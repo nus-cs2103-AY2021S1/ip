@@ -1,9 +1,14 @@
 package duke.controllers;
 
+import java.io.IOException;
+
 import javafx.collections.FXCollections; // ??
 import javafx.collections.ObservableList; // ??
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.geometry.Insets;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.CornerRadii;
@@ -16,23 +21,27 @@ import javafx.scene.layout.HBox;
 public class DialogBox extends HBox {
     // DialogBox are those things that display someone's message
     // Creating custom control of Dialog box, instead of using VBox
+    @FXML
     private Label userText;
+    @FXML
     private ImageView profilePic;
 
-    public DialogBox(Label l, ImageView iv) {
-        this.userText = l;
-        this.profilePic = iv;
+    public DialogBox(String text, Image img) {
+        // Iteration 2: Adding this as FXML Controller
+        this.userText = new Label();
+        this.profilePic = new ImageView();
 
-        // Customized configurations
-        userText.setWrapText(true);
-        profilePic.setFitHeight(100.0);
-        profilePic.setFitWidth(100.0);
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            fxmlLoader.setController(this);
+            fxmlLoader.setRoot(this);
+            fxmlLoader.load();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        this.setAlignment(Pos.TOP_RIGHT); // Method from HBox. By default, text is top-right
-        this.setPadding(new Insets(10.0, 10.0, 10.0, 10.0)); // pad from one DB to another
-        this.setSpacing(10.0); // spacing between children eg: text and image
-        this.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, new CornerRadii(20.0), new Insets(5.0, 0.0, 5.0, 0.0)))); // time to create some background value
-        this.getChildren().addAll(userText, profilePic);
+        this.userText.setText(text);
+        this.profilePic.setImage(img);
     }
 
     // more customisation functions
@@ -50,12 +59,12 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(temp);
     }
 
-    public static DialogBox getUserDialogBox(Label l, ImageView iv) {
-        return new DialogBox(l, iv); // Not flipped
+    public static DialogBox getUserDialogBox(String txt, Image img) {
+        return new DialogBox(txt, img); // Not flipped
     }
 
-    public static DialogBox getDukeDialogBox(Label l, ImageView iv) {
-        DialogBox db = new DialogBox(l, iv);
+    public static DialogBox getDukeDialogBox(String txt, Image img) {
+        DialogBox db = new DialogBox(txt, img);
         db.flip();
         return db;
     }

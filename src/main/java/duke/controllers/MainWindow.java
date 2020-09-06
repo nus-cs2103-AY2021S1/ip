@@ -46,8 +46,8 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input); // will always be in Duke. Replacing with legit logic later.
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialogBox(new Label(input), new ImageView(userImage)),
-                DialogBox.getDukeDialogBox(new Label(response), new ImageView(dukeImage))
+                DialogBox.getUserDialogBox(input, userImage),
+                DialogBox.getDukeDialogBox(response, dukeImage)
         );
         userInput.clear();
     }

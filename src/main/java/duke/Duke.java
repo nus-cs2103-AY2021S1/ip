@@ -18,7 +18,7 @@ import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 
-public class Duke extends Application {
+public class Duke {
     private TaskList tasks;
     // Variables for JavaFX
     @FXML
@@ -80,104 +80,8 @@ public class Duke extends Application {
         sc.close();
     }
 
-    /**
-     * start() initiates the whole staging process.
-     * @param stage Stage object
-     */
-    @Override
-    public void start(Stage stage) {
-        // Init / Setting up required components (aka Nodes)
-
-        // Create scrollPane for scrolling content of chat
-        // Input empty now. Can play around with input
-        this.scrollPane = new ScrollPane();
-        this.dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer); // enables dialogContainer scrolling
-
-        this.userInput = new TextField();
-        this.sendButton = new Button("Send"); // txt for button
-
-        AnchorPane mainLayout = new AnchorPane(); // Initialize what will be shown
-        // Add all nodes as children
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        // Format Nodes (individual components) to look as expected
-        // 2.1. stage
-        stage.setTitle("Hal9000");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-
-        // 2.2. mainLayout
-        mainLayout.setPrefSize(400.0, 600.0);
-
-        // 2.3. Scroll Pane
-        scrollPane.setPrefSize(385, 535);
-        // Hbar, Vbar = Horizontal bar, Vertical bar
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true); // what is this
-
-
-        // 2.4. dialogContainer
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-        dialogContainer.setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, new CornerRadii(20.0), new Insets(5.0, 0.0, 5.0, 0.0)))); // time to create some background value
-
-        // 2.5. userInput bar
-        userInput.setPrefWidth(325.0);
-
-        // 2.6. Send button
-        sendButton.setPrefWidth(55.0);
-
-        // 2.7. AnchorPane. This is where all the nodes / components are arranged.
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput, 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-
-        // STEP 3: Interacting with user using setOnMouseClicked and setOnAction (press Enter)
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
-
-        // ScrollPane automaticly scrolls down when text exceeds size of dialogContainer
-        dialogContainer.heightProperty().addListener((observable) -> {
-            scrollPane.setVvalue(1.0); // scroll down til end
-        });
-
-        // Step 4: Import images
-
-        this.scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.show();
-    }
-
-    /**
-     * Iteration 2: Iteration 1 did not enable picture
-     * and distinction between Duke and User;
-     * Handles interrupt, obtain user text, pair it with user photo in a DialogBox Object
-     * Do the same thing with Duke response (which is just echoing for now)
-     * Finally, clear user text input node.
-     */
-    @FXML
-    private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText())); // impl getResponse
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialogBox(userText, new ImageView(userImg)),
-                DialogBox.getDukeDialogBox(dukeText, new ImageView(dukeImg))
-        );
-        userInput.clear();
-    }
+    // start() method moved to class MainGUI
+    // And also handleUserInput()
 
     public String getResponse(String userText) {
         return "Haha " + userText + " makes Hal9000 go brrrrr";
