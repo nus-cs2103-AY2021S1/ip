@@ -30,6 +30,16 @@ public class Deadline extends Task {
     public LocalDate getByWhen() {
         return this.by;
     }
+    
+    @Override
+    public boolean checkIfDuplicate(Task otherTask) {
+        if (otherTask instanceof Deadline) {
+            // share same description and timing
+            return super.checkIfDuplicate(otherTask) && by.equals(((Deadline) otherTask).getByWhen());
+        }
+        return false;
+    }
+    
     @Override
     public String toString() {
         String formattedTimeBy = by.format(DateTimeFormatter.ofPattern("MMM d yyyy"));

@@ -98,4 +98,14 @@ public class TaskList {
         }
         return formattedListString;
     }
+
+    /**
+     * Returns boolean indicating presence of duplicate taskA.s
+     * 
+     * @param task task to check against if there are duplicates of.
+     * @return true if duplicates exists.
+     */
+    public boolean findIfDuplicateExists(Task task) {
+        return taskList.stream().anyMatch(taskItem -> taskItem.checkIfDuplicate(task));
+    }
 }
