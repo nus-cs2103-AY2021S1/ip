@@ -2,6 +2,7 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.stream.IntStream;
 
 /**
  * Represents user interface class.
@@ -56,9 +57,8 @@ public class Ui {
         } else {
             StringBuilder list = new StringBuilder();
             list.append("Here are the tasks in your list:\n");
-            for (int i = 0; i < tasks.size(); i++) {
-                list.append(String.format("%d. %s\n", i + 1, tasks.getTasks().get(i)));
-            }
+            IntStream.range(0, tasks.size()).forEach(i ->
+                    list.append(String.format("%d. %s\n", i + 1, tasks.getTasks().get(i))));
             return list.toString();
         }
     }
