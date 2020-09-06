@@ -42,65 +42,83 @@ public class Parser {
          
 
         switch (commandType) {
-        case "list":
-            return new listCommand(tasklist);
+            case "list":
+                return new listCommand(tasklist);
 
-        case "todo":
-            try {
-                if (userInput.length() < 5) {
-                    throw new DukeException();
+            case "todo":
+
+                assert userInput.length() > 5 : "No description for todo";
+
+                try {
+                    if (userInput.length() <= 5) {
+                        throw new DukeException();
+                    }
+                    String todoDescription = userInput.substring(5);
+                    toDo task = new toDo(todoDescription, false);
+                    return new addCommand(tasklist, task);
+
+                } catch (DukeException e) {
+                    return new exceptionCommand(tasklist, duke.ui.showException("Must include description for todo"));
                 }
-                String todoDescription = userInput.substring(5);
-                toDo task = new toDo(todoDescription, false);
-                return new addCommand(tasklist, task);
 
-            } catch (DukeException e) {
-                return new exceptionCommand(tasklist,duke.ui.showException("Must include description for todo"));
-            }
+            case "deadline":
 
-        case "deadline":
-            try {
-                if (!userInput.contains("/by")) {
-                    throw new DukeException();
-                } else {
-                    int index = userInput.indexOf("/by");
-                    String deadlineDateString = userInput.substring(index + 4);
-                    LocalDate deadlineDate = LocalDate.parse(deadlineDateString);
-                    Deadline deadline = new Deadline(userInput.substring(9, index), false, deadlineDate);
-                    return new addCommand(tasklist, deadline);
+                assert userInput.contains("/by") : "deadline must include /by";
+
+                try {
+                    if (!userInput.contains("/by")) {
+                        throw new DukeException();
+                    } else {
+                        int index = userInput.indexOf("/by");
+                        String deadlineDateString = userInput.substring(index + 4);
+                        LocalDate deadlineDate = LocalDate.parse(deadlineDateString);
+                        Deadline deadline = new Deadline(userInput.substring(9, index), false, deadlineDate);
+                        return new addCommand(tasklist, deadline);
+                    }
+                } catch (DateTimeParseException e) {
+                    return new exceptionCommand(tasklist, duke.ui.showException("Please input date in the format: YYYY-MM-DD"));
+                } catch (DukeException e) {
+                    return new exceptionCommand(tasklist, duke.ui.showException("deadline must include '/by'"));
                 }
-            } catch (DateTimeParseException e) {
+
+
+            case "event":
+
+                assert userInput.contains("/at") : "event must include /at";
+
+                try {
+                    if (!userInput.contains("/at")) {
+                        throw new DukeException();
+                    } else {
+                        int index = userInput.indexOf("/at");
+                        if (userInput.substring(index + 3).length() < 1) {
+                            throw new DukeArrayException();
+                        }
+                        String eventDateString = userInput.substring(index + 4);
+
+                        LocalDate eventDate = LocalDate.parse(eventDateString);
+                        Event event = new Event(userInput.substring(6, index), false, eventDate);
+                        return new addCommand(tasklist, event);
+                    }
+                } catch (DukeArrayException e){
+                    return new exceptionCommand(tasklist,duke.ui.showException("event must include date after /at"));
+                } catch (DateTimeParseException e) {
                 return new exceptionCommand(tasklist,duke.ui.showException("Please input date in the format: YYYY-MM-DD"));
-            } catch (DukeException e) {
-                return new exceptionCommand(tasklist,duke.ui.showException("deadline must include '/by'"));
-            }
-
-
-        case "event":
-            try {
-                if (!userInput.contains("/at")) {
-                    throw new DukeException();
-                } else {
-                    int index = userInput.indexOf("/at");
-                    String eventDateString = userInput.substring(index + 4);
-                    LocalDate eventDate = LocalDate.parse(eventDateString);
-                    Event event = new Event(userInput.substring(6, index), false, eventDate);
-                    return new addCommand(tasklist,event);
-                }
-            } catch (DateTimeParseException e) {
-                return new exceptionCommand(tasklist,duke.ui.showException("Please input date in the format: YYYY-MM-DD"));
-            } catch (DukeException e) {
+                } catch (DukeException e) {
                 return new exceptionCommand(tasklist,duke.ui.showException("event must include '/at'"));
-            }
+                }
 
 
         case "delete":
+
+            assert userInput.length() >7 : "Must include number after delete";
+
             try {
                 if (userInput.length() <= 6) {
                     throw new DukeException();
                 }
                 int taskNumber = Integer.parseInt(userInput.substring(7)) - 1;
-                if (taskNumber > tasklist.list.size()) {
+                if (taskNumber >= tasklist.list.size()) {
                     throw new DukeArrayException();
                 }
                 return new deleteCommand(tasklist, taskNumber);
@@ -113,6 +131,9 @@ public class Parser {
             }
 
         case "done":
+
+            assert userInput.length() >5 : "Must include number after done";
+
             try {
                 if (userInput.length() < 6) {
                     throw new DukeException();
@@ -132,6 +153,9 @@ public class Parser {
             return new endCommand(tasklist);
 
         case "find":
+
+            assert userInput.length() >5 : "Must include name after 'find'";
+
             try {
                 if (userInput.length() < 6) {
                     throw new DukeException();

@@ -1,2 +1,4 @@
+[T][✗] h
 [T][✓] play
-[T][✗] dance
+[T][✗] cancer2
+[T][✗] cancer3
