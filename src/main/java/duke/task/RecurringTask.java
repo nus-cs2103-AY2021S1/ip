@@ -5,18 +5,32 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 import duke.exception.DukeFrequencyNotFoundException;
+import duke.exception.DukeInputNotRecognizedException;
 
 public class RecurringTask extends Task {
     enum Frequency {
-        DAILY, WEEKLY, MONTHLY;
+        DAILY, WEEKLY, MONTHLY, TEST;
     }
 
     private String date;
+    private String time;
     private Timer timer = new Timer();
 
-    private RecurringTask(String description, String date) {
+    protected RecurringTask(String description, String date) {
         super(description);
         this.date = date;
+    }
+
+    public String getTime() {
+        return time;
+    }
+
+    private void setTime(String time) {
+        this.time = time;
+    }
+
+    public String getDate() {
+        return date;
     }
 
     /**
@@ -25,11 +39,21 @@ public class RecurringTask extends Task {
      * @return
      * @throws DukeFrequencyNotFoundException
      */
-    public static RecurringTask createRecurringTask(String description, String date)
-            throws DukeFrequencyNotFoundException {
-        RecurringTask recurringTask = new RecurringTask(description, date);
-        recurringTask.repeatTask(date);
-        return recurringTask;
+    public static RecurringTask createRecurringTask(String description, String date, String time)
+            throws DukeInputNotRecognizedException {
+        try {
+            int hour = Integer.parseInt(time.substring(0, 2));
+            int min = Integer.parseInt(time.substring(1, 4));
+            Calendar calendar = Calendar.getInstance();
+            calendar.set(Calendar.HOUR_OF_DAY, hour);
+            calendar.set(Calendar.MINUTE, min);
+            RecurringTask recurringTask = new RecurringTask(description, date);
+            recurringTask.setTime(time);
+            recurringTask.repeatTask(date, calendar);
+            return recurringTask;
+        } catch (Exception e) {
+            throw new DukeInputNotRecognizedException("Please input a time in the 24 hour format. Eg. 0600");
+        }
     }
 
     /**
@@ -37,13 +61,16 @@ public class RecurringTask extends Task {
      * @return
      * @throws DukeFrequencyNotFoundException
      */
-    private static long getTimeDelay(String date) throws DukeFrequencyNotFoundException {
+    protected static long getTimeDelay(String date) throws DukeFrequencyNotFoundException {
         Calendar calendar = Calendar.getInstance();
         if (!hasInputs(date)) {
             throw new DukeFrequencyNotFoundException("Frequency not found. "
                     + "Please only enter Daily, Weekly or Monthly");
         }
         switch (Frequency.valueOf(date.toUpperCase())) {
+        case TEST:
+            calendar.add(Calendar.MINUTE, 1);
+            return calendar.getTimeInMillis() - System.currentTimeMillis();
         case DAILY:
             calendar.add(Calendar.DATE, 1);
             return calendar.getTimeInMillis() - System.currentTimeMillis();
@@ -54,10 +81,11 @@ public class RecurringTask extends Task {
             calendar.add(Calendar.MONTH, 1);
             return calendar.getTimeInMillis() - System.currentTimeMillis();
         default:
-            throw new DukeFrequencyNotFoundException("Frequency not found. "
+            throw new DukeFrequencyNotFoundException(" Frequency not found. "
                    + "Please only enter Daily, Weekly or Monthly");
         }
     }
+
 
     /**
      * Checks if string is inside enum Frequency.
@@ -78,15 +106,14 @@ public class RecurringTask extends Task {
      * @param date
      * @throws DukeFrequencyNotFoundException
      */
-    public void repeatTask(String date) throws DukeFrequencyNotFoundException {
+    public void repeatTask(String date, Calendar calendar) throws DukeFrequencyNotFoundException {
         TimerTask timerTask = new TimerTask() {
             @Override
             public void run() {
                 RecurringTask.super.undoTask();
             }
         };
-        long delay = 0L;
-        timer.scheduleAtFixedRate(timerTask, delay, getTimeDelay(date));
+        timer.schedule(timerTask, calendar.getTime(), getTimeDelay(date));
     }
 
     /**
@@ -103,7 +130,7 @@ public class RecurringTask extends Task {
      */
     @Override
     public String toString() {
-        return "[R]" + super.toString() + date;
+        return "[R]" + super.toString() + " " + date + " at " + time;
     }
 
 }

@@ -214,14 +214,14 @@ public class Parser {
      * @throws DukeTaskNotFoundException If not task is inputted.
      */
     public static RecurringCommand parseRecurring(String[] commandDetails)
-            throws DukeTaskNotFoundException, DukeFrequencyNotFoundException {
+            throws DukeFrequencyNotFoundException, DukeTaskNotFoundException {
         if (commandDetails.length < 2) {
-            throw new DukeTaskNotFoundException(" ERROR... RECURRING TASK DESCRIPTION EMPTY. \n "
-                    + " PLEASE INPUT IN THE FORMAT 'RECURRING [FREQUENCY] [DESCRIPTION]'");
+            throw new DukeFrequencyNotFoundException(" ERROR... RECURRING TASK FREQUENCY EMPTY. "
+                    + "\n PLEASE TRY AGAIN IN THE FORMAT 'RECURRING [FREQUENCY] [DESCRIPTION]'");
         }
         String[] stringArray = commandDetails[1].split(" ", 2);
         if (stringArray.length < 2) {
-            throw new DukeFrequencyNotFoundException(" ERROR... RECURRING TASK FREQUENCY EMPTY. "
+            throw new DukeTaskNotFoundException(" ERROR... RECURRING TASK DESCRIPTION EMPTY. "
                     + "\n PLEASE TRY AGAIN IN THE FORMAT 'RECURRING [FREQUENCY] [DESCRIPTION]'");
         }
         return new RecurringCommand(stringArray);
