@@ -51,8 +51,12 @@ public final class DoneCommand extends Command {
                 Integer.toString(index),
                 ExceptionType.INVALID_ARGUMENT);
         }
-
-        //Print the done message
+        Task task = taskList.get(index);
+        if (task.isDone()) {
+            throw new UltronException(task.toString(), ExceptionType.ALREADY_DONE);
+        }
+        assert getArguments().trim().length() == 1;
+        task.markDone();
         ui.setMessage(String.format("Finally! Making yourself useful\n"
             + "  %s%n", taskList.get(index)));
     }
