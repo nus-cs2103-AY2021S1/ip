@@ -40,13 +40,14 @@ public class TaskList implements Iterable<Task> {
      */
     public String markCompleted(int index) throws DukeException {
         try {
+            //assert index > 0 && index < this.listOfItems.size();
             Task item = this.listOfItems.get(index);
             item.markAsDone();
 
             return String.format("\nNice! I've marked this task as done:\n  %s\n", item.toString());
 
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("List does not contain the number specified");
+            return (new DukeException("List does not contain the number specified")).toString();
         }
     }
 
@@ -57,14 +58,16 @@ public class TaskList implements Iterable<Task> {
      * @throws DukeException if the number given is not on the list
      */
     public String deleteTask(int index) throws DukeException {
+
         try {
+
             Task item = this.listOfItems.remove(index);
 
             return String.format("\nNoted. I've removed this task:\n  %s\nNow you have %d tasks in your list.\n",
                     item.toString(),
                     this.listOfItems.size());
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("List does not contain the number specified");
+            return (new DukeException("List does not contain the number specified")).toString();
         }
     }
 
@@ -75,6 +78,7 @@ public class TaskList implements Iterable<Task> {
      */
 
     public void findTask(String Keyword){
+        assert Keyword.length() > 0;
         ListOfKeyWordItems.clear();
        for (Task item : listOfItems) {
 if (item.toString().indexOf(Keyword) != -1) {

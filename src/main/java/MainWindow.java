@@ -49,8 +49,6 @@ public class MainWindow extends AnchorPane {
 
         String input = userInput.getText();
         //String response = duke.getResponse(input);
-
-
         String response = Parser.parseCode(tl, new UI(), false, input);
         if (response.equals(UI.addLines("Bye. Hope to see you again soon!"))) {
             dialogContainer.getChildren().addAll(

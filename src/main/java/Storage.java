@@ -23,6 +23,7 @@ public class Storage {
      * @throws DukeException
      */
     public static void save(TaskList list, String filePath) throws DukeException {
+        assert filePath.length() > 0;
         String[] directories = filePath.split("/");
         String home = System.getProperty("user.home");
         Path path = Paths.get(home, directories);
@@ -50,6 +51,7 @@ public class Storage {
      */
     public static TaskList load(String filePath) {
         try {
+            assert filePath.length() > 0;
             String[] directories = filePath.split("/");
             String home = System.getProperty("user.home");
             Path path = Paths.get(home, directories);
