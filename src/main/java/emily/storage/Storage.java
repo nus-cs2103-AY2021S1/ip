@@ -1,4 +1,4 @@
-package main.java.emily.command;
+package main.java.emily.storage;
 
 import main.java.emily.task.Deadline;
 import main.java.emily.task.Event;
