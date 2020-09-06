@@ -49,18 +49,18 @@ public class Storage {
      * @return the task list that stores all tasks from the user's previous session
      */
     public TaskList getTaskListFromDatabase() {
-        TaskList taskList = new TaskList();
+        TaskList tasks = new TaskList();
         try {
             File file = new File(this.directory);
             Scanner scanner = new Scanner(file);
 
             while (scanner.hasNextLine()) {
-                taskList.addTask(createTaskFromDatabase(scanner.nextLine()));
+                tasks.addTask(createTaskFromDatabase(scanner.nextLine()));
             }
         } catch (FileNotFoundException e) {
             System.out.println("Database file does not exist in directory");
         }
-        return taskList;
+        return tasks;
     }
 
     /**

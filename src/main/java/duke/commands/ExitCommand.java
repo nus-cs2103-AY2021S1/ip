@@ -23,9 +23,9 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList taskList, Storage storage) {
+    public String execute(TaskList tasks, Storage storage) {
         StringBuilder stringBuilder = new StringBuilder();
-        taskList.forEach(task -> {
+        tasks.forEach(task -> {
             stringBuilder.append(task.formatTaskForDatabase() + "\n");
         });
 

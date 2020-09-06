@@ -13,15 +13,15 @@ public class ListCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList taskList, Storage storage) {
-        return listAllTasks(taskList);
+    public String execute(TaskList tasks, Storage storage) {
+        return listAllTasks(tasks);
     }
 
-    private String listAllTasks(TaskList taskList) {
+    private String listAllTasks(TaskList tasks) {
         String response = "Here are all the tasks you currently have! \n";
-        for (int i = 0; i < taskList.size(); i++) {
+        for (int i = 0; i < tasks.size(); i++) {
             try {
-                String output = (i + 1) + "." + taskList.getTask(i + 1) + "\n";
+                String output = (i + 1) + "." + tasks.getTask(i + 1) + "\n";
                 response += output;
             } catch (DukeException e) {
                 return e.getMessage();

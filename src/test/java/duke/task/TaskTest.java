@@ -21,20 +21,20 @@ public class TaskTest {
 
     @Test
     public void testDeleteTask() throws DukeException {
-        TaskList taskList = new TaskList();
+        TaskList tasks = new TaskList();
         Todo firstTodo = new Todo("task");
         Todo secondTodo = new Todo("todo");
         Todo thirdTodo = new Todo("random");
-        taskList.addTask(firstTodo);
-        taskList.addTask(secondTodo);
-        taskList.addTask(thirdTodo);
+        tasks.addTask(firstTodo);
+        tasks.addTask(secondTodo);
+        tasks.addTask(thirdTodo);
 
-        Throwable exception = assertThrows(DukeException.class, () -> taskList.deleteTask(5));
+        Throwable exception = assertThrows(DukeException.class, () -> tasks.deleteTask(5));
         assertEquals("Oh no! Task number does not exist in task list.",
                 exception.getMessage());
-        assertEquals(firstTodo, taskList.deleteTask(1));
-        assertEquals(thirdTodo, taskList.deleteTask(2));
-        assertEquals(1, taskList.size());
+        assertEquals(firstTodo, tasks.deleteTask(1));
+        assertEquals(thirdTodo, tasks.deleteTask(2));
+        assertEquals(1, tasks.size());
     }
 
     @Test

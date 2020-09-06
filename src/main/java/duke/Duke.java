@@ -12,7 +12,7 @@ import javafx.application.Platform;
  * Represents the chat bot Duke.
  */
 public class Duke {
-    private TaskList taskList;
+    private TaskList tasks;
     private Storage storage;
 
     /**
@@ -20,7 +20,7 @@ public class Duke {
      */
     public Duke() {
         storage = Storage.dbInstance();
-        taskList = storage.getTaskListFromDatabase();
+        tasks = storage.getTaskListFromDatabase();
     }
 
     /**
@@ -34,7 +34,7 @@ public class Duke {
             if (command.getExitStatus() == true) {
                 Platform.exit();
             }
-            response = command.execute(taskList, storage);
+            response = command.execute(tasks, storage);
         } catch (DukeException e) {
             return e.getMessage();
         } catch (NumberFormatException e) {
