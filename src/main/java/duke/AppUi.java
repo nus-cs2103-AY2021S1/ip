@@ -28,7 +28,7 @@ public class AppUi extends Ui {
      * @return the mark as done message
      */
     public String getMarkAsDoneMsg(Task task){
-        return "Nice! I've marked this task as done: " + task.toString();
+        return "Nice! I've marked this task as done:\n" + task.toString();
     }
 
     /**

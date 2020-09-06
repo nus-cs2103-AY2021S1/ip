@@ -81,9 +81,9 @@ public class TaskList {
      * @return the Task that is marked as done
      */
     public Task markTaskDone(int index) {
-        if (index < list.size()) {
-            list.get(index).markAsDone();
-            return list.get(index);
+        if (index > 0 && index <= list.size()) {
+            list.get(index - 1).markAsDone();
+            return list.get(index - 1);
         } else {
             return null;
         }
@@ -103,8 +103,8 @@ public class TaskList {
      * @return the removed Task
      */
     public Task delete(int index) {
-        if (index < list.size()) {
-            return list.remove(index);
+        if (index > 0 && index < list.size()) {
+            return list.remove(index - 1);
         } else {
             return null;
         }
