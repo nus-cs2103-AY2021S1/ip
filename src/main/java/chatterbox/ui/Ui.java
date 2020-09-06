@@ -14,6 +14,8 @@ public class Ui {
      * @return The add task message.
      */
     public static String getAddTaskMessage(Task t, int totalTasks) {
+        assert t != null;
+        assert totalTasks > 0;
         return "Got it. I've added this task: \n"
             + t + "\n"
             + "Now you have " + totalTasks + " tasks in the list";
@@ -27,6 +29,8 @@ public class Ui {
      * @return The delete task message.
      */
     public static String getDeleteTaskMessage(Task t, int totalTasks) {
+        assert t != null;
+        assert totalTasks >= 0;
         return "Noted! I've removed this task from your list: \n"
             + t + "\n"
             + " Now you have " + totalTasks + " tasks in the list.";
