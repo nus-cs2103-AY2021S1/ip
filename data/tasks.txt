@@ -1,3 +1,4 @@
 E | 0 | something again | 2020-09-01 | 10:00
 T | 0 | read
 D | 0 | CS2100 lab 3 | 2020-09-10 | 23:59
+T | 0 | read
