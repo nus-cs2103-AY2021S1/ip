@@ -21,6 +21,7 @@ public class TaskList {
      * @param tasks ArrayList of tasks.
      */
     TaskList(ArrayList<Task> tasks) {
+        assert tasks != null : "ArrayList have not been initialised";
         this.tasks = tasks;
     }
 
@@ -63,6 +64,7 @@ public class TaskList {
      * @param task Task to be appended to this list
      */
     public void add(Task task) {
+        assert task != null : "task have not been initialised";
         tasks.add(task);
     }
 
