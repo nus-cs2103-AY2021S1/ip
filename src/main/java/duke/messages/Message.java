@@ -5,19 +5,6 @@ package duke.messages;
  */
 public class Message {
 
-    // TODO: change logo
-    public static final String LOGO = "     ___   ____    __    ____  _______     _______."
-            + "  ______   .___  ___.  _______          ______\n"
-            + "    /   \\  \\   \\  /  \\  /   / |   ____| "
-            + "/       | /  __  \\  |   \\/   | |   ____|        /  __  \\\n"
-            + "   /  ^  \\  \\   \\/    \\/   /  |  |__    "
-            + "|   (----`|  |  |  | |  \\  /  | |  |__    ______|  |  |  |\n"
-            + "  /  /_\\  \\  \\            /   |   __|    "
-            + "\\   \\    |  |  |  | |  |\\/|  | |   __|  |______|  |  |  |\n"
-            + " /  _____  \\  \\    /\\    /    |  |____.--"
-            + "--)   |   |  `--'  | |  |  |  | |  |____        |  `--'  |\n"
-            + "/__/     \\__\\  \\__/  \\__/     |_______|_"
-            + "______/     \\______/  |__|  |__| |_______|        \\______/\n";
     public static final String MESSAGE_GREETING = "I AM Awesome-O.";
     public static final String MESSAGE_WHAT_CAN_I_DO = "What can Awesome-O do for you?";
     public static final String MESSAGE_HELP_PROMPT = "...PSST! Type \"help\" for more information!";
