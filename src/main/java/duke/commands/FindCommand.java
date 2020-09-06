@@ -11,6 +11,7 @@ public class FindCommand extends Command {
 
     /**
      * Receives the keyword to search for and sets the response to be the result of the tasks found.
+     * @param input the user input.
      * @return <code>true</code>
      */
     @Override
