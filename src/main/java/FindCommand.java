@@ -1,5 +1,6 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Represents a find/search command.
@@ -24,12 +25,10 @@ public class FindCommand extends Command {
 
         List<Task> tempList = new ArrayList<>();
         String keyword = afterCommand;
-        // collate the tasks with the keyword (using lambda instead)
-        taskList.getTasks().forEach(task -> {
-            if (task.getDetails().contains(keyword)) {
-                tempList.add(task);
-            }
-        });
+        // collate the tasks with the keyword (using streams and lambda)
+        tempList.addAll(taskList.getTasks().stream()
+                .filter(task -> task.getDetails().contains(keyword))
+                .collect(Collectors.toList()));
         // display those tasks
         return ui.displayTasksWithCommand(tempList, "find");
     }
