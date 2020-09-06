@@ -12,14 +12,14 @@ import org.junit.jupiter.api.Test;
 public class ParserTest {
     @Test
     public void testParseDateTime() {
-        assertNull(Parser.parseDateTime("0293a"));
-        assertEquals(Parser.parseDateTime("1/12/2020 1800"),
+        assertNull(Parser.parseDateTimeFromString("0293a"));
+        assertEquals(Parser.parseDateTimeFromString("1/12/2020 1800"),
                 LocalDateTime.of(2020, 12, 1, 18, 0, 0, 0));
-        assertEquals(Parser.parseDateTime("12-6-2020 2330"),
+        assertEquals(Parser.parseDateTimeFromString("12-6-2020 2330"),
                 LocalDateTime.of(2020, 6, 12, 23, 30, 0, 0));
-        assertEquals(Parser.parseDateTime("1/1/2012"),
+        assertEquals(Parser.parseDateTimeFromString("1/1/2012"),
                 LocalDateTime.of(2012, 1, 1, 0, 0, 0, 0));
-        assertEquals(Parser.parseDateTime("24-8-1900"),
+        assertEquals(Parser.parseDateTimeFromString("24-8-1900"),
                 LocalDateTime.of(1900, 8, 24, 0, 0, 0, 0));
     }
 

@@ -12,6 +12,10 @@ import chatterbox.ui.Ui;
  * Handles the modification of and other operations relating to the task list.
  */
 public class TaskList {
+    private static final String ERROR_INVALID_TASK_NUMBER = "Invalid task number.";
+    private static final String INFO_MATCHING_TASKS = "I've found these matching tasks in your list!";
+    private static final String INFO_LIST_EMPTY = "Your list is currently empty.";
+
     private static List<Task> tasks = new ArrayList<>();
     private final Storage storage;
 
@@ -27,16 +31,17 @@ public class TaskList {
     }
 
     /**
-     * Find all tasks that match the given keyword and print them.
+     * Finds all tasks that match the given keyword and returns a string containing a list of them.
      *
-     * @param keyword   Keyword to match the tasks with.
+     * @param keyword Keyword to match the tasks with.
+     * @return String containing the list of found tasks.
      */
     public String findTasks(String keyword) {
         keyword = keyword.strip();
         if (keyword.equals("")) {
             return getPrintableTaskList();
         } else {
-            StringBuilder foundTasks = new StringBuilder("\nI've found these matching tasks in your list!\n");
+            StringBuilder foundTasks = new StringBuilder(INFO_MATCHING_TASKS).append("\n");
             for (int i = 0; i < tasks.size(); i++) {
                 Task t = tasks.get(i);
                 if (t.inputString.contains(keyword)) {
@@ -49,6 +54,8 @@ public class TaskList {
 
     /**
      * Prints the full task list.
+     *
+     * @return String containing list of all tasks.
      */
     public String getPrintableTaskList() {
         if (tasks.size() != 0) {
@@ -58,13 +65,15 @@ public class TaskList {
             }
             return fullList.toString();
         } else {
-            return "Your list is currently empty.";
+            return INFO_LIST_EMPTY;
         }
     }
 
     /**
      * Adds a task to the task list, and updates storage.
      *
+     * @param t The task to add.
+     * @return Add task message.
      * @throws IOException  If task list fails to save.
      */
     public String addTask(Task t) throws IOException {
@@ -75,17 +84,27 @@ public class TaskList {
     }
 
     /**
+     * Ensures task number is valid and throws a ChatterboxException if it isn't.
+     *
+     * @param taskNo The task number to check.
+     * @throws ChatterboxException If task number is not valid.
+     */
+    private void checkTaskNumber(int taskNo) throws ChatterboxException {
+        if (taskNo < 0 || taskNo >= tasks.size()) {
+            throw new ChatterboxException(ERROR_INVALID_TASK_NUMBER);
+        }
+    }
+
+    /**
      * Sets a task as done, and updates storage.
      *
      * @param taskNo    The index of the task to be set as done.
+     * @return Done task message.
      * @throws ChatterboxException  If task number if invalid.
      * @throws IOException  If task list fails to save.
      */
     public String setTaskAsDone(int taskNo) throws ChatterboxException, IOException {
-        if (taskNo < 0 || taskNo >= tasks.size()) {
-            throw new ChatterboxException("Invalid task number.");
-        }
-
+        checkTaskNumber(taskNo);
         Task t = tasks.get(taskNo);
         t.setDone(true);
         storage.saveItems(tasks);
@@ -96,14 +115,12 @@ public class TaskList {
      * Deletes a task, and updates storage.
      *
      * @param taskNo    The index of the task to be deleted.
+     * @return Delete task message.
      * @throws ChatterboxException  If task number if invalid.
      * @throws IOException  If task list fails to save.
      */
     public String deleteTask(int taskNo) throws ChatterboxException, IOException {
-        if (taskNo < 0 || taskNo >= tasks.size()) {
-            throw new ChatterboxException("Invalid task number.");
-        }
-
+        checkTaskNumber(taskNo);
         Task t = tasks.remove(taskNo);
         storage.saveItems(tasks);
         return Ui.getDeleteTaskMessage(t, tasks.size());

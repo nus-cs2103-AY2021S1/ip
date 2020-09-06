@@ -13,6 +13,8 @@ import chatterbox.task.Task;
  * Handles the loading and saving of tasks.
  */
 public class Storage {
+    private static final String ERROR_FILE_CORRUPT = "One or more lines in the save file may have been corrupted.";
+
     private static final String SAVE_FOLDER_PATH = "./data";
     private static final String SAVE_FILE_PATH = SAVE_FOLDER_PATH + "/chatterbox.txt";
     private final File saveFolder = new File(SAVE_FOLDER_PATH);
@@ -52,7 +54,7 @@ public class Storage {
                 t.setDone(Boolean.parseBoolean(line.substring(0, line.indexOf(' '))));
                 items.add(t);
             } catch (IndexOutOfBoundsException e) {
-                throw new ChatterboxException("One or more lines in the save file may have been corrupted.");
+                throw new ChatterboxException(ERROR_FILE_CORRUPT);
             }
         }
         return items;

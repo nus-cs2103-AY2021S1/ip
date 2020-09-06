@@ -9,7 +9,7 @@ public class Task {
     private static final String SYMBOL_TICK = "\u2713";
     private static final String SYMBOL_CROSS = "\u2717";
 
-    protected LocalDateTime deadline;
+    protected LocalDateTime dateTime;
     protected String prefix;
     protected String inputString;
     protected String contents;

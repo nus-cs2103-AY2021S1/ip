@@ -12,12 +12,12 @@ public class Deadline extends Task {
      * @param input  User input without the command word.
      */
     public Deadline(String input) {
-        inputString = this.getClass().getSimpleName().toLowerCase() + " " + input;
+        inputString = "deadline " + input;
         try {
             String[] split = input.split("/", 2);
-            String dateTime = split[1].substring(split[1].indexOf(' ') + 1);
-            deadline = Parser.parseDateTime(dateTime);
-            contents = Parser.parseDateTimeTask(input, deadline);
+            String originalDateTime = split[1].substring(split[1].indexOf(' ') + 1);
+            dateTime = Parser.parseDateTimeFromString(originalDateTime);
+            contents = Parser.getDateTimeTaskString(input, dateTime);
         } catch (ArrayIndexOutOfBoundsException e) {
             contents = input;
         }
