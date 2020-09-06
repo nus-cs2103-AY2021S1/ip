@@ -84,7 +84,7 @@ public class Parser {
     private static DoneCommand parseDoneCommand(String commandArg) throws DukeException {
         int taskIdx;
         try {
-            taskIdx = Integer.parseInt(commandArg);
+            taskIdx = Integer.parseInt(commandArg.trim());
         } catch (NumberFormatException e) {
             throw new DukeException("Sorry I'm not sure what task do you want me to mark as done!");
         }
@@ -94,7 +94,7 @@ public class Parser {
     private static DeleteCommand parseDeleteCommand(String commandArg) throws DukeException {
         int taskIdx;
         try {
-            taskIdx = Integer.parseInt(commandArg);
+            taskIdx = Integer.parseInt(commandArg.trim());
         } catch (NumberFormatException e) {
             throw new DukeException("Sorry I'm not sure what task do you want me to delete!");
         }

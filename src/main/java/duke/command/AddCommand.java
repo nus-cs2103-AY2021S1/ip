@@ -43,11 +43,11 @@ public class AddCommand extends Command {
             break;
         }
         case DEADLINE: {
-            task = new Deadline(taskContent[0], taskContent[1]);
+            task = new Deadline(taskContent[0].trim(), taskContent[1].trim());
             break;
         }
         case EVENT: {
-            task = new Event(taskContent[0], taskContent[1]);
+            task = new Event(taskContent[0].trim(), taskContent[1].trim());
             break;
         }
         default:

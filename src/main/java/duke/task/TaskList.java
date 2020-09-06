@@ -55,13 +55,13 @@ public class TaskList {
      */
     public String listTasksWithKeyword(String keyword) {
         StringBuilder output = new StringBuilder();
-        int i = 1;
+        int taskIdx = 1;
 
         for (Task task : tasks) {
             if (task.getDescription().contains(keyword)) {
-                output.append(i).append(". ").append(task).append("\n");
+                output.append(String.format("%d. %s\n", taskIdx, task));
             }
-            i++;
+            taskIdx++;
         }
 
         output.deleteCharAt(output.length() - 1);
@@ -102,7 +102,7 @@ public class TaskList {
         StringBuilder output = new StringBuilder();
 
         for (int i = 0; i < size(); i++) {
-            output.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
+            output.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
         }
 
         output.deleteCharAt(output.length() - 1);

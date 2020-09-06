@@ -13,16 +13,11 @@ public class ToDo extends Task {
         this.taskType = "T";
     }
 
-//    /**
-//     * Creates a {@code ToDo} from existing data.
-//     * @param uniqueId Unique Id of the todo.
-//     * @param isDone Todo completion status.
-//     * @param description Description of the todo.
-//     */
-//    public ToDo(String uniqueId, boolean isDone, String description) {
-//        super(uniqueId, isDone, description);
-//        taskType = "T";
-//    }
+    /**
+     * Creates a {@code ToDo} from existing data.
+     * @param isDone Todo completion status.
+     * @param description Description of the todo.
+     */
     public ToDo(boolean isDone, String description) {
         this(description);
         if (isDone) {
@@ -32,6 +27,6 @@ public class ToDo extends Task {
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return String.format("[T]%s", super.toString());
     }
 }
