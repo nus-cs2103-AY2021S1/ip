@@ -44,9 +44,9 @@ public class Task {
     @Override
     public String toString() {
         if (isDone) {
-            return String.format ("[DONE] %s", this.description);
+            return String.format ("[\u2713] %s", this.description);
         } else {
-            return String.format ("[NOT DONE] %s", this.description);
+            return String.format ("[\u2717] %s", this.description);
         }
     }
 }

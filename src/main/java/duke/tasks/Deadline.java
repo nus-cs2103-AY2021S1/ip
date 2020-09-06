@@ -29,9 +29,9 @@ public class Deadline extends Task {
     public String toString() {
         Parser parser = new Parser();
         if (isDone) {
-            return String.format ("[D][DONE] %s (by: %s)", this.description, parser.convertDate(deadline));
+            return String.format ("[D][\u2713] %s (by: %s)", this.description, parser.convertDate(deadline));
         } else {
-            return String.format ("[D][NOT DONE] %s (by: %s)", this.description, parser.convertDate(deadline));
+            return String.format ("[D][\u2717] %s (by: %s)", this.description, parser.convertDate(deadline));
         }
     }
 }

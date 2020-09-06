@@ -1,0 +1,3 @@
+Todo | true | sleep
+Todo | false | eat
+Event | false | movie | 2020-08-08

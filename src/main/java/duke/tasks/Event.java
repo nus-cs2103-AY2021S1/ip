@@ -29,9 +29,9 @@ public class Event extends Task {
     public String toString() {
         Parser parser = new Parser();
         if (isDone) {
-            return String.format ("[E][DONE] %s (at: %s)", this.description, parser.convertDate(time));
+            return String.format ("[E][\u2713] %s (at: %s)", this.description, parser.convertDate(time));
         } else {
-            return String.format ("[E][NOT DONE] %s (at: %s)", this.description, parser.convertDate(time));
+            return String.format ("[E][\u2717] %s (at: %s)", this.description, parser.convertDate(time));
         }
     }
 }

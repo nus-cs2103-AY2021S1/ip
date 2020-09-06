@@ -2,13 +2,16 @@ package duke;
 
 import duke.tasks.Task;
 
+import java.nio.charset.Charset;
+
+
 /**
  * Ui which sets output message to the user
  */
 public class Ui {
     
     private String outputMessage;
-
+    
     /**
      * Initializes the output message to the welcome message
      */
@@ -35,7 +38,9 @@ public class Ui {
      * @return output message
      */
     public String getOutputMessage (){
-        return this.outputMessage;
+        String pattern = "\u2727\uff65\uff9f\u003a \u002a\u2727\uff65\uff9f\u003a\u002a \u3000";
+        String border = String.format("%s %s %s\n", pattern, pattern, pattern);
+        return String.format ("%s\n %s\n %s", border, outputMessage, border);
     }
     
     /**
