@@ -17,7 +17,7 @@ import java.util.Scanner;
  * <code>duke.Storage</code> handles all file read and writes.
  */
 public class Storage {
-    final static String TASKS_TEXT_FILE_PATH = "../../tasks.txt";
+    final static String TASKS_TEXT_FILE_PATH = "src/main/resources/tasks.txt";
 
     /**
      * Loads the information from the file "duke.tasks.txt" into a
@@ -60,14 +60,14 @@ public class Storage {
             return tasks;
         } catch (FileNotFoundException e) {
             // TODO: Customise font
-            System.out.println("File \"tasks.txt\" does not exist. Attempting to create one for you.");
             try {
-                FileWriter fw = new FileWriter(TASKS_TEXT_FILE_PATH);
-                fw.close();
+                System.out.println("File \"tasks.txt\" does not exist. Attempting to create one for you.");
+                File file = new File(TASKS_TEXT_FILE_PATH);
+                file.createNewFile();
                 System.out.println("Successfully created file tasks.txt");
                 return tasks;
-            } catch (IOException ioException) {
-                throw new DukeException(ioException.getMessage());
+            } catch (IOException io) {
+                throw new DukeException(io.getMessage());
             }
         }
     }
