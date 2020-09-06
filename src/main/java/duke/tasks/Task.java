@@ -19,6 +19,7 @@ public class Task {
      */
     public String markAsDone(){
         this.isDone = true;
+        assert this.isDone: "OOPS! Failed to mark this task as done.";
         String result = "Nice! I've marked this task as done:"+"\n";
 //        System.out.println("Nice! I've marked this task as done:");
 //        System.out.println(this.toString());
