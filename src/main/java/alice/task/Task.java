@@ -1,5 +1,8 @@
 package alice.task;
 
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Represents a task in ALICE.
  */
@@ -20,11 +23,15 @@ public abstract class Task {
 
     /**
      * Marks the task as done.
+     *
+     * @return true if successful; false otherwise.
      */
-    public void markAsDone() {
-        if (!isDone) {
-            isDone = true;
+    public boolean markAsDone() {
+        if (isDone) {
+            return false;
         }
+        isDone = true;
+        return true;
     }
 
     /**
@@ -35,15 +42,9 @@ public abstract class Task {
      */
     public boolean containKeywords(String... keywords) {
         assert keywords.length != 0 : "Keywords used for checking with task description cannot be empty";
-        String[] descriptionTokens = description.split(" ");
-        for (int i = 0; i < keywords.length; i++) {
-            for (int j = 0; j < descriptionTokens.length; j++) {
-                if (descriptionTokens[j].equals(keywords[i])) {
-                    return true;
-                }
-            }
-        }
-        return false;
+
+        List<String> descriptionTokens = Arrays.asList(description.split(" "));
+        return Arrays.stream(keywords).anyMatch(descriptionTokens::contains);
     }
 
     /**

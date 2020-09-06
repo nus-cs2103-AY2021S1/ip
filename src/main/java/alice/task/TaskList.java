@@ -142,7 +142,10 @@ public class TaskList {
      */
     public Task markTaskAsDone(int index) throws InvalidCommandException {
         try {
-            tasks.get(index).markAsDone();
+            boolean isOpSuccessful = tasks.get(index).markAsDone();
+            if (!isOpSuccessful) {
+                return null;
+            }
             return tasks.get(index);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidCommandException("That task number does not exist.");
