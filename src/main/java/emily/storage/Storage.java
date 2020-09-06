@@ -1,9 +1,10 @@
-package main.java.emily.storage;
+package emily.storage;
 
-import main.java.emily.task.Deadline;
-import main.java.emily.task.Event;
-import main.java.emily.task.Task;
-import main.java.emily.task.ToDos;
+import emily.exception.DukeException;
+import emily.task.Task;
+import emily.task.Deadline;
+import emily.task.Event;
+import emily.task.ToDos;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -13,31 +14,29 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Deals with loading tasks from the txt file and saving tasks in the file
+ * Saves and loads data
  */
 public class Storage {
     private static String filepath;
 
-    Storage(String filepath) {
-        this.filepath = filepath;
+    public Storage(String filepath) {
+        Storage.filepath = filepath;
     }
 
     /**
-     * Returns a list of tasks
      * Reads the information from the txt file and process into a list of task
+     * Creates new txt file if file does not exist
      *
      * @return an Arraylist of Task
-     * @throws DukeException when the file is invalid
+     * @throws DukeException invalid file
      */
     public ArrayList<Task> loadData() throws DukeException {
-
         ArrayList<Task> store = new ArrayList<>();
 
         File f = new File(filepath);
         f.getParentFile().mkdirs();
         try {
             if (f.exists()) {
-
                 Scanner sc = new Scanner(f);
                 while (sc.hasNext()) {
                     String line = sc.nextLine();
@@ -46,27 +45,26 @@ public class Storage {
                     String[] temp;
 
                     switch (type) {
-                        case 'T':
-                            temp = line.split(",", 2);
-                            Task t = new ToDos(temp[1]);
-                            t.setFinished(isCompleted);
-                            store.add(t);
-                            break;
-                        case 'D':
-                            temp = line.split(",", 3);
-                            Task d = new Deadline(temp[1], temp[2]);
-                            d.setFinished(isCompleted);
-                            store.add(d);
-                            break;
-                        case 'E':
-                            temp = line.split(",", 3);
-                            Task e = new Event(temp[1], temp[2]);
-                            e.setFinished(isCompleted);
-                            store.add(e);
-                            break;
-                        default:
-                            throw new DukeException("invalid type of task");
-
+                    case 'T':
+                        temp = line.split(",", 2);
+                        Task t = new ToDos(temp[1]);
+                        t.setHasFinished(isCompleted);
+                        store.add(t);
+                        break;
+                    case 'D':
+                        temp = line.split(",", 3);
+                        Task d = new Deadline(temp[1], temp[2]);
+                        d.setHasFinished(isCompleted);
+                        store.add(d);
+                        break;
+                    case 'E':
+                        temp = line.split(",", 3);
+                        Task e = new Event(temp[1], temp[2]);
+                        e.setHasFinished(isCompleted);
+                        store.add(e);
+                        break;
+                    default:
+                        assert false : "txt file contains invalid terms, please rewrite txt file";
                     }
                 }
 
@@ -79,7 +77,6 @@ public class Storage {
         } catch (IOException e) {
             throw new DukeException("file already existed");
         }
-
     }
 
 
@@ -89,7 +86,7 @@ public class Storage {
      * @param store contains the updated list of task
      * @throws DukeException for invalid file
      */
-    public void reWriteData(ArrayList<Task> store) throws DukeException {
+    public void saveData(ArrayList<Task> store) throws DukeException {
         try {
             FileWriter fw = new FileWriter(this.filepath);
             String txt = "";
@@ -98,24 +95,21 @@ public class Storage {
                 String temp = "";
                 Task current = store.get(i);
                 if (current instanceof ToDos) {
-                    temp = "T" + (current.isFinished() ? "1" : "0")
+                    temp = "T" + (current.isHasFinished() ? "1" : "0")
                             + "," + current.getDescription();
                 } else if (current instanceof Deadline) {
-                    temp = "D" + (current.isFinished() ? "1" : "0")
+                    temp = "D" + (current.isHasFinished() ? "1" : "0")
                             + "," + current.getDescription() + "," + ((Deadline) current).getBy();
                 } else if (current instanceof Event) {
-                    temp = "E" + (current.isFinished() ? "1" : "0")
+                    temp = "E" + (current.isHasFinished() ? "1" : "0")
                             + "," + current.getDescription() + "," + ((Event) current).getAt();
                 }
-
                 txt = txt + temp + System.lineSeparator();
             }
-
             fw.write(txt);
             fw.close();
         } catch (IOException e) {
             throw new DukeException("invalid file");
         }
     }
-
 }

@@ -1,4 +1,4 @@
-package main.java.emily.app;
+package emily.app;
 
 import javafx.application.Application;
 import javafx.application.Platform;
@@ -9,25 +9,24 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import main.java.emily.command.Emily;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import emily.command.Emily;
 
-public class Main extends Application {
-
+/**
+ * Listens to user input and provides a layout of the application.
+ */
+public class UI extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private Image emily = new Image(this.getClass().getResourceAsStream("/images/emily.png"));
+    private final Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private final Image emily = new Image(this.getClass().getResourceAsStream("/images/emily.png"));
 
-    private Emily bot = new Emily();
+    private final Emily bot = new Emily();
 
     @Override
     public void start(Stage stage) {
@@ -40,18 +39,15 @@ public class Main extends Application {
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
-        sendButton = new Button("Send");
+        Button sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, dialogContainer, userInput, sendButton);
 
-
-        scene = new Scene(mainLayout);
-
+        Scene scene = new Scene(mainLayout);
         stage.setScene(scene);
         stage.show();
 
-        // more code to be added here later
         //Step 2. Formatting the window to look as expected
         stage.setTitle("Emily");
         stage.setResizable(false);
@@ -67,11 +63,9 @@ public class Main extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
-
         sendButton.setPrefWidth(55.0);
 
         AnchorPane.setTopAnchor(scrollPane, 1.0);
@@ -79,18 +73,14 @@ public class Main extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-
         dialogContainer.getChildren().addAll(
                 new DialogBox(getDialogLabel(intro), new ImageView())
         );
 
-
-        // more code to be added here later
         //Part 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
             handleUserInput();
@@ -99,12 +89,10 @@ public class Main extends Application {
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
-
     }
 
     /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Emily's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
@@ -119,12 +107,14 @@ public class Main extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Sends command to Emily bot. Ends the program if user sends "bye" command.
+     *
+     * @param input String of user's command
+     * @return a string corresponding to the logic of the command
      */
     private String getResponse(String input) {
 
-        if(input.equals("bye")){
+        if (input.equals("bye")) {
             Platform.exit();
         }
 
@@ -133,8 +123,8 @@ public class Main extends Application {
     }
 
     /**
-     * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */

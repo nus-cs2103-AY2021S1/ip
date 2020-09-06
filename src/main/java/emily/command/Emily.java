@@ -1,8 +1,8 @@
-package main.java.emily.command;
+package emily.command;
 
-import main.java.emily.exception.DukeException;
-import main.java.emily.storage.Storage;
-import main.java.emily.storage.TaskList;
+import emily.exception.DukeException;
+import emily.storage.Storage;
+import emily.storage.TaskList;
 import java.io.File;
 
 
@@ -11,16 +11,17 @@ import java.io.File;
  */
 public class Emily {
 
-    private static final String FILE_PATH = "data/emily.txt";
+    private static final String FILE_PATH = "data/emily.txt"; //store txt file under data folder
     private final Storage storage;
-    private final Logic ui;
+    private final Logic logic;
     private TaskList tasks;
 
     /**
      * Manages the app components
+     * Loads the tasklist with existing saved tasks from previous sessions
      */
     public Emily() {
-        ui = new Logic();
+        logic = new Logic();
         storage = new Storage(FILE_PATH);
         try {
             tasks = new TaskList(storage.loadData());
@@ -33,6 +34,7 @@ public class Emily {
     /**
      * Reads the string of user command and return the corresponding output
      * by the program.
+     *
      * @param userInputText user will type into the box
      * @return a String response from Emily
      */
@@ -42,7 +44,7 @@ public class Emily {
 
         while (!end) {
             try {
-                output = ui.readsLine(userInputText, tasks);
+                output = logic.readsLine(userInputText, tasks);
                 storage.saveData(tasks.getTaskArrayList());
                 end = true;
             } catch (DukeException e) {

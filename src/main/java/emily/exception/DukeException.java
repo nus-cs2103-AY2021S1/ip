@@ -1,4 +1,4 @@
-package main.java.emily.exception;
+package emily.exception;
 
 /**
  * Alerts the program if logic fails.
