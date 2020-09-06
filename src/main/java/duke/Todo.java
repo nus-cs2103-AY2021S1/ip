@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.LocalDate;
+
 /**
  * <h>To-do duke.Task Type</h>
  * This class is a type of tasks without any date/time attached to it.
@@ -11,6 +13,20 @@ public class Todo extends Task {
      */
     public Todo(String description) {
         super(description);
+    }
+
+    /**
+     * Converts to-do task to a string to be save in to-do.txt file
+     * @return String A string containing task-type, doneStatus, descriptions and details.
+     */
+    @Override
+    public String convertToText() {
+        return "T" + super.convertToText();
+    }
+
+    @Override
+    public boolean checkTask(LocalDate date) {
+        return false;
     }
 
     /**

@@ -42,6 +42,20 @@ public class Deadline extends Task {
     }
 
     /**
+     * Converts deadline task to a string to be save in to-do.txt file
+     * @return String A string containing task-type, doneStatus, descriptions and details.
+     */
+    @Override
+    public String convertToText() {
+        return "D" + super.convertToText() + " >> " + this.getDate().toString() + " " + this.getTime().toString();
+    }
+
+    @Override
+    public boolean checkTask(LocalDate date) {
+        return getDate().equals(date) && isNotDone();
+    }
+
+    /**
      * Overridden toString method to output name, type and status of task.
      * @return String This returns a string.
      */
