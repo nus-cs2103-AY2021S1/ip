@@ -21,6 +21,9 @@ public class Parser {
      */
     public Command parse(String fullCommand) throws DukeException {
         String[] splitStrings = fullCommand.split(" ");
+
+        assert(splitStrings.length >= 1);
+
         String firstInput = splitStrings[0];
         Command c;
         switch (firstInput) {
