@@ -46,7 +46,7 @@ public class Storage {
         String childPath = strings[1];
 
         File file = new File(parentPath);
-        if(!file.exists()) {
+        if (!file.exists()) {
             file.mkdir();
         }
 

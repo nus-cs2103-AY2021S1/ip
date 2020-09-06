@@ -5,14 +5,10 @@ import java.io.IOException;
 
 import command.Command;
 import exception.AnonymousException;
-import exception.DescriptionException;
 import exception.DukeCreateFileException;
-import exception.DukeDateTimeParserException;
 import exception.DukeException;
 import exception.DukeFileException;
 import exception.DukeFileNotFoundException;
-import exception.DukeKeywordException;
-import exception.NoIndexException;
 import parser.Parser;
 import storage.Storage;
 import task.TaskList;
@@ -93,7 +89,7 @@ public class Duke {
             return new DukeFileException().toString();
         } catch (AnonymousException e) {
             return new AnonymousException(command).toString();
-        } catch(DukeException e) {
+        } catch (DukeException e) {
             return e.toString();
         }
     }

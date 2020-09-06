@@ -1,11 +1,6 @@
 package command;
 
 import java.time.LocalDate;
-import java.util.List;
-import java.util.function.Supplier;
-import java.util.stream.Collectors;
-import java.util.stream.IntStream;
-import java.util.stream.Stream;
 
 import exception.DukeDateTimeParserException;
 import parser.Parser;
@@ -58,7 +53,7 @@ public class ShowBeforeCommand extends Command {
 
                 boolean isBeforeSpecifiedDate = deadlineTask.getDateTime().toLocalDate().isBefore(localDate);
                 if (isBeforeSpecifiedDate) {
-                    sb.append(index+ ". " + deadlineTask + "\n");
+                    sb.append(index + ". " + deadlineTask + "\n");
                     index++;
                 }
             } else if (task instanceof EventTask) {

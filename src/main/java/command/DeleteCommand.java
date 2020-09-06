@@ -48,10 +48,11 @@ public class DeleteCommand extends Command {
      * the external file.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, NoIndexException, DukeInvalidIndexException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, NoIndexException,
+            DukeInvalidIndexException {
         int index = Parser.findIndexParser(this.command);
 
-        if(index <= 0 || index > tasks.size()) {
+        if (index <= 0 || index > tasks.size()) {
             throw new DukeInvalidIndexException();
         }
 

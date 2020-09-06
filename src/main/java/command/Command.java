@@ -65,7 +65,8 @@ public abstract class Command {
      * @throws DukeKeywordException Thrown when user failed to specify the keyword in the command.
      */
     public abstract String execute (TaskList tasks, Ui ui, Storage storage) throws IOException, AnonymousException,
-            DescriptionException, DukeDateTimeParserException, NoIndexException, DukeKeywordException, DukeInvalidIndexException;
+            DescriptionException, DukeDateTimeParserException, NoIndexException, DukeKeywordException,
+            DukeInvalidIndexException;
 
     /**
      * A getter method that returns the state whether a program is ready to exit or not.

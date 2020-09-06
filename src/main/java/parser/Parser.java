@@ -76,13 +76,13 @@ public class Parser {
             String[] taskDetails = strings[2].split("\\|");
             String deadlineDescription = taskDetails[0].trim();
             LocalDateTime deadlineDateTime = LocalDateTime.parse(taskDetails[1].trim(), formatter);
-            task = new DeadlineTask(deadlineDescription,deadlineDateTime);
+            task = new DeadlineTask(deadlineDescription, deadlineDateTime);
             break;
         case "E" :
             String[] taskDetails2 = strings[2].split("\\|");
-            String eventDescription =  taskDetails2[0].trim();
+            String eventDescription = taskDetails2[0].trim();
             LocalDateTime eventDateTime = LocalDateTime.parse(taskDetails2[1].trim(), formatter);
-            task = new EventTask(eventDescription,eventDateTime);
+            task = new EventTask(eventDescription, eventDateTime);
             break;
         default :
             return new Task();

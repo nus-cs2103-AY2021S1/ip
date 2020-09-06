@@ -65,7 +65,7 @@ public class EventCommand extends Command {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
             String eventTaskDescription = taskDetails.get("taskDescription");
-            LocalDateTime eventTaskDateTime = LocalDateTime.parse(taskDetails.get("taskTime"),formatter);
+            LocalDateTime eventTaskDateTime = LocalDateTime.parse(taskDetails.get("taskTime"), formatter);
 
             EventTask eventTask = new EventTask(eventTaskDescription, eventTaskDateTime);
 
