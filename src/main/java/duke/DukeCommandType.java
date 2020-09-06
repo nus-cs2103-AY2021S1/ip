@@ -11,6 +11,7 @@ public enum DukeCommandType {
     FIND,
     DONE,
     DELETE,
+    UPDATE,
     HELP,
     UNKNOWN,
     EXIT

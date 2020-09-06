@@ -39,6 +39,11 @@ public class Deadline extends Task {
         this.deadline = LocalDate.parse(deadline);
     }
 
+    public Deadline(String description, LocalDate deadline, boolean isDone) {
+        super(description, isDone);
+        this.deadline = deadline;
+    }
+
     /**
      * Returns string format of deadline.
      *

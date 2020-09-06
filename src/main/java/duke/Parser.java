@@ -10,9 +10,8 @@ public class Parser {
      * Interprets the command type from user's input and calls CommandHandler to process the commands.
      *
      * @param input
-     * @throws DukeException
      */
-    public static String parseInputs(String input) throws DukeException {
+    public static String parseInputs(String input) {
         assert !input.isEmpty() : "Input shouldn't be empty!";
         String output = "";
         if (input.equals("bye")) {
@@ -31,6 +30,8 @@ public class Parser {
             output += CommandHandler.handleCommands(input, DukeCommandType.DONE, tasks);
         } else if (input.startsWith("delete")) {
             output += CommandHandler.handleCommands(input, DukeCommandType.DELETE, tasks);
+        } else if (input.startsWith("update")) {
+            output += CommandHandler.handleCommands(input, DukeCommandType.UPDATE, tasks);
         } else if (input.startsWith("find")) {
             output += CommandHandler.handleCommands(input, DukeCommandType.FIND, tasks);
         } else {

@@ -39,6 +39,11 @@ public class Event extends Task {
         this.scheduled = LocalDate.parse(scheduled);
     }
 
+    public Event(String description, LocalDate scheduled, boolean isDone) {
+        super(description, isDone);
+        this.scheduled = scheduled;
+    }
+
     /**
      * Returns string format of event.
      *

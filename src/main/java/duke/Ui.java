@@ -54,7 +54,8 @@ public class Ui {
                 + "\ndeadline <your task> /by <your deadline> - add task with deadline"
                 + "\nevent <your event> /at <event's timing> - add event"
                 + "\ndone <index of task> - mark task as done"
-                + "\ndelete <index of task> - delete task from list";
+                + "\ndelete <index of task> - delete task from list"
+                + "\n update <index of task> <desc/date> <edited desc/date>";
         return str;
     }
 

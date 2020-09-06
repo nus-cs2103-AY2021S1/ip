@@ -9,7 +9,7 @@
     <children>
         <HBox fx:id="speechBubble" maxHeight="-Infinity" styleClass="speech-bubble" stylesheets="@duke.css">
             <children>
-                <Label fx:id="dialog" text="Label" wrapText="true">
+                <Label minHeight="-Infinity" fx:id="dialog" text="Label" wrapText="true">
                     <padding>
                         <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                     </padding>
