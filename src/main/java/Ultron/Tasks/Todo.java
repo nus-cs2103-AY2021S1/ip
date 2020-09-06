@@ -7,12 +7,8 @@ public final class Todo extends Task {
      *
      * @param description Description of the todo.
      */
-    //Call the constructor
     public Todo(final String description) {
-
-        //Call the superclass constructor
         super(description);
-
     }
 
     /**
