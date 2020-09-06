@@ -16,6 +16,11 @@ import javafx.util.Duration;
  * layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+
+    private static final double TIME_DELAY = 1;
+    private static final String USER_IMAGE_PATH = "/images/user.png";
+    private static final String DUKE_IMAGE_PATH = "/images/duke.png";
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -27,11 +32,9 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private final double TIME_DELAY = 1;
-    private final String USER_IMAGE_PATH = "/images/user.png";
-    private final String DUKE_IMAGE_PATH = "/images/duke.png";
     private Image userImage = new Image(this.getClass().getResourceAsStream(USER_IMAGE_PATH));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream(DUKE_IMAGE_PATH));
+
 
     /**
      * Initializes the GUI window.

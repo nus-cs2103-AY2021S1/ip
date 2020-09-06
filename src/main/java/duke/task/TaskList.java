@@ -1,8 +1,9 @@
 package duke.task;
 
+import java.util.ArrayList;
+
 import duke.exception.InvalidRequestException;
 
-import java.util.ArrayList;
 
 /**
  * Represents a TaskList and consists of information and methods related to the list of tasks.
@@ -37,11 +38,11 @@ public class TaskList {
      * @throws InvalidRequestException If the command is invalid.
      */
     public void deleteTask(int index) throws InvalidRequestException {
-            if (listOfTasks.size() < index || index < 0) {
-                throw new InvalidRequestException("You have entered an invalid duke.task "
-                        + "number! Please try again.");
-            }
-            listOfTasks.remove(index - 1);
+        if (listOfTasks.size() < index || index < 0) {
+            throw new InvalidRequestException("You have entered an invalid duke.task "
+                    + "number! Please try again.");
+        }
+        listOfTasks.remove(index - 1);
     }
 
     /**
@@ -51,11 +52,11 @@ public class TaskList {
      * @throws InvalidRequestException If the command is invalid.
      */
     public void setAsDone(int index) throws InvalidRequestException {
-            if (listOfTasks.size() < index || index < 0) {
-                throw new InvalidRequestException("You have entered an invalid duke.task "
-                        + "number! Please try again.");
-            }
-            this.listOfTasks.get(index - 1).setTaskToBeDone();
+        if (listOfTasks.size() < index || index < 0) {
+            throw new InvalidRequestException("You have entered an invalid duke.task "
+                    + "number! Please try again.");
+        }
+        this.listOfTasks.get(index - 1).setTaskToBeDone();
 
     }
 
@@ -83,4 +84,4 @@ public class TaskList {
         return this.listOfTasks;
     }
 
- }
+}

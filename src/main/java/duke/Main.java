@@ -12,8 +12,9 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    private static final String MAIN_WINDOW_PATH = "/view/MainWindow.fxml";
+
     private Duke duke = new Duke();
-    private final String MAIN_WINDOW_PATH = "/view/MainWindow.fxml";
 
     /**
      * Starts

@@ -1,20 +1,21 @@
 package duke.ui;
 
+import java.util.ArrayList;
+
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.util.ArrayList;
 
 /**
  * Represents Ui class and consists of methods related to user interaction.
  */
 public class Ui {
 
-    private TaskList taskList;
-    private static final String EMPTY_SPACE_BEFORE_TASK = "     ";
     private static final String GREETING_PART_ONE = "Hi, I am Duke! :D\n";
     private static final String GREETING_PART_TWO = "Is there anything I could help with?\n";
+    private static final String EMPTY_SPACE_BEFORE_TASK = "     ";
     private static final String EXIT_MESSAGE = "Bye! I look forward to meeting you next time!\n";
+
+    private TaskList taskList;
 
     /**
      * Constructs an ui object.

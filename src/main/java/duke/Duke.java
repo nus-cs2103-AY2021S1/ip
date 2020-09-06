@@ -1,7 +1,6 @@
 package duke;
 
 import duke.command.Command;
-import duke.command.ExitCommand;
 import duke.exception.InvalidInputException;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -15,11 +14,12 @@ import duke.ui.Ui;
  */
 public class Duke {
 
+    private static final String byeMessage = "bye";
+
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
     private boolean canCloseWindow = false;
-    private static final String byeMessage = "bye";
 
     /**
      * Creates a duke object and initializes storage, taskList and ui.
