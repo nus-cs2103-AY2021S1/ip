@@ -14,6 +14,6 @@ public class ClearCommand extends Command {
     @Override
     public String run(TaskList taskList) {
         taskList.clearAll();
-        return Ui.clear();
+        return Ui.answerClear();
     }
 }

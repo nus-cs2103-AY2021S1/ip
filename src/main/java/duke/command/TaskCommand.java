@@ -16,11 +16,11 @@ public class TaskCommand extends Command {
 
     @Override
     public String run(TaskList taskList) throws UserException {
-        Task task;
         if (input.size() < 4) {
             throw new InvalidArgumentException("Missing argument(s)");
         }
-        task = taskList.addTask(input);
-        return Ui.task(task.toString(), taskList.count());
+        Task task = taskList.makeTask(input);
+        taskList.addTask(task);
+        return Ui.answerTask(task.toString(), taskList.count());
     }
 }

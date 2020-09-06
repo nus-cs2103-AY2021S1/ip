@@ -1,11 +1,13 @@
 package duke.task;
 
+import duke.misc.Const;
+
 import java.time.LocalDateTime;
 
 public class Task {
     protected String type;
     protected String description;
-    protected LocalDateTime time;
+    protected LocalDateTime time = Const.DEFAULT_TIME;
     protected boolean isDone = false;
 
     /**
@@ -18,6 +20,24 @@ public class Task {
         type = "Task";
         this.description = description;
         this.time = time;
+    }
+
+    public Task(String description, LocalDateTime time, boolean isDone) {
+        type = "Task";
+        this.description = description;
+        this.time = time;
+        this.isDone = isDone;
+    }
+
+    public Task(String description) {
+        type = "Task";
+        this.description = description;
+    }
+
+    public Task(String description, boolean isDone) {
+        type = "Task";
+        this.description = description;
+        this.isDone = isDone;
     }
 
     /**
@@ -38,8 +58,8 @@ public class Task {
                 + time.getMonthValue() + "/"
                 + time.getYear() + " "
                 + (time.getHour() * 100 + time.getMinute());
-        if (time.equals(LocalDateTime.MIN)) {
-            datetimeString = "null";
+        if (time.equals(Const.DEFAULT_TIME)) {
+            datetimeString = Const.NO_TIME;
         }
         return type + "%%%" + description + "%%%" + datetimeString + "%%%" + (isDone ? 1 : 0);
     }

@@ -1,11 +1,14 @@
 package duke.task;
 
-import java.time.LocalDateTime;
-
 public class Todo extends Task {
     public Todo(String description) {
-        super(description, LocalDateTime.MIN);
+        super(description);
         super.type = "todo";
+    }
+
+    public Todo(String description, boolean isDone) {
+        this(description);
+        super.isDone = isDone;
     }
 
     @Override

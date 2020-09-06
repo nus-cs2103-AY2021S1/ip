@@ -18,6 +18,6 @@ public class DeleteCommand extends Command {
         assert input.size() == 2: "DeleteCommand.run(): input must have exactly 2 words";
         int index = Integer.parseInt(input.get(1));
         Task task = taskList.removeTask(index);
-        return Ui.delete(task.toString(), taskList.count());
+        return Ui.answerDelete(task.toString(), taskList.count());
     }
 }

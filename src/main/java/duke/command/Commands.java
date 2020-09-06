@@ -15,7 +15,9 @@ public class Commands {
      * @throws InvalidArgumentException
      */
     public static Command create(List<String> input) throws InvalidArgumentException {
-        switch (input.get(0).toLowerCase()) {
+        String commandType = input.get(0).toLowerCase();
+
+        switch (commandType) {
         case "bye":
             return new ByeCommand(input);
         case "done":
@@ -32,6 +34,8 @@ public class Commands {
         case "deadline":
         case "event":
             return new TaskCommand(input);
+        case "save":
+            return new SaveCommand(input);
         default:
             throw new InvalidArgumentException("Command not found");
         }
