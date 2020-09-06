@@ -6,8 +6,7 @@
 .label {
     -fx-background-color: white;
     -fx-background-radius: 4;
-    -fx-border-color: white;
-    -fx-border-radius: 5;
+    -fx-background-insets: -5;
     -fx-opacity: 0.90;
 }
 
