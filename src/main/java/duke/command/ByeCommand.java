@@ -27,6 +27,7 @@ public class ByeCommand extends Command {
     public CommandResponse execute(TaskList tasks, Ui ui, Storage storage) {
         String responseMessage = "Bye. Hope to see you again soon!";
         boolean shouldExit = getIsExit();
+        assert shouldExit : "shouldExit should be true";
         storage.save(tasks);
         return new CommandResponse(responseMessage, shouldExit);
     }

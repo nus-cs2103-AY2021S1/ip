@@ -53,6 +53,7 @@ public class AddEventCommand extends Command {
                     + tasks.getNumberOfTaskDescription()
                     + " in the list.";
             boolean shouldExit = getIsExit();
+            assert !shouldExit : "shouldExit should be false";
             return new CommandResponse(responseMessage, shouldExit);
         } catch (DateTimeParseException e) {
             throw new InvalidTaskDateTimeException();

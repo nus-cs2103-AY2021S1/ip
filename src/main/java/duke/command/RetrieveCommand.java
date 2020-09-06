@@ -59,6 +59,7 @@ public class RetrieveCommand extends Command {
             }
 
             boolean shouldExit = getIsExit();
+            assert !shouldExit : "shouldExit should be false";
             return new CommandResponse(createResponseMessage(retrievedTasks), shouldExit);
         } catch (DateTimeParseException e) {
             throw new InvalidTaskDateException();

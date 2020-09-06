@@ -20,6 +20,7 @@ public class DoneCommand extends Command {
     public DoneCommand(int taskNumber) {
         super(false);
         this.taskNumber = taskNumber;
+        assert taskNumber >= 0 : "taskNumber should not be less than 0";
     }
 
     /**
@@ -36,6 +37,7 @@ public class DoneCommand extends Command {
         String responseMessage = "Nice! I've marked this task as done:\n\t   "
                 + tasks.getTask(taskNumber);
         boolean shouldExit = getIsExit();
+        assert !shouldExit : "shouldExit should be false";
         return new CommandResponse(responseMessage, shouldExit);
     }
 
