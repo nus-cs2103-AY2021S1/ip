@@ -7,6 +7,10 @@ import duke.exception.InvalidDeadlineException;
 import duke.parser.DateTimeParsing;
 
 public class Deadline extends Task {
+    private static final String DEADLINE_SYMBOL = "[D]";
+    private static final String DEADLINE_NAME = "deadline ";
+    private static final String DEADLINE_BY = "/by ";
+
     private final String time12h;
     private final LocalDate date;
 
@@ -48,12 +52,12 @@ public class Deadline extends Task {
     public String toSaveString() {
         String date = DateTimeParsing.localDateToString(this.date);
         String time = DateTimeParsing.to24HTimeFormat(time12h);
-        return (isDone ? 1 : 0) + "deadline " + description + "/by " + date + " " + time;
+        return (isDone ? 1 : 0) + DEADLINE_NAME + description + DEADLINE_BY + date + " " + time;
     }
 
     @Override
     public String toString() {
         String formattedDate = DateTimeParsing.localDateToFormattedString(date);
-        return "[D]" + super.toString() + "(by: " + formattedDate + " " + time12h + ")";
+        return DEADLINE_SYMBOL + super.toString() + "(by: " + formattedDate + " " + time12h + ")";
     }
 }

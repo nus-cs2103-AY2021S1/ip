@@ -5,6 +5,9 @@ import java.time.LocalDate;
 import duke.exception.InvalidTodoException;
 
 public class Todo extends Task {
+    private static final String TODO_ICON = "[T]";
+    private static final String TODO_NAME = "todo ";
+
     private Todo(String desc) {
         super(desc);
     }
@@ -25,7 +28,7 @@ public class Todo extends Task {
 
     @Override
     public String toSaveString() {
-        return (isDone ? 1 : 0) + "todo " + description;
+        return (isDone ? 1 : 0) + TODO_NAME + description;
     }
 
     @Override
@@ -35,6 +38,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return TODO_ICON + super.toString();
     }
 }

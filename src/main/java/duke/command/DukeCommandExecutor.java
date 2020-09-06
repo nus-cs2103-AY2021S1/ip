@@ -5,6 +5,8 @@ import duke.exception.InvalidCommandException;
 import duke.task.TaskList;
 
 public class DukeCommandExecutor implements CommandExecutor {
+    private static final String ERROR_INVALID_COMMAND = "I'm sorry, but I don't know what that means :-(";
+
     private boolean hasExited = false;
 
     /**
@@ -17,9 +19,7 @@ public class DukeCommandExecutor implements CommandExecutor {
      * @throws DukeException If the command is not formatted properly.
      */
     public String execute(String in, TaskList taskList) throws DukeException {
-        if (hasExited) {
-            throw new InvalidCommandException("Program has already exited!");
-        }
+        assert !hasExited : "Program has already exited";
 
         CommandType cmdType = CommandParser.parseCmdWord(in);
         switch (cmdType) {
@@ -38,8 +38,9 @@ public class DukeCommandExecutor implements CommandExecutor {
             return ListCommand.execute(taskList);
         case Task:
             return TaskCommand.execute(in, taskList);
-        default: // Invalid
-            throw new InvalidCommandException("I'm sorry, but I don't know what that means :-(");
+        default:
+            assert cmdType.equals(CommandType.Invalid) : "CommandType should be Invalid";
+            throw new InvalidCommandException(ERROR_INVALID_COMMAND);
         }
     }
 

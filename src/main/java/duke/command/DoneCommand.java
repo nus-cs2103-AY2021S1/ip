@@ -6,6 +6,9 @@ import duke.task.TaskList;
 
 // Handles all the logic behind any "done" command from the user.
 public class DoneCommand extends Command {
+    private static final String ERROR_INVALID_INDEX = "Please input a valid index.";
+    private static final String RESPONSE = "Nice! I've marked this task as done\n  ";
+
     /**
      * Executes any "done" command issued by the user.
      * Marks the task in the taskList specified by the user as done.
@@ -21,9 +24,11 @@ public class DoneCommand extends Command {
             Task task = taskList.get(index);
             task.markAsDone();
             taskList.update(index);
-            return "Nice! I've marked this task as done\n  " + task.toString();
+
+            String response = RESPONSE + task.toString();
+            return response;
         } catch (NumberFormatException | IndexOutOfBoundsException e) {
-            throw new InvalidCommandException("Please input a valid index.");
+            throw new InvalidCommandException(ERROR_INVALID_INDEX);
         }
     }
 }

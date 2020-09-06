@@ -12,6 +12,10 @@ import java.util.Arrays;
 
 // Class that handles the loading and saving of the save file.
 public class DukeStorage implements Storage {
+    private static final String ERROR_CREATE_SAVE = "An error has occurred when trying to create the save file!";
+    private static final String ERROR_UPDATE_SAVE = "An error has occurred when updating the save file.";
+    private static final String ERROR_READ_SAVE = "An error has occurred when reading the save file.";
+
     private final Path filePath;
     private ArrayList<String> saveLines;
     private boolean isActive = true;
@@ -30,7 +34,7 @@ public class DukeStorage implements Storage {
             createSaveFile();
             loadData();
         } catch (IOException e) {
-            throw new IOException("An error has occurred when trying to create the save file!");
+            throw new IOException(ERROR_CREATE_SAVE);
         }
     }
 
@@ -52,15 +56,11 @@ public class DukeStorage implements Storage {
         try {
             FileWriter myWriter = new FileWriter(filePath.toString());
             for (String line: saveLines) {
-                try {
-                    myWriter.write(line + "\n");
-                } catch (IOException e) {
-                    System.out.println("An error has occurred when updating the save file.");
-                }
+                myWriter.write(line + "\n");
             }
             myWriter.close();
         } catch (IOException e) {
-            System.out.println("An error has occurred when updating the save file.");
+            System.out.println(ERROR_UPDATE_SAVE);
         }
     }
 
@@ -104,24 +104,13 @@ public class DukeStorage implements Storage {
         return saveLines;
     }
 
-    private String[] loadData() {
+    private void loadData() throws IOException {
         // Prevent saving while loading
         isActive = false;
-        String[] result = new String[0];
-        try {
-            BufferedReader in = new BufferedReader(new FileReader(filePath.toString()));
-            result = in.lines().toArray(String[]::new);
-            in.close();
-        } catch (IOException e) {
-            System.out.println(System.getProperty("user.dir"));
-            System.out.println(filePath.toString());
-            System.out.println(e.getMessage());
-            System.out.println("An error has occurred when reading the save file.");
-        } finally {
-            isActive = true;
-            this.saveLines = new ArrayList<>(Arrays.asList(result));
-        }
-
-        return result;
+        BufferedReader in = new BufferedReader(new FileReader(filePath.toString()));
+        String[] result = in.lines().toArray(String[]::new);
+        in.close();
+        isActive = true;
+        this.saveLines = new ArrayList<>(Arrays.asList(result));
     }
 }

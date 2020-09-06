@@ -1,12 +1,16 @@
 package duke.command;
 
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 import duke.task.Task;
 import duke.task.TaskList;
 
 // Handles all the logic behind any "find" command from the user.
 public class FindCommand extends Command {
+    private static final String RESPONSE_NO_MATCHES = "None of the tasks matches the keyword!";
+    private static final String RESPONSE_MATCHES_FOUND = "Here are the matching tasks in your list:\n";
+
     /**
      * Executes any "due" command issued by the user.
      * Returns the information of the tasks containing the keyword specified by the user.
@@ -20,18 +24,23 @@ public class FindCommand extends Command {
 
         ArrayList<String> msg = new ArrayList<>();
         int len = taskList.size();
-        for (int i = 1; i <= len; i++) {
-            Task task = taskList.get(i - 1);
-            if (task.containsKeyword(keyword)) {
-                String output = i + "." + task.toString();
-                msg.add(output);
-            }
-        }
 
-        String firstLine = msg.size() == 0
-                ? "None of the tasks matches the keyword!"
-                : "Here are the matching tasks in your list:\n";
+        Stream
+                .iterate(1 , i -> i <= len, i -> i + 1)
+                .forEach(i -> {
+                    Task task = taskList.get(i - 1);
+                    if (task.containsKeyword(keyword)) {
+                        String output = i + "." + task.toString();
+                        msg.add(output);
+                    }
+                });
 
-        return firstLine + String.join("\n", msg);
+        boolean hasMatches = msg.size() > 0;
+        String firstLine = hasMatches
+                ? RESPONSE_MATCHES_FOUND
+                : RESPONSE_NO_MATCHES;
+
+        String response = firstLine + String.join("\n", msg);
+        return response;
     }
 }

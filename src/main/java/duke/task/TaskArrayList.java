@@ -6,7 +6,7 @@ import duke.storage.Storage;
 
 // An implementation of the TaskList interface using an ArrayList
 public class TaskArrayList implements TaskList {
-    private final ArrayList<Task> taskList = new ArrayList<>();
+    private final ArrayList<Task> tasks = new ArrayList<>();
     private final Storage store;
 
     public TaskArrayList(Storage store) {
@@ -15,7 +15,7 @@ public class TaskArrayList implements TaskList {
 
     @Override
     public void add(Task t, boolean shouldUpdateStorage) {
-        taskList.add(t);
+        tasks.add(t);
         if (shouldUpdateStorage) {
             store.addLine(t.toSaveString());
         }
@@ -23,22 +23,22 @@ public class TaskArrayList implements TaskList {
 
     @Override
     public Task get(int i) {
-        return taskList.get(i);
+        return tasks.get(i);
     }
 
     @Override
     public Task remove(int i) {
         store.removeLine(i);
-        return taskList.remove(i);
+        return tasks.remove(i);
     }
 
     @Override
     public void update(int i) {
-        store.updateLine(i, taskList.get(i).toSaveString());
+        store.updateLine(i, tasks.get(i).toSaveString());
     }
 
     @Override
     public int size() {
-        return taskList.size();
+        return tasks.size();
     }
 }
