@@ -1,6 +1,8 @@
 package duke.ui;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -243,9 +245,7 @@ public class Ui {
      * @param messages Messages to be printed.
      */
     public void printMessage(String... messages) {
-        for (String m: messages) {
-            System.out.println(m);
-        }
+        Arrays.stream(messages).forEach(message -> System.out.println(message));
     }
 
     /**
@@ -263,9 +263,7 @@ public class Ui {
      * @param responses Responses to be accumulated.
      */
     public void accumulateResponses(String... responses) {
-        for (String i: responses) {
-            accumulatedResponses.add(i);
-        }
+        Arrays.stream(responses).forEachOrdered(response -> accumulatedResponses.add(response));
     }
 
     /**
@@ -274,9 +272,8 @@ public class Ui {
      */
     public String getResponses() {
         StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < accumulatedResponses.size() - 1; i++) {
-            sb.append(accumulatedResponses.get(i) + SEPARATOR);
-        }
+        accumulatedResponses.stream().limit(accumulatedResponses.size() - 1)
+                .forEachOrdered(response -> sb.append(response + SEPARATOR));
         sb.append(accumulatedResponses.get(accumulatedResponses.size() - 1));
         accumulatedResponses = new ArrayList<>();
         return sb.toString();
