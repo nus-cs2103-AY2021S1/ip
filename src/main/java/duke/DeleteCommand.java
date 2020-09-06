@@ -31,6 +31,9 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(
             TaskList taskList, Storage storage, Ui ui) throws DukeException, IOException {
+        assert taskList != null : "Task list cannot be null";
+        assert storage != null : "Storage cannot be null";
+        assert ui != null : "Ui cannot be null";
         storage.writeToFile(taskList.getTasks());
         return ui.displayDelete(userInput, taskList);
     }
