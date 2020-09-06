@@ -11,8 +11,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.exception.DukeFileNotFoundException;
+import duke.exception.DukeInputNotRecognizedException;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.RecurringTask;
 import duke.task.Task;
 import duke.task.ToDo;
 
@@ -23,6 +25,7 @@ public class Storage {
     private static final String TODO = "T";
     private static final String DEADLINE = "D";
     private static final String EVENT = "E";
+    private static final String RECURRING = "R";
     private File file;
 
     /**
@@ -67,11 +70,14 @@ public class Storage {
                 case EVENT:
                     taskList.add(readEvent(task));
                     break;
+                case RECURRING:
+                    taskList.add(readRecurring(task));
+                    break;
                 default:
                     assert false : "Unknown format of Data";
                 }
             }
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException | DukeInputNotRecognizedException e) {
             throw new DukeFileNotFoundException();
         }
         return taskList;
@@ -120,6 +126,21 @@ public class Storage {
     }
 
     /**
+     * Creates a RecurringTask using the task details.
+     *
+     * @param task Details of task.
+     * @return RecurringTask.
+     */
+    private RecurringTask readRecurring(String[] task) throws DukeInputNotRecognizedException {
+        RecurringTask recurringTask = RecurringTask.createRecurringTask(
+                task[2].trim(), task[3].trim(), task[4].trim());
+        if (task[1].equals("1")) {
+            recurringTask.doneTask();
+        }
+        return recurringTask;
+    }
+
+    /**
      * Saves the TaskList to a file.
      *
      * @param taskList ArrayList of Task.
@@ -147,12 +168,17 @@ public class Storage {
                 String taskDetails = String.format("T | %d | %s", task.isTaskDone() ? 1 : 0, task.getDescription());
                 content.append(taskDetails).append("\n");
             } else if (task instanceof Deadline) {
-                String taskDetails = String.format("T | %d | %s |%s",
+                String taskDetails = String.format("D | %d | %s | %s",
                         task.isTaskDone() ? 1 : 0, task.getDescription(), ((Deadline) task).getDate());
                 content.append(taskDetails).append("\n");
-            } else {
-                String taskDetails = String.format("T | %d | %s |%s",
+            } else if (task instanceof Event) {
+                String taskDetails = String.format("E | %d | %s | %s",
                         task.isTaskDone() ? 1 : 0, task.getDescription(), ((Event) task).getAt());
+                content.append(taskDetails).append("\n");
+            } else if (task instanceof RecurringTask) {
+                String taskDetails = String.format("R | %d | %s | %s | %s",
+                        task.isTaskDone() ? 1 : 0, task.getDescription(), (
+                                (RecurringTask) task).getDate(), ((RecurringTask) task).getTime());
                 content.append(taskDetails).append("\n");
             }
         });

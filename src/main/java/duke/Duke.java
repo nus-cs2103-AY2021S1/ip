@@ -64,13 +64,6 @@ public class Duke {
     }
 
     /**
-     * Runs the chat bot.
-     */
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
-
-    /**
      * Parses user inputs into commands and returns it as a string.
      *
      * @param input User input.
@@ -83,5 +76,12 @@ public class Duke {
         } catch (DukeException e) {
             return ui.showError(e.getMessage());
         }
+    }
+
+    /**
+     * Runs the chat bot.
+     */
+    public static void main(String[] args) {
+        new Duke("data/tasks.txt").run();
     }
 }

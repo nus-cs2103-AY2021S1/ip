@@ -3,6 +3,8 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.task.RecurringTask;
+import duke.task.Task;
 
 /**
  * Represents a command which ends the operation.

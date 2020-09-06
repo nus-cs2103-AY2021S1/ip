@@ -1,1 +1,4 @@
 T | 0 | return book
+T | 0 | return book
+D | 0 | return book | 2/12/2019 1800
+R | 0 | meeting | daily | 1800

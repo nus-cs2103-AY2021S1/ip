@@ -49,7 +49,7 @@ public class Ui {
         if (!taskList.isEmpty()) {
             for (int i = 0; i < taskList.size(); i++) {
                 int count = i + 1;
-                output.append(String.format("   %d. ", count)).append(taskList.get(i).toString());
+                output.append(String.format("\n   %d. ", count)).append(taskList.get(i).toString());
             }
         }
         return output.toString();

@@ -4,6 +4,7 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.exception.DukeTaskNotFoundException;
+import duke.task.RecurringTask;
 import duke.task.Task;
 
 /**
@@ -36,6 +37,10 @@ public class DeleteCommand extends Command {
         int taskNumber = Character.getNumericValue(commandDetails[1].charAt(0)) - 1;
         if (tasks.getTasks().isEmpty() || taskNumber > tasks.getTasks().size()) {
             throw new DukeTaskNotFoundException(" ERROR... TASK NOT FOUND. \n PLEASE TRY AGAIN ");
+        }
+        if (tasks.getTasks().get(taskNumber) instanceof RecurringTask) {
+            RecurringTask recurringTask = (RecurringTask) tasks.getTasks().get(taskNumber);
+            recurringTask.cancelRepeat();
         }
         Task removedTask = tasks.getTasks().remove(taskNumber);
         return ui.showDeletedTask(removedTask, tasks.getTasks().size());
