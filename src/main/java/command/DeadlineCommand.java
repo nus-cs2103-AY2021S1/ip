@@ -59,10 +59,12 @@ public class DeadlineCommand extends Command {
             assert !taskDetails.isEmpty() : "TaskDetails is empty";
 
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-
+  
             String deadlineTaskDescription = taskDetails.get("taskDescription");
+            assert !taskDetails.isEmpty() : "TaskDetails is empty";
+          
             LocalDateTime deadlineTaskDateTime= LocalDateTime.parse(taskDetails.get("taskTime"), formatter);
-
+    
             DeadlineTask deadlineTask = new DeadlineTask(deadlineTaskDescription, deadlineTaskDateTime);
 
             tasks.add(deadlineTask);
