@@ -20,6 +20,7 @@ public class Storage {
         if (!file.exists()) {
             file.mkdir();
         }
+        assert file.exists();
 
     }
 
@@ -30,7 +31,10 @@ public class Storage {
      */
     public void createToDo(String fileName) {
 
+
         File file = new File(fileName);
+
+        assert file!=null;
 
         if (!file.exists()) {
             try {
