@@ -9,6 +9,10 @@
     -fx-background-radius: 15;
 }
 
+.chat-label {
+    -fx-text-fill: black;
+}
+
 .label-text {
     -fx-text-fill: #2D3833;
     -fx-font-size: 14px;
@@ -25,11 +29,12 @@
     -fx-background-color: rgba(0,0,0,0);
 }
 
-.dialog-container {
+
+.scroll-bar {
     -fx-background-image:url("/images/background.jpg");
-    -fx-background-size: contain;
-    -fx-background-repeat: stretch;
+    -fx-background-size: 100% 110%;
     -fx-background-position: bottom center;
+    -fx-background: transparent;
 }
 
 .button {
@@ -40,18 +45,21 @@
     -fx-background-insets: 5px;
     -fx-text-fill: white;
     -fx-font-size: 15px;
+    -fx-font-weight: bold;
     -fx-font-family: Lucida Console;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0.0, 0.0);
 }
 
 .user-input {
     -fx-background-color: palegoldenrod;
     -fx-background-radius: 10;
-    -fx-padding: 5 5 5 10;
+    -fx-padding: 5 5 5 20;
     -fx-border-insets: 5px;
     -fx-background-insets: 5px;
     -fx-text-fill: black;
-    -fx-font-size: 18px;
+    -fx-font-size: 16px;
     -fx-font-family: Lucida Console;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0.0, 0.0);
 }
 
 
