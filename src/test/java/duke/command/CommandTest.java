@@ -9,11 +9,11 @@ import java.util.regex.Matcher;
 import org.junit.jupiter.api.Test;
 
 public class CommandTest {
-    private void testCommandRejectsBadInputs(Command command) {
+    private void testCommandUnmatchedInput_ReturnsEmpty(Command command) {
         assertEquals(Optional.empty(), command.matcher("thisshouldnotmatchever"));
     }
 
-    private void testCommandMatchesCorrectly(Command command, String input, String[] argsToMatch) {
+    private void testCommandCorrectInput_ReturnsCorrectOutput(Command command, String input, String[] argsToMatch) {
         Optional<Matcher> maybeMatcher = command.matcher(input);
         Matcher matcher = maybeMatcher.get();
         matcher.find();
@@ -26,13 +26,13 @@ public class CommandTest {
     }
 
     @Test
-    void testTodoCommandRejectsBadInputs() {
-        testCommandRejectsBadInputs(Command.TODO);
+    void testTodoCommandUnmatchedInput_ReturnsEmpty() {
+        testCommandUnmatchedInput_ReturnsEmpty(Command.TODO);
     }
 
     @Test
-    void testTodoCommandMatchesCorrectly() {
-        testCommandMatchesCorrectly(Command.TODO, "todo test", new String[] {"test"});
+    void testTodoCommandCorrectInput_ReturnsCorrectOutput() {
+        testCommandCorrectInput_ReturnsCorrectOutput(Command.TODO, "todo test", new String[] {"test"});
     }
 
 }

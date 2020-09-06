@@ -8,17 +8,17 @@ public class TodoTest {
     private final Todo todo = new Todo("test");
 
     @Test
-    void testCorrectIdentifier() {
+    void testIdentifier_CorrectOutput() {
         assertEquals("T", todo.getTaskIdentifier());
     }
 
     @Test
-    void testToString() {
+    void testToString_CorrectOutput() {
         assertEquals("[T][ ] test", todo.toString());
     }
 
     @Test
-    void testMarkAsDone() {
+    void testMarkAsDone_ChangesOutput() {
         todo.markAsDone();
         assertEquals("[T][X] test", todo.toString());
     }
