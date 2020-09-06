@@ -104,7 +104,7 @@ public class DukeStorage implements Storage {
         return saveLines;
     }
 
-    private String[] loadData() {
+    private void loadData() {
         // Prevent saving while loading
         isActive = false;
         String[] result = new String[0];
@@ -113,15 +113,10 @@ public class DukeStorage implements Storage {
             result = in.lines().toArray(String[]::new);
             in.close();
         } catch (IOException e) {
-            System.out.println(System.getProperty("user.dir"));
-            System.out.println(filePath.toString());
-            System.out.println(e.getMessage());
             System.out.println("An error has occurred when reading the save file.");
         } finally {
             isActive = true;
             this.saveLines = new ArrayList<>(Arrays.asList(result));
         }
-
-        return result;
     }
 }

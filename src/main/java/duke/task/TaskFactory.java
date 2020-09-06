@@ -20,9 +20,10 @@ public class TaskFactory {
             return Todo.createTodo(details);
         case Deadline:
             return Deadline.createDeadline(details);
-        case Event: // duke.task.Event
+        case Event:
             return Event.createEvent(details);
         default:
+            assert type.equals(TaskType.Invalid) : "TaskType should be Invalid";
             throw new InvalidCommandException("Something went wrong during the creation of the task. :-(");
         }
     }

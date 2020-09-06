@@ -36,7 +36,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
-            fxmlLoader.<MainWindow>getController().setExitFunction(() -> stage.close());
+            fxmlLoader.<MainWindow>getController().setExitFunction(stage::close);
             stage.show();
             stage.getIcons().add(new Image(getClass().getResource("/images/Icon.png").toString()));
         } catch (IOException e) {

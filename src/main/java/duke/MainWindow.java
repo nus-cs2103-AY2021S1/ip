@@ -54,7 +54,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     protected void handleUserInput() {
-        String input = userInput.getText();
+        String input = userInput.getText().trim();
         String response = duke.getResponse(input);
 
         if (input.equals("")) {
