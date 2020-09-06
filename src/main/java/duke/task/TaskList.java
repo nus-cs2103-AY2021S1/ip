@@ -114,11 +114,11 @@ public class TaskList {
      */
     public ArrayList<Task> getMatchingTasks(String queryString) {
         ArrayList<Task> matchingTasks = new ArrayList<Task>();
-        for (Task task : tasks) {
+        tasks.forEach(task -> {
             if (task.toString().contains(queryString)) {
                 matchingTasks.add(task);
             }
-        }
+        });
         return matchingTasks;
     }
 
