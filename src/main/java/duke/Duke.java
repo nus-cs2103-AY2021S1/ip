@@ -56,7 +56,6 @@ public class Duke {
                     Task curr = tasks.deleteItem(input);
                     return ui.deleteItem(curr);
                 } catch (DukeException ex1) {
-                    return ui.showError(ex1.description);
                     return ui.showError(ex1.toString());
                 }
             case LIST:
