@@ -1,7 +1,6 @@
 package duke;
 
 import duke.command.Command;
-import duke.command.ExitCommand;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -38,30 +37,27 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String fullCommand) {
-        String[] splitted = fullCommand.split("\\s+");
+        String[] splittedInput = fullCommand.split("\\s+");
         String response;
-        boolean isExiting = false;
-        if (splitted.length == 1 && splitted[0].equals("hello")) {
+
+        if (splittedInput.length == 1 && splittedInput[0].equals("hello")) {
             isRunning = true;
             return ui.showWelcome();
-        } else if (splitted.length == 1 && splitted[0].equals(ExitCommand.COMMAND)) {
-            isExiting = true;
         }
-        if (isRunning) {
-            if (isExiting) {
-                isRunning = false;
-            }
 
-            try {
-                Command command = Parser.parse(fullCommand);
-                response = command.execute(tasks, ui, storage);
-                storage.write(tasks);
-            } catch (DukeException e) {
-                response = ui.showError(e.getMessage());
-            }
-        } else {
-            response = "I'm sleeping...zzz";
+        if (!isRunning) {
+            return "I'm sleeping...zzz";
+        }
+
+        try {
+            Command command = Parser.parse(fullCommand);
+            isRunning = !command.isExit();
+            response = command.execute(tasks, ui, storage);
+            storage.write(tasks);
+        } catch (DukeException e) {
+            response = ui.showError(e.getMessage());
         }
         return response;
+
     }
 }

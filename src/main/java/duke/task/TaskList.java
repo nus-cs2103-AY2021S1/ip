@@ -29,6 +29,7 @@ public class TaskList {
      * @param task The task to be added
      */
     public void add(Task task) {
+        assert task != null : "task cannot be null";
         tasks.add(task);
     }
 
@@ -38,6 +39,7 @@ public class TaskList {
      * @return The removed task
      */
     public Task remove(int index) {
+        assert index >= 0 && index < tasks.size() : "index out of bound";
         return tasks.remove(index);
     }
 
@@ -47,6 +49,7 @@ public class TaskList {
      * @return The task at that position
      */
     public Task get(int index) {
+        assert index >= 0 && index < tasks.size() : "index out of bound";
         return tasks.get(index);
     }
 
@@ -86,13 +89,14 @@ public class TaskList {
      * @return A new <code>TaskList</code> of the selected tasks
      */
     public TaskList filter(Predicate<Task> predicate) {
-        ArrayList<Task> filtered = new ArrayList<>();
+        assert predicate != null : "predicate cannot be null";
+        ArrayList<Task> filteredTasks = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             if (predicate.test(task)) {
-                filtered.add(task);
+                filteredTasks.add(task);
             }
         }
-        return new TaskList(filtered);
+        return new TaskList(filteredTasks);
     }
 }

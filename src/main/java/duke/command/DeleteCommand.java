@@ -34,6 +34,8 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException {
+        assert tasks != null : "tasklist object cannot be null";
+        assert ui != null : "ui object cannot be null";
         try {
             return ui.showDeleteTask(tasks.remove(index), tasks);
         } catch (IndexOutOfBoundsException e) {

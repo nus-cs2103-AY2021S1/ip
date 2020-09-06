@@ -22,6 +22,7 @@ public class Event extends Task {
      */
     public Event(String description, String eventTime) {
         super(description);
+        assert eventTime != null : "event time cannot be null";
         this.eventTime = eventTime;
         isInDateFormat = false;
         int idx = eventTime.indexOf(" to ");
@@ -65,6 +66,7 @@ public class Event extends Task {
      * @return True if this task occurs on that day, false otherwise
      */
     public boolean isOccuringOn(LocalDate cmpDate) {
+        assert cmpDate != null : "compared date cannot be null";
         if (!isInDateFormat) {
             return false;
         }

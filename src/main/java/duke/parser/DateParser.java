@@ -26,9 +26,9 @@ public class DateParser {
                             "dd/M/yyyy",
                             "d/M/yyyy"
         };
-        for (int i = 0; i < formats.length; i++) {
+        for (String format : formats) {
             try {
-                LocalDate date = LocalDate.parse(dateStr, DateTimeFormatter.ofPattern(formats[i]));
+                LocalDate date = LocalDate.parse(dateStr, DateTimeFormatter.ofPattern(format));
                 return Optional.of(date);
             } catch (DateTimeParseException e) {
                 // exception is thrown means that cannot parse date in that format

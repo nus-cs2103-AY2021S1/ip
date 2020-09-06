@@ -35,6 +35,8 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null : "tasklist object cannot be null";
+        assert ui != null : "ui object cannot be null";
         TaskList filteredTasks = tasks;
         for (String keyword : keywords) {
             Optional<LocalDate> optDate = DateParser.parse(keyword);
