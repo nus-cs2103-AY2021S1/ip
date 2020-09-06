@@ -32,6 +32,7 @@ public class FindCommand extends Command {
     @Override
     public CommandResponse execute(TaskList tasks, Storage storage) throws DukeException {
         assert !this.isExit() : "Find command should not be an exit command.";
+        assert tasks != null && storage != null : "tasks and storage cannot be null.";
         return new CommandResponse(Ui.respondFindTasks(tasks, keyword), this.isExit());
     }
 }

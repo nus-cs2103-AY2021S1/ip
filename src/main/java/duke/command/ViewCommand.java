@@ -36,6 +36,7 @@ public class ViewCommand extends Command {
     public CommandResponse execute(TaskList tasks, Storage storage) throws DukeException {
         try {
             assert !this.isExit() : "View command should not be an exit command.";
+            assert tasks != null && storage != null : "tasks and storage cannot be null.";
             return new CommandResponse(Ui.respondViewTasks(tasks, Parser.parseDate(date)), this.isExit());
         } catch (DateTimeParseException e) {
             throw new DukeException("OOPS!!! The date is not valid.");
