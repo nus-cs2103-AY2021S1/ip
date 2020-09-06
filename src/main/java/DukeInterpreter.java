@@ -47,21 +47,21 @@ public class DukeInterpreter {
         String[] splittedWords = code.split("\\|");
         boolean isCompleted = splittedWords[1].trim().equals("✓");
         String details = splittedWords[2].trim();
-        String extra = null;
+        String extraDetails = null; // extra info for deadline/event
         if (splittedWords.length == 4) {
             // since the tostring has a 'T' char inside
             String dateTime = splittedWords[3].trim();
             String date = dateTime.substring(0, 10);
             String time = dateTime.substring(11, 16);
-            extra = date + " " + time;
+            extraDetails = date + " " + time;
         }
         switch (taskType) {
         case 'T':
             return decodeToDo(details, isCompleted);
         case 'D':
-            return decodeDeadline(details, isCompleted, extra);
+            return decodeDeadline(details, isCompleted, extraDetails);
         case 'E':
-            return decodeEvent(details, isCompleted, extra);
+            return decodeEvent(details, isCompleted, extraDetails);
         default:
             return null;
         }
@@ -76,8 +76,8 @@ public class DukeInterpreter {
     }
 
     private static Deadline decodeDeadline(String details, boolean isCompleted,
-                                           String extra) throws DukeException {
-        Deadline deadline = new Deadline(details, extra);
+                                           String extraDetails) throws DukeException {
+        Deadline deadline = new Deadline(details, extraDetails);
         if (isCompleted) {
             deadline.markTaskAsCompleted();
         }
@@ -85,8 +85,8 @@ public class DukeInterpreter {
     }
 
     private static Event decodeEvent(String details, boolean isCompleted,
-                                     String extra) throws DukeException {
-        Event event = new Event(details, extra);
+                                     String extraDetails) throws DukeException {
+        Event event = new Event(details, extraDetails);
         if (isCompleted) {
             event.markTaskAsCompleted();
         }
