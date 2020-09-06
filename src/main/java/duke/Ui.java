@@ -41,5 +41,7 @@ public class Ui {
             next = scan.nextLine();
         }
     }
+
+
 }
 
