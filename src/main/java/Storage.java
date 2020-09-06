@@ -16,7 +16,7 @@ public class Storage {
     }
 
     /**
-     * Load the file if it exists or creates it if it does not.
+     * Loads the file if it exists or creates it if it does not.
      *
      * @return The List of Tasks.
      * @throws DukeException when the file cannot be found or read.
@@ -81,7 +81,7 @@ public class Storage {
     }
 
     /**
-     * Add new Task to the file.
+     * Adds new Task to the file.
      *
      * @param taskType The type of the Task.
      * @param done Whether the task is completed.
@@ -93,6 +93,7 @@ public class Storage {
             throws DukeException {
         try {
             FileWriter myWriter = new FileWriter(filePath, true);
+
             switch (taskType) {
             case "T":
                 myWriter.write("\n" + taskType + " | " + done + " | " + description);
@@ -113,7 +114,7 @@ public class Storage {
     }
 
     /**
-     * Edit a Task in the file.
+     * Edits a Task in the file.
      *
      * @param taskNumber The index of the Task.
      * @param taskType The type of the Task.
@@ -160,6 +161,7 @@ public class Storage {
             br.close();
 
             FileWriter fw = new FileWriter(new File(filePath));
+
             //Write entire string buffer into the file
             fw.write(sb.toString());
             fw.close();
@@ -170,7 +172,7 @@ public class Storage {
     }
 
     /**
-     * Delete a Task in the file.
+     * Deletes a Task in the file.
      *
      * @param taskNumber The index of the Task.
      * @param total The total number of Tasks in the list.

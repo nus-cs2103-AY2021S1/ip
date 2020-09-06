@@ -13,7 +13,7 @@ public class Task {
     }
 
     /**
-     * Return the status icon of the Task.
+     * Returns the status icon of the Task.
      *
      * @return The status icon of the Task.
      */
@@ -32,7 +32,7 @@ public class Task {
     }
 
     /**
-     * Return the task type of the Task.
+     * Returns the task type of the Task.
      *
      * @return The task type of the Task.
      */
@@ -47,7 +47,7 @@ public class Task {
     }
 
     /**
-     * Return the description of the Task.
+     * Returns the description of the Task.
      *
      * @return The description of the Task.
      */

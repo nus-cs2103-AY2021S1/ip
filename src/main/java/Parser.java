@@ -1,7 +1,7 @@
 public class Parser {
 
     /**
-     * Returns the Command to be exectued.
+     * Returns the Command to be executed.
      *
      * @param command The command from the user.
      * @return The Command to be executed.

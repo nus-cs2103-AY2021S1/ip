@@ -13,6 +13,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
+
         String[] dateAndTime = by.split(" ");
         String[] date = dateAndTime[0].split("/");
         String time = dateAndTime[1];

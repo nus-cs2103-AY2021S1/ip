@@ -25,6 +25,7 @@ public class AddDeadlineCommand extends Command {
         if (input.length() <= 9 || !input.contains("/by")) {
             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
         }
+
         String[] splitStr = input.split("/by ");
         String description = splitStr[0].substring(9).trim();
         Deadline deadline = new Deadline(description, splitStr[1]);
@@ -32,6 +33,7 @@ public class AddDeadlineCommand extends Command {
         tasks.addTask(deadline);
 
         storage.writeNewDataToFile("D", "0", deadline.getDescription(), deadline.getBy());
+
         System.out.println("    Got it. I've added this task:\n      " + deadline + "\n    Now you have "
                 + tasks.getSize() + " tasks in the list.");
     }

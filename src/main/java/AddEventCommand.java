@@ -33,6 +33,7 @@ public class AddEventCommand extends Command {
         tasks.addTask(event);
 
         storage.writeNewDataToFile("E", "0", event.getDescription(), event.getTime());
+
         System.out.println("    Got it. I've added this task:\n      " + event + "\n    Now you have "
                 + tasks.getSize() + " tasks in the list.");
     }

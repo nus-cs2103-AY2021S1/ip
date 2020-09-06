@@ -30,6 +30,7 @@ public class AddTodoCommand extends Command {
         tasks.addTask(todo);
 
         storage.writeNewDataToFile("T", "0", todo.getDescription(), "");
+
         System.out.println("    Got it. I've added this task:\n      " + todo + "\n    Now you have "
                 + tasks.getSize() + " tasks in the list.");
     }
