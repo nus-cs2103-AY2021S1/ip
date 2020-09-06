@@ -9,6 +9,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Node;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
+import javafx.scene.paint.Color;
 
 
 public class DialogBox extends HBox {
@@ -18,6 +20,7 @@ public class DialogBox extends HBox {
 
     public DialogBox(Label l, ImageView iv) {
         text = l;
+
         iv.setClip(new Circle(60,60,60));
         displayPicture = iv;
 
@@ -41,6 +44,7 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(Label l, ImageView iv) {
+
         DialogBox userDialog = new DialogBox(l, iv);
         userDialog.setStyle("-fx-background-color: #f1f3f8;");
         userDialog.setPadding(new Insets(15,10,15,0));
@@ -48,9 +52,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
+        l.setFont(new Font("Cambria", 15));
+        l.setTextFill(Color.web("#e7305b"));
         var db = new DialogBox(l, iv);
         db.flip();
-        db.setStyle("-fx-background-color: #f6bed6;");
+        db.setStyle("-fx-background-color: #ddf3f5;");
         db.setPadding((new Insets(15, 0, 15, 10)));
         return db;
     }

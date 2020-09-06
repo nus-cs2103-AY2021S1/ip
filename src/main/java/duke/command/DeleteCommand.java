@@ -21,6 +21,7 @@ public class DeleteCommand extends Command {
     public String execute(TaskList list, Ui ui, Storage storage) throws DukeException {
         try{
             Task task = list.getList().get(index);
+            assert index >= 0 : "Index out of bound";
             list.delete(task);
             storage.generateTxt(list);
             return ui.showDelete(task, list);

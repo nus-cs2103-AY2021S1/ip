@@ -186,6 +186,8 @@ public class Duke extends Application{
         );
         userInput.clear();
         if (dukeText.getText().equals(ui.showBye())) {
+            userInput.setDisable(true);
+            sendButton.setDisable(true);
             PauseTransition delay = new PauseTransition(Duration.seconds(2));
             delay.setOnFinished( event -> stage.close() );
             delay.play();

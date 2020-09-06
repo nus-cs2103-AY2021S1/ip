@@ -52,8 +52,10 @@ public class Parser {
             }
 
             return new AddCommand(first, second);
+
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("The description of the task cannot be empty!");
+            throw new DukeException("Only one word detected. Remember to add whitespace" +
+                    "between information or enter a valid one word command!");
         }
     }
 }

@@ -5,7 +5,6 @@ import duke.ui.Ui;
 import duke.storage.Storage;
 
 public class ByeCommand extends Command {
-
     @ Override
     public String execute(TaskList list, Ui ui, Storage storage) {
         return ui.showBye();
