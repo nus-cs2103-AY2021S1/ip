@@ -30,11 +30,36 @@ public class TaskList {
      *
      * @param task Task to be added.
      */
-    protected String addTask(Task task) throws IOException {
+    protected String addTask(Task task) throws IOException{
+        List<Task> duplicateTasks = findDuplicateTasks(task);
+        String message = "Hurray! I have added: " + task + "\n";
         list.add(task);
         storage.saveTasks(toString());
-        return "Added: " + task + "\n";
+
+        if (!duplicateTasks.isEmpty()) {
+            int count = 1;
+            duplicateTasks.add(task);
+            message += "FYI, you now have multiple(" + duplicateTasks.size() + ") '"
+                    + task.getTask() + "' tasks" +
+                    ".\nPlease let me know if you want to delete the duplicates.\n";
+            for (Task t : duplicateTasks) {
+                message += count++ + ". " + t.toString() + "\n";
+            }
+        }
+        return message;
     }
+
+    private List<Task> findDuplicateTasks(Task task) {
+        List<Task> duplicateTasks = new ArrayList<>();
+        String name = task.getTask();
+        for (Task t : list) {
+            if (t.getTask().equals(name)) {
+                duplicateTasks.add(t);
+            }
+        }
+        return duplicateTasks;
+    }
+
 
     /**
      * Marks a task as done.
