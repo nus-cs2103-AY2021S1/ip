@@ -28,8 +28,8 @@ public class Duke {
      * Returns the response after executing the command
      * associated with the user input.
      *
-     * @param input user input
-     * @return response from execution of the command
+     * @param input User input
+     * @return Response from execution of the command
      */
     public String getResponse(String input) {
         Command command = Parser.parse(input);
