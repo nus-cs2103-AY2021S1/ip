@@ -35,7 +35,7 @@ public class DeadlineCommand extends Command {
         try {
             Task newDeadline = new Deadline(details, by);
             taskList.addTask(newDeadline);
-            return ui.addTask(newDeadline, taskList.tasksSize());
+            return ui.addTask(newDeadline, taskList.getTasksSize(), false);
         } catch (DukeException ex) {
             return ui.throwDukeException(ex);
         }

@@ -14,10 +14,25 @@ public class Task {
     }
 
     /**
+     * Returns true if task is completed.
+     * @return True if task is completed.
+     */
+    public boolean isTaskCompleted() {
+        return this.isCompleted;
+    }
+
+    /**
      * To indicate that the task is completed (with a tick symbol).
      */
     public void markTaskAsCompleted() {
         this.isCompleted = true;
+    }
+
+    /**
+     * To indicate that the task is uncompleted (with a cross symbol).
+     */
+    public void markTaskAsUncompleted() {
+        this.isCompleted = false;
     }
 
     /**

@@ -2,4 +2,4 @@ D | ✓ | do work | 2011-01-01T12:30
 T | ✗ | watch show
 T | ✓ | eat dinner
 D | ✓ | return book | 2020-01-01T12:30
-E | ✗ | project meeting | 2020-01-02T12:40
+E | ✗ | project meeting | 2020-02-02T14:30

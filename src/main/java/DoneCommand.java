@@ -17,8 +17,12 @@ public class DoneCommand extends Command {
     public String execute(TaskList taskList, Ui ui, DukeStorage storage) {
         // needs a valid number
         int taskNo = Integer.parseInt(afterCommand) - 1;
-        if (taskNo >= taskList.tasksSize() || taskNo < 0) {
+        if (taskNo >= taskList.getTasksSize() || taskNo < 0) {
             return ui.throwDukeException(new DukeException("Please enter a valid task no!"));
+        }
+
+        if (taskList.get(taskNo).isTaskCompleted()) {
+            return ui.throwDukeException(new DukeException("Task is already completed!"));
         }
 
         taskList.markTaskCompleted(taskNo);

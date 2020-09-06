@@ -21,7 +21,7 @@ public class ToDoCommand extends Command {
         } else {
             Task newToDo = new ToDo(afterCommand);
             taskList.addTask(newToDo);
-            return ui.addTask(newToDo, taskList.tasksSize());
+            return ui.addTask(newToDo, taskList.getTasksSize(), false);
         }
     }
 

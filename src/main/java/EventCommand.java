@@ -35,7 +35,7 @@ public class EventCommand extends Command {
         try {
             Task newEvent = new Event(details, at);
             taskList.addTask(newEvent);
-            return ui.addTask(newEvent, taskList.tasksSize());
+            return ui.addTask(newEvent, taskList.getTasksSize(), false);
         } catch (DukeException ex) {
             return ui.throwDukeException(ex);
         }

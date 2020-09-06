@@ -48,13 +48,16 @@ public class Ui {
     }
 
     /**
-     * Returns/Prints message upon a new task added.
+     * Returns/Prints message upon the ADD or UNDO Command.
      * @param task task to be added.
      * @param size current number of tasks in tasklist.
+     * @param shouldUndo true if undo command was called.
      * @return Returns a string message when a task is added.
      */
-    public String addTask(Task task, int size) {
-        return format("Got it. I've added this task:\n" + task + "\n"
+    public String addTask(Task task, int size, boolean shouldUndo) {
+        return format((shouldUndo ? "\nUNDO EXECUTED:\n" : "Got it.")
+            + "I've " + (shouldUndo ? "recovered" : "added")
+            + " this task:\n" + task + "\n"
             + "Now you have " + size + " tasks in the list.");
     }
 
@@ -68,13 +71,25 @@ public class Ui {
     }
 
     /**
-     * Returns/Prints deleted task upon DELETE Command.
+     * Returns/Prints incomplete task upon UNDO Command.
+     * @param task incomplete task.
+     * @return Returns a string message when a task is unmarked.
+     */
+    public String displayIncompleteTask(Task task) {
+        return format("\nUNDO EXECUTED:\n"
+                + "I have unmarked this task:\n" + task);
+    }
+
+    /**
+     * Returns/Prints deleted task upon DELETE or UNDO Command.
      * @param task task to be deleted.
      * @param size current number of tasks in tasklist.
+     * @param shouldUndo true if undo command was called.
      * @return Returns a string message when a task is deleted.
      */
-    public String displayDeletedTask(Task task, int size) {
-        return format("Noted. I've removed this task:\n" + task + "\n"
+    public String displayDeletedTask(Task task, int size, boolean shouldUndo) {
+        return format((shouldUndo ? "\nUNDO EXECUTED:\n" : "Noted. ")
+            + "I've removed this task:\n" + task + "\n"
             + "Now you have " + size + " tasks in the list.");
     }
 
