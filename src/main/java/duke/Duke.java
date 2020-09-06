@@ -33,38 +33,28 @@ public class Duke {
         }
     }
 
-    /**
-     * Executes the chatbot. The chatbot will respond
-     * based on specific keywords.
-     */
-    public void chat() {
+    //
 
-    }
+    //    public static void main(String[] args) {
 
-    /**
-     * Main method that executes Duke chatbot.
-     *
-     * @param args String array of arguments.
-     */
-    public static void main(String[] args) {
-        Duke chatbot = new Duke();
-        chatbot.chat();
-    }
+    //        String logo = " ____        _        \n"
 
-    /*
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-}
-*/
+    //                + "|  _ \\ _   _| | _____ \n"
+
+    //                + "| | | | | | | |/ / _ \\\n"
+
+    //                + "| |_| | |_| |   <  __/\n"
+
+    //                + "|____/ \\__,_|_|\\_\\___|\n";
+
+    //        System.out.println("Hello from\n" + logo);
+
+    //}
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns the appropriate response from the chat bot.
+     * @param input The user input.
+     * @return The appropriate respone message.
      */
     public String getResponse(String input) {
         ui.intro();

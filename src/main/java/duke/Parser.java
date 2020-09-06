@@ -43,7 +43,7 @@ public class Parser {
     }
 
     /**
-     * The main method that analyse the user input and give an
+     * Analyses the user input and give an
      * appropriate command.
      * @param commandLine The user input.
      * @return The command based on the user input. The 5 commands are AddCommand, ListCommand,
@@ -54,7 +54,7 @@ public class Parser {
         try {
             if (isList(commandLine)) {
                 return parseListCommand();
-            } else if (isToDo(commandLine)) {
+            } else if (isTodo(commandLine)) {
                 return parseAddCommandTodo(commandLine);
             } else if (isDeadline(commandLine) || isEvent(commandLine)) {
                 return parseAddCommandWithDate(commandLine);
@@ -154,7 +154,7 @@ public class Parser {
      * @param string The user input.
      * @return Returns a boolean.
      */
-    static boolean isToDo(String string) {
+    static boolean isTodo(String string) {
         return string.startsWith("todo");
     }
 

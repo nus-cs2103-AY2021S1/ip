@@ -22,33 +22,30 @@ public class Ui {
         this.scanner = new Scanner(System.in);
     }
 
+
     /**
      * Displays the introductions.
+     * @return The introductions.
      */
     String intro() {
         return reply("Hello, I'm Ravenloss") + "\n"
                 + reply("What can I do for you?");
     }
 
+
     /**
      * Displays the message with the indentation.
      * @param string String to be displayed.
+     * @return The message with proper indentation.
      */
     public String reply(String string) {
         return INDENTATION + string;
     }
 
-//    /**
-//     * Gives the next command line inputted by the user.
-//     * @return The next inquiry.
-//     */
-//    public String nextInquiry() {
-//        return scanner.nextLine();
-//    }
-
     /**
      * Displays the list of tasks
      * @param tasks The list of tasks.
+     * @return The list of tasks in proper format.
      */
     public String list(List<Task> tasks) {
         StringBuilder buffer = new StringBuilder();
@@ -68,6 +65,7 @@ public class Ui {
     /**
      * Display the filtered list with the proper response message to the user.
      * @param filteredTasks The filtered tasks.
+     * @return The list of filtered tasks.
      */
     public String filteredList(List<Task> filteredTasks) {
         StringBuilder buffer = new StringBuilder();
@@ -88,6 +86,7 @@ public class Ui {
      * Displays the message when a task is added to the list.
      * @param currentTask The task to be added.
      * @param size The size of the list.
+     * @return The message when a task is added.
      */
     public String addMessage(Task currentTask, Integer size) {
         StringBuilder buffer = new StringBuilder();
@@ -100,6 +99,7 @@ public class Ui {
     /**
      * Displays the message when a task is marked as done.
      * @param currentTask The tasks that was marked as done.
+     * @return The message when a task is marked as done.
      */
     public String doneMessage(Task currentTask) {
         currentTask.done();
@@ -110,7 +110,8 @@ public class Ui {
     }
 
     /**
-     * Displays the farewell message.
+     * Displays the farewell message
+     * @return The farewell message.
      */
     public String farewell() {
         return reply("Bye. Hope to see you again soon!");
@@ -120,6 +121,7 @@ public class Ui {
      * Displays the message after deleting a task.
      * @param currentTask The task deleted.
      * @param sizeLeft The size of the list after deleting the task.
+     * @return The delete message.
      */
     public String deleteMessage(Task currentTask, Integer sizeLeft) {
         StringBuilder buffer = new StringBuilder();
@@ -129,13 +131,4 @@ public class Ui {
                 .append("\n");
         return buffer.toString();
     }
-
-    /**
-     * Displays the dotted line to separate the user input and the system generated output.
-     */
-    public void showLine() {
-        System.out.println(LINE);
-    }
-
-
 }

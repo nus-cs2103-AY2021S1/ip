@@ -16,7 +16,7 @@ public interface Command {
      * @param tasks TaskList.
      * @param ui Ui.
      * @param storage Storage.
-     * @return A boolean to indicate the terminating command.
+     * @return The response based on the command.
      * @throws DukeException Exceptions when executing the different methods of TaskList,
      * Ui and Storage.
      */

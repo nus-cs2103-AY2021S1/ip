@@ -26,7 +26,7 @@ public class AddCommand implements Command {
      * @param tasks The TaskList.
      * @param ui The Ui.
      * @param storage The Storage.
-     * @return A boolean to indicate that it is not the terminating command.
+     * @return The add message by the Ui.
      * @throws DukeException Exceptions when executing the different methods of TaskList,
      * Ui and Storage.
      */

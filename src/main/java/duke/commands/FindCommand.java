@@ -23,7 +23,7 @@ public class FindCommand implements Command {
      * @param tasks TaskList.
      * @param ui Ui.
      * @param storage Storage.
-     * @return A boolean to indicate that it is not the terminating command.
+     * @return The find message by the Ui.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         return ui.filteredList(tasks.findTasks(keyword));

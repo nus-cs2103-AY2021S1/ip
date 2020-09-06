@@ -28,7 +28,7 @@ public class DoneCommand implements Command {
      * @param tasks TaskList.
      * @param ui Ui.
      * @param storage Storage.
-     * @return A boolean to indicate that it is not the terminating command.
+     * @return The done message by the Ui.
      * @throws DukeException Exceptions when executing the different methods of TaskList,
      * Ui and Storage. Also accounts for index errors.
      */
