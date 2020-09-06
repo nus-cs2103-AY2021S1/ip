@@ -30,6 +30,8 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assertArgumentsValid(tasks, ui, storage);
+      
         if (taskIdx > tasks.size() || taskIdx <= 0) {
             throw new DukeException("No task with this ID!");
         }

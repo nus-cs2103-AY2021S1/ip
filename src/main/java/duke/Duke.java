@@ -31,10 +31,15 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Function that takes in the user's input, processes and then executes it. It then sends a message back
+     * to the user, based on the command given.
+     *
+     * @param input User input.
+     * @return Message after the command has been processed and executed.
      */
     public String getResponse(String input) {
+        assert input != null : "Input is null";
+
         try {
             Command c = Parser.parse(input);
             c.execute(tasks, ui, storage);

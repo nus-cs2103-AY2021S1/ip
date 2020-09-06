@@ -24,6 +24,8 @@ public class Parser {
      * @throws DukeException If command provided is invalid.
      */
     public static Command parse(String inputCommand) throws DukeException {
+        assert inputCommand != null;
+
         String[] inputArr = inputCommand.split(" ", 2);
         String commandArg = inputArr.length == 2 ? inputArr[1] : null;
 

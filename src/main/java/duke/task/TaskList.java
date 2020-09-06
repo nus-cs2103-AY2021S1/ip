@@ -54,6 +54,8 @@ public class TaskList {
      * @return Tasks containing the keyword.
      */
     public String listTasksWithKeyword(String keyword) {
+        assert keyword != null : "Search keyword is null";
+
         StringBuilder output = new StringBuilder();
         int taskIdx = 1;
 

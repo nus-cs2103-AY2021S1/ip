@@ -13,6 +13,7 @@ import duke.util.Storage;
  * Class representing an add task command.
  */
 public class AddCommand extends Command {
+
     private final CommandType taskType;
     private final String[] taskContent;
 

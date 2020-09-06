@@ -7,7 +7,7 @@ import duke.exception.DukeException;
  */
 public class Ui {
     private String nextMessage;
-
+  
     /**
      * Show a greeting message to the user.
      */
@@ -46,5 +46,4 @@ public class Ui {
     public String getNextMessage() {
         return this.nextMessage;
     }
-
 }

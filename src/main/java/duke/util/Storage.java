@@ -94,6 +94,5 @@ public class Storage {
         } catch (IOException e) {
             throw new DukeException("Failed to write to data file.");
         }
-
     }
 }
