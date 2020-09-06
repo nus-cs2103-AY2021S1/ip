@@ -67,6 +67,8 @@ public class Storage {
                 } else if (type.equals("E")) {
                     time = LocalDate.parse(inputs[3]);
                     tasks.add(new Event(description, isDone, time));
+                } else {
+                    throw new DukeException(" I cannot identify the task type :(");
                 }
             }
             return tasks;

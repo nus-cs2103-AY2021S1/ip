@@ -112,6 +112,17 @@ public class TaskList {
         }
     }
 
+    private boolean checkIfKeywordExists(String keyword, Task currentTask, int wordLength) {
+        String description = currentTask.getDescription();
+        for (int j = 0; j <= description.length() - wordLength; j++) {
+            String currentSearch = description.substring(j, j + wordLength);
+            if (currentSearch.equals(keyword)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     /**
      * Finds all tasks that match the keyword.
      *
@@ -123,13 +134,8 @@ public class TaskList {
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (int i = 0; i < taskCount; i++) {
             Task currentTask = tasks.get(i);
-            String description = currentTask.getDescription();
-            for (int j = 0; j <= description.length() - wordLength; j++) {
-                String currentSearch = description.substring(j, j + wordLength);
-                if (currentSearch.equals(keyword)) {
-                    matchingTasks.add(currentTask);
-                    break;
-                }
+            if (checkIfKeywordExists(keyword, currentTask, wordLength)) {
+                matchingTasks.add(currentTask);
             }
         }
         return matchingTasks;
