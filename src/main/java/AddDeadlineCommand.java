@@ -26,7 +26,7 @@ public class AddDeadlineCommand extends Command {
             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
         }
 
-        assert input.contains("/by") : "input in AddDeadline should contain /by";
+        assert input.contains("/by") : "Input in AddDeadline should contain /by";
 
         String[] splitStr = input.split("/by ");
         String description = splitStr[0].substring(9).trim();
@@ -34,9 +34,9 @@ public class AddDeadlineCommand extends Command {
 
         tasks.addTask(deadline);
 
-        storage.writeNewDataToFile("D", "0", deadline.getDescription(), deadline.getBy());
+        storage.updateFile(tasks);
 
-        System.out.println("    Got it. I've added this task:\n      " + deadline + "\n    Now you have "
+        System.out.println("Got it. I've added this task:\n" + deadline + "\nNow you have "
                 + tasks.getSize() + " tasks in the list.");
     }
 }

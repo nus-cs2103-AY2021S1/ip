@@ -6,9 +6,11 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Storage {
-
+    public static final String TASK_DONE = "1";
+    public static final String TASK_NOT_DONE = "0";
     protected String filePath;
 
     public Storage(String filePath) {
@@ -63,6 +65,7 @@ public class Storage {
                         throw new DukeException("Line cannot be read");
                     }
                 }
+                Collections.sort(tasks);
                 return tasks;
             } catch (IOException ex) {
                 System.out.println("Error reading file" + ex);
@@ -178,7 +181,7 @@ public class Storage {
      * @param total The total number of Tasks in the list.
      * @throws DukeException When there is error writing to the file.
      */
-    public static void deleteCurrentDataInFile(int taskNumber, int total) throws DukeException {
+    public void deleteCurrentDataInFile(int taskNumber, int total) throws DukeException {
         try {
             String currentDir = System.getProperty("user.dir");
             String pathToFile = currentDir + File.separator + "data" + File.separator + "duke.txt";
@@ -210,5 +213,61 @@ public class Storage {
             System.out.println("Error deleting task: " + ex.getMessage());
             throw new DukeException("Error deleting task.");
         }
+    }
+
+    /**
+     * Updates the entire file according to the updated TaskList.
+     *
+     * @param tasks The TaskList object containing all the tasks.
+     * @throws DukeException When there is error writing to the file.
+     */
+    public void updateFile(TaskList tasks) throws DukeException {
+        try {
+            BufferedReader br = new BufferedReader(new FileReader(filePath));
+
+            //String buffer to store contents of the file
+            StringBuffer sb = new StringBuffer("");
+
+            for (int i = 0; i < tasks.getSize(); i++) {
+                Task task = tasks.getTask(i);
+                String taskType = task.getTaskType();
+                String isDone = task.getIsDone() ? TASK_DONE : TASK_NOT_DONE;
+                String lineToAdd;
+
+                switch (taskType) {
+                case "T":
+                    lineToAdd = "T | " + isDone + " | " + task.getDescription();
+                    break;
+                case "D":
+                    Deadline deadline = (Deadline) task;
+                    lineToAdd = "D | " + isDone + " | " + deadline.getDescription() + " | " + deadline.getBy();
+                    break;
+                case "E":
+                    Event event = (Event) task;
+                    lineToAdd = "E | " + isDone + " | " + event.getDescription() + " | " + event.getTime();
+                    break;
+                default:
+                    throw new DukeException("Task to be written is not recognised.");
+                }
+
+                if (i == tasks.getSize() - 1) {
+                    sb.append(lineToAdd);
+                } else {
+                    sb.append(lineToAdd + "\n");
+                }
+            }
+
+            br.close();
+
+            FileWriter fw = new FileWriter(new File(filePath));
+
+            //Write entire string buffer into the file
+            fw.write(sb.toString());
+            fw.close();
+        } catch (IOException e) {
+            System.out.println("Error editing file: " + e.getMessage());
+            throw new DukeException("Error editing file");
+        }
+
     }
 }
