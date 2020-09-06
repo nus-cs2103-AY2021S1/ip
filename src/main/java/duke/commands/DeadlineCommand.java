@@ -2,6 +2,7 @@ package duke.commands;
 
 import java.time.LocalDate;
 
+import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.tasks.Deadline;
 import duke.tasks.TaskList;
@@ -56,13 +57,17 @@ public class DeadlineCommand extends Command {
     @Override
     public String execute(TaskList taskList, UI ui, Storage storage) {
         Deadline deadlineTask;
-        if (this.hasLocalDate) {
-            deadlineTask = new Deadline(commandDescription, deadlineLocalDate);
-        } else {
-            deadlineTask = new Deadline(commandDescription, deadlineDate);
+        try {
+            if (this.hasLocalDate) {
+                deadlineTask = new Deadline(commandDescription, deadlineLocalDate);
+            } else {
+                deadlineTask = new Deadline(commandDescription, deadlineDate);
+            }
+            taskList.addToList(deadlineTask);
+            storage.saveData(taskList, ui);
+            return ui.displayAddedTask(deadlineTask, taskList.getListSize());
+        } catch (DukeException e) {
+            return ui.showError("Invalid deadline task!");
         }
-        taskList.addToList(deadlineTask);
-        storage.saveData(taskList, ui);
-        return ui.displayAddedTask(deadlineTask, taskList.getListSize());
     }
 }

@@ -6,6 +6,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import duke.duke.Duke;
+import duke.exceptions.DukeException;
 import duke.parser.Parser;
 
 /**
@@ -80,7 +82,10 @@ public class TaskList {
      *
      * @param task Task to be added.
      */
-    public void addToList(Task task) {
+    public void addToList(Task task) throws DukeException {
+        if (task == null) {
+            throw new DukeException();
+        }
         tasks.add(task);
     }
 

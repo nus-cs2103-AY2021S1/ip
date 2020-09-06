@@ -2,6 +2,7 @@ package duke.commands;
 
 import java.time.LocalDate;
 
+import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.tasks.Event;
 import duke.tasks.TaskList;
@@ -57,13 +58,17 @@ public class EventCommand extends Command {
         assert ui != null;
         assert storage != null;
         Event eventTask;
-        if (this.hasLocalDate) {
-            eventTask = new Event(commandDescription, eventLocalDate);
-        } else {
-            eventTask = new Event(commandDescription, eventDate);
+        try {
+            if (this.hasLocalDate) {
+                eventTask = new Event(commandDescription, eventLocalDate);
+            } else {
+                eventTask = new Event(commandDescription, eventDate);
+            }
+            taskList.addToList(eventTask);
+            storage.saveData(taskList, ui);
+            return ui.displayAddedTask(eventTask, taskList.getListSize());
+        } catch (DukeException e) {
+            return ui.showError("Invalid event task!");
         }
-        taskList.addToList(eventTask);
-        storage.saveData(taskList, ui);
-        return ui.displayAddedTask(eventTask, taskList.getListSize());
     }
 }

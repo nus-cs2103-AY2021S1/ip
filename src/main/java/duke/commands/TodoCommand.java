@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
@@ -35,9 +36,13 @@ public class TodoCommand extends Command {
     public String execute(TaskList taskList, UI ui, Storage storage) {
         assert ui != null;
         assert storage != null;
-        Task task = new ToDo(commandDescription);
-        taskList.addToList(task);
-        storage.saveData(taskList, ui);
-        return ui.displayAddedTask(task, taskList.getListSize());
+        try {
+            Task task = new ToDo(commandDescription);
+            taskList.addToList(task);
+            storage.saveData(taskList, ui);
+            return ui.displayAddedTask(task, taskList.getListSize());
+        } catch (DukeException e) {
+            return ui.showError("Invalid todo task!");
+        }
     }
 }
