@@ -52,4 +52,19 @@ public class EventTask extends Task {
     public String toString() {
         return "[E]" + this.getStatusIcon() + " " + this.getDescription();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+        }
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof EventTask)) {
+            return false;
+        }
+        EventTask otherEvent = (EventTask) other;
+        return (this.description.equals(otherEvent.description) && this.time.equals(otherEvent.time));
+    }
 }

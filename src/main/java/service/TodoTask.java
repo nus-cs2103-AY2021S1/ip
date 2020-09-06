@@ -49,4 +49,19 @@ public class TodoTask extends Task {
     public String toString() {
         return "[T]" + this.getStatusIcon() + " " + this.getDescription();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+        }
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof TodoTask)) {
+            return false;
+        }
+        TodoTask otherTodo = (TodoTask) other;
+        return this.description.equals(otherTodo.description);
+    }
 }

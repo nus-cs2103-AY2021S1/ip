@@ -29,7 +29,12 @@ public class DukeService {
      * @param toAdd the new task
      * @return a dedicated message
      */
-    public DukeResponse addTask(Task toAdd) {
+    public DukeResponse addTask(Task toAdd) throws ServiceException {
+        for (Task task: tasks) {
+            if (task.equals(toAdd)) {
+                throw new ServiceException("Task exists!");
+            }
+        }
         tasks.add(toAdd);
         return new DukeResponse("Added: " + toAdd + "\n" + numberOfElementsAnnouncement() + "\n");
     }

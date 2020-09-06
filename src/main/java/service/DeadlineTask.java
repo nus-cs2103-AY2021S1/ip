@@ -61,4 +61,19 @@ public class DeadlineTask extends Task {
     public String toString() {
         return "[D]" + this.getStatusIcon() + " " + this.getDescription();
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if (other == null) {
+            return false;
+        }
+        if (other == this) {
+            return true;
+        }
+        if (!(other instanceof DeadlineTask)) {
+            return false;
+        }
+        DeadlineTask otherDeadline = (DeadlineTask) other;
+        return (this.description.equals(otherDeadline.description) && this.time.equals(otherDeadline.time));
+    }
 }
