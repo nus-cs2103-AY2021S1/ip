@@ -1,5 +1,8 @@
 package duke.commands;
 
+import duke.Ui;
+import duke.tasks.TaskManager;
+
 /**
  * <code>duke.commands.ListCommand</code> inherits from the base class <code>duke.commands.Command</code>
  * and will handle the job of listing duke.tasks.
@@ -12,9 +15,15 @@ public class ListCommand extends Command {
      * object in the parent class.
      * @return <code>true</code>
      */
-    public boolean execute() {
-        String s = tm.listTasks();
-        ui.print(s);
+    @Override
+    public boolean execute(String input) {
         return true;
+    }
+
+    @Override
+    public void init(TaskManager tm, Ui ui) {
+        setUtility(tm, ui);
+        setResponse(tm.listTasks());
+        setDone();
     }
 }

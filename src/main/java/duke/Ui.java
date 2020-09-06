@@ -68,101 +68,78 @@ public class Ui {
     /**
      * Shows the interface to ask for the name of a todo.
      */
-    public void askTodo() {
-        System.out.println(LINE);
-        System.out.println("What is the name of your Todo?");
-        System.out.println(LINE);
-        System.out.print("> ");
+    public String askTodo() {
+        return "What is the name of your Todo?";
     }
 
     /**
      * Shows the interface to ask for the name of a deadline.
+     * @return
      */
-    public void askDeadlineName() {
-        System.out.println(LINE);
-        System.out.println("What is the name of your Deadline?");
-        System.out.println(LINE);
-        System.out.print("> ");
+    public String askDeadlineName() {
+        return "What is the name of your Deadline?";
     }
 
     /**
      * Shows the interface to ask for the due date of the deadline.
      */
-    public void askDeadlineDate() {
-        System.out.println(LINE);
-        System.out.println("When is the deadline? (Give in this format: day month year)"); 
-        System.out.println(LINE);
-        System.out.print("> ");
+    public String askDeadlineDate() {
+        return "When is the deadline? (Give in this format: day month year)";
     }
 
     /**
      * Shows the interface to ask for the name of the event.
      */
-    public void askEventName() {
-        System.out.println(LINE);
-        System.out.println("What is the name of your Event?");
-        System.out.println(LINE);
-        System.out.print("> ");
+    public String askEventName() {
+        return "What is the name of your Event?";
     }
 
     /**
      * Shows the interface to ask for the start time of the event.
      */
-    public void askEventStartTime() {
-        System.out.println(LINE);
-        System.out.println("When is the start of your event? (Give in this format: day month year hour:min)"); 
-        System.out.println(LINE);
-        System.out.print("> ");
+    public String askEventStartTime() {
+        return "When is the start of your event? (Give in this format: day month year hour:min)";
     }
 
     /**
      * Shows the interface to to ask for the end time of the event.
      */
-    public void askEventEndTime() {
-        System.out.println(LINE);
-        System.out.println("When is the end of your event? (Give in this format: day month year hour:min)"); 
-        System.out.println(LINE);
-        System.out.print("> ");
+    public String askEventEndTime() {
+        return "When is the end of your event? (Give in this format: day month year hour:min)";
     }
 
     /**
      * Shows the interface to ask for the number of the
      * task to be marked as completed.
      */
-    public void askTaskNumToComplete() {
-        System.out.println(LINE);
-        System.out.println("What is the number of the task you wish to mark as complete?"); 
-        System.out.println(LINE);
-        System.out.print("> ");
+    public String askTaskNumToComplete() {
+        return "What is the number of the task you wish to mark as complete?";
     }
 
     /**
      * Displays a message to indicating a task has been marked as completed.
      * @param task the task that has completed
      */
-    public void taskCompleted(Task task) {
-        System.out.println("Nice, I've marked this task as done!");
-        System.out.println(task);
+    public String taskCompleted(Task task) {
+        return "Nice, I've marked this task as done!" + task.toString();
     }
 
     /**
      * Shows the interface to ask for the number of the
      * task to be deleted.
      */
-    public void askTaskNumToDelete() {
+    public String askTaskNumToDelete() {
         System.out.println(LINE);
         System.out.println("What is the number of the task you wish to delete?"); 
         System.out.println(LINE);
         System.out.print("> ");
+        return "What is the number of the task you wish to delete?";
     }
 
     /**
      * Show interface to ask for a keyword.
      */
-    public void askForKeyword() {
-        System.out.println(LINE);
-        System.out.println("Give me a keyword to search for");
-        System.out.println(LINE);
-        System.out.print("> ");
+    public String askForKeyword() {
+        return "Give me a keyword to search for";
     }
 }

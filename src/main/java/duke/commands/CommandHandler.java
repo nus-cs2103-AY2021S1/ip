@@ -1,5 +1,8 @@
 package duke.commands;
 
+import duke.Ui;
+import duke.tasks.TaskManager;
+
 /**
  * duke.commands.CommandHandler is the class that will handle all the duke.commands.
  */
@@ -10,7 +13,7 @@ public class CommandHandler {
      * @param cmd the string command to be parsed.
      * @return a <code>duke.commands.Command</code>.
      */
-    public static Command parseCommand(String cmd) {
+    public Command parseCommand(String cmd) {
         switch (cmd) {
             case "bye":
                 return new ExitCommand();

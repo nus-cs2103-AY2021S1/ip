@@ -1,5 +1,8 @@
 package duke.commands;
 
+import duke.Ui;
+import duke.tasks.TaskManager;
+
 /**
  * <code>duke.commands.FindCommand</code> inherits from the base class <code>duke.commands.Command</code>.
  * It handles the execution of finding duke.tasks given a particular keyword.
@@ -14,11 +17,16 @@ public class FindCommand extends Command {
      * @return <code>true</code>
      */
     @Override
-    public boolean execute() {
-        ui.askForKeyword();
-        String keyword = sc.nextLine();
-        String result = tm.findTask(keyword);
-        ui.print(result);
+    public boolean execute(String input) {
+        String result = tm.findTask(input);
+        setResponse(result);
+        setDone();
         return true;
+    }
+
+    @Override
+    public void init(TaskManager tm, Ui ui) {
+        setResponse(ui.askForKeyword());
+        setUtility(tm, ui);
     }
 }

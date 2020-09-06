@@ -1,5 +1,7 @@
 package duke.commands;
 
+import duke.Ui;
+import duke.tasks.TaskManager;
 import duke.tasks.Todo;
 
 /**
@@ -16,10 +18,17 @@ public class TodoCommand extends Command {
      * its <code>add</code> method with an <code>Todo</code> object passed as an argument.
      * @return <code>true</code>
      */
-    public boolean execute() {
-        ui.askTodo();
-        String todoName = sc.nextLine();
-        tm.add(new Todo(todoName));
+    @Override
+    public boolean execute(String input) {
+        tm.add(new Todo(input));
+        setDone();
+        setResponse("Todo added"); // TODO: refactor this
         return true;
+    }
+
+    @Override
+    public void init(TaskManager tm, Ui ui) {
+        setResponse(ui.askTodo());
+        setUtility(tm, ui);
     }
 }

@@ -11,21 +11,21 @@ import java.util.Scanner;
  * duke.commands
  */
 public abstract class Command {
-    TaskManager tm;
-    Ui ui;
-    Scanner sc;
+    protected TaskManager tm;
+    protected Ui ui;
+    protected int stage = 0;
+    protected boolean isDone = false;
+    private String response;
 
     /**
      * Sets utility tools that will be used by child command classes.
      *
      * @param tm the task manager.
      * @param ui the ui object that will output the user interface.
-     * @param sc the scanner object to receive user inputs.
      */
-    public void setUtility(TaskManager tm, Ui ui, Scanner sc) {
+    public void setUtility(TaskManager tm, Ui ui) {
         this.tm = tm;
         this.ui = ui;
-        this.sc = sc;
     }
 
     /**
@@ -35,5 +35,28 @@ public abstract class Command {
      * @return a boolean value indicating whether or not the program should continue running.
      * @throws DukeException if an exception has occured while executing the command.
      */
-    public abstract boolean execute() throws DukeException;
+    public abstract boolean execute(String input) throws DukeException;
+
+    public abstract void init(TaskManager tm, Ui ui);
+
+    protected void incrementStage() {
+        stage++;
+    }
+
+    protected void setResponse(String response) {
+        this.response = response;
+    }
+
+    public boolean isDone() {
+        return isDone;
+    };
+
+    protected void setDone() {
+        isDone = true;
+    }
+
+    @Override
+    public String toString() {
+        return response;
+    }
 }

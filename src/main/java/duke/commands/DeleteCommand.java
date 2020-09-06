@@ -1,6 +1,9 @@
 package duke.commands;
 
 import duke.DukeException;
+import duke.Ui;
+import duke.tasks.Task;
+import duke.tasks.TaskManager;
 
 /**
  * <code>duke.commands.DeleteCommand</code> inherits from the base class <code>duke.commands.Command</code>
@@ -18,10 +21,18 @@ public class DeleteCommand extends Command {
      * @return <code>true</code>
      * @throws DukeException if an invalid task number was given by the user.
      */
-    public boolean execute() throws DukeException {
-        ui.askTaskNumToDelete();
-        int taskNum = Integer.parseInt(sc.nextLine());
-        tm.deleteTask(taskNum);
+    @Override
+    public boolean execute(String input) throws DukeException {
+        Task task = tm.deleteTask(Integer.parseInt(input));
+        String response = String.format("Successfully removed the following task:\n %s", task);
+        setResponse(response);
+        setDone();
         return true;
+    }
+
+    @Override
+    public void init(TaskManager tm, Ui ui) {
+        setUtility(tm, ui);
+        setResponse(ui.askTaskNumToComplete());
     }
 }

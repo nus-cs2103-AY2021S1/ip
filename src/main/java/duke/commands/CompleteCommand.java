@@ -1,7 +1,9 @@
 package duke.commands;
 
 import duke.DukeException;
+import duke.Ui;
 import duke.tasks.Task;
+import duke.tasks.TaskManager;
 
 /**
  * <code>duke.commands.CompleteCommand</code> inherits from the base class <code>duke.commands.Command</code>
@@ -19,11 +21,17 @@ public class CompleteCommand extends Command {
      * @return <code>true</code>
      * @throws DukeException if an invalid task number was given by the user.
      */
-    public boolean execute() throws DukeException {
-        ui.askTaskNumToComplete();
-        int taskNum = Integer.parseInt(sc.nextLine());
-        Task task = tm.markDone(taskNum);
-        ui.taskCompleted(task);
+    @Override
+    public boolean execute(String input) throws DukeException {
+        Task task = tm.markDone(Integer.parseInt(input));
+        setResponse(ui.taskCompleted(task));
+        setDone();
         return true;
+    }
+
+    @Override
+    public void init(TaskManager tm, Ui ui) {
+        setUtility(tm, ui);
+        setResponse(ui.askTaskNumToComplete());
     }
 }

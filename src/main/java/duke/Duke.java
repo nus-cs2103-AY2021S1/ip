@@ -9,19 +9,20 @@ import java.util.Scanner;
  * Main class that will oversee the running of the program.
  */
 public class Duke {
-//    Ui ui;
-//    TaskManager taskManager;
-//    CommandHandler commandHandler;
-//
-//    Duke() {
-//        this.ui = new Ui();
-//        this.commandHandler = new CommandHandler();
-//        try {
-//            this.taskManager = new TaskManager(new Storage().load());
-//        } catch (DukeException e) {
-//            System.out.println(e);
-//        }
-//    }
+    private Ui ui;
+    private TaskManager taskManager;
+    private CommandHandler commandHandler;
+    private Command cmd;
+
+    Duke() {
+        this.ui = new Ui();
+        this.commandHandler = new CommandHandler();
+        try {
+            this.taskManager = new TaskManager(new Storage().load());
+        } catch (DukeException e) {
+            System.out.println("OOPS error loading storage: " + e.getMessage());
+        }
+    }
 
     public void start() {
 //        ui.showStartScreen();
@@ -196,6 +197,23 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        // If a command has not been set yet or if the ongoing command has been completed
+        if (cmd == null || cmd.isDone()) {
+            Command cmd = commandHandler.parseCommand(input);
+            cmd.init(taskManager, ui);
+            setNewCommand(cmd);
+            return cmd.toString();
+        } else {
+            try {
+                cmd.execute(input);
+                return cmd.toString();
+            } catch (DukeException e) {
+                return "OOPS! Something went wrong while executing: " + e.toString();
+            }
+        }
+    }
+
+    private void setNewCommand(Command cmd) {
+        this.cmd = cmd;
     }
 }
