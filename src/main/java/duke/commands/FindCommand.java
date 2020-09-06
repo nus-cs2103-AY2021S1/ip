@@ -32,6 +32,7 @@ public class FindCommand extends Command {
      */
     public String execute(Ui ui, Storage listStorage, TaskList taskList) {
         TaskList keywordTasks = new TaskList();
+        assert taskList.getNumTask() >= 0 : "Something went wrong in your task list!";
         for (int i = 0; i < taskList.getNumTask(); i++) {
             Task nextTask = taskList.get(i);
             if (nextTask.toString().contains(keyword)) {

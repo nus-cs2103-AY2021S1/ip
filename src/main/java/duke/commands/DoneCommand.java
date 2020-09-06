@@ -32,19 +32,15 @@ public class DoneCommand extends Command {
      * @param listStorage Backend storage to store items in the task list.
      * @param taskList List of tasks added by users so far.
      * @return UI message after executing done command.
+     * @throws InvalidCommand Invalid task number given.
      */
-    public String execute(Ui ui, Storage listStorage, TaskList taskList) throws InvalidCommand{
+    public String execute(Ui ui, Storage listStorage, TaskList taskList) throws InvalidCommand {
         try {
             Task editedTask = taskList.get(this.taskIndex);
             listStorage.editTask(editedTask, this.taskIndex, taskList);
             return ui.markAsDone(this.taskIndex, taskList);
         } catch (IndexOutOfBoundsException ex) {
-            try {
-                throw new InvalidCommand("Please enter a valid task number.");
-            } catch (InvalidCommand invalidCommand) {
-                invalidCommand.printStackTrace();
-            }
+            throw new InvalidCommand("Please enter a valid task number.");
         }
-        return "Cannot mark as done!";
     }
 }

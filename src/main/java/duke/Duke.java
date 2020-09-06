@@ -43,12 +43,13 @@ public class Duke {
         String uiMessage = "";
         try {
             Command c = Parser.parse(input);
+            assert c != null : "Something went wrong!";
             if (c != null) {
                 uiMessage = c.execute(this.ui, this.listStorage, this.taskList);
                 checkExit(c);
             }
         } catch (InvalidCommand ex) {
-            Ui.commandError(ex);
+            uiMessage = Ui.commandError(ex);
         }
         return uiMessage;
     }
@@ -68,13 +69,13 @@ public class Duke {
      * @return Storage loading messages.
      */
     public String loadStorage() {
-        String loadingStorageMessage = "";
+        String uiMessage = "";
         try {
-            loadingStorageMessage = this.ui.loadStorage(this.listStorage.loadData(this.taskList));
+            uiMessage = this.ui.loadStorage(this.listStorage.loadData(this.taskList));
         } catch (InvalidCommand ex) {
             Ui.commandError(ex);
         }
-        return loadingStorageMessage;
+        return uiMessage;
     }
 
     /**

@@ -38,6 +38,7 @@ public class Storage {
      *
      * @param currTaskList Task list of bot.
      * @return Message after loading data.
+     * @throws InvalidCommand Unable to read or create data file.
      */
     public String loadData(TaskList currTaskList) throws InvalidCommand {
         String loadingDataFileMessage = this.checkHistory();
@@ -66,6 +67,7 @@ public class Storage {
      * Adds the new task into storage file.
      *
      * @param newTask New Task that has been added.
+     * @throws InvalidCommand Unable write to file.
      */
     public void addTask(Task newTask) throws InvalidCommand {
         String retrieveTaskType = checkTaskType(newTask);
@@ -80,6 +82,7 @@ public class Storage {
      * @param editedTask Task to be edited.
      * @param taskIndex Index of task in the task list.
      * @param currentList Current task list used by bot.
+     * @throws InvalidCommand Unable to remove old data file.
      */
     public void editTask(Task editedTask, int taskIndex, TaskList currentList) throws InvalidCommand {
         String taskType = checkTaskType(editedTask);
@@ -93,6 +96,7 @@ public class Storage {
      * Deletes task from storage file when it is removed from task list.
      *
      * @param removedTask Task to be removed.
+     * @throws InvalidCommand Unable to remove old data file.
      */
     public void deleteTask(Task removedTask) throws InvalidCommand {
             String taskType = checkTaskType(removedTask);
@@ -148,6 +152,7 @@ public class Storage {
     private void deleteTaskFromFile(String taskNameToBeRemoved) throws InvalidCommand {
         try {
             File removed = new File(DATA_FILE_DIRECTORY + "dataList1.txt");
+            assert this.storageFile.exists() : "Storage file is lost while application is running!";
             BufferedReader reader = new BufferedReader(new FileReader(this.storageFile));
             BufferedWriter writer = new BufferedWriter(new FileWriter(removed));
             String currentLine = reader.readLine();
@@ -184,6 +189,7 @@ public class Storage {
     private void editTaskFromFile (String removeTaskString, String editedTaskString) throws InvalidCommand {
         try {
             File toBeDeleted = new File(DATA_FILE_DIRECTORY + "dataList1.txt");
+            assert this.storageFile.exists() : "Storage file is lost while application is running!";
             BufferedReader readerBuffer = new BufferedReader(new FileReader(this.storageFile));
             BufferedWriter writerBuffer = new BufferedWriter(new FileWriter(toBeDeleted));
             String readingLine = readerBuffer.readLine();
@@ -255,6 +261,7 @@ public class Storage {
     private void readPastDataFile(TaskList toBeUpdatedTaskList) throws InvalidCommand{
         String newLine = "";
         try {
+            assert this.storageFile.exists() : "Storage file went missing, please restart your bot!";
             BufferedReader rb = new BufferedReader(new FileReader(this.storageFile));
             newLine = rb.readLine();
             while (newLine != null) {
@@ -285,12 +292,17 @@ public class Storage {
     }
 
     private LocalDate getDate(String[] storageFileString) {
+        assert storageFileString[3].trim().length() != 0 : "Task date is corrupted!";
         return LocalDate.parse(storageFileString[3].trim());
     }
 
     private void processTasks(String[] taskStorageString, TaskList toBeUpdatedTaskList) {
         String trimmedTaskName = trimTaskName(taskStorageString);
         boolean isTaskDone = checkTaskStatus(taskStorageString);
+        assert taskStorageString.length == 3 : "Task in storage file is missing information!";
+        assert taskStorageString[2].trim().length() != 0 : "Task name is corrupted!";
+        assert Integer.parseInt(taskStorageString[1].trim()) == 1
+                | Integer.parseInt(taskStorageString[1].trim()) == 0 : "Task status is corrupted!";
         if (taskStorageString[0].charAt(0) == 'T') {
             ToDo pastToDo = new ToDo(trimmedTaskName);
             processTaskStatus(pastToDo, isTaskDone);

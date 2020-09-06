@@ -31,6 +31,7 @@ public class DeleteCommand extends Command {
      * @param listStorage Backend storage to store items in the task list.
      * @param taskList List of tasks added by users so far.
      * @return UI message after executing delete command.
+     * @throws InvalidCommand Invalid task number given.
      */
     @Override
     public String execute(Ui ui, Storage listStorage, TaskList taskList) throws InvalidCommand {
@@ -39,12 +40,7 @@ public class DeleteCommand extends Command {
             listStorage.deleteTask(removedTask);
             return ui.deleteTask(removedTask, taskList);
         } catch (IndexOutOfBoundsException ex) {
-            try {
-                throw new InvalidCommand("Please enter a valid task number.");
-            } catch (InvalidCommand invalidCommand) {
-                invalidCommand.printStackTrace();
-            }
+            throw new InvalidCommand("Please enter a valid task number.");
         }
-        return "Cannot delete task!";
     }
 }
