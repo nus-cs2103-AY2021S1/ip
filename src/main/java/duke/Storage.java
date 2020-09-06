@@ -31,29 +31,6 @@ public class Storage {
     }
 
     /**
-     * Modifies the string array to the requisite form by adding corresponding delimiters and removing the done status.
-     *
-     * @param input String array that is passed in / read from the local file.
-     * @return String that is modified and ready to be parsed by the Parser.
-     */
-    public String editFileInput(String[] input) {
-        ArrayList<String> result = new ArrayList<>();
-        String taskType = input[0];
-        for (int i = 0; i < input.length; i++) {
-            if (taskType.equals("deadline") && i == 3) {
-                result.add("/by");
-            } else if (taskType.equals("event") && i == 3) {
-                result.add("/at");
-            }
-            if (i != 1) {
-                result.add(input[i]);
-            }
-        }
-        String[] returnArray = new String[result.size()];
-        return Arrays.stream(result.toArray(returnArray)).collect(Collectors.joining(" "));
-    }
-
-    /**
      * Loads command strings from the local file and decipher them to tasks that can be added to the task list.
      *
      * @return Task list with tasks loaded from the local file.
@@ -64,15 +41,16 @@ public class Storage {
             File file = new File(filePath);
             FileReader fr = new FileReader(file);
             BufferedReader br = new BufferedReader(fr);
-            String line = br.readLine();
 
+            String line = br.readLine();
             TaskList newTaskList = new TaskList();
 
             while (line != null) {
-                String[] splitLine = line.split(" \\| ");
+                String[] splitLine = line.split("\\s*\\|\\s*");
+                String checkedFileInput = new FileStringChecker(splitLine).checkFile();
                 boolean isDone = splitLine[1].equals("1") ? true : false;
 
-                AddCommand c = new Parser(editFileInput(splitLine)).parseFromFile(isDone);
+                AddCommand c = new Parser(checkedFileInput).parseFromFile(isDone);
                 c.executeFromFile(newTaskList);
 
                 line = br.readLine();
@@ -95,7 +73,7 @@ public class Storage {
     public void write(TaskList taskList) throws DukeException {
         try {
             File file = new File(filePath);
-            // add directory if it does not exist
+            // Add directory if it does not exist
             file.getParentFile().mkdirs();
             FileWriter fw;
 

@@ -40,7 +40,10 @@ public class Ui {
      * @return String to be printed out.
      */
     public String printMatches(ArrayList<Task> foundTasks) {
-        String returnString = "\n Here are the matching tasks in your list: ";
+        if (foundTasks.size() < 1) {
+            return " Sorry, no tasks were found!";
+        }
+        String returnString = " Here are the matching tasks in your list: ";
         for (Task t: foundTasks) {
             returnString += "\n\t " + t.toString();
         }
@@ -58,7 +61,7 @@ public class Ui {
      * @return String to be printed out.
      */
     public String showTaskAdded(TaskList taskList) {
-        return "\n Got it. I've added this task: " + "\n  "
+        return " Got it. I've added this task: " + "\n\t"
                 + taskList.getTask(taskList.totalTask() - 1).toString()
                 + showTotalTasks(taskList.totalTask());
     }
@@ -70,8 +73,8 @@ public class Ui {
      * @return String to be printed out.
      */
     public String showDone(Task task) {
-        return "\n Nice! I've marked this task as done: "
-                + "\n\t   "
+        return " Nice! I've marked this task as done: "
+                + "\n\t"
                 + task.toString();
     }
 
@@ -83,8 +86,8 @@ public class Ui {
      * @return String to be printed out.
      */
     public String showDelete(TaskList taskList, Task task) {
-        return "\n Noted. I've removed this task: "
-                + "\n\t "
+        return " Noted. I've removed this task: "
+                + "\n\t"
                 + task.toString()
                 + showTotalTasks(taskList.totalTask());
     }
@@ -96,7 +99,7 @@ public class Ui {
      * @return String to be printed out.
      */
     public String printList(TaskList taskList) {
-        String returnString = "\n Here are the tasks in your list: \n";
+        String returnString = " Here are the tasks in your list: ";
         for (int i = 0; i < taskList.totalTask(); i++) {
             returnString += "\n\t " + (i + 1) + ". " + taskList.getTask(i).toString();
         }
@@ -110,7 +113,7 @@ public class Ui {
      * @return String to be printed out.
      */
     public String showError(String errorMessage) {
-        return "\n\t "
+        return "\t "
                 + errorMessage;
     }
     /**
@@ -119,7 +122,7 @@ public class Ui {
      * @return String to be printed out.
      */
     public String showLoadingError() {
-        return "\n Something wrong with loading from your file.. Proceeding to create new empty TaskList";
+        return " Something wrong with loading from your file.. Proceeding to create new empty TaskList: ";
     }
 
     /**

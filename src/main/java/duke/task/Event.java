@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.DateTime;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -10,35 +12,18 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
-    /** LocalDate object to store the date of the event. */
-    private LocalDate date;
-
-    /** LocalTime object to store the time of the event. */
-    private LocalTime time;
+    /** DateTime object to store the date and any specified time of the event. */
+    private DateTime dateTime;
 
     /**
      * Creates an Event task containing the description, date and time of the task.
      *
      * @param name Description of the event task.
-     * @param date Date of the event.
-     * @param time Time of the event.
+     * @param dateTime Date and any specified time of the event.
      */
-    public Event(String name, LocalDate date, LocalTime time) {
+    public Event(String name, DateTime dateTime) {
         super(name);
-        this.time = time;
-        this.date = date;
-    }
-
-    /**
-     * Creates an Event task containing the description and date of the task.
-     *
-     * @param name Description of the deadline task.
-     * @param date Date of the task deadline.
-     */
-    public Event(String name, LocalDate date) {
-        super(name);
-        time = null;
-        this.date = date;
+        this.dateTime = dateTime;
     }
 
     /**
@@ -48,8 +33,7 @@ public class Event extends Task {
      */
     public String appendFile() {
         String doneString = (isDone() == true ? "1" : "0");
-        String time = this.time != null ? this.time.format(DateTimeFormatter.ofPattern("HHmm")) : "";
-        return "event" + " | " + doneString + " | " + getName() + " | " + date + " | " + time;
+        return "event" + " | " + doneString + " | " + getName() + " | " + dateTime.getFileFormattedDateTime();
     }
 
     /**
@@ -61,8 +45,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         String doneString = (isDone() == true ? "✓" : "✗");
-        String dateFormat = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return "[E]" + "[" + doneString + "] " + getName() + " (at: " + dateFormat
-                + (time != null ? " " + time.format(DateTimeFormatter.ofPattern("HHmma")) + " " : "") + ")";
+        return "[E]" + "[" + doneString + "] " + getName() + " (at: " + dateTime.getPrintFormattedDate()
+                + " " + dateTime.getPrintFormattedTime() + ")";
     }
 }

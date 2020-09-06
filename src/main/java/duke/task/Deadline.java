@@ -4,41 +4,26 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+import duke.DateTime;
+
 /**
  * Represents a Deadline task that contains both task name and a date to serve as a deadline.
  * Time can be added as an optional parameter.
  */
 public class Deadline extends Task {
 
-    /** LocalDate object to store the date of the deadline. */
-    private LocalDate date;
-
-    /** LocalTime object to store the time of the deadline. */
-    private LocalTime time;
+    /** DateTime object to store the date and any specified time of the deadline. */
+    private DateTime dateTime;
 
     /**
      * Creates a Deadline task containing the description, date and time of the task.
      *
      * @param name Description of the deadline task.
-     * @param date Date of the task deadline.
-     * @param time Time of the task deadline.
+     * @param dateTime Date and any specified time of the task deadline.
      */
-    public Deadline(String name, LocalDate date, LocalTime time) {
+    public Deadline(String name, DateTime dateTime) {
         super(name);
-        this.time = time;
-        this.date = date;
-    }
-
-    /**
-     * Creates a Deadline task containing the description and date of the task.
-     *
-     * @param name Description of the deadline task.
-     * @param date Date of the task deadline.
-     */
-    public Deadline(String name, LocalDate date) {
-        super(name);
-        time = null;
-        this.date = date;
+        this.dateTime = dateTime;
     }
 
     /**
@@ -48,8 +33,7 @@ public class Deadline extends Task {
      */
     public String appendFile() {
         String doneString = (isDone() == true ? "1" : "0");
-        String time = this.time != null ? this.time.format(DateTimeFormatter.ofPattern("HHmm")) : "";
-        return "deadline" + " | " + doneString + " | " + getName() + " | " + date + " | " + time;
+        return "deadline" + " | " + doneString + " | " + getName() + " | " + dateTime.getFileFormattedDateTime();
     }
 
     /**
@@ -61,9 +45,8 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String doneString = (isDone() == true ? "✓" : "✗");
-        String dateFormat = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return "[D]" + "[" + doneString + "] " + getName() + " (by: " + dateFormat
-                + (time != null ? " " + time.format(DateTimeFormatter.ofPattern("HHmma")) + " " : "") + ")";
+        return "[D]" + "[" + doneString + "] " + getName() + " (by: " + dateTime.getPrintFormattedDate()
+                + " " + dateTime.getPrintFormattedTime() + ")";
     }
 }
 

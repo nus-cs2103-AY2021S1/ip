@@ -3,6 +3,10 @@ package duke;
 import duke.command.Command;
 import duke.task.TaskList;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * Represents a functional chat-bot that helps to keep track of todo, deadline and event tasks.
  */
@@ -10,9 +14,6 @@ public class Duke {
 
     /** Handles all User Interaction elements of the chat-bot. */
     protected Ui ui;
-
-    /** Determines if user has been greeted. */
-    private boolean isWelcome;
 
     /** Handles any read/write requests. */
     private Storage storage;
@@ -32,7 +33,7 @@ public class Duke {
         try {
             tasks = storage.load();
         } catch (DukeException e) {
-            System.out.println(ui.showLoadingError());
+            System.out.println(ui.showLoadingError() + e.getMessage());
             tasks = new TaskList();
         }
     }
@@ -58,7 +59,6 @@ public class Duke {
             }
         }
         System.out.println("Goodbye! Hope you have a great one!");
-
     }
 
     /**
@@ -70,7 +70,6 @@ public class Duke {
      * @return The response to the user based on the user input.
      */
     public String run(String input) {
-        ui.showWelcome();
         try {
             Command c = new Parser(input).parse();
             if (!c.isExit()) {
@@ -88,7 +87,7 @@ public class Duke {
      * @param input User input.
      * @return The response to the user input.
      */
-    String getResponse(String input) {
+    protected String getResponse(String input) {
         return new Duke("data/tasks.txt").run(input);
     }
 

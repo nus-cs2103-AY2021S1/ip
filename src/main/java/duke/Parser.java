@@ -47,7 +47,7 @@ public class Parser {
      */
     public Command parse() throws DukeException {
         String[] addCommands = new String[]{"todo", "deadline", "event"};
-        String[] splitInput = getString().split(" ");
+        String[] splitInput = getString().trim().split("\\s+");
         String commandType = splitInput[0];
         if (commandType.equals("")) {
             throw new DukeException("Your Input String cannot be Empty!");
@@ -78,7 +78,7 @@ public class Parser {
     public AddCommand parseFromFile(boolean isDone) throws DukeException {
         //Assuming that written file will only contain events to be added
         String[] addCommands = new String[]{"todo", "deadline", "event"};
-        String[] splitInput = getString().split(" ");
+        String[] splitInput = getString().trim().split("\\s+");
         String commandType = splitInput[0];
         if (commandType.equals("")) {
             throw new DukeException("File has empty input String!");

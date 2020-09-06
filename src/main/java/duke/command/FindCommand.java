@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import duke.DukeException;
+import duke.FindTaskStringChecker;
 import duke.Storage;
 import duke.Ui;
 import duke.task.TaskList;
@@ -35,9 +36,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (super.isFirstIndexEmpty()) {
-            throw new DukeException("Oops, please enter a keyword after your command!");
-        }
+        new FindTaskStringChecker(getArray()).checkTaskName();
         String keyword = Arrays.stream(getArray()).skip(1).collect(Collectors.joining(" "));
         return ui.printMatches(tasks.findTask(keyword));
     }
