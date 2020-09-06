@@ -20,6 +20,8 @@ public class TaskList {
      * @throws InvalidArgumentException
      */
     public Task addTask(List<String> tokens) throws InvalidArgumentException {
+        assert database != null : "TaskList.addTask(): database cannot be null";
+        assert tokens.size() >= 2: "TaskList.addTask(): tokens' size must be at least 2";
         Task task;
         String datetimeString = tokens.get(2).trim();
         LocalDateTime datetime = (datetimeString.equals("null"))
@@ -63,6 +65,7 @@ public class TaskList {
         if (index <= 0 || index > database.size()) {
             throw new InvalidArgumentException("Invalid argument for the LIST command.");
         }
+        assert (index > 0 || index <= database.size()) : "getTask's pretest not working properly";
         return database.get(index - 1);
     }
 
@@ -76,6 +79,7 @@ public class TaskList {
         if (index <= 0 || index > database.size()) {
             throw new InvalidArgumentException("Out of range argument for DONE command.");
         }
+        assert (index > 0 || index <= database.size()) : "finishTask's pretest not working properly";
         database.get(index - 1).markAsDone();
     }
 
@@ -90,6 +94,7 @@ public class TaskList {
         if (index <= 0 || index > database.size()) {
             throw new InvalidArgumentException("Out of range argument for DELETE command.");
         }
+        assert (index > 0 || index <= database.size()) : "removeTask's pretest not working properly";
         return database.remove(index - 1);
     }
 
@@ -100,6 +105,7 @@ public class TaskList {
      */
     public void initialize() throws InvalidArgumentException {
         List<List<String>> data = Storage.readFile();
+        assert data != null: "TaskList.initialize(): data cannot be null";
         for (List<String> tokens : data) {
             addTask(tokens);
         }
@@ -118,6 +124,7 @@ public class TaskList {
      * @return the number of current tasks.
      */
     public int count() {
+        assert database != null : "TaskList.count(): database cannot be null";
         return database.size();
     }
 
@@ -125,6 +132,7 @@ public class TaskList {
      * Clears all tasks in the list.
      */
     public void clearAll() {
+        assert database != null : "TaskList.clear(): database cannot be null";
         database.clear();
     }
 
@@ -134,6 +142,7 @@ public class TaskList {
      * @return the list of corresponding string represent the tasks
      */
     public List<String> printTasks() {
+        assert database != null : "TaskList.printTasks(): database cannot be null";
         List<String> output = new ArrayList<>();
         for (int i = 0; i < database.size(); i++) {
             output.add((i + 1) + "." + database.get(i));
@@ -142,6 +151,7 @@ public class TaskList {
     }
 
     public List<String> findTasks(String query) {
+        assert database != null : "TaskList.findTasks(): database cannot be null";
         query = query.trim();
         List<String> output = new ArrayList<>();
         int count = 1;

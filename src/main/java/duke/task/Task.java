@@ -33,6 +33,7 @@ public class Task {
      * @return the serial of the task
      */
     public String serialize() {
+        assert time != null: "cannot serialize when time is null";
         String datetimeString = time.getDayOfMonth() + "/"
                 + time.getMonthValue() + "/"
                 + time.getYear() + " "

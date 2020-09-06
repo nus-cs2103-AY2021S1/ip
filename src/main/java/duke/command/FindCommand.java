@@ -13,6 +13,7 @@ public class FindCommand extends Command {
 
     @Override
     public String run(TaskList taskList) {
+        assert input.size() == 2: "FindCommand.run(): input must have exactly 2 words";
         return Ui.find(taskList.findTasks(input.get(1)));
     }
 }

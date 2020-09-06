@@ -44,6 +44,7 @@ public class Parser {
      * @throws InvalidArgumentException
      */
     public static LocalDateTime stringToTime(String datetimeString) throws InvalidArgumentException {
+        assert datetimeString != null : "cannot convert a null string to time";
         String[] timeTokens = datetimeString.split(" |/");
         int time = timeTokens.length >= 4 ? Integer.parseInt(timeTokens[3]) : 0;
         try {
