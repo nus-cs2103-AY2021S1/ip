@@ -2,6 +2,7 @@ package duke.parser;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.function.Predicate;
 
 import duke.command.ByeCommand;
 import duke.command.Command;
@@ -20,6 +21,7 @@ import duke.exception.DukeException;
  * @author Audrey Felicio Anwar
  */
 public class Parser {
+    private static final Predicate<String[]> CHECK_LENGTH = (s) -> s.length <= 1;
     private enum Commands {
         BYE,
         LIST,
@@ -54,7 +56,7 @@ public class Parser {
                 break;
             case DONE:
             case DELETE:
-                if (separated.length <= 1) {
+                if (CHECK_LENGTH.test(separated)) {
                     isError = true;
                     errorMessage = " Task index must be specified :(";
                     break;
@@ -77,7 +79,7 @@ public class Parser {
             case TODO:
             case DEADLINE:
             case EVENT:
-                if (separated.length <= 1) {
+                if (CHECK_LENGTH.test(separated)) {
                     isError = true;
                     errorMessage = " Task description cannot be empty :(";
                     break;
@@ -92,7 +94,7 @@ public class Parser {
                     break;
                 case DEADLINE:
                     content = input.substring(9).split(" /by ");
-                    if (content.length <= 1) {
+                    if (CHECK_LENGTH.test(content)) {
                         isError = true;
                         errorMessage = " Deadline date cannot be empty :(";
                         break;
@@ -103,7 +105,7 @@ public class Parser {
                     break;
                 default:
                     content = input.substring(6).split(" /at ");
-                    if (content.length <= 1) {
+                    if (CHECK_LENGTH.test(content)) {
                         isError = true;
                         errorMessage = " Deadline date cannot be empty :(";
                         break;
@@ -115,7 +117,7 @@ public class Parser {
                 }
                 break;
             default:
-                if (separated.length <= 1) {
+                if (CHECK_LENGTH.test(separated)) {
                     isError = true;
                     errorMessage = " Keyword cannot be empty :(";
                     break;
