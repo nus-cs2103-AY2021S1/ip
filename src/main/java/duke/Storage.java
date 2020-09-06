@@ -42,62 +42,10 @@ public class Storage {
      */
     public String loadData(TaskList currTaskList) throws InvalidCommand {
         String loadingDataFileMessage = this.checkHistory();
+        checkIfFileAvailable();
+        readPastDataFile(currTaskList);
         if (loadingDataFileMessage.length() == 0) {
-            loadingDataFileMessage = "________________________________________________________" + "\n"
-                    + "     Found directories and file" + "\n"
-                    + "________________________________________________________" + "\n";
-        }
-        try {
-            assert this.storageFile.exists() : "Storage file went missing, please restart your bot!";
-            BufferedReader rb = new BufferedReader(new FileReader(this.storageFile));
-            String newLine = "";
-            newLine = rb.readLine();
-            while (newLine != null) {
-                String[] taskInput = newLine.split("\\|");
-                if (taskInput.length == 1) {
-                    break;
-                }
-                if (taskInput[0].charAt(0) == 'T') {
-                    assert taskInput.length == 3 : "Task in storage file is missing information!";
-                    assert taskInput[2].trim().length() != 0 : "Task name is corrupted!";
-                    assert Integer.parseInt(taskInput[1].trim()) == 1
-                            | Integer.parseInt(taskInput[1].trim()) == 0 : "Task status is corrupted!";
-                    ToDo pastToDo = new ToDo(taskInput[2].trim());
-                    if (Integer.parseInt(taskInput[1].trim()) == 1) {
-                        pastToDo.markDone();
-                    }
-                    currTaskList.add(pastToDo);
-                    newLine = rb.readLine();
-                } else if (newLine.charAt(0) == 'E') {
-                    assert taskInput.length == 4 : "Task name and/or date in storage file is lost!";
-                    assert taskInput[2].trim().length() != 0 : "Task name is corrupted!";
-                    assert taskInput[3].trim().length() != 0 : "Task date is corrupted!";
-                    assert Integer.parseInt(taskInput[1].trim()) == 1
-                            | Integer.parseInt(taskInput[1].trim()) == 0 : "Task status is corrupted!";
-                    Event pastEvent = new Event(taskInput[2].trim(), LocalDate.parse(taskInput[3].trim()));
-                    if (Integer.parseInt(taskInput[1].trim()) == 1) {
-                        pastEvent.markDone();
-                    }
-                    currTaskList.add(pastEvent);
-                    newLine = rb.readLine();
-                } else if (newLine.charAt(0) == 'D') {
-                    assert taskInput.length == 4 : "Task name and/or date in storage file is lost!";
-                    assert taskInput[2].trim().length() != 0 : "Task name is corrupted!";
-                    assert taskInput[3].trim().length() != 0 : "Task date is corrupted!";
-                    assert Integer.parseInt(taskInput[1].trim()) == 1
-                            | Integer.parseInt(taskInput[1].trim()) == 0 : "Task status is corrupted!";
-                    Deadline pastDeadline = new Deadline(taskInput[2].trim(),
-                            LocalDate.parse(taskInput[3].trim()));
-                    if (Integer.parseInt(taskInput[1].trim()) == 1) {
-                        pastDeadline.markDone();
-                    }
-                    currTaskList.add(pastDeadline);
-                    newLine = rb.readLine();
-                }
-            }
-            rb.close();
-        } catch (IOException e) {
-            throw new InvalidCommand("Unable to read file");
+            loadingDataFileMessage = Ui.allFilesFound();
         }
         return loadingDataFileMessage;
     }
@@ -110,25 +58,8 @@ public class Storage {
      */
     private String checkHistory() throws InvalidCommand {
         String overallHistoryMessage = "";
-        try {
-            FileReader readFile = new FileReader(DATA_FILE_DIRECTORY);
-        } catch (FileNotFoundException e) {
-            File newData = new File(DATA_FILE_DIRECTORY);
-            if (!newData.exists()) {
-                newData.mkdirs();
-                overallHistoryMessage += Ui.addDirectory();
-                overallHistoryMessage += "\n";
-            }
-        }
-
-        try {
-            if (this.storageFile.createNewFile()) {
-                overallHistoryMessage += Ui.addDataFile();
-                overallHistoryMessage += "\n";
-            }
-        } catch (IOException e) {
-            throw new InvalidCommand("Unable to create file");
-        }
+        overallHistoryMessage += checkDirectoryCreated();
+        overallHistoryMessage += checkFileCreated();
         return overallHistoryMessage;
     }
 
@@ -139,21 +70,10 @@ public class Storage {
      * @throws InvalidCommand Unable write to file.
      */
     public void addTask(Task newTask) throws InvalidCommand {
-        try {
-            FileWriter fw = new FileWriter(this.storageFile, true);
-            if (newTask instanceof ToDo) {
-                fw.write(((ToDo) newTask).getDataStorageName() + "\n");
-                fw.close();
-            } else if (newTask instanceof Deadline) {
-                fw.write(((Deadline) newTask).getDataStorageName() + "\n");
-                fw.close();
-            } else if (newTask instanceof Event) {
-                fw.write(((Event) newTask).getDataStorageName() + "\n");
-                fw.close();
-            }
-        } catch (IOException e) {
-            throw new InvalidCommand("Unable to write to file");
-        }
+        String retrieveTaskType = checkTaskType(newTask);
+        String retrieveStorageName = getStorageName(retrieveTaskType, newTask);
+        String wordsToBeWritten = retrieveStorageName + "\n";
+        writeToFile(wordsToBeWritten);
     }
 
     /**
@@ -165,55 +85,11 @@ public class Storage {
      * @throws InvalidCommand Unable to remove old data file.
      */
     public void editTask(Task editedTask, int taskIndex, TaskList currentList) throws InvalidCommand {
-        File toBeDeleted = new File (DATA_FILE_DIRECTORY + "dataList1.txt");
-        BufferedReader readerBuffer = null;
-        assert this.storageFile.exists() : "Storage file is lost while application is running!";
-        try {
-            readerBuffer = new BufferedReader(new FileReader(this.storageFile));
-            BufferedWriter writerBuffer = new BufferedWriter(new FileWriter(toBeDeleted));
-            String readingLine = readerBuffer.readLine();
-            String lineToEdit = "";
-            String lineToChangeTo = "";
-
-            if (editedTask instanceof Deadline) {
-                lineToEdit = ((Deadline) editedTask).getDataStorageName();
-                currentList.get(taskIndex).markDone();
-                lineToChangeTo = ((Deadline) editedTask).getDataStorageName();
-            } else if (editedTask instanceof Event) {
-                lineToEdit = ((Event) editedTask).getDataStorageName();
-                currentList.get(taskIndex).markDone();
-                lineToChangeTo = ((Event) editedTask).getDataStorageName();
-            } else {
-                lineToEdit = ((ToDo) editedTask).getDataStorageName();
-                currentList.get(taskIndex).markDone();
-                lineToChangeTo = ((ToDo) editedTask).getDataStorageName();
-            }
-
-            while (readingLine != null) {
-                if (readingLine.equals(lineToEdit)) {
-                    writerBuffer.write(lineToChangeTo + "\n");
-                    readingLine = readerBuffer.readLine();
-                    continue;
-                }
-                writerBuffer.write(readingLine + "\n");
-                readingLine = readerBuffer.readLine();
-            }
-
-            writerBuffer.close();
-            readerBuffer.close();
-
-            if (this.storageFile.delete()) {
-                // Rename the output file to the input file
-                if (!toBeDeleted.renameTo(this.storageFile)) {
-                    throw new IOException("Could not rename to update data file");
-                }
-            } else {
-                throw new IOException("Could not delete old data file");
-            }
-        } catch (IOException e) {
-            throw new InvalidCommand(e.getMessage());
-        }
-
+        String taskType = checkTaskType(editedTask);
+        String lineToEdit = getStorageName(taskType, editedTask);
+        currentList.get(taskIndex).markDone();
+        String lineToChangeTo = getStorageName(taskType, editedTask);
+        editTaskFromFile(lineToEdit, lineToChangeTo);
     }
 
     /**
@@ -223,24 +99,66 @@ public class Storage {
      * @throws InvalidCommand Unable to remove old data file.
      */
     public void deleteTask(Task removedTask) throws InvalidCommand {
+            String taskType = checkTaskType(removedTask);
+            String lineToRemove = getStorageName(taskType, removedTask);
+            deleteTaskFromFile(lineToRemove);
+    }
+
+    /**
+     *
+     * @param taskToBeChecked
+     * @return
+     * @throws InvalidCommand
+     */
+    private String checkTaskType(Task taskToBeChecked) throws InvalidCommand {
+        String taskType = "";
+        if (taskToBeChecked instanceof Deadline) {
+            taskType = "Deadline";
+        } else if (taskToBeChecked instanceof Event) {
+            taskType = "Event";
+        } else if (taskToBeChecked instanceof ToDo) {
+            taskType = "ToDo";
+        } else {
+            throw new InvalidCommand("Your Task is invalid, please clear all memory.");
+        }
+        return taskType;
+    }
+
+    /**
+     *
+     * @param typeOfInputTask
+     * @param taskToRetrieveName
+     * @return
+     * @throws InvalidCommand
+     */
+    private String getStorageName(String typeOfInputTask, Task taskToRetrieveName) throws InvalidCommand{
+        String taskStorageName = "";
+        switch (typeOfInputTask) {
+            case "Deadline":
+                taskStorageName = ((Deadline) taskToRetrieveName).getDataStorageName();
+                break;
+            case "Event":
+                taskStorageName = ((Event) taskToRetrieveName).getDataStorageName();
+                break;
+            case "ToDo":
+                taskStorageName = ((ToDo) taskToRetrieveName).getDataStorageName();
+                break;
+            default:
+                throw new InvalidCommand("Your Storage File is corrupted. Please delete it.");
+        }
+        return taskStorageName;
+    }
+
+    private void deleteTaskFromFile(String taskNameToBeRemoved) throws InvalidCommand {
         try {
-            File removed = new File (DATA_FILE_DIRECTORY + "dataList1.txt");
+            File removed = new File(DATA_FILE_DIRECTORY + "dataList1.txt");
             assert this.storageFile.exists() : "Storage file is lost while application is running!";
             BufferedReader reader = new BufferedReader(new FileReader(this.storageFile));
             BufferedWriter writer = new BufferedWriter(new FileWriter(removed));
             String currentLine = reader.readLine();
-            String lineToRemove = "";
-
-            if (removedTask instanceof Deadline) {
-                lineToRemove = ((Deadline) removedTask).getDataStorageName();
-            } else if (removedTask instanceof Event) {
-                lineToRemove = ((Event) removedTask).getDataStorageName();
-            } else {
-                lineToRemove = ((ToDo) removedTask).getDataStorageName();
-            }
 
             while (currentLine != null) {
-                if (currentLine.equals(lineToRemove)) {
+                if (currentLine.equals(taskNameToBeRemoved)) {
                     currentLine = reader.readLine();
                     continue;
                 }
@@ -251,17 +169,165 @@ public class Storage {
             writer.close();
             reader.close();
 
-            if (this.storageFile.delete()) {
-                // Rename the output file to the input file
-                if (!removed.renameTo(this.storageFile)) {
-                    throw new IOException("Could not rename to update data file");
-                }
-            } else {
-                throw new IOException("Could not delete old data file");
-            }
-        } catch (IOException e) {
-            throw new InvalidCommand(e.getMessage());
+            filesDeletion(removed, this.storageFile);
+        } catch (IOException ex) {
+            throw new InvalidCommand(ex.getMessage());
         }
     }
 
+    private void filesDeletion (File newFile, File overWrittenFile) throws IOException{
+        if (overWrittenFile.delete()) {
+            // Rename output file to input file
+            if (!newFile.renameTo(overWrittenFile)) {
+                throw new IOException("Could not rename to update data file");
+            }
+        } else {
+            throw new IOException("Could not delete old data file");
+        }
+    }
+
+    private void editTaskFromFile (String removeTaskString, String editedTaskString) throws InvalidCommand {
+        try {
+            File toBeDeleted = new File(DATA_FILE_DIRECTORY + "dataList1.txt");
+            assert this.storageFile.exists() : "Storage file is lost while application is running!";
+            BufferedReader readerBuffer = new BufferedReader(new FileReader(this.storageFile));
+            BufferedWriter writerBuffer = new BufferedWriter(new FileWriter(toBeDeleted));
+            String readingLine = readerBuffer.readLine();
+            while (readingLine != null) {
+                if (readingLine.equals(removeTaskString)) {
+                    writerBuffer.write(editedTaskString + "\n");
+                    readingLine = readerBuffer.readLine();
+                    continue;
+                }
+                writerBuffer.write(readingLine + "\n");
+                readingLine = readerBuffer.readLine();
+            }
+
+            writerBuffer.close();
+            readerBuffer.close();
+
+            filesDeletion(toBeDeleted, this.storageFile);
+        } catch (IOException ex) {
+            throw new InvalidCommand(ex.getMessage());
+        }
+    }
+
+    private void writeToFile(String stringToBeWritten) throws InvalidCommand {
+        try {
+            FileWriter fw = new FileWriter(this.storageFile, true);
+            fw.write(stringToBeWritten);
+            fw.close();
+        } catch (IOException e) {
+            throw new InvalidCommand("Cannot write to file!");
+        }
+    }
+
+    private String checkDirectoryCreated() {
+        String messageObtained = "";
+        try {
+            FileReader readFile = new FileReader(DATA_FILE_DIRECTORY);
+        } catch (FileNotFoundException e) {
+            File newData = new File(DATA_FILE_DIRECTORY);
+            if (!newData.exists()) {
+                newData.mkdirs();
+                messageObtained += Ui.addDirectory();
+                messageObtained += "\n";
+            }
+        }
+        return messageObtained;
+    }
+
+    private String checkFileCreated() throws InvalidCommand {
+        String fileCreationMessage = "";
+        try {
+            if (this.storageFile.createNewFile()) {
+                fileCreationMessage += Ui.addDataFile();
+                fileCreationMessage += "\n";
+            }
+        } catch (IOException e) {
+            throw new InvalidCommand("Unable to create file");
+        }
+        return fileCreationMessage;
+    }
+
+    private void checkIfFileAvailable() throws InvalidCommand {
+        try {
+            BufferedReader rb = new BufferedReader(new FileReader(this.storageFile));
+        } catch (FileNotFoundException e) {
+            throw new InvalidCommand("File cannot be found");
+        }
+    }
+
+    private void readPastDataFile(TaskList toBeUpdatedTaskList) throws InvalidCommand{
+        String newLine = "";
+        try {
+            assert this.storageFile.exists() : "Storage file went missing, please restart your bot!";
+            BufferedReader rb = new BufferedReader(new FileReader(this.storageFile));
+            newLine = rb.readLine();
+            while (newLine != null) {
+                String[] taskInput = newLine.split("\\|");
+                if (taskInput.length == 1) {
+                    break;
+                }
+                processTasks(taskInput, toBeUpdatedTaskList);
+                newLine = rb.readLine();
+            }
+            rb.close();
+        } catch (IOException e) {
+            throw new InvalidCommand("Your storage file cannot be read");
+        }
+    }
+
+    private String trimTaskName(String[] storageFileString) {
+        return storageFileString[2].trim();
+    }
+
+    private boolean checkTaskStatus(String[] storageFileString) {
+        int statusValue = Integer.parseInt(storageFileString[1].trim());
+        assert statusValue == 1 || statusValue == 0 : "Your storage file is corrupted.";
+        if (statusValue == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    private LocalDate getDate(String[] storageFileString) {
+        assert storageFileString[3].trim().length() != 0 : "Task date is corrupted!";
+        return LocalDate.parse(storageFileString[3].trim());
+    }
+
+    private void processTasks(String[] taskStorageString, TaskList toBeUpdatedTaskList) {
+        String trimmedTaskName = trimTaskName(taskStorageString);
+        boolean isTaskDone = checkTaskStatus(taskStorageString);
+        assert taskStorageString.length == 3 : "Task in storage file is missing information!";
+        assert taskStorageString[2].trim().length() != 0 : "Task name is corrupted!";
+        assert Integer.parseInt(taskStorageString[1].trim()) == 1
+                | Integer.parseInt(taskStorageString[1].trim()) == 0 : "Task status is corrupted!";
+        if (taskStorageString[0].charAt(0) == 'T') {
+            ToDo pastToDo = new ToDo(trimmedTaskName);
+            processTaskStatus(pastToDo, isTaskDone);
+            addTaskToList(pastToDo, toBeUpdatedTaskList);
+        } else if (taskStorageString[0].charAt(0) == 'E') {
+            LocalDate eventDate = getDate(taskStorageString);
+            Event pastEvent = new Event(trimmedTaskName, eventDate);
+            processTaskStatus(pastEvent, isTaskDone);
+            addTaskToList(pastEvent, toBeUpdatedTaskList);
+        } else if (taskStorageString[0].charAt(0) == 'D') {
+            LocalDate deadlineDate = getDate(taskStorageString);
+            Deadline pastDeadline = new Deadline(trimmedTaskName,
+                    deadlineDate);
+            processTaskStatus(pastDeadline, isTaskDone);
+            addTaskToList(pastDeadline, toBeUpdatedTaskList);
+        }
+    }
+
+    private void addTaskToList(Task pastTaskToAdd, TaskList currentTaskList) {
+        currentTaskList.add(pastTaskToAdd);
+    }
+
+    private void processTaskStatus(Task pastTask, boolean taskStatus) {
+        if (taskStatus) {
+            pastTask.markDone();
+        }
+    }
 }

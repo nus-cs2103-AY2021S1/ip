@@ -1,2 +1,5 @@
-T | 0 | read
 T | 0 | write
+D | 0 | sleep | 2020-05-06
+T | 0 | write
+E | 0 | hahha | 2020-09-06
+D | 0 | code | 2020-05-06
