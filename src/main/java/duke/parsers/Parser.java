@@ -12,6 +12,7 @@ public class Parser {
      * @return the appropriate command based on the input given by the user
      */
     public static Command parse(String fullCommand) {
+        assert fullCommand != null : "fullCommand should not be null";
         String firstWord = fullCommand.split(" ")[0];
 
         switch (firstWord) {
