@@ -29,6 +29,7 @@ public class EventCommand extends Command {
 
             Event event;
             try {
+                assert(LocalDateTime.parse(s[1], DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")).isAfter(LocalDateTime.now()));
                 event = new Event(s[0], LocalDateTime.parse(s[1], DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")));
             } catch (DateTimeParseException e) {
                 throw new DukeCommandException("Invalid date!");
