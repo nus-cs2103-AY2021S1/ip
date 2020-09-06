@@ -25,35 +25,11 @@ public class TaskList {
         tasks = new ArrayList<>();
         try {
             Scanner scanner = new Scanner(file);
-
             while (scanner.hasNextLine()) {
                 String[] line = scanner.nextLine().split("\\|");
-                Task newTask = null;
-                LocalDate localDate = null;
-                switch (line[0].strip()) {
-                case "T":
-                    newTask = new ToDo(line[2].strip());
-                    break;
-                case "D":
-                    localDate = Parser.parseDate(line[3].strip());
-                    if (localDate != null) {
-                        newTask = new Deadline(line[2].strip(), localDate);
-                    } else {
-                        newTask = new Deadline(line[2].strip(), line[3].strip());
-                    }
-                    break;
-                case "E":
-                    localDate = Parser.parseDate(line[3].strip());
-                    if (localDate != null) {
-                        newTask = new Event(line[2].strip(), localDate);
-                    } else {
-                        newTask = new Event(line[2].strip(), line[3].strip());
-                    }
-                    break;
-                default:
-                    continue;
-                }
-                if (line[1].strip().equals("1")) {
+                Task newTask = getDataFromLine(line);
+                boolean isTaskDone = line[1].strip().equals("1");
+                if (isTaskDone) {
                     newTask.setDone();
                 }
                 tasks.add(newTask);
@@ -61,6 +37,35 @@ public class TaskList {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+    }
+
+    private Task getDataFromLine(String[] line) {
+        Task newTask;
+        LocalDate localDate;
+        switch (line[0].strip()) {
+        case "T":
+            newTask = new ToDo(line[2].strip());
+            break;
+        case "D":
+            localDate = Parser.parseDate(line[3].strip());
+            if (localDate != null) {
+                newTask = new Deadline(line[2].strip(), localDate);
+            } else {
+                newTask = new Deadline(line[2].strip(), line[3].strip());
+            }
+            break;
+        case "E":
+            localDate = Parser.parseDate(line[3].strip());
+            if (localDate != null) {
+                newTask = new Event(line[2].strip(), localDate);
+            } else {
+                newTask = new Event(line[2].strip(), line[3].strip());
+            }
+            break;
+        default:
+            newTask = null;
+        }
+        return newTask;
     }
 
     /**

@@ -67,16 +67,20 @@ public class Storage {
         File file = new File(directoryPath + "/" + fileName);
         try {
             resetFileContents(directoryPath + "/" + fileName);
-            for (int i = 0; i < tasks.getListSize(); i++) {
-                Task task = tasks.getTaskAtIndex(i);
-                appendToFile(directoryPath + "/" + fileName, task.getSaveFormat() + "\n");
-            }
+            appendTasksToFile(tasks);
         } catch (IOException e) {
             return ui.showError("Something went wrong while trying to save your data... :/");
         } catch (IndexOutOfBoundsException e) {
             return ui.showError("There's no such element!");
         }
         return "";
+    }
+
+    private void appendTasksToFile(TaskList tasks) throws IOException {
+        for (int i = 0; i < tasks.getListSize(); i++) {
+            Task task = tasks.getTaskAtIndex(i);
+            appendToFile(directoryPath + "/" + fileName, task.getSaveFormat() + "\n");
+        }
     }
 
     //Resets the contents of the file at the given file path.
