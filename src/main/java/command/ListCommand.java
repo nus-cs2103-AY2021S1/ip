@@ -4,6 +4,7 @@ import storage.Storage;
 import task.TaskList;
 import ui.Ui;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Stream;
 
 /**
@@ -32,15 +33,10 @@ public class ListCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         StringBuilder sb = new StringBuilder();
-        
-        for (int i = 0; i < tasks.size(); i++) {
-            boolean isLastTask = i != tasks.size() - 1;
-            if (isLastTask) {
-                sb.append(i + 1).append(". ").append(tasks.getTask(i)).append("\n");
-            } else {
-                sb.append(i + 1).append(". ").append(tasks.getTask(i));
-            }
-        }
+
+        AtomicInteger index = new AtomicInteger(1);
+        tasks.getTasks().stream().forEach(t -> sb.append(index.getAndIncrement()).append(". ").append(t).append("\n"));
+
 
         return ui.getMessageTemplate("Here are the tasks in your list:\n" + sb.toString());
     }
