@@ -18,7 +18,7 @@ public class Ui {
      * Displays a greeting message to the user.
      */
     public void displayGreeting() {
-        System.out.println("Hi, I'm ");
+        System.out.println("Hi, I'm");
         System.out.println(LOGO);
         System.out.println("What do you need this time 😫");
     }

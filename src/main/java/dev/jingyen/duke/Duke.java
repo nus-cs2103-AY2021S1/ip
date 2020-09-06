@@ -69,7 +69,7 @@ public class Duke {
                 ui.displayGreetingReminder(tasks.tasksCount());
             }
 
-            System.out.print("> ");
+            System.out.println();
             while (scanner.hasNextLine()) {
                 String input = scanner.nextLine();
                 String output = handleCommand(input);
@@ -78,14 +78,10 @@ public class Duke {
                     storage.saveTasks(tasks.getTasks());
                     break;
                 }
-                System.out.print("> ");
             }
-
-            ui.displayGoodbye();
         } catch (IOException e) {
             ui.displayMessages(e.getMessage());
         }
-
     }
 
     /**
