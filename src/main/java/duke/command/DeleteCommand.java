@@ -42,7 +42,6 @@ public class DeleteCommand extends Command {
                 + " in the list.";
         boolean shouldExit = getIsExit();
         assert !shouldExit : "shouldExit should be false";
-        tasks.removeTask(taskNumber);
         storage.save(tasks);
         return new CommandResponse(responseMessage, shouldExit);
     }
