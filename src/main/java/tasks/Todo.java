@@ -8,6 +8,11 @@ import exceptions.DataException;
  */
 public class Todo extends Task {
 
+    /**
+     * Constructs a new Todo.
+     * @param desc the task description
+     * @throws DataException if the task description is blank
+     */
     public Todo(String desc) throws DataException {
         super(desc);
     }

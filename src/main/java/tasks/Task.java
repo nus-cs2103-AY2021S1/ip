@@ -14,6 +14,11 @@ public abstract class Task {
     // indicates whether the task is done or not
     private boolean isDone;
 
+    /**
+     * Constructs a new Task.
+     * @param description the task description
+     * @throws DataException if the task description is blank
+     */
     public Task(String description) throws DataException {
         if (description.isBlank()) {
             throw new DataException("Task Description", "Cannot be blank");

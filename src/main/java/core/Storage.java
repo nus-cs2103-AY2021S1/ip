@@ -1,14 +1,14 @@
 package core;
 
-import command.CommandHandler;
-import tasks.Task;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import command.CommandHandler;
+import tasks.Task;
 
 public class Storage {
     /**
@@ -22,7 +22,7 @@ public class Storage {
         final FileWriter fw = new FileWriter(saveFile);
         fw.write(IntStream.rangeClosed(1, TaskList.size())
                 .boxed()
-                .map(i ->  {
+                .map(i -> {
                     Task t = TaskList.get(i - 1);
                     return t.getParentCommand()
                             + (t.getDoneStatus() ? "\ndone " + i : "");

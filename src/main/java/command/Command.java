@@ -4,14 +4,14 @@ package command;
  * Enumerates the types of possible commands.
  */
 public enum Command {
-    EXIT_CMD    ("bye", true),
-    LIST_CMD    ("list", true),
-    DONE_CMD    ("done", false),
-    TODO_CMD    ("todo", false),
-    EVENT_CMD   ("event", false),
+    EXIT_CMD("bye", true),
+    LIST_CMD("list", true),
+    DONE_CMD("done", false),
+    TODO_CMD("todo", false),
+    EVENT_CMD("event", false),
     DEADLINE_CMD("deadline", false),
-    DELETE_CMD  ("delete", false),
-    FIND_CMD    ("find", false);
+    DELETE_CMD("delete", false),
+    FIND_CMD("find", false);
 
     private final String cmdString;
     private final boolean hasNoArgs;

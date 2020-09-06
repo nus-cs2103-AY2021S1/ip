@@ -1,9 +1,9 @@
 package core;
 
-import tasks.Task;
-
 import java.util.ArrayList;
 import java.util.stream.Stream;
+
+import tasks.Task;
 
 /**
  * Controls the current list of tasks.

@@ -1,8 +1,8 @@
 package command;
 
-import exceptions.CommandException;
-
 import java.util.stream.Stream;
+
+import exceptions.CommandException;
 
 public class Parser {
 

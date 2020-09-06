@@ -3,7 +3,7 @@ package exceptions;
 /**
  * Exception representing an error in data validation.
  */
-public class DataException extends IPException {
+public class DataException extends IpException {
 
     private final String field;
     private final String reason;

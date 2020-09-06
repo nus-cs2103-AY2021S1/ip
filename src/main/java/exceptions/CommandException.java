@@ -3,7 +3,7 @@ package exceptions;
 /**
  * Exception representing an error parsing the command strings.
  */
-public class CommandException extends IPException {
+public class CommandException extends IpException {
 
     private final String command;
     private final String reason;

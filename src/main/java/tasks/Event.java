@@ -1,10 +1,10 @@
 package tasks;
 
-import exceptions.DataException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import exceptions.DataException;
 
 /**
  * Events have an additional event time (a {@code LocalDate} specified with /at).
@@ -14,6 +14,12 @@ public class Event extends Task {
     // event held at this time
     private final LocalDate at;
 
+    /**
+     * Constructs a new Deadline.
+     * @param desc description of the event
+     * @param at event time - event is held at this time
+     * @throws DataException if the event time or description is blank or invalid
+     */
     public Event(String desc, String at) throws DataException {
         super(desc);
         if (at.isBlank()) {
