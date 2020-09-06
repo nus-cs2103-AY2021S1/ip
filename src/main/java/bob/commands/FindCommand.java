@@ -18,15 +18,16 @@ public class FindCommand extends Command {
      * @throws BobEmptyFindException If user input is empty.
      */
     public FindCommand(String input) throws BobEmptyFindException {
-
         //Removes all whitespaces and checks if input is empty
-        if (input.replaceAll("\\s+", "").length() == 0) {
+        boolean isEmpty = input.trim().length() == 0;
+        boolean isNotEmpty = !isEmpty;
+
+        if (isEmpty) {
             throw new BobEmptyFindException();
         }
 
-        this.input = input.startsWith(" ")
-                ? input.substring(1)
-                : input;
+        assert isNotEmpty;
+        this.input = input.trim();
     }
     @Override
     public boolean isExited() {
@@ -37,7 +38,6 @@ public class FindCommand extends Command {
     @Override
     public String execute(Tasklist tasks, Storage storage) {
         String tasksFound = tasks.findTasks(this.input);
-
         // Ui shows message to user based on number of tasks found
         if (tasksFound.length() == 0) {
             return MsgGenerator.generateNoTaskFoundMessage(this.input);
