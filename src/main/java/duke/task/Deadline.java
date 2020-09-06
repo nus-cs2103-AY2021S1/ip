@@ -33,6 +33,16 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String getNotification() {
+        return this.description + "@" + by.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma"));
+    }
+
+    @Override
+    public boolean isComing(int days) {
+        return by.minusDays(days).isBefore(LocalDateTime.now());
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: "
                 + by.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma")) + ")";

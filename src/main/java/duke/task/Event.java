@@ -33,6 +33,16 @@ public class Event extends Task {
     }
 
     @Override
+    public String getNotification() {
+        return this.description + "@" + at.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma"));
+    }
+
+    @Override
+    public boolean isComing(int days) {
+        return at.minusDays(days).isBefore(LocalDateTime.now());
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("dd MMM yyyy hh:mma")) + ")";
     }

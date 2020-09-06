@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.io.Serializable;
+import java.time.LocalDateTime;
 
 /**
  * A class for different types of class.
@@ -33,11 +34,27 @@ public class Task implements Serializable {
     }
 
     /**
-     * If invoked, the task will be marked as done
+     * Marks this task as done
      * by setting the isDone flag to true.
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    /**
+     * Returns true if deadline of this task is approaching
+     * @return If the deadline is approaching
+     */
+    public boolean isComing(int days) {
+        return false;
+    }
+
+    /**
+     * Returns the standard format for notifications.
+     * @return Notification string
+     */
+    public String getNotification() {
+        return "";
     }
 
     public String getDescription() {
@@ -51,6 +68,8 @@ public class Task implements Serializable {
     public boolean isDone() {
         return isDone;
     }
+
+
 
     @Override
     public String toString() {

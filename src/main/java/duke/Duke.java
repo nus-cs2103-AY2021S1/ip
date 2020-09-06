@@ -1,8 +1,13 @@
 package duke;
 
+import java.awt.AWTException;
+import java.awt.SystemTray;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.exception.DukeStorageException;
+
+
 
 /**
  * A class for duke.
@@ -24,7 +29,13 @@ public class Duke {
         storage = new Storage("./data/");
         try {
             tasks = new TaskList(storage.load());
-        } catch (DukeStorageException e) {
+
+            if (SystemTray.isSupported()) {
+                Notification.notifyTime(tasks);
+            } else {
+                System.err.println("System tray not supported!");
+            }
+        } catch (DukeStorageException | AWTException e) {
             ui.showLoadingError();
             tasks = new TaskList();
         }
