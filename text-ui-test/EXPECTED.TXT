@@ -1,6 +1,3 @@
-./data directory created
-duke.txt created in ./data
-__________________________
 ITS ME: 
 8888888 888b    888 88888888888 8888888b.  888     888 888888b.    .d88888b. 88888888888 
   888   8888b   888     888     888   Y88b 888     888 888  "88b  d88P" "Y88b    888     
@@ -11,6 +8,8 @@ ITS ME:
   888   888   Y8888     888     888  T88b  Y88b. .d88P 888   d88P Y88b. .d88P    888     
 8888888 888    Y888     888     888   T88b  "Y88888P"  8888888P"   "Y88888P"     888
 I want to know EVERYTHING ABOUT YOU
+__________________________
+Task list cleared
 __________________________
 __________________________
 Got it. I've added this task:
@@ -50,13 +49,13 @@ __________________________
 
 __________________________
 __________________________
-Something is amiss `(OCO)/ !!: Invalid Command Exception: sayonara is not a valid command.
+Something is amiss `(OCO)/ !!: Invalid Command Exception: sayonara is not a valid single word command.
 __________________________
 __________________________
 Something is amiss `(OCO)/ !!: Task number does not exist
 __________________________
 __________________________
-Something is amiss `(OCO)/ !!: Invalid arguments specified for event
+Something is amiss `(OCO)/ !!: Invalid Command Exception: event is not a valid single word command.
 __________________________
 __________________________
 HAI. I've deleted this task:
@@ -71,4 +70,6 @@ __________________________
 __________________________
 Something is amiss `(OCO)/ !!: Cannot delete task that does not exist
 __________________________
+__________________________
 SAYONARA!
+__________________________

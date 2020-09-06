@@ -10,14 +10,14 @@ import duke.task.Task;
  * Represents the command object where user executes deletion of task from TaskList.
  */
 public class DeleteCommand extends Command {
-    private String args;
+    private int taskIndex;
 
     /**
      * Initializes the DeleteCommand Object.
-     * @param args task to delete.
+     * @param taskIndex task to delete.
      */
-    public DeleteCommand(String args) {
-        this.args = args;
+    public DeleteCommand(int taskIndex) {
+        this.taskIndex = taskIndex;
     }
 
     /**
@@ -33,9 +33,7 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList taskItems, Ui ui, Storage storage) throws DukeException {
         try {
-            // parse for argument - item number
-            int itemNumber = Integer.parseInt(args.split(" ")[1]);
-            Task task = taskItems.removeTask(itemNumber);
+            Task task = taskItems.removeTask(taskIndex);
             storage.saveTaskToMemory(taskItems.getAll());
             return ui.deleteTaskReply(task, taskItems);
         } catch (IndexOutOfBoundsException e) {

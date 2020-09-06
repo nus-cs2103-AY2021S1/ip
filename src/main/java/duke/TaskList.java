@@ -55,13 +55,13 @@ public class TaskList {
     }
 
     /**
-     * Get task from task list.
+     * Get task from task list offset by one
      *
      * @param taskIndex index of task to be retrieved.
      * @return Task Object retrieved based on index.
      */
     public Task getTask(int taskIndex) {
-        return taskList.get(taskIndex);
+        return taskList.get(taskIndex - 1);
     }
 
     /**
