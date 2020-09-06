@@ -22,7 +22,8 @@ public class Deadline extends Task {
      * @param priority Priority of the deadline.
      * @throws DukeException If an exception related to Duke occurred.
      */
-    public Deadline(String content, String datetimeDueString, boolean isComplete, String priority) throws DukeException {
+    public Deadline(String content, String datetimeDueString,
+                    boolean isComplete, String priority) throws DukeException {
         super(content, isComplete, priority);
         if (datetimeDueString.replace(" ", "").equals("")) {
             throw new DukeException("Event datetime cannot be empty.");
