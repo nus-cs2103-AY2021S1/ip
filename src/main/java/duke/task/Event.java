@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.exception.WrongFormatException;
-
 /**
  * Encapsulates the event task type. An event task has a description of the task and the venue of where the task will
  * be done.
@@ -16,9 +14,8 @@ public class Event extends Task {
      *
      * @param description The description of the task.
      * @param at The venue where the task is to be done.
-     * @throws WrongFormatException If no description is provided.
      */
-    public Event(String description, String at) throws WrongFormatException {
+    public Event(String description, String at) {
         super(description, "[E]", "event", false);
         this.at = at;
     }
@@ -29,9 +26,8 @@ public class Event extends Task {
      * @param description The description of the task.
      * @param at The venue where the task is to be done.
      * @param isDone Marks whether the task has been completed or not.
-     * @throws WrongFormatException If no description is provided.
      */
-    public Event(String description, String at, boolean isDone) throws WrongFormatException {
+    public Event(String description, String at, boolean isDone) {
         super(description, "[E]", "event", isDone);
         this.at = at;
     }

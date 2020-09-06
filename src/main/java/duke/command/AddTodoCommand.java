@@ -6,8 +6,6 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.UiForGui;
-import duke.exception.TodoWrongFormatException;
-import duke.exception.WrongFormatException;
 import duke.task.Task;
 import duke.task.ToDo;
 
@@ -17,16 +15,15 @@ import duke.task.ToDo;
  */
 public class AddTodoCommand extends AddCommand {
 
-    /** The entire command entered by the user */
-    private String fullCommand;
+    private String taskDescription;
 
     /**
      * Creates and initializes an AddTodoCommand object.
      *
-     * @param fullCommand The entire command entered by the user.
+     * @param taskDescription The task description entered by the user.
      */
-    public AddTodoCommand(String fullCommand) {
-        this.fullCommand = fullCommand;
+    public AddTodoCommand(String taskDescription) {
+        this.taskDescription = taskDescription;
     }
 
     /**
@@ -35,37 +32,28 @@ public class AddTodoCommand extends AddCommand {
      * @param tasks The list of tasks in the program.
      * @param ui The Ui object being used in the program.
      * @param storage The Storage object being used in the program.
-     * @throws TodoWrongFormatException If the add to-do command is in a wrong format.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws TodoWrongFormatException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        Task newTask = new ToDo(taskDescription);
+        tasks.addTask(newTask);
+        ui.showReplyForAddTask(newTask, tasks);
         try {
-            Task newTask = new ToDo(fullCommand.substring(5).trim());
-            tasks.addTask(newTask);
-            ui.showReplyForAddTask(newTask, tasks);
-            try {
-                storage.writeToFile(tasks);
-            } catch (IOException e) {
-                System.err.println(e.getMessage());
-            }
-        } catch (IndexOutOfBoundsException | WrongFormatException e) { // add to-do command is in a wrong format
-            throw new TodoWrongFormatException();
+            storage.writeToFile(tasks);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
         }
     }
 
     @Override
-    public String execute(TaskList tasks, UiForGui uiForGui, Storage storage) throws TodoWrongFormatException {
+    public String execute(TaskList tasks, UiForGui uiForGui, Storage storage) {
+        Task newTask = new ToDo(taskDescription);
+        tasks.addTask(newTask);
         try {
-            Task newTask = new ToDo(fullCommand.substring(5).trim());
-            tasks.addTask(newTask);
-            try {
-                storage.writeToFile(tasks);
-            } catch (IOException e) {
-                System.err.println(e.getMessage());
-            }
-            return uiForGui.showReplyForAddTask(newTask, tasks);
-        } catch (IndexOutOfBoundsException | WrongFormatException e) { // add to-do command is in a wrong format
-            throw new TodoWrongFormatException();
+            storage.writeToFile(tasks);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
         }
+        return uiForGui.showReplyForAddTask(newTask, tasks);
     }
 }

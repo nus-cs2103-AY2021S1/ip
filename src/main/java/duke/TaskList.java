@@ -1,7 +1,6 @@
 package duke;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -46,7 +45,7 @@ public class TaskList {
      * @param listOfTasks The list of tasks in String format, to populate the task list with.
      * @throws WrongFormatException If an error is present in the format of a task in the save file.
      */
-    private void initiateTaskList(List<String> listOfTasks) throws WrongFormatException {
+    private void initiateTaskList(List<String> listOfTasks) {
         for (String taskString : listOfTasks) {
             String[] taskStringParts = taskString.split("\\|");
             String taskTypeSymbol = taskStringParts[0];
@@ -62,8 +61,8 @@ public class TaskList {
                 break;
             case DEADLINE_SYMBOL:
                 String deadline = taskStringParts[3];
-                tasks.add(new Deadline(taskDescription, LocalDateTime.parse(deadline).format(DateTimeFormatter
-                        .ofPattern(DATE_TIME_FORMAT_PATTERN)), doneSymbol.equals(DONE)));
+                tasks.add(new Deadline(taskDescription, LocalDateTime.parse(deadline).toLocalDate(),
+                                LocalDateTime.parse(deadline), doneSymbol.equals(DONE)));
                 break;
             default:
                 System.err.println("Error in last save. Now loading a new, empty task list.");

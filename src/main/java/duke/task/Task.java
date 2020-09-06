@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.exception.WrongFormatException;
-
 /**
  * Encapsulates a task for the Duke program. A task is inclusive of a textual description and a boolean flag to mark
  * whether it has been completed or not. There are several types of tasks, namely: to-do, event and deadline.
@@ -27,13 +25,8 @@ public class Task {
      * @param taskTypeSymbol The symbol that represents the type of task.
      * @param taskTypeName The name of the task type.
      * @param isDone Marks whether the task has been completed or not.
-     * @throws WrongFormatException If no description is provided.
      */
-    public Task(String description, String taskTypeSymbol, String taskTypeName, boolean isDone)
-            throws WrongFormatException {
-        if (description.isEmpty()) {
-            throw new WrongFormatException(taskTypeName);
-        }
+    public Task(String description, String taskTypeSymbol, String taskTypeName, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
         this.taskTypeSymbol = taskTypeSymbol;
