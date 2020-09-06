@@ -13,9 +13,9 @@ import duke.util.DateTime;
  */
 public class DateTimeParser {
 
-    private static final String[] ACCEPTED_DATE_FORMATS = {"yyyy/M/d", "d/M/yyyy", "yyyy-M-d", "d-M-yyyy",
-        "yyyy MMM d", "d MMM yyyy"};
-    private static final String[] ACCEPTED_TIME_FORMATS = {"HH[:]mm", "h:mma", "h.mma"};
+    private static final String[] ACCEPTED_DATE_FORMATS = {"yyyy/M/d", "d/M/yyyy", "yyyy/MMM/d", "d/MMM/yyyy",
+        "yyyy-M-d", "d-M-yyyy", "yyyy-MMM-d", "d-MMM-yyyy"};
+    private static final String[] ACCEPTED_TIME_FORMATS = {"HH[:]mm", "h:mma", "h.mma", "ha"};
 
     /**
      * Parses datetime input from the user.

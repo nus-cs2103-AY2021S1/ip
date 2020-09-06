@@ -40,7 +40,7 @@ public class DateTime {
 
     @Override
     public String toString() {
-        String output = date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG));
+        String output = date.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
 
         if (time != null) {
             output += ", " + time.format(DateTimeFormatter.ofLocalizedTime(FormatStyle.SHORT));
