@@ -22,6 +22,9 @@ Got it. I've added this task:
 Now you have 2 tasks in the list
 __________________________
 __________________________
+Something is amiss `(OCO)/ !!: Duplicate Task Added
+__________________________
+__________________________
 Got it. I've added this task:
     [E][✘] project meeting (at: Nov 3 2012)
 Now you have 3 tasks in the list

@@ -24,7 +24,7 @@ public class Task {
         this.description = description;
         this.isDone = isDone;
     }
-
+    
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
@@ -40,7 +40,11 @@ public class Task {
     public String getDescription() {
         return this.description;
     }
-
+    
+    public boolean checkIfDuplicate(Task otherTask) {
+        return description.equals(otherTask.getDescription());
+    }
+        
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
