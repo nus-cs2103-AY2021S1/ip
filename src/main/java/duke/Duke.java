@@ -43,6 +43,7 @@ public class Duke extends Application {
     /**
      * Constructs a Duke object that represents
      * a particular Duke session
+     *
      * @param directory the directory where the database is located
      * @param path path to the database file
      */
@@ -59,6 +60,7 @@ public class Duke extends Application {
      */
     private void handleUserInput() {
         String input = userInput.getText().trim();
+        assert !input.isEmpty() : "Input is empty"; // user input should not be empty
         String output;
 
         // process user input
