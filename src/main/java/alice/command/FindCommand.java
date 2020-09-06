@@ -22,18 +22,33 @@ public class FindCommand implements Command {
      *
      * @param keywords the list of keywords to search against.
      */
-    public FindCommand(String... keywords) {
+    private FindCommand(String... keywords) {
         this.keywords = keywords;
     }
 
     /**
-     * Checks if the command word triggers the <code>FindCommand</code>.
+     * Checks if the command word triggers the {@code FindCommand}.
      *
      * @param name the command word to check.
-     * @return true if the command word belongs to <code>FindCommand</code>; false otherwise.
+     * @return true if the command word belongs to {@code FindCommand}; false otherwise.
      */
     public static boolean hasCommandWord(String name) {
         return NAMES.contains(name);
+    }
+
+    /**
+     * Creates a new Find command to search for tasks based on keywords given by the user.
+     *
+     * @param argument the string of keywords provided by user
+     * @return the {@code FindCommand} with the user's keywords
+     * @throws InvalidCommandException if the keywords provided is an empty string
+     */
+    public static FindCommand createCommand(String argument) throws InvalidCommandException {
+        if (!argument.isBlank()) {
+            return new FindCommand(argument.strip().split(" "));
+        } else {
+            throw new InvalidCommandException("The keyword for find cannot be left empty.");
+        }
     }
 
     @Override

@@ -56,10 +56,10 @@ public class Deadline extends Task {
     }
 
     /**
-     * Decode an encoded string representation of the <code>Deadline</code>.
+     * Decode an encoded string representation of the {@code Deadline}.
      *
      * @param saved the string representation of the encoded task with deadline.
-     * @return the <code>Deadline</code> described in the string representation.
+     * @return the {@code Deadline} described in the string representation.
      * @throws AliceException if the encoded string is corrupted.
      */
     public static Deadline decode(String saved) throws AliceException {

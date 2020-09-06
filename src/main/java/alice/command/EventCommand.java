@@ -11,6 +11,7 @@ import alice.storage.StorageFile;
 import alice.task.Event;
 import alice.task.Task;
 import alice.task.TaskList;
+import alice.util.Parser;
 
 /**
  * Represents the command to add a new event in ALICE.
@@ -25,24 +26,52 @@ public class EventCommand implements Command {
     private final LocalDateTime on;
 
     /**
-     * Creates a new command to create a new <code>Event</code> with the details provided.
+     * Creates a new command to create a new {@code Event} with the details provided.
      *
      * @param description the description of the event.
      * @param on          the datetime of when the event is happening.
      */
-    public EventCommand(String description, LocalDateTime on) {
+    private EventCommand(String description, LocalDateTime on) {
         this.description = description;
         this.on = on;
     }
 
     /**
-     * Checks if the command word triggers the <Code>EventCommand</Code>.
+     * Checks if the command word triggers the {@code EventCommand}.
      *
      * @param name the command word to check.
-     * @return true if the command word belongs to <Code>EventCommand</Code>; false otherwise.
+     * @return true if the command word belongs to {@code EventCommand}; false otherwise.
      */
     public static boolean hasCommandWord(String name) {
         return NAMES.contains(name);
+    }
+
+    /**
+     * Creates a new command to create a new {@code Event} with the details given by the user.
+     *
+     * @param argument the event details input given by user.
+     * @return the {@code EventCommand} with the indicated details.
+     * @throws InvalidCommandException if the user gives an invalid description and/or datetime.
+     */
+    public static EventCommand createCommand(String argument) throws InvalidCommandException {
+        String[] arguments = argument.split(" /on ", 2);
+        if (arguments.length == 2 && !arguments[1].isBlank()) {
+            String description = arguments[0];
+            String dateTime = arguments[1];
+
+            LocalDateTime eventDateTime = Parser.parseDateTime(dateTime);
+            return new EventCommand(description, eventDateTime);
+        } else if (argument.isBlank()) {
+            // Empty event description
+            throw new InvalidCommandException("The event description cannot be left empty.");
+        } else if (argument.endsWith("/on")) {
+            // Empty start-end time
+            throw new InvalidCommandException("You cannot create an event without a date/time.");
+        } else {
+            // No /on marker
+            throw new InvalidCommandException("I can't find the date/time of the event.\n"
+                    + "Did you forget to add '/on'?");
+        }
     }
 
     @Override

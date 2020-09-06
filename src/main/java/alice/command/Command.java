@@ -14,7 +14,7 @@ public interface Command {
      *
      * @param tasks       the list of tasks stored in ALICE.
      * @param storageFile the file used to store ALICE data.
-     * @return the corresponding <code>CommandResult</code> with instructions for cleaning up.
+     * @return the corresponding {@code CommandResult} with instructions for cleaning up.
      */
     CommandResult process(TaskList tasks, StorageFile storageFile);
 }
