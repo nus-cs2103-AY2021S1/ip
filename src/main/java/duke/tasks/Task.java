@@ -35,10 +35,18 @@ public class Task {
         }
     }
 
+    /**
+     * Returns whether this Task has been marked as done.
+     * @return true if the Task has been marked as done.
+     */
     public boolean getDone() {
         return isDone;
     }
 
+    /**
+     * Returns this Task's name.
+     * @return this Task's name.
+     */
     public String getTaskName() {
         return taskName;
     }

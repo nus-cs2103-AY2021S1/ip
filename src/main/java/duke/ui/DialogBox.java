@@ -49,10 +49,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns a DialogBox containing the given text and image, aligned to the right as a User.
+     * @param text the text to be in the DialogBox.
+     * @param img the image to be in the DialogBox.
+     * @return a DialogBox containing the text and image aligned right
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns a DialogBox containing the given text and image, aligned to the left as the Duke.
+     * @param text the text to be in the DialogBox.
+     * @param img the image to be in the DialogBox.
+     * @return a DialogBox containing the text and image aligned left
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         DialogBox db = new DialogBox(text, img);
         db.flip();

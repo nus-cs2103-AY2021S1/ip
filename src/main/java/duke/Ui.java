@@ -18,7 +18,8 @@ public class Ui {
     public final static String MESSAGE_DONE = "Right. This task is now marked as done:";
     public final static String MESSAGE_DELETE = "Begone! This task is now removed: ";
     public final static String MESSAGE_ADD = "Fine. I added the following to the list: ";
-    public final static String MESSAGE_WELCOME = "Famed, of course, for my unique red skin and unparalleled skills as a general of " +
+    public final static String MESSAGE_WELCOME =
+            "Famed, of course, for my unique red skin and unparalleled skills as a general of " +
             "the House of War, I, the Red Prince, was raised within the vast palaces of the fabled Forbidden " +
             "City. I was destined to become the next emperor, but my ambitions suffered a bit of a setback " +
             "when I fell from grace for cavorting with demons. Now I'm exiled and hunted by assassins, but I " +
@@ -28,6 +29,7 @@ public class Ui {
     /**
      * Shows an Exception.
      * @param e the Exception to be shown.
+     * @return a String containing the Exception to be shown.
      */
     public static String showException(Exception e) {
         System.out.println(e);
@@ -36,6 +38,7 @@ public class Ui {
 
     /**
      * Shows the exit message.
+     * @return a String of the exit message.
      */
     public static String showExit() {
         System.out.println(MESSAGE_EXIT);
@@ -45,6 +48,7 @@ public class Ui {
     /**
      * Shows a {@link TaskList} to the user.
      * @param tasks the TaskList to be shown.
+     * @return a String containing the tasks to be shown.
      */
     public static String showList(TaskList tasks) {
         String msg = MESSAGE_LIST + "\n" + tasks;
@@ -55,6 +59,7 @@ public class Ui {
     /**
      * Shows a successful "done" command.
      * @param doneTask the {@link Task} marked as done.
+     * @return a String containing the Task marked done.
      */
     public static String showDone(Task doneTask) {
         String msg = MESSAGE_DONE + doneTask;
@@ -65,6 +70,7 @@ public class Ui {
     /**
      * Shows a successful "delete" command.
      * @param deletedTask the {@link Task} deleted.
+     * @return a String containing the deleted Task.
      */
     public static String showDelete(Task deletedTask) {
         String msg = MESSAGE_DELETE + deletedTask;
@@ -75,6 +81,7 @@ public class Ui {
     /**
      * Shows a successful command that adds a Task. eg. "todo", "deadline", "event"
      * @param addedTask the {@link Task} created.
+     * @return a String containing the added Task.
      */
     public static String showAddTask(Task addedTask) {
         String msg = MESSAGE_ADD + addedTask;
@@ -84,6 +91,7 @@ public class Ui {
 
     /**
      * Shows the welcome message.
+     * @return a String containing the welcome message.
      */
     public static String showWelcome() {
         System.out.println(MESSAGE_WELCOME);
@@ -93,6 +101,7 @@ public class Ui {
     /**
      * Shows a {@link TaskList} of found tasks.
      * @param foundTasks a TaskList of tasks found.
+     * @return a String containing the found tasks.
      */
     public static String showFound(TaskList foundTasks) {
         String msg = MESSAGE_FOUND + "\n" + foundTasks;

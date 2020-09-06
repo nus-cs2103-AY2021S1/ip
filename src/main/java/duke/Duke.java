@@ -3,7 +3,7 @@ package duke;
 import duke.tasks.Task;
 
 public class Duke {
-    static final String SAVE_FILE = "save.txt";
+    private static final String SAVE_FILE = "save.txt";
 
     private Storage storage;
     private TaskList tasks;

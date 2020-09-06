@@ -52,18 +52,34 @@ public class ParsedCommand {
         return this;
     }
 
+    /**
+     * Returns this ParsedCommand's type.
+     * @return this ParsedCommand's type.
+     */
     public String getType() {
         return commandType;
     }
 
+    /**
+     * Returns this ParsedCommand's index.
+     * @return this ParsedCommand's index.
+     */
     public int getIndex() {
         return index;
     }
 
+    /**
+     * Returns this ParsedCommand's name.
+     * @return this ParsedCommand's name.
+     */
     public String getName() {
         return name;
     }
 
+    /**
+     * Returns this ParsedCommand's date.
+     * @return this ParsedCommand's date.
+     */
     public String getDate() {
         return date;
     }

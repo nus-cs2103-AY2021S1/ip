@@ -9,7 +9,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class StorageTest {
     @Test
-    public void testSaveAndLoad() throws DukeException{
+    public void testSaveAndLoad() throws DukeException {
         Storage s = new Storage("saveTest.txt");
         TaskList tasks = new TaskList();
         tasks.addTask(new Todo("blah"));
