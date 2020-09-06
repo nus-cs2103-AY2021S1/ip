@@ -9,6 +9,7 @@ public class Parser {
      */
     public Task handleInput(String input) {
         String[] commandComponents = input.split(" ", 2);
+        assert commandComponents.length > 0 : "The string input cannot be split by a whitespace.";
         String taskType = commandComponents[0];
         Task taskToReturn;
         if (taskType.equals("event")) {
