@@ -1,12 +1,16 @@
 package duke.task;
 
+import java.time.LocalDate;
+
+import duke.DukeException;
+
 /**
  * Represents a task to be completed.
  */
 public abstract class Task {
     /** Description of the task. */
     protected String description;
-    /** Marks if the task is done or not. */
+    /** Indicates if the task is done or not. */
     protected boolean isDone;
     /** Represents the type of the task. */
     protected TaskType taskType;
@@ -37,9 +41,16 @@ public abstract class Task {
      *
      * @return True, if this task is done, otherwise false.
      */
-    public boolean getIsDone() {
+    public boolean isDone() {
         return this.isDone;
     }
+
+    /**
+     * If this task has a date associated to it, returns true, otherwise false.
+     *
+     * @return True, if this task has a date associated to it, otherwise false.
+     */
+    public abstract boolean hasDate();
 
     /**
      * Gets the description of this task.
@@ -56,8 +67,13 @@ public abstract class Task {
      * @return String representation of the task type in short form.
      */
     public String getShortForm() {
-        return taskType.getShortForm();
+        return this.taskType.getShortForm();
     }
+
+    /**
+     * Returns the date, if any, of the task.
+     */
+    public abstract LocalDate getDate() throws DukeException;
 
     /**
      * Marks this task as done.
@@ -73,6 +89,6 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s]%s %s", this.taskType.getShortForm(), this.getStatusIcon(), this.description);
+        return String.format("[%s]%s %s", taskType.getShortForm(), getStatusIcon(), description);
     }
 }

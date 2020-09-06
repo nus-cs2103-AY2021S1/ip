@@ -22,11 +22,22 @@ public class Event extends Task {
     }
 
     /**
+     * Returns true since events have dates associated to them.
+     *
+     * @return True, since events have dates associated to them.
+     */
+    @Override
+    public boolean hasDate() {
+        return true;
+    }
+
+    /**
      * Gets the date at which this task occurs.
      *
      * @return The date at which this task occurs.
      */
-    public LocalDate getAt() {
+    @Override
+    public LocalDate getDate() {
         return this.at;
     }
 
@@ -37,6 +48,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return String.format("%s (at: %s)",
+                super.toString(),
+                at.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
     }
 }

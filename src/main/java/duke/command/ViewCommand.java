@@ -1,9 +1,9 @@
 package duke.command;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import duke.DukeException;
-import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -13,14 +13,14 @@ import duke.Ui;
  */
 public class ViewCommand extends Command {
     /** The date on which you want to view the tasks for. */
-    private String date;
+    private final LocalDate date;
 
     /**
      * Creates a new view command with the specified date.
      *
      * @param date The date on which you want to view the tasks for.
      */
-    public ViewCommand(String date) {
+    public ViewCommand(LocalDate date) {
         this.date = date;
     }
 
@@ -35,9 +35,8 @@ public class ViewCommand extends Command {
     @Override
     public CommandResponse execute(TaskList tasks, Storage storage) throws DukeException {
         try {
-            assert !this.isExit() : "View command should not be an exit command.";
             assert tasks != null && storage != null : "tasks and storage cannot be null.";
-            return new CommandResponse(Ui.respondViewTasks(tasks, Parser.parseDate(date)), this.isExit());
+            return new CommandResponse(Ui.respondViewTasks(tasks, date));
         } catch (DateTimeParseException e) {
             throw new DukeException("OOPS!!! The date is not valid.");
         }
