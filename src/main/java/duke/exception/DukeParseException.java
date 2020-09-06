@@ -12,8 +12,8 @@ public class DukeParseException extends DukeException {
         this.extraMessage = extraMessage;
     }
     @Override
-    public String toString() {
-        String message = super.toString();
+    public String getMessage() {
+        String message = super.getMessage();
         if (extraMessage != null) {
             message += "\n\n" + extraMessage;
         }

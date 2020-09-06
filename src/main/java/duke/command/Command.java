@@ -5,7 +5,6 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 
 import duke.exception.DukeException;
-import duke.exception.DukeParseException;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
@@ -50,7 +49,7 @@ public enum Command {
         }
     }
 
-    public void dispatch(TaskList taskList, Ui ui, CommandLine args) throws DukeException, DukeParseException {
+    public void dispatch(TaskList taskList, Ui ui, CommandLine args) throws DukeException {
         this.exec.run(taskList, ui, args);
     }
 

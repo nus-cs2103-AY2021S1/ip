@@ -76,10 +76,10 @@ public class Parser {
             command.dispatch(this.taskList, this.ui, cmd);
         } catch (ParseException e) {
             DukeParseException toThrow = new DukeParseException(e.getMessage());
-            toThrow.setExtraMessage("TODO put addhelp here");
+            toThrow.setExtraMessage(getHelp(commandName, options));
             throw toThrow;
         } catch (DukeParseException toThrow) {
-            toThrow.setExtraMessage("TODO put addhelp here");
+            toThrow.setExtraMessage(getHelp(commandName, options));
             throw toThrow;
         }
     }
