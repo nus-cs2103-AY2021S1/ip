@@ -30,6 +30,9 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList taskList,
                         Storage storage, Ui ui) throws DukeException, IOException {
+        assert taskList != null : "Task list cannot be null";
+        assert storage != null : "Storage cannot be null";
+        assert ui != null : "Ui cannot be null";
         int length = userInput.length();
         int position = Integer.parseInt(userInput.substring(5, length));
         storage.writeToFile(taskList.getTasks());

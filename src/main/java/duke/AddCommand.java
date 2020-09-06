@@ -40,6 +40,9 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList taskList, Storage storage, Ui ui)
             throws DukeException, IOException {
+        assert taskList != null : "Task list cannot be null";
+        assert storage != null : "Storage cannot be null";
+        assert ui != null : "Ui cannot be null";
         switch (command) {
         case TODO:
             return addToDo(taskList, storage, ui, this.userInput);
@@ -72,6 +75,7 @@ public class AddCommand extends Command {
      */
     public String addToDo(TaskList tasks, Storage storage, Ui ui,
                         String userInput) throws DukeException, IOException {
+        assert userInput != null : "User input cannot be null";
         if (!userInput.substring(4).isBlank()) { //if got space behind, it will add also
             ToDo todo = new ToDo(userInput.substring(5));
             tasks.addTask(todo); //adds into tasks list
@@ -93,6 +97,7 @@ public class AddCommand extends Command {
      */
     public String addDeadline(TaskList tasks, Storage storage, Ui ui, String userInput)
             throws DukeException {
+        assert userInput != null : "User input cannot be null";
         String[] input = userInput.split(" ");
         if (!userInput.substring(8).isBlank()) {
             try {
@@ -128,6 +133,7 @@ public class AddCommand extends Command {
      */
     public String addEvent(TaskList tasks, Storage storage, Ui ui, String userInput)
             throws DukeException {
+        assert userInput != null : "User input cannot be null";
         String[] input = userInput.split(" ");
         if (!userInput.substring(5).isBlank()) {
             try {
