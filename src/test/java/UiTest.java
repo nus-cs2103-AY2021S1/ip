@@ -3,11 +3,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import java.util.ArrayList;
 import java.util.List;
 
-import main.java.com.jacob.duke.task.Deadline;
 import org.junit.jupiter.api.Test;
 
 import main.java.com.jacob.duke.DukeException;
 import main.java.com.jacob.duke.Ui;
+import main.java.com.jacob.duke.task.Deadline;
 import main.java.com.jacob.duke.task.Event;
 import main.java.com.jacob.duke.task.Task;
 import main.java.com.jacob.duke.task.Todo;
@@ -67,9 +67,9 @@ public class UiTest {
         String result;
         try {
             String s = "Here are the tasks in your filtered list:  1.   [D][X] Dummy Deadline Oct 15 2019 6PM";
-            s.replaceAll("\n", "").replaceAll("\r", "");
+            s = s.replaceAll("\n", "").replaceAll("\r", "");
             result = new Ui().showFilteredDateTimeList("list-due 2019-10-15 1800", taskList);
-            String cleanOutput = result.toString().replaceAll("\n", "")
+            String cleanOutput = result.replaceAll("\n", "")
                     .replaceAll("\r", "");
             assertEquals(s, cleanOutput.trim());
         } catch (DukeException d) {
@@ -87,8 +87,8 @@ public class UiTest {
         try {
             String result = new Ui().showFilteredDateTimeList("list-due 2019-10-15 1800", taskList);
             String s = "Here are the tasks in your filtered list:  1.   [E][X] Dummy Event Oct 15 2019 6PM";
-            s.replaceAll("\n", "").replaceAll("\r", "");
-            final String cleanOutput = result.toString().replaceAll("\n", "")
+            s = s.replaceAll("\n", "").replaceAll("\r", "");
+            final String cleanOutput = result.replaceAll("\n", "")
                     .replaceAll("\r", "");
             assertEquals(s, cleanOutput.trim());
         } catch (DukeException d) {
