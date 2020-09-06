@@ -9,18 +9,25 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.task.TaskType;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
 /**
  * Encapsulates the parsing of user inputs.
  */
 public class Parser {
-    private static final String COMMAND_EXIT = "bye";
-    private static final String COMMAND_LIST = "list";
-    private static final String COMMAND_FIND = "find";
-    private static final String COMMAND_COMPLETE = "done";
-    private static final String COMMAND_ADD_TODO = "todo";
-    private static final String COMMAND_ADD_EVENT = "event";
-    private static final String COMMAND_ADD_DEADLINE = "deadline";
-    private static final String COMMAND_DELETE = "delete";
+    private static final Set<String> COMMAND_EXIT = new HashSet<>(Arrays.asList("bye", "exit", "q"));
+    private static final Set<String> COMMAND_LIST = new HashSet<>(Arrays.asList("list", "ls"));
+    private static final Set<String> COMMAND_FIND = new HashSet<>(Arrays.asList("find", "search"));
+    private static final Set<String> COMMAND_COMPLETE = new HashSet<>(Arrays.asList("done", "complete"));
+    private static final Set<String> COMMAND_ADD_TODO = new HashSet<>(Collections.singletonList("todo"));
+    private static final Set<String> COMMAND_ADD_EVENT = new HashSet<>(Collections.singletonList("event"));
+    private static final Set<String> COMMAND_ADD_DEADLINE = new HashSet<>(Collections.singletonList("deadline"));
+    private static final Set<String> COMMAND_DELETE = new HashSet<>(Arrays.asList("delete", "remove"));
 
     /**
      * Processes the full user input.
@@ -46,7 +53,7 @@ public class Parser {
         String command = commandInput.toString();
         String args = argsInput.toString();
 
-        if (command.equals(COMMAND_ADD_DEADLINE)) {
+        if (command.has(COMMAND_ADD_DEADLINE)) {
             return new AddCommand(args, TaskType.DEADLINE);
         } else if (command.equals(COMMAND_ADD_EVENT)) {
             return new AddCommand(args, TaskType.EVENT);
