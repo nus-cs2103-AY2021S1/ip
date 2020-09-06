@@ -1,5 +1,7 @@
 package duke.ui;
 
+import java.util.ArrayList;
+
 import duke.tasks.Task;
 import duke.tool.TaskList;
 
@@ -8,7 +10,7 @@ import duke.tool.TaskList;
  */
 public class Ui {
     /**
-     * The formatted space.
+     * Returns the formatted space.
      *
      * @return a whitespace.
      */
@@ -18,92 +20,115 @@ public class Ui {
 
 
     /**
-     * Print the greeting message.
+     * Prints the greeting message.
      */
     public String showGreeting() {
         return "Hello! I'm Duke DuiDui\nWhat can I do for you?";
     }
 
     /**
-     * Print the loading error message.
+     * Prints the loading error message.
      */
     public void showLoadingError() {
         System.out.println("Loading error!");
     }
 
     /**
-     * Print the message showing the task is done.
-     * @param tasklist
+     * Prints the message showing the task is done.
+     *
+     * @param taskList
      * @param i ith task.
      * @return
      */
-    public String showDoneMessage(TaskList tasklist, int i) {
+    public String showDoneMessage(TaskList taskList, int i) {
         return "Nice! I've marked this task as done:\n"
-                + spaceBeforeOrder() + tasklist.getTask(i) + "\n" + spaceBeforeOrder() + "Now you have "
-                + tasklist.getNumOfTasks() + " tasks in the list.";
+                + spaceBeforeOrder() + taskList.getTask(i) + "\n" + spaceBeforeOrder() + "Now you have "
+                + taskList.getNumOfTasks() + " tasks in the list.";
     }
 
     /**
-     * Print the message showing the task is deleted.
-     * @param tasklist
+     * Prints the message showing the task is deleted.
+     *
+     * @param taskList
      * @param removed the removed task.
      * @return
      */
-    public String showDeleteMessage(TaskList tasklist, Task removed) {
+    public String showDeleteMessage(TaskList taskList, Task removed) {
         return "Noted. I've removed this task:\n"
                 + spaceBeforeOrder() + removed + "\n" + spaceBeforeOrder() + "Now you have "
-                + tasklist.getNumOfTasks() + " tasks in the list.";
+                + taskList.getNumOfTasks() + " tasks in the list.";
     }
 
     /**
-     * Print the message showing the task is added.
-     * @param tasklist
+     * Prints the message showing the task is added.
+     *
+     * @param taskList
      * @param num current number of tasks in the list.
      */
-    public String showAddedMessage(TaskList tasklist, int num) {
+    public String showAddedMessage(TaskList taskList, int num) {
         return "Got it. I've added this task:\n"
-                + spaceBeforeOrder() + tasklist.getTask(num)
+                + spaceBeforeOrder() + taskList.getTask(num)
                 + "\n" + spaceBeforeOrder() + "Now you have "
                 + (num + 1) + " tasks in the list.";
     }
 
     /**
-     * Print the tasks in the list.
+     * Returns string representation of the tasks in the list.
+     *
+     * @param task
+     * @param taskList
+     * @return the string representation of the task.
+     */
+    public String presentTask(Task task, TaskList taskList) {
+        return spaceBeforeOrder() + (taskList.getTaskList().indexOf(task) + 1)
+                + ". " + task + "\n";
+    }
+
+    /**
+     * Returns the string represents the whole task list
+     * starting with the first sentence.
+     *
+     * @param firstSentence
+     * @param taskList
+     * @return the string representation.
+     */
+    public String UseStreamListTasks(String firstSentence, TaskList taskList) {
+        return taskList.getTaskList().stream()
+                .reduce(firstSentence,
+                        (string, task) -> string + presentTask(task, taskList),
+                        (string1, string2) -> string1 + string2);
+    }
+
+    /**
+     * Prints the tasks in the list.
+     *
      * @param tasklist
      * @return
      */
     public String listTasks(TaskList tasklist) {
-        String output;
-        output = "Here are the tasks in your list:\n";
-        for (int i = 0; i < tasklist.getNumOfTasks(); i++) {
-            output += spaceBeforeOrder() + (i + 1) + ". "
-                    + tasklist.getTask(i) + "\n";
-        }
-        return output;
+        String firstSentence = "Here are the tasks in your list:\n";
+        return UseStreamListTasks(firstSentence, tasklist);
     }
 
     /**
-     * Print the tasks in the list which contain the certain string.
-     * @param tasklist
+     * Prints the tasks in the list which contain the certain string.
+     *
+     * @param taskList
      * @param toFind
      * @return
      */
-    public String listMatchedTasks(TaskList tasklist, String toFind) {
-        String output;
-        output = "Here are the matching tasks in your list:\n";
-        int count = 1;
-        for (int i = 0; i < tasklist.getNumOfTasks(); i++) {
-            if (tasklist.getTask(i).getName().contains(toFind)) {
-                output += spaceBeforeOrder() + count + ". "
-                        + tasklist.getTask(i) + "\n";
-                count++;
-            }
-        }
-        return output;
+    public String listMatchedTasks(TaskList taskList, String toFind) {
+        String firstSentence = "Here are the matching tasks in your list:\n";
+        TaskList listWithKeyword = new TaskList(new ArrayList<>());
+        taskList.getTaskList().stream()
+                .filter(task -> task.getName().contains(toFind))
+                .forEach(task -> listWithKeyword.add(task));
+        return UseStreamListTasks(firstSentence, listWithKeyword);
     }
 
     /**
-     * Print the goodbye message.
+     * Prints the goodbye message.
+     *
      * @return
      */
     public String showGoodbye() {

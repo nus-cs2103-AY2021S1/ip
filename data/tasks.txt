@@ -1,2 +1,3 @@
-T | 0 | misssss u
-T | 0 | kissssssss u
+T | 1 | 1
+T | 0 | hi
+T | 0 | do you miss me

@@ -40,6 +40,7 @@ public class Storage {
             while (s.hasNext()) {
                 String curr = s.nextLine();
                 String[] currTask = curr.split(" \\| ");
+                assert currTask.length >= 3;
                 Boolean isDone = currTask[1].equals("1");
                 switch (currTask[0]) {
                     case "T":
@@ -67,7 +68,8 @@ public class Storage {
     }
 
     /**
-     * Write the changed message into the file.
+     * Writes the changed message into the file.
+     *
      * @param orderList
      */
     public void writeData(ArrayList<Task> orderList) {

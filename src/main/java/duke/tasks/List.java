@@ -5,7 +5,7 @@ import duke.tool.TaskList;
 import duke.ui.Ui;
 
 /**
- * Represent the list task.
+ * Represents the list task.
  */
 public class List extends Task {
     /**

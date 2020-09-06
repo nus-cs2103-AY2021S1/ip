@@ -25,9 +25,10 @@ public class Parser {
     private static DateTimeFormatter validFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     /**
-     * Check whether the characters in the string represents an integer.
-     * @param s
-     * @return
+     * Checks whether the characters in the string represents an integer.
+     *
+     * @param s the string to be checked.
+     * @return the boolean represents whether the string is integer.
      */
     public static boolean isInteger(String s) {
         if (s == null) {
@@ -42,7 +43,8 @@ public class Parser {
     }
 
     /**
-     * Parse the command from user and return the corresponding task.
+     * Parses the command from user and return the corresponding task.
+     *
      * @param order the order from user.
      * @param tl
      * @return the task which can be understood by Duke.
@@ -86,6 +88,7 @@ public class Parser {
                         if (splitAgain.length == 1) {
                             throw new NoTimeException(command[0]);
                         }
+                        assert splitAgain.length == 2;
                         return new Deadline(splitAgain[0],
                                 LocalDateTime.parse(splitAgain[1], validFormat), false);
                     case "EVENT":
@@ -96,6 +99,7 @@ public class Parser {
                         if (splitAgain.length == 1) {
                             throw new NoTimeException(command[0]);
                         }
+                        assert splitAgain.length == 2;
                         return new Event(splitAgain[0],
                                 LocalDateTime.parse(splitAgain[1], validFormat), false);
                     case "TODO":
