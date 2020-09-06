@@ -6,8 +6,7 @@ public class TaskToDo extends Task {
         super(description);
     }
 
-    public TaskToDo(String description, boolean done)
-    {
+    public TaskToDo(String description, boolean done) {
         super(description);
         isDone = done;
     }

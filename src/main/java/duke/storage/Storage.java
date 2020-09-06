@@ -79,8 +79,6 @@ public class Storage {
         }
     }
 
-
-
     public static class InvalidStorageFilePathException extends DukeException {
         public InvalidStorageFilePathException(String message) {
             super(message);

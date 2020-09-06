@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 public class Ui {
 
+    public static final String GOODBYE = "Bye. Try not to come again please... let me live.\n";
     private static final String LOGO = "   ___      _      _ __   _              \n" +
             "  /   \\    | |    | '_ \\ | |_     __ _   \n" +
             "  | - |    | |    | .__/ | ' \\   / _` |  \n" +
@@ -13,14 +14,9 @@ public class Ui {
             "\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-'\"`-0-0-' ";
     private static final String GREETING = "Hello, Alpha here... welcome to my help centre... again :/\n"
             + "Would you like to explain what you want?\n";
-
-    public static final String GOODBYE = "Bye. Try not to come again please... let me live.\n";
     private static final String LINE_PREFIX = "    ";
-
     private static final String LINE_SEPARATOR = System.lineSeparator();
-
     private static final String DIVIDER = "____________________________________________________________\n";
-
     private Scanner sc;
 
     public Ui(InputStream in) {
@@ -49,5 +45,4 @@ public class Ui {
         System.out.print("input command: ");
         return sc.nextLine();
     }
-
 }
