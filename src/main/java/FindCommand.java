@@ -24,12 +24,12 @@ public class FindCommand extends Command {
 
         List<Task> tempList = new ArrayList<>();
         String keyword = afterCommand;
-        // collate the tasks with the keyword
-        for (Task task : taskList.getTasks()) {
+        // collate the tasks with the keyword (using lambda instead)
+        taskList.getTasks().forEach(task -> {
             if (task.getDetails().contains(keyword)) {
                 tempList.add(task);
             }
-        }
+        });
         // display those tasks
         return ui.displayTasksWithCommand(tempList, "find");
     }
