@@ -32,6 +32,8 @@ public class Duke {
     }
 
     public String run(String input) {
+        assert !input.isEmpty();
+
         Command c = Parser.parse(input);
 
         switch (c) {
@@ -54,6 +56,7 @@ public class Duke {
                     Task curr = tasks.deleteItem(input);
                     return ui.deleteItem(curr);
                 } catch (DukeException ex1) {
+                    return ui.showError(ex1.description);
                     return ui.showError(ex1.toString());
                 }
             case LIST:
@@ -63,7 +66,7 @@ public class Duke {
                     storage.overwriteData(tasks.getList());
                     return ui.save();
                 } catch (IOException ex1) {
-                    return ui.showError(ex1.getMessage());
+                    return ui.showError(ex1.getLocalizedMessage());
                 }
             case FIND:
                 try {
@@ -81,7 +84,8 @@ public class Duke {
 
 
     public static void main(String[] args) {
-        Duke d = new Duke("data/Duke.txt");
+        Duke d = new Duke("");
+//        "data/Duke.txt"
 
         System.out.println(ui.welcome());
 
