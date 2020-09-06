@@ -51,7 +51,8 @@ public class UndoStorage {
                 throw new MugException("Something went wrong. Mug fail to undo:_:");
             }
         } catch (NoSuchElementException ex) {
-            String err = "Mug do not have anything to undo. TT\n(Note: Mug can only undo the most recent command.)";
+            String err = "Mug do not have anything to undo. TT"
+                    + "\n(Note: Mug can only undo the most recent command.)";
             throw new MugException(err);
         } catch (IOException ex) {
             throw new MugException("Something went wrong. Mug fail to undo:_:");
@@ -128,7 +129,7 @@ public class UndoStorage {
      * @throws IOException If fail to write file.
      */
     private void writeFile(String mugFilepath, String undoFilepath,
-                           boolean isDelete, boolean isDone) throws IOException {
+                           boolean isDelete, boolean isDone) throws IOException, MugException {
         String tempFile = "temp.txt";
         File oldFile = new File(mugFilepath);
         File newFile = new File(tempFile);
@@ -141,6 +142,7 @@ public class UndoStorage {
             undoSc.useDelimiter("[\n]");
             undoSc.next();
             int lineIndex = Integer.parseInt(undoSc.next());
+            assert(lineIndex >= 0);
             // read mug.txt
             Scanner mugSc = new Scanner(oldFile);
             mugSc.useDelimiter("[\n]");
@@ -164,6 +166,8 @@ public class UndoStorage {
             oldFile.delete();
             File renameFile = new File(mugFilepath);
             newFile.renameTo(renameFile);
+        } catch (NumberFormatException ex) {
+            throw new MugException("Something went wrong with your undo.txt file!!!");
         } catch (IOException ex) {
             throw new IOException();
         }
