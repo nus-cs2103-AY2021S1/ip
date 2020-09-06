@@ -40,6 +40,9 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList taskList, Storage storage, Ui ui)
             throws DukeException, IOException {
+        assert taskList != null : "Task list cannot be null";
+        assert storage != null : "Storage cannot be null";
+        assert ui != null : "Ui cannot be null";
         switch (command) {
         case TODO:
             return addToDo(taskList, storage, ui);
@@ -61,6 +64,7 @@ public class AddCommand extends Command {
     }
 
     private String addToDo(TaskList tasks, Storage storage, Ui ui) throws DukeException, IOException {
+        assert userInput != null : "User input cannot be null";
         if (!userInput.substring(4).isBlank()) {
             throw new DukeException("The description of todo cannot be empty!");
         }
@@ -72,6 +76,7 @@ public class AddCommand extends Command {
 
     private String addDeadline(TaskList tasks, Storage storage, Ui ui)
             throws DukeException {
+        assert userInput != null : "User input cannot be null";
         String[] input = userInput.split(" ");
         if (!userInput.substring(8).isBlank()) {
             try {
@@ -98,6 +103,7 @@ public class AddCommand extends Command {
 
     private String addEvent(TaskList tasks, Storage storage, Ui ui)
             throws DukeException {
+        assert userInput != null : "User input cannot be null";
         String[] input = userInput.split(" ");
         if (!userInput.substring(5).isBlank()) {
             try {
