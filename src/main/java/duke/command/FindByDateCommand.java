@@ -51,6 +51,7 @@ public class FindByDateCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             String date = parsedCommand[1].trim();
+            assert !date.isBlank();
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
             LocalDate dateToSearch = LocalDate.parse(date, dateFormatter);
             Predicate<Task> searchDateFilter = task -> {

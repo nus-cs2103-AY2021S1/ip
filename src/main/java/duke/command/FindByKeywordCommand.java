@@ -52,6 +52,7 @@ public class FindByKeywordCommand extends Command {
                     .stream()
                     .filter(searchKeywordFilter)
                     .collect(Collectors.toList());
+            assert !keyword.isBlank();
             return ui.showTaskList(searchResults);
         } catch (ArrayIndexOutOfBoundsException ex) {
             String err = "No keyword for the search was entered. Please enter a keyword!";
