@@ -50,6 +50,7 @@ public class EventCommand extends Command {
             DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:mm");
 
             String[] eventInfo = retrieveEventInfo();
+            assert !eventInfo[0].isBlank();
             String[] timeStamp = eventInfo[1].split(" ");
 
             LocalDate eventDate = LocalDate.parse(timeStamp[0], dateFormatter);

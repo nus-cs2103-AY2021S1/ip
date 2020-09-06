@@ -43,6 +43,7 @@ public class ToDoCommand extends Command {
         String todoInfo = this.retrieveTodoInfo();
         Task todo = new Todo(todoInfo.trim());
         tasks.addTask(todo);
+        assert !todoInfo.isBlank();
         storage.saveToFile(tasks);
         return ui.showNewTask(todo, tasks.getListSize());
     }

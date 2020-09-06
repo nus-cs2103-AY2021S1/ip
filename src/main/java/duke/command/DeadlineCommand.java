@@ -51,6 +51,7 @@ public class DeadlineCommand extends Command {
             DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:mm");
 
             String[] deadlineInfo = retrieveDeadlineInfo();
+            assert !deadlineInfo[0].isBlank();
             String[] timeStamp = deadlineInfo[1].split(" ");
 
             LocalDate deadlineDate = LocalDate.parse(timeStamp[0], dateFormatter);

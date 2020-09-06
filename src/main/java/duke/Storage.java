@@ -44,6 +44,7 @@ public class Storage {
             File dataFile = new File(Storage.FILE_LOCATION);
             // create an empty file to store the tasks if the file does not exist
             dataFile.createNewFile();
+            assert dataFile.exists();
 
             Scanner scanner = new Scanner(dataFile);
             while (scanner.hasNextLine()) {
