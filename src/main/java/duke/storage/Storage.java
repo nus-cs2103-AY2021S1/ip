@@ -1,24 +1,27 @@
 package duke.storage;
 
-import duke.exception.DukeOperationException;
-import duke.exception.DukeParseException;
-import duke.list.StorableList;
-import duke.parser.StorageParser;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-/** Represents an object that deals with loading and saving DukeLists into a text file. */
+import duke.exception.DukeOperationException;
+import duke.exception.DukeParseException;
+import duke.list.StorableList;
+import duke.parser.StorageParser;
+
+/**
+ * Represents an object that deals with loading and saving DukeLists into a text file.
+ * @param <T> the object to be stored in the text files.
+ */
 public abstract class Storage<T extends Storable> {
     protected final File file;
     protected final StorageParser<T> storageParser;
 
     /**
      * Constructor method.
-     *
      * @param file the actual file path of the text file.
+     * @param storageParser the required <code>StorageParser</code>.
      */
     Storage(File file, StorageParser<T> storageParser) {
         this.file = file;
@@ -40,7 +43,7 @@ public abstract class Storage<T extends Storable> {
     /**
      * Loads the <code>StorableList</code> from the text file.
      *
-     * @param list the <code>list</code> to be loaded onto.
+     * @param list the <code>StorableList</code> to be loaded onto.
      * @return a <code>String</code> indicating the status of the loading.
      */
     public String loadList(StorableList<T> list) {
@@ -54,7 +57,7 @@ public abstract class Storage<T extends Storable> {
         StringBuilder sb = new StringBuilder();
         while (sc.hasNext()) {
             try {
-                T storable = this.storageParser.parseStorageString(sc.nextLine());
+                T storable = storageParser.parseStorageString(sc.nextLine());
                 list.add(storable);
             } catch (DukeParseException exception) {
                 sb.append(exception.getMessage());

@@ -18,6 +18,7 @@ public enum CommandType {
 
     /**
      * Constructor class.
+     *
      * @param command the <code>String</code> of the actual command.
      * @param commandLength the minimum number of parameters needed for the command.
      *                      This includes the <code>command</code> itself.
@@ -29,6 +30,7 @@ public enum CommandType {
 
     /**
      * Gets the <code>command</code>.
+     *
      * @return a <code>String</code> of the <code>command</code>.
      */
     public String getCommand() {
@@ -37,7 +39,8 @@ public enum CommandType {
 
     /**
      * Checks if the given <code>length</code> is smaller than the <code>commandLength</code>.
-     * If such, it also means that the <code>command</code> is invalid.
+     * If this is the case, it means that the <code>command</code> is invalid.
+     *
      * @return <code>rue</code> if the given length is greater than or equal to the <code>commandLength</code>.
      */
     public boolean isNotValidLength(int length) {

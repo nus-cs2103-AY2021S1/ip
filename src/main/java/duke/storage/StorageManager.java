@@ -53,8 +53,8 @@ public class StorageManager {
      * @return a <code>String</code> containing the status of loading.
      */
     public String loadStores(TaskList taskList, ExpenseList expenseList) {
-        String taskResult = this.taskStorage.loadList(taskList);
-        String expenseResult = this.expenseStorage.loadList(expenseList);
+        String taskResult = taskStorage.loadList(taskList);
+        String expenseResult = expenseStorage.loadList(expenseList);
         return taskResult + "\n" + expenseResult;
     }
 

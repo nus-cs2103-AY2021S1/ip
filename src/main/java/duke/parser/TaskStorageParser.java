@@ -11,7 +11,7 @@ import duke.task.Todo;
 import duke.utils.Datetime;
 
 /** Represents a class that parses lines in a saved storage text file into actual <code>Task</code>. */
-public class TaskStorageParser implements StorageParser<Task>{
+public class TaskStorageParser implements StorageParser<Task> {
     private static final String IS_COMPLETED = "1";
     private static final String NOT_COMPLETED = "0";
 

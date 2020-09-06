@@ -12,7 +12,7 @@ public class TaskList extends StorableList<Task> {
      * Initialise a new <code>ArrayList</code> of <code>Task</code>.
      */
     public TaskList() {
-       super(new ArrayList<>());
+        super(new ArrayList<>());
     }
 
     /**
@@ -26,26 +26,6 @@ public class TaskList extends StorableList<Task> {
         task.completeTask();
         assert task.isTaskCompleted() : "Task is not marked as complete";
         return task;
-    }
-
-    /**
-     * Converts the <code>TaskList</code> to a representative <code>String</code>.
-     * This <code>String</code> contains all details of <code>Tasks</code> stored in <code>TaskList</code>.
-     *
-     * @return the <code>String</code> representing <code>TaskList</code>.
-     */
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        for (int i = 0; i < list.size(); i++) {
-            String taskLine = String.format("%d. %s", i + 1, list.get(i));
-            sb.append(taskLine);
-            sb.append("\n");
-        }
-        if (sb.length() > 0) {
-            sb.deleteCharAt(sb.length() - 1);
-        }
-        return sb.toString();
     }
 
     /**

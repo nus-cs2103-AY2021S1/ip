@@ -77,7 +77,7 @@ public class Datetime {
         try {
             DateTimeFormatter dtf = DateTimeFormatter.ofPattern(pattern);
             LocalDate localDate = LocalDate.parse(date, dtf);
-            return LocalDateTime.of(localDate, LocalTime.of(12, 00));
+            return LocalDateTime.of(localDate, LocalTime.of(12, 0));
         } catch (DateTimeParseException exception) {
             String msg = String.format("Ensure the date passed in is of the form: '%s'.", pattern);
             throw new DukeParseException(msg);

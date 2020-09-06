@@ -1,11 +1,14 @@
 package duke.list;
 
-import duke.storage.Storable;
-
 import java.util.ArrayList;
 import java.util.Iterator;
 
-/** Represents the interface of lists in Duke. */
+import duke.storage.Storable;
+
+/**
+ * Represents the interface of lists in Duke.
+ * @param <T> the item type to be stored in StorableList.
+ */
 public abstract class StorableList<T extends Storable> implements Iterable<T> {
     protected ArrayList<T> list;
 
@@ -75,4 +78,24 @@ public abstract class StorableList<T extends Storable> implements Iterable<T> {
      * @return a <code>String</code> containing all searched <code>Storables</code>.
      */
     public abstract String search(String searchWord);
+
+    /**
+     * Converts this to a representative <code>String</code>.
+     * This <code>String</code> contains all details of the items stored in this.
+     *
+     * @return the <code>String</code> representing this.
+     */
+    @Override
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < list.size(); i++) {
+            String line = String.format("%d. %s", i + 1, list.get(i));
+            sb.append(line);
+            sb.append("\n");
+        }
+        if (sb.length() > 0) {
+            sb.deleteCharAt(sb.length() - 1);
+        }
+        return sb.toString();
+    }
 }
