@@ -5,6 +5,7 @@ import java.io.IOException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import luoyi.duke.data.Duke;
@@ -26,6 +27,8 @@ public class MainApp extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle("CatBot");
+            stage.getIcons().add(new Image(MainApp.class.getResourceAsStream("/images/icon.jpg")));
+            stage.setResizable(false);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
