@@ -8,6 +8,7 @@ import command.ExitCommand;
 import command.FindCommand;
 import command.HelpCommand;
 import command.ListCommand;
+import command.TagCommand;
 import duke.DukeException;
 
 /**
@@ -39,7 +40,6 @@ public class Parser {
             throw new DukeException("Command description cannot be empty");
         }
         if (type == Action.DEADLINE) {
-            System.out.println(result);
             if (isInvalidDeadlineTaskFormat(result)) {
                 throw new DukeException("Be sure to include a task description and date in the correct format.");
             }
@@ -142,6 +142,13 @@ public class Parser {
         case HELP:
             resultantCommand = new HelpCommand();
             break;
+        case TAG:
+            String[] splitCommandDesc = commandDesc.split(" ", 2);
+            String tagName = splitCommandDesc[1];
+            int taskNumber = Integer.parseInt(splitCommandDesc[0]);
+            this.validateTaskNum(taskNumber);
+            resultantCommand = new TagCommand(taskNumber, tagName);
+            break;
         default:
             assert false : action;
         }
@@ -161,6 +168,7 @@ public class Parser {
         DONE,
         DELETE,
         FIND,
-        HELP
+        HELP,
+        TAG
     }
 }

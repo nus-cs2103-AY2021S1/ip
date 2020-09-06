@@ -1,5 +1,7 @@
 package task;
 
+import util.Tag;
+
 /**
  * Represents a Task, providing implementation of a general task.
  */
@@ -15,6 +17,11 @@ public class Task {
     protected boolean isDone;
 
     /**
+     * Tag attached to the task.
+     */
+    protected Tag tag;
+
+    /**
      * Creates a task.
      *
      * @param description Description of the task.
@@ -23,6 +30,17 @@ public class Task {
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
+    }
+
+    /**
+     * Sets the tag for the task and returns the task.
+     *
+     * @param tag Tag to be tagged to task.
+     * @return Return task.
+     */
+    public Task setTag(Tag tag) {
+        this.tag = tag;
+        return this;
     }
 
     /**
@@ -57,6 +75,11 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "]" + " " + this.description;
+        String task = "[" + this.getStatusIcon() + "]" + " " + this.description + " ";
+        if (tag == null) {
+            return task;
+        } else {
+            return task + tag.toString();
+        }
     }
 }

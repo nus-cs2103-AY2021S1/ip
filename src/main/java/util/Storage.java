@@ -84,16 +84,26 @@ public class Storage {
     }
 
     /**
-     * Modifies a line from the file.
+     * Modifies a line from the file, marking the task in the line as done or adding a tag to the task.
      *
      * @param lineNum Line number to be modified from the file.
      * @throws IOException If there is error writing to the file.
      */
-    public void modifyLine(int lineNum) throws IOException {
+    public void modifyLine(int lineNum, Tag ...tags) throws IOException {
         Path path = Path.of(file.getPath());
         List<String> fileContent = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));
         String line = fileContent.get(lineNum);
-        String updatedLine = line.replaceFirst("0", "1");
+        boolean isTagModification = tags.length == 1;
+        String updatedLine;
+        if (isTagModification) {
+            // adding tag to task
+            Tag tag = tags[0];
+            updatedLine = line + " | " + tag.getName();
+        } else {
+            // marking task as done
+            updatedLine = line.replaceFirst("0", "1");
+        }
         fileContent.set(lineNum, updatedLine);
+        Files.write(path, fileContent, StandardCharsets.UTF_8);
     }
 }
