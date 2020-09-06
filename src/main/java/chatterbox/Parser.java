@@ -28,32 +28,34 @@ public class Parser {
      * @param dateTime The raw string to be parsed into datetime.
      * @return The string parsed as a LocalDateTime if possible, else null
      */
-    public static LocalDateTime parseDateTime(String dateTime) {
+    public static LocalDateTime parseDateTimeFromString(String dateTime) {
         for (String format : dateFormats) {
             try {
                 Date d = new SimpleDateFormat(format).parse(dateTime);
                 return d.toInstant().atZone(ZoneId.systemDefault()).toLocalDateTime();
             } catch (ParseException e) {
-                // Intentionally left blank
+                // Intentionally left empty
             }
         }
         return null;
     }
 
     /**
-     * Parses the task contents to change the date display.
+     * Combines the task input and the datetime to change the date display.
+     * If datetime is null, then this function just returns the input string.
      *
      * @param input String to format.
-     * @return The formatted string.
+     * @param dateTime LocalDateTime for the deadline task, can be null.
+     * @return The datetime task string.
      */
-    public static String parseDateTimeTask(String input, LocalDateTime deadline) {
+    public static String getDateTimeTaskString(String input, LocalDateTime dateTime) {
         if (input.contains("/")) {
             String[] split = input.split("/", 2);
-            String dateTime = split[1].substring(split[1].indexOf(' ') + 1);
-            if (deadline != null) {
-                dateTime = deadline.format(DF);
+            String originalDateTime = split[1].substring(split[1].indexOf(' ') + 1);
+            if (dateTime != null) {
+                originalDateTime = dateTime.format(DF);
             }
-            return String.format("%s(%s: %s)", split[0], split[1].split(" ")[0], dateTime);
+            return String.format("%s(%s: %s)", split[0], split[1].split(" ")[0], originalDateTime);
         } else {
             return input;
         }

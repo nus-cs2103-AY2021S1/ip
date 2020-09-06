@@ -9,6 +9,10 @@ import chatterbox.task.TaskList;
  * Handles the main loop and the high level logic flow of the program.
  */
 public class Chatterbox {
+    private static final String ERROR_EMPTY_INPUT = "Input cannot be empty.";
+    private static final String ERROR_NO_TASK_NUMBER = "Please enter a number after the command.";
+    private static final String ERROR_INVALID_COMMAND = "That's not a valid command.";
+
     private final TaskList tasks;
 
     /**
@@ -31,6 +35,9 @@ public class Chatterbox {
 
     /**
      * Shows the welcome message, then processes each line of user input until "bye" is typed.
+     *
+     * @param input The user's input string.
+     * @return Chatterbox's response to the input.
      */
     public String getResponse(String input) {
         try {
@@ -50,7 +57,7 @@ public class Chatterbox {
     private String processInput(String input) throws ChatterboxException, IOException {
         // Check if input is just whitespace
         if (input.equals("")) {
-            throw new ChatterboxException("Input cannot be empty.");
+            throw new ChatterboxException(ERROR_EMPTY_INPUT);
         }
 
         // Get first word of input
@@ -65,7 +72,7 @@ public class Chatterbox {
             try {
                 taskNo = Integer.parseInt(input.split(" ")[1]) - 1;
             } catch (NumberFormatException e) {
-                throw new ChatterboxException("Please enter a number after the command.");
+                throw new ChatterboxException(ERROR_NO_TASK_NUMBER);
             }
 
             // Mark as done or delete based on the command
@@ -75,12 +82,13 @@ public class Chatterbox {
                 return tasks.deleteTask(taskNo);
             }
         } else if (command.equals("find")) {
-            return tasks.findTasks(input.split(" ", 2)[1]);
+            String searchKeyword = input.split(" ", 2)[1];
+            return tasks.findTasks(searchKeyword);
         } else if (command.equals("deadline") || command.equals("todo") || command.equals("event")) {
             Task t = Parser.parseTask(input);
             return tasks.addTask(t);
         } else {
-            throw new ChatterboxException("That's not a valid command.");
+            throw new ChatterboxException(ERROR_INVALID_COMMAND);
         }
     }
 }
