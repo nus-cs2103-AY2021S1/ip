@@ -1,9 +1,9 @@
 package duke.command;
+import duke.exception.InvalidInputException;
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import duke.exception.InvalidInputException;
-import duke.task.Task;
 
 /**
  * Represents an AddCommand and handles methods related to commands about adding a task.

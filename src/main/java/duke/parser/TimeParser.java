@@ -8,7 +8,7 @@ import java.time.format.DateTimeFormatter;
  * parsing the string representing the time of tasks.
  */
 public class TimeParser {
-    
+
     private LocalDate localDate;
     private String time;
 

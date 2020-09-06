@@ -73,7 +73,7 @@ public class Task {
      * @param whetherIsDone Boolean showing whether the duke.task is done.
      */
     public void setWhetherTaskDone(String whetherIsDone) {
-         isDone = whetherIsDone.equals("true");
+        isDone = whetherIsDone.equals("true");
     }
 
     /**
@@ -92,7 +92,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" +
-                this.getStatusSymbol() + "] " + taskName;
+        return "[" + this.getStatusSymbol() + "] " + taskName;
     }
 }

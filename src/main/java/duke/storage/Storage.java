@@ -1,17 +1,18 @@
 package duke.storage;
 
-import duke.exception.InvalidFilePathException;
-import duke.task.Task;
-import duke.task.TaskList;
-import duke.task.Todo;
-import duke.task.Deadline;
-import duke.task.Event;
-
 import java.io.File;
-import java.util.Scanner;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Scanner;
+
+import duke.exception.InvalidFilePathException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+
 
 /**
  * Represents the storage class. Storage class is a class consists of methods
@@ -47,7 +48,7 @@ public class Storage {
                 this.directoryPath = directoryPath;
             }
         } catch (InvalidFilePathException e) {
-                e.getMessage();
+            e.getMessage();
         }
     }
 
@@ -93,6 +94,8 @@ public class Storage {
                     event.setWhetherTaskDone(whetherIsDone);
                     listOfTasks.add(event);
                     break;
+                default:
+                    break;
                 }
             }
             scanner.close();
@@ -108,7 +111,7 @@ public class Storage {
      *
      * @param listOfTasks The list of tasks.
      */
-    public void write( ArrayList<Task> listOfTasks) {
+    public void write(ArrayList<Task> listOfTasks) {
         try {
             FileWriter fileWriter = new FileWriter(filePath);
             for (Task task : listOfTasks) {

@@ -1,9 +1,9 @@
 package duke.command;
+import duke.exception.InvalidInputException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import duke.exception.InvalidInputException;
 
 /**
  * Represents a DoneCommand and handles methods related to commands

@@ -1,7 +1,5 @@
 package duke.exception;
 
-import duke.exception.InvalidInputException;
-
 /**
  * Represents an InvalidRequestException and handles the exceptions related
  * to invalid user requests.
