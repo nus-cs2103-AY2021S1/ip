@@ -1,7 +1,8 @@
-package main.java.emily.command;
+package emily.command;
 
-import main.java.emily.storage.TaskList;
-import main.java.emily.task.Task;
+import emily.storage.TaskList;
+import emily.task.Task;
+import emily.exception.DukeException;
 
 import java.util.ArrayList;
 
@@ -64,7 +65,7 @@ public class Ui {
             case DONE:
                 index = Character.getNumericValue(input.charAt(5)) - 1;
                 current = ls.getTaskArrayList().get(index);
-                current.setFinished(true);
+                current.setHasFinished(true);
                 outputDialogue += ("\n    Nice work, I have marked this task as done: "
                         + current);
                 break;
