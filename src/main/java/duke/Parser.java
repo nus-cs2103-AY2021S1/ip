@@ -131,9 +131,9 @@ public class Parser {
                 return tasks.setDoneAsString(taskPosition);
 
             } catch (StringIndexOutOfBoundsException e) {
-                ui.showInvalidFormatCommandDescription();
+                return "☹ OOPS!!! The description of a done cannot be empty or in wrong format";
             } catch (NumberFormatException e) {
-                ui.showInvalidFormatCommandDescription();
+                return "☹ OOPS!!! The description of a done cannot be empty or in wrong format";
             }
         } else if (userInput.startsWith(Command.TODO.value)) {
             try {
@@ -142,7 +142,7 @@ public class Parser {
                 storage.saveTasks(tasks.getTasksList());
                 return result;
             } catch (StringIndexOutOfBoundsException e) {
-                ui.showInvalidFormatCommandDescription();
+                return "☹ OOPS!!! The description of a done cannot be empty or in wrong format";
             }
 
         } else if (userInput.startsWith(Command.DEADLINE.value)) {
@@ -155,7 +155,7 @@ public class Parser {
                 storage.saveTasks(tasks.getTasksList());
                 return result;
             } catch (StringIndexOutOfBoundsException e) {
-                ui.showInvalidFormatCommandDescription();
+                return "☹ OOPS!!! The description of a done cannot be empty or in wrong format";
             }
 
         } else if (userInput.startsWith(Command.EVENT.value)) {
@@ -169,7 +169,7 @@ public class Parser {
                 return result;
 
             } catch (StringIndexOutOfBoundsException e) {
-                ui.showInvalidFormatCommandDescription();
+                return "☹ OOPS!!! The description of a done cannot be empty or in wrong format";
             }
         } else if (userInput.startsWith(Command.DELETE.value)) {
             try {
@@ -179,7 +179,7 @@ public class Parser {
                 return result;
 
             } catch (StringIndexOutOfBoundsException e) {
-                ui.showInvalidFormatCommandDescription();
+                return "☹ OOPS!!! The description of a done cannot be empty or in wrong format";
             }
         }
         return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
