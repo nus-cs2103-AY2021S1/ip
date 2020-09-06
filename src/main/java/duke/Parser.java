@@ -146,6 +146,7 @@ public class Parser {
      * @throws IOException if filePath does not exist
      */
     public static String parse(String command, TaskList tasks, Storage storage, String output) throws IOException {
+        assert tasks.size() >= 0;
         if (command.equals("bye")) {
             isExit = true;
             return "Goodbye, have a nice day :D";

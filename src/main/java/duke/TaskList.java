@@ -42,6 +42,7 @@ public class TaskList {
      * @return corresponding task
      */
     public Task get(int index) {
+        assert this.listOfTasks != null;
         return this.listOfTasks.get(index);
     }
 
@@ -52,6 +53,7 @@ public class TaskList {
      * @return corresponding task
      */
     public Task remove(int index) {
+        assert this.listOfTasks != null;
         return this.listOfTasks.remove(index);
     }
 
@@ -61,6 +63,7 @@ public class TaskList {
      * @return number of tasks
      */
     public int size() {
+        assert this.listOfTasks != null;
         return this.listOfTasks.size();
     }
 
@@ -70,6 +73,7 @@ public class TaskList {
      * @param task task to be added
      */
     public void add(Task task) {
+        assert this.listOfTasks != null;
         this.listOfTasks.add(task);
     }
 }
