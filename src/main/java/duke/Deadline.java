@@ -18,6 +18,7 @@ public class Deadline extends Task {
     }
 
     private String formatDate() {
+        assert date != null;
         return date.format(DateTimeFormatter.ofPattern("MMM d yyyy h:mm a"));
     }
 

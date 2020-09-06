@@ -74,6 +74,7 @@ public class Storage {
     public void populateToLstOfTask(List<Task> lstOfTask) throws IOException {
 
         createNewTextFileCalledTask();
+        assert file != null;
 
         BufferedReader br = new BufferedReader(new FileReader(file));
 

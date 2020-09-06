@@ -84,6 +84,7 @@ public class Duke  {
     }
 
     private void exit() {
+        assert taskList != null;
         storage.saveTaskContents(taskList.getLstOfTask());
     }
 
