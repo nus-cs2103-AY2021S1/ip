@@ -1,27 +1,27 @@
+package duke.gui;
+
+import duke.Duke;
+import duke.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import java.util.concurrent.CompletableFuture;
-import javafx.application.Platform;
 
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Controller for duke.gui.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML
-    private ScrollPane scrollPane;
+    ScrollPane scrollPane;
     @FXML
-    private VBox dialogContainer;
+    VBox dialogContainer;
     @FXML
-    private TextField userInput;
+    TextField userInput;
     @FXML
-    private Button sendButton;
+    Button sendButton;
 
     private Duke duke;
 
@@ -29,7 +29,7 @@ public class MainWindow extends AnchorPane {
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @FXML
-    public void initialize() {
+    void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
 
         dialogContainer.getChildren().addAll(
@@ -42,11 +42,11 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() {
+    void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
@@ -54,15 +54,11 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+
         if (response.equals("Bye! Please come again!")) {
-            CompletableFuture<Void> cf = CompletableFuture.runAsync(() -> {
-                try {
-                    Thread.sleep(100);
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                }
-            });
-            cf.thenRun(Platform::exit).thenRun(() -> System.exit(0));
+            userInput.setDisable(true);
+            sendButton.setDisable(true);
+            System.exit(0);
         }
     }
 }

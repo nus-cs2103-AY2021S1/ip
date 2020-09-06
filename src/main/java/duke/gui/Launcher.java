@@ -1,3 +1,5 @@
+package duke.gui;
+
 import javafx.application.Application;
 
 public class Launcher {

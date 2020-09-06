@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -9,7 +13,7 @@ public class Ui {
     final private String deleteMsg = "Too bad. I'll remove the following order: ";
     final private String saveMsg = "Aright, I have remembered your sins :)";
     final private String retListMsg = "Here's what you have ordered...";
-    final private String defaultError = "Wat talking you?";
+    final private String defaultError = DukeException.INVALID_COMMAND_EXCEPTION.toString();
     final private String byeMsg = "Bye! Please come again!";
     final private String newLine = "\n";
 

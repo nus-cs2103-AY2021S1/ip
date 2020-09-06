@@ -1,3 +1,5 @@
+package duke;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
@@ -57,9 +59,9 @@ public class Parser {
     }
 
     /**
-     * Returns a enum class item stored in Duke based on the first word of the input.
+     * Returns a enum class item stored in duke.Duke based on the first word of the input.
      * @param input Command from user
-     * @return Duke Command to indicate which switch to enter
+     * @return duke.Duke Command to indicate which switch to enter
      */
     public static Duke.Command parse(String input) {
         if (getFirstWord(input).equals("todo") || getFirstWord(input).equals("deadline") ||
@@ -73,7 +75,7 @@ public class Parser {
             return Duke.Command.LIST;
         } else if (input.equals("save")) {
             return Duke.Command.SAVE;
-        } else if (input.contains("find")) {
+        } else if (getFirstWord(input).equals("find")) {
             return Duke.Command.FIND;
         } else if (input.equals("bye")) {
             return Duke.Command.BYE;

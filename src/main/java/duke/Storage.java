@@ -1,3 +1,10 @@
+package duke;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.format.DateTimeParseException;
@@ -24,26 +31,8 @@ public class Storage {
                 while (data.hasNextLine()) {
                     String curr = data.nextLine();
                     String[] info = curr.split(", ", 4);
-                    if (info[0].equals("T")) {
-                        ToDo tobeAdded = new ToDo(info[2]);
-                        if (info[1].equals("1")) {
-                            tobeAdded.markAsDone();
-                        }
-                        txtData.add(tobeAdded);
-                    } else if (info[0].equals("D")) {
-                        Deadline tobeAdded = new Deadline(info[2], Parser.dateParser(info[3]));
-                        if (info[1].equals("1")) {
-                            tobeAdded.markAsDone();
-                        }
-                        txtData.add(tobeAdded);
-                    } else if (info[0].equals("E")) {
-                        String[] t = info[3].split(" ", 2);
-                        Event tobeAdded = new Event(info[2], Parser.dateParser(t[0]), t[1]);
-                        if (info[1].equals("1")) {
-                            tobeAdded.markAsDone();
-                        }
-                        txtData.add(tobeAdded);
-                    }
+                    Task newTask = generateNewTask(info);
+                    txtData.add(newTask);
                 }
             }
             return txtData;
@@ -52,6 +41,28 @@ public class Storage {
         } catch (DateTimeParseException ex2) {
             throw new DukeException("Date/Time incorrect format");
         }
+    }
+
+    public Task generateNewTask(String[] info) throws DukeException {
+        Task tobeAdded = new Task("");
+        if (info[0].equals("T")) {
+            tobeAdded = new ToDo(info[2]);
+            if (info[1].equals("1")) {
+                tobeAdded.markAsDone();
+            }
+        } else if (info[0].equals("D")) {
+            tobeAdded = new Deadline(info[2], Parser.dateParser(info[3]));
+            if (info[1].equals("1")) {
+                tobeAdded.markAsDone();
+            }
+        } else if (info[0].equals("E")) {
+            String[] t = info[3].split(" ", 2);
+            tobeAdded = new Event(info[2], Parser.dateParser(t[0]), t[1]);
+            if (info[1].equals("1")) {
+                tobeAdded.markAsDone();
+            }
+        }
+        return tobeAdded;
     }
 
     public void overwriteData(ArrayList<Task> data) throws IOException {
