@@ -12,7 +12,7 @@ public class Event extends Task {
      * @param input  User input without the command word.
      */
     public Event(String input) {
-        inputString = this.getClass().getSimpleName().toLowerCase() + " " + input;
+        inputString = "event " + input;
         try {
             String[] split = input.split("/", 2);
             String dateTime = split[1].substring(split[1].indexOf(' ') + 1);
