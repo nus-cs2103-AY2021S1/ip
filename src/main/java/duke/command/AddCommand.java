@@ -75,7 +75,7 @@ public class AddCommand extends Command {
      * @return The same task that is added to the task list.
      * @throws DukeException If task string does not contain task name, is unrecognized.
      */
-    private Task addTask(TaskList tasks) throws DukeException {
+    protected Task addTask(TaskList tasks) throws DukeException {
         switch (getArray()[0]) {
         case ("todo"):
             Task todo = processTask("", "todo");

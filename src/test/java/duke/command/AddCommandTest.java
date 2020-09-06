@@ -1,6 +1,5 @@
 package duke.command;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -9,20 +8,30 @@ import org.junit.jupiter.api.Test;
 
 import duke.DukeException;
 import duke.task.Task;
+import duke.task.TaskList;
 
 
 class AddCommandTest {
 
     @Test
-    public void containsString_arrayWithString_true() {
-        assertTrue(new AddCommand(new String[]{"deadline", "return book", "/by", "2022-08-26", "1800" })
-                .containsString("return book"));
+    public void addTask_deadlineTask_taskListWithOneTask() throws DukeException {
+        TaskList testTaskList = new TaskList();
+        new AddCommand(new String[]{"deadline", "return book", "/by", "2022-08-26", "1800" })
+                .addTask(testTaskList);
+        assertTrue(testTaskList.totalTask() == 1);
     }
 
     @Test
-    public void containsString_arrayWithoutString_false() {
-        assertFalse(new AddCommand(new String[]{"deadline", "return book", "/by", "2022-08-26", "1800" })
-                .containsString("return library book"));
+    public void addTask_unrecognizedTask_exceptionThrown() {
+        try {
+            TaskList testTaskList = new TaskList();
+            new AddCommand(new String[]{"birthday", "sing", "song", "/by" })
+                    .addTask(testTaskList);
+            fail(); // the test should not reach this line
+        } catch (DukeException e) {
+            assertEquals("I don't understand what task you want to be added! Only deadline/todo/event!",
+                    e.getMessage());
+        }
     }
 
     @Test
@@ -46,7 +55,7 @@ class AddCommandTest {
                     .processTask("/by", "deadline");
             fail(); // the test should not reach this line
         } catch (DukeException e) {
-            assertEquals("All deadline/event tasks must come with a date in yyyy-mm-dd format!",
+            assertEquals("The task must come with a date in yyyy-mm-dd format!",
                     e.getMessage());
         }
     }
