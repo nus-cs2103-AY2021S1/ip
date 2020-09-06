@@ -33,7 +33,7 @@ public class Parser {
     private static String errorMessage = null;
 
     private static Command handleDoneOrDelete(Commands commandType, int index) throws DukeException {
-        Command command = null;
+        Command command;
         switch (commandType) {
         case DONE:
             command = new DoneCommand(index);

@@ -65,6 +65,7 @@ public class TaskList {
         if (index < 1 || taskCount < index) {
             ui.accumulateResponses(" Sorry I cannot find your specified task :(");
         } else {
+            assert taskCount >= index : " Index must not be greater than task count";
             Task removed = tasks.get(index - 1);
             tasks.remove(index - 1);
             taskCount -= 1;
@@ -85,6 +86,7 @@ public class TaskList {
                     " If you want to get busy add more task.",
                     " I'll remember them for you :)");
         } else {
+            assert taskCount > 0 : " Task list must not be empty";
             ui.accumulateResponses(" Let me list out all your tasks...");
             for (int i = 0; i < taskCount; i++) {
                 ui.accumulateResponses(" " + (i + 1) + "." + tasks.get(i));
@@ -102,6 +104,7 @@ public class TaskList {
         if (index < 1 || taskCount < index) {
             ui.accumulateResponses(" Sorry I cannot find your specified task :(");
         } else {
+            assert taskCount >= index : " Index must not be greater than task count";
             tasks.get(index - 1).completeTask();
             ui.accumulateResponses(" Congratulations for finishing this task!",
                     " Let me mark this as done for you.",

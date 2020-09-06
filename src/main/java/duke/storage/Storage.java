@@ -35,6 +35,7 @@ public class Storage {
             File data = new File(filePath);
             if (!data.exists()) {
                 data.createNewFile();
+                assert data.exists() : " Directory cannot be made";
             }
             this.data = data;
         } catch (IOException error) {
