@@ -87,8 +87,7 @@ public class TaskList {
      */
     public TaskList filter(Predicate<Task> predicate) {
         ArrayList<Task> filtered = new ArrayList<>();
-        for (int i = 0; i < tasks.size(); i++) {
-            Task task = tasks.get(i);
+        for (Task task : tasks) {
             if (predicate.test(task)) {
                 filtered.add(task);
             }

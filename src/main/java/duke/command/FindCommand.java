@@ -2,6 +2,7 @@ package duke.command;
 
 import java.time.LocalDate;
 import java.util.Optional;
+import java.util.function.Predicate;
 
 import duke.parser.DateParser;
 import duke.storage.Storage;
@@ -27,7 +28,7 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Finds all the tasks that happen or due on that day or contaning the keyword(s),
+     * Finds all the tasks that happen or due on that day or containing the keyword(s),
      * and pass them to the <code>Ui</code> to print them out.
      * @param tasks A list of tasks
      * @param ui An Ui object that correspond to interacting with the user
@@ -40,8 +41,11 @@ public class FindCommand extends Command {
             Optional<LocalDate> optDate = DateParser.parse(keyword);
             if (optDate.isPresent()) {
                 LocalDate date = optDate.get();
-                filteredTasks = tasks.filter((task) -> ((task instanceof Deadline && ((Deadline) task).isDueOn(date))
-                                || (task instanceof Event && ((Event) task).isOccuringOn(date))));
+                filteredTasks = tasks.filter((task) -> {
+                    boolean isDeadlineAndDueOnDate = task instanceof Deadline && ((Deadline) task).isDueOn(date);
+                    boolean isEventAndOccurOnDate = task instanceof Event && ((Event) task).isOccuringOn(date);
+                    return isDeadlineAndDueOnDate || isEventAndOccurOnDate;
+                });
 
             } else {
                 filteredTasks = tasks.filter((task) ->
