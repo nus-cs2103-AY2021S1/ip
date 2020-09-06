@@ -3,7 +3,7 @@ package duke.task;
 /**
  * Task class that represents a task.
  */
-public class Task {
+public class Task implements Comparable<Task> {
     protected String description;
     protected boolean isDone;
 
@@ -37,7 +37,12 @@ public class Task {
     public void markAsDone() {
         isDone = true;
     }
-
+    /**
+     * Marks the task as undone
+     */
+    public void markAsUndone() {
+        isDone = false;
+    }
     /**
      * Returns the String representation of the task.
      * @return the String representation of the task.
@@ -56,5 +61,11 @@ public class Task {
         } else {
             return "? | 0 | " + description;
         }
+    }
+
+    @Override
+    public int compareTo(Task t) {
+        String givenDescription = t.description;
+        return description.compareTo(givenDescription);
     }
 }

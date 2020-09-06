@@ -1,5 +1,7 @@
 package duke.command;
 
+import java.util.LinkedList;
+
 import duke.component.DukeException;
 import duke.component.Storage;
 import duke.component.TaskList;
@@ -23,7 +25,8 @@ public class ByeCommand implements Command {
      * Says bye and closes Duke.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage,
+                          LinkedList<ReversibleCommand> reversibleCommands) throws DukeException {
         return ui.giveResponse("\tBye. Hope to see you again soon!");
     }
 }
