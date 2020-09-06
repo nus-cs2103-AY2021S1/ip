@@ -84,7 +84,10 @@ public class DukeException extends Exception {
                 error += "Error in updating task: Wrong time format";
                 error += "\nFormat: YYYY-MM-DD";
                 break;
+            default:
+                throw new IllegalStateException("Unexpected value: " + commandType);
             }
+            break;
         case MISSING_DESCRIPTION:
             switch (commandType) {
             case TODO:

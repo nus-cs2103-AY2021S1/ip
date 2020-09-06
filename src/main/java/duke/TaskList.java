@@ -1,8 +1,8 @@
 package duke;
 
-import java.util.ArrayList;
-
 import static duke.DukeCommandType.UPDATE;
+
+import java.util.ArrayList;
 
 /**
  * TaskList class contains the task list and all operations that modify task in the list.
@@ -44,7 +44,6 @@ public class TaskList {
 
     /**
      * Prints user's list of tasks.
-     *
      */
     public static String getListOfTasks() {
         String str = "";
@@ -122,8 +121,16 @@ public class TaskList {
         return str;
     }
 
+    /**
+     * Updates task's description or date
+     *
+     * @param index
+     * @param type
+     * @param edit
+     * @return String of updated task
+     */
     public static String updateTask(Integer index, String type, String edit) {
-        String str ="";
+        String str = "";
         if (index > tasks.size()) {
             try {
                 throw new DukeException("", DukeExceptionType.INVALID_INDEX, UPDATE);
@@ -135,7 +142,7 @@ public class TaskList {
             Task updatedTask = null;
             if (currTask instanceof ToDo) {
                 if (type.equals("desc")) {
-                    updatedTask = new ToDo(edit,currTask.isDone);
+                    updatedTask = new ToDo(edit, currTask.isDone);
                     tasks.set(index, updatedTask);
                     str += "Okay! I've updated this task to:\n"
                             + tasks.get(index);

@@ -39,6 +39,14 @@ public class Event extends Task {
         this.scheduled = LocalDate.parse(scheduled);
     }
 
+    /**
+     * Initialises Events using description, scheduled event date and isDone.
+     * Used when knowledge about isDone is needed, eg. loading existing list from hard disk.
+     *
+     * @param description
+     * @param scheduled
+     * @param isDone
+     */
     public Event(String description, LocalDate scheduled, boolean isDone) {
         super(description, isDone);
         this.scheduled = scheduled;
