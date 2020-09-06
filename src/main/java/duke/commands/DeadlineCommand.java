@@ -24,6 +24,7 @@ public class DeadlineCommand extends Command {
 
     /**
      * Adds a <code>Deadline</code> to the task manager.
+     * @param input the user input.
      * @return <code>true</code>
      * @throws DukeException if the construction of the <code>Deadline</code> object results in an <code>exception</code>
      */
