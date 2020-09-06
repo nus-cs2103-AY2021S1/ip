@@ -1,6 +1,7 @@
 package main.java.duke;
 
 import java.io.File;
+import java.util.ArrayList;
 
 public class Duke {
 
@@ -23,7 +24,9 @@ public class Duke {
     public Duke(String filepath) {
         storage = new Storage(filepath);
         // task
-        taskList = new TaskList(storage.getStartupTaskList());
+        ArrayList<Task> taskArrayList = storage.getStartupTaskList();
+        assert taskArrayList != null : "taskArrayList is null";
+        taskList = new TaskList(taskArrayList);
         ui = new Ui(taskList, storage);
     }
 
@@ -45,6 +48,7 @@ public class Duke {
 
     public static void main(String[] args) {
         String workingDir = System.getProperty("user.dir");
+        assert workingDir.length() > 0 : "working directory is empty";
         Duke application = new Duke(workingDir + File.separator
                 + "tasklist.txt");
         application.run();

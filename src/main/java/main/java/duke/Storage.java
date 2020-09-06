@@ -7,15 +7,13 @@ import java.util.Scanner;
 
 public class Storage {
 
-    private File file = null;
+    private File file;
 
-    private Scanner fileScanner = null;
+    private FileWriter appendFileWriter;
+    private FileReader fileReader;
 
-    private FileWriter appendFileWriter = null;
-    private FileReader fileReader = null;
-
-    private BufferedWriter bufferedAppendWriter = null;
-    private BufferedReader bufferedReader = null;
+    private BufferedWriter bufferedAppendWriter;
+    private BufferedReader bufferedReader;
 
     private ArrayList<Task> startupTaskList = new ArrayList<>();
 
@@ -30,19 +28,14 @@ public class Storage {
         try {
             if (!file.exists()) {
                 file.createNewFile();
-                fileScanner = new Scanner(file);
-                fileReader = new FileReader(file);
-                bufferedReader = new BufferedReader(fileReader);
             } else {
-                fileScanner = new Scanner(file);
-                fileReader = new FileReader(file);
-                bufferedReader = new BufferedReader(fileReader);
+                Scanner fileScanner = new Scanner(file);
                 // while there is still a line of string to read, populate the tasklist
                 while(fileScanner.hasNextLine()) {
                     // dissect the line of String to create Task objects.
                     String taskDesc = fileScanner.nextLine();
                     String[] lineComponents = taskDesc.split(" ", 2);
-                    Task toAdd = null;
+                    Task toAdd;
                     if (taskDesc.contains("[T]")) {
                         toAdd = new Todo(lineComponents[1]);
                     } else if (taskDesc.contains("[D]")) {
@@ -50,6 +43,7 @@ public class Storage {
                     } else if (taskDesc.contains("[E]")) {
                         toAdd = new Event(lineComponents[1]);
                     } else {
+                        toAdd = null;
                         System.out.println("Couldn't read saved tasks from System");
                     }
                     if (taskDesc.contains("\u2713")) {
@@ -59,9 +53,14 @@ public class Storage {
                     startupTaskList.add(toAdd);
                 }
             }
+            fileReader = new FileReader(file);
+            bufferedReader = new BufferedReader(fileReader);
             // appendFileWriter appends new text whenever we write to the file
+            // to maintain the previous entries.
             appendFileWriter = new FileWriter(file, true);
+            assert appendFileWriter != null : "appendFileWriter not initialized properly";
             bufferedAppendWriter = new BufferedWriter(appendFileWriter);
+            assert appendFileWriter != null : "bufferedAppendWriter not initialized properly";
         } catch (FileNotFoundException fnfe) {
             System.out.println(fnfe.getMessage());
         } catch (IOException ioe) {
@@ -94,6 +93,7 @@ public class Storage {
             BufferedWriter bufferedOverrideWriter = new BufferedWriter(overrideFileWriter);;
             for (int i = 0; i < taskList.size(); i++) {
                 Task toWrite = taskList.getTask(i);
+                assert toWrite != null : "task to be written into .txt storage file is null";
                 bufferedOverrideWriter.write(toWrite.toString() + System.lineSeparator());
             }
             bufferedOverrideWriter.flush();
