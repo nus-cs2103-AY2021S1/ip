@@ -1,4 +1,4 @@
-package duke;
+package duke.data.task;
 
 /**
  * Represents a task that has a description and
@@ -34,6 +34,15 @@ public class Task {
      */
     public boolean getIsDone() {
         return isDone;
+    }
+
+    /**
+     * Getter for description, returns the description of the
+     * task as a String.
+     * @return String of task description.
+     */
+    public String getDescription() {
+        return description;
     }
 
     /**

@@ -1,13 +1,12 @@
 package duke;
 
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-
 import java.util.Scanner;
+
+import duke.data.exception.DukeException;
+import duke.data.task.TaskList;
+import duke.parser.Parser;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
 /**
  * Entry point of the To Do List application.

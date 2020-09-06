@@ -1,4 +1,4 @@
-package duke;
+package duke.data.exception;
 
 /**
  * Custom Exception thrown when user input received is invalid.

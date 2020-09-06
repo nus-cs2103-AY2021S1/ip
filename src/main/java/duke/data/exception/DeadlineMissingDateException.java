@@ -1,4 +1,4 @@
-package duke;
+package duke.data.exception;
 
 /**
  * Exception thrown when the Deadline has a missing valid date.

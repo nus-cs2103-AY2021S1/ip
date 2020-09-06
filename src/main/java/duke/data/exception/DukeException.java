@@ -1,4 +1,4 @@
-package duke;
+package duke.data.exception;
 
 /**
  * Base class for custom exceptions specific to Duke.

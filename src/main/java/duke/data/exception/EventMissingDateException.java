@@ -1,4 +1,4 @@
-package duke;
+package duke.data.exception;
 
 /**
  * Custom Duke exception thrown when Event command is missing a date.

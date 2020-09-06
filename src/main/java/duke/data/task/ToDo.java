@@ -1,4 +1,4 @@
-package duke;
+package duke.data.task;
 
 /**
  * Basic task with only a description.

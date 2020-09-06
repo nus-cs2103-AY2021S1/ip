@@ -1,6 +1,18 @@
-package duke;
+package duke.parser;
 
 import java.time.LocalDate;
+
+import duke.data.exception.DeadlineMissingDateException;
+import duke.data.exception.EventMissingDateException;
+import duke.data.exception.InvalidInputException;
+import duke.data.exception.ToDoMissingDescriptionException;
+import duke.data.task.Deadline;
+import duke.data.task.Event;
+import duke.data.task.Task;
+import duke.data.task.TaskList;
+import duke.data.task.ToDo;
+import duke.storage.Storage;
+import duke.ui.Ui;
 
 /**
  * Parses user input.
@@ -28,7 +40,7 @@ public class Parser {
         } else if (userInput.matches("done ([0-9]+)")) {
             int number = Integer.parseInt(userInput.split(" ")[1]);
             if (number > taskList.getTaskList().size()) {
-                ui.printMessage("duke.Task not found please choose another number!");
+                ui.printMessage("duke.data.task.Task not found please choose another number!");
             } else if (number < 100 && number > 0) {
                 taskList.getTask(number - 1).markAsDone();
                 ui.printMessage("This task is done, great job!\n" + taskList.getTask(number - 1));
@@ -80,7 +92,7 @@ public class Parser {
             String keyword = userInput.replace("find ", "");
             String message = "Here are the matching tasks in your list\n";
             for (Task task : taskList.getTaskList()) {
-                if (task.description.contains(keyword)) {
+                if (task.getDescription().contains(keyword)) {
                     message += task.toString() + "\n";
                 }
             }

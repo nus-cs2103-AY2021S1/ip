@@ -1,4 +1,4 @@
-package duke;
+package duke.storage;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -7,6 +7,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.data.task.Deadline;
+import duke.data.task.Event;
+import duke.data.task.Task;
+import duke.data.task.ToDo;
 
 /**
  * Used to load and save data files to the

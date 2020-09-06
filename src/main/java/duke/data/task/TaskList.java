@@ -1,7 +1,9 @@
-package duke;
+package duke.data.task;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.data.exception.DukeException;
 
 /**
  * Data class containing the list of tasks
