@@ -147,15 +147,6 @@ public class Output {
         return result.toString();
     }
 
-    /**
-     * Prints the Duke logo ("AWESOME-O").
-     *
-     * @return A string representing the Duke logo.
-     */
-    public String printLogo() {
-        return Message.LOGO;
-    }
-
     // Prints the number of tasks left in the list
     private String printNumberOfTasks(int n) {
         return String.format(Message.MESSAGE_NUMBER_OF_TASKS, n);
