@@ -3,6 +3,7 @@ package duke.command;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.stream.Stream;
 
 import duke.exception.InvalidCommandException;
 import duke.parser.DateTimeParsing;
@@ -30,13 +31,15 @@ public class DueCommand extends Command {
 
             ArrayList<String> filteredTasks = new ArrayList<>();
             int len = taskList.size();
-            for (int i = 1; i <= len; i++) {
-                Task task = taskList.get(i - 1);
-                if (task.isDueOn(date)) {
-                    String output = i + "." + task.toString();
-                    filteredTasks.add(output);
-                }
-            }
+            Stream
+                    .iterate(1 , i -> i <= len, i -> i + 1)
+                    .forEach(i -> {
+                        Task task = taskList.get(i - 1);
+                        if (task.isDueOn(date)) {
+                            String output = i + "." + task.toString();
+                            filteredTasks.add(output);
+                        }
+                    });
 
             boolean hasTaskToShow = filteredTasks.size() > 0;
             String firstLine = hasTaskToShow
