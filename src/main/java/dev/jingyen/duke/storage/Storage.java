@@ -39,8 +39,6 @@ public class Storage {
         return tasks;
     }
 
-    // TODO: 26/8/20 consider a more robust check
-
     /**
      * Checks if the file at <code>filePath</code> exists.
      *
