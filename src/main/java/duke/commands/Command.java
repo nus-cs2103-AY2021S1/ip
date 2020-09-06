@@ -4,11 +4,11 @@ import duke.Ui;
 import duke.tasks.TaskManager;
 import duke.DukeException;
 
-import java.util.Scanner;
-
 /**
- * duke.commands.Command is the abstract base class for all
- * duke.commands
+ * Command is the abstract base class for all commands.
+ * Each command will have different stages in its life cycle and will always
+ * be initialised with zero.
+ * Each stage will have a different response to be displayed to the user.
  */
 public abstract class Command {
     protected TaskManager tm;
@@ -29,7 +29,7 @@ public abstract class Command {
     }
 
     /**
-     * Abstract method to be implemented by child command classes.
+     * Executes the command.
      * Different child command classes will have different behaviours
      * when the method <code>execute</code> is called.
      * @return a boolean value indicating whether or not the program should continue running.
@@ -37,6 +37,12 @@ public abstract class Command {
      */
     public abstract boolean execute(String input) throws DukeException;
 
+    /**
+     * Initialises the command.
+     * Different child command classes will have different behaviours.
+     * @param tm the task manager.
+     * @param ui the ui.
+     */
     public abstract void init(TaskManager tm, Ui ui);
 
     protected void incrementStage() {
@@ -47,6 +53,10 @@ public abstract class Command {
         this.response = response;
     }
 
+    /**
+     * Returns the value of <code>isDone</code>.
+     * @return a boolean value.
+     */
     public boolean isDone() {
         return isDone;
     };
