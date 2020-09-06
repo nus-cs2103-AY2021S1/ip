@@ -24,7 +24,8 @@ import duke.task.ToDo;
 public class Parser {
     // check if user input contains a single word
     private static boolean checkIfSingleWordReply(String[] commandAndArguments) {
-        return commandAndArguments.length == 1;
+        final int SINGLE_WORD_LENGTH = 1;
+        return commandAndArguments.length == SINGLE_WORD_LENGTH;
     }
     
     /**
@@ -36,7 +37,8 @@ public class Parser {
      */
     static Command parse(String reply) throws DukeException {
         String[] commandAndArguments = reply.split(" ");
-        String command = commandAndArguments[0];
+        final int COMMAND_INDEX = 0;
+        String command = commandAndArguments[COMMAND_INDEX];
         boolean isSingleWordCommand = checkIfSingleWordReply(commandAndArguments);
         if (isSingleWordCommand) {
             switch (command) {
@@ -50,7 +52,7 @@ public class Parser {
                 throw new DukeException(
                         String.format("Invalid Command Exception: %s is not a valid single word command.", command));
             }
-        } else {
+        } else if (!isSingleWordCommand) {
             try {
                 switch (command) {
                 case "done":
@@ -81,6 +83,8 @@ public class Parser {
             } catch (StringIndexOutOfBoundsException | ArrayIndexOutOfBoundsException e) {
                 throw new DukeException(String.format("Invalid arguments specified for %s", command));
             }
+        } else {
+           throw new DukeException("Unexpected number of Commands");
         }
     }
 

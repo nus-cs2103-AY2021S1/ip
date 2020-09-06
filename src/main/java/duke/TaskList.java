@@ -42,7 +42,8 @@ public class TaskList {
      */
     public Task removeTask(int index) {
         // 1 index list
-        return taskList.remove(index - 1);
+        final int OFFSET = 1;
+        return taskList.remove(index - OFFSET);
     }
 
     /**
@@ -61,7 +62,8 @@ public class TaskList {
      * @return Task Object retrieved based on index.
      */
     public Task getTask(int taskIndex) {
-        return taskList.get(taskIndex - 1);
+        final int OFFSET = 1;
+        return taskList.get(taskIndex - OFFSET);
     }
 
     /**
@@ -90,8 +92,9 @@ public class TaskList {
     @Override
     public String toString() {
         String formattedListString = "";
+        final int OFFSET = 1;
         for (int i = 0; i < taskList.size(); i++) {
-            formattedListString += String.format("%d. %s\n", i + 1, taskList.get(i));
+            formattedListString += String.format("%d. %s\n", i + OFFSET, taskList.get(i));
         }
         return formattedListString;
     }
