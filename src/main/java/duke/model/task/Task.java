@@ -53,6 +53,11 @@ public abstract class Task {
         return this.isDone;
     }
 
+    /**
+     * Returns description of Task.
+     *
+     * @return Task description.
+     */
     public String getDescription() {
         return this.description;
     }

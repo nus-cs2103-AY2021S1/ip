@@ -8,12 +8,28 @@ import duke.model.task.Task;
 import duke.storage.Storage;
 import duke.ui.Ui;
 
+/**
+ * Handles 'find' command input by user.
+ */
 public class FindCommand extends Command {
 
+    /**
+     * Constructor for FindCommand class.
+     *
+     * @param command String input by user.
+     */
     public FindCommand(String command) {
         super(command);
     }
 
+    /**
+     * Gets Tasks containing keyword from TaskManager.
+     *
+     * @param tm TaskManager that handles tasks in memory.
+     * @param ui User interface that interacts with the user.
+     * @param storage Storage class that handles saving and loading from file.
+     * @throws DukeException If search term is not provided.
+     */
     @Override
     public void execute(TaskManager tm, Ui ui, Storage storage) throws DukeException {
         String[] commandDetails = command.split(" ", 2);

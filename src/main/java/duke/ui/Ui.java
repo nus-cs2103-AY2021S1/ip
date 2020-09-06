@@ -60,6 +60,10 @@ public class Ui {
         System.out.println(s);
     }
 
+    /**
+     * Prints a given ArrayList of Tasks.
+     * @param taskList ArrayList of Tasks to be printed.
+     */
     public void showTaskList(ArrayList<Task> taskList){
         String s = "";
         for (int i= 0; i < taskList.size(); i++) {

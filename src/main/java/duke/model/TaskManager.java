@@ -93,6 +93,12 @@ public class TaskManager {
     }
 
 
+    /**
+     * Searches taskList for Task description containing keyword.
+     *
+     * @param searchTerm Keyword to be searched.
+     * @return ArrayList of Tasks containing keyword.
+     */
     public ArrayList<Task> findTasks(String searchTerm) {
         ArrayList<Task> matchingTasks = new ArrayList<Task>();
         for (Task task : taskList) {
