@@ -118,7 +118,8 @@ public class Storage {
      * Updates save file.
      */
     public void updateFile() {
-        file.delete();
+        boolean fileDeleted = file.delete();
+        assert fileDeleted: "file not deleted";
         saveFile();
         loadFile();
     }
