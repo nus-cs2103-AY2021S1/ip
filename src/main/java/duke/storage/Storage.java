@@ -49,7 +49,7 @@ public class Storage {
      * @throws IOException on input error.
      */
     public String saveToFile() throws IOException {
-        FileWriter fileWriter = new FileWriter(file, true);
+        FileWriter fileWriter = new FileWriter(file, false);
         for (String s : recordArrayLst) {
             fileWriter.write(s + "\n");
         }
