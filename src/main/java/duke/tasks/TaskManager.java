@@ -49,7 +49,7 @@ public class TaskManager {
     private void save() {
         StringBuffer sb = new StringBuffer();
         for (Task task : tasks) {
-            sb.append(task.saveText() + "\n");
+            sb.append(task.saveText()).append("\n");
         }
         Storage.writeTasksFile(sb.toString());
     }
@@ -62,7 +62,7 @@ public class TaskManager {
         int i = 1;
         StringBuffer sb = new StringBuffer("Here are your duke.tasks\n");
         for (Task task: tasks) {
-            sb.append("\n" + i + ". " + task);
+            sb.append("\n").append(i).append(". ").append(task);
             i++;
         }
         return sb.toString();
