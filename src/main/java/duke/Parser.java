@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 public class Parser {
 
-    public static int CONTINUE = 1, BYE = 2;
-    public static int TODO = 0, DEADLINE = 1, EVENT = 2;
+    public static final int CONTINUE = 1, BYE = 2;
+    public static final int TODO = 0, DEADLINE = 1, EVENT = 2;
     protected Ui ui;
 
     /**

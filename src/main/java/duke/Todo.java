@@ -7,15 +7,15 @@ public class Todo extends Task {
 
     /**
      * Gets the description of the Todo
-     * @param s the todo input by user
+     * @param input the todo input by user
      * @return the description of the Todo
      */
-    public static String getDescription(String s) {
+    public static String getDescription(String input) {
         int start = 0;
-        while (!s.substring(start, start + 4).equals("todo")) {
+        while (!input.substring(start, start + 4).equals("todo")) {
             start++;
         }
-        return s.substring(start + 5);
+        return input.substring(start + 5);
     }
 
     /**
