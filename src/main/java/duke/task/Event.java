@@ -20,6 +20,12 @@ public class Event extends Task {
     }
 
     @Override
+    public String getType() { return "Event"; }
+
+    @Override
+    public LocalDate getDate() { return this.date; }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
             + " " + time + ")";
