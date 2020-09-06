@@ -22,116 +22,23 @@ public class Duke {
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
-    /* 
-    Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     
-    @Override
-    public void start(Stage stage) {
-        // Step 1
-        scrollPane = new ScrollPane();
-        dialogContainer = new VBox();
-        scrollPane.setContent(dialogContainer);
-
-        userInput = new TextField();
-        sendButton = new Button("Send");
-
-        AnchorPane mainLayout = new AnchorPane();
-        mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-
-        scene = new Scene(mainLayout);
-
-        stage.setScene(scene);
-        stage.show();
-        // Step 2
-        stage.setTitle("Duke");
-        stage.setResizable(false);
-        stage.setMinHeight(600.0);
-        stage.setMinWidth(400.0);
-
-        mainLayout.setPrefSize(400.0, 600.0);
-
-        scrollPane.setPrefSize(385, 535);
-        scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
-        scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
-
-        scrollPane.setVvalue(1.0);
-        scrollPane.setFitToWidth(true);
-        
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
-        userInput.setPrefWidth(325.0);
-
-        sendButton.setPrefWidth(55.0);
-
-        AnchorPane.setTopAnchor(scrollPane, 1.0);
-
-        AnchorPane.setBottomAnchor(sendButton, 1.0);
-        AnchorPane.setRightAnchor(sendButton, 1.0);
-
-        AnchorPane.setLeftAnchor(userInput , 1.0);
-        AnchorPane.setBottomAnchor(userInput, 1.0);
-        //Step 3
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
-
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
-        //Scroll down to the end every time dialogContainer's height changes.
-        dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-    }
     /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-    /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     
-    private void handleUserInput() {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
-        );
-        userInput.clear();
-    }
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns Duke's response as a String.
+     * 
+     * @throws DukeException 
      */
-    public String getResponse(String input) throws DukeException, UnsupportedEncodingException {
-        //return "Duke heard: " + input;
-        /*ByteArrayOutputStream os = new ByteArrayOutputStream();
-        String utf8 = StandardCharsets.UTF_8.name();
-        try (PrintStream ps = new PrintStream(os, true, utf8)) {
-            new Duke("listStore.ser").run(input);
-        }
-        String data = new String(os.toByteArray(), utf8);
-        System.out.println(data);
-        return data;
-        */
+    public String getResponse(String input) throws DukeException {
         return new Duke("listStore.ser").run(input);
     }
     
     /**
-     * Duke runs the program, and ends process when user input is "bye"
+     * Duke runs the program, using data specified by filepath.
      * @param filepath
      * @throws DukeException if an exception arises while reading input or creating parser object
      */
     public Duke(String filepath) {
+        assert filepath == "listStore.ser";
         ui = new UI();
         storage = new Storage(filepath);
         try {
@@ -141,14 +48,15 @@ public class Duke {
             inputs = new TaskList();
         }
     }
+    
+    //Empty Constructor
     public Duke() {
-        
     }
 
     /**
-     * run() method constructs Duke Object, constructs UI,
-     * storage and TaskList object to initialize
-     * @return
+     * run() method constructs Duke Object, constructs UI, storage and TaskList object to initialize.
+     * 
+     * @return output String 
      */
     public String run(String input) throws DukeException {
         while (true) {
@@ -254,7 +162,9 @@ public class Duke {
         }
     }
 
-    // Storage Class deals with saving and retrieving data from a hard disk
+    /** 
+     * Storage Class deals with saving and retrieving data from a hard disk.
+     */
     public static class Storage {
         private String filepath;
 
@@ -262,8 +172,8 @@ public class Duke {
             this.filepath = filepath;
         }
 
-        /*
-         * Saves tasks in file specified by the filepath
+        /**
+         * Saves tasks in file specified by the filepath.
          *
          * @param list of tasks
          * @catch IOException
@@ -280,8 +190,8 @@ public class Duke {
             }
         }
 
-        /*
-         * Retrieves tasks from file specified by the filepath
+        /**
+         * Retrieves tasks from file specified by the filepath.
          *
          * @catch FileNotFoundException if file does not exist, creates a new arraylist
          * @catch IOException and ClassNotFoundException, returns null
@@ -323,8 +233,8 @@ public class Duke {
             }
         }
 
-        /*
-         * Marks task, as specified by user, as done
+        /**
+         * Marks task, as specified by user, as done.
          *
          * @param nextLine, represents user input
          * @throws DukeException if user does not specify which task done, or if task specified is not in list
@@ -346,13 +256,13 @@ public class Duke {
             }
         }
 
-        /*
-         * removes task, as specified by the user, from list
+        /**
+         * Removes task, as specified by the user, from list.
          *
          * @param nextLine, represents user input
          * @throws DukeException if user does not specify which task to remove or task is not in list
          */
-        String taskRemove(String nextLine) throws DukeException {
+        String removeTask(String nextLine) throws DukeException {
             if (nextLine.equals("remove") || nextLine.equals("remove ")) {
                 throw new DukeException("OOPS!!! The description of remove cannot be empty");
             }
@@ -372,13 +282,13 @@ public class Duke {
             }
         }
 
-        /*
-         * Adds a to-do object to the list, and saves the list to hard disk
+        /**
+         * Adds a to-do object to the list, and saves the list to hard disk.
          *
          * @param nextLine, represents user input
          * @throws DukeException if user does not specify task to-do
          */
-        String taskTodo(String nextLine) throws DukeException {
+        String addTodoTask(String nextLine) throws DukeException {
             if (nextLine.equals("todo") || nextLine.equals("todo ")) {
                 throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
             }
@@ -386,17 +296,18 @@ public class Duke {
             inputs.add(todo);
             int count = inputs.size();
             storage.writeToFile(inputs);
+            assert inputs != null;
             return "Got it. I've added this task: \n" + "  [T][x] " + todo.content
                     + "\n Now you have " + count + " tasks in the list";
         }
 
-        /*
-         * Adds a deadline object to the list, and saves the list to hard disk
+        /**
+         * Adds a deadline object to the list, and saves the list to hard disk.
          *
          * @param nextLine, represents user input
          * @throws DukeException if user does not specify task
          */
-        String taskDeadline(String nextLine) throws DukeException {
+        String addDeadlineTask(String nextLine) throws DukeException {
             try {
                 if (nextLine.equals("deadline") || nextLine.equals("deadline ")) {
                     throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
@@ -406,6 +317,7 @@ public class Duke {
                 inputs.add(deadline);
                 int count = inputs.size();
                 storage.writeToFile(inputs);
+                assert inputs != null;
                 return ("Got it. I've added this task: \n" + "  [D][x] " + deadline.content
                         + deadline.printTime + "\n Now you have " + count + " tasks in the list");
             } catch (java.time.format.DateTimeParseException e) {
@@ -413,13 +325,13 @@ public class Duke {
             }
         }
 
-        /*
-         * Adds an event object to the list, and saves the list to hard disk
+        /**
+         * Adds an event object to the list, and saves the list to hard disk.
          *
          * @param nextLine, represents user input
          * @throws DukeException if user does not specify task
          */
-        String taskEvent(String nextLine) throws DukeException {
+        String addEventTask(String nextLine) throws DukeException {
             if (nextLine.equals("event") || nextLine.equals("event ")) {
                 throw new DukeException("OOPS!!! The description of an event cannot be empty.");
             }
@@ -428,11 +340,12 @@ public class Duke {
             inputs.add(event);
             int count = inputs.size();
             storage.writeToFile(inputs);
+            assert inputs != null;
             return ("Got it. I've added this task: \n" + "  [E][x] " + event.content
                     + event.printTime + "\n Now you have " + count + " tasks in the list");
         }
 
-        String taskFind(String nextLine) throws DukeException {
+        String findTask(String nextLine) throws DukeException {
             if (nextLine.equals("find") || nextLine.equals("find ")) {
                 throw new DukeException("OOPS!!! The description of find cannot be empty");
             }
@@ -441,16 +354,32 @@ public class Duke {
             for (int i = 0; i < len; i++) {
                 Input input = inputs.get(i);
                 if (input.content.contains(keyword)) {
-                    if (input.done) {
-                        return ((i + 1) + ". " + input.id + "[/] " + input.content
-                                + input.printTime);
-                    } else {
-                        return ((i + 1) + ". " + input.id + "[x] " + input.content
-                                + input.printTime);
-                    }
+                    printTask(input, i);
                 }
             }
             return "";
+        }
+        
+        String printList() {
+            if (this.inputs.size() == 0) {
+                return "No tasks in list";
+            } else {
+                int len = this.inputs.size();
+                String stringList = "Here are the tasks in your list: \n";
+                for (int i = 0; i <= len-1; i++) {
+                    Input input = this.inputs.get(i);
+                    stringList += printTask(input, i);
+                }
+                return stringList;
+            }
+        }
+        
+        String printTask(Input input, int i) {
+            if (input.done) {
+                return ((i+1) + ". " + input.id + "[/] " + input.content + input.printTime + "\n");
+            } else {
+                return ((i+1) + ". " + input.id + "[x] " + input.content + input.printTime + "\n");
+            }
         }
     }
 
@@ -486,47 +415,34 @@ public class Duke {
 
     //Parser class deals with making sense of user command
     public static class Parser {
-        private final String nextLine;
-        private final TaskList inputs;
+        private final String userInput;
+        private final TaskList savedTaskList;
 
         Parser(String nextLine, TaskList inputs) {
-            this.nextLine = nextLine;
-            this.inputs = inputs;
+            this.userInput = nextLine;
+            this.savedTaskList = inputs;
         }
 
-        /** Guides the TaskList based on user command
+        /** Guides the TaskList based on user command.
+         * 
          * @throws DukeException
          */
         String parse() throws DukeException {
             try {
-                if (nextLine.startsWith("done")) {
-                    return inputs.taskDone(nextLine);
-                } else if (nextLine.startsWith("remove")) {
-                    return inputs.taskRemove(nextLine);
-                } else if (nextLine.startsWith("todo")) {
-                    return inputs.taskTodo(nextLine);
-                } else if (nextLine.startsWith("deadline")) {
-                    return inputs.taskDeadline(nextLine);
-                } else if (nextLine.startsWith("event")) {
-                    return inputs.taskEvent(nextLine);
-                } else if (nextLine.startsWith("find")) {
-                    return inputs.taskFind(nextLine);
-                } else if (nextLine.equals("list")) {
-                    if (inputs.inputs.size() == 0) {
-                        return "No tasks in list";
-                    } else {
-                        int len = inputs.inputs.size();
-                        String stringList = "Here are the tasks in your list: \n";
-                        for (int i = 0; i <= len-1; i++) {
-                            Input inputType = inputs.inputs.get(i);
-                            if (inputType.done) {
-                                stringList += ((i+1) + ". " + inputType.id + "[/] " + inputType.content + inputType.printTime + "\n");
-                            } else {
-                                stringList += ((i+1) + ". " + inputType.id + "[x] " + inputType.content + inputType.printTime + "\n");
-                            }
-                        }
-                        return stringList;
-                    }
+                if (userInput.startsWith("done")) {
+                    return savedTaskList.taskDone(userInput);
+                } else if (userInput.startsWith("remove")) {
+                    return savedTaskList.removeTask(userInput);
+                } else if (userInput.startsWith("todo")) {
+                    return savedTaskList.addTodoTask(userInput);
+                } else if (userInput.startsWith("deadline")) {
+                    return savedTaskList.addDeadlineTask(userInput);
+                } else if (userInput.startsWith("event")) {
+                    return savedTaskList.addEventTask(userInput);
+                } else if (userInput.startsWith("find")) {
+                    return savedTaskList.findTask(userInput);
+                } else if (userInput.equals("list")) {
+                    return savedTaskList.printList();
                 } else {
                     throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
                 }
