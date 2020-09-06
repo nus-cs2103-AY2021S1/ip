@@ -21,7 +21,7 @@ public class TaskList {
 
     /** Private constructor */
     private TaskList() {
-        l = new Storage();
+        l = new Storage("data", "taskdata.txt");
 
         // Checks if there are any save files of todoList.
         // If there is, attempt to read the object as arraylist.

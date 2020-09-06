@@ -19,7 +19,7 @@ public class Executor {
 
     private static final TaskList TASK_LIST = TaskList.initStorage();
 
-    private static final Storage STORAGE = new Storage();
+    private static final Storage STORAGE = new Storage("data", "taskdata.txt");
 
     /* Half-assed attempt at concurrency lock.
     There should be no need for concurrency

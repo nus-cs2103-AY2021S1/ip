@@ -26,27 +26,4 @@ class ParserTest {
         }
     }
 
-    @Test
-    void test_authenthicateUser_correct_password() {
-        Controller c = Controller.initController();
-        c.savedUserPw("Chciken nuggets");
-        try {
-            Parser p = Parser.authenthicateUser("Chciken nuggets");
-            assertEquals(1,1);
-        } catch (DukeException e) {
-            fail();
-        }
-    }
-    @Test
-    void test_authenthicateUser_wrong_password() {
-        Controller c = Controller.initController();
-        c.savedUserPw("Chicken nuggets");
-        try {
-            Parser p = Parser.authenthicateUser("Chciken nuggets");
-            fail();
-        } catch (DukeException e) {
-            assertEquals(1,1);
-        }
-    }
-
 }

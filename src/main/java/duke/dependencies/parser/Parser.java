@@ -3,11 +3,9 @@ package duke.dependencies.parser;
 import duke.dependencies.dukeexceptions.DukeException;
 import duke.dependencies.dukeexceptions.EmptyTaskException;
 import duke.dependencies.dukeexceptions.InvalidDateException;
-import duke.dependencies.dukeexceptions.InvalidPassException;
 import duke.dependencies.dukeexceptions.UnknownCommandException;
 import duke.dependencies.executable.Command;
 import duke.dependencies.executable.Executable;
-import duke.dependencies.storage.Storage;
 import duke.dependencies.task.Task;
 import duke.dependencies.task.TaskDate;
 
@@ -17,7 +15,7 @@ import java.util.regex.Pattern;
 /**
  * A Class to parse commands.
  */
-class Parser {
+public class Parser {
     private final Executable command;
 
     /**
@@ -56,26 +54,26 @@ class Parser {
         }
     }
 
-    /**
-     *
-     *
-     * @param pw Password/name to be checked with.
-     * @return
-     * @throws DukeException Thrown if the given string is incorrect.
-     * AKA no authorisation.
-     */
-    public static Parser authenthicateUser(String pw) throws DukeException {
-        Storage s = new Storage();
-        if (s.checkUserAuth(pw)) {
-            try {
-                return parseExplicitCommand("authentication::success");
-            } catch (DukeException e) {
-                throw e;
-            }
-        } else {
-            throw new InvalidPassException("Wrong password");
-        }
-    }
+//    /**
+//     *
+//     *
+//     * @param pw Password/name to be checked with.
+//     * @return
+//     * @throws DukeException Thrown if the given string is incorrect.
+//     * AKA no authorisation.
+//     */
+//    public static Parser authenthicateUser(String pw) throws DukeException {
+//        Storage s = new Storage();
+//        if (s.checkUserAuth(pw)) {
+//            try {
+//                return parseExplicitCommand("authentication::success");
+//            } catch (DukeException e) {
+//                throw e;
+//            }
+//        } else {
+//            throw new InvalidPassException("Wrong password");
+//        }
+//    }
 
 
     /* -------------------------------------- END OF PUBLIC METHODS ----------------------------------------------- */
@@ -188,7 +186,7 @@ class Parser {
      * @param word Word to check for.
      * @return True if the word is in the line.
      */
-    private static boolean checkForWord(String line, String word) {
+    public static boolean checkForWord(String line, String word) {
         return Pattern.compile(
                 String.format(".*?\\b%s\\b.*?", word),
                 Pattern.CASE_INSENSITIVE)
@@ -197,17 +195,17 @@ class Parser {
     }
 
     /**
-     * Case insensitive cutting out of the word.
+     * Returns the string with the given word cut out, case-insensitive removal
      *
      * @param line Line to cut from.
-     * @param cmd Command to cut out.
+     * @param word Word to cut out.
      * @return Line without the command.
      */
-    private static String cutOutTheWord(String line, String cmd) {
-        String c2 = cmd.toUpperCase(Locale.UK);
+    public static String cutOutTheWord(String line, String word) {
+        String c2 = word.toUpperCase(Locale.UK);
         String l2 = line.toUpperCase(Locale.UK);
         int idx = l2.indexOf(c2);
-        return line.substring(idx + cmd.length()).trim();
+        return line.substring(idx + word.length()).trim();
 
     }
 

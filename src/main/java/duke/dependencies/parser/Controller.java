@@ -1,13 +1,14 @@
 package duke.dependencies.parser;
 
+import duke.UserAuthenticator;
 import duke.dependencies.dukeexceptions.DukeException;
 import duke.dependencies.dukeexceptions.EmptyTaskException;
 import duke.dependencies.dukeexceptions.InvalidDateException;
 import duke.dependencies.dukeexceptions.UnknownCommandException;
 import duke.dependencies.dukeexceptions.UnspecifiedDateException;
+import duke.dependencies.executable.Command;
 import duke.dependencies.executable.Executable;
 import duke.dependencies.executor.Executor;
-import duke.dependencies.storage.Storage;
 
 
 /**
@@ -21,6 +22,11 @@ public class Controller {
      */
     private final Executor exe;
 
+    /**
+     * Object to authenticate the user.
+     */
+    private final UserAuthenticator userAuthenticator;
+
     private boolean isInUserAuthenticationMode = false;
 
     /**
@@ -28,6 +34,7 @@ public class Controller {
      */
     private Controller() {
         exe = Executor.initExecutor();
+        userAuthenticator = UserAuthenticator.init();
     }
 
     /**
@@ -35,28 +42,26 @@ public class Controller {
      *
      * @return The Parser object.
      */
-    public static Controller initController() {
+    public static Controller init() {
         return new Controller();
     }
 
     /**
-     * Returns a boolean to check if the user has a cached password.
+     * Checks the whether the user has entered his details.
      *
-     * @return True if the user has already saved a password for Duke.
+     * @return True if the user details has already been cached.
      */
-    public boolean checkIsUserPwCached() {
-        Storage s = new Storage();
-        return s.checkPwCache();
+    public boolean hasUserEnteredDetails() {
+        return userAuthenticator.isUserCached();
     }
 
     /**
-     * Saves user entered password/name to the file.
+     * Saves the given user details.
      *
-     * @param pw The userpassword/name.
+     * @param details User details to be saved.
      */
-    public void savedUserPw(String pw) {
-        Storage s = new Storage();
-        s.saveUserPw(pw);
+    public void saveUserDetails(String details) {
+        userAuthenticator.save(details);
     }
 
 
@@ -64,11 +69,11 @@ public class Controller {
      * Parses given command and determines if it is a valid command,
      * and calls an executor to execute a valid command.
      *
-     * @param command
+     * @param command The given input by the user.
      * @return Reply: what was done by the execution of input.
      */
     public String parseAndExec(String command) {
-        Parser parser = null;
+        Parser parser;
         if (!isInUserAuthenticationMode) {
             try {
                 parser = Parser.parseAndCheck(command);
@@ -129,14 +134,14 @@ public class Controller {
                 return "Something is not right. This should not be printed. Error in Controller.java";
             }
         } else {
-            try {
-                parser = Parser.authenthicateUser(command);
+
+            // In user authentication mode. Check for user password validity.
+            if (userAuthenticator.check(command)) {
                 isInUserAuthenticationMode = false;
-                Executable e = parser.getExecutable();
-                String reply = exe.receiveAndExec(e);
+                String reply = exe.receiveAndExec(Command.createClearCacheCommand(null));
                 return reply;
-            } catch (DukeException e) {
-                return e.getMessage();
+            } else {
+                return "You've entered the wrong pw!";
             }
         }
 
