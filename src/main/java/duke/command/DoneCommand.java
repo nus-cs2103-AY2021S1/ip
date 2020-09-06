@@ -24,11 +24,11 @@ public class DoneCommand extends Command {
         } else {
             int index = Integer.parseInt("" + getInputCommand().charAt(5)) - 1;
             if (list.getList().size() >= index && index >= 0) {
-                Task tas = list.getList().get(index);
-                tas.markAsDone();
+                Task taskToPrint = list.getList().get(index);
+                taskToPrint.markAsDone();
 
                 ui.printMessage("Nice! I've marked this task as done:");
-                ui.printMessage(tas.toString());
+                ui.printMessage(taskToPrint.toString());
                 storage.save(list);
             }
         }

@@ -21,14 +21,16 @@ public class DeadlineCommand extends Command {
 
     @Override
     public void execute(TaskList list, Storage storage, Ui ui) throws DukeCommandException, DukeStorageException {
-        Pattern pattern = Pattern.compile("deadline ([a-zA-z0-9_-]+)((?: [a-zA-z0-9_-]+)*) /by [0-9]{1,2}/[0-9]{1,2}/[0-9]{4,4} [0-9]{4,4}");
+        Pattern pattern = Pattern.compile(
+                "deadline ([a-zA-z0-9_-]+)((?: [a-zA-z0-9_-]+)*) /by [0-9]{1,2}/[0-9]{1,2}/[0-9]{4,4} [0-9]{4,4}");
         if (!pattern.matcher(getInputCommand()).matches()) {
             throw new DukeCommandException("\u2639 OOPS!!! Wrong 'deadline' command format!");
         } else {
-            String[] s = getInputCommand().substring(9).split(" /by ");
+            String[] parseArray = getInputCommand().substring(9).split(" /by ");
             Deadline deadline;
             try {
-                deadline = new Deadline(s[0], LocalDateTime.parse(s[1], DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")));
+                deadline = new Deadline(parseArray[0], LocalDateTime.parse(parseArray[1],
+                        DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")));
             } catch (DateTimeParseException e) {
                 throw new DukeCommandException("Invalid date!");
             }

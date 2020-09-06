@@ -22,10 +22,10 @@ public class ListCommand extends Command {
         } else {
             ui.printMessage("Here are the tasks in your list:");
 
-            int ctr = 1;
+            int taskIndexCounter = 1;
             for (Task task: list.getList()) {
-                ui.printMessage("" + ctr + "." + task);
-                ctr++;
+                ui.printMessage("" + taskIndexCounter + "." + task);
+                taskIndexCounter++;
             }
         }
     }

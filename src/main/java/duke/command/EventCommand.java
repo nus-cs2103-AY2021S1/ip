@@ -21,15 +21,17 @@ public class EventCommand extends Command {
 
     @Override
     public void execute(TaskList list, Storage storage, Ui ui) throws DukeCommandException, DukeStorageException {
-        Pattern pattern = Pattern.compile("event ([a-zA-z0-9_-]+)((?: [a-zA-z0-9_-]+)*) /at [0-9]{1,2}/[0-9]{1,2}/[0-9]{4,4} [0-9]{4,4}");
+        Pattern pattern = Pattern.compile(
+                "event ([a-zA-z0-9_-]+)((?: [a-zA-z0-9_-]+)*) /at [0-9]{1,2}/[0-9]{1,2}/[0-9]{4,4} [0-9]{4,4}");
         if (!pattern.matcher(getInputCommand()).matches()) {
             throw new DukeCommandException("\u2639 OOPS!!! Wrong 'event' command format!");
         } else {
-            String[] s = getInputCommand().substring(6).split(" /at ");
+            String[] parseArray = getInputCommand().substring(6).split(" /at ");
 
             Event event;
             try {
-                event = new Event(s[0], LocalDateTime.parse(s[1], DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")));
+                event = new Event(parseArray[0], LocalDateTime.parse(parseArray[1],
+                        DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")));
             } catch (DateTimeParseException e) {
                 throw new DukeCommandException("Invalid date!");
             }

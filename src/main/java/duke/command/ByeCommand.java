@@ -3,7 +3,6 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.exception.DukeCommandException;
 
 public class ByeCommand extends Command {
     public ByeCommand(String inputCommand) {
@@ -11,7 +10,7 @@ public class ByeCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList list, Storage storage, Ui ui) throws DukeCommandException {
+    public void execute(TaskList list, Storage storage, Ui ui) {
         ui.printMessage("Bye. Hope to see you again soon!");
     }
 

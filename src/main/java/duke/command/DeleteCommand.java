@@ -22,11 +22,11 @@ public class DeleteCommand extends Command {
         } else {
             int index = Integer.parseInt("" + getInputCommand().charAt(7)) - 1;
             if (list.getList().size() > index && index >= 0) {
-                Task tas = list.getList().get(index);
+                Task taskToPrint = list.getList().get(index);
                 list.getList().remove(index);
 
                 ui.printMessage("Noted. I've removed this task:");
-                ui.printMessage(tas.toString());
+                ui.printMessage(taskToPrint.toString());
 
                 storage.save(list);
             } else {

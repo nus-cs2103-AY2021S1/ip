@@ -53,21 +53,22 @@ public class DialogBox extends HBox {
      */
     private void flip() {
         this.setAlignment(Pos.TOP_LEFT);
-        ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
-        FXCollections.reverse(tmp);
-        this.getChildren().setAll(tmp);
+        ObservableList<Node> child = FXCollections.observableArrayList(this.getChildren());
+        FXCollections.reverse(child);
+        this.getChildren().setAll(child);
     }
 
     public static DialogBox getUserDialog(Label l) {
-        DialogBox box = new DialogBox(l);
-        box.setBackground(new Background(new BackgroundFill(Paint.valueOf("#ffffff"), null, null)));
-        box.setBorder(new Border(new BorderStroke(Paint.valueOf("pink"), null, null, BorderWidths.DEFAULT)));
-        return box;
+        DialogBox dialogBox = new DialogBox(l);
+        dialogBox.setBackground(new Background(new BackgroundFill(Paint.valueOf("#ffffff"), null, null)));
+        dialogBox.setBorder(new Border(new BorderStroke(Paint.valueOf("pink"),
+                null, null, BorderWidths.DEFAULT)));
+        return dialogBox;
     }
 
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        var db = new DialogBox(l.getText(), iv.getImage());
-        db.flip();
-        return db;
+        DialogBox dialogBox = new DialogBox(l.getText(), iv.getImage());
+        dialogBox.flip();
+        return dialogBox;
     }
 }
