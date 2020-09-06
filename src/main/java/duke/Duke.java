@@ -24,8 +24,9 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Returns a response depending on the user input.
+     * @param input user input.
+     * @return the response.
      */
     public String getResponse(String input) {
         // If a command has not been set yet or if the ongoing command has been completed
