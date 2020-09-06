@@ -23,10 +23,10 @@ public class TaskList {
      */
     public String listTasks() throws DukeException {
         if (tasks.size() <= 0) {
-            throw new DukeException("You don't have any tasks.");
+            throw new DukeException(Ui.EMPTY_TASK_LIST_MSG);
         }
 
-        String response = "Here are the tasks in your list:\n";
+        String response = Ui.LIST_TASK_MSG + "\n";
 //        System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++) {
             int taskNo = i + 1;
@@ -44,7 +44,7 @@ public class TaskList {
      */
     public String listTasksOn(LocalDate date) throws DukeException {
         if (tasks.size() <= 0) {
-            throw new DukeException("You don't have any tasks.");
+            throw new DukeException(Ui.EMPTY_TASK_LIST_MSG);
         }
         ArrayList<Task> taskList = new ArrayList<>();
         for (Task task: tasks) {
@@ -84,7 +84,7 @@ public class TaskList {
 //        System.out.println(" " + " "
 //                + "[" + completedTask.getStatusIcon() + "] "
 //                + completedTask.getDescription());
-        String response = "Nice! I've marked this task as done:\n"
+        String response = Ui.DONE_MSG + "\n"
                 + " " + " "
                 + "[" + completedTask.getStatusIcon() + "] "
                 + completedTask.getDescription() + "\n";
@@ -100,7 +100,7 @@ public class TaskList {
         tasks.add(newTask);
 //        System.out.println(newTask);
 //        System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-        String response = "Got it. I've added this task:\n"
+        String response = Ui.ADD_MSG + "\n"
                 + newTask + "\n"
                 + "Now you have " + tasks.size() + " tasks in the list.\n";
         return response;
@@ -115,7 +115,7 @@ public class TaskList {
         if (tasks.size() <= 0) {
             throw new DukeException("Nothing to delete.");
         } else if (taskNo > tasks.size()) {
-            throw new DukeException("Please provide a correct task number.");
+            throw new DukeException(Ui.INVALID_TASK_NO_MSG);
         } else {
             String response;
 //            System.out.println("Noted. I've removed this task:");
@@ -125,7 +125,7 @@ public class TaskList {
 //                    + "[" + taskToBeDeleted.getStatusIcon() + "] "
 //                    + taskToBeDeleted.getDescription());
 //            System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-            response = "Noted. I've removed this task:\n"
+            response = Ui.DELETE_MSG + "\n"
                     + " " + " "
                     + "[" + taskToBeDeleted.getStatusIcon() + "] "
                     + taskToBeDeleted.getDescription() + "\n"
@@ -141,7 +141,7 @@ public class TaskList {
      */
     public String searchKeyword(String keyword) throws DukeException {
         if (tasks.size() <= 0) {
-            throw new DukeException("You don't have any tasks.");
+            throw new DukeException(Ui.EMPTY_TASK_LIST_MSG);
         }
 
         ArrayList<Task> taskList = new ArrayList<>();
