@@ -30,6 +30,8 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui) {
+        assert(this.idx >= 0 && tasks != null && ui != null);
+
         try {
             Task t = tasks.remove(idx);
             ui.showRemoveTask(t, tasks.size());

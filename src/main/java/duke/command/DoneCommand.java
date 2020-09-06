@@ -29,6 +29,8 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui) {
+        assert(this.idx >= 0 && tasks != null && ui != null);
+
         try {
             Task t = tasks.get(idx);
             t.setDone();
