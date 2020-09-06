@@ -45,11 +45,11 @@ public class AddCommand extends Command {
         assert ui != null : "Ui cannot be null";
         switch (command) {
         case TODO:
-            return addToDo(taskList, storage, ui, this.userInput);
+            return addToDo(taskList, storage, ui);
         case DEADLINE:
-            return addDeadline(taskList, storage, ui, this.userInput);
+            return addDeadline(taskList, storage, ui);
         case EVENT:
-            return addEvent(taskList, storage, ui, this.userInput);
+            return addEvent(taskList, storage, ui);
         default:
             throw new DukeException("An invalid command is entered! :(");
         }
@@ -63,39 +63,18 @@ public class AddCommand extends Command {
         return this.userInput;
     }
 
-    /**
-     * Adds a ToDo task.
-     * @param tasks Task List containing tasks.
-     * @param storage Writes the task being added into file.
-     * @param ui Handles printing of user interaction.
-     * @param userInput User input as a String.
-     * @return Text when todo task is added.
-     * @throws DukeException When description of a ToDo task is empty.
-     * @throws IOException When writing to file fails.
-     */
-    public String addToDo(TaskList tasks, Storage storage, Ui ui,
-                        String userInput) throws DukeException, IOException {
+    private String addToDo(TaskList tasks, Storage storage, Ui ui) throws DukeException, IOException {
         assert userInput != null : "User input cannot be null";
-        if (!userInput.substring(4).isBlank()) { //if got space behind, it will add also
-            ToDo todo = new ToDo(userInput.substring(5));
-            tasks.addTask(todo); //adds into tasks list
-            storage.writeToFile(tasks.getTasks());
-            return ui.displayAddTodo(todo, tasks);
-        } else {
+        if (!userInput.substring(4).isBlank()) {
             throw new DukeException("The description of todo cannot be empty!");
         }
+        ToDo todo = new ToDo(userInput.substring(5));
+        tasks.addTask(todo);
+        storage.writeToFile(tasks.getTasks());
+        return ui.displayAddTodo(todo, tasks);
     }
 
-    /**
-     * Adds a Deadline Task.
-     * @param tasks Task List containing tasks.
-     * @param storage Writes the task being added into file.
-     * @param ui Handles printing of user interaction.
-     * @param userInput User input as a String.
-     * @return  Text when deadline task is added.
-     * @throws DukeException When input for Deadline is invalid, respective error messages are printed.
-     */
-    public String addDeadline(TaskList tasks, Storage storage, Ui ui, String userInput)
+    private String addDeadline(TaskList tasks, Storage storage, Ui ui)
             throws DukeException {
         assert userInput != null : "User input cannot be null";
         String[] input = userInput.split(" ");
@@ -109,7 +88,7 @@ public class AddCommand extends Command {
                 tasks.addTask(deadline);
                 storage.writeToFile(tasks.getTasks());
                 return ui.displayAddDeadline(deadline, tasks);
-            } catch (PatternSyntaxException | ArrayIndexOutOfBoundsException ex) {
+            } catch (ArrayIndexOutOfBoundsException ex) {
                 throw new DukeException(
                         "You have keyed in an invalid input for 'deadline'!");
             } catch (DateTimeParseException | IOException ex) {
@@ -122,16 +101,7 @@ public class AddCommand extends Command {
         }
     }
 
-    /**
-     * Adds an Event task.
-     * @param tasks Task List containing tasks.
-     * @param storage Writes the task being added into file.
-     * @param ui Handles printing of user interaction.
-     * @param userInput User input as a String.
-     * @return Text when deadline task is added.
-     * @throws DukeException When input for Event is invalid, respective error messages are printed.
-     */
-    public String addEvent(TaskList tasks, Storage storage, Ui ui, String userInput)
+    private String addEvent(TaskList tasks, Storage storage, Ui ui)
             throws DukeException {
         assert userInput != null : "User input cannot be null";
         String[] input = userInput.split(" ");
