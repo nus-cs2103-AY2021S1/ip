@@ -32,7 +32,7 @@ public class Storage {
      * @throws IOException
      */
     public ArrayList<Task> loadData() throws IOException {
-        DateTimeFormatter validFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        DateTimeFormatter validFormat = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
         ArrayList<Task> orderList = new ArrayList<>();
 
         try {
@@ -40,14 +40,14 @@ public class Storage {
             Scanner s = new Scanner(dataStorage);
             while (s.hasNext()) {
                 String curr = s.nextLine();
-                String[] currTask = curr.split("|");
-                Boolean isDone = currTask[1] == "1";
-                if (currTask[0] == "T") {
+                String[] currTask = curr.split(" \\| ");
+                Boolean isDone = currTask[1].equals("1");
+                if (currTask[0].equals("T")) {
                     orderList.add(new Todo(currTask[2], isDone));
-                } else if (currTask[0] == "D") {
+                } else if (currTask[0].equals("D")) {
                     orderList.add(new Deadline(currTask[2],
                             LocalDateTime.parse(currTask[3], validFormat), isDone));
-                } else if (currTask[0] == "E") {
+                } else if (currTask[0].equals("E")) {
                     orderList.add(new Event(currTask[2],
                             LocalDateTime.parse(currTask[3], validFormat), isDone));
                 }
@@ -59,19 +59,18 @@ public class Storage {
                 System.out.println("File duke.txt does not exist yet.");
             }
         }
-
         return orderList;
 
     }
 
     /**
      * Write the changed message into the file.
-     * @param orderlist
+     * @param orderList
      */
-    public void writeData(ArrayList<Task> orderlist) {
+    public void writeData(ArrayList<Task> orderList) {
         try {
             FileWriter fw = new FileWriter(filePath, false);
-            for (Task task : orderlist) {
+            for (Task task : orderList) {
                 fw.write(task.fileFormattedString() + "\n");
             }
             fw.close();
