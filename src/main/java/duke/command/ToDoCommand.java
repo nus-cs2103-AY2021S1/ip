@@ -31,6 +31,8 @@ public class ToDoCommand extends TaskCreationCommand {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null : "tasklist object cannot be null";
+        assert ui != null : "ui object cannot be null";
         Task task = new ToDo(description);
         return super.execute(task, ui, tasks);
     }

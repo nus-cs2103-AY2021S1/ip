@@ -35,6 +35,9 @@ public class DeadlineCommand extends TaskCreationCommand {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null : "tasklist object cannot be null";
+        assert ui != null : "ui object cannot be null";
+        assert storage != null : "storage object cannot be null";
         Task task = new Deadline(description, time);
         return super.execute(task, ui, tasks);
     }

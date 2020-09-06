@@ -35,6 +35,9 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert tasks != null : "tasklist object cannot be null";
+        assert ui != null : "ui object cannot be null";
+        assert storage != null : "storage object cannot be null";
         storage.write(tasks);
         return ui.showGoodbye();
     }

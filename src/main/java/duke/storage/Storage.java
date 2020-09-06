@@ -25,6 +25,7 @@ public class Storage {
      * @param filePath The path of the file that this object interacts with
      */
     public Storage(String filePath) {
+        assert filePath != null : "file path cannot be null";
         this.filePath = filePath;
     }
 
@@ -34,6 +35,7 @@ public class Storage {
      * @throws DukeException If there is any unexpected error in the loading process
      */
     public ArrayList<Task> load() throws DukeException {
+        assert filePath != null : "file path cannot be null";
         File f = new File(filePath);
         ArrayList<Task> tasks = new ArrayList<>();
         try {
@@ -86,6 +88,8 @@ public class Storage {
      * @param tasks The data to be written
      */
     public void write(TaskList tasks) throws DukeException {
+        assert tasks != null : "task list cannot be null";
+        assert filePath != null : "file path cannot be null";
         try {
             File f = new File(filePath);
 

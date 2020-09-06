@@ -35,6 +35,8 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidIndexException {
+        assert tasks != null : "tasklist object cannot be null";
+        assert ui != null : "ui object cannot be null";
         try {
             tasks.markAsDone(index);
             return ui.showMarkAsDoneTask(tasks.get(index));
