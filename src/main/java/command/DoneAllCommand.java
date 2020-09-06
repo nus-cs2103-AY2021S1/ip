@@ -44,8 +44,10 @@ public class DoneAllCommand extends Command {
         }
 
         StringBuilder sb = new StringBuilder();
+
         for (int i = 0; i < tasks.size(); i++) {
-            if (i != tasks.size() - 1) {
+            boolean isLastTask = i != tasks.size() - 1;
+            if (isLastTask) {
                 sb.append(ui.formatMessage((i + 1) + ". " + tasks.getTask(i) + "\n"));
             } else {
                 sb.append(ui.formatMessage((i + 1) + ". " + tasks.getTask(i)));

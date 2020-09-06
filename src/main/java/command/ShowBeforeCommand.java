@@ -51,13 +51,15 @@ public class ShowBeforeCommand extends Command {
         for (Task task : tasks.getTasks()) {
             if (task instanceof DeadlineTask) {
                 DeadlineTask deadlineTask = (DeadlineTask) task;
-                if (deadlineTask.getDateTime().toLocalDate().isBefore(localDate)) {
+                boolean isBeforeSpecifiedDate = deadlineTask.getDateTime().toLocalDate().isBefore(localDate);
+                if (isBeforeSpecifiedDate) {
                     sb.append(i + ". " + deadlineTask + "\n");
                     i++;
                 }
             } else if (task instanceof EventTask) {
                 EventTask eventTask = (EventTask) task;
-                if (eventTask.getDateTime().toLocalDate().isBefore(localDate)) {
+                boolean isBeforeSpecifiedDate = eventTask.getDateTime().toLocalDate().isBefore(localDate);
+                if (isBeforeSpecifiedDate) {
                     sb.append(i + ". " + eventTask + "\n");
                     i++;
                 }

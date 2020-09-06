@@ -51,19 +51,20 @@ public class ShowAfterCommand extends Command {
         for (Task task : tasks.getTasks()) {
             if (task instanceof DeadlineTask) {
                 DeadlineTask deadlineTask = (DeadlineTask) task;
-                if (deadlineTask.getDateTime().toLocalDate().isAfter(localDate)) {
-                    sb.append(i + ". " + deadlineTask + "\n");
+                boolean isAfterSpecifiedDate = deadlineTask.getDateTime().toLocalDate().isAfter(localDate);
+                if (isAfterSpecifiedDate) {
+                    sb.append(i).append(". ").append(deadlineTask).append("\n");
                     i++;
                 }
 
             } else if (task instanceof EventTask) {
                 EventTask eventTask = (EventTask) task;
-                if (eventTask.getDateTime().toLocalDate().isAfter(localDate)) {
-                    sb.append(i + ". " + eventTask + "\n");
+                boolean isAfterSpecifiedDate = eventTask.getDateTime().toLocalDate().isAfter(localDate);
+                if (isAfterSpecifiedDate) {
+                    sb.append(i).append(". ").append(eventTask).append("\n");
                     i++;
                 }
             }
-
         }
 
         return ui.getMessageTemplate(sb.toString());

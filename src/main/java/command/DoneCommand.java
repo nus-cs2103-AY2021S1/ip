@@ -49,6 +49,7 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, NoIndexException {
         int index = Parser.findIndexParser(this.command);
+
         Task task = tasks.getTask(index - 1);
         task.setDone(true);
 

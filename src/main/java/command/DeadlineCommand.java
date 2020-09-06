@@ -57,8 +57,11 @@ public class DeadlineCommand extends Command {
         try {
             Map<String, String> taskDetails = Parser.findDescriptionParser(this.command);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            DeadlineTask deadlineTask = new DeadlineTask(taskDetails.get("taskDescription"),
-                    LocalDateTime.parse(taskDetails.get("taskTime"), formatter));
+
+            String deadlineTaskDescription = taskDetails.get("taskDescription");
+            LocalDateTime deadlineTaskDateTime= LocalDateTime.parse(taskDetails.get("taskTime"), formatter);
+
+            DeadlineTask deadlineTask = new DeadlineTask(deadlineTaskDescription, deadlineTaskDateTime);
 
             tasks.add(deadlineTask);
 

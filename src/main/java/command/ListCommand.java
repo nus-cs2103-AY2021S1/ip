@@ -30,11 +30,13 @@ public class ListCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         StringBuilder sb = new StringBuilder();
+
         for (int i = 0; i < tasks.size(); i++) {
-            if (i != tasks.size() - 1) {
-                sb.append((i + 1) + ". " + tasks.getTask(i) + "\n");
+            boolean isLastTask = i != tasks.size() - 1;
+            if (isLastTask) {
+                sb.append(i + 1).append(". ").append(tasks.getTask(i)).append("\n");
             } else {
-                sb.append((i + 1) + ". " + tasks.getTask(i));
+                sb.append(i + 1).append(". ").append(tasks.getTask(i));
             }
         }
 

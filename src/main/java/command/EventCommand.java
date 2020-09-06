@@ -60,8 +60,11 @@ public class EventCommand extends Command {
         try {
             Map<String, String> taskDetails = Parser.findDescriptionParser(this.command);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            EventTask eventTask = new EventTask(taskDetails.get("taskDescription"),
-                    LocalDateTime.parse(taskDetails.get("taskTime"), formatter));
+
+            String eventTaskDescription = taskDetails.get("taskDescription");
+            LocalDateTime eventTaskDateTime = LocalDateTime.parse(taskDetails.get("taskTime"),formatter);
+
+            EventTask eventTask = new EventTask(eventTaskDescription, eventTaskDateTime);
 
             tasks.add(eventTask);
 
