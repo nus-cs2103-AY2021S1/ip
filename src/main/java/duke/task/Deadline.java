@@ -21,6 +21,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String dueTime) {
         super(description);
+        assert dueTime != null : "due time cannot be null";
         this.dueTimeStr = dueTime;
         Optional<LocalDate> optDate = DateParser.parse(dueTime);
         if (optDate.isPresent()) {
@@ -59,6 +60,7 @@ public class Deadline extends Task {
      * @return True if this task is due on that day, false otherwise
      */
     public boolean isDueOn(LocalDate cmpDate) {
+        assert cmpDate != null : "compared date cannot be null";
         if (!isInDateFormat) {
             return false;
         }
