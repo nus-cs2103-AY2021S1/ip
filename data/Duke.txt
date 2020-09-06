@@ -1,3 +1,0 @@
-T, 1, git push this code
-E, 1, complete work , 2020-09-01 6PM
-D, 0, finish more work , 2020-08-18
