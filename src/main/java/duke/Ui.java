@@ -38,9 +38,12 @@ public class Ui {
      * Returns all the tasks in the specified Task list.
      *
      * @param taskList The task list that contains the list of tasks to be printed.
-     * @return The list of tasks from the specified task list.
+     * @return The list of tasks from the specified task list, or none if there are no tasks in the task list.
      */
     public static String respondList(TaskList taskList) {
+        if (taskList.getNumberOfTasks() == 0) {
+            return "You currently do not have any tasks.";
+        }
         return "Here are the tasks in your list: \n" + taskList;
     }
 

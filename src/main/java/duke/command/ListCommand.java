@@ -27,6 +27,7 @@ public class ListCommand extends Command {
      */
     @Override
     public CommandResponse execute(TaskList tasks, Storage storage) throws DukeException {
+        assert !this.isExit() : "List command should not be an exit command.";
         return new CommandResponse(Ui.respondList(tasks), this.isExit());
     }
 }

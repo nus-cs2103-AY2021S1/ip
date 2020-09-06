@@ -47,6 +47,7 @@ public class TaskList {
      * @return The task at the specified position in this task list.
      */
     public Task getTask(int taskNumber) {
+        assert taskNumber >= 0 : "Task number should be non-negative.";
         return this.tasks.get(taskNumber - 1);
     }
 
@@ -112,6 +113,7 @@ public class TaskList {
      * @return The task that was deleted.
      */
     public Task deleteTask(int taskNumber) {
+        assert taskNumber >= 0 : "Task number should be non-negative.";
         Task removedTask = this.tasks.get(taskNumber - 1);
         this.tasks.remove(taskNumber - 1);
         return removedTask;
@@ -123,6 +125,7 @@ public class TaskList {
      * @param taskNumber The position of the task to be marked as done.
      */
     public void markTaskAsDone(int taskNumber) {
+        assert taskNumber >= 0 : "Task number should be non-negative.";
         this.tasks.get(taskNumber - 1).markAsDone();
     }
 

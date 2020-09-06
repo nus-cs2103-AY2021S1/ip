@@ -26,6 +26,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public CommandResponse execute(TaskList tasks, Storage storage) throws DukeException {
+        assert this.isExit() : "Should be an exit command.";
         storage.save(tasks.getTasks());
         return new CommandResponse(Ui.respondExit(), this.isExit());
     }

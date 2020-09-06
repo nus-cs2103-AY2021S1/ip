@@ -32,6 +32,7 @@ public class DoneCommand extends Command {
     @Override
     public CommandResponse execute(TaskList tasks, Storage storage) throws DukeException {
         try {
+            assert !this.isExit() : "Done command should not be an exit command.";
             tasks.markTaskAsDone(taskNumber);
             storage.save(tasks.getTasks());
             return new CommandResponse(Ui.respondDoneTask(tasks.getTask(taskNumber)), this.isExit());

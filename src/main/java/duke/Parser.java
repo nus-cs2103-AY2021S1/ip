@@ -62,6 +62,7 @@ public class Parser {
             case FIND:
                 return new FindCommand(splitCommand[1]);
             default:
+                assert false : instruction;
                 throw new IllegalArgumentException();
             }
         } catch (NumberFormatException e) {

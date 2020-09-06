@@ -32,6 +32,7 @@ public class AddCommand extends Command {
      */
     @Override
     public CommandResponse execute(TaskList tasks, Storage storage) throws DukeException {
+        assert !this.isExit() : "Add command should not be an exit command.";
         tasks.addTask(task);
         storage.save(tasks.getTasks());
         return new CommandResponse(Ui.respondAddTask(task, tasks), this.isExit());
