@@ -3,16 +3,16 @@ package duke.parser;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
-
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
-
 import duke.Context;
 import duke.command.Command;
+import duke.command.CommandExecutable;
+import duke.command.Macro;
 import duke.exception.DukeException;
 import duke.exception.DukeParseException;
 
@@ -26,6 +26,7 @@ public class Parser {
 
     /**
      * Constructor for Parser.
+     *
      * @param context Context object.
      */
     public Parser(Context context) {
@@ -54,6 +55,7 @@ public class Parser {
     /**
      * Parses the String input, then runs the respective Command (if input is valid)
      * using the Parser object's internal TaskList and Ui objects.
+     *
      * @param input String raw input from user.
      * @throws DukeException If there are any parse errors, or Command has any errors.
      */
@@ -65,17 +67,30 @@ public class Parser {
         }
         String commandName = inputSplitBySpace[0];
         String[] args = Arrays.copyOfRange(inputSplitBySpace, 1, inputSplitBySpace.length);
-        Command command = Command.getCommandByName(commandName);
-        Options options = command.getOptions();
+        if ("macro".equals(commandName)) {
+            String joinedArgs = String.join(" ", args);
+            this.context.getMacroList().addMacro(joinedArgs, this.context.getUi());
+        } else if (Command.hasCommand(commandName)) {
+            Command command = Command.getCommandByName(commandName);
+            runCommand(commandName, command.getExec(), command.getOptions(), args);
+        } else if (this.context.getMacroList().hasMacro(commandName)) {
+            Macro macro = this.context.getMacroList().getMacro(commandName);
+            runCommand(commandName, macro::execute, macro.getOptions(), args);
+        }
+
+    }
+
+    private void runCommand(String name, CommandExecutable exec, Options options, String[] args)
+        throws DukeException {
         try {
             CommandLine cmd = this.parser.parse(options, args);
-            command.dispatch(this.context, cmd);
+            exec.run(this.context, cmd);
         } catch (ParseException e) {
             DukeParseException toThrow = new DukeParseException(e.getMessage());
-            toThrow.setExtraMessage(getHelp(commandName, options));
+            toThrow.setExtraMessage(getHelp(name, options));
             throw toThrow;
         } catch (DukeParseException toThrow) {
-            toThrow.setExtraMessage(getHelp(commandName, options));
+            toThrow.setExtraMessage(getHelp(name, options));
             throw toThrow;
         }
     }

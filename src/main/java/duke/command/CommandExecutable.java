@@ -6,6 +6,6 @@ import duke.Context;
 import duke.exception.DukeException;
 
 @FunctionalInterface
-interface CommandExecutable {
+public interface CommandExecutable {
     void run(Context context, CommandLine arguments) throws DukeException;
 }

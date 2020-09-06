@@ -69,7 +69,7 @@ class CommandLibrary {
         if (unconsumedArgs.size() == 0) {
             throw new DukeParseException("this command requires non-empty arguments.");
         }
-        return String.join("", unconsumedArgs);
+        return String.join(" ", unconsumedArgs);
     }
     private static int parseInt(String input) throws DukeParseException {
         try {

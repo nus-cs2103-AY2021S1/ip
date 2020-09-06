@@ -48,8 +48,8 @@ public enum Command {
         }
     }
 
-    public void dispatch(Context context, CommandLine args) throws DukeException {
-        this.exec.run(context, args);
+    public CommandExecutable getExec() {
+        return this.exec;
     }
 
     public Options getOptions() {
@@ -63,5 +63,14 @@ public enum Command {
             }
         }
         throw DukeException.Errors.UNKNOWN_COMMAND.create();
+    }
+
+    public static boolean hasCommand(String name) {
+        for (Command command : Command.values()) {
+            if (command.name.equals(name)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
