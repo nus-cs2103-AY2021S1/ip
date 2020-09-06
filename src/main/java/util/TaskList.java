@@ -86,7 +86,7 @@ public class TaskList {
         if (index < 0 || index >= tasks.size()) {
             throw new DukeException("Invalid index given");
         }
-       return (index + 1) + ". " + tasks.get(index) + "\n";
+        return (index + 1) + ". " + tasks.get(index) + "\n";
     }
 
     /**
@@ -95,6 +95,7 @@ public class TaskList {
      * @param task Task to be added.
      */
     public void addTask(Task task) {
+        assert tasks != null;
         tasks.add(task);
     }
 
@@ -124,6 +125,7 @@ public class TaskList {
             throw new DukeException("Invalid index given");
         }
         tasks.get(index).completeTask();
+        assert tasks.get(index).isCompleted() == true;
         return tasks.get(index);
     }
 
@@ -133,6 +135,7 @@ public class TaskList {
      * @return The number of tasks.
      */
     public int getSize() {
+        assert tasks != null;
         return tasks.size();
     }
 }
