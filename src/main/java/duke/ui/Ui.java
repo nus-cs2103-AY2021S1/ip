@@ -26,7 +26,8 @@ public class Ui {
      * Generates a line of # to separate text.
      */
     public void showLine() {
-        System.out.println("#############################################################");
+        System.out.println(
+                "#############################################################");
     }
 
     /**

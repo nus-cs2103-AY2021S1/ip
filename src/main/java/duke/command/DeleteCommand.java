@@ -33,12 +33,17 @@ public class DeleteCommand extends Command {
 
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        try {
-            Task t = tasks.retrieve(taskNumber);
-            tasks.remove(taskNumber);
-            ui.deleteTaskMessage(t, tasks);
-        } catch (Exception e) {
+        boolean taskNumberGreaterThanZero = taskNumber <= 0;
+        boolean taskNumberMoreThanTaskListSize = taskNumber > tasks.getNumOfTasks();
+        boolean isNotValidTaskNumber = taskNumberGreaterThanZero
+                || taskNumberMoreThanTaskListSize;
+
+        if (isNotValidTaskNumber) {
             throw new DukeException("Task does not exist/invalid task number.");
         }
+
+        Task t = tasks.retrieve(taskNumber);
+        tasks.remove(taskNumber);
+        ui.deleteTaskMessage(t, tasks);
     }
 }
