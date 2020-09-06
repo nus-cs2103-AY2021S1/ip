@@ -1,10 +1,19 @@
 package duke.parser;
 
-import java.util.Optional;
-import java.util.regex.Matcher;
+import java.io.PrintWriter;
+import java.io.StringWriter;
+import java.util.Arrays;
+
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.CommandLineParser;
+import org.apache.commons.cli.DefaultParser;
+import org.apache.commons.cli.HelpFormatter;
+import org.apache.commons.cli.Options;
+import org.apache.commons.cli.ParseException;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.exception.DukeParseException;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
@@ -14,6 +23,8 @@ import duke.ui.Ui;
 public class Parser {
     private final TaskList taskList;
     private final Ui ui;
+    private final CommandLineParser parser;
+    private final HelpFormatter formatter;
 
     /**
      * Constructor for Parser.
@@ -24,6 +35,24 @@ public class Parser {
         assert taskList != null && ui != null : "taskList and ui should not be null";
         this.taskList = taskList;
         this.ui = ui;
+        this.parser = new DefaultParser();
+        this.formatter = new HelpFormatter();
+    }
+
+    // TODO test
+    private String getHelp(String command, Options options) {
+        StringWriter stringWriter = new StringWriter();
+        PrintWriter printWriter = new PrintWriter(stringWriter);
+        this.formatter.printHelp(
+            printWriter,
+            this.formatter.getWidth(),
+            command,
+            "",
+            options,
+            this.formatter.getLeftPadding(),
+            this.formatter.getDescPadding(),
+            "");
+        return stringWriter.toString();
     }
 
     /**
@@ -33,25 +62,25 @@ public class Parser {
      * @throws DukeException If there are any parse errors, or Command has any errors.
      */
     public void parseAndRun(String input) throws DukeException {
-        for (Command command : Command.values()) {
-            Optional<Matcher> maybeMatcher = command.matcher(input);
-            if (maybeMatcher.isEmpty()) {
-                continue;
-            }
-            Matcher matcher = maybeMatcher.get();
-            // Should we throw a more specific error here?
-            if (!matcher.find()) {
-                throw command.matchError();
-            }
-            int count = matcher.groupCount();
-            String[] args = new String[count];
-            for (int i = 1; i <= count; i++) {
-                args[i - 1] = matcher.group(i);
-            }
-            command.dispatch(this.taskList, this.ui, args);
-            return;
+        String[] inputSplitBySpace = input.split("\\s+");
+        if (inputSplitBySpace.length == 0) {
+            // TODO should this happen ever? change w assertion?
+            throw DukeException.Errors.UNKNOWN_COMMAND.create();
         }
-        // if we are here means no command has matched
-        throw DukeException.Errors.UNKNOWN_COMMAND.create();
+        String commandName = inputSplitBySpace[0];
+        String[] args = Arrays.copyOfRange(inputSplitBySpace, 1, inputSplitBySpace.length);
+        Command command = Command.getCommandByName(commandName);
+        Options options = command.getOptions();
+        try {
+            CommandLine cmd = this.parser.parse(options, args);
+            command.dispatch(this.taskList, this.ui, cmd);
+        } catch (ParseException e) {
+            DukeParseException toThrow = new DukeParseException(e.getMessage());
+            toThrow.setExtraMessage("TODO put addhelp here");
+            throw toThrow;
+        } catch (DukeParseException toThrow) {
+            toThrow.setExtraMessage("TODO put addhelp here");
+            throw toThrow;
+        }
     }
 }

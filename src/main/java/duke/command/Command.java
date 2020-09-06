@@ -1,10 +1,11 @@
 package duke.command;
 
-import java.util.Optional;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import org.apache.commons.cli.CommandLine;
+import org.apache.commons.cli.Option;
+import org.apache.commons.cli.Options;
 
 import duke.exception.DukeException;
+import duke.exception.DukeParseException;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
@@ -12,71 +13,57 @@ import duke.ui.Ui;
  * Stores all the commands to be run.
  */
 public enum Command {
-    TODO(CommandLibrary.TODO_COMMAND,
-            DukeException.Errors.TODO_EMPTY_DESCRIPTION,
-            "(.*)",
-            "todo"),
-    DEADLINE(CommandLibrary.DEADLINE_COMMAND,
-            DukeException.Errors.DEADLINE_BAD_FORMAT,
-            "(.*?) /by (.*)",
-            "deadline"),
-    EVENT(CommandLibrary.EVENT_COMMAND,
-            DukeException.Errors.EVENT_BAD_FORMAT,
-            "(.*) /at (.*)",
-            "event"),
-    LIST(CommandLibrary.LIST_COMMAND,
-            DukeException.Errors.UNKNOWN_COMMAND,
-            "",
-            "list"),
-    BYE(CommandLibrary.BYE_COMMAND,
-            DukeException.Errors.UNKNOWN_COMMAND,
-            "",
-            "bye"),
-    // TODO add more specific errors for these two below
-    DONE(CommandLibrary.DONE_COMMAND,
-            DukeException.Errors.UNKNOWN_COMMAND,
-            "(\\d+)",
-            "done"),
-    DELETE(CommandLibrary.DELETE_COMMAND,
-            DukeException.Errors.UNKNOWN_COMMAND,
-            "(\\d+)",
-            "delete"),
-    FIND(CommandLibrary.FIND_COMMAND,
-            DukeException.Errors.UNKNOWN_COMMAND,
-            "(.*)",
-            "find");
+    TODO("todo",
+        CommandLibrary.TODO_COMMAND),
+    DEADLINE("deadline",
+        CommandLibrary.DEADLINE_COMMAND,
+        Option.builder("by")
+            .required(true)
+            .hasArg()
+            .build()),
+    EVENT("event",
+        CommandLibrary.EVENT_COMMAND,
+        Option.builder("at")
+            .required(true)
+            .hasArg()
+            .build()),
+    LIST("list",
+        CommandLibrary.LIST_COMMAND),
+    BYE("bye",
+        CommandLibrary.BYE_COMMAND),
+    DONE("done",
+        CommandLibrary.DONE_COMMAND),
+    DELETE("delete",
+        CommandLibrary.DELETE_COMMAND),
+    FIND("find",
+        CommandLibrary.FIND_COMMAND);
     private final CommandExecutable exec;
-    private final DukeException.Errors matchError;
-    private final Pattern format;
+    private final Options options;
     private final String name;
 
-    Command(CommandExecutable exec, DukeException.Errors matchError, String formatString, String name) {
-        this.exec = exec;
-        this.format = Pattern.compile(formatString);
-        this.matchError = matchError;
+    Command(String name, CommandExecutable exec, Option ... optionArray) {
         this.name = name;
-    }
-
-    /**
-     * Parses the String input and returns a Optional.of(regex.Matcher) if there is a match,
-     * otherwise returns Optional.empty(). The matcher will be configured to return the arguments
-     * to the Command in its capture groups. The regex used to match can be found in the Command enum.
-     * @param rawInput String raw input from the user.
-     * @return Optional regex.Matcher if there is a match, else empty().
-     */
-    public Optional<Matcher> matcher(String rawInput) {
-        if (!rawInput.startsWith(this.name)) {
-            return Optional.empty();
+        this.exec = exec;
+        this.options = new Options();
+        for (Option option : optionArray) {
+            options.addOption(option);
         }
-        Matcher matcher = this.format.matcher(rawInput.substring(this.name.length()).trim());
-        return Optional.of(matcher);
     }
 
-    public void dispatch(TaskList taskList, Ui ui, String[] args) throws DukeException {
+    public void dispatch(TaskList taskList, Ui ui, CommandLine args) throws DukeException, DukeParseException {
         this.exec.run(taskList, ui, args);
     }
 
-    public DukeException matchError() {
-        return this.matchError.create();
+    public Options getOptions() {
+        return this.options;
+    }
+
+    public static Command getCommandByName(String name) throws DukeException {
+        for (Command command : Command.values()) {
+            if (command.name.equals(name)) {
+                return command;
+            }
+        }
+        throw DukeException.Errors.UNKNOWN_COMMAND.create();
     }
 }
