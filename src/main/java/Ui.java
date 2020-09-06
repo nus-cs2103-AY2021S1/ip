@@ -35,8 +35,7 @@ public class Ui {
      * @return Returns a greeting string.
      */
     public String greet() {
-        return format("Hello! I'm\n" + logo + "\n"
-                + "What can I do for you?");
+        return format("Hello! I'm Duke!\n" + "What can I do for you?");
     }
 
     /**
