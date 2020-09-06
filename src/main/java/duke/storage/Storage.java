@@ -13,13 +13,27 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+/**
+ * Handles the saving and loading of tasks.
+ */
 public class Storage {
     private String saveFilePath;
 
+    /**
+     * Constructor for Storage class.
+     *
+     * @param saveFilePath Location of save file.
+     */
     public Storage(String saveFilePath){
         this.saveFilePath = saveFilePath;
     }
 
+    /**
+     * Saves the current ArrayList of tasks to disk.
+     *
+     * @param taskList ArrayList of Tasks to save.
+     * @throws IOException If unable to write save file.
+     */
     public void save(ArrayList<Task> taskList) throws IOException {
         File saveFile = new File(saveFilePath);
         if (!saveFile.exists()) {
@@ -33,6 +47,12 @@ public class Storage {
         fw.close();
     }
 
+    /**
+     * Loads saved tasks from disk.
+     *
+     * @return ArrayList of Tasks.
+     * @throws IOException If unable to access or find the save file.
+     */
     public ArrayList<Task> load() throws IOException {
         ArrayList<Task> taskList = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(saveFilePath));
