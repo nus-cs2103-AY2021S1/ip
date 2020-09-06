@@ -20,7 +20,7 @@ import duke.tasks.Todo;
 public class Storage {
     private final File dataFile;
     @SuppressWarnings({"checkstyle:AbbreviationAsWordInName", "CheckStyle"})
-    private final String FilePath;
+    private final String filePath;
 
     /**
      * Initializes a storage object
@@ -28,7 +28,7 @@ public class Storage {
      * @param filePath String representing the filepath to load the file
      */
     public Storage(String filePath) {
-        this.FilePath = filePath;
+        this.filePath = filePath;
         dataFile = new File(filePath);
         try {
             if (dataFile.createNewFile()) {
@@ -47,7 +47,7 @@ public class Storage {
 
     public void appendFile (String task) {
         try {
-            FileWriter fw = new FileWriter(FilePath, true);
+            FileWriter fw = new FileWriter(filePath, true);
             fw.write(task);
             fw.close();
         } catch (IOException err) {
@@ -62,7 +62,7 @@ public class Storage {
      */
     public void overwriteFile (ArrayList<Task> list) {
         try {
-            FileWriter fw = new FileWriter(FilePath);
+            FileWriter fw = new FileWriter(filePath);
             for (Task currentTask : list) {
                 String done = currentTask.isDone() ? "1" : "0";
                 if (currentTask instanceof Event) {
