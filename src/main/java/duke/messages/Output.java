@@ -1,5 +1,6 @@
 package duke.messages;
 
+import java.util.Arrays;
 import java.util.List;
 
 import duke.tasks.Task;
@@ -141,9 +142,7 @@ public class Output {
     public String printGeneralChatWindow(String... messages) {
         StringBuilder result = new StringBuilder();
 
-        for (String message : messages) {
-            result.append(String.format("%s\n", message));
-        }
+        Arrays.asList(messages).forEach(m -> result.append(String.format("%s\n", m)));
 
         return result.toString();
     }
