@@ -55,6 +55,7 @@ public class Storage {
      * Creates the relevant directory and data file if user do not have them.
      *
      * @return Message indicating directory and/or datafile found (if applicable).
+     * @throws InvalidCommand Unable to create directory or data file.
      */
     private String checkHistory() throws InvalidCommand {
         String overallHistoryMessage = "";
