@@ -4,14 +4,15 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Scanner;
 import java.util.List;
+import java.util.Scanner;
+
 import duke.exception.DukeException;
 import duke.exception.FileErrorException;
 import duke.exception.FolderErrorException;
-import duke.task.Task;
-import duke.task.Event;
 import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
 import duke.task.ToDo;
 import duke.tasklist.TaskList;
 
@@ -39,7 +40,7 @@ public class Storage {
         String file = filePath.split("/")[1];
         String dir = System.getProperty("user.dir");
 
-        java.nio.file.Path dataFolder = java.nio.file.Paths.get(dir,folder);
+        java.nio.file.Path dataFolder = java.nio.file.Paths.get(dir, folder);
         if (!java.nio.file.Files.exists(dataFolder)) {
             if (!new File(dataFolder.toString()).mkdir()) {
                 throw new FolderErrorException();
@@ -49,7 +50,7 @@ public class Storage {
         assert dataFolder != null : "Folder not found!";
 
         java.nio.file.Path fileLocation = java.nio.file.Paths
-                .get(dataFolder.toString(),file);
+                .get(dataFolder.toString(), file);
 
         if (!java.nio.file.Files.exists(fileLocation)) {
             try {
@@ -98,6 +99,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads data from the hard disk to the app.
+     * @param list an empty list ready to be filled with tasks
+     * @throws DukeException if the data from the file is corrupted or can't find the file
+     */
     public void loadData(TaskList list) throws DukeException {
         try {
             Scanner s = new Scanner(this.data);
@@ -107,38 +113,38 @@ public class Storage {
                 if (component.length > 4) {
                     throw new DukeException("Corrupted data detected! Loading terminated!");
                 }
-                assert component.length <= 4: "Corrupted file data";
+                assert component.length <= 4 : "Corrupted file data";
                 switch (component[0].trim()) {
-                    case "T": {
-                        Task current = new ToDo(component[2]);
-                        int state = Integer.parseInt(component[1].trim());
-                        if (state == 1) {
-                            current.markAsDone();
-                        }
-                        list.add(current);
-                        break;
+                case "T": {
+                    Task current = new ToDo(component[2]);
+                    int state = Integer.parseInt(component[1].trim());
+                    if (state == 1) {
+                        current.markAsDone();
                     }
-                    case "D": {
-                        Deadline current = new Deadline(component[2].trim(), component[3].trim());
-                        int state = Integer.parseInt(component[1].trim());
-                        if (state == 1) {
-                            current.markAsDone();
-                        }
-                        list.add(current);
-                        break;
+                    list.add(current);
+                    break;
+                }
+                case "D": {
+                    Deadline current = new Deadline(component[2].trim(), component[3].trim());
+                    int state = Integer.parseInt(component[1].trim());
+                    if (state == 1) {
+                        current.markAsDone();
                     }
-                    case "E": {
-                        Event current = new Event(component[2].trim(), component[3].trim());
-                        int state = Integer.parseInt(component[1].trim());
-                        if (state == 1) {
-                            current.markAsDone();
-                        }
-                        list.add(current);
-                        break;
+                    list.add(current);
+                    break;
+                }
+                case "E": {
+                    Event current = new Event(component[2].trim(), component[3].trim());
+                    int state = Integer.parseInt(component[1].trim());
+                    if (state == 1) {
+                        current.markAsDone();
                     }
-                    default: {
-                        throw new DukeException("Corrupted data detected! Loading terminated!");
-                    }
+                    list.add(current);
+                    break;
+                }
+                default: {
+                    throw new DukeException("Corrupted data detected! Loading terminated!");
+                }
                 }
             }
         } catch (FileNotFoundException e) {

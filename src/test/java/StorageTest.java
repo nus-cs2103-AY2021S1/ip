@@ -1,10 +1,13 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+import java.io.File;
+
+import org.junit.jupiter.api.Test;
+
 import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
-import org.junit.jupiter.api.Test;
-import java.io.File;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
 
 public class StorageTest {
 
@@ -41,7 +44,7 @@ public class StorageTest {
         StorageStub temp = new StorageStub("C:\\Users\\linco\\Desktop\\2103T IP\\data\\storageTest2.txt");
         TaskList list = new TaskList();
         temp.loadData(list);
-        assertEquals(list.getList().get(0).toString(), "[D][✘] return book (by: Dec 2 2019 18:00)");
+        assertEquals(list.getList().get(0).toString(), "[D][\u2718] return book (by: Dec 2 2019 18:00)");
     }
 
 }

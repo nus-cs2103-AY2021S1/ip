@@ -1,16 +1,17 @@
-import duke.command.DoneCommand;
-import duke.exception.DukeException;
-import duke.task.Task;
-import duke.task.ToDo;
-import duke.tasklist.TaskList;
-import duke.storage.Storage;
-import duke.ui.Ui;
-import org.junit.jupiter.api.Test;
-import java.io.File;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import java.io.File;
 
+import org.junit.jupiter.api.Test;
+
+import duke.command.DoneCommand;
+import duke.exception.DukeException;
+import duke.storage.Storage;
+import duke.task.Task;
+import duke.task.ToDo;
+import duke.tasklist.TaskList;
+import duke.ui.Ui;
 
 public class DoneCommandTest {
 
@@ -26,7 +27,7 @@ public class DoneCommandTest {
     }
 
     @Test
-    public void execute_invalidInput_exceptionThrown() throws Exception{
+    public void execute_invalidInput_exceptionThrown() throws Exception {
         DoneCommand temp = new DoneCommand("10");
         TaskList list = new TaskList();
         Ui ui = new Ui();
