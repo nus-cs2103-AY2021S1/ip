@@ -87,6 +87,14 @@ public abstract class TaskWithDateTime extends Task {
         return LocalTime.parse(timeString);
     }
 
+    public LocalDate getDate() {
+        return date;
+    }
+
+    public Optional<LocalTime> getTime() {
+        return time;
+    }
+
     @Override
     public String getDescription() {
         return String.format("%s / %s%s", description, date,

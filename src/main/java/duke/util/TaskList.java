@@ -1,6 +1,7 @@
 package duke.util;
 
 import duke.task.Task;
+import duke.task.TaskWithDateTime;
 import duke.task.Todo;
 import duke.task.Event;
 import duke.task.Deadline;
@@ -8,8 +9,9 @@ import duke.task.Deadline;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.stream.IntStream;
+import java.util.Comparator;
 import java.util.Optional;
+import java.util.stream.IntStream;
 
 /**
  * The TaskList encapsulates the list of tasks and is in charge of
@@ -205,5 +207,67 @@ public class TaskList {
             return "Search result is empty!";
         }
         return "Search result:\n" + filtered.get();
+    }
+
+    /**
+     * Sorts the task list based on the input parameter. Users can sort by
+     * either task names lexicographically, subtypes, or date time if applicable.
+     * In the case of date time sorting, tasks without date time will be sorted
+     * last.
+     * @param sortBy the parameter of sorting the list.
+     */
+    public void sort(String sortBy) throws DukeException {
+        switch (sortBy) {
+        case "name":
+            sortByName();
+            break;
+        case "type":
+            sortByType();
+            break;
+        case "datetime":
+            sortByDateTime();
+            break;
+        default:
+            throw new DukeException("Invalid sorting parameter");
+        }
+    }
+
+    private void sortByName() {
+        list.sort(Comparator.comparing(Task::getDescription));
+    }
+
+    private void sortByType() {
+        list.sort(Comparator.comparing(Task::getType));
+    }
+
+    private void sortByDateTime() {
+        list.sort(
+                (Task t1, Task t2) -> {
+                    if (t1 instanceof TaskWithDateTime && t2 instanceof TaskWithDateTime) {
+                        TaskWithDateTime dt1 = (TaskWithDateTime) t1;
+                        TaskWithDateTime dt2 = (TaskWithDateTime) t2;
+                        if (dt1.getDate().equals(dt2.getDate())) {
+                            if (dt1.getTime().isPresent() && dt2.getTime().isPresent()) {
+                                return dt1.getTime().get().compareTo(dt2.getTime().get());
+                            } else if (dt1.getTime().isPresent()) {
+                                return -1;
+                            } else if (dt2.getTime().isPresent()){
+                                return 1;
+                            } else {
+                                return 0;
+                            }
+                        } else {
+                            return dt1.getDate().compareTo(dt2.getDate());
+                        }
+                    }
+                    if (t1 instanceof TaskWithDateTime) {
+                        return -1;
+                    } else if (t2 instanceof TaskWithDateTime) {
+                        return 1;
+                    } else {
+                        return 0;
+                    }
+                }
+        );
     }
 }

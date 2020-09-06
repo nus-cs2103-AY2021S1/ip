@@ -9,6 +9,7 @@ import duke.command.FindCommand;
 import duke.command.ExitCommand;
 import duke.command.InvalidCommand;
 import duke.command.HelpCommand;
+import duke.command.SortCommand;
 
 import java.util.Arrays;
 
@@ -108,6 +109,12 @@ public class Parser {
             }
         case "help":
             return new HelpCommand();
+        case "sort":
+            try {
+                return new SortCommand(parsed[1]);
+            } catch (ArrayIndexOutOfBoundsException aioobe) {
+                return new InvalidCommand("You can sort by: name, type, datetime");
+            }
         default:
             return new InvalidCommand();
         }

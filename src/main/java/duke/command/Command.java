@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.util.DukeException;
 import duke.util.TaskList;
 import duke.util.Ui;
 import duke.util.Storage;
@@ -11,5 +12,5 @@ import duke.util.Storage;
  */
 public interface Command {
     boolean isExit();
-    String execute(TaskList tasks, Ui ui, Storage storage);
+    String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 }
