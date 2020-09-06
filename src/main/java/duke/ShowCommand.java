@@ -8,6 +8,9 @@ import java.util.stream.IntStream;
 public class ShowCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null : "tasks have not been initialised";
+        assert ui != null : "ui have not been initialised";
+        assert storage != null : "storage have not been initialised";
         StringBuilder output = new StringBuilder();
         if (tasks.isEmpty()) {
             output.append("Theres currently nothing in your list.");

@@ -28,6 +28,7 @@ public class Storage {
      * @throws IOException If an error occurs during writing.
      */
     public void writeToFile(TaskList tasks) throws IOException {
+        assert tasks != null : "tasks have not been initialised";
         FileWriter file = new FileWriter(filePath);
         StringBuilder s = new StringBuilder();
         IntStream.of(0, tasks.size()).forEach(i -> {
