@@ -10,40 +10,40 @@ class TodoTest {
 
     @Test
     public void testCreateTodo() throws DukeException {
-        Todo todo = new Todo("Test content");
+        Todo todo = new Todo("Test content", "0");
     }
 
     @Test
     public void testTodoSetComplete() throws DukeException {
-        Todo todo = new Todo("Test content");
+        Todo todo = new Todo("Test content", "0");
         todo.setComplete(true);
         assertTrue(todo.isComplete);
     }
 
     @Test
     public void testIncompleteTodoToString() throws DukeException {
-        Todo todo = new Todo("Test content");
-        assertEquals("[T][X] Test content", todo.toString());
+        Todo todo = new Todo("Test content", "0");
+        assertEquals("[T][X](!) Test content", todo.toString());
     }
 
     @Test
     public void testCompleteTodoToString() throws DukeException {
-        Todo todo = new Todo("Test content");
+        Todo todo = new Todo("Test content", "0");
         todo.setComplete(true);
-        assertEquals("[T][Y] Test content", todo.toString());
+        assertEquals("[T][Y](!) Test content", todo.toString());
     }
 
     @Test
     public void testIncompleteTodoToSaveString() throws DukeException {
-        Todo todo = new Todo("Test content");
-        assertEquals("T/0/Test content/ ", todo.toSaveString());
+        Todo todo = new Todo("Test content", "0");
+        assertEquals("T/0/0/Test content/ ", todo.toSaveString());
     }
 
     @Test
     public void testCompleteTodoToSaveString() throws DukeException {
-        Todo todo = new Todo("Test content");
+        Todo todo = new Todo("Test content", "0");
         todo.setComplete(true);
-        assertEquals("T/1/Test content/ ", todo.toSaveString());
+        assertEquals("T/0/1/Test content/ ", todo.toSaveString());
     }
 
 }

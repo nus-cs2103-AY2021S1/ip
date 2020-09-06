@@ -38,8 +38,9 @@ public class AddEventCommand extends Command {
         m.find();
         String content = m.group("content");
         String datetime = m.group("datetime");
+        String priority = m.group("priority");
         try {
-            Event event = taskManager.addEvent(content, datetime);
+            Event event = taskManager.addEvent(content, datetime, priority);
             return MessageManager.getAddSuccessMessage(event, taskManager);
         } catch (DukeException | IOException exception) {
             return exception.getMessage();

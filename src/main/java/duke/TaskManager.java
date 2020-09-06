@@ -32,12 +32,13 @@ public class TaskManager {
      * Creates and adds a Todo to the taskStorage.
      *
      * @param content String description of todo.
+     * @param priority Priority of the todo.
      * @return Created todo.
      * @throws IOException If an input or output exception occurred.
      * @throws DukeException If an exception related to Duke occurred.
      */
-    public Todo addTodo(String content) throws DukeException, IOException {
-        Todo todo = new Todo(content);
+    public Todo addTodo(String content, String priority) throws DukeException, IOException {
+        Todo todo = new Todo(content, priority);
         taskStorage.addTask(todo);
         return todo;
     }
@@ -47,12 +48,13 @@ public class TaskManager {
      *
      * @param content String description of deadline.
      * @param datetimeDue Datetime of when the deadline is.
+     * @param priority Priority of the deadline.
      * @return Created deadline.
      * @throws IOException If an input or output exception occurred.
      * @throws DukeException If an exception related to Duke occurred.
      */
-    public Deadline addDeadline(String content, String datetimeDue) throws DukeException, IOException {
-        Deadline deadline = new Deadline(content, datetimeDue);
+    public Deadline addDeadline(String content, String datetimeDue, String priority) throws DukeException, IOException {
+        Deadline deadline = new Deadline(content, datetimeDue, priority);
         taskStorage.addTask(deadline);
         return deadline;
     }
@@ -62,12 +64,13 @@ public class TaskManager {
      *
      * @param content String description of event.
      * @param datetime Datetime of when the event is.
+     * @param priority Priority of the event.
      * @return Created todo.
      * @throws IOException If an input or output exception occurred.
      * @throws DukeException If an exception related to Duke occurred.
      */
-    public Event addEvent(String content, String datetime) throws DukeException, IOException {
-        Event event = new Event(content, datetime);
+    public Event addEvent(String content, String datetime, String priority) throws DukeException, IOException {
+        Event event = new Event(content, datetime, priority);
         taskStorage.addTask(event);
         return event;
     }

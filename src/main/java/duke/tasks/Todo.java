@@ -12,20 +12,22 @@ public class Todo extends Task {
      *
      * @param content Contents of the todo.
      * @param isComplete Completion status of the todo.
+     * @param priority Priority of the todo.
      * @throws DukeException If an exception related to Duke occurred.
      */
-    public Todo(String content, Boolean isComplete) throws DukeException {
-        super(content, isComplete);
+    public Todo(String content, Boolean isComplete, String priority) throws DukeException {
+        super(content, isComplete, priority);
     }
 
     /**
      * Class constructor.
      *
      * @param content Contents of the todo.
+     * @param priority
      * @throws DukeException If an exception related to Duke occurred.
      */
-    public Todo(String content) throws DukeException {
-        super(content);
+    public Todo(String content, String priority) throws DukeException {
+        super(content, priority);
     }
 
     /**

@@ -19,10 +19,11 @@ public class Deadline extends Task {
      * @param content Contents of the deadline.
      * @param datetimeDueString Due datetime of the deadline.
      * @param isComplete Completion status of the deadline.
+     * @param priority Priority of the deadline.
      * @throws DukeException If an exception related to Duke occurred.
      */
-    public Deadline(String content, String datetimeDueString, boolean isComplete) throws DukeException {
-        super(content, isComplete);
+    public Deadline(String content, String datetimeDueString, boolean isComplete, String priority) throws DukeException {
+        super(content, isComplete, priority);
         if (datetimeDueString.replace(" ", "").equals("")) {
             throw new DukeException("Event datetime cannot be empty.");
         }
@@ -39,10 +40,11 @@ public class Deadline extends Task {
      *
      * @param content Contents of the deadline.
      * @param datetimeDueString Due datetime of the deadline.
+     * @param priority Priority of the deadline.
      * @throws DukeException If an exception related to Duke occurred.
      */
-    public Deadline(String content, String datetimeDueString) throws DukeException {
-        super(content);
+    public Deadline(String content, String datetimeDueString, String priority) throws DukeException {
+        super(content, priority);
         if (datetimeDueString.replace(" ", "").equals("")) {
             throw new DukeException("Event datetime cannot be empty.");
         }

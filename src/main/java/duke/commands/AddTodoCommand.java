@@ -37,8 +37,9 @@ public class AddTodoCommand extends Command {
         Matcher m = r.matcher(input);
         m.find();
         String content = m.group("content");
+        String priority = m.group("priority");
         try {
-            Todo todo = taskManager.addTodo(content);
+            Todo todo = taskManager.addTodo(content, priority);
             return MessageManager.getAddSuccessMessage(todo, taskManager);
         } catch (DukeException | IOException exception) {
             return exception.getMessage();

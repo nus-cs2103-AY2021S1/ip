@@ -71,16 +71,17 @@ public class TaskStorage {
         String[] lineSplit = line.split("/");
         try {
             String taskType = lineSplit[0];
-            Boolean isTaskComplete = convertToBoolean(lineSplit[1]);
-            String content = lineSplit[2];
-            String datetime = lineSplit[3];
+            String priority = lineSplit[1];
+            Boolean isTaskComplete = convertToBoolean(lineSplit[2]);
+            String content = lineSplit[3];
+            String datetime = lineSplit[4];
             switch (taskType) {
             case "D":
-                return new Deadline(content, datetime, isTaskComplete);
+                return new Deadline(content, datetime, isTaskComplete, priority);
             case "E":
-                return new Event(content, datetime, isTaskComplete);
+                return new Event(content, datetime, isTaskComplete, priority);
             case "T":
-                return new Todo(content, isTaskComplete);
+                return new Todo(content, isTaskComplete, priority);
             default:
                 throw new DukeException("Error in parsing line, invalid task type.");
             }
