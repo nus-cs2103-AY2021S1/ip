@@ -90,6 +90,7 @@ public class Storage {
      * @return True if update is successful, False otherwise.
      */
     public boolean updateFile(TaskList list) {
+        assert (list != null) : "Storage - updateFile: TaskList is null!";
         try {
             System.out.println("Saving changes...");
             File file = getFile();
@@ -102,7 +103,6 @@ public class Storage {
             System.out.println("Changes saved.");
             return true;
         } catch (IOException e) {
-            e.printStackTrace();
             System.out.println("Something went wrong during saving!");
             return false;
         }
@@ -139,7 +139,7 @@ public class Storage {
                         list.addItem(new Event(task, done, localDate));
                         break;
                     default:
-                        return null;
+                        System.out.println("Could not parse" + matcher.group(1));
                     }
                 }
             }
