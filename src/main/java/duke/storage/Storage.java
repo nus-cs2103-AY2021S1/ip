@@ -75,38 +75,40 @@ public class Storage {
                 e.printStackTrace();
             }
         }
+
+        assert duke.exists() : "the file in the file path: " + this.filePath + " should exist";
     }
 
     private ArrayList<Task> decodeTxtFile() throws DukeException {
         File f = new File(this.filePath);
+        Scanner s;
         ArrayList<Task> decodedTasks = new ArrayList<>();
 
         try {
-            Scanner s = new Scanner(f);
-
-            String string;
-            Task task = null;
-
-            while (s.hasNext()) {
-                string = s.nextLine();
-
-                switch (string.charAt(0)) {
-                case 'D':
-                    task = Deadline.decode(string);
-                    break;
-                case 'E':
-                    task = Event.decode(string);
-                    break;
-                case 'T':
-                    task = ToDo.decode(string);
-                    break;
-                }
-                decodedTasks.add(task);
-            }
+            s = new Scanner(f);
         } catch (FileNotFoundException e) {
             throw new DukeFileNotFoundException("the file could not be found");
-        } catch (EmptyDescriptionException | EmptyDateException e) {
-            throw new DukeException(e.getMessage());
+        }
+
+        String string;
+        Task task = null;
+
+        while (s.hasNext()) {
+            string = s.nextLine();
+
+            switch (string.charAt(0)) {
+            case 'D':
+                task = Deadline.decode(string);
+                break;
+            case 'E':
+                task = Event.decode(string);
+                break;
+            case 'T':
+                task = ToDo.decode(string);
+                break;
+            }
+            assert task != null : "task should not be null";
+            decodedTasks.add(task);
         }
         return decodedTasks;
     }
