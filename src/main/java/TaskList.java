@@ -60,6 +60,6 @@ public class TaskList {
      * @param taskIndex index of task in tasklist.
      */
     public void markTaskCompleted(int taskIndex) {
-        tasks.get(taskIndex).markAsCompleted();
+        tasks.get(taskIndex).markTaskAsCompleted();
     }
 }

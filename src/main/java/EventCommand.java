@@ -25,19 +25,19 @@ public class EventCommand extends Command {
         // teach the user the format for the deadline
         if (splittedEvent.length == 1) {
             return ui.throwDukeException(new DukeException("Format of event recording: event keyword"
-                + ", event instructions, forward slash, at keyword with a colon, start/end time)"
-                    + "\n e.g. project meeting /at Mon 2-4pm"));
-        } else {
-            String details = splittedEvent[0].trim();
-            String at = splittedEvent[1].split("at", 2)[1].trim();
+                + ", event instructions, forward slash, at keyword with a colon, specific date + time)"
+                    + "\n e.g. project meeting /at 2020-01-02 14:30"));
+        }
 
-            try {
-                Task newEvent = new Event(details, at);
-                taskList.addTask(newEvent);
-                return ui.addTask(newEvent, taskList.tasksSize());
-            } catch (DukeException ex) {
-                return ui.throwDukeException(ex);
-            }
+        String details = splittedEvent[0].trim();
+        String at = splittedEvent[1].split("at", 2)[1].trim();
+
+        try {
+            Task newEvent = new Event(details, at);
+            taskList.addTask(newEvent);
+            return ui.addTask(newEvent, taskList.tasksSize());
+        } catch (DukeException ex) {
+            return ui.throwDukeException(ex);
         }
     }
 

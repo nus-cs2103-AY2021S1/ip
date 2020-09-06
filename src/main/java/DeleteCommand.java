@@ -18,11 +18,11 @@ public class DeleteCommand extends Command {
         int taskNo = Integer.parseInt(afterCommand) - 1;
         if (taskNo >= taskList.tasksSize() || taskNo < 0) {
             return ui.throwDukeException(new DukeException("Please enter a valid task no!"));
-        } else {
-            Task deletedTask = taskList.get(taskNo);
-            taskList.delete(taskNo);
-            return ui.displayDeletedTask(deletedTask, taskList.tasksSize());
         }
+
+        Task deletedTask = taskList.get(taskNo);
+        taskList.delete(taskNo);
+        return ui.displayDeletedTask(deletedTask, taskList.tasksSize());
     }
 
     @Override

@@ -16,17 +16,17 @@ public class DukeInterpreter {
         char symbol = taskString.charAt(4);
         String[] rest = taskString.substring(7).split("\\(", 2);
         String details = rest[0].trim();
-        String extra = "";
+        String extraDetails = ""; // extra info for deadline/event.
         if (rest.length == 2) {
             if (task instanceof Deadline) {
                 Deadline deadline = (Deadline) task;
-                extra = deadline.getDateTime().toString();
+                extraDetails = deadline.getDateTime().toString();
             } else if (task instanceof Event) {
                 Event event = (Event) task;
-                extra = event.getDateTime().toString();
+                extraDetails = event.getDateTime().toString();
             }
         }
-        return encodeHelper(type, symbol, details, extra);
+        return encodeHelper(type, symbol, details, extraDetails);
     }
 
     private static String encodeHelper(char type, char symbol, String details, String extra) {
@@ -70,7 +70,7 @@ public class DukeInterpreter {
     private static ToDo decodeToDo(String details, boolean isCompleted) {
         ToDo toDo = new ToDo(details);
         if (isCompleted) {
-            toDo.markAsCompleted();
+            toDo.markTaskAsCompleted();
         }
         return toDo;
     }
@@ -79,7 +79,7 @@ public class DukeInterpreter {
                                            String extra) throws DukeException {
         Deadline deadline = new Deadline(details, extra);
         if (isCompleted) {
-            deadline.markAsCompleted();
+            deadline.markTaskAsCompleted();
         }
         return deadline;
     }
@@ -88,7 +88,7 @@ public class DukeInterpreter {
                                      String extra) throws DukeException {
         Event event = new Event(details, extra);
         if (isCompleted) {
-            event.markAsCompleted();
+            event.markTaskAsCompleted();
         }
         return event;
     }

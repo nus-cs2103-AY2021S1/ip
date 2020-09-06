@@ -15,7 +15,7 @@ public class DukeTest {
     @DisplayName("Task class: Test for checking off events as done")
     public void doneTest() {
         Task todo = new ToDo("sleep");
-        todo.markAsCompleted();
+        todo.markTaskAsCompleted();
         Assertions.assertEquals("[T][✓] sleep", todo.toString());
     }
 

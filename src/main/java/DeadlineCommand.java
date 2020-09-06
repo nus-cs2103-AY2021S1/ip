@@ -25,19 +25,19 @@ public class DeadlineCommand extends Command {
         // teach the user the format for the deadline
         if (splittedDeadline.length == 1) {
             return ui.throwDukeException(new DukeException("Format of deadline recording: deadline keyword"
-                + ", deadline instructions, forward slash, by keyword with a colon, specific date/time)"
-                    + "\n e.g. deadline return book /by Sunday"));
-        } else {
-            String details = splittedDeadline[0].trim();
-            String by = splittedDeadline[1].split("by", 2)[1].trim();
+                + ", deadline instructions, forward slash, by keyword with a colon, specific date + time)"
+                    + "\n e.g. deadline return book /by 2020-01-01 12:30"));
+        }
 
-            try {
-                Task newDeadline = new Deadline(details, by);
-                taskList.addTask(newDeadline);
-                return ui.addTask(newDeadline, taskList.tasksSize());
-            } catch (DukeException ex) {
-                return ui.throwDukeException(ex);
-            }
+        String details = splittedDeadline[0].trim();
+        String by = splittedDeadline[1].split("by", 2)[1].trim();
+
+        try {
+            Task newDeadline = new Deadline(details, by);
+            taskList.addTask(newDeadline);
+            return ui.addTask(newDeadline, taskList.tasksSize());
+        } catch (DukeException ex) {
+            return ui.throwDukeException(ex);
         }
     }
 
