@@ -38,52 +38,53 @@ public class Storage {
         try {
             File data = new File(path);
             Scanner sc = new Scanner(data);
-
             while (sc.hasNextLine()) {
-
                 String nextLine = sc.nextLine();
-                Task task = new Task("");
-
-                String[] components = nextLine.split(" \\| ");
-                try {
-                    switch (components[0]) {
-                    case "T":
-                        task = new Todo(components[2]);
-                        break;
-                    case "D":
-                        task = new Deadline(components[2], components[3]);
-                        break;
-                    case "E":
-                        task = new Event(components[2], components[3]);
-                        break;
-                    default:
-                        throw new DukeException("I found an illegal string in the data file.");
-                    }
-                } catch (DukeException e) {
-                    System.out.println(e.getMessage());
-                }
-
-                if (components[1].equals("1")) {
-                    task.markAsDone();
-                }
+                Task task = generateTask(nextLine);
                 taskList.add(task);
             }
         } catch (FileNotFoundException e) {
-            if (!new File(path).exists()) {
-                new File("data").mkdir();
-                try {
-                    new File(path).createNewFile();
-                } catch (IOException ioException) {
-                    throw new DukeException("I cannot create the data file!");
-                }
-                if (!new File(path).exists()) {
-                    throw new DukeException("Failed to access the file!");
-                } else {
-                    throw new DukeException("No data file found, a new data file created!");
-                }
-            }
+            createDataFile();
         }
         return taskList;
+    }
+
+    private void createDataFile() throws DukeException {
+        new File("data").mkdir();
+        try {
+            new File(path).createNewFile();
+        } catch (IOException ioException) {
+            throw new DukeException("I cannot create the data file!");
+        }
+        assert new File(path).exists() : "Failed to access the file!";
+        throw new DukeException("No data file found, a new data file created!");
+    }
+
+    private Task generateTask(String nextLine) {
+        Task task = new Task("");
+        String[] components = nextLine.split(" \\| ");
+        try {
+            switch (components[0]) {
+            case "T":
+                task = new Todo(components[2]);
+                break;
+            case "D":
+                task = new Deadline(components[2], components[3]);
+                break;
+            case "E":
+                task = new Event(components[2], components[3]);
+                break;
+            default:
+                throw new DukeException("I found an illegal string in the data file.");
+            }
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+
+        if (components[1].equals("1")) {
+            task.markAsDone();
+        }
+        return task;
     }
 
     /**

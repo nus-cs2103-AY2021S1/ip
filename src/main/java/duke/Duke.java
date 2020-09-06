@@ -15,6 +15,7 @@ import duke.component.Ui;
  * @since 2020-08-18
  */
 public class Duke {
+    private static final String FILE_PATH = "data/tasks.txt";
     private TaskList taskList;
     private Storage storage;
     private Ui ui;
@@ -23,9 +24,8 @@ public class Duke {
      * Initializes Duke with the given file path
      */
     public Duke() {
-        String filePath = "data/tasks.txt";
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(FILE_PATH);
         try {
             taskList = new TaskList(storage.readList());
         } catch (DukeException e) {
