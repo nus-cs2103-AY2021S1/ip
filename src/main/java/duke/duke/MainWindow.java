@@ -60,7 +60,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         if (input.equals("bye")) {
-            KeyFrame exit = new KeyFrame(Duration.seconds(1), event -> {
+            KeyFrame exit = new KeyFrame(Duration.seconds(2), event -> {
                 Platform.exit();
             });
             Timeline timeline = new Timeline(exit);

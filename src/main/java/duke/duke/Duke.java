@@ -27,7 +27,7 @@ public class Duke {
     }
 
     /**
-     * Begin the Duke chat bot program.
+     * Begin the Duke chat bot program. Deprecated since v0.2.
      */
     public void run() {
         ui.showOutput(ui.showWelcome());
