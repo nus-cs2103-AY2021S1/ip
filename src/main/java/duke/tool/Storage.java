@@ -41,6 +41,7 @@ public class Storage {
             while (s.hasNext()) {
                 String curr = s.nextLine();
                 String[] currTask = curr.split(" \\| ");
+                assert currTask.length >= 3;
                 Boolean isDone = currTask[1].equals("1");
                 if (currTask[0].equals("T")) {
                     orderList.add(new Todo(currTask[2], isDone));

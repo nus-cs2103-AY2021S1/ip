@@ -84,6 +84,7 @@ public class Parser {
                         if (splitAgain.length == 1) {
                             throw new NoTimeException(command[0]);
                         }
+                        assert splitAgain.length == 2;
                         return new Deadline(splitAgain[0],
                                 LocalDateTime.parse(splitAgain[1], VALID_FORMAT), false);
                     } else if (ValidInput.getCmdType(command[0]).name().equals("EVENT")) {
@@ -91,6 +92,7 @@ public class Parser {
                         if (splitAgain.length == 1) {
                             throw new NoTimeException(command[0]);
                         }
+                        assert splitAgain.length == 2;
                         return new Event(splitAgain[0],
                                 LocalDateTime.parse(splitAgain[1], VALID_FORMAT), false);
                     } else if (ValidInput.getCmdType(command[0]).name().equals("TODO")) {
