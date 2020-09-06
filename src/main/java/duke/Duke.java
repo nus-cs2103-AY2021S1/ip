@@ -2,8 +2,6 @@ package duke;
 
 import static duke.storage.Storage.DEFAULT_STORAGE_FILEPATH;
 
-import java.io.InputStream;
-
 import duke.commands.Command;
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
@@ -28,21 +26,25 @@ public class Duke {
     private Parser parser;
     private Ui ui;
 
-    public Duke(String filePath) {
-        this(filePath, System.in);
+    public Duke(Ui ui) {
+        this(DEFAULT_STORAGE_FILEPATH, ui);
     }
 
     /**
      * Constructor for Duke.
+     * <p>
+     * Loads tasks from save file into taskList.
+     * </p>
+     *
      * @param filePath save file path.
-     * @param in inputStream.
+     * @param ui Ui manager.
      */
-    public Duke(String filePath, InputStream in) {
+    public Duke(String filePath, Ui ui) {
         try {
             storage = new Storage(filePath);
             taskList = storage.loadTasks();
-            ui = new Ui(in);
-            parser = new Parser(taskList, ui);
+            this.ui = ui;
+            parser = new Parser(taskList, this.ui);
         } catch (StorageOperationException e) {
             System.out.println(e.getMessage());
             throw new RuntimeException(e);
@@ -50,39 +52,32 @@ public class Duke {
     }
 
     /**
-     * Executes Duke chat bot functionality.
+     * Responds to user string input.
      * <p>
-     * Continues taking in commands until
-     * "bye" command is input by user.
+     * Able to handle and print DukeException.
+     * If "bye", saves locally and exits.
      * </p>
      *
+     * @param input
+     * @return true terminate if bye
      */
-    public void run() {
-        ui.showWelcomeMessage();
-        String input = ui.getUserInput();
-        while (!input.equals("bye")) {
+    public boolean respondToUserInput(String input) {
+        if (input.equals("bye")) {
+            ui.showGoodbyeMessage();
             try {
-                Command command = parser.getCommandFromInput(input);
-                command.execute();
-            } catch (DukeException e) {
-                ui.outputBlockToUser(e.getMessage());
+                storage.saveTasks(taskList);
+            } catch (StorageOperationException soe) {
+                System.out.println(soe.getMessage());
             }
-            input = ui.getUserInput();
+            return true;
         }
-        ui.showGoodbyeMessage();
-        try {
-            storage.saveTasks(taskList);
-        } catch (StorageOperationException soe) {
-            System.out.println(soe.getMessage());
-        }
-    }
 
-    /**
-     * Main method for execution.
-     * @param args
-     */
-    public static void main(String[] args) {
-        Duke duke = new Duke(DEFAULT_STORAGE_FILEPATH);
-        duke.run();
+        try {
+            Command command = parser.getCommandFromInput(input);
+            command.execute();
+        } catch (DukeException e) {
+            ui.outputBlockToUser(e.getMessage());
+        }
+        return false;
     }
 }
