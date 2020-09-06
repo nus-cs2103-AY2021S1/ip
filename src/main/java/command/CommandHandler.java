@@ -35,6 +35,9 @@ public class CommandHandler implements Consumer<String>, Function<String, String
             return "";
         }
 
+        // input string should no longer be blank
+        assert !input.isBlank();
+
         try {
             final String output;
             final Command cmd = Parser.parseCommand(input);
