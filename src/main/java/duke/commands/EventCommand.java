@@ -6,7 +6,7 @@ import duke.tasks.Event;
 import duke.tasks.TaskManager;
 
 /**
- * <code>duke.commands.EventCommand</code> inherits from the base class <code>duke.commands.Command</code>
+ * <code>EventCommand</code> inherits from the base class <code>Command</code>
  * and will handle the job of adding events to the task manager.
  */
 public class EventCommand extends Command {
@@ -29,12 +29,7 @@ public class EventCommand extends Command {
 
     /**
      * Adds an <code>Event</code> to the task manager.
-     * Using the <code>duke.Ui</code> object in the parent class, it prints out
-     * the user interface to ask for the name, start time and end time of the event to be created.
-     * It uses the <code>Scanner</code> object in the parent class to receive the name, start time
-     * and end time of the deadline.
-     * It uses the <code>TaskManager</code> object in the parent class and calls
-     * its <code>add</code> method with an <code>Event</code> object passed as an argument.
+     * @param input the user input.
      * @return <code>true</code>
      * @throws DukeException if the construction of the <code>Event</code> object results in an <code>exception</code>
      */
@@ -61,6 +56,13 @@ public class EventCommand extends Command {
         return true;
     }
 
+    /**
+     * Sets the utility tools <code>tm</code> and <code>ui</code>.
+     * In addition, sets the initial response to ask for the name of the
+     * event to be created.
+     * @param tm the task manager.
+     * @param ui the ui.
+     */
     @Override
     public void init(TaskManager tm, Ui ui) {
         setResponse(ui.askEventName());
