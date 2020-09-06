@@ -50,18 +50,27 @@ public class Storage {
         //read from file
         BufferedReader reader = Files.newBufferedReader(file);
         List<Task> tasks = new ArrayList<>(); //this does not update this.todos
-        String currentLine;
-        while ((currentLine = reader.readLine()) != null) {
+//        while ((currentLine = reader.readLine()) != null) {
+//            try {
+//                System.out.println(currentLine);
+//                Task task = parseData(currentLine);
+//                tasks.add(task);
+//            } catch (StorageException e) {
+//                System.out.println(e.getMessage());
+//            } catch (DukeException d) {
+//                System.out.println(d.getMessage());
+//            }
+//        }
+        reader.lines().forEach(line -> {
             try {
-                System.out.println(currentLine);
-                Task task = parseData(currentLine);
+                Task task = parseData(line);
                 tasks.add(task);
             } catch (StorageException e) {
                 System.out.println(e.getMessage());
             } catch (DukeException d) {
                 System.out.println(d.getMessage());
             }
-        }
+        });
         return tasks;
     }
 
@@ -76,95 +85,126 @@ public class Storage {
 
         try {
             String[] parsed = line.split("\\s\\|\\s");
-            Task task;
+
             if (parsed.length < 2) {
                 throw new StorageException(line + "is in invalid format.");
             } else {
                 String identifier = parsed[0]; //get the type of duke.task
-                String doneIndicator = parsed[1];
-                String taskName = parsed[2];
 
                 if (identifier.equals("T")) {
-                    if (doneIndicator.equals("1")) {
-                        task = new Todo(taskName, true);
-                    } else {
-                        task = new Todo(taskName);
-                    }
+                    return parseTodoData(parsed);
 
                 } else if (identifier.equals("E")) {
-                    //String dateAndTime = parsed[3];
-                    String date = parsed[3];
-                    //String[] dateTime = dateString.split("\\s");
-                    //String date = dateTime[0];
-                    LocalDate localDate = LocalDate.parse(date);
-
-                    if (parsed.length < 5) {
-                        if (doneIndicator.equals("1")) {
-                            task = new Event(taskName, true, localDate);
-                        } else {
-                            task = new Event(taskName, localDate);
-                        }
-
-                    } else {
-                        String time = parsed[4];
-                        String[] startEndTime = time.split("-");
-                        String startTime = startEndTime[0];
-                        LocalTime localStartTime = LocalTime.parse(startTime);
-
-                        if (startEndTime.length < 2) {
-                            if (doneIndicator.equals("1")) {
-                                task = new Event(taskName, true, localDate, localStartTime);
-                            } else {
-                                task = new Event(taskName, false, localDate, localStartTime);
-                            }
-                        } else {
-                            String endTime = startEndTime[1];
-                            LocalTime localEndTime = LocalTime.parse(endTime);
-                            if (doneIndicator.equals("1")) {
-                                task = new Event(taskName,
-                                    true, localDate, localStartTime, localEndTime);
-                            } else {
-                                task = new Event(taskName,
-                                    false, localDate, localStartTime, localEndTime);
-                            }
-                        }
-                    }
+                    return parseEventData(parsed);
 
                 } else if (identifier.equals("D")) {
-                    //String dateAndTime = parsed[3];
-                    String date = parsed[3];
-                    //String[] dateTime = dateAndTime.split(" ");
-                    //String date = dateTime[0];
-                    LocalDate localDate = LocalDate.parse(date);
-
-                    if (parsed.length < 5) {
-                        if (doneIndicator.equals("1")) {
-                            task = new Deadline(taskName, true, localDate);
-                        } else {
-                            task = new Deadline(taskName, localDate);
-                        }
-                    } else {
-                        String time = parsed[4];
-                        LocalTime localTime = LocalTime.parse(time);
-                        if (doneIndicator.equals("1")) {
-                            task = new Deadline(taskName, true, localDate, localTime);
-                        } else {
-                            task = new Deadline(taskName, false, localDate, localTime);
-                        }
-                    }
+                    return parseDeadlineData(parsed);
 
                 } else {
                     throw new StorageException("Invalid format. Moving on to the next task.");
                 }
 
             }
-            return task;
 
         } catch (DateTimeParseException e) {
             throw new CalendarException("Please input the correct date and time format. "
                 + "YYYY-MM-DD for date and HH:MM for time.");
         }
+    }
 
+    /**
+     * Format the event data to more readable format.
+     *
+     * @param parsed split Input.
+     * @return parsed Event data.
+     */
+    public static Event parseEventData(String[] parsed) {
+        String doneIndicator = parsed[1];
+        String taskName = parsed[2];
+        String date = parsed[3];
+        LocalDate localDate = LocalDate.parse(date);
+        Event event;
+        if (parsed.length == 4) {
+            if (doneIndicator.equals("1")) {
+                event = new Event(taskName, true, localDate);
+            } else {
+                event = new Event(taskName, localDate);
+            }
+        } else {
+            String time = parsed[4];
+            String[] startEndTime = time.split("-");
+            String startTime = startEndTime[0];
+            LocalTime localStartTime = LocalTime.parse(startTime);
+            if (startEndTime.length < 2) {
+                if (doneIndicator.equals("1")) {
+                    event = new Event(taskName, true, localDate, localStartTime);
+                } else {
+                    event = new Event(taskName, false, localDate, localStartTime);
+                }
+            } else {
+                String endTime = startEndTime[1];
+                LocalTime localEndTime = LocalTime.parse(endTime);
+                if (doneIndicator.equals("1")) {
+                    event = new Event(taskName,
+                        true, localDate, localStartTime, localEndTime);
+                } else {
+                    event = new Event(taskName,
+                        false, localDate, localStartTime, localEndTime);
+                }
+            }
+        }
+        return event;
+    }
+
+    /**
+     * Format the deadline data to more readable format.
+     *
+     * @param parsed split Input.
+     * @return parsed Deadline data.
+     */
+    public static Deadline parseDeadlineData(String[] parsed) {
+        String doneIndicator = parsed[1];
+        String taskName = parsed[2];
+        String date = parsed[3];
+        LocalDate localDate = LocalDate.parse(date);
+        Deadline deadline;
+
+        if (parsed.length < 5) {
+            if (doneIndicator.equals("1")) {
+                deadline = new Deadline(taskName, true, localDate);
+            } else {
+                deadline = new Deadline(taskName, localDate);
+            }
+        } else {
+            String time = parsed[4];
+            LocalTime localTime = LocalTime.parse(time);
+            if (doneIndicator.equals("1")) {
+                deadline = new Deadline(taskName, true, localDate, localTime);
+            } else {
+                deadline = new Deadline(taskName, false, localDate, localTime);
+            }
+        }
+        return deadline;
+    }
+
+    /**
+     * Format the todo data to more readable format.
+     *
+     * @param parsed split Input.
+     * @return parsed Todo data.
+     */
+    public static Todo parseTodoData(String[] parsed) {
+        String doneIndicator = parsed[1];
+        String taskName = parsed[2];
+        Todo todo;
+
+        if (doneIndicator.equals("1")) {
+            todo = new Todo(taskName, true);
+        } else {
+            todo = new Todo(taskName);
+        }
+
+        return todo;
     }
 
     /**
@@ -185,36 +225,12 @@ public class Storage {
                     stored = String.format("%s | %d | %s", type, status ? 1 : 0, taskName);
 
                 } else if (type.equals("E")) {
-                    Event event = (Event) task;
-                    LocalDate date = event.getDate();
-                    LocalTime startTime = event.getStartTime();
-                    LocalTime endTime = event.getEndTime();
 
-                    if (startTime == null && endTime == null) {
-                        stored = String.format(
-                            "%s | %d | %s | %s", type, status ? 1 : 0, taskName, date);
-                    } else if (endTime == null) {
-                        stored = String.format("%s | %d | %s | %s | %s",
-                            type, status ? 1 : 0, taskName, date, startTime);
-                    } else {
-                        stored = String.format("%s | %d | %s | %s | %s-%s",
-                            type, status ? 1 : 0, taskName, date, startTime, endTime);
-                    }
+                    stored = updateEventData(task);
 
                 } else if (type.equals("D")) {
-                    Deadline deadline = (Deadline) task;
-                    LocalDate date = deadline.getDeadline();
-                    LocalTime time = deadline.getTime();
 
-                    if (time == null) {
-                        stored = String.format("%s | %d | %s | %s",
-                            type, status ? 1 : 0, taskName, date);
-                    } else {
-                        stored = String.format("%s | %d | %s | %s | %s",
-                            type, status ? 1 : 0, taskName, date, time);
-
-                    }
-
+                    stored = updateDeadlineData(task);
                 }
                 writer.write(stored);
                 writer.newLine();
@@ -226,4 +242,51 @@ public class Storage {
         }
     }
 
+
+    public static String updateEventData(Task task) {
+        String type = task.getType();
+        Boolean status = task.getStatus();
+        String taskName = task.getDescription();
+        String stored = "";
+        Event event = (Event) task;
+
+        LocalDate date = event.getDate();
+        LocalTime startTime = event.getStartTime();
+        LocalTime endTime = event.getEndTime();
+
+        if (startTime == null && endTime == null) {
+            stored = String.format(
+                "%s | %d | %s | %s", type, status ? 1 : 0, taskName, date);
+        } else if (endTime == null) {
+            stored = String.format("%s | %d | %s | %s | %s",
+                type, status ? 1 : 0, taskName, date, startTime);
+        } else {
+            stored = String.format("%s | %d | %s | %s | %s-%s",
+                type, status ? 1 : 0, taskName, date, startTime, endTime);
+        }
+
+        return stored;
+    }
+
+    public static String updateDeadlineData(Task task) {
+        String type = task.getType();
+        Boolean status = task.getStatus();
+        String taskName = task.getDescription();
+        String stored = "";
+        Deadline deadline = (Deadline) task;
+
+        LocalDate date = deadline.getDeadline();
+        LocalTime time = deadline.getTime();
+
+        if (time == null) {
+            stored = String.format("%s | %d | %s | %s",
+                type, status ? 1 : 0, taskName, date);
+        } else {
+            stored = String.format("%s | %d | %s | %s | %s",
+                type, status ? 1 : 0, taskName, date, time);
+
+        }
+
+        return stored;
+    }
 }

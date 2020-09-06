@@ -43,4 +43,17 @@ public class Todo extends Task {
         }
         return this;
     }
+
+    @Override
+    public boolean equals(Object other) {
+        if(this == other) {
+            return true;
+        } else if (other instanceof Todo) {
+            Todo todo = (Todo) other;
+            boolean descIsEqual = this.description.equals(todo.getDescription());
+            return descIsEqual;
+        } else {
+            return false;
+        }
+    }
 }

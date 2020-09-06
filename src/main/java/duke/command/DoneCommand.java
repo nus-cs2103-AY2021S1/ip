@@ -18,6 +18,7 @@ public class DoneCommand extends Command {
 
     /**
      * Processes all the done command to determine the correct output.
+     *
      * @param taskList List of tasks.
      * @param ui       UI of the bot.
      * @param storage  Storage managing the file in hard disk.
@@ -33,6 +34,7 @@ public class DoneCommand extends Command {
 
     /**
      * Processes all the done command to determine the correct output.
+     *
      * @param taskNumbers Parsed string containing task numbers.
      * @param taskList    List containing all the task(s).
      * @param ui          UI of the bot

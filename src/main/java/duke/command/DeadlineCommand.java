@@ -3,10 +3,7 @@ package duke.command;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
-import java.util.Calendar;
 
-import duke.Duke;
-import duke.Parser;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -49,41 +46,6 @@ public class DeadlineCommand extends Command {
 
     public String processDeadline(
         String theRest, TaskList taskList, Ui ui, Storage storage) throws DukeException {
-//        try {
-//            String[] taskAndDeadlineAndTime = theRest.split(" /by ", 2);
-//            Deadline deadline;
-//
-//            try {
-//                String task = taskAndDeadlineAndTime[0];
-//                String dateAndTime = taskAndDeadlineAndTime[1];
-//                String[] dateTime = dateAndTime.split(" ", 2);
-//
-//                String date = dateTime[0];
-//
-//                try {
-//                    LocalDate localDate = LocalDate.parse(date);
-//
-//                    if (dateTime.length < 2) {
-//                        deadline = new Deadline(task, localDate);
-//                    } else {
-//                        String time = dateTime[1];
-//                        LocalTime localTime = LocalTime.parse(time);
-//                        deadline = new Deadline(task, false, localDate, localTime);
-//                    }
-//                    Storage.updateData(taskList.getTasks());
-//                    return taskList.saveToList(deadline);
-//
-//                } catch (DateTimeParseException e) {
-//                    throw new CalendarException("Please enter the date in YYYY/MM/DD format and time in HH:MM format.");
-//                }
-//
-//            } catch (IndexOutOfBoundsException e) {
-//                throw new DeadlineException("Please specify the task and deadline.");
-//            }
-//
-//        } catch (DukeException d) {
-//            throw new DeadlineException("Please specify the task and deadline.");
-//        }
 
         Deadline deadline;
         try {
@@ -92,7 +54,7 @@ public class DeadlineCommand extends Command {
             LocalDate localDate = getDeadlineDate(details);
             LocalTime localTime = getDeadlineTime(details);
 
-            if(localTime != null) {
+            if (localTime != null) {
                 deadline = new Deadline(task, false, localDate, localTime);
             } else {
                 deadline = new Deadline(task, localDate);
@@ -107,6 +69,14 @@ public class DeadlineCommand extends Command {
             throw calendarExc;
         }
     }
+
+    /**
+     * Parses the deadline details.
+     *
+     * @param theRest deadline details.
+     * @return Date and time of the deadline task.
+     * @throws DeadlineException
+     */
 
     public String[] parseDeadlineDetails(String theRest) throws DeadlineException {
         try {
@@ -159,7 +129,6 @@ public class DeadlineCommand extends Command {
             return null;
         }
     }
-
 
 
     /**
