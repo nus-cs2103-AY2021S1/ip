@@ -81,24 +81,26 @@ public class Duke {
 
     private String cmdFind(String keyword) {
         try {
-            if (ls.isEmpty()) {
+            if (isListEmpty()) {
                 return ui.outputCheckNoTask();
-            } else {
-                return ui.outputFindTask(ls, keyword);
             }
+            return ui.outputFindTask(ls, keyword);
         } catch (Exception ex) {
             return ui.outputFindError();
         }
     }
 
+    private boolean isListEmpty() {
+        return ls.isEmpty();
+    }
+
     private String cmdCheck(String checkDate) {
         try {
             LocalDate date = LocalDate.parse(checkDate);
-            if (ls.isEmpty()) {
+            if (isListEmpty()) {
                 return ui.outputCheckNoTask();
-            } else {
-                return ui.outputCheckTask(ls, date);
             }
+            return ui.outputCheckTask(ls, date);
         } catch (Exception ex) {
             return ui.outputCheckError();
         }
@@ -170,10 +172,9 @@ public class Duke {
     }
 
     private String cmdList() {
-        if (ls.isEmpty()) {
+        if (isListEmpty()) {
             return ui.outputListNoTask();
-        } else {
-            return ui.outputListTask(ls);
         }
+        return ui.outputListTask(ls);
     }
 }

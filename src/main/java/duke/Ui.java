@@ -215,8 +215,8 @@ public class Ui {
                     counter += 1;
                     str.append(counter).append(". ").append(task.toString()).append("\n");
                 }
-            } else if (task instanceof Deadline && !task.isDone()) {
-                if (((Deadline) task).getDate().equals(date)) {
+            } else if (task instanceof Deadline) {
+                if (((Deadline) task).getDate().equals(date) && !task.isDone()) {
                     counter += 1;
                     str.append(counter).append(". ").append(task.toString()).append("\n");
                 }
