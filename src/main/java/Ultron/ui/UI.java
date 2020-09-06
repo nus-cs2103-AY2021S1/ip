@@ -1,22 +1,16 @@
 package ultron.ui;
 
-import java.util.Scanner;
-
 public final class UI {
 
     /**
      * Store the scanner object.
      */
-    private final Scanner scanner;
     private String string;
 
     /**
      * UI to handle all the displaying.
      */
     public UI() {
-
-        //Create a new scanner object
-        scanner = new Scanner(System.in);
         setIntro();
     }
 
