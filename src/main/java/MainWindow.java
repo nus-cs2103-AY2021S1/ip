@@ -63,6 +63,13 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
 
+        if (userInput.getText().equals("bye")) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(duke.ui.goodbye(), dukeImage)
+            );
+            System.exit(0); // Closes GUI window.
+        }
+
         userInput.clear();
     }
 }
