@@ -1,5 +1,6 @@
 package duke.tasks;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -34,6 +35,26 @@ public class Deadline extends Task {
     public Deadline markDone() {
         super.markDone();
         return this;
+    }
+
+    /**
+     * Gets the type of the task.
+     *
+     * @return String representation of the type.
+     */
+    @Override
+    public String getType() {
+        return "deadline";
+    }
+
+    /**
+     * Checks whether the tasks is on today.
+     *
+     * @return is today or not.
+     */
+    @Override
+    public boolean isOnTheDate(LocalDate date) {
+        return this.by.toLocalDate().isEqual(date);
     }
 
     /**

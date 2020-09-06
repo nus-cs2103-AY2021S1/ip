@@ -16,6 +16,16 @@ public class List extends Task {
     }
 
     /**
+     * Gets the type of the task.
+     *
+     * @return String representation of the type.
+     */
+    @Override
+    public String getType() {
+        return "list";
+    }
+
+    /**
      * Prints all the tasks in the list.
      *
      * @param taskList

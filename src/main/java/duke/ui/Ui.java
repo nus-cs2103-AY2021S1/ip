@@ -1,5 +1,6 @@
 package duke.ui;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import duke.tasks.Task;
@@ -24,6 +25,26 @@ public class Ui {
      */
     public String showGreeting() {
         return "Hello! I'm Duke DuiDui\nWhat can I do for you?";
+    }
+
+    public String showReminderToday(TaskList taskList) {
+        TaskList today = taskList.findTasksInCertainDate(LocalDate.now());
+        String firstSentence = "DO REMIND TO DO IN TODAY:\n";
+        if (today.getNumOfTasks() == 0) {
+            return firstSentence + "\n"
+                    + "Nothing to do on today.";
+        }
+        return useStreamListTasks(firstSentence, today);
+    }
+
+    public String showReminderTomorrow(TaskList taskList) {
+        TaskList tomorrow = taskList.findTasksInCertainDate(LocalDate.now().plusDays(1));
+        String firstSentence = "DO REMIND TO DO IN TOMORROW:\n";
+        if (tomorrow.getNumOfTasks() == 0) {
+            return firstSentence + "\n"
+                    + "Nothing to do on tomorrow.";
+        }
+        return useStreamListTasks(firstSentence, tomorrow);
     }
 
     /**
@@ -92,7 +113,7 @@ public class Ui {
      * @param taskList
      * @return the string representation.
      */
-    public String UseStreamListTasks(String firstSentence, TaskList taskList) {
+    public String useStreamListTasks(String firstSentence, TaskList taskList) {
         return taskList.getTaskList().stream()
                 .reduce(firstSentence,
                         (string, task) -> string + presentTask(task, taskList),
@@ -102,12 +123,16 @@ public class Ui {
     /**
      * Prints the tasks in the list.
      *
-     * @param tasklist
+     * @param taskList
      * @return
      */
-    public String listTasks(TaskList tasklist) {
+    public String listTasks(TaskList taskList) {
         String firstSentence = "Here are the tasks in your list:\n";
-        return UseStreamListTasks(firstSentence, tasklist);
+        if (taskList.getNumOfTasks() == 0) {
+            return firstSentence + "\n"
+                    + "No tasks need to be done! Take a rest!";
+        }
+        return useStreamListTasks(firstSentence, taskList);
     }
 
     /**
@@ -123,7 +148,11 @@ public class Ui {
         taskList.getTaskList().stream()
                 .filter(task -> task.getName().contains(toFind))
                 .forEach(task -> listWithKeyword.add(task));
-        return UseStreamListTasks(firstSentence, listWithKeyword);
+        if (listWithKeyword.getNumOfTasks() == 0) {
+            return firstSentence + "\n"
+                    + "Opps! Find nothing related.";
+        }
+        return useStreamListTasks(firstSentence, listWithKeyword);
     }
 
     /**

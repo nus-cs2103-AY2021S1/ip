@@ -1,5 +1,6 @@
 package duke.tool;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 import duke.tasks.Task;
@@ -71,5 +72,18 @@ public class TaskList {
      */
     public int getNumOfTasks() {
         return taskList.size();
+    }
+
+    public TaskList findTasksInCertainDate(LocalDate date) {
+        TaskList today = new TaskList(new ArrayList<>());
+        for (Task task : taskList) {
+            String type = task.getType();
+            if (type.equals("deadline") || type.equals("event")) {
+                if (task.isOnTheDate(date)) {
+                    today.add(task);
+                }
+            }
+        }
+        return today;
     }
 }

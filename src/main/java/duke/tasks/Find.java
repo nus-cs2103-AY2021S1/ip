@@ -21,6 +21,16 @@ public class Find extends Task {
         this.toFind = toFind;
     }
 
+    /**
+     * Gets the type of the task.
+     *
+     * @return String representation of the type.
+     */
+    @Override
+    public String getType() {
+        return "find";
+    }
+
     @Override
     public String execute(TaskList tasklist, Ui ui, Storage storage) {
         return ui.listMatchedTasks(tasklist, this.toFind);

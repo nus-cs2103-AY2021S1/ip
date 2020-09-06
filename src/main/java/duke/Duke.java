@@ -40,6 +40,10 @@ public class Duke {
         return this.ui;
     }
 
+    public TaskList getTaskList() {
+        return this.tasks;
+    }
+
     /**
      * Gets duke's response.
      */

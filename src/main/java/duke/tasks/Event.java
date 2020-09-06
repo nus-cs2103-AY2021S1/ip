@@ -1,5 +1,6 @@
 package duke.tasks;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -34,6 +35,26 @@ public class Event extends Task {
     public Event markDone() {
         super.markDone();
         return this;
+    }
+
+    /**
+     * Gets the type of the task.
+     *
+     * @return String representation of the type.
+     */
+    @Override
+    public String getType() {
+        return "event";
+    }
+
+    /**
+     * Checks whether the tasks is on today.
+     *
+     * @return is today or not.
+     */
+    @Override
+    public boolean isOnTheDate(LocalDate date) {
+        return this.at.toLocalDate().isEqual(date);
     }
 
     /**

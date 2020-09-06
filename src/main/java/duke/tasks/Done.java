@@ -21,6 +21,16 @@ public class Done extends Task {
     }
 
     /**
+     * Gets the type of the task.
+     *
+     * @return String representation of the type.
+     */
+    @Override
+    public String getType() {
+        return "done";
+    }
+
+    /**
      * Marks the task in the list as done and print the done message.
      * Writes the changes into the file.
      *

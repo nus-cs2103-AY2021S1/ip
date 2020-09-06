@@ -4,6 +4,8 @@ import duke.tool.Storage;
 import duke.tool.TaskList;
 import duke.ui.Ui;
 
+import java.time.LocalDate;
+
 /**
  * The class to Represent a task.
  */
@@ -86,4 +88,17 @@ public class Task {
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         return null;
     };
+
+    public String getType() {
+        return null;
+    }
+
+    /**
+     * Checks whether the tasks is on today.
+     *
+     * @return is today or not.
+     */
+    public boolean isOnTheDate(LocalDate date) {
+        return false;
+    }
 }

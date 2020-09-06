@@ -21,6 +21,16 @@ public class Delete extends Task {
     }
 
     /**
+     * Gets the type of the task.
+     *
+     * @return String representation of the type.
+     */
+    @Override
+    public String getType() {
+        return "delete";
+    }
+
+    /**
      * Deletes the certain task in the list and print the deleted message.
      * Writes the changes into the file.
      *

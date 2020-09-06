@@ -24,6 +24,16 @@ public class Todo extends Task {
     }
 
     /**
+     * Gets the type of the task.
+     *
+     * @return String representation of the type.
+     */
+    @Override
+    public String getType() {
+        return "todo";
+    }
+
+    /**
      * Adds the task into the list and print the added message.
      * Writes the changes into the file.
      *
