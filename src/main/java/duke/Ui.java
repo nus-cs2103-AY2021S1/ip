@@ -30,6 +30,10 @@ public class Ui {
     private static final String DIVIDER =
             "------------------------------------------------------\n";
 
+    private static final String GREETING = "\nHello, I'm Star Bot! What can I do for you?\nSay \"bye\" to exit.\n";
+    private static final String GOODBYE_MESSAGE = "Goodbye, see you again soon! :)";
+    private static final String EMPTY_LIST_MESSAGE = "Your list is empty! Let's add some tasks!";
+
     /** Scanner used to scan user's input */
     private static final Scanner SCANNER = new Scanner(System.in);
 
@@ -37,14 +41,14 @@ public class Ui {
      * Greets the user upon program start up.
      */
     public void showWelcome() {
-        System.out.println(LOGO + "\nHello, I'm Star Bot! What can I do for you?\nSay \"bye\" to exit.\n");
+        System.out.println(LOGO + GREETING);
     }
 
     /**
      * Says goodbye to the user before termination of the program.
      */
     public void showGoodbye() {
-        showReply("Goodbye, see you again soon! :)");
+        showReply(GOODBYE_MESSAGE);
     }
 
     /**
@@ -113,7 +117,7 @@ public class Ui {
      */
     public void showTaskList(TaskList tasks) {
         if (tasks.isEmpty()) {
-            showReply("Your list is empty! Let's add some tasks!");
+            showReply(EMPTY_LIST_MESSAGE);
         } else {
             showReply("Here are the tasks in your list:" + tasks.toStringForCli());
         }

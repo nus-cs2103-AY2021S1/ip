@@ -8,6 +8,9 @@ import duke.task.Task;
  * Handles all interactions with the user.
  */
 public class UiForGui {
+    private static final String GREETING = "\nHello, I'm Star Bot! What can I do for you?\nSay \"bye\" to exit.\n";
+    private static final String GOODBYE_MESSAGE = "Goodbye, see you again soon! :)";
+    private static final String EMPTY_LIST_MESSAGE = "Your list is empty! Let's add some tasks!";
 
     /** Scanner used to scan user's input */
     private static final Scanner SCANNER = new Scanner(System.in);
@@ -16,14 +19,14 @@ public class UiForGui {
      * Greets the user upon program start up.
      */
     public static String showWelcome() {
-        return "Hello, I'm Star Bot! What can I do for you?\nSay \"bye\" to exit.\n";
+        return GREETING;
     }
 
     /**
      * Says goodbye to the user before termination of the program.
      */
     public String showGoodbye() {
-        return "Goodbye, see you again soon! :)";
+        return GOODBYE_MESSAGE;
     }
 
     /**
@@ -73,7 +76,7 @@ public class UiForGui {
      */
     public String showTaskList(TaskList tasks) {
         if (tasks.isEmpty()) {
-            return "Your list is empty! Let's add some tasks!";
+            return EMPTY_LIST_MESSAGE;
         } else {
             return "Here are the tasks in your list:" + tasks.toStringForGui();
         }

@@ -16,6 +16,15 @@ import duke.command.UnknownCommand;
  */
 public class Parser {
 
+    private static final String BYE = "bye";
+    private static final String LIST = "list";
+    private static final String DONE = "done";
+    private static final String DELETE = "delete";
+    private static final String TODO = "todo";
+    private static final String EVENT = "event";
+    private static final String DEADLINE = "deadline";
+    private static final String FIND = "find";
+
     /**
      * Parses user commands and returns the appropriate executable command for the program to then execute.
      *
@@ -24,21 +33,22 @@ public class Parser {
      */
     public static Command parse(String fullCommand) {
         String[] commandWords = fullCommand.split(" ");
-        if (fullCommand.equals("bye")) { // Exit the program
+        String firstWord = commandWords[0];
+        if (fullCommand.equals(BYE)) { // Exit the program
             return new ExitCommand();
-        } else if (fullCommand.equals("list")) { // List out task list
+        } else if (fullCommand.equals(LIST)) { // List out task list
             return new ListCommand();
-        } else if (commandWords[0].equals("done")) { // Done with a task
+        } else if (firstWord.equals(DONE)) { // Done with a task
             return new DoneCommand(commandWords);
-        } else if (commandWords[0].equals("delete")) { // Delete a task
+        } else if (firstWord.equals(DELETE)) { // Delete a task
             return new DeleteCommand(commandWords);
-        } else if (commandWords[0].equals("todo")) { // Add To-Do task
+        } else if (firstWord.equals(TODO)) { // Add To-Do task
             return new AddTodoCommand(fullCommand);
-        } else if (commandWords[0].equals("event")) { // Add duke.task.Event task
+        } else if (firstWord.equals(EVENT)) { // Add duke.task.Event task
             return new AddEventCommand(fullCommand);
-        } else if (commandWords[0].equals("deadline")) { // Add duke.task.Deadline task
+        } else if (firstWord.equals(DEADLINE)) { // Add duke.task.Deadline task
             return new AddDeadlineCommand(fullCommand);
-        } else if (commandWords[0].equals("find")) { // Find task(s) in task list
+        } else if (firstWord.equals(FIND)) { // Find task(s) in task list
             return new FindCommand(fullCommand);
         } else { // Unknown command entered
             return new UnknownCommand();

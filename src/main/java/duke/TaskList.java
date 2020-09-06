@@ -16,6 +16,12 @@ import duke.task.ToDo;
  */
 public class TaskList {
 
+    private static final String TODO_SYMBOL = "[T]";
+    private static final String EVENT_SYMBOL = "[E]";
+    private static final String DEADLINE_SYMBOL = "[D]";
+    private static final String DONE = "1";
+    private static final String DATE_TIME_FORMAT_PATTERN = "yyyy-MM-dd HHmm";
+
     /** The user's list of tasks */
     private List<Task> tasks = new ArrayList<>();
 
@@ -41,18 +47,23 @@ public class TaskList {
      * @throws WrongFormatException If an error is present in the format of a task in the save file.
      */
     private void initiateTaskList(List<String> listOfTasks) throws WrongFormatException {
-        for (String s : listOfTasks) {
-            String[] splitLine = s.split("\\|");
-            switch (splitLine[0]) {
-            case "[T]": // To-Do
-                tasks.add(new ToDo(splitLine[2], !splitLine[1].equals("0")));
+        for (String taskString : listOfTasks) {
+            String[] taskStringParts = taskString.split("\\|");
+            String taskTypeSymbol = taskStringParts[0];
+            String doneSymbol = taskStringParts[1];
+            String taskDescription = taskStringParts[2];
+            switch (taskTypeSymbol) {
+            case TODO_SYMBOL:
+                tasks.add(new ToDo(taskDescription, doneSymbol.equals(DONE)));
                 break;
-            case "[E]": // duke.task.Event
-                tasks.add(new Event(splitLine[2], splitLine[3], !splitLine[1].equals("0")));
+            case EVENT_SYMBOL:
+                String eventLocation = taskStringParts[3];
+                tasks.add(new Event(taskDescription, eventLocation, doneSymbol.equals(DONE)));
                 break;
-            case "[D]": // duke.task.Deadline
-                tasks.add(new Deadline(splitLine[2], LocalDateTime.parse(splitLine[3]).format(DateTimeFormatter
-                        .ofPattern("yyyy-MM-dd HHmm")), !splitLine[1].equals("0")));
+            case DEADLINE_SYMBOL:
+                String deadline = taskStringParts[3];
+                tasks.add(new Deadline(taskDescription, LocalDateTime.parse(deadline).format(DateTimeFormatter
+                        .ofPattern(DATE_TIME_FORMAT_PATTERN)), doneSymbol.equals(DONE)));
                 break;
             default:
                 System.err.println("Error in last save. Now loading a new, empty task list.");

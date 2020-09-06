@@ -41,63 +41,97 @@ public class Storage {
      */
     public List<String> load() throws FileNotFoundException {
         File memoryFile = new File(filePath);
-        if (!memoryFile.exists()) { // If file is non-existent, either the .txt file or a directory in the
-            // filePath does not exist
-            boolean areExistentDirectories = true; // Check if all directories specified in filePath exist
-            String[] pathParts = filePath.split("/");
-            String testPath = "";
-            String nonExistentDirectory = "";
-            for (int i = 0; i < pathParts.length - 1; i++) {
-                testPath += pathParts[i] + "/";
-                if (!new File(testPath).exists()) { // A directory specified in filePath does not exist
-                    areExistentDirectories = false;
-                    nonExistentDirectory = pathParts[i]; // The directory specified in filePath that does not
-                    // exist
-                    break;
-                }
-            }
-            if (areExistentDirectories) { // All directories specified in memoryFilePath exists, only the .txt file
-                // does not exist
-                try {
-                    Files.createFile(Path.of(filePath)); // Create the .txt file with location as stated in
-                    // filePath
-                } catch (IOException e) {
-                    System.err.println(e.getMessage());
-                }
-                throw new FileNotFoundException("ERROR: Could not load last save.\nThe save file \""
-                        + pathParts[pathParts.length - 1] + "\" does not exist.\nNow loading a new, empty task list"
-                        + ".\nA new save file \"" + pathParts[pathParts.length - 1] + "\" has been created with the\n"
-                        + "following path: \"" + filePath + "\".");
-            } else { // A directory specified in filePath does not exist so we should create it (and all its
-                // subdirectories if any)
-                try {
-                    String fullPath = "";
-                    for (int i = 0; i < pathParts.length - 1; i++) {
-                        fullPath += pathParts[i] + "/";
-                    }
-                    Files.createDirectories(Path.of(fullPath)); // Create missing directory (and all its
-                    // subdirectories if any) as specified by filePath
-                    Files.createFile(Path.of(filePath)); // Create .txt file in newly created path
-                } catch (IOException e) {
-                    System.err.println(e.getMessage());
-                }
-                throw new FileNotFoundException("ERROR: Could not load last save.\nPath specified for save file: "
-                        + "\"" + filePath + "\"\nThe directory \"" + nonExistentDirectory + "\"\n(and hence all "
-                        + "subdirectories of it, if any)\ndoes not exist.\nNow loading a new, empty task list.\nA new "
-                        + "save file \"" + pathParts[pathParts.length - 1] + "\" has been created with the\nfollowing "
-                        + "path: \"" + filePath + "\".");
-            }
+
+        // If file is non-existent, either the .txt file or a directory in the filePath does not exist
+        if (!memoryFile.exists()) {
+            handleMemoryFileDoesNotExist();
         }
 
+        // Else the save file exists and we load the task list with tasks as specified in the save file
         List<String> tasks = new ArrayList<>();
-
-        // If the save file exists, we load the task list with tasks as specified in the save file
         Scanner sc = new Scanner(memoryFile);
         while (sc.hasNextLine()) {
             tasks.add(sc.nextLine());
         }
-
         return tasks;
+    }
+
+    private void handleMemoryFileDoesNotExist() throws FileNotFoundException {
+        if (areAllExistentDirectories()) { // All directories specified in memoryFilePath exists, only the .txt file
+            // does not exist
+            createMissingSaveFile();
+        } else { // A directory specified in filePath does not exist so we should create it (and all its subdirectories
+            // if any)
+            createMissingDirectoriesAndSaveFile();
+        }
+    }
+
+    private boolean areAllExistentDirectories() {
+        boolean areAllExistentDirectories = true; // Check if all directories specified in filePath exist
+        String[] pathParts = filePath.split("/");
+        String testPath = "";
+        for (int i = 0; i < pathParts.length - 1; i++) {
+            testPath += pathParts[i] + "/";
+            if (!new File(testPath).exists()) { // A directory specified in filePath does not exist
+                areAllExistentDirectories = false;
+                break;
+            }
+        }
+        return areAllExistentDirectories;
+    }
+
+    private String findNonExistentDirectory() {
+        String[] pathParts = filePath.split("/");
+        String testPath = "";
+        for (int i = 0; i < pathParts.length - 1; i++) {
+            testPath += pathParts[i] + "/";
+            if (!new File(testPath).exists()) { // A directory specified in filePath does not exist
+                return pathParts[i]; // The directory specified in filePath that does not exist
+            }
+        }
+        assert false : "All directories exist. This method was wrongly called.";
+        return "";
+    }
+
+    private void createMissingSaveFile() throws FileNotFoundException {
+        try {
+            Files.createFile(Path.of(filePath)); // Create the .txt file with location as stated in filePath
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        String[] pathParts = filePath.split("/");
+        throw new FileNotFoundException("Error encountered: Could not load last save.\nThe save file \""
+                + pathParts[pathParts.length - 1] + "\" does not exist.\nNow loading a new, empty task list"
+                + ".\nA new save file \"" + pathParts[pathParts.length - 1] + "\" has been created with the\n"
+                + "following path: \"" + filePath + "\".");
+    }
+
+    private void createMissingDirectoriesAndSaveFile() throws FileNotFoundException {
+        String nonExistentDirectory = findNonExistentDirectory();
+        try {
+            String pathOfDirectoriesToCreate = buildPathOfDirectoriesToCreate();
+            Files.createDirectories(Path.of(pathOfDirectoriesToCreate)); // Create missing directory (and all its
+            // subdirectories if any) as specified by filePath
+            Files.createFile(Path.of(filePath)); // Create .txt file in newly created path
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
+        }
+        String[] pathParts = filePath.split("/");
+        throw new FileNotFoundException("Error encountered: Could not load last save.\nPath specified for save "
+                + "file: "
+                + "\"" + filePath + "\"\nThe directory \"" + nonExistentDirectory + "\"\n(and hence all "
+                + "subdirectories of it, if any)\ndoes not exist.\nNow loading a new, empty task list.\nA new "
+                + "save file \"" + pathParts[pathParts.length - 1] + "\" has been created with the\nfollowing "
+                + "path: \"" + filePath + "\".");
+    }
+
+    private String buildPathOfDirectoriesToCreate() {
+        String[] pathParts = filePath.split("/");
+        String pathOfDirectoriesToCreate = "";
+        for (int i = 0; i < pathParts.length - 1; i++) {
+            pathOfDirectoriesToCreate += pathParts[i] + "/";
+        }
+        return pathOfDirectoriesToCreate;
     }
 
     /**
