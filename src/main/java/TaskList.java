@@ -53,12 +53,9 @@ public class TaskList {
     private List<Task> findDuplicateTasks(Task task) {
         List<Task> duplicateTasks = new ArrayList<>();
         String name = task.getTask();
-        list.stream().forEach(new Consumer<Task>() {
-            @Override
-            public void accept(Task t) {
-                if (t.getTask().equals(name)) {
-                    duplicateTasks.add(t);
-                }
+        list.stream().forEach((Task t) -> {
+            if (t.getTask().equals(name)) {
+                duplicateTasks.add(t);
             }
         });
 
