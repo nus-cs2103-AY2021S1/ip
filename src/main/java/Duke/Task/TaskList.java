@@ -1,12 +1,15 @@
 package main.java.Duke.Task;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class TaskList {
     public ArrayList<Task> list;
+    public ArrayList<Expense> expenses;
 
-    public TaskList(ArrayList<Task> tasklist) {
+    public TaskList(ArrayList<Task> tasklist, ArrayList<Expense> expenses) {
         this.list = tasklist;
+        this.expenses = expenses;
     }
 
     /**
@@ -19,7 +22,6 @@ public class TaskList {
         list.remove(taskNumber);
         return ("I have removed the task:\n" + taskDeleted.stringify() + "\n" + "Now you have "
                 + list.size() + " tasks in the list.");
-
     }
 
     /**
@@ -66,5 +68,40 @@ public class TaskList {
             }
         }
         return returnStr;
+    }
+
+    public double calculateTotalExpense(){
+        double sum = 0;
+
+        for (int i = 0; i < expenses.size() ; i++) {
+            sum+= expenses.get(i).amount;
+        }
+        return sum;
+    }
+
+    public String addExpense(Expense expense){
+        expenses.add(expense);
+        return
+                "I have added this expense:\n"
+                        + expense.stringify() + "\n"
+                        + "Now your total expense is: $" + String.format("%.2f", this.calculateTotalExpense());
+    }
+
+    public String showExpenses(){
+        String str = "Here are the expenses:\n";
+
+        for (int i = 0; i < expenses.size(); i++) {
+            str += ((i+1)+"." + expenses.get(i).stringify() + "\n");
+        }
+        return str
+                + "\n"
+                + "Total expenses " + this.calculateTotalExpense();
+    }
+
+    public String deleteExpense(int expenseNumber) {
+        Expense expenseDeleted = expenses.get(expenseNumber);
+        expenses.remove(expenseNumber);
+        return ("I have removed the expense:\n" + expenseDeleted.stringify() + "\n" + "Now you have "
+                + expenses.size() + " expenses in the list.");
     }
 }

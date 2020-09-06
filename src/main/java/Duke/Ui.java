@@ -42,7 +42,12 @@ public class Ui {
                 + "3)deadline - to create a deadline\n"
                 + "4)event - to schedule an event\n"
                 + "5)done - to mark tasks as done\n"
-                + "6)delete - to delete tasks from the list"
+                + "6)delete - to delete tasks from the list\n"
+                + "7)find - to find tasks from the list\n"
+                + "\n-FOR EXPENSES-\n\n"
+                + "1)expense - to add an expense\n"
+                + "2)listExpense - to list all expenses\n"
+                + "3)deleteExpense - to delete expense from the list"
         );
     }
 

@@ -1,9 +1,6 @@
 package main.java.Duke;
 
-import main.java.Duke.Task.Deadline;
-import main.java.Duke.Task.Event;
-import main.java.Duke.Task.Task;
-import main.java.Duke.Task.toDo;
+import main.java.Duke.Task.*;
 
 import java.io.*;
 import java.time.LocalDate;
@@ -12,10 +9,12 @@ import java.util.ArrayList;
 public class Storage {
     public String filePath;
     public ArrayList<Task> arr;
+    public ArrayList<Expense> arrExpenses;
 
     public Storage(String filePath) {
         this.filePath = filePath;
         this.arr = new ArrayList<>();
+        this.arrExpenses = new ArrayList<>();
         readTasks();
     }
 
@@ -32,7 +31,7 @@ public class Storage {
 
             objReader = new BufferedReader(new FileReader(filePath));
 
-            while ((strCurrentLine = objReader.readLine()) != null) {
+            while ((strCurrentLine = objReader.readLine()) != null && strCurrentLine.length()!=0) {
                 String taskType = strCurrentLine.substring(1, 2);
                 boolean taskCompletion = strCurrentLine.contains("✗") ? false : true;
                 String taskDetails = taskCompletion
@@ -58,6 +57,12 @@ public class Storage {
                 }
             }
 
+            while ((strCurrentLine = objReader.readLine()) != null) {
+                String expenseString = strCurrentLine.substring(0, strCurrentLine.indexOf(","));
+                double expenseAmount = Double.parseDouble(strCurrentLine.substring(strCurrentLine.indexOf("Cost:") + 6));
+                arrExpenses.add(new Expense(expenseString,false,expenseAmount));
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -76,7 +81,7 @@ public class Storage {
      *
      * @param arr Current task list.
      */
-    public void saveTasks(ArrayList<Task> arr) {
+    public void saveTasks(ArrayList<Task> arr , ArrayList<Expense> arrEx) {
         try {
             // Creates a FileWriter
             FileWriter file = new FileWriter(filePath);
@@ -87,6 +92,12 @@ public class Storage {
             // Writes the string to the file
             for (int i = 0 ; i < arr.size() ; i++ ) {
                 output.write(arr.get(i).stringify() + "\n");
+            }
+
+            output.write("\n");
+
+            for (int i = 0 ; i < arrEx.size() ; i++ ) {
+                output.write(arrEx.get(i).stringify() + "\n");
             }
             // Closes the writer
             output.close();

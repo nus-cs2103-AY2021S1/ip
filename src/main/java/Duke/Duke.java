@@ -91,7 +91,7 @@ public class Duke extends Application {
 
     public Duke () {
         this.storage = new Storage("duke.txt");
-        this.tasklist = new TaskList(storage.arr);
+        this.tasklist = new TaskList(storage.arr,storage.arrExpenses);
         this.ui = new Ui();
     }
 
@@ -111,7 +111,7 @@ public class Duke extends Application {
             command.execute();
             isExit = command.isExit;
         }
-        duke.storage.saveTasks(arrList);
+        duke.storage.saveTasks(arrList,duke.tasklist.expenses);
         System.out.println("Bye. Hope to see you again soon!");
     }
 
@@ -220,7 +220,7 @@ public class Duke extends Application {
         if(!this.isExit) {
             return string;
         }else {
-            duke.storage.saveTasks(duke.tasklist.list);
+            duke.storage.saveTasks(duke.tasklist.list,duke.tasklist.expenses);
             return "Bye. Hope to see you again soon!";
         }
     }

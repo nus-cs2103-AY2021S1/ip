@@ -2,3 +2,7 @@
 [T][✓] play
 [T][✗] cancer2
 [T][✗] cancer3
+
+dog ,Cost:$1000.00
+cat ,Cost:$500.00
+rabbit ,Cost:$200.00

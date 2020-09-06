@@ -3,10 +3,7 @@ package main.java.Duke;
 import main.java.Duke.Commands.*;
 import main.java.Duke.DukeException.DukeArrayException;
 import main.java.Duke.DukeException.DukeException;
-import main.java.Duke.Task.Deadline;
-import main.java.Duke.Task.Event;
-import main.java.Duke.Task.TaskList;
-import main.java.Duke.Task.toDo;
+import main.java.Duke.Task.*;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -164,6 +161,44 @@ public class Parser {
             } catch (DukeException e) {
                 return new exceptionCommand(tasklist,duke.ui.showException("Must include name after 'find'."));
             }
+
+        case "expense":
+            try {
+                if (!userInput.contains("/amount")) {
+                    throw new DukeException();
+                }
+                int amountIndex = userInput.indexOf("/amount");
+                String expenseString = userInput.substring(8,amountIndex);
+                int expenseAmount = Integer.parseInt(userInput.substring(amountIndex + 8));
+                return new addExpenseCommand(tasklist, new Expense(expenseString,false,expenseAmount));
+
+            } catch (DukeException e) {
+                return new exceptionCommand(tasklist,duke.ui.showException("Must include '/amount' after expense"));
+            }
+
+        case "listExpense":
+            return new listExpenseCommand(tasklist);
+
+        case "deleteExpense":
+            try {
+                if (userInput.length() <= 14) {
+                    throw new DukeException();
+                }
+                int expenseNumber = Integer.parseInt(userInput.substring(14)) - 1;
+                if (expenseNumber >= tasklist.expenses.size()) {
+                    throw new DukeArrayException();
+                }
+                return new deleteExpenseCommand(tasklist, expenseNumber);
+            } catch (DukeArrayException e) {
+                return new exceptionCommand(tasklist,duke.ui.showException("Number cannot be longer than the list."));
+            } catch (DukeException e) {
+                return new exceptionCommand(tasklist,duke.ui.showException("Must include number after 'deleteExpense'"));
+            } catch (NumberFormatException e) {
+                return new exceptionCommand(tasklist, duke.ui.showException("Must include number after 'deleteExpense'"));
+            }
+
+        case "totalExpense":
+            return new totalExpenseCommand(tasklist,"");
 
         default:
             return new Command(tasklist,duke.ui.badInput());
