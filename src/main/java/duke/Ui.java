@@ -3,7 +3,7 @@ package duke;
 import duke.tasks.Task;
 
 /**
- * <code>duke.Ui</code> contains all the methods and information needed to diplay
+ * <code>Ui</code> contains all the methods and information needed to diplay
  * the user interface on the screen.
  */
 public class Ui {
