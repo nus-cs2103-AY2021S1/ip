@@ -145,7 +145,7 @@ public class Duke extends Application {
         userInput.clear();
 
         // exit Duke if "bye" was called
-        if (input.equals("bye")) {
+        if (input.equals("bye") || input.equals("b")) {
             Platform.exit();
         }
     }

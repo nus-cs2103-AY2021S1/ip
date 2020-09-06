@@ -19,6 +19,9 @@ import duke.task.ToDo;
  * the UI system when the program begins.
  */
 public class Storage {
+
+    private static final String DONE = "Y";
+
     private String filePath;
 
     public Storage(String filePath) {
@@ -36,6 +39,7 @@ public class Storage {
             saveFile.createNewFile();
         } catch (IOException ex) {
             ex.printStackTrace();
+
         }
     }
 
@@ -58,20 +62,20 @@ public class Storage {
 
                 String[] time = parsedNext[3].trim().split(" ");
                 Deadline deadline = new Deadline(parsedNext[2].trim(),
-                        time[1], parsedNext[1].trim().equals("✓"));
+                        time[1], parsedNext[1].trim().equals(DONE));
                 lib.add(deadline);
             }
             if (parsedNext[0].trim().equals("E")) {
 
                 String[] time = parsedNext[3].trim().split(" ");
                 Event event = new Event(parsedNext[2].trim(),
-                        time[1], parsedNext[1].trim().equals("✓"));
+                        time[1], parsedNext[1].trim().equals(DONE));
                 lib.add(event);
             }
             if (parsedNext[0].trim().equals("T")) {
 
                 ToDo toDo = new ToDo(parsedNext[2].trim(),
-                        parsedNext[1].trim().equals("✓")
+                        parsedNext[1].trim().equals(DONE)
                 );
                 lib.add(toDo);
             }

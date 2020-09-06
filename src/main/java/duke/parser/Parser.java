@@ -11,6 +11,7 @@ import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
 import duke.exception.DukeException;
@@ -60,23 +61,35 @@ public class Parser {
     public Command checkOneWord(String command) throws DukeException {
         switch (command) {
         case "bye":
+        case "b":
             return new ExitCommand();
         case "list":
+        case "l":
             return new ListCommand();
+        case "help":
+        case "h":
+            return new HelpCommand();
         case "todo":
         case "deadline":
         case "event":
+        case "t":
+        case "d":
+        case "e":
             throw new DukeException("Please enter a valid"
                     + " description for your task!");
         case "done":
+        case "o":
             throw new DukeException("Please enter the ID "
                     + "of the task you would like to complete.");
         case "delete":
+        case "x":
             throw new DukeException("Please retry and enter "
                     + "the ID of the task to be deleted.");
         case "check":
+        case "c":
             throw new DukeException("Please enter a date to check!");
         case "find":
+        case "f":
             throw new DukeException("Please enter a keyword to search for.");
         default:
             throw new DukeException("Please enter a valid "
@@ -95,6 +108,7 @@ public class Parser {
 
         switch (task) {
         case "done":
+        case "o":
             if (!isNumeric(parsedCommand[1])) {
                 throw new DukeException("Please enter a valid task number to complete!");
             } else {
@@ -103,6 +117,7 @@ public class Parser {
             }
 
         case "delete":
+        case "x":
             if (!isNumeric(parsedCommand[1])) {
                 throw new DukeException("Please enter a valid task number for deletion!");
             } else {
@@ -111,6 +126,7 @@ public class Parser {
             }
 
         case "check":
+        case "c":
             try {
                 LocalDate checkedDate = LocalDate.parse(parsedCommand[1]);
                 return new CheckCommand(checkedDate);
@@ -119,11 +135,13 @@ public class Parser {
             }
 
         case "find":
+        case "f":
             return new FindCommand(parsedCommand[1]);
         default:
-            if (task.equals("todo")) {
+            if (task.equals("todo") || task.equals("t")) {
                 return new TodoCommand(parsedCommand[1]);
-            } else if (task.equals("deadline") || task.equals("event")) {
+            } else if (task.equals("deadline") || task.equals("event")
+                || task.equals("d") || task.equals("e")) {
                 return checkValidTime(parsedCommand);
             } else {
                 throw new DukeException("Please enter a valid task name to add into the list!");
@@ -151,11 +169,11 @@ public class Parser {
                 throw new DukeException("The time description cannot be left blank!");
             } else {
 
-                if (task.equals("deadline")) {
+                if (task.equals("deadline") || task.equals("d")) {
                     return new DeadlineCommand(processTimePrefix[0].trim(),
                             time[1].trim());
                 } else {
-                    assert (task.equals("event")) : "This task name does not exist!";
+                    assert (task.equals("event") || task.equals("e")) : "This task name does not exist!";
                     return new EventCommand(processTimePrefix[0].trim(),
                             time[1].trim());
                 }

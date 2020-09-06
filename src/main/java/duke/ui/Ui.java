@@ -29,18 +29,21 @@ public class Ui {
      * @return The list of commands.
      */
     public String showCommands() {
-        return "Here are a list of commands you can use:\n"
-                + "1. list (shows all currently listed tasks)\n"
-                + "2. bye (exit the program)\n"
-                + "3. done <task number> (mark the task with <task number> as complete)\n"
-                + "4. delete <task number> (delete this task with <task number> from list)\n"
-                + "5. check <yyyy-mm-dd> (check tasks that are due or occurring on <yyyy-mm-dd>)\n"
-                + "6. todo <description> (adds todo task to list with <description>)\n"
-                + "7. deadline <description> /by <time> (adds deadline to list with "
+        return "Here are a list of commands you can use "
+                + "(You can type the letter labelled next to any of the following commands "
+                + "as a shortcut, instead of their full name):\n"
+                + "1. (l) list (shows all currently listed tasks)\n"
+                + "2. (b) bye (exit the program)\n"
+                + "3. (o) done <task number> (mark the task with <task number> as complete)\n"
+                + "4. (x) delete <task number> (delete this task with <task number> from list)\n"
+                + "5. (c) check <yyyy-mm-dd> (check tasks that are due or occurring on <yyyy-mm-dd>)\n"
+                + "6. (t) todo <description> (adds todo task to list with <description>)\n"
+                + "7. (d) deadline <description> /by <time> (adds deadline to list with "
                 + "<description> and due by <time>)\n"
-                + "8. event <description> /at <time> (adds event to list with "
+                + "8. (e) event <description> /at <time> (adds event to list with "
                 + "<description> and occurs at <time>)\n"
-                + "9. find <word> (list tasks that contain <word> in description)\n"
+                + "9. (f) find <word> (list tasks that contain <word> in description)\n"
+                + "10. (h) help (show this instruction list again)\n"
                 + endLine;
     }
 
