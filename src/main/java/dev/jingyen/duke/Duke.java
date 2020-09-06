@@ -20,12 +20,11 @@ public class Duke {
     private final TaskList tasks;
 
     /**
-     * A Constructor for dev.jingyen.duke.Duke that initializes the save file path to nothing.
+     * A Constructor for dev.jingyen.duke.Duke that initializes the save file path to the default
+     * <code>.duke/tasks.txt</code> in the user's home directory, depending on their Operating System.
      */
     public Duke() {
-        ui = new Ui();
-        storage = new Storage("");
-        tasks = new TaskList();
+        this(SAVE_FILE_PATH);
     }
 
     /**
