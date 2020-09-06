@@ -63,12 +63,12 @@ public class FindByDateCommand extends Command {
                     .collect(Collectors.toList());
             return ui.showTaskList(searchResults);
         } catch (ArrayIndexOutOfBoundsException ex) {
-            String err = "No task date provided. Please input a valid date using the format: 'dd/mm/yyyy' ";
-            throw new InvalidFunctionException(err);
+            String error = "No task date provided. Please input a valid date using the format: 'dd/mm/yyyy' ";
+            throw new InvalidFunctionException(error);
         } catch (DateTimeParseException ex) {
-            String err = "The task date format is incorrect. "
+            String error = "The task date format is incorrect. "
                     + "Please input a valid date using the format: 'dd/mm/yyyy'";
-            throw new InvalidFunctionException(err);
+            throw new InvalidFunctionException(error);
         }
     }
 

@@ -55,8 +55,8 @@ public class FindByKeywordCommand extends Command {
             assert !keyword.isBlank();
             return ui.showTaskList(searchResults);
         } catch (ArrayIndexOutOfBoundsException ex) {
-            String err = "No keyword for the search was entered. Please enter a keyword!";
-            throw new InvalidFunctionException(err);
+            String error = "No keyword for the search was entered. Please enter a keyword!";
+            throw new InvalidFunctionException(error);
         }
     }
 
