@@ -35,9 +35,7 @@ public final class Storage {
      * @param path Path to the storage file.
      */
     public Storage(final String path) {
-        //Create a new file object
         f = new File(path);
-
     }
 
     /**
@@ -47,10 +45,6 @@ public final class Storage {
      * @return String The encoded String of the task.
      */
     private String encode(final Task task) {
-        /*
-          @param task Task to be encoded to string
-         * @return String containing the command
-         */
         return task.getType() + ":" + gson.toJson(task);
     }
 
@@ -83,9 +77,7 @@ public final class Storage {
      * @throws UltronException If there is an error decoding the file.
      */
     public ArrayList<Task> load() throws UltronException {
-
         ArrayList<Task> taskArrayList = new ArrayList<>();
-
         try {
             Scanner scanner = new Scanner(f);
             while (scanner.hasNext()) {
@@ -108,7 +100,6 @@ public final class Storage {
      */
     public void writeAll(final ArrayList<Task> taskArrayList)
         throws UltronException {
-
         //Check if the directory exist
         if (!f.exists()) {
             try {
