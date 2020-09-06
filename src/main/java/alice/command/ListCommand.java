@@ -16,13 +16,17 @@ public class ListCommand implements Command {
     protected static final String USE_CASE = "[" + String.join(", ", NAMES) + "]";
 
     /**
-     * Checks if the command word triggers the <code>ListCommand</code>.
+     * Checks if the command word triggers the {@code ListCommand}.
      *
      * @param name the command word to check.
-     * @return true if the command word belongs to <code>ListCommand</code>; false otherwise.
+     * @return true if the command word belongs to {@code ListCommand}; false otherwise.
      */
     public static boolean hasCommandWord(String name) {
         return NAMES.contains(name);
+    }
+
+    public static ListCommand createCommand() {
+        return new ListCommand();
     }
 
     @Override

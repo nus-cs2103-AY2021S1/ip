@@ -25,9 +25,7 @@ public class Deadline extends Task {
      * @param by          the latest datetime by which the task should be completed.
      */
     public Deadline(String description, LocalDateTime by) {
-        super(description);
-        this.by = by;
-        this.hasTime = !by.toLocalTime().equals(LocalTime.MIDNIGHT);
+        this(false, description, by);
     }
 
     /**
@@ -58,10 +56,10 @@ public class Deadline extends Task {
     }
 
     /**
-     * Decode an encoded string representation of the <code>Deadline</code>.
+     * Decode an encoded string representation of the {@code Deadline}.
      *
      * @param saved the string representation of the encoded task with deadline.
-     * @return the <code>Deadline</code> described in the string representation.
+     * @return the {@code Deadline} described in the string representation.
      * @throws AliceException if the encoded string is corrupted.
      */
     public static Deadline decode(String saved) throws AliceException {

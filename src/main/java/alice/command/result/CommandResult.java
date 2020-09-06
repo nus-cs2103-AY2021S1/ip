@@ -6,7 +6,7 @@ import alice.storage.SaveStatus;
  * Represents the result of processing a user command.
  * It contains a set of instructions which serves to provide the appropriate feedback to the user.
  */
-public class CommandResult {
+public abstract class CommandResult {
     private final String commandMessage;
     private final SaveStatus saveStatus;
     private final boolean isCommandSuccess;

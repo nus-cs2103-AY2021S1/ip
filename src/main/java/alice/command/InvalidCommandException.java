@@ -7,7 +7,7 @@ import alice.AliceException;
  */
 public class InvalidCommandException extends AliceException {
     /**
-     * Constructs a <code>InvalidCommandException</code> with the
+     * Constructs a {@code InvalidCommandException} with the
      * specified detail message.
      *
      * @param msg the detail message.

@@ -5,7 +5,7 @@ package alice;
  */
 public class AliceException extends Exception {
     /**
-     * Constructs an <code>AliceException</code> with the
+     * Constructs an {@code AliceException} with the
      * specified detail message.
      *
      * @param message the detail message.
