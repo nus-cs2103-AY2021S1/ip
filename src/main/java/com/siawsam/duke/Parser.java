@@ -74,7 +74,7 @@ public class Parser {
         case "find":
             return parseFindCommand(literal);
         default:
-            assert !COMMANDS.contains(command) : "invalid parameterized command";
+            assert !PARAMETERIZED_COMMANDS.contains(command) : "invalid parameterized command";
             return Response.emptyResponse();
         }
     }
