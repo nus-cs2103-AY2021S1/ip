@@ -115,11 +115,10 @@ public class Storage {
     }
 
     /**
-     * Returns an empty ArrayList to refresh the Records
-     * @return ArrayList
+     * Refreshes the Records arraylist to remove past tasks
      */
-    public ArrayList<String> refreshRecords() {
-        return this.recordArrayLst = new ArrayList<>();
+    public void refreshRecords() {
+        this.recordArrayLst = new ArrayList<>();
     }
 }
 

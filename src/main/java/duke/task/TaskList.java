@@ -48,8 +48,12 @@ public class TaskList {
         return updatedTask.toString();
     }
 
-    public ArrayList<Task> refreshTasklist() {
-        return this.tasklist = new ArrayList<Task>();
+
+    /**
+     * Refreshes the Tasklist arraylist to remove all tasks in it
+     */
+    public void refreshTasklist() {
+        this.tasklist = new ArrayList<>();
     }
 
     /**
