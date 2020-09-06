@@ -18,7 +18,8 @@ public class ScheduleCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(TaskList tasks, Output output, Storage storage) throws DukeInvalidScheduleInputException {
+    public CommandResult execute(TaskList tasks, Output output, Storage storage)
+            throws DukeInvalidScheduleInputException {
         return new CommandResult(output.printScheduleChatWindow(tasks.findScheduledTasks(input)));
     }
 
