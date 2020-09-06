@@ -46,6 +46,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() throws FileNotFoundException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        assert response.length() > 0 : "Response should not be empty";
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
