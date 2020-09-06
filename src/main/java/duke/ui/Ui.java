@@ -33,11 +33,7 @@ public class Ui {
      * @return the processed string
      */
     public String output(List<String> strings) {
-        String res = "";
-        for (String s : strings) {
-            res += s + "\n";
-        }
-        return res;
+        return strings.stream().reduce("", (x, y) -> x + y + "\n");
     }
 
     /**
