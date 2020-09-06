@@ -44,12 +44,6 @@ public class Storage {
         }
     }
 
-//    public void addToFile(String textToAdd) throws IOException {
-//        FileWriter fileWriter = new FileWriter(storagePath, true);
-//        fileWriter.write(textToAdd);
-//        fileWriter.close();
-//    }
-
     /**
      * Writes the entire task list to the saved file.
      * @param taskList The task list such that its details are copied in the saved file.
@@ -87,6 +81,25 @@ public class Storage {
         return tasks;
     }
 
+    private Task translateStringToTask(String savedTask) throws IOException {
+        String[] arr = savedTask.split(" \\| ");
+        String command = arr[0];
+        boolean isDone = arr[1].equals("\u2713");
+        String description = arr[2];
+        String timeNotProcessed = arr.length == 3 ? "" : arr[3];
+        boolean hasTime = timeNotProcessed.contains("T");
+        String timeProcessed = timeNotProcessed.replace("T", " ");
+        if (command.equals("T")) {
+            return new ToDo(description, isDone);
+        } else if (command.equals("E")) {
+            return new Event(description, timeProcessed, hasTime, isDone);
+        } else if (command.equals("D")) {
+            return new DeadLine(description, timeProcessed, hasTime, isDone);
+        } else {
+            throw new IOException("Saved task is invalid");
+        }
+    }
+
     /**
      * Reads from the saved file and creates the task list.
      * @return Task list that contains all the tasks in the saved file.
@@ -96,22 +109,7 @@ public class Storage {
         List<String> taskListInString = this.readStorageFile();
         TaskList taskList = new TaskList();
         for (String taskInString : taskListInString) {
-            // parser work
-            String[] arr = taskInString.split(" \\| ");
-            String command = arr[0];
-            String isDone = arr[1];
-            String description = arr[2];
-            String timeNotProcessed = arr.length == 3 ? "" : arr[3];
-            boolean hasTime = timeNotProcessed.contains("T"); //
-            String timeProcessed = timeNotProcessed.replace("T", " ");
-            Task task;
-            if (command.equals("T")) {
-                task = new ToDo(description, isDone.equals("\u2713"));
-            } else if (command.equals("E")) {
-                task = new Event(description, timeProcessed, hasTime, isDone.equals("\u2713"));
-            } else {
-                task = new DeadLine(description, timeProcessed, hasTime, isDone.equals("\u2713"));
-            }
+            Task task = this.translateStringToTask(taskInString);
             taskList.addTask(task);
         }
         return taskList;
