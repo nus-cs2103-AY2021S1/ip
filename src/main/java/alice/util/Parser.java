@@ -46,6 +46,7 @@ public class Parser {
         );
 
         List<DateTimeFormatter> knownFormats = new ArrayList<>();
+        // Create a formatter for each known patterns to be used for parsing dates
         for (int i = 0; i < knownPatterns.size(); i++) {
             knownFormats.add(
                     new DateTimeFormatterBuilder()
@@ -68,6 +69,7 @@ public class Parser {
      * @throws InvalidCommandException if the userInput does not match any commands and/or its command signature.
      */
     public static Command parseCommand(String userInput) throws InvalidCommandException {
+        // Split the userInput into the command word and subsequent command details
         String[] arr = userInput.strip().split(" ", 2);
         String cmd = arr[0];
         String argument;
@@ -105,6 +107,7 @@ public class Parser {
             // Command to add event
             return parseEventInput(argument);
         } else if (ByeCommand.hasCommandWord(cmd)) {
+            // Command to exit program
             return new ByeCommand();
         } else {
             // Invalid command
@@ -242,7 +245,7 @@ public class Parser {
             try {
                 return LocalDateTime.parse(dateTimeString, KNOWN_DT_FORMATS.get(i));
             } catch (DateTimeParseException ex) {
-                // ignore
+                // Ignore exception, fall through expected
             }
         }
 

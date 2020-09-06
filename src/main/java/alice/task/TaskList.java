@@ -82,11 +82,9 @@ public class TaskList {
 
         StringBuilder s = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
-            s.append(i + 1).append(". ").append(tasks.get(i));
-            if (i < tasks.size() - 1) {
-                s.append("\n");
-            }
+            s.append(i + 1).append(". ").append(tasks.get(i)).append("\n");
         }
+        s.setLength(s.length() - 1);
         return s.toString();
     }
 

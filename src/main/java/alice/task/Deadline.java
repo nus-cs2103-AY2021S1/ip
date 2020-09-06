@@ -25,9 +25,7 @@ public class Deadline extends Task {
      * @param by          the latest datetime by which the task should be completed.
      */
     public Deadline(String description, LocalDateTime by) {
-        super(description);
-        this.by = by;
-        this.hasTime = !by.toLocalTime().equals(LocalTime.MIDNIGHT);
+        this(false, description, by);
     }
 
     /**

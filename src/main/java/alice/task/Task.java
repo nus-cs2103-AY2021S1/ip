@@ -8,16 +8,6 @@ public abstract class Task {
     private boolean isDone;
 
     /**
-     * Creates an undone task with the specified description.
-     *
-     * @param description describes the task.
-     */
-    public Task(String description) {
-        this.description = description;
-        this.isDone = false;
-    }
-
-    /**
      * Creates a task with the indicated status and specified description.
      *
      * @param isDone      the completion status of the task, true if completed; false otherwise.

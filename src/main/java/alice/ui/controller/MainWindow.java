@@ -54,10 +54,6 @@ public class MainWindow {
         primaryStage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/icon.png")));
     }
 
-    public Stage getPrimaryStage() {
-        return primaryStage;
-    }
-
     /**
      * Show the stage to the user.
      */

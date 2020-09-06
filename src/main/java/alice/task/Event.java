@@ -25,9 +25,7 @@ public class Event extends Task {
      * @param on          the date and time of the event.
      */
     public Event(String description, LocalDateTime on) {
-        super(description);
-        this.on = on;
-        this.hasTime = !on.toLocalTime().equals(LocalTime.MIDNIGHT);
+        this(false, description, on);
     }
 
     /**
