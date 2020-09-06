@@ -87,6 +87,10 @@ public class Parser {
                         taskList.findTask(findWord);
                        return ui.addLines(taskList.printOutKeyWordList());
 
+                    case RESCHEDULE:
+                        String taskToChange = arr[1];
+                        return ui.addLines(taskList.rescheduleTask(taskToChange));
+
                 }
 
 
