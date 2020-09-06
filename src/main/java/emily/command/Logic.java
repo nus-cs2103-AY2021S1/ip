@@ -1,5 +1,8 @@
 package emily.command;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 import emily.exception.DukeException;
@@ -22,7 +25,7 @@ public class Logic {
      * Valid commands
      */
     enum Command {
-        LIST, DELETE, TASK, DONE, BLANK, FIND
+        LIST, DELETE, TASK, DONE, FIND, VIEW
     }
 
     /**
@@ -51,12 +54,27 @@ public class Logic {
             break;
         case FIND: //find all tasks with matching keyword
             String keyword = input.substring(5);
-            ArrayList<Task> arr = ls.findSameKeyword(keyword);
+            ArrayList<Task> lsSameKeyword = ls.findSameKeyword(keyword);
 
             outputLines.add("Here are the matching tasks in your list");
             counter = 1;
-            for (Task t : arr) {
+            for (Task t : lsSameKeyword) {
                 outputLines.add(counter + ". " + t);
+                counter++;
+            }
+            break;
+        case VIEW: //find all task with given date in format yyyy-mm-dd
+            String date = input.substring(5);
+            ArrayList<Task> lsSameDate  = ls.findSameDate(date);
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+            String formattedDate = LocalDate.parse(date).format(formatter);
+
+
+            outputLines.add("Here are the tasks on " + formattedDate + " in your list");
+            counter = 1;
+            for (Task t : lsSameDate) {
+                outputLines.add("- " + t);
                 counter++;
             }
             break;
@@ -108,6 +126,11 @@ public class Logic {
             throw new DukeException("Empty Input");
         } else if (input.equals("list")) {
             c = Command.LIST;
+        } else if (input.contains("view")) { //users will key in specific date
+            if (shortened.equals("view")){
+                throw new DukeException("Missing date");
+            }
+            c = Command.View;
         } else if (input.contains("delete")) {
             if (shortened.equals("delete")) {
                 throw new DukeException("Empty Index");

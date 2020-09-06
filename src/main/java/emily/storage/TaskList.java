@@ -1,5 +1,7 @@
 package emily.storage;
 
+import emily.task.Deadline;
+import emily.task.Event;
 import emily.task.Task;
 
 import java.util.ArrayList;
@@ -45,6 +47,25 @@ public class TaskList {
         for (Task t : this.taskArrayList) {
             String d = t.getDescription();
             if (d.contains(keyword)) {
+                ls.add(t);
+            }
+        }
+        return ls;
+    }
+
+    public ArrayList<Task> findSameDate(String keydate) {
+        ArrayList<Task> ls = new ArrayList<>();
+        for (Task t : this.taskArrayList) {
+            String d = "";
+            if (t instanceof Deadline) {
+                d = ((Deadline) t).getBy();
+            } else if (t instanceof Event) {
+                d = ((Event) t).getAt();
+            } else {
+                assert false: "List has an unknown task type";
+            }
+
+            if (d.contains(keydate)) {
                 ls.add(t);
             }
         }
