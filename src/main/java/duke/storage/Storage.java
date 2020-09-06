@@ -88,7 +88,6 @@ public class Storage {
     public void saveData(TaskList tasks) throws DukeException {
         try {
             FileWriter writer = new FileWriter(dataFilePath);
-            System.out.println(tasks.serializeList());
             writer.write(tasks.serializeList());
             writer.close();
         } catch (IOException e) {

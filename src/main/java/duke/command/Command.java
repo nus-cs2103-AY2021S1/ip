@@ -33,7 +33,7 @@ public abstract class Command {
 
     /**
      * Checks whether the command is an exit command.
-     * @return Whether is command is an exit command.
+     * @return Whether the command is an exit command.
      */
     public boolean isExit() {
         return false;
