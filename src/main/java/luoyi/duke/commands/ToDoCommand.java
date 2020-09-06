@@ -67,7 +67,7 @@ public class ToDoCommand extends TaskCommand {
         System.out.print(TextFormatter.getFormattedText(output));
         return output;
     }
-  
+
     /**
      * {@inheritDoc}
      */
