@@ -53,6 +53,8 @@ public class Task {
 
     @Override
     public String toString() {
+        assert taskName != null;
+
         String mark = isDone ? "✓" : "✗";
         return "[" + mark + "] " + taskName;
     }

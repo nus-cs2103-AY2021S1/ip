@@ -90,6 +90,8 @@ public class ParsedCommand {
      * @throws DukeException If this ParsedCommand's parameters can't be created into a Task.
      */
     public Task toTask() throws DukeException {
+        assert name != null;
+
         Task newTask;
 
         if (commandType.equals("todo")) {
