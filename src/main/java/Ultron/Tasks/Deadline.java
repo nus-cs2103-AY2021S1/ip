@@ -44,13 +44,8 @@ public final class Deadline extends Task {
      * @param description Description for the task.
      * @param by          The deadline for the task in string format.
      */
-    //Constructor for the event class
     public Deadline(final String description, final String by) {
-
-        //Call the superclass constructor
         super(description);
-
-        //Store the at variable
         at = by;
     }
 
@@ -60,13 +55,8 @@ public final class Deadline extends Task {
      * @param description Description for the task.
      * @param by          The deadline for the task in Date format.
      */
-    //Constructor for the event class
     public Deadline(final String description, final Date by) {
-
-        //Call the superclass constructor
         super(description);
-
-        //Store the at variable
         date = by;
     }
 
@@ -76,30 +66,18 @@ public final class Deadline extends Task {
      * @return Deadline task.
      */
     public static Deadline parseCommand(final String args) {
-        //Create the matcher
         Matcher matcher = DATE_MATCH.matcher(args);
-
-        //Check for matches
-        matcher.find();
-
-        //Get the date and the name
+        boolean match = matcher.find();
         String name = matcher.group(NAME_INDEX);
         String date = matcher.group(DATE_INDEX);
-
-        //Extract the date
         try {
-
-            //Parse the date
             Date date1 = DATE_FORMAT.parse(date);
-
-            //Pass the date to the constructor
             return new Deadline(name, date1);
         } catch (ParseException e) {
 
             //Pass the 2 arguments into the function
             return new Deadline(name, date);
         }
-
     }
 
     /**
@@ -107,9 +85,7 @@ public final class Deadline extends Task {
      *
      * @return String representation of Deadline.
      */
-    //Getter for the date of the
     public String getDate() {
-        //Return the date
         return Objects.requireNonNullElseGet(at, () -> new SimpleDateFormat("dd-MM-yyyy HHmm").format(date));
     }
 
