@@ -28,8 +28,6 @@ public class Storage {
             } else {
                 populateTaskList(file);
             }
-            fileReader = new FileReader(file);
-            bufferedReader = new BufferedReader(fileReader);
             // appendFileWriter appends new text whenever we write to the file
             // to maintain the previous entries.
             appendFileWriter = new FileWriter(file, true);
