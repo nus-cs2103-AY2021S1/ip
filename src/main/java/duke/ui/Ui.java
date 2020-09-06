@@ -1,6 +1,9 @@
 package duke.ui;
 
+import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.model.task.Task;
 
 public class Ui {
     private final String WELCOME = "Hello. I am Claude! What may I do for you today?";
@@ -34,6 +37,14 @@ public class Ui {
 
     public void showDetails(String s) {
         System.out.println(s);
+    }
+
+    public void showTaskList(ArrayList<Task> taskList){
+        String s = "";
+        for (int i= 0; i < taskList.size(); i++) {
+            s = s = s + (i + 1) + ". " + taskList.get(i) + "\n";
+        }
+        showDetails(s);
     }
 
     public void showError(Exception e) {

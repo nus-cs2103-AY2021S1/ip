@@ -6,6 +6,7 @@ import duke.logic.commands.Command;
 import duke.logic.commands.DeleteCommand;
 import duke.logic.commands.DoneCommand;
 import duke.logic.commands.ExitCommand;
+import duke.logic.commands.FindCommand;
 import duke.logic.commands.ListCommand;
 
 public class CommandParser {
@@ -21,6 +22,8 @@ public class CommandParser {
             return new DoneCommand(command);
         case("delete"):
             return new DeleteCommand(command);
+        case("find"):
+            return new FindCommand(command);
         case("deadline"):
         case("event"):
         case("todo"):
