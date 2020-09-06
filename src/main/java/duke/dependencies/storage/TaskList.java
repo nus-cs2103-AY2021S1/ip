@@ -98,6 +98,7 @@ public class TaskList {
      * @return String representing the newly added task.
      */
     public String add(Task task) {
+        assert !task.isItEmpty() && !task.isMiscTask();  // Add Assertions
         todoList.add(task);
         l.overwriteAndSave(todoList);
         return task.toString();

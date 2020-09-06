@@ -46,6 +46,18 @@ public abstract class Task implements Serializable, Schedulable {
     }
 
     /**
+     * Returns whether this task is a Miscellaneous task. Miscellaneous task are task
+     * defined to be task which are not for adding to the user's task list. These task do not represent
+     * task in which the user can complete in any way shape or form. They are meant for the Duke's
+     * implementation.
+     *
+     * @return True if the task is a Misc. task, false otherwise.
+     */
+    public boolean isMiscTask() {
+        return false;
+    }
+
+    /**
      * Completes this Task. This represents the user finishing this task.
      */
     public void completed() {
@@ -153,6 +165,11 @@ public abstract class Task implements Serializable, Schedulable {
 
         @Override
         public boolean isItEmpty() {
+            return true;
+        }
+
+        @Override
+        public boolean isMiscTask() {
             return true;
         }
 
