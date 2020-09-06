@@ -5,11 +5,12 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDate;
 
+import org.junit.jupiter.api.Test;
+
 import duke.exceptions.DukeException;
 import duke.model.task.Deadline;
 import duke.model.task.Event;
 import duke.model.task.ToDo;
-import org.junit.jupiter.api.Test;
 
 public class TaskManagerTest {
     private TaskManager tm = new TaskManager();
@@ -51,7 +52,7 @@ public class TaskManagerTest {
     }
 
     @Test
-    public void markTaskDone_invalidIndex_exceptionThrown(){
+    public void markTaskDone_invalidIndex_exceptionThrown() {
         assertEquals(0, tm.getTaskList().size());
         ToDo todo = new ToDo("Test");
         tm.addTask(todo);
