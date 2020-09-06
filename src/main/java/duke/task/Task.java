@@ -61,7 +61,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        String s = this.isDone ? "[✓] " : "[✗] ";
+        String s = this.isDone ? "[\u2713] " : "[\u2717] ";
         return s + this.details;
     }
 }
