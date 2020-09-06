@@ -32,7 +32,7 @@ public class Duke {
         if (cmd == null || cmd.isDone()) {
             Command cmd = commandHandler.parseCommand(input);
             cmd.init(taskManager, ui);
-            setNewCommand(cmd);
+            setCommand(cmd);
             return cmd.toString();
         } else {
             try {
@@ -44,7 +44,7 @@ public class Duke {
         }
     }
 
-    private void setNewCommand(Command cmd) {
+    private void setCommand(Command cmd) {
         this.cmd = cmd;
     }
 }
