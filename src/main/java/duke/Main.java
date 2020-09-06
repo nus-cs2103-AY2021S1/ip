@@ -15,13 +15,13 @@ public class Main extends Application {
 
     private static Stage stage;
 
-    private Duke duke = new Duke();
+    private final Duke duke = new Duke();
 
 
     @Override
     public void start(Stage stage) {
         try {
-            this.stage = stage;
+            Main.stage = stage;
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
