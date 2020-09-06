@@ -44,30 +44,7 @@ public class Storage {
         JsonArray taskElems = json.getAsJsonArray();
         for (JsonElement elem : taskElems) {
             JsonObject elemObject = elem.getAsJsonObject();
-            Task task;
-            String description = elemObject.get("description").getAsString();
-            String taskType = elemObject.get("taskType").getAsString();
-            String time = parseDate(elemObject.get("date"));
-            try {
-                switch (taskType) {
-                case "T":
-                    task = new Todo(description);
-                    break;
-                case "E":
-                    task = new Event(description, time);
-                    break;
-                case "D":
-                    task = new Deadline(description, time);
-                    break;
-                default:
-                    throw new JsonParseException("Invalid task type.");
-                }
-            } catch (DukeException e) {
-                throw new JsonParseException("Invalid date format.");
-            }
-            if (elemObject.get("isDone").getAsBoolean()) {
-                task.markAsDone();
-            }
+            Task task = deserializeSingleTask(elemObject);
             tasks.add(task);
         }
         return new TaskList(tasks);
@@ -88,6 +65,34 @@ public class Storage {
     public Storage(String filePath) {
         this.filePath = filePath;
         this.gsonObject = GSON_BUILDER.create();
+    }
+
+    private static Task deserializeSingleTask(JsonObject elemObject) {
+        Task task;
+        String description = elemObject.get("description").getAsString();
+        String taskType = elemObject.get("taskType").getAsString();
+        String time = parseDate(elemObject.get("date"));
+        try {
+            switch (taskType) {
+            case "T":
+                task = new Todo(description);
+                break;
+            case "E":
+                task = new Event(description, time);
+                break;
+            case "D":
+                task = new Deadline(description, time);
+                break;
+            default:
+                throw new JsonParseException("Invalid task type.");
+            }
+        } catch (DukeException e) {
+            throw new JsonParseException("Invalid date format.");
+        }
+        if (elemObject.get("isDone").getAsBoolean()) {
+            task.markAsDone();
+        }
+        return task;
     }
 
     private static String parseDate(JsonElement elem) throws JsonParseException {
