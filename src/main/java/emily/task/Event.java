@@ -16,8 +16,8 @@ public class Event extends Task {
     /**
      * Subclass of Task with a timestamp
      *
-     * @param description
-     * @param timeStamp
+     * @param description detailing the name of the task
+     * @param timeStamp   in the form of yyyy-mm-dd hhmm
      */
     public Event(String description, String timeStamp) {
         super(description);
@@ -29,7 +29,7 @@ public class Event extends Task {
     /**
      * Getter method to retrieve timestamp
      *
-     * @return String of the date in the form yyy-mm-dd
+     * @return String of the date in the form yyyy-mm-dd
      */
     public String getAt() {
         return timeStamp;
@@ -38,7 +38,8 @@ public class Event extends Task {
     @Override
     public String toString() {
 
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+        //timestamp formatted into a date
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy HH:mm");
 
         return "[E]" + super.toString()
                 + " (at: " + this.at.format(formatter) + ")";

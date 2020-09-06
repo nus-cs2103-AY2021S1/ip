@@ -27,7 +27,7 @@ public class Deadline extends Task {
     /**
      * Getter method to retrieve timestamp
      *
-     * @return timestamp in the format yyy-mm--dd
+     * @return timestamp in the format yyyy-mm--dd
      */
     public String getBy() {
         return this.timeStamp;
@@ -35,8 +35,11 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
+        //timestamp formatted to date
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd-MMM-yyyy");
+
         return "[D]" + super.toString() + " (by: "
-                + this.by + ")";
+                + this.by.format(formatter) + ")";
     }
 
 }

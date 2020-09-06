@@ -78,7 +78,7 @@ public class UI extends Application {
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
         dialogContainer.getChildren().addAll(
-                new DialogBox(getDialogLabel(intro), new ImageView())
+                new emily.app.DialogBox(getDialogLabel(intro), new ImageView())
         );
 
         //Part 3. Add functionality to handle user input.

@@ -1,6 +1,7 @@
 package emily.storage;
 
 import emily.task.Task;
+
 import java.util.ArrayList;
 
 /**
@@ -28,7 +29,7 @@ public class TaskList {
      * @param index provided by the user
      */
     public void deleteTask(int index) {
-        assert index<=this.taskArrayList.size();
+        assert index <= this.taskArrayList.size();
         taskArrayList.remove(index);
     }
 
