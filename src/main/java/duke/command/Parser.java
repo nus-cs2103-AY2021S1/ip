@@ -49,6 +49,7 @@ public class Parser {
      * @throws DukeException A custom Exception that carries a message for the user if thrown.
      */
     public String processCommand(String command) throws DukeException {
+        assert (command != null) : "Parser - processCommand: command input is null!";
         Pattern pattern = Pattern.compile("^(.*?)\\s(.*?)(?:\\s/..\\s?(.*))?$");
         Matcher matcher = pattern.matcher(command);
         if (command.equals("")) {
@@ -74,7 +75,8 @@ public class Parser {
                     + "\n"
                     + "done <index> - mark the specified task as done\n"
                     + "undo <index> - mark the specified task as not done\n"
-                    + "delete <index> - deletes the specified task from the list";
+                    + "delete <index> - deletes the specified task from the list"
+                    + "find <word> - shows tasks with the word present in the task description\n";
         } else if (matcher.find()) {
             String com = matcher.group(1);
             String task = matcher.group(2);
@@ -111,36 +113,34 @@ public class Parser {
      * @throws DukeException A custom Exception that carries a message for the user if thrown.
      */
     private String processTask(String com, String task, String date) throws DukeException {
-
+        assert (com != null) : "Parser - processTask: com is null!";
+        assert (task != null) : "Parser - processTask: task is null!";
         switch(com) {
         case("todo"):
-            if (!task.equals("")) {
-                return list.addItem(new Todo(task));
-            } else {
+            if (task.equals("")) {
                 throw new DukeException("Please write a task to be done, with \"todo <task>\"");
             }
+            return list.addItem(new Todo(task));
         case("deadline"):
-            if (!task.equals("")) {
-                try {
-                    return list.addItem(new Deadline(task, Parser.convertDate(date)));
-                } catch (DateTimeParseException e) {
-                    throw new DukeException("Please write your date in the format \"dd/MM/yyyy\"");
-                }
-            } else {
+            if (task.equals("")) {
                 throw new DukeException("Please write a deadline, with \"deadline <task> /by <date>\"");
             }
+            try {
+                return list.addItem(new Deadline(task, Parser.convertDate(date)));
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Please write your date in the format \"dd/MM/yyyy\"");
+            }
         case("event"):
-            if (!task.equals("")) {
-                try {
-                    return list.addItem(new Event(task, Parser.convertDate(date)));
-                } catch (DateTimeParseException e) {
-                    throw new DukeException("Please write your date in the format \"dd/MM/yyyy\"");
-                }
-            } else {
+            if (task.equals("")) {
                 throw new DukeException("Please write an event, with \"event <task> /at <date>\"");
             }
+            try {
+                return list.addItem(new Event(task, Parser.convertDate(date)));
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Please write your date in the format \"dd/MM/yyyy\"");
+            }
         default:
-            return null;
+            throw new DukeException("Something went wrong with processing the command! Please try again!");
         }
     }
 
@@ -153,34 +153,31 @@ public class Parser {
      * @throws DukeException A custom Exception that carries a message for the user if thrown.
      */
     private String processList(String com, String index) throws DukeException {
-
+        assert (com != null) : "Parser - processList: com is null!";
+        assert (index != null) : "Parser - processList: task is null!";
         switch(com) {
         case("done"):
-            if (!index.equals("")) {
-                return list.markDone(Integer.parseInt(index) - 1);
-            } else {
+            if (index.equals("")) {
                 throw new DukeException("Please choose a task to mark as done, with \"done <task number>\"");
             }
+            return list.markDone(Integer.parseInt(index) - 1);
         case("undo"):
-            if (!index.equals("")) {
-                return list.revertDone(Integer.parseInt(index) - 1);
-            } else {
+            if (index.equals("")) {
                 throw new DukeException("Please choose a task to undo, with \"undo <task number>\"");
             }
+            return list.revertDone(Integer.parseInt(index) - 1);
         case("delete"):
-            if (!index.equals("")) {
-                return list.deleteItem(Integer.parseInt(index) - 1);
-            } else {
+            if (index.equals("")) {
                 throw new DukeException("Please choose a task to delete, with \"delete <task number>\"");
             }
+            return list.deleteItem(Integer.parseInt(index) - 1);
         case("find"):
-            if (!index.equals("")) {
-                return list.findWord(index);
-            } else {
+            if (index.equals("")) {
                 throw new DukeException("Please input a word to find tasks with, using \"find <word>\"");
             }
+            return list.findWord(index);
         default:
-            return null;
+            throw new DukeException("Something went wrong with processing the command! Please try again!");
         }
     }
 
