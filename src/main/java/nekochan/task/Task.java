@@ -41,7 +41,7 @@ public abstract class Task implements Encodable<Task>, Searchable {
         isCompleted = true;
     }
 
-    abstract boolean similar(Object obj);
+    abstract boolean isSimilar(Object obj);
 
     private String getStatusIcon() {
         return isCompleted ? COMPLETED_ICON : INCOMPLETE_ICON;

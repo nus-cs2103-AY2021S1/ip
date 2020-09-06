@@ -1,6 +1,8 @@
 package nekochan.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -17,28 +19,6 @@ public class DeadlineTest {
     public void createTask_dateOnly_success() {
         Deadline deadline = Deadline.createTask("return book by 20-03-2019");
         assertEquals("[D][\u2718] return book (by: 20 Mar 2019)", deadline.toString());
-    }
-
-    @Test
-    public void createTask_dateTime_success() {
-        Deadline deadline = Deadline.createTask("IP Project A-JUnit by 20-03-2019 23:59");
-        assertEquals("[D][\u2718] IP Project A-JUnit (by: 20 Mar 2019 23:59)", deadline.toString());
-    }
-
-    @Test
-    public void createTask_unrecognisedDate_throwsException() {
-        NekoException thrown = assertThrows(NekoException.class, () -> {
-            Deadline deadline = Deadline.createTask("Fix parsing by 20th January 2019");
-        });
-        assertTrue(thrown.getMessage().contains(Messages.PARSE_DATETIME_ERROR));
-    }
-
-    @Test
-    public void createTask_unrecognisedTime_throwsException() {
-        NekoException thrown = assertThrows(NekoException.class, () -> {
-            Deadline deadline = Deadline.createTask("Fix parsing by 20-03-2019 1200");
-        });
-        assertTrue(thrown.getMessage().contains(Messages.PARSE_DATETIME_ERROR));
     }
 
     @Test
@@ -99,5 +79,33 @@ public class DeadlineTest {
             Deadline deadline = Deadline.decode("E|X|Description");
         });
         assertTrue(thrown.getMessage().contains(Messages.DECODE_UNEXPECTED_TYPE_ERROR));
+    }
+
+    @Test
+    public void isSimilar_similarDeadline_true() {
+        Deadline d1 = Deadline.createTask("Description by 1 Jan 2020 11:59");
+        Deadline d2 = Deadline.createTask("description by 1 Jan 2020 11:59");
+        assertTrue(d1.isSimilar(d2));
+    }
+
+    @Test
+    public void isSimilar_differentDate_false() {
+        Deadline d1 = Deadline.createTask("Description by 1 Jan 2020 11:59");
+        Deadline d2 = Deadline.createTask("description by 2 Jan 2020 11:59");
+        assertFalse(d1.isSimilar(d2));
+    }
+
+    @Test
+    public void equals_sameDeadline_true() {
+        Deadline d1 = Deadline.createTask("Description by 1 Jan 2020 11:59");
+        Deadline d2 = Deadline.createTask("Description by 1 Jan 2020 11:59");
+        assertEquals(d1, d2);
+    }
+
+    @Test
+    public void equals_similarDeadline_false() {
+        Deadline d1 = Deadline.createTask("Description by 1 Jan 2020 11:59");
+        Deadline d2 = Deadline.createTask("description by 1 Jan 2020 11:59");
+        assertNotEquals(d1, d2);
     }
 }

@@ -52,7 +52,7 @@ public class TaskList implements Iterable<Task> {
         }
 
         // Add task but show an error if there is a similar task.
-        List<Task> similars = store.stream().filter((x) -> x.similar(task)).collect(Collectors.toList());
+        List<Task> similars = store.stream().filter((x) -> x.isSimilar(task)).collect(Collectors.toList());
         boolean hasSimilars = similars.size() > 0;
         store.add(task);
         if (hasSimilars) {
@@ -83,7 +83,7 @@ public class TaskList implements Iterable<Task> {
      *
      * @param index the index of the {@code Task} to delete.
      * @return the {@code Task} that was deleted.
-     * @throws NekoException
+     * @throws NekoException if the index is out of range.
      */
     public Task deleteTask(int index) throws NekoException {
         try {

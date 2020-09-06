@@ -12,7 +12,7 @@ public class ConcreteTaskStub extends Task {
     }
 
     @Override
-    boolean similar(Object obj) {
+    boolean isSimilar(Object obj) {
         return true;
     }
 

@@ -75,10 +75,14 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns true if both {@code ToDo} are similar.
+     * Returns true if the specified {@code obj} is a {@code ToDo} and has the same (case insensitive) description as
+     * this {@code ToDo}.
+     *
+     * @param obj the reference object with which to compare.
+     * @return true if the {@code Object} is a {@code ToDo} and has the same (case insensitive) description.
      */
     @Override
-    boolean similar(Object obj) {
+    boolean isSimilar(Object obj) {
         if (obj == this) {
             return true;
         }
@@ -92,7 +96,10 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns true if both {@code ToDo} have the same identity or data.
+     * Returns true if the specified {@code obj} is a {@code ToDo} and has the same details.
+     *
+     * @param obj the reference object with which to compare.
+     * @return true if the {@code Object} is a {@code ToDo} and has the same details.
      */
     @Override
     public boolean equals(Object obj) {
