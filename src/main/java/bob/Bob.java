@@ -25,12 +25,14 @@ public class Bob {
     public Bob() throws IOException, BobException {
         boolean ifPathDirIsTest = System.getProperty("user.dir").endsWith("text-ui-test");
         boolean ifPathDirIsIp = System.getProperty("user.dir").endsWith("ip");
+
         String filePath = ifPathDirIsTest
                 ? "test.txt"
                 : ifPathDirIsIp
                 ? "data/bob.txt"
                 // Creates a save file on the user's home directory if user is not in ip directory
                 : System.getProperty("user.home") + "/bob.txt";
+
         Tasklist tempTasks = null;
         this.storage = new Storage(filePath);
         try {

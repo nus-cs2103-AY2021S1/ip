@@ -36,7 +36,6 @@ public class Task {
      */
     protected String getStatusIcon() {
         // return tick or cross symbols
-        // (only_exception_case : appears to be ? in ACTUAL.TXT after running runtest.bat)
         return (isDone ? "\u2713" : "\u2718");
     }
 
