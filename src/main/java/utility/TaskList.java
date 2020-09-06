@@ -79,6 +79,7 @@ public class TaskList {
      * @param input the name of the task to search for.
      */
     public String findTasks(String input) {
+        assert input != null : "Input is null";
         String query = input.substring(5);
         StringBuilder out = new StringBuilder();
         for (int i = 0; i < taskList.size(); i++) {
@@ -95,6 +96,7 @@ public class TaskList {
      * @param input the number of the task to be marked as complete.
      */
     public String completeTask(String input) {
+        assert input != null : "Input is null";
         // mark task as done
         int position = Integer.parseInt(input.substring(5));
         taskList.get(position - 1).markDone();
@@ -107,6 +109,7 @@ public class TaskList {
      * @throws DukeException Custom Duke Exception
      */
     public String addEvent(String input) throws DukeException {
+        assert input != null : "Input is null";
         if (input.length() <= 6) {
             throw new DukeException("Exception occurred: Name not found for Tasks.Event.");
         }
@@ -123,6 +126,7 @@ public class TaskList {
      * @throws DukeException Custom Duke Exception
      */
     public String addDeadline(String input) throws DukeException {
+        assert input != null : "Input is null";
         if (input.length() <= 9) {
             throw new DukeException("Exception occurred: Name not found for Tasks.Deadline.");
         }
@@ -141,6 +145,7 @@ public class TaskList {
      * @param input name of Todo task.
      */
     public String addTodo(String input) {
+        assert input != null : "Input is null";
         taskList.add(new Todo(input.substring(5)));
         return printAddedTask(taskList);
     }
@@ -152,6 +157,7 @@ public class TaskList {
      * @throws DukeException Custom Duke Exception.
      */
     public String deleteTask(String input) throws DukeException {
+        assert input != null : "Input is null";
         if (input.length() <= 7) {
             throw new DukeException("Exception occurred: Kindly enter a number for deletion.");
         }

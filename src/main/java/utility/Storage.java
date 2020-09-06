@@ -17,7 +17,7 @@ public class Storage {
     /**
      * The directory path of the text file Duke reads and saves to.
      */
-    private String filePath;
+    private final String filePath;
 
     /**
      * Controls the reading and writing of data to hard disk.
@@ -46,7 +46,7 @@ public class Storage {
     /**
      * Reads the text file into ArrayList format to start the program
      * @return ArrayList that will be the TaskList
-     * @throws FileNotFoundException
+     * @throws FileNotFoundException exception if file isn't found
      */
     public ArrayList<Task> load() throws FileNotFoundException {
         File f = new File(filePath);
@@ -78,13 +78,6 @@ public class Storage {
                 System.out.println("Can't read line - load()");
             }
         }
-
-        // this line of code should not be here logic wise. temp fix only.
-//        if (newList.size() > 0) {
-//            // temp fix
-//            newList.remove(newList.size() - 1);
-//        }
-
         return newList;
     }
 
@@ -95,29 +88,17 @@ public class Storage {
      */
     public void writeToFile(ArrayList<Task> ls) throws IOException {
         FileWriter fw = new FileWriter(filePath);
-        String textToAdd = "";
+        StringBuilder textToAdd = new StringBuilder();
         // convert ArrayList contents to string
         for (Task t : ls) {
             if (t instanceof Event || t instanceof Deadline) {
-                textToAdd = textToAdd + t.toWrite() + "\n";
+                textToAdd.append(t.toWrite()).append("\n");
             } else {
-                textToAdd = textToAdd + t.toString() + "\n";
+                textToAdd.append(t.toString()).append("\n");
             }
 
         }
-        fw.write(textToAdd);
+        fw.write(textToAdd.toString());
         fw.close();
     }
-
-
-
-
-
-
-
-
-
-
-
-
 }
