@@ -1,6 +1,9 @@
 package command;
 
+import java.io.StringBufferInputStream;
 import java.time.LocalDate;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import exception.DukeDateTimeParserException;
 import parser.Parser;
@@ -46,24 +49,25 @@ public class ShowAfterCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeDateTimeParserException {
         LocalDate localDate = Parser.findDateParser(this.command);
         StringBuilder sb = new StringBuilder();
-        int i = 1;
+        int index = 1;
 
         for (Task task : tasks.getTasks()) {
             if (task instanceof DeadlineTask) {
                 DeadlineTask deadlineTask = (DeadlineTask) task;
-                if (deadlineTask.getDateTime().toLocalDate().isAfter(localDate)) {
-                    sb.append(i + ". " + deadlineTask + "\n");
-                    i++;
+                boolean isAfterSpecifiedDate = deadlineTask.getDateTime().toLocalDate().isAfter(localDate);
+                if (isAfterSpecifiedDate) {
+                    sb.append(index).append(". ").append(deadlineTask).append("\n");
+                    index++;
                 }
 
             } else if (task instanceof EventTask) {
                 EventTask eventTask = (EventTask) task;
-                if (eventTask.getDateTime().toLocalDate().isAfter(localDate)) {
-                    sb.append(i + ". " + eventTask + "\n");
-                    i++;
+                boolean isAfterSpecifiedDate = eventTask.getDateTime().toLocalDate().isAfter(localDate);
+                if (isAfterSpecifiedDate) {
+                    sb.append(index).append(". ").append(eventTask).append("\n");
+                    index++;
                 }
             }
-
         }
 
         return ui.getMessageTemplate(sb.toString());

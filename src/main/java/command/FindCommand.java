@@ -44,7 +44,9 @@ public class FindCommand extends Command {
         int i = 1;
 
         for (Task task : tasks.getTasks()) {
-            if (task.getDescription().contains(keyword)) {
+            boolean isKeywordExist = task.getDescription().contains(keyword);
+
+            if (isKeywordExist) {
                 sb.append(ui.formatMessage((i) + ". " + task + "\n"));
                 i++;
             }

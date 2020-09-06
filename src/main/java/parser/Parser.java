@@ -66,44 +66,34 @@ public class Parser {
     public static Task readFileParser(String line) {
         String[] strings = line.split("\\|", 3);
         String taskType = strings[0].trim();
+        Task task;
 
         switch(taskType) {
         case "T" :
-            TodoTask todoTask = new TodoTask();
-            if (strings[1].trim().equals("1")) {
-                todoTask.setDone(true);
-            } else {
-                todoTask.setDone(false);
-            }
-            todoTask.setDescription(strings[2].trim());
-            return todoTask;
+            task = new TodoTask(strings[2].trim());
+            break;
         case "D" :
-            DeadlineTask deadlineTask = new DeadlineTask();
-            if (strings[1].trim().equals("1")) {
-                deadlineTask.setDone(true);
-            } else {
-                deadlineTask.setDone(false);
-            }
             String[] taskDetails = strings[2].split("\\|");
-            deadlineTask.setDescription(taskDetails[0].trim());
-            deadlineTask.setDate(LocalDateTime.parse(taskDetails[1].trim(), formatter));
-            return deadlineTask;
+            String deadlineDescription = taskDetails[0].trim();
+            LocalDateTime deadlineDateTime = LocalDateTime.parse(taskDetails[1].trim(), formatter);
+            task = new DeadlineTask(deadlineDescription,deadlineDateTime);
+            break;
         case "E" :
-            EventTask eventTask = new EventTask();
-
-            if (strings[1].trim().equals("1")) {
-                eventTask.setDone(true);
-
-            } else {
-                eventTask.setDone(false);
-            }
             String[] taskDetails2 = strings[2].split("\\|");
-            eventTask.setDescription(taskDetails2[0].trim());
-            eventTask.setDateTime(LocalDateTime.parse(taskDetails2[1].trim(), formatter));
-            return eventTask;
+            String eventDescription =  taskDetails2[0].trim();
+            LocalDateTime eventDateTime = LocalDateTime.parse(taskDetails2[1].trim(), formatter);
+            task = new EventTask(eventDescription,eventDateTime);
+            break;
         default :
             return new Task();
         }
+
+        if (strings[1].trim().equals("1")) {
+            task.setDone(true);
+        } else {
+            task.setDone(false);
+        }
+        return task;
     }
 
     /**
@@ -196,9 +186,14 @@ public class Parser {
             Map<String, String> map = new HashMap<>();
             String[] getDetails = input.split("\\s", 2);
             String[] details = getDetails[1].split("/", 2);
+
+            String taskDescription = details[0].trim();
             map.put("taskDescription", details[0].trim());
+
             String[] splitTimeDetails = details[1].split("\\s", 2);
-            map.put("taskTime", splitTimeDetails[1]);
+
+            String taskDateTime = splitTimeDetails[1];
+            map.put("taskTime", taskDateTime);
             return map;
         } catch (IndexOutOfBoundsException e) {
             throw new DescriptionException();
@@ -232,7 +227,7 @@ public class Parser {
     public static String findKeywordParser(String input) throws DukeKeywordException {
         try {
             String keyword = input.split("\\s", 2)[1];
-            if (keyword.equals("") || keyword.equals("\\s")) {
+            if (isKeywordEmpty(keyword)) {
                 throw new DukeKeywordException();
             } else {
                 return keyword.trim();
@@ -240,5 +235,9 @@ public class Parser {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeKeywordException();
         }
+    }
+
+    private static boolean isKeywordEmpty(String keyword) {
+        return keyword.equals("") || keyword.equals("\\s");
     }
 }
