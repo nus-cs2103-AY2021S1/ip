@@ -32,6 +32,7 @@ public class TaskList {
      * @param index The task index that identifies the task to be deleted.
      */
     public void deleteTask(int index) {
+        assert index < totalTask() : "Task index is greater than available!";
         getTaskList().remove(index);
     }
 
@@ -42,6 +43,7 @@ public class TaskList {
      * @return The task at a specified index of the ArrayList.
      */
     public Task getTask(int index) {
+        assert index < totalTask() : "Task index is greater than available!";
         return getTaskList().get(index);
     }
 
