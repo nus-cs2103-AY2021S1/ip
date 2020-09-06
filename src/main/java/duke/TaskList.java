@@ -61,6 +61,16 @@ public class TaskList {
     }
 
     /**
+     * Checks whether a task input is contained inside the current task list.
+     *
+     * @param findTask Task to be searched.
+     * @return Is task contained in task list.
+     */
+    public boolean contains(Task findTask) {
+        return this.taskList.contains(findTask);
+    }
+
+    /**
      * Removes the task at a given index.
      *
      * @param index Given index to remove the task in the task list.

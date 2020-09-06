@@ -1,6 +1,8 @@
 package duke;
 
+import duke.commands.ByeCommand;
 import duke.commands.Command;
+import duke.exception.InvalidCommand;
 import duke.parser.Parser;
 
 /**
@@ -39,9 +41,15 @@ public class Duke {
      */
     protected String getResponse(String input) {
         String uiMessage = "";
-        Command c = Parser.parse(input);
-        if (c != null) {
-            uiMessage = c.execute(this.ui, this.listStorage, this.taskList);
+        try {
+            Command c = Parser.parse(input);
+            assert c != null : "Something went wrong!";
+            if (c != null) {
+                uiMessage = c.execute(this.ui, this.listStorage, this.taskList);
+                checkExit(c);
+            }
+        } catch (InvalidCommand ex) {
+            uiMessage = Ui.commandError(ex);
         }
         return uiMessage;
     }
@@ -61,7 +69,13 @@ public class Duke {
      * @return Storage loading messages.
      */
     public String loadStorage() {
-        return this.ui.loadStorage(this.listStorage.loadData(this.taskList));
+        String uiMessage = "";
+        try {
+            uiMessage = this.ui.loadStorage(this.listStorage.loadData(this.taskList));
+        } catch (InvalidCommand ex) {
+            Ui.commandError(ex);
+        }
+        return uiMessage;
     }
 
     /**
@@ -73,4 +87,9 @@ public class Duke {
         return this.ui.loadFile();
     }
 
+    private void checkExit(Command commandExecuted) {
+        if (commandExecuted instanceof ByeCommand) {
+            System.exit(0);
+        }
+    }
 }
