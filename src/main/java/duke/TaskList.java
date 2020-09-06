@@ -63,6 +63,21 @@ public class TaskList {
     }
 
     /**
+     * Checks whether the task is duplicate or not.
+     *
+     * @param task the task to check.
+     * @return boolean if the task is duplicated, return true.
+     */
+    public boolean isDuplicate(Task task) {
+        for (Task taskData: tasks) {
+            if (taskData.getDescription().equals(task.getDescription())) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Adds a task type Todo and display message.
      *
      * @param description description of the task.
@@ -70,13 +85,18 @@ public class TaskList {
      */
     public String addToDoAsString(String description) {
         Task toDo = new Todo(description);
-        tasks.add(toDo);
-        String result = "___________________________________________\n";
-        result += "        Got it. I've added this task:\n";
-        result += "            " + toDo + "\n";
-        result += "        Now you have " + tasks.size() + " tasks in the list.\n";
-        result += "___________________________________________";
-        return result;
+        boolean isDuplicate = isDuplicate(toDo);
+        if (!isDuplicate) {
+            tasks.add(toDo);
+            String result = "___________________________________________\n";
+            result += "        Got it. I've added this task:\n";
+            result += "            " + toDo + "\n";
+            result += "        Now you have " + tasks.size() + " tasks in the list.\n";
+            result += "___________________________________________";
+            return result;
+        } else {
+            return "The task is duplicated. Try another one :D";
+        }
     }
 
     /**
@@ -88,13 +108,18 @@ public class TaskList {
      */
     public String addDeadlineAsString(String description, String by) {
         Task deadline = new Deadline(description, by);
-        tasks.add(deadline);
-        String result = "___________________________________________\n";
-        result += "        Got it. I've added this task:\n";
-        result += "            " + deadline + "\n";
-        result += "        Now you have " + tasks.size() + " tasks in the list.\n";
-        result += "___________________________________________";
-        return result;
+        boolean isDuplicate = isDuplicate(deadline);
+        if (!isDuplicate) {
+            tasks.add(deadline);
+            String result = "___________________________________________\n";
+            result += "        Got it. I've added this task:\n";
+            result += "            " + deadline + "\n";
+            result += "        Now you have " + tasks.size() + " tasks in the list.\n";
+            result += "___________________________________________";
+            return result;
+        } else {
+            return "The task is duplicated. Try another one :D";
+        }
     }
 
     /**
@@ -106,13 +131,18 @@ public class TaskList {
      */
     public String addEventAsString(String description, String by) {
         Task event = new Event(description, by);
-        tasks.add(event);
-        String result = "___________________________________________\n";
-        result += "        Got it. I've added this task:\n";
-        result += "            " + event + "\n";
-        result += "        Now you have " + tasks.size() + " tasks in the list.\n";
-        result += "___________________________________________";
-        return result;
+        boolean isDuplicate = isDuplicate(event);
+        if (!isDuplicate) {
+            tasks.add(event);
+            String result = "___________________________________________\n";
+            result += "        Got it. I've added this task:\n";
+            result += "            " + event + "\n";
+            result += "        Now you have " + tasks.size() + " tasks in the list.\n";
+            result += "___________________________________________";
+            return result;
+        } else {
+            return "The task is duplicated. Try another one :D";
+        }
     }
 
     /**

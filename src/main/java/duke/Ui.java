@@ -31,7 +31,7 @@ public class Ui {
      * Shows invalid format command error message.
      */
     public String showInvalidFormatCommandDescription() {
-        return "☹ OOPS!!! The description of a done cannot be empty or in wrong format\n";
+        return "☹ OOPS!!! The description of a task cannot be empty or in wrong format\n";
     }
 
     /**
