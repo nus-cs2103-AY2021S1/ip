@@ -11,11 +11,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 import data.task.Task;
-import parser.commands.DeleteParser;
-import parser.commands.DoneParser;
-import parser.commands.DueParser;
-import parser.commands.FindParser;
-import parser.commands.TaskParser;
+import parser.commands.*;
 import storage.Storage;
 import tasklist.TaskList;
 import ui.Ui;
@@ -180,6 +176,9 @@ public class Parser {
                 }
                 case "due": {
                     return DueParser.parse(multiWord, tl);
+                }
+                case "update": {
+                    return UpdateParser.parse(multiWord, tl, stores);
                 }
                 // it's a task
                 case "todo":
