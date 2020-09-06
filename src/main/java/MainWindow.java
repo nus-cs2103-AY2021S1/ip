@@ -50,7 +50,8 @@ public class MainWindow extends AnchorPane {
                 + "        \\/         \\/               \n";
         //String result = "*********************************\n";
         String result = ("Hi! I'm\n" + logo + "\n");
-        result += ("What can I help you with?");
+        result += ("What can I help you with?\n");
+        result += "(Type 'help' for a list of commands!)";
         //result += "\n*********************************";
         return result;
     }

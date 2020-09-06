@@ -7,12 +7,14 @@ import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 
 import dukeexception.DukeException;
 import storage.Storage;
 import tasklist.TaskList;
 import tasks.Deadline;
 import tasks.Event;
+import tasks.Task;
 import tasks.Todo;
 
 /**
@@ -25,6 +27,8 @@ public class Parser {
 
     /** Tasklist for dealing with the user's data */
     protected TaskList tasks;
+
+    protected HashMap<String, Task> commandList = new HashMap<String, Task>();
 
     /**
      * Constructs a new Parser object.
@@ -85,8 +89,8 @@ public class Parser {
         result += "3. todo <task>\n";
         result += "4. event <task> /at <yyyy-mm-dd>\n";
         result += "5. deadline <task> /by <yyyy-mm-dd>\n";
-        result += "6. done <list number>\n";
-        result += "7. delete <list number>\n";
+        result += "6. done <list number(s)>\n";
+        result += "7. delete <list number(s)>\n";
         result += "8. find <keyword>\n";
         result += "9. bye\n\n";
         result += "Hope this helped you! :D";
@@ -323,6 +327,11 @@ public class Parser {
         return reply;
     }
 
+    protected String undoTask(String command) {
+        String reply = "";
+        return reply;
+    }
+
     /**
      * Reads the user's input and manages it according to the input.
      * @param command the input given by the user
@@ -358,6 +367,9 @@ public class Parser {
                 break;
             case "find":
                 reply = handleFind(command);
+                break;
+            case "undo":
+                reply = undoTask(command);
                 break;
             default:
                 reply = "Sorry! I don't understand that command. Please try again!";
