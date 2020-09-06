@@ -36,22 +36,22 @@ public class EventCommand extends Command {
     @Override
     public boolean execute(String input) throws DukeException {
         switch (stage) {
-            case 0:
-                setEventName(input);
-                setResponse(ui.askEventStartTime());
-                incrementStage();
-                break;
-            case 1:
-                setEventStartTime(input);
-                setResponse(ui.askEventEndTime());
-                incrementStage();
-                break;
-            case 2:
-                setEventEndTime(input);
-                tm.add(new Event(eventName, eventStartTime, eventEndTime));
-                setResponse("Event added"); // TODO: refactor this
-                setEventEndTime(input);
-                setDone();
+        case 0:
+            setEventName(input);
+            setResponse(ui.askEventStartTime());
+            incrementStage();
+            break;
+        case 1:
+            setEventStartTime(input);
+            setResponse(ui.askEventEndTime());
+            incrementStage();
+            break;
+        case 2:
+            setEventEndTime(input);
+            tm.add(new Event(eventName, eventStartTime, eventEndTime));
+            setResponse("Event added"); // TODO: refactor this
+            setEventEndTime(input);
+            setDone();
         }
         return true;
     }
