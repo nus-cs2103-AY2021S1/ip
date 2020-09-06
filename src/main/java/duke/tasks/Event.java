@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * <code>duke.tasks.Event</code> inherits from <code>duke.tasks.Task</code>
+ * <code>Event</code> inherits from <code>Task</code>
  * and is used to represent an event.
  */
 public class Event extends Task {
