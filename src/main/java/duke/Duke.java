@@ -31,7 +31,7 @@ public class Duke {
      * Executes a DukeBot session for the bot to perform its intended functions.
      */
     public void run() {
-        System.out.println(ui.showWelcome());
+        System.out.println(Ui.showWelcome());
         boolean isExit = false;
         while (!isExit) {
             try {

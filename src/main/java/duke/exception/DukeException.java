@@ -11,6 +11,6 @@ public class DukeException extends Exception {
      * @param message String containing the specified error message.
      */
     public DukeException(String message) {
-        super("Oh no! " + message + "\nType 'commands' for a list of all my functions and their commands.");
+        super("Oh no! " + message);
     }
 }

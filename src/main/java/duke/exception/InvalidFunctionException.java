@@ -11,6 +11,6 @@ public class InvalidFunctionException extends DukeException {
      * @param message String containing the specified error message.
      */
     public InvalidFunctionException(String message) {
-        super(message);
+        super(message + "\nType 'commands' for a list of all my functions and their commands.");
     }
 }

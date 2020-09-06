@@ -42,21 +42,20 @@ public class DeleteCommand extends Command {
         try {
             int index = Integer.parseInt(this.parsedCommand[1]);
             if (index > tasks.getListSize() || index <= 0) {
-                String err = "Invalid Task! The task ID you provided is not valid. ";
-                throw new InvalidTaskException(err);
-            } else {
-                Task toRemove = tasks.getTask(index - 1);
-                tasks.removeTask(index - 1);
-                storage.saveToFile(tasks);
-                return ui.showDeletedTask(toRemove, tasks.getListSize());
+                String error = "Invalid Task! The task ID you provided is not valid. ";
+                throw new InvalidTaskException(error);
             }
+            Task toRemove = tasks.getTask(index - 1);
+            tasks.removeTask(index - 1);
+            storage.saveToFile(tasks);
+            return ui.showDeletedTask(toRemove, tasks.getListSize());
         } catch (ArrayIndexOutOfBoundsException ex) {
-            String err = "No Task ID provided! Please input the ID of the task you wish to delete.";
-            throw new InvalidFunctionException(err);
+            String error = "No Task ID provided! Please input the ID of the task you wish to delete.";
+            throw new InvalidFunctionException(error);
         } catch (NumberFormatException ex) {
-            String err = "Your input is not a recognised command. You have to provide the ID of "
+            String error = "Your input is not a recognised command. You have to provide the ID of "
                     + "the task you wish to delete.";
-            throw new InvalidFunctionException(err);
+            throw new InvalidFunctionException(error);
         }
     }
 
