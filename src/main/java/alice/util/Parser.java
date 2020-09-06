@@ -9,17 +9,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import alice.command.ByeCommand;
-import alice.command.ClearCommand;
 import alice.command.Command;
+import alice.command.CommandType;
 import alice.command.DeadlineCommand;
 import alice.command.DeleteCommand;
 import alice.command.DoneCommand;
 import alice.command.EventCommand;
 import alice.command.FindCommand;
-import alice.command.HelpCommand;
 import alice.command.InvalidCommandException;
-import alice.command.ListCommand;
 import alice.command.TodoCommand;
 
 /**
@@ -77,40 +74,14 @@ public class Parser {
             argument = "";
         }
 
-        if (ListCommand.hasCommandWord(cmd)) {
-            // Command to display task list
-            return new ListCommand();
-        } else if (FindCommand.hasCommandWord(cmd)) {
-            // Command to find specific tasks
-            return parseFindKeywords(argument);
-        } else if (ClearCommand.hasCommandWord(cmd)) {
-            // Command to clear task list
-            return new ClearCommand();
-        } else if (HelpCommand.hasCommandWord(cmd)) {
-            // Command to get list of commands
-            return new HelpCommand();
-        } else if (DoneCommand.hasCommandWord(cmd)) {
-            // Command to mark task as done
-            return parseDoneInput(argument);
-        } else if (DeleteCommand.hasCommandWord(cmd)) {
-            // Command to mark task as done
-            return parseDeleteInput(argument);
-        } else if (TodoCommand.hasCommandWord(cmd)) {
-            // Command to add to-do
-            return parseTodoInput(argument);
-        } else if (DeadlineCommand.hasCommandWord(cmd)) {
-            // Command to add deadline
-            return parseDeadlineInput(argument);
-        } else if (EventCommand.hasCommandWord(cmd)) {
-            // Command to add event
-            return parseEventInput(argument);
-        } else if (ByeCommand.hasCommandWord(cmd)) {
-            return new ByeCommand();
-        } else {
-            // Invalid command
-            throw new InvalidCommandException("Sorry I cannot register that command!\n"
-                    + "Use 'help' command to see the lists of available command");
+        CommandType[] commands = CommandType.values();
+        for (int i = 0; i < arr.length; i++) {
+            if (commands[i].hasCommandWord(cmd)) {
+                return commands[i].createCmd(argument);
+            }
         }
+        throw new InvalidCommandException("Sorry I cannot register that command!\n"
+                + "Use 'help' command to see the lists of available command");
     }
 
     /**
