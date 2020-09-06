@@ -113,7 +113,7 @@ public class Parser {
      */
     private static Command prepareList(String suffix) throws DukeException {
         if (suffix.length() != 0) {
-            throw new DukeException();
+            throw new DukeException("Listing specific tasks not yet supported.");
         } else {
             return new ListCommand();
         }
