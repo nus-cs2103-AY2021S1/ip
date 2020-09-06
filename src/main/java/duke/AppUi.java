@@ -1,17 +1,34 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.function.Supplier;
 
 public class AppUi extends Ui {
 
     public AppUi(){}
+
+    Supplier<String> byeMessage = () -> "Bye. Hope to see you again soon!";
+    Supplier<String> inputEmptyErrorMsg = () -> "\uD83D\uDE43 OOPS!!! input cannot be empty.";
+    Supplier<String> wrongFormatAfterDoneMsg = () -> "\uD83D\uDE43 wrong input after the word \"done\"";
+    Supplier<String> wrongFormatAfterDeleteMsg = () -> "\uD83D\uDE43 wrong input after the word \"delete\"";
+    Supplier<String> descriptionEmptyMsg = () -> "\uD83D\uDE43 OOPS!!! The description of a todo cannot be empty.";
+    Supplier<String> wrongDeadlineFormatMsg = () -> "\uD83D\uDE43 OOPS!!! The description and time of a deadline cannot be empty."
+            + " Or maybe you used \"at\" instead of \"by\"?";
+    Supplier<String> wrongEventFormatMsg = () -> "\uD83D\uDE43 OOPS!!! The description and time of a event cannot be empty."
+            + " Or maybe you used \"by\" instead of \"at\"?";
+    Supplier<String> wrongDateFormatMsg = () -> "Wrong date input format. Correct format should be \"YYYY-MM-DD\"\n";
+    Supplier<String> wrongTimeFormatMsg = () -> "Wrong time format. Correct format should be \"HH:MM\"\n";
+    Supplier<String> noSuchCommandMsg = () -> "\uD83D\uDE43 Sorry~ please specify whether this is a todo or a deadline or a event\n"
+            + "put the word \"todo\" or \"deadline\" or \"event\" in front of your description";
+    Supplier<String> wrongFindFormatMsg = () -> "Wrong \"find\" command format.\nCorrect is \"find {keyword}\" "
+            + "where {keyword} is the keyword you want to search";
 
     /**
      * Returns the input empty error message
      * @return the input empty error message
      */
     public String getInputEmptyErrorMsg(){
-        return "\uD83D\uDE43 OOPS!!! input cannot be empty.";
+        return inputEmptyErrorMsg.get();
     }
 
     /**
@@ -19,7 +36,7 @@ public class AppUi extends Ui {
      * @return the bye message
      */
     public String getByeMessage(){
-        return "Bye. Hope to see you again soon!";
+        return byeMessage.get();
     }
 
     /**
@@ -28,7 +45,7 @@ public class AppUi extends Ui {
      * @return the mark as done message
      */
     public String getMarkAsDoneMsg(Task task){
-        return "Nice! I've marked this task as done: " + task.toString();
+        return "Nice! I've marked this task as done:\n" + task.toString();
     }
 
     /**
@@ -46,7 +63,7 @@ public class AppUi extends Ui {
      * @return wrong format after done message
      */
     public String getWrongFormatAfterDoneMsg() {
-        return "\uD83D\uDE43 wrong input after the word \"done\"";
+        return wrongFormatAfterDoneMsg.get();
     }
 
     /**
@@ -54,7 +71,7 @@ public class AppUi extends Ui {
      * @return wrong format after the word "delete" in delete command message
      */
     public String getWrongFormatAfterDeleteMsg() {
-        return "\uD83D\uDE43 wrong input after the word \"delete\"";
+        return wrongFormatAfterDeleteMsg.get();
     }
 
     /**
@@ -73,7 +90,7 @@ public class AppUi extends Ui {
      * @return get description empty message
      */
     public String getDescriptionEmptyMsg() {
-        return "\uD83D\uDE43 OOPS!!! The description of a todo cannot be empty.";
+        return descriptionEmptyMsg.get();
     }
 
     /**
@@ -124,8 +141,7 @@ public class AppUi extends Ui {
      * @return wrong deadline format message
      */
     public String getWrongDeadlineFormatMsg() {
-        return "\uD83D\uDE43 OOPS!!! The description and time of a deadline cannot be empty."
-                + " Or maybe you used \"at\" instead of \"by\"?";
+        return wrongDeadlineFormatMsg.get();
     }
 
     /**
@@ -133,8 +149,7 @@ public class AppUi extends Ui {
      * @return wrong event format message
      */
     public String getWrongEventFormatMsg() {
-        return "\uD83D\uDE43 OOPS!!! The description and time of a event cannot be empty."
-                + " Or maybe you used \"by\" instead of \"at\"?";
+        return wrongEventFormatMsg.get();
     }
 
     /**
@@ -142,7 +157,7 @@ public class AppUi extends Ui {
      * @return wrong date format message
      */
     public String getWrongDateFormatMsg() {
-        return "Wrong date input format. Correct format should be \"YYYY-MM-DD\"\n";
+        return wrongDateFormatMsg.get();
     }
 
     /**
@@ -150,7 +165,7 @@ public class AppUi extends Ui {
      * @return wrong time format message
      */
     public String getWrongTimeFormatMsg() {
-        return "Wrong time format. Correct format should be \"HH:MM\"\n";
+        return wrongTimeFormatMsg.get();
     }
 
     /**
@@ -158,8 +173,7 @@ public class AppUi extends Ui {
      * @return no such command message
      */
     public String getNoSuchCommandMsg() {
-        return "\uD83D\uDE43 Sorry~ please specify whether this is a todo or a deadline or a event\n"
-                + "put the word \"todo\" or \"deadline\" or \"event\" in front of your description";
+        return noSuchCommandMsg.get();
     }
 
     /**
@@ -180,8 +194,7 @@ public class AppUi extends Ui {
      * @return the wrong find format error
      */
     public String getWrongFindFormatMsg() {
-        return "Wrong \"find\" command format.\nCorrect is \"find {keyword}\" "
-                + "where {keyword} is the keyword you want to search";
+        return wrongFindFormatMsg.get();
     }
 
     /**
