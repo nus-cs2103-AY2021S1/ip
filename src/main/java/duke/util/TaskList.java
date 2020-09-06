@@ -3,6 +3,7 @@ package duke.util;
 import duke.task.Task;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -82,6 +83,20 @@ public class TaskList {
      */
     public Task remove(int idx) {
         return taskList.remove(idx);
+    }
+
+    /**
+     * Creates a shallow copy of this task list, and sort it based on the given Comparator
+     *
+     * @param comparator The comparator used to sort this task list.
+     * @return A new TaskList which is in the sorted order.
+     */
+    public TaskList sort(Comparator<? super Task> comparator) {
+        TaskList newTaskList = new TaskList();
+        newTaskList.taskList.addAll(this.taskList);
+
+        newTaskList.taskList.sort(comparator);
+        return newTaskList;
     }
 
 }

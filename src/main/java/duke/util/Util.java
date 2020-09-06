@@ -67,13 +67,13 @@ public class Util {
         //TODO: may want to check for file modification. Or invalid line input
         switch (split[0]) {
         case "T":
-            t = new ToDo(split[2]);
+            t = new ToDo(split[3]);
             break;
         case "D":
-            t = new Deadline(split[2], convertStringToDateTime(split[3]));
+            t = new Deadline(split[3], convertStringToDateTime(split[4]));
             break;
         case "E":
-            t = new Event(split[2], convertStringToDateTime(split[3]));
+            t = new Event(split[3], convertStringToDateTime(split[4]));
             break;
         default:
             throw new DukeException("Error in reading this line...");
@@ -82,6 +82,8 @@ public class Util {
         if (split[1].equals("1")) {
             t.setDone();
         }
+
+        t.setPriority(Integer.parseInt(split[2]));  //TODO: check if parse throws any excption
 
         return t;
     }
