@@ -93,12 +93,11 @@ public class TaskManager {
      * @param taskNum the task number of the task to be deleted
      * @throws DukeException if the provided task number is out of bounds of the range of the <code>ArrayList</code>
      */
-    public void deleteTask(int taskNum) throws DukeException {
+    public Task deleteTask(int taskNum) throws DukeException {
         try {
             Task task = tasks.remove(taskNum - 1);
-            System.out.println(String.format("Successfully removed the following task:\n %s", task));
-            System.out.println(String.format("You have a total of %d duke.tasks left", tasks.size()));
             save();
+            return task;
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("you gave an invalid task number!");
         }
@@ -126,5 +125,10 @@ public class TaskManager {
             }
             return sb.toString();
         }
+    }
+
+    @Override
+    public String toString() {
+        return "This is an instance of a task manager";
     }
 }
