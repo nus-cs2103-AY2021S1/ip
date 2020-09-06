@@ -90,7 +90,7 @@ public class TaskList {
         for (Task task : listOfTasks) {
             String[] words = task.name.split(" ");
             for (String word : words) {
-                if (word.equals(keyWord)) {
+                if (word.contains(keyWord)) {
                     tasksFound.add(task);
                     break;
                 }
