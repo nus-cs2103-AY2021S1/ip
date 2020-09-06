@@ -98,7 +98,9 @@ public class TaskList {
     public String doneTask(String s) throws DukeException {
         try {
             int index = Integer.parseInt(s);
-            if (index < 1 || index > storage.size()) {
+            boolean isWithinSizeLimit = index > storage.size();
+            boolean isLowerThanSizeMin = index < 1;
+            if (isLowerThanSizeMin || isWithinSizeLimit) {
                 throw new DukeException("You have entered an invalid number: " + index
                     + ". Please try again.");
             } else {
@@ -119,10 +121,14 @@ public class TaskList {
      * @throws DukeException The Exception of Duke bot
      */
     public String delTask(String s) throws DukeException {
-        if (storage.size() == 0 || s.toLowerCase().equals("all")) {
+        boolean isEmptyStorage = storage.size() == 0;
+        boolean isAll = s.toLowerCase().equals("all");
+        boolean isEmptyString = s.equals("");
+
+        if (isEmptyStorage || isAll) {
             storage.clear();
             return "All tasks cleared!!\n";
-        } else if (s.equals("")) {
+        } else if (isEmptyString) {
             try {
                 return addTask("delete", "");
             } catch (DukeException e) {
