@@ -22,7 +22,7 @@ public class Task {
     }
 
     /**
-     * Update the Task as done.
+     * Updates the Task as done.
      *
      * @return true when the Task is marked as done.
      */

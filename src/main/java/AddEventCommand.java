@@ -26,6 +26,8 @@ public class AddEventCommand extends Command {
             throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
         }
 
+        assert input.contains("/at") : "Input in AddEvent should contain /at";
+
         String[] splitStr = input.split("/at ");
         String description = splitStr[0].substring(6).trim();
         Event event = new Event(description, splitStr[1]);

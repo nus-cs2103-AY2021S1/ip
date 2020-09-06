@@ -15,6 +15,8 @@ public class Deadline extends Task {
         super(description);
 
         String[] dateAndTime = by.split(" ");
+        assert dateAndTime.length == 2 : "Deadline inputted does not follow required format";
+
         String[] date = dateAndTime[0].split("/");
         String time = dateAndTime[1];
         LocalDateTime dateTime = LocalDateTime.of(Integer.parseInt(date[2]), Integer.parseInt(date[1]),
@@ -25,7 +27,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Return the Deadline time.
+     * Returns the Deadline time.
      *
      * @return The Deadline time.
      */
@@ -34,7 +36,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Return the string to be printed out for Deadline.
+     * Returns the string to be printed out for Deadline.
      *
      * @return The string to be printed out for Deadline.
      */
