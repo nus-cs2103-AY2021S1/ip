@@ -5,6 +5,7 @@ import ultron.Storage;
 import ultron.TaskList;
 import ultron.exceptions.ExceptionType;
 import ultron.exceptions.UltronException;
+import ultron.tasks.Task;
 import ultron.ui.UI;
 
 public final class DoneCommand extends Command {
@@ -51,8 +52,11 @@ public final class DoneCommand extends Command {
                 Integer.toString(index),
                 ExceptionType.INVALID_ARGUMENT);
         }
-
-        //Print the done message
+        Task task = taskList.get(index);
+        if (task.isDone()) {
+            throw new UltronException(task.toString(), ExceptionType.ALREADY_DONE);
+        }
+        task.markDone();
         ui.setMessage(String.format("Finally! Making yourself useful\n"
             + "  %s%n", taskList.get(index)));
     }
