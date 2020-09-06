@@ -38,6 +38,8 @@ public class AppParser extends Parser {
             ptr++;
         }
 
+        assert !command[ptr].equals("") : "Pointer still points to empty string";
+
         if (command[ptr].equals("bye")) {
             storage.writeFile(list);
             return appUi.getByeMessage();

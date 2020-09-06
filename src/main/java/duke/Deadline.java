@@ -125,6 +125,7 @@ public class Deadline extends Task {
      * @return a Deadline object
      */
     public static Deadline of(String description, String by, boolean isDone) {
+        assert !description.equals("") : "description of deadline is empty";
         Deadline ddl = new Deadline(description, by, isDone);
         String[] dateAndTime = by.replace('/', '-').split(" ");
         try {

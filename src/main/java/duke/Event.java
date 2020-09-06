@@ -125,6 +125,9 @@ public class Event extends Task {
      * @return a Event object
      */
     public static Event of(String description, String at, boolean isDone) {
+        assert !description.equals("") : "description of event is empty";
+        assert !at.equals("") : "at of event is empty";
+
         Event event = new Event(description, at, isDone);
         String[] dateAndTime = at.replace('/', '-').split(" ");
         try {
