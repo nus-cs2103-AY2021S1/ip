@@ -41,6 +41,10 @@ public abstract class Task {
         }
     }
 
+    public boolean isDone() {
+        return this.isDone;
+    }
+
     /**
      * Expresses the task as a string which is used for storage purposes.
      *

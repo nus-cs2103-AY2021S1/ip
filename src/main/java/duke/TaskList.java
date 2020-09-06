@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 import duke.exceptions.EmptyCommandException;
 import duke.exceptions.EmptyFindException;
@@ -177,7 +178,32 @@ public class TaskList {
                 throw new TaskCompletionException(tasks.size());
             }
         } else {
-            throw new TaskCompletionException(tasks.size());
+            return completeMultiple(val.trim());
+        }
+    }
+
+    private String completeMultiple(String keyword) {
+        switch (keyword) {
+        case "deadline":
+            completeIf(task -> task instanceof Deadline);
+            return "All deadlines have been completed.";
+        case "event":
+            completeIf(task -> task instanceof Event);
+            return "All events have been completed.";
+        case "todo":
+            completeIf(task -> task instanceof ToDo);
+            return "All todos have been completed.";
+        default:
+            completeIf(task -> task.getDescription().contains(keyword));
+            return "All tasks related to " + keyword + " have been completed.";
+        }
+    }
+
+    private void completeIf(Predicate<Task> predicate) {
+        for (Task task : tasks) {
+            if (predicate.test(task)) {
+                task.complete();
+            }
         }
     }
 
@@ -188,14 +214,14 @@ public class TaskList {
      * @return A string indicating deletion of the task.
      * @throws TaskDeletionException If the number is out of range of the list.
      */
-    public String deleteTask(String str) throws TaskDeletionException {
+    public String deleteTask(String str) throws TaskDeletionException, InvalidCommandException {
         if (!str.startsWith("delete ")) {
             throw new TaskDeletionException(tasks.size());
         }
         int startIndex = "delete".length() + 1;
         String val = str.substring(startIndex);
         if (!isInteger(val)) {
-            throw new TaskDeletionException(tasks.size());
+            return deleteMultiple(val.trim());
         } else {
             int i = Integer.parseInt(val);
             if (i > 0 && i <= tasks.size()) {
@@ -210,6 +236,30 @@ public class TaskList {
             }
         }
     }
+
+    private String deleteMultiple(String type) throws InvalidCommandException {
+        switch (type) {
+        case "deadline":
+            tasks.removeIf(task -> task instanceof Deadline);
+            break;
+        case "event":
+            tasks.removeIf(task -> task instanceof Event);
+            break;
+        case "todo":
+            tasks.removeIf(task -> task instanceof ToDo);
+            break;
+        case "done":
+            tasks.removeIf(Task::isDone);
+            break;
+        case "pending":
+            tasks.removeIf(task -> !task.isDone());
+            break;
+        default:
+            throw new InvalidCommandException();
+        }
+        return "All " + type + " tasks have been removed.\nYou now have " + tasks.size() + " tasks in the list";
+    }
+
 
     /**
      * Deletes all items in the current list.
