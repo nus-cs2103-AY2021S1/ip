@@ -80,10 +80,7 @@ public class Duke {
 
         switch (cmd) {
         case BYE:
-            assert(isFileInStorage()): "File should exist.";
-            // rewrite the file to update latest changes
-            Storage.saveFile(getStorageFile(), ls);
-            return ui.outputBye();
+            return cmdBye();
         case LIST:
             return cmdList();
         case DONE:
@@ -103,6 +100,13 @@ public class Duke {
         default:
             return ui.outputInvalidInput();
         }
+    }
+
+    private String cmdBye() throws IOException {
+        assert(isFileInStorage()): "File should exist.";
+        // rewrite the file to update latest changes
+        Storage.saveFile(getStorageFile(), ls);
+        return ui.outputBye();
     }
 
     private String cmdFind(String keyword) {
