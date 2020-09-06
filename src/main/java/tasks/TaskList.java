@@ -197,16 +197,16 @@ public class TaskList {
     }
 
     /**
-     * hello
-     * @return hi
+     * Undo the most recent edited task(add, delete, done).
+     * @return Undo Status
      */
     public String undoTask() {
         try {
             this.undoStore.undo();
-        } catch (MugException e) {
-            return "Fail";
+            this.taskList = this.store.load();
+            return "Mug has undo successfully :D";
+        } catch (MugException ex) {
+            return ex.getMessage();
         }
-        this.taskList = this.store.load();
-        return "Undo Successfully";
     }
 }
