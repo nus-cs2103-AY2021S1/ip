@@ -42,7 +42,7 @@ public class Event extends Task {
      * @return A LocalDateTime object.
      */
     public LocalDateTime getDateTime() {
-        return this.at;
+        return at;
     }
 
     /**

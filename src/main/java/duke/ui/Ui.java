@@ -12,9 +12,6 @@ public class Ui {
     /** String to separate different outputs from Duke */
     private static final String LINE = "\t____________________________________________________________";
 
-    /** Scanner to scan for user inputs */
-    private static final Scanner sc = new Scanner(System.in);
-
     /**
      * Constructs an <code>Ui</code> object.
      */
@@ -30,7 +27,11 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n\t "
                 + "| |_| | |_| |   <  __/\n\t "
                 + "|____/ \\__,_|_|\\_\\___|\n\t ";
-        System.out.println(LINE + "\n\t " + logo + "\n\t Hello! I'm Duke\n\t What can I do for you?\n" + LINE);
+        System.out.println(LINE
+                + "\n\t "
+                + logo
+                + "\n\t Hello! I'm Duke\n\t What can I do for you?\n"
+                + LINE);
     }
 
     /**
@@ -46,6 +47,7 @@ public class Ui {
      * @return User Input.
      */
     public String readCommand() {
+        Scanner sc = new Scanner(System.in);
         return sc.nextLine();
     }
 

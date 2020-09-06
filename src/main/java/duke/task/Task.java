@@ -40,7 +40,7 @@ public class Task {
      * Marks the Task as done by changing the value of isDOne to true.
      */
     public void completeTask() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /**
@@ -59,7 +59,7 @@ public class Task {
      * @return Description of the Task.
      */
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     /**

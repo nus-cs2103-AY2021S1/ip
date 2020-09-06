@@ -39,27 +39,11 @@ public class AddTodoCommand extends Command {
         String responseMessage = "Got it. I've added this todo: \n\t   "
                 + task + "\n\t "
                 + "Now you have "
-                + getTaskDescription(tasks.getNumberOfTask())
+                + tasks.getNumberOfTaskDescription()
                 + " in the list.";
         boolean shouldExit = getIsExit();
         assert !shouldExit : "shouldExit should be false";
         return new CommandResponse(responseMessage, shouldExit);
-    }
-
-    /**
-     * Returns a String description of the number of Task.
-     *
-     * @param noOfTask Number of Task in TaskList
-     * @return String description of the number of Task.
-     */
-    public static String getTaskDescription(int noOfTask) {
-        String taskDescription = "";
-        if (noOfTask > 1) {
-            taskDescription = noOfTask + " tasks";
-        } else {
-            taskDescription = noOfTask + " task";
-        }
-        return taskDescription;
     }
 
     @Override

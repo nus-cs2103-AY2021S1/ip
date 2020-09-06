@@ -45,8 +45,7 @@ public class Duke {
     public CommandResponse getResponse(String input) {
         try {
             Command c = Parser.parse(input, tasks);
-            CommandResponse response = c.execute(tasks, ui, storage);
-            return response;
+            return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return new CommandResponse(e.getMessage(), false);
         }
@@ -62,10 +61,12 @@ public class Duke {
         boolean isExit = false;
         while (!isExit) {
             try {
-                String fullCommand = ui.readCommand();
                 ui.showLine();
+
+                String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand, tasks);
                 CommandResponse response = c.execute(tasks, ui, storage);
+
                 isExit = response.getShouldExit();
                 ui.printMessage(response.getResponseMessage());
             } catch (DukeException e) {
