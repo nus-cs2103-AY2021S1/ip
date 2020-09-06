@@ -64,6 +64,7 @@ public class Parser {
      * @return returns a String array based on the input split by one space
      */
     String[] parseString(String input) {
+        assert input != null;
         String[] tokens = input.split(" ");
         return tokens;
     }

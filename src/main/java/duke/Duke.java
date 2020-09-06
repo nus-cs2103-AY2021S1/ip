@@ -86,6 +86,7 @@ public class Duke {
 
     private void exit() {
         storage.saveTaskContents(tasksList.getLstOfTask());
+        assert taskList != null;
     }
 
     private String done(String[] parsedUserInput) {
