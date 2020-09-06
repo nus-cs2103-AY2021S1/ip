@@ -18,6 +18,8 @@ public class Parser {
      *          eg. wrong date format, unrecognized command
      */
     public static ParsedCommand parseNextCommand(String input) throws DukeException {
+        assert input != null;
+
         Scanner sc = new Scanner(input);
 
         String commandType = sc.next();
@@ -61,6 +63,7 @@ public class Parser {
                     "\"deadline\", \"event\", or \"bye\".");
         }
 
+        assert command.getType().equals(commandType);
         return command;
     }
 }
