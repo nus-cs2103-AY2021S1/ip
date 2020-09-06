@@ -3,7 +3,7 @@ package duke;
 public class EmptyDeadLineException extends Exception {
 
     private static final long serialVersionUID = 1L;
-    private final static String errorMessage = "OOPS!!! The description of a deadline cannot be empty.";
+    private static final String errorMessage = "OOPS!!! The description of a deadline cannot be empty.";
 
     /**
      * EmptyDeadLineException constructor

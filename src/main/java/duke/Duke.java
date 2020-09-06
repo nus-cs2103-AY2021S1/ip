@@ -11,7 +11,6 @@ public class Duke {
     /**
      * Duke constructor
      *
-     *
      */
     public Duke() {
         storage = new Storage("src/main/data.txt");
@@ -50,8 +49,13 @@ public class Duke {
         return op;
     }
 
+    /**
+     * Show welcome message to users
+     *
+     * @return a welcome message when people start the GUI
+     */
     public String welcomeMessage() {
-        return  "Hello, I'm DukeQ :) \n" + "I am very happy to serve you! \n"
+        return  "Hello, I'm DukeQ:) \n" + "I am very happy to serve you! \n"
                 + "The valid command formats are as follows and the case is sensitive. \n"
                 + "\n"
                 + "todo then your instructions e.g. todo read book\n"
