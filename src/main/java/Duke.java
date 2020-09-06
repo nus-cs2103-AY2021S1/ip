@@ -42,8 +42,6 @@ public class Duke {
                 // Save tasks before terminating program
                 this.storage.saveTasks(this.taskList.tasks);
                 return this.ui.goodbye();
-            } else if (response == null) {
-
             }
         } catch (DukeException ex) {
             response = ex.getMessage();
