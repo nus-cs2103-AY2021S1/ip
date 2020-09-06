@@ -46,6 +46,8 @@ public class Storage {
             }
         }
 
+        assert dataFolder != null : "Folder not found!";
+
         java.nio.file.Path fileLocation = java.nio.file.Paths
                 .get(dataFolder.toString(),file);
 
@@ -58,7 +60,7 @@ public class Storage {
                 throw new FolderErrorException();
             }
         }
-
+        assert fileLocation != null : "file not found!";
         this.data = new File(fileLocation.toString());
     }
 
@@ -105,6 +107,7 @@ public class Storage {
                 if (component.length > 4) {
                     throw new DukeException("Corrupted data detected! Loading terminated!");
                 }
+                assert component.length <= 4: "Corrupted file data";
                 switch (component[0].trim()) {
                     case "T": {
                         Task current = new ToDo(component[2]);
@@ -124,7 +127,6 @@ public class Storage {
                         list.add(current);
                         break;
                     }
-
                     case "E": {
                         Event current = new Event(component[2].trim(), component[3].trim());
                         int state = Integer.parseInt(component[1].trim());
