@@ -13,6 +13,7 @@ import duke.commands.CommandAddToDo;
 import duke.commands.CommandDelete;
 import duke.commands.CommandDone;
 import duke.commands.CommandList;
+import duke.commands.CommandFind;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -26,7 +27,7 @@ import java.util.regex.Pattern;
  */
 public class Parser {
 
-    private static final Pattern COMMAND_INPUT_FORMAT = Pattern.compile("(?<command>^[ltde]\\w+)" + "\\s?"
+    private static final Pattern COMMAND_INPUT_FORMAT = Pattern.compile("(?<command>^[ltdef]\\w+)" + "\\s?"
             + "(?<arguments>.*)");
 
     private TaskList taskList;
@@ -65,6 +66,8 @@ public class Parser {
             return new CommandDone(taskList, ui, parseDoneOrDelete(arguments));
         case CommandDelete.COMMAND_STRING:
             return new CommandDelete(taskList, ui, parseDoneOrDelete(arguments));
+        case CommandFind.COMMAND_STRING:
+            return new CommandFind(taskList, ui, arguments);
         case CommandAddToDo.COMMAND_STRING:
             return new CommandAddToDo(taskList, ui, new TaskToDo(arguments));
         case CommandAddEvent.COMMAND_STRING:
