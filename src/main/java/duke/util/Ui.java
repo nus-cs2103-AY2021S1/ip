@@ -30,6 +30,8 @@ public class Ui {
      * @param message message to be appended to the buffer.
      */
     private void println(String... message) {
+        assert(message != null);
+
         for (int i = 0; i < message.length; i++) {
             outputBuffer += message[i] + "\n";
         }
@@ -103,6 +105,8 @@ public class Ui {
      * @param size The size of the task list after adding.
      */
     public void showAddTask(Task task, int size) {
+        assert(task != null);
+
         println(
                 "Got it. I've added this task: ", task.toString(),
                 "Now you have " + size + " tasks in the list."
@@ -116,6 +120,8 @@ public class Ui {
      * @param size The size of the task list after removal.
      */
     public void showRemoveTask(Task task, int size) {
+        assert(task != null);
+
         println( "Noted. I've removed this task: ", task.toString(),
                 "Now you have " + size + " tasks in the list." );
     }
@@ -126,6 +132,8 @@ public class Ui {
      * @param task The task that was marked completed.
      */
     public void showDone(Task task) {
+        assert(task != null);
+
         println("Nice! I've marked this task as done: ", task.toString());
     }
 
@@ -135,6 +143,8 @@ public class Ui {
      * @param de The exception encountered during execution.
      */
     public void printError(DukeException de) {
+        assert(de != null);
+
         println(de.getMessage());
     }
 
@@ -146,6 +156,8 @@ public class Ui {
      * @param tasks Task selected based on the searched keyword.
      */
     public void printSearchResult(String searchTerm, List<Integer> idxList, List<Task> tasks) {
+        assert(idxList.size() == tasks.size());
+
         if (tasks.size() == 0) {
             println("I can't find any task named \"" + searchTerm + "\" in the list...");
             return;

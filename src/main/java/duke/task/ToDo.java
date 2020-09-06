@@ -23,6 +23,7 @@ public class ToDo extends Task {
      * {@inheritDoc}
      */
     public String getSaveToFileString() {
+        assert(!this.desc.isBlank());
         return "T`" + super.getSaveToFileString();
     }
 
