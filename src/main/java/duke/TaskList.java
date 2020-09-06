@@ -1,6 +1,5 @@
 package duke;
 
-import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -8,6 +7,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Objects;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 import duke.exception.DeadlineInvalidDate;
@@ -90,11 +90,8 @@ public class TaskList {
 
         StringBuilder str = new StringBuilder();
 
-        int i = 1;
-        for (Task todo : tasks) {
-            str.append(String.format("%d. %s\n", i, todo));
-            i++;
-        }
+        IntStream.range(0, tasks.size()).forEach(
+            i -> str.append(String.format("%d. %s\n", i + 1, tasks.get(i))));
 
         return str.toString().trim();
     }
@@ -109,28 +106,20 @@ public class TaskList {
 
         assert date != null;
 
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("dd MMM y");
         StringBuilder str = new StringBuilder();
 
-        int i = 0;
-        for (Task task : tasks) {
-            if (task.getDate().equals(date)) {
-                if (i == 0) {
-                    str.append("Here's your list on ");
-                    str.append(date.format(DateTimeFormatter.ofPattern("dd MMM y")));
-                    str.append(":\n");
-                }
+        IntStream.range(0, tasks.size())
+            .filter(i -> tasks.get(i).getDate().equals(date))
+            .forEach(i -> str.append(String.format("%d. %s\n", i + 1, tasks.get(i))));
 
-                str.append(String.format("%d. %s\n", (i + 1), task));
-                i++;
-            }
-        }
-
-        if (i == 0 || tasks.size() == 0) {
+        if (str.length() == 0) {
             return "You have nothing to do on "
-                + date.format(DateTimeFormatter.ofPattern("dd MMM y."));
+                + date.format(dateFormat) + ".";
         }
 
-        return str.toString().trim();
+        return String.format("Here's your list on %s:\n", date.format(dateFormat))
+            + str.toString().trim();
     }
 
     /**
@@ -287,9 +276,7 @@ public class TaskList {
             StringBuilder str = new StringBuilder();
             str.append("Noted. I've removed these tasks:\n");
 
-            for (Task deleted: deletedTasks) {
-                str.append(String.format("%s\n", deleted));
-            }
+            deletedTasks.forEach(deleted -> str.append(String.format("%s\n", deleted)));
 
             return str.toString().trim();
 

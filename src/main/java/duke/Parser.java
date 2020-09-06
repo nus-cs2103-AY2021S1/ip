@@ -44,42 +44,44 @@ public class Parser {
         fullCommand = fullCommand.trim();
 
         // Determines the case for each command
-        switch (getFirstWord(fullCommand)) {
-            case "todo":
-                return new ToDoCommand(getTask(fullCommand, "todo"));
-                // Fallthrough
+        String firstWord = getFirstWord(fullCommand);
 
-            case "event":
-                return new EventCommand(getTask(fullCommand, "event"));
-                // Fallthrough
+        switch (firstWord) {
+        case "todo":
+            return new ToDoCommand(getTask(fullCommand, firstWord));
+            // Fallthrough
 
-            case "deadline":
-                return new DeadlineCommand(getTask(fullCommand, "deadline"));
-                // Fallthrough
+        case "event":
+            return new EventCommand(getTask(fullCommand, firstWord));
+            // Fallthrough
 
-            case "list":
-                return new ListCommand(fullCommand);
-                // Fallthrough
+        case "deadline":
+            return new DeadlineCommand(getTask(fullCommand, firstWord));
+            // Fallthrough
 
-            case "find":
-                return new FindCommand(getKeywords(fullCommand));
-                // Fallthrough
+        case "list":
+            return new ListCommand(fullCommand);
+            // Fallthrough
 
-            case "done":
-                return new DoneCommand(getTaskNumbers(fullCommand, "done"));
-                // Fallthrough
+        case "find":
+            return new FindCommand(getKeywords(fullCommand));
+            // Fallthrough
 
-            case "delete":
-                return new DeleteCommand(getTaskNumbers(fullCommand, "delete"));
-                // Fallthrough
+        case "done":
+            return new DoneCommand(getTaskNumbers(fullCommand, firstWord));
+            // Fallthrough
 
-            case "bye":
-                return new ExitCommand();
-                // Fallthrough
+        case "delete":
+            return new DeleteCommand(getTaskNumbers(fullCommand, firstWord));
+            // Fallthrough
 
-            default:
-                throw new UnrecognizedTaskException();
-                // Fallthrough
+        case "bye":
+            return new ExitCommand();
+            // Fallthrough
+
+        default:
+            throw new UnrecognizedTaskException();
+            // Fallthrough
         }
     }
 
@@ -93,7 +95,7 @@ public class Parser {
      */
     private static String getTask(String fullCommand, String firstWord) throws EmptyTaskException {
         try {
-            return fullCommand.substring(firstWord.length() + 1).trim(); // take whitespace into account
+            return fullCommand.substring((firstWord + " ").length()).trim();
         } catch (StringIndexOutOfBoundsException e) {
             throw new EmptyTaskException();
         }

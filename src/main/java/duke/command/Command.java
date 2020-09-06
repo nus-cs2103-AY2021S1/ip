@@ -8,9 +8,7 @@ import duke.exception.DukeException;
 /** A command for the Duke bot to execute. */
 public abstract class Command {
 
-    /**
-     * The type of command.
-     */
+    /** The type of command. */
     protected boolean isExit;
 
     /**

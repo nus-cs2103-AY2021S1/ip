@@ -6,14 +6,14 @@ import java.time.LocalDateTime;
 /** A task of type Event. */
 public class Event extends Task {
 
+    /** Save format for empty endDate. */
+    public static final String EMPTY_END_DATE = "XXXXXXXXXXXXXXXXXXX";
+
     /** The starting date time of the event. */
     private final LocalDateTime startDate;
 
     /** The end date time of the event. */
     private final LocalDateTime endDate;
-
-    /** Save format for empty endDate. */
-    public static final String EMPTY_END_DATE = "XXXXXXXXXXXXXXXXXXX";
 
     /**
      * Constructs an Event.

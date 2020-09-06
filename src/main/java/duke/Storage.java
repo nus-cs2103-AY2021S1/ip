@@ -85,7 +85,7 @@ public class Storage {
 
             for (String task : Files.readAllLines(dukeFile)) {
                 Task t = readTask(task);
-                assert t != null: "File read error.";
+                assert t != null : "File read error.";
                 taskList.add(readTask(task));
             }
 
@@ -114,54 +114,54 @@ public class Storage {
         boolean isDone = task.charAt(1) == '1';
 
         switch (taskCode) {
-            case 'T':
-                ToDo toDo = new ToDo(task.substring(3).trim());
+        case 'T':
+            ToDo toDo = new ToDo(task.substring(3).trim());
 
-                if (isDone) {
-                    toDo = toDo.markDone();
-                }
+            if (isDone) {
+                toDo = toDo.markDone();
+            }
 
-                return toDo;
-                // Fallthrough
+            return toDo;
+            // Fallthrough
 
-            case 'D':
-                String endDateString = task.substring(task.length() - isoFormat.length());
-                Deadline deadline = new Deadline(task.substring(3, task.length() - isoFormat.length()).trim(),
-                    LocalDateTime.parse(endDateString));
+        case 'D':
+            String endDateString = task.substring(task.length() - isoFormat.length());
+            Deadline deadline = new Deadline(task.substring(3, task.length() - isoFormat.length()).trim(),
+                LocalDateTime.parse(endDateString));
 
-                if (isDone) {
-                    deadline = deadline.markDone();
-                }
+            if (isDone) {
+                deadline = deadline.markDone();
+            }
 
-                return deadline;
-                // Fallthrough
+            return deadline;
+            // Fallthrough
 
-            case 'E':
+        case 'E':
 
-                String taskText = task.substring(3,
-                    task.length() - (eventDateFormat + " ").length()).trim();
-                String startDateString = task.substring(
-                    task.length() - eventDateFormat.length(),
-                    task.length() - (isoFormat + " to ").length());
-                endDateString = task.substring(task.length() - isoFormat.length());
+            String taskText = task.substring(3,
+                task.length() - (eventDateFormat + " ").length()).trim();
+            String startDateString = task.substring(
+                task.length() - eventDateFormat.length(),
+                task.length() - (isoFormat + " to ").length());
+            endDateString = task.substring(task.length() - isoFormat.length());
 
-                boolean hasEndDate = !endDateString.equals(Event.EMPTY_END_DATE);
+            boolean hasEndDate = !endDateString.equals(Event.EMPTY_END_DATE);
 
-                Event event = new Event(taskText, LocalDateTime.parse(startDateString),
-                    hasEndDate
-                        ? LocalDateTime.parse(endDateString)
-                        : null);
+            Event event = new Event(taskText, LocalDateTime.parse(startDateString),
+                hasEndDate
+                    ? LocalDateTime.parse(endDateString)
+                    : null);
 
-                if (isDone) {
-                    event = event.markDone();
-                }
+            if (isDone) {
+                event = event.markDone();
+            }
 
-                return event;
-                // Fallthrough
+            return event;
+            // Fallthrough
 
-            default:
-                return null;
-                // Fallthrough
+        default:
+            return null;
+            // Fallthrough
         }
     }
 }

@@ -6,12 +6,6 @@ import java.time.format.DateTimeFormatter;
 /** The task to be put on the list. */
 public abstract class Task {
 
-    /** The task description. */
-    protected final String task;
-
-    /** The completion status. */
-    protected final boolean isDone;
-
     /** Save Date Format. */
     protected static final DateTimeFormatter SAVE_DATE_FORMAT = DateTimeFormatter.ofPattern("y-MM-dd");
 
@@ -23,6 +17,12 @@ public abstract class Task {
 
     /** Print Time Format. */
     protected static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("h:mm a");
+
+    /** The task description. */
+    protected final String task;
+
+    /** The completion status. */
+    protected final boolean isDone;
 
     /**
      * Constructs a Task.
