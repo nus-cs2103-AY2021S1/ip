@@ -5,6 +5,6 @@ public class MissingTaskIndexException extends DukeException {
 
     /** Constructs a new MissingTaskIndexException object with the specified error message. */
     public MissingTaskIndexException() {
-        super("Harh? There isn't a task index inputted");
+        super("Harh? There isn't a task index inputted.");
     }
 }
