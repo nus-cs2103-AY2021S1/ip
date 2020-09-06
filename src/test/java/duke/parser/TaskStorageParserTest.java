@@ -41,7 +41,7 @@ public class TaskStorageParserTest {
     @MethodSource("getArguments")
     public void convertStorageToTask_correctSymbol_success(
             Task actual, String storage) throws DukeParseException {
-        Task converted = TASK_STORAGE_PARSER.convertStorageToTask(storage);
+        Task converted = TASK_STORAGE_PARSER.parseStorageString(storage);
         assertEquals(converted, actual);
     }
 
@@ -58,7 +58,7 @@ public class TaskStorageParserTest {
     @MethodSource("getConvertStorageToTaskExceptionArguments")
     public void convertStorageToTask_wrongSymbol_exceptionThrown(String storageString, String task) {
         try {
-            TASK_STORAGE_PARSER.convertStorageToTask(storageString);
+            TASK_STORAGE_PARSER.parseStorageString(storageString);
         } catch (DukeParseException exception) {
             String err = String.format(
                     "It appears this %s: '%s' is corrupted.", task, storageString);

@@ -53,8 +53,8 @@ public class StorageManager {
      * @return a <code>String</code> containing the status of loading.
      */
     public String loadStores(TaskList taskList, ExpenseList expenseList) {
-        String taskResult = this.taskStorage.loadTaskList(taskList);
-        String expenseResult = this.expenseStorage.loadExpenseList(expenseList);
+        String taskResult = this.taskStorage.loadList(taskList);
+        String expenseResult = this.expenseStorage.loadList(expenseList);
         return taskResult + "\n" + expenseResult;
     }
 
@@ -66,7 +66,7 @@ public class StorageManager {
      */
     public void saveStores(
             TaskList taskList, ExpenseList expenseList) throws DukeOperationException {
-        this.taskStorage.saveToDisk(taskList);
-        this.expenseStorage.saveToDisk(expenseList);
+        taskStorage.saveToDisk(taskList);
+        expenseStorage.saveToDisk(expenseList);
     }
 }

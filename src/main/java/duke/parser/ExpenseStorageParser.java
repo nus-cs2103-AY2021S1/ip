@@ -15,7 +15,7 @@ import duke.utils.Utils;
  * This class also parses <code>Expense</code> into <code>Strings</code>
  * that will be saved into the storage text file.
  */
-public class ExpenseStorageParser {
+public class ExpenseStorageParser implements StorageParser<Expense> {
     private static final int DESCRIPTION_INDEX = 1;
     private static final int VALUE_INDEX = 2;
     private static final int DATE_INDEX = 3;
@@ -58,16 +58,17 @@ public class ExpenseStorageParser {
     /**
      * Parses storage <code>Strings</code> into <code>Expenses</code>.
      *
-     * @param storageExpenseString the <code>String</code> to be parsed.
+     * @param storageString the <code>String</code> to be parsed.
      * @return the parsed <code>Expense</code>.
      * @throws DukeParseException if there are any errors in parsing.
      */
-    public Expense convertStorageToExpense(String storageExpenseString) throws DukeParseException {
-        String[] storageExpense = storageExpenseString.split(Storable.DELIMITER);
+    @Override
+    public Expense parseStorageString(String storageString) throws DukeParseException {
+        String[] storageExpense = storageString.split(Storable.DELIMITER);
         assert storageExpense.length > 0 : "There is an error in the splitting of the storageExpenseString";
 
         if (storageExpense.length < STORAGE_LENGTH) {
-            String msg = String.format("It appears this event: '%s' is corrupted.", storageExpenseString);
+            String msg = String.format("It appears this event: '%s' is corrupted.", storageString);
             throw new DukeParseException(msg);
         }
 
@@ -84,7 +85,7 @@ public class ExpenseStorageParser {
         case Receivable.RECEIVABLE_SYMBOL:
             return new Receivable(description, value, date);
         default:
-            String msg = String.format("It appears this line: '%s' is corrupted.", storageExpenseString);
+            String msg = String.format("It appears this line: '%s' is corrupted.", storageString);
             throw new DukeParseException(msg);
         }
     }

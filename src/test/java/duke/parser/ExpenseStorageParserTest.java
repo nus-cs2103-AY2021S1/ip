@@ -37,7 +37,7 @@ public class ExpenseStorageParserTest {
     @MethodSource("getArguments")
     public void convertStorageToExpense_correctSymbol_success(
             Expense actual, String storage) throws DukeParseException {
-        Expense converted = EXPENSE_STORAGE_PARSER.convertStorageToExpense(storage);
+        Expense converted = EXPENSE_STORAGE_PARSER.parseStorageString(storage);
         assertEquals(converted, actual);
     }
 
@@ -54,7 +54,7 @@ public class ExpenseStorageParserTest {
     @MethodSource("getConvertStorageToExpenseExceptionArguments")
     public void convertStorageToExpense_wrongSymbol_exceptionThrown(String storageString) {
         try {
-            EXPENSE_STORAGE_PARSER.convertStorageToExpense(storageString);
+            EXPENSE_STORAGE_PARSER.parseStorageString(storageString);
         } catch (DukeParseException exception) {
             assertNotEquals(exception.getMessage(), "");
         }
