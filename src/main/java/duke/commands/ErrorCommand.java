@@ -4,17 +4,27 @@ import duke.Ui;
 import duke.tasks.TaskManager;
 
 /**
- * <code>duke.commands.ErrorCommand</code> inherits from the base class <code>duke.commands.Command</code>
+ * <code>ErrorCommand</code> inherits from the base class <code>Command</code>
  * and will handle the situation when the user gives an invalid command.
  */
 public class ErrorCommand extends Command {
 
+    /**
+     * Calls the ui class to output an error message.
+     * @param input the user input
+     * @return <code>true</code>.
+     */
     @Override
     public boolean execute(String input) {
         // TODO: refactor this to the ui class
         return true;
     }
 
+    /**
+     * Initialises the response with an error message.
+     * @param tm the task manager.
+     * @param ui the ui.
+     */
     @Override
     public void init(TaskManager tm, Ui ui) {
         setResponse("Oops, you gave an invalid command!");
