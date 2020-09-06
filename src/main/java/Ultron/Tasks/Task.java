@@ -17,13 +17,8 @@ public abstract class Task {
      *
      * @param description Description of the Task.
      */
-    //Constructor for Task
     public Task(final String description) {
-
-        //Store the message
         this.message = description;
-
-        //Mark the current task as not done
         this.markUnDone();
     }
 
@@ -33,8 +28,6 @@ public abstract class Task {
      * @return Message for the task.
      */
     public String getMessage() {
-
-        //Return the message
         return this.message;
     }
 
@@ -44,8 +37,6 @@ public abstract class Task {
      * @return boolean denoting if the task is completed.
      */
     public boolean isDone() {
-
-        //returns true if the task is done
         return this.isCompleted;
     }
 
@@ -67,20 +58,14 @@ public abstract class Task {
      * Mark the task as completed.
      */
     public void markDone() {
-
-
-        //Mark the task as complete
-        this.isCompleted = true; //mark the task as done
-
+        this.isCompleted = true;
     }
 
     /**
      * Mark the task as not completed.
      */
     public void markUnDone() {
-
-        //Mark the test as not done
-        this.isCompleted = false; //mark the task as undone
+        this.isCompleted = false;
     }
 
     /**
@@ -89,9 +74,7 @@ public abstract class Task {
      * @return Status icon as a String.
      */
     public String getStatusIcon() {
-
-        //Get the statusIcon based on state
-        return (this.isDone() ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (this.isDone() ? "\u2713" : "\u2718"); //returns tick or X symbols
     }
 
     /**
@@ -101,8 +84,6 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-
-        //Convert the object to string
         return String.format("[%s] %s",
             this.getStatusIcon(),
             this.getMessage());
