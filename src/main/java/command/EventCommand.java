@@ -59,6 +59,9 @@ public class EventCommand extends Command {
             DukeDateTimeParserException {
         try {
             Map<String, String> taskDetails = Parser.findDescriptionParser(this.command);
+
+            assert !taskDetails.isEmpty() : "TaskDetails is empty";
+
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             EventTask eventTask = new EventTask(taskDetails.get("taskDescription"),
                     LocalDateTime.parse(taskDetails.get("taskTime"), formatter));

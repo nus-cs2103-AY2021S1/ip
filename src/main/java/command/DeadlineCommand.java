@@ -57,6 +57,9 @@ public class DeadlineCommand extends Command {
         try {
             Map<String, String> taskDetails = Parser.findDescriptionParser(this.command);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+
+            assert !taskDetails.isEmpty() : "TaskDetails is empty";
+
             DeadlineTask deadlineTask = new DeadlineTask(taskDetails.get("taskDescription"),
                     LocalDateTime.parse(taskDetails.get("taskTime"), formatter));
 

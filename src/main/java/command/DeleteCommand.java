@@ -2,6 +2,7 @@ package command;
 
 import java.io.IOException;
 
+import exception.DukeInvalidIndexException;
 import exception.NoIndexException;
 import parser.Parser;
 import storage.Storage;
@@ -47,8 +48,13 @@ public class DeleteCommand extends Command {
      * the external file.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, NoIndexException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, NoIndexException, DukeInvalidIndexException {
         int index = Parser.findIndexParser(this.command);
+
+        if(index <= 0 || index > tasks.size()) {
+            throw new DukeInvalidIndexException();
+        }
+
 
         Task removedTask = tasks.remove(index - 1);
 

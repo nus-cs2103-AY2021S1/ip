@@ -1,5 +1,6 @@
 package ui;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.Collections;
 
@@ -15,6 +16,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 
+//Solution below adapted from https://se-education.org/guides/tutorials/javaFxPart4.html
 
 /**
  * An example of a custom control using FXML.
@@ -36,7 +38,7 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        //this.setBackground(new Background(Color.RED));
         Circle clip = new Circle(50.0, 50.0, 50.0);
         dialog.setText(text);
         displayPicture.setImage(img);

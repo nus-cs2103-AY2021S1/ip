@@ -44,11 +44,15 @@ public class Storage {
         String[] strings = Parser.fileParser(filepath);
         String parentPath = strings[0];
         String childPath = strings[1];
+
+        File file = new File(parentPath);
+        if(!file.exists()) {
+            file.mkdir();
+        }
+
         this.file = new File(parentPath, childPath);
 
-
         if (!this.file.exists()) {
-            this.file.mkdir();
             this.file.createNewFile();
         }
 
