@@ -12,7 +12,7 @@ import duke.ui.Ui;
 /**
  * Handles 'bye' command input by user.
  */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
 
     /**
      * Constructor for ExitCommand class.

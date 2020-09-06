@@ -9,9 +9,9 @@ import duke.model.task.Task;
  * Deals with user interactions.
  */
 public class Ui {
-    private final String WELCOME = "Hello. I am Claude! What may I do for you today?";
-    private final String GOODBYE = "Goodbye! Hope to see you again soon!";
-    private final String LINE = "______________________________";
+    static final String WELCOME = "Hello. I am Claude! What may I do for you today?";
+    static final String GOODBYE = "Goodbye! Hope to see you again soon!";
+    static final String LINE = "______________________________";
     private Scanner sc;
 
     public Ui() {
@@ -24,7 +24,7 @@ public class Ui {
      * @return String to be processed by parser.
      */
     public String readCommand() {
-        if (sc.hasNext()){
+        if (sc.hasNext()) {
             return sc.nextLine();
         } else {
             return "";
@@ -64,9 +64,9 @@ public class Ui {
      * Prints a given ArrayList of Tasks.
      * @param taskList ArrayList of Tasks to be printed.
      */
-    public void showTaskList(ArrayList<Task> taskList){
+    public void showTaskList(ArrayList<Task> taskList) {
         String s = "";
-        for (int i= 0; i < taskList.size(); i++) {
+        for (int i = 0; i < taskList.size(); i++) {
             s = s = s + (i + 1) + ". " + taskList.get(i) + "\n";
         }
         showDetails(s);

@@ -34,7 +34,7 @@ public class TaskManager {
      *
      * @param task Task to be added.
      */
-    public void addTask(Task task){
+    public void addTask(Task task) {
         taskList.add(task);
     }
 

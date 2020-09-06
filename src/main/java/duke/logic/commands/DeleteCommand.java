@@ -9,7 +9,7 @@ import duke.ui.Ui;
 /**
  * Handles 'delete' commands input by user.
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
 
     /**
      * Constructor for DeleteCommand class

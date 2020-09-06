@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
+import duke.exceptions.DukeException;
 import duke.model.task.Deadline;
 import duke.model.task.Event;
 import duke.model.task.Task;
@@ -24,7 +25,7 @@ public class Storage {
      *
      * @param saveFilePath Location of save file.
      */
-    public Storage(String saveFilePath){
+    public Storage(String saveFilePath) {
         this.saveFilePath = saveFilePath;
     }
 
@@ -53,7 +54,7 @@ public class Storage {
      * @return ArrayList of Tasks.
      * @throws IOException If unable to access or find the save file.
      */
-    public ArrayList<Task> load() throws IOException {
+    public ArrayList<Task> load() throws IOException, DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(saveFilePath));
         String line;
@@ -74,6 +75,9 @@ public class Storage {
                 LocalDate eventDate = LocalDate.parse(taskLine[3]);
                 Event event = new Event(taskLine[2], Boolean.parseBoolean(taskLine[1]), eventDate);
                 taskList.add(event);
+                break;
+            default:
+                throw new DukeException("Error parsing save file.");
             }
         }
         return taskList;
