@@ -14,6 +14,14 @@ public class FindCommand extends Command {
         this.input = input;
     }
 
+    /**
+     * Executes the command.
+     *
+     * @param tasks The entire list of tasks.
+     * @param ui Ui object to deal with user interaction.
+     * @param storage Storage object to deal with loading tasks from the file and saving tasks in the file.
+     * @throws DukeException when the input is not valid.
+     */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (input.length() <= 5) {
@@ -21,6 +29,8 @@ public class FindCommand extends Command {
         }
 
         String[] splitStr = input.split(" ");
+
+        assert splitStr.length == 2 : "Input for Find does not follow the correct format";
 
         ArrayList<Task> tasksWithWord = tasks.find(splitStr[1]);
 

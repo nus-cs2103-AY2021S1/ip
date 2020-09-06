@@ -28,6 +28,8 @@ public class DeleteCommand extends Command {
             throw new DukeException("☹ OOPS!!! I don't know which task to delete.");
         }
 
+        assert splitStr.length == 2 : "Input for Delete does not follow the correct format";
+
         int taskIndex = Integer.parseInt(splitStr[1]) - 1;
         Task task = tasks.getTask(taskIndex);
         tasks.removeTask(taskIndex);

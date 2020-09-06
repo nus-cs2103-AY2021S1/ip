@@ -9,7 +9,7 @@ public class Ui {
     }
 
     /**
-     * Show the welcome message.
+     * Shows the welcome message.
      */
     public void showWelcome() {
         System.out.println("    ___________________________________________________________");
@@ -18,7 +18,7 @@ public class Ui {
     }
 
     /**
-     * Read the next user input.
+     * Reads the next user input.
      *
      * @return The next user input.
      */
@@ -27,21 +27,21 @@ public class Ui {
     }
 
     /**
-     * Show the divider line.
+     * Shows the divider line.
      */
     public void showLine() {
         System.out.println("    ___________________________________________________________");
     }
 
     /**
-     * Show the loading error message.
+     * Shows the loading error message.
      */
     public void showLoadingError() {
         System.out.println("Error loading file");
     }
 
     /**
-     * Show the error message.
+     * Shows the error message.
      */
     public void showError(String errorMessage) {
         System.out.println(errorMessage);
