@@ -64,4 +64,18 @@ public class TaskList {
         tasks.remove(n-1);
         ui.count(tasks);
     }
+
+    /**
+     * Finds tasks that matches the given keyword.
+     * @param keyword The given keyword.
+     */
+    public void find(String keyword) {
+        ArrayList<Task> results = new ArrayList<Task>();
+        for (Task task: tasks) {
+            if (task.getCommand().contains(keyword)) {
+                results.add(task);
+            }
+        }
+        ui.findKeyword(results);
+    }
 }

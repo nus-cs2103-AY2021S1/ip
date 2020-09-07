@@ -62,6 +62,9 @@ public class Parser {
         } else if (command.split(" ")[0].equals("delete")) {
             tasks.delete(Integer.parseInt(command.split(" ")[1]));
             storage.record(tasks.getTasks());
+        } else if (command.split(" ")[0].equals("find")) {
+            String keyword = command.replace("find ", "");
+            tasks.find(keyword);
         } else if (command.split(" ")[0].equals("todo")) {
             String taskcommand = command.replace("todo", "");
             if (!taskcommand.equals("")) {
