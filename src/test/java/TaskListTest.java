@@ -1,7 +1,7 @@
 import duke.TaskList;
 import duke.task.Deadline;
 import duke.task.Task;
-import duke.task.ToDo;
+import duke.task.Todo;
 
 
 import java.time.LocalDateTime;
@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
  * Tests the methods and exceptions for the TaskList class.
  */
 public class TaskListTest {
-    Task TODO = new ToDo("Todo Testing", false);
+    Task TODO = new Todo("Todo Testing", false);
     Task DEADLINE = new Deadline("Deadline Testing", false,
             LocalDateTime.of(2020, 8, 30, 16, 0 ));
     Task EVENT  = new Deadline("Event Testing", false,

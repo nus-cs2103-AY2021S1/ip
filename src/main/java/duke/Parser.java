@@ -24,7 +24,7 @@ import duke.exceptions.DukeInvalidTaskException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
-import duke.task.ToDo;
+import duke.task.Todo;
 
 
 
@@ -172,7 +172,7 @@ public class Parser {
         if (commandLine.equals("todo")) {
             throw new DukeEmptyToDoException();
         }
-        ToDo task = new ToDo(commandLine.substring(5), false);
+        Todo task = new Todo(commandLine.substring(5), false);
         return new AddCommand(task);
     }
 
