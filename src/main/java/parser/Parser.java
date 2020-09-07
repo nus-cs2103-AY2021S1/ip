@@ -16,12 +16,6 @@ import exception.TrackingException;
 
 import storage.Storage;
 
-
-
-
-
-
-
 /**
  * Parser for Duke class.
  * Parses the various commands and makes necessary changes to the TaskList and Storage.
@@ -31,33 +25,38 @@ public class Parser {
     private Storage storage;
     private boolean isExit = false;
     public Parser(TaskList tasks, Storage storage) {
-        this.tasks = tasks;
+        tasks = tasks;
         this.storage = storage;
-
     }
 
     /**
      * Parses the input, and makes necessary changes to tasks and storage.
+     *
      * @param fullInput Command from the user.
      */
 
     public String parse(String fullInput) {
         String result = "";
         try {
-            if (fullInput.equals("list")) {
+
+            if (fullInput.equals("event") || fullInput.equals("deadline") || fullInput.equals("todo")
+                || fullInput.equals("done") || fullInput.equals("find")) {
+
+                throw new DescriptionException(fullInput);
+            } else if (fullInput.equals("list")) {
                 //Lists the tasks in the task list.
-                result = this.tasks.list();
+                result = tasks.list();
             } else if (fullInput.startsWith("delete ")) {
                 //Deletes a task in the task list.
                 int num = Integer.parseInt(fullInput.substring(7));
-                result = this.tasks.delete(num);
+                result = tasks.delete(num);
             } else if (fullInput.startsWith("done ")) {
                 //Marks a task as done in the task list.
                 int num = Integer.parseInt(fullInput.substring(5));
-                result = this.tasks.doTask(num);
+                result = tasks.doTask(num);
             } else if (fullInput.equals("bye")) {
                 //Saves the task list into the hard drive and terminates the program.
-                this.storage.save(this.tasks);
+                this.storage.save(tasks);
                 this.isExit = true;
                 result = "Bye. Hope to see you again soon! Bahahahaha!\n"
                     + "____________________________________________________________\n";
@@ -66,7 +65,7 @@ public class Parser {
                 if (fullInput.length() <= 5) {
                     throw new DescriptionException("find");
                 }
-                result = this.tasks.find(fullInput.substring(5));
+                result = tasks.find(fullInput.substring(5));
 
             } else if (fullInput.startsWith("todo ")) {
                 if (fullInput.length() <= 5) {
@@ -76,7 +75,7 @@ public class Parser {
                 String description = fullInput.substring(5);
                 Task newTask = new ToDo(description);
                 //Adds task into the task list.
-                result = this.tasks.add(newTask);
+                result = tasks.add(newTask);
 
             } else if (fullInput.startsWith("deadline ")) {
 
@@ -113,7 +112,7 @@ public class Parser {
                 Task task = new Deadline(description, by);
 
                 //Adds task into the task list.
-                result = this.tasks.add(task);
+                result = tasks.add(task);
 
             } else if (fullInput.startsWith("event ")) {
                 //Check for validity of input.
@@ -149,12 +148,8 @@ public class Parser {
                 Task task = new Events(description, at);
 
                 //Adds task into task list.
-                result = this.tasks.add(task);
+                result = tasks.add(task);
 
-            } else if (fullInput.equals("event") || fullInput.equals("deadline") || fullInput.equals("todo")
-                || fullInput.equals("done") || fullInput.equals("find")) {
-
-                throw new DescriptionException(fullInput);
             } else {
                 //Checks for invalid input where command is unknown.
                 throw new CommandException(fullInput);

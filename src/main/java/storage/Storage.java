@@ -35,6 +35,7 @@ public class Storage {
 
     /**
      * Loads the task list from the hard drive.
+     *
      * @throws IOException Exception when the file is not able to be created successfully.
      */
     private void initTaskList() throws IOException {
@@ -85,7 +86,8 @@ public class Storage {
     }
 
     /**
-     * Loads the task list from the file path
+     * Loads the task list from the file path.
+     *
      * @return task list from the file path, in array list.
      */
 
@@ -100,6 +102,7 @@ public class Storage {
 
     /**
      * Saves the task list to the hard drive.
+     *
      * @param tasks TaskList to be saved.
      */
 

@@ -28,6 +28,7 @@ public class Ui {
 
     /**
      * Reads the command from the user.
+     *
      * @return User input
      */
 
@@ -37,7 +38,7 @@ public class Ui {
     }
 
     /**
-     * Displays message when program is closed
+     * Displays message when program is closed.
      */
 
     public String displayBye() {

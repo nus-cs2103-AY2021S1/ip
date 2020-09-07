@@ -5,7 +5,6 @@ import java.util.ArrayList;
 /**
  * Encapsulates TaskList that supports various methods
  */
-
 public class TaskList {
     private ArrayList<Task> tasks;
     public TaskList(ArrayList<Task> tasks) {
@@ -15,7 +14,6 @@ public class TaskList {
     /**
      * Prints out the current list of tasks.
      */
-
     public String list() {
         int counter = 1;
         String result = "Here are the tasks in your list: \n";
@@ -32,6 +30,7 @@ public class TaskList {
 
     /**
      * Delete the task with a specified index from the task list.
+     *
      * @param num index of task to be deleted.
      */
 
@@ -50,6 +49,7 @@ public class TaskList {
 
     /**
      * Mark the task with a specified index from the task list as done.
+     *
      * @param num Index of task to be done.
      */
 
@@ -61,6 +61,7 @@ public class TaskList {
 
     /**
      * Add a task to the task list.
+     *
      * @param task Task object to be added to the list.
      */
     public String add(Task task) {
@@ -73,6 +74,7 @@ public class TaskList {
 
     /**
      * Returns the task with specified index from the task list.
+     *
      * @param index Index of task to be returned
      * @return Task from list with specified index
      */
@@ -88,6 +90,7 @@ public class TaskList {
 
     /**
      * Returns size of task list.
+     *
      * @return size of task list.
      */
 
@@ -97,6 +100,7 @@ public class TaskList {
 
     /**
      * Finds and prints task that contains a substring in the description
+     *
      * @param substring Substring that the task is to contain.
      */
 

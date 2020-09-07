@@ -14,9 +14,10 @@ public class Task {
     }
 
     /**
-     * Returns the status icon of the task. \
+     * Returns the status icon of the task.
      * If the task is done, a tick symbol will be returned.
      * Else, a cross will be returned.
+     *
      * @return Status of task
      */
 
