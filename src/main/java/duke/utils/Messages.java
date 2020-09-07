@@ -25,6 +25,7 @@ public class Messages {
             + "The correct command is:\ncompleted";
     public static final String INVALID_OVERDUE_COMMAND = "OOPS!! Invalid Overdue Command. \n"
             + "The correct command is:\noverdue";
+    public static final String INVALID_DATE_TIME_FORMAT = "OOPS!! You have inputted an incorrect date and time format";
     public static final String MISSING_DATE_AND_TIME_FOR_DEADLINE = "OOPS!!! Missing date/time.\n"
             + "Correct command is:\ndeadline <task description> /by <datetime>";
     public static final String MISSING_DATE_AND_TIME_FOR_EVENT = "OOPS!!! Missing date/time.\n"
@@ -43,4 +44,5 @@ public class Messages {
             + "Good job on keeping up with your tasks";
     public static final String NO_TASKS_FOR_TODAY_MESSAGE = "There are no tasks for today."
             + "Go ahead and chill for the day";
+    public static final String INVALID_COMMAND_ASSERTIONS = "Invalid command has been handled earlier";
 }
