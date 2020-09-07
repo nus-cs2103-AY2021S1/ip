@@ -84,6 +84,7 @@ public class Parser {
             // Task number is input after done/delete in the whole command in string
             // Minus one to access the index in the task list
             int indexOfTask = Integer.parseInt(stringArr[1]) - 1;
+            assert indexOfTask >=0 : "The index of the task to modify is negative!";
             return handler.getTasks().get(indexOfTask);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("\u2639 Oops, " + '"' + stringArr[1] + '"'
@@ -150,10 +151,13 @@ public class Parser {
                                                    String separator) throws DukeException {
         String taskDesc = input.substring(tasktype.name().length() + 1, input.indexOf(separator) - 1);
         checkIsFieldEmpty("taskDesc", taskDesc);
+        // size of /by or /at with a space
         String atByWithSpace = "/at ";
         int lengthOfSeparator = atByWithSpace.length();
+        assert !taskDesc.isEmpty() : "The description provided is empty!";
         String time = input.substring(input.indexOf(separator) + lengthOfSeparator);
         checkIsFieldEmpty("time", time);
+        assert !time.isEmpty() : "The time provided is empty!";
         if (tasktype == Task.TaskType.DEADLINE) {
             return new Deadline(taskDesc, time);
         } else if (tasktype == Task.TaskType.EVENT) {

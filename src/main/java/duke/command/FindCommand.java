@@ -40,16 +40,13 @@ public class FindCommand extends Command {
             }
             if (!hasFoundTask) {
                 // Unable to find any matching task
-                Ui.drawTopBorder();
                 Ui.indent(1);
                 System.out.println("I couldn't find any tasks matching " + '"' + keyword + '"' + ".");
-                Ui.drawBottomBorder();
                 return;
             }
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("\u2639 Oops, the keyword to search for cannot be empty!");
         }
-        Ui.drawTopBorder();
         Ui.indent(1);
         System.out.println("I have found the matching tasks in your list: ");
         // Prints each task found
@@ -57,6 +54,5 @@ public class FindCommand extends Command {
             Ui.indent(2);
             System.out.println(t);
         }
-        Ui.drawBottomBorder();
     }
 }
