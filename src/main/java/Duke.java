@@ -255,9 +255,9 @@ public class Duke extends Application implements Initializable {
 
   /** Prints the line, e.g. ******************* */
   String printLine() {
-    String star = "*";
+    String STAR = "*";
     int n = 50;
-    String repeated = IntStream.range(0, n).mapToObj(i -> star).collect(Collectors.joining(""));
+    String repeated = IntStream.range(0, n).mapToObj(i -> STAR).collect(Collectors.joining(""));
     return repeated + "\n";
   }
 
