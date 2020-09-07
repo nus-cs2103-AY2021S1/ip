@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.LocalDate;
+
 public abstract class Task {
     private String description;
     private boolean isDone;
@@ -13,6 +15,12 @@ public abstract class Task {
         this.description = description;
         this.isDone = isDone;
     }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public abstract void setTime(LocalDate time);
 
     /**
      * @return The description of the task.

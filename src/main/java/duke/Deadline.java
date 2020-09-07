@@ -20,6 +20,11 @@ class Deadline extends Task {
     }
 
     @Override
+    public void setTime(LocalDate time) {
+        this.by = time;
+    }
+
+    @Override
     public Deadline completeTask() {
         return new Deadline(super.getDescription(), true, this.by);
     }

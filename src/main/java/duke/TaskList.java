@@ -11,7 +11,9 @@ import exception.DukeErrorException;
 import exception.InvalidDeadlineException;
 import exception.InvalidEventException;
 import exception.InvalidTodoException;
+import exception.UnknownCommandException;
 import ui.Ui;
+
 
 /**
  * Represents a {@code Tasklist} object to store tasks in memory.
@@ -151,6 +153,42 @@ public class TaskList {
         assert this.tasks != null : "The task list should not be null";
         this.tasks.set(index, this.tasks.get(index).completeTask());
         return Ui.printDone(this.tasks, index);
+    }
+
+    /**
+     * Updates a task
+     * @param ui Ui object to print user display
+     * @param str The string input containing the new description
+     */
+    public String updateTask(Ui ui, String str)
+            throws ArrayIndexOutOfBoundsException, UnknownCommandException {
+        String[] command = str.trim().split(" ", 2);
+        int index = Integer.parseInt(command[0]) - 1;
+        if (index > this.tasks.size() || index < 0) {
+            throw new ArrayIndexOutOfBoundsException();
+        }
+        String[] description = command[1].split(" ", 2);
+        String taskType = description[0];
+        String taskDetails = description[1];
+        System.out.println(taskDetails);
+        if (taskType.equals("todo")) {
+            tasks.get(index).setDescription(taskDetails);
+        } else if (taskType.equals("deadline")) {
+            description = taskDetails.split("/by");
+            String deadlineTitle = description[0].trim();
+            String deadlineTime = description[1].trim();
+            tasks.get(index).setDescription(deadlineTitle);
+            tasks.get(index).setTime(LocalDate.parse(deadlineTime));
+        } else if (taskType.equals("event")) {
+            description = taskDetails.split("/at");
+            String eventTitle = description[0].trim();
+            String eventTime = description[1].trim();
+            tasks.get(index).setDescription(eventTitle);
+            tasks.get(index).setTime(LocalDate.parse(eventTime));
+        } else {
+            throw new UnknownCommandException();
+        }
+        return ui.printList(this.tasks);
     }
 
     /**

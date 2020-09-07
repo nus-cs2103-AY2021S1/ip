@@ -6,6 +6,7 @@ import exception.DukeErrorException;
 import exception.InvalidDeadlineException;
 import exception.InvalidEventException;
 import exception.InvalidTodoException;
+import exception.UnknownCommandException;
 import ui.Ui;
 
 
@@ -96,8 +97,16 @@ public class Duke {
             } catch (ArrayIndexOutOfBoundsException | InvalidEventException ex) {
                 return ex + ". ☹ The description of an event cannot be empty.";
             }
-        } else {
+        } else if (command.equals(Commands.FIND)) {
             return ui.printList(tl.findTask(splitted[1]));
+        } else if (command.equals(Commands.UPDATE)) {
+            try {
+                return tl.updateTask(ui, splitted[1]);
+            } catch (UnknownCommandException | ArrayIndexOutOfBoundsException e) {
+                return e.toString();
+            }
+        } else {
+            return "Unknown command!";
         }
     }
 }
