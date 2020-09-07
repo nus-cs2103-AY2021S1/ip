@@ -31,6 +31,7 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
+            assert i < taskList.size() : "index should be less than taskList length";
             ui.saveDeleteMessage(taskList.delete(i));
             storage.refresh(taskList);
         } catch (IOException e) {
