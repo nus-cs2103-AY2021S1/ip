@@ -13,10 +13,6 @@ public class Duke {
     private UI ui;
     private Parser parser;
 
-
-
-
-
     /**
      * Creates the Duke object with its attributes.
      * @throws FileNotFoundException File containing list of task may not be found.
@@ -37,32 +33,12 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     protected String getResponse(String input) throws IOException {
-        Command c = parser.parse(input);
-        return c.execute(tasks, ui, storage);
+        Command resultCommand = parser.parse(input);
+        return resultCommand.execute(tasks, ui, storage);
     }
 
-    /**
-     * The Duke program is run and commands are executed.
-     * @throws IOException File containing list of task may not be found.
-     */
-    public void run() throws IOException {
-        UI.intro();
-        boolean isExit = false;
-        while (!isExit) {
-            String toPrint = ui.nextInput();
-            ui.dividerLine();
-
-            Command c = parser.parse(toPrint);
-            c.execute(tasks, ui, storage);
-            isExit = c.isExit();
-
-            ui.dividerLine();
-        }
-        System.out.println("Bye. Hope to see you again soon!");
-    }
 
     public static void main(String[] args) throws DukeException, IOException {
-        new Duke().run();
     }
 
 

@@ -68,10 +68,8 @@ public class TaskList {
     public void done(String toPrint) {
         String command = toPrint.replaceAll("[^\\d.]", "");
         int indexCommand = Integer.parseInt(command.trim());
-        System.out.println("Nice! I've marked this task as done: ");
         Task completedTask = this.taskLs.get(indexCommand - 1);
         completedTask.markAsDone();
-        System.out.println("[" + completedTask.getStatusIcon() + "] " + completedTask.description);
     }
 
     public String doneString(String toPrint) {
