@@ -6,6 +6,7 @@ package duckie.exception;
 public class DuckieException extends Exception {
     /**
      * Instantiate DuckieException.
+     *
      * @param message Error message of why the Exception is thrown.
      */
     public DuckieException(String message) {

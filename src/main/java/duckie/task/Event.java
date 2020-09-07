@@ -12,6 +12,7 @@ public class Event extends Task {
 
     /**
      * Instantiate a Event task.
+     *
      * @param description Description of the task.
      * @param dateTime Date and Time of the task.
      */
@@ -22,6 +23,7 @@ public class Event extends Task {
 
     /**
      * Overrides method to return the type of the Event task.
+     *
      * @return "E" string.
      */
     @Override
@@ -31,6 +33,7 @@ public class Event extends Task {
 
     /**
      * Overrides method to return the date and time of the Event task.
+     *
      * @return Date and Time string of Event Task.
      */
     @Override
@@ -41,6 +44,7 @@ public class Event extends Task {
 
     /**
      * Overrides method to return the String representation of a Event task.
+     *
      * @return String representation of Event task.
      */
     @Override

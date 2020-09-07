@@ -18,6 +18,7 @@ public class DoneCommand extends Command {
 
     /**
      * Instantiate the DoneCommand.
+     *
      * @param ind Index of the Task in TaskList to be marked done.
      */
     public DoneCommand(int ind) {
@@ -26,6 +27,7 @@ public class DoneCommand extends Command {
 
     /**
      * Mark a required Task as done.
+     *
      * @param tasks TaskList containing all the tasks.
      * @param ui Ui to interact with the users.
      * @param storage Storage to write to File.

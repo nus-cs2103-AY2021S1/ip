@@ -10,6 +10,7 @@ import duckie.ui.Ui;
 public class ByeCommand extends Command {
     /**
      * Check if the Command is exiting.
+     *
      * @return true.
      */
     @Override
@@ -19,6 +20,7 @@ public class ByeCommand extends Command {
 
     /**
      * Display the ending message and end the chatbot.
+     *
      * @param tasks TaskList containing all the tasks.
      * @param ui Ui to interact with the users.
      * @param storage Storage to write to File.

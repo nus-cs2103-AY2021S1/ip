@@ -6,6 +6,7 @@ package duckie.task;
 public class Todo extends Task {
     /**
      * Instantiate Todo object.
+     *
      * @param description Description of a Task.
      */
     public Todo(String description) {
@@ -14,6 +15,7 @@ public class Todo extends Task {
 
     /**
      * Overrides method to return the type of the Todo Task.
+     *
      * @return "T" string.
      */
     @Override
@@ -23,6 +25,7 @@ public class Todo extends Task {
 
     /**
      * Overrides method to return the String representation of a Todo task.
+     *
      * @return String representation of Todo task.
      */
     @Override

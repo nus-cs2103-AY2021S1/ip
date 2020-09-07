@@ -21,6 +21,7 @@ public class TaskList {
 
     /**
      * Instantiate a TaskList with pre-saved tasks.
+     *
      * @param tasks ArrayList containing pre-saved tasks.
      */
     public TaskList(ArrayList<Task> tasks) {
@@ -29,6 +30,7 @@ public class TaskList {
 
     /**
      * Return the ArrayList containing the current tasks.
+     *
      * @return ArrayList containing current tasks.
      */
     public ArrayList<Task> getTaskList() {
@@ -37,6 +39,7 @@ public class TaskList {
 
     /**
      * Return the actual Index of a task in the ArrayList.
+     *
      * @param task Task required.
      * @return Integer index value.
      */
@@ -46,6 +49,7 @@ public class TaskList {
 
     /**
      * Add a Task to TaskList.
+     *
      * @param t1 Task to be added.
      */
     public void addTask(Task t1) {
@@ -54,6 +58,7 @@ public class TaskList {
 
     /**
      * Delete a Task from the TaskList.
+     *
      * @param ind Index of the Task in ArrayList.
      */
     public void deleteTask(int ind) {
@@ -69,6 +74,7 @@ public class TaskList {
 
     /**
      * Check the Task in the TaskList as done.
+     *
      * @param ind Index of the Task in ArrayList.
      */
     public void markTaskDone(int ind) {
@@ -78,6 +84,7 @@ public class TaskList {
 
     /**
      * Display the current tasks in the TaskList.
+     *
      * @throws DuckieException If list is empty.
      */
     public void displayList() throws DuckieException {
@@ -90,6 +97,7 @@ public class TaskList {
 
     /**
      * Filter the list based on the keyword provided.
+     *
      * @param keyword Keyword used to find matching tasks.
      * @return ArrayList containing all the tasks matching the keyword.
      */

@@ -12,6 +12,7 @@ public class Deadline extends Task {
 
     /**
      * Instantiate a Deadline task.
+     *
      * @param description Description of the task.
      * @param deadline Deadline date of the task.
      */
@@ -22,6 +23,7 @@ public class Deadline extends Task {
 
     /**
      * Overrides method to return the type of the Deadline task.
+     *
      * @return "D" string.
      */
     @Override
@@ -31,6 +33,7 @@ public class Deadline extends Task {
 
     /**
      * Overrides method to return the date of the Deadline task.
+     *
      * @return Date string of Deadline Task.
      */
     @Override
@@ -40,6 +43,7 @@ public class Deadline extends Task {
 
     /**
      * Overrides method to return the String representation of a Deadline task.
+     *
      * @return String representation of Deadline task.
      */
     @Override

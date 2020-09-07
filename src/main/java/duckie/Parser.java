@@ -30,6 +30,7 @@ public class Parser {
 
     /**
      * Parse the input Command to direct Duckie on what actions to carry out.
+     *
      * @param fullCommand Input string command.
      * @return Specific Command.
      * @throws DuckieException All the possible DuckieExceptions.

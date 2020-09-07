@@ -28,6 +28,7 @@ public class Ui {
 
     /**
      * Display logo.
+     *
      * @return LOGO string.
      */
     public static String getLogo() {
@@ -107,6 +108,7 @@ public class Ui {
 
     /**
      * Display the current Task condition after being marked as Done.
+     *
      * @param t1 Task being marked Done.
      */
     public static void checkTaskReply(Task t1) {
@@ -117,6 +119,7 @@ public class Ui {
 
     /**
      * Display the current Task that is being deleted.
+     *
      * @param t1 Task being deleted.
      */
     public static void deleteTaskReply(Task t1) {
@@ -133,6 +136,7 @@ public class Ui {
 
     /**
      * Display the Exception message.
+     *
      * @param msg Message of the Exception thrown.
      */
     public static void showError(String msg) {
@@ -141,6 +145,7 @@ public class Ui {
 
     /**
      * Read the input Command.
+     *
      * @return Input string.
      */
     public String readCommand() {

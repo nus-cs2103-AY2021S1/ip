@@ -17,6 +17,7 @@ public class FindCommand extends Command {
 
     /**
      * Instantiate a FindCommand object.
+     *
      * @param keyword Keyword that is going to be matched.
      */
     public FindCommand(String keyword) {
@@ -25,6 +26,7 @@ public class FindCommand extends Command {
 
     /**
      * Find the matching tasks and display them.
+     *
      * @param tasks TaskList containing all the tasks.
      * @param ui Ui to interact with the users.
      * @param storage Storage to write to File.

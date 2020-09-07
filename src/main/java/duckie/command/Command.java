@@ -12,6 +12,7 @@ public abstract class Command {
 
     /**
      * Execute the command according to the input given.
+     *
      * @param tasks TaskList containing all the tasks.
      * @param ui Ui to interact with the users.
      * @param storage Storage to write to File.
@@ -22,6 +23,7 @@ public abstract class Command {
 
     /**
      * Check if the Command signifies exit of the chatbot.
+     *
      * @return False to signify platform exit.
      */
     public boolean isExit() {

@@ -27,6 +27,7 @@ public class Storage {
 
     /**
      * Instantiate a Storage object
+     *
      * @param filePath Path of duckie.txt.
      */
     public Storage(String filePath) {
@@ -36,6 +37,7 @@ public class Storage {
     /**
      * Opens the duckie file from the harddrive
      * Creates the file and directory if cannot be found
+     *
      * @return File containing the saved tasks.
      * @throws DuckieException Throw FileError Exception.
      */
@@ -66,6 +68,7 @@ public class Storage {
 
     /**
      * Load the duckie file and generate the ArrayList containing the tasks
+     *
      * @return ArrayList containing all the saved tasks.
      * @throws DuckieException Throw File Error exception.
      */
@@ -122,6 +125,7 @@ public class Storage {
 
     /**
      * Update the current tasks in the TaskList to the duckie file
+     *
      * @param tasks List containing all the current tasks
      * @throws DuckieException Throw File Error Exception.
      */

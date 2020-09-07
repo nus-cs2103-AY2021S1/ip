@@ -9,6 +9,7 @@ public class Task {
 
     /**
      * Instantiate a Task object.
+     *
      * @param description Description of the task.
      */
     public Task(String description) {
@@ -25,6 +26,7 @@ public class Task {
 
     /**
      * Check if a Task is completed or not.
+     *
      * @return Boolean value indicating the completeness of the task.
      */
     public boolean isCompleted() {
@@ -33,6 +35,7 @@ public class Task {
 
     /**
      * Return the description of a Task.
+     *
      * @return String description of a Task.
      */
     public String getDescription() {
@@ -41,6 +44,7 @@ public class Task {
 
     /**
      * Return the type of a Task.
+     *
      * @return null.
      */
     public String getType() {
@@ -49,6 +53,7 @@ public class Task {
 
     /**
      * Return the date of a Task.
+     *
      * @return null.
      */
     public String getDate() {
@@ -57,6 +62,7 @@ public class Task {
 
     /**
      * Overrided method to return the String representation of a Task.
+     *
      * @return String representation of a Task.
      */
     @Override
