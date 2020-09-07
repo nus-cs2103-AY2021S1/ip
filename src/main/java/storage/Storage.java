@@ -19,6 +19,7 @@ import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
 
+
 /**
  * Operations on local file.
  */
@@ -130,7 +131,7 @@ public class Storage {
                 br.readLine();
                 lineNum++;
             }
-            writeUndoRecord("add", "", lineNum);
+            writeUndoRecord(Action.ADD, "", lineNum);
         } catch (MugException ex) {
             throw new MugException(ex.getMessage());
         } catch (IOException ex) {
@@ -164,7 +165,7 @@ public class Storage {
                 if (taskTrack != taskId) {
                     pw.println(line);
                 } else {
-                    writeUndoRecord("delete", line, taskId);
+                    writeUndoRecord(Action.DELETE, line, taskId);
                 }
             }
 
@@ -205,7 +206,7 @@ public class Storage {
                 if (taskTrack != taskId) {
                     pw.println(line);
                 } else {
-                    writeUndoRecord("done", line, taskId);
+                    writeUndoRecord(Action.DONE, line, taskId);
                     String[] newLine = line.split("[|]", 3);
                     pw.println(newLine[0] + "|" + 1 + "|" + newLine[2]);
                 }
@@ -229,7 +230,7 @@ public class Storage {
      * @param task command given to Mug.
      * @throws MugException If fail to access undo.txt.
      */
-    private void writeUndoRecord(String task, String info, int taskId) throws MugException {
+    private void writeUndoRecord(Action task, String info, int taskId) throws MugException {
         try {
             new File("undo.txt").delete();
             File newFile = new File("undo.txt");

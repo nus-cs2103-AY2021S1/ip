@@ -11,6 +11,9 @@ import java.util.stream.IntStream;
 
 import mugexception.MugException;
 
+/**
+ * Undo Action in storage
+ */
 public class UndoStorage {
     /** mug.txt filepath */
     private final String mugFilepath;
@@ -36,15 +39,18 @@ public class UndoStorage {
     public void undo() throws MugException {
         try {
             Scanner sc = new Scanner(new File(this.undoFilepath));
-            String undoCommand = sc.next();
+            Action undoCommand = Action.valueOf(sc.next());
+            assert(undoCommand == Action.DELETE
+                    || undoCommand == Action.ADD
+                    || undoCommand == Action.DONE);
             switch (undoCommand) {
-            case "delete":
+            case DELETE:
                 undoDelete();
                 break;
-            case "add":
+            case ADD:
                 undoAdd();
                 break;
-            case "done":
+            case DONE:
                 undoDone();
                 break;
             default:
@@ -124,8 +130,8 @@ public class UndoStorage {
      *
      * @param mugFilepath mug.txt filepath.
      * @param undoFilepath undo.txt filepath.
-     * @param isDelete Undo on delete Command.
-     * @param isDone Undo on done Command.
+     * @param isDelete delete Command related.
+     * @param isDone done Command related.
      * @throws IOException If fail to write file.
      */
     private void writeFile(String mugFilepath, String undoFilepath,
