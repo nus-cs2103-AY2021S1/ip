@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Runs the chatbot.
+ * Wraps the tasklist in a Duke object.
  */
 public class Duke {
     private TaskList taskList;
