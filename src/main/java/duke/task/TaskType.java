@@ -2,18 +2,18 @@ package duke.task;
 
 /** Different possible TaskType */
 public enum TaskType {
-  TODO("[T]"),
-  EVENT("[E]"),
-  DEADLINE("[D]");
+    TODO("[T]"),
+    EVENT("[E]"),
+    DEADLINE("[D]");
 
-  private String name;
+    private String name;
 
-  TaskType(String name) {
-    this.name = name;
-  }
+    TaskType(String name) {
+        this.name = name;
+    }
 
-  @Override
-  public String toString() {
-    return this.name;
-  }
+    @Override
+    public String toString() {
+        return this.name;
+    }
 }

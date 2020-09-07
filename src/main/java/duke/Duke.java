@@ -19,14 +19,17 @@ public class Duke {
     private String fileString;
     private TaskList taskList;
 
+    /**
+     * Duke's constructor for gui based program
+     */
     public Duke() {
         this.taskList = new TaskList();
     }
 
     /**
-     * Duke's constructor
+     * Duke's constructor for cli based program
      *
-     * @param fileString name of the file
+     * @param fileString name of the file where the commands will be output to
      */
     public Duke(String fileString) {
         this.fileString = fileString;
@@ -68,9 +71,9 @@ public class Duke {
     }
 
     /**
-     * Runs the duke program
+     * Runs the duke's cli based program
      */
-    public void run() {
+    public void runCli() {
         Ui.showGreet();
         CommandScanner cmdScanner = new CommandScanner();
 
