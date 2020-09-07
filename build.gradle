@@ -54,7 +54,7 @@ javafx {
 }
 
 application {
-    mainClassName = "Main"
+    mainClassName = "bot.Launcher"
 }
 
 shadowJar {
