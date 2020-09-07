@@ -56,26 +56,22 @@ public class TaskList {
 
     /**
      * Adds a new task to TaskList.
-     * @param task Description of task to be added.
+     * @param taskDescription Description of task to be added.
      * @param date Date for deadline and event tasks.
      * @param taskType Type of tasks to be added.
      * @throws DukeException If taskType is not defined.
      */
-    public void addTask(String task, String date, TaskType taskType) throws DukeException {
+    public void addTask(String taskDescription, String date, TaskType taskType) throws DukeException {
 
-        Task t;
         switch (taskType) {
         case TODO:
-            t = new TodoTask(task);
-            tasks.add(t);
+            tasks.add(new TodoTask(taskDescription));
             break;
         case DEADLINE:
-            t = new DeadlineTask(task, date);
-            tasks.add(t);
+            tasks.add(new DeadlineTask(taskDescription, date));
             break;
         case EVENT:
-            t = new EventTask(task, date);
-            tasks.add(t);
+            tasks.add(new EventTask(taskDescription, date));
             break;
         default:
             throw new InvalidTaskTypeException("Invalid Task Type");
