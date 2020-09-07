@@ -1,4 +1,5 @@
 package Duke.Commands;
+
 import Duke.Errors.DukeException;
 import Duke.Helpers.Storage;
 import Duke.Helpers.TaskList;
@@ -17,6 +18,14 @@ public class ExitCommand extends Command {
     }
 
     /**
+     * Gives the exit message
+     *
+     * @return String of exit message.
+     */
+    private String exitMessage(){
+        return "  Bye. Hope to see you again soon!";
+    }
+    /**
      * Prints bye message
      *
      * @param tasks no change made
@@ -26,8 +35,8 @@ public class ExitCommand extends Command {
      * @throws DukeException not thrown
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        System.out.println("  Bye. Hope to see you again soon!");
-        return "  Bye. Hope to see you again soon!";
+        System.out.println(exitMessage());
+        return exitMessage();
     }
 
     /**

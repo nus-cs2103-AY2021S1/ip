@@ -26,6 +26,18 @@ abstract public class AddCommand extends Command {
     }
 
     /**
+     * Gives a String saying that the task list has been updated
+     *
+     * @param task to be added into taskList
+     * @param taskList where task is added
+     * @return String that informs task is added into taskList
+     */
+    protected static String stringToUpdateTaskList(Task task, TaskList taskList){
+        return "  Got it. I've added this task:\n  " + task.toString() + "\n" + //Task added message
+                "  Now you have " + taskList.getAllTasks().size() + " tasks in the list.";
+    }
+
+    /**
      * adds the task to list of task in taskList and into the file in storage
      *
      * @param storage where the file here is updated
@@ -33,17 +45,14 @@ abstract public class AddCommand extends Command {
      * @param taskList where the tasks here is updated with task added
      * @throws IOException when the file in storage is not present
      */
-    public static String updateTaskList(Storage storage, Task task, TaskList taskList) throws IOException {
-            FileWriter fw = new FileWriter(storage.getFilePath(), true);
-            taskList.getAllTasks().add(task);
-            fw.write(task.inputListFormat() + "\n");
-            fw.close();
-            Task.tasks.add(task);
-            System.out.println("  Got it. I've added this task:\n  " + task.toString() + "\n" +
-                    "  Now you have " + taskList.getAllTasks().size() + " tasks in the list.");
-            return "  Got it. I've added this task:\n  " + task.toString() + "\n" +
-                    "  Now you have " + taskList.getAllTasks().size() + " tasks in the list.";
-
+    protected static String updateTaskList(Storage storage, Task task, TaskList taskList) throws IOException {
+        FileWriter fw = new FileWriter(storage.getFilePath(), true); //updates the file in storage as new task is added
+        taskList.getAllTasks().add(task);
+        fw.write(task.inputListFormat() + "\n");
+        fw.close();
+        Task.tasks.add(task); //adds task to taskList
+        System.out.println(stringToUpdateTaskList(task, taskList));
+        return stringToUpdateTaskList(task, taskList);
     }
 
     /**
@@ -52,10 +61,10 @@ abstract public class AddCommand extends Command {
      * @param string string to convert to date
      * @return local date which is converted from string, if cannot then DateTimeException thrown
      */
-    public static LocalDate stringToLocalDate(String string){
+    protected static LocalDate stringToLocalDate(String string){
         try{
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd");
-            LocalDate parsedDate = LocalDate.parse(string, formatter);
+            LocalDate parsedDate = LocalDate.parse(string, formatter); //converts string to date
             return parsedDate;
         }catch (DateTimeException d) {
             throw d;
@@ -67,10 +76,10 @@ abstract public class AddCommand extends Command {
      * @param string string to convert to dateTime
      * @return local dateTime which is converted from string, if cannot then DateTimeException thrown
      */
-    public static LocalDateTime stringToLocalDateTime(String string){
+    protected static LocalDateTime stringToLocalDateTime(String string){
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy MM dd, HH:mm");
-            LocalDateTime parsedDate = LocalDateTime.parse(string, formatter);
+            LocalDateTime parsedDate = LocalDateTime.parse(string, formatter); //converts string to date and time
             return parsedDate;
         } catch (DateTimeException g) {
             throw g;
@@ -83,10 +92,10 @@ abstract public class AddCommand extends Command {
      * @param string string to convert to time
      * @return local time which is converted from string, if cannot then DateTimeException thrown
      */
-    public static LocalTime stringToLocalTime(String string){
+    protected static LocalTime stringToLocalTime(String string){
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("HH:mm");
-            LocalTime parsedDate = LocalTime.parse(string, formatter);
+            LocalTime parsedDate = LocalTime.parse(string, formatter);//converts string to time
             return parsedDate;
         } catch (DateTimeException f) {
             throw f;
