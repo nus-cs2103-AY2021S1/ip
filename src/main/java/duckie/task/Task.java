@@ -3,7 +3,7 @@ package duckie.task;
 /**
  * Parent class of all Tasks type.
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -44,21 +44,13 @@ public class Task {
 
     /**
      * Returns the type of a Task.
-     *
-     * @return null.
      */
-    public String getType() {
-        return null;
-    }
+    public abstract String getType();
 
     /**
      * Returns the date of a Task.
-     *
-     * @return null.
      */
-    public String getDate() {
-        return null;
-    }
+    public abstract String getDate();
 
     /**
      * Overrides method to return the String representation of a Task.

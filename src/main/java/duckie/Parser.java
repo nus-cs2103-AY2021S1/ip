@@ -37,12 +37,12 @@ public class Parser {
      * @throws DuckieException All the possible DuckieExceptions.
      */
     public static Command parse(String fullCommand) throws DuckieException {
-        String input = fullCommand.strip();
-        if (input.equalsIgnoreCase("bye")) {
+        String input = fullCommand.strip().toLowerCase();
+        if (input.equals("bye")) {
             return new ByeCommand();
-        } else if (input.equalsIgnoreCase("list")) {
+        } else if (input.equals("list")) {
             return new ListCommand();
-        } else if (input.toLowerCase().indexOf("done") == 0) {
+        } else if (input.indexOf("done") == 0) {
             if (isAWord(input)) {
                 throw new DuckieInsufficientInfoException();
             }
@@ -56,14 +56,14 @@ public class Parser {
             int ind = Integer.parseInt(input.split(" ")[1]);
 
             return new DoneCommand(ind);
-        } else if (input.toLowerCase().indexOf("delete") == 0) {
+        } else if (input.indexOf("delete") == 0) {
             if (isAWord(input)) {
                 throw new DuckieInsufficientInfoException();
             }
 
             String description = input.split(" ")[1].strip();
 
-            if (description.toLowerCase().equals("all")) {
+            if (description.equals("all")) {
                 return new DeleteAllCommand();
             } else {
                 try {
@@ -74,14 +74,14 @@ public class Parser {
                 int ind = Integer.parseInt(description);
                 return new DeleteCommand(ind);
             }
-        } else if (input.toLowerCase().indexOf("todo") == 0) {
+        } else if (input.indexOf("todo") == 0) {
             if (isAWord(input)) {
                 throw new DuckieInsufficientInfoException();
             }
             String todo = input.split(" ", 2)[1];
             Task t1 = new Todo(todo);
             return new AddCommand(t1);
-        } else if (input.toLowerCase().indexOf("deadline") == 0) {
+        } else if (input.indexOf("deadline") == 0) {
             if (isAWord(input)) {
                 throw new DuckieInsufficientInfoException();
             }
@@ -121,7 +121,7 @@ public class Parser {
             } else {
                 throw new DuckieException("Please use '/at' to indicate the date input.");
             }
-        } else if (input.toLowerCase().indexOf("find") == 0) {
+        } else if (input.indexOf("find") == 0) {
             if (isAWord(input)) {
                 throw new DuckieInsufficientInfoException();
             }
