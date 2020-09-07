@@ -1,22 +1,18 @@
-import bot.Bot;
+package bot;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.util.Scanner;
 
+/**
+ * The type Main.
+ */
 public class Main extends Application {
-    private TextField userInput;
-    private VBox dialogContainer;
-
     private Bot duke = new Bot("Straw Bot", "./assets/userData.txt");
 
     public static void main(String[] args) {

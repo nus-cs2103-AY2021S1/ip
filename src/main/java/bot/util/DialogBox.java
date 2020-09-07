@@ -1,3 +1,6 @@
+package bot.util;
+
+import bot.MainWindow;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
