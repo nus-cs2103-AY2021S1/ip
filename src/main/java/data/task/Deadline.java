@@ -37,6 +37,9 @@ public class Deadline extends Task {
                     = LocalTime.parse(dateTimeArr[1].substring(0, 2) + ":" + dateTimeArr[1].substring(2, 4));
             this.dateTimeTxt = this.date.format(DateTimeFormatter.ofPattern("d MMMM yyyy")) + " "
                     + this.time.format(DateTimeFormatter.ofPattern("hh:mm a"));
+            //Assertion to check whether date and time have been correctly parsed
+            assert this.date != null;
+            assert this.time != null;
         } catch (DateTimeParseException e) {
             throw new DukeInvalidUserInputException("It seems you have entered an invalid date and time. "
                     + "The format should be as follows YYYY-MM-DD hhmm.");
@@ -58,6 +61,11 @@ public class Deadline extends Task {
      * @throws DukeInvalidUserInputException when an invalid date and time format is found in the input string array.
      */
     public static Deadline parse(String[] txtArray) throws DukeInvalidUserInputException {
+        //Assertions to check whether the txtArray are of the correct format.
+        assert txtArray[1] != null; //This field should not be empty unless user manually modify TaskList.txt.
+        assert txtArray[2] != null; //This field should not be empty unless user manually modify TaskList.txt.
+        assert txtArray[3] != null; //This field should not be empty unless user manually modify TaskList.txt.
+
         String done = txtArray[1].trim();
         String description = txtArray[2].trim();
         String[] unFormattedDateTime = txtArray[3].trim().split(" ");
