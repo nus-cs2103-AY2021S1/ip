@@ -29,39 +29,44 @@ public class Parser {
                 ui.list(tasks);
             } else {
                 String[] words = line.split("\\s+");
-                if (words[0].equals("done")) {
-                    try {
-                        int index = completeDelete(line, tasks.size());
-                        tasks.get(index).setDone();
-                        Storage.fileUpdate(tasks, path);
-                        ui.done(tasks, index);
-                    } catch (DukeException e) {
-                        System.out.println(e.getMessage());
-                    }
-                } else if (words[0].equals("delete")) {
-                    try {
-                        int index = completeDelete(line, tasks.size());
-                        ui.remove(tasks, index);
-                        tasks.delete(index);
-                        Storage.fileUpdate(tasks, path);
-                    } catch (DukeException e) {
-                        System.out.println(e.getMessage());
-                    }
-                } else if (words[0].equals("find")) {
-                    if (words.length > 1) {
-                        String keyword = line.substring(5);
-                        TaskList matches = matchFinder(tasks, keyword);
-                        ui.foundMatches(matches);
-                    }
-                } else {
-                    try {
-                        Task task = taskClassify(line);
-                        tasks.add(task);
-                        Storage.fileUpdate(tasks, path);
-                        ui.add(task, tasks.size());
-                    } catch (DukeException e) {
-                        System.out.println(e.getMessage());
-                    }
+                switch (words[0]) {
+                    case "done":
+                        try {
+                            int index = completeDelete(line, tasks.size());
+                            tasks.get(index).setDone();
+                            Storage.fileUpdate(tasks, path);
+                            ui.done(tasks, index);
+                        } catch (DukeException e) {
+                            System.out.println(e.getMessage());
+                        }
+                        break;
+                    case "delete":
+                        try {
+                            int index = completeDelete(line, tasks.size());
+                            ui.remove(tasks, index);
+                            tasks.delete(index);
+                            Storage.fileUpdate(tasks, path);
+                        } catch (DukeException e) {
+                            System.out.println(e.getMessage());
+                        }
+                        break;
+                    case "find":
+                        if (words.length > 1) {
+                            String keyword = line.substring(5);
+                            TaskList matches = matchFinder(tasks, keyword);
+                            ui.foundMatches(matches);
+                        }
+                        break;
+                    default:
+                        try {
+                            Task task = taskClassify(line);
+                            tasks.add(task);
+                            Storage.fileUpdate(tasks, path);
+                            ui.add(task, tasks.size());
+                        } catch (DukeException e) {
+                            System.out.println(e.getMessage());
+                        }
+                        break;
                 }
             }
         }
@@ -83,66 +88,71 @@ public class Parser {
                     count++;
                 }
             }
+            assert count > 0 : "Something went wrong with the parser function!";
             return string;
         } else {
             String[] words = line.split("\\s+");
-            if (words[0].equals("done")) {
-                try {
-                    int index = completeDelete(line, tasks.size());
-                    tasks.get(index).setDone();
-                    Storage.fileUpdate(tasks, path);
-                    String string = "Nice! I've marked this task as done:" + "\n";
-                    string += tasks.get(index).toString();
-                    return string;
-                } catch (DukeException e) {
-                    return e.getMessage();
-                }
-            } else if (words[0].equals("delete")) {
-                try {
-                    int index = completeDelete(line, tasks.size());
-                    String string = "Noted. I've removed this task:" + "\n";
-                    string += tasks.get(index).toString() + "\n";
-                    string += "Now you have " + (tasks.size() - 1) + " tasks in the list.";
-                    tasks.delete(index);
-                    Storage.fileUpdate(tasks, path);
-                    return string;
-                } catch (DukeException e) {
-                    return e.getMessage();
-                }
-            } else if (words[0].equals("find")) {
-                if (words.length > 1) {
-                    String keyword = line.substring(5);
-                    TaskList matches = matchFinder(tasks, keyword);
-                    String string = "Here are the matching tasks in your list:" + "\n";
-                    int counter = 1;
-                    for (Task task : matches.getList()) {
-                        if (counter == tasks.size()) {
-                            string += counter + "." + task.toString();
-                        } else {
-                            string += counter + "." + task.toString() + "\n";
-                            counter++;
+            switch (words[0]) {
+                case "done":
+                    try {
+                        int index = completeDelete(line, tasks.size());
+                        assert index > -1 : "Something went wrong with the completeDelete function";
+                        tasks.get(index).setDone();
+                        Storage.fileUpdate(tasks, path);
+                        String string = "Nice! I've marked this task as done:" + "\n";
+                        string += tasks.get(index).toString();
+                        return string;
+                    } catch (DukeException e) {
+                        return e.getMessage();
+                    }
+                case "delete":
+                    try {
+                        int index = completeDelete(line, tasks.size());
+                        assert index > -1 : "Something went wrong with the completeDelete function";
+                        String string = "Noted. I've removed this task:" + "\n";
+                        string += tasks.get(index).toString() + "\n";
+                        string += "Now you have " + (tasks.size() - 1) + " tasks in the list.";
+                        tasks.delete(index);
+                        Storage.fileUpdate(tasks, path);
+                        return string;
+                    } catch (DukeException e) {
+                        return e.getMessage();
+                    }
+                case "find":
+                    if (words.length > 1) {
+                        String keyword = line.substring(5);
+                        TaskList matches = matchFinder(tasks, keyword);
+                        String string = "Here are the matching tasks in your list:" + "\n";
+                        int counter = 1;
+                        for (Task task : matches.getList()) {
+                            if (counter == tasks.size()) {
+                                string += counter + "." + task.toString();
+                            } else {
+                                string += counter + "." + task.toString() + "\n";
+                                counter++;
+                            }
                         }
+                        if (counter == 1) {
+                            return "There are no matching tasks in your list :(";
+                        }
+                        assert counter > 0 : "Something went wrong with the parser function!";
+                        return string;
+                    } else {
+                        return "OOPS!! Missing keyword to find!";
                     }
-                    if (counter == 1) {
-                        return "There are no matching tasks in your list :(";
-                    }
-                    return string;
-                } else {
-                    return "OOPS!! Missing keyword to find!";
-                }
-            } else {
-                try {
-                    Task task = taskClassify(line);
-                    tasks.add(task);
-                    Storage.fileUpdate(tasks, path);
-                    String string = "Got it. I've added this task:" + "\n";
-                    string += "  " + task.toString() + "\n";
-                    string += "Now you have " + tasks.size() + " tasks in the list.";
-                    return string;
+                default:
+                    try {
+                        Task task = taskClassify(line);
+                        tasks.add(task);
+                        Storage.fileUpdate(tasks, path);
+                        String string = "Got it. I've added this task:" + "\n";
+                        string += "  " + task.toString() + "\n";
+                        string += "Now you have " + tasks.size() + " tasks in the list.";
+                        return string;
 
-                } catch (DukeException e) {
-                    return e.getMessage();
-                }
+                    } catch (DukeException e) {
+                        return e.getMessage();
+                    }
             }
         }
     }
@@ -156,6 +166,7 @@ public class Parser {
      * @throws DukeException if input is invalid or out of bounds.
      */
     public static int completeDelete(String str, int numTask) throws DukeException {
+        assert numTask > -1 : "completeDelete function was passed with negative numTask value";
         String[] words = str.split("\\s+");
         int len = words.length;
         if (len == 2) {
@@ -166,6 +177,7 @@ public class Parser {
                 if (index >= numTask || index < 0) {
                     throw new DukeException("OOPS!!! Out of bounds of the list of tasks.");
                 }
+                assert index > -1 && index < numTask : "An exception should have been thrown.";
                 return index;
             }
         }
@@ -271,6 +283,7 @@ public class Parser {
                         }
                         time += words[j] + " ";
                     }
+                    assert count > -1 && count < len : "Count should always be within range of number of tasks";
                     return new Deadline(desc, time);
                 }
             case "event":
@@ -298,6 +311,7 @@ public class Parser {
                         }
                         time += " " + words[j];
                     }
+                    assert count > -1 && count < len : "Count should always be within range of number of tasks";
                     return new Event(desc, time);
                 }
             default:

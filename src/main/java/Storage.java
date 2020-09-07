@@ -20,7 +20,7 @@ public class Storage {
         if (Files.exists(path)) {
             return Parser.reader(new File(path.toString()));
         } else {
-            File f = new File(path.toString());
+            new File(path.toString());
         }
         return new TaskList();
     }
@@ -48,6 +48,7 @@ public class Storage {
             }
             fw.close();
         } catch (IOException e) {
+            assert Files.exists(path) : "Something went wrong with the fileUpdate function!";
             System.out.println("OOPS!! Something went wrong :(");
         }
 
