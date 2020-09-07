@@ -43,18 +43,16 @@ public class Storage {
             String date = temp.substring(temp.indexOf("|") + 2);
             if (first == 'D') {
                 des = "deadline " + taskDescription + " /by " + date;
-            } else if (first == 'E') {
+            } else {
                 des = "event " + taskDescription + " /at " + date;
             }
         }
 
         Task t = new Task(des);
-        if (num == '0') {
-            return t;
-        } else {
+        if (num != '0') {
             t.markAsDone();
-            return t;
         }
+        return t;
     }
 
     /**
@@ -82,7 +80,6 @@ public class Storage {
      * @throws DukeException If any of the <code>Task</code> objects is not valid.
      */
     public ArrayList<Task> load() throws DukeException {
-        // converts text to tasks, duke exception to check if is valid task
         ArrayList<Task> tasksArray = new ArrayList<>();
         ArrayList<String> tasksStrings = new ArrayList<>();
 
@@ -129,7 +126,6 @@ public class Storage {
      * @param textToAdd Text to be written to the file specified in <code>filePath</code>.
      */
     public static void save(String filePath, String textToAdd) {
-        // writes fileString to .txt file
         try {
             writeToFile(Duke.FILENAME, textToAdd);
         } catch (IOException e) {
