@@ -18,6 +18,7 @@ public class Parser {
      * @param command   the user's command
      */
     public static Command parse(String input) throws IOException {
+        assert input != "" : "input is null";
         String command = input.split(" ")[0];
         switch (command) {
             case "bye":

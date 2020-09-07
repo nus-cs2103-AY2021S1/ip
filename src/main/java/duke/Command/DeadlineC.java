@@ -18,6 +18,7 @@ public class DeadlineC extends Command {
 
     @Override
     public String execute(Ui ui, TaskList todoList, Storage store) throws DukeException {
+        assert input.length() > 7 : "no date entered";
         String fullDL = input.substring(9);
         String result = "";
         try {

@@ -20,6 +20,8 @@ public class DeleteC extends Command {
 
     @Override
     public String execute(Ui ui, TaskList todoList, Storage store) throws IOException {
+        assert input.length() > 6 : "no date entered";
+
         String result = "";
         int deleteID = Integer.parseInt( input.substring(7)) - 1;
         Task deleted = todoList.get(deleteID);

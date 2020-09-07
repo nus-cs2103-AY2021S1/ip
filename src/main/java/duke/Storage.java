@@ -43,20 +43,25 @@ public class Storage {
      * Loads a schedule file.
      * @return  a TaskList that has all the tasks in the schedule text file
      */
-    public ArrayList<Task> load() throws IOException {
+    public ArrayList<Task> load() throws DukeException {
         ArrayList<Task> todoList = new ArrayList<Task>();
-        BufferedReader reader = new BufferedReader(new FileReader(this.filepath));
-        String line = null;
-        while ((line = reader.readLine()) != null) {
-            String[] taskArr = line.split("/");
-            if (taskArr[0].equals("T")) {
-                todoList.add(new Todo(taskArr[2], taskArr[1]));
-            } else if (taskArr[0].equals("E")) {
-                todoList.add(new Event(taskArr[1], taskArr[2], LocalDate.parse(taskArr[3])));
-            } else if (taskArr[0].equals("D")) {
-                todoList.add(new Deadline(taskArr[1], taskArr[2], LocalDate.parse(taskArr[3])));
+        try {
+            BufferedReader reader = new BufferedReader(new FileReader(this.filepath));
+            String line = null;
+            while ((line = reader.readLine()) != null) {
+                String[] taskArr = line.split("/");
+                if (taskArr[0].equals("T")) {
+                    todoList.add(new Todo(taskArr[2], taskArr[1]));
+                } else if (taskArr[0].equals("E")) {
+                    todoList.add(new Event(taskArr[1], taskArr[2], LocalDate.parse(taskArr[3])));
+                } else if (taskArr[0].equals("D")) {
+                    todoList.add(new Deadline(taskArr[1], taskArr[2], LocalDate.parse(taskArr[3])));
+                }
             }
+        } catch (IOException e) {
+            throw new DukeException("error! i couldn't read the data file correctly, please do a system check!");
         }
+
         return todoList;
     }
 

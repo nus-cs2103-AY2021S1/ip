@@ -19,6 +19,8 @@ public class OnC extends Command {
 
     @Override
     public String execute(Ui ui, TaskList todoList, Storage store) throws IOException {
+        assert input.length() > 2 : "no date entered";
+
         String result = "";
         LocalDate checkOn = LocalDate.parse(input.substring(3).trim());
         result += "On this day, you have: \n";

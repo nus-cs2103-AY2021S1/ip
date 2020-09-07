@@ -18,6 +18,9 @@ public class TodoC extends Command {
 
     @Override
     public String execute(Ui ui, TaskList todoList, Storage store){
+
+        assert input.length() > 4 : "no date entered";
+
         String result = "";
         String name = input.substring(5);
         try {
