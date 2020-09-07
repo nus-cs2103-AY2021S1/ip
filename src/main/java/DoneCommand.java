@@ -6,11 +6,11 @@ public class DoneCommand extends Command {
     /**
      * Constructor for DoneCommand
      *
-     * @param description
+     * @param taskNumber
      * @throws IllegalArgumentException
      */
-    public DoneCommand(String description) throws IllegalArgumentException {
-        super(description); //the task number to mark it as done
+    public DoneCommand(String taskNumber) throws IllegalArgumentException {
+        super(taskNumber);
     }
 
     /**

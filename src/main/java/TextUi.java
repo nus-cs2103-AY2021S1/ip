@@ -3,23 +3,6 @@
  * prints necessary messages/ outputs
  */
 public class TextUi {
-
-    public static final String DIVIDER = "===================================================\n";
-
-    /**
-     * prints hello message with DUKE logo
-     */
-    public static String printHello() {
-        String logo = " ____        _\n"
-                + "|  _ \\ _   _| | _____\n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-
-        return ("Hello! I'm Duke\n" + "What can I do for you?\n");
-    }
-
     /**
      * prints messages when new task is added
      *

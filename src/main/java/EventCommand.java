@@ -8,12 +8,12 @@ public class EventCommand extends Command {
     /**
      * Constructor for EventCommand
      *
-     * @param deadlineName
-     * @param deadlineDateTime
+     * @param eventName
+     * @param eventDateTime
      * @throws IllegalArgumentException
      */
-    public EventCommand(String deadlineName, LocalDateTime deadlineDateTime) throws IllegalArgumentException {
-        super(deadlineName, deadlineDateTime);
+    public EventCommand(String eventName, LocalDateTime eventDateTime) throws IllegalArgumentException {
+        super(eventName, eventDateTime);
     }
 
     /**

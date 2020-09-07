@@ -6,11 +6,11 @@ public class DeleteCommand extends Command {
     /**
      * Constructor for DeleteCommand
      *
-     * @param description
+     * @param taskNumber
      * @throws IllegalArgumentException
      */
-    public DeleteCommand(String description) throws IllegalArgumentException {
-        super(description); //the task number to delete
+    public DeleteCommand(String taskNumber) throws IllegalArgumentException {
+        super(taskNumber);
     }
 
     /**

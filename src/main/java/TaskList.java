@@ -6,8 +6,6 @@ import java.util.ArrayList;
  */
 public class TaskList implements Serializable {
     private ArrayList<Task> taskList = new ArrayList<>();
-
-    @SuppressWarnings("checkstyle:AbbreviationAsWordInName")
     private final long serialVersionUID = 1089785654636785606L;
 
     /**
