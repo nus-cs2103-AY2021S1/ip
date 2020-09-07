@@ -44,7 +44,7 @@ public class Storage {
     String combineAllTasks(ArrayList<Task> items) {
         String res = "";
         for (Task item : items) {
-            res += String.format("%s", item.saveString());
+            res += String.format("%s", item.getSaveString());
             res += "\n";
         }
         return res;

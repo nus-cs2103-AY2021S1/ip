@@ -27,19 +27,19 @@ public class Parser {
         String type = input.split(" ")[0];
         switch (type) {
         case "todo":
-            if (input.substring(4).equals("") || input.substring(5).equals("")) {
+            if (!input.matches(Todo.FORMAT)) {
                 throw new InvalidDescriptionException();
             }
             return new Todo(input.substring(5));
         case "deadline":
             String[] dl = input.split(" /by ");
-            if (dl[0].substring(8).equals("") || dl[0].substring(9).equals("")) {
+            if (!input.matches(Deadline.FORMAT)) {
                 throw new InvalidDescriptionException();
             }
             return new Deadline(dl[0].substring(9), dl[1]);
         case "event":
             String[] e = input.split(" /at ");
-            if (e[0].substring(5).equals("") || e[0].substring(6).equals("")) {
+            if (!input.matches(Event.FORMAT)) {
                 throw new InvalidDescriptionException();
             }
             return new Event(e[0].substring(6), e[1]);

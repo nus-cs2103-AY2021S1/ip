@@ -4,6 +4,7 @@ package duke.task;
  * Event class for tasks that have a set timing.
  */
 public class Event extends Task {
+    public static final String FORMAT = "event [^ ]+.+[^ ]+ /at [^ ]+.+";
     static final String SYMBOL = "E";
     private DateTime time;
 
@@ -36,9 +37,9 @@ public class Event extends Task {
      * @return A string to that can be saved into the .txt file
      */
     @Override
-    public String saveString() {
+    public String getSaveString() {
         int completeSymbol = this.complete ? 1 : 0;
-        return String.format("%s|%d|%s|%s", SYMBOL, completeSymbol, this.title, this.time.saveString());
+        return String.format("%s|%d|%s|%s", SYMBOL, completeSymbol, this.title, this.time.getSaveString());
     }
 
     /**

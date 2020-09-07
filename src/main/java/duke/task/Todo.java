@@ -4,6 +4,7 @@ package duke.task;
  * Todo class for Tasks that need to be completed.
  */
 public class Todo extends Task {
+    public static final String FORMAT = "todo [^ ]+.+";
 
     /**
      * Constructor for Todo class.

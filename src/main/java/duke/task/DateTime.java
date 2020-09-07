@@ -45,7 +45,7 @@ public class DateTime {
      *
      * @return A String of the date in proper format.
      */
-    public String saveString() {
+    public String getSaveString() {
         return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
