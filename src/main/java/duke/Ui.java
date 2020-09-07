@@ -49,32 +49,13 @@ public class Ui {
             return new String[]{"You have left the dialog.\nPlease restart the app or enter \"hello\" to wake me up!"};
         }
 
-        List<String> response = new ArrayList<>();
+        List<String> response;
         String[] commandTask = parser.commandParser(input);
 
         if (commandTask.length == 1) {
             response = processSingleWordRequest(commandTask[0]);
-            return response.toArray(new String[response.size()]);
-        }
-
-        String commandType = commandTask[0];
-        switch (commandType) {
-            case "find":
-                response = processFindKeyword(commandTask[1]);
-                break;
-            case "exception":
-                response = processException(commandTask[1]);
-                break;
-            case "done":
-            case "delete":
-                response.addAll(taskList.editTask(commandTask));
-                break;
-            case "todo":
-            case "event":
-            case "deadline":
-            default:
-                response.addAll(taskList.addTask(commandTask));
-                break;
+        } else {
+            response = processComplexRequest(commandTask);
         }
 
         return response.toArray(new String[response.size()]);
@@ -124,6 +105,38 @@ public class Ui {
     }
 
 
+    public List<String> processComplexRequest(String[] commandTask) {
+
+        String commandType = commandTask[0];
+        switch (commandType) {
+        case "find":
+            return processFindKeyword(commandTask[1]);
+        case "exception":
+            return processException(commandTask[1]);
+        case "done":
+        case "delete":
+            return processEditRequest(commandTask);
+        case "todo":
+        case "event":
+        case "deadline":
+        default:
+            return processAddRequest(commandTask);
+        }
+    }
+
+
+    public List<String> processEditRequest(String[] commandTask) {
+        List<String> response = taskList.editTask(commandTask);
+        return response;
+    }
+
+
+    public List<String> processAddRequest(String[] commandTask) {
+        List<String> response = taskList.addTask(commandTask);
+        return response;
+    }
+
+
     public List<String> processFindKeyword(String keyword) {
         List<String> response = new ArrayList<>();
         List<Task> matchList = taskList.searchTask(keyword);
@@ -135,14 +148,12 @@ public class Ui {
 
         String output = "Here are the tasks that match your keyword:\n";
         Iterator itr = matchList.iterator();
-        int temp = 1;
-
+        int taskNumber = 1;
         while (itr.hasNext()) {
-            output += "\n" + temp + "." + itr.next();
-            temp++;
+            output += "\n" + taskNumber + "." + itr.next();
+            taskNumber++;
         }
         response.add(output);
-
         return response;
     }
 
@@ -166,31 +177,15 @@ public class Ui {
             return DukeException.ExceptionType.DEADLINE_INCOMPLETE;
         case "empty_illegal":
             return DukeException.ExceptionType.EMPTY_ILLEGAL;
+        case "improperDateTime":
+            return DukeException.ExceptionType.IMPROPER_DATETIME;
+        case "find":
+            return DukeException.ExceptionType.FIND_INCOMPLETE;
         case "no_meaning":
         default:
             return DukeException.ExceptionType.NO_MEANING;
         }
 
     }
-
-
-
-    /*public List<String> processEmptyTask(List<String> response, String taskType) {
-        switch (taskType) {
-        case "todo":
-            response.addAll(HandleException.handleException(
-                    DukeException.ExceptionType.TODO_INCOMPLETE));
-            break;
-        case "event":
-            response.addAll(HandleException.handleException(
-                    DukeException.ExceptionType.EVENT_INCOMPLETE));
-            break;
-        case "deadline":
-            response.addAll(HandleException.handleException(
-                    DukeException.ExceptionType.DEADLINE_INCOMPLETE));
-            break;
-        }
-        return response;
-    }*/
 
 }

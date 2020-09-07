@@ -42,18 +42,14 @@ public class Storage {
      * Initialize the File object to enable writing memory.
      * Create valid directory and file if not present.
      */
-    public void reachFile() {
+    public void reachFile() throws IOException {
         File dataFolder = new File(fileDirectory);
         if (!dataFolder.exists() && !dataFolder.isDirectory()) {
             dataFolder.mkdirs();
         }
         File taskListFile = new File(fileDirectory + fileName);
         if (!taskListFile.exists()) {
-            try {
-                taskListFile.createNewFile();
-            } catch (Exception e) {
-
-            }
+            taskListFile.createNewFile();
         }
         this.memoFile = taskListFile;
     }
@@ -62,9 +58,10 @@ public class Storage {
     /**
      * Return List of Task objects read and processed from local memory.
      *
-     * @return List of Task objects each time the chatbot is run.
+     * @return List of Task objects each time the chatbot is started.
      */
-    public List<Task> readMemoTasks() {
+    public List<Task> readMemoTasks() throws IOException {
+
         reachFile();
 
         List<Task> taskCollections = new ArrayList<>();
@@ -117,37 +114,57 @@ public class Storage {
 
 
     /**
-     * Overwrite local memory with the current List of Task objects.
+     * Overwrites local memory with the current List of Task objects.
+     * If file does not exist, creates a new file with current tasklist.
      *
-     * @param task_list  Current List of Task objects.
+     * @param taskList  Current List of Task objects.
+     * @return  true if successfully read and written file, false if failure.
      */
-    public void write_memory(List<Task> task_list) throws IOException {
-        FileWriter fw = new FileWriter(fileDirectory + fileName);
-        String textToAppend = "";
-        Iterator taskIter = task_list.iterator();
-        while (taskIter.hasNext()) {
-            Task t = (Task) taskIter.next();
-            textToAppend += taskToMemoStr(t);
+    public boolean write_memory(List<Task> taskList) {
+        try {
+            if (!new File(fileDirectory + fileName).exists()) {
+                reachFile();
+            }
+            FileWriter fw = new FileWriter(fileDirectory + fileName);
+            Iterator taskIter = taskList.iterator();
+            String textToAppend = "";
+            while (taskIter.hasNext()) {
+                Task t = (Task) taskIter.next();
+                textToAppend += taskToMemoStr(t);
+            }
+            fw.write(textToAppend);
+            fw.close();
+            return true;
+        } catch (Exception e) {
+            return false;
         }
-        fw.write(textToAppend);
-        fw.close();
+
     }
 
 
     /**
-     * Write local memory with a newly added Task object (not overwriting).
+     * Modifies local memory with a newly added Task object (not overwriting).
+     * If local file not existing, create a new file.
      *
      * @param filePath  Path of the file to be modified.
      * @param t  Task object to be added.
+     * @return  true if successful appending/overwriting, false if failure.
      */
-    public void appendToFile(String filePath, Task t) {
+    public boolean appendToFile(String filePath, Task t, List<Task> taskList) {
+        if (!new File(filePath).exists()) {
+            boolean success = write_memory(taskList);
+            if (!success) {
+                return false;
+            }
+        }
         try {
             FileWriter fw = new FileWriter(filePath, true); // appending instead of overwriting
             fw.write(taskToMemoStr(t));
             fw.close();
         } catch (Exception ex) {
-            HandleException.handleException(DukeException.ExceptionType.READ_FILE);
+            return false;
         }
+        return true;
     }
 
 }

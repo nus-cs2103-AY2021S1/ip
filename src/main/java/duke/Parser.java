@@ -16,9 +16,13 @@ public class Parser {
      * @param dateTime  User input of date and time of a Task object (specifically Deadline/Event).
      * @returns  Processed datetime of a Deadline or Event object.
      */
-    public String dateTimeParser(String dateTime) {
-        DateTimeConverter dtc = new DateTimeConverter(FormatStyle.MEDIUM, FormatStyle.SHORT);
-        return dtc.processTime(dateTime);
+    public String dateTimeParser(String commandType, String dateTime) {
+        try {
+            DateTimeConverter dtc = new DateTimeConverter(FormatStyle.MEDIUM, FormatStyle.SHORT);
+            return dtc.processTime(commandType, dateTime);
+        } catch (Exception e) {
+            return "improperDateTime";
+        }
     }
 
 
@@ -45,6 +49,7 @@ public class Parser {
     }
 
 
+
     /**
      * Return Specific information of a Command in Segments.
      *
@@ -53,22 +58,28 @@ public class Parser {
      */
     public String[] commandParser(String input) {
 
-        if (input.equals("bye") || input.equals("hello") || input.equals("list")) {
-            return new String[]{input};
+        String cleanInput = input.trim();
+        if (!cleanInput.contains(" ")) {   // single word command
+            switch (cleanInput) {
+            case "bye":
+            case "hello":
+            case "list":
+                return new String[]{input};
+            default:
+                return parseException(cleanInput);
+            }
         }
 
-        String[] inputSplitArr = input.split(" ", 2);
+        String[] inputSplitArr = cleanInput.split(" ", 2);
         String commandType = inputSplitArr[0];
         String taskContent = inputSplitArr[1];
 
         switch (commandType) {
         case "find":
             return parseFind(commandType, taskContent);
-
         case "done":
         case "delete":
             return parseModifications(commandType, taskContent);
-
         case "todo":
         case "event":
         case "deadline":
@@ -82,41 +93,48 @@ public class Parser {
 
 
     public String[] parseFind(String commandType, String keyword) {
-        if (keyword.isBlank()) {
-            return new String[] {"exception", "find"};
-        }
+//        if (keyword.isBlank()) {
+//            return new String[] {"exception", "find"};
+//        }
         return new String[] {commandType, keyword};
     }
 
 
     public String[] parseModifications(String commandType, String actionNumber) {
-        if (actionNumber.isBlank()) {
-            return new String[] {"exception", "empty_illegal"};
-        }
+//        if (actionNumber.isBlank()) {
+//            return new String[] {"exception", "empty_illegal"};
+//        }
         return new String[] {commandType, actionNumber};
     }
 
 
     public String[] parseNewEvent(String commandType, String taskContent) {
 
-        String[] output;
+//        String[] output;
+//
+//        if (commandType.equals("todo")) {
+//            //output = parseTodo(taskContent);
+//            output = new String[] {commandType, taskContent};
+//        } else {
+//            output = parseEventAndDeadline(commandType, taskContent);
+//        }
+//
+//        return output;
 
         if (commandType.equals("todo")) {
-            output = parseTodo(commandType, taskContent);
+            return parseTodo(taskContent);
         } else {
-            output = parseEventAndDeadline(commandType, taskContent);
+            return parseEventAndDeadline(commandType, taskContent);
         }
-
-        return output;
 
     }
 
 
-    public String[] parseTodo(String commandType, String taskContent) {
-        if (taskContent.isBlank()) {
-            return new String[] {"exception", "todo"};
-        }
-        return new String[] {commandType, taskContent};
+    public String[] parseTodo(String taskContent) {
+//        if (taskContent.isBlank()) {
+//            return new String[] {"exception", "todo"};
+//        }
+        return new String[] {"todo", taskContent};
     }
 
 
@@ -128,16 +146,79 @@ public class Parser {
             String taskAction = taskDetails[0];
             String dateTime = taskDetails[1];
 
-            dateTime = this.dateTimeParser(dateTime);
+            dateTime = dateTimeParser(commandType, dateTime);
+
+            if (dateTime.equals("improperDateTime")) {
+                return new String[]{"exception", "improperDateTime"};
+            }
 
             return new String[]{commandType, taskAction, dateTime};
 
         } catch (Exception ex) {
-            String exceptionType = commandType.equals("event")
-                    ? "event"
-                    : "deadline";
-            return new String[]{"exception", exceptionType};
+//            String exceptionType = commandType.equals("event")
+//                    ? "event"
+//                    : "deadline";
+//            return new String[]{"exception", exceptionType};
+            return parseException(commandType);
         }
     }
+
+    public String[] parseException(String type) {
+        switch (type) {
+        case "done":
+        case "delete":
+            return new String[] {"exception", "empty_illegal"};
+        case "find":
+        case "todo":
+        case "event":
+        case "deadline":
+            return new String[] {"exception", type};
+        default:
+            return new String[] {"exception", "no_meaning"};
+        }
+    }
+
+
+
+    //    /**
+//     * Return Specific information of a Command in Segments.
+//     *
+//     * @param input  User input of command.
+//     * @returns  Specific information of a Command in the form of String array.
+//     */
+//    public String[] commandParser(String input) {
+//
+//        if (input.equals("bye") || input.equals("hello") || input.equals("list")) {
+//            return new String[]{input};
+//        }
+//
+//        String commandType;
+//        String taskContent;
+//        try {
+//            String[] inputSplitArr = input.split(" ", 2);
+//            commandType = inputSplitArr[0];
+//            taskContent = inputSplitArr[1];
+//        } catch (Exception e) {
+//            return new String[] {"exception", "no_meaning"};
+//        }
+//
+//        switch (commandType) {
+//        case "find":
+//            return parseFind(commandType, taskContent);
+//
+//        case "done":
+//        case "delete":
+//            return parseModifications(commandType, taskContent);
+//
+//        case "todo":
+//        case "event":
+//        case "deadline":
+//            return parseNewEvent(commandType, taskContent);
+//
+//        default:
+//            return new String[] {"exception", "no_meaning"};
+//        }
+//
+//    }
 
 }

@@ -29,7 +29,7 @@ public class TaskList {
 
     /**
      * Constructor of TaskList class.
-     * Initialize the taskCollections to be an empty ArrayList.
+     * Initializes the taskCollections to be an empty ArrayList.
      *
      * @param taskCollections List of Task objects to initialize the class variable taskCollections.
      * @param memoFileDir     Directory of the file to store tasks.
@@ -45,7 +45,7 @@ public class TaskList {
 
     /**
      * Another Constructor of TaskList class.
-     * Initialize the taskCollections to be an empty ArrayList.
+     * Initializes the taskCollections to be an empty ArrayList.
      *
      * @return Type, status, content, and empty datetime of Task object in the form of an array of Strings
      */
@@ -55,7 +55,7 @@ public class TaskList {
 
 
     /**
-     * Return taskCollections of the TaskList object.
+     * Returns taskCollections of the TaskList object.
      *
      * @return Current list of Tasks.
      */
@@ -65,10 +65,10 @@ public class TaskList {
 
 
     /**
-     * Return List of the Task objects matching the keyword.
+     * Returns List of the Task objects matching the keyword.
      *
      * @param keyword  User input of keyword to look for.
-     * @return Matching Task objects.
+     * @return Matching Task objects (task content or datetime).
      */
     public List<Task> searchTask(String keyword) {
         List<Task> searchResult = new ArrayList<>();
@@ -82,6 +82,7 @@ public class TaskList {
                 continue;
             }
             if (currTask.getType().equals("D") || currTask.getType().equals("E")) {
+                // search in DateTime section
                 if (currTask.getInfo()[3].toLowerCase().contains(keywordLowerCase)) {
                     searchResult.add(currTask);
                 }
@@ -91,9 +92,9 @@ public class TaskList {
         return searchResult;
     }
 
-    
+
     /**
-     * Add new Task object to the temporary collection and local memory.
+     * Adds new Task object to the temporary collection and local memory.
      */
     public List<String> addTask(String[] commandArr) {
         String type = commandArr[0];
@@ -107,9 +108,8 @@ public class TaskList {
                 : new Deadline(taskContent, commandArr[2]);
         try {
             taskCollections.add(t);
-            new Storage(memoFileDir, memoFileName).appendToFile(memoFileDir + memoFileName, t);
-            output.add("Got it. I've added ths task:\n" + "  " + taskCollections.get(taskCollections.size() - 1)
-                    + "\nNow you have " + taskCollections.size() + " tasks in the list.");
+            new Storage(memoFileDir, memoFileName).appendToFile(memoFileDir + memoFileName, t, taskCollections);
+            output.add(addSuccessMsg("add", t.toString()));
         } catch (Exception e) {
             output.addAll(HandleException.handleException(
                     DukeException.ExceptionType.READ_FILE));
@@ -119,20 +119,26 @@ public class TaskList {
 
 
     /**
-     * Modify temporary tasklist and overwrite local memory.
+     * Modifies temporary tasklist and overwrite local memory.
      */
     public List<String> editTask(String[] commandArr) {
         List<String> output = new ArrayList<>();
 
         try {
-            String type = commandArr[0];
+            String actionType = commandArr[0];
             int taskNumber = Integer.parseInt(commandArr[1]);
             int actionNumber = taskNumber - 1;
             String taskContent = taskCollections.get(actionNumber).toString();
 
-            editTaskCollections(type, actionNumber);
-            new Storage(memoFileDir, memoFileName).write_memory(taskCollections);
-            output.add(addSuccessMsg(type, taskContent));
+            editTaskCollections(actionType, actionNumber);
+            boolean success = new Storage(memoFileDir, memoFileName).write_memory(taskCollections);
+            if (success) {
+                output.add(addSuccessMsg(actionType, taskContent));
+            } else {
+                output.addAll(HandleException.handleException(
+                        DukeException.ExceptionType.READ_FILE
+                ));
+            }
 
         } catch (Exception ex) {
             output.addAll(HandleException.handleException(
@@ -142,8 +148,11 @@ public class TaskList {
     }
 
 
-    public void editTaskCollections(String type, int actionNumber) {
-        switch (type) {
+    /**
+     * Modifies local taskCollections in response to a 'done' or 'delete' command.
+     */
+    public void editTaskCollections(String actionType, int actionNumber) {
+        switch (actionType) {
         case "delete":
             taskCollections.remove(actionNumber);
             break;
@@ -155,15 +164,22 @@ public class TaskList {
     }
 
 
+    /**
+     * Adds output message after a successful 'done', 'delete' or 'add' action.
+     */
     public String addSuccessMsg(String type, String taskContent) {
-        if (type.equals("delete")) {
-            return "Noted. I've removed this task:\n" + taskContent + "\n"
-                    + "Now you have " + taskCollections.size() + " tasks in the list.";
+        switch (type) {
+            case "delete":
+                return "Noted. I've removed this task:\n" + taskContent
+                        + "\nNow you have " + taskCollections.size() + " tasks in the list.";
+            case "done":
+                return "Nice! I've marked this task as done:\n" + " [\u2713] "
+                        + taskContent.split("] ", 2)[1];
+            case "add":
+            default:
+                return "Got it. I've added ths task:\n" + "  " + taskContent
+                        + "\nNow you have " + taskCollections.size() + " tasks in the list.";
         }
-//        return "Nice! I've marked this task as done:\n" + " [\u2713] "
-//                + taskCollections.get(actionNumber).toString().split("] ", 2)[1];
-        return "Nice! I've marked this task as done:\n" + " [\u2713] "
-                + taskContent.split("] ", 2)[1];
     }
 
 }
