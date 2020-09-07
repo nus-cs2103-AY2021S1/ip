@@ -9,6 +9,10 @@ public class Response {
         this(null, false, false);
     }
 
+    public Response(String message) {
+        this(message, false, false);
+    }
+
     /**
      * A Response object.
      *
@@ -20,10 +24,6 @@ public class Response {
         this.message = message;
         this.isError = isError;
         this.isExit = isExit;
-    }
-
-    public Response(String message) {
-        this(message, false, false);
     }
 
     public String getMessage() {

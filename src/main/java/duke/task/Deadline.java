@@ -8,26 +8,26 @@ import java.time.format.DateTimeFormatter;
  * Represents a deadline.
  */
 public class Deadline extends Task {
-    private final LocalDateTime by;
+    private final LocalDateTime dateTime;
 
-    public Deadline(String description, LocalDateTime by) {
-        this(description, by, false);
+    public Deadline(String description, LocalDateTime dateTime) {
+        this(description, dateTime, false);
     }
 
     /**
      * The deadline constructor.
      *
      * @param description The description of the deadline.
-     * @param by The date/time the deadline is due by.
+     * @param dateTime The date/time the deadline is due by.
      * @param isDone The boolean keeping track of whether the deadline is done.
      */
-    public Deadline(String description, LocalDateTime by, boolean isDone) {
+    public Deadline(String description, LocalDateTime dateTime, boolean isDone) {
         super(description, isDone);
-        this.by = by;
+        this.dateTime = dateTime;
     }
 
-    public LocalDateTime getBy() {
-        return this.by;
+    public LocalDateTime getDateTime() {
+        return this.dateTime;
     }
 
     /**
@@ -38,18 +38,18 @@ public class Deadline extends Task {
      */
     @Override
     public boolean isDue(LocalDate date) {
-        return this.by.toLocalDate().equals(date);
+        return this.dateTime.toLocalDate().equals(date);
     }
 
     @Override
     public String toSaveData() {
-        return "D | " + super.toSaveData() + " | " + this.by;
+        return "D | " + super.toSaveData() + " | " + this.dateTime;
     }
 
     @Override
     public String toString() {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy, h:mm a");
 
-        return "[D]" + super.toString() + " (by: " + this.by.format(formatter) + ")";
+        return "[D]" + super.toString() + " (by: " + this.dateTime.format(formatter) + ")";
     }
 }

@@ -35,7 +35,7 @@ public class TaskListTest {
 
         taskList.addTask(TaskType.DEADLINE, TaskListTest.DESCRIPTION, TaskListTest.DATE_TIME);
         assertEquals(expectedTask.getDescription(), taskList.getTask(1).getDescription());
-        assertEquals(expectedTask.getBy(), ((Deadline) taskList.getTask(1)).getBy());
+        assertEquals(expectedTask.getDateTime(), ((Deadline) taskList.getTask(1)).getDateTime());
     }
 
     @Test
@@ -45,7 +45,7 @@ public class TaskListTest {
 
         taskList.addTask(TaskType.EVENT, TaskListTest.DESCRIPTION, TaskListTest.DATE_TIME);
         assertEquals(expectedTask.getDescription(), taskList.getTask(1).getDescription());
-        assertEquals(expectedTask.getAt(), ((Event) taskList.getTask(1)).getAt());
+        assertEquals(expectedTask.getDateTime(), ((Event) taskList.getTask(1)).getDateTime());
     }
 
     @Test
