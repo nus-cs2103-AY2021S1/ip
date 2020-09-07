@@ -22,6 +22,8 @@ public class TaskList {
         int iterator = 1;
         output += "Here are the matching tasks in your list:\n";
 
+        assert listOfFoundItems.size()>0;
+
         for (Task s : listOfFoundItems) {
             output += iterator + "." + s.toString();
             iterator++;
@@ -35,9 +37,8 @@ public class TaskList {
         return "added: " + myTask;
     }
 
-
-
     public String deleteTask(int index) {
+        assert this.tasks.size() > index;
         Task myTask = this.tasks.get(index);
         this.tasks.remove(index);
         return "removed: " + myTask;
