@@ -25,7 +25,6 @@ public class Duke{
 
     /**
      * Constructor for a new driver system
-//     * @param filePath  the file path of the schedule list
      */
     public Duke() {
         ui = new Ui();

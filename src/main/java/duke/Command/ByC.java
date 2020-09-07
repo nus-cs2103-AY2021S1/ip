@@ -17,6 +17,10 @@ public class ByC extends Command {
         this.input = input;
     }
 
+    private boolean isBy(Deadline d, LocalDate date) {
+        return (d.by.isBefore(date) || d.by.equals(date));
+    }
+
     @Override
     public String execute(Ui ui, TaskList todoList, Storage store) throws IOException {
         assert input.length() > 2 : "no date entered";
@@ -25,9 +29,7 @@ public class ByC extends Command {
         result += "By this day, you have: \n" ;
         int deadCount = 0;
         for (Task checkDead : todoList.todoList) {
-            if (checkDead instanceof Deadline &&
-                    (((Deadline) checkDead).by.isBefore(checkBy) ||
-                            ((Deadline) checkDead).by.equals(checkBy))) {
+            if (checkDead instanceof Deadline && isBy((Deadline)checkDead, checkBy)) {
                 result += checkDead.toString();
                 deadCount++;
             }
