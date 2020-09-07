@@ -15,6 +15,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.tag = "";
     }
 
     /**
@@ -25,6 +26,7 @@ public class Task {
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
+        this.tag = "";
     }
 
     /**
@@ -60,7 +62,8 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), this.description);
+        return String.format("[%s]%s %s",
+                getStatusIcon(), this.tag.length() > 0 ? "[#" + this.tag + "]" : "", this.description);
     }
 
     /**

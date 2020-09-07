@@ -86,6 +86,22 @@ public class TaskList {
     }
 
     /**
+     * Tags the task at that particular index and returns that task.
+     * @param idx The index to identify the task to be tagged.
+     * @param tag The word to tag task with.
+     * @return The task that has been tagged.
+     * @throws DukeException Throws DukeException when the index given is not valid.
+     */
+    public Task tagTask(int idx, String tag) throws DukeException {
+        if (idx < 0 || idx >= listOfTasks.size()) {
+            throw new DukeException("The task cannot be found.");
+        }
+        Task task = listOfTasks.get(idx);
+        task.addTag(tag);
+        return task;
+    }
+
+    /**
      * Adds a task to the list.
      * @param task The task to be added.
      */

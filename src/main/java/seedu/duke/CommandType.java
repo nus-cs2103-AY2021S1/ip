@@ -11,7 +11,8 @@ public enum CommandType {
     TODO("todo"),
     DEADLINE("deadline"),
     EVENT("event"),
-    FIND("find");
+    FIND("find"),
+    TAG("tag");
 
     private final String name;
     CommandType(String name) {

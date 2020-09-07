@@ -141,6 +141,15 @@ public class Ui {
         this.outputLine(String.format("Now you have %d tasks in the list.", numTasksLeft));
     }
 
+    /**
+     * Shows the user the task that has been tagged.
+     * @param task The task that has been tagged.
+     */
+    public void showTaskTagged(Task task) {
+        this.outputLine("Got it. I've tagged this task:");
+        printWithIndent(task.toString());
+    }
+
     private void printWithIndent(String str) {
         this.outputLine("  " + str);
     }
