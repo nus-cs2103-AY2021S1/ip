@@ -32,7 +32,7 @@ public final class DeleteCommand extends Command {
                         final Storage storage) throws UltronException {
 
         //Initialise index
-        int index = Parser.parseInteger(this.getArguments());
+        int index = Parser.parseInteger(this.getArgument());
 
         //Check if the index is out of range
         if (index < 0 || index >= taskList.size()) {

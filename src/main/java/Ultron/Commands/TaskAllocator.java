@@ -58,22 +58,22 @@ public final class TaskAllocator extends Command {
         String command = taskCommand.name();
 
         //Trim the args
-        if (getArguments().trim().length() == 0) {
+        if (getArgument().trim().length() == 0) {
 
             //Throw an exception when there is nothing supplied
             throw new UltronException(command,
-                ExceptionType.NO_ARGUMENTS_SUPPLIED);
+                    ExceptionType.NO_ARGUMENTS_SUPPLIED);
         }
 
         try {
             //Create a new task
-            task = taskCommand.createTask(getArguments());
+            task = taskCommand.createTask(getArgument());
 
         } catch (IllegalStateException e) {
 
             //Throw a Duke exception
             throw new UltronException(command,
-                ExceptionType.INVALID_COMMAND);
+                    ExceptionType.INVALID_COMMAND);
         }
 
         //Add the task to the task list
@@ -82,6 +82,6 @@ public final class TaskAllocator extends Command {
         //Print out the message
         ui.setMessage(String.format("Can't you keep track of '%s' yourself?\n"
                 + "Now you have %d burdens%n",
-            task, taskList.size()));
+                task, taskList.size()));
     }
 }

@@ -31,21 +31,21 @@ public class FindCommand extends Command {
                         final UI ui,
                         final Storage storage) throws UltronException {
 
-        if (getArguments().length() == 0) {
-            throw new UltronException("find", getArguments(), ExceptionType.NO_ARGUMENTS_SUPPLIED);
+        if (getArgument().length() == 0) {
+            throw new UltronException("find", getArgument(), ExceptionType.NO_ARGUMENTS_SUPPLIED);
         }
-        assert getArguments().length() > 0;
-        boolean printed = false;
+        assert getArgument().length() > 0;
+        boolean isPrinted = false;
         int count = 0;
         StringBuilder message = new StringBuilder();
         message.append("Why do you always bothering me?\n");
-        for (Task task : taskList.getList()) {
-            if (task.getMessage().contains(getArguments())) {
+        for (Task task : taskList.getTasks()) {
+            if (task.getMessage().contains(getArgument())) {
                 message.append((String.format("%d. %s\n", ++count, task)));
-                printed = true;
+                isPrinted = true;
             }
         }
-        if (!printed) {
+        if (!isPrinted) {
             message.append("There is literally nothing here\n");
         }
         ui.setMessage(message.toString());

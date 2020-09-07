@@ -32,10 +32,10 @@ public final class ByeCommand extends Command {
                         final UI ui,
                         final Storage storage) throws UltronException {
 
-        if (this.getArguments().trim().length() > 0) {
+        if (this.getArgument().trim().length() > 0) {
             throw new UltronException("bye", ExceptionType.TOO_MUCH_ARGUMENTS);
         }
-        assert this.getArguments().trim().length() == 0;
-        storage.writeAll(taskList.getList());
+        assert this.getArgument().trim().length() == 0;
+        storage.writeAll(taskList.getTasks());
     }
 }

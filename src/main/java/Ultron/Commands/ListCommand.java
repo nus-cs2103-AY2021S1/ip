@@ -31,7 +31,7 @@ public final class ListCommand extends Command {
                         final Storage storage) throws UltronException {
 
         //Check if there are arguments
-        if (this.getArguments().trim().length() > 0) {
+        if (this.getArgument().trim().length() > 0) {
             throw new UltronException("list", ExceptionType.TOO_MUCH_ARGUMENTS);
         }
 

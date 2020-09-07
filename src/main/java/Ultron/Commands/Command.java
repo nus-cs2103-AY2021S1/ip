@@ -49,7 +49,7 @@ public abstract class Command {
      *
      * @return String arguments.
      */
-    protected String getArguments() {
+    protected String getArgument() {
         return this.arguments;
     }
 

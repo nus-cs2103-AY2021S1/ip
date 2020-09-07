@@ -31,25 +31,25 @@ public final class DoneCommand extends Command {
     public void execute(final TaskList taskList,
                         final UI ui,
                         final Storage storage) throws UltronException {
-        int index = Parser.parseInteger(this.getArguments());
-        if (getArguments().trim().length() < 1) {
+        int index = Parser.parseInteger(this.getArgument());
+        if (getArgument().trim().length() < 1) {
             throw new UltronException("done",
-                ExceptionType.NO_ARGUMENTS_SUPPLIED);
-        } else if (getArguments().trim().length() > 1) {
+                    ExceptionType.NO_ARGUMENTS_SUPPLIED);
+        } else if (getArgument().trim().length() > 1) {
             throw new UltronException("done",
-                ExceptionType.TOO_MUCH_ARGUMENTS);
+                    ExceptionType.TOO_MUCH_ARGUMENTS);
         } else if (index >= taskList.size()) {
             throw new UltronException(Integer.toString(index + 1),
-                "done",
-                ExceptionType.INVALID_ARGUMENT);
+                    "done",
+                    ExceptionType.INVALID_ARGUMENT);
         }
         Task task = taskList.get(index);
         if (task.isDone()) {
             throw new UltronException(task.toString(), ExceptionType.ALREADY_DONE);
         }
-        assert getArguments().trim().length() == 1;
+        assert getArgument().trim().length() == 1;
         task.markDone();
         ui.setMessage(String.format("Finally! Making yourself useful\n"
-            + "\t%s%n", taskList.get(index)));
+                + "\t%s%n", taskList.get(index)));
     }
 }
