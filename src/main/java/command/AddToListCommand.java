@@ -26,6 +26,8 @@ public class AddToListCommand extends Command {
      * @throws DukeException If input date format is invalid.
      */
     public LocalDateTime processDate(String inputDeadline) throws DukeException {
+        assert inputDeadline.length() > 0 : "Date and time cannot be empty";
+
         String dateFormat;
         if (inputDeadline.contains("/")) {
             dateFormat = "/";
@@ -56,6 +58,9 @@ public class AddToListCommand extends Command {
      */
     @Override
     public String execute(String inputMsg, TaskList currList, Ui ui) throws DukeException {
+        assert currList != null : "TaskList cannot be null";
+        assert ui != null : "Ui cannot be null";
+
         // user specified action, to identify type of action
         String actionType = inputMsg.split(" ")[0];
         Task newTask;

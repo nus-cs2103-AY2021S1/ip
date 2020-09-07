@@ -35,6 +35,7 @@ public class TaskList {
      * @return Task object with task number i.
      */
     public Task get(int i) {
+        assert i < getNumberOfTasks() : "Task number is invalid";
         return tasks.get(i);
     }
 
@@ -42,6 +43,7 @@ public class TaskList {
      * @param i Remove Task object with task number i from the list.
      */
     public void remove(int i) {
+        assert i < getNumberOfTasks() : "Task number is invalid";
         this.tasks.remove(i);
     }
 
