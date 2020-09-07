@@ -13,6 +13,10 @@ import duke.task.TaskList;
  */
 public class Processor {
 
+    private static boolean isValidIndex(int index, TaskList tasks) {
+        return index > 0 && index <= tasks.getSize();
+    }
+
     /**
      * Processes the run of the program.
      * @param taskList The user's task list.
@@ -35,11 +39,13 @@ public class Processor {
                     response = ui.getFullList(taskList);
                 } else if (command.equals("done")) {
                     int index = Parser.getIndexTask(userInput);
+                    assert isValidIndex(index, taskList) : "Invalid task index";
                     Task task = taskList.getTask(index - 1);
                     task.markAsDone();
                     response = ui.getMarkTaskAsDoneMessage(task);
                 } else if (command.equals("delete")) {
                     int index = Parser.getIndexTask(userInput);
+                    assert isValidIndex(index, taskList) : "Invalid task index";
                     Task deletedTask = taskList.getTask(index - 1);
                     taskList.deleteTask(index - 1);
                     response = ui.getDeleteTaskMessage(deletedTask, taskList);

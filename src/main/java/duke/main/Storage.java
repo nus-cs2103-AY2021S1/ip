@@ -110,6 +110,7 @@ public class Storage {
         TaskList taskList = new TaskList();
         for (String taskInString : taskListInString) {
             Task task = this.translateStringToTask(taskInString);
+            assert task != null : "Task does not exist";
             taskList.addTask(task);
         }
         return taskList;

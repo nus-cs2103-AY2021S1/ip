@@ -79,6 +79,8 @@ public class Ui {
      * @param taskList The task list of the user.
      */
     private String taskListModify(String message, Task task, TaskList taskList) {
+        assert task != null : "task does not exist";
+        assert taskList != null : "task list does not exist";
         String newTaskListLength = "Now you have " + taskList.getSize() + " items in the list";
         String taskDescription = indentMessage(task.toString());
         String[] strings = {message, taskDescription, newTaskListLength};
