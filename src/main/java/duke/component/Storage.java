@@ -48,7 +48,7 @@ public class Storage {
      */
     public ArrayList<Task> getListOfTasks() throws DukeException {
         ArrayList<Task> listOfTasks = new ArrayList<>();
-
+        assert listOfTaskStrings instanceof List : "ListOfTaskStrings must be of type List";
         try {
             for (String stringTask : this.listOfTaskStrings) {
                 char typeOfTask = stringTask.charAt(0);
@@ -138,7 +138,7 @@ public class Storage {
                 fileWriter.close();
 
             } catch (IOException e) {
-                System.out.println("There was an error when writing the tasks to file: " + e.getMessage());
+
             }
         }
     }
