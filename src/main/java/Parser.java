@@ -65,7 +65,7 @@ public class Parser {
             int taskNumber = getNumber(parsedInput);
             return tasks.markTaskDone(ui, taskNumber, storage);
         } else {
-            throw new DukeException("Invalid number");
+            throw new DukeException("Invalid number for DONE command");
         }
     }
 
@@ -74,7 +74,7 @@ public class Parser {
             int taskNumber = getNumber(parsedInput);
             return tasks.deleteTask(ui, taskNumber, storage);
         } else {
-            throw new DukeException("Invalid number");
+            throw new DukeException("Invalid number for DELETE command");
         }
     }
 
@@ -105,15 +105,16 @@ public class Parser {
         }
     }
 
-    private static String handleFindCommand(Ui ui, TaskList tasks, String[] parsedInput) {
-        return tasks.findTask(ui, parsedInput);
+    private static String handleFindCommand(Ui ui, TaskList tasks, String[] parsedInput) throws DukeException {
+        if (isValidFormat(parsedInput)) {
+            return tasks.findTask(ui, parsedInput);
+        } else {
+            throw new DukeException("Invalid FIND format");
+        }
     }
 
     /**
-     * Reads the user input and return it.
      *
-     * @param input An input String.
-     * @return A boolean whether input is bye.
      */
     public static boolean isBye(String input){
         String commandKeyword = input.split(" ", 2)[0].toLowerCase();
@@ -121,15 +122,15 @@ public class Parser {
     }
 
     private static boolean isValidSize(TaskList tasks, String[] parsedInput) {
-        if (parsedInput.length > 0) {
-            String num = parsedInput[1];
-            try {
-                int number = Integer.parseInt(num);
-                return tasks.getListSize() >= number && number > 0;
-            } catch (NumberFormatException e) {
-                return false;
-            }
-        } else {
+        boolean hasDescription = parsedInput.length > 1;
+        if (!hasDescription) {
+            return false;
+        }
+        String num = parsedInput[1];
+        try {
+            int number = Integer.parseInt(num);
+            return tasks.getListSize() >= number && number > 0;
+        } catch (NumberFormatException e) {
             return false;
         }
     }
@@ -175,6 +176,10 @@ public class Parser {
     }
 
     private static boolean isValidFormat(String[] parsedInput, Task.Type type) {
+        boolean hasDescription = parsedInput.length > 1;
+        if (!hasDescription) {
+            return false;
+        }
         String body = parsedInput[1];
         if (type == Task.Type.TODO) {
             return !body.equals("");
@@ -186,6 +191,10 @@ public class Parser {
             return body.split(EVENT_SEPARATOR, 2).length == 2 && isValidTime(body, Task.Type.EVENT);
         }
         return false;
+    }
+
+    private static boolean isValidFormat(String[] parsedInput) {
+        return parsedInput.length > 1;
     }
 
     private static boolean isValidTime(String body, Task.Type type) throws DateTimeParseException {
