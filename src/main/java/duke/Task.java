@@ -41,6 +41,7 @@ public class Task {
      */
 
     public static void addTaskFromFile(String task, ArrayList<Task> store, boolean print) {
+        assert task.split(" ").length >= 4;
         String type = task.split(" ", 2)[0];
         String remain = task.split(" ", 2)[1];
         String isDone = remain.split(" ", 2)[0];
