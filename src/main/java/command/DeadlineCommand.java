@@ -19,7 +19,6 @@ import tasks.TaskList;
 public class DeadlineCommand extends Command {
 
     private static DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-    private final int deadlineIndex = 3;
     public DeadlineCommand(String input) {
         super(input);
     }
