@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 import duke.exception.DukeException;
 
@@ -74,25 +75,17 @@ public class TaskList {
 
 
     /**
-     * For each task, it will check if the task has all the keywords and if it does, will add it into a list.
-     * The list is returned
+     * Returns a list of tasks that follows the condition of the predicate parameter
      *
-     * @param keyWords The keywords to check for in tasks
-     * @return A list of tasks, each containing all the keywords.
+     * @param tester The predicate for the returned list's tasks to follow
+     * @return A list of tasks that returns true with the predicate
+
      */
-    public ArrayList<Task> find(String... keyWords) {
+    public ArrayList<Task> findTasks(Predicate<Task> tester) {
         ArrayList<Task> foundTasks = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            boolean hasKeyWords = true;
-            for (int j = 0; j < keyWords.length; j++) {
-                if (!task.toString().contains(keyWords[j])) {
-                    hasKeyWords = false;
-                    break;
-                }
-            }
-
-            if (hasKeyWords) {
+            if (tester.test(task)) {
                 foundTasks.add(task);
             }
         }
