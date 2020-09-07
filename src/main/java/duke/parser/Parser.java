@@ -41,6 +41,8 @@ public class Parser {
                 return new DeleteCommand(args, tasks, storage).execute();
             case "find":
                 return new FindCommand(args, tasks).execute();
+            case "schedule":
+                return new ScheduleCommand(args, tasks).execute();
             default:
                 return new ErrorCommand("☹ OOPS!!! I'm sorry, but I don't know what that means :-(").execute();
             }

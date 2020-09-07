@@ -4,7 +4,7 @@ import duke.exception.DukeException;
 import duke.task.TaskList;
 
 public class ListCommand extends Command {
-    TaskList tasks;
+    private TaskList tasks;
     
     public ListCommand(TaskList tasks) {
         this.tasks = tasks;
