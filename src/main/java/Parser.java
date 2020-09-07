@@ -2,17 +2,35 @@ import java.util.Scanner;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Represents a Parser. The Parser class deals with making sense of the user command and running the command.
+ */
 public class Parser {
+    /**
+     * The user interface.
+     */
     private static Ui ui;
+    /**
+     * The list of task.
+     */
     private static TaskList tasks;
+    /**
+     * The storage object used.
+     */
     private static Storage storage;
 
+    /**
+     * Creates a new <code>Parser</code> with the given <code>Ui</code>, <code>TaskList</code> and <code>Storage</code>.
+     */
     public Parser(Ui ui, TaskList tasks, Storage storage) {
         this.ui = ui;
         this.tasks = tasks;
         this.storage = storage;
     }
 
+    /**
+     * Greets and runs the user command line by line.
+     */
     public static void run() {
         Scanner scanner = new Scanner(System.in);
         ui.printLogo();
@@ -28,9 +46,9 @@ public class Parser {
     }
 
     /**
-     * this method handles two types of error: invalid input (does not contain todo/deadline/event)
-     * and empty task (if the input starts with todo/deadline/event and the content is not empty,
-     * it is assumed that the input has correct structure)
+     * Deals with the user command.
+     * @param command the command given by user.
+     * @throws DukeException when the instruction has an invalid task type, or the task type is specified but content is empty.
      */
     public static void handleCommand(String command) throws DukeException {
         if (command.equals("bye")) {
