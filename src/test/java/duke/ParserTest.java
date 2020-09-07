@@ -2,6 +2,7 @@ package duke;
 
 import duke.Parser;
 import duke.command.Command;
+import duke.command.EventCommand;
 import duke.exceptions.DukeException;
 import org.junit.jupiter.api.Test;
 
@@ -12,8 +13,8 @@ class ParserTest {
     @Test
     public void testParseCommand() {
         try {
-            Parser.parseCommand("event read book /at 2020-10-10 20:00");
-            assertTrue(true);
+            Command command = Parser.parseCommand("event read book /at 2020-10-10 20:00");
+            assertTrue(command instanceof EventCommand);
         } catch (DukeException e) {
             fail();
         }

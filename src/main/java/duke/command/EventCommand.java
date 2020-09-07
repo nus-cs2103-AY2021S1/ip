@@ -26,7 +26,8 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Execute the command to add an event into the task list.
+     * Executes the command to add an event into the task list.
+     *
      * @param tasks TaskList of tasks.
      * @param ui Ui object from the Ui class.
      * @param storage Storage object from the Storage class.

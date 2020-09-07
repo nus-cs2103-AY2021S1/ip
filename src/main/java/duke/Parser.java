@@ -9,7 +9,6 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
-
 import duke.exceptions.DukeException;
 
 /**
@@ -19,6 +18,7 @@ public class Parser {
 
     /**
      * Parse user input into useful commands.
+     *
      * @param userInput String input by user through the Ui.
      * @return respective command that will be executed.
      * @throws DukeException exceptions thrown by parsing user inputs.
@@ -42,6 +42,7 @@ public class Parser {
     /**
      * Differentiate user input into commands that add their respective
      * tasks into the task list.
+     *
      * @param command user input.
      * @return respective Command.
      * @throws DukeException unable to read user input.

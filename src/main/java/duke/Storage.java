@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
@@ -24,13 +23,13 @@ import duke.tasks.Todo;
  */
 public class Storage {
 
-    public final String path;
-
-    private DateTimeFormatter formatter =
+    public static final DateTimeFormatter FORMATTER =
             DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
-    public Storage(String storagePath) {
-        this.path = storagePath;
+    public final String path;
+
+    public Storage(String path) {
+        this.path = path;
     }
 
 
@@ -52,7 +51,6 @@ public class Storage {
             }
             bw.close();
         } catch (IOException e) {
-            e.printStackTrace();
             throw new InvalidFileException("Failed to save");
         }
     }
@@ -91,11 +89,11 @@ public class Storage {
                     break;
                 case "D":
                     newTask = new Deadline(readLine[2],
-                            LocalDateTime.parse(readLine[3], formatter));
+                            LocalDateTime.parse(readLine[3], FORMATTER));
                     break;
                 case "E":
                     newTask = new Event(readLine[2],
-                            LocalDateTime.parse(readLine[3], formatter));
+                            LocalDateTime.parse(readLine[3], FORMATTER));
                     break;
                 default:
                     break;

@@ -17,6 +17,7 @@ public class ListCommand extends Command {
 
     /**
      * Execute the command to list out all tasks in a specific format.
+     *
      * @param tasks TaskList of tasks.
      * @param ui Ui object from the Ui class.
      * @param storage Storage object from the Storage class.

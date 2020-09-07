@@ -3,10 +3,19 @@ package duke.tasks;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * Task super class that has a description and boolean
+ * to check if it is completed.
+ */
 public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructor for a new task.
+     *
+     * @param description of new task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;

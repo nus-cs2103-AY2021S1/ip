@@ -2,8 +2,12 @@ package duke.tasks;
 
 import java.util.ArrayList;
 
+/**
+ * TaskList class which contains an ArrayList of Tasks
+ * and methods to manipulate the list of tasks.
+ */
 public class TaskList {
-    ArrayList<Task> taskList;
+    private ArrayList<Task> taskList;
 
     public TaskList() {
         this.taskList = new ArrayList<>();
@@ -13,8 +17,8 @@ public class TaskList {
         this.taskList = list.getTaskList();
     }
 
-    public void addTask(Task t) {
-        taskList.add(t);
+    public void addTask(Task task) {
+        taskList.add(task);
     }
 
     public void markAsDone(int index) {
@@ -36,12 +40,4 @@ public class TaskList {
     public ArrayList<Task> getTaskList() {
         return taskList;
     }
-
-    public void showAllTasks() {
-        String allTasks = "";
-        for (int i = 0; i < taskList.size(); i++) {
-            System.out.println((i + 1) + "." + taskList.get(i));
-        }
-    }
-
 }

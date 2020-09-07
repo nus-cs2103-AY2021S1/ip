@@ -19,6 +19,7 @@ public class ExitCommand extends Command {
 
     /**
      * Execute the exit process.
+     *
      * @param tasks TaskList of tasks.
      * @param ui Ui object from the Ui class.
      * @param storage Storage object from the Storage class.

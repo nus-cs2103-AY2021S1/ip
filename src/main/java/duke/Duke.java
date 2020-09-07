@@ -16,11 +16,9 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    public Duke() {
-    }
-
     /**
      * Duke constructor to take initialize Storage, TaskList and Ui.
+     *
      * @param filePath path to saved file.
      */
     public Duke(String filePath) {
@@ -38,14 +36,16 @@ public class Duke {
      * Main method for Duke to start running its processors.
      */
     public String run(String input) {
-        String result = ui.showLine();
+        String result = "";
         try {
             Command c = Parser.parseCommand(input);
-            return result + c.execute(tasks, ui, storage) + "\n" + ui.showLine();
+            return result + c.execute(tasks, ui, storage) + "\n";
         } catch (DukeException e) {
             return ui.showErrorMessage(e.getMessage());
         }
     }
+
+
 
     public String showWelcomeMessage() {
         return this.ui.showWelcomeMessage();

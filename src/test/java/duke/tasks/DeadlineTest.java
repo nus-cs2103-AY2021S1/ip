@@ -1,6 +1,6 @@
 package duke.tasks;
 
-import duke.tasks.Deadline;
+import duke.Storage;
 import org.junit.jupiter.api.Test;
 
 import java.time.LocalDateTime;
@@ -9,7 +9,7 @@ import java.time.format.DateTimeFormatter;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 class DeadlineTest {
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+    DateTimeFormatter formatter = Storage.FORMATTER;
 
     @Test
     public void constructorTest() {

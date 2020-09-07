@@ -19,6 +19,7 @@ public abstract class Command {
 
     /**
      * Execute specific commands.
+     *
      * @param tasks TaskList of tasks.
      * @param ui Ui object from the Ui class.
      * @param storage Storage object from the Storage class.
@@ -31,6 +32,7 @@ public abstract class Command {
 
     /**
      * To indicate if command is an exit command.
+     *
      * @return true if command exits Duke and false otherwise.
      */
     public abstract boolean isExit();
