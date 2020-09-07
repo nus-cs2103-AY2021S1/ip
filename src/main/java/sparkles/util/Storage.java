@@ -112,6 +112,7 @@ public class Storage {
         } catch (IOException ignored) {
             System.out.println("Error");
         }
+        assert file.exists();
     }
 
     private Task decodeTask(String next) {
