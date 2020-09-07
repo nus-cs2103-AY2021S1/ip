@@ -81,6 +81,7 @@ public class Parser {
         try {
             // Finding the actual task
             int indexOfTask = Integer.parseInt(stringArr[1]) - 1;
+            assert indexOfTask >=0 : "The index of the task to modify is negative!";
             return handler.getTasks().get(indexOfTask);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("\u2639 Oops, " + '"' + stringArr[1] + '"'
@@ -144,9 +145,11 @@ public class Parser {
     public static Task parseTaskWithTime(String input, Task.TaskType tasktype, String separator) throws DukeException {
         String taskDesc = input.substring(tasktype.name().length() + 1, input.indexOf(separator) - 1);
         checkIsFieldEmpty("taskDesc", taskDesc);
+        assert !taskDesc.isEmpty() : "The description provided is empty!";
         // +4 due to size of /by or /at with a space
         String time = input.substring(input.indexOf(separator) + 4);
         checkIsFieldEmpty("time", time);
+        assert !time.isEmpty() : "The time provided is empty!";
         if (tasktype == Task.TaskType.DEADLINE) {
             return new Deadline(taskDesc, time);
         } else {

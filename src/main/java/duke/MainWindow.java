@@ -26,10 +26,10 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/User.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     // Standing Man icon by Icons8 from https://icons8.com/icon/8NzonSPORfzB/man-in-a-tuxedo
 
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
     // Man In A Tuxedo icon by Icons8 from https://icons8.com/icon/21832/standing-man
 
     @FXML

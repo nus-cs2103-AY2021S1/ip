@@ -156,11 +156,10 @@ public class Storage {
             } catch (DukeException e1) {
                 System.out.println(e1);
             }
-            return newList;
         } else {
             hasLoadingError = true;
-            return newList;
         }
+        return newList;
     }
 
     /**

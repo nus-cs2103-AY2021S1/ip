@@ -60,18 +60,6 @@ public class Ui {
     }
 
     /**
-     * Draws the top border of the chatbot's response.
-     */
-    public static void drawTopBorder() {
-    }
-
-    /**
-     * Draws the bottom border of the chatbot's response.
-     */
-    public static void drawBottomBorder() {
-    }
-
-    /**
      * Provides indentation for formatting.
      *
      * @param times The number of 4 spaces to be printed.
@@ -91,7 +79,6 @@ public class Ui {
      */
     public static void printSuccess(String operation, Task currentTask, int listSize) {
         // Prints success message and list size after task added/deleted
-        drawTopBorder();
         indent(1);
         if (operation.equals("add")) {
             System.out.print("Yes! I have successfully added:\n");
@@ -101,23 +88,19 @@ public class Ui {
             System.out.println("Good job! You completed:");
             indent(2);
             System.out.println(currentTask);
-            drawBottomBorder();
             return;
         }
         indent(2);
         System.out.println(currentTask);
         indent(1);
         System.out.println("You have " + listSize + " task(s) in the list.");
-        drawBottomBorder();
     }
 
     /**
      * Initial greeting message in unicode.
      */
     public static void greet() {
-        drawTopBorder();
         System.out.println(getGreeting());
-        drawBottomBorder();
     }
 
     public static String getGreeting() {
