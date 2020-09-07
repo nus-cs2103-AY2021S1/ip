@@ -11,6 +11,7 @@ import java.util.Scanner;
  * load from disk.
  */
 public class Storage {
+    private static final String MESSAGE_INVALID = "I don't understand anything you just said";
     private final Path filepath;
 
     /**
@@ -36,7 +37,6 @@ public class Storage {
             }
         }
         Files.writeString(filepath, taskListString);
-
     }
 
     /**
@@ -48,39 +48,48 @@ public class Storage {
      * @throws BlankTaskException If the task provided in the list has a blank name.
      * @throws IOException        If there was an error in saving to disk.
      */
-    ArrayList<Task> load() throws BlankTaskException, IOException {
+    ArrayList<Task> load() throws BlankTaskException, IOException, InvalidCommandException {
         if (Files.notExists(filepath)) {
             if (Files.notExists(filepath.getParent())) {
                 Files.createDirectories(filepath.getParent());
             }
             Files.createFile(filepath);
             return new ArrayList<>();
-        } else {
-            Scanner data;
-            data = new Scanner(filepath);
-            ArrayList<Task> taskList = new ArrayList<>();
-            while (data.hasNextLine()) {
-                Task curr;
-                switch (data.nextLine()) {
-                case "T":
-                    curr = new ToDo(data.nextLine());
-                    break;
-                case "E":
-                    curr = new Event(data.nextLine(), LocalDate.parse(data.nextLine()),
-                            LocalTime.parse(data.nextLine()));
-                    break;
-                default:
-                    curr = new Deadline(data.nextLine(), LocalDate.parse(data.nextLine()),
-                            LocalTime.parse(data.nextLine()));
-                    break;
-                }
-                if (data.nextBoolean()) {
-                    curr.markAsDone();
-                }
-                taskList.add(curr);
-                data.nextLine();
+        }
+
+        Scanner data;
+        data = new Scanner(filepath);
+        ArrayList<Task> taskList = new ArrayList<>();
+        populateList(data, taskList);
+        return taskList;
+    }
+
+    private void populateList(Scanner data, ArrayList<Task> taskList)
+            throws BlankTaskException, InvalidCommandException {
+        while (data.hasNextLine()) {
+            Task curr;
+            switch (data.nextLine()) {
+            case "T":
+                curr = new ToDo(data.nextLine());
+                break;
+            case "E":
+                curr = new Event(data.nextLine(), LocalDate.parse(data.nextLine()),
+                        LocalTime.parse(data.nextLine()));
+                break;
+            case "D":
+                curr = new Deadline(data.nextLine(), LocalDate.parse(data.nextLine()),
+                        LocalTime.parse(data.nextLine()));
+                break;
+            default:
+                throw new InvalidCommandException(MESSAGE_INVALID);
             }
-            return taskList;
+
+            if (data.nextBoolean()) {
+                curr.markAsDone();
+            }
+
+            taskList.add(curr);
+            data.nextLine();
         }
     }
 }
