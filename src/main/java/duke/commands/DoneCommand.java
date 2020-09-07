@@ -13,11 +13,12 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * returns the done message
-     * @param tasks
-     * @param ui
-     * @param storage
-     * @return done message
+     * Marks a task as done.
+     *
+     * @param tasks tasklist object.
+     * @param ui Ui object.
+     * @param storage Storage object.
+     * @return done message.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.getTask(index);

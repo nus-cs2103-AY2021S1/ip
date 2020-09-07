@@ -8,17 +8,12 @@ import java.util.stream.Collectors;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
 
+/**
+ * Returns a string for duke to display.
+ */
 public class Ui {
     public Ui() {
     }
-
-    //    public String readCommand() {
-    //        return sc.nextLine();
-    //    }
-
-    //    public void showLine() {
-    //        System.out.println("____________________________________________________________");
-    //    }
 
     public String displayWelcome() {
         return "Hello! I am YURINA Chan.\nWhat can I do for you? ᕕ( ᐛ )ᕗ";
@@ -26,11 +21,6 @@ public class Ui {
 
     public String displayBye() {
         return "Bye~ Hope to see you again soon! ∠( ᐛ 」∠)＿";
-    }
-
-    public String showLoadingError() {
-        return "There is no data file found. "
-                + "A new file will be created at the end of the session. ⊂(￣▽￣)⊃";
     }
 
     public String displayAddTaskMessage(Task task) {
@@ -50,10 +40,10 @@ public class Ui {
     }
 
     /**
-     * Shows all the tasks that are still in the list
+     * Shows all the tasks that are still in the list.
+     *
      * @param taskList
      */
-
     public String showTask(TaskList taskList) {
         if (taskList.getTasks().size() == 0) {
             return "This is no task in your task list yet. Add one now! (/^▽^)/";
@@ -72,10 +62,11 @@ public class Ui {
     }
 
     /**
-     * Shows the tasks on certain day
-     * @param taskList
+     * Shows the tasks on certain day.
+     *
+     * @param taskList TaskList object.
+     * @param date Date to search for tasks.
      */
-
     public String showTask(TaskList taskList, LocalDate date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
         String dateString = date.format(formatter);
@@ -94,10 +85,11 @@ public class Ui {
     }
 
     /**
-     * Shows the tasks containing certain keywords
-     * @param taskList
-     * @param keyword
-     * @return
+     * Shows the tasks containing certain keywords.
+     *
+     * @param taskList TaskList object.
+     * @param keyword Keyword to search for tasks.
+     * @return A String of relevant tasks.
      */
     public String showTask(TaskList taskList, String keyword) {
         ArrayList<Task> tasks = taskList.getTasks();

@@ -33,7 +33,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String data() {
-        return "T" + super.data() + " | " + time;
+    public String getData() {
+        return "T" + super.getData() + " | " + time;
     }
 }

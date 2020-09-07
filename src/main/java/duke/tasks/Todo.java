@@ -16,7 +16,7 @@ public class Todo extends Task {
         return super.toString().replace("[", "[T][");
     }
 
-    public String data() {
-        return "T" + super.data();
+    public String getData() {
+        return "T" + super.getData();
     }
 }
