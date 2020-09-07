@@ -12,6 +12,7 @@ public class Task {
     private String taskName;
     private boolean isDone;
     private boolean hasFormattedDate;
+    private boolean hasReminderSet;
 
     /**
      * Creates an instance of a Task object with the appropriate
@@ -22,7 +23,8 @@ public class Task {
     public Task(String taskName) {
         this.taskName = taskName;
         this.isDone = false;
-        hasFormattedDate = false;
+        this.hasFormattedDate = false;
+        this.hasReminderSet = false;
     }
 
     /**
@@ -38,6 +40,7 @@ public class Task {
         this.isDone = false;
         this.hasFormattedDate = hasFormattedDate;
         this.localDate = localDate;
+        this.hasReminderSet = false;
     }
 
     /**
@@ -87,6 +90,16 @@ public class Task {
      */
     public String getSaveFormat() {
         String done = isDone ? "1" : "0";
-        return done + " | " + taskName;
+        String reminder = hasReminderSet ? "1" : "0";
+        return done + " | " + reminder + " | " + taskName;
     }
+
+    public boolean getReminderStatus() {
+        return this.hasReminderSet;
+    }
+
+    public void setReminder() {
+        this.hasReminderSet = true;
+    }
+
 }
