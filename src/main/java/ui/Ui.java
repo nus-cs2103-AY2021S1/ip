@@ -73,7 +73,7 @@ public class Ui {
     private String doneAction(String[] splitInput, TaskList tasks) throws MugException {
         // Validate splitInput
         Parser.input(Command.DONE, splitInput.length, false);
-        assert(splitOrder.length > 1);
+        assert(splitInput.length > 1);
         Parser.info(Command.DONE, splitInput[1], false);
         // Extract and validate Id
         int doneTaskId = Parser.index(splitInput[1], splitInput.length);
@@ -89,14 +89,14 @@ public class Ui {
      * @return Respond after deleting task.
      * @throws MugException If the user input is wrong format.
      */
-    private String deleteAction(String[] splitInput, TaskList tasks) throws MugException {       
+    private String deleteAction(String[] splitInput, TaskList tasks) throws MugException {
         // Validate splitInput
         Parser.input(Command.DELETE, splitInput.length, false);
-        assert(splitOrder.length > 1);
+        assert(splitInput.length > 1);
         Parser.info(Command.DELETE, splitInput[1], false);
         // Extract and Validate Id
         int deleteTaskId = Parser.index(splitInput[1], splitInput.length);
-        assert(deleteTaskId > 0); 
+        assert(deleteTaskId > 0);
         return tasks.deleteTask(deleteTaskId);
     }
 
@@ -112,7 +112,7 @@ public class Ui {
     private String taskAction(Command command, String[] splitInput, TaskList tasks) throws MugException {
         // Validate splitInput
         Parser.input(command, splitInput.length, false);
-        assert(splitOrder.length > 1);
+        assert(splitInput.length > 1);
         Parser.info(command, splitInput[1], false);
         // Extract Info
         String info = splitInput[1];
@@ -130,7 +130,7 @@ public class Ui {
     private String findAction(String[] splitInput, TaskList tasks) throws MugException {
         // Validate splitInput
         Parser.input(Command.FIND, splitInput.length, false);
-        assert(splitOrder.length > 1);
+        assert(splitInput.length > 1);
         Parser.info(Command.FIND, splitInput[1], false);
         // extract keyword
         String keyword = splitInput[1];
@@ -148,7 +148,7 @@ public class Ui {
     /**
      * Undergoes action for list command.
      * @param tasks A list of tasks to show.
-     * @return
+     * @return list of Tasks.
      */
     private String listAction(TaskList tasks) {
         return tasks.readList();

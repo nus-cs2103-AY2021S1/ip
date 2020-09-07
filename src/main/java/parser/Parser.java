@@ -15,7 +15,7 @@ public class Parser {
      * Validates user's input.
      *
      * @param command User command.
-     * @param splitNum Length of the split string.
+     * @param splitInputLen Length of the split string.
      * @param isTime time related.
      * @throws MugException If splitNum less than 2.
      */
