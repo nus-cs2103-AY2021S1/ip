@@ -33,10 +33,14 @@ public class TaskList {
      * @param taskNumber The index of the task in the tasklist
      * @return String representation of the Task object that is deleted
      */
-    public String deleteTask(int taskNumber) {
+    public String deleteTask(int taskNumber) throws DukeException {
         assert !taskPriority.isEmpty() : "Cannot delete from an Empty Tasklist";
+        if (taskNumber > getListSize()) {
+            String message = "Index not found! Are you sure you are typing the correct index?";
+            throw new DukeException(message);
+        }
         Task removedTask = null;
-        for (int i = 0; i < taskNumber; i++) {
+        for (int i = 1; i < taskNumber; i++) {
             removedTask = taskPriority.poll();
         }
         this.tasklist.remove(removedTask);
@@ -50,10 +54,14 @@ public class TaskList {
      * @param taskNumber The index of the task in the tasklist
      * @return String representation of the Task object that is updated
      */
-    public String updateTask(int taskNumber) {
+    public String updateTask(int taskNumber) throws DukeException {
         assert !taskPriority.isEmpty() : "Cannot delete from an Empty Tasklist";
+        if (taskNumber > getListSize()) {
+            String message = "Index not found! Are you sure you are typing the correct index?";
+            throw new DukeException(message);
+        }
         Task updatedTask = null;
-        for (int i = 0; i < taskNumber; i++) {
+        for (int i = 1; i < taskNumber; i++) {
             updatedTask = taskPriority.poll();
         }
         updatedTask.setDone();

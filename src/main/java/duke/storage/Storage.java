@@ -1,13 +1,13 @@
 package duke.storage;
 
-import duke.task.Task;
-import duke.task.TaskList;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import duke.task.*;
+import duke.task.TaskList;
 
 /**
  * <h1> Storage Class (Saving Tasks)</h1>
