@@ -13,11 +13,11 @@ import java.util.ArrayList;
 
 import command.Command;
 import mugexception.MugException;
-import validator.Validator;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
+import validator.Validator;
 
 
 /**

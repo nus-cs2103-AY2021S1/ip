@@ -2,8 +2,9 @@ package ui;
 
 import command.Command;
 import mugexception.MugException;
-import validator.Validator;
 import tasks.TaskList;
+import validator.Validator;
+
 
 /**
  * User interaction.
