@@ -1,26 +1,20 @@
 /**
  * Parser class handles all the commands from the King Program
  * and returns a reply from the commands.
+ *
+ * @see parser.ParserLogic
  */
 package parser;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 import king.KingException;
 import storage.Storage;
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
+import storage.StorageException;
 import tasks.TaskList;
-import tasks.ToDo;
-import ui.UI;
 
 public class Parser {
 
-    private final Storage storage;
     private final ParserExceptions exceptions = new ParserExceptions();
-    private TaskList taskList;
+    private final ParserLogic parserLogic;
 
     /**
      * Parse the commands from the King Program
@@ -30,8 +24,7 @@ public class Parser {
      * @return Parser parser to parse commands.
      */
     public Parser(Storage storage, TaskList taskList) {
-        this.storage = storage;
-        this.taskList = taskList;
+        parserLogic = new ParserLogic(taskList, storage);
     }
 
     /**
@@ -43,104 +36,35 @@ public class Parser {
      * @param phrase the command given by the user.
      * @return String the reply from the command given.
      * @throws KingException kingException is thrown when phrase is invalid.
+     * @throws StorageException StorageException thrown by Storage when writing to asset file.
+     * @see Storage
      */
-    public String parse(String phrase) throws KingException {
+
+    public String parse(String phrase) throws KingException, StorageException {
+
         assert phrase != null : "command cannot be null!";
 
         String mainCommand = phrase.split(" ")[0].toLowerCase();
-        String reply;
-
         if (mainCommand.equals("bye")) {
-            reply = UI.emptyChatBox("Bye! Come back soon.");
+            return parserLogic.parseBye();
         } else if (mainCommand.equals("list")) {
-            reply = UI.showTaskList(taskList);
+            return parserLogic.parseList();
         } else if (phrase.equals("clear list")) {
-            taskList.clear();
-            reply = UI.emptyChatBox("I have cleared the list!");
+            return parserLogic.parseClearList();
         } else if (mainCommand.equals("done")) {
-            String stringItem = phrase.substring(4).trim();
-            try {
-                int taskNumber = Integer.parseInt(stringItem) - 1;
-                Task item = taskList.get(taskNumber);
-                item.markAsDone();
-                reply = UI.doneChatBox(item.toString());
-            } catch (IndexOutOfBoundsException e) {
-                throw exceptions.itemNotFoundException(stringItem, e);
-            } catch (NumberFormatException e) {
-                throw (stringItem.isEmpty())
-                        ? exceptions.doneNotFollowedByNumberException()
-                        : exceptions.invalidNumberException(stringItem, e);
-            } catch (Exception e) {
-                throw exceptions.badDoneSyntaxException();
-            }
+            return parserLogic.parseDone(phrase);
         } else if (mainCommand.equals("todo")) {
-            String task = phrase.substring(4).trim();
-            if (!task.isEmpty()) {
-                ToDo todo = new ToDo(task);
-                taskList.add(todo);
-                reply = UI.addItemChatBox(todo.toString(), taskList.size());
-            } else {
-                throw exceptions.emptyTodoException();
-            }
+            return parserLogic.parseToDo(phrase);
         } else if (mainCommand.equals("event")) {
-            String item = phrase.substring(5).trim();
-            String[] tokens = item.split(" /at ");
-            if (tokens.length == 2) {
-                Event event = new Event(tokens[0], tokens[1]);
-                taskList.add(event);
-                reply = UI.addItemChatBox(event.toString(), taskList.size());
-            } else {
-                throw exceptions.badEventSyntaxException();
-            }
+            return parserLogic.parseEvent(phrase);
         } else if (mainCommand.equals("deadline")) {
-            String item = phrase.substring(8).trim();
-            String[] tokens = item.split(" /by ");
-            if (tokens.length != 2) {
-                throw exceptions.badDeadlineSyntaxException();
-            }
-            try {
-                LocalDateTime datetime = stringToLocalDateTime(tokens[1]);
-                Deadline deadline = new Deadline(tokens[0], datetime);
-                taskList.add(deadline);
-                reply = UI.addItemChatBox(deadline.toString(), taskList.size());
-            } catch (KingException badDateTimeSyntax) {
-                throw badDateTimeSyntax;
-            }
+            return parserLogic.parseDeadline(phrase);
         } else if (mainCommand.equals("delete")) {
-            String stringItem = phrase.substring(6).trim();
-            try {
-                int itemNo = Integer.parseInt(stringItem) - 1;
-                Task item = taskList.get(itemNo);
-                taskList.delete(itemNo);
-                reply = UI.deleteItemChatBox(item.toString(), taskList.size());
-            } catch (IndexOutOfBoundsException e) {
-                throw exceptions.itemNotFoundException(stringItem, e);
-            } catch (NumberFormatException e) {
-                throw (stringItem.isEmpty())
-                        ? exceptions.deleteNotFollowedByNumberException()
-                        : exceptions.invalidNumberException(stringItem, e);
-            } catch (Exception e) {
-                throw exceptions.badDeleteSyntaxException();
-            }
+            return parserLogic.parseDelete(phrase);
         } else if (mainCommand.equals("find")) {
-            String[] keywords = phrase.substring(4).trim().split(" ");
-            return UI.showFoundItems(storage.find(keywords));
+            return parserLogic.parseFind(phrase);
         } else {
             throw exceptions.badCommandException();
-        }
-        storage.persistTaskList(taskList);
-        return reply;
-    }
-
-    // takes a Date Time string and returns a LocalDateTime
-    private LocalDateTime stringToLocalDateTime(String localDateTime) throws KingException {
-        assert localDateTime != null : "localDateTime cannot be null";
-
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/MM/yyyy HHmm");
-            return LocalDateTime.parse(localDateTime, formatter);
-        } catch (Exception e) {
-            throw exceptions.badLocalDateTimeException(e);
         }
     }
 }
