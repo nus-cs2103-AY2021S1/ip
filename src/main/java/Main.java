@@ -1,3 +1,4 @@
+import duke.gui.Launcher;
 import javafx.application.Application;
 
 public class Main {
