@@ -43,8 +43,16 @@ public class MainWindow extends AnchorPane {
      * Displays welcome message on starting Duke chat bot.
      */
     public void dukeWelcome() {
+        String welcomeMessage = "Hello!!! I'm Duke, your handy tasks manager."
+                + "\nHere are some commands you can use!"
+                + "\n- To add a todo, type: 'todo <task description>'."
+                + "\n- To add a deadline, type: 'deadline <deadline description> /by <dd-mm-yyyy> HHMM'."
+                + "\n- To add an event, type: 'event <event description> /at <dd-mm-yyyy> HHMM'."
+                + "\n- To view all tasks, type: 'list'."
+                + "\n- To find tasks, type: 'find <keyword>'."
+                + "\n- To leave me, type: 'bye'.";
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog("Hello! I'm Duke, some call me a parrot.\nWhat can I do for you?", dukeImage));
+                DialogBox.getDukeDialog(welcomeMessage, dukeImage));
     }
 
     /**
