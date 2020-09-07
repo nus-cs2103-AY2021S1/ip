@@ -51,7 +51,7 @@ public class CommandLineInterfaceParser {
             case TODAY:
                 return newTodayTasksCommand();
             case UNCOMPLETED:
-               return newListAllUncompletedTasksCommand();
+                return newListAllUncompletedTasksCommand();
             case COMPLETED:
                 return newListAllCompletedTasksCommand();
             case OVERDUE:

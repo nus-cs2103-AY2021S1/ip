@@ -1,6 +1,5 @@
 package duke.task;
 
-import java.sql.Time;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -25,12 +24,12 @@ public class TaskManager {
         return this.tasks.get(taskIndex);
     }
 
-    public List<Task> getTasks() {
-        return this.tasks;
-    }
-
     public int getTotalNumberOfTasks() {
         return this.tasks.size();
+    }
+
+    public List<Task> getAllTasks() {
+        return this.tasks;
     }
 
     public int getNumberOfCompletedTasks() {
@@ -51,18 +50,6 @@ public class TaskManager {
             }
         }
         return uncompletedTasks;
-    }
-
-    public boolean isPluralCompletedTasks() {
-        return getNumberOfCompletedTasks() > 2;
-    }
-
-    public boolean isPluralUncompletedTasks() {
-        return getNumberOfUncompletedTasks() > 2;
-    }
-
-    public List<Task> getAllTasks() {
-        return this.tasks;
     }
 
     public List<Task> getAllUncompletedTasks() {

@@ -1,11 +1,8 @@
 package duke.commands;
 
-import duke.storage.Storage;
-
 import duke.task.Task;
 import duke.task.TaskManager;
 
-import duke.utils.Colour;
 import duke.utils.Messages;
 
 import java.util.List;
@@ -18,17 +15,24 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public CommandOutput executeCommand(TaskManager taskManager, Storage storage) {
+    public CommandOutput executeCommand(TaskManager taskManager) {
         List<Task> filteredTasks = taskManager.findTasksByKeyword(keyword);
-        if (filteredTasks.size() == 0) {
-            return new CommandOutput(Colour.convertTextToRed(Messages.NO_TASKS_UNDER_KEYWORD_MESSAGE), false);
-        } else {
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append("Here are the matching tasks in your list:\n");
+        String filteredTasksOutput = outputResult(filteredTasks);
+        return new CommandOutput(filteredTasksOutput, false);
+    }
+
+    private String outputResult(List<Task> filteredTasks) {
+        StringBuilder filteredTasksOutput = new StringBuilder();
+        boolean hasFilteredTasks = filteredTasks.size() > 0;
+        if (hasFilteredTasks) {
+            filteredTasksOutput.append(Messages.FILTERED_TASKS_STARTING_MESSAGE);
             for (Task task : filteredTasks) {
-                stringBuilder.append(task.toString() + "\n");
+                String taskDescription = task.toString();
+                filteredTasksOutput.append(taskDescription + "\n");
             }
-            return new CommandOutput(stringBuilder.toString(), false);
+        } else {
+            filteredTasksOutput.append(Messages.NO_TASKS_UNDER_KEYWORD_MESSAGE);
         }
+        return filteredTasksOutput.toString();
     }
 }

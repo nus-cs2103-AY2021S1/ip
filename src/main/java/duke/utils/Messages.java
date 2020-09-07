@@ -32,9 +32,15 @@ public class Messages {
 
     public static final String TASK_MARKED_AS_DONE_MESSAGE = "Good job on completing this task!"
             + "I have marked this task as done: \n";
+    public static final String FILTERED_TASKS_STARTING_MESSAGE = "Here are the matching tasks in your list:\n";
     public static final String NO_TASKS_UNDER_KEYWORD_MESSAGE = "I am sorry but there are no tasks "
             + "under the keyword you have inputted.";
-
-
-
+    public static final String NO_UNCOMPLETED_TASKS_MESSAGE = "You do not have any uncompleted tasks."
+            + " Great job on completing all your tasks";
+    public static final String NO_COMPLETED_TASKS_MESSAGE = "You do not have any completed tasks."
+            + " You better get started on completing some tasks soon";
+    public static final String NO_OVERDUE_TASKS_MESSAGE = "There are no overdue tasks."
+            + "Good job on keeping up with your tasks";
+    public static final String NO_TASKS_FOR_TODAY_MESSAGE = "There are no tasks for today."
+            + "Go ahead and chill for the day";
 }
