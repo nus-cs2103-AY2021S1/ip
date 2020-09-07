@@ -27,9 +27,6 @@ public class Main extends Application {
             stage.setResizable(false);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
-            if (duke.isExit) {
-                Platform.exit();
-            }
         } catch (IOException e) {
             e.printStackTrace();
         }
