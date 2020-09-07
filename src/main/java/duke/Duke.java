@@ -29,9 +29,9 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            String res = c.execute(tasks, ui);
+            String response = c.execute(tasks, ui);
             storage.save(tasks);
-            return res;
+            return response;
         } catch (DukeException e) {
             return ui.print(e.getMessage());
         }
@@ -45,7 +45,7 @@ public class Duke {
      * Starts execution of the Duke program.
      */
     public void run() {
-        ui.printHello();
+        printHello();
         tasks = storage.load();
         boolean isExit = false;
         while (!isExit) {
