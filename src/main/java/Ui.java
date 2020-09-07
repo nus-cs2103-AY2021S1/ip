@@ -73,6 +73,12 @@ public class Ui {
                 + "Type 'help' for list of commands.";
     }
 
+    /**
+     * Returns String for updated Task.
+     * @param oldTask Previous task
+     * @param updatedTask Updated task
+     * @return String showing task has been updated
+     */
     public String updateTaskLine(Task oldTask, Task updatedTask) {
         return "The selected Task has been updated:\n"
                 + oldTask + " ---> " + updatedTask;

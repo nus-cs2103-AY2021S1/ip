@@ -87,7 +87,7 @@ public class TaskList {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :(");
         }
 
-        assert toAdd != null: "Nothing added!";
+        assert toAdd != null : "Nothing added!";
         return ui.addTaskLine(toAdd, storage.size());
     }
 
@@ -194,31 +194,31 @@ public class TaskList {
             Task updatedTask;
 
             switch (command) {
-                case "name":
-                    String updatedName = ls[2];
-                    updatedTask = oldTask.updateName(updatedName);
+            case "name":
+                String updatedName = ls[2];
+                updatedTask = oldTask.updateName(updatedName);
+                storage.add(index, updatedTask);
+                break;
+            case "time":
+                String[] split = next.split(" time ");
+                String updatedInput = split[1];
+                String updatedTime = Parser.parseDateTime(updatedInput);
+                if (updatedTime.contains("Please input the time and date in\n")) {
+                    return updatedTime;
+                } else {
+                    updatedTask = oldTask.updateTime(updatedTime);
                     storage.add(index, updatedTask);
-                    break;
-                case "time":
-                    String[] split = next.split(" time ");
-                    String updatedInput = split[1];
-                    String updatedTime = Parser.parseDateTime(updatedInput);
-                    if (updatedTime.contains("Please input the time and date in\n")) {
-                        return updatedTime;
-                    } else {
-                        updatedTask = oldTask.updateTime(updatedTime);
-                        storage.add(index, updatedTask);
-                    }
-                    break;
-                default:
-                    throw new DukeException("Please choose either \"name\" or \"time\" to update.");
+                }
+                break;
+            default:
+                throw new DukeException("Please choose either \"name\" or \"time\" to update.");
             }
             return ui.updateTaskLine(oldTask, updatedTask);
         } catch (NumberFormatException nfe) {
             return "Please state task number after \"update\".\n";
         }
     }
-    
+
     /**
      * Getter method for task list.
      * @return The current task list of the bot
