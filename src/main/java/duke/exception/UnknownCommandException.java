@@ -6,13 +6,12 @@ package duke.exception;
  */
 public class UnknownCommandException extends DukeException {
 
+    private static final String additionalErrorDescription = " I'm sorry, but I don't know what that means :(";
+
     /**
-     * Returns an error message. Informs the user that the command entered is not recognized.
-     *
-     * @return The error message.
+     * Creates and initializes an UnknownCommandException object.
      */
-    @Override
-    public String getMessage() {
-        return super.getMessage() + " I'm sorry, but I don't know what that means :(";
+    public UnknownCommandException() {
+        super(additionalErrorDescription);
     }
 }

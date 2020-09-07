@@ -1,5 +1,7 @@
 package duke.exception;
 
+import duke.command.DoneCommand;
+
 /**
  * Encapsulates a done wrong format exception. These exceptions are thrown when the user enters a done command with an
  * invalid format in which the first word of the command is "done" but either no other text accompanies the command, or
@@ -7,20 +9,12 @@ package duke.exception;
  */
 public class DoneWrongFormatException extends WrongFormatException {
 
+    private static final String correctFormatDescription = "single whitespace and an integer";
+
     /**
      * Creates and initializes a DoneWrongFormatException object.
      */
     public DoneWrongFormatException() {
-        super("done");
-    }
-
-    /**
-     * Returns an error message. Informs the user of the valid format of the command.
-     *
-     * @return The error message.
-     */
-    @Override
-    public String getMessage() {
-        return super.getMessage() + "single whitespace and an integer";
+        super(DoneCommand.COMMAND_WORD, correctFormatDescription);
     }
 }

@@ -6,6 +6,12 @@ package duke.exception;
  */
 public class DukeException extends Exception {
 
+    protected String additionalErrorDescription;
+
+    public DukeException(String additionalErrorDescription) {
+        this.additionalErrorDescription = additionalErrorDescription;
+    }
+
     /**
      * Returns an error message. Informs the user what went wrong and how to avoid the error if appropriate.
      *
@@ -13,6 +19,6 @@ public class DukeException extends Exception {
      */
     @Override
     public String getMessage() {
-        return "OOPS!";
+        return "OOPS!" + additionalErrorDescription;
     }
 }

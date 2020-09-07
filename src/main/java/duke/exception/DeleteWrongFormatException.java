@@ -1,5 +1,7 @@
 package duke.exception;
 
+import duke.command.DeleteCommand;
+
 /**
  * Encapsulates a delete wrong format exception. These exceptions are thrown when the user enters a delete command with
  * an invalid format in which the first word of the command is "delete" but either no other text accompanies the
@@ -7,20 +9,12 @@ package duke.exception;
  */
 public class DeleteWrongFormatException extends WrongFormatException {
 
+    private static final String correctFormatDescription = "single whitespace and an integer";
+
     /**
      * Creates and initializes a DeleteWrongFormatException object.
      */
     public DeleteWrongFormatException() {
-        super("delete");
-    }
-
-    /**
-     * Returns an error message. Informs the user of the valid format of the command.
-     *
-     * @return The error message.
-     */
-    @Override
-    public String getMessage() {
-        return super.getMessage() + "single whitespace and an integer";
+        super(DeleteCommand.COMMAND_WORD, correctFormatDescription);
     }
 }

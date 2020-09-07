@@ -1,13 +1,13 @@
 package duke.exception;
 
+import duke.command.FindCommand;
+
 public class FindWrongFormatException extends WrongFormatException {
 
-    public FindWrongFormatException() {
-        super("find");
-    }
+    private static final String correctFormatDescription = "word / words that you would like to search for in\nthe"
+            + "task list.";
 
-    @Override
-    public String getMessage() {
-        return super.getMessage() + "word / words that you would like to search for in\nthe task list.";
+    public FindWrongFormatException() {
+        super(FindCommand.COMMAND_WORD, correctFormatDescription);
     }
 }

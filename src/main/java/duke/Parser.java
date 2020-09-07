@@ -112,6 +112,9 @@ public class Parser {
                 throw new EventWrongFormatException();
             }
             String taskLocation = commandParts[1].trim();
+            if (taskLocation.isEmpty()) {
+                throw new EventWrongFormatException();
+            }
             return new AddEventCommand(taskDescription, taskLocation);
         } catch (IndexOutOfBoundsException e) { // add event command is in a wrong format
             throw new EventWrongFormatException();

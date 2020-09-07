@@ -6,25 +6,12 @@ package duke.exception;
  */
 public class WrongFormatException extends DukeException {
 
-    /** The command type as specified by the first word of the command that the user entered */
-    private String commandName;
-
     /**
      * Creates and initializes a WrongFormatException object.
      *
-     * @param commandName The command type as specified by the first word of the command that the user entered.
+     * @param commandWord The command type as specified by the first word of the command that the user entered.
      */
-    public WrongFormatException(String commandName) {
-        this.commandName = commandName;
-    }
-
-    /**
-     * Returns an error message. Informs the user of the valid format of the command.
-     *
-     * @return The error message.
-     */
-    @Override
-    public String getMessage() {
-        return super.getMessage() + " The " + commandName + " command has to be followed by a\n";
+    public WrongFormatException(String commandWord, String correctFormatDescription) {
+        super(" The " + commandWord + " command has to be followed by a\n" + correctFormatDescription);
     }
 }
