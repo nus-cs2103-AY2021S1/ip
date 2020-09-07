@@ -15,6 +15,7 @@ public class Ui {
 
     /**
      * Shows the interface to ask for the name of a todo.
+     * @return the question
      */
     public String askTodo() {
         return "What is the name of your Todo?";
@@ -22,7 +23,7 @@ public class Ui {
 
     /**
      * Shows the interface to ask for the name of a deadline.
-     * @return
+     * @return the question
      */
     public String askDeadlineName() {
         return "What is the name of your Deadline?";
@@ -30,6 +31,7 @@ public class Ui {
 
     /**
      * Shows the interface to ask for the due date of the deadline.
+     * @return the question
      */
     public String askDeadlineDate() {
         return "When is the deadline? (Give in this format: day month year)";
@@ -37,6 +39,7 @@ public class Ui {
 
     /**
      * Shows the interface to ask for the name of the event.
+     * @return the question
      */
     public String askEventName() {
         return "What is the name of your Event?";
@@ -44,6 +47,7 @@ public class Ui {
 
     /**
      * Shows the interface to ask for the start time of the event.
+     * @return the question
      */
     public String askEventStartTime() {
         return "When is the start of your event? (Give in this format: day month year hour:min)";
@@ -51,6 +55,7 @@ public class Ui {
 
     /**
      * Shows the interface to to ask for the end time of the event.
+     * @return the question
      */
     public String askEventEndTime() {
         return "When is the end of your event? (Give in this format: day month year hour:min)";
@@ -59,6 +64,7 @@ public class Ui {
     /**
      * Shows the interface to ask for the number of the
      * task to be marked as completed.
+     * @return the question
      */
     public String askTaskNumToComplete() {
         return "What is the number of the task you wish to mark as complete?";
@@ -67,6 +73,7 @@ public class Ui {
     /**
      * Displays a message to indicating a task has been marked as completed.
      * @param task the task that has completed
+     * @return the message indicated the task has been marked as completed
      */
     public String taskCompleted(Task task) {
         return "Nice, I've marked this task as done!" + task.toString();
@@ -75,6 +82,7 @@ public class Ui {
     /**
      * Shows the interface to ask for the number of the
      * task to be deleted.
+     * @return the question
      */
     public String askTaskNumToDelete() {
         return "What is the number of the task you wish to delete?";
@@ -82,6 +90,7 @@ public class Ui {
 
     /**
      * Show interface to ask for a keyword.
+     * @return the question
      */
     public String askForKeyword() {
         return "Give me a keyword to search for";
