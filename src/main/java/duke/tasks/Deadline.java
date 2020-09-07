@@ -32,6 +32,7 @@ public class Deadline extends Task {
     }
 
     public LocalDate getDate() {
+        assert this.date != null : "date parameter of Deadline object cannot be null";
         return this.date;
     }
 

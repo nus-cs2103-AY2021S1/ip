@@ -32,6 +32,7 @@ public class DoneCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         try {
+            assert i < taskList.size() : "index should be less than taskList length";
             ui.saveDoneMessage(taskList.setDone(i));
             storage.refresh(taskList);
         } catch (IOException e) {

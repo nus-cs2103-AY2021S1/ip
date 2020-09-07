@@ -47,6 +47,7 @@ public class Event extends Task {
     }
 
     public LocalDate getDate() {
+        assert this.date != null : "date parameter of Event object cannot be null";
         return this.date;
     }
 
