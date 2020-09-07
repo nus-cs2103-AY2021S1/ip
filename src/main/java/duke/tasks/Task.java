@@ -7,6 +7,8 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    protected final static String DELIMITER = " ~/~ ";
+
     /**
      * Constructs a task associated with a description.
      * @param description The description of the task.

@@ -56,9 +56,9 @@ public class Event extends Task {
      */
     @Override
     public String txtFileFormat() {
-        return "E ~/~ " + super.txtFileFormat() + " ~/~ " + this.date.toString()
-                + (startTime != null ? " ~/~ " + startTime.toString() : "")
-                + (endTime != null ? " ~/~ " + endTime.toString() : "");
+        return "E" + DELIMITER + super.txtFileFormat() + DELIMITER + this.date.toString()
+                + (startTime != null ? DELIMITER + startTime.toString() : "")
+                + (endTime != null ? DELIMITER + endTime.toString() : "");
     }
 
     /**

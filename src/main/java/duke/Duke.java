@@ -15,7 +15,7 @@ public class Duke {
     private Ui ui;
     private Storage storage;
 
-    private static final String path = "./data/duke.txt";
+    private static final String PATH = "./data/duke.txt";
 
     /**
      * Constructs a Duke object associated with a file path.
@@ -24,7 +24,7 @@ public class Duke {
     public Duke() {
         try {
             this.ui = new Ui();
-            this.storage = new Storage(path);
+            this.storage = new Storage(PATH);
             this.taskList = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.saveErrorMessage("Error");

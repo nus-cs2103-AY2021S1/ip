@@ -27,6 +27,7 @@ public class Ui {
     public void saveListMessage(TaskList taskList, LocalDate date) {
         int i = 1;
         StringBuilder sb = new StringBuilder();
+
         if (date == null) {
             for (Task t : taskList.getList()) {
                 sb.append(i + "." + t + "\n");
@@ -40,6 +41,7 @@ public class Ui {
                 }
             }
         }
+
         this.message = sb.toString();
     }
 
@@ -54,11 +56,13 @@ public class Ui {
         assert i >= 0 : "index of taskList must be greater or equal to zero";
         assert i < taskList.size() : "index of taskList must be less than size of taskList";
         StringBuilder sb = new StringBuilder();
+
         for (Task t : taskList.getList()) {
             if (t.getDescription().indexOf(keyword) != -1) {
                 sb.append(i++ + "." + t + "\n");
             }
         }
+
         this.message = sb.toString();
     }
 

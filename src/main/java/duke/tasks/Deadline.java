@@ -41,8 +41,8 @@ public class Deadline extends Task {
      */
     @Override
     public String txtFileFormat() {
-        return "D ~/~ " + super.txtFileFormat() + " ~/~ " + this.date.toString()
-                + (this.time != null ? " ~/~ " + this.time.toString() : "");
+        return "D" + DELIMITER + super.txtFileFormat() + DELIMITER + this.date.toString()
+                + (this.time != null ? DELIMITER + this.time.toString() : "");
     }
 
     /**
