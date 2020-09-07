@@ -44,11 +44,11 @@ test {
 }
 
 application {
-    mainClassName = "duke.task"
+    mainClassName = "duke.task.Launcher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "Yoo"
     archiveClassifier = null
 }
 
