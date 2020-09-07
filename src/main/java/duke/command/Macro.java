@@ -79,14 +79,16 @@ public class Macro {
         } catch (DukeException e) {
             DukeCustomException toThrow = new DukeCustomException(e.getMessage());
 
-            String extraMessage = "An error occurred when executing this command:\n"
-                + commands[lastCommandIndex]
-                + "\n\nThe following commands executed successfully:\n"
-                + String.join("\n", Arrays.copyOfRange(commands, 0, lastCommandIndex))
-                + "\n\n The following commands were not executed:\n"
+            String errorLocation = "An error occurred when executing this command:\n"
+                + commands[lastCommandIndex];
+            String doneCommands = lastCommandIndex == 0 ? ""
+                : "\n\nThe following commands executed successfully:\n"
+                + String.join("\n", Arrays.copyOfRange(commands, 0, lastCommandIndex));
+            String notDoneCommands = lastCommandIndex + 1 == commands.length ? ""
+                : "\n\n The following commands were not executed:\n"
                 + String.join("\n", Arrays.copyOfRange(commands, lastCommandIndex + 1, commands.length));
 
-            toThrow.setExtraMessage(extraMessage);
+            toThrow.setExtraMessage(errorLocation + doneCommands + notDoneCommands);
             throw toThrow;
         }
     }
