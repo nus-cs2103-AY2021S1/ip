@@ -69,7 +69,6 @@ public class Duke {
     public CommandResult executeCommand(String userInput) {
         try {
             Command command = new Parser().parseCommand(userInput);
-            System.out.println(taskList);
             command.setData(taskList);
             CommandResult result = command.execute();
             storage.save(taskList);
