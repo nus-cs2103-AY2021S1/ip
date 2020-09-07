@@ -6,6 +6,7 @@ import chatbot.exception.ChatbotException;
 import java.util.ArrayList;
 import java.time.LocalDate;
 import java.util.Iterator;
+import java.util.function.Predicate;
 
 /**
  * A class containing a list of tasks, with methods for adding new tasks, deleting and returning
@@ -98,21 +99,19 @@ public class TaskList {
     }
 
     /**
-     * Returns a list of tasks due on a given date.
-     * @param date given date
-     * @return list of tasks due
+     * Returns a list of tasks that fulfills the given predicate.
+     * @param pred given predicate
+     * @return list of tasks
      */
-    public ArrayList<Task> retrieveTasksOnDate(LocalDate date) {
+    public ArrayList<Task> retrieveTasksByPred(Predicate pred) {
 
         Iterator<Task> iter = this.tasks.iterator();
         ArrayList<Task> tasks = new ArrayList<>();
 
         while (iter.hasNext()) {
-            Task tsk = iter.next();
-            LocalDate taskDate = tsk.getDate();
-
-            if (taskDate != null && taskDate.equals(date)) {
-                tasks.add(tsk);
+            Task task = iter.next();
+            if (pred.test(task)) {
+                tasks.add(task);
             }
         }
 

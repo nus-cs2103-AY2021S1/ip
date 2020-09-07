@@ -1,37 +1,17 @@
 package chatbot.data;
 
-import chatbot.common.Message;
-import chatbot.exception.ChatbotException;
-
 import java.time.LocalDate;
 
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
 
-    public Event(String description, boolean isDone, LocalDate timestamp) {
-        super(description, "E", isDone, timestamp);
+    public Event(String description, boolean isDone, LocalDate date) {
+        super(description, "E", isDone, date);
     }
 
-    public static Event newEvent(String raw) throws ChatbotException {
-        if (raw.length() == 0) {
-            throw new ChatbotException(Message.TASK_EMPTY);
-        }
-
-        String description = raw.split("/at")[0].trim();
-        LocalDate timestamp;
-
-        try {
-            String dateString = raw.split("/at")[1].trim();
-            timestamp = LocalDate.parse(dateString);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new ChatbotException(Message.DATE_MISSING);
-        } catch (DateTimeParseException e) {
-            throw new ChatbotException(Message.INVALID_DATE);
-        }
-
-        return new Event(description, false, timestamp);
+    public static Event newEvent(String description, LocalDate date) {
+        return new Event(description, false, date);
     }
 
     @Override
