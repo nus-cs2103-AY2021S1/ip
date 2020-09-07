@@ -29,15 +29,23 @@ public class TaskList {
      *
      * @param ui A Ui object.
      */
-    public void printList(Ui ui) {
-        if (tasks.size() == 0) ui.say("Your task list is currently empty.");
+    public String printList(Ui ui) {
+        if (tasks.size() == 0) {
+            String currentlyEmpty = "Your task list is currently empty.";
+            ui.say(currentlyEmpty);
+            return currentlyEmpty;
+        }
         else {
-            ui.say("Here is your task list.");
+            String currentList = "Here is your task list.";
+            ui.say(currentList);
+            currentList += "\n";
             int count = 1;
             for (Task task : tasks) {
-                System.out.println(count + ". " + task);
+                currentList += count + ". " + task + "\n";
                 count++;
             }
+            System.out.println(currentList);
+            return currentList;
         }
     }
 
@@ -47,11 +55,14 @@ public class TaskList {
      * @param number Task number.
      * @param ui A Ui object.
      */
-    public void markTaskDone(int number, Ui ui) {
+    public String markTaskDone(int number, Ui ui) {
         Task task = tasks.get(number - 1);
         task.markDone();
-        ui.say("I have marked it as done!");
+        String markedDone = "I have marked it as done!";
+        ui.say(markedDone);
+        markedDone += "\n" + task;
         System.out.println(task);
+        return markedDone;
     }
 
     /**
@@ -60,12 +71,16 @@ public class TaskList {
      * @param number Task number.
      * @param ui A Ui object.
      */
-    public void deleteTask(int number, Ui ui) {
+    public String deleteTask(int number, Ui ui) {
         Task task = tasks.get(number - 1);
         tasks.remove(number - 1);
-        ui.say("I have deleted this task!");
+        String deletedTask = "I have deleted this task!";
+        ui.say(deletedTask);
+        deletedTask += "\n" + task + "\n";
         System.out.println(task);
-        ui.say("You have " + getListSize() + " items in your task list now.");
+        String currentSize = "You have " + getListSize() + " items in your task list now.";
+        ui.say(currentSize);
+        return deletedTask + currentSize;
     }
 
     /**
@@ -74,9 +89,11 @@ public class TaskList {
      * @param task The Task to be added.
      * @param ui A Ui object.
      */
-    public void addTask(Task task, Ui ui) {
+    public String addTask(Task task, Ui ui) {
         tasks.add(task);
-        ui.say("You have " + getListSize() + " items in your task list now.");
+        String addedTask = "You have " + getListSize() + " items in your task list now.";
+        ui.say(addedTask);
+        return addedTask;
     }
 
     /**
@@ -85,19 +102,29 @@ public class TaskList {
      * @param body String to search for.
      * @param ui A Ui object.
      */
-    public void findTask(String body, Ui ui) {
+    public String findTask(String body, Ui ui) {
         if (tasks.size() > 0) {
-            ui.say("Here are the matching tasks in your list:");
+            String matchingTasks = "Here are the matching tasks in your list:";
+            ui.say(matchingTasks);
+            matchingTasks += "\n";
             boolean noneFound = true;
             for (Task task : tasks) {
                 if (task.toString().contains(body)) {
+                    matchingTasks += task + "\n";
                     System.out.println(task);
                     noneFound = false;
                 }
             }
-            if (noneFound) ui.say("No matching tasks.");
+            if (noneFound) {
+                String noMatching = "No matching tasks";
+                ui.say(noMatching);
+                return noMatching;
+            }
+            return matchingTasks;
         } else {
-            ui.say("You have no tasks yet.");
+            String noTasks = "You have no tasks yet.";
+            ui.say(noTasks);
+            return noTasks;
         }
     }
 

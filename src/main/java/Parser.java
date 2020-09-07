@@ -17,7 +17,7 @@ public class Parser {
      * @param storage A Storage object.
      * @throws DukeException When user input cannot be understood.
      */
-    public static void parseInput(String input, Ui ui, TaskList tasks, Storage storage) throws DukeException, IOException {
+    public static String parseInput(String input, Ui ui, TaskList tasks, Storage storage) throws DukeException, IOException {
         String[] parsed = input.split(" ", 2);
         String keyword = parsed[0];
         String body = "";
@@ -26,51 +26,47 @@ public class Parser {
         }
         switch (keyword) {
         case "list":
-            tasks.printList(ui);
-            break;
+            return tasks.printList(ui);
         case "done":
             if (isValidSize(body, tasks)) {
-                tasks.markTaskDone(getNumber(body), ui);
+                storage.writeFile(tasks);
+                return tasks.markTaskDone(getNumber(body), ui);
             } else {
                 throw new DukeException("Invalid number");
             }
-            break;
         case "delete":
             if (isValidSize(body, tasks)) {
-                tasks.deleteTask(getNumber(body), ui);
+                storage.writeFile(tasks);
+                return tasks.deleteTask(getNumber(body), ui);
             } else {
                 throw new DukeException("Invalid number");
             }
-            break;
         case "todo":
             if (isValidFormat(body, Task.Type.TODO)) {
-                tasks.addTask(new Todo(body), ui);
+                storage.writeFile(tasks);
+                return tasks.addTask(new Todo(body), ui);
             } else {
                 throw new DukeException("Invalid task format");
             }
-            break;
         case "deadline":
             if (isValidFormat(body, Task.Type.DEADLINE) && isValidTime(body, Task.Type.DEADLINE)) {
-                tasks.addTask(new Deadline(getDescription(body), getTime(body, Task.Type.DEADLINE)), ui);
+                storage.writeFile(tasks);
+                return tasks.addTask(new Deadline(getDescription(body), getTime(body, Task.Type.DEADLINE)), ui);
             } else {
                 throw new DukeException("Invalid task format");
             }
-            break;
         case "event":
             if (isValidFormat(body, Task.Type.EVENT) && isValidTime(body, Task.Type.EVENT)) {
-                tasks.addTask(new Event(getDescription(body), getTime(body, Task.Type.EVENT)), ui);
+                storage.writeFile(tasks);
+                return tasks.addTask(new Event(getDescription(body), getTime(body, Task.Type.EVENT)), ui);
             } else {
                 throw new DukeException("Invalid task format");
             }
-            break;
         case "find":
-            tasks.findTask(body, ui);
-        case "bye":
-            break;
+            return tasks.findTask(body, ui);
         default:
             throw new DukeException("Invalid command");
         }
-        storage.writeFile(tasks);
     }
 
     /**

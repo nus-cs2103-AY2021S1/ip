@@ -5,17 +5,19 @@ import java.io.IOException;
  * The main Duke class.
  */
 public class Duke {
+    private static final String FILEPATH = "data/duke.txt";
+
     private Ui ui;
     private TaskList tasks;
     private Storage storage;
 
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke().run();
     }
 
-    public Duke(String filepath) {
+    public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage(filepath);
+        this.storage = new Storage(FILEPATH);
         try {
             this.tasks = new TaskList(storage.loadFile());
         } catch (FileNotFoundException | DukeException e) {
@@ -39,5 +41,16 @@ public class Duke {
             }
         }
         ui.goodbye();
+    }
+
+    public String getResponse(String input) {
+        if (input.equals("bye")) {
+            System.exit(0);
+        }
+        try {
+            return Parser.parseInput(input, ui, tasks, storage);
+        } catch (DukeException | IOException e) {
+            return e.getMessage();
+        }
     }
 }

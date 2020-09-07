@@ -23,15 +23,19 @@ public class Ui {
     /**
      * Greets the user.
      */
-    public void greet() {
-        System.out.println("Duke: Hello! How may I help you?");
+    public String greet() {
+        String greeting = "Duke: Hello! How may I help you?";
+        System.out.println(greeting);
+        return greeting;
     }
 
     /**
      * Says goodbye to the user.
      */
-    public void goodbye() {
-        System.out.println("Duke: Bye. Hope to see you again!");
+    public String goodbye() {
+        String goodBye = "Duke: Bye. Hope to see you again!";
+        System.out.println(goodBye);
+        return goodBye;
     }
 
     /**
@@ -39,8 +43,10 @@ public class Ui {
      *
      * @param something Text to be said to the user.
      */
-    public void say(String something) {
-        System.out.println("Duke: " + something);
+    public String say(String something) {
+        String thing = "Duke: " + something;
+        System.out.println(thing);
+        return thing;
     }
 
     /**
@@ -48,7 +54,9 @@ public class Ui {
      *
      * @param e The exception.
      */
-    public void getError(Exception e) {
-        System.out.println("Duke: Error! " + e.getMessage());
+    public String getError(Exception e) {
+        String error = "Duke: Error! " + e.getMessage();
+        System.out.println();
+        return error;
     }
 }
