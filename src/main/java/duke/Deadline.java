@@ -32,6 +32,11 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    @Override
+    public void updateTime(LocalDate time) {
+        by = time;
+    }
+
     private String getDateFormat() {
         return by.format(DateTimeFormatter.ofPattern("d MMMM yyyy"));
     }

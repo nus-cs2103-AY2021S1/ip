@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.LocalDate;
+
 /**
  * The task base class. Has a description and indicator whether the task is done or not.
  */
@@ -35,6 +37,24 @@ public class Task {
      */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
+    }
+
+    /**
+     * Updates the description.
+     *
+     * @param description updated description.
+     */
+    public void updateDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * Updates the time.
+     *
+     * @param time updated time.
+     */
+    public void updateTime(LocalDate time) throws DukeException {
+        throw new DukeException("The task doesn't have a time property.");
     }
 
     /**

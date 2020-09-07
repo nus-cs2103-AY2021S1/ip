@@ -1,13 +1,14 @@
 package duke;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 /**
  * Parse an input given to the Duke to a command.
  */
 public class Parser {
     private enum CommandType {
-        find, list, done, delete, todo, deadline, event, bye
+        find, list, done, delete, todo, deadline, event, update, bye
     }
 
     private static String parseDescription(String[] data, String timeDivider) throws DukeException {
@@ -35,7 +36,7 @@ public class Parser {
 
         if (idx >= data.length) {
             throw new DukeException(
-                    "Please specify the deadline date in this format: \"" + timeDivider + " <date>\". ");
+                    "Please specify the date in this format: \"" + timeDivider + " <date>\". ");
         }
 
         StringBuilder time = new StringBuilder(data[idx]);
@@ -101,8 +102,26 @@ public class Parser {
             command = new AddCommand(
                     new Event(Parser.parseDescription(commandLine, "/at"), Parser.parseTime(commandLine, "/at")));
             break;
+        case update:
+            if (commandLine.length < 3) {
+                throw new DukeException("Update with this format: \"update date/description <updatedValue>\"");
+            }
+
+            idx = Integer.parseInt(commandLine[2]);
+
+            if (commandLine[1].equals("date")) {
+                command = new UpdateTimeCommand(idx, Parser.parseTime(
+                        Arrays.copyOfRange(commandLine, 1, commandLine.length), commandLine[2]));
+            } else if (commandLine[1].equals("description")) {
+                command = new UpdateDescriptionCommand(idx, Parser.parseDescription(
+                        Arrays.copyOfRange(commandLine, 2, commandLine.length), ""));
+            } else {
+                throw new DukeException("Can only update date or description");
+            }
+            break;
         case bye:
-            return new ByeCommand();
+            command = new ByeCommand();
+            break;
         default:
             throw new DukeException("I'm sorry but I don't recognize your commandLine T__T.");
         }
