@@ -1,6 +1,12 @@
 package duke.storage;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -87,8 +93,7 @@ public class Storage {
 
 
     ArrayList<Task> getTaskListFromStream(InputStream inputStream) throws DukeException {
-        try (BufferedReader br
-                     = new BufferedReader(new InputStreamReader(inputStream))) {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
             ArrayList<Task> taskList = new ArrayList<>();
             String line;
             while ((line = br.readLine()) != null) {
