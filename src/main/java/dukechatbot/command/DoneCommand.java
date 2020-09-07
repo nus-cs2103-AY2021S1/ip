@@ -12,7 +12,7 @@ public class DoneCommand extends Command {
 
     private final String argument;
 
-    public DoneCommand(String input) {
+    public DoneCommand(String input) throws IndexOutOfBoundsException {
         super(input, new DoneCommandExecutor());
         this.argument = CommandParser.getTitle(input);
     }

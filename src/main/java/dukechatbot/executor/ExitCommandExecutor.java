@@ -6,11 +6,24 @@ import dukechatbot.dukeoutput.DukeOutput;
 import dukechatbot.storage.Storage;
 import dukechatbot.tasklist.TaskList;
 
-public class ExitCommandExecutor extends CommandExecutor {
-    
+
+/**
+ * Represents executor of exit command.
+ * Saves the task list to disk.
+ * Returns exit response message.
+ */
+public class ExitCommandExecutor implements CommandExecutor {
+
+    /**
+     * Saves the task list to disk.
+     * 
+     * @param command
+     * @param taskList
+     * @return Response from Duke.
+     */
     @Override
     public String execute(Command command, TaskList taskList) {
         Storage.save(taskList.getList());
-        return DukeOutput.output(DukeConstants.EXIT_RESPONSE);
+        return DukeOutput.getOutput(DukeConstants.EXIT_RESPONSE);
     }
 }

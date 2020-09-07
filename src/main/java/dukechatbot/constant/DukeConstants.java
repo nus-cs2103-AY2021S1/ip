@@ -7,6 +7,8 @@ public class DukeConstants {
     public static final String INDENT = "    ";
     public static final String LINE = INDENT + "------------------------------";
     public static final String INITIAL_RESPONSE = "Hello! I'm Duke\n\tWhat can I do for you?";
+    public static final String INVALID_INPUT_RESPONSE = "\u2639 OOPS!!! I'm sorry,"
+            + " but I don't know what that means :-(";
     public static final String EXIT_INPUT = "bye";
     public static final String EXIT_RESPONSE = "Bye. Hope to see you again soon!";
 
@@ -24,4 +26,8 @@ public class DukeConstants {
     public static final String EVENT_COMMAND = "event";
 
     public static final String ADD_TASK_OUTPUT = "Got it. I've added this task:";
+    
+    public static final String DEADLINE_TASK_KEYWORD = "/by";
+    public static final String EVENT_TASK_KEYWORD = "/at";
+
 }

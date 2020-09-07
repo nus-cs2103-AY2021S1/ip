@@ -11,8 +11,9 @@ class DukeOutputFormatter {
 
     /**
      * Formats and prints the responses from Duke.
-     *
-     * @param list of responses by Duke.
+     * 
+     * @param responses
+     * @return Formatted responses from Duke
      */
     static String format(List<String> responses) {
         StringBuilder sb = new StringBuilder();
@@ -23,12 +24,13 @@ class DukeOutputFormatter {
         sb.append(DukeConstants.LINE);
         return sb.toString();
     }
-    
+
     /**
      * Formats and prints the responses from Duke.
-     *
-     * @param list of responses by Duke.
-     * @param indentIndexes to indicate which response is formatted more.
+     * 
+     * @param responses
+     * @param indentIndexes
+     * @return Formatted responses from Duke
      */
     static String format(List<String> responses, List<Integer> indentIndexes) {
         StringBuilder sb = new StringBuilder();

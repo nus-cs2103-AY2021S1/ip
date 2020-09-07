@@ -6,12 +6,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
-import dukechatbot.task.DeadlineTask;
-import dukechatbot.task.EventTask;
+import dukechatbot.dukeoutput.DukeOutput;
+import dukechatbot.parser.TaskParser;
 import dukechatbot.task.Task;
-import dukechatbot.task.ToDoTask;
 
 /**
  * Loads and saves task list from / to file.
@@ -40,27 +40,11 @@ public class Storage {
                 for (int i = 0; i < components.length; i++) {
                     components[i] = components[i].trim();
                 }
-                Task task;
-                boolean isDone = Integer.parseInt(components[1]) == 1;
-                switch(components[0]) {
-                case "T":
-                    task = new ToDoTask(components[2], isDone);
-                    break;
-                case "D":
-                    task = new DeadlineTask(components[2], components[3], isDone);
-                    break;
-                default:
-                    String[] dateTimeComp = components[3].trim().split("\\s+", 2);
-                    String date = dateTimeComp[0];
-                    String[] timeComp = dateTimeComp[1].split("-", 2);
-                    String startTime = timeComp[0];
-                    String endTime = timeComp[1];
-                    task = new EventTask(components[2], date, startTime, endTime, isDone);
-                }
+                Task task = TaskParser.parseTaskFromDisk(components);
                 list.add(task);
             }
-        } catch (FileNotFoundException e) {
-            System.out.println("\u2639 OOPS! some error saving the list.");
+        } catch (FileNotFoundException | NoSuchElementException e) {
+            DukeOutput.getOutput("\u2639 OOPS! some error saving the list.");
             e.printStackTrace();
         }
         return list;
@@ -85,7 +69,7 @@ public class Storage {
                 fileWriter.write("\n");
             }
         } catch (IOException e) {
-            System.out.println("\u2639 OOPS! some error saving the list.");
+            DukeOutput.getOutput("\u2639 OOPS! some error saving the list.");
         }
     }
 }

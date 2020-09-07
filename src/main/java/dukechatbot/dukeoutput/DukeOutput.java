@@ -14,7 +14,7 @@ public class DukeOutput {
      *
      * @param response from Duke.
      */
-    public static String output(String response) {
+    public static String getOutput(String response) {
         assert(!Objects.isNull(response));
         return DukeOutputFormatter.format(Collections.singletonList(response));
     }
@@ -24,7 +24,7 @@ public class DukeOutput {
      *
      * @param responses list of responses by Duke.
      */
-    public static String output(List<String> responses) {
+    public static String getOutput(List<String> responses) {
         assert(!Objects.isNull(responses));
         return DukeOutputFormatter.format(responses);
     }
@@ -35,6 +35,7 @@ public class DukeOutput {
      * @param responses list of responses by Duke.
      * @param indentIndexes to indicate which response is formatted more.
      */
+    public static String getOutput(List<String> responses, List<Integer> indentIndexes) {
     public static String output(List<String> responses, List<Integer> indentIndexes) {
         assert(!Objects.isNull(responses));
         assert(!Objects.isNull(indentIndexes));

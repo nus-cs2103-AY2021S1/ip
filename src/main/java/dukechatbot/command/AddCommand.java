@@ -16,7 +16,7 @@ public class AddCommand extends Command {
 
     private final String argument;
 
-    public AddCommand(String input, TaskEnum taskType) {
+    public AddCommand(String input, TaskEnum taskType) throws IndexOutOfBoundsException {
         super(input, new AddCommandExecutor());
         this.taskType = taskType;
         assert(!Objects.isNull(this.taskType));

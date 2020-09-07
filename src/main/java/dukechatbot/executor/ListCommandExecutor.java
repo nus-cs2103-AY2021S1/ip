@@ -8,16 +8,17 @@ import dukechatbot.tasklist.TaskList;
  * Represents executor of list command.
  * Executes the action of listing tasks in the task list.
  */
-public class ListCommandExecutor extends CommandExecutor {
+public class ListCommandExecutor implements CommandExecutor {
 
     /**
      * Lists all the tasks in the task list.
      *
      * @param command
      * @param taskList
+     * @return Response from Duke.
      */
     @Override
     public String execute(Command command, TaskList taskList) {
-        return DukeOutput.output(taskList.getListInfo());
+        return DukeOutput.getOutput(taskList.getListInfo());
     }
 }
