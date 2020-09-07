@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class TaskList {
@@ -104,6 +105,38 @@ public class TaskList {
         for (int i = 0; i < matches.size(); i++) {
             ui.addMessage((i + 1) + ". " + matches.get(i) + "\n");
         }
+    }
+
+    /**
+     * Updates task's description.
+     *
+     * @param idx         idx of the task.
+     * @param description updated description.
+     * @param ui          ui where the message is shown.
+     * @throws DukeException index out of bound.
+     */
+    public void updateDescription(int idx, String description, Ui ui) throws DukeException {
+        if (idx < 1 || idx > tasks.size()) {
+            throw new DukeException("Sorry, but you inputted an invalid task index.");
+        }
+        tasks.get(idx - 1).updateDescription(description);
+        ui.addMessage("Here's the updated task\n" + tasks.get(idx - 1).toString());
+    }
+
+    /**
+     * Updates task's time.
+     *
+     * @param idx  idx of the task.
+     * @param time updated time.
+     * @param ui   ui where the message is shown.
+     * @throws DukeException index out of bound.
+     */
+    public void updateTime(int idx, LocalDate time, Ui ui) throws DukeException {
+        if (idx < 1 || idx > tasks.size()) {
+            throw new DukeException("Sorry, but you inputted an invalid task index.");
+        }
+        tasks.get(idx - 1).updateTime(time);
+        ui.addMessage("Here's the updated task\n" + tasks.get(idx - 1).toString());
     }
 
     @Override
