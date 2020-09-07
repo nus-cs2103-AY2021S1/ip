@@ -56,4 +56,9 @@ public class Ui {
                 + "        " + task + '\n'
                 + "    Now you have " + sizeOfTaskList + " tasks in the list.";
     }
+
+    public String showIsDuplicateMessage() {
+        return "    This task is already in your task list!";
+    }
+
 }

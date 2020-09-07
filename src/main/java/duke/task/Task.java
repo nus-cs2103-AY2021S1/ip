@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.exception.DukeException;
+import duke.tasklist.TaskList;
 
 /**
  * Represents a task entry from the user. A <code>Task</code> object corresponds to
@@ -187,6 +188,23 @@ public class Task {
         return e;
     }
 
+    /**
+     * Checks if this task is already an existing task in the task list
+     * @param tasks
+     * @return True if this task already exists in the task list and
+     * false otherwise.
+     */
+    public boolean isDuplicate(TaskList tasks) {
+        boolean isDuplicate = false;
+        for (int i = 0; i < tasks.size(); i++) {
+            if (this.equalsWithoutDoneness(tasks.get(i))) {
+                isDuplicate = true;
+                break;
+            }
+        }
+        return isDuplicate;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (o == this) {
@@ -200,6 +218,31 @@ public class Task {
         Task t = (Task) o;
 
         if (this.description.equals(t.description) && this.isDone == t.isDone) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    /**
+     * Checks if this task and the specified task are the same, without
+     * considering the doneness of the task.
+     * @param o
+     * @return True if this task is equal to the specified task, without regarding
+     * the it's doneness, and false otherwise.
+     */
+    public boolean equalsWithoutDoneness(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (!(o instanceof Task)) {
+            return false;
+        }
+
+        Task t = (Task) o;
+
+        if (this.description.equals(t.description)) {
             return true;
         } else {
             return false;
