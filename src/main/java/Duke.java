@@ -23,6 +23,7 @@ public class Duke {
      * Exits when user inputs "bye"
      */
     String processInput(String msg) {
+        assert !msg.isBlank() : "input is empty";
         if (msg.equals("bye")) {
             return "Bye bye. Talk again soon!";
         } else if (msg.equals("list")) {
