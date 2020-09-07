@@ -10,6 +10,12 @@ public class Ui {
     /** String to print upon adding a new task to the task list */
     private final String ADD_TASK_MESSAGE = "Got it. I've added this task:";
 
+    /** String to print upon archiving all tasks */
+    private final String ARCHIVE_ALL_TASKS_MESSAGE = "Noted. All tasks have been archived.";
+
+    /** String to print upon archiving of a task */
+    private final String ARCHIVE_TASK_MESSAGE = "Noted. I've archived this task:";
+
     /** String to print upon completion of a task */
     private final String COMPLETE_TASK_MESSAGE = "Nice! I've marked this task as done:";
 
@@ -31,6 +37,9 @@ public class Ui {
     /** Horizontal line */
     private final String HORIZONTAL_LINE = "    ____________________________________________________________";
 
+    /** String to print upon detecting an invalid character */
+    private final String INVALID_CHARACTER_MESSAGE = "You have entered an invalid character \"%s\"";
+
     /** String to print when an invalid input is detected */
     private final String INVALID_SYNTAX_MESSAGE = "OOPS!!! I'm sorry, but I don't know what that means :(";
 
@@ -48,6 +57,30 @@ public class Ui {
 
     /** String to print when the task list is empty */
     private final String ZERO_TASK_MESSAGE = "Your task list is currently empty. YAY!!! :D";
+
+    /**
+     * Gets output strings upon archiving all tasks.
+     *
+     * @return Output strings upon archiving all tasks
+     */
+    public String[] getArchiveAllTasksStrings() {
+        String[] strings = new String[] {ARCHIVE_ALL_TASKS_MESSAGE, ZERO_TASK_MESSAGE};
+        return strings;
+    }
+
+    /**
+     * Gets output strings upon archiving a task.
+     *
+     * @param tasks
+     * @param task
+     * @return Output strings upon archiving a task
+     */
+    public String[] getArchiveTaskStrings(TaskList tasks, Task task) {
+        assert tasks != null;
+        assert task != null;
+        String[] strings = new String[] {ARCHIVE_TASK_MESSAGE, task.toString(),getNumOfTasksString(tasks)};
+        return strings;
+    }
 
     /**
      * Gets the string to print to reflect the number of tasks in the current task list.
@@ -130,6 +163,11 @@ public class Ui {
      */
     String[] getHelloStrings() {
         return STARTUP_MESSAGE;
+    }
+
+    public String[] getInvalidCharacterStrings(String invalidChar) {
+        String[] strings = new String[] {String.format(INVALID_CHARACTER_MESSAGE, invalidChar)};
+        return strings;
     }
 
     /**

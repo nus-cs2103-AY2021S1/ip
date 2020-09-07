@@ -31,17 +31,18 @@ public class CreateTodoCommand extends Command {
      * Executes the command to create a todo
      *
      * @param storage Storage
-     * @param tasks Task list
+     * @param taskList Task list
+     * @param archive Archive
      * @param ui Ui
      * @return Output strings displayed on the UI showing todo creation
      */
     @Override
-    public String[] execute(Storage storage, TaskList tasks, Ui ui) {
+    public String[] execute(Storage storage, TaskList taskList, TaskList archive, Ui ui) {
         assert storage != null;
-        assert tasks != null;
+        assert taskList != null;
         assert ui != null;
 
-        ToDo newTodo = tasks.addTodo(description, isComplete);
-        return ui.getCreateTaskStrings(tasks, newTodo);
+        ToDo newTodo = taskList.addTodo(description, isComplete);
+        return ui.getCreateTaskStrings(taskList, newTodo);
     }
 }

@@ -1,46 +1,44 @@
 package duke.command;
 
 import duke.Storage;
-import duke.task.Task;
 import duke.TaskList;
 import duke.Ui;
+import duke.task.Task;
 
-/**
- * Encapsulates a command to complete a task.
- */
-public class CompleteTaskCommand extends Command {
+public class ArchiveTaskCommand extends Command {
 
-    /** Index of the task to complete in the current task list */
+    /** Index of the task in the main task list to be archived */
     private final int taskIndex;
 
     /**
      * Constructor
      *
-     * @param taskIndex Index of the task
+     * @param taskIndex Index of the task in the main task list
      */
-    public CompleteTaskCommand(int taskIndex) {
+    public ArchiveTaskCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }
 
     /**
-     * Executes the command to complete the task.
+     * Executes the command to archive the task.
      *
      * @param storage Storage
      * @param taskList Task list
      * @param archive Archive
      * @param ui Ui
-     * @return Output strings displayed in the UI showing task completion
+     * @return Output strings displayed in the UI showing task archiving
      */
     @Override
     public String[] execute(Storage storage, TaskList taskList, TaskList archive, Ui ui) {
-        assert storage != null;
         assert taskList != null;
+        assert archive != null;
         assert ui != null;
 
-        Task task = taskList.completeTaskAt(taskIndex);
+        Task task = taskList.deleteTaskAt(taskIndex);
         if (task == null) {
             return ui.getInvalidTaskIndexStrings();
         }
-        return ui.getCompleteTaskStrings(task);
+        archive.addTask(task);
+        return ui.getArchiveTaskStrings(taskList, task);
     }
 }

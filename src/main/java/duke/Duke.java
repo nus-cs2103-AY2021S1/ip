@@ -10,14 +10,20 @@ import java.util.Scanner;
  */
 public class Duke {
 
-    /** Pathname of the local data file */
-    final String PATH_NAME = "./data/duke_data.csv";
+    /** Pathname of the local main data file */
+    final String MAIN_DATA_PATH_NAME = "./data/duke_data.csv";
+
+    /** Pathname of the local archive data file */
+    final String ARCHIVE_DATA_PATH_NAME = "./data/duke_archive.csv";
 
     /** Storage */
     Storage storage;
 
     /** Task list*/
     TaskList tasks;
+
+    /** Archive task list */
+    TaskList archive;
 
     /** User Interface using command line */
     Ui ui;
@@ -26,9 +32,10 @@ public class Duke {
      * Constructor
      */
     Duke() {
-        this.storage = new Storage(PATH_NAME);
-        this.tasks = storage.loadTasks();
-        this.ui = new Ui();
+        storage = new Storage(MAIN_DATA_PATH_NAME, ARCHIVE_DATA_PATH_NAME);
+        tasks = storage.loadTasksFromMainData();
+        archive = storage.loadTasksFromArchiveData();
+        ui = new Ui();
     }
 
     /**
@@ -51,7 +58,7 @@ public class Duke {
         while (sc.hasNextLine()) {
             String input = sc.nextLine();
             Command command = Parser.parse(input);
-            String[] outputStrings = command.execute(storage, tasks, ui);
+            String[] outputStrings = command.execute(storage, tasks, archive, ui);
             ui.print(outputStrings);
 
             if (command instanceof ExitCommand) {
@@ -87,7 +94,7 @@ public class Duke {
      */
     String getResponse(String input) {
         Command command = Parser.parse(input);
-        String[] strings = command.execute(storage, tasks, ui);
+        String[] strings = command.execute(storage, tasks, archive, ui);
         StringBuilder output;
 
         if (strings.length >= 1) {
