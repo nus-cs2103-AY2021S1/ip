@@ -43,9 +43,9 @@ public class Duke {
         ui.clearOutputMessage();
         assert ui.getOutputMessage().length() == 0;
         try {
-            Command c = Parser.parse(input);
-            c.execute(tasks, ui, storage);
-            this.exitProgram = c.isExit();
+            Command command = Parser.parse(input);
+            command.execute(tasks, ui, storage);
+            this.exitProgram = command.isExit();
         } catch (DukeException err) {
             ui.showError(err.getMessage());
         }

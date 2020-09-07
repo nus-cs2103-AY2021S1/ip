@@ -20,7 +20,7 @@ public class ListCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         if (date != null) {
-            ui.showTasksOnDate(tasks.getListOfTasks(date), date);
+            ui.showTasksOnDate(tasks.getListOfTasksOnDate(date), date);
         } else {
             ui.showAllTasks(tasks.getListOfTasks());
         }

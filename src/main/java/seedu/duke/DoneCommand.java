@@ -20,7 +20,8 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showTaskDone(tasks.markTaskDone(index - 1));
+        Task taskMarkedDone = tasks.markTaskDone(index - 1);
+        ui.showTaskDone(taskMarkedDone);
         storage.saveTaskList(tasks);
     }
 }
