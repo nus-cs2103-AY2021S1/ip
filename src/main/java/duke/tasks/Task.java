@@ -9,8 +9,9 @@ public class Task {
     protected boolean hasTime;
 
     /**
-     * Creates a new Task object which is not done
-     * @param description
+     * Creates a new Task object which is not done.
+     *
+     * @param description Description of the task.
      */
     public Task(String description) {
         this.description = description;
@@ -19,9 +20,10 @@ public class Task {
     }
 
     /**
-     * Creates a new Task object with description and isDone status
-     * @param description
-     * @param isDone
+     * Creates a new Task object with description and isDone status.
+     *
+     * @param description Description of the task.
+     * @param isDone Whether the task is complete.
      */
     public Task(String description, int isDone) {
         this.description = description;
@@ -34,18 +36,19 @@ public class Task {
     }
 
     /**
-     * Reduces the count of tasks
+     * Reduces the count of tasks.
      */
     public static void reduceOneTasks() {
         numberOfTasks--;
     }
 
     /**
-     * Gets the tick or cross sign which indicates is a task is complete
-     * @return
+     * Gets the tick or cross sign which indicates is a task is complete.
+     *
+     * @return a tick or X symbols.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "\u2713" : "\u2718");
     }
 
     public boolean getHasTime() {
@@ -61,8 +64,9 @@ public class Task {
     }
 
     /**
-     * Marks a task as finished
-     * @return
+     * Marks a task as finished.
+     *
+     * @return a finished task.
      */
     public Task markAsDone() {
         this.isDone = true;
@@ -75,7 +79,8 @@ public class Task {
     }
 
     /**
-     * Returns the message when a task is marked as done
+     * Returns the message when a task is marked as done.
+     *
      * @return mark-as-done Message
      */
     public String markAsDoneMessage() {
@@ -84,7 +89,7 @@ public class Task {
     }
 
     /**
-     * Returns the message when a new task is added
+     * Returns the message when a new task is added.
      */
     public String addMessage() {
         return "Got it.(^∇^) I've added this task:\n"
@@ -92,7 +97,7 @@ public class Task {
     }
 
     /**
-     * Returns the message when a task is deleted
+     * Returns the message when a task is deleted.
      */
     public String deleteMessage() {
         return "Got it.(^∇^) I've deleted this task:\n"
@@ -100,10 +105,11 @@ public class Task {
     }
 
     /**
-     * Returns info about the task in the format for data storage
-     * @return A string
+     * Returns info about the task in the format for data storage.
+     *
+     * @return A string.
      */
-    public String data() {
+    public String getData() {
         return " | " + (isDone
                 ? "1"
                 : "0") + " | " + description;

@@ -23,9 +23,42 @@ public class Storage {
     }
 
     /**
-     * Returns an arraylist in which individual task is constructed from the data txt file.
-     * @return ArrayList
-     * @throws PathNoFoundException
+     * Adds a to-do, deadline or event to tasklist.
+     * @param line User input
+     * @param tasks ArrayList of Tasks
+     */
+    private void addTask(String line, ArrayList<Task> tasks){
+        String[] info = line.split(" \\| ");
+        String type = info[0];
+        int complete = Integer.parseInt(info[1]);
+        String title = info[2];
+        switch(type) {
+            case "T":
+                Todo newTodo = new Todo(title, complete);
+                tasks.add(newTodo);
+                break;
+            case "D":
+                String deadline = info[3];
+                LocalDate deadlineInLocalDate = LocalDate.parse(deadline);
+                Deadline newDeadline = new Deadline(title, complete, deadlineInLocalDate);
+                tasks.add(newDeadline);
+                break;
+            case "E":
+                String time = info[3];
+                LocalDate timeInLocalDate = LocalDate.parse(time);
+                Event newEvent = new Event(title, complete, timeInLocalDate);
+                tasks.add(newEvent);
+                break;
+            default:
+                throw new AssertionError(type);
+        }
+    }
+
+    /**
+     * Reads .txt file.
+     *
+     * @return ArrayList of tasks.
+     * @throws PathNoFoundException If there is no data file found.
      */
     public ArrayList<Task> readFile() throws PathNoFoundException {
         try {
@@ -34,32 +67,7 @@ public class Storage {
             if (Files.exists(Paths.get(cwd + filePath))) {
                 List<String> allLines = Files.readAllLines(Paths.get(cwd + filePath));
                 for (String line : allLines) {
-
-                    String[] info = line.split(" \\| ");
-                    String type = info[0];
-                    int complete = Integer.parseInt(info[1]);
-                    String title = info[2];
-
-                    switch(type) {
-                    case "T":
-                        Todo newTodo = new Todo(title, complete);
-                        tasks.add(newTodo);
-                        break;
-                    case "D":
-                        String deadline = info[3];
-                        LocalDate deadlineInLocalDate = LocalDate.parse(deadline);
-                        Deadline newDeadline = new Deadline(title, complete, deadlineInLocalDate);
-                        tasks.add(newDeadline);
-                        break;
-                    case "E":
-                        String time = info[3];
-                        LocalDate timeInLocalDate = LocalDate.parse(time);
-                        Event newEvent = new Event(title, complete, timeInLocalDate);
-                        tasks.add(newEvent);
-                        break;
-                    default:
-
-                    }
+                    addTask(line, tasks);
                 }
             }
             return tasks;
@@ -69,15 +77,15 @@ public class Storage {
     }
 
     /**
-     * Save the modified TaskArray in the hard disc
-     * @param tasklist
+     * Saves the modified TaskArray in the hard disc.
+     * @param tasklist TaskList object.
      */
     public void saveFile(TaskList tasklist) {
         try {
             String cwd = System.getProperty("user.dir");
             FileWriter fw = new FileWriter(cwd + filePath);
             for (Task task : tasklist.getTasks()) {
-                String data = task.data();
+                String data = task.getData();
                 fw.write(data + System.lineSeparator());
             }
             fw.close();

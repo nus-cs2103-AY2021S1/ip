@@ -23,10 +23,22 @@ public class Duke {
         }
     }
 
+    /**
+     * Generates the welcome message before user inputs any.
+     *
+     * @return A welcome message.
+     */
     public String welcome() {
         return ui.displayWelcome();
     }
 
+
+    /**
+     * Generates the response message based on user input.
+     * Parses users input to generate a command and execute the task.
+     *
+     * @return A response message.
+     */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
@@ -36,5 +48,4 @@ public class Duke {
             return ex.getMessage();
         }
     }
-
 }

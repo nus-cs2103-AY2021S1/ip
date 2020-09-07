@@ -8,6 +8,9 @@ import java.util.stream.Collectors;
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
 
+/**
+ * Returns a string for duke to display.
+ */
 public class Ui {
     public Ui() {
     }
@@ -19,7 +22,6 @@ public class Ui {
     public String displayBye() {
         return "Bye~ Hope to see you again soon! ∠( ᐛ 」∠)＿";
     }
-
 
     public String displayAddTaskMessage(Task task) {
         return task.addMessage();
@@ -38,7 +40,8 @@ public class Ui {
     }
 
     /**
-     * Shows all the tasks that are still in the list
+     * Shows all the tasks that are still in the list.
+     *
      * @param taskList
      */
     public String showTask(TaskList taskList) {
@@ -59,8 +62,10 @@ public class Ui {
     }
 
     /**
-     * Shows the tasks on certain day
-     * @param taskList
+     * Shows the tasks on certain day.
+     *
+     * @param taskList TaskList object.
+     * @param date Date to search for tasks.
      */
     public String showTask(TaskList taskList, LocalDate date) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd MMM yyyy");
@@ -80,10 +85,18 @@ public class Ui {
     }
 
     /**
+<<<<<<< HEAD
      * Shows the tasks containing certain keywords
      * @param taskList
      * @param keyword
      * @return a string
+=======
+     * Shows the tasks containing certain keywords.
+     *
+     * @param taskList TaskList object.
+     * @param keyword Keyword to search for tasks.
+     * @return A String of relevant tasks.
+>>>>>>> master
      */
     public String showTask(TaskList taskList, String keyword) {
         ArrayList<Task> tasks = taskList.getTasks();

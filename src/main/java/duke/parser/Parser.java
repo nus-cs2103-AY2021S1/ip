@@ -10,15 +10,26 @@ public class Parser {
     public Parser() {
     }
 
+
+    private static boolean isOneWordCommand(String[] parseArray) {
+        return parseArray.length == 1;
+    }
+
+    private static int getArrayIndex(String[] parseArray) {
+        String index = parseArray[1];
+        return Integer.parseInt(index) - 1;
+    }
+
+
     /**
      * Cut an user-input String to smaller piece of information
-     * Returns different command constructed with the info pieces
-     * @param fullCommand
-     * @return Command
-     * @throws EmptyTaskException
-     * @throws EmptyTimeException
-     * @throws CommandNotFoundException
-     * @throws WrongDateFormatException
+     *
+     * @param fullCommand String of user input.
+     * @return Command A command object constructed with the info pieces.
+     * @throws EmptyTaskException If no index is specified.
+     * @throws EmptyTimeException If no date is specified.
+     * @throws CommandNotFoundException If a unrecognisable command is used.
+     * @throws WrongDateFormatException If the date cannot be parsed.
      */
     public static Command parse(String fullCommand) throws EmptyTaskException, EmptyTimeException,
             CommandNotFoundException, WrongDateFormatException, IncompleteMessageException {
@@ -32,7 +43,7 @@ public class Parser {
             command = new ExitCommand();
             break;
         case "list":
-            if (parseArray.length == 1) {
+            if (isOneWordCommand(parseArray)) {
                 command = new ListCommand(null);
             } else {
                 String time = parseArray[1];
@@ -45,20 +56,19 @@ public class Parser {
             }
             break;
         case "done":
-            if (parseArray.length == 1) {
+            if (isOneWordCommand(parseArray)) {
                 throw new EmptyTaskException();
             } else {
-                String time = parseArray[1];
                 try {
-                    int index = Integer.parseInt(time) - 1;
-                    command = new DoneCommand(index);
+                    int arrayIndex = getArrayIndex(parseArray);
+                    command = new DoneCommand(arrayIndex);
                 } catch (NumberFormatException ex) {
                     throw new EmptyTaskException();
                 }
             }
             break;
         case "find":
-            if (parseArray.length == 1) {
+            if (isOneWordCommand(parseArray)) {
                 throw new IncompleteMessageException("Please specify keyword. (´∀`)");
             } else {
                 String keyword = parseArray[1];
@@ -66,12 +76,11 @@ public class Parser {
             }
             break;
         case "delete":
-            if (parseArray.length == 1) {
+            if (isOneWordCommand(parseArray)) {
                 throw new EmptyTaskException();
             } else {
-                String rest = parseArray[1];
-                int index = Integer.parseInt(rest) - 1;
-                command = new DeleteCommand(index);
+                int arrayIndex = getArrayIndex(parseArray);
+                command = new DeleteCommand(arrayIndex);
             }
             break;
         case "todo":
@@ -79,7 +88,7 @@ public class Parser {
         case "deadline":
             // Fallthrough
         case "event":
-            if (parseArray.length == 1) {
+            if (isOneWordCommand(parseArray)) {
                 throw new EmptyTaskException();
             } else {
                 String rest = parseArray[1];
