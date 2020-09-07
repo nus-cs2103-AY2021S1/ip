@@ -76,6 +76,8 @@ public class DeadlineCommand extends AddCommand {
         if (!time) {
             throw new DeadlineException(false, false);
         }
+        assert !s.substring(1, s.length() - 1).contains("/");
+        assert !commandDescription.substring(index + 4).contains("/by");
         Deadline d = provide(s.substring(1, s.length() - 1), commandDescription.substring(index + 4));
         try {
             return updateTaskList(storage, d, tasks);
