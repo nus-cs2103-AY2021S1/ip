@@ -177,34 +177,37 @@ public class TaskList {
     }
 
     public String updateTask(String next) throws DukeException {
-        String[] ls = next.split(" ");
-        System.out.println(next);
-        int index = Integer.parseInt(ls[0]) - 1;
-        String command = ls[1].toLowerCase();
-        Task oldTask = storage.remove(index);
-        Task updatedTask;
+        try {
+            String[] ls = next.split(" ");
+            int index = Integer.parseInt(ls[0]) - 1;
+            String command = ls[1].toLowerCase();
+            Task oldTask = storage.remove(index);
+            Task updatedTask;
 
-        switch (command) {
-        case "name":
-            String updatedName = ls[2];
-            updatedTask = oldTask.updateName(updatedName);
-            storage.add(index, updatedTask);
-            break;
-        case "time":
-            String[] split = next.split(" time ");
-            String updatedInput = split[1];
-            String updatedTime = Parser.parseDateTime(updatedInput);
-            if (updatedTime.contains("Please input the time and date in\n")) {
-                return updatedTime;
-            } else {
-                updatedTask = oldTask.updateTime(updatedTime);
-                storage.add(index, updatedTask);
+            switch (command) {
+                case "name":
+                    String updatedName = ls[2];
+                    updatedTask = oldTask.updateName(updatedName);
+                    storage.add(index, updatedTask);
+                    break;
+                case "time":
+                    String[] split = next.split(" time ");
+                    String updatedInput = split[1];
+                    String updatedTime = Parser.parseDateTime(updatedInput);
+                    if (updatedTime.contains("Please input the time and date in\n")) {
+                        return updatedTime;
+                    } else {
+                        updatedTask = oldTask.updateTime(updatedTime);
+                        storage.add(index, updatedTask);
+                    }
+                    break;
+                default:
+                    throw new DukeException("Please choose either \"name\" or \"time\" to update.");
             }
-            break;
-        default:
-            throw new DukeException("Please choose either [name] or [time] after update command");
+            return ui.updateTaskLine(oldTask, updatedTask);
+        } catch (NumberFormatException nfe) {
+            return "Please state task number after \"update\".\n";
         }
-        return ui.updateTaskLine(oldTask, updatedTask);
     }
     /**
      * Getter method for task list.
