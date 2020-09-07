@@ -158,8 +158,6 @@ public class Ui {
         String returnStr;
         returnStr = "You have a total of " + listSize + " tasks" + "\n"
                 + "--------------------------------------";
-        /*System.out.println("You have a total of " + listSize + " tasks");
-        System.out.println("--------------------------------------");*/
         System.out.println(returnStr);
         return returnStr;
     }

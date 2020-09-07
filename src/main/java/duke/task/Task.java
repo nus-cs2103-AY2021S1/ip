@@ -1,11 +1,11 @@
 package duke.task;
 
 /**
- * Encapsulates a duke.task for the user
+ * Encapsulates a task for the user
  */
 public class Task {
     private Boolean isDone;
-    private final String taskName;
+    private final String taskDetails;
     private final TaskType type;
 
     /**
@@ -15,7 +15,7 @@ public class Task {
      */
     public Task(String taskName, TaskType type) {
         this.isDone = false;
-        this.taskName = taskName;
+        this.taskDetails = taskName;
         this.type = type;
     }
 
@@ -44,6 +44,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.taskName;
+        return this.taskDetails;
     }
 }

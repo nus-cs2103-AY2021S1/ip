@@ -5,29 +5,37 @@ import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
-import java.util.ArrayList;
-
+/**
+ * Encapsulates a Command to add a new task.
+ */
 public class AddCommand extends Command {
     final Task[] myTasks;
+
+    /**
+     * Initializes an instance of AddCommand.
+     * @param myTasks A variable number of tasks to be added to the Task List.
+     */
     public AddCommand(Task ... myTasks) {
         this.myTasks = myTasks;
     }
 
     /**
+     * Consolidated method to perform the following actions.
      * Adds a duke.task to toDoList in duke.task.TaskList, saves the new duke.task list in a
      * txt file and prints a success message.
      * @param ui a duke.Ui instance to enable calling of duke.Ui functions
      * @param storage a duke.Storage instance to enable calling of duke.Storage functions
+     * @return String being printed.
      */
     @Override
     public String execute(Ui ui, Storage storage) {
-        String returnStr = "";
+        StringBuilder returnStr = new StringBuilder();
         for (Task t : myTasks) {
             TaskList.addToList(t);
-            returnStr = returnStr + (ui.printFormat(t.toString()));
+            returnStr.append(ui.printFormat(t.toString()));
         }
         storage.save(TaskList.getList());
-        returnStr = returnStr + ui.printNumberOfTasks(TaskList.getList().size());
-        return returnStr;
+        returnStr.append(ui.printNumberOfTasks(TaskList.getList().size()));
+        return returnStr.toString();
     }
 }

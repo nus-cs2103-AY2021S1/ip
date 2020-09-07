@@ -4,6 +4,9 @@ import duke.Storage;
 import duke.Ui;
 import duke.task.TaskList;
 
+/**
+ * Encapsulates a Command to print out the current Task List to the client.
+ */
 public class PrintlistCommand extends Command {
 
     /**
