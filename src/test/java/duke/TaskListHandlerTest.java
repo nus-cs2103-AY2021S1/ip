@@ -70,22 +70,15 @@ class TaskListHandlerTest {
         handler.addToList(new Todo("assignment"));
         handler.addToList(new Deadline("submission", "9pm"));
         handler.printList();
-        String expectedOutput = " ______________________________________________________________ "
+        String expectedOutput = "    Here are the tasks in your list:"
             + System.getProperty("line.separator")
-            + "*                                                              *"
+            + "        1. [E][\u2718] mega sale (at: 12pm)"
             + System.getProperty("line.separator")
-            + "    Here are the tasks in your list:"
+            + "        2. [T][\u2718] assignment"
             + System.getProperty("line.separator")
-            + "        1. [E][?] mega sale (at: 12pm)"
-            + System.getProperty("line.separator")
-            + "        2. [T][?] assignment"
-            + System.getProperty("line.separator")
-            + "        3. [D][?] submission (by: 9pm)"
+            + "        3. [D][\u2718] submission (by: 9pm)"
             + System.getProperty("line.separator")
             + "    You have 3 task(s) in the list"
-            + System.getProperty("line.separator")
-            + System.getProperty("line.separator")
-            + "*______________________________________________________________*"
             + System.getProperty("line.separator");
         assertEquals(expectedOutput, outContent.toString());
         System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
