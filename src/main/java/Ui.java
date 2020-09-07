@@ -81,6 +81,7 @@ public class Ui {
      */
     public String updateTaskLine(Task oldTask, Task updatedTask) {
         return "The selected Task has been updated:\n"
-                + oldTask + " ---> " + updatedTask;
+                + "Prev: " + oldTask
+                + "\nUpdated: " + updatedTask;
     }
 }
