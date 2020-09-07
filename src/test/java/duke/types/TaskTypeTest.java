@@ -36,18 +36,18 @@ class TaskTypeTest {
     @Test
     void valueOfDeadlineType() {
         TaskType deadlineType = TaskType.valueOfType("deadline");
-        assertEquals(deadlineType, TaskType.DEADLINE);
+        assertEquals(TaskType.DEADLINE, deadlineType);
     }
 
     @Test
     void valueOfEventType() {
         TaskType deadlineType = TaskType.valueOfType("event");
-        assertEquals(deadlineType, TaskType.EVENT);
+        assertEquals(TaskType.EVENT, deadlineType);
     }
 
     @Test
     void valueOfTodoType() {
         TaskType deadlineType = TaskType.valueOfType("todo");
-        assertEquals(deadlineType, TaskType.TODO);
+        assertEquals(TaskType.TODO, deadlineType);
     }
 }

@@ -12,7 +12,6 @@ import duke.tasks.TaskList;
 import duke.types.TaskType;
 import duke.ui.AlertBox;
 import duke.ui.Messenger;
-import javafx.scene.control.Label;
 
 
 /**
@@ -88,8 +87,10 @@ public class Storage {
 
     /**
      * Saves the data in the task list into a saved file.
+     *
+     * @return a string representing the message for saving data to file.
      */
-    public void saveDataToFile(Label label) {
+    public String saveDataToFile() {
         try {
             FileWriter writer = new FileWriter(FILE_PATH);
 
@@ -100,9 +101,11 @@ public class Storage {
             writer.close();
             taskList.clearTasks();
             assert taskList.getTasks().size() == 0 : "task list is not cleared";
-            label.setText(Messenger.CLOSE_MESSAGE);
+            return Messenger.CLOSE_MESSAGE;
         } catch (IOException e) {
-            AlertBox.display("IO Error!", e.getMessage());
+            String errorTitle = "IO Error!";
+            AlertBox.display(errorTitle, e.getMessage());
+            return errorTitle;
         }
     }
 }

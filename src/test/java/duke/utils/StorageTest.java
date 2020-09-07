@@ -1,72 +1,49 @@
 package duke.utils;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.PrintStream;
-import java.nio.file.Files;
-import java.util.Scanner;
-
-import TextFxJava.TestFXJUnitAppRunner;
 import duke.tasks.TaskList;
 
-import javafx.scene.control.Label;
+import duke.ui.Messenger;
 import org.junit.jupiter.api.Test;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+class StorageTest {
 
-
-class StorageTest extends TestFXJUnitAppRunner {
+    TaskList list = new TaskList();
+    Storage storage = new Storage(list);
 
     @Test
     void readSavedFile() throws IOException {
-        TaskList list = new TaskList();
-        Storage storage = new Storage(list);
-
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-
         makeBackup();
-        String actual = storage.readSavedFile() + list.printList();
-        recover();
-
+        String actual = storage.readSavedFile();
         String expected = "Hold a while, trying to retrieve where you were last time...\n"
-                + "Great! We have successfully loaded the data. Enjoy~\n"
-                + "Here are the tasks in your list:\n"
-                + "1.[T][✗] borrow book\n"
-                + "2.[D][✗] return book (by: Aug 23 2020)\n";
-
+                + "Great! We have successfully loaded the data. Enjoy~\n";
+        recover();
         assertEquals(expected, actual);
-
     }
 
     @Test
     void saveDataToFile() throws IOException {
-        Label label = new Label();
-        TaskList list = new TaskList();
-        Storage storage = new Storage(list);
         makeBackup();
-        storage.readSavedFile();
-        list.addTask("test content", "todo");
-        storage.saveDataToFile(label);
-        StringBuilder sb = new StringBuilder();
-        File f = new File("data/duke.txt");
-        Scanner sc = new Scanner(f);
-        while (sc.hasNextLine()) {
-            sb.append(sc.nextLine()).append("\n");
-        }
-        String actual = sb.toString();
-        String expected = "todo|borrow book\n"
-                + "deadline|return book|Aug 23 2020\n"
-                + "todo|test content\n";
+        String actual = storage.saveDataToFile();
+        String expected = "Content Saved! Hope to see you again soon!";
+        assertEquals(expected, actual);
         recover();
-        assertEquals(actual, expected);
     }
 
     private void makeBackup() throws IOException {
+        File directory = new File("data");
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
         File f = new File("data/duke.txt");
+        if (!f.createNewFile()) {
+            return;
+        }
         File dest = new File("data/duke.bak");
         File test = new File("src/test/java/duke/utils/duke-test.txt");
         dest.exists();
@@ -80,6 +57,10 @@ class StorageTest extends TestFXJUnitAppRunner {
 
     private void recover() throws IOException {
         File dest = new File("data/duke.bak");
+        if (!dest.exists()) {
+            // if cannot find back up, then give up recover
+            return;
+        }
         File f = new File("data/duke.txt");
         if (f.delete()) {
             Files.copy(dest.toPath(), f.toPath());

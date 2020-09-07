@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ParserTest {
+    private static final char FROWN = '\u2639';
     Parser parser = new Parser();
 
     @Test
@@ -13,8 +14,8 @@ class ParserTest {
         try {
             String commandLine1 = "todo borrow book";
             String[] split = parser.extractAction(commandLine1);
-            assertEquals(split[0], "todo");
-            assertEquals(split[1], "borrow book");
+            assertEquals("todo", split[0]);
+            assertEquals("borrow book", split[1]);
         } catch (DukeException e) {
             fail();
         }
@@ -27,7 +28,7 @@ class ParserTest {
             parser.extractAction(commandLine);
             fail();
         } catch (DukeException e) {
-            assertEquals(e.getMessage(), "☹ OOPS!!! The command cannot be empty!");
+            assertEquals(FROWN + " OOPS!!! The command cannot be empty!", e.getMessage());
         }
     }
 
@@ -38,7 +39,7 @@ class ParserTest {
             parser.extractAction(command);
             fail();
         } catch (DukeException e) {
-            assertEquals(e.getMessage(), "☹ OOPS!!! Check if you have spelled correctly!");
+            assertEquals(FROWN + " OOPS!!! Check if you have spelled correctly!", e.getMessage());
         }
     }
 
@@ -62,7 +63,7 @@ class ParserTest {
             parser.extractDate(command);
             fail();
         } catch (DukeException e) {
-            assertEquals(e.getMessage(), "☹ OOPS!!! Seems you forgot to supply the time!\n" +
+            assertEquals(e.getMessage(), FROWN + " OOPS!!! Seems you forgot to supply the time!\n" +
                     "Simply add '/by <time>' for deadline OR '/at <time>' for event behind your command");
         }
     }
@@ -74,7 +75,7 @@ class ParserTest {
             parser.extractDate(command);
             fail();
         } catch (DukeException e) {
-            assertEquals(e.getMessage(), "☹ OOPS!!! Seems you forgot to supply the main content!");
+            assertEquals(FROWN + " OOPS!!! Seems you forgot to supply the main content!", e.getMessage());
         }
     }
 
@@ -85,7 +86,8 @@ class ParserTest {
             parser.extractDate(command);
             fail();
         } catch (DukeException e) {
-            assertEquals(e.getMessage(), "☹ OOPS!!! The format for your date is incorrect. Use yyyy-MM-dd instead");
+            assertEquals(FROWN + " OOPS!!! The format for your date is incorrect."
+                    + " Use yyyy-MM-dd format instead", e.getMessage());
         }
     }
 }

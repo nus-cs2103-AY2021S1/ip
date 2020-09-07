@@ -5,6 +5,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TaskTest {
+    private static final char CROSS = '\u2717';
+    private static final char TICK = '\u2713';
 
     @Test
     void getContent() {
@@ -41,9 +43,9 @@ class TaskTest {
     @Test
     void testToString() {
         Task task = new Task("test content", "deadline", "2020-08-23");
-        assertEquals(task.toString(), "[D][✗] test content (by: Aug 23 2020)");
+        assertEquals(task.toString(), "[D][" + CROSS + "] test content (by: Aug 23 2020)");
 
         task.markAsDone();
-        assertEquals(task.toString(), "[D][✓] test content (by: Aug 23 2020)");
+        assertEquals(task.toString(), "[D][" + TICK + "] test content (by: Aug 23 2020)");
     }
 }

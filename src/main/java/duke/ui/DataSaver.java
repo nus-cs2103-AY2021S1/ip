@@ -35,7 +35,7 @@ public class DataSaver implements PopUpBox {
         Label saveDataMessage = new Label();
         saveAndQuit.setOnAction(e -> {
             isQuitting = true;
-            storage.saveDataToFile(saveDataMessage);
+            saveDataMessage.setText(storage.saveDataToFile());
             saveDataMessage.setText("Content has been Saved for you!");
             window.close();
         });

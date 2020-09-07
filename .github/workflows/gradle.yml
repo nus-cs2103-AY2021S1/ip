@@ -21,6 +21,11 @@ jobs:
       - name: Merge to master
         run: git checkout --progress --force ${{ github.sha }}
 
+      - name: Run repository-wide tests
+        if: runner.os == 'Linux'
+        working-directory:  ${{ github.workspace }}/.github
+        run: ./run-checks.sh
+
       - name: Validate Gradle Wrapper
         uses: gradle/wrapper-validation-action@v1
 
@@ -32,19 +37,3 @@ jobs:
 
       - name: Build and check with Gradle
         run: ./gradlew check
-
-      - name: Perform IO redirection test (*NIX)
-        if: runner.os == 'Linux'
-        working-directory:  ${{ github.workspace }}/text-ui-test
-        run: ./runtest.sh
-
-      - name: Perform IO redirection test (MacOS)
-        if: always() && runner.os == 'macOS'
-        working-directory:  ${{ github.workspace }}/text-ui-test
-        run: ./runtest.sh
-
-      - name: Perform IO redirection test (Windows)
-        if: always() && runner.os == 'Windows'
-        working-directory:  ${{ github.workspace }}/text-ui-test
-        shell: cmd
-        run: runtest.bat
