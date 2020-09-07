@@ -31,22 +31,22 @@ public class TaskList {
     }
 
     /**
-     * @param i task.Task number.
-     * @return task.Task object with task number i.
+     * @param i Task number.
+     * @return Task object with task number i.
      */
     public Task get(int i) {
         return tasks.get(i);
     }
 
     /**
-     * @param i Remove task.Task object with task number i from the list.
+     * @param i Remove Task object with task number i from the list.
      */
     public void remove(int i) {
         this.tasks.remove(i);
     }
 
     /**
-     * @param t task.Task to be added to the list.
+     * @param t Task to be added to the list.
      */
     public void add(Task t) {
         this.tasks.add(t);
