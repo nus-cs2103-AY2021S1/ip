@@ -44,6 +44,16 @@ public class Event extends Task {
     return "";
   }
 
+  public void changeStartTime(String newStartTime) throws DukeException {
+    try {
+      new SimpleDateFormat("dd/MM/yyyy HHmm").parse(newStartTime);
+      this.startTime = newStartTime;
+    } catch (ParseException e) {
+      throw new DukeException(
+          "Invalid date format! Please ensure date in this format dd/MM/yyyy HHmm");
+    }
+  }
+
   /**
    * Returns task type
    *

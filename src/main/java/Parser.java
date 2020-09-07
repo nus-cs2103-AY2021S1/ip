@@ -86,6 +86,8 @@ public class Parser {
         }
       case "find":
         return tasks.handleFind(inputs);
+      case "update":
+        return tasks.handleUpdate(inputs);
       case "bye":
         return "Bye. Hope to see you again soon!";
       default:

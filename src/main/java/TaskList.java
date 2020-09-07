@@ -62,7 +62,7 @@ public class TaskList {
   /**
    * Marks a given task as Done
    *
-   * @param inputs Userinput split into tokens
+   * @param inputs User input split into tokens
    */
   public String handleDone(String[] inputs) throws DukeException {
     int index = Integer.parseInt(inputs[1]) - 1;
@@ -94,6 +94,29 @@ public class TaskList {
             + tasks.size() + " tasks in the list.";
   }
 
+  public String handleUpdate(String[] inputs) {
+    inputs = inputs[1].split(" ",2);
+    int index = Integer.parseInt(inputs[0]) - 1;
+    Task current = tasks.get(index);
+    if (current.getType().equals("E")) {
+      try {
+        ((Event) current).changeStartTime(inputs[1]);
+        return "I have updated the task as follows: \n" + current.toString();
+      } catch (DukeException e) {
+        return e.getMessage();
+      }
+    }
+    else if (current.getType().equals("D")) {
+      try {
+        ((Deadline) current).changeDeadline(inputs[1]);
+        return "I have updated the task as follows: \n" + current.toString();
+      } catch (DukeException e) {
+        return e.getMessage();
+      }
+    }
+    return "Unable to update task";
+  }
+
   /** Prints out the TaskList */
   public String list() {
     StringBuilder out = new StringBuilder("Task list\n");
@@ -109,7 +132,7 @@ public class TaskList {
   /**
    * Searches for a task with the specified keyword Prints it out
    *
-   * @param inputs Userinput split into tokens
+   * @param inputs User input split into tokens
    */
   public String handleFind(String[] inputs) {
     StringBuilder out = new StringBuilder("Here are the matching tasks in your list:\n");
