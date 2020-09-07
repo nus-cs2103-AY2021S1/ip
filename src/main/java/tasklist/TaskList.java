@@ -11,10 +11,6 @@ import storage.Storage;
 public class TaskList {
     private ArrayList<Task> todoList;
 
-    public TaskList() {
-        this.todoList = new ArrayList<>();
-    }
-
     public TaskList(ArrayList<Task> allTask) {
         this.todoList = allTask;
     }
@@ -89,7 +85,7 @@ public class TaskList {
     public ArrayList<Task> findTasks(String keyword) {
         ArrayList<Task> temp = new ArrayList<>();
         for (int i  = 0; i < this.todoList.size(); i++) {
-            if(this.todoList.get(i).getDescription().contains(keyword)) {
+            if (this.todoList.get(i).getDescription().contains(keyword)) {
                 temp.add(this.todoList.get(i));
             }
         }

@@ -15,7 +15,6 @@ import java.util.Scanner;
  * The Storage class can (i) load the data from duke.txt, (ii) save a task onto duke.txt,
  *  (iii) rewrite duke.txt when a task is removed or updated.
  */
-
 public class Storage {
     protected File file;
 
@@ -33,11 +32,11 @@ public class Storage {
      * @throws FileNotFoundException if there is no file found to load from.
      */
     public ArrayList<Task> load() throws FileNotFoundException {
-        Scanner s = new Scanner(this.file);
+        Scanner scanner = new Scanner(this.file);
         ArrayList<Task> list = new ArrayList<>();
 
-        while (s.hasNext()) {
-            String[] taskInfo = s.nextLine().split(",", 4);
+        while (scanner.hasNext()) {
+            String[] taskInfo = scanner.nextLine().split(",", 4);
             if (taskInfo[0].equals("T")) {
                 if (taskInfo[1].equals("1")) {
                     Todo todo = new Todo(taskInfo[2], true);
@@ -87,7 +86,6 @@ public class Storage {
         }
     }
 
-
     /**
      * Rewrites duke.txt with the tasks from the todoList
      * @param path The file path of duke.txt
@@ -108,31 +106,29 @@ public class Storage {
     }
 
     private static String formatString(Task task) {
+        String formattedString;
+
         if (task instanceof Todo) {
             if (task.checkDone()) {
-                String s = "T,1," + task.getDescription();
-                return s;
+                formattedString = "T,1," + task.getDescription();
             } else {
-                String s = "T,0," + task.getDescription();
-                return s;
+                formattedString = "T,0," + task.getDescription();
             }
+
         } else if (task instanceof Deadline) {
             if (task.checkDone()) {
-                String s = "D,1," + task.getDescription() + "," + ((Deadline) task).getDeadline();
-                return s;
+                formattedString = "D,1," + task.getDescription() + "," + ((Deadline) task).getDeadline();
             } else {
-                String s = "D,0," + task.getDescription() + "," + ((Deadline) task).getDeadline();
-                return s;
+                formattedString = "D,0," + task.getDescription() + "," + ((Deadline) task).getDeadline();
             }
         } else {
             if (task.checkDone()) {
-                String s = "E,1," + task.getDescription() + "," + ((Event) task).checkAt();
-                return s;
+                formattedString = "E,1," + task.getDescription() + "," + ((Event) task).checkAt();
             } else {
-                String s = "E,0," + task.getDescription() + "," + ((Event) task).checkAt();
-                return s;
+                formattedString = "E,0," + task.getDescription() + "," + ((Event) task).checkAt();
             }
         }
+        return formattedString;
     }
 
     private static void appendToFile(String filePath, String textToAppend) throws IOException {
