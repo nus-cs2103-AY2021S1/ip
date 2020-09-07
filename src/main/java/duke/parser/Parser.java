@@ -38,7 +38,12 @@ public class Parser {
         this.formatter = new HelpFormatter();
     }
 
-    // TODO test
+    /**
+     * Returns the help String created using commons-cli's HelpFormatter.
+     * @param command Name of command.
+     * @param options Options for command.
+     * @return formatted help string.
+     */
     private String getHelp(String command, Options options) {
         StringWriter stringWriter = new StringWriter();
         PrintWriter printWriter = new PrintWriter(stringWriter);
@@ -64,7 +69,6 @@ public class Parser {
     public void parseAndRun(String input) throws DukeException {
         String[] inputSplitBySpace = input.split("\\s+");
         if (inputSplitBySpace.length == 0) {
-            // TODO should this happen ever? change w assertion?
             throw DukeException.Errors.UNKNOWN_COMMAND.create();
         }
         String commandName = inputSplitBySpace[0];
