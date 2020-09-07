@@ -20,51 +20,79 @@ public class Parser {
         if (commandArgs[0].equals(CommandType.BYE.getName())) {
             return new ExitCommand();
         } else if (commandArgs[0].equals(CommandType.LIST.getName())) {
-            try {
-                return new ListCommand(LocalDate.parse(commandArgs[1]));
-            } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
-                return new ListCommand();
-            }
+            return createListCommand(commandArgs);
         } else if (commandArgs[0].equals(CommandType.DONE.getName())) {
-            try {
-                return new DoneCommand(Integer.parseInt(commandArgs[1]));
-            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("The number of the task to be marked as done has to be provided.");
-            }
+            return createDoneCommand(commandArgs);
         } else if (commandArgs[0].equals(CommandType.DELETE.getName())) {
-            try {
-                return new DeleteCommand(Integer.parseInt(commandArgs[1]));
-            } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
-                throw new DukeException("The number of the task to be deleted has to be provided.");
-            }
+            return createDeleteCommand(commandArgs);
         } else if (commandArgs[0].equals(CommandType.TODO.getName())) {
-            String description = Parser.reassembleString(commandArgs, 1, commandArgs.length);
-            return new AddCommand(CommandType.TODO, description, null);
+            return createAddTodoCommand(commandArgs);
         } else if (commandArgs[0].equals(CommandType.DEADLINE.getName())) {
-            int byIdx = Arrays.asList(commandArgs).indexOf("/by");
-            if (byIdx < 0) {
-                throw new DukeException("The deadline date has to be provided to the deadline task.");
-            }
-            String description = Parser.reassembleString(commandArgs, 1, byIdx);
-            String by = Parser.reassembleString(commandArgs, byIdx + 1, commandArgs.length);
-            return new AddCommand(CommandType.DEADLINE, description, by);
+            return createAddDeadlineCommand(commandArgs);
         } else if (commandArgs[0].equals(CommandType.EVENT.getName())) {
-            int atIdx = Arrays.asList(commandArgs).indexOf("/at");
-            if (atIdx < 0) {
-                throw new DukeException("The event date has to be provided to the event task.");
-            }
-            String description = Parser.reassembleString(commandArgs, 1, atIdx);
-            String at = Parser.reassembleString(commandArgs, atIdx + 1, commandArgs.length);
-            return new AddCommand(CommandType.EVENT, description, at);
+            return createAddEventCommand(commandArgs);
         } else if (commandArgs[0].equals(CommandType.FIND.getName())) {
-            String keyword = Parser.reassembleString(commandArgs, 1, commandArgs.length);
-            if (keyword.length() == 0) {
-                throw new DukeException("The keyword has to be provided for the find command");
-            }
-            return new FindCommand(keyword);
+            return createFindCommand(commandArgs);
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means...");
         }
+    }
+
+    private static ListCommand createListCommand(String[] commandArgs) {
+        try {
+            return new ListCommand(LocalDate.parse(commandArgs[1]));
+        } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
+            return new ListCommand();
+        }
+    }
+
+    private static DoneCommand createDoneCommand(String[] commandArgs) throws DukeException {
+        try {
+            return new DoneCommand(Integer.parseInt(commandArgs[1]));
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("The number of the task to be marked as done has to be provided.");
+        }
+    }
+
+    private static DeleteCommand createDeleteCommand(String[] commandArgs) throws DukeException {
+        try {
+            return new DeleteCommand(Integer.parseInt(commandArgs[1]));
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("The number of the task to be deleted has to be provided.");
+        }
+    }
+
+    private static AddCommand createAddTodoCommand(String[] commandArgs) {
+        String description = Parser.reassembleString(commandArgs, 1, commandArgs.length);
+        return new AddCommand(CommandType.TODO, description, null);
+    }
+
+    private static AddCommand createAddDeadlineCommand(String[] commandArgs) throws DukeException {
+        int byIdx = Arrays.asList(commandArgs).indexOf("/by");
+        if (byIdx < 0) {
+            throw new DukeException("The deadline date has to be provided to the deadline task.");
+        }
+        String description = Parser.reassembleString(commandArgs, 1, byIdx);
+        String by = Parser.reassembleString(commandArgs, byIdx + 1, commandArgs.length);
+        return new AddCommand(CommandType.DEADLINE, description, by);
+    }
+
+    private static AddCommand createAddEventCommand(String[] commandArgs) throws DukeException {
+        int atIdx = Arrays.asList(commandArgs).indexOf("/at");
+        if (atIdx < 0) {
+            throw new DukeException("The event date has to be provided to the event task.");
+        }
+        String description = Parser.reassembleString(commandArgs, 1, atIdx);
+        String at = Parser.reassembleString(commandArgs, atIdx + 1, commandArgs.length);
+        return new AddCommand(CommandType.EVENT, description, at);
+    }
+
+    private static FindCommand createFindCommand(String[] commandArgs) throws DukeException {
+        String keyword = Parser.reassembleString(commandArgs, 1, commandArgs.length);
+        if (keyword.length() == 0) {
+            throw new DukeException("The keyword has to be provided for the find command");
+        }
+        return new FindCommand(keyword);
     }
 
     private static String reassembleString(String[] arr, int from, int to) {
