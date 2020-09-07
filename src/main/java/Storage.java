@@ -29,10 +29,10 @@ public class Storage {
         String extraInfo = "";
         if (task.getType().equals("E")) {
           Event task1 = (Event) task;
-          extraInfo = task1.getAt();
+          extraInfo = task1.getStartTime();
         } else if (task.getType().equals("D")) {
           Deadline task1 = (Deadline) task;
-          extraInfo = task1.getBy();
+          extraInfo = task1.getDeadline();
         }
         String output =
             task.getType()

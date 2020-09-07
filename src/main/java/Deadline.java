@@ -8,16 +8,16 @@ import java.util.Date;
  */
 public class Deadline extends Task {
 
-    protected String by;
+    protected String deadline;
 
     /**
      * Constructor that takes in the deadline description and the date/time
      * @param description event description
-     * @param by date/time of event
+     * @param deadline date/time of event
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String deadline) {
         super(description);
-        this.by = by;
+        this.deadline = deadline;
     }
 
     /**
@@ -26,12 +26,12 @@ public class Deadline extends Task {
      */
     public String getTime() {
         try {
-            Date d1 = new SimpleDateFormat("dd/mm/yyyy HHmm").parse(by);
+            Date d1 = new SimpleDateFormat("dd/mm/yyyy HHmm").parse(deadline);
             return new SimpleDateFormat("HH:mm, dd MMM yyyy").format(d1);
         } catch (ParseException e) {
             System.out.println("Invalid format");
+            return "Invalid format";
         }
-        return "";
     }
 
     /**
@@ -46,7 +46,7 @@ public class Deadline extends Task {
      * Returns the string representation of the date/time
      * @return original string representation of date/time
      */
-    public String getBy() { return by; }
+    public String getDeadline() { return deadline; }
 
     @Override
     public String toString() {

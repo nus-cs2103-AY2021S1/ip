@@ -19,16 +19,12 @@ public class TaskList {
   /**
    * Handles the addition of an event
    *
-   * @param inputs Userinput split into tokens
+   * @param inputs User input split into tokens
    */
   public String handleEvent(String[] inputs) {
     String[] tokens = inputs[1].split(" /at ");
     tasks.add(new Event(tokens[0], tokens[1]));
-    System.out.println("Got it. I've added this task:");
-    System.out.println(tasks.get(tasks.size() - 1));
-    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-    return "Got it. I've added this task:\n" +  tasks.get(tasks.size() - 1) + "\nNow you have "
-            + tasks.size() + " tasks in the list.";
+    return getResponse();
   }
 
   /**
@@ -39,10 +35,14 @@ public class TaskList {
   public String handleDeadline(String[] inputs) {
     String[] tokens = inputs[1].split(" /by ");
     tasks.add(new Deadline(tokens[0], tokens[1]));
+    return getResponse();
+  }
+
+  private String getResponse() {
     System.out.println("Got it. I've added this task:");
     System.out.println(tasks.get(tasks.size() - 1));
     System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-    return "Got it. I've added this task:\n" +  tasks.get(tasks.size() - 1) + "\nNow you have "
+    return "Got it. I've added this task:\n" + tasks.get(tasks.size() - 1) + "\nNow you have "
             + tasks.size() + " tasks in the list.";
   }
 
@@ -56,11 +56,7 @@ public class TaskList {
       throw new DukeException("The description of a todo cannot be empty.");
     }
     tasks.add(new ToDo(inputs[1]));
-    System.out.println("Got it. I've added this task:");
-    System.out.println(tasks.get(tasks.size() - 1));
-    System.out.println("Now you have " + tasks.size() + " tasks in the list.");
-    return "Got it. I've added this task:\n" +  tasks.get(tasks.size() - 1) + "\nNow you have "
-            + tasks.size() + " tasks in the list.";
+    return getResponse();
   }
 
   /**
@@ -80,7 +76,7 @@ public class TaskList {
   }
 
   /**
-   * Deletes a specified task
+   * Deletes a specified task at indicated index
    *
    * @param inputs User input split into tokens
    */

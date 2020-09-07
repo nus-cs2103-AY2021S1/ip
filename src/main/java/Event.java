@@ -7,17 +7,17 @@ import java.util.Date;
  */
 public class Event extends Task {
 
-  protected String at;
+  protected String startTime;
 
   /**
    * Constructor that takes in event description and the date/time
    *
    * @param description event description
-   * @param at date/time of event
+   * @param startTime date/time of event
    */
-  public Event(String description, String at) {
+  public Event(String description, String startTime) {
     super(description);
-    this.at = at;
+    this.startTime = startTime;
   }
 
   /**
@@ -25,8 +25,8 @@ public class Event extends Task {
    *
    * @return original string representation of date/time
    */
-  public String getAt() {
-    return at;
+  public String getStartTime() {
+    return startTime;
   }
 
   /**
@@ -36,7 +36,7 @@ public class Event extends Task {
    */
   public String getTime() {
     try {
-      Date d1 = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(at);
+      Date d1 = new SimpleDateFormat("dd/MM/yyyy HHmm").parse(startTime);
       return new SimpleDateFormat("HH:mm, dd MMM yyyy").format(d1);
     } catch (ParseException e) {
       System.out.println("Invalid format");
