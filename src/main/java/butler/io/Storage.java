@@ -40,44 +40,54 @@ public class Storage {
      * @param taskList List of tasks to be written into the hard disk.
      * @throws ButlerException if file is not detected.
      */
-    public void storeTaskList(TaskList taskList) throws ButlerException{
+    public void storeTaskList(TaskList taskList) throws ButlerException {
         try {
             FileWriter fw = new FileWriter(filePath);
             String fileText = "";
+
             int size = taskList.getSize();
             for (int i = 0; i < size; i++) {
                 Task task = taskList.getTask(i);
                 String taskDetails;
+                TaskType taskType = task.getTaskType();
+
                 if (task.isComplete()) {
                     taskDetails = "complete";
                 } else {
                     taskDetails = "incomplete";
                 }
-                TaskType taskType = task.getTaskType();
+
                 switch (taskType) {
-                    case TODO:
-                        taskDetails += " todo " + task.getSummary();
-                        break;
-                    case DEADLINE:
-                        DeadlineTask deadlineTask = (DeadlineTask) task;
-                        taskDetails += " deadline " + deadlineTask.getSummary()
-                                + " /by " + deadlineTask.getDeadline();
-                        break;
-                    case EVENT:
-                        EventTask eventTask = (EventTask) task;
-                        taskDetails += " event " + eventTask.getSummary()
-                                + " /at " + eventTask.getStartDate() + " "
-                                + eventTask.getEndDate();
-                        break;
-                    default:
-                        throw new ButlerException("Something is wrong. This place should be unreachable.");
+                case TODO:
+                    taskDetails += " todo " + task.getSummary();
+                    break;
+
+                case DEADLINE:
+                    DeadlineTask deadlineTask = (DeadlineTask) task;
+                    taskDetails += " deadline " + deadlineTask.getSummary()
+                            + " /by " + deadlineTask.getDeadline();
+                    break;
+
+                case EVENT:
+                    EventTask eventTask = (EventTask) task;
+                    taskDetails += " event " + eventTask.getSummary()
+                            + " /at " + eventTask.getStartDate() + " "
+                            + eventTask.getEndDate();
+                    break;
+
+                default:
+                    throw new ButlerException("Something is wrong. This place should be unreachable.");
                 }
+
                 fileText += taskDetails + System.lineSeparator();
             }
+
             fw.write(fileText);
             fw.close();
+
         } catch (IOException e) {
             throw new ButlerException("There is an error with writing to the path. File is not detected.");
+
         } catch (ClassCastException e) {
             throw new ButlerException("Something is wrong. ClassCastException should be unreachable.");
         }
@@ -96,13 +106,14 @@ public class Storage {
             ArrayList<Task> taskList = new ArrayList<>();
 
             while (s.hasNext()) {
-                // read in file input into tasks
                 String input = s.nextLine();
-                // first detect completion status
+
                 String completionStatus = input.split(" ", 2)[0];
                 String details = input.split(" ", 2)[1];
+
                 AddCommand c = (AddCommand) Parser.parse(details);
                 Task task = c.getTask();
+
                 if (completionStatus.equals("complete")) {
                     task.markComplete();
                 }
@@ -118,10 +129,13 @@ public class Storage {
                 throw new ButlerException("Code should never reach here." + f.getMessage());
             }
             throw new ButlerException("There is no file to access.");
+
         } catch (IndexOutOfBoundsException e) {
             throw new ButlerException("There is an error inside the file. The task has incomplete details.");
+
         } catch (ClassCastException e) {
             throw new ButlerException("Instead of tasks, a command was written into the file.");
+
         } catch (ButlerException e) {
             throw new ButlerException("There is an error within the task in the file.");
         }

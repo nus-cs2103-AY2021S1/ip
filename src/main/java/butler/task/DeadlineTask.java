@@ -33,7 +33,7 @@ public class DeadlineTask extends Task {
      * @return Deadline of this deadline task.
      */
     public LocalDate getDeadline() {
-        return this.deadline;
+        return deadline;
     }
 
     /**

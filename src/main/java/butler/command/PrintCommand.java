@@ -23,7 +23,7 @@ public class PrintCommand extends Command {
      * @param storage Storage which stores given <code>taskList</code> on hard disk.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage){
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.printTaskList(taskList);
     }
 

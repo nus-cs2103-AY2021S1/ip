@@ -41,95 +41,96 @@ public class Parser {
         }
 
         switch (commandType) {
-            case "done":
-                String[] indexStringArray = Arrays.copyOfRange(input.split(" "), 1, input.split(" ").length);
-                ArrayList<Integer> indexList = new ArrayList<>();
+        case "done":
+            String[] indexStringArray = Arrays.copyOfRange(input.split(" "), 1, input.split(" ").length);
+            ArrayList<Integer> indexList = new ArrayList<>();
 
-                // Convert string index to integer
-                for (String index : indexStringArray) {
-                    try {
-                        Integer i = Integer.parseInt(index);
-                        if (i < 1) {
-                            throw new ButlerException("An invalid index was given.\n"
-                                    + "Index must be positive.");
-                        } else {
-                            indexList.add(i);
-                        }
-                    } catch (NumberFormatException e) {
-                        throw new ButlerException("An invalid index was given.\n"
-                                + index + " is not an integer.");
-                    }
-                }
-
-                if (indexList.size() == 0) {
-                    throw new ButlerException("No index was given . Please provide a valid index.");
-                }
-
-                return new CompleteCommand(indexList);
-
-            case "delete":
-                String stringIndex = input.split(" ")[1];
+            // Convert string index to integer
+            for (String index : indexStringArray) {
                 try {
-                    int index = Integer.parseInt(stringIndex);
-                    return new DeleteCommand(index);
+                    Integer i = Integer.parseInt(index);
+                    if (i < 1) {
+                        throw new ButlerException("An invalid index was given.\n"
+                                + "Index must be positive.");
+                    } else {
+                        indexList.add(i);
+                    }
                 } catch (NumberFormatException e) {
                     throw new ButlerException("An invalid index was given.\n"
-                            + stringIndex + " is not an integer.");
+                            + index + " is not an integer.");
                 }
+            }
 
-            case "todo":
-                try {
-                    String taskDetails = input.split(" ", 2)[1];
-                    Task task = new ToDoTask(taskDetails);
-                    return new AddCommand(task);
-                } catch (IndexOutOfBoundsException e) {
-                    throw new ButlerException("Please add a description for the ToDo task.");
-                }
+            if (indexList.size() == 0) {
+                throw new ButlerException("No index was given . Please provide a valid index.");
+            }
 
-            case "event":
-                try {
-                    String taskDetails = input.split(" ", 2)[1];
-                    String summary = taskDetails.split(" /at ", 2)[0];
+            return new CompleteCommand(indexList);
 
-                    String date = taskDetails.split(" /at ", 2)[1];
-                    LocalDate startDate = LocalDate.parse(date.split(" ")[0]);
-                    LocalDate endDate = LocalDate.parse(date.split(" ")[1]);
+        case "delete":
+            String stringIndex = input.split(" ")[1];
 
-                    Task task = new EventTask(summary, startDate, endDate);
-                    return new AddCommand(task);
+            try {
+                int index = Integer.parseInt(stringIndex);
+                return new DeleteCommand(index);
+            } catch (NumberFormatException e) {
+                throw new ButlerException("An invalid index was given.\n"
+                        + stringIndex + " is not an integer.");
+            }
 
-                } catch (IndexOutOfBoundsException e) {
-                    throw new ButlerException("Please provide a summary and date of event.\n"
-                            + "Separate the dates from summary using \" /at \" and "
-                            + "separate the two dates using a space.");
+        case "todo":
+            try {
+                String taskDetails = input.split(" ", 2)[1];
+                Task task = new ToDoTask(taskDetails);
+                return new AddCommand(task);
+            } catch (IndexOutOfBoundsException e) {
+                throw new ButlerException("Please add a description for the ToDo task.");
+            }
 
-                } catch (DateTimeParseException e) {
-                    throw new ButlerException("Please input a valid Date format.\n"
-                            + "Valid Date format is YYYY-MM-DD.");
-                }
+        case "event":
+            try {
+                String taskDetails = input.split(" ", 2)[1];
+                String summary = taskDetails.split(" /at ", 2)[0];
 
-            case "deadline":
-                try {
-                    String taskDetails = input.split(" ", 2)[1];
-                    String summary = taskDetails.split(" /by ", 2)[0];
+                String date = taskDetails.split(" /at ", 2)[1];
+                LocalDate startDate = LocalDate.parse(date.split(" ")[0]);
+                LocalDate endDate = LocalDate.parse(date.split(" ")[1]);
 
-                    String deadline = taskDetails.split(" /by ", 2)[1];
-                    LocalDate formattedDeadline = LocalDate.parse(deadline);
+                Task task = new EventTask(summary, startDate, endDate);
+                return new AddCommand(task);
 
-                    Task task = new DeadlineTask(summary, formattedDeadline);
-                    return new AddCommand(task);
+            } catch (IndexOutOfBoundsException e) {
+                throw new ButlerException("Please provide a summary and date of event.\n"
+                        + "Separate the dates from summary using \" /at \" and "
+                        + "separate the two dates using a space.");
 
-                } catch (IndexOutOfBoundsException e) {
-                    throw new ButlerException("Please provide a summary and deadline.\n"
-                            + "Separate the deadline from summary using \" /by \".");
+            } catch (DateTimeParseException e) {
+                throw new ButlerException("Please input a valid Date format.\n"
+                        + "Valid Date format is YYYY-MM-DD.");
+            }
 
-                } catch (DateTimeParseException e) {
-                    throw new ButlerException("Please input a valid Date format.\n"
-                            + "Valid Date format is YYYY-MM-DD.");
-                }
+        case "deadline":
+            try {
+                String taskDetails = input.split(" ", 2)[1];
+                String summary = taskDetails.split(" /by ", 2)[0];
+
+                String deadline = taskDetails.split(" /by ", 2)[1];
+                LocalDate formattedDeadline = LocalDate.parse(deadline);
+
+                Task task = new DeadlineTask(summary, formattedDeadline);
+                return new AddCommand(task);
+
+            } catch (IndexOutOfBoundsException e) {
+                throw new ButlerException("Please provide a summary and deadline.\n"
+                        + "Separate the deadline from summary using \" /by \".");
+
+            } catch (DateTimeParseException e) {
+                throw new ButlerException("Please input a valid Date format.\n"
+                        + "Valid Date format is YYYY-MM-DD.");
+            }
         }
 
-        throw new ButlerException("This is not a valid command type.\n" +
-                "Valid commands start with list, done, delete, todo, deadline, event or bye.");
+        throw new ButlerException("This is not a valid command type.\n"
+                + "Valid commands start with list, done, delete, todo, deadline, event or bye.");
     }
 }

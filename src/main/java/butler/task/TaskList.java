@@ -1,6 +1,7 @@
 package butler.task;
 
 import butler.exception.ButlerException;
+
 import java.util.ArrayList;
 
 /**
@@ -27,19 +28,22 @@ public class TaskList {
     }
 
     /**
-     * Marks the task at the specified <code>index</code> as complete.
-     * Valid indexes range from 1 to the size of this list of tasks.
+     * Gets the number of tasks in this list of tasks.
      *
-     * @param index Index of the task to mark as completed.
-     * @throws ButlerException if the index is out of range.
+     * @return Number of tasks in this list of tasks.
      */
-    public void completeTask(int index) throws ButlerException {
-        try {
-            taskList.get(index - 1).markComplete();
-        } catch (IndexOutOfBoundsException e) {
-            throw new ButlerException("Please give a valid index. \""
-                    + index + "\" is not a valid index.\n");
-        }
+    public int getSize() {
+        return taskList.size();
+    }
+
+    /**
+     * Gets the task at the specified <code>index</code>.
+     *
+     * @param taskIndex Index of the task.
+     * @return Task at the specified <code>index</code>.
+     */
+    public Task getTask(int taskIndex) {
+        return taskList.get(taskIndex);
     }
 
     /**
@@ -52,36 +56,33 @@ public class TaskList {
     }
 
     /**
-     * Removes the task at the specified <code>index</code> from this list.
+     * Marks the task at the specified <code>index</code> as complete.
+     * Valid indexes range from 1 to the size of this list of tasks.
      *
-     * @param index Index of the task to be removed.
+     * @param taskIndex Index of the task to mark as completed.
      * @throws ButlerException if the index is out of range.
      */
-    public void deleteTask(int index) throws ButlerException {
+    public void completeTask(int taskIndex) throws ButlerException {
         try {
-            taskList.remove(index - 1);
+            taskList.get(taskIndex - 1).markComplete();
         } catch (IndexOutOfBoundsException e) {
             throw new ButlerException("Please give a valid index. \""
-                    + index + "\" is not a valid index.\n");
+                    + taskIndex + "\" is not a valid index.");
         }
     }
 
     /**
-     * Gets the number of tasks in this list of tasks.
+     * Removes the task at the specified <code>index</code> from this list.
      *
-     * @return Number of tasks in this list of tasks.
+     * @param taskIndex Index of the task to be removed.
+     * @throws ButlerException if the index is out of range.
      */
-    public int getSize() {
-        return taskList.size();
-    }
-
-    /**
-     * Gets the task at the specified <code>index</code>.
-     *
-     * @param index Index of the task.
-     * @return Task at the specified <code>index</code>.
-     */
-    public Task getTask(int index) {
-        return taskList.get(index);
+    public void deleteTask(int taskIndex) throws ButlerException {
+        try {
+            taskList.remove(taskIndex - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new ButlerException("Please give a valid index. \""
+                    + taskIndex + "\" is not a valid index.");
+        }
     }
 }

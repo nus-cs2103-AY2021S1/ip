@@ -23,15 +23,6 @@ public abstract class Task {
     }
 
     /**
-     * Gets the completion status of this task in string form.
-     *
-     * @return "[Y]" if this task is complete else "[N]".
-     */
-    private String getStatus() {
-        return (isComplete ? "[Y]" : "[N]");
-    }
-
-    /**
      * Gets the summary of this task.
      *
      * @return Summary of this task.
@@ -62,7 +53,7 @@ public abstract class Task {
      * Marks this task as complete.
      */
     public void markComplete() {
-        this.isComplete = true;
+        isComplete = true;
     }
 
     /**
@@ -72,6 +63,6 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return this.getStatus() + " " + this.getSummary();
+        return (isComplete ? "[Y]" : "[N]") + " " + getSummary();
     }
 }
