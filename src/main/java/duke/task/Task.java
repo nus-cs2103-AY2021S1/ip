@@ -1,5 +1,9 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Optional;
+
 /**
  * Represents a general task that has a name and status of completion.
  * More specific task will inherit from this class.
@@ -35,6 +39,10 @@ public abstract class Task {
 
     public abstract String convertTxt();
 
-    public abstract String getDate();
+    public abstract String getDateAsString();
+
+    public abstract Optional<LocalDate> getDate();
+
+    public abstract Optional<LocalTime> getTime();
 
 }

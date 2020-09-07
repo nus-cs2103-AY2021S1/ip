@@ -21,7 +21,7 @@ public class CheckCommand extends Command {
     public String execute(TaskList list, Ui ui, Storage storage) {
 
         AtomicInteger count = new AtomicInteger(1);
-        Predicate<Task> checkDate = x -> x.getDate().equals(this.target);
+        Predicate<Task> checkDate = x -> x.getDateAsString().equals(this.target);
         Function<Task, String> taskString = x -> ui.showTask(count.getAndIncrement(), x);
         BinaryOperator<String> accumulator = (x, y) -> (x + "\n" + y);
 

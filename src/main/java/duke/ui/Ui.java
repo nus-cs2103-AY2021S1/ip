@@ -1,9 +1,9 @@
 package duke.ui;
 
-import java.util.Scanner;
-
 import duke.task.Task;
 import duke.tasklist.TaskList;
+
+import java.util.Scanner;
 
 /**
  * Represents an object that is responsible for user interaction.
@@ -51,7 +51,11 @@ public class Ui {
     }
 
     public String showTask(int count, Task task) {
-        return count + ". " + task;
+        String space = ". ";
+        if (count < 10) {
+            space = ".   ";
+        }
+        return count + space + task;
     }
 
     public String showDone(Task task) {
@@ -90,6 +94,10 @@ public class Ui {
 
     public String showNothingFound() {
         return "Hmm, I didn't find anything that match your input";
+    }
+
+    public String showSort() {
+        return "I have sorted the list of tasks! Todo tasks will be display lastly.\n";
     }
 
 }
