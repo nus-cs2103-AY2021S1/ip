@@ -97,6 +97,7 @@ public class Storage {
     }
 
     private boolean convertFormatToIsDone(String taskDoneFormat) {
+        assert taskDoneFormat.equals("1") || taskDoneFormat.equals("0");
         return taskDoneFormat.equals("1");
     }
 
