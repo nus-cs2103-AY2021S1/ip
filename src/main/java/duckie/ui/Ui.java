@@ -20,7 +20,7 @@ public class Ui {
     private Scanner sc;
 
     /**
-     * Instantiate an Ui object with the Scanner object ready.
+     * Instantiates an Ui object with the Scanner object ready.
      */
     public Ui() {
         sc = new Scanner(System.in);

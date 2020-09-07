@@ -17,7 +17,7 @@ public class DeleteCommand extends Command {
     private int ind;
 
     /**
-     * Instantiate the DeleteCommand.
+     * Instantiates the DeleteCommand.
      *
      * @param ind Index of the Task in TaskList to be deleted.
      */
@@ -26,7 +26,7 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Delete the required Task.
+     * Deletes the required Task.
      *
      * @param tasks TaskList containing all the tasks.
      * @param ui Ui to interact with the users.

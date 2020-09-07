@@ -8,7 +8,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Instantiate a Task object.
+     * Instantiatess a Task object.
      *
      * @param description Description of the task.
      */
@@ -18,14 +18,14 @@ public class Task {
     }
 
     /**
-     * Check the task and mark as done.
+     * Checks the task and mark as done.
      */
     public void markDone() {
         this.isDone = true;
     }
 
     /**
-     * Check if a Task is completed or not.
+     * Checks if a Task is completed or not.
      *
      * @return Boolean value indicating the completeness of the task.
      */
@@ -34,7 +34,7 @@ public class Task {
     }
 
     /**
-     * Return the description of a Task.
+     * Returns the description of a Task.
      *
      * @return String description of a Task.
      */
@@ -43,7 +43,7 @@ public class Task {
     }
 
     /**
-     * Return the type of a Task.
+     * Returns the type of a Task.
      *
      * @return null.
      */
@@ -52,7 +52,7 @@ public class Task {
     }
 
     /**
-     * Return the date of a Task.
+     * Returns the date of a Task.
      *
      * @return null.
      */
@@ -61,7 +61,7 @@ public class Task {
     }
 
     /**
-     * Overrided method to return the String representation of a Task.
+     * Overrides method to return the String representation of a Task.
      *
      * @return String representation of a Task.
      */

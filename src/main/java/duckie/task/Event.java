@@ -11,7 +11,7 @@ public class Event extends Task {
     protected LocalDateTime dateTime;
 
     /**
-     * Instantiate a Event task.
+     * Instantiatess a Event task.
      *
      * @param description Description of the task.
      * @param dateTime Date and Time of the task.

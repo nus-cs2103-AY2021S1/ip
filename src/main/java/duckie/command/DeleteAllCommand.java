@@ -14,7 +14,7 @@ import duckie.ui.Ui;
  */
 public class DeleteAllCommand extends Command {
     /**
-     * Delete all Tasks in TaskList.
+     * Deletes all Tasks in TaskList.
      *
      * @param tasks TaskList containing all the tasks.
      * @param ui Ui to interact with the users.

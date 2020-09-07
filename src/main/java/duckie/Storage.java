@@ -26,7 +26,7 @@ public class Storage {
     private String filePath;
 
     /**
-     * Instantiate a Storage object
+     * Instantiates a Storage object
      *
      * @param filePath Path of duckie.txt.
      */

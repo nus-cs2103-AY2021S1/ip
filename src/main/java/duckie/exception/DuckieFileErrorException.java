@@ -6,7 +6,7 @@ package duckie.exception;
 public class DuckieFileErrorException extends DuckieException {
 
     /**
-     * Instantiate DuckieFileErrorException.
+     * Instantiates DuckieFileErrorException.
      */
     public DuckieFileErrorException() {
         super("Duckie is facing some problems loading your file.");

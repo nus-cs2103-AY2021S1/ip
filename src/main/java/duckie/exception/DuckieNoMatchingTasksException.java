@@ -5,7 +5,7 @@ package duckie.exception;
  */
 public class DuckieNoMatchingTasksException extends DuckieException {
     /**
-     * Instantiate DuckieNoListException.
+     * Instantiates DuckieNoListException.
      */
     public DuckieNoMatchingTasksException() {
         super("Duckie can't find any matching tasks!");

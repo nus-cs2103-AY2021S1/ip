@@ -11,7 +11,7 @@ public class Deadline extends Task {
     protected LocalDate deadline;
 
     /**
-     * Instantiate a Deadline task.
+     * Instantiatess a Deadline task.
      *
      * @param description Description of the task.
      * @param deadline Deadline date of the task.

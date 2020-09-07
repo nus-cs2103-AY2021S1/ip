@@ -5,7 +5,7 @@ package duckie.task;
  */
 public class Todo extends Task {
     /**
-     * Instantiate Todo object.
+     * Instantiatess Todo object.
      *
      * @param description Description of a Task.
      */

@@ -6,7 +6,7 @@ package duckie.exception;
 public class DuckieInvalidCommandException extends DuckieException {
 
     /**
-     * Instantiate DuckieInvalidCommandException.
+     * Instantiates DuckieInvalidCommandException.
      */
     public DuckieInvalidCommandException() {
         super("Sorry, Duckie does not understand what you are trying to do.");

@@ -23,7 +23,7 @@ public class Duckie {
     private Path filePath = Paths.get(cwd, "data", "duckie.txt");
 
     /**
-     * Instantiate the Duckie object
+     * Instantiates the Duckie object
      */
     public Duckie() {
         ui = new Ui();

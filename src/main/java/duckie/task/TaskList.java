@@ -13,14 +13,14 @@ public class TaskList {
     private ArrayList<Task> tasks;
 
     /**
-     * Instantiate an empty list.
+     * Instantiatess an empty list.
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
     /**
-     * Instantiate a TaskList with pre-saved tasks.
+     * Instantiatess a TaskList with pre-saved tasks.
      *
      * @param tasks ArrayList containing pre-saved tasks.
      */
@@ -29,7 +29,7 @@ public class TaskList {
     }
 
     /**
-     * Return the ArrayList containing the current tasks.
+     * Returns the ArrayList containing the current tasks.
      *
      * @return ArrayList containing current tasks.
      */
@@ -38,7 +38,7 @@ public class TaskList {
     }
 
     /**
-     * Return the actual Index of a task in the ArrayList.
+     * Returns the actual Index of a task in the ArrayList.
      *
      * @param task Task required.
      * @return Integer index value.
@@ -48,7 +48,7 @@ public class TaskList {
     }
 
     /**
-     * Add a Task to TaskList.
+     * Adds a Task to TaskList.
      *
      * @param t1 Task to be added.
      */
@@ -57,7 +57,7 @@ public class TaskList {
     }
 
     /**
-     * Delete a Task from the TaskList.
+     * Deletes a Task from the TaskList.
      *
      * @param ind Index of the Task in ArrayList.
      */
@@ -66,14 +66,14 @@ public class TaskList {
     }
 
     /**
-     * Delete all Tasks in the TaskList.
+     * Deletes all Tasks in the TaskList.
      */
     public void deleteAllTasks() {
         tasks.clear();
     }
 
     /**
-     * Check the Task in the TaskList as done.
+     * Checks the Task in the TaskList as done.
      *
      * @param ind Index of the Task in ArrayList.
      */
@@ -83,7 +83,7 @@ public class TaskList {
     }
 
     /**
-     * Display the current tasks in the TaskList.
+     * Displays the current tasks in the TaskList.
      *
      * @throws DuckieException If list is empty.
      */
@@ -96,7 +96,7 @@ public class TaskList {
     }
 
     /**
-     * Filter the list based on the keyword provided.
+     * Filters the list based on the keyword provided.
      *
      * @param keyword Keyword used to find matching tasks.
      * @return ArrayList containing all the tasks matching the keyword.

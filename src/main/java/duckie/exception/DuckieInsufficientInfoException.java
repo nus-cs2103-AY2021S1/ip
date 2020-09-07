@@ -6,7 +6,7 @@ package duckie.exception;
 public class DuckieInsufficientInfoException extends DuckieException {
 
     /**
-     * Instantiate DuckieInsufficientInfoErrorException.
+     * Instantiates DuckieInsufficientInfoErrorException.
      */
     public DuckieInsufficientInfoException() {
         super("Duckie needs more description after the first word.");

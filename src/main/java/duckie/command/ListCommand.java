@@ -12,7 +12,7 @@ import duckie.ui.Ui;
  */
 public class ListCommand extends Command {
     /**
-     * List and display all the tasks in the TaskList currently.
+     * Lists and displays all the tasks in the TaskList currently.
      *
      * @param tasks TaskList containing all the tasks.
      * @param ui Ui to interact with the users.

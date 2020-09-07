@@ -9,7 +9,7 @@ import duckie.ui.Ui;
  */
 public class ByeCommand extends Command {
     /**
-     * Check if the Command is exiting.
+     * Checks if the Command is exiting.
      *
      * @return true.
      */
@@ -19,7 +19,7 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * Display the ending message and end the chatbot.
+     * Displays the ending message and end the chatbot.
      *
      * @param tasks TaskList containing all the tasks.
      * @param ui Ui to interact with the users.

@@ -7,7 +7,7 @@ package duckie.exception;
 public class DuckieNoListException extends DuckieException {
 
     /**
-     * Instantiate DuckieNoListException.
+     * Instantiates DuckieNoListException.
      */
     public DuckieNoListException() {
         super("Quack. You have no tasks in the list currently.");

@@ -11,7 +11,7 @@ import duckie.ui.Ui;
 public abstract class Command {
 
     /**
-     * Execute the command according to the input given.
+     * Executes the command according to the input given.
      *
      * @param tasks TaskList containing all the tasks.
      * @param ui Ui to interact with the users.
@@ -22,7 +22,7 @@ public abstract class Command {
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DuckieException;
 
     /**
-     * Check if the Command signifies exit of the chatbot.
+     * Checks if the Command signifies exit of the chatbot.
      *
      * @return False to signify platform exit.
      */

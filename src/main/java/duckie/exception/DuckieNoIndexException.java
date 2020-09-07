@@ -5,7 +5,7 @@ package duckie.exception;
  */
 public class DuckieNoIndexException extends DuckieException {
     /**
-     * Instantiate DuckieNoIndexException.
+     * Instantiates DuckieNoIndexException.
      */
     public DuckieNoIndexException() {
         super("Quack. The input index is not found in the list.");

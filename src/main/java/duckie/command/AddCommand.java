@@ -13,7 +13,7 @@ public class AddCommand extends Command {
     private Task task;
 
     /**
-     * Instantiate the AddCommand.
+     * Instantiates the AddCommand.
      *
      * @param task Task to be added.
      */
@@ -22,8 +22,8 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Execute the command to add task into TaskList.
-     * 
+     * Executes the command to add task into TaskList.
+     *
      * @param tasks TaskList containing all the tasks.
      * @param ui Ui to interact with the users.
      * @param storage Storage to write to File.
