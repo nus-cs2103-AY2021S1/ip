@@ -78,12 +78,12 @@ public class Storage {
                 String text = "T | " + (task.getStatus() ? "1" : "0") + " | " + task.getCommand();
                 fileWriter.write(text + System.lineSeparator());
             } else if (task instanceof Deadline) {
-                String text = "D | " + (task.getStatus() ? "1" : "0") + " | " + task.getCommand()
-                        + " | " + ((Deadline) task).getTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+                String text = "D | " + (task.getStatus() ? "1" : "0") + " | " + task.getCommand() + " | "
+                        + ((Deadline) task).getTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
                 fileWriter.write(text + System.lineSeparator());
             } else if (task instanceof Event) {
-                String text = "E | " + (task.getStatus() ? "1" : "0") + " | " + task.getCommand()
-                        + " | " + ((Event) task).getTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+                String text = "E | " + (task.getStatus() ? "1" : "0") + " | " + task.getCommand() + " | "
+                        + ((Event) task).getTime().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
                 fileWriter.write(text + System.lineSeparator());
             }
         }

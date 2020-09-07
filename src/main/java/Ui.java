@@ -53,7 +53,8 @@ public class Ui {
      * @param tasks the list where the task is stored in.
      */
     public static void done(int n, ArrayList<Task> tasks) {
-        System.out.println("Nice! I've marked this task as done: \n" + tasks.get(n-1).toString());
+        System.out.println("Nice! I've marked this task as done: \n"
+                + tasks.get(n-1).toString());
     }
 
     /**
@@ -62,7 +63,8 @@ public class Ui {
      * @param tasks the list where the task to be deleted from.
      */
     public static void delete(int n, ArrayList<Task> tasks) {
-        System.out.println("Noted. I've removed this task:\n" + tasks.get(n-1).toString());
+        System.out.println("Noted. I've removed this task:\n"
+                + tasks.get(n-1).toString());
     }
 
     /**
