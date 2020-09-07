@@ -28,28 +28,10 @@ public class Ui {
      * is initialised.
      */
     public static String showWelcome() {
-
-        /**
-        String text = "      ______    ______           __      ___            __     _______  \n"
-                + "      |__  __|   |  ___  |         |    \\   |     |           /_ \\    |   ___|   \n"
-                + "         |  |      |  |   |  |         |      \\ |     |       //_\\ \\   |  |___   \n"
-                + "  __    |  |      |  |   |  |         |   |  \\       |         / ____ \\  |____  |   \n"
-                + "  |  |__|  |      |  |__|  |         |   |    \\     |        / /    \\ \\ _____| |  \n"
-                + "  |______|      |______|        |__|       \\__|             /_/      \\_\\|______|  \n"
-                + "                     _____   ______  ________        \n"
-                + "                     |  _ \\ |  _  | |__   __|       \n"
-                + "                     | |_| || | | |    | |           \n"
-                + "                     |    / | | | |    | |           \n"
-                + "                     |  _ \\ | |_| |    | |          \n"
-                + "                     | |_| ||     |    | |           \n"
-                + "                     |_____/|_____|    |_|           \n";
-         **/
-
-        String greeting = "Hello! I am JonasBot! Nice to meet you :) \n"
-                + "  \nI am a task manager bot that will keep track of all your tasks. \n"
-                + "  \nTo view a list of all my commands, input 'commands' \n"
-                + "  \nNow that you are familiar with the commands, how may I assist you today?";
-        return (greeting);
+        String greeting = "Hello! I am JonasBot! Nice to meet you :) \n\n"
+                + "To view a list of all my commands, input 'commands' \n\n"
+                + "How may I assist you today?";
+        return greeting;
     }
 
     /**

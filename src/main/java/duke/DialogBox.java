@@ -7,17 +7,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 /**
@@ -40,9 +35,6 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        Circle circle = new Circle(32, 35, 32);
-        displayPicture.setClip(circle);
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -59,23 +51,19 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox dialogBox = new DialogBox(text, img);
-        Color backgroundColor = Color.SALMON;
-        CornerRadii radii = new CornerRadii(20.00);
-        Insets insets = new Insets(5);
-        BackgroundFill backgroundFill = new BackgroundFill(backgroundColor, radii, insets);
-        Background background = new Background(backgroundFill);
-        dialogBox.setBackground(background);
+        String userDialogStyle = "-fx-background-color: salmon; "
+                + "-fx-background-radius: 10; -fx-padding: 10 15 10 15";
+        dialogBox.dialog.setStyle(userDialogStyle);
+        dialogBox.displayPicture.setClip(new Circle(54, 43, 42));
         return dialogBox;
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
-        Color backgroundColor = Color.LIGHTSTEELBLUE;
-        CornerRadii radii = new CornerRadii(30.00);
-        Insets insets = new Insets(10);
-        BackgroundFill backgroundFill = new BackgroundFill(backgroundColor, radii, insets);
-        Background background = new Background(backgroundFill);
-        db.setBackground(background);
+        String dukeDialogStyle = "-fx-background-color: lightSteelBlue; "
+                + "-fx-background-radius: 10; -fx-padding: 10 15 10 15";
+        db.dialog.setStyle(dukeDialogStyle);
+        db.displayPicture.setClip(new Circle(50, 42, 42));
         db.flip();
         return db;
     }
