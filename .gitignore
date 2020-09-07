@@ -2,7 +2,8 @@
 /.idea/
 /out/
 /*.iml
-
+src/main/java/META-INF/
+ 
 # Gradle build files
 /.gradle/
 /build/
