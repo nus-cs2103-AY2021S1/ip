@@ -54,6 +54,7 @@ public class TaskList {
      * @param str input String specified
      */
     public String finder(String str) {
+        assert this.list.size() >= 1 : "The current TaskList is Empty";
         String result = "";
         int counter = 1;
         for (Task task : this.list) {

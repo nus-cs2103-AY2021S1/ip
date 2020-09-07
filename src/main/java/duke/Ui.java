@@ -29,6 +29,8 @@ public class Ui {
         TaskList tasks = new TaskList(store.load());
         Parser parser = new Parser(tasks);
         while (next != null) {
+            assert next.contains("todo") | next.contains("deadline")
+                    | next.contains("event") : "Please provide a valid keyword";
             if (next.equals("bye")) {
                 System.out.println("-------------------------");
                 System.out.println("Bye. Hope to see you again soon!");

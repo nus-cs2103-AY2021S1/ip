@@ -330,6 +330,7 @@ public class Parser {
                     break;
                 }
             } else if (str.contains("delete")) {
+                assert store.size() > 0 : "There are already no tasks!";
                 if (str.length() == 6) {
                     throw new DukeException("\u2639 OOPS!!! Please specify what task to delete.");
                 }
