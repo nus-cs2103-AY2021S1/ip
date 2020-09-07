@@ -1,12 +1,15 @@
 package duke.storage;
 
+import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import duke.exception.DukeException;
 import duke.task.Deadline;
@@ -34,7 +37,7 @@ public class Storage {
      * @throws DukeException If the storage file cannot be read, found or created if not created yet.
      */
     public ArrayList<Task> load() throws DukeException {
-        return readAndLoadFromFile();
+        return getTaskListFromFile();
     }
 
     Task createTaskFromFile(String[] strArray) throws DukeException {
@@ -70,19 +73,12 @@ public class Storage {
         }
     }
 
-    ArrayList<Task> readAndLoadFromFile() throws DukeException {
+    ArrayList<Task> getTaskListFromFile() throws DukeException {
         try {
-            ArrayList<Task> taskList = new ArrayList<>();
             if (fileExists(savedTaskPath)) {
                 File file = new File(savedTaskPath);
-                //System.out.println(file.getAbsolutePath());
-                Scanner s = new Scanner(file);
-                while (s.hasNext()) {
-                    String[] strArray = s.nextLine().split(" \\| ");
-                    Task task = createTaskFromFile(strArray);
-                    taskList.add(task);
-                }
-                return taskList;
+                InputStream inputStream = new FileInputStream(file);
+                return getTaskListFromStream(inputStream);
             } else {
                 createFile();
                 return new ArrayList<Task>();
@@ -95,8 +91,23 @@ public class Storage {
         }
     }
 
+
+    ArrayList<Task> getTaskListFromStream(InputStream inputStream) throws DukeException {
+        try (BufferedReader br = new BufferedReader(new InputStreamReader(inputStream))) {
+            ArrayList<Task> taskList = new ArrayList<>();
+            String line;
+            while ((line = br.readLine()) != null) {
+                String[] strArray = line.split(" \\| ");
+                Task task = createTaskFromFile(strArray);
+                taskList.add(task);
+            }
+            return taskList;
+        } catch (IOException e) {
+            throw new DukeException(e.getMessage());
+        }
+    }
+
     boolean fileExists(String path) throws DukeException {
-        String fullPath = new File(path).getAbsolutePath();
         String[] pathStringArray = path.split("/");
         StringBuilder currentPath = new StringBuilder();
         boolean directoryNotFound = false;
