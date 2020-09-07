@@ -145,7 +145,7 @@ public class Ui {
 
         int numUncompletedTasks = 0;
         for (Task task : tasks) {
-            if (!task.getIsDone()) {
+            if (!task.isDone()) {
                 numUncompletedTasks++;
             }
         }

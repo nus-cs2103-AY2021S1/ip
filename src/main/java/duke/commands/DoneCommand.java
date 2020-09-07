@@ -31,7 +31,7 @@ public class DoneCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         assert index > taskList.getTasks().size() : "Oh no! There is an error with the DoneCommand numbering logic.";
-        if (!taskList.getTasks().get(index).getIsDone()) {
+        if (!taskList.getTasks().get(index).isDone()) {
             taskList.markTaskAsDone(index);
             incrementNumCompletedTasks();
         }

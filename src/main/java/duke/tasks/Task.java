@@ -30,7 +30,7 @@ public class Task {
     /**
      * @return The indicator of whether the task is done.
      */
-    public boolean getIsDone() {
+    public boolean isDone() {
         return isDone;
     }
 
