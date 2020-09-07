@@ -10,13 +10,6 @@ import duke.Task;
 public class Ui {
 
     /**
-     * Build chat line separator
-     */
-    public static String buildChatSeparator() {
-        return "____________________________________________________________";
-    }
-
-    /**
      * Show farewell message
      */
     public static String sayFarewell() {
@@ -31,7 +24,7 @@ public class Ui {
      */
     public String describeTask(ArrayList<Task> list, Task curr) {
         return " Got it. I've added this task: \n"
-                + " " + curr.toString() + curr.getDateDescription()
+                + " " + curr.toString()
                 + "\n Now you have " + (list.size() == 1
                 ? list.size() + " task"
                 : list.size() + " tasks")
@@ -49,7 +42,6 @@ public class Ui {
         for (int i = 1; i <= list.size(); i++) {
             output.append(" " + i + ". "
                     + list.get(i - 1).toString()
-                    + list.get(i - 1).getDateDescription()
                     + '\n');
         }
         return output.toString();
@@ -63,7 +55,7 @@ public class Ui {
      */
     public static String printDeleted(Task deleted, ArrayList<Task> list) {
         return " Noted. I've removed this task:  \n"
-                + deleted
+                + " " + deleted
                 + "\n Now you have " + (list.size() <= 1
                     ? list.size() + " task"
                     : list.size() + " tasks")
