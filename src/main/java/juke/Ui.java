@@ -3,7 +3,7 @@ package juke;
 import juke.command.Command;
 
 /**
- * The juke.Ui class holds commonly used phrases used by the bot to
+ * Represents a Ui class that holds commonly used phrases used by the bot to
  * communicate with the user.
  */
 public class Ui {

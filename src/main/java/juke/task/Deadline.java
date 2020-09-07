@@ -22,7 +22,6 @@ public class Deadline extends Task {
 
     /**
      * Returns the representative text of the Deadline.
-     *
      * @return Representative text.
      */
     @Override
@@ -37,7 +36,6 @@ public class Deadline extends Task {
 
     /**
      * Outputs the Deadline as a String.
-     *
      * @return String representation of Deadline.
      */
     @Override

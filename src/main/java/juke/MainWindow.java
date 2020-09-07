@@ -9,7 +9,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 /**
- * Controller for juke.MainWindow. Provides the layout for the other controls.
+ * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML
@@ -36,7 +36,7 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing juke.Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Juke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML

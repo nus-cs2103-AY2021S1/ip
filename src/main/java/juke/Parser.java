@@ -20,13 +20,12 @@ import juke.command.ListCommand;
 import juke.command.DoneCommand;
 
 /**
- * Represents the juke.Parser class, that interprets user input commands.
+ * Represents the Parser class, that interprets user input commands.
  */
 public class Parser {
 
     /**
      * Interprets user input text, into understandable commands.
-     *
      * @param inputText Commands input by user.
      * @return Command understood by Chatbot.
      */

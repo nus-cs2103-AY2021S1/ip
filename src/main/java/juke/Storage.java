@@ -15,7 +15,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * juke.Storage class that handles all the hard-disk storage of the Tasklist.
+ * Represents a Storage class that handles all the hard-disk storage of the Tasklist.
  */
 public class Storage {
 
@@ -29,6 +29,7 @@ public class Storage {
             File f = this.checkAndCreateFile(root);
             ArrayList<Task> list = new ArrayList<>();
             Scanner scanner = new Scanner(f);
+
             while (scanner.hasNext()) {
                 String[] next = scanner.nextLine().split("/");
                 Task task = null;
@@ -60,7 +61,7 @@ public class Storage {
      * Checks and identifies storage file (if available), or else
      * creates a new and empty file.
      * @param root User project root path.
-     * @return juke.Storage file.
+     * @return Storage file.
      */
     protected File checkAndCreateFile(String root) {
         try {
@@ -79,6 +80,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves the current list of tasks to file.
+     * @throws IOException
+     */
     public void saveTasksToFile() throws IOException {
         String root = System.getProperty("user.dir");
         FileWriter fw = new FileWriter(Paths.get(root, "data", "dukeTaskList.txt").toString());

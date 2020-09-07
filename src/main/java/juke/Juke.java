@@ -14,7 +14,6 @@ public class Juke {
     private TaskList tasks;
     private Ui ui;
 
-
     /**
      * Builds an instance of the Juke Chatbot.
      */

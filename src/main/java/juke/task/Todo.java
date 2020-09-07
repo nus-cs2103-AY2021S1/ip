@@ -1,16 +1,20 @@
 package juke.task;
 
 /**
- * A juke.task.Deadline class that represents a juke.task.Todo.
- * It has a juke.task.Task description.
+ * Represents a Todo class with an input description.
  */
 public class Todo extends Task {
+
+    /**
+     * Constructs a Todo task with the input description
+     * @param description Description of the task
+     */
     public Todo(String description) {
         super(description);
     }
 
     /**
-     * Returns the representative text of the juke.task.Todo.
+     * Returns the representative text of the Todo.
      * @return Representative text.
      */
     @Override
@@ -20,8 +24,8 @@ public class Todo extends Task {
     }
 
     /**
-     * Outputs the juke.task.Todo as a String.
-     * @return String representation of juke.task.Todo.
+     * Outputs the Todo as a String.
+     * @return String representation of Todo.
      */
     @Override
     public String toString() {

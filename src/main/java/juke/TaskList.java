@@ -5,12 +5,16 @@ import juke.task.Task;
 import java.util.ArrayList;
 
 /**
- * The juke.TaskList class holds and manages the current list of Tasks stored
+ * The TaskList class holds and manages the current list of Tasks stored
  * by the user.
  */
 public class TaskList {
     public static ArrayList<Task> list;
 
+    /**
+     * Constructs a TaskList
+     * @param loadedTasks
+     */
     public TaskList(ArrayList<Task> loadedTasks) {
         this.list = loadedTasks;
     }
@@ -27,9 +31,9 @@ public class TaskList {
     }
 
     /**
-     * Removes a juke.task from the list of current tasks.
+     * Removes a task from the list of current tasks.
      *
-     * @param taskNo Index of juke.task to remove.
+     * @param taskNo Index of task to remove.
      */
     public String removeFromList(int taskNo) {
         StringBuilder output = new StringBuilder();
@@ -40,9 +44,8 @@ public class TaskList {
     }
 
     /**
-     * Adds a juke.task to the list of current tasks.
-     *
-     * @param task juke.task.Task to be added.
+     * Adds a task to the list of current tasks.
+     * @param task Task to be added.
      */
     public String addToList(Task task) {
         StringBuilder output = new StringBuilder();
@@ -58,8 +61,7 @@ public class TaskList {
 
     /**
      * Marks a task in list of current tasks as completed.
-     *
-     * @param taskNo Index of juke.task to mark.
+     * @param taskNo Index of Task to mark.
      */
     public String markTaskAsDone(int taskNo) {
         StringBuilder output = new StringBuilder();
@@ -70,6 +72,11 @@ public class TaskList {
         return output.toString();
     }
 
+    /**
+     * Finds a task based on given keyword.
+     * @param keyword Keyword to use for search.
+     * @return List of Matching tasks.
+     */
     public String findTasks(String keyword) {
         StringBuilder output = new StringBuilder();
         int count = 0;
@@ -77,6 +84,7 @@ public class TaskList {
             Task task = this.list.get(i);
             String description = task.getDescription();
             boolean thereIsMatch = description.matches(".*\\b" + keyword + "\\b.*");
+
             if (thereIsMatch) {
                 if (count == 0) {
                     output.append("Here are the tasks you're trying to find.\n");

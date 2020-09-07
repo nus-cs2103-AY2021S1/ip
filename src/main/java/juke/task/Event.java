@@ -11,7 +11,7 @@ public class Event extends Task {
     private LocalDate at;
 
     /**
-     * C
+     * Constructs an Event Task with an input description and at Date.
      * @param description
      * @param at
      */
@@ -35,8 +35,8 @@ public class Event extends Task {
     }
 
     /**
-     * Outputs the juke.task.Event as a String.
-     * @return String representation of juke.task.Event.
+     * Outputs the Event as a String.
+     * @return String representation of Event.
      */
     @Override
     public String toString() {
