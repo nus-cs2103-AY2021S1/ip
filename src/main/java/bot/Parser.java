@@ -1,6 +1,13 @@
 package bot;
 
-import bot.command.*;
+import bot.command.AddCommand;
+import bot.command.Command;
+import bot.command.DoneCommand;
+import bot.command.ListCommand;
+import bot.command.DeleteCommand;
+import bot.command.FindCommand;
+import bot.command.ExitCommand;
+
 import bot.util.InvalidCommandException;
 import bot.util.InvalidInputException;
 
@@ -12,6 +19,7 @@ public class Parser {
     /**
      * Returns the command based on the first character of user's input.
      * If the command given is invalid, InvalidInputException is thrown.
+     *
      * @param input user's input
      * @return Command enum class
      * @throws InvalidInputException command's argument is invalid
@@ -26,26 +34,26 @@ public class Parser {
             String[] words = input.split(" ");
             String[] args = new String[2];
             switch(words[0]) {
-                case "list":
-                    return new ListCommand("list");
-                case "todo":
-                    return new AddCommand("todo", parseSingleArg(input));
-                case "deadline":
-                    args = parseDeadline(input);
-                    return new AddCommand("deadline", args[0], args[1]);
-                case "event":
-                    args = parseEvent(input);
-                    return new AddCommand("event", args[0], args[1]);
-                case "done":
-                    return new DoneCommand("done", parseIndex(input));
-                case "delete":
-                    return new DeleteCommand("delete", parseIndex(input));
-                case "find":
-                    return new FindCommand("find", parseSingleArg(input));
-                case "bye":
-                    return new ExitCommand("exit");
-                default:
-                    throw new InvalidCommandException("What's that again? I can't understand.");
+            case "list":
+                return new ListCommand("list");
+            case "todo":
+                return new AddCommand("todo", parseSingleArg(input));
+            case "deadline":
+                args = parseDeadline(input);
+                return new AddCommand("deadline", args[0], args[1]);
+            case "event":
+                args = parseEvent(input);
+                return new AddCommand("event", args[0], args[1]);
+            case "done":
+                return new DoneCommand("done", parseIndex(input));
+            case "delete":
+                return new DeleteCommand("delete", parseIndex(input));
+            case "find":
+                return new FindCommand("find", parseSingleArg(input));
+            case "bye":
+                return new ExitCommand("exit");
+            default:
+                throw new InvalidCommandException("What's that again? I can't understand.");
             }
         } catch (InvalidCommandException | InvalidInputException e) {
             throw e;
@@ -76,10 +84,11 @@ public class Parser {
 
     /**
      * Returns the name and date assuming the the input is the command for Deadline.
-     * @param input user's input
-     * @return an array of 2 String, first String is the name of deadline
-     * while second is the deadline's date
-     * @throws InvalidInputException command's argument is invalid
+     *
+     * @param input user's input.
+     * @return an array of 2 String, first String is the name of deadline.
+     * while second is the deadline's date.
+     * @throws InvalidInputException command's argument is invalid.
      */
     public String[] parseDeadline(String input) throws InvalidInputException {
         String[] output = new String[2];
@@ -130,17 +139,17 @@ public class Parser {
         StringBuilder deadline = new StringBuilder();
 
         int indexDateDelimiter = -1;
-        for(int i = 0; i < words.length; i++) {
+        for (int i = 0; i < words.length; i++) {
             if (words[i].equals("/at")){
                 indexDateDelimiter = i;
             }
         }
-        try{
-            for(int i = 1; i < indexDateDelimiter; i++) {
+        try {
+            for (int i = 1; i < indexDateDelimiter; i++) {
                 name.append(words[i]);
                 name.append(" ");
             }
-            for(int i = indexDateDelimiter + 1; i < words.length; i++) {
+            for (int i = indexDateDelimiter + 1; i < words.length; i++) {
                 deadline.append(words[i]);
                 deadline.append(" ");
             }

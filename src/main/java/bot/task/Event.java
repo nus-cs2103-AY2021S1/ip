@@ -24,6 +24,7 @@ public class Event extends Task {
 
     /**
      * Serialises the object.
+     * 
      * @return A string that is formatted to be read and stored in Storage.
      */
     @Override

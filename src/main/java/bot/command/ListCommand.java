@@ -13,7 +13,7 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Displayed all tasks in tasklist
+     * Displays all tasks in tasklist
      *
      * @param taskList taskLIst where the items are to be shown.
      * @param storage storage associated with taskList.

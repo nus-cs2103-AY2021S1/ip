@@ -9,7 +9,7 @@ import java.io.IOException;
 /**
  * A type of command that removes Task from TaskList.
  */
-public class DeleteCommand extends Command{
+public class DeleteCommand extends Command {
     private int itemIndex;
 
     public DeleteCommand(String cmd, int ind) {

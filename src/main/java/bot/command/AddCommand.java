@@ -70,6 +70,5 @@ public class AddCommand extends Command {
             throw new IOException("Sorry, do what? Please give me a valid input." +
                     " Thank you.");
         }
-
     }
 }
