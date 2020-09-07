@@ -29,7 +29,6 @@ public class Event extends Task {
         super(desc);
         this.date = date;
     }
-
     /**
      * Constructs an event object given details in
      * the form of a description, a LocalDateTime
@@ -48,6 +47,11 @@ public class Event extends Task {
     // private helper for returning formatted dates
     private String[] formatDate(LocalDateTime date) {
         return date.format(DATABASE_DATE_TIME_FORMAT).split(" ");
+    }
+
+    // accessor method for date and time
+    public LocalDateTime getDate() {
+        return date;
     }
 
     // String representation methods

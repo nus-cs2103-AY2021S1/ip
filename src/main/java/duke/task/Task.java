@@ -1,10 +1,10 @@
+package duke.task;
+
 /**
  * Encapsulates the idea of a task, set as abstract
  * to prevent instantiation
  */
-package duke.task;
-
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
 
     // String constants for labelling state of task
     protected static final String CROSS = "X";
@@ -39,8 +39,19 @@ public abstract class Task {
         isDone = true;
     }
 
-    // String representation methods
+    /**
+     * Compares two task instances using the lexicographical
+     * ordering of their descriptions
+     *
+     * @param other the other task to compare to
+     * @return an integer indicating the order of the two tasks
+     */
+    @Override
+    public int compareTo(Task other) {
+        return desc.compareTo(other.getDesc());
+    }
 
+    // String representation method
     /**
      * Converts a task into its database representation:
      * task type | 0-1 completion flag | description
