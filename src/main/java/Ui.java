@@ -72,4 +72,9 @@ public class Ui {
         return "OOPS!!! I'm sorry, but I don't know what that means :(\n"
                 + "Type 'help' for list of commands.";
     }
+
+    public String updateTaskLine(Task oldTask, Task updatedTask) {
+        return "The selected Task has been updated:\n"
+                + oldTask + " ---> " + updatedTask;
+    }
 }
