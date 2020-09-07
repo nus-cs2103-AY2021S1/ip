@@ -91,8 +91,6 @@ public class Duke extends Application {
         userInput.clear();
     }
 
-
-
     @Override
     public void start(Stage stage) {
         //The container for the content of the chat to scroll.

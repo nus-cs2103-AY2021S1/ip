@@ -36,6 +36,7 @@ public class TaskList {
      */
 
     public String delete(int num) {
+        assert num >= 1;
 
         try {
             Task task = tasks.get(num - 1);
@@ -54,6 +55,7 @@ public class TaskList {
      */
 
     public String doTask(int num) {
+        assert num >= 1;
         Task task = tasks.get(num - 1);
         task.doTask();
         return "Noted. I've done the task: \n" + task;
@@ -64,6 +66,7 @@ public class TaskList {
      * @param task Task object to be added to the list.
      */
     public String add(Task task) {
+    assert task != null;
 
         tasks.add(task);
         return "Got it. I've added this task: \n"
