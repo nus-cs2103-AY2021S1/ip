@@ -132,4 +132,34 @@ public class Ui {
             return displayMessages(messages);
         }
     }
+
+    /**
+     * Displays a Help message for the user on how to use Duke.
+     *
+     * @return a formatted String for help
+     */
+    public String displayHelp() {
+        return displayMessages(
+                "So, I remind you of things.",
+                "You can ask me for the following things:",
+                "- help",
+                "\tshow this help message.",
+                "- list",
+                "\ttell you what tasks you have.",
+                "- find <search term>",
+                "\tsee if you have any tasks that match the search term.",
+                "- done <index>",
+                "\tmark the task at the index as done.",
+                "- delete <index>",
+                "\tremove the task at the given index from the list.",
+                "- todo <task name>",
+                "\ttrack an uncompleted Todo to your list of tasks.",
+                "- deadline <task name> /by <yyyy-mm-dd>",
+                "\ttrack an uncompleted deadline Task.",
+                "- event <task name> /at <period>",
+                "\ttrack an uncompleted Event at a given period.",
+                "- bye",
+                "\texit. I'll remember the tasks you've told me to track."
+        );
+    }
 }
