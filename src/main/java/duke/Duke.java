@@ -39,6 +39,7 @@ public class Duke {
     private String getDoneResponse(String[] inputs) {
         try {
             Parser.checkIndex(inputs, taskList.getSize());
+            assert inputs.length > 1;
             int index = Integer.parseInt(inputs[1]) - 1;
             taskList.markDone(index);
             storage.writeData(taskList);
@@ -56,6 +57,7 @@ public class Duke {
                 return ui.getDeleteAllTasksMessage();
             } else {
                 Parser.checkIndex(inputs, taskList.getSize());
+                assert inputs.length > 1;
                 int index = Integer.parseInt(inputs[1]) - 1;
                 Task temp = taskList.getTask(index);
                 taskList.removeTask(index);
@@ -70,6 +72,8 @@ public class Duke {
     private String getAddTodoResponse(String[] inputs, Commands command) {
         try {
             Parser.checkDescription(inputs, command);
+            assert inputs.length > 1;
+          
             taskList.addTask(new Todo(inputs[1]));
             storage.writeData(taskList);
             return ui.getAddedTask(taskList.getTask(taskList.getSize() - 1), taskList.getSize());
@@ -81,11 +85,15 @@ public class Duke {
     private String getAddEventResponse(String[] inputs, Commands command) {
         try {
             Parser.checkDescription(inputs, command);
+            assert inputs.length > 1;
             String temp = " " + inputs[1];
             String[] taskInfo = temp.split("/at", 2);
+            assert taskInfo.length > 0;
             inputs[1] = taskInfo[0];
             Parser.checkDescription(inputs, command);
             Parser.checkTime(taskInfo, command);
+            assert taskInfo.length > 1;
+          
             taskList.addTask(new Event(taskInfo[0].trim(), taskInfo[1].trim()));
             storage.writeData(taskList);
             return ui.getAddedTask(taskList.getTask(taskList.getSize() - 1), taskList.getSize());
@@ -97,11 +105,15 @@ public class Duke {
     private String getAddDeadlineResponse(String[] inputs, Commands command) {
         try {
             Parser.checkDescription(inputs, command);
+            assert inputs.length > 1;
             String temp = " " + inputs[1];
             String[] taskInfo = temp.split("/by", 2);
+            assert taskInfo.length > 0;
             inputs[1] = taskInfo[0];
             Parser.checkDescription(inputs, command);
             Parser.checkTime(taskInfo, command);
+            assert taskInfo.length > 1;
+          
             taskList.addTask(new Deadline(taskInfo[0].trim(), taskInfo[1].trim()));
             storage.writeData(taskList);
             return ui.getAddedTask(taskList.getTask(taskList.getSize() - 1), taskList.getSize());

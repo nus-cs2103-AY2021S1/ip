@@ -52,11 +52,12 @@ public class Storage {
      * @throws IOException if there is an error in writing the tasks into file in hard disk.
      */
     public void writeData(TaskList taskList) throws IOException {
-        File f = new File(filePath);
-        if (!f.exists()) {
-            f.getParentFile().mkdirs();
-            f.createNewFile();
+        File file = new File(filePath);
+        if (!file.exists()) {
+            file.getParentFile().mkdirs();
+            file.createNewFile();
         }
+        assert file.exists();
         FileWriter fw = new FileWriter(filePath);
         StringBuilder textToAdd = new StringBuilder();
         for (Task task : taskList.getTasks()) {
