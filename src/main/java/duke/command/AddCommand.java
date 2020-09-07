@@ -95,6 +95,7 @@ public class AddCommand extends Command {
         default:
 
         }
+        // satisfied the method requirements to compile, but will never be reached in the program
         ArrayList<String> l = new ArrayList<>();
         l.add("THIS SHOULD NOT SHOW, addcommand class last line");
         return l;

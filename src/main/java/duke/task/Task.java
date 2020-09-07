@@ -12,8 +12,10 @@ public abstract class Task {
      *
      */
     public Task(String description) {
+        assert description instanceof String : "Description of the task has to be of type String";
         this.description = description;
         this.isDone = false;
+        assert !isDone : "Task isDone status must be initialised to false";
     }
 
     /**
