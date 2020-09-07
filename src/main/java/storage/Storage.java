@@ -20,7 +20,7 @@ public class Storage {
 
     public Storage(String filepath) {
         if (filepath == null) {
-            throw new NullPointerException();
+            assert false;
         } else {
             this.filepath = filepath;
         }
@@ -40,7 +40,7 @@ public class Storage {
                 taskList.load(toAdd);
             }
         } catch (FileNotFoundException e) {
-            //can be ignored as if file is not found it will just be created when saving data
+            //can be ignored because if file is not found it will just be created when saving data
         }
     }
 
