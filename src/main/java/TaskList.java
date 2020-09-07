@@ -37,8 +37,10 @@ public class TaskList {
         case E:
             list.add(new Event(name, date, time));
             break;
-        default:
+        case T:
             list.add(new ToDo(name));
+            break;
+        default:
             break;
         }
     }
@@ -49,11 +51,13 @@ public class TaskList {
 
     public ArrayList<Task> find(String query) {
         ArrayList<Task> filteredTasks = new ArrayList<>();
+
         for (Task task : list) {
             if (task.toString().contains(query)) {
                 filteredTasks.add(task);
             }
         }
+
         return filteredTasks;
     }
 }

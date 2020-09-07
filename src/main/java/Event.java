@@ -26,24 +26,6 @@ public class Event extends Task {
     }
 
     /**
-     * Gets the date of the event.
-     *
-     * @return Date of event.
-     */
-    public LocalDate getDate() {
-        return date;
-    }
-
-    /**
-     * Gets the time of the event.
-     *
-     * @return Time of event.
-     */
-    public LocalTime getTime() {
-        return time;
-    }
-
-    /**
      * Returns a String representation of the Event. Includes the task type, name, done status, date, and time (if
      * applicable).
      *
