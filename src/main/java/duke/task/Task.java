@@ -55,6 +55,10 @@ public class Task {
         this.priority = priority;
     }
 
+    public void removePriority() {
+        this.priority = null;
+    }
+
     /**
      * Retrieves the status icon of task.
      * @return A string value of status icon.
