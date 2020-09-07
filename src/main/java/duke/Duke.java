@@ -29,6 +29,12 @@ public class Duke {
 
     public Duke() {}
 
+    /**
+     * Returns a response based on user input.
+     *
+     * @param input The user's line of input.
+     * @return Returns Duke's response.
+     */
     public String getResponse(String input) {
         try {
             if (tasks == null) {
@@ -43,16 +49,23 @@ public class Duke {
             }
             String response = Parser.parse(input, tasks, true);
             if (response.equals(ui.goodbye(true))) {
-                new Timer().schedule(new TimerTask() {
-                    public void run () {
-                        Platform.exit();
-                        System.exit(0); }
-                }, 2000);
+                exit();
             }
             return response;
         } catch (DukeException e) {
             return e.getMessage();
         }
+    }
+
+    /**
+     * Exits the application.
+     */
+    public void exit() {
+        new Timer().schedule(new TimerTask() {
+            public void run () {
+                Platform.exit();
+                System.exit(0); }
+        }, 2000);
     }
 
     /**

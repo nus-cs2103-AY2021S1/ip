@@ -56,14 +56,13 @@ public class Ui {
         } else {
             if (tasks.size() == 0) {
                 System.out.println("There are no tasks in your list yet.");
-                return "";
             } else {
                 System.out.println("Here are the tasks in your list:");
                 for (int i = 0; i < tasks.getTasks().size(); i++) {
                     System.out.println((i + 1) + ". " + tasks.getTasks().get(i).recordString());
                 }
-                return "";
             }
+            return "";
         }
     }
 
