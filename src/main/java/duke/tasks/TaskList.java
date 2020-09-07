@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import duke.DukeException;
+
 import java.util.ArrayList;
 
 /**
@@ -35,6 +37,7 @@ public class TaskList {
      * Marks task as done, then returns it
      *
      * @param index Index of task to be completed
+     * @return Completed task
      */
     public Task markDone(int index) {
         Task doneTask = list.get(index);
@@ -46,10 +49,23 @@ public class TaskList {
      * Deletes task, then returns it
      *
      * @param index Index of task to be deleted
+     * @return Deleted task
      */
     public Task delete(int index) {
         Task deletedTask = list.get(index);
         list.remove(index);
         return deletedTask;
+    }
+
+    /**
+     * Edits task, then returns it
+     *
+     * @param index Index of task to be edited
+     * @return Edited task
+     */
+    public Task edit(int index, String editInput) throws DukeException {
+        Task editedTask = list.get(index);
+        editedTask.edit(editInput);
+        return editedTask;
     }
 }

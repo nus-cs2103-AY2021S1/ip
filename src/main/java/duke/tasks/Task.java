@@ -1,7 +1,9 @@
 package duke.tasks;
 
-public class Task {
-    protected final String description;
+import duke.DukeException;
+
+public abstract class Task {
+    protected String description;
     protected boolean isDone;
 
     /**
@@ -22,4 +24,6 @@ public class Task {
     public void markAsDone() {
         this.isDone = true;
     }
+
+    public abstract void edit(String editInput) throws DukeException;
 }

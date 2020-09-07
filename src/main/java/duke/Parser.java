@@ -3,6 +3,7 @@ package duke;
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
+import duke.command.EditCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
@@ -22,6 +23,10 @@ public class Parser {
 
     private static boolean isFindCommand(String input) {
         return input.length() >= 4 && input.substring(0, 4).equalsIgnoreCase("find");
+    }
+
+    private static boolean isEditCommand(String input) {
+        return input.length() >= 4 && input.substring(0, 4).equalsIgnoreCase("edit");
     }
 
     private static boolean isDeleteCommand(String input) {
@@ -51,6 +56,10 @@ public class Parser {
         } else if (isFindCommand(input)) {
             String search = input.substring(5);
             return new FindCommand(search);
+        } else if (isEditCommand(input)) {
+            int taskIndex = Character.getNumericValue(input.charAt(5)) - 1;
+            String editInput = input.substring(7);
+            return new EditCommand(taskIndex, editInput);
         } else if (isDeleteCommand(input)) {
             int taskIndex = Integer.parseInt(input.substring(7)) - 1;
             return new DeleteCommand(taskIndex);

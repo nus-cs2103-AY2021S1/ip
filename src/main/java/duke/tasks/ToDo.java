@@ -11,6 +11,11 @@ public class ToDo extends Task {
         super(description, isDone);
     }
 
+    public void edit(String editInput) {
+        assert editInput.substring(0, 4) == "desc";
+        super.description = editInput.substring(5);
+    }
+
     @Override
     public String toString() {
         return "[T][" + super.getStatusIcon() + "] " + super.description;

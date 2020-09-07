@@ -58,6 +58,9 @@ public class Ui {
         case MARK_DONE:
             taskString = "Task marked complete: \n";
             break;
+        case EDIT:
+            taskString = "Task edited: \n";
+            break;
         case DELETE:
             taskString = "Task deleted: \n";
             break;
