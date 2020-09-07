@@ -3,8 +3,8 @@
  * has description and status.</p>
  */
 public class ToDoTask extends Task {
-    public ToDoTask(String taskName, boolean isDone) {
-        super(taskName, isDone);
+    public ToDoTask(String taskName, boolean isDone, TagList tagList) {
+        super(taskName, isDone, tagList);
     }
 
     @Override

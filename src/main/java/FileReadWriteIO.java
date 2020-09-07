@@ -13,7 +13,8 @@ public class FileReadWriteIO {
                                             + taskData.getTaskDescription() + " %% "
                                             + taskData.getIsDone() + " %% "
                                             + taskData.getDate() + " %% "
-                                            + taskData.getTime());
+                                            + taskData.getTime() + " %% "
+                                            + taskData.getTags());
     }
 
     private static void appendTaskData(TaskData taskData) throws IOException {
@@ -21,7 +22,8 @@ public class FileReadWriteIO {
                                             + taskData.getTaskDescription() + " %% "
                                             + taskData.getIsDone() + " %% "
                                             + taskData.getDate() + " %% "
-                                            + taskData.getTime());
+                                            + taskData.getTime() + " %% "
+                                            + taskData.getTags());
     }
 
     /**

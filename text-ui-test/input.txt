@@ -4,6 +4,7 @@ todo borrow book
 deadline return book /by Sunday
 event project meeting /at Mon 2-4pm
 todo collect homework
+todo collect homework #school #homework
 event project meeting /at 19:00 2020-12-25
 deadline CS2030 homework /by 2020-12-22
 done 3

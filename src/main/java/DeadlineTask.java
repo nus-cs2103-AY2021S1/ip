@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * <p>The DeadlineTask class defines the behavior of deadline task that has a
  * specific date to be done by for the task.</p>
@@ -12,8 +14,8 @@ public class DeadlineTask extends Task {
      * @param isDone A boolean that shows the status of the task.
      * @param timeToBeDoneBy A DateAndTime object to represent the deadline.
      */
-    public DeadlineTask(String taskDescription, boolean isDone, DateAndTime timeToBeDoneBy) {
-        super(taskDescription, isDone);
+    public DeadlineTask(String taskDescription, boolean isDone, DateAndTime timeToBeDoneBy, TagList tagList) {
+        super(taskDescription, isDone, tagList);
         this.deadlineTime = timeToBeDoneBy;
     }
 

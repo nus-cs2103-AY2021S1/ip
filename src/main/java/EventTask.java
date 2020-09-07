@@ -5,8 +5,8 @@
 public class EventTask extends Task {
     private DateAndTime eventTime;
 
-    public EventTask(String taskName, boolean isDone, DateAndTime eventTime) {
-        super(taskName, isDone);
+    public EventTask(String taskName, boolean isDone, DateAndTime eventTime, TagList tagList) {
+        super(taskName, isDone, tagList);
         this.eventTime = eventTime;
     }
 

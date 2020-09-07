@@ -28,17 +28,32 @@ public class TaskSaveAndLoadManager {
                 boolInt = 0;
             }
             if (task instanceof ToDoTask) {
-                taskData = new TaskData("todo", task.getTaskDescription(),
-                        boolInt, "");
+                if (task.getTagList() != null) {
+                    taskData = new TaskData("todo", task.getTaskDescription(),
+                            boolInt, "", task.getTagList().toString());
+                } else {
+                    taskData = new TaskData("todo", task.getTaskDescription(),
+                            boolInt, "", "");
+                }
             } else if (task instanceof DeadlineTask) {
                 LocalDate date = ((DeadlineTask) task).getDeadlineTime().getDate();
-                taskData = new TaskData("deadline", task.getTaskDescription(),
-                        boolInt, date.toString(), "");
+                if (task.getTagList() != null) {
+                    taskData = new TaskData("deadline", task.getTaskDescription(),
+                            boolInt, date.toString(), "", task.getTagList().toString());
+                } else {
+                    taskData = new TaskData("deadline", task.getTaskDescription(),
+                            boolInt, date.toString(), "", "");
+                }
             } else if (task instanceof EventTask) {
                 LocalDate date = ((EventTask) task).getEventTime().getDate();
                 LocalTime time = ((EventTask) task).getEventTime().getTime();
-                taskData = new TaskData("event", task.getTaskDescription(),
-                        boolInt, date.toString(), time.toString());
+                if (task.getTagList() != null) {
+                    taskData = new TaskData("event", task.getTaskDescription(),
+                            boolInt, date.toString(), time.toString(), task.getTagList().toString());
+                } else {
+                    taskData = new TaskData("event", task.getTaskDescription(),
+                            boolInt, date.toString(), time.toString(), "");
+                }
             }
             taskManagerData.getTaskList().add(taskData);
         }
@@ -62,14 +77,14 @@ public class TaskSaveAndLoadManager {
                 String[] tempArr = loadedDatum.split(" %% ");
                 TaskData taskData;
                 // a todo item
-                if (tempArr.length == 3) {
-                    taskData = new TaskData(tempArr[0], tempArr[1], Integer.parseInt(tempArr[2]));
-                // a deadline item
-                } else if (tempArr.length == 4) {
+                if (tempArr[0].equals("todo")) {
                     taskData = new TaskData(tempArr[0], tempArr[1], Integer.parseInt(tempArr[2]), tempArr[3]);
+                // a deadline item
+                } else if (tempArr[0].equals("deadline")) {
+                    taskData = new TaskData(tempArr[0], tempArr[1], Integer.parseInt(tempArr[2]), tempArr[3], tempArr[4]);
                 } else {
                     taskData = new TaskData(tempArr[0], tempArr[1],
-                            Integer.parseInt(tempArr[2]), tempArr[3], tempArr[4]);
+                            Integer.parseInt(tempArr[2]), tempArr[3], tempArr[4], tempArr[5]);
                 }
                 Task task = loadTask(taskData);
                 taskList.add(task);
@@ -79,18 +94,32 @@ public class TaskSaveAndLoadManager {
         return null;
     }
 
+    private TagList loadTagList(TaskData taskData) {
+        TagList tagList = new TagList();
+        if (!taskData.getTags().equals("")) {
+            String[] tags = taskData.getTags().trim().split("#");
+            for (String tag : tags) {
+                Tag currTag = new Tag(tag);
+                tagList.addTag(currTag);
+            }
+            return tagList;
+        } else {
+            return null;
+        }
+    }
+
     private Task loadTask(TaskData taskData) {
         boolean isDone;
         isDone = taskData.getIsDone() == 1;
 
         if (taskData.getTaskType().equals("todo")) {
-            return new ToDoTask(taskData.getTaskDescription(), isDone);
+            return new ToDoTask(taskData.getTaskDescription(), isDone, loadTagList(taskData));
         } else if (taskData.getTaskType().equals("deadline")) {
             DateAndTime dt = new DateAndTime(LocalDate.parse(taskData.getTime()));
-            return new DeadlineTask(taskData.getTaskDescription(), isDone, dt);
+            return new DeadlineTask(taskData.getTaskDescription(), isDone, dt, loadTagList(taskData));
         } else {
             DateAndTime dt = new DateAndTime(LocalDate.parse(taskData.getDate()), LocalTime.parse(taskData.getTime()));
-            return new EventTask(taskData.getTaskDescription(), isDone, dt);
+            return new EventTask(taskData.getTaskDescription(), isDone, dt, loadTagList(taskData));
         }
     }
 }
