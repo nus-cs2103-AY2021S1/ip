@@ -33,8 +33,8 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String data() {
-        return "D" + super.data() + " | " + time;
+    public String getData() {
+        return "D" + super.getData() + " | " + time;
     }
 
 }

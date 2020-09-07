@@ -11,6 +11,14 @@ public class FindCommand extends Command {
         this.keyword = keyword;
     }
 
+    /**
+     * Finds tasks with the given keywords.
+     *
+     * @param tasks tasklist object.
+     * @param ui Ui object.
+     * @param storage Storage object.
+     * @return a string of all tasks containing the keywords.
+     */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
 
         String output = ui.showTask(tasks, keyword);

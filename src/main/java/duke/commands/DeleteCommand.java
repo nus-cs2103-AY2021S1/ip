@@ -12,7 +12,14 @@ public class DeleteCommand extends Command {
         this.index = index;
     }
 
-
+    /**
+     * Deletes the task from tasklist.
+     *
+     * @param tasks tasklist object.
+     * @param ui Ui object.
+     * @param storage Storage object.
+     * @return a string of delete task message.
+     */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.getTask(index);
         Task.reduceOneTasks();
