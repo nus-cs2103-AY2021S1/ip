@@ -27,7 +27,7 @@ public class Ui {
 
     /**
      * Constructor of Ui class.
-     * Initialize the filepath, filename, and list of tasks already stored in memory.
+     * Initializes the filepath, filename, and list of tasks already stored in memory.
      *
      * @param filePath  Directory of local file to read and write.
      * @param fileName  Name of local file to read and write.
@@ -41,8 +41,13 @@ public class Ui {
     }
 
 
+
     /**
-     * Interact with users and process inputs.
+     * Returns processed user input of commands once the system is awake.
+     * Returns system response if the chatbot is in sleeping mode.
+     *
+     * @param input  User input of command.
+     * @return processed system response to user commands.
      */
     public String[] processRequests(String input) {
         if (sleepMode && !input.equals("hello")) {
@@ -62,6 +67,12 @@ public class Ui {
     }
 
 
+    /**
+     * Returns system response to single-word commands.
+     *
+     * @param command  user input of command.
+     * @return output list in response to simple commands.
+     */
     public List<String> processSingleWordRequest(String command) {
         List<String> response = new ArrayList<>();
 
@@ -83,6 +94,11 @@ public class Ui {
     }
 
 
+    /**
+     * Returns list of all tasks in response to 'list' command.
+     *
+     * @return system response to 'hello' command.
+     */
     public String processListCommand() {
         int temp = 1;
         String output = "Here are the tasks in your list:\n";
@@ -96,6 +112,12 @@ public class Ui {
     }
 
 
+    /**
+     * Returns opening address in response to 'hello' command that wakes the system.
+     * Modifies the system sleep-status when the system is successfully waken.
+     *
+     * @return system response to 'hello' command.
+     */
     public String processHelloCommand() {
         if (sleepMode) {
             sleepMode = false;
@@ -105,6 +127,12 @@ public class Ui {
     }
 
 
+    /**
+     * Returns system response to multiple-word commands.
+     *
+     * @param commandTask  processed user input of command.
+     * @return output list containing system response to complex commands.
+     */
     public List<String> processComplexRequest(String[] commandTask) {
 
         String commandType = commandTask[0];
@@ -125,18 +153,36 @@ public class Ui {
     }
 
 
+    /**
+     * Returns specified user input of 'editing' requests, i.e. 'done' and 'delete'.
+     *
+     * @param commandTask  processed user input of command.
+     * @return further-processed user input of modification commands.
+     */
     public List<String> processEditRequest(String[] commandTask) {
         List<String> response = taskList.editTask(commandTask);
         return response;
     }
 
 
+    /**
+     * Returns output list containing system response to task-addition commands'.
+     *
+     * @param commandTask  processed user input of task-addition command.
+     * @return output list containing system response to todo', 'event', 'deadline' commands.
+     */
     public List<String> processAddRequest(String[] commandTask) {
         List<String> response = taskList.addTask(commandTask);
         return response;
     }
 
 
+    /**
+     * Returns output list containing system response to 'find' command.
+     *
+     * @param keyword  word to be searched in the task list.
+     * @return output list containing system response to 'find' command.
+     */
     public List<String> processFindKeyword(String keyword) {
         List<String> response = new ArrayList<>();
         List<Task> matchList = taskList.searchTask(keyword);
@@ -158,6 +204,12 @@ public class Ui {
     }
 
 
+    /**
+     * Returns output list after adding the information about the exception.
+     *
+     * @param exceptionType  type of exception encountered.
+     * @return output list after adding the information about the exception.
+     */
     public List<String> processException(String exceptionType) {
         List<String> response = new ArrayList<>();
         response.addAll(
@@ -167,6 +219,12 @@ public class Ui {
     }
 
 
+    /**
+     * Returns ExceptionType in response to different exceptions caught.
+     *
+     * @param exceptionType  type of exception encountered.
+     * @return ExceptionType that corresponds to the exception caught.
+     */
     public DukeException.ExceptionType returnException(String exceptionType) {
         switch (exceptionType) {
         case "todo":

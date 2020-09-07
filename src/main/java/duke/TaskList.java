@@ -82,7 +82,7 @@ public class TaskList {
                 continue;
             }
             if (currTask.getType().equals("D") || currTask.getType().equals("E")) {
-                // search in DateTime section
+                // search keyword in DateTime section of a 'event' or 'deadline' task
                 if (currTask.getInfo()[3].toLowerCase().contains(keywordLowerCase)) {
                     searchResult.add(currTask);
                 }
@@ -94,7 +94,11 @@ public class TaskList {
 
 
     /**
+     * Returns output array after a successful 'done' or 'delete' action.
      * Adds new Task object to the temporary collection and local memory.
+     *
+     * @param commandArr  processed user input of 'done' or 'delete' command.
+     * @return  output array after a successful 'modify' operation.
      */
     public List<String> addTask(String[] commandArr) {
         String type = commandArr[0];
@@ -119,7 +123,11 @@ public class TaskList {
 
 
     /**
+     * Returns output array after a successful 'done' or 'delete' action.
      * Modifies temporary tasklist and overwrite local memory.
+     *
+     * @param commandArr  processed user input of 'done' or 'delete' command.
+     * @return  output array after a successful 'modify' operation.
      */
     public List<String> editTask(String[] commandArr) {
         List<String> output = new ArrayList<>();
@@ -150,6 +158,9 @@ public class TaskList {
 
     /**
      * Modifies local taskCollections in response to a 'done' or 'delete' command.
+     *
+     * @param actionType  type of 'modification' command.
+     * @param actionNumber  actual index of task in taskCollections (starts from 0).
      */
     public void editTaskCollections(String actionType, int actionNumber) {
         switch (actionType) {
@@ -165,7 +176,11 @@ public class TaskList {
 
 
     /**
-     * Adds output message after a successful 'done', 'delete' or 'add' action.
+     * Returns output message after a successful 'done', 'delete' or 'add' action.
+     *
+     * @param type  type of command.
+     * @param taskContent  content of the task that is added or modified.
+     * @return  success message after a successful 'add' or 'modify' operation.
      */
     public String addSuccessMsg(String type, String taskContent) {
         switch (type) {

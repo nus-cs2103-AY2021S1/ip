@@ -26,7 +26,7 @@ public class Storage {
 
     /**
      * Constructor of Storage class.
-     * Initialize class members fileDirectory, fileName, parser.
+     * Initializes class members fileDirectory, fileName, parser.
      *
      * @param fileDirectory  Directory of local file to store tasks.
      * @param fileName  Name of local file to store tasks.
@@ -39,8 +39,10 @@ public class Storage {
 
 
     /**
-     * Initialize the File object to enable writing memory.
-     * Create valid directory and file if not present.
+     * Initializes the File object to enable writing memory.
+     * Creates valid directory and file if not present.
+     *
+     * @throws IOException if exception caught in createNewFile().
      */
     public void reachFile() throws IOException {
         File dataFolder = new File(fileDirectory);
@@ -56,16 +58,16 @@ public class Storage {
 
 
     /**
-     * Return List of Task objects read and processed from local memory.
+     * Returns List of Task objects read and processed from local memory.
      *
      * @return List of Task objects each time the chatbot is started.
+     * @throws IOException if exception caught in reachFile().
      */
     public List<Task> readMemoTasks() throws IOException {
-
-        reachFile();
-
         List<Task> taskCollections = new ArrayList<>();
         Scanner sc;
+
+        reachFile();
 
         try {
             sc = new Scanner(memoFile);
@@ -96,7 +98,7 @@ public class Storage {
 
 
     /**
-     * Return String of a Task object for storage in local memory.
+     * Returns String of a Task object for storage in local memory.
      *
      * @param t  Task object for conversion.
      * @return  Task String to be stored in memory.
@@ -114,8 +116,9 @@ public class Storage {
 
 
     /**
+     * Returns true if file is successfully read and written, false otherwise.
      * Overwrites local memory with the current List of Task objects.
-     * If file does not exist, creates a new file with current tasklist.
+     * If file does not exist, creates a new file with current task-list.
      *
      * @param taskList  Current List of Task objects.
      * @return  true if successfully read and written file, false if failure.
@@ -143,6 +146,7 @@ public class Storage {
 
 
     /**
+     * Returns true if file is successfully modified, false otherwise.
      * Modifies local memory with a newly added Task object (not overwriting).
      * If local file not existing, create a new file.
      *

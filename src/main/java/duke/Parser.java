@@ -11,7 +11,8 @@ public class Parser {
 
 
     /**
-     * Return Formatted datetime of a task.
+     * Returns Formatted datetime of a task.
+     * Returns 'improperDateTime' if datetime input cannot be processed properly.
      *
      * @param dateTime  User input of date and time of a Task object (specifically Deadline/Event).
      * @returns  Processed datetime of a Deadline or Event object.
@@ -27,7 +28,7 @@ public class Parser {
 
 
     /**
-     * Return Specific information of a Task object.
+     * Returns Specific information of a Task object.
      *
      * @param taskLine  Single line of information of a Task object.
      * @returns  Specific information of a Task contained in an array of Strings.
@@ -49,9 +50,9 @@ public class Parser {
     }
 
 
-
     /**
-     * Return Specific information of a Command in Segments.
+     * Returns Specific information of a Command in Segments.
+     * Returns Specific information of an exception in Segments if exceptions caught.
      *
      * @param input  User input of command.
      * @returns  Specific information of a Command in the form of String array.
@@ -76,7 +77,7 @@ public class Parser {
 
         switch (commandType) {
         case "find":
-            return parseFind(commandType, taskContent);
+            return parseFind(taskContent);
         case "done":
         case "delete":
             return parseModifications(commandType, taskContent);
@@ -92,35 +93,37 @@ public class Parser {
     }
 
 
-    public String[] parseFind(String commandType, String keyword) {
-//        if (keyword.isBlank()) {
-//            return new String[] {"exception", "find"};
-//        }
-        return new String[] {commandType, keyword};
+    /**
+     * Returns Specific information of a 'find' command in Segments.
+     *
+     * @param keyword  User input of keyword to search for.
+     * @returns  Specific information of a find command in the form of String array.
+     */
+    public String[] parseFind(String keyword) {
+        return new String[] {"find", keyword};
     }
 
 
+    /**
+     * Returns Specific information of a 'done' or 'delete' command in Segments.
+     *
+     * @param commandType  type of command, i.e. 'done' or 'delete'.
+     * @param actionNumber  index of task to be modified.
+     * @returns  Specific information of this modification command in the form of String array.
+     */
     public String[] parseModifications(String commandType, String actionNumber) {
-//        if (actionNumber.isBlank()) {
-//            return new String[] {"exception", "empty_illegal"};
-//        }
         return new String[] {commandType, actionNumber};
     }
 
 
+    /**
+     * Returns Specific information of a add-new-event command in Segments.
+     *
+     * @param commandType  type of command, i.e. 'todo' or 'event' or 'deadline'.
+     * @param taskContent  content of task to be added.
+     * @returns  Specific information of 'todo' or 'event' or 'deadline' command in String array.
+     */
     public String[] parseNewEvent(String commandType, String taskContent) {
-
-//        String[] output;
-//
-//        if (commandType.equals("todo")) {
-//            //output = parseTodo(taskContent);
-//            output = new String[] {commandType, taskContent};
-//        } else {
-//            output = parseEventAndDeadline(commandType, taskContent);
-//        }
-//
-//        return output;
-
         if (commandType.equals("todo")) {
             return parseTodo(taskContent);
         } else {
@@ -130,14 +133,25 @@ public class Parser {
     }
 
 
+    /**
+     * Returns Specific information of a 'todo' command in Segments.
+     *
+     * @param taskContent  content of task to be added.
+     * @returns  Specific information of 'todo' command in String array.
+     */
     public String[] parseTodo(String taskContent) {
-//        if (taskContent.isBlank()) {
-//            return new String[] {"exception", "todo"};
-//        }
         return new String[] {"todo", taskContent};
     }
 
 
+    /**
+     * Returns Specific information of a 'event' or 'deadline' command in Segments.
+     * Returns Specific information of an exception in Segments if exceptions caught.
+     *
+     * @param commandType  type of command, i.e. 'event' or 'deadline'.
+     * @param taskContent  content of task to be added.
+     * @returns  Specific information of 'event' or 'deadline' command in String array.
+     */
     public String[] parseEventAndDeadline(String commandType, String taskContent) {
         try {
             String[] taskDetails = taskContent.split(
@@ -155,14 +169,17 @@ public class Parser {
             return new String[]{commandType, taskAction, dateTime};
 
         } catch (Exception ex) {
-//            String exceptionType = commandType.equals("event")
-//                    ? "event"
-//                    : "deadline";
-//            return new String[]{"exception", exceptionType};
             return parseException(commandType);
         }
     }
 
+
+    /**
+     * Returns Specific information of an exception in Segments.
+     *
+     * @param type  type of exception to be processed.
+     * @returns  Specific information of exception in String array.
+     */
     public String[] parseException(String type) {
         switch (type) {
         case "done":
@@ -177,48 +194,5 @@ public class Parser {
             return new String[] {"exception", "no_meaning"};
         }
     }
-
-
-
-    //    /**
-//     * Return Specific information of a Command in Segments.
-//     *
-//     * @param input  User input of command.
-//     * @returns  Specific information of a Command in the form of String array.
-//     */
-//    public String[] commandParser(String input) {
-//
-//        if (input.equals("bye") || input.equals("hello") || input.equals("list")) {
-//            return new String[]{input};
-//        }
-//
-//        String commandType;
-//        String taskContent;
-//        try {
-//            String[] inputSplitArr = input.split(" ", 2);
-//            commandType = inputSplitArr[0];
-//            taskContent = inputSplitArr[1];
-//        } catch (Exception e) {
-//            return new String[] {"exception", "no_meaning"};
-//        }
-//
-//        switch (commandType) {
-//        case "find":
-//            return parseFind(commandType, taskContent);
-//
-//        case "done":
-//        case "delete":
-//            return parseModifications(commandType, taskContent);
-//
-//        case "todo":
-//        case "event":
-//        case "deadline":
-//            return parseNewEvent(commandType, taskContent);
-//
-//        default:
-//            return new String[] {"exception", "no_meaning"};
-//        }
-//
-//    }
 
 }
