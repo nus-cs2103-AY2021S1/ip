@@ -71,9 +71,14 @@ public class Storage {
      * @param taskDate Date of a task obtained from a .txt file.
      * @return LocalDateTime object representing the date related to task.Task.
      * @throws ParseException If an error has been reached while parsing.
+     * @throws DukeException If user does not input both date and time.
      */
-    public LocalDateTime getDate(String taskDate) throws ParseException {
+    public LocalDateTime getDate(String taskDate) throws ParseException, DukeException {
         String[] splitDate = taskDate.split(" ");
+        if (splitDate.length == 1) {
+            throw new DukeException("Please enter both date and time!");
+        }
+
         int date = Integer.parseInt(splitDate[0]);
 
         // convert month in words to month in int
