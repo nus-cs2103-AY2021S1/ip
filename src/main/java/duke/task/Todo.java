@@ -1,9 +1,9 @@
+package duke.task;
+
 /**
  * Encapsulates the idea of tasks without any date/time attached,
  * hence inherits from Task
  */
-package duke.task;
-
 public class Todo extends Task {
 
     // constants

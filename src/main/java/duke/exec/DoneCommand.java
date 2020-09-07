@@ -6,7 +6,7 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-public class Done implements Executable {
+public class DoneCommand implements Executable {
 
     // constants
     private static final String TOGGLE_MESSAGE = "Nice! "
@@ -16,7 +16,7 @@ public class Done implements Executable {
     private int index; // zero-based
 
     // constructor
-    public Done(int index) {
+    public DoneCommand(int index) {
         this.index = index;
     }
 
@@ -39,6 +39,6 @@ public class Done implements Executable {
 
         toToggle.setTaskAsDone();
         store.write(tasks);
-        return ui.output(TOGGLE_MESSAGE, "\t" + toToggle.toString());
+        return ui.outputString(TOGGLE_MESSAGE, "\t" + toToggle.toString());
     }
 }

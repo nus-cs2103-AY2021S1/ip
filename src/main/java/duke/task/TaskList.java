@@ -1,12 +1,12 @@
-/**
- * Encapsulates the idea of a list of tasks, implemented
- * using an ArrayList
- */
 package duke.task;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Encapsulates the idea of a list of tasks, implemented
+ * using an ArrayList
+ */
 public class TaskList {
 
     // instance variables
@@ -36,7 +36,6 @@ public class TaskList {
     public Task get(int index) {
         return tasks.get(index);
     }
-
     /**
      * Return underlying list of tasks
      */
@@ -53,7 +52,6 @@ public class TaskList {
     public void add(Task task) {
         tasks.add(task);
     }
-
     /**
      * Removes a task at the given zero-based index
      *
@@ -63,7 +61,7 @@ public class TaskList {
         tasks.remove(index);
     }
 
-    // TaskList processing methods
+    // TaskList processing method
     /**
      * Returns list of tasks filtered based on
      * exact matching with the keyword given

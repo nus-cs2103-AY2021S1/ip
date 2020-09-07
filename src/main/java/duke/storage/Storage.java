@@ -1,8 +1,3 @@
-/**
- * Encapsulates a storage object that provides
- * functionality with regard to reading and writing
- * from a file
- */
 package duke.storage;
 
 import java.io.BufferedReader;
@@ -24,6 +19,11 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
 
+/**
+ * Encapsulates a storage object that provides
+ * functionality with regard to reading and writing
+ * from a file
+ */
 public class Storage {
 
     // DateTime format constant
@@ -52,7 +52,7 @@ public class Storage {
      * @return list of tasks read from store
      */
     public List<Task> load() {
-        List<Task> res = new ArrayList<>();
+        List<Task> listOfTasks = new ArrayList<>();
         try {
             // initialize
             Files.createDirectories(Paths.get(directory));
@@ -72,19 +72,19 @@ public class Storage {
                 switch(type) {
                 case "T":
                     desc = remaining;
-                    res.add(new Todo(desc, isDone));
+                    listOfTasks.add(new Todo(desc, isDone));
                     break;
                 case "E":
                     String[] eventDetails = remaining.split("\\s\\|\\s");
                     desc = eventDetails[0];
                     LocalDateTime date = LocalDateTime.parse(eventDetails[1], DATE_TIME_FORMAT);
-                    res.add(new Event(desc, date, isDone));
+                    listOfTasks.add(new Event(desc, date, isDone));
                     break;
                 case "D":
                     String[] deadlineDetails = remaining.split("\\s\\|\\s");
                     desc = deadlineDetails[0];
                     LocalDateTime deadline = LocalDateTime.parse(deadlineDetails[1], DATE_TIME_FORMAT);
-                    res.add(new Deadline(desc, deadline, isDone));
+                    listOfTasks.add(new Deadline(desc, deadline, isDone));
                     break;
                 default:
                     break;
@@ -93,7 +93,7 @@ public class Storage {
         } catch (IOException e) {
             System.out.println("Something went wrong in the loading");
         } finally {
-            return res;
+            return listOfTasks;
         }
     }
 
