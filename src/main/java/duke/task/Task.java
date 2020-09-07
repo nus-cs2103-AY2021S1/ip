@@ -22,7 +22,7 @@ public class Task {
      * @return a string that symbolises if the task is done
      */
     public String getStatusIcon() {
-        return (isDone ? "[o]" : "[x]"); //return tick or X symbols
+        return (isDone ? "[\u2713]" : "[X]"); //return tick or X symbols
     }
 
     /**

@@ -19,6 +19,7 @@ public class ByC extends Command {
 
     @Override
     public String execute(Ui ui, TaskList todoList, Storage store) throws IOException {
+        assert input.length() > 2 : "no date entered";
         LocalDate checkBy = LocalDate.parse(input.substring(3));
         String result = "";
         result += "By this day, you have: \n" ;

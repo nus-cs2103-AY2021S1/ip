@@ -18,6 +18,8 @@ public class EventC extends Command {
 
     @Override
     public String execute(Ui ui, TaskList todoList, Storage store) throws IOException {
+        assert input.length() > 5 : "no date entered";
+
         String result = "";
         try {
             String fullE = input.substring(6) ;

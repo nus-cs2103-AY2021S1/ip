@@ -20,6 +20,8 @@ public class DoneC extends Command {
 
     @Override
     public String execute(Ui ui, TaskList todoList, Storage store) throws IOException {
+        assert input.length() > 4 : "no date entered";
+
         String result = "";
         int taskID = Integer.parseInt( input.substring(5)) - 1;
         Task task = todoList.get(taskID);

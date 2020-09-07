@@ -32,7 +32,7 @@ public class Duke{
         storage = new Storage("src/main/java/duke/text/todo.txt");
         try {
             tasks = new TaskList(storage.load());
-        } catch (IOException e) {
+        } catch (DukeException e) {
             System.out.println(e.getMessage());;
         }
     }

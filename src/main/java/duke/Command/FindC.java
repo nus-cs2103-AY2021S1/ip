@@ -20,6 +20,8 @@ public class FindC extends Command {
 
     @Override
     public String execute(Ui ui, TaskList todoList, Storage store) throws IOException {
+        assert input.length() > 4 : "no keyword entered";
+
         String result = "";
         String keyword = input.substring(5);
         int findCount = 0;
