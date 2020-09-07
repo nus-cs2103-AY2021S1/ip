@@ -11,7 +11,7 @@ import exception.InvalidTodoException;
 import ui.Ui;
 
 /**
- * Represents a {@code Tasklist} object to store tasks in memory
+ * Represents a {@code Tasklist} object to store tasks in memory.
  */
 public class TaskList {
     // List of tasks
@@ -26,11 +26,11 @@ public class TaskList {
     }
 
     /**
-     * Read input from String and add new Deadline object to the list
-     * @param ui Ui object to print user display
-     * @param str The string input
-     * @param isNew Boolean value that indicates the task is new or not
-     * @param isDone Boolean value that indicates the state of the task
+     * Reads input from String and add new Deadline object to the list.
+     * @param ui Ui object to print user display.
+     * @param str The string input.
+     * @param isNew Boolean value that indicates the task is new or not.
+     * @param isDone Boolean value that indicates the state of the task.
      */
     public String addDeadline(Ui ui, String str, boolean isNew, boolean isDone)
             throws InvalidDeadlineException {
@@ -63,11 +63,11 @@ public class TaskList {
     }
 
     /**
-     * Read input from String and add new Event object to the list
-     * @param ui Ui object to print user display
-     * @param str The string input
-     * @param isNew Boolean value that indicates the task is new or not
-     * @param isDone Boolean value that indicates the state of the task
+     * Reads input from String and add new Event object to the list.
+     * @param ui Ui object to print user display.
+     * @param str The string input.
+     * @param isNew Boolean value that indicates the task is new or not.
+     * @param isDone Boolean value that indicates the state of the task.
      */
     public String addEvent(Ui ui, String str, boolean isNew, boolean isDone)
             throws InvalidEventException {
@@ -100,11 +100,11 @@ public class TaskList {
     }
 
     /**
-     * Read input from String and add new Todo object to the list
-     * @param ui Ui object to print user display
-     * @param str The string input
-     * @param isNew Boolean value that indicates the task is new or not
-     * @param isDone Boolean value that indicates the state of the task
+     * Reads input from String and add new Todo object to the list.
+     * @param ui Ui object to print user display.
+     * @param str The string input.
+     * @param isNew Boolean value that indicates the task is new or not.
+     * @param isDone Boolean value that indicates the state of the task.
      */
     public String addTodo(Ui ui, String str, boolean isNew, boolean isDone)
             throws InvalidTodoException {
@@ -121,8 +121,8 @@ public class TaskList {
     }
 
     /**
-     * Deletes a task from the list
-     * @param index The index of the target object
+     * Deletes a task from the list.
+     * @param index The index of the target object.
      */
     public String deleteTask(int index) throws DukeErrorException {
         if (index >= this.tasks.size() || index < 0) {
@@ -133,8 +133,8 @@ public class TaskList {
     }
 
     /**
-     * Make the target task to be completed
-     * @param index The index of the target object
+     * Makes the target task to be completed.
+     * @param index The index of the target object.
      */
     public String makeDone(int index) throws DukeErrorException {
         if (index >= this.tasks.size() || index < 0) {
@@ -145,9 +145,9 @@ public class TaskList {
     }
 
     /**
-     * Finds Task objects that contains the keyword
-     * @param query The query keyword
-     * @reutn A list of task that fulfills the query keyword
+     * Finds Task objects that contains the keyword.
+     * @param query The query keyword.
+     * @reutn A list of task that fulfills the query keyword.
      */
     public ArrayList<Task> findTask(String query) {
         ArrayList<Task> suitableTasks = new ArrayList<>();

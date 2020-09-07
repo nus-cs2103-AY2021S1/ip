@@ -19,8 +19,6 @@ public class Duke {
     private Storage storage;
     // TaskList object to handle insertion, deletion, etc of tasks
     private TaskList tl;
-    // Parser object to process inputs and commands
-    private Parser parser;
 
     /**
      * A constructor to initialize Duke Chatbot
@@ -28,7 +26,6 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         tl = new TaskList();
-        parser = new Parser();
         storage = new Storage();
     }
 
@@ -57,7 +54,7 @@ public class Duke {
         String[] splitted = input.split(" ", 2);
         Commands command;
         try {
-            command = parser.processCommand(splitted);
+            command = Parser.processCommand(splitted);
         } catch (DukeErrorException ex) {
             return ex.toString();
         }
@@ -69,13 +66,15 @@ public class Duke {
             return ui.printList(tl.getTaskList());
         } else if (command.equals(Commands.DONE)) {
             try {
-                return tl.makeDone(Integer.parseInt(splitted[1]) - 1);
+                int taskIndex = Integer.parseInt(splitted[1]) - 1;
+                return tl.makeDone(taskIndex);
             } catch (ArrayIndexOutOfBoundsException | DukeErrorException ex) {
                 return ex.toString();
             }
         } else if (command.equals(Commands.DELETE)) {
             try {
-                return tl.deleteTask(Integer.parseInt(splitted[1]) - 1);
+                int taskIndex = Integer.parseInt(splitted[1]) - 1;
+                return tl.deleteTask(taskIndex);
             } catch (ArrayIndexOutOfBoundsException | DukeErrorException ex) {
                 return ex.toString();
             }
