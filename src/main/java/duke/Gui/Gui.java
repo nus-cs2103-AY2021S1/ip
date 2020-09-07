@@ -19,16 +19,16 @@ public class Gui {
 
     public ArrayList<String> showBye() {
         ArrayList<String> responseList = new ArrayList<>();
-        final String BYE_MESSAGE = "Bye!!! Hope to see you again real soon.";
-        responseList.add(BYE_MESSAGE);
+        responseList.add("Bye!!! Hope to see you again real soon.");
+        assert responseList instanceof ArrayList : "Return type of the result of this method should be an ArrayList";
 
         return responseList;
     }
 
     public ArrayList<String> showDone() {
         ArrayList<String> responseList = new ArrayList<>();
-        final String DONE_MESSAGE = "The following task has been marked done: ";
-        responseList.add(DONE_MESSAGE);
+        responseList.add("The following task has been marked done: ");
+        assert responseList instanceof ArrayList : "Return type of the result of this method should be an ArrayList";
 
         return responseList;
     }
@@ -38,13 +38,12 @@ public class Gui {
     }
 
     /**
-     * Prints out all the tasks.
+     * prints out all the tasks.
      * @param list list of tasks.
      */
     public ArrayList<String> listAllTasks(ArrayList<Task> list) {
         ArrayList<String> responseList = new ArrayList<>();
-        final String LIST_MESSAGE = "Here are the tasks in your list: ";
-        responseList.add(LIST_MESSAGE);
+        responseList.add("Here are the tasks in your list: ");
 
         int LENGTH_OF_LIST = list.size();
         if (LENGTH_OF_LIST > 0) {
@@ -55,84 +54,84 @@ public class Gui {
             }
         } else {
             responseList.remove(0);
-            final String TASKS_NOT_FOUND_MESSAGE = "Here are the tasks in your list: ";
-            responseList.add(TASKS_NOT_FOUND_MESSAGE);
+            responseList.add("No tasks found, add a task now!");
         }
         return responseList;
     }
 
     /**
-     * Message displayed after item added to list
+     * message after adding a task to list.
      * @param task task to be added.
      * @param tasksLeft integer value of tasks remaining in the list of tasks.
      */
     public ArrayList<String> addMessage(Task task, int tasksLeft) {
-        ArrayList<String> reponseList = new ArrayList<>();
+        ArrayList<String> responseList = new ArrayList<>();
 
-        reponseList.add("Got it, the following task has been added:\n" + INDENT + INDENT + task +
-                "\n" + INDENT + this.messageForTasksLeft(tasksLeft));
+        responseList.add("Got it, the following task has been added:\n" + INDENT + INDENT + task +
+                "\n" + INDENT + this.taskLeftMessage(tasksLeft));
+        assert responseList instanceof ArrayList : "Return type of the result of this method should be an ArrayList";
 
-        return reponseList;
+        return responseList;
     }
 
     /**
-     * Message after searching for term with Find
+     * message after searching for term with Find
      * @param listOfTasksFound list of taks found containing that term
      */
     public ArrayList<String> findMessage(ArrayList<Task> listOfTasksFound) {
         ArrayList<String> responseList = new ArrayList<>();
 
         if (listOfTasksFound.isEmpty()) {
-            final String NO_TASKS_FOUND_MESSAGE = "No tasks found with that term";
-            responseList.add(NO_TASKS_FOUND_MESSAGE);
+            responseList.add("No tasks found with that term");
         } else {
-            final String MATCHING_TASKS_MESSAGE = "Here are the matching tasks in your list: \n";
-            responseList.add(MATCHING_TASKS_MESSAGE);
+            responseList.add("Here are the matching tasks in your list: \n");
 
             for (int i = 1; i <= listOfTasksFound.size(); i++) {
                 responseList.add(i + "." + listOfTasksFound.get(i - 1));
             }
         }
+        assert responseList instanceof ArrayList : "Return type of the result of this method should be an ArrayList";
+
         return responseList;
     }
 
     /**
-     * Message displayed after deleting a task
+     * message after deleting a message.
      * @param task task to be deleted.
      * @param tasksLeft integer value of tasks remaining in the list of tasks.
      */
     public ArrayList<String> deleteMessage(Task task, int tasksLeft) {
         ArrayList<String> responseList = new ArrayList<>();
-        final String DELETED_TASK_MESSAGE = "Noted. I have removed this task:\n" + INDENT + INDENT + task + "\n" +
-                this.messageForTasksLeft(tasksLeft);
-        responseList.add (DELETED_TASK_MESSAGE);
+        responseList.add ("Noted. I have removed this task:\n" + INDENT + INDENT + task + "\n" +
+                this.taskLeftMessage(tasksLeft));
+        assert responseList instanceof ArrayList : "Return type of the result of this method should be an ArrayList";
+
         return responseList;
     }
 
     /**
-     * Message to show number of tasks left.
+     * message to show number of tasks left.
      * @param tasksLeft integer value of tasks remaining in the list of tasks.
      * @return string of message.
      */
-    public ArrayList<String> messageForTasksLeft(int tasksLeft) {
+    public ArrayList<String> taskLeftMessage(int tasksLeft) {
         ArrayList<String> responseList = new ArrayList<>();
-        final String TASKS_LEFT_MESSAGE = "Now you have " + tasksLeft + " tasks in the list.";
-        responseList.add(TASKS_LEFT_MESSAGE);
+        responseList.add("Now you have " + tasksLeft + " tasks in the list.");
         if (tasksLeft == 0) {
-            final String NO_TASKS_FOUND_MESSAGE = "No tasks found. Add a task now!";
-            responseList.add(NO_TASKS_FOUND_MESSAGE);
+            responseList.add("No tasks found. Add a task now!");
         }
+        assert responseList instanceof ArrayList : "Return type of the result of this method should be an ArrayList";
+
         return responseList;
     }
 
     /**
-     * Shows icon based on whether task is done or not.
+     * shows icon based on whether task is done or not.
      * @param task task to be checked.
      * @return string of icon with brackets.
      */
     public String getStatusIcon(Task task) {
-        final String STATUS_ICON_MESSAGE = "[" + (task.getIsDone() ? "\u2713" : "\u2718") + "] ";
-        return (STATUS_ICON_MESSAGE);
+        return ("[" + (task.getIsDone() ? "\u2713" : "\u2718") + "] ");
     }
 
     public String readCommand() {

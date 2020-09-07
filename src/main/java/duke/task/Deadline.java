@@ -40,7 +40,9 @@ public class Deadline extends Task {
      */
     private LocalDate extractDate(String dateUnformatted) {
         dateUnformatted = dateUnformatted.replaceAll("/", "-");
-        return LocalDate.parse(dateUnformatted);
+        LocalDate dateFormatted = LocalDate.parse(dateUnformatted);
+        assert dateFormatted instanceof LocalDate : "Return type of this method should be of type LocalDate";
+        return dateFormatted;
     }
 
     /**
@@ -60,10 +62,9 @@ public class Deadline extends Task {
     public String toString() {
         DateTimeFormatter dtfDate = DateTimeFormatter.ofPattern("MMM dd yyyy");
         DateTimeFormatter dtfTime = DateTimeFormatter.ISO_LOCAL_TIME;
-        final String DEADLINE_STRING_SHOWED_TO_USER =
-                "[D]" + super.toString() + "(by: " + this.date.format(dtfDate) + " " + this.time.format(dtfTime) +
-                ")";
-        return DEADLINE_STRING_SHOWED_TO_USER;
+        assert dtfDate instanceof DateTimeFormatter : "date formatter has to be of type DateTimeFormatter";
+        assert dtfTime instanceof DateTimeFormatter : "time formatter has to be of type DateTimeFormatter";
+        return "[D]" + super.toString() + "(by: " + this.date.format(dtfDate) + " " + this.time.format(dtfTime) + ")";
     }
 
     /**
@@ -75,10 +76,10 @@ public class Deadline extends Task {
         char status = this.isDone ? '1' : '0';
         DateTimeFormatter dtfDate = DateTimeFormatter.ofPattern("MMM dd yyyy");
         DateTimeFormatter dtfTime = DateTimeFormatter.ISO_LOCAL_TIME;
-        final String DEADLINE_STRING_TO_SAVE =
-                "D " + "| " + status + " | " + this.description + "| " + this.date.format(dtfDate) + " " +
+        assert dtfDate instanceof DateTimeFormatter : "date formatter has to be of type DateTimeFormatter";
+        assert dtfTime instanceof DateTimeFormatter : "time formatter has to be of type DateTimeFormatter";
+        return "D " + "| " + status + " | " + this.description + "| " + this.date.format(dtfDate) + " " +
                 this.time.format(dtfTime);
-        return DEADLINE_STRING_TO_SAVE;
     }
 
 }

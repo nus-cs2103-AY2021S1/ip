@@ -8,8 +8,7 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        final String TODO_TASK_STRING =  "[T]" + super.toString();
-        return TODO_TASK_STRING;
+        return "[T]" + super.toString();
     }
 
     /**
@@ -19,7 +18,7 @@ public class Todo extends Task {
     @Override
     public String stringToSave() {
         char status = this.isDone ? '1' : '0';
-        final String TODO_TASK_TO_SAVE = "T " + "| " + status + " | " + this.description;
-        return TODO_TASK_TO_SAVE;
+        return "T " + "| " + status + " | " + this.description;
     }
+
 }
