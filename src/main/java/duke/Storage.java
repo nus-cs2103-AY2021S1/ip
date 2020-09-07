@@ -14,7 +14,7 @@ import duke.exceptions.DukeFileNotFoundException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
-import duke.task.ToDo;
+import duke.task.Todo;
 
 
 
@@ -71,7 +71,7 @@ public class Storage {
 
                 // Creates the tasks accordingly
                 if (title.equals("T")) {
-                    this.list.add(new ToDo(description, isDone));
+                    this.list.add(new Todo(description, isDone));
                 } else if (title.equals("D")) {
                     this.list.add(new Deadline(description, isDone, Parser.parseDateTime(arrOfString[3])));
                 } else if (title.equals("E")) {
@@ -113,7 +113,7 @@ public class Storage {
         try {
             FileWriter myWriter = new FileWriter(fileName);
             for (Task task: tasks) {
-                if (task instanceof ToDo) {
+                if (task instanceof Todo) {
                     myWriter.write("T | "
                             + (task.getIsDone() ? "1 | " : "0 | ")
                             + task.getDescription());

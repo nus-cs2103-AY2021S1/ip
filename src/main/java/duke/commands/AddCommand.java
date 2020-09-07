@@ -21,8 +21,8 @@ public class AddCommand implements Command {
     }
 
     /**
-     * Executes the addition of task and sends the appropriate response to the user.
-     * It also stores the changes to the storage.z
+     * Executes the addition of task and sends the appropriate response to the user and
+     * stores the changes to the storage.
      * @param tasks The TaskList.
      * @param ui The Ui.
      * @param storage The Storage.

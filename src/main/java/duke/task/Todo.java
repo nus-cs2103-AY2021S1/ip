@@ -3,14 +3,14 @@ package duke.task;
 /**
  * A sub class of Task, which represents any todo tasks.
  */
-public class ToDo extends Task {
+public class Todo extends Task {
 
     /**
-     * ToDo constructor.
+     * Todo constructor.
      * @param description Details of the task.
      * @param isDone Progress of the task.
      */
-    public ToDo(String description, boolean isDone) {
+    public Todo(String description, boolean isDone) {
         super(description, isDone);
     }
 

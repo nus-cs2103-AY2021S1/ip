@@ -22,8 +22,8 @@ public class DeleteCommand implements Command {
     }
 
     /**
-     * Executes the deletion of task and sends the appropriate response to the user.
-     * It also stores the changes to the storage.
+     * Executes the deletion of task and sends the appropriate response to the user and
+     * also stores the changes to the storage.
      * @param tasks TaskList.
      * @param ui Ui.
      * @param storage Storage.

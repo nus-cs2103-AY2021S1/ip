@@ -5,9 +5,6 @@ import java.util.ArrayList;
 import duke.commands.Command;
 import duke.exceptions.DukeException;
 
-
-
-
 /**
  * Duke helps you manage tasks through a chatbot.
  * Duke also saves your list of tasks and will load
@@ -16,7 +13,6 @@ import duke.exceptions.DukeException;
 public class Duke {
     protected Storage storage;
     protected Ui ui;
-    protected String inquiry;
     protected TaskList tasks;
 
     /**
@@ -54,7 +50,7 @@ public class Duke {
     /**
      * Returns the appropriate response from the chat bot.
      * @param input The user input.
-     * @return The appropriate respone message.
+     * @return The appropriate response message.
      */
     public String getResponse(String input) {
         ui.intro();
