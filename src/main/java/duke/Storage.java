@@ -33,6 +33,7 @@ public class Storage {
     private String filePath;
 
     Storage(String filePath) {
+        assert filePath != null : "File path cannot be null";
         this.filePath = filePath;
     }
 
