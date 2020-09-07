@@ -39,7 +39,7 @@ public class TaskList {
      * @param date The date used to filter the tasks.
      * @return List of deadlines and events occurring on the date.
      */
-    public List<Task> getListOfTasks(LocalDate date) {
+    public List<Task> getListOfTasksOnDate(LocalDate date) {
         return this.listOfTasks.stream().filter(task -> (task instanceof Event && ((Event) task).isOnDate(date))
                 || (task instanceof Deadline && ((Deadline) task).isOnDate(date))).collect(Collectors.toList());
     }
@@ -49,7 +49,7 @@ public class TaskList {
      * @param keyword The keyword to be used to filter the tasks.
      * @return The list of tasks.
      */
-    public List<Task> getListOfTasks(String keyword) {
+    public List<Task> getListOfTasksWithKeyword(String keyword) {
         return this.listOfTasks.stream().filter(
                 task -> task.getDescription().contains(keyword)).collect(Collectors.toList());
     }
