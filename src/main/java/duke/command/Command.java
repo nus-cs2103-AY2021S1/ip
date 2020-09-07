@@ -13,6 +13,7 @@ public abstract class Command {
     protected Parser parser;
 
     protected Command(ArrayList<Task> tasks) {
+        assert tasks.size() >= 0;
         this.tasks = tasks;
         layout = new Layout();
         parser = new Parser();

@@ -27,6 +27,7 @@ public class ManageTask extends Command {
     public String manageTask(Action type, String i) {
         try {
             int index = Integer.parseInt(i);
+            assert index > 1;
             Task task = tasks.get(index - 1);
             switch (type) {
             case DONE:
