@@ -23,6 +23,7 @@ public class Parser {
      */
     static int parseMarkDoneInstr(String user_input) {
         int index = Integer.parseInt(user_input.split(" ")[1]) - 1;
+        assert index >= 0 : "index cannot be nagative";
         return index;
     }
 
@@ -33,6 +34,7 @@ public class Parser {
      */
     static int parseDeleteInstr(String user_input) {
         int index = Integer.parseInt(user_input.split(" ")[1]) - 1;
+        assert index >= 0 : "index cannot be nagative";
         return index;
     }
 

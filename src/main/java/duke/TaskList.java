@@ -35,6 +35,7 @@ public class TaskList {
      * @param index index of task in taskList to be deleted
      */
     public void deleteTask(int index) {
+        assert 0 <= index && index < taskList.size() : "invalid index, index is out of range";
         taskList.remove(index);
     }
 
@@ -44,6 +45,7 @@ public class TaskList {
      * @return task in the taskList according to the index
      */
     public Task getTask(int index) {
+        assert 0 <= index && index < taskList.size() : "invalid index, index is out of range";
         Task task = taskList.get(index);
         return task;
     }
