@@ -112,8 +112,10 @@ public class DeadlineCommand extends Command {
 
     /**
      * Executes deadline command.
+     *
      * @param tasks Bob's tasklist.
      * @param storage Bob's storage.
+     * @return String message response after executing deadline command.
      * @throws BobInvalidDateAndTimeException if no/invalid date and time is stated.
      * @throws IOException If an error occurs while updating file.
      */

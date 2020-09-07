@@ -34,7 +34,13 @@ public class FindCommand extends Command {
         return false;
     }
 
-
+    /**
+     * Executes find command.
+     *
+     * @param tasks Bob's tasklist.
+     * @param storage Bob's storage.
+     * @return String message response containing find results.
+     */
     @Override
     public String execute(Tasklist tasks, Storage storage) {
         String tasksFound = tasks.findTasks(this.input);

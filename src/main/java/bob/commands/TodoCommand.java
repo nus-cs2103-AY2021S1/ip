@@ -18,6 +18,7 @@ public class TodoCommand extends Command {
      * Creates a todo command.
      *
      * @param input User input.
+     * @return String message response after executing todo command.
      * @throws BobEmptyTaskException If there is no description for task.
      */
     public TodoCommand(String input) throws BobEmptyTaskException {

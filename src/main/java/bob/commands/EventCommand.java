@@ -116,6 +116,7 @@ public class EventCommand extends Command {
      *
      * @param tasks Bob's tasklist.
      * @param storage Bob's storage.
+     * @return String message response after executing event command.
      * @throws BobInvalidDateAndTimeException if no/invalid date and time is stated.
      * @throws IOException If an error occurs while updating file.
      */

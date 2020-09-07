@@ -15,6 +15,7 @@ import bob.commands.ExitCommand;
 import bob.commands.FindCommand;
 import bob.commands.ListCommand;
 import bob.commands.TodoCommand;
+import bob.commands.UndoCommand;
 import bob.exceptions.BobEmptyFindException;
 import bob.exceptions.BobEmptyTaskException;
 import bob.exceptions.BobInvalidCommandException;
@@ -85,6 +86,13 @@ public class ParserTest {
             throws BobEmptyTaskException, BobInvalidCommandException, BobEmptyFindException {
         String input = "find test";
         parseAndAssertCommandType(input, FindCommand.class);
+    }
+
+    @Test
+    public void parse_undoCommand_parsedCorrectly()
+            throws BobEmptyTaskException, BobInvalidCommandException, BobEmptyFindException {
+        String input = "undo";
+        parseAndAssertCommandType(input, UndoCommand.class);
     }
 
     /* Test incorrect parsing */
