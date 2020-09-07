@@ -44,17 +44,22 @@ public class Storage {
             while (dataScanner.hasNext()) {
                 String next = dataScanner.nextLine();
                 char taskType = next.charAt(1);
-                boolean isDone = next.charAt(4) == '\u2713';
+                assert taskType == 'T' || taskType == 'D' || taskType == 'E';
+                char doneChar = next.charAt(4);
+                assert doneChar == '\u2713' || doneChar == '\u2718';
+                boolean isDone = doneChar == '\u2713';
                 String description = next.substring(7);
                 if (taskType == 'T') {
                     list.add(new ToDo(description, isDone));
                 } else if (taskType == 'D') {
                     String[] split = description.split("[(]by: ");
+                    assert split.length == 2;
                     String deadlineDesc = split[0];
                     LocalDate deadline = LocalDate.parse(split[1].substring(0, split[1].length() - 1), formatter);
                     list.add(new Deadline(deadlineDesc, deadline, isDone));
                 } else if (taskType == 'E') {
                     String[] split = description.split("[(]at: ");
+                    assert split.length == 2;
                     String eventDesc = split[0];
                     LocalDate eventTime = LocalDate.parse(split[1].substring(0, split[1].length() - 1), formatter);
                     list.add(new Event(eventDesc, eventTime, isDone));

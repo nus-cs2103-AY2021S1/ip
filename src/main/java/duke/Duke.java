@@ -12,7 +12,7 @@ public class Duke {
     private Ui ui;
 
     public Duke() {
-        storage = new Storage("src/main/data.txt");
+        storage = new Storage("data.txt");
         tasks = new TaskList(storage.getTasks());
         ui = new Ui();
     }
