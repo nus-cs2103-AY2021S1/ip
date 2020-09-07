@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Optional;
 
+import duke.exception.DukeException;
+
 /**
  * Represents probably the simplest type of Task.
  */
@@ -36,6 +38,11 @@ public class ToDo extends Task {
     @Override
     public Optional<LocalTime> getTime() {
         return Optional.empty();
+    }
+
+    @Override
+    public void update(String time) throws DukeException {
+        throw new DukeException("ToDo task cannot be updated!");
     }
 
 }

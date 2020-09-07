@@ -24,7 +24,7 @@ public class Ui {
     }
 
     public String showWelcome() {
-        return "Hello from\n" + logo + "\nHey, I'm Emilia \u2764 !\nWhat can I do for you?";
+        return "Hello from\n" + logo + "\nHey, I'm Emilia \u2764 !\nWhat can I do for you?\n";
     }
 
     public String showError(String errorMessage) {
@@ -66,6 +66,10 @@ public class Ui {
 
     public String showDone(Task task) {
         return "Understood, I've marked this task as done:\n" + task;
+    }
+
+    public String showUpdate(Task task) {
+        return "Understood, I've updated this task for you:\n" + task;
     }
 
     /**

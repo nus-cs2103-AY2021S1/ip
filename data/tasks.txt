@@ -1,10 +1,13 @@
-D | 0 | return book | 2/12/2019 1400
-D | 1 | return book | 2/12/2019 1800
-E | 0 | return book | 2/12/2019 1800
+D | 0 | book | 01/01/2012 0001
+D | 0 | return book | 21/01/2016 0048
+D | 0 | return book | 2/03/2019 1800
+E | 0 | return book | 2/03/2019 1800
+D | 1 | return book | 13/06/2019 1230
 D | 0 | return book | 2/12/2019 1800
-D | 0 | book | 2/12/2019 1800
-T | 1 |                     asldjasljkd
-T | 1 |                   sleep
-T | 0 |          wow
-T | 1 |       123
-T | 0 |  123123
+D | 0 | return book | 2/12/2019 1800
+T | 1 |                          asldjasljkd
+T | 1 |                        sleep
+T | 0 |               wow
+T | 1 |            123
+T | 0 |       123123
+T | 0 |      123
