@@ -1,3 +1,10 @@
+package duke;
+
+import storage.Storage;
+import ui.Ui;
+import task.TaskList;
+import javafx.DialogBox;
+
 import java.io.IOException;
 
 import javafx.application.Application;
@@ -85,6 +92,10 @@ public class Duke extends Application {
         } catch (IOException e) {
             return e.toString();
         }
+    }
+
+    public String getGreeting() {
+        return ui.greet();
     }
 
     @Override

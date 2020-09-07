@@ -1,3 +1,5 @@
+package task;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -18,7 +20,7 @@ public class TaskList {
     }
 
     /**
-     * Overloaded method that takes in a list of tasks retrieved from duke.txt.
+     * Overloaded method that takes in a list of tasks retrieved from storage.
      *
      * @param list List of tasks that the user inputted previously.
      */

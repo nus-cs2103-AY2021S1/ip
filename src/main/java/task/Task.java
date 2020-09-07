@@ -1,3 +1,5 @@
+package task;
+
 /**
  * <h1>Represents the most simple form of a task</h1>
  * Contains the specific details of a task and whether

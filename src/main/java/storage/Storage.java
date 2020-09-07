@@ -1,3 +1,10 @@
+package storage;
+
+import task.Task;
+import task.Todo;
+import task.Deadline;
+import task.Event;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -93,11 +100,11 @@ public class Storage {
 
             } else if (task instanceof Deadline) {
 
-                toAdd = "D:" + completed + ":" + task.getTask() + ":" + ((Deadline) task).date;
+                toAdd = "D:" + completed + ":" + task.getTask() + ":" + ((Deadline) task).getDate();
 
             } else if (task instanceof Event) {
 
-                toAdd = "E:" + completed + ":" + task.getTask() + ":" + ((Event) task).date;
+                toAdd = "E:" + completed + ":" + task.getTask() + ":" + ((Event) task).getDate();
 
             } else {
                 // nothing

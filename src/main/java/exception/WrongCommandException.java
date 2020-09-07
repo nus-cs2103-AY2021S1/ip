@@ -1,3 +1,5 @@
+package exception;
+
 /**
  * Inherits from the DukeException class and is thrown
  * when the command words are not used.

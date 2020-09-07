@@ -1,3 +1,10 @@
+package parser;
+
+import exception.DukeException;
+import exception.IncompleteInputException;
+import exception.MissingNumberException;
+import exception.WrongCommandException;
+
 /**
  * <h1>Parser class</h1>
  * This class helps to parse the data that users input
@@ -27,14 +34,14 @@ public class Parser {
      * @throws DukeException When user input is wrong or incomplete.
      */
     public void parse() throws DukeException {
-        if (line.contains("hello")) {
-            commandType = "hello";
-
-        } else if (line.contains("bye")) {
+        if (line.contains("bye")) {
             commandType = "bye";
 
         } else if (line.contains("list")) {
             commandType = "list";
+
+        } else if (line.contains("help")) {
+            commandType = "help";
 
         } else if (line.contains("todo")) {
             commandType = "todo";

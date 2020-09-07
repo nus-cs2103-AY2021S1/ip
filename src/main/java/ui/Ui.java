@@ -1,4 +1,17 @@
+package ui;
+
+import task.TaskList;
+import storage.Storage;
+import parser.Parser;
+import exception.DukeException;
+import exception.NumberOutOfRangeException;
+import task.Task;
+import task.Todo;
+import task.Event;
+import task.Deadline;
+
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 
 /**
  * <h1>User Interface class</h1>
@@ -44,7 +57,10 @@ public class Ui {
             taskDetails = parser.getTaskDetails();
             date = parser.getDate();
 
-            if (commandType.equals("bye")) {
+            if (commandType.equals("help")) {
+                toReturn += help();
+
+            } else if (commandType.equals("bye")) {
                 toReturn += end();
 
             } else if (commandType.equals("list")) {
@@ -74,8 +90,12 @@ public class Ui {
 
             storage.addData(list.getList());
 
-        } catch (DukeException e) {
+        } catch (DukeException e ) {
             toReturn += e.getMessage();
+            toReturn += "\n";
+
+        } catch (DateTimeParseException e) {
+            toReturn += "Wrong date format. Please follow this format: YYYY-MM-DD.";
             toReturn += "\n";
         }
 
@@ -87,13 +107,9 @@ public class Ui {
      * Greeting of users to signify the start of the program.
      */
     public String greet() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String start = "Hello! I'm Duke, your personal assistant. \nWhat can I do for you?";
-        String text = LINE + logo + start + LINE;
+        String start = "Woof! I'm Nugget, your personal doggo.\nWhat can I do for you today?\n" +
+                "FYI: You can type 'help' for the commands available.\n";
+        String text = LINE + start + LINE;
         return text;
     }
 
@@ -101,7 +117,19 @@ public class Ui {
      * Good bye to signify the end of the program.
      */
     public String end() {
-        String text = "Goodbye! Hope to see you again soon. :)\n";
+        String text = "Goodbye! Let's play fetch again soon. :)\n";
+        return text;
+    }
+
+    public String help() {
+        String text = "Here are the list of commands you can type:\n" +
+                "list - Shows the complete list of tasks you have\n" +
+                "find <keyword> - Shows tasks in your task list that match the keyword\n" +
+                "todo <task> - Adds a todo task\n" +
+                "event <event details> /at <date in YYYY-MM-DD> - Adds an event\n" +
+                "deadline <deadline details> /by <date in YYYY-MM-DD> -  Adds a deadline\n" +
+                "done <task number> - Marks the task as completed\n" +
+                "delete <task number> - Deletes the task from your list\n";
         return text;
     }
 
@@ -127,11 +155,15 @@ public class Ui {
      *
      * @param taskNumber Task's number in the list.
      */
-    public String done(int taskNumber) {
-        list.getList().get(taskNumber - 1).completed();
-        String header = "You've completed this task:\n";
-        String text = header + (list.getList().get(taskNumber - 1)).toString() + "\n";
-        return text;
+    public String done(int taskNumber) throws NumberOutOfRangeException {
+        if (taskNumber <= 0 || taskNumber > list.getTotalTasks()) {
+            throw new NumberOutOfRangeException();
+        } else {
+            list.getList().get(taskNumber - 1).completed();
+            String header = "You've completed this task:\n";
+            String text = header + (list.getList().get(taskNumber - 1)).toString() + "\n";
+            return text;
+        }
     }
 
     /**
@@ -139,12 +171,16 @@ public class Ui {
      *
      * @param taskNumber Task's number in the list.
      */
-    public String delete(int taskNumber) {
-        String deleted = (list.getList().get(taskNumber - 1)).toString();
-        list.remove(taskNumber - 1);
-        String header = "Ok, this task has been kicked off your to-do list:\n";
-        String text = header + deleted + "\n" + list.toString() + "\n";
-        return text;
+    public String delete(int taskNumber) throws NumberOutOfRangeException {
+        if (taskNumber <= 0 || taskNumber > list.getTotalTasks()) {
+            throw new NumberOutOfRangeException();
+        } else {
+            String deleted = (list.getList().get(taskNumber - 1)).toString();
+            list.remove(taskNumber - 1);
+            String header = "Ok, this task has been kicked off your to-do list:\n";
+            String text = header + deleted + "\n" + list.toString() + "\n";
+            return text;
+        }
     }
 
     /**
@@ -166,7 +202,7 @@ public class Ui {
      * @param task Event details.
      * @param date Date of event.
      */
-    public String event(String task, String date) {
+    public String event(String task, String date) throws DateTimeParseException {
         Event event = new Event(task, date, false);
         list.add(event);
         String header = "I've added this task:\n";
@@ -180,7 +216,7 @@ public class Ui {
      * @param task Deadline details.
      * @param date Date of deadline.
      */
-    public String deadline(String task, String date) {
+    public String deadline(String task, String date) throws DateTimeParseException {
         Deadline deadline = new Deadline(task, date, false);
         list.add(deadline);
         String header = "I've added this task:\n";

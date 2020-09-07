@@ -1,3 +1,5 @@
+package task;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
@@ -7,7 +9,7 @@ import java.time.format.DateTimeFormatter;
  * * and the due date.
  */
 public class Deadline extends Task {
-    protected String date;
+    private String date;
     private LocalDate localDate;
 
     /**
@@ -21,6 +23,10 @@ public class Deadline extends Task {
         super(task, isCompleted);
         this.date = date;
         localDate = LocalDate.parse(date);
+    }
+
+    public String getDate() {
+        return date;
     }
 
     /**

@@ -1,3 +1,5 @@
+package exception;
+
 /**
  * Inherits from the DukeException class and is thrown
  * when the command "done" or "delete" is used without
