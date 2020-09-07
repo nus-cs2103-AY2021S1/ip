@@ -57,7 +57,7 @@ test {
 //}
 
 application {
-    mainClassName = "sparrow.Sparrow"
+    mainClassName = "Launcher"
 }
 
 shadowJar {
