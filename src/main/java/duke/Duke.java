@@ -45,7 +45,8 @@ public class Duke {
             if (response.equals(ui.goodbye(true))) {
                 new Timer().schedule(new TimerTask() {
                     public void run () {
-                        Platform.exit(); }
+                        Platform.exit();
+                        System.exit(0); }
                 }, 2000);
             }
             return response;
