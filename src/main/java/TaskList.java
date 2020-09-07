@@ -2,6 +2,7 @@ import javax.lang.model.type.ArrayType;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 public class TaskList {
@@ -46,10 +47,8 @@ public class TaskList {
                         break;
                 }
             }
-            return returnTaskList;
-        } else {
-            return returnTaskList;
         }
+        return returnTaskList;
     }
 
     public static TaskList copy(TaskList copiedTaskList) {
@@ -110,5 +109,17 @@ public class TaskList {
             if (task.getDescription().contains(searchString)) returnArrayList.add(task);
         }
         return returnArrayList;
+    }
+
+    public String printTaskList() {
+        String returnString = "";
+        int counter = 0;
+        Iterator<Task> taskIterator = this.taskList.iterator();
+        while (taskIterator.hasNext()) {
+            Task thisTask = taskIterator.next();
+            returnString += "\n" + (counter + 1) + ". " + thisTask.toString();
+            counter++;
+        }
+        return returnString;
     }
 }

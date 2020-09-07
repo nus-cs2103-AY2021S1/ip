@@ -1,18 +1,6 @@
 import java.io.IOException;
 import java.util.Iterator;
-import java.util.Scanner;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
+
 
 public class Duke {
     private final Storage storage;
@@ -27,27 +15,13 @@ public class Duke {
         this.ui = new Ui();
     }
 
-    public Duke(Storage storage, Parser parser, Ui ui) {
-        this.storage = storage;
-        this.parser = parser;
-        this.ui = ui;
-    }
-
-    public static void main(String[] args) throws IOException {
-        Storage dukeStorage = Storage.initialiseStorage();
-        dukeStorage.loadFromDisk();
-        Duke duke = new Duke(dukeStorage, new Parser(), new Ui());
-
-        duke.ui.showWelcomeMessage();
-    }
-
     private String response(String userInput, TaskList taskList) throws DukeException, IOException {
         if (userInput.equals("bye")) {
             return ui.showByeMessage();
         } else if (userInput.equals("list")) {
             return ui.showList(returnList());
         } else if (userInput.startsWith("todo") || userInput.startsWith("deadline") || userInput.startsWith("event")) {
-            Task thisTask = parser.processAddTaskInput(userInput, taskList, ui);
+            Task thisTask = parser.processAddTaskInput(userInput);
             taskList.addTask(thisTask);
             storage.saveToDisk();
             return ui.showAddTaskMessage(thisTask, taskList);
@@ -64,15 +38,7 @@ public class Duke {
      * @return list view of all tasks
      */
     public String returnList() {
-        String returnString = "";
-        int counter = 0;
-        Iterator<Task> taskIterator = storage.taskList.getList().iterator();
-        while (taskIterator.hasNext()) {
-            Task thisTask = taskIterator.next();
-            returnString += "\n" + (counter + 1) + ". " + thisTask.toString();
-            counter++;
-        }
-        return returnString;
+        return storage.taskList.printTaskList();
     }
 
     /**

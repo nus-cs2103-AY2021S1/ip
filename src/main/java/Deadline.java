@@ -4,37 +4,36 @@ import java.time.LocalTime;
 import java.util.Scanner;
 
 public class Deadline extends Task {
-    //dealing with dates
     LocalDate deadlineDate;
     LocalTime deadlineTime;
 
     public Deadline(String description, String deadline) {
         super(description);
-        String[] dateTimeSplit = deadline.split(" ");
-        String[] dateSplit = dateTimeSplit[1].split("/");
-        if (dateSplit[0].length() == 4) {
-            deadlineDate = LocalDate.of(Integer.parseInt(dateSplit[0]), Integer.parseInt(dateSplit[1]), Integer.parseInt(dateSplit[2]));
-        } else {
-            deadlineDate = LocalDate.of(Integer.parseInt(dateSplit[2]), Integer.parseInt(dateSplit[1]), Integer.parseInt(dateSplit[0]));
-        }
-        deadlineTime = LocalTime.of(Integer.parseInt(dateTimeSplit[2].substring(0,2)), Integer.parseInt(dateTimeSplit[2].substring(2)));
+        deadlineDate = processDate(deadline);
+        deadlineTime = processTime(deadline);
     }
 
     public Deadline(String description, String deadline, boolean isDone) {
         super(description);
-        String[] dateTimeSplit = deadline.split(" ");
-        String[] dateSplit = dateTimeSplit[0].split("/");
-
-        if (dateSplit[0].length() == 4) {
-            deadlineDate = LocalDate.of(Integer.parseInt(dateSplit[0]), Integer.parseInt(dateSplit[1]), Integer.parseInt(dateSplit[2]));
-        } else {
-            deadlineDate = LocalDate.of(Integer.parseInt(dateSplit[2]), Integer.parseInt(dateSplit[1]), Integer.parseInt(dateSplit[0]));
-        }
-        deadlineTime = LocalTime.of(Integer.parseInt(dateTimeSplit[1].substring(0,2)), Integer.parseInt(dateTimeSplit[1].substring(2)));
+        deadlineDate = processDate(deadline);
+        deadlineTime = processTime(deadline);
         this.isDone = isDone;
-
     }
 
+    private LocalDate processDate(String deadline) {
+        String[] dateTimeSplit = deadline.split(" ");
+        String[] dateSplit = dateTimeSplit[0].split("/");
+        if (dateSplit[0].length() == 4) {
+            return LocalDate.of(Integer.parseInt(dateSplit[0]), Integer.parseInt(dateSplit[1]), Integer.parseInt(dateSplit[2]));
+        } else {
+            return LocalDate.of(Integer.parseInt(dateSplit[2]), Integer.parseInt(dateSplit[1]), Integer.parseInt(dateSplit[0]));
+        }
+    }
+
+    private LocalTime processTime(String deadline) {
+        String[] dateTimeSplit = deadline.split(" ");
+        return LocalTime.of(Integer.parseInt(dateTimeSplit[1].substring(0,2)), Integer.parseInt(dateTimeSplit[1].substring(2)));
+    }
 
     @Override
     public String getDescription() {

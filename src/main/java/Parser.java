@@ -5,37 +5,32 @@ public class Parser {
     /**
      * Returns appropriate task after processing userInput. Calls on ui to give user a response
      * @param userInput
-     * @param taskList
-     * @param ui
      * @return Task to be used by Duke instance
      * @throws ToDoException
      * @throws deadlineException
      * @throws eventException
      */
-    public Task processAddTaskInput(String userInput, TaskList taskList, Ui ui) throws ToDoException, deadlineException, eventException {
+    public Task processAddTaskInput(String userInput) throws DukeException {
         String taskType = userInput.split(" ")[0];
         Task thisTask = null;
         switch (taskType) {
             case "todo":
                 if (userInput.equals("todo")) throw new ToDoException();
                 thisTask = new Task(userInput.replace("todo ", ""));
-                ui.showToDoMessage(thisTask, taskList);
                 return thisTask;
             case "deadline":
-                if (userInput.equals("deadline")) {
-                    throw new deadlineException();
-                }
+                if (userInput.equals("deadline")) throw new deadlineException();
                 String[] StringArr = userInput.split(" /by");
                 thisTask = new Deadline(StringArr[0].replace("deadline ", ""), StringArr[1]);
-                ui.showDeadlineMessage(thisTask, taskList);
                 return thisTask;
             case "event":
                 if (userInput.equals("event")) throw new eventException();
                 StringArr = userInput.split(" /at");
                 thisTask = new Event(StringArr[0].replace("event ", ""), StringArr[1]);
-                ui.showEventMessage(thisTask, taskList);
+                return thisTask;
+            default:
+                throw new DukeException();
         }
-        return thisTask;
     }
 
     /**
