@@ -111,6 +111,35 @@ public class Deadline extends Task {
     }
 
     /**
+     * Checks if the time provided is within an hour of tasks
+     * in the list.
+     *
+     * @param time time that is being searched for in the list.
+     * @return true or false if time is within an hour of tasks
+     * list or not.
+     * @throws DukeException if description provided does not match format of time.
+     */
+    public boolean isWithinAnHour(LocalTime time) {
+        assert dateorTime != null;
+        String[] descriptions = dateorTime.split(" ");
+        for (int i = 0; i < descriptions.length; i++) {
+            LocalTime t1 = time;
+            LocalTime t2 = null;
+            try {
+                t2 = LocalTime.parse(descriptions[i]);
+                if (t2.getHour() - t1.getHour() <= 1 && t2.getHour() - t1.getHour() >= -1) {
+                    return true;
+                } else {
+                    continue;
+                }
+            } catch (DateTimeParseException e) {
+                continue;
+            }
+        }
+        return false;
+    }
+
+    /**
      * Prints out the task in correct format.
      *
      * @return task in the form of a string.

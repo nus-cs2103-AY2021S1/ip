@@ -13,7 +13,7 @@ import duke.tasks.TaskList;
 /**
  * Command to find tasks by date.
  */
-public class DateCommand extends Command {
+public class ScheduleCommand extends Command {
     private String description;
 
     /**
@@ -21,7 +21,7 @@ public class DateCommand extends Command {
      *
      * @param description date being searched
      */
-    public DateCommand(String description) {
+    public ScheduleCommand(String description) {
         this.description = description;
     }
 
@@ -37,7 +37,8 @@ public class DateCommand extends Command {
         assert storage != null : "Storage cannot be null.";
         assert description != null : "Description cannot be null.";
         boolean dateExists = false;
-        String response = "";
+        int position = 1;
+        String response = "Tasks on " + description + "\n";
         LocalDate dateSearched;
         try {
             dateSearched = LocalDate.parse(description);
@@ -47,13 +48,15 @@ public class DateCommand extends Command {
         for (Task i : tasklist.getList()) {
             if (i instanceof Deadline) {
                 if (((Deadline) i).isSameDate(dateSearched)) {
-                    response += i.toString() + "\n";
+                    response += "Task " + position + ". " + i.toString() + "\n";
                     dateExists = true;
+                    position++;
                 }
             } else if (i instanceof Event) {
                 if (((Event) i).isSameDate(dateSearched)) {
-                    response += i.toString() + "\n";;
+                    response += "Task " + position + ". " + i.toString() + "\n";;
                     dateExists = true;
+                    position++;
                 }
             }
         }
@@ -63,3 +66,4 @@ public class DateCommand extends Command {
         return response;
     }
 }
+

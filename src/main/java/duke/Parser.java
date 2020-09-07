@@ -4,11 +4,11 @@ import duke.commands.AddCommand;
 import duke.commands.ByeCommand;
 import duke.commands.Command;
 import duke.commands.Commands;
-import duke.commands.DateCommand;
 import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
+import duke.commands.ScheduleCommand;
 import duke.commands.TimeCommand;
 
 /**
@@ -73,11 +73,11 @@ public class Parser {
                         + "only have one space between 'delete' and the task number.");
             }
             return new DeleteCommand(description.split(" ")[1]);
-        } else if (description.startsWith("date")) {
+        } else if (description.startsWith("schedule")) {
             if (invalidSearchOrDelete || !hasDescription) {
                 throw new DukeException(("you need to input a legit date for e.g: 29-01-19, no more and no less."));
             }
-            return new DateCommand(description.substring(5));
+            return new ScheduleCommand(description.substring(9));
         } else if (description.startsWith("find")) {
             if (invalidSearchOrDelete || !hasDescription) {
                 throw new DukeException(("you need to input something to find."));
@@ -92,8 +92,8 @@ public class Parser {
             return new ByeCommand();
         } else {
             throw new DukeException("type in 'todo', 'deadline', 'event' to start!\n"
-                    + "Also, type 'date' and key in a date in YYYY-MM-DD format "
-                    + "to search for events/deadlines happening on that date!\n"
+                    + "Also, type 'schedule' and key in a date in YYYY-MM-DD format "
+                    + "to view schedule on that date!\n"
                     + " Or type 'time' and key in time in HH:mm format "
                     + "to search for events/deadline happening on that time!");
         }

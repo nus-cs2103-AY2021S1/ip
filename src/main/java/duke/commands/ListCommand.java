@@ -25,11 +25,10 @@ public class ListCommand extends Command {
         assert storage != null : "Storage cannot be null.";
         if (tasklist.getSize() == 0) {
             throw new DukeException("there's nothing on the list yet.");
-        } else {
-            return IntStream.range(0, tasklist.getSize())
-                    .mapToObj(index -> String.format("%d . %s", index + 1, tasklist.get(index)))
-                    .collect(Collectors.joining("\n"))
-                    .trim();
         }
+        return IntStream.range(0, tasklist.getSize())
+                .mapToObj(index -> String.format("%d . %s", index + 1, tasklist.get(index)))
+                .collect(Collectors.joining("\n"))
+                .trim();
     }
 }
