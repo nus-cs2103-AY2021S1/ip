@@ -19,6 +19,8 @@ public class InvalidInputCommand extends Command {
      */
     @Override
     public String[] execute(Storage storage, TaskList tasks, Ui ui) {
+        assert ui != null;
+
         return ui.getInvalidInputStrings();
     }
 }

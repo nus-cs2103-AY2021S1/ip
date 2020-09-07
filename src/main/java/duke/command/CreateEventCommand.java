@@ -45,6 +45,10 @@ public class CreateEventCommand extends Command {
      */
     @Override
     public String[] execute(Storage storage, TaskList tasks, Ui ui) {
+        assert storage != null;
+        assert tasks != null;
+        assert ui != null;
+
         Event newEvent = tasks.addEvent(description, isComplete, date);
         return ui.getCreateTaskStrings(tasks, newEvent);
     }

@@ -32,6 +32,9 @@ public class TaskList {
      * @return Created deadline
      */
     public Deadline addDeadline(String description, boolean isComplete, LocalDate date) {
+        assert description != null;
+        assert date != null;
+
         Deadline deadline = new Deadline(description, isComplete, date);
         taskArrayList.add(deadline);
         return deadline;
@@ -45,6 +48,9 @@ public class TaskList {
      * @param date Date of the event
      */
     public Event addEvent(String description, boolean isComplete, LocalDate date) {
+        assert description != null;
+        assert date != null;
+
         Event event = new Event(description, isComplete, date);
         taskArrayList.add(event);
         return event;
@@ -58,6 +64,8 @@ public class TaskList {
      * @return Created todo
      */
     public ToDo addTodo(String description, boolean isComplete) {
+        assert description != null;
+
         ToDo todo = new ToDo(description, isComplete);
         taskArrayList.add(todo);
         return todo;
@@ -131,6 +139,8 @@ public class TaskList {
      * @return Sublist of tasks
      */
     public Task[] getSublistContainingKeyword(String keyword) {
+        assert keyword != null;
+
         ArrayList<Task> tasksContainingKeyword = new ArrayList<>();
         for (Task task : taskArrayList) {
             if (task.hasKeyword(keyword)) {

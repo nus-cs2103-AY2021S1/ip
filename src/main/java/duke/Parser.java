@@ -31,6 +31,7 @@ class Parser {
      * @return Command corresponding to the input
      */
     static Command parse(String input) {
+        assert input != null;
 
         // Parses initial input into prefix and body
         String[] parsedCommand = input.split(" ", 2);
@@ -71,6 +72,8 @@ class Parser {
      * @throws NumberFormatException Exception thrown if the string cannot be parsed into integers
      */
     static LocalDate genDate(String input) throws NumberFormatException {
+        assert input != null;
+
         String[] strings = input.split(Parser.DATE_SEPARATOR, 3);
         int[] ints = new int[3];
         for(int i = 0; i < 3; i++) {

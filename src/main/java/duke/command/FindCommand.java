@@ -32,6 +32,9 @@ public class FindCommand extends Command {
      */
     @Override
     public String[] execute(Storage storage, TaskList tasks, Ui ui) {
+        assert tasks != null;
+        assert ui != null;
+
         Task[] sublist = tasks.getSublistContainingKeyword(keyword);
         return ui.getTasksWithKeywordStrings(sublist);
     }

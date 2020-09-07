@@ -32,6 +32,10 @@ public class CompleteTaskCommand extends Command {
      */
     @Override
     public String[] execute(Storage storage, TaskList tasks, Ui ui) {
+        assert storage != null;
+        assert tasks != null;
+        assert ui != null;
+
         Task task = tasks.completeTaskAt(taskIndex);
         if (task == null) {
             return ui.getInvalidTaskIndexStrings();

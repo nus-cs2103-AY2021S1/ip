@@ -37,6 +37,10 @@ public class CreateTodoCommand extends Command {
      */
     @Override
     public String[] execute(Storage storage, TaskList tasks, Ui ui) {
+        assert storage != null;
+        assert tasks != null;
+        assert ui != null;
+
         ToDo newTodo = tasks.addTodo(description, isComplete);
         return ui.getCreateTaskStrings(tasks, newTodo);
     }

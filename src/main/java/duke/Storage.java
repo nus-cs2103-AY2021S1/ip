@@ -37,6 +37,9 @@ public class Storage {
      * @param strings Input strings read from the file
      */
     void addTaskFromData(TaskList tasks, String[] strings) {
+        assert tasks != null;
+        assert strings != null;
+
         if (strings.length == 0) {
             return;
         }
@@ -92,6 +95,7 @@ public class Storage {
      * @param taskList Task list to be saved
      */
     public void saveTaskList(TaskList taskList) {
+        assert taskList != null;
         try {
             FileWriter csvWriter = new FileWriter(FILE);
             for (int i = 0; i < taskList.getNumOfTasks(); i++) {

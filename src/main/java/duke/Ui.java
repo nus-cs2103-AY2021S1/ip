@@ -57,6 +57,7 @@ public class Ui {
      * tasks if the list is not empty
      */
     private String getNumOfTasksString(TaskList tasks) {
+        assert tasks != null;
         int numOfTasks = tasks.getNumOfTasks();
         if (numOfTasks == 0) {
             return ZERO_TASK_MESSAGE;
@@ -72,6 +73,7 @@ public class Ui {
      * @return Output strings upon completing a task
      */
     public String[] getCompleteTaskStrings(Task task) {
+        assert task != null;
         String[] strings = new String[] {COMPLETE_TASK_MESSAGE, task.toString()};
         return strings;
     }
@@ -84,6 +86,8 @@ public class Ui {
      * @return Output strings upon creating a new task
      */
     public String[] getCreateTaskStrings(TaskList tasks, Task task) {
+        assert tasks != null;
+        assert task != null;
         String[] strings = new String[] {ADD_TASK_MESSAGE, task.toString(), getNumOfTasksString(tasks)};
         return strings;
     }
@@ -96,6 +100,8 @@ public class Ui {
      * @return Output strings upon deleting a task
      */
     public String[] getDeleteTaskStrings(TaskList tasks, Task task) {
+        assert tasks != null;
+        assert task != null;
         String[] strings = new String[] {DELETE_TASK_MESSAGE, task.toString(),getNumOfTasksString(tasks)};
         return strings;
     }
@@ -153,6 +159,7 @@ public class Ui {
      * @return Output string representation of all tasks
      */
     public String[] getTaskListStrings(TaskList tasks) {
+        assert tasks != null;
         if (tasks.isEmpty()) {
             return new String[] {ZERO_TASK_MESSAGE};
         } else {
@@ -172,6 +179,7 @@ public class Ui {
      * @return Output strings upon finding matching tasks
      */
     public String[] getTasksWithKeywordStrings(Task[] tasks) {
+        assert tasks != null;
         String[] strings = new String[tasks.length + 1];
         if (tasks.length == 0) {
             strings[0] = FOUND_ZERO_TASK_MESSAGE;
@@ -190,6 +198,7 @@ public class Ui {
      * @param strings Array of strings to be printed
      */
     public void print(String[] strings) {
+        assert strings != null;
         System.out.println(HORIZONTAL_LINE);
         for(String string : strings) {
             System.out.print(TEXT_INDENTATION);

@@ -45,6 +45,10 @@ public class CreateDeadlineCommand extends Command {
      */
     @Override
     public String[] execute(Storage storage, TaskList tasks, Ui ui) {
+        assert storage != null;
+        assert tasks != null;
+        assert ui != null;
+
         Deadline newDeadline = tasks.addDeadline(description, isComplete, date);
         return ui.getCreateTaskStrings(tasks, newDeadline);
     }

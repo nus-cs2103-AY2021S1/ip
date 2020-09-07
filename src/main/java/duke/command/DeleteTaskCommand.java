@@ -33,6 +33,9 @@ public class DeleteTaskCommand extends Command {
      */
     @Override
     public String[] execute(Storage storage, TaskList tasks, Ui ui) {
+        assert tasks != null;
+        assert ui != null;
+
         Task task = tasks.deleteTaskAt(taskIndex);
         if (task == null) {
             return ui.getInvalidTaskIndexStrings();
