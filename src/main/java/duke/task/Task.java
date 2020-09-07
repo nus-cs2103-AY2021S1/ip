@@ -78,12 +78,10 @@ public class Task {
     public String getDate() {
         String des = this.description;
         if (des.contains("/")) {
-            return des.substring(des.indexOf("/") + 4);
+            return des.substring(des.indexOf('/') + NUM_CHARS_TO_DATE);
         } else {
             throw new AssertionError("This task does not have a date");
         }
-
-        return des.substring(des.indexOf('/') + NUM_CHARS_TO_DATE);
 
     }
 
