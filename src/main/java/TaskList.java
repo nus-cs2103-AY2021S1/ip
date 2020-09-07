@@ -34,7 +34,7 @@ public class TaskList {
   /**
    * Handles the addition of a deadline
    *
-   * @param inputs Userinput split into tokens
+   * @param inputs User input split into tokens
    */
   public String handleDeadline(String[] inputs) {
     String[] tokens = inputs[1].split(" /by ");
@@ -49,7 +49,7 @@ public class TaskList {
   /**
    * Handles the addition of a todo
    *
-   * @param inputs Userinput split into tokens
+   * @param inputs User input split into tokens
    */
   public String handleToDo(String[] inputs) throws DukeException {
     if (inputs.length < 2) {
@@ -82,7 +82,7 @@ public class TaskList {
   /**
    * Deletes a specified task
    *
-   * @param inputs Userinput split into tokens
+   * @param inputs User input split into tokens
    */
   public String handleDelete(String[] inputs) throws DukeException {
     int index = Integer.parseInt(inputs[1]) - 1;

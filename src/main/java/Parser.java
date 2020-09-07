@@ -8,6 +8,7 @@ public class Parser {
    * @param tasks TaskList
    */
   public void parseCommand(String[] inputs, TaskList tasks) {
+    assert(inputs.length > 0) ;
     String command = inputs[0];
     switch (command) {
       case "list":
@@ -53,6 +54,7 @@ public class Parser {
   }
 
   public String parseCommandUi(String[] inputs, TaskList tasks) {
+    assert(inputs.length > 0) ;
     String command = inputs[0];
     switch (command) {
       case "list":
