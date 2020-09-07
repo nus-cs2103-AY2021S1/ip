@@ -10,7 +10,7 @@ public class Ui {
      * Gets chat divider.
      * @return divider line.
      */
-    public String chatDivider() {
+    public String getChatDivider() {
         return "____________________________________________________________\n";
     }
 
@@ -18,7 +18,7 @@ public class Ui {
      * Gets welcome message.
      * @return welcome message from Duke.
      */
-    public String gettWelcomeMessage() {
+    public String getWelcomeMessage() {
         String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -89,7 +89,7 @@ public class Ui {
      * Prints confirmation when all tasks is deleted from the list.
      * @return message for delete all tasks.
      */
-    public String sayDeleteAllTasks() {
+    public String getDeleteAllTasksMessage() {
         return "Noted. I've removed all tasks in the list.\n"
             + "Now you have no task in the list.";
     }

@@ -25,7 +25,7 @@ public class TaskList {
     }
 
     /**
-     * Gets all the task in the list.
+     * Gets all the tasks in the list.
      * @return the tasks in TaskList.
      */
     public ArrayList<Task> getTasks() {

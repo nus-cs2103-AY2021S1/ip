@@ -68,8 +68,9 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + (date != null
-            ? (date.getDayOfWeek() + ", " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")))
-            : at) + ")";
+        String parsedDate = date != null
+            ? date.getDayOfWeek() + ", " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+            : at;
+        return "[E]" + super.toString() + " (at: " + parsedDate + ")";
     }
 }
