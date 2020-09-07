@@ -32,6 +32,10 @@ public class Task {
         return this.description;
     }
 
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     /**
      * Returns the corresponding status icon depending on whether the task is completed.
      * @return A tick if the task is completed and a cross if the task is incomplete.
@@ -47,12 +51,21 @@ public class Task {
         isDone = true;
     }
 
+    public void undo() {
+        this.isDone = false;
+    }
+
     /**
      * Returns the date of the task.
      * @return null for task of type Task that has no date.
      */
     public LocalDate getDate() {
         return null;
+    }
+
+    // return true if set successfully
+    public boolean setDate(LocalDate date) {
+        return false;
     }
 
     @Override

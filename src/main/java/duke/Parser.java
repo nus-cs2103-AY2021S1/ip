@@ -4,14 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.regex.Pattern;
 
-import duke.commands.AddCommand;
-import duke.commands.Command;
-import duke.commands.DateCommand;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.ExitCommand;
-import duke.commands.FindCommand;
-import duke.commands.ListCommand;
+import duke.commands.*;
 import duke.todo.Deadline;
 import duke.todo.Event;
 import duke.todo.Task;
@@ -50,6 +43,8 @@ public class Parser {
                 throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
             } else if (commandWord.equals("event")) {
                 throw new DukeException("OOPS!!! The description of a event cannot be empty.");
+            } else if (commandWord.equals("edit")) {
+                throw new DukeException("Please tell me which task you want to edit");
             } else {
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
@@ -68,6 +63,17 @@ public class Parser {
                 return new DateCommand(time);
             } else if (commandWord.equals("find")) {
                 return new FindCommand(commandBody);
+            } else if (commandWord.equals("edit")) {
+                String parts[] = commandBody.split(" ", 3);
+                int taskNo = Integer.parseInt(parts[0].trim());
+                String type = parts[1].trim();
+                if (parts.length == 2) {
+                    return new UpdateCommand(taskNo, type);
+                } else {
+                    String content = parts[2];
+                    return new UpdateCommand(taskNo, type, content);
+                }
+
             } else {
                 // add command
                 Task newTask = Parser.parseTask(str);

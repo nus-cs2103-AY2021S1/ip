@@ -17,56 +17,72 @@ public class TaskList {
         return this.tasks;
     }
 
-    /**
-     * Lists out all the tasks in the list.
-     * @throws DukeException
-     */
-    public String listTasks() throws DukeException {
-        assert tasks.size() >= 0 : "Number of tasks cannot be negative";
+    private void checkTaskList(int taskNo) throws DukeException {
         if (tasks.size() <= 0) {
             throw new DukeException(Ui.EMPTY_TASK_LIST_MSG);
         }
 
-        String response = Ui.LIST_TASK_MSG + "\n";
-        for (int i = 0; i < tasks.size(); i++) {
-            int taskNo = i + 1;
-            Task task = tasks.get(i);
-            response = response + taskNo + "." + task + "\n";
+        if (taskNo > tasks.size()) {
+            throw new DukeException(Ui.INVALID_TASK_NO_MSG);
         }
-        return response;
+    }
+
+    private void checkTaskList() throws DukeException {
+        if (tasks.size() <= 0) {
+            throw new DukeException(Ui.EMPTY_TASK_LIST_MSG);
+        }
+    }
+    /**
+     * Lists out all the tasks in the list.
+     */
+    public String listTasks() {
+        assert tasks.size() >= 0 : "Number of tasks cannot be negative";
+        try {
+            checkTaskList();
+            String response = Ui.LIST_TASK_MSG + "\n";
+            for (int i = 0; i < tasks.size(); i++) {
+                int taskNo = i + 1;
+                Task task = tasks.get(i);
+                response = response + taskNo + "." + task + "\n";
+            }
+            return response;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
     /**
      * Lists out all the tasks on a specific date.
      * @param date The specific date.
-     * @throws DukeException If there is no task on that day.
      */
-    public String listTasksOn(LocalDate date) throws DukeException {
-        if (tasks.size() <= 0) {
-            throw new DukeException(Ui.EMPTY_TASK_LIST_MSG);
-        }
-        ArrayList<Task> taskList = new ArrayList<>();
-        for (Task task: tasks) {
-            LocalDate taskDate = task.getDate();
-            if (taskDate != null) {
-                if (taskDate.isEqual(date)) {
-                    taskList.add(task);
+    public String listTasksOn(LocalDate date) {
+        try {
+            checkTaskList();
+            ArrayList<Task> taskList = new ArrayList<>();
+            for (Task task : tasks) {
+                LocalDate taskDate = task.getDate();
+                if (taskDate != null) {
+                    if (taskDate.isEqual(date)) {
+                        taskList.add(task);
+                    }
                 }
             }
-        }
 
-        String response;
-        if (taskList.size() > 0) {
-            response = "Here are the tasks happening on: " + date.format(formatter) + "\n";
-            for (int i = 0; i < taskList.size(); i++) {
-                int taskNo = i + 1;
-                Task task = taskList.get(i);
-                response = response + taskNo + "." + task + "\n";
+            String response;
+            if (taskList.size() > 0) {
+                response = "Here are the tasks happening on: " + date.format(formatter) + "\n";
+                for (int i = 0; i < taskList.size(); i++) {
+                    int taskNo = i + 1;
+                    Task task = taskList.get(i);
+                    response = response + taskNo + "." + task + "\n";
+                }
+            } else {
+                response = "You don't have anything on: " + date.format(formatter) + " :)))\n";
             }
-        } else {
-            response = "You don't have anything on: " + date.format(formatter) + " :)))\n";
+            return response;
+        } catch (DukeException e) {
+            return e.getMessage();
         }
-        return response;
     }
 
     /**
@@ -75,13 +91,17 @@ public class TaskList {
      */
     public String doneTask(int taskNo) {
         assert taskNo >= 0: "taskNo cannot be negative";
-        Task completedTask = tasks.get(taskNo - 1);
-        completedTask.markAsDone();
-        String response = Ui.DONE_MSG + "\n"
-                + " " + " "
-                + "[" + completedTask.getStatusIcon() + "] "
-                + completedTask.getDescription() + "\n";
-        return response;
+        try {
+            checkTaskList(taskNo);
+            Task completedTask = tasks.get(taskNo - 1);
+            completedTask.markAsDone();
+            String response = Ui.DONE_MSG + "\n"
+                    + " " + " "
+                    + completedTask + "\n";
+            return response;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 
     /**
@@ -100,56 +120,111 @@ public class TaskList {
     /**
      * Deletes a task on the task list.
      * @param taskNo The task number of the to be deleted task on the list.
-     * @throws DukeException If there is nothing to delete and the task number exceeds total number of tasks.
      */
-    public String deleteTask(int taskNo) throws DukeException {
+    public String deleteTask(int taskNo) {
         assert taskNo >= 0: "taskNo cannot be negative";
-        if (tasks.size() <= 0) {
-            throw new DukeException("Nothing to delete.");
-        } else if (taskNo > tasks.size()) {
-            throw new DukeException(Ui.INVALID_TASK_NO_MSG);
-        } else {
-            String response;
-            Task taskToBeDeleted = tasks.get(taskNo - 1);
-            tasks.remove(taskNo - 1);
-            response = Ui.DELETE_MSG + "\n"
-                    + " " + " "
-                    + "[" + taskToBeDeleted.getStatusIcon() + "] "
-                    + taskToBeDeleted.getDescription() + "\n"
-                    + "Now you have " + tasks.size() + " tasks in the list.\n";
-            return response;
+        try {
+            checkTaskList(taskNo);
+            if (tasks.size() <= 0) {
+                throw new DukeException("Nothing to delete.");
+            } else if (taskNo > tasks.size()) {
+                throw new DukeException(Ui.INVALID_TASK_NO_MSG);
+            } else {
+                String response;
+                Task taskToBeDeleted = tasks.get(taskNo - 1);
+                tasks.remove(taskNo - 1);
+                response = Ui.DELETE_MSG + "\n"
+                        + " " + " "
+                        + taskToBeDeleted + "\n"
+                        + "Now you have " + tasks.size() + " tasks in the list.\n";
+                return response;
+            }
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 
     /**
      * Searches tasks that match the keyword.
      * @param keyword The keyword provided by the user.
-     * @throws DukeException
      */
-    public String searchKeyword(String keyword) throws DukeException {
+    public String searchKeyword(String keyword) {
         assert keyword != "": "keyword cannot be empty";
-        if (tasks.size() <= 0) {
-            throw new DukeException(Ui.EMPTY_TASK_LIST_MSG);
-        }
-
-        ArrayList<Task> taskList = new ArrayList<>();
-        for (Task task: tasks) {
-            if (task.getDescription().contains(keyword)) {
-                taskList.add(task);
+        try {
+            checkTaskList();
+            ArrayList<Task> taskList = new ArrayList<>();
+            for (Task task : tasks) {
+                if (task.getDescription().contains(keyword)) {
+                    taskList.add(task);
+                }
             }
-        }
 
-        String response;
-        if (taskList.size() > 0) {
-            response = "Here are the matching tasks in your list:\n";
-            for (int i = 0; i < taskList.size(); i++) {
-                int taskNo = i + 1;
-                Task task = taskList.get(i);
-                response = response + taskNo + "." + task + "\n";
+            String response;
+            if (taskList.size() > 0) {
+                response = "Here are the matching tasks in your list:\n";
+                for (int i = 0; i < taskList.size(); i++) {
+                    int taskNo = i + 1;
+                    Task task = taskList.get(i);
+                    response = response + taskNo + "." + task + "\n";
+                }
+            } else {
+                response = "You don't have anything related to " + "\"" + keyword + "\"" + "\n";
             }
-        } else {
-            response = "You don't have anything related to " + "\"" + keyword + "\"" + "\n";
+            return response;
+        } catch (DukeException e) {
+            return e.getMessage();
         }
-        return response;
+    }
+
+    public String updateDate(int taskNo, LocalDate date) {
+        assert taskNo >= 0 : "taskNo cannot be negative";
+        try {
+            checkTaskList(taskNo);
+            String response;
+            Task taskToBeUpdated = tasks.get(taskNo - 1);
+            boolean flag = taskToBeUpdated.setDate(date);
+            if (flag) {
+                response = "Date is updated successfully" + "\n"
+                        + " " + " "
+                        + taskToBeUpdated + "\n";
+            } else {
+                response = "Update is unsuccessful T.T. Todo tasks have no date";
+            }
+            return response;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
+    public String updateTaskDescription(int taskNo, String content) {
+        assert taskNo >= 0 : "taskNo cannot be negative";
+        try {
+            checkTaskList(taskNo);
+            String response;
+            Task taskToBeUpdated = tasks.get(taskNo - 1);
+            taskToBeUpdated.setDescription(content);
+            response = "Description is updated successfully" + "\n"
+                    + " " + " "
+                    + taskToBeUpdated + "\n";
+            return response;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
+    public String undoTask(int taskNo) {
+        assert taskNo >= 0 : "taskNo cannot be negative";
+        try {
+            checkTaskList(taskNo);
+            String response;
+            Task taskToBeUpdated = tasks.get(taskNo - 1);
+            taskToBeUpdated.undo();
+            response = "The following task is marked as undone:" + "\n"
+                    + " " + " "
+                    + taskToBeUpdated + "\n";
+            return response;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }

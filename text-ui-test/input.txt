@@ -11,3 +11,6 @@ todo exercise
 deadline LCC essay /by 2020/09/24
 event judo competition /at 2020-11-23
 date 2020-09-24
+edit 1 date 2020-12-15
+edit 1 task borrow books
+edit 1 undo

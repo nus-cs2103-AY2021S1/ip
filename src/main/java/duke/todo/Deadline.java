@@ -40,6 +40,12 @@ public class Deadline extends Task {
     }
 
     @Override
+    public boolean setDate(LocalDate date) {
+        this.by = date;
+        return true;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }

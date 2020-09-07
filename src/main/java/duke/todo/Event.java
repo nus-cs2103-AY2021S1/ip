@@ -40,6 +40,12 @@ public class Event extends Task {
     }
 
     @Override
+    public boolean setDate(LocalDate date) {
+        this.at = date;
+        return true;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }

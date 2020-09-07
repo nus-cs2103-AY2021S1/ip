@@ -38,7 +38,7 @@ public class Storage {
 //                System.out.println("A data file has been created for you");
             } else {
                 // file exist
-                savedFiles = "Here are your existing tasks";
+                savedFiles = "Here are your existing tasks\n";
 //                System.out.println("Here are your existing tasks");
                 Scanner s = new Scanner(f);
                 while (s.hasNext()) {
