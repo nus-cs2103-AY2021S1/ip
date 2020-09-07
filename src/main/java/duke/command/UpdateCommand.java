@@ -49,7 +49,7 @@ public class UpdateCommand extends Command {
         tasks.updateTask(taskId, updatedTask);
         storage.updateExistingTask(taskId, updatedTask);
 
-        return String.format("Noted. I've updated the task.\nHere's your updated task list:\n%s\n.",
-                tasks);
+        return String.format("Noted. I've updated the task.\n\nHere's your updated task "
+                + "list:\n%s\n", tasks);
     }
 }
