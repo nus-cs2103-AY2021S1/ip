@@ -16,14 +16,13 @@ import duke.operation.DeleteOperation;
 import duke.operation.DoneOperation;
 import duke.operation.ExitOperation;
 import duke.operation.FindOperation;
+import duke.operation.ListOperation;
 import duke.operation.Operation;
 import duke.operation.addexpenseoperation.AddPayableOperation;
 import duke.operation.addexpenseoperation.AddReceivableOperation;
 import duke.operation.addtaskoperation.AddDeadlineTaskOperation;
 import duke.operation.addtaskoperation.AddEventTaskOperation;
 import duke.operation.addtaskoperation.AddTodoTaskOperation;
-import duke.operation.listoperation.ListExpenseOperation;
-import duke.operation.listoperation.ListTaskOperation;
 import duke.storage.StorageManager;
 import duke.task.Todo;
 
@@ -59,11 +58,11 @@ public class CommandParserTest {
 
         command = "list task";
         operation = commandParser.parse(command, listManager, storageManager);
-        assertTrue(operation instanceof ListTaskOperation);
+        assertTrue(operation instanceof ListOperation);
 
         command = "list expense";
         operation = commandParser.parse(command, listManager, storageManager);
-        assertTrue(operation instanceof ListExpenseOperation);
+        assertTrue(operation instanceof ListOperation);
 
         command = "find task book";
         operation = commandParser.parse(command, listManager, storageManager);

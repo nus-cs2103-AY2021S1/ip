@@ -12,15 +12,13 @@ import duke.operation.DeleteOperation;
 import duke.operation.DoneOperation;
 import duke.operation.ExitOperation;
 import duke.operation.FindOperation;
+import duke.operation.ListOperation;
 import duke.operation.Operation;
 import duke.operation.addexpenseoperation.AddPayableOperation;
 import duke.operation.addexpenseoperation.AddReceivableOperation;
 import duke.operation.addtaskoperation.AddDeadlineTaskOperation;
 import duke.operation.addtaskoperation.AddEventTaskOperation;
 import duke.operation.addtaskoperation.AddTodoTaskOperation;
-import duke.operation.listoperation.ListExpenseOperation;
-import duke.operation.listoperation.ListOperation;
-import duke.operation.listoperation.ListTaskOperation;
 import duke.storage.StorageManager;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -44,9 +42,9 @@ public class CommandParser {
                     "Ensure either 'task' or 'expense' is input after 'list'.");
         }
         if (commands[1].equals(TASK)) {
-            return new ListTaskOperation(listManager.getTaskList());
+            return new ListOperation(listManager.getTaskList());
         } else if (commands[1].equals(EXPENSE)) {
-            return new ListExpenseOperation(listManager.getExpenseList());
+            return new ListOperation(listManager.getExpenseList());
         } else {
             throw new DukeParseException(
                     "Ensure either 'task' or 'expense' is spelled correctly.");

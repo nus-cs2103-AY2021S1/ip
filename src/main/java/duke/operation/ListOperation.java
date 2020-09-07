@@ -1,17 +1,20 @@
-package duke.operation.listoperation;
+package duke.operation;
 
 import duke.list.StorableList;
-import duke.operation.Operation;
 import duke.result.Result;
 
-public abstract class ListOperation extends Operation {
+/** Represents the list <code>Operation</code>. */
+public class ListOperation extends Operation {
     protected final StorableList list;
 
+    /**
+     * Constructor method.
+     *
+     * @param list the list to be displayed.
+     */
     public ListOperation(StorableList list) {
         this.list = list;
     }
-
-    protected abstract String getMessage();
 
     /**
      * Executes the operation by retrieving all <code>Tasks</code> in <code>TaskList</code>.
@@ -20,6 +23,7 @@ public abstract class ListOperation extends Operation {
      */
     @Override
     public Result execute() {
-        return new Result(true, getMessage(), this.isExit());
+        String msg = "Here is what I have found:\n" + list.toString();
+        return new Result(true, msg, this.isExit());
     }
 }
