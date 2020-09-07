@@ -28,6 +28,7 @@ public class Duke {
     
     /**
      * Creates Duke object.
+     * 
      * @param filePath Pathname of the file that stores tasks.
      */
     public Duke(String filePath) {
@@ -54,6 +55,7 @@ public class Duke {
 
     /**
      * Gets list of tasks.
+     * 
      * @return List of tasks.
      */
     public TaskList getTasks() {
@@ -62,6 +64,7 @@ public class Duke {
 
     /**
      * Gets storage.
+     * 
      * @return Storage of Duke.
      */
     public Storage getStorage() {
@@ -70,6 +73,7 @@ public class Duke {
 
     /**
      * Gets parser.
+     * 
      * @return Parser of Duke.
      */
     public Parser getParser() {
@@ -78,6 +82,7 @@ public class Duke {
 
     /**
      * Gets Ui.
+     * 
      * @return Ui of Duke.
      */
     public Ui getUi() {

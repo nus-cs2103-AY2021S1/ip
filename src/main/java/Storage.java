@@ -14,6 +14,7 @@ public class Storage {
 
     /**
      * Creates a Storage object.
+     * 
      * @param filePath Pathname of the file that stores tasks.
      */
     public Storage(String filePath) {
@@ -22,6 +23,7 @@ public class Storage {
 
     /**
      * Loads file from hard disk when Duke bot is started.
+     * 
      * @return List of tasks.
      * @throws IOException Input error.
      */
@@ -58,6 +60,7 @@ public class Storage {
 
     /**
      * Save the tasks in the hard disk automatically whenever the task list changes.
+     * 
      * @param tasks List of tasks.
      * @throws IOException Input error.
      */
