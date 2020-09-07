@@ -10,10 +10,7 @@ import java.util.List;
 
 import duke.exceptions.PathNoFoundException;
 import duke.tasklist.TaskList;
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
+import duke.tasks.*;
 
 public class Storage {
     private final String filePath;
@@ -48,6 +45,14 @@ public class Storage {
                 LocalDate timeInLocalDate = LocalDate.parse(time);
                 Event newEvent = new Event(title, complete, timeInLocalDate);
                 tasks.add(newEvent);
+                break;
+            case "P":
+                String start = info[3];
+                String end = info[4];
+                LocalDate startInLocalDate = LocalDate.parse(start);
+                LocalDate endLocalDate = LocalDate.parse(end);
+                PeriodTask periodTask = new PeriodTask(title, complete, startInLocalDate, endLocalDate);
+                tasks.add(periodTask);
                 break;
             default:
                 throw new AssertionError(type);
