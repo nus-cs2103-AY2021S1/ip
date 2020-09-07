@@ -9,18 +9,18 @@ class ActionTypeTest {
     @Test
     void valueOfDeleteType() {
         ActionType todoType = ActionType.valueOfType("delete");
-        assertEquals(todoType, ActionType.DELETE);
+        assertEquals(ActionType.DELETE, todoType);
     }
 
     @Test
     void valueOfDoneType() {
        ActionType doneType = ActionType.valueOfType("done");
-        assertEquals(doneType, ActionType.DONE);
+        assertEquals(ActionType.DONE, doneType);
    }
 
     @Test
     void valueOfFindType() {
         ActionType findType = ActionType.valueOfType("find");
-        assertEquals(findType, ActionType.FIND);
+        assertEquals(ActionType.FIND, findType);
     }
 }

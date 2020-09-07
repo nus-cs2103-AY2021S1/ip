@@ -11,7 +11,7 @@ class TaskListTest {
     void getTasks() {
         TaskList list = new TaskList();
         list.addTask("test content", "todo");
-        assertEquals(list.getTasks().get(0).toString(), "[T][✗] test content");
+        assertEquals("[T][✗] test content", list.getTasks().get(0).toString());
     }
 
     @Test
@@ -48,7 +48,7 @@ class TaskListTest {
                 "    [D][✗] test content2 (by: Aug 23 2020)\n" +
                 "Now you have 2 tasks in the list.\n";
         assertEquals(expectedOut, actual);
-        assertEquals(list.getTasks().size(), 2);
+        assertEquals(2, list.getTasks().size());
     }
 
     @Test
@@ -74,7 +74,7 @@ class TaskListTest {
             list.deleteTask(1);
             fail();
         } catch (DukeException e) {
-            assertEquals(e.getMessage(), "☹ OOPS!!! Seems the index you provided is not in the list.");
+            assertEquals("☹ OOPS!!! Seems the index you provided is not in the list.", e.getMessage());
         }
     }
 

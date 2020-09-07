@@ -13,8 +13,8 @@ class ParserTest {
         try {
             String commandLine1 = "todo borrow book";
             String[] split = parser.extractAction(commandLine1);
-            assertEquals(split[0], "todo");
-            assertEquals(split[1], "borrow book");
+            assertEquals("todo", split[0]);
+            assertEquals("borrow book", split[1]);
         } catch (DukeException e) {
             fail();
         }
@@ -27,7 +27,7 @@ class ParserTest {
             parser.extractAction(commandLine);
             fail();
         } catch (DukeException e) {
-            assertEquals(e.getMessage(), "☹ OOPS!!! The command cannot be empty!");
+            assertEquals("☹ OOPS!!! The command cannot be empty!", e.getMessage());
         }
     }
 
@@ -38,7 +38,7 @@ class ParserTest {
             parser.extractAction(command);
             fail();
         } catch (DukeException e) {
-            assertEquals(e.getMessage(), "☹ OOPS!!! Check if you have spelled correctly!");
+            assertEquals("☹ OOPS!!! Check if you have spelled correctly!", e.getMessage());
         }
     }
 
@@ -74,7 +74,7 @@ class ParserTest {
             parser.extractDate(command);
             fail();
         } catch (DukeException e) {
-            assertEquals(e.getMessage(), "☹ OOPS!!! Seems you forgot to supply the main content!");
+            assertEquals("☹ OOPS!!! Seems you forgot to supply the main content!", e.getMessage());
         }
     }
 
@@ -85,8 +85,8 @@ class ParserTest {
             parser.extractDate(command);
             fail();
         } catch (DukeException e) {
-            assertEquals(e.getMessage(), "☹ OOPS!!! The format for your date is incorrect."
-                    + " Use yyyy-MM-dd format instead");
+            assertEquals("☹ OOPS!!! The format for your date is incorrect."
+                    + " Use yyyy-MM-dd format instead", e.getMessage());
         }
     }
 }
