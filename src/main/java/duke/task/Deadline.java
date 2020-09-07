@@ -2,7 +2,6 @@ package duke.task;
 
 import java.time.LocalDateTime;
 
-import duke.Duke;
 import duke.DukeException;
 import duke.InvalidSaveException;
 import duke.datetime.DateTimeHandler;
@@ -24,8 +23,9 @@ public class Deadline extends Task {
 
     /**
      * Creates a new Deadline object from the full deadline description that includes the deadline.
-     * @param taskDescription description of the Deadline object with both the task and the deadline
-     * @throws DukeException if the string provided to create the deadline is invalid
+     *
+     * @param taskDescription description of the Deadline object with both the task and the deadline.
+     * @throws DukeException if the string provided to create the deadline is invalid.
      */
     public Deadline(String taskDescription) throws DukeException {
         super(taskDescription.split(SPLITTER)[0]);
@@ -39,10 +39,11 @@ public class Deadline extends Task {
     }
 
     /**
-     * Creates a new Deadline object by manually inputting t
-     * @param deadlineDescription description of the task only
-     * @param deadline string description of the deadline
-     * @throws DukeException if the deadline provided has an invalid datetime format
+     * Creates a new Deadline object by manually inputting description and the deadline.
+     *
+     * @param deadlineDescription description of the task only.
+     * @param deadline string description of the deadline.
+     * @throws DukeException if the deadline provided has an invalid datetime format.
      */
     private Deadline(String deadlineDescription, String deadline) throws DukeException {
         super(deadlineDescription);
@@ -52,7 +53,8 @@ public class Deadline extends Task {
     /**
      * Returns the String representation of the object.
      * Updated from the superclass Task to include the type of task and the deadline.
-     * @return string representing a Deadline task with a "[D]" identifier and the deadline at the back
+     *
+     * @return string representing a Deadline task with a "[D]" identifier and the deadline at the back.
      */
     @Override
     public String toString() {
@@ -60,17 +62,15 @@ public class Deadline extends Task {
                 getTimingString());
     }
 
-    /**
-     * Adjusts the String forms of the start and end timing for output
-     * @return string of the start and end timings
-     */
+    /** Returns a string of the deadline in the standard format */
     private String getTimingString() {
         return DateTimeHandler.STANDARD_DATETIME_FORMAT.format(deadline);
     }
 
     /**
      * Returns a summary of the Deadline.
-     * @return string containing type, completion status, description and timing
+     *
+     * @return string containing type, completion status, description and timing.
      */
     @Override
     public String getSummary() {
@@ -83,9 +83,10 @@ public class Deadline extends Task {
 
     /**
      * Returns an Deadline object corresponding to the summary given.
-     * @param summary string summary of the Deadline object to be reconstructed
-     * @return Deadline object representing the summary given
-     * @throws InvalidSaveException if the summary in the save file is invalid
+     *
+     * @param summary string summary of the Deadline object to be reconstructed.
+     * @return Deadline object representing the summary given.
+     * @throws InvalidSaveException if the summary in the save file is invalid.
      */
     public static Deadline reconstructFromSummary(String summary) throws InvalidSaveException {
         String[] details = summary.split("\\|");

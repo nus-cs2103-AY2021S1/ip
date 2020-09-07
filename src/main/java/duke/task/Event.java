@@ -25,8 +25,9 @@ public class Event extends Task {
 
     /**
      * Creates an Event object with the given event description and timing.
-     * @param taskDescription full description of the event including task and timing
-     * @throws DukeException if the format of the description is invalid
+     *
+     * @param taskDescription full description of the event including task and timing.
+     * @throws DukeException if the format of the description is invalid.
      */
     public Event(String taskDescription) throws DukeException {
         super(taskDescription.split(SPLITTER)[0]);
@@ -41,9 +42,10 @@ public class Event extends Task {
 
     /**
      * Creates a new Event object by manually setting the description and timing
-     * @param eventDescription description of the event task only
-     * @param timing string description of the timing of the event
-     * @throws DukeException if the timing provided for the event has an invalid format
+     *
+     * @param eventDescription description of the event task only.
+     * @param timing string description of the timing of the event.
+     * @throws DukeException if the timing provided for the event has an invalid format.
      */
     private Event(String eventDescription, String timing) throws DukeException {
         super(eventDescription);
@@ -52,8 +54,9 @@ public class Event extends Task {
 
     /**
      * Processes an event timing String by assigning the pair of start and end timings to the properties.
-     * @param timing String containing the details of the start and end timing
-     * @throws DukeException if the timing provided for the event has an invalid format
+     *
+     * @param timing String containing the details of the start and end timing.
+     * @throws DukeException if the timing provided for the event has an invalid format.
      */
     private void processEventTimingString(String timing) throws DukeException {
         Pair<LocalDateTime, LocalDateTime> pair =
@@ -65,17 +68,16 @@ public class Event extends Task {
     /**
      * Returns the String representation of the object.
      * Updated from the superclass Task to include the type of Task this object is and include the timing.
-     * @return returns a String representing an Event with a "[E]" identifier and timing
+     *
+     * @return returns a String representing an Event with a "[E]" identifier and timing.
      */
     @Override
     public String toString() {
         return String.format("[%s]%s (at: %s)", SYMBOL, super.toString(), getTimingString());
     }
 
-    /**
-     * Adjusts the String forms of the start and end timing for output
-     * @return string of the start and end timings
-     */
+
+    /** Returns a string of the timings corresponding to this event */
     private String getTimingString() {
         if (startTiming.toLocalDate().equals(endTiming.toLocalDate())) {
             return DateTimeHandler.STANDARD_DATETIME_FORMAT.format(startTiming)
@@ -88,7 +90,8 @@ public class Event extends Task {
 
     /**
      * Returns a summary of the Event.
-     * @return string containing type, completion status, description and timing
+     *
+     * @return string containing type, completion status, description and timing.
      */
     @Override
     public String getSummary() {
@@ -101,9 +104,10 @@ public class Event extends Task {
 
     /**
      * Returns an Event object corresponding to the summary given.
-     * @param summary string summary of the Event object to be reconstructed
-     * @return Event object representing the summary given
-     * @throws InvalidSaveException if the summary in the save file is invalid
+     *
+     * @param summary string summary of the Event object to be reconstructed.
+     * @return Event object representing the summary given.
+     * @throws InvalidSaveException if the summary in the save file is invalid.
      */
     public static Event reconstructFromSummary(String summary) throws InvalidSaveException {
         String[] details = summary.split("\\|");

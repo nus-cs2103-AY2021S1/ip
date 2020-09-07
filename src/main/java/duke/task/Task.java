@@ -9,18 +9,15 @@ import duke.storage.PrintSummary;
  */
 public abstract class Task implements PrintSummary {
 
-    /**
-     * description of the task
-     */
+    /** description of the task */
     private String description;
-    /**
-     * boolean flag indicating completion of the task
-     */
+    /** boolean flag indicating completion of the task */
     private boolean isDone;
 
     /**
      * Creates a new incomplete Task object.
-     * @param description description of the task
+     *
+     * @param description description of the task.
      */
     public Task(String description) {
         this.description = description;
@@ -28,8 +25,9 @@ public abstract class Task implements PrintSummary {
     }
 
     /**
-     * Creates a tick or cross String depending on whether the task is completed.
-     * @return tick if the task is completed, a cross otherwise
+     * Returns a tick or cross String depending on whether the task is completed.
+     *
+     * @return tick if the task is completed, a cross otherwise.
      */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
@@ -37,6 +35,7 @@ public abstract class Task implements PrintSummary {
 
     /**
      * Returns a String representation of the Task.
+     *
      * @return String representing the task, showing its status and description.
      */
     @Override
@@ -45,8 +44,9 @@ public abstract class Task implements PrintSummary {
     }
 
     /**
-     * Returns the task description
-     * @return string of task description
+     * Returns the task description.
+     *
+     * @return string of task description.
      */
     public String getTaskDescription() {
         return description;
@@ -54,7 +54,8 @@ public abstract class Task implements PrintSummary {
 
     /**
      * Returns the state of th:we Task, whether it is completed or not.
-     * @return true if the task is completed, false otherwise
+     *
+     * @return true if the task is completed, false otherwise.
      */
     public boolean isCompleted() {
         return isDone;
@@ -69,7 +70,9 @@ public abstract class Task implements PrintSummary {
 
     /**
      * Returns a summary of the Task.
-     * @return string summarising the object
+     * Implementing classes should also implement a static method to reconstruct the object from the summary.
+     *
+     * @return string summarising the object.
      */
     public abstract String getSummary();
 

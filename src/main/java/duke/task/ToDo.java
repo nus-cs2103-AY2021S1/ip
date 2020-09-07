@@ -14,7 +14,8 @@ public class ToDo extends Task {
 
     /**
      * Creates a ToDo object with the given task description.
-     * @param taskDescription description of the task to be done
+     *
+     * @param taskDescription description of the task to be done.
      */
     public ToDo(String taskDescription) {
         super(taskDescription);
@@ -23,7 +24,8 @@ public class ToDo extends Task {
     /**
      * Returns the String representation of the object.
      * Updated from the superclass Task to include the type of Task this object is.
-     * @return string representing the ToDo task with a "[T]" identifier
+     *
+     * @return string representing the ToDo task with a "[T]" identifier.
      */
     @Override
     public String toString() {
@@ -32,7 +34,8 @@ public class ToDo extends Task {
 
     /**
      * Returns a summary of the ToDo.
-     * @return string containing type, completion status and description
+     *
+     * @return string containing type, completion status and description.
      */
     @Override
     public String getSummary() {
@@ -44,9 +47,10 @@ public class ToDo extends Task {
 
     /**
      * Returns a ToDo object corresponding to the summary given.
-     * @param summary string summary of the ToDo object to be reconstructed
-     * @return ToDo object representing the summary given
-     * @throws InvalidSaveException if the summary in the save file is invalid
+     *
+     * @param summary string summary of the ToDo object to be reconstructed.
+     * @return ToDo object representing the summary given.
+     * @throws InvalidSaveException if the summary in the save file is invalid.
      */
     public static ToDo reconstructFromSummary(String summary) throws InvalidSaveException {
         String[] details = summary.split("\\|");
