@@ -154,7 +154,8 @@ public class Duke {
         String description = eventArray[0];
         String date = eventArray[1];
 
-        Event event = new Event(description, date.trim());
+        LocalDateTime localDateTime = parser.parseDateAndTime(date.trim());
+        Event event = new Event(description, localDateTime);
         tasksList.add(event);
         return ui.showAddedTaskMessage(event, tasksList.getNumOfTask());
     }

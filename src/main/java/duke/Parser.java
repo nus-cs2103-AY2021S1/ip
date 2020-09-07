@@ -42,9 +42,11 @@ public class Parser {
             if (type.equals("T")) {
                 task = new ToDo(description);
             } else if (type.equals("E")) {
-                task = new Event(description, date);
-            } else { // "D"
+                task = new Event(description, parseDateAndTime(date));
+            } else if (type.equals("D")) {
                 task = new Deadline(description, parseDateAndTime(date));
+            } else {
+                throw new NullPointerException("Task file corrupted");
             }
 
             if (status.equals("\u2713")) {
