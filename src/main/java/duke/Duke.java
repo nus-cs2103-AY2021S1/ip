@@ -26,7 +26,7 @@ public class Duke {
      * @return A string representing Duke's response.
      */
     public String getResponse(String input) {
-        if (taskList.isEmpty()) {
+        if (!taskList.isInitialised()) {
             try {
                 taskList.initialise();
             } catch (IOException e) {
@@ -37,6 +37,7 @@ public class Duke {
                 return e.toString();
             }
         }
+        assert taskList.isInitialised();
         return parser.allocate(input, taskList);
     }
 }
