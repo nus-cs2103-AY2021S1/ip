@@ -53,6 +53,7 @@ public class Ui {
      */
 
     public String showList(ArrayList<Task> list) {
+        assert list.size() >= 0 : "list size should not be negative";
         String toReturn = showLine();
         if (list.size() == 0) {
             toReturn += "you do not have any tasks yet";

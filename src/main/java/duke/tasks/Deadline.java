@@ -29,6 +29,9 @@ public class Deadline extends Task {
 
     public Deadline(String taskName, String date) throws DukeInvalidDateException, DukeInvalidTaskException {
         super(taskName);
+        assert taskName != null : "TaskName should not be null!";
+        assert date != null : "Date should not be null!";
+        assert !date.equals(" ");
         if (!date.equals(null) && !date.equals(" ")) {
             this.date = date;
             try {

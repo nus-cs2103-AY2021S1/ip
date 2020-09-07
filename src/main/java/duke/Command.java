@@ -21,6 +21,7 @@ public class Command {
      * @param action The type of action take as given by the task.
      */
     public Command(String task, String action) {
+        assert task != null && action != null : "task and action cannot be null!";
         this.task = task;
         this.action = action;
     }
@@ -30,53 +31,54 @@ public class Command {
      * @param taskList the current task list in use.
      * @param ui the user interface object.
      */
-
     public String execute(TaskList taskList, Ui ui) throws DukeException {
-        if (action.equals("invalid")) {
-            return ui.showInvalidCommand();
-        } else if (action.equals("bye")) {
+        assert taskList != null & ui != null : "taskList and ui should not be null!";
+        switch (action) {
+        case "bye":
             return ui.showEnd();
-        } else if (action.equals("list")) {
+        case "list":
             return ui.showList(taskList.getList());
-        } else if (action.indexOf("done") == 0) {
-            String[] split = action.split("done ");
+        case "done":
+            System.out.println("went into done case");
+            String[] split = task.split("done ");
+            System.out.println(split[0]);
             try {
                 Integer taskNumber = Integer.parseInt(split[1]);
                 return taskList.checkOff(taskNumber);
             } catch (NumberFormatException err) {
                 return "Please input a valid number";
             }
-        } else if (action.equals("delete")) {
+        case "delete":
             return taskList.delete(task);
-        } else if (action.equals("todo")) {
-            String toReturn = taskList.addToDo(task) + ui.showAdded();
-            return toReturn;
-        } else if (action.equals("deadline")) {
-            String toReturn = taskList.addDeadline(task) + ui.showAdded();
-            return toReturn;
-        } else if (action.equals("event")) {
-            String toReturn = taskList.addEvent(task) + ui.showAdded();
-            return toReturn;
-        } else if (action.equals("find")) {
-            String[] split = task.split("find ");
-            String toFind = split[1];
+        case "todo":
+            return taskList.addToDo(task) + ui.showAdded();
+        case "deadline":
+            return taskList.addDeadline(task) + ui.showAdded();
+        case "event":
+            return taskList.addEvent(task) + ui.showAdded();
+        case "find":
+            String toFind = task.split("find ")[1];
             ArrayList<Task> list = taskList.getList();
             ArrayList<Task> filtered = new ArrayList<>();
-            if (list.size() == 0) {
-                return "You do not have any tasks yet";
-            } else {
-                String toReturn = "Here are the tasks that matches '" + toFind + "'";
-                for (int i = 0; i < list.size(); i++) {
-                    String task = list.get(i).toString();
-                    if (task.contains(toFind)) {
-                        filtered.add(list.get(i));
-                    }
-                }
-                toReturn += ui.showList(filtered);
-                return toReturn;
-            }
-        } else {
+            return getSize(toFind, ui, list, filtered);
+        default:
             return ui.showInvalidCommand();
+        }
+    }
+
+    private String getSize(String toFind, Ui ui, ArrayList<Task> list, ArrayList<Task> filtered) {
+        if (list.size() == 0) {
+            return "You do not have any tasks yet";
+        } else {
+            String toReturn = "Here are the tasks that matches '" + toFind + "'";
+            for (int i = 0; i < list.size(); i++) {
+                String task = list.get(i).toString();
+                if (task.contains(toFind)) {
+                    filtered.add(list.get(i));
+                }
+            }
+            toReturn += ui.showList(filtered);
+            return toReturn;
         }
     }
 }
