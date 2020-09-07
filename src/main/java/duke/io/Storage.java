@@ -52,27 +52,27 @@ public class Storage {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String fileLine;
             while ((fileLine = br.readLine()) != null) {
-                String[] tempArr = fileLine.split(",");
-                String command = tempArr[0];
+                String[] tempWordArr = fileLine.split(",");
+                String command = tempWordArr[0];
                 switch (command) {
                 case "duke.task.Todo":
-                    Task tempTodo = new Todo(tempArr[2]);
-                    if (tempArr[1].equals("true")) {
+                    Task tempTodo = new Todo(tempWordArr[2]);
+                    if (tempWordArr[1].equals("true")) {
                         tempTodo.markAsDone();
                     }
                     taskArrayList.add(tempTodo);
                     break;
                 case "duke.task.Deadline":
-                    Task tempDeadline = new Deadline(tempArr[2], LocalDateTime.parse(tempArr[3]));
-                    if (tempArr[1].equals("true")) {
+                    Task tempDeadline = new Deadline(tempWordArr[2], LocalDateTime.parse(tempWordArr[3]));
+                    if (tempWordArr[1].equals("true")) {
                         tempDeadline.markAsDone();
                     }
                     taskArrayList.add(tempDeadline);
                     break;
                 case "duke.task.Event":
-                    Task tempEvent = new Event(tempArr[2], LocalDateTime.parse(tempArr[3]),
-                            LocalDateTime.parse(tempArr[4]));
-                    if (tempArr[1].equals("true")) {
+                    Task tempEvent = new Event(tempWordArr[2], LocalDateTime.parse(tempWordArr[3]),
+                            LocalDateTime.parse(tempWordArr[4]));
+                    if (tempWordArr[1].equals("true")) {
                         tempEvent.markAsDone();
                     }
                     taskArrayList.add(tempEvent);

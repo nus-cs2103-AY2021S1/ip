@@ -39,6 +39,7 @@ public class DeleteCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         String[] input = fullCommand.split(" ");
+
         StringBuilder resultSb = new StringBuilder(
                 String.format("%s\n %s\n", ui.showLine(), "Noted. I've removed this task: "));
         if (input.length == 2) {

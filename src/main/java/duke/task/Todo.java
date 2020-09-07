@@ -23,12 +23,12 @@ public class Todo extends Task {
      * Checks if two object are equal.
      * If equal true, else false.
      *
-     * @param o object to be compare.
+     * @param obj object to be compare.
      * @return true is same, false if different
      */
     @Override
-    public boolean equals(Object o) {
-        return super.equals(o);
+    public boolean equals(Object obj) {
+        return super.equals(obj);
     }
 
     /**

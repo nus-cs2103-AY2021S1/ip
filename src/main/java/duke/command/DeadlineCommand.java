@@ -45,31 +45,33 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.showLine();
         if (!fullCommand.contains(" ")) {
             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
         }
-        String details = fullCommand.substring(fullCommand.indexOf(" ")).trim();
         if (!fullCommand.contains("/by")) {
             throw new DukeException("☹ OOPS!!! The date & time of a deadline cannot be empty.");
         }
+
+        String details = fullCommand.substring(fullCommand.indexOf(" ")).trim();
         String description = details.substring(0, details.indexOf("/by")).trim();
         String by = details.substring(details.indexOf("/by") + 3).trim();
 
         String[] inputDateTime = by.split(" ");
         String[] date = inputDateTime[0].split("[/\\\\]|-");
         LocalDate localDate = convertDateToLocalDate(date);
-
         LocalTime localTime = LocalTime.of(0, 0);
+
         if (inputDateTime.length > 1) {
             int timeLength = inputDateTime[1].length();
+            int hour;
+            int minute;
             if (timeLength == 4) {
-                int hour = Integer.parseInt(inputDateTime[1].substring(0, 2));
-                int minute = Integer.parseInt(inputDateTime[1].substring(2, 4));
+                hour = Integer.parseInt(inputDateTime[1].substring(0, 2));
+                minute = Integer.parseInt(inputDateTime[1].substring(2, 4));
                 localTime = LocalTime.of(hour, minute);
             } else if (timeLength == 3) {
-                int hour = Integer.parseInt(String.valueOf(inputDateTime[1].charAt(0)));
-                int minute = Integer.parseInt(inputDateTime[1].substring(1, 3));
+                hour = Integer.parseInt(String.valueOf(inputDateTime[1].charAt(0)));
+                minute = Integer.parseInt(inputDateTime[1].substring(1, 3));
                 localTime = LocalTime.of(hour, minute);
             } else {
                 throw new DukeException("Error with input time");
@@ -77,16 +79,13 @@ public class DeadlineCommand extends Command {
         }
 
         LocalDateTime localDateTime = LocalDateTime.of(localDate, localTime);
-        StringBuilder resultSb = new StringBuilder(
-                String.format("%s\n %s\n", ui.showLine(), "Got it. I've added this task:"));
         taskList.addTask(new Deadline(description, localDateTime));
-        resultSb.append("\t")
-                .append(taskList.retrieveTask(taskList.sizeOfList() - 1))
-                .append(String.format("\nNow you have %o tasks in list.\n", taskList.sizeOfList()))
-                .append(ui.showLine());
-        Ui.printString(resultSb.toString());
-
         storage.write(taskList);
+
+        String resultSb = String.format("%s\n %s\n", ui.showLine(), "Got it. I've added this task:") + "\t"
+                + taskList.retrieveTask(taskList.sizeOfList() - 1) + String.format("\nNow you have %o tasks in list"
+                + ".\n", taskList.sizeOfList()) + ui.showLine();
+        Ui.printString(resultSb);
     }
 
     private static LocalDate convertDateToLocalDate(String[] date) throws DukeException {
