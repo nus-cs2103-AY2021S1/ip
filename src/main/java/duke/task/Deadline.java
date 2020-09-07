@@ -14,20 +14,20 @@ public class Deadline extends Task {
      * @param title    Title of task.
      * @param deadline Deadline of task.
      */
-    public Deadline(String title, String deadline) {
-        super(title);
+    public Deadline(String title, String deadline, String[] tags) {
+        super(title, tags);
         this.deadline = new DateTime(deadline);
     }
 
     /**
-     * Overloads constructor for Deadline class.
+     * Overloads constructor for Deadline class. Used when reading data from .txt file.
      *
      * @param title      Title of task.
      * @param isComplete Boolean to represent completion status of task.
      * @param deadline   Deadline of task.
      */
-    public Deadline(String title, boolean isComplete, String deadline) {
-        super(title, isComplete);
+    public Deadline(String title, boolean isComplete, String deadline, String[] tags) {
+        super(title, isComplete, tags);
         this.deadline = new DateTime(deadline);
     }
 
@@ -38,8 +38,9 @@ public class Deadline extends Task {
      */
     @Override
     public String getSaveString() {
-        int completeSymbol = this.complete ? 1 : 0;
-        return String.format("%s|%d|%s|%s", SYMBOL, completeSymbol, this.title, this.deadline.getSaveString());
+        int completeSymbol = this.isComplete ? 1 : 0;
+        return String.format("%s|%d|%s|%s|%s", SYMBOL, completeSymbol, title,
+                deadline.getSaveString(), convertTagsToString("/"));
     }
 
     /**
@@ -49,7 +50,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String completeSymbol = this.complete ? "[/]" : "[X]";
-        return String.format("[%s]%s %s (by: %s)", SYMBOL, completeSymbol, this.title, this.deadline);
+        String completeSymbol = this.isComplete ? "[/]" : "[X]";
+        return String.format("[%s]%s %s (by: %s) %s", SYMBOL, completeSymbol, title, deadline, convertTagsToString(""));
     }
 }

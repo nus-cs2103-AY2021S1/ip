@@ -1,6 +1,7 @@
 package duke.misc;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import duke.exception.InvalidDescriptionException;
 import duke.exception.InvalidIndexException;
@@ -24,28 +25,38 @@ public class Parser {
      * @throws InvalidTypeException        In case the task type is not one of Event, Deadline, Todo.
      */
     public static Task handleInput(String input) throws InvalidDescriptionException, InvalidTypeException {
-        String type = input.split(" ")[0];
+        String[] tags = extractTags(input);
+        String cleanInput = removeHashTags(input);
+        String type = cleanInput.split("\\s+")[0];
         switch (type) {
         case "todo":
-            if (!input.matches(Todo.FORMAT)) {
+            if (!cleanInput.matches(Todo.FORMAT)) {
                 throw new InvalidDescriptionException();
             }
-            return new Todo(input.substring(5));
+            return new Todo(cleanInput.substring(5), tags);
         case "deadline":
-            String[] dl = input.split(" /by ");
-            if (!input.matches(Deadline.FORMAT)) {
+            if (!cleanInput.matches(Deadline.FORMAT)) {
                 throw new InvalidDescriptionException();
             }
-            return new Deadline(dl[0].substring(9), dl[1]);
+            String[] dl = cleanInput.split(" /by ");
+            return new Deadline(dl[0].substring(9), dl[1], tags);
         case "event":
-            String[] e = input.split(" /at ");
-            if (!input.matches(Event.FORMAT)) {
+            if (!cleanInput.matches(Event.FORMAT)) {
                 throw new InvalidDescriptionException();
             }
-            return new Event(e[0].substring(6), e[1]);
+            String[] e = cleanInput.split(" /at ");
+            return new Event(e[0].substring(6), e[1], tags);
         default:
             throw new InvalidTypeException();
         }
+    }
+
+    private static String[] extractTags(String input) {
+        return Arrays.stream(input.split("\\s+")).filter(str -> str.matches("#.+")).toArray(String[]::new);
+    }
+
+    private static String removeHashTags(String input) {
+        return input.replace("#", "");
     }
 
 
