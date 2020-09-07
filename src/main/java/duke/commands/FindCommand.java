@@ -36,7 +36,7 @@ public class FindCommand extends Command {
             return new CommandResult(result.trim());
         } catch (IndexOutOfBoundsException ie) {
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-        } catch (Exception pnfe) {
+        } catch (Exception e) {
             return new CommandResult(Messages.MESSAGE_TASK_NOT_IN_TASKLIST);
         }
     }
