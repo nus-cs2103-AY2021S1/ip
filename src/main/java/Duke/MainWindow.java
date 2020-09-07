@@ -47,7 +47,7 @@ public class MainWindow extends AnchorPane {
     public void setDuke(Duke d, Stage stage) {
         duke = d;
         this.stage = stage;
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog("Hello", dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog("Hello", dukeImage)); //Introduction given by Duke
     }
 
     /**
@@ -57,15 +57,15 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         if(duke.isExit()){
-            stage.close();
+            stage.close(); //since bye message is given
         }
         String input = userInput.getText(); //input can be multiple input separated by ',' sign
         String[] inputs = input.split(", ");
-        String response = duke.getResponse(inputs);
+        String response = duke.getResponse(inputs); //response given by duke
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-            );
+                DialogBox.getUserDialog(input, userImage),//user input displayed
+                DialogBox.getDukeDialog(response, dukeImage) //Duke input displayed
+        );
         userInput.clear();
     }
 }

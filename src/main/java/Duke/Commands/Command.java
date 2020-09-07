@@ -21,7 +21,7 @@ abstract public class Command {
      *
      * @param commandDescription assigns this.string to string
      */
-    Command(String commandDescription){
+    public Command(String commandDescription){
         this.commandDescription = commandDescription;
     }
 

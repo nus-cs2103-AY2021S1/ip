@@ -56,28 +56,32 @@ abstract public class Task {
     }
 
     /**
-     * Gives a specific string representation for that in the tasks.txt file
-     *
-     * @return the string representation
-     */
-    public String inputListFormat(){
-        if(this.done){
-            return " | 1 | " + this.name;
-        }else{
-            return " | 0 | " + this.name;
-        }
-    }
-
-    /**
      * Overrides the toString methods
      *
      * @return String which contains info on task name as well as whether it is completed(tick sign) or not(cross sign).
      */
     public String toString() {
         if (this.done) {
-            return "[" + "\u2713" + "] " + this.name;
+            return "[" + "\u2713" + "] " + this.name; //\u2713 is a tick, denoting done
+        }else if(!this.done) {
+            return "[" + "\u2717" + "] " + this.name; //\u2717 is a cross, deonoting not done
+        }else {
+            return "default";
         }
-        return "[" + "\u2717" + "] " + this.name;
     }
 
+    /**
+     * Gives a specific string representation for that in the tasks.txt file
+     *
+     * @return the string representation
+     */
+    public String inputListFormat(){    //format of Tasks to appear in file in Storage
+        if(this.done){
+            return " | 1 | " + this.name; //1 denotes done
+        }else if(!this.done) {
+            return " | 0 | " + this.name; //0 denotes not done
+        }else{
+            return "default";
+        }
+    }
 }

@@ -11,6 +11,16 @@ public class FIleEmptyException extends DukeException {
      */
     @Override
     public String toString() {
-        return "Task file is empty!";
+        return fileEmpty(); //when file is empty
+    }
+
+    /**
+     * Returns when file is empty
+     *
+     * @return informs user that file is empty
+     */
+    private String fileEmpty(){
+        return "  Task file is empty!";
     }
 }
+

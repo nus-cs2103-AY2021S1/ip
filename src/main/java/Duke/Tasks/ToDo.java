@@ -41,6 +41,6 @@ public class ToDo extends Task {
      * @return the string representation
      */
     public String inputListFormat(){
-        return "T" + super.inputListFormat();
+        return "T" + super.inputListFormat(); //format of Tasks to appear in file in Storage
     }
 }

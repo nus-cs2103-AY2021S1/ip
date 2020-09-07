@@ -10,34 +10,68 @@ public class DeadlineException extends DukeException{
      * descriptionPresent tests shows whether the description is present in the input of the user or not.
      * If description is not present it is true, else it is false
      */
-    private boolean descriptionPresent;
-    private boolean formatPresent;
+    private boolean isDescriptionAbsent;
+    private boolean isDateTimeFormatWrong;
+    private boolean isDateTimeAbsent;
 
     /**
-     *constructor for deadline exception that assigns description and format values
+     * constructor for deadline exception that assigns description and format values
      *
-     * @param description input, depneding on whether the description is present or not in the input.txt file. If present it is false
-     *   else it is true.
+     * @param isDescriptionAbsent true if description absent
+     * @param isDateTimeFormatWrong true if format is wrong
+     * @param isDateTimeAbsent true if date and time are absent.
      */
-    public DeadlineException(boolean description, boolean format){
-        this.descriptionPresent = description;
-        this.formatPresent = format;
+    public DeadlineException(boolean isDescriptionAbsent, boolean isDateTimeFormatWrong, boolean isDateTimeAbsent){
+        this.isDescriptionAbsent = isDescriptionAbsent;
+        this.isDateTimeFormatWrong = isDateTimeFormatWrong;
+        this.isDateTimeAbsent = isDateTimeAbsent;
     }
 
     /**
      * doesn't take in any arguments, overrides the in-built toString() method.
      *
-     * @return returns a string informing that the description is empty if description is true. Else, if description is
-     * false, it means that the date is absent and it informs accordingly.
+     * @return returns a string informing that the description is empty if descriptionAbsent is true. Else, it tests
+     * whether the format is wrong, if it then a string describing it would be returned. If isDateTimeAbsent is true then
+     * date time for deadline is absent and a String describing it would be returned. Else then default returns which
+     * should not occur.
      */
     public String toString(){
-        if(this.descriptionPresent){
-            return "  '\u2639' OOPS!!! The description of a deadline cannot be empty.";
+        if(this.isDescriptionAbsent) {
+            return descriptionAbsent(); //when descriptionAbsent
+        } else if(this.isDateTimeFormatWrong) {
+            return dateTimeFormatWrong(); //when dateTimeFormat is wrong
+        } else if(this.isDateTimeAbsent) {
+            return dateTimeAbsent(); //when dateTime is absent
+        } else {
+            return "default";
         }
-        if(this.formatPresent){
-            return "  '\u2639' OOPS!!! The formats of date and/ or include " +
-                    "yyyy MM dd/ yyyy MM dd, HH:mm/ HH:mm";
-        }
+    }
+
+    /**
+     * returns String on condition where description for Deadline is absent
+     *
+     * @return String informing user that the description for Deadline is absent
+     */
+    private String descriptionAbsent(){
+        return "  '\u2639' OOPS!!! The description of a deadline cannot be empty.";
+    }
+
+    /**
+     * returns String on condition where format for date and/or time format for Deadline is wrong
+     *
+     * @return String informing user format for date and/or time format for Deadline is wrong
+     */
+    private String dateTimeFormatWrong(){
+        return "  '\u2639' OOPS!!! The formats of date and/ or include " +
+                "yyyy MM dd/ yyyy MM dd, HH:mm/ HH:mm";
+    }
+
+    /**
+     * returns String on condition where date and/or time for Deadline is absent
+     *
+     * @return String informing user that the date and/or time for Deadline is absent
+     */
+    private String dateTimeAbsent(){
         return "  '\u2639' OOPS!!! The specific date/time of a deadline cannot be empty.";
     }
 }

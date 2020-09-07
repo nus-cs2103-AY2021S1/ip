@@ -24,27 +24,6 @@ public class FindCommand extends Command {
     public FindCommand(String string) {
         super(string);
     }
-    private void setTasks(String[] strings, TaskList tasks){
-        List<Task> allTasks = tasks.getAllTasks();
-        for(int i = 0; i < tasks.getAllTasks().size(); i++){
-            Task task = allTasks.get(i);
-            String string = task.getName();
-            String[] comp = string.split(" ", -2);
-            boolean contains = false;
-            for(int j = 0; j < strings.length; j++){
-                String s = strings[j];
-                for(int k = 0; k < comp.length; k++){
-                    if(comp[k].equals(s)){
-                        contains = true;
-                        break;
-                    }
-                }
-            }
-            if(contains) {
-                this.tasks.add(task);
-            }
-        }
-    }
 
     /**
      * Finds the tasks which contains keyword in string
@@ -58,26 +37,62 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if(commandDescription.length() == 4 || commandDescription.length() == 5){
-            throw new FindException(false, "");
+        if(wordsToFindAbsent()){
+            throw new FindException(false, true, "");
         }else{
             String find = commandDescription.substring(5);
-            String[] strings = find.split(" ", -2);
+            String[] strings = find.split(" ", -2); // keywords split into different Strings
             setTasks(strings, tasks);
             if(this.tasks.size() == 0){
-                throw new FindException(true, find);
+                throw new FindException(true, false, find);
             }else{
-                String s = "  Here are the matching tasks in your list:";
-                System.out.println("  Here are the matching tasks in your list:");
-                for(int i = 0; i < this.tasks.size(); i++){
-                    Task task = this.tasks.get(i);
-                    System.out.println("  " + (i + 1) + "." + task.toString());
-                    s = s + "\n" + "  " + (i + 1) + "." + task.toString();
-                }
-                return s;
+                return findMessage();
             }
         }
     }
-}
 
+    /**
+     * sets the Tasks list here with Tasks containing key words.
+     *
+     * @param strings contains String of key words
+     * @param tasks contains all the current tasks
+     */
+    private void setTasks(String[] strings, TaskList tasks){
+        List<Task> allTasks = tasks.getAllTasks();
+        for(int i = 0; i < tasks.getAllTasks().size(); i++){
+            Task task = allTasks.get(i);
+            String string = task.getName();
+            String[] comp = string.split(" ", -2);
+            boolean contains = false;
+            for(int j = 0; j < strings.length; j++){
+                String s = strings[j];
+                for(int k = 0; k < comp.length; k++){
+                    if(comp[k].equals(s)){ //checks whether Task name/description contains keywords given by user
+                        contains = true;  //then assigns contains true if that is the case
+                        break;
+                    }
+                }
+            }
+            if(contains) {
+                this.tasks.add(task); //if contains is true, Task is added to ArrayList of tasks.
+            }
+        }
+    }
+
+    public String findMessage() throws FindException {
+        String s = "  Here are the matching tasks in your list:";
+        System.out.println("  Here are the matching tasks in your list:");
+        for(int i = 0; i < this.tasks.size(); i++){
+            Task task = this.tasks.get(i);
+            System.out.println("  " + (i + 1) + "." + task.toString());
+            s = s + "\n" + "  " + (i + 1) + "." + task.toString(); // concatenates all the Task present in tasks
+        }
+        return s;
+    }
+
+    private boolean wordsToFindAbsent(){
+        return commandDescription.length() == 4 || commandDescription.length() == 5;  //since keywords present after length of 5
+    }
+
+}
 
