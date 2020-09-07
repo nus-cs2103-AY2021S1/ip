@@ -26,6 +26,8 @@ public class AddToDoCommand extends Command {
         }
 
         String description = getParsedCommand()[1];
+        assert !description.isEmpty(); // assert that the todo description is not empty
+
         Task taskToAdd = new ToDo(description);
         addTask(tasks, taskToAdd, ui);
     }
