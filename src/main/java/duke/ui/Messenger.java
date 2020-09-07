@@ -14,11 +14,6 @@ public class Messenger {
             + "|____/ \\__,_|_|\\_\\___|\n";
 
     /**
-     * Introduction messages.
-     */
-    public static final String INTRO_MESSAGE = "A Production by Zijian.\n\nFor CS2103T 2020 Sem 1";
-
-    /**
      * Messages for loading and saving files.
      */
     public static final String FILE_LOADING = "Hold a while, trying to retrieve where you were last time...";
@@ -28,20 +23,22 @@ public class Messenger {
     /**
      * Error handling messages.
       */
-    public static final String INDEX_FORMAT_ERROR = "☹ OOPS!!! Seems you have provided an invalid index :-(";
-    public static final String COMMAND_UNRECOGNIZABLE_ERROR = "☹ OOPS!!! I'm sorry, "
+    public static final char FROWN = '\u2639';
+    public static final String INDEX_FORMAT_ERROR = FROWN + " OOPS!!! Seems you have provided an invalid index :-(";
+    public static final String COMMAND_UNRECOGNIZABLE_ERROR = FROWN + " OOPS!!! I'm sorry, "
             + "but I don't know what that means :-(";
-    public static final String EMPTY_COMMAND_ERROR = "☹ OOPS!!! The command cannot be empty!";
-    public static final String SPELL_ERROR = "☹ OOPS!!! Check if you have spelled correctly!";
-    public static final String EMPTY_CONTENT_ERROR = "☹ OOPS!!! Seems you forgot to supply the main content!";
-    public static final String EMPTY_TIME_ERROR = "☹ OOPS!!! Seems you forgot to supply the time!\n"
+    public static final String EMPTY_COMMAND_ERROR = FROWN + " OOPS!!! The command cannot be empty!";
+    public static final String SPELL_ERROR = FROWN + " OOPS!!! Check if you have spelled correctly!";
+    public static final String EMPTY_CONTENT_ERROR = FROWN + " OOPS!!! Seems you forgot to supply the main content!";
+    public static final String EMPTY_TIME_ERROR = FROWN + " OOPS!!! Seems you forgot to supply the time!\n"
             + "Simply add '/by <time>' for deadline OR '/at <time>' for event behind your command";
-    public static final String INDEX_OUT_OF_BOUND_ERROR = "☹ OOPS!!! Seems the index you provided is not in the list.";
+    public static final String INDEX_OUT_OF_BOUND_ERROR = FROWN + " OOPS!!! Seems the "
+            + "index you provided is not in the list.";
     public static final String FILE_NOT_FOUND = "Couldn't find a save file. You may start adding things from start!";
     public static final String DIRECTORY_NOT_FOUND = "Couldn't find the data directory. Creating one for you...";
-    public static final String DATE_FORMAT_ERROR = "☹ OOPS!!! The format for your date is incorrect. "
+    public static final String DATE_FORMAT_ERROR = FROWN + " OOPS!!! The format for your date is incorrect. "
             + "Use yyyy-MM-dd format instead";
     public static String emptyDescriptionError(String command) {
-        return String.format("☹ OOPS!!! The description of a %s cannot be empty.", command);
+        return String.format(FROWN + " OOPS!!! The description of a %s cannot be empty.", command);
     }
 }
