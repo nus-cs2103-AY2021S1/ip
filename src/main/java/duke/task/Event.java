@@ -30,22 +30,22 @@ public class Event extends Task {
      * @param detail the description of the event
      * @param eventTime the time of the event
      */
-    public Event(int doneStatus, String detail, LocalDateTime eventTime) {
-        super(doneStatus, detail);
+    public Event(String priority, int doneStatus, String detail, LocalDateTime eventTime) {
+        super(priority, doneStatus, detail);
         this.eventTime = eventTime;
     }
 
     @Override
     public String formatTaskForDatabase() {
         int status = super.getDoneStatus() ? 1 : 0;
-        return "E|" + status + "|" + super.description + "|" + eventTime;
+        return super.priority.name() +"|" + "E|" + status + "|" + super.description + "|" + eventTime;
     }
 
 
     @Override
     public String toString() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-        return "[E]" + super.toString() + " " + super.description + " (At: "
+        return "[" + super.priority.name() + "]" + "[E]" + super.toString() + " (At: "
                 + eventTime.format(dateTimeFormatter) + ")";
     }
 }

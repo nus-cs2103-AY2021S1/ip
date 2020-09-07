@@ -6,8 +6,14 @@ import duke.exceptions.DukeException;
  * Represents the task the user wants to do.
  */
 public abstract class Task {
+    protected Priority priority;
     protected String description;
     private boolean isDone;
+
+    public enum Priority {
+        HIGH, MID, LOW
+    }
+
 
     /**
      * @param description the description of the task
@@ -19,19 +25,21 @@ public abstract class Task {
         }
         this.description = description;
         this.isDone = false;
+        this.priority = Priority.MID;
     }
 
     /**
      * Overloaded constructor for tasks from the database.
      *
-     * @param doneStatus whether the task is done from the previous session.
+     * @param doneStatus  whether the task is done from the previous session.
      * @param description the description of the task stored in the database.
      */
-    public Task(int doneStatus, String description) {
+    public Task(String priority, int doneStatus, String description) {
         if (doneStatus == 1) {
             this.isDone = true;
         }
         this.description = description;
+        this.priority = Priority.valueOf(priority.toUpperCase());
     }
 
     /**
@@ -39,6 +47,19 @@ public abstract class Task {
      */
     public void setDone() {
         this.isDone = !isDone;
+    }
+
+    public void setPriority(String priority) {
+        switch (priority) {
+        case "high":
+            this.priority = Priority.HIGH;
+            break;
+        case "low":
+            this.priority = Priority.LOW;
+            break;
+        default:
+            this.priority = Priority.MID;
+        }
     }
 
     public String getDescription() {
@@ -59,6 +80,7 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return isDone ? "[\u2713]" : "[\u2718]";
+        String status = isDone ? "[\u2713]" : "[\u2718]";
+        return status + " " + description;
     }
 }

@@ -14,18 +14,18 @@ public class Todo extends Task {
      * @param doneStatus the state of the task from the user's previous session
      * @param s the description of the todo
      */
-    public Todo(int doneStatus, String s) {
-        super(doneStatus, s);
+    public Todo(String priority, int doneStatus, String s) {
+        super(priority, doneStatus, s);
     }
 
     @Override
     public String formatTaskForDatabase() {
         int status = super.getDoneStatus() ? 1 : 0;
-        return "T|" + status + "|" + super.description;
+        return super.priority.name() +"|" + "T|" + status + "|" + super.description;
     }
 
     @Override
     public String toString() {
-        return "[T]" + super.toString() + " " + super.description;
+        return "[" + super.priority.name() + "]" + "[T]" + super.toString() ;
     }
 }

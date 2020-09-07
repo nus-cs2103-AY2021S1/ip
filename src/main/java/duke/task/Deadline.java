@@ -31,21 +31,21 @@ public class Deadline extends Task {
      * @param detail the description of the deadline
      * @param deadline the time of the deadline.
      */
-    public Deadline(int doneStatus, String detail, LocalDateTime deadline) {
-        super(doneStatus, detail);
+    public Deadline(String priority, int doneStatus, String detail, LocalDateTime deadline) {
+        super(priority, doneStatus, detail);
         this.deadline = deadline;
     }
 
     @Override
     public String formatTaskForDatabase() {
         int status = super.getDoneStatus() ? 1 : 0;
-        return "D|" + status + "|" + super.description + "|" + this.deadline;
+        return super.priority.name() +"|" + "D|" + status + "|" + super.description + "|" + this.deadline;
     }
 
     @Override
     public String toString() {
         DateTimeFormatter dateTimeFormatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
-        return "[D]" + super.toString() + " " + super.description + " (By: "
+        return "[" + super.priority.name() + "]" + "[D]" + super.toString() + " (By: "
                 + deadline.format(dateTimeFormatter) + ")";
     }
 }

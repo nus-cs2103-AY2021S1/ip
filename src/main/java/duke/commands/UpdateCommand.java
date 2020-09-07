@@ -24,6 +24,14 @@ public class UpdateCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Storage storage) {
+        if (super.command.equals("done")) {
+            return setDoneStatusMessage(tasks);
+        } else {
+            return setPriorityMessage(tasks);
+        }
+    }
+
+    public String setDoneStatusMessage(TaskList tasks) {
         String response = "Nice! I've marked this task as done:\n";
         try {
             Task selectedTask = tasks.getTask(index);
@@ -35,5 +43,19 @@ public class UpdateCommand extends Command {
         assert response != "" : "Response is an empty string";
         return response;
     }
+
+    public String setPriorityMessage(TaskList tasks) {
+        String response = "The priority of this task has been updated: \n";
+        try {
+            Task selectedTask = tasks.getTask(index);
+            selectedTask.setPriority(super.command);
+            response += selectedTask.toString();
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+        assert response != "" : "Response is an empty string";
+        return response;
+    }
+
 
 }

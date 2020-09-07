@@ -24,7 +24,7 @@ public class ListCommand extends Command {
         stringBuilder.append("Here are all the tasks you currently have! \n");
         IntStream.range(0, tasks.size()).forEach(index -> {
             try {
-                String output = (index + 1) + "." + tasks.getTask(index + 1) + "\n";
+                String output = (index + 1) + ". " + tasks.getTask(index + 1) + "\n";
                 stringBuilder.append(output);
             } catch (DukeException e) {
                 System.out.println(e.getMessage());

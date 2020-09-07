@@ -16,6 +16,12 @@ import duke.task.Todo;
  * Represents the database of tasks for the user.
  */
 public class Storage {
+    private static int priority = 0;
+    private static int type = 1;
+    private static int done = 2;
+    private static int detail = 3;
+    private static int time = 4;
+
     private String directory;
     private File db;
 
@@ -64,25 +70,27 @@ public class Storage {
     }
 
     /**
-     * Uses the formatted string from the database to create a saved task.
+     * Uses the formatted string from the database to create a saved task. String stored in
+     * priority|type|done|details|time.
      *
      * @param string the formatted string that has type, done status, description and time
      * @return the task stored in the database
      */
     public Task createTaskFromDatabase(String string) {
         String[] parts = string.split("\\|");
-        String typeOfTask = parts[0];
-        int doneStatus = Integer.parseInt(parts[1]);
-        String details = parts[2];
+        String priority = parts[Storage.priority];
+        String typeOfTask = parts[Storage.type];
+        int doneStatus = Integer.parseInt(parts[Storage.done]);
+        String details = parts[Storage.detail];
 
         if (typeOfTask.equals("T")) {
-            return new Todo(doneStatus, details);
+            return new Todo(priority, doneStatus, details);
         } else if (typeOfTask.equals("D")) {
-            LocalDateTime timing = LocalDateTime.parse(parts[3]);
-            return new Deadline(doneStatus, details, timing);
+            LocalDateTime timing = LocalDateTime.parse(parts[Storage.time]);
+            return new Deadline(priority, doneStatus, details, timing);
         } else if (typeOfTask.equals("E")) {
-            LocalDateTime timing = LocalDateTime.parse(parts[3]);
-            return new Event(doneStatus, details, timing);
+            LocalDateTime timing = LocalDateTime.parse(parts[Storage.time]);
+            return new Event(priority, doneStatus, details, timing);
         }
         return null;
     }
