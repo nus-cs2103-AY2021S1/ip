@@ -16,7 +16,6 @@ import duckie.task.Deadline;
 import duckie.task.Event;
 import duckie.task.Task;
 import duckie.task.Todo;
-import duckie.ui.Ui;
 
 
 /**
@@ -44,26 +43,47 @@ public class Storage {
     public File openFile() throws DuckieException {
         try {
             File duckieFile = new File(this.filePath);
+            File duckieDir = new File(duckieFile.getParent());
+
+            if (!duckieDir.exists()) {
+                duckieDir.mkdirs();
+            }
+
             if (!duckieFile.exists()) {
-                File dir = new File(duckieFile.getParent());
-                if (!dir.exists()) {
-                    if (dir.mkdirs() && duckieFile.createNewFile()) {
-                        System.out.println("\t" + "Memory File created successfully!");
-                    } else {
-                        throw new DuckieException("\t" + "Quack! Unable to create file!");
-                    }
-                } else {
-                    if (duckieFile.createNewFile()) {
-                        System.out.println("\t" + "Memory File created successfully!");
-                    } else {
-                        throw new DuckieException("Quack! Unable to create file!");
-                    }
-                }
+                duckieFile.createNewFile();
             }
             return duckieFile;
         } catch (IOException e) {
             throw new DuckieFileErrorException();
         }
+    }
+
+    private Task createTodo(String isDone, String description) {
+        Task toDo = new Todo(description);
+        if (isDone.equals("1")) {
+            toDo.markDone();
+        }
+        return toDo;
+    }
+
+    private Task createDeadline(String isDone, String description, String date) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E, MMM dd yyyy");
+        LocalDate d1 = LocalDate.parse(date, formatter);
+        Deadline taskD = new Deadline(description, d1);
+        if (isDone.equals("1")) {
+            taskD.markDone();
+        }
+        return taskD;
+    }
+
+    private Task createEvent(String isDone, String description, String dateTime) {
+        DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("E, MMM dd yyyy hh:mm a");
+        LocalDateTime d2 = LocalDateTime.parse(dateTime, formatter2);
+        Event taskE = new Event(description, d2);
+        if (isDone.equals("1")) {
+            taskE.markDone();
+        }
+        return taskE;
     }
 
     /**
@@ -89,35 +109,22 @@ public class Storage {
 
                 String description = taskBreakdown[2].strip();
                 switch (type) {
-                case "T":
-                    Todo taskToDo = new Todo(description);
-                    if (isDone.equals("1")) {
-                        taskToDo.markDone();
-                    }
-                    tasks.add(taskToDo);
-                    break;
-                case "D":
-                    String date = taskBreakdown[3].strip();
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("E, MMM dd yyyy");
-                    LocalDate d1 = LocalDate.parse(date, formatter);
-                    Deadline taskD = new Deadline(description, d1);
-                    if (isDone.equals("1")) {
-                        taskD.markDone();
-                    }
-                    tasks.add(taskD);
-                    break;
-                case "E":
-                    String dateTime = taskBreakdown[3].strip();
-                    DateTimeFormatter formatter2 = DateTimeFormatter.ofPattern("E, MMM dd yyyy hh:mm a");
-                    LocalDateTime d2 = LocalDateTime.parse(dateTime, formatter2);
-                    Event taskE = new Event(description, d2);
-                    if (isDone.equals("1")) {
-                        taskE.markDone();
-                    }
-                    tasks.add(taskE);
-                    break;
-                default:
-                    break;
+                    case "T":
+                        Task taskToDo = createTodo(isDone, description);
+                        tasks.add(taskToDo);
+                        break;
+                    case "D":
+                        String date = taskBreakdown[3].strip();
+                        Task taskD = createDeadline(isDone, description, date);
+                        tasks.add(taskD);
+                        break;
+                    case "E":
+                        String dateTime = taskBreakdown[3].strip();
+                        Task taskE = createEvent(isDone, description, dateTime);
+                        tasks.add(taskE);
+                        break;
+                    default:
+                        break;
                 }
             }
         } catch (FileNotFoundException e) {

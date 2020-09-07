@@ -38,100 +38,110 @@ public class Parser {
      */
     public static Command parse(String fullCommand) throws DuckieException {
         assert fullCommand instanceof String : "Command must be a String type.";
-        String input = fullCommand.strip().toLowerCase();
-        if (input.equals("bye")) {
+        String input = fullCommand.strip();
+        String firstWord = input.split(" ", 2)[0].toLowerCase();
+        if (firstWord.equals("bye")) {
             return new ByeCommand();
-        } else if (input.equals("list")) {
+        } else if (firstWord.equals("list")) {
             return new ListCommand();
-        } else if (input.indexOf("done") == 0) {
-            if (isAWord(input)) {
-                throw new DuckieInsufficientInfoException();
-            }
-
-            try {
-                Integer.parseInt(input.split(" ")[1]);
-            } catch (NumberFormatException e) {
-                throw new DuckieNoNumberInputException();
-            }
-
-            int ind = Integer.parseInt(input.split(" ")[1]);
-
-            return new DoneCommand(ind);
-        } else if (input.indexOf("delete") == 0) {
-            if (isAWord(input)) {
-                throw new DuckieInsufficientInfoException();
-            }
-
-            String description = input.split(" ")[1].strip();
-
-            if (description.equals("all")) {
-                return new DeleteAllCommand();
-            } else {
-                try {
-                    Integer.parseInt(input.split(" ")[1]);
-                } catch (NumberFormatException e) {
-                    throw new DuckieNoNumberInputException("Input 'delete all' if you want to clear all tasks.");
-                }
-                int ind = Integer.parseInt(description);
-                return new DeleteCommand(ind);
-            }
-        } else if (input.indexOf("todo") == 0) {
-            if (isAWord(input)) {
-                throw new DuckieInsufficientInfoException();
-            }
-            String todo = input.split(" ", 2)[1];
-            Task t1 = new Todo(todo);
-            return new AddCommand(t1);
-        } else if (input.indexOf("deadline") == 0) {
-            if (isAWord(input)) {
-                throw new DuckieInsufficientInfoException();
-            }
-
-            if (input.contains("/")) {
-                String[] splitted = input.split("/");
-                if (isAWord(splitted[1])) {
-                    throw new DuckieException("Please state a date in the format 'DD MMM YYYY' after '/by'.\n"
-                            + "\t" + "For example, 'deadline Quiz /by 21 Aug 2000'.");
-                }
-                String time = splitted[1].split(" ", 2)[1];
-                String description = splitted[0].split(" ", 2)[1];
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy");
-                LocalDate date = LocalDate.parse(time, formatter);
-                Task t1 = new Deadline(description, date);
-                return new AddCommand(t1);
-            } else {
-                throw new DuckieException("Please use '/by' to indicate the date input.");
-            }
-        } else if (input.toLowerCase().indexOf("event") == 0) {
-            if (isAWord(input)) {
-                throw new DuckieInsufficientInfoException();
-            }
-
-            if (input.contains("/")) {
-                String[] splitted = input.split("/");
-                if (isAWord(splitted[1])) {
-                    throw new DuckieException("Please state a date in the format 'DD MMM YYYY HH:MM a' after '/at'.\n"
-                            + "\t" + "For example, 'event Party /at 21 Aug 2000 07:20 PM'.");
-                }
-                String time = splitted[1].split(" ", 2)[1];
-                String description = splitted[0].split(" ", 2)[1];
-                DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy hh:mm a");
-                LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
-                Task t1 = new Event(description, dateTime);
-                return new AddCommand(t1);
-            } else {
-                throw new DuckieException("Please use '/at' to indicate the date input.");
-            }
-        } else if (input.indexOf("find") == 0) {
-            if (isAWord(input)) {
-                throw new DuckieInsufficientInfoException();
-            }
-
-            String keyword = input.split(" ", 2)[1];
-            return new FindCommand(keyword);
         } else {
-            throw new DuckieInvalidCommandException();
-        }
+            if (isAWord(input)) {
+                throw new DuckieInsufficientInfoException();
+            }
 
+            if (firstWord.equals("done")) {
+                int ind = parseDone(input);
+                return new DoneCommand(ind);
+            } else if (firstWord.equals("delete")) {
+                String description = input.split(" ")[1].strip();
+                if (description.equals("all")) {
+                    return new DeleteAllCommand();
+                } else {
+                    int ind = parseDelete(input, description);
+                    return new DeleteCommand(ind);
+                }
+            } else if (firstWord.equals("todo")) {
+                Task t1 = parseTodo(input);
+                return new AddCommand(t1);
+            } else if (firstWord.equals("deadline")) {
+                if (input.contains("/")) {
+                    Task t1 = parseDeadline(input);
+                    return new AddCommand(t1);
+                } else {
+                    throw new DuckieException("Please use '/by' to indicate the date input.");
+                }
+            } else if (firstWord.equals("event")) {
+                if (input.contains("/")) {
+                    Task t1 = parseEvent(input);
+                    return new AddCommand(t1);
+                } else {
+                    throw new DuckieException("Please use '/at' to indicate the date input.");
+                }
+            } else if (firstWord.equals("find")) {
+                String keyword = parseFind(input);
+                return new FindCommand(keyword);
+            } else {
+                throw new DuckieInvalidCommandException();
+            }
+        }
+    }
+
+    public static int parseDone(String input) throws DuckieException {
+        int ind;
+        try {
+            ind = Integer.parseInt(input.split(" ")[1]);
+        } catch (NumberFormatException e) {
+            throw new DuckieNoNumberInputException();
+        }
+        return ind;
+    }
+
+    public static int parseDelete(String input, String description) throws DuckieException {
+        try {
+            Integer.parseInt(input.split(" ")[1]);
+        } catch (NumberFormatException e) {
+            throw new DuckieNoNumberInputException("Input 'delete all' if you want to clear all tasks.");
+        }
+        int ind = Integer.parseInt(description);
+        return ind;
+    }
+
+    public static Task parseTodo(String input) {
+        String todo = input.split(" ", 2)[1];
+        Task t1 = new Todo(todo);
+        return t1;
+    }
+
+    public static Task parseDeadline(String input) throws DuckieException {
+        String[] splitted = input.split("/");
+        if (isAWord(splitted[1]) || input.split(" ")[1].equals("/")) {
+            throw new DuckieException("Please state a date in the format 'DD MMM YYYY' after '/by'.\n"
+                    + "\t" + "For example, 'deadline Quiz /by 21 Aug 2000'.");
+        }
+        String time = splitted[1].split(" ", 2)[1];
+        String description = splitted[0].split(" ", 2)[1];
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy");
+        LocalDate date = LocalDate.parse(time, formatter);
+        Task t1 = new Deadline(description, date);
+        return t1;
+    }
+
+    public static Task parseEvent(String input) throws DuckieException {
+        String[] splitted = input.split("/");
+        if (isAWord(splitted[1])) {
+            throw new DuckieException("Please state a date in the format 'DD MMM YYYY HH:MM a' after '/at'.\n"
+                    + "\t" + "For example, 'event Party /at 21 Aug 2000 07:20 PM'.");
+        }
+        String time = splitted[1].split(" ", 2)[1];
+        String description = splitted[0].split(" ", 2)[1];
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy hh:mm a");
+        LocalDateTime dateTime = LocalDateTime.parse(time, formatter);
+        Task t1 = new Event(description, dateTime);
+        return t1;
+    }
+
+    public static String parseFind(String input) {
+        String keyword = input.split(" ", 2)[1];
+        return keyword;
     }
 }

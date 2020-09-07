@@ -23,6 +23,11 @@ public class Todo extends Task {
         return "T";
     }
 
+    @Override
+    public String getDate() {
+        return null;
+    }
+
     /**
      * Overrides method to return the String representation of a Todo task.
      *
