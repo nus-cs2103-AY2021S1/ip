@@ -26,14 +26,17 @@ public class Duke extends Application {
 
     /**
      * Constructor for Duke
+     *
      * @throws IOException
      * @throws ClassNotFoundException
      */
     public Duke() throws IOException, ClassNotFoundException {
         this.taskList = Storage.load();
     }
+
     /**
      * main function
+     *
      * @throws IOException
      * @throws ClassNotFoundException
      */
@@ -57,14 +60,12 @@ public class Duke extends Application {
 
     /**
      * starting function for GUI Java FX.
+     *
      * @param stage
      */
 
     @Override
     public void start(Stage stage) {
-        //Step 1. Setting up required components
-
-        //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -94,7 +95,6 @@ public class Duke extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
@@ -118,14 +118,13 @@ public class Duke extends Application {
         });
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
-        // more code to be added here later
     }
 
     /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
+     *
+     * @return
      */
     private void handleUserInput() {
         String userText = userInput.getText();
@@ -139,6 +138,7 @@ public class Duke extends Application {
 
     /**
      * handles response from the user input
+     *
      * @param input
      * @return
      */
@@ -149,7 +149,7 @@ public class Duke extends Application {
         } catch (IllegalArgumentException exception) {
             return exception.getMessage();
         }
-        }
+    }
 }
 
 
