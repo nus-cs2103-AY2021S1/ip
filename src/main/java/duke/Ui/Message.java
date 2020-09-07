@@ -9,9 +9,10 @@ public class Message {
     public static final String MESSAGE_DONE = "¡Fantástico! I've marked this task as done:\n    ";
     public static final String MESSAGE_DELETE = "Entiendo! I've removed this task:\n    ";
     public static final String MESSAGE_FIND = "Here are the matching tasks in your list:\n";
-    public static final String MESSAGE_NO_TASK = "There are currently no tasks in your list\n";
+    public static final String MESSAGE_NO_TASK = "Dios mio! There are currently no tasks in your list\n";
     public static final String MESSAGE_LIST = "Here are the tasks in your list:\n";
     public static final String MESSAGE_LOADING_ERROR = "Failed to load tasks. An empty list is created.\n";
+    public static final String MESSAGE_PRIORITY = "Genial! I've changed the priority of this task:\n    ";
 
     /**
      * Prints the total number of tasks in the task list.

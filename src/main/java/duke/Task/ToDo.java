@@ -16,11 +16,11 @@ public class ToDo extends Task {
 
     /**
      * Converts a todo into serialized form (e.g.
-     * 'T | 1 | read book').
+     * 'T | 1 | 1 | read book').
      */
     @Override
     public String serialize() {
-        return String.format("T | %d | %s", getStatusCode(), description);
+        return String.format("T | %d | %d | %s", getStatusCode(), getPriorityValue(), description);
     }
 
     @Override

@@ -105,11 +105,11 @@ public class Event extends Task {
 
     /**
      * Converts an event into serialized form (e.g.
-     * 'E | 0 | project meeting | 20/12/2020 200-1400').
+     * 'E | 0 | 1 | project meeting | 20/12/2020 200-1400').
      */
     @Override
     public String serialize() {
-        return String.format("E | %d | %s | %s", getStatusCode(), description, at);
+        return String.format("E | %d | %d | %s | %s", getStatusCode(), getPriorityValue(), description, at);
     }
 
     @Override

@@ -1,14 +1,15 @@
 package duke.parser;
 
-import duke.exception.DukeException;
-
+import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.CompleteCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
 import duke.command.DeleteCommand;
-import duke.command.AddCommand;
+import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.PriorityCommand;
+
+import duke.exception.DukeException;
 
 /**
  * Handles making sense of the user command.
@@ -38,6 +39,10 @@ public class Parser {
             return new FindCommand(keyword);
         } else if (str.matches("^(todo|deadline|event).*")) {
             return new AddCommand(str);
+        } else if (str.contains("priority")) {
+            int taskIndex = Integer.parseInt(str.split("\\s+")[1]);
+            int priorityValue = Integer.parseInt(str.split("\\s+")[2]);
+            return new PriorityCommand(taskIndex, priorityValue);
         } else {
             throw new DukeException("did you type the wrong command? Try again!");
         }

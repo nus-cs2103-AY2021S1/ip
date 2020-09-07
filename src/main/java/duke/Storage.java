@@ -57,20 +57,40 @@ public class Storage {
             while (scanner.hasNextLine()) {
                 String[] data = scanner.nextLine().split(" \\| ");
                 Task task;
+
                 switch (data[0]) {
                 case "T":
-                    task = new ToDo(data[2]);
+                    task = new ToDo(data[3]);
                     break;
                 case "D":
-                    task = new Deadline(data[2], data[3]);
+                    task = new Deadline(data[3], data[4]);
                     break;
                 case "E":
-                    task = new Event(data[2], data[3]);
+                    task = new Event(data[3], data[4]);
                     break;
                 default:
                     throw new DukeException("Failed to load tasks.");
                 }
+
                 markTaskDone(task, data[1]);
+
+                switch (data[2]) {
+                case "1":
+                    task.setPriority(1);
+                    break;
+                case "2":
+                    task.setPriority(2);
+                    break;
+                case "3":
+                    task.setPriority(3);
+                    break;
+                case "4":
+                    task.setPriority(4);
+                    break;
+                default:
+                    throw new DukeException("Invalid priority value.");
+                }
+
                 tasks.add(task);
             }
             scanner.close();

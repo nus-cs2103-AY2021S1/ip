@@ -9,6 +9,7 @@ public abstract class Task {
 
     protected String description;
     protected boolean isDone;
+    protected TaskPriority taskPriority;
 
     /**
      * Constructs a <code>Task</code> Object to represent a task.
@@ -18,6 +19,7 @@ public abstract class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.taskPriority = TaskPriority.LOW; // sets the task to lowest priority by default
     }
 
     public String getStatusIcon() {
@@ -46,6 +48,30 @@ public abstract class Task {
     }
 
     /**
+     * Sets the priority value of a task.
+     *
+     * @param value The priority value of a task.
+     * @throws DukeException If an invalid priority value is passed in.
+     */
+    public void setPriority(int value) throws DukeException {
+        if (value == 1) {
+            taskPriority = TaskPriority.URGENT;
+        } else if (value == 2) {
+            taskPriority = TaskPriority.HIGH;
+        } else if (value == 3) {
+            taskPriority = TaskPriority.MEDIUM;
+        } else if (value == 4) {
+            taskPriority = TaskPriority.LOW;
+        } else {
+            throw new DukeException("Invalid priority value!");
+        }
+    }
+
+    public int getPriorityValue() {
+        return this.taskPriority.getPriorityValue();
+    }
+
+    /**
      * Converts a task into serialized form.
      *
      * @return The serialized form of a task.
@@ -54,6 +80,6 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), getDescription());
+        return String.format("[%s][%d] %s", getStatusIcon(), getPriorityValue(), getDescription());
     }
 }
