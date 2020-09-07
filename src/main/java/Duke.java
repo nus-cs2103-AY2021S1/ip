@@ -31,9 +31,9 @@ public class Duke {
      * @param msg user input
      * @return String
      */
-    private String processInput(String msg) {
-        assert false;
-        String result;
+
+    String processInput(String msg) {
+        assert !msg.isBlank() : "input is empty";
         if (msg.equals("bye")) {
             result = "Bye bye. Talk again soon!";
         } else if (msg.equals("list")) {
