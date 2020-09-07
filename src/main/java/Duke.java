@@ -263,6 +263,7 @@ public class Duke extends Application implements Initializable {
 
   public void handleItemEntered() {
     String commandWord = command.getText();
+    assert commandWord.length() > 0 : "Please enter a command";
     command.clear();
     if (commandWord.startsWith("bye")) {
       console.appendText("See you again soon!\n");
