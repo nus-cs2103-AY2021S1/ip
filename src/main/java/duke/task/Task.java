@@ -41,7 +41,7 @@ public class Task {
      *
      * @return String describing the task.
      */
-    public String saveString() {
+    public String getSaveString() {
         int completeSymbol = this.complete ? 1 : 0;
         return String.format("%s|%d|%s", SYMBOL, completeSymbol, this.title);
     }

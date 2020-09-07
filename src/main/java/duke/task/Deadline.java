@@ -4,6 +4,7 @@ package duke.task;
  * Deadline class for tasks that have a set deadline.
  */
 public class Deadline extends Task {
+    public static final String FORMAT = "deadline [^ ]+.+[^ ]+ /by [^ ]+.+";
     static final String SYMBOL = "D";
     private DateTime deadline;
 
@@ -36,9 +37,9 @@ public class Deadline extends Task {
      * @return A string to that can be saved into the .txt file
      */
     @Override
-    public String saveString() {
+    public String getSaveString() {
         int completeSymbol = this.complete ? 1 : 0;
-        return String.format("%s|%d|%s|%s", SYMBOL, completeSymbol, this.title, this.deadline.saveString());
+        return String.format("%s|%d|%s|%s", SYMBOL, completeSymbol, this.title, this.deadline.getSaveString());
     }
 
     /**
