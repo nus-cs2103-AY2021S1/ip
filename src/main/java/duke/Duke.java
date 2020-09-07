@@ -53,9 +53,9 @@ public class Duke extends Application {
      * Initialize storage, tasks, ui of Duke object.
      */
     public Duke() {
-        this.storage = new Storage(MEMORY_FILE_DIR, MEMORY_FILE_NAME);
+        storage = new Storage(MEMORY_FILE_DIR, MEMORY_FILE_NAME);
         try {
-            this.tasks = new TaskList(storage.readMemoTasks(), MEMORY_FILE_DIR, MEMORY_FILE_NAME);
+            tasks = new TaskList(storage.readMemoTasks(), MEMORY_FILE_DIR, MEMORY_FILE_NAME);
         } catch (Exception ex) {
             tasks = new TaskList();
             List<String> output = HandleException.handleException(DukeException.ExceptionType.READ_FILE);
@@ -64,7 +64,7 @@ public class Duke extends Application {
                         DialogBox.getDukeDialog(s, duke));
             }
             dialogContainer.getChildren().addAll(
-                    DialogBox.getDukeDialog("Let us start with an empty list first!", duke));
+                    DialogBox.getDukeDialog("Let us start with an empty list now.", duke));
         }
 
         this.ui = new Ui(MEMORY_FILE_DIR, MEMORY_FILE_NAME, tasks.showList());

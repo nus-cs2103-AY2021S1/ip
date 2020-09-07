@@ -46,7 +46,7 @@ public class DukeException extends Throwable {
                 + "\n'event MY_TASK /at DATE_OR_TIME'"
                 + "\n'find KEYWORD'"
                 + "\n'bye'\n\nNOTE: "
-                + "\nRecommended Form of DATE_OR_TIME: 'YYYY-MM-DD HHMM' or 'YYYY-MM-DD''";
+                + "\nAcceptable Form of DATE_OR_TIME: 'YYYY-MM-DD HHMM', 'YYYY-MM-DD', 'YYYY-MM-DD HH', 'YYYY-MM-DD H' or 'undecided''";
 
         switch(et) {
         case NO_MEANING:
@@ -66,22 +66,23 @@ public class DukeException extends Throwable {
             output.add("Please follow the format: 'find KEYWORD'");
             break;
         case DEADLINE_INCOMPLETE:
-            output.add("☹ OOPS!!! The description of a deadline cannot be empty or incomplete.");
+            output.add("☹ OOPS!!! The description of a deadline cannot be empty or incomplete.\n"
+                    + "\nUse '/by undecided' if you want to decide later!");
             output.add("Please follow the format: \n'deadline MY_TASK /by DATE_OR_TIME'\n"
-                    + "\n(Recommended DATE/TIME format:\n'YYYY-MM-DD HHMM' or 'YYYY-MM-DD')");
+                    + "\n(Acceptable DATE/TIME format:\n'YYYY-MM-DD HHMM', 'YYYY-MM-DD', 'YYYY-MM-DD HH', 'YYYY-MM-DD H' or 'undecided'.)");
             break;
         case EVENT_INCOMPLETE:
-            output.add("☹ OOPS!!! The description of an event cannot be empty or incomplete.");
+            output.add("☹ OOPS!!! The description of an event cannot be empty or incomplete.\n"
+                    + "\nUse '/at undecided' if you want to decide later!");
             output.add("Please follow the format: \n'event MY_TASK /at DATE_OR_TIME'\n"
-                    + "\nRecommended DATE/TIME format: 'YYYY-MM-DD HHMM' or 'YYYY-MM-DD'");
+                    + "\nAcceptable DATE/TIME format:\n 'YYYY-MM-DD HHMM', 'YYYY-MM-DD', 'YYYY-MM-DD HH', 'YYYY-MM-DD H' or 'undecided'.");
             break;
         case READ_FILE:
             output.add("☹ OOPS!!! There seems to be some problem accessing the memory file!");
             break;
         case IMPROPER_DATETIME:
-            output.add("☹ OOPS!!! We are unable to understand the Time provided.");
-            output.add("However, we will still add this task. No worries!\n"
-                    + "Next time, please consider the format 'YYYY-MM-DD HHMM' or 'YYYY-MM-DD'!");
+            output.add("☹ OOPS!!! We are unable to understand the DateTime provided.");
+            output.add("Please use the formats 'YYYY-MM-DD HHMM', 'YYYY-MM-DD', 'YYYY-MM-DD HH', 'YYYY-MM-DD H' or 'undecided'.!");
             break;
         default:
             output.add("☹ OOPS!!! Unspecified problem detected!");

@@ -11,131 +11,189 @@ public class Parser {
 
 
     /**
-     * Return Formatted datetime of a task.
+     * Returns Formatted datetime of a task.
+     * Returns 'improperDateTime' if datetime input cannot be processed properly.
      *
      * @param dateTime  User input of date and time of a Task object (specifically Deadline/Event).
      * @returns  Processed datetime of a Deadline or Event object.
      */
-    public String dateTimeParser(String dateTime) {
-        DateTimeConverter dtc = new DateTimeConverter(FormatStyle.MEDIUM, FormatStyle.SHORT);
-        return dtc.processTime(dateTime);
-    }
-
-
-    /**
-     * Return Specific information of a Task object.
-     *
-     * @param taskLine  Single line of information of a Task object.
-     * @returns  Specific information of a Task contained in an array of Strings.
-     */
-    public String[] memoTaskParser(String taskLine) {
-        assert (!taskLine.isBlank());
-
-        String[] tempType = taskLine.split(SpecialFormat.SPLIT_NOTN, 2);
-        String[] tempDetails;
-
-        if (tempType[0].equals("T")) {
-            tempDetails = tempType[1].split(SpecialFormat.SPLIT_NOTN, 2);
-            return new String[] {tempType[0], tempDetails[0], tempDetails[1]};
-        } else {
-            tempDetails = tempType[1].split(SpecialFormat.SPLIT_NOTN, 3);
-            return new String[] {tempType[0], tempDetails[0], tempDetails[1], tempDetails[2]};
-
+    public String dateTimeParser(String commandType, String dateTime) {
+        try {
+            DateTimeConverter dtc = new DateTimeConverter(FormatStyle.MEDIUM, FormatStyle.SHORT);
+            return dtc.processTime(commandType, dateTime);
+        } catch (Exception e) {
+            return "improperDateTime";
         }
     }
 
 
     /**
-     * Return Specific information of a Command in Segments.
+     * Returns Specific information of a Task object.
+     *
+     * @param taskLine  Single line of information of a Task object.
+     * @returns  Specific information of a Task contained in an array of Strings.
+     */
+    public String[] localFileTaskParser(String taskLine) {
+        assert (!taskLine.isBlank());
+        String[] taskTypeAndContent = taskLine.split(SpecialFormat.SPLIT_NOTN, 2);
+        String taskType = taskTypeAndContent[0];
+        String taskContent = taskTypeAndContent[1];
+        String[] taskDetails;
+
+        if (taskType.equals("T")) {
+            taskDetails = taskContent.split(SpecialFormat.SPLIT_NOTN, 2);
+            return new String[] {taskType, taskDetails[0], taskDetails[1]};
+        } else {  // if taskType has value of "E" or "D", representing Event or Deadline object
+            taskDetails = taskContent.split(SpecialFormat.SPLIT_NOTN, 3);
+            // taskDetails[0] isDone, taskDetails[1] taskAction, taskDetails[2] datetime
+            return new String[] {taskType, taskDetails[0], taskDetails[1], taskDetails[2]};
+        }
+    }
+
+
+    /**
+     * Returns Specific information of a Command in Segments.
+     * Returns Specific information of an exception in Segments if exceptions caught.
      *
      * @param input  User input of command.
      * @returns  Specific information of a Command in the form of String array.
      */
     public String[] commandParser(String input) {
-        String commandType;
-        String[] output = new String[] {};
 
-        if (input.equals("bye")) {
-            commandType = "bye";
-            output = new String[] {commandType};
-        } else if (input.equals("hello")) {
-            commandType = "hello";
-            output = new String[] {commandType};
-        } else if (input.equals("list")) {
-            commandType = "list";
-            output = new String[] {commandType};
-        } else {
-            String exceptionType;
-            String[] inputSplitArr;
-            inputSplitArr = input.split(" ", 2);
-            commandType = inputSplitArr[0];
-
-            if (commandType.equals("done") || commandType.equals("delete")) {
-                try {
-                    String actionNumber = inputSplitArr[1];
-                    output = new String[] {commandType, actionNumber};
-                } catch (Exception ex) {
-                    commandType = "exception";
-                    return new String[] {commandType, "empty_illegal"};
-                }
-            } else if (commandType.equals("find")) {
-                String keyword;
-                try {
-                    keyword = inputSplitArr[1];
-                } catch (Exception e) {
-                    return new String[] {"exception", "find"};
-                }
-                /*if (keyword.isBlank()) {
-                    return new String[] {"exception", "find"};
-                }*/
-                output = new String[] {commandType, keyword};
-            } else if (commandType.equals("deadline") || commandType.equals("event") ||
-                    commandType.equals("todo")) {
-                String taskContent;
-                String dateTime;
-
-                if (!commandType.equals("todo")) {
-                    try {
-                        inputSplitArr = inputSplitArr[1].split(
-                                commandType.equals("event") ? " /at " : " /by ", 2);
-                    } catch (Exception ex) {
-                        exceptionType = commandType.equals("deadline")
-                                ? "deadline"
-                                : "event";
-                        commandType = "exception";
-                        return new String[] {commandType, exceptionType};
-                    }
-                }
-
-                if (commandType.equals("todo")) {
-                    try {
-                        taskContent = inputSplitArr[1];
-                    } catch (Exception e) {
-                        return new String[] {"exception", "todo"};
-                    }
-                    output = new String[] {commandType, taskContent};
-                } else {
-                    try {
-                        taskContent = inputSplitArr[0];
-                        dateTime = inputSplitArr[1];
-                        dateTime = this.dateTimeParser(dateTime);
-                        output = new String[] {commandType, taskContent, dateTime};
-                    } catch (Exception ex) {
-                        exceptionType = commandType.equals("event")
-                                ? "event"
-                                : "deadline";
-                        commandType = "exception";
-                        return new String[] {commandType, exceptionType};
-                    }
-                }
-
-            } else {
-                exceptionType = "no_meaning";
-                commandType = "exception";
-                return new String[] {commandType, exceptionType};
+        String cleanInput = input.trim();
+        if (!cleanInput.contains(" ")) {   // single word command
+            switch (cleanInput) {
+            case "bye":
+            case "hello":
+            case "list":
+                return new String[]{input};
+            default:
+                return parseException(cleanInput);
             }
         }
-        return output;
+
+        String[] inputSplitArr = cleanInput.split(" ", 2);
+        String commandType = inputSplitArr[0];
+        String taskContent = inputSplitArr[1];
+
+        switch (commandType) {
+        case "find":
+            return parseFind(taskContent);
+        case "done":
+        case "delete":
+            return parseModifications(commandType, taskContent);
+        case "todo":
+        case "event":
+        case "deadline":
+            return parseNewEvent(commandType, taskContent);
+
+        default:
+            return new String[] {"exception", "no_meaning"};
+        }
+
+    }
+
+
+    /**
+     * Returns Specific information of a 'find' command in Segments.
+     *
+     * @param keyword  User input of keyword to search for.
+     * @returns  Specific information of a find command in the form of String array.
+     */
+    public String[] parseFind(String keyword) {
+        return new String[] {"find", keyword};
+    }
+
+
+    /**
+     * Returns Specific information of a 'done' or 'delete' command in Segments.
+     *
+     * @param commandType  type of command, i.e. 'done' or 'delete'.
+     * @param actionNumber  index of task to be modified.
+     * @returns  Specific information of this modification command in the form of String array.
+     */
+    public String[] parseModifications(String commandType, String actionNumber) {
+        return new String[] {commandType, actionNumber};
+    }
+
+
+    /**
+     * Returns Specific information of a add-new-event command in Segments.
+     *
+     * @param commandType  type of command, i.e. 'todo' or 'event' or 'deadline'.
+     * @param taskContent  content of task to be added.
+     * @returns  Specific information of 'todo' or 'event' or 'deadline' command in String array.
+     */
+    public String[] parseNewEvent(String commandType, String taskContent) {
+        if (commandType.equals("todo")) {
+            return parseTodo(taskContent);
+        } else {
+            return parseEventAndDeadline(commandType, taskContent);
+        }
+
+    }
+
+
+    /**
+     * Returns Specific information of a 'todo' command in Segments.
+     *
+     * @param taskContent  content of task to be added.
+     * @returns  Specific information of 'todo' command in String array.
+     */
+    public String[] parseTodo(String taskContent) {
+        return new String[] {"todo", taskContent};
+    }
+
+
+    /**
+     * Returns Specific information of a 'event' or 'deadline' command in Segments.
+     * Returns Specific information of an exception in Segments if exceptions caught.
+     *
+     * @param commandType  type of command, i.e. 'event' or 'deadline'.
+     * @param taskContent  content of task to be added.
+     * @returns  Specific information of 'event' or 'deadline' command in String array.
+     */
+    public String[] parseEventAndDeadline(String commandType, String taskContent) {
+        try {
+            String[] taskDetails = taskContent.split(
+                    commandType.equals("event") ? " /at " : " /by ", 2);
+
+            String taskAction = taskDetails[0];
+            String dateTime = taskDetails[1];
+
+            dateTime = dateTimeParser(commandType, dateTime);
+
+            if (dateTime.equals("improperDateTime")) {
+                return new String[]{"exception", "improperDateTime"};
+            }
+
+            return new String[]{commandType, taskAction, dateTime};
+
+        } catch (Exception ex) {
+            return parseException(commandType);
+        }
+    }
+
+
+    /**
+     * Returns Specific information of an exception in Segments.
+     *
+     * @param type  type of exception to be processed.
+     * @returns  Specific information of exception in String array.
+     */
+    public String[] parseException(String type) {
+        switch (type) {
+        case "done":
+        case "delete":
+            return new String[] {"exception", "empty_illegal"};
+        case "find":
+        case "todo":
+        case "event":
+        case "deadline":
+            return new String[] {"exception", type};
+        default:
+            return new String[] {"exception", "no_meaning"};
+        }
     }
 
 }
