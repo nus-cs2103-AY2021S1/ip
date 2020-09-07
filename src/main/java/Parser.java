@@ -13,16 +13,28 @@ public class Parser {
 
                     case "bye": {
                         response += "Bye. Hope to see you again soon!";
+<<<<<<< HEAD
+                        break;
+=======
+>>>>>>> origin/master
                     }
 
                     case "find": {
 
                         response += tasks.findTask(keyword[1]);
+<<<<<<< HEAD
+                        break;
+=======
+>>>>>>> origin/master
                     }
 
                     case "delete": {
                         int index = Integer.parseInt(keyword[1]) - 1;
                         response += tasks.deleteTask(index);
+<<<<<<< HEAD
+                        break;
+=======
+>>>>>>> origin/master
                     }
 
                     case "todo": {
@@ -32,6 +44,10 @@ public class Parser {
                         }
                         Todo newTodo = new Todo(textMessage.substring(5), false);
                         response += tasks.addTask(newTodo);
+<<<<<<< HEAD
+                        break;
+=======
+>>>>>>> origin/master
                     }
 
 
@@ -47,6 +63,10 @@ public class Parser {
                         } catch (Exception e) {
                             throw new InvalidFormatException();
                         }
+<<<<<<< HEAD
+                        break;
+=======
+>>>>>>> origin/master
 
                     }
 
@@ -62,6 +82,34 @@ public class Parser {
                         } catch (Exception e) {
                             throw new InvalidFormatException();
                         }
+<<<<<<< HEAD
+                        break;
+
+                    }
+
+                    case "list": {
+                        response += tasks.showList();
+                        break;
+                    }
+
+                    case "stats": {
+                        response += tasks.numberOfTaskCompleted();
+                        break;
+                    }
+
+                    case "done": {
+                        int index = Integer.parseInt(keyword[1]) - 1;
+                        tasks.getTasks().get(index).markDone();
+                        response += "Nice I've marked this tasks as done";
+                        response += tasks.getTasks().get(index);
+                        break;
+                    }
+
+                    default:
+                        response += "\n"+ ui.inputInstruction();
+                        throw new InvalidInputException();
+
+=======
 
                     }
 
@@ -78,12 +126,14 @@ public class Parser {
 
                     default:
                         throw new InvalidInputException();
+>>>>>>> origin/master
                 }
 
             }
             catch (DukeException e) {
                 response += e.getMessage();
             }
+
 
         return response;
     }
