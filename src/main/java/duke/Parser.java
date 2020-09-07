@@ -26,6 +26,7 @@ public class Parser {
     static Command parse (String fullCommand)
         throws InvalidInputException, InvalidCommandException, InvalidTaskTypeException {
         String[] commands = fullCommand.trim().split(" ", 2);
+        assert !fullCommand.isEmpty(): "Command cannot be empty";
         switch(commands[0]) {
         case "bye":
             return new ExitCommand();
