@@ -24,6 +24,7 @@ public class TaskList {
      * @param taskId given duke.task ID
      */
     public static void removeFromList(int taskId) {
+        assert taskId > 0 : "Task number provided cannot be less than 1!";
         toDoList.remove(taskId - 1);
     }
 

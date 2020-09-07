@@ -8,6 +8,7 @@ import duke.task.TaskList;
 public class CheckCommand extends Command {
     final int checkInt;
     public CheckCommand(int checkInt) {
+        assert checkInt > 0 : "Task number provided cannot be less than 1!";
         this.checkInt = checkInt;
     }
 
@@ -19,11 +20,10 @@ public class CheckCommand extends Command {
      */
     @Override
     public String execute(Ui ui, Storage storage) {
+        assert checkInt > 0 : "Task number provided cannot be less than 1!";
         Task task = TaskList.getList().get(checkInt - 1);
         task.markAsDone();
         storage.save(TaskList.getList());
-        /*ui.checkList(duke.task.toString(), duke.task.getTaskStatusIcon());
-        ui.printNumberOfTasks(duke.task.TaskList.toDoList.size());*/
         return ui.checkList(task.toString(), task.getTaskStatusIcon())
                 + ui.printNumberOfTasks(TaskList.getList().size());
     }
