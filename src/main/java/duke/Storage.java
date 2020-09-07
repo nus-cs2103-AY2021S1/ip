@@ -22,6 +22,7 @@ public class Storage {
     public void writeFile(TaskList tl) {
         try {
             ArrayList<Task> tasks = tl.getTaskList();
+            assert tasks != null : "Task list should not be null";
             StringBuilder replacementText = new StringBuilder();
             createFile("data/duke.txt");
             for (int i = 0; i < tasks.size(); i++) {
@@ -75,6 +76,7 @@ public class Storage {
             String curr = readSc.nextLine();
             char taskType = curr.charAt(1);
             char taskState = curr.charAt(4);
+            assert taskType != null : "Command should not be null";
             switch (taskType) {
             case 'T':
                 try {
