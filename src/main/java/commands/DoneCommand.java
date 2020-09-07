@@ -13,27 +13,35 @@ public class DoneCommand extends Command {
 
     private TaskList taskList;
     private Storage storage;
-    private String user_input;
+    private String userInput;
 
-    public DoneCommand(TaskList taskList, Storage storage, String user_input) {
+    /**
+     * Constructs a done command.
+     * @param taskList of Duke.
+     * @param storage of Duke.
+     * @param ui of Duke.
+     * @param userInput details of command.
+     */
+    public DoneCommand(TaskList taskList, Storage storage, String userInput, Ui ui) {
+        super(ui);
         this.taskList = taskList;
         this.storage = storage;
-        this.user_input = user_input;
+        this.userInput = userInput;
     }
 
     @Override
     public String execute() throws DukeInvalidUserInputException {
         //Get number after done keyword
-        if (this.user_input.length() == 4) {
+        if (this.userInput.length() == 4) {
             throw new DukeInvalidUserInputException("I'm sorry to inform you that the "
                     + "description of a done must not be empty.");
         }
         try {
-            String int_substring = this.user_input.substring(5);
-            int int_substring_converted = Integer.parseInt(int_substring);
+            String intSubstring = this.userInput.substring(5);
+            int indexNumber = Integer.parseInt(intSubstring);
             this.storage.saveTaskList(this.taskList); //Overwrites current data.txt file
-            Task taskDone = this.taskList.markDone(int_substring_converted);
-            return Ui.showMarkDone(taskDone);
+            Task taskDone = this.taskList.markDone(indexNumber);
+            return this.ui.showMarkDone(taskDone);
         } catch (NumberFormatException ex) {
             throw new DukeInvalidUserInputException("My sincere apologies, but please enter a valid number.");
         } catch (IndexOutOfBoundsException ex) {

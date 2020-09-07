@@ -1,7 +1,5 @@
 package data.task;
 
-import ui.Ui;
-
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -34,7 +32,8 @@ public class TaskList {
     }
 
     /**
-     * Deletes a specific task based on the task's index in the task array list and then generates and prints a success message.
+     * Deletes a specific task based on the task's index in the task array list
+     * and then generates and prints a success message.
      * @param i index of task to be deleted.
      */
     public Task delete(int i) {
@@ -44,7 +43,8 @@ public class TaskList {
     }
 
     /**
-     * Marks a specific task as done based on task's index in the task array list and then generates and prints a success message.
+     * Marks a specific task as done based on task's index in the task array list
+     * and then generates and prints a success message.
      * @param i index of task to be marked.
      */
     public Task markDone(int i) {
@@ -73,7 +73,7 @@ public class TaskList {
     public ArrayList<Task> findTasksKeyword(String keyword) {
         ArrayList<Task> result = new ArrayList<>();
         for (Task task : this.taskList) {
-            if (task.descriptionContains(keyword)) {
+            if (task.containsKeyword(keyword)) {
                 result.add(task);
             }
         }
@@ -99,8 +99,6 @@ public class TaskList {
                 if (event.getDate().equals(inputDate)) {
                     result.add(task);
                 }
-            } else {
-                //ignore To_Do tasks as they do not have dates
             }
         }
         return result;

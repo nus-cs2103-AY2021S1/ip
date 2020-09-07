@@ -1,43 +1,54 @@
 package commands;
 
+import java.util.ArrayList;
+
 import data.exception.DukeException;
 import data.exception.DukeInvalidUserInputException;
 import data.task.Task;
 import data.task.TaskList;
 import ui.Ui;
 
-import java.util.ArrayList;
-
 /**
- * Finds tasks based on their description that matches a specific user_input keyword.
+ * Finds tasks based on their description that matches a specific userInput keyword.
  */
-public class FindCommand extends Command{
+public class FindCommand extends Command {
 
     private TaskList taskList;
-    private Ui ui;
-    private String user_input;
+    private String userInput;
 
-    public FindCommand(TaskList taskList, Ui ui, String user_input) {
+    /**
+     * Constructs a find command.
+     * @param taskList of Duke.
+     * @param ui of Duke.
+     * @param userInput details of command.
+     */
+    public FindCommand(TaskList taskList, Ui ui, String userInput) {
+        super(ui);
         this.taskList = taskList;
-        this.ui = ui;
-        this.user_input = user_input;
+        this.userInput = userInput;
     }
 
 
     @Override
     public String execute() throws DukeException {
-        if (this.user_input.trim().length() == 4) {
+        if (isFindFieldEmpty(this.userInput)) {
             return this.ui.showFindResults(this.taskList.getTaskList(), ""); //show all tasks
-        } else {
-            String[] userInputArr = this.user_input.split(" ");
-            if (userInputArr.length > 2) {
-                throw new DukeInvalidUserInputException("My deepest apologies but I'm only able to "
-                        + "find tasks based on a single keyword.");
-            } else {
-                String keyword = userInputArr[1];
-                ArrayList<Task> result = this.taskList.findTasksKeyword(keyword);
-                return this.ui.showFindResults(result, keyword);
-            }
         }
+        String[] userInputArr = this.userInput.split(" ");
+        if (!isSingleField(userInputArr)) {
+            throw new DukeInvalidUserInputException("My deepest apologies but I'm only able to "
+                    + "find tasks based on a single keyword.");
+        }
+        String keyword = userInputArr[1];
+        ArrayList<Task> result = this.taskList.findTasksKeyword(keyword);
+        return this.ui.showFindResults(result, keyword);
+    }
+
+    private boolean isFindFieldEmpty(String userInput) {
+        return userInput.trim().length() == 4;
+    }
+
+    private boolean isSingleField(String[] userInputArr) {
+        return userInputArr.length <= 2;
     }
 }

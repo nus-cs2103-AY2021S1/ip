@@ -11,52 +11,40 @@ import ui.Ui;
 /**
  * Adds a Deadline task into the current task list of Duke.
  */
-public class DeadlineCommand extends Command {
+public class DeadlineCommand extends CreateTaskCommand {
 
-    private TaskList taskList;
-    private Storage storage;
-    private Ui ui;
-    private String user_input;
-
-    public DeadlineCommand(TaskList taskList, Storage storage, Ui ui, String user_input) {
-        this.taskList = taskList;
-        this.storage = storage;
-        this.user_input = user_input;
-        this.ui = ui;
+    /**
+     * Constructs a deadline command.
+     * @param taskList of Duke.
+     * @param storage of Duke.
+     * @param ui of Duke.
+     * @param userInput details of tasks.
+     */
+    public DeadlineCommand(TaskList taskList, Storage storage, Ui ui, String userInput) {
+        super(taskList, storage, ui, userInput);
     }
 
     @Override
     public String execute() throws DukeInvalidUserInputException, DukeIllegalCommandException {
         try {
-            String withoutCommand = user_input.substring(user_input.indexOf(' '));
-            String[] withoutCommandArr = withoutCommand.split("/");
-            String description = withoutCommandArr[0].trim();
-            if (description.isEmpty()) {
-                throw new DukeInvalidUserInputException("I'm sorry to inform you that the "
-                        + "description of a deadline must not be empty.");
-            }
-            if (withoutCommandArr.length < 2) {
-                throw new DukeInvalidUserInputException("It appears you are missing a "
-                        + "follow up '/by' command.");
-            }
-            String followUpCommand = Parser.parseFollowUpCommand(withoutCommandArr[1]);
+            String userInputWithoutCommand = this.userInput.substring(this.userInput.indexOf(' '));
+            String[] userInputWithoutCommandArr = userInputWithoutCommand.split("/");
+            String description = userInputWithoutCommandArr[0].trim();
+            checkDescription(description, "deadline");
+            checkFollowUpCommand(userInputWithoutCommandArr, "/by");
+            String followUpCommand = Parser.parseFollowUpCommand(userInputWithoutCommandArr[1]);
             if (followUpCommand.equals("by")) {
-                if (!withoutCommandArr[1].trim().contains(" ")) {
-                    throw new DukeInvalidUserInputException("It appears you are missing "
-                            + "the date and time for your deadline.");
-                }
-                String dateTime = withoutCommandArr[1].substring(withoutCommandArr[1].indexOf(" ")).trim();
+                checkDateTime(userInputWithoutCommandArr[1], "deadline");
+                String dateTime = userInputWithoutCommandArr[1]
+                        .substring(userInputWithoutCommandArr[1].indexOf(" ")).trim();
                 Deadline newTask = new Deadline(description, dateTime);
-                this.taskList.add(newTask);
-                this.storage.saveTask(newTask);
-                return this.ui.showAddedToList(newTask) + "\n"
-                        + this.ui.showTotalTasks(this.taskList.getTotalTask());
+                return addTask(newTask);
             } else {
                 throw new DukeIllegalCommandException(followUpCommand);
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeInvalidUserInputException("I'm sorry to inform you that the description "
-                    + "of a deadline must not be empty.");
+            throw new DukeInvalidUserInputException("It seems you have entered an invalid date and time. "
+                    + "The format should be as follows YYYY-MM-DD hhmm.");
         }
     }
 

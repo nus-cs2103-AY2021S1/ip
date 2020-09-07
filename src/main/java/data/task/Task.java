@@ -10,7 +10,7 @@ public abstract class Task {
     private String[] descriptionArr; //to facilitate finding/searching of keyword
     private boolean isDone;
 
-    public Task(String description) {
+    Task(String description) {
         this.description = description;
         this.descriptionArr = description.split(" ");
         this.isDone = false;
@@ -20,7 +20,6 @@ public abstract class Task {
      * Obtains status icon(either tick or cross symbol) based on the Task's isDone status.
      * @return status icon string.
      */
-    //return tick or cross symbol accordingly
     public String getStatusIcon() {
         if (isDone) {
             return "\u2713";
@@ -74,7 +73,7 @@ public abstract class Task {
      * @param keyword to be checked.
      * @return whether the keyword is within the description.
      */
-    public boolean descriptionContains(String keyword) {
+    public boolean containsKeyword(String keyword) {
         for (String word : descriptionArr) {
             if (word.toLowerCase().equals(keyword.toLowerCase())) {
                 return true;

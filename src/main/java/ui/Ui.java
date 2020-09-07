@@ -1,28 +1,26 @@
 package ui;
 
-import data.exception.DukeException;
-import data.task.Task;
-
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import data.exception.DukeException;
+import data.task.Task;
 /**
  * User interface of Duke which manages all text output.
  */
 public class Ui {
 
-    private final Scanner user_input;
+    private final Scanner userInput;
 
     public Ui() {
-        this.user_input = new Scanner(System.in);
+        this.userInput = new Scanner(System.in);
     }
 
     /**
      * Generates and prints greeting message upon launching of Duke.
      */
     public static String showGreeting() {
-        String greeting = "Oh Golly! Who do we have here?\nThe name's Duke, how can I be of assistance?";
-        return greeting;
+        return "Oh Golly! Who do we have here?\nThe name's Duke, how can I be of assistance?";
     }
 
     /**
@@ -62,16 +60,14 @@ public class Ui {
      * @param i the total number of task in a tasklist.
      */
     public String showTotalTasks(int i) {
-        String totalTaskMsg = "Marvellous! Now you have " + i + " tasks in your list!";
-        return totalTaskMsg;
+        return "Marvellous! Now you have " + i + " tasks in your list!";
     }
 
     /**
      * Generates and prints the exit message upon exiting Duke.
      */
     public String showExit() {
-        String parting = "Well, I'm utterly knackered! Cheerios!";
-        return parting;
+        return "Well, I'm utterly knackered! Cheerios!";
     }
 
     /**
@@ -79,11 +75,17 @@ public class Ui {
      * @param task that is added to the tasklist.
      */
     public String showAddedToList(Task task) {
-        String add_to_listMsg = "No worries, the following task has been added to your list:";
-        return add_to_listMsg + "\t" + task;
+        String addToListMsg = "No worries, the following task has been added to your list:";
+        return addToListMsg + "\t" + task;
     }
 
-    public String showFindResults(ArrayList<Task> taskList, String user_input) {
+    /**
+     * Displays the search result of find command.
+     * @param taskList to be searched.
+     * @param userInput find keyword given by user.
+     * @return search result as a String.
+     */
+    public String showFindResults(ArrayList<Task> taskList, String userInput) {
         String output = "";
         for (int i = 0; i < taskList.size(); i++) {
             Task currentTask = taskList.get(i);
@@ -93,8 +95,8 @@ public class Ui {
                 output = output + (i + 1) + "." + currentTask + "\n";
             }
         }
-        String getListMsg = "Splendid! Here are the tasks in your list that matches " + "'" + user_input + "'" + ":";
-        String emptyListMsg = "Oh dear, it seems that there are no tasks that matches " + "'" + user_input + "'" + ".";
+        String getListMsg = "Splendid! Here are the tasks in your list that matches " + "'" + userInput + "'" + ":";
+        String emptyListMsg = "Oh dear, it seems that there are no tasks that matches " + "'" + userInput + "'" + ".";
         if (taskList.size() < 1) {
             return emptyListMsg;
         } else {
@@ -106,20 +108,19 @@ public class Ui {
      * Generates and prints the unknown error message upon encountering an unidentifiable error.
      */
     public static String showUnknownError() {
-        String unknownErrorMsg = "OH FIDDLESTICKS, WE SEEM TO HAVE HIT A BUMP ON THE ROAD HERE. "
+        return "OH FIDDLESTICKS, WE SEEM TO HAVE HIT A BUMP ON THE ROAD HERE. "
                 + "AN UNKNOWN ERROR HAS BEEN DETECTED.";
-        return unknownErrorMsg;
     }
 
     public String getUserInput() {
-        return this.user_input.nextLine();
+        return this.userInput.nextLine();
     }
 
     /**
      * Generates and prints the done message when a task is being marked as done.
      * @param task that is being marked as done.
      */
-    public static String showMarkDone(Task task) {
+    public String showMarkDone(Task task) {
         String markDoneMsg = "Splendid! I've marked the following task as done:";
         String taskDetails = "  [" + task.getStatusIcon() + "] " + task.getDescription();
         return markDoneMsg + "\n" + taskDetails;

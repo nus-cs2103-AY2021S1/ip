@@ -1,20 +1,22 @@
-import data.task.*;
-import org.junit.jupiter.api.Test;
-import storage.Storage;
-import ui.Ui;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import org.junit.jupiter.api.Test;
 
+import data.task.Deadline;
+import data.task.Event;
+import data.task.TaskList;
+import data.task.ToDo;
+import storage.Storage;
 public class StorageTest {
 
     @Test
-    public void constructor_nullFilePath_exceptionThrown() throws Exception {
+    public void constructor_nullFilePath_exceptionThrown() {
         assertThrows(NullPointerException.class, () -> new Storage(null));
     }
 
@@ -27,7 +29,8 @@ public class StorageTest {
         assertEquals(3, dummyTaskList.getTotalTask());
         assertEquals(dummyTaskList.getTask(0).toTxtFormat(), "T | 1 | buy books");
         assertEquals(dummyTaskList.getTask(1).toTxtFormat(), "D | 1 | eat bread | 6 May 2020 04:00 AM");
-        assertEquals(dummyTaskList.getTask(2).toTxtFormat(), "E | 0 | eat dinner | 12 December 2018 11:00 PM to 01:00 AM");
+        assertEquals(dummyTaskList.getTask(2).toTxtFormat(), "E | 0 | eat dinner | "
+                + "12 December 2018 11:00 PM to 01:00 AM");
     }
 
     @Test
@@ -40,7 +43,7 @@ public class StorageTest {
     }
 
     @Test
-    public void save_nullTask() throws Exception {
+    public void save_nullTask() {
         String validTxtFile = "data/storageValidTest.txt";
         Storage storage = new Storage(validTxtFile);
         assertThrows(NullPointerException.class, () -> storage.saveTask(null));
@@ -67,7 +70,7 @@ public class StorageTest {
     }
 
     private TaskList createDummyTaskList() {
-        return new TaskList(new ArrayList<Task>(), new Ui());
+        return new TaskList(new ArrayList<>());
     }
 
     private ToDo createDummyToDo() {
@@ -78,7 +81,7 @@ public class StorageTest {
         return new Deadline("A Valid Deadline", "2020-08-24 2000");
     }
 
-    private Event createDummyEvent() throws Exception{
+    private Event createDummyEvent() throws Exception {
         return new Event("A Valid Event", "2020-08-24 2000-0100");
     }
 

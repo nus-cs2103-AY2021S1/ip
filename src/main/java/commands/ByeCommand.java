@@ -7,10 +7,8 @@ import ui.Ui;
  */
 public class ByeCommand extends Command {
 
-    private Ui ui;
-
     public ByeCommand(Ui ui) {
-        this.ui = ui;
+        super(ui);
     }
 
     @Override
