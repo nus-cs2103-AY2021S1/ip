@@ -23,6 +23,7 @@ public class ToDo extends Task {
         return "T | " + (super.getStatus() == "Completed" ? "1" : "0") + " | " + super.getTaskName();
     }
 
+
     /**
      * Returns String representation of to-do task to be displayed in task list.
      *

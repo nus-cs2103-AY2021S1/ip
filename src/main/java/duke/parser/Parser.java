@@ -11,6 +11,7 @@ import duke.commands.DoneCommand;
 import duke.commands.FindCommand;
 import duke.commands.HelpCommand;
 import duke.commands.ListCommand;
+import duke.commands.TagCommand;
 import duke.exception.InvalidCommand;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -60,9 +61,28 @@ public class Parser {
         } else if (command.contains("help")) {
             HelpCommand newCommand = new HelpCommand();
             return newCommand;
+        } else if (command.contains("tag")) {
+            TagCommand newCommand = processTag(command);
+            return newCommand;
         }
         //Throws an error if user command does not match any keywords.
         throw new InvalidCommand("Please enter the correct command");
+    }
+
+    private static TagCommand processTag(String command) throws InvalidCommand {
+        try {
+            int taskIndex = -1;
+            try {
+                taskIndex = Integer.parseInt(command.substring(4, 5)) - 1;
+            } catch (NumberFormatException ex) {
+                throw new InvalidCommand("Please enter task number instead of task name!");
+            }
+            String tagWord = command.substring(6);
+            TagCommand tc = new TagCommand(taskIndex, tagWord);
+            return tc;
+        } catch (StringIndexOutOfBoundsException ex) {
+            throw new InvalidCommand("OOPS!!! Please specify your task.");
+        }
     }
 
     private static FindCommand processFind(String command) throws InvalidCommand {
@@ -85,7 +105,7 @@ public class Parser {
         }
         try {
             int deleteIndex = Integer.parseInt(deleteInput[1]);
-            DeleteCommand dc = new DeleteCommand(deleteIndex);
+            DeleteCommand dc = new DeleteCommand(deleteIndex - 1);
             return dc;
         } catch (NumberFormatException ex) {
             throw new InvalidCommand("Please enter a valid task number");
@@ -163,7 +183,7 @@ public class Parser {
         } catch (NumberFormatException ex) {
             throw new InvalidCommand("Please enter task number instead of task name!");
         }
-        DoneCommand dc = new DoneCommand(taskToDo);
+        DoneCommand dc = new DoneCommand(taskToDo - 1);
         return dc;
     }
 }

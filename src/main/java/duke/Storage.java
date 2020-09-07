@@ -78,7 +78,7 @@ public class Storage {
     }
 
     /**
-     * Edits any tasks in the current stroage file if they have been marked as done.
+     * Edits any tasks in the current storage file if they have been marked as done.
      *
      * @param editedTask Task to be edited.
      * @param taskIndex Index of task in the task list.
@@ -91,6 +91,14 @@ public class Storage {
         currentList.get(taskIndex).markDone();
         String lineToChangeTo = getStorageName(taskType, editedTask);
         editTaskFromFile(lineToEdit, lineToChangeTo);
+    }
+
+    public void editTaggedTask(Task editedTask, int taskIndex, TaskList currentList, String tagWord) throws InvalidCommand {
+        String typeOfTask = checkTaskType(editedTask);
+        String lineToChangeInStorage = getStorageName(typeOfTask, editedTask);
+        currentList.get(taskIndex).tagTask(tagWord);
+        String lineToChangeTo = getStorageName(typeOfTask, editedTask);
+        editTaskFromFile(lineToChangeInStorage, lineToChangeTo);
     }
 
     /**
@@ -280,13 +288,26 @@ public class Storage {
     }
 
     private String trimTaskName(String[] storageFileString) {
-        return storageFileString[2].trim();
+        String taskName = storageFileString[2].trim();
+        if (taskName.contains("#")) {
+            int indexOfTaggedWord = taskName.indexOf('#');
+            return taskName.substring(0,indexOfTaggedWord - 1);
+        }
+        return taskName;
     }
 
     private boolean checkTaskStatus(String[] storageFileString) {
         int statusValue = Integer.parseInt(storageFileString[1].trim());
         assert statusValue == 1 || statusValue == 0 : "Your storage file is corrupted.";
         if (statusValue == 1) {
+            return true;
+        }
+        return false;
+    }
+
+    private boolean checkTaskTaggedStatus(String[] storageFileString) {
+        String taskName = storageFileString[2].trim();
+        if (taskName.contains("#")) {
             return true;
         }
         return false;
@@ -300,35 +321,51 @@ public class Storage {
     private void processTasks(String[] taskStorageString, TaskList toBeUpdatedTaskList) {
         String trimmedTaskName = trimTaskName(taskStorageString);
         boolean isTaskDone = checkTaskStatus(taskStorageString);
+        boolean isTaskTagged = checkTaskTaggedStatus(taskStorageString);
+        String tagWord = getTagWord(taskStorageString);
         assert taskStorageString.length == 3 : "Task in storage file is missing information!";
         assert taskStorageString[2].trim().length() != 0 : "Task name is corrupted!";
         assert Integer.parseInt(taskStorageString[1].trim()) == 1
                 | Integer.parseInt(taskStorageString[1].trim()) == 0 : "Task status is corrupted!";
         if (taskStorageString[0].charAt(0) == 'T') {
             ToDo pastToDo = new ToDo(trimmedTaskName);
-            processTaskStatus(pastToDo, isTaskDone);
+            processTaskStatus(pastToDo, isTaskDone, isTaskTagged, tagWord);
             addTaskToList(pastToDo, toBeUpdatedTaskList);
         } else if (taskStorageString[0].charAt(0) == 'E') {
             LocalDate eventDate = getDate(taskStorageString);
             Event pastEvent = new Event(trimmedTaskName, eventDate);
-            processTaskStatus(pastEvent, isTaskDone);
+            processTaskStatus(pastEvent, isTaskDone, isTaskTagged, tagWord);
             addTaskToList(pastEvent, toBeUpdatedTaskList);
         } else if (taskStorageString[0].charAt(0) == 'D') {
             LocalDate deadlineDate = getDate(taskStorageString);
             Deadline pastDeadline = new Deadline(trimmedTaskName,
                     deadlineDate);
-            processTaskStatus(pastDeadline, isTaskDone);
+            processTaskStatus(pastDeadline, isTaskDone, isTaskTagged, tagWord);
             addTaskToList(pastDeadline, toBeUpdatedTaskList);
         }
+    }
+
+    private String getTagWord(String[] taskStorageString) {
+        String taskName = taskStorageString[2].trim();
+        if (taskName.contains("#")) {
+            int taggedIndex = taskName.indexOf('#');
+            String taggedWord = taskName.substring(taggedIndex + 1);
+            return taggedWord;
+        }
+        return "";
     }
 
     private void addTaskToList(Task pastTaskToAdd, TaskList currentTaskList) {
         currentTaskList.add(pastTaskToAdd);
     }
 
-    private void processTaskStatus(Task pastTask, boolean taskStatus) {
+    private void processTaskStatus(Task pastTask, boolean taskStatus, boolean taskTaggedStatus, String tagWord) {
         if (taskStatus) {
             pastTask.markDone();
+        }
+
+        if (taskTaggedStatus) {
+            pastTask.tagTask(tagWord);
         }
     }
 }

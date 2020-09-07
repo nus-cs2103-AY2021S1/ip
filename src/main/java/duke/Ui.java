@@ -239,4 +239,10 @@ public class Ui {
     public String loadStorage(String loadData) {
         return loadData;
     }
+
+    public String taggedTask(Task tagTask, String tagWord) {
+        String uiMessageForTaggedTask = Ui.lines + "\n" + "     Got it. I've tagged this task:" + "\n" + "       "
+                + tagTask + "\n" + Ui.lines;
+        return uiMessageForTaggedTask;
+    }
 }

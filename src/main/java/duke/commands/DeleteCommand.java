@@ -36,7 +36,7 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(Ui ui, Storage listStorage, TaskList taskList) throws InvalidCommand {
         try {
-            Task removedTask = taskList.removeTask(itemIndex - 1);
+            Task removedTask = taskList.removeTask(itemIndex);
             listStorage.deleteTask(removedTask);
             return ui.deleteTask(removedTask, taskList);
         } catch (IndexOutOfBoundsException ex) {

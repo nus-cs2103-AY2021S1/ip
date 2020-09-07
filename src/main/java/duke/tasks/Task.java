@@ -8,6 +8,8 @@ package duke.tasks;
 public class Task {
     private boolean hasCompleted;
     private String taskName;
+    private String tagName;
+    private boolean isTagged;
 
     /**
      * Creates Task with relevant task name.
@@ -16,6 +18,8 @@ public class Task {
     public Task(String name) {
         this.taskName = name;
         this.hasCompleted = false;
+        this.tagName = "#noTag";
+        this.isTagged = false;
     }
 
     /**
@@ -41,7 +45,23 @@ public class Task {
      * @return Task name.
      */
     protected String getTaskName() {
+        if (isTagged) {
+            return this.taskName + " " + getTagName();
+        }
         return this.taskName;
+    }
+
+    private String getTagName() {
+        String retrievedTagName = "";
+        if (this.isTagged) {
+            retrievedTagName = this.tagName;
+        }
+        return retrievedTagName;
+    }
+
+    public void tagTask(String tagWord) {
+        this.isTagged = true;
+        this.tagName = "#" + tagWord;
     }
 
     /**
@@ -51,7 +71,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + getStatus() + "] " + this.taskName;
+        return "[" + getStatus() + "] " + getTaskName();
     }
 
 }
