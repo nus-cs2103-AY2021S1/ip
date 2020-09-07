@@ -34,8 +34,8 @@ public class AddCommandExecutor extends CommandExecutor {
         try {
             task = TaskParser.parseTask(((AddCommand) command).getArgument(), (
                     (AddCommand) command).getTaskType());
-        } catch (IndexOutOfBoundsException | DateTimeParseException exception) {
-           return DukeOutput.output(exception.getMessage());
+        } catch (IndexOutOfBoundsException | DateTimeParseException exception) { 
+            return DukeOutput.output(exception.getMessage());
             
         }
         taskList.add(task);
