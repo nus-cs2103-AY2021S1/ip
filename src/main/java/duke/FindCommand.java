@@ -14,7 +14,7 @@ public class FindCommand extends Command {
 
         String inputDescription = getParsedCommand()[1].trim();
         boolean taskFound = false;
-        ui.appendMessage("Here are the matching tasks in your list:\n");
+        ui.appendMessage("Here are all the matching tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             String taskDescription = tasks.get(i).getDescription();
             boolean keywordIsFound = taskDescription.contains(inputDescription);

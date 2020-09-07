@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Encapsulates all the commands recognised by chaBot
+ * Encapsulates all the commands recognised by chatBot
  */
 public enum UserCommand {
     BYE("bye"),
