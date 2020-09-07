@@ -7,7 +7,7 @@ import ultron.tasks.Task;
 public final class TaskList {
 
     /** Store the internal list of tasks. */
-    private final ArrayList<Task> list;
+    private final ArrayList<Task> tasks;
 
     /**
      * Task list.
@@ -16,7 +16,7 @@ public final class TaskList {
      * @param taskArrayList Arraylist containing all the tasks.
      */
     public TaskList(final ArrayList<Task> taskArrayList) {
-        list = taskArrayList;
+        tasks = taskArrayList;
     }
 
     /**
@@ -24,8 +24,8 @@ public final class TaskList {
      *
      * @return ArrayList containing all of the tasks.
      */
-    public ArrayList<Task> getList() {
-        return new ArrayList<>(list);
+    public ArrayList<Task> getTasks() {
+        return new ArrayList<>(tasks);
     }
 
     /**
@@ -34,7 +34,7 @@ public final class TaskList {
      * @return int size.
      */
     public int size() {
-        return this.list.size();
+        return this.tasks.size();
     }
 
     /**
@@ -43,7 +43,7 @@ public final class TaskList {
      * @param index The index of the task to be marked.
      */
     public void markDone(final int index) {
-        if (index < this.list.size() && index >= 0) {
+        if (index < this.tasks.size() && index >= 0) {
             this.get(index).markDone();
         }
     }
@@ -54,8 +54,8 @@ public final class TaskList {
      * @param index Index of the task to be removed.
      */
     public void remove(final int index) {
-        if (index < this.list.size() && index >= 0) {
-            this.list.remove(index);
+        if (index < this.tasks.size() && index >= 0) {
+            this.tasks.remove(index);
         }
     }
 
@@ -66,7 +66,7 @@ public final class TaskList {
      * @return Task at the index provided.
      */
     public Task get(final int index) {
-        return this.list.get(index);
+        return this.tasks.get(index);
     }
 
     /**
@@ -75,6 +75,6 @@ public final class TaskList {
      * @param task Task to be added.
      */
     public void add(final Task task) {
-        this.list.add(task);
+        this.tasks.add(task);
     }
 }
