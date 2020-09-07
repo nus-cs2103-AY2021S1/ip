@@ -24,6 +24,7 @@ public class CommandResult {
      * @param feedbackToUser message to the user
      */
     public CommandResult(String feedbackToUser) {
+        assert feedbackToUser.length() > 0 : "No feedback to user";
         this.feedbackToUser = feedbackToUser;
         relevantTasks = null;
     }
@@ -34,6 +35,7 @@ public class CommandResult {
      * @param relevantTasks relevant tasks list
      */
     public CommandResult(String feedbackToUser, List<Task> relevantTasks) {
+        assert feedbackToUser.length() > 0 : "No feedback to user";
         this.feedbackToUser = feedbackToUser;
         this.relevantTasks = relevantTasks;
     }

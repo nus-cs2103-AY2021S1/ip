@@ -27,7 +27,7 @@ public class Parser {
 
     public static final Pattern TASK_STRING_ARGS_FORMAT = Pattern.compile("(?<targetIndex>\\w.+)");
 
-    public static final Pattern EVENT_TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
+    public static final Pattern EVENT_TASK_DATA_ARGS_FORMAT =
             Pattern.compile("(?<description>[^/]+)+\\s+(\\/at)+\\s+"
                     + "(?<duedate>[\\d\\d\\d-\\d\\d\\-\\d\\d\\d+\\s+\\d\\d:\\d\\d]+)");
 

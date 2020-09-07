@@ -22,6 +22,7 @@ public class MarkDoneCommand extends Command {
     @Override
     public CommandResult execute() {
         try {
+            assert getTargetIndex() >= 0 : 0;
             final int target = getTargetIndex();
             return new CommandResult(String.format(MESSAGE_SUCCESS, duke.markDone(target)));
         } catch (IndexOutOfBoundsException ie) {

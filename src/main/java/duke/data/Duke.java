@@ -59,6 +59,7 @@ public class Duke {
      * @return Return task which is mark done
      */
     public Task markDone(int index) {
+        assert index >= 0;
         taskList.getTask(index).markAsDone();
         return taskList.getTask(index);
     }
@@ -112,14 +113,13 @@ public class Duke {
     public String getResponse(String input) throws StorageOperationException {
         Command command = new Parser().parseCommand(input);
         return executeCommand(command).getFeedbackToUser();
-
     }
 
     /**
      * Executes the command
      * @return a command result which result from the command executed
      */
-    private CommandResult executeCommand(src.main.java.duke.commands.Command command)
+    private CommandResult executeCommand(Command command)
             throws StorageOperationException {
         command.setData(this);
         CommandResult result = command.execute();
