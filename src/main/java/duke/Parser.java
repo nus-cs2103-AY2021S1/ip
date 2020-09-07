@@ -29,6 +29,8 @@ public class Parser {
      * @returns  Specific information of a Task contained in an array of Strings.
      */
     public String[] memoTaskParser(String taskLine) {
+        assert (!taskLine.isBlank());
+
         String[] tempType = taskLine.split(SpecialFormat.SPLIT_NOTN, 2);
         String[] tempDetails;
 
