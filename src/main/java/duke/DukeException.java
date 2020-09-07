@@ -1,12 +1,13 @@
 package duke;
 /**
- * Exception related to Duke application
+ * Exception related to Duke application.
  */
 public class DukeException extends Exception {
 
     /**
-     * constructor of DukeException
-     * @param errorMessage error message
+     * Constructor of DukeException.
+     *
+     * @param errorMessage Error message.
      */
     public DukeException(String errorMessage) {
         super(errorMessage);

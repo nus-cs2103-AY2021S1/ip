@@ -4,30 +4,17 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-//javaFX
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.layout.Region;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-
 /**
  * Duke is the main class in this todo app.
  */
 public class Duke {
-    private Storage storage;
     public TaskList tasks;
+    private Storage storage;
     private Ui ui;
 
     /**
-     * constructor of Duke
+     * Constructor of Duke
+     *
      * @param filePath path where saved data of todo is stored
      */
     public Duke(String filePath) {
@@ -44,8 +31,8 @@ public class Duke {
     }
 
     /**
-     * load tasks from saved text file
-     * takes user input and execute until program terminates
+     * Loads tasks from saved text file.
+     * Takes user input and execute until program terminates.
      */
     public void run() {
         ui.showWelcome();
@@ -59,7 +46,7 @@ public class Duke {
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
                  */
-                user_input_handler(fullCommand, false);
+                handleUserInput(fullCommand, false);
             } catch (DukeException | IOException e) {
                 ui.showError(e.getMessage());
             } finally {
@@ -76,12 +63,13 @@ public class Duke {
     }
 
     /**
-     * takes user input and execute tasks according to it
-     * @param user_input input from user, run tasks according to this
-     * @param loading indicates whether input is from saved data or user
+     * Return response and take action according to the user input.
+     *
+     * @param userInput input from user, run tasks according to this.
+     * @param loading indicates whether input is from saved data or user.
      */
-    public String user_input_handler(String user_input, boolean loading) throws DukeException, IOException {
-        String instructionType = Parser.parseInstruction(user_input);
+    public String handleUserInput(String userInput, boolean loading) throws DukeException, IOException {
+        String instructionType = Parser.parseInstruction(userInput);
         String response = "";
 
         if (instructionType.equals("bye")) {
@@ -96,32 +84,35 @@ public class Duke {
         } else if (instructionType.equals("done")) {
             // mark done
             // parse instruction
-            int index = Parser.parseMarkDoneInstr(user_input);
+            int index = Parser.parseMarkDoneInstr(userInput);
+
             // execute
             Task chosenTask = tasks.getTask(index);
             chosenTask.markAsDone();
-            if (!loading){
+            if (!loading) {
                 response = ui.showMarkedDoneTask(chosenTask);
             }
 
         } else if (instructionType.equals("delete")) {
             // delete task
             // parse instruction
-            int index = Parser.parseDeleteInstr(user_input);
+            int index = Parser.parseDeleteInstr(userInput);
+
             // execute
             Task chosenTask = tasks.getTask(index);
             tasks.deleteTask(index);
-            if (!loading){
+            if (!loading) {
                 response = ui.showDeletedTask(chosenTask, tasks.taskList);
             }
 
         } else if (instructionType.equals("find")) {
             // find task
             // parse instruction
-            String keyword = Parser.parseFindInstr(user_input);
+            String keyword = Parser.parseFindInstr(userInput);
+
             // execute
             ArrayList<Task> foundTasks = tasks.find(keyword);
-            if (!loading){
+            if (!loading) {
                 response = ui.showFoundTask(foundTasks);
             }
 
@@ -129,11 +120,12 @@ public class Duke {
             // make todo
             try {
                 // parse instruction
-                String description = Parser.parseAddTodoInstr(user_input);
+                String description = Parser.parseAddTodoInstr(userInput);
+
                 // execute
                 Task todo = new Todo(description);
                 tasks.addTask(todo);
-                if (!loading){
+                if (!loading) {
                     response = ui.showAddedTask(todo, tasks.taskList);
                 }
             } catch (DukeException e) {
@@ -144,11 +136,12 @@ public class Duke {
             // make deadline
             try {
                 // parse instruction
-                HashMap<String, Object> parsedData = Parser.parseAddDeadlineInstr(user_input);
+                HashMap<String, Object> parsedData = Parser.parseAddDeadlineInstr(userInput);
                 String description = (String) parsedData.get("description");
-                LocalDate l_time = (LocalDate) parsedData.get("time");
+                LocalDate localTime = (LocalDate) parsedData.get("time");
+
                 // execute
-                Task deadline = new Deadline(description, l_time);
+                Task deadline = new Deadline(description, localTime);
                 tasks.addTask(deadline);
                 if (!loading) {
                     response = ui.showAddedTask(deadline, tasks.taskList);
@@ -157,17 +150,18 @@ public class Duke {
                 response = ui.showError(e.getMessage());
             }
 
-        } else if (instructionType.equals("event")){
+        } else if (instructionType.equals("event")) {
             // make event
             try {
                 // parse instruction
-                HashMap<String, Object> parsedData = Parser.parseAddEventInstr(user_input);
+                HashMap<String, Object> parsedData = Parser.parseAddEventInstr(userInput);
                 String description = (String) parsedData.get("description");
-                LocalDate l_time = (LocalDate) parsedData.get("time");
+                LocalDate localTime = (LocalDate) parsedData.get("time");
+
                 // execute
-                Task event = new Event(description, l_time);
+                Task event = new Event(description, localTime);
                 tasks.addTask(event);
-                if (!loading){
+                if (!loading) {
                     response = ui.showAddedTask(event, tasks.taskList);
                 }
             } catch (DukeException e) {
@@ -176,7 +170,7 @@ public class Duke {
 
         } else {
             // invalid input
-            if (!loading){
+            if (!loading) {
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
@@ -193,8 +187,8 @@ public class Duke {
     public String getResponse(String input) {
         Duke duke = new Duke("data/duke.txt");
         String response = "";
-        try{
-            response = duke.user_input_handler(input, false);
+        try {
+            response = duke.handleUserInput(input, false);
         } catch (DukeException | IOException e) {
             response = duke.ui.showError(e.getMessage());
         }
@@ -206,7 +200,4 @@ public class Duke {
         return this.ui;
     }
 
-    public Duke() {
-
-    }
 }

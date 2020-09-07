@@ -7,28 +7,29 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
- * Storage is responsible for loading saving data(tasks)
+ * Storage is responsible for loading saving data(tasks).
  */
 public class Storage {
-    public String filePath;
+    private String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
     /**
-     * load data from text file in specific folder
-     * @param Duke app which is currently used
-     * @return ArrayList containing tasks from text file
+     * Returns list of tasks loaded from saved data stored as text file.
+     *
+     * @param duke App which is currently used.
+     * @return ArrayList containing tasks from text file.
      */
-    public ArrayList<Task> load(Duke Duke) throws IOException {
+    public ArrayList<Task> load(Duke duke) throws IOException {
         // read file
         try {
             File file = new File(filePath);
             Scanner reader = new Scanner(file);
             while (reader.hasNextLine()) {
-                String user_input = reader.nextLine();
-                Duke.user_input_handler(user_input, true);
+                String userInput = reader.nextLine();
+                duke.handleUserInput(userInput, true);
             }
             reader.close();
         } catch (FileNotFoundException e) {
@@ -37,23 +38,26 @@ public class Storage {
             if (!path.isDirectory()) {
                 path.mkdir();
             }
+
             // create file if doesn't exist
             File file = new File("data/duke.txt");
             file.createNewFile();
+
             // Load again
-            load(Duke);
+            load(duke);
         } catch (IOException e) {
             e.printStackTrace();
         } catch (DukeException e) {
             e.printStackTrace();
         }
-        ArrayList<Task> taskList = Duke.tasks.taskList;
+        ArrayList<Task> taskList = duke.tasks.taskList;
         return taskList;
     }
 
     /**
-     * save tasks to text file in specific folder
-     * @param taskList contains list of tasks which will be saved
+     * Saves tasks to text file in specific folder.
+     *
+     * @param taskList Contains list of tasks which will be saved.
      */
     static void save(ArrayList<Task> taskList) throws IOException {
         File file = new File("data/duke.txt");
@@ -72,8 +76,10 @@ public class Storage {
                 Deadline deadline = (Deadline) task;
                 taskInst = String.format("deadline %s /by %s\n", task.description, deadline.deadline);
             }
+
             //write instruction to text file
             fileWriter.write(taskInst);
+
             // add done instruction if task is done
             if (task.isDone) {
                 fileWriter.write(String.format("done %s\n", index));
