@@ -12,18 +12,6 @@ import duke.exception.DukeException;
 public class Ui {
 
     /**
-     * Show user input message(s).
-     * @param message  Message(s) to be shown
-     */
-    public static String show(String ... message) {
-        String response = "";
-        for (String m : message) {
-            response += m;
-        }
-        return response;
-    }
-
-    /**
      * Introduction message
      */
     public static final String GREET = "Hello! I'm Rose\nWhat can I do for you? <3\n";
@@ -59,6 +47,18 @@ public class Ui {
     public String readLine() {
         String input = in.nextLine();
         return input;
+    }
+
+    /**
+     * Show user input message(s).
+     * @param message  Message(s) to be shown
+     */
+    public static String show(String ... message) {
+        String response = "";
+        for (String m : message) {
+            response += m;
+        }
+        return response;
     }
 
     /**
