@@ -24,9 +24,7 @@ public abstract class Command {
      * @return String to be output by Duke in the dialogue box
      * @throws DukeException if exception encountered
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        return "";
-    }
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 
     public boolean isExit() {
         return isExit;
