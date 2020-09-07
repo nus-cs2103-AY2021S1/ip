@@ -19,8 +19,6 @@ public class ListCommand extends Command {
     public ArrayList<String> execute(TaskList taskList, Gui gui, Storage storage, ArrayList<String> responseList) {
         ArrayList<Task> listOfTasks = taskList.getList();
         responseList.addAll(gui.listAllTasks(listOfTasks));
-        assert responseList instanceof ArrayList : "ResponseList has to be a list";
-
         return responseList;
     }
 }
