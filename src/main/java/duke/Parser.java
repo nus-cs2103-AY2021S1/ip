@@ -13,6 +13,7 @@ public class Parser {
      * @return Returns appropriate Command.
      */
     static Command readUserInput(String userInput) {
+        assert userInput != null;
         if (userInput.equals(Instruction.BYE.getInstruction())) {
             return new ExitCommand();
         } else if (userInput.equals(Instruction.LIST.getInstruction())) {

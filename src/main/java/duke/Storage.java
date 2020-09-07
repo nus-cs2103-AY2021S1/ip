@@ -76,6 +76,8 @@ public class Storage {
      * @throws DukeException If an error occurs while saving the task.
      */
     void saveTasksToFile(TaskList tasks) throws DukeException {
+        assert tasks != null;
+
         FileWriter fileWriter;
 
         try {
