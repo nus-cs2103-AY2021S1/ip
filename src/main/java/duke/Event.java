@@ -18,6 +18,7 @@ public class Event extends Task {
      */
     public Event(String description, LocalDateTime localDateTime) {
         super(description);
+        assert localDateTime != null;
         this.localDateTime = localDateTime;
     }
 
@@ -30,6 +31,7 @@ public class Event extends Task {
      */
     public Event(String description, boolean isDone, LocalDateTime localDateTime) {
         super(description, isDone);
+        assert localDateTime != null;
         this.localDateTime = localDateTime;
     }
 

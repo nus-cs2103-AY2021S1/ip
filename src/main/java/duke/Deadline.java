@@ -18,6 +18,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, LocalDateTime localDateTime) {
         super(description);
+        assert localDateTime != null;
         this.localDateTime = localDateTime;
     }
 
@@ -30,6 +31,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, boolean isDone, LocalDateTime localDateTime) {
         super(description, isDone);
+        assert localDateTime != null;
         this.localDateTime = localDateTime;
     }
 
