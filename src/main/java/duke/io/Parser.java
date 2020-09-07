@@ -43,7 +43,13 @@ public class Parser {
        
         return new String[]{date.toString(), description.toString()};
     }
-    
+
+    /**
+     * Return the word to filter tasks by.
+     * @param arr Array of words in user input.
+     * @return single word.
+     * @throws DukeException
+     */
     public String getFilterWord(String [] arr) throws DukeException{
         if (arr.length < 2) {
             throw new DukeException("Please specify a filter word");
@@ -53,7 +59,13 @@ public class Parser {
         }
         return arr[1];
     }
-    
+
+    /**
+     * Return date from user input.
+     * @param arr Array of words in user input.
+     * @return date of task.
+     * @throws DukeException
+     */
     public String getDate(String [] arr) throws DukeException {
         if (arr.length < 2) {
             throw new DukeException("Please specify a filter date");
@@ -90,6 +102,11 @@ public class Parser {
         return arrList;
     }
 
+    /**
+     * Check if parameter is a valid date.
+     * @param str user input date.
+     * @return LocalDate object with user input date.
+     */
     public LocalDate checkDate(String str) {
         String [] arr = str.split("/");
         String year;
@@ -150,7 +167,6 @@ public class Parser {
                     return "";
                 }
             }
-            return null;
         }
         return null;
     }
