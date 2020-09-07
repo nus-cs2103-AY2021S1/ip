@@ -9,7 +9,7 @@ import duke.task.Task;
 /** Represents Ui of application that is responsible for interactions with user. */
 public class Ui {
 
-    private Scanner scanner;
+    protected Scanner scanner;
 
     /**
      * Constructs a new instance of a Ui object.
@@ -21,16 +21,19 @@ public class Ui {
     /**
      * Generates and print welcome message when Duke is initialized.
      */
-    void showWelcome() {
-        System.out.println("Hello! I'm Duke\nWhat can I do for you?");
+    String showWelcome() {
+        String welcomeMessage = "Hello! I'm Duke\nWhat can I do for you?";
+        System.out.println(welcomeMessage);
+        return welcomeMessage;
     }
 
     /**
      * Generates and print exit message when user exits Duke.
      */
     public String exit() {
-        System.out.println("Bye. Hope to see you again soon!");
-        return "Bye. Hope to see you again soon!";
+        String exitMessage = "Bye. Hope to see you again soon!";
+        System.out.println(exitMessage);
+        return exitMessage;
     }
 
     /**
@@ -103,7 +106,4 @@ public class Ui {
         System.out.println("Error loading data");
     }
 
-    public Scanner getScanner() {
-        return this.scanner;
-    }
 }

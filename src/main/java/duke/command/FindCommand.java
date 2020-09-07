@@ -5,12 +5,11 @@ import java.util.List;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.exception.DukeException;
 import duke.task.Task;
 
 public class FindCommand extends Command {
 
-    private String keyword;
+    protected String keyword;
 
     public FindCommand(String keyword) {
         this.keyword = keyword;
@@ -21,15 +20,11 @@ public class FindCommand extends Command {
      * @param taskList TaskList associated with command.
      * @param ui Ui associated with command.
      * @param storage Storage associated with command.
-     * @throws DukeException If there is error during execution of command.
+     *
      */
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         List<Task> searchResults = taskList.findTasks(keyword);
         return ui.printSearchResults(searchResults);
-    }
-
-    public String getKeyword() {
-        return this.keyword;
     }
 
     public boolean isExit() {

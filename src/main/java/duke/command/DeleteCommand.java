@@ -16,7 +16,7 @@ public class DeleteCommand extends Command {
      */
     public static final String MESSAGE_SUCCESS = "Noted. I've removed this task:\n%s";
 
-    private int index;
+    protected int index;
 
     /**
      * Constructs a new instance of a DeleteCommand.
@@ -46,9 +46,5 @@ public class DeleteCommand extends Command {
      */
     public boolean isExit() {
         return false;
-    }
-
-    public int getIndex() {
-        return this.index;
     }
 }
