@@ -85,7 +85,8 @@ class ParserTest {
             parser.extractDate(command);
             fail();
         } catch (DukeException e) {
-            assertEquals(e.getMessage(), "☹ OOPS!!! The format for your date is incorrect. Use yyyy-MM-dd instead");
+            assertEquals(e.getMessage(), "☹ OOPS!!! The format for your date is incorrect."
+                    + " Use yyyy-MM-dd format instead");
         }
     }
 }

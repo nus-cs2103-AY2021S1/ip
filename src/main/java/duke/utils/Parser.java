@@ -80,6 +80,6 @@ public class Parser {
         } catch (DateTimeParseException exp) {
             throw new DukeException(Messenger.DATE_FORMAT_ERROR);
         }
-        assert value.split(" -").length == 3 : "date has the wrong format";
+        assert value.split("-").length == 3 : "date has the wrong format";
     }
 }
