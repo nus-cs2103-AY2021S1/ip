@@ -41,4 +41,21 @@ public class Duke {
             }
         }
     }
+
+    public String getResponse(String input) {
+        if (input.equals("bye")) {
+            System.exit(0);
+        }
+        try {
+            return Parser.parseInput(input, ui, tasks, storage);
+        } catch (DukeException | IOException e) {
+            return e.getMessage();
+        }
+    }
+
+    public String getGreetings() {
+        String greetings = ui.sayGreetings();
+//        greetings += ui.showGreetings();
+        return greetings;
+    }
 }

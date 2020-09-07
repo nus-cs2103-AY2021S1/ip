@@ -47,9 +47,7 @@ public class Ui {
     }
 
     /**
-     * Brings up error message to the user.
      *
-     * @param e The exception.
      */
     public String sayErrorMessage(Exception e) {
         String errorMessage = BOT_NAME + "Error! " + e.getMessage();

@@ -61,9 +61,6 @@ public class TaskList {
         tasks.remove(taskNumber - 1);
         storage.writeFile(this);
         return ui.sayDeletedTask(task, getListSize());
-//        ui.say("I have deleted this task!");
-//        System.out.println(task);
-//        ui.say("You have " + getListSize() + " items in your task list now.");
     }
 
     /**
