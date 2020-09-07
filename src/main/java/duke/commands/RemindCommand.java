@@ -5,27 +5,23 @@ import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.UI;
 
-/**
- * Represents a Done command for when the user wants to mark
- * a task as done.
- */
-public class DoneCommand extends Command {
-    public static final String COMMAND_WORD = "done";
+public class RemindCommand extends Command {
+    public static final String COMMAND_WORD = "remind";
     private static final int SIZE_OFFSET = -1;
 
     /**
-     * Creates an instance of a Done Command with the appropriate
-     * task to be set as done as the command description.
+     * Creates an instance of a Remind Command with the appropriate
+     * task to be flagged for reminder as the command description.
      *
      * @param commandDescription Description of the command body.
      */
-    public DoneCommand(String commandDescription) {
+    public RemindCommand(String commandDescription) {
         super(commandDescription, false);
     }
 
     /**
      * Executes the command and returns Duke's response.
-     * Marks the appropriate task as done.
+     * Marks the appropriate task for reminders.
      *
      * @param taskList List of tasks currently being tracked.
      * @param ui User interface object.
@@ -36,13 +32,14 @@ public class DoneCommand extends Command {
     public String execute(TaskList taskList, UI ui, Storage storage) {
         try {
             Task task = taskList.getTaskAtIndex(Integer.parseInt(commandDescription) + SIZE_OFFSET);
-            task.setDone();
+            task.setReminder();
             storage.saveData(taskList, ui);
-            return ui.displayDoneTask(task);
+            return ui.displayRemindTask(task);
         } catch (IndexOutOfBoundsException e) {
             return ui.showError("There's no such element!");
         } catch (NumberFormatException e) {
             return ui.showError("Looks like your input was invalid! Enter --help for more information");
         }
     }
+
 }

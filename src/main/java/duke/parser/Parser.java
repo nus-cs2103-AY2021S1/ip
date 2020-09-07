@@ -5,18 +5,7 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import duke.commands.Command;
-import duke.commands.DeadlineCommand;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.EventCommand;
-import duke.commands.ExitCommand;
-import duke.commands.GetEventsCommand;
-import duke.commands.HelpCommand;
-import duke.commands.InvalidCommand;
-import duke.commands.ListCommand;
-import duke.commands.SearchCommand;
-import duke.commands.TodoCommand;
+import duke.commands.*;
 
 /**
  * Represents a Parser that will read User Input from the command
@@ -78,6 +67,9 @@ public class Parser {
         case DoneCommand.COMMAND_WORD:
             return new DoneCommand(commandBody.strip());
             //Fallthrough
+        case RemindCommand.COMMAND_WORD:
+            return new RemindCommand(commandBody.strip());
+            //Fallthrough
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
             //Fallthrough
@@ -87,6 +79,8 @@ public class Parser {
         case GetEventsCommand.COMMAND_WORD:
             return prepareGetEvents(commandBody.strip());
             //Fallthrough
+        case GetRemindersCommand.COMMAND_WORD:
+            return new GetRemindersCommand();
         case SearchCommand.COMMAND_WORD:
             return prepareSearch(commandBody.strip());
             //Fallthrough

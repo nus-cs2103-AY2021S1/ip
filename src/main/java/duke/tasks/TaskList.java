@@ -37,8 +37,12 @@ public class TaskList {
                 String[] line = scanner.nextLine().split("\\|");
                 Task newTask = getDataFromLine(line);
                 boolean isTaskDone = line[1].strip().equals("1");
+                boolean hasReminder = line[2].strip().equals("1");
                 if (isTaskDone) {
                     newTask.setDone();
+                }
+                if (hasReminder) {
+                    newTask.setReminder();
                 }
                 tasks.add(newTask);
             }

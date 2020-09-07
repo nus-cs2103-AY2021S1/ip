@@ -101,6 +101,17 @@ public class UI {
     }
 
     /**
+     * Returns the task added to reminders.
+     *
+     * @param task Task to be reminded of.
+     * @return Task remind message as a String.
+     */
+    public String displayRemindTask(Task task) {
+        assert task != null;
+        return "Nice! I've added this task to your reminders:\n" + task;
+    }
+
+    /**
      * Returns all tasks that are due on the given date.
      *
      * @param tasks List of current tasks.
@@ -115,6 +126,24 @@ public class UI {
         assert tasks.size() > 0;
         String answer = "Here are your events on "
                 + localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ":\n";
+        for (Task task : tasks) {
+            answer += task + "\n";
+        }
+        return answer;
+    }
+
+    /**
+     * Returns all tasks that have reminders.
+     *
+     * @param tasks List of current tasks.
+     * @return Tasks with reminders as a String.
+     */
+    public String displayTasksWithReminders(ArrayList<Task> tasks) {
+        if (tasks.size() == 0) {
+            return "Whoops! Looks like there are no events with reminders!";
+        }
+        assert tasks.size() > 0;
+        String answer = "Here are your tasks with reminders: \n";
         for (Task task : tasks) {
             answer += task + "\n";
         }
@@ -157,6 +186,10 @@ public class UI {
                        + "--help : Displays help information\n"
                        + "\n"
                        + "todo <task description> : Adds task as Todo item\n"
+                       + "\n"
+                       + "remind  <number> : Adds task to list of reminders\n"
+                       + "\n"
+                       + "getReminders : Retrieves all tasks with reminders\n"
                        + "\n"
                        + "deadline <task description> /by <due date> : Adds task as Deadline\n"
                        + "\n"
