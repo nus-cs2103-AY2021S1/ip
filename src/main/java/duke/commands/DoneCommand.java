@@ -1,9 +1,6 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
-import duke.exceptions.StorageOperationException;
-
-import duke.storage.Storage;
 
 import duke.task.Task;
 import duke.task.TaskManager;
@@ -22,19 +19,20 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public CommandOutput executeCommand(TaskManager taskManger, Storage storage) throws DukeException {
+    public CommandOutput executeCommand(TaskManager taskManger) throws DukeException {
         try {
-            Task completedTask = taskManger.getTask(completedTaskIndex - 1);
             taskManger.markTaskAsDone(completedTaskIndex);
-            storage.save(taskManger);
-            String taskDoneMessage = Messages.TASK_MARKED_AS_DONE_MESSAGE;
-            StringBuilder stringBuilder = new StringBuilder(taskDoneMessage);
-            stringBuilder.append(completedTask.toString());
-            return new CommandOutput(stringBuilder.toString(), false);
-        } catch (StorageOperationException e) {
-            throw new DukeException(e.getMessage());
+            Task completedTask = taskManger.getTask(completedTaskIndex - 1);
+            String doneTaskOutput = outputResult(completedTask);
+            return new CommandOutput(doneTaskOutput, false);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(Messages.INVALID_TASK_INDEX_ERROR_MESSAGE);
         }
+    }
+
+    private String outputResult(Task completedTask) {
+        StringBuilder doneTaskOutput = new StringBuilder(Messages.TASK_MARKED_AS_DONE_MESSAGE);
+        doneTaskOutput.append(completedTask.toString());
+        return doneTaskOutput.toString();
     }
 }

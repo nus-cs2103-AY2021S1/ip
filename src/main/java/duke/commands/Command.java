@@ -1,7 +1,6 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
-import duke.storage.Storage;
 
 import duke.task.TaskManager;
 
@@ -12,7 +11,7 @@ import duke.task.TaskManager;
  */
 
 public abstract class Command {
-    public abstract CommandOutput executeCommand(TaskManager taskManger, Storage storage) throws DukeException;
+    public abstract CommandOutput executeCommand(TaskManager taskManger) throws DukeException;
 
     public boolean isExit() {
         return false;

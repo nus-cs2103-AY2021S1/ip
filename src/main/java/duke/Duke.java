@@ -13,7 +13,6 @@ import duke.storage.Storage;
 
 import duke.task.TaskManager;
 
-import duke.utils.Messages;
 import duke.utils.Ui;
 
 import java.util.Scanner;
@@ -40,18 +39,14 @@ public class Duke {
         boolean isExit = false;
         String userInput;
         while (!isExit) {
-            try {
-                if (scanner.hasNextLine()) {
-                    userInput = scanner.nextLine();
-                } else {
-                    userInput = "Bye";
-                }
-                CommandOutput output = getCommandExecutionOutput(userInput);
-                ui.print(output.getCommandOutput());
-                isExit = output.isExit();
-            } catch (IllegalArgumentException e) {
-                ui.print(Messages.INVALID_COMMAND_INPUT_MESSAGE);
+            if (scanner.hasNextLine()) {
+                userInput = scanner.nextLine();
+            } else {
+                userInput = "Bye";
             }
+            CommandOutput output = getCommandExecutionOutput(userInput);
+            ui.print(output.getCommandOutput());
+            isExit = output.isExit();
         }
         scanner.close();
         System.exit(0);
@@ -60,8 +55,11 @@ public class Duke {
     public CommandOutput getCommandExecutionOutput(String userCommand) {
         try {
             Command parsedUserCommand = CommandLineInterfaceParser.parse(userCommand);
-            CommandOutput commandOutput = parsedUserCommand.executeCommand(taskManager, storage);
+            CommandOutput commandOutput = parsedUserCommand.executeCommand(taskManager);
+            storage.save(taskManager);
             return commandOutput;
+        } catch (StorageOperationException e) {
+            return new CommandOutput(e.getMessage(), false);
         } catch (DukeException e) {
             return new CommandOutput(e.getMessage(), false);
         }

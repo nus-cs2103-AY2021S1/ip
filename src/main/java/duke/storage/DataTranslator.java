@@ -11,7 +11,6 @@ import duke.task.Task;
 import duke.task.TaskManager;
 import duke.task.Todo;
 
-import duke.utils.Colour;
 import duke.utils.Ui;
 
 import java.util.ArrayList;
@@ -37,19 +36,18 @@ public class DataTranslator {
         for (String line : lines) {
             Task task = null;
             String[] parsedLine = line.split(" \\| ");
-            DukeDateTime dukeDateTime;
             try {
                 switch (parsedLine[0]) {
                 case "T":
                     task = new Todo(parsedLine[2]);
                     break;
                 case "D":
-                    dukeDateTime = DateTimeParser.parseDateTime(parsedLine[3]);
-                    task = new Deadline(parsedLine[2], dukeDateTime);
+                    DukeDateTime deadlineDukeDateTime = DateTimeParser.parseDateTime(parsedLine[3]);
+                    task = new Deadline(parsedLine[2], deadlineDukeDateTime);
                     break;
                 case "E":
-                    dukeDateTime = DateTimeParser.parseDateTime(parsedLine[3]);
-                    task = new Event(parsedLine[2], dukeDateTime);
+                    DukeDateTime eventDukeDateTime = DateTimeParser.parseDateTime(parsedLine[3]);
+                    task = new Event(parsedLine[2], eventDukeDateTime);
                     break;
                 default:
                     assert parsedLine[0] != "T" || parsedLine[0] != "D" || parsedLine[0] != "E"
@@ -75,7 +73,7 @@ public class DataTranslator {
      */
     public static List<String> encode(TaskManager taskManager) {
         List<String> data = new ArrayList<>();
-        List<Task> tasks = taskManager.getTasks();
+        List<Task> tasks = taskManager.getAllTasks();
         for (Task task : tasks) {
             data.add(task.toDataFileFormat());
         }

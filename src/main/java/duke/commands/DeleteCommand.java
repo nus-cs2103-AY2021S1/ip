@@ -1,9 +1,6 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
-import duke.exceptions.StorageOperationException;
-
-import duke.storage.Storage;
 
 import duke.task.Task;
 import duke.task.TaskManager;
@@ -21,17 +18,21 @@ public class DeleteCommand extends Command {
         this.taskIndex = taskIndex;
     }
 
-    public CommandOutput executeCommand(TaskManager taskManager, Storage storage) throws DukeException {
+    public CommandOutput executeCommand(TaskManager taskManager) throws DukeException {
         try {
-            Task deletedTask = taskManager.getTask(taskIndex - 1);
             taskManager.deleteTask(taskIndex);
-            storage.save(taskManager);
-            String output = "Noted. I have removed the task: \n" + deletedTask.toString();
-            return new CommandOutput(output, false);
-        } catch (StorageOperationException e) {
-            throw new DukeException(e.getMessage());
+            Task deletedTask = taskManager.getTask(taskIndex - 1);
+            String deletedTaskOutput = outputResult(deletedTask);
+            return new CommandOutput(deletedTaskOutput, false);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException(Messages.INVALID_TASK_INDEX_ERROR_MESSAGE);
         }
+    }
+
+    private String outputResult(Task deletedTask) {
+        StringBuilder deletedTaskOutput = new StringBuilder("Noted. I have removed the task:\n");
+        String deletedTaskDescription = deletedTask.toString();
+        deletedTaskOutput.append(deletedTaskDescription);
+        return deletedTaskOutput.toString();
     }
 }
