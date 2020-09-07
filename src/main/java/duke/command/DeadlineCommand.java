@@ -65,11 +65,19 @@ public class DeadlineCommand extends Command {
             int timeLength = inputDateTime[1].length();
             if (timeLength == 4) {
                 int hour = Integer.parseInt(inputDateTime[1].substring(0, 2));
+                assert hour < 25
+                        : "Not Valid Hour";
                 int minute = Integer.parseInt(inputDateTime[1].substring(2, 4));
+                assert minute < 60
+                        : "Not Valid Minute";
                 localTime = LocalTime.of(hour, minute);
             } else if (timeLength == 3) {
                 int hour = Integer.parseInt(String.valueOf(inputDateTime[1].charAt(0)));
+                assert hour < 10
+                        : "Not Valid Hour";
                 int minute = Integer.parseInt(inputDateTime[1].substring(1, 3));
+                assert minute < 60
+                        : "Not Valid Minute";
                 localTime = LocalTime.of(hour, minute);
             } else {
                 throw new DukeException("Error with input time");
@@ -77,14 +85,12 @@ public class DeadlineCommand extends Command {
         }
 
         LocalDateTime localDateTime = LocalDateTime.of(localDate, localTime);
-        StringBuilder resultSb = new StringBuilder(
-                String.format("%s\n %s\n", ui.showLine(), "Got it. I've added this task:"));
         taskList.addTask(new Deadline(description, localDateTime));
-        resultSb.append("\t")
-                .append(taskList.retrieveTask(taskList.sizeOfList() - 1))
-                .append(String.format("\nNow you have %o tasks in list.\n", taskList.sizeOfList()))
-                .append(ui.showLine());
-        Ui.printString(resultSb.toString());
+
+        String result = String.format("%s\n %s\n", ui.showLine(),
+                "Got it. I've added this task:") + "\t" + taskList.retrieveTask(taskList.sizeOfList() - 1)
+                + String.format("\nNow you have %o tasks in list.\n", taskList.sizeOfList()) + ui.showLine();
+        Ui.printString(result);
 
         storage.write(taskList);
     }
@@ -93,8 +99,14 @@ public class DeadlineCommand extends Command {
         LocalDate localDate;
         if (date.length == 3) {
             int day = Integer.parseInt(date[0]);
+            assert day < 32
+                    : "Not Valid Date";
             int month = Integer.parseInt(date[1]);
+            assert month < 13
+                    : "Not Valid Month";
             int year = Integer.parseInt(date[2]);
+            assert year > 0
+                    : "Not Valid Year";
             localDate = LocalDate.of(year, month, day);
         } else {
             throw new DukeException("Error with input date!");

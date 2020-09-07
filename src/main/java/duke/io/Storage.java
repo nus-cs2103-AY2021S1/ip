@@ -56,6 +56,7 @@ public class Storage {
                 String command = tempArr[0];
                 switch (command) {
                 case "duke.task.Todo":
+                    assert tempArr.length == 3;
                     Task tempTodo = new Todo(tempArr[2]);
                     if (tempArr[1].equals("true")) {
                         tempTodo.markAsDone();
@@ -63,6 +64,7 @@ public class Storage {
                     taskArrayList.add(tempTodo);
                     break;
                 case "duke.task.Deadline":
+                    assert tempArr.length == 4;
                     Task tempDeadline = new Deadline(tempArr[2], LocalDateTime.parse(tempArr[3]));
                     if (tempArr[1].equals("true")) {
                         tempDeadline.markAsDone();
@@ -70,6 +72,7 @@ public class Storage {
                     taskArrayList.add(tempDeadline);
                     break;
                 case "duke.task.Event":
+                    assert tempArr.length == 5;
                     Task tempEvent = new Event(tempArr[2], LocalDateTime.parse(tempArr[3]),
                             LocalDateTime.parse(tempArr[4]));
                     if (tempArr[1].equals("true")) {
@@ -95,6 +98,7 @@ public class Storage {
     public void write(TaskList taskList) {
         createFile();
         try {
+            assert filePath != null;
             FileWriter writer = new FileWriter(filePath);
             for (Task task : taskList.getTaskArrayList()) {
                 String taskType = task.getClass().getTypeName();
