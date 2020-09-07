@@ -1,5 +1,6 @@
 package duke.utils;
 
+import duke.Duke;
 import duke.command.ClearCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
@@ -20,12 +21,24 @@ public class Parser {
     /**
      * Converts the users input from string to Command type.
      *
-     * @param input string the user entered.
+     * @param input raw unprocessed string the user entered.
      * @return Command which the user wanted.
      * @throws DukeException if the command format is wrong.
      */
     public static Command parse(String input) throws DukeException {
-        // todo create test casee for parser, test for empty input
+        String trimmed = input.trim();
+
+        if (trimmed.equals("")) {
+            throw new DukeException("Please type a duke command");
+        }
+
+        String[] keywords = findKeywords(input.trim());
+
+        if (keywords.length == 1) {
+            throw new DukeException("Please enter a valid command");
+        }
+
+
         switch (input.split(" ")[0].toLowerCase()) {
         case "":
             throw new DukeException("Please type a duke.command");
@@ -65,4 +78,17 @@ public class Parser {
             throw new DukeException("I don't know what that means :( ");
         }
     }
+
+
+    /**
+     * Converts string into array of keywords.
+     *
+     * @param stringToConvert the string to be converted.
+     * @return array with commands.
+     */
+    private static String[] findKeywords(String stringToConvert) {
+        return stringToConvert.split("/");
+    }
+
+
 }
