@@ -93,7 +93,7 @@ class TaskListTest {
                 + "1.[T][✗] test content1\n"
                 + "2.[D][✗] test content2 (by: Aug 23 2020)\n"
                 + "3.[D][✗] test content2 (by: Aug 25 2020)\n"
-                + "4.[D][✗] test content3 (by: Aug 28 2020)";
+                + "4.[D][✗] test content3 (by: Aug 28 2020)\n";
         assertEquals(expected, actual);
     }
 }
