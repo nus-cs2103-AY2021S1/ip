@@ -1,15 +1,6 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.CompleteTaskCommand;
-import duke.command.CreateDeadlineCommand;
-import duke.command.CreateEventCommand;
-import duke.command.CreateTodoCommand;
-import duke.command.DeleteTaskCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.InvalidInputCommand;
-import duke.command.ListTasksCommand;
+import duke.command.*;
 
 import java.time.LocalDate;
 
@@ -33,6 +24,10 @@ class Parser {
     static Command parse(String input) {
         assert input != null;
 
+        if (input.contains(Storage.DATA_SEPARATOR)) {
+            return parseInvalidCharacter(Storage.DATA_SEPARATOR);
+        }
+
         // Parses initial input into prefix and body
         String[] parsedCommand = input.split(" ", 2);
         String prefix = parsedCommand[0];
@@ -43,6 +38,8 @@ class Parser {
 
         // Command determined by prefix
         switch(prefix) {
+        case("archive"):
+            return parseArchive(body);
         case("bye"):
             return parseExit(body);
         case("deadline"):
@@ -80,6 +77,25 @@ class Parser {
             ints[i] = Integer.parseInt(strings[i]);
         }
         return LocalDate.of(ints[0], ints[1], ints[2]);
+    }
+
+    /**
+     * Parses the given input into either an ArchiveAllTasksCommand or an ArchiveTaskCommand.
+     *
+     * @param body
+     * @return ArchiveAllTasksCommand or ArchiveTaskCommand. If the input is invalid, it is parsed as invalid input.
+     */
+    private static Command parseArchive(String body) {
+        if (body.equals("all")) {
+            return new ArchiveAllTasksCommand();
+        }
+
+        try {
+            int taskIndex = Integer.parseInt(body);
+            return new ArchiveTaskCommand(taskIndex - 1);
+        } catch (NumberFormatException e) {
+            return parseInvalidInput();
+        }
     }
 
     /**
@@ -181,6 +197,10 @@ class Parser {
      */
     private static InvalidInputCommand parseInvalidInput() {
         return new InvalidInputCommand();
+    }
+
+    private static InvalidCharacterCommand parseInvalidCharacter(String invalidChar) {
+        return new InvalidCharacterCommand(invalidChar);
     }
 
     /**

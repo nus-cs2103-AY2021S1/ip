@@ -39,17 +39,18 @@ public class CreateEventCommand extends Command {
      * Executes the command to create an event.
      *
      * @param storage Storage
-     * @param tasks Task list
+     * @param taskList Task list
+     * @param archive Archive
      * @param ui Ui
      * @return Output strings displayed on the UI showing event creation
      */
     @Override
-    public String[] execute(Storage storage, TaskList tasks, Ui ui) {
+    public String[] execute(Storage storage, TaskList taskList, TaskList archive, Ui ui) {
         assert storage != null;
-        assert tasks != null;
+        assert taskList != null;
         assert ui != null;
 
-        Event newEvent = tasks.addEvent(description, isComplete, date);
-        return ui.getCreateTaskStrings(tasks, newEvent);
+        Event newEvent = taskList.addEvent(description, isComplete, date);
+        return ui.getCreateTaskStrings(taskList, newEvent);
     }
 }

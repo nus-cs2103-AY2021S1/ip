@@ -4,25 +4,25 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
-/**
- * Encapsulates a command to list the tasks in the current task list
- */
-public class ListTasksCommand extends Command {
+public class ArchiveAllTasksCommand extends Command {
 
     /**
-     * Executes the command to list the tasks in the current task list.
+     * Executes the command to archive all tasks.
      *
      * @param storage Storage
      * @param taskList Task list
-     * @param archive
+     * @param archive Archive
      * @param ui Ui
-     * @return Output strings displayed on the UI showing current task list
+     * @return Output strings displayed in the UI showing task archiving
      */
     @Override
     public String[] execute(Storage storage, TaskList taskList, TaskList archive, Ui ui) {
         assert taskList != null;
+        assert archive != null;
         assert ui != null;
 
-        return ui.getTaskListStrings(taskList);
+        archive.addTasks(taskList);
+        taskList.deleteAllTasks();
+        return ui.getArchiveAllTasksStrings();
     }
 }

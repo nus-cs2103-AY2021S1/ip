@@ -39,17 +39,18 @@ public class CreateDeadlineCommand extends Command {
      * Executes the command to create a deadline.
      *
      * @param storage Storage
-     * @param tasks Task list
+     * @param taskList Task list
+     * @param archive Archive
      * @param ui Ui
      * @return Output strings displayed in the UI showing deadline creation
      */
     @Override
-    public String[] execute(Storage storage, TaskList tasks, Ui ui) {
+    public String[] execute(Storage storage, TaskList taskList, TaskList archive, Ui ui) {
         assert storage != null;
-        assert tasks != null;
+        assert taskList != null;
         assert ui != null;
 
-        Deadline newDeadline = tasks.addDeadline(description, isComplete, date);
-        return ui.getCreateTaskStrings(tasks, newDeadline);
+        Deadline newDeadline = taskList.addDeadline(description, isComplete, date);
+        return ui.getCreateTaskStrings(taskList, newDeadline);
     }
 }

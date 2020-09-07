@@ -14,9 +14,10 @@ public abstract class Command {
      * Executes the command.
      *
      * @param storage Storage
-     * @param tasks Task list
+     * @param taskList Task list
+     * @param archive
      * @param ui Ui
      * @return Output strings displayed in the UI
      */
-    public abstract String[] execute(Storage storage, TaskList tasks, Ui ui);
+    public abstract String[] execute(Storage storage, TaskList taskList, TaskList archive, Ui ui);
 }

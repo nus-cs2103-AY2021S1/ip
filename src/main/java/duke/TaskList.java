@@ -57,6 +57,28 @@ public class TaskList {
     }
 
     /**
+     * Adds the task to the task list.
+     *
+     * @param task
+     * @return Task
+     */
+    public Task addTask(Task task) {
+        taskArrayList.add(task);
+        return task;
+    }
+
+    /**
+     * Adds all tasks in another task list to this task list.
+     *
+     * @param tasks
+     */
+    public void addTasks(TaskList tasks) {
+        for (int i = 0; i < tasks.getNumOfTasks(); i++) {
+            addTask(tasks.getTaskAt(i));
+        }
+    }
+
+    /**
      * Creates a new todo and adds it to the task list.
      *
      * @param description Description of the todo
@@ -84,6 +106,13 @@ public class TaskList {
         Task task = taskArrayList.get(taskIndex);
         task.setComplete();
         return task;
+    }
+
+    /**
+     * Deletes all tasks in the task list.
+     */
+    public void deleteAllTasks() {
+        taskArrayList.clear();
     }
 
     /**

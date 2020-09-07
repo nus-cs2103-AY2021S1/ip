@@ -26,16 +26,17 @@ public class FindCommand extends Command {
      * Execute the command to find matching tasks.
      *
      * @param storage Storage
-     * @param tasks Task list
+     * @param taskList Task list
+     * @param archive
      * @param ui Ui
      * @return Output strings displayed on the UI showing sublist of tasks containing the specified keyword
      */
     @Override
-    public String[] execute(Storage storage, TaskList tasks, Ui ui) {
-        assert tasks != null;
+    public String[] execute(Storage storage, TaskList taskList, TaskList archive, Ui ui) {
+        assert taskList != null;
         assert ui != null;
 
-        Task[] sublist = tasks.getSublistContainingKeyword(keyword);
+        Task[] sublist = taskList.getSublistContainingKeyword(keyword);
         return ui.getTasksWithKeywordStrings(sublist);
     }
 }

@@ -13,18 +13,21 @@ public class ExitCommand extends Command {
      * Executes the command to exit duke.
      *
      * @param storage Storage
-     * @param tasks Task list
+     * @param taskList Task list
+     * @param archive
      * @param ui Ui
      * @return Output strings displayed on the UI showing exit
      */
     @Override
-    public String[] execute(Storage storage, TaskList tasks, Ui ui) {
+    public String[] execute(Storage storage, TaskList taskList, TaskList archive, Ui ui) {
         assert storage != null;
-        assert tasks != null;
+        assert taskList != null;
         assert ui != null;
 
-        storage.resetFile();
-        storage.saveTaskList(tasks);
+        storage.resetMainDataFile();
+        storage.resetArchiveDataFile();
+        storage.saveMainTaskList(taskList);
+        storage.saveArchive(archive);
         return ui.getExitStrings();
     }
 }
