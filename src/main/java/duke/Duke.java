@@ -2,7 +2,6 @@ package duke;
 
 import duke.command.ExitCommand;
 import javafx.application.Platform;
-import javafx.scene.image.Image;
 
 import duke.command.Command;
 import duke.exception.DukeException;
@@ -20,10 +19,6 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-
-    //private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    //private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
 
     /**
      * Creates a new Duke object with the specified file path.
@@ -45,6 +40,7 @@ public class Duke {
     /**
      * Runs the duke application.
      */
+
     public void run() {
         ui.showWelcome();
         boolean isExit = false;
@@ -62,6 +58,7 @@ public class Duke {
             }
         }
     }
+
 
 
     /**
@@ -84,9 +81,9 @@ public class Duke {
         return response;
     }
 
-    public static void main(String[] args) {
-        new Duke(FILENAME).run();
-    }
+    //public static void main(String[] args) {
+    //    new Duke(FILENAME).run();
+    //}
 
 
 

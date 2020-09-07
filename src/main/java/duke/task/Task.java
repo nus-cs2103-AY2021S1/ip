@@ -10,6 +10,10 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    static final String CHECKED_ICON = "\u2713";
+    static final String UNCHECKED_ICON = "\u2718";
+    static final int NUM_CHARS_TO_DATE = 4;
+
     /**
      * Creates a task with the specified String <code>description</code> and is
      * marked as undone.
@@ -27,7 +31,7 @@ public class Task {
      * @return Checked or unchecked symbol.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? CHECKED_ICON : UNCHECKED_ICON);
     }
 
     public void markAsDone() {
@@ -78,6 +82,9 @@ public class Task {
         } else {
             throw new AssertionError("This task does not have a date");
         }
+
+        return des.substring(des.indexOf('/') + NUM_CHARS_TO_DATE);
+
     }
 
     /**
@@ -94,9 +101,8 @@ public class Task {
      *
      * @return True if the task is neither a to do, deadline, or event and false otherwise
      */
-    public boolean isInvalidTask() {
-        String firstWord = this.getFirstWord();
-        return !(firstWord.equals("todo") || firstWord.equals("deadline") || firstWord.equals("event"));
+    public boolean isValidTask() {
+        return this.isTodo() || this.isDeadline() || this.isEvent();
     }
 
     /**
@@ -107,7 +113,7 @@ public class Task {
      * @throws DukeException If user input is not valid
      */
     public void validate() throws DukeException {
-        if (this.isInvalidTask()) { // checks if input is not to do, deadline, or event
+        if (!this.isValidTask()) { // checks if input is not to do, deadline, or event
             throw new DukeException("   ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         if (this.isSingleWord()) { // checks if input is only the type of task, but no description
@@ -132,7 +138,7 @@ public class Task {
      *
      * @return Task reformatted as a String
      */
-    public String taskToText() { // converts description text to file text
+    public String taskToText() throws DukeException {
         String des = this.description;
         String task = des.substring(des.indexOf(" ") + 1);
         if (this.isTodo()) {
@@ -149,7 +155,7 @@ public class Task {
                     : "E | 0 | " + task.substring(0, task.indexOf('/') - 1)
                     + " | " + this.getDate());
         } else {
-            return "";
+            throw new DukeException("Invalid task type.");
         }
     }
 

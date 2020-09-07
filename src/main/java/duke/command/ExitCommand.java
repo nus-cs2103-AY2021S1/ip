@@ -20,18 +20,15 @@ public class ExitCommand extends Command {
     }
 
     /**
-     * Prints the template for exiting the Duke program.
+     * Exits the Duke program.
      *
      * @param tasks List of <code>Task</code> objects.
      * @param ui Ui object created by Duke.
      * @param storage Storage object created by Duke.
+     * @return Empty string
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("    Bye. Hope to see you again soon!\n");
-    }
-
     public String executeToString(TaskList tasks, Ui ui, Storage storage) {
-        return "    Bye. Hope to see you again soon!\n";
+        return "";
     }
 }
 
