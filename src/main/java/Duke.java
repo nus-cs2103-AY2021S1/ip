@@ -16,13 +16,8 @@ public class Duke {
      */
     public Duke() {
         super();
-    }
-
-    /**
-     */
-    public Duke(String databaseDirectoryPath) {
         this.ui = new Ui();
-        this.storage = new Storage(databaseDirectoryPath);
+        this.storage = new Storage(Duke.DATABASE_DIRECTORY_PATH);
         this.parser = new Parser();
 
         try {
@@ -32,33 +27,6 @@ public class Duke {
             this.tasks = new TaskList();
         }
     }
-//
-//    /**
-//     * Starts the bot.
-//     */
-//    public void run() {
-//        this.ui.greetUser();
-//
-//        boolean keepApplicationRunning = true;
-//        Scanner sc = new Scanner(System.in);
-//
-//        while (keepApplicationRunning) {
-//            try {
-//                String userInput = this.ui.getUserInput(sc);
-//                if (userInput.equals("bye")) {
-//                    keepApplicationRunning = false;
-//                }
-//                this.parser.parseCommands(this.tasks, userInput, sc);
-//                // Saves the state after each command instead of only saving to the database upon exit
-//                this.storage.save(this.tasks.getDatabase());
-//            } catch (DukeException e) {
-//                this.ui.showErrorMessage(e.getMessage());
-//            }
-//        }
-//
-//        this.ui.showExitMessage();
-//        System.exit(0);
-//    }
 
     /**
      * Creates a label with the specified text and adds it to the dialog container.
@@ -74,6 +42,12 @@ public class Duke {
     }
 
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try {
+            String output = this.parser.parseCommands(this.tasks, input);
+            this.storage.save(this.tasks.getDatabase());
+            return output;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }
