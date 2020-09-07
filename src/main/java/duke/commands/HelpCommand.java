@@ -1,7 +1,7 @@
 package src.main.java.duke.commands;
 
 /**
- * Help function that helps the user to clarify doubts
+ * Represents a help command that helps the user to clarify doubts.
  */
 public class HelpCommand extends Command {
 
@@ -19,7 +19,8 @@ public class HelpCommand extends Command {
             DeleteCommand.MESSAGE_USAGE,
             MarkDoneCommand.MESSAGE_USAGE,
             HelpCommand.MESSAGE_USAGE,
-            ExitCommand.MESSAGE_USAGE};
+            ExitCommand.MESSAGE_USAGE,
+            UpdatedescriptionCommand.MESSAGE_USAGE};
 
         String resultString = "";
 

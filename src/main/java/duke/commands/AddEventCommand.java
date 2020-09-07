@@ -4,7 +4,7 @@ import src.main.java.duke.data.task.Event;
 
 
 /**
- * Command that adds event
+ * Represents a command that adds an event.
  */
 public class AddEventCommand extends Command {
 
@@ -18,17 +18,17 @@ public class AddEventCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New event task added: %1$s";
 
-    private final Event toAdd;
+    private final Event newTask;
 
     public AddEventCommand(String description, String dueDate) {
-        this.toAdd = new Event(description, dueDate);
+        this.newTask = new Event(description, dueDate);
     }
 
     @Override
     public CommandResult execute() {
         try {
-            duke.addTask(toAdd);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+            duke.addTask(newTask);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, newTask));
         } catch (Exception e) {
             return new CommandResult("Oh no. Add event was not successful");
         }

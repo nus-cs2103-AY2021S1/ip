@@ -9,7 +9,7 @@ import src.main.java.duke.storage.StorageFile.InvalidStorageFilePathException;
 import src.main.java.duke.ui.MainWindow;
 
 /**
- * A GUI for Duke using FXML.
+ * Represents the GUI for Duke using FXML.
  */
 public class Main extends Application {
 

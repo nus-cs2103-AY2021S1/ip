@@ -9,7 +9,7 @@ import java.util.Objects;
 import java.util.stream.Collectors;
 
 /**
- * A list of tasks that does not allow null elements or duplicates.
+ * Represents a task list that contains tasks.
  *
  */
 public class TaskList implements Iterable<Task> {
@@ -23,7 +23,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Constructs a list from the items in the given collection.
-     * @param tasks a collection of persons
+     * @param tasks a collection of persons.
      */
     public TaskList(Collection<Task> tasks) {
         internalList.addAll(tasks);
@@ -31,7 +31,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Constructs a shallow copy of the list.
-     * @param source the source of the task list
+     * @param source the source of the task list.
      */
     public TaskList(TaskList source) {
         internalList.addAll(source.internalList);
@@ -51,8 +51,8 @@ public class TaskList implements Iterable<Task> {
      * Returns an unmodifiable java List view with elements cast as immutable {@link Task}s.
      * For use with other methods/libraries.
      * Any changes to the internal list/elements are immediately visible in the returned list.
-     * @param searchString String to be searched in the task
-     * @return a list of tasks that is filtered
+     * @param searchString String to be searched in the task.
+     * @return a list of tasks that is filtered.
      */
     public List<Task> filteredView(String searchString) {
         List<Task> filteredList = internalList
@@ -64,8 +64,8 @@ public class TaskList implements Iterable<Task> {
     /**
      * Checks if the list contains an equivalent person as the given argument.
      * defines a weaker notion of equality.
-     * @param toCheck the task to be check
-     * @return return true if the list contains the task
+     * @param toCheck the task to be check.
+     * @return return true if the list contains the task.
      */
     public boolean doesContain(Task toCheck) {
         for (Task p : internalList) {
@@ -79,7 +79,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Adds a task to the list.
-     * @param task task to be added
+     * @param task task to be added.
      */
     public void add(Task task) {
         internalList.add(task);
@@ -87,14 +87,16 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Removes the equivalent task from the list.
-     * @param index index to remove the task
+     * @param index index to remove the task.
+     * @return task that is removed.
      * @throws TaskNotFoundException if no such task could be found in the list.
      */
-    public void remove(int index) throws TaskNotFoundException {
-        final Task taskNotFound = internalList.remove(index);
-        if (taskNotFound == null) {
+    public Task remove(int index) throws TaskNotFoundException {
+        final Task deletedTask = internalList.remove(index);
+        if (deletedTask == null) {
             throw new TaskNotFoundException();
         }
+        return deletedTask;
     }
 
     /**

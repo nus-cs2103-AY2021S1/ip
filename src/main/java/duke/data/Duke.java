@@ -11,7 +11,7 @@ import src.main.java.duke.storage.StorageFile;
 import src.main.java.duke.storage.StorageFile.StorageOperationException;
 
 /**
- * Duke class represents the bot which contains a tasklist and interacts with the tasks.
+ * Represents the bot which contains a tasklist and interacts with the tasks.
  */
 public class Duke {
 
@@ -54,9 +54,21 @@ public class Duke {
     }
 
     /**
+     * Adds a task to the task list.
+     * @param newDescription new description of the task.
+     * @param index index to update the task.
+     * @return task that is removed.
+     */
+    public Task updateDescription(String newDescription, int index) {
+        Task currentTask = taskList.getTask(index);
+        currentTask.updateDescription(newDescription);
+        return currentTask;
+    }
+
+    /**
      * Marks the task in the list done.
-     * @param index index of the task to be mark done
-     * @return Return task which is mark done
+     * @param index index of the task to be mark done.
+     * @return Return task which is mark done.
      */
     public Task markDone(int index) {
         assert index >= 0;
@@ -77,10 +89,11 @@ public class Duke {
      * Removes the equivalent task from the task list.
      *
      * @param index index of the task to be removed
+     * @return a task that is removed.
      * @throws TaskNotFoundException task cannot be found back to {@code DeleteCommand}
      */
-    public void removeTask(int index) throws TaskNotFoundException {
-        taskList.remove(index - 1);
+    public Task removeTask(int index) throws TaskNotFoundException {
+        return taskList.remove(index - 1);
     }
 
     /**
@@ -110,7 +123,6 @@ public class Duke {
      *
      * @param input an user input
      * @return return a response to the user
-     * @throws StorageOperationException error occur when executing storage operation
      */
     public String getResponse(String input) {
         Command command = new Parser().parseCommand(input);

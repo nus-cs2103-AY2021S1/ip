@@ -1,5 +1,14 @@
-E  | 1 | mark homework | 2019-02-12 18:00
-T  | 1 | revlkamdsflk laskdmfalkmdf
-T  | 1 | asdlkfkmas alskdfmaksldmf
-E  | 0 | mark homework | 2019-02-12 18:00
-T  | 1 | revise homework
+E  | 0 | asdfa asdfasd | 2019-02-12 18:00
+E  | 0 | asdfasd fadsfads | 2019-02-12 18:00
+T  | 0 | help
+T  | 0 | asdfadf
+T  | 0 | aldskfmaklsdf
+T  | 0 | alkdsfmaskldf
+T  | 0 | alksdmfkalsdfmklads
+T  | 0 | alsdkfmalksdmf
+T  | 0 | as
+T  | 0 | asdfa
+T  | 0 | a
+T  | 0 | asd
+T  | 0 | asdfasdf asdfasdf
+T  | 0 | asd

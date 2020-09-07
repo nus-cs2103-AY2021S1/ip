@@ -15,12 +15,13 @@ import src.main.java.duke.storage.StorageFile.StorageOperationException;
 
 
 /**
- * DukeDencoder decodes all the {@code Task} in the {@code toSave} into a list of decodable
+ * Represents a decoder that decodes all the {@code Task} in the {@code toSave} into a list of decodable.
  */
 public class DukeDecoder {
 
     public static final String TODO_REGEX = "(T)+\\s+([|])+\\s+([10])+\\s+([|])+\\s+\\w+.+";
     public static final String DEADLINE_REGEX = "([DE])+\\s+([|])+\\s+([10])+\\s+([|])+\\s+\\w+.+\\s+([|])+\\s+\\w+.+";
+
     /**
      * Decodes {@code encodedDuke} into an {@code Duke} containing the decoded
      * tasks.

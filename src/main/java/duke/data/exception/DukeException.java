@@ -1,7 +1,7 @@
 package src.main.java.duke.data.exception;
 
 /**
- * Duke exception is customised exception class for Bot
+ * Represents customised exception class for Bot.
  *
  */
 public class DukeException extends Exception {

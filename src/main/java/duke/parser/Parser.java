@@ -17,9 +17,10 @@ import src.main.java.duke.commands.HelpCommand;
 import src.main.java.duke.commands.IncorrectCommand;
 import src.main.java.duke.commands.ListCommand;
 import src.main.java.duke.commands.MarkDoneCommand;
+import src.main.java.duke.commands.UpdatedescriptionCommand;
 
 /**
- * Parses user input.
+ * Represents a parser that parses user input.
  */
 public class Parser {
 
@@ -35,9 +36,11 @@ public class Parser {
             Pattern.compile("(?<description>[^/]+)+\\s+(\\/by)+\\s+"
                     + "(?<duedate>[\\d\\d\\d-\\d\\d\\-\\d\\d\\d+\\s+\\d\\d:\\d\\d]+)");
 
+    public static final Pattern UPDATE_DESCRIPTION_ARGS_FORMAT =
+            Pattern.compile("(?<index>[\\d]+)+\\s+(?<description>.+)");
+
     public static final Pattern TASK_DATA_ARGS_FORMAT = // '/' forward slashes are reserved for delimiter prefixes
             Pattern.compile("(?<description>[^/]+)");
-
     /**
      * Used for initial separation of command word and args.
      */
@@ -58,6 +61,7 @@ public class Parser {
 
         final String commandWord = matcher.group("commandWord");
         final String arguments = matcher.group("arguments");
+
         switch (commandWord) {
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
@@ -75,6 +79,8 @@ public class Parser {
             return prepareMarkDone(arguments);
         case FindCommand.COMMAND_WORD:
             return prepareFind(arguments);
+        case UpdatedescriptionCommand.COMMAND_WORD:
+            return prepareUpdateDescription(arguments);
         default:
             return new HelpCommand();
         }
@@ -88,11 +94,13 @@ public class Parser {
      */
     private Command prepareAddEvent(String args) {
         final Matcher matcher = EVENT_TASK_DATA_ARGS_FORMAT.matcher(args.trim());
+
         // Validate arg string format
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddTodoCommand.MESSAGE_USAGE));
         }
+
         return new AddEventCommand(matcher.group("description"), matcher.group("duedate"));
     }
 
@@ -104,12 +112,32 @@ public class Parser {
      */
     private Command prepareAddTodo(String args) {
         final Matcher matcher = TASK_DATA_ARGS_FORMAT.matcher(args.trim());
+
         // Validate arg string format
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddTodoCommand.MESSAGE_USAGE));
         }
+
         return new AddTodoCommand(matcher.group("description"));
+    }
+
+    /**
+     * Parses arguments in the context of the add task command.
+     *
+     * @param args full command args string
+     * @return the prepared command
+     */
+    private Command prepareUpdateDescription(String args) {
+        final Matcher matcher = UPDATE_DESCRIPTION_ARGS_FORMAT.matcher(args.trim());
+
+        // Validate arg string format
+        if (!matcher.matches()) {
+            return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
+                    UpdatedescriptionCommand.MESSAGE_USAGE));
+        }
+
+        return new UpdatedescriptionCommand(matcher.group("description"), Integer.valueOf(matcher.group("index")));
     }
 
     /**
@@ -120,11 +148,13 @@ public class Parser {
      */
     private Command prepareAddDeadline(String args) {
         final Matcher matcher = DEADLINE_TASK_DATA_ARGS_FORMAT.matcher(args.trim());
+
         // Validate arg string format
         if (!matcher.matches()) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
                     AddDeadlineCommand.MESSAGE_USAGE));
         }
+
         return new AddDeadlineCommand(matcher.group("description"), matcher.group("duedate"));
     }
 
@@ -158,7 +188,7 @@ public class Parser {
             return new MarkDoneCommand(targetIndex);
         } catch (ParseException pe) {
             return new IncorrectCommand(String.format(MESSAGE_INVALID_COMMAND_FORMAT,
-                    DeleteCommand.MESSAGE_USAGE));
+                    MarkDoneCommand.MESSAGE_USAGE));
         } catch (NumberFormatException nfe) {
             return new IncorrectCommand(MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
         }

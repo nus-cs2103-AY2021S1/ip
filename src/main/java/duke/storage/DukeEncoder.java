@@ -7,7 +7,7 @@ import src.main.java.duke.data.Duke;
 import src.main.java.duke.data.task.Task;
 
 /**
- * DukeEncoder encodes all the {@code Task} in the {@code toSave} into a list of decodable
+ * Represents an encoder that encodes all the {@code Task} in the {@code toSave} into a list of decodable.
  */
 public class DukeEncoder {
     /**

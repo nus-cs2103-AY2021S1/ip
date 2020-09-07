@@ -1,7 +1,7 @@
 package src.main.java.duke.data.exception;
 
 /**
- * Signals that some given data does not fulfill some constraints.
+ * Represents exception that signals that some given data does not fulfill some constraints.
  */
 public class IllegalValueException extends DukeException {
     /**
