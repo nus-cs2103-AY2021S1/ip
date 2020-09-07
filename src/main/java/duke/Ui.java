@@ -78,7 +78,10 @@ public class Ui {
 
         switch(command){
         case "hello":
-            response.add(processHelloCommand());
+            response.addAll(processHelloCommand());
+            break;
+        case "help":
+            response.add(DukeException.fullGuide);
             break;
         case "bye":
             sleepMode = true;
@@ -118,12 +121,17 @@ public class Ui {
      *
      * @return system response to 'hello' command.
      */
-    public String processHelloCommand() {
+    public List<String> processHelloCommand() {
+        List<String> output = new ArrayList<>();
         if (sleepMode) {
             sleepMode = false;
-            return "Hello! This is J.A.R.V.I.S.\nHow may I help you?";
+            output.add("Hello! This is J.A.R.V.I.S.\nHow may I help you?");
+            output.add("Enter 'help' for command guide.");
+        } else {
+            output.add("You have already started our dialog.\nPlease enter your command :)");
         }
-        return "You have already started our dialog.\nPlease enter your command :)";
+        return output;
+
     }
 
 

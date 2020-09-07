@@ -17,7 +17,7 @@ public class Parser {
      * @param dateTime  User input of date and time of a Task object (specifically Deadline/Event).
      * @returns  Processed datetime of a Deadline or Event object.
      */
-    public String dateTimeParser(String commandType, String dateTime) {
+    private String dateTimeParser(String commandType, String dateTime) {
         try {
             DateTimeConverter dtc = new DateTimeConverter(FormatStyle.MEDIUM, FormatStyle.SHORT);
             return dtc.processTime(commandType, dateTime);
@@ -65,6 +65,7 @@ public class Parser {
             switch (cleanInput) {
             case "bye":
             case "hello":
+            case "help":
             case "list":
                 return new String[]{input};
             default:
@@ -100,7 +101,7 @@ public class Parser {
      * @param keyword  User input of keyword to search for.
      * @returns  Specific information of a find command in the form of String array.
      */
-    public String[] parseFind(String keyword) {
+    private String[] parseFind(String keyword) {
         return new String[] {"find", keyword};
     }
 
@@ -112,7 +113,7 @@ public class Parser {
      * @param actionNumber  index of task to be modified.
      * @returns  Specific information of this modification command in the form of String array.
      */
-    public String[] parseModifications(String commandType, String actionNumber) {
+    private String[] parseModifications(String commandType, String actionNumber) {
         return new String[] {commandType, actionNumber};
     }
 
@@ -124,7 +125,7 @@ public class Parser {
      * @param taskContent  content of task to be added.
      * @returns  Specific information of 'todo' or 'event' or 'deadline' command in String array.
      */
-    public String[] parseNewEvent(String commandType, String taskContent) {
+    private String[] parseNewEvent(String commandType, String taskContent) {
         if (commandType.equals("todo")) {
             return parseTodo(taskContent);
         } else {
@@ -140,7 +141,7 @@ public class Parser {
      * @param taskContent  content of task to be added.
      * @returns  Specific information of 'todo' command in String array.
      */
-    public String[] parseTodo(String taskContent) {
+    private String[] parseTodo(String taskContent) {
         return new String[] {"todo", taskContent};
     }
 
@@ -153,7 +154,7 @@ public class Parser {
      * @param taskContent  content of task to be added.
      * @returns  Specific information of 'event' or 'deadline' command in String array.
      */
-    public String[] parseEventAndDeadline(String commandType, String taskContent) {
+    private String[] parseEventAndDeadline(String commandType, String taskContent) {
         try {
             String[] taskDetails = taskContent.split(
                     commandType.equals("event") ? " /at " : " /by ", 2);
@@ -181,7 +182,7 @@ public class Parser {
      * @param type  type of exception to be processed.
      * @returns  Specific information of exception in String array.
      */
-    public String[] parseException(String type) {
+    private String[] parseException(String type) {
         switch (type) {
         case "done":
         case "delete":

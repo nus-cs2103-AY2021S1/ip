@@ -122,7 +122,8 @@ public class Storage {
     /**
      * Returns true if file is successfully read and written, false otherwise.
      * Overwrites local memory with the current List of Task objects.
-     * If file does not exist, creates a new file with current task-list.
+     * Creates a new file with current task-list if file does not exist.
+     * Recovers the old list if the local file is accidentally deleted.
      *
      * @param taskList  Current List of Task objects.
      * @return  true if successfully read and written file, false if failure.
