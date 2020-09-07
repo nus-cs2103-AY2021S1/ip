@@ -3,6 +3,7 @@
  */
 public class Parser {
     protected ListOfItems listOfItems;
+    protected Help help;
 
     /**
      * Constructor initialises a new Parser object.
@@ -11,6 +12,7 @@ public class Parser {
      */
     public Parser(ListOfItems list) {
         this.listOfItems = list;
+        this.help = new Help();
     }
 
     /**
@@ -36,6 +38,8 @@ public class Parser {
                 return listOfItems.checkBefore(input);
             } else if (input.contains("find")) {
                 return listOfItems.find(input);
+            } else if (input.contains("help")) {
+                return help.get();
             } else {
                 return listOfItems.addItem(input);
             }
