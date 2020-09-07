@@ -4,31 +4,41 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * A juke.task.Deadline class that represents a juke.task.Task with a deadline.
- * It has a juke.task.Task description, as well as a deadline date.
+ * Represents a Task to be done by a given deadline date.
  */
 public class Deadline extends Task {
 
     private LocalDate by;
 
+    /**
+     * Constructs a Deadline with an input description and by date.
+     * @param description Description of Deadline task.
+     * @param by Date by which task is to be completed.
+     */
     public Deadline(String description, String by) {
         super(description);
         this.by = LocalDate.parse(by);
     }
 
     /**
-     * Returns the representative text of the juke.task.Deadline.
+     * Returns the representative text of the Deadline.
+     *
      * @return Representative text.
      */
     @Override
     public String taskSaver() {
         String type = "D";
-        return type + "/" + super.taskSaver() + "/" + by.format(DateTimeFormatter.ISO_LOCAL_DATE);
+        return String.format("%s/%s/%s",
+                type,
+                super.taskSaver(),
+                by.format(DateTimeFormatter.ISO_LOCAL_DATE));
+        // return type + "/" + super.taskSaver() + "/" + by.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
     /**
-     * Outputs the juke.task.Deadline as a String.
-     * @return String representation of juke.task.Deadline.
+     * Outputs the Deadline as a String.
+     *
+     * @return String representation of Deadline.
      */
     @Override
     public String toString() {

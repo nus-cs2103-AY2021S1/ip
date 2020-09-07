@@ -3,8 +3,17 @@ package juke.command;
 import juke.TaskList;
 import juke.Storage;
 
+/**
+ * Represents a command to be interpreted and executed by the Juke chatbot.
+ */
 public abstract class Command {
 
-    public abstract String executeCommand(TaskList tasklist, Storage storage);
+    /**
+     * Executes whats required based on the type of command.
+     * @param taskList List of tasks
+     * @param storage Storage of tasks onto disk
+     * @return Response Text to be output by chatbot.
+     */
+    public abstract String executeCommand(TaskList taskList, Storage storage);
 
 }

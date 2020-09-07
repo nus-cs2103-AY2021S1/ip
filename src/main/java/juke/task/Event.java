@@ -4,13 +4,17 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * An juke.task.Event class that represents a juke.task.Task that occurs on a day.
- * It has a juke.task.Task Description, as well as a juke.task.Event date.
+ * Represents a Task that occurs at a given event date.
  */
 public class Event extends Task {
 
     private LocalDate at;
 
+    /**
+     * C
+     * @param description
+     * @param at
+     */
     public Event(String description, String at) {
         super(description);
         this.at = LocalDate.parse(at);
@@ -23,7 +27,11 @@ public class Event extends Task {
     @Override
     public String taskSaver() {
         String type = "E";
-        return type + "/" + super.taskSaver() + "/" + at.format(DateTimeFormatter.ISO_LOCAL_DATE);
+        return String.format("%s/%s/%s",
+                type,
+                super.taskSaver(),
+                at.format(DateTimeFormatter.ISO_LOCAL_DATE));
+        // return type + "/" + super.taskSaver() + "/" + at.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
     /**

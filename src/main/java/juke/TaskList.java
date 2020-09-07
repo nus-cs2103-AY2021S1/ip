@@ -57,16 +57,16 @@ public class TaskList {
     }
 
     /**
-     * Marks a juke.task in list of current tasks as completed.
+     * Marks a task in list of current tasks as completed.
      *
      * @param taskNo Index of juke.task to mark.
      */
-    public String makeTaskDone(int taskNo) {
+    public String markTaskAsDone(int taskNo) {
         StringBuilder output = new StringBuilder();
         Task toBeDone = this.list.get(taskNo);
         toBeDone.markAsDone();
         this.list.set(taskNo, toBeDone);
-        output.append("Good Job, this juke.task is now done:\n").append(toBeDone);
+        output.append("Good Job, this task is now done:\n").append(toBeDone);
         return output.toString();
     }
 

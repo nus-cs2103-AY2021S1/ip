@@ -34,7 +34,7 @@ public class Task {
      */
     public String taskSaver() {
         String doneStatus = this.isDone ? "1" : "0";
-        return doneStatus + "/" + description;
+        return doneStatus + "/" + this.description;
     }
 
     public String getDescription() {

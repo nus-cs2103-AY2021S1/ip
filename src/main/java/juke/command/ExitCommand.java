@@ -5,12 +5,17 @@ import juke.TaskList;
 
 import java.io.IOException;
 
+/**
+ * Represents the command to exit the chatbot.
+ */
 public class ExitCommand extends Command {
 
-    public ExitCommand() {
-        super();
-    }
-
+    /**
+     * Executes the exiting of chatbot, upon saving of tasks to file.
+     * @param taskList List of tasks
+     * @param storage Storage of tasks onto disk
+     * @return Response Text to be output by chatbot upon exiting.
+     */
     @Override
     public String executeCommand(TaskList taskList, Storage storage) {
         try {
