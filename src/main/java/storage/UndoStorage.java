@@ -57,9 +57,7 @@ public class UndoStorage {
                 throw new MugException("Something went wrong. Mug fail to undo:_:");
             }
         } catch (NoSuchElementException ex) {
-            String err = "Mug do not have anything to undo. TT"
-                    + "\n(Note: Mug can only undo the most recent command.)";
-            throw new MugException(err);
+            throw new MugException("Mug do not have anything to undo. TT");
         } catch (IOException ex) {
             throw new MugException("Something went wrong. Mug fail to undo:_:");
         }
@@ -73,7 +71,7 @@ public class UndoStorage {
     private void undoDelete() throws MugException {
         try {
             writeFile(this.mugFilepath, this.undoFilepath, true, false);
-            clearFile(this.undoFilepath);
+            clearUndo(this.undoFilepath);
         } catch (IOException ex) {
             throw new MugException("Something went wrong. Mug fail to undo:_:");
         }
@@ -87,7 +85,7 @@ public class UndoStorage {
     private void undoDone() throws MugException {
         try {
             writeFile(this.mugFilepath, this.undoFilepath, false, true);
-            clearFile(this.undoFilepath);
+            clearUndo(this.undoFilepath);
         } catch (IOException ex) {
             throw new MugException("Something went wrong. Mug fail to undo:_:");
         }
@@ -101,7 +99,7 @@ public class UndoStorage {
     private void undoAdd() throws MugException {
         try {
             writeFile(this.mugFilepath, this.undoFilepath, false, false);
-            clearFile(this.undoFilepath);
+            clearUndo(this.undoFilepath);
         } catch (IOException ex) {
             throw new MugException("Something went wrong. Mug fail to undo:_:");
         }
@@ -113,17 +111,38 @@ public class UndoStorage {
      * @param filepath The filepath of the file to clear.
      * @throws IOException If fail to write file.
      */
-    private void clearFile(String filepath) throws IOException {
+    private void clearUndo(String filepath) throws IOException {
+        String tempFile = "clearTemp.txt";
+        File oldFile = new File(filepath);
+        File newFile = new File(tempFile);
+
         try {
-            FileWriter undoFw = new FileWriter(filepath);
+            FileWriter undoFw = new FileWriter(tempFile, true);
             BufferedWriter undoBw = new BufferedWriter(undoFw);
             PrintWriter undoPw = new PrintWriter(undoBw);
+            // read undo.txt
+            Scanner undoSc = new Scanner(new File(filepath));
+            undoSc.useDelimiter("[\n]");
+            // remove the first three
+            undoSc.next();
+            undoSc.next();
+            undoSc.next();
+            // copy back the rest
+            while (undoSc.hasNext()) {
+                undoPw.println(undoSc.next());
+            }
+            undoSc.close();
             undoPw.flush();
             undoPw.close();
+            // rename file
+            oldFile.delete();
+            File renameFile = new File(filepath);
+            newFile.renameTo(renameFile);
         } catch (IOException ex) {
             throw new IOException();
         }
     }
+
 
     /**
      * Writes local storage file when undo.
@@ -140,6 +159,7 @@ public class UndoStorage {
         File oldFile = new File(mugFilepath);
         File newFile = new File(tempFile);
         try {
+            // write mug file
             FileWriter mugFw = new FileWriter(tempFile, true);
             BufferedWriter mugBw = new BufferedWriter(mugFw);
             PrintWriter mugPw = new PrintWriter(mugBw);

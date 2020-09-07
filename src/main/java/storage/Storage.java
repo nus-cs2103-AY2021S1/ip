@@ -37,6 +37,7 @@ public class Storage {
         this.filepath = filepath;
         File mainFile = new File(filepath);
         File undoFile = new File("undo.txt");
+        undoFile.deleteOnExit();
         try {
             if (!mainFile.exists()) {
                 mainFile.createNewFile();
@@ -231,17 +232,31 @@ public class Storage {
      * @throws MugException If fail to access undo.txt.
      */
     private void writeUndoRecord(Action task, String info, int taskId) throws MugException {
+        String tempFile = "undoTemp.txt";
+        File oldFile = new File("undo.txt");
+        File newFile = new File(tempFile);
+
         try {
-            new File("undo.txt").delete();
-            File newFile = new File("undo.txt");
-            FileWriter fw = new FileWriter(newFile, true);
+            FileWriter fw = new FileWriter(tempFile, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
+            // read undo.txt
+            FileReader fr = new FileReader("undo.txt");
+            BufferedReader br = new BufferedReader(fr);
             pw.println(task);
             pw.println(taskId);
             pw.println(info);
+            while (br.ready()) {
+                pw.println(br.readLine());
+            }
+            //close reader and writer
+            br.close();
             pw.flush();
             pw.close();
+            //rename
+            oldFile.delete();
+            File renameFile = new File("undo.txt");
+            newFile.renameTo(renameFile);
         } catch (IOException ex) {
             throw new MugException("Something went wrong. Mug fail to record task :_:");
         }
