@@ -82,16 +82,27 @@ public class TaskList {
     public List<Task> findTasks(String keyword) {
         /*
         List<Task> filteredTasks = new ArrayList<>();
+        // Original version
         for (Task task : tasks) {
             if (task.getDescription().contains(keyword)) {
                 filteredTasks.add(task);
             }
         }
+
+        // Lambda version
+        tasks.forEach(task -> {
+            if (task.getDescription().contains(keyword)) {
+                filteredTasks.add(task);
+            }
+        });
+        return filteredTasks;
+
         */
 
         // Stream Version
         return tasks.stream()
                 .filter(task -> task.getDescription().contains(keyword))
                 .collect(Collectors.toList());
+
     }
 }
