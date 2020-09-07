@@ -1,6 +1,7 @@
 package duke.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -61,6 +62,27 @@ public class TaskListTest {
         assertEquals(taskToBeUpdated, tasks.updateTask(2, updatedTask));
 
         assertEquals(updatedTask, tasks.getTask(2));
+    }
+
+    @Test
+    public void updateTaskThatIsCompleted_taskListWithSomeItems_remainCompleted()
+            throws DukeException {
+        List<Task> testInputTasks = new ArrayList<>();
+        testInputTasks.add(new Todo("todo desc1"));
+        Task taskToBeUpdated = new Todo("todo desc2");
+        taskToBeUpdated.markAsDone();
+        testInputTasks.add(taskToBeUpdated);
+        testInputTasks.add(new Deadline("deadline desc1", "2020-12-30"));
+        testInputTasks.add(new Event("event desc1", "2020-12-30"));
+
+        TaskList tasks = new TaskList(testInputTasks);
+
+        Task updatedTask = new Event("event desc3", "2020-10-30");
+
+        assertEquals(taskToBeUpdated, tasks.updateTask(2, updatedTask));
+
+        assertEquals(updatedTask, tasks.getTask(2));
+        assertTrue(updatedTask.isDone());
     }
 
     @Test

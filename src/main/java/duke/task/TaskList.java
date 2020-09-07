@@ -57,6 +57,10 @@ public class TaskList {
      */
     public Task updateTask(int taskId, Task updatedTask) {
         assert taskId <= this.tasks.size();
+        Task originalTask = this.tasks.get(taskId - 1);
+        if (originalTask.isDone()) {
+            updatedTask.markAsDone();
+        }
         return this.tasks.set(taskId - 1, updatedTask);
     }
 

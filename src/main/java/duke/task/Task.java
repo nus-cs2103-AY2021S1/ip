@@ -37,6 +37,15 @@ public abstract class Task implements Serialisable {
     }
 
     /**
+     * Returns the status of the task.
+     *
+     * @return true if the task is complete, fals e otherwise.
+     */
+    public boolean isDone() {
+        return this.isDone;
+    }
+
+    /**
      * Returns a <code>✓</code> if the task is done, <code>✘</code> otherwise.
      *
      * @return <code>✓</code> if the task is done, <code>✘</code> otherwise.
