@@ -70,6 +70,22 @@ public class TaskList {
         return updatedTask.toString();
     }
 
+    public String setTaskAsImportant(int taskNumber) throws DukeException {
+        assert !taskPriority.isEmpty() : "Cannot delete from an Empty Tasklist";
+        if (taskNumber > getListSize()) {
+            String message = "Index not found! Are you sure you are typing the correct index?";
+            throw new DukeException(message);
+        }
+        Task importantTask = null;
+        for (int i = 0; i < taskNumber; i++) {
+            importantTask = taskPriority.poll();
+        }
+        importantTask.setAsImportant();
+        this.taskPriority.clear();
+        refillTaskPriorityQueue();
+        return importantTask.toString();
+    }
+
 
     /**
      * Refreshes the Tasklist arraylist to remove all tasks in it
