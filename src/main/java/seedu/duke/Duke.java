@@ -39,7 +39,9 @@ public class Duke {
      * Returns the output of Duke based on the user's input and decide whether to exit program
      */
     public String getResponse(String input) {
+        assert !this.exitProgram;
         ui.clearOutputMessage();
+        assert ui.getOutputMessage().length() == 0;
         try {
             Command command = Parser.parse(input);
             command.execute(tasks, ui, storage);
@@ -47,6 +49,7 @@ public class Duke {
         } catch (DukeException err) {
             ui.showError(err.getMessage());
         }
+        assert ui.getOutputMessage().length() > 0;
         return ui.getOutputMessage();
     }
 
