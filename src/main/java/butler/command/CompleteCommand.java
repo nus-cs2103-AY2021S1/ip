@@ -4,6 +4,7 @@ import butler.exception.ButlerException;
 import butler.io.Storage;
 import butler.io.Ui;
 import butler.task.TaskList;
+
 import java.util.ArrayList;
 
 public class CompleteCommand extends Command {

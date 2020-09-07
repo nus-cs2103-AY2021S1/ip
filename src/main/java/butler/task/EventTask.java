@@ -13,7 +13,7 @@ public class EventTask extends Task {
         this.taskType = TaskType.EVENT;
     }
 
-    public String getTime() {
+    private String getEventDuration() {
         return startDate.getDayOfMonth() + " "
                 + startDate.getMonth().toString() + " "
                 + startDate.getYear() + " to "
@@ -32,6 +32,6 @@ public class EventTask extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (from: " + getTime() + ")";
+        return "[E]" + super.toString() + " (from: " + getEventDuration() + ")";
     }
 }

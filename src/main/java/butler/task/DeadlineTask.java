@@ -11,14 +11,14 @@ public class DeadlineTask extends Task {
         this.taskType = TaskType.DEADLINE;
     }
 
-    public String getDeadlineString() {
+    private String getDeadlineString() {
         return deadline.getDayOfMonth() + " "
                 + deadline.getMonth().toString() + " "
                 + deadline.getYear();
     }
 
     public LocalDate getDeadline() {
-        return this.deadline;
+        return deadline;
     }
 
     @Override

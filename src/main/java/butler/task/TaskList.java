@@ -15,33 +15,33 @@ public class TaskList {
         this.taskList = new ArrayList<>();
     }
 
-    public void completeTask(int i) throws ButlerException {
-        try {
-            taskList.get(i - 1).markComplete();
-        } catch (IndexOutOfBoundsException e) {
-            throw new ButlerException("Please give a valid index. \""
-                    + i + "\" is not a valid index.\n");
-        }
+    public int getSize() {
+        return taskList.size();
+    }
+
+    public Task getTask(int taskIndex) {
+        return taskList.get(taskIndex);
     }
 
     public void addTask(Task task) {
         taskList.add(task);
     }
 
-    public void deleteTask(int index) throws ButlerException {
+    public void completeTask(int taskIndex) throws ButlerException {
         try {
-            taskList.remove(index - 1);
+            taskList.get(taskIndex - 1).markComplete();
         } catch (IndexOutOfBoundsException e) {
             throw new ButlerException("Please give a valid index. \""
-                    + index + "\" is not a valid index.\n");
+                    + taskIndex + "\" is not a valid index.");
         }
     }
 
-    public int getSize() {
-        return taskList.size();
-    }
-
-    public Task getTask(int i) {
-        return taskList.get(i);
+    public void deleteTask(int taskIndex) throws ButlerException {
+        try {
+            taskList.remove(taskIndex - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new ButlerException("Please give a valid index. \""
+                    + taskIndex + "\" is not a valid index.");
+        }
     }
 }

@@ -24,25 +24,26 @@ public class Butler {
         }
     }
 
+    public static void main(String[] args) {
+        new Butler("data/tasks.txt").run();
+    }
+
     private void run() {
         ui.showWelcome();
         boolean isExit = false;
+
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
+                ui.showLine();
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
-            } catch (ButlerException e) { // reaches here due to invalid command
+            } catch (ButlerException e) {
                 ui.showError(e.getMessage());
             } finally {
                 ui.showLine();
             }
         }
-    }
-
-    public static void main(String[] args) {
-        new Butler("data/tasks.txt").run();
     }
 }

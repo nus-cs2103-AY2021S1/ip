@@ -11,10 +11,6 @@ public class Task {
         this.taskType = null;
     }
 
-    public String getStatus() {
-        return (isComplete ? "[Y]" : "[N]");
-    }
-
     public String getSummary() {
         return summary;
     }
@@ -28,11 +24,11 @@ public class Task {
     }
 
     public void markComplete() {
-        this.isComplete = true;
+        isComplete = true;
     }
 
     @Override
     public String toString() {
-        return this.getStatus() + " " + this.getSummary();
+        return (isComplete ? "[Y]" : "[N]") + " " + getSummary();
     }
 }
