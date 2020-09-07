@@ -34,6 +34,8 @@ abstract class Command {
         } else if (command.contains("find ")) {
             String key = command.replace("find ", "");
             return new FindCommand(key);
+        } else if (command.equals("load")) {
+            return new LoadFileCommand();
         } else {
             //actual entry
             String postFix = command.split(" ", 2)[1];

@@ -1,8 +1,6 @@
-import java.io.IOException;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.BufferedWriter;
-import java.io.OutputStreamWriter;
+import javax.swing.*;
+import javax.swing.filechooser.FileNameExtensionFilter;
+import java.io.*;
 
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -11,9 +9,26 @@ import java.nio.file.Paths;
 public class Storage {
     //abstracts the file loading/checking process
     private File storeFile;
+    private File pointerFile;
+    static final String noPath = "nopath";
 
     Storage(String filePath) throws IOException {
-        //check if file exists, else create file and directories
+        //read data file path from filePath file
+        this.pointerFile = new File(filePath);
+        BufferedReader br = new BufferedReader(new FileReader(this.pointerFile));
+        String dataFilePath = br.readLine();
+        loadFile(dataFilePath);
+    }
+
+    /**
+     * Returns the loaded storage file
+     * @return File object
+     */
+    File load() {
+        return this.storeFile;
+    }
+
+    public void loadFile(String filePath) throws IOException {
         Path testPath = Paths.get(filePath);
         File testFile = new File(filePath);
         if (testFile.exists()) {
@@ -23,14 +38,7 @@ public class Storage {
             Files.createFile(testPath);
             this.storeFile = new File(filePath);
         }
-    }
-
-    /**
-     * Returns the loaded storage file
-     * @return File object
-     */
-    File load() {
-        return this.storeFile;
+        this.updatePointerFile(filePath);
     }
 
     public void saveFile(TaskList tasks) throws IOException {
@@ -44,6 +52,26 @@ public class Storage {
         }
         bw.close();
     }
+
+    public static String promptForFile() {
+        JFileChooser fc = new JFileChooser("./data");
+        fc.addChoosableFileFilter(new FileNameExtensionFilter("*.txt", "txt"));
+        int rtnValue = fc.showOpenDialog(null);
+        if (rtnValue == JFileChooser.APPROVE_OPTION) {
+            String filePath = fc.getSelectedFile().getAbsolutePath();
+            return filePath;
+        } else {
+            return noPath;
+        }
+    }
+
+    private void updatePointerFile(String path) throws IOException {
+        this.pointerFile = new File(this.pointerFile.getAbsolutePath());
+        BufferedWriter bw = new BufferedWriter(new FileWriter(this.pointerFile));
+        bw.write(path);
+        bw.close();
+    }
+
 }
 
 
