@@ -4,7 +4,7 @@ package duke;
  * Encapsulates an Abstract Command class
  */
 public abstract class Command {
-    private String[] parsedCommand;
+    protected String[] parsedCommand;
 
     /**
      * Instantiates a Command.
