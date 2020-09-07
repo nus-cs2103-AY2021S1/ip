@@ -51,13 +51,15 @@ public class Parser {
         switch (actionType) {
             case "done" :
                 if (userInput.equals("done")) throw new DukeException();
-                int doneIndex = Integer.parseInt(userInput.substring(5));
+                int doneIndex = Integer.parseInt(userInput.replace("done ", ""));
+                assert doneIndex >= 1 : "Index must be a positive value";
                 taskList.taskCompleted(doneIndex);
                 System.out.println("\n");
                 break;
             case "delete" :
                 if (userInput.equals("delete")) throw new deleteException();
                 int indexDeleted = Integer.parseInt(userInput.replace("delete ", ""));
+                assert indexDeleted >= 1 : "Index must be a positive value";
                 taskList.deleteTask(indexDeleted);
                 break;
             case "find" :
