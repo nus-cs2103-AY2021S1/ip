@@ -20,7 +20,6 @@ public class TaskList {
     }
 
     public TaskList(List<Task> tasks) {
-        assert(!tasks.isEmpty()) : "Task list should not be empty";
         this.tasks = new ArrayList<>(tasks);
     }
 
