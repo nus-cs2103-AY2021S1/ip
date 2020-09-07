@@ -5,11 +5,11 @@ import java.io.FileNotFoundException;
  */
 public class Duke {
     /**
-     * The <code>Storage</code> used.
+     * The <code>Storage</code> used in Duke.
      */
     private Storage storage;
     /**
-     * The list of task.
+     * The list of tasks.
      */
     private TaskList tasks;
     /**
@@ -17,7 +17,7 @@ public class Duke {
      */
     private Ui ui;
     /**
-     * The <code>Parser</code> used.
+     * The <code>Parser</code> used in Duke.
      */
     private Parser parser;
 
