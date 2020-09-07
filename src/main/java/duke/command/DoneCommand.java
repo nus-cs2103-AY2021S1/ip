@@ -16,7 +16,7 @@ public class DoneCommand extends Command {
      */
     public static final String MESSAGE_SUCCESS = "Nice! I've marked this task as done:\n%s";
 
-    private int index;
+    protected int index;
 
     /**
      * Constructs a new instance of a DoneCommand.
@@ -46,9 +46,5 @@ public class DoneCommand extends Command {
      */
     public boolean isExit() {
         return false;
-    }
-
-    public int getIndex() {
-        return this.index;
     }
 }
