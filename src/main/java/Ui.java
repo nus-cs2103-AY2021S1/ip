@@ -164,24 +164,58 @@ public class Ui {
     public Response helpText() {
         String finalOutput = "List of commands are as follows:\n"
                 +
-                "[list]: List all tasks\n"
+                "1. [list]: Lists all tasks\n"
                 +
-                "[delete <index>]: Removes task from list\n"
+                "2. [delete <index>]: Removes task from list\n"
                 +
-                "[done <index>]: Mark task as done \n"
+                "3. [done <index>]: Marks task as done \n"
                 +
-                "[todo <task>]: Create a todo Task \n"
+                "4. [todo <task>]: Creates Todo Task \n"
                 +
-                "[deadline <task> /by dd/mm/yy hhmm]: \n Create task with desired date \n"
+                "5. [deadline <task> /by DD/MM/YY HHMM]: \n   Creates Deadline task with desired date \n"
                 +
-                "[event <task> /at dd/mm/yy hhmm-hhmm]: \n Create task with desired date \n"
+                "6. [event <task> /at DD/MM/YY HHMM]: \n   Creates Event task with desired date \n"
                 +
-                "[find <query>] Return matched results in list \n"
+                "7. [find <query>] Returns matching tasks in list \n"
                 +
-                "[edit]: Edit details of items\n"
+                "8. [sort <description> or <type>]: Sorts list\n   according to input parameter\n"
                 +
-                "[bye]: Closes program";
+                "9. [help]: Displays all available features in Duke\n   application\n"
+                +
+                "10. [bye]: Closes program";
         Response responseObject = new Response(finalOutput);
+        return responseObject;
+    }
+
+    /**
+     * Output sorted list in alphabetical order according to task description.
+     * @return Response object
+     */
+    public Response listTaskByDesc(Ui ui, TaskList arrayOfTasks) {
+        String output = "Your list has been sorted in alphabetical order with respect to task description.";
+        Response finalResponse = ui.listTasks(arrayOfTasks);
+        Response responseObject = new Response(output + "\n\n" + finalResponse.getInputMessage());
+        return responseObject;
+    }
+
+    /**
+     * Output sorted list in alphabetical order according to task type.
+     * @return Response object
+     */
+    public Response listTaskByType(Ui ui, TaskList arrayOfTasks) {
+        String output = "Your list has been sorted in alphabetical order with respect to task type.";
+        Response finalResponse = ui.listTasks(arrayOfTasks);
+        Response responseObject = new Response(output + "\n\n" + finalResponse.getInputMessage());
+        return responseObject;
+    }
+
+    /**
+     * Output error message for invalid sort command input.
+     * @return Response object
+     */
+    public Response sortError() {
+        String output = "The sort command is invalid. Please enter 'sort description' or 'sort type'.";
+        Response responseObject = new Response(output);
         return responseObject;
     }
 }

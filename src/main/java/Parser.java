@@ -66,6 +66,11 @@ public class Parser {
             newTaskObject = processHelpCommand();
             break;
 
+        case "sort":
+            newTaskObject = processSortCommand(userInputArray, numOfInput);
+            break;
+
+
         default:
             throw new DukeException("Catastrophe detected! I'm sorry, but '" + commandCheck
                                     + "' is not within my realm of knowledge. " + "\u2620 ");
@@ -73,14 +78,29 @@ public class Parser {
         return newTaskObject;
     }
 
+    /**
+     * Implements bye command.
+     * @return ByeCommand object.
+     */
     private static ByeCommand processByeCommand() {
         return new ByeCommand();
     }
 
+    /**
+     * Implements list command.
+     * @return ListCommand object.
+     */
     private static ListCommand processListCommand() {
         return new ListCommand();
     }
 
+    /**
+     * Implements done command.
+     * @param userInputArray Entire string input by user as an array
+     * @param numOfInput Number of separate strings in user input
+     * @return DoneCommand object.
+     * @throws DukeException if there is an issue.
+     */
     private static DoneCommand processDoneCommand(String[] userInputArray, Integer numOfInput) throws DukeException {
         if (numOfInput < 2) {
             throw new DukeException("Please specify which task you have completed.");
@@ -96,6 +116,13 @@ public class Parser {
         return new DoneCommand(indexOfDoneTask);
     }
 
+    /**
+     * Implements Todo command.
+     * @param userInputArray Entire string input by user as an array
+     * @param numOfInput Number of separate strings in user input
+     * @return TodoCommand object.
+     * @throws DukeException if there is an issue.
+     */
     private static TodoCommand processTodoCommand(String[] userInputArray, Integer numOfInput) throws DukeException {
         if (numOfInput == 1) {
             throw new DukeException("\u2620 Oh no! The description of a todo task cannot be empty.");
@@ -111,6 +138,14 @@ public class Parser {
         return new TodoCommand(outputTodoDesc);
     }
 
+    /**
+     * Implements Event command.
+     * @param userInputArray Entire string input by user as an array
+     * @param numOfInput Number of separate strings in user input
+     * @param inputLine String that is input by user on command line.
+     * @return EventCommand object.
+     * @throws DukeException if there is an issue.
+     */
     private static EventCommand processEventCommand(String[] userInputArray, Integer numOfInput, String inputLine)
                                                     throws DukeException {
         if (numOfInput == 1) {
@@ -159,6 +194,14 @@ public class Parser {
         return new EventCommand(outputEventDesc, outputEventDate, outputEventTime);
     }
 
+    /**
+     * Implements Deadline command.
+     * @param userInputArray Entire string input by user as an array
+     * @param numOfInput Number of separate strings in user input
+     * @param inputLine String that is input by user on command line.
+     * @return DeadlineCommand object.
+     * @throws DukeException if there is an issue.
+     */
     private static DeadlineCommand processDeadlineCommand(String[] userInputArray, Integer numOfInput, String inputLine)
                                                           throws DukeException {
         if (numOfInput == 1) {
@@ -208,6 +251,14 @@ public class Parser {
         return new DeadlineCommand(outputDeadlineDesc, outputDeadlineDate, outputDeadlineTime);
     }
 
+    /**
+     * Implements Delete command.
+     * @param userInputArray Entire string input by user as an array
+     * @param numOfInput Number of separate strings in user input
+     * @param inputLine String that is input by user on command line.
+     * @return DeleteCommand object.
+     * @throws DukeException if there is an issue.
+     */
     private static DeleteCommand processDeleteCommand(String[] userInputArray, Integer numOfInput, String inputLine)
                                                       throws DukeException {
         if (numOfInput < 2) {
@@ -227,6 +278,12 @@ public class Parser {
         return new DeleteCommand(currentTaskIndex);
     }
 
+    /**
+     * Implements Find command.
+     * @param inputLine String that is input by user on command line.
+     * @return FindCommand object.
+     * @throws DukeException if there is an issue.
+     */
     private static FindCommand processFindCommand(String inputLine) throws DukeException {
         String[] arrayOfElements = inputLine.split(" ");
         int numOfTokens = arrayOfElements.length;
@@ -238,7 +295,25 @@ public class Parser {
         return new FindCommand(copiedArray);
     }
 
+    /**
+     * Implements Help command.
+     * @return HelpCommand object.
+     */
     private static HelpCommand processHelpCommand() {
         return new HelpCommand();
+    }
+
+    /**
+     * Implements Sort command.
+     * @param userInputArray Entire string input by user as an array
+     * @param numOfInput Number of separate strings in user input
+     * @return SortCommand object.
+     */
+    private static SortCommand processSortCommand(String[] userInputArray, int numOfInput) throws DukeException {
+        if (numOfInput == 1) {
+            throw new DukeException("\u2620 Oh no! The description of a sort command cannot be empty.");
+        }
+        String typeOfSort = userInputArray[1];
+        return new SortCommand(typeOfSort);
     }
 }

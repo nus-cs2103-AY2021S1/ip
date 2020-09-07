@@ -41,6 +41,14 @@ public class Task {
     }
 
     /**
+     * Gets the task's description.
+     * @return Task description in String.
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    /**
      * Overrides toString method so as to customize output string format.
      * @return String in our desired format.
      */

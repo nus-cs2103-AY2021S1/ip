@@ -57,6 +57,14 @@ public class TaskList {
     }
 
     /**
+     * Gets the list of tasks.
+     * @return List of tasks.
+     */
+    public ArrayList<Task> getTasks() {
+        return arrayOfTasks;
+    }
+
+    /**
      * Overrides toString method so as to customize output string format.
      * @return String in our desired format.
      */
