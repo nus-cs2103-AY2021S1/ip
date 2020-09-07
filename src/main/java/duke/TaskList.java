@@ -64,16 +64,19 @@ public class TaskList {
     public void addTask(String task, String date, TaskType taskType) throws DukeException {
 
         Task t;
+        assert !task.isEmpty(): "Task should have a description";
         switch (taskType) {
         case TODO:
             t = new TodoTask(task);
             tasks.add(t);
             break;
         case DEADLINE:
+            assert !date.isEmpty(): "Deadline task should have a date.";
             t = new DeadlineTask(task, date);
             tasks.add(t);
             break;
         case EVENT:
+            assert !date.isEmpty(): "Event task should have a date.";
             t = new EventTask(task, date);
             tasks.add(t);
             break;
