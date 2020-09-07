@@ -290,7 +290,7 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	Got it. I've added this task:
 
-		[E][N] meet friend (at: Monday, September 07, 2020)
+		[E][N] meet friend (at: Monday, September 14, 2020)
 
 	Now you have 16 tasks in the list.
 
@@ -300,7 +300,7 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	Got it. I've added this task:
 
-		[E][N] meet friend (at: Monday, September 07, 2020)
+		[E][N] meet friend (at: Monday, September 14, 2020)
 
 	Now you have 17 tasks in the list.
 
@@ -310,7 +310,7 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	Got it. I've added this task:
 
-		[E][N] meet friend (at: Monday, September 07, 2020)
+		[E][N] meet friend (at: Monday, September 14, 2020)
 
 	Now you have 18 tasks in the list.
 
@@ -320,7 +320,7 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 
 	Got it. I've added this task:
 
-		[E][N] meet friend (at: Monday, September 07, 2020)
+		[E][N] meet friend (at: Monday, September 14, 2020)
 
 	Now you have 19 tasks in the list.
 
@@ -343,10 +343,10 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 	13.[E][N] meet friend (at: Saturday, March 02, 2019 06:00 PM)
 	14.[E][N] meet friend (at: 1800 02/12/2019)
 	15.[E][N] project meeting (at: Mon 2-4pm)
-	16.[E][N] meet friend (at: Monday, September 07, 2020)
-	17.[E][N] meet friend (at: Monday, September 07, 2020)
-	18.[E][N] meet friend (at: Monday, September 07, 2020)
-	19.[E][N] meet friend (at: Monday, September 07, 2020)
+	16.[E][N] meet friend (at: Monday, September 14, 2020)
+	17.[E][N] meet friend (at: Monday, September 14, 2020)
+	18.[E][N] meet friend (at: Monday, September 14, 2020)
+	19.[E][N] meet friend (at: Monday, September 14, 2020)
 	____________________________________________________________
 
 	____________________________________________________________
@@ -387,10 +387,10 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 	13.[E][N] meet friend (at: Saturday, March 02, 2019 06:00 PM)
 	14.[E][N] meet friend (at: 1800 02/12/2019)
 	15.[E][N] project meeting (at: Mon 2-4pm)
-	16.[E][N] meet friend (at: Monday, September 07, 2020)
-	17.[E][N] meet friend (at: Monday, September 07, 2020)
-	18.[E][N] meet friend (at: Monday, September 07, 2020)
-	19.[E][N] meet friend (at: Monday, September 07, 2020)
+	16.[E][N] meet friend (at: Monday, September 14, 2020)
+	17.[E][N] meet friend (at: Monday, September 14, 2020)
+	18.[E][N] meet friend (at: Monday, September 14, 2020)
+	19.[E][N] meet friend (at: Monday, September 14, 2020)
 	____________________________________________________________
 
 	____________________________________________________________
@@ -437,10 +437,10 @@ DDDDDDDDDDDDDDDDDDDDDDDDDDDDDDNNNNDNMMMNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNNN
 	10.[E][N] meet friend (at: Saturday, March 02, 2019 06:00 PM)
 	11.[E][N] meet friend (at: 1800 02/12/2019)
 	12.[E][N] project meeting (at: Mon 2-4pm)
-	13.[E][N] meet friend (at: Monday, September 07, 2020)
-	14.[E][N] meet friend (at: Monday, September 07, 2020)
-	15.[E][N] meet friend (at: Monday, September 07, 2020)
-	16.[E][N] meet friend (at: Monday, September 07, 2020)
+	13.[E][N] meet friend (at: Monday, September 14, 2020)
+	14.[E][N] meet friend (at: Monday, September 14, 2020)
+	15.[E][N] meet friend (at: Monday, September 14, 2020)
+	16.[E][N] meet friend (at: Monday, September 14, 2020)
 	____________________________________________________________
 
 	____________________________________________________________

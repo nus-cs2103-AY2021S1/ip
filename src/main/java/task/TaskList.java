@@ -41,10 +41,10 @@ public class TaskList {
      *                                        E.g deadline return book /bylmklmlmlkmlkmlmlmlmlmkl Sunday.
      */
     public String addTask(String userCommand) {
-        if (userCommand.contains("todo")) { // To Do
+        if (userCommand.contains("todo")) { // Handle To Do
             // E.g todowork
             if (userCommand.split(" ").length == 1) {
-                return DukeException.invalidTodo();
+                return DukeException.printInvalidTodo();
             } else if (userCommand.split(" ").length != 1) {
                 // Add and report that the todo is added
                 TaskList tasklist = this;
@@ -52,21 +52,21 @@ public class TaskList {
             } else {
                 return SystemExit.terminateDuke("todo error");
             }
-        } else if (userCommand.contains("deadline")) { // Deadline
+        } else if (userCommand.contains("deadline")) { // Handle Deadline
             try {
                 TaskList tasklist = this;
                 return TaskHelper.handleDeadline(userCommand, tasklist);
             } catch (ArrayIndexOutOfBoundsException e) {
                 // E.g deadline return book /bylmklmlmlkmlkmlmlmlmlmkl Sunday
-                return DukeException.invalidDeadline();
+                return DukeException.printInvalidDeadline();
             }
-        } else if (userCommand.contains("event")) { // Event
+        } else if (userCommand.contains("event")) { // Handle Event
             try {
                 TaskList tasklist = this;
                 return TaskHelper.handleEvent(userCommand, tasklist);
             } catch (ArrayIndexOutOfBoundsException e) {
                 // E.g event project meeting /atlmklmlmlkmlkmlmlmlmlmkl Mon 2-4pm
-                return DukeException.invalidEvent();
+                return DukeException.printInvalidEvent();
             }
         } else {
             return SystemExit.terminateDuke("add error");
@@ -89,7 +89,7 @@ public class TaskList {
             String[] userCommandSplit = userCommand.split(" ");
             // To prevent cases such as "done 1 7", "done", "done123123123"
             if (userCommandSplit.length != 2) {
-                return DukeException.invalidCommand();
+                return DukeException.printInvalidCommand();
             } else if (userCommandSplit.length == 2) {
                 TaskList tasklist = this;
                 return TaskHelper.handleCompletedTask(userCommandSplit, tasklist);
@@ -98,10 +98,10 @@ public class TaskList {
             }
         } catch (IndexOutOfBoundsException e) {
             // E.g "done 719329813298712398123" is not valid as number of tasks is cap to 100 by requirements
-            return DukeException.noSuchTask();
+            return DukeException.printNoSuchTask();
         } catch (NumberFormatException e) {
             // E.g "done work"
-            return DukeException.invalidCommand();
+            return DukeException.printInvalidCommand();
         }
     }
 
@@ -120,7 +120,7 @@ public class TaskList {
             String[] userCommandSplit = userCommand.split(" ");
             // To prevent cases such as "delete 1 7", "delete", "delete123123123"
             if (userCommandSplit.length != 2) {
-                return DukeException.invalidCommand();
+                return DukeException.printInvalidCommand();
             } else {
                 TaskList tasklist = this;
                 return TaskHelper.handleTaskDeletion(userCommandSplit, tasklist);
@@ -128,7 +128,7 @@ public class TaskList {
         } catch (Exception e) {
             // E.g "delete 719329813298712398123" is not valid as number of tasks is cap to 100 by requirements
             // E.g "delete all" is not valid as "all" is not a numerical value
-            return DukeException.noSuchTask();
+            return DukeException.printNoSuchTask();
         }
     }
 
@@ -142,7 +142,7 @@ public class TaskList {
         String[] userCommandSplit = userCommand.split(" ", 2);
         // To prevent cases such as "findasd"
         if (userCommandSplit.length != 2) {
-            return DukeException.invalidCommand();
+            return DukeException.printInvalidCommand();
         } else if (userCommandSplit.length == 2) {
             TaskList tasklist = this;
             return TaskHelper.handleTaskFinding(userCommandSplit, tasklist);

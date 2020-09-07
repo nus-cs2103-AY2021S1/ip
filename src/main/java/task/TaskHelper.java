@@ -29,7 +29,7 @@ public class TaskHelper {
         tasks.add(newTask);
         assert tasks.size() == initialSize + 1 : "Size of tasks list is incorrect after adding todo.";
         Storage.appendToFile(newTask.toString());
-        return TaskDescription.addedTaskDescription(tasks, newTask);
+        return TaskDescription.addTaskDescription(tasks, newTask);
     }
 
     /**
@@ -50,7 +50,7 @@ public class TaskHelper {
         int initialSize = tasks.size();
         tasks.add(newTask);
         Storage.appendToFile(newTask.toString());
-        return TaskDescription.addedTaskDescription(tasks, newTask);
+        return TaskDescription.addTaskDescription(tasks, newTask);
     }
 
     /**
@@ -71,7 +71,7 @@ public class TaskHelper {
         int initialSize = tasks.size();
         tasks.add(newTask);
         Storage.appendToFile(newTask.toString());
-        return TaskDescription.addedTaskDescription(tasks, newTask);
+        return TaskDescription.addTaskDescription(tasks, newTask);
     }
 
     /**
@@ -126,7 +126,7 @@ public class TaskHelper {
         tasks.remove(index);
         assert tasks.size() == initialSize - 1 : "Size of tasks list is incorrect after deleting task.";
         Storage.deleteFromFile(deletedTask.toString());
-        return TaskDescription.deletedTaskDescription(tasks, deletedTask);
+        return TaskDescription.deleteTaskDescription(tasks, deletedTask);
     }
 
     /**
@@ -143,6 +143,6 @@ public class TaskHelper {
         List<Task> tasks = tasklist.getTasks();
         List<Task> tasksCopy = tasks;
         tasksCopy.removeIf(task -> !task.getDescription().contains(keyword));
-        return TaskDescription.searchedTaskDescription(tasksCopy);
+        return TaskDescription.searchTaskDescription(tasksCopy);
     }
 }

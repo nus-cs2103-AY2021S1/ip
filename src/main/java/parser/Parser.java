@@ -50,7 +50,7 @@ public class Parser {
                 tasklist.findTask(userCommand);
             } else {
                 // If a task is specified as a Task but not a Deadline / To Do / Event, throw an error
-                DukeException.genericTask();
+                DukeException.printGenericTask();
             }
         }
     }
@@ -88,7 +88,7 @@ public class Parser {
             return tasklist.findTask(userCommand);
         } else {
             // If a task is specified as a Task but not a Deadline / To Do / Event, throw an error
-            return DukeException.genericTask();
+            return DukeException.printGenericTask();
         }
     }
 }

@@ -23,12 +23,12 @@ public class Storage {
     /**
      * Folder path of folder which duke.txt is found in.
      */
-    protected static final String FOLDERPATH =
+    protected static final String FOLDER_PATH =
             java.nio.file.Paths.get(System.getProperty("user.dir"), "data").toString();
     /**
      * File path of duke.txt.
      */
-    protected static final String FILEPATH =
+    protected static final String FILE_PATH =
             java.nio.file.Paths.get(System.getProperty("user.dir"), "data", "duke.txt").toString();
 
     /**
@@ -36,7 +36,7 @@ public class Storage {
      */
     public static String createFolder() {
         try {
-            File writingDirectory = new File(Storage.FOLDERPATH);
+            File writingDirectory = new File(Storage.FOLDER_PATH);
 
             // If src\main\java\data folder does not exist, create one
             if (!writingDirectory.exists()) {
@@ -45,7 +45,7 @@ public class Storage {
             return "";
         } catch (Exception e) {
             System.out.println("Error Message: " + e.getMessage());
-            return DukeException.errorCreatingFolder();
+            return DukeException.printErrorCreatingFolder();
         }
     }
 
@@ -60,13 +60,13 @@ public class Storage {
             Storage.createFolder();
 
             // Append instead of overwriting
-            FileWriter fw = new FileWriter(Storage.FILEPATH, true);
+            FileWriter fw = new FileWriter(Storage.FILE_PATH, true);
             fw.write(textToAdd + "\n");
             fw.close();
             return "";
         } catch (IOException e) {
             System.out.println("Error Message: " + e.getMessage());
-            return DukeException.errorAppendingToFile();
+            return DukeException.printErrorAppendingToFile();
         }
     }
 
@@ -78,7 +78,7 @@ public class Storage {
      */
     public static String amendFile(String currentText, String amendedText) {
         try {
-            File file = new File(Storage.FILEPATH);
+            File file = new File(Storage.FILE_PATH);
 
             // Replace currentText with amendedText
             List<String> out = Files.lines(file.toPath())
@@ -90,7 +90,7 @@ public class Storage {
             return "";
         } catch (IOException e) {
             System.out.println("Error Message: " + e.getMessage());
-            return DukeException.errorAmendingFile();
+            return DukeException.printErrorAmendingFile();
         }
     }
 
@@ -101,7 +101,7 @@ public class Storage {
      */
     public static String deleteFromFile(String textToDelete) {
         try {
-            File file = new File(Storage.FILEPATH);
+            File file = new File(Storage.FILE_PATH);
 
             // Use Stream filter to remove line that contains textToDelete
             List<String> out = Files.lines(file.toPath())
@@ -113,7 +113,7 @@ public class Storage {
             return "";
         } catch (IOException e) {
             System.out.println("Error Message: " + e.getMessage());
-            return DukeException.errorDeletingTextFromFile();
+            return DukeException.printErrorDeletingTextFromFile();
         }
     }
 
@@ -125,7 +125,7 @@ public class Storage {
     public static List<Task> loadTextIntoTaskList() {
         List<String> lines;
         List<Task> tasks = new ArrayList<>();
-        File file = new File(Storage.FILEPATH);
+        File file = new File(Storage.FILE_PATH);
         try {
             // E.g [D][Y] return book (by: Sunday)
             lines = Files.readAllLines(file.toPath(), StandardCharsets.UTF_8);
@@ -185,7 +185,7 @@ public class Storage {
                 tasks.add(task);
             }
         } catch (IOException e) {
-            DukeException.errorLoadingTextIntoTaskList();
+            DukeException.printErrorLoadingTextIntoTaskList();
             System.out.println("Error Message: " + e.getMessage());
         }
         return tasks;
