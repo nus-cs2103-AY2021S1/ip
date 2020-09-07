@@ -1,53 +1,28 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.*;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.layout.Region;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 
 
 /**
  * Represents a Duke class, which is an interactive chat bot which allows you to track tasks.
  */
 public class Duke {
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private PopupControl mainLayout;
+    Parser parser;
+    Storage storage;
+    TaskList taskList;
+    Ui ui;
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-        return textToAdd;
-    }
-
-    public static void main(String[] args) {
-
-    }
-
-    public static String getResponse(String msg) {
-        Parser parser = new Parser();
+    Duke() {
+        this.parser = new Parser();
+        this.ui = new Ui();
         String currentDirectory = System.getProperty("user.dir");
-        Storage storage = new Storage(currentDirectory + "/data/duke.txt");
-        TaskList taskList = new TaskList();
+        this.storage = new Storage(currentDirectory + "/data/duke.txt");
+        this.taskList = new TaskList();
         if (storage.getExisted()) {
             taskList = new TaskList(storage.getTaskList());
         }
+    }
+
+    public String getResponse(String msg) {
         try {
             Parser.Command command = parser.parse(msg);
             assert(command != null);

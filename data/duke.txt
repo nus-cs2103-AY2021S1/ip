@@ -1,4 +1,9 @@
+<<<<<<< HEAD
 T | 0 | e
 T | 0 | b
 T | 0 | a
 T | 0 | f
+=======
+E | 0 | eat  | today
+T | 0 | food
+>>>>>>> master
