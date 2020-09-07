@@ -25,6 +25,6 @@ public class DeadlineCommand extends Command {
         Deadline newDeadline = new Deadline(this.getTaskName(), this.getTaskDateTime());
         taskList.addTask(newDeadline);
         String deadlineTask = newDeadline.toString();
-        return TextUi.printNewTasks(deadlineTask) + TextUi.printTaskSummary(taskList.getTaskLength());
+        return TextUi.printNewTasks(deadlineTask) + "\n" + TextUi.printTaskSummary(taskList.getTaskLength());
     }
 }

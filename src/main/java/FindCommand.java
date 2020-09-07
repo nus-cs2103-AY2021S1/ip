@@ -6,11 +6,11 @@ public class FindCommand extends Command {
     /**
      * Constructor for FindCommand
      *
-     * @param description
+     * @param keyWord
      * @throws IllegalArgumentException
      */
-    public FindCommand(String description) throws IllegalArgumentException {
-        super(description);
+    public FindCommand(String keyWord) throws IllegalArgumentException {
+        super(keyWord);
     }
 
     /**
@@ -23,6 +23,6 @@ public class FindCommand extends Command {
         assert keyWord != null;
         TaskList keyWordTaskList = taskList.getTasksWithKeyWords(keyWord);
         return TextUi.printMessage("Here are the matching tasks in your list:\n" + keyWordTaskList.toString())
-                + "\n" + TextUi.printTaskSummary(keyWordTaskList.getTaskLength());
+                + TextUi.printTaskSummary(keyWordTaskList.getTaskLength());
     }
 }

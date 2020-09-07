@@ -9,7 +9,7 @@ import java.io.ObjectOutputStream;
  * handles the storing and loading of information (task list)
  */
 public class Storage {
-    private final long serialVersionUID = 1234L;
+    private final long serialVersionUID = 1089785654636785606L;
 
     /**
      * loads the tasklist that user keyed in before terminating the bot

@@ -15,7 +15,6 @@ import javafx.stage.Stage;
 
 public class Duke extends Application {
     private static TaskList taskList;
-
     private Image user = new Image(this.getClass().getResourceAsStream("/images/SpongeBob.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/Patrick.png"));
     private ScrollPane scrollPane;
@@ -40,11 +39,10 @@ public class Duke extends Application {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public static void main() throws IOException, ClassNotFoundException {
-        TextUi.printHello();
+    public static void main(String[] args) throws IOException, ClassNotFoundException {
         Scanner sc = new Scanner(System.in);
         String input;
-        taskList = Storage.load();
+        //taskList = Storage.load();
 
         while (true) {
             try {
@@ -145,6 +143,7 @@ public class Duke extends Application {
     public String getResponse(String input) {
         try {
             Command command = Parser.decideCategory(input);
+            Storage.store(taskList);
             return command.execute(taskList);
         } catch (IllegalArgumentException exception) {
             return exception.getMessage();
