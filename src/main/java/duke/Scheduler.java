@@ -9,7 +9,13 @@ public class Scheduler {
 
     private TaskList tasksList;
 
+    Scheduler() {}
+
     Scheduler(TaskList tasksList) {
+        this.tasksList = tasksList;
+    }
+
+    public void instantiateTasksList(TaskList tasksList) {
         this.tasksList = tasksList;
     }
 

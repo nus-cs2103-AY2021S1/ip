@@ -2,6 +2,7 @@ package duke;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -13,6 +14,7 @@ public class Duke {
     private Storage storage;
     private Parser parser;
     private TaskList tasksList;
+    private Scheduler scheduler;
 
     public Duke() {} // empty constructor needed for javaFX
 
@@ -25,6 +27,7 @@ public class Duke {
         this.storage = new Storage(filePath);
         this.parser = new Parser();
         this.tasksList = new TaskList(new ArrayList<>());
+        this.scheduler = new Scheduler();
         // this method copy the task data to the taskList
         this.startup();
     }
@@ -71,6 +74,9 @@ public class Duke {
                     break;
                 case FIND:
                     result = search(parsedUserInput);
+                    break;
+                case SCHEDULE:
+                    result = schedule(parsedUserInput);
                     break;
                 default:
                     break;
@@ -154,7 +160,7 @@ public class Duke {
         String description = eventArray[0];
         String date = eventArray[1];
 
-        LocalDateTime localDateTime = parser.parseDateAndTime(date.trim());
+        LocalDateTime localDateTime = parser.parseDateAndTime(date);
         Event event = new Event(description, localDateTime);
         tasksList.add(event);
         return ui.showAddedTaskMessage(event, tasksList.getNumOfTask());
@@ -212,6 +218,25 @@ public class Duke {
 
         } catch (IndexOutOfBoundsException e) {
             return ui.showInvalidSearchCommand();
+        }
+
+    }
+
+    private String schedule(String[] parsedUserInput){
+        try {
+            scheduler.instantiateTasksList(this.tasksList);
+
+            String typeOfSchedule = parsedUserInput[1]; // can add other types of scheduling
+            String dateString = parsedUserInput[2];
+            String timeString = parsedUserInput[3];
+            LocalDateTime date = parser.parseDateAndTime(dateString + " " + timeString);
+
+            List<Task> tasksBeforeDate = scheduler.getTaskByDate(date);
+
+            return ui.listTask(tasksBeforeDate);
+
+        } catch (NullPointerException | DateTimeParseException e2) {
+            return ui.showInvalidDateFormatGiven();
         }
 
     }

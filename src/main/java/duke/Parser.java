@@ -42,9 +42,9 @@ public class Parser {
             if (type.equals("T")) {
                 task = new ToDo(description);
             } else if (type.equals("E")) {
-                task = new Event(description, parseDateAndTime(date));
+                task = new Event(description, parseDateTimeFromTxt(date));
             } else if (type.equals("D")) {
-                task = new Deadline(description, parseDateAndTime(date));
+                task = new Deadline(description, parseDateTimeFromTxt(date));
             } else {
                 throw new NullPointerException("Task file corrupted");
             }
@@ -83,5 +83,10 @@ public class Parser {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
         LocalDateTime d1 = LocalDateTime.parse(dateTime, formatter);
         return d1;
+    }
+
+    LocalDateTime parseDateTimeFromTxt(String dateTime) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy h:mm a");
+        return LocalDateTime.parse(dateTime,formatter);
     }
 }
