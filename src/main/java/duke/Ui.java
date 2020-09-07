@@ -44,12 +44,12 @@ public class Ui {
     public String list(TaskList tasks, boolean isRunningOnGui) {
         if (isRunningOnGui) {
             if (tasks.size() == 0) {
-                String noTasks = "There are no tasks in your list yet.";
-                return noTasks;
+                return "There are no tasks in your list yet.";
             } else {
                 String response = "Here are the tasks in your list:";
                 for (int i = 0; i < tasks.getTasks().size(); i++) {
-                    response += "\n" + Integer.toString((i + 1)) + ". " + tasks.getTasks().get(i).recordString();
+                    String taskString = "\n" + (i + 1) + ". " + tasks.getTasks().get(i).recordString();
+                    response += taskString;
                 }
                 return response;
             }
@@ -95,7 +95,7 @@ public class Ui {
         if (isRunningOnGui) {
             String response = "Noted. I've removed this task:";
             response += "\n" + t.recordString();
-            response += "\n" + "Now, you have " + Integer.toString(size) + " tasks in the list";
+            response += "\n" + "Now, you have " + size + " tasks in the list";
             return response;
         } else {
             System.out.println("Noted. I've removed this task:");
@@ -116,7 +116,7 @@ public class Ui {
         if (isRunningOnGui) {
             String response = "Got it. I've added this task:";
             response += "\n" + t.recordString();
-            response += "\n" + "Now, you have " + Integer.toString(size) + " tasks in the list";
+            response += "\n" + "Now, you have " + size + " tasks in the list";
             return response;
         } else {
             System.out.println("Got it. I've added this task:");
@@ -138,7 +138,8 @@ public class Ui {
             } else {
                 String response = "Here are the matching tasks in your list:";
                 for (int i = 0; i < tasks.size(); i++) {
-                    response += "\n" + Integer.toString(i + 1) + ". " + tasks.get(i).recordString();
+                    String matchingTask = "\n" + (i + 1) + ". " + tasks.get(i).recordString();
+                    response += matchingTask;
                 }
                 return response;
             }

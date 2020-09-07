@@ -10,12 +10,16 @@ public class Parser {
      * Processes each line of user input in accordance to the user's TaskList.
      * Triggers the appropriate response to the user via the Ui class methods.
      *
-     * @param input Line of user input.
+     * @param inputted Line of user input.
      * @param tasks The user's current task list.
      * @return Returns a ui.goodbye() if the user inputs "bye", which ends the program.
      * @throws DukeException  If user input is incorrect.
      */
-    public static String parse(String input, TaskList tasks, boolean isRunningOnGui) throws DukeException {
+    public static String parse(String inputted, TaskList tasks, boolean isRunningOnGui) throws DukeException {
+        String input = inputted.trim();
+        if (input.equals("")) {
+            throw new DukeException("Please input a proper command!");
+        }
         Ui ui = new Ui();
         String[] splitArr = input.split(" ");
         if (input.equals("bye")) {
