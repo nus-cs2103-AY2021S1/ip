@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -25,47 +26,44 @@ public class TaskList {
     }
 
     /**
-     * Prints the list of tasks in order.
      *
-     * @param ui A Ui object.
      */
-    public void printList(Ui ui) {
-        if (tasks.size() == 0) ui.say("Your task list is currently empty.");
+    public String getList(Ui ui) {
+        if (tasks.size() == 0) {
+            return ui.sayCurrentListIsEmpty();
+        }
         else {
-            ui.say("Here is your task list.");
+            String currentList = "";
             int count = 1;
             for (Task task : tasks) {
-                System.out.println(count + ". " + task);
+                currentList += count + ". " + task + "\n";
                 count++;
             }
+            return ui.sayCurrentList(currentList);
         }
     }
 
     /**
-     * Marks the (number - 1)th task in the list as done.
      *
-     * @param number Task number.
-     * @param ui A Ui object.
      */
-    public void markTaskDone(int number, Ui ui) {
-        Task task = tasks.get(number - 1);
+    public String markTaskDone(Ui ui, int taskNumber, Storage storage) throws IOException {
+        Task task = tasks.get(taskNumber - 1);
         task.markDone();
-        ui.say("I have marked it as done!");
-        System.out.println(task);
+        storage.writeFile(this);
+        return ui.sayMarkedAsDone(task);
     }
 
     /**
-     * Deletes the (number - 1)th task in the list.
      *
-     * @param number Task number.
-     * @param ui A Ui object.
      */
-    public void deleteTask(int number, Ui ui) {
-        Task task = tasks.get(number - 1);
-        tasks.remove(number - 1);
-        ui.say("I have deleted this task!");
-        System.out.println(task);
-        ui.say("You have " + getListSize() + " items in your task list now.");
+    public String deleteTask(Ui ui, int taskNumber, Storage storage) throws IOException {
+        Task task = tasks.get(taskNumber - 1);
+        tasks.remove(taskNumber - 1);
+        storage.writeFile(this);
+        return ui.sayDeletedTask(task, getListSize());
+//        ui.say("I have deleted this task!");
+//        System.out.println(task);
+//        ui.say("You have " + getListSize() + " items in your task list now.");
     }
 
     /**
@@ -74,30 +72,33 @@ public class TaskList {
      * @param task The Task to be added.
      * @param ui A Ui object.
      */
-    public void addTask(Task task, Ui ui) {
+    public String addTask(Task task, Ui ui, Storage storage) throws IOException {
         tasks.add(task);
-        ui.say("You have " + getListSize() + " items in your task list now.");
+        storage.writeFile(this);
+        return ui.sayAddedTask(task, getListSize());
     }
 
     /**
-     * Finds a task that matches the String body parameter.
      *
-     * @param body String to search for.
-     * @param ui A Ui object.
      */
-    public void findTask(String body, Ui ui) {
+    public String findTask(Ui ui, String[] parsedInput) {
         if (tasks.size() > 0) {
-            ui.say("Here are the matching tasks in your list:");
+            String body = parsedInput[1];
+            String foundTasks = "";
             boolean noneFound = true;
             for (Task task : tasks) {
                 if (task.toString().contains(body)) {
-                    System.out.println(task);
+                    foundTasks += task + "\n";
                     noneFound = false;
                 }
             }
-            if (noneFound) ui.say("No matching tasks.");
+            if (!noneFound) {
+                return ui.sayFoundTasks(foundTasks);
+            } else {
+                return ui.sayNoMatchingFileFound();
+            }
         } else {
-            ui.say("You have no tasks yet.");
+            return ui.sayCurrentListIsEmpty();
         }
     }
 
