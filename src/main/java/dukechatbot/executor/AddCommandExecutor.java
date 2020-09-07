@@ -4,6 +4,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
+import java.util.NoSuchElementException;
 
 import dukechatbot.command.AddCommand;
 import dukechatbot.command.Command;
@@ -34,7 +35,8 @@ public class AddCommandExecutor extends CommandExecutor {
         try {
             task = TaskParser.parseTask(((AddCommand) command).getArgument(), (
                     (AddCommand) command).getTaskType());
-        } catch (IndexOutOfBoundsException | DateTimeParseException exception) { 
+        } catch (IndexOutOfBoundsException | DateTimeParseException 
+                | NoSuchElementException exception) { 
             return DukeOutput.output(exception.getMessage());
             
         }

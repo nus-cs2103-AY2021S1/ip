@@ -1,6 +1,7 @@
 package dukechatbot.parser;
 
 import java.time.format.DateTimeParseException;
+import java.util.NoSuchElementException;
 
 import dukechatbot.enums.TaskEnum;
 import dukechatbot.task.DeadlineTask;
@@ -22,7 +23,8 @@ public class TaskParser {
      * @return Task object.
      * @throws IndexOutOfBoundsException
      */
-    public static Task parseTask(String title, TaskEnum taskType) throws IndexOutOfBoundsException {
+    public static Task parseTask(String title, TaskEnum taskType) throws 
+            IndexOutOfBoundsException, NoSuchElementException {
         Task task;
         switch(taskType) {
         case TODO:
@@ -31,8 +33,11 @@ public class TaskParser {
         case DEADLINE:
             task = parseDeadlineTask(title);
             break;
-        default:
+        case EVENT:
             task = parseEventTask(title);
+            break;
+        default:
+            throw new NoSuchElementException("\u2639 OOPS!!! task type is invalid.");
         }
         return task;
     }
