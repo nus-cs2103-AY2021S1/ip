@@ -6,6 +6,9 @@ import duke.dependencies.task.Task;
 
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Class that implements the list of Tasks the user has. Implemented with an ArrayList,
@@ -68,9 +71,6 @@ public class TaskList {
             if (i != todoList.size() - 1) {
                 sb.append("\n");
             }
-//            if (i == todoList.size() - 1) {
-//                sb.append("\nSo stop procrastinating!");
-//            }
         }
         if (todoList.size() == 0) {
             sb.append("Oops!!! Theres's nothing here!\n")
@@ -109,7 +109,7 @@ public class TaskList {
      * @param nums An array of numbers in string form.
      * @return String representing the newly completed task.
      */
-    public String done(Integer... nums) { // VARARGS
+    public String done(Integer... nums) { // VARARGS // C-MassOps
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < nums.length; i++) {
             Schedulable t = todoList.get(nums[i] - 1);
@@ -130,11 +130,23 @@ public class TaskList {
      * @param nums An array of numbers in string form.
      * @return String representing the deleted task.
      */
-    public String deleteTask(Integer nums) {
-        Schedulable t = todoList.get(nums - 1);
-        todoList.remove(nums - 1);
+    public String deleteTask(Integer... nums) {
+        StringBuilder sb = new StringBuilder();
+        List<Integer> arr = Arrays.asList(nums);
+        List<Integer> sortedArr = arr.stream().sorted().collect(Collectors.toList()); // A-Streams
+        int offset = 0;
+        for (int i = 0; i < sortedArr.size(); i++) {
+            int taskIndex = sortedArr.get(i) - offset - 1;
+            Schedulable t = todoList.get(taskIndex);
+            sb.append(t.toString());
+            if (i != sortedArr.size() - 1) {
+                sb.append("\n");
+            }
+            todoList.remove(taskIndex);
+            offset++;
+        }
         l.overwriteAndSave(todoList);
-        return t.toString();
+        return sb.toString();
     }
 
     /**

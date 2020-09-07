@@ -3,10 +3,8 @@ package duke.dependencies.executor;
 
 import duke.dependencies.executable.CommandType;
 import duke.dependencies.executable.Executable;
-import duke.dependencies.storage.Storage;
 import duke.dependencies.storage.TaskList;
 import duke.dependencies.task.Task;
-
 
 import static duke.dependencies.executable.CommandType.*;
 
@@ -18,8 +16,6 @@ import static duke.dependencies.executable.CommandType.*;
 public class Executor {
 
     private static final TaskList TASK_LIST = TaskList.initStorage();
-
-    private static final Storage STORAGE = new Storage();
 
     /* Half-assed attempt at concurrency lock.
     There should be no need for concurrency
@@ -116,6 +112,7 @@ public class Executor {
                 return TASK_LIST.getTodosInList();
             }
             case DONE: {
+                /* C-MassOperations */
                 // Done command would have a task of "1 2 3 4"
                 String[] nums = e.getTask().showTaskDescription().split("[\\D]+");
                 Integer[] arr = new Integer[nums.length];
@@ -125,8 +122,12 @@ public class Executor {
                 return TASK_LIST.done(arr);
             }
             case DELETE: {
-                String nums = e.getTask().showTaskDescription();
-                return TASK_LIST.deleteTask(Integer.valueOf(nums));
+                String[] nums = e.getTask().showTaskDescription().split("[\\D]+");
+                Integer[] arr = new Integer[nums.length];
+                for (int i = 0; i < nums.length; i++) {
+                    arr[i] = Integer.valueOf(nums[i]);
+                }
+                return TASK_LIST.deleteTask(arr);
             }
             case FIND: {
                 String keyword = e.getTask().showTaskDescription();
