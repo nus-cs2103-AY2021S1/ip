@@ -14,7 +14,6 @@ class ExitCommand extends Command {
      */
     @Override
     String execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.showExit();
         return ui.showExit();
     }
 

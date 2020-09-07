@@ -16,7 +16,7 @@ class Ui {
      *
      * @param e Duke Exception.
      */
-    public String showError(DukeException e) {
+    String showError(DukeException e) {
         return printOutput(e.getMessage());
     }
 
@@ -25,16 +25,16 @@ class Ui {
      *
      * @param input String input.
      */
-    public String printOutput(String input) {
+    String printOutput(String input) {
         return input;
     }
 
-    public String showWelcome() {
+    String showWelcome() {
         return printOutput("Hello! I'm Duke\n"
                 + "What can I do for you?");
     }
 
-    public String showExit() {
+    String showExit() {
         return printOutput("Bye. Hope to see you again soon!");
     }
 }
