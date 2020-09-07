@@ -120,8 +120,8 @@ public class TaskList {
     public void event(String toPrint) {
         try {
             toPrint = toPrint.substring(5);
-            String[] arrtoPrint = toPrint.split("/at ");
-            Event taskEvent = new Event(arrtoPrint[0], arrtoPrint[1]);
+            String[] arrToPrint = toPrint.split("/at ");
+            Event taskEvent = new Event(arrToPrint[0], arrToPrint[1]);
             this.taskLs.add(taskEvent);
 
         } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {

@@ -36,7 +36,7 @@ public class Duke {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    protected String getResponse(String input) throws IOException {
+    protected String getResponse(String input) throws IOException, DukeException {
         Command c = parser.parse(input);
         return c.execute(tasks, ui, storage);
     }
@@ -45,7 +45,7 @@ public class Duke {
      * The Duke program is run and commands are executed.
      * @throws IOException File containing list of task may not be found.
      */
-    public void run() throws IOException {
+    public void run() throws IOException, DukeException {
         UI.intro();
         boolean isExit = false;
         while (!isExit) {
