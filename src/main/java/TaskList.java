@@ -212,7 +212,7 @@ public class TaskList {
                 }
                 break;
             default:
-                throw new DukeException("Please choose either \"name\" or \"time\" to update.");
+                throw new DukeException("Please choose either [name] or [time] to update.");
             }
             return ui.updateTaskLine(oldTask, updatedTask);
         } catch (NumberFormatException nfe) {
