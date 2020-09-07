@@ -63,22 +63,6 @@ public class DukeTest {
     }
 
     @Test
-    public void testCase2(){
-        ByteArrayInputStream in = new ByteArrayInputStream("todo nothing\nbye\n".getBytes());
-        System.setIn(in);
-
-        // Run main
-        Duke.main(new String[0]);
-        String expectedResponse = "Hello! I'm Duke\nWhat can I do for you?" + sysLineSep +
-                "Go it. I've added this task:\n[T]" + "[" + Task.CROSS + "]" + " nothing" + sysLineSep +
-                "Now you have 1 task in the list." + sysLineSep +
-                "Bye. Hope to see you again soon!" + sysLineSep;
-
-        assertEquals(expectedResponse, outContent.toString());
-
-    }
-
-    @Test
     public void testTaskList2(){
         //Adding and removing tasks
         TaskList taskList = new TaskList(new ArrayList<>());
