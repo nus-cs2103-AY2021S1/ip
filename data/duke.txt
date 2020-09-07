@@ -1,1 +1,4 @@
 T | 0 | gg
+T | 0 | get milk
+T | 0 | get abs
+T | 0 | get muscles

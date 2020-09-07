@@ -45,11 +45,10 @@ public class Gui {
 
         int LENGTH_OF_LIST = list.size();
         if (LENGTH_OF_LIST > 0) {
-            int counter = 1;
-            for (Task task : list) {
+            list.forEach(task -> {
+                int counter = list.indexOf(task) + 1;
                 responseList.add("  " + counter + "." + task);
-                counter++;
-            }
+            });
         } else {
             responseList.remove(0);
             responseList.add("No tasks found, add a task now!");
@@ -63,12 +62,12 @@ public class Gui {
      * @param tasksLeft integer value of tasks remaining in the list of tasks.
      */
     public ArrayList<String> addMessage(Task task, int tasksLeft) {
-        ArrayList<String> reponseList = new ArrayList<>();
+        ArrayList<String> responseList = new ArrayList<>();
 
-        reponseList.add("Got it, the following task has been added:\n" + INDENT + INDENT + task +
+        responseList.add("Got it, the following task has been added:\n" + INDENT + INDENT + task +
                 "\n" + INDENT + this.taskLeftMessage(tasksLeft));
 
-        return reponseList;
+        return responseList;
     }
 
     /**
