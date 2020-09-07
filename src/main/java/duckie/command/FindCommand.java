@@ -35,6 +35,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DuckieException {
+        assert keyword instanceof String : "Keyword is not in the right data type";
         ArrayList<Task> filteredList = tasks.filterList(keyword);
         if (filteredList.size() == 0) {
             throw new DuckieNoMatchingTasksException();

@@ -37,6 +37,7 @@ public class Parser {
      * @throws DuckieException All the possible DuckieExceptions.
      */
     public static Command parse(String fullCommand) throws DuckieException {
+        assert fullCommand instanceof String : "Command must be a String type.";
         String input = fullCommand.strip().toLowerCase();
         if (input.equals("bye")) {
             return new ByeCommand();
