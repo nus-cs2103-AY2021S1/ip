@@ -32,14 +32,15 @@ public class Storage {
     Storage(String filePath) {
         this.filePath = filePath;
         try {
+            Path directoryPath = Paths.get("data/");
+
+            if (!Files.exists(directoryPath)) {
+                Files.createDirectory(directoryPath);
+            }
+
             Path file = Paths.get(this.filePath);
 
             if (!Files.exists(file)) {
-                // Check if directory exists
-                Path directoryPath = Paths.get("data/");
-                if (!Files.exists(directoryPath)) {
-                    Files.createDirectory(directoryPath);
-                }
                 Files.createFile(file);
             }
 
