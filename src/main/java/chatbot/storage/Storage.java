@@ -34,6 +34,8 @@ public class Storage {
     public ArrayList<Task> loadTasks() throws ChatbotException {
         try {
 
+            assert location != null : "File path is not supposed to be null.";
+
             // File does not exist
             if (!Files.exists(location)) {
                 Files.createFile(location);
@@ -43,7 +45,10 @@ public class Storage {
             // File exists, load data
             Stream<Task> taskStream = Files.lines(location).map(line -> {
 
+                // split by separator
                 String[] lineData = line.split("\\|");
+
+                // trim and extract data
                 String type = lineData[0].trim();
                 boolean isDone = lineData[1].trim().equals("1");
                 String description = lineData[2].trim();
@@ -78,7 +83,7 @@ public class Storage {
         }
     }
 
-    public void saveTasks(ArrayList<Task> taskList) throws ChatbotException {
+    public boolean saveTasks(ArrayList<Task> taskList) throws ChatbotException {
 
         Iterator<Task> iter = taskList.iterator();
         String dataStr = "";
@@ -99,5 +104,7 @@ public class Storage {
         } catch (IOException e) {
             throw new ChatbotException("Oooops, I couldn't save the tasks.");
         }
+
+        return true;
     }
 }

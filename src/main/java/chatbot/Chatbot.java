@@ -1,6 +1,7 @@
 package chatbot;
 
 import chatbot.commands.Command;
+import chatbot.commands.ExitCommand;
 import chatbot.data.TaskList;
 import chatbot.exception.ChatbotException;
 import chatbot.parser.Parser;
@@ -23,6 +24,7 @@ public class Chatbot {
 
         try {
             taskList = new TaskList(taskStorage.loadTasks());
+            assert taskList != null : "Task list is not supposed to be null.";
         } catch (ChatbotException e) {
             e.printStackTrace();
         }
@@ -33,7 +35,15 @@ public class Chatbot {
         String response = "";
 
         try {
+            // parse user input to generate a command
             Command command = Parser.parse(input);
+
+            // exit command -> terminate program
+            if (command instanceof ExitCommand) {
+                ui.exit();
+            }
+
+            // execute command to get response message
             response = command.execute(taskList, ui, taskStorage);
         } catch (ChatbotException e) {
             response = e.getMessage();

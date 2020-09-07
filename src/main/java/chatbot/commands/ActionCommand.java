@@ -51,7 +51,7 @@ public class ActionCommand extends Command {
             break;
         }
 
-        storage.saveTasks(taskList.getTasks());
+        assert storage.saveTasks(taskList.getTasks()) : "Save tasks supposed to return true.";
 
         return response;
     }
