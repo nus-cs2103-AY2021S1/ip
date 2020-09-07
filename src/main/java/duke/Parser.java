@@ -30,7 +30,8 @@ public class Parser {
             return new ListCommand(parsedCommand);
         } else if (command.equals(UserCommand.DONE.getCommand())) {
             return new DoneCommand(parsedCommand);
-        } else if (command.equals(UserCommand.TODO.getCommand())) {
+        } else if (command.equals(UserCommand.TODO.getCommand())
+                || command.equals(UserCommand.T.getCommand())) {
             return new AddToDoCommand(parsedCommand);
         } else if (command.equals(UserCommand.DEADLINE.getCommand())) {
             return new AddDeadlineCommand(parsedCommand);

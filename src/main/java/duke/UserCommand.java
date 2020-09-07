@@ -5,11 +5,11 @@ package duke;
  */
 public enum UserCommand {
     BYE("bye"),
-    LIST("list"),
+    LIST("list"), LS("ls"),
     DONE("done"),
-    TODO("todo"),
-    DEADLINE("deadline"),
-    EVENT("event"),
+    TODO("todo"), T("t"),
+    DEADLINE("deadline"), D("d"),
+    EVENT("event"), E("e"),
     DELETE("delete"),
     CLEAR("clear"),
     FIND("find");
@@ -25,7 +25,7 @@ public enum UserCommand {
     }
 
     /**
-     * Gett method for user command
+     * Get method for user command
      * @return the user command
      */
     String getCommand() {
