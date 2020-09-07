@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 /**
  * Represents the task list.
@@ -86,12 +87,9 @@ public class TaskList {
      * @return list of tasks containing the search term.
      */
     public ArrayList<Task> find(String searchTerm) {
-        ArrayList<Task> results = new ArrayList<>();
-        for (Task task : tasks) {
-            if (task.getDescription().contains(searchTerm)) {
-                results.add(task);
-            }
-        }
+        Predicate<Task> notMatch = task -> !task.getDescription().contains(searchTerm);
+        ArrayList<Task> results = new ArrayList<>(tasks);
+        results.removeIf(notMatch);
         return results;
     }
 }
