@@ -22,6 +22,10 @@ public class Ui {
         return "Hey there, I'm Fukuyama Masaharu the 24/7 Chatbot. What can I do for you (deep voice).";
     }
 
+    public void exit() {
+        System.exit(0);
+    }
+
     /**
      * Prints out a success message for adding a task.
      * @param task task added

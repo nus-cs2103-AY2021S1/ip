@@ -20,7 +20,9 @@ public class Parser {
 
         String text = fullCmd.trim();
         String typeStr = text.split(" ")[0].trim();
-        String body = text.substring(typeStr.length()).trim();
+
+        int index = typeStr.length();
+        String body = text.substring(index).trim();
 
         Command command = null;
 
