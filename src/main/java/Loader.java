@@ -1,5 +1,6 @@
 package main.java;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.io.File;
 import java.util.Scanner;
@@ -13,9 +14,15 @@ public class Loader {
         this.taskArrayList = new ArrayList<>();
     }
 
-    public void fill() throws FileNotFoundException {
+    public void fill() throws IOException {
         File f = new File("./command.txt");
-        Scanner sc = new Scanner(f);
+        Scanner sc;
+        try {
+            sc = new Scanner(f);
+        } catch (FileNotFoundException e) {
+            f.createNewFile();
+            sc = new Scanner(f);
+        }
 
         while (sc.hasNext()) {
             String next = sc.nextLine();
@@ -48,7 +55,7 @@ public class Loader {
     public ArrayList<Task> load() throws DukeException {
         try{
             fill();
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             throw new DukeException("Cannot find the file!!");
         }
         return taskArrayList;
