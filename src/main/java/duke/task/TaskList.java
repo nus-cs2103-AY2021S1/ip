@@ -108,6 +108,7 @@ public class TaskList {
      * @param ui Ui object to print messages.
      */
     public String taskDone(int index, Ui ui) {
+        assert index > 0 : "Negative index detected";
         Task temp = this.listOfTasks.get(index);
         temp.completed();
         return ui.markDone(temp);
@@ -119,6 +120,7 @@ public class TaskList {
      * @param ui Ui object to print messages.
      */
     public String taskDelete(int index, Ui ui) {
+        assert index > 0 : "Negative index detected";
         Task temp = this.listOfTasks.get(index);
         this.listOfTasks.remove(index);
         return ui.markDelete(listOfTasks.size(), temp);
