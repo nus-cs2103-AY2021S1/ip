@@ -14,13 +14,13 @@ public class TodoTest {
     @Test
     public void testCompleteTask() {
         Todo todo = new Todo("read book");
-        todo = todo.completeTask();
+        todo.completeTask();
         assertEquals("[T][V] read book", todo.toString());
     }
 
     @Test
     public void testGetData() {
         Todo todo = new Todo("home workout");
-        assertEquals("TODO#home workout#false", todo.getData());
+        assertEquals("TODO#home workout#false#", todo.getData());
     }
 }

@@ -13,7 +13,9 @@ public class InvalidCommandException extends DukeException {
             + "\n3. event <event_desc> /at <time>"
             + "\n4. done <task_no>"
             + "\n5. delete <task_no>"
-            + "\n6. list"
-            + "\n7. bye";
+            + "\n6. find <search_term_from_task_desc_or_tag>"
+            + "\n7. tag <task_no> <tags_separated_by_comma>"
+            + "\n8. list"
+            + "\n9. bye";
     }
 }

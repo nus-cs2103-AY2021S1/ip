@@ -57,7 +57,16 @@ public class TaskList {
      * @param index the index of the task in the list.
      */
     public void markDone(int index) {
-        tasks.set(index, tasks.get(index).completeTask());
+        tasks.get(index).completeTask();
+    }
+
+    /**
+     * Attaches tag to a task.
+     * @param index the index of the task in the list.
+     * @param tag tag to be attached to the task.
+     */
+    public void tagTask(int index, String tag) {
+        tasks.get(index).setTag(tag);
     }
 
     /**
@@ -89,7 +98,9 @@ public class TaskList {
      * @return list of tasks containing the search term.
      */
     public ArrayList<Task> find(String searchTerm) {
-        Predicate<Task> match = task -> task.getDescription().contains(searchTerm);
+        Predicate<Task> match = task -> {
+            return task.getDescription().contains(searchTerm) || task.getTag().contains(searchTerm);
+        };
         List<Task> results = new ArrayList<>(tasks)
             .stream()
             .filter(match)

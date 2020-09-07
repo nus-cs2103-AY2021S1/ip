@@ -35,13 +35,24 @@ public class Storage {
             String input = sc.nextLine();
             String[] inputs = input.split("#");
             Commands command = Commands.valueOf(inputs[0]);
+            Task task;
             if (command.equals(Commands.TODO)) {
-                taskList.add(new Todo(inputs[1], Boolean.parseBoolean(inputs[2])));
+                task = new Todo(inputs[1], Boolean.parseBoolean(inputs[2]));
+                if (inputs.length > 3) {
+                    task.setTag(inputs[3]);
+                }
             } else if (command.equals(Commands.EVENT)) {
-                taskList.add(new Event(inputs[1], Boolean.parseBoolean(inputs[2]), inputs[3]));
+                task = new Event(inputs[1], Boolean.parseBoolean(inputs[2]), inputs[3]);
+                if (inputs.length > 4) {
+                    task.setTag(inputs[4]);
+                }
             } else {
-                taskList.add(new Event(inputs[1], Boolean.parseBoolean(inputs[2]), inputs[3]));
+                task = new Event(inputs[1], Boolean.parseBoolean(inputs[2]), inputs[3]);
+                if (inputs.length > 4) {
+                    task.setTag(inputs[4]);
+                }
             }
+            taskList.add(task);
         }
         return taskList;
     }

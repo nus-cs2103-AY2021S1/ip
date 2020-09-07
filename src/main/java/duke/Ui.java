@@ -37,7 +37,7 @@ public class Ui {
     }
 
     /**
-     * Prints confirmation when a new task is added.
+     * Gets message when a new task is added.
      * @param task the task added.
      * @param numberOfTask the current number of tasks.
      * @return message for added task.
@@ -49,7 +49,7 @@ public class Ui {
     }
 
     /**
-     * Prints the current list of tasks.
+     * Gets the current list of tasks.
      * @param taskList the lists of task.
      * @return the String representation of taskList.
      */
@@ -63,7 +63,7 @@ public class Ui {
     }
 
     /**
-     * Prints confirmation when a task is marked as done.
+     * Gets message when a task is marked as done.
      * @param task the task being completed.
      * @return message for completed task.
      */
@@ -73,7 +73,7 @@ public class Ui {
     }
 
     /**
-     * Prints confirmation when a task is deleted from the list.
+     * Gets message when a task is deleted from the list.
      * @param task the task deleted.
      * @param numberOfTask the current number of tasks.
      * @return message for deleted task.
@@ -86,12 +86,22 @@ public class Ui {
     }
 
     /**
-     * Prints confirmation when all tasks is deleted from the list.
+     * Gets message when all tasks is deleted from the list.
      * @return message for delete all tasks.
      */
     public String getDeleteAllTasksMessage() {
         return "Noted. I've removed all tasks in the list.\n"
             + "Now you have no task in the list.";
+    }
+
+    /**
+     * Gets message when tag is attached to a task.
+     * @param task the task being tagged.
+     * @return message for tagged task.
+     */
+    public String getTagTaskMessage(Task task) {
+        return "Noted. I've added the tag to your task.\n"
+            + task.toString();
     }
 
     /**
