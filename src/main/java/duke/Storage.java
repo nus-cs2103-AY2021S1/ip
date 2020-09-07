@@ -29,7 +29,6 @@ public class Storage {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    @SuppressWarnings("all")
     public ArrayList<Task> load() throws IOException, ClassNotFoundException {
         ArrayList<Task> store = new ArrayList<Task>();
         try {
@@ -42,7 +41,7 @@ public class Storage {
                 store.add(task);
             }
         } catch (EOFException e) {
-            System.out.println("");
+            System.out.println(e);
         } catch (IOException e) {
             File yourFile = new File("store.ser");
             yourFile.createNewFile();
