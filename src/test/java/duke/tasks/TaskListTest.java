@@ -85,12 +85,15 @@ class TaskListTest {
         list.addTask("test content2", "deadline", "2020-08-23");
         list.addTask("test content2", "deadline", "2020-08-25");
         list.addTask("test content3", "deadline", "2020-08-28");
+        list.addTask("test", "deadline", "2020-08-30");
 
         String actual = list.findTask("content2");
 
-        String expected = "Here are the matching tasks in your list:\n" +
-                "1.[D][✗] test content2 (by: Aug 23 2020)\n" +
-                "2.[D][✗] test content2 (by: Aug 25 2020)\n";
+        String expected = "Here are the matching tasks in your list:\n"
+                + "1.[T][✗] test content1\n"
+                + "2.[D][✗] test content2 (by: Aug 23 2020)\n"
+                + "3.[D][✗] test content2 (by: Aug 25 2020)\n"
+                + "4.[D][✗] test content3 (by: Aug 28 2020)";
         assertEquals(expected, actual);
     }
 }
