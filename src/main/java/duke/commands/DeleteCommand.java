@@ -20,8 +20,8 @@ public class DeleteCommand extends Command {
 
     public CommandOutput executeCommand(TaskManager taskManager) throws DukeException {
         try {
-            taskManager.deleteTask(taskIndex);
             Task deletedTask = taskManager.getTask(taskIndex - 1);
+            taskManager.deleteTask(taskIndex);
             String deletedTaskOutput = outputResult(deletedTask);
             return new CommandOutput(deletedTaskOutput, false);
         } catch (IndexOutOfBoundsException e) {

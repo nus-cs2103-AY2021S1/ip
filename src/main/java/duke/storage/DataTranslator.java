@@ -15,6 +15,7 @@ import duke.utils.Ui;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Represents a translator which will encode the tasks in {@link TaskManager} object into the valid format to write
@@ -70,9 +71,9 @@ public class DataTranslator {
      * @return The list of strings
      */
     public static List<String> encode(TaskManager taskManager) {
-        List<String> data = new ArrayList<>();
         List<Task> tasks = taskManager.getAllTasks();
-        tasks.forEach(task -> data.add(task.toDataFileFormat()));
-        return data;
+        return tasks.stream()
+                .map(Task::toDataFileFormat)
+                .collect(Collectors.toList());
     }
 }
