@@ -3,13 +3,15 @@ package duke.exception;
 /**
  * Separate parse exception just for parse errors.
  */
-public class DukeParseException extends DukeException {
+public class DukeCustomException extends DukeException {
     private String extraMessage;
-    public DukeParseException(String message) {
+    public DukeCustomException(String message) {
         super(message);
     }
     public void setExtraMessage(String extraMessage) {
-        this.extraMessage = extraMessage;
+        if (this.extraMessage == null) {
+            this.extraMessage = extraMessage;
+        }
     }
     @Override
     public String getMessage() {

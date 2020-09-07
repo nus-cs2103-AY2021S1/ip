@@ -8,7 +8,7 @@ import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 import duke.Context;
 import duke.exception.DukeException;
-import duke.exception.DukeParseException;
+import duke.exception.DukeCustomException;
 import duke.parser.Parser;
 
 public class Macro {
@@ -59,17 +59,17 @@ public class Macro {
                 parser.parseAndRun(commands[lastCommandIndex]);
             }
         } catch (DukeException e) {
-            DukeParseException toThrow = new DukeParseException(e.getMessage());
+            DukeCustomException toThrow = new DukeCustomException(e.getMessage());
 
             String extraMessage = "An error occurred when executing this command:\n"
                 + commands[lastCommandIndex]
-                + "The following commands executed successfully:\n"
+                + "\n\nThe following commands executed successfully:\n"
                 + String.join("\n", Arrays.copyOfRange(commands, 0, lastCommandIndex))
-                + "\n The following commands were not executed:\n"
+                + "\n\n The following commands were not executed:\n"
                 + String.join("\n", Arrays.copyOfRange(commands, lastCommandIndex + 1, commands.length));
 
             toThrow.setExtraMessage(extraMessage);
-            throw toThrow; // TODO test
+            throw toThrow;
         }
     }
 

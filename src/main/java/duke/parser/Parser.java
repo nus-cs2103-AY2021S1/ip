@@ -14,7 +14,7 @@ import duke.command.Command;
 import duke.command.CommandExecutable;
 import duke.command.Macro;
 import duke.exception.DukeException;
-import duke.exception.DukeParseException;
+import duke.exception.DukeCustomException;
 
 /**
  * Class to parse raw input from user and run commands from the input.
@@ -85,11 +85,11 @@ public class Parser {
         try {
             CommandLine cmd = this.parser.parse(options, args);
             exec.run(this.context, cmd);
-        } catch (ParseException e) {
-            DukeParseException toThrow = new DukeParseException(e.getMessage());
+        } catch (DukeCustomException toThrow) {
             toThrow.setExtraMessage(getHelp(name, options));
             throw toThrow;
-        } catch (DukeParseException toThrow) {
+        } catch (ParseException e) {
+            DukeCustomException toThrow = new DukeCustomException(e.getMessage());
             toThrow.setExtraMessage(getHelp(name, options));
             throw toThrow;
         }

@@ -5,7 +5,7 @@ import java.util.List;
 import org.apache.commons.cli.CommandLine;
 
 import duke.exception.DukeException;
-import duke.exception.DukeParseException;
+import duke.exception.DukeCustomException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -65,18 +65,18 @@ class CommandLibrary {
         context.getUi().systemMessage("sir i found your items sir look:");
         context.getUi().systemMessage(TaskList.enumerateItems(items));
     };
-    private static String getUnusedArgs(CommandLine args) throws DukeParseException {
+    private static String getUnusedArgs(CommandLine args) throws DukeCustomException {
         List<String> unconsumedArgs = args.getArgList();
         if (unconsumedArgs.size() == 0) {
-            throw new DukeParseException("this command requires non-empty arguments.");
+            throw new DukeCustomException("this command requires non-empty arguments.");
         }
         return String.join(" ", unconsumedArgs);
     }
-    private static int parseInt(String input) throws DukeParseException {
+    private static int parseInt(String input) throws DukeCustomException {
         try {
             return Integer.parseInt(input);
         } catch (NumberFormatException e) {
-            throw new DukeParseException("unexpected input, expected integer input.");
+            throw new DukeCustomException("unexpected input, expected integer input.");
         }
     }
 }
