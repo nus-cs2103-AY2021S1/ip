@@ -42,6 +42,9 @@ test {
         showStandardStreams = false
     }
 }
+run {
+    enableAssertions = true
+}
 
 application {
     mainClassName = "duke.Duke"

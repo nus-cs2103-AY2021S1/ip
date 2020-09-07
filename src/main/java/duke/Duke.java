@@ -48,7 +48,6 @@ public class Duke {
      */
     public String getGreeting() {
         String response = "Hello and welcome to the GeNiaaz personal assistant";
-        assert false : "thisshld flag";
         if (!this.isExtracted) {
             return response + "\n\nData was not extracted successfully, new list created";
         }
