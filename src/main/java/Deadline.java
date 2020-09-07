@@ -42,4 +42,22 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
+    /**
+     * Checks if two Deadlines are equal
+     *
+     * @return a boolean
+     */
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        } else if (object instanceof Deadline) {
+            Deadline otherDeadline = (Deadline) object;
+            return this.description.equals(otherDeadline.description)
+                    && this.isDone == otherDeadline.isDone
+                    && this.by.equals(otherDeadline.by);
+        } else {
+            return false;
+        }
+    }
 }

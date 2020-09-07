@@ -37,4 +37,23 @@ public class Event extends Task {
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
+
+    /**
+     * Checks if two Events are equal
+     *
+     * @return a boolean
+     */
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        } else if (object instanceof Event) {
+            Event otherEvent = (Event) object;
+            return this.description.equals(otherEvent.description)
+                    && this.isDone == otherEvent.isDone
+                    && this.at.equals(otherEvent.at);
+        } else {
+            return false;
+        }
+    }
 }

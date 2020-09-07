@@ -46,16 +46,71 @@ public class Parser {
             return this.delete(input);
         } else if (input.startsWith("find")) {
             return this.find(input);
+        } else if (input.equals("remove duplicates")) {
+            return this.removeDupes();
         } else {
             return new InputNotRecognisedException().toString();
         }
     }
 
     /**
+     * Compares two tasks
+     *
+     * @return a boolean denoting if they are equal
+     */
+    public boolean areEqualTasks(Task t1, Task t2) {
+        if (t1 instanceof Todo && t2 instanceof Todo) {
+            Todo thisTask = (Todo) t1;
+            Todo otherTask = (Todo) t2;
+            return t1.equals(t2);
+        } else if (t1 instanceof Deadline && t2 instanceof Deadline) {
+            Deadline thisTask = (Deadline) t1;
+            Deadline otherTask = (Deadline) t2;
+            return t1.equals(t2);
+        } else if (t1 instanceof Event && t2 instanceof Event) {
+            Event thisTask = (Event) t1;
+            Event otherTask = (Event) t2;
+            return t1.equals(t2);
+        } else {
+            return false;
+        }
+    }
+
+
+
+    /**
+     * Finds and remove duplicated Tasks
+     *
+     * @return a String message
+     */
+    private String removeDupes() {
+        boolean needsUpdate = false;
+        for (int i = 0; i < tasks.length() - 1; i++) {
+            Task focalTask = tasks.get(i);
+            for (int j = 0; j < tasks.length(); j++) {
+                if (j != i) {
+                    Task otherTask = tasks.get(j);
+                    if (areEqualTasks(focalTask, otherTask)) {
+                        needsUpdate = true;
+                        tasks.remove(otherTask);
+                    }
+                }
+            }
+        }
+        if (needsUpdate) {
+            this.storage.saveListToData(tasks.get());
+            return this.ui.removedDupes();
+        } else {
+            return this.ui.noDupes();
+        }
+    }
+
+
+    /**
      * Finds and prints out Tasks with the keywords provided by the user
      *
      * @param input the user's input in String form
-     * @return
+     * @return a String Message
      */
     private String find(String input) {
         int stringLength = input.length();
@@ -84,6 +139,8 @@ public class Parser {
 
     /**
      * Prints out the TaskList
+     *
+     * @return a String Message
      */
     private String provideList() {
         String items = "";
@@ -101,7 +158,7 @@ public class Parser {
      * Marks a Task on the TaskList as done
      *
      * @param input is the user's input in String form
-     * @return
+     * @return a String Message
      */
     private String markAsDone(String input) {
         int stringLength = input.length();
@@ -120,7 +177,7 @@ public class Parser {
      * @param input is the User's input in String form
      * @throws EmptyDescriptionException
      * @throws WrongFormatException
-     * @return
+     * @return a String Message
      */
     private String newTaskEntry(String input) throws EmptyDescriptionException, WrongFormatException {
         int stringLength = input.length();
@@ -140,7 +197,7 @@ public class Parser {
      * @param input is the description of the task as given by user
      * @throws EmptyDescriptionException
      * @throws WrongFormatException
-     * @return
+     * @return a String Message
      */
     private String createAndAddTodo(String input) throws EmptyDescriptionException, WrongFormatException {
         int stringLength = input.length();
@@ -161,7 +218,7 @@ public class Parser {
      * @param input is the description of the task as given by user
      * @throws EmptyDescriptionException
      * @throws WrongFormatException
-     * @return
+     * @return a String Message
      */
     private String createAndAddDeadline(String input) throws EmptyDescriptionException, WrongFormatException {
         int stringLength = input.length();
@@ -191,7 +248,7 @@ public class Parser {
      * @param task is the Task to be added to the TaskList
      * @throws EmptyDescriptionException
      * @throws WrongFormatException
-     * @return
+     * @return a String Message
      */
     private String addTaskToTasklist(Task task) {
         this.tasks.add(task);
@@ -206,7 +263,7 @@ public class Parser {
      * @param input is the description of the task as given by user
      * @throws EmptyDescriptionException
      * @throws WrongFormatException
-     * @return
+     * @return a String Message
      */
     private String createAndAddEvent(String input) throws EmptyDescriptionException, WrongFormatException {
         int stringLength = input.length();
@@ -228,7 +285,7 @@ public class Parser {
 
     /**
      * Exit sequence of the Application
-     * @return
+     * @return a String Message
      */
     private String end() {
         storage.saveListToData(this.tasks.get());
@@ -241,7 +298,7 @@ public class Parser {
      * @param input is the position of the Task to be deleted
      * @throws EmptyListException
      * @throws InvalidListIndexException
-     * @return
+     * @return a String Message
      */
     private String delete(String input) throws EmptyListException, InvalidListIndexException {
         int stringLength = input.length();

@@ -32,4 +32,22 @@ public class Todo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
+    /**
+     * Checks if two Todos are equal
+     *
+     * @return a boolean
+     */
+    @Override
+    public boolean equals(Object object) {
+        if (this == object) {
+            return true;
+        } else if (object instanceof Todo) {
+            Todo otherTodo = (Todo) object;
+            return this.description.equals(otherTodo.description)
+                        && this.isDone == otherTodo.isDone;
+        } else {
+            return false;
+        }
+    }
 }
