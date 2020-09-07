@@ -8,6 +8,7 @@ public class PrintsearchCommand extends Command {
     final String[] keyword;
 
     public PrintsearchCommand(String[] keyword) {
+        assert keyword.length > 0 : "You must have a keyword for find!";
         this.keyword = keyword;
     }
 

@@ -115,10 +115,6 @@ public class Ui {
                 + "Such wow! I have completed the following duke.task!" + "\n"
                 + task + " [" + taskStatus + "]" + "\n"
                 + "--------------------------------------\n";
-        /*System.out.println("--------------------------------------");
-        System.out.println("Such wow! I have completed the following duke.task!");
-        System.out.println(duke.task + " [" + taskStatus + "]");
-        System.out.println("--------------------------------------");*/
         System.out.println(returnStr);
         return returnStr;
     }
@@ -128,13 +124,12 @@ public class Ui {
      * @param taskId given duke.task id
      */
     public String removePrint(int taskId) {
+        assert taskId > 0 : "Task number provided cannot be less than 1!";
         Task tr = TaskList.getList().get(taskId - 1);
         String returnStr;
-        returnStr = "duke.task.Task successfully removed!" + "\n"
-                + "-> " + tr.toString();
+        returnStr = "Task successfully removed!" + "\n"
+                + "-> " + tr.toString() + "\n";
         System.out.println(returnStr);
-        /*System.out.println("duke.task.Task successfully removed!");
-        System.out.println("-> " + tr.toString());*/
         return returnStr;
     }
 

@@ -36,11 +36,13 @@ public class Parser {
                 return new ErrorCommand(e.getMessage());
             }
         } else if (input.contains("find")) {
+            assert input.length() > 5 : "You must have a keyword for find!";
             String keyword = input.substring(5);
             String[] searchArray = checkCommas(keyword).toArray(new String [0]);
             return new PrintsearchCommand(searchArray);
 
         } else if (input.contains("remove")) {
+            assert input.length() > 6 : "You specify the task id to remove!";
             int removeInt;
             try {
                 String intAtBack = input.substring(7);
@@ -52,17 +54,6 @@ public class Parser {
         } else if (input.contains("todo")) {
             return processTodo(input);
         } else if (input.contains("deadline")) {
-            /*if (checkEmpty(input, "deadline")) {
-                throw new DukeException("Much error! You have to describe your mission!");
-            }
-            if (checkPlan(input)) {
-                throw new DukeException("Oh no, you do not have a planned timing for your mission!");
-            }
-            if (input.contains("/")) {
-                return parseDate("deadline", input, "by");
-            } else {
-                return new AddCommand(new Deadline(input.substring(9)));
-            }*/
             return processDeadline(input.substring(9));
         } else if (input.contains("event")) {
             return processEvent(input.substring(6));
