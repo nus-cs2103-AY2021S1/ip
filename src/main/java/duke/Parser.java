@@ -34,8 +34,8 @@ import duke.task.Todo;
  * It then returns the required commands needed.
  */
 public class Parser {
-    private final static int DEADLINE_LENGTH = 9;
-    private final static int EVENT_LENGTH = 6;
+    private static final int DEADLINE_LENGTH = 9;
+    private static final int EVENT_LENGTH = 6;
 
     /**
      * Reads and convert the date and time in String format to LocalDateTime.

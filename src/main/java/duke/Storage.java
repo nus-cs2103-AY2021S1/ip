@@ -72,7 +72,7 @@ public class Storage {
 
                 if (isDone.equals("1")) {
                     task.markAsDone();
-                } else if (!isDone.equals("0")){
+                } else if (!isDone.equals("0")) {
                     throw new DukeInvalidDataException("Oops data is invalid");
                 }
                 list.add(task);
