@@ -44,9 +44,13 @@ public class Parser {
         case LIST:
             return new ListCommand();
         case DONE:
-            return new DoneCommand(Integer.parseInt(input.substring(5)) - 1);
+            try {
+                return new DoneCommand(Integer.parseInt(keywords[1].trim()) - 1);
+            } catch (Exception e) {
+                throw new DukeException("You can't do something not in the list?");
+            }
         case DELETE:
-            return new DeleteCommand(Integer.parseInt(input.substring(7)) - 1);
+            return new DeleteCommand(Integer.parseInt(keywords[1].trim()) - 1);
         case DEADLINE:
             try {
                 int by = input.indexOf(" /by");

@@ -70,15 +70,15 @@ public abstract class Command {
         ClearCommand.aliases.add("clear");
 
         DeadlineCommand.aliases = new ArrayList<>();
-        DeadlineCommand.aliases.add("d");
+        DeadlineCommand.aliases.add("de");
         DeadlineCommand.aliases.add("deadline");
 
         DeleteCommand.aliases = new ArrayList<>();
-        DeleteCommand.aliases.add("del");
+        DeleteCommand.aliases.add("d");
         DeleteCommand.aliases.add("delete");
 
         DoneCommand.aliases = new ArrayList<>();
-        DoneCommand.aliases.add("d");
+        DoneCommand.aliases.add("do");
         DoneCommand.aliases.add("done");
 
         EventCommand.aliases = new ArrayList<>();
