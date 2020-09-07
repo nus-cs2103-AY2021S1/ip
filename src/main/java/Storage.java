@@ -14,18 +14,17 @@ import java.util.Scanner;
  */
 public class Storage {
     private static final String MESSAGE_INVALID = "I don't understand anything you just said";
-    private static final Map<String,String> presetAliasMap= Map.of(
-            "t","todo",
-            "d","deadline",
-            "e","event");
+    private static final Map<String, String> presetAliasMap = Map.of(
+            "t", "todo",
+            "d", "deadline",
+            "e", "event");
     private final Path taskFilePath;
     private final Path aliasMapFilePath;
-
 
     /**
      * Public Constructor.
      *
-     * @param filepath Path of data storage file.
+     * @param filepath         Path of data storage file.
      * @param aliasMapFilePath Path of key mappings file.
      */
     public Storage(Path filepath, Path aliasMapFilePath) {
@@ -104,13 +103,14 @@ public class Storage {
             data.nextLine();
         }
     }
-    public HashMap<String,String> loadAliasMapping() throws IOException {
-        HashMap<String,String>aliasMappings=new HashMap<>(presetAliasMap);
-        if (Files.exists(aliasMapFilePath)){
+
+    public HashMap<String, String> loadAliasMapping() throws IOException {
+        HashMap<String, String> aliasMappings = new HashMap<>(presetAliasMap);
+        if (Files.exists(aliasMapFilePath)) {
             Scanner data;
             data = new Scanner(aliasMapFilePath);
-            while (data.hasNext()){
-                aliasMappings.put(data.next(),data.next());
+            while (data.hasNext()) {
+                aliasMappings.put(data.next(), data.next());
             }
         }
         return aliasMappings;

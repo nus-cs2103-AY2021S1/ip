@@ -2,7 +2,6 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.format.DateTimeParseException;
-
 import javafx.application.Platform;
 
 /**
@@ -21,12 +20,12 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         Path dataPath = Paths.get("data", "duke.txt");
-        Path aliasMapFilePath=Paths.get("data","keymap.txt");
+        Path aliasMapFilePath = Paths.get("data", "keymap.txt");
         storage = new Storage(dataPath, aliasMapFilePath);
 
         try {
             tasks = new TaskList(storage.loadTaskList());
-            parser =new Parser(storage.loadAliasMapping());
+            parser = new Parser(storage.loadAliasMapping());
         } catch (BlankTaskException | InvalidCommandException e) {
             ui.displayOutput(e.getMessage());
         } catch (IOException e) {
@@ -40,7 +39,7 @@ public class Duke {
         try {
             c = parser.parse(input);
             assert c != null : "The command cannot be null";
-        } catch (MissingDelimiterException | MissingDateTimeException | InvalidCommandException e) {
+        } catch (MissingDelimiterException | MissingDateTimeException | InvalidCommandException | AliasNotAllowedException e) {
             return e.getMessage();
         } catch (DateTimeParseException e) {
             return Ui.MESSAGE_WRONG_FORMAT;

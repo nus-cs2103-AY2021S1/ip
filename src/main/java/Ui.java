@@ -66,6 +66,6 @@ public class Ui {
     }
 
     public String showMapping(String originalKey, String newKey) {
-        return String.format(MESSAGE_BINDING,originalKey,newKey);
+        return String.format(MESSAGE_BINDING, originalKey, newKey);
     }
 }

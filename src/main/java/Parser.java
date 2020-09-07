@@ -15,10 +15,14 @@ public class Parser {
     private static final String MESSAGE_MISSING_SLASH = "You didn't put the correct delimiter in the command";
     private static final String MESSAGE_INVALID = "I don't understand anything you just said";
 
-    private static final HashMap<String, TaskType> taskTypeMap = new HashMap<>(Map.of(
+    private static final HashMap<String, TaskType> TASK_TYPE_MAP = new HashMap<>(Map.of(
             "event", TaskType.E,
             "deadline", TaskType.D,
             "todo", TaskType.T));
+
+    private static final String[] RESTRICTED_WORDS =
+            { "addalias", "bye", "deadline", "delete", "done", "event", "find", "list", "todo" };
+    private static final String MESSAGE_ALIAS_NOT_ALLOWED = "This mapping is not allowed!";
 
     private final HashMap<String, String> aliasMap;
 
@@ -39,12 +43,12 @@ public class Parser {
      */
     public Command parse(String input)
             throws MissingDelimiterException, MissingDateTimeException, InvalidCommandException,
-            DateTimeParseException, IndexOutOfBoundsException {
+            DateTimeParseException, IndexOutOfBoundsException, AliasNotAllowedException {
         String[] commandElements = input.trim().split(" ");
 
         // replaces custom mapping with default commands
-        if (aliasMap.containsKey(commandElements[0])){
-            commandElements[0]= aliasMap.get(commandElements[0]);
+        if (aliasMap.containsKey(commandElements[0])) {
+            commandElements[0] = aliasMap.get(commandElements[0]);
         }
 
         Command intendedCommand;
@@ -69,8 +73,12 @@ public class Parser {
                     Arrays.copyOfRange(commandElements, 1, commandElements.length)));
             break;
         case "addalias":
-            aliasMap.put(commandElements[1],commandElements[2]);
-            intendedCommand=new AddAliasCommand(aliasMap,commandElements[1]);
+            if (Arrays.binarySearch(RESTRICTED_WORDS, commandElements[1]) >= 0
+                    || Arrays.binarySearch(RESTRICTED_WORDS, commandElements[2]) < 0) {
+                throw new AliasNotAllowedException(MESSAGE_ALIAS_NOT_ALLOWED);
+            }
+            aliasMap.put(commandElements[1], commandElements[2]);
+            intendedCommand = new AddAliasCommand(aliasMap, commandElements[1]);
             break;
         default:
             intendedCommand = parseTask(commandElements);
@@ -82,7 +90,7 @@ public class Parser {
     private static Command parseTask(String[] commandElements)
             throws InvalidCommandException, MissingDelimiterException, MissingDateTimeException {
         Command intendedCommand;
-        TaskType currType = taskTypeMap.get(commandElements[0]);
+        TaskType currType = TASK_TYPE_MAP.get(commandElements[0]);
 
         if (currType == null) {
             throw new InvalidCommandException(MESSAGE_INVALID);
