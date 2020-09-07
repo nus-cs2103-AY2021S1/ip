@@ -69,6 +69,7 @@ public class Duke {
             } else if (command.equals(Commands.DONE)) {
                 try {
                     Parser.checkIndex(inputs, taskList.getSize());
+                    assert inputs.length > 1;
                     int index = Integer.parseInt(inputs[1]) - 1;
                     taskList.markDone(index);
                     return ui.getCompletedTask(taskList.getTask(index));
@@ -82,6 +83,7 @@ public class Duke {
                         return ui.sayDeleteAllTasks();
                     } else {
                         Parser.checkIndex(inputs, taskList.getSize());
+                        assert inputs.length > 1;
                         int index = Integer.parseInt(inputs[1]) - 1;
                         Task temp = taskList.getTask(index);
                         taskList.removeTask(index);
@@ -93,6 +95,7 @@ public class Duke {
             } else if (command.equals(Commands.TODO)) {
                 try {
                     Parser.checkDescription(inputs, command);
+                    assert inputs.length > 1;
                     taskList.addTask(new Todo(inputs[1]));
                     return ui.getAddedTask(taskList.getTask(taskList.getSize() - 1), taskList.getSize());
                 } catch (EmptyDescriptionException ex) {
@@ -101,12 +104,15 @@ public class Duke {
             } else if (command.equals(Commands.DEADLINE)) {
                 try {
                     Parser.checkDescription(inputs, command);
+                    assert inputs.length > 1;
                     String temp = " " + inputs[1];
-                    String[] taskInfos = temp.split("/by", 2);
-                    inputs[1] = taskInfos[0];
+                    String[] taskInfo = temp.split("/by", 2);
+                    assert taskInfo.length > 0;
+                    inputs[1] = taskInfo[0];
                     Parser.checkDescription(inputs, command);
-                    Parser.checkTime(taskInfos, command);
-                    taskList.addTask(new Deadline(taskInfos[0].trim(), taskInfos[1].trim()));
+                    Parser.checkTime(taskInfo, command);
+                    assert taskInfo.length > 1;
+                    taskList.addTask(new Deadline(taskInfo[0].trim(), taskInfo[1].trim()));
                     return ui.getAddedTask(taskList.getTask(taskList.getSize() - 1), taskList.getSize());
                 } catch (EmptyDescriptionException ex) {
                     return ex.getMessage();
@@ -116,12 +122,15 @@ public class Duke {
             } else {
                 try {
                     Parser.checkDescription(inputs, command);
+                    assert inputs.length > 1;
                     String temp = " " + inputs[1];
-                    String[] taskInfos = temp.split("/at", 2);
-                    inputs[1] = taskInfos[0];
+                    String[] taskInfo = temp.split("/at", 2);
+                    assert taskInfo.length > 0;
+                    inputs[1] = taskInfo[0];
                     Parser.checkDescription(inputs, command);
-                    Parser.checkTime(taskInfos, command);
-                    taskList.addTask(new Event(taskInfos[0].trim(), taskInfos[1].trim()));
+                    Parser.checkTime(taskInfo, command);
+                    assert taskInfo.length > 1;
+                    taskList.addTask(new Event(taskInfo[0].trim(), taskInfo[1].trim()));
                     return ui.getAddedTask(taskList.getTask(taskList.getSize() - 1), taskList.getSize());
                 } catch (EmptyDescriptionException ex) {
                     return ex.getMessage();
