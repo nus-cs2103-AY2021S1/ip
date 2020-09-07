@@ -51,13 +51,12 @@ public class Storage {
     }
 
     public void writeToFile(Task task, int index) {
-
-
+        createFile("TaskList/Task" + index + ".txt");
         try {
-            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("ToDo/item" + todoNum + ".txt"));
+            ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream("TaskList/Task" + index + ".txt"));
             out.writeObject(task);
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Writing to File");
         }
     }
 
