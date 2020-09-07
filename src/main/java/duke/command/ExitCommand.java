@@ -1,8 +1,8 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.Storage;
-import main.java.duke.TaskList;
-import main.java.duke.Ui;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * Encapsulates a command to exit duke
@@ -10,12 +10,12 @@ import main.java.duke.Ui;
 public class ExitCommand extends Command {
 
     /**
-     * Executes the command to exit duke
+     * Executes the command to exit duke.
      *
      * @param storage Storage
      * @param tasks Task list
      * @param ui Ui
-     * @return Output strings
+     * @return Output strings displayed on the UI showing exit
      */
     @Override
     public String[] execute(Storage storage, TaskList tasks, Ui ui) {

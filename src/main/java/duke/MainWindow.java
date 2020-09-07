@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,8 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import main.java.duke.command.Command;
-import main.java.duke.command.ExitCommand;
+import duke.command.Command;
+import duke.command.ExitCommand;
 
 import java.util.concurrent.TimeUnit;
 
@@ -30,8 +30,8 @@ public class MainWindow extends AnchorPane {
 
     private Stage stage;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image USER_IMAGE = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image DUKE_IMAGE = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     @FXML
     public void initialize() {
@@ -48,6 +48,9 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    /**
+     * Closes the stage.
+     */
     void exitStage() {
         try {
             TimeUnit.SECONDS.sleep(1);
@@ -56,20 +59,24 @@ public class MainWindow extends AnchorPane {
         stage.close();
     }
 
+    /**
+     * Creates the initial dialog box displaying the start-up message.
+     */
     @FXML
     void handleStartUp() {
         String startupMessage = duke.getStartupMessage();
-        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(startupMessage, dukeImage));
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(startupMessage, DUKE_IMAGE));
     }
 
+    /**
+     * Handles the user input. If the user input is parsed into an ExitCommand, the stage is exit. Otherwise, it is
+     * handled normally in the method handleGeneralUserInput.
+     */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-
         Command command = Parser.parse(input);
-
         handleGeneralUserInput(input);
-
         if (command instanceof ExitCommand) {
             exitStage();
         }
@@ -82,8 +89,8 @@ public class MainWindow extends AnchorPane {
     private void handleGeneralUserInput(String input) {
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getUserDialog(input, USER_IMAGE),
+                DialogBox.getDukeDialog(response, DUKE_IMAGE)
         );
         userInput.clear();
     }

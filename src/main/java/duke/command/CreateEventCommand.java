@@ -1,10 +1,10 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.Storage;
-import main.java.duke.TaskList;
-import main.java.duke.Ui;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
-import main.java.duke.task.Event;
+import duke.task.Event;
 
 import java.time.LocalDate;
 
@@ -36,16 +36,16 @@ public class CreateEventCommand extends Command {
     }
 
     /**
-     * Executes the command to create an event
+     * Executes the command to create an event.
      *
      * @param storage Storage
      * @param tasks Task list
      * @param ui Ui
-     * @return Output strings
+     * @return Output strings displayed on the UI showing event creation
      */
     @Override
     public String[] execute(Storage storage, TaskList tasks, Ui ui) {
-        Event event = tasks.addEvent(description, isComplete, date);
-        return ui.getCreateTaskStrings(tasks, event);
+        Event newEvent = tasks.addEvent(description, isComplete, date);
+        return ui.getCreateTaskStrings(tasks, newEvent);
     }
 }
