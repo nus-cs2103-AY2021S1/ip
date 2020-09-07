@@ -21,6 +21,64 @@ import duke.exception.DukeException;
  */
 public class Parser {
 
+    private static String unknownCommandMessage = "OOPS!!! I've not yet learned what that means."
+            + "Please enter a valid command :) "
+            + "\n\nAdditionally, do note that the description cannot be empty "
+            + "for the following commands:"
+            + "\n1. event"
+            + "\n2. deadline"
+            + "\n3. done"
+            + "\n4. delete"
+            + "\n5. find";
+
+    private static boolean isValidDescription(String[] userInput) throws DukeException {
+        if (userInput.length == 1 || userInput[1].equals("")) {
+            throw new DukeException(unknownCommandMessage);
+        }
+        return true;
+    }
+
+    private static Command DeadlineAndEventHandler(String[] userInput, String eventType
+            , String keyword, DateTimeFormatter dateFormatter
+            , DateTimeFormatter timeFormatter) throws DukeException {
+
+        String[] content = userInput[1].split(keyword, 2);
+        if (content.length == 1 || content[0].equals("")) {
+            throw new DukeException("OOPS!!! It seems we can't find your event description.");
+        }
+        if (content[1].equals("")) {
+            throw new DukeException("OOPS!!! We can't seem to find your event time. Please type "
+                    + "/by before your preferred timing");
+        }
+        try {
+            String[] dateTime = content[1].split(" ", 3);
+            LocalDate localDate = LocalDate.from(dateFormatter.parse(dateTime[1]));
+            LocalTime localTime = LocalTime.from(timeFormatter.parse(dateTime[2]));
+            return new AddCommand(eventType, content[0], localDate, localTime);
+
+        } catch (DateTimeParseException error) {
+            throw new DukeException("OOPS!!! It seems like you've provided us "
+                    + "with the wrong date time format for your event. "
+                    + "Please structure it as yyyy-mm-dd hh:mm");
+        }
+    }
+
+    private static Command DeleteAndDoneHandler(String[] userInput, String taskType) throws DukeException {
+        try {
+            int index = Integer.parseInt(userInput[1]) - 1;
+            switch (taskType) {
+            case "done":
+                return new DoneCommand(index);
+            case "delete":
+                return new DeleteCommand(index);
+            default:
+                throw new DukeException("Wrong usage of DeleteAndDoneHandler method in Parser class");
+            }
+        } catch (NumberFormatException e) {
+            throw new DukeException("Please provide a positive number when indicating task index.");
+        }
+    }
+
     /**
      * Static method to parse user input.
      * @param userCommand User string from the command line.
@@ -34,108 +92,46 @@ public class Parser {
 
         // Formats the way users input their time for a task.
         DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("HHmm");
+
         String[] userWord = userCommand.split(" ", 2);
 
-        // Exits the program.
         if (userCommand.equals("bye")) {
             return new ExitCommand();
         }
+        if (userCommand.equals("list")) {
+            return new ListCommand();
+        }
+
+        isValidDescription(userWord);
+
         // Switch block checks for the appropriate commands to create based on user input.
         switch (userWord[0]) {
-        case "list":
-            return new ListCommand();
-            //Fallthrough
-
         case "find" :
-            if (userWord.length == 1 || userWord[1].equals("")) {
-                throw new DukeException("   ☹ OOPS!!! The description of the command find cannot be empty.");
-            }
             return new FindCommand(userWord[1]);
             //Fallthrough
 
         case "todo":
-            if (userWord.length == 1 || userWord[1].equals("")) {
-                throw new DukeException("   ☹ OOPS!!! The description of the command todo cannot be empty.");
-            }
             return new AddCommand("todo", userWord[1]);
             //Fallthrough
 
         case "deadline":
-            if (userWord.length == 1 || userWord[1].equals("")) {
-                throw new DukeException("   ☹ OOPS!!! The description of the command deadline cannot be empty.");
-            }
-            String[] content = userWord[1].split("/by", 2);
-            if (content.length == 1 || content[0].equals("")) {
-                throw new DukeException("   ☹ OOPS!!! We can't seem to find your event description.");
-            }
-            if (content[1].equals("")) {
-                throw new DukeException("   ☹ OOPS!!! We can't seem to find your event time. Please type "
-                        + "/by before your preferred timing");
-            }
-            try {
-                String[] dateTime = content[1].split(" ", 3);
-                LocalDate localDate = LocalDate.from(dateFormatter.parse(dateTime[1]));
-                LocalTime localTime = LocalTime.from(timeFormatter.parse(dateTime[2]));
-                return new AddCommand("deadline", content[0], localDate, localTime);
-
-            } catch (DateTimeParseException error) {
-                throw new DukeException("   ☹ OOPS!!! It seems like you've provided us "
-                        + "with the wrong date time format for your event. "
-                        + "Please structure it as yyyy-mm-dd hh:mm");
-            }
+            return DeadlineAndEventHandler(userWord, "deadline", "/by", dateFormatter, timeFormatter);
             //Fallthrough
 
         case "event":
-            if (userWord.length == 1 || userWord[1].equals("")) {
-                throw new DukeException("   ☹ OOPS!!! The description of the command event cannot be empty.");
-            }
-            String[] content2 = userWord[1].split("/at", 2);
-            if (content2.length == 1 || content2[0].equals("")) {
-                throw new DukeException("   ☹ OOPS!!! We can't seem to find your event description.");
-            }
-            if (content2[1].equals("")) {
-                throw new DukeException("   ☹ OOPS!!! We can't seem to find your event time. "
-                        + "Please type /at before your preferred timing");
-            }
-            try {
-                String[] dateTime = content2[1].split(" ", 3);
-                LocalDate localDate = LocalDate.from(dateFormatter.parse(dateTime[1]));
-                LocalTime localTime = LocalTime.from(timeFormatter.parse(dateTime[2]));
-                return new AddCommand("event", content2[0], localDate, localTime);
-
-            } catch (DateTimeParseException error) {
-                throw new DukeException("   ☹ OOPS!!! It seems like you've provided us "
-                        + "with the wrong date time format for your event. "
-                        + "Please structure it as yyyy-mm-dd hh:mm");
-            }
+            return DeadlineAndEventHandler(userWord, "event", "/at", dateFormatter, timeFormatter);
             //Fallthrough
 
         case "done":
-            if (userWord.length == 1 || userWord[1].equals("")) {
-                throw new DukeException("   ☹ OOPS!!! The description of the command done cannot be empty.");
-            }
-            try {
-                int index = Integer.parseInt(userWord[1]) - 1;
-                return new DoneCommand(index);
-            } catch (NumberFormatException e) {
-                throw new DukeException("    Please provide a positive number when indicating task index.");
-            }
+            return DeleteAndDoneHandler(userWord, "done");
             //Fallthrough
 
         case "delete":
-            if (userWord.length == 1 || userWord[1].equals("")) {
-                throw new DukeException("   ☹ OOPS!!! The description of the command done cannot be empty.");
-            }
-            try {
-                int index2 = Integer.parseInt(userWord[1]) - 1;
-                return new DeleteCommand(index2);
-            } catch (NumberFormatException e) {
-                throw new DukeException("    Please provide a positive number when indicating task index.");
-            }
+            return DeleteAndDoneHandler(userWord, "delete");
             //Fallthrough
 
         default:
-            throw new DukeException("    Sorry! I'm not really sure what to do with this command yet ☹");
+            throw new DukeException(unknownCommandMessage);
             //Fallthrough
         }
     }
