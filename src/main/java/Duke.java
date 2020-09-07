@@ -1,5 +1,8 @@
 package main.java;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,8 +15,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
 /**
  * Duke chatbot :)
@@ -38,18 +39,6 @@ public class Duke extends Application {
     private ByteArrayOutputStream errContent = new ByteArrayOutputStream();
     private final PrintStream originalOut = System.out;
     private final PrintStream originalErr = System.err;
-
-    public void setUpStreams() {
-        outContent = new ByteArrayOutputStream();
-        errContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        System.setErr(new PrintStream(errContent));
-    }
-
-    public void restoreStreams() {
-        System.setOut(originalOut);
-        System.setErr(originalErr);
-    }
 
     /**
      * Constructor
@@ -81,6 +70,18 @@ public class Duke extends Application {
         }
     }
 
+    private void setUpStreams() {
+        outContent = new ByteArrayOutputStream();
+        errContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        System.setErr(new PrintStream(errContent));
+    }
+
+    private void restoreStreams() {
+        System.setOut(originalOut);
+        System.setErr(originalErr);
+    }
+
     private void run() {
         ui.hi();
 
@@ -88,6 +89,7 @@ public class Duke extends Application {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
+                assert fullCommand.length() > 0 : "User input should not be empty!";
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
                 isExit = c.isExit();
