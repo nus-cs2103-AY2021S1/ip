@@ -98,14 +98,16 @@ public class TaskList {
      */
     public String doneTask(String s) throws DukeException {
         try {
-            int i = Integer.parseInt(s);
-            if (i < 1 || i > storage.size()) {
-                throw new DukeException("You have entered an invalid number: " + i
+            int index = Integer.parseInt(s);
+            boolean isWithinSizeLimit = index > storage.size();
+            boolean isLowerThanSizeMin = index < 1;
+            if (isLowerThanSizeMin || isWithinSizeLimit) {
+                throw new DukeException("You have entered an invalid number: " + index
                     + ". Please try again.");
             } else {
-                Task t = storage.get(i - 1);
-                Task completed = t.setDone(true);
-                storage.set(i - 1, completed);
+                Task t = storage.get(index - 1);
+                Task completed = t.setDone();
+                storage.set(index - 1, completed);
                 return "Nice! I've marked this task as done:\n" + "  "
                         + completed + "\n";
             }
@@ -120,10 +122,14 @@ public class TaskList {
      * @throws DukeException The Exception of Duke bot
      */
     public String delTask(String s) throws DukeException {
-        if (storage.size() == 0 || s.toLowerCase().equals("all")) {
+        boolean isEmptyStorage = storage.size() == 0;
+        boolean isAll = s.toLowerCase().equals("all");
+        boolean isEmptyString = s.equals("");
+
+        if (isEmptyStorage || isAll) {
             storage.clear();
             return "All tasks cleared!!\n";
-        } else if (s.equals("")) {
+        } else if (isEmptyString) {
             try {
                 return addTask("delete", "");
             } catch (DukeException e) {
@@ -154,15 +160,15 @@ public class TaskList {
         if (storage.isEmpty()) {
             return "Your list is empty!\n";
         } else {
-            int index = 1;
+            int count = 1;
             String output = "Here are the matching tasks in your list:\n";
             for (Task curr : storage) {
                 if (curr.getName().toLowerCase().contains(s.toLowerCase())) {
-                    output = output.concat(index + "." + curr + "\n");
-                    index++;
+                    output = output.concat(count + "." + curr + "\n");
+                    count++;
                 }
             }
-            if (index == 1) {
+            if (count == 1) {
                 return "There was no match!";
             } else {
                 return output;

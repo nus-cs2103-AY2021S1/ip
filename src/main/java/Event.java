@@ -35,11 +35,10 @@ public class Event extends Task {
 
     /**
      * Setter method for setting done attribute to given input.
-     * @param b The new completion status
      * @return New Event task with same parameters but attribute done changed to given input
      */
     @Override
-    public Event setDone(boolean b) {
+    public Event setDone() {
         return new Event(this.getName(), true, this.at);
     }
 

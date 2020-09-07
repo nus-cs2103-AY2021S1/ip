@@ -27,7 +27,7 @@ public class Storage {
     /**
      * Checks and makes save file.
      */
-    public void fileCheck() {
+    public void createOrLoadFile() {
         try {
             File f = new File(pathname);
             f.getParentFile().mkdirs();

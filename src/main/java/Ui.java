@@ -17,7 +17,7 @@ public class Ui {
      * @return String for welcome message
      */
     public String startUp(TaskList taskList, Storage storage) {
-        storage.fileCheck();
+        storage.createOrLoadFile();
         if (!storage.getFile().exists() || storage.getFile().length() == 0) {
             return "Hello! I'm Duke\n"
                     + "What can I do for you?\n";
@@ -65,7 +65,7 @@ public class Ui {
     }
 
     /**
-     * Return String for unknown input.
+     * Returns String for unknown input.
      * @return String for unknown input
      */
     public String unknownInputLine() {
