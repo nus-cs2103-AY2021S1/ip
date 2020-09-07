@@ -162,9 +162,9 @@ public class UI {
 
         StringBuilder formatted = new StringBuilder();
         int len = taskList.size();
-        for (int number = 0; number < len; number++) {
-            formatted.append("\n\t  " + (number + 1) + ". " + taskList.get(number).toString());
-        }
+        IntStream
+                .range(0, len)
+                .forEach(number -> formatted.append("\n\t  " + (number + 1) + ". " + taskList.get(number).toString()));
         return emptyChatBox("I found " + len + " items with the given keyword(s):"
                 + formatted.toString());
     }
