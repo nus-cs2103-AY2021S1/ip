@@ -29,6 +29,10 @@ public class Event extends Task {
     public String toString() {
         String done = this.done ? "O" : "X";
         String date = this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
-        return "[E][" + done + "] " + this.task + "at: " + date;
+        if (isImportant) {
+            return "[E][" + done + "]** " + this.task + "at: " + date;
+        } else {
+            return "[E][" + done + "] " + this.task + "at: " + date;
+        }
     }
 }

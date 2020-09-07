@@ -55,6 +55,10 @@ public class Parser {
         } else if (stringarr[0].equals("refresh")) {
             String response = processorRefresh(taskList, storage);
             finalString = Ui.showCommandMessage(response);
+        } else if (stringarr[0].equals("important")) {
+            int index = Integer.parseInt(stringarr[1]);
+            String response = taskList.setTaskAsImportant(index);
+            finalString = Ui.showResponse(response, command);
         } else {
             String response = processorAdd(command, taskList, false);
             finalString = Ui.showResponse(response, command);

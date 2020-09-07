@@ -29,6 +29,10 @@ public class Deadline extends Task {
     public String toString() {
         String done = this.done ? "O" : "X";
         String date = this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
-        return "[D][" + done + "] " + this.task + "by: " + date;
+        if (isImportant) {
+            return "[D][" + done + "]** " + this.task + "by: " + date;
+        } else {
+            return "[D][" + done + "] " + this.task + "by: " + date;
+        }
     }
 }
