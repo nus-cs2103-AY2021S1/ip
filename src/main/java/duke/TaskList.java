@@ -135,6 +135,7 @@ public class TaskList {
     public List<Task> findWord(String input) {
         String[] inputArray = input.split(" ", 2);
         String word = inputArray[1];
+        assert !word.isBlank();
         List<Task> findArray = new ArrayList<>();
         for (Task x: list) {
             String[] nameArray = x.getName().split(" ");
