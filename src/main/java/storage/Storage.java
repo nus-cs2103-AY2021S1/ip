@@ -1,14 +1,15 @@
 package storage;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import command.Command;
 import mugexception.MugException;
@@ -17,6 +18,7 @@ import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
 import tasks.Todo;
+
 
 /**
  * Operations on local file.
@@ -33,10 +35,15 @@ public class Storage {
      */
     public Storage(String filepath) {
         this.filepath = filepath;
-        File file = new File(filepath);
+        File mainFile = new File(filepath);
+        File undoFile = new File("undo.txt");
+        undoFile.deleteOnExit();
         try {
-            if (!file.exists()) {
-                file.createNewFile();
+            if (!mainFile.exists()) {
+                mainFile.createNewFile();
+            }
+            if (!undoFile.exists()) {
+                undoFile.createNewFile();
             }
         } catch (IOException ex) {
             System.out.println("An error occurred!!");
@@ -52,12 +59,12 @@ public class Storage {
     public ArrayList<Task> load() {
         ArrayList<Task> taskList = new ArrayList<>();
         try {
-            Scanner sc = new Scanner(new File(this.filepath));
-            sc.useDelimiter("[\n]");
+            FileReader fr = new FileReader(this.filepath);
+            BufferedReader br = new BufferedReader(fr);
             String line;
 
-            while (sc.hasNext()) {
-                line = sc.next();
+            while (br.ready()) {
+                line = br.readLine();
                 String[] newLine = line.split("[|]");
                 Command command = Parser.command(newLine[0]);
                 boolean hasDone = Integer.parseInt(newLine[1]) == 1;
@@ -73,7 +80,7 @@ public class Storage {
                 }
             }
 
-        } catch (FileNotFoundException | MugException ex) {
+        } catch (IOException | MugException ex) {
             System.out.println("WARNING: " + ex.getMessage() + " :WARNING");
         } catch (ArrayIndexOutOfBoundsException ex) {
             System.out.println("WARNING: There is Something wrong with your Storage :WARNING");
@@ -93,7 +100,6 @@ public class Storage {
             FileWriter fw = new FileWriter(this.filepath, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
-
             switch (command) {
             case TODO:
                 pw.println("TODO|0|" + info);
@@ -121,10 +127,16 @@ public class Storage {
             default:
                 break;
             }
-
             pw.flush();
             pw.close();
-
+            FileReader fr = new FileReader(this.filepath);
+            BufferedReader br = new BufferedReader(fr);
+            int lineNum = 0;
+            while (br.ready()) {
+                br.readLine();
+                lineNum++;
+            }
+            writeUndoRecord(Action.ADD, "", lineNum);
         } catch (MugException ex) {
             throw new MugException(ex.getMessage());
         } catch (IOException ex) {
@@ -149,18 +161,20 @@ public class Storage {
             FileWriter fw = new FileWriter(tempFile, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
-            Scanner sc = new Scanner(new File(this.filepath));
-            sc.useDelimiter("[\n]");
+            FileReader fr = new FileReader(this.filepath);
+            BufferedReader br = new BufferedReader(fr);
 
-            while (sc.hasNext()) {
-                line = sc.next();
+            while (br.ready()) {
+                line = br.readLine();
                 taskTrack++;
                 if (taskTrack != taskId) {
                     pw.println(line);
+                } else {
+                    writeUndoRecord(Action.DELETE, line, taskId);
                 }
             }
 
-            sc.close();
+            br.close();
             pw.flush();
             pw.close();
             oldFile.delete();
@@ -188,20 +202,22 @@ public class Storage {
             FileWriter fw = new FileWriter(tempFile, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
-            Scanner sc = new Scanner(new File(this.filepath));
-            sc.useDelimiter("[\n]");
+            FileReader fr = new FileReader(this.filepath);
+            BufferedReader br = new BufferedReader(fr);
 
-            while (sc.hasNext()) {
-                line = sc.next();
+            while (br.ready()) {
+                line = br.readLine();
                 taskTrack++;
                 if (taskTrack != taskId) {
                     pw.println(line);
                 } else {
-                    String[] newLine = line.split("[|]" , 3);
+                    writeUndoRecord(Action.DONE, line, taskId);
+                    String[] newLine = line.split("[|]", 3);
                     pw.println(newLine[0] + "|" + 1 + "|" + newLine[2]);
                 }
             }
-            sc.close();
+
+            br.close();
             pw.flush();
             pw.close();
             oldFile.delete();
@@ -212,6 +228,41 @@ public class Storage {
         } catch (IOException e) {
             throw new MugException("Something went wrong");
         }
+    }
 
+    /**
+     * Record the action.
+     * @param task command given to Mug.
+     * @throws MugException If fail to access undo.txt.
+     */
+    private void writeUndoRecord(Action task, String info, int taskId) throws MugException {
+        String tempFile = "undoTemp.txt";
+        File oldFile = new File("undo.txt");
+        File newFile = new File(tempFile);
+
+        try {
+            FileWriter fw = new FileWriter(tempFile, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            // read undo.txt
+            FileReader fr = new FileReader("undo.txt");
+            BufferedReader br = new BufferedReader(fr);
+            pw.println(task);
+            pw.println(taskId);
+            pw.println(info);
+            while (br.ready()) {
+                pw.println(br.readLine());
+            }
+            //close reader and writer
+            br.close();
+            pw.flush();
+            pw.close();
+            //rename
+            oldFile.delete();
+            File renameFile = new File("undo.txt");
+            newFile.renameTo(renameFile);
+        } catch (IOException ex) {
+            throw new MugException("Something went wrong. Mug fail to record task :_:");
+        }
     }
 }

@@ -7,7 +7,7 @@ import command.Command;
 import mugexception.MugException;
 
 /**
- * Parses and validates the user command
+ * Validates or parses the user command
  */
 public class Parser {
 
@@ -15,9 +15,9 @@ public class Parser {
      * Validates user's input.
      *
      * @param command User command.
-     * @param splitInputLen Length of the split string.
-     * @param isTime About time.
-     * @throws MugException If splitInputLen less than 2.
+     * @param splitNum Length of the split string.
+     * @param isTime time related.
+     * @throws MugException If splitNum less than 2.
      */
     public static void input(Command command, int splitInputLen, boolean isTime) throws MugException {
         if (splitInputLen < 2) {
@@ -38,7 +38,7 @@ public class Parser {
      *
      * @param command User command.
      * @param info Task description.
-     * @param isTime About time.
+     * @param isTime time related.
      * @throws MugException If info pass in is empty.
      */
     public static void info(Command command, String info, boolean isTime) throws MugException {

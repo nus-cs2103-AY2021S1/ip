@@ -46,6 +46,9 @@ public class Ui {
             case FIND:
                 output = findAction(splitInput, tasks);
                 break;
+            case UNDO:
+                output = tasks.undoTask();
+                break;
             default:
                 output = "Hey!!! I'm sorry, but Mug don't know what that means :3";
                 break;
