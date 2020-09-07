@@ -28,6 +28,42 @@ public class TaskListTest {
     }
 
     @Test
+    public void updateTaskOfSameType_taskListWithSomeItems_success() throws DukeException {
+        List<Task> testInputTasks = new ArrayList<>();
+        testInputTasks.add(new Todo("todo desc1"));
+        Task taskToBeUpdated = new Todo("todo desc2");
+        testInputTasks.add(taskToBeUpdated);
+        testInputTasks.add(new Deadline("deadline desc1", "2020-12-30"));
+        testInputTasks.add(new Event("event desc1", "2020-12-30"));
+
+        TaskList tasks = new TaskList(testInputTasks);
+
+        Task updatedTask = new Todo("todo desc3");
+
+        assertEquals(taskToBeUpdated, tasks.updateTask(2, updatedTask));
+
+        assertEquals(updatedTask, tasks.getTask(2));
+    }
+
+    @Test
+    public void updateTaskWithDifferentType_taskListWithSomeItems_success() throws DukeException {
+        List<Task> testInputTasks = new ArrayList<>();
+        testInputTasks.add(new Todo("todo desc1"));
+        Task taskToBeUpdated = new Todo("todo desc2");
+        testInputTasks.add(taskToBeUpdated);
+        testInputTasks.add(new Deadline("deadline desc1", "2020-12-30"));
+        testInputTasks.add(new Event("event desc1", "2020-12-30"));
+
+        TaskList tasks = new TaskList(testInputTasks);
+
+        Task updatedTask = new Event("event desc3", "2020-10-30");
+
+        assertEquals(taskToBeUpdated, tasks.updateTask(2, updatedTask));
+
+        assertEquals(updatedTask, tasks.getTask(2));
+    }
+
+    @Test
     public void deleteTask_taskListWithSomeItems_success() throws DukeException {
         List<Task> testInputTasks = new ArrayList<>();
         testInputTasks.add(new Todo("todo desc1"));

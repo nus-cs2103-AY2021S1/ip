@@ -49,10 +49,22 @@ public class TaskList {
     }
 
     /**
+     * Updates a {@link Task} in the list.
+     *
+     * @param taskId      The ID of the task to be updated.
+     * @param updatedTask The updated task.
+     * @return The {@link Task} before the update is performed.
+     */
+    public Task updateTask(int taskId, Task updatedTask) {
+        assert taskId <= this.tasks.size();
+        return this.tasks.set(taskId - 1, updatedTask);
+    }
+
+    /**
      * Deletes a {@link Task} in the list.
      *
      * @param taskId The ID of the task to be deleted.
-     * @return The {@link Task} that was deleted form the list.
+     * @return The {@link Task} that was deleted from the list.
      */
     public Task deleteTask(int taskId) {
         assert taskId <= this.tasks.size();
