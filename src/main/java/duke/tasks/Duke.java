@@ -13,10 +13,6 @@ public class Duke {
     private UI ui;
     private Parser parser;
 
-
-
-
-
     /**
      * Creates the Duke object with its attributes.
      * @throws FileNotFoundException File containing list of task may not be found.
@@ -67,12 +63,3 @@ public class Duke {
 
 
 }
-
-//    public static boolean isValidDate(String dateStr) {
-//        try {
-//            LocalDate.parse(dateStr);
-//        } catch (DateTimeParseException e){
-//            return false;
-//        }
-//        return true;
-//    }

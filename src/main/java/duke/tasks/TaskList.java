@@ -179,17 +179,21 @@ public class TaskList {
      * @param toPrint Keyword entered by user.
      */
     public String find(String toPrint) {
-        TaskList duplicateTaskLs = new TaskList();
-        duplicateTaskLs.taskLs = new ArrayList<>(this.getTaskLs());
+        try {
+            TaskList duplicateTaskLs = new TaskList();
+            duplicateTaskLs.taskLs = new ArrayList<>(this.getTaskLs());
 
-        toPrint = toPrint.substring(4);
-        String finalToPrint = toPrint;
+            toPrint = toPrint.substring(4);
+            String finalToPrint = toPrint;
 
-        duplicateTaskLs.taskLs.removeIf(n -> !n.getDescription().contains(finalToPrint));
+            duplicateTaskLs.taskLs.removeIf(n -> !n.getDescription().contains(finalToPrint));
 
-        String printGui = "";
-        printGui = printGui + "Here are the matching tasks in your list: " + "\n";
-        return duplicateTaskLs.findList(printGui);
+            String printGui = "";
+            printGui = printGui + "Here are the matching tasks in your list: " + "\n";
+            return duplicateTaskLs.findList(printGui);
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            return "Format of find command is incorrect";
+        }
     }
 
     /**

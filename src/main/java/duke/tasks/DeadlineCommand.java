@@ -8,21 +8,21 @@ import java.time.format.DateTimeParseException;
  * from users.
  */
 public class DeadlineCommand extends Command {
-    protected String deadline;
+    private String deadlineTask;
 
     /**
      * Constructor that stores the deadline string.
      * @param deadline input from user.
      */
     public DeadlineCommand(String deadline) {
-        this.deadline = deadline;
+        this.deadlineTask = deadline;
     }
 
     @Override
     public String execute(TaskList tasks, UI ui, Storage storage) throws IOException {
         try {
             //add event task to list of tasks
-            tasks.deadline(this.deadline);
+            tasks.deadline(this.deadlineTask);
         } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
             return Deadline.invalidInput();
         }
@@ -32,6 +32,6 @@ public class DeadlineCommand extends Command {
         storage.writeToFile("data/duke.rtf", s);
 
         //Return String to print
-        return tasks.deadlineString(this.deadline);
+        return tasks.deadlineString(this.deadlineTask);
     }
 }

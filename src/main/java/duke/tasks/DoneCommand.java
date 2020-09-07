@@ -7,7 +7,7 @@ import java.io.IOException;
  * from users.
  */
 public class DoneCommand extends Command {
-    protected String done;
+    private String done;
 
     public DoneCommand(String done) {
         this.done = done;

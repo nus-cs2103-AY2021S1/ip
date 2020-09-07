@@ -7,20 +7,20 @@ import java.io.IOException;
  * from users.
  */
 public class DeleteCommand extends Command {
-    protected String delete;
+    protected String toDelete;
 
     /**
      * Constructor that stores the string to be deleted.
      * @param delete string to be removed from list of tasks.
      */
     public DeleteCommand(String delete) {
-        this.delete = delete;
+        this.toDelete = delete;
     }
 
     @Override
     public String execute(TaskList tasks, UI ui, Storage storage) throws IOException {
         try {
-            String command = this.delete.replaceAll("[^\\d.]", "");
+            String command = this.toDelete.replaceAll("[^\\d.]", "");
             int i = Integer.parseInt(command.trim());
             Task deletedTask = tasks.taskLs.get(i - 1);
             int numTask = tasks.taskLs.size();
@@ -30,7 +30,7 @@ public class DeleteCommand extends Command {
             printGui = printGui + "Now you have " + numTask + " tasks in the list.";
 
             //delete task from list of tasks
-            tasks.delete(this.delete);
+            tasks.delete(this.toDelete);
 
             //write to file
             String s = storage.genList(tasks.getTaskLs());

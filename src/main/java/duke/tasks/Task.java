@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents a Task that is created upon user input.
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected LocalDate date;
@@ -61,13 +61,12 @@ public class Task {
         return this.description;
     }
 
+
     /**
      * Prints out the error message when the input is invalid.
-     * @param error invalid input from user.
      */
-    public static String invalidInput(String error) {
-        String errorMsg = "Error: " + error;
-        return errorMsg;
+    public static String invalidInput() {
+        return null;
     }
 
     @Override
