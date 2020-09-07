@@ -1,9 +1,12 @@
 package duke.tasks;
 
+import duke.exception.DukeException;
+
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 /** A generic class from which all task-related classes will inherit from. */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
 
@@ -36,8 +39,8 @@ public class Task {
         return this.description;
     }
 
-    public LocalDate getDate() {
-        return null;
+    public void updateDescription(String description) {
+        this.description = description;
     }
 
     /**
@@ -53,4 +56,12 @@ public class Task {
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.description;
     }
+
+    public abstract void updateDate(LocalDate date) throws DukeException;
+
+    public abstract void updateTime(LocalTime time) throws DukeException;
+
+    public abstract void updateTime(LocalTime startTime, LocalTime endTime) throws DukeException;
+
+    public abstract LocalDate getDate();
 }

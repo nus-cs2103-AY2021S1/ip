@@ -30,13 +30,9 @@ public class AddCommand extends Command {
      * @param storage The Storage to add the task to.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        try {
-            taskList.add(this.task);
-            ui.saveAddMessage(this.task, taskList.size());
-            storage.add(this.task);
-        } catch (IOException e) {
-            System.out.println("Something went wrong!");
-        }
+    public void execute(TaskList taskList, Ui ui, Storage storage) throws IOException {
+        taskList.add(this.task);
+        ui.saveAddMessage(this.task, taskList.size());
+        storage.add(this.task);
     }
 }

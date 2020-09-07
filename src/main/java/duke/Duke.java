@@ -44,7 +44,9 @@ public class Duke {
             Command command = Parser.parse(input);
             command.execute(taskList, ui, storage);
         } catch (DukeException e) {
-            ui.saveErrorMessage("Sorry, I don't understand that!");
+            ui.saveErrorMessage(e.getMessage());
+        } catch (IOException e) {
+            ui.saveErrorMessage("Sorry, something went wrong");
         }
     }
 

@@ -1,8 +1,11 @@
 package duke.command;
 
+import duke.exception.DukeException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
+
+import java.io.IOException;
 
 /** This abstract class is a generic class which all other command classes inherit from. */
 public abstract class Command {
@@ -14,5 +17,5 @@ public abstract class Command {
      * @param ui The Ui that saves messages to be sent to the user.
      * @param storage The Storage object to make changes to or to get tasks from.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException, IOException;
 }

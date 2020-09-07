@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import duke.exception.DukeException;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -69,5 +71,22 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + (startTime != null ? " " + startTime.format(DateTimeFormatter.ofPattern("hh:mm a")) : "")
                 + (endTime != null ? "-" + endTime.format(DateTimeFormatter.ofPattern("hh:mm a")) : "") + ")";
+    }
+
+    @Override
+    public void updateDate(LocalDate date) {
+        this.date = date;
+    }
+
+    @Override
+    public void updateTime(LocalTime time) {
+        this.startTime = time;
+        this.endTime = null;
+    }
+
+    @Override
+    public void updateTime(LocalTime startTime, LocalTime endTime) {
+        this.startTime = startTime;
+        this.endTime = endTime;
     }
 }

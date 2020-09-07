@@ -12,15 +12,14 @@ import java.util.List;
 public class TaskList {
     private List<Task> list;
 
-    /**
-     * Constructs an empty TaskList.
-     */
+    /** Constructs an empty TaskList. */
     public TaskList() {
         this.list = new ArrayList<>();
     }
 
     /**
      * Constructs a TaskList from the given list.
+     *
      * @param list The List to be associated with the TaskList.
      */
     public TaskList(List<Task> list) {
@@ -37,6 +36,7 @@ public class TaskList {
 
     /**
      * Marks the i-th task (index i - 1) as done.
+     *
      * @param i The index (starting from 1) of the task to be marked as done in the TaskList.
      * @return The task marked as done.
      */
@@ -47,6 +47,7 @@ public class TaskList {
 
     /**
      * Adds a task to the TaskList.
+     *
      * @param task The task to be added.
      */
     public void add(Task task) {
@@ -55,6 +56,7 @@ public class TaskList {
 
     /**
      * Deletes the i-th task (index i - 1) from the TaskList.
+     *
      * @param i The index (starting from 1) of the task to be deleted.
      * @return The deleted task.
      */
@@ -63,6 +65,7 @@ public class TaskList {
     }
 
     /**
+     *
      * @return The number of tasks in the TaskList.
      */
     public int size() {

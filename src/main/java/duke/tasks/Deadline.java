@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import duke.exception.DukeException;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
@@ -52,5 +54,20 @@ public class Deadline extends Task {
     public String toString() {
         return "[D]" + super.toString() + " (by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
                 + (time != null ? " " + time.format(DateTimeFormatter.ofPattern("hh:mm a")) : "") + ")";
+    }
+
+    @Override
+    public void updateDate(LocalDate date) {
+        this.date = date;
+    }
+
+    @Override
+    public void updateTime(LocalTime time) {
+        this.time = time;
+    }
+
+    @Override
+    public void updateTime(LocalTime startTime, LocalTime endTime) throws DukeException {
+        throw new DukeException("Deadlines don't have end times!");
     }
 }

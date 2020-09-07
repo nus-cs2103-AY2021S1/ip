@@ -1,12 +1,6 @@
 package duke.parser;
 
-import duke.command.AddCommand;
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.exception.DukeException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
@@ -48,9 +42,56 @@ public class Parser {
             return parseDeadlineCommand(command);
         } else if (command.startsWith("event ")) {
             return parseEventCommand(command);
+        } else if (command.startsWith("update time")) {
+            return parseUpdateTimeCommand(command);
+        } else if (command.startsWith("update date")) {
+            return parseUpdateDateCommand(command);
+        } else if (command.startsWith("update desc")) {
+            return parseUpdateDescCommand(command);
         } else {
             throw new DukeException("Sorry I don't understand!");
         }
+    }
+
+    public static UpdateCommand parseUpdateTimeCommand(String command) {
+        String[] commandSplits = command.split(" ");
+        int taskToUpdate = Integer.valueOf(commandSplits[2]);
+
+        String timeString = commandSplits[3];
+        String[] timeSplits = timeString.split("-");
+        if (timeSplits.length == 2) {
+            LocalTime startTime = LocalTime.parse(timeSplits[0]);
+            LocalTime endTime = LocalTime.parse(timeSplits[1]);
+            return new UpdateCommand(taskToUpdate, startTime, endTime);
+        } else {
+            LocalTime time = LocalTime.parse(timeString);
+            return new UpdateCommand(taskToUpdate, time);
+        }
+    }
+
+    public static UpdateCommand parseUpdateDateCommand(String command) {
+        String[] splits = command.split(" ");
+        int taskToUpdate = Integer.valueOf(splits[2]);
+        String dateString = splits[3];
+        LocalDate date = LocalDate.parse(dateString);
+        return new UpdateCommand(taskToUpdate, date);
+    }
+
+    public static UpdateCommand parseUpdateDescCommand(String command) throws DukeException {
+        StringBuilder sb = new StringBuilder();
+        int i = 12;
+        while(Character.isDigit(command.charAt(i))) {
+            sb.append(command.charAt(i));
+            i++;
+        }
+        int taskToUpdate = Integer.valueOf(sb.toString());
+
+        if (command.charAt(i) != ' ') {
+            throw new DukeException("Invalid input: please leave a space");
+        }
+
+        String desc = command.substring(i + 1);
+        return new UpdateCommand(taskToUpdate, desc);
     }
 
     /**

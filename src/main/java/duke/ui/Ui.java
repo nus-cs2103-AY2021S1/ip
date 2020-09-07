@@ -98,6 +98,10 @@ public class Ui {
                 + "Now you have " + size + " tasks in the list";
     }
 
+    public void saveUpdateMessage(Task task, int taskIndex) {
+        this.message = "Got it. I've updated task " + taskIndex + " to:\n\t" + task;
+    }
+
     /**
      * Saves error messages.
      *
