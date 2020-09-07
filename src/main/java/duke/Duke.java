@@ -23,6 +23,7 @@ public class Duke {
      * with empty list of tasks if file lookup is unsuccessful.
      */
     public Duke() {
+        assert filepath instanceof Path : "Filepath for data file must be defined";
         storage = new Storage(filepath);
         try {
             taskList = new TaskList(storage.getListOfTasks());

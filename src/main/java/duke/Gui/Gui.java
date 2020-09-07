@@ -20,6 +20,7 @@ public class Gui {
     public ArrayList<String> showBye() {
         ArrayList<String> responseList = new ArrayList<>();
         responseList.add("Bye!!! Hope to see you again real soon.");
+        assert responseList instanceof ArrayList : "Return type of the result of this method should be an ArrayList";
 
         return responseList;
     }
@@ -27,6 +28,7 @@ public class Gui {
     public ArrayList<String> showDone() {
         ArrayList<String> responseList = new ArrayList<>();
         responseList.add("The following task has been marked done: ");
+        assert responseList instanceof ArrayList : "Return type of the result of this method should be an ArrayList";
 
         return responseList;
     }
@@ -63,12 +65,13 @@ public class Gui {
      * @param tasksLeft integer value of tasks remaining in the list of tasks.
      */
     public ArrayList<String> addMessage(Task task, int tasksLeft) {
-        ArrayList<String> reponseList = new ArrayList<>();
+        ArrayList<String> responseList = new ArrayList<>();
 
-        reponseList.add("Got it, the following task has been added:\n" + INDENT + INDENT + task +
+        responseList.add("Got it, the following task has been added:\n" + INDENT + INDENT + task +
                 "\n" + INDENT + this.taskLeftMessage(tasksLeft));
+        assert responseList instanceof ArrayList : "Return type of the result of this method should be an ArrayList";
 
-        return reponseList;
+        return responseList;
     }
 
     /**
@@ -87,6 +90,8 @@ public class Gui {
                 responseList.add(i + "." + listOfTasksFound.get(i - 1));
             }
         }
+        assert responseList instanceof ArrayList : "Return type of the result of this method should be an ArrayList";
+
         return responseList;
     }
 
@@ -99,6 +104,8 @@ public class Gui {
         ArrayList<String> responseList = new ArrayList<>();
         responseList.add ("Noted. I have removed this task:\n" + INDENT + INDENT + task + "\n" +
                 this.taskLeftMessage(tasksLeft));
+        assert responseList instanceof ArrayList : "Return type of the result of this method should be an ArrayList";
+
         return responseList;
     }
 
@@ -113,6 +120,8 @@ public class Gui {
         if (tasksLeft == 0) {
             responseList.add("No tasks found. Add a task now!");
         }
+        assert responseList instanceof ArrayList : "Return type of the result of this method should be an ArrayList";
+
         return responseList;
     }
 
