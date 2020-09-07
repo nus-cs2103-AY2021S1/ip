@@ -5,9 +5,10 @@ import java.io.Serializable;
 /**
  * Represents a serializable task.
  */
-public class Task implements Serializable {
+public class Task implements Serializable, Taggable {
     private final String taskDescription;
     private boolean isDone = false;
+    private Tag tag;
     
     /**
      * Constructs a new Task instance containing a task description.
@@ -36,6 +37,14 @@ public class Task implements Serializable {
      */
     public boolean includesKeyword(String keyword) {
         return taskDescription.contains(keyword);
+    }
+    
+    public void addTag(Tag tag) {
+        this.tag = tag;
+    }
+    
+    Tag getTag() {
+        return tag;
     }
     
     /**
