@@ -112,4 +112,34 @@ public class TaskList {
         }
         return filteredList;
     }
+
+    /**
+     * Returns all the current Deadline tasks in TaskList.
+     *
+     * @return ArrayList containing all the Deadline Tasks.
+     */
+    public ArrayList<Deadline> getAllDeadlineTasks() {
+        ArrayList<Deadline> deadlineTasks = new ArrayList<>();
+        for (Task t1 : tasks) {
+            if (t1.getType().equals("D")) {
+                deadlineTasks.add((Deadline) t1);
+            }
+        }
+        return deadlineTasks;
+    }
+
+    /**
+     * Returns all the current Event tasks in TaskList.
+     *
+     * @return ArrayList containing all the Event Tasks.
+     */
+    public ArrayList<Event> getAllEventTasks() {
+        ArrayList<Event> eventTasks = new ArrayList<>();
+        for (Task t1 : tasks) {
+            if (t1.getType().equals("E")) {
+                eventTasks.add((Event) t1);
+            }
+        }
+        return eventTasks;
+    }
 }

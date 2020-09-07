@@ -12,6 +12,8 @@ import duckie.command.DeleteCommand;
 import duckie.command.DoneCommand;
 import duckie.command.FindCommand;
 import duckie.command.ListCommand;
+import duckie.command.SortDeadlineCommand;
+import duckie.command.SortEventCommand;
 import duckie.exception.DuckieException;
 import duckie.exception.DuckieInvalidCommandException;
 import duckie.exception.DuckieNoNumberInputException;
@@ -75,6 +77,14 @@ public class Parser {
             } else if (firstWord.equals("find") && !isAWord(input)) {
                 String keyword = parseFind(input);
                 return new FindCommand(keyword);
+            } else if (firstWord.equals("sort") && !isAWord(input)) {
+                if (input.contains("deadline")) {
+                    return new SortDeadlineCommand();
+                } else if (input.contains("event")) {
+                    return new SortEventCommand();
+                } else {
+                    throw new DuckieInvalidCommandException();
+                }
             } else {
                 throw new DuckieInvalidCommandException();
             }

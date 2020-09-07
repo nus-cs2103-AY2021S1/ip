@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import duckie.Storage;
 import duckie.exception.DuckieException;
+import duckie.exception.DuckieNoListException;
 import duckie.exception.DuckieNoMatchingTasksException;
 import duckie.task.Task;
 import duckie.task.TaskList;
@@ -35,6 +36,10 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DuckieException {
+        if (tasks.getTaskList().size() == 0) {
+            throw new DuckieNoListException();
+        }
+
         assert keyword instanceof String : "Keyword is not in the right data type";
         ArrayList<Task> filteredList = tasks.filterList(keyword);
         if (filteredList.size() == 0) {

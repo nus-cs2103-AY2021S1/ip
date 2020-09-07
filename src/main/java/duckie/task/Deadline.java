@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * A task type in charge of task containing deadline date.
  */
-public class Deadline extends Task {
+public class Deadline extends Task implements Comparable<Deadline> {
     protected static final DateTimeFormatter DT_FORMATTER = DateTimeFormatter.ofPattern("E, MMM dd yyyy");
     protected LocalDate deadline;
 
@@ -49,5 +49,17 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + DT_FORMATTER.format(this.deadline) + ")";
+    }
+
+    /**
+     * Compare the date of two deadline tasks.
+     *
+     * @param task2 Task to be compared with.
+     * @return 1 if current task is later, -1 if current task is earlier and
+     * 0 if current task and task2 have the same dates.
+     */
+    @Override
+    public int compareTo(Deadline task2) {
+        return this.deadline.compareTo(task2.deadline);
     }
 }

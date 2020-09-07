@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * A task type in charge of task containing Event date and time.
  */
-public class Event extends Task {
+public class Event extends Task implements Comparable<Event> {
     protected static final DateTimeFormatter DT_FORMATTER = DateTimeFormatter.ofPattern("E, MMM dd yyyy hh:mm a");
     protected LocalDateTime dateTime;
 
@@ -50,5 +50,17 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + DT_FORMATTER.format(this.dateTime) + ")";
+    }
+
+    /**
+     * Compare the date of two event tasks.
+     *
+     * @param event2 Task to be compared with.
+     * @return 1 if current task is later, -1 if current task is earlier and
+     * 0 if current task and task2 have the same dates.
+     */
+    @Override
+    public int compareTo(Event event2) {
+        return this.dateTime.compareTo(event2.dateTime);
     }
 }

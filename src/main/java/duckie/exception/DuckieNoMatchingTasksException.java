@@ -10,4 +10,12 @@ public class DuckieNoMatchingTasksException extends DuckieException {
     public DuckieNoMatchingTasksException() {
         super("Duckie can't find any matching tasks!");
     }
+
+    /**
+     * Instantiates DuckieNoMatchingTasksException with slightly customised message.
+     */
+    public DuckieNoMatchingTasksException(String message) {
+        super("Duckie can't find any matching " + message + " tasks!");
+    }
+
 }
