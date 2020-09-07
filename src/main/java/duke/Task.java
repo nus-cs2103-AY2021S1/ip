@@ -1,5 +1,8 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
+
 /**
  * This is an abstract class that represents a Task with description and a status.
  * The class has common functionality that is inherited.
@@ -52,4 +55,6 @@ public abstract class Task {
      * @return returns string representation of the task type
      */
     public abstract String getTaskType();
+
+    public abstract Optional<LocalDateTime> getLocalDateTime();
 }
