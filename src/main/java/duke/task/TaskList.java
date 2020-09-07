@@ -40,7 +40,7 @@ public class TaskList {
             throw new DukeException(message);
         }
         Task removedTask = null;
-        for (int i = 1; i < taskNumber; i++) {
+        for (int i = 0; i < taskNumber; i++) {
             removedTask = taskPriority.poll();
         }
         this.tasklist.remove(removedTask);
@@ -61,10 +61,11 @@ public class TaskList {
             throw new DukeException(message);
         }
         Task updatedTask = null;
-        for (int i = 1; i < taskNumber; i++) {
+        for (int i = 0; i < taskNumber; i++) {
             updatedTask = taskPriority.poll();
         }
         updatedTask.setDone();
+        this.taskPriority.clear();
         refillTaskPriorityQueue();
         return updatedTask.toString();
     }

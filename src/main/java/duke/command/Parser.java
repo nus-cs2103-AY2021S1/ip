@@ -140,7 +140,8 @@ public class Parser {
                     Deadline deadline = Deadline.createDeadline(secondarr[0], date);
                     taskObj = deadline;
                 } catch (DateTimeParseException e) {
-                    String message = "That does not look like a proper Date. Please input MMM d yyyy HH:mm";
+                    String message = "That does not look like a proper Date. " +
+                            "Please input MMM d yyyy HH:mm eg. Aug 25 2020 15:00";
                     throw new DukeException(message);
                 }
             }
@@ -156,7 +157,8 @@ public class Parser {
                     Event event = Event.createEvent(secondarr[0], date);
                     taskObj = event;
                 } catch (DateTimeParseException e) {
-                    String message = "That does not look like a proper Date. Please input MMM d yyyy HH:mm";
+                    String message = "That does not look like a proper Date. " +
+                            "Please input MMM d yyyy HH:mm eg. Aug 25 2020 15:00";
                     throw new DukeException(message);
                 }
             }
