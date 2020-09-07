@@ -28,6 +28,9 @@ public class AddCommand extends Command {
         super(false);
         this.input = input;
         this.actionType = actionType;
+        assert actionType == ActionType.ADD_TODO ||
+                actionType == ActionType.ADD_DEADLINE ||
+                actionType == ActionType.ADD_EVENT;
     }
 
     /**
