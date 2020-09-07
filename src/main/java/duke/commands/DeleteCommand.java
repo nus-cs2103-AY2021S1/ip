@@ -27,6 +27,7 @@ public class DeleteCommand extends Command {
      * @param storage The storage system that saves the taskList.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
+        assert num > taskList.getTasks().size() : "Oh no! There is an error with the DeleteCommand numbering logic.";
         dialog = ui.formatDeleteTask(taskList.getTasks(), num);
         taskList.deleteTask(num);
         storage.saveTaskList(taskList.getTasks());

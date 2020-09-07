@@ -73,6 +73,7 @@ public class Parser {
         } else if (command.equals("delete")) {
             return new DeleteCommand(num - 1);
         } else {
+            assert false : "Oh no! This invalid Duke Command scenario should be handled earlier.";
             throw new InvalidDukeCommandException();
         }
     }
@@ -100,6 +101,7 @@ public class Parser {
             String date = argumentDescriptionAndDate[1];
             return new AddCommand(new Event(description, LocalDate.parse(date, FORMATTER_INPUT)));
         } else {
+            assert false : "Oh no! This invalid Duke Command scenario should be handled earlier.";
             throw new InvalidDukeCommandException();
         }
     }
