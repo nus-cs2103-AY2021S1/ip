@@ -75,7 +75,6 @@ public class Storage {
             String curr = readSc.nextLine();
             char taskType = curr.charAt(1);
             char taskState = curr.charAt(4);
-            assert taskType != null : "Command should not be null";
             switch (taskType) {
             case 'T':
                 try {
