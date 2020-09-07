@@ -1,6 +1,9 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Represents the task list.
@@ -86,12 +89,12 @@ public class TaskList {
      * @return list of tasks containing the search term.
      */
     public ArrayList<Task> find(String searchTerm) {
-        ArrayList<Task> results = new ArrayList<>();
-        for (Task task : tasks) {
-            if (task.getDescription().contains(searchTerm)) {
-                results.add(task);
-            }
-        }
-        return results;
+        Predicate<Task> match = task -> task.getDescription().contains(searchTerm);
+        List<Task> results = new ArrayList<>(tasks)
+            .stream()
+            .filter(match)
+            .collect(Collectors.toList());
+        ArrayList<Task> searchResults = new ArrayList<>(results);
+        return searchResults;
     }
 }
