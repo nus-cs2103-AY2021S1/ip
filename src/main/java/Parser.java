@@ -277,7 +277,7 @@ public class Parser {
      *
      * It then executes the commands.
      *
-     * @return a String representation of Duke output.
+     * @return a String representation of Duke output based on user commands.
      *
      * @throws DukeException when command is wrong, unidentifiable or missing.
      */
