@@ -25,10 +25,12 @@ public class DateTimeHandler {
             STANDARD_2400_FORMAT_STRING);
 
     /**
-     * Parses a string be converted into a single LocalDateTime object.
-     * @param dateTime string to be converted into LocalDateTime object
-     * @return LocalDateTime object from the details given
-     * @throws DukeException if the format of the datetime string is invalid
+     * Returns a LocalDateTime object from the parsed string.
+     * This method handles invalid string formats as well.
+     *
+     * @param dateTime string to be converted into LocalDateTime object.
+     * @return LocalDateTime object from the details given.
+     * @throws DukeException if the format of the datetime string is invalid.
      */
     public static LocalDateTime parseDateTime(String dateTime) throws DukeException {
         try {
@@ -40,25 +42,29 @@ public class DateTimeHandler {
     }
 
     /**
-     * Parses a string be converted into a pair of start and end timings.
+     * Returns a pair of LocalDateTime objects from the parsed event timings string.
+     * This method handles invalid string formats as well.
      * Besides invalid format, this method checks that the latter timing is later than the earlier timing.
-     * @param eventTiming string to be converted into a pair of LocalDateTime objects
-     * @return pair of LocalDateTime objects from the details given
-     * @throws DukeException if the format of the event-timing string is invalid or end timing later than start
+     *
+     * @param eventTiming string to be converted into a pair of LocalDateTime objects.
+     * @return pair of LocalDateTime objects from the details given.
+     * @throws DukeException if the format of the event-timing string is invalid or end timing later than start.
      */
     public static Pair<LocalDateTime, LocalDateTime> parseEventTimings(String eventTiming) throws DukeException {
         int acceptableLength1 = STANDARD_DATETIME_FORMAT_STRING.length() + 1 + STANDARD_2400_FORMAT_STRING.length();
         int acceptableLength2 = STANDARD_DATETIME_FORMAT_STRING.length() * 2 + 1;
+
         if (eventTiming.length() != acceptableLength1 && eventTiming.length() != acceptableLength2) {
-            throw new DukeException(eventTiming + " is not a valid event timing. Please use either\n"
-                    + STANDARD_DATETIME_FORMAT_STRING + "-" + STANDARD_DATETIME_FORMAT_STRING + " (24hr)\n"
-                    + STANDARD_DATETIME_FORMAT_STRING + "-" + STANDARD_2400_FORMAT_STRING + " (24hr)");
+            throw new DukeException(getEventStringFormatError(eventTiming));
         }
+
         String firstTiming = eventTiming.substring(0, STANDARD_DATETIME_FORMAT_STRING.length());
         String secondTiming = eventTiming.substring(STANDARD_DATETIME_FORMAT_STRING.length() + 1);
+
         try {
             LocalDateTime dateTime1 = LocalDateTime.parse(firstTiming, STANDARD_DATETIME_FORMAT);
             LocalDateTime dateTime2;
+
             if (secondTiming.length() == STANDARD_DATETIME_FORMAT_STRING.length()) {
                 dateTime2 = LocalDateTime.parse(secondTiming, STANDARD_DATETIME_FORMAT);
             } else {
@@ -69,15 +75,23 @@ public class DateTimeHandler {
             if (dateTime2.compareTo(dateTime1) < 0) {
                 throw new DukeException("End timing must be later than start timing!");
             }
+
             return Pair.of(dateTime1, dateTime2);
 
         } catch (DateTimeParseException e) {
-            throw new DukeException(eventTiming + " is not a valid event timing. Please use either\n"
-                    + STANDARD_DATETIME_FORMAT_STRING + "-" + STANDARD_DATETIME_FORMAT_STRING + " (24hr)\n"
-                    + STANDARD_DATETIME_FORMAT_STRING + "-" + STANDARD_2400_FORMAT_STRING + " (24hr)");
+            throw new DukeException(getEventStringFormatError(eventTiming));
 
         }
     }
+
+
+    /** Returns a formatted error message for the parseEventTimings method */
+    private static String getEventStringFormatError(String eventTiming) {
+        return eventTiming + " is not a valid event timing. Please use either\n"
+                + STANDARD_DATETIME_FORMAT_STRING + "-" + STANDARD_DATETIME_FORMAT_STRING + " (24hr)\n"
+                + STANDARD_DATETIME_FORMAT_STRING + "-" + STANDARD_2400_FORMAT_STRING + " (24hr)";
+    }
+
 
 
 
