@@ -2,6 +2,7 @@ package tasks;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Represents the List of all the tasks that logic.Duke
@@ -44,13 +45,9 @@ public class TaskList {
      * @return List of tasks that matches the keyword.
      */
     public List<Task> findTasks(String keyword) {
-        List<Task> newList = new ArrayList<>();
-        for (int m = 0; m < taskList.size(); m++) {
-            if (taskList.get(m).taskDesc.contains(keyword)) {
-                newList.add(taskList.get(m));
-            }
-        }
-        return newList;
+        List<Task> filteredTasks = taskList.stream().filter(task -> task.taskDesc.contains(keyword)).collect(
+                Collectors.toList());
+        return filteredTasks;
     }
 
     public void addTask(Task task) {
