@@ -67,32 +67,29 @@ public class Storage {
         File savedFolder = new File(folderPath);
         File savedFile = new File(filePath);
 
-        if (savedFolder.exists()) {
-            if (savedFile.exists()) {
-                try {
-                    BufferedReader bufferedReader = new BufferedReader(new FileReader(savedFile));
-                    String storedTask = "";
-                    ArrayList<String> listOfTasks = new ArrayList<>();
-
-                    while ((storedTask = bufferedReader.readLine()) != null) {
-                        listOfTasks.add(storedTask);
-                    }
-                    bufferedReader.close();
-                    return listOfTasks;
-
-                } catch (FileNotFoundException e) {
-                    throw new DukeException("   File not found!");
-                } catch (IOException e) {
-                    throw new DukeException("   IOException encountered in loading data file.");
-                }
-
-            } else {
-                this.makeFile();
-                return new ArrayList<String>();
-            }
-        } else {
+        if (!savedFolder.exists()) {
             this.makeFolder();
-            return new ArrayList<String>();
+            return new ArrayList<>();
+        }
+        if (!savedFile.exists()) {
+            this.makeFile();
+            return new ArrayList<>();
+        }
+        try {
+            BufferedReader bufferedReader = new BufferedReader(new FileReader(savedFile));
+            String storedTask = "";
+            ArrayList<String> listOfTasks = new ArrayList<>();
+
+            while ((storedTask = bufferedReader.readLine()) != null) {
+                listOfTasks.add(storedTask);
+            }
+            bufferedReader.close();
+            return listOfTasks;
+
+        } catch (FileNotFoundException e) {
+            throw new DukeException("   File not found!");
+        } catch (IOException e) {
+            throw new DukeException("   IOException encountered in loading data file.");
         }
     }
 
