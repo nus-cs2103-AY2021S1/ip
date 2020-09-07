@@ -1,16 +1,20 @@
 package chatbot.parser;
 
 import chatbot.commands.*;
+
 import chatbot.common.Message;
 import chatbot.common.Type;
+
 import chatbot.data.Deadline;
 import chatbot.data.Event;
 import chatbot.data.Task;
 import chatbot.data.Todo;
+
 import chatbot.exception.ChatbotException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
 import java.util.function.Predicate;
 
 /**
@@ -30,11 +34,11 @@ public class Parser {
         Type type;
         Command invalidCommand = new InvalidCommand();
 
-        // parse out the type of command
+        // extract type of command
         String text = fullCmd.trim();
         String typeStr = text.split(" ")[0].trim();
 
-        // parse out the arguments of the command
+        // extract arguments from command
         int index = typeStr.length();
         String arguments = text.substring(index).trim();
 
@@ -45,26 +49,26 @@ public class Parser {
         }
 
         switch (type) {
-            case BYE:
-                return new ExitCommand();
-            case DATE:
-                return parseFindByDateCommand(arguments);
-            case DELETE:
-                return parseDeleteCommand(arguments);
-            case DEADLINE:
-                return parseAddDeadlineCommand(arguments);
-            case DONE:
-                return parseDoneCommand(arguments);
-            case EVENT:
-                return parseAddEventCommand(arguments);
-            case FIND:
-                return parseFindByKeywordCommand(arguments);
-            case LIST:
-                return new ShowAllCommand();
-            case TODO:
-                return parseAddTodoCommand(arguments);
-            default:
-                return invalidCommand;
+        case BYE:
+            return new ExitCommand();
+        case DATE:
+            return parseFindByDateCommand(arguments);
+        case DELETE:
+            return parseDeleteCommand(arguments);
+        case DEADLINE:
+            return parseAddDeadlineCommand(arguments);
+        case DONE:
+            return parseDoneCommand(arguments);
+        case EVENT:
+            return parseAddEventCommand(arguments);
+        case FIND:
+            return parseFindByKeywordCommand(arguments);
+        case LIST:
+            return new ShowAllCommand();
+        case TODO:
+            return parseAddTodoCommand(arguments);
+        default:
+            return invalidCommand;
         }
     }
 

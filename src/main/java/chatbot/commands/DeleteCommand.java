@@ -28,10 +28,9 @@ public class DeleteCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) throws ChatbotException {
 
         Task deletedTask = taskList.removeTask(index);
-        String response = ui.deleteSuccess(deletedTask, taskList.count());
 
         assert storage.saveTasks(taskList.getTasks()) : "Save tasks supposed to return true.";
 
-        return response;
+        return ui.deleteSuccess(deletedTask, taskList.count());
     }
 }

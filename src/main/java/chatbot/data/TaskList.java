@@ -48,16 +48,9 @@ public class TaskList {
     /**
      * Adds a new task to the list of tasks.
      * @param task new task to be added
-     * @return true if a non-null task object is given
      */
-    public boolean addTask(Task task) {
-
-        if (task == null) {
-            return false;
-        }
-
+    public void addTask(Task task) {
         tasks.add(task);
-        return true;
     }
 
     /**
@@ -79,7 +72,7 @@ public class TaskList {
     }
 
     /**
-     * Mark a task on the list as done.
+     * Marks a task on the list as done.
      * @param index index to locate the task
      * @return task to be marked as done
      * @throws ChatbotException if given index is out-of-bounds
