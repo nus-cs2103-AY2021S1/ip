@@ -26,15 +26,19 @@ public class Parser {
     static Command callCommand(String command, String[] parsedCommand) throws DukeException {
         if (command.equals(UserCommand.BYE.getCommand())) {
             return new ExitCommand(parsedCommand);
-        } else if (command.equals(UserCommand.LIST.getCommand())) {
+        } else if (command.equals(UserCommand.LIST.getCommand())
+                || command.equals(UserCommand.LS.getCommand())) {
             return new ListCommand(parsedCommand);
         } else if (command.equals(UserCommand.DONE.getCommand())) {
             return new DoneCommand(parsedCommand);
-        } else if (command.equals(UserCommand.TODO.getCommand())) {
+        } else if (command.equals(UserCommand.TODO.getCommand())
+                || command.equals(UserCommand.T.getCommand())) {
             return new AddToDoCommand(parsedCommand);
-        } else if (command.equals(UserCommand.DEADLINE.getCommand())) {
+        } else if (command.equals(UserCommand.DEADLINE.getCommand())
+                || command.equals(UserCommand.D.getCommand())) {
             return new AddDeadlineCommand(parsedCommand);
-        } else if (command.equals(UserCommand.EVENT.getCommand())) {
+        } else if (command.equals(UserCommand.EVENT.getCommand())
+                || command.equals(UserCommand.E.getCommand())) {
             return new AddEventCommand(parsedCommand);
         } else if (command.equals(UserCommand.DELETE.getCommand())) {
             return new DeleteCommand(parsedCommand);
