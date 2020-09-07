@@ -15,6 +15,7 @@ import duckie.command.ListCommand;
 import duckie.exception.DuckieException;
 import duckie.exception.DuckieInsufficientInfoException;
 import duckie.exception.DuckieInvalidCommandException;
+import duckie.exception.DuckieNoNumberInputException;
 import duckie.task.Deadline;
 import duckie.task.Event;
 import duckie.task.Task;
@@ -32,7 +33,7 @@ public class Parser {
      * Parse the input Command to direct Duckie on what actions to carry out.
      *
      * @param fullCommand Input string command.
-     * @return Specific Command.
+     * @return Specific Command to execute the instructions.
      * @throws DuckieException All the possible DuckieExceptions.
      */
     public static Command parse(String fullCommand) throws DuckieException {
@@ -49,7 +50,7 @@ public class Parser {
             try {
                 Integer.parseInt(input.split(" ")[1]);
             } catch (NumberFormatException e) {
-                throw new DuckieException("You have to input a number after 'done'!");
+                throw new DuckieNoNumberInputException();
             }
 
             int ind = Integer.parseInt(input.split(" ")[1]);
@@ -68,8 +69,7 @@ public class Parser {
                 try {
                     Integer.parseInt(input.split(" ")[1]);
                 } catch (NumberFormatException e) {
-                    throw new DuckieException("You have to input a number after 'delete'!\n"
-                            + "\t" + "If you want to delete all, input 'delete all'");
+                    throw new DuckieNoNumberInputException("Input 'delete all' if you want to clear all tasks.");
                 }
                 int ind = Integer.parseInt(description);
                 return new DeleteCommand(ind);
