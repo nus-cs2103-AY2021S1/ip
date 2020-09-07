@@ -13,7 +13,6 @@ import duckie.command.DoneCommand;
 import duckie.command.FindCommand;
 import duckie.command.ListCommand;
 import duckie.exception.DuckieException;
-import duckie.exception.DuckieInsufficientInfoException;
 import duckie.exception.DuckieInvalidCommandException;
 import duckie.exception.DuckieNoNumberInputException;
 import duckie.task.Deadline;
@@ -45,14 +44,10 @@ public class Parser {
         } else if (firstWord.equals("list")) {
             return new ListCommand();
         } else {
-            if (isAWord(input)) {
-                throw new DuckieInsufficientInfoException();
-            }
-
-            if (firstWord.equals("done")) {
+            if (firstWord.equals("done") && !isAWord(input)) {
                 int ind = parseDone(input);
                 return new DoneCommand(ind);
-            } else if (firstWord.equals("delete")) {
+            } else if (firstWord.equals("delete") && !isAWord(input)) {
                 String description = input.split(" ")[1].strip();
                 if (description.equals("all")) {
                     return new DeleteAllCommand();
@@ -60,24 +55,24 @@ public class Parser {
                     int ind = parseDelete(input, description);
                     return new DeleteCommand(ind);
                 }
-            } else if (firstWord.equals("todo")) {
+            } else if (firstWord.equals("todo") && !isAWord(input)) {
                 Task t1 = parseTodo(input);
                 return new AddCommand(t1);
-            } else if (firstWord.equals("deadline")) {
+            } else if (firstWord.equals("deadline") && !isAWord(input)) {
                 if (input.contains("/")) {
                     Task t1 = parseDeadline(input);
                     return new AddCommand(t1);
                 } else {
                     throw new DuckieException("Please use '/by' to indicate the date input.");
                 }
-            } else if (firstWord.equals("event")) {
+            } else if (firstWord.equals("event") && !isAWord(input)) {
                 if (input.contains("/")) {
                     Task t1 = parseEvent(input);
                     return new AddCommand(t1);
                 } else {
                     throw new DuckieException("Please use '/at' to indicate the date input.");
                 }
-            } else if (firstWord.equals("find")) {
+            } else if (firstWord.equals("find") && !isAWord(input)) {
                 String keyword = parseFind(input);
                 return new FindCommand(keyword);
             } else {
