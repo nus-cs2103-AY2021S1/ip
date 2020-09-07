@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.format.DateTimeParseException;
 
 import duke.dukeexception.DukeKeywordMissingException;
+import duke.dukeexception.DukeMissingCommandNumberException;
 import duke.dukeexception.DukeTaskNonExistException;
 import duke.dukeexception.DukeUnknownInputException;
 import duke.dukeexception.EmptyDescriptionException;
@@ -86,20 +87,13 @@ public class Parser {
                 taskIndex = getTaskIndex(response);
                 return ui.performDone(taskIndex);
             case TODO:
-                checkEmptyDescription(response, "todo");
-                return ui.performAddTodo(response.substring("todo".length()));
+                return processTodo(response);
             case DEADLINE:
-                checkEmptyDescription(response, "deadline");
-                checkMissingKeyword(response, "/by ");
-                date = getDate(response, "/by ");
-                response = getResponse(response, "deadline ", "/by ");
-                return ui.performAddDeadline(response, date);
+                return processDeadline(response);
             case EVENT:
-                checkEmptyDescription(response, "event");
-                checkMissingKeyword(response, "/at ");
-                date = getDate(response, "/at ");
-                response = getResponse(response, "event ", "/at ");
-                return ui.performAddEvent(response, date);
+                return processEvent(response);
+            case UPDATE:
+                return processUpdate(response);
             case UNKNOWN:
                 throw new DukeUnknownInputException("error");
             default:
@@ -107,10 +101,89 @@ public class Parser {
                 return null;
             }
         } catch (IOException | DukeTaskNonExistException | EmptyDescriptionException
-                | DukeKeywordMissingException | DukeUnknownInputException e) {
+                | DukeKeywordMissingException | DukeUnknownInputException
+                | DukeMissingCommandNumberException e) {
             return ui.performShowError(e);
         } catch (DateTimeParseException e) {
             return "☹ OOPS!!! Ensure that the datetime input is in the format YYYY-MM-DD HH:MM";
+        }
+    }
+
+    private String processUpdate(String response) throws EmptyDescriptionException, DukeKeywordMissingException, DukeMissingCommandNumberException, IOException {
+        int taskIndex;
+        checkEmptyDescription(response, "update");
+        checkMissingKeyword(response, "/to ");
+        taskIndex = getTaskIndex(response);
+        response = response.substring(response.indexOf("/to ") + "/to ".length());
+        Command taskType = getTaskType(response);
+        return processUpdatedTask(taskIndex, response, taskType);
+    }
+
+    private String processUpdatedTask(int taskIndex, String response, Command taskType) throws
+            DukeKeywordMissingException, EmptyDescriptionException, IOException {
+        String date;
+        switch(taskType) {
+        case EVENT:
+            checkEmptyDescription(response, "event");
+            checkMissingKeyword(response, "/at ");
+            date = getDate(response, "/at ");
+            response = getResponse(response, "event ", "/at ");
+            return ui.performUpdateTask(response, taskIndex, Command.EVENT, date);
+        case DEADLINE:
+            checkEmptyDescription(response, "deadline");
+            checkMissingKeyword(response, "/by ");
+            date = getDate(response, "/by ");
+            response = getResponse(response, "deadline ", "/by ");
+            return ui.performUpdateTask(response, taskIndex, Command.DEADLINE, date);
+        case TODO:
+            checkEmptyDescription(response, "todo");
+            response = response.substring("todo".length());
+            return ui.performUpdateTask(response, taskIndex, Command.TODO, "");
+        default:
+            assert false : "Duke incorrect tasktype in processUpdatedTask";
+            throw new DukeKeywordMissingException("no such task type");
+        }
+    }
+
+    private String processTodo(String response) throws EmptyDescriptionException, IOException {
+        checkEmptyDescription(response, "todo");
+        return ui.performAddTodo(response.substring("todo".length()));
+    }
+
+    private String processEvent(String response) throws EmptyDescriptionException, DukeKeywordMissingException,
+            IOException {
+        String date;
+        checkEmptyDescription(response, "event");
+        checkMissingKeyword(response, "/at ");
+        date = getDate(response, "/at ");
+        response = getResponse(response, "event ", "/at ");
+        return ui.performAddEvent(response, date);
+    }
+
+    private String processDeadline(String response) throws EmptyDescriptionException,
+            DukeKeywordMissingException, IOException {
+        String date;
+        checkEmptyDescription(response, "deadline");
+        checkMissingKeyword(response, "/by ");
+        date = getDate(response, "/by ");
+        response = getResponse(response, "deadline ", "/by ");
+        return ui.performAddDeadline(response, date);
+    }
+
+    private Command getTaskType(String response) throws DukeKeywordMissingException {
+        int endPoint = response.indexOf(" ");
+        if (endPoint < 0) {
+            throw new DukeKeywordMissingException("Missing Keyword : type of task");
+        }
+        switch (response.substring(0, response.indexOf(" "))) {
+        case "todo":
+            return Command.TODO;
+        case "event":
+            return Command.EVENT;
+        case "deadline":
+            return Command.DEADLINE;
+        default:
+            throw new DukeKeywordMissingException("Missing Keyword : type of task");
         }
     }
 
@@ -135,10 +208,23 @@ public class Parser {
         }
     }
 
-    private int getTaskIndex(String response) {
+    private int getTaskIndex(String response) throws DukeMissingCommandNumberException {
         int taskIndex;
-        taskIndex = Integer.parseInt(response.replaceAll("\\D+", "")) - 1;
+        String parsedResponse = getCommand(response);
+        taskIndex = parseInteger(parsedResponse);
         return taskIndex;
+    }
+
+    private int parseInteger(String parsedResponse) throws DukeMissingCommandNumberException {
+        try {
+            return Integer.parseInt(parsedResponse.replaceAll("\\D+", "")) - 1;
+        } catch (NumberFormatException e) {
+            throw new DukeMissingCommandNumberException("error");
+        }
+    }
+
+    private String getCommand(String response) {
+        return response.substring(0, response.indexOf(" ", response.indexOf(" ") + 1));
     }
 
     private Command keyword(String response) {
@@ -148,6 +234,8 @@ public class Parser {
             return Command.LIST;
         } else if (response.indexOf("find ") == 0) {
             return Command.FIND;
+        } else if (response.indexOf("update ") == 0) {
+            return Command.UPDATE;
         } else if (response.indexOf("delete") == 0) {
             return Command.DELETE;
         } else if (response.indexOf("done ") == 0) {

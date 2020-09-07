@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 
 import duke.dukeexception.DukeTaskNonExistException;
+import duke.parser.Command;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.deadline.Deadline;
@@ -179,5 +180,37 @@ public class UI {
      */
     public String performShowError(Exception except) {
         return except.toString();
+    }
+
+    /**
+     * Performs the updating of the task.
+     * @param response Description of the task.
+     * @param taskIndex The index that we are supposed to swap.
+     * @param taskType The type of the task.
+     * @param date The due date. If there is no due date, it is set as "".
+     * @return message that shows that the tasklist is updated.
+     * @throws IOException if there is an error while updating the txt file.
+     */
+    public String performUpdateTask(String response, int taskIndex, Command taskType, String date) throws IOException {
+        Task newTask;
+        switch(taskType) {
+        case TODO:
+            newTask = new ToDo(response, LocalDateTime.now());
+            break;
+        case EVENT:
+            newTask = new EventTask(response, LocalDateTime.now(), date);
+            break;
+        case DEADLINE:
+            newTask = new Deadline(response, LocalDateTime.now(), date);
+            break;
+        default:
+            assert false : "update task error";
+            newTask = null;
+        }
+        taskList.updateTask(newTask, taskIndex);
+        storage.updateFile(taskList);
+        return "Got it. I've updated this task: " + '\n'
+                + "  " + newTask + '\n'
+                + "Now you have " + taskList.getSize() + " tasks in the list.";
     }
 }

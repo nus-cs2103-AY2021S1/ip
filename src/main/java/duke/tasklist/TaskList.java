@@ -134,4 +134,8 @@ public class TaskList {
         return tasks;
     }
 
+    public void updateTask(Task newTask, int taskIndex) {
+        tasks.set(taskIndex, newTask);
+    }
+
 }

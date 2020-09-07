@@ -9,5 +9,6 @@ public enum Command {
     TODO,
     DEADLINE,
     EVENT,
+    UPDATE,
     UNKNOWN;
 }
