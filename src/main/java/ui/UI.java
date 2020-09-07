@@ -90,17 +90,22 @@ public class UI {
     }
 
     /**
-     * Returns a chat box wrap around a message when the user successfully deletes an item.
+     * Returns a chat box wrap around a message when the user successfully deletes tasks.
      *
-     * @param chatContent    text String.
+     * @param itemsDeletedList    taskList of the items deleted.
      * @param numOfItemsLeft number of items left in the new TaskList.
      * @return String chat box around text.
      * @see TaskList
      */
-    public static String deleteItemChatBox(String chatContent, int numOfItemsLeft) {
+    public static String deleteItemChatBox(int numOfItemsLeft, TaskList itemsDeletedList) {
+        String formattedText = "";
+        for (int i = 0; i < itemsDeletedList.size(); i++) {
+            String item = itemsDeletedList.get(i).toString();
+            formattedText += ("\t" + item + "\n");
+        }
         return emptyChatBox("I have deleted the following item:\n"
-                + "\t" + chatContent
-                + "\nYou got " + numOfItemsLeft + " task(s) left.");
+                + formattedText
+                + "You got " + numOfItemsLeft + " task(s) left.");
     }
 
     /**

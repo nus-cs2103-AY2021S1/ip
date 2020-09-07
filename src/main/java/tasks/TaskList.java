@@ -1,6 +1,8 @@
 package tasks;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 public class TaskList {
@@ -57,11 +59,17 @@ public class TaskList {
     /**
      * Deletes a task in the given index.
      *
-     * @param position position of the task to be deleted.
-     * @return Task task deleted in the position.
+     * @param positions positions of the tasks to be deleted.
+     * @return TaskList of deleted tasks
      * @see Task
      */
-    public Task delete(int position) {
-        return taskList.remove(position);
+    public TaskList delete(Integer ... positions) {
+        TaskList deleted = new TaskList();
+        Arrays.sort(positions, Collections.reverseOrder());
+        for (int pos : positions) {
+            deleted.add(taskList.get(pos));
+            taskList.remove(pos);
+        }
+        return deleted;
     }
 }
