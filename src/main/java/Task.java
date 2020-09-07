@@ -16,6 +16,8 @@ abstract class Task {
 
     abstract Task updateTime(String time);
 
+    abstract Task updateName(String name);
+
     public String getStatusIcon() {
         return (done ? "\u2713" : "\u2718");
     }

@@ -29,13 +29,23 @@ public class ToDo extends Task {
     }
 
     /**
-     * Updates the time of given Todo task.
+     * Updates the time of current Todo task.
      * @param time New updated time
      * @return Todo task with updated time
      */
     @Override
     public ToDo updateTime(String time) {
         return new ToDo(super.name, super.done);
+    }
+
+    /**
+     * Updates name of current Todo Task.
+     * @param name New update name
+     * @return Todo task with new name
+     */
+    @Override
+    public ToDo updateName(String name) {
+        return new ToDo(name, super.done);
     }
 
     /**
