@@ -6,7 +6,7 @@ import java.util.Scanner;
  * Encapsulates the chat bot program.
  * Yoo is a chat bot program you can use to record tasks.
  * You can add three types of tasks: todo, deadline and event.
- * You can add and delete tasks using commands.
+ * You can add, find, and delete tasks using commands.
  * Terminate the program using the bye command.
  *
  * @author Jace Tan
