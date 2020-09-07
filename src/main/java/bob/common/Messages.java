@@ -12,6 +12,7 @@ public class Messages {
     public static final String NO_UNFINISHED_TASKS_REMINDER = "You have no unfinished tasks.\n";
     public static final String REMINDER_MSG = "You have these unfinished task / upcoming events & deadlines boss.\n";
     public static final String DELETE_MSG = "I have deleted the task.\n";
+    public static final String UNDO_MSG = "Yes boss, I have undone your command.\n";
     public static final String INVALID_COMMAND =
             "Sorry boss, I am not smart enough to understand that. Please give me a valid instruction.\n";
     public static final String EMPTY_TASK =
@@ -31,4 +32,5 @@ public class Messages {
             "Update to saved file has failed, file reader might be corrupted. :(\n";
     public static final String INVALID_PATHNAME =
             "Couldn't recognise the file name. Please restart Bob with a different file path name.\n";
+    public static final String INVALID_UNDO_MSG = "Sorry boss, you have no commands to undo.";
 }

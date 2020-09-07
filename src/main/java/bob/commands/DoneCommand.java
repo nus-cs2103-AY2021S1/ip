@@ -29,6 +29,7 @@ public class DoneCommand extends Command {
      *
      * @param tasks Bob's tasklist.
      * @param storage Bob's storage.
+     * @return String message response after executing done command.
      * @throws BobInvalidNumberException If input cannot be parsed.
      * @throws BobListIndexOutOfBoundsException If number > size of tasklist or <= 0.
      * @throws IOException If an error occurs while updating file.

@@ -44,6 +44,8 @@ test {
 
 application {
     mainClassName = "bob.Launcher"
+    // enable assertions
+    applicationDefaultJvmArgs = ['-ea']
 }
 
 shadowJar {

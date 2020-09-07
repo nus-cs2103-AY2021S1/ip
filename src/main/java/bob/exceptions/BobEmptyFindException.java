@@ -4,7 +4,6 @@ import bob.common.Messages;
 
 /**
  * Exception representing empty find description with inherited functionalities from Exception.
- * @author Lim Zi Yang
  */
 public class BobEmptyFindException extends BobException {
 
