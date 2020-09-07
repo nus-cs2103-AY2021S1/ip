@@ -44,22 +44,12 @@ public class TodayTasksCommand extends Command {
     }
 
     private int getNumberOfCompletedTasks(List<Task> tasksForToday) {
-        int numOfCompletedTasks = 0;
-        for (Task task : tasksForToday) {
-            if (task.getIsDone()) {
-                numOfCompletedTasks++;
-            }
-        }
+        int numOfCompletedTasks = (int) tasksForToday.stream().filter(Task::getIsDone).count();
         return numOfCompletedTasks;
     }
 
     private int getNumberOfUncompletedTasks(List<Task> tasksForToday) {
-        int numOfUncompletedTasks = 0;
-        for (Task task : tasksForToday) {
-            if (!task.getIsDone()) {
-                numOfUncompletedTasks++;
-            }
-        }
+        int numOfUncompletedTasks = (int) tasksForToday.stream().filter(task -> !task.getIsDone()).count();
         return numOfUncompletedTasks;
     }
 }

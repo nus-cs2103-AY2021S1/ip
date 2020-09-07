@@ -54,27 +54,27 @@ public class TaskManager {
 
     public List<Task> getAllUncompletedTasks() {
         List<Task> uncompletedTasks = new ArrayList<>();
-        for (int i = 0; i < tasks.size(); i++) {
-            if (!tasks.get(i).getIsDone()) {
-                uncompletedTasks.add(tasks.get(i));
+        tasks.forEach(task -> {
+            if (!task.getIsDone()) {
+                uncompletedTasks.add(task);
             }
-        }
+        });
         return uncompletedTasks;
     }
 
     public List<Task> getAllCompletedTasks() {
         List<Task> completedTasks = new ArrayList<>();
-        for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getIsDone()) {
-                completedTasks.add(tasks.get(i));
+        tasks.forEach(task -> {
+            if (task.getIsDone()) {
+                completedTasks.add(task);
             }
-        }
+        });
         return completedTasks;
     }
 
     public List<Task> getAllTasksBeforeQueryDate(LocalDate queryDate) {
         List<Task> tasksBeforeQueryDate = new ArrayList<>();
-        for (Task task : tasks) {
+        tasks.forEach(task -> {
             if (task instanceof TimeBased) {
                 TimeBased timeBasedTask = (TimeBased) task;
                 LocalDate taskLocalDate = timeBasedTask.getDate();
@@ -82,23 +82,23 @@ public class TaskManager {
                     tasksBeforeQueryDate.add(task);
                 }
             }
-        }
+        });
         return tasksBeforeQueryDate;
     }
 
     public List<Task> findTasksByKeyword(String keyword) {
         List<Task> filteredTasks = new ArrayList<>();
-        for (Task task : tasks) {
+        tasks.forEach(task -> {
             if (task.getContent().contains(keyword)) {
                 filteredTasks.add(task);
             }
-        }
+        });
         return filteredTasks;
     }
 
     public List<Task> findTasksByDate(LocalDate queryDate) {
         List<Task> tasksForQueryDate = new ArrayList<>();
-        for (Task task : tasks) {
+        tasks.forEach(task -> {
             if (task instanceof TimeBased) {
                 TimeBased timeBasedTask = (TimeBased) task;
                 LocalDate taskLocalDate = timeBasedTask.getDate();
@@ -106,7 +106,7 @@ public class TaskManager {
                     tasksForQueryDate.add(task);
                 }
             }
-        }
+        });
         return tasksForQueryDate;
     }
 
