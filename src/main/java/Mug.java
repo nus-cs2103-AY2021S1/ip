@@ -3,7 +3,7 @@ import tasks.TaskList;
 import ui.Ui;
 
 /**
- * A tool to save task.
+ * A class to get Mug response.
  */
 public class Mug {
     /** user Interface Object*/

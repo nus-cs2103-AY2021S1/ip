@@ -7,15 +7,18 @@ import command.Command;
 import mugexception.MugException;
 import parser.Parser;
 import storage.Storage;
+import storage.UndoStorage;
 
 /**
  * Operation for the list of Task.
  */
 public class TaskList {
     /** ArrayList of Task */
-    private final ArrayList<Task> taskList;
+    private ArrayList<Task> taskList;
     /** Local storage that store list of task */
     private final Storage store;
+    /** undo Storage action */
+    private final UndoStorage undoStore;
 
     /**
      * Constructs TaskList object with local Storage given.
@@ -25,6 +28,7 @@ public class TaskList {
     public TaskList(Storage store) {
         this.taskList = store.load();
         this.store = store;
+        this.undoStore = new UndoStorage("mug.txt", "undo.txt");
     }
 
     /**
@@ -189,6 +193,20 @@ public class TaskList {
             return "Opps!! MUG don't have the task you searching :)";
         } else {
             return results.toString();
+        }
+    }
+
+    /**
+     * Undo the most recent edited task(add, delete, done).
+     * @return Undo Status
+     */
+    public String undoTask() {
+        try {
+            this.undoStore.undo();
+            this.taskList = this.store.load();
+            return "Mug has undo successfully :D";
+        } catch (MugException ex) {
+            return ex.getMessage();
         }
     }
 }

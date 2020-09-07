@@ -57,6 +57,9 @@ public class Ui {
                 String keyword = splitOrder[1];
                 output = tasks.searchTask(keyword);
                 break;
+            case UNDO:
+                output = tasks.undoTask();
+                break;
             default:
                 output = "Hey!!! I'm sorry, but Mug don't know what that means :3";
                 break;
