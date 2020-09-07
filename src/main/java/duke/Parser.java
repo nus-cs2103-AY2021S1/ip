@@ -71,7 +71,7 @@ public class Parser {
             commands[1] = temp[0];
             commands[2] = temp[1];
             return commands;
-        default: //meaningless command
+        default:
             throw new DukeException(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }

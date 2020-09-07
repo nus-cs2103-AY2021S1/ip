@@ -98,7 +98,7 @@ public class Storage {
         }
     }
 
-    private Task parseTask(String line) {
+    private Task parseTask(String line) throws DukeException {
         String[] commands = line.split(" \\| ");
         boolean isDone = commands[1].equals("1");
         switch (commands[0]) {
@@ -108,8 +108,11 @@ public class Storage {
         case "D": {
             return new Deadline(isDone, commands[2], commands[3]);
         }
-        default: {
+        case "E": {
             return new Event(isDone, commands[2], commands[3]);
+        }
+        default: {
+            throw new DukeException("Ops, the storage format goes wrong somewhere.");
         }
         }
     }
