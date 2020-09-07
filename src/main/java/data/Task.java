@@ -1,5 +1,7 @@
 package data;
 
+import java.time.LocalDate;
+
 /**
  * Encapsulates a Task.
  */
@@ -32,8 +34,23 @@ public class Task {
         this.isDone = true;
     }
 
+
+    /**
+     * Returns description of task.
+     * @return description of task.
+     */
+    public String getDescription() {
+        return description;
+    }
+
+    public void changeDate(LocalDate date){
+
+    }
+
     @Override
     public String toString() {
         return getStatusIcon() + " " + this.description;
     }
+
+
 }

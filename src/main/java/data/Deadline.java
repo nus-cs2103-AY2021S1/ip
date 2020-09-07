@@ -15,6 +15,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public void changeDate(LocalDate date) {
+        by = date;
+    }
+
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by + ")";
     }

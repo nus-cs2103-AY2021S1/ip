@@ -1,5 +1,6 @@
 package data;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -67,7 +68,7 @@ public class TaskList {
      * @param task Task object to be added to the list.
      */
     public String add(Task task) {
-    assert task != null;
+
 
         tasks.add(task);
         return "Got it. I've added this task: \n"
@@ -117,6 +118,13 @@ public class TaskList {
             }
         }
         return result;
+    }
+
+    public String snoozeTask(int taskNum, LocalDate date) {
+
+        Task task = tasks.get(taskNum);
+        task.changeDate(date);
+        return "The new task is as follows: " + task.toString();
     }
 
 

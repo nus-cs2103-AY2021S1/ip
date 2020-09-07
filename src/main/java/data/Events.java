@@ -16,6 +16,11 @@ public class Events extends Task {
     }
 
     @Override
+    public void changeDate(LocalDate date) {
+        at = date;
+    }
+
+    @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + at + ")";
     }
