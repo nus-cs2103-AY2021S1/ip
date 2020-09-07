@@ -87,8 +87,18 @@ public class EventCommand extends Command {
         LocalDate localDate;
         if (date.length == 3) {
             int day = Integer.parseInt(date[0]);
+            assert day < 32
+                    : "Not Valid Date";
+            assert day > 0
+                    : "Not Valid Date";
             int month = Integer.parseInt(date[1]);
+            assert month < 13
+                    : "Not Valid Month";
+            assert month > 0
+                    : "Not Valid Month";
             int year = Integer.parseInt(date[2]);
+            assert year > 0
+                    : "Not Valid Year";
             localDate = LocalDate.of(year, month, day);
         } else {
             throw new DukeException("Error with input date!");
@@ -101,11 +111,27 @@ public class EventCommand extends Command {
         LocalTime localTime;
         if (timeLength == 4) {
             int hour = Integer.parseInt(time.substring(0, 2));
+            assert hour >= 0
+                    : "Not Valid Hour";
+            assert hour <= 23
+                    : "Not Valid Hour";
             int minute = Integer.parseInt(time.substring(2, 4));
+            assert minute >= 0
+                    : "Not Valid Minutes";
+            assert minute < 60
+                    : "Not Valid Minutes";
             localTime = LocalTime.of(hour, minute);
         } else if (timeLength == 3) {
             int hour = Integer.parseInt(String.valueOf(time.charAt(0)));
+            assert hour >= 0
+                    : "Not Valid Hour";
+            assert hour < 10
+                    : "Not Valid Hour";
             int minute = Integer.parseInt(time.substring(1, 3));
+            assert minute >= 0
+                    : "Not Valid Minutes";
+            assert minute < 60
+                    : "Not Valid Minutes";
             localTime = LocalTime.of(hour, minute);
         } else {
             throw new DukeException("Error with input time");
