@@ -36,6 +36,7 @@ public class Storage {
             File path = new File("data/");
             if (!path.isDirectory()) {
                 path.mkdir();
+
             }
             // create file if doesn't exist
             File file = new File("data/duke.txt");
@@ -73,6 +74,7 @@ public class Storage {
                 taskInst = String.format("deadline %s /by %s\n", task.description, deadline.deadline);
             }
             //write instruction to text file
+            assert taskInst != "" : "task instuction should not be empty";
             fileWriter.write(taskInst);
             // add done instruction if task is done
             if (task.isDone) {

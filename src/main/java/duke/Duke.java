@@ -83,6 +83,7 @@ public class Duke {
     public String user_input_handler(String user_input, boolean loading) throws DukeException, IOException {
         String instructionType = Parser.parseInstruction(user_input);
         String response = "";
+        assert instructionType != "" : "instructionType cannot be empty string";
 
         if (instructionType.equals("bye")) {
             // quit
@@ -100,6 +101,7 @@ public class Duke {
             // execute
             Task chosenTask = tasks.getTask(index);
             chosenTask.markAsDone();
+            assert chosenTask.isDone : "task is not marked as done";
             if (!loading){
                 response = ui.showMarkedDoneTask(chosenTask);
             }
@@ -111,6 +113,7 @@ public class Duke {
             // execute
             Task chosenTask = tasks.getTask(index);
             tasks.deleteTask(index);
+            assert !tasks.taskList.contains(chosenTask) : "task is not deleted deleted from taskList";
             if (!loading){
                 response = ui.showDeletedTask(chosenTask, tasks.taskList);
             }
@@ -133,6 +136,7 @@ public class Duke {
                 // execute
                 Task todo = new Todo(description);
                 tasks.addTask(todo);
+                assert tasks.taskList.contains(todo) : "todo is not added to taskList";
                 if (!loading){
                     response = ui.showAddedTask(todo, tasks.taskList);
                 }
@@ -150,6 +154,7 @@ public class Duke {
                 // execute
                 Task deadline = new Deadline(description, l_time);
                 tasks.addTask(deadline);
+                assert tasks.taskList.contains(deadline) : "deadline is not added to taskList";
                 if (!loading) {
                     response = ui.showAddedTask(deadline, tasks.taskList);
                 }
@@ -167,6 +172,7 @@ public class Duke {
                 // execute
                 Task event = new Event(description, l_time);
                 tasks.addTask(event);
+                assert tasks.taskList.contains(event) : "event is not added to taskList";
                 if (!loading){
                     response = ui.showAddedTask(event, tasks.taskList);
                 }
@@ -198,6 +204,7 @@ public class Duke {
         } catch (DukeException | IOException e) {
             response = duke.ui.showError(e.getMessage());
         }
+        assert response != "" : "response should not be empty";
         return "Duke heard: \n"
                 + response;
     }
