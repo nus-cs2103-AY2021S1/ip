@@ -52,6 +52,7 @@ public class MainWindow extends AnchorPane {
 
     public void showWelcome() {
         String welcomeMsg = duke.getUi().showWelcome();
+        assert welcomeMsg != "" : "welcome message is empty.";
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(welcomeMsg, dukeImage)
         );

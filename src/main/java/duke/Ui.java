@@ -62,6 +62,7 @@ public class Ui {
      * @param doneTask Task which is marked as done.
      */
     public String showMarkedDoneTask(Task doneTask) {
+        assert doneTask.isDone : "this task is not marked as done";
         String message = "Nice! I've marked this task as done: \n"
                 + doneTask.toString();
         System.out.println(message);
@@ -75,6 +76,7 @@ public class Ui {
      * @param taskList ArrayList containing tasks.
      */
     public String showDeletedTask(Task deletedTask, ArrayList<Task> taskList) {
+        assert !taskList.contains(deletedTask) : "this task is not deleted from taskList";
         String message = "Noted. I've removed this task: \n"
                 + deletedTask.toString() + "\n"
                 + String.format("Now you have %s tasks in the list.", taskList.size());
@@ -89,6 +91,7 @@ public class Ui {
      * @param taskList ArrayList containing tasks.
      */
     public String showAddedTask(Task addedTask, ArrayList<Task> taskList) {
+        assert taskList.contains(addedTask) : "this task is not added to the taskList";
         String message = "Got it. I've added this task: \n"
                 + addedTask.toString() + "\n"
                 + String.format("Now you have %s tasks in the list.", taskList.size());

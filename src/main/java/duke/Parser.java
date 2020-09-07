@@ -25,6 +25,7 @@ public class Parser {
      */
     static int parseMarkDoneInstr(String userInput) {
         int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
+        assert index >= 0 : "index cannot be nagative";
         return index;
     }
 
@@ -36,6 +37,7 @@ public class Parser {
      */
     static int parseDeleteInstr(String userInput) {
         int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
+        assert index >= 0 : "index cannot be nagative";
         return index;
     }
 
