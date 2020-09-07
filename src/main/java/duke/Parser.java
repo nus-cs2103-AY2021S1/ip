@@ -20,6 +20,8 @@ public class Parser {
             return new ExitCommand();
         } else if (cmd.equals(Instruction.LIST.getInstruction())) {
             return new ListCommand();
+        } else if (cmd.equals(Instruction.HELP.getInstruction())) {
+            return new HelpCommand();
         } else if (cmd.equals(Instruction.DONE.getInstruction())) {
             int itemsIdx = Integer.parseInt(inputArr[1]) - 1;
             return new DoneCommand(itemsIdx);

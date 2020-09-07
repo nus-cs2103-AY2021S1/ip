@@ -7,6 +7,7 @@ import java.util.ArrayList;
  */
 public class Ui {
     private String message;
+
     /**
      * Instantiates Ui.
      */
@@ -23,6 +24,7 @@ public class Ui {
 
     /**
      * Get the current message.
+     *
      * @return current message.
      */
     public String getMessage() {
@@ -119,5 +121,21 @@ public class Ui {
             this.message = this.message + index + ". " + t + "\n";
             index++;
         }
+    }
+
+    /**
+     * Provide in-app guidance for users.
+     */
+    public void showHelpMessage() {
+        this.message = "Hello! Here are the things that I can help you with:\n"
+                + "-------------\n"
+                + "1. list \u2192 displays the tasks to be completed\n"
+                + "2. find <keyword> \u2192 search for the items that matches the keyword you have provided\n"
+                + "3. done <index> \u2192 mark a task as completed\n"
+                + "4. delete <index> \u2192 delete a task\n"
+                + "5. todo <task name> \u2192 add a ToDo task to the list\n"
+                + "6. deadline <task name> /by <yyyy-mm-dd> <hhmm> \u2192 add a Deadline task to the list\n"
+                + "7. event <task name> /at <yyyy-mm-dd> <hhmm> \u2192 add a Event task to the list\n"
+                + "8. bye \u2192 exits the programme";
     }
 }
