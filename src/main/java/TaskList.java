@@ -18,7 +18,6 @@ public class TaskList {
     /**
      * Displays the task list.
      */
-
     public String displayList() {
         if (storage.isEmpty()) {
             return "Your list is empty!\n";
@@ -38,6 +37,7 @@ public class TaskList {
      * Adds task to the task list.
      * @param s The type of task to add
      * @param next The remaining task description
+     * @return Task addition string
      * @throws DukeException The Exception of Duke bot
      */
     public String addTask(String s, String next) throws DukeException {
@@ -94,6 +94,7 @@ public class TaskList {
     /**
      * Completes given from the task list.
      * @param s Index of task to be completed on the list
+     * @return Task done String
      * @throws DukeException The Exception of Duke bot
      */
     public String doneTask(String s) throws DukeException {
@@ -119,6 +120,7 @@ public class TaskList {
     /**
      * Deletes given task from the task list.
      * @param s Index of task to be completed on the list
+     * @return Task deleted String
      * @throws DukeException The Exception of Duke bot
      */
     public String delTask(String s) throws DukeException {
@@ -155,6 +157,7 @@ public class TaskList {
     /**
      * Prints the list of tasks that contain the given string.
      * @param s The string that should appear in the task
+     * @return List of tasks found matching input s
      */
     public String findTask(String s) {
         if (storage.isEmpty()) {
@@ -176,6 +179,12 @@ public class TaskList {
         }
     }
 
+    /**
+     * Updates current task with new name or time.
+     * @param next The remaining task description
+     * @return Task updated String
+     * @throws DukeException The Exception of Duke bot
+     */
     public String updateTask(String next) throws DukeException {
         try {
             String[] ls = next.split(" ");
@@ -209,6 +218,7 @@ public class TaskList {
             return "Please state task number after \"update\".\n";
         }
     }
+    
     /**
      * Getter method for task list.
      * @return The current task list of the bot
