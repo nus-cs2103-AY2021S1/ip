@@ -37,7 +37,7 @@ public class DialogBox extends HBox {
         assert circle != null;
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(
-                    MainWindow.class.getResource("/view/DialogBox.fxml"));
+                MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();

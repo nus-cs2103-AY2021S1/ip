@@ -94,7 +94,7 @@ public class Parser {
             throw new DukeException("type in 'todo', 'deadline', 'event' to start!\n"
                     + "Also, type 'schedule' and key in a date in YYYY-MM-DD format "
                     + "to view schedule on that date!\n"
-                    + " Or type 'time' and key in time in HH:mm format "
+                    + "Or type 'time' and key in time in HH:mm format "
                     + "to search for events/deadline happening on that time!");
         }
     }
