@@ -1,0 +1,2 @@
+T | 0 | do hwk 1
+E | 1 | eat dinner with fam | 11-11-1111 1111
