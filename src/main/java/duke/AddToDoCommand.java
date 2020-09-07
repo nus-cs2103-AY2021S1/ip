@@ -26,7 +26,12 @@ public class AddToDoCommand extends Command {
         }
 
         String description = getParsedCommand()[1];
+        if (description.isBlank()) {
+            throw new DukeException("NANI??! Don't just type spaces as your description!\n");
+        }
+
         assert !description.isEmpty(); // assert that the todo description is not empty
+        assert !description.isBlank(); // assert that the todo description is not blank
 
         Task taskToAdd = new ToDo(description);
         addTask(tasks, taskToAdd, ui);
