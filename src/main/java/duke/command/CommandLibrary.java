@@ -13,6 +13,7 @@ import duke.task.TaskList;
 import duke.task.Todo;
 
 class CommandLibrary {
+    // TODO: will CommandLine ever give us nulls? have to check.
     static final CommandExecutable DEADLINE_COMMAND = (context, args) -> {
         String description = getUnusedArgs(args);
         String time = args.getOptionValue("by");

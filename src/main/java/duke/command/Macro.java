@@ -3,13 +3,12 @@ package duke.command;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
-
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
-
 import duke.Context;
 import duke.exception.DukeException;
+import duke.exception.DukeParseException;
 import duke.parser.Parser;
 
 public class Macro {
@@ -23,19 +22,22 @@ public class Macro {
         this.options = options;
     }
 
-    public static Macro newMacro(String input) {
-        // TODO error catching and throwing
+    public static Macro newMacro(String input) throws DukeException {
         // note: following also trims whitespace.
         String[] inputSplitBySemicolon = input.split(" *; *");
         String[] macroNameAndArgs = inputSplitBySemicolon[0].split("\\s+");
         String[] commands = Arrays.copyOfRange(inputSplitBySemicolon, 1, inputSplitBySemicolon.length);
         Options options = new Options();
-        for (int i = 1; i < macroNameAndArgs.length; i++) {
-            String name = macroNameAndArgs[i];
-            String description = "macro argument " + name;
-            Option option = new Option(name, true, description);
-            option.setRequired(true);
-            options.addOption(option);
+        try {
+            for (int i = 1; i < macroNameAndArgs.length; i++) {
+                String name = macroNameAndArgs[i];
+                String description = "macro argument " + name;
+                Option option = new Option(name, true, description);
+                option.setRequired(true);
+                options.addOption(option);
+            }
+        } catch (IllegalArgumentException e) {
+            throw DukeException.Errors.MACRO_DEFINITION_ERROR.create();
         }
         return new Macro(macroNameAndArgs[0], Arrays.asList(commands), options);
     }
@@ -50,12 +52,24 @@ public class Macro {
 
     public void execute(Context context, CommandLine args) throws DukeException {
         Parser parser = new Parser(context);
+        String[] commands = this.substituteAll(args);
+        int lastCommandIndex = 0;
         try {
-            for (String command : this.substituteAll(args)) {
-                parser.parseAndRun(command);
+            for (lastCommandIndex = 0; lastCommandIndex < commands.length; lastCommandIndex++) {
+                parser.parseAndRun(commands[lastCommandIndex]);
             }
         } catch (DukeException e) {
-            throw e; // TODO
+            DukeParseException toThrow = new DukeParseException(e.getMessage());
+
+            String extraMessage = "An error occurred when executing this command:\n"
+                + commands[lastCommandIndex]
+                + "The following commands executed successfully:\n"
+                + String.join("\n", Arrays.copyOfRange(commands, 0, lastCommandIndex))
+                + "\n The following commands were not executed:\n"
+                + String.join("\n", Arrays.copyOfRange(commands, lastCommandIndex + 1, commands.length));
+
+            toThrow.setExtraMessage(extraMessage);
+            throw toThrow; // TODO test
         }
     }
 

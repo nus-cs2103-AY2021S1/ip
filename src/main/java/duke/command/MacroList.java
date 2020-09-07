@@ -1,8 +1,9 @@
 package duke.command;
 
-
 import java.util.HashMap;
 import java.util.Map;
+
+import duke.exception.DukeException;
 import duke.ui.Ui;
 
 public class MacroList {
@@ -21,15 +22,15 @@ public class MacroList {
         return this.hasMacro(name) || Command.hasCommand(name);
     }
 
-    public void addMacro(String declaration) {
+    public void addMacro(String declaration) throws DukeException {
         Macro newMacro = Macro.newMacro(declaration);
         if (this.macroNameUnavailable(newMacro.getName())) {
-            // TODO: throw some exception
+            throw DukeException.Errors.MACRO_ALREADY_DEFINED.create();
         }
         this.macros.put(newMacro.getName(), newMacro);
     }
 
-    public void addMacro(String declaration, Ui ui) {
+    public void addMacro(String declaration, Ui ui) throws DukeException {
         this.addMacro(declaration);
         ui.systemMessage("macro have been add ;)");
     }

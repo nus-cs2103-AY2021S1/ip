@@ -18,7 +18,9 @@ public class DukeException extends Exception {
         DATE_PARSE_ERROR("sir the date of format is wrong sir please try\n"
                 + "\"yyyy-mm-dd\", eg \"2020-08-24\" sir"),
         FILE_READ_ERROR("sir there is some error in read file i make new list ok?"),
-        FILE_WRITE_ERROR("sir there is some error in write file, oopsies!");
+        FILE_WRITE_ERROR("sir there is some error in write file, oopsies!"),
+        MACRO_ALREADY_DEFINED("sir that's name's been already taken! please try make new name"),
+        MACRO_DEFINITION_ERROR("sir that is invalid macro definition format, oopsies!");
 
         private final String message;
         Errors(String message) {
