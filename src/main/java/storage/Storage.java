@@ -1,6 +1,9 @@
 package storage;
 
-import tasklist.*;
+import tasklist.Task;
+import tasklist.Todo;
+import tasklist.Event;
+import tasklist.Deadline;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -14,14 +17,14 @@ import java.util.Scanner;
  */
 
 public class Storage {
-    protected File f;
+    protected File file;
 
     /**
      * Creates and initialises a Storage object
      * @param filePath the path of the file to be read
      */
     public Storage(String filePath) {
-        this.f = new File(filePath);
+        this.file = new File(filePath);
     }
 
     /**
@@ -30,7 +33,7 @@ public class Storage {
      * @throws FileNotFoundException if there is no file found to load from.
      */
     public ArrayList<Task> load() throws FileNotFoundException {
-        Scanner s = new Scanner(this.f);
+        Scanner s = new Scanner(this.file);
         ArrayList<Task> list = new ArrayList<>();
 
         while (s.hasNext()) {

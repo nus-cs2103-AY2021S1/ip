@@ -1,7 +1,11 @@
 package parser;
 
-import tasklist.*;
-import exception.*;
+import tasklist.TaskList;
+import tasklist.Todo;
+import tasklist.Deadline;
+import tasklist.Event;
+import tasklist.Task;
+import exception.DukeException;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -144,13 +148,12 @@ public class Parser {
                 String keywords = findArray[1];
                 ArrayList<Task> temp = newList.findTasks(keywords);
                 String text = "Here are the tasks in your list:";
-                //System.out.println("     Here are the tasks in your list:");
+
                 for (int i = 0; i < temp.size(); i++) {
                     int listNumber = i + 1;
                     Task currentTask = temp.get(i);
 
                     text += "\n" + "     " + listNumber + "." + currentTask.toString();
-//                    System.out.println("     " + listNumber + "." + currentTask.toString());
                 }
                 return text;
             }
