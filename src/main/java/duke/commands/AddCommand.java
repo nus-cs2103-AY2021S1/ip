@@ -28,7 +28,7 @@ public class AddCommand extends Command {
      * Creates AddCommand object that handles adding of todo, deadline and event.
      *
      * @param taskType differentiates between todo, deadline and event.
-     * @param command is the description entered by the user.
+     * @param command  is the description entered by the user.
      */
     public AddCommand(Type taskType, String command) {
         super(command);
@@ -39,14 +39,14 @@ public class AddCommand extends Command {
     public String execute(TaskList tasks, Storage storage) {
         super.init(tasks, storage);
         switch (taskType) {
-            case TODO:
-                return addTodo();
-            case EVENT:
-                return addEvent();
-            case DEADLINE:
-                return addDeadline();
-            default:
-                assert false : "Unknown type";
+        case TODO:
+            return addTodo();
+        case EVENT:
+            return addEvent();
+        case DEADLINE:
+            return addDeadline();
+        default:
+            assert false : "Unknown type";
         }
         return null;
     }

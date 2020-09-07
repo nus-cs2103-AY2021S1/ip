@@ -57,7 +57,7 @@ public class TaskTest {
 
         Event event = new Event("book read", dateTime);
 
-        assertEquals("[D][\u2718] read book (by:Apr 21 2020 23:45)", deadline.toString());
-        assertEquals("[E][\u2718] book read (at:Apr 21 2020 23:45)", event.toString());
+        assertEquals("[D][\u2718] read book (By: Apr 21 2020 23:45)", deadline.toString());
+        assertEquals("[E][\u2718] book read (At: Apr 21 2020 23:45)", event.toString());
     }
 }
