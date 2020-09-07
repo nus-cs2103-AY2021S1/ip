@@ -11,6 +11,10 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.VBox;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.PrintStream;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -38,10 +42,19 @@ public class MainWindow extends AnchorPane {
 
     }
 
-    public void setDuke(Bot d) {
-        duke = d;
+    public void setDuke(String botName, String filePath) {
+        ByteArrayOutputStream newConsole = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(newConsole));
+        File f = new File(filePath);
+        if (!f.exists()) {
+            String response = "Hey, you new user eh? I've got your profile created. No worries.";
+            System.out.println(response);
+        }
+        String greeting = String.format("Good day, I'm %s. What can I do for you?", botName);
+        System.out.println(greeting);
+        duke = new Bot(botName, filePath);
         dialogContainer.getChildren().addAll(
-            DialogBox.getDukeDialog("ff", dukeImage)
+                DialogBox.getDukeDialog(newConsole.toString(), dukeImage)
         );
     }
 
@@ -59,4 +72,6 @@ public class MainWindow extends AnchorPane {
         );
         userInput.clear();
     }
+
+
 }
