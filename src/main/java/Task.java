@@ -7,7 +7,7 @@ package main.java;
  */
 class Task {
     private final String name;
-    private boolean done = false;
+    private boolean isDone = false;
 
     /**
      * Constructor
@@ -43,7 +43,7 @@ class Task {
             throw new Exception("Invalid data structure");
         }
 
-        task.done = Boolean.parseBoolean(params[1]);
+        task.isDone = Boolean.parseBoolean(params[1]);
         return task;
     }
 
@@ -51,12 +51,12 @@ class Task {
      * Converts the task to data form
      */
     public String toData() {
-        return done + " | " + name;
+        return isDone + " | " + name;
     }
 
     @Override
     public String toString() {
-        return "[" + (done ? "✓" : "✗") + "] " + name;
+        return "[" + (isDone ? "✓" : "✗") + "] " + name;
     }
 
     public boolean contains(String keyword) {
@@ -64,6 +64,6 @@ class Task {
     }
 
     public void setDone() {
-        this.done = true;
+        this.isDone = true;
     }
 }
