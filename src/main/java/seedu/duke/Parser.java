@@ -17,6 +17,7 @@ public class Parser {
      */
     public static Command parse(String fullCommand) throws DukeException {
         String[] commandArgs = fullCommand.split(" ");
+        assert commandArgs.length > 0;
         if (commandArgs[0].equals(CommandType.BYE.getName())) {
             return new ExitCommand();
         } else if (commandArgs[0].equals(CommandType.LIST.getName())) {
@@ -68,6 +69,7 @@ public class Parser {
     }
 
     private static String reassembleString(String[] arr, int from, int to) {
+        assert from >= 0 && to <= arr.length;
         return String.join(" ", Arrays.copyOfRange(arr, from, to));
     }
 }

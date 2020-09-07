@@ -66,6 +66,7 @@ public class TaskList {
         }
         Task task = listOfTasks.get(idx);
         task.markAsDone();
+        assert task.getIsDone();
         return task;
     }
 
