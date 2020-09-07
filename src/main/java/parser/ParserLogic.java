@@ -19,7 +19,7 @@ public class ParserLogic {
     private final Storage storage;
     private TaskList taskList;
 
-    ParserLogic(TaskList taskList, Storage storage){
+    ParserLogic(TaskList taskList, Storage storage) {
         this.taskList = taskList;
         this.storage = storage;
     }
@@ -29,7 +29,7 @@ public class ParserLogic {
      *
      * @return String String Reply from King.
      */
-    public String parseBye(){
+    public String parseBye() {
         return UI.emptyChatBox("Bye! Come back soon.");
     }
 
@@ -39,7 +39,7 @@ public class ParserLogic {
      *
      * @return String Reply from King.
      */
-    public String parseClearList() throws StorageException{
+    public String parseClearList() throws StorageException {
         taskList.clear();
         storage.persistTaskList(taskList);
         return UI.emptyChatBox("I have cleared the list!");
@@ -50,17 +50,17 @@ public class ParserLogic {
      *
      * @return String Reply from King.
      */
-    public String parseList(){
+    public String parseList() {
         return UI.showTaskList(taskList);
     }
 
     /**
-     * Parse the "todo <task>" command from the user.
+     * Parse the "todo" command from the user.
      * Updates the data in storage.
      *
      * @param command Phrase entered by user.
      * @return String Reply from King.
-     * @throws KingException Throws KingException for invalid commands.
+     * @throws KingException    Throws KingException for invalid commands.
      * @throws StorageException Exception from writing to asset file.
      */
     public String parseToDo(String command) throws KingException, StorageException {
@@ -81,7 +81,7 @@ public class ParserLogic {
      *
      * @param command Phrase entered by user.
      * @return String Reply from King.
-     * @throws KingException Throws KingException for invalid commands.
+     * @throws KingException    Throws KingException for invalid commands.
      * @throws StorageException Exception from writing to asset file.
      */
     public String parseEvent(String command) throws KingException, StorageException {
@@ -103,7 +103,7 @@ public class ParserLogic {
      *
      * @param command Phrase entered by user.
      * @return String Reply from King.
-     * @throws KingException Throws KingException for invalid commands.
+     * @throws KingException    Throws KingException for invalid commands.
      * @throws StorageException Exception from writing to asset file.
      */
     public String parseDeadline(String command) throws KingException, StorageException {
@@ -129,10 +129,10 @@ public class ParserLogic {
      *
      * @param command Phrase entered by user.
      * @return String Reply from King.
-     * @throws KingException Throws KingException for invalid commands.
+     * @throws KingException    Throws KingException for invalid commands.
      * @throws StorageException Exception from writing to asset file.
      */
-    public String parseDelete(String command) throws KingException, StorageException{
+    public String parseDelete(String command) throws KingException, StorageException {
         System.out.println(command);
         String stringItem = command.substring(6).trim();
         try {
@@ -149,8 +149,7 @@ public class ParserLogic {
                     : exceptions.invalidNumberException(stringItem, e);
         } catch (StorageException e) {
             throw e;
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             throw exceptions.badDeleteSyntaxException();
         }
     }
@@ -174,7 +173,7 @@ public class ParserLogic {
      *
      * @param command Phrase entered by user.
      * @return String Reply from King.
-     * @throws KingException Throws KingException for invalid commands.
+     * @throws KingException    Throws KingException for invalid commands.
      * @throws StorageException Exception from writing to asset file.
      */
     public String parseDone(String command) throws KingException, StorageException {

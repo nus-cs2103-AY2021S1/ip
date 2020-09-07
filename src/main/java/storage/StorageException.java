@@ -1,6 +1,6 @@
 package storage;
 
-public class StorageException extends Exception{
+public class StorageException extends Exception {
     public final String message;
     public final Throwable error;
 

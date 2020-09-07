@@ -68,6 +68,10 @@ public class King {
         scanner.close();
     }
 
+    /**
+     * Runs the King program on the terminal.
+     *
+     */
     public static void main(String[] args) {
         try {
             King king = new King("data/king.txt");

@@ -8,9 +8,9 @@
  */
 package ui;
 
-import tasks.TaskList;
-
 import java.util.stream.IntStream;
+
+import tasks.TaskList;
 
 public class UI {
 

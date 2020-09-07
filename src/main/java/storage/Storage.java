@@ -3,12 +3,6 @@
  */
 package storage;
 
-import tasks.Deadline;
-import tasks.Event;
-import tasks.Task;
-import tasks.TaskList;
-import tasks.ToDo;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileReader;
@@ -17,6 +11,12 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import tasks.Deadline;
+import tasks.Event;
+import tasks.Task;
+import tasks.TaskList;
+import tasks.ToDo;
 
 public class Storage {
 
@@ -88,7 +88,7 @@ public class Storage {
      * @return boolean returns true if taskList is successfully persisted.
      * @throws StorageException IOException when writing to asset file.
      */
-    public boolean persistTaskList(TaskList taskList) throws StorageException{
+    public boolean persistTaskList(TaskList taskList) throws StorageException {
         assert taskList != null : "taskList cannot be null";
 
         try {
@@ -144,6 +144,7 @@ public class Storage {
 
     /**
      * Converts data to Task.
+     *
      * @param data data stored in the asset file.
      * @return Task task created from data.
      */
