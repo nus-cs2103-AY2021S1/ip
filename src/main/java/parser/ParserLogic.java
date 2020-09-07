@@ -133,6 +133,7 @@ public class ParserLogic {
      * @throws StorageException Exception from writing to asset file.
      */
     public String parseDelete(String command) throws KingException, StorageException{
+        System.out.println(command);
         String stringItem = command.substring(6).trim();
         try {
             int itemNo = Integer.parseInt(stringItem) - 1;

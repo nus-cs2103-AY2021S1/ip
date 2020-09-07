@@ -39,7 +39,11 @@ public class Parser {
      * @throws StorageException StorageException thrown by Storage when writing to asset file.
      * @see Storage
      */
+
     public String parse(String phrase) throws KingException, StorageException {
+
+        assert phrase != null : "command cannot be null!";
+
         String mainCommand = phrase.split(" ")[0].toLowerCase();
         if (mainCommand.equals("bye")) {
             return parserLogic.parseBye();
@@ -50,15 +54,15 @@ public class Parser {
         } else if (mainCommand.equals("done")) {
             return parserLogic.parseDone(phrase);
         } else if (mainCommand.equals("todo")) {
-            return parserLogic.parseToDo(mainCommand);
+            return parserLogic.parseToDo(phrase);
         } else if (mainCommand.equals("event")) {
-            return parserLogic.parseEvent(mainCommand);
+            return parserLogic.parseEvent(phrase);
         } else if (mainCommand.equals("deadline")) {
-            return parserLogic.parseDeadline(mainCommand);
+            return parserLogic.parseDeadline(phrase);
         } else if (mainCommand.equals("delete")) {
-            return parserLogic.parseDelete(mainCommand);
+            return parserLogic.parseDelete(phrase);
         } else if (mainCommand.equals("find")) {
-            return parserLogic.parseFind(mainCommand);
+            return parserLogic.parseFind(phrase);
         } else {
             throw exceptions.badCommandException();
         }

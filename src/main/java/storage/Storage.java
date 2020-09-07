@@ -89,6 +89,8 @@ public class Storage {
      * @throws StorageException IOException when writing to asset file.
      */
     public boolean persistTaskList(TaskList taskList) throws StorageException{
+        assert taskList != null : "taskList cannot be null";
+
         try {
             BufferedWriter output = new BufferedWriter(new FileWriter(filePath));
             for (int i = 0; i < taskList.size(); i++) {
@@ -146,6 +148,8 @@ public class Storage {
      * @return Task task created from data.
      */
     private Task dataToTask(String data) {
+        assert data != null : "data cannot be null!";
+
         String[] dataTokens = data.split("@", 4);
         Task task;
         switch (dataTokens[0]) {
