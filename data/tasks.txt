@@ -1,4 +1,7 @@
 [T][✓] kiwis
 [T][✘] oranges
 [E][✘] kiwis (at: 18:00 Sep 30 2020)
-[T][✘] oranges
+[T][✓] oranges
+[E][✘] meeting (at: 18:00 Oct 20 2020)
+[T][✘] 4
+[D][✘] keyboard (by: 18:00 Sep 9 2020)

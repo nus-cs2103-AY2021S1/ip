@@ -40,6 +40,7 @@ public class Duke {
         try {
             Command fullCommand = Parser.parse(input);
             String dukeResponse = fullCommand.execute(taskList, ui, storage);
+            assert !dukeResponse.isBlank() : "Response from Duke is never empty!";
             return dukeResponse;
         } catch (DukeException e) {
             return e.getMessage();
