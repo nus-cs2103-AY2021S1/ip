@@ -18,8 +18,11 @@ public class Todo extends Task{
      */
     public String toString() {
         assert super.description.length() > 0 : "Description is empty";
+        String priorityString = super.priority != null
+                ? "[" + super.priority.toString() + "] "
+                : " ";
         return "[" + taskType + "]" + "[" + super.getStatusIcon()
-                + "] " + super.description;
+                + "]" + priorityString + super.description;
     }
 
 }

@@ -44,6 +44,10 @@ public class Event extends Task{
                 + ")";
     }
 
+    /**
+     * Returns a formatted description of the Deadline task, with the date and time dateline wrapped in parenthesis
+     * @return a formatted description of the Deadline task, with the date and time dateline wrapped in parenthesis
+     */
     public String formattedDescription() {
         assert super.description.length() > 0 : "task description is empty";
         // an array where index 0 contains "deadline return book"
@@ -61,7 +65,10 @@ public class Event extends Task{
     }
 
     public String toString() {
+        String priorityString = super.priority != null
+                ? "[" + super.priority.toString() + "] "
+                : " ";
         return "[" + taskType + "]" + "[" + super.getStatusIcon()
-                + "] " + formattedDescription();
+                + "]" + priorityString + formattedDescription();
     }
 }

@@ -39,6 +39,45 @@ public class Storage {
     }
 
     /**
+     * Reads the line of string stored in the text file and
+     * determines the priority to mark the task with.
+     * @param taskDesc task stored as a line of string in the text file
+     * @param toMark task whose priority needs may be marked if priority is present.
+     */
+    public void markPriority(String taskDesc, Task toMark) {
+        if (taskDesc.contains("[LOW]")) {
+            toMark.setPriority(Priority.LOW);
+        }
+        if (taskDesc.contains("[MEDIUM]")) {
+            toMark.setPriority(Priority.MEDIUM);
+        }
+        if (taskDesc.contains("[HIGH]")) {
+            toMark.setPriority(Priority.HIGH);
+        }
+    }
+
+    /**
+     * Returns the corresponding task according to the task stored in the line of String in the text file.
+     * @param taskDesc string representation of the task
+     * @return the Task object.
+     */
+    public Task recreateTask(String taskDesc) {
+        // lineComponents[0] contains the [TaskType][isCompleted][Priority]
+        // lineComponents[1] contains the description of the task, to be passed
+        // to the Task object's constructor.
+        String[] lineComponents = taskDesc.split(" ", 2);
+        if (taskDesc.contains("[T]")) {
+            return new Todo(lineComponents[1]);
+        } else if (taskDesc.contains("[D]")) {
+            return new Deadline(lineComponents[1]);
+        } else if (taskDesc.contains("[E]")) {
+            return new Event(lineComponents[1]);
+        } else {
+            return null;
+        }
+    }
+
+    /**
      * Iterates through a file object using a scanner object, interprets the lines of text and
      * populates the task list with the corresponding task objects.
      * @param file File object that contains the list of tasks in text file format.
@@ -50,23 +89,16 @@ public class Storage {
             while(fileScanner.hasNextLine()) {
                 // dissect the line of String to create Task objects.
                 String taskDesc = fileScanner.nextLine();
-                String[] lineComponents = taskDesc.split(" ", 2);
-                Task toAdd;
-                if (taskDesc.contains("[T]")) {
-                    toAdd = new Todo(lineComponents[1]);
-                } else if (taskDesc.contains("[D]")) {
-                    toAdd = new Deadline(lineComponents[1]);
-                } else if (taskDesc.contains("[E]")) {
-                    toAdd = new Event(lineComponents[1]);
-                } else {
-                    toAdd = null;
-                    System.out.println("Couldn't read saved task from System");
+                Task toAdd = recreateTask(taskDesc);
+                if (toAdd == null) {
+                    System.out.println("Task is empy!");
                 }
                 if (taskDesc.contains("\u2713")) {
                     // description has a tick
                     toAdd.markDone();
                 }
                 if (toAdd != null) {
+                    markPriority(taskDesc, toAdd);
                     startupTaskList.add(toAdd);
                 }
             }
@@ -97,7 +129,7 @@ public class Storage {
             // the FileWriter and BufferedWriters are created on demand here
             // as they tend to change over time.
             FileWriter overrideFileWriter = new FileWriter(file);
-            BufferedWriter bufferedOverrideWriter = new BufferedWriter(overrideFileWriter);;
+            BufferedWriter bufferedOverrideWriter = new BufferedWriter(overrideFileWriter);
             for (int i = 0; i < taskList.size(); i++) {
                 Task toWrite = taskList.getTask(i);
                 assert toWrite != null : "task to be written into .txt storage file is null";

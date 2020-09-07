@@ -28,7 +28,8 @@ public class Deadline extends Task {
         // an array where index 0 contains "by"
         // index 1 contains date
         // index 2 contains time
-        String[] descSplitBySpace = byDateTime.split(" ", 3);
+        // String.split is called with limit 4 to make the time string free of whitespace before and after.
+        String[] descSplitBySpace = byDateTime.split(" ", 4);
         assert descSplitBySpace.length == 3 : "deadline is not in the format /by 2011-11-29 1830";
         localDate = LocalDate.parse(descSplitBySpace[1]);
         String timeString = descSplitBySpace[2];
@@ -68,7 +69,10 @@ public class Deadline extends Task {
      * @return a string representation of the Deadline object.
      */
     public String toString() {
+        String priorityString = super.priority != null
+                ? "[" + super.priority.toString() + "] "
+                : " ";
         return "[" + taskType + "]" + "[" + super.getStatusIcon()
-                + "] " + formattedDescription();
+                + "]" + priorityString + formattedDescription();
     }
 }

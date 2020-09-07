@@ -83,6 +83,30 @@ public class Ui {
     }
 
     /**
+     * Marks the task at position index with the given priority
+     * @param priority string representation of low, medium or high.
+     * @param taskIndex index of task whose priority needs to be set in task list.
+     */
+    public String markTaskPriority(String priority, int taskIndex) {
+        Task toMark = taskList.getTask(taskIndex);
+        toMark.markDone();
+        String result;
+        if (priority.equals("low")) {
+            toMark.setPriority(Priority.LOW);
+        } else if (priority.equals("medium")) {
+            toMark.setPriority(Priority.MEDIUM);
+        } else if (priority.equals("high")) {
+            toMark.setPriority(Priority.HIGH);
+        } else {
+            return " Sorry, we the priority has to be either low, medium or high";
+        }
+        result = "  Nice! the priority for this task has been set to " + priority + ":\n"
+                + "    " + toMark.toString();
+        storage.changeFileContents(taskList);
+        return result;
+    }
+
+    /**
      * Takes in the user command and passes it to the parser object, to receive the correct Task
      * to be handled appropriately. Thereafter Duke's response is returned.
      * @param nextInput user input commands that involve the creation of task objects.
@@ -120,8 +144,9 @@ public class Ui {
      * @return the string to be displayed as the response on CLI or GUI
      */
     public String getDukeResponse(String nextInput) {
-        String[] commandComponents = nextInput.split(" ", 2);
-        String taskType = commandComponents[0];
+        // nextInput can include the priority of the task by ending the command with /priority low or medium or high.
+        String[] commandComponents = nextInput.split(" ", 4);
+        String header = commandComponents[0];
         String toReturn;
         if (nextInput.equals("hello")) {
             toReturn = "  Hey! welcome to your nightmare!";
@@ -129,7 +154,7 @@ public class Ui {
             toReturn = "  Bye. Hope to see you again soon!";
         } else if (nextInput.equals("list")) {
             toReturn = taskList.toString();
-        } else if (commandComponents[0].equals("done")) {
+        } else if (header.equals("done")) {
             try {
                 int taskIndex = Integer.parseInt(commandComponents[1]) - 1;
                 toReturn = markTaskDone(taskIndex);
@@ -141,7 +166,7 @@ public class Ui {
                         new DoneException("Please provide a task number to mark as done!");
                 toReturn = doneException.getMessage();
             }
-        } else if (commandComponents[0].equals("delete")) {
+        } else if (header.equals("delete")) {
             try {
                 int taskIndex = Integer.parseInt(commandComponents[1]) - 1;
                 toReturn = deleteTask(taskIndex);
@@ -153,9 +178,19 @@ public class Ui {
                         new DeleteTaskException("Please provide a task number to delete!");
                 toReturn = deleteException.getMessage();
             }
-        } else if (commandComponents[0].equals("find")) {
+        } else if (header.equals("find")) {
             String keyword = commandComponents[1];
             toReturn = taskList.searchWithKeyword(keyword);
+        } else if (header.equals("set")) {
+            // set 2 priority low or medium or high
+            int taskIndex = Integer.parseInt(commandComponents[1]) - 1;
+            String fieldToSet = commandComponents[2];
+            String priority = commandComponents[3];
+            if (fieldToSet.equals("priority")) {
+                toReturn = markTaskPriority(priority, taskIndex);
+            } else {
+                toReturn = "  Sorry setting of this type of label is supported";
+            }
         } else {
             toReturn = getResultFromParser(nextInput);
         }
