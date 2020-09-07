@@ -44,8 +44,8 @@ public class SortCommand extends Command {
                                     .sorted(comparator)
                                     .collect(Collectors.toList()));
         storage.generateTxt(list);
-        return ui.showSort() + "\n" + new ListCommand().
-                execute(list, ui, storage);
+        return ui.showSort() + "\n" + new ListCommand()
+                .execute(list, ui, storage);
 
     }
 

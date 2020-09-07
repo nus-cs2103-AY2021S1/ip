@@ -1,9 +1,9 @@
 package duke.ui;
 
+import java.util.Scanner;
+
 import duke.task.Task;
 import duke.tasklist.TaskList;
-
-import java.util.Scanner;
 
 /**
  * Represents an object that is responsible for user interaction.
@@ -50,6 +50,12 @@ public class Ui {
         return "Please take a look at the tasks:";
     }
 
+    /**
+     * Represents the message displayed on GUI for a task
+     * @param count the index of this task in list
+     * @param task the task
+     * @return String representation of the task with index
+     */
     public String showTask(int count, Task task) {
         String space = ". ";
         if (count < 10) {
