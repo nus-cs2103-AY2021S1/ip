@@ -1,5 +1,7 @@
 package main.java;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -7,9 +9,9 @@ public class CommandHandler {
     Scanner sc;
     ArrayList<Task> taskList;
 
-    public CommandHandler() {
+    public CommandHandler(ArrayList<Task> taskList) {
         this.sc = new Scanner(System.in);
-        this.taskList = new ArrayList<>();
+        this.taskList = taskList;
     }
 
     public void handleCommand() {
@@ -209,5 +211,34 @@ public class CommandHandler {
 
     public void handleDefault() throws DukeException {
         throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
+    }
+
+    public void updateFile() throws IOException {
+        FileWriter fw = new FileWriter("./command.txt");
+        FileWriter fwAppend = new FileWriter("./command.txt", true);
+        for (int i = 0; i < taskList.size(); i++) {
+            Task task = taskList.get(i);
+            String line;
+            if(task instanceof Todo) {
+                int done = task.isDone? 1:0;
+                line = "T|" + done + "|" + task.description;
+            } else if(task instanceof Deadline) {
+                int done = task.isDone? 1:0;
+                line = "D|" + done + "|" + task.description + "|" + ((Deadline) task).deadline;
+            } else {
+                int done = task.isDone? 1:0;
+                line = "T|" + done + "|" + task.description + "|" + ((Event) task).time;
+            }
+
+            if (i == 0) {
+                fw.write(line + '\n');
+            } else if (i < taskList.size() - 1) {
+                fwAppend.write(line + '\n');
+            } else {
+                fwAppend.write(line);
+            }
+        }
+        fw.close();
+        fwAppend.close();
     }
 }
