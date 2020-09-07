@@ -39,18 +39,8 @@ public class Storage {
                 ArrayList<Task> taskList = new ArrayList<>();
                 Scanner scn = new Scanner(this.file);
                 while (scn.hasNextLine()) {
-                    String[] data = scn.nextLine().split(SEPARATOR);
-                    switch (data[0]) {
-                    case Storage.TODO_FORMAT:
-                        taskList.add(new Todo(data[2], convertFormatToIsDone(data[1])));
-                        break;
-                    case Storage.EVENT_FORMAT:
-                        taskList.add(new Event(data[2], convertFormatToIsDone(data[1]), data[3]));
-                        break;
-                    case Storage.DEADLINE_FORMAT:
-                        taskList.add(new Deadline(data[2], convertFormatToIsDone(data[1]), data[3]));
-                        break;
-                    }
+                    Task task = convertFormatToTask(scn.nextLine());
+                    taskList.add(task);
                 }
                 scn.close();
                 return taskList;
@@ -74,25 +64,49 @@ public class Storage {
         try {
             fileWriter = new FileWriter(this.file);
             for (Task task : tasks.getListOfTasks()) {
-                if (task instanceof Todo) {
-                    fileWriter.write(String.join(Storage.SEPARATOR,
-                            Storage.TODO_FORMAT, convertIsDoneToFormat(task.getIsDone()), task.getDescription()));
-                } else if (task instanceof Event) {
-                    fileWriter.write(String.join(Storage.SEPARATOR,
-                            Storage.EVENT_FORMAT, convertIsDoneToFormat(task.getIsDone()), task.getDescription(),
-                            ((Event) task).getAt()));
-                } else if (task instanceof Deadline) {
-                    fileWriter.write(String.join(Storage.SEPARATOR,
-                            Storage.DEADLINE_FORMAT, convertIsDoneToFormat(task.getIsDone()), task.getDescription(),
-                            ((Deadline) task).getBy()));
-                } else {
-                    throw new DukeException("Sorry, there is an error saving the task list here.");
-                }
+                fileWriter.write(convertTaskToFormat(task));
                 fileWriter.write(System.lineSeparator());
             }
             fileWriter.close();
         } catch (IOException e) {
             throw new DukeException("Sorry, there is an error saving the task list here.");
+        }
+    }
+
+    /**
+     * Converts the string format in which the task is saved as into the Task object.
+     */
+    private Task convertFormatToTask(String taskFormat) throws DukeException {
+        String[] taskFormatData = taskFormat.split(SEPARATOR);
+        switch (taskFormatData[0]) {
+        case Storage.TODO_FORMAT:
+            return new Todo(taskFormatData[2], convertFormatToIsDone(taskFormatData[1]));
+        case Storage.EVENT_FORMAT:
+            return new Event(taskFormatData[2], convertFormatToIsDone(taskFormatData[1]), taskFormatData[3]);
+        case Storage.DEADLINE_FORMAT:
+            return new Deadline(taskFormatData[2], convertFormatToIsDone(taskFormatData[1]), taskFormatData[3]);
+        default:
+            throw new DukeException("Sorry, there is an invalid task format.");
+        }
+    }
+
+    /**
+     * Converts the Task object into the string format which it is to be saved as.
+     */
+    private String convertTaskToFormat(Task task) throws DukeException {
+        if (task instanceof Todo) {
+            return (String.join(Storage.SEPARATOR,
+                    Storage.TODO_FORMAT, convertIsDoneToFormat(task.getIsDone()), task.getDescription()));
+        } else if (task instanceof Event) {
+            return (String.join(Storage.SEPARATOR,
+                    Storage.EVENT_FORMAT, convertIsDoneToFormat(task.getIsDone()), task.getDescription(),
+                    ((Event) task).getAt()));
+        } else if (task instanceof Deadline) {
+            return (String.join(Storage.SEPARATOR,
+                    Storage.DEADLINE_FORMAT, convertIsDoneToFormat(task.getIsDone()), task.getDescription(),
+                    ((Deadline) task).getBy()));
+        } else {
+            throw new DukeException("Sorry, there is an invalid task item.");
         }
     }
 
