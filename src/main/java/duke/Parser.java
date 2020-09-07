@@ -93,6 +93,7 @@ public class Parser {
     }
 
     public static Command parse(String fullCommand) throws DukeException {
+        assert fullCommand != null : "Command should not be null";
         if (fullCommand.equalsIgnoreCase("list")) {
             return new ListCommand();
         } else if (fullCommand.startsWith("done")) {
