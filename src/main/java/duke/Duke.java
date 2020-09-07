@@ -51,11 +51,20 @@ public class Duke {
                 isRunning = false;
             }
             response = command.execute(tasks, ui, storage);
-            storage.write(tasks);
         } catch (DukeException e) {
             response = ui.showError(e.getMessage());
         }
         return response;
+    }
 
+    /**
+     * Store data into the data file
+     */
+    public void cleanUp() {
+        try {
+            storage.write(tasks);
+        } catch (DukeException e) {
+            System.out.println("Cannot write file");
+        }
     }
 }
