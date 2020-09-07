@@ -783,3 +783,32 @@ Here are the tags in your list:
 1.#cool
 2.#bro
 
+Hello! I'm Duke
+What can I do for you?
+
+☹ OOPS!!! I'm sorry, but I don't know what that means :-(
+Got it. I've added this task:
+  [T][✘] read book #cool #fun
+Now you have 1 tasks in the list.
+Got it. I've added this task:
+  [T][✘] more books #verygood
+Now you have 2 tasks in the list.
+Here are the tasks in your list:
+
+Here are the tasks in your list:
+1.[T][✘] read book #cool #fun
+
+Here are the tasks in your list:
+1.[T][✘] read book #cool #fun
+2.[T][✘] more books #verygood
+
+Here are the tags in your list:
+1.#cool
+
+Here are the tags in your list:
+1.#cool
+2.#fun
+
+Here are the tags in your list:
+1.#verygood
+
