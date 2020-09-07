@@ -38,8 +38,7 @@ public class MainWindow extends AnchorPane {
     }
 
     public void setDuke(Duke d) {
-        assert(
-                Objects.isNull(d));
+        assert(!Objects.isNull(d));
         duke = d;
     }
 
