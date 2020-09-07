@@ -2,6 +2,7 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.task.Task;
 
@@ -79,14 +80,14 @@ public class TaskList {
      * @return A filtered list of tasks.
      */
     public List<Task> findTasks(String keyword) {
-        List<Task> filteredTasks = new ArrayList<>();
         /*
+        List<Task> filteredTasks = new ArrayList<>();
+        // Original version
         for (Task task : tasks) {
             if (task.getDescription().contains(keyword)) {
                 filteredTasks.add(task);
             }
         }
-         */
 
         // Lambda version
         tasks.forEach(task -> {
@@ -95,5 +96,13 @@ public class TaskList {
             }
         });
         return filteredTasks;
+
+        */
+
+        // Stream Version
+        return tasks.stream()
+                .filter(task -> task.getDescription().contains(keyword))
+                .collect(Collectors.toList());
+
     }
 }

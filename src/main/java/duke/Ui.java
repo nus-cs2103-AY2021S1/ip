@@ -1,7 +1,6 @@
 package duke;
 
 import java.util.List;
-import java.util.Scanner;
 
 import duke.task.Task;
 
@@ -12,16 +11,6 @@ import duke.task.Task;
  */
 public class Ui {
     private static final String INDENTATION = "     ";
-    private static final String LINE = "    ____________________________________________________________";
-    private Scanner scanner;
-
-    /**
-     * Ui constructor.
-     */
-    public Ui() {
-        this.scanner = new Scanner(System.in);
-    }
-
 
     /**
      * Displays the introductions.
@@ -31,7 +20,6 @@ public class Ui {
         return reply("Hello, I'm Ravenloss") + "\n"
                 + reply("What can I do for you?");
     }
-
 
     /**
      * Displays the message with the indentation.
@@ -76,6 +64,8 @@ public class Ui {
             for (int i = 0; i < filteredTasks.size(); i++) {
                 String number = (i + 1) + ".";
                 Task currentTask = filteredTasks.get(i);
+
+                // Sample output: 1.[T][✘] Task with keyword
                 buffer.append(reply(number + currentTask.toString())).append("\n");
             }
         }
@@ -90,9 +80,12 @@ public class Ui {
      */
     public String addMessage(Task currentTask, Integer size) {
         StringBuilder buffer = new StringBuilder();
-        buffer.append(reply("Got it. I've added this duke.task:")).append("\n")
-                .append(reply(INDENTATION + currentTask.toString())).append("\n")
-                .append(reply("Now you have " + size + " tasks in the list.")).append("\n");
+        buffer.append(reply("Got it. I've added this duke.task:"))
+                .append("\n")
+                .append(reply(INDENTATION + currentTask.toString()))
+                .append("\n")
+                .append(reply("Now you have " + size + " tasks in the list."))
+                .append("\n");
         return buffer.toString();
     }
 
@@ -104,8 +97,10 @@ public class Ui {
     public String doneMessage(Task currentTask) {
         currentTask.done();
         StringBuilder buffer = new StringBuilder();
-        buffer.append(reply("Good job! I've marked this task as done")).append("\n")
-                .append(reply(INDENTATION + currentTask.toString())).append("\n");
+        buffer.append(reply("Good job! I've marked this task as done"))
+                .append("\n")
+                .append(reply(INDENTATION + currentTask.toString()))
+                .append("\n");
         return buffer.toString();
     }
 
@@ -125,8 +120,10 @@ public class Ui {
      */
     public String deleteMessage(Task currentTask, Integer sizeLeft) {
         StringBuilder buffer = new StringBuilder();
-        buffer.append(reply("Noted. I've removed this task: ")).append("\n")
-                .append(reply(INDENTATION + currentTask.toString())).append("\n")
+        buffer.append(reply("Noted. I've removed this task: "))
+                .append("\n")
+                .append(reply(INDENTATION + currentTask.toString()))
+                .append("\n")
                 .append(reply("Now you have " + sizeLeft + " tasks in the list."))
                 .append("\n");
         return buffer.toString();

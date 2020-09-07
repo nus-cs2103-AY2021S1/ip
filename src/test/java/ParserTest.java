@@ -9,7 +9,7 @@ import duke.exceptions.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
-import duke.task.ToDo;
+import duke.task.Todo;
 
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -22,7 +22,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
  * Tests the methods and exceptions for the Parser class.
  */
 public class ParserTest {
-    Task TODO = new ToDo("Todo Testing", false);
+    Task TODO = new Todo("Todo Testing", false);
     Task DEADLINE = new Deadline("Deadline Testing", false,
             LocalDateTime.of(2020, 8, 30, 16, 0 ));
     Task EVENT  = new Event("Event Testing", false,
@@ -46,7 +46,7 @@ public class ParserTest {
         Ui ui = new Ui();
         Storage storage = new Storage();
 
-        Task doneToDo = new ToDo("Todo Testing", true);
+        Task doneToDo = new Todo("Todo Testing", true);
         taskList.addToPlanner(doneToDo);
 
         assertThrows(DukeAlreadyDoneException.class, () -> {
@@ -61,7 +61,7 @@ public class ParserTest {
         Ui ui = new Ui();
         Storage storage = new Storage();
 
-        Task doneToDo = new ToDo("Todo Testing", true);
+        Task doneToDo = new Todo("Todo Testing", true);
         taskList.addToPlanner(doneToDo);
 
         assertThrows(DukeInvalidIndexException.class, () -> {
