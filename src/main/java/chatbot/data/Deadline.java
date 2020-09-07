@@ -1,37 +1,17 @@
 package chatbot.data;
 
-import chatbot.common.Message;
-import chatbot.exception.ChatbotException;
-
 import java.time.LocalDate;
 
-import java.time.format.DateTimeParseException;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
 
-    public Deadline(String description, boolean isDone, LocalDate timestamp) {
-        super(description, "D", isDone, timestamp);
+    public Deadline(String description, boolean isDone, LocalDate date) {
+        super(description, "D", isDone, date);
     }
 
-    public static Deadline newDeadline(String raw) throws ChatbotException {
-        if (raw.length() == 0) {
-            throw new ChatbotException(Message.TASK_EMPTY);
-        }
-
-        String description = raw.split("/by")[0].trim();
-        LocalDate timestamp;
-
-        try {
-            String dateString = raw.split("/by")[1].trim();
-            timestamp = LocalDate.parse(dateString);
-        } catch (ArrayIndexOutOfBoundsException e) {
-            throw new ChatbotException(Message.DATE_MISSING);
-        } catch (DateTimeParseException e) {
-            throw new ChatbotException(Message.INVALID_DATE);
-        }
-
-        return new Deadline(description, false, timestamp);
+    public static Deadline newDeadline(String description, LocalDate date) {
+        return new Deadline(description, false, date);
     }
 
     @Override

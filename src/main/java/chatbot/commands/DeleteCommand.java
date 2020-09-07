@@ -7,12 +7,16 @@ import chatbot.exception.ChatbotException;
 import chatbot.storage.Storage;
 import chatbot.ui.Ui;
 
-public class AddCommand extends Command {
+/**
+ * Represents a command to either delete or mark task as done given a type.
+ */
 
-    private final Task toAdd;
+public class DeleteCommand extends Command {
 
-    public AddCommand(Task task) {
-        this.toAdd = task;
+    int index;
+
+    public DeleteCommand(int index) {
+        this.index = index;
     }
 
     @Override
@@ -22,9 +26,11 @@ public class AddCommand extends Command {
 
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws ChatbotException {
-        assert toAdd != null : "Task is not supposed to be null";
-        taskList.addTask(toAdd);
+
+        Task deletedTask = taskList.removeTask(index);
+
         assert storage.saveTasks(taskList.getTasks()) : "Save tasks supposed to return true.";
-        return ui.addSuccess(toAdd, taskList.count());
+
+        return ui.deleteSuccess(deletedTask, taskList.count());
     }
 }

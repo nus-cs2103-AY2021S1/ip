@@ -1,19 +1,20 @@
 package chatbot.commands;
 
-import chatbot.common.Message;
 import chatbot.data.TaskList;
+
 import chatbot.storage.Storage;
 import chatbot.ui.Ui;
 
-public class ExitCommand extends Command {
+public class ShowAllCommand extends Command {
 
     @Override
     public boolean isExit() {
-        return true;
+        return false;
     }
 
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        return ui.errorMessage(Message.EXIT_MESSAGE);
+
+        return ui.list(taskList.getTasks());
     }
 }

@@ -31,12 +31,10 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setChatbot(Chatbot d) {
-        chatbot = d;
-        String greeting = chatbot.greeting();
-        dialogContainer.getChildren().addAll(
-                DialogBox.getChatbotDialog(greeting, chatbotImage)
-        );
+    public void setChatbot(Chatbot b) {
+        chatbot = b;
+
+        showWelcomeMessage();
     }
 
     /**
@@ -54,5 +52,13 @@ public class MainWindow extends AnchorPane {
         );
 
         userInput.clear();
+    }
+
+    @FXML
+    private void showWelcomeMessage() {
+        String greeting = chatbot.generateWelcomeMessage();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getChatbotDialog(greeting, chatbotImage)
+        );
     }
 }

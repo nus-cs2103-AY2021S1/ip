@@ -1,10 +1,11 @@
 package chatbot.data;
 
+import chatbot.common.Message;
 import chatbot.exception.ChatbotException;
 
 import java.util.ArrayList;
-import java.time.LocalDate;
 import java.util.Iterator;
+import java.util.function.Predicate;
 
 /**
  * A class containing a list of tasks, with methods for adding new tasks, deleting and returning
@@ -47,14 +48,9 @@ public class TaskList {
     /**
      * Adds a new task to the list of tasks.
      * @param task new task to be added
-     * @return true if a non-null task object is given
      */
-    public boolean addTask(Task task) {
-        if (task == null) {
-            return false;
-        }
+    public void addTask(Task task) {
         tasks.add(task);
-        return true;
     }
 
     /**
@@ -69,14 +65,14 @@ public class TaskList {
         try {
             removed = this.tasks.remove(index);
         } catch (IndexOutOfBoundsException e) {
-            throw new ChatbotException("That item does not exist!");
+            throw new ChatbotException(Message.ITEM_NOT_EXIST);
         }
 
         return removed;
     }
 
     /**
-     * Mark a task on the list as done.
+     * Marks a task on the list as done.
      * @param index index to locate the task
      * @return task to be marked as done
      * @throws ChatbotException if given index is out-of-bounds
@@ -88,41 +84,26 @@ public class TaskList {
             taskDone = getTask(index).markDone();
             this.tasks.set(index, taskDone);
         } catch (IndexOutOfBoundsException e) {
-            throw new ChatbotException("That item does not exist!");
+            throw new ChatbotException(Message.ITEM_NOT_EXIST);
         }
 
         return taskDone;
     }
 
     /**
-     * Returns a list of tasks due on a given date.
-     * @param date given date
-     * @return list of tasks due
+     * Returns a list of tasks that fulfills the given predicate.
+     * @param pred given predicate
+     * @return list of tasks
      */
-    public ArrayList<Task> retrieveTasksOnDate(LocalDate date) {
+    public ArrayList<Task> retrieveTasksByPred(Predicate<Task> pred) {
 
         Iterator<Task> iter = this.tasks.iterator();
         ArrayList<Task> tasks = new ArrayList<>();
 
         while (iter.hasNext()) {
-            Task tsk = iter.next();
-            LocalDate taskDate = tsk.getDate();
-            if (taskDate != null && taskDate.equals(date)) {
-                tasks.add(tsk);
-            }
-        }
-        return tasks;
-    }
-
-    public ArrayList<Task> find(String searchStr) {
-
-        Iterator<Task> iter = this.tasks.iterator();
-        ArrayList<Task> tasks = new ArrayList<>();
-
-        while (iter.hasNext()) {
-            Task tsk = iter.next();
-            if (tsk.getDescription().contains(searchStr)) {
-                tasks.add(tsk);
+            Task task = iter.next();
+            if (pred.test(task)) {
+                tasks.add(task);
             }
         }
 

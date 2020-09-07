@@ -7,12 +7,12 @@ import chatbot.exception.ChatbotException;
 import chatbot.storage.Storage;
 import chatbot.ui.Ui;
 
-public class AddCommand extends Command {
+public class DoneCommand extends Command {
 
-    private final Task toAdd;
+    int index;
 
-    public AddCommand(Task task) {
-        this.toAdd = task;
+    public DoneCommand(int index) {
+        this.index = index;
     }
 
     @Override
@@ -22,9 +22,11 @@ public class AddCommand extends Command {
 
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws ChatbotException {
-        assert toAdd != null : "Task is not supposed to be null";
-        taskList.addTask(toAdd);
+        Task taskDone = taskList.markAsDone(index);
+
         assert storage.saveTasks(taskList.getTasks()) : "Save tasks supposed to return true.";
-        return ui.addSuccess(toAdd, taskList.count());
+
+        return ui.markDoneSuccess(taskDone);
     }
+
 }
