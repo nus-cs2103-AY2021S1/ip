@@ -73,10 +73,13 @@ public class Storage {
 
         while (readSc.hasNextLine()) {
             String curr = readSc.nextLine();
-            switch (curr.charAt(1)) {
+            char taskType = curr.charAt(1);
+            char taskState = curr.charAt(4);
+            assert taskType != null : "Command should not be null";
+            switch (taskType) {
             case 'T':
                 try {
-                    if (curr.charAt(4) == 'X') {
+                    if (taskState == 'X') {
                         tl.addTodo(ui, curr.split(" ", 2)[1], false, false);
                     } else {
                         tl.addTodo(ui, curr.split(" ", 2)[1], false, true);
@@ -87,7 +90,7 @@ public class Storage {
                 break;
             case 'D':
                 try {
-                    if (curr.charAt(4) == 'X') {
+                    if (taskState == 'X') {
                         tl.addDeadline(ui, curr.split(" ", 2)[1], false, false);
                     } else {
                         tl.addDeadline(ui, curr.split(" ", 2)[1], false, true);
@@ -98,7 +101,7 @@ public class Storage {
                 break;
             case 'E':
                 try {
-                    if (curr.charAt(4) == 'X') {
+                    if (taskState == 'X') {
                         tl.addEvent(ui, curr.split(" ", 2)[1], false, false);
                     } else {
                         tl.addEvent(ui, curr.split(" ", 2)[1], false, true);

@@ -4,18 +4,19 @@ import exception.DukeErrorException;
 import exception.UnknownCommandException;
 
 /**
- * Represents parser class to parse user commands
+ * Represents parser class to parse user commands.
  */
 public class Parser {
 
     /**
-     * Method to verify the command is valid or not
+     * Verifies whether the command is valid or not.
      *
-     * @param commandString user input
-     * @return a {@code Command} object representing user actions
+     * @param commandString user input.
+     * @return a {@code Command} object representing user actions.
      */
     public static Commands processInput(String commandString) throws UnknownCommandException {
         Commands cmd = Commands.valueOf(commandString);
+        assert cmd != null : "Command should not be null";
         if (!cmd.equals(Commands.BYE)
                 && !cmd.equals(Commands.EVENT)
                 && !cmd.equals(Commands.DEADLINE)
@@ -30,15 +31,15 @@ public class Parser {
     }
 
     /**
-     * Main method to call to parse user commands
+     * Parses user commands.
      *
-     * @param splitted user input
-     * @return a {@code Command} object representing user actions
+     * @param splitted user input.
+     * @return a {@code Command} object representing user actions.
      */
     public static Commands processCommand(String[] splitted) throws DukeErrorException {
         try {
             Commands command = processInput(splitted[0].toUpperCase());
-
+            assert command != null : "Command should not be null";
             return command;
         } catch (IllegalArgumentException | UnknownCommandException ex) {
             System.out.println(ex);

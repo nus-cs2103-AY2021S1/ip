@@ -11,7 +11,7 @@ import exception.InvalidTodoException;
 import ui.Ui;
 
 /**
- * Represents a {@code Tasklist} object to store tasks in memory
+ * Represents a {@code Tasklist} object to store tasks in memory.
  */
 public class TaskList {
     // List of tasks
@@ -26,11 +26,11 @@ public class TaskList {
     }
 
     /**
-     * Read input from String and add new Deadline object to the list
-     * @param ui Ui object to print user display
-     * @param str The string input
-     * @param isNew Boolean value that indicates the task is new or not
-     * @param isDone Boolean value that indicates the state of the task
+     * Reads input from String and add new Deadline object to the list.
+     * @param ui Ui object to print user display.
+     * @param str The string input.
+     * @param isNew Boolean value that indicates the task is new or not.
+     * @param isDone Boolean value that indicates the state of the task.
      */
     public String addDeadline(Ui ui, String str, boolean isNew, boolean isDone)
             throws InvalidDeadlineException {
@@ -40,6 +40,7 @@ public class TaskList {
         } else {
             deadline = str.split("on");
         }
+        assert deadline != null : "Deadline should not be empty";
         if (deadline.length > 2) {
             throw new InvalidDeadlineException("☹ Task deadline must be written after `/by`.");
         }
@@ -63,11 +64,11 @@ public class TaskList {
     }
 
     /**
-     * Read input from String and add new Event object to the list
-     * @param ui Ui object to print user display
-     * @param str The string input
-     * @param isNew Boolean value that indicates the task is new or not
-     * @param isDone Boolean value that indicates the state of the task
+     * Reads input from String and add new Event object to the list.
+     * @param ui Ui object to print user display.
+     * @param str The string input.
+     * @param isNew Boolean value that indicates the task is new or not.
+     * @param isDone Boolean value that indicates the state of the task.
      */
     public String addEvent(Ui ui, String str, boolean isNew, boolean isDone)
             throws InvalidEventException {
@@ -77,6 +78,7 @@ public class TaskList {
         } else {
             event = str.split("on");
         }
+        assert event != null : "Event should not be empty";
         if (event.length > 2) {
             throw new InvalidEventException("☹ Event time must be written after `/at`.");
         }
@@ -100,19 +102,21 @@ public class TaskList {
     }
 
     /**
-     * Read input from String and add new Todo object to the list
-     * @param ui Ui object to print user display
-     * @param str The string input
-     * @param isNew Boolean value that indicates the task is new or not
-     * @param isDone Boolean value that indicates the state of the task
+     * Reads input from String and add new Todo object to the list.
+     * @param ui Ui object to print user display.
+     * @param str The string input.
+     * @param isNew Boolean value that indicates the task is new or not.
+     * @param isDone Boolean value that indicates the state of the task.
      */
     public String addTodo(Ui ui, String str, boolean isNew, boolean isDone)
             throws InvalidTodoException {
         String description = str.trim();
+        assert description != null : "Todo description must not be empty";
         if (description.equals("")) {
             throw new InvalidTodoException("☹ Todo description must be specified.");
         }
         Todo curr = new Todo(description, isDone);
+        assert this.tasks != null : "The task list should not be null";
         this.tasks.add(curr);
         if (isNew) {
             return ui.describeTask(this.tasks, curr);
@@ -121,35 +125,38 @@ public class TaskList {
     }
 
     /**
-     * Deletes a task from the list
-     * @param index The index of the target object
+     * Deletes a task from the list.
+     * @param index The index of the target object.
      */
     public String deleteTask(int index) throws DukeErrorException {
         if (index >= this.tasks.size() || index < 0) {
             throw new DukeErrorException("Operation: delete " + (index + 1) + " fails ☹.");
         }
+        assert this.tasks != null : "The task list should not be null";
         Task deleted = this.tasks.remove(index);
         return Ui.printDeleted(deleted, this.tasks);
     }
 
     /**
-     * Make the target task to be completed
-     * @param index The index of the target object
+     * Makes the target task to be completed.
+     * @param index The index of the target object.
      */
     public String makeDone(int index) throws DukeErrorException {
         if (index >= this.tasks.size() || index < 0) {
             throw new DukeErrorException("Operation: done " + (index + 1) + " fails ☹.");
         }
+        assert this.tasks != null : "The task list should not be null";
         this.tasks.set(index, this.tasks.get(index).completeTask());
         return Ui.printDone(this.tasks, index);
     }
 
     /**
-     * Finds Task objects that contains the keyword
-     * @param query The query keyword
-     * @reutn A list of task that fulfills the query keyword
+     * Finds Task objects that contains the keyword.
+     * @param query The query keyword.
+     * @reutn A list of task that fulfills the query keyword.
      */
     public ArrayList<Task> findTask(String query) {
+        assert this.tasks != null : "The task list should not be null";
         ArrayList<Task> suitableTasks = new ArrayList<>();
         this.tasks.forEach(x -> {
             if (x.getDescription().contains(query)) {
