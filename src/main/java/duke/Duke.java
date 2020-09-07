@@ -122,10 +122,14 @@ public class Duke extends Application {
      */
     private String getResponse(String input) {
         try {
-            return javafxBot(input);
+            assert !input.isBlank();
+            String response = javafxBot(input);
+            assert !response.isBlank();
+            return response;
         } catch (DukeException e) {
             return e.getMessage();
         }
+
     }
 
     /**

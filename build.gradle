@@ -29,6 +29,7 @@ test {
     }
 }
 
+
 application {
     mainClassName = "duke.Main"
 }
@@ -43,6 +44,7 @@ checkstyle {
 }
 
 run{
+    enableAssertions = true
     standardInput = System.in
 }
 
