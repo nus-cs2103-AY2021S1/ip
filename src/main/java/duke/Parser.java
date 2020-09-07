@@ -3,106 +3,121 @@ import java.time.LocalDate;
 import java.util.HashMap;
 
 /**
- * Parse the user input is useable form
+ * Parse the user input is useable form.
  */
 public class Parser {
     /**
-     * parse and get the instruction type of user input
-     * @param user_input input give from user
-     * @return instruction type of user input
+     * Returns instruction type by parsing user input.
+     *
+     * @param userInput Input give from user.
+     * @return Instruction type of user input.
      */
-    static String parseInstruction(String user_input) {
-        String instructionType = user_input.split(" ")[0];
+    static String parseInstruction(String userInput) {
+        String instructionType = userInput.split(" ")[0];
         return instructionType;
     }
 
     /**
-     * parse instruction for marking tasks done and return index of task
-     * @param user_input input give from user
-     * @return index of task which will be marked as done
+     * Return index of tasks which will be marked as done by parsing mark task done instruction.
+     *
+     * @param userInput Input give from user.
+     * @return Index of task which will be marked as done.
      */
-    static int parseMarkDoneInstr(String user_input) {
-        int index = Integer.parseInt(user_input.split(" ")[1]) - 1;
+    static int parseMarkDoneInstr(String userInput) {
+        int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
         assert index >= 0 : "index cannot be nagative";
         return index;
     }
 
     /**
-     * parse instruction for deleting task
-     * @param user_input input give from user
-     * @return index of task which will be deleted
+     * Return index of task which will be deleted by parsing delete task instruction.
+     *
+     * @param userInput Input give from user.
+     * @return Index of task which will be deleted.
      */
-    static int parseDeleteInstr(String user_input) {
-        int index = Integer.parseInt(user_input.split(" ")[1]) - 1;
+    static int parseDeleteInstr(String userInput) {
+        int index = Integer.parseInt(userInput.split(" ")[1]) - 1;
         assert index >= 0 : "index cannot be nagative";
         return index;
     }
 
     /**
-     * parse instruction for adding todo
-     * @param user_input input give from user
-     * @return description of todo
+     * Returns information required to add todo task by parsing add todo instruction.
+     *
+     * @param userInput Input give from user.
+     * @return Description of todo.
      */
-    static String parseAddTodoInstr(String user_input) throws DukeException {
+    static String parseAddTodoInstr(String userInput) throws DukeException {
         // check if input is valid
-        if (user_input.split(" ", 2).length == 1) {
+        if (userInput.split(" ", 2).length == 1) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
+
         // get data
-        String description = user_input.split(" ", 2)[1];
+        String description = userInput.split(" ", 2)[1];
         return description;
     }
 
     /**
-     * parse instruction for adding deadline
-     * @param user_input input give from user
-     * @return hashMap containing description and deadline of task
+     * Returns information required to create deadline by parsing add deadline instruction.
+     *
+     * @param userInput iInput give from user.
+     * @return HashMap containing description and deadline of task.
      */
-    static HashMap<String, Object> parseAddDeadlineInstr(String user_input) throws DukeException {
+    static HashMap<String, Object> parseAddDeadlineInstr(String userInput) throws DukeException {
         // check if input is valid
-        if (user_input.split(" ", 2).length == 1) {
+        if (userInput.split(" ", 2).length == 1) {
             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
         }
-        String task = user_input.split(" ", 2)[1];
+        String task = userInput.split(" ", 2)[1];
         if (task.split(" /by ", 2).length < 2) {
             throw new DukeException("☹ OOPS!!! The description and time is required for deadline");
         }
+
         // get data
         String description = task.split(" /by ", 2)[0];
         String time = task.split(" /by ")[1];
-        LocalDate l_time = LocalDate.parse(time);
-        HashMap<String, Object> parsedData = new HashMap<String, Object>(){
-            { put("description", description); put("time", l_time); }
+        LocalDate localTime = LocalDate.parse(time);
+        HashMap<String, Object> parsedData = new HashMap<String, Object>() {
+            {
+                put("description", description);
+                put("time", localTime);
+            }
         };
         return parsedData;
     }
 
     /**
-     * parse instruction for adding event
-     * @param user_input input give from user
-     * @return hashMap containing description and eventTime of event
+     * Returns information required to create event by parsing add event instruction.
+     *
+     * @param userInput Input give from user.
+     * @return HashMap containing description and eventTime of event.
      */
-    static HashMap<String, Object> parseAddEventInstr(String user_input) throws DukeException {
+    static HashMap<String, Object> parseAddEventInstr(String userInput) throws DukeException {
         // check if input is valid
-        if (user_input.split(" ", 2).length == 1) {
+        if (userInput.split(" ", 2).length == 1) {
             throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
         }
-        String task = user_input.split(" ", 2)[1];
+        String task = userInput.split(" ", 2)[1];
         if (task.split(" /at ", 2).length < 2) {
             throw new DukeException("☹ OOPS!!! The description and time is required for event");
         }
+
         // get data
-        String description = user_input.split(" /at ", 2)[0];
+        String description = userInput.split(" /at ", 2)[0];
         String time = task.split(" /at ")[1];
-        LocalDate l_time = LocalDate.parse(time);
+        LocalDate localTime = LocalDate.parse(time);
         HashMap<String, Object> parsedData = new HashMap<String, Object>() {
-            { put("description", description); put("time", l_time); }
+            {
+                put("description", description);
+                put("time", localTime);
+            }
         };
         return parsedData;
     }
 
-    static String parseFindInstr(String user_input) {
-        String keyword = user_input.split(" ")[1];
+    static String parseFindInstr(String userInput) {
+        String keyword = userInput.split(" ")[1];
         return keyword;
     }
 

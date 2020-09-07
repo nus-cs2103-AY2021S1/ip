@@ -6,14 +6,15 @@ import java.time.format.DateTimeFormatter;
  * Deadline is one type of tasks.
  * It contains deadline for the task.
  */
-public class Deadline extends Task{
+public class Deadline extends Task {
 
     protected LocalDate deadline;
 
     /**
-     * constructor of Deadline
-     * @param description description of task
-     * @param deadline deadline of task
+     * Constructor of Deadline.
+     *
+     * @param description Description of task.
+     * @param deadline Deadline of task.
      */
     public Deadline(String description, LocalDate deadline) {
         super(description);
@@ -21,8 +22,9 @@ public class Deadline extends Task{
     }
 
     /**
-     * represents Deadline in string
-     * @return string representation of deadline
+     * Returns string representation of Deadline.
+     *
+     * @return String representation of deadline.
      */
     @Override
     public String toString() {

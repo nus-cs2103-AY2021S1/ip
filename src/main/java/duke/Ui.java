@@ -7,7 +7,7 @@ import java.util.Scanner;
 public class Ui {
 
     /**
-     * shows error message occured while loading data from text file
+     * Returns and shows error message of loading data from text file.
      */
     public String showLoadingError() {
         String message = "Failed to load data";
@@ -16,7 +16,7 @@ public class Ui {
     }
 
     /**
-     * show welcome message when app is started
+     * Returns and shows welcome message when app is started.
      */
     public String showWelcome() {
         String logo = " ____        _        \n"
@@ -32,7 +32,7 @@ public class Ui {
     }
 
     /**
-     * show goodbye message when app exits
+     * Returns and show goodbye message when app exits.
      */
     public String showGoodBye() {
         String message = "Bye. Hope to see you again soon!";
@@ -41,8 +41,9 @@ public class Ui {
     }
 
     /**
-     * show list of tasks
-     * @param taskList ArrayList containing tasks
+     * Returns and shows string representation of list of tasks.
+     *
+     * @param taskList ArrayList containing tasks.
      */
     public String showListOfTask(ArrayList<Task> taskList) {
         String message = "Here are the tasks in your list: \n";
@@ -56,8 +57,9 @@ public class Ui {
     }
 
     /**
-     * show message when task is marked done
-     * @param doneTask task which is marked as done
+     * Returns and shows message when task is marked done.
+     *
+     * @param doneTask Task which is marked as done.
      */
     public String showMarkedDoneTask(Task doneTask) {
         assert doneTask.isDone : "this task is not marked as done";
@@ -68,9 +70,10 @@ public class Ui {
     }
 
     /**
-     * show message when task is deleted
-     * @param deletedTask task which is deleted
-     * @param taskList ArrayList containing tasks
+     * Returns and shows message when task is deleted.
+     *
+     * @param deletedTask Task which is deleted.
+     * @param taskList ArrayList containing tasks.
      */
     public String showDeletedTask(Task deletedTask, ArrayList<Task> taskList) {
         assert !taskList.contains(deletedTask) : "this task is not deleted from taskList";
@@ -82,9 +85,10 @@ public class Ui {
     }
 
     /**
-     * show message when task is added
-     * @param addedTask task which is added
-     * @param taskList ArrayList containing tasks
+     * Return and prints message when task is added.
+     *
+     * @param addedTask Task which is added.
+     * @param taskList ArrayList containing tasks.
      */
     public String showAddedTask(Task addedTask, ArrayList<Task> taskList) {
         assert taskList.contains(addedTask) : "this task is not added to the taskList";
@@ -96,7 +100,7 @@ public class Ui {
     }
 
     /**
-     * show horizontal line to saparate different messages
+     * Returns and prints how horizontal line to separate different messages.
      */
     public String showLine() {
         String message = "---------------------------------------";
@@ -105,8 +109,9 @@ public class Ui {
     }
 
     /**
-     * show message for any error occurred
-     * @param message message of error that occurred
+     * Returns and prints error message.
+     *
+     * @param message Message of error that occurred.
      */
     public String showError(String message) {
         System.out.println(message);
@@ -114,16 +119,22 @@ public class Ui {
     }
 
     /**
-     * read command from user input
-     * @return command from user input
+     * Returns command from user input.
+     *
+     * @return Command from user input.
      */
     public String readCommand() {
-        Scanner scanner = new Scanner(System.in);  // Create a Scanner object
-        String user_input = "";
-        user_input = scanner.nextLine();  // Read user input
-        return user_input;
+        Scanner scanner = new Scanner(System.in); // Create a Scanner object
+        String userInput = "";
+        userInput = scanner.nextLine(); // Read user input
+        return userInput;
     }
 
+    /**
+     * Returns and prints message of find command's result.
+     * @param foundTasks List of tasks of found.
+     * @return Message showing tasks found by find command.
+     */
     public String showFoundTask(ArrayList<Task> foundTasks) {
         String message = "Here are the matching tasks in your list: \n";
         int index = 1;
@@ -134,5 +145,4 @@ public class Ui {
         System.out.println(message);
         return message;
     }
-    
 }

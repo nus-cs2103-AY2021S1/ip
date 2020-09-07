@@ -3,17 +3,18 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Event is a type of task
- * contains eventTime of task
+ * Event is a type of task.
+ * Contains eventTime of task.
  */
 public class Event extends Task {
 
     protected LocalDate eventTime;
 
     /**
-     * constructor of Event
-     * @param description description of event
-     * @param eventTime time which event will happen
+     * Constructor of Event.
+     *
+     * @param description Description of event.
+     * @param eventTime Time which event will happen.
      */
     public Event(String description, LocalDate eventTime) {
         super(description);
@@ -21,8 +22,9 @@ public class Event extends Task {
     }
 
     /**
-     * represents event as text
-     * @return string representation of event
+     * Returns string representation of event.
+     *
+     * @return String representation of event.
      */
     @Override
     public String toString() {
