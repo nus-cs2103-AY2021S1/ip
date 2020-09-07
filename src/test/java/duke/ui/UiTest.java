@@ -18,10 +18,11 @@ import duke.task.ToDo;
 public class UiTest {
     private static final String CROSS_ICON = "\u2718";
 
+    @SuppressWarnings("checkstyle:Regexp")
     private Task[] tasks = {
-            new ToDo("read book"),
-            new Deadline("submit project", "20/4/2019"),
-            new Event("shoppee", "12/4/2019 to 02/9/2019")
+        new ToDo("read book"),
+        new Deadline("submit project", "20/4/2019"),
+        new Event("shoppee", "12/4/2019 to 02/9/2019")
     };
     private ArrayList<Task> testSample = new ArrayList<>(Arrays.asList(tasks));
 
