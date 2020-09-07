@@ -20,11 +20,7 @@ public class ListCommand extends Command {
         StringBuilder sb = new StringBuilder();
         sb.append(ui.print("Here are the tasks in your list:\n"));
         List<Task> store = taskList.getList();
-        int count = 0;
-        for (Task task : store) {
-            count++;
-            sb.append(ui.print(String.format("%d. %s\n", count, task)));
-        }
+        store.forEach(task -> sb.append(ui.print(String.format("%d. %s\n", store.indexOf(task) + 1, task))));
         return sb.toString();
     }
 }
