@@ -1,7 +1,11 @@
 package duke;
 
+import static java.time.temporal.TemporalAdjusters.next;
+
+import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.List;
@@ -24,7 +28,23 @@ import duke.task.Todo;
  */
 public class Parser {
     /** List of all the valid date inputs */
-    private static final List<String> DATE_FORMATS = Arrays.asList("d/M/y", "y-M-d");
+    private static final List<String> DATE_FORMATS = Arrays.asList("d/M/yy", "d/MMM/yy", "d/MMMM/yy",
+            "d/M/y", "d/MMM/y", "d/MMMM/y", "y/M/d",
+            "d-M-yy", "d-MMM-yy", "d-MMMM-yy",
+            "d-M-y", "d-MMM-y", "d-MMMM-y", "y-M-d",
+            "d M yy", "d MMM yy", "d MMMM yy",
+            "d M y", "d MMM y", "d MMMM y", "y M d");
+    /** List of all the valid day of the week inputs. */
+    private static final List<String> DAY_FORMATS = Arrays.asList("MONDAY", "MON",
+            "TUESDAY", "TUE", "TUES",
+            "WEDNESDAY", "WED",
+            "THURSDAY", "THUR", "THURS",
+            "FRIDAY", "FRI",
+            "SATURDAY", "SAT",
+            "SUNDAY", "SUN");
+    /** List of all the valid relative day inputs. */
+    private static final List<String> RELATIVE_DAY_FORMATS = Arrays.asList("YESTERDAY", "TODAY", "TOMORROW");
+
 
     /**
      * Parses the input command from the user into a command that the chat bot can understand.
@@ -84,24 +104,31 @@ public class Parser {
     }
 
     /**
-     * Parses input dates in the valid date formats of d/M/y and y-M-d into the local date format.
+     * Parses input dates in the valid date formats into the local date format. Valid date formats include:
+     * <ol>
+     *     <li>day/month/year</li>
+     *     <li>day-month-year</li>
+     *     <li>day month year</li>
+     * </ol>
+     * where day can be e.g. 03 or 3, month can be e.g. 09, 9, Sep, September, and year can be e.g. 2011 or 11.
      *
-     * @param string The date to be parsed.
+     * @param input The date to be parsed.
      * @return Local date format of the input date.
      * @throws DateTimeParseException If the input date is not of an acceptable format.
      */
-    public static LocalDate parseDate(String string) throws DateTimeParseException {
-        for (int i = 0; i < DATE_FORMATS.size(); i++) {
-            String formatString = DATE_FORMATS.get(i);
-            try {
-                return LocalDate.parse(string, DateTimeFormatter.ofPattern(formatString));
-            } catch (DateTimeParseException e) {
-                if (i == DATE_FORMATS.size() - 1) {
-                    throw e;
-                }
+    public static LocalDate parseDate(String input) throws DateTimeParseException {
+        String parsedInput = input.trim().toUpperCase();
+        for (String format : DAY_FORMATS) {
+            if (parsedInput.equals(format)) {
+                return parseLocalDateFromDay(parsedInput);
             }
         }
-        return null;
+        for (String format : RELATIVE_DAY_FORMATS) {
+            if (parsedInput.equals(format)) {
+                return parseLocalDateFromRelativeDay(parsedInput);
+            }
+        }
+        return parseLocalDateFromStringDate(parsedInput);
     }
 
     /**
@@ -112,5 +139,66 @@ public class Parser {
      */
     private static CommandInstruction parseCommandInstruction(String userInstruction) {
         return CommandInstruction.valueOf(userInstruction.toUpperCase());
+    }
+
+    private static LocalDate parseLocalDateFromStringDate(String date) {
+        for (int i = 0; i < DATE_FORMATS.size(); i++) {
+            String formatString = DATE_FORMATS.get(i);
+            try {
+                DateTimeFormatter dTF =
+                        new DateTimeFormatterBuilder().parseCaseInsensitive()
+                                .appendPattern(formatString)
+                                .toFormatter();
+                return LocalDate.parse(date, dTF);
+            } catch (DateTimeParseException e) {
+                if (i == DATE_FORMATS.size() - 1) {
+                    throw e;
+                }
+            }
+        }
+        return null;
+    }
+
+    private static LocalDate parseLocalDateFromDay(String day) {
+        DayOfWeek parsedDay;
+        switch (day) {
+        case "MONDAY": case "MON":
+            parsedDay = DayOfWeek.MONDAY;
+            break;
+        case "TUESDAY": case "TUE": case "TUES":
+            parsedDay = DayOfWeek.TUESDAY;
+            break;
+        case "WEDNESDAY": case "WED":
+            parsedDay = DayOfWeek.WEDNESDAY;
+            break;
+        case "THURSDAY": case "THU": case "THUR": case "THURS":
+            parsedDay = DayOfWeek.THURSDAY;
+            break;
+        case "FRIDAY": case "FRI":
+            parsedDay = DayOfWeek.FRIDAY;
+            break;
+        case "SATURDAY": case "SAT":
+            parsedDay = DayOfWeek.SATURDAY;
+            break;
+        case "SUNDAY": case "SUN":
+            parsedDay = DayOfWeek.SUNDAY;
+            break;
+        default:
+            throw new IllegalArgumentException();
+        }
+        return LocalDate.now().with(next(parsedDay));
+    }
+
+    private static LocalDate parseLocalDateFromRelativeDay(String day) {
+        switch (day) {
+        case "YESTERDAY":
+            return LocalDate.now().minusDays(1);
+        case "TODAY":
+            return LocalDate.now();
+        case "TOMORROW":
+            return LocalDate.now().plusDays(1);
+        default:
+            throw new IllegalArgumentException();
+        }
     }
 }
