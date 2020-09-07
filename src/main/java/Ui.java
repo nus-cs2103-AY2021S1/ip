@@ -3,7 +3,6 @@
  */
 public class Ui {
     public static String messagePrint(String msg) {
-        // Add indentation for new lines
         return msg;
     }
 }

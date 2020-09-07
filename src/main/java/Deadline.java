@@ -11,6 +11,8 @@ public class Deadline extends Task{
     protected LocalDate dueDateAsDate;
 
     Deadline(String taskDescription, String date) {
+        assert(date.length() > 0);
+        assert(taskDescription.length() > 0);
         this.taskDescription = taskDescription;
         this.isCompleted = false;
         this.dueDateAsString = date;
@@ -18,6 +20,8 @@ public class Deadline extends Task{
     }
 
     Deadline(String taskDescription, LocalDate date) {
+        assert(date != null);
+        assert(taskDescription.length() > 0);
         this.taskDescription = taskDescription;
         this.isCompleted = false;
         this.dueDateAsDate = date;
@@ -31,8 +35,10 @@ public class Deadline extends Task{
      */
     public String getDate() {
         if (dueDateAsString != null) {
+            assert(dueDateAsString.length() > 0);
             return dueDateAsString;
         } else {
+            assert(dueDateAsDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")).length() > 0);
             return dueDateAsDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         }
     }

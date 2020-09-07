@@ -11,6 +11,8 @@ public class Event extends Task {
     protected LocalDate eventDateAsDate;
 
     Event(String taskDescription, String date) {
+        assert(date.length() > 0);
+        assert(taskDescription.length() > 0);
         this.taskDescription = taskDescription;
         this.isCompleted = false;
         this.eventDateAsString = date;
@@ -18,6 +20,8 @@ public class Event extends Task {
     }
 
     Event(String taskDescription, LocalDate date) {
+        assert(date != null);
+        assert(taskDescription.length() > 0);
         this.taskDescription = taskDescription;
         this.isCompleted = false;
         this.eventDateAsString = null;
@@ -31,8 +35,10 @@ public class Event extends Task {
      */
     public String getDate() {
         if (eventDateAsString != null) {
+            assert(eventDateAsString.length() > 0);
             return eventDateAsString;
         } else {
+            assert(eventDateAsDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")).length() > 0);
             return eventDateAsDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         }
     }
@@ -51,6 +57,7 @@ public class Event extends Task {
         if (eventDateAsDate != null) {
             return "[E]" + super.toString() + " (at: " + eventDateAsDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
         } else {
+            assert(eventDateAsString.length() > 0);
             return "[E]" + super.toString() + " (at: " + eventDateAsString + ")";
         }
     }
