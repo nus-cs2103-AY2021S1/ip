@@ -7,19 +7,18 @@ import duke.utils.TaskList;
 import duke.utils.Ui;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class EventCommand extends Command {
     private final String description;
     private final String at;
+    protected static List<String> aliases;
 
 
     public EventCommand(String description, String at) {
         this.description = description;
         this.at = at;
-        aliases = new ArrayList<>();
-        aliases.add("ev");
-        aliases.add("event");
 
     }
 

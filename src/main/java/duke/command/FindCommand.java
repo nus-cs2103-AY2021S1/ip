@@ -12,14 +12,11 @@ import duke.utils.Ui;
 
 public class FindCommand extends Command {
     private final String keyword;
+    protected static List<String> aliases;
 
 
     public FindCommand(String keyword) {
         this.keyword = keyword;
-        aliases = new ArrayList<>();
-        aliases.add("f");
-        aliases.add("find");
-
     }
 
 

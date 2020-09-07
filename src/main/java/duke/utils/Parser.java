@@ -34,17 +34,7 @@ public class Parser {
         }
 
         String[] keywords = findKeywords(input.trim());
-
-        if (keywords.length == 1) {
-            throw new DukeException("Please enter a valid command");
-        }
-
-        // todo calls command class to get a enum of command type.
         CommandType commandType = Command.containsKeyword(keywords[0]);
-
-        // todo create test case for parse methods.
-
-        // todo switch through the enums.
 
         switch (commandType) {
         case EXIT:
@@ -72,7 +62,10 @@ public class Parser {
                 throw new DukeException("Event format isn't correct");
             }
         case TODO:
-            return new TodoCommand(input.substring(5));
+            if (input.substring(5).trim().equals("")) {
+                throw new DukeException("Todo what? ");
+            }
+            return new TodoCommand(input.substring(5).trim());
         case FIND:
             try {
                 return new FindCommand(input.substring(5));

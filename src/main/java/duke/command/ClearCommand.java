@@ -1,7 +1,7 @@
 package duke.command;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import duke.utils.DukeException;
 import duke.utils.DukeFileHandler;
@@ -10,13 +10,7 @@ import duke.utils.Ui;
 
 
 public class ClearCommand extends Command {
-
-    public ClearCommand() {
-        aliases = new ArrayList<>();
-        aliases.add("c");
-        aliases.add("clear");
-    }
-
+    protected static List<String> aliases;
 
     @Override
     public void execute(TaskList tasks, Ui ui, DukeFileHandler fileHandler) throws DukeException {
@@ -27,6 +21,7 @@ public class ClearCommand extends Command {
         } catch (IOException e) {
             throw new DukeException("Error clearing lists in storage");
         }
-
     }
+
+
 }

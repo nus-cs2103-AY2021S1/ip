@@ -1,18 +1,19 @@
 package duke.command;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import duke.Main;
 import duke.utils.DukeException;
 import duke.utils.DukeFileHandler;
 import duke.utils.TaskList;
 import duke.utils.Ui;
-
-import java.util.List;
 
 
 /**
  * Corresponds to commands the users wants to execute.
  */
 public abstract class Command {
-    protected static List<String> aliases;
 
 
     /**
@@ -25,12 +26,8 @@ public abstract class Command {
      */
     public abstract void execute(TaskList tasks, Ui ui, DukeFileHandler fileHandler) throws DukeException;
 
-    // todo create a getter to return the alias for the loop
 
-    // todo return a COMMAND_TYPE.
     public static CommandType containsKeyword(String commandKeyword) {
-        // todo loop through all the commands types.
-        // todo for each command type, loop through the alias.
         if (contains(ClearCommand.aliases, commandKeyword)) {
             return CommandType.CLEAR;
         } else if (contains(DeadlineCommand.aliases, commandKeyword)) {
@@ -50,6 +47,7 @@ public abstract class Command {
         } else if (contains(TodoCommand.aliases, commandKeyword)) {
             return CommandType.TODO;
         } else {
+            Main.getWindow().showsToDialog("The keyword got is: " + commandKeyword);
             return CommandType.UNKNOWN;
         }
 
@@ -66,4 +64,42 @@ public abstract class Command {
     }
 
 
+    public static void initialise() {
+        ClearCommand.aliases = new ArrayList<>();
+        ClearCommand.aliases.add("c");
+        ClearCommand.aliases.add("clear");
+
+        DeadlineCommand.aliases = new ArrayList<>();
+        DeadlineCommand.aliases.add("d");
+        DeadlineCommand.aliases.add("deadline");
+
+        DeleteCommand.aliases = new ArrayList<>();
+        DeleteCommand.aliases.add("del");
+        DeleteCommand.aliases.add("delete");
+
+        DoneCommand.aliases = new ArrayList<>();
+        DoneCommand.aliases.add("d");
+        DoneCommand.aliases.add("done");
+
+        EventCommand.aliases = new ArrayList<>();
+        EventCommand.aliases.add("ev");
+        EventCommand.aliases.add("event");
+
+        ExitCommand.aliases = new ArrayList<>();
+        ExitCommand.aliases.add("ex");
+        ExitCommand.aliases.add("bye");
+
+        FindCommand.aliases = new ArrayList<>();
+        FindCommand.aliases.add("f");
+        FindCommand.aliases.add("find");
+
+        ListCommand.aliases = new ArrayList<>();
+        ListCommand.aliases.add("l");
+        ListCommand.aliases.add("list");
+
+        TodoCommand.aliases = new ArrayList<>();
+        TodoCommand.aliases.add("t");
+        TodoCommand.aliases.add("todo");
+
+    }
 }

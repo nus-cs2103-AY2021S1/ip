@@ -6,17 +6,16 @@ import duke.utils.TaskList;
 import duke.utils.Ui;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class DeleteCommand extends Command {
     private final int indexEntryToDelete;
+    protected static List<String> aliases;
 
 
     public DeleteCommand(int indexEntryToDelete) {
         this.indexEntryToDelete = indexEntryToDelete;
-        aliases = new ArrayList<>();
-        aliases.add("del");
-        aliases.add("delete");
     }
 
 
