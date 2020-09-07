@@ -29,7 +29,6 @@ public class Storage {
      * Returns the loaded storage file
      * @return File object
      */
-
     File load() {
         return this.storeFile;
     }

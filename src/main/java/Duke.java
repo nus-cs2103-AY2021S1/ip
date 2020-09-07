@@ -68,8 +68,9 @@ public class Duke {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * getResponse takes the user command as a String and returns the response from Duke
+     * @param input User command String
+     * @return Duke response String
      */
     String getResponse(String input) {
         String command = input;
