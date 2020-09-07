@@ -45,6 +45,7 @@ public class Storage {
      * @throws IOException if exception caught in createNewFile().
      */
     public void reachFile() throws IOException {
+        assert (!fileDirectory.isBlank() && !fileName.isBlank());
         File dataFolder = new File(fileDirectory);
         if (!dataFolder.exists() && !dataFolder.isDirectory()) {
             dataFolder.mkdirs();
@@ -70,6 +71,7 @@ public class Storage {
         reachFile();
 
         try {
+            assert (memoFile != null);
             sc = new Scanner(memoFile);
         } catch (Exception e) {
             return taskCollections;
@@ -80,7 +82,9 @@ public class Storage {
             if (currTask.isBlank()) {
                 continue;
             }
+
             String[] taskInfo = parser.localFileTaskParser(currTask);
+            assert (taskInfo.length > 1);
             String taskType = taskInfo[0];
             boolean isDone = taskInfo[1].equals("0") ? false : true;
             String taskAction = taskInfo[2];

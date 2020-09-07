@@ -34,6 +34,7 @@ public class Parser {
      * @returns  Specific information of a Task contained in an array of Strings.
      */
     public String[] localFileTaskParser(String taskLine) {
+        assert (!taskLine.isBlank());
         String[] taskTypeAndContent = taskLine.split(SpecialFormat.SPLIT_NOTN, 2);
         String taskType = taskTypeAndContent[0];
         String taskContent = taskTypeAndContent[1];
