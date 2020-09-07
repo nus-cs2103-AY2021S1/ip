@@ -25,73 +25,73 @@ public class Parser {
      */
     static Command parse (String fullCommand)
         throws InvalidInputException, InvalidCommandException, InvalidTaskTypeException {
-        String[] commandArr = fullCommand.trim().split(" ", 2);
-        switch(commandArr[0]) {
+        String[] commands = fullCommand.trim().split(" ", 2);
+        switch(commands[0]) {
         case "bye":
             return new ExitCommand();
         case "todo":
         case "deadline":
         case "event":
-            if (commandArr.length <= 1) {
+            if (commands.length <= 1) {
                 throw new InvalidInputException("☹ OOPS!!! The description of a task cannot be empty.");
             }
-            return prepareAdd(commandArr[0], commandArr[1]);
+            return prepareAdd(commands[0], commands[1]);
         case "delete":
-            if (commandArr.length <= 1) {
+            if (commands.length <= 1) {
                 throw new InvalidInputException("☹ OOPS!!! An index for a task needs to be provided");
             }
-            return prepareDelete(commandArr[1]);
+            return prepareDelete(commands[1]);
         case "done":
-            if (commandArr.length <= 1) {
+            if (commands.length <= 1) {
                 throw new InvalidInputException("☹ OOPS!!! An index for a task needs to be provided");
             }
-            return prepareDone(commandArr[1]);
+            return prepareDone(commands[1]);
         case "list":
             return new ListCommand();
         case "find":
-            return new FindCommand(commandArr[1]);
+            return new FindCommand(commands[1]);
         default:
-            throw new InvalidCommandException("Invalid Command: " + commandArr[0]);
+            throw new InvalidCommandException("Invalid Command: " + commands[0]);
         }
     }
 
     /**
      * Parses argument in the context of adding a new task.
      * @param command Type of task added.
-     * @param taskDetails Details of task to be added.
+     * @param task Task to be added.
      * @return The prepared command to add new task.
      * @throws InvalidInputException If taskDetails is empty or lacking date or timing for Deadline and Event Task.
      * @throws InvalidTaskTypeException If command is not deadline, todo, event.
      */
-    static Command prepareAdd(String command, String taskDetails)
+    static Command prepareAdd(String command, String task)
         throws InvalidInputException, InvalidTaskTypeException {
         switch (command) {
         case "todo": {
-            String task = taskDetails.trim();
+            String taskDetails = task.trim();
             if (task.isEmpty()) {
                 throw new InvalidInputException("☹ OOPS!!! The description of a todo cannot be empty.");
             }
-            return new AddCommand(task, null, TaskType.TODO);
+            return new AddCommand(taskDetails, null, TaskType.TODO);
         }
         case "deadline": {
-            String[] task = taskDetails.trim().split(" /by ");
-            if (task[0].isEmpty()) {
+            String[] taskDetails = task.trim().split(" /by ");
+            if (taskDetails[0].isEmpty()) {
                 throw new InvalidInputException("☹ OOPS!!! The description of a deadline task cannot be empty.");
             }
-            if (task.length < 2) {
+            if (taskDetails.length < 2) {
                 throw new InvalidInputException("☹ OOPS!!! The deadline of a deadline task cannot be empty.");
             }
-            return new AddCommand(task[0], task[1], TaskType.DEADLINE);
+            return new AddCommand(taskDetails[0], taskDetails[1], TaskType.DEADLINE);
         }
         case "event": {
-            String[] task = taskDetails.trim().split(" /at ");
-            if (task[0].isEmpty()) {
+            String[] taskDetails = task.trim().split(" /at ");
+            if (taskDetails[0].isEmpty()) {
                 throw new InvalidInputException("☹ OOPS!!! The description of an event task cannot be empty.");
             }
-            if (task.length < 2) {
+            if (taskDetails.length < 2) {
                 throw new InvalidInputException("☹ OOPS!!! The timing of an event task cannot be empty.");
             }
-            return new AddCommand(task[0], task[1], TaskType.EVENT);
+            return new AddCommand(taskDetails[0], taskDetails[1], TaskType.EVENT);
         }
         default:
             throw new InvalidTaskTypeException("Invalid task type:" + command);
