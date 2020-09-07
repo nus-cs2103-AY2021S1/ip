@@ -20,6 +20,14 @@ public class Task {
         this.tagList = tagList;
     }
 
+    public String serialiseTask() {
+        return "";
+    }
+
+    public Task deserialiseTask() {
+        return this;
+    }
+
     public void setTaskAsDone() {
         this.isDone = true;
     }

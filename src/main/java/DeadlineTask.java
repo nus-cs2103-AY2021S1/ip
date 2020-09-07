@@ -24,6 +24,13 @@ public class DeadlineTask extends Task {
     }
 
     @Override
+    public String serialiseTask() {
+        int isDone = getTaskStatus() ? 1 : 0;
+        return "deadline %% " + getTaskDescription() + " %% " + isDone + " %% "
+                + getDeadlineTime() + " %% " + getTagList();
+    }
+
+    @Override
     public String toString() {
         return "[D] [" + getStatusIcon() + "] " + taskDescription + " (by: " + deadlineTime + ")";
     }

@@ -8,6 +8,12 @@ public class ToDoTask extends Task {
     }
 
     @Override
+    public String serialiseTask() {
+        int isDone = getTaskStatus() ? 1 : 0;
+        return "todo %% " + getTaskDescription() + " %% " + isDone + " %% " + getTagList();
+    }
+
+    @Override
     public String toString() {
         return "[T] [" + getStatusIcon() + "] " + taskDescription;
     }

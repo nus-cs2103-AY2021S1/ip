@@ -121,7 +121,7 @@ public class Parser {
         }
     }
 
-    private static TagList parseTag(String detail) {
+    public static TagList parseTag(String detail) {
         int i = detail.trim().indexOf("#");
         String tagList = detail.substring(i);
         String spaceRemovedString = tagList.replace(" ", "");
@@ -131,10 +131,8 @@ public class Parser {
             if (!s.equals(" ")) {
                 Tag currTag = new Tag(s);
                 res.addTag(currTag);
-                System.out.println(currTag);
             }
         }
         return res;
     }
-
 }

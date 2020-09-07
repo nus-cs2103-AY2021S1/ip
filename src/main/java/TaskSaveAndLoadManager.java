@@ -16,48 +16,15 @@ public class TaskSaveAndLoadManager {
      * @param taskManager The TaskManager that stores the task list
      * @throws IOException An exception thrown when IO operation fails
      */
-    public void saveTaskManager(TaskManager taskManager) throws IOException {
-        TaskManagerData taskManagerData = new TaskManagerData();
-        TaskData taskData = null;
-        for (Task task: taskManager.getTaskList()) {
-            boolean bool = task.getTaskStatus();
-            int boolInt;
-            if (bool) {
-                boolInt = 1;
-            } else {
-                boolInt = 0;
-            }
-            if (task instanceof ToDoTask) {
-                if (task.getTagList() != null) {
-                    taskData = new TaskData("todo", task.getTaskDescription(),
-                            boolInt, "", task.getTagList().toString());
-                } else {
-                    taskData = new TaskData("todo", task.getTaskDescription(),
-                            boolInt, "", "");
-                }
-            } else if (task instanceof DeadlineTask) {
-                LocalDate date = ((DeadlineTask) task).getDeadlineTime().getDate();
-                if (task.getTagList() != null) {
-                    taskData = new TaskData("deadline", task.getTaskDescription(),
-                            boolInt, date.toString(), "", task.getTagList().toString());
-                } else {
-                    taskData = new TaskData("deadline", task.getTaskDescription(),
-                            boolInt, date.toString(), "", "");
-                }
-            } else if (task instanceof EventTask) {
-                LocalDate date = ((EventTask) task).getEventTime().getDate();
-                LocalTime time = ((EventTask) task).getEventTime().getTime();
-                if (task.getTagList() != null) {
-                    taskData = new TaskData("event", task.getTaskDescription(),
-                            boolInt, date.toString(), time.toString(), task.getTagList().toString());
-                } else {
-                    taskData = new TaskData("event", task.getTaskDescription(),
-                            boolInt, date.toString(), time.toString(), "");
-                }
-            }
-            taskManagerData.getTaskList().add(taskData);
-        }
-        FileReadWriteIO.saveTaskListData(taskManagerData);
+    public void saveTaskManager(TaskManager taskManager) throws IOException, DukeException {
+        System.out.println(taskManager.getTaskList().size());
+//        for (int i = 0; i < taskManager.getTaskList().size(); i++) {
+//            if (i == 0) {
+//                FileReadWrite.writeToFile(taskManager.getTaskList().get(0).serialiseTask());
+//            } else {
+//                FileReadWrite.appendToFile(taskManager.getTaskList().get(i).serialiseTask());
+//            }
+//        }
     }
 
     /**
@@ -67,31 +34,45 @@ public class TaskSaveAndLoadManager {
      * @return The TaskManager that stores the task list.
      * @throws IOException An exception thrown when IO operation fails.
      */
+//    public TaskManager loadTaskManager() throws IOException {
+//        List<String> loadedData = FileReadWrite.loadFromSavedFile();
+//        ArrayList<Task> taskList = new ArrayList<>();
+//        // loop through the loaded data strings, split each string by | and add to task list
+//        if (loadedData != null) {
+//            for (String loadedDatum : loadedData) {
+//                assert (loadedDatum.contains(" %% ")) : "Each data object must have %% as separator";
+//                String[] tempArr = loadedDatum.split(" %% ");
+//                TaskData taskData;
+//                // a todo item
+//                if (tempArr[0].equals("todo")) {
+//                    taskData = new TaskData(tempArr[0], tempArr[1], Integer.parseInt(tempArr[2]), tempArr[3]);
+//                // a deadline item
+//                } else if (tempArr[0].equals("deadline")) {
+//                    taskData = new TaskData(tempArr[0], tempArr[1], Integer.parseInt(tempArr[2]), tempArr[3], tempArr[4]);
+//                } else {
+//                    taskData = new TaskData(tempArr[0], tempArr[1],
+//                            Integer.parseInt(tempArr[2]), tempArr[3], tempArr[4], tempArr[5]);
+//                }
+//                Task task = loadTask(taskData);
+//                taskList.add(task);
+//            }
+//            return new TaskManager(taskList);
+//        }
+//        return null;
+//    }
+
     public TaskManager loadTaskManager() throws IOException {
-        List<String> loadedData = FileReadWriteIO.loadUngroupedSavedTaskList();
+        List<String> loadedData = FileReadWrite.loadFromSavedFile();
         ArrayList<Task> taskList = new ArrayList<>();
-        // loop through the loaded data strings, split each string by | and add to task list
         if (loadedData != null) {
-            for (String loadedDatum : loadedData) {
-                assert (loadedDatum.contains(" %% ")) : "Each data object must have %% as separator";
-                String[] tempArr = loadedDatum.split(" %% ");
-                TaskData taskData;
-                // a todo item
-                if (tempArr[0].equals("todo")) {
-                    taskData = new TaskData(tempArr[0], tempArr[1], Integer.parseInt(tempArr[2]), tempArr[3]);
-                // a deadline item
-                } else if (tempArr[0].equals("deadline")) {
-                    taskData = new TaskData(tempArr[0], tempArr[1], Integer.parseInt(tempArr[2]), tempArr[3], tempArr[4]);
-                } else {
-                    taskData = new TaskData(tempArr[0], tempArr[1],
-                            Integer.parseInt(tempArr[2]), tempArr[3], tempArr[4], tempArr[5]);
-                }
-                Task task = loadTask(taskData);
-                taskList.add(task);
+            for (String string : loadedData) {
+                Task taskToAdd = loadTask2(string);
+                taskList.add(taskToAdd);
             }
             return new TaskManager(taskList);
+        } else {
+            return null;
         }
-        return null;
     }
 
     private TagList loadTagList(TaskData taskData) {
@@ -120,6 +101,54 @@ public class TaskSaveAndLoadManager {
         } else {
             DateAndTime dt = new DateAndTime(LocalDate.parse(taskData.getDate()), LocalTime.parse(taskData.getTime()));
             return new EventTask(taskData.getTaskDescription(), isDone, dt, loadTagList(taskData));
+        }
+    }
+
+    private TagList loadTagList(String fullData) {
+        TagList tagList = new TagList();
+        int i = fullData.indexOf("#");
+        String tagListString = fullData.substring(i);
+        String[] tagArr = tagListString.trim().split("#");
+        for (String tag : tagArr) {
+            Tag currTag = new Tag(tag);
+            tagList.addTag(currTag);
+        }
+        return tagList;
+    }
+
+    private Task loadTask2(String string) {
+        String[] splitDataString = string.trim().split(" %% ");
+        String taskType = splitDataString[0];
+        String taskDescription = splitDataString[1];
+        String isDoneString = splitDataString[2];
+        boolean isDone;
+        isDone = Integer.parseInt(isDoneString) == 1;
+        if (taskType == "todo") {
+            if (string.contains("#")) {
+                TagList tagList = loadTagList(string);
+                return new ToDoTask(taskDescription, isDone, tagList);
+            } else {
+                return new ToDoTask(taskDescription, isDone, null);
+            }
+        } else if (taskType == "deadline") {
+            DateAndTime dt = new DateAndTime(LocalDate.parse(splitDataString[3]));
+            if (string.contains("#")) {
+                TagList tagList = loadTagList(string);
+                return new DeadlineTask(taskDescription, isDone, dt, tagList);
+            } else {
+                return new DeadlineTask(taskDescription, isDone, dt,null);
+            }
+        } else if (taskType == "event") {
+            DateAndTime dt = new DateAndTime(LocalDate.parse(splitDataString[3]),
+                                LocalTime.parse(splitDataString[4]));
+            if (string.contains("#")) {
+                TagList tagList = loadTagList(string);
+                return new DeadlineTask(taskDescription, isDone, dt, tagList);
+            } else {
+                return new DeadlineTask(taskDescription, isDone, dt,null);
+            }
+        } else {
+            return null;
         }
     }
 }
