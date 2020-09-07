@@ -16,6 +16,7 @@ public abstract class Task {
      * @param isDone The boolean keeping track of whether the task is done.
      */
     public Task(String description, boolean isDone) {
+        assert(!description.isBlank()) : "Task description should not be empty";
         this.description = description;
         this.isDone = isDone;
     }
@@ -29,6 +30,7 @@ public abstract class Task {
      * @return true if the task contains the given keyword.
      */
     public boolean hasKeyword(String keyword) {
+        assert(!keyword.isBlank()) : "Keyword should not be blank";
         return this.description.contains(keyword);
     }
 

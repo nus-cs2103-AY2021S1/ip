@@ -19,6 +19,7 @@ public class Main extends Application {
     public Main() {
         this.duke = new Duke("data/tasks.txt");
         Response initResponse = this.duke.getInitResponse();
+        assert(!initResponse.isExit()) : "initResponse should not cause an exit";
 
         if (initResponse.isError()) {
             Alert alert = new Alert(Alert.AlertType.ERROR, initResponse.getMessage());
