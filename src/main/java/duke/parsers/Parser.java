@@ -12,6 +12,7 @@ import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.FindCommand;
 import duke.commands.ListCommand;
+import duke.commands.StatsCommand;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidDukeCommandException;
 import duke.exceptions.InvalidTaskIndexException;
@@ -55,6 +56,8 @@ public class Parser {
             return new DateCommand(LocalDate.parse(argument, FORMATTER_INPUT));
         } else if (command.equals("find")) {
             return new FindCommand(argument);
+        } else if (command.equals("stats")) {
+            return new StatsCommand();
         } else {
             throw new InvalidDukeCommandException();
         }

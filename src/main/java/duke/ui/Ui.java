@@ -1,5 +1,7 @@
 package duke.ui;
 
+import static duke.tasklist.TaskList.getNumCompletedTasks;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -28,9 +30,10 @@ public class Ui {
         return sc.nextLine();
     }
 
-    /** Shows the list of tasks in Duke format.
+    /** Gives the list of tasks in Duke format.
      *
      * @param tasks The list of tasks.
+     * @return The list of tasks in Duke format.
      */
     public String formatLst(ArrayList<Task> tasks) {
         StringBuilder s;
@@ -46,19 +49,21 @@ public class Ui {
         return s.toString();
     }
 
-    /** Shows the message where a task is marked as done in Duke format.
+    /** Gives the message where a task is marked as done in Duke format.
      *
      * @param tasks The list of tasks.
      * @param index The index of the task that is marked as done.
+     * @return The message where a task is marked as done in Duke format.
      */
     public String formatMarkAsDone(ArrayList<Task> tasks, int index) {
         return "Nice! I've marked this task as done:\n" + tasks.get(index);
     }
 
-    /** Shows the list of tasks after a task is added in Duke format.
+    /** Gives the list of tasks after a task is added in Duke format.
      *
      * @param tasks The list of tasks.
      * @param task The task that is added.
+     * @return The list of tasks after a task is added in Duke format.
      */
     public String formatAddTask(ArrayList<Task> tasks, Task task) {
         int size = tasks.size();
@@ -66,10 +71,11 @@ public class Ui {
             size, size == 1 ? "task" : "tasks");
     }
 
-    /** Shows the list of tasks after a task is deleted in Duke format.
+    /** Gives the list of tasks after a task is deleted in Duke format.
      *
      * @param tasks The list of tasks.
      * @param index The index of the task that is deleted.
+     * @return The list of tasks after a task is deleted in Duke format.
      */
     public String formatDeleteTask(ArrayList<Task> tasks, int index) {
         int sizeAfterDeletion = tasks.size() - 1;
@@ -78,10 +84,11 @@ public class Ui {
             sizeAfterDeletion, sizeAfterDeletion == 1 ? "task" : "tasks");
     }
 
-    /** Shows the list of tasks that occur on the specified date in Duke format.
+    /** Gives the list of tasks that occur on the specified date in Duke format.
      *
      * @param tasksOnDate The list of tasks that occur on the specified date.
      * @param queryDate The specified date.
+     * @return The list of tasks that occur on the specified date in Duke format.
      */
     public String formatShowTasksOnDate(ArrayList<Task> tasksOnDate, LocalDate queryDate) {
         if (!tasksOnDate.isEmpty()) {
@@ -97,9 +104,10 @@ public class Ui {
         }
     }
 
-    /** Shows the list of tasks that contain the keyword in Duke format.
+    /** Gives the list of tasks that contain the keyword in Duke format.
      *
      * @param matchingTasks The list of tasks that contain the keyword.
+     * @return The list of tasks that contain the keyword in Duke format.
      */
     public String formatFindTasks(ArrayList<Task> matchingTasks) {
         if (!matchingTasks.isEmpty()) {
@@ -113,9 +121,10 @@ public class Ui {
         }
     }
 
-    /** Shows the error message in Duke format.
+    /** Gives the error message in Duke format.
      *
      * @param e The exception that is thrown.
+     * @return The error message in Duke format.
      */
     public String showError(Exception e) {
         if (e instanceof DateTimeParseException) {
@@ -123,5 +132,28 @@ public class Ui {
         } else {
             return e.getMessage();
         }
+    }
+
+    /** Gives the statistics of the taskList in Duke format.
+     *
+     * @param tasks The list of tasks.
+     * @return The statistics of the taskList in Duke format.
+     */
+    public String formatStats(ArrayList<Task> tasks) {
+        String s = String.format("You have completed %d %s in this session.", getNumCompletedTasks(),
+            getNumCompletedTasks() == 1 ? "task" : "tasks");
+
+        int numUncompletedTasks = 0;
+        for (Task task : tasks) {
+            if (!task.getIsDone()) {
+                numUncompletedTasks++;
+            }
+        }
+        if (numUncompletedTasks > 0) {
+            s += String.format("\nYou have %d uncompleted %s in your current list.", numUncompletedTasks,
+                numUncompletedTasks == 1 ? "task" : "tasks");
+        }
+
+        return s;
     }
 }

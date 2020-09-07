@@ -7,6 +7,9 @@ import duke.tasks.Task;
 /** Represents the dynamic list of tasks. */
 public class TaskList {
 
+    /** The number of tasks completed in the session. */
+    private static int numCompletedTasks = 0;
+
     /** The list of tasks. */
     private ArrayList<Task> tasks;
 
@@ -19,7 +22,18 @@ public class TaskList {
     }
 
     /**
-      * @return the list of tasks.
+     * @return The number of tasks completed in the session.
+     */
+    public static int getNumCompletedTasks() {
+        return numCompletedTasks;
+    }
+
+    public static void incrementNumCompletedTasks() {
+        TaskList.numCompletedTasks++;
+    }
+
+    /**
+      * @return The list of tasks.
      */
     public ArrayList<Task> getTasks() {
         return tasks;
