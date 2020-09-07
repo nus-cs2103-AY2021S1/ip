@@ -36,7 +36,6 @@ public class DukeOutput {
      * @param indentIndexes to indicate which response is formatted more.
      */
     public static String getOutput(List<String> responses, List<Integer> indentIndexes) {
-    public static String output(List<String> responses, List<Integer> indentIndexes) {
         assert(!Objects.isNull(responses));
         assert(!Objects.isNull(indentIndexes));
         return DukeOutputFormatter.format(responses, indentIndexes);
