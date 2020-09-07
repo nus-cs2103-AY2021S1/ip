@@ -1,13 +1,21 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-
+/**
+ * Chatbot class
+ */
 public class Duke {
     private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
     private Storage storage;
     private TaskList tasks;
 
+
+    /**
+     * Constructor for Duke
+     * Initializes storage path to be data/Duke.txt and
+     * loads the file into field variable taskList
+     */
     public Duke() {
         storage = new Storage("data/Duke.txt");
         tasks = new TaskList(storage.loadFile());
@@ -18,33 +26,36 @@ public class Duke {
     }
 
     /**
-     * Processes each command line by line,
-     * calling the corresponding methods
-     * Exits when user inputs "bye"
+     * Parses user input as a command and
+     * returns corresponding string
+     * @param msg user input
+     * @return String
      */
+
     String processInput(String msg) {
         assert !msg.isBlank() : "input is empty";
         if (msg.equals("bye")) {
-            return "Bye bye. Talk again soon!";
+            result = "Bye bye. Talk again soon!";
         } else if (msg.equals("list")) {
-            return displayList();
+            result = displayList();
         } else if (msg.contains("done")) {
             int index = Integer.parseInt(msg.replace("done ", "").trim());
-            return markAsDone(index);
+            result = markAsDone(index);
         } else if (msg.contains("delete")) {
             int index = Integer.parseInt(msg.replace("delete ", "").trim());
-            return delete(index);
+            result = delete(index);
         } else if (msg.contains("todo")) {
-            return addToList(msg.replace("todo ", ""), Type.TODO);
+            result = addToList(msg.replace("todo ", ""), TaskType.TODO);
         } else if (msg.contains("event")) {
-            return addToList(msg.replace("event ", ""), Type.EVENT);
+            result = addToList(msg.replace("event ", ""), TaskType.EVENT);
         } else if (msg.contains("deadline")) {
-            return addToList(msg.replace("deadline ", ""), Type.DEADLINE);
+            result = addToList(msg.replace("deadline ", ""), TaskType.DEADLINE);
         } else if (msg.contains("find")) {
-            return find(msg.replace("find ", ""));
+            result = find(msg.replace("find ", ""));
         } else {
-            return "Sorry, Poco didn't understand. Try again?";
+            result = "Sorry, Poco didn't understand your command";
         }
+        return result;
     }
 
     /**
@@ -64,7 +75,7 @@ public class Duke {
      * @param msg description of task
      * @param type type of task
      */
-    String addToList(String msg, Type type) {
+    private String addToList(String msg, TaskType type) {
         if (msg.trim().isEmpty()) {
             return "Poco noticed that your task is empty";
         } else {
@@ -83,6 +94,8 @@ public class Duke {
                 LocalDateTime ld = LocalDateTime.parse(sp[1].trim(), formatter);
                 tasks.add(new Deadline(sp[0], ld));
                 break;
+            default:
+                System.out.println("invalid task type");
             }
             storage.saveFile(tasks);
             return "Poco has added " + sp[0] + " to your list" + "\n"
@@ -96,7 +109,7 @@ public class Duke {
      *
      * @param index index of item that is done
      */
-    String markAsDone(int index) {
+    private String markAsDone(int index) {
         index--;
         if (index < 0 || index >= tasks.size()) {
             return "Poco cannot find the task: " + index;
@@ -113,7 +126,7 @@ public class Duke {
      *
      * @param index index of item to be deleted
      */
-    String delete(int index) {
+    private String delete(int index) {
         index--;
         if (index < 0 || index >= tasks.size()) {
             index++;
@@ -127,11 +140,11 @@ public class Duke {
 
     }
 
-    String find(String match) {
+    private String find(String match) {
         return tasks.find(match);
     }
 }
 
-enum Type {
+enum TaskType {
     TODO, EVENT, DEADLINE
 }
