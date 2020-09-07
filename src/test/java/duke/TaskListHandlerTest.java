@@ -1,10 +1,6 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.FileDescriptor;
@@ -12,9 +8,14 @@ import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
-class taskListHandlerTest {
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
+class TaskListHandlerTest {
 
     @Test
     void getTaskList() {
@@ -54,7 +55,7 @@ class taskListHandlerTest {
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         Ui.indent(5);
-        String expectedOutput  = "                    ";
+        String expectedOutput = "                    ";
         assertEquals(expectedOutput, outContent.toString());
         System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));
         System.out.println("Passed: indentTest!");
@@ -69,31 +70,15 @@ class taskListHandlerTest {
         handler.addToList(new Todo("assignment"));
         handler.addToList(new Deadline("submission", "9pm"));
         handler.printList();
-//        String expectedOutput = " ______________________________________________________________ \n" +
-//            "*                                                              *\n" +
-//            "    Here are the tasks in your list:\n" +
-//            "        1. [E][✘] mega sale (at: 12pm)\n" +
-//            "        2. [T][✘] assignment\n" +
-//            "        3. [D][✘] submission (by: 9pm)\n" +
-//            "    You have 3 task(s) in the list\n" +
-//            "\n" +
-//            "*______________________________________________________________*\n";
-        String expectedOutput  = " ______________________________________________________________ "
+        String expectedOutput = "    Here are the tasks in your list:"
             + System.getProperty("line.separator")
-            + "*                                                              *"
+            + "        1. [E][\u2718] mega sale (at: 12pm)"
             + System.getProperty("line.separator")
-            + "    Here are the tasks in your list:"
+            + "        2. [T][\u2718] assignment"
             + System.getProperty("line.separator")
-            +"        1. [E][?] mega sale (at: 12pm)"
-            + System.getProperty("line.separator")
-            + "        2. [T][?] assignment"
-            + System.getProperty("line.separator")
-            + "        3. [D][?] submission (by: 9pm)"
+            + "        3. [D][\u2718] submission (by: 9pm)"
             + System.getProperty("line.separator")
             + "    You have 3 task(s) in the list"
-            + System.getProperty("line.separator")
-            + System.getProperty("line.separator")
-            + "*______________________________________________________________*"
             + System.getProperty("line.separator");
         assertEquals(expectedOutput, outContent.toString());
         System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out)));

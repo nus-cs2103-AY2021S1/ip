@@ -15,8 +15,8 @@ public class Todo extends Task {
      * @return String representing a task in save file.
      */
     @Override
-    public String toSaveFormat() {
-        return "todo " + super.toSaveFormat();
+    public String printSaveFormat() {
+        return "todo " + super.printSaveFormat();
     }
 
     /**

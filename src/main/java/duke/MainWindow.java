@@ -51,7 +51,7 @@ public class MainWindow extends AnchorPane {
         if (input.equals("bye")) {
             Stage stage = (Stage) scrollPane.getScene().getWindow();
             PauseTransition delay = new PauseTransition(Duration.seconds(2));
-            delay.setOnFinished( event -> stage.close() );
+            delay.setOnFinished(event -> stage.close());
             delay.play();
         }
         String response = duke.getResponse(input);

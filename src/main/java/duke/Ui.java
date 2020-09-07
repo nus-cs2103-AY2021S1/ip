@@ -1,7 +1,5 @@
 package duke;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -14,9 +12,10 @@ import duke.task.Task;
 public class Ui {
     /** Class-wide variable to know whether to continue running user interface. */
     protected static boolean isRunning = true;
+    protected static String logo;
     protected final TaskListHandler handler;
     protected final Storage storage;
-    protected static String logo;
+
 
     /**
      * Initializes the Ui with the task list and storage.
@@ -80,14 +79,19 @@ public class Ui {
     public static void printSuccess(String operation, Task currentTask, int listSize) {
         // Prints success message and list size after task added/deleted
         indent(1);
-        if (operation.equals("add")) {
+        switch (operation) {
+        case "add":
             System.out.print("Yes! I have successfully added:\n");
-        } else if (operation.equals("delete")) {
+            break;
+        case "delete":
             System.out.print("Alright! I've removed this task:\n");
-        } else {
+            break;
+        case "done":
             System.out.println("Good job! You completed:");
             indent(2);
             System.out.println(currentTask);
+            return;
+        default:
             return;
         }
         indent(2);
@@ -97,19 +101,29 @@ public class Ui {
     }
 
     /**
-     * Initial greeting message in unicode.
+     * Prints the greeting message.
      */
     public static void greet() {
         System.out.println(getGreeting());
     }
 
+    /**
+     * Retrieves the greeting in string format for GUI.
+     *
+     * @return Greeting.
+     */
     public static String getGreeting() {
         setLogo();
         String greeting = "Hey! I'm Duke the chatbot!";
         String doForYou = "What can I do for you?";
-        return logo + "\n" + greeting + "\n" + doForYou;
+        return logo + "\n"
+            + greeting + "\n"
+            + doForYou;
     }
 
+    /**
+     * Initializes the duke logo.
+     */
     public static void setLogo() {
         logo = "DUKE!";
     }

@@ -1,19 +1,17 @@
 package duke;
 
-import duke.command.Command;
-
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.NoSuchElementException;
-import java.util.Scanner;
+
+import duke.command.Command;
 
 public class Duke {
-    private ByteArrayOutputStream GUIOutput;
-    private ByteArrayOutputStream GUIError;
-    private Storage storageVar;
-    private TaskListHandler handlerVar;
     private static final PrintStream originalOutput = System.out;
     private static final PrintStream originalError = System.err;
+    private final Storage storageVar;
+    private final TaskListHandler handlerVar;
+    private ByteArrayOutputStream guiOutput;
 
     public Duke() {
         storageVar = new Storage("./data");
@@ -29,7 +27,7 @@ public class Duke {
      */
     public static void initialize() {
         String home = System.getProperty("user.dir");
-        Storage storage = new Storage( home + "/data");
+        Storage storage = new Storage(home + "/data");
         if (Storage.hasLoadingError) {
             return;
         }
@@ -44,7 +42,7 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-        setGUIStreams();
+        setGuiStreams();
         try {
             Command c = Parser.parse(input, handlerVar);
             c.execute(handlerVar, storageVar);
@@ -55,18 +53,18 @@ public class Duke {
             System.out.println(e.getMessage());
             DukeException.tryAgain();
         }
-        resetGUIStreams();
-        return GUIOutput.toString();
+        resetGuiStreams();
+        return guiOutput.toString();
     }
 
-    public void setGUIStreams() {
-        GUIOutput = new ByteArrayOutputStream();
-        GUIError = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(GUIOutput));
-        System.setErr(new PrintStream(GUIError));
+    public void setGuiStreams() {
+        guiOutput = new ByteArrayOutputStream();
+        ByteArrayOutputStream guiError = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(guiOutput));
+        System.setErr(new PrintStream(guiError));
     }
 
-    public void resetGUIStreams() {
+    public void resetGuiStreams() {
         System.setOut(originalOutput);
         System.setErr(originalError);
     }
