@@ -11,7 +11,7 @@ import java.util.Scanner;
  * Storage class to manage loading and saving of tasks in text file
  */
 public class Storage {
-    private final String filePath;
+    private String filePath;
     private File data;
     private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
@@ -20,15 +20,24 @@ public class Storage {
      *
      * @param filePath Filepath of .txt file to save tasks in
      */
-    public Storage(String filePath) {
-        this.filePath = filePath;
-        try {
-            data = new File(filePath);
-            data.createNewFile();
-        } catch (Exception e) {
+    public Storage(String filePath)  {
+       try {
+           File data = new File(filePath);
+           if (!data.exists()) {
+               File folder = new File("src");
+               //data.mkdir(); // create a folder in your current work space
+               File file = new File(folder, "data.txt"); // put the file inside the folder
+               file.createNewFile(); // create the file
+               this.filePath = file.getPath();
+           } else {
+               this.filePath = filePath;
+           }
+       }
+       catch (Exception e) {
             System.out.println(e.getMessage());
-        }
+       }
     }
+
 
     /**
      * Loads saved tasks into list for use
@@ -57,7 +66,7 @@ public class Storage {
                     LocalDate eventTime = LocalDate.parse(split[1].substring(0, split[1].length() - 1), formatter);
                     list.add(new Event(eventDesc, eventTime, isDone));
                 } else {
-                    throw new DukeException("File reading error _(´ཀ`」 ∠)_");
+                    throw new DukeException("File reading error");
                 }
             }
         } catch (Exception e) {

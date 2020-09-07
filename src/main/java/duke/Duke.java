@@ -13,9 +13,9 @@ public class Duke {
      *
      */
     public Duke() {
-        storage = new Storage("src/main/data.txt");
-        tasks = new TaskList(storage.getTasks());
-        ui = new Ui();
+       storage = new Storage("src/main/data.txt");
+       tasks = new TaskList(storage.getTasks());
+       ui = new Ui();
     }
 
 
