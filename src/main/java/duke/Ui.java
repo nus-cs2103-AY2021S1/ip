@@ -40,6 +40,7 @@ public class Ui {
      */
     public void list(TaskList taskList) {
         printBorder();
+        assert taskList.getTasks().size() >= 0;
         if (taskList.getTasks().size() == 0) {
             System.out.println(indentation + "You have no tasks in your list!");
         } else {
@@ -59,6 +60,7 @@ public class Ui {
      * @param index position of the task in the list of tasks to be marked done
      */
     public void markDone(TaskList taskList, int index) {
+        assert taskList.getTasks() != null;
         Task oldTask = taskList.getTasks().get(index);
         Task newTask = oldTask.markAsDone();
         taskList.replace(oldTask, newTask);

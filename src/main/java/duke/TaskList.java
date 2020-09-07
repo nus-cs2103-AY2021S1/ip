@@ -58,6 +58,7 @@ public class TaskList {
                 + task.getDescription() + " @ " + task.getDate() + "\n";
         Storage.appendToFile(Storage.getFilePath(), textToAppend);
 
+        assert tasks.size() >= 0;
         System.out.println(indentation + "Got it. I've added this task:");
         System.out.println(indentation + indentation + task);
         System.out.println(indentation + "Now you have " + (tasks.size() != 1
@@ -73,10 +74,12 @@ public class TaskList {
      * @throws IOException produced by failed or interrupted I/O operations
      */
     public void delete(int index) throws IOException {
+        assert tasks != null;
         Task task = tasks.get(index);
         tasks.remove(task);
         Storage.updateFile(Storage.getFilePath(), this);
 
+        assert tasks.size() >= 0;
         printBorder();
         System.out.println(indentation + "Noted. I've removed this task:");
         System.out.println(indentation + indentation + task);
@@ -93,6 +96,7 @@ public class TaskList {
      * @param newTask new task to replace the old task
      */
     public void replace(Task oldTask, Task newTask) {
+        assert tasks != null;
         int index = tasks.indexOf(oldTask);
         tasks.set(index, newTask);
     }
