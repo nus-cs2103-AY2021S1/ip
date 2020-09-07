@@ -9,6 +9,7 @@ public interface PrintSummary {
 
     /**
      * Returns a summary of the object.
+     *
      * The object must be able to be reconstructed from the summary.
      * @return string representing the details of the object.
      */

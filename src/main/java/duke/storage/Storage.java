@@ -27,10 +27,12 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    /** Initialises the Storage object.
+    /**
+     * Initialises and returns the Storage object.
      * The method first attempts to search for a pre-saved list in a fixed location.
      * If it is not found, the method will create such a directory and file to write and save future updates.
-     * @return Storage object for updating changes to the task list
+     *
+     * @return Storage object for updating changes to the task list.
      */
     public static Storage init() {
         String filePath = System.getProperty("user.dir");
@@ -44,9 +46,10 @@ public class Storage {
     }
 
     /**
-     * Reads the stored data in the file found in the file path.
+     * Returns a task list of the stored data in the file found in the file path.
      * It interprets the text found in the file to recreate the task list.
-     * @return task list with items corresponding to what was found in the saved file or empty if a file was not found
+     *
+     * @return task list with items corresponding to what was found in the saved file or empty if a file was not found.
      */
     public TaskList readStoredData() {
         File file = new File(filePath);
@@ -74,10 +77,11 @@ public class Storage {
     }
 
     /**
-     * Method recreates a task from the provided string summary of the task.
-     * @param taskSummary string details of the task
-     * @return task corresponding to the summary
-     * @throws InvalidSaveException if the symbol read is not a valid symbol of a task type
+     * Returns a task from the provided string summary of the task.
+     *
+     * @param taskSummary string details of the task.
+     * @return task corresponding to the summary.
+     * @throws InvalidSaveException if the symbol read is not a valid symbol of a task type.
      */
     protected Task createTask(String taskSummary) throws InvalidSaveException {
         String identifier = taskSummary.split("\\|", 2)[0];
@@ -95,7 +99,8 @@ public class Storage {
 
     /**
      * Writes the new task list's details into the file at the file path.
-     * @param taskList updated task list to be saved
+     *
+     * @param taskList updated task list to be saved.
      */
     public void updateFile(TaskList taskList) {
         try {
