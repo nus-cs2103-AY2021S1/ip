@@ -20,6 +20,7 @@ public class FindCommand extends Command {
      */
     public String execute(TaskList taskList) {
         String keyWord = this.getTaskName();
+        assert keyWord != null;
         TaskList keyWordTaskList = taskList.getTasksWithKeyWords(keyWord);
         return TextUi.printMessage("Here are the matching tasks in your list:\n" + keyWordTaskList.toString())
                 + "\n" + TextUi.printTaskSummary(keyWordTaskList.getTaskLength());

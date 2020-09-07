@@ -21,6 +21,7 @@ public class DoneCommand extends Command {
     public String execute(TaskList taskList) {
         int taskNumber;
         taskNumber = Integer.parseInt(this.getTaskName());
+        assert taskNumber != 0;
         Task doneTask = taskList.getTask(taskNumber);
         doneTask.markAsDone();
         return TextUi.printMessage("Nice! I've marked this task as done:\n" + doneTask);
