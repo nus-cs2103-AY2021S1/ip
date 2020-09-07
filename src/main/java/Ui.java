@@ -1,3 +1,4 @@
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.List;
 
@@ -6,8 +7,10 @@ import java.util.List;
  * with the user
  */
 public class Ui {
-    private static String SPACE = "     ";
-    private final String messageHello = Parser.format("Hello! I'm Duke\n" + SPACE + " " + "What can I do for you?");
+    // dummy value 1 for now
+    private final String messageHello = Parser.format("Hello! I'm Duke - your personal task manager\n" + "      " +
+            "Today is " + java.time.LocalDate.now().format(DateTimeFormatter.ofPattern("MMM d yyyy")) + "\n      " + "You have done "
+            + 1 + " task(s) in the past week." + "\n      Keep up the good work!!!");
     private Scanner scanner = new Scanner(System.in);
 
     public void run(List<Task> lst) throws Exception {

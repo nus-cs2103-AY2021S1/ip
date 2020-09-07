@@ -21,21 +21,6 @@ public class Convert {
     }
 
     /**
-     * Returns a formatted string keeping original data
-     * The input string must contain "/at"
-     *
-     * @param s input string
-     * @return a formatted string
-     */
-    static String atDigitalDate(String s) {
-        String first = s.split("/at ")[0];
-        String second = s.split("/at ")[1];
-        // date of format "yyyy-mm-dd"
-        LocalDate date = LocalDate.parse(second);
-        return first + "/at " + date;
-    }
-
-    /**
      * Returns a formatted string transforming from "/by" to ":(by)"
      * The input string must contain "/by"
      *
@@ -47,20 +32,6 @@ public class Convert {
         String second = s.split("/by ")[1];
         LocalDate date = LocalDate.parse(second);
         return first + "(by: " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
-    }
-
-    /**
-     * Returns a formatted string keeping original data
-     * The input string must contain "/by"
-     *
-     * @param s input string
-     * @return a formatted string
-     */
-    static String byDigitalDate(String s) {
-        String first = s.split("/by ")[0];
-        String second = s.split("/by ")[1];
-        LocalDate date = LocalDate.parse(second);
-        return first + "/by " + date;
     }
 
     /**

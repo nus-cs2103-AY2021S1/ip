@@ -4,8 +4,8 @@ import java.util.List;
 public class Parser {
     // constant SPACE and LINE for format purposes
     public static String SPACE = "     ";
-    public static String LINE = "____________________________________________________________\n";
-    // add outer frame lines
+    // public static String LINE = "____________________________________________________________\n";
+    public static String LINE = "_____________________________________________\n";
 
     /**
      * Returns formatted string, adding SPACE and LINE
@@ -28,7 +28,7 @@ public class Parser {
     private final String messageDelete = "Noted. I've removed this task:\n";
     private final String messageMatching = "Here are the matching tasks in your list:\n";
 
-    // currentCommand the whole line
+    // currentCommand: the whole line
     private String currentCommand;
 
     Parser(String currentCommand) {
@@ -118,7 +118,7 @@ public class Parser {
                         lst.add(task);
                         messageRespond.append(format(messageAdded + SPACE + "   "
                                 + task.getTypeLetter() + task.getStatusIcon() + task.getPrintMessage()
-                                + "\n " + SPACE + "Now you have " + lst.size() + " task(s) in the list.")).append("\n");
+                                + "\n " + SPACE + "Now you have " + lst.size() + " task(s) in the list."));
                         break;
                     } catch (IndexOutOfBoundsException ex) {
                         messageRespond.append(format(new DeadlineEmptyBodyException().toString()));
@@ -130,7 +130,7 @@ public class Parser {
                         lst.add(task);
                         messageRespond.append(format(messageAdded + SPACE + "   "
                                 + task.getTypeLetter() + task.getStatusIcon() + task.getPrintMessage()
-                                + "\n " + SPACE + "Now you have " + lst.size() + " task(s) in the list.")).append("\n");
+                                + "\n " + SPACE + "Now you have " + lst.size() + " task(s) in the list."));
                         break;
                     } catch (IndexOutOfBoundsException ex) {
                         messageRespond.append(format(new EventEmptyBodyException().toString()));

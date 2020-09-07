@@ -18,7 +18,6 @@ public class Todo extends Task {
 
     @Override
     public String getTypeLetter() {
-        // dummy value
         return "[T]";
     }
 

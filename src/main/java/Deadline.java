@@ -18,7 +18,6 @@ public class Deadline extends Task {
 
     @Override
     public String getTypeLetter() {
-        // dummy value
         return "[D]";
     }
 
@@ -29,6 +28,6 @@ public class Deadline extends Task {
 
     @Override
     public String getStoreMessage() {
-        return Convert.byDigitalDate(getMessage());
+        return getMessage();
     }
 }

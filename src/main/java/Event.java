@@ -18,7 +18,6 @@ public class Event extends Task {
 
     @Override
     public String getTypeLetter() {
-        // dummy value
         return "[E]";
     }
 
@@ -29,6 +28,6 @@ public class Event extends Task {
 
     @Override
     public String getStoreMessage() {
-        return Convert.atDigitalDate(getMessage());
+        return getMessage();
     }
 }
