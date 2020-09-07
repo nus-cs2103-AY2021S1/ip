@@ -43,6 +43,7 @@ public class Storage {
      * Create valid directory and file if not present.
      */
     public void reachFile() {
+        assert (!fileDirectory.isBlank() && !fileName.isBlank());
         File dataFolder = new File(fileDirectory);
         if (!dataFolder.exists() && !dataFolder.isDirectory()) {
             dataFolder.mkdirs();
@@ -72,6 +73,7 @@ public class Storage {
         Scanner sc;
 
         try {
+            assert (memoFile != null);
             sc = new Scanner(memoFile);
         } catch (Exception e) {
             return taskCollections;
@@ -84,6 +86,7 @@ public class Storage {
             }
 
             String[] taskInfo = this.parser.memoTaskParser(currTask);
+            assert (taskInfo.length > 1);
             switch (taskInfo[0]) {
             case "T":
                 taskCollections.add(
