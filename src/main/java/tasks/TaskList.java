@@ -83,6 +83,7 @@ public class TaskList {
                 String[] deadlineInfo = info.split(" /by ");
                 //Validate info
                 Parser.input(command, deadlineInfo.length, true);
+                assert(deadlineInfo.length > 1);
                 Parser.info(command, deadlineInfo[1], true);
                 // info
                 String deadlineEvent = deadlineInfo[0];
@@ -93,6 +94,7 @@ public class TaskList {
                 String[] eventInfo = info.split(" /at ");
                 //Validate info
                 Parser.input(command, eventInfo.length, true);
+                assert(eventInfo.length > 1);
                 Parser.info(command, eventInfo[1], true);
                 // info
                 String eventEvent = eventInfo[0];
@@ -125,9 +127,11 @@ public class TaskList {
      * @return Message when task delete.
      */
     public String deleteTask(int taskId) {
-        if (taskId > this.taskListLen()) {
+        if (taskId > this.taskListLen() || taskId < 1) {
             return "MUG don't have this task to Delete @_@";
         } else {
+            //assert
+            assert(taskId <= this.taskListLen());
             try {
                 int taskIndex = taskId - 1;
                 Task deletedTask = this.taskList.get(taskIndex);
@@ -152,9 +156,11 @@ public class TaskList {
      * @return Message when task update done.
      */
     public String taskDone(int taskId) {
-        if (taskId > this.taskListLen()) {
+        if (taskId > this.taskListLen() || taskId < 1) {
             return "MUG don't have this task to mark as Done :>";
         } else {
+            //assert
+            assert(taskId <= this.taskListLen());
             int taskIndex = taskId - 1;
             Task doneTask = this.taskList.get(taskIndex);
             if (doneTask.isDone()) {
