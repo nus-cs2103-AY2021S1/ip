@@ -45,22 +45,32 @@ public class Jimmy {
      * "bye" command, the method allows the program to terminate.
      */
     public void run() {
-        ui.print(ui.greet());
+        String greeting = ui.greet();
+        ui.printOutput(greeting);
         loadList();
         boolean isExit = false;
         while (!isExit) {
-            try {
-                String command = ui.process();
-                if (command.equals("bye")) {
-                    isExit = true;
-                }
-                String reply = Parser.parse(planner, command);
-                ui.print(reply);
-            } catch (JimmyException e) {
-                ui.print(e.getMessage());
-            }
+            isExit = readInputPrintOutput();
+            System.out.println("reaches here");
         }
         saveList();
+    }
+
+    private boolean readInputPrintOutput() {
+        String reply = "";
+        boolean isExit = false;
+        try {
+            String command = ui.readUserInput();
+            isExit = command.equals("bye");
+            reply = Parser.parse(planner, command);
+        } catch (JimmyException e) {
+            reply = e.getMessage();
+        } finally {
+            System.out.println("reaches finally");
+            ui.printOutput(reply);
+        }
+
+        return isExit;
     }
 
     /**
@@ -82,7 +92,7 @@ public class Jimmy {
             }
             return reply;
         } catch (JimmyException e) {
-            ui.print(e.getMessage());
+            ui.printOutput(e.getMessage());
             return e.getMessage();
         }
     }

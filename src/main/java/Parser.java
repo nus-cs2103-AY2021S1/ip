@@ -48,45 +48,32 @@ public class Parser {
                 throw new JimmyException(ErrorMessage.UNKNOWN_FUNCTION);
             }
         } else {
-            switch (arr[0]) {
+
+            String firstWord = arr[0];
+
+            switch (firstWord) {
 
             case "done":
             case "delete":
-                if (arr.length > 2) {
-                    throw new JimmyException(ErrorMessage.EXCESS_DESCRIPTION);
-                }
-                int index = Integer.parseInt(arr[1]);
+                ifExcessDescriptionThenThrow(arr);
 
-                if (index > lst.getNumTasks() + 1 || index < 1) {
-                    throw new JimmyException(ErrorMessage.TASK_EXCEED_RANGE);
-                }
-                if (arr[0].equals("done")) {
-                    lst.completeTask(index);
-                    Task t = lst.getTask(index);
-                    reply = "Nice! I've marked this task as done:" + "\n\t  " + t;
-                } else {
-                    Task t = lst.getTask(index);
-                    lst.del(index);
-                    reply = "Noted. I've removed this task:" + "\n\t  " + t +
-                        "\n\tNow you have " + lst.getNumTasks() + " tasks in the list.";
-                }
+                int index = Integer.parseInt(arr[1]);
+                ifExceedRangeThenThrow(lst, index);
+                String tentativeReply = ifDoneGetReply(lst, firstWord, index);
+                reply = ifDeleteGetReply(lst, firstWord, index, tentativeReply);
+
                 break;
 
             case "todo":
             case "event":
             case "deadline":
-                Task t = null;
-                if (arr[0].equals("todo")) {
-                    t = new Todo(msg);
-                } else if (arr[0].equals("event")) {
-                    t = new Event(msg);
-                } else {
-                    t = new Deadline(msg);
-                }
-                lst.addTask(t);
-                reply = "Got it. I've added this task:\n\t  " +
-                    t + "\n\tNow you have " + lst.getNumTasks()
+                Task taskToBeAdded = getAppropriateTask(firstWord, msg);
+                lst.addTask(taskToBeAdded);
+                reply = "Got it. I've added this task:\n\t  "
+                    + taskToBeAdded + "\n\tNow you have "
+                    + lst.getNumTasks()
                     + " tasks in the list.";
+
                 break;
 
             case "find":
@@ -102,4 +89,46 @@ public class Parser {
         return reply;
     }
 
+    private static void ifExcessDescriptionThenThrow(String[] msgArray) throws JimmyException {
+        if (msgArray.length > 2) {
+            throw new JimmyException(ErrorMessage.EXCESS_DESCRIPTION);
+        }
+    }
+
+    private static void ifExceedRangeThenThrow(TaskList taskList, int index) throws JimmyException {
+        if (index > taskList.getNumTasks() || index < 1) {
+            throw new JimmyException(ErrorMessage.TASK_EXCEED_RANGE);
+        }
+    }
+
+    private static String ifDoneGetReply(TaskList taskList, String firstWord, int index) {
+        if (firstWord.equals("done")) {
+            taskList.completeTask(index);
+            Task completedTask = taskList.getTask(index);
+            return "Nice! I've marked this task as done:" + "\n\t  " + completedTask;
+        } else {
+            return null;
+        }
+    }
+
+    private static String ifDeleteGetReply(TaskList taskList, String firstWord, int index, String reply) {
+        if (firstWord.equals("delete")) {
+            Task taskToBeDeleted = taskList.getTask(index);
+            taskList.del(index);
+            return "Noted. I've removed this task:" + "\n\t  " + taskToBeDeleted
+                + "\n\tNow you have " + taskList.getNumTasks() + " tasks in the list.";
+        } else {
+            return reply;
+        }
+    }
+
+    private static Task getAppropriateTask(String firstWord, String message) {
+        if (firstWord.equals("todo")) {
+            return new Todo(message);
+        } else if (firstWord.equals("event")) {
+            return new Event(message);
+        } else {
+            return new Deadline(message);
+        }
+    }
 }

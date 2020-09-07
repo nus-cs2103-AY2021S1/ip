@@ -53,7 +53,7 @@ public class Ui {
      *
      * @return {@code String} form of user input.
      */
-    public String process() {
+    public String readUserInput() {
         return this.sc.nextLine();
     }
 
@@ -62,7 +62,7 @@ public class Ui {
      *
      * @param input {@code String} that is formatted and printed.
      */
-    public void print(String input) {
+    public void printOutput(String input) {
         System.out.println(this.div() +
             "\t" + input + this.div());
     }

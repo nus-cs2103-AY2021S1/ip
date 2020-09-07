@@ -73,38 +73,46 @@ public class Storage {
     /**
      * Overrides (if existing file exists) and saves a {@code TaskList} to the file in the filepath.
      *
-     * @param p {@code TaskList} to be saved into file.
+     * @param taskList {@code TaskList} to be saved into file.
      */
-    public void updateList(TaskList p) {
+    public void updateList(TaskList taskList) {
 
         try {
-            FileWriter fw = new FileWriter(this.file.getPath());
-            for (Task t : p.getList()) {
-                fw.write(this.format(t) + "\n");
-            }
-            fw.close();
+            FileWriter fileWriter = new FileWriter(this.file.getPath());
+            writeTasksIntoList(taskList, fileWriter);
+            fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void writeTasksIntoList(TaskList taskList, FileWriter writer) throws IOException {
+        for (Task task : taskList.getList()) {
+            writer.write(this.format(task) + "\n");
         }
     }
 
     /**
      * Retrieves tasks (if present) from file in filepath and loads it into the {@code TaskList}.
      *
-     * @param p {@code TaskList} that will be loaded with tasks from previous iterations if present.
+     * @param taskList {@code TaskList} that will be loaded with tasks from previous iterations if present.
      */
-    public void loadList(TaskList p) {
+    public void loadList(TaskList taskList) {
         try {
-            FileReader fr = new FileReader(this.file.getPath());
-            BufferedReader br = new BufferedReader(fr);
-            String currLine = br.readLine();
-            while (currLine != null) {
-                p.addTask(this.reformat(currLine));
-                currLine = br.readLine();
-            }
-            br.close();
+            FileReader fileReader = new FileReader(this.file.getPath());
+            BufferedReader bufferedReader = new BufferedReader(fileReader);
+            readFromFileThenAddToList(taskList, bufferedReader);
+            bufferedReader.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void readFromFileThenAddToList(TaskList taskList, BufferedReader reader) throws IOException {
+        String currentLine = reader.readLine();
+        while (currentLine != null) {
+            taskList.addTask(reformat(currentLine));
+            currentLine = reader.readLine();
         }
     }
 
