@@ -15,7 +15,7 @@ import java.util.Scanner;
 public class Storage {
     private final String filePath;
     private File data;
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    private final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("MMM dd yyyy");
 
     /**
      * Storage constructor
@@ -51,12 +51,12 @@ public class Storage {
                 } else if (taskType == 'D') {
                     String[] split = description.split("[(]by: ");
                     String deadlineDesc = split[0];
-                    LocalDate deadline = LocalDate.parse(split[1].substring(0, split[1].length() - 1), formatter);
+                    LocalDate deadline = LocalDate.parse(split[1].substring(0, split[1].length() - 1), FORMATTER);
                     list.add(new Deadline(deadlineDesc, deadline, isDone));
                 } else if (taskType == 'E') {
                     String[] split = description.split("[(]at: ");
                     String eventDesc = split[0];
-                    LocalDate eventTime = LocalDate.parse(split[1].substring(0, split[1].length() - 1), formatter);
+                    LocalDate eventTime = LocalDate.parse(split[1].substring(0, split[1].length() - 1), FORMATTER);
                     list.add(new Event(eventDesc, eventTime, isDone));
                 } else {
                     throw new DukeException("File reading error _(´ཀ`」 ∠)_");
