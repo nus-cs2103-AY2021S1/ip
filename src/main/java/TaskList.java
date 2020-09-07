@@ -63,11 +63,15 @@ public class TaskList {
     @Override
     public String toString() {
         String rtn = taskList.stream().map(task -> task.toString()).collect(Collectors.joining("\n"));
-        String[] rtnSplit = rtn.split("\n");
-        for (int i = 0; i < rtnSplit.length; i++) {
-            rtnSplit[i] = (i + 1) + ". " + rtnSplit[i];
+        if (!rtn.equals("")) {
+            String[] rtnSplit = rtn.split("\n");
+            for (int i = 0; i < rtnSplit.length; i++) {
+                rtnSplit[i] = (i + 1) + ". " + rtnSplit[i];
+            }
+            return Arrays.asList(rtnSplit).stream().collect(Collectors.joining("\n"));
+        } else {
+            return "";
         }
-        return Arrays.asList(rtnSplit).stream().collect(Collectors.joining("\n"));
     }
 
     public String find(String key) {
