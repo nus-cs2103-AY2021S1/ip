@@ -27,6 +27,14 @@ public class Duke {
     }
 
     /**
+     * Main driver method (for testing purposes).
+     */
+    public static void main(String[] args) {
+        Duke duke = new Duke();
+        duke.run();
+    }
+
+    /**
      * Runs the program until termination.
      */
     public void run() {
