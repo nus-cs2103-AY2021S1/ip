@@ -43,6 +43,16 @@ public class Event extends Task {
     }
 
     /**
+     * Updates the time of given Event task.
+     * @param time New updated time
+     * @return Event task with updated time
+     */
+    @Override
+    public Event updateTime(String time) {
+        return new Event(super.name, super.done, time);
+    }
+
+    /**
      * Returns the Event object string.
      * @return The Event object string name
      */

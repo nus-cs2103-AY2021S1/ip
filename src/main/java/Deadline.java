@@ -43,6 +43,16 @@ public class Deadline extends Task {
     }
 
     /**
+     * Updates the time of given deadline task.
+     * @param time New updated time
+     * @return Deadline task with updated time
+     */
+    @Override
+    public Deadline updateTime(String time) {
+        return new Deadline(super.name, super.done, time);
+    }
+
+    /**
      * Returns the Deadline object string.
      * @return The Deadline object string name
      */
