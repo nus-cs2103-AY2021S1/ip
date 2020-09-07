@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.exception.WrongFormatException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -15,11 +14,7 @@ import duke.task.ToDo;
  */
 public class TaskList {
 
-    private static final String TODO_SYMBOL = "[T]";
-    private static final String EVENT_SYMBOL = "[E]";
-    private static final String DEADLINE_SYMBOL = "[D]";
-    private static final String DONE = "1";
-    private static final String DATE_TIME_FORMAT_PATTERN = "yyyy-MM-dd HHmm";
+    private static final String DONE = Integer.toString(Task.DONE_SYMBOL_MEMORY);
 
     /** The user's list of tasks */
     private List<Task> tasks = new ArrayList<>();
@@ -33,9 +28,8 @@ public class TaskList {
      * Creates and initializes a list of tasks and populates it with tasks specified by the listOfTasks.
      *
      * @param listOfTasks The list of tasks in String format, to populate the task list with.
-     * @throws WrongFormatException If an error is present in the format of a task in the save file.
      */
-    public TaskList(List<String> listOfTasks) throws WrongFormatException {
+    public TaskList(List<String> listOfTasks) {
         initiateTaskList(listOfTasks);
     }
 
@@ -43,7 +37,6 @@ public class TaskList {
      * Populates the task list with tasks specified by the listOfTasks.
      *
      * @param listOfTasks The list of tasks in String format, to populate the task list with.
-     * @throws WrongFormatException If an error is present in the format of a task in the save file.
      */
     private void initiateTaskList(List<String> listOfTasks) {
         for (String taskString : listOfTasks) {
@@ -52,14 +45,14 @@ public class TaskList {
             String doneSymbol = taskStringParts[1];
             String taskDescription = taskStringParts[2];
             switch (taskTypeSymbol) {
-            case TODO_SYMBOL:
+            case ToDo.TASK_TYPE_SYMBOL:
                 tasks.add(new ToDo(taskDescription, doneSymbol.equals(DONE)));
                 break;
-            case EVENT_SYMBOL:
+            case Event.TASK_TYPE_SYMBOL:
                 String eventLocation = taskStringParts[3];
                 tasks.add(new Event(taskDescription, eventLocation, doneSymbol.equals(DONE)));
                 break;
-            case DEADLINE_SYMBOL:
+            case Deadline.TASK_TYPE_SYMBOL:
                 String deadline = taskStringParts[3];
                 tasks.add(new Deadline(taskDescription, LocalDateTime.parse(deadline).toLocalDate(),
                                 LocalDateTime.parse(deadline), doneSymbol.equals(DONE)));

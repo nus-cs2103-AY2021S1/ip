@@ -27,19 +27,14 @@ import duke.exception.WrongFormatException;
  */
 public class Parser {
 
-    private static final String BYE = "bye";
-    private static final String LIST = "list";
-    private static final String DONE = "done";
-    private static final String DELETE = "delete";
-    private static final String TODO = "todo";
-    private static final String EVENT = "event";
-    private static final String DEADLINE = "deadline";
-    private static final String FIND = "find";
-
     private static final int INDEX_OF_DESCRIPTION_START_FOR_TODO = 5;
     private static final int INDEX_OF_DESCRIPTION_START_FOR_EVENT = 6;
     private static final int INDEX_OF_DESCRIPTION_START_FOR_DEADLINE = 9;
     private static final int INDEX_OF_DESCRIPTION_START_FOR_FIND = 5;
+    private static final int INDEX_OF_HOURS_START = 0;
+    private static final int INDEX_OF_HOURS_END = 2;
+    private static final int INDEX_OF_MINUTES_START = 2;
+    private static final int INDEX_OF_MINUTES_END = 4;
 
     /**
      * Parses user commands and returns the appropriate executable command for the program to then execute.
@@ -50,21 +45,21 @@ public class Parser {
     public static Command parse(String fullCommand) throws WrongFormatException {
         String[] commandWords = fullCommand.split(" ");
         String firstWord = commandWords[0];
-        if (fullCommand.equals(BYE)) { // Exit the program
+        if (fullCommand.equals(ExitCommand.COMMAND_WORD)) { // Exit the program
             return new ExitCommand();
-        } else if (fullCommand.equals(LIST)) { // List out task list
+        } else if (fullCommand.equals(ListCommand.COMMAND_WORD)) { // List out task list
             return new ListCommand();
-        } else if (firstWord.equals(DONE)) { // Done with a task
+        } else if (firstWord.equals(DoneCommand.COMMAND_WORD)) { // Done with a task
             return createDoneCommand(commandWords);
-        } else if (firstWord.equals(DELETE)) { // Delete a task
+        } else if (firstWord.equals(DeleteCommand.COMMAND_WORD)) { // Delete a task
             return createDeleteCommand(commandWords);
-        } else if (firstWord.equals(TODO)) { // Add To-Do task
+        } else if (firstWord.equals(AddTodoCommand.COMMAND_WORD)) { // Add To-Do task
             return createAddTodoCommand(fullCommand);
-        } else if (firstWord.equals(EVENT)) { // Add duke.task.Event task
+        } else if (firstWord.equals(AddEventCommand.COMMAND_WORD)) { // Add Event task
             return createAddEventCommand(fullCommand);
-        } else if (firstWord.equals(DEADLINE)) { // Add duke.task.Deadline task
+        } else if (firstWord.equals(AddDeadlineCommand.COMMAND_WORD)) { // Add Deadline task
             return createAddDeadlineCommand(fullCommand);
-        } else if (firstWord.equals(FIND)) { // Find task(s) in task list
+        } else if (firstWord.equals(FindCommand.COMMAND_WORD)) { // Find task(s) in task list
             return createFindCommand(fullCommand);
         } else { // Unknown command entered
             return new UnknownCommand();
@@ -73,7 +68,8 @@ public class Parser {
 
     private static Command createDoneCommand(String[] commandWords) throws DoneWrongFormatException {
         try {
-            if (commandWords.length != 2) { // If command is in a wrong format by having more than 2 words
+            if (commandWords.length != DoneCommand.EXPECTED_NUMBER_OF_ARGUMENTS) { // If command is in a wrong format
+                // by having more than 2 words
                 throw new DoneWrongFormatException();
             }
             int taskIndex = Integer.parseInt(commandWords[1]) - 1; // Index of task in the task list
@@ -85,7 +81,8 @@ public class Parser {
 
     private static Command createDeleteCommand(String[] commandWords) throws DeleteWrongFormatException {
         try {
-            if (commandWords.length != 2) { // If command is in a wrong format by having more than 2 words
+            if (commandWords.length != DeleteCommand.EXPECTED_NUMBER_OF_ARGUMENTS) { // If command is in a wrong format
+                // by having more than 2 words
                 throw new DeleteWrongFormatException();
             }
             int taskIndex = Integer.parseInt(commandWords[1]) - 1; // Index of task in the task list
@@ -109,7 +106,7 @@ public class Parser {
 
     private static Command createAddEventCommand(String fullCommand) throws EventWrongFormatException {
         try {
-            String[] commandParts = fullCommand.split("/at");
+            String[] commandParts = fullCommand.split(AddEventCommand.COMMAND_SPLIT_WORD);
             String taskDescription = commandParts[0].substring(INDEX_OF_DESCRIPTION_START_FOR_EVENT).trim();
             if (taskDescription.isEmpty()) {
                 throw new EventWrongFormatException();
@@ -123,7 +120,7 @@ public class Parser {
 
     private static Command createAddDeadlineCommand(String fullCommand) throws DeadlineWrongFormatException {
         try {
-            String[] commandParts = fullCommand.split("/by");
+            String[] commandParts = fullCommand.split(AddDeadlineCommand.COMMAND_SPLIT_WORD);
             String taskDescription = commandParts[0].substring(INDEX_OF_DESCRIPTION_START_FOR_DEADLINE).trim();
             if (taskDescription.isEmpty()) {
                 throw new DeadlineWrongFormatException();
@@ -133,8 +130,10 @@ public class Parser {
             String[] dateAndTimeParts = taskDeadline.split(" ");
             String deadlineDateString = dateAndTimeParts[0];
             String deadlineTimeString = dateAndTimeParts[1];
-            int deadlineTimeHours = Integer.parseInt(deadlineTimeString.substring(0, 2));
-            int deadlineTimeMinutes = Integer.parseInt(deadlineTimeString.substring(2, 4));
+            int deadlineTimeHours = Integer.parseInt(deadlineTimeString.substring(INDEX_OF_HOURS_START,
+                    INDEX_OF_HOURS_END));
+            int deadlineTimeMinutes = Integer.parseInt(deadlineTimeString.substring(INDEX_OF_MINUTES_START,
+                    INDEX_OF_MINUTES_END));
             LocalDate deadlineDate = LocalDate.parse(deadlineDateString);
             LocalDateTime deadlineDateAndTime = deadlineDate.atTime(deadlineTimeHours, deadlineTimeMinutes);
 

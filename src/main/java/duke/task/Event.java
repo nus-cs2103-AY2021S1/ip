@@ -6,6 +6,9 @@ package duke.task;
  */
 public class Event extends Task {
 
+    public static final String TASK_TYPE_SYMBOL = "[E]";
+    private static final String TASK_TYPE_NAME = "event";
+
     /** The venue where the task is to be done */
     protected String at;
 
@@ -16,8 +19,7 @@ public class Event extends Task {
      * @param at The venue where the task is to be done.
      */
     public Event(String description, String at) {
-        super(description, "[E]", "event", false);
-        this.at = at;
+        this(description, at, false);
     }
 
     /**
@@ -28,7 +30,12 @@ public class Event extends Task {
      * @param isDone Marks whether the task has been completed or not.
      */
     public Event(String description, String at, boolean isDone) {
-        super(description, "[E]", "event", isDone);
+        super(description,
+                " (at: " + at + ")",
+                "|" + at,
+                TASK_TYPE_SYMBOL,
+                TASK_TYPE_NAME,
+                isDone);
         this.at = at;
     }
 
@@ -39,30 +46,5 @@ public class Event extends Task {
      */
     public String getAt() {
         return at;
-    }
-
-    /**
-     * Formats the string that will be written in the save file to represent this particular event task.
-     *
-     * @return The string that will be written in the save file to represent this particular event task.
-     */
-    @Override
-    public String toStringForMemory() {
-        return super.toStringForMemory() + "|" + at;
-    }
-
-    /**
-     * Formats the way the event task is presented to the user as part of the task list.
-     *
-     * @return The String that represents the event task when it is presented to the user as part of the task list.
-     */
-    @Override
-    public String toStringForGui() {
-        return super.toStringForGui() + " (at: " + at + ")";
-    }
-
-    @Override
-    public String toStringForCli() {
-        return super.toStringForCli() + " (at: " + at + ")";
     }
 }

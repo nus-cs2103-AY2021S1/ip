@@ -15,7 +15,10 @@ import duke.task.Task;
  */
 public class DeleteCommand extends Command {
 
+    public static final String COMMAND_WORD = "delete";
+    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     private int taskIndex;
+    private int userSpecifiedIndex;
 
     /**
      * Creates and initializes a DeleteCommand object.
@@ -24,6 +27,7 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(int taskIndex) {
         this.taskIndex = taskIndex;
+        this.userSpecifiedIndex = taskIndex + 1;
     }
 
     /**
@@ -47,7 +51,7 @@ public class DeleteCommand extends Command {
             }
         } catch (IndexOutOfBoundsException e) { // User requests for a task with an index not within the current task
             // list
-            throw new TaskIndexOutOfBoundsException(Integer.toString(taskIndex + 1));
+            throw new TaskIndexOutOfBoundsException(Integer.toString(userSpecifiedIndex));
         }
     }
 
@@ -63,7 +67,7 @@ public class DeleteCommand extends Command {
             return uiForGui.showReplyForDeleteTask(removedTask, tasks);
         } catch (IndexOutOfBoundsException e) { // User requests for a task with an index not within the current task
             // list
-            throw new TaskIndexOutOfBoundsException(Integer.toString(taskIndex + 1));
+            throw new TaskIndexOutOfBoundsException(Integer.toString(userSpecifiedIndex));
         }
     }
 }

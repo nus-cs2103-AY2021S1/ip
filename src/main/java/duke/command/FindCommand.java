@@ -9,6 +9,7 @@ import duke.task.Task;
 
 public class FindCommand extends Command {
 
+    public static final String COMMAND_WORD = "find";
     private String keyWords;
 
     public FindCommand(String keyWords) {

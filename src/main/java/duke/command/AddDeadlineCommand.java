@@ -17,6 +17,8 @@ import duke.task.Task;
  */
 public class AddDeadlineCommand extends AddCommand {
 
+    public static final String COMMAND_WORD = "deadline";
+    public static final String COMMAND_SPLIT_WORD = "/by";
     private String taskDescription;
     private LocalDate deadlineDate;
     private LocalDateTime deadlineDateAndTime;

@@ -11,6 +11,8 @@ import duke.UiForGui;
  */
 public class ListCommand extends Command {
 
+    public static final String COMMAND_WORD = "list";
+
     /**
      * Executes the command and lists out the tasks in the task list and presents them to the user.
      *

@@ -6,7 +6,6 @@ import java.util.concurrent.TimeUnit;
 import duke.command.Command;
 import duke.command.UnknownCommand;
 import duke.exception.DukeException;
-import duke.exception.WrongFormatException;
 import javafx.application.Platform;
 
 /**
@@ -41,7 +40,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (FileNotFoundException | WrongFormatException e) {
+        } catch (FileNotFoundException e) {
             ui.showError(e);
             tasks = new TaskList();
         }
@@ -55,7 +54,7 @@ public class Duke {
         storage = new Storage(FILE_PATH);
         try {
             tasks = new TaskList(storage.load());
-        } catch (FileNotFoundException | WrongFormatException e) {
+        } catch (FileNotFoundException e) {
             uiForGui.showError(e);
             tasks = new TaskList();
         }

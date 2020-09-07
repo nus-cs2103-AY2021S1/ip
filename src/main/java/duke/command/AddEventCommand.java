@@ -15,6 +15,8 @@ import duke.task.Task;
  */
 public class AddEventCommand extends AddCommand {
 
+    public static final String COMMAND_WORD = "event";
+    public static final String COMMAND_SPLIT_WORD = "/at";
     private String taskDescription;
     private String taskLocation;
 

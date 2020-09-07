@@ -15,6 +15,7 @@ import duke.task.ToDo;
  */
 public class AddTodoCommand extends AddCommand {
 
+    public static final String COMMAND_WORD = "todo";
     private String taskDescription;
 
     /**

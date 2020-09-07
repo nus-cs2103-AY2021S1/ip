@@ -6,8 +6,21 @@ package duke.task;
  */
 public class Task {
 
+    public static final int DONE_SYMBOL_MEMORY = 1;
+    public static final int NOT_DONE_SYMBOL_MEMORY = 0;
+    private static final String DONE_SYMBOL_GUI = "\u2713";
+    private static final String NOT_DONE_SYMBOL_GUI = "\u2718";
+    private static final String DONE_SYMBOL_CLI = "✓";
+    private static final String NOT_DONE_SYMBOL_CLI = "✘";
+
     /** Describes the task */
     protected String description;
+
+    /** Additional information to describe the task */
+    protected String additionalDescription;
+
+    /** Additional information to describe the task to be stored in save file */
+    protected String additionalDescriptionForMemory;
 
     /** Marks whether the task has been completed or not */
     protected boolean isDone;
@@ -26,8 +39,11 @@ public class Task {
      * @param taskTypeName The name of the task type.
      * @param isDone Marks whether the task has been completed or not.
      */
-    public Task(String description, String taskTypeSymbol, String taskTypeName, boolean isDone) {
+    public Task(String description, String additionalDescription, String additionalDescriptionForMemory,
+                String taskTypeSymbol, String taskTypeName, boolean isDone) {
         this.description = description;
+        this.additionalDescription = additionalDescription;
+        this.additionalDescriptionForMemory = additionalDescriptionForMemory;
         this.isDone = isDone;
         this.taskTypeSymbol = taskTypeSymbol;
         this.taskTypeName = taskTypeName;
@@ -38,12 +54,16 @@ public class Task {
      *
      * @return "✓" if the task is completed; "✘" if it is not completed.
      */
-    public String getStatusIconForGui() {
-        return (isDone ? "\u2713" : "\u2718");
+    private String getStatusIconForGui() {
+        return (isDone ? DONE_SYMBOL_GUI : NOT_DONE_SYMBOL_GUI);
     }
 
-    public String getStatusIconForCli() {
-        return (isDone ? "✓" : "✘");
+    private String getStatusIconForCli() {
+        return (isDone ? DONE_SYMBOL_CLI : NOT_DONE_SYMBOL_CLI);
+    }
+
+    private int getStatusIconForMemory() {
+        return (isDone ? DONE_SYMBOL_MEMORY : NOT_DONE_SYMBOL_MEMORY);
     }
 
     /**
@@ -70,7 +90,7 @@ public class Task {
      * @return The string that will be written in the save file to represent this particular task.
      */
     public String toStringForMemory() {
-        return taskTypeSymbol + "|" + (isDone ? 1 : 0) + "|" + description;
+        return taskTypeSymbol + "|" + getStatusIconForMemory() + "|" + description + additionalDescriptionForMemory;
     }
 
     /**
@@ -79,10 +99,10 @@ public class Task {
      * @return The String that represents the task when it is presented to the user as part of the task list.
      */
     public String toStringForGui() {
-        return taskTypeSymbol + "[" + getStatusIconForGui() + "] " + description;
+        return taskTypeSymbol + "[" + getStatusIconForGui() + "] " + description + additionalDescription;
     }
 
     public String toStringForCli() {
-        return taskTypeSymbol + "[" + getStatusIconForCli() + "] " + description;
+        return taskTypeSymbol + "[" + getStatusIconForCli() + "] " + description + additionalDescription;
     }
 }

@@ -15,7 +15,10 @@ import duke.task.Task;
  */
 public class DoneCommand extends Command {
 
+    public static final String COMMAND_WORD = "done";
+    public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     private int taskIndex;
+    private int userSpecifiedIndex;
 
     /**
      * Creates and initializes a DoneCommand object.
@@ -24,6 +27,7 @@ public class DoneCommand extends Command {
      */
     public DoneCommand(int taskIndex) {
         this.taskIndex = taskIndex;
+        this.userSpecifiedIndex = taskIndex + 1;
     }
 
     /**
@@ -48,7 +52,7 @@ public class DoneCommand extends Command {
             }
         } catch (IndexOutOfBoundsException e) { // User requests for a task with an index not within the current task
             // list
-            throw new TaskIndexOutOfBoundsException(Integer.toString(taskIndex + 1));
+            throw new TaskIndexOutOfBoundsException(Integer.toString(userSpecifiedIndex));
         }
     }
 
@@ -65,7 +69,7 @@ public class DoneCommand extends Command {
             return uiForGui.showReplyForDoneTask(completedTask);
         } catch (IndexOutOfBoundsException e) { // User requests for a task with an index not within the current task
             // list
-            throw new TaskIndexOutOfBoundsException(Integer.toString(taskIndex + 1));
+            throw new TaskIndexOutOfBoundsException(Integer.toString(userSpecifiedIndex));
         }
     }
 }

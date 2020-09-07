@@ -5,13 +5,16 @@ package duke.task;
  */
 public class ToDo extends Task {
 
+    public static final String TASK_TYPE_SYMBOL = "[T]";
+    private static final String TASK_TYPE_NAME = "todo";
+
     /**
      * Creates and initializes a to-do task that has not been completed by default.
      *
      * @param description The description of the task.
      */
     public ToDo(String description) {
-        super(description, "[T]", "todo", false);
+        this(description, false);
     }
 
     /**
@@ -21,6 +24,11 @@ public class ToDo extends Task {
      * @param isDone Marks whether the task has been completed or not.
      */
     public ToDo(String description, boolean isDone) {
-        super(description, "[T]", "todo", isDone);
+        super(description,
+                "",
+                "",
+                TASK_TYPE_SYMBOL,
+                TASK_TYPE_NAME,
+                isDone);
     }
 }

@@ -11,6 +11,8 @@ import duke.UiForGui;
  */
 public class ExitCommand extends Command {
 
+    public static final String COMMAND_WORD = "bye";
+
     /**
      * Creates and initializes an ExitCommand object. Its isExit boolean flag is marked as true to indicate to the
      * program that it should terminate.
