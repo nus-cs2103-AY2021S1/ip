@@ -2,6 +2,7 @@ package duke.utils;
 
 import duke.tasks.TaskList;
 
+import duke.ui.Messenger;
 import org.junit.jupiter.api.Test;
 
 import java.io.File;
@@ -35,7 +36,14 @@ class StorageTest {
     }
 
     private void makeBackup() throws IOException {
+        File directory = new File("data");
+        if (!directory.exists()) {
+            directory.mkdir();
+        }
         File f = new File("data/duke.txt");
+        if (!f.createNewFile()) {
+            return;
+        }
         File dest = new File("data/duke.bak");
         File test = new File("src/test/java/duke/utils/duke-test.txt");
         dest.exists();
@@ -49,6 +57,10 @@ class StorageTest {
 
     private void recover() throws IOException {
         File dest = new File("data/duke.bak");
+        if (!dest.exists()) {
+            // if cannot find back up, then give up recover
+            return;
+        }
         File f = new File("data/duke.txt");
         if (f.delete()) {
             Files.copy(dest.toPath(), f.toPath());
