@@ -11,7 +11,7 @@ import ui.Ui;
 /**
  * Adds a Deadline task into the current task list of Duke.
  */
-public class DeadlineCommand extends Command{
+public class DeadlineCommand extends Command {
 
     private TaskList taskList;
     private Storage storage;
@@ -26,8 +26,8 @@ public class DeadlineCommand extends Command{
     }
 
     @Override
-    public void execute() throws DukeInvalidUserInputException, DukeIllegalCommandException {
-        try{
+    public String execute() throws DukeInvalidUserInputException, DukeIllegalCommandException {
+        try {
             String withoutCommand = user_input.substring(user_input.indexOf(' '));
             String[] withoutCommandArr = withoutCommand.split("/");
             String description = withoutCommandArr[0].trim();
@@ -48,8 +48,9 @@ public class DeadlineCommand extends Command{
                 String dateTime = withoutCommandArr[1].substring(withoutCommandArr[1].indexOf(" ")).trim();
                 Deadline newTask = new Deadline(description, dateTime);
                 this.taskList.add(newTask);
-                this.ui.showTotalTasks(this.taskList.getTotalTask());
                 this.storage.saveTask(newTask);
+                return this.ui.showAddedToList(newTask) + "\n"
+                        + this.ui.showTotalTasks(this.taskList.getTotalTask());
             } else {
                 throw new DukeIllegalCommandException(followUpCommand);
             }

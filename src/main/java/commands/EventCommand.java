@@ -3,6 +3,7 @@ package commands;
 import data.exception.DukeIllegalCommandException;
 import data.exception.DukeInvalidUserInputException;
 import data.task.Event;
+import data.task.Task;
 import data.task.TaskList;
 import parser.Parser;
 import storage.Storage;
@@ -26,7 +27,7 @@ public class EventCommand extends Command{
     }
 
     @Override
-    public void execute() throws DukeInvalidUserInputException, DukeIllegalCommandException {
+    public String execute() throws DukeInvalidUserInputException, DukeIllegalCommandException {
         try {
             String withoutCommand = user_input.substring(user_input.indexOf(' '));
             String[] withoutCommandArr = withoutCommand.split("/");
@@ -48,8 +49,9 @@ public class EventCommand extends Command{
                 String dateTime = withoutCommandArr[1].substring(withoutCommandArr[1].indexOf(" ")).trim();
                 Event newTask = new Event(description, dateTime);
                 this.taskList.add(newTask);
-                this.ui.showTotalTasks(this.taskList.getTotalTask());
                 this.storage.saveTask(newTask);
+                return this.ui.showAddedToList(newTask) + "\n"
+                        + this.ui.showTotalTasks(this.taskList.getTotalTask());
             } else {
                 throw new DukeIllegalCommandException(followUpCommand);
             }

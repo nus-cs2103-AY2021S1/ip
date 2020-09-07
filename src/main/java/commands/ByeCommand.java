@@ -5,7 +5,7 @@ import ui.Ui;
 /**
  * Exits from Duke.
  */
-public class ByeCommand extends Command{
+public class ByeCommand extends Command {
 
     private Ui ui;
 
@@ -14,9 +14,9 @@ public class ByeCommand extends Command{
     }
 
     @Override
-    public void execute() {
-        this.ui.showExit();
+    public String execute() {
         System.exit(0);
+        return this.ui.showExit();
     }
 
     @Override

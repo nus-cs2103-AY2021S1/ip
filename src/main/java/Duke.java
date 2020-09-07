@@ -8,6 +8,8 @@ import ui.Ui;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 /**
@@ -28,7 +30,7 @@ public class Duke {
     public Duke(String file) {
         this.isChatting = true;
         this.ui = new Ui();
-        this.taskList = new TaskList(new ArrayList<>(), this.ui);
+        this.taskList = new TaskList(new ArrayList<>());
         this.storage = new Storage(file);
         this.parser = new Parser(this.taskList, this.storage, this.ui);
     }
@@ -37,7 +39,6 @@ public class Duke {
      * Runs Duke until termination.
      */
     private void startChat() {
-        this.ui.showGreeting();
         try {
             this.storage.loadTaskList(this.taskList);
         } catch (DukeInvalidUserInputException e) {
@@ -60,35 +61,21 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(baos);
-        PrintStream old = System.out;
-        System.setOut(ps);
         try {
             Command user_command = this.parser.parseCommand(input);
-            user_command.execute();
+            return user_command.execute();
         } catch (DukeException e) {
-            this.ui.showDukeError(e);
+            return this.ui.showDukeError(e);
         }
-        System.out.flush();
-        System.setOut(old);
-        return baos.toString();
     }
 
     public String initDuke() {
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(baos);
-        PrintStream old = System.out;
-        System.setOut(ps);
-        this.ui.showGreeting();
-        System.out.flush();
-        System.setOut(old);
         try {
             this.storage.loadTaskList(this.taskList);
         } catch (DukeInvalidUserInputException e) {
-            this.ui.showDukeError(e);
+            return this.ui.showDukeError(e);
         }
-        return baos.toString();
+        return Ui.showGreeting();
     }
 
     public static void main(String[] args) {

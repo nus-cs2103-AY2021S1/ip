@@ -24,9 +24,9 @@ public class FindDateCommand extends Command{
     }
 
     @Override
-    public void execute() throws DukeException {
+    public String execute() throws DukeException {
         if (this.user_input.trim().length() == 6) {
-            this.ui.showFindResults(this.taskList.getTaskList(), ""); //show all tasks
+            return this.ui.showFindResults(this.taskList.getTaskList(), ""); //show all tasks
         } else {
             String[] userInputArr = this.user_input.split(" ");
             if (userInputArr.length > 2) {
@@ -39,7 +39,7 @@ public class FindDateCommand extends Command{
                             + "date is of the wrong format. (Format: YYYY-MM-DD)");
                 } else {
                     ArrayList<Task> result = this.taskList.findTasksDate(keyword);
-                    this.ui.showFindResults(result, keyword);
+                    return this.ui.showFindResults(result, keyword);
                 }
             }
         }

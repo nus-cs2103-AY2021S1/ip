@@ -1,8 +1,10 @@
 package commands;
 
 import data.exception.DukeInvalidUserInputException;
+import data.task.Task;
 import data.task.TaskList;
 import storage.Storage;
+import ui.Ui;
 
 /**
  * Marks a specific task in the current task list of Duke as done.
@@ -20,7 +22,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute() throws DukeInvalidUserInputException {
+    public String execute() throws DukeInvalidUserInputException {
         //Get number after done keyword
         if (this.user_input.length() == 4) {
             throw new DukeInvalidUserInputException("I'm sorry to inform you that the "
@@ -29,8 +31,9 @@ public class DoneCommand extends Command {
         try {
             String int_substring = this.user_input.substring(5);
             int int_substring_converted = Integer.parseInt(int_substring);
-            this.taskList.markDone(int_substring_converted);
             this.storage.saveTaskList(this.taskList); //Overwrites current data.txt file
+            Task taskDone = this.taskList.markDone(int_substring_converted);
+            return Ui.showMarkDone(taskDone);
         } catch (NumberFormatException ex) {
             throw new DukeInvalidUserInputException("My sincere apologies, but please enter a valid number.");
         } catch (IndexOutOfBoundsException ex) {

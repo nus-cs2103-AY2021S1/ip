@@ -1,6 +1,7 @@
 package commands;
 
 import data.exception.DukeInvalidUserInputException;
+import data.task.Task;
 import data.task.TaskList;
 import storage.Storage;
 import ui.Ui;
@@ -23,14 +24,15 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute() throws DukeInvalidUserInputException {
+    public String execute() throws DukeInvalidUserInputException {
         //Get number after done keyword
         String int_substring = user_input.substring(7);
         try {
             int int_substring_converted = Integer.parseInt(int_substring);
-            this.taskList.delete(int_substring_converted);
-            this.ui.showTotalTasks(this.taskList.getTotalTask());
+            Task deletedTask = this.taskList.delete(int_substring_converted);
             this.storage.saveTaskList(this.taskList); //Overwrites current data.txt file
+            return this.ui.showDelete(deletedTask) + "\n"
+                    + this.ui.showTotalTasks(this.taskList.getTotalTask());
         } catch (NumberFormatException ex) {
             throw new DukeInvalidUserInputException("My sincere apologies, but please enter a valid number.");
         } catch (IndexOutOfBoundsException ex) {

@@ -25,9 +25,9 @@ public class FindCommand extends Command{
 
 
     @Override
-    public void execute() throws DukeException {
+    public String execute() throws DukeException {
         if (this.user_input.trim().length() == 4) {
-            this.ui.showFindResults(this.taskList.getTaskList(), ""); //show all tasks
+            return this.ui.showFindResults(this.taskList.getTaskList(), ""); //show all tasks
         } else {
             String[] userInputArr = this.user_input.split(" ");
             if (userInputArr.length > 2) {
@@ -36,7 +36,7 @@ public class FindCommand extends Command{
             } else {
                 String keyword = userInputArr[1];
                 ArrayList<Task> result = this.taskList.findTasksKeyword(keyword);
-                this.ui.showFindResults(result, keyword);
+                return this.ui.showFindResults(result, keyword);
             }
         }
     }
