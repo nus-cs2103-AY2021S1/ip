@@ -43,7 +43,7 @@ test {
 }
 
 application {
-    mainClassName = "Main"
+    mainClassName = "Launcher"
 }
 
 shadowJar {
@@ -52,7 +52,7 @@ shadowJar {
 }
 
 checkstyle {
-    toolVersion = '8.23'
+    toolVersion = '8.26'
 }
 
 run{
