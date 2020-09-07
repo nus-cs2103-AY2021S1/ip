@@ -26,7 +26,8 @@ public class Parser {
     static Command callCommand(String command, String[] parsedCommand) throws DukeException {
         if (command.equals(UserCommand.BYE.getCommand())) {
             return new ExitCommand(parsedCommand);
-        } else if (command.equals(UserCommand.LIST.getCommand())) {
+        } else if (command.equals(UserCommand.LIST.getCommand())
+                || command.equals(UserCommand.LS.getCommand())) {
             return new ListCommand(parsedCommand);
         } else if (command.equals(UserCommand.DONE.getCommand())) {
             return new DoneCommand(parsedCommand);
