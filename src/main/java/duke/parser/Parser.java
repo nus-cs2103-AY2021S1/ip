@@ -88,6 +88,8 @@ public class Parser {
         case "deadline":
             // Fallthrough
         case "event":
+            // Fallthrough
+        case "period-task":
             if (isOneWordCommand(parseArray)) {
                 throw new EmptyTaskException();
             } else {
@@ -104,7 +106,8 @@ public class Parser {
                         try {
                             String time = rest.split(" /")[1].split(" ", 2)[1];
                             LocalDate date = LocalDate.parse(time);
-                            command = new AddCommand(type, description, date);
+                            LocalDate[] dataArr = {date};
+                            command = new AddCommand(type, description, dataArr);
                         } catch (ArrayIndexOutOfBoundsException ex) {
                             throw new EmptyTimeException("Please don't leave the deadline blank~ (´∀`)");
                         } catch (DateTimeParseException ex) {
@@ -120,7 +123,27 @@ public class Parser {
                         try {
                             String time = rest.split(" /")[1].split(" ", 2)[1];
                             LocalDate date = LocalDate.parse(time);
-                            command = new AddCommand(type, description, date);
+                            LocalDate[] dataArr = {date};
+                            command = new AddCommand(type, description, dataArr);
+                        } catch (ArrayIndexOutOfBoundsException ex) {
+                            throw new EmptyTimeException("Please don't leave the event time blank~ (´∀`)");
+                        } catch (DateTimeParseException ex) {
+                            throw new WrongDateFormatException();
+                        }
+                    }
+                    break;
+                case "period-task":
+                    if (rest.split("/").length == 1) {
+                        throw new EmptyTimeException("Please specify start and end time using \"/from ... /to\". (´∀`)");
+                    } else {
+                        String description = rest.split(" /")[0];
+                        try {
+                            String startString = rest.split(" /")[1].split(" ", 2)[1];
+                            LocalDate start = LocalDate.parse(startString);
+                            String endString = rest.split(" /")[2].split(" ", 2)[1];
+                            LocalDate end = LocalDate.parse(endString);
+                            LocalDate[] dataArr = {start, end};
+                            command = new AddCommand(type, description, dataArr);
                         } catch (ArrayIndexOutOfBoundsException ex) {
                             throw new EmptyTimeException("Please don't leave the event time blank~ (´∀`)");
                         } catch (DateTimeParseException ex) {

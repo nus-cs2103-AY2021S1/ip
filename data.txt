@@ -1,4 +1,4 @@
 T | 1 | watch Inception
 D | 1 | finish hw | 2020-08-27
-T | 0 | lunch with Rhea
-T | 1 | do laundry
+T | 1 | lunch with Rhea
+D | 1 | test | 2020-09-11 | 2020-09-14
