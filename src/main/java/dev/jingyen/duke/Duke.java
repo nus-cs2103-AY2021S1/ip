@@ -96,6 +96,8 @@ public class Duke {
             String[] tokens = input.split(" ");
             Command command = Command.valueOf(tokens[0].toUpperCase());
             switch (command) {
+            case HELP:
+                return ui.displayHelp();
             case LIST: // show tasks available
                 return ui.displayTasks(tasks.getTasks());
             case FIND:
@@ -113,7 +115,7 @@ public class Duke {
                         "Okay. So you've done:",
                         task.toString());
             }
-            case DELETE:
+            case DELETE: {
                 int index = Integer.parseInt(tokens[1]) - 1;
                 Task task = tasks.getTask(index);
                 tasks.deleteTask(index);
@@ -121,6 +123,7 @@ public class Duke {
                         "Right, you no longer want me to track:",
                         task.toString(),
                         ui.getTasksLeftMessage(tasks.tasksCount()));
+            }
             case TODO:
                 // Fallthrough
             case DEADLINE:

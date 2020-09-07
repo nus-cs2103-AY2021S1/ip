@@ -1,6 +1,7 @@
 package dev.jingyen.duke;
 
 public enum Command {
+    HELP("help"),
     LIST("list"),
     FIND("find"),
     DONE("done"),
