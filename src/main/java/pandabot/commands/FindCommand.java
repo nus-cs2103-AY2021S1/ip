@@ -9,15 +9,15 @@ import pandabot.ui.Ui;
  * that matches the search word.
  */
 public class FindCommand extends Command {
-    private final String toMatch;
+    private final String keyword;
 
     /**
      * Creates a FindCommand object.
      *
-     * @param toMatch the word used in the search for tasks with matching descriptions
+     * @param keyword the word used in the search for tasks with matching descriptions
      */
-    public FindCommand(String toMatch) {
-        this.toMatch = toMatch;
+    public FindCommand(String keyword) {
+        this.keyword = keyword;
     }
 
     /**
@@ -31,7 +31,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        TaskList matchingTasks = tasks.findTask(toMatch);
+        TaskList matchingTasks = tasks.findTask(keyword);
         return ui.displayOnFind(matchingTasks);
     }
 }

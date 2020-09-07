@@ -56,11 +56,11 @@ public class Parser {
             return new AddCommand(new ToDo(cmd[1]));
         case "deadline":
             verifyArguments(cmd, 2);
-            String[] deadlineDes = obtainDes(cmd[1], "/by ");
+            String[] deadlineDes = obtainDescription(cmd[1], "/by ");
             return new AddCommand(new Deadline(deadlineDes[0], deadlineDes[1]));
         case "event":
             verifyArguments(cmd, 2);
-            String[] eventDes = obtainDes(cmd[1], "/at ");
+            String[] eventDes = obtainDescription(cmd[1], "/at ");
             return new AddCommand(new Event(eventDes[0], eventDes[1]));
         case "find":
             verifyArguments(cmd, 2);
@@ -71,12 +71,14 @@ public class Parser {
     }
 
     private static void verifyArguments(String[] cmd, int len) throws PandaBotInsufficientArgumentException {
-        if (cmd.length < len) {
+        if (cmd.length < len || cmd[cmd.length - 1].length() == 0) {
             throw new PandaBotInsufficientArgumentException();
         }
+        assert cmd[cmd.length - 1].length() > 0 : "Command arguments should not be empty.";
+        assert cmd.length == len : "Command arguments should match the number of arguments required.";
     }
 
-    private static String[] obtainDes(String des, String separator) throws PandaBotInsufficientArgumentException {
+    private static String[] obtainDescription(String des, String separator) throws PandaBotInsufficientArgumentException {
         String[] res = des.split(separator, 2);
         verifyArguments(res, 2);
         return res;

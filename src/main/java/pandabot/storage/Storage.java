@@ -56,6 +56,7 @@ public class Storage {
             }
         }
 
+        assert Files.exists(saveFilePath) : "Save file should be successfully created.";
         this.saveFilePath = saveFilePath;
     }
 
