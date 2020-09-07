@@ -33,4 +33,8 @@ public abstract class Task {
     public boolean getStatus() {
         return this.status;
     }
+
+    public abstract Task snoozeTask();
+
+    public abstract Task snoozeTask(int days);
 }

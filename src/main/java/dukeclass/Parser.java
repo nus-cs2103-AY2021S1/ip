@@ -114,6 +114,25 @@ public class Parser {
                 }
                 return tempList.toString();
 
+            } else if (splitString[0].equals("snooze")) {
+
+                if (splitString.length == 2) {
+                    int index = Integer.parseInt(splitString[1]) - 1;
+                    Task newTask = list.get(index).snoozeTask();
+                    list.set(index, newTask);
+
+                } else if (splitString.length == 3) {
+                    int index = Integer.parseInt(splitString[1]) - 1;
+                    int days = Integer.parseInt(splitString[2]);
+                    Task newTask = list.get(index).snoozeTask(days);
+                    list.set(index, newTask);
+
+                } else {
+                    //invalid input exception
+                }
+
+                return Ui.printTaskList(list);
+
             } else {
                 Task currTask = Parser.parseTask(userInput);
                 list.add(currTask);

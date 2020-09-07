@@ -41,12 +41,15 @@ public class Ui {
                 + "type \"done <number>\" to mark the specific task as done\n"
                 + "type \"delete <number>\" to delete the specific task\n"
                 + "type \"find <keyword>\" to find a task with the specific keyword\n"
+                + "type \"snooze <number> <days>\" to snooze a task by a certain number of days."
+                        +" By default snooze one day.\n"
+                + "\n"
                 + "To add new tasks:"
                 + "type \"todo <task>\" to add a to do\n"
                 + "type \"event <task> /<preposition> <yyyy-MM-dd HH:mm>\""
                         + "to add an event e.g event do chores /by 2020-08-08 12:00\n"
                 + "type \"deadline <task> /<preposition> <yyyy-MM-dd HH:mm>\""
-                        + "to add a deadline e.g event do chores /by 2020-08-08 12:00\n"
+                        + "to add a deadline e.g deadline do chores /by 2020-08-08 12:00\n"
                 + "\n";
     }
 
