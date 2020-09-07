@@ -382,7 +382,6 @@ public class ListOfItems {
                                 && !((Event) task).endTime.isAfter(time);
                     }
 
-
                     if ((isDeadline || isEvent) && (checkDate && checkTime)) {
                         hasResults = true;
                         assert task.id > 0 : "item id cannot be 0 or negative!";
