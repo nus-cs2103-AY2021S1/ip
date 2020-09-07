@@ -44,6 +44,8 @@ public class Parser {
      * @throws DukeException if there is an error with the input or input is not given in the correct format.
      */
     public static String commandParser(String input, TaskList list) throws DukeException {
+        assert !input.equals(""): "Input cannot be empty";
+
         String[] splitInput = input.split(" ");
 
         if (splitInput[0].equals("list")) {
