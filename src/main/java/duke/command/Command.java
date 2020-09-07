@@ -25,7 +25,38 @@ public abstract class Command {
      */
     public abstract void execute(TaskList tasks, Ui ui, DukeFileHandler fileHandler) throws DukeException;
 
-    public static boolean containsKeyword(String commandKeyword) {
+    // todo create a getter to return the alias for the loop
+
+    // todo return a COMMAND_TYPE.
+    public static CommandType containsKeyword(String commandKeyword) {
+        // todo loop through all the commands types.
+        // todo for each command type, loop through the alias.
+        if (contains(ClearCommand.aliases, commandKeyword)) {
+            return CommandType.CLEAR;
+        } else if (contains(DeadlineCommand.aliases, commandKeyword)) {
+            return CommandType.DEADLINE;
+        } else if (contains(DeleteCommand.aliases, commandKeyword)) {
+            return CommandType.DELETE;
+        } else if (contains(DoneCommand.aliases, commandKeyword)) {
+            return CommandType.DONE;
+        } else if (contains(EventCommand.aliases, commandKeyword)) {
+            return CommandType.EVENT;
+        } else if (contains(ExitCommand.aliases, commandKeyword)) {
+            return CommandType.EXIT;
+        } else if (contains(FindCommand.aliases, commandKeyword)) {
+            return CommandType.FIND;
+        } else if (contains(ListCommand.aliases, commandKeyword)) {
+            return CommandType.LIST;
+        } else if (contains(TodoCommand.aliases, commandKeyword)) {
+            return CommandType.TODO;
+        } else {
+            return CommandType.UNKNOWN;
+        }
+
+    }
+
+
+    private static boolean contains(List<String> aliases, String commandKeyword) {
         for (String alias : aliases) {
             if (alias.equals(commandKeyword)) {
                 return true;
@@ -33,4 +64,6 @@ public abstract class Command {
         }
         return false;
     }
+
+
 }
