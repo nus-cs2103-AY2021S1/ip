@@ -53,6 +53,7 @@ public class Parser {
     public static Command parse(String commandLine) throws DukeException {
         try {
             if (isList(commandLine)) {
+                assert commandLine.equals("list") : "list command line bug";
                 return parseListCommand();
             } else if (isTodo(commandLine)) {
                 return parseAddCommandTodo(commandLine);
@@ -84,6 +85,7 @@ public class Parser {
      * @throws DukeEmptyFindException Checks if the keyword is empty.
      */
     private static Command parseFindCommand(String commandLine) throws DukeEmptyFindException {
+        assert commandLine.startsWith("todo") : "todo command line bug";
         if (commandLine.equals("todo")) {
             throw new DukeEmptyFindException();
         }
