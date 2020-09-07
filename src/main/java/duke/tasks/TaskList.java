@@ -124,12 +124,51 @@ public class TaskList {
         StringBuilder output = new StringBuilder("Here are the matching tasks in your list:\n");
         for (Task task : tasks) {
             String content = task.getContent();
-            if (content.contains(keyword)) {
+            if (isFuzzyMatched(keyword, content)) {
                 output.append(index).append(".").append(task.toString()).append("\n");
                 index++;
             }
         }
         return output.toString();
+    }
+
+    /**
+     * Match the string with a task if the difference is less than two chars.
+     *
+     * @param keyword the keyword to be matched.
+     * @param taskName the name of the task in a string.
+     * @return true if a match is found and false otherwise.
+     */
+    private boolean isFuzzyMatched(String keyword, String taskName) {
+        int lKeyword = keyword.length();
+        int lTask = taskName.length();
+        final int fuzzyLimit = Math.max(1, lKeyword / 5);
+
+        // if keyword is longer or is empty, no match can be found
+        if (lKeyword > lTask || lKeyword == 0) {
+            return false;
+        }
+
+        for (int i = 0; i <= lTask - lKeyword; ++i) {
+            boolean matchFound = true;
+            int fuzzyCount = 0;
+            for (int j = 0; j < lKeyword; ++j) {
+                boolean isCharMatched = taskName.charAt(i + j) == keyword.charAt(j);
+                if (!isCharMatched && fuzzyCount < fuzzyLimit) {
+                    fuzzyCount++;
+                    continue;
+                }
+
+                if (!isCharMatched) {
+                    matchFound = false;
+                    break;
+                }
+            }
+            if (matchFound) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
