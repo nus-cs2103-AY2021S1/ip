@@ -8,14 +8,14 @@ import duke.ui.Ui;
 public class DoneCommand extends Command {
 
     /** The index of the task to be marked as done. */
-    private int num;
+    private int index;
 
     /** Constructs a new DoneCommand object with the specified index of the task.
      *
-     * @param num The index of the task to be marked as done.
+     * @param index The index of the task to be marked as done.
      */
-    public DoneCommand(int num) {
-        this.num = num;
+    public DoneCommand(int index) {
+        this.index = index;
     }
 
     /** Marks the task as done,
@@ -28,9 +28,9 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        assert num > taskList.getTasks().size() : "Oh no! There is an error with the DoneCommand numbering logic.";
-        taskList.markTaskAsDone(num);
-        dialog = ui.formatMarkAsDone(taskList.getTasks(), num);
+        assert index > taskList.getTasks().size() : "Oh no! There is an error with the DoneCommand numbering logic.";
+        taskList.markTaskAsDone(index);
+        dialog = ui.formatMarkAsDone(taskList.getTasks(), index);
         storage.saveTaskList(taskList.getTasks());
     }
 }

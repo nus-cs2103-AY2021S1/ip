@@ -11,14 +11,12 @@ import duke.tasks.Task;
 /** Represents the UI that prints out messages in Duke format. */
 public class Ui {
 
-    /** The scanner that scans the user input. */
-    private Scanner sc;
-
     /** The welcome message in Duke format. */
     public static final String DIALOG_WELCOME = "Hello! I'm Milk.\nWhat can I help you with?";
-
     /** The goodbye message in Duke format. */
     public static final String DIALOG_BYE = "You're going? Bye :( Hope to see you again soon.";
+    /** The scanner that scans the user input. */
+    private Scanner sc;
 
     /** Constructs a new Ui object. */
     public Ui() {
@@ -51,10 +49,10 @@ public class Ui {
     /** Shows the message where a task is marked as done in Duke format.
      *
      * @param tasks The list of tasks.
-     * @param num The index of the task that is marked as done.
+     * @param index The index of the task that is marked as done.
      */
-    public String formatMarkAsDone(ArrayList<Task> tasks, int num) {
-        return "Nice! I've marked this task as done:\n" + tasks.get(num);
+    public String formatMarkAsDone(ArrayList<Task> tasks, int index) {
+        return "Nice! I've marked this task as done:\n" + tasks.get(index);
     }
 
     /** Shows the list of tasks after a task is added in Duke format.
@@ -71,11 +69,11 @@ public class Ui {
     /** Shows the list of tasks after a task is deleted in Duke format.
      *
      * @param tasks The list of tasks.
-     * @param num The index of the task that is deleted.
+     * @param index The index of the task that is deleted.
      */
-    public String formatDeleteTask(ArrayList<Task> tasks, int num) {
+    public String formatDeleteTask(ArrayList<Task> tasks, int index) {
         int sizeAfterDeletion = tasks.size() - 1;
-        return String.format("Alright. I've removed this task:\n" + tasks.get(num)
+        return String.format("Alright. I've removed this task:\n" + tasks.get(index)
             + "\nNow you have %d %s in the list.",
             sizeAfterDeletion, sizeAfterDeletion == 1 ? "task" : "tasks");
     }
