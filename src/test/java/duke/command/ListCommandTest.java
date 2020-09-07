@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 
 import duke.DukeException;
+import duke.History;
 import duke.Storage;
 import duke.task.TaskList;
 
@@ -25,8 +26,9 @@ public class ListCommandTest {
         Path storageFilePath = Paths.get(".", "data", "test.txt");
         TaskList l = new TaskList();
         Storage s = new Storage(storageFilePath);
+        History history = new History();
         try {
-            assertTrue(test.execute(l, s).contains("Here are all the items in your list"));
+            assertTrue(test.execute(l, s, history).contains("Here are all the items in your list"));
         } catch (DukeException e) {
             System.out.println("Test failed");
         }

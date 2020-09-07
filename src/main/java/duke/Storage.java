@@ -13,6 +13,7 @@ import java.util.List;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.TaskList;
 import duke.task.ToDo;
 
 
@@ -168,6 +169,20 @@ public class Storage {
     public void deleteTask(int taskIndex) {
         assert taskIndex < allTasks.size() && taskIndex >= 0 : "Task index must be within range of allTask size";
         this.allTasks.remove(taskIndex);
+        writeToStorage();
+    }
+
+    /**
+     * Updates the local storage when Duke undoes changes.
+     *
+     * @param taskList is the new TaskList to be written to local storage.
+     */
+    public void undoChanges(TaskList taskList) {
+        List<String> newList = new ArrayList<>();
+        for (int i = 0; i < taskList.size(); i++) {
+            newList.add(taskList.get(i).toString());
+        }
+        this.allTasks = newList; // Substitute old List with new List which is the previous taskList state
         writeToStorage();
     }
 }

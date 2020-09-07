@@ -8,6 +8,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.UndoCommand;
 
 /**
  * A Parser to take in user input and determines the Command given to Duke.
@@ -45,6 +46,8 @@ public class Parser {
             return new DoneCommand(fullCommand);
         case DELETE:
             return new DeleteCommand(fullCommand);
+        case UNDO:
+            return new UndoCommand(fullCommand);
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }

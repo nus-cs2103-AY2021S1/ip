@@ -5,24 +5,21 @@ import duke.History;
 import duke.Storage;
 import duke.task.TaskList;
 
-/**
- * Command given to Duke to search for Tasks within Duke's TaskList.
- */
-public class FindCommand extends Command {
+public class UndoCommand extends Command {
     private final String userInput;
 
     /**
-     * Creates a Find Command to search the TaskList for the Task with the specified key word.
+     * Creates an Undo Command to revert the state of Duke's TaskList to the previous state.
      *
      * @param fullCommand <code>String</code> of the entire command from the user input.
      */
-    public FindCommand(String fullCommand) {
+    public UndoCommand(String fullCommand) {
         super();
         this.userInput = fullCommand;
     }
 
     /**
-     * Searches for Tasks that has the keyword inputted by the user.
+     * Changes the state of Duke's TaskList to the previous state.
      *
      * @param taskList the List of all the Tasks that Duke has.
      * @param storage the database of Tasks that is saved to the user's local storage.
@@ -31,12 +28,9 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Storage storage, History history) throws DukeException {
-        assert taskList != null : "taskList cannot be null";
-        if (userInput.length() <= 4) {
-            throw new DukeException("Please enter a keyword to find your task");
-        }
-
-        String keyword = this.userInput.substring(5);
-        return taskList.showSpecifiedItems(keyword);
+        TaskList previousState = history.undoHistory();
+        taskList.replace(previousState);
+        storage.undoChanges(previousState);
+        return "Undo successful! This is what your list looks like now:\n" + previousState.toString();
     }
 }

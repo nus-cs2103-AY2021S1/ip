@@ -25,6 +25,16 @@ public class ToDo extends Task {
     }
 
     /**
+     * Creates a deep copy of the current ToDo.
+     *
+     * @return a copy of the current ToDo.
+     */
+    @Override
+    public ToDo deepCopy() {
+        return new ToDo(super.description, super.isDone);
+    }
+
+    /**
      * Prints out the details of the ToDo Task, as well as whether or not it is completed.
      *
      * @return a <code>String</code> representation of the ToDo Task.

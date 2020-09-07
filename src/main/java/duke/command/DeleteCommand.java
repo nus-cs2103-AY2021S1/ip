@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.History;
 import duke.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -24,14 +25,16 @@ public class DeleteCommand extends Command {
      *
      * @param taskList the List containing all the tasks that Duke has stored.
      * @param storage the database for Duke to save all tasks to the user's local storage.
+     * @param history the state of all changes made to Duke's TaskList.
      * @throws DukeException when the task to be deleted does not exist in Duke's TaskList.
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage, History history) throws DukeException {
         assert storage != null : "Storage cannot be null";
         assert taskList != null : "taskList cannot be null";
         try {
             String taskIndex = userInput.substring(7);
+            history.addToHistory(taskList);
             int index = Integer.valueOf(taskIndex) - 1; // taskIndex started from 1
             Task deletedTask = taskList.delete(index);
 
