@@ -7,7 +7,10 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -25,14 +28,21 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Momoa.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Keanu.png"));
+    private Image bgImage = new Image(this.getClass().getResourceAsStream("/images/bg2.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        Background bg = new Background(new BackgroundImage(bgImage, null, null , null , null));
+        this.dialogContainer.setBackground(bg);
+
     }
 
     public void setDuke(Bot d) {
         duke = d;
+        dialogContainer.getChildren().addAll(
+            DialogBox.getDukeDialog("ff", dukeImage)
+        );
     }
 
     /**

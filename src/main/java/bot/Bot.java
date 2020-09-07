@@ -30,7 +30,7 @@ public class Bot {
             this.taskList = new TaskList(storage.loadFileContents());
         } catch (IOException e) {
             ui.showLoadingError();
-            this.taskList =  new TaskList();
+            this.taskList = new TaskList();
         }
     }
 
