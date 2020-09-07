@@ -54,6 +54,10 @@ public class Parser {
         return s.equals("help");
     }
 
+    private static boolean checkUpdate(String s) {
+        return s.equals("update");
+    }
+
     /**
      * Parses the user input and calls the appropriate functions.
      * @param taskList The list of tasks handler
@@ -69,6 +73,14 @@ public class Parser {
             String next = text.substring(i + 1);
             if (checkFind(test)) {
                 return taskList.findTask(next);
+            } else if (checkUpdate(test)) {
+                try {
+                    output = taskList.updateTask(next);
+                    storage.updateFile();
+                    return output;
+                } catch (DukeException e) {
+                    return e.getMessage();
+                }
             } else if (checkDone(test)) {
                 try {
                     output = taskList.doneTask(next);

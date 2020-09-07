@@ -61,6 +61,7 @@ public class Ui {
                 + "deadline [taskname] /by [yyyy-MM-dd HHmm]\n"
                 + "event [taskname] /at [yyy-MM-dd HHmm]\n"
                 + "delete [index or all]\n"
+                + "update [index] [name or time] [input]\n"
                 + "bye\n";
     }
 
@@ -71,5 +72,17 @@ public class Ui {
     public String unknownInputLine() {
         return "OOPS!!! I'm sorry, but I don't know what that means :(\n"
                 + "Type 'help' for list of commands.";
+    }
+
+    /**
+     * Returns String for updated Task.
+     * @param oldTask Previous task
+     * @param updatedTask Updated task
+     * @return String showing task has been updated
+     */
+    public String updateTaskLine(Task oldTask, Task updatedTask) {
+        return "The selected Task has been updated:\n"
+                + "Prev: " + oldTask
+                + "\nUpdated: " + updatedTask;
     }
 }

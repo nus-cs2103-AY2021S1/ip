@@ -18,7 +18,6 @@ public class TaskList {
     /**
      * Displays the task list.
      */
-
     public String displayList() {
         if (storage.isEmpty()) {
             return "Your list is empty!\n";
@@ -38,12 +37,13 @@ public class TaskList {
      * Adds task to the task list.
      * @param s The type of task to add
      * @param next The remaining task description
+     * @return Task addition string
      * @throws DukeException The Exception of Duke bot
      */
     public String addTask(String s, String next) throws DukeException {
-        Task toAdd = null;
+        Task toAdd;
 
-        if (s.matches("todo|deadline|event|done|delete") && next.equals("")) {
+        if (s.matches("todo|deadline|event|done|delete|update") && next.equals("")) {
             throw new DukeException("OOPS!!! The description of " + s + " cannot be empty.");
         }
 
@@ -87,13 +87,14 @@ public class TaskList {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :(");
         }
 
-        assert toAdd != null: "Nothing added!";
+        assert toAdd != null : "Nothing added!";
         return ui.addTaskLine(toAdd, storage.size());
     }
 
     /**
      * Completes given from the task list.
      * @param s Index of task to be completed on the list
+     * @return Task done String
      * @throws DukeException The Exception of Duke bot
      */
     public String doneTask(String s) throws DukeException {
@@ -119,6 +120,7 @@ public class TaskList {
     /**
      * Deletes given task from the task list.
      * @param s Index of task to be completed on the list
+     * @return Task deleted String
      * @throws DukeException The Exception of Duke bot
      */
     public String delTask(String s) throws DukeException {
@@ -155,6 +157,7 @@ public class TaskList {
     /**
      * Prints the list of tasks that contain the given string.
      * @param s The string that should appear in the task
+     * @return List of tasks found matching input s
      */
     public String findTask(String s) {
         if (storage.isEmpty()) {
@@ -173,6 +176,47 @@ public class TaskList {
             } else {
                 return output;
             }
+        }
+    }
+
+    /**
+     * Updates current task with new name or time.
+     * @param next The remaining task description
+     * @return Task updated String
+     * @throws DukeException The Exception of Duke bot
+     */
+    public String updateTask(String next) throws DukeException {
+        try {
+            String[] ls = next.split(" ");
+            int index = Integer.parseInt(ls[0]) - 1;
+            String command = ls[1].toLowerCase();
+            Task oldTask = storage.remove(index);
+            Task updatedTask;
+
+            switch (command) {
+            case "name":
+                String[] splitName = next.split(" name ");
+                String updatedName = splitName[1];
+                updatedTask = oldTask.updateName(updatedName);
+                storage.add(index, updatedTask);
+                break;
+            case "time":
+                String[] splitTime = next.split(" time ");
+                String updatedInput = splitTime[1];
+                String updatedTime = Parser.parseDateTime(updatedInput);
+                if (updatedTime.contains("Please input the time and date in\n")) {
+                    return updatedTime;
+                } else {
+                    updatedTask = oldTask.updateTime(updatedTime);
+                    storage.add(index, updatedTask);
+                }
+                break;
+            default:
+                throw new DukeException("Please choose either [name] or [time] to update.");
+            }
+            return ui.updateTaskLine(oldTask, updatedTask);
+        } catch (NumberFormatException nfe) {
+            return "Please state task number after \"update\".\n";
         }
     }
 

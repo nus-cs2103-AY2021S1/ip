@@ -1,6 +1,6 @@
 abstract class Task {
-    private final String name;
-    private final boolean done;
+    protected final String name;
+    protected final boolean done;
 
     public Task(String name) {
         this.name = name;
@@ -13,6 +13,10 @@ abstract class Task {
     }
 
     abstract Task setDone();
+
+    abstract Task updateTime(String time);
+
+    abstract Task updateName(String name);
 
     public String getStatusIcon() {
         return (done ? "\u2713" : "\u2718");

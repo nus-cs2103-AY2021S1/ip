@@ -119,7 +119,7 @@ public class Storage {
      */
     public void updateFile() {
         boolean fileDeleted = file.delete();
-        assert fileDeleted: "file not deleted";
+        assert fileDeleted : "file not deleted";
         saveFile();
         loadFile();
     }
