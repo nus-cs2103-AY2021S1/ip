@@ -1,5 +1,7 @@
 package dukeclass;
 
+import java.time.LocalDateTime;
+
 /**
  * A type of task.
  * The task has a String message and a Boolean status.
@@ -21,6 +23,14 @@ public class Todo extends Task {
     public Todo(String taskString, boolean status) {
         super(taskString);
         this.status = status;
+    }
+
+    public Task snoozeTask() {
+        return this;
+    }
+
+    public Task snoozeTask(int days) {
+        return this;
     }
 
     @Override

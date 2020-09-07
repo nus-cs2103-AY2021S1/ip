@@ -42,6 +42,37 @@ public class Event extends Task {
         this.status = status;
     }
 
+    /**
+     * Constructor for Event task but with ability to set status
+     * and take in dateTime as LocalDateTime instead of string
+     *
+     * @param taskString  the task given by the user
+     * @param preposition  the preposition for the time frame
+     * @param dateTime  the time frame
+     * @param status  status of the task
+     */
+    public Event(String taskString, String preposition, LocalDateTime dateTime, boolean status) {
+        super(taskString);
+        this.preposition = preposition;
+        this.dateTime = dateTime;
+        this.status = status;
+    }
+
+    public Task snoozeTask() {
+
+        LocalDateTime newDateTime = this.dateTime.minusDays(-1);
+
+        return new Event(this.taskString, this.preposition, newDateTime, this.status);
+    }
+
+    public Task snoozeTask(int days) {
+
+        LocalDateTime newDateTime = this.dateTime.minusDays(-1 * days);
+
+        return new Event(this.taskString, this.preposition, newDateTime, this.status);
+    }
+
+
     @Override
     public String toString() {
         String statusIcon = (status) ? "\u2714" : "\u2716";
@@ -55,4 +86,5 @@ public class Event extends Task {
         return "event//" + taskString + "//" + preposition + "//"
                 + dateTime.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + "//" + status;
     }
+
 }
