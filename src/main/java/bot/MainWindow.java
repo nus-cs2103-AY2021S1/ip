@@ -12,7 +12,6 @@ import javafx.scene.layout.BackgroundImage;
 import javafx.scene.layout.VBox;
 
 import java.io.ByteArrayOutputStream;
-import java.io.File;
 import java.io.PrintStream;
 
 /**
@@ -45,11 +44,6 @@ public class MainWindow extends AnchorPane {
     public void setDuke(String botName, String filePath) {
         ByteArrayOutputStream newConsole = new ByteArrayOutputStream();
         System.setOut(new PrintStream(newConsole));
-        File f = new File(filePath);
-        if (!f.exists()) {
-            String response = "Hey, you new user eh? I've got your profile created. No worries.";
-            System.out.println(response);
-        }
         String greeting = String.format("Good day, I'm %s. What can I do for you?", botName);
         System.out.println(greeting);
         duke = new Bot(botName, filePath);

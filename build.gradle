@@ -60,7 +60,7 @@ javafx {
 }
 
 application {
-    mainClassName = "bot.Main"
+    mainClassName = "bot.Launcher"
 }
 
 shadowJar {
