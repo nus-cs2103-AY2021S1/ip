@@ -52,4 +52,10 @@ public class Duke {
             return e.getMessage();
         }
     }
+
+    public String getGreetings() {
+        String greetings = ui.sayGreetings();
+//        greetings += ui.showGreetings();
+        return greetings;
+    }
 }
