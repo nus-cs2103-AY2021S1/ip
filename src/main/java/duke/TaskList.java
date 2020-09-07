@@ -74,6 +74,7 @@ class TaskList {
             task = handleEvent(description, date);
             break;
         default:
+            assert false : "There should only be 3 types of tasks, should not reach here";
             task = new Task("");
         }
 

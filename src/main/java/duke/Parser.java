@@ -58,8 +58,9 @@ class Parser {
             secondPartOfCommand = partsOfCommand[1];
             return new FindCommand(secondPartOfCommand);
         case BYE:
-            // Fallthrough
+            return new ExitCommand();
         default:
+            assert false : "There should only be a fixed number of commands, should not reach here";
             return new ExitCommand();
         }
     }
@@ -93,6 +94,7 @@ class Parser {
                 date = taskInfoParts[1];
                 return new AddCommand(commandName, description, date);
             default:
+                assert false : "There should only be 3 types of tasks, should not reach here";
                 return new AddCommand(commandName, "");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
