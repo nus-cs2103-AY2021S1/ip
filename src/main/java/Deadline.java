@@ -22,6 +22,20 @@ public class Deadline extends Task {
         this.dueTime = dueTime;
     }
 
+    @Override
+    public Deadline changeDesc(String newDesc) {
+        return new Deadline(newDesc, this.dueDate, this.dueTime, this.isComplete);
+    }
+
+    public Deadline changeTime(LocalTime newTime) {
+        return new Deadline(this.description, this.dueDate, newTime, this.isComplete);
+    }
+
+    public Deadline changeDate(LocalDate newDate) {
+        return new Deadline(this.description, newDate, this.dueTime, this.isComplete);
+    }
+
+
     /**
      * Returns a Deadline event that is completed.
      * @return Completed Deadline task.

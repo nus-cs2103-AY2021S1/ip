@@ -22,6 +22,20 @@ public class Event extends Task {
         this.startTime = startTime;
     }
 
+    @Override
+    public Event changeDesc(String newDesc) {
+        return new Event(newDesc, this.startDate, this.startTime, this.isComplete);
+    }
+
+    public Event changeTime(LocalTime newStartTime) {
+        return new Event(this.description, this.startDate, newStartTime, this.isComplete);
+    }
+
+    public Event changeDate(LocalDate newStartDate) {
+        return new Event(this.description, newStartDate, this.startTime, this.isComplete);
+    }
+
+
     /**
      * Returns a new Event which is completed.
      * @return Completed Event task.

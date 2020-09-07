@@ -1,5 +1,6 @@
 import java.io.IOException;
-import java.util.Scanner;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  * The user interface class that communicates with the user and the system to get
@@ -9,10 +10,14 @@ public class UI {
 
     private Storage storage;
     private Parser parser;
+    private String updateStatus;
+    private int updateIndex;
 
     private UI(Storage storage) {
         this.storage = storage;
         this.parser = new Parser();
+        this.updateStatus = "Not updating";
+        this.updateIndex = -1;
     }
 
     /**
@@ -84,8 +89,23 @@ public class UI {
         }
 
         try {
+
+            if (this.isUpdating()) {
+                int updateStatus = this.parser.processUpdate(input, this.updateStatus);
+
+                Task taskToChange = this.storage.getTaskFromList(this.updateIndex);
+
+                this.proceedUpdate(updateStatus, input);
+
+                Task taskChangedTo = this.storage.getTaskFromList(this.updateIndex);
+                this.updateStatus = "Not updating";
+                this.updateIndex = -1;
+
+                return "Updated " + taskToChange + "to: " + "\n" + taskChangedTo;
+            }
+
             int parseResult = this.parser.parse(input, this.storage.getSizeofTasks());
-            assert(parseResult > 0 && parseResult < 6);
+            assert(parseResult > 0 && parseResult < 7);
 
             if (isListCommand(parseResult)) {
                 return this.readSavedTasks();
@@ -109,10 +129,23 @@ public class UI {
 
                 return getListOfMatches(keyword);
             }
+            if (isUpdateCommand(parseResult)) {
+                //Get update type: time, task, desc, date
+                String updateType = this.parser.getUpdateType(input);
+                int index = this.parser.getUpdateIndex(input) - 1;
+                String taskType = this.storage.getTaskType(index);
+
+                this.parser.verifyTaskCanUpdate(updateType, taskType);
+
+                this.updateStatus = updateType;
+                this.updateIndex = index;
+
+                return "Ok, Please type in the new " + updateType;
+            }
             if (parser.isTerminateCommand(input)) {
                 this.storage.save();
 
-                return "Bye see you again!";
+                return "See you again!";
             }
 
             //If reached here, means input must be a task command
@@ -127,7 +160,38 @@ public class UI {
         } catch (InvalidInputException e) {
             return e + "\n" + "Please enter a valid input";
         }
-}
+    }
+
+    private void proceedUpdate(int updateStatus, String input) throws InvalidInputException, InvalidCommandException {
+        String trimmedInput = input.trim();
+
+        if (updateStatus == 1) {
+            //replace date
+            LocalDate newDate = LocalDate.parse(trimmedInput);
+            this.storage.changeDate(this.updateIndex, newDate);
+        }
+
+        if (updateStatus == 2) {
+            //replace time
+            LocalTime newTime = LocalTime.parse(trimmedInput);
+            this.storage.changeTime(this.updateIndex, newTime);
+        }
+
+        if (updateStatus == 3) {
+            //replace task
+            Task newTask = this.parser.getTask(trimmedInput);
+
+            this.storage.replaceTask(this.updateIndex, newTask);
+        }
+
+        if (updateStatus == 4) {
+            this.storage.changeDesc(this.updateIndex, trimmedInput);
+        }
+    }
+
+    private boolean isUpdating() {
+        return !this.updateStatus.equals("Not updating");
+    }
 
     private boolean isListCommand(int num) {
         return num == 1;
@@ -143,6 +207,10 @@ public class UI {
 
     private boolean isFindCommand(int num) {
         return num == 4;
+    }
+
+    private boolean isUpdateCommand(int num) {
+        return num == 5;
     }
 
 }

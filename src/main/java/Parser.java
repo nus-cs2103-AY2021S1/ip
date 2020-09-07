@@ -11,7 +11,8 @@ public class Parser {
     private static final int DONE_COMMAND = 2;
     private static final int DELETE_COMMAND = 3;
     private static final int FIND_COMMAND = 4;
-    private static final int TASK_COMMAND = 5;
+    private static final int UPDATE_COMMAND = 5;
+    private static final int TASK_COMMAND = 6;
 
 
     /**
@@ -38,6 +39,9 @@ public class Parser {
         } else if (isFindCommand(input)) {
             verifyFindCommand(input);
             return FIND_COMMAND;
+        } else if (isUpdateCommand(input)) {
+            verifyUpdateCommand(input, sizeOfList);
+            return UPDATE_COMMAND;
         } else {
             return TASK_COMMAND;
         }
@@ -53,6 +57,10 @@ public class Parser {
         return Integer.parseInt(parts[1]) - 1;
     }
 
+    public int getUpdateIndex(String input) {
+        return Integer.parseInt(input.trim().split("\\W+")[2]);
+    }
+
     /**
      * Retrieves the keyword for a find command in the input string.
      * @param input The user input.
@@ -60,6 +68,18 @@ public class Parser {
      */
     public String getKeyword(String input) {
         return input.trim().split(" ", 2)[1].trim();
+    }
+
+    public String getUpdateType(String input) {
+        return  input.trim().split("\\W+")[1];
+    }
+
+    public void verifyTaskCanUpdate(String updateType, String taskType) throws InvalidCommandException{
+        if (updateType.equals("time") || updateType.equals("date")) {
+            if (taskType.equals("Task")) {
+                throw new InvalidCommandException("Sorry, can't update the task this way");
+            }
+        }
     }
 
     /**
@@ -70,7 +90,7 @@ public class Parser {
      * @throws InvalidCommandException If command is of invalid format.
      */
     public Task getTask(String input) throws InvalidInputException, InvalidCommandException {
-        String[] parts = input.split(" ", 2);
+        String[] parts = input.trim().split(" ", 2);
 
         try {
             if (input.startsWith("todo")) {
@@ -114,6 +134,36 @@ public class Parser {
         } catch (InvalidInputException e) {
             throw e;
         }
+    }
+
+    public int processUpdate(String input, String updateType) throws InvalidCommandException{
+        String trimmedInput = input.trim();
+        int GET_DATE = 1;
+        int GET_TIME = 2;
+        int GET_TASK = 3;
+        int GET_DESC = 4;
+
+        if (updateType.equals("time")) {
+            try {
+                LocalTime.parse(trimmedInput);
+                return GET_TIME;
+            } catch (DateTimeParseException e) {
+                throw new InvalidCommandException("Please give your time in hh:mm format!");
+            }
+        }
+        if (updateType.equals("date")) {
+            try {
+                LocalDate.parse(trimmedInput);
+                return GET_DATE;
+            } catch (DateTimeParseException e) {
+                throw new InvalidCommandException("Please give your date in yyyy-mm-dd format!");
+            }
+        }
+        if (updateType.equals("task")) {
+            return GET_TASK;
+        }
+
+        return GET_DESC;
     }
 
     private static void verifyTodo(String input) throws InvalidCommandException{
@@ -236,6 +286,40 @@ public class Parser {
         } else if (!(input.charAt(4) == ' ')) {
             throw new InvalidCommandException("Please make sure there is a space after the find keyword!");
         }
+    }
+
+    private static boolean isUpdateCommand(String input) {
+
+        //Checks if there is a spacing after update keyword
+        String[] parts = input.split(" ");
+
+        return parts[0].equals("update");
+    }
+
+    private static void verifyUpdateCommand(String input, int numOfTasks) throws InvalidCommandException{
+        //Split the verify command into 3 parts, the command, what to update and the number
+        String[] words = input.split("\\W+");
+
+        if (words.length != 3) {
+            throw new InvalidCommandException("Sorry wrong format");
+        }
+
+        if (!words[1].equals("time") && !words[1].equals("date") && !words[1].equals("task") &&
+            !words[1].equals("desc")) {
+            throw new InvalidCommandException("Sorry I can't update that");
+        }
+
+        try {
+            int index = Integer.parseInt(words[2]) - 1;
+            boolean numInRange = index > -1 && index < numOfTasks;
+
+            if (!numInRange) {
+                throw new InvalidCommandException("Number is invalid!");
+            }
+        } catch (NumberFormatException e) {
+            throw new InvalidCommandException("Please input a number!");
+        }
+
     }
 
     public static boolean isListCommand(String input) {

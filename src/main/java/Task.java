@@ -15,6 +15,10 @@ public class Task {
         isComplete = bool;
     }
 
+    public Task changeDesc(String newDesc) {
+        return new Task(newDesc, this.isComplete);
+    }
+
     /**
      * Marks a task as completed or done.
      * @return Completed task.

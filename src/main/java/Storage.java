@@ -9,6 +9,8 @@ import java.io.IOException;
 
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 /**
  * Represents the storage of the tasks that a user wishes to save.
@@ -37,6 +39,10 @@ public class Storage {
      */
     public int getSizeofTasks() {
         return this.taskList.size();
+    }
+
+    public String getTaskType(int index) {
+        return this.taskList.getTask(index).getClass().getName();
     }
 
     /**
@@ -70,6 +76,22 @@ public class Storage {
      */
     public Task getTaskFromList(int index) {
         return this.taskList.getTask(index);
+    }
+
+    public void replaceTask(int index, Task task) {
+        this.taskList.changeTask(index, task);
+    }
+
+    public void changeDesc(int index, String newDesc) {
+        this.taskList.changeDescription(index, newDesc);
+    }
+
+    public void changeTime(int index, LocalTime newTime) {
+        this.taskList.modifyTime(index, newTime);
+    }
+
+    public void changeDate(int index, LocalDate newDate) {
+        this.taskList.modifyDate(index, newDate);
     }
 
     /**

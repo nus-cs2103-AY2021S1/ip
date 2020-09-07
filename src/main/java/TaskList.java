@@ -57,6 +57,10 @@ public class TaskList {
         return taskList.get(index);
     }
 
+    public void changeTask(int index, Task task) {
+        this.taskList.set(index, task);
+    }
+
     /**
      * Deletes the task at the specific index.
      * @param index of the task to delete.
@@ -73,6 +77,32 @@ public class TaskList {
     public void markDone(int index) {
         assert(index >= 0 && index < taskList.size());
         taskList.set(index, taskList.get(index).markDone());
+    }
+
+    public void changeDescription(int index, String newDesc) {
+        taskList.set(index, taskList.get(index).changeDesc(newDesc));
+    }
+
+    public void modifyTime(int index, LocalTime newTime) {
+        Task taskToBeModified = taskList.get(index);
+        if (taskToBeModified instanceof Deadline) {
+            Deadline task = (Deadline) taskToBeModified;
+            taskList.set(index, task.changeTime(newTime));
+        } else if (taskToBeModified instanceof Event) {
+            Event task = (Event) taskToBeModified;
+            taskList.set(index, task.changeTime(newTime));
+        }
+    }
+
+    public void modifyDate(int index, LocalDate newDate) {
+        Task taskToBeModified = taskList.get(index);
+        if (taskToBeModified instanceof Deadline) {
+            Deadline task = (Deadline) taskToBeModified;
+            taskList.set(index, task.changeDate(newDate));
+        } else if (taskToBeModified instanceof Event) {
+            Event task = (Event) taskToBeModified;
+            taskList.set(index, task.changeDate(newDate));
+        }
     }
 
     /**
