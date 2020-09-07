@@ -138,11 +138,14 @@ public class UI {
      * @return String formatted String with items in the taskList.
      */
     public static String showTaskList(TaskList taskList) {
+
+        assert taskList != null : "showTaskList cannot be null!";
+
         StringBuilder formatted = new StringBuilder();
         int len = taskList.size();
-        for (int number = 0; number < len; number++) {
-            formatted.append("\n\t  " + (number + 1) + ". " + taskList.get(number).toString());
-        }
+        IntStream
+                .range(0, len)
+                .forEach(number -> formatted.append("\n\t  " + (number + 1) + ". " + taskList.get(number).toString()));
         return emptyChatBox("There are " + len + " items in your list:"
                 + formatted.toString());
     }
@@ -154,6 +157,9 @@ public class UI {
      * @return String formatted printable list
      */
     public static String showFoundItems(TaskList taskList) {
+
+        assert taskList != null : "taskList cannot be null!";
+
         StringBuilder formatted = new StringBuilder();
         int len = taskList.size();
         IntStream

@@ -2,8 +2,8 @@ package king;
 
 public class KingException extends Exception {
 
-    final String message;
-    final Throwable error;
+    public final String message;
+    public final Throwable error;
 
     /**
      * Create a KingException generated from the King Program.

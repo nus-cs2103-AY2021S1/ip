@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import storage.StorageException;
 import ui.controllers.MainWindow;
 
 public class Main extends Application {
@@ -34,7 +35,7 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setKing(king);
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (KingException e) {
+        } catch (StorageException e) {
             StackPane layout = new StackPane();
             Text text = new Text(e.message);
             layout.getChildren().add(text);
