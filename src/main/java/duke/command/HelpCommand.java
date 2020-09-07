@@ -25,13 +25,16 @@ public class HelpCommand extends Command {
         String eventHelpMessage = "To add a new Event item, type 'event <description> /at <date "
                 + "in yyyy-MM-dd format>'.\n";
         String doneHelpMessage = "To mark any item as complete, type 'done <taskId>'.\n";
+        String updateHelpMessage =
+                "To update an item, type 'update <taskId> <task creation " + "inputs>'.\n";
         String findHelpMessage =
                 "To find all items containing a certain keyword, type 'find <keyword>'.\n";
 
         List<String> messages =
                 List.of(listHelpMessage, byeHelpMessage, todoHelpMessage, deadlineHelpMessage,
-                        eventHelpMessage, doneHelpMessage, findHelpMessage).stream()
-                        .map((message) -> "\u2022 " + message).collect(Collectors.toList());
+                        eventHelpMessage, doneHelpMessage, updateHelpMessage, findHelpMessage)
+                        .stream().map((message) -> "\u2022 " + message)
+                        .collect(Collectors.toList());
 
         return String.format("This is a list of functionalities that I support:\n\n%s",
                 String.join("", messages));
