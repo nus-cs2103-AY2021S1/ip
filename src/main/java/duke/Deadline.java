@@ -68,8 +68,9 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + (date != null
-            ? (date.getDayOfWeek() + ", " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")))
-            : by) + ")";
+        String parsedDate = date != null
+            ? date.getDayOfWeek() + ", " + date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+            : by;
+        return "[D]" + super.toString() + " (by: " + parsedDate + ")";
     }
 }

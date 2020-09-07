@@ -9,9 +9,9 @@ import exception.InvalidIndexException;
  * A parser for user's input command.
  */
 public class Parser {
-    private static void checkCommands(String input) throws InvalidCommandException {
+    private static void checkCommands(String commandType) throws InvalidCommandException {
         try {
-            Commands.valueOf(input.trim().toUpperCase());
+            Commands.valueOf(commandType);
         } catch (IllegalArgumentException ex) {
             throw new InvalidCommandException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -25,8 +25,9 @@ public class Parser {
      */
     public static Commands parse(String fullCommand) throws InvalidCommandException {
         String[] inputs = fullCommand.split("\\s+", 2);
-        checkCommands(inputs[0]);
-        return Commands.valueOf(inputs[0].trim().toUpperCase());
+        String commandType = inputs[0].trim().toUpperCase();
+        checkCommands(commandType);
+        return Commands.valueOf(commandType);
     }
 
     /**
@@ -53,13 +54,13 @@ public class Parser {
     /**
      * Checks whether the user input contains task description.
      * @param task the user task input.
-     * @param type the type of the task.
+     * @param commandType the type of the task.
      * @throws EmptyDescriptionException if the user input does not contain task description.
      */
-    public static void checkDescription(String[] task, Commands type) throws EmptyDescriptionException {
-        String usage = "Please input using the format: " + (type.equals(Commands.TODO)
+    public static void checkDescription(String[] task, Commands commandType) throws EmptyDescriptionException {
+        String usage = "Please input using the format: " + (commandType.equals(Commands.TODO)
             ? "todo <todo_desc>"
-            : type.equals(Commands.DEADLINE)
+            : commandType.equals(Commands.DEADLINE)
             ? "deadline <deadline_desc> /by <time>"
             : "event <event_desc> /at <time>");
         if (task.length < 2 || task[1].trim().equals("")) {
