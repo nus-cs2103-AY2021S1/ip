@@ -7,6 +7,7 @@ public class Duke {
     Storage storage;
     Ui ui;
     TaskList taskList;
+    FriendList friendList;
 
     /**
      * Constructor for Duke.
@@ -15,6 +16,7 @@ public class Duke {
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
+        friendList = new FriendList();
         try {
             taskList = new TaskList(storage.loadData());
         } catch (Exception e) {
@@ -25,6 +27,7 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         storage = new Storage("src/main/java/tasklist.txt");
+        friendList = new FriendList();
         try {
             taskList = new TaskList(storage.loadData());
         } catch (Exception e) {
@@ -67,6 +70,11 @@ public class Duke {
                 taskList.delete(k);
                 return "Now you have " + taskList.getList().size() +
                     (taskList.getList().size() > 1 ? " tasks" : " task") + " on the list";
+            case "friend":
+                String[] v = s.split(" /name ");
+                String name = v[1];
+                this.friendList.addFriend(new Friend(name));
+                return "Add a new friend: " + name;
             case "deadline":
                 if (s.length() != "deadline".length()) {
                     String[] value = s.split(" /by ");
