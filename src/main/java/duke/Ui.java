@@ -25,11 +25,11 @@ public class Ui {
      * @param newOutputMessage specified message
      */
     public void setOutputMessage(String newOutputMessage) {
-        this.outputMessage = newOutputMessage + "\n";
+        this.outputMessage = "    " + newOutputMessage + "\n";
     }
     
     private void appendMessage (String message) {
-        this.outputMessage += (message + "\n");
+        this.outputMessage += ("    " + message + "\n");
     }
 
     /**
@@ -38,8 +38,9 @@ public class Ui {
      * @return output message
      */
     public String getOutputMessage (){
-        String pattern = "\u2727\uff65\uff9f\u003a \u002a\u2727\uff65\uff9f\u003a\u002a \u3000";
-        String border = String.format("%s %s %s\n", pattern, pattern, pattern);
+        String pattern = "\u2509\u2509\u2509\u2509\u2509\u02da\u002a\u274b \u274b " +
+                "\u274b\u002a\u02da\u2509\u2509\u2509\u2509\u2509\u0f1d";
+        String border = String.format("%s %s\n", pattern, pattern);
         return String.format ("%s\n %s\n %s", border, outputMessage, border);
     }
     

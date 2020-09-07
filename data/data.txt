@@ -1,3 +1,3 @@
-Todo | true | sleep
+Todo | false | sleep
+Event | true | movie | 2020-08-08
 Todo | false | eat
-Event | false | movie | 2020-08-08

@@ -38,7 +38,7 @@ public class UndoCommand extends Command {
             int removeIndex = Integer.parseInt(undoCommandStrings[1].replaceAll("[^0-9]", ""));
             assert removeIndex >= 0;
             Task deletedTask = deletedTaskList.getLatestDelete();
-            if (removeIndex >= taskList.size() - 1) {
+            if (removeIndex >= taskList.size()) {
                 taskList.addTask(deletedTask);
             } else {
                 taskList.addTaskAtIndex(removeIndex, deletedTask);
