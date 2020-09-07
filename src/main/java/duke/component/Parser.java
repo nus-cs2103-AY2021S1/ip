@@ -13,13 +13,12 @@ public class Parser {
     public static Command parse(String fullCommand) throws DukeException {
         String[] userInputArr = fullCommand.split(" ");
         String instructionCommand = userInputArr[0];
-        assert userInputArr instanceof  String[] : "When Command parses instructions, the strings must be stored in " +
-                "an array";
 
         // ENUM generation
         try {
             EnumUserInstruction.userInstruction userInstructionEnum = EnumUserInstruction.userInstruction.
                     valueOf(instructionCommand.toUpperCase());
+
             switch (userInstructionEnum) {
             case BYE:
                 return new ByeCommand();
