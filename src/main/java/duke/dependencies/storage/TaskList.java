@@ -182,14 +182,18 @@ public class TaskList {
     public String findMatching(String keyword) {
         StringBuilder sb = new StringBuilder();
         int i = 1;
-        for (Schedulable task : todoList) {
+        List<Schedulable> filteredList = todoList.stream()
+                .filter(task -> {
             String taskString = task.toString();
-            if (taskString.contains(keyword)) {
-                sb.append(i++)
-                        .append(". ")
-                        .append(taskString)
-                        .append("\n");
-            }
+            return taskString.contains(keyword);
+        }).collect(Collectors.toList());
+        for (Schedulable task : filteredList) {
+            String taskString = task.toString();
+            sb.append(i++)
+                    .append(". ")
+                    .append(taskString)
+                    .append("\n");
+
         }
         sb.setLength(sb.length() - 1);
         return sb.toString();
