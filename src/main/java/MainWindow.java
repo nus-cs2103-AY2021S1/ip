@@ -35,8 +35,8 @@ public class MainWindow extends AnchorPane {
 //        printToUser(duke.getStorage().load(taskList, ui));
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDuke(Duke duke) {
+        this.duke = duke;
     }
 
     /**
@@ -44,6 +44,7 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void printToUser(String message) {
+        assert(!message.isEmpty());
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(message, dukeImage)
         );
@@ -70,6 +71,9 @@ public class MainWindow extends AnchorPane {
         duke.getStorage().save(taskList, ui);
     }
 
+    /**
+     * Closes JavaFX GUI when invoked.
+     */
     @FXML
     void closeStage() {
         Stage stage = (Stage) userInput.getScene().getWindow();

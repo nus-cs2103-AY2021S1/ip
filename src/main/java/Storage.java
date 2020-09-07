@@ -83,6 +83,7 @@ public class Storage {
      * @param ui the Ui that is currently in use.
      */
     private static void processTask(String line, TaskList taskList, Ui ui) {
+        assert(!line.isEmpty());
         String[] task = line.split(" \\| ");
         Boolean isDone = task[1].equals("1");
         String taskName = task[2];
