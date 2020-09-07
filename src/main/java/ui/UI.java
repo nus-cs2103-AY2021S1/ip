@@ -55,21 +55,6 @@ public class UI {
     }
 
     /**
-     * Returns a chat box for KING wrapped around a given text.
-     *
-     * @param chatContent text string.
-     * @return String chat box around text.
-     * @see king.King
-     * @deprecated
-     */
-    @Deprecated
-    public static String userChatBox(String chatContent) {
-        return "\t" + printKingBorder("", CHAT_WIDTH, '=') + "\n\t"
-                + formatStringIfLong(chatContent) + "\n"
-                + "\t" + printKingBorder("", CHAT_WIDTH, '=') + "\n";
-    }
-
-    /**
      * Returns an empty chat box.
      *
      * @param chatContent text string.

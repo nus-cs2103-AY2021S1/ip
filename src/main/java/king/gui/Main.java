@@ -5,7 +5,7 @@
  *
  * Sets the scenes.
  */
-package king;
+package king.gui;
 
 import java.io.IOException;
 
@@ -16,6 +16,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import king.King;
 import storage.StorageException;
 import ui.controllers.MainWindow;
 

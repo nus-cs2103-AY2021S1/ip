@@ -3,7 +3,7 @@
  * This is done using the JavaFx module.
  */
 
-package king;
+package king.gui;
 
 import javafx.application.Application;
 

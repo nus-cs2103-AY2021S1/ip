@@ -27,7 +27,7 @@ public class King {
      * @throws StorageException kingException generated from Storage.
      * @see Storage
      */
-    King(String filepath) throws StorageException {
+    public King(String filepath) throws StorageException {
         storage = new Storage(filepath);
         taskList = new TaskList();
         taskList.addAll(storage.load());
@@ -62,10 +62,20 @@ public class King {
         Scanner scanner = new Scanner(System.in);
         String phrase;
         while (scanner.hasNextLine() && !(phrase = scanner.nextLine()).equals("bye")) {
-            System.out.println(getResponse(phrase));
+            System.out.println(UI.kingChatBox(getResponse(phrase)));
         }
-        System.out.print(UI.emptyChatBox("Bye! Hope to see you again soon."));
+        System.out.print(UI.kingChatBox("Bye! Hope to see you again soon."));
         scanner.close();
+    }
+
+    public static void main(String[] args) {
+        try {
+            King king = new King("data/king.txt");
+            System.out.println(UI.welcome());
+            king.run();
+        } catch (StorageException e) {
+            System.out.println(UI.errorBox(e.message));
+        }
     }
 
 }
