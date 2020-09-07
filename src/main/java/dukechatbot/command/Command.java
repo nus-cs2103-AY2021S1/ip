@@ -1,5 +1,7 @@
 package dukechatbot.command;
 
+import java.util.Objects;
+
 import dukechatbot.executor.CommandExecutor;
 
 /**
@@ -16,6 +18,8 @@ public class Command {
     public Command(String input, CommandExecutor commandExecutor) {
         this.input = input;
         this.commandExecutor = commandExecutor;
+        assert(!Objects.isNull(this.input));
+        assert(!Objects.isNull(this.commandExecutor));
     }
 
     /**

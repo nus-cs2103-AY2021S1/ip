@@ -1,5 +1,7 @@
 package dukechatbot.parser;
 
+import java.util.Objects;
+
 import dukechatbot.command.AddCommand;
 import dukechatbot.command.Command;
 import dukechatbot.command.DeleteCommand;
@@ -84,6 +86,7 @@ public class CommandParser {
      * @throws IndexOutOfBoundsException
      */
     public static String getTitle(String input) throws IndexOutOfBoundsException {
+        assert(!Objects.isNull(input));
         try {
             return input.split("\\s+", 2)[1];
         } catch (IndexOutOfBoundsException exception) {

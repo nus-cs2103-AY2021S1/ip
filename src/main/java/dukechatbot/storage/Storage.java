@@ -78,7 +78,7 @@ public class Storage {
         if (!parentFile.exists()) {
             parentFile.mkdir();
         }
-        
+        assert(parentFile.exists());
         try (FileWriter fileWriter = new FileWriter(file)) {
             for (Task task : taskList) {
                 fileWriter.write(task.getSaveFormat());
