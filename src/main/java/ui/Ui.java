@@ -51,7 +51,7 @@ public class Ui {
         if (taskList.size() < 1) {
             return emptyListMsg;
         } else {
-            return getListMsg + "\n" + output;
+            return getListMsg + showBreakLine() + output;
         }
     }
 
@@ -100,7 +100,7 @@ public class Ui {
         if (taskList.size() < 1) {
             return emptyListMsg;
         } else {
-            return getListMsg + "\n" + output;
+            return getListMsg + showBreakLine() + output;
         }
     }
 
@@ -123,7 +123,7 @@ public class Ui {
     public String showMarkDone(Task task) {
         String markDoneMsg = "Splendid! I've marked the following task as done:";
         String taskDetails = "  [" + task.getStatusIcon() + "] " + task.getDescription();
-        return markDoneMsg + "\n" + taskDetails;
+        return markDoneMsg + showBreakLine() + taskDetails;
     }
 
     /**
@@ -133,6 +133,18 @@ public class Ui {
     public String showDelete(Task task) {
         String deleteMsg = "No worries, the following task has been deleted from your list:";
         String taskDetails = "  [" + task.getStatusIcon() + "] " + task.getDescription();
-        return deleteMsg + "\n" + taskDetails;
+        return deleteMsg + showBreakLine() + taskDetails;
+    }
+
+    public String showSorted() {
+        return "There you go, your list has been sorted alphabetically!";
+    }
+
+    public String showSortedDateTime() {
+        return "There you go, your list has been sorted by date and time!";
+    }
+
+    public static String showBreakLine() {
+        return "\n-------------------------------------------------------------\n";
     }
 }

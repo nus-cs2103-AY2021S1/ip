@@ -29,6 +29,10 @@ public class Deadline extends Task {
     public LocalDate getDate() {
         return this.date;
     }
+
+    public LocalTime getTime() {
+        return this.time;
+    }
     /**
      * Converts the given string into a LocalDateTime to be stored in the given Deadline.
      * @param dateTime to be converted into LocalDateTime.
