@@ -6,6 +6,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class TaskListTest {
+    private static final char FROWN = '\u2639';
     private static final char CROSS = '\u2717';
 
     @Test
@@ -75,7 +76,7 @@ class TaskListTest {
             list.deleteTask(1);
             fail();
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! Seems the index you provided is not in the list.", e.getMessage());
+            assertEquals(FROWN + " OOPS!!! Seems the index you provided is not in the list.", e.getMessage());
         }
     }
 
