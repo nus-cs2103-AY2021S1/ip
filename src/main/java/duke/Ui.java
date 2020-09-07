@@ -29,8 +29,8 @@ public class Ui {
      */
     public static String showWelcomeMessage() {
         String toReturn = showLine()
-                + "Hello! Welcome to Duke, your personal task manager! What can I do for you? \n";
-        toReturn += "To see your list of tasks - list \n";
+                + "Hello! Welcome to Duke, your personal task manager! What can I do for you? \n\n";
+        toReturn += "COMMANDS: \nTo see your list of tasks - list \n";
         toReturn += "To mark a task as done - done {task number} \n";
         toReturn += "To delete your tasks - delete {task number} \n";
         toReturn += "To find certain tasks - find {keyword} \n";
@@ -82,7 +82,6 @@ public class Ui {
      * Displays a message indicating that the program has come to an end.
      */
     public static String showEnd() {
-        String toReturn = showLine() + " Bye. Hope to see you again soon!" + "\n" + showLine();
-        return toReturn;
+        return showLine() + " Bye. Hope to see you again soon!" + "\n" + showLine();
     }
 }

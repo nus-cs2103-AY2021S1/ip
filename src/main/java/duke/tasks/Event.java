@@ -28,6 +28,9 @@ public class Event extends Task {
 
     public Event(String taskName, String day) throws DukeInvalidDayException, DukeInvalidTaskException {
         super(taskName);
+        assert taskName != null : "TaskName should not be null!";
+        assert day != null : "Day should not be null!";
+        assert !day.equals(" ");
         if (!day.equals(null) && !day.equals(" ")) {
             this.day = day;
             try {

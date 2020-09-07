@@ -16,6 +16,7 @@ public class Task {
      * @throws DukeInvalidTaskException
      */
     public Task(String taskName) throws DukeInvalidTaskException {
+        assert taskName != null : "TaskName should not be null!";
         if (!taskName.equals(null) && !taskName.equals(" ")) {
             this.taskName = taskName;
             this.done = false;

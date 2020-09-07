@@ -17,6 +17,7 @@ public class Todo extends Task {
      */
     public Todo(String taskName) throws DukeInvalidTaskException {
         super(taskName);
+        assert taskName != null : "taskName should be null";
     }
 
     /**

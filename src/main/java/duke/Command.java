@@ -39,9 +39,7 @@ public class Command {
         case "list":
             return ui.showList(taskList.getList());
         case "done":
-            System.out.println("went into done case");
             String[] split = task.split("done ");
-            System.out.println(split[0]);
             try {
                 Integer taskNumber = Integer.parseInt(split[1]);
                 return taskList.checkOff(taskNumber);

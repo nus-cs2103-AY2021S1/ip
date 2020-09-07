@@ -64,20 +64,13 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(filePath);
             for (Task currentTask : list) {
-                String done = currentTask.isDone() ? "1" : "0";
-                if (currentTask instanceof Event) {
-                    fw.write("E | " + done + " | " + currentTask.getTaskName() + " | "
-                            + ((Event) currentTask).getDate() + "\n");
-                } else if (currentTask instanceof Deadline) {
-                    fw.write("D | " + done + " | " + currentTask.getTaskName() + " | "
-                            + ((Deadline) currentTask).getDate() + "\n");
-                } else if (currentTask instanceof Todo) {
-                    fw.write("T | " + done + " | " + currentTask.getTaskName() + "\n");
-                }
+                fw.write(identifyTask(currentTask));
             }
             fw.close();
         } catch (IOException err) {
             System.out.println("error overwriting file.");
+        } catch (DukeException err) {
+            System.out.println("error interpreting task");
         }
     }
 
@@ -128,4 +121,25 @@ public class Storage {
         }
         return toReturn;
     }
+    /**
+     * Identifies the type of the current task
+     * @param currentTask the current task to identify
+     * @return String to write into the file
+     * @throws DukeException when current task does not fit any description
+     */
+    private String identifyTask(Task currentTask) throws DukeException {
+        String done = currentTask.isDone() ? "1" : "0";
+        if (currentTask instanceof Event) {
+            return "E | " + done + " | " + currentTask.getTaskName() + " | "
+                    + ((Event) currentTask).getDate() + "\n";
+        } else if (currentTask instanceof Deadline) {
+            return "D | " + done + " | " + currentTask.getTaskName() + " | "
+                    + ((Deadline) currentTask).getDate() + "\n";
+        } else if (currentTask instanceof Todo) {
+            return "T | " + done + " | " + currentTask.getTaskName() + "\n";
+        } else {
+            throw new DukeException("error interpreting task");
+        }
+    }
 }
+

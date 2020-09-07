@@ -32,8 +32,6 @@ public class TaskList {
         this.storage = storage;
         this.todo = storage.load();
     }
-
-
     /**
      * Deletes the task from the task list.
      *
@@ -47,8 +45,6 @@ public class TaskList {
         try {
             if (splits.length > 1) {
                 int taskNumber = Integer.parseInt(splits[1]);
-                System.out.println(taskNumber);
-                System.out.println(todo.size());
                 if (taskNumber - 1 >= todo.size() || taskNumber - 1 < 0 || todo.size() == 0) {
                     throw new DukeException("Invalid task number");
                 } else {
@@ -78,6 +74,7 @@ public class TaskList {
      */
 
     public String addEvent (String line) throws DukeInvalidDayException, DukeInvalidTaskException {
+        assert line != null : "event given cannot be null";
         String[] splits = line.split("event |/at ");
         String toReturn = Ui.showLine();
         if (splits.length > 2) {
@@ -105,6 +102,7 @@ public class TaskList {
      * @throws DukeInvalidTaskException
      */
     public String addDeadline (String line) throws DukeInvalidDateException, DukeInvalidTaskException {
+        assert line != null : "deadline task given cannot be null";
         String[] splits = line.split("deadline |/by ");
         String toReturn = Ui.showLine();
         if (splits.length > 2) {
@@ -169,4 +167,20 @@ public class TaskList {
     public ArrayList<Task> getList() {
         return this.todo;
     }
+
+//    private boolean checkValidityOfTask (String[] splits, String taskType) throws DukeInvalidDateException,
+//            DukeInvalidDayException, DukeInvalidTaskException {
+//        assert taskType.equals("event") || taskType.equals("deadline") : "this task type is not usable";
+//        if (splits.length > 2) {
+//            return true;
+//        } else if (splits.length > 1) {
+//            if (taskType.equals("event")) {
+//                throw new DukeInvalidDayException();
+//            } else {
+//                throw new DukeInvalidDateException();
+//            }
+//        } else {
+//            throw new DukeInvalidTaskException();
+//        }
+//    }
 }
