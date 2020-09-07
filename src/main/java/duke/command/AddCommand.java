@@ -36,6 +36,11 @@ public class AddCommand extends Command {
     public String executeToString(TaskList tasks, Ui ui, Storage storage) {
         Task t = new Task(userInput);
         String result = "";
+
+        if (t.isDuplicate(tasks)) {
+            return ui.showIsDuplicateMessage();
+        }
+
         try {
             t.validate();
 
