@@ -28,18 +28,6 @@ public class Ui {
     }
 
     /**
-     * Waits for the user to insert command and reads it.
-     * @return A string represents the user's input
-     */
-    public String requestCommand() {
-        System.out.println(horizontalLine);
-        System.out.println("Your command:");
-        String input = sc.nextLine();
-        System.out.println(horizontalLine);
-        return input;
-    }
-
-    /**
      * Shows the items in the task.
      * @param tasks The list of items to be shown
      */
