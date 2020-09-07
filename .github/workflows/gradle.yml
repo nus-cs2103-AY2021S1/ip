@@ -30,5 +30,8 @@ jobs:
           java-version: '11'
           java-package: jdk+fx
 
+      - name: Change wrapper permissions
+        run: chmod +x ./gradlew
+
       - name: Build and check with Gradle
         run: ./gradlew check
