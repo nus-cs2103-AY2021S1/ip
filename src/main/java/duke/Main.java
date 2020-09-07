@@ -1,7 +1,8 @@
-package duke.main;
+package duke;
 
 import java.io.IOException;
 
+import duke.main.Duke;
 import duke.ui.controller.MainWindow;
 import javafx.animation.PauseTransition;
 import javafx.application.Application;
