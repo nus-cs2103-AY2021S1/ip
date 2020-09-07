@@ -22,8 +22,8 @@ public class Parser {
             commands[1] = commands[1].trim();
         }
         String[] temp;
-        commands = Arrays.copyOf(commands, 3);
         String key;
+        commands = Arrays.copyOf(commands, 3);
         switch (commands[0]) {
         case "bye":
         case "find":
