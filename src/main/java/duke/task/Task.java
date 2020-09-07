@@ -10,6 +10,10 @@ import java.util.Locale;
  */
 public abstract class Task {
 
+    private final int NUM_OF_DATA_STRINGS = 3;
+    private final String TASK_TYPE_STRING = "task";
+    private final String PRINTING_STRING = "[%s] %s";
+
     /** Date of the task, null if date is not associated with the task */
     final LocalDate date;
 
@@ -26,7 +30,7 @@ public abstract class Task {
      * @param isCompleted Completion status of the task
      * @param date Date of the task, null if date is not associated with the task
      */
-    Task(String description, boolean isCompleted, LocalDate date) {
+    protected Task(String description, boolean isCompleted, LocalDate date) {
         this.date = date;
         this.description = description;
         this.isComplete = isCompleted;
@@ -37,8 +41,12 @@ public abstract class Task {
      *
      * @return String representation of the task in the file
      */
-    public String[] getDataString() {
-        return new String[] {"task", String.valueOf(isComplete), description};
+    public String[] getDataStrings() {
+        String[] dataStrings = new String[NUM_OF_DATA_STRINGS];
+        dataStrings[0] = TASK_TYPE_STRING;
+        dataStrings[1] = String.valueOf(isComplete);
+        dataStrings[2] = description;
+        return dataStrings;
     }
 
     /**
@@ -47,22 +55,21 @@ public abstract class Task {
      * @return String representation of the date of the task in the UI
      */
     String getDateString() {
-        if (this.date == null) {
+        if (date == null) {
             return null;
-        } else {
-            return this.date.getYear() + " " +
-                    this.date.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH) + " " +
-                    this.date.getDayOfMonth();
         }
+        return date.getYear() + " " +
+                date.getMonth().getDisplayName(TextStyle.SHORT, Locale.ENGLISH) + " " +
+                date.getDayOfMonth();
     }
 
     /**
-     * Gets the status icon reflecting the completion status of the task
+     * Gets the status icon reflecting the completion status of the task.
      *
      * @return Status icon
      */
     String getStatusIcon() {
-        if (this.isComplete) {
+        if (isComplete) {
             return "\u2713";
         } else {
             return "\u2718";
@@ -73,7 +80,7 @@ public abstract class Task {
      * Marks the task as complete
      */
     public void setComplete() {
-        this.isComplete = true;
+        isComplete = true;
     }
 
     /**
@@ -83,7 +90,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return String.format(PRINTING_STRING, getStatusIcon(), description);
     }
 
     /**
@@ -93,6 +100,6 @@ public abstract class Task {
      * @return True if keyword is found in description, false otherwise
      */
     public boolean hasKeyword(String keyword) {
-        return this.description.contains(keyword);
+        return description.contains(keyword);
     }
 }

@@ -24,24 +24,22 @@ public class DeleteTaskCommand extends Command {
     }
 
     /**
-     * Executes the command to delete the task
+     * Executes the command to delete the task.
      *
      * @param storage Storage
      * @param tasks Task list
      * @param ui Ui
-     * @return Output strings
+     * @return Output strings displayed on the UI showing task deletion
      */
     @Override
     public String[] execute(Storage storage, TaskList tasks, Ui ui) {
         assert tasks != null;
         assert ui != null;
 
-        Task task = tasks.deleteTaskAt(this.taskIndex);
-
-        if (task != null) {
-            return ui.getDeleteTaskStrings(tasks, task);
-        } else {
+        Task task = tasks.deleteTaskAt(taskIndex);
+        if (task == null) {
             return ui.getInvalidTaskIndexStrings();
         }
+        return ui.getDeleteTaskStrings(tasks, task);
     }
 }

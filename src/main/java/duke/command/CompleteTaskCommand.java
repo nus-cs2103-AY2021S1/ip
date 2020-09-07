@@ -6,7 +6,7 @@ import duke.TaskList;
 import duke.Ui;
 
 /**
- * Encapsulates a command to complete a task
+ * Encapsulates a command to complete a task.
  */
 public class CompleteTaskCommand extends Command {
 
@@ -23,12 +23,12 @@ public class CompleteTaskCommand extends Command {
     }
 
     /**
-     * Executes the command to complete the task
+     * Executes the command to complete the task.
      *
      * @param storage Storage
      * @param tasks Task list
      * @param ui Ui
-     * @return Output strings
+     * @return Output strings displayed in the UI showing task completion
      */
     @Override
     public String[] execute(Storage storage, TaskList tasks, Ui ui) {
@@ -36,11 +36,10 @@ public class CompleteTaskCommand extends Command {
         assert tasks != null;
         assert ui != null;
 
-        Task task = tasks.completeTaskAt(this.taskIndex);
-        if (task != null) {
-            return ui.getCompleteTaskStrings(task);
-        } else {
+        Task task = tasks.completeTaskAt(taskIndex);
+        if (task == null) {
             return ui.getInvalidTaskIndexStrings();
         }
+        return ui.getCompleteTaskStrings(task);
     }
 }

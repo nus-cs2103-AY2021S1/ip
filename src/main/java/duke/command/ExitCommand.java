@@ -10,12 +10,12 @@ import duke.Ui;
 public class ExitCommand extends Command {
 
     /**
-     * Executes the command to exit duke
+     * Executes the command to exit duke.
      *
      * @param storage Storage
      * @param tasks Task list
      * @param ui Ui
-     * @return Output strings
+     * @return Output strings displayed on the UI showing exit
      */
     @Override
     public String[] execute(Storage storage, TaskList tasks, Ui ui) {

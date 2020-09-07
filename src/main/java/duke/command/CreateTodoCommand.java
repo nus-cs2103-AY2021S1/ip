@@ -33,7 +33,7 @@ public class CreateTodoCommand extends Command {
      * @param storage Storage
      * @param tasks Task list
      * @param ui Ui
-     * @return Output strings
+     * @return Output strings displayed on the UI showing todo creation
      */
     @Override
     public String[] execute(Storage storage, TaskList tasks, Ui ui) {
@@ -41,7 +41,7 @@ public class CreateTodoCommand extends Command {
         assert tasks != null;
         assert ui != null;
 
-        ToDo todo = tasks.addTodo(this.description, this.isComplete);
-        return ui.getCreateTaskStrings(tasks, todo);
+        ToDo newTodo = tasks.addTodo(description, isComplete);
+        return ui.getCreateTaskStrings(tasks, newTodo);
     }
 }

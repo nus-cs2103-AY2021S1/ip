@@ -36,12 +36,12 @@ public class CreateEventCommand extends Command {
     }
 
     /**
-     * Executes the command to create an event
+     * Executes the command to create an event.
      *
      * @param storage Storage
      * @param tasks Task list
      * @param ui Ui
-     * @return Output strings
+     * @return Output strings displayed on the UI showing event creation
      */
     @Override
     public String[] execute(Storage storage, TaskList tasks, Ui ui) {
@@ -49,7 +49,7 @@ public class CreateEventCommand extends Command {
         assert tasks != null;
         assert ui != null;
 
-        Event event = tasks.addEvent(description, isComplete, date);
-        return ui.getCreateTaskStrings(tasks, event);
+        Event newEvent = tasks.addEvent(description, isComplete, date);
+        return ui.getCreateTaskStrings(tasks, newEvent);
     }
 }

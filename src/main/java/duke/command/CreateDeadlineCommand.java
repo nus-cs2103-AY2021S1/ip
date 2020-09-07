@@ -36,12 +36,12 @@ public class CreateDeadlineCommand extends Command {
     }
 
     /**
-     * Executes the command to create a deadline
+     * Executes the command to create a deadline.
      *
      * @param storage Storage
      * @param tasks Task list
      * @param ui Ui
-     * @return Output strings
+     * @return Output strings displayed in the UI showing deadline creation
      */
     @Override
     public String[] execute(Storage storage, TaskList tasks, Ui ui) {
@@ -49,7 +49,7 @@ public class CreateDeadlineCommand extends Command {
         assert tasks != null;
         assert ui != null;
 
-        Deadline deadline = tasks.addDeadline(this.description, this.isComplete, this.date);
-        return ui.getCreateTaskStrings(tasks, deadline);
+        Deadline newDeadline = tasks.addDeadline(description, isComplete, date);
+        return ui.getCreateTaskStrings(tasks, newDeadline);
     }
 }
