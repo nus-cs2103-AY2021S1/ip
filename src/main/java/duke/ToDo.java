@@ -1,5 +1,8 @@
 package duke;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
+
 public class ToDo extends Task {
 
     public ToDo(String description) {
@@ -9,6 +12,11 @@ public class ToDo extends Task {
     @Override
     public String getTaskType() {
         return "T";
+    }
+
+    @Override
+    public Optional<LocalDateTime> getLocalDateTime() {
+        return Optional.empty();
     }
 
     @Override

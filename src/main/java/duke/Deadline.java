@@ -2,6 +2,7 @@ package duke;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 public class Deadline extends Task {
     private LocalDateTime date;
@@ -19,6 +20,11 @@ public class Deadline extends Task {
     @Override
     public String getTaskType() {
         return "D";
+    }
+
+    @Override
+    public Optional<LocalDateTime> getLocalDateTime() {
+        return Optional.of(this.date);
     }
 
     private String formatDate() {

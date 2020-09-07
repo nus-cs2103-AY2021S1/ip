@@ -41,4 +41,13 @@ public class TaskList {
         this.lstOfTask.add(task);
     }
 
+    /** This method returns a task from the list based on the index
+     *
+     * @param index the index of the task in the list
+     * @return Task that correspond to the index
+     */
+    public Task getTask(int index) {
+        return this.lstOfTask.get(index);
+    }
+
 }
