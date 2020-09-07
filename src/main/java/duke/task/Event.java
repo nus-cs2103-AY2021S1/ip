@@ -5,6 +5,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
+import duke.exception.DukeException;
+
 /**
  * Represents a type of Task that has a specific date and time of occurrence.
  * Similar to Deadline Class.
@@ -19,15 +21,9 @@ public class Event extends Task {
      * @param description information for the task itself
      * @param at information for the time and date of occurrence
      */
-    public Event(String description, String at) {
+    public Event(String description, String at) throws DukeException {
         super(description);
-        this.at = at;
-        String[] timeComponent = at.split(" ");
-        this.date = LocalDate.parse(format(timeComponent[0].trim()));
-        String hour = timeComponent[1].substring(0, 2);
-        String minute = timeComponent[1].substring(2);
-        this.time = LocalTime.of(Integer.parseInt(hour),
-                Integer.parseInt(minute));
+        this.update(at);
     }
 
     private String format(String input) {
@@ -62,6 +58,21 @@ public class Event extends Task {
     @Override
     public Optional<LocalTime> getTime() {
         return Optional.ofNullable(this.time);
+    }
+
+    @Override
+    public void update(String time) throws DukeException {
+        try {
+            this.at = time.trim();
+            String[] timeComponent = at.split(" ");
+            this.date = LocalDate.parse(format(timeComponent[0].trim()));
+            String hour = timeComponent[1].substring(0, 2);
+            String minute = timeComponent[1].substring(2);
+            this.time = LocalTime.of(Integer.parseInt(hour), Integer.parseInt(minute));
+
+        } catch (Exception e) {
+            throw new DukeException("Invalid date and time format detected!");
+        }
     }
 
 }

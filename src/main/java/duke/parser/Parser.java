@@ -9,6 +9,7 @@ import duke.command.DoneCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.SortCommand;
+import duke.command.UpdateCommand;
 import duke.exception.DukeException;
 
 
@@ -55,6 +56,10 @@ public class Parser {
 
             case "find": {
                 return new FindCommand(second);
+            }
+
+            case "update": {
+                return new UpdateCommand(second);
             }
 
             default: {

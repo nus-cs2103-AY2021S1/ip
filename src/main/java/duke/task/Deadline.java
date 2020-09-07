@@ -5,6 +5,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
 
+import duke.exception.DukeException;
+
 /**
  *  Represents a specific type of Task that has a deadline as additional information.
  *  Following the convention for String input is crucial for successful instantiation.
@@ -19,15 +21,9 @@ public class Deadline extends Task {
      * @param description information for the task itself
      * @param by information for the deadline
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String by) throws DukeException {
         super(description);
-        this.by = by.trim();
-        String[] timeComponent = by.split(" ");
-        this.date = LocalDate.parse(format(timeComponent[0].trim()));
-        String hour = timeComponent[1].substring(0, 2);
-        String minute = timeComponent[1].substring(2);
-        this.time = LocalTime.of(Integer.parseInt(hour),
-                Integer.parseInt(minute));
+        this.update(by);
     }
 
     /**
@@ -78,4 +74,18 @@ public class Deadline extends Task {
         return Optional.ofNullable(this.time);
     }
 
+    @Override
+    public void update(String time) throws DukeException {
+        try {
+            this.by = time.trim();
+            String[] timeComponent = by.split(" ");
+            this.date = LocalDate.parse(format(timeComponent[0].trim()));
+            String hour = timeComponent[1].substring(0, 2);
+            String minute = timeComponent[1].substring(2);
+            this.time = LocalTime.of(Integer.parseInt(hour), Integer.parseInt(minute));
+
+        } catch (Exception e) {
+            throw new DukeException("Invalid date and time format detected!");
+        }
+    }
 }

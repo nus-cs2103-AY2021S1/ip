@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.Optional;
 
+import duke.exception.DukeException;
+
 /**
  * Represents a general task that has a name and status of completion.
  * More specific task will inherit from this class.
@@ -44,5 +46,7 @@ public abstract class Task {
     public abstract Optional<LocalDate> getDate();
 
     public abstract Optional<LocalTime> getTime();
+
+    public abstract void update(String time) throws DukeException;
 
 }
