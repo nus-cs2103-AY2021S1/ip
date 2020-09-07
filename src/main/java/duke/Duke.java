@@ -63,7 +63,6 @@ public class Duke extends Application {
     /**
      * Runs Duke.
      */
-
     public void run() {
         System.out.println(ui.displayWelcome());
         boolean isExit = false;
@@ -80,7 +79,6 @@ public class Duke extends Application {
     /**
      * Handles input from user, and prints output into the GUI
      */
-
     private void handleUserInput() {
         String userText = userInput.getText();
         String dukeText = getResponse(userInput.getText());
