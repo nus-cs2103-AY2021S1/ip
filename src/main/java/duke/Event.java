@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
  */
 public class Event extends Task {
     /** the time of the Event. */
-    protected final String at;
+    protected String at;
     /** the time of the Event as java.time.LocalDate. */
     protected LocalDate date;
 
@@ -45,21 +45,12 @@ public class Event extends Task {
     }
 
     /**
-     * Marks the Event as done.
-     * @return Event with updated status (done).
-     */
-    @Override
-    public Event completeTask() {
-        return new Event(description, true, at);
-    }
-
-    /**
      * Gets the format of the Event to be saved in hard disk.
      * @return Event object in specified format.
      */
     @Override
     public String getData() {
-        return "EVENT#" + description + "#" + String.valueOf(isDone) + "#" + at;
+        return "EVENT#" + description + "#" + String.valueOf(isDone) + "#" + at + "#" + tag;
     }
 
     /**

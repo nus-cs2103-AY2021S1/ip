@@ -14,13 +14,13 @@ public class EventTest {
     @Test
     public void testCompleteTask() {
         Event event = new Event("buy books", "6pm");
-        event = event.completeTask();
+        event.completeTask();
         assertEquals("[E][V] buy books (at: 6pm)", event.toString());
     }
 
     @Test
     public void testGetData() {
         Event event = new Event("workout", "2020-08-27");
-        assertEquals("EVENT#workout#false#2020-08-27", event.getData());
+        assertEquals("EVENT#workout#false#2020-08-27#", event.getData());
     }
 }

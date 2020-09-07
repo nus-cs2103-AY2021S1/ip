@@ -119,6 +119,21 @@ public class Duke {
         }
     }
 
+    String getAttachTagResponse(String input) {
+        try {
+            String[] inputs = input.split("\\s+", 3);
+            Parser.checkIndex(inputs, taskList.getSize());
+            assert inputs.length > 1;
+            int index = Integer.parseInt(inputs[1]) - 1;
+            String tag = inputs.length > 2 ? inputs[2] : "";
+            taskList.tagTask(index, tag);
+            storage.writeData(taskList);
+            return ui.getTagTaskMessage(taskList.getTask(index));
+        } catch (InvalidIndexException | IOException ex) {
+            return ex.getMessage();
+        }
+    }
+
     /**
      * Gets welcome message.
      * @return welcome message from Duke.
@@ -163,6 +178,9 @@ public class Duke {
                 break;
             case EVENT:
                 response = getAddEventResponse(inputs, command);
+                break;
+            case TAG:
+                response = getAttachTagResponse(input);
                 break;
             default:
                 response = "";

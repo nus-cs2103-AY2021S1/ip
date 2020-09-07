@@ -5,9 +5,11 @@ package duke;
  */
 public class Task {
     /** the description of the task. */
-    protected final String description;
+    protected String description;
     /** boolean indicating whether the task is done or not. */
-    protected final boolean isDone;
+    protected boolean isDone;
+    /** the tag for the task. */
+    protected String tag;
 
     /**
      * Constructor for Task.
@@ -16,6 +18,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.tag = "";
     }
 
     /**
@@ -26,6 +29,7 @@ public class Task {
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
+        this.tag = "";
     }
 
     /**
@@ -37,11 +41,41 @@ public class Task {
     }
 
     /**
-     * Marks the Task as done.
-     * @return Task with updated status (done).
+     * Gets the tag of the task.
+     * @return task tag.
      */
-    public Task completeTask() {
-        return new Task(description, true);
+    public String getTag() {
+        return tag;
+    }
+
+    /**
+     * Marks the Task as done.
+     */
+    public void completeTask() {
+        this.isDone = true;
+    }
+
+    /**
+     * Attaches tag to a task.
+     * @param tag tag to be attached.
+     */
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    /**
+     * Gets the tag(s) attached to the task.
+     * @return tag(s) attached to the task.
+     */
+    public String tagToString() {
+        String[] splittedTags = tag.split(",");
+        StringBuilder tags = new StringBuilder("");
+        for (String tag : splittedTags) {
+            if (tag.trim() != "") {
+                tags.append("#" + tag.trim() + " ");
+            }
+        }
+        return tags.toString();
     }
 
     /**
@@ -57,7 +91,7 @@ public class Task {
      * @return Task object in specified format.
      */
     public String getData() {
-        return "TASK#" + description + "#" + String.valueOf(isDone);
+        return "TASK#" + description + "#" + String.valueOf(isDone) + "#" + tag;
     }
 
     /**
@@ -65,6 +99,6 @@ public class Task {
      * @return the string representation of the Task.
      */
     public String toString() {
-        return getStatusIcon() + ' ' + description;
+        return getStatusIcon() + ' ' + tagToString() + description;
     }
 }

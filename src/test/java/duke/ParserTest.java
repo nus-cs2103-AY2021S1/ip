@@ -32,8 +32,10 @@ public class ParserTest {
                 + "3. event <event_desc> /at <time>\n"
                 + "4. done <task_no>\n"
                 + "5. delete <task_no>\n"
-                + "6. list\n"
-                + "7. bye", ex.getMessage());
+                + "6. find <search_term_from_task_desc_or_tag>\n"
+                + "7. tag <task_no> <tags_separated_by_comma>\n"
+                + "8. list\n"
+                + "9. bye", ex.getMessage());
         }
     }
 

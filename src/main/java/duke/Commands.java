@@ -11,5 +11,6 @@ public enum Commands {
     DELETE,
     LIST,
     FIND,
+    TAG,
     BYE
 }

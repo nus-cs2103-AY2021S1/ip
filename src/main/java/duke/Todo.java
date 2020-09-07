@@ -22,21 +22,12 @@ public class Todo extends Task {
     }
 
     /**
-     * Marks the Todo as done.
-     * @return Todo with updated status (done).
-     */
-    @Override
-    public Todo completeTask() {
-        return new Todo(description, true);
-    }
-
-    /**
      * Gets the format of the Todo to be saved in hard disk.
      * @return Todo object in specified format.
      */
     @Override
     public String getData() {
-        return "TODO#" + description + "#" + String.valueOf(isDone);
+        return "TODO#" + description + "#" + String.valueOf(isDone) + "#" + tag;
     }
 
     /**

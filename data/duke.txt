@@ -1,3 +1,4 @@
-TODO#read book#false
-EVENT#write essay#false#tonight
-EVENT#meeting#true#2pm
+TODO#read book#false#
+EVENT#write essay#false#tonight#
+EVENT#meeting#true#2pm#
+TODO#eat#true#fun, nice

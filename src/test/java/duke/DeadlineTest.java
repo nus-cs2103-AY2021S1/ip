@@ -14,13 +14,13 @@ public class DeadlineTest {
     @Test
     public void testCompleteTask() {
         Deadline deadline = new Deadline("pay bills", "tomorrow");
-        deadline = deadline.completeTask();
+        deadline.completeTask();
         assertEquals("[D][V] pay bills (by: tomorrow)", deadline.toString());
     }
 
     @Test
     public void testGetData() {
         Deadline deadline = new Deadline("finish tutorial 1", "2020-08-27");
-        assertEquals("DEADLINE#finish tutorial 1#false#2020-08-27", deadline.getData());
+        assertEquals("DEADLINE#finish tutorial 1#false#2020-08-27#", deadline.getData());
     }
 }

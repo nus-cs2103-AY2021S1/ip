@@ -9,7 +9,7 @@ import java.time.format.DateTimeParseException;
  */
 public class Deadline extends Task {
     /** The deadline of the task. */
-    protected final String by;
+    protected String by;
     /** Deadline of the task as java.time.LocalDate. */
     protected LocalDate date;
 
@@ -45,21 +45,12 @@ public class Deadline extends Task {
     }
 
     /**
-     * Marks the Deadline as done.
-     * @return Deadline with updated status (done).
-     */
-    @Override
-    public Deadline completeTask() {
-        return new Deadline(description, true, by);
-    }
-
-    /**
      * Gets the format of the Deadline to be saved in hard disk.
      * @return Deadline object in specified format.
      */
     @Override
     public String getData() {
-        return "DEADLINE#" + description + "#" + String.valueOf(isDone) + "#" + by;
+        return "DEADLINE#" + description + "#" + String.valueOf(isDone) + "#" + by + "#" + tag;
     }
 
     /**
