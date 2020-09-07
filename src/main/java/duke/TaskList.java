@@ -62,17 +62,17 @@ public class TaskList {
      * @throws DukeException If taskType is not defined.
      */
     public void addTask(String taskDescription, String date, TaskType taskType) throws DukeException {
-        assert !taskDescription.isEmpty(): "Task should have a description";
+        assert !taskDescription.isEmpty() : "Task should have a description";
         switch (taskType) {
         case TODO:
             tasks.add(new TodoTask(taskDescription));
             break;
         case DEADLINE:
-            assert !date.isEmpty(): "Deadline task should have a date.";
+            assert !date.isEmpty() : "Deadline task should have a date.";
             tasks.add(new DeadlineTask(taskDescription, date));
             break;
         case EVENT:
-            assert !date.isEmpty(): "Event task should have a date.";
+            assert !date.isEmpty() : "Event task should have a date.";
             tasks.add(new EventTask(taskDescription, date));
             break;
         default:
