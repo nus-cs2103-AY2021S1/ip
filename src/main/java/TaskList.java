@@ -87,6 +87,7 @@ public class TaskList {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :(");
         }
 
+        assert toAdd != null: "Nothing added!";
         return ui.addTaskLine(toAdd, storage.size());
     }
 
