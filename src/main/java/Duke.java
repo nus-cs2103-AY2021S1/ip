@@ -35,6 +35,7 @@ public class Duke {
      * @throws IOException
      */
     public Duke(String filePath) throws IOException {
+        assert filePath.contains(".txt"); //enure that correct file type is passed
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
