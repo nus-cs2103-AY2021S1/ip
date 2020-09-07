@@ -6,10 +6,10 @@ import org.junit.jupiter.api.Test;
 
 public class StorageTest {
 
-    private Storage storage = new Storage("src/main/java/data/duke.txt");
+    private Storage storage = new Storage("./data/duke.txt");
 
     @Test
     public void testGetFilePath() {
-        assertEquals("src/main/java/data/duke.txt", storage.getFilePath());
+        assertEquals("./data/duke.txt", storage.getFilePath());
     }
 }

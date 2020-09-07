@@ -39,6 +39,7 @@ public class Storage {
     public List<Task> load() throws IOException {
         File f = new File(filePath);
         if (!f.exists()) {
+            f.getParentFile().mkdirs();
             f.createNewFile();
         }
         Scanner s = new Scanner(f);

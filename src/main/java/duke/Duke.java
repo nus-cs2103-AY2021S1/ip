@@ -17,7 +17,7 @@ public class Duke {
      */
     public Duke() {
         ui = new Ui();
-        storage = new Storage("src/main/java/data/duke.txt");
+        storage = new Storage("./data/duke.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
