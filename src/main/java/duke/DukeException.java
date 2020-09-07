@@ -2,7 +2,7 @@ package duke;
 
 public class DukeException extends Exception {
     /**
-     * The constructor for a DukeException, an exception exclusive to the Duke package.
+     * The constructor for a DukeException, an exception exclusive to the duke.Duke package.
      *
      * @param errorMessage The desired error message to be displayed.
      */

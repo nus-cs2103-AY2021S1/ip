@@ -1,28 +1,22 @@
+package duke;
+
 import java.io.IOException;
 import java.util.ArrayList;
-
-import duke.DialogBox;
-import duke.DukeException;
-import duke.Parser;
-import duke.Storage;
-import duke.Ui;
 
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
- * The Duke class that runs the Duke task manager program
+ * The duke.Duke class that runs the duke.Duke task manager program
  */
 public class Duke extends Application {
 
@@ -33,17 +27,22 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/stark.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/jarvis.png"));
+    private Storage storage;
+    private Parser parser;
 
-    /**
-     * The main method, when run, runs the Duke Program.
-     *
-     * @param args NA
-     */
-    public static void main (String[] args) {
-        Application.launch(Duke.class, args);
+
+
+    public Duke() {
+        storage = new Storage("src/main/data/", "src/main/data/data.txt");
+        try {
+            storage.processData();
+        } catch (java.io.IOException ignored) {
+            /* Exceptions are ignored */
+        }
+        parser = new Parser(storage.getData());
     }
 
-    public static void setTimeout(Runnable runnable, int delay) {
+    public void setTimeout(Runnable runnable, int delay) {
         new Thread(() -> {
             try {
                 Thread.sleep(delay);
@@ -56,20 +55,18 @@ public class Duke extends Application {
 
     /**
      * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput(Parser parser, Storage storage) {
-        Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText(), parser, storage));
+    private void handleUserInput() {
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                DialogBox.getUserDialog(userInput.getText(), user),
+                DialogBox.getDukeDialog(getResponse(userInput.getText()), duke)
         );
         userInput.clear();
     }
 
-    private String getResponse(String input, Parser parser, Storage storage) {
+    public String getResponse(String input) {
         String outputMessage;
         try {
             outputMessage = parser.parse(input);
@@ -87,22 +84,26 @@ public class Duke extends Application {
         return outputMessage;
     }
 
+    public void setIntro() {
+        dialogContainer = new VBox();
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.introduction(), duke));
+    }
+
     /**
      *
      * @param stage
      */
     public void start(Stage stage) {
-        Storage storage = new Storage("src/main/data/", "src/main/data/data.txt");
         try {
             storage.processData();
         } catch (java.io.IOException ignored) {
             /* Exceptions are ignored */
         }
-        ArrayList<String> lines = storage.getData();
-        Parser parser = new Parser(lines);
+
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(new Label(Ui.introduction()), new ImageView(duke)));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.introduction(), duke));
+        System.out.println("reached here");
         scrollPane.setContent(dialogContainer);
         userInput = new TextField();
         sendButton = new Button("Send");
@@ -111,7 +112,7 @@ public class Duke extends Application {
         scene = new Scene(mainLayout);
         stage.setScene(scene);
         stage.show();
-        stage.setTitle("Duke");
+        stage.setTitle("duke.Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -140,11 +141,11 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput(parser, storage);
+            handleUserInput();
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput(parser, storage);
+            handleUserInput();
         });
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));

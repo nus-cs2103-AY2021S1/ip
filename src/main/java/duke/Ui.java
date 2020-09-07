@@ -9,18 +9,18 @@ public class Ui {
     private static String divider = "************************************************\n";
 
     /**
-     * Returns a String to be printed as an introduction upon start up Duke
+     * Returns a String to be printed as an introduction upon start up duke.Duke
      *
      * @return  returns the intro String
      */
     public static String introduction() {
-        String intro = "Hello! I'm Duke\nWhat can i do for you?\n";
+        String intro = "Hello! I'm duke.Duke\nWhat can i do for you?\n";
         return divider + intro + divider;
     }
 
     /**
      * returns a done statement while updating the task string by swapping the cross with a tick.
-     * The doneTask argument must comply with the standard output string format of Duke tasks.
+     * The doneTask argument must comply with the standard output string format of duke.Duke tasks.
      *
      * @param doneTask the task that is to be marked done.
      * @return returns the updated line.
@@ -45,7 +45,7 @@ public class Ui {
 
     /**
      * returns out the tasks in numerical order based on the ArrayList param.
-     * The lines argument must contain Strings that comply with the standard output string format of Duke tasks.
+     * The lines argument must contain Strings that comply with the standard output string format of duke.Duke tasks.
      *
      * @param lines List of tasks to be printed.
      * @return The string representing the list of tasks.
@@ -86,7 +86,7 @@ public class Ui {
     }
 
     /**
-     * Returns a String representing the message shown when users exit Duke.
+     * Returns a String representing the message shown when users exit duke.Duke.
      *
      * @return The string representing the goodbye message.
      */
@@ -130,7 +130,7 @@ public class Ui {
 
 
     /**
-     * Handles DukeExceptions{@link DukeException} thrown by Duke package methods by returning a string representing
+     * Handles DukeExceptions{@link DukeException} thrown by duke.Duke package methods by returning a string representing
      * the error.
      *
      * @param e The DukeException to be handled.

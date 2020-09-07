@@ -18,16 +18,16 @@ public class Parser {
     }
 
     /**
-     * Checks if Duke should carry on.
+     * Checks if duke.Duke should carry on.
      *
-     * @return True if Duke is not terminated with a Bye command, false otherwise.
+     * @return True if duke.Duke is not terminated with a Bye command, false otherwise.
      */
     public boolean shouldContinueDuke() {
         return carryOn;
     }
 
     /**
-     * Simply returns the current set of lines. This should be called when Duke is terminated.
+     * Simply returns the current set of lines. This should be called when duke.Duke is terminated.
      *
      * @return The finalized set of lines
      */

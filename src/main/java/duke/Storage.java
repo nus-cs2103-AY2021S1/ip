@@ -31,11 +31,11 @@ public class Storage {
     }
 
     /**
-     * Obtains the file required to begin Duke. If the files/folders are missing, they would be created in the
+     * Obtains the file required to begin duke.Duke. If the files/folders are missing, they would be created in the
      * specified directories. It then converts the txt file into an ArrayList{@link ArrayList} containing strings that
      * represent the tasks specified in the txt file.
      * <p>
-     * It is important to know that the arrayList is not updated throughout the use of Duke. The goal of this class is
+     * It is important to know that the arrayList is not updated throughout the use of duke.Duke. The goal of this class is
      * to only process the initial data.txt file upon loading and saving a final updated copy of the txt file which has
      * to be provided. Updates occur in the Parser{@link Parser} class.
      *
