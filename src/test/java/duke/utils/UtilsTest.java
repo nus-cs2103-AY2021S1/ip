@@ -59,4 +59,40 @@ public class UtilsTest {
     public void testHasInteger(String[] arr, int index, boolean actual) {
         assertEquals(Utils.hasInteger(arr, index), actual);
     }
+
+    private static Stream<Arguments> isMoneyArguments() {
+        return Stream.of(
+                Arguments.of("$0.01", true),
+                Arguments.of("$5.05", true),
+                Arguments.of("$300", true),
+                Arguments.of("$3", true),
+                Arguments.of("$300.00", true),
+                Arguments.of("\u00a5500.50", true),
+                Arguments.of("100", false),
+                Arguments.of("100.00", false),
+                Arguments.of("$30.0", false)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("isMoneyArguments")
+    public void testIsMoney(String money, boolean expected) {
+        assertEquals(Utils.isMoney(money), expected);
+    }
+
+    private static Stream<Arguments> convertMoneyToValueArguments() {
+        return Stream.of(
+                Arguments.of("$0.01", 0.01),
+                Arguments.of("$5.05", 5.05),
+                Arguments.of("$300", 300.00),
+                Arguments.of("$300.00", 300.00),
+                Arguments.of("\u00a5500.50", 500.50)
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("convertMoneyToValueArguments")
+    public void testConvertMoneyToValue(String money, double expected) {
+        assertEquals(Utils.convertMoneyToValue(money), expected);
+    }
 }

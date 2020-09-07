@@ -46,6 +46,38 @@ public class DatetimeTest {
         }
     }
 
+    private static Stream<Arguments> getParseDateString_correctFormat_arguments() {
+        return Stream.of(
+                Arguments.of("2019-19-02", "yyyy-dd-MM",
+                        LocalDate.of(2019, 2, 19)),
+                Arguments.of("20 12 2020", "dd MM yyyy",
+                        LocalDate.of(2020, 12, 20))
+        );
+    }
+
+    @ParameterizedTest
+    @MethodSource("getParseDateString_correctFormat_arguments")
+    public void parseDateString_correctFormat_success(
+            String date, String pattern, LocalDate actualDate) throws DukeParseException {
+        LocalTime noon = LocalTime.of(12, 0);
+        LocalDateTime actual = LocalDateTime.of(actualDate, noon);
+        assertEquals(Datetime.parseDateString(date, pattern), actual);
+    }
+
+    @Test
+    public void parseDateString_wrongFormat_exceptionThrown() {
+        String pattern = "yyyy dd MM";
+        try {
+            LocalDate actual = LocalDate.of(2019, 2, 19);
+            assertEquals(Datetime.parseDateString("2019-19-02", pattern), actual);
+            fail();
+        } catch (DukeParseException exception) {
+            String expected = String.format(
+                    "Ensure the date passed in is of the form: '%s'.", pattern);
+            assertEquals(expected, exception.getMessage());
+        }
+    }
+
     private static Stream<Arguments> getParseTimeString_correctFormat_arguments() {
         return Stream.of(
                 Arguments.of("0654", "HHmm",

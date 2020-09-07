@@ -1,31 +1,19 @@
 package duke.operation;
 
+import duke.list.StorableList;
 import duke.result.Result;
-import duke.task.TaskList;
 
-/**
- * The operation that lists all the <code>Tasks</code> in <code>TaskList</code>.
- */
+/** Represents the list <code>Operation</code>. */
 public class ListOperation extends Operation {
-    private final TaskList taskList;
+    protected final StorableList list;
 
     /**
      * Constructor method.
      *
-     * @param taskList the <code>TaskList</code> that is to be printed.
+     * @param list the list to be displayed.
      */
-    public ListOperation(TaskList taskList) {
-        this.taskList = taskList;
-    }
-
-    /**
-     * Specifies that this is not an <code>ExitOperation</code>.
-     *
-     * @return <code>false</code>.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+    public ListOperation(StorableList list) {
+        this.list = list;
     }
 
     /**
@@ -35,7 +23,7 @@ public class ListOperation extends Operation {
      */
     @Override
     public Result execute() {
-        String message = "Here are your tasks:\n" + this.taskList.toString();
-        return new Result(true, message, this.isExit());
+        String msg = "Here is what I have found:\n" + list.toString();
+        return new Result(true, msg, this.isExit());
     }
 }

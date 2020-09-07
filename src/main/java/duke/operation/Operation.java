@@ -11,7 +11,9 @@ public abstract class Operation {
      *
      * @return <code>true</code> if the <code>Operation</code> is an <code>ExitOperation</code>.
      */
-    public abstract boolean isExit();
+    public boolean isExit() {
+        return false;
+    }
 
     /**
      * Executes the series of instructions.

@@ -46,7 +46,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String stringTime = this.time.getOutputDatetimeString();
+        String stringTime = time.getOutputDatetimeString();
         String atTime = String.format("(at: %s)", stringTime);
         return "[" + EVENT_SYMBOL + "]" + toStringSuffix() + " " + atTime;
     }
@@ -87,7 +87,7 @@ public class Event extends Task {
      */
     @Override
     public Optional<String> getTaskDatetime() {
-        String stringTime = this.time.getOutputDatetimeString();
+        String stringTime = time.getOutputDatetimeString();
         return Optional.of(stringTime);
     }
 }

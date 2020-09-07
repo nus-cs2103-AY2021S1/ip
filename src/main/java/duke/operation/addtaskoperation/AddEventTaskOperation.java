@@ -1,14 +1,14 @@
-package duke.operation;
+package duke.operation.addtaskoperation;
 
 import java.time.LocalDateTime;
 
+import duke.list.TaskList;
 import duke.task.Event;
-import duke.task.TaskList;
 
 /**
  * Represents the operation that adds <code>Events</code>.
  */
-public class AddEventOperation extends AddOperation {
+public class AddEventTaskOperation extends AddTaskOperation {
     private final LocalDateTime time;
 
     /**
@@ -18,7 +18,7 @@ public class AddEventOperation extends AddOperation {
      * @param time the time when the <code>Event</code> occurs.
      * @param taskList the <code>TaskList</code> that <code>Event</code> is to be added into.
      */
-    public AddEventOperation(String description, LocalDateTime time, TaskList taskList) {
+    public AddEventTaskOperation(String description, LocalDateTime time, TaskList taskList) {
         super(description, taskList);
         this.time = time;
     }
@@ -30,6 +30,6 @@ public class AddEventOperation extends AddOperation {
      */
     @Override
     public Event createTask() {
-        return Event.createEvent(this.description, this.time);
+        return Event.createEvent(description, time);
     }
 }

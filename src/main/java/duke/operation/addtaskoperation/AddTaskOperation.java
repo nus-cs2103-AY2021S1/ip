@@ -1,13 +1,12 @@
-package duke.operation;
+package duke.operation.addtaskoperation;
 
+import duke.list.TaskList;
+import duke.operation.Operation;
 import duke.result.Result;
 import duke.task.Task;
-import duke.task.TaskList;
 
-/**
- * Abstract class representing the operations that add various types of <code>Tasks</code>.
- */
-public abstract class AddOperation extends Operation {
+/** Abstract class representing the operations that add various types of <code>Tasks</code>. */
+public abstract class AddTaskOperation extends Operation {
     protected String description;
     protected TaskList taskList;
 
@@ -17,19 +16,9 @@ public abstract class AddOperation extends Operation {
      * @param description the description of the <code>Task</code>.
      * @param taskList the <code>TaskList</code> that <code>Task</code> is to be added into.
      */
-    AddOperation(String description, TaskList taskList) {
+    AddTaskOperation(String description, TaskList taskList) {
         this.description = description;
         this.taskList = taskList;
-    }
-
-    /**
-     * Specifies that this is not an <code>ExitOperation</code>.
-     *
-     * @return <code>false</code>.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
     }
 
     /**
@@ -49,9 +38,9 @@ public abstract class AddOperation extends Operation {
     public Result execute() {
         Task newTask = createTask();
         assert !newTask.isTaskCompleted() : "Ensure task created is not yet completed";
-        this.taskList.addTask(newTask);
+        this.taskList.add(newTask);
         String message = "I have added the task:\n" + newTask + "\n"
-                + String.format("You now have %d tasks.", this.taskList.getCurrCapacity());
+                + String.format("You now have %d tasks.", taskList.getCurrCapacity());
         return new Result(true, message, this.isExit());
     }
 }

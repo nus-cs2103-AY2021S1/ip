@@ -1,50 +1,38 @@
 package duke.operation;
 
+import duke.list.StorableList;
 import duke.result.Result;
-import duke.task.TaskList;
 
-/**
- * The operation that finds <code>Tasks</code> in <code>TaskList</code> associated with a search word.
- */
+/** The operation that finds <code>Tasks</code> in <code>TaskList</code> associated with a search word. */
 public class FindOperation extends Operation {
-    private final TaskList taskList;
+    private final StorableList storableList;
     private final String searchWord;
 
     /**
      * Constructor method.
      *
-     * @param taskList the <code>TaskList</code> that is to be searched on.
-     * @param searchWord the <code>String</code> that <code>TaskList</code> is to be search with.
+     * @param storableList the <code>StorableList</code> that is to be searched on.
+     * @param searchWord the <code>String</code> that <code>StorableList</code> is to be search with.
      */
-    public FindOperation(TaskList taskList, String searchWord) {
-        this.taskList = taskList;
+    public FindOperation(StorableList storableList, String searchWord) {
+        this.storableList = storableList;
         this.searchWord = searchWord;
     }
 
     /**
-     * Specifies that this is not an <code>ExitOperation</code>.
+     * Executes the operation by retrieving all <code>Storables</code> in
+     * <code>StorableList</code> containing the search word.
      *
-     * @return <code>false</code>.
-     */
-    @Override
-    public boolean isExit() {
-        return false;
-    }
-
-    /**
-     * Executes the operation by retrieving all <code>Tasks</code> in
-     * <code>TaskList</code> containing the search word.
-     *
-     * @return a <code>Result</code> containing all <code>Tasks</code> found.
+     * @return a <code>Result</code> containing all <code>Storables</code> found.
      */
     @Override
     public Result execute() {
-        String foundTasks = this.taskList.findString(searchWord);
+        String found = storableList.search(searchWord);
         String message;
-        if (foundTasks.equals("")) {
-            message = String.format("I have found no tasks that match: %s", this.searchWord);
+        if (found.equals("")) {
+            message = String.format("I have found no tasks that match: %s", searchWord);
         } else {
-            message = "Here are the tasks I have found:\n" + foundTasks;
+            message = "Here is what I have found:\n" + found;
         }
         return new Result(true, message, this.isExit());
     }

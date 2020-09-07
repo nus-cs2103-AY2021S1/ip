@@ -28,7 +28,7 @@ public class Result {
      * @return <code>true</code> if the <code>Operation</code> was successful.
      */
     public boolean isSuccessful() {
-        return this.isSuccessful;
+        return isSuccessful;
     }
 
     /**
@@ -37,7 +37,7 @@ public class Result {
      * @return <code>true</code> if it is an <code>ExitOperation</code>.
      */
     public boolean isExit() {
-        return this.isExit;
+        return isExit;
     }
 
     /**
@@ -46,7 +46,7 @@ public class Result {
      * @return the message <code>String</code>.
      */
     public String getMessage() {
-        return this.message;
+        return message;
     }
 
 }
