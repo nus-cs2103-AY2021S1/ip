@@ -3,6 +3,7 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 /**
  * Represents a type of Task that has a specific date and time of occurrence.
@@ -44,7 +45,7 @@ public class Event extends Task {
     }
 
     @Override
-    public String getDate() {
+    public String getDateAsString() {
         return this.at.split(" ")[0];
     }
 
@@ -52,4 +53,15 @@ public class Event extends Task {
     public String convertTxt() {
         return "E | " + (this.status ? "1" : "0") + " | " + name + " | " + at;
     }
+
+    @Override
+    public Optional<LocalDate> getDate() {
+        return Optional.ofNullable(this.date);
+    }
+
+    @Override
+    public Optional<LocalTime> getTime() {
+        return Optional.ofNullable(this.time);
+    }
+
 }

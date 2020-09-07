@@ -3,6 +3,7 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Optional;
 
 /**
  *  Represents a specific type of Task that has a deadline as additional information.
@@ -54,7 +55,7 @@ public class Deadline extends Task {
     }
 
     @Override
-    public String getDate() {
+    public String getDateAsString() {
         return this.by.split(" ")[0];
     }
 
@@ -66,4 +67,15 @@ public class Deadline extends Task {
     public String convertTxt() {
         return "D | " + (this.status ? "1" : "0") + " | " + name + " | " + by;
     }
+
+    @Override
+    public Optional<LocalDate> getDate() {
+        return Optional.ofNullable(this.date);
+    }
+
+    @Override
+    public Optional<LocalTime> getTime() {
+        return Optional.ofNullable(this.time);
+    }
+
 }

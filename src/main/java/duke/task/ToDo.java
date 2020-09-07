@@ -1,5 +1,9 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.Optional;
+
 /**
  * Represents probably the simplest type of Task.
  */
@@ -20,7 +24,18 @@ public class ToDo extends Task {
     }
 
     @Override
-    public String getDate() {
+    public String getDateAsString() {
         return "";
     }
+
+    @Override
+    public Optional<LocalDate> getDate() {
+        return Optional.empty();
+    }
+
+    @Override
+    public Optional<LocalTime> getTime() {
+        return Optional.empty();
+    }
+
 }
