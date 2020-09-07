@@ -12,7 +12,8 @@ public enum Instruction {
     DEADLINE("deadline"),
     TODO("todo"),
     EMPTY(""),
-    FIND("find");
+    FIND("find"),
+    HELP("help");
 
     private final String i;
 
