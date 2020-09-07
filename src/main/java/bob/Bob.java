@@ -9,6 +9,7 @@ import bob.commands.DoneCommand;
 import bob.commands.EventCommand;
 import bob.commands.TodoCommand;
 import bob.commands.UndoCommand;
+import bob.common.Messages;
 import bob.common.MsgGenerator;
 import bob.data.task.Tasklist;
 import bob.exceptions.BobException;
@@ -23,12 +24,12 @@ public class Bob {
     private Storage storage;
     private Tasklist tasks;
     private boolean hasExited;
+
     /**
      * Creates a Bob.
      *
      * @throws IOException If saved file can't be loaded.
      */
-
     public Bob() throws IOException, BobException {
         boolean ifPathDirIsTest = System.getProperty("user.dir").endsWith("text-ui-test");
         boolean ifPathDirIsIp = System.getProperty("user.dir").endsWith("ip");
@@ -85,7 +86,7 @@ public class Bob {
             this.hasExited = c.isExited();
             return replyMessage;
         } catch (IOException e) {
-            return MsgGenerator.generateUpdatingError();
+            return Messages.UPDATE_ERROR;
         } catch (BobException e) {
             return MsgGenerator.generateError(e);
         }

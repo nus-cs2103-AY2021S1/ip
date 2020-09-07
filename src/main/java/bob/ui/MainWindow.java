@@ -3,7 +3,7 @@ package bob.ui;
 import java.io.IOException;
 
 import bob.Bob;
-import bob.common.MsgGenerator;
+import bob.common.Messages;
 import bob.exceptions.BobException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
@@ -48,7 +48,7 @@ public class MainWindow extends AnchorPane {
         scrollPane.setFitToHeight(false);
         dialogContainer.getChildren().addAll(
                 Gap.createGap(),
-                DialogBox.getBobDialog(MsgGenerator.generateIntroMessage(), bobImage)
+                DialogBox.getBobDialog(Messages.INTRO, bobImage)
         );
     }
 
@@ -63,7 +63,7 @@ public class MainWindow extends AnchorPane {
                     DialogBox.getBobDialog(bob.getReminders(), bobImage));
         } catch (BobException | IOException e) {
             dialogContainer.getChildren().addAll(
-                    DialogBox.getBobDialog(MsgGenerator.generateLoadingError(), bobImage)
+                    DialogBox.getBobDialog(Messages.LOADING_ERROR, bobImage)
             );
         }
     }

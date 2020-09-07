@@ -1,6 +1,6 @@
 package bob.commands;
 
-import bob.common.MsgGenerator;
+import bob.common.Messages;
 import bob.data.task.Tasklist;
 import bob.storage.Storage;
 
@@ -16,6 +16,6 @@ public class ExitCommand extends Command {
 
     @Override
     public String execute(Tasklist tasks, Storage storage) {
-        return MsgGenerator.generateExitMessage();
+        return Messages.OUTRO;
     }
 }

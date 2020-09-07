@@ -30,20 +30,6 @@ public class MsgGenerator {
     }
 
     /**
-     * Generates introduction message.
-     */
-    public static String generateIntroMessage() {
-        return generateMsg(Messages.INTRO);
-    }
-
-    /**
-     * Generates exit message.
-     */
-    public static String generateExitMessage() {
-        return generateMsg(Messages.OUTRO);
-    }
-
-    /**
      * Generates error message.
      *
      * @param e Exception caught.
@@ -109,24 +95,6 @@ public class MsgGenerator {
         } else {
             return header + Messages.REMINDER_MSG + unfinishedTasks;
         }
-    }
-
-    /**
-     * Generates loading error message.
-     *
-     * @return Loading error message.
-     */
-    public static String generateLoadingError() {
-        return generateMsg(Messages.LOADING_ERROR);
-    }
-
-    /**
-     * Generates updating error message.
-     *
-     * @return Updating error message.
-     */
-    public static String generateUpdatingError() {
-        return generateMsg(Messages.UPDATE_ERROR);
     }
 
     public static String generateTasksFoundMessage(String input, String tasksFound) {
