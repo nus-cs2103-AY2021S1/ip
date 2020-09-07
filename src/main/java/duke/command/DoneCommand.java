@@ -26,9 +26,9 @@ public class DoneCommand extends Command {
      * @return CommandResult object for ui
      * @throws DukeException If unable to find the task or update the storage.
      */
-
     @Override
     public CommandResult execute(TaskList taskList, Storage storage) throws DukeException {
+        assert taskList != null && storage != null;
         Task taskToSetDone = taskList.getTask(indexOfTask);
         taskList.setTaskDone(indexOfTask);
         storage.updateStorage(taskList);
