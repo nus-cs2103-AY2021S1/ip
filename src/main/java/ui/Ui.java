@@ -2,7 +2,7 @@ package ui;
 
 import command.Command;
 import mugexception.MugException;
-import parser.Parser;
+import validator.Validator;
 import tasks.TaskList;
 
 /**
@@ -23,7 +23,7 @@ public class Ui {
         try {
             String[] splitInput = input.split(" ", 2);
             // Validate Command
-            Command command = Parser.command(splitInput[0]);
+            Command command = Validator.command(splitInput[0]);
 
             switch (command) {
             case LIST:
@@ -72,11 +72,11 @@ public class Ui {
      */
     private String doneAction(String[] splitInput, TaskList tasks) throws MugException {
         // Validate splitInput
-        Parser.input(Command.DONE, splitInput.length, false);
+        Validator.input(Command.DONE, splitInput.length, false);
         assert(splitInput.length > 1);
-        Parser.info(Command.DONE, splitInput[1], false);
+        Validator.info(Command.DONE, splitInput[1], false);
         // Extract and validate Id
-        int doneTaskId = Parser.index(splitInput[1], splitInput.length);
+        int doneTaskId = Validator.index(splitInput[1], splitInput.length);
         assert(doneTaskId > 0);
         return tasks.taskDone(doneTaskId);
     }
@@ -91,11 +91,11 @@ public class Ui {
      */
     private String deleteAction(String[] splitInput, TaskList tasks) throws MugException {
         // Validate splitInput
-        Parser.input(Command.DELETE, splitInput.length, false);
+        Validator.input(Command.DELETE, splitInput.length, false);
         assert(splitInput.length > 1);
-        Parser.info(Command.DELETE, splitInput[1], false);
+        Validator.info(Command.DELETE, splitInput[1], false);
         // Extract and Validate Id
-        int deleteTaskId = Parser.index(splitInput[1], splitInput.length);
+        int deleteTaskId = Validator.index(splitInput[1], splitInput.length);
         assert(deleteTaskId > 0);
         return tasks.deleteTask(deleteTaskId);
     }
@@ -111,9 +111,9 @@ public class Ui {
      */
     private String taskAction(Command command, String[] splitInput, TaskList tasks) throws MugException {
         // Validate splitInput
-        Parser.input(command, splitInput.length, false);
+        Validator.input(command, splitInput.length, false);
         assert(splitInput.length > 1);
-        Parser.info(command, splitInput[1], false);
+        Validator.info(command, splitInput[1], false);
         // Extract Info
         String info = splitInput[1];
         return tasks.addTask(command, info);
@@ -129,9 +129,9 @@ public class Ui {
      */
     private String findAction(String[] splitInput, TaskList tasks) throws MugException {
         // Validate splitInput
-        Parser.input(Command.FIND, splitInput.length, false);
+        Validator.input(Command.FIND, splitInput.length, false);
         assert(splitInput.length > 1);
-        Parser.info(Command.FIND, splitInput[1], false);
+        Validator.info(Command.FIND, splitInput[1], false);
         // extract keyword
         String keyword = splitInput[1];
         return tasks.searchTask(keyword);

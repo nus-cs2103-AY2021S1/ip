@@ -1,4 +1,4 @@
-package parser;
+package validator;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -9,7 +9,7 @@ import mugexception.MugException;
 /**
  * Validates or parses the user command
  */
-public class Parser {
+public class Validator {
 
     /**
      * Validates user's input.

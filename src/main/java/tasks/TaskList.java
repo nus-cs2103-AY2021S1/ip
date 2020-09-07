@@ -7,7 +7,7 @@ import java.util.stream.IntStream;
 
 import command.Command;
 import mugexception.MugException;
-import parser.Parser;
+import validator.Validator;
 import storage.Storage;
 import storage.UndoStorage;
 
@@ -82,23 +82,23 @@ public class TaskList {
             case DEADLINE:
                 String[] deadlineInfo = info.split(" /by ");
                 //Validate info
-                Parser.input(command, deadlineInfo.length, true);
+                Validator.input(command, deadlineInfo.length, true);
                 assert(deadlineInfo.length > 1);
-                Parser.info(command, deadlineInfo[1], true);
+                Validator.info(command, deadlineInfo[1], true);
                 // info
                 String deadlineEvent = deadlineInfo[0];
-                LocalDate deadlineTime = Parser.date(deadlineInfo[1]);
+                LocalDate deadlineTime = Validator.date(deadlineInfo[1]);
                 task = new Deadline(deadlineEvent, deadlineTime);
                 break;
             case EVENT:
                 String[] eventInfo = info.split(" /at ");
                 //Validate info
-                Parser.input(command, eventInfo.length, true);
+                Validator.input(command, eventInfo.length, true);
                 assert(eventInfo.length > 1);
-                Parser.info(command, eventInfo[1], true);
+                Validator.info(command, eventInfo[1], true);
                 // info
                 String eventEvent = eventInfo[0];
-                LocalDate eventTime = Parser.date(eventInfo[1]);
+                LocalDate eventTime = Validator.date(eventInfo[1]);
                 task = new Event(eventEvent, eventTime);
                 break;
             default:

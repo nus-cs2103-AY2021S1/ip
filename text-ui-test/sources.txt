@@ -6,7 +6,7 @@
 ../src/main/java/tasks/Todo.java
 ../src/main/java/Mug.java
 ../src/main/java/mugexception/MugException.java
-../src/main/java/parser/Parser.java
+../src/main/java/validator/Parser.java
 ../src/main/java/storage/Storage.java
 ../src/main/java/DialogBox.java
 ../src/main/java/Main.java

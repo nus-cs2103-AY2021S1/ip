@@ -1,4 +1,4 @@
-package parser;
+package validator;
 
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -10,12 +10,12 @@ import org.junit.jupiter.api.Test;
 import command.Command;
 import mugexception.MugException;
 
-public class ParserTest {
+public class ValidatorTest {
 
     @Test
     public void inputTest() {
         try {
-            Parser.input(Command.TODO, 1, true);
+            Validator.input(Command.TODO, 1, true);
         } catch (MugException ex) {
             String expect = "HEY!!! Don't be stingy give MUG more information >.<";
             assertEquals(expect, ex.getMessage());
@@ -25,7 +25,7 @@ public class ParserTest {
     @Test
     public void infoTest() {
         try {
-            Parser.info(Command.TODO, "", true);
+            Validator.info(Command.TODO, "", true);
         } catch (MugException ex) {
             String expect = "HEY!!! Don't be stingy give MUG more information >.<";
             assertEquals(expect, ex.getMessage());
@@ -35,7 +35,7 @@ public class ParserTest {
     @Test
     public void dateTest() {
         try {
-            LocalDate actDate = Parser.date("2019-01-12");
+            LocalDate actDate = Validator.date("2019-01-12");
             LocalDate expDate = LocalDate.parse("2019-01-12");
             assertEquals(expDate, actDate);
         } catch (MugException ex) {
@@ -46,7 +46,7 @@ public class ParserTest {
     @Test
     public void commandTest() {
         try {
-            Command command = Parser.command("todo");
+            Command command = Validator.command("todo");
             assertEquals(Command.TODO, command);
         } catch (MugException ex) {
             ex.printStackTrace();
@@ -56,7 +56,7 @@ public class ParserTest {
     @Test
     public void indexTest() {
         try {
-            int index = Parser.index("2", 4);
+            int index = Validator.index("2", 4);
             assertEquals(2, index);
         } catch (MugException ex) {
             ex.printStackTrace();
