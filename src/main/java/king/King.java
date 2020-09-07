@@ -10,6 +10,7 @@ import java.util.Scanner;
 
 import parser.Parser;
 import storage.Storage;
+import storage.StorageException;
 import tasks.TaskList;
 import ui.UI;
 
@@ -23,10 +24,10 @@ public class King {
      * Creates the asset needed for the King program in the given file path.
      *
      * @param filepath file path to create the asset file.
-     * @throws KingException kingException generated from Storage.
+     * @throws StorageException kingException generated from Storage.
      * @see Storage
      */
-    King(String filepath) throws KingException {
+    King(String filepath) throws StorageException {
         storage = new Storage(filepath);
         taskList = new TaskList();
         taskList.addAll(storage.load());
@@ -44,6 +45,8 @@ public class King {
         try {
             return parser.parse(input);
         } catch (KingException e) {
+            return UI.emptyChatBox(e.message);
+        } catch (StorageException e) {
             return UI.emptyChatBox(e.message);
         }
     }
