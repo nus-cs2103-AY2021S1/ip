@@ -123,6 +123,7 @@ public class Parser {
                     output += (index + "." + task + "\n");
                 }
             }
+            assert taskList.getTasks().size() >= 0;
             return output;
         } else {
             String[] arrOfStr = input.split(" ", 0);
@@ -148,6 +149,7 @@ public class Parser {
                 output += ("Now you have " + (tasks.size() != 1
                         ? tasks.size() + " tasks in the list."
                         : tasks.size() + " task in the list."));
+                assert taskList.getTasks().size() >= 0;
                 return output;
             } else if (identifier.equals("find")) {
                 // find
@@ -204,6 +206,7 @@ public class Parser {
                     output += ("Now you have " + (tasks.size() != 1
                             ? tasks.size() + " tasks in the list."
                             : tasks.size() + " task in the list."));
+                    assert taskList.getTasks().size() >= 0;
                     return output;
                 }
             }

@@ -51,6 +51,7 @@ public class Storage {
             String description = arrOfStr[2];
             Task newTask;
 
+            assert symbol.equals("[T]") || symbol.equals("[D]") || symbol.equals("[E]");
             if (symbol.equals("[T]")) {
                 newTask = new Todo(description);
             } else if (symbol.equals("[D]")) {
