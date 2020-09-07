@@ -1,4 +1,8 @@
-import java.io.*;
+import java.io.FileWriter;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 
@@ -39,6 +43,9 @@ public class Storage {
                     break;
                 case "E":
                     taskList.add(new Event(strArr[1], strArr[2], LocalDate.parse(strArr[3])));
+                    break; 
+                default:
+                    assert false : "The type of task is invalid";
                     break;
                 }
             }

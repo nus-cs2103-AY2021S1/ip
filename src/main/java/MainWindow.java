@@ -1,12 +1,13 @@
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -29,6 +30,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        Background bg = new Background(new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY));
+        dialogContainer.setBackground(bg);
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog("Hello! I'm Duke" + "\nWhat can I do for you?", dukeImg));
     }
@@ -46,6 +49,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String userText = userInput.getText();
         String dukeText = getResponse(userInput.getText());
+        assert dukeText.length() > 0 : "Response message cannot be empty";
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, userImg),
                 DialogBox.getDukeDialog(dukeText, dukeImg));

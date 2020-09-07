@@ -14,6 +14,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, LocalDate by) {
         super(description);
+        assert by != null : "Date cannot be null";
         this.by = by;
     }
 
@@ -29,6 +30,7 @@ public class Deadline extends Task {
         this.isDone = done.equals("1");
     }
     
+    @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " 
                 + this.by.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
