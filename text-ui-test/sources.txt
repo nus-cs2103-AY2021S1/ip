@@ -1,6 +1,9 @@
 C:\Users\Pactech\Desktop\ip\src\main\java\duke\Duke.java
+C:\Users\Pactech\Desktop\ip\src\main\java\duke\Launcher.java
+C:\Users\Pactech\Desktop\ip\src\main\java\duke\Main.java
 C:\Users\Pactech\Desktop\ip\src\main\java\duke\command\AddCommand.java
 C:\Users\Pactech\Desktop\ip\src\main\java\duke\command\Command.java
+C:\Users\Pactech\Desktop\ip\src\main\java\duke\command\CommandResult.java
 C:\Users\Pactech\Desktop\ip\src\main\java\duke\command\DateAndTimeListCommand.java
 C:\Users\Pactech\Desktop\ip\src\main\java\duke\command\DateListCommand.java
 C:\Users\Pactech\Desktop\ip\src\main\java\duke\command\DeleteCommand.java
@@ -16,4 +19,6 @@ C:\Users\Pactech\Desktop\ip\src\main\java\duke\task\Event.java
 C:\Users\Pactech\Desktop\ip\src\main\java\duke\task\Task.java
 C:\Users\Pactech\Desktop\ip\src\main\java\duke\task\TaskList.java
 C:\Users\Pactech\Desktop\ip\src\main\java\duke\task\ToDo.java
+C:\Users\Pactech\Desktop\ip\src\main\java\duke\ui\DialogBox.java
+C:\Users\Pactech\Desktop\ip\src\main\java\duke\ui\MainWindow.java
 C:\Users\Pactech\Desktop\ip\src\main\java\duke\ui\Ui.java
