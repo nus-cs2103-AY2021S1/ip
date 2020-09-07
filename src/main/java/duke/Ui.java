@@ -29,6 +29,11 @@ public class Ui {
         return "Hello! I'm meimei ^_^\nI could scream at you all day!";
     }
 
+    /**
+     * Prints the tasks stated.
+     * @param tasks to be printed.
+     * @return tasks in string format.
+     */
     public static String printTaskList(List<Task> tasks) {
         String result = "";
         result += "Here are the tasks in your list: \n";

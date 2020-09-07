@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.List;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -12,7 +14,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import java.util.List;
 
 /**
  * Duke class that creates a Duke bot to interact with user.
@@ -50,18 +51,19 @@ public class Duke extends Application {
             tasks = new TaskList();
         }
     }
-//
-//    public Duke() {
-//        filePath = "data";
-//        ui = new Ui();
-//        storage = new Storage("data");
-//        try {
-//            tasks = new TaskList(storage.load());
-//        } catch (DukeException e) {
-//            ui.showLoadingError();
-//            tasks = new TaskList();
-//        }
-//    }
+    /*
+    public Duke() {
+        filePath = "data";
+        ui = new Ui();
+        storage = new Storage("data");
+        try {
+            tasks = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            tasks = new TaskList();
+        }
+    }
+    */
 
     /**
      * Main method to get duke to start running and ask for user input
