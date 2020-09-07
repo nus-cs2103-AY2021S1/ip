@@ -28,13 +28,22 @@ public class ListCommand extends Command {
      * @throws DukeException
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        return listMessage(tasks);
+    }
+
+    /**
+     * gives the message when list is called.
+     *
+     * @param tasks gives the current list, which is used to return current list
+     * @return all the current list
+     */
+    private String listMessage(TaskList tasks){
         String s = "";
         for(int i = 0; i < tasks.getAllTasks().size(); i++){
-            System.out.println("  " + tasks.getAllTasks().get(i));
+            System.out.println("  " + tasks.getAllTasks().get(i)); // concatenates all the string representation of Tasks TaskList
             s = s + "\n" + "  " + tasks.getAllTasks().get(i);
         }
         return s;
     }
-
 }
 

@@ -45,8 +45,7 @@ public class Deadline extends Task {
      * @return the string representation
      */
     public String inputListFormat() {
-        return "D" + super.inputListFormat() + " | " + this.day;
+        return "D" + super.inputListFormat() + " | " + this.day; //format of Tasks to appear in file in Storage
     }
 
 }
-

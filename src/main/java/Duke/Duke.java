@@ -20,35 +20,6 @@ public class Duke {
     public Duke(){}
 
     /**
-     * This gives the boolean value of isExit
-     *
-     * @return returns the value of isExit.
-     */
-    public boolean isExit(){
-        return isExit;
-    }
-
-    /**
-     * This gives the respective output based on the input
-     *
-     * @param inputs what the user inputs in the GUI, can be multiple inputs.
-     * @return the output based on the output.
-     */
-    public String getResponse(String... inputs)  {
-        String output = "";
-        for(int i = 0; i < inputs.length; i++) {
-            String input = inputs[i];
-            Command c = Parser.parse(input);
-            try {
-                isExit = c.isExit();
-                output = output + "\n" + (i + 1) + ". " + c.execute(tasks, new Ui(), storage);
-            } catch (DukeException e) {
-                output = output + "\n" + (i + 1) + ". " + e.getMessage();
-            }
-        }
-        return output.substring(1);
-    }
-    /**
      * Assigns the above member variables with the appropriate values, and throws certain exceptions if file in
      * the filePath mentioned is empty or absent
      *
@@ -75,6 +46,35 @@ public class Duke {
         }
     }
     /**
+     * This gives the boolean value of isExit
+     *
+     * @return returns the value of isExit.
+     */
+    public boolean isExit(){
+        return isExit;
+    }
+
+    /**
+     * This gives the respective output based on the input
+     *
+     * @param inputs what the user inputs in the GUI, can be multiple inputs.
+     * @return the output based on the output.
+     */
+    public String getResponse(String... inputs)  {
+        String output = "";
+        for(int i = 0; i < inputs.length; i++) {
+            String input = inputs[i];
+            Command c = Parser.parse(input);
+            try {
+                isExit = c.isExit();
+                output = output + "\n" + (i + 1) + ". " + c.execute(tasks, new Ui(), storage); //concatenates output message
+            } catch (DukeException e) {
+                output = output + "\n" + (i + 1) + ". " + e.getMessage();//concatenates error message
+            }
+        }
+        return output.substring(1); //returns String
+    }
+    /**
      * gives main logic of the App,
      * where exceptions are caught and printed and if bye is there code stops. also starts with hello
      */
@@ -88,7 +88,7 @@ public class Duke {
                 ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
                 c.execute(tasks, ui, storage);
-                isExit = c.isExit();
+                isExit = c.isExit(); //if true exits program as bye is mentioned
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } finally {
@@ -115,4 +115,3 @@ public class Duke {
         duke.run();*/
     }
 }
-

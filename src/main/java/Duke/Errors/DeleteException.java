@@ -10,30 +10,53 @@ public class DeleteException extends DukeException {
      * If ID is not present it is true, else it is false
      * deleted checks whether the task was previously deleted, if deleted it is true else false.
      */
-    private boolean IDabsent;
+    private boolean isIDAbsent;
+    private boolean isNotIDDefined;
 
     /**
      * constructor that assigns tne 2 variables its respective values
      *
-     * @param IDabsent input, depending on whether the ID is present or not in the input.txt file. If present it is false
-     *   else it is true.
+     * @param isIDabsent     input, true if ID is input my reader, false otherwise.
+     * @param isNOtIDDefined input, true if ID > number of tasks present, false otherwise.
      */
-    public DeleteException(boolean IDabsent){
-        this.IDabsent = IDabsent;
+    public DeleteException(boolean isIDabsent, boolean isNOtIDDefined) {
+        this.isIDAbsent = isIDabsent;
+        this.isNotIDDefined = isNOtIDDefined;
     }
 
     /**
      * doesn't take in any arguments, overrides the in-built toString() method, for printing in getMessage().
      *
-     * @return returns a string depending on the scenario. If the IDabsent is true, then description that the description of
-     * delete cannot be empty. If the ID is previously deleted, it prints that it was deleted.
-     * Else, it means that the ID, of the Task given is not defined yet.
+     * @return returns a string depending on the scenario. If the IDAbsent is true, then description that the description of
+     * delete cannot be empty. Else if isDefined is true then String returning that ID is not defined is returned. Else,
+     * default is returned which should not occur.
      */
     @Override
     public String toString() {
-        if(IDabsent){
-            return "  '\u2639' OOPS!!! The description of delete cannot be empty.";
+        if (isIDAbsent) {
+            return iDAbsent(); //when ID is not input by user
+        } else if (isNotIDDefined) {
+            return iDNotDefined(); //when ID is not defined yet
+        } else {
+            return "default";
         }
+    }
+
+    /**
+     * returns on condition when user didn't mention the task ID to delete
+     *
+     * @return String informing user that ID of task to be deleted is not mentioned
+     */
+    private String iDAbsent() {
+        return "  '\u2639' OOPS!!! The description of delete cannot be empty.";
+    }
+
+    /**
+     * returns on condition when the ID is more than the number of tasks present
+     *
+     * @return String informing user that ID of task to be deleted is not defined yet.
+     */
+    private String iDNotDefined() {
         return "  '\u2639' OOPS!!! The ID is not yet defined.";
     }
 }

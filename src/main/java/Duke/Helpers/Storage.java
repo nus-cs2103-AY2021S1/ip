@@ -19,6 +19,7 @@ import java.util.Scanner;
  */
 public class Storage {
     private String filePath;
+
     /**
      * Constructor assigns filePath to filePath
      * @param filePath assigns this value to variable
@@ -40,44 +41,23 @@ public class Storage {
             Scanner sc = new Scanner(f);
             if(sc.hasNext()) {
                 do{
-                    String s = sc.nextLine();
-                    char bool = s.charAt(4);
-                    boolean done = (bool == '1');
-                    if(s.charAt(0) == 'T'){
-                        tasks.add(new ToDo(s.substring(8), done));
-                    }else if(s.charAt(0) == 'E'){
-                        String string = "";
-                        int index = -1;
-                        for(int i = 8; i < s.length(); i++){
-                            if(s.charAt(i) == '|'){
-                                index = i;
-                                break;
-                            }
-                            string = string + s.charAt(i);
-                        }
-                        String another = "";
-                        for(int i = index + 2; i < s.length(); i++){
-                            if(s.charAt(i) == '-'){
-                                index = i;
-                                break;
-                            }
-                            another = another + s.charAt(i);
-                        }
-                        tasks.add(new Event(string, done, another, s.substring(index + 1)));
-                    }else {
-                        String string = "";
-                        int index = -1;
-                        for(int i = 8; i < s.length(); i++){
-                            if(s.charAt(i) == '|'){
-                                index = i;
-                                break;
-                            }
-                            string = string + s.charAt(i);
-                        }
-                        tasks.add(new Deadline(string, done, s.substring(index + 2)));
+                    String input = sc.nextLine();
+                    char bool = input.charAt(4); //gives the char of 1 or 0 as it is always present at index 4
+                    boolean isDone = (bool == '1'); //since 1 indicates done
+                    if(input.charAt(0) == 'T'){
+                        ToDo todoPresent = todoPresent(input, isDone);
+                        tasks.add(todoPresent);
+                    }else if(input.charAt(0) == 'E'){
+                        Event eventPresent = eventPresent(input, isDone);
+                        tasks.add(eventPresent);
+                    }else if(input.charAt(0) == 'D'){
+                        Deadline deadlinePresent = deadlinePresent(input, isDone);
+                        tasks.add(deadlinePresent);
+                    }else{
+
                     }
-                    } while (sc.hasNextLine());
-                }
+                } while (sc.hasNextLine());
+            }
             if(tasks.size() == 0){
                 throw new FIleEmptyException();
             }else {
@@ -86,6 +66,65 @@ public class Storage {
         } catch (IOException error){
             throw new FileAbsentException(this.filePath);
         }
+    }
+
+    /**
+     * Returns ToDo task for that present in the list in storage
+     *
+     * @param input string from the file in storage
+     * @param isDone boolean of whether task is completed or not. True if completed and false otherwise.
+     * @return ToDo task
+     */
+    private ToDo todoPresent(String input, boolean isDone){
+        return new ToDo(input.substring(8), isDone); // since the string after index 8
+    }
+
+    /**
+     * Returns Event task for that present in list in storage
+     *
+     * @param input string from file in storage
+     * @param isDone boolean of whether task is completed or not. True if completed and false otherwise.
+     * @return Event task
+     */
+    private Event eventPresent(String input, boolean isDone){
+        String string = "";
+        int index = -1;
+        for(int i = 8; i < input.length(); i++){
+            if(input.charAt(i) == '|'){
+                index = i;
+                break;
+            }
+            string = string + input.charAt(i); //character "|" splits the description of event and time.
+        }
+        String another = "";
+        for(int i = index + 2; i < input.length(); i++){
+            if(input.charAt(i) == '-'){
+                index = i;
+                break;
+            }
+            another = another + input.charAt(i); // character "-" separates the start and end time.
+        }
+        return new Event(string, isDone, another, input.substring(index + 1));
+    }
+    /**
+     * Returns Deadline task for that present in list in storage
+     *
+     * @param input string from file in storage
+     * @param isDone boolean of whether task is completed or not. True if completed and false otherwise.
+     * @return Deadline task
+     */
+    private Deadline deadlinePresent(String input, boolean isDone){
+        String string = "";
+        int index = -1;
+        for(int i = 8; i < input.length(); i++){
+            if(input.charAt(i) == '|'){
+                index = i;
+                break;
+            }
+            string = string + input.charAt(i); //line '|' splits the description of deadline and time.
+        }
+        return new Deadline(string, isDone, input.substring(index + 2));
+
     }
     /**
      * gives the filePath

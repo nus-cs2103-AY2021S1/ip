@@ -11,7 +11,7 @@ abstract public class DukeException extends Exception {
      * @return string of the exception
      */
     public String getMessage(){
-            return toString();
+        return toString();
     }
 }
 

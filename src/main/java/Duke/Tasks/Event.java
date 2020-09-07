@@ -48,6 +48,6 @@ public class Event extends Task {
      * @return the string representation
      */
     public String inputListFormat(){
-        return "E" + super.inputListFormat() + " | " + this.dateTime + "-" + this.end;
+        return "E" + super.inputListFormat() + " | " + this.dateTime + "-" + this.end; //format of Tasks to appear in file in Storage
     }
 }

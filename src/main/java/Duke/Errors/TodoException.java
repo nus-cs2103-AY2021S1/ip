@@ -11,6 +11,16 @@ public class TodoException extends DukeException {
      * @return returns a string informing that the description of the ToDo is absent as it cant be.
      */
     public String toString(){
+        return descriptionAbsent(); //when description is absent
+    }
+
+    /**
+     * Returns when description is absent
+     *
+     * @return String informign user that the description of ToDo cannot be empty.
+     */
+    private String descriptionAbsent(){
         return "  '\u2639' OOPS!!! The description of a ToDo cannot be empty";
     }
 }
+

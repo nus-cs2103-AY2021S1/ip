@@ -31,3 +31,4 @@ public class RandomCommand extends Command {
         throw new WrongInputException();
     }
 }
+
