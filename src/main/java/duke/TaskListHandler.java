@@ -44,10 +44,8 @@ public class TaskListHandler {
      */
     public ArrayList<Task> clearList() {
         this.tasks = new ArrayList<>();
-        Ui.drawTopBorder();
         Ui.indent(1);
         System.out.println("The list of tasks has successfully been cleared.");
-        Ui.drawBottomBorder();
         return tasks;
     }
 
@@ -62,16 +60,15 @@ public class TaskListHandler {
             throw new DukeException("\u2639 Oops, the list of tasks is empty, pls add tasks first!");
         }
         int listPos = 1;
-        Ui.drawTopBorder();
         Ui.indent(1);
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++, listPos++) {
             Ui.indent(2);
             System.out.println(listPos + ". " + tasks.get(i));
         }
+        assert listPos > 0: "Wrong task number printed!";
         Ui.indent(1);
         System.out.println("You have " + tasks.size() + " task(s) in the list");
-        Ui.drawBottomBorder();
     }
 
     /**
