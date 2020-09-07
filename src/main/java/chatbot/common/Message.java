@@ -9,4 +9,9 @@ public class Message {
 
     public static final String TASK_EMPTY = "Task cannot be empty.";
     public static final String DATE_MISSING = "Ah oh, you forgot the date.";
+
+    public static final String LOAD_FAIL = "Ooops, I couldn't load the tasks.";
+    public static final String SAVE_FAIL = "Oooops, I couldn't save the tasks.";
+
+    public static final String ITEM_NOT_EXIST = "That item does not exist!";
 }

@@ -25,27 +25,6 @@ public class Chatbot {
         initialiseTaskList(taskStorage);
     }
 
-    public void initialiseDataPath(String path) {
-        this.filePath = Path.of(path);
-    }
-
-    public void initialiseUI() {
-        ui = new Ui();
-    }
-
-    public void initialiseStorage() {
-        taskStorage = new Storage(filePath);
-    }
-
-    public void initialiseTaskList(Storage store) {
-        // load tasks from disk
-        try {
-            taskList = new TaskList(store.loadTasks());
-        } catch (ChatbotException e) {
-            e.printStackTrace();
-        }
-    }
-
     public String getResponse(String input) {
         String response;
 
@@ -68,6 +47,27 @@ public class Chatbot {
     }
 
     public String generateWelcomeMessage() {
-        return ui.greet();
+        return ui.getWelcomeMessage();
+    }
+
+    public void initialiseDataPath(String path) {
+        this.filePath = Path.of(path);
+    }
+
+    public void initialiseUI() {
+        ui = new Ui();
+    }
+
+    public void initialiseStorage() {
+        taskStorage = new Storage(filePath);
+    }
+
+    public void initialiseTaskList(Storage store) {
+        // load tasks from disk
+        try {
+            taskList = new TaskList(store.loadTasks());
+        } catch (ChatbotException e) {
+            e.printStackTrace();
+        }
     }
 }

@@ -3,8 +3,6 @@ package chatbot.ui;
 import chatbot.data.Task;
 
 import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.Scanner;
 
 /**
  * A class representing the command line level user interface. Responsible for reading commands
@@ -13,12 +11,10 @@ import java.util.Scanner;
 
 public class Ui {
 
-    Scanner sc;
-
     /**
      * Prints out a welcome message.
      */
-    public String greet() {
+    public String getWelcomeMessage() {
         return "Hey there, I'm Fukuyama Masaharu the 24/7 Chatbot. What can I do for you (deep voice).";
     }
 
@@ -63,7 +59,7 @@ public class Ui {
     }
 
     /**
-     * List out the given tasks.
+     * Lists out the given tasks.
      * @param ls list of tasks
      */
     public String list(ArrayList<Task> ls) {
@@ -75,10 +71,8 @@ public class Ui {
         int index = 1;
         String response = "";
 
-        Iterator<Task> iter = ls.iterator();
-
-        while (iter.hasNext()) {
-            response += index + ". " + iter.next() + "\n";
+        for (Task l : ls) {
+            response = response.concat(index + ". " + l + "\n");
             index++;
         }
 

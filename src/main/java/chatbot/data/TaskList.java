@@ -1,5 +1,6 @@
 package chatbot.data;
 
+import chatbot.common.Message;
 import chatbot.exception.ChatbotException;
 
 import java.util.ArrayList;
@@ -50,9 +51,11 @@ public class TaskList {
      * @return true if a non-null task object is given
      */
     public boolean addTask(Task task) {
+
         if (task == null) {
             return false;
         }
+
         tasks.add(task);
         return true;
     }
@@ -69,7 +72,7 @@ public class TaskList {
         try {
             removed = this.tasks.remove(index);
         } catch (IndexOutOfBoundsException e) {
-            throw new ChatbotException("That item does not exist!");
+            throw new ChatbotException(Message.ITEM_NOT_EXIST);
         }
 
         return removed;
@@ -88,7 +91,7 @@ public class TaskList {
             taskDone = getTask(index).markDone();
             this.tasks.set(index, taskDone);
         } catch (IndexOutOfBoundsException e) {
-            throw new ChatbotException("That item does not exist!");
+            throw new ChatbotException(Message.ITEM_NOT_EXIST);
         }
 
         return taskDone;
@@ -107,10 +110,12 @@ public class TaskList {
         while (iter.hasNext()) {
             Task tsk = iter.next();
             LocalDate taskDate = tsk.getDate();
+
             if (taskDate != null && taskDate.equals(date)) {
                 tasks.add(tsk);
             }
         }
+
         return tasks;
     }
 
@@ -121,6 +126,7 @@ public class TaskList {
 
         while (iter.hasNext()) {
             Task tsk = iter.next();
+
             if (tsk.getDescription().contains(searchStr)) {
                 tasks.add(tsk);
             }
