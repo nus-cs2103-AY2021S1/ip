@@ -34,6 +34,7 @@ public class DoneCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String response = "";
         if (index >= 0 && index < tasks.listSize()) {
+            assert index > 0 : "Negative index value detected at execute method";
             response = tasks.taskDone(index, ui);
             storage.save(tasks.convertToFile());
         } else {

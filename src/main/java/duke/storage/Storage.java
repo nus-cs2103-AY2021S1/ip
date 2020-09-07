@@ -46,6 +46,7 @@ public class Storage {
      * @throws DukeException
      */
     public void makeFile() throws DukeException {
+        assert !filePath.isEmpty() : "Filepath is empty";
         File savedFile = new File(filePath);
         try {
             savedFile.createNewFile();
@@ -60,6 +61,9 @@ public class Storage {
      * @throws DukeException
      */
     public ArrayList<String> load() throws DukeException {
+        assert !filePath.isEmpty() : "Filepath is empty";
+        assert !folderPath.isEmpty() : "FolderPath is empty";
+
         File savedFolder = new File(folderPath);
         File savedFile = new File(filePath);
 
