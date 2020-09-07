@@ -9,6 +9,7 @@ import java.nio.file.Paths;
 import org.junit.jupiter.api.Test;
 
 import duke.DukeException;
+import duke.History;
 import duke.Storage;
 import duke.task.TaskList;
 
@@ -25,8 +26,9 @@ public class DoneCommandTest {
         Path storageFilePath = Paths.get(".", "data", "test.txt");
         TaskList l = new TaskList();
         Storage s = new Storage(storageFilePath);
+        History history = new History();
         try {
-            test.execute(l, s);
+            test.execute(l, s, history);
         } catch (DukeException e) {
             assertTrue(e.getMessage().contains("Please enter a valid task number"));
         }

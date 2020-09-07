@@ -54,6 +54,12 @@ public class Event extends Task {
         }
     }
 
+    private Event(String description, LocalDate atDate, LocalTime atTime) {
+        super(description);
+        this.atDate = atDate;
+        this.atTime = atTime;
+    }
+
     private LocalTime formatTime(String at) {
         int timeIndex = at.indexOf(" ") + 1;
         String timePortion = at.substring(timeIndex);
@@ -67,6 +73,16 @@ public class Event extends Task {
         String formattedDate = datePortion.replaceAll("/", "-");
         LocalDate date = LocalDate.parse(formattedDate);
         return date;
+    }
+
+    /**
+     * Creates a deep copy of the current Event.
+     *
+     * @return a copy of the current Event.
+     */
+    @Override
+    public Event deepCopy() {
+        return new Event(this.description, this.atDate, this.atTime);
     }
 
     /**

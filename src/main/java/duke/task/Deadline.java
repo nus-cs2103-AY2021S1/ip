@@ -53,6 +53,12 @@ public class Deadline extends Task {
         }
     }
 
+    private Deadline(String description, LocalDate byDate, LocalTime byTime) {
+        super(description);
+        this.byDate = byDate;
+        this.byTime = byTime;
+    }
+
     private LocalTime formatTime(String by) {
         int timeIndex = by.indexOf(" ") + 1;
         String timePortion = by.substring(timeIndex);
@@ -66,6 +72,16 @@ public class Deadline extends Task {
         String formattedDate = datePortion.replaceAll("/", "-");
         LocalDate date = LocalDate.parse(formattedDate);
         return date;
+    }
+
+    /**
+     * Creates a deep copy of the current Deadline.
+     *
+     * @return a copy of the current Deadline.
+     */
+    @Override
+    public Deadline deepCopy() {
+        return new Deadline(this.description, this.byDate, this.byTime);
     }
 
     /**

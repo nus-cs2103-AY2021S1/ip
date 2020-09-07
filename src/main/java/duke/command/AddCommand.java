@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.History;
 import duke.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -18,6 +19,7 @@ public class AddCommand extends Command {
 
     /**
      * Constructor to create an add command.
+     *
      * @param userInput command give from user via command line.
      * @param c type of command which is an <code>ENUM</code>
      */
@@ -35,19 +37,23 @@ public class AddCommand extends Command {
      *
      * @param taskList the List containing all the tasks that Duke has stored.
      * @param storage the database for Duke to save all tasks to the user's local storage.
+     * @param history the state of all changes made to Duke's TaskList.
      * @return string representation of Duke's response to the command.
      * @throws DukeException when the type of task being added is unknown.
      */
     @Override
-    public String execute(TaskList taskList, Storage storage) throws DukeException {
+    public String execute(TaskList taskList, Storage storage, History history) throws DukeException {
         assert storage != null : "Storage cannot be null";
         assert taskList != null : "taskList cannot be null";
         switch (c) {
         case TODO:
+            history.addToHistory(taskList);
             return addToDoTask(this.userInput, taskList, storage);
         case EVENT:
+            history.addToHistory(taskList);
             return addEventTask(this.userInput, taskList, storage);
         case DEADLINE:
+            history.addToHistory(taskList);
             return addDeadlineTask(this.userInput, taskList, storage);
         default:
             throw new DukeException("I don't recognize the type of task you are trying to add");

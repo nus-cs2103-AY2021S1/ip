@@ -90,6 +90,34 @@ public class TaskList {
                 + " in the list.";
     }
 
+    private List<Task> getInnerList() {
+        return this.taskList;
+    }
+
+    /**
+     * Switches the old TaskList with a new TaskList.
+     *
+     * @param newTaskList the new TaskList to replace the old TaskList with.
+     */
+    public void replace(TaskList newTaskList) {
+        this.taskList = newTaskList.getInnerList();
+    }
+
+    /**
+     * Creates a deep copy of the TaskList.
+     *
+     * @return a new instance of TaskList copied from the previous instance.
+     */
+    public TaskList deepCopy() {
+        List<Task> newList = new ArrayList<>();
+        List<Task> currList = this.taskList;
+        for (Task t : currList) {
+            Task copiedTask = t.deepCopy();
+            newList.add(copiedTask);
+        }
+        return new TaskList(newList);
+    }
+
     /**
      * Returns a string representation of the Tasks in the list.
      *

@@ -41,6 +41,15 @@ public class Task {
         return description.contains(keyword);
     }
 
+    /**
+     * Creates a deep copy of the current Task.
+     *
+     * @return a copy of the current Task.
+     */
+    public Task deepCopy() {
+        return new Task(this.description, this.isDone);
+    }
+
     public String getStatusIcon() {
         return (isDone ? "1" : "0");
     }

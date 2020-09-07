@@ -14,6 +14,7 @@ public class Duke {
     private static final Path storageFilePath = Paths.get(".", "data", "test.txt");
     private Storage storage;
     private TaskList taskList;
+    private History history;
 
     /**
      * Constructor to create a Duke object.
@@ -24,6 +25,7 @@ public class Duke {
      */
     public Duke() {
         this.storage = new Storage(Duke.storageFilePath);
+        this.history = new History();
         try {
             this.taskList = new TaskList(this.storage.getAllTasks());
         } catch (DukeException e) {
@@ -43,8 +45,8 @@ public class Duke {
             if (c.isExit()) {
                 Platform.exit();
             }
+            return c.execute(this.taskList, this.storage, this.history);
 
-            return c.execute(this.taskList, this.storage);
         } catch (DukeException e) {
             return (e.getMessage());
         }
