@@ -16,7 +16,7 @@ public class EventCommand extends Command {
      * Adds an Event object to TaskList object.
      * @param command User input
      * @param list TaskList object containing all tasks
-     * @param storage Storage object that reads and writes to duke.ser
+     * @param storage Storage object that reads and writes to duke.txt
      * @return A response saying event has been added
      */
     @Override

@@ -59,13 +59,28 @@ public class TaskList {
     /**
      * Filters through list of Tasks for appropriate keyword within instructions.
      * @param keyword Word to filter by
-     * @return A String of filtered Lists of Tasks
+     * @return A string of filtered List of Tasks
      */
     public String filter(String keyword) {
         List<Task> filteredList = new ArrayList<>();
         String loweredCaseKeyword = keyword.toLowerCase();
         for (Task task : this.list) {
             if (task.instructions.toLowerCase().contains(loweredCaseKeyword)) {
+                filteredList.add(task);
+            }
+        }
+        return iterateFilteredList(filteredList);
+    }
+
+    /**
+     * Filters through list of Tasks for appropriate tagging.
+     * @param targetTag Tag to filter by
+     * @return A string of filtered List of Tasks
+     */
+    public String filterTag(String targetTag) {
+        List<Task> filteredList = new ArrayList<>();
+        for (Task task : this.list) {
+            if (targetTag.equals(task.tag)) {
                 filteredList.add(task);
             }
         }
