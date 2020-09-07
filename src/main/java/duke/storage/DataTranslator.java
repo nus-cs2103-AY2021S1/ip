@@ -52,13 +52,15 @@ public class DataTranslator {
                     task = new Event(parsedLine[2], dukeDateTime);
                     break;
                 default:
+                    assert parsedLine[0] != "T" || parsedLine[0] != "D" || parsedLine[0] != "E"
+                            : "String should either be T, D or E to represent the type of Task that is saved.";
                     break;
                 }
             } catch (DukeException e) {
-                formatter.print(Colour.convertTextToRed(e.getMessage()));
+                formatter.print(e.getMessage());
             }
             if (parsedLine[1].equals("1")) {
-                assert task != null;
+                assert task != null : "Task should contain a description";
                 task.markTaskAsDone();
             }
             taskManager.addTask(task);
