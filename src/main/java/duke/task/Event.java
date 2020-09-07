@@ -6,7 +6,7 @@ import duke.exception.MissingDeadlineException;
  * Represents a task that is occurring at a specific time.
  */
 public class Event extends Task {
-    protected String eventTime;
+    protected String time;
 
     public Event(String desc) throws MissingDeadlineException {
         super("E", desc.split(" /at ", 2)[0]);
@@ -15,25 +15,25 @@ public class Event extends Task {
             throw new MissingDeadlineException("event");
         } else {
             String date = desc.split(" /at ", 2)[1];
-            eventTime = containsTime(date)
+            time = containsTime(date)
                             ? formatDateTime(date)
                             : formatDate(date);
         }
     }
 
-    public Event(String desc, String eventTime) {
+    public Event(String desc, String time) {
         super("E", desc);
-        this.eventTime = eventTime;
+        this.time = time;
     }
 
     @Override
     public String formatTaskForFile() {
         return taskType + " | " + (isDone ? "1" : "0") + " | " +
-                description + " | " + eventTime;
+                description + " | " + time;
     }
 
     @Override
     public String toString() {
-        return "[E]" + getStatusIcon() + description + " (at: " + eventTime + ")";
+        return "[E]" + getStatusIcon() + description + " (at: " + time + ")";
     }
 }

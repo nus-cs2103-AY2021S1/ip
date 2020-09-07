@@ -79,6 +79,7 @@ public class Ui {
      * @return The list of tasks.
      */
     public String list(String formattedList) {
+        assert formattedList != null;
         String list = "Here are the tasks in your list: \n  ";
         list += formattedList;
         return list;
@@ -109,6 +110,7 @@ public class Ui {
     }
 
     public String find(String matchingTasks) {
+        assert matchingTasks != null;
         String list = "Here are the matching tasks in your list: \n  ";
         list += matchingTasks;
         return list;

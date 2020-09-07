@@ -14,6 +14,7 @@ public class Parser {
      * @return The user input formatted for Duke chat bot handling.
      */
     public static String[] parse(String str) {
+        assert str != null;
         return str.split(" ", 2);
     }
 

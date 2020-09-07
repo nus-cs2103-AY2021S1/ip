@@ -20,7 +20,7 @@ public abstract class Task {
         isDone = false;
     }
 
-    protected boolean containsTime(String str) {
+    public boolean containsTime(String str) {
         Pattern p = Pattern.compile(".* ([01]?[0-9]|2[0-3])[0-5][0-9]");
         Matcher m = p.matcher(str);
         return m.matches();

@@ -39,6 +39,7 @@ public class TaskList {
     }
 
     Task createTask(String taskType, String desc) throws MissingDeadlineException{
+        assert taskType != null && desc != null;
         if (taskType.equals("todo")) {
             return new Todo(desc);
         } else if (taskType.equals("deadline")) {
@@ -58,12 +59,14 @@ public class TaskList {
      * @throws MissingDeadlineException
      */
     public Task addTask(String taskType, String desc) throws MissingDeadlineException {
+        assert taskType != null && desc != null;
         Task task = createTask(taskType, desc);
         tasks.add(task);
         return task;
     }
 
     String formatTask(int num, List<Task> tasks) {
+        assert num >= 0;
         String lineBreak = num != tasks.size() - 1 ? "\n  " : "";
         return (num + 1) + "." + tasks.get(num) + lineBreak;
     }
