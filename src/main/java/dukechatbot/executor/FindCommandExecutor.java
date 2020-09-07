@@ -16,7 +16,7 @@ import dukechatbot.tasklist.TaskList;
  * Executes the action of finding tasks that contain the search keyword.
  *
  */
-public class FindCommandExecutor extends CommandExecutor {
+public class FindCommandExecutor implements CommandExecutor {
 
     /**
      * Gets the list of task in task list that contains the search keyword
@@ -24,6 +24,7 @@ public class FindCommandExecutor extends CommandExecutor {
      *
      * @param command
      * @param taskList
+     * @return Response from Duke.
      */
     @Override
     public String execute(Command command, TaskList taskList) {
@@ -31,6 +32,6 @@ public class FindCommandExecutor extends CommandExecutor {
         List<String> responses = new ArrayList<>(Collections.singletonList(DukeConstants.FIND_OUTPUT));
         List<Task> matchedTasks = taskList.findMatches(searchKeyword);
         matchedTasks.stream().map(Task::toString).forEach(responses::add);
-        return DukeOutput.output(responses);
+        return DukeOutput.getOutput(responses);
     }
 }

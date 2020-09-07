@@ -13,7 +13,7 @@ public class DukeOutput {
      *
      * @param response from Duke.
      */
-    public static String output(String response) {
+    public static String getOutput(String response) {
         return DukeOutputFormatter.format(Collections.singletonList(response));
     }
 
@@ -22,7 +22,7 @@ public class DukeOutput {
      *
      * @param response list of responses by Duke.
      */
-    public static String output(List<String> response) {
+    public static String getOutput(List<String> response) {
         return DukeOutputFormatter.format(response);
     }
 
@@ -32,7 +32,7 @@ public class DukeOutput {
      * @param responses list of responses by Duke.
      * @param indentIndexes to indicate which response is formatted more.
      */
-    public static String output(List<String> responses, List<Integer> indentIndexes) {
+    public static String getOutput(List<String> responses, List<Integer> indentIndexes) {
         return DukeOutputFormatter.format(responses, indentIndexes);
     }
 }

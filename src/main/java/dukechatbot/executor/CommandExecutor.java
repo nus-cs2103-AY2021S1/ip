@@ -4,9 +4,9 @@ import dukechatbot.command.Command;
 import dukechatbot.tasklist.TaskList;
 
 /**
- * Represents executor of add command.
+ * Represents executor of a command.
  * Executes the command given to Duke.
  */
-public abstract class CommandExecutor {
-    public abstract String execute(Command command, TaskList taskList);
+public interface CommandExecutor {
+    String execute(Command command, TaskList taskList);
 }

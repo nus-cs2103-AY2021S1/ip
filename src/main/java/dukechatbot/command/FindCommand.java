@@ -12,7 +12,7 @@ public class FindCommand extends Command {
 
     private final String argument;
 
-    public FindCommand(String input) {
+    public FindCommand(String input) throws IndexOutOfBoundsException {
         super(input, new FindCommandExecutor());
         this.argument = CommandParser.getTitle(input);
     }
