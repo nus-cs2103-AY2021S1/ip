@@ -80,7 +80,11 @@ public class Parser {
             String[] splitString = userInput.split(" ");
 
 
-            if (splitString[0].equals("list")) {
+            if (splitString[0].equals("help")) {
+
+                return Ui.helpMessage();
+
+            } else if (splitString[0].equals("list")) {
 
                 return Ui.printTaskList(list);
 

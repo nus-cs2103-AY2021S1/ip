@@ -16,7 +16,7 @@ public class Todo extends Task {
      * Constructor for Todo task but with ability to set status
      *
      * @param taskString  the task given by the user
-     * @param status  status of the task
+     * @param status  status of the taskd
      */
     public Todo(String taskString, boolean status) {
         super(taskString);
@@ -25,7 +25,7 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        String statusIcon = (status) ? "\u2713" : "\u2713";
+        String statusIcon = (status) ? "\u2714" : "\u2716";
         return "[" + ICON + "]" + "[" + statusIcon + "] " + this.taskString;
     }
 

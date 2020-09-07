@@ -30,6 +30,28 @@ public class Ui {
     }
 
     /**
+     * Prints the help message
+     *
+     * @return help message of String type.
+     */
+    public static String helpMessage() {
+        return "Full list of commands:\n"
+                + "type \"bye\" to save your current list\n"
+                + "type \"list\" to view your current list\n"
+                + "type \"done <number>\" to mark the specific task as done\n"
+                + "type \"delete <number>\" to delete the specific task\n"
+                + "type \"find <keyword>\" to find a task with the specific keyword\n"
+                + "To add new tasks:"
+                + "type \"todo <task>\" to add a to do\n"
+                + "type \"event <task> /<preposition> <yyyy-MM-dd HH:mm>\""
+                        + "to add an event e.g event do chores /by 2020-08-08 12:00\n"
+                + "type \"deadline <task> /<preposition> <yyyy-MM-dd HH:mm>\""
+                        + "to add a deadline e.g event do chores /by 2020-08-08 12:00\n"
+                + "\n";
+    }
+
+
+    /**
      * Prints the list of tasks
      *
      * @param list  list to be printed.

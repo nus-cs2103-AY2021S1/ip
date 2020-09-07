@@ -44,7 +44,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String statusIcon = (status) ? "\u2713" : "\u2713";
+        String statusIcon = (status) ? "\u2714" : "\u2716";
         return "[" + ICON + "]" + "[" + statusIcon + "] "
                 + this.taskString + " (" + this.preposition + ": "
                 + dateTime.format(DateTimeFormatter.ofPattern("d MMM yyyy")) + ")";
