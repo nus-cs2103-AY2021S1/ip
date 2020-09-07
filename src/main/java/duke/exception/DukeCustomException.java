@@ -1,7 +1,9 @@
 package duke.exception;
 
 /**
- * Separate parse exception just for parse errors.
+ * DukeException which allows custom messages.
+ * Also includes a setExtraMessage function to add another
+ * error message to be displayed (one time use).
  */
 public class DukeCustomException extends DukeException {
     private String extraMessage;

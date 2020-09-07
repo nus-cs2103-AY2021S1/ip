@@ -3,18 +3,20 @@ package duke.parser;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.util.Arrays;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.CommandLineParser;
 import org.apache.commons.cli.DefaultParser;
 import org.apache.commons.cli.HelpFormatter;
 import org.apache.commons.cli.Options;
 import org.apache.commons.cli.ParseException;
+
 import duke.Context;
 import duke.command.Command;
 import duke.command.CommandExecutable;
 import duke.command.Macro;
-import duke.exception.DukeException;
 import duke.exception.DukeCustomException;
+import duke.exception.DukeException;
 
 /**
  * Class to parse raw input from user and run commands from the input.

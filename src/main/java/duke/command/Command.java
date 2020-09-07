@@ -1,10 +1,8 @@
 package duke.command;
 
-import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
 
-import duke.Context;
 import duke.exception.DukeException;
 
 /**
@@ -65,6 +63,11 @@ public enum Command {
         throw DukeException.Errors.UNKNOWN_COMMAND.create();
     }
 
+    /**
+     * Checks if the queried command exists.
+     * @param name checks if there exists a command with this name.
+     * @return true if name is a registered command.
+     */
     public static boolean hasCommand(String name) {
         for (Command command : Command.values()) {
             if (command.name.equals(name)) {

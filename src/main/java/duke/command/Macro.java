@@ -3,14 +3,20 @@ package duke.command;
 import java.util.Arrays;
 import java.util.Iterator;
 import java.util.List;
+
 import org.apache.commons.cli.CommandLine;
 import org.apache.commons.cli.Option;
 import org.apache.commons.cli.Options;
+
 import duke.Context;
-import duke.exception.DukeException;
 import duke.exception.DukeCustomException;
+import duke.exception.DukeException;
 import duke.parser.Parser;
 
+/**
+ * Macro class that deals with user-created macros. Possibly turing complete (this
+ * is a bad thing and should be addressed).
+ */
 public class Macro {
     private final String name;
     private final List<String> commands;
@@ -22,9 +28,15 @@ public class Macro {
         this.options = options;
     }
 
-    public static Macro newMacro(String input) throws DukeException {
+    /**
+     * Creates a new macro using the String declaration.
+     * @param declaration Macro declaration string. Format in the user guide.
+     * @return Macro that was created
+     * @throws DukeException if declaration has the wrong format.
+     */
+    public static Macro newMacro(String declaration) throws DukeException {
         // note: following also trims whitespace.
-        String[] inputSplitBySemicolon = input.split(" *; *");
+        String[] inputSplitBySemicolon = declaration.split(" *; *");
         String[] macroNameAndArgs = inputSplitBySemicolon[0].split("\\s+");
         String[] commands = Arrays.copyOfRange(inputSplitBySemicolon, 1, inputSplitBySemicolon.length);
         Options options = new Options();
@@ -50,6 +62,12 @@ public class Macro {
         return this.options;
     }
 
+    /**
+     * Executes the macro. Can be used as a CommandExecutable.
+     * @param context context for execution.
+     * @param args command line arguments parsed using commons-cli.
+     * @throws DukeException if any command in the macro encounters an error.
+     */
     public void execute(Context context, CommandLine args) throws DukeException {
         Parser parser = new Parser(context);
         String[] commands = this.substituteAll(args);
@@ -73,6 +91,12 @@ public class Macro {
         }
     }
 
+    /**
+     * Substitutes all the arguments into the macro, and returns the
+     * substituted commands as a list. Exposed mainly for testing.
+     * @param args
+     * @return
+     */
     public String[] substituteAll(CommandLine args) {
         String[] output = new String[this.commands.size()];
         for (int i = 0; i < this.commands.size(); i++) {
