@@ -66,12 +66,14 @@ public class TaskList {
      * @param toPrint contains int to mark the specific task as done.
      */
     public void done(String toPrint) {
-        String command = toPrint.replaceAll("[^\\d.]", "");
-        int indexCommand = Integer.parseInt(command.trim());
-        System.out.println("Nice! I've marked this task as done: ");
-        Task completedTask = this.taskLs.get(indexCommand - 1);
-        completedTask.markAsDone();
-        System.out.println("[" + completedTask.getStatusIcon() + "] " + completedTask.description);
+        try {
+            String command = toPrint.replaceAll("[^\\d.]", "");
+            int indexCommand = Integer.parseInt(command.trim());
+            Task completedTask = this.taskLs.get(indexCommand - 1);
+            completedTask.markAsDone();
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            throw e;
+        }
     }
 
     public String doneString(String toPrint) {
@@ -89,17 +91,17 @@ public class TaskList {
      * Creates a todo task and adds it to the list of tasks.
      * @param toPrint Description of task.
      */
-    public void todo(String toPrint) {
+    public void todo(String toPrint) throws DukeException {
         try {
             toPrint = toPrint.substring(4);
-            if (toPrint.isEmpty()) {
+            if (toPrint.isEmpty() | toPrint.length() == 1) {
                 throw new DukeException("");
             }
             Todo taskTodo = new Todo(toPrint);
             this.taskLs.add(taskTodo);
 
         } catch (DukeException e) {
-            Todo.invalidInput();
+            throw e;
         }
     }
 
@@ -125,7 +127,7 @@ public class TaskList {
             this.taskLs.add(taskEvent);
 
         } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
-            Event.invalidInput();
+            throw e;
         }
     }
 
@@ -156,7 +158,7 @@ public class TaskList {
 
 
         } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
-            Deadline.invalidInput();
+            throw e;
         }
     }
 

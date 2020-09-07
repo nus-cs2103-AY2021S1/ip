@@ -37,8 +37,8 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     protected String getResponse(String input) throws IOException, DukeException {
-        Command c = parser.parse(input);
-        return c.execute(tasks, ui, storage);
+        Command resultCommand = parser.parse(input);
+        return resultCommand.execute(tasks, ui, storage);
     }
 
     /**

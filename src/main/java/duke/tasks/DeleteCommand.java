@@ -19,24 +19,27 @@ public class DeleteCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, UI ui, Storage storage) throws IOException {
+        try {
+            String command = this.delete.replaceAll("[^\\d.]", "");
+            int i = Integer.parseInt(command.trim());
+            Task deletedTask = tasks.taskLs.get(i - 1);
+            int numTask = tasks.taskLs.size();
+            String printGui = "";
+            printGui = printGui + "Noted. I've removed this task: " + "\n";
+            printGui = printGui + deletedTask + "\n";
+            printGui = printGui + "Now you have " + numTask + " tasks in the list.";
 
-        String command = this.delete.replaceAll("[^\\d.]", "");
-        int i = Integer.parseInt(command.trim());
-        Task deletedTask = tasks.taskLs.get(i - 1);
-        int numTask = tasks.taskLs.size();
+            //delete task from list of tasks
+            tasks.delete(this.delete);
 
-        String printGui = "";
-        printGui = printGui + "Noted. I've removed this task: " + "\n";
-        printGui = printGui + deletedTask + "\n";
-        printGui = printGui + "Now you have " + numTask + " tasks in the list.";
+            //write to file
+            String s = storage.genList(tasks.getTaskLs());
+            storage.writeToFile("data/duke.rtf", s);
 
-        //delete task from list of tasks
-        tasks.delete(this.delete);
-
-        //write to file
-        String s = storage.genList(tasks.getTaskLs());
-        storage.writeToFile("data/duke.rtf", s);
-
-        return printGui;
+            return printGui;
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            return "Either input number is out of range of the list " +
+                    "of tasks or the input is not a number";
+        }
     }
 }

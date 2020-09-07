@@ -19,8 +19,12 @@ public class TodoCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, UI ui, Storage storage) throws IOException {
-        //add todo task to list of tasks
-        tasks.todo(this.todo);
+        try {
+            //add todo task to list of tasks
+            tasks.todo(this.todo);
+        } catch (DukeException e){
+            return Todo.invalidInput();
+        }
 
         //write task to file
         String s = storage.genList(tasks.getTaskLs());

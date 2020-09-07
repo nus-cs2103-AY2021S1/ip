@@ -1,6 +1,7 @@
 package duke.tasks;
 
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents an Event Command. This command handles the event input
@@ -19,8 +20,12 @@ public class EventCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, UI ui, Storage storage) throws IOException {
-        //add event task to list of tasks
-        tasks.event(this.event);
+        try {
+            //add event task to list of tasks
+            tasks.event(this.event);
+        } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
+            return Event.invalidInput();
+        }
 
         //write to file
         String s = storage.genList(tasks.getTaskLs());

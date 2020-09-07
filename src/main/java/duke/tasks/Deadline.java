@@ -23,8 +23,8 @@ public class Deadline extends Task {
     /**
      * Prints out an error when the format of the deadline is incorrect.
      */
-    public static void invalidInput() {
-        invalidInput("OOPS!!! The format of the Deadline is wrong.");
+    public static String invalidInput() {
+        return "OOPS!!! The format of the Deadline is wrong.";
     }
 
 

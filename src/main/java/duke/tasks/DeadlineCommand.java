@@ -1,6 +1,7 @@
 package duke.tasks;
 
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 
 /**
  * Represents a deadline command. This command handles the deadline input
@@ -19,8 +20,12 @@ public class DeadlineCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, UI ui, Storage storage) throws IOException {
-        //add event task to list of tasks
-        tasks.deadline(this.deadline);
+        try {
+            //add event task to list of tasks
+            tasks.deadline(this.deadline);
+        } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
+            return Deadline.invalidInput();
+        }
 
         //write to file
         String s = storage.genList(tasks.getTaskLs());

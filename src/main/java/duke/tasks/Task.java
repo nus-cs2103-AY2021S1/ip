@@ -65,9 +65,9 @@ public class Task {
      * Prints out the error message when the input is invalid.
      * @param error invalid input from user.
      */
-    public static void invalidInput(String error) {
+    public static String invalidInput(String error) {
         String errorMsg = "Error: " + error;
-        System.out.println(errorMsg);
+        return errorMsg;
     }
 
     @Override

@@ -17,8 +17,8 @@ public class Todo extends Task {
     /**
      * Prints out an error when the format of the Todo is incorrect.
      */
-    public static void invalidInput() {
-        invalidInput("OOPS!!! The description of a todo cannot be empty.");
+    public static String invalidInput() {
+        return "OOPS!!! The description of a todo cannot be empty.";
     }
 
     @Override
