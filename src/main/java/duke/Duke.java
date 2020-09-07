@@ -1,7 +1,7 @@
-package main.java.duke;
+package duke;
 
-import main.java.duke.command.Command;
-import main.java.duke.command.ExitCommand;
+import duke.command.Command;
+import duke.command.ExitCommand;
 
 import java.util.Scanner;
 

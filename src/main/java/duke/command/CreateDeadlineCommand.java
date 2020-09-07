@@ -1,10 +1,10 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.Storage;
-import main.java.duke.TaskList;
-import main.java.duke.Ui;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
-import main.java.duke.task.Deadline;
+import duke.task.Deadline;
 
 import java.time.LocalDate;
 
@@ -45,6 +45,10 @@ public class CreateDeadlineCommand extends Command {
      */
     @Override
     public String[] execute(Storage storage, TaskList tasks, Ui ui) {
+        assert storage != null;
+        assert tasks != null;
+        assert ui != null;
+
         Deadline deadline = tasks.addDeadline(this.description, this.isComplete, this.date);
         return ui.getCreateTaskStrings(tasks, deadline);
     }

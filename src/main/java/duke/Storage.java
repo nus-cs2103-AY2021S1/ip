@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -37,6 +37,9 @@ public class Storage {
      * @param strings Input strings read from the file
      */
     void addTaskFromData(TaskList tasks, String[] strings) {
+        assert tasks != null;
+        assert strings != null;
+
         if (strings.length > 0) {
             String taskType = strings[0];
             if (taskType.equals("todo") && strings.length == 3) {
@@ -93,6 +96,7 @@ public class Storage {
      * @return true if saving is successful, false otherwise
      */
     public boolean saveTaskList(TaskList taskList) {
+        assert taskList != null;
         try {
             FileWriter csvWriter = new FileWriter(this.file);
             for (int i = 0; i < taskList.getNumOfTasks(); i++) {

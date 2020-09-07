@@ -1,10 +1,10 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.Storage;
-import main.java.duke.TaskList;
-import main.java.duke.Ui;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
-import main.java.duke.task.Task;
+import duke.task.Task;
 
 /**
  * Encapsulates a command to delete a task
@@ -33,6 +33,9 @@ public class DeleteTaskCommand extends Command {
      */
     @Override
     public String[] execute(Storage storage, TaskList tasks, Ui ui) {
+        assert tasks != null;
+        assert ui != null;
+
         Task task = tasks.deleteTaskAt(this.taskIndex);
 
         if (task != null) {

@@ -1,6 +1,6 @@
-package main.java.duke;
+package duke;
 
-import main.java.duke.task.Task;
+import duke.task.Task;
 
 /**
  * Encapsulates the user interface of duke
@@ -57,6 +57,7 @@ public class Ui {
      * tasks if the list is not empty
      */
     private String getNumOfTasksString(TaskList tasks) {
+        assert tasks != null;
         int numOfTasks = tasks.getNumOfTasks();
         if (numOfTasks == 0) {
             return zeroTasksMessage;
@@ -71,6 +72,7 @@ public class Ui {
      * @param task Completed task
      */
     public void printCompleteTask(Task task) {
+        assert task != null;
         String[] strings = new String[] {this.completeTaskMessage, task.toString()};
         this.print(strings);
     }
@@ -82,6 +84,7 @@ public class Ui {
      * @return Output strings upon completing a task
      */
     public String[] getCompleteTaskStrings(Task task) {
+        assert task != null;
         String[] strings = new String[] {this.completeTaskMessage, task.toString()};
         return strings;
     }
@@ -93,6 +96,8 @@ public class Ui {
      * @param task Created task
      */
     public void printCreateTask(TaskList tasks, Task task) {
+        assert tasks != null;
+        assert task != null;
         String[] strings = new String[] {this.addTaskMessage, task.toString(), getNumOfTasksString(tasks)};
         this.print(strings);
     }
@@ -105,6 +110,8 @@ public class Ui {
      * @return Output strings upon creating a new task
      */
     public String[] getCreateTaskStrings(TaskList tasks, Task task) {
+        assert tasks != null;
+        assert task != null;
         String[] strings = new String[] {this.addTaskMessage, task.toString(), getNumOfTasksString(tasks)};
         return strings;
     }
@@ -116,6 +123,8 @@ public class Ui {
      * @param task Deleted task
      */
     public void printDeleteTask(TaskList tasks, Task task) {
+        assert tasks != null;
+        assert task != null;
         String[] strings = new String[] {this.deleteTaskMessage, task.toString(),getNumOfTasksString(tasks)};
         this.print(strings);
     }
@@ -128,6 +137,8 @@ public class Ui {
      * @return Output strings upon deleting a task
      */
     public String[] getDeleteTaskStrings(TaskList tasks, Task task) {
+        assert tasks != null;
+        assert task != null;
         String[] strings = new String[] {this.deleteTaskMessage, task.toString(),getNumOfTasksString(tasks)};
         return strings;
     }
@@ -208,6 +219,7 @@ public class Ui {
      * @param tasks Current task list
      */
     public void printTaskList(TaskList tasks) {
+        assert tasks != null;
         if (tasks.isEmpty()) {
             this.print(new String[] {this.zeroTasksMessage});
         } else {
@@ -227,6 +239,7 @@ public class Ui {
      * @return Output string representation of all tasks
      */
     public String[] getTaskListStrings(TaskList tasks) {
+        assert tasks != null;
         if (tasks.isEmpty()) {
             return new String[] {this.zeroTasksMessage};
         } else {
@@ -245,6 +258,7 @@ public class Ui {
      * @param tasks Sublist of tasks
      */
     public void printTasksWithKeyword(Task[] tasks) {
+        assert tasks != null;
         String[] strings = new String[tasks.length + 1];
         if (tasks.length == 0) {
             strings[0] = this.foundZeroTasksMessage;
@@ -264,6 +278,7 @@ public class Ui {
      * @return Output strings upon finding matching tasks
      */
     public String[] getTasksWithKeywordStrings(Task[] tasks) {
+        assert tasks != null;
         String[] strings = new String[tasks.length + 1];
         if (tasks.length == 0) {
             strings[0] = this.foundZeroTasksMessage;
@@ -282,6 +297,7 @@ public class Ui {
      * @param strings Array of strings to be printed
      */
     public void print(String[] strings) {
+        assert strings != null;
         System.out.println(this.horizontalLine);
         for(String string : strings) {
             System.out.print(this.textIndentation);

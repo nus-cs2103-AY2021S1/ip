@@ -1,8 +1,8 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.Storage;
-import main.java.duke.TaskList;
-import main.java.duke.Ui;
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * Encapsulates a command to find tasks that match a given keyword
@@ -30,6 +30,9 @@ public class FindCommand extends Command {
      */
     @Override
     public String[] execute(Storage storage, TaskList tasks, Ui ui) {
+        assert tasks != null;
+        assert ui != null;
+
         return ui.getTasksWithKeywordStrings(tasks.getSublistContainingKeyword(this.keyword));
     }
 }

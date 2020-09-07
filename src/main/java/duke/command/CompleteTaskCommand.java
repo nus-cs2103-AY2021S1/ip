@@ -1,9 +1,9 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.Storage;
-import main.java.duke.task.Task;
-import main.java.duke.TaskList;
-import main.java.duke.Ui;
+import duke.Storage;
+import duke.task.Task;
+import duke.TaskList;
+import duke.Ui;
 
 /**
  * Encapsulates a command to complete a task
@@ -32,6 +32,10 @@ public class CompleteTaskCommand extends Command {
      */
     @Override
     public String[] execute(Storage storage, TaskList tasks, Ui ui) {
+        assert storage != null;
+        assert tasks != null;
+        assert ui != null;
+
         Task task = tasks.completeTaskAt(this.taskIndex);
         if (task != null) {
             return ui.getCompleteTaskStrings(task);

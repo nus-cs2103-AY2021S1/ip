@@ -1,9 +1,9 @@
-package main.java.duke.command;
+package duke.command;
 
-import main.java.duke.Storage;
-import main.java.duke.TaskList;
-import main.java.duke.task.ToDo;
-import main.java.duke.Ui;
+import duke.Storage;
+import duke.TaskList;
+import duke.task.ToDo;
+import duke.Ui;
 
 /**
  * Encapsulates a command to create a todo
@@ -37,6 +37,10 @@ public class CreateTodoCommand extends Command {
      */
     @Override
     public String[] execute(Storage storage, TaskList tasks, Ui ui) {
+        assert storage != null;
+        assert tasks != null;
+        assert ui != null;
+
         ToDo todo = tasks.addTodo(this.description, this.isComplete);
         return ui.getCreateTaskStrings(tasks, todo);
     }

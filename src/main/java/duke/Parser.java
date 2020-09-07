@@ -1,15 +1,15 @@
-package main.java.duke;
+package duke;
 
-import main.java.duke.command.Command;
-import main.java.duke.command.CompleteTaskCommand;
-import main.java.duke.command.CreateDeadlineCommand;
-import main.java.duke.command.CreateEventCommand;
-import main.java.duke.command.CreateTodoCommand;
-import main.java.duke.command.DeleteTaskCommand;
-import main.java.duke.command.ExitCommand;
-import main.java.duke.command.FindCommand;
-import main.java.duke.command.InvalidInputCommand;
-import main.java.duke.command.ListTasksCommand;
+import duke.command.Command;
+import duke.command.CompleteTaskCommand;
+import duke.command.CreateDeadlineCommand;
+import duke.command.CreateEventCommand;
+import duke.command.CreateTodoCommand;
+import duke.command.DeleteTaskCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.InvalidInputCommand;
+import duke.command.ListTasksCommand;
 
 import java.time.LocalDate;
 
@@ -31,6 +31,7 @@ class Parser {
      * @return Command corresponding to the input
      */
     static Command parse(String input) {
+        assert input != null;
 
         // Parses initial input into prefix and body
         String[] parsedCommand = input.split(" ", 2);
@@ -97,6 +98,8 @@ class Parser {
      * @throws NumberFormatException Exception thrown if the string cannot be parsed into integers
      */
     static LocalDate genDate(String input) throws NumberFormatException {
+        assert input != null;
+
         String[] strings = input.split(Parser.dateSeparator, 3);
         int[] ints = new int[3];
         for(int i = 0; i < 3; i++) {

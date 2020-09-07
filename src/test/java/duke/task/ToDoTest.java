@@ -1,6 +1,6 @@
 package test.java.duke.task;
 
-import main.java.duke.task.ToDo;
+import duke.task.ToDo;
 
 import org.junit.jupiter.api.Test;
 

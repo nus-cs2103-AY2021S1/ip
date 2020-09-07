@@ -1,4 +1,4 @@
-package main.java.duke;
+package duke;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,8 +8,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import main.java.duke.command.Command;
-import main.java.duke.command.ExitCommand;
+import duke.command.Command;
+import duke.command.ExitCommand;
 
 import java.util.concurrent.TimeUnit;
 

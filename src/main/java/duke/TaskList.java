@@ -1,9 +1,9 @@
-package main.java.duke;
+package duke;
 
-import main.java.duke.task.Deadline;
-import main.java.duke.task.Event;
-import main.java.duke.task.Task;
-import main.java.duke.task.ToDo;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -32,6 +32,9 @@ public class TaskList {
      * @return Created deadline
      */
     public Deadline addDeadline(String description, boolean isComplete, LocalDate date) {
+        assert description != null;
+        assert date != null;
+
         Deadline deadline = new Deadline(description, isComplete, date);
         this.taskArrayList.add(deadline);
         return deadline;
@@ -45,6 +48,9 @@ public class TaskList {
      * @param date Date of the event
      */
     public Event addEvent(String description, boolean isComplete, LocalDate date) {
+        assert description != null;
+        assert date != null;
+
         Event event = new Event(description, isComplete, date);
         this.taskArrayList.add(event);
         return event;
@@ -58,6 +64,8 @@ public class TaskList {
      * @return Created todo
      */
     public ToDo addTodo(String description, boolean isComplete) {
+        assert description != null;
+
         ToDo todo = new ToDo(description, isComplete);
         this.taskArrayList.add(todo);
         return todo;
@@ -137,6 +145,8 @@ public class TaskList {
      * @return Sublist of tasks
      */
     public Task[] getSublistContainingKeyword(String keyword) {
+        assert keyword != null;
+
         ArrayList<Task> tasksContainingKeyword = new ArrayList<>();
         for (Task task : this.taskArrayList) {
             if (task.hasKeyword(keyword)) {
