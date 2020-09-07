@@ -50,7 +50,7 @@ public class Deadline extends Task {
     @Override
     String toStorageRepresentation() {
         String result;
-        result = "duke.Deadline" + "|";
+        result = "Deadline" + "|";
         result += this.isDone ? "1" : "0";
         result += "|";
         result += this.description;

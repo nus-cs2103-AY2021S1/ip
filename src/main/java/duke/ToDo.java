@@ -1,12 +1,12 @@
 package duke;
 
 /**
- * Encapsulates a stodo  duke.ToDo item
+ * Encapsulates a ToDo item
  */
 public class ToDo extends Task {
 
     /**
-     * Instantiates a duke.ToDo with a description of it.
+     * Instantiates a ToDo with a description of it.
      *
      * @param description an explanation of what the task is about
      */
