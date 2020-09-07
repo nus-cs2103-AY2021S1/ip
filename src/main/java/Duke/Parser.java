@@ -131,6 +131,7 @@ public class Parser {
             if (!restOfCommand.contains(DATE_DEADLINE)) {
                 return new IncorrectCommand("☹ OOPS !!! Debe establecer una fecha límite para esta tarea.");
             }
+            assert restOfCommand.contains(DATE_DEADLINE);
             int byPosition = restOfCommand.indexOf(DATE_DEADLINE);
             String taskDescription = restOfCommand.substring(0, byPosition);
             String dateDescription = restOfCommand.substring(byPosition + 4);
@@ -148,6 +149,7 @@ public class Parser {
             if (!restOfCommand.contains(DATE_EVENT)) {
                 return new IncorrectCommand("☹ OOPS !!! Debe establecer la hora del evento para esta tarea.");
             }
+            assert restOfCommand.contains(DATE_EVENT);
             int atPosition = restOfCommand.indexOf(DATE_EVENT);
             taskDescription = restOfCommand.substring(0, atPosition);
             dateDescription = restOfCommand.substring(atPosition + 4);
@@ -163,6 +165,7 @@ public class Parser {
         case FIND:
             return new FindCommand(restOfCommand);
         default:
+            assert false;
             return null;
         }
     }

@@ -2,7 +2,7 @@ plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
-    id 'com.github.johnrengelman.shadow' version '5.1.0'
+    id "com.github.johnrengelman.shadow" version "5.2.0"
 }
 test {
     useJUnitPlatform()
@@ -29,6 +29,11 @@ dependencies {
     testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
 }
+
+mainClassName = "SpanishDuke"
+
+apply plugin: 'com.github.johnrengelman.shadow'
+
 checkstyle {
     toolVersion "7.6.1"
 }

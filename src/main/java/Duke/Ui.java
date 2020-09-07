@@ -51,6 +51,7 @@ public class Ui {
      */
     public String showList(TaskList taskList) {
         StringBuilder outputMessage = new StringBuilder("Estas son las tareas de su lista:");
+        assert taskList.getTaskList().size() > 0;
         for (int i = 0; i < taskList.getTaskList().size(); i++) {
             outputMessage.append("\n").append(i + 1).append(". ").append(taskList.getTaskList().get(i).toString());
         }
@@ -114,6 +115,7 @@ public class Ui {
      */
     public String showFoundList(ArrayList<Task> foundTaskList) {
         StringBuilder outputMessage = new StringBuilder("Aquí están las tareas coincidentes en su lista:");
+        assert foundTaskList.size() > 0;
         for (int i = 0; i < foundTaskList.size(); i++) {
             outputMessage.append("\n").append(i + 1).append(". ").append(foundTaskList.get(i).toString());
         }
