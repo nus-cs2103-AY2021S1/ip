@@ -1,13 +1,11 @@
 package duke.commands;
 
+import java.util.ArrayList;
+
 import duke.storage.Storage;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 import duke.ui.UI;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
 
 public class GetRemindersCommand extends Command {
     public static final String COMMAND_WORD = "getReminders";

@@ -5,7 +5,20 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import duke.commands.*;
+import duke.commands.Command;
+import duke.commands.DeadlineCommand;
+import duke.commands.DeleteCommand;
+import duke.commands.DoneCommand;
+import duke.commands.EventCommand;
+import duke.commands.ExitCommand;
+import duke.commands.GetEventsCommand;
+import duke.commands.GetRemindersCommand;
+import duke.commands.HelpCommand;
+import duke.commands.InvalidCommand;
+import duke.commands.ListCommand;
+import duke.commands.RemindCommand;
+import duke.commands.SearchCommand;
+import duke.commands.TodoCommand;
 
 /**
  * Represents a Parser that will read User Input from the command
