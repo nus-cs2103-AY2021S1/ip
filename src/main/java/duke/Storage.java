@@ -74,7 +74,7 @@ public class Storage {
      * @throws ParseException If an error has been reached while parsing.
      * @throws DukeException If user does not input both date and time.
      */
-    public LocalDateTime getDate(String taskDate) throws ParseException, DukeException {
+    public LocalDateTime getDate(String taskDate) throws DukeException, ParseException {
         String[] splitDate = taskDate.split(" ");
         if (splitDate.length == 1) {
             throw new DukeException("Please enter both date and time!");
@@ -84,22 +84,47 @@ public class Storage {
 
         // convert month in words to month in int
         String monthInWords = splitDate[1];
-        Date checkMonth = new SimpleDateFormat("MMM", Locale.ENGLISH).parse(monthInWords);
-        Calendar cal = Calendar.getInstance();
-        cal.setTime(checkMonth);
-        int month = cal.get(Calendar.MONTH) + 1;
-
+        int month = getMonthInNumber(monthInWords);
         int year = Integer.parseInt(splitDate[2]);
 
         // get hour and minute from time
         String time = splitDate[3];
-        int hour = Integer.parseInt(time.split(":")[0]);
-        if (splitDate[4].equals("PM")) {
-            hour += 12;
-        }
+        int hour = getHourInContinentalTime(time, splitDate[4]);
         int min = Integer.parseInt(time.split(":")[1].substring(0, 2));
 
         return LocalDateTime.of(year, month, date, hour, min);
+    }
+
+    /**
+     * Converts month in String to integer representation.
+     *
+     * @param monthInWords String representation of the month.
+     * @return Integer representation of the month.
+     * @throws ParseException If an error has been reached while parsing.
+     */
+    public int getMonthInNumber(String monthInWords) throws ParseException {
+        assert monthInWords != null : "Month cannot be null";
+        Date checkMonth = new SimpleDateFormat("MMM", Locale.ENGLISH).parse(monthInWords);
+        Calendar cal = Calendar.getInstance();
+        cal.setTime(checkMonth);
+        return cal.get(Calendar.MONTH) + 1;
+    }
+
+    /**
+     * Converts time from 12-hour representation to 24-hour representation i.e. continental time.
+     *
+     * @param time String representation of time.
+     * @param period String representation of time period of day i.e. AM or PM.
+     * @return Integer representation of the time in 24-hour format.
+     */
+    public int getHourInContinentalTime(String time, String period) {
+        assert time != null : "Time cannot be null";
+        assert period != null : "Time period cannot be null";
+        int hour = Integer.parseInt(time.split(":")[0]);
+        if (period.equals("PM")) {
+            hour += 12;
+        }
+        return hour;
     }
 
     /**
