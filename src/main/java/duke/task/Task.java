@@ -16,6 +16,7 @@ public class Task {
 
     /**
      * Returns a tick if done, cross if not.
+     *
      * @return A tick or cross String.
      */
     public String getStatusIcon() {
@@ -40,6 +41,7 @@ public class Task {
 
     /**
      * Returns whether the task is done.
+     *
      * @return A boolean whether the task is done.
      */
     public boolean isDone() {

@@ -16,7 +16,7 @@ import duke.task.TaskList;
 import duke.task.ToDo;
 
 public class Storage {
-    private static String SAVED_TASK_PATH;
+    private static String savedTaskPath;
 
     /**
      * Initializes Storage with the input path as the location for the storage file.
@@ -24,7 +24,7 @@ public class Storage {
      * @param path The path to store the storage file.
      */
     public Storage(String path) {
-        SAVED_TASK_PATH = path;
+        savedTaskPath = path;
     }
 
     /**
@@ -73,8 +73,8 @@ public class Storage {
     ArrayList<Task> readAndLoadFromFile() throws DukeException {
         try {
             ArrayList<Task> taskList = new ArrayList<>();
-            if (fileExists(SAVED_TASK_PATH)) {
-                File file = new File(SAVED_TASK_PATH);
+            if (fileExists(savedTaskPath)) {
+                File file = new File(savedTaskPath);
                 //System.out.println(file.getAbsolutePath());
                 Scanner s = new Scanner(file);
                 while (s.hasNext()) {
@@ -130,7 +130,7 @@ public class Storage {
     public void updateStorage(TaskList tasks) throws DukeException {
         assert tasks != null;
         try {
-            FileWriter fw = new FileWriter(SAVED_TASK_PATH);
+            FileWriter fw = new FileWriter(savedTaskPath);
             String textForUpdate = convertTaskListToSaveFormat(tasks);
             fw.write(textForUpdate);
             fw.close();
@@ -140,9 +140,9 @@ public class Storage {
     }
 
     void createFile() throws DukeException {
-        File newFile = new File(SAVED_TASK_PATH);
+        File newFile = new File(savedTaskPath);
         try {
-            String[] pathStringArray = SAVED_TASK_PATH.split("/");
+            String[] pathStringArray = savedTaskPath.split("/");
             StringBuilder currentPath = new StringBuilder();
             newFile.getParentFile().mkdirs();
             if (newFile.createNewFile()) {
