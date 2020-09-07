@@ -51,6 +51,11 @@ public class Deadline extends Task {
         return date.format(DATABASE_DATE_TIME_FORMAT).split(" ");
     }
 
+    // accessor method for date and time
+    public LocalDateTime getDate() {
+        return date;
+    }
+
     // String representation methods
     @Override
     public String toString() {

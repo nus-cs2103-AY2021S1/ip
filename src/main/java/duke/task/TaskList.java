@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -77,6 +78,9 @@ public class TaskList {
             }
         }
         return new TaskList(res);
+    }
+    public void sort(Comparator<Task> comp) {
+        tasks.sort(comp);
     }
 
     // string processing
