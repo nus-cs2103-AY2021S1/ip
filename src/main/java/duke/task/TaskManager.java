@@ -3,6 +3,7 @@ package duke.task;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Represents a list of tasks. A <code>TaskManager</code> object will be able to carry out certain functions
@@ -53,23 +54,15 @@ public class TaskManager {
     }
 
     public List<Task> getAllUncompletedTasks() {
-        List<Task> uncompletedTasks = new ArrayList<>();
-        tasks.forEach(task -> {
-            if (!task.getIsDone()) {
-                uncompletedTasks.add(task);
-            }
-        });
-        return uncompletedTasks;
+        return tasks.stream()
+                .filter(task -> !task.getIsDone())
+                .collect(Collectors.toList());
     }
 
     public List<Task> getAllCompletedTasks() {
-        List<Task> completedTasks = new ArrayList<>();
-        tasks.forEach(task -> {
-            if (task.getIsDone()) {
-                completedTasks.add(task);
-            }
-        });
-        return completedTasks;
+        return tasks.stream()
+                .filter(task -> task.getIsDone())
+                .collect(Collectors.toList());
     }
 
     public List<Task> getAllTasksBeforeQueryDate(LocalDate queryDate) {
@@ -87,13 +80,7 @@ public class TaskManager {
     }
 
     public List<Task> findTasksByKeyword(String keyword) {
-        List<Task> filteredTasks = new ArrayList<>();
-        tasks.forEach(task -> {
-            if (task.getContent().contains(keyword)) {
-                filteredTasks.add(task);
-            }
-        });
-        return filteredTasks;
+        return tasks.stream().filter(task -> task.getContent().contains(keyword)).collect(Collectors.toList());
     }
 
     public List<Task> findTasksByDate(LocalDate queryDate) {
