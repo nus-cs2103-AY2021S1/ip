@@ -55,8 +55,10 @@ public class TaskList {
      */
     public String finder(String str) {
         assert this.list.size() >= 1 : "The current TaskList is Empty";
+
         String result = "";
         int counter = 1;
+
         for (Task task : this.list) {
             if (task.getDescription().contains(str)) {
                 result = result + counter + ". [" + task.getType() + "]["
@@ -64,9 +66,11 @@ public class TaskList {
                 counter++;
             }
         }
+
         if (counter == 1) {
             result = "There are no tasks that match your search!";
         }
+
         return result;
     }
 }

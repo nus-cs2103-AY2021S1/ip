@@ -18,19 +18,25 @@ public class Ui {
      * @throws ClassNotFoundException
      */
     public void start(Storage storage) throws DukeException, IOException, ClassNotFoundException {
+
+        //Start the Scanner for user input.
         Scanner scan = new Scanner(System.in);
+
         String intro = "-------------------------\n"
                 + "Hello! I'm Duke\n"
                 + "What can I do for you?\n"
                 + "-------------------------";
         System.out.println(intro);
+
         String next = scan.nextLine();
         Storage store = storage;
         TaskList tasks = new TaskList(store.load());
         Parser parser = new Parser(tasks);
+
         while (next != null) {
             assert next.contains("todo") | next.contains("deadline")
                     | next.contains("event") : "Please provide a valid keyword";
+
             if (next.equals("bye")) {
                 System.out.println("-------------------------");
                 System.out.println("Bye. Hope to see you again soon!");
@@ -39,11 +45,9 @@ public class Ui {
                 Storage.store(tasks.getList());
                 break;
             }
+
             parser.parse(next);
             next = scan.nextLine();
         }
     }
-
-
 }
-

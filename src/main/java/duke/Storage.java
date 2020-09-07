@@ -30,7 +30,9 @@ public class Storage {
      * @throws ClassNotFoundException
      */
     public ArrayList<Task> load() throws IOException, ClassNotFoundException {
+
         ArrayList<Task> store = new ArrayList<Task>();
+
         try {
             Path relativePath = Paths.get(filename);
             Path absolutePath = relativePath.toAbsolutePath();
@@ -47,6 +49,7 @@ public class Storage {
             yourFile.createNewFile();
             FileOutputStream oFile = new FileOutputStream(yourFile, false);
         }
+
         return store;
     }
 

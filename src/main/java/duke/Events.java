@@ -39,7 +39,6 @@ public class Events extends Task {
     public void setDateTime() {
         int index = this.start.indexOf(" ");
         String dateTemp = this.start.substring(0, index);
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd");
         LocalDate date = LocalDate.parse(dateTemp);
         this.date = date;
     }

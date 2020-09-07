@@ -2,7 +2,6 @@ package duke;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
@@ -28,7 +27,7 @@ public class Parser {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public void parse(String str) throws DukeException, IOException, ClassNotFoundException {
+    public void parse(String str) throws DukeException, IOException {
 
         ArrayList<Task> store = this.tasks.getList();
 
@@ -38,6 +37,8 @@ public class Parser {
 
         while (str != null) {
             if (str.equals("list")) {
+
+                //Counter to keep track of the index of the Tasks.
                 int counter = 1;
                 System.out.println("-------------------------");
                 for (Task task : store) {
@@ -53,9 +54,14 @@ public class Parser {
                 if (str.length() == 4) {
                     throw new DukeException("\u2639 OOPS!!! Please state what task has been completed.");
                 }
+
+                //To get the index of the corresponding task after they keyword "done".
                 int num = Integer.parseInt(str.substring(5)) - 1;
+
+                //Store the current Task to the TaskList after marking as done.
                 Task curr = store.get(num);
                 curr.markAsDone();
+
                 System.out.println("-------------------------");
                 System.out.println("Nice! I've marked this task as done:");
                 System.out.println("  [" + curr.getStatusIcon() + "] " + curr.getDescription());
@@ -66,19 +72,27 @@ public class Parser {
                     if (str.length() == 4) {
                         throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
                     }
-                    ToDos curr = new ToDos(str.substring(5));
+
+                    //The description of the Task occurs after the 5th String index.
+                    String description = str.substring(5);
+
+                    //Add the Task to the TaskList.
+                    ToDos curr = new ToDos(description);
                     store.add(curr);
+
                     System.out.println("-------------------------");
                     System.out.println("Got it. I've added this task:");
                     System.out.println("  [" + curr.getType() + "][" + curr.getStatusIcon() + "] "
                             + curr.getDescription());
                     System.out.println("Now you have " + store.size() + " tasks in the list.");
                     System.out.println("-------------------------");
+
                     Path relativePath = Paths.get("duke.txt");
                     Path absolutePath = relativePath.toAbsolutePath();
                     BufferedWriter writer = new BufferedWriter(new FileWriter("" + absolutePath));
                     writer.append('\n');
                     StringBuilder result = new StringBuilder("");
+
                     for (Task task : store) {
                         if (task.getDescription() != null) {
                             result.append("[" + task.getType() + "]"
@@ -86,22 +100,29 @@ public class Parser {
                             result.append("\n");
                         }
                     }
+
                     writer.append(result);
                     writer.close();
                     break;
                 } catch (IOException e) {
                     File yourFile = new File("duke.txt");
                     yourFile.createNewFile();
-                    FileOutputStream oFile = new FileOutputStream(yourFile, false);
                 }
             } else if (str.contains("deadline")) {
                 try {
+
+                    //The description of the Task is given after the 9th String index.
                     Deadlines curr = new Deadlines(str.substring(9));
                     String description = curr.getDescription();
+
+                    //To get the index of the beginning of the deadline.
                     int index = description.indexOf("/") + 4;
                     curr.setDeadline(description.substring(index));
                     curr.setDateTime();
+
+                    //Add the current Task to the TaskList.
                     store.add(curr);
+
                     System.out.println("-------------------------");
                     System.out.println("Got it. I've added this task:");
                     System.out.println("  [" + curr.getType() + "][" + curr.getStatusIcon() + "] "
@@ -109,11 +130,13 @@ public class Parser {
                             + "(by: " + curr.getDeadline() + ")");
                     System.out.println("Now you have " + store.size() + " tasks in the list.");
                     System.out.println("-------------------------");
+
                     Path relativePath = Paths.get("duke.txt");
                     Path absolutePath = relativePath.toAbsolutePath();
                     BufferedWriter writer = new BufferedWriter(new FileWriter("" + absolutePath));
                     writer.append('\n');
                     StringBuilder result = new StringBuilder("");
+
                     for (Task task : store) {
                         if (task.getDescription() != null) {
                             result.append("[" + task.getType() + "]"
@@ -121,6 +144,8 @@ public class Parser {
                             result.append("\n");
                         }
                     }
+
+                    //Write to the duke.txt save file.
                     writer.append(result);
                     writer.close();
                     break;
@@ -133,10 +158,15 @@ public class Parser {
                 try {
                     Events curr = new Events(str.substring(6));
                     String description = curr.getDescription();
+
+                    //To get the index of the description after the keyword "event".
                     int index = description.indexOf("/") + 4;
                     curr.setStart(description.substring(index));
                     curr.setDateTime();
+
+                    //Add the current task to the TaskList.
                     store.add(curr);
+
                     System.out.println("-------------------------");
                     System.out.println("Got it. I've added this task:");
                     System.out.println("  [" + curr.getType() + "][" + curr.getStatusIcon() + "] "
@@ -144,11 +174,13 @@ public class Parser {
                             + "(at: " + curr.getStart() + ")");
                     System.out.println("Now you have " + store.size() + " tasks in the list.");
                     System.out.println("-------------------------");
+
                     Path relativePath = Paths.get("data/duke.txt");
                     Path absolutePath = relativePath.toAbsolutePath();
                     BufferedWriter writer = new BufferedWriter(new FileWriter("" + absolutePath));
                     writer.append('\n');
                     StringBuilder result = new StringBuilder("");
+
                     for (Task task : store) {
                         if (task.getDescription() != null) {
                             result.append("[" + task.getType() + "]" + "[" + task.getStatusIcon()
@@ -156,6 +188,7 @@ public class Parser {
                             result.append("\n");
                         }
                     }
+
                     writer.append(result);
                     writer.close();
                     break;
@@ -168,9 +201,14 @@ public class Parser {
                 if (str.length() == 6) {
                     throw new DukeException("\u2639 OOPS!!! Please specify what task to delete.");
                 }
+
+                //To get the index of the corresponding Task to delete.
                 int num = Integer.parseInt(str.substring(7)) - 1;
                 Task curr = store.get(num);
+
+                //Remove the Task from the TaskList.
                 store.remove(curr);
+
                 System.out.println("-------------------------");
                 System.out.println("Noted! I've removed this task:");
                 System.out.println(curr);
@@ -179,6 +217,8 @@ public class Parser {
                 break;
             } else if (str.contains("find")) {
                 TaskList tasks = new TaskList(store);
+
+                //The keyword to find appears after the space.
                 int index = str.indexOf(" ") + 1;
                 String query = str.substring(index);
                 tasks.find(query);
@@ -196,14 +236,14 @@ public class Parser {
     }
 
     /**
-     * Returns the result string after parsing.
+     * Returns the result string after parsing, same logic as parse.
      * @param str
      * @return the result string
      * @throws DukeException
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public String parseStr(String str) throws DukeException, IOException, ClassNotFoundException {
+    public String parseStr(String str) throws DukeException, IOException {
 
         ArrayList<Task> store = this.tasks.getList();
         String result = "";
@@ -215,6 +255,7 @@ public class Parser {
         while (str != null) {
             if (str.equals("list")) {
                 int counter = 1;
+
                 for (Task task : store) {
                     if (task.getDescription() != null) {
                         result = result + counter + ". [" + task.getType()
@@ -222,11 +263,13 @@ public class Parser {
                         counter++;
                     }
                 }
+
                 return result;
             } else if (str.contains("done")) {
                 if (str.length() == 4) {
                     throw new DukeException("\u2639 OOPS!!! Please state what task has been completed.");
                 }
+
                 int num = Integer.parseInt(str.substring(5)) - 1;
                 Task curr = store.get(num);
                 curr.markAsDone();
@@ -238,16 +281,20 @@ public class Parser {
                     if (str.length() == 4) {
                         throw new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty.");
                     }
+
                     ToDos curr = new ToDos(str.substring(5));
                     store.add(curr);
+
                     result = result + "Got it. I've added this task:\n";
                     result = result + "  [" + curr.getType() + "][" + curr.getStatusIcon() + "] "
                             + curr.getDescription() + "\n";
                     result = result + "Now you have " + store.size() + " tasks in the list.\n";
+
                     Path relativePath = Paths.get("duke.txt");
                     Path absolutePath = relativePath.toAbsolutePath();
                     BufferedWriter writer = new BufferedWriter(new FileWriter("" + absolutePath));
                     writer.append('\n');
+
                     StringBuilder res = new StringBuilder("");
                     for (Task task : store) {
                         if (task.getDescription() != null) {
@@ -256,6 +303,7 @@ public class Parser {
                             res.append("\n");
                         }
                     }
+
                     writer.append(res);
                     writer.close();
                     return result;
@@ -271,16 +319,20 @@ public class Parser {
                     curr.setDeadline(description.substring(index));
                     curr.setDateTime();
                     store.add(curr);
+
                     result = result + "Got it. I've added this task:\n";
                     result = result + "  [" + curr.getType() + "][" + curr.getStatusIcon() + "] "
                             + curr.getDescription().substring(0, description.indexOf("/"))
                             + "(by: " + curr.getDeadline() + ")" + "\n";
                     result = result + "Now you have " + store.size() + " tasks in the list.\n";
+
                     Path relativePath = Paths.get("duke.txt");
                     Path absolutePath = relativePath.toAbsolutePath();
+
                     BufferedWriter writer = new BufferedWriter(new FileWriter("" + absolutePath));
                     writer.append('\n');
                     StringBuilder res = new StringBuilder("");
+
                     for (Task task : store) {
                         if (task.getDescription() != null) {
                             res.append("[" + task.getType() + "]"
@@ -288,6 +340,7 @@ public class Parser {
                             res.append("\n");
                         }
                     }
+
                     writer.append(res);
                     writer.close();
                     return result;
@@ -301,18 +354,22 @@ public class Parser {
                     Events curr = new Events(str.substring(6));
                     String description = curr.getDescription();
                     int index = description.indexOf("/") + 4;
+
                     curr.setStart(description.substring(index));
                     curr.setDateTime();
                     store.add(curr);
+
                     result = result + "Got it. I've added this task:\n";
                     result = result + "  [" + curr.getType() + "][" + curr.getStatusIcon() + "] "
                             + curr.getDescription().substring(0, description.indexOf("/"))
                             + "(at: " + curr.getStart() + ")\n";
                     result = result + "Now you have " + store.size() + " tasks in the list.\n";
+
                     Path relativePath = Paths.get("data/duke.txt");
                     Path absolutePath = relativePath.toAbsolutePath();
                     BufferedWriter writer = new BufferedWriter(new FileWriter("" + absolutePath));
                     writer.append('\n');
+
                     StringBuilder res = new StringBuilder("");
                     for (Task task : store) {
                         if (task.getDescription() != null) {
@@ -321,6 +378,7 @@ public class Parser {
                             res.append("\n");
                         }
                     }
+
                     writer.append(res);
                     writer.close();
                     return result;
@@ -330,13 +388,16 @@ public class Parser {
                     break;
                 }
             } else if (str.contains("delete")) {
+
                 assert store.size() > 0 : "There are already no tasks!";
+
                 if (str.length() == 6) {
                     throw new DukeException("\u2639 OOPS!!! Please specify what task to delete.");
                 }
                 int num = Integer.parseInt(str.substring(7)) - 1;
                 Task curr = store.get(num);
                 store.remove(curr);
+
                 result = result + "Noted! I've removed this task:\n";
                 result = result + curr.toString() + "\n";
                 result = result + "Now you have " + store.size() + " tasks in the list.\n";
