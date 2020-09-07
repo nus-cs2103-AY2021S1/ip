@@ -6,34 +6,49 @@ package duke.task;
 public class Task {
     static final String SYMBOL = "T";
     protected String title;
-    protected boolean complete;
+    protected boolean isComplete;
+    protected String[] tags;
 
     /**
      * Constructor of Task class.
      *
      * @param title Title of task.
      */
-    public Task(String title) {
+    public Task(String title, String[] tags) {
         this.title = title;
-        this.complete = false;
+        this.isComplete = false;
+        this.tags = tags;
     }
 
     /**
-     * Overloads constructor of Task class.
+     * Overloads constructor of Task class. Only used to read data from .txt file.
      *
      * @param title      Title of task.
      * @param isComplete Boolean to represent completion status of task.
      */
-    public Task(String title, boolean isComplete) {
+    public Task(String title, boolean isComplete, String[] tags) {
         this.title = title;
-        this.complete = isComplete;
+        this.isComplete = isComplete;
+        this.tags = tags;
     }
 
     /**
      * Completes this task.
      */
     public void complete() {
-        this.complete = true;
+        this.isComplete = true;
+    }
+
+    protected String convertTagsToString(String separator) {
+        String res = "";
+        for (int i = 0; i < tags.length; i++) {
+            if (i == tags.length - 1) {
+                res += String.format("%s", tags[i]);
+            } else {
+                res += String.format("%s%s", tags[i], separator);
+            }
+        }
+        return res;
     }
 
     /**
@@ -42,8 +57,8 @@ public class Task {
      * @return String describing the task.
      */
     public String getSaveString() {
-        int completeSymbol = this.complete ? 1 : 0;
-        return String.format("%s|%d|%s", SYMBOL, completeSymbol, this.title);
+        int completeSymbol = this.isComplete ? 1 : 0;
+        return String.format("%s|%d|%s|%s", SYMBOL, completeSymbol, title, convertTagsToString("/"));
     }
 
     /**
@@ -53,7 +68,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        String completeSymbol = this.complete ? "[/]" : "[X]";
-        return String.format("[%s]%s %s", SYMBOL, completeSymbol, this.title);
+        String completeSymbol = this.isComplete ? "[/]" : "[X]";
+        return String.format("[%s]%s %s %s", SYMBOL, completeSymbol, title, convertTagsToString(""));
     }
 }

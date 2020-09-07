@@ -24,16 +24,11 @@ public class Storage {
     static final String HOME = System.getProperty("user.home");
     static final Path DIR = Paths.get(HOME, "data");
     static final Path PATH = Paths.get(HOME, "data", "iPStore.txt");
-    static final String IO_MESSAGE = "Sorry! There was an IOException! Initialising with an empty Tasklist!";
-    static final String INVALID_MESSAGE = "Sorry! There was an error in reading your data! "
-            +
-            "Initialising with a semi-complete Tasklist!";
 
     /**
      * Constructor for Storage class.
      */
-    public Storage() {
-    }
+    public Storage() {}
 
     /**
      * Combines all tasks into 1 long string separated by newlines.
@@ -50,6 +45,10 @@ public class Storage {
         return res;
     }
 
+    private String[] retrieveTags(String input) {
+        return input.split("/");
+    }
+
     /**
      * Converts string to a task.
      *
@@ -59,19 +58,23 @@ public class Storage {
      */
     Task stringToTask(String str) throws InvalidTypeException, InvalidDataException {
         String[] info = str.split("\\|");
-        if (info.length < 3) {
+        if (info.length < 4) {
             throw new InvalidDataException();
         }
         boolean isComplete = info[1].equals("1");
+        String[] tags;
         switch (info[0]) {
         case "T":
-            return new Todo(info[2], isComplete);
+            tags = retrieveTags(info[3]);
+            return new Todo(info[2], isComplete, tags);
         case "D":
             assert info.length >= 4;
-            return new Deadline(info[2], isComplete, info[3]);
+            tags = retrieveTags(info[4]);
+            return new Deadline(info[2], isComplete, info[3], tags);
         case "E":
             assert info.length >= 4;
-            return new Event(info[2], isComplete, info[3]);
+            tags = retrieveTags(info[4]);
+            return new Event(info[2], isComplete, info[3], tags);
         default:
             throw new InvalidTypeException();
         }
