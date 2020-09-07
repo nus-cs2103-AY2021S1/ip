@@ -33,9 +33,11 @@ public class Parser {
         } else if (command.equals(UserCommand.TODO.getCommand())
                 || command.equals(UserCommand.T.getCommand())) {
             return new AddToDoCommand(parsedCommand);
-        } else if (command.equals(UserCommand.DEADLINE.getCommand())) {
+        } else if (command.equals(UserCommand.DEADLINE.getCommand())
+                || command.equals(UserCommand.D.getCommand())) {
             return new AddDeadlineCommand(parsedCommand);
-        } else if (command.equals(UserCommand.EVENT.getCommand())) {
+        } else if (command.equals(UserCommand.EVENT.getCommand())
+                || command.equals(UserCommand.E.getCommand())) {
             return new AddEventCommand(parsedCommand);
         } else if (command.equals(UserCommand.DELETE.getCommand())) {
             return new DeleteCommand(parsedCommand);
