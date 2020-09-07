@@ -9,8 +9,7 @@ import java.util.Scanner;
 
 /** This class deals with messages sent to the user. */
 public class Ui {
-    private Scanner sc = new Scanner(System.in);
-
+    
     /** The message to be sent to the user through the GUI. */
     private String message;
 
@@ -54,6 +53,8 @@ public class Ui {
      */
     public void saveFindMessage(TaskList taskList, String keyword) {
         int i = 1;
+        assert i >= 0 : "index of taskList must be greater or equal to zero";
+        assert i < taskList.size() : "index of taskList must be less than size of taskList";
         StringBuilder sb = new StringBuilder();
 
         for (Task t : taskList.getList()) {
@@ -71,6 +72,7 @@ public class Ui {
      * @param task The task marked as done.
      */
     public void saveDoneMessage(Task task) {
+        assert task != null : "task cannot be null";
         this.message = "Nice! I've marked this task as done:\n\t" + task;
     }
 
@@ -80,6 +82,7 @@ public class Ui {
      * @param task The deleted task.
      */
     public void saveDeleteMessage(Task task) {
+        assert task != null : "task cannot be null";
         this.message = "Noted. I've removed this task:\n\t" + task;
     }
 
@@ -90,6 +93,7 @@ public class Ui {
      * @param size The size of the TaskList.
      */
     public void saveAddMessage(Task task, int size) {
+        assert task != null : "task cannot be null";
         this.message = "Got it. I've added this task:\n\t" + task + "\n"
                 + "Now you have " + size + " tasks in the list";
     }
