@@ -29,6 +29,7 @@ public class Parser {
 
         if (command.equals("list")) {
             if (tasks.length() > 0) {
+                assert tasks.length() == 0;
                 result = "Here's your list!\n" + ui.showTaskList(tasks);
             } else {
                 result = "You have no tasks!";
@@ -87,6 +88,7 @@ public class Parser {
         if (tasksWithKeyword.length() > 0) {
             return ui.showFoundKeyword() + "\n" + ui.showTaskList(tasksWithKeyword);
         } else {
+            assert tasksWithKeyword.length() == 0;
             return ui.showCannotFindKeyword();
         }
     }
@@ -108,6 +110,7 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new YooException("Please enter a valid task index (>_<)");
         }
+        return result;
     }
 
     private static String deleteTask(TaskList tasks, String[] cmd, Ui ui) throws YooException {
@@ -126,6 +129,7 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new YooException("Please enter a valid task index (>_<)");
         }
+        return result;
     }
 
     private static String addTodo(TaskList tasks, String[] cmd, Ui ui) {
