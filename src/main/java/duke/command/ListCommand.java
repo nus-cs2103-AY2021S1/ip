@@ -5,7 +5,16 @@ import duke.utils.DukeFileHandler;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
+import java.util.ArrayList;
+
 public class ListCommand extends Command {
+
+    public ListCommand() {
+        aliases = new ArrayList<>();
+        aliases.add("l");
+
+    }
+
     @Override
     public void execute(TaskList tasks, Ui ui, DukeFileHandler fileHandler) throws DukeException {
         if (tasks.isNull()) {

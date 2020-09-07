@@ -5,6 +5,8 @@ import duke.utils.DukeFileHandler;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
+import java.util.ArrayList;
+
 
 public class DeleteCommand extends Command {
     private final int indexEntryToDelete;
@@ -12,6 +14,9 @@ public class DeleteCommand extends Command {
 
     public DeleteCommand(int indexEntryToDelete) {
         this.indexEntryToDelete = indexEntryToDelete;
+        aliases = new ArrayList<>();
+        aliases.add("d");
+
     }
 
 

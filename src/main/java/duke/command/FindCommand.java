@@ -1,5 +1,6 @@
 package duke.command;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import duke.task.Task;
@@ -15,6 +16,9 @@ public class FindCommand extends Command {
 
     public FindCommand(String keyword) {
         this.keyword = keyword;
+        aliases = new ArrayList<>();
+        aliases.add("f");
+
     }
 
 

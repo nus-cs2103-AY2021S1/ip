@@ -6,9 +6,16 @@ import duke.utils.DukeFileHandler;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
+import java.util.ArrayList;
+
 
 public class ExitCommand extends Command {
 
+    public ExitCommand() {
+        aliases = new ArrayList<>();
+        aliases.add("ex");
+
+    }
 
     @Override
     public void execute(TaskList tasks, Ui ui, DukeFileHandler fileHandler) throws DukeException {

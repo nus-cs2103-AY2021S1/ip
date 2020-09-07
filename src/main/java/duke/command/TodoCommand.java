@@ -1,6 +1,7 @@
 package duke.command;
 
 import java.io.IOException;
+import java.util.ArrayList;
 
 import duke.task.Task;
 import duke.utils.DukeException;
@@ -15,6 +16,9 @@ public class TodoCommand extends Command {
 
     public TodoCommand(String description) {
         this.description = description;
+        aliases = new ArrayList<>();
+        aliases.add("t");
+
     }
 
 

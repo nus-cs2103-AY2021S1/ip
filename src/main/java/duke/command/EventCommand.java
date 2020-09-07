@@ -6,6 +6,8 @@ import duke.utils.DukeFileHandler;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
+import java.util.ArrayList;
+
 
 public class EventCommand extends Command {
     private final String description;
@@ -15,6 +17,9 @@ public class EventCommand extends Command {
     public EventCommand(String description, String at) {
         this.description = description;
         this.at = at;
+        aliases = new ArrayList<>();
+        aliases.add("ev");
+
     }
 
 

@@ -5,6 +5,8 @@ import duke.utils.DukeFileHandler;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
+import java.util.ArrayList;
+
 
 public class DoneCommand extends Command {
     private final int indexEntryDone;
@@ -12,6 +14,9 @@ public class DoneCommand extends Command {
 
     public DoneCommand(int indexEntryDone) {
         this.indexEntryDone = indexEntryDone;
+        aliases = new ArrayList<>();
+        aliases.add("d");
+
     }
 
 

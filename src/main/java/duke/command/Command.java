@@ -5,11 +5,16 @@ import duke.utils.DukeFileHandler;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
+import java.util.List;
+
 
 /**
  * Corresponds to commands the users wants to execute.
  */
 public abstract class Command {
+    protected List<String> aliases;
+
+
     /**
      * Uses polymorphism to execute the methods relevant to the Command.
      *
