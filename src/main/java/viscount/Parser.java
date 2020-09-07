@@ -19,9 +19,7 @@ import viscount.command.DoneCommand;
 import viscount.command.ListCommand;
 import viscount.exception.ViscountDateTimeParseException;
 import viscount.exception.ViscountException;
-import viscount.exception.ViscountMissingArgumentDescriptionException;
 import viscount.exception.ViscountMissingArgumentException;
-import viscount.exception.ViscountMissingDescriptionException;
 import viscount.exception.ViscountNumberFormatException;
 import viscount.exception.ViscountUnknownCommandException;
 import viscount.exception.ViscountUnsupportedOperationException;
@@ -164,9 +162,9 @@ public class Parser {
             }
 
             if (taskTypeModifier.equals("todo")) {
-                throw new ViscountUnsupportedOperationException("/on");
+                throw new ViscountUnsupportedOperationException("todo /on");
             } else if (dateString.isEmpty()) {
-                throw new ViscountMissingArgumentDescriptionException("/on");
+                throw new ViscountMissingArgumentException("/on parameter");
             }
         }
 
@@ -193,17 +191,25 @@ public class Parser {
             throw new ViscountMissingArgumentException("task type");
         }
 
-        TaskType taskType = TaskType.valueOf(arguments.get(1).toUpperCase());
+        try {
+            TaskType taskType = TaskType.valueOf(arguments.get(1).toUpperCase());
 
-        switch (taskType) {
-        case TODO:
-            return parseAddTodoCommand(arguments);
-        case DEADLINE:
-            return parseAddDeadlineCommand(arguments);
-        case EVENT:
-            return parseAddEventCommand(arguments);
-        default:
-            throw new ViscountUnsupportedOperationException("task type " + taskType.name());
+            switch (taskType) {
+            case TODO:
+                return parseAddTodoCommand(arguments);
+            case DEADLINE:
+                return parseAddDeadlineCommand(arguments);
+            case EVENT:
+                return parseAddEventCommand(arguments);
+            default:
+                /* Since all possible TaskTypes have been enumerated,
+                 * and exception for incorrect task type input has been handled,
+                 * program will never reach the default block of this switch statement.
+                 */
+                return null;
+            }
+        } catch (IllegalArgumentException e) {
+            throw new ViscountUnknownCommandException(arguments.get(1));
         }
     }
 
@@ -218,7 +224,7 @@ public class Parser {
         String description = String.join(" ", arguments.subList(2, arguments.size()));
 
         if (description.isEmpty()) {
-            throw new ViscountMissingDescriptionException("todo");
+            throw new ViscountMissingArgumentException("todo description");
         }
 
         return new AddCommand(TaskType.TODO, description, null);
@@ -235,18 +241,18 @@ public class Parser {
         int dueDateIndex = arguments.indexOf("/by");
 
         if (dueDateIndex == -1) {
-            throw new ViscountMissingArgumentException("/by");
+            throw new ViscountMissingArgumentException("/by argument");
         }
 
         String description = String.join(" ", arguments.subList(2, dueDateIndex));
         String dueDateString = String.join(" ", arguments.subList(dueDateIndex + 1, arguments.size()));
 
         if (description.isEmpty()) {
-            throw new ViscountMissingDescriptionException("deadline");
+            throw new ViscountMissingArgumentException("deadline description");
         }
 
         if (dueDateString.isEmpty()) {
-            throw new ViscountMissingArgumentDescriptionException("/by");
+            throw new ViscountMissingArgumentException("/by parameter");
         }
 
         try {
@@ -268,18 +274,18 @@ public class Parser {
         int eventTimeIndex = arguments.indexOf("/at");
 
         if (eventTimeIndex == -1) {
-            throw new ViscountMissingArgumentException("/at");
+            throw new ViscountMissingArgumentException("/at argument");
         }
 
         String description = String.join(" ", arguments.subList(2, eventTimeIndex));
         String eventTimeString = String.join(" ", arguments.subList(eventTimeIndex + 1, arguments.size()));
 
         if (description.isEmpty()) {
-            throw new ViscountMissingDescriptionException("event");
+            throw new ViscountMissingArgumentException("event description");
         }
 
         if (eventTimeString.isEmpty()) {
-            throw new ViscountMissingArgumentDescriptionException("/at");
+            throw new ViscountMissingArgumentException("/at parameter");
         }
 
         try {
