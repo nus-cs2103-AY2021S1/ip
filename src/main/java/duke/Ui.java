@@ -13,58 +13,6 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
-    final String LINE = "------------------------";
-
-    /**
-     * Shows the start screen.
-     */
-    public void showStartScreen() {
-        System.out.println(LINE);
-        System.out.println("Hello from\n" + LOGO);
-        System.out.println("Hello! I'm Duke \nWhat can I do for you?");
-        System.out.println(LINE + "\n");
-    }
-
-    /**
-     * Prints out a string with a <code>LINE</code> above and below it.
-     * @param s the string to be printed out
-     */
-    public void print(String s) {
-        System.out.println(LINE);
-        System.out.println(s);  
-        System.out.println(LINE);
-    }
-
-    /**
-     * Shows the interface to ask for a command.
-     */
-    public void askForCommand() {
-        System.out.println(LINE);
-        System.out.println("What is your command?"); 
-        System.out.println(LINE);
-        System.out.print("> ");
-    }
-
-    /**
-     * Shows the interface to display the error.
-     * @param errorMessage the error to be displayed
-     */
-    public void showErrorScreen(String errorMessage) {
-        System.out.println(LINE);
-        System.out.println("Oh no, something went wrong!");
-        System.out.println(errorMessage);
-        System.out.println(LINE);
-    }
-
-    /**
-     * Shows the exit screen.
-     */
-    public void showExitScreen() {
-        System.out.println(LINE);
-        System.out.println("GOODBYE!");
-        System.out.println(LINE);
-    }
-
     /**
      * Shows the interface to ask for the name of a todo.
      */
@@ -129,10 +77,6 @@ public class Ui {
      * task to be deleted.
      */
     public String askTaskNumToDelete() {
-        System.out.println(LINE);
-        System.out.println("What is the number of the task you wish to delete?"); 
-        System.out.println(LINE);
-        System.out.print("> ");
         return "What is the number of the task you wish to delete?";
     }
 
