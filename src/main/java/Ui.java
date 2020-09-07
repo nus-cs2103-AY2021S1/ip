@@ -120,6 +120,7 @@ public class Ui {
      * has been marked as completed.
      */
     public String markDone(int index, TaskList taskList) {
+        assert(index < taskList.size());
         Task task = taskList.getTask(index);
         return LINE + "Nice! I've marked this patty as cooked:" +  "\n" +
                 task.toString() + "\n" + LINE;
@@ -134,6 +135,8 @@ public class Ui {
      * TaskList that matches a specified word.
      */
     public String find(String word, TaskList taskList) {
+        assert(!word.isEmpty());
+        assert(taskList.size() > 0);
         TaskList temp = new TaskList();
         for(int i = 1; i <= taskList.size(); i++) {
             Task task = taskList.getTask(i);
@@ -154,5 +157,4 @@ public class Ui {
         output.append("\n" + LINE);
         return output.toString();
     }
-    
 }
