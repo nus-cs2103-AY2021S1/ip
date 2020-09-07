@@ -8,6 +8,7 @@ public class DukeException extends Exception {
      */
     public DukeException(String errorMessage) {
         super("OH NO!!! :( " + errorMessage);
+        assert errorMessage instanceof String : "Error message has to an instance of a String";
     }
 }
 //☹
