@@ -1,7 +1,6 @@
 package duke.command;
 
 import java.util.ArrayList;
-import java.util.Objects;
 
 import duke.DukeException;
 import duke.Storage;
