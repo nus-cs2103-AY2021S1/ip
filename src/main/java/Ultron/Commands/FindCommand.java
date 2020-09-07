@@ -1,5 +1,8 @@
 package ultron.commands;
 
+import java.util.List;
+import java.util.stream.Collectors;
+
 import ultron.Storage;
 import ultron.TaskList;
 import ultron.exceptions.ExceptionType;
@@ -36,17 +39,20 @@ public class FindCommand extends Command {
         }
         assert getArgument().length() > 0;
         boolean isPrinted = false;
-        int count = 0;
         StringBuilder message = new StringBuilder();
         message.append("Why do you always bothering me?\n");
-        for (Task task : taskList.getTasks()) {
-            if (task.getMessage().contains(getArgument())) {
-                message.append((String.format("%d. %s\n", ++count, task)));
-                isPrinted = true;
-            }
-        }
-        if (!isPrinted) {
+        List<Task> result = taskList.getTasks()
+                .stream()
+                .filter(task -> task.toString()
+                .contains(getArgument()))
+                .collect(Collectors.toList());
+
+        if (result.size() == 0) {
             message.append("There is literally nothing here\n");
+        } else {
+            for (int i = 0; i < result.size(); ++i) {
+                message.append(String.format("%d. %s\n", i + 1, result.get(i)));
+            }
         }
         ui.setMessage(message.toString());
     }
