@@ -195,13 +195,14 @@ public class TaskList {
 
             switch (command) {
             case "name":
-                String updatedName = ls[2];
+                String[] splitName = next.split(" name ");
+                String updatedName = splitName[1];
                 updatedTask = oldTask.updateName(updatedName);
                 storage.add(index, updatedTask);
                 break;
             case "time":
-                String[] split = next.split(" time ");
-                String updatedInput = split[1];
+                String[] splitTime = next.split(" time ");
+                String updatedInput = splitTime[1];
                 String updatedTime = Parser.parseDateTime(updatedInput);
                 if (updatedTime.contains("Please input the time and date in\n")) {
                     return updatedTime;
