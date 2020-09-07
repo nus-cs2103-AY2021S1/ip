@@ -85,11 +85,18 @@ public class Ui {
     }
 
     /**
+<<<<<<< HEAD
+     * Shows the tasks containing certain keywords
+     * @param taskList
+     * @param keyword
+     * @return a string
+=======
      * Shows the tasks containing certain keywords.
      *
      * @param taskList TaskList object.
      * @param keyword Keyword to search for tasks.
      * @return A String of relevant tasks.
+>>>>>>> master
      */
     public String showTask(TaskList taskList, String keyword) {
         ArrayList<Task> tasks = taskList.getTasks();

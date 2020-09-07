@@ -23,6 +23,5 @@ public class ExitCommand extends Command {
         storage.saveFile(tasks);
         String output = ui.displayBye();
         return output;
-
     }
 }

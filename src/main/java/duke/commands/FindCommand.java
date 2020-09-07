@@ -20,7 +20,6 @@ public class FindCommand extends Command {
      * @return a string of all tasks containing the keywords.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-
         String output = ui.showTask(tasks, keyword);
         return output;
     }
