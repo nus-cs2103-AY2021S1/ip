@@ -17,7 +17,6 @@ public class ListCommand extends Command {
         String output = "";
         if (date == null) {
             output = ui.showTask(tasks);
-
         } else {
             output = ui.showTask(tasks, date);
         }

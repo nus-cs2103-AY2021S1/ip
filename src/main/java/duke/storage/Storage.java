@@ -62,7 +62,6 @@ public class Storage {
                     }
                 }
             }
-
             return tasks;
         } catch (IOException ex) {
             throw new PathNoFoundException("No database found... A new database will be initialized!");

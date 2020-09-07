@@ -28,7 +28,6 @@ public class Parser {
         Command command = null;
 
         switch(type) {
-
         case "bye":
             command = new ExitCommand();
             break;
@@ -37,8 +36,12 @@ public class Parser {
                 command = new ListCommand(null);
             } else {
                 String time = parseArray[1];
-                LocalDate date = LocalDate.parse(time);
-                command = new ListCommand(date);
+                try {
+                    LocalDate date = LocalDate.parse(time);
+                    command = new ListCommand(date);
+                } catch(DateTimeParseException ex) {
+                    throw new WrongDateFormatException();
+                }
             }
             break;
         case "done":
@@ -46,8 +49,12 @@ public class Parser {
                 throw new EmptyTaskException();
             } else {
                 String time = parseArray[1];
-                int index = Integer.parseInt(time) - 1;
-                command = new DoneCommand(index);
+                try {
+                    int index = Integer.parseInt(time) - 1;
+                    command = new DoneCommand(index);
+                } catch (NumberFormatException ex) {
+                    throw new EmptyTaskException();
+                }
             }
             break;
         case "find":
@@ -113,16 +120,13 @@ public class Parser {
                     }
                     break;
                 default:
-
+                    throw new AssertionError(type);
                 }
                 break;
             }
         default:
             throw new CommandNotFoundException();
         }
-
         return command;
     }
-
-
 }

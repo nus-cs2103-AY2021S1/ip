@@ -12,7 +12,6 @@ public class FindCommand extends Command {
     }
 
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-
         String output = ui.showTask(tasks, keyword);
         return output;
     }
