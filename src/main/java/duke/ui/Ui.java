@@ -1,9 +1,9 @@
 package duke.ui;
 
-import duke.task.Task;
-import duke.task.ToDo;
-
 import java.util.Scanner;
+
+import duke.task.Task;
+
 
 /**
  * Represents a class that deals with interactions with the user
@@ -45,6 +45,12 @@ public class Ui {
         System.out.println(message);
     }
 
+    /**
+     * Returns the template response for adding new task as a string.
+     * @param task
+     * @param sizeOfTaskList
+     * @return String of the template response after adding a new task.
+     */
     public String showAddTaskResponse(Task task, int sizeOfTaskList) {
         return "    Got it. I've added this task:\n"
                 + "        " + task + '\n'

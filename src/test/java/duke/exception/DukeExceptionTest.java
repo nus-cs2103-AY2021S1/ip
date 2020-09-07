@@ -1,8 +1,9 @@
 package duke.exception;
 
-import duke.task.Task;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+
+import duke.task.Task;
 
 public class DukeExceptionTest {
     @Test

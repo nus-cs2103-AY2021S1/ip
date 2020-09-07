@@ -10,9 +10,8 @@ import duke.ui.Ui;
  * Represents a user command that deletes a task from the task list.
  */
 public class DeleteCommand extends Command {
-    private String userInput;
-
     static final int INDEX_OF_TASK_NUMBER = 7;
+    private String userInput;
 
     public DeleteCommand(String userInput) {
         this.userInput = userInput;

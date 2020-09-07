@@ -1,14 +1,13 @@
 package duke;
 
-import duke.command.ExitCommand;
-import javafx.application.Platform;
-
 import duke.command.Command;
+import duke.command.ExitCommand;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.Ui;
+import javafx.application.Platform;
 
 /**
  * Represents the main class for the Duke application

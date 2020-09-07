@@ -10,10 +10,9 @@ import duke.ui.Ui;
  * Represents a user command that marks the specified task as done.
  */
 public class DoneCommand extends Command {
-    private String userInput;
-
     static final int INDEX_OF_TASK_NUMBER = 5;
     static final String DONE_RESPONSE = "    Nice! I've marked this task as done:\n";
+    private String userInput;
 
     public DoneCommand(String userInput) {
         this.userInput = userInput;

@@ -16,11 +16,11 @@ import duke.task.Task;
  * tasks in the file.
  */
 public class Storage {
-    private String filePath;
-
     static final int INDEX_OF_TASK_TYPE = 0;
     static final int INDEX_OF_DONENESS = 4;
     static final int INDEX_OF_TASK_DESCRIPTION = 8;
+
+    private String filePath;
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -101,7 +101,7 @@ public class Storage {
                 tasksArray.add(t.convertToTodo());
             } else if (t.isDeadline()) {
                 tasksArray.add(t.convertToDeadline());
-            } else if (t.isEvent()){
+            } else if (t.isEvent()) {
                 tasksArray.add(t.convertToEvent());
             }
             assert false;

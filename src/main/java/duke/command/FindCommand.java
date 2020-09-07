@@ -38,6 +38,6 @@ public class FindCommand extends Command {
                 result += "\n    " + (i + 1) + ". " + curr;
             }
         }
-        return  result;
+        return result;
     }
 }

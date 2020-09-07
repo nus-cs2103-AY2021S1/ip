@@ -7,12 +7,12 @@ import duke.exception.DukeException;
  * either a to do, deadline, or event.
  */
 public class Task {
-    protected String description;
-    protected boolean isDone;
-
     static final String CHECKED_ICON = "\u2713";
     static final String UNCHECKED_ICON = "\u2718";
     static final int NUM_CHARS_TO_DATE = 4;
+
+    protected String description;
+    protected boolean isDone;
 
     /**
      * Creates a task with the specified String <code>description</code> and is
