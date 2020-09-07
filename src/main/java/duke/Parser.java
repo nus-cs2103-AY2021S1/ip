@@ -2,7 +2,14 @@ package duke;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
-import duke.commands.*;
+
+import duke.commands.AddCommand;
+import duke.commands.CheckCommand;
+import duke.commands.Command;
+import duke.commands.ErrorCommand;
+import duke.commands.PrintlistCommand;
+import duke.commands.RemoveCommand;
+import duke.commands.SearchCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -23,34 +30,14 @@ public class Parser {
      * recognise user input
      */
     public static Command manage(String input) throws DukeException {
-        //ArrayList<Task> tasks = new ArrayList<>();
         if (input.equals("list")) {
             return new PrintlistCommand();
         } else if (input.contains("check")) {
-            int checkInt;
-            try {
-                String intAtBack = input.substring(6);
-                checkInt = Integer.parseInt(intAtBack);
-                return new CheckCommand(checkInt);
-            } catch (Exception e) {
-                return new ErrorCommand(e.getMessage());
-            }
+            return processCheck(input);
         } else if (input.contains("find")) {
-            assert input.length() > 5 : "You must have a keyword for find!";
-            String keyword = input.substring(5);
-            String[] searchArray = checkCommas(keyword).toArray(new String [0]);
-            return new PrintsearchCommand(searchArray);
-
+            return processSearch(input);
         } else if (input.contains("remove")) {
-            assert input.length() > 6 : "You specify the task id to remove!";
-            int removeInt;
-            try {
-                String intAtBack = input.substring(7);
-                removeInt = Integer.parseInt(intAtBack);
-                return new RemoveCommand(removeInt);
-            } catch (Exception e) {
-                return new ErrorCommand(e.getMessage());
-            }
+            return processRemoval(input);
         } else if (input.contains("todo")) {
             return processTodo(input);
         } else if (input.contains("deadline")) {
@@ -62,7 +49,35 @@ public class Parser {
         }
     }
 
-    public static ArrayList<String> checkCommas(String input) {
+    private static Command processRemoval(String input) {
+        int removeInt;
+        try {
+            String intAtBack = input.substring(7);
+            removeInt = Integer.parseInt(intAtBack);
+            return new RemoveCommand(removeInt);
+        } catch (Exception e) {
+            return new ErrorCommand(e.getMessage());
+        }
+    }
+
+    private static Command processSearch(String input) {
+        String keyword = input.substring(5);
+        String[] searchArray = checkCommas(keyword).toArray(new String [0]);
+        return new SearchCommand(searchArray);
+    }
+
+    private static Command processCheck(String input) {
+        int checkInt;
+        try {
+            String intAtBack = input.substring(6);
+            checkInt = Integer.parseInt(intAtBack);
+            return new CheckCommand(checkInt);
+        } catch (Exception e) {
+            return new ErrorCommand(e.getMessage());
+        }
+    }
+
+    private static ArrayList<String> checkCommas(String input) {
         ArrayList<String> returnArray = new ArrayList<>();
         if (input.contains(",")) {
             int commaIndex = input.indexOf(",");
@@ -97,8 +112,7 @@ public class Parser {
                 throw new DukeException("Oh no, you do not have a planned timing for your event!");
             } else if (input.contains("/")) {
                 eventTasks.add(new Event(parseDate(s, "on")));
-            }
-            else {
+            } else {
                 eventTasks.add(new Event(s));
             }
         }
@@ -116,8 +130,7 @@ public class Parser {
                 throw new DukeException("Oh no, you do not have a planned timing for your deadline!");
             } else if (input.contains("/")) {
                 eventTasks.add(new Deadline(parseDate(s, "by")));
-            }
-            else {
+            } else {
                 eventTasks.add(new Deadline(s));
             }
         }
@@ -133,53 +146,13 @@ public class Parser {
             String time = input.substring(byPos);
             try {
                 String parsedTime = formatDate(time);
-                String listForm = input.substring(0, notePos - 1)
+                return input.substring(0, notePos - 1)
                         + keyword + " " + parsedTime;
-                return listForm;
             } catch (Exception e) {
                 return echo;
             }
         } else {
             return echo;
-        }
-    }
-
-    private static Command parseDate(String taskType, String input, String keyword) {
-        int notePos = input.indexOf("/") + 1;
-        String note = input.substring(notePos);
-        String echo = input.substring(taskType.length() + 1, notePos - 1) + " ------> " + note;
-        ArrayList<Task> tasks = new ArrayList<>();
-        if (input.contains(keyword)) {
-            int byPos = input.indexOf(keyword) + 3;
-            String time = input.substring(byPos);
-            try {
-                String parsedTime = formatDate(time);
-                String listForm = input.substring(taskType.length() + 1, notePos - 1)
-                        + keyword + " " + parsedTime;
-                if (taskType == "event") {
-                    tasks.add(new Event(listForm));
-                    return new AddCommand(tasks.toArray(new Task[0]));
-                } else {
-                    tasks.add(new Deadline(listForm));
-                    return new AddCommand(tasks.toArray(new Task[0]));
-                }
-            } catch (Exception e) {
-                if (taskType == "event") {
-                    tasks.add(new Event(echo));
-                    return new AddCommand(tasks.toArray(new Task[0]));
-                } else {
-                    tasks.add(new Deadline(echo));
-                    return new AddCommand(tasks.toArray(new Task[0]));
-                }
-            }
-        } else {
-            if (taskType == "event") {
-                tasks.add(new Event(echo));
-                return new AddCommand(tasks.toArray(new Task[0]));
-            } else {
-                tasks.add(new Deadline(echo));
-                return new AddCommand(tasks.toArray(new Task[0]));
-            }
         }
     }
 

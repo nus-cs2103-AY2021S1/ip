@@ -5,9 +5,16 @@ import duke.Storage;
 import duke.Ui;
 import duke.task.TaskList;
 
+/**
+ * Encapusulates a Command to remove a task from the Task List.
+ */
 public class RemoveCommand extends Command {
     final int removeInt;
 
+    /**
+     * Initializes a RemoveCommand instance.
+     * @param removeInt Int input that represents the Task to be removed.
+     */
     public RemoveCommand(int removeInt) {
         this.removeInt = removeInt;
     }

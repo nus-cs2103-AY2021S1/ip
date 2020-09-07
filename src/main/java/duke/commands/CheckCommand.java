@@ -5,8 +5,16 @@ import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * Encapsulates a Command to check a task off the Task list.
+ */
 public class CheckCommand extends Command {
     final int checkInt;
+
+    /**
+     * Initializes instance of CheckCommand.
+     * @param checkInt Int input to indicate task to be checked off the Task List.
+     */
     public CheckCommand(int checkInt) {
         assert checkInt > 0 : "Task number provided cannot be less than 1!";
         this.checkInt = checkInt;
