@@ -35,12 +35,22 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Sets the Duke object for the MainWindow
+     * Sets the duke object for the MainWindow controller
      *
-     * @param d The Duke object to be set
+     * @param d The Duke object
+>>>>>>> master
      */
     public void setDuke(Duke d) {
         duke = d;
+    }
+
+    /**
+     * Duke sends his regards in the chat.
+     */
+    public void printOpeningMessage() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(duke.getWelcomeMessage(), dukeImage)
+        );
     }
 
     /**

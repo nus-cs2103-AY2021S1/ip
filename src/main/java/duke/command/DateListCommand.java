@@ -33,6 +33,7 @@ public class DateListCommand extends Command {
      */
     @Override
     public CommandResult execute(TaskList taskList, Storage storage) throws DukeException {
+        assert taskList != null && storage != null;
         StringBuilder stringBuilder = new StringBuilder();
         int numberOfTasksFound = 0;
         stringBuilder.append("Here are the tasks with the date: " + localDate.toString() + "\n");

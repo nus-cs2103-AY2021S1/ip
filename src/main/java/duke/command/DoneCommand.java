@@ -28,6 +28,7 @@ public class DoneCommand extends Command {
      */
     @Override
     public CommandResult execute(TaskList taskList, Storage storage) throws DukeException {
+        assert taskList != null && storage != null;
         Task taskToSetDone = taskList.getTask(indexOfTask);
         taskList.setTaskDone(indexOfTask);
         storage.updateStorage(taskList);

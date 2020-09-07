@@ -35,6 +35,7 @@ public class CommandResult {
      * @return The string for the user to see
      */
     public String getFeedbackToUser() {
+        assert feedbackToUser != null;
         return feedbackToUser;
     }
 }
