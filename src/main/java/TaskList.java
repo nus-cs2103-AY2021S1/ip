@@ -1,3 +1,4 @@
+import java.io.IOException;
 import java.util.ArrayList;
 
 /**
@@ -25,62 +26,41 @@ public class TaskList {
     }
 
     /**
-     * Prints the list of tasks in order.
      *
-     * @param ui A Ui object.
      */
-    public String printList(Ui ui) {
+    public String getList(Ui ui) {
         if (tasks.size() == 0) {
-            String currentlyEmpty = "Your task list is currently empty.";
-            ui.say(currentlyEmpty);
-            return currentlyEmpty;
+            return ui.sayCurrentListIsEmpty();
         }
         else {
-            String currentList = "Here is your task list.";
-            ui.say(currentList);
-            currentList += "\n";
+            String currentList = "";
             int count = 1;
             for (Task task : tasks) {
                 currentList += count + ". " + task + "\n";
                 count++;
             }
-            System.out.println(currentList);
-            return currentList;
+            return ui.sayCurrentList(currentList);
         }
     }
 
     /**
-     * Marks the (number - 1)th task in the list as done.
      *
-     * @param number Task number.
-     * @param ui A Ui object.
      */
-    public String markTaskDone(int number, Ui ui) {
-        Task task = tasks.get(number - 1);
+    public String markTaskDone(Ui ui, int taskNumber, Storage storage) throws IOException {
+        Task task = tasks.get(taskNumber - 1);
         task.markDone();
-        String markedDone = "I have marked it as done!";
-        ui.say(markedDone);
-        markedDone += "\n" + task;
-        System.out.println(task);
-        return markedDone;
+        storage.writeFile(this);
+        return ui.sayMarkedAsDone(task);
     }
 
     /**
-     * Deletes the (number - 1)th task in the list.
      *
-     * @param number Task number.
-     * @param ui A Ui object.
      */
-    public String deleteTask(int number, Ui ui) {
-        Task task = tasks.get(number - 1);
-        tasks.remove(number - 1);
-        String deletedTask = "I have deleted this task!";
-        ui.say(deletedTask);
-        deletedTask += "\n" + task + "\n";
-        System.out.println(task);
-        String currentSize = "You have " + getListSize() + " items in your task list now.";
-        ui.say(currentSize);
-        return deletedTask + currentSize;
+    public String deleteTask(Ui ui, int taskNumber, Storage storage) throws IOException {
+        Task task = tasks.get(taskNumber - 1);
+        tasks.remove(taskNumber - 1);
+        storage.writeFile(this);
+        return ui.sayDeletedTask(task, getListSize());
     }
 
     /**
@@ -89,42 +69,33 @@ public class TaskList {
      * @param task The Task to be added.
      * @param ui A Ui object.
      */
-    public String addTask(Task task, Ui ui) {
+    public String addTask(Task task, Ui ui, Storage storage) throws IOException {
         tasks.add(task);
-        String addedTask = "You have " + getListSize() + " items in your task list now.";
-        ui.say(addedTask);
-        return addedTask;
+        storage.writeFile(this);
+        return ui.sayAddedTask(task, getListSize());
     }
 
     /**
-     * Finds a task that matches the String body parameter.
      *
-     * @param body String to search for.
-     * @param ui A Ui object.
      */
-    public String findTask(String body, Ui ui) {
+    public String findTask(Ui ui, String[] parsedInput) {
         if (tasks.size() > 0) {
-            String matchingTasks = "Here are the matching tasks in your list:";
-            ui.say(matchingTasks);
-            matchingTasks += "\n";
+            String body = parsedInput[1];
+            String foundTasks = "";
             boolean noneFound = true;
             for (Task task : tasks) {
                 if (task.toString().contains(body)) {
-                    matchingTasks += task + "\n";
-                    System.out.println(task);
+                    foundTasks += task + "\n";
                     noneFound = false;
                 }
             }
-            if (noneFound) {
-                String noMatching = "No matching tasks";
-                ui.say(noMatching);
-                return noMatching;
+            if (!noneFound) {
+                return ui.sayFoundTasks(foundTasks);
+            } else {
+                return ui.sayNoMatchingFileFound();
             }
-            return matchingTasks;
         } else {
-            String noTasks = "You have no tasks yet.";
-            ui.say(noTasks);
-            return noTasks;
+            return ui.sayCurrentListIsEmpty();
         }
     }
 

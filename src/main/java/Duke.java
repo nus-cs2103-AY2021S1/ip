@@ -5,7 +5,7 @@ import java.io.IOException;
  * The main Duke class.
  */
 public class Duke {
-    private static final String FILEPATH = "data/duke.txt";
+    private static final String FILEPATH = "data/tasks.txt";
 
     private Ui ui;
     private TaskList tasks;
@@ -21,26 +21,25 @@ public class Duke {
         try {
             this.tasks = new TaskList(storage.loadFile());
         } catch (FileNotFoundException | DukeException e) {
-            ui.getError(e);
-            ui.say("It seems like you have no saved files! Creating one now...");
+            ui.sayErrorMessage(e);
+            ui.informFileNotFound();
             this.tasks = new TaskList();
         }
     }
 
     private void run() {
-        ui.greet();
+        ui.sayGreetings();
         boolean isBye = false;
         while (!isBye) {
-            String input = ui.receiveInput();
+            String userInput = ui.receiveUserInput();
             try {
-                Parser.parseInput(input, ui, tasks, storage);
+                Parser.parseInput(userInput, ui, tasks, storage);
             } catch (DukeException | IOException e) {
-                ui.getError(e);
+                ui.sayErrorMessage(e);
             } finally {
-                isBye = Parser.isBye(input);
+                isBye = Parser.isBye(userInput);
             }
         }
-        ui.goodbye();
     }
 
     public String getResponse(String input) {
