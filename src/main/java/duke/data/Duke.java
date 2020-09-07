@@ -70,14 +70,14 @@ public class Duke {
      * @return True if the list contains the task
      */
     public boolean containsTask(Task task) {
-        return taskList.contains(task);
+        return taskList.doesContain(task);
     }
 
     /**
      * Removes the equivalent task from the task list.
      *
      * @param index index of the task to be removed
-     * @throws TaskNotFoundException task cannot be found
+     * @throws TaskNotFoundException task cannot be found back to {@code DeleteCommand}
      */
     public void removeTask(int index) throws TaskNotFoundException {
         taskList.remove(index - 1);
@@ -98,9 +98,11 @@ public class Duke {
      */
     @Override
     public boolean equals(Object other) {
-        return other == this // short circuit if same object
-                || (other instanceof Duke // instanceof handles nulls
-                        && this.taskList.equals(((Duke) other).taskList));
+        boolean sameObject = other == this; // short circuit if same object
+        boolean isSameInstance = other instanceof Duke; // instanceof handles nulls
+        TaskList otherTaskList = ((Duke) other).taskList;
+        boolean isEqual = this.taskList.equals(otherTaskList);
+        return sameObject || isSameInstance && isEqual;
     }
 
     /**
@@ -110,7 +112,7 @@ public class Duke {
      * @return return a response to the user
      * @throws StorageOperationException error occur when executing storage operation
      */
-    public String getResponse(String input) throws StorageOperationException {
+    public String getResponse(String input) {
         Command command = new Parser().parseCommand(input);
         return executeCommand(command).getFeedbackToUser();
     }
@@ -119,11 +121,14 @@ public class Duke {
      * Executes the command
      * @return a command result which result from the command executed
      */
-    private CommandResult executeCommand(Command command)
-            throws StorageOperationException {
+    private CommandResult executeCommand(Command command) {
         command.setData(this);
         CommandResult result = command.execute();
-        storageFile.save(this);
+        try {
+            storageFile.save(this);
+        } catch (StorageOperationException e) {
+            return new CommandResult("Could not save the file");
+        }
         return result;
     }
 }
