@@ -5,11 +5,13 @@ import chatbot.common.Message;
 import chatbot.common.Type;
 import chatbot.data.Deadline;
 import chatbot.data.Event;
+import chatbot.data.Task;
 import chatbot.data.Todo;
 import chatbot.exception.ChatbotException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.function.Predicate;
 
 /**
  * A class that parses the command input given by the user.
@@ -21,11 +23,12 @@ public class Parser {
      * Parses the user input and returns an executable command.
      * @param fullCmd the user input
      * @return command matching the user input
-     * @throws ChatbotException
+     * @throws ChatbotException if command is invalid
      */
     public static Command parse(String fullCmd) throws ChatbotException {
 
         Type type;
+        Command invalidCommand = new InvalidCommand();
 
         // parse out the type of command
         String text = fullCmd.trim();
@@ -38,36 +41,48 @@ public class Parser {
         try {
             type = Type.valueOf(typeStr.toUpperCase());
         } catch (IllegalArgumentException e) {
-            return new InvalidCommand();
+            return invalidCommand;
         }
 
-        boolean isShowAll = type == Type.LIST;
-        boolean isFindByDate = type == Type.DATE;
-        boolean isAddTodo = type == Type.TODO;
-        boolean isAddDeadline = type == Type.DEADLINE;
-        boolean isAddEvent = type == Type.EVENT;
-        boolean isAction = type == Type.DELETE || type == Type.DONE;
-        boolean isFind = type == Type.FIND;
-        boolean isExit = type == Type.BYE;
+        switch (type) {
+            case BYE:
+                return new ExitCommand();
+            case DATE:
+                return parseFindByDateCommand(arguments);
+            case DELETE:
+                return parseDeleteCommand(arguments);
+            case DEADLINE:
+                return parseAddDeadlineCommand(arguments);
+            case DONE:
+                return parseDoneCommand(arguments);
+            case EVENT:
+                return parseAddEventCommand(arguments);
+            case FIND:
+                return parseFindByKeywordCommand(arguments);
+            case LIST:
+                return new ShowAllCommand();
+            case TODO:
+                return parseAddTodoCommand(arguments);
+            default:
+                return invalidCommand;
+        }
+    }
 
-        if (isShowAll) {
-            return new ShowAllCommand();
-        } else if (isFindByDate) {
-            return parseFindByDateCommand(arguments);
-        } else if (isAddTodo) {
-            return parseAddTodoCommand(arguments);
-        } else if (isAddDeadline) {
-            return parseAddDeadlineCommand(arguments);
-        } else if (isAddEvent) {
-            return parseAddEventCommand(arguments);
-        } else if (isAction) {
-            return new ActionCommand(type, arguments);
-        } else if (isExit) {
-            return new ExitCommand();
-        } else if (isFind) {
-            return new FindCommand(arguments);
-        } else {
-            return new InvalidCommand();
+    private static Command parseDeleteCommand(String args) throws ChatbotException {
+        try {
+            int index = Integer.parseInt(args) - 1;
+            return new DeleteCommand(index);
+        } catch (NumberFormatException e) {
+            throw new ChatbotException(Message.INVALID_NUMBER);
+        }
+    }
+
+    private static Command parseDoneCommand(String args) throws ChatbotException {
+        try {
+            int index = Integer.parseInt(args) - 1;
+            return new DoneCommand(index);
+        } catch (NumberFormatException e) {
+            throw new ChatbotException(Message.INVALID_NUMBER);
         }
     }
 
@@ -122,10 +137,15 @@ public class Parser {
     private static Command parseFindByDateCommand(String args) throws ChatbotException {
         try {
             LocalDate date = LocalDate.parse(args);
-            return new FindByDateCommand(date);
+            Predicate<Task> pred = task -> (task.getDate() != null && task.getDate().equals(date));
+            return new FindCommand(pred);
         } catch (DateTimeParseException e) {
             throw new ChatbotException(Message.INVALID_DATE);
         }
     }
 
+    private static Command parseFindByKeywordCommand(String args){
+        Predicate<Task> pred = task -> (task.getDescription().contains(args));
+        return new FindCommand(pred);
+    }
 }

@@ -2,7 +2,6 @@ package chatbot.commands;
 
 import chatbot.common.Message;
 import chatbot.data.TaskList;
-import chatbot.exception.ChatbotException;
 import chatbot.storage.Storage;
 import chatbot.ui.Ui;
 
@@ -14,7 +13,7 @@ public class InvalidCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws ChatbotException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         return Message.INVALID_COMMAND;
     }
 }

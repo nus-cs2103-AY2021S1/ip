@@ -4,7 +4,6 @@ import chatbot.common.Message;
 import chatbot.exception.ChatbotException;
 
 import java.util.ArrayList;
-import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.function.Predicate;
 
@@ -103,7 +102,7 @@ public class TaskList {
      * @param pred given predicate
      * @return list of tasks
      */
-    public ArrayList<Task> retrieveTasksByPred(Predicate pred) {
+    public ArrayList<Task> retrieveTasksByPred(Predicate<Task> pred) {
 
         Iterator<Task> iter = this.tasks.iterator();
         ArrayList<Task> tasks = new ArrayList<>();
@@ -112,22 +111,6 @@ public class TaskList {
             Task task = iter.next();
             if (pred.test(task)) {
                 tasks.add(task);
-            }
-        }
-
-        return tasks;
-    }
-
-    public ArrayList<Task> find(String searchStr) {
-
-        Iterator<Task> iter = this.tasks.iterator();
-        ArrayList<Task> tasks = new ArrayList<>();
-
-        while (iter.hasNext()) {
-            Task tsk = iter.next();
-
-            if (tsk.getDescription().contains(searchStr)) {
-                tasks.add(tsk);
             }
         }
 

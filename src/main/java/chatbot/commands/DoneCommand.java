@@ -1,0 +1,29 @@
+package chatbot.commands;
+
+import chatbot.data.Task;
+import chatbot.data.TaskList;
+
+import chatbot.exception.ChatbotException;
+import chatbot.storage.Storage;
+import chatbot.ui.Ui;
+
+public class DoneCommand extends Command {
+
+    int index;
+
+    public DoneCommand(int index) {
+        this.index = index;
+    }
+
+    @Override
+    public boolean isExit() {
+        return false;
+    }
+
+    @Override
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws ChatbotException {
+        Task taskDone = taskList.markAsDone(index);
+        return ui.markDoneSuccess(taskDone);
+    }
+
+}

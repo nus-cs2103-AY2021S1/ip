@@ -7,14 +7,14 @@ import chatbot.ui.Ui;
 
 public class ShowAllCommand extends Command {
 
+    @Override
     public boolean isExit() {
         return false;
     }
 
+    @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
 
-        String response = ui.list(taskList.getTasks());
-
-        return response;
+        return ui.list(taskList.getTasks());
     }
 }
