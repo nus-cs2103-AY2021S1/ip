@@ -270,13 +270,12 @@ public class Parser {
     /**
      * Processes user input for classification and execution.
      *
-     * @param str is the line of String obtained from user input when user
-     * is using the JavaFX GUI.
+     * @param str is the line of String obtained from user input.
      *
      * Reads and makes sense of user input commands which includes:
      * (bye, list, todo, deadline, event, delete)
      *
-     * It changes the output to a String as Duke Response.
+     * It then executes the commands.
      *
      * @return a String representation of Duke output.
      *
