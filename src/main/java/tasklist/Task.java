@@ -22,7 +22,9 @@ public class Task {
      * @return A string object of the status symbol.
      */
     public String getStatusIcon() {
-        return (isDone ? "[" + "\u2713" + "]" : "[" + "\u2718" + "]"); //return tick or X symbols
+        String tickIcon = "[" + "\u2713" + "]";
+        String crossIcon = "[" + "\u2718" + "]";
+        return isDone ? tickIcon : crossIcon;
     }
 
     public String getDescription() {

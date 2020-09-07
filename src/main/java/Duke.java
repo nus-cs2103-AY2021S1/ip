@@ -8,7 +8,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 
 public class Duke {
-    public final static String FILE_PATH = System.getProperty("user.dir") + "/data/duke.txt";
+    private final static String FILE_PATH = System.getProperty("user.dir") + "/data/duke.txt";
 
     private Ui ui;
     private Storage storage;
