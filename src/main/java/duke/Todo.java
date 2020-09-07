@@ -30,8 +30,8 @@ class Todo extends Task {
      * @return Simple string description.
      */
     @Override
-    String toStringSimple() {
-        return "T | " + super.toStringSimple();
+    String toStringForStorage() {
+        return "T | " + super.toStringForStorage();
     }
 
     @Override

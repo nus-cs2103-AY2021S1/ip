@@ -13,29 +13,29 @@ class Deadline extends Task {
     /**
      *  String used to store deadline.
      */
-    protected LocalDate by;
+    protected LocalDate deadlineDate;
 
     /**
      * Constructor for deadline class.
      *
      * @param description Task description.
-     * @param by Deadline.
+     * @param deadlineDate Deadline.
      */
-    Deadline(String description, LocalDate by) {
+    Deadline(String description, LocalDate deadlineDate) {
         super(description);
-        this.by = by;
+        this.deadlineDate = deadlineDate;
     }
 
     /**
      * Constructor for deadline class.
      *
      * @param description Task description.
-     * @param by Deadline.
+     * @param deadlineDate Deadline.
      * @param isDone Describes if task is completed.
      */
-    Deadline(String description, LocalDate by, boolean isDone) {
+    Deadline(String description, LocalDate deadlineDate, boolean isDone) {
         super(description, isDone);
-        this.by = by;
+        this.deadlineDate = deadlineDate;
     }
 
     /**
@@ -44,13 +44,13 @@ class Deadline extends Task {
      * @return Simple string description.
      */
     @Override
-    String toStringSimple() {
-        return "D | " + super.toStringSimple() + " | " + by;
+    String toStringForStorage() {
+        return "D | " + super.toStringForStorage() + " | " + deadlineDate;
     }
 
     @Override
     public String toString() {
-        String formattedDate = this.by.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
+        String formattedDate = this.deadlineDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
         return "[D]" + super.toString() + " (by: " + formattedDate + ")";
     }
 }
