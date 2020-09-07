@@ -2,7 +2,6 @@ package duke.command;
 
 import java.time.LocalDate;
 import java.util.Optional;
-import java.util.function.Predicate;
 
 import duke.parser.DateParser;
 import duke.storage.Storage;
