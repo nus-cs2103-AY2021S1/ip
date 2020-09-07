@@ -35,4 +35,8 @@ public class TaskList {
     public void empty() {
         this.list.clear();
     }
+
+    public void sortList(List<Task> list) {
+        this.list = list;
+    }
 }

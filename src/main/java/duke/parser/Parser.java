@@ -8,6 +8,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.SortCommand;
 import duke.exception.DukeException;
 
 
@@ -27,6 +28,10 @@ public class Parser {
 
         if (input.equals("list")) {
             return new ListCommand();
+        }
+
+        if (input.equals("sort")) {
+            return new SortCommand();
         }
 
         String[] process = input.split(" ", 2);

@@ -50,8 +50,18 @@ public class Ui {
         return "Please take a look at the tasks:";
     }
 
+    /**
+     * Represents the message displayed on GUI for a task
+     * @param count the index of this task in list
+     * @param task the task
+     * @return String representation of the task with index
+     */
     public String showTask(int count, Task task) {
-        return count + ". " + task;
+        String space = ". ";
+        if (count < 10) {
+            space = ".   ";
+        }
+        return count + space + task;
     }
 
     public String showDone(Task task) {
@@ -90,6 +100,10 @@ public class Ui {
 
     public String showNothingFound() {
         return "Hmm, I didn't find anything that match your input";
+    }
+
+    public String showSort() {
+        return "I have sorted the list of tasks! Todo tasks will be display lastly.\n";
     }
 
 }
