@@ -23,10 +23,10 @@ public class Task {
      * @param description The description for this task.
      * @param isDone Whether this task is completed.
      */
-    public Task(String description, boolean isDone) {
+    public Task(String description, boolean isDone, String tag) {
         this.description = description;
         this.isDone = isDone;
-        this.tag = "";
+        this.tag = tag;
     }
 
     /**

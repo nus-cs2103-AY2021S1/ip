@@ -78,13 +78,19 @@ public class Storage {
      */
     private Task convertFormatToTask(String taskFormat) throws DukeException {
         String[] taskFormatData = taskFormat.split(SEPARATOR);
+        String description = taskFormatData[3];
+        boolean isDone = convertFormatToIsDone(taskFormatData[1]);
+        String tag = taskFormatData[2];
+
         switch (taskFormatData[0]) {
         case Storage.TODO_FORMAT:
-            return new Todo(taskFormatData[2], convertFormatToIsDone(taskFormatData[1]));
+            return new Todo(description, isDone, tag);
         case Storage.EVENT_FORMAT:
-            return new Event(taskFormatData[2], convertFormatToIsDone(taskFormatData[1]), taskFormatData[3]);
+            String at = taskFormatData[4];
+            return new Event(description, isDone, at, tag);
         case Storage.DEADLINE_FORMAT:
-            return new Deadline(taskFormatData[2], convertFormatToIsDone(taskFormatData[1]), taskFormatData[3]);
+            String by = taskFormatData[4];
+            return new Deadline(description, isDone, by, tag);
         default:
             throw new DukeException("Sorry, there is an invalid task format.");
         }
@@ -96,15 +102,16 @@ public class Storage {
     private String convertTaskToFormat(Task task) throws DukeException {
         if (task instanceof Todo) {
             return (String.join(Storage.SEPARATOR,
-                    Storage.TODO_FORMAT, convertIsDoneToFormat(task.getIsDone()), task.getDescription()));
+                    Storage.TODO_FORMAT, convertIsDoneToFormat(task.getIsDone()),
+                    task.getTag(), task.getDescription()));
         } else if (task instanceof Event) {
             return (String.join(Storage.SEPARATOR,
-                    Storage.EVENT_FORMAT, convertIsDoneToFormat(task.getIsDone()), task.getDescription(),
-                    ((Event) task).getAt()));
+                    Storage.EVENT_FORMAT, convertIsDoneToFormat(task.getIsDone()),
+                    task.getTag(), task.getDescription(), ((Event) task).getAt()));
         } else if (task instanceof Deadline) {
             return (String.join(Storage.SEPARATOR,
-                    Storage.DEADLINE_FORMAT, convertIsDoneToFormat(task.getIsDone()), task.getDescription(),
-                    ((Deadline) task).getBy()));
+                    Storage.DEADLINE_FORMAT, convertIsDoneToFormat(task.getIsDone()),
+                    task.getTag(), task.getDescription(), ((Deadline) task).getBy()));
         } else {
             throw new DukeException("Sorry, there is an invalid task item.");
         }
