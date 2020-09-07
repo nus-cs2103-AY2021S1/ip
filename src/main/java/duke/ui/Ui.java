@@ -11,14 +11,12 @@ import duke.tasks.Task;
 /** Represents the UI that prints out messages in Duke format. */
 public class Ui {
 
-    /** The scanner that scans the user input. */
-    private Scanner sc;
-
     /** The welcome message in Duke format. */
     public static final String DIALOG_WELCOME = "Hello! I'm Milk.\nWhat can I help you with?";
-
     /** The goodbye message in Duke format. */
     public static final String DIALOG_BYE = "You're going? Bye :( Hope to see you again soon.";
+    /** The scanner that scans the user input. */
+    private Scanner sc;
 
     /** Constructs a new Ui object. */
     public Ui() {

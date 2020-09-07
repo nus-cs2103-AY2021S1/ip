@@ -21,12 +21,11 @@ import javafx.scene.paint.Color;
 
 public class DialogBox extends HBox {
 
+    private static boolean isUserDialog = false;
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
-
-    private static boolean isUserDialog = false;
 
     private DialogBox(String text, Image img) {
         try {
