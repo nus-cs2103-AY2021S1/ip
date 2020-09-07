@@ -2,4 +2,4 @@ E  | 1 | mark homework | 2019-02-12 18:00
 T  | 1 | revlkamdsflk laskdmfalkmdf
 T  | 1 | asdlkfkmas alskdfmaksldmf
 E  | 0 | mark homework | 2019-02-12 18:00
-T  | 0 | revise homework
+T  | 1 | revise homework

@@ -57,20 +57,22 @@ public class DukeDecoder {
             System.out.println("I'm sorry, but I don't know what that means :-(");
         }
 
-        if (inputList[0].trim().equals("D")) {
+        String letterCommand = inputList[0].trim();
+        switch(letterCommand) {
+        case "D":
             newTask = new Deadline(inputList[2].trim(), inputList[3].trim());
-        }
-
-        if (inputList[0].trim().equals("T")) {
+            break;
+        case "T":
             newTask = new Todo(inputList[2].trim());
-        }
-
-        if (inputList[0].trim().equals("E")) {
+            break;
+        case "E":
             newTask = new Event(inputList[2].trim(), inputList[3].trim());
-        }
-
-        if (inputList[1].trim().equals("1")) {
+            break;
+        case "1":
             newTask.markAsDoneWithoutPrint();
+            break;
+        default:
+            System.out.println("I'm sorry, but I don't know what that means :-(");
         }
         return newTask;
     }

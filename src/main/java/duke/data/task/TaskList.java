@@ -67,7 +67,7 @@ public class TaskList implements Iterable<Task> {
      * @param toCheck the task to be check
      * @return return true if the list contains the task
      */
-    public boolean contains(Task toCheck) {
+    public boolean doesContain(Task toCheck) {
         for (Task p : internalList) {
             if (p == toCheck) {
                 return true;

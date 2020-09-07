@@ -5,7 +5,7 @@ package src.main.java.duke.data.exception;
  *
  */
 public class DukeException extends Exception {
-    private String errorMesage;
+    private final String errorMesage;
     public DukeException(String errorMessage) {
         this.errorMesage = errorMessage;
     }

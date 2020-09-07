@@ -7,18 +7,19 @@ public class HelpCommand extends Command {
 
     public static final String COMMAND_WORD = "help";
 
-    public static final String MESSAGE_USAGE = COMMAND_WORD + ": Shows program usage instructions.\n"
+    public static final String MESSAGE_USAGE = COMMAND_WORD
+            + ": Shows program usage instructions.\n"
             + "Example: " + COMMAND_WORD;
 
     @Override
     public CommandResult execute() {
         String[] stringArray = {src.main.java.duke.commands.AddTodoCommand.MESSAGE_USAGE,
-            src.main.java.duke.commands.AddEventCommand.MESSAGE_USAGE,
-            src.main.java.duke.commands.AddDeadlineCommand.MESSAGE_USAGE,
-            src.main.java.duke.commands.DeleteCommand.MESSAGE_USAGE,
-            src.main.java.duke.commands.MarkDoneCommand.MESSAGE_USAGE,
+            AddEventCommand.MESSAGE_USAGE,
+            AddDeadlineCommand.MESSAGE_USAGE,
+            DeleteCommand.MESSAGE_USAGE,
+            MarkDoneCommand.MESSAGE_USAGE,
             HelpCommand.MESSAGE_USAGE,
-            src.main.java.duke.commands.ExitCommand.MESSAGE_USAGE};
+            ExitCommand.MESSAGE_USAGE};
 
         String resultString = "";
 
