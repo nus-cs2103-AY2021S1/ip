@@ -30,6 +30,7 @@ public class FindCommand extends Command {
     public void execute(TaskListHandler handler, Storage storage) throws DukeException {
         ArrayList<Task> foundTasks = new ArrayList<>();
         try {
+            // Second character is the keyword to search for
             String keyword = input.split(" ")[1];
             for (Task task : handler.getTasks()) {
                 if (task.getDescription().contains(keyword)) {
@@ -38,6 +39,7 @@ public class FindCommand extends Command {
                 }
             }
             if (!hasFoundTask) {
+                // Unable to find any matching task
                 Ui.drawTopBorder();
                 Ui.indent(1);
                 System.out.println("I couldn't find any tasks matching " + '"' + keyword + '"' + ".");
@@ -50,6 +52,7 @@ public class FindCommand extends Command {
         Ui.drawTopBorder();
         Ui.indent(1);
         System.out.println("I have found the matching tasks in your list: ");
+        // Prints each task found
         for (Task t: foundTasks) {
             Ui.indent(2);
             System.out.println(t);

@@ -70,15 +70,6 @@ class TaskListHandlerTest {
         handler.addToList(new Todo("assignment"));
         handler.addToList(new Deadline("submission", "9pm"));
         handler.printList();
-        //        String expectedOutput = " ______________________________________________________________ \n" +
-        //            "*                                                              *\n" +
-        //            "    Here are the tasks in your list:\n" +
-        //            "        1. [E][✘] mega sale (at: 12pm)\n" +
-        //            "        2. [T][✘] assignment\n" +
-        //            "        3. [D][✘] submission (by: 9pm)\n" +
-        //            "    You have 3 task(s) in the list\n" +
-        //            "\n" +
-        //            "*______________________________________________________________*\n";
         String expectedOutput = " ______________________________________________________________ "
             + System.getProperty("line.separator")
             + "*                                                              *"

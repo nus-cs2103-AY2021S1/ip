@@ -46,7 +46,7 @@ class ParserTest {
     void parseTaskWithTime() throws DukeException {
         Event newEvent = new Event("fan-signing", "2pm");
         String command = "event fan-signing /at 2pm";
-        assertEquals(Parser.parseTaskWithTime(command, Task.TaskType.EVENT, "/at"), newEvent);
+        assertEquals(Parser.parseTaskWithTimeSubroutine(command, Task.TaskType.EVENT, "/at"), newEvent);
         System.out.println("Passed: parseTaskWithTimeTest!");
     }
 

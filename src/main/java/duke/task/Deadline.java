@@ -24,9 +24,9 @@ public class Deadline extends Task {
     }
 
     /**
-     * Process user input into into another datetime format.
+     * Processes user input into into another datetime format.
      * e.g. 2020-10-10 1800 --> 10 Oct 2020 6:00 PM
-     * if user input doesnt match this format then accept time as normal string.
+     * if user input doesnt match this format then accept normal string as time.
      *
      * @param input User input for the time for deadline.
      */

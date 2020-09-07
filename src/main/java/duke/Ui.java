@@ -93,15 +93,20 @@ public class Ui {
         // Prints success message and list size after task added/deleted
         drawTopBorder();
         indent(1);
-        if (operation.equals("add")) {
+        switch (operation) {
+        case "add":
             System.out.print("Yes! I have successfully added:\n");
-        } else if (operation.equals("delete")) {
+            break;
+        case "delete":
             System.out.print("Alright! I've removed this task:\n");
-        } else {
+            break;
+        case "done":
             System.out.println("Good job! You completed:");
             indent(2);
             System.out.println(currentTask);
             drawBottomBorder();
+            return;
+        default:
             return;
         }
         indent(2);
@@ -112,14 +117,17 @@ public class Ui {
     }
 
     /**
-     * Initial greeting message in unicode.
+     * Prints the greeting message.
      */
     public static void greet() {
-        drawTopBorder();
         System.out.println(getGreeting());
-        drawBottomBorder();
     }
 
+    /**
+     * Retrieves the greeting in string format for GUI.
+     *
+     * @return Greeting.
+     */
     public static String getGreeting() {
         setLogo();
         String greeting = "Hey! I'm Duke the chatbot!";
@@ -129,6 +137,9 @@ public class Ui {
             + doForYou;
     }
 
+    /**
+     * Initializes the duke logo.
+     */
     public static void setLogo() {
         logo = "DUKE!";
     }
