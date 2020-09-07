@@ -1,5 +1,7 @@
 package duke.commands;
 
+import java.util.stream.IntStream;
+
 import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
@@ -18,15 +20,17 @@ public class ListCommand extends Command {
     }
 
     private String listAllTasks(TaskList tasks) {
-        String response = "Here are all the tasks you currently have! \n";
-        for (int i = 0; i < tasks.size(); i++) {
+        StringBuilder stringBuilder = new StringBuilder();
+        stringBuilder.append("Here are all the tasks you currently have! \n");
+        IntStream.range(0, tasks.size()).forEach(index -> {
             try {
-                String output = (i + 1) + "." + tasks.getTask(i + 1) + "\n";
-                response += output;
+                String output = (index + 1) + "." + tasks.getTask(index + 1) + "\n";
+                stringBuilder.append(output);
             } catch (DukeException e) {
-                return e.getMessage();
+                System.out.println(e.getMessage());
             }
-        }
+        });
+        String response = stringBuilder.toString();
         assert response != "" : "Response is an empty string";
         return response;
     }
