@@ -1,10 +1,14 @@
 package duke.command;
 
-import duke.exception.DukeException;
-import duke.task.TaskList;
-import duke.ui.Ui;
+import org.apache.commons.cli.CommandLine;
 
+import duke.Context;
+import duke.exception.DukeException;
+
+/**
+ * Lambda type for executable commands to be launched by the parser.
+ */
 @FunctionalInterface
-interface CommandExecutable {
-    void run(TaskList taskList, Ui ui, String[] arguments) throws DukeException;
+public interface CommandExecutable {
+    void run(Context context, CommandLine arguments) throws DukeException;
 }
