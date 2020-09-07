@@ -123,10 +123,12 @@ public class Storage {
 
     /**
      * Updates the storage with tasks from taskList
+     *
      * @param tasks The TaskList to update to storage with
      * @throws DukeException If it could not update the storage file
      */
     public void updateStorage(TaskList tasks) throws DukeException {
+        assert tasks != null;
         try {
             FileWriter fw = new FileWriter(SAVED_TASK_PATH);
             String textForUpdate = convertTaskListToSaveFormat(tasks);
