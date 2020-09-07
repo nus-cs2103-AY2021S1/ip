@@ -79,4 +79,26 @@ public class Ui {
         return " Here are the matching tasks in your list:";
     }
 
+    /**
+     * Returns the message when dupes are found and removed
+     *
+     * @return String
+     */
+    protected String removedDupes() {
+        return this.LINE + "\n"
+                + " All duplicates have been removed." + "\n"
+                + this.LINE;
+    }
+
+    /**
+     * Returns the message when there are no dupes
+     *
+     * @return String
+     */
+    protected String noDupes() {
+        return this.LINE + "\n"
+                + " No dupes were found." + "\n"
+                + this.LINE;
+    }
+
 }
