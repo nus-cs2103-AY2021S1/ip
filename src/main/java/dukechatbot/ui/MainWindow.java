@@ -1,5 +1,7 @@
 package dukechatbot.ui;
 
+import java.util.Objects;
+
 import dukechatbot.duke.Duke;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -32,9 +34,12 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         String initMessage = Duke.getGreetingMessage();
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(initMessage, dukeImage));
+        assert(dialogContainer.getChildren().size() == 1);
     }
 
     public void setDuke(Duke d) {
+        assert(
+                Objects.isNull(d));
         duke = d;
     }
 

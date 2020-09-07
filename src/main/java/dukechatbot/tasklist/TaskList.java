@@ -2,6 +2,7 @@ package dukechatbot.tasklist;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 import dukechatbot.constant.DukeConstants;
@@ -24,6 +25,7 @@ public class TaskList {
      * @param task
      */
     public void add(Task task) {
+        assert(!Objects.isNull(task));
         this.list.add(task);
     }
 
@@ -51,6 +53,7 @@ public class TaskList {
      * @return Task String information.
      */
     public String markDone(int idx) {
+        assert(idx >= 0 && idx < this.list.size());
         Task task = this.list.get(idx);
         task.markDone();
         return task.toString();
@@ -79,6 +82,7 @@ public class TaskList {
      * @return Deleted task string information.
      */
     public String delete(int idx) {
+        assert(idx >= 0 && idx < this.list.size());
         Task task = this.list.remove(idx);
         return task.toString();
     }

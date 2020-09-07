@@ -1,5 +1,7 @@
 package dukechatbot.command;
 
+import java.util.Objects;
+
 import dukechatbot.enums.TaskEnum;
 import dukechatbot.executor.AddCommandExecutor;
 import dukechatbot.parser.CommandParser;
@@ -17,6 +19,7 @@ public class AddCommand extends Command {
     public AddCommand(String input, TaskEnum taskType) {
         super(input, new AddCommandExecutor());
         this.taskType = taskType;
+        assert(!Objects.isNull(this.taskType));
         this.argument = CommandParser.getTitle(input);
     }
 
