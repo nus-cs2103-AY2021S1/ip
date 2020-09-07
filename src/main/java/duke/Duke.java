@@ -31,7 +31,8 @@ public class Duke {
         } finally {
             this.context = new Context(this.taskList, this.ui);
             this.parser = new Parser(this.context);
-            ui.start();
+            this.context.getMacroList().addDefaultMacros();
+            this.ui.start();
         }
     }
 

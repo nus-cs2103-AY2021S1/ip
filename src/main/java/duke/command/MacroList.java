@@ -29,7 +29,7 @@ public class MacroList {
     /**
      * Adds a macro to the MacroList silently (no ui interaction).
      * @param declaration Macro declaration string. Refer to the user guide.
-     * @throws DukeException if the macro's name has already ben taken.
+     * @throws DukeException if the macro's name has already been taken.
      */
     public void addMacro(String declaration) throws DukeException {
         Macro newMacro = Macro.newMacro(declaration);
@@ -42,11 +42,32 @@ public class MacroList {
     /**
      * Adds a macro to the MacroList. Prints a success message to the Ui.
      * @param declaration Macro declaration string. Refer to the user guide.
-     * @throws DukeException if the macro's name has already ben taken.
+     * @throws DukeException if the macro's name has already been taken.
      */
     public void addMacro(String declaration, Ui ui) throws DukeException {
         this.addMacro(declaration);
         ui.systemMessage("macro have been add ;)");
+    }
+
+    /**
+     * Add default macro shortcuts for the user into the MacroList.
+     */
+    public void addDefaultMacros() {
+        String[] macros = {"t; todo \\$",
+            "e at; event \\$ -at \\at",
+            "d by; deadline \\$ -by \\by",
+            "x; delete \\$",
+            "f; find \\$",
+            "c; done \\$",
+            "l; list"};
+        for (String macro : macros) {
+            try {
+                this.addMacro(macro);
+            } catch (DukeException e) {
+                // should never happen, but if it does:
+                assert false : "default macro definition failed:" + e.getMessage();
+            }
+        }
     }
 
     public Macro getMacro(String name) {
