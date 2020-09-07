@@ -8,6 +8,7 @@ public class Deadline extends Task {
     private LocalDate timeDescription;
     private String formattedTimeDescription;
 
+
     /**
      * Creates a Deadline object.
      * It is mainly for file writing.
@@ -16,7 +17,7 @@ public class Deadline extends Task {
      * @param timeDescription is the LocalDate input representing date.
      */
     public Deadline(String description, LocalDate timeDescription) {
-        super(description, "D");
+        super(description, Task.DEADLINE);
         this.timeDescription = timeDescription;
         this.formattedTimeDescription = this.timeDescription.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }

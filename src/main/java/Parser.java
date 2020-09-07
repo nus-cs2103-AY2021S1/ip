@@ -46,9 +46,14 @@ public class Parser {
     public void checkUserInput(String str) throws DukeException {
         System.out.println("    _______________________________________________________________________");
 
+        str = str.trim();
         int commandSpace = str.indexOf(" ");
 
-        if (str.equals("bye")) {
+        if (str.length() < 3) {
+            throw new DukeException("*Invalid command.*\n"
+                    + "     Commands: bye, list, todo, event, deadline, delete");
+
+        } else if (str.equals("bye")) {
             close();
 
         } else if (str.equals("list")) {
@@ -278,10 +283,19 @@ public class Parser {
      * @throws DukeException when command is wrong, unidentifiable or missing.
      */
     public String parseUserInput(String str) throws DukeException {
+        String trimmedStr = str.trim();
         int commandSpace = str.indexOf(" ");
 
+        if (trimmedStr.length() < 3) {
+            throw new DukeException("*Invalid command.*\n"
+                    + "  Commands: bye, list, find, done, delete, todo, event, deadline");
+        }
+
+        assert trimmedStr.length() > 2 : "user input should not be empty/just white spaces";
+
         if (str.equals("bye")) {
-            throw new DukeException("bye");
+            MainWindow.closeWindow();
+            return "See you again!";
 
         } else if (str.equals("list")) {
             List<Task> currLst = this.tasks.getTasks();
@@ -296,11 +310,14 @@ public class Parser {
 
             return output;
 
-        } else if (commandSpace < 0) {
+        } else if (commandSpace <= 0) {
             throw new DukeException("*Invalid command.*\n"
-                    + "  Commands: bye, list, todo, event, deadline, delete");
+                    + "  Commands: bye, list, find, done, delete, todo, event, deadline");
+        }
 
-        } else if (str.substring(0, 5).equals("done ")) {
+        assert commandSpace > 0 : "There should be a spacing after command call from this point onwards";
+
+        if (str.substring(0, 5).equals("done ")) {
             int length = str.length();
             String index = str.substring(5, length);
             int realIndex = Integer.parseInt(index) - 1;
@@ -308,6 +325,9 @@ public class Parser {
             if (realIndex >= this.tasks.getLength() || realIndex < 0) {
                 throw new DukeException("*Invalid task index, please try again.*");
             }
+
+            assert this.tasks.getLength() >= realIndex + 1 : "There should be a task in task list to mark done";
+
             Task taskSubject = this.tasks.markDone(realIndex);
             return "Nice! I've marked this task as done:\n"
                     + "  " + taskSubject;
@@ -317,6 +337,8 @@ public class Parser {
             if (length == 5) {
                 throw new DukeException("*Please fill in todo description*");
             }
+
+            assert length > commandSpace + 1 : "There should be a description";
 
             Todo newTodo = new Todo(str.substring(5, length));
             this.tasks.store(newTodo);
@@ -329,6 +351,8 @@ public class Parser {
             if (length == 5) {
                 throw new DukeException("*Please fill in a keyword to find*");
             }
+
+            assert length > commandSpace + 1 : "There should be a keyword";
 
             String keyword = str.substring(5, length);
             List<Task> allTasks = tasks.getTasks();
@@ -354,11 +378,14 @@ public class Parser {
 
         } else if (commandSpace <= 4) {
             throw new DukeException("*Invalid command.*\n"
-                    + "  Commands: bye, list, todo, event, deadline, delete");
+                    + "  Commands: bye, list, find, done, delete, todo, event, deadline");
+        }
 
-        } else if (str.substring(0, 6).equals("event ")) {
-            int length = str.length();
-            if (length == 6) {
+        assert str.length() > 4 : "The length of command with a space character should be > 4";
+
+        if (str.substring(0, 6).equals("event ")) {
+            int length = str.trim().length();
+            if (length == 5) {
                 throw new DukeException("*Please fill in event description*");
             }
 
@@ -384,9 +411,12 @@ public class Parser {
 
         } else if (commandSpace <= 5) {
             throw new DukeException("*Invalid command.*\n"
-                    + "  Commands: bye, list, todo, event, deadline, delete");
+                    + "  Commands: bye, list, find, done, delete, todo, event, deadline");
+        }
 
-        } else if (str.substring(0, 7).equals("delete ")) {
+        assert str.length() > 5 : "The length of command with a space character should be > 5";
+
+        if (str.substring(0, 7).equals("delete ")) {
             int length = str.length();
             String index = str.substring(7, length);
             int realIndex = Integer.parseInt(index) - 1;
@@ -395,6 +425,8 @@ public class Parser {
                 throw new DukeException("*Invalid task index, please try again.*");
             }
 
+            assert this.tasks.getLength() >= realIndex + 1 : "There should be a task in task list to mark delete";
+
             Task taskSubject = this.tasks.remove(realIndex);
             return "Noted. I've removed this task:\n"
                     + "  " + taskSubject + "\n"
@@ -402,10 +434,13 @@ public class Parser {
 
         } else if (commandSpace <= 6) {
             throw new DukeException("*Invalid command.*\n"
-                    + "  Commands: bye, list, todo, event, deadline, delete");
+                    + "  Commands: bye, list, find, done, delete, todo, event, deadline");
+        }
 
-        } else if (str.substring(0, 9).equals("deadline ")) {
-            int length = str.length();
+        assert str.length() > 6 : "The length of command with a space character should be > 6";
+
+        if (str.substring(0, 9).equals("deadline ")) {
+            int length = str.trim().length();
             if (length == 9) {
                 throw new DukeException("*Please fill in deadline description*");
             }
@@ -432,7 +467,7 @@ public class Parser {
 
         } else {
             throw new DukeException("*Invalid command.*\n"
-                    + "     Commands: bye, list, todo, event, deadline, delete");
+                    + "  Commands: bye, list, find, done, delete, todo, event, deadline");
         }
     }
 }

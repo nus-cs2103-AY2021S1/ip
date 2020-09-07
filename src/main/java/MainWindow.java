@@ -35,6 +35,13 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
+     * Closes the window.
+     */
+    public static void closeWindow() {
+        Platform.exit();
+    }
+
+    /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
@@ -47,10 +54,5 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
-
-        if (response.equals("See you again!")) {
-            Platform.exit();
-
-        }
     }
 }

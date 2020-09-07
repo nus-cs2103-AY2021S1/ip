@@ -117,12 +117,7 @@ public class Duke {
 
         } catch (DukeException e) {
             String exceptionMessage = e.toString();
-
-            if (exceptionMessage.equals("bye")) {
-                output = "See you again!";
-            } else {
-                output = e.toString();
-            }
+            output = exceptionMessage;
         }
 
         return output;

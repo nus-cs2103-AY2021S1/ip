@@ -6,6 +6,7 @@ public class Task {
     protected String description;
     protected String type;
     protected boolean isDone;
+    protected static final String DEADLINE = "D";
 
     /**
      * Creates a Task object.
