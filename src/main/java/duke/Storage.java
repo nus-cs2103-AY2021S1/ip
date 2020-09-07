@@ -11,9 +11,98 @@ import java.util.Scanner;
  */
 public class Storage {
     private String filePath;
+    private Scanner scanner;
+    private final char TODO = 'T';
+    private final char DEADLINE = 'D';
+    private final char EVENT = 'E';
+    private final char DONE = 'O';
+    private final char NOT_DONE = 'X';
+    private final int START_OF_TASK_NAME = 7;
+    private final int DONE_OR_NOT = 4;
+    private final int START_OF_DATE = 4;
 
     public Storage(String filePath) {
         this.filePath = filePath;
+    }
+
+    /**
+     * Creates the text file in the specified directory (this.filepath).
+     */
+    public void createDirectory() {
+        final File parentDir = new File("data");
+        parentDir.mkdir();
+        final String hash = "tasks";
+        final String fileName = hash + ".txt";
+        final File file = new File(parentDir, fileName);
+        try {
+            file.createNewFile();
+            System.out.println("Created path data/tasks.txt");
+        } catch (IOException e) {
+            System.out.println("Could not create file.");
+        }
+    }
+
+    /**
+     * Generates a ToDo based on the input line of text.
+     *
+     * @param task The input line of text from the file.
+     * @return Returns a new ToDo.
+     */
+    public ToDo generateTodo(String task) {
+        ToDo newTodo = null;
+        if (task.charAt(DONE_OR_NOT) == DONE) {
+            newTodo = new ToDo(task.substring(START_OF_TASK_NAME));
+            newTodo.setDone();
+        } else if (task.charAt(DONE_OR_NOT) == NOT_DONE) {
+            newTodo = new ToDo(task.substring(START_OF_TASK_NAME));
+        }
+        return newTodo;
+    }
+
+    /**
+     * Generates a Deadline based on the input line of text.
+     *
+     * @param task The input line of text from the file.
+     * @return Returns a new Deadline.
+     */
+    public Deadline generateDeadline(String task) {
+        Deadline newDeadline = null;
+        if (task.charAt(DONE_OR_NOT) == DONE) {
+            int indexOfDeadline = task.indexOf("by:");
+            String date = task.substring(indexOfDeadline + START_OF_DATE, task.length() - 1);
+            String description = task.substring(START_OF_TASK_NAME, indexOfDeadline - 2);
+            newDeadline = new Deadline(description, date);
+            newDeadline.setDone();
+        } else if (task.charAt(DONE_OR_NOT) == NOT_DONE) {
+            int indexOfDeadline = task.indexOf("by:");
+            String date = task.substring(indexOfDeadline + START_OF_DATE, task.length() - 1);
+            String description = task.substring(START_OF_TASK_NAME, indexOfDeadline - 2);
+            newDeadline = new Deadline(description, date);
+        }
+        return newDeadline;
+    }
+
+    /**
+     * Generates an Event based on the input line of text.
+     *
+     * @param task The input line of text from the file.
+     * @return Returns a new Event.
+     */
+    public Event generateEvent(String task) {
+        Event newEvent = null;
+        if (task.charAt(DONE_OR_NOT) == DONE) {
+            int indexOfEvent = task.indexOf("at:");
+            String date = task.substring(indexOfEvent + START_OF_DATE, task.length() - 1);
+            String description = task.substring(START_OF_TASK_NAME, indexOfEvent - 2);
+            newEvent = new Event(description, date);
+            newEvent.setDone();
+        } else if (task.charAt(DONE_OR_NOT) == NOT_DONE) {
+            int indexOfEvent = task.indexOf("at:");
+            String date = task.substring(indexOfEvent + START_OF_DATE, task.length() - 1);
+            String description = task.substring(START_OF_TASK_NAME, indexOfEvent - 2);
+            newEvent = new Event(description, date);
+        }
+        return newEvent;
     }
 
     /**
@@ -27,69 +116,28 @@ public class Storage {
     public TaskList load() throws DukeException {
         File f = new File(this.filePath); // create a File for the given file path
         if (!f.exists()) {
-            final File parentDir = new File("data");
-            parentDir.mkdir();
-            final String hash = "tasks";
-            final String fileName = hash + ".txt";
-            final File file = new File(parentDir, fileName);
-            try {
-                file.createNewFile();
-                System.out.println("Created path data/tasks.txt");
-            } catch (IOException e) {
-                System.out.println("Could not create file.");
-            }
+            createDirectory();
         }
-        Scanner s;
         try {
-            s = new Scanner(f); // create a Scanner using the File as the source
+            scanner = new Scanner(f); // create a Scanner using the File as the source
         } catch (Exception e) {
             throw new DukeException("File not found.");
         }
         ArrayList<Task> loadedTasks = new ArrayList<>();
-        while (s.hasNext()) {
-            String task = s.nextLine();
+        while (scanner.hasNext()) {
+            String task = scanner.nextLine();
             switch (task.charAt(1)) {
-            case ('T'):
-                if (task.charAt(4) == 'O') {
-                    Task newTask = new ToDo(task.substring(7));
-                    newTask.setDone();
-                    loadedTasks.add(newTask);
-                } else if (task.charAt(4) == 'X') {
-                    Task newTask = new ToDo(task.substring(7));
-                    loadedTasks.add(newTask);
-                }
+            case (TODO):
+                ToDo newTodo = generateTodo(task);
+                loadedTasks.add(newTodo);
                 break;
-            case ('D'):
-                if (task.charAt(4) == 'O') {
-                    int indexOfDeadline = task.indexOf("by:");
-                    String date = task.substring(indexOfDeadline + 4, task.length() - 1);
-                    String description = task.substring(7, indexOfDeadline - 2);
-                    Task newTask = new Deadline(description, date);
-                    newTask.setDone();
-                    loadedTasks.add(newTask);
-                } else if (task.charAt(4) == 'X') {
-                    int indexOfDeadline = task.indexOf("by:");
-                    String date = task.substring(indexOfDeadline + 4, task.length() - 1);
-                    String description = task.substring(7, indexOfDeadline - 2);
-                    Task newTask = new Deadline(description, date);
-                    loadedTasks.add(newTask);
-                }
+            case (DEADLINE):
+                Deadline newDeadline = generateDeadline(task);
+                loadedTasks.add(newDeadline);
                 break;
-            case ('E'):
-                if (task.charAt(4) == 'O') {
-                    int indexOfEvent = task.indexOf("at:");
-                    String date = task.substring(indexOfEvent + 4, task.length() - 1);
-                    String description = task.substring(7, indexOfEvent - 2);
-                    Task newTask = new Event(description, date);
-                    newTask.setDone();
-                    loadedTasks.add(newTask);
-                } else if (task.charAt(4) == 'X') {
-                    int indexOfEvent = task.indexOf("at:");
-                    String date = task.substring(indexOfEvent + 4, task.length() - 1);
-                    String description = task.substring(7, indexOfEvent - 2);
-                    Task newTask = new Event(description, date);
-                    loadedTasks.add(newTask);
-                }
+            case (EVENT):
+                Event newEvent = generateEvent(task);
+                loadedTasks.add(newEvent);
                 break;
             default:
                 throw new DukeException("I'm sorry, something went wrong!");
