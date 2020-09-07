@@ -5,7 +5,6 @@ import java.time.LocalDate;
  * Parses commands as well as provide differnet type of subclasses
  * to handle different types of commands
  */
-
 abstract class Command {
     protected boolean exit;
     static private ExitCommand exitCommand = new ExitCommand();
@@ -19,11 +18,9 @@ abstract class Command {
      * Command object
      * @param command String command
      * @return appropriate Command object
-     * @throws InvalidInput if String command not available
+     * @throws InvalidInputException if String command not available
      */
-
-
-    static Command parse(String command) throws InvalidInput {
+    static Command parse(String command) throws InvalidInputException, EmptyTodoException {
         if (command.equals("bye")) {
             return exitCommand;
         } else if (command.equals("list")) {
@@ -48,7 +45,7 @@ abstract class Command {
             } else if (preFix.equals("event")) {
                 return new EventCommand(postFix);
             } else {
-                throw new InvalidInput();
+                throw new InvalidInputException();
             }
         }
     }
@@ -60,7 +57,6 @@ abstract class Command {
      * @param storage Storage handling
      * @throws IOException may be thrown while saving to storage
      */
-
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws IOException;
 
     /**
@@ -72,138 +68,3 @@ abstract class Command {
     }
 }
 
-/**
- * An exit command
- */
-class ExitCommand extends Command {
-    ExitCommand() {
-        super();
-        this.exit = true;
-    }
-
-    @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return "Duke is exiting, goodbye!";
-    }
-}
-
-/**
- * A list command to list all tasks
- */
-class ListCommand extends Command {
-    @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return ui.printf("Here are the tasks in your list:\n" + tasks.toString());
-    }
-}
-
-/**
- * A done command to mark a given task number as done
- */
-class DoneCommand extends Command {
-    private int doneTask;
-
-    DoneCommand(int task) {
-        super();
-        this.doneTask = task;
-    }
-
-    @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        tasks.done(this.doneTask);
-        storage.saveFile(tasks);
-        return ui.printf("Nice! I've marked this task as done:\n" + tasks.get(this.doneTask));
-    }
-}
-
-/**
- * A delete command to delete a given task number
- */
-class DeleteCommand extends Command {
-    private int deleteTask;
-
-    DeleteCommand(int task) {
-        super();
-        this.deleteTask = task;
-    }
-
-    @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        String taskString = tasks.get(this.deleteTask).toString();
-        tasks.delete(this.deleteTask);
-        storage.saveFile(tasks);
-        return ui.printf("Noted. I've removed this task:\n" + taskString + "\n" + tasks.taskCount());
-    }
-}
-
-/**
- * A Todo command to add a todo Task to the TaskList
- */
-class TodoCommand extends Command {
-    private String task;
-
-    TodoCommand(String toParse) {
-        this.task = toParse;
-    }
-
-    @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        Task task = tasks.addTodo(this.task);
-        storage.saveFile(tasks);
-        return ui.printf("Got it. I've added this task:\n" + task.toString() + "\n" + tasks.taskCount());
-    }
-}
-
-/**
- * A Deadline command to add a Deadline Task to the TaskList
- */
-class DeadlineCommand extends Command {
-    private String task;
-    private String deadline;
-
-    DeadlineCommand(String toParse) {
-        String[] split = toParse.split(" /by ");
-        this.task = split[0];
-        this.deadline = split[1];
-    }
-
-    @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        Task task = tasks.addDeadline(this.task, this.deadline);
-        storage.saveFile(tasks);
-        return ui.printf("Got it. I've added this task:\n" + task + "\n" + tasks.taskCount());
-    }
-}
-
-/**
- * An Event command to add an Event Task to the TaskList
- */
-class EventCommand extends Command {
-    private String task;
-    private String at;
-    EventCommand(String toParse) {
-        String[] split = toParse.split(" /at ");
-        this.task = split[0];
-        this.at = split[1];
-    }
-
-    @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        Task task = tasks.addEvent(this.task, this.at);
-        storage.saveFile(tasks);
-        return ui.printf("Got it. I've added this task:\n" + task + "\n" + tasks.taskCount());
-    }
-}
-
-class FindCommand extends Command {
-    private String key;
-
-    FindCommand(String key) {
-        this.key = key;
-    }
-
-    @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
-        return ui.printf("Here are the matching tasks in your list:\n" + tasks.find(this.key));
-    }
-}

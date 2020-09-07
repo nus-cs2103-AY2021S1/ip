@@ -45,7 +45,6 @@ public class Ui {
     /**
      * Prints goodbye message
      */
-
     public void goodbye() {
         System.out.println(format + "Bye. Hope to see you again soon!");
     }
@@ -54,7 +53,6 @@ public class Ui {
      * Prints error message
      * @param message Error message from exception
      */
-
     public void showError(String message) {
         System.out.println(format + "An error was thrown: " + message);
     }

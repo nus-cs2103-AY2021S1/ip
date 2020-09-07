@@ -1,6 +1,10 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Deadline is a subclass of task that also keeps track of when a task is due
+ * It is initialized via 'deadline (taskname) /by (yyyy-dd-mm)'
+ */
 class Deadline extends Task {
     private LocalDate date;
 
