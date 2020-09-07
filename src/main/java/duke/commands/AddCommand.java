@@ -54,7 +54,7 @@ public class AddCommand extends Command {
             tasklist.add(new Deadline(descriptions[0], descriptions[1]));
             return ("Hi there, I've added this task:\n"
                     + tasklist.get(tasklist.getSize() - 1) + "\nYou have "
-                    + tasklist.getSize() + " tasks in the list. \n\n"
+                    + tasklist.getSize() + " tasks in the list. \n"
                     + response);
         case EVENT:
             String[] descriptions2 = description.split("/at ");
@@ -62,7 +62,7 @@ public class AddCommand extends Command {
             tasklist.add(new Event(descriptions2[0], descriptions2[1]));
             return ("Hi there, I've added this task:\n"
                     + tasklist.get(tasklist.getSize() - 1) + "\nYou have "
-                    + tasklist.getSize() + " tasks in the list. \n\n"
+                    + tasklist.getSize() + " tasks in the list. \n"
                     + response2);
         default:
             throw new DukeException("invalid command.");
@@ -90,15 +90,15 @@ public class AddCommand extends Command {
         for (Task k : tasks) {
             if (k instanceof Deadline) {
                 if (((Deadline) k).isSameDate(date)) {
-                    if (((Deadline) k).isSameTime(time) || ((Deadline) k).isWithinAnHour(time)) {
-                        response += tasks.indexOf(k) + ". " + k.toString() + "\n";
+                    if (((Deadline) k).isWithinAnHour(time)) {
+                        response += tasks.indexOf(k) + 1 + ". " + k.toString() + "\n";
                         hasClash = true;
                     }
                 }
             } else if (k instanceof Event) {
-                if (((Event) k).isWithinAnHour(time)) {
-                    if (((Event) k).isSameTime(time)) {
-                        response += tasks.indexOf(k) + ". " + k.toString() + "\n";
+                if (((Event) k).isSameDate(date)) {
+                    if (((Event) k).isWithinAnHour(time)) {
+                        response += tasks.indexOf(k) + 1 + ". " + k.toString() + "\n";
                         hasClash = true;
                     }
                 }

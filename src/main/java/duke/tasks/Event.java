@@ -124,7 +124,7 @@ public class Event extends Task {
             LocalTime t2 = null;
             try {
                 t2 = LocalTime.parse(descriptions[i]);
-                if (t2.getHour() - t1.getHour() >= 1 || t1.getHour() - t2.getHour() >= 1) {
+                if (t2.getHour() - t1.getHour() <= 1 && t2.getHour() - t1.getHour() >= -1) {
                     return true;
                 } else {
                     continue;
