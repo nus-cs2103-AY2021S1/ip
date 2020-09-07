@@ -19,7 +19,7 @@ public class Storage {
             this.filePath = filePath;
             File dataFile = new File(filePath);
             if (!dataFile.getParentFile().exists()) {
-                if (dataFile.mkdirs()) {
+                if (dataFile.getParentFile().mkdirs()) {
                     new Ui("Data Directory is created...").printMessage();
                 } else {
                     new Ui("Oops...the data directory cannot be created :(").printMessage();

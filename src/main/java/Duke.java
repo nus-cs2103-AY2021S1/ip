@@ -13,18 +13,8 @@ public class Duke {
     private Parser parser;
     private TaskList tasks;
 
-    private final static String DATA_FILE_PATH = "data/dukeData.txt";
+    private final static String DATA_FILE_PATH = "src/main/data/dukeData.txt";
 
-    /**
-     * Returns lateral location of the specified position.
-     * If the position is unset, NaN is returned.
-     *
-     * @param filePath  Relative path of the data file
-     * @param y Y coordinate of position.
-     * @param zone Zone of position.
-     * @return Lateral location.
-     * @throws IllegalArgumentException  If zone is <= 0.
-     */
     private Duke(String filePath) {
         ui = new Ui();
 
