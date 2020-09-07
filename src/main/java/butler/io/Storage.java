@@ -16,14 +16,30 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-// Class deals with loading tasks from the file and saving tasks in the file
+/**
+ * Represents a storage responsible for reading and writing into the hard disk.
+ * Reads a list of tasks from a given location in the hard disk and
+ * stores the list of tasks into the same location within the hard disk.
+ */
 public class Storage {
     private String filePath;
 
+    /**
+     * Constructs a new storage with the given <code>filePath</code>.
+     * The storage will read and write into the file at the given <code>filePath</code>.
+     *
+     * @param filePath File path of the file to be read from and written into.
+     */
     public Storage(String filePath) {
         this.filePath = filePath;
     }
 
+    /**
+     * Stores the given <code>taskList</code> within the <code>filePath</code>.
+     *
+     * @param taskList List of tasks to be written into the hard disk.
+     * @throws ButlerException if file is not detected.
+     */
     public void storeTaskList(TaskList taskList) throws ButlerException{
         try {
             FileWriter fw = new FileWriter(filePath);
@@ -67,6 +83,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the list of tasks from the <code>filePath</code>.
+     *
+     * @return A list of tasks read from the <code>filePath</code>.
+     * @throws ButlerException if there is an error within the content of the file.
+     */
     public ArrayList<Task> load() throws ButlerException {
         try {
             File f = new File(filePath);

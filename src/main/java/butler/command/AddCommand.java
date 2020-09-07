@@ -6,13 +6,31 @@ import butler.io.Ui;
 import butler.task.Task;
 import butler.task.TaskList;
 
+/**
+ * Represents a command to add a <code>Task</code> to a <code>TaskList</code>.
+ */
 public class AddCommand extends Command {
     private Task task;
 
+    /**
+     * Constructs a command to add the given <code>task</code>.
+     *
+     * @param task Task to be added.
+     */
     public AddCommand(Task task) {
         this.task = task;
     }
 
+    /**
+     * Adds the task to the specified <code>taskList</code>.
+     * Updates the list of tasks saved in the hard disk and
+     * alerts the user that the task has been successfully added.
+     *
+     * @param taskList List of tasks in which task is to be added to.
+     * @param ui User interface to interact with user.
+     * @param storage Storage which stores given <code>taskList</code> on hard disk.
+     * @throws ButlerException if an error with saving the list of tasks occurs.
+     */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws ButlerException {
         taskList.addTask(task);
@@ -20,11 +38,21 @@ public class AddCommand extends Command {
         ui.showTaskAdded(task);
     }
 
+    /**
+     * Returns a boolean whether this command is an <code>ExitCommand</code>.
+     *
+     * @return <code>false</code>
+     */
     @Override
     public Boolean isExit() {
         return false;
     }
 
+    /**
+     * Returns the task this command is adding.
+     *
+     * @return Task to be added by this command.
+     */
     public Task getTask() {
         return task;
     }

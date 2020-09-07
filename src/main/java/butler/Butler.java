@@ -7,6 +7,13 @@ import butler.io.Storage;
 import butler.io.Ui;
 import butler.task.TaskList;
 
+/**
+ * Represents a butler that manages a list of tasks for the user.
+ *
+ * Butler maintains a list of tasks across different sessions.
+ * Data of the list of tasks are saved in hard disk within data/tasks.txt
+ * relative to the program file location.
+ */
 public class Butler {
 
     private Storage storage;

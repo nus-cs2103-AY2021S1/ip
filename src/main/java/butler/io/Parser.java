@@ -16,9 +16,19 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-// Class  deals with making sense of the user command
+/**
+ * Represents a parser to identify the content of the user input.
+ * Throws <code>ButlerException</code> when an invalid input is processed.
+ */
 public class Parser {
 
+    /**
+     * Parses the given <code>input</code> to identify the command given.
+     *
+     * @param input User input to be parsed.
+     * @return Command represented by the <code>input</code>.
+     * @throws ButlerException if the user input is invalid.
+     */
     public static Command parse(String input) throws ButlerException {
         String commandType = input.split(" ")[0];
 
