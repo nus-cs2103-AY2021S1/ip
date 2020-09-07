@@ -16,23 +16,38 @@ public class Chatbot {
     private static Storage taskStorage;
     private static Ui ui;
 
+    private Path filePath;
+
     public Chatbot() {
-        final Path dataLocation = Path.of("chatbot.txt");
+        initialiseDataPath("chatbot.txt");
+        initialiseUI();
+        initialiseStorage();
+        initialiseTaskList(taskStorage);
+    }
 
+    public void initialiseDataPath(String path) {
+        this.filePath = Path.of(path);
+    }
+
+    public void initialiseUI() {
         ui = new Ui();
-        taskStorage = new Storage(dataLocation);
+    }
 
+    public void initialiseStorage() {
+        taskStorage = new Storage(filePath);
+    }
+
+    public void initialiseTaskList(Storage store) {
+        // load tasks from disk
         try {
-            taskList = new TaskList(taskStorage.loadTasks());
-            assert taskList != null : "Task list is not supposed to be null.";
+            taskList = new TaskList(store.loadTasks());
         } catch (ChatbotException e) {
             e.printStackTrace();
         }
     }
 
     public String getResponse(String input) {
-
-        String response = "";
+        String response;
 
         try {
             // parse user input to generate a command
@@ -52,7 +67,7 @@ public class Chatbot {
         return response;
     }
 
-    public String greeting() {
+    public String generateWelcomeMessage() {
         return ui.greet();
     }
 }
