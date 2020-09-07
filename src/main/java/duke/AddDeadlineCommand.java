@@ -44,6 +44,11 @@ public class AddDeadlineCommand extends Command {
         }
 
         String deadlineName = descriptionArray[0];
+
+        if (deadlineName.isEmpty() || deadlineName.isBlank()) {
+            throw new DukeException("NANI??! Don't describe your deadline with just spaces!\n");
+        }
+        assert !deadlineName.isBlank() : "deadline name is not supposed to be blank";
         String deadlineEndTime = descriptionArray[1];
 
         // split to date and time
