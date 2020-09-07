@@ -13,8 +13,8 @@ public class Event extends Task {
      * @param description Description of the event needs to be performed
      * @param at String representation of when the event is occurring
      */
-    public Event(String description, String at) {
-        super(description);
+    public Event(String description, Priority priority,  String at) {
+        super(description, priority);
         this.at = at;
     }
 
@@ -25,8 +25,8 @@ public class Event extends Task {
      * @param at String representation of when the event is occurring
      * @param isDone Completion status of the task
      */
-    public Event(String description, String at, boolean isDone) {
-        super(description, isDone);
+    public Event(String description, Priority priority, String at, boolean isDone) {
+        super(description, priority, isDone);
         this.at = at;
     }
 
@@ -35,8 +35,8 @@ public class Event extends Task {
      * @param description Description of the event needs to be performed
      * @param atDate LocalDate representation of when the event is occurring
      */
-    public Event(String description, LocalDate atDate) {
-        super(description);
+    public Event(String description, Priority priority, LocalDate atDate) {
+        super(description, priority);
         this.atDate = atDate;
     }
 

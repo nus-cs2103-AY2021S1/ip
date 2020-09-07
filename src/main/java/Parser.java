@@ -135,13 +135,18 @@ public class Parser {
      * @throws DukeException when the user does not provide a description
      */
     private static Task createTodo(String input) throws DukeException {
-        String taskDescription = input.substring(5);
-        if (input.equals("todo") || taskDescription.isEmpty()) {
+        String taskDetails = input.substring(5);
+        if (input.equals("todo") || taskDetails.isEmpty()) {
             String incorrectTaskDescriptionMessage = "My apologies sir but the description of todo "
                     + "cannot be empty :(";
             throw new DukeException(incorrectTaskDescriptionMessage);
         }
-        return new Todo(taskDescription);
+
+        String[] splitInput = taskDetails.split(" ");
+        Priority priority = Priority.valueOf(splitInput[0]);
+        String taskDescription = splitInput[1];
+
+        return new Todo(taskDescription, priority);
     }
 
     /**
@@ -176,15 +181,16 @@ public class Parser {
         }
 
         String[] splicedInput = input.substring(9).split(" /by ");
-        String deadlineDescription = splicedInput[0];
+        Priority priority = Priority.valueOf(splicedInput[0].split(" ", 2)[0]);
+        String deadlineDescription = splicedInput[0].split(" ", 2)[1];
         String deadlineByString = splicedInput[1];
         LocalDate deadlineByDate = convertDate(deadlineByString);
 
         if (deadlineByDate == null) {
-            return new Deadline(deadlineDescription, deadlineByString);
+            return new Deadline(deadlineDescription, priority, deadlineByString);
         }
 
-        return new Deadline(deadlineDescription, deadlineByDate);
+        return new Deadline(deadlineDescription, priority, deadlineByDate);
     }
 
     /**
@@ -203,13 +209,16 @@ public class Parser {
         }
 
         String[] splicedInput = input.substring(6).split(" /at ");
+        Priority priority = Priority.valueOf(splicedInput[0].split(" ", 2)[0]);
+        String eventDescription = splicedInput[0].split(" ", 2)[1];
         LocalDate date = convertDate(splicedInput[1]);
+        String dateString = splicedInput[1];
 
         if (date == null) {
-            return new Event(splicedInput[0], splicedInput[1]);
+            return new Event(eventDescription, priority, dateString);
         }
 
-        return new Event(splicedInput[0], date);
+        return new Event(eventDescription, priority, date);
     }
 
     /**
