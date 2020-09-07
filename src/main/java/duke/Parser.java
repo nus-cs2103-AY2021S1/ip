@@ -28,6 +28,7 @@ import duke.exception.DukeUnknownCommandException;
  */
 public class Parser {
     private LocalDate parseDate(String inputDate) throws DukeDateTimeException {
+        assert inputDate != null : "Input date cannot be null";
         try {
             return LocalDate.parse(inputDate, DateTimeFormatter.ISO_LOCAL_DATE);
         } catch (DateTimeException e) {
@@ -36,6 +37,7 @@ public class Parser {
     }
 
     private LocalTime parseTime(String inputTime) throws DukeDateTimeException {
+        assert inputTime != null : "Input time cannot be null";
         try {
             return LocalTime.parse(inputTime, DateTimeFormatter.ISO_LOCAL_TIME);
         } catch (DateTimeException e) {
