@@ -14,25 +14,23 @@ public class Parser {
      */
     static Command readUserInput(String userInput) {
         assert userInput != null;
-        if (userInput.equals(Instruction.BYE.getInstruction())) {
+        String[] inputArr = userInput.split(" ");
+        String cmd = inputArr[0];
+        if (cmd.equals(Instruction.BYE.getInstruction())) {
             return new ExitCommand();
-        } else if (userInput.equals(Instruction.LIST.getInstruction())) {
+        } else if (cmd.equals(Instruction.LIST.getInstruction())) {
             return new ListCommand();
+        } else if (cmd.equals(Instruction.DONE.getInstruction())) {
+            int itemsIdx = Integer.parseInt(inputArr[1]) - 1;
+            return new DoneCommand(itemsIdx);
+        } else if (cmd.equals(Instruction.DELETE.getInstruction())) {
+            int itemsIdx = Integer.parseInt(inputArr[1]) - 1;
+            return new DeleteCommand(itemsIdx);
+        } else if (cmd.equals(Instruction.FIND.getInstruction())) {
+            String keyword = inputArr[1];
+            return new FindCommand(keyword);
         } else {
-            String[] inputArr = userInput.split(" ");
-            String taskName = inputArr[0];
-            if (taskName.equals(Instruction.DONE.getInstruction())) {
-                int itemsIdx = Integer.parseInt(inputArr[1]) - 1;
-                return new DoneCommand(itemsIdx);
-            } else if (taskName.equals(Instruction.DELETE.getInstruction())) {
-                int itemsIdx = Integer.parseInt(inputArr[1]) - 1;
-                return new DeleteCommand(itemsIdx);
-            } else if (taskName.equals(Instruction.FIND.getInstruction())) {
-                String keyword = inputArr[1];
-                return new FindCommand(keyword);
-            } else {
-                return new AddCommand(userInput);
-            }
+            return new AddCommand(userInput);
         }
     }
 }
