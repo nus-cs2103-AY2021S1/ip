@@ -23,11 +23,11 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(String inputMsg, TaskList currList, Ui ui) throws DukeException {
-        if (currList.getNumberOfTasks() == 0) {
+        if (currList.getNumberOfTasks() > 0) {
+            return currList.displayTasks();
+        } else {
             // user has not added any task
             throw new DukeException("Nothing has been added to the list yet!");
-        } else {
-            return currList.displayTasks();
         }
     }
 }
