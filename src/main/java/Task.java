@@ -4,15 +4,17 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected Priority priority;
 
     /**
      * Initialises a new Task with the given description.
      * @param description Description of the task that needs to be performed
      */
-    public Task(String description) {
+    public Task(String description, Priority priority) {
         assert description != null;
 
         this.description = description;
+        this.priority = priority;
         this.isDone = false;
     }
 
@@ -21,10 +23,11 @@ public class Task {
      * @param description Description of the task that needs to be performed
      * @param isDone Completion status of the task
      */
-    public Task(String description, boolean isDone) {
+    public Task(String description, Priority priority, boolean isDone) {
         assert description != null;
 
         this.description = description;
+        this.priority = priority;
         this.isDone = isDone;
     }
 
@@ -37,7 +40,7 @@ public class Task {
     }
 
     public String toString() {
-        return "[" + getStatusIcon() + "] " + description;
+        return "[" + getStatusIcon() + "] " + " {" + priority.name() + "} " + description;
     }
 
     /**
@@ -46,6 +49,6 @@ public class Task {
      * @return Task in its save format
      */
     public String getSaveFormat() {
-        return (isDone ? "1" : "0") + " | " + description;
+        return (isDone ? "1" : "0") + " | " + priority.name() + " | " + description;
     }
 }

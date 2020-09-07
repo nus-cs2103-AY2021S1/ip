@@ -14,7 +14,7 @@ public class TaskList {
      * @param file .txt file that contains saved Duke task data
      * @param ui Ui to display results and errors to the user
      */
-    @SuppressWarnings("checkstyle:MissingSwitchDefault")
+
     public TaskList(File file, Ui ui) {
         assert file != null;
         assert ui != null;
@@ -27,21 +27,23 @@ public class TaskList {
             while (sc.hasNextLine()) {
                 String[] components = sc.nextLine().split(" \\| ");
                 String taskId = components[0];
-                String taskDescription = components[2];
                 boolean isComplete = components[1].equals("1");
+                Priority priority = Priority.valueOf(components[2]);
+                String taskDescription = components[3];
 
-                //noinspection CheckStyle
                 switch (taskId) {
                 case "T":
-                    tasks.add(new Todo(taskDescription, isComplete));
+                    tasks.add(new Todo(taskDescription, priority, isComplete));
                     break;
                 case "D":
-                    String deadlineBy = components[3];
-                    tasks.add(new Deadline(taskDescription, deadlineBy, isComplete));
+                    String deadlineBy = components[4];
+                    tasks.add(new Deadline(taskDescription, priority, deadlineBy, isComplete));
                     break;
                 case "E":
-                    String eventAt = components[3];
-                    tasks.add(new Event(taskDescription, eventAt, isComplete));
+                    String eventAt = components[4];
+                    tasks.add(new Event(taskDescription, priority, eventAt, isComplete));
+                    break;
+                default:
                     break;
                 }
             }

@@ -1,5 +1,6 @@
-T | 1 | read book
-D | 1 | return book | June 6th
-E | 0 | project meeting | Aug 6th 2-4pm
-T | 0 | read book
-T | 0 | yolo
+T | 1 | HIGH | read book
+D | 1 | LOW | return book | June 6th
+E | 0 | MEDIUM | project meeting | Aug 6th 2-4pm
+T | 0 | HIGH | read book
+T | 0 | HIGH | yolo
+T | 0 | HIGH | hello
