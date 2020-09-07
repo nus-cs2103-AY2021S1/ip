@@ -14,19 +14,21 @@ import ui.Ui;
 
 public class Storage {
 
+    private Scanner readSc;
+
     /**
      * Write the content of the list into a file
-     * @param list The task list
      */
-    public void writeFile(ArrayList<Task> list) {
+    public void writeFile(TaskList tl) {
         try {
+            ArrayList<Task> tasks = tl.getTaskList();
             StringBuilder replacementText = new StringBuilder();
             createFile("data/duke.txt");
-            for (int i = 0; i < list.size(); i++) {
-                if (list.get(i) instanceof Todo) {
-                    replacementText.append(list.get(i).toString() + "\n");
+            for (int i = 0; i < tasks.size(); i++) {
+                if (tasks.get(i) instanceof Todo) {
+                    replacementText.append(tasks.get(i).toString() + "\n");
                 } else {
-                    replacementText.append(list.get(i).toString() + " on " + list.get(i).getDate() + "\n");
+                    replacementText.append(tasks.get(i).toString() + " on " + tasks.get(i).getDate() + "\n");
                 }
             }
             appendToFile("data/duke.txt", replacementText.toString());
@@ -64,13 +66,11 @@ public class Storage {
 
     /**
      * Read data from a file and put it inside the list
-     * @param readSc Scanner object to read the file content
      * @param tl TaskList object to add the tasks inside the file to the list
      * @param ui Ui object to print user display
-     * @param list The task list
      * @param filePath The file path (destination)
      */
-    public String readFile(Scanner readSc, TaskList tl, Ui ui, ArrayList<Task> list, String filePath)
+    public String readFile(TaskList tl, Ui ui, String filePath)
             throws FileNotFoundException, NullPointerException {
         File f = new File(filePath);
         readSc = new Scanner(f);
@@ -81,9 +81,9 @@ public class Storage {
             case 'T':
                 try {
                     if (curr.charAt(4) == 'X') {
-                        tl.addTodo(ui, list, curr.split(" ", 2)[1], false, false);
+                        tl.addTodo(ui, curr.split(" ", 2)[1], false, false);
                     } else {
-                        tl.addTodo(ui, list, curr.split(" ", 2)[1], false, true);
+                        tl.addTodo(ui, curr.split(" ", 2)[1], false, true);
                     }
                 } catch (InvalidTodoException e) {
                     return e.toString();
@@ -92,9 +92,9 @@ public class Storage {
             case 'D':
                 try {
                     if (curr.charAt(4) == 'X') {
-                        tl.addDeadline(ui, list, curr.split(" ", 2)[1], false, false);
+                        tl.addDeadline(ui, curr.split(" ", 2)[1], false, false);
                     } else {
-                        tl.addDeadline(ui, list, curr.split(" ", 2)[1], false, true);
+                        tl.addDeadline(ui, curr.split(" ", 2)[1], false, true);
                     }
                 } catch (InvalidDeadlineException e) {
                     return e.toString();
@@ -103,9 +103,9 @@ public class Storage {
             case 'E':
                 try {
                     if (curr.charAt(4) == 'X') {
-                        tl.addEvent(ui, list, curr.split(" ", 2)[1], false, false);
+                        tl.addEvent(ui, curr.split(" ", 2)[1], false, false);
                     } else {
-                        tl.addEvent(ui, list, curr.split(" ", 2)[1], false, true);
+                        tl.addEvent(ui, curr.split(" ", 2)[1], false, true);
                     }
                 } catch (InvalidEventException e) {
                     return e.toString();

@@ -1,7 +1,6 @@
 package ui;
 
 import duke.Duke;
-import duke.Storage;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -24,14 +23,21 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+    private Ui ui = new Ui();
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private Storage storage = new Storage();
 
+    /**
+     * Initialize the GUI
+     */
     @FXML
     public void initialize() {
+        userInput.setPromptText("Type a message");
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(ui.introduceDuke(), dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {

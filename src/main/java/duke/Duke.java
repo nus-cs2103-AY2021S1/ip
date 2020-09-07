@@ -1,8 +1,6 @@
 package duke;
 
 import java.io.FileNotFoundException;
-import java.util.ArrayList;
-import java.util.Scanner;
 
 import exception.DukeErrorException;
 import exception.InvalidDeadlineException;
@@ -15,12 +13,6 @@ import ui.Ui;
  * Main class for the Duke application
  */
 public class Duke {
-    // Scanner to read input
-    private Scanner readSc;
-    // Scanner to give input
-    private Scanner inputSc;
-    // List of tasks
-    private ArrayList<Task> tasks;
     // Ui object to print out displays
     private Ui ui;
     // Storage object to handle saving to file
@@ -34,8 +26,6 @@ public class Duke {
      * A constructor to initialize Duke Chatbot
      */
     public Duke() {
-        inputSc = new Scanner(System.in);
-        tasks = new ArrayList<>();
         ui = new Ui();
         tl = new TaskList();
         parser = new Parser();
@@ -47,7 +37,7 @@ public class Duke {
      */
     public void putExistingTask() {
         try {
-            storage.readFile(readSc, tl, ui, tasks, "data/duke.txt");
+            storage.readFile(tl, ui, "data/duke.txt");
         } catch (FileNotFoundException | NullPointerException e) {
             System.out.println("Folder data not found! " + e);
         }
@@ -73,42 +63,42 @@ public class Duke {
         }
 
         if (command.equals(Commands.BYE)) {
-            storage.writeFile(tasks);
+            storage.writeFile(tl);
             return ui.sayFarewell();
         } else if (command.equals(Commands.LIST)) {
-            return ui.printList(tasks);
+            return ui.printList(tl.getTaskList());
         } else if (command.equals(Commands.DONE)) {
             try {
-                return tl.makeDone(tasks, Integer.parseInt(splitted[1]) - 1);
+                return tl.makeDone(Integer.parseInt(splitted[1]) - 1);
             } catch (ArrayIndexOutOfBoundsException | DukeErrorException ex) {
                 return ex.toString();
             }
         } else if (command.equals(Commands.DELETE)) {
             try {
-                return tl.deleteTask(tasks, Integer.parseInt(splitted[1]) - 1);
+                return tl.deleteTask(Integer.parseInt(splitted[1]) - 1);
             } catch (ArrayIndexOutOfBoundsException | DukeErrorException ex) {
                 return ex.toString();
             }
         } else if (command.equals(Commands.DEADLINE)) {
             try {
-                return tl.addDeadline(ui, tasks, splitted[1], true, false);
+                return tl.addDeadline(ui, splitted[1], true, false);
             } catch (ArrayIndexOutOfBoundsException | InvalidDeadlineException ex) {
                 return ex + ". ☹ Task deadline must be specified.";
             }
         } else if (command.equals(Commands.TODO)) {
             try {
-                return tl.addTodo(ui, tasks, splitted[1], true, false);
+                return tl.addTodo(ui, splitted[1], true, false);
             } catch (ArrayIndexOutOfBoundsException | InvalidTodoException ex) {
                 return ex + ". ☹ The description of a todo cannot be empty.";
             }
         } else if (command.equals(Commands.EVENT)) {
             try {
-                return tl.addEvent(ui, tasks, splitted[1], true, false);
+                return tl.addEvent(ui, splitted[1], true, false);
             } catch (ArrayIndexOutOfBoundsException | InvalidEventException ex) {
                 return ex + ". ☹ The description of an event cannot be empty.";
             }
         } else {
-            return ui.printList(tl.findTask(tasks, splitted[1]));
+            return ui.printList(tl.findTask(splitted[1]));
         }
     }
 }

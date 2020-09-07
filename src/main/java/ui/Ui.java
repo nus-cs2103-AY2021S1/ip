@@ -85,16 +85,9 @@ public class Ui {
      * Show introduction of the Duke chatbot
      */
     public String introduceDuke() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        StringBuilder output = new StringBuilder("Hello from\n" + logo);
-        String introduction = "____________________________________________________________\n"
-                + "Hello! I'm Duke\n"
-                + "What can I do for you?\n"
-                + "____________________________________________________________\n";
+        StringBuilder output = new StringBuilder();
+        String introduction = "Hello! I'm Duke\n"
+                + "What can I do for you?\n";
         output.append(introduction);
         return output.toString();
     }
