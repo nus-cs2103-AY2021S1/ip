@@ -36,7 +36,7 @@ public class Parser {
      */
 
     public String parse(String fullInput) {
-        assert fullInput.length() > 0 && fullInput.contains(" ");
+        assert fullInput.length() > 0;
         String result = "";
         try {
 
@@ -55,6 +55,21 @@ public class Parser {
                 //Marks a task as done in the task list.
                 int num = Integer.parseInt(fullInput.substring(5));
                 result = tasks.doTask(num);
+            } else if (fullInput.startsWith("snooze ")) {
+                //Snoozes a task, and postpone the task to a later date.
+                String commands[] = fullInput.split(" ");
+                int taskNum = Integer.parseInt(commands[1]) - 1 ;
+                String dateString = commands[2];
+                String[] dateArray = dateString.split("-");
+                // Checks if the date and time are in the correct format.
+                if (dateArray.length != 3
+                    || dateArray[0].length() != 4 && dateArray[1].length() != 2 && dateArray[2].length() != 2) {
+                    throw new DateTimeException();
+                }
+
+                result = tasks.snoozeTask(taskNum, LocalDate.of(Integer.parseInt(dateArray[0]),
+                    Integer.parseInt(dateArray[1]), Integer.parseInt(dateArray[2])));
+
             } else if (fullInput.equals("bye")) {
                 //Saves the task list into the hard drive and terminates the program.
                 this.storage.save(tasks);
@@ -108,6 +123,7 @@ public class Parser {
                     || dateTime[0].length() != 4 && dateTime[1].length() != 2 && dateTime[2].length() != 2) {
                     throw new DateTimeException();
                 }
+
                 LocalDate by = LocalDate.of(Integer.parseInt(dateTime[0]), Integer.parseInt(dateTime[1]),
                     Integer.parseInt(dateTime[2]));
                 Task task = new Deadline(description, by);
