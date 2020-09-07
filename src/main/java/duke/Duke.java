@@ -27,8 +27,6 @@ public class Duke {
     public String getResponse(String userInput) {
         try {
             ui.clearMessage();
-            assert ui.toString().equals(""); // assert that the ui is properly cleared
-
             Command c = Parser.parse(userInput);
             c.execute(tasks, ui, storage);
             storage.writeToFile(tasks);
