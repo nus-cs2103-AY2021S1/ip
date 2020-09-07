@@ -1,5 +1,6 @@
 package duke.command;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import duke.task.Task;
@@ -16,23 +17,18 @@ public class FindCommand extends Command {
 
     public String execute(TaskList taskList, Ui ui) {
         List<Task> store = taskList.getList();
-        int count = 0;
-        boolean hasMatching = false;
         String lowercaseString = matchString.toLowerCase();
-        String outputMessage = "";
-        for (Task task : store) {
-            count++;
-            if (task.toString().toLowerCase().contains(lowercaseString)) {
-                if (!hasMatching) { // check if this is first match
-                    outputMessage += ui.print("Here are the matching tasks in your list:\n");
-                    hasMatching = true;
-                }
-                outputMessage += ui.print(String.format("%d. %s", count, task));
-            }
+        StringBuilder outputMessage = new StringBuilder("Here are the matching tasks in your list:\n");
+        List<Task> matchingTasks = new ArrayList<>();
+        store.stream().filter(task -> task.toString().toLowerCase()
+                .contains(lowercaseString)).forEach(task -> {
+                    matchingTasks.add(task);
+                    outputMessage.append(String.format("%d. %s", store.indexOf(task) + 1, task));
+                });
+        if (matchingTasks.isEmpty()) {
+            return ui.print(String.format("You have no tasks matching '%s'", matchString));
+        } else {
+            return ui.print(outputMessage.toString());
         }
-        if (!hasMatching) {
-            outputMessage += ui.print(String.format("You have no tasks matching '%s'", matchString));
-        }
-        return outputMessage;
     }
 }
