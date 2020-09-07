@@ -133,20 +133,29 @@ public class ParserLogic {
      * @throws StorageException Exception from writing to asset file.
      */
     public String parseDelete(String command) throws KingException, StorageException {
-        System.out.println(command);
-        String stringItem = command.substring(6).trim();
+
+        String itemsToDelete = command.substring(6).trim();
+        // splits the item number an array while removing whitespaces
+        String[] tasksToDeleteTokens = itemsToDelete.replaceAll("\\s+", " ").split(" ");
+        Integer[] taskPositions = new Integer[tasksToDeleteTokens.length];
+
+        // taskNumber keeps track of the current task number in tasksToDeleteTokens being parsed.
+        String taskNumber = tasksToDeleteTokens[0];
         try {
-            int itemNo = Integer.parseInt(stringItem) - 1;
-            Task item = taskList.get(itemNo);
-            taskList.delete(itemNo);
+            for (int pos = 0; pos < taskPositions.length; pos++) {
+                taskNumber = tasksToDeleteTokens[pos];
+                int itemNumber = Integer.parseInt(taskNumber) - 1;
+                taskPositions[pos] = itemNumber;
+            }
+            TaskList deletedTasks = taskList.delete(taskPositions);
             storage.persistTaskList(taskList);
-            return UI.deleteItemChatBox(item.toString(), taskList.size());
+            return UI.deleteItemChatBox(taskList.size(), deletedTasks);
         } catch (IndexOutOfBoundsException e) {
-            throw exceptions.itemNotFoundException(stringItem, e);
+            throw exceptions.itemNotFoundException(taskNumber, e);
         } catch (NumberFormatException e) {
-            throw (stringItem.isEmpty())
+            throw (itemsToDelete.isEmpty())
                     ? exceptions.deleteNotFollowedByNumberException()
-                    : exceptions.invalidNumberException(stringItem, e);
+                    : exceptions.invalidNumberException(taskNumber, e);
         } catch (StorageException e) {
             throw e;
         } catch (Exception e) {

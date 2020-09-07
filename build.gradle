@@ -44,7 +44,7 @@ test {
 }
 
 application {
-    mainClassName = "king.Launcher"
+    mainClassName = "king.gui.Launcher"
 }
 
 shadowJar {
