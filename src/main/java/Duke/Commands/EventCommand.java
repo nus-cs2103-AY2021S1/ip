@@ -97,6 +97,12 @@ public class EventCommand extends AddCommand{
             throw new EventException(false, true, false, false, false);
         }
         String[] dataSplit = new String[3];
+
+        assert !s.substring(1, s.length() - 1).contains("/"); //description cannot contain /
+        assert !commandDescription.substring(index + 4).contains("/at"); //start date and/or time cannot contain /at
+        assert !commandDescription.substring(end + 1).contains("-"); //end date and/or time cannot contain -
+
+
         dataSplit[0] = s.substring(1, s.length() - 1);
         dataSplit[1] = commandDescription.substring(index + 4, end);
         dataSplit[2] = commandDescription.substring(end + 1);
@@ -158,3 +164,4 @@ public class EventCommand extends AddCommand{
 
 
 }
+

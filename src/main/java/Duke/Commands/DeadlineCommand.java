@@ -83,6 +83,8 @@ public class DeadlineCommand extends AddCommand {
         if (!time) {
             throw new DeadlineException(false, false, true);
         }
+        assert !s.substring(1, s.length() - 1).contains("/"); // description should not contain /
+        assert !commandDescription.substring(index + 4).contains("/by"); ////date and/or time should not contain /at
         String[] dataSplit = new String[]{s.substring(1, s.length() - 1), commandDescription.substring(index + 4)};
         return dataSplit;
     }

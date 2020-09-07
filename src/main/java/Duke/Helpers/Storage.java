@@ -36,6 +36,7 @@ public class Storage {
      */
     public List<Task> load() throws DukeException {
         File f = new File(this.filePath);
+        assert f.exists(); //file should exist to keep track of tasks
         try {
             List<Task> tasks = new ArrayList<>();
             Scanner sc = new Scanner(f);
