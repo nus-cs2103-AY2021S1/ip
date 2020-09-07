@@ -44,7 +44,10 @@ public class Ui {
             taskDetails = parser.getTaskDetails();
             date = parser.getDate();
 
-            if (commandType.equals("bye")) {
+            if (commandType.equals("hello")) {
+                toReturn += greet();
+
+            } else if (commandType.equals("bye")) {
                 toReturn += end();
 
             } else if (commandType.equals("list")) {
@@ -69,7 +72,7 @@ public class Ui {
                 toReturn += find(taskDetails);
 
             } else {
-
+                assert false;
             }
 
             storage.addData(list.getList());
@@ -92,8 +95,8 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String start = "Hello! I'm Duke, your personal assistant. \nWhat can I do for you?";
-        String text = LINE + logo + start + LINE;
+        String start = "Hello! I'm Duke, your personal assistant. \nWhat can I do for you?\n";
+        String text = logo + start;
         return text;
     }
 

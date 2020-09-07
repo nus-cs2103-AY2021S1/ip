@@ -54,17 +54,11 @@ public class Storage {
             Task task;
 
             if (type.equals("T")) {
-
                 task = new Todo(taskString, isCompleted);
-
             } else if (type.equals("D")) {
-
                 task = new Deadline(taskString, details[3], isCompleted);
-
             } else {
-
                 task = new Event(taskString, details[3], isCompleted);
-
             }
 
             list.add(task);
@@ -88,21 +82,14 @@ public class Storage {
             String completed = String.valueOf(task.isCompleted());
 
             if (task instanceof Todo) {
-
                 toAdd = "T:" + completed + ":" + task.getTask();
-
             } else if (task instanceof Deadline) {
-
                 toAdd = "D:" + completed + ":" + task.getTask() + ":" + ((Deadline) task).date;
-
             } else if (task instanceof Event) {
-
                 toAdd = "E:" + completed + ":" + task.getTask() + ":" + ((Event) task).date;
-
             } else {
-                // nothing
+                assert false;
             }
-
             fw.write(toAdd + "\n");
         }
 
