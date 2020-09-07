@@ -1,3 +1,1 @@
 [T][V] read book
-[D][V] individual project on 2020-05-09
-[E][X] party on 2020-09-10

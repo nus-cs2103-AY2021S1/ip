@@ -24,13 +24,9 @@ public class Storage {
             ArrayList<Task> tasks = tl.getTaskList();
             StringBuilder replacementText = new StringBuilder();
             createFile("data/duke.txt");
-            for (int i = 0; i < tasks.size(); i++) {
-                if (tasks.get(i) instanceof Todo) {
-                    replacementText.append(tasks.get(i).toString() + "\n");
-                } else {
-                    replacementText.append(tasks.get(i).toString() + " on " + tasks.get(i).getDate() + "\n");
-                }
-            }
+            tasks.forEach(x -> {
+                replacementText.append(x.toString() + "\n");
+            });
             appendToFile("data/duke.txt", replacementText.toString());
         } catch (IOException e) {
             System.out.println("Folder data not found! " + e);
