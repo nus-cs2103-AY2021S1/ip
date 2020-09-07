@@ -1,16 +1,15 @@
 package storage;
 
-import data.exception.DukeInvalidUserInputException;
-import data.task.Task;
-import data.task.TaskList;
-import ui.Ui;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
+import data.exception.DukeInvalidUserInputException;
+import data.task.Task;
+import data.task.TaskList;
+import ui.Ui;
 /**
  * Represents the storage of where Duke is loading information from and saving information to.
  */
@@ -18,6 +17,10 @@ public class Storage {
 
     private String filepath;
 
+    /**
+     * Constructs the storage based on a filepath to a txt file.
+     * @param filepath to txt file.
+     */
     public Storage(String filepath) {
         if (filepath == null) {
             assert false;
@@ -29,7 +32,8 @@ public class Storage {
     /**
      * Loads the data in the text file from the file path to an assigned TaskList.
      * @param taskList to load data to.
-     * @throws DukeInvalidUserInputException if there are any invalid inputs in the file that are unable to be parsed into a Task.
+     * @throws DukeInvalidUserInputException if there are any invalid inputs in the file
+     * that are unable to be parsed into a Task.
      */
     public void loadTaskList(TaskList taskList) throws DukeInvalidUserInputException {
         File saveFile = new File(this.filepath);
@@ -64,7 +68,7 @@ public class Storage {
                 toSave.close();
             }
         } catch (IOException e) {
-            Ui.showUnknownError();;
+            System.out.println(Ui.showUnknownError());
         }
     }
 
@@ -78,7 +82,7 @@ public class Storage {
             if (taskList.getTotalTask() > 0) {
                 overwriteFile.write(taskList.getTask(0).toTxtFormat());
                 overwriteFile.close();
-                for (int i = 1 ; i < taskList.getTaskList().size() ; i++) {
+                for (int i = 1; i < taskList.getTaskList().size(); i++) {
                     saveTask(taskList.getTask(i));
                 }
             } else {
@@ -86,7 +90,7 @@ public class Storage {
                 overwriteFile.close();
             }
         } catch (IOException e) {
-            Ui.showUnknownError();;
+            System.out.println(Ui.showUnknownError());
         }
     }
 }

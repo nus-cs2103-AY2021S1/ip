@@ -1,33 +1,33 @@
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
 import commands.Command;
 import data.exception.DukeIllegalCommandException;
 import data.task.TaskList;
-import org.junit.jupiter.api.Test;
 import parser.Parser;
 import storage.Storage;
 import ui.Ui;
 
-import java.util.ArrayList;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-
-
 public class ParserTest {
 
     @Test
-    public void parse_emptyUserInput_returnsIllegalCommand() throws Exception {
+    public void parse_emptyUserInput_returnsIllegalCommand() {
         Parser parser = createDummyParser();
         assertThrows(DukeIllegalCommandException.class, () -> parser.parseCommand(""));
     }
 
     @Test
-    public void parse_blankUserInput_returnsIllegalCommand() throws Exception {
+    public void parse_blankUserInput_returnsIllegalCommand() {
         Parser parser = createDummyParser();
         assertThrows(DukeIllegalCommandException.class, () -> parser.parseCommand(" "));
     }
 
     @Test
-    public void parse_unknownCommand_returnsIllegalCommand() throws Exception {
+    public void parse_unknownCommand_returnsIllegalCommand() {
         Parser parser = createDummyParser();
         assertThrows(DukeIllegalCommandException.class, () -> parser.parseCommand("unknown blah blah"));
     }
@@ -100,6 +100,6 @@ public class ParserTest {
     }
 
     public Parser createDummyParser() {
-        return new Parser(new TaskList(new ArrayList<>(), new Ui()), new Storage("data/dummyText.txt"), new Ui());
+        return new Parser(new TaskList(new ArrayList<>()), new Storage("data/dummyText.txt"), new Ui());
     }
 }

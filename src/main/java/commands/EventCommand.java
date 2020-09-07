@@ -11,45 +11,34 @@ import ui.Ui;
 /**
  * Adds an Event task into the current task list of Duke.
  */
-public class EventCommand extends Command{
+public class EventCommand extends CreateTaskCommand {
 
-    private TaskList taskList;
-    private Storage storage;
-    private Ui ui;
-    private String user_input;
-
-    public EventCommand(TaskList taskList, Storage storage, Ui ui, String user_input) {
-        this.taskList = taskList;
-        this.storage = storage;
-        this.user_input = user_input;
-        this.ui = ui;
+    /**
+     * Constructs a event command.
+     * @param taskList of Duke.
+     * @param storage of Duke.
+     * @param ui of Duke.
+     * @param userInput details of tasks.
+     */
+    public EventCommand(TaskList taskList, Storage storage, Ui ui, String userInput) {
+        super(taskList, storage, ui, userInput);
     }
 
     @Override
-    public void execute() throws DukeInvalidUserInputException, DukeIllegalCommandException {
+    public String execute() throws DukeInvalidUserInputException, DukeIllegalCommandException {
         try {
-            String withoutCommand = user_input.substring(user_input.indexOf(' '));
-            String[] withoutCommandArr = withoutCommand.split("/");
-            String description = withoutCommandArr[0].trim();
-            if (description.isEmpty()) {
-                throw new DukeInvalidUserInputException("I'm sorry to inform you that the "
-                        + "description of an event must not be empty.");
-            }
-            if (withoutCommandArr.length < 2) {
-                throw new DukeInvalidUserInputException("It appears you are missing a "
-                        + "follow up '/at' command.");
-            }
-            String followUpCommand = Parser.parseFollowUpCommand(withoutCommandArr[1]);
+            String userInputWithoutCommand = this.userInput.substring(this.userInput.indexOf(' '));
+            String[] userInputWithoutCommandArr = userInputWithoutCommand.split("/");
+            String description = userInputWithoutCommandArr[0].trim();
+            checkDescription(description, "event");
+            checkFollowUpCommand(userInputWithoutCommandArr, "/at");
+            String followUpCommand = Parser.parseFollowUpCommand(userInputWithoutCommandArr[1]);
             if (followUpCommand.equals("at")) {
-                if (!withoutCommandArr[1].trim().contains(" ")) {
-                    throw new DukeInvalidUserInputException("It appears you are missing the "
-                            + "date and time for your event.");
-                }
-                String dateTime = withoutCommandArr[1].substring(withoutCommandArr[1].indexOf(" ")).trim();
+                checkDateTime(userInputWithoutCommandArr[1], "event");
+                String dateTime = userInputWithoutCommandArr[1]
+                        .substring(userInputWithoutCommandArr[1].indexOf(" ")).trim();
                 Event newTask = new Event(description, dateTime);
-                this.taskList.add(newTask);
-                this.ui.showTotalTasks(this.taskList.getTotalTask());
-                this.storage.saveTask(newTask);
+                return addTask(newTask);
             } else {
                 throw new DukeIllegalCommandException(followUpCommand);
             }

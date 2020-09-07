@@ -1,10 +1,10 @@
-import data.exception.DukeInvalidUserInputException;
-import data.task.Deadline;
-import data.task.Event;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
+
+import data.exception.DukeInvalidUserInputException;
+import data.task.Event;
 
 public class EventTest {
     @Test
@@ -13,7 +13,7 @@ public class EventTest {
     }
 
     @Test
-    public void convertDateTime_validInput_returnsValidDateTime() throws Exception{
+    public void convertDateTime_validInput_returnsValidDateTime() throws Exception {
         Event deadline = new Event("Description", "2020-02-02 2020-2121");
         assertEquals("[E][\u2718] Description (at: 2 February 2020 08:20 PM to 09:21 PM)", deadline.toString());
     }
@@ -29,7 +29,7 @@ public class EventTest {
     }
 
     @Test
-    public void toTxtFormat_validInput_returnsTxtFormat() throws Exception{
+    public void toTxtFormat_validInput_returnsTxtFormat() throws Exception {
         Event event = new Event("Description", "2020-02-02 2020-2121");
         assertEquals("E | 0 | Description | 2 February 2020 08:20 PM to 09:21 PM", event.toTxtFormat());
     }
@@ -41,7 +41,7 @@ public class EventTest {
     }
 
     @Test
-    public void parse_validInput_returnsDeadline() throws Exception{
+    public void parse_validInput_returnsDeadline() throws Exception {
         String[] txtArray = {"D", "0", "A Valid Description", "24 August 2020 08:00 PM to 01:00 AM"};
         Event event = Event.parse(txtArray);
         assertEquals("[E][\u2718] A Valid Description (at: 24 August 2020 08:00 PM to 01:00 AM)", event.toString());

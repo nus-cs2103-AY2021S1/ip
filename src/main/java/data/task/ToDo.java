@@ -1,7 +1,5 @@
 package data.task;
 
-import data.exception.DukeInvalidUserInputException;
-
 /**
  * A specific type of task that only contains a description of a task.
  */

@@ -5,18 +5,16 @@ import ui.Ui;
 /**
  * Exits from Duke.
  */
-public class ByeCommand extends Command{
-
-    private Ui ui;
+public class ByeCommand extends Command {
 
     public ByeCommand(Ui ui) {
-        this.ui = ui;
+        super(ui);
     }
 
     @Override
-    public void execute() {
-        this.ui.showExit();
+    public String execute() {
         System.exit(0);
+        return this.ui.showExit();
     }
 
     @Override

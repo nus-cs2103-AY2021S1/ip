@@ -9,32 +9,26 @@ import ui.Ui;
 /**
  * Adds a To_Do task into the current task list of Duke.
  */
-public class ToDoCommand extends Command {
+public class ToDoCommand extends CreateTaskCommand {
 
-    private TaskList taskList;
-    private Storage storage;
-    private Ui ui;
-    private String user_input;
-
-    public ToDoCommand(TaskList taskList, Storage storage, Ui ui, String user_input) {
-        this.taskList = taskList;
-        this.storage = storage;
-        this.user_input = user_input;
-        this.ui = ui;
+    /**
+     * Constructs a to do command.
+     * @param taskList of Duke.
+     * @param storage of Duke.
+     * @param ui of Duke.
+     * @param userInput details of tasks.
+     */
+    public ToDoCommand(TaskList taskList, Storage storage, Ui ui, String userInput) {
+        super(taskList, storage, ui, userInput);
     }
 
     @Override
-    public void execute() throws DukeInvalidUserInputException {
+    public String execute() throws DukeInvalidUserInputException {
         try {
-            String description = user_input.substring(5).trim();
-            if (description.isEmpty()) {
-                throw new DukeInvalidUserInputException("I'm sorry to inform you that the "
-                        + "description of a todo must not be empty.");
-            }
+            String description = userInput.substring(5).trim();
+            checkDescription(description, "todo");
             ToDo newTask = new ToDo(description);
-            this.taskList.add(newTask);
-            this.ui.showTotalTasks(this.taskList.getTotalTask());
-            this.storage.saveTask(newTask);
+            return addTask(newTask);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeInvalidUserInputException("I'm sorry to inform you that the "
                     + "description of a todo must not be empty.");

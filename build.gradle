@@ -62,5 +62,7 @@ run{
 }
 
 tasks.withType(JavaCompile) {
-    options.encoding = 'UTF-8'
+    options.encoding('UTF-8')
 }
+
+applicationDefaultJvmArgs = ["-Dfile.encoding=UTF-8"]
