@@ -1,3 +1,0 @@
-1 || todo || aaron is awesome
-1 || deadline || aaron very awesome  || 2020-11-11
-0 || todo || asdlkjf
