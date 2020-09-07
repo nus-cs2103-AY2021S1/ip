@@ -85,4 +85,20 @@ public class TaskList {
                     + taskIndex + "\" is not a valid index.");
         }
     }
+
+    /**
+     * Produces a sub list of tasks that contains the given <code>keyword</code>.
+     *
+     * @param keyword Keyword by which tasks are filtered by.
+     * @return A list of tasks that contains the given <code>keyword</code>.
+     */
+    public TaskList findTasks(String keyword) {
+        ArrayList<Task> filteredList = new ArrayList<>();
+        for (Task t : taskList) {
+            if (t.getSummary().contains(keyword)) {
+                filteredList.add(t);
+            }
+        }
+        return new TaskList(filteredList);
+    }
 }
