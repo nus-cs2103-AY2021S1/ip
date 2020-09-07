@@ -42,7 +42,7 @@ public class TaskList {
      * the keyword that the user is finding.
      *
      * @param keyword Keyword that the user is finding.
-     * @return List of tasks that matches the keyword.
+     * @return List of tasks that matches the keyword given.
      */
     public List<Task> findTasks(String keyword) {
         List<Task> filteredTasks = taskList.stream().filter(task -> task.taskDesc.contains(keyword)).collect(
