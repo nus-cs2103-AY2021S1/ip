@@ -20,6 +20,7 @@ public class TaskList {
     }
 
     public TaskList(List<Task> tasks) {
+        assert(!tasks.isEmpty()) : "Task list should not be empty";
         this.tasks = new ArrayList<>(tasks);
     }
 
@@ -35,6 +36,7 @@ public class TaskList {
     public Task addTask(TaskType type, String description, LocalDateTime dateTime) throws DukeException {
         switch (type) {
         case TODO:
+            assert(dateTime == null) : "dateTime should be null for todos";
             return addTodo(description);
         case DEADLINE:
             return addDeadline(description, dateTime);
@@ -86,6 +88,8 @@ public class TaskList {
      * @throws DukeException if the task number does not correspond to any task.
      */
     public Task getTask(int taskNo) throws DukeException {
+        assert(taskNo >= 0) : "Task number should be non-negative";
+
         if (taskNo <= 0 || taskNo > this.tasks.size()) {
             throw new DukeException("Task " + taskNo + " does not exist.");
         }
