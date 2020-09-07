@@ -1,7 +1,4 @@
-D | 1 | finish assignment | 2020-08-28
-T | 1 | math tutorial
-E | 1 | birthday party | 2020-08-30
 T | 0 | read book
-T | 1 | buy book
-D | 0 | return book | 2020-09-30
-E | 0 | outing | 2020-09-20
+D | 0 | return book | 2020-09-30T23:59
+D | 0 | d | 2020-09-30T14:47
+E | 0 | e | 2020-12-29T04:45

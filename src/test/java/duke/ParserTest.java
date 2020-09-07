@@ -21,8 +21,8 @@ public class ParserTest {
     @Test
     public void parseCommand_validCommand_success() throws DukeException {
         assertTrue(Parser.parseCommand("todo read book") instanceof TodoCommand);
-        assertTrue(Parser.parseCommand("deadline return book /by 2020-08-28") instanceof DeadlineCommand);
-        assertTrue(Parser.parseCommand("event birthday /at 2020-08-31") instanceof EventCommand);
+        assertTrue(Parser.parseCommand("deadline return book /by 30/9/2020") instanceof DeadlineCommand);
+        assertTrue(Parser.parseCommand("event birthday /at 30/9/2020") instanceof EventCommand);
         assertTrue(Parser.parseCommand("list") instanceof ListCommand);
         assertTrue(Parser.parseCommand("bye") instanceof ExitCommand);
         assertTrue(Parser.parseCommand("done 1") instanceof DoneCommand);
@@ -32,7 +32,7 @@ public class ParserTest {
 
     @Test
     public void parseCommand_missingDescription_exceptionThrown() {
-        String message = "OOPS!!! Description of a task cannot be empty :(\n";
+        String message = "OOPS!!! Description of a todo cannot be empty :(\n";
         try {
             Parser.parseCommand("todo");
             fail();
@@ -55,7 +55,7 @@ public class ParserTest {
 
     @Test
     public void parseCommand_missingKeyword_exceptionThrown() {
-        String message = "Please indicate a deadline using the \"/by\" keyword.\n";
+        String message = "Please indicate a date using the \"/by\" keyword.\n";
         try {
             Parser.parseCommand("deadline return book");
             fail();
@@ -67,7 +67,7 @@ public class ParserTest {
     @Test
     public void parseCommand_invalidDateFormat_exceptionThrown() {
         String message = "Invalid date format! "
-                + "Please use the proper date format i.e. yyyy-MM-dd\n";
+                + "Please use the proper date format i.e. dd/MM/yyyy\n";
         try {
             Parser.parseCommand("event birthday /at next Monday");
             fail();

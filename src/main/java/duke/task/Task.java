@@ -1,6 +1,6 @@
 package duke.task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 /**
  * Represents a task.
@@ -48,8 +48,8 @@ public class Task {
      *
      * @return The date of the task.
      */
-    public LocalDate getDate() {
-        return LocalDate.now();
+    public LocalDateTime getDate() {
+        return LocalDateTime.now();
     }
 
     /**

@@ -1,6 +1,9 @@
 package duke.logic;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
@@ -56,43 +59,39 @@ public class Parser {
         }
 
         Command command;
-        try {
-            switch (type) {
-            case TODO:
-            case DEADLINE:
-            case EVENT:
-                String details = splitCommand[1];
-                command = parseAddCommand(type, details);
-                break;
-            case DELETE: {
-                String taskNumber = splitCommand[1];
-                command = new DeleteCommand(taskNumber);
-                break;
-            }
-            case DONE: {
-                String taskNumber = splitCommand[1];
-                command = new DoneCommand(taskNumber);
-                break;
-            }
-            case FIND:
-                String keyword = splitCommand[1];
-                String[] keywords = keyword.split(" ");
-                command = new FindCommand(keywords);
-                break;
-            case LIST:
-                command = new ListCommand();
-                break;
-            case BYE:
-                command = new ExitCommand();
-                break;
-            default:
-                command = new InvalidCommand(fullCommand);
-                break;
-            }
-            return command;
-        } catch (DateTimeParseException e) {
-            throw new DukeDateTimeParseException();
+        switch (type) {
+        case TODO:
+        case DEADLINE:
+        case EVENT:
+            String details = splitCommand[1];
+            command = parseAddCommand(type, details);
+            break;
+        case DELETE: {
+            String taskNumber = splitCommand[1];
+            command = new DeleteCommand(taskNumber);
+            break;
         }
+        case DONE: {
+            String taskNumber = splitCommand[1];
+            command = new DoneCommand(taskNumber);
+            break;
+        }
+        case FIND:
+            String keyword = splitCommand[1];
+            String[] keywords = keyword.split(" ");
+            command = new FindCommand(keywords);
+            break;
+        case LIST:
+            command = new ListCommand();
+            break;
+        case BYE:
+            command = new ExitCommand();
+            break;
+        default:
+            command = new InvalidCommand(fullCommand);
+            break;
+        }
+        return command;
     }
 
     private static boolean isTask(CommandType type) {
@@ -118,10 +117,41 @@ public class Parser {
         }
 
         String description = keywordSplit[0].trim();
-        LocalDate date = LocalDate.parse(keywordSplit[1].trim());
+        LocalDateTime dateTime = parseDateTime(keywordSplit[1].trim());
         return type == CommandType.DEADLINE
-                ? new DeadlineCommand(description, date)
-                : new EventCommand(description, date);
+                ? new DeadlineCommand(description, dateTime)
+                : new EventCommand(description, dateTime);
+    }
+
+    private static LocalDateTime parseDateTime(String dateTime) throws DukeDateTimeParseException {
+        String[] dateTimeSplit = dateTime.split(" ", 2);
+
+        String dateString = dateTimeSplit[0];
+        LocalDate date = parseDate(dateString);
+
+        String timeString = dateTimeSplit.length < 2 ? "" : dateTimeSplit[1];
+        LocalTime time = parseTime(timeString);
+        return LocalDateTime.of(date, time);
+    }
+
+    private static LocalDate parseDate(String date) throws DukeDateTimeParseException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d/M/y");
+        try {
+            return formatter.parse(date, LocalDate::from);
+        } catch (DateTimeParseException e) {
+            throw new DukeDateTimeParseException(false);
+        }
+    }
+
+    private static LocalTime parseTime(String time) throws DukeDateTimeParseException {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("H:m");
+        try {
+            return time.isEmpty()
+                    ? LocalTime.of(23, 59)
+                    : formatter.parse(time, LocalTime::from);
+        } catch (DateTimeParseException e) {
+            throw new DukeDateTimeParseException(true);
+        }
     }
 
     /**
