@@ -26,6 +26,7 @@ import javafx.stage.Stage;
 public class Controller extends Application implements Initializable {
   public TextField command;
   public TextArea console;
+  private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
   static TaskList taskList;
   private static Ui ui;
   private static File file;
@@ -138,7 +139,7 @@ public class Controller extends Application implements Initializable {
         deadline = deadline.substring(0, deadline.length() - 1);
         // add task
         try {
-          DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy");
+
           LocalDate deadlineDate = LocalDate.parse(deadline, formatter);
           Task toBeAdded = new Deadline(taskName, deadlineDate, isCompleted);
           taskList.addTask(toBeAdded);
