@@ -58,39 +58,15 @@ public class Parser {
         Command command;
         try {
             switch (type) {
-            case BYE:
-                command = new ExitCommand();
+            case TODO:
+            case DEADLINE:
+            case EVENT:
+                String details = splitCommand[1];
+                command = parseAddCommand(type, details);
                 break;
-            case LIST:
-                command = new ListCommand();
-                break;
-            case TODO: {
-                String description = splitCommand[1];
-                command = new TodoCommand(description);
-                break;
-            }
-            case DEADLINE: {
-                String[] splitDeadline = splitCommand[1].split("/by");
-                boolean isMissingKeyword = splitDeadline.length < 2;
-                if (isMissingKeyword) {
-                    throw new DukeMissingTaskKeywordException("\"/by\"");
-                }
-                String description = splitDeadline[0].trim();
-                String by = splitDeadline[1].trim();
-                LocalDate date = LocalDate.parse(by);
-                command = new DeadlineCommand(description, date);
-                break;
-            }
-            case EVENT: {
-                String[] splitEvent = splitCommand[1].split("/at");
-                boolean isMissingKeyword = splitEvent.length < 2;
-                if (isMissingKeyword) {
-                    throw new DukeMissingTaskKeywordException("\"/at\"");
-                }
-                String description = splitEvent[0].trim();
-                String at = splitEvent[1].trim();
-                LocalDate date = LocalDate.parse(at);
-                command = new EventCommand(description, date);
+            case DELETE: {
+                String taskNumber = splitCommand[1];
+                command = new DeleteCommand(taskNumber);
                 break;
             }
             case DONE: {
@@ -98,15 +74,16 @@ public class Parser {
                 command = new DoneCommand(taskNumber);
                 break;
             }
-            case DELETE: {
-                String taskNumber = splitCommand[1];
-                command = new DeleteCommand(taskNumber);
-                break;
-            }
             case FIND:
                 String keyword = splitCommand[1];
                 String[] keywords = keyword.split(" ");
                 command = new FindCommand(keywords);
+                break;
+            case LIST:
+                command = new ListCommand();
+                break;
+            case BYE:
+                command = new ExitCommand();
                 break;
             default:
                 command = new InvalidCommand(fullCommand);
@@ -125,6 +102,26 @@ public class Parser {
 
     private static boolean isDoneOrDeleteCommand(CommandType type) {
         return type == CommandType.DONE || type == CommandType.DELETE;
+    }
+
+    private static Command parseAddCommand(CommandType type, String details) throws DukeException {
+        if (type == CommandType.TODO) {
+            return new TodoCommand(details);
+        }
+
+        String keyword = type == CommandType.DEADLINE ? "/by" : "/at";
+        String[] keywordSplit = details.split(keyword);
+
+        boolean isMissingKeyword = keywordSplit.length < 2;
+        if (isMissingKeyword) {
+            throw new DukeMissingTaskKeywordException("\"" + keyword + "\"");
+        }
+
+        String description = keywordSplit[0].trim();
+        LocalDate date = LocalDate.parse(keywordSplit[1].trim());
+        return type == CommandType.DEADLINE
+                ? new DeadlineCommand(description, date)
+                : new EventCommand(description, date);
     }
 
     /**

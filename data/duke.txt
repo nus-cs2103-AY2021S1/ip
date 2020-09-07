@@ -3,3 +3,5 @@ T | 1 | math tutorial
 E | 1 | birthday party | 2020-08-30
 T | 0 | read book
 T | 1 | buy book
+D | 0 | return book | 2020-09-30
+E | 0 | outing | 2020-09-20
