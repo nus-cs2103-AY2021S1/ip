@@ -37,6 +37,9 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(Ui.showWelcomeMessage(), dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
@@ -59,17 +62,10 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() throws DukeException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        if (response.equals(Ui.showEnd())) {
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response, dukeImage)
-            );
-        } else {
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getDukeDialog(response, dukeImage)
-            );
-            userInput.clear();
-        }
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, dukeImage)
+        );
+        userInput.clear();
     }
 }
