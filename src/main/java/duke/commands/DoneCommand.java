@@ -28,6 +28,7 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
+        assert num > taskList.getTasks().size() : "Oh no! There is an error with the DoneCommand numbering logic.";
         taskList.markTaskAsDone(num);
         dialog = ui.formatMarkAsDone(taskList.getTasks(), num);
         storage.saveTaskList(taskList.getTasks());
