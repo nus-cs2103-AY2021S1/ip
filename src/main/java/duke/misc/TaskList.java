@@ -13,6 +13,7 @@ import duke.task.Task;
  * TaskList class to store all the tasks in Duke.
  */
 public class TaskList {
+    private static final String SEARCH_FORMAT = "find [^ ]+.+";
     private ArrayList<Task> items;
     private Storage storage;
 
@@ -103,13 +104,12 @@ public class TaskList {
      * @throws InvalidDescriptionException InvalidDescriptionException In case keyword is empty.
      */
     public String find(String keyWord) throws InvalidDescriptionException {
-        String[] arr = keyWord.split(" ");
-        if (keyWord.length() == 4 || arr[1].equals("")) {
+        if (!keyWord.matches(SEARCH_FORMAT)) {
             throw new InvalidDescriptionException();
         }
         ArrayList<Task> temp = new ArrayList<>();
         for (Task task : this.items) {
-            if (task.toString().contains(arr[1])) {
+            if (task.toString().contains(keyWord.substring(5))) {
                 temp.add(task);
             }
         }
