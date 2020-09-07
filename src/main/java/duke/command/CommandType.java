@@ -9,5 +9,6 @@ public enum CommandType {
     EXIT,
     FIND,
     LIST,
-    TODO
+    TODO,
+    UNKNOWN
 }
