@@ -11,14 +11,16 @@ public interface Ui {
     public static final String OPENING_MESSAGE = "Hello! I'm Duke\nWhat can I do for you?";
 
     /**
-     * Queries the user for the next command in the form of a string.
-     * @return string provided by the user
+     * Queries the user for the next command in the form of a string and returns it.
+     *
+     * @return string provided by the user.
      */
     public String getInput();
 
     /**
      * Notifies the user with the given message.
-     * @param message message to be sent
+     *
+     * @param message message to be sent.
      */
     public void outputMessage(String message);
 
@@ -27,7 +29,9 @@ public interface Ui {
      */
     public void startup();
 
-
+    /**
+     * Exits the application and closes Duke.
+     */
     public void exit();
 
 

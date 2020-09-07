@@ -16,14 +16,19 @@ import javafx.stage.Stage;
 
 import java.util.concurrent.CompletableFuture;
 
+/**
+ * GUI class handling the graphical aspects of the Duke chatbot.
+ */
 public class DukeGui extends Application implements Ui {
 
+    // JavaFX pieces
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
     private Button sendButton;
     private Scene scene;
 
+    // Images used for the user and the
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
@@ -31,6 +36,11 @@ public class DukeGui extends Application implements Ui {
     private boolean isUpdated;
     private String enteredMessage;
 
+    /**
+     * Starts the Duke GUI application.
+     *
+     * @param stage stage for the gui application.
+     */
     @Override
     public void start(Stage stage) {
 
@@ -92,29 +102,18 @@ public class DukeGui extends Application implements Ui {
         CompletableFuture.runAsync(() -> duke.run());
     }
 
+    /**
+     * Displays the opening message to the user.
+     */
     @Override
     public void startup() {
         Platform.runLater(() ->
                 dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.OPENING_MESSAGE, dukeImage)));
     }
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
 
     /**
-     * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Handles the user input upon receiving it.
+     * The method registers that the use has responded and updates the GUI with the user's response.
      */
     private void handleUserInput() {
         String text = userInput.getText();
@@ -123,16 +122,27 @@ public class DukeGui extends Application implements Ui {
         userInput.clear();
     }
 
+    /**
+     * Displays the duke's message to the user.
+     *
+     * @param message message to be sent.
+     */
     public void outputMessage(String message) {
         Platform.runLater(() -> dialogContainer.getChildren().add(DialogBox.getDukeDialog(message, dukeImage)));
     }
 
+    /** Used to notify the sleeping thread in getInput() to obtain user response asynchronously */
     private synchronized void registerResponse(String enteredMessage) {
         this.enteredMessage = enteredMessage;
         isUpdated = true;
         notifyAll();
     }
 
+    /**
+     * Returns the user's input by waiting for the user to provide an update.
+     *
+     * @return string of the user input
+     */
     public synchronized String getInput() {
         isUpdated = false;
         try {
@@ -147,6 +157,9 @@ public class DukeGui extends Application implements Ui {
 
     }
 
+    /**
+     * Exits the app.
+     */
     public void exit() {
         Platform.exit();
     }

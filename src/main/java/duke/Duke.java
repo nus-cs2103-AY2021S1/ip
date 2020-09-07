@@ -4,18 +4,6 @@ import duke.command.Command;
 import duke.command.CommandParser;
 import duke.storage.Storage;
 import duke.util.TaskList;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.control.Label;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
-import javafx.scene.layout.Region;
-import javafx.stage.Stage;
 
 /**
  * Duke is a Personal Assistant Chatbot that helps a user keep track of various things.
@@ -43,7 +31,13 @@ public class Duke {
         ui = new UiDefault();
     }
 
-    protected Duke(Ui ui) {
+    /**
+     * Creates a Duke bot with the provided ui.
+     * All other settings are the same as the default constructor.
+     *
+     * @param ui UI to be used.
+     */
+    public Duke(Ui ui) {
         storage = storage.init();
         taskList = storage.readStoredData();
         this.ui = ui;
@@ -51,7 +45,8 @@ public class Duke {
 
     /**
      * Initialises and runs the Duke chat bot. Does not require input arguments.
-     * @param args Input arguments
+     *
+     * @param args Input arguments.
      */
     public static void main(String[] args) {
         Duke duke = new Duke();

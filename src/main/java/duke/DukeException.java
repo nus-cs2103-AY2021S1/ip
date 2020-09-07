@@ -7,7 +7,8 @@ public class DukeException extends Exception {
 
     /**
      * Creates a DukeException object with a customised error description.
-     * @param description description of the type of error encountered
+     *
+     * @param description description of the type of error encountered.
      */
     public DukeException(String description) {
         super("OOPS!!! " + description);

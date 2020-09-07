@@ -10,18 +10,25 @@ public class UiDefault implements Ui {
 
     private Scanner scanner;
 
+    /**
+     * Constructs a new default UI that uses the system I/O for input and output.
+     */
     public UiDefault() {
         scanner = new Scanner(System.in);
     }
 
+    /**
+     * Sends the opening message to the output.
+     */
     @Override
     public void startup() {
         outputMessage(Ui.OPENING_MESSAGE);
     }
 
     /**
-     * Queries the System input stream for the next command in the form of a string.
-     * @return string provided by the user
+     * Queries the System input stream for the next command in the form of a string and returns it.
+     *
+     * @return string provided by the user.
      */
     @Override
     public String getInput() {
@@ -29,8 +36,9 @@ public class UiDefault implements Ui {
     }
 
     /**
-     * Notifies the System output stream with the given message
-     * @param message message to be sent
+     * Notifies the System output stream with the given message.
+     *
+     * @param message message to be sent.
      */
     @Override
     public void outputMessage(String message) {
@@ -39,8 +47,9 @@ public class UiDefault implements Ui {
 
     /**
      * Returns a formatted String according to the needs of the specific implementation of Ui.
-     * @param string message to be sent
-     * @return formatted message that will be sent
+     *
+     * @param string message to be sent.
+     * @return formatted message that will be sent.
      */
     protected static String processString(String string) {
         return LINE_BREAK + PRESPACING
