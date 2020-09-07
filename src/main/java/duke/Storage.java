@@ -22,12 +22,11 @@ public class Storage {
     public void writeFile(TaskList tl) {
         try {
             ArrayList<Task> tasks = tl.getTaskList();
-            assert tasks != null : "Task list should not be null";
             StringBuilder replacementText = new StringBuilder();
             createFile("data/duke.txt");
-            for (int i = 0; i < tasks.size(); i++) {
-                replacementText.append(tasks.get(i).toString() + "\n");
-            }
+            tasks.forEach(x -> {
+                replacementText.append(x.toString() + "\n");
+            });
             appendToFile("data/duke.txt", replacementText.toString());
         } catch (IOException e) {
             System.out.println("Folder data not found! " + e);
