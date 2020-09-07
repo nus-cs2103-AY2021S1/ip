@@ -25,7 +25,7 @@ public class Parser {
     private Storage storage;
     private boolean isExit = false;
     public Parser(TaskList tasks, Storage storage) {
-        tasks = tasks;
+        this.tasks = tasks;
         this.storage = storage;
     }
 
