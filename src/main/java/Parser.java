@@ -1,5 +1,6 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * handles the parsing of information, from user input to different commands
@@ -93,9 +94,13 @@ public class Parser {
         } else if (descriptionArray.length > 2) {
             throw new IllegalArgumentException("Invalid input, multiple deadlines stated. ");
         } else {
-            DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern(" dd/MM/yyyy HH:mm");
-            LocalDateTime deadlineDateTime = LocalDateTime.parse(descriptionArray[1], inputFormat);
-            return new DeadlineCommand(deadlineName, deadlineDateTime);
+            try {
+                DateTimeFormatter inputFormat = DateTimeFormatter.ofPattern(" dd/MM/yyyy HH:mm");
+                LocalDateTime deadlineDateTime = LocalDateTime.parse(descriptionArray[1], inputFormat);
+                return new DeadlineCommand(deadlineName, deadlineDateTime);
+            } catch (DateTimeParseException exception) {
+                throw new IllegalArgumentException("Incorrect formatting - write it in dd/MM/yyyy HH:mm format");
+            }
         }
     }
 

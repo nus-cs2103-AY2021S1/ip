@@ -21,11 +21,10 @@ public class DeadlineCommand extends Command {
      *
      * @param taskList
      */
-    public void execute(TaskList taskList) {
+    public String execute(TaskList taskList) {
         Deadline newDeadline = new Deadline(this.getTaskName(), this.getTaskDateTime());
         taskList.addTask(newDeadline);
         String deadlineTask = newDeadline.toString();
-        TextUi.printNewTasks(deadlineTask);
-        TextUi.printTaskSummary(taskList.getTaskLength());
+        return TextUi.printNewTasks(deadlineTask) + TextUi.printTaskSummary(taskList.getTaskLength());
     }
 }

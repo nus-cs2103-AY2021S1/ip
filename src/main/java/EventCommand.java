@@ -21,10 +21,9 @@ public class EventCommand extends Command {
      *
      * @param taskList
      */
-    public void execute(TaskList taskList) {
+    public String execute(TaskList taskList) {
         Event newEvent = new Event(this.getTaskName(), this.getTaskDateTime());
         taskList.addTask(newEvent);
-        TextUi.printNewTasks(newEvent.toString());
-        TextUi.printTaskSummary(taskList.getTaskLength());
+        return TextUi.printNewTasks(newEvent.toString()) + "\n" + TextUi.printTaskSummary(taskList.getTaskLength());
     }
 }

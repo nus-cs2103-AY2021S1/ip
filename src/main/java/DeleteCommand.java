@@ -18,11 +18,11 @@ public class DeleteCommand extends Command {
      *
      * @param taskList
      */
-    public void execute(TaskList taskList) {
+    public String execute(TaskList taskList) {
         int taskNumber;
         taskNumber = Integer.parseInt(this.getTaskName());
         Task deletedTask = taskList.getTask(taskNumber);
         taskList.removeTask(deletedTask);
-        TextUi.printMessage("Noted. I've removed this task:" + deletedTask);
+        return TextUi.printMessage("Noted. I've removed this task:\n" + deletedTask);
     }
 }

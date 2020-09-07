@@ -18,10 +18,9 @@ public class TodoCommand extends Command {
      *
      * @param taskList
      */
-    public void execute(TaskList taskList) {
+    public String execute(TaskList taskList) {
         Todo newTask = new Todo(this.getTaskName());
         taskList.addTask(newTask);
-        TextUi.printNewTasks(newTask.toString());
-        TextUi.printTaskSummary(taskList.getTaskLength());
+        return TextUi.printNewTasks(newTask.toString()) + "\n" + TextUi.printTaskSummary(taskList.getTaskLength());
     }
 }

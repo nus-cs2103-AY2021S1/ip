@@ -11,7 +11,11 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Duke duke;
+
+    public Main() throws IOException, ClassNotFoundException {
+        duke = new Duke();
+    }
 
     @Override
     public void start(Stage stage) {

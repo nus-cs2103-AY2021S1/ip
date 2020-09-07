@@ -18,10 +18,10 @@ public class FindCommand extends Command {
      *
      * @param taskList
      */
-    public void execute(TaskList taskList) {
+    public String execute(TaskList taskList) {
         String keyWord = this.getTaskName();
         TaskList keyWordTaskList = taskList.getTasksWithKeyWords(keyWord);
-        TextUi.printMessage("Here are the matching tasks in your list:\n" + keyWordTaskList.toString());
-        TextUi.printTaskSummary(keyWordTaskList.getTaskLength());
+        return TextUi.printMessage("Here are the matching tasks in your list:\n" + keyWordTaskList.toString())
+                + "\n" + TextUi.printTaskSummary(keyWordTaskList.getTaskLength());
     }
 }

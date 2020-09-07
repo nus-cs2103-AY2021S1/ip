@@ -50,7 +50,7 @@ public class Command {
      *
      * @param taskList
      */
-    public void execute(TaskList taskList) {
+    public String execute(TaskList taskList) {
         throw new UnsupportedOperationException("This method is to be implemented by child classes");
     }
 }

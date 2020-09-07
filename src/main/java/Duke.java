@@ -25,11 +25,19 @@ public class Duke extends Application {
     private Scene scene;
 
     /**
+     * Constructor for Duke
+     * @throws IOException
+     * @throws ClassNotFoundException
+     */
+    public Duke() throws IOException, ClassNotFoundException {
+        this.taskList = Storage.load();
+    }
+    /**
      * main function
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    public static void duke() throws IOException, ClassNotFoundException {
+    public static void main() throws IOException, ClassNotFoundException {
         TextUi.printHello();
         Scanner sc = new Scanner(System.in);
         String input;
@@ -46,6 +54,11 @@ public class Duke extends Application {
             }
         }
     }
+
+    /**
+     * starting function for GUI Java FX.
+     * @param stage
+     */
 
     @Override
     public void start(Stage stage) {
@@ -130,83 +143,11 @@ public class Duke extends Application {
      * @return
      */
     public String getResponse(String input) {
-        TaskList task = new TaskList();
-        String category = Parser.getCategory(input);
-        String description = Parser.getDescription(input);
-
-        switch (category) {
-        case "todo":
-            if (description.equals("")) {
-                return TextUi.printError(new IllegalArgumentException("The description of a todo cannot be empty."));
-            } else {
-                Command command = Parser.decideCategory(input);
-                command.execute(task);
-                return TextUi.printNewTasks(task.toString()) + TextUi.printTaskSummary(task.getTaskLength());
-            }
-        case "deadline":
-            String[] descriptionArray = description.split("/by");
-            if (descriptionArray[0].equals("")) {
-                return TextUi.printError(new IllegalArgumentException("The description of a deadline cannot be empty. "));
-            } else if (descriptionArray.length == 1) { //no "/at" present
-                return TextUi.printError(new IllegalArgumentException("Invalid input, no deadline stated. "));
-            } else if (descriptionArray.length > 2) {
-                return TextUi.printError(new IllegalArgumentException("Invalid input, multiple deadlines stated. "));
-            } else {
-                Command command = Parser.decideCategory(input);
-                command.execute(task);
-                return TextUi.printNewTasks(task.toString()) + TextUi.printTaskSummary(task.getTaskLength());
-            }
-        case "event":
-            String[] descriptionArray2 = description.split("/at");
-            if (descriptionArray2[0].equals("")) {
-                return TextUi.printError(new IllegalArgumentException("The description of an event cannot be empty. "));
-            } else if (descriptionArray2.length == 1) { //no "/at" present
-                return TextUi.printError(new IllegalArgumentException("Invalid input, no event time stated. "));
-            } else if (descriptionArray2.length > 2) {
-                return TextUi.printError(new IllegalArgumentException("Invalid input, multiple deadlines stated. "));
-            } else {
-                Command command = Parser.decideCategory(input);
-                command.execute(task);
-                return TextUi.printNewTasks(task.toString()) + TextUi.printTaskSummary(task.getTaskLength());
-            }
-        case "done":
-            if (description.equals("")) {
-                return TextUi.printError(new IllegalArgumentException("Not sure which task is to be indicated as done."));
-            } else {
-                Command command = Parser.decideCategory(input);
-                command.execute(task);
-                return TextUi.printMessage(task.toString());
-            }
-        case "delete":
-            if (description.equals("")) {
-                return TextUi.printError(new IllegalArgumentException("Not sure which task is to be deleted. "));
-            } else {
-                Command command = Parser.decideCategory(input);
-                command.execute(task);
-                return TextUi.printMessage(task.toString());
-            }
-        case "bye":
-            if (!description.equals("")) {
-                return TextUi.printError(new IllegalArgumentException(" Invalid input. "));
-            } else {
-                Command command = Parser.decideCategory(input);
-                command.execute(task);
-                return TextUi.printMessage(task.toString());
-            }
-        case "find":
-            if (description.equals("")) {
-                return TextUi.printError(new IllegalArgumentException("No keyword found. "));
-            } else {
-                return TextUi.printMessage(task.toString());
-            }
-        case "list":
-            if (!description.equals("")) {
-                return TextUi.printError(new IllegalArgumentException(" Invalid input. "));
-            } else {
-                return TextUi.printMessage(task.toString()) + task.toString();
-            }
-        default:
-            return TextUi.printError(new IllegalArgumentException("Invalid input."));
+        try {
+            Command command = Parser.decideCategory(input);
+            return command.execute(taskList);
+        } catch (IllegalArgumentException exception) {
+            return exception.getMessage();
         }
         }
 }

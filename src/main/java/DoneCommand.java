@@ -18,12 +18,12 @@ public class DoneCommand extends Command {
      *
      * @param taskList
      */
-    public void execute(TaskList taskList) {
+    public String execute(TaskList taskList) {
         int taskNumber;
         taskNumber = Integer.parseInt(this.getTaskName());
         Task doneTask = taskList.getTask(taskNumber);
         doneTask.markAsDone();
-        TextUi.printMessage("Nice! I've marked this task as done: " + doneTask);
+        return TextUi.printMessage("Nice! I've marked this task as done:\n" + doneTask);
     }
 }
 

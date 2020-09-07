@@ -18,8 +18,8 @@ public class ListCommand extends Command {
      *
      * @param taskList
      */
-    public void execute(TaskList taskList) {
-        TextUi.printMessage("Here are the tasks in your list:\n" + taskList.toString());
-        TextUi.printTaskSummary(taskList.getTaskLength());
+    public String execute(TaskList taskList) {
+        return TextUi.printMessage("Here are the tasks in your list:\n"
+                + taskList.toString()) + "\n" + TextUi.printTaskSummary(taskList.getTaskLength());
     }
 }

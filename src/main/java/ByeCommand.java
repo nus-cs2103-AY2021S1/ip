@@ -18,8 +18,8 @@ public class ByeCommand extends Command {
      *
      * @param taskList
      */
-    public void execute(TaskList taskList) {
-        TextUi.printMessage("Bye bye! Hope to see you again soon!\n");
+    public String execute(TaskList taskList) {
         System.exit(0);
+        return TextUi.printMessage("Bye bye! Hope to see you again soon!\n");
     }
 }
