@@ -48,7 +48,7 @@ public class TaskList {
                     i++;
                     continue;
                 }
-                msg += ("\t" + (i++) + ". " + t + "\n");
+                msg += ((i++) + ". " + t + "\n");
             }
         }
         return msg;

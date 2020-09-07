@@ -21,9 +21,10 @@ public class Task {
     }
 
     /**
-     * Returns the status of the task.
+     * Returns the status of the task. A tick icon indicates task is complete,
+     * and a cross icon indicates the task is incomplete.
      *
-     * @return Status of the task.
+     * @return Status of the task (i.e. completion status).
      */
     public String getStatusIcon() {
         //return tick or X symbols

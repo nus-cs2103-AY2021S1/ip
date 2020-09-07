@@ -1,3 +1,12 @@
 .v-box {
     -fx-background-color: #33322f;
 }
+
+.label-txt {
+    -fx-padding: 0px 5px;
+}
+
+/*.image {*/
+/*    -fx-background-radius: 50px;*/
+/*    -fx-border-radius: 50px;*/
+/*}*/

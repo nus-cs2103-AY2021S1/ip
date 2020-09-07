@@ -3,3 +3,5 @@ D-----✘-----same as above-----Aug 29 2020 Sat 2359hrs
 E-----✓-----2103 tutorial-----5pm Wednesday 26th Aug
 T-----✘-----test -----NaN
 T-----✘-----anything-----NaN
+T-----✘-----somtehgin-----NaN
+T-----✘-----anythinggdg-----NaN
