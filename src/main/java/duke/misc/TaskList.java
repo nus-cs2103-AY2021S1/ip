@@ -15,6 +15,7 @@ import duke.task.Task;
 public class TaskList {
     private ArrayList<Task> items;
     private Storage storage;
+    private boolean isInitialised;
 
     /**
      * Constructor for TaskList class.
@@ -22,6 +23,7 @@ public class TaskList {
     public TaskList() {
         this.storage = new Storage();
         this.items = new ArrayList<>();
+        this.isInitialised = false;
     }
 
     /**
@@ -33,6 +35,7 @@ public class TaskList {
     public void initialise() throws IOException, InvalidTypeException, InvalidDataException {
         try {
             this.items = this.storage.readData();
+            this.isInitialised = true;
         } catch (InvalidTypeException e) {
             throw e;
         } catch (InvalidDataException e) {
@@ -42,8 +45,13 @@ public class TaskList {
         }
     }
 
-    public boolean isEmpty() {
-        return this.items.isEmpty();
+    /**
+     * Function to tell whether items have been loaded from the .txt file.
+     *
+     * @return A boolean indicating whether the taskList has been initialised.
+     */
+    public boolean isInitialised() {
+        return this.isInitialised;
     }
 
     /**

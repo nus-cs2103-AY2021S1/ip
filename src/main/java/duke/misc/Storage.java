@@ -67,8 +67,10 @@ public class Storage {
         case "T":
             return new Todo(info[2], isComplete);
         case "D":
+            assert info.length >= 4;
             return new Deadline(info[2], isComplete, info[3]);
         case "E":
+            assert info.length >= 4;
             return new Event(info[2], isComplete, info[3]);
         default:
             throw new InvalidTypeException();
