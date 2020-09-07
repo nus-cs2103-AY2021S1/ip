@@ -3,7 +3,7 @@ package src.main.java.duke.commands;
 import src.main.java.duke.data.task.Deadline;
 
 /**
- * Command that adds deadline
+ * Represents a command that adds a deadline.
  */
 public class AddDeadlineCommand extends Command {
 
@@ -17,17 +17,17 @@ public class AddDeadlineCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New deadline task added: %1$s";
 
-    private final Deadline toAdd;
+    private final Deadline newTask;
 
     public AddDeadlineCommand(String description, String dueDate) {
-        this.toAdd = new Deadline(description, dueDate);
+        this.newTask = new Deadline(description, dueDate);
     }
 
     @Override
     public CommandResult execute() {
         try {
-            duke.addTask(toAdd);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+            duke.addTask(newTask);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, newTask));
         } catch (Exception e) {
             return new CommandResult("Oh no. Add deadline was not successful");
         }

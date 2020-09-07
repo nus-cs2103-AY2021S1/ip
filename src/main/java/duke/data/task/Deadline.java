@@ -5,7 +5,7 @@ import java.time.format.DateTimeFormatter;
 
 
 /**
- * The Deadline class that represents a deadline task.
+ * Represents a deadline task.
  *
  */
 public class Deadline extends Task {
@@ -14,7 +14,7 @@ public class Deadline extends Task {
     /**
      * Constructor for deadline with description and dueDate
      * @param description description of deadline
-     * @param dueDate duedate of the deadline task
+     * @param dueDate     duedate of the deadline task
      */
     public Deadline(String description, String dueDate) {
         this.description = description;

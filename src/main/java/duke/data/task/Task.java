@@ -3,7 +3,7 @@ package src.main.java.duke.data.task;
 import java.util.Objects;
 
 /**
- * The task class that represents a task.
+ * Represents a task.
  *
  */
 public class Task {
@@ -27,6 +27,16 @@ public class Task {
      */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+    }
+
+    /**
+     * Updates the description of the task.
+     * @param newDescription New description of the task.
+     * @return true if the description is updated.
+     */
+    public boolean updateDescription(String newDescription) {
+        this.description = newDescription;
+        return true;
     }
 
     /**

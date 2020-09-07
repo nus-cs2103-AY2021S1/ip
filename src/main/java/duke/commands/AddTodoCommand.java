@@ -4,7 +4,7 @@ import src.main.java.duke.data.task.Todo;
 
 
 /**
- * Command that adds todo
+ * Represents a command that adds a todo.
  */
 public class AddTodoCommand extends Command {
 
@@ -18,17 +18,17 @@ public class AddTodoCommand extends Command {
 
     public static final String MESSAGE_SUCCESS = "New todo task added: %1$s";
 
-    private final Todo toAdd;
+    private final Todo newTask;
 
     public AddTodoCommand(String description) {
-        this.toAdd = new Todo(description);
+        this.newTask = new Todo(description);
     }
 
     @Override
     public CommandResult execute() {
         try {
-            duke.addTask(toAdd);
-            return new CommandResult(String.format(MESSAGE_SUCCESS, toAdd));
+            duke.addTask(newTask);
+            return new CommandResult(String.format(MESSAGE_SUCCESS, newTask));
         } catch (Exception e) {
             return new CommandResult("Oh no. Add todo was not successful");
         }

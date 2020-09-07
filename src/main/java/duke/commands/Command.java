@@ -7,7 +7,7 @@ import src.main.java.duke.data.task.Task;
 
 
 /**
- * Command that adds todo
+ * Represents a command.
  */
 public class Command {
 
@@ -50,15 +50,15 @@ public class Command {
     }
 
     public int getTargetIndex() {
-        return targetIndex;
+        return this.targetIndex;
+    }
+
+    public String getTargetString() {
+        return this.targetString;
     }
 
     public void setTargetIndex(int targetIndex) {
         this.targetIndex = targetIndex;
-    }
-
-    public String getTargetString() {
-        return targetString;
     }
 
     public void setTargetString(String targetString) {

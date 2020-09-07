@@ -2,7 +2,7 @@ package src.main.java.duke.commands;
 
 
 /**
- * Exits the program
+ * Represents an exit command that helps to terminate the program.
  */
 public class ExitCommand extends Command {
 
@@ -14,6 +14,7 @@ public class ExitCommand extends Command {
 
     @Override
     public CommandResult execute() {
+        System.exit(0);
         return new CommandResult(MESSAGE_EXIT_ACKNOWEDGEMENT);
     }
 

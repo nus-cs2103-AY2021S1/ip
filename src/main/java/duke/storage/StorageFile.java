@@ -13,7 +13,7 @@ import src.main.java.duke.data.exception.IllegalValueException;
 
 
 /**
- * StorageFile manages the storage of the Best2103Bot
+ * Represents a storage that manages the storage of the Best2103Bot.
  */
 public class StorageFile {
 
@@ -57,6 +57,7 @@ public class StorageFile {
     /**
      * Saves the {@code addressBook} data to the storage file.
      * @param duke Duke object that is to be saved
+     *
      * @throws StorageOperationException if there were errors converting and/or
      *                                   storing data to file.
      */
@@ -64,14 +65,15 @@ public class StorageFile {
         try {
             File tempFile = new File(String.valueOf(path));
             boolean exists = tempFile.exists();
-            if (exists) {
+
+            if (exists) { // If the file exist
                 List<String> encodedDuke = DukeEncoder.encodeDuke(duke);
                 Files.write(path, encodedDuke);
-            } else {
+            } else { // If file does not exist, make a new directory and file
                 File directory = new File(System.getProperty("user.dir") + "/data");
                 directory.mkdirs();
                 File file = new File(String.valueOf(path));
-                boolean truth = file.createNewFile();
+                boolean isFileCreated = file.createNewFile();
                 List<String> encodedDuke = DukeEncoder.encodeDuke(duke);
                 Files.write(path, encodedDuke);
             }

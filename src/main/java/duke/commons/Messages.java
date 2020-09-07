@@ -1,7 +1,7 @@
 package src.main.java.duke.commons;
 
 /**
- * Container for user visible messages.
+ * Represents a container for user visible messages.
  */
 public class Messages {
     public static final String INDENT = "   ";

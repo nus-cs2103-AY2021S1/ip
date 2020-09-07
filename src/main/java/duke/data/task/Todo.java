@@ -1,7 +1,7 @@
 package src.main.java.duke.data.task;
 
 /**
- * The Todo class that represents a Todo task.
+ * Represents a todo task.
  *
  */
 public class Todo extends Task {

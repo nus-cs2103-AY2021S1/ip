@@ -1,9 +1,10 @@
 package src.main.java.duke.commands;
 
 import src.main.java.duke.commons.Messages;
+import src.main.java.duke.data.task.Task;
 
 /**
- * Deletes a task identified using it's last displayed index from the task list.
+ * Represents a command that deletes the task in the list.
  */
 public class DeleteCommand extends Command {
 
@@ -15,19 +16,19 @@ public class DeleteCommand extends Command {
 
     public static final String MESSAGE_DELETE_TASK_SUCCESS = "Deleted Task: %1$s";
 
-    public DeleteCommand(int targetVisibleIndex) {
-        super(targetVisibleIndex);
+    public DeleteCommand(int index) {
+        super(index);
     }
 
     @Override
     public CommandResult execute() {
         try {
             final int target = getTargetIndex();
-            duke.removeTask(target);
-            return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, target));
+            Task task = duke.removeTask(target);
+            return new CommandResult(String.format(MESSAGE_DELETE_TASK_SUCCESS, task));
         } catch (IndexOutOfBoundsException ie) {
             return new CommandResult(Messages.MESSAGE_INVALID_TASK_DISPLAYED_INDEX);
-        } catch (Exception pnfe) {
+        } catch (Exception e) {
             return new CommandResult(Messages.MESSAGE_TASK_NOT_IN_TASKLIST);
         }
     }
