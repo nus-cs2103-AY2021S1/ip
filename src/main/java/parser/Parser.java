@@ -36,6 +36,7 @@ public class Parser {
      */
 
     public String parse(String fullInput) {
+        assert fullInput.length() > 0 && fullInput.contains(" ");
         String result = "";
         try {
 
