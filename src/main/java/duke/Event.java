@@ -20,6 +20,11 @@ class Event extends Task {
     }
 
     @Override
+    public void setTime(LocalDate time) {
+        this.at = time;
+    }
+
+    @Override
     public Event completeTask() {
         return new Event(super.getDescription(), true, this.at);
     }
