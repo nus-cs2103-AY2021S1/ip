@@ -1,4 +1,3 @@
-[T][✘] run
+[T][✘] lunch 
 [D][✘] homework (by: 2020-09-10)
-[T][✓] eat
-[T][✘] bathe
+[E][✘] meeting (at: 2020-10-10 1400)
