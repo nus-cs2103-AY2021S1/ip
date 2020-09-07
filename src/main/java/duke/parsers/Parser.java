@@ -64,14 +64,14 @@ public class Parser {
         if (argument.isEmpty()) {
             throw new MissingTaskIndexException();
         }
-        int num = Integer.parseInt(argument);
-        if (num <= 0 || num > size) {
+        int index = Integer.parseInt(argument);
+        if (index <= 0 || index > size) {
             throw new InvalidTaskIndexException();
         }
         if (command.equals("done")) {
-            return new DoneCommand(num - 1);
+            return new DoneCommand(index - 1);
         } else if (command.equals("delete")) {
-            return new DeleteCommand(num - 1);
+            return new DeleteCommand(index - 1);
         } else {
             throw new InvalidDukeCommandException();
         }

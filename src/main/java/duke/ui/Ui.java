@@ -51,10 +51,10 @@ public class Ui {
     /** Shows the message where a task is marked as done in Duke format.
      *
      * @param tasks The list of tasks.
-     * @param num The index of the task that is marked as done.
+     * @param index The index of the task that is marked as done.
      */
-    public String formatMarkAsDone(ArrayList<Task> tasks, int num) {
-        return "Nice! I've marked this task as done:\n" + tasks.get(num);
+    public String formatMarkAsDone(ArrayList<Task> tasks, int index) {
+        return "Nice! I've marked this task as done:\n" + tasks.get(index);
     }
 
     /** Shows the list of tasks after a task is added in Duke format.
@@ -71,11 +71,11 @@ public class Ui {
     /** Shows the list of tasks after a task is deleted in Duke format.
      *
      * @param tasks The list of tasks.
-     * @param num The index of the task that is deleted.
+     * @param index The index of the task that is deleted.
      */
-    public String formatDeleteTask(ArrayList<Task> tasks, int num) {
+    public String formatDeleteTask(ArrayList<Task> tasks, int index) {
         int sizeAfterDeletion = tasks.size() - 1;
-        return String.format("Alright. I've removed this task:\n" + tasks.get(num)
+        return String.format("Alright. I've removed this task:\n" + tasks.get(index)
             + "\nNow you have %d %s in the list.",
             sizeAfterDeletion, sizeAfterDeletion == 1 ? "task" : "tasks");
     }

@@ -27,10 +27,10 @@ public class TaskList {
 
     /** Marks a task that is stored in the list as done.
      *
-     * @param num The index of the task to be marked as done.
+     * @param index The index of the task to be marked as done.
      */
-    public void markTaskAsDone(int num) {
-        tasks.get(num).markAsDone();
+    public void markTaskAsDone(int index) {
+        tasks.get(index).markAsDone();
     }
 
     /** Adds a task into the list.
@@ -43,9 +43,9 @@ public class TaskList {
 
     /** Deletes a task from the list.
      *
-     * @param num The index of the task to be deleted.
+     * @param index The index of the task to be deleted.
      */
-    public void deleteTask(int num) {
-        tasks.remove(num);
+    public void deleteTask(int index) {
+        tasks.remove(index);
     }
 }

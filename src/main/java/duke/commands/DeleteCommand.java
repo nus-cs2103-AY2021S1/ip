@@ -8,14 +8,14 @@ import duke.ui.Ui;
 public class DeleteCommand extends Command {
 
     /** The index of the task to be deleted. */
-    private int num;
+    private int index;
 
     /** Constructs a new DeleteCommand object with the specified index of the task.
      *
-     * @param num The index of the task to be deleted.
+     * @param index The index of the task to be deleted.
      */
-    public DeleteCommand(int num) {
-        this.num = num;
+    public DeleteCommand(int index) {
+        this.index = index;
     }
 
     /** Deletes the task from TaskList's list,
@@ -27,8 +27,8 @@ public class DeleteCommand extends Command {
      * @param storage The storage system that saves the taskList.
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
-        dialog = ui.formatDeleteTask(taskList.getTasks(), num);
-        taskList.deleteTask(num);
+        dialog = ui.formatDeleteTask(taskList.getTasks(), index);
+        taskList.deleteTask(index);
         storage.saveTaskList(taskList.getTasks());
     }
 }
