@@ -30,8 +30,8 @@ public class Event extends Task {
      * @param isDone Whether the event is done.
      * @param at When the event will be at.
      */
-    public Event(String description, boolean isDone, String at) {
-        super(description, isDone);
+    public Event(String description, boolean isDone, String at, String tag) {
+        super(description, isDone, tag);
         this.at = at;
         this.setAtDateAndTime();
     }

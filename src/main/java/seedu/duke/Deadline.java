@@ -30,8 +30,8 @@ public class Deadline extends Task {
      * @param isDone Whether the deadline is done.
      * @param by When the event will be.
      */
-    public Deadline(String description, boolean isDone, String by) {
-        super(description, isDone);
+    public Deadline(String description, boolean isDone, String by, String tag) {
+        super(description, isDone, tag);
         this.by = by;
         this.setByDateAndTime();
     }

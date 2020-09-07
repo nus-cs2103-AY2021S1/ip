@@ -45,13 +45,17 @@ public class TaskList {
     }
 
     /**
-     * Returns list of tasks which description contains the keyword.
-     * @param keyword The keyword to be used to filter the tasks.
+     * Returns list of tasks which description contains the keyword or which tag is equal to keyword tag.
+     * If the keyword contains a '#' at the start, this method will filter by tags instead.
+     * @param keyword The keyword or tag to be used to filter the tasks.
      * @return The list of tasks.
      */
     public List<Task> getListOfTasksWithKeyword(String keyword) {
         return this.listOfTasks.stream().filter(
-                task -> task.getDescription().contains(keyword)).collect(Collectors.toList());
+                task -> keyword.charAt(0) == '#'
+                        ? task.getTag().equals(keyword.substring(1))
+                        : task.getDescription().contains(keyword)
+        ).collect(Collectors.toList());
     }
 
     /**
@@ -82,6 +86,22 @@ public class TaskList {
         }
         Task task = listOfTasks.get(idx);
         listOfTasks.remove(idx);
+        return task;
+    }
+
+    /**
+     * Tags the task at that particular index and returns that task.
+     * @param idx The index to identify the task to be tagged.
+     * @param tag The word to tag task with.
+     * @return The task that has been tagged.
+     * @throws DukeException Throws DukeException when the index given is not valid.
+     */
+    public Task tagTask(int idx, String tag) throws DukeException {
+        if (idx < 0 || idx >= listOfTasks.size()) {
+            throw new DukeException("The task cannot be found.");
+        }
+        Task task = listOfTasks.get(idx);
+        task.addTag(tag);
         return task;
     }
 

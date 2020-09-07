@@ -34,6 +34,8 @@ public class Parser {
             return createAddEventCommand(commandArgs);
         } else if (commandArgs[0].equals(CommandType.FIND.getName())) {
             return createFindCommand(commandArgs);
+        } else if (commandArgs[0].equals(CommandType.TAG.getName())) {
+            return createTagCommand(commandArgs);
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means...");
         }
@@ -111,6 +113,20 @@ public class Parser {
             throw new DukeException("The keyword has to be provided for the find command");
         }
         return new FindCommand(keyword);
+    }
+
+    private static TagCommand createTagCommand(String[] commandArgs) throws DukeException {
+        int idx;
+        try {
+            idx = Integer.parseInt(commandArgs[1]);
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            throw new DukeException("The number of the task to be tagged has to be provided.");
+        }
+        String tag = Parser.reassembleString(commandArgs, 2, commandArgs.length);
+        if (tag.length() == 0) {
+            throw new DukeException("The tag has to be provided for the tag command");
+        }
+        return new TagCommand(idx, tag);
     }
 
     private static String reassembleString(String[] arr, int from, int to) {
