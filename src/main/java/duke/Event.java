@@ -13,29 +13,29 @@ class Event extends Task {
     /**
      * Variable to store event time.
      */
-    protected LocalDate at;
+    protected LocalDate eventDate;
 
     /**
      * Constructor used to create Event.
      *
      * @param description Event description.
-     * @param at Event time.
+     * @param eventDate Event time.
      */
-    Event(String description, LocalDate at) {
+    Event(String description, LocalDate eventDate) {
         super(description);
-        this.at = at;
+        this.eventDate = eventDate;
     }
 
     /**
      * Constructor used to create Event.
      *
      * @param description Event description.
-     * @param at Event time.
+     * @param eventDate Event time.
      * @param isDone Describes if task is completed.
      */
-    Event(String description, LocalDate at, boolean isDone) {
+    Event(String description, LocalDate eventDate, boolean isDone) {
         super(description, isDone);
-        this.at = at;
+        this.eventDate = eventDate;
     }
 
     /**
@@ -44,13 +44,13 @@ class Event extends Task {
      * @return Simple string description.
      */
     @Override
-    String toStringSimple() {
-        return "E | " + super.toStringSimple() + " | " + at;
+    String toStringForStorage() {
+        return "E | " + super.toStringForStorage() + " | " + eventDate;
     }
 
     @Override
     public String toString() {
-        String formattedDate = this.at.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
+        String formattedDate = this.eventDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.MEDIUM));
         return "[E]" + super.toString() + " (at: " + formattedDate + ")";
     }
 }

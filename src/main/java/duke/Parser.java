@@ -13,33 +13,50 @@ class Parser {
      * @throws DukeException  When date is in wrong format, or task lacks description.
      */
     static Command parse(String input) throws DukeException {
-        String second;
-        int index;
-
-        String[] parts = input.split(" ", 2);
-        String action = parts[0].toUpperCase();
+        String[] partsOfCommand = splitCommandAndFormatAction(input);
+        String action = partsOfCommand[0];
 
         CommandName commandName = tryEnum(action);
+        return handleCommand(commandName, partsOfCommand);
+    }
+
+    private static String[] splitCommandAndFormatAction(String input) {
+        String[] partsOfCommand = input.split(" ", 2);
+        String action = partsOfCommand[0].toUpperCase();
+
+        if (partsOfCommand.length > 1) {
+            assert partsOfCommand.length == 2 : "Length of parts of command should be 2";
+            String secondPartOfCommand = partsOfCommand[1];
+            return new String[]{action, secondPartOfCommand};
+        } else {
+            return new String[]{action};
+        }
+    }
+
+    private static Command handleCommand(CommandName commandName, String[] partsOfCommand) throws DukeException {
+        int index;
+        String secondPartOfCommand;
+
         switch(commandName) {
         case LIST:
             return new ListCommand();
         case DONE:
-            second = parts[1];
-            index = Integer.parseInt(second);
+            secondPartOfCommand = partsOfCommand[1];
+            index = Integer.parseInt(secondPartOfCommand);
             return new DoneCommand(index);
         case TODO:
             // Fallthrough
         case DEADLINE:
             // Fallthrough
         case EVENT:
-            return handleTask(parts, commandName);
+            return handleTask(partsOfCommand, commandName);
         case DELETE:
-            second = parts[1];
-            index = Integer.parseInt(second);
+            secondPartOfCommand = partsOfCommand[1];
+            index = Integer.parseInt(secondPartOfCommand);
             return new DeleteCommand(index);
         case FIND:
-            second = parts[1];
-            return new FindCommand(second);
+            secondPartOfCommand = partsOfCommand[1];
+            return new FindCommand(secondPartOfCommand);
         case BYE:
             // Fallthrough
         default:
@@ -79,9 +96,9 @@ class Parser {
                 return new AddCommand(commandName, "");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            String error = "OOPS!!! The description of a " + commandName.toString().toLowerCase()
+            String emptyDescriptionErrorMessage = "OOPS!!! The description of a " + commandName.toString().toLowerCase()
                 + " cannot be empty.";
-            throw new DukeException(error);
+            throw new DukeException(emptyDescriptionErrorMessage);
         }
     }
 

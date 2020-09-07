@@ -62,7 +62,7 @@ class Task {
      *
      * @return Simple string description.
      */
-    String toStringSimple() {
+    String toStringForStorage() {
         int intDone = isDone ? 1 : 0;
         return intDone + " | " + this.getDescription();
     }

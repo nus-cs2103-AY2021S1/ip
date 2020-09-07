@@ -14,13 +14,13 @@ class TaskList {
     private ArrayList<Task> taskList = new ArrayList<>();
 
     /**
-     * Constructor used to create list of tasks.
+     * Constructs list of tasks.
      */
     TaskList() {
     }
 
     /**
-     * Constructor used to create list of tasks.
+     * Constructs list of tasks.
      *
      * @param taskStrings List of tasks in string format.
      * @throws DukeException  When date is in wrong format.
@@ -29,19 +29,21 @@ class TaskList {
 
         for (ArrayList<String> taskString : taskStrings) {
 
+            String description = taskString.get(2);
             int isDoneInt = Integer.parseInt(taskString.get(1));
             boolean isDone = isDoneInt > 0;
+
             String taskNameString = taskString.get(0);
             TaskNameInStorage taskNameInStorage = TaskNameInStorage.valueOf(taskNameString);
             switch (taskNameInStorage) {
             case D:
-                handleDeadline(taskString.get(2), taskString.get(3), isDone);
+                handleDeadline(description, taskString.get(3), isDone);
                 break;
             case E:
-                handleEvent(taskString.get(2), taskString.get(3), isDone);
+                handleEvent(description, taskString.get(3), isDone);
                 break;
             case T:
-                handleTodo(taskString.get(2), isDone);
+                handleTodo(description, isDone);
                 break;
             default:
                 throw new DukeException("Invalid character in storage file :-(");
@@ -50,7 +52,7 @@ class TaskList {
     }
 
     /**
-     * Getter to retrieve list of tasks.
+     * Gets list of tasks.
      *
      * @return List of tasks.
      */
@@ -76,9 +78,10 @@ class TaskList {
         }
 
         int len = taskList.size();
-        return "Got it. I've added this task:\n"
+        String addedTaskOutputMessage = "Got it. I've added this task:\n"
                 + task.toString() + "\nNow you have " + len
                 + " tasks in the list.";
+        return addedTaskOutputMessage;
     }
 
     private Task handleTodo(String todoTask) {
@@ -147,17 +150,19 @@ class TaskList {
     String doTask(int index) {
         Task task = taskList.get(index - 1);
         task.setDone(true);
-        return "Nice! I've marked this task as done: \n"
+        String doneOutputMessage = "Nice! I've marked this task as done: \n"
                 + task.toString();
+        return doneOutputMessage;
     }
 
     String deleteTask(int index) {
         Task task = taskList.get(index - 1);
         taskList.remove(index - 1);
         int len = taskList.size();
-        return "Noted. I've removed this task:\n"
+        String deletionOutputMessage = "Noted. I've removed this task:\n"
                 + task.toString() + "\nNow you have " + len
                 + " tasks in the list.";
+        return deletionOutputMessage;
     }
 
     String findTasks(String search) {

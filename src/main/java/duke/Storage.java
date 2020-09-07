@@ -33,15 +33,19 @@ class Storage {
      * @throws DukeException When IO error occurs.
      */
     ArrayList<ArrayList<String>> load() throws DukeException {
-        File f = new File(this.filePath);
-        f.getParentFile().mkdirs();
+        File file = new File(this.filePath);
+        file.getParentFile().mkdirs();
+        if (file.exists()) {
+            return readTasksFromFile();
+        } else {
+            return createFile(file);
+        }
+    }
+
+    private ArrayList<ArrayList<String>> createFile(File file) throws DukeException {
         try {
-            if (!f.exists()) {
-                f.createNewFile();
-                return new ArrayList<>();
-            } else {
-                return readTasksFromFile();
-            }
+            file.createNewFile();
+            return new ArrayList<>();
         } catch (IOException e) {
             throw new DukeException("A file error has occurred!");
         }
@@ -53,10 +57,10 @@ class Storage {
         // E | isDoneInt | description | at
         // T | isDoneInt | description
 
-        File f = new File(this.filePath);
+        File file = new File(this.filePath);
         ArrayList<ArrayList<String>> formattedOutput = new ArrayList<>();
         try {
-            Scanner s = new Scanner(f);
+            Scanner s = new Scanner(file);
             while (s.hasNext()) {
                 String line = s.nextLine();
                 String[] lineParts = line.split(" \\| ");
@@ -70,11 +74,16 @@ class Storage {
     }
 
     void save(ArrayList<Task> tasks) throws DukeException {
+        String output = tasksToStorageStringOutput(tasks);
+        appendToFile(output);
+    }
+
+    private String tasksToStorageStringOutput(ArrayList<Task> tasks) {
         StringBuilder output = new StringBuilder();
         for (Task task : tasks) {
-            output.append(task.toStringSimple()).append(System.lineSeparator());
+            output.append(task.toStringForStorage()).append(System.lineSeparator());
         }
-        appendToFile(output.toString());
+        return output.toString();
     }
 
     private void appendToFile(String textToAppend) throws DukeException {
