@@ -44,12 +44,11 @@ public class TaskList {
      */
     public List<Task> findTasks(String keyword) {
         List<Task> searchResults = new ArrayList<>();
-
-        for (Task task : tasks) {
+        tasks.forEach(task -> {
             if (task.getDescription().contains(keyword)) {
                 searchResults.add(task);
             }
-        }
+        });
         return searchResults;
 
     }
