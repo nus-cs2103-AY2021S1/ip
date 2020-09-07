@@ -1,5 +1,3 @@
-package test;
-
 import bot.Bot;
 
 import org.junit.After;

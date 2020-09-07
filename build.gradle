@@ -34,6 +34,12 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
 
+tasks.withType(JavaCompile) {
+    options.encoding = 'UTF-8'
+}
+
+applicationDefaultJvmArgs = ["-Dfile.encoding=utf-8"]
+
 test {
     useJUnitPlatform()
 
@@ -54,7 +60,7 @@ javafx {
 }
 
 application {
-    mainClassName = "bot.Launcher"
+    mainClassName = "bot.Main"
 }
 
 shadowJar {

@@ -1,5 +1,3 @@
-package test;
-
 import bot.task.Todo;
 
 import static org.junit.Assert.assertEquals;
