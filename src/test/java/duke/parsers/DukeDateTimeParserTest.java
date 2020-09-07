@@ -1,5 +1,6 @@
 package duke.parsers;
 
+import static duke.utils.Messages.MESSAGE_INVALID_DATE_TIME;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -40,7 +41,7 @@ public class DukeDateTimeParserTest {
             DukeDateTime dukeDateTime = DukeDateTimeParser.parse(input);
             fail();
         } catch (DukeDateTimeParseException e) {
-            assertEquals("OOPS! Invalid date / time format!", e.getMessage());
+            assertEquals(MESSAGE_INVALID_DATE_TIME, e.getMessage());
         }
     }
 }

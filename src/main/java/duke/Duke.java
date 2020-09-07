@@ -35,7 +35,7 @@ public class Duke {
     }
 
     /**
-     * Runs the program until termination.
+     * Runs the program until termination. Only called during testing.
      */
     public void run() {
         inputOutput.showGreeting();
@@ -66,7 +66,7 @@ public class Duke {
             storage.save(taskList);
             return command.execute(taskList);
         } catch (DukeException e) {
-            return new CommandResult(e.getMessage(), false);
+            return new CommandResult("\t " + e.getMessage(), false);
         }
     }
 }

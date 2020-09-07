@@ -1,5 +1,6 @@
 package duke.tasklist;
 
+import static duke.utils.Messages.MESSAGE_NO_SUCH_TASK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertIterableEquals;
 import static org.junit.jupiter.api.Assertions.fail;
@@ -49,7 +50,7 @@ public class TaskListTest {
             Task task = taskList.markTaskAsDone(0);
             fail();
         } catch (NoSuchTaskException e) {
-            assertEquals("OOPS! No such task exists!", e.getMessage());
+            assertEquals(MESSAGE_NO_SUCH_TASK, e.getMessage());
         }
     }
 
@@ -69,7 +70,7 @@ public class TaskListTest {
             Task task = taskList.deleteTask(0);
             fail();
         } catch (NoSuchTaskException e) {
-            assertEquals("OOPS! No such task exists!", e.getMessage());
+            assertEquals(MESSAGE_NO_SUCH_TASK, e.getMessage());
         }
     }
 

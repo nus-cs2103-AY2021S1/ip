@@ -1,5 +1,12 @@
 package duke.parsers;
 
+import static duke.utils.Messages.MESSAGE_EMPTY_DUE_DATE;
+import static duke.utils.Messages.MESSAGE_EMPTY_TASK_DELETED;
+import static duke.utils.Messages.MESSAGE_EMPTY_TASK_DESCRIPTION;
+import static duke.utils.Messages.MESSAGE_EMPTY_TASK_DONE;
+import static duke.utils.Messages.MESSAGE_INVALID_COMMAND;
+import static duke.utils.Messages.MESSAGE_INVALID_DATE_TIME;
+import static duke.utils.Messages.MESSAGE_INVALID_TASK;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -54,7 +61,7 @@ public class ParserTest {
             Parser.parse("done");
             fail();
         } catch (EmptyTaskDoneException e) {
-            assertEquals("OOPS! Task done cannot be empty!", e.getMessage());
+            assertEquals(MESSAGE_EMPTY_TASK_DONE, e.getMessage());
         }
     }
 
@@ -64,7 +71,7 @@ public class ParserTest {
             Parser.parse("done task");
             fail();
         } catch (InvalidTaskException e) {
-            assertEquals("OOPS! Invalid task found.", e.getMessage());
+            assertEquals(MESSAGE_INVALID_TASK, e.getMessage());
         }
     }
 
@@ -80,7 +87,7 @@ public class ParserTest {
             Parser.parse("delete");
             fail();
         } catch (EmptyTaskDeletedException e) {
-            assertEquals("OOPS! Task deleted cannot be empty!", e.getMessage());
+            assertEquals(MESSAGE_EMPTY_TASK_DELETED, e.getMessage());
         }
     }
 
@@ -90,7 +97,7 @@ public class ParserTest {
             Parser.parse("delete task");
             fail();
         } catch (InvalidTaskException e) {
-            assertEquals("OOPS! Invalid task found.", e.getMessage());
+            assertEquals(MESSAGE_INVALID_TASK, e.getMessage());
         }
     }
 
@@ -106,7 +113,7 @@ public class ParserTest {
             Parser.parse("deadline return book /by some-date");
             fail();
         } catch (DukeDateTimeParseException e) {
-            assertEquals("OOPS! Invalid date / time format!", e.getMessage());
+            assertEquals(MESSAGE_INVALID_DATE_TIME, e.getMessage());
         }
     }
 
@@ -116,7 +123,7 @@ public class ParserTest {
             Parser.parse("deadline return book");
             fail();
         } catch (EmptyDueDateException e) {
-            assertEquals("OOPS! The due date of deadline cannot be empty!", e.getMessage());
+            assertEquals(MESSAGE_EMPTY_DUE_DATE, e.getMessage());
         }
     }
 
@@ -126,7 +133,7 @@ public class ParserTest {
             Parser.parse("deadline /by 23/8/2020");
             fail();
         } catch (EmptyTaskDescriptionException e) {
-            assertEquals("OOPS! The description of a deadline cannot be empty.", e.getMessage());
+            assertEquals(String.format(MESSAGE_EMPTY_TASK_DESCRIPTION, "deadline"), e.getMessage());
         }
     }
 
@@ -142,7 +149,7 @@ public class ParserTest {
             Parser.parse("todo    ");
             fail();
         } catch (EmptyTaskDescriptionException e) {
-            assertEquals("OOPS! The description of a todo cannot be empty.", e.getMessage());
+            assertEquals(String.format(MESSAGE_EMPTY_TASK_DESCRIPTION, "todo"), e.getMessage());
         }
     }
 
@@ -164,7 +171,7 @@ public class ParserTest {
             Parser.parse("hello");
             fail();
         } catch (InvalidCommandException e) {
-            assertEquals("OOPS! I'm sorry but I don't know what that means :-(", e.getMessage());
+            assertEquals(MESSAGE_INVALID_COMMAND, e.getMessage());
         }
     }
 
