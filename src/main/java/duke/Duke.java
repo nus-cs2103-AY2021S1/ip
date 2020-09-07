@@ -128,15 +128,15 @@ public class Duke extends Application {
         }
     }
 
-    /*
     /**
      * Main method which runs the bot
      * @param args user input
      * @throws DukeException if bot does not understand user input
-    public static void main(String[] args) throws DukeException {
-        new Duke().bot();
+     */
+    public static void main(String[] args) {
+        Application.launch(Duke.class, args);
     }
-    */
+
 
     /**
      * Bot method which handles the inputs and responds to the user while calling the appropriate classes
