@@ -11,7 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-// Duke Class
+/**
+ * Duke is a program to keep track of and organise tasks, including todo tasks, event tasks, and deadline tasks.
+ * 
+ * @author Yan Lyn
+ */
 public class Duke {
 
     private static Storage storage;
@@ -24,7 +28,7 @@ public class Duke {
     private Scene scene;
     
     /**
-     * Returns Duke's response as a String.
+     * getResponse returns Duke's response to be shown on the user interface.
      * 
      * @throws DukeException 
      */
@@ -33,9 +37,10 @@ public class Duke {
     }
     
     /**
-     * Duke runs the program, using data specified by filepath.
+     * Duke constructor constructs Duke object, while initializing 'ui', 'storage' and 'inputs' variables. 
+     * The 'inputs' TaskList is retrieved from the file specified by the filepath.
+     * 
      * @param filepath
-     * @throws DukeException if an exception arises while reading input or creating parser object
      */
     public Duke(String filepath) {
         assert filepath == "listStore.ser";
@@ -54,13 +59,15 @@ public class Duke {
     }
 
     /**
-     * run() method constructs Duke Object, constructs UI, storage and TaskList object to initialize.
+     * The run() method runs the program by initializing a parser object to deal with making sense of user command 
+     * and running the parse() method on the parser object.
+     * The run() method directly returns the string "Bye. Hope to see you again soon!" if user input is "bye".
      * 
-     * @return output String 
+     * @return Duke's output in a string
+     * @throws DukeException in case of DukeException when running parse() method on the parser object
      */
     public String run(String input) throws DukeException {
         while (true) {
-           // String nextLine = ui.readInput();
            String nextLine = input;
             Parser parser = new Parser(nextLine, inputs);
             if (nextLine.equals("bye")) {
@@ -73,9 +80,11 @@ public class Duke {
 //    public static void main (String[]args) throws DukeException {
 //        new Duke("listStore.ser").run();
 //    }
-     
 
-    // Input class represents user inputted tasks
+
+    /**
+     * Input class represents input from the user in the form of tasks.
+     */
     public static class Input implements Serializable {
         boolean done = false;
         String content;
@@ -93,7 +102,9 @@ public class Duke {
             this.content = content;
         }
 
-        // Marks task as done
+        /**
+         * taskDone() method marks task as done by setting boolean 'done' as true.
+         */
         public void taskDone() {
             System.out.println("check");
             this.done = true;
@@ -119,7 +130,14 @@ public class Duke {
 
     public static class Deadline extends Input {
 
-        // Constructor for Deadline Object, converts time string to LocalDate and formats for printing
+        /**
+         * Constructor for Deadline Object.
+         * Converts date specified by the user from a string to a LocalDate object, under the 'time' attribute.
+         * Formats LocalDate and converts it back to a string for printing, under the 'printTime' attribute.
+         * 
+         * @param content
+         * @param deadlineTime
+         */
         Deadline(String content, String deadlineTime) {
             super(content);
             this.time = LocalDate.parse(deadlineTime, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -137,7 +155,14 @@ public class Duke {
 
     public static class Event extends Input {
 
-        // Constructor for Event Object, converts time string to LocalDate and formats for printing
+        /**
+         * Constructor for Event Object.
+         * Converts date specified by the user from a string to a LocalDate object, under the 'time' attribute.
+         * Formats LocalDate and converts it back to a string for printing, under the 'printTime' attribute.
+         *
+         * @param content
+         * @param eventTime
+        */
         Event(String content, String eventTime) {
             super(content);
             this.time = LocalDate.parse(eventTime, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
@@ -153,7 +178,9 @@ public class Duke {
         }
     }
 
-
+    /**
+     * DukeException class which inherits directly from Exception class.
+     */
     public static class DukeException extends Exception {
         protected String msg;
 
@@ -173,9 +200,9 @@ public class Duke {
         }
 
         /**
-         * Saves tasks in file specified by the filepath.
+         * Saves TaskList in a file which is based on the filepath in the Storage Class.
          *
-         * @param list of tasks
+         * @param list of input tasks to be saved
          * @catch IOException
          */
         void writeToFile(List<Input> list) {
@@ -191,8 +218,9 @@ public class Duke {
         }
 
         /**
-         * Retrieves tasks from file specified by the filepath.
+         * Retrieves TaskList from a file based on the filepath in the Storage Class.
          *
+         * @returns TaskList from file
          * @catch FileNotFoundException if file does not exist, creates a new arraylist
          * @catch IOException and ClassNotFoundException, returns null
          */
@@ -217,7 +245,9 @@ public class Duke {
         }
     }
 
-    // TaskList represents the list of input tasks
+    /** 
+     * TaskList class represents the list of input tasks.
+     */
     public static class TaskList {
         List<Input> inputs;
 
@@ -234,9 +264,11 @@ public class Duke {
         }
 
         /**
-         * Marks task, as specified by user, as done.
+         * Identifies task specified by the user and invokes taskDone() method from Input class to mark task as done.
+         * Saves the resulting list to a hard disk.
          *
-         * @param nextLine, represents user input
+         * @return A string representing Duke's response to be shown to user
+         * @param nextLine representing user input
          * @throws DukeException if user does not specify which task done, or if task specified is not in list
          */
         String taskDone(String nextLine) throws DukeException {
@@ -257,8 +289,10 @@ public class Duke {
         }
 
         /**
-         * Removes task, as specified by the user, from list.
+         * Identifies task specified by the user and removes the task from the list.
+         * Saves the resulting list to the hard disk.
          *
+         * @return A string representing Duke's response to be shown to user
          * @param nextLine, represents user input
          * @throws DukeException if user does not specify which task to remove or task is not in list
          */
@@ -283,8 +317,10 @@ public class Duke {
         }
 
         /**
-         * Adds a to-do object to the list, and saves the list to hard disk.
+         * Adds a to-do object to the list based on user input.
+         * Saves the resulting list to a hard disk.
          *
+         * @return A string representing Duke's response to be shown to user
          * @param nextLine, represents user input
          * @throws DukeException if user does not specify task to-do
          */
@@ -302,10 +338,12 @@ public class Duke {
         }
 
         /**
-         * Adds a deadline object to the list, and saves the list to hard disk.
+         * Adds a deadline object to the list based on user input.
+         * Saves the resulting list to a hard disk.
          *
+         * @return A string representing Duke's response to be shown to user
          * @param nextLine, represents user input
-         * @throws DukeException if user does not specify task
+         * @throws DukeException if user does not specify deadline task 
          */
         String addDeadlineTask(String nextLine) throws DukeException {
             try {
@@ -326,10 +364,12 @@ public class Duke {
         }
 
         /**
-         * Adds an event object to the list, and saves the list to hard disk.
+         * Adds an event object to the list based on user input.
+         * Saves the resulting list to a hard disk.
          *
+         * @return A string representing Duke's response to be shown to user
          * @param nextLine, represents user input
-         * @throws DukeException if user does not specify task
+         * @throws DukeException if user does not specify event task
          */
         String addEventTask(String nextLine) throws DukeException {
             if (nextLine.equals("event") || nextLine.equals("event ")) {
@@ -345,6 +385,13 @@ public class Duke {
                     + event.printTime + "\n Now you have " + count + " tasks in the list");
         }
 
+        /**
+         * Find tasks which contains keyword specified by user.
+         *
+         * @return A list of tasks containing the keyword
+         * @param nextLine, represents user input
+         * @throws DukeException if user does not specify task to find
+         */        
         String findTask(String nextLine) throws DukeException {
             if (nextLine.equals("find") || nextLine.equals("find ")) {
                 throw new DukeException("OOPS!!! The description of find cannot be empty");
@@ -360,7 +407,12 @@ public class Duke {
             }
             return stringList;
         }
-        
+
+        /**
+         * Prints a list of the tasks in the TaskList.
+         * 
+         * @return list of tasks in TaskList
+         */
         String printList() {
             if (this.inputs.size() == 0) {
                 return "No tasks in list";
@@ -374,7 +426,15 @@ public class Duke {
                 return stringList;
             }
         }
-        
+
+        /**
+         * Prints input task to a string, to be shown to the user as Duke's response.
+         * Prints string with '[/]' if input task is done, otherwise prints string with '[x]'.
+         * 
+         * @param input, which represents the input task to print to string.
+         * @param i, which is the index of the task in the list
+         * @return string to be shown to user
+         */
         String printTask(Input input, int i) {
             if (input.done) {
                 return ((i+1) + ". " + input.id + "[/] " + input.content + input.printTime + "\n");
@@ -384,11 +444,15 @@ public class Duke {
         }
     }
 
-    // UI class deals with User Input
+    /** 
+     * UI class deals with the User Input.
+     */
     public static class UI {
         private Scanner sc = new Scanner(System.in);
 
-        // UI Constructor, prints DUKE as part of initialization
+        /** 
+         * UI Constructor, prints DUKE to show that the program has initialized.
+         */
         UI() {
             String logo = " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
@@ -401,12 +465,17 @@ public class Duke {
                     + "What can I do for you?");
         }
 
-        // Reads user input using scanner
+        /**
+         * Scans for user input.
+         */
         String readInput() {
             return this.sc.nextLine();
         }
 
-        // Prints error if DukeException is caught when constructing Duke Object
+        /**
+         * Prints 'Loading Error!' if DukeException is caught while constructing Duke Object.
+         */
+         
         void showLoadingError() {
             System.out.println("Loading Error!");
         }
@@ -414,7 +483,9 @@ public class Duke {
 
     }
 
-    //Parser class deals with making sense of user command
+    /**
+     * Parser class deals with making sense of user command.
+     */
     public static class Parser {
         private final String userInput;
         private final TaskList savedTaskList;
@@ -424,9 +495,10 @@ public class Duke {
             this.savedTaskList = inputs;
         }
 
-        /** Guides the TaskList based on user command.
+        /** 
+         * Runs different methods on the TaskList based on user command.
          * 
-         * @throws DukeException
+         * @throws DukeException if user command is not recognised or if methods in TaskList throw DukeException
          */
         String parse() throws DukeException {
             try {
