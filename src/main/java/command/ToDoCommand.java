@@ -32,12 +32,17 @@ public class ToDoCommand extends Command {
 
         //Check if input is empty.
         if (super.input.length() <= INPUT_INDEX) {
-            throw new InvalidInputException("\t☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new InvalidInputException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
-        ToDo task = new ToDo(super.input.substring(INPUT_INDEX));
-        tasks.getTasks().add(task);
+
+        //Check if there is a description overlap
+        String taskDescription = super.input.substring(INPUT_INDEX);
+        tasks.checkDuplicates(taskDescription);
+
+        ToDo task = new ToDo(taskDescription);
+        tasks.addTask(task);
         storage.saveFile(tasks.getTasks());
-        return ui.printOutput("\tGot it. I've added this task:\n" + "\t" + task.toString()
-                + "\n\tNow you have " + tasks.getTasks().size() + " tasks in the list.");
+        return ui.printOutput("Got it. I've added this task:\n" + task.toString()
+                + "\nNow you have " + tasks.getTasks().size() + " tasks in the list.");
     }
 }

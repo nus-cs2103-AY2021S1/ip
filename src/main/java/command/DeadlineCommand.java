@@ -38,29 +38,32 @@ public class DeadlineCommand extends Command {
             InvalidInputException, InvalidSaveFileException {
 
         final int INPUT_INDEX = 9;
+        final int DEADLINE_INDEX = 3;
 
-        //Check if the description is empty
+        //Check if the description is empty.
         if (super.input.length() <= INPUT_INDEX) {
-            throw new InvalidInputException("\t☹ OOPS!!! The description of a deadline cannot be empty.");
+            throw new InvalidInputException("☹ OOPS!!! The description of a deadline cannot be empty.");
         }
 
-        final int DEADLINE_INDEX = 3;
         String[] splitWord = super.input.split("/");
 
+        //Seperate task description from deadline given.
         String desc = splitWord[0].substring(INPUT_INDEX, splitWord[0].length() - 1);
         String deadline = splitWord[1].substring(DEADLINE_INDEX);
         Deadline task;
+        tasks.checkDuplicates(desc);
+
         try {
             task = new Deadline(desc, LocalDateTime.parse(deadline, dateTimeFormat));
         } catch (DateTimeParseException e) {
             throw new InvalidDateTimeFormatException(
-                    "\tDeadline input must follow a certain format: yyyy-mm-dd HH:mm "
+                    "Deadline input must follow a certain format: yyyy-mm-dd HH:mm "
                     + "e.g. 2020-08-23 16:45");
         }
 
         tasks.addTask(task);
         storage.saveFile(tasks.getTasks());
-        return ui.printOutput("\tGot it. I've added this task:\n" + "\t" + task.toString()
-                + "\n\tNow you have " + tasks.getTasks().size() + " tasks in the list.");
+        return ui.printOutput("Got it. I've added this task:\n" + task.toString()
+                + "\n\nNow you have " + tasks.getTasks().size() + " tasks in the list.");
     }
 }

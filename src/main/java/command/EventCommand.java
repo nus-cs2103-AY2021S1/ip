@@ -39,25 +39,28 @@ public class EventCommand extends Command {
 
         final int INPUT_INDEX = 6;
         final int EVENT_INDEX = 3;
+
         //Check if event is specified
         if (super.input.length() <= INPUT_INDEX) {
-            throw new InvalidInputException("\t☹ OOPS!!! The description of an event cannot be empty.");
+            throw new InvalidInputException("☹ OOPS!!! The description of an event cannot be empty.");
         }
 
         String[] splitWord = super.input.split("/");
         String desc = splitWord[0].substring(INPUT_INDEX, splitWord[0].length() - 1);
         String timing = splitWord[1].substring(EVENT_INDEX);
         Event task;
+        tasks.checkDuplicates(desc);
+
         try {
             task = new Event(desc, LocalDateTime.parse(timing, dateTimeFormat));
         } catch (DateTimeParseException e) {
             throw new InvalidDateTimeFormatException(
-                    "\tEvent timing input must follow a certain format: yyyy-mm-dd HH:mm "
+                    "Event timing input must follow a certain format: yyyy-mm-dd HH:mm "
                     + "e.g. 2020-08-23 16:45");
         }
         tasks.addTask(task);
         storage.saveFile(tasks.getTasks());
-        return ui.printOutput("\tGot it. I've added this task:\n" + "\t" + task.toString()
-                + "\n\tNow you have " + tasks.getTasks().size() + " tasks in the list.");
+        return ui.printOutput("Got it. I've added this task:\n" + task.toString()
+                + "\nNow you have " + tasks.getTasks().size() + " tasks in the list.");
     }
 }

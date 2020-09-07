@@ -23,12 +23,12 @@ public class ListCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidInputException {
         if (tasks.getTasks().size() == 0) {
-            throw new InvalidInputException("\tList is empty! Start adding some tasks");
+            throw new InvalidInputException("List is empty! Start adding some tasks");
         } else {
-            String result = "\t Here are the tasks in your list:";
+            String result = "Here are the tasks in your list:";
             for (int i = 1; i <= tasks.getTasks().size(); i++) {
                 Task current = tasks.getTasks().get(i - 1);
-                result += ui.printOutput("\n\t" + i + "." + current.toString());
+                result += ui.printOutput("\n" + i + "." + current.toString());
             }
             return result;
         }

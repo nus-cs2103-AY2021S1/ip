@@ -31,6 +31,7 @@ public class Duke {
             ui.showError(e.getMessage());
             taskList = new TaskList();
         }
+        this.taskList.createDuplicateChecker();
     }
 
     public Duke() {

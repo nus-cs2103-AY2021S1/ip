@@ -104,7 +104,7 @@ public class Storage {
             fw.close();
         } catch (IOException e) {
             throw new InvalidSaveFileException(
-                    "\t☹ OOPS!!! logic.Duke is experiencing IO errors when writing to save file!");
+                    "☹ OOPS!!! logic.Duke is experiencing IO errors when writing to save file!");
         }
     }
 }
