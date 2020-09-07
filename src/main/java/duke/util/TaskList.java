@@ -33,7 +33,7 @@ public class TaskList {
      * @return Task which was marked as done.
      */
     public Task completeTask(int num) {
-        assert (num >= 0 && num < store.size());
+        assert (num > 0 && num <= store.size());
         store.get(num - 1).setDone();
         return store.get(num - 1);
     }
@@ -44,7 +44,7 @@ public class TaskList {
      * @return Task which was deleted.
      */
     public Task deleteTask(int num) {
-        assert (num >= 0 && num < store.size());
+        assert (num > 0 && num <= store.size());
         Task task = store.get(num - 1);
         store.remove(task);
         return task;
