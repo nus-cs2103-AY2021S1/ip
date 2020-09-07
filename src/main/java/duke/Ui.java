@@ -1,9 +1,11 @@
 package duke;
 
+import java.util.List;
+
 import duke.task.Task;
 import duke.task.TaskList;
 
-import java.util.List;
+
 
 /**
  * Encapsulates the user interface.
@@ -72,7 +74,6 @@ public class Ui {
         System.out.println(welcomeMessage);
         return welcomeMessage;
     }
-
     /**
      * Prints a given string but adds "Added : " in front of the message.
      * @param msg given string
