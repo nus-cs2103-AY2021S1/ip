@@ -41,14 +41,14 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.showLine();
         String[] input = fullCommand.split(" ");
-        String toFind;
+
+        String keyword;
         StringBuilder resultSb = new StringBuilder(
                 String.format("%s\n %s\n", ui.showLine(), "Here are the matching tasks in your list:"));
         if (input.length == 2) {
-            toFind = fullCommand.substring(fullCommand.indexOf(" ")).trim();
-            ArrayList<Task> results = taskList.find(toFind);
+            keyword = fullCommand.substring(fullCommand.indexOf(" ")).trim();
+            ArrayList<Task> results = taskList.find(keyword);
             for (int i = 0; i < results.size(); i++) {
                 resultSb.append(String.format("%d. %s%n\n", i + 1, results.get(i)));
             }

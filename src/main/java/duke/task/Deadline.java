@@ -40,21 +40,21 @@ public class Deadline extends Task {
      * Checks if two object are equal.
      * If equal true, else false.
      *
-     * @param o object to be compare.
-     * @return true is same, false if different
+     * @param obj object to be compare.
+     * @return true is same, false if differento
      */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        if (!super.equals(o)) {
+        if (!super.equals(obj)) {
             return false;
         }
-        Deadline deadline = (Deadline) o;
+        Deadline deadline = (Deadline) obj;
         return Objects.equals(by, deadline.by);
     }
 

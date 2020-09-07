@@ -52,30 +52,30 @@ public class Storage {
             BufferedReader br = new BufferedReader(new FileReader(file));
             String fileLine;
             while ((fileLine = br.readLine()) != null) {
-                String[] tempArr = fileLine.split(",");
-                String command = tempArr[0];
+                String[] tempWordArr = fileLine.split(",");
+                String command = tempWordArr[0];
                 switch (command) {
                 case "duke.task.Todo":
-                    assert tempArr.length == 3;
-                    Task tempTodo = new Todo(tempArr[2]);
-                    if (tempArr[1].equals("true")) {
+                    assert tempWordArr.length == 3;
+                    Task tempTodo = new Todo(tempWordArr[2]);
+                    if (tempWordArr[1].equals("true")) {
                         tempTodo.markAsDone();
                     }
                     taskArrayList.add(tempTodo);
                     break;
                 case "duke.task.Deadline":
-                    assert tempArr.length == 4;
-                    Task tempDeadline = new Deadline(tempArr[2], LocalDateTime.parse(tempArr[3]));
-                    if (tempArr[1].equals("true")) {
+                    assert tempWordArr.length == 4;
+                    Task tempDeadline = new Deadline(tempWordArr[2], LocalDateTime.parse(tempWordArr[3]));
+                    if (tempWordArr[1].equals("true")) {
                         tempDeadline.markAsDone();
                     }
                     taskArrayList.add(tempDeadline);
                     break;
                 case "duke.task.Event":
-                    assert tempArr.length == 5;
-                    Task tempEvent = new Event(tempArr[2], LocalDateTime.parse(tempArr[3]),
-                            LocalDateTime.parse(tempArr[4]));
-                    if (tempArr[1].equals("true")) {
+                    assert tempWordArr.length == 5;
+                    Task tempEvent = new Event(tempWordArr[2], LocalDateTime.parse(tempWordArr[3]),
+                            LocalDateTime.parse(tempWordArr[4]));
+                    if (tempWordArr[1].equals("true")) {
                         tempEvent.markAsDone();
                     }
                     taskArrayList.add(tempEvent);

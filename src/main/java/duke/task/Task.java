@@ -61,18 +61,18 @@ public class Task {
      * Checks if two object are equal.
      * If equal true, else false.
      *
-     * @param o object to be compare.
+     * @param obj object to be compare.
      * @return true is same, false if different
      */
     @Override
-    public boolean equals(Object o) {
-        if (this == o) {
+    public boolean equals(Object obj) {
+        if (this == obj) {
             return true;
         }
-        if (o == null || getClass() != o.getClass()) {
+        if (obj == null || getClass() != obj.getClass()) {
             return false;
         }
-        Task task = (Task) o;
+        Task task = (Task) obj;
         return isDone == task.isDone && description.equals(task.description);
     }
 

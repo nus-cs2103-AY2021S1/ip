@@ -45,21 +45,21 @@ public class EventCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.showLine();
         if (!fullCommand.contains(" ")) {
             throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
         }
-        String details = fullCommand.substring(fullCommand.indexOf(" ")).trim();
         if (!fullCommand.contains("/at")) {
             throw new DukeException("☹ OOPS!!! The date & time of a event cannot be empty.");
         }
+
+        String details = fullCommand.substring(fullCommand.indexOf(" ")).trim();
         String description = details.substring(0, details.indexOf("/at")).trim();
         String at = details.substring(details.indexOf("/at") + 3).trim();
 
         String[] inputDateTime = at.split(" ");
         String[] date = inputDateTime[0].split("[/\\\\]|-");
-        LocalDate localDate = convertDateToLocalDate(date);
 
+        LocalDate localDate = convertDateToLocalDate(date);
         LocalTime startLocalTime = LocalTime.of(0, 0);
         LocalTime endLocalTime = LocalTime.of(23, 59);
         if (inputDateTime.length > 1) {
@@ -69,17 +69,16 @@ public class EventCommand extends Command {
             }
             startLocalTime = convertTimeToLocalTime(timeArr[0]);
         }
+
         LocalDateTime startLocalDateTime = LocalDateTime.of(localDate, startLocalTime);
         LocalDateTime endLocalDateTime = LocalDateTime.of(localDate, endLocalTime);
-        StringBuilder resultSb = new StringBuilder(
-                String.format("%s\n %s\n", ui.showLine(), "Got it. I've added this task:"));
-
         taskList.addTask(new Event(description, startLocalDateTime, endLocalDateTime));
-        resultSb.append("\t")
-                .append(taskList.retrieveTask(taskList.sizeOfList() - 1))
-                .append(String.format("Now you have %o tasks in list.\n", taskList.sizeOfList()))
-                .append(ui.showLine());
-        Ui.printString(resultSb.toString());
+
+        String resultSb = String.format("%s\n %s\n", ui.showLine(), "Got it. I've added this task:") + "\t"
+                + taskList.retrieveTask(taskList.sizeOfList() - 1) + String.format(
+                "Now you have %o tasks in list.\n", taskList.sizeOfList()) + ui.showLine();
+        Ui.printString(resultSb);
+
         storage.write(taskList);
     }
 

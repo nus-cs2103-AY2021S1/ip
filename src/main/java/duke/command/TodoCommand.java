@@ -37,13 +37,14 @@ public class TodoCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         String description = fullCommand.substring(fullCommand.indexOf(" ")).trim();
-        StringBuilder resultSb = new StringBuilder(
-                String.format("%s\n %s\n", ui.showLine(), "Got it. I've added this task:"));
+
         taskList.addTask(new Todo(description));
-        resultSb.append("\t").append(taskList.retrieveTask(taskList.sizeOfList() - 1)).append("\n");
-        resultSb.append(String.format("Now you have %o tasks in list.\n", taskList.sizeOfList())).append(ui.showLine());
         storage.write(taskList);
-        Ui.printString(resultSb.toString());
+        String resultSb = String.format(
+                "%s\n %s\n", ui.showLine(), "Got it. I've added this task:") + "\t" + taskList.retrieveTask(
+                taskList.sizeOfList() - 1) + "\n" + String.format("Now you have %o tasks in list.\n",
+                taskList.sizeOfList()) + ui.showLine();
+        Ui.printString(resultSb);
     }
 
     /**
