@@ -47,7 +47,7 @@ public class Storage {
             String date = temp.substring(temp.indexOf("|") + 2);
             if (first == 'D') {
                 des = "deadline " + taskDescription + " /by " + date;
-            } else if (first == 'E') {
+            } else {
                 des = "event " + taskDescription + " /at " + date;
             }
         }
@@ -128,7 +128,9 @@ public class Storage {
      *
      * @param textToAdd Text to be written to the file specified in <code>filePath</code>.
      */
+
     public static void save(String textToAdd) {
+
         try {
             writeToFile(textToAdd);
         } catch (IOException e) {

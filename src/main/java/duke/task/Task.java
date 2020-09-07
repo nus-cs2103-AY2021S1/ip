@@ -76,11 +76,15 @@ public class Task {
      * @return Date of task.
      */
     public String getDate() {
-        String des = this.getDescription();
-        if (des.indexOf('/') == -1) {
-            return "";
+        String des = this.description;
+        if (des.contains("/")) {
+            return des.substring(des.indexOf("/") + 4);
+        } else {
+            throw new AssertionError("This task does not have a date");
         }
+
         return des.substring(des.indexOf('/') + NUM_CHARS_TO_DATE);
+
     }
 
     /**

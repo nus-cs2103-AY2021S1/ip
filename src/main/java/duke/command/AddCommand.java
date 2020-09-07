@@ -25,15 +25,7 @@ public class AddCommand extends Command {
         return false;
     }
 
-    /**
-     * Checks for the type of task added by the user based on the user input, and
-     * adds the appropriate type of task to the task list.
-     *
-     * @param tasks List of <code>Task</code> objects.
-     * @param ui Ui object created by Duke.
-     * @param storage Storage object created by Duke.
-     * @return String of what was added to the task list, in duke's template message.
-     */
+
     public String executeToString(TaskList tasks, Ui ui, Storage storage) {
         Task t = new Task(userInput);
         String result = "";
@@ -43,6 +35,7 @@ public class AddCommand extends Command {
             String fileString = tasks.listToString();
 
             if (t.isTodo()) {
+
                 ToDo todo = t.convertToTodo();
                 tasks.add(todo);
                 fileString += todo.taskToText() + "\n";
@@ -62,6 +55,11 @@ public class AddCommand extends Command {
                 fileString += event.taskToText() + "\n";
 
                 result =  ui.showAddTaskResponse(event, tasks.size());
+
+
+                
+            } else {
+                assert false;
 
             }
 
