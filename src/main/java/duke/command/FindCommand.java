@@ -35,7 +35,19 @@ public class FindCommand extends Command {
         assert taskList != null && storage != null;
 
         if (taskList.numberOfTasks() > 0) {
-            ArrayList<Task> tasksWithKeyWord = taskList.find(keyWords);
+            //ArrayList<Task> tasksWithKeyWord = taskList.find(keyWords);
+            ArrayList<Task> tasksWithKeyWord = taskList.findTasks(task ->
+                    {
+                    boolean hasKeyWords = true;
+                    for (int j = 0; j < keyWords.length; j++) {
+                        if (!task.toString().contains(keyWords[j])) {
+                            hasKeyWords = false;
+                            break;
+                        }
+                    }
+                    return hasKeyWords;
+                }
+            );
             if (tasksWithKeyWord.size() > 0) {
                 StringBuilder stringBuilder = new StringBuilder();
                 stringBuilder.append(createOpeningMessage());
