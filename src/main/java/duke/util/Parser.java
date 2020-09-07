@@ -23,7 +23,14 @@ import duke.task.Todo;
  * Helps parse user input.
  */
 public class Parser {
-
+    private static final String BYE = "bye";
+    private static final String LIST = "list";
+    private static final String TODO = "todo";
+    private static final String DEADLINE = "deadline";
+    private static final String EVENT = "event";
+    private static final String DONE = "done";
+    private static final String DELETE = "delete";
+    private static final String FIND = "find";
     /**
      * Parses an input string and returns a Command based on the input.
      *
@@ -37,29 +44,29 @@ public class Parser {
      */
     public static Command parse(String input) throws InvalidDescriptionException, InvalidCommandException,
             InvalidEventException, InvalidDeadlineException, InvalidDateFormatException {
-        String[] splitString = input.split(" ", 2);
-        String command = splitString[0];
+        String[] separatedInput = input.split(" ", 2);
+        String command = separatedInput[0];
         int num;
         switch (command) {
-        case "bye":
+        case BYE:
             return new ByeCommand();
-        case "list":
+        case LIST:
             return new ListCommand();
-        case "todo":
-        case "deadline":
-        case "event":
-            if (splitString.length == 1) {
+        case TODO:
+        case DEADLINE:
+        case EVENT:
+            if (separatedInput.length == 1) {
                 throw new InvalidDescriptionException();
             }
-            return parseTask(command, splitString[1].trim());
-        case "done":
-            num = Integer.parseInt(splitString[1]);
+            return parseTask(command, separatedInput[1].trim());
+        case DONE:
+            num = Integer.parseInt(separatedInput[1]);
             return new DoneCommand(num);
-        case "delete":
-            num = Integer.parseInt(splitString[1]);
+        case DELETE:
+            num = Integer.parseInt(separatedInput[1]);
             return new DeleteCommand(num);
-        case "find":
-            String matchString = splitString[1].trim();
+        case FIND:
+            String matchString = separatedInput[1].trim();
             return new FindCommand(matchString);
         default:
             throw new InvalidCommandException();
@@ -80,26 +87,26 @@ public class Parser {
     private static Command parseTask(String command, String description)
             throws InvalidEventException, InvalidDeadlineException,
             InvalidCommandException, InvalidDateFormatException {
-        String[] splitted;
+        String[] separatedDescription;
         LocalDate date;
         try {
             switch (command) {
-            case "todo":
+            case TODO:
                 return new AddCommand(new Todo(description));
-            case "deadline":
-                splitted = description.split(" /by ", 2);
-                if (splitted.length == 1) {
+            case DEADLINE:
+                separatedDescription = description.split(" /by ", 2);
+                if (separatedDescription.length == 1) {
                     throw new InvalidDeadlineException();
                 }
-                date = LocalDate.parse(splitted[1]);
-                return new AddCommand(new Deadline(splitted[0], date));
-            case "event":
-                splitted = description.split(" /at ", 2);
-                if (splitted.length == 1) {
+                date = LocalDate.parse(separatedDescription[1]);
+                return new AddCommand(new Deadline(separatedDescription[0], date));
+            case EVENT:
+                separatedDescription = description.split(" /at ", 2);
+                if (separatedDescription.length == 1) {
                     throw new InvalidEventException();
                 }
-                date = LocalDate.parse(splitted[1]);
-                return new AddCommand(new Event(splitted[0], date));
+                date = LocalDate.parse(separatedDescription[1]);
+                return new AddCommand(new Event(separatedDescription[0], date));
             default:
                 throw new InvalidCommandException();
             }
