@@ -291,7 +291,7 @@ public class Parser {
                     + "  Commands: bye, list, find, done, delete, todo, event, deadline");
         }
 
-        assert trimmedStr.length() > 2 : "user input should not be empty/just white spaces";
+
 
         if (str.equals("bye")) {
             MainWindow.closeWindow();
@@ -315,7 +315,7 @@ public class Parser {
                     + "  Commands: bye, list, find, done, delete, todo, event, deadline");
         }
 
-        assert commandSpace > 0 : "There should be a spacing after command call from this point onwards";
+
 
         if (str.substring(0, 5).equals("done ")) {
             int length = str.length();
@@ -338,7 +338,7 @@ public class Parser {
                 throw new DukeException("*Please fill in todo description*");
             }
 
-            assert length > commandSpace + 1 : "There should be a description";
+
 
             Todo newTodo = new Todo(str.substring(5, length));
             this.tasks.store(newTodo);
@@ -352,7 +352,7 @@ public class Parser {
                 throw new DukeException("*Please fill in a keyword to find*");
             }
 
-            assert length > commandSpace + 1 : "There should be a keyword";
+
 
             String keyword = str.substring(5, length);
             List<Task> allTasks = tasks.getTasks();
@@ -381,7 +381,7 @@ public class Parser {
                     + "  Commands: bye, list, find, done, delete, todo, event, deadline");
         }
 
-        assert str.length() > 4 : "The length of command with a space character should be > 4";
+
 
         if (str.substring(0, 6).equals("event ")) {
             int length = str.trim().length();
@@ -414,7 +414,7 @@ public class Parser {
                     + "  Commands: bye, list, find, done, delete, todo, event, deadline");
         }
 
-        assert str.length() > 5 : "The length of command with a space character should be > 5";
+
 
         if (str.substring(0, 7).equals("delete ")) {
             int length = str.length();
@@ -425,7 +425,7 @@ public class Parser {
                 throw new DukeException("*Invalid task index, please try again.*");
             }
 
-            assert this.tasks.getLength() >= realIndex + 1 : "There should be a task in task list to mark delete";
+
 
             Task taskSubject = this.tasks.remove(realIndex);
             return "Noted. I've removed this task:\n"
@@ -437,7 +437,7 @@ public class Parser {
                     + "  Commands: bye, list, find, done, delete, todo, event, deadline");
         }
 
-        assert str.length() > 6 : "The length of command with a space character should be > 6";
+
 
         if (str.substring(0, 9).equals("deadline ")) {
             int length = str.trim().length();
