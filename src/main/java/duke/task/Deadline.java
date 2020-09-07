@@ -46,8 +46,8 @@ public class Deadline extends Task {
      * @return String representing a task in save file.
      */
     @Override
-    public String toSaveFormat() {
-        return "deadline " + super.toSaveFormat() + " /by " + by;
+    public String printSaveFormat() {
+        return "deadline " + super.printSaveFormat() + " /by " + by;
     }
 
     /**

@@ -37,21 +37,4 @@ public class DoneCommand extends AbstractModifyTaskCommand {
             DukeException.tryAgain();
         }
     }
-
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) {
-            return true;
-        }
-        if (!(o instanceof Task)) {
-            return false;
-        }
-        Task task1 = (Task) o;
-        return task1 == task;
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(task);
-    }
 }

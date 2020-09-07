@@ -1,26 +1,27 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-import org.junit.jupiter.api.Test;
-
-import java.util.ArrayList;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 class ParserTest {
 
-//    @Test
-//    void parse() throws DukeException {
-//        taskListHandler handler = new taskListHandler(new ArrayList<>());
-//        Parser.parse("todo pop-quiz", handler);
-//        TodoCommand tdcmd = new TodoCommand(new Todo("todo pop-quiz"));
-//        assertEquals(Parser.parse("todo pop-quiz", handler), tdcmd);
-//    }
+    //    @Test
+    //    void parse() throws DukeException {
+    //        taskListHandler handler = new taskListHandler(new ArrayList<>());
+    //        Parser.parse("todo pop-quiz", handler);
+    //        TodoCommand tdcmd = new TodoCommand(new Todo("todo pop-quiz"));
+    //        assertEquals(Parser.parse("todo pop-quiz", handler), tdcmd);
+    //    }
 
     @Test
     void parseModifyTaskCommand() throws DukeException {
@@ -54,8 +55,7 @@ class ParserTest {
         String nameOfField = "taskDesc";
         String emptyTaskDesc = "    ";
         DukeException thrown = assertThrows(
-                DukeException.class,
-                () -> Parser.checkIsFieldEmpty(nameOfField, emptyTaskDesc),
+                DukeException.class, () -> Parser.checkIsFieldEmpty(nameOfField, emptyTaskDesc),
                 "Expected checkIsFieldEmpty() to throw, but it didn't"
         );
         assertTrue(thrown.getMessage().contains("\u2639 Oops, " + nameOfField + " cannot be empty"));

@@ -25,8 +25,8 @@ public class Event extends Task {
      * @return String representing a task in save file.
      */
     @Override
-    public String toSaveFormat() {
-        return "event " + super.toSaveFormat() + " /at " + at;
+    public String printSaveFormat() {
+        return "event " + super.printSaveFormat() + " /at " + at;
     }
 
     /**

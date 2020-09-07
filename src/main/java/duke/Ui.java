@@ -124,7 +124,9 @@ public class Ui {
         setLogo();
         String greeting = "Hey! I'm Duke the chatbot!";
         String doForYou = "What can I do for you?";
-        return logo + "\n" + greeting + "\n" + doForYou;
+        return logo + "\n"
+            + greeting + "\n"
+            + doForYou;
     }
 
     public static void setLogo() {

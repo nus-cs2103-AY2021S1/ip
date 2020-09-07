@@ -154,7 +154,7 @@ public class Storage {
                 this.saveToFile(newList);
                 Ui.greet();
             } catch (DukeException e1) {
-                System.out.println(e1);
+                System.out.println(e1.getMessage());
             }
             return newList;
         } else {
@@ -187,7 +187,7 @@ public class Storage {
                 }
 
                 // System.out.println("Wrote: " + t.toSaveFormat());
-                writer.write(t.toSaveFormat() + System.lineSeparator());
+                writer.write(t.printSaveFormat() + System.lineSeparator());
             }
             doneIndexes = doneIndexesBuilder.toString();
             if (!doneIndexes.equals("")) {

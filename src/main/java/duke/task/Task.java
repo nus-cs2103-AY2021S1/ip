@@ -75,7 +75,7 @@ public class Task {
      *
      * @return String representing a task in save file.
      */
-    public String toSaveFormat() {
+    public String printSaveFormat() {
         return description;
     }
 
