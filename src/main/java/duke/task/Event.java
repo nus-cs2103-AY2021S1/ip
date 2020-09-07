@@ -41,7 +41,9 @@ public class Event extends Task {
      */
     private LocalDate extractDate(String dateUnformatted) {
         dateUnformatted = dateUnformatted.replaceAll("/", "-");
-        return LocalDate.parse(dateUnformatted);
+        LocalDate formattedDate = LocalDate.parse(dateUnformatted);
+        assert formattedDate instanceof LocalDate : "return value of this method has to be of type LocalDate";
+        return formattedDate;
     }
 
     /**
@@ -50,7 +52,9 @@ public class Event extends Task {
      * @return formatted Localtime from string of unformatted time.
      */
     private LocalTime extractTime(String timeUnformatted) {
-        return LocalTime.parse(timeUnformatted);
+        LocalTime formattedTime = LocalTime.parse(timeUnformatted);
+        assert formattedTime instanceof LocalTime : "return value of this method has to be of type LocalTime";
+        return formattedTime;
     }
 
     /**
@@ -61,7 +65,11 @@ public class Event extends Task {
     public String toString() {
         DateTimeFormatter dtfDate = DateTimeFormatter.ofPattern("MMM dd yyyy");
         DateTimeFormatter dtfTime = DateTimeFormatter.ISO_LOCAL_TIME;
-        return "[E]" + super.toString() + "(at: " + this.date.format(dtfDate) + " " + this.time.format(dtfTime) + ")";
+        assert dtfDate instanceof DateTimeFormatter : "date formatter has to be of type DateTimeFormatter";
+        assert dtfTime instanceof DateTimeFormatter : "time formatter has to be of type DateTimeFormatter";
+        final String EVENT_STRING_SHOWED_TO_USER =  "[E]" + super.toString() + "(at: " + this.date.format(dtfDate) +
+                " " + this.time.format(dtfTime) + ")";
+        return EVENT_STRING_SHOWED_TO_USER;
     }
 
     /**
@@ -73,7 +81,11 @@ public class Event extends Task {
         char status = this.isDone ? '1' : '0';
         DateTimeFormatter dtfDate = DateTimeFormatter.ofPattern("MMM dd yyyy");
         DateTimeFormatter dtfTime = DateTimeFormatter.ISO_LOCAL_TIME;
-        return "E " + "| " + status + " | " + this.description + "| " + this.date.format(dtfDate) + " " + this.time.format(dtfTime);
+        assert dtfDate instanceof DateTimeFormatter : "date formatter has to be of type DateTimeFormatter";
+        assert dtfTime instanceof DateTimeFormatter : "time formatter has to be of type DateTimeFormatter";
+        final String EVENT_STRING_TO_SAVE =
+                "E " + "| " + status + " | " + this.description + "| " + this.date.format(dtfDate) + " " + this.time.format(dtfTime);
+        return EVENT_STRING_TO_SAVE;
     }
 
 }

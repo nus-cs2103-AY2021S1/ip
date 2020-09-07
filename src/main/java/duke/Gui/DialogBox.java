@@ -29,7 +29,7 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     /**
-     * constructor for DialogBox instance
+     * Constructor for DialogBox instance
      * @param text message to be shown to user
      * @param img image of user to be shown in display window
      * @param isAssistant boolean to check if is assistant or user
@@ -63,10 +63,10 @@ public class DialogBox extends HBox {
             this.setBackground(new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
         }
         int count = dialog.getText().endsWith("\n") ? 1 : 0;
-        String[] ss = dialog.getText().split("\n");
-        count += ss.length + 1;
-        for (String s : ss) {
-            count += s.length() / 32;
+        String[] stringList = dialog.getText().split("\n");
+        count += stringList.length + 1;
+        for (String substring : stringList) {
+            count += substring.length() / 32;
         }
         this.setMinHeight(count * 15 + 30);
 
