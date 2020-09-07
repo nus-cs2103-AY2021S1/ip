@@ -3,7 +3,7 @@
  */
 public class Parser {
     enum Command {
-        LIST, BYE, DONE, DELETE, DEADLINE, EVENT, TODO, EMPTY_TASK_TODO, EMPTY_TASK_EVENT_DEADLINE, EMPTY_DATE, NULL, FIND;
+        UNDO, LIST, BYE, DONE, DELETE, DEADLINE, EVENT, TODO, EMPTY_TASK_TODO, EMPTY_TASK_EVENT_DEADLINE, EMPTY_DATE, NULL, FIND;
     }
 
 
@@ -16,6 +16,9 @@ public class Parser {
     public Command parse(String msg) {
         if (msg.equals("bye")) {
             return Command.BYE;
+
+        } else if (msg.equals("undo")) {
+            return Command.UNDO;
 
         } else if (msg.equals("list")) {
             return Command.LIST;

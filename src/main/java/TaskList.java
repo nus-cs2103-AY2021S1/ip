@@ -21,8 +21,9 @@ public class TaskList {
      * @return TaskList with added Task.
      */
     public TaskList add(Task task) {
-        taskList.add(task);
-        return new TaskList(taskList);
+        ArrayList<Task> newTaskList = new ArrayList<Task> (taskList);
+        newTaskList.add(task);
+        return new TaskList(newTaskList);
     }
 
     /**
@@ -33,8 +34,9 @@ public class TaskList {
      */
     public TaskList remove(int index) {
         assert(index >= 0 && index <= taskList.size() - 1);
-        taskList.remove(index);
-        return new TaskList(taskList);
+        ArrayList<Task> newTaskList = new ArrayList<Task> (taskList);
+        newTaskList.remove(index);
+        return new TaskList(newTaskList);
     }
 
     /**
@@ -81,7 +83,8 @@ public class TaskList {
      * @return TaskList with Task being set at specific index.
      */
     public TaskList set(int index, Task task) {
-        taskList.set(index, task);
-        return new TaskList(taskList);
+        ArrayList<Task> newTaskList = new ArrayList<Task> (taskList);
+        newTaskList.set(index, task);
+        return new TaskList(newTaskList);
     }
 }
