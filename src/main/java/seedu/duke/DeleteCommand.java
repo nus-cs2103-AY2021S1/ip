@@ -20,7 +20,8 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.showTaskDeleted(tasks.deleteTask(index - 1), tasks.size());
+        Task taskDeleted = tasks.deleteTask(index - 1);
+        ui.showTaskDeleted(taskDeleted, tasks.size());
         storage.saveTaskList(tasks);
     }
 }

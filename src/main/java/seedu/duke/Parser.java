@@ -62,8 +62,11 @@ public class Parser {
         }
     }
 
-    private static AddCommand createAddTodoCommand(String[] commandArgs) {
+    private static AddCommand createAddTodoCommand(String[] commandArgs) throws DukeException {
         String description = Parser.reassembleString(commandArgs, 1, commandArgs.length);
+        if (description.equals("")) {
+            throw new DukeException("The description of a todo cannot be empty.");
+        }
         return new AddCommand(CommandType.TODO, description, null);
     }
 
@@ -72,8 +75,16 @@ public class Parser {
         if (byIdx < 0) {
             throw new DukeException("The deadline date has to be provided to the deadline task.");
         }
+
         String description = Parser.reassembleString(commandArgs, 1, byIdx);
         String by = Parser.reassembleString(commandArgs, byIdx + 1, commandArgs.length);
+        if (description.equals("")) {
+            throw new DukeException("The description of a deadline cannot be empty.");
+        }
+        if (by.equals("")) {
+            throw new DukeException("The date of a deadline cannot be empty.");
+        }
+
         return new AddCommand(CommandType.DEADLINE, description, by);
     }
 
@@ -84,6 +95,12 @@ public class Parser {
         }
         String description = Parser.reassembleString(commandArgs, 1, atIdx);
         String at = Parser.reassembleString(commandArgs, atIdx + 1, commandArgs.length);
+        if (description.equals("")) {
+            throw new DukeException("The description of an event cannot be empty.");
+        }
+        if (at.equals("")) {
+            throw new DukeException("The date of an event cannot be empty.");
+        }
         return new AddCommand(CommandType.EVENT, description, at);
     }
 
