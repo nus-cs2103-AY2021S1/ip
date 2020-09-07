@@ -12,10 +12,8 @@ public abstract class Task {
      *
      */
     public Task(String description) {
-        assert description instanceof String : "Description of the task has to be of type String";
         this.description = description;
         this.isDone = false;
-        assert !isDone : "Task isDone status must be initialised to false";
     }
 
     /**
@@ -23,8 +21,7 @@ public abstract class Task {
      * @return string of icon.
      */
     public String getStatusIcon() {
-        final String STATUS_ICON_PREFIX =  ("[" + (isDone ? "\u2713" : "\u2718") + "] ");
-        return STATUS_ICON_PREFIX;
+        return ("[" + (isDone ? "\u2713" : "\u2718") + "] ");
     }
 
     /**
@@ -57,8 +54,7 @@ public abstract class Task {
     }
 
     public boolean isContain(String term) {
-        final boolean isContainsTerm = this.description.contains(term);
-        return isContainsTerm;
+        return (this.description.contains(term));
     }
 
     public boolean getIsDone() {

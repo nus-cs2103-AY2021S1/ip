@@ -36,6 +36,6 @@ public class FindCommand extends Command {
         });
 
         responseList.addAll(gui.findMessage(listOfTasksFound));
-        return responseList;
+    return responseList;
     }
 }
