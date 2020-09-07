@@ -61,7 +61,7 @@ public class Duke {
         } catch (DukeErrorException ex) {
             return ex.toString();
         }
-
+        assert command != null : "Command should not be null";
         if (command.equals(Commands.BYE)) {
             storage.writeFile(tl);
             return ui.sayFarewell();
