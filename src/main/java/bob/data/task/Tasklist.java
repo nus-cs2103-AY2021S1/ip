@@ -9,24 +9,26 @@ import bob.storage.Storage;
 
 
 /**
- * Represents the list containing tasks in Bob.
+ * Represents the tasks containing tasks in Bob.
  */
 public class Tasklist {
-    private final ArrayList<Task> list;
+    private static final String LINE_BREAK = "\n";
+
+    private final ArrayList<Task> tasks;
 
     /**
-     * Creates a tasklist.
+     * Creates a tasktasks.
      *
      * @param storage Bob's Storage.
      * @throws FileNotFoundException If File in Storage does not exist.
      * @throws BobInvalidDateAndTimeException If there is an error from converting file data to Task.
      */
     public Tasklist(Storage storage) throws FileNotFoundException, BobInvalidDateAndTimeException {
-        this.list = storage.getList();
+        this.tasks = storage.getList();
     }
 
     public Tasklist() {
-        list = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -36,61 +38,61 @@ public class Tasklist {
      * @throws IOException If there is an error rewriting file.
      */
     public void updateData(Storage storage) throws IOException {
-        storage.updateFile(list);
+        storage.updateFile(tasks);
     }
 
     /**
-     * Add task to list.
+     * Add task to tasks.
      *
      * @param task Task to be added.
      */
     public void addTask(Task task) {
-        list.add(task);
+        tasks.add(task);
     }
 
     /**
-     * Gets size of list.
+     * Gets size of tasks.
      *
-     * @return Size of task list.
+     * @return Size of task tasks.
      */
     public int getListSize() {
-        return this.list.size();
+        return this.tasks.size();
     }
 
     /**
-     * Marks a task in list as done.
+     * Marks a task in tasks as done.
      *
      * @param taskNo Task number of task to be marked as done.
      * @return Task marked as done.
      */
     public Task markTaskDone(int taskNo) {
         int index = taskNo - 1;
-        Task task = this.list.get(index).markDone();
-        this.list.set(index, task);
+        Task task = this.tasks.get(index).markDone();
+        this.tasks.set(index, task);
         return task;
     }
 
     /**
-     * Deletes task in list.
+     * Deletes task in tasks.
      *
      * @param taskNo Task number of task to be deleted.
      * @return Deleted task.
      */
     public Task deleteTask(int taskNo) {
         int index = taskNo - 1;
-        Task task = list.get(index);
-        this.list.remove(index);
+        Task task = tasks.get(index);
+        this.tasks.remove(index);
         return task;
     }
 
     /**
-     * Get number of done tasks in list.
+     * Get number of done tasks in tasks.
      *
      * @return Number of done tasks.
      */
     private int getNumOfDoneTask() {
         int doneTask = 0;
-        for (Task task : list) {
+        for (Task task : tasks) {
             if (task.checkIsDone()) {
                 doneTask++;
             }
@@ -99,15 +101,15 @@ public class Tasklist {
     }
 
     /**
-     * Creates a readable String of tasks in list.
+     * Creates a readable String of tasks in tasks.
      *
-     * @return String representing tasks in list.
+     * @return String representing tasks in tasks.
      */
     private String convertList() {
         StringBuilder output = new StringBuilder();
         for (int i = 0; i < getListSize(); i++) {
             int taskNo = i + 1;
-            output.append(taskNo).append(". ").append(this.list.get(i)).append("\n");
+            output.append(taskNo).append(". ").append(this.tasks.get(i)).append(LINE_BREAK);
         }
         return output.toString();
     }
@@ -119,21 +121,32 @@ public class Tasklist {
      */
     public String findTasks(String input) {
         StringBuilder tasksFound = new StringBuilder();
-        for (Task task: list) {
+        for (Task task: tasks) {
             boolean containsInput = task.toString().contains(input);
             if (containsInput) {
-                tasksFound.append(task.toString()).append("\n");
+                tasksFound.append(task.toString()).append(LINE_BREAK);
             }
         }
         return tasksFound.toString();
+    }
+
+    public String getUnfinishedTasks() {
+        StringBuilder unFinishedTasks = new StringBuilder();
+        for (Task task: tasks) {
+            boolean isNotDone = !task.checkIsDone();
+            if (isNotDone) {
+                unFinishedTasks.append(task.toString()).append(LINE_BREAK);
+            }
+        }
+        return unFinishedTasks.toString();
     }
 
     @Override
     public String toString() {
         return getListSize() == 0
                 ? "You currently have no tasks.\n"
-                : getNumOfDoneTask() == list.size()
+                : getNumOfDoneTask() == tasks.size()
                 ? "Wow congrats, you finished all your tasks.\n" + convertList()
-                : "You have " + (list.size() - getNumOfDoneTask()) + " unfinished tasks.\n" + convertList();
+                : "You have " + (tasks.size() - getNumOfDoneTask()) + " unfinished tasks.\n" + convertList();
     }
 }

@@ -36,7 +36,6 @@ public class Parser {
         boolean isEventCommand = input.length() >= 5 && input.startsWith("event");
         boolean isDeadlineCommand = input.length() >= 8 && input.startsWith("deadline");
         boolean isFindCommand = input.length() >= 4 && input.startsWith("find");
-
         boolean isUnknownCommand = !(isExitCommand || isListCommand || isDoneCommand || isDeleteCommand
                 || isTodoCommmand || isEventCommand || isDeadlineCommand || isFindCommand);
 
@@ -56,7 +55,6 @@ public class Parser {
             return new DeadlineCommand(input.substring(8));
         } else if (isFindCommand) {
             return new FindCommand(input.substring((4)));
-        // If user's command is invalid/not recognisable by Bob
         } else {
             assert isUnknownCommand;
             throw new BobInvalidCommandException();

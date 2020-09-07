@@ -65,6 +65,10 @@ public class Bob {
         }
     }
 
+    public String getReminders() {
+        return MsgGenerator.generateReminderMessages(this.tasks);
+    }
+
     public boolean checkExited() {
         return this.hasExited;
     }
