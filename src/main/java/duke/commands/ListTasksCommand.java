@@ -4,6 +4,7 @@ import duke.task.Task;
 import duke.task.TaskManager;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Represents the command which will list out all the tasks that are currently stored in the storage
@@ -23,10 +24,15 @@ public class ListTasksCommand extends Command {
     private String outputResult(List<Task> allTasks, int numberOfCompletedTasks, int numberOfUncompletedTasks) {
         StringBuilder allTasksOutput = new StringBuilder();
         allTasksOutput.append("Here are all your tasks: \n");
-        for (int i = 0; i < allTasks.size(); i++) {
-            String taskDescriptionInListFormat = String.format("%d) %s\n", i + 1, allTasks.get(i).toString());
+        AtomicInteger listNumber = new AtomicInteger();
+        allTasks.forEach(task -> {
+            String taskDescription = task.toString();
+            String taskDescriptionInListFormat = String.format("%d) %s\n",
+                    listNumber.get() + 1,
+                    taskDescription);
             allTasksOutput.append(taskDescriptionInListFormat);
-        }
+            listNumber.getAndIncrement();
+        });
         boolean hasMoreThanOneCompletedTask = numberOfCompletedTasks > 1;
         boolean hasMoreThanOneUncompletedTask = numberOfUncompletedTasks > 1;
         String completedTasks = numberOfCompletedTasks

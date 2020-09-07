@@ -5,6 +5,7 @@ import duke.task.TaskManager;
 import duke.utils.Messages;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class ListAllUncompletedTasksCommand extends Command {
 
@@ -20,11 +21,15 @@ public class ListAllUncompletedTasksCommand extends Command {
         boolean hasUncompletedTasks = uncompletedTasks.size() > 0;
         if (hasUncompletedTasks) {
             allUncompletedTasksOutput.append("Here are all your uncompleted tasks:\n");
-            for (int i = 0; i < uncompletedTasks.size(); i++) {
-                Task uncompletedTask = uncompletedTasks.get(i);
-                String taskDescriptionInListFormat = String.format("%d) %s\n", (i + 1), uncompletedTask.toString());
-                allUncompletedTasksOutput.append((taskDescriptionInListFormat));
-            }
+            AtomicInteger listNumber = new AtomicInteger();
+            uncompletedTasks.forEach(uncompletedTask -> {
+                String taskDescription = uncompletedTask.toString();
+                String taskDescriptionInListFormat = String.format("%d) %s\n",
+                        listNumber.get() + 1,
+                        taskDescription);
+                allUncompletedTasksOutput.append(taskDescriptionInListFormat);
+                listNumber.getAndIncrement();
+            });
         } else {
             allUncompletedTasksOutput.append(Messages.NO_UNCOMPLETED_TASKS_MESSAGE);
         }

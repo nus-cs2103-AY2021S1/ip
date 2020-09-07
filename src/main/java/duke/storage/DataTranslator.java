@@ -72,9 +72,7 @@ public class DataTranslator {
     public static List<String> encode(TaskManager taskManager) {
         List<String> data = new ArrayList<>();
         List<Task> tasks = taskManager.getAllTasks();
-        for (Task task : tasks) {
-            data.add(task.toDataFileFormat());
-        }
+        tasks.forEach(task -> data.add(task.toDataFileFormat()));
         return data;
     }
 }
