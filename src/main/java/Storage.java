@@ -27,6 +27,10 @@ public class Storage {
      * @return File containing the saved data from previous runs of Duke or a new text file if one is not found
      */
     public File getSavedData(Ui ui) {
+        assert dataPathName != null;
+        assert dataFilePath != null;
+        assert ui != null;
+
         File folder = new File(this.dataPathName);
 
         if (!folder.exists()) {
@@ -50,6 +54,11 @@ public class Storage {
      * @param ui Ui to display results and errors to the user
      */
     public void saveTasks(TaskList tasks, Ui ui) {
+        assert dataPathName != null;
+        assert dataFilePath != null;
+        assert tasks != null;
+        assert ui != null;
+
         File file = new File(this.dataFilePath);
 
         try {

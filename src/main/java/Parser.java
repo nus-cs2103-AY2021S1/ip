@@ -18,6 +18,11 @@ public class Parser {
      * @return String representing the output from the UI to the user
      */
     public static String parse(String input, Storage storage, TaskList tasks, Ui ui) {
+        assert input != null;
+        assert storage != null;
+        assert tasks != null;
+        assert ui != null;
+
         String output = ui.showDivider();
 
         try {
@@ -206,6 +211,7 @@ public class Parser {
      * @return String representing the output from the UI to the user
      */
     private static String addTask(Task task, TaskList tasks, Ui ui) {
+        assert task != null;
         tasks.addTask(task);
         return ui.showAddTask(task, tasks);
     }

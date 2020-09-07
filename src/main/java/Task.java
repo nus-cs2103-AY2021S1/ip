@@ -10,6 +10,8 @@ public class Task {
      * @param description Description of the task that needs to be performed
      */
     public Task(String description) {
+        assert description != null;
+
         this.description = description;
         this.isDone = false;
     }
@@ -20,6 +22,8 @@ public class Task {
      * @param isDone Completion status of the task
      */
     public Task(String description, boolean isDone) {
+        assert description != null;
+
         this.description = description;
         this.isDone = isDone;
     }

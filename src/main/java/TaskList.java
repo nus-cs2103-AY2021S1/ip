@@ -16,6 +16,9 @@ public class TaskList {
      */
     @SuppressWarnings("checkstyle:MissingSwitchDefault")
     public TaskList(File file, Ui ui) {
+        assert file != null;
+        assert ui != null;
+
         this.tasks = new ArrayList<>();
 
         try {
