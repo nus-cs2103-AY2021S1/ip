@@ -73,7 +73,6 @@ public class Duke {
         try {
             Parser.checkDescription(inputs, command);
             assert inputs.length > 1;
-          
             taskList.addTask(new Todo(inputs[1]));
             storage.writeData(taskList);
             return ui.getAddedTask(taskList.getTask(taskList.getSize() - 1), taskList.getSize());
@@ -93,7 +92,6 @@ public class Duke {
             Parser.checkDescription(inputs, command);
             Parser.checkTime(taskInfo, command);
             assert taskInfo.length > 1;
-          
             taskList.addTask(new Event(taskInfo[0].trim(), taskInfo[1].trim()));
             storage.writeData(taskList);
             return ui.getAddedTask(taskList.getTask(taskList.getSize() - 1), taskList.getSize());
@@ -113,7 +111,6 @@ public class Duke {
             Parser.checkDescription(inputs, command);
             Parser.checkTime(taskInfo, command);
             assert taskInfo.length > 1;
-          
             taskList.addTask(new Deadline(taskInfo[0].trim(), taskInfo[1].trim()));
             storage.writeData(taskList);
             return ui.getAddedTask(taskList.getTask(taskList.getSize() - 1), taskList.getSize());
