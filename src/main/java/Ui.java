@@ -86,8 +86,7 @@ public class Ui {
      * @return String representation of the divider
      */
     public String showDivider() {
-        return "";
-        // return DIVIDER + "\n";
+        return DIVIDER + "\n";
     }
 
     public String showError(String message) {

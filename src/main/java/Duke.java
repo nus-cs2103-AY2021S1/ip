@@ -27,10 +27,10 @@ public class Duke {
     }
 
     public String getResponse(String input) {
-        if (Parser.isDone()) {
+        if (Parser.getIsDone()) {
             System.exit(0);
         }
-        String result = Parser.parse(input, storage, tasks, ui);
-        return result;
+        String response = Parser.parse(input, storage, tasks, ui);
+        return response;
     }
 }

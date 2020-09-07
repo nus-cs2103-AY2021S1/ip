@@ -43,16 +43,16 @@ public class Event extends Task {
     @Override
     public String toString() {
         String output = "[E]" + super.toString() + " (at: ";
-        if (this.atDate == null) {
-            output += this.at;
+        if (atDate == null) {
+            output += at;
         } else {
-            output += this.atDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
+            output += atDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
         }
         return output + ")";
     }
 
     @Override
     public String getSaveFormat() {
-        return "E | " + super.getSaveFormat() + " | " + this.at;
+        return "E | " + super.getSaveFormat() + " | " + at;
     }
 }

@@ -6,7 +6,7 @@ import java.time.format.DateTimeParseException;
  * the relevant operations.
  */
 public class Parser {
-    private static boolean done = false;
+    private static boolean isDone = false;
 
     /**
      * Static method that takes in the string input from the user and executes the relevant tasks required and triggers
@@ -28,7 +28,7 @@ public class Parser {
         try {
             if (input.equals("bye")) {
                 output += ui.showGoodbyeMessage();
-                done = true;
+                isDone = true;
             } else if (input.equals("list")) {
                 output += ui.showAllTasks(tasks);
             } else if (input.startsWith("done")) {
@@ -66,8 +66,9 @@ public class Parser {
 
     private static String findTask(String input, TaskList tasks, Ui ui) throws DukeException {
         if (input.equals("find")) {
-            throw new DukeException("Sorry sir you will have to try again and this time "
-                    + "tell me which task you want me to find");
+            String cannotFindTaskMessage = "Sorry sir you will have to try again and this time "
+                    + "tell me which task you want me to find";
+            throw new DukeException(cannotFindTaskMessage);
         }
 
         String searchTerm = input.split(" ")[1];
@@ -90,13 +91,15 @@ public class Parser {
      * @param tasks TaskList that contains the task required
      * @param ui Ui to display results and errors to the user
      * @return String representing the output from the UI to the user
-     * @throws DukeException Thrown when the user does not specify a task
+     * @throws DukeException when the user does not specify a task
      */
     public static String markAsDone(String input, TaskList tasks, Ui ui) throws DukeException {
-        if (input.equals("done")) { // Input does not contain which task to mark as done
-            throw new DukeException("Sorry sir you will have to try again and this time "
-                    + "tell me which task you want me to mark as done");
+        if (input.equals("done")) {
+            String inputDoesNotContainTaskMessage = "Sorry sir you will have to try again and this time "
+                    + "tell me which task you want me to mark as done";
+            throw new DukeException(inputDoesNotContainTaskMessage);
         }
+
         int index = Integer.parseInt(input.split(" ")[1]);
         Task task = tasks.getTask(index - 1);
         task.markAsDone();
@@ -110,13 +113,15 @@ public class Parser {
      * @param tasks TaskList that contains the task to be deleted
      * @param ui Ui to display results and errors to the user
      * @return String representing the output from the UI to the user
-     * @throws DukeException Thrown when the user does not specify a task
+     * @throws DukeException when the user does not specify a task
      */
     private static String deleteTask(String input, TaskList tasks, Ui ui) throws DukeException {
         if (input.equals("delete")) { // Input does not contain which task to mark as done
-            throw new DukeException("Sorry sir you will have to try again and this time "
-                    + "tell me which task you want me to delete");
+            String inputDoesNotContainTaskNumberMessage = "Sorry sir you will have to try again and this time "
+                    + "tell me which task you want me to delete";
+            throw new DukeException(inputDoesNotContainTaskNumberMessage);
         }
+
         int index = Integer.parseInt(input.split(" ")[1]);
         Task deletedTask = tasks.deleteTask(index - 1); // Subtract 1 due to offset
         return ui.showDeleteTask(deletedTask, tasks);
@@ -127,15 +132,16 @@ public class Parser {
      *
      * @param input User input that starts with the "todo" keyword
      * @return Todo task created based on the user input
-     * @throws DukeException Thrown when the user does not provide a description
+     * @throws DukeException when the user does not provide a description
      */
     private static Task createTodo(String input) throws DukeException {
-        // Input does not contain the required keyword
-        if (input.equals("todo") || input.substring(5).isEmpty()) {
-            throw new DukeException("My apologies sir but the description of todo "
-                    + "cannot be empty :(");
+        String taskDescription = input.substring(5);
+        if (input.equals("todo") || taskDescription.isEmpty()) {
+            String incorrectTaskDescriptionMessage = "My apologies sir but the description of todo "
+                    + "cannot be empty :(";
+            throw new DukeException(incorrectTaskDescriptionMessage);
         }
-        return new Todo(input.substring(5));
+        return new Todo(taskDescription);
     }
 
     /**
@@ -145,7 +151,7 @@ public class Parser {
      * @return LocalDate object of the given input date
      */
     private static LocalDate convertDate(String dateString) {
-        LocalDate date = null;
+        LocalDate date;
         try {
             date = LocalDate.parse(dateString);
         } catch (DateTimeParseException e) {
@@ -159,23 +165,26 @@ public class Parser {
      *
      * @param input User input that starts with the "deadline" keyword
      * @return Deadline task created based on the user input
-     * @throws DukeException Thrown when the user input is in the incorrect format or does not provide a description
+     * @throws DukeException when the user input is in the incorrect format or does not provide a description
      */
     private static Task createDeadline(String input) throws DukeException {
-        // Input does not contain the required keyword
-        if (input.equals("deadline") || !input.substring(9).contains("/by")) {
-            throw new DukeException("My apologies sir but you will have to use the correct "
-                    + "format to create a deadline :(");
+        boolean inputContainsBy = input.substring(9).contains("/by");
+        if (input.equals("deadline") || !inputContainsBy) {
+            String incorrectDeadlineFormatMessage = "My apologies sir but you will have to use the correct "
+                    + "format to create a deadline :(";
+            throw new DukeException(incorrectDeadlineFormatMessage);
         }
 
         String[] splicedInput = input.substring(9).split(" /by ");
-        LocalDate date = convertDate(splicedInput[1]);
+        String deadlineDescription = splicedInput[0];
+        String deadlineByString = splicedInput[1];
+        LocalDate deadlineByDate = convertDate(deadlineByString);
 
-        if (date == null) {
-            return new Deadline(splicedInput[0], splicedInput[1]);
+        if (deadlineByDate == null) {
+            return new Deadline(deadlineDescription, deadlineByString);
         }
 
-        return new Deadline(splicedInput[0], date);
+        return new Deadline(deadlineDescription, deadlineByDate);
     }
 
     /**
@@ -183,13 +192,14 @@ public class Parser {
      *
      * @param input User input that starts with the "event" keyword
      * @return Event task create base don the user input
-     * @throws DukeException Thrown when the user input is in the incorrect format or does not provide a description
+     * @throws DukeException when the user input is in the incorrect format or does not provide a description
      */
     private static Task createEvent(String input) throws DukeException {
-        // Input does not contain the required keyword
-        if (input.equals("event") || !input.substring(6).contains("/at")) {
-            throw new DukeException("My apologies sir but you will have to use the correct "
-                    + "format to create a event :(");
+        boolean inputContainsAt = input.substring(6).contains("/at");
+        if (input.equals("event") || !inputContainsAt) {
+            String incorrectEventFormatMessage = "My apologies sir but you will have to use the correct "
+                    + "format to create a event :(";
+            throw new DukeException(incorrectEventFormatMessage);
         }
 
         String[] splicedInput = input.substring(6).split(" /at ");
@@ -216,7 +226,7 @@ public class Parser {
         return ui.showAddTask(task, tasks);
     }
 
-    public static boolean isDone() {
-        return done;
+    public static boolean getIsDone() {
+        return isDone;
     }
 }
