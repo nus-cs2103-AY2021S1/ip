@@ -1,7 +1,4 @@
-import java.io.IOException;
-import java.io.File;
-import java.io.BufferedReader;
-import java.io.FileReader;
+import java.io.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -12,15 +9,19 @@ public class TaskList {
     private ArrayList<Task> taskList;
 
     TaskList(File file) throws IOException {
+        this.loadTaskFile(file);
+    }
+
+    public void loadTaskFile(File file) throws IOException {
         BufferedReader br = new BufferedReader(new FileReader(file));
         String line = br.readLine();
-        taskList = new ArrayList<>();
+        this.taskList = new ArrayList<>();
         while (line != null) {
             String[] split = line.split("%d%");
             if (split.length > 3) {
-                taskList.add(Task.createTask(split[0], split[1], split[2], split[3]));
+                this.taskList.add(Task.createTask(split[0], split[1], split[2], split[3]));
             } else {
-                taskList.add(Task.createTask(split[0], split[1], split[2], ""));
+                this.taskList.add(Task.createTask(split[0], split[1], split[2], ""));
             }
             line = br.readLine();
         }

@@ -14,7 +14,7 @@ public class Main extends Application {
     private Duke duke;
 
     public Main() throws IOException {
-        this.duke = new Duke("data/tasks.txt");
+        this.duke = new Duke("data/pointer.txt");
     }
 
     @Override
