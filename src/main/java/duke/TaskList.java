@@ -80,11 +80,20 @@ public class TaskList {
      */
     public List<Task> findTasks(String keyword) {
         List<Task> filteredTasks = new ArrayList<>();
+        /*
         for (Task task : tasks) {
             if (task.getDescription().contains(keyword)) {
                 filteredTasks.add(task);
             }
         }
+         */
+
+        // Lambda version
+        tasks.forEach(task -> {
+            if (task.getDescription().contains(keyword)) {
+                filteredTasks.add(task);
+            }
+        });
         return filteredTasks;
     }
 }
