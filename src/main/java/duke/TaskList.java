@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import duke.exception.DukeException;
 import duke.exception.EmptyListException;
 import duke.exception.OutOfBoundsException;
+import duke.exception.SomethingWentWrongException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -48,7 +49,7 @@ public class TaskList {
      * @param dateTime The date and time of the task.
      * @param type The task type.
      */
-    public void add(String task, LocalDateTime dateTime, TaskType type) {
+    public void add(String task, LocalDateTime dateTime, TaskType type) throws DukeException {
         switch (type) {
         case DEADLINE:
             Task nextDeadline = new Deadline(task, dateTime);
@@ -63,6 +64,7 @@ public class TaskList {
             list.add(nextToDo);
             break;
         default:
+            throw new SomethingWentWrongException();
         }
     }
 

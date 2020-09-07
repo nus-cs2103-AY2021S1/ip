@@ -61,24 +61,20 @@ public class Parser {
         String datePattern = "(\\d\\d\\d\\d-\\d\\d-\\d\\d)\\s";
         String timePattern = "(\\d\\d)(\\d\\d)";
         String completePattern = "(deadline\\s)(.+)\\s(/by\\s)" + datePattern + timePattern;
-        String missingTaskPattern = "(deadline\\s)(/by)((\\s(.*))*)";
+        String missingTaskPattern = "(deadline\\s/by)((\\s(.*))*)";
         try {
-            if (input.trim().matches(basePattern)) {
-                if (input.trim().matches(almostCompletePattern)) {
-                    if (input.trim().matches(completePattern)) {
-                        String task = input.replaceAll(completePattern, "$2");
-                        LocalDateTime dateTime = extractDateTime(input, completePattern);
-                        return new DeadlineCommand(task, dateTime);
-                    } else {
-                        throw (new WrongDateTimeFormatException());
-                    }
-                } else if (input.trim().matches(missingTaskPattern)) {
-                    throw (new MissingTaskException());
-                } else {
-                    throw (new MissingTimeException("by"));
-                }
-            } else {
+            if (!input.trim().matches(basePattern)) {
                 throw (new EmptyDescriptionException("deadline"));
+            } else if (input.trim().matches(missingTaskPattern)) {
+                throw (new MissingTaskException());
+            } else if (!input.trim().matches(almostCompletePattern)) {
+                throw (new MissingTimeException("by"));
+            } else if (input.trim().matches(completePattern)) {
+                String task = input.replaceAll(completePattern, "$2");
+                LocalDateTime dateTime = extractDateTime(input, completePattern);
+                return new DeadlineCommand(task, dateTime);
+            } else {
+                throw (new WrongDateTimeFormatException());
             }
         } catch (DukeException e) {
             throw (e);
@@ -93,22 +89,18 @@ public class Parser {
         String completePattern = "(event\\s)(.+)\\s(/at\\s)" + datePattern + timePattern;
         String missingTaskPattern = "(event\\s)(/at)((\\s(.*))*)";
         try {
-            if (input.trim().matches(basePattern)) {
-                if (input.trim().matches(almostCompletePattern)) {
-                    if (input.trim().matches(completePattern)) {
-                        String task = input.replaceAll(completePattern, "$2");
-                        LocalDateTime dateTime = extractDateTime(input, completePattern);
-                        return new EventCommand(task, dateTime);
-                    } else {
-                        throw (new WrongDateTimeFormatException());
-                    }
-                } else if (input.trim().matches(missingTaskPattern)) {
-                    throw (new MissingTaskException());
-                } else {
-                    throw (new MissingTimeException("at"));
-                }
-            } else {
+            if (!input.trim().matches(basePattern)) {
                 throw (new EmptyDescriptionException("event"));
+            } else if (input.trim().matches(missingTaskPattern)) {
+                throw (new MissingTaskException());
+            } else if (!input.trim().matches(almostCompletePattern)) {
+                throw (new MissingTimeException("at"));
+            } else if (input.trim().matches(completePattern)) {
+                String task = input.replaceAll(completePattern, "$2");
+                LocalDateTime dateTime = extractDateTime(input, completePattern);
+                return new EventCommand(task, dateTime);
+            } else {
+                throw (new WrongDateTimeFormatException());
             }
         } catch (DukeException e) {
             throw (e);
@@ -157,18 +149,16 @@ public class Parser {
             String basePattern = "(due in\\s)(.+)";
             String hourPattern = "(due in\\s)(\\d+)\\s(hours)";
             String dayPattern = "(due in\\s)(\\d+)\\s(days)";
-            if (input.trim().matches(basePattern)) {
-                if (input.trim().matches(hourPattern)) {
-                    long time = parseInt(input.replaceAll(hourPattern, "$2"));
-                    return new DueInCommand(time, true);
-                } else if (input.trim().matches(dayPattern)) {
-                    long time = parseInt(input.replaceAll(dayPattern, "$2"));
-                    return new DueInCommand(time, false);
-                } else {
-                    throw (new WrongDueInFormatException());
-                }
-            } else {
+            if (!input.trim().matches(basePattern)) {
                 throw (new EmptyDescriptionException("due in"));
+            } else if (input.trim().matches(hourPattern)) {
+                long time = parseInt(input.replaceAll(hourPattern, "$2"));
+                return new DueInCommand(time, true);
+            } else if (input.trim().matches(dayPattern)) {
+                long time = parseInt(input.replaceAll(dayPattern, "$2"));
+                return new DueInCommand(time, false);
+            } else {
+                throw (new WrongDueInFormatException());
             }
         } catch (NumberFormatException e) {
             throw (new TypeMismatchException("due in"));
