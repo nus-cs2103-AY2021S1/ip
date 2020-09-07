@@ -3,7 +3,6 @@ package duke;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Scanner;
 
 import exception.EmptyDescriptionException;
 import exception.EmptyTimeException;
@@ -51,7 +50,7 @@ public class Duke {
      * @return the String response from Duke
      */
     public String getResponse(String input) {
-//        ui.printWelcome();
+        // ui.printWelcome();
         String[] inputs = input.split("\\s+", 2);
         try {
             Commands command = Parser.parse(input);

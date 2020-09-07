@@ -57,7 +57,7 @@ public class Ui {
         ArrayList<Task> tasks = taskList.getTasks();
         StringBuilder results = new StringBuilder("Here are the tasks in your list:");
         for (int index = 0; index < tasks.size(); index++) {
-           results.append("\n" + (index + 1) + ": " + tasks.get(index).toString());
+            results.append("\n" + (index + 1) + ": " + tasks.get(index).toString());
         }
         return results.toString();
     }
@@ -69,7 +69,7 @@ public class Ui {
      */
     public String getCompletedTask(Task task) {
         return "Nice! I've marked this task as done:\n"
-        + task.toString();
+            + task.toString();
     }
 
     /**
@@ -80,8 +80,8 @@ public class Ui {
      */
     public String getDeletedTask(Task task, int numberOfTask) {
         return "Noted. I've removed this task:\n"
-        + task.toString()
-        + "\nNow you have " + numberOfTask + " tasks in the list.";
+            + task.toString()
+            + "\nNow you have " + numberOfTask + " tasks in the list.";
 
     }
 
@@ -91,7 +91,7 @@ public class Ui {
      */
     public String sayDeleteAllTasks() {
         return "Noted. I've removed all tasks in the list.\n"
-        + "Now you have no task in the list.";
+            + "Now you have no task in the list.";
     }
 
     /**
