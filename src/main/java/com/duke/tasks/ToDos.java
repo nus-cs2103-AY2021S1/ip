@@ -5,6 +5,7 @@ package com.duke.tasks;
  */
 
 public class ToDos extends Task {
+    public static final String TODO_SYMBOL = "[T]";
 
     public ToDos(String task) {
         super(task);
@@ -22,7 +23,7 @@ public class ToDos extends Task {
     @Override
     public String toString() {
         String doneIndicator = getDoneIndicator();
-        return "[T]" + doneIndicator + " " + this.task;
+        return TODO_SYMBOL + doneIndicator + " " + this.task;
     }
 
     /**

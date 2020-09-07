@@ -92,4 +92,6 @@ public abstract class Task {
      */
     // Task - 1 - read book
     public abstract String parseToSaveFormat();
+
+    public abstract String toString();
 }

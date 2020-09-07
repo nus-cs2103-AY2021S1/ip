@@ -39,10 +39,11 @@ public class Duke extends Application {
         try {
             this.tasks = new TaskList(storage.load());
             this.ui = new Ui(tasks);
+            ui.initialize();
         } catch (DukeException e) {
+            System.out.println(e.getMessage());
             tasks = new TaskList();
             this.ui = new Ui(tasks);
-            ui.showLoadingError();
         }
     }
     /**
@@ -57,6 +58,10 @@ public class Duke extends Application {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+    }
+
+    public Ui getUi() {
+        return this.ui;
     }
 
     @Override
@@ -141,14 +146,5 @@ public class Duke extends Application {
         String res = this.ui.listen(input);
         return res;
     }
-
-    /**
-     * Duke main method. Initializes tasks from persistent storage file.
-     */
-    public static void main(String[] args) throws DukeException {
-        Duke duke = new Duke(FILE_PATH);
-        duke.ui.initialize(duke.tasks);
-    }
-
 
 }
