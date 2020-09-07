@@ -1,5 +1,8 @@
 package duke.storage;
 
+import duke.task.Task;
+import duke.task.TaskList;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,11 +21,11 @@ import java.util.Scanner;
  */
 public class Storage {
     private File file;
-    private ArrayList<String> recordArrayLst;
+    private TaskList taskList;
 
-    private Storage(String fileName) {
+    private Storage(String fileName, TaskList taskList) {
         this.file = new File(fileName);
-        this.recordArrayLst = new ArrayList<>();
+        this.taskList = taskList;
     }
 
     /**
@@ -32,9 +35,10 @@ public class Storage {
      */
     public ArrayList<String> loadFile() throws IOException {
         assert this.file != null : "file cannot be null";
+        ArrayList<String> recordArrayLst = new ArrayList<>();
         Scanner sc = new Scanner(this.file);
         while (sc.hasNextLine()) {
-            this.recordArrayLst.add(sc.nextLine());
+            recordArrayLst.add(sc.nextLine());
         }
         return recordArrayLst;
     };
@@ -50,47 +54,12 @@ public class Storage {
      */
     public String saveToFile() throws IOException {
         FileWriter fileWriter = new FileWriter(file, false);
-        for (String s : recordArrayLst) {
-            fileWriter.write(s + "\n");
+        for (int i = 0; i < taskList.getListSize(); i++) {
+            Task task = taskList.getTask();
+            fileWriter.write(task.toString() + "\n");
         }
         fileWriter.close();
-        return "Total number of Tasks saved: " + recordArrayLst.size();
-    }
-
-    /**
-     * Stores the current task (Record) into the arraylist
-     * as a String.
-     *
-     * @author Lee Penn Han.
-     * @param record This is the Task to be saved.
-     */
-    public void saveRecord(String record) {
-        recordArrayLst.add(record);
-    }
-
-    /**
-     * Updates the element in the Record ArrayList by using the
-     * index from User Input to identify the position.
-     *
-     * @author Lee Penn Han.
-     * @param record Latest Task Status.
-     * @param index The index of the task in the list.
-     */
-    public void updateRecord(String record, int index) {
-        int i = index - 1;
-        recordArrayLst.set(i, record);
-    }
-
-    /**
-     * Deletes the element in the Record ArrayList by using the
-     * index from User Input to identify the position.
-     *
-     * @author Lee Penn Han.
-     * @param index The index of the targeted task in the list.
-     */
-    public void deleteRecord(int index) {
-        int i = index - 1;
-        recordArrayLst.remove(i);
+        return "Total number of Tasks saved: " + taskList.getListSize();
     }
 
     /**
@@ -100,25 +69,8 @@ public class Storage {
      * @param fileName This is the filename that the tasks will be saved under.
      * @return Storage object.
      */
-    public static Storage createDukeFile(String fileName) {
-        return new Storage(fileName);
-    }
-
-    /**
-     * Gets the arraylist of Records to be saved.
-     *
-     * @author Lee Penn Han.
-     * @return Arraylist of Records to be saved.
-     */
-    public ArrayList<String> getRecords() {
-        return this.recordArrayLst;
-    }
-
-    /**
-     * Refreshes the Records arraylist to remove past tasks
-     */
-    public void refreshRecords() {
-        this.recordArrayLst = new ArrayList<>();
+    public static Storage createDukeFile(String fileName, TaskList taskList) {
+        return new Storage(fileName, taskList);
     }
 }
 

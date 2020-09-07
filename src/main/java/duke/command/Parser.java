@@ -44,12 +44,10 @@ public class Parser {
         } else if (stringarr[0].equals("done")) {
             int index = Integer.parseInt(stringarr[1]);
             String response = taskList.updateTask(index);
-            storage.updateRecord(response, index);
             finalString = Ui.showResponse(response, command);
         } else if (stringarr[0].equals("delete")) {
             int index = Integer.parseInt(stringarr[1]);
             String response = taskList.deleteTask(index);
-            storage.deleteRecord(index);
             finalString = Ui.showResponse(response, command);
         } else if (stringarr[0].equals("find")) {
             String response = processorFind(command, taskList);
@@ -59,7 +57,6 @@ public class Parser {
             finalString = Ui.showCommandMessage(response);
         } else {
             String response = processorAdd(command, taskList, false);
-            storage.saveRecord(response);
             finalString = Ui.showResponse(response, command);
         }
         return finalString;
@@ -77,7 +74,6 @@ public class Parser {
 
     private static String processorRefresh(TaskList taskList, Storage storage) {
         taskList.refreshTasklist();
-        storage.refreshRecords();
         return "Records and Tasks refreshed.";
     }
 

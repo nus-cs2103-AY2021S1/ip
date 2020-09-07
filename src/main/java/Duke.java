@@ -48,7 +48,7 @@ public class Duke {
      */
     public Duke() {
         this.taskList = TaskList.createTaskList();
-        this.storage = Storage.createDukeFile("Saved");
+        this.storage = Storage.createDukeFile("Saved", taskList);
         try {
             ArrayList<String> taskHistory = this.storage.loadFile();
             Parser.processOldTasks(taskHistory, this.taskList);
