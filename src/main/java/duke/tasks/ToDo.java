@@ -11,7 +11,7 @@ public class ToDo extends Task {
      */
     @Override
     public String txtFileFormat() {
-        return "T ~/~ " + super.txtFileFormat();
+        return "T" + DELIMITER + super.txtFileFormat();
     }
 
     /**

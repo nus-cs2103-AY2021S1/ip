@@ -29,16 +29,20 @@ public class Parser {
         } else if (command.startsWith("list")) {
             return parseListCommand(command);
         } else if (command.startsWith("find")) {
-            String keyword = command.substring(5);
+            int findCommandBreak = 5;
+            String keyword = command.substring(findCommandBreak);
             return new FindCommand(keyword);
         } else if (command.startsWith("done ")) {
-            int i = Integer.valueOf(command.substring(5));
+            int doneCommandBreak = 5;
+            int i = Integer.valueOf(command.substring(doneCommandBreak));
             return new DoneCommand(i);
         } else if (command.startsWith("delete ")) {
-            int i = Integer.valueOf(command.substring(7));
+            int deleteCommandBreak = 7;
+            int i = Integer.valueOf(command.substring(deleteCommandBreak));
             return new DeleteCommand(i);
         } else if (command.startsWith("todo ")) {
-            ToDo todo = new ToDo(command.substring(5));
+            int todoCommandBreak = 5;
+            ToDo todo = new ToDo(command.substring(todoCommandBreak));
             return new AddCommand(todo);
         } else if (command.startsWith("deadline ")) {
             return parseDeadlineCommand(command);
@@ -72,15 +76,22 @@ public class Parser {
      * @throws DukeException The user input command cannot be parsed.
      */
     public static AddCommand parseDeadlineCommand(String command) throws DukeException {
-        int cut = command.indexOf(" /by ");
-        if (cut >= 9) {
-            String desc = command.substring(9, cut);
-            String by = command.substring(cut + 5);
+        int indexOfBy = command.indexOf(" /by ");
+        if (indexOfBy >= 9) {
+            int indexOfTitle = 9;
+            int indexOfDeadline = indexOfBy + 5;
+            String desc = command.substring(indexOfTitle, indexOfBy);
+            String by = command.substring(indexOfDeadline);
+
             String[] dateAndTime = by.split(" ");
-            LocalDate date = LocalDate.parse(dateAndTime[0]);
+            String dateString = dateAndTime[0];
+            LocalDate date = LocalDate.parse(dateString);
+
             Deadline deadline = null;
             if (dateAndTime.length == 2) {
-                deadline = new Deadline(desc, date, LocalTime.parse(dateAndTime[1]));
+                String timeString = dateAndTime[1];
+                LocalTime time = LocalTime.parse(timeString);
+                deadline = new Deadline(desc, date, time);
             } else {
                 deadline = new Deadline(desc, date);
             }
@@ -96,29 +107,40 @@ public class Parser {
      * @throws DukeException The user input command cannot be parsed.
      */
     public static AddCommand parseEventCommand(String command) throws DukeException {
-        int cut = command.indexOf(" /at ");
+        int indexOfAt = command.indexOf(" /at ");
         try {
-            if (cut >= 9) {
-                String desc = command.substring(6, cut);
-                String at = command.substring(cut + 5);
-                String[] dateAndTime = at.split(" ");
-                LocalDate date = LocalDate.parse(dateAndTime[0]);
-                Event event = null;
-                if (dateAndTime.length == 2) {
-                    String[] startAndEndTime = dateAndTime[1].split("-");
-                    LocalTime startTime = LocalTime.parse(startAndEndTime[0]);
-                    if (startAndEndTime.length == 2) {
-                        event = new Event(desc, date, startTime, LocalTime.parse(startAndEndTime[1]));
-                    } else {
-                        event = new Event(desc, date, startTime);
-                    }
-                } else {
-                    event = new Event(desc, date);
-                }
-                return new AddCommand(event);
-            } else {
+            if (indexOfAt < 9) {
                 throw new DukeException("Invalid event input");
             }
+
+            int indexOfTitle = 6;
+            int indexOfDate = indexOfAt + 5;
+            String desc = command.substring(indexOfTitle, indexOfAt);
+            String at = command.substring(indexOfDate);
+
+            String[] dateAndTime = at.split(" ");
+            String dateString = dateAndTime[0];
+            LocalDate date = LocalDate.parse(dateString);
+
+            Event event = null;
+            if (dateAndTime.length == 2) {
+                String timeRangeString = dateAndTime[1];
+                String[] startAndEndTime = timeRangeString.split("-");
+
+                String startTimeString = startAndEndTime[0];
+                LocalTime startTime = LocalTime.parse(startTimeString);
+
+                if (startAndEndTime.length == 2) {
+                    String endTimeString = startAndEndTime[1];
+                    event = new Event(desc, date, startTime, LocalTime.parse(endTimeString));
+                } else {
+                    event = new Event(desc, date, startTime);
+                }
+            } else {
+                event = new Event(desc, date);
+            }
+
+            return new AddCommand(event);
         } catch (DateTimeParseException e) {
             throw new DukeException("Invalid event input");
         }

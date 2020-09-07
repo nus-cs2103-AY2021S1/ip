@@ -28,6 +28,7 @@ public class Ui {
     public void saveListMessage(TaskList taskList, LocalDate date) {
         int i = 1;
         StringBuilder sb = new StringBuilder();
+
         if (date == null) {
             for (Task t : taskList.getList()) {
                 sb.append(i + "." + t + "\n");
@@ -41,6 +42,7 @@ public class Ui {
                 }
             }
         }
+
         this.message = sb.toString();
     }
 
@@ -53,11 +55,13 @@ public class Ui {
     public void saveFindMessage(TaskList taskList, String keyword) {
         int i = 1;
         StringBuilder sb = new StringBuilder();
+
         for (Task t : taskList.getList()) {
             if (t.getDescription().indexOf(keyword) != -1) {
                 sb.append(i++ + "." + t + "\n");
             }
         }
+
         this.message = sb.toString();
     }
 

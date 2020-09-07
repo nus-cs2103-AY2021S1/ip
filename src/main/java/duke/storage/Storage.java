@@ -52,41 +52,70 @@ public class Storage {
         List<Task> list = new ArrayList<>();
         BufferedReader br = new BufferedReader(new FileReader(path));
         String task = br.readLine();
+
         while(task != null) {
             if (!task.equals("")) {
-                String[] splits = task.split(" ~/~ ");
+                String delimiter = " ~/~ ";
+                String[] splits = task.split(delimiter);
+
                 Task t = null;
-                switch (splits[0]) {
+                String taskType = splits[0];
+                switch (taskType) {
                 case "T":
-                    t = new ToDo(splits[2]);
+                    String todo = splits[2];
+                    t = new ToDo(todo);
                     break;
                 case "D":
+                    String description = splits[2];
+
+                    String dateString = splits[3];
+                    LocalDate date = LocalDate.parse(dateString);
+
                     if (splits.length == 4) {
-                        t = new Deadline(splits[2], LocalDate.parse(splits[3]));
+                        t = new Deadline(description, date);
                     } else if (splits.length == 5) {
-                        t = new Deadline(splits[2], LocalDate.parse(splits[3]), LocalTime.parse(splits[4]));
+                        String timeString = splits[4];
+                        LocalTime time = LocalTime.parse(timeString);
+
+                        t = new Deadline(description, date, time);
                     }
                     break;
                 case "E":
+                    description = splits[2];
+
+                    dateString = splits[3];
+                    date = LocalDate.parse(dateString);
+
                     if (splits.length == 4) {
-                        t = new Event(splits[2], LocalDate.parse(splits[3]));
-                    } else if (splits.length == 5) {
-                        t = new Event(splits[2], LocalDate.parse(splits[3]), LocalTime.parse(splits[4]));
-                    } else if (splits.length == 6) {
-                        t = new Event(splits[2], LocalDate.parse(splits[3]), LocalTime.parse(splits[4]),
-                                LocalTime.parse(splits[5]));
+                        t = new Event(description, date);
+                    } else if (splits.length >= 5) {
+                        String startTimeString = splits[4];
+                        LocalTime startTime = LocalTime.parse(startTimeString);
+
+                        if (splits.length == 5) {
+                            t = new Event(description, date, startTime);
+                        } else if (splits.length == 6) {
+                            String endTimeString = splits[5];
+                            LocalTime endTime = LocalTime.parse(endTimeString);
+                            t = new Event(description, date, startTime, endTime);
+                        }
                     }
                     break;
                 default:
                     throw new DukeException("Please check the hard disk for any errors");
                 }
-                if (splits[1].equals("1")) {
+
+                String isDone = splits[1];
+                if (isDone.equals("1")) {
                     t.markAsDone();
                 }
+
                 list.add(t);
             }
+
             task = br.readLine();
         }
+
         return list;
     }
 
