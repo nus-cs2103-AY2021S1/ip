@@ -35,7 +35,7 @@ public class TaskManager {
      * Adds a task.
      * @param task the task to be added
      */
-    public void add(Task task) {
+    public void add(Task task) throws DukeException {
         tasks.add(task);
         save();
     }
@@ -46,7 +46,7 @@ public class TaskManager {
      * This string information is then passed on to the <code>Storage</code>
      * class where it will handle the saving of the information.
      */
-    private void save() {
+    private void save() throws DukeException {
         StringBuffer sb = new StringBuffer();
         for (Task task : tasks) {
             sb.append(task.saveText()).append("\n");
