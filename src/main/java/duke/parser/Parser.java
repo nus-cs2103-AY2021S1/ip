@@ -25,6 +25,7 @@ import duke.task.ToDo;
 
 
 public class Parser {
+
     /**
      * Parses the command from CLI and returns a corresponding Command object.
      *

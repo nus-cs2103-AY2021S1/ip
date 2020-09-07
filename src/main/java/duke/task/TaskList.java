@@ -79,6 +79,7 @@ public class TaskList {
      *
      * @param tester The predicate for the returned list's tasks to follow
      * @return A list of tasks that returns true with the predicate
+
      */
     public ArrayList<Task> findTasks(Predicate<Task> tester) {
         ArrayList<Task> foundTasks = new ArrayList<>();

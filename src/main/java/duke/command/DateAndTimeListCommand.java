@@ -67,7 +67,7 @@ public class DateAndTimeListCommand extends Command {
         } else {
             return new CommandResult("There are no tasks with the date: "
                     + localDate.toString()
-                        + " and time: " + localTime.toString());
+                    + " and time: " + localTime.toString());
         }
     }
 
