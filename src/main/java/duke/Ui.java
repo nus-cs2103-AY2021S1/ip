@@ -31,8 +31,9 @@ public class Ui {
      * Generates and print exit message when user exits Duke.
      */
     public String exit() {
-        System.out.println("Bye. Hope to see you again soon!");
-        return "Bye. Hope to see you again soon!";
+        String exitMessage = "Bye. Hope to see you again soon!";
+        System.out.println(exitMessage);
+        return exitMessage;
     }
 
     /**
