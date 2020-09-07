@@ -19,8 +19,8 @@ public class Duke {
     private boolean isExtracted = true;
 
     /**
-     * Creates an instance of Duke, instance of ui created too. TaskList initialised.
-     * with empty list of tasks if file lookup is unsuccessful.
+     * Creates an instance of Duke and ui. Initialises TaskList.
+     * Initialises empty list of tasks if file lookup is unsuccessful.
      */
     public Duke() {
         storage = new Storage(filepath);
@@ -33,7 +33,7 @@ public class Duke {
     }
 
     /**
-     * executes logic in this class
+     * Executes logic in this class
      * @param args default style for this method
      */
     public static void main(String[] args) {

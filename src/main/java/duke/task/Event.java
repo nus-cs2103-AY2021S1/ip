@@ -61,7 +61,9 @@ public class Event extends Task {
     public String toString() {
         DateTimeFormatter dtfDate = DateTimeFormatter.ofPattern("MMM dd yyyy");
         DateTimeFormatter dtfTime = DateTimeFormatter.ISO_LOCAL_TIME;
-        return "[E]" + super.toString() + "(at: " + this.date.format(dtfDate) + " " + this.time.format(dtfTime) + ")";
+        final String EVENT_STRING_SHOWED_TO_USER =  "[E]" + super.toString() + "(at: " + this.date.format(dtfDate) +
+                " " + this.time.format(dtfTime) + ")";
+        return EVENT_STRING_SHOWED_TO_USER;
     }
 
     /**
@@ -73,7 +75,9 @@ public class Event extends Task {
         char status = this.isDone ? '1' : '0';
         DateTimeFormatter dtfDate = DateTimeFormatter.ofPattern("MMM dd yyyy");
         DateTimeFormatter dtfTime = DateTimeFormatter.ISO_LOCAL_TIME;
-        return "E " + "| " + status + " | " + this.description + "| " + this.date.format(dtfDate) + " " + this.time.format(dtfTime);
+        final String EVENT_STRING_TO_SAVE =
+                "E " + "| " + status + " | " + this.description + "| " + this.date.format(dtfDate) + " " + this.time.format(dtfTime);
+        return EVENT_STRING_TO_SAVE;
     }
 
 }

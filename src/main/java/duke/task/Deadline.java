@@ -60,7 +60,10 @@ public class Deadline extends Task {
     public String toString() {
         DateTimeFormatter dtfDate = DateTimeFormatter.ofPattern("MMM dd yyyy");
         DateTimeFormatter dtfTime = DateTimeFormatter.ISO_LOCAL_TIME;
-        return "[D]" + super.toString() + "(by: " + this.date.format(dtfDate) + " " + this.time.format(dtfTime) + ")";
+        final String DEADLINE_STRING_SHOWED_TO_USER =
+                "[D]" + super.toString() + "(by: " + this.date.format(dtfDate) + " " + this.time.format(dtfTime) +
+                ")";
+        return DEADLINE_STRING_SHOWED_TO_USER;
     }
 
     /**
@@ -72,8 +75,10 @@ public class Deadline extends Task {
         char status = this.isDone ? '1' : '0';
         DateTimeFormatter dtfDate = DateTimeFormatter.ofPattern("MMM dd yyyy");
         DateTimeFormatter dtfTime = DateTimeFormatter.ISO_LOCAL_TIME;
-        return "D " + "| " + status + " | " + this.description + "| " + this.date.format(dtfDate) + " " +
+        final String DEADLINE_STRING_TO_SAVE =
+                "D " + "| " + status + " | " + this.description + "| " + this.date.format(dtfDate) + " " +
                 this.time.format(dtfTime);
+        return DEADLINE_STRING_TO_SAVE;
     }
 
 }

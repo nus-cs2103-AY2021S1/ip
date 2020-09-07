@@ -21,7 +21,8 @@ public abstract class Task {
      * @return string of icon.
      */
     public String getStatusIcon() {
-        return ("[" + (isDone ? "\u2713" : "\u2718") + "] ");
+        final String STATUS_ICON_PREFIX =  ("[" + (isDone ? "\u2713" : "\u2718") + "] ");
+        return STATUS_ICON_PREFIX;
     }
 
     /**
@@ -54,7 +55,8 @@ public abstract class Task {
     }
 
     public boolean isContain(String term) {
-        return (this.description.contains(term));
+        final boolean isContainsTerm = this.description.contains(term);
+        return isContainsTerm;
     }
 
     public boolean getIsDone() {

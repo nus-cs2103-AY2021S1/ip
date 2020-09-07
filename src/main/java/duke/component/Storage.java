@@ -29,7 +29,6 @@ public class Storage {
             if (Files.exists(this.filePath)) {
                 this.listOfTaskStrings = Files.readAllLines(this.filePath);
             } else {
-                System.out.println("File not found at that location, new file of tasks has been created");
                 // create folder if needed
                 Path folderPath = filePath.getParent();
                 Files.createDirectories(folderPath);
@@ -38,7 +37,6 @@ public class Storage {
             }
 
         } catch (IOException e) {
-            System.out.println("Error when loading with file: Saveload class");
             this.listOfTaskStrings = new ArrayList<>();
         }
     }

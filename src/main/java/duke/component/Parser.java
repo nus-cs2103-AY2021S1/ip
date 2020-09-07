@@ -16,10 +16,10 @@ public class Parser {
 
         // ENUM generation
         try {
-            EnumUserInstruction.userInstruction userInstructionEnum = EnumUserInstruction.userInstruction.
+            EnumUserInstruction.userInstruction enumInstruction = EnumUserInstruction.userInstruction.
                     valueOf(instructionCommand.toUpperCase());
 
-            switch (userInstructionEnum) {
+            switch (enumInstruction) {
             case BYE:
                 return new ByeCommand();
             case LIST:
@@ -33,7 +33,7 @@ public class Parser {
             case TODO:
             case DEADLINE:
             case EVENT:
-                return new AddCommand(fullCommand, userInstructionEnum);
+                return new AddCommand(fullCommand, enumInstruction);
             default:
                 throw new DukeException("Please enter a valid instruction (eg. todo, list, done...)");
             }

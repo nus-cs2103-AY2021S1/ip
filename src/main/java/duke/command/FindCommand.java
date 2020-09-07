@@ -33,7 +33,8 @@ public class FindCommand extends Command {
                 listOfTasksFound.add(task);
             }
         }
+
         responseList.addAll(gui.findMessage(listOfTasksFound));
-    return responseList;
+        return responseList;
     }
 }
