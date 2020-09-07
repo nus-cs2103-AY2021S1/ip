@@ -34,6 +34,7 @@ public class DialogBox extends HBox {
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
         } catch (IOException e) {
+            System.out.println("An error occurred.");
             e.printStackTrace();
         }
 

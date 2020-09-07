@@ -36,6 +36,7 @@ public class Duke {
                 Command c = getResponse(userInput);
                 isExit = c.isExit();
             } catch (Exception e) {
+                System.out.println("An error occurred.");
                 e.printStackTrace();
             }
         }

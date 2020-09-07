@@ -9,6 +9,7 @@ import java.util.concurrent.TimeUnit;
 import duke.Duke;
 import duke.commands.Command;
 import duke.commands.ExceptionCommand;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;

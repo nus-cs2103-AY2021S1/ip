@@ -2,6 +2,7 @@ package duke.tasks;
 
 /** Represents the task that is stored in the list. */
 public class Task {
+
     /** The indicator of whether the task is done. */
     private boolean isDone;
     /** The description of the task. */

@@ -29,7 +29,7 @@ public class Storage {
             dataFile = new File(DATAFILE_PATH);
             dataFile.createNewFile();
         } catch (IOException e) {
-            System.out.println("An error occurred");
+            System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }
@@ -46,7 +46,7 @@ public class Storage {
                 lines.add(sc.nextLine());
             }
         } catch (FileNotFoundException e) {
-            System.out.println("An error occurred");
+            System.out.println("An error occurred.");
             e.printStackTrace();
         }
         return lines;
@@ -65,7 +65,7 @@ public class Storage {
         try {
             writeToFile(sb.toString());
         } catch (IOException e) {
-            System.out.println("An error occurred");
+            System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }

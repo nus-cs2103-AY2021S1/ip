@@ -3,6 +3,7 @@ package duke;
 import java.io.IOException;
 
 import duke.gui.MainWindow;
+
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -27,6 +28,7 @@ public class Main extends Application {
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
+            System.out.println("An error occurred.");
             e.printStackTrace();
         }
     }
