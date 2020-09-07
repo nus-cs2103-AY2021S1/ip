@@ -1,7 +1,5 @@
 package duke;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -14,9 +12,10 @@ import duke.task.Task;
 public class Ui {
     /** Class-wide variable to know whether to continue running user interface. */
     protected static boolean isRunning = true;
+    protected static String logo;
     protected final TaskListHandler handler;
     protected final Storage storage;
-    protected static String logo;
+
 
     /**
      * Initializes the Ui with the task list and storage.

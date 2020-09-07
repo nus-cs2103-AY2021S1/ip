@@ -66,7 +66,7 @@ public class TaskListHandler {
             Ui.indent(2);
             System.out.println(listPos + ". " + tasks.get(i));
         }
-        assert listPos > 0: "Wrong task number printed!";
+        assert listPos > 0 : "Wrong task number printed!";
         Ui.indent(1);
         System.out.println("You have " + tasks.size() + " task(s) in the list");
     }

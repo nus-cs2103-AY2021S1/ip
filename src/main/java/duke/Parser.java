@@ -156,7 +156,7 @@ public class Parser {
         checkIsFieldEmpty("time", time);
         if (tasktype == Task.TaskType.DEADLINE) {
             return new Deadline(taskDesc, time);
-        } else if (tasktype == Task.TaskType.EVENT){
+        } else if (tasktype == Task.TaskType.EVENT) {
             return new Event(taskDesc, time);
         } else {
             return new Task("this task should not be created");
