@@ -41,6 +41,8 @@ public class Parser {
             return new ByC(input);
         case "find":
             return new FindC(input);
+        case "reminder":
+            return new ReminderC(input);
         default:
             return new Command();
         }
