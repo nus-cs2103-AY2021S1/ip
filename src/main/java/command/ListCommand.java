@@ -23,6 +23,9 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(String inputMsg, TaskList currList, Ui ui) throws DukeException {
+        assert currList != null : "TaskList cannot be null";
+        assert ui != null : "Ui cannot be null";
+
         if (currList.getNumberOfTasks() > 0) {
             return currList.displayTasks();
         } else {

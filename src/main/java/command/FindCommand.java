@@ -26,6 +26,9 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(String inputMsg, TaskList currList, Ui ui) throws DukeException {
+        assert currList != null : "TaskList cannot be null";
+        assert ui != null : "Ui cannot be null";
+
         int numOfWords = inputMsg.split(" ").length;
         if (numOfWords <= 1) {
             throw new DukeException("Enter keyword to search for!");

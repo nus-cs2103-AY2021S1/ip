@@ -25,6 +25,9 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(String inputMsg, TaskList currList, Ui ui) throws DukeException {
+        assert currList != null : "TaskList cannot be null";
+        assert ui != null : "Ui cannot be null";
+
         // gets the deleted task number
         int taskNumber = Integer.valueOf(inputMsg.split(" ")[1]);
 
