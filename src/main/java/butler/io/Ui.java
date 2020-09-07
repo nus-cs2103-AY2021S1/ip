@@ -2,6 +2,7 @@ package butler.io;
 
 import butler.task.Task;
 import butler.task.TaskList;
+
 import java.util.Scanner;
 
 // Class deals with interactions with the user
@@ -65,6 +66,22 @@ public class Ui {
 
     public void showTaskDeleted(int taskIndex) {
         String msg = "Task " + taskIndex + " has been deleted.";
+        System.out.println(msg);
+    }
+
+    /**
+     * Prints out the given filtered list of tasks.
+     *
+     * @param taskList List of tasks to be printed out.
+     */
+    public void printFilteredTaskList(TaskList taskList) {
+        String msg = "Here are the matching tasks in your list.\n"
+                + "You have " + taskList.getSize()
+                + (taskList.getSize() > 1 ? " tasks" : " task")
+                + " in total.\n";
+        for (int i = 0; i < taskList.getSize(); i++) {
+            msg += "\n" + (i + 1) + ": " + taskList.getTask(i);
+        }
         System.out.println(msg);
     }
 }

@@ -5,12 +5,14 @@ import butler.command.Command;
 import butler.command.CompleteCommand;
 import butler.command.DeleteCommand;
 import butler.command.ExitCommand;
+import butler.command.FindCommand;
 import butler.command.PrintCommand;
 import butler.exception.ButlerException;
 import butler.task.DeadlineTask;
 import butler.task.EventTask;
 import butler.task.Task;
 import butler.task.ToDoTask;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
@@ -117,6 +119,14 @@ public class Parser {
                     throw new ButlerException("Please input a valid Date format.\n"
                             + "Valid Date format is YYYY-MM-DD.");
                 }
+
+        case "find":
+            try {
+                String keyword = input.split(" ", 2)[1];
+                return new FindCommand(keyword);
+            } catch (IndexOutOfBoundsException e) {
+                throw new ButlerException("Please add some keywords to filter with.");
+            }
         }
 
         throw new ButlerException("This is not a valid command type.\n" +
