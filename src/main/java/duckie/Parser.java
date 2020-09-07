@@ -15,14 +15,13 @@ import duckie.command.ListCommand;
 import duckie.exception.DuckieException;
 import duckie.exception.DuckieInsufficientInfoException;
 import duckie.exception.DuckieInvalidCommandException;
-import duckie.exception.DuckieNoNumberInputException;
 import duckie.task.Deadline;
 import duckie.task.Event;
 import duckie.task.Task;
 import duckie.task.Todo;
 
 /**
- * Responsible for the parsing of input Commands.
+ * Responsible for the parsing of input Commands
  */
 public class Parser {
     private static boolean isAWord(String s) {
@@ -30,20 +29,18 @@ public class Parser {
     }
 
     /**
-     * Parse the input Command to direct Duckie on what actions to carry out.
-     *
-     * @param fullCommand Input string command.
-     * @return Specific Command to execute the instructions.
-     * @throws DuckieException All the possible DuckieExceptions.
+     * Parse the input Command to direct Duckie on what actions to carry out
+     * @param fullCommand Input string command
+     * @return Specific Command
+     * @throws DuckieException
      */
     public static Command parse(String fullCommand) throws DuckieException {
-        assert fullCommand instanceof String : "Command must be a String type.";
-        String input = fullCommand.strip().toLowerCase();
-        if (input.equals("bye")) {
+        String input = fullCommand.strip();
+        if (input.equalsIgnoreCase("bye")) {
             return new ByeCommand();
-        } else if (input.equals("list")) {
+        } else if (input.equalsIgnoreCase("list")) {
             return new ListCommand();
-        } else if (input.indexOf("done") == 0) {
+        } else if (input.toLowerCase().indexOf("done") == 0) {
             if (isAWord(input)) {
                 throw new DuckieInsufficientInfoException();
             }
@@ -51,38 +48,39 @@ public class Parser {
             try {
                 Integer.parseInt(input.split(" ")[1]);
             } catch (NumberFormatException e) {
-                throw new DuckieNoNumberInputException();
+                throw new DuckieException("You have to input a number after 'done'!");
             }
 
             int ind = Integer.parseInt(input.split(" ")[1]);
 
             return new DoneCommand(ind);
-        } else if (input.indexOf("delete") == 0) {
+        } else if (input.toLowerCase().indexOf("delete") == 0) {
             if (isAWord(input)) {
                 throw new DuckieInsufficientInfoException();
             }
 
             String description = input.split(" ")[1].strip();
 
-            if (description.equals("all")) {
+            if (description.toLowerCase().equals("all")) {
                 return new DeleteAllCommand();
             } else {
                 try {
                     Integer.parseInt(input.split(" ")[1]);
                 } catch (NumberFormatException e) {
-                    throw new DuckieNoNumberInputException("Input 'delete all' if you want to clear all tasks.");
+                    throw new DuckieException("You have to input a number after 'delete'!\n"
+                            + "\t" + "If you want to delete all, input 'delete all'");
                 }
                 int ind = Integer.parseInt(description);
                 return new DeleteCommand(ind);
             }
-        } else if (input.indexOf("todo") == 0) {
+        } else if (input.toLowerCase().indexOf("todo") == 0) {
             if (isAWord(input)) {
                 throw new DuckieInsufficientInfoException();
             }
             String todo = input.split(" ", 2)[1];
             Task t1 = new Todo(todo);
             return new AddCommand(t1);
-        } else if (input.indexOf("deadline") == 0) {
+        } else if (input.toLowerCase().indexOf("deadline") == 0) {
             if (isAWord(input)) {
                 throw new DuckieInsufficientInfoException();
             }
@@ -122,7 +120,7 @@ public class Parser {
             } else {
                 throw new DuckieException("Please use '/at' to indicate the date input.");
             }
-        } else if (input.indexOf("find") == 0) {
+        } else if (input.toLowerCase().indexOf("find") == 0) {
             if (isAWord(input)) {
                 throw new DuckieInsufficientInfoException();
             }
