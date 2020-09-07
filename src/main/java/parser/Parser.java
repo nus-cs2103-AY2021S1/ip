@@ -1,15 +1,6 @@
 package parser;
 
-import commands.ByeCommand;
-import commands.Command;
-import commands.DeadlineCommand;
-import commands.DeleteCommand;
-import commands.DoneCommand;
-import commands.EventCommand;
-import commands.FindCommand;
-import commands.FindDateCommand;
-import commands.ListCommand;
-import commands.ToDoCommand;
+import commands.*;
 import data.exception.DukeIllegalCommandException;
 import data.task.TaskList;
 import storage.Storage;
@@ -67,6 +58,10 @@ public class Parser {
             return new FindCommand(this.taskList, this.ui, userInput);
         case "finddt":
             return new FindDateCommand(this.taskList, this.ui, userInput);
+        case "sort":
+            return new SortCommand(this.ui, this.taskList, this.storage);
+        case "sortdt":
+            return new SortDateTimeCommand(this.ui, this.taskList, this.storage);
         default:
             throw new DukeIllegalCommandException(keyword);
         }

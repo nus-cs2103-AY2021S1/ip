@@ -1,7 +1,10 @@
 package data.task;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Represents an array list of tasks.
@@ -106,5 +109,75 @@ public class TaskList {
             }
         }
         return result;
+    }
+
+    /**
+     * Sorts the current task list lexicographically.
+     */
+    public void sortTaskListAlphabetically() {
+        Collections.sort(this.taskList, new Comparator<Task>() {
+            @Override
+            public int compare(Task firstTask, Task secondTask) {
+                return firstTask.getDescription().compareTo(secondTask.getDescription());
+            }
+        });
+    }
+
+    /**
+     * Sorts the current task list by date and time.
+     */
+    public void sortTaskListDateTime() {
+        ArrayList<Task> todoTasks = new ArrayList<>();
+        ArrayList<Task> dateTimeTasks = new ArrayList<>();
+        for (Task task : this.taskList) {
+            if (task instanceof ToDo) {
+                todoTasks.add(task);
+            } else {
+                dateTimeTasks.add(task);
+            }
+        }
+        sortDateTimeTasks(dateTimeTasks);
+        dateTimeTasks.addAll(todoTasks);
+        this.taskList = dateTimeTasks;
+    }
+
+    /**
+     * Sorts an arraylist of tasks based on date and time.
+     * @param tasks arraylist to be sorted.
+     */
+    private void sortDateTimeTasks(ArrayList<Task> tasks) {
+        Collections.sort(tasks, new Comparator<Task>() {
+            @Override
+            public int compare(Task firstTask, Task secondTask) {
+                LocalDate firstDate;
+                LocalDate secondDate;
+                LocalTime firstTime;
+                LocalTime secondTime;
+                if (firstTask instanceof Deadline) {
+                    Deadline firstDeadline = (Deadline) firstTask;
+                    firstDate = firstDeadline.getDate();
+                    firstTime = firstDeadline.getTime();
+                } else {
+                    Event firstEvent = (Event) firstTask;
+                    firstDate = firstEvent.getDate();
+                    firstTime = firstEvent.getStartTime();
+                }
+                if (secondTask instanceof Deadline) {
+                    Deadline secondDeadline = (Deadline) secondTask;
+                    secondDate = secondDeadline.getDate();
+                    secondTime = secondDeadline.getTime();
+                } else {
+                    Event secondEvent = (Event) secondTask;
+                    secondDate = secondEvent.getDate();
+                    secondTime = secondEvent.getStartTime();
+                }
+
+                if (firstDate.compareTo(secondDate) == 0) {
+                    return firstTime.compareTo(secondTime);
+                } else {
+                    return firstDate.compareTo(secondDate);
+                }
+            }
+        });
     }
 }

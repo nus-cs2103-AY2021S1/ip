@@ -39,8 +39,8 @@ public class DoneCommand extends Command {
         try {
             String intSubstring = this.userInput.substring(5);
             int indexNumber = Integer.parseInt(intSubstring);
-            this.storage.saveTaskList(this.taskList); //Overwrites current data.txt file
             Task taskDone = this.taskList.markDone(indexNumber);
+            this.storage.saveTaskList(this.taskList); //Overwrites current data.txt file
             return this.ui.showMarkDone(taskDone);
         } catch (NumberFormatException ex) {
             throw new DukeInvalidUserInputException("My sincere apologies, but please enter a valid number.");

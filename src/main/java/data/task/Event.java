@@ -30,6 +30,10 @@ public class Event extends Task {
         return this.date;
     }
 
+    public LocalTime getStartTime() {
+        return this.startTime;
+    }
+
     /**
      * Converts the given string into a LocalDate and LocalTime to be
      *     stored as the Event's date,start and end time.
