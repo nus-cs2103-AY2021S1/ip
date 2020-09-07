@@ -7,7 +7,7 @@ import java.util.Objects;
  * Represents the command to add tasks to the existing task list. An object of this class has the fields type, name,
  * date, and time. Implements the execute method from the Command class.
  */
-public class AddCommand extends Command {
+public class AddTaskCommand extends Command {
     private final TaskType type;
     private final String name;
     private final LocalDate date;
@@ -21,7 +21,7 @@ public class AddCommand extends Command {
      * @param date Date of the deadline or event.
      * @param time Time of the deadline or event.
      */
-    public AddCommand(TaskType type, String name, LocalDate date, LocalTime time) {
+    public AddTaskCommand(TaskType type, String name, LocalDate date, LocalTime time) {
         this.type = type;
         this.name = name;
         this.date = date;
@@ -50,7 +50,7 @@ public class AddCommand extends Command {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-        AddCommand that = (AddCommand) o;
+        AddTaskCommand that = (AddTaskCommand) o;
         return type == that.type
                 && Objects.equals(name, that.name)
                 && Objects.equals(date, that.date)

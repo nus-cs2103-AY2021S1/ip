@@ -11,8 +11,9 @@ import javafx.application.Platform;
 public class Duke {
 
     private final Storage storage;
-    private TaskList tasks;
     private final Ui ui;
+    private TaskList tasks;
+    private Parser parser;
 
     /**
      * Initialises the instance attributes: storage, tasks, ui.
@@ -20,10 +21,12 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         Path dataPath = Paths.get("data", "duke.txt");
-        storage = new Storage(dataPath);
+        Path aliasMapFilePath=Paths.get("data","keymap.txt");
+        storage = new Storage(dataPath, aliasMapFilePath);
 
         try {
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(storage.loadTaskList());
+            parser =new Parser(storage.loadAliasMapping());
         } catch (BlankTaskException | InvalidCommandException e) {
             ui.displayOutput(e.getMessage());
         } catch (IOException e) {
@@ -35,7 +38,7 @@ public class Duke {
         Command c;
 
         try {
-            c = Parser.parse(input);
+            c = parser.parse(input);
             assert c != null : "The command cannot be null";
         } catch (MissingDelimiterException | MissingDateTimeException | InvalidCommandException e) {
             return e.getMessage();

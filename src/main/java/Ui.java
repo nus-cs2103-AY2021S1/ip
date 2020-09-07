@@ -25,6 +25,7 @@ public class Ui {
     private static final String MESSAGE_DELETE = "Got it. I removed this task:";
     private static final String MESSAGE_NO_MATCHES = "Since when did you save a task like that?";
     private static final String MESSAGE_MATCHES = "These are the matching tasks in your list:";
+    private static final String MESSAGE_BINDING = "%s is now bound to %s!";
 
     public Ui() {
     }
@@ -62,5 +63,9 @@ public class Ui {
     public String showDone(Task task) {
         assert task.isDone() : "task should be marked as done";
         return MESSAGE_DONE + "\n" + LEFT_MARGIN + task;
+    }
+
+    public String showMapping(String originalKey, String newKey) {
+        return String.format(MESSAGE_BINDING,originalKey,newKey);
     }
 }

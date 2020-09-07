@@ -4,6 +4,8 @@ import java.nio.file.Path;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Scanner;
 
 /**
@@ -12,15 +14,23 @@ import java.util.Scanner;
  */
 public class Storage {
     private static final String MESSAGE_INVALID = "I don't understand anything you just said";
-    private final Path filepath;
+    private static final Map<String,String> presetAliasMap= Map.of(
+            "t","todo",
+            "d","deadline",
+            "e","event");
+    private final Path taskFilePath;
+    private final Path aliasMapFilePath;
+
 
     /**
      * Public Constructor.
      *
      * @param filepath Path of data storage file.
+     * @param aliasMapFilePath Path of key mappings file.
      */
-    public Storage(Path filepath) {
-        this.filepath = filepath;
+    public Storage(Path filepath, Path aliasMapFilePath) {
+        this.taskFilePath = filepath;
+        this.aliasMapFilePath = aliasMapFilePath;
     }
 
     /**
@@ -37,7 +47,7 @@ public class Storage {
                 taskListString.append(attribute).append("\n");
             }
         }
-        Files.writeString(filepath, taskListString);
+        Files.writeString(taskFilePath, taskListString);
     }
 
     /**
@@ -49,23 +59,23 @@ public class Storage {
      * @throws BlankTaskException If the task provided in the list has a blank name.
      * @throws IOException        If there was an error in saving to disk.
      */
-    ArrayList<Task> load() throws BlankTaskException, IOException, InvalidCommandException {
-        if (Files.notExists(filepath)) {
-            if (Files.notExists(filepath.getParent())) {
-                Files.createDirectories(filepath.getParent());
+    ArrayList<Task> loadTaskList() throws BlankTaskException, IOException, InvalidCommandException {
+        if (Files.notExists(taskFilePath)) {
+            if (Files.notExists(taskFilePath.getParent())) {
+                Files.createDirectories(taskFilePath.getParent());
             }
-            Files.createFile(filepath);
+            Files.createFile(taskFilePath);
             return new ArrayList<>();
         }
 
         Scanner data;
-        data = new Scanner(filepath);
+        data = new Scanner(taskFilePath);
         ArrayList<Task> taskList = new ArrayList<>();
-        populateList(data, taskList);
+        populateTaskList(data, taskList);
         return taskList;
     }
 
-    private void populateList(Scanner data, ArrayList<Task> taskList)
+    private void populateTaskList(Scanner data, ArrayList<Task> taskList)
             throws BlankTaskException, InvalidCommandException {
         while (data.hasNextLine()) {
             Task curr;
@@ -93,5 +103,24 @@ public class Storage {
             taskList.add(curr);
             data.nextLine();
         }
+    }
+    public HashMap<String,String> loadAliasMapping() throws IOException {
+        HashMap<String,String>aliasMappings=new HashMap<>(presetAliasMap);
+        if (Files.exists(aliasMapFilePath)){
+            Scanner data;
+            data = new Scanner(aliasMapFilePath);
+            while (data.hasNext()){
+                aliasMappings.put(data.next(),data.next());
+            }
+        }
+        return aliasMappings;
+    }
+
+    public void saveMapping(HashMap<String, String> aliasMap) throws IOException {
+        StringBuilder aliasMapString = new StringBuilder();
+        for (String key : aliasMap.keySet()) {
+            aliasMapString.append(key).append(" ").append(aliasMap.get(key)).append("\n");
+        }
+        Files.writeString(aliasMapFilePath, aliasMapString);
     }
 }

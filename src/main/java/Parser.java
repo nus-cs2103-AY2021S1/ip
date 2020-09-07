@@ -20,6 +20,12 @@ public class Parser {
             "deadline", TaskType.D,
             "todo", TaskType.T));
 
+    private final HashMap<String, String> aliasMap;
+
+    public Parser(HashMap<String, String> aliasMap) {
+        this.aliasMap = aliasMap;
+    }
+
     /**
      * Parses the commands provided by the client.
      *
@@ -31,10 +37,16 @@ public class Parser {
      * @throws DateTimeParseException    If the date/time is in the wrong format.
      * @throws IndexOutOfBoundsException If the task number provided is invalid.
      */
-    public static Command parse(String input)
+    public Command parse(String input)
             throws MissingDelimiterException, MissingDateTimeException, InvalidCommandException,
             DateTimeParseException, IndexOutOfBoundsException {
         String[] commandElements = input.trim().split(" ");
+
+        // replaces custom mapping with default commands
+        if (aliasMap.containsKey(commandElements[0])){
+            commandElements[0]= aliasMap.get(commandElements[0]);
+        }
+
         Command intendedCommand;
         switch (commandElements[0]) {
         case "bye":
@@ -55,6 +67,10 @@ public class Parser {
         case "find":
             intendedCommand = new FindCommand(String.join(" ",
                     Arrays.copyOfRange(commandElements, 1, commandElements.length)));
+            break;
+        case "addalias":
+            aliasMap.put(commandElements[1],commandElements[2]);
+            intendedCommand=new AddAliasCommand(aliasMap,commandElements[1]);
             break;
         default:
             intendedCommand = parseTask(commandElements);
@@ -81,7 +97,7 @@ public class Parser {
             if (delimiter + 3 > commandElements.length) {
                 throw new MissingDateTimeException(MESSAGE_MISSING_DATETIME);
             }
-            intendedCommand = new AddCommand(currType,
+            intendedCommand = new AddTaskCommand(currType,
                     String.join(" ", Arrays.copyOfRange(commandElements, 1, delimiter)),
                     LocalDate.parse(commandElements[delimiter + 1], DateTimeFormatter.ofPattern("dd-MM-yy")),
                     LocalTime.parse(commandElements[delimiter + 2], DateTimeFormatter.ofPattern("HH:mm")));
@@ -94,13 +110,13 @@ public class Parser {
             if (delimiter + 3 > commandElements.length) {
                 throw new MissingDateTimeException(MESSAGE_MISSING_DATETIME);
             }
-            intendedCommand = new AddCommand(currType,
+            intendedCommand = new AddTaskCommand(currType,
                     String.join(" ", Arrays.copyOfRange(commandElements, 1, delimiter)),
                     LocalDate.parse(commandElements[delimiter + 1], DateTimeFormatter.ofPattern("dd-MM-yy")),
                     LocalTime.parse(commandElements[delimiter + 2], DateTimeFormatter.ofPattern("HH:mm")));
             break;
         case T:
-            intendedCommand = new AddCommand(currType,
+            intendedCommand = new AddTaskCommand(currType,
                     String.join(" ", Arrays.copyOfRange(commandElements, 1, commandElements.length)),
                     null,
                     null);
