@@ -3,6 +3,9 @@ package duke;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 import exception.DukeErrorException;
 import exception.InvalidDeadlineException;
@@ -150,12 +153,11 @@ public class TaskList {
      * @reutn A list of task that fulfills the query keyword
      */
     public ArrayList<Task> findTask(String query) {
-        ArrayList<Task> suitableTasks = new ArrayList<>();
-        this.tasks.forEach(x -> {
-            if (x.getDescription().contains(query)) {
-                suitableTasks.add(x);
-            }
-        });
-        return suitableTasks;
+        Predicate<Task> matchQuery = x -> x.getDescription().contains(query);
+        List<Task> suitableTasks = new ArrayList<>(this.tasks)
+                .stream()
+                .filter(matchQuery)
+                .collect(Collectors.toList());
+        return new ArrayList<Task>(suitableTasks);
     }
 }
