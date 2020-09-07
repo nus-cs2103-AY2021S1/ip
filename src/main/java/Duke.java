@@ -329,6 +329,9 @@ public class Duke {
                 throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
             }
             Todo todo = new Todo(nextLine.substring(5));
+            if (taskExist(todo.content, null)) {
+                return "Could not add task. Task already exists!";
+            }
             inputs.add(todo);
             int count = inputs.size();
             storage.writeToFile(inputs);
@@ -352,6 +355,9 @@ public class Duke {
                 }
                 int charLoc = nextLine.indexOf("/by");
                 Deadline deadline = new Deadline(nextLine.substring(9, charLoc), nextLine.substring(charLoc + 4));
+                if (taskExist(deadline.content, deadline.time)) {
+                    return "Could not add task. Task already exists!";
+                }
                 inputs.add(deadline);
                 int count = inputs.size();
                 storage.writeToFile(inputs);
@@ -377,6 +383,9 @@ public class Duke {
             }
             int charLoc = nextLine.indexOf("/at");
             Event event = new Event(nextLine.substring(6, charLoc), nextLine.substring(charLoc + 4));
+            if (taskExist(event.content, event.time)) {
+                return "Could not add task. Task already exists!";
+            }
             inputs.add(event);
             int count = inputs.size();
             storage.writeToFile(inputs);
@@ -442,6 +451,36 @@ public class Duke {
                 return ((i+1) + ". " + input.id + "[x] " + input.content + input.printTime + "\n");
             }
         }
+
+        /**
+         * Checks if task already exists to avoid duplicates.
+         * @param taskContent
+         * @return true if task exists, false if task does not exist
+         */
+        boolean taskExist(String taskContent, LocalDate taskDate) {
+            int len = inputs.size();
+            for(int i = 0; i < len; i++) {
+                Input taskFromList = inputs.get(i);
+                if (taskFromList.content.contains(taskContent) && taskDateMatch(taskFromList, taskDate)) {
+                    return true;
+                }
+            }
+            return false;
+        }
+        
+        boolean taskDateMatch(Input task, LocalDate taskDate) {
+            if (taskDate == null) {
+                return true;
+            }
+            if (task.time == null) {
+                return false;
+            } else if (task.time.isEqual(taskDate)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        
     }
 
     /** 
