@@ -50,6 +50,8 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() throws DukeException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        assert !input.equals("") : "Input cannot be empty";
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
