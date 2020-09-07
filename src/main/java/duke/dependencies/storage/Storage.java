@@ -1,12 +1,20 @@
 package duke.dependencies.storage;
 
 
-import java.io.*;
+import java.io.DataInputStream;
+import java.io.DataOutputStream;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
 import duke.dependencies.dukeexceptions.MissingListException;
+
+import duke.dependencies.parser.Parser;
 
 /**
  * Utility lass to handle the reading and writing to files.
@@ -18,24 +26,20 @@ import duke.dependencies.dukeexceptions.MissingListException;
  */
 public class Storage {
 
-    private final Path PW_FILE_PATH;
-    private final Path PW_DIR_PATH;
-
-    /** Paths for saved list. */
+    /** Paths for sa. */
     private final Path DIR_PATH;
     private final Path FILE_PATH;
+    private final static Path CURRENT_DIR_PATH = Paths.get(".");
 
-    private boolean isFilePresent;
+    private boolean isContentStringalizable;
 
     /**
      * Constructor for the storage class to read and write to files.
      */
-    public Storage() {
-        DIR_PATH = Paths.get(".", "data");
-        FILE_PATH = DIR_PATH.resolve("taskdata.txt");
-        isFilePresent = Files.exists(FILE_PATH);
-        PW_DIR_PATH = Paths.get(".", "cache");
-        PW_FILE_PATH = PW_DIR_PATH.resolve("pw.dat");
+    public Storage(String dirName, String fileName) {
+        DIR_PATH = Paths.get(".", dirName);
+        FILE_PATH = DIR_PATH.resolve(fileName);
+        isContentStringalizable = Parser.checkForWord(fileName, ".dat");
     }
 
     /**
@@ -44,14 +48,14 @@ public class Storage {
      * @return True if the file is present, else otherwise.
      */
     public boolean isSavedFilePresent() {
-        return isFilePresent;
+        return Files.exists(FILE_PATH );
     }
 
     /**
-     * Instantiates a .txt file in /data directory to save task list of user. Does nothing if the file is present.
+     * Instantiates the file in specified directory. Does nothing if the file is present.
      */
     public void instantiateFile() {
-        assert !isFilePresent;
+        assert !isSavedFilePresent();
         try {
             if (Files.exists(DIR_PATH)) {
                 if (Files.exists(FILE_PATH)) {
@@ -65,7 +69,6 @@ public class Storage {
                 System.out.println("Clean slate: Initialising cache...");
 
             }
-            isFilePresent = true;
         } catch (IOException e) {
             e.printStackTrace();
             System.out.println("Unexpected error occurred while trying to create a file to save your data.");
@@ -91,10 +94,10 @@ public class Storage {
     }
 
     /**
-     * Returns the object stored in the data file. Typecasts the object to
-     * T.
+     * Returns the object stored in the data file.
+     *
      * @param <T> Object of type T.
-     * @return T
+     * @return T The object stored int he file. Serializable.
      * @throws MissingListException if the file is not found.
      */
     @SuppressWarnings("unchecked")
@@ -108,13 +111,14 @@ public class Storage {
         }
     }
 
-    public boolean checkUserAuth(String pw) {
-        return pw.equals(readUserPw());
-    }
-
-    public String readUserPw() {
+    /**
+     * Reads the file contents as a String
+     * @return
+     */
+    public String readDataFileAsString() {
+        assert isContentStringalizable : "Wrong usage of storage: .dat file expected instead .txt file found.";
         try {
-            DataInputStream dis = new DataInputStream(new FileInputStream(PW_FILE_PATH.toString()));
+            DataInputStream dis = new DataInputStream(new FileInputStream(FILE_PATH.toString()));
             String r = dis.readUTF();
             dis.close();
             return r;
@@ -123,32 +127,16 @@ public class Storage {
         }
     }
 
-    public void instantiatePwFile() {
+    /**
+     * Writes the given string to the file. This overwrites previous data in the file. Equivalent to the creation of
+     * a new user details.
+     *
+     * @param pw The string to be written to the file.
+     */
+    public void writeStringToFile(String pw) {
+        assert isSavedFilePresent() && isContentStringalizable;
         try {
-            if (Files.exists(PW_DIR_PATH)) {
-                if (Files.exists(PW_FILE_PATH)) {
-                } else {
-                    Files.createFile(PW_FILE_PATH);;
-                }
-                System.out.println("Clean slate: Initialising cache...");
-            } else {
-                Files.createDirectory(PW_DIR_PATH);
-                Files.createFile(PW_FILE_PATH);
-                System.out.println("Clean slate: Initialising cache...");
-
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-//            System.out.println("Unexpected error occurred while trying to create a file to save your data.");
-        }
-    }
-
-    public void saveUserPw(String pw) {
-        if (!checkPwCache()) {
-            instantiatePwFile();
-        }
-        try {
-            DataOutputStream dos = new DataOutputStream(new FileOutputStream(PW_FILE_PATH.toString()));
+            DataOutputStream dos = new DataOutputStream(new FileOutputStream(FILE_PATH.toString()));
             dos.writeUTF(pw);
             dos.close();
         } catch (IOException e) {
@@ -156,15 +144,21 @@ public class Storage {
         }
     }
 
-    public boolean checkPwCache() {
-        try {
-            DataInputStream dis = new DataInputStream(new FileInputStream(PW_FILE_PATH.toString()));
-            dis.close();
-            return true;
-        } catch (IOException e) {
-            return false;
-        }
-    }
+    /* ---------------------------------------- DEPRECATED ---------------------------------------------------------- */
+
+//    /**
+//     * Checks the
+//     * @return
+//     */
+//    public boolean checkFileCache() {
+//        try {
+//            DataInputStream dis = new DataInputStream(new FileInputStream(FILE_PATH.toString()));
+//            dis.close();
+//            return true;
+//        } catch (IOException e) {
+//            return false;
+//        }
+//    }
 
 
 }

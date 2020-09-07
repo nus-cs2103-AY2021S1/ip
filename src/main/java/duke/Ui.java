@@ -22,7 +22,11 @@ class Ui {
     private static final String CONVO_START = GREETING;
     private static final String END = "end|ciao|bye|close|exit|nights|shutdown";
 
-    private  static final Controller CONTROLLER = Controller.initController();
+    private static final Controller CONTROLLER = Controller.init();
+
+    private boolean enterPasswordMode = false;
+    private boolean confirmPasswordMode = false;
+    private String password;
 
 
     /**
@@ -30,14 +34,6 @@ class Ui {
      */
     public void start() {
         System.out.println(CONVO_START);
-    }
-
-    public boolean checkAuth() {
-        return CONTROLLER.checkIsUserPwCached();
-    }
-
-    public void setPw(String pw) {
-        CONTROLLER.savedUserPw(pw);
     }
 
     /**
@@ -60,6 +56,31 @@ class Ui {
         // End command
         if (!s.isEmpty() && END.contains(s)) {
             return "See yall around!!!";
+        }
+        // Checks if the second entering of the password matches the first entering.
+        if (confirmPasswordMode) {
+            // The second entering of password matches the first entering.
+            if (password.equals(s)) {
+                CONTROLLER.saveUserDetails(password);
+                confirmPasswordMode = false;
+                enterPasswordMode = false;
+                return "Password saved successfully.";
+            } else {
+                enterPasswordMode = false;
+                confirmPasswordMode = false;
+                return "The password you have entered does not match.";
+            }
+        }
+        // First attempt of entering the password by the user.
+        if (enterPasswordMode) {
+            password = s;
+            confirmPasswordMode = true;
+            enterPasswordMode = false;
+            return "Please enter your password again.";
+        }
+        if (!CONTROLLER.hasUserEnteredDetails()) {
+            enterPasswordMode = true;
+            return "You are somebody new! Please state your user password.";
         }
         // Initiating a conversation with duke with 'hi'
         if (s.length() == 2 && s.contains("hi")) {

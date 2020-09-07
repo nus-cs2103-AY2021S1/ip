@@ -24,7 +24,7 @@ public class TaskList {
 
     /** Private constructor */
     private TaskList() {
-        l = new Storage();
+        l = new Storage("data", "taskdata.txt");
 
         // Checks if there are any save files of todoList.
         // If there is, attempt to read the object as arraylist.
@@ -98,6 +98,7 @@ public class TaskList {
      * @return String representing the newly added task.
      */
     public String add(Task task) {
+        assert !task.isItEmpty() && !task.isMiscTask();  // Add Assertions
         todoList.add(task);
         l.overwriteAndSave(todoList);
         return task.toString();
