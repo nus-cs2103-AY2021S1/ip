@@ -9,19 +9,13 @@ import ultron.tasks.Todo;
 
 public enum TaskCommand {
 
-    /**
-     * Enum for the TODO task.
-     */
+    /** Enum for the TODO task. */
     todo(Todo::parseCommand),
 
-    /**
-     * Enum for the Event class.
-     */
+    /** Enum for the Event class. */
     event(Event::parseCommand),
 
-    /**
-     * Enum for the deadline class.
-     */
+    /** Enum for the deadline class. */
     deadline(Deadline::parseCommand);
 
     /**
@@ -43,7 +37,7 @@ public enum TaskCommand {
     /**
      * Create a task based on the description.
      *
-     * @param description
+     * @param description description of task.
      * @return Task with the description.
      */
     public Task createTask(final String description) {
