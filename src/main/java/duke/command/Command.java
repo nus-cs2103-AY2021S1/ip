@@ -14,6 +14,7 @@ public abstract class Command {
 
     /**
      * Returns a boolean to tell the program if it should exit.
+     *
      * @return true if the program should exit after executing, false otherwise
      */
     public boolean isExit() {
@@ -22,9 +23,10 @@ public abstract class Command {
 
     /**
      * Executes some manipulation of Task between taskList, ui and storage.
-     * @param taskList List of Tasks to work with
-     * @param ui UI element to be used
-     * @param storage Storage element to be used
+     *
+     * @param taskList List of Tasks to work with.
+     * @param ui UI element to be used.
+     * @param storage Storage element to be used.
      */
     public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 

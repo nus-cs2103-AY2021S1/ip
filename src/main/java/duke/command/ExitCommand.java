@@ -13,8 +13,9 @@ public class ExitCommand extends Command {
     protected static final String CLOSING_MESSAGE = "Bye. Hope to see you again soon!";
 
     /**
-     * Static method that creates a generic exit command
-     * @return exit command
+     * Returns the default implementation of an ExitCommand to signal Exiting the bot.
+     *
+     * @return exit command.
      */
     public static ExitCommand create() {
         return new ExitCommand();
@@ -23,11 +24,12 @@ public class ExitCommand extends Command {
 
     /**
      * Signals exit to the bot.
-     * The bot does not perform any manipulation.
+     * The command does not perform any manipulation.
      * The method also broadcasts an update through the UI and updates the storage file.
-     * @param taskList List of Tasks to work with
-     * @param ui UI element to be used
-     * @param storage Storage element to be used
+     *
+     * @param taskList List of Tasks to work with.
+     * @param ui UI element to be used.
+     * @param storage Storage element to be used.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
@@ -41,7 +43,8 @@ public class ExitCommand extends Command {
 
     /**
      * Returns true to signal to the bot that it is time to exit.
-     * @return true
+     *
+     * @return true.
      */
     @Override
     public boolean isExit() {

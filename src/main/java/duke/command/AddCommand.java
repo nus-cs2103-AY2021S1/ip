@@ -24,10 +24,12 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Static factory method for creating the appropriate AddCommand from a String input.
-     * @param taskCommand String input of the form "add {task description}"
-     * @return command object that adds the task to the task list when executed
-     * @throws DukeException if the description of the command is invalid
+     * Returns an AddCommand made from the appropriate string put.
+     * This is a static factory method which handles invalid formats as well.
+     *
+     * @param taskCommand String input of the form "add {task description}".
+     * @return command object that adds the task to the task list when executed.
+     * @throws DukeException if the description of the command is invalid.
      */
     public static AddCommand parse(String taskCommand) throws DukeException {
         return new AddCommand(TaskParser.parse(taskCommand));
@@ -36,9 +38,10 @@ public class AddCommand extends Command {
     /**
      * Adds the stored task to the taskList.
      * The method also broadcasts an update through the UI and updates the storage file.
-     * @param taskList List of Tasks to work with
-     * @param ui UI element to be used
-     * @param storage Storage element to be used
+     *
+     * @param taskList List of Tasks to work with.
+     * @param ui UI element to be used.
+     * @param storage Storage element to be used.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
@@ -48,11 +51,12 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Standard String creator for the update.
+     * Returns a formatted message for when a task is added.
      * Edit this to adjust the message sent when the command is executed.
-     * @param task task added
-     * @param taskList task list that the task was added to
-     * @return formatted String notifying of the update
+     *
+     * @param task task added.
+     * @param taskList task list that the task was added to.
+     * @return formatted String notifying of the update.
      */
     private String createAddMessage(Task task, TaskList taskList) {
         return ADDED_MESSAGE + '\n'

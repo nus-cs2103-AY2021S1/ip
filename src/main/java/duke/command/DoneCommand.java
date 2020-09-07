@@ -23,10 +23,12 @@ public class DoneCommand extends Command {
     }
 
     /**
-     * Static factory method for creating the appropriate done command from a String input.
-     * @param command String input of the form "done {index}" (index starts at 1)
-     * @return command object that marks the task as done when executed
-     * @throws DukeException if the command given is invalid, with the reason provided
+     * Returns an DoneCommand made from the appropriate string put.
+     * This is a static factory method which handles invalid formats as well.
+     *
+     * @param command String input of the form "done {index}" (index starts at 1).
+     * @return command object that marks the task as done when executed.
+     * @throws DukeException if the command given is invalid, with the reason provided.
      */
     public static DoneCommand parse(String command) throws DukeException {
         String[] details = command.split(" ", 2);
@@ -45,10 +47,11 @@ public class DoneCommand extends Command {
     /**
      * Marks the index of the designated task as done.
      * The method also broadcasts an update through the UI and updates the storage file.
-     * @param taskList List of Tasks to work with
-     * @param ui UI element to be used
-     * @param storage Storage element to be used
-     * @throws DukeException if the number provided is invalid
+     *
+     * @param taskList List of Tasks to work with.
+     * @param ui UI element to be used.
+     * @param storage Storage element to be used.
+     * @throws DukeException if the number provided is invalid.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
@@ -69,10 +72,11 @@ public class DoneCommand extends Command {
 
 
     /**
-     * Standard String creator for the update.
+     * Returns a formatted message for when a task is done.
      * Edit this to adjust the message sent when the command is executed.
-     * @param taskDone task marked as done
-     * @return formatted String notifying of the update
+     *
+     * @param taskDone task marked as done.
+     * @return formatted String notifying of the update.
      */
     private String createDoneMessage(Task taskDone) {
         return DONE_MESSAGE + "\n   " + taskDone;

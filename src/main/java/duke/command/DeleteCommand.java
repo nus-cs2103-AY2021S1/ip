@@ -23,11 +23,12 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Static factory method for creating the appropriate DeleteCommand from a String input.
+     * Returns a DeleteCommand made from the appropriate string put.
+     * This is a static factory method which handles invalid formats as well.
      *
-     * @param command String input of the form "delete {index}" (index starts at 1)
-     * @return command object that deletes the designated task when executed
-     * @throws DukeException if the command given is invalid, with the reason provided
+     * @param command String input of the form "delete {index}" (index starts at 1).
+     * @return command object that deletes the designated task when executed.
+     * @throws DukeException if the command given is invalid, with the reason provided.
      */
     public static DeleteCommand parse(String command) throws DukeException {
         String[] details = command.split(" ");
@@ -46,10 +47,11 @@ public class DeleteCommand extends Command {
     /**
      * Deletes the task corresponding to the index from the task list.
      * The method also broadcasts an update through the UI and updates the storage file.
-     * @param taskList List of Tasks to work with
-     * @param ui UI element to be used
-     * @param storage Storage element to be used
-     * @throws DukeException if the number provided is invalid
+     *
+     * @param taskList List of Tasks to work with.
+     * @param ui UI element to be used.
+     * @param storage Storage element to be used.
+     * @throws DukeException if the number provided is invalid.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
@@ -64,11 +66,12 @@ public class DeleteCommand extends Command {
     }
 
     /**
-     * Standard String creator for the update.
+     * Returns a formatted message for when a task is deleted.
      * Edit this to adjust the message sent when the command is executed.
-     * @param taskRemoved task that was removed
-     * @param taskList task list where the task was deleted from
-     * @return formatted String notifying of the update
+     *
+     * @param taskRemoved task that was removed.
+     * @param taskList task list where the task was deleted from.
+     * @return formatted String notifying of the update.
      */
     private String createDeleteMessage(Task taskRemoved, TaskList taskList) {
         return DELETE_MESSAGE + '\n'

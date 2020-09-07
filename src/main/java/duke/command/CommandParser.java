@@ -20,9 +20,10 @@ public class CommandParser {
     /**
      * Returns the appropriate command type based on the string input.
      * The method uses the first word to determine that type of command to create.
-     * @param userInput string containing the command to be created
-     * @return command object corresponding to the details provided
-     * @throws DukeException if the user input given is invalid, with the reason provided
+     *
+     * @param userInput string containing the command to be created.
+     * @return command object corresponding to the details provided.
+     * @throws DukeException if the user input given is invalid, with the reason provided.
      */
     public static Command parse(String userInput) throws DukeException {
         String firstWord = userInput.split(" ")[0];

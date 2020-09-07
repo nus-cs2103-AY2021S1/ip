@@ -25,10 +25,12 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Static factory method for creating the appropriate find command from a String input.
-     * @param command String input of the form "find {search string}"
-     * @return command object that finds the tasks containing the search string when executed
-     * @throws DukeException if the command given does not provide a string to search for
+     * Returns an FindCommand made from the appropriate string put.
+     * This is a static factory method which handles invalid formats as well.
+     *
+     * @param command String input of the form "find {search string}".
+     * @return command object that finds the tasks containing the search string when executed.
+     * @throws DukeException if the command given does not provide a string to search for.
      */
     public static FindCommand parse(String command) throws DukeException {
         String[] details = command.split(" ", 2);
@@ -41,9 +43,10 @@ public class FindCommand extends Command {
     /**
      * Finds the tasks whose description contains the search string.
      * The method then broadcasts an update through the UI.
-     * @param taskList List of Tasks to work with
-     * @param ui UI element to be used
-     * @param storage Storage element to be used
+     *
+     * @param taskList List of Tasks to work with.
+     * @param ui UI element to be used.
+     * @param storage Storage element to be used.
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
@@ -53,9 +56,10 @@ public class FindCommand extends Command {
 
     /**
      * Returns a list of tasks all of which have their descriptions containing the search string.
-     * @param searchString string to be matched
-     * @param taskList list of tasks to be searched
-     * @return list of tasks which contain the string in their description
+     *
+     * @param searchString string to be matched.
+     * @param taskList list of tasks to be searched.
+     * @return list of tasks which contain the string in their description.
      */
     protected TaskList getMatchingTasks(String searchString, TaskList taskList) {
         TaskList matchingList = new TaskList();
@@ -68,10 +72,11 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Standard String creator for the update.
+     * Returns a formatted message for finding tasks.
      * Edit this to adjust the message sent when the command is executed.
-     * @param taskList list of tasks containing the search string
-     * @return formatted String notifying of the update
+     *
+     * @param taskList list of tasks containing the search string.
+     * @return formatted String notifying of the update.
      */
     protected String createFindMessage(TaskList taskList) {
         if (taskList.size() == 0) {
