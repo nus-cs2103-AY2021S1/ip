@@ -30,7 +30,7 @@ public class ToDoTest {
     }
 
     @Test
-    public void taskSaveFormat_hasReminder_OnePrinted() {
+    public void taskSaveFormat_hasReminder_onePrinted() {
         String expectedOutput = "T | 0 | 1 | test1";
         Task testTodo = new ToDo("test1");
         testTodo.setReminder();
