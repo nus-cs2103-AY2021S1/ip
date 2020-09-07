@@ -38,45 +38,61 @@ public class AddCommand extends Command {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
         if (taskType.equals(Instruction.TODO.getInstruction())) {
-            if (taskDescription.equals(Instruction.EMPTY.getInstruction())) {
-                throw new DukeException("Please key in a valid name for To Do");
-            }
-            newTask = new Todo(taskDescription);
+            newTask = toDoTask(taskDescription);
         } else if (taskType.equals(Instruction.DEADLINE.getInstruction())) {
-            String[] deadlineArr = taskDescription.split(" /by ", 2);
-
-            if (deadlineArr.length != 2) {
-                throw new DukeException("Please key in a valid name and date for the Deadline");
-            }
-            String deadlineName = deadlineArr[0];
-            String deadlineDateTime = deadlineArr[1];
-
-            if (deadlineDateTime.equals(Instruction.EMPTY.getInstruction())) {
-                throw new DukeException("Please key in a valid date and time for the Deadline");
-            }
-
-            LocalDateTime localDateTime = LocalDateTime.parse(deadlineDateTime, formatter);
-            newTask = new Deadline(deadlineName, localDateTime);
-
+            newTask = deadlineTask(taskDescription, formatter);
         } else if (taskType.equals(Instruction.EVENT.getInstruction())) {
-            String[] eventArr = taskDescription.split(" /at ", 2);
-            if (eventArr.length != 2) {
-                throw new DukeException("Please key in a valid name and date for the Event");
-            }
-            String eventName = eventArr[0];
-            String eventDuration = eventArr[1];
-
-            if (eventDuration.equals(Instruction.EMPTY.getInstruction())) {
-                throw new DukeException("Please key in a valid duration for the Event");
-            }
-            LocalDateTime localDateTime = LocalDateTime.parse(eventDuration, formatter);
-            newTask = new Event(eventName, localDateTime);
+            newTask = eventTask(taskDescription, formatter);
         } else {
             throw new DukeException("I'm sorry, but I don't know what that means :-(");
         }
+
         tasks.addTask(newTask);
         ui.showAddTask(newTask, tasks.getSize());
         storage.saveTasksToFile(tasks);
+    }
+
+    private Task toDoTask(String taskDescription) throws DukeException {
+        if (taskDescription.equals(Instruction.EMPTY.getInstruction())) {
+            throw new DukeException("Please key in a valid name for To Do");
+        }
+        return new Todo(taskDescription);
+    }
+
+    private Task deadlineTask(String taskDescription, DateTimeFormatter formatter) throws DukeException {
+        String[] deadlineArr = taskDescription.split(" /by ", 2);
+
+        if (deadlineArr.length != 2) {
+            throw new DukeException("Please key in a valid name and date for the Deadline");
+        }
+
+        String deadlineName = deadlineArr[0];
+        String deadlineDateTime = deadlineArr[1];
+
+        if (deadlineDateTime.equals(Instruction.EMPTY.getInstruction())) {
+            throw new DukeException("Please key in a valid date and time for the Deadline");
+        }
+
+        LocalDateTime localDateTime = LocalDateTime.parse(deadlineDateTime, formatter);
+        return new Deadline(deadlineName, localDateTime);
+    }
+
+    private Task eventTask(String taskDescription, DateTimeFormatter formatter) throws DukeException {
+        String[] eventArr = taskDescription.split(" /at ", 2);
+
+        if (eventArr.length != 2) {
+            throw new DukeException("Please key in a valid name and date for the Event");
+        }
+
+        String eventName = eventArr[0];
+        String eventDuration = eventArr[1];
+
+        if (eventDuration.equals(Instruction.EMPTY.getInstruction())) {
+            throw new DukeException("Please key in a valid duration for the Event");
+        }
+
+        LocalDateTime localDateTime = LocalDateTime.parse(eventDuration, formatter);
+        return new Event(eventName, localDateTime);
     }
 
 }
