@@ -24,6 +24,7 @@ public class ExitCommandExecutor implements CommandExecutor {
     @Override
     public String execute(Command command, TaskList taskList) {
         Storage.save(taskList.getList());
+        System.exit(0);
         return DukeOutput.getOutput(DukeConstants.EXIT_RESPONSE);
     }
 }
