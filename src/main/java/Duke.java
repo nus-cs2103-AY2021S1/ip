@@ -114,7 +114,7 @@ public class Duke {
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return "nothing much";
+        return "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
     }
 
     /**
