@@ -2,6 +2,7 @@ package duke.commands;
 
 import java.time.LocalDate;
 
+import duke.exceptions.EmptyTaskException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.tasks.Deadline;
@@ -47,7 +48,7 @@ public class AddCommand extends Command {
             output = ui.displayAddTaskMessage(event);
             break;
         default:
-
+            throw new AssertionError(type);
         }
         return output;
     }
