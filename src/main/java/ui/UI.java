@@ -10,6 +10,8 @@ package ui;
 
 import tasks.TaskList;
 
+import java.util.stream.IntStream;
+
 public class UI {
 
     // maximum number of characters across a screen
@@ -138,9 +140,9 @@ public class UI {
     public static String showTaskList(TaskList taskList) {
         StringBuilder formatted = new StringBuilder();
         int len = taskList.size();
-        for (int number = 0; number < len; number++) {
-            formatted.append("\n\t  " + (number + 1) + ". " + taskList.get(number).toString());
-        }
+        IntStream
+                .range(0, len)
+                .forEach(number -> formatted.append("\n\t  " + (number + 1) + ". " + taskList.get(number).toString()));
         return emptyChatBox("There are " + len + " items in your list:"
                 + formatted.toString());
     }
