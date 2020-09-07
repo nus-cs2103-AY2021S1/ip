@@ -198,6 +198,151 @@ public class Command {
         }
     }
 
+    public String parse(TaskList tasks, Ui ui, Storage storage) {
+        switch (input[0]) {
+        case "bye":
+            this.shouldExit = true;
+            return ui.showBye();
+        case "list": {
+            return ui.showList(tasks);
+        }
+        case "done": {
+            int index;
+            if (input.length == 1) {
+                return "Please select a task to mark as completed!";
+            }
+            try {
+                index = Integer.parseInt(input[1]);
+            } catch (NumberFormatException e) {
+                return "Please choose an integer value!";
+            }
+            if (index <= 0) {
+                return "Please choose an integer greater than 0!";
+            } else if (index > tasks.size()) {
+                return "Your task list is not that long yet!";
+            }
+            tasks.completeTask(index);
+            storage.save(tasks);
+            return ui.showDone(tasks.getTask(index));
+        }
+        case "delete": {
+            int index;
+            if (input.length == 1) {
+                return "Please select a task to mark as completed!";
+            }
+            try {
+                index = Integer.parseInt(input[1]);
+            } catch (NumberFormatException e) {
+                return "Please choose an integer value!";
+            }
+            if (index <= 0) {
+                return "Please choose an integer greater than 0!";
+            } else if (index > tasks.size()) {
+                return "Your task list is not that long yet!";
+            }
+            Task task = tasks.getTask(index);
+            tasks.deleteTask(index);
+            storage.save(tasks);
+            return ui.showDelete(tasks, task);
+        }
+        case "find": {
+            if (input.length == 1) {
+                return "Please use a keyword you'd like to search with!";
+            }
+            if (input.length > 2) {
+                return "Please use only one keyword!";
+            }
+            List<Task> matches = tasks.search(input[1]);
+            return ui.showFind(matches);
+        }
+        case "deadline": {
+            Task task;
+            StringBuilder description = new StringBuilder();
+            StringBuilder time = new StringBuilder();
+            if (input.length == 1) {
+                return "A deadline requires a description and a time!";
+            }
+            int i = 1;
+            while (!input[i].equals("/by")) {
+                description.append(input[i++]).append(" ");
+                if (i == input.length) {
+                    return "deadline requires the use of \"/by\"!";
+                }
+            }
+            if (description.length() == 0) {
+                return "The description of a deadline cannot be empty!";
+            }
+            while (++i < input.length) {
+                time.append(input[i]).append(" ");
+            }
+            if (time.length() == 0) {
+                return "The time of a deadline cannot be empty!";
+            }
+            description.deleteCharAt(description.length() - 1);
+            time.deleteCharAt(time.length() - 1);
+            try {
+                task = new Deadline(description.toString(), time.toString(), false);
+                tasks.addTask(task);
+                storage.save(tasks);
+                return ui.showAdd(tasks, task);
+            } catch (DateTimeParseException e) {
+                return "Error: Please use the following format instead:\ndd-MM-yyyy HHmm";
+            }
+        }
+        case "event": {
+            Task task;
+            StringBuilder description = new StringBuilder();
+            StringBuilder time = new StringBuilder();
+            if (input.length == 1) {
+                return "An event requires a description and a time!";
+            }
+            int i = 1;
+            while (!input[i].equals("/at")) {
+                description.append(input[i++]).append(" ");
+                if (i == input.length) {
+                    return "event requires the use of \"/at\"!";
+                }
+            }
+            if (description.length() == 0) {
+                return "The description of an event cannot be empty!";
+            }
+            while (++i < input.length) {
+                time.append(input[i]).append(" ");
+            }
+            if (time.length() == 0) {
+                return "The time of an event cannot be empty!";
+            }
+            description.deleteCharAt(description.length() - 1);
+            time.deleteCharAt(time.length() - 1);
+            try {
+                task = new Event(description.toString(), time.toString(), false);
+                tasks.addTask(task);
+                storage.save(tasks);
+                return ui.showAdd(tasks, task);
+            } catch (DateTimeParseException e) {
+                return "Error: Please use the following format instead:\ndd-MM-yyyy HHmm";
+            }
+        }
+        case "todo": {
+            if (input.length == 1) {
+                return "The description of a todo cannot be empty!";
+            }
+            Task task;
+            StringBuilder description = new StringBuilder();
+            for (int i = 1; i < input.length; i++) {
+                description.append(input[i]).append(" ");
+            }
+            description.deleteCharAt(description.length() - 1);
+            task = new ToDo(description.toString(), false);
+            tasks.addTask(task);
+            storage.save(tasks);
+            return ui.showAdd(tasks, task);
+        }
+        default:
+            return "I'm sorry, but I don't know what that means :-(";
+        }
+    }
+
     public boolean shouldExit() {
         return this.shouldExit;
     }

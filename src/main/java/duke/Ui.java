@@ -34,19 +34,18 @@ public class Ui {
      * @param tasks a TaskList containing the tasks in the save file
      */
 
-    public void printLoaded(TaskList tasks) {
-        System.out.println(
-                "    A save file has been found and loaded!\n"
-                        + "    Your current tasks are: ");
+    public String printLoaded(TaskList tasks) {
+        StringBuilder ret = new StringBuilder("A save file has been found and loaded!\n"
+                + "Your current tasks are: \n");
         int i = 0;
         if (tasks.size() == 0) {
-            System.out.println("    ... empty! Good work!");
+            ret.append("... empty! Good work!\n");
         } else {
             while (tasks.size() > i) {
-                System.out.println("        " + ++i + ". " + tasks.getTask(i).toString());
+                ret.append(String.format("%d. %s\n", ++i, tasks.getTask(i).toString()));
             }
         }
-        System.out.println(LINE);
+        return ret.toString();
     }
 
     /**
@@ -67,6 +66,12 @@ public class Ui {
                         + LINE);
     }
 
+    public String showAdd(TaskList tasks, Task task) {
+        return String.format("Noted. I've added this task:\n%s\n"
+                + "You now have %d %s in your list.", task.toString(),
+                tasks.size(), tasks.size() == 1 ? "task" : "tasks");
+    }
+
     /**
      * Prints to user if the user has entered the terminate command.
      */
@@ -75,6 +80,10 @@ public class Ui {
         System.out.println(
                 "    Bye. Hope to see you again soon!\n"
                         + LINE);
+    }
+
+    public String showBye() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -88,6 +97,11 @@ public class Ui {
                 "    Nice! I've marked this task as done:\n        "
                         + task.toString() + "\n"
                         + LINE);
+    }
+
+    public String showDone(Task task) {
+        return String.format("Nice! I've marked this task as done:\n%s\n",
+                task.toString());
     }
 
     /**
@@ -108,6 +122,12 @@ public class Ui {
                         + LINE);
     }
 
+    public String showDelete(TaskList tasks, Task task) {
+        return String.format("Noted. I've removed this task:\n%s\n"
+                + "You now have %d %s in your list.", task.toString(),
+                tasks.size(), tasks.size() == 1 ? "task" : "tasks");
+    }
+
     /**
      * Prints to user if a DukeException has been caught, printing the corresponding
      * error message.
@@ -118,6 +138,10 @@ public class Ui {
     public void printError(DukeException e) {
         System.out.println(
                 e.getMessage() + "\n" + LINE);
+    }
+
+    public String showError(DukeException e) {
+        return String.format("%s\n", e.getMessage());
     }
 
     /**
@@ -135,6 +159,15 @@ public class Ui {
         System.out.println(LINE);
     }
 
+    public String showFind(List<Task> list) {
+        int i = 0;
+        StringBuilder ret = new StringBuilder("Here are the matching tasks in your list:\n");
+        while (list.size() > i) {
+            ret.append(String.format("%d. %s\n", ++i, list.get(i - 1).toString()));
+        }
+        return ret.toString();
+    }
+
     /**
      * Prints to user the current Tasks found in the TaskList.
      *
@@ -148,6 +181,15 @@ public class Ui {
             System.out.println("        " + ++i + ". " + list.getTask(i).toString());
         }
         System.out.println(LINE);
+    }
+
+    public String showList(TaskList list) {
+        int i = 0;
+        StringBuilder ret = new StringBuilder("Here are the tasks in your list:\n");
+        while (list.size() > i) {
+            ret.append(String.format("%d. %s\n", ++i, list.getTask(i).toString()));
+        }
+        return ret.toString();
     }
 
     /**
@@ -173,13 +215,17 @@ public class Ui {
      * Prints a welcome message for the user.
      */
 
-    public void welcome() {
+    public void printWelcome() {
         String logo = "     ____        _        \n"
                 + "    |  _ \\ _   _| | _____ \n"
                 + "    | | | | | | | |/ / _ \\\n"
                 + "    | |_| | |_| |   <  __/\n"
                 + "    |____/ \\__,_|_|\\_\\___|\n";
         System.out.println(LINE + "\n" + logo + "\n    Hello! I'm Duke!\n");
+    }
+
+    public String welcome() {
+        return "Hello! I'm Duke!\n";
     }
 
 }
