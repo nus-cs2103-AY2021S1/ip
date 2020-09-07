@@ -36,7 +36,7 @@ public class Storage {
         String[] tokens = filepath.split("/");
         int pathLength = tokens.length;
         if (pathLength == 1) {
-            throw new StorageException("Invalid file path: " + filepath, new Throwable("null path"));
+            throw new StorageException("Invalid file path: " + filepath, new Throwable("bad path"));
         } else {
             String path = tokens[0];
             for (int i = 1; i < pathLength; i++) {

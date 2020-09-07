@@ -1,19 +1,20 @@
 package king;
 
-import storage.Storage;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
 import org.junit.jupiter.api.Test;
+
 import parser.Parser;
+import storage.Storage;
 import tasks.Event;
 import tasks.TaskList;
 import tasks.ToDo;
 import ui.UI;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
-
 public class ParserTest {
 
-    TaskList tasklist = new TaskList();
+    private TaskList tasklist = new TaskList();
 
     @Test
     public void parseToDoTest() {
