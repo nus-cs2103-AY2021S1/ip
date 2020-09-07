@@ -9,6 +9,7 @@ public class Parser {
      * @throws DukeException exception for invalid user input.
      */
     public static Command parse(String input) throws DukeException {
+        assert input.length() > 0 : "There is no user input.";
         String[] words = input.split("\\s");
         String firstWord = words[0];
         if (input.equals("bye")) { //bye command
