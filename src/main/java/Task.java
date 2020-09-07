@@ -1,3 +1,5 @@
+import java.time.format.DateTimeFormatter;
+
 public class Task {
     public enum Status {
         PENDING,
@@ -21,6 +23,10 @@ public class Task {
 
     public void markAsDone() {
         this.status = Status.DONE;
+    }
+
+    public String toStore() {
+        return this.toString();
     }
 
     public void undo() {

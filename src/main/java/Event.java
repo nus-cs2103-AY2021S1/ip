@@ -15,9 +15,13 @@ public class Event extends Task {
 
     @Override public String toString() {
 
-        return "[E] " + this.status.statusToSymbol() + " " + this.name + " (at:" +
-                localDate.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy"))
-                + ")";
+        return "[E] " + this.status.statusToSymbol() + this.name + " at: " +
+                localDate.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy"));
 
     }
+
+    @Override public String toStore() {
+        return "[E] " + this.status.statusToSymbol() + this.name + " at: " + time;
+    }
+
 }

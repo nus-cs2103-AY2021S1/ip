@@ -15,9 +15,16 @@ public class Deadline extends Task {
 
     @Override public String toString() {
 
-        return "[D] " + this.status.statusToSymbol() + " " + this.name +
-                " (by:" +
-                localDate.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy")) + ")";
+        return "[D] " + this.status.statusToSymbol() + this.name +
+                " by: " +
+                localDate.format(DateTimeFormatter.ofPattern("dd-MMM-yyyy"));
+
+    }
+
+    @Override public String toStore() {
+
+        return "[D] " + this.status.statusToSymbol() + this.name +
+                " by: " + dueDate;
 
     }
 
