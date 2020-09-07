@@ -26,24 +26,6 @@ public class Deadline extends Task {
     }
 
     /**
-     * Gets the due date.
-     *
-     * @return Due date.
-     */
-    public LocalDate getDueDate() {
-        return dueDate;
-    }
-
-    /**
-     * Gets the time due.
-     *
-     * @return Time due.
-     */
-    public LocalTime getTime() {
-        return time;
-    }
-
-    /**
      * Returns a String representation of the Deadline. Includes the task type, name, done status, date, and time (if
      * applicable).
      *

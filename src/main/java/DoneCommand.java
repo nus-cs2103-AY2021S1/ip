@@ -23,17 +23,19 @@ public class DoneCommand extends Command {
      * @param tasks   List of tasks.
      * @param ui      User interface.
      * @param storage Storage.
+     * @return Done message string.
      * @throws IOException               If there is an error during saving to disk.
      * @throws IndexOutOfBoundsException If the task number provided does not exist.
-     * @return
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage)
             throws IOException, IndexOutOfBoundsException {
         Task curr = tasks.getTaskAtIndex(id);
+
         if (curr.isDone()) {
             return Ui.MESSAGE_ALR_DONE;
         }
+
         tasks.markAsDone(id);
         storage.updateMemory(tasks.getList());
         assert curr.isDone() : "The task should be marked as done";
