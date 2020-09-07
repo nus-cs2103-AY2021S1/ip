@@ -11,25 +11,26 @@ import duckie.task.TaskList;
 import duckie.ui.Ui;
 
 /**
- * Command to delete a task in the TaskList
+ * Command to delete a task in the TaskList.
  */
 public class DeleteCommand extends Command {
     private int ind;
 
     /**
-     * Instantiate the DeleteCommand
-     * @param ind Index of the Task in TaskList to be deleted
+     * Instantiate the DeleteCommand.
+     * @param ind Index of the Task in TaskList to be deleted.
      */
     public DeleteCommand(int ind) {
         this.ind = ind;
     }
 
     /**
-     * Delete the required Task
-     * @param tasks TaskList containing all the tasks
-     * @param ui Ui to interact with the users
-     * @param storage Storage to write to File
-     * @throws DuckieException
+     * Delete the required Task.
+     * @param tasks TaskList containing all the tasks.
+     * @param ui Ui to interact with the users.
+     * @param storage Storage to write to File.
+     * @return output Display deleted task.
+     * @throws DuckieException Throw File Error Exception.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DuckieException {

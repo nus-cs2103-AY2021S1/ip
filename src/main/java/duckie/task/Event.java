@@ -4,16 +4,16 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * A task type in charge of task containing Event date and time
+ * A task type in charge of task containing Event date and time.
  */
 public class Event extends Task {
     protected static final DateTimeFormatter DT_FORMATTER = DateTimeFormatter.ofPattern("E, MMM dd yyyy hh:mm a");
     protected LocalDateTime dateTime;
 
     /**
-     * Instantiate a Event task
-     * @param description Description of the task
-     * @param dateTime Date and Time of the task
+     * Instantiate a Event task.
+     * @param description Description of the task.
+     * @param dateTime Date and Time of the task.
      */
     public Event(String description, LocalDateTime dateTime) {
         super(description);
@@ -21,8 +21,8 @@ public class Event extends Task {
     }
 
     /**
-     * Overrides method to return the type of the Event task
-     * @return "E" string
+     * Overrides method to return the type of the Event task.
+     * @return "E" string.
      */
     @Override
     public String getType() {
@@ -30,8 +30,8 @@ public class Event extends Task {
     }
 
     /**
-     * Overrides method to return the date and time of the Event task
-     * @return Date and Time string of Event Task
+     * Overrides method to return the date and time of the Event task.
+     * @return Date and Time string of Event Task.
      */
     @Override
     public String getDate() {
@@ -40,8 +40,8 @@ public class Event extends Task {
 
 
     /**
-     * Overrides method to return the String representation of a Event task
-     * @return String representation of Event task
+     * Overrides method to return the String representation of a Event task.
+     * @return String representation of Event task.
      */
     @Override
     public String toString() {

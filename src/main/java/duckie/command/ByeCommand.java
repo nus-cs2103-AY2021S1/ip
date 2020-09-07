@@ -5,12 +5,12 @@ import duckie.task.TaskList;
 import duckie.ui.Ui;
 
 /**
- * Command to signify the exit of the chatbot
+ * Command to signify the exit of the chatbot.
  */
 public class ByeCommand extends Command {
     /**
-     * Check if the Command is exiting
-     * @return true
+     * Check if the Command is exiting.
+     * @return true.
      */
     @Override
     public boolean isExit() {
@@ -18,10 +18,11 @@ public class ByeCommand extends Command {
     }
 
     /**
-     * Display the ending message and end the chatbot
-     * @param tasks TaskList containing all the tasks
-     * @param ui Ui to interact with the users
-     * @param storage Storage to write to File
+     * Display the ending message and end the chatbot.
+     * @param tasks TaskList containing all the tasks.
+     * @param ui Ui to interact with the users.
+     * @param storage Storage to write to File.
+     * @return String String to say goodbye.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

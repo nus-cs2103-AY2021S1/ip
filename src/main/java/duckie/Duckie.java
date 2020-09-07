@@ -27,12 +27,10 @@ public class Duckie {
      */
     public Duckie() {
         ui = new Ui();
-        ui.showIntro();
         storage = new Storage(String.valueOf(filePath));
         try {
             tasks = new TaskList(storage.load());
         } catch (DuckieException e) {
-            ui.showError(e.getMessage());
             tasks = new TaskList();
         }
     }

@@ -7,69 +7,69 @@ import duckie.exception.DuckieNoListException;
 import duckie.ui.Ui;
 
 /**
- * Contains all the saved tasks in a List form
+ * Contains all the saved tasks in a List form.
  */
 public class TaskList {
     private ArrayList<Task> tasks;
 
     /**
-     * Instantiate an empty list
+     * Instantiate an empty list.
      */
     public TaskList() {
         this.tasks = new ArrayList<>();
     }
 
     /**
-     * Instantiate a TaskList with pre-saved tasks
-     * @param tasks ArrayList containing pre-saved tasks
+     * Instantiate a TaskList with pre-saved tasks.
+     * @param tasks ArrayList containing pre-saved tasks.
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
     /**
-     * Return the ArrayList containing the current tasks
-     * @return ArrayList containing current tasks
+     * Return the ArrayList containing the current tasks.
+     * @return ArrayList containing current tasks.
      */
     public ArrayList<Task> getTaskList() {
         return tasks;
     }
 
     /**
-     * Return the actual Index of a task in the ArrayList
-     * @param task Task required
-     * @return Integer index value
+     * Return the actual Index of a task in the ArrayList.
+     * @param task Task required.
+     * @return Integer index value.
      */
     public int getIndex(Task task) {
         return tasks.indexOf(task);
     }
 
     /**
-     * Add a Task to TaskList
-     * @param t1 Task to be added
+     * Add a Task to TaskList.
+     * @param t1 Task to be added.
      */
     public void addTask(Task t1) {
         tasks.add(t1);
     }
 
     /**
-     * Delete a Task from the TaskList
-     * @param ind Index of the Task in ArrayList
+     * Delete a Task from the TaskList.
+     * @param ind Index of the Task in ArrayList.
      */
     public void deleteTask(int ind) {
         tasks.remove(ind);
     }
 
     /**
-     * Delete all Tasks in the TaskList
+     * Delete all Tasks in the TaskList.
      */
     public void deleteAllTasks() {
         tasks.clear();
     }
 
     /**
-     * Check the Task in the TaskList as done
-     * @param ind Index of the Task in ArrayList
+     * Check the Task in the TaskList as done.
+     * @param ind Index of the Task in ArrayList.
      */
     public void markTaskDone(int ind) {
         Task t1 = tasks.get(ind);
@@ -77,8 +77,8 @@ public class TaskList {
     }
 
     /**
-     * Display the current tasks in the TaskList
-     * @throws DuckieException If list is empty
+     * Display the current tasks in the TaskList.
+     * @throws DuckieException If list is empty.
      */
     public void displayList() throws DuckieException {
         if (tasks.size() == 0) {
@@ -89,9 +89,9 @@ public class TaskList {
     }
 
     /**
-     * Filter the list based on the keyword provided
-     * @param keyword
-     * @return ArrayList containing all the tasks matching the keyword
+     * Filter the list based on the keyword provided.
+     * @param keyword Keyword used to find matching tasks.
+     * @return ArrayList containing all the tasks matching the keyword.
      */
     public ArrayList<Task> filterList(String keyword) {
         ArrayList<Task> filteredList = new ArrayList<>();

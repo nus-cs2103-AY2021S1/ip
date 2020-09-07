@@ -6,7 +6,7 @@ import java.util.Scanner;
 import duckie.task.Task;
 
 /**
- * Deals with the interaction with users
+ * Deals with the interaction with users.
  */
 public class Ui {
     private static final String INDENT = "\t";
@@ -20,29 +20,29 @@ public class Ui {
     private Scanner sc;
 
     /**
-     * Instantiate an Ui object with the Scanner object ready
+     * Instantiate an Ui object with the Scanner object ready.
      */
     public Ui() {
         sc = new Scanner(System.in);
     }
 
     /**
-     * Display logo
-     * @return
+     * Display logo.
+     * @return LOGO string.
      */
     public static String getLogo() {
         return LOGO;
     }
 
     /**
-     * Display the horizontal line to break the lines
+     * Display the horizontal line to break the lines.
      */
     public static void showLine() {
         System.out.println(HORIZ_LINE);
     }
 
     /**
-     * Display Duckie introduction and the loading tasks message
+     * Display Duckie introduction and the loading tasks message.
      */
     public static void showIntro() {
         System.out.println(HORIZ_LINE + "\n" + LOGO + "\n"
@@ -51,7 +51,7 @@ public class Ui {
     }
 
     /**
-     * Display Duckie ending when 'bye' is input
+     * Display Duckie ending when 'bye' is input.
      */
     public static void showEnding() {
         System.out.println(INDENT
@@ -59,10 +59,10 @@ public class Ui {
     }
 
     /**
-     * Display the addTask message
+     * Display the addTask message.
      *
-     * @param t1 Task that is added
-     * @param tasks ArrayList containing all the tasks
+     * @param t1 Task that is added.
+     * @param tasks ArrayList containing all the tasks.
      */
     public static void addTaskReply(Task t1, ArrayList<Task> tasks) {
         System.out.println(INDENT + "Quack! Added: " + t1);
@@ -70,9 +70,9 @@ public class Ui {
     }
 
     /**
-     * Display the contents in the List
+     * Display the contents in the List.
      *
-     * @param tasks ArrayList containing the tasks that are to be displayed
+     * @param tasks ArrayList containing the tasks that are to be displayed.
      */
     public static void displayListReply(ArrayList<Task> tasks) {
         int index = 1;
@@ -84,9 +84,9 @@ public class Ui {
     }
 
     /**
-     * Display the contents in the List
+     * Display the contents in the List.
      *
-     * @param tasks ArrayList containing the tasks that are to be displayed
+     * @param tasks ArrayList containing the tasks that are to be displayed.
      */
     public static void displayMatchingTasksReply(ArrayList<Task> tasks) {
         int index = 1;
@@ -98,7 +98,7 @@ public class Ui {
     }
 
     /**
-     * Display the message that there are no tasks in the list
+     * Display the message that there are no tasks in the list.
      */
     public static void displayNoListReply() {
         System.out.println(INDENT + "Quack. You have no tasks in the list currently");
@@ -106,8 +106,8 @@ public class Ui {
     }
 
     /**
-     * Display the current Task condition after being marked as Done
-     * @param t1 Task being marked Done
+     * Display the current Task condition after being marked as Done.
+     * @param t1 Task being marked Done.
      */
     public static void checkTaskReply(Task t1) {
         System.out.println(INDENT
@@ -116,8 +116,8 @@ public class Ui {
     }
 
     /**
-     * Display the current Task that is being deleted
-     * @param t1 Task being deleted
+     * Display the current Task that is being deleted.
+     * @param t1 Task being deleted.
      */
     public static void deleteTaskReply(Task t1) {
         System.out.println(INDENT + "Quack! I've remove this task: \n"
@@ -132,16 +132,16 @@ public class Ui {
     }
 
     /**
-     * Display the Exception message
-     * @param msg Message of the Exception thrown
+     * Display the Exception message.
+     * @param msg Message of the Exception thrown.
      */
     public static void showError(String msg) {
         System.out.println(INDENT + "Oh no! " + msg);
     }
 
     /**
-     * Read the input Command
-     * @return Input string
+     * Read the input Command.
+     * @return Input string.
      */
     public String readCommand() {
         String input = sc.nextLine();
@@ -150,7 +150,7 @@ public class Ui {
     }
 
     /**
-     * Display the Loading Tasks message
+     * Display the Loading Tasks message.
      */
     public static void showLoading() {
         System.out.println(INDENT + "Loading tasks...");

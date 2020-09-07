@@ -8,15 +8,16 @@ import duckie.task.TaskList;
 import duckie.ui.Ui;
 
 /**
- * Command to list all the current tasks in the TaskList
+ * Command to list all the current tasks in the TaskList.
  */
 public class ListCommand extends Command {
     /**
-     * List and display all the tasks in the TaskList currently
-     * @param tasks TaskList containing all the tasks
-     * @param ui Ui to interact with the users
-     * @param storage Storage to write to File
-     * @throws DuckieException
+     * List and display all the tasks in the TaskList currently.
+     * @param tasks TaskList containing all the tasks.
+     * @param ui Ui to interact with the users.
+     * @param storage Storage to write to File.
+     * @return output A list of all the tasks in the list currently.
+     * @throws DuckieException throw NoList Exception.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DuckieException {

@@ -37,8 +37,9 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one is to greet and another one displays the available tasks in the list
+     * Creates two dialog boxes, one is to greet and another one displays the available tasks in the list.
      */
+    @FXML
     public void showWelcome() {
         String logo = Ui.getLogo();
         String toShow = "Quack. Duckie is here to remember your tasks!";

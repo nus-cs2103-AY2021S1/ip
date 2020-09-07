@@ -10,15 +10,16 @@ import duckie.task.TaskList;
 import duckie.ui.Ui;
 
 /**
- * Command to delete all tasks in the TaskList
+ * Command to delete all tasks in the TaskList.
  */
 public class DeleteAllCommand extends Command {
     /**
-     * Delete all Tasks in TaskList
-     * @param tasks TaskList containing all the tasks
-     * @param ui Ui to interact with the users
-     * @param storage Storage to write to File
-     * @throws DuckieException
+     * Delete all Tasks in TaskList.
+     * @param tasks TaskList containing all the tasks.
+     * @param ui Ui to interact with the users.
+     * @param storage Storage to write to File.
+     * @return String Message to indicate that all tasks in the list are cleared.
+     * @throws DuckieException Throw FileError Exception.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DuckieException {

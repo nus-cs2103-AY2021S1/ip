@@ -21,7 +21,7 @@ import duckie.task.Task;
 import duckie.task.Todo;
 
 /**
- * Responsible for the parsing of input Commands
+ * Responsible for the parsing of input Commands.
  */
 public class Parser {
     private static boolean isAWord(String s) {
@@ -29,10 +29,10 @@ public class Parser {
     }
 
     /**
-     * Parse the input Command to direct Duckie on what actions to carry out
-     * @param fullCommand Input string command
-     * @return Specific Command
-     * @throws DuckieException
+     * Parse the input Command to direct Duckie on what actions to carry out.
+     * @param fullCommand Input string command.
+     * @return Specific Command.
+     * @throws DuckieException All the possible DuckieExceptions.
      */
     public static Command parse(String fullCommand) throws DuckieException {
         String input = fullCommand.strip();

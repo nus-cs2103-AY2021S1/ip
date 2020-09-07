@@ -1,20 +1,20 @@
 package duckie.task;
 
 /**
- * A task type in charge of task description only
+ * A task type in charge of task description only.
  */
 public class Todo extends Task {
     /**
-     * Instantiate Todo object
-     * @param description Description of a Task
+     * Instantiate Todo object.
+     * @param description Description of a Task.
      */
     public Todo(String description) {
         super(description);
     }
 
     /**
-     * Overrides method to return the type of the Todo Task
-     * @return "T" string
+     * Overrides method to return the type of the Todo Task.
+     * @return "T" string.
      */
     @Override
     public String getType() {
@@ -22,8 +22,8 @@ public class Todo extends Task {
     }
 
     /**
-     * Overrides method to return the String representation of a Todo task
-     * @return String representation of Todo task
+     * Overrides method to return the String representation of a Todo task.
+     * @return String representation of Todo task.
      */
     @Override
     public String toString() {
