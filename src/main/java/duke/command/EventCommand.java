@@ -19,6 +19,7 @@ public class EventCommand extends Command {
         this.at = at;
         aliases = new ArrayList<>();
         aliases.add("ev");
+        aliases.add("event");
 
     }
 

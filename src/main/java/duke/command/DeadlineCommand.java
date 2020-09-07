@@ -19,6 +19,7 @@ public class DeadlineCommand extends Command {
         this.by = by;
         aliases = new ArrayList<>();
         aliases.add("d");
+        aliases.add("deadline");
 
     }
 

@@ -14,6 +14,7 @@ public class ClearCommand extends Command {
     public ClearCommand() {
         aliases = new ArrayList<>();
         aliases.add("c");
+        aliases.add("clear");
     }
 
 

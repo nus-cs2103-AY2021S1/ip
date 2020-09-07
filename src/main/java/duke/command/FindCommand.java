@@ -18,6 +18,7 @@ public class FindCommand extends Command {
         this.keyword = keyword;
         aliases = new ArrayList<>();
         aliases.add("f");
+        aliases.add("find");
 
     }
 

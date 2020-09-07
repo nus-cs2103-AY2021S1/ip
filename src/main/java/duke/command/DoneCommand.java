@@ -16,6 +16,7 @@ public class DoneCommand extends Command {
         this.indexEntryDone = indexEntryDone;
         aliases = new ArrayList<>();
         aliases.add("d");
+        aliases.add("done");
 
     }
 

@@ -12,6 +12,7 @@ public class ListCommand extends Command {
     public ListCommand() {
         aliases = new ArrayList<>();
         aliases.add("l");
+        aliases.add("list");
 
     }
 

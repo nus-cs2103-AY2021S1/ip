@@ -15,8 +15,8 @@ public class DeleteCommand extends Command {
     public DeleteCommand(int indexEntryToDelete) {
         this.indexEntryToDelete = indexEntryToDelete;
         aliases = new ArrayList<>();
-        aliases.add("d");
-
+        aliases.add("del");
+        aliases.add("delete");
     }
 
 

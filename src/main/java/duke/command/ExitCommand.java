@@ -14,6 +14,7 @@ public class ExitCommand extends Command {
     public ExitCommand() {
         aliases = new ArrayList<>();
         aliases.add("ex");
+        aliases.add("exit");
 
     }
 

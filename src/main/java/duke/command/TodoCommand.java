@@ -18,6 +18,7 @@ public class TodoCommand extends Command {
         this.description = description;
         aliases = new ArrayList<>();
         aliases.add("t");
+        aliases.add("todo");
 
     }
 
