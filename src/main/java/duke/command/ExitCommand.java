@@ -6,8 +6,11 @@ import duke.utils.DukeFileHandler;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
+import java.util.List;
+
 
 public class ExitCommand extends Command {
+    protected static List<String> aliases;
 
 
     @Override

@@ -20,6 +20,7 @@ public class Duke {
     public Duke(String path) {
         ui = new Ui();
         fileHandler = new DukeFileHandler(path);
+        Command.initialise();
 
     }
 

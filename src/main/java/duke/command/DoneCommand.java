@@ -5,13 +5,18 @@ import duke.utils.DukeFileHandler;
 import duke.utils.TaskList;
 import duke.utils.Ui;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 public class DoneCommand extends Command {
     private final int indexEntryDone;
 
+    protected static List<String> aliases;
 
     public DoneCommand(int indexEntryDone) {
         this.indexEntryDone = indexEntryDone;
+
     }
 
 

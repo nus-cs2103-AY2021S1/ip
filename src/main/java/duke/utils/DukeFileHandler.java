@@ -83,7 +83,6 @@ public class DukeFileHandler {
      * @throws IOException if the file could not be found.
      */
     public void writeToFile(List<Task> list) throws IOException {
-        assert list.size() > 0;
 
         try {
             FileWriter fileWriter = new FileWriter(path);

@@ -1,5 +1,8 @@
 package duke.command;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.task.Deadline;
 import duke.utils.DukeException;
 import duke.utils.DukeFileHandler;
@@ -10,6 +13,7 @@ import duke.utils.Ui;
 public class DeadlineCommand extends Command {
     private final String description;
     private final String by;
+    protected static List<String> aliases;
 
 
     public DeadlineCommand(String description, String by) {
