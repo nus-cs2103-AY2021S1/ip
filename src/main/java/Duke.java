@@ -72,11 +72,11 @@ public class Duke {
      */
     String getResponse(String input) {
         String command = input;
-        System.out.println(input);
         try {
             Command c = Command.parse(command);
             return "Duke heard: " + c.execute(tasks, ui, storage);
         } catch (Exception e) {
+            e.printStackTrace();
             return "Duke exception: " + e.getMessage();
         }
     }

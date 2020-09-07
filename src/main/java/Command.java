@@ -83,7 +83,6 @@ class ExitCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("EXISTSTAUS");
         return "Duke is exiting, goodbye!";
     }
 }
@@ -94,7 +93,6 @@ class ExitCommand extends Command {
 class ListCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        System.out.println("tasks:" + tasks.toString());
         return ui.printf("Here are the tasks in your list:\n" + tasks.toString());
     }
 }
@@ -131,9 +129,10 @@ class DeleteCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+        String taskString = tasks.get(this.deleteTask).toString();
         tasks.delete(this.deleteTask);
         storage.saveFile(tasks);
-        return ui.printf("Noted. I've removed this task:\n" + tasks.get(this.deleteTask) + "\n" + tasks.taskCount());
+        return ui.printf("Noted. I've removed this task:\n" + taskString + "\n" + tasks.taskCount());
     }
 }
 
