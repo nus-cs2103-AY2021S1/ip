@@ -32,7 +32,7 @@ public class Duke {
     }
 
     /**
-     * Main method of Duke
+     * Main method of Duke.
      *
      * @param args String arguments (not necessary)
      */
@@ -42,13 +42,10 @@ public class Duke {
     }
 
     /**
-     * Runs Duke on the command line
+     * Runs Duke on the command line.
      */
     public void runDukeOnCli() {
-
         ui.printHello();
-
-        // Initialize scanner to receive user inputs
         Scanner sc = new Scanner(System.in);
 
         while (sc.hasNextLine()) {
@@ -57,36 +54,39 @@ public class Duke {
             String[] outputStrings = command.execute(storage, tasks, ui);
             ui.print(outputStrings);
 
-            // Exit command exits the program
             if (command instanceof ExitCommand) {
                 break;
             }
         }
     }
 
+    /**
+     * Gets the startup message as a string.
+     *
+     * @return Startup message as a string.
+     */
     String getStartupMessage() {
         String[] strings = ui.getHelloStrings();
-        StringBuilder output;
 
-        if (strings.length >= 1) {
-            output = new StringBuilder(strings[0]);
-            for (int i = 1; i < strings.length; i++) {
-                output.append("\n");
-                output.append(strings[i]);
-            }
-            return output.toString();
-        } else {
+        if (strings.length == 0) {
             return "Hello!";
         }
+
+        StringBuilder output = new StringBuilder(strings[0]);
+        for (int i = 1; i < strings.length; i++) {
+            output.append("\n");
+            output.append(strings[i]);
+        }
+        return output.toString();
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Retrieves the response from an input as a String.
+     *
+     * @return Response
      */
     String getResponse(String input) {
         Command command = Parser.parse(input);
-
         String[] strings = command.execute(storage, tasks, ui);
         StringBuilder output;
 
