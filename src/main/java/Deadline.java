@@ -1,6 +1,5 @@
 package main.java;
 
-import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -9,8 +8,6 @@ import java.time.format.DateTimeFormatter;
  * @author Lio
  */
 class Deadline extends Task {
-    private LocalDate by;
-
     /**
      * Constructor
      *
@@ -18,19 +15,18 @@ class Deadline extends Task {
      * @param by Date that the task is due
      */
     public Deadline(String name, String by) {
-        super(name);
-        this.by = LocalDate.parse(by);
+        super(name, by);
     }
 
     /**
      * Converts the task to data form
      */
     public String toData() {
-        return "D | " + super.toData() + " | " + by;
+        return "D | " + super.toData() + " | " + this.date;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        return "[D]" + super.toString() + " (by: " + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 }

@@ -1,6 +1,7 @@
 package main.java;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -115,5 +116,17 @@ public class TaskList {
         List<Task> filteredList = list.stream()
                 .filter(t -> t.contains(keyword)).collect(Collectors.toList());
         return new TaskList(filteredList);
+    }
+
+    /**
+     * Returns a sorted TaskList
+     *
+     * @param comparator comparator used to sort the tasks
+     * @return A new TaskList that is sorted by the comparator
+     */
+    public TaskList sort(Comparator<Task> comparator) {
+        TaskList sorted = new TaskList(list);
+        sorted.list.sort(comparator);
+        return sorted;
     }
 }

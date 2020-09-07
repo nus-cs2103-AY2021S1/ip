@@ -1,12 +1,15 @@
 package main.java;
 
+import java.time.LocalDate;
+
 /**
  * Tasks are items that need to be done
  *
  * @author Lio
  */
 class Task {
-    private final String name;
+    public final String name;
+    public LocalDate date;
     private boolean isDone = false;
 
     /**
@@ -16,6 +19,17 @@ class Task {
      */
     public Task(String name) {
         this.name = name;
+    }
+
+    /**
+     * Constructor
+     *
+     * @param name Name of the task
+     * @param date Date relevant to that task
+     */
+    public Task(String name, String date) {
+        this.name = name;
+        this.date = LocalDate.parse(date);
     }
 
     /**
