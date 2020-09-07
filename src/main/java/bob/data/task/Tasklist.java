@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import bob.exceptions.BobInvalidDateAndTimeException;
+import bob.exceptions.BobInvalidUndoException;
 import bob.storage.Storage;
 
 
@@ -13,9 +14,10 @@ import bob.storage.Storage;
  */
 public class Tasklist {
     private final ArrayList<Task> list;
+    private Tasklist previousTasklist;
 
     /**
-     * Creates a tasklist.
+     * Loads a tasklist.
      *
      * @param storage Bob's Storage.
      * @throws FileNotFoundException If File in Storage does not exist.
@@ -23,10 +25,26 @@ public class Tasklist {
      */
     public Tasklist(Storage storage) throws FileNotFoundException, BobInvalidDateAndTimeException {
         this.list = storage.getList();
+        this.previousTasklist = null;
     }
 
+    /**
+     * Initializes a tasklist.
+     */
     public Tasklist() {
         list = new ArrayList<>();
+        this.previousTasklist = null;
+    }
+
+    /**
+     * Creates a new tasklist with the previous tasklist saved.
+     *
+     * @param tasks New list of tasks.
+     * @param previousTasklist Previous tasklist.
+     */
+    private Tasklist(ArrayList<Task> tasks, Tasklist previousTasklist) {
+        this.list = tasks;
+        this.previousTasklist = previousTasklist;
     }
 
     /**
@@ -114,6 +132,7 @@ public class Tasklist {
 
     /**
      * Finds tasks containing input.
+     *
      * @param input User input.
      * @return String of tasks containing the input.
      */
@@ -126,6 +145,31 @@ public class Tasklist {
             }
         }
         return tasksFound.toString();
+    }
+
+    /**
+     * Creates a new tasklist with the previous tasklist saved.
+     *
+     * @return Tasklist with the previous tasklist saved.
+     */
+    public Tasklist savePreviousTasklist() {
+        ArrayList<Task> newTasks = new ArrayList<>();
+        for (Task task: list) {
+            newTasks.add(task);
+        }
+        return new Tasklist(newTasks, this);
+    }
+
+    public Tasklist getPreviousTasklist() throws BobInvalidUndoException {
+        boolean noPreviousTaskist = previousTasklist == null;
+        boolean hasPreviousTaskist = !noPreviousTaskist;
+
+        if (noPreviousTaskist) {
+            throw new BobInvalidUndoException();
+        }
+
+        assert hasPreviousTaskist;
+        return this.previousTasklist;
     }
 
     @Override
