@@ -8,7 +8,7 @@ import duke.task.TaskList;
 /**
  * Represents a command to view a list of Duke's function and the function commands.
  */
-public class FunctionsCommand extends Command {
+public class HelpCommand extends Command {
 
     /**
      * Prints all of Duke's functions and the commands for each function.

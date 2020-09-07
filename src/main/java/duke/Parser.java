@@ -8,7 +8,7 @@ import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.FindByDateCommand;
 import duke.command.FindByKeywordCommand;
-import duke.command.FunctionsCommand;
+import duke.command.HelpCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.TagCommand;
@@ -31,7 +31,7 @@ public class Parser {
     private static final String DELETE_COMMAND = "delete";
     private static final String FIND_BY_DATE_COMMAND = "find_by_date";
     private static final String FIND_BY_KEYWORD_COMMAND = "find";
-    private static final String VIEW_FUNCTION_COMMAND = "commands";
+    private static final String HELP_COMMAND = "help";
     private static final String TAG_COMMAND = "tag";
 
     /**
@@ -49,8 +49,8 @@ public class Parser {
         if (message.isEmpty()) {
             String err = "No input was entered! Please enter something!";
             throw new InvalidFunctionException(err);
-        } else if (message.equals(Parser.VIEW_FUNCTION_COMMAND)) {
-            return new FunctionsCommand();
+        } else if (message.equals(Parser.HELP_COMMAND)) {
+            return new HelpCommand();
         } else if (message.equals(Parser.END_COMMAND)) {
             return new ExitCommand();
         } else if (message.equals(Parser.LIST_COMMAND)) {

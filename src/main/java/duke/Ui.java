@@ -29,7 +29,7 @@ public class Ui {
      */
     public static String showWelcome() {
         String greeting = "Hello! I am JonasBot! Nice to meet you :) \n\n"
-                + "To view a list of all my commands, input 'commands' \n\n"
+                + "To view a list of all my commands, input 'help' \n\n"
                 + "How may I assist you today?";
         return greeting;
     }
@@ -122,18 +122,19 @@ public class Ui {
                 + "1. Create a new task: \n\n"
                 + "1.1 Todo: 'todo <task description>'. For eg, todo eat \n\n"
                 + "1.2 Deadline: 'deadline <task description> /by <deadline date>'. "
-                + "Input the date using the format: 'dd/mm/yyyy hh:mm'. "
+                + "Input the date using the format: dd/mm/yyyy hh:mm. "
                 + "For eg, deadline return book /by 12/2/2020 13:00 \n\n"
                 + "1.3 Event: 'event <task description> /at <event date>'. "
-                + "Input the date using the format: 'dd/mm/yyyy hh:mm'. "
+                + "Input the date using the format: dd/mm/yyyy hh:mm. "
                 + "For eg, event project meeting /at 1/3/2020 12:00 \n\n"
                 + "2. To display all tasks in your list: 'list' \n\n"
-                + "3. To mark a task as completed: 'done <task ID>'. For eg, 'done 2' \n\n"
-                + "4. To delete a task: 'delete <task ID>'. For eg, 'delete 2' \n\n"
+                + "3. To mark a task as completed: 'done <task ID>'. For eg, done 2 \n\n"
+                + "4. To delete a task: 'delete <task ID>'. For eg, delete 2 \n\n"
                 + "5. To search for a task by keyword: 'find <keyword>'. For eg, find book\n\n"
                 + "6. To search for a task by date: 'find_by_date <date>'. "
-                + "Input the date using the format: 'dd/mm/yyyy'. For eg, 'find_by_date 12/2/2020' \n\n"
-                + "7. To end this chat: 'bye'. ";
+                + "Input the date using the format: dd/mm/yyyy. For eg, find_by_date 12/2/2020\n\n"
+                + "7. To tag a task: 'tag <task ID> <tag>'. For eg, tag 1 fun\n\n"
+                + "8. To end this chat: 'bye'. ";
         return commands;
     }
 
