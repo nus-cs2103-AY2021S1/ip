@@ -22,9 +22,9 @@ public class DukeParserTest {
 
     @Test
     public void parseTest_testTodo() throws DukeException {
-        String fullCommand = "todo Test ToDo: parse";
+        String fullCommand = "todo Test Todo: parse";
         Command command = Parser.parse(fullCommand);
-        assert command.getClass().getTypeName().equals("duke.command.ToDoCommand");
+        assert command.getClass().getTypeName().equals("duke.command.TodoCommand");
     }
 
     @Test
