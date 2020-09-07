@@ -52,6 +52,13 @@ public class AddCommand extends Command {
         storage.saveTasksToFile(tasks);
     }
 
+    /**
+     * Returns a ToDo task based on the task description given by user.
+     *
+     * @param taskDescription Description of the task to be done.
+     * @return New ToDo task with given description.
+     * @throws DukeException If no valid name is given.
+     */
     private Task toDoTask(String taskDescription) throws DukeException {
         if (taskDescription.equals(Instruction.EMPTY.getInstruction())) {
             throw new DukeException("Please key in a valid name for To Do");
@@ -59,6 +66,14 @@ public class AddCommand extends Command {
         return new Todo(taskDescription);
     }
 
+    /**
+     * Returns a Deadline task based on task description given by user.
+     *
+     * @param taskDescription Description of the task to be done.
+     * @param formatter Formats the date and time of the input.
+     * @return New Deadline task with given description and formatted datetime.
+     * @throws DukeException If description of task is invalid.
+     */
     private Task deadlineTask(String taskDescription, DateTimeFormatter formatter) throws DukeException {
         String[] deadlineArr = taskDescription.split(" /by ", 2);
 
@@ -77,6 +92,14 @@ public class AddCommand extends Command {
         return new Deadline(deadlineName, localDateTime);
     }
 
+    /**
+     * Returns an Event task based on task description given by user.
+     *
+     * @param taskDescription Description of the task to be done.
+     * @param formatter Formats the date and time of the input.
+     * @return New Event task with given description and formatted datetime.
+     * @throws DukeException If description of task is invalid.
+     */
     private Task eventTask(String taskDescription, DateTimeFormatter formatter) throws DukeException {
         String[] eventArr = taskDescription.split(" /at ", 2);
 
