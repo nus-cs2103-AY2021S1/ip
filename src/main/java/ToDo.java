@@ -3,6 +3,7 @@
  */
 public class ToDo extends Task {
     ToDo(String taskDescription) {
+        assert(taskDescription.length() > 0);
         this.taskDescription = taskDescription;
         this.isCompleted = false;
 

@@ -26,6 +26,7 @@ abstract class Task {
      * @return Task description.
      */
     public String getTask() {
+        assert(this.taskDescription.length() > 0);
         return taskDescription;
     }
 

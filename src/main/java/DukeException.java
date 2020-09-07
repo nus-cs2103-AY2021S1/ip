@@ -5,6 +5,7 @@ public class DukeException extends Exception {
     String error;
     DukeException(DukeExceptionType errorType) {
         super(errorType.toString());
+        assert(errorType.toString().length() > 0);
         error = errorType.toString();
     }
 

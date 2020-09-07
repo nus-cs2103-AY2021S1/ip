@@ -1,0 +1,17 @@
+#dialogContainer {
+    -fx-background-color: peachpuff;
+}
+
+.root {
+    -fx-font-family: "Courier New";
+}
+
+#dialog {
+    -fx-label-padding: 10px;
+}
+
+#displayPicture {
+    -fx-border-radius: 500px;
+    -fx-border-color: blue;
+    -fx-border-width: 100px;
+}
