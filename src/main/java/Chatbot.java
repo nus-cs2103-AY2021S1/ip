@@ -35,7 +35,7 @@ public class Chatbot {
         ui.showWelcomeMessage();
         Scanner scanner = new Scanner(System.in);
 
-        while (!Parser.isDone()) {
+        while (!Parser.getIsDone()) {
             String input = scanner.nextLine();
             Parser.parse(input, storage, tasks, ui);
         }

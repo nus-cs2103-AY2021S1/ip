@@ -10,7 +10,7 @@ public class TaskList {
     private ArrayList<Task> tasks;
 
     /**
-     * Initialises a TaskList object from a file containing saved tasks
+     * Initialises a TaskList object from a file containing saved tasks.
      * @param file .txt file that contains saved Duke task data
      * @param ui Ui to display results and errors to the user
      */
@@ -26,17 +26,22 @@ public class TaskList {
 
             while (sc.hasNextLine()) {
                 String[] components = sc.nextLine().split(" \\| ");
+                String taskId = components[0];
+                String taskDescription = components[2];
+                boolean isComplete = components[1].equals("1");
 
                 //noinspection CheckStyle
-                switch (components[0]) {
+                switch (taskId) {
                 case "T":
-                    tasks.add(new Todo(components[2], components[1].equals("1") ? true : false));
+                    tasks.add(new Todo(taskDescription, isComplete));
                     break;
                 case "D":
-                    tasks.add(new Deadline(components[2], components[3], components[1].equals("1") ? true : false));
+                    String deadlineBy = components[3];
+                    tasks.add(new Deadline(taskDescription, deadlineBy, isComplete));
                     break;
                 case "E":
-                    tasks.add(new Event(components[2], components[3], components[1].equals("1") ? true : false));
+                    String eventAt = components[3];
+                    tasks.add(new Event(taskDescription, eventAt, isComplete));
                     break;
                 }
             }

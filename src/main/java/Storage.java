@@ -11,6 +11,7 @@ public class Storage {
 
     /**
      * Initialises a Storage object with the given dataPathName and dataFilePath.
+     *
      * @param dataPathName PathName to get to the .txt file used for storage
      * @param dataFilePath Full FilePath to get to the .txt file used for storage
      */
@@ -50,6 +51,7 @@ public class Storage {
 
     /**
      * Saves tasks in the TaskList to the stated external .txt file
+     *
      * @param tasks TaskList containing the updated tasks
      * @param ui Ui to display results and errors to the user
      */

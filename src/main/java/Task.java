@@ -37,7 +37,7 @@ public class Task {
     }
 
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return "[" + getStatusIcon() + "] " + description;
     }
 
     /**
@@ -46,6 +46,6 @@ public class Task {
      * @return Task in its save format
      */
     public String getSaveFormat() {
-        return (isDone ? "1" : "0") + " | " + this.description;
+        return (isDone ? "1" : "0") + " | " + description;
     }
 }
