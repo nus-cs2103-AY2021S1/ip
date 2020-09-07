@@ -30,6 +30,6 @@ public class AddDeadlineTaskOperation extends AddTaskOperation {
      */
     @Override
     public Deadline createTask() {
-        return Deadline.createDeadline(this.description, this.dateTime);
+        return Deadline.createDeadline(description, dateTime);
     }
 }

@@ -30,6 +30,6 @@ public class AddEventTaskOperation extends AddTaskOperation {
      */
     @Override
     public Event createTask() {
-        return Event.createEvent(this.description, this.time);
+        return Event.createEvent(description, time);
     }
 }

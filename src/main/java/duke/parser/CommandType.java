@@ -34,7 +34,7 @@ public enum CommandType {
      * @return a <code>String</code> of the <code>command</code>.
      */
     public String getCommand() {
-        return this.command;
+        return command;
     }
 
     /**
@@ -44,6 +44,6 @@ public enum CommandType {
      * @return <code>rue</code> if the given length is greater than or equal to the <code>commandLength</code>.
      */
     public boolean isNotValidLength(int length) {
-        return this.commandLength > length;
+        return commandLength > length;
     }
 }

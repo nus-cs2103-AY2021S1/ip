@@ -47,7 +47,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        String stringDateTime = this.datetime.getOutputDatetimeString();
+        String stringDateTime = datetime.getOutputDatetimeString();
         String byDatetime = String.format("(by: %s)", stringDateTime);
         return "[" + DEADLINE_SYMBOL + "]" + toStringSuffix() + " " + byDatetime;
     }
@@ -88,7 +88,7 @@ public class Deadline extends Task {
      */
     @Override
     public Optional<String> getTaskDatetime() {
-        String stringDateTime = this.datetime.getOutputDatetimeString();
+        String stringDateTime = datetime.getOutputDatetimeString();
         return Optional.of(stringDateTime);
     }
 }

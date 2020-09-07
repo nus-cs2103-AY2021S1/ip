@@ -49,7 +49,7 @@ public abstract class Storage<T extends Storable> {
     public String loadList(StorableList<T> list) {
         Scanner sc;
         try {
-            sc = new Scanner(this.file);
+            sc = new Scanner(file);
         } catch (IOException ignore) {
             return "I detect no task storage files. I shall create a fresh list.";
         }

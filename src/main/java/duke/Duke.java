@@ -30,7 +30,7 @@ public class Duke {
      * @return status of the <code>StartOperation</code>.
      */
     public Result initialize() {
-        return new StartOperation(this.listManager, this.storageManager).execute();
+        return new StartOperation(listManager, storageManager).execute();
     }
 
     /**
@@ -39,7 +39,7 @@ public class Duke {
      * @return status of the <code>ExitOperation</code>.
      */
     public Result stopDuke() {
-        return new ExitOperation(this.storageManager, this.listManager).execute();
+        return new ExitOperation(storageManager, listManager).execute();
     }
 
     /**
@@ -50,7 +50,7 @@ public class Duke {
      */
     public Result getResponse(String input) {
         try {
-            Operation operation = this.commandParser.parse(input, this.listManager, this.storageManager);
+            Operation operation = commandParser.parse(input, listManager, storageManager);
             return operation.execute();
         } catch (DukeException exception) {
             return new Result(false, exception.getMessage(), false);

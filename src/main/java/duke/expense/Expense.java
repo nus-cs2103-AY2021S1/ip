@@ -71,7 +71,7 @@ public abstract class Expense implements Storable {
      * @return a <code>String</code> of value.
      */
     public String getPrintValue() {
-        return String.format("$%.2f", this.value);
+        return String.format("$%.2f", value);
     }
 
     /**
@@ -88,7 +88,7 @@ public abstract class Expense implements Storable {
      * @return <code>String</code> of the date.
      */
     public String getExpenseDate() {
-        return this.date.getOutputDatetimeString();
+        return date.getOutputDatetimeString();
     }
 
     /**
@@ -99,7 +99,7 @@ public abstract class Expense implements Storable {
      */
     protected String toStringSuffix() {
         String date = getExpenseDate();
-        return String.format("%s (on: %s), %s", this.description, date, getPrintValue());
+        return String.format("%s (on: %s), %s", description, date, getPrintValue());
     }
 
     /**

@@ -30,14 +30,14 @@ public class DeleteOperation extends Operation {
      */
     @Override
     public Result execute() {
-        if (!this.storableList.isValidIndex(index)) {
+        if (!storableList.isValidIndex(index)) {
             String message = "The index you have passed in cannot be found in the list of tasks.";
             return new Result(false, message, this.isExit());
         }
-        Storable removed = this.storableList.remove(this.index);
+        Storable removed = storableList.remove(this.index);
         String message = "Noted. I've removed:\n"
                 + removed + "\n"
-                + String.format("You now have %d tasks in the list", this.storableList.getCurrCapacity());
+                + String.format("You now have %d tasks in the list", storableList.getCurrCapacity());
         return new Result(true, message, this.isExit());
     }
 }

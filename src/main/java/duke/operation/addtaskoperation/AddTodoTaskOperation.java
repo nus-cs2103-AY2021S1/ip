@@ -25,6 +25,6 @@ public class AddTodoTaskOperation extends AddTaskOperation {
      */
     @Override
     public Todo createTask() {
-        return Todo.createTodo(this.description);
+        return Todo.createTodo(description);
     }
 }

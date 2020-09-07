@@ -34,7 +34,7 @@ public class Receivable extends Expense {
      */
     @Override
     public double getValue() {
-        return this.value;
+        return value;
     }
 
     /**

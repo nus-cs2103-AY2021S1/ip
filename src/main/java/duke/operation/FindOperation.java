@@ -3,9 +3,7 @@ package duke.operation;
 import duke.list.StorableList;
 import duke.result.Result;
 
-/**
- * The operation that finds <code>Tasks</code> in <code>TaskList</code> associated with a search word.
- */
+/** The operation that finds <code>Tasks</code> in <code>TaskList</code> associated with a search word. */
 public class FindOperation extends Operation {
     private final StorableList storableList;
     private final String searchWord;
@@ -29,10 +27,10 @@ public class FindOperation extends Operation {
      */
     @Override
     public Result execute() {
-        String found = this.storableList.search(searchWord);
+        String found = storableList.search(searchWord);
         String message;
         if (found.equals("")) {
-            message = String.format("I have found no tasks that match: %s", this.searchWord);
+            message = String.format("I have found no tasks that match: %s", searchWord);
         } else {
             message = "Here is what I have found:\n" + found;
         }

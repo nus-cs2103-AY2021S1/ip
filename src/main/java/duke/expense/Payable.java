@@ -34,7 +34,7 @@ public class Payable extends Expense {
      */
     @Override
     public double getValue() {
-        return this.value * -1;
+        return value * -1;
     }
 
     /**
