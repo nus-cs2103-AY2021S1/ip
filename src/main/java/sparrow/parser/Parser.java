@@ -149,7 +149,7 @@ public class Parser {
     private Command prepareFilter(String args) {
         final Matcher matcher = FILTER_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
-            System.out.println("no matches");
+            System.out.println("Wrong filter format");
             return new IncorrectCommand("Please pass a proper date to filter by.");
         }
         try {

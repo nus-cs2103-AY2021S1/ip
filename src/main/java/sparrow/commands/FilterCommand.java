@@ -19,6 +19,7 @@ public class FilterCommand extends Command {
     private final LocalDate date;
 
     public FilterCommand(LocalDate date) {
+        super();
         this.date = date;
     }
 
