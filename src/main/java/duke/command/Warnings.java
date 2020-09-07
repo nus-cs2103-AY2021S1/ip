@@ -53,4 +53,12 @@ public class Warnings {
     public static String invalidTodoWarning() {
         return HORIZONTAL_LINE + "Sorry hor, I can't understand your todo input\n" + HORIZONTAL_LINE;
     }
+
+    /**
+     * Warns user to include '#' in front of tag.
+     * @return A warning message
+     */
+    public static String invalidTagWarning() {
+        return HORIZONTAL_LINE + "Sorry hor, please make sure you have '#' in front of your tag\n" + HORIZONTAL_LINE;
+    }
 }

@@ -15,7 +15,7 @@ public class DoneCommand extends Command {
      * Marks task as done.
      * @param command User input
      * @param list TaskList object containing all tasks
-     * @param storage Storage object that reads and writes to duke.ser
+     * @param storage Storage object that reads and writes to duke.txt
      * @return A response showing done task
      */
     @Override

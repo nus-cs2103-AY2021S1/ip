@@ -15,7 +15,7 @@ public class FindCommand extends Command {
      * Filters out tasks from task list based on user input.
      * @param command User input
      * @param list TaskList object containing all tasks
-     * @param storage Storage object that reads and writes to duke.ser
+     * @param storage Storage object that reads and writes to duke.txt
      * @return A list of filtered tasks
      */
     @Override

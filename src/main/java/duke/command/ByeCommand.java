@@ -16,7 +16,7 @@ public class ByeCommand extends Command {
      * Runs the "bye" command.
      * @param command User input
      * @param list TaskList object containing all tasks
-     * @param storage Storage object that reads and writes to duke.ser
+     * @param storage Storage object that reads and writes to duke.txt
      * @return A bye response
      */
     @Override

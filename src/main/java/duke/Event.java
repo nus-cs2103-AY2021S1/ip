@@ -22,14 +22,27 @@ public class Event extends Task {
     }
 
     /**
+     * Contructor for Event object with tag.
+     * @param isComplete Boolean to indicate if event is complete
+     * @param index Index position of Task in TaskList
+     * @param instructions Event description
+     * @param time Time of event
+     * @param tag Hashtag
+     */
+    public Event(boolean isComplete, int index, String instructions, String time, String tag) {
+        super(isComplete, index, instructions, tag);
+        this.time = parseTime(time);
+    }
+
+    /**
      * Constructor for Event object.
      * @param isComplete Boolean to indicate if event is complete
      * @param index Index position of Task in TaskList
      * @param instructions Event description
      * @param time Time of event in LocalDate format
      */
-    public Event(boolean isComplete, int index, String instructions, LocalDate time) {
-        super(isComplete, index, instructions);
+    public Event(boolean isComplete, int index, String instructions, LocalDate time, String tag) {
+        super(isComplete, index, instructions, tag);
         this.time = time;
     }
 
@@ -55,9 +68,9 @@ public class Event extends Task {
     public String toString() {
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("d MMM yyyy");
         if (this.isComplete) {
-            return "[E][✓] " + this.instructions + " (at: " + outputFormatter.format(this.time) + ")";
+            return "[E][✓] " + this.instructions + " (at: " + outputFormatter.format(this.time) + ")" + printTag();
         } else {
-            return "[E][✗] " + this.instructions + " (at: " + outputFormatter.format(this.time) + ")";
+            return "[E][✗] " + this.instructions + " (at: " + outputFormatter.format(this.time) + ")" + printTag();
         }
     }
 }

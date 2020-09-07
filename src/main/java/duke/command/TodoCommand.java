@@ -16,16 +16,27 @@ public class TodoCommand extends Command {
      * Adds a Todo object to TaskList object.
      * @param command User input
      * @param list TaskList object containing all tasks
-     * @param storage Storage object that reads and writes to duke.ser
+     * @param storage Storage object that reads and writes to duke.txt
      * @return A response saying todo has been added
      */
     @Override
     public String execute(String command, TaskList list, Storage storage) {
         try {
             String horizontalLine = "____________________________________\n";
-            String instructions = command.substring(5);
+            String[] commandArr = command.split("\\s+");
+            String instructions = commandArr[1];
             int counter = list.getList().size();
-            list.addTask(counter, new Todo(false, counter + 1, instructions));
+            Todo todo;
+            if (commandArr.length == 3) {
+                String tag = commandArr[2];
+                if (!tag.startsWith("#")) {
+                    return Warnings.invalidTagWarning();
+                }
+                todo = new Todo(false, counter + 1, instructions, tag);
+            } else {
+                todo = new Todo(false, counter + 1, instructions);
+            }
+            list.addTask(counter, todo);
             String taskMessage = list.getList().get(counter).toString();
             storage.writeData(list.getList());
             return horizontalLine + "Okok. I add for you: \n"

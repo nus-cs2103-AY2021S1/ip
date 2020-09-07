@@ -16,7 +16,7 @@ public class DeleteCommand extends Command {
      * Deletes specified task.
      * @param command User input
      * @param list TaskList object containing all tasks
-     * @param storage Storage object that reads and writes to duke.ser
+     * @param storage Storage object that reads and writes to duke.txt
      * @return A response with deleted task
      */
     @Override
