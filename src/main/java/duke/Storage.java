@@ -23,6 +23,7 @@ public class Storage {
 
     /**
      * Constructor for a new driver system.
+     *
      * @param filepath  the file path of the schedule text file
      */
     public Storage(String filepath) {
@@ -31,6 +32,7 @@ public class Storage {
 
     /**
      * Writes tasks into the schedule file.
+     *
      * @param task      the task that's to be written into the text file
      */
     public void write(Task task) throws IOException {
@@ -41,6 +43,7 @@ public class Storage {
 
     /**
      * Loads a schedule file.
+     *
      * @return  a TaskList that has all the tasks in the schedule text file
      */
     public ArrayList<Task> load() throws IOException {
@@ -62,12 +65,12 @@ public class Storage {
 
     /**
      * Writes tasks into the schedule file.
+     *
      * @param tl      the TaskList that's to be over written into the text file
      */
     public void overwrite(TaskList tl) throws IOException {
         FileWriter todoWriter = new FileWriter(this.filepath, false);
-        for (Task task: tl.todoList
-        ) {
+        for (Task task: tl.todoList) {
             todoWriter.write(task.splitToString());
         }
         todoWriter.close();
