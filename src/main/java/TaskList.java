@@ -15,6 +15,7 @@ public class TaskList {
 
     /**
      * Creates a list of tasks.
+     * 
      * @param taskList List of tasks.
      */
     public TaskList(ArrayList<Task> taskList) {
@@ -23,8 +24,9 @@ public class TaskList {
 
     /**
      * Gets the task at a specific index from the list.
+     * 
      * @param index Index of task item in the list.
-     * @return
+     * @return Task item according to the index.
      */
     public Task getTask(int index) {
         return this.taskList.get(index);
@@ -32,6 +34,7 @@ public class TaskList {
 
     /**
      * Adds a task to the list.
+     * 
      * @param task Task that needs to be added.
      */
     public void addTask(Task task) {
@@ -40,6 +43,7 @@ public class TaskList {
 
     /**
      * Deletes a task at a specific index from the list.
+     * 
      * @param index Index of task item in the list.
      */
     public void deleteTask(int index) {
@@ -48,6 +52,7 @@ public class TaskList {
 
     /**
      * Gets the size of list.
+     * 
      * @return Size of list.
      */
     public int getSize() {
@@ -56,6 +61,7 @@ public class TaskList {
 
     /**
      * Gets the list of tasks.
+     * 
      * @return List of tasks.
      */
     public ArrayList<Task> getTaskList() {

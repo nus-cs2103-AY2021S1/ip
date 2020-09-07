@@ -5,6 +5,7 @@ public class Todo extends Task {
 
     /**
      * Creates To-do object. 
+     * 
      * @param description To-do description.
      */
     public Todo(String description) {
@@ -13,6 +14,7 @@ public class Todo extends Task {
 
     /**
      * Creates To-do object.
+     * 
      * @param done Done state of task.
      * @param description To-do description.
      */

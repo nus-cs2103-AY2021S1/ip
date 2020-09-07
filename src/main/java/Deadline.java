@@ -9,6 +9,7 @@ public class Deadline extends Task {
 
     /**
      * Creates Deadline object.
+     * 
      * @param description Task description.
      * @param by Deadline of task.
      */
@@ -20,6 +21,7 @@ public class Deadline extends Task {
 
     /**
      * Creates Deadline object.
+     * 
      * @param done Done state of task.
      * @param description Task description.
      * @param by Deadline of task.

@@ -7,6 +7,7 @@ public class Task {
 
     /**
      * Creates task.
+     * 
      * @param description Task description.
      */
     public Task(String description) {
@@ -16,6 +17,7 @@ public class Task {
 
     /**
      * Checks whether the task is done.
+     * 
      * @return Unicode character.
      */
     public String getStatusIcon() {
@@ -24,6 +26,7 @@ public class Task {
     
     /**
      * Checks whether the task is done.
+     * 
      * @return Integer that represents done state.
      */
     public int doneState() {
@@ -32,6 +35,7 @@ public class Task {
 
     /**
      * Gets task description.
+     * 
      * @return Task description.
      */
     public String getDescription() {

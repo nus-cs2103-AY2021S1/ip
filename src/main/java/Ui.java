@@ -4,6 +4,7 @@
 public class Ui {
     /**
      * Greets user when Duke bot is activated.
+     * 
      * @return Duke response message.
      */
     public String printGreet() {
@@ -17,6 +18,7 @@ public class Ui {
 
     /**
      * Prints response message on user inputs.
+     * 
      * @param string Response message by Duke bot.
      */
     public void printLine(String string) {
@@ -25,6 +27,7 @@ public class Ui {
 
     /**
      * Draws border on top and bottom of the response message.
+     * 
      * @param string Response message by Duke bot.
      * @return Response message with border.
      */
@@ -35,6 +38,7 @@ public class Ui {
 
     /**
      * Prints bye message to user.
+     * 
      * @return Duke response message for bye.
      */
     public String printBye() {
@@ -43,6 +47,7 @@ public class Ui {
 
     /**
      * Prints message when a task is added.
+     * 
      * @param task Task that is added.
      * @param lst List of tasks.
      * @return Duke response message when user adds task.
@@ -55,6 +60,7 @@ public class Ui {
 
     /**
      * Prints message when a task is marked as done.
+     * 
      * @param task Task that is marked as done.
      * @return Duke response message when a task is done.
      */
@@ -65,6 +71,7 @@ public class Ui {
 
     /**
      * Prints message when a task is deleted.
+     * 
      * @param task Task that needs to be deleted.
      * @param lst List of tasks.
      * @return Duke response message when a task is deleted.
@@ -77,6 +84,7 @@ public class Ui {
 
     /**
      * Prints the full list of tasks.
+     * 
      * @param lst List of tasks.
      * @return Duke response message of tasks in the list.
      */
@@ -86,6 +94,7 @@ public class Ui {
 
    /**
      * Prints error messages.
+    * 
      * @param err Error message.
      * @return Duke response message for an error.
      */
@@ -95,6 +104,7 @@ public class Ui {
 
     /**
      * Prints matching tasks that contains the keyword entered by user.
+     * 
      * @param lst List of tasks.
      * @return Duke response message of matching tasks.
      */

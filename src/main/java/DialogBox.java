@@ -25,6 +25,7 @@ public class DialogBox extends HBox {
 
     /**
      * Creates dialog box object.
+     * 
      * @param text User input or response message from Duke.
      * @param img Image of user or Duke.
      */
@@ -55,9 +56,10 @@ public class DialogBox extends HBox {
 
     /**
      * Create dialog box for user.
+     * 
      * @param text User input.
      * @param img User image.
-     * @return
+     * @return Dialog box containing user input.
      */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
@@ -65,9 +67,10 @@ public class DialogBox extends HBox {
 
     /**
      * Create dialog box for Duke.
+     * 
      * @param text Duke's response message.
      * @param img Duke image.
-     * @return
+     * @return Dialog box containing Duke's response message.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
