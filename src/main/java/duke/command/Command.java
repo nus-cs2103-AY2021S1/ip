@@ -12,7 +12,7 @@ import java.util.List;
  * Corresponds to commands the users wants to execute.
  */
 public abstract class Command {
-    protected List<String> aliases;
+    protected static List<String> aliases;
 
 
     /**
@@ -24,4 +24,13 @@ public abstract class Command {
      * @throws DukeException Throws DukeException which must be caught by the method.
      */
     public abstract void execute(TaskList tasks, Ui ui, DukeFileHandler fileHandler) throws DukeException;
+
+    public static boolean containsKeyword(String commandKeyword) {
+        for (String alias : aliases) {
+            if (alias.equals(commandKeyword)) {
+                return true;
+            }
+        }
+        return false;
+    }
 }
