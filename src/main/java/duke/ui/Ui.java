@@ -11,9 +11,7 @@ import java.util.List;
 
 public class Ui {
     // String constants
-    private static final String INDENT = "\t";
-    private static final String LINE_BREAK = "_".repeat(70);
-    private static final String WELCOME_MESSAGE = "Hello! I'm Orang. "
+    private static final String WELCOME_MESSAGE = "Hello! I'm Duke. "
             + "What can I do for you?";
 
     /**
@@ -22,7 +20,7 @@ public class Ui {
      * @return the welcome message
      */
     public String greeting() {
-        return output(WELCOME_MESSAGE);
+        return outputString(WELCOME_MESSAGE);
     }
 
     /**
@@ -32,7 +30,7 @@ public class Ui {
      * @param strings the list of strings to be processed
      * @return the processed string
      */
-    public String output(List<String> strings) {
+    public String outputString(List<String> strings) {
         return strings.stream().reduce("", (x, y) -> x + y + "\n");
     }
 
@@ -43,7 +41,7 @@ public class Ui {
      * @param strings the array of strings to be processed
      * @return the processed string
      */
-    public String output(String ...strings) {
-        return output(Arrays.asList(strings));
+    public String outputString(String ...strings) {
+        return outputString(Arrays.asList(strings));
     }
 }

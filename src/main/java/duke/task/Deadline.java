@@ -1,12 +1,12 @@
-/**
- * Encapsulates the idea of deadlines, tasks that need to
- * be done before a specific time. Thus it inherits from Task
- */
 package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Encapsulates the idea of deadlines, tasks that need to
+ * be done before a specific time. Thus it inherits from Task
+ */
 public class Deadline extends Task {
 
     // constants
@@ -47,7 +47,7 @@ public class Deadline extends Task {
     }
 
     // private helper for returning formatted dates
-    private String[] format(LocalDateTime date) {
+    private String[] formatDate(LocalDateTime date) {
         return date.format(DATABASE_DATE_TIME_FORMAT).split(" ");
     }
 
@@ -55,11 +55,11 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         return String.format("[%s][%s] %s (by: %s)", TYPE, getStateLabel(),
-                getDesc(), format(date)[0] + " " + format(date)[1]);
+                getDesc(), formatDate(date)[0] + " " + formatDate(date)[1]);
     }
     @Override
     public String databaseRep() {
         return TYPE + " | " + super.databaseRep() + " | "
-                + format(date)[0] + " " + format(date)[1];
+                + formatDate(date)[0] + " " + formatDate(date)[1];
     }
 }

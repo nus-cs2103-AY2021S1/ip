@@ -1,12 +1,12 @@
-/**
- * Encapsulates the idea of events, tasks that start
- * and end at specific times. Thus it inherits from Task
- */
 package duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * Encapsulates the idea of events, tasks that start
+ * and end at specific times. Thus it inherits from Task
+ */
 public class Event extends Task {
 
     // constants
@@ -46,7 +46,7 @@ public class Event extends Task {
     }
 
     // private helper for returning formatted dates
-    private String[] format(LocalDateTime date) {
+    private String[] formatDate(LocalDateTime date) {
         return date.format(DATABASE_DATE_TIME_FORMAT).split(" ");
     }
 
@@ -54,11 +54,11 @@ public class Event extends Task {
     @Override
     public String toString() {
         return String.format("[%s][%s] %s (at: %s)", TYPE, getStateLabel(),
-                getDesc(), format(date)[0] + " " + format(date)[1]);
+                getDesc(), formatDate(date)[0] + " " + formatDate(date)[1]);
     }
     @Override
     public String databaseRep() {
         return TYPE + " | " + super.databaseRep() + " | "
-                + format(date)[0] + " " + format(date)[1];
+                + formatDate(date)[0] + " " + formatDate(date)[1];
     }
 }

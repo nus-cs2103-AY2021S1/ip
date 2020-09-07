@@ -4,9 +4,9 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-public class Exit implements Executable {
+public class ExitCommand implements Executable {
 
-    // constants
+    // constant
     private static final String EXIT_MESSAGE = "Bye. "
             + "Hope to see you again soon!";
 
@@ -20,6 +20,6 @@ public class Exit implements Executable {
      */
     @Override
     public String run(TaskList tasks, Ui ui, Storage store) {
-        return ui.output(EXIT_MESSAGE);
+        return ui.outputString(EXIT_MESSAGE);
     }
 }

@@ -1,11 +1,11 @@
-/**
- * A custom checked exception class to represent
- * exceptions specific to Duke
- */
 package duke;
 
 import duke.task.Task;
 
+/**
+ * A custom checked exception class to represent
+ * exceptions specific to Duke
+ */
 public class DukeException extends Exception {
 
     // message constants

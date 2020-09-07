@@ -6,7 +6,7 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-public class Find implements Executable {
+public class FindCommand implements Executable {
 
     // constants
     private static final String FIND_MESSAGE = "Here are the tasks that match "
@@ -16,7 +16,7 @@ public class Find implements Executable {
     private String keyword;
 
     // constructor
-    public Find(String keyword) {
+    public FindCommand(String keyword) {
         this.keyword = keyword;
     }
 
@@ -32,11 +32,11 @@ public class Find implements Executable {
     @Override
     public String run(TaskList tasks, Ui ui, Storage store) {
         if (tasks.isEmpty()) {
-            return ui.output("The list is empty");
+            return ui.outputString("The list is empty");
         } else {
             List<String> enumeration = tasks.filter(keyword).enumerate();
             enumeration.add(0, FIND_MESSAGE);
-            return ui.output(enumeration);
+            return ui.outputString(enumeration);
         }
     }
 }

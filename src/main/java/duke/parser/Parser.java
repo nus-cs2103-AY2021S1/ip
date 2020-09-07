@@ -1,27 +1,27 @@
-/**
- * This class contains functionality that deals with making sense of user input
- */
 package duke.parser;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 import duke.DukeException;
-import duke.exec.Add;
-import duke.exec.Delete;
-import duke.exec.Done;
+import duke.exec.AddCommand;
+import duke.exec.DeleteCommand;
+import duke.exec.DoneCommand;
 import duke.exec.Executable;
-import duke.exec.Exit;
-import duke.exec.Find;
-import duke.exec.Listing;
+import duke.exec.ExitCommand;
+import duke.exec.FindCommand;
+import duke.exec.ListCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+/**
+ * This class contains functionality that deals with making sense of user input
+ */
 public class Parser {
 
-    // Command constants for the bot
+    // command constants for the bot
     private static final String EXIT_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
     private static final String DONE_COMMAND = "done";
@@ -40,7 +40,7 @@ public class Parser {
      *
      * @param input the raw user input
      * @return the Executable obtained from parsing the input
-     * @throws DukeException if encountered command is
+     * @throws DukeException if encountered command has errors
      */
     public static Executable parse(String input) throws DukeException {
         String[] tokens = input.split("\\s+", 2); // the command and remaining details
@@ -57,13 +57,13 @@ public class Parser {
             if (remaining != null) {
                 throw DukeException.unspecificCommand();
             }
-            return new Listing();
+            return new ListCommand();
         case TODO_COMMAND:
             if (remaining == null) {
                 throw DukeException.emptyDescription(); // empty description
             }
             task = new Todo(remaining);
-            return new Add(task);
+            return new AddCommand(task);
         case DEADLINE_COMMAND:
             if (remaining == null) {
                 throw DukeException.emptyDescription(); // empty description
@@ -78,7 +78,7 @@ public class Parser {
 
             LocalDateTime deadline = LocalDateTime.parse(taskItems[1].trim(), DATE_TIME_PARSE_FORMAT);
             task = new Deadline(desc, deadline);
-            return new Add(task);
+            return new AddCommand(task);
         case EVENT_COMMAND:
             if (remaining == null) {
                 throw DukeException.emptyDescription(); // empty description
@@ -93,30 +93,30 @@ public class Parser {
 
             LocalDateTime eventDate = LocalDateTime.parse(taskItems[1].trim(), DATE_TIME_PARSE_FORMAT);
             task = new Event(desc, eventDate);
-            return new Add(task);
+            return new AddCommand(task);
         case DONE_COMMAND:
             if (remaining == null) {
                 throw DukeException.invalidNumber();
             }
             index = Integer.parseInt(remaining) - 1;
-            return new Done(index);
+            return new DoneCommand(index);
         case DELETE_COMMAND:
             if (remaining == null) {
                 throw DukeException.invalidNumber();
             }
             index = Integer.parseInt(remaining) - 1;
-            return new Delete(index);
+            return new DeleteCommand(index);
         case FIND_COMMAND:
             if (remaining == null) {
                 throw DukeException.missingParameters();
             }
             desc = remaining;
-            return new Find(desc);
+            return new FindCommand(desc);
         case EXIT_COMMAND:
             if (remaining != null) {
                 throw DukeException.unspecificCommand();
             }
-            return new Exit();
+            return new ExitCommand();
         default:
             throw DukeException.unknownOperation();
         }
