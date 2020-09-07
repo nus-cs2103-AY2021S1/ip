@@ -85,7 +85,7 @@ public class Ui {
                 toReturn += find(taskDetails);
 
             } else {
-
+                assert false;
             }
 
             storage.addData(list.getList());
