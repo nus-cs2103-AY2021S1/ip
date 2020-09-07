@@ -26,7 +26,7 @@ public class Ui {
      *
      * @return an error message
      */
-    public static String commandError() {
+    public static String showCommandError() {
         return "Sorry, I do not know what that means :(";
     }
 
@@ -35,7 +35,7 @@ public class Ui {
      *
      * @return an error message
      */
-    public static String fileError() {
+    public static String showFileError() {
         return "Oops! Something went wrong :(";
     }
 
@@ -44,7 +44,7 @@ public class Ui {
      *
      * @return an error message
      */
-    public static String listError() {
+    public static String showListError() {
         return "There is no task in the list :)";
     }
 
@@ -54,7 +54,7 @@ public class Ui {
      * @param msg the message given
      * @return the message given
      */
-    public static String userMessage(String msg) {
+    public static String showMessage(String msg) {
         return msg;
     }
 
@@ -73,7 +73,7 @@ public class Ui {
             message += "\nNow you have " + size + " tasks in the list.";
             return message;
         } catch (IOException e) {
-            return Ui.fileError();
+            return Ui.showFileError();
         }
     }
 
@@ -121,7 +121,7 @@ public class Ui {
             message += "\nNow you have " + size + " tasks in the list.";
             return message;
         } catch (IOException e) {
-            return Ui.fileError();
+            return Ui.showFileError();
         }
     }
 

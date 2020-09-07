@@ -25,7 +25,7 @@ public class Command {
             } else if (Parser.isExit(line)) { // exit command
                 return Ui.exit();
             } else if (Parser.isList(line)) { // list command
-                return Ui.userMessage(TaskList.printList());
+                return Ui.showMessage(TaskList.printList());
             } else if (Parser.isDone(line)) { // done command
                 int index = Integer.parseInt(line.substring(5));
                 return Ui.showDone(TaskList.setDone(index));
@@ -46,11 +46,11 @@ public class Command {
                 return Ui.showAdd(task);
             }
         } catch (IOException e) {
-            return Ui.fileError();
+            return Ui.showFileError();
         } catch (NullListException e) {
-            return Ui.listError();
+            return Ui.showListError();
         } catch (Exception e) {
-            return Ui.commandError();
+            return Ui.showCommandError();
         }
     }
 

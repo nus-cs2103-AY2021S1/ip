@@ -74,7 +74,7 @@ public class Storage {
     }
 
     /**
-     * Adds parameters of a task to the storage file
+     * Adds a task to the storage file given its parameters
      *
      * @param type task type
      * @param done whether the task is done (0 for undone, 1 for done)

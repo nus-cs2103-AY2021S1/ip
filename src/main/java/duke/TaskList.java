@@ -103,20 +103,14 @@ public class TaskList {
         }
         StringBuilder sb = new StringBuilder();
         int count = 1;
-        boolean isFound = false;
         for (int i = 1; i <= size; i++) {
             String task = taskList.get(i - 1).toString();
             if (task.contains(word)) {
                 sb.append("\n").append(count).append(". ").append(task);
-                isFound = true;
                 count++;
             }
         }
-        if (!isFound) {
-            return "";
-        } else {
-            return sb.toString();
-        }
+        return sb.toString();
     }
 
     /**
