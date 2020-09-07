@@ -44,6 +44,7 @@ public class TaskList {
      * @return Integer index value.
      */
     public int getIndex(Task task) {
+        assert task != null : "There is not task to get index from.";
         return tasks.indexOf(task);
     }
 

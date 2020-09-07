@@ -82,7 +82,11 @@ public class Storage {
                 String[] taskBreakdown = task.split("\\|");
 
                 String type = taskBreakdown[0].strip();
+                assert type == "T" || type == "D" || type == "E" : "Task type is wrong.";
+
                 String isDone = taskBreakdown[1].strip();
+                assert isDone == "1" || isDone == "0" : "There should not be other numbers.";
+
                 String description = taskBreakdown[2].strip();
                 switch (type) {
                 case "T":
