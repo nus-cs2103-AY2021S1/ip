@@ -34,10 +34,14 @@ public class TaskList {
      * @return String representation of the Task object that is deleted
      */
     public String deleteTask(int taskNumber) {
-        int i = taskNumber - 1;
-        Task removedTask = this.tasklist.get(i);
-        this.tasklist.remove(i);
-        this.taskPriority.remove(removedTask);
+        assert !taskPriority.isEmpty() : "Cannot delete from an Empty Tasklist";
+        Task removedTask = null;
+        for (int i = 0; i < taskNumber; i++) {
+            removedTask = taskPriority.poll();
+        }
+        this.tasklist.remove(removedTask);
+        this.taskPriority.clear();
+        refillTaskPriorityQueue();
         return removedTask.toString();
     }
 
@@ -47,11 +51,13 @@ public class TaskList {
      * @return String representation of the Task object that is updated
      */
     public String updateTask(int taskNumber) {
-        int i = taskNumber - 1;
-        Task updatedTask = this.tasklist.get(i);
-        this.taskPriority.remove(updatedTask);
+        assert !taskPriority.isEmpty() : "Cannot delete from an Empty Tasklist";
+        Task updatedTask = null;
+        for (int i = 0; i < taskNumber; i++) {
+            updatedTask = taskPriority.poll();
+        }
         updatedTask.setDone();
-        this.taskPriority.add(updatedTask);
+        refillTaskPriorityQueue();
         return updatedTask.toString();
     }
 
@@ -61,6 +67,7 @@ public class TaskList {
      */
     public void refreshTasklist() {
         this.tasklist = new ArrayList<>();
+        this.taskPriority.clear();
     }
 
     /**
@@ -94,5 +101,14 @@ public class TaskList {
      */
     public static TaskList createTaskList() {
         return new TaskList();
+    }
+
+    /**
+     *
+     */
+    public void refillTaskPriorityQueue() {
+        for (int i = 0; i < getListSize(); i++) {
+            this.taskPriority.add(this.getTask(i));
+        }
     }
 }

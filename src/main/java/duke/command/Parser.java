@@ -4,7 +4,6 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.PriorityQueue;
 
 import duke.storage.Storage;
 import duke.task.Deadline;
@@ -93,12 +92,14 @@ public class Parser {
             StringBuilder stringBuilder = new StringBuilder();
             stringBuilder.append("Here are the matching tasks in your list: \n");
             for (int i = 0; i < taskList.getListSize(); i++) {
-                if (taskList.getTask(i).getTask().contains(key)) {
+                Task currentTask = taskList.getTask();
+                if (currentTask.getTask().contains(key)) {
                     String findResponse = counter + "." + taskList.getTask(i).toString() + "\n";
                     stringBuilder.append(findResponse);
                     counter++;
                 }
             }
+            taskList.refillTaskPriorityQueue();
             stringBuilder.append(Ui.showLine());
             return stringBuilder.toString();
         } catch (Exception e) {
@@ -115,10 +116,7 @@ public class Parser {
             String listResponse = index + "." + currentTask.toString() + "\n";
             stringBuilder.append(listResponse);
         }
-        for (int i = 0; i < taskList.getListSize(); i++) {
-            PriorityQueue<Task> taskPriorityQueue = taskList.getTaskPriorityQueue();
-            taskPriorityQueue.add(taskList.getTask(i));
-        }
+        taskList.refillTaskPriorityQueue();
         stringBuilder.append(Ui.showLine());
         return stringBuilder.toString();
     }
