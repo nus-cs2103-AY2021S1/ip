@@ -18,12 +18,12 @@ public class TaskList {
 
     /**
      * updating the taskList from the database if file is found
-     * @param s
+     * @param listOfTask to be created.
      */
-    TaskList(List<String> s) {
+    TaskList(List<String> listOfTask) {
         this.tasks = new ArrayList<>();
-        for (int i = 0; i < s.size(); i++) {
-            addTaskFromFile(s.get(i), tasks);
+        for (int i = 0; i < listOfTask.size(); i++) {
+            addTaskFromFile(listOfTask.get(i), tasks);
         }
     }
 
