@@ -39,7 +39,7 @@ public class TaskList {
     // Overrides toString() method of Object Class to display contents of list neatly
     @Override
     public String toString() {
-        String msg = ". . . list is currently empty . . .";  // Default message given empty list
+        String msg = ". . . list is currently empty . . .";  //Default message given empty list
         if (!this.lst.isEmpty()) {
             int i = 1;
             msg = ((i) + ". " + this.getTask(i) + "\n");

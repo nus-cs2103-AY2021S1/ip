@@ -1,6 +1,4 @@
 
-import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -8,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.FileAlreadyExistsException;
 import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 /**
  * The {@code Storage} class stores and retrieves tasks.
@@ -26,6 +26,9 @@ public class Storage {
             Files.createDirectories(path);
             file = new File("data/list.txt");
             file.createNewFile();
+
+            assert file.exists() : "file should exist";
+
         } catch (FileAlreadyExistsException e) {
             // the directory already exists.
         } catch (IOException e) {
@@ -65,6 +68,9 @@ public class Storage {
             System.out.println("Something went wrong here");
         }
         if (arr[1].equals("\u2713")) {
+
+            assert t != null : "t should not be null";
+
             t.markAsDone();
         }
         return t;

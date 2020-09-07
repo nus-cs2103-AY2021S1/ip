@@ -31,7 +31,7 @@ public class Ui {
      * @return Greetings.
      */
     public String greet() {
-        return "              █████████\n"
+        return "                   █████████\n"
             + "  ███████          ███        ███\n"
             + "  █      █       ███             ███\n"
             + "   █      █    ██                   ██\n"
@@ -63,7 +63,7 @@ public class Ui {
      * @param input {@code String} that is formatted and printed.
      */
     public void print(String input) {
-        System.out.println(this.div() +
-            "\t" + input + this.div());
+        System.out.println(this.div()
+            + "\t" + input + this.div());
     }
 }
