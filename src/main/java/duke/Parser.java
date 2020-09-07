@@ -7,20 +7,20 @@ import java.util.ArrayList;
  */
 public class Parser {
     private static Ui ui = new Ui();
-    private final static String EMPTY_COMMAND = "";
-    private final static String BYE_COMMAND = "bye";
-    private final static String LIST_COMMAND = "list";
-    private final static String DONE_COMMAND = "done";
-    private final static String DELETE_COMMAND = "delete";
-    private final static String FIND_COMMAND = "find";
-    private final static String NEW_TODO_COMMAND = "todo";
-    private final static String NEW_DEADLINE_COMMAND = "deadline";
-    private final static String NEW_EVENT_COMMAND = "event";
+    private static final String EMPTY_COMMAND = "";
+    private static final String BYE_COMMAND = "bye";
+    private static final String LIST_COMMAND = "list";
+    private static final String DONE_COMMAND = "done";
+    private static final String DELETE_COMMAND = "delete";
+    private static final String FIND_COMMAND = "find";
+    private static final String NEW_TODO_COMMAND = "todo";
+    private static final String NEW_DEADLINE_COMMAND = "deadline";
+    private static final String NEW_EVENT_COMMAND = "event";
 
-    private final static int TODO_DESCRIPTION_START_INDEX = 5;
-    private final static int DEADLINE_DESCRIPTION_START_INDEX = 9;
-    private final static int EVENT_DESCRIPTION_START_INDEX = 6;
-    private final static int DATE_START_INDEX = 4;
+    private static final int TODO_DESCRIPTION_START_INDEX = 5;
+    private static final int DEADLINE_DESCRIPTION_START_INDEX = 9;
+    private static final int EVENT_DESCRIPTION_START_INDEX = 6;
+    private static final int DATE_START_INDEX = 4;
 
     /**
      * Executes a done command.

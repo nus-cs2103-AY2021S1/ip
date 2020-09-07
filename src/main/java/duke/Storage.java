@@ -10,16 +10,17 @@ import java.util.Scanner;
  * Deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
+    private static final char TODO = 'T';
+    private static final char DEADLINE = 'D';
+    private static final char EVENT = 'E';
+    private static final char DONE = 'O';
+    private static final char NOT_DONE = 'X';
+    private static final int START_OF_TASK_NAME = 7;
+    private static final int DONE_OR_NOT = 4;
+    private static final int START_OF_DATE = 4;
+
     private String filePath;
     private Scanner scanner;
-    private final char TODO = 'T';
-    private final char DEADLINE = 'D';
-    private final char EVENT = 'E';
-    private final char DONE = 'O';
-    private final char NOT_DONE = 'X';
-    private final int START_OF_TASK_NAME = 7;
-    private final int DONE_OR_NOT = 4;
-    private final int START_OF_DATE = 4;
 
     public Storage(String filePath) {
         this.filePath = filePath;
