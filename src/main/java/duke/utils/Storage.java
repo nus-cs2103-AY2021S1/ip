@@ -12,7 +12,6 @@ import duke.tasks.TaskList;
 import duke.types.TaskType;
 import duke.ui.AlertBox;
 import duke.ui.Messenger;
-import javafx.scene.control.Label;
 
 
 /**
