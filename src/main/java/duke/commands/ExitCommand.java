@@ -11,6 +11,14 @@ public class ExitCommand extends Command {
         return true;
     }
 
+    /**
+     * Exits the programme and saves the data.
+     *
+     * @param tasks
+     * @param ui
+     * @param storage
+     * @return
+     */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         storage.saveFile(tasks);
         String output = ui.displayBye();

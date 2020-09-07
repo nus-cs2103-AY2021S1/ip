@@ -20,6 +20,14 @@ public class AddCommand extends Command {
         this.date = date;
     }
 
+    /**
+     * Adds specific type of task into tasklist.
+     *
+     * @param tasks tasklist object.
+     * @param ui Ui object.
+     * @param storage Storage object.
+     * @return a string of addTask message.
+     */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         String output = "";
         switch (type) {
