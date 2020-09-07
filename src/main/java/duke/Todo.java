@@ -9,12 +9,16 @@ public class Todo extends Task {
         super(isComplete, index, instructions);
     }
 
+    public Todo(boolean isComplete, int index, String instructions, String tag) {
+        super(isComplete, index, instructions, tag);
+    }
+
     @Override
     public String toString() {
         if (this.isComplete) {
-            return "[T][✓] " + this.instructions;
+            return "[T][✓] " + this.instructions + printTag();
         } else {
-            return "[T][✗] " + this.instructions;
+            return "[T][✗] " + this.instructions + printTag();
         }
     }
 }

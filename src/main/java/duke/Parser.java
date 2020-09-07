@@ -26,31 +26,31 @@ public class Parser {
         String command = fullCommand.split("\\s+")[0];
         switch (command) {
         case "bye":
-            parsedCommand = new ByeCommand(command, list, storage);
+            parsedCommand = new ByeCommand(fullCommand, list, storage);
             break;
         case "list":
-            parsedCommand = new ListCommand(command, list, storage);
+            parsedCommand = new ListCommand(fullCommand, list, storage);
             break;
         case "delete":
-            parsedCommand = new DeleteCommand(command, list, storage);
+            parsedCommand = new DeleteCommand(fullCommand, list, storage);
             break;
         case "done":
-            parsedCommand = new DoneCommand(command, list, storage);
+            parsedCommand = new DoneCommand(fullCommand, list, storage);
             break;
         case "todo":
-            parsedCommand = new TodoCommand(command, list, storage);
+            parsedCommand = new TodoCommand(fullCommand, list, storage);
             break;
         case "deadline":
-            parsedCommand = new DeadlineCommand(command, list, storage);
+            parsedCommand = new DeadlineCommand(fullCommand, list, storage);
             break;
         case "event":
-            parsedCommand = new EventCommand(command, list, storage);
+            parsedCommand = new EventCommand(fullCommand, list, storage);
             break;
         case "find":
-            parsedCommand = new FindCommand(command, list, storage);
+            parsedCommand = new FindCommand(fullCommand, list, storage);
             break;
         default:
-            parsedCommand = new InvalidCommand(command, list, storage);
+            parsedCommand = new InvalidCommand(fullCommand, list, storage);
             break;
         }
         return parsedCommand;

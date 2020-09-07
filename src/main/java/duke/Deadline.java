@@ -22,14 +22,27 @@ public class Deadline extends Task {
     }
 
     /**
-     * Constructor for Deadline object
+     * Constructor for Deadline object with tag
+     * @param isComplete Boolean to indicate if deadline is complete
+     * @param index Index position of Task in TaskList
+     * @param instructions Task description
+     * @param date Deadline
+     * @param tag Hashtag
+     */
+    public Deadline(boolean isComplete, int index, String instructions, String date, String tag) {
+        super(isComplete, index, instructions, tag);
+        this.date = parseTime(date);
+    }
+
+    /**
+     * Constructor for Deadline object passing in LocalDate as parameter.
      * @param isComplete Boolean to indicate if deadline is complete
      * @param index Index position of Task in TaskList
      * @param instructions Task description
      * @param date Deadline in LocalDate form
      */
-    public Deadline(boolean isComplete, int index, String instructions, LocalDate date) {
-        super(isComplete, index, instructions);
+    public Deadline(boolean isComplete, int index, String instructions, LocalDate date, String tag) {
+        super(isComplete, index, instructions, tag);
         this.date = date;
     }
 
@@ -51,9 +64,9 @@ public class Deadline extends Task {
     public String toString() {
         DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("d MMM yyyy");
         if (this.isComplete) {
-            return "[D][✓] " + this.instructions + " (by: " + outputFormatter.format(this.date) + ")";
+            return "[D][✓] " + this.instructions + " (by: " + outputFormatter.format(this.date) + ")" + printTag();
         } else {
-            return "[D][✗] " + this.instructions + " (by: " + outputFormatter.format(this.date) + ")";
+            return "[D][✗] " + this.instructions + " (by: " + outputFormatter.format(this.date) + ")" + printTag();
         }
     }
 }

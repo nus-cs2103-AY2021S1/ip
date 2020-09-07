@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.Deadline;
+import duke.Event;
 import duke.Storage;
 import duke.TaskList;
 
@@ -24,12 +25,21 @@ public class DeadlineCommand extends Command {
     public String execute(String command, TaskList list, Storage storage) {
         try {
             String horizontalLine = "____________________________________\n";
-            String instructions = command.substring(9);
-            String[] arr = instructions.split("/by");
-            instructions = arr[0].substring(0, arr[0].length() - 1);
-            String date = arr[1].substring(1);
+            String[] commandArr = command.split("\\s+");
+            String instructions = commandArr[1];
+            String date = commandArr[3];
+            Deadline deadline;
             int counter = list.getList().size();
-            list.addTask(counter, new Deadline(false, counter + 1, instructions, date));
+            if (commandArr.length == 5) {
+                String tag = commandArr[4];
+                if (!tag.startsWith("#")) {
+                    return Warnings.invalidTagWarning();
+                }
+                deadline = new Deadline(false, counter + 1, instructions, date, tag);
+            } else {
+                deadline = new Deadline(false, counter + 1, instructions, date);
+            }
+            list.addTask(counter, deadline);
             storage.writeData(list.getList());
             String taskMessage = list.getList().get(counter).toString();
             return horizontalLine + "Okok. I help you add this task: \n"
