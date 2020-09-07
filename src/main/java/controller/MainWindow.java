@@ -28,7 +28,7 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
     @FXML
     public void initialize() {
@@ -49,6 +49,8 @@ public class MainWindow extends AnchorPane {
                 + "\n- To add a deadline, type: 'deadline <deadline description> /by <dd-mm-yyyy> HHMM'."
                 + "\n- To add an event, type: 'event <event description> /at <dd-mm-yyyy> HHMM'."
                 + "\n- To view all tasks, type: 'list'."
+                + "\n- To mark a task as done, type: 'done <task number>'."
+                + "\n- To delete a task, type: 'delete <task number>'."
                 + "\n- To find tasks, type: 'find <keyword>'."
                 + "\n- To leave me, type: 'bye'.";
         dialogContainer.getChildren().add(
