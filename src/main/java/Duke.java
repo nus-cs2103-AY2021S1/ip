@@ -47,6 +47,6 @@ public class Duke {
      * Runs Duke with the given filePath.
      */
     public static void main(String[] args) {
-        new Duke("C:\\Users\\e0316059\\Desktop\\cs2103 ip\\src\\main\\java\\data\\duke.txt").run();
+        new Duke("C:\\Users\\e0316059\\Desktop\\Duke\\src\\main\\java\\data\\Duke.txt").run();
     }
 }
