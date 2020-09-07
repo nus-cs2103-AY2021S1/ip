@@ -2,9 +2,14 @@
  * Encapsulates messages for interacting with the user.
  */
 
+/**
+ * manages user interfacce interactions
+ */
 public class UI {
-
-    public void showLoadingError(DukeException e){
-        System.out.println(e);
+    public void print(String s){
+        System.out.println(s);
     }
+
+
 }
+
