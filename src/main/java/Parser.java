@@ -13,16 +13,19 @@ public class Parser {
 
                     case "bye": {
                         response += "Bye. Hope to see you again soon!";
+                        break;
                     }
 
                     case "find": {
 
                         response += tasks.findTask(keyword[1]);
+                        break;
                     }
 
                     case "delete": {
                         int index = Integer.parseInt(keyword[1]) - 1;
                         response += tasks.deleteTask(index);
+                        break;
                     }
 
                     case "todo": {
@@ -32,6 +35,7 @@ public class Parser {
                         }
                         Todo newTodo = new Todo(textMessage.substring(5), false);
                         response += tasks.addTask(newTodo);
+                        break;
                     }
 
 
@@ -47,6 +51,7 @@ public class Parser {
                         } catch (Exception e) {
                             throw new InvalidFormatException();
                         }
+                        break;
 
                     }
 
@@ -62,11 +67,18 @@ public class Parser {
                         } catch (Exception e) {
                             throw new InvalidFormatException();
                         }
+                        break;
 
                     }
 
                     case "list": {
                         response += tasks.showList();
+                        break;
+                    }
+
+                    case "stats": {
+                        response += tasks.numberOfTaskCompleted();
+                        break;
                     }
 
                     case "done": {
@@ -74,16 +86,20 @@ public class Parser {
                         tasks.getTasks().get(index).markDone();
                         response += "Nice I've marked this tasks as done";
                         response += tasks.getTasks().get(index);
+                        break;
                     }
 
                     default:
+                        response += "\n"+ ui.inputInstruction();
                         throw new InvalidInputException();
+
                 }
 
             }
             catch (DukeException e) {
                 response += e.getMessage();
             }
+
 
         return response;
     }

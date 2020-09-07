@@ -32,7 +32,7 @@ public class Duke extends Application{
 
     @Override
     public void start(Stage stage) {
-        storage.createDirectory("TestList");
+        storage.createDirectory("TaskList");
 
         Label helloWorld = new Label("Hello World!"); // Creating a new Label control
         Scene scene = new Scene(helloWorld); // Setting the scene to be our Label

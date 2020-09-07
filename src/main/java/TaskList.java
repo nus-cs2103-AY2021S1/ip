@@ -57,4 +57,16 @@ public class TaskList {
         }
         return output;
     }
+
+    public String numberOfTaskCompleted() {
+        int number = 0;
+        String output = "Number of task completed: ";
+        for (Task s : tasks) {
+            if (s.checkDone()){
+                number ++;
+            }
+        }
+        output += number;
+        return output;
+    }
 }
