@@ -28,14 +28,12 @@ public class FindCommand extends Command {
     @Override
     public ArrayList<String> execute(TaskList tasks, Gui gui, Storage storage, ArrayList<String> responseList) {
         ArrayList<Task> listOfTasksFound = new ArrayList<>();
-        ArrayList<Task> list = tasks.getList();
-        list.forEach(task -> {
+        for (Task task : tasks.getList()) {
             if (task.isContain(this.bodyCommand)) {
                 listOfTasksFound.add(task);
             }
-        });
-
+        }
         responseList.addAll(gui.findMessage(listOfTasksFound));
-        return responseList;
+    return responseList;
     }
 }
