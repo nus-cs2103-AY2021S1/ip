@@ -22,6 +22,8 @@ public class ToDo extends Task {
      * @return To_Do task based on input string array.
      */
     public static ToDo parse(String[] txtArray) {
+        assert txtArray[1] != null; //This field should not be empty unless user manually modify TaskList.txt.
+        assert txtArray[2] != null; //This field should not be empty unless user manually modify TaskList.txt.
         ToDo toDo = new ToDo(txtArray[2].trim());
         if (txtArray[1].trim().equals("1")) {
             toDo.markAsDone();

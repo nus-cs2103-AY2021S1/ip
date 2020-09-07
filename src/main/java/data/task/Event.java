@@ -46,6 +46,9 @@ public class Event extends Task {
             this.dateTimeTxt = this.date.format(DateTimeFormatter.ofPattern("d MMMM yyyy"))
                     + " " + this.startTime.format(DateTimeFormatter.ofPattern("hh:mm a")) + " to "
                     + this.endTime.format(DateTimeFormatter.ofPattern("hh:mm a"));
+            //Assertion to check whether startTime and endTime have been correctly parsed
+            assert this.startTime != null;
+            assert this.endTime != null;
         } catch (DateTimeParseException | IndexOutOfBoundsException e) {
             throw new DukeInvalidUserInputException("It seems you have entered an invalid date and time."
                     + " The format should be as follows YYYY-MM-DD hhmm-hhmm.");
@@ -68,6 +71,11 @@ public class Event extends Task {
      *     is found in the input string array.
      */
     public static Event parse(String[] txtArray) throws DukeInvalidUserInputException {
+        //Assertions to check whether the txtArray are of the correct format.
+        assert txtArray[1] != null; //This field should not be empty unless user manually modify TaskList.txt.
+        assert txtArray[2] != null; //This field should not be empty unless user manually modify TaskList.txt.
+        assert txtArray[3] != null; //This field should not be empty unless user manually modify TaskList.txt.
+
         String done = txtArray[1].trim();
         String description = txtArray[2].trim();
         String[] unFormattedDateTime = txtArray[3].trim().split(" ");

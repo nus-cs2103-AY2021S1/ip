@@ -52,6 +52,7 @@ public abstract class Task {
         } else if (firstLetter == 'E') {
             return Event.parse(txtArray);
         } else {
+            assert false; //Code should not reach here as it should be caught as an unknown command in Parser.
             throw new DukeInvalidUserInputException("My apologies but I am not familiar with such a task type.");
         }
     }

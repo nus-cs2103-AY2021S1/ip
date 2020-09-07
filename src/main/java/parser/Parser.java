@@ -79,6 +79,7 @@ public class Parser {
      */
     public static String parseFollowUpCommand(String userInput) {
         String[] userInputArr = userInput.split(" ");
+        assert userInputArr[0] != null;
         return userInputArr[0];
     }
 }

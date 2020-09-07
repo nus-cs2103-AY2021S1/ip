@@ -37,6 +37,7 @@ public class TaskList {
      * @param i index of task to be deleted.
      */
     public Task delete(int i) {
+        assert i >= 0; //Index of arrays cannot be less than zero.
         Task task = this.taskList.get(i - 1);
         this.taskList.remove(i - 1);
         return task;
@@ -48,6 +49,7 @@ public class TaskList {
      * @param i index of task to be marked.
      */
     public Task markDone(int i) {
+        assert i >= 0; //Index of arrays cannot be less than zero.
         Task task = this.taskList.get(i - 1);
         task.markAsDone();
         return task;
@@ -58,6 +60,7 @@ public class TaskList {
     }
 
     public Task getTask(int i) {
+        assert i >= 0; //Index of arrays cannot be less than zero.
         return this.taskList.get(i);
     }
 
@@ -88,6 +91,7 @@ public class TaskList {
     public ArrayList<Task> findTasksDate(String date) {
         ArrayList<Task> result = new ArrayList<>();
         LocalDate inputDate = LocalDate.parse(date);
+        assert inputDate != null; //To ensure inputDate has been correctly parsed.
         for (Task task : this.taskList) {
             if (task instanceof Deadline) {
                 Deadline deadline = (Deadline) task;
