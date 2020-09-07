@@ -6,7 +6,7 @@ public class Ui {
      * Greets user when Duke bot is activated.
      * @return Duke response message.
      */
-    public String greet() {
+    public String printGreet() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
@@ -29,7 +29,7 @@ public class Ui {
      * @return Response message with border.
      */
     public String drawBorder(String string) {
-        String line = "_________________________________________________________________";
+        String line = "__________________________________________________";
         return line + "\n" + string + "\n" + line;
     }
 
@@ -37,8 +37,8 @@ public class Ui {
      * Prints bye message to user.
      * @return Duke response message for bye.
      */
-    public String bye() {
-        return "Bye. Hope to see you again soon!";
+    public String printBye() {
+        return drawBorder("Bye. Hope to see you again soon!");
     }
 
     /**
@@ -48,9 +48,9 @@ public class Ui {
      * @return Duke response message when user adds task.
      */
     public String printAddTask(Task task, TaskList lst) {
-        return "Got it. I've added this task:\n" + "  " 
+        return drawBorder("Got it. I've added this task:\n" + "  " 
                 + task.toString() + "\n" + "Now you have " 
-                + lst.getSize() + " tasks in the list.";
+                + lst.getSize() + " tasks in the list.");
     }
 
     /**
@@ -59,8 +59,8 @@ public class Ui {
      * @return Duke response message when a task is done.
      */
     public String printDoneTask(Task task) {
-        return "Nice! I've marked this task as done: \n" 
-                + "  " + task.toString();
+        return drawBorder("Nice! I've marked this task as done: \n" 
+                + "  " + task.toString());
     }
 
     /**
@@ -70,9 +70,9 @@ public class Ui {
      * @return Duke response message when a task is deleted.
      */
     public String printDeleteTask(Task task, TaskList lst) {
-        return "Noted. I've removed this task:\n" + "  " 
+        return drawBorder("Noted. I've removed this task:\n" + "  " 
                 + task.toString() + "\n" + "Now you have " 
-                + lst.getSize() + " tasks in the list.";
+                + lst.getSize() + " tasks in the list.");
     }
 
     /**
@@ -81,7 +81,7 @@ public class Ui {
      * @return Duke response message of tasks in the list.
      */
     public String printTaskList(TaskList lst) { 
-        return "Here are the tasks in your list:\n" + lst.toString();
+        return drawBorder("Here are the tasks in your list:\n" + lst.toString());
     }
 
    /**
@@ -90,7 +90,7 @@ public class Ui {
      * @return Duke response message for an error.
      */
     public String showError(String err) {
-        return err;
+        return drawBorder(err);
     }
 
     /**
@@ -99,7 +99,7 @@ public class Ui {
      * @return Duke response message of matching tasks.
      */
     public String printMatchingTasks(TaskList lst) {
-        return "Here are the matching tasks in your list:\n" + lst.toString();
+        return drawBorder("Here are the matching tasks in your list:\n" + lst.toString());
 
     }
 }

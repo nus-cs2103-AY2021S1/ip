@@ -1,21 +1,4 @@
-import com.sun.tools.javac.Main;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.scene.shape.Circle;
-import javafx.scene.shape.Rectangle;
-import javafx.stage.Stage;
-
-import java.io.*;
+import java.io.IOException;
 import java.util.Scanner;
 
 /**
@@ -62,7 +45,7 @@ public class Duke {
      * Reads user input then acts accordingly and stores user data.
      */
     public void run() {
-        ui.greet();
+        ui.printGreet();
         Scanner sc = new Scanner(System.in);
         while (sc.hasNext()) {
             //parser.parse(sc.nextLine(), tasks, ui, storage);
