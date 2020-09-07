@@ -3,6 +3,8 @@
 This is a project under the module CS2103t taken in the National University of Singapore.
 
 ## King Chat Bot
+<img>![Java CI](https://github.com/todoge/ip/workflows/Java%20CI/badge.svg)</img>
+
 <strong><u>Instructions to run the app:</u></strong>  
 Download and run the `king.jar` in `release v1.1`.\
 On running the application successfully, you should see the pop-up window.  
