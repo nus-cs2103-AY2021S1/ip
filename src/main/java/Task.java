@@ -18,6 +18,7 @@ public abstract class Task {
         if (name.isBlank()) {
             throw new BlankTaskException(MESSAGE_BLANK_TASK);
         }
+
         this.name = name.strip();
     }
 
