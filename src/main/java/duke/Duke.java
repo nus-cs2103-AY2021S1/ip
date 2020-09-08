@@ -64,6 +64,7 @@ public class Duke {
         while (!isExit) {
             try {
                 String userInput = ui.getInput();
+                assert !userInput.isBlank();
                 Command command = CommandParser.parse(userInput);
                 command.execute(taskList, ui, storage);
                 isExit = command.isExit();
