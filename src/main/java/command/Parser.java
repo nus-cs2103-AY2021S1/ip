@@ -14,7 +14,7 @@ public class Parser {
      */
     public static Command parseCommand(String input) throws CommandException {
         return Stream.of(Command.values())
-                .filter(cmd -> cmd.isHasNoArgs()
+                .filter(cmd -> cmd.hasNoArgs()
                         ? input.equals(cmd.getCmdString())
                         : input.startsWith(cmd.getCmdString()))
                 .findFirst()

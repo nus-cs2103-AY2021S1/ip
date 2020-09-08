@@ -33,7 +33,7 @@ public enum Command {
      * Checks if the command is standalone and has no arguments.
      * @return {@code true} if the command has no arguments
      */
-    public boolean isHasNoArgs() {
+    public boolean hasNoArgs() {
         return hasNoArgs;
     }
 
