@@ -1,5 +1,7 @@
 package dukeclass;
 
+import dukeexception.InvalidInputException;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
