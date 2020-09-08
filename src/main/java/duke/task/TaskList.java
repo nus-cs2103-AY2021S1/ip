@@ -1,6 +1,6 @@
 package duke.task;
 
-import duke.Copiable;
+import duke.storage.Copiable;
 import duke.exceptions.NoSuchTaskException;
 
 import java.util.List;

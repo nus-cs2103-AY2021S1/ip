@@ -1,4 +1,4 @@
-package duke;
+package duke.storage;
 
 /**
  * Implementors can create a copy of themselves containing all their relevant state.

@@ -1,11 +1,11 @@
 package duke.command;
 
-import duke.DukeStateManager;
+import duke.storage.DukeStateManager;
 import duke.task.NumberedTask;
 import duke.task.TaskList;
 import duke.ui.Response;
 import duke.ui.Ui;
-import duke.Storage;
+import duke.storage.Storage;
 
 import java.util.List;
 

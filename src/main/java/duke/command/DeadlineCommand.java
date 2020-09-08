@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.DukeStateManager;
+import duke.storage.DukeStateManager;
 import duke.ui.Response;
 import duke.ui.Ui;
-import duke.Storage;
+import duke.storage.Storage;
 import duke.exceptions.WrongDateFormatException;
 import duke.parser.DateParser;
 import duke.task.Deadline;

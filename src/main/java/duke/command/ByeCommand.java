@@ -1,7 +1,7 @@
 package duke.command;
 
-import duke.DukeStateManager;
-import duke.Storage;
+import duke.storage.DukeStateManager;
+import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.ui.Response;

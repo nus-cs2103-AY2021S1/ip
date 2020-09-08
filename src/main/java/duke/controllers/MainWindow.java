@@ -1,3 +1,5 @@
+package duke.controllers;
+
 import duke.Duke;
 import duke.ui.Response;
 
@@ -16,7 +18,7 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 /**
- * Controller for MainWindow. Provides the layout for the other controls.
+ * Controller for duke.controllers.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
     @FXML
