@@ -8,7 +8,7 @@ import duke.task.Task;
 /**
  * Abstraction for an operation involving adding of tasks to a list of task.
  */
-public abstract class AddTaskCommand extends Command {
+public abstract class AddTaskCommand extends TaskListOperator {
     private static final String MESSAGE_HEAD = "Got it, I have added this task:\n";
     private static final String MESSAGE_MIDDLE = "\nYou now have ";
     private static final String MESSAGE_END = " task(s) in this list";

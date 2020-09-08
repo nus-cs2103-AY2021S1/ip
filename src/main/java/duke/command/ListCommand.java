@@ -5,7 +5,7 @@ import duke.main.TaskList;
 /**
  * Abstraction for the list command.
  */
-public class ListCommand extends Command {
+public class ListCommand extends TaskListOperator {
     private static final String MESSAGE = "Here are the tasks in your list:\n";
 
     /**

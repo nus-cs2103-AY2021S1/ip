@@ -13,7 +13,7 @@ public class ToDo extends Task {
     /**
      * Creates a ToDo object representing the given command.
      *
-     * @param task Command describing the ToDo to be created.
+     * @param task TaskListOperator describing the ToDo to be created.
      * @return ToDo object representing the task description.
      */
     public static ToDo create(String task) {

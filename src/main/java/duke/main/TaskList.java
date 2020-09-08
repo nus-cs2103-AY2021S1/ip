@@ -20,6 +20,11 @@ import duke.task.ToDo;
 public class TaskList {
     private final List<Task> tasks;
 
+    /**
+     * Constructs a new TaskList object by reading the data in the given saved file.
+     *
+     * @param file File representing location of the saved tasks.
+     */
     public TaskList(File file) {
         this.tasks = initTasks(file);
         assert (tasks != null) : "Tasks not initialised";

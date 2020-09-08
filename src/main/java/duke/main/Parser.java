@@ -4,11 +4,12 @@ import duke.command.AddDeadlineCommand;
 import duke.command.AddEventCommand;
 import duke.command.AddToDoCommand;
 import duke.command.ByeCommand;
-import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
+import duke.command.TaskListOperator;
 import duke.exception.InvalidCommandException;
 
 /**
@@ -42,6 +43,8 @@ public class Parser {
             return new ListCommand(taskList).execute();
         } else if (input.equals("bye")) {
             return new ByeCommand(storage, taskList).execute();
+        } else if (input.equals("help")) {
+            return new HelpCommand().execute();
         } else {
             return operateOnTaskList(input);
         }
@@ -56,31 +59,31 @@ public class Parser {
     private String operateOnTaskList(String input) {
         try {
             String keyword = extractCommand(input);
-            Command command;
+            TaskListOperator taskListOperator;
             switch (keyword) {
             case "done":
-                command = new DoneCommand(input.substring(5), taskList);
+                taskListOperator = new DoneCommand(input.substring(5), taskList);
                 break;
             case "delete":
-                command = new DeleteCommand(input.substring(7), taskList);
+                taskListOperator = new DeleteCommand(input.substring(7), taskList);
                 break;
             case "find":
-                command = new FindCommand(input.substring(5), taskList);
+                taskListOperator = new FindCommand(input.substring(5), taskList);
                 break;
             case "todo":
-                command = new AddToDoCommand(input.substring(5), taskList);
+                taskListOperator = new AddToDoCommand(input.substring(5), taskList);
                 break;
             case "event":
-                command = new AddEventCommand(input.substring(5), taskList);
+                taskListOperator = new AddEventCommand(input.substring(5), taskList);
                 break;
             case "deadline":
-                command = new AddDeadlineCommand(input.substring(5), taskList);
+                taskListOperator = new AddDeadlineCommand(input.substring(5), taskList);
                 break;
             default:
                 throw new InvalidCommandException();
             }
 
-            return command.execute();
+            return taskListOperator.execute();
         } catch (InvalidCommandException e) {
             return e.toString();
         }
@@ -91,7 +94,7 @@ public class Parser {
      * This is the first word in the input line.
      *
      * @param input User input.
-     * @return Command word.
+     * @return TaskListOperator word.
      * @throws InvalidCommandException If only one word was provided.
      */
     private String extractCommand(String input) throws InvalidCommandException {
