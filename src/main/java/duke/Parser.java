@@ -49,6 +49,12 @@ public class Parser {
                 int taskNumber = Integer.parseInt(strArr[1]);
                 return taskList.markTaskAsDone(taskNumber);
             }
+            case "tag": {
+                String[] data = strArr[1].split(" ", 2);
+                int taskNumber = Integer.parseInt(data[0]);
+                String tagName = data[1];
+                return taskList.tagTaskInList(taskNumber, tagName);
+            }
             case "delete": {
                 int taskNumber = Integer.parseInt(strArr[1]);
                 if (taskNumber <= taskList.getNumOfTask()) {

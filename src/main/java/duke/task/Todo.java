@@ -24,12 +24,21 @@ public class Todo extends Task {
         } else {
             done = "1";
         }
-        String[] str = new String[]{"T", done, this.getTaskName()};
+        String[] str;
+        if (!this.isTagged()) {
+            str = new String[]{"T", done, this.getTaskName()};
+        } else {
+            str = new String[]{"T", done, this.getTaskName(), this.getTagName()};
+        }
         return str;
     }
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        if (!this.isTagged()) {
+            return "[T]" + super.toString();
+        } else {
+            return "[T]" + super.toString() + " " + this.getTagName();
+        }
     }
 }

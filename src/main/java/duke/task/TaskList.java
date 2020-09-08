@@ -62,6 +62,20 @@ public class TaskList {
     }
 
     /**
+     * Marks the nth task as done.
+     *
+     * @param n Index of the task to be marked as done.
+     */
+    public String tagTaskInList(int n, String tag) {
+        // Asserts that index is within the correct range.
+        assert n <= taskList.size();
+        String message = "Got it! I've tagged this task as: " + tag + "\n";
+        Task task = taskList.get(n - 1);
+        task.addTag(tag);
+        return message;
+    }
+
+    /**
      * Deletes the nth task.
      *
      * @param n Index of the task to be deleted.
