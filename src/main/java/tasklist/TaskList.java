@@ -21,6 +21,7 @@ public class TaskList {
     private String completedTask = "     \\\\(^o^)/ *.*.* \\\\(^o^)/"
             + "\n  Yay! This task has been completed:"
             + "\n  ";
+    private Task deletedItem;
 
     /**
      * It creates a new array list for the todo list and sets the counter to 0.
@@ -71,6 +72,26 @@ public class TaskList {
     }
 
     /**
+     * It marks a completed task as incomplete
+     *
+     * @param input
+     * @return String to be outputted to the user
+     * @throws DukeException
+     */
+    public String unCompleteItem(String input) throws DukeException {
+        String indexString = input.split(" ")[1];
+        try {
+            String output = "";
+            Task item = todoList.get(Integer.valueOf(indexString) - 1);
+            item.unCompleteTask();
+            output += "This task is back to being incomplete:\n" + item.getItem();
+            return output;
+        } catch (Exception e) {
+            throw new DukeException("Oops! Invalid task number. Please try again >.<");
+        }
+    }
+
+    /**
      * It finds the task in the task list based on the number given and deletes it from
      * the list. It then returns the String to be printed for the user to see.
      * It throws a DukeException error if the user gives an invalid input.
@@ -102,9 +123,50 @@ public class TaskList {
     public Task deleteItemFromTodolist(String indexString) {
         int index = Integer.valueOf(indexString) - 1;
         Task item = todoList.get(index);
+        deletedItem = item;
         todoList.remove(index);
         numberOfTasks -= 1;
         return item;
+    }
+
+    /**
+     * Adds the deleted item back to the todolist at its previous index
+     *
+     * @param input
+     * @return String to be outputted to the user
+     * @throws DukeException
+     */
+    public String unDeleteItem(String input) throws DukeException {
+        try {
+            String indexString = input.split(" ")[1];
+            int index = Integer.valueOf(indexString) - 1;
+            todoList.add(index, deletedItem);
+            numberOfTasks += 1;
+            String output = "";
+            output += "  Noted. This task has now been added back to the list:"
+                    + "\n    " + deletedItem.getItem();
+            output += "\n  There are now " + numberOfTasks + " todo items in the list";
+            return output;
+        } catch (Exception e) {
+            throw new DukeException("Oops! Invalid task number. Please try again >.<");
+        }
+    }
+
+    /**
+     * Deletes the last item added to the todolist
+     *
+     * @return String to be outputted to the user
+     */
+    public String deleteLastAddedItem() {
+        int index = numberOfTasks - 1;
+        Task item = todoList.get(index);
+        deletedItem = item;
+        todoList.remove(index);
+        numberOfTasks -= 1;
+        String output = "";
+        output += "  Noted. This task has now been removed from the list:" + "\n    " + item.getItem();
+        output += "\n  There are now " + numberOfTasks + " todo items in the list";
+        return output;
     }
 
     /**

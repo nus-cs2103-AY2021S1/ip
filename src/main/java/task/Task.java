@@ -30,6 +30,13 @@ public class Task {
     }
 
     /**
+     * Sets the task to incomplete(false)
+     */
+    public void unCompleteTask() {
+        this.isCompleted = false;
+    }
+
+    /**
      * It returns the String to be printed to the user containing
      * the details of the task.
      *
