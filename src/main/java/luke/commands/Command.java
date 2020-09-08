@@ -9,6 +9,4 @@ public abstract class Command {
 
     public abstract String execute(Storage storage, TaskList taskList, Ui ui) throws LukeException;
 
-    public abstract boolean isExit();
-
 }

@@ -18,9 +18,4 @@ public class ListCommand extends Command {
     public String execute(Storage storage, TaskList tasks, Ui ui) throws LukeException {
         return ui.showListResult(tasks);
     }
-
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

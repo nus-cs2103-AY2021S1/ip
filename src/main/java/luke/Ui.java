@@ -17,8 +17,9 @@ public class Ui {
         return msg;
     }
 
-    public String showLoadingError() {
-        return "An unexpected error was encountered while loading data file.\nPlease try again.";
+    public void showLoadingError() {
+//        return "An unexpected error was encountered while loading data file.\nPlease try again.";
+        System.out.println("loading error");
     }
 
     public String showAddResult(Task newTask, int numOfTasks) {

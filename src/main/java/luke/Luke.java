@@ -23,29 +23,27 @@ public class Luke {
         try {
             this.tasks = new TaskList(storage.load());
         } catch (LukeException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
+//            ui.showLoadingError();
+            this.tasks = new TaskList();
         }
         this.ui = new Ui();
     }
 
     public String getResponse(String input) {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                Command c = Parser.parseCommand(input);
-                c.execute(storage, tasks, ui);
-                isExit = c.isExit();
-            } catch (LukeException e) {
-                ui.showError(e.getMessage());
-            }
+        try {
+            Command command = Parser.parseCommand(input);
+            return command.execute(storage, tasks, ui);
+        } catch (LukeException e) {
+            ui.showError(e.getMessage());
         }
-        System.exit(0);
         return "";
     }
 
-//    /**
+    public Ui getUi() {
+        return this.ui;
+    }
+
+    //    /**
 //     * Creates a task.Todo object with the given input.
 //     *
 //     * @param input description of the task.Todo object

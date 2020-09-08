@@ -25,9 +25,4 @@ public class AddCommand extends Command {
             throw new LukeException("Please enter a valid date format.");
         }
     }
-
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

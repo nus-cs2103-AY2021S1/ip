@@ -24,9 +24,4 @@ public class DeleteCommand extends Command {
             throw new LukeException("Please enter a valid task number.");
         }
     }
-
-    @Override
-    public boolean isExit() {
-        return false;
-    }
 }

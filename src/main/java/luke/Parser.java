@@ -2,15 +2,16 @@ package luke;
 
 import luke.commands.*;
 import luke.exception.LukeException;
+import luke.exception.LukeUnknownCommandException;
 import luke.task.Deadline;
 import luke.task.Event;
 import luke.task.Task;
 import luke.task.Todo;
 
 import java.time.DateTimeException;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.util.Arrays;
+import java.util.List;
 
 public class Parser {
 
@@ -31,33 +32,33 @@ public class Parser {
     }
 
     public static Command parseCommand(String input) throws LukeException {
-        String commandType = input.substring(0, input.indexOf(" ")).trim();
-        String commandDetails = input.substring(input.indexOf(" ") + 1).trim();
+        List<String> commandSplit = Arrays.asList(input.split(" "));
+        String commandType = commandSplit.get(0);
 
         try {
             switch (commandType) {
             case "list":
                 return new ListCommand();
             case "todo":
-                return new AddCommand(new Todo(commandDetails));
+                return new AddCommand(new Todo(commandSplit.get(1)));
             case "deadline":
-                String[] deadlineDetails = commandDetails.split("/by");
+                String[] deadlineDetails = commandSplit.get(1).split("/by");
                 String deadlineDescription = deadlineDetails[0].trim();
                 LocalDateTime by = LocalDateTime.parse(deadlineDetails[1].trim());
                 return new AddCommand(new Deadline(deadlineDescription, by));
             case "event":
-                String[] eventDetails = commandDetails.split("/at");
+                String[] eventDetails = commandSplit.get(1).split("/at");
                 String eventDescription = eventDetails[0].trim();
                 String at = eventDetails[1].trim();
                 return new AddCommand(new Event(eventDescription, at));
             case "delete":
-                return new DeleteCommand(Integer.parseInt(commandDetails));
+                return new DeleteCommand(Integer.parseInt(commandSplit.get(1)));
             case "done":
-                return new DoneCommand(Integer.parseInt(commandDetails));
+                return new DoneCommand(Integer.parseInt(commandSplit.get(1)));
             case "bye":
                 return new ExitCommand();
             default:
-                throw new LukeException("Sorry I do not understand :( Please try another command.");
+                throw new LukeUnknownCommandException(commandType);
             }
 
         } catch (DateTimeException dateTimeException) {
