@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.DukeException;
 import duke.Ui;
 import duke.tasks.TaskManager;
 import duke.tasks.Todo;
@@ -15,7 +16,7 @@ public class TodoCommand extends Command {
      * @return <code>true</code>
      */
     @Override
-    public boolean execute(String input) {
+    public boolean execute(String input) throws DukeException {
         tm.add(new Todo(input));
         setDone();
         setResponse("Todo added"); // TODO: refactor this

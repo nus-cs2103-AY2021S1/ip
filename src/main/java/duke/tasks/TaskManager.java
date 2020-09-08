@@ -35,7 +35,7 @@ public class TaskManager {
      * Adds a task.
      * @param task the task to be added
      */
-    public void add(Task task) {
+    public void add(Task task) throws DukeException {
         tasks.add(task);
         save();
     }

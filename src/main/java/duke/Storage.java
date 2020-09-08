@@ -30,7 +30,7 @@ public class Storage {
      */
     public List<Task> load() throws DukeException {
         List<Task> tasks = new ArrayList<>();
-        
+
         try {
             File f = new File(TASKS_TEXT_FILE_PATH);
             Scanner sc = new Scanner(f);
@@ -39,21 +39,23 @@ public class Storage {
                 String taskInfo = sc.nextLine();
                 String[] arr = taskInfo.split(",");
                 switch (arr[0]) {
-                    case "T":
-                        Todo t = new Todo(arr[2]);
-                        if (arr[1].equals("1")) t.setCompleted();
-                        tasks.add(t);
-                        break;
-                    case "D":
-                        Deadline d = new Deadline(arr[2], arr[3]);
-                        if (arr[1].equals("1")) d.setCompleted();
-                        tasks.add(d);
-                        break;
-                    case "E":
-                        Event e = new Event(arr[2], arr[3], arr[4]);
-                        if (arr[1].equals("1")) e.setCompleted();
-                        tasks.add(e);
-                        break;
+                case "T":
+                    Todo t = new Todo(arr[2]);
+                    if (arr[1].equals("1")) t.setCompleted();
+                    tasks.add(t);
+                    break;
+                case "D":
+                    Deadline d = new Deadline(arr[2], arr[3]);
+                    if (arr[1].equals("1")) d.setCompleted();
+                    tasks.add(d);
+                    break;
+                case "E":
+                    Event e = new Event(arr[2], arr[3], arr[4]);
+                    if (arr[1].equals("1")) e.setCompleted();
+                    tasks.add(e);
+                    break;
+                default:
+                    throw new DukeException("Unrecognised category character when loading from tasks.txt");
                 }
             }
             sc.close();
@@ -76,13 +78,13 @@ public class Storage {
      * Writes the list of tasks to the file "tasks.txt".
      * @param fileContent the comma seperated string information to be written to the file
      */
-    public static void writeTasksFile(String fileContent) {
+    public static void writeTasksFile(String fileContent) throws DukeException {
         try {
             FileWriter fw = new FileWriter(TASKS_TEXT_FILE_PATH, false);
             fw.write(fileContent);
             fw.close();
         } catch (IOException e) {
-            System.out.println("Something went wrong while saving to the backend: " + e.getMessage());
+            throw new DukeException("Something went wrong while saving to the backend: " + e.getMessage());
         }
     }
 }
