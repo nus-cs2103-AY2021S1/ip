@@ -6,12 +6,17 @@ package task;
  */
 public class Todo extends Task {
 
-    public Todo(String task, boolean isCompleted) {
-        super(task, isCompleted);
+    public Todo(String task, boolean isCompleted, int priority) {
+        super(task, isCompleted, priority);
     }
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        String text = "[T]" + super.toString();
+        if (getPriority() != 0) {
+            return text + " (priority: " + getPriority() + ")";
+        } else {
+            return text;
+        }
     }
 }

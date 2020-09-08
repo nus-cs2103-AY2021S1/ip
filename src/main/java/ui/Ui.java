@@ -1,6 +1,5 @@
 package ui;
 
-import task.TaskList;
 import storage.Storage;
 import parser.Parser;
 import exception.DukeException;
@@ -9,6 +8,7 @@ import task.Task;
 import task.Todo;
 import task.Event;
 import task.Deadline;
+import task.TaskList;
 
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
@@ -48,6 +48,7 @@ public class Ui {
         String taskDetails = "";
         String date = "";
         String toReturn = "";
+        int priority;
         toReturn += LINE;
 
         try {
@@ -56,6 +57,7 @@ public class Ui {
             commandType = parser.getCommandType();
             taskDetails = parser.getTaskDetails();
             date = parser.getDate();
+            priority = parser.getPriority();
 
             if (commandType.equals("help")) {
                 toReturn += help();
@@ -67,13 +69,13 @@ public class Ui {
                 toReturn += list();
 
             } else if (commandType.equals("todo")) {
-                toReturn += todo(taskDetails);
+                toReturn += todo(taskDetails, priority);
 
             } else if (commandType.equals("event")) {
-                toReturn += event(taskDetails, date);
+                toReturn += event(taskDetails, date, priority);
 
             } else if (commandType.equals("deadline")) {
-                toReturn += deadline(taskDetails, date);
+                toReturn += deadline(taskDetails, date, priority);
 
             } else if (commandType.equals("done")) {
                 toReturn += done(Integer.parseInt(taskDetails));
@@ -90,7 +92,7 @@ public class Ui {
 
             storage.addData(list.getList());
 
-        } catch (DukeException e ) {
+        } catch (DukeException e) {
             toReturn += e.getMessage();
             toReturn += "\n";
 
@@ -125,11 +127,13 @@ public class Ui {
         String text = "Here are the list of commands you can type:\n" +
                 "list - Shows the complete list of tasks you have\n" +
                 "find <keyword> - Shows tasks in your task list that match the keyword\n" +
-                "todo <task> - Adds a todo task\n" +
+                "done <task number> - Marks the task as completed\n" +
+                "delete <task number> - Deletes the task from your list\n" +
+                "todo <task>- Adds a todo task\n" +
                 "event <event details> /at <date in YYYY-MM-DD> - Adds an event\n" +
                 "deadline <deadline details> /by <date in YYYY-MM-DD> -  Adds a deadline\n" +
-                "done <task number> - Marks the task as completed\n" +
-                "delete <task number> - Deletes the task from your list\n";
+                "\nOptional: Adding a '/p <priority level>' tag at the end of a task command\n" +
+                "adds a priority level to your task! The default priority level is 0.\n";
         return text;
     }
 
@@ -188,12 +192,16 @@ public class Ui {
      *
      * @param task Task details.
      */
-    public String todo(String task) {
-        Todo todo = new Todo(task, false);
-        list.add(todo);
-        String header = "I've added this task:\n";
-        String text = header + todo.toString() + "\n" + list.toString() + "\n";
-        return text;
+    public String todo(String task, int priority) throws NumberOutOfRangeException {
+        if (priority < 0 || priority > list.getTotalTasks() + 1) {
+            throw new NumberOutOfRangeException();
+        } else {
+            Todo todo = new Todo(task, false, priority);
+            list.add(todo);
+            String header = "I've added this task:\n";
+            String text = header + todo.toString() + "\n" + list.toString() + "\n";
+            return text;
+        }
     }
 
     /**
@@ -202,12 +210,16 @@ public class Ui {
      * @param task Event details.
      * @param date Date of event.
      */
-    public String event(String task, String date) throws DateTimeParseException {
-        Event event = new Event(task, date, false);
-        list.add(event);
-        String header = "I've added this task:\n";
-        String text = header + event.toString() + "\n" + list.toString() + "\n";
-        return text;
+    public String event(String task, String date, int priority) throws DateTimeParseException, NumberOutOfRangeException {
+        if (priority < 0 || priority > list.getTotalTasks() + 1) {
+            throw new NumberOutOfRangeException();
+        } else {
+            Event event = new Event(task, date, false, priority);
+            list.add(event);
+            String header = "I've added this task:\n";
+            String text = header + event.toString() + "\n" + list.toString() + "\n";
+            return text;
+        }
     }
 
     /**
@@ -216,12 +228,16 @@ public class Ui {
      * @param task Deadline details.
      * @param date Date of deadline.
      */
-    public String deadline(String task, String date) throws DateTimeParseException {
-        Deadline deadline = new Deadline(task, date, false);
-        list.add(deadline);
-        String header = "I've added this task:\n";
-        String text = header + deadline.toString() + "\n" + list.toString() + "\n";
-        return text;
+    public String deadline(String task, String date, int priority) throws DateTimeParseException, NumberOutOfRangeException {
+        if (priority < 0 || priority > list.getTotalTasks() + 1) {
+            throw new NumberOutOfRangeException();
+        } else {
+            Deadline deadline = new Deadline(task, date, false, priority);
+            list.add(deadline);
+            String header = "I've added this task:\n";
+            String text = header + deadline.toString() + "\n" + list.toString() + "\n";
+            return text;
+        }
     }
 
     /**

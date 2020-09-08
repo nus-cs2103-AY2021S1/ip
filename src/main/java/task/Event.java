@@ -19,8 +19,8 @@ public class Event extends Task {
      * @param date Date of event.
      * @param isCompleted Boolean to check whether task has been completed.
      */
-    public Event(String task, String date, boolean isCompleted) {
-        super(task, isCompleted);
+    public Event(String task, String date, boolean isCompleted, int priority) {
+        super(task, isCompleted, priority);
         this.date = date;
         localDate = LocalDate.parse(date);
     }
@@ -37,6 +37,11 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        String text = "[E]" + super.toString() + " (at: " + localDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+        if (getPriority() != 0) {
+            return text + " (priority: " + getPriority() + ")";
+        } else {
+            return text;
+        }
     }
 }

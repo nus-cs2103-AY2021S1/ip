@@ -51,7 +51,17 @@ public class TaskList {
      * @param t Task to be added.
      */
     public void add(Task t) {
-        list.add(t);
+        int tP = t.getPriority();
+        if (tP == 0) {
+            list.add(t);
+        } else {
+            for (int i = 0; i < totalTasks; i++) {
+                if (list.get(i).getPriority() == tP) {
+                    list.add(i, t);
+                    break;
+                }
+            }
+        }
         totalTasks++;
     }
 

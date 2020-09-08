@@ -61,11 +61,11 @@ public class Storage {
             Task task;
 
             if (type.equals("T")) {
-                task = new Todo(taskString, isCompleted);
+                task = new Todo(taskString, isCompleted, Integer.parseInt(details[3]));
             } else if (type.equals("D")) {
-                task = new Deadline(taskString, details[3], isCompleted);
+                task = new Deadline(taskString, details[3], isCompleted, Integer.parseInt(details[4]));
             } else {
-                task = new Event(taskString, details[3], isCompleted);
+                task = new Event(taskString, details[3], isCompleted, Integer.parseInt(details[4]));
             }
 
             list.add(task);
@@ -89,11 +89,11 @@ public class Storage {
             String completed = String.valueOf(task.isCompleted());
 
             if (task instanceof Todo) {
-                toAdd = "T:" + completed + ":" + task.getTask();
+                toAdd = "T:" + completed + ":" + task.getTask() + ":" + task.getPriority();
             } else if (task instanceof Deadline) {
-                toAdd = "D:" + completed + ":" + task.getTask() + ":" + ((Deadline) task).getDate();
+                toAdd = "D:" + completed + ":" + task.getTask() + ":" + ((Deadline) task).getDate() + ":" + task.getPriority();
             } else if (task instanceof Event) {
-                toAdd = "E:" + completed + ":" + task.getTask() + ":" + ((Event) task).getDate();
+                toAdd = "E:" + completed + ":" + task.getTask() + ":" + ((Event) task).getDate() + ":" + task.getPriority();
             } else {
                 assert false;
             }

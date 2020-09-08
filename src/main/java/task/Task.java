@@ -5,9 +5,10 @@ package task;
  * Contains the specific details of a task and whether
  * the task has been completed.
  */
-public class Task {
+public abstract class Task {
     private String task;
     private boolean isCompleted;
+    private int priority;
 
     /**
      * Creates a Task object.
@@ -15,9 +16,10 @@ public class Task {
      * @param task
      * @param isCompleted
      */
-    public Task(String task, boolean isCompleted) {
+    public Task(String task, boolean isCompleted, int priority) {
         this.task = task;
         this.isCompleted = isCompleted;
+        this.priority = priority;
     }
 
     public String getTask() {
@@ -28,6 +30,10 @@ public class Task {
         return isCompleted;
     }
 
+    public int getPriority() {
+        return priority;
+    }
+
     /**
      * Marks the isCompleted flag as true once user completes the task.
      */
@@ -36,7 +42,7 @@ public class Task {
     }
 
     /**
-     * An overriden method that returns a String with the details of a task.
+     * An overridden method that returns a String with the details of a task.
      *
      * @return String containing a tick or a cross, if the task is complete or incomplete respectively,
      * together with the details of the task.
