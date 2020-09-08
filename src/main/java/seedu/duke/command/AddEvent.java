@@ -28,7 +28,11 @@ public class AddEvent extends AddCommand {
      */
     @Override
     public void execute(TaskList ls, Ui ui) throws DateTimeException, DukeCommandException {
-        String[] input = words[1].split(" /by ");
+        String[] input = words[1].split(" /at ");
+        assert input.length > 0 : "Input should not be empty.";
+        if (input.length < 2) {
+            throw new DukeCommandException("Write something after the command, gee.");
+        }
         LocalDateTime day = LocalDateTime.parse(input[1], FORMATTER);
         Event newE = new Event(input[0], day, false);
         ls.add(newE);
