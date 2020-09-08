@@ -2,6 +2,7 @@ package duke;
 
 import duke.command.AddCommand;
 import duke.command.ByeCommand;
+import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.HelpCommand;
 import duke.command.ListCommand;
@@ -72,20 +73,7 @@ public class Duke {
             break;
         case DELETE:
             index = Integer.parseInt(input.substring(7)) - 1;
-
-            try {
-                if (index >= userTasks.getTaskListSize()) {
-                    throw new DukeException("", ExceptionType.INDEX_OUT_OF_BOUNDS);
-                } else {
-                    Task task = userTasks.getTask(index);
-                    userTasks.deleteTask(index);
-                    response += ui.taskDeletedMessage(task);
-                }
-                storage.saveToFile(userTasks.getTaskList());
-            } catch (DukeException ex) {
-                response += ui.errorMessage(ex);
-            }
-
+            response += new DeleteCommand().execute(index, userTasks, storage);
             break;
         case BYE:
             response += new ByeCommand().getResponse();

@@ -7,7 +7,7 @@ import duke.DukeException;
 import duke.ExceptionType;
 
 /**
- * This class marks a particular task chosen by user as done.
+ * This class marks a specific task chosen by user as done.
  */
 public class DoneCommand extends Command {
     public DoneCommand() {
@@ -22,7 +22,7 @@ public class DoneCommand extends Command {
      * @param storage storage object.
      * @return response after execution of command.
      */
-    public String execute(int index, TaskList userTasks, Storage storage) {
+    public String execute(int index, TaskList userTasks, Storage storage) throws DukeException {
         try {
             if (index >= userTasks.getTaskListSize()) {
                 throw new DukeException("", ExceptionType.INDEX_OUT_OF_BOUNDS);
