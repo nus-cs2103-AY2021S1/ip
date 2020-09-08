@@ -24,13 +24,17 @@ public class TaskList extends ArrayList<Task> {
     /**
      * Adds a task to itself.
      */
-    public void addTask(Task newTask, boolean announce) {
-        super.add(newTask);
-        if (announce) {
-            String prefix = "Okay! I shall add this task:\n";
-            String suffix = String.format("Now you got a total of %s task%s in your list!\n", super.size(),
-                    super.size() == 1 ? "" : "s");
-            Ui.printWithLines(prefix + newTask + "\n" + suffix);
+    public void addTask(Task newTask, boolean announce) throws DukeDuplicateTaskException {
+        if (this.hasDuplicate(newTask)) {
+            throw new DukeDuplicateTaskException();
+        } else {
+            super.add(newTask);
+            if (announce) {
+                String prefix = "Okay! I shall add this task:\n";
+                String suffix = String.format("Now you got a total of %s task%s in your list!\n", super.size(),
+                        super.size() == 1 ? "" : "s");
+                Ui.printWithLines(prefix + newTask + "\n" + suffix);
+            }
         }
     }
 
@@ -51,7 +55,13 @@ public class TaskList extends ArrayList<Task> {
      */
     public void lookFor(String query) {
         TaskList results = new TaskList();
-        this.stream().filter(task -> task.hasKeyword(query)).forEach(task -> results.addTask(task, false));
+        this.stream().filter(task -> task.hasKeyword(query)).forEach(task -> {
+            try {
+                results.addTask(task, false);
+            } catch (DukeDuplicateTaskException e) {
+                e.printStackTrace();
+            }
+        });
         StringBuilder prefix = new StringBuilder("Here are the matches in your list:\n");
         Ui.printWithLines(prefix.append(results.listOut()).toString());
     }
@@ -76,6 +86,15 @@ public class TaskList extends ArrayList<Task> {
             list.append(task.toData()).append("\n");
         }
         return list.toString();
+    }
+
+    private boolean hasDuplicate(Task newTask) {
+        for (Task task : this) {
+            if (newTask.equals(task)) {
+                return true;
+            }
+        }
+        return false;
     }
 
 }

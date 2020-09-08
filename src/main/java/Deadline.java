@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Deadline extends Task {
 
@@ -40,6 +41,25 @@ public class Deadline extends Task {
 
     public String toData() {
         return String.format("[D]%s/by %s", super.toString(), by.format(Duke.dateTimeFormat));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o == null || getClass() != o.getClass()) {
+            return false;
+        } else if (!super.equals(o)) {
+            return false;
+        } else {
+            Deadline deadline = (Deadline) o;
+            return by.equals(deadline.by);
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), by);
     }
 
 }

@@ -1,4 +1,5 @@
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 public class Event extends Task {
 
@@ -42,4 +43,22 @@ public class Event extends Task {
         return String.format("[E]%s/at %s", super.toString(), at.format(Duke.dateTimeFormat));
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o == null || getClass() != o.getClass()) {
+            return false;
+        } else if (!super.equals(o)) {
+            return false;
+        } else {
+            Event event = (Event) o;
+            return at.equals(event.at);
+        }
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(super.hashCode(), at);
+    }
 }
