@@ -20,11 +20,6 @@ public class DeleteCommand extends Command {
     public CommandResult execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task targetTask = taskList.get(indexOfTaskToBeDeleted - 1);
         taskList.remove(indexOfTaskToBeDeleted - 1);
-//        try {
-//            storage.modifyLineInTextFile(indexOfTaskToBeDeleted, "delete");
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
         storage.saveTasks(taskList);
         int size = taskList.getSize();
         ui.printTaskDeleted(targetTask.toString(), size);

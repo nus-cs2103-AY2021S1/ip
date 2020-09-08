@@ -51,11 +51,11 @@ public class Parser {
         case FIND : {
             return parseFind(splitCommand[1]);
         }
-//        case RESCHEDULE: {
-//            String[] indexAndDate = splitCommand[1].split(" ", 2);
-//            int indexOfTaskToReschedule = Integer.parseInt(indexAndDate[0]);
-//            return parseReschedule(indexOfTaskToReschedule, indexAndDate[1]);
-//        }
+        case RESCHEDULE: {
+            String[] indexAndDate = splitCommand[1].split(" ", 2);
+            int indexOfTaskToReschedule = Integer.parseInt(indexAndDate[0]);
+            return parseReschedule(indexOfTaskToReschedule, indexAndDate[1]);
+        }
         default: {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

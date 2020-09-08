@@ -40,4 +40,11 @@ public abstract class Command {
         str.append("Now you have ").append(size).append(" tasks in the list.");
         return str.toString();
     }
+
+    public String rescheduleTaskToString(Task targetTask) {
+        StringBuilder str = new StringBuilder();
+        str.append("Got it. I've rescheduled this task:\n");
+        str.append(targetTask.toString()).append("\n");
+        return str.toString();
+    }
 }
