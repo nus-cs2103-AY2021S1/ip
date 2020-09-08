@@ -26,7 +26,9 @@ public class Deadline extends Task {
      * @return Due date of deadline.
      */
     public String getDate() {
-        return by.substring(0, 11);
+        int dateLength = 11;
+
+        return by.substring(0, dateLength);
     }
 
     /**
