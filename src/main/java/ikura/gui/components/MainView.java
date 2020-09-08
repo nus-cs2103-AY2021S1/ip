@@ -10,8 +10,18 @@ import javafx.geometry.Insets;
 import javafx.scene.layout.StackPane;
 import javafx.scene.control.SplitPane;
 
+/**
+ * The main view of the GUI, consisting of the CommandView on the left and the TaskListView on the right.
+ */
 public class MainView extends StackPane {
 
+    /**
+     * Constructs a new CommandInputView, linked to the given frontend, with the preferred dimensions.
+     *
+     * @param frontend          the frontend to use
+     * @param preferredWidth    the preferred width
+     * @param preferredHeight   the preferred height
+     */
     public MainView(GuiFrontend frontend, int preferredWidth, int preferredHeight) {
         StackPane.setAlignment(this, Pos.CENTER);
 

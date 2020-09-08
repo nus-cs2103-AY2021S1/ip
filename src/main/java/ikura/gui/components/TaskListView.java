@@ -12,8 +12,16 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.control.ScrollPane;
 
+/**
+ * A View that displays a list of tasks, which are themselves displayed as TaskViews,
+ */
 public class TaskListView extends AnchorPane {
 
+    /**
+     * Constructs a new TaskListView, linked to the given frontend
+     *
+     * @param frontend the frontend to use
+     */
     public TaskListView(GuiFrontend frontend) {
 
         var items = new VBox(/* spacing: */ 40.0);

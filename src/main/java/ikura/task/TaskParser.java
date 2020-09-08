@@ -7,8 +7,6 @@ import java.util.Optional;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-import ikura.util.Pair;
-
 import java.time.format.DateTimeParseException;
 import ikura.util.InvalidInputException;
 

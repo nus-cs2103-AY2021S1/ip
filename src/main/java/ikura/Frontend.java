@@ -3,8 +3,6 @@
 
 package ikura;
 
-import java.util.Optional;
-
 public abstract class Frontend {
 
     public static final String BOT_NAME  = "ikurabowl";

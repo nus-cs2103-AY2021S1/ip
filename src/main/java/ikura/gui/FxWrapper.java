@@ -3,8 +3,6 @@
 
 package ikura.gui;
 
-import ikura.task.Task;
-import ikura.gui.GuiFrontend;
 import ikura.gui.components.MainView;
 
 import javafx.stage.Stage;
@@ -18,6 +16,11 @@ public class FxWrapper extends Application {
     // static field so that we can use it from the javafx start() method.
     private static GuiFrontend frontend;
 
+    /**
+     * Runs the application with the provided GuiFrontend.
+     *
+     * @param frontend the frontend to use
+     */
     public static void run(GuiFrontend frontend) {
         FxWrapper.frontend = frontend;
 

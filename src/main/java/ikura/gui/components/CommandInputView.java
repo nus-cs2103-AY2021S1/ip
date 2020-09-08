@@ -12,24 +12,19 @@ import javafx.application.Platform;
 import javafx.scene.layout.Priority;
 import javafx.scene.control.TextField;
 
+/**
+ * A view that has a button and a textfield, that is used for entering commands.
+ */
 public class CommandInputView extends HBox {
 
     private final GuiFrontend frontend;
     private final TextField field;
 
-    private void runCommand() {
-
-        var cmd = this.field.getText();
-
-        if (!cmd.isEmpty()) {
-            this.field.setText("");
-
-            if (!this.frontend.processCommand(cmd)) {
-                Platform.exit();
-            }
-        }
-    }
-
+    /**
+     * Constructs a new CommandInputView, linked to the given frontend
+     *
+     * @param frontend the frontend to use
+     */
     public CommandInputView(GuiFrontend frontend) {
 
         this.frontend = frontend;
@@ -56,4 +51,18 @@ public class CommandInputView extends HBox {
             this.field.requestFocus();
         });
     }
+
+    private void runCommand() {
+
+        var cmd = this.field.getText();
+
+        if (!cmd.isEmpty()) {
+            this.field.setText("");
+
+            if (!this.frontend.processCommand(cmd)) {
+                Platform.exit();
+            }
+        }
+    }
+
 }

@@ -3,14 +3,8 @@
 
 package ikura.gui;
 
-import java.util.Optional;
-import java.util.stream.Stream;
-import java.util.stream.Collectors;
-
-import ikura.Bot;
 import ikura.Frontend;
 import ikura.TaskList;
-import ikura.task.Todo;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,12 +13,22 @@ public class GuiFrontend extends Frontend {
 
     private final ObservableList<String> outputLog;
 
+    /**
+     * Constructs a new GuiFrontend using the given tasklist.
+     *
+     * @param tasks the TaskList to use
+     */
     public GuiFrontend(TaskList tasks) {
         super(tasks);
 
         this.outputLog = FXCollections.observableArrayList();
     }
 
+    /**
+     * Get the output log of the Bot, as an ObservableList.
+     *
+     * @return the output log as an ObservableList
+     */
     public ObservableList<String> getOutputLog() {
         return this.outputLog;
     }

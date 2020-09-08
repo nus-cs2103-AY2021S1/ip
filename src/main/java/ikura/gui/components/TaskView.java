@@ -5,21 +5,29 @@ package ikura.gui.components;
 
 import ikura.task.Task;
 
-import javafx.scene.control.Label;
-import javafx.scene.control.Separator;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
 import javafx.scene.layout.VBox;
-import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.layout.Region;
+import javafx.scene.control.Label;
+import javafx.scene.text.TextFlow;
+import javafx.scene.control.Separator;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
-import javafx.scene.text.Font;
-import javafx.scene.text.TextFlow;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Text;
 
+/**
+ * A View that displays a Task, including its title and description.
+ */
 public class TaskView extends AnchorPane {
 
+    /**
+     * Constructs a new TaskView with its parent, and the task to display.
+     *
+     * @param parent the parent JavaFX component of this TaskView (should be a TaskListView)
+     * @param task   the Task to display
+     */
     public TaskView(Region parent, Task task) {
 
         var title = new Label(task.getTitle() + " - " + (task.isDone() ? "done" : "not"));

@@ -9,8 +9,17 @@ import javafx.scene.layout.VBox;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.AnchorPane;
 
+/**
+ * A View that combines a CommandHistoryView and a CommandInputView. This makes up the left
+ * pane of the GUI.
+ */
 public class CommandView extends AnchorPane {
 
+    /**
+     * Constructs a new CommandView, linked to the given frontend
+     *
+     * @param frontend the frontend to use
+     */
     public CommandView(GuiFrontend frontend) {
 
         var cmdHistory = new CommandHistoryView(frontend);
