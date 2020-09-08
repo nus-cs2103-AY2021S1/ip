@@ -3,7 +3,7 @@ package willy.ui;
 import javafx.application.Application;
 
 /**
- * A launcher class to workaround classpath issues.
+ * A launcher class to workaround classpath issues to launch JavaFX.
  */
 public class Launcher {
 

@@ -1,7 +1,7 @@
 package willy.task;
 
 /**
- * Basic Task with no additional conditions.
+ * Responsible for Basic Task with no additional conditions.
  */
 public class ToDoTask extends Task {
 

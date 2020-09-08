@@ -14,10 +14,6 @@ public class DeadlineTask extends Task {
         return stringDeadline;
     }
 
-    public LocalDateTime getDeadline() {
-        return deadline;
-    }
-
     public DeadlineTask(String deadline, String task, TaskSymbol taskType) {
         super(task, taskType);
         this.stringDeadline = deadline;

@@ -1,7 +1,7 @@
 package willy.ui;
 
 /**
- * Greetings that the bot can do.
+ * In charge of the Greetings that the bot can do.
  */
 public class Greet {
     private String originalGreeting;
@@ -19,18 +19,6 @@ public class Greet {
     public Greet(String greeting) {
         this.originalGreeting = greeting;
         this.greeting = "\t" + greeting;
-    }
-
-    public String getStartGreeting() {
-        return startGreeting;
-    }
-
-    public String getGreeting() {
-        return this.originalGreeting;
-    }
-
-    public String getExitGreeting() {
-        return exitGreeting;
     }
 
     @Override
