@@ -5,11 +5,10 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-import duke.storage.StateManager;
 import org.junit.jupiter.api.Test;
 
 import duke.exception.DukeException;
-import duke.storage.Storage;
+import duke.storage.StateManager;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;

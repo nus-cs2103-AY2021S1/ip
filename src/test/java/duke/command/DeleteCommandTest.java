@@ -2,12 +2,10 @@ package duke.command;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
-import duke.storage.State;
-import duke.storage.StateManager;
 import org.junit.jupiter.api.Test;
 
 import duke.exception.DukeException;
-import duke.storage.Storage;
+import duke.storage.StateManager;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.ToDo;
