@@ -21,6 +21,7 @@ public abstract class TaskWithDate extends Task {
     }
 
     public LocalDate getDate() {
+        assert date != null;
         return date;
     }
 
