@@ -11,6 +11,7 @@ public enum Command {
     EVENT,
     LIST,
     TODO,
-    FIND
+    FIND,
+    UNDO
 }
 
