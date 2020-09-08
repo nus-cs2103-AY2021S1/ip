@@ -14,10 +14,6 @@ public class Parser {
     private static int whichTask = -1;
     private static String searchText = "";
 
-    /**
-     * All valid command types.
-     */
-
     private static boolean isNum(String s) {
         if (s == null) {
             return false;
@@ -39,7 +35,7 @@ public class Parser {
     }
 
     /**
-     * Processes string and assign it to a command type.
+     * Processes string and assigns it to a command type.
      * @param s command as a String
      * @param size size of tasklist
      * @return a Commands.Command enum item
@@ -105,6 +101,7 @@ public class Parser {
                 }
                 return new AddCommand(new Event(task[0].replaceFirst("event ", ""), task[1]));
             default:
+                assert (type == Task.Type.TODO);
                 if ((s.split(" ")).length < 2) {
                     throw new DukeException(DukeException.EMPTY_TODO);
                 }
