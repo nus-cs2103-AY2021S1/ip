@@ -29,16 +29,6 @@ public class ToDoTask extends Task {
     }
 
     /**
-     * Gets the type of Tasks.
-     *
-     * @return type of Task.
-     */
-    @Override
-    public String getType() {
-        return "T";
-    }
-
-    /**
      * String representation of this object.
      *
      * @return string representation of this object ([statusIcon] description).

@@ -14,7 +14,7 @@ import exception.DateTimeInvalidFormatException;
  *
  * <p> (i) getters </p>
  */
-public class DeadlineTask extends Task {
+public class DeadlineTask extends Task implements TimeRestriction {
     protected static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy kk:mm");
     protected LocalDateTime dateTime;
 
@@ -109,13 +109,21 @@ public class DeadlineTask extends Task {
     }
 
     /**
-     * Gets the type of Tasks.
+     * Gets details of the task in [type]//[status]//[description]//[date]//[time] format
      *
-     * @return type of Task.
+     * @return details of the task.
      */
     @Override
-    public String getType() {
-        return "D";
+    public String getDetails() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("D//");
+        sb.append(getStatusIcon());
+        sb.append("//");
+        sb.append(getDescription() + "//");
+        sb.append(getDateInput() + "//");
+        sb.append(getTimeInput());
+
+        return sb.toString();
     }
 
     /**
