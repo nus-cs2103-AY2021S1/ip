@@ -180,6 +180,7 @@ public class Duke extends Application {
             System.out.println("No tasks found. Start adding your first few tasks!");
             return;
         }
+        assert savedItems.size() >= 1;
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < savedItems.size(); ++i) {
             Task task = loadItem(i);
