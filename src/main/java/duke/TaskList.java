@@ -50,11 +50,7 @@ public class TaskList {
                 .collect(Collectors.toList());
         return fileString;
     }
-    /**
-     * Uses stream.filter to find the matching tasks.
-     *
-     * @return List of Tasks which contains all matching tasks.
-     */
+
     public List<Task> findMatchingTask(String keyWord) {
         List<Task> matchingTask = this.tasks
                 .stream()
