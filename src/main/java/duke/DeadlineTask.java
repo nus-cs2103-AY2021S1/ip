@@ -38,13 +38,13 @@ public class DeadlineTask extends Task {
         return "[D]" + super.toString() + " (by: " + deadlineString + ")";
     }
 
-    private String toSaveStringDeadline() {
+    private String toSavedStringDeadline() {
         return deadline == null ? deadlineString : deadline.toString();
     }
 
     @Override
-    public String toSaveString() {
-        return String.format("D @@ %s @@ %s @@ %s", toSaveStringDone(), desc, toSaveStringDeadline());
+    public String toSavedString() {
+        return String.format("D @@ %s @@ %s @@ %s", toSavedStringIsDone(), desc, toSavedStringDeadline());
     }
 
     @Override
