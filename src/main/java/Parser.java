@@ -16,8 +16,13 @@ public class Parser {
     private static final String EVENT = "event";
     private static final String FIND = "find";
 
+    private static final String EMPTY_STRING = "";
+
     private static final String DEADLINE_SEPARATOR = " /by ";
     private static final String EVENT_SEPARATOR = " /at ";
+    private static final String SEPARATOR = " /";
+
+    private static final String NOW = "now";
 
     /**
      *
@@ -106,7 +111,7 @@ public class Parser {
     }
 
     private static String handleFindCommand(Ui ui, TaskList tasks, String[] parsedInput) throws DukeException {
-        if (isValidFormat(parsedInput)) {
+        if (isValidFindFormat(parsedInput)) {
             return tasks.findTask(ui, parsedInput);
         } else {
             throw new DukeException("Invalid FIND format");
@@ -118,7 +123,7 @@ public class Parser {
      */
     public static boolean isBye(String input){
         String commandKeyword = input.split(" ", 2)[0].toLowerCase();
-        return commandKeyword.equals("bye");
+        return commandKeyword.equals(BYE);
     }
 
     private static boolean isValidSize(TaskList tasks, String[] parsedInput) {
@@ -157,18 +162,18 @@ public class Parser {
     }
 
     private static String getDescription(String body) {
-        return body.split(" /", 2)[0];
+        return body.split(SEPARATOR, 2)[0];
     }
 
     private static String getTime(String body, Task.Type type) {
-        String time = "";
+        String time = EMPTY_STRING;
         if (type == Task.Type.DEADLINE) {
-            time = body.split(" /by ", 2)[1];
+            time = body.split(DEADLINE_SEPARATOR, 2)[1];
         }
         if (type == Task.Type.EVENT) {
-            time = body.split(" /at ", 2)[1];
+            time = body.split(EVENT_SEPARATOR, 2)[1];
         }
-        if (time.equals("now")) {
+        if (time.toLowerCase().equals(NOW)) {
             return LocalDate.now().format(DateTimeFormatter.ofPattern("d MMM yyyy"));
         } else {
             return LocalDate.parse(time).format(DateTimeFormatter.ofPattern("d MMM yyyy"));
@@ -182,7 +187,7 @@ public class Parser {
         }
         String body = parsedInput[1];
         if (type == Task.Type.TODO) {
-            return !body.equals("");
+            return !body.equals(EMPTY_STRING);
         }
         if (type == Task.Type.DEADLINE) {
             return body.split(DEADLINE_SEPARATOR, 2).length == 2 && isValidTime(body, Task.Type.DEADLINE);
@@ -193,19 +198,19 @@ public class Parser {
         return false;
     }
 
-    private static boolean isValidFormat(String[] parsedInput) {
+    private static boolean isValidFindFormat(String[] parsedInput) {
         return parsedInput.length > 1;
     }
 
     private static boolean isValidTime(String body, Task.Type type) throws DateTimeParseException {
-        String time = "";
+        String time = EMPTY_STRING;
         if (type == Task.Type.DEADLINE) {
-            time = body.split(" /by ", 2)[1];
+            time = body.split(DEADLINE_SEPARATOR, 2)[1];
         }
         if (type == Task.Type.EVENT) {
-            time = body.split(" /at ", 2)[1];
+            time = body.split(EVENT_SEPARATOR, 2)[1];
         }
-        if (time.equals("now")) {
+        if (time.toLowerCase().equals(NOW)) {
             return true;
         }
         try {
