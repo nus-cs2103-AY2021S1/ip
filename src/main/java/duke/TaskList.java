@@ -13,8 +13,8 @@ public class TaskList {
     /**
      * Constructor for TaskList, do storage initilization
      */
-    public TaskList() {
-        storage = new Storage("data.txt");
+    public TaskList(String filename) {
+        storage = new Storage(filename);
         tasks = storage.load();
     }
 

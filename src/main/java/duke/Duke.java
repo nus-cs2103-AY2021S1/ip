@@ -14,8 +14,8 @@ public class Duke {
     private final TaskList taskList;
     private final Parser parser;
 
-    public Duke() {
-        taskList = new TaskList();
+    public Duke(String filename) {
+        taskList = new TaskList(filename);
         Ui.init();
         Ui.greet();
         parser = new Parser(taskList);
