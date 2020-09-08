@@ -109,6 +109,13 @@ public class Duke {
                 response += ui.errorMessage(ex);
                 break;
             }
+        default:
+            try {
+                throw new DukeException("", ExceptionType.DEFAULT);
+            } catch (DukeException ex) {
+                response += ui.errorMessage(ex);
+            }
+            break;
         }
         return response;
     }

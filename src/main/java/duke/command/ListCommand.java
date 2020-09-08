@@ -31,7 +31,7 @@ public class ListCommand extends Command{
      * @param input input from user.
      * @return response after execution of command.
      */
-    public String execute(TaskList userTasks, String input) {
+    public String execute(TaskList userTasks, String input) throws DukeException {
         CommandType command = new InputParser().parseList(input);
         switch (command) {
         case LIST_ALL:
@@ -102,6 +102,7 @@ public class ListCommand extends Command{
             response = ui.errorMessage(
                     new DukeException("", ExceptionType.INVALID_COMMAND)
             );
+            break;
         }
         return response;
     }
