@@ -20,6 +20,7 @@ public class FindtypeCommand implements Command {
                 throw new DobbyException("Incorrect usage of command. "
                         + "Please try again.\n  " + USAGE);
             }
+
             type = type.toUpperCase();
             if (!(type.equals("T") || type.equals("D") || type.equals("E"))) {
                 throw new DobbyException("Incorrect usage of command.\n"
@@ -34,6 +35,7 @@ public class FindtypeCommand implements Command {
                     + "Type required cannot be empty. Please try again.\n  "
                     + USAGE);
         }
+        assert message != null : "Return message to user cannot be empty";
         return message;
     }
 }

@@ -13,10 +13,10 @@ public class DeadlineCommand implements Command {
     @Override
     public String parseInput(TaskList tasks, String text) throws DobbyException {
         String message = "";
-        String by = "";
         assert text.startsWith("deadline") : "Deadline command must start with deadline";
         try {
-            text = text.substring(9).trim();
+            int commandLen = "deadline".length();
+            text = text.substring(commandLen + 1).trim();
 
             if (text.indexOf("/by") < 0 && text.length() >= 1) { // non-empty description and /by missing
                 throw new DobbyException("Incorrect usage of command.\nDeadline details cannot be empty. "
@@ -26,9 +26,9 @@ public class DeadlineCommand implements Command {
                         + "Please try again.\n  " + USAGE);
             }
 
-            by = text.substring(text.indexOf("/by") + 4).trim();
-            text = text.substring(0, text.indexOf("/by") - 1).trim();
-            Deadline deadline = new Deadline(text, by);
+            String by = text.substring(text.indexOf("/by") + 4).trim();
+            String description = text.substring(0, text.indexOf("/by") - 1).trim();
+            Deadline deadline = new Deadline(description, by);
 
             if (by.lastIndexOf(' ') > 0) {
                 if (by.substring(1 + by.lastIndexOf(' ')).length() > 4) {
@@ -37,6 +37,7 @@ public class DeadlineCommand implements Command {
                             + "Please try again.\n  " + USAGE);
                 }
             }
+
             tasks.addToList(deadline);
             message = "Great! I've added the following task:\n  " + deadline.getDescription()
                     + String.format("\nNow you have %d task%s in the list.", tasks.getSize(),
@@ -58,6 +59,7 @@ public class DeadlineCommand implements Command {
         } catch (DobbyException e) { // empty description or /by missing
             return e.getMessage();
         }
+        assert message != null : "Return message to user cannot be empty";
         return message;
     }
 }

@@ -31,6 +31,7 @@ public class FindCommand implements Command {
                     + "Keyword required cannot be empty. Please try again.\n  "
                     + USAGE);
         }
+        assert message != null : "Return message to user cannot be empty";
         return message;
     }
 }
