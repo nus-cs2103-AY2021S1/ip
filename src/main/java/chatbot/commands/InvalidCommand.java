@@ -1,11 +1,16 @@
 package chatbot.commands;
 
-import chatbot.common.Message;
 import chatbot.data.TaskList;
 import chatbot.storage.Storage;
 import chatbot.ui.Ui;
 
 public class InvalidCommand extends Command {
+
+    String message;
+
+    public InvalidCommand(String message) {
+        this.message = message;
+    }
 
     @Override
     public boolean isExit() {
@@ -14,6 +19,6 @@ public class InvalidCommand extends Command {
 
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        return Message.INVALID_COMMAND;
+        return this.message;
     }
 }

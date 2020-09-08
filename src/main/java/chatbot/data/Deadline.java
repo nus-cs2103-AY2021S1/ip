@@ -16,12 +16,12 @@ public class Deadline extends Task {
 
     @Override
     public Deadline markDone() {
-        return new Deadline(this.description, true, this.timestamp);
+        return new Deadline(this.description, true, this.date);
     }
 
     @Override
     public String toString() {
-        String formattedDate = this.timestamp.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String formattedDate = this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return super.toString() + " (by: " + formattedDate + ")";
     }
 }

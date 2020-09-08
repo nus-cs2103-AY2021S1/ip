@@ -16,12 +16,12 @@ public class Event extends Task {
 
     @Override
     public Event markDone() {
-        return new Event(this.description, true, this.timestamp);
+        return new Event(this.description, true, this.date);
     }
 
     @Override
     public String toString() {
-        String formattedDate = this.timestamp.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        String formattedDate = this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         return super.toString() + " (at: " + formattedDate + ")";
     }
 }

@@ -4,6 +4,7 @@ import chatbot.common.Message;
 import chatbot.exception.ChatbotException;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Iterator;
 import java.util.function.Predicate;
 
@@ -108,5 +109,14 @@ public class TaskList {
         }
 
         return tasks;
+    }
+
+    public ArrayList<Task> retrieveTasksByOrder(Comparator<Task> comp) {
+        ArrayList<Task> copyOfTasks = new ArrayList<>();
+        for (Task t : tasks) {
+            copyOfTasks.add(t);
+        }
+        copyOfTasks.sort(comp);
+        return copyOfTasks;
     }
 }

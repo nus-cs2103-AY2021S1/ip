@@ -10,13 +10,13 @@ public class Task {
     protected final String description;
     protected final String type;
     protected final boolean isDone;
-    protected final LocalDate timestamp;
+    protected final LocalDate date;
 
-    protected Task(String description, String type, boolean isDone, LocalDate timestamp) {
+    protected Task(String description, String type, boolean isDone, LocalDate date) {
         this.description = description;
         this.isDone = isDone;
         this.type = type;
-        this.timestamp = timestamp;
+        this.date = date;
     }
 
     /**
@@ -48,7 +48,7 @@ public class Task {
      * @return the date of the task
      */
     public LocalDate getDate() {
-        return this.timestamp;
+        return this.date;
     }
 
     public String getType() {
@@ -60,7 +60,7 @@ public class Task {
      * @return a task object marked as done
      */
     public Task markDone() {
-        return new Task(this.description, this.type, true, this.timestamp);
+        return new Task(this.description, this.type, true, this.date);
     }
 
     @Override

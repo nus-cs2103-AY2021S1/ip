@@ -11,6 +11,7 @@ import chatbot.data.Task;
 import chatbot.data.Todo;
 
 import chatbot.exception.ChatbotException;
+import chatbot.util.comparator.TaskByDateComparator;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -32,7 +33,7 @@ public class Parser {
     public static Command parse(String fullCmd) throws ChatbotException {
 
         Type type;
-        Command invalidCommand = new InvalidCommand();
+        Command invalidCommand = new InvalidCommand(Message.INVALID_COMMAND);
 
         // extract type of command
         String text = fullCmd.trim();
@@ -65,10 +66,33 @@ public class Parser {
             return parseFindByKeywordCommand(arguments);
         case LIST:
             return new ShowAllCommand();
+        case SORT:
+            return parseSortCommand(arguments);
         case TODO:
             return parseAddTodoCommand(arguments);
         default:
             return invalidCommand;
+        }
+    }
+
+    private static Command parseSortCommand(String args) {
+        String[] arr = args.split("/by");
+
+        if (arr.length == 0 || arr.length == 1) {
+            return new InvalidCommand(Message.INVALID_COMMAND
+                    + Message.SUGGEST_SORT_BY_DATE);
+        }
+
+        String descriptor = arr[1].trim();
+        TaskByDateComparator comp = new TaskByDateComparator();
+
+        if (descriptor.equals("earliest")) {
+            return new SortCommand(comp);
+        } else if (descriptor.equals("latest")) {
+            return new SortCommand(comp.reversed());
+        } else {
+            return new InvalidCommand(Message.INVALID_COMMAND
+                    + Message.SUGGEST_SORT_BY_DATE);
         }
     }
 
