@@ -4,8 +4,8 @@ import duke.textstoreandprint.TextStore;
 
 public abstract class Task {
 
-    String name;
-    boolean done = false;
+    protected String name;
+    protected boolean done = false;
 
     Task(String name) {
         this.name = name;
@@ -20,6 +20,10 @@ public abstract class Task {
     }
 
     public abstract String saveString();
+
+    public boolean equals(Task task) {
+        return this.name.equals(task.name);
+    }
 
     public boolean markDone() {
         if (done) {

@@ -12,6 +12,10 @@ public class EventTask extends Task {
         this.date = date;
     }
 
+    public boolean equals(EventTask eventTask) {
+        return super.equals(eventTask) && this.date.equals(eventTask.date);
+    }
+
     @Override
     public String toString() {
         return indicator + super.toString() + " (Date: " + date.toString() + ")";

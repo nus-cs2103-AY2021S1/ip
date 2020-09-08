@@ -12,6 +12,10 @@ public class DeadLineTask extends Task {
         this.date = date;
     }
 
+    public boolean equals(DeadLineTask deadLineTask) {
+        return super.equals(deadLineTask) && this.date.equals(deadLineTask.date);
+    }
+
     @Override
     public String toString() {
         return indicator + super.toString() + " (by: " + date + ")";

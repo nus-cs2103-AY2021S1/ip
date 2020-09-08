@@ -8,6 +8,10 @@ public class TodoTask extends Task {
         super(name);
     }
 
+    public boolean equals(TodoTask todoTask) {
+        return super.equals(todoTask);
+    }
+
     @Override
     public String toString() {
         return indicator + super.toString();

@@ -16,10 +16,17 @@ public class TaskList {
      * @param task
      */
     public void addTask(Task task) {
-        taskList.add(task);
-        TextPrinter.standardPrint("Got it. I've added this task:\n  " +
-                task.toString() + "\n" +
-                "Now you have " + size() + " tasks in the list.");
+        int duplicateTaskNum = findDuplicate(task);
+        if (duplicateTaskNum == -1) {
+            taskList.add(task);
+            TextPrinter.standardPrint("Got it. I've added this task:\n  " +
+                    task.toString() + "\n" +
+                    "Now you have " + size() + " tasks in the list.");
+        } else {
+            TextPrinter.standardPrint("Task already exists\n" +
+                    taskList.get(duplicateTaskNum).toString() + "\n" +
+                    "No new task is added");
+        }
     }
 
     /**
@@ -115,5 +122,15 @@ public class TaskList {
         } catch (IndexOutOfBoundsException e) {
             TextPrinter.printTaskNotFoundError();
         }
+    }
+
+    // below are private methods
+    private int findDuplicate(Task task) {
+        for (int i = 0; i < taskList.size(); i++) {
+            if (task.equals(taskList.get(i))) {
+                return i;
+            }
+        }
+        return -1;
     }
 }

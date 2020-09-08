@@ -29,6 +29,7 @@ public class WindowDisplay extends Application {
     private TaskList taskList;
     private Path pathToSave;
     private Ui ui;
+    private static boolean hasEnded = false;
 
     @Override
     public void start(Stage stage) {
@@ -153,5 +154,10 @@ public class WindowDisplay extends Application {
         ui.handle(input);
         return "space";
     }
+
+    // personal private methods below
+//    public static void endWindow() {
+//        hasEnded = true;
+//    }
 }
 

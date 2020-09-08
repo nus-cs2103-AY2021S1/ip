@@ -39,7 +39,7 @@ public class CommandParserAndLogic {
                 TextPrinter.printCommands();
                 return true;
             case "bye":
-                byeLogic();
+//                byeLogic();
                 return true;
             case "list":
                 taskList.printOut();
@@ -68,9 +68,9 @@ public class CommandParserAndLogic {
         }
     }
 
-    private void byeLogic() {
-        Ui.endUi();
-    }
+//    private void byeLogic() {
+//        WindowDisplay.endWindow();
+//    }
 
     private void doneLogic() {
         if (current.length == 1) {
