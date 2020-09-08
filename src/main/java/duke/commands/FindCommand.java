@@ -6,6 +6,7 @@ import duke.ui.Ui;
 import duke.task.Task;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class FindCommand extends Command {
     private final boolean HAS_FINISHED = false;
@@ -17,10 +18,11 @@ public class FindCommand extends Command {
 
     @Override
     public CommandResult execute(TaskList taskList, Ui ui, Storage storage) {
+        String[] keywords = keyword.split(" ");
         // For CLI
-        taskList.find(keyword);
+        taskList.find(keywords);
         // For GUI
-        ArrayList<Task> matchingTasks = taskList.findForGui(keyword);
+        ArrayList<Task> matchingTasks = taskList.findForGui(keywords);
         StringBuilder str = new StringBuilder();
         str.append("Here are the matching tasks in your list:\n");
         str.append(taskListToString(matchingTasks));
