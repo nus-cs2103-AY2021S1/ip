@@ -30,15 +30,13 @@ public class ListCommand extends Command {
     }
 
     private String list(ArrayList<Task> tasks) {
-        int curr = 0;
-        String res = "";
+        return tasks.stream().reduce("",
+                (string, currTask) -> string + printTaskInList(currTask, tasks),
+                (prev, next) -> prev + next);
+    }
 
-        while (curr < tasks.size()) {
-            res += ui.printTask(curr + 1, tasks.get(curr)) + "\n";
-            curr += 1;
-        }
-
-        return res;
+    private String printTaskInList(Task task, ArrayList<Task> tasks) {
+        return ui.printTask(tasks.indexOf(task) + 1, task) + "\n";
     }
 
     private String checkDate() throws DukeException {
