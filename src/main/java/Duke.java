@@ -56,7 +56,7 @@ public class Duke {
             isWriting = true;
             String noteName = in.substring(Parser.NEW_LENGTH);
             if (noteName.length() == 0) {
-                result = Ui.errorMsg("enter a note name! e.g. note mynote");
+                result = Ui.errorMsg("enter a note name! e.g. note mynote");       
             } else {
                 result = Ui.print("new note added! now type in the content of your note.");
                 tempNote = new Note(noteName);
@@ -78,6 +78,8 @@ public class Duke {
                     note = notes.get(current);
                     result = Ui.print(note.getContent());
                 }
+                assert in.length() >= 5 : "input is too short";
+                current = Integer.parseInt(in.substring(5));
             } catch (Exception e){
                 result = Ui.errorMsg("you haven't entered a note number to view!");
             }
@@ -87,7 +89,7 @@ public class Duke {
             if (keyword.length() == 0) {
                 result = Ui.errorMsg("you haven't entered a search keyword!");
             } else {
-                result = Ui.print("here's the list of tasks that contain the keyword!") + Ui.print(tasks.findTasks(keyword).toString());
+                result = Ui.print("here's the list of tasks that contain the keyword!") + Ui.print(tasks.findTasks(keyword).toString());                
             }
         } else if (cmd == Command.DONE) {
             int current;
@@ -126,7 +128,6 @@ public class Duke {
                     assert task != null : "task is null";
                     tasks.delete(current);
                     result = Ui.print("i've removed the following task from the list:\n\t" + task + "\nnow you have " + tasks.size() + " items in your tasklist.");
-
                 }
             } catch (Exception e){
                 result = Ui.errorMsg("you haven't entered a task number to delete!");
