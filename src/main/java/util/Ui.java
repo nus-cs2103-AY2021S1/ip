@@ -1,14 +1,12 @@
 package util;
 
-import java.util.Scanner;
-
 /**
  * Deals with interactions with the user
  * */
 public class Ui {
     /** Constants **/
-    private final String outputBreaker = ">>> ";
-    private final String lineBreaker = "--.--.--.--.--.--.--.--.--.--.--." +
+    private final String outputSymbol = ">>> ";
+    private final String lineBreak = "--.--.--.--.--.--.--.--.--.--.--." +
             "--.--.--.--.--.--.--.--.--.--.--";
     // Text Images
     private final String logo = " ____        _        \n"
@@ -18,16 +16,12 @@ public class Ui {
             + "|____/ \\__,_|_|\\_\\___|\n";
 
     // Other variable
-    private Scanner scanner;
-
     private String greetings = "";
 
     /**
      * Constructors.
      */
     public Ui() {
-        // Using Scanner for reading inputs
-        this.scanner = new Scanner(System.in);
     }
 
     /**
@@ -46,7 +40,7 @@ public class Ui {
         return greetings +
                 "\nHello, I'm Duke! " +
                 "What can I help you with today?" +
-                "\n" + lineBreaker + "\n";
+                "\n" + lineBreak + "\n";
     }
 
     /**
@@ -55,44 +49,27 @@ public class Ui {
      * @return Duke's farewell as a String
      */
     public String getFarewells() {
-        return outputBreaker +
+        return outputSymbol +
                 "Bye! Hoped I helped!" +
-                "\n" + lineBreaker;
+                "\n" + lineBreak;
     }
 
     /**
-     * Takes in input from user.
-     *
-     * @return User input as a String.
-     */
-    public String readUserInput() {
-        // Read user input
-        return scanner.nextLine();
-    }
-
-    /**
-     * Prints Duke's symbols before response.
-     */
-    public void printOutputSymbol() {
-        System.out.print(outputBreaker);
-    }
-
-    /**
-     * Prints Duke's symbols before response.
+     * Returns a line break and Duke's symbols before response.
      *
      * @return The string containing output symbols.
      */
     public String getOutputSymbol() {
-        return lineBreaker + "\n" + outputBreaker;
+        return lineBreak + "\n" + outputSymbol;
     }
 
     /**
-     * Returns the line breaker string.
+     * Returns the line break string.
      *
      * @returns Line break as String.
      */
-    public String getLineBreaker() {
-        return lineBreaker + "\n";
+    public String getLineBreak() {
+        return lineBreak + "\n";
     }
 
     /**
