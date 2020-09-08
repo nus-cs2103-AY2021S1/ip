@@ -1,7 +1,7 @@
 package TaskList;
 
 import java.util.ArrayList;
-import Tasks.*;
+import Tasks.Task;
 
 /**
  * TaskList.TaskList is the list of tasks and handles the list functions (get, add, remove, size) in the program and the storage.
