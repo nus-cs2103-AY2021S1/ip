@@ -2,8 +2,9 @@ package duke.storage;
 
 import java.util.List;
 
+import duke.task.Task;
+import duke.task.TaskList;
 import duke.tools.Format;
-import duke.tools.Parser;
 
 
 
@@ -28,15 +29,18 @@ public class DukeFileReader extends DukeFile {
     /**
      * Loads all the strings back to the Parser list as tasks.
      */
-    public void loadFile() {
+    public TaskList<Task> loadFile() {
         if (!doesFileExist()) {
             createFile();
         }
+        TaskList<Task> taskList = new TaskList<>();
         List<String> taskStrings = readFile();
         for (String taskString : taskStrings) {
             Format<String> stringFormat = new Format<>(taskString);
-            Parser.getTaskList().addMemory(stringFormat.stringToTask());
+            taskList.addMemory(stringFormat.stringToTask());
         }
+
+        return taskList;
     }
 
     /**
@@ -45,15 +49,17 @@ public class DukeFileReader extends DukeFile {
      *
      * @param content User input.
      */
-    public void matchContent(String content) {
+    public TaskList<Task> matchContent(String content) {
+        TaskList<Task> taskList = new TaskList<>();
         if (doesFileExist()) {
             List<String> taskStrings = readFile();
             for (String taskString : taskStrings) {
                 if (taskString.contains(content)) {
                     Format<String> stringFormat = new Format<>(taskString);
-                    Parser.getTaskList().addMemory(stringFormat.stringToTask());
+                    taskList.addMemory(stringFormat.stringToTask());
                 }
             }
         }
+        return taskList;
     }
 }

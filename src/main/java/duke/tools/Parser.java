@@ -45,7 +45,7 @@ public class Parser {
      */
     public static void reloadTaskList() {
         taskList = new TaskList<>();
-        new DukeFileReader(Directory.FILEDIRECTORY.toString()).loadFile();
+        taskList = new DukeFileReader(Directory.FILEDIRECTORY.toString()).loadFile();
     }
 
     /**
@@ -70,6 +70,7 @@ public class Parser {
 
         extract = new String[3];
         extract = extract(order);
+        assert extract[command] != null : "Shorten() not working";
         reloadTaskList();
 
         if (order.equals(Command.LIST.toString())) {
@@ -155,7 +156,7 @@ public class Parser {
         try {
             taskList = new TaskList<>();
             DukeFileReader dukeFileReader = new DukeFileReader(Directory.FILEDIRECTORY.toString());
-            dukeFileReader.matchContent(content);
+            taskList = dukeFileReader.matchContent(content);
 
             Response response = new Response(
                     Statement.FIND.toString()
@@ -220,6 +221,8 @@ public class Parser {
             return extract;
         }
 
+        assert pointer != separator : "pointer or separator calculation is wrong";
+
         //details of the description is found
         extract[taskDetail] = new Format<>(
                 description
@@ -241,6 +244,11 @@ public class Parser {
                     .shorten()
                     .getContent();
         }
+
+        assert (separator < len - 1 && extract[taskTime] != null)
+                || (separator >= len - 1 && extract[taskTime] == null)
+                : "correspondence of separator and time allocation mismatches";
+
         return extract;
     }
 
@@ -261,6 +269,11 @@ public class Parser {
                 & !identity.equals(Command.DEADLINE.toString())) {
             return DukeException.inputFormatException();
         }
+
+        assert identity.equals(Command.TODO.toString())
+                || identity.equals(Command.EVENT.toString())
+                || identity.equals(Command.DEADLINE.toString())
+                : "commands other todo or event or deadline passed filter";
 
         //situation that there is no detail of the task, throw error
         if (detail == null) {
@@ -285,6 +298,9 @@ public class Parser {
                 return DukeException.timeFormatException();
             }
         }
+
+        assert task != null : "condition set above appears incorrect logic";
+
         taskList.addMemory(task);
         DukeFileWriter data = new DukeFileWriter(Directory.FILEDIRECTORY.toString(), true);
         data.writeToFile(task.toString());
