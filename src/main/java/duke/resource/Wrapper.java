@@ -23,7 +23,6 @@ public class Wrapper {
         return this.taskList;
     }
 
-
     public Ui getUi() {
         return this.ui;
     }
