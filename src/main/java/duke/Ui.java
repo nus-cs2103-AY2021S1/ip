@@ -59,47 +59,56 @@ public class Ui {
     }
 
     public String showStatistics(TaskList tasks) {
-        int numOfTodo = 0;
-        int numOfDoneTodo = 0;
-        int numOfEvent = 0;
-        int numOfDoneEvent = 0;
-        int numOfDeadline = 0;
-        int numOfDoneDeadline = 0;
-        int numOfDone = 0;
+        double numOfTodos = 0;
+        double numOfDoneTodos = 0;
+        double numOfEvents = 0;
+        double numOfDoneEvents = 0;
+        double numOfDeadlines = 0;
+        double numOfDoneDeadlines = 0;
+        double numOfDones = 0;
 
         for (int i = 0; i < tasks.getSize(); i++) {
             Task task = tasks.getTask(i);
             switch (task.getType()) {
             case "todo":
-                numOfTodo++;
+                numOfTodos++;
                 if (task.getDoneStatus()) {
-                    numOfDone++;
-                    numOfDoneTodo++;
+                    numOfDones++;
+                    numOfDoneTodos++;
                 }
                 break;
             case "deadline":
-                numOfDeadline++;
+                numOfDeadlines++;
                 if (task.getDoneStatus()) {
-                    numOfDone++;
-                    numOfDoneDeadline++;
+                    numOfDones++;
+                    numOfDoneDeadlines++;
                 }
                 break;
             case "event":
-                numOfEvent++;
+                numOfEvents++;
                 if (task.getDoneStatus()) {
-                    numOfDone++;
-                    numOfDoneEvent++;
+                    numOfDones++;
+                    numOfDoneEvents++;
                 }
                 break;
             }
         }
 
+        int percentageOfDoneTodos = (int) (numOfDoneTodos / numOfTodos * 100);
+        int percentageOfDoneDeadlines = (int) (numOfDoneDeadlines / numOfDeadlines * 100);
+        int percentageOfDoneEvents = (int) (numOfDoneEvents / numOfEvents * 100);
+        int percentageOfDoneTasks = (int) (numOfDones / tasks.getSize() * 100);
+
         String message = "Here are some statistics about your tasks:\n\n"
-                + "You have completed " + numOfDoneTodo + " out of " + numOfTodo + " Todos.\n"
-                + "You have completed " + numOfDoneDeadline + " out of " + numOfDeadline + " Deadlines.\n"
-                + "You have completed " + numOfDoneEvent + " out of " + numOfEvent + " Events.\n"
+                + "You have completed " + numOfDoneTodos
+                + " out of " + numOfTodos + " Todos. (" + percentageOfDoneTodos + "%)\n"
+                + "You have completed " + numOfDoneDeadlines
+                + " out of " + numOfDeadlines + " Deadlines. (" + percentageOfDoneDeadlines + "%)\n"
+                + "You have completed " + numOfDoneEvents
+                + " out of " + numOfEvents + " Events. (" + percentageOfDoneEvents + "%)\n"
                 + "\n"
-                + "In total, you have completed " + numOfDone + " out of " + tasks.getSize() + " tasks.\n";
+                + "In total, you have completed " + numOfDones
+                + " out of " + tasks.getSize() + " tasks. (" + percentageOfDoneTasks + "%)\n";
         return wrapMessageInBorders(message);
     }
 
