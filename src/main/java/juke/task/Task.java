@@ -5,11 +5,12 @@ package juke.task;
  */
 public class Task {
 
-    protected String description;
-    protected boolean isDone;
+    private String description;
+    private boolean isDone;
 
     /**
      * Constructs a Task with a given description.
+     *
      * @param description Description of Task.
      */
     public Task(String description) {
@@ -19,6 +20,7 @@ public class Task {
 
     /**
      * Gets the appropriate icon to represent current Done status of task.
+     *
      * @return Icon String.
      */
     public String getStatusIcon() {
@@ -34,6 +36,7 @@ public class Task {
 
     /**
      * Returns the representative text of the Task.
+     *
      * @return Text that represents Task.
      */
     public String taskSaver() {
@@ -43,6 +46,7 @@ public class Task {
 
     /**
      * Returns the description of Task.
+     *
      * @return Description of task.
      */
     public String getDescription() {
@@ -50,7 +54,16 @@ public class Task {
     }
 
     /**
+     * Sets the Task Description
+     * @param description
+     */
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    /**
      * Outputs the Task as a String.
+     *
      * @return String representation of Task.
      */
     @Override

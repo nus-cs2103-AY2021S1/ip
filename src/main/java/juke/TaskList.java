@@ -1,7 +1,10 @@
 package juke;
 
+import juke.task.Deadline;
+import juke.task.Event;
 import juke.task.Task;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -72,7 +75,7 @@ public class TaskList {
      */
     public String markTaskAsDone(int taskNo) {
         assert taskNo < list.size() : "Invalid Task index";
-       
+
         Task toBeDone = this.list.get(taskNo);
         toBeDone.markAsDone();
         this.list.set(taskNo, toBeDone);
@@ -115,6 +118,80 @@ public class TaskList {
         if (thereWasNoMatch) {
             output.append("No match found :(");
         }
+
+        return output.toString();
+    }
+
+    /**
+     * Updates a task with the given description.
+     *
+     * @param taskNo         The index position of task.
+     * @param newDescription The new description to be used.
+     * @return Successful message upon change.
+     */
+    public String updateDescription(int taskNo, String newDescription) {
+        assert taskNo < list.size() : "Invalid Task index";
+
+        Task taskToBeUpdated = list.get(taskNo);
+        taskToBeUpdated.setDescription(newDescription);
+
+        StringBuilder output = new StringBuilder();
+        String toBeAppended = String.format("I've changed the task description! The task now looks like this:\n%s",
+                taskToBeUpdated);
+        output.append(toBeAppended);
+
+        return output.toString();
+    }
+
+    /**
+     * Updates a task with the given date.
+     *
+     * @param taskNo  The index position of task.
+     * @param newDate The new date to be used.
+     * @return Successful message upon change.
+     */
+    public String updateDate(int taskNo, LocalDate newDate) {
+        assert taskNo < list.size() : "Invalid Task index";
+
+        Task task = list.get(taskNo);
+
+        if (task instanceof Deadline) {
+            Deadline taskToBeUpdated = (Deadline) task;
+            taskToBeUpdated.setByDate(newDate);
+        } else if (task instanceof Event) {
+            Event taskToBeUpdated = (Event) task;
+            taskToBeUpdated.setAtDate(newDate);
+        }
+
+        StringBuilder output = new StringBuilder();
+        String toBeAppended = String.format("I've changed the task date! The task now looks like this:\n%s",
+                task);
+        output.append(toBeAppended);
+
+        return output.toString();
+    }
+
+    /**
+     * Updates a task with the given description and given date.
+     *
+     * @param taskNo         The index position of task.
+     * @param newDescription The new description to be used.
+     * @param newDate        The new Date to be used.
+     * @return Successful message upon change.
+     */
+    public String updateDescriptionAndDate(int taskNo, String newDescription, LocalDate newDate) {
+        assert taskNo < list.size() : "Invalid Task index";
+
+        Task task = list.get(taskNo);
+
+        this.updateDescription(taskNo, newDescription);
+        this.updateDate(taskNo, newDate);
+
+        StringBuilder output = new StringBuilder();
+        String toBeAppended = String.format(
+                "I've changed the task description and date! The task now looks like this:\n%s",
+                task);
+        output.append(toBeAppended);
 
         return output.toString();
     }
