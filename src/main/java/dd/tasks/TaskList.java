@@ -3,6 +3,7 @@ package dd.tasks;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.Scanner;
 
 /**
@@ -10,6 +11,7 @@ import java.util.Scanner;
  */
 public class TaskList {
     private final ArrayList<Task> taskList;
+    private int numOfTodo = 0;
 
     /**
      * Class Constructor.
@@ -32,6 +34,7 @@ public class TaskList {
 
             if (temp[0].equals("T")) {
                 scannedTasks.add(new Todo(temp[2]));
+                this.numOfTodo += 1;
             } else if (temp[0].equals("E")) {
                 scannedTasks.add(new Event(temp[2], temp[3]));
             } else {
@@ -64,15 +67,6 @@ public class TaskList {
     }
 
     /**
-     * Returns the last task in the ArrayList of tasks.
-     *
-     * @return Last task in the ArrayList of tasks.
-     */
-    public Task getLastTask() {
-        return taskList.get(taskList.size() - 1);
-    }
-
-    /**
      * Returns a task according to a given index.
      *
      * @param i Index of Task in tasks to be returned.
@@ -92,11 +86,33 @@ public class TaskList {
     }
 
     /**
+     * Adds a To-do task, ensures that all to-do tasks are at the top of list
+     * and increase number of to-do by one.
+     *
+     * @param t To-do task to be added to ArrayList of tasks.
+     */
+    public void addTodo(Task t) {
+        taskList.add(numOfTodo, t);
+        this.numOfTodo += 1;
+    }
+
+    /**
      * Deletes the task at a given index.
      *
      * @param i Index of Task in tasks to be deleted.
      */
     public void deleteTask(int i) {
+        if (taskList.get(i) instanceof Todo) {
+            this.numOfTodo -= 1;
+        }
         taskList.remove(i);
+    }
+
+    /**
+     * Sorts the deadline and event tasks chronologically.
+     */
+    public void sortTasks() {
+        assert (!(taskList.get(numOfTodo) instanceof Todo)) : "trying to sort todo";
+        taskList.subList(numOfTodo, getTaskSize()).sort(Comparator.comparing(Task::getDateTime));
     }
 }
