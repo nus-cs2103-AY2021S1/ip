@@ -18,6 +18,7 @@ import java.time.format.DateTimeFormatter;
 public class Parser {
     private final TaskList taskList;
     private final Storage storage;
+    private String prevCommand = "";
     /**
      * Has a taskList and storage object to call the appropriate taskList functions and
      * to overwrite the file containing the tasks at the end of the Java Duke Program
@@ -44,6 +45,9 @@ public class Parser {
         assert(input.contains(" "));
         String[] instructions = input.split(" ");
         String command = instructions[0];
+        if (!command.equals("undo")) {
+            prevCommand = input;
+        }
         switch (command) {
         case "bye":
             storage.overwriteTodoList();
@@ -66,6 +70,8 @@ public class Parser {
             String event = input.substring(5);
             return taskList.addItem(command, event);
         }
+        case "undo":
+            return undoPrevCommand();
         case "LanZhan":
             return "Wei Ying, \n\n"
                     + "Why am I sitting here having such a useless conversation with you?\n\n Go away!";
@@ -214,5 +220,57 @@ public class Parser {
         LocalDate dueDate = Parser.formatDate(splitItem[1]);
         String dateTime = Parser.formatDateString(dueDate, splitItem[1]);
         return new Event(splitItem[0], dateTime, dueDate, splitItem[1], isCompleted);
+    }
+
+    /**
+     * Undoes the previous command inputted by the user
+     *
+     * @return String to be outputted to the user
+     * @throws DukeException
+     */
+    private String undoPrevCommand() throws DukeException {
+        if (prevCommand.length() == 0) {
+            throw new DukeException("Nothing to undo >.<");
+        }
+        String[] instructions = prevCommand.split(" ");
+        String command = instructions[0];
+        String oldCommand = prevCommand;
+        return undoCommand(command, oldCommand);
+    }
+
+    /**
+     * Undoes the previous command inputted by the user
+     *
+     * @param command
+     * @param oldCommand
+     * @return String to be inputted to the user
+     * @throws DukeException
+     */
+    private String undoCommand(String command, String oldCommand) throws DukeException {
+        prevCommand = "undo " + oldCommand;
+        switch (command) {
+        case "bye":
+            storage.overwriteTodoList();
+            return command;
+        case "list":
+            return taskList.showList();
+        case "done":
+            return taskList.unCompleteItem(oldCommand);
+        case "delete":
+            return taskList.unDeleteItem(oldCommand);
+        case "find":
+            return taskList.findItem(oldCommand);
+        case "todo":
+        case "deadline":
+        case "event":
+            return taskList.deleteLastAddedItem();
+        case "undo":
+            return scenarios(oldCommand.substring(5));
+        case "LanZhan":
+            return "Wei Ying, \n\n"
+                    + "Why am I sitting here having such a useless conversation with you?\n\n Go away!";
+        default:
+            throw new DukeException("Oops! Previous command could not be undone");
+        }
     }
 }
