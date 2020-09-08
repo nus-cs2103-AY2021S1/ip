@@ -44,25 +44,23 @@ public class Repl {
     /**
      * Processes the user's input and returns a {@code DukeResponse}.
      *
-     * @param input the user's input
-     * @return a {@code DukeResponse}
+     * @param input the user's input.
+     * @return a {@code DukeResponse}.
      */
     public static DukeResponse getResponse(String input) {
         String firstToken = input.split(" ")[0];
-        // This should never be displayed as all possible responses should already be covered.
-        String response = ResourceHandler.getString("repl.internalError");
-        boolean shouldExit = false;
+        DukeResponse dukeResponse;
         try {
             Command command = Command.valueOf(firstToken.toUpperCase());
             // Check that the user input is of the correct format for the command.
             command.validate(input);
             // Execute the command.
-            response = command.execute(taskManager, input);
+            dukeResponse = command.execute(taskManager, input);
         } catch (DukeException e) {
-            response = e.getMessage();
+            dukeResponse = new DukeResponse(e.getMessage());
         } catch (IllegalArgumentException e) {
-            response = ResourceHandler.getString("repl.unknownCommand");
+            dukeResponse = new DukeResponse(ResourceHandler.getString("repl.unknownCommand"));
         }
-        return new DukeResponse(response, shouldExit);
+        return dukeResponse;
     }
 }

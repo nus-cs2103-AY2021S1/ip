@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.regex.Pattern;
 
 import duke.exceptions.DukeException;
+import duke.messages.DukeResponse;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.TaskManager;
@@ -44,8 +45,10 @@ public enum Command {
          * @return the output of running the 'bye' command.
          */
         @Override
-        public String execute(TaskManager taskManager, String input) {
-            return ResourceHandler.getString("repl.farewell");
+        public DukeResponse execute(TaskManager taskManager, String input) {
+            String response = ResourceHandler.getString("repl.farewell");
+            // Return a `DukeResponse` with the exit flag enabled.
+            return new DukeResponse(response, true);
         }
     },
 
@@ -79,13 +82,14 @@ public enum Command {
          * @throws DukeException if an error occurs while running the 'deadline' command.
          */
         @Override
-        public String execute(TaskManager taskManager, String input) throws DukeException {
+        public DukeResponse execute(TaskManager taskManager, String input) throws DukeException {
             String lineWithoutCommand = input.replaceFirst("^deadline", "");
             String[] args = lineWithoutCommand.split("/by", 2);
             String deadlineName = args[0].trim();
             String dueDateString = args[1].trim();
             LocalDateTime dueDate = DateTimeParser.parseDateTime(dueDateString);
-            return taskManager.addTask(new Deadline(deadlineName, dueDate));
+            String response = taskManager.addTask(new Deadline(deadlineName, dueDate));
+            return new DukeResponse(response);
         }
     },
 
@@ -118,7 +122,7 @@ public enum Command {
          * @return the output of running the 'delete' command.
          */
         @Override
-        public String execute(TaskManager taskManager, String input) {
+        public DukeResponse execute(TaskManager taskManager, String input) {
             String lineWithoutCommand = input.replaceFirst("^delete", "");
             String listIndexStr = lineWithoutCommand.trim();
             // `listIndexStr` is guaranteed to be a string made up of only digit characters after validation.
@@ -130,7 +134,7 @@ public enum Command {
                 response = ResourceHandler.getString("repl.invalidTaskIndex");
             }
             assert response != null;
-            return response;
+            return new DukeResponse(response);
         }
     },
 
@@ -163,7 +167,7 @@ public enum Command {
          * @return the output of running the 'done' command.
          */
         @Override
-        public String execute(TaskManager taskManager, String input) {
+        public DukeResponse execute(TaskManager taskManager, String input) {
             String lineWithoutCommand = input.replaceFirst("^done", "");
             String listIndexStr = lineWithoutCommand.trim();
             // `listIndexStr` is guaranteed to be a string made up of only digit characters after validation.
@@ -175,7 +179,7 @@ public enum Command {
                 response = ResourceHandler.getString("repl.invalidTaskIndex");
             }
             assert response != null;
-            return response;
+            return new DukeResponse(response);
         }
     },
 
@@ -209,13 +213,14 @@ public enum Command {
          * @throws DukeException if an error occurs while running the 'event' command.
          */
         @Override
-        public String execute(TaskManager taskManager, String input) throws DukeException {
+        public DukeResponse execute(TaskManager taskManager, String input) throws DukeException {
             String lineWithoutCommand = input.replaceFirst("^event", "");
             String[] args = lineWithoutCommand.split("/at", 2);
             String eventName = args[0].trim();
             String dateTimeString = args[1].trim();
             LocalDateTime dateTime = DateTimeParser.parseDateTime(dateTimeString);
-            return taskManager.addTask(new Event(eventName, dateTime));
+            String response = taskManager.addTask(new Event(eventName, dateTime));
+            return new DukeResponse(response);
         }
     },
 
@@ -248,10 +253,11 @@ public enum Command {
          * @return the output of running the 'find' command.
          */
         @Override
-        public String execute(TaskManager taskManager, String input) {
+        public DukeResponse execute(TaskManager taskManager, String input) {
             String lineWithoutCommand = input.replaceFirst("^find", "");
             String[] searchKeywords = lineWithoutCommand.trim().split("\\s+");
-            return taskManager.getMatchingTasks(searchKeywords);
+            String response = taskManager.getMatchingTasks(searchKeywords);
+            return new DukeResponse(response);
         }
     },
 
@@ -283,8 +289,9 @@ public enum Command {
          * @return the output of running the 'list' command.
          */
         @Override
-        public String execute(TaskManager taskManager, String input) {
-            return taskManager.toString();
+        public DukeResponse execute(TaskManager taskManager, String input) {
+            String response = taskManager.toString();
+            return new DukeResponse(response);
         }
     },
 
@@ -316,8 +323,9 @@ public enum Command {
          * @return the output of running the 'overdue' command.
          */
         @Override
-        public String execute(TaskManager taskManager, String input) {
-            return taskManager.getOverdueTasks();
+        public DukeResponse execute(TaskManager taskManager, String input) {
+            String response = taskManager.getOverdueTasks();
+            return new DukeResponse(response);
         }
     },
 
@@ -350,10 +358,11 @@ public enum Command {
          * @return the output of running the 'todo' command.
          */
         @Override
-        public String execute(TaskManager taskManager, String input) {
+        public DukeResponse execute(TaskManager taskManager, String input) {
             String lineWithoutCommand = input.replaceFirst("^todo", "");
             String toDoName = lineWithoutCommand.trim();
-            return taskManager.addTask(new ToDo(toDoName));
+            String response = taskManager.addTask(new ToDo(toDoName));
+            return new DukeResponse(response);
         }
     },
 
@@ -385,8 +394,9 @@ public enum Command {
          * @return the output of running the 'upcoming' command.
          */
         @Override
-        public String execute(TaskManager taskManager, String input) {
-            return taskManager.getUpcomingTasks();
+        public DukeResponse execute(TaskManager taskManager, String input) {
+            String response = taskManager.getUpcomingTasks();
+            return new DukeResponse(response);
         }
     };
 
@@ -403,8 +413,8 @@ public enum Command {
      *
      * @param taskManager the {@code TaskManager} object that is keeping track of tasks.
      * @param input the user input.
-     * @return a String response to be outputted by the chatbot.
+     * @return a {@code DukeResponse}.
      * @throws DukeException if an error occurs while running the command.
      */
-    public abstract String execute(TaskManager taskManager, String input) throws DukeException;
+    public abstract DukeResponse execute(TaskManager taskManager, String input) throws DukeException;
 }
