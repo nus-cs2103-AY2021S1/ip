@@ -29,7 +29,6 @@ public class Storage {
      */
     public ArrayList<Task> load() {
         ArrayList<Task> tasks = new ArrayList<>();
-        assert !filePath.isEmpty() : "Data filePath is missing.";
         try {
             File file = new File(filePath);
             if (file.exists()) {
@@ -72,7 +71,6 @@ public class Storage {
      * @param taskList The overall user's task list.
      */
     public void writeTasks(TaskList taskList) {
-        assert !filePath.isEmpty() : "Data filePath is missing.";
         try {
             ArrayList<Task> tasks = taskList.getTaskList();
             File file = new File(filePath);

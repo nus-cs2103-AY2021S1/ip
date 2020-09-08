@@ -59,7 +59,6 @@ checkstyle {
 run{
     systemProperty "file.encoding", "utf-8"
     standardInput = System.in
-    enableAssertions = true
 }
 
 compileJava.options.encoding = 'UTF-8'
