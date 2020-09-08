@@ -45,10 +45,14 @@ public class TaskManager {
 
     @Override
     public String toString() {
-        String result = "Here are the tasks in your list:\n";
-        for (int i = 0; i < tasksList.size(); i++) {
-            result = result + (i+1) + ". " + tasksList.get(i) + "\n";
+        if (this.getTasksList().size() == 0) {
+            return "You have nothing to do!";
+        } else {
+            String result = "Here are the tasks in your list:\n";
+            for (int i = 0; i < tasksList.size(); i++) {
+                result = result + (i + 1) + ". " + tasksList.get(i) + "\n";
+            }
+            return result;
         }
-        return result;
     }
 }

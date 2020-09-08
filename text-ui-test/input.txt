@@ -1,3 +1,10 @@
 todo go for a run
 deadline homework /by 2020-11-22
 event meeting /at 2020-12-12 18:00
+deadline cs assignment /by 2020-03-14
+todo math assignment
+list
+find assignment
+done 3
+delete 1
+bye

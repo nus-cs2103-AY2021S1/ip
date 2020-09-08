@@ -2,7 +2,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
-public class AddCommand extends IOHandler {
+public class AddCommand extends Command {
 
     private String taskType;
     private String taskDescription;
@@ -14,7 +14,7 @@ public class AddCommand extends IOHandler {
     }
 
     @Override
-    public String handleIO(String input, TaskManager taskManager, FileHandler fileHandler) throws IOException {
+    public String handle(String input, TaskManager taskManager, Storage fileHandler) throws IOException {
 
         if (this.taskType.equals("todo")) {
             //if the task is a todo task

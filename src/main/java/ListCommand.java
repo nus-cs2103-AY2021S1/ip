@@ -1,7 +1,7 @@
-public class ListCommand extends IOHandler {
+public class ListCommand extends Command {
 
     @Override
-    public String handleIO(String input, TaskManager taskManager, FileHandler fileHandler) {
+    public String handle(String input, TaskManager taskManager, Storage fileHandler) {
         return taskManager.toString();
     }
 }

@@ -1,11 +1,3 @@
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import javafx.scene.image.Image;
-
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
@@ -16,24 +8,15 @@ import java.util.Scanner;
  */
 public class Duke {
 
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/duke2.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/duke1.png"));
-
-
     private TaskManager taskManager;
-    private FileHandler fileHandler;
+    private Storage fileHandler;
 
     public Duke(String filePath) throws IOException {
-        this.fileHandler = new FileHandler(filePath);
+        this.fileHandler = new Storage(filePath);
         this.taskManager = new TaskManager();
 
         try {
-            List<String> files = FileHandler.readSavedFile(filePath);
+            List<String> files = Storage.readSavedFile(filePath);
             for (String value : files) {
                 Task task = TextAndTaskConverter.textConverter(value);
                 taskManager.getTasksList().add(task);
@@ -58,8 +41,8 @@ public class Duke {
     private void run() throws IOException {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
-        IOHandler ioHandler = Parser.parseInput(input);
-        System.out.println(ioHandler.handleIO(input, taskManager, fileHandler));
+        Command ioHandler = Parser.parseInput(input);
+        System.out.println(ioHandler.handle(input, taskManager, fileHandler));
     }
 
     /**
@@ -67,7 +50,7 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) throws IOException {
-        IOHandler ioHandler = Parser.parseInput(input);
-        return ioHandler.handleIO(input, taskManager, fileHandler);
+        Command ioHandler = Parser.parseInput(input);
+        return ioHandler.handle(input, taskManager, fileHandler);
     }
 }

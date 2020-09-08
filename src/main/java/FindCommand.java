@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class FindCommand extends IOHandler {
+public class FindCommand extends Command {
 
     String searchWord;
 
@@ -9,7 +9,7 @@ public class FindCommand extends IOHandler {
         this.searchWord = splitInput[1];
     }
 
-    public String handleIO(String input, TaskManager taskManager, FileHandler fileHandler) {
+    public String handle(String input, TaskManager taskManager, Storage fileHandler) {
 
         ArrayList<String> tasksFound = new ArrayList<>();
         for (int i = 0; i < taskManager.getTasksList().size(); i++) {
@@ -21,7 +21,7 @@ public class FindCommand extends IOHandler {
 
         //print tasks that match the search word
         if (tasksFound.size() == 0) {
-            return "Nothing matches :(";
+            return "Sorry nothing matches :(";
 
         } else {
             String result = "";

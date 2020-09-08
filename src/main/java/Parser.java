@@ -1,6 +1,6 @@
 public class Parser {
 
-    public static IOHandler parseInput(String input) {
+    public static Command parseInput(String input) {
 
         if (input.equals("list")) {
             return new ListCommand();

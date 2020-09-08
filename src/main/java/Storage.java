@@ -2,16 +2,15 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Handles txt files created.
  */
-public class FileHandler {
+public class Storage {
 
     private String filePath;
 
-    public FileHandler(String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -33,13 +32,13 @@ public class FileHandler {
 
             if (task instanceof Deadline) {
                 fileWriter.write("D ## " + (task.getDone() ? 1 : 0) + " ## "
-                        + ((Deadline) task).getDescription() + " ## "
+                        + task.getDescription() + " ## "
                         + ((Deadline) task).getDate() + "\n");
             }
 
             if (task instanceof Event) {
                 fileWriter.write("E ## " + (task.getDone() ? 1 : 0) + " ## "
-                        + ((Event) task).getDescription() + " ## "
+                        + task.getDescription() + " ## "
                         + ((Event) task).getDate() + " " + ((Event) task).getTime() + "\n");
             }
         }

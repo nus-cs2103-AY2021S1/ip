@@ -1,9 +1,9 @@
 import java.io.IOException;
 
-public class ByeCommand extends IOHandler {
+public class ByeCommand extends Command {
 
     @Override
-    public String handleIO(String input, TaskManager taskManager, FileHandler fileHandler) throws IOException {
+    public String handle(String input, TaskManager taskManager, Storage fileHandler) throws IOException {
         fileHandler.writeToFile(taskManager);
         return "bye bye!";
     }

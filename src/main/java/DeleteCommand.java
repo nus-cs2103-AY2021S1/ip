@@ -1,6 +1,6 @@
 import java.io.IOException;
 
-public class DeleteCommand extends IOHandler {
+public class DeleteCommand extends Command {
 
     private int taskNum;
 
@@ -9,7 +9,7 @@ public class DeleteCommand extends IOHandler {
         this.taskNum = Integer.parseInt(splitInput[1]);
     }
 
-    public String handleIO(String input, TaskManager taskManager, FileHandler fileHandler) throws IOException {
+    public String handle(String input, TaskManager taskManager, Storage fileHandler) throws IOException {
         Task deletedTask = taskManager.getTask(taskNum - 1);
         taskManager.removeTask(taskNum);
         fileHandler.writeToFile(taskManager);
