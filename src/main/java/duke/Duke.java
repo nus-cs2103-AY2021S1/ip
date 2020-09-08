@@ -17,6 +17,7 @@ public class Duke {
     }
     /**
      * Generates a response to user input.
+     *
      * @param input User input.
      * @return Response string.
      */

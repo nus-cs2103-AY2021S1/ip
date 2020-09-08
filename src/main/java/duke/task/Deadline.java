@@ -5,6 +5,7 @@ public class Deadline extends Task {
 
     /**
      * Constructs a deadline object.
+     *
      * @param deadlineTask Name of deadline.
      * @param byTime Time by which deadline should be completed.
      */
@@ -15,6 +16,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the deadline in array form.
+     *
      * @return String array.
      */
     @Override

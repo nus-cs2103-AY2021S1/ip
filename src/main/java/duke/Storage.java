@@ -20,6 +20,7 @@ public class Storage {
 
     /**
      * Check whether duke.txt exists and read lines from that file.
+     *
      * @param taskList TaskList that manages tasks.
      */
     public static void loadFromFile(TaskList taskList) {
@@ -56,6 +57,7 @@ public class Storage {
 
     /**
      * Adds the tasks from data to taskList.
+     *
      * @param data Task info in data array.
      * @param taskList TaskList that manages tasks.
      */
@@ -89,6 +91,7 @@ public class Storage {
 
     /**
      * Stores the newly updated taskList to duke.txt.
+     *
      * @param taskList TaskList that manages tasks.
      */
     public static void writeToFile(TaskList taskList) {

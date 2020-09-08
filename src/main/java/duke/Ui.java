@@ -3,8 +3,7 @@ package duke;
 import java.util.Scanner;
 
 public class Ui {
-    private static final String horizontalLine = "    ____________________________________________________________";
-    private static final String indentation = "     ";
+    private static final String INDENTATION = "     ";
     private Scanner scanner;
 
     public Ui() {
@@ -13,6 +12,7 @@ public class Ui {
 
     /**
      * Returns the user input.
+     *
      * @return String of user input.
      */
     public String readInput() {
@@ -40,6 +40,7 @@ public class Ui {
 
     /**
      * Returns the error message.
+     *
      * @param message Error message.
      */
     public static String getErrorMessage(String message) {
