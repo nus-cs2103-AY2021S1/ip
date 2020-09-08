@@ -42,3 +42,29 @@ The run:
 ```shell script
 java -jar out/artifacts/ip_jar/ip.jar
 ```
+
+## Input commands
+
+##### Misc
+```
+bye # exit program
+```
+
+##### Viewing & querying tasks
+```
+list # List task details: id, description, time stamp etc...
+find,<keywords> # Search for matches in tasks, return the id
+```
+
+##### Updating tasks
+```
+done,<task id> # Indicate a task is complete
+delete,<task id> # Delete a task
+```
+
+##### Creating tasks
+```
+todo,<task name> # Add a task to todos
+deadline,<task name>,<time>
+event,<task name>,<time>
+```
