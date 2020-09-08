@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.text.Text?>
 
 <fx:root
         alignment="TOP_RIGHT"
@@ -15,7 +15,7 @@
         xmlns:fx="http://javafx.com/fxml/1"
 >
     <children>
-        <Text fx:id="dialog" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" />
+        <Label fx:id="dialog" text="Label" wrapText="true" />
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
     </children>
     <padding>

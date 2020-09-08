@@ -7,10 +7,11 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.text.Text;
+import javafx.scene.layout.Region;
 
 /**
  * An example of a custom control using FXML.
@@ -19,7 +20,7 @@ import javafx.scene.text.Text;
  */
 public class DialogBox extends HBox {
     @FXML
-    private Text dialog;
+    private Label dialog;
     @FXML
     private ImageView displayPicture;
 
@@ -34,6 +35,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setMinHeight(Region.USE_PREF_SIZE);
         displayPicture.setImage(img);
     }
 

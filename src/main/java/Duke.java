@@ -5,6 +5,8 @@
 public class Duke {
     private TaskList tasks;
     private final Storage storage;
+    private String storageErrorMessage;
+    private boolean hasStorageError;
 
     /**
      * Constructor.
@@ -13,10 +15,21 @@ public class Duke {
         this.storage = new Storage();
         try {
             this.tasks = storage.loadFile();
+            this.hasStorageError = false;
         } catch (Exception e) {
             System.err.println(e);
             this.tasks = new TaskList();
+            this.storageErrorMessage = e.toString();
+            this.hasStorageError = true;
         }
+    }
+
+    public String getStorageErrorMessage() {
+        return storageErrorMessage;
+    }
+
+    public boolean hasStorageError() {
+        return hasStorageError;
     }
 
     protected CommandResult acceptInput(String input) {
@@ -25,8 +38,7 @@ public class Duke {
             return command.execute(this.tasks, this.storage);
         } catch (DukeException e) {
             System.err.println(e);
+            return new CommandResult(e.toString());
         }
-
-        return new CommandResult("Oops! Something went wrong");
     }
 }

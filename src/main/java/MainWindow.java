@@ -37,6 +37,12 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         duke = d;
+
+        if (duke.hasStorageError()) {
+            dialogContainer
+                    .getChildren()
+                    .addAll(DialogBox.getDukeDialog(duke.getStorageErrorMessage(), dukeImage));
+        }
     }
 
     /**
