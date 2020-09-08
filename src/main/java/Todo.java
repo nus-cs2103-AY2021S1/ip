@@ -10,7 +10,7 @@ public class Todo extends Task {
      * @param description is the description of the todo.
      */
     public Todo(String description) {
-        super(description, "T");
+        super(description, Task.TODO_TASK);
     }
 
     /**
@@ -21,6 +21,6 @@ public class Todo extends Task {
      * @param isDone states if the Todo object is completed or not.
      */
     public Todo(String description, boolean isDone) {
-        super(description, "T", isDone);
+        super(description, Task.TODO_TASK, isDone);
     }
 }
