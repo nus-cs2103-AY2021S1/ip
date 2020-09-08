@@ -2,6 +2,7 @@ package sparkles.command.addcommand;
 
 import sparkles.SparklesException;
 import sparkles.command.Command;
+import sparkles.task.Task;
 import sparkles.task.TaskList;
 import sparkles.util.Parser;
 import sparkles.util.Storage;
@@ -36,5 +37,30 @@ public class AddCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) throws SparklesException {
         Command c = Parser.parseAddCommand(command);
         return c.execute(taskList, ui, storage);
+    }
+
+    /**
+     * Concatenate all lines of output together as one whole string
+     * and return that string to be executed by the command
+     * in the method "execute".
+     *
+     * @param ui       Ui object that deals with user interaction
+     * @param task     Task whose string output is required
+     * @param taskList TaskList object containing list of tasks
+     * @return final response to the command
+     */
+    @Override
+    public String concatenateOutputs(Ui ui, Task task, TaskList taskList) {
+        String response;
+
+        ui.print("     Got it. I've added this task");
+
+        response = "Got it. I've added this task\n";
+        response += task.printTask().trim() + "\n";
+
+        taskList.add(task);
+
+        response += ui.showListSize(taskList.getListSize());
+        return response;
     }
 }

@@ -39,25 +39,36 @@ public class DeleteCommand extends Command {
         try {
             index = Integer.parseInt(command.substring(7));
             Task task = taskList.getStorage().get(index - 1);
-            ui.print("     Noted, I have removed this task:");
-            response = "Noted, I have removed this task:\n";
-            response += task.printTask().trim() + "\n";
 
-            taskList.remove(task);
-            response += ui.showListSize(taskList.getListSize());
+            ui.print("     Noted, I have removed this task:");
+
+            response = this.concatenateOutputs(ui, task, taskList);
             return response;
         } catch (Exception ex) {
             if (ex instanceof StringIndexOutOfBoundsException) {
                 throw new SparklesException("     OOPS!! Task in the list to be deleted is not specified!");
+            } else if (taskList.getStorage().isEmpty()) {
+                throw new SparklesException("     OOPS!! Task list is empty!");
             } else {
-                if (taskList.getStorage().isEmpty()) {
-                    throw new SparklesException("     OOPS!! Task list is empty!");
-                } else {
-                    throw new SparklesException("     OOPS!! Task does not exist!");
-                }
+                throw new SparklesException("     OOPS!! Task does not exist!");
             }
         } finally {
             storage.updateFile(taskList.getStorage());
         }
+    }
+
+    @Override
+    public String concatenateOutputs(Ui ui, Task task, TaskList taskList) {
+        String response;
+
+        ui.print("     Noted, I have removed this task:");
+
+        response = "Noted, I have removed this task:\n";
+        response += task.printTask().trim() + "\n";
+
+        taskList.remove(task);
+
+        response += ui.showListSize(taskList.getListSize());
+        return response;
     }
 }

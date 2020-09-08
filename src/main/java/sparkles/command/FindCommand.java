@@ -12,6 +12,7 @@ import sparkles.util.Ui;
  * Represent a find command.
  */
 public class FindCommand extends Command {
+
     public FindCommand(String command) {
         super(command);
     }
@@ -33,39 +34,52 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws SparklesException {
-        List<Task> listFromTaskList = taskList.getStorage();
         String response = "";
 
-        if (listFromTaskList.isEmpty()) {
+        if (taskList.isEmpty()) {
             ui.print("     OOPS!! Task list is empty!");
-            response = "OOPS!! Task list is empty!";
-        } else {
-            try {
-                String find = command.substring(5).trim();
 
-                int index = 1;
+            return "OOPS!! Task list is empty!";
+        }
 
-                for (int i = 0; i < listFromTaskList.size(); i++) {
-                    Task task = listFromTaskList.get(i);
-                    String desc = task.getDescription();
+        try {
+            response = this.concatenateOutputs(ui, null, taskList);
 
-                    if (desc.contains(find)) {
-                        response += task.printTask(index).trim() + "\n";
-                        index++;
-                    }
-                }
-
-                if (index == 1) {
-                    ui.print("     OOPS!!No such task!");
-                    response = "OOPS!!No such task!";
-                }
-            } catch (Exception ex) {
-                if (ex instanceof StringIndexOutOfBoundsException) {
-                    throw new SparklesException(
-                            "     OOPS!! Related keyword of task in the list to find is not specified!");
-                }
+        } catch (Exception ex) {
+            if (ex instanceof StringIndexOutOfBoundsException) {
+                throw new SparklesException(
+                        "     OOPS!! Related keyword of task in the list to find is not specified!");
             }
         }
+        return response;
+    }
+
+    @Override
+    public String concatenateOutputs(Ui ui, Task task, TaskList taskList) {
+        assert task == null;
+
+        String response = "";
+        List<Task> listFromTaskList = taskList.getStorage();
+
+        String find = this.command.substring(5).trim();
+        int index = 1;
+
+        for (int i = 0; i < listFromTaskList.size(); i++) {
+            Task t = listFromTaskList.get(i);
+            String desc = t.getDescription();
+
+            if (desc.contains(find)) {
+                response += t.printTask(index).trim() + "\n";
+                index++;
+            }
+        }
+
+        if (index == 1) {
+            ui.print("     OOPS!!No such task!");
+
+            response = "OOPS!!No such task!";
+        }
+
         return response;
     }
 }

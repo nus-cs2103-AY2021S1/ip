@@ -1,6 +1,7 @@
 package sparkles.command;
 
 import sparkles.SparklesException;
+import sparkles.task.Task;
 import sparkles.task.TaskList;
 import sparkles.util.Storage;
 import sparkles.util.Ui;
@@ -29,5 +30,7 @@ public abstract class Command {
      */
     public boolean isExit() {
         return false;
-    };
+    }
+
+    public abstract String concatenateOutputs(Ui ui, Task task, TaskList taskList);
 }

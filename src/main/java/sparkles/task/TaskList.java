@@ -42,4 +42,8 @@ public class TaskList {
     public int getListSize() {
         return storage.size();
     }
+
+    public boolean isEmpty() {
+        return storage.isEmpty();
+    }
 }
