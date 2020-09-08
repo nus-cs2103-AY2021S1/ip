@@ -44,7 +44,7 @@ public class RescheduleCommand extends Command {
         }
         }
         ui.printTaskRescheduled(targetTask.toString(), rescheduledTask.toString());
-        String messageAfterExecution = rescheduleTaskToString(rescheduledTask);
+        String messageAfterExecution = rescheduleTaskToString(targetTask, rescheduledTask);
         return new CommandResult(messageAfterExecution);
     }
 

@@ -41,10 +41,12 @@ public abstract class Command {
         return str.toString();
     }
 
-    public String rescheduleTaskToString(Task targetTask) {
+    public String rescheduleTaskToString(Task oldTask, Task newTask) {
         StringBuilder str = new StringBuilder();
         str.append("Got it. I've rescheduled this task:\n");
-        str.append(targetTask.toString()).append("\n");
+        str.append(oldTask.toString()).append("\n");
+        str.append("To:\n");
+        str.append(newTask.toString()).append("\n");
         return str.toString();
     }
 }
