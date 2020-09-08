@@ -12,7 +12,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.addShowOnScreen("okcan mark completed:\n    " + tasks.getTask(doneIndex).markAsDone()
                 + "\nNow you have " + tasks.getSize() + " tasks in the list.");
     }

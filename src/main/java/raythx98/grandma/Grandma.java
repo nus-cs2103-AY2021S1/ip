@@ -7,6 +7,8 @@ import raythx98.grandma.storage.Storage;
 import raythx98.grandma.task.TaskList;
 import raythx98.grandma.ui.Ui;
 
+import java.io.FileNotFoundException;
+
 /**
  * Something.
  */
@@ -22,10 +24,15 @@ public class Grandma {
      */
     public Grandma(String filePath) {
         ui = new Ui();
-        tasks = new TaskList();
         parser = new Parser();
         storage = new Storage(filePath);
-        tasks = storage.load();
+        try {
+            tasks = storage.load();
+        } catch (DukeException e) {
+            e.printStackTrace();
+        } catch (FileNotFoundException e) {
+            tasks = new TaskList();
+        }
     }
 
     /**

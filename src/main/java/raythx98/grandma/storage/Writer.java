@@ -9,7 +9,6 @@ public class Writer {
 
     public static void overwrite(String filepath, String input) {
         try {
-
             FileWriter writer = new FileWriter(new File(filepath), false);
             writer.write(input);
             writer.close();

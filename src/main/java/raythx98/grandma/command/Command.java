@@ -19,13 +19,4 @@ public abstract class Command {
      * @throws DukeException
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
-
-    /**
-     * Returns whether a Command is an ExitCommand.
-     *
-     * @return False by default as most Commands are not ExitCommands.
-     */
-    public boolean isExit() {
-        return false;
-    }
 }

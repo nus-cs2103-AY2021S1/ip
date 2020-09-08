@@ -51,7 +51,7 @@ public class TaskList {
             }
         }
         if (match.getSize() == 0) {
-            throw new InvalidIndexException("No such tasks leh...");
+            throw new InvalidIndexException();
         }
         return match.toString();
     }

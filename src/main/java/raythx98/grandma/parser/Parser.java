@@ -10,10 +10,13 @@ import raythx98.grandma.command.ExitCommand;
 import raythx98.grandma.command.FindCommand;
 import raythx98.grandma.command.HelpCommand;
 import raythx98.grandma.command.ListCommand;
+import raythx98.grandma.exception.AdditionalArgumentException;
 import raythx98.grandma.exception.DukeException;
 import raythx98.grandma.exception.EmptyDescriptionException;
+import raythx98.grandma.exception.InsufficientArgumentException;
 import raythx98.grandma.exception.InvalidIndexException;
 import raythx98.grandma.exception.UnknownCommandException;
+import raythx98.grandma.exception.WrongArgumentException;
 import raythx98.grandma.task.TaskList;
 
 /**
@@ -31,77 +34,77 @@ public class Parser {
     public Command parse(TaskList tasks, String nextLine) throws DukeException, NumberFormatException {
         String[] spaceSplit = nextLine.split(" ", 2);
         if (nextLine.isEmpty()) {
-            throw new EmptyDescriptionException("Type something leh");
+            throw new EmptyDescriptionException();
         }
         switch (spaceSplit[0]) {
         case "bye":
             if (spaceSplit.length > 1) {
-                throw new DukeException("bye error");
+                throw new AdditionalArgumentException();
             }
             return new ExitCommand();
         case "list":
             if (spaceSplit.length > 1) {
-                throw new DukeException("list error");
+                throw new AdditionalArgumentException();
             }
             return new ListCommand();
         case "help":
             if (spaceSplit.length > 1) {
-                throw new DukeException("help error");
+                throw new AdditionalArgumentException();
             }
             return new HelpCommand();
         case "done":
             if (spaceSplit.length < 2) {
-                throw new DukeException("done error");
+                throw new InsufficientArgumentException();
             }
             int doneIndex;
             try {
                 doneIndex = Integer.parseInt(spaceSplit[1]) - 1;
             } catch (NumberFormatException e) {
-                throw new DukeException("Not number");
+                throw new WrongArgumentException();
             }
             if (doneIndex < 0 || doneIndex > tasks.getSize() - 1) {
-                throw new InvalidIndexException("Simi number lai de");
+                throw new InvalidIndexException();
             }
             return new DoneCommand(doneIndex);
         case "delete":
             if (spaceSplit.length < 2) {
-                throw new DukeException("lol");
+                throw new InsufficientArgumentException();
             }
             int deleteIndex;
             try {
                 deleteIndex = Integer.parseInt(spaceSplit[1]) - 1;
             } catch (NumberFormatException e) {
-                throw new DukeException("Not number");
+                throw new WrongArgumentException();
             }
             if (deleteIndex < 0 || deleteIndex > tasks.getSize() - 1) {
-                throw new InvalidIndexException("Simi number lai de");
+                throw new InvalidIndexException();
             }
             return new DeleteCommand(deleteIndex);
         case "find":
             if (spaceSplit.length < 2) {
-                throw new EmptyDescriptionException("Specify key word la oi");
+                throw new EmptyDescriptionException();
             }
             return new FindCommand(spaceSplit[1]);
         case "todo":
             if (spaceSplit.length < 2) {
-                throw new EmptyDescriptionException("Description empty la oi");
+                throw new EmptyDescriptionException();
             } else {
                 return new AddTodoCommand(spaceSplit[1]);
             }
         case "deadline":
             if (spaceSplit.length < 2) {
-                throw new EmptyDescriptionException("Description empty la oi");
+                throw new EmptyDescriptionException();
             } else {
                 return new AddDeadlineCommand(spaceSplit[1]);
             }
         case "event":
             if (spaceSplit.length < 2) {
-                throw new EmptyDescriptionException("Description empty la oi");
+                throw new EmptyDescriptionException();
             } else {
                 return new AddEventCommand(spaceSplit[1]);
             }
         default:
-            throw new UnknownCommandException("Don't understand la oi");
+            throw new UnknownCommandException();
         }
     }
 }

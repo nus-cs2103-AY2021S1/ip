@@ -4,7 +4,9 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
+import raythx98.grandma.exception.DateTimeException;
 import raythx98.grandma.exception.DukeException;
+import raythx98.grandma.exception.TaskLoadingException;
 
 /**
  * Represents a specific task which is an event.
@@ -54,7 +56,7 @@ public class Event extends Task {
             this.date = LocalDate.parse(taskDescriptions[3]);
             this.at = LocalTime.parse(taskDescriptions[4]);
         } else {
-            throw new DukeException("Task loading error...");
+            throw new TaskLoadingException();
         }
         if (taskDescriptions[1].equals(TICK_BINARY)) {
             this.markAsDone();
@@ -72,7 +74,7 @@ public class Event extends Task {
         } else if (date != null && at != null) {
             return super.toPrint() + "|" + date + "|" + at;
         } else {
-            throw new DukeException("DateTime Error la oi...");
+            throw new DateTimeException();
         }
     }
 

@@ -4,7 +4,7 @@ package raythx98.grandma.exception;
  * Checked exception as a result of an invalid index.
  */
 public class InvalidIndexException extends DukeException {
-    public InvalidIndexException(String errorMessage) {
-        super(errorMessage);
+    public InvalidIndexException() {
+        super("Wrung index la... Choose a task tat exist pls grr...");
     }
 }

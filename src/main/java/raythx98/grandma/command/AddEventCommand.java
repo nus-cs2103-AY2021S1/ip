@@ -1,6 +1,7 @@
 package raythx98.grandma.command;
 
 import raythx98.grandma.exception.DukeException;
+import raythx98.grandma.exception.WrongDescriptionException;
 import raythx98.grandma.storage.Storage;
 import raythx98.grandma.task.Event;
 import raythx98.grandma.task.Task;
@@ -21,7 +22,7 @@ public class AddEventCommand extends AddCommand {
         } else if (descriptionSplit.length == 2) {
             task = new Event(descriptionSplit[0], descriptionSplit[1]);
         } else {
-            throw new DukeException("Invalid Description");
+            throw new WrongDescriptionException();
         }
         tasks.addTask(task);
         ui.addShowOnScreen("Got it, here yur task bij\n    " + task.toString()

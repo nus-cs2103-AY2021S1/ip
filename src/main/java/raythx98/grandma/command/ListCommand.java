@@ -6,7 +6,7 @@ import raythx98.grandma.task.TaskList;
 import raythx98.grandma.ui.Ui;
 
 public class ListCommand extends Command {
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.addShowOnScreen("Here yur tasks faggit: \n" + tasks.toString());
     }
 }

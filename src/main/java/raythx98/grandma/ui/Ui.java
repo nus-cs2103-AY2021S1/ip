@@ -22,7 +22,7 @@ public class Ui {
     public void farewell() {
         toShowOnScreen += "Never come back,\n"
                 + "dun wanna see yu ever agin.\n"
-                + "Exiting in 5... \nminutes? hours? idk you'll find out";
+                + "Exiting in 5... \n\nminutes? hours? idk you'll find out \nlul GTFO";
     }
 
     /**
@@ -32,14 +32,14 @@ public class Ui {
      */
     public String help() {
         toShowOnScreen += "These r wud u tell your ol' grandma here...\n"
-                + "To add task\n        todo {description} \n                /by {YYYY-MM-DD HHmm}\n"
+                + "Yu wan add more tasks\n        todo {description} \n                /by {YYYY-MM-DD HHmm}\n"
                 + "        deadline {description} \n                /by {YYYY-MM-DD HHmm}\n"
                 + "        event {description} \n                /at {YYYY-MM-DD HHmm}\n"
-                + "To delete task\n        delete {task number}\n"
-                + "To mark task done\n        done {task number}\n"
-                + "To list all tasks\n        list\n"
-                + "To find tasks\n        find {keyword}\n"
-                + "To exit\n        bye";
+                + "Yu wan remove tasks coz incompetent\n        delete {task number}\n"
+                + "Yu wan mark task as completed\n        done {task number}\n"
+                + "Yu wan see ur tasks coz u forget\n        list\n"
+                + "Yu wan find ur tasks coz u noob\n        find {keyword}\n"
+                + "Yu wanna gtfo\n        bye";
         return toShowOnScreen;
     }
 
