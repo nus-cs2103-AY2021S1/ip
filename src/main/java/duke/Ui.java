@@ -52,7 +52,7 @@ public class Ui {
      *
      * @return String.
      */
-    public String printAvailableCommands() {
+    public String availableCommands() {
          return SERVANT_SPEAK
                 + "    These are your available commands my Lord:\n\n"
                 + "    help - Show list of available commands\n"
@@ -81,7 +81,7 @@ public class Ui {
      * @param size size of task list.
      * @return String.
      */
-    public String printTaskAddedMessage(Task task, int size) {
+    public String taskAddedMessage(Task task, int size) {
         return SERVANT_SPEAK
                 + "    As you wish Sire. I have added the task:\n       "
                 + task.toString() + "\n"
@@ -96,7 +96,7 @@ public class Ui {
      * @param task task that was marked as done.
      * @return String.
      */
-    public String printMarkAsDoneMessage(Task task) {
+    public String markAsDoneMessage(Task task) {
         return SERVANT_SPEAK
                 + "    As you wish Sire. I have marked this task as done:\n"
                 + "       " + task.toString();
@@ -109,7 +109,7 @@ public class Ui {
      * @param task task that was removed from the task list.
      * @return String.
      */
-    public String printTaskDeletedMessage(Task task) {
+    public String taskDeletedMessage(Task task) {
         return SERVANT_SPEAK
                 + "    As you wish Sire. I removed this task:\n"
                 + "       " + task.toString();
@@ -121,7 +121,7 @@ public class Ui {
      * @param userTasks This is the task list to be printed.
      * @return String.
      */
-    public String printAllTasks(ArrayList<Task> userTasks) {
+    public String allTasksToString(ArrayList<Task> userTasks) {
         return SERVANT_SPEAK
                 + "    Here are your tasks your Majesty:\n"
                 + new TaskList(userTasks).toString();
@@ -134,7 +134,7 @@ public class Ui {
      * @param userTasksDone This is the list of tasks to be printed.
      * @return String.
      */
-    public String printAllTasksDone(ArrayList<Task> userTasksDone) {
+    public String allTasksDoneToString(ArrayList<Task> userTasksDone) {
         return SERVANT_SPEAK
                 + "    Here are all the tasks that you have"
                 + " done your Majesty:\n"
@@ -148,7 +148,7 @@ public class Ui {
      * @param userTasksNotDone This is the list of tasks to be printed.
      * @return String.
      */
-    public String printAllTasksNotDone(ArrayList<Task> userTasksNotDone) {
+    public String allTasksNotDoneToString(ArrayList<Task> userTasksNotDone) {
         return SERVANT_SPEAK
                 + "    Here are all the tasks that you have"
                 + " not done your Majesty:\n"
@@ -161,7 +161,7 @@ public class Ui {
      * @param userToDos This is the list of to do to do tasks to be printed.
      * @return String.
      */
-    public String printToDos(ArrayList<Task> userToDos) {
+    public String toDosToString(ArrayList<Task> userToDos) {
         return SERVANT_SPEAK
                 + "    Here are all your to do tasks your Majesty:\n"
                 + new TaskList(userToDos).toString();
@@ -174,7 +174,7 @@ public class Ui {
      * @param userToDosDone This is the list of tasks to be printed.
      * @return String.
      */
-    public String printToDosDone(ArrayList<Task> userToDosDone) {
+    public String toDosDoneToString(ArrayList<Task> userToDosDone) {
         return SERVANT_SPEAK
                 + "    Here are all the to do tasks that you have"
                 + " done your Majesty:\n"
@@ -188,7 +188,7 @@ public class Ui {
      * @param userToDosNotDone This is the list of tasks to be printed.
      * @return String.
      */
-    public String printToDosNotDone(ArrayList<Task> userToDosNotDone) {
+    public String toDosNotDoneToString(ArrayList<Task> userToDosNotDone) {
         return SERVANT_SPEAK
                 + "    Here are all the to do tasks that you have"
                 + " not done your Majesty:\n"
@@ -201,7 +201,7 @@ public class Ui {
      * @param userDeadlines This is the list of deadlines to be printed.
      * @return String.
      */
-    public String printDeadlines(ArrayList<Task> userDeadlines) {
+    public String deadlinesToString(ArrayList<Task> userDeadlines) {
         return SERVANT_SPEAK
                 + "    Here are all your tasks with a deadline your Majesty:\n"
                 + new TaskList(userDeadlines).toString();
@@ -214,7 +214,7 @@ public class Ui {
      * @param userDeadlinesDone This is the list of deadlines to be printed.
      * @return String.
      */
-    public String printDeadlinesDone(ArrayList<Task> userDeadlinesDone) {
+    public String deadlinesDoneToString(ArrayList<Task> userDeadlinesDone) {
         return SERVANT_SPEAK
                 + "    Here are all your tasks with a deadline that you have"
                 + " done your Majesty:\n"
@@ -228,7 +228,7 @@ public class Ui {
      * @param userDeadlinesNotDone This is the list of deadlines to be printed.
      * @return String.
      */
-    public String printDeadlinesNotDone(ArrayList<Task> userDeadlinesNotDone) {
+    public String deadlinesNotDoneToString(ArrayList<Task> userDeadlinesNotDone) {
         return SERVANT_SPEAK
                 + "    Here are all your tasks with a deadline that you have"
                 + " not done your Majesty:\n"
@@ -241,7 +241,7 @@ public class Ui {
      * @param userEvents This is the list of events to be printed.
      * @return String.
      */
-    public String printEvents(ArrayList<Task> userEvents) {
+    public String eventsToString(ArrayList<Task> userEvents) {
         return SERVANT_SPEAK
                 + "    Here are all your events your Majesty:\n"
                 + new TaskList(userEvents).toString();
@@ -254,7 +254,7 @@ public class Ui {
      * @param userEventsDone This is the list of events to be printed.
      * @return String.
      */
-    public String printEventsDone(ArrayList<Task> userEventsDone) {
+    public String eventsDoneToString(ArrayList<Task> userEventsDone) {
         return SERVANT_SPEAK
                 + "    Here are all your events that you have"
                 + " done your Majesty:\n"
@@ -268,7 +268,7 @@ public class Ui {
      * @param userEventsNotDone This is the list of events to be printed.
      * @return String.
      */
-    public String printEventsNotDone(ArrayList<Task> userEventsNotDone) {
+    public String eventsNotDoneToString(ArrayList<Task> userEventsNotDone) {
         return SERVANT_SPEAK
                 + "    Here are all your events that you have"
                 + " not done your Majesty:\n"
@@ -283,7 +283,7 @@ public class Ui {
      * @param keyword given keyword used by filter.
      * @return String.
      */
-    public String printFilteredTasksByKeyword(ArrayList<Task> filteredTasks, String keyword) {
+    public String filteredTasksByKeywordToString(ArrayList<Task> filteredTasks, String keyword) {
         return SERVANT_SPEAK
                 + "    Here are all the tasks containing "
                 + keyword + " your Majesty:\n"
@@ -295,7 +295,7 @@ public class Ui {
      *
      * @return String.
      */
-    public String printByeMessage() {
+    public String byeMessage() {
         return SERVANT_SPEAK
                 + "    It was a pleasure to serve you my Liege.\n"
                 + "    Till next time.";
@@ -307,7 +307,7 @@ public class Ui {
      * @param ex This is the DukeException object created by the error.
      * @return String.
      */
-    public String printError(DukeException ex) {
+    public String errorMessage(DukeException ex) {
         return ex.toString();
     }
 }

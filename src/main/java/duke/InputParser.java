@@ -72,53 +72,7 @@ public class InputParser {
         }
 
         if (input.startsWith("list ")) {
-            if (input.equals("list all")) {
-                return CommandType.LIST_ALL;
-            }
-
-            if (input.equals("list all done")) {
-                return CommandType.LIST_ALL_DONE;
-            }
-
-            if (input.equals("list all not done")) {
-                return CommandType.LIST_ALL_NOT_DONE;
-            }
-
-            if (input.equals("list todos")) {
-                return CommandType.LIST_TODOS;
-            }
-
-            if (input.equals("list todos done")) {
-                return CommandType.LIST_TODOS_DONE;
-            }
-
-            if (input.equals("list todos not done")) {
-                return CommandType.LIST_TODOS_NOT_DONE;
-            }
-
-            if (input.equals("list deadlines")) {
-                return CommandType.LIST_DEADLINES;
-            }
-
-            if (input.equals("list deadlines done")) {
-                return CommandType.LIST_DEADLINES_DONE;
-            }
-
-            if (input.equals("list deadlines not done")) {
-                return CommandType.LIST_DEADLINES_NOT_DONE;
-            }
-
-            if (input.equals("list events")) {
-                return CommandType.LIST_EVENTS;
-            }
-
-            if (input.equals("list events done")) {
-                return CommandType.LIST_EVENTS_DONE;
-            }
-
-            if (input.equals("list events not done")) {
-                return CommandType.LIST_EVENTS_NOT_DONE;
-            }
+            return CommandType.LIST;
         }
 
         if (input.startsWith("find ")) {
@@ -137,6 +91,64 @@ public class InputParser {
             return CommandType.BYE;
         }
 
+        return CommandType.INVALID_COMMAND;
+    }
+
+    /**
+     * Takes the given input and parses it to
+     * return the appropriate list command.
+     *
+     * @param input input from user.
+     * @return list command type.
+     */
+    public CommandType parseList(String input) {
+        if (input.equals("list all")) {
+            return CommandType.LIST_ALL;
+        }
+
+        if (input.equals("list all done")) {
+            return CommandType.LIST_ALL_DONE;
+        }
+
+        if (input.equals("list all not done")) {
+            return CommandType.LIST_ALL_NOT_DONE;
+        }
+
+        if (input.equals("list todos")) {
+            return CommandType.LIST_TODOS;
+        }
+
+        if (input.equals("list todos done")) {
+            return CommandType.LIST_TODOS_DONE;
+        }
+
+        if (input.equals("list todos not done")) {
+            return CommandType.LIST_TODOS_NOT_DONE;
+        }
+
+        if (input.equals("list deadlines")) {
+            return CommandType.LIST_DEADLINES;
+        }
+
+        if (input.equals("list deadlines done")) {
+            return CommandType.LIST_DEADLINES_DONE;
+        }
+
+        if (input.equals("list deadlines not done")) {
+            return CommandType.LIST_DEADLINES_NOT_DONE;
+        }
+
+        if (input.equals("list events")) {
+            return CommandType.LIST_EVENTS;
+        }
+
+        if (input.equals("list events done")) {
+            return CommandType.LIST_EVENTS_DONE;
+        }
+
+        if (input.equals("list events not done")) {
+            return CommandType.LIST_EVENTS_NOT_DONE;
+        }
         return CommandType.INVALID_COMMAND;
     }
 
