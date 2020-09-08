@@ -21,10 +21,6 @@ public class AddDeadlineCommand extends AddCommand {
         this.toAdd = new Deadline(description, deadline);
     }
 
-    public Deadline getDeadline() {
-        return toAdd;
-    }
-
     @Override
     public CommandResult execute() {
         taskList.add(toAdd);

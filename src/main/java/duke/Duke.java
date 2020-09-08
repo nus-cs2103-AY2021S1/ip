@@ -29,11 +29,11 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke().run(args);
+        new Duke().run();
     }
 
     /** Runs the program until termination.  */
-    public void run(String[] args) {
+    public void run() {
         runCommandLoopUntilExitCommand();
     }
 

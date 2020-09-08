@@ -21,10 +21,6 @@ public class AddEventCommand extends AddCommand {
         this.toAdd = new Event(description, dateTime);
     }
 
-    public Event getEvent() {
-        return toAdd;
-    }
-
     @Override
     public CommandResult execute() {
         taskList.add(toAdd);

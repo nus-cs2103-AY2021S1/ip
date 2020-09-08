@@ -6,13 +6,13 @@ import java.util.List;
 import duke.data.TaskList;
 
 /**
- * Encodes the {@code TaskList} object into a duke.data file for duke.storage.
+ * Encodes the {@code TaskList} object into a data file for duke.storage.
  */
 public class TaskListEncoder {
 
     /**
      * Encodes all the {@code Task} in the {@code toSave} into a list of decodable and readable string presentation
-     * for duke.storage.
+     * for storage.
      */
     public static List<String> encodeTaskList(TaskList toSave) {
         final List<String> encodedTasks = new ArrayList<>();

@@ -19,10 +19,6 @@ public class AddTodoCommand extends AddCommand {
         this.toAdd = new Todo(description);
     }
 
-    public Todo getTodo() {
-        return toAdd;
-    }
-
     @Override
     public CommandResult execute() {
         taskList.add(toAdd);

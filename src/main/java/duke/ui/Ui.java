@@ -18,15 +18,8 @@ public class Ui {
 
     /** Offset required to convert between 1-indexing and 0-indexing.  */
     public static final int DISPLAYED_INDEX_OFFSET = 1;
-
-    /** A platform independent line separator. */
-    private static final String LS = System.lineSeparator();
-
     /** A decorative prefix added to the beginning of lines printed by AddressBook */
     private static final String LINE_PREFIX = "| ";
-
-    private static final String DIVIDER = "---------------------------------------------------------------------------";
-
     /** Format of indexed list item */
     private static final String MESSAGE_INDEXED_LIST_ITEM = "\t%1$d. %2$s";
 
@@ -76,55 +69,18 @@ public class Ui {
         return fullInputLine;
     }
 
-    /** Shows message(s) to the user */
-    public void showToUser(String... message) {
-        for (String m : message) {
-            out.println(LINE_PREFIX + m.replace("\n", LS + LINE_PREFIX));
-        }
-    }
-
     /**
-     * Generates and prints the failed message if the application fails to start.
+     * Returns the failed message if the application fails to start.
      */
-    public void showInitFailedMessage() {
-        showToUser(Messages.MESSAGE_INIT_FAILED, DIVIDER, DIVIDER);
-    }
-
     public String getInitFailedMessage() {
         return Messages.MESSAGE_INIT_FAILED;
     }
 
     /**
-     * Generates and prints the welcome message upon the start of the application.
+     * Returns the welcome message upon the start of the application.
      */
-    public void showWelcomeMessage() {
-        showToUser(DIVIDER, Messages.MESSAGE_WELCOME, DIVIDER);
-    }
-
     public String getWelcomeMessage() {
         return Messages.MESSAGE_WELCOME;
-    }
-
-    /**
-     * Generates and prints the goodbye message upon the end of the application.
-     */
-    public void showGoodbyeMessage() {
-        showToUser(Messages.MESSAGE_GOODBYE, DIVIDER);
-    }
-
-    public String getGoodbyeMessage() {
-        return Messages.MESSAGE_GOODBYE;
-    }
-
-    /**
-     * Shows a list of tasks to the user, formatted as an indexed list.
-     */
-    public void showTaskListView(List<? extends Task> taskList) {
-        final List<String> formattedTasks = new ArrayList<>();
-        for (Task task : taskList) {
-            formattedTasks.add(task.toString());
-        }
-        showToUsersAsIndexedList(formattedTasks);
     }
 
     /**
@@ -142,29 +98,12 @@ public class Ui {
      * Shows the result of a command execution to the user. Includes additional formatting to demarcate different
      * command execution segments.
      */
-    public void showResultToUser(CommandResult result) {
-        final Optional<List<? extends Task>> tasks = result.getRelevantTasks();
-        tasks.ifPresent(this::showTaskListView);
-        showToUser(result.feedbackToUser, DIVIDER);
-    }
-
-    /**
-     * Shows the result of a command execution to the user. Includes additional formatting to demarcate different
-     * command execution segments.
-     */
     public String getResultToUser(CommandResult result) {
         final Optional<List<? extends Task>> tasks = result.getRelevantTasks();
         StringBuilder sb = new StringBuilder();
-        tasks.ifPresent(list -> {
-            sb.append(getTaskListView(list));
-        });
+        tasks.ifPresent(list -> sb.append(getTaskListView(list)));
         sb.append(result.feedbackToUser);
         return sb.toString();
-    }
-
-    /** Shows a list of strings to the user, formatted as an indexed list. */
-    private void showToUsersAsIndexedList(List<String> list) {
-        showToUser(getIndexedListForViewing(list), DIVIDER);
     }
 
     /** Formats a list of strings as a viewable indexed list. */

@@ -42,14 +42,14 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
         setPadding(new Insets(10));
-        dialog.setPadding(new Insets(10));
+        this.dialog.setPadding(new Insets(10));
+        this.displayPicture.setPreserveRatio(true);
 
-        dialog.setText(text);
-        displayPicture.setImage(img);
+        this.dialog.setText(text);
+        this.displayPicture.setImage(img);
 
-        setBackground(new Background(new BackgroundFill(isUserDialog ? Color.MISTYROSE : Color.LIGHTGREY,
+        setBackground(new Background(new BackgroundFill(this.isUserDialog ? Color.MISTYROSE : Color.LIGHTGREY,
                 new CornerRadii(5), new Insets(5))));
     }
 
