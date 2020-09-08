@@ -21,7 +21,7 @@ public class TaskList extends ArrayList<Task> {
      */
     @Override
     public Task get(int index) {
-        return get(index - 1);
+        return super.get(index - 1);
     }
 
     /**
@@ -33,7 +33,7 @@ public class TaskList extends ArrayList<Task> {
      */
     @Override
     public Task remove(int index) {
-        return remove(index - 1);
+        return super.remove(index - 1);
     }
 
     @Override
