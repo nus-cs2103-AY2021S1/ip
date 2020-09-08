@@ -15,4 +15,9 @@ public class FindCommand extends Command {
     public String act(TaskList list) {
         return Ui.searchResult(list.find(searchText));
     }
+
+    @Override
+    public String undo(TaskList list) {
+        return Ui.cannotUndoMessage();
+    }
 }

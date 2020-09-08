@@ -13,7 +13,7 @@ public abstract class Command {
     }
 
     public enum CommandType {
-        EXIT, DONE, DELETE, LIST, FIND, ADD, ERROR;
+        EXIT, DONE, DELETE, LIST, FIND, ADD, ERROR, UNDO;
     }
 
     public CommandType getType() {
@@ -21,4 +21,5 @@ public abstract class Command {
     }
 
     public abstract String act(TaskList list);
+    public abstract String undo(TaskList list);
 }

@@ -12,4 +12,9 @@ public class ListCommand extends Command{
     public String act(TaskList list) {
         return Ui.list(list);
     }
+
+    @Override
+    public String undo(TaskList list) {
+        return Ui.cannotUndoMessage();
+    }
 }
