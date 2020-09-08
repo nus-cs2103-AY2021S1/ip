@@ -24,22 +24,18 @@ public class Deadline extends Task {
     public Deadline(String description, String dueBy) throws PandaBotException {
         super(description);
 
-        String input = dueBy.strip();
-        if (input.length() == 0) {
+        String inputDueBy = dueBy.strip();
+
+        if (inputDueBy.length() == 0) {
             throw new PandaBotInsufficientArgumentException();
         }
 
         // check if a formatted date and time is given
-        String[] dT = input.split(" ");
-        if (dT.length > 1) {
-            try {
-                DateAndTime dateTime = new DateAndTime(dT[0], dT[1]);
-                this.dueBy = dateTime.toString();
-            } catch (DateTimeParseException e) {
-                // couldn't parse the input -> unformatted deadline
-                this.dueBy = dueBy;
-            }
-        } else {
+        try {
+            DateAndTime dateTime = new DateAndTime(inputDueBy);
+            this.dueBy = dateTime.toString();
+        } catch (DateTimeParseException e) {
+            // if the input couldn't be parsed, the input is an unformatted dueBy
             this.dueBy = dueBy;
         }
     }
