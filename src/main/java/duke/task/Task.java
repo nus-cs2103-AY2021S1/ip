@@ -2,6 +2,8 @@ package duke.task;
 
 import duke.exception.DukeException;
 
+import java.time.LocalDate;
+
 /**
  * An abstract class providing the blueprint for a task.
  */
@@ -47,6 +49,14 @@ public class Task {
      */
     public String toData() {
         return (isDone ? "1///" : "0///") + name + "///";
+    }
+
+    public boolean hasDate() {
+        return false;
+    }
+
+    public boolean isOnDate(LocalDate date) {
+        return false;
     }
 
     /**

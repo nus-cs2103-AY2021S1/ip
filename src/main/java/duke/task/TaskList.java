@@ -5,7 +5,6 @@ import java.time.LocalTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
-import duke.Duke;
 import duke.exception.DukeException;
 import duke.ui.Ui;
 
@@ -227,5 +226,24 @@ public class TaskList {
         } catch (DateTimeParseException e) {
             throw new DukeException("    Error in date time formatting encountered in data file");
         }
+    }
+
+    public String ViewScheduleOfDay(Ui ui, LocalDate date) throws DukeException {
+        ArrayList<Task> result = new ArrayList<>();
+        for (Task t : this.listOfTasks) {
+            if (t.hasDate() && t.isOnDate(date)) {
+                result.add(t);
+            }
+        }
+        if (result.size() == 0) {
+            throw new DukeException("    No matching task found :(");
+        }
+        int counter = 1;
+        String response = ui.printResult();
+        for (Task task: result) {
+            response = response + "\n" + ui.printTask(counter, task);
+            counter += 1;
+        }
+        return response;
     }
 }
