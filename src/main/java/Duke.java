@@ -96,14 +96,6 @@ public class Duke extends Application {
 
     }
 
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
     /**
      * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
@@ -113,13 +105,6 @@ public class Duke extends Application {
         Ui.startInput(taskList);
     }
 
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    private String getResponse(String input) {
-        return "Duke heard: " + input;
-    }
 
     public void exit() {
         ((Stage) userInput.getScene().getWindow()).close();
