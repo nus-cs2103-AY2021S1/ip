@@ -36,7 +36,7 @@ class DateTimeProcessor {
             try {
                 return Optional.of(LocalDateTime.parse(input, DateTimeFormatter.ofPattern(format)));
             } catch (DateTimeParseException e) {
-                throw new DukeException(e.toString());
+                continue;
             }
         }
         return Optional.empty();
@@ -47,7 +47,7 @@ class DateTimeProcessor {
             try {
                 return Optional.of(LocalDate.parse(input, DateTimeFormatter.ofPattern(format)));
             } catch (DateTimeParseException e) {
-                throw new DukeException(e.toString());
+                continue;
             }
         }
         return Optional.empty();
@@ -62,8 +62,8 @@ class DateTimeProcessor {
      * @return The neatly formatted date-time string.
      */
     String getParsedDate(String input) throws DukeException {
-        Optional<LocalDateTime> possibleDateTime = parseDateTime(input);
         try {
+            Optional<LocalDateTime> possibleDateTime = parseDateTime(input);
             Optional<LocalDate> possibleDate = parseDate(input);
             if (possibleDateTime.isPresent()) {
                 LocalDateTime dateTime = possibleDateTime.get();
