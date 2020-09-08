@@ -8,7 +8,7 @@ import duke.task.Task;
 /**
  * Abstraction for the done command.
  */
-public class DoneCommand extends Command {
+public class DoneCommand extends TaskListOperator {
     private static final String MESSAGE = "Well done! The following task is complete:\n";
 
     private final String number;

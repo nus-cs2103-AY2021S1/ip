@@ -5,7 +5,7 @@ import duke.main.TaskList;
 /**
  * Abstraction for the find command.
  */
-public class FindCommand extends Command {
+public class FindCommand extends TaskListOperator {
     private static final String MESSAGE = "The following task(s) match your search:\n";
     private static final String NO_TASK_FOUND = "Sorry, there are no tasks that "
             + "match your description!";

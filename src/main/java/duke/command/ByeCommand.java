@@ -7,7 +7,7 @@ import duke.main.TaskList;
  * Abstraction for the bye command.
  * This class saves the TaskList into a file before sending a farewell message.
  */
-public class ByeCommand extends Command {
+public class ByeCommand extends TaskListOperator {
     private static final String BYE = "All changes saved, hope to see you again!";
 
     private final Storage storage;

@@ -8,7 +8,7 @@ import duke.task.Task;
 /**
  * Abstraction for the delete command.
  */
-public class DeleteCommand extends Command {
+public class DeleteCommand extends TaskListOperator {
     private static final String MESSAGE_HEAD = "Noted, I have removed the below task:\n";
     private static final String MESSAGE_MIDDLE = "\nNow you have ";
     private static final String MESSAGE_END = " task(s) left";
