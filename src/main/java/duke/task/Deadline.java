@@ -15,11 +15,6 @@ public class Deadline extends Task implements TimeBased {
         this.dateTime = dateTime;
     }
 
-    public Deadline(String content, DukeDateTime dateTime, boolean isDone) {
-        super(content, isDone);
-        this.dateTime = dateTime;
-    }
-
     @Override
     public DukeDateTime getDukeDateTime() {
         return this.dateTime;
@@ -40,7 +35,7 @@ public class Deadline extends Task implements TimeBased {
 
     @Override
     public String toDataFileFormat() {
-        return String.format("D | %d | %s | %s", isDone ? 1 : 0, content, dateTime);
+        return String.format("D | %d | %s | %s | %s", isDone ? 1 : 0, tagName, content, dateTime);
     }
 
     @Override

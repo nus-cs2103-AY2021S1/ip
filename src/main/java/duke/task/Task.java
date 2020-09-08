@@ -7,23 +7,24 @@ package duke.task;
 public class Task {
     protected String content;
     protected boolean isDone;
+    protected String tagName;
 
     public Task(String content) {
         this.content = content;
         this.isDone = false;
-    }
-
-    public Task(String content, boolean isDone) {
-        this.content = content;
-        this.isDone = isDone;
+        this.tagName = "";
     }
 
     public String toDataFileFormat() {
-        return String.format("? | %d | %s", isDone ? 1 : 0, this.content);
+        return String.format("? | %d | %s | %s", isDone ? 1 : 0, tagName, content);
     }
 
     public void markTaskAsDone() {
         isDone = true;
+    }
+
+    public void setTag(String tagName) {
+        this.tagName = tagName;
     }
 
     public boolean getIsDone() {
@@ -42,6 +43,10 @@ public class Task {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append(getStatusIcon());
+        if (!tagName.equals("")) {
+            String tagDescription = "[" + this.tagName + "] ";
+            stringBuilder.append(tagDescription);
+        }
         stringBuilder.append(this.content);
         return stringBuilder.toString();
     }

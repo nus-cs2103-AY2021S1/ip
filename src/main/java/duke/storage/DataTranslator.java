@@ -13,7 +13,6 @@ import duke.task.Todo;
 
 import duke.utils.Ui;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -40,14 +39,14 @@ public class DataTranslator {
             try {
                 switch (parsedLine[0]) {
                 case "T":
-                    task = new Todo(parsedLine[2]);
+                    task = new Todo(parsedLine[3]);
                     break;
                 case "D":
-                    DukeDateTime deadlineDukeDateTime = DateTimeParser.parseDateTime(parsedLine[3]);
+                    DukeDateTime deadlineDukeDateTime = DateTimeParser.parseDateTime(parsedLine[4]);
                     task = new Deadline(parsedLine[2], deadlineDukeDateTime);
                     break;
                 case "E":
-                    DukeDateTime eventDukeDateTime = DateTimeParser.parseDateTime(parsedLine[3]);
+                    DukeDateTime eventDukeDateTime = DateTimeParser.parseDateTime(parsedLine[4]);
                     task = new Event(parsedLine[2], eventDukeDateTime);
                     break;
                 default:
@@ -61,6 +60,9 @@ public class DataTranslator {
             if (parsedLine[1].equals("1")) {
                 assert task != null : "Task should contain a description";
                 task.markTaskAsDone();
+            }
+            if (!parsedLine[2].equals("")) {
+                task.setTag(parsedLine[2]);
             }
             taskManager.addTask(task);
         }

@@ -12,6 +12,7 @@ import duke.commands.ListAllCompletedTasksCommand;
 import duke.commands.ListAllUncompletedTasksCommand;
 import duke.commands.ListTasksCommand;
 import duke.commands.OverdueCommand;
+import duke.commands.SetTagCommand;
 import duke.commands.TodayTasksCommand;
 
 import duke.exceptions.DukeException;
@@ -66,6 +67,9 @@ public class CommandLineInterfaceParser {
                 return newListAllCompletedTasksCommand();
             case OVERDUE:
                 return newOverdueCommand();
+            case TAG:
+                content = userInput.replaceFirst("^(?i)tag", "");
+                return newSetTagCommand(words[1], words[2]);
             default:
                 assert false : Messages.INVALID_COMMAND_ASSERTIONS;
                 break;
@@ -153,5 +157,12 @@ public class CommandLineInterfaceParser {
 
     private static InvalidCommand newInvalidCommand(String errorMessage) {
         return new InvalidCommand(errorMessage);
+    }
+
+    private static SetTagCommand newSetTagCommand(String taskIndex, String tagName) {
+        int taskToBeTaggedIndex = Integer.parseInt(taskIndex);
+        String tagNameWithoutHex = tagName.replaceAll("[^a-zA-Z0-9]", " ").trim();
+        SetTagCommand newSetTagCommand = new SetTagCommand(taskToBeTaggedIndex, tagNameWithoutHex);
+        return newSetTagCommand;
     }
 }
