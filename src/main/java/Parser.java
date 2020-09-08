@@ -9,72 +9,73 @@ public class Parser {
      * @param taskList Task list referred to in the interaction.
      * @param filePath The relative path to assigned file for reading
      *                 and writing of data.
-     * @return nothing
+     * @return String Response to be returned
      */
     public static String respond(String command, Ui ui, TaskList taskList, String filePath) {
         String[] pieces = command.split(" ", 2);
         if (command.equals("bye")) { // terminating command
-            ui.bye();
-            System.exit(0);
+            return ui.bye();
         } else if (command.equals("list")) { // listing command
             if (taskList.list.isEmpty()) {
-                ui.emptyList();
+                return ui.emptyList();
             } else {
-                ui.printAll(taskList);
+                return ui.returnAll(taskList);
             }
         } else if (pieces[0].equals("find")) { // listing command
             if (taskList.list.isEmpty()) {
-                ui.emptyList();
+                return ui.emptyList();
             } else {
-                ui.printRelevant(taskList, pieces[1]);
+                return ui.returnRelevant(taskList, pieces[1]);
             }
         } else if (pieces[0].equals("done")) { // Mark Done task command
             if (pieces.length == 1) { // task number is missing
-                ui.markDoneFailure();
+                return ui.markDoneFailure();
             } else {
                 int task = Integer.parseInt(pieces[1]); // get the task number
                 if (task > taskList.noOfTasks) {
-                    ui.uncreatedTask(); // task has not been created
+                    return ui.uncreatedTask(); // task has not been created
                 } else {
                     Task cur = taskList.list.get(task - 1);
                     cur.markAsDone();
-                    ui.markDoneSuccessful(cur);
+                    Storage.updateTasks(taskList.getNoOfTasks(), taskList.list, filePath);
+                    return ui.markDoneSuccessful(cur);
                 }
             }
-            Storage.updateTasks(taskList.getNoOfTasks(), taskList.list, filePath);
         } else if (pieces[0].equals("delete")) { // delete command
             if (pieces.length == 1) {
-                ui.incompleteDeleteCommand();
+                return ui.incompleteDeleteCommand();
             } else {
                 int num = Integer.valueOf(pieces[1]);
                 if (num > taskList.noOfTasks) {
-                    ui.uncreatedTask();
+                    return ui.uncreatedTask();
                 } else {
                     Task removed = taskList.list.get(num - 1);
                     taskList.deleteTask(removed);
-                    ui.deleteSuccessful(removed, taskList);
+                    Storage.updateTasks(taskList.getNoOfTasks(), taskList.list, filePath); // update storage
+                    return ui.deleteSuccessful(removed, taskList);
                 }
             }
-            Storage.updateTasks(taskList.getNoOfTasks(), taskList.list, filePath);
         } else {
             if (pieces.length == 1) {
+                String stringToReturn = "";
                 switch (pieces[0]) {
                 case "todo":
-                    ui.missingDescription("todo");
+                    stringToReturn = ui.missingDescription("todo");
                     break;
 
                 case "deadline":
-                    ui.missingDescription("deadline");
+                    stringToReturn = ui.missingDescription("deadline");
                     break;
 
                 case "event":
-                    ui.missingDescription("event");
+                    stringToReturn = ui.missingDescription("event");
                     break;
 
                 default:
-                    ui.unknownCommand();
+                    stringToReturn = ui.unknownCommand();
                     break;
                 }
+                return stringToReturn;
             } else {
                 Task t = new Task("");
                 String[] array;
@@ -107,13 +108,14 @@ public class Parser {
                 }
                 if (t.description != "") {
                     taskList.addTask(t);
-                    ui.addSuccessful(t, taskList);
                     Storage.updateTasks(taskList.getNoOfTasks(), taskList.list, filePath);
+                    return ui.addSuccessful(t, taskList);
+                } else {
+                    return "";
                 }
 
             }
         }
-        return command;
     }
 }
 

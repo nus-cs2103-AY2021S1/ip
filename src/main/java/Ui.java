@@ -8,9 +8,7 @@ import java.util.Scanner;
 public class Ui {
     private final Scanner in;
     private final PrintStream out;
-    public static final int DISPLAYED_INDEX_OFFSET = 1;
-    private static final String LS = System.lineSeparator();
-    private static final String LINE =  "____________________________________________________________\n";
+    private static final String LINE =  "_______________________________________________\n";
 
     private static final String GREETING= "Hello! I'm Duke from the chat bot universe ~ \n" +
             "Nice to meet you! \n" +
@@ -41,15 +39,15 @@ public class Ui {
     /**
      * This method is used to greet the user.
      */
-    public void greet() {
-        System.out.println(LINE + GREETING + LINE);
+    public String greet() {
+        return LINE + GREETING + LINE;
     }
 
     /**
      * This method is used to say good bye to the user.
      */
-    public void bye() {
-        System.out.println(LINE + BYE + LINE);
+    public String bye() {
+        return LINE + BYE + LINE;
     }
 
     /**
@@ -65,116 +63,134 @@ public class Ui {
      * @param taskList The task list used for printing.
      */
     public void printAll(TaskList taskList) {
-        System.out.println(LINE + "Here are the tasks in your list: \n");
+        System.out.println(returnAll(taskList));
+    }
+
+    public String returnAll(TaskList taskList) {
+        String stringToReturn = LINE + "Here are the tasks in your list: \n";
         for (int i = 1; i < taskList.getNoOfTasks() + 1; i++) {
             Task cur = taskList.list.get(i - 1);
-            System.out.println("" + i + "." + cur);
+            stringToReturn += ("" + i + "." + cur + "\n");
         }
-        System.out.println(LINE);
+        stringToReturn += LINE;
+        return stringToReturn;
     }
 
 
     public void printRelevant(TaskList taskList, String keyWord) {
-        System.out.println(LINE + "Here are the matching tasks in your list: \n");
-        for (int i = 1; i < taskList.getNoOfTasks() + 1; i++) {
+        System.out.println(returnRelevant(taskList,keyWord));
+    }
+
+    public String returnRelevant(TaskList taskList, String keyWord) {
+        String stringToReturn = LINE + "Here are the matching tasks in your list: \n";
+        int n = taskList.getNoOfTasks();
+        for (int i = 1; i < n + 1; i++) {
             Task cur = taskList.list.get(i - 1);
             if (!cur.toString().contains(keyWord)) {
                 continue;
             }
-            System.out.println("" + i + "." + cur);
+            stringToReturn += ("" + i + "." + cur + "/n");
         }
-        System.out.println(LINE);
+        stringToReturn += LINE;
+        return stringToReturn;
     }
 
 
     /**
      * This method is used to warn the user that the list is empty.
      */
-    public void emptyList() {
+    public String emptyList() {
         Exception ex = new InvalidInputException("Oops, your list is currently empty. Add some tasks first!");
-        System.err.println(LINE + ex.getMessage() + "\n" + LINE);
+        String stringToReturn = LINE + ex.getMessage() + "\n" + LINE;
+        return stringToReturn;
     }
 
     // ADD RELATED
-    public void addSuccessful(Task added, TaskList list) {
-        System.out.println(LINE);
-        System.out.println("Got it. I've added this task: \n" + added);
-        System.out.println("Now you have " + list.getNoOfTasks() + " tasks in the list. ");
-        System.out.println(LINE);
+    public String addSuccessful(Task added, TaskList list) {
+        String stringToReturn = LINE + "Got it. I've added this task: \n"
+                                + added + "\n" + "Now you have " + list.getNoOfTasks() +
+                                 " tasks in the list.\n " + LINE ;
+        return stringToReturn;
     }
 
     /**
      * This method is used to warn the user that the command is undefined.
      */
-    public void unknownCommand() {
+    public String unknownCommand() {
         Exception ex = new InvalidInputException("Ah oh! I didn't know what that means >n<, sorry! ");
-        System.err.println(LINE + ex.getMessage() + "\n" + LINE);
+        String stringToReturn = LINE + ex.getMessage() + "\n" + LINE;
+        return stringToReturn;
     }
 
     // DELETE RELATED
-    public void deleteSuccessful(Task deleted, TaskList list) {
-        System.out.println(LINE);
-        System.out.println("Got it. I've removed this task: \n" + deleted);
-        System.out.println("Now you have " + list.getNoOfTasks() + " tasks in the list. ");
-        System.out.println(LINE);
+    public String deleteSuccessful(Task deleted, TaskList list) {
+        String stringToReturn = LINE + "Got it. I've removed this task: \n" + deleted +
+                                "\n" + "Now you have " + list.getNoOfTasks() +
+                                " tasks in the list. " + "\n" + LINE;
+        return  stringToReturn;
     }
 
     /**
      * This method is used to warn the user that task to be deleted is not specified.
      */
-    public void incompleteDeleteCommand() {
+    public String incompleteDeleteCommand() {
         Exception ex = new InvalidInputException("Hey, you forgot to tell me which task to delete");
-        System.err.println(LINE + ex.getMessage() + "\n" + LINE);
+        String stringToReturn = LINE + ex.getMessage() + "\n" + LINE;
+        return stringToReturn;
     }
 
 
     // MODIFY
-    public void markDoneSuccessful(Task done) {
-        System.out.println(LINE);
-        System.out.println("Nice! I've marked this task as done: \n" + done);
-        System.out.println(LINE);
+    public String markDoneSuccessful(Task done) {
+        String stringToReturn = LINE + "Nice! I've marked this task as done: \n" +
+                                done + "\n" + LINE;
+        return stringToReturn;
     }
 
     // PRINT RELATED
-    public void markDoneFailure() {
+    public String markDoneFailure() {
         Exception ex = new InvalidInputException("Hey, you forgot to tell me which task is done!");
-        System.err.println(LINE + ex.getMessage() + "\n" + LINE);
+        String stringToReturn = LINE + ex.getMessage() + "\n" + LINE;
+        return stringToReturn;
     }
 
     /**
      * This method is used to warn the user that the task referred to has not been created.
      */
-    public void uncreatedTask() {
+    public String uncreatedTask() {
         Exception ex = new InvalidInputException("Oops, this task has not been created yet!");
-        System.err.println(LINE + ex.getMessage() + "\n" + LINE);
+        String stringToReturn = LINE + ex.getMessage() + "\n" + LINE;
+        return stringToReturn;
     }
 
     /**
      * This method is used to warn the user that there is not prior data from Duke.
      */
-    public void showLoadingError() {
-
-        System.out.println("Creating the storage file...");
+    public String showLoadingError() {
+        return "Creating the storage file...";
     }
 
-    public void missingDescription(String type) {
+    public String  missingDescription(String type) {
         Exception ex = new InvalidInputException("Hey, you forget the description for your " + type +"!");
-        System.err.println(LINE + ex.getMessage() + "\n" + LINE);
+        String stringToReturn = LINE + ex.getMessage() + "\n" + LINE;
+        return stringToReturn;
     }
 
     /**
      * This method is used to warn the user that the deadline information is missing.
      */
-    public void missingDeadline() {
+    public String missingDeadline() {
         Exception ex = new InvalidInputException("Sorry, but I can't help if you don't tell me the exact deadline!");
-        System.err.println(LINE + ex.getMessage() + "\n" + LINE);
+        String stringToReturn = LINE + ex.getMessage() + "\n" + LINE;
+        return stringToReturn;
     }
 
     /**
      * This method is used to warn the user that the event time is missing.
      */
-    public void missingEventTime() {
+    public String missingEventTime() {
         Exception ex = new InvalidInputException("I see...But what time is this event at?");
-        System.err.println(LINE + ex.getMessage() + "\n" + LINE);
+        String stringToReturn = LINE + ex.getMessage() + "\n" + LINE;
+        return stringToReturn;
     }
 }

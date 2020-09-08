@@ -67,7 +67,6 @@ public class Duke extends Application {
      * This method simulate the interaction between
      * Duke and human users.
      *
-     * @param args Unused.
      * @return Nothing.
      */
     public void run() {
@@ -183,7 +182,9 @@ public class Duke extends Application {
      */
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
-        Label dukeText = new Label(getResponse(userInput.getText()));
+
+        Duke testBot = new Duke("data/tasks.txt");
+        Label dukeText = new Label(getResponse(userInput.getText(),testBot));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
@@ -192,8 +193,9 @@ public class Duke extends Application {
     }
 
 
-    private String getResponse(String input) {
-        return "Duke heard: " + input; // needs to be customised later
+
+    private String getResponse(String input, Duke testBot) {
+        return Parser.respond(input, testBot.ui, testBot.tasks, testBot.storage.filePath);
     }
 }
 
