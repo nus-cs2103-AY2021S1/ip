@@ -42,13 +42,15 @@ public class Duke {
 
     /**
      * Generates a formatted response according to the User's input
+     * on a brand new task
      * @return String
      */
     public String getResponse(String input) {
+        boolean inputNewTask = false;
         StringBuilder stringBuilder = new StringBuilder();
         if (!input.equals("bye") && input.length() != 0) {
             try {
-                stringBuilder.append(Parser.process(input, this.taskList, this.storage));
+                stringBuilder.append(Parser.process(input, this.taskList, inputNewTask));
             } catch (DukeException e) {
                 stringBuilder.append(Ui.showError(e.getMessage()));
             }
