@@ -51,6 +51,7 @@ public class MainWindow extends AnchorPane {
                 + "\n- To view all tasks, type: 'list'."
                 + "\n- To mark a task as done, type: 'done <task number>'."
                 + "\n- To delete a task, type: 'delete <task number>'."
+                + "\n- To undo latest action, type: 'undo'."
                 + "\n- To find tasks, type: 'find <keyword>'."
                 + "\n- To leave me, type: 'bye'.";
         dialogContainer.getChildren().add(
