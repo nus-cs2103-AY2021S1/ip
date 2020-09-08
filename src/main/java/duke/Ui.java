@@ -142,7 +142,8 @@ public class Ui {
      * @return The text to be displayed.
      */
     public String showSnoozedTask(Task task, TaskList taskList) {
-        return formatPrint(String.format("Got it. I've snoozed this task by 1 day: \n   %s\nNow you have %d task%s in the list.",
+        return formatPrint(String.format("Got it. I've snoozed this task by 1 day: \n   %s\n"
+                        + "Now you have %d task%s in the list.",
                 task, taskList.getSize(), taskList.getSize() > 1 ? "s" : ""));
     }
 

@@ -49,6 +49,11 @@ public class Deadline extends Task {
         }
     }
 
+    /**
+     * Snoozes a deadline by one day.
+     *
+     * @return The deadline snoozed.
+     */
     public Deadline snoozeDeadline() {
         this.date = this.date.plusDays(1);
         return this;

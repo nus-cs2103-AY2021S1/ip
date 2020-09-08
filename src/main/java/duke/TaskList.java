@@ -96,9 +96,11 @@ public class TaskList {
         if (task instanceof ToDo) {
             throw new DukeException("OOPS! A ToDo cannot be snoozed!");
         } else if (task instanceof Event) {
-            ((Event) task).snoozeEvent();
+            Event event = (Event) task;
+            event.snoozeEvent();
         } else if (task instanceof Deadline) {
-            ((Deadline) task).snoozeDeadline();
+            Deadline deadline = (Deadline) task;
+            deadline.snoozeDeadline();
         }
         return task;
     }

@@ -62,6 +62,11 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Snoozes an event by one day.
+     *
+     * @return The event snoozed.
+     */
     public Event snoozeEvent() {
         this.startDateTime = this.startDateTime.plusDays(1);
         this.endDateTime = this.endDateTime.plusDays(1);
