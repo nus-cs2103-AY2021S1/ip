@@ -2,6 +2,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.time.LocalDate;
 public class StoreData {
     public static String filePath = "./data/duke.txt";
 
@@ -29,10 +30,10 @@ public class StoreData {
                         tasks.add(new Todo(split[1]));
                         break;
                     case "D":
-                        tasks.add(new Deadline(split[1], split[2]));
+                        tasks.add(new Deadline(split[1], LocalDate.parse(split[2])));
                         break;
                     case "E":
-                        tasks.add(new Event(split[1], split[2]));
+                        tasks.add(new Event(split[1], LocalDate.parse(split[2])));
                         break;
                 }
             }

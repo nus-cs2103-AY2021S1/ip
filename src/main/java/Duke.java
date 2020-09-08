@@ -19,11 +19,7 @@ public class Duke {
         System.out.println(hello + "\n" + question);
 
         String ans = sc.nextLine();
-<<<<<<< HEAD
-        ArrayList<Task> tasks = new ArrayList<>();
-=======
         ArrayList<Task> tasks = StoreData.readFile();
->>>>>>> branch-Level-7
         while (ans != null) {
             try {
                 if (ans.equals("list")) {
@@ -50,11 +46,7 @@ public class Duke {
                         System.out.println(ex.toString());
                     } else {
                         Deadline d = new Deadline(ans.substring(9, ans.indexOf('/') - 1),
-<<<<<<< HEAD
                                 LocalDate.parse(ans.substring(ans.indexOf('/') + 4)));
-=======
-                                ans.substring(ans.indexOf('/') + 4));
->>>>>>> branch-Level-7
                         tasks.add(d);
                         System.out.println("Got it. I've added this task:" + "\n" + " " + d.toString() + "\n"
                                 + "Now you have " + tasks.size() + " tasks in the list");
@@ -65,11 +57,7 @@ public class Duke {
                         System.out.println(ex.toString());
                     } else {
                         Event e = new Event(ans.substring(6, ans.indexOf('/') - 1),
-<<<<<<< HEAD
                                 LocalDate.parse(ans.substring(ans.indexOf('/') + 4)));
-=======
-                                ans.substring(ans.indexOf('/') + 4));
->>>>>>> branch-Level-7
                         tasks.add(e);
                         System.out.println("Got it. I've added this task:" + "\n" + " " + e.toString() + "\n"
                                 + "Now you have " + tasks.size() + " tasks in the list");
