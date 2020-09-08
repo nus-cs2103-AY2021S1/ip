@@ -21,11 +21,11 @@ public class Storage {
      * @param ui the Ui associated to the current Duke object.
      */
     public void saveTasks(TaskList taskList, Ui ui) {
-        File savedFile = new File(".//SAVED-TASKS.txt");
+        File savedFile = new File(file);
         boolean exists = savedFile.exists();
         try {
             if (exists) {
-                BufferedWriter writer = new BufferedWriter(new FileWriter(".//SAVED-TASKS.txt"));
+                BufferedWriter writer = new BufferedWriter(new FileWriter(file));
                 StringBuilder tasks = new StringBuilder();
                 for (int i = 1; i <= taskList.size(); i++) {
                     Task task = taskList.getTask(i);

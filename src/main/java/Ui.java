@@ -5,40 +5,37 @@ import java.util.Scanner;
  * Ui class that deals with interactions with the user.
  */
 public class Ui {
-    public Scanner sc;
 
     public static String horizontal = "________________________________" + "\n";
 
     /**
      * Constructor that creates a Ui object, with a Scanner that reads user input.
      */
-    public Ui() {
-        sc = new Scanner(System.in);
-    }
+    public Ui() {}
 
     /**
      * Prints to user a welcome message when the program is run.
      */
-    public void welcome() {
-        String hello = "Hello! I'm Duke" + "\n" + "What can I do for you?" + "\n";
-        System.out.println(horizontal + hello + horizontal);
+    public static String printWelcome() {
+        String hello = "Hello! I'm Chris" + "\n" + "What can I do for you?" + "\n";
+        return horizontal + "\n" + hello + horizontal;
     }
 
     /**
      * Prints to user if the user has entered the terminate command.
      */
-    public void printBye() {
+    public static String printBye() {
         String bye = "Bye. Hope to see you again soon!" + "\n";
-        System.out.println(horizontal + bye + horizontal);
+        return horizontal + "\n" + bye + horizontal;
     }
 
     /**
      * Prints to user if a Task has been marked as complete.
      * @param task the Task that was marked as complete.
      */
-    public void printDone(Task task) {
-        System.out.println(horizontal + "Nice! I've marked this task as done:" + "\n" +
-                task.toString() + "\n" + horizontal);
+    public String printDone(Task task) {
+        return horizontal + "Nice! I've marked this task as done:" + "\n" +
+                task.toString() + "\n" + horizontal;
     }
 
     /**
@@ -47,23 +44,29 @@ public class Ui {
      * @param taskList the TaskList associated with the current Duke object.
      * @param task the Task that was deleted from the TaskList.
      */
-    public void printDelete(TaskList taskList, Task task) {
-        System.out.println(horizontal + "Noted. I've removed this task:" + "\n" +
+    public String printDelete(TaskList taskList, Task task) {
+        return horizontal + "Noted. I've removed this task:" + "\n" +
                 task.toString() + "\n" + "Now you have " + taskList.size() + " tasks in the list." +
-                "\n" + horizontal);
+                "\n" + horizontal;
     }
 
     /**
      * Prints the list of tasks in the TaskList
      * @param taskList the TaskList associated with the current Duke object.
      */
-    public void printList(TaskList taskList) {
-        System.out.println(horizontal + "Here are the tasks in your list:" + "\n");
-        for (int i = 1; i <= taskList.size(); i++) {
-            Task task = taskList.getTask(i);
-            System.out.println(i + "." + task.toString());
+    public String printList(TaskList taskList) {
+        StringBuilder tasks = new StringBuilder();
+        if (taskList.size() > 0) {
+            tasks.append(horizontal + "Here are the tasks in your list:" + "\n");
+            for (int i = 1; i <= taskList.size(); i++) {
+                Task task = taskList.getTask(i);
+                tasks.append(i + "." + task.toString()).append("\n");
+            }
+        } else {
+            tasks.append("You have no tasks mate!");
         }
-        System.out.println(horizontal);
+        tasks.append(horizontal);
+        return tasks.toString();
     }
 
     /**
@@ -71,55 +74,60 @@ public class Ui {
      * @param taskList the TaskList associated with the current Duke object.
      * @param task the Task that is being added to the TaskList.
      */
-    public void printAdd(TaskList taskList, Task task) {
-        System.out.println(horizontal + "Got it. I've added this task:" + "\n" + task.toString() + "\n" +
-                "Now you have " + taskList.size() + " tasks in the list." + "\n" + horizontal);
+    public String printAdd(TaskList taskList, Task task) {
+        return horizontal + "Got it. I've added this task:" + "\n" + task.toString() + "\n" +
+                "Now you have " + taskList.size() + " tasks in the list." + "\n" + horizontal;
     }
 
     /**
      * Prints to user if a DukeException has been caught, printing an error message.
      * @param e a DukeException containing the error message.
      */
-    public void printDukeError(DukeException e) {
-        System.out.println(e.getMessage() + "\n");
+    public String printDukeError(DukeException e) {
+        return e.getMessage() + "\n";
     }
 
     /**
      * Prints to the user an error message when an I0Exception has been caught.
      * @param e an IOException containing an error message.
      */
-    public void printIOError(IOException e) {
-        System.out.println(e.getMessage() + "\n");
+    public String printIOError(IOException e) {
+        return e.getMessage() + "\n";
     }
 
     /**
      * Prints a statement depending on whether the file has been successfully created.
      * @param b a Boolean whether the file has been created.
      */
-    public void printHasCreated(Boolean b) {
+    public String printHasCreated(Boolean b) {
         if (b) {
-            System.out.println("New file created" + "\n");
+            return "New file created" + "\n";
         } else {
-            System.out.println("Failed to create file");
+            return "Failed to create file";
         }
 
+    }
+
+    public String printError(String message) {
+        return "Oh no there seems to be an error" + message;
     }
 
     /**
      * Prints to user all the tasks that had been saved in the TaskList.
      * @param taskList the TaskList associated with the current Duke object.
      */
-    public void printSaved(TaskList taskList) {
+    public static String printSaved(TaskList taskList) {
+        StringBuilder tasks = new StringBuilder();
         if (taskList.size() > 0) {
-            System.out.println("Here are your saved tasks: \n");
+            tasks.append("Here are your saved tasks: \n");
             for (int i = 1; i <= taskList.size(); i++) {
                 Task task = taskList.getTask(i);
-                System.out.println(i + ". " + task.toString());
+                tasks.append(i + ". " + task.toString()).append("\n");
             }
         } else {
-            System.out.println("You have no tasks.");
+           tasks.append("You have no tasks mate.");
         }
-        System.out.println(horizontal);
+        return tasks.toString();
     }
 
 
@@ -128,7 +136,7 @@ public class Ui {
      * @param word the word that is being searched for.
      * @param taskList the TaskList associated with the current Duke object.
      */
-    public void find(String word, TaskList taskList) {
+    public String find(String word, TaskList taskList) {
         TaskList list = new TaskList();
         for (int i = 1; i <= taskList.size(); i++) {
             Task task = taskList.getTask(i);
@@ -136,14 +144,16 @@ public class Ui {
                 list.addTask(task);
             }
         }
+        StringBuilder tasks = new StringBuilder();
         if (list.size() > 0) {
-            System.out.println(horizontal + "Here are the matching tasks in your list: \n");
+            tasks.append(horizontal + "Here are the matching tasks in your list: \n");
             for (int i = 1; i <= list.size(); i++) {
-                System.out.printf("%s. %s%n", i, list.getTask(i).toString());
+                tasks.append(String.format("%s. %s%n", i, list.getTask(i).toString()))
+                        .append("\n");
             }
         } else {
-            System.out.println("There are no matching tasks.");
+            tasks.append("There are no matching tasks.");
         }
-        System.out.println(horizontal);
+        return tasks.toString();
     }
 }
