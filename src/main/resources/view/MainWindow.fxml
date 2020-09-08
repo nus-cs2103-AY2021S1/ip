@@ -5,30 +5,38 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="835.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
-  <children>
-    <TextField fx:id="userInput" layoutX="13.0" layoutY="777.0" onAction="#handleUserInput" prefHeight="50.0" prefWidth="459.0" promptText="type help to view all commands " style="-fx-background-color: #D4F1F4; -fx-prompt-text-fill: grey; -fx-background-radius: 15;" AnchorPane.bottomAnchor="8.0">
-         <font>
-            <Font name="Segoe UI Italic" size="16.0" />
-         </font>
-         <effect>
-            <DropShadow spread="0.34" />
-         </effect></TextField>
-    <ScrollPane fx:id="scrollPane" focusTraversable="false" hbarPolicy="NEVER" hvalue="1.0" prefHeight="766.0" prefWidth="602.0" vvalue="1.0">
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
+   <bottom>
+      <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="66.0" prefWidth="605.0" BorderPane.alignment="CENTER">
+        <children>
+          <Button fx:id="sendButton" contentDisplay="CENTER" layoutX="486.0" layoutY="8.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="50.0" prefWidth="107.0" style="-fx-background-color: #75E6DA; -fx-background-radius: 15;" text="Enter" textFill="#5b5b5b">
+               <font>
+                  <Font name="Segoe UI Bold" size="18.0" />
+               </font>
+               <effect>
+                  <DropShadow />
+               </effect>
+            </Button>
+          <TextField fx:id="userInput" layoutX="13.0" layoutY="777.0" onAction="#handleUserInput" prefHeight="50.0" prefWidth="459.0" promptText="type help to view all commands " style="-fx-background-color: #D4F1F4; -fx-prompt-text-fill: grey; -fx-background-radius: 15;" AnchorPane.bottomAnchor="8.0">
+               <font>
+                  <Font name="Segoe UI Italic" size="16.0" />
+               </font>
+               <effect>
+                  <DropShadow spread="0.34" />
+               </effect>
+            </TextField>
+        </children>
+      </AnchorPane>
+   </bottom>
+   <center>
+    <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" focusTraversable="false" hbarPolicy="NEVER" hvalue="1.0" prefHeight="777.0" prefWidth="605.0" vvalue="1.0" BorderPane.alignment="CENTER">
          <content>
-        <VBox fx:id="dialogContainer" blendMode="DARKEN" prefHeight="766.0" prefWidth="584.0" style="-fx-background-color: #D4F1F4;" />
+        <VBox fx:id="dialogContainer" blendMode="DARKEN" prefHeight="775.0" prefWidth="608.0" style="-fx-background-color: #D4F1F4;" />
          </content>
     </ScrollPane>
-    <Button fx:id="sendButton" contentDisplay="CENTER" layoutX="487.0" layoutY="776.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="50.0" prefWidth="107.0" style="-fx-background-color: #75E6DA; -fx-background-radius: 15;" text="Enter" textFill="#5b5b5b">
-         <font>
-            <Font name="Segoe UI Bold" size="18.0" />
-         </font>
-         <effect>
-            <DropShadow />
-         </effect>
-      </Button>
-  </children>
-</AnchorPane>
+   </center>
+</BorderPane>
