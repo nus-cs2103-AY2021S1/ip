@@ -46,6 +46,7 @@ public class Storage {
         File f = new File(this.path);
         f.createNewFile();
         assert f.exists() : "duke.txt should have been created or already exists";
+
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         ArrayList<Task> ls = new ArrayList<>();
         assert ls.size() == 0: "Should be a new list of tasks.";
