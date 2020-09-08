@@ -1,13 +1,54 @@
 package duke.utils;
 
 public class Messages {
-    public static final String WELCOME_MESSAGE = "Hello! I'm Duke\nHow may I be of assistance?\n";
+    public static final String WELCOME_MESSAGE = "Hello! I'm Duke, your personal assistant\n"
+            + "How may I be of assistance?\n"
+            + "If you are unsure of any command,"
+            + " just type \"help\" and a list of all the commands and its uses will be shown.";
     public static final String FAREWELL_MESSAGE = "Bye. Hope my service has been satisfactory."
-           + "Hope to see you again soon.";
+            + "Hope to see you again soon.";
+
+    public static final String CORRECT_TODO_COMMAND = "-Todo: This command is used to create a new Todo task.\n"
+            + "The correct command is:\n \"todo <task description>.\"";
+    public static final String CORRECT_DEADLINE_COMMAND = "-Deadline: This command is used to create a new "
+            + "deadline task.\n"
+            + "The correct command is:\n \"deadline <task description> /by <datetime>\"";
+    public static final String CORRECT_EVENT_COMMAND = "-Event: This command is used to create a new Event task.\n"
+            + "The correct command is:\n \"event <task description> /at <datetime>\"";
+    public static final String CORRECT_DONE_COMMAND = "-Done: This command is used to mark an existing task as done.\n"
+            + "The correct command is:\n \"done <task index>\"";
+    public static final String CORRECT_DELETE_COMMAND = "-Delete: This command is used to delete an existing task.\n"
+            + "The correct command is:\n \"delete <task index>\"";
+    public static final String CORRECT_FIND_COMMAND = "-Find: This command is used to find tasks that fit a keyword.\n"
+            + "The correct command is:\n \"find <keyword>\"";
+    public static final String CORRECT_LIST_COMMAND = "-List: This command is used to list all exisiting tasks.\n"
+            + "The correct command is:\n \"list\"";
+    public static final String CORRECT_SET_TAG_COMMAND = "-Tag: This command is used to tag tasks.\n"
+            + "The correct command is:\n \"tag <task index> #<tag name>\"";
+    public static final String CORRECT_OVERDUE_COMMAND = "-Overdue: This command is used to display all overdue "
+            + "uncompleted tasks.\n"
+            + "The correct command is:\n \"overdue\"";
+    public static final String CORRECT_UNCOMPLETED_COMMAND = "-Uncompleted: This command is used to display all "
+            + " uncompleted tasks.\n"
+            + "The correct command is:\n \"uncompleted\"";
+    public static final String CORRECT_COMPLETED_COMMAND = "-Completed: This command is used to display all "
+            + " completed tasks.\n"
+            + "The correct command is:\n \"completed\"";
 
     public static final String INVALID_COMMAND_INPUT_MESSAGE = "OOPS!!!! You have inputted an invalid command.\n"
-            + "The only commands I know are:\n" + "1) Todo <task description>\n"
-            + "2) Deadline <task description> /by <datetime>\n" + "3) Event <task description> /at <datetime>";
+            + "The only commands I know are:\n"
+            + "1) Todo <task description>\n"
+            + "2) Deadline <task description> /by <datetime>\n"
+            + "3) Event <task description> /at <datetime>\n"
+            + "4) Done <task index>\n"
+            + "5) Delete <task index>\n"
+            + "6) Find <keyword>\n"
+            + "7) list\n"
+            + "8) uncompleted\n"
+            + "9) completed\n"
+            + "10) tag <task index> #<tag name>\n"
+            + "11) today\n"
+            + "12) overdue\n";
     public static final String INVALID_TASK_INDEX_ERROR_MESSAGE = "Invalid task index! Please choose another index.";
     public static final String INVALID_TODO_COMMAND = "OOPS!!! The description of a todo cannot be empty!\n"
             + "The correct command is:\ntodo <task description>";
@@ -25,11 +66,14 @@ public class Messages {
             + "The correct command is:\ncompleted";
     public static final String INVALID_OVERDUE_COMMAND = "OOPS!! Invalid Overdue Command.\n"
             + "The correct command is:\noverdue";
+    public static final String INVALID_HELP_COMMAND = "OOPS!! Invalid Help Command.\n"
+            + "The correct command is:\nhelp";
     public static final String INVALID_TAG_COMMAND = "OOPS! Invalid Tag Command.\n"
             + "The correct command is:\ntag <task index> #<tag name>";
     public static final String INVALID_TAG_FORMAT_COMMAND = "Oh no! Looks like you have inputted the wrong format."
             + "The correct command should be:\ntag <task index> #<tag name>";
     public static final String INVALID_DATE_TIME_FORMAT = "OOPS!! You have inputted an incorrect date and time format";
+    public static final String INVALID_COMMAND_ASSERTIONS = "Invalid command has been handled earlier";
     public static final String MISSING_DATE_AND_TIME_FOR_DEADLINE = "OOPS!!! Missing date/time.\n"
             + "Correct command is:\ndeadline <task description> /by <datetime>";
     public static final String MISSING_DATE_AND_TIME_FOR_EVENT = "OOPS!!! Missing date/time.\n"
@@ -48,5 +92,20 @@ public class Messages {
             + "Good job on keeping up with your tasks";
     public static final String NO_TASKS_FOR_TODAY_MESSAGE = "There are no tasks for today."
             + "Go ahead and chill for the day";
-    public static final String INVALID_COMMAND_ASSERTIONS = "Invalid command has been handled earlier";
+    public static final String NO_TASKS_MESSAGE = "Looks like there are no tasks currently."
+            + "Go ahead and start creating new tasks";
+
+
+    public static final String HELP_MESSAGE = "Here are the commands you can use:\n"
+            + "1) " + CORRECT_TODO_COMMAND + "\n"
+            + "2) " + CORRECT_DEADLINE_COMMAND + "\n"
+            + "3) " + CORRECT_EVENT_COMMAND + "\n"
+            + "4) " + CORRECT_DONE_COMMAND + "\n"
+            + "5) " + CORRECT_DELETE_COMMAND + "\n"
+            + "6) " + CORRECT_FIND_COMMAND + "\n"
+            + "7) " + CORRECT_LIST_COMMAND + "\n"
+            + "8) " + CORRECT_SET_TAG_COMMAND + "\n"
+            + "9) " + CORRECT_OVERDUE_COMMAND + "\n"
+            + "10) " + CORRECT_COMPLETED_COMMAND + "\n"
+            + "11) " + CORRECT_UNCOMPLETED_COMMAND;
 }

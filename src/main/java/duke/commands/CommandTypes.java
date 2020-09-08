@@ -152,6 +152,15 @@ public enum CommandTypes {
                 throw new DukeException(Messages.INVALID_TAG_COMMAND);
             }
         }
+    },
+    HELP {
+        @Override
+        public void checkInput(String input) throws DukeException {
+            String content = input.replaceFirst("^(?i)help", "");
+            if (!content.isBlank()) {
+                throw new DukeException(Messages.INVALID_HELP_COMMAND);
+            }
+        }
     };
 
     public abstract void checkInput(String input) throws DukeException;
