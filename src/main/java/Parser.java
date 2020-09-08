@@ -87,6 +87,8 @@ public class Parser {
                     if (parseDate(userInput.substring(idx + 5)) == null) {
                         throw new TaskException(TaskType.DEADLINE, "time", TaskExceptionType.FORMAT);
                     } else {
+                        assert userInput.substring(9, idx).isBlank(): "Deadline description cannot be blank";
+                        assert userInput.substring(idx + 5).isBlank(): "Deadline date cannot be blank";
                         return new AddCommand(TaskType.DEADLINE, userInput.substring(9, idx),
                                 parseDate(userInput.substring(idx + 5)));
                     }
@@ -101,6 +103,8 @@ public class Parser {
                     if (parseDate(userInput.substring(idx + 5)) == null) {
                         throw new TaskException(TaskType.EVENT, "time", TaskExceptionType.FORMAT);
                     } else {
+                        assert userInput.substring(6, idx).isBlank(): "Event description cannot be blank";
+                        assert userInput.substring(idx + 5).isBlank(): "Event date cannot be blank";
                         return new AddCommand(TaskType.EVENT, userInput.substring(6, idx),
                                 parseDate(userInput.substring(idx + 5)));
                     }

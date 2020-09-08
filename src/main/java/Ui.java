@@ -86,6 +86,7 @@ public class Ui {
      * @return String with count of tasks.
      */
     public static String getListCount(TaskList tasks) {
+        assert tasks == null: "TaskList should not be null";
         return "Now you have " + tasks.getCount() + " task" + (tasks.getCount() == 1 ? "" : "s") + " in the list.";
     }
 
@@ -98,6 +99,7 @@ public class Ui {
      * @return ArrayList containing details of tasks that fulfil the criteria.
      */
     public static ArrayList<String> getTaskList(TaskList tasks, Date date, String keyWord) {
+        assert tasks == null: "TaskList should not be null";
         ArrayList<String> lst = tasks.toString(date, keyWord);
         lst.add(0, "Here are the " + ((keyWord == null) ? "" : "matching ") + "tasks in your list" + ((date == null)
                 ? "" : " that occur on " + formatDate(date)) + ":");
@@ -111,6 +113,7 @@ public class Ui {
      * @return ArrayList feedback message that task is marked as done.
      */
     public static ArrayList<String> getDoneTask(Task task) {
+        assert task == null: "Task should not be null";
         ArrayList<String> lst = new ArrayList<>();
         lst.add(DONE_MSG);
         lst.add(INDENT + task.toString());
@@ -125,6 +128,8 @@ public class Ui {
      * @return ArrayList
      */
     public static ArrayList<String> getDeletedTask(Task task, TaskList taskList) {
+        assert task == null: "Task should not be null";
+        assert taskList == null: "TaskList should not be null";
         ArrayList<String> lst = new ArrayList<>();
         lst.add(DELETED_MSG);
         lst.add(INDENT + task.toString());
@@ -140,6 +145,8 @@ public class Ui {
      * @return ArrayList feedback message that task is added to taskList.
      */
     public static ArrayList<String> getAddTask(Task task, TaskList taskList) {
+        assert task == null: "Task should not be null";
+        assert taskList == null: "TaskList should not be null";
         ArrayList<String> lst = new ArrayList<>();
         lst.add(ADD_MSG);
         lst.add(INDENT + task.toString());
