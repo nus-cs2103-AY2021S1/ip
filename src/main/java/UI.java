@@ -16,7 +16,7 @@ public class UI {
      * @return String response for this command.
      */
     protected String doneTask(Task task) {
-        if (task.getStatus()) {
+        if (!task.getStatus()) {
             String str1 = "\nNice! I have completed this task!";
             String str2 = " " + task + "\n";
             return str1 + str2;
@@ -35,7 +35,7 @@ public class UI {
     protected String addTask(TaskList tasks, Task newTask) {
         String str1 = "\nGot it. This task is now added.\n";
         String str2 = " " + newTask;
-        int tasksLeft = tasks.checkTasksLeft();
+        long tasksLeft = tasks.checkTasksLeft();
         String str3 = "You have " + tasksLeft
                 + " tasks left in your list!\n";
         return str1 + str2 + "\n" + str3;
@@ -99,7 +99,7 @@ public class UI {
         ArrayList<Task> allTasks = tasks.getTaskList();
         for (Task task: allTasks) {
             if (task.getTaskDeadline().equals(date)) {
-                str1 += index + "." + task + "\n";
+                str1 += index + ". " + task + "\n";
                 index++;
             }
         }

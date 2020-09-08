@@ -26,10 +26,9 @@ public class TaskList {
      * @param completedTask task to be completed.
      */
     protected void markTaskDone(Task completedTask) {
+        int index = taskList.indexOf(completedTask);
         completedTask.markAsDone();
-        int indexOfTask = this.taskList.indexOf(completedTask);
-        this.taskList.get(indexOfTask).markAsDone();
-
+        this.taskList.set(index, completedTask);
     }
 
     /**
@@ -65,16 +64,12 @@ public class TaskList {
      *
      * @return number of uncompleted tasks.
      */
-    protected int checkTasksLeft() {
-        int index = 0;
-        for (Task task : this.taskList) {
-            if (!task.getStatus()) {
-                index++;
-            }
-        }
+    protected long checkTasksLeft() {
+        long sum = taskList.stream().filter(task -> !task.getStatus())
+                .count();
 
-        assert (index >= 0) : "Invalid number of tasks";
-        return index;
+        assert (sum >= 0) : "Invalid number of tasks";
+        return sum;
     }
 
     /**
