@@ -9,7 +9,7 @@ public class Jimmy {
 
     private final Ui ui;
     private final Storage storage;
-    private final TaskList planner;
+    private final TaskList taskList;
     private boolean isLoaded;
 
     /**
@@ -18,7 +18,7 @@ public class Jimmy {
     public Jimmy() {
         this.ui = new Ui();
         this.storage = new Storage();
-        this.planner = new TaskList();
+        this.taskList = new TaskList();
         this.isLoaded = false;
     }
 
@@ -27,7 +27,7 @@ public class Jimmy {
      * program. Method does nothing if no prior data is found.
      */
     public void loadList() {
-        storage.loadList(planner);
+        storage.loadList(taskList);
         this.isLoaded = true;
     }
 
@@ -36,7 +36,7 @@ public class Jimmy {
      * reference. Method is usually called when the program terminates.
      */
     public void saveList() {
-        storage.updateList(planner);
+        storage.updateList(taskList);
     }
 
     /**
@@ -45,22 +45,30 @@ public class Jimmy {
      * "bye" command, the method allows the program to terminate.
      */
     public void run() {
-        ui.print(ui.greet());
+        String greeting = ui.greet();
+        ui.printOutput(greeting);
         loadList();
         boolean isExit = false;
         while (!isExit) {
-            try {
-                String command = ui.process();
-                if (command.equals("bye")) {
-                    isExit = true;
-                }
-                String reply = Parser.parse(planner, command);
-                ui.print(reply);
-            } catch (JimmyException e) {
-                ui.print(e.getMessage());
-            }
+            isExit = readInputPrintOutput();
         }
         saveList();
+    }
+
+    private boolean readInputPrintOutput() {
+        String reply = "";
+        boolean isExit = false;
+        try {
+            String command = ui.readUserInput();
+            isExit = command.equals("bye");
+            reply = Parser.parse(taskList, command);
+        } catch (JimmyException e) {
+            reply = e.getMessage();
+        } finally {
+            ui.printOutput(reply);
+        }
+
+        return isExit;
     }
 
     /**
@@ -75,14 +83,14 @@ public class Jimmy {
             loadList();
         }
         try {
-            String reply = Parser.parse(planner, input);
+            String reply = Parser.parse(taskList, input);
             if (input.equals("bye")) {
                 saveList();
                 reply += "\n Click the \" X \" button to close this window.";
             }
             return reply;
         } catch (JimmyException e) {
-            ui.print(e.getMessage());
+            ui.printOutput(e.getMessage());
             return e.getMessage();
         }
     }
