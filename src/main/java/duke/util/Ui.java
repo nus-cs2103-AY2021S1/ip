@@ -136,6 +136,21 @@ public class Ui {
     }
 
     /**
+     * Prints the set output whenever an alias is added.
+     *
+     * @param alias alias added.
+     * @param type command type.
+     * @return the printed message.
+     */
+    public String printAliasMessage(String alias, String type) {
+        assert alias != null && type != null;
+        String textToPrint = "Got it. I've added this mapping:\n"
+                + "   " + alias + " -> " + type;
+        printWithFormatting(textToPrint);
+        return textToPrint;
+    }
+
+    /**
      * Formats and prints a string.
      *
      * @param toPrint string to print.

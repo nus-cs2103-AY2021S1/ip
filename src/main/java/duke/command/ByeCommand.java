@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.util.AliasMap;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
@@ -25,10 +26,11 @@ public class ByeCommand extends Command {
      * @param tasks TaskList of the program.
      * @param ui user interface of the program.
      * @param storage storage of the program.
+     * @param aliasMap alias mapping.
      * @return the execution message.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage, AliasMap aliasMap) {
         assert tasks != null && ui != null && storage != null;
         return ui.sayBye();
     }

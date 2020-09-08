@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.util.AliasMap;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
@@ -14,6 +15,7 @@ public class Duke {
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
+    private final AliasMap aliasMap;
     private boolean isQuitting;
 
     /**
@@ -26,6 +28,9 @@ public class Duke {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         this.isQuitting = false;
+
+        this.aliasMap = new AliasMap();
+        this.aliasMap.populate();
 
         try {
             this.tasks = new TaskList(storage.load());
@@ -45,8 +50,8 @@ public class Duke {
 
         while (!this.isQuitting) {
             try {
-                Command c = Parser.parse(this.ui.getInput());
-                c.execute(this.tasks, this.ui, this.storage);
+                Command c = Parser.parse(this.ui.getInput(), this.aliasMap);
+                c.execute(this.tasks, this.ui, this.storage, this.aliasMap);
                 this.isQuitting = c.isQuitting();
             } catch (DukeException e) {
                 ui.printWithFormatting(e.getMessage());
@@ -58,8 +63,8 @@ public class Duke {
 
         assert input != null;
         try {
-            Command c = Parser.parse(input);
-            return c.execute(this.tasks, this.ui, this.storage);
+            Command c = Parser.parse(input, this.aliasMap);
+            return c.execute(this.tasks, this.ui, this.storage, this.aliasMap);
         } catch (DukeException e) {
             this.ui.printWithFormatting(e.getMessage());
             return e.getMessage();
