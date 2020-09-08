@@ -1,6 +1,7 @@
 package nekochan.command;
 
 import nekochan.exceptions.IncompleteNekoCommandException;
+import nekochan.model.NekoHistory;
 import nekochan.storage.Storage;
 import nekochan.task.Task;
 import nekochan.task.TaskList;
@@ -28,14 +29,13 @@ public class CompleteCommand extends Command {
     /**
      * Executes this {@code CompleteCommand}.
      * Marks the {@code Task} in the specified {@code list} at the stored {@code index} as complete.
-     *
-     * @param list    the currently loaded {@link TaskList} object.
+     * @param history the currently loaded {@link NekoHistory} object.
      * @param storage the currently loaded {@link Storage} object.
      */
     @Override
-    public void execute(TaskList list, Storage storage) {
-        completedTask = list.markAsComplete(index);
-        storage.save(list);
+    public void execute(NekoHistory history, Storage storage) {
+        completedTask = history.markAsComplete(index);
+        history.save(storage);
         super.isCompleted = true;
     }
 

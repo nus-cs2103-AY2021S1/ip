@@ -43,6 +43,8 @@ public abstract class Task implements Encodable<Task>, Searchable {
 
     abstract boolean isSimilar(Object obj);
 
+    public abstract Task deepCopy();
+
     private String getStatusIcon() {
         return isCompleted ? COMPLETED_ICON : INCOMPLETE_ICON;
     }

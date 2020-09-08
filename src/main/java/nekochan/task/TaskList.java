@@ -1,9 +1,9 @@
 package nekochan.task;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import nekochan.exceptions.NekoDuplicateTaskException;
 import nekochan.exceptions.NekoException;
@@ -16,7 +16,7 @@ import nekochan.util.Messages;
  * This class also provides methods to list and remove all {@code Task}.
  * Implements the {@code Iterable} interface.
  */
-public class TaskList implements Iterable<Task> {
+public class TaskList {
 
     private List<Task> store;
 
@@ -28,7 +28,17 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
-     * Constructs a {@code TaskList} containing {@code Task} of the specified list.
+     * Constructs a deep copy of the supplied {@code TaskList} instance.
+     *
+     * @param copy the {@code TaskList} to copy.
+     */
+    public TaskList(TaskList copy) {
+        store = new ArrayList<>();
+        copy.store.forEach((task) -> store.add(task.deepCopy()));
+    }
+
+    /**
+     * Constructs a {@code TaskList} containing {@code Task} of the specified {@code list}.
      *
      * @param list the list of {@code Task} whose contents are to be imported into this {@code TaskList}.
      */
@@ -41,10 +51,10 @@ public class TaskList implements Iterable<Task> {
      *
      * @param task the task to be inserted.
      * @return the task that was inserted.
-     * @throws NekoDuplicateTaskException if a similar copy of {@code task} exists.
+     * @throws NekoSimilarTaskException if a similar copy of {@code task} exists.
      * @throws NekoDuplicateTaskException if a duplicate copy of {@code task} exists.
      */
-    public Task add(Task task) throws NekoSimilarTaskException, NekoDuplicateTaskException {
+    public Task addTask(Task task) throws NekoSimilarTaskException, NekoDuplicateTaskException {
         // Do not add task if there is an exact copy.
         boolean hasDuplicate = store.stream().anyMatch((x) -> x.equals(task));
         if (hasDuplicate) {
@@ -87,8 +97,7 @@ public class TaskList implements Iterable<Task> {
      */
     public Task deleteTask(int index) throws NekoException {
         try {
-            Task removed = store.remove(index);
-            return removed;
+            return store.remove(index);
         } catch (IndexOutOfBoundsException e) {
             throw new NekoException(Messages.MISSING_TASK_ERROR);
         }
@@ -96,12 +105,9 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Deletes all existing {@code Task} in this {@code TaskList}.
-     *
-     * @return true if this {@code TaskList} was successfully cleared.
      */
-    public boolean clearList() {
+    public void clearList() {
         store = new ArrayList<>();
-        return true;
     }
 
     /**
@@ -114,12 +120,11 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
-     * Returns an {@code Iterator} over the contents of this {@code TaskList}.
+     * Returns a stream containing the tasks stored in this {@code TaskList}.
      *
-     * @return an {@code Iterator} over the contents of this {@code TaskList}.
+     * @return a stream containing the tasks stored in this {@code TaskList}.
      */
-    @Override
-    public Iterator<Task> iterator() {
-        return store.iterator();
+    public Stream<Task> getStream() {
+        return this.store.stream();
     }
 }

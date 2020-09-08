@@ -1,6 +1,7 @@
 package nekochan.command;
 
 import nekochan.exceptions.IncompleteNekoCommandException;
+import nekochan.model.NekoHistory;
 import nekochan.storage.Storage;
 import nekochan.task.TaskList;
 import nekochan.util.Messages;
@@ -16,13 +17,13 @@ public class DeleteAllCommand extends Command {
      * Executes this {@code DeleteAllCommand}.
      * Deletes all contents in the specified {@code list}.
      *
-     * @param list    the currently loaded {@link TaskList} object.
+     * @param history the currently loaded {@link NekoHistory} object.
      * @param storage the currently loaded {@link Storage} object.
      */
     @Override
-    public void execute(TaskList list, Storage storage) {
-        list.clearList();
-        storage.save(list);
+    public void execute(NekoHistory history, Storage storage) {
+        history.clearAllTasks();
+        history.save(storage);
         super.isCompleted = true;
     }
 

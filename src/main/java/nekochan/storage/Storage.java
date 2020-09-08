@@ -59,9 +59,13 @@ public class Storage {
         }
         try {
             FileWriter writer = new FileWriter(path.toString());
-            for (Task item : list) {
-                writer.write(item.encode() + "\n");
-            }
+            list.getStream().forEach((item) -> {
+                try {
+                    writer.write(item.encode() + "\n");
+                } catch (IOException e) {
+                    throw new NekoStorageException(Messages.STORAGE_ERROR_UNABLE_TO_WRITE);
+                }
+            });
             writer.close();
         } catch (IOException e) {
             throw new NekoStorageException(Messages.STORAGE_ERROR_UNABLE_TO_WRITE);

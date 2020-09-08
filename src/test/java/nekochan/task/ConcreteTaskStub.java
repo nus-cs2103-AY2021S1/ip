@@ -7,6 +7,11 @@ public class ConcreteTaskStub extends Task {
     }
 
     @Override
+    public Task deepCopy() {
+        return new ConcreteTaskStub(description);
+    }
+
+    @Override
     public String encode() {
         return "";
     }

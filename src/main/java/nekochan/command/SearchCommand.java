@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import nekochan.exceptions.IncompleteNekoCommandException;
+import nekochan.model.NekoHistory;
 import nekochan.storage.Storage;
 import nekochan.task.Task;
-import nekochan.task.TaskList;
 import nekochan.util.Messages;
 
 /**
@@ -34,16 +34,12 @@ public class SearchCommand extends Command {
     /**
      * Executes this {@code SearchCommand}.
      *
-     * @param list    the currently loaded {@link TaskList} object.
+     * @param history the currently loaded {@link NekoHistory} object.
      * @param storage the currently loaded {@link Storage} object.
      */
     @Override
-    public void execute(TaskList list, Storage storage) {
-        for (Task task : list) {
-            if (task.match(searchParameter)) {
-                results.add(task);
-            }
-        }
+    public void execute(NekoHistory history, Storage storage) {
+        results = history.search(searchParameter);
         super.isCompleted = true;
     }
 

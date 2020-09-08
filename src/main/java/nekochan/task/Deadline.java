@@ -97,6 +97,12 @@ public class Deadline extends Task {
         }
     }
 
+    @Override
+    public Deadline deepCopy() {
+        // Both description and due are immutable.
+        return new Deadline(description, due);
+    }
+
     /**
      * Returns true if the specified {@code obj} is a {@code Deadline} and has the same (case insensitive) description
      * and due datetime as this {@code Deadline}.

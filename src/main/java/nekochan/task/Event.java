@@ -160,6 +160,11 @@ public class Event extends Task {
         }
     }
 
+    @Override
+    public Event deepCopy() {
+        return new Event(description, startDateTime, endDateTime);
+    }
+
     /**
      * Returns true if the specified {@code obj} is an {@code Event} and has the same (case insensitive) description,
      * start and end datetime as this {@code Event}.

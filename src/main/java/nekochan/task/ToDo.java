@@ -74,6 +74,11 @@ public class ToDo extends Task {
         return description.contains(searchParameter) || searchParameter.contains(description);
     }
 
+    @Override
+    public ToDo deepCopy() {
+        return new ToDo(description);
+    }
+
     /**
      * Returns true if the specified {@code obj} is a {@code ToDo} and has the same (case insensitive) description as
      * this {@code ToDo}.

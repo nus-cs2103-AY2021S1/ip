@@ -3,6 +3,7 @@ package nekochan;
 import nekochan.command.Command;
 import nekochan.command.Response;
 import nekochan.exceptions.NekoStorageException;
+import nekochan.model.NekoHistory;
 import nekochan.parser.Parser;
 import nekochan.storage.Storage;
 import nekochan.task.TaskList;
@@ -12,34 +13,36 @@ import nekochan.task.TaskList;
  */
 public class NekoChan {
 
+    private NekoHistory history;
     private Storage storage;
-    private TaskList taskList;
 
     /**
      * Constructs an instance of the chat bot logic.
      * Uses the default save location.
      *
-     * @param useHistory true if the local save file at the default save location should be loaded.
+     * @param useSave true if the local save file at the default save location should be loaded.
      */
-    public NekoChan(boolean useHistory) {
-        this(Storage.FILE_PATH, useHistory);
+    public NekoChan(boolean useSave) {
+        this(Storage.FILE_PATH, useSave);
     }
 
     /**
      * Constructs an instance of the chat bot logic.
      *
      * @param filePath the file path to store the local save file.
-     * @param useHistory true if the local save file should be loaded.
+     * @param useSave true if the local save file should be loaded.
      * @throws NekoStorageException if the file at the specified {@code filePath} could not be loaded.
      */
-    public NekoChan(String filePath, boolean useHistory) throws NekoStorageException {
-        if (useHistory) {
+    public NekoChan(String filePath, boolean useSave) throws NekoStorageException {
+        TaskList taskList;
+        if (useSave) {
             storage = new Storage(filePath);
             taskList = new TaskList(storage.load());
         } else {
             storage = new Storage(filePath);
             taskList = new TaskList();
         }
+        history = new NekoHistory(taskList);
     }
 
     /**
@@ -50,7 +53,7 @@ public class NekoChan {
      */
     public Response getResponse(String input) {
         Command c = Parser.parse(input);
-        c.execute(taskList, storage);
+        c.execute(history, storage);
         return c.feedback();
     }
 }
