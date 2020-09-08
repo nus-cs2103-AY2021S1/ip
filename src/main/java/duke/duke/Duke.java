@@ -42,25 +42,31 @@ public class Duke {
   public void addTodoTask(String description) {
     Task task = new TodoTask(description);
     tasks.add(task);
-    notifyObservers(task.toString());
+    notifyObservers("Added TODO: " + task.toString());
   }
 
   public void addEventTask(String description, String at) {
     Task task = new EventTask(description, at);
     tasks.add(task);
-    notifyObservers(task.toString());
+    notifyObservers("Added EVENT: " + task.toString());
   }
 
   public void addDeadlineTask(String description, String by) {
     Task task = new DeadlineTask(description, by);
     tasks.add(task);
-    notifyObservers(task.toString());
+    notifyObservers("Added DEADLINE: " + task.toString());
   }
 
   public void markTaskDone(int id) {
     Task task = tasks.get(id);
     task.markDone();
-    notifyObservers(task.toString());
+    notifyObservers("Marked DONE:" + task.toString());
+  }
+
+  public void deleteTask(int id) {
+    Task task = tasks.remove(id);
+    notifyObservers("DELETED:" + task.toString());
+    notifyObservers(String.format("You now have %d tasks.", tasks.size()));
   }
 
   public List<Task> getTasks() {

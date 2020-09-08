@@ -26,7 +26,7 @@ public class Runner {
     Duke.getInstance().addObserver(new CLI());
 
     String input;
-    while (!Parser.isExitCommand(input = sc.nextLine().trim())) {
+    while (!Parser.isTerminate(input = sc.nextLine().trim())) {
       try {
         Command command = Parser.parseCommand(input);
         command.execute(Duke.getInstance());
