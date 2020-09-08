@@ -28,4 +28,12 @@ public class TaskList {
     public ArrayList<Task> getTaskList() {
         return this.tasks;
     }
+
+    /**
+     * Set the tasks to the given list of tasks.
+     * @param taskList new list of tasks.
+     */
+    public void setTaskList(TaskList taskList) {
+        this.tasks = taskList.getTaskList();
+    }
 }

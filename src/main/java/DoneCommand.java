@@ -27,6 +27,7 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DoneException {
+        UndoStack.add(tasks);
         ArrayList<Task> store = tasks.getTaskList();
         if (input.length == 1) { //incomplete done command
             throw new DoneException(" ☹ OOPS!!! The description of a done cannot be empty.");

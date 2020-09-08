@@ -30,6 +30,7 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DeadlineException {
+        UndoStack.add(tasks);
         ArrayList<Task> store = tasks.getTaskList();
         int index = 0;
         for (int i = 1; i < input.length; i++) {
