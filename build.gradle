@@ -56,7 +56,7 @@ tasks.withType(JavaCompile) {
 
 shadowJar {
     archiveBaseName = "duke"
-    archiveClassifier = "v0.2"
+    archiveClassifier = "v0.3"
 }
 
 checkstyle {

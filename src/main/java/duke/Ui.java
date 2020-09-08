@@ -105,8 +105,9 @@ public class Ui {
                 indent(1);
                 System.out.println(t);
             }
-            return;
+            break;
         default:
+            assert false : "Error printing success message of " + operation;
             return;
         }
         indent(1);

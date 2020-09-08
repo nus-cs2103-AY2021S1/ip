@@ -74,7 +74,7 @@ public class TaskListHandler {
             Ui.indent(1);
             System.out.println(listPos + ". " + tasks.get(i));
         }
-        assert listPos > 0 : "Invalid task number encountered when printing task list!";
+        assert listPos > 0 : "Error printing task at position " + listPos + " when printing task list";
         System.out.println();
         System.out.println("You have " + tasks.size() + " task(s) in the list");
     }

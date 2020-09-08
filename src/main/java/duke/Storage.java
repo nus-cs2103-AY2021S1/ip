@@ -73,7 +73,7 @@ public class Storage {
                 File dir = new File(location);
                 boolean isDirCreated = dir.mkdir();
                 if (isDirCreated) {
-                    System.out.println("Created directory: " + location);
+                    System.out.println("Created directory at: " + location);
                 }
             }
             // Once save file is newly created, isEmptySave will be true
@@ -160,6 +160,7 @@ public class Storage {
         } catch (DukeException e1) {
             System.out.println(e1.getMessage());
         }
+        assert !hasLoadingError : "Error resetting the save file after user confirmation";
         return newList;
     }
 

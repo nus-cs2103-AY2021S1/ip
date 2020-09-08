@@ -95,7 +95,7 @@ public class Parser {
             // Task number is input after done/delete in the whole command in string
             // Minus one to access the index in the task list
             int indexOfTask = Integer.parseInt(stringArr[1]) - 1;
-            assert indexOfTask >= 0 : "The index of the task to modify is negative!";
+            assert indexOfTask >= 0 : "Error processing the index " + indexOfTask + " of task to modify";
             return handler.getTasks().get(indexOfTask);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("\u2639 Whoops, " + '"' + stringArr[1] + '"'
@@ -144,6 +144,7 @@ public class Parser {
                     + "event [task] /at [time]");
             }
         } else {
+            assert false : "Error detecting task type for new task command";
             return new Task("this task should not be created");
         }
     }
@@ -165,15 +166,16 @@ public class Parser {
         // size of /by or /at with a space
         String atByWithSpace = "/at ";
         int lengthOfSeparator = atByWithSpace.length();
-        assert !taskDesc.isEmpty() : "The description provided is empty!";
+        assert !taskDesc.isEmpty() : "Error processing the empty task description given";
         String time = input.substring(input.indexOf(separator) + lengthOfSeparator);
         checkIsFieldEmpty("time", time);
-        assert !time.isEmpty() : "The time provided is empty!";
+        assert !time.isEmpty() : "Error processing the empty time given";
         if (tasktype == Task.TaskType.DEADLINE) {
             return new Deadline(taskDesc, time);
         } else if (tasktype == Task.TaskType.EVENT) {
             return new Event(taskDesc, time);
         } else {
+            assert false : "Error parsing new task with time of task type " + tasktype + " in subroutine";
             return new Task("this task should not be created");
         }
     }
