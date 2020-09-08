@@ -1,7 +1,19 @@
-import main.java.*;
+import main.java.task.Task;
+import main.java.task.Event;
+import main.java.task.Deadline;
+import main.java.task.Todo;
+import main.java.DukeException;
 
-import java.io.*;
-import java.util.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.FileInputStream;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Scanner;
+import java.util.Set;
+import java.util.Arrays;
 
 import static java.lang.Integer.parseInt;
 
