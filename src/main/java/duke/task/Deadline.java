@@ -51,12 +51,14 @@ public class Deadline extends Task {
     @Override
     public Task setAsDone() {
 
+        boolean wasDone = this.isDone;
         Function<LocalTime, Deadline> toDeadline = localTime ->
                 new Deadline(this.description, this.date, localTime, this.isDone);
         Supplier<Deadline> justDateDeadline = () -> new Deadline(this.description, this.date, this.isDone);
 
         Task doneTask = this.time.map(toDeadline).orElseGet(justDateDeadline);
         doneTask.isDone = true;
+        assert this.isDone == wasDone;
         return doneTask;
     }
 

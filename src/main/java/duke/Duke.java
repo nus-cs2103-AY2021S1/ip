@@ -41,6 +41,7 @@ public class Duke {
     public void run() {
 
         this.ui.greet();
+        assert !this.isQuitting;
 
         while (!this.isQuitting) {
             try {
@@ -55,6 +56,7 @@ public class Duke {
 
     public String getResponse(String input) {
 
+        assert input != null;
         try {
             Command c = Parser.parse(input);
             return c.execute(this.tasks, this.ui, this.storage);

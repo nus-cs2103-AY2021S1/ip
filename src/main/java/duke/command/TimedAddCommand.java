@@ -60,9 +60,12 @@ public class TimedAddCommand extends AddCommand {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert tasks != null && ui != null && storage != null;
+        int previousSize = tasks.getSize();
         Task newTask = this.time.map(
             time -> tasks.addTimedTask(this.type, this.desc, this.date, time, false))
             .orElseGet(() -> tasks.addTimedTask(this.type, this.desc, this.date, false));
+        assert tasks.getSize() == previousSize + 1;
         storage.save(tasks.getList());
         return ui.printAddMessage(newTask, tasks.getSize());
     }

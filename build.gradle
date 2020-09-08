@@ -49,6 +49,7 @@ application {
 }
 
 shadowJar {
+    //noinspection GroovyAssignabilityCheck
     archiveBaseName = "duke"
     archiveClassifier = null
 }
@@ -59,4 +60,5 @@ checkstyle {
 
 run{
     standardInput = System.in
+    enableAssertions = true
 }

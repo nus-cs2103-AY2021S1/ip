@@ -34,6 +34,8 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
 
+        assert tasks != null && ui != null && storage != null;
+        int previousSize = tasks.getSize();
         boolean isOutOfBounds = this.idx >= tasks.getSize() || this.idx < 0;
 
         if (isOutOfBounds) {
@@ -41,6 +43,7 @@ public class DeleteCommand extends Command {
         }
 
         Task rmTask = tasks.remove(this.idx);
+        assert tasks.getSize() == previousSize - 1;
         storage.save(tasks.getList());
         return ui.printDeleteMessage(rmTask, tasks.getSize());
     }

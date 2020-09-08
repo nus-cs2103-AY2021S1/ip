@@ -45,6 +45,7 @@ public class Storage {
     public List<Task> load() throws DukeException {
 
         List<Task> tasks = new ArrayList<>();
+        assert this.filePath != null;
 
         try {
             int lastSlash = this.filePath.lastIndexOf('/');
@@ -74,6 +75,8 @@ public class Storage {
      * @throws DukeException if there are any I/O issues.
      */
     private void loadFromFile(List<Task> tasks) throws DukeException {
+
+        assert this.filePath != null;
 
         try {
             File f = new File(this.filePath);
@@ -125,6 +128,7 @@ public class Storage {
      */
     private Task createTask(String type, String description, String meta, boolean isDone) {
 
+        assert type != null && description != null && meta != null;
         boolean hasTime = meta.contains(" ");
 
         DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd");
@@ -141,6 +145,7 @@ public class Storage {
                     ? new Deadline(description, date, time, isDone)
                     : new Event(description, date, time, isDone);
         } else {
+            assert !meta.contains(" ");
             LocalDate date = LocalDate.parse(meta, dateFormat);
             return type.equals("deadline")
                     ? new Deadline(description, date, isDone)
@@ -203,6 +208,8 @@ public class Storage {
      * @throws IOException if there are any I/O issues.
      */
     private void writeToFile(String textToAdd) throws IOException {
+
+        assert textToAdd != null;
 
         FileWriter fw = new FileWriter(this.filePath);
         fw.write(textToAdd);

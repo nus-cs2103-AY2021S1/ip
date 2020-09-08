@@ -33,6 +33,7 @@ public class Parser {
      */
     public static Command parse(String input) throws DukeException {
 
+        assert input != null;
         String trimmedInput = input.trim();
         String command = trimmedInput.split(" ")[0];
 
@@ -54,6 +55,7 @@ public class Parser {
                 return new DeleteCommand(deleteIdx);
             case TODO:
                 taskFormatCheck(command, trimmedInput);
+                assert !trimmedInput.contains("/");
                 int startOfDescription = trimmedInput.indexOf(' ') + 1;
                 String description = trimmedInput.substring(startOfDescription);
                 return new AddCommand(description);
@@ -82,6 +84,7 @@ public class Parser {
     private static TimedAddCommand getAddTimedCommand(String input, String command) throws DukeException {
 
         taskFormatCheck(command, input);
+        assert input.contains("/");
 
         int startOfInfo = input.indexOf(' ') + 1;
         String info = input.substring(startOfInfo);
@@ -119,6 +122,9 @@ public class Parser {
      */
     private static void taskFormatCheck(String type, String input) throws DukeException {
 
+        assert type != null && input != null;
+        assert type.equals("todo") || type.equals("deadline") || type.equals("event");
+
         int idxOfSpace = input.indexOf(' ');
         int idxOfMeta = input.indexOf('/');
         int infoLength = idxOfMeta - (idxOfSpace + 1);
@@ -144,7 +150,7 @@ public class Parser {
         }
 
         boolean isTimedTask = type.equals("deadline") || type.equals("event");
-        boolean hasNoTimestamp = isTimedTask && info.substring(idxOfMeta).length() < 5;
+        boolean hasNoTimestamp = isTimedTask && input.substring(idxOfMeta).length() < 5;
 
         if (type.equals("deadline") && hasNoTimestamp) {
             throw new DukeException("Oh dear! A deadline must contain a timestamp!");

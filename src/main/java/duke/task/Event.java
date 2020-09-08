@@ -51,12 +51,14 @@ public class Event extends Task {
     @Override
     public Task setAsDone() {
 
+        boolean wasDone = this.isDone;
         Function<LocalTime, Event> toEvent = localTime ->
                 new Event(this.description, this.date, localTime, this.isDone);
         Supplier<Event> justDateEvent = () -> new Event(this.description, this.date, this.isDone);
 
         Task doneTask = this.time.map(toEvent).orElseGet(justDateEvent);
         doneTask.isDone = true;
+        assert this.isDone == wasDone;
         return doneTask;
     }
 
