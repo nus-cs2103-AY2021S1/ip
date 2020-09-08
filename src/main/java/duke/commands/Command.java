@@ -68,6 +68,7 @@ public abstract class Command {
 
     @Override
     public String toString() {
+        assert (response != null) : "response has not been initialised";
         return response;
     }
 }

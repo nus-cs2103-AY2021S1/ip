@@ -46,8 +46,9 @@ public class TaskManager {
      * This string information is then passed on to the <code>Storage</code>
      * class where it will handle the saving of the information.
      */
-    private void save() throws DukeException {
-        StringBuffer sb = new StringBuffer();
+    private void save() {
+        assert tasks != null : "the task list was never initialised";
+        StringBuilder sb = new StringBuilder();
         for (Task task : tasks) {
             sb.append(task.saveText()).append("\n");
         }
