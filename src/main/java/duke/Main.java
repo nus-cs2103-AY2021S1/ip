@@ -3,6 +3,7 @@ package duke;
 import java.io.IOException;
 
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
@@ -34,5 +35,9 @@ public class Main extends Application {
 
     public static MainWindow getWindow() {
         return window;
+    }
+
+    public static void closeWindow() {
+        Platform.exit();
     }
 }
