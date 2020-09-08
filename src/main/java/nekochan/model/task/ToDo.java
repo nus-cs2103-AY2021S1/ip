@@ -18,11 +18,6 @@ public class ToDo extends Task {
         super(description, isCompleted);
     }
 
-    @Override
-    public ToDo setCompleted() {
-        return new ToDo(description, true);
-    }
-
     /**
      * Returns a {@code ToDo} object with the specified {@code details}.
      *
@@ -62,30 +57,11 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns an encoded string representation of this {@code Deadline}.
-     *
-     * @return an encoded string representation of this {@code Deadline}.
+     * {@inheritDoc}
      */
     @Override
-    public String encode() {
-        return String.format("T|%s|%s",
-                super.isCompleted ? ENCODED_COMPLETE_FLAG : ENCODED_INCOMPLETE_FLAG,
-                super.description);
-    }
-
-    /**
-     * Returns a string representation of this {@code ToDo}.
-     *
-     * @return a string representation of this {@code ToDo}.
-     */
-    @Override
-    public boolean match(String searchParameter) {
-        return description.contains(searchParameter) || searchParameter.contains(description);
-    }
-
-    @Override
-    public ToDo deepCopy() {
-        return new ToDo(description, isCompleted);
+    public ToDo setCompleted() {
+        return new ToDo(description, true);
     }
 
     /**
@@ -110,6 +86,41 @@ public class ToDo extends Task {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public ToDo deepCopy() {
+        return new ToDo(description, isCompleted);
+    }
+
+    @Override
+    public String toString() {
+        return "[T]" + super.toString();
+    }
+
+    /**
+     * Returns an encoded string representation of this {@code Deadline}.
+     *
+     * @return an encoded string representation of this {@code Deadline}.
+     */
+    @Override
+    public String encode() {
+        return String.format("T|%s|%s",
+                super.isCompleted ? ENCODED_COMPLETE_FLAG : ENCODED_INCOMPLETE_FLAG,
+                super.description);
+    }
+
+    /**
+     * Returns a string representation of this {@code ToDo}.
+     *
+     * @return a string representation of this {@code ToDo}.
+     */
+    @Override
+    public boolean match(String searchParameter) {
+        return description.contains(searchParameter) || searchParameter.contains(description);
+    }
+
+    /**
      * Returns true if the specified {@code obj} is a {@code ToDo} and has the same details.
      *
      * @param obj the reference object with which to compare.
@@ -127,10 +138,5 @@ public class ToDo extends Task {
 
         ToDo other = (ToDo) obj;
         return other.description.equals(description);
-    }
-
-    @Override
-    public String toString() {
-        return "[T]" + super.toString();
     }
 }

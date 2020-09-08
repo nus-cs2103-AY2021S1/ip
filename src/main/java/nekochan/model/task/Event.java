@@ -38,11 +38,6 @@ public class Event extends Task {
         endDateTime = end;
     }
 
-    @Override
-    public Event setCompleted() {
-        return new Event(description, startDateTime, endDateTime, true);
-    }
-
     private static Event createAllDayEvent(String description, String dateTimeComponent) {
         String start = dateTimeComponent.split(ALL_DAY_KEYWORD)[0].split(DURATION_DELIMITER)[0].trim();
         LocalDateTime startDateTime = DateParser.parseStringToDateTime(start);
@@ -140,6 +135,61 @@ public class Event extends Task {
     }
 
     /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Event setCompleted() {
+        return new Event(description, startDateTime, endDateTime, true);
+    }
+
+    /**
+     * Returns true if the specified {@code obj} is an {@code Event} and has the same (case insensitive) description,
+     * start and end datetime as this {@code Event}.
+     *
+     * @param obj the reference object with which to compare.
+     * @return true if the {@code Object} is an {@code Event} and are similar.
+     */
+    @Override
+    boolean isSimilar(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof Event)) {
+            return false;
+        }
+
+        Event other = (Event) obj;
+        return other.description.toLowerCase().equals(description.toLowerCase())
+                && other.startDateTime.equals(startDateTime)
+                && other.endDateTime.equals(endDateTime);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Event deepCopy() {
+        return new Event(description, startDateTime, endDateTime, isCompleted);
+    }
+
+    /**
+     * Returns a string representation of this {@code Event} object.
+     *
+     * @return a string representation of this {@code Event} object.
+     */
+    @Override
+    public String toString() {
+        if (DateParser.isDateOnly(startDateTime) && startDateTime.toLocalDate().isEqual(endDateTime.toLocalDate())) {
+            return "[E]" + super.toString() + " (on " + DateParser.parseLocalDateTimeToString(startDateTime)
+                    + " for all day)";
+        } else {
+            return "[E]" + super.toString() + " (from " + DateParser.parseLocalDateTimeToString(startDateTime)
+                    + " to " + DateParser.parseLocalDateTimeToString(endDateTime) + ")";
+        }
+    }
+
+    /**
      * Returns an encoded string representation of this {@code Event}.
      *
      * @return an encoded string representation of this {@code Event}.
@@ -171,34 +221,6 @@ public class Event extends Task {
         }
     }
 
-    @Override
-    public Event deepCopy() {
-        return new Event(description, startDateTime, endDateTime, isCompleted);
-    }
-
-    /**
-     * Returns true if the specified {@code obj} is an {@code Event} and has the same (case insensitive) description,
-     * start and end datetime as this {@code Event}.
-     *
-     * @param obj the reference object with which to compare.
-     * @return true if the {@code Object} is an {@code Event} and are similar.
-     */
-    @Override
-    boolean isSimilar(Object obj) {
-        if (obj == this) {
-            return true;
-        }
-
-        if (!(obj instanceof Event)) {
-            return false;
-        }
-
-        Event other = (Event) obj;
-        return other.description.toLowerCase().equals(description.toLowerCase())
-                && other.startDateTime.equals(startDateTime)
-                && other.endDateTime.equals(endDateTime);
-    }
-
     /**
      * Returns true if the specified {@code obj} is an {@code Event} and has the same details.
      *
@@ -219,21 +241,5 @@ public class Event extends Task {
         return other.description.equals(description)
                 && other.startDateTime.equals(startDateTime)
                 && other.endDateTime.equals(endDateTime);
-    }
-
-    /**
-     * Returns a string representation of this {@code Event} object.
-     *
-     * @return a string representation of this {@code Event} object.
-     */
-    @Override
-    public String toString() {
-        if (DateParser.isDateOnly(startDateTime) && startDateTime.toLocalDate().isEqual(endDateTime.toLocalDate())) {
-            return "[E]" + super.toString() + " (on " + DateParser.parseLocalDateTimeToString(startDateTime)
-                    + " for all day)";
-        } else {
-            return "[E]" + super.toString() + " (from " + DateParser.parseLocalDateTimeToString(startDateTime)
-                    + " to " + DateParser.parseLocalDateTimeToString(endDateTime) + ")";
-        }
     }
 }
