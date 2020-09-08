@@ -39,7 +39,7 @@ public class FastForwarderGenerator {
             throw new DukeException("Please specify an integer larger than 0!");
         }
 
-        String recurringIdentifier = recurringDetails.substring(recurringIdentifierIndex);
+        String recurringIdentifier = recurringDetails.substring(recurringIdentifierIndex).toUpperCase();
         switch (recurringIdentifier) {
         case INTERVAL_DAILY:
             return localDateTime -> localDateTime.plusDays(multiplier);

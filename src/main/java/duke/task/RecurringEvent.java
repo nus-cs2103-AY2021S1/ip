@@ -31,12 +31,17 @@ public class RecurringEvent extends Event {
     protected RecurringEvent(String eventDescription, LocalDateTime startTiming,
              LocalDateTime endTiming, String recurringDetails) {
         super(eventDescription, startTiming, endTiming);
-        this.recurringDetails = recurringDetails;
+        this.recurringDetails = recurringDetails.toUpperCase();
     }
 
     private void parseRecurringDetails(String recurringDetails) throws DukeException {
         this.recurringDetails = recurringDetails;
         fastForwarder = FastForwarderGenerator.generateFastForwarder(recurringDetails);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + String.format(" (Recurring Interval: %s)", recurringDetails);
     }
 
     @Override

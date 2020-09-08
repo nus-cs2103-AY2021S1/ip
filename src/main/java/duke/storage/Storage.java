@@ -8,10 +8,7 @@ import java.util.Scanner;
 import java.util.regex.Pattern;
 
 import duke.InvalidSaveException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.task.*;
 import duke.util.TaskList;
 
 /**
@@ -92,6 +89,8 @@ public class Storage {
             return ToDo.reconstructFromSummary(taskSummary);
         case Deadline.SYMBOL:
             return Deadline.reconstructFromSummary(taskSummary);
+        case RecurringEvent.SYMBOL:
+            return RecurringEvent.reconstructFromSummary(taskSummary);
         default:
             throw new InvalidSaveException(identifier + " is not a valid type symbol!");
         }
