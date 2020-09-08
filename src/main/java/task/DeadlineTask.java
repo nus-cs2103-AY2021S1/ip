@@ -9,12 +9,13 @@ import exception.DateTimeInvalidFormatException;
 /**
  * Encapsulates the details of a task with a deadline.
  *
- * <p>The 'DeadlineTask' class extends from Task class and supports operators,
+ * <p>The 'DeadlineTask' class extends from Task class and implement TimeRelated interface.
+ * It supports operators,
  * supported include: </p>
  *
  * <p> (i) getters </p>
  */
-public class DeadlineTask extends Task implements TimeRestriction {
+public class DeadlineTask extends Task implements TimeRelated {
     protected static final DateTimeFormatter DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy kk:mm");
     protected LocalDateTime dateTime;
 

@@ -40,7 +40,7 @@ public class TaskList {
      * Add a task to the list.
      *
      * @param task the task to be added.
-     * @return string containing information on deletion and list size.
+     * @return string containing information on addition and list size.
      */
     public String addToTaskList(task.Task task) {
         this.taskList.add(task);
@@ -93,7 +93,8 @@ public class TaskList {
      * @return size of list.
      */
     public int size() {
-        return this.taskList.size();
+        int size  = this.taskList.size();
+        return size;
     }
 
     /**
