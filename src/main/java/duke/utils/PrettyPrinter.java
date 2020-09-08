@@ -17,6 +17,8 @@ public class PrettyPrinter {
      * @param dividerLength the number of underscores of each divider.
      */
     public PrettyPrinter(int leftPadding, int dividerLength) {
+        assert leftPadding >= 0 : "Amount of left padding should be non-negative";
+        assert dividerLength >= 0 : "Divider length should be non-negative";
         this.leftPadding = leftPadding;
         this.dividerLength = dividerLength;
     }

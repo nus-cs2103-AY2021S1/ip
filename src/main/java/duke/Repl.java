@@ -62,10 +62,11 @@ public class Repl {
             // Check that the user input is of the correct format for the command.
             command.validate(input);
             switch (command) {
-            case BYE:
+            case BYE: {
                 response = ResourceHandler.getString("repl.farewell");
                 shouldExit = true;
                 break;
+            }
             case DEADLINE: {
                 String lineWithoutCommand = input.replaceFirst("^deadline", "");
                 String[] args = lineWithoutCommand.split("/by", 2);
@@ -133,6 +134,7 @@ public class Repl {
                 break;
             }
             default:
+                assert false : "Switch statement does not cover all possible values of the Command enum";
                 break;
             }
         } catch (DukeException e) {
