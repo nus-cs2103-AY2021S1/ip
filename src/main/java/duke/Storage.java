@@ -39,21 +39,21 @@ public class Storage {
             File file = new File("data/duke.txt");
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
-                String previousTaskString = sc.nextLine();
-                String[] words = previousTaskString.split(" @ ", 0);
-                Task PreviousTask = null;
+                String previouTaskString = sc.nextLine();
+                String[] words = previouTaskString.split(" @ ", 0);
+                Task previouTask = null;
                 if (words[0].equals("D")) {
-                    PreviousTask = new Deadline(words[2], words[3]);
-                    tasks.add(PreviousTask);
+                    previouTask = new Deadline(words[2], words[3]);
+                    tasks.add(previouTask);
                 } else if (words[0].equals("T")) {
-                    PreviousTask = new ToDo(words[2]);
-                    tasks.add(PreviousTask);
+                    previouTask = new ToDo(words[2]);
+                    tasks.add(previouTask);
                 } else if (words[0].equals("E")) {
-                    PreviousTask = new Event(words[2], words[3]);
-                    tasks.add(PreviousTask);
+                    previouTask = new Event(words[2], words[3]);
+                    tasks.add(previouTask);
                 }
                 if (words[1].equals("1")) {
-                    PreviousTask.setIsDone();
+                    previouTask.setIsDone();
                 }
             }
         } catch (FileNotFoundException e) {
@@ -63,8 +63,7 @@ public class Storage {
     }
 
     /**
-     * Creates a duke.txt under data directory if the file does not exist at the first place.
-     * If the file exist, start loading. (Adding previous stored task in duke.txt into an ArrayList<tasks>)
+     * Creates a duke.txt under data directory if the file does not exist at the first place, else load the content.
      *
      * @throws IOException Exception occurs when the file is not found
      */

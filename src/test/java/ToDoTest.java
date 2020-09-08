@@ -18,7 +18,7 @@ public class ToDoTest {
     @Test
     public void addNewTodoTest() throws EmptyInputException, IOException, NoResponseException {
         TaskList tasks = new TaskList(new ArrayList<Task>());
-        Ui ui = new Ui(tasks);
+        Ui ui = new Ui();
         Parser parser = new Parser(ui , tasks);
         String expectedOutput = "____________________________________________________________\n" +
                 "     Got it. I've added this task:\n" +
@@ -35,7 +35,7 @@ public class ToDoTest {
         ArrayList<Task> tasksArr = new ArrayList<>();
         tasksArr.add(todoTest);
         TaskList tasks = new TaskList(tasksArr);
-        Ui ui = new Ui(tasks);
+        Ui ui = new Ui();
         Parser parser = new Parser(ui , tasks);
         String expectedOutput = "____________________________________________________________\n" +
                 "     Noted. I've removed this task:\n" +

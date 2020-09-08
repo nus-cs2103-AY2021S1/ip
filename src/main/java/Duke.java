@@ -1,11 +1,13 @@
+import java.io.IOException;
+
+import duke.EmptyInputException;
+import duke.NoResponseException;
+import duke.Parser;
+import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.Parser;
-import duke.NoResponseException;
-import duke.EmptyInputException;
-import duke.Storage;
 
-import java.io.IOException;
+
 
 public class Duke {
     protected Storage storage;

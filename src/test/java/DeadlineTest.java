@@ -17,7 +17,7 @@ public class DeadlineTest {
     @Test
     public void addNewDeadlineTest() throws EmptyInputException, IOException, NoResponseException {
         TaskList tasks = new TaskList(new ArrayList<Task>());
-        Ui ui = new Ui(tasks);
+        Ui ui = new Ui();
         Parser parser = new Parser(ui , tasks);
         String expectedOutput = "____________________________________________________________\n" +
                 "     Got it. I've added this task:\n" +
@@ -36,7 +36,7 @@ public class DeadlineTest {
         tasksArr.add(DeadlineTest1);
         tasksArr.add(DeadlineTest2);
         TaskList tasks = new TaskList(tasksArr);
-        Ui ui = new Ui(tasks);
+        Ui ui = new Ui();
         Parser parser = new Parser(ui , tasks);
         String expectedOutput = "____________________________________________________________\n" +
                 "     Noted. I've removed this task:\n" +

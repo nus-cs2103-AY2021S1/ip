@@ -16,7 +16,11 @@ public class Event extends Task {
         super(description);
         this.date = LocalDate.parse(date);
     }
-
+    /**
+     * Returns a string that represents the Event task which will be written in the documented file.
+     *
+     * @return String represents Event task in duke.txt.
+     */
     public String writeToFile() {
         String isDoneString = this.isDone ? " 1 @ " : " 0 @ ";
         String date = " @ " + this.date;
