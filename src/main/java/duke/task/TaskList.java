@@ -42,9 +42,9 @@ public class TaskList<T> {
         int size = this.taskList.size();
         if (size != 0) {
             for (int i = 1; i < size; i++) {
-                results.append("    ").append(i).append(". ").append(taskList.get(i - 1)).append("\n");
+                results.append(i).append(". ").append(taskList.get(i - 1)).append("\n");
             }
-            results.append("    ").append(size).append(". ").append(taskList.get(size - 1));
+            results.append(size).append(". ").append(taskList.get(size - 1));
         }
         return results.toString();
     }

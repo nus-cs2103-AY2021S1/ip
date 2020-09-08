@@ -89,4 +89,22 @@ public class DukeException {
     public static String findDetailMissingException() {
         return new Format<>(Exceptions.FINDDETAILMISSINGEXCEPTION.toString()).toString();
     }
+
+    /**
+     * Returns an error message when the file already exists during creation.
+     *
+     * @return An error message.
+     */
+    public static String fileAlreadyExistException() {
+        return new Format<>(Exceptions.FILEALREADYEXIST.toString()).toString();
+    }
+
+    /**
+     * Returns an error message when the write() method throws IOException.
+     *
+     * @return An error message.
+     */
+    public static String fileWritingException() {
+        return new Format<>(Exceptions.WRITINGEXCEPTION.toString()).toString();
+    }
 }

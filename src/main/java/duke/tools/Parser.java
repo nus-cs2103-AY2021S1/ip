@@ -4,9 +4,9 @@ import duke.exception.DukeException;
 import duke.main.Command;
 import duke.main.Directory;
 import duke.main.Statement;
-import duke.storage.EditFile;
-import duke.storage.ReadFile;
-import duke.storage.WriteIn;
+import duke.storage.DukeFileEditor;
+import duke.storage.DukeFileReader;
+import duke.storage.DukeFileWriter;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -45,7 +45,7 @@ public class Parser {
      */
     public static void reloadTaskList() {
         taskList = new TaskList<>();
-        new ReadFile(Directory.FILEDIRECTORY.toString()).readFile();
+        new DukeFileReader(Directory.FILEDIRECTORY.toString()).loadFile();
     }
 
     /**
@@ -68,6 +68,7 @@ public class Parser {
      */
     public static String run(String order) {
 
+        extract = new String[3];
         extract = extract(order);
         reloadTaskList();
 
@@ -106,8 +107,8 @@ public class Parser {
             } else {
                 Task task = taskList.getTaskList().get(num - 1);
                 task.setDone();
-                EditFile editFile = new EditFile(Directory.FILEDIRECTORY.toString());
-                editFile.setTaskDone(num);
+                DukeFileEditor dukeFileEditor = new DukeFileEditor(Directory.FILEDIRECTORY.toString());
+                dukeFileEditor.setTaskDone(num);
                 return new Format<>(new Response(Statement.DONE.toString() + task)).toString();
             }
         } catch (NumberFormatException e) {
@@ -128,8 +129,8 @@ public class Parser {
             } else {
                 Task task = taskList.getTaskList().get(num - 1);
                 taskList.getTaskList().remove(num - 1);
-                EditFile editFile = new EditFile(Directory.FILEDIRECTORY.toString());
-                editFile.deleteLine(num);
+                DukeFileEditor dukeFileEditor = new DukeFileEditor(Directory.FILEDIRECTORY.toString());
+                dukeFileEditor.deleteLine(num);
 
                 String response =
                         Statement.DELETE.toString()
@@ -153,8 +154,8 @@ public class Parser {
     public static String find(String content) {
         try {
             taskList = new TaskList<>();
-            ReadFile readFile = new ReadFile(Directory.FILEDIRECTORY.toString());
-            readFile.matchContent(content);
+            DukeFileReader dukeFileReader = new DukeFileReader(Directory.FILEDIRECTORY.toString());
+            dukeFileReader.matchContent(content);
 
             Response response = new Response(
                     Statement.FIND.toString()
@@ -173,7 +174,7 @@ public class Parser {
      * directory in Directory class.
      */
     public static String clear() {
-        EditFile deleteAll = new EditFile(Directory.FILEDIRECTORY.toString());
+        DukeFileEditor deleteAll = new DukeFileEditor(Directory.FILEDIRECTORY.toString());
         deleteAll.clearFile();
         taskList = new TaskList<>();
 
@@ -253,7 +254,6 @@ public class Parser {
         String identity = extract[command];
         String detail = extract[taskDetail];
         String time = extract[taskTime];
-        System.out.println(identity);
 
         //to check if the input is not a todo or event or deadline
         if (!identity.equals(Command.TODO.toString())
@@ -286,7 +286,7 @@ public class Parser {
             }
         }
         taskList.addMemory(task);
-        WriteIn data = new WriteIn(Directory.FILEDIRECTORY.toString(), true);
+        DukeFileWriter data = new DukeFileWriter(Directory.FILEDIRECTORY.toString(), true);
         data.writeToFile(task.toString());
         Format<Task> responseWithFormat =
                 new Format<>(task);

@@ -8,6 +8,7 @@ import javafx.animation.PauseTransition;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.util.Duration;
@@ -27,6 +28,7 @@ public class Main extends Application {
             Scene scene = new Scene(anchorPane);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/Duke.png")));
             stage.show();
         } catch (IOException exception) {
             exception.printStackTrace();

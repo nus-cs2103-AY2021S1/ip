@@ -8,7 +8,7 @@ public enum FormatString {
     UNDERSCORE {
         @Override
         public String toString() {
-            return "  ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
+            return "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~";
         }
     },
 
