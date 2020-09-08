@@ -38,7 +38,7 @@ public class DeleteCommand extends Command {
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeLoadingErrorException {
         Task deletedTask = taskList.deleteTask(taskNo);
-        storage.save(taskList);
+        storage.saveTasks(taskList);
         String uiMessage = String.format(
                 "Noted. I've removed this task:\n%s\n%s",
                 deletedTask.toString(),

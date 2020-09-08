@@ -38,7 +38,7 @@ public class DoneCommand extends Command {
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeLoadingErrorException {
         Task completedTask = taskList.completeTask(taskNo);
-        storage.save(taskList);
+        storage.saveTasks(taskList);
         String uiMessage = String.format("Nice! I've marked this task as done:\n%s", completedTask.toString());
         return ui.print(uiMessage);
     }

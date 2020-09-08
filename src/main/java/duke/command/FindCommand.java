@@ -23,7 +23,7 @@ public class FindCommand extends Command {
      * @param storage Storage associated with the operation.
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        List<Task> relatedTasks = taskList.findTasks(keyword);
+        List<Task> relatedTasks = taskList.findRelatedTasks(keyword);
         return ui.printSearchResult(relatedTasks);
     }
 }

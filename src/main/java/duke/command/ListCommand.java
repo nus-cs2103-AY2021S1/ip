@@ -16,6 +16,6 @@ public class ListCommand extends Command {
      * @param storage Storage associated with the operation
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        return ui.list(taskList);
+        return ui.printList(taskList);
     }
 }

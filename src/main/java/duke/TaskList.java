@@ -39,11 +39,11 @@ public class TaskList {
     /**
      * Retrieves the task according to the index given.
      *
-     * @param i Index of the task in the list.
+     * @param index Index of the task in the list.
      * @return Returns the task.
      */
-    public Task get(int i) {
-        return tasks.get(i);
+    public Task get(int index) {
+        return tasks.get(index);
     }
 
     /**
@@ -51,7 +51,7 @@ public class TaskList {
      *
      * @return Returns the size.
      */
-    public int size() {
+    public int getSize() {
         return tasks.size();
     }
 
@@ -140,7 +140,7 @@ public class TaskList {
      * @param keyword Keyword used to find the related tasks.
      * @return Returns a list of related tasks.
      */
-    public List<Task> findTasks(String keyword) {
+    public List<Task> findRelatedTasks(String keyword) {
         List<Task> relatedTasks = new ArrayList<>();
         tasks.stream().filter(task -> task.getDescription().contains(keyword))
                 .forEach(task -> relatedTasks.add(task));

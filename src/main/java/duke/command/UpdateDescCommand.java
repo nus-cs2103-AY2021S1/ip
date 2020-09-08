@@ -28,7 +28,7 @@ public class UpdateDescCommand extends UpdateCommand {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeLoadingErrorException {
         Task updatedTask = taskList.updateTaskDesc(super.taskNo, this.description);
-        storage.save(taskList);
+        storage.saveTasks(taskList);
         String uiMessage = String.format(
                 "Noted. I've updated this task:\n%s\n%s",
                 updatedTask.toString(),

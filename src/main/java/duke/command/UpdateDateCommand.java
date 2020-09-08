@@ -39,7 +39,7 @@ public class UpdateDateCommand extends UpdateCommand {
     public String execute(TaskList taskList, Ui ui, Storage storage)
             throws DukeLoadingErrorException, DukeInvalidUpdateException {
         Task updatedTask = taskList.updateTaskDate(super.taskNo, this.date);
-        storage.save(taskList);
+        storage.saveTasks(taskList);
         String uiMessage = String.format(
                 "Noted. I've updated this task:\n%s\n%s",
                 updatedTask.toString(),

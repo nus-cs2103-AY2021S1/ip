@@ -41,13 +41,13 @@ public class Parser {
         String[] commands = fullCommand.trim().split(" ", 2);
         switch(commands[0]) {
         case "bye":
-            return parseBye();
+            return new ByeCommand();
         case "list":
-            return parseList();
+            return new ListCommand();
         case "done":
-            return parseDone(Integer.parseInt(commands[1]));
+            return new DoneCommand(Integer.parseInt(commands[1]));
         case "delete":
-            return parseDelete(Integer.parseInt(commands[1]));
+            return new DeleteCommand(Integer.parseInt(commands[1]));
         case "update":
             return parseUpdate(commands[1]);
         case "find":
@@ -75,43 +75,6 @@ public class Parser {
         }
     }
 
-    /**
-     * Parses a ByeCommand.
-     *
-     * @return Returns a ByeCommand.
-     */
-    static ByeCommand parseBye() {
-        return new ByeCommand();
-    }
-
-    /**
-     * Parses a ListCommand.
-     *
-     * @return Returns a ListCommand.
-     */
-    static ListCommand parseList() {
-        return new ListCommand();
-    }
-
-    /**
-     * Parses a DoneCommand.
-     *
-     * @param taskNo Number of the task that is to be completed.
-     * @return Returns a DoneCommand associated with the task to be completed.
-     */
-    static DoneCommand parseDone(int taskNo) {
-        return new DoneCommand(taskNo);
-    }
-
-    /**
-     * Parses a DeleteCommand.
-     *
-     * @param taskNo Number of the task that is to be deleted.
-     * @return Returns a DeleteCommand associated with the task to be deleted.
-     */
-    static DeleteCommand parseDelete(int taskNo) {
-        return new DeleteCommand(taskNo);
-    }
 
     /**
      * Parses a UpdateCommand.

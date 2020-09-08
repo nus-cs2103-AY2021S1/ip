@@ -39,7 +39,7 @@ public class AddCommand extends Command {
      */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeLoadingErrorException {
         taskList.addTask(task);
-        storage.save(taskList);
+        storage.saveTasks(taskList);
         String uiMessage = String.format(
                 "Got it. I've added this task:\n%s\n%s",
                 task.toString(),

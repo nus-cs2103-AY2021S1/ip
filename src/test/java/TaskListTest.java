@@ -51,7 +51,7 @@ public class TaskListTest {
         taskList.addTask(deadline);
         Event event = new Event("project meeting", "06-06-2020 11:00");
         taskList.addTask(event);
-        assertEquals(taskList.size(),
+        assertEquals(taskList.getSize(),
                 2);
     }
 

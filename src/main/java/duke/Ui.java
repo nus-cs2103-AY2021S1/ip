@@ -53,9 +53,9 @@ public class Ui {
      *
      * @param taskList TaskList to be printed.
      */
-    public String list(TaskList taskList) {
+    public String printList(TaskList taskList) {
         String s = "Here are the tasks in your list:\n";
-        for (int i = 1; i <= taskList.size(); i++) {
+        for (int i = 1; i <= taskList.getSize(); i++) {
             Task task = taskList.get(i - 1);
             String message = i + ".";
             message += task;

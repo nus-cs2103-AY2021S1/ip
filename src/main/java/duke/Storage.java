@@ -68,11 +68,9 @@ public class Storage {
                 case "T":
                     taskList.add(new Todo(task[2], task[1].equals("1")));
                     break;
-
                 case "E":
                     taskList.add(new Event(task[2], task[3], task[1].equals("1")));
                     break;
-
                 case "D":
                     taskList.add(new Deadline(task[2], task[3], task[1].equals("1")));
                     break;
@@ -111,7 +109,7 @@ public class Storage {
      * @param taskList TaskList to be saved.
      * @throws DukeLoadingErrorException If I/O operation fails.
      */
-    public void save(TaskList taskList) throws DukeLoadingErrorException {
+    public void saveTasks(TaskList taskList) throws DukeLoadingErrorException {
         try {
             FileWriter fw = new FileWriter(String.valueOf(path));
             String content = "";
