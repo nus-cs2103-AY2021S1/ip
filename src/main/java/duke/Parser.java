@@ -8,6 +8,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
@@ -57,6 +58,8 @@ public class Parser {
             return new ClearCommand();
         case "find":
             return new FindCommand(input);
+        case "help":
+            return new HelpCommand(input);
         default:
             return new InvalidCommand(input);
         }

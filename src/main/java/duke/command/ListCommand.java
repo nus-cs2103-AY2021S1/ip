@@ -8,6 +8,11 @@ import duke.TaskListHandler;
  * Inherits from generic command class.
  */
 public class ListCommand extends Command {
+    public static final String COMMAND_WORD = "list";
+    public static final String COMMAND_USAGE = COMMAND_WORD + ": Displays all tasks and their details.\n\n"
+        + "Example: "
+        + COMMAND_WORD;
+
 
     /**
      * Prints the task list.
