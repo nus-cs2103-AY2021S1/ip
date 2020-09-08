@@ -13,6 +13,7 @@ public class ScheduledCommand implements Command {
     @Override
     public String parseInput(TaskList tasks, String text) throws DobbyException {
         String message;
+        assert text.startsWith("scheduled") : "Scheduled command must start with scheduled.";
         try {
             String dt = text.substring(text.indexOf(' ') + 1);
             String day = dt.substring(0, dt.indexOf('/'));
@@ -26,6 +27,7 @@ public class ScheduledCommand implements Command {
                     + "The format of the date in incorrect. Please try again.\n  "
                     + USAGE);
         }
+        assert message != null : "Return message to user cannot be empty";
         return message;
     }
 }
