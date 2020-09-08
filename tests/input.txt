@@ -26,4 +26,4 @@ event
 event /by 1999-12-31
 event asdf /by 1999-12-31
 event asdf
-bye
+quit
