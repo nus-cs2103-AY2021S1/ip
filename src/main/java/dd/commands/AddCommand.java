@@ -50,7 +50,7 @@ public class AddCommand extends Command {
                 // valid
                 int initialNum = tasks.getTaskSize();
                 String formattedDate = dth.categorizeInput(temp[1]);
-                Deadline addedDeadline= new Deadline(temp[0], formattedDate);
+                Deadline addedDeadline = new Deadline(temp[0], formattedDate);
                 tasks.addTask(addedDeadline);
                 tasks.sortTasks();
 
