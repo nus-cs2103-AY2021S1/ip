@@ -8,6 +8,10 @@ import java.time.format.DateTimeFormatter;
  * @author Tee Kok Siang
  */
 public class Deadline extends Task {
+    /** Keyword for extracting the Deadline date */
+    public static final String BY_KEYWORD = "/by";
+    /** Position for the keyword */
+    public static final int INVALID_BY_POSITION = 1;
     private final String by;
 
     /**

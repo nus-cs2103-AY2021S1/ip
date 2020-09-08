@@ -5,6 +5,10 @@ package duke.task;
  * @author Tee Kok Siang
  */
 public class Event extends Task {
+    /** Keyword for extracting the event time */
+    public static final String AT_KEYWORD = "/at";
+    /** Position for the keyword */
+    public static final int INVALID_AT_POSITION = 1;
     private final String at;
 
     /**

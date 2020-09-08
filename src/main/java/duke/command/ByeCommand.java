@@ -5,7 +5,7 @@ import duke.TaskList;
 import duke.ui.Ui;
 
 /**
- * Represents an exit command.
+ * Represents an exiting application command.
  * @author Tee Kok Siang
  */
 public class ByeCommand extends Command {

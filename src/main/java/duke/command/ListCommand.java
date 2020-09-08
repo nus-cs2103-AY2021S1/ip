@@ -8,7 +8,7 @@ import duke.ui.Ui;
 import duke.task.Task;
 
 /**
- * Represents a list task command.
+ * Represents a listing {@link duke.TaskList} command.
  * @author Tee Kok Siang
  */
 public class ListCommand extends Command {

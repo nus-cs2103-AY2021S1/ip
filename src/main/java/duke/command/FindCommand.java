@@ -8,13 +8,36 @@ import duke.TaskList;
 import duke.ui.Ui;
 import duke.task.Task;
 
+/**
+ * Represents a searching {@link duke.task.Task} command.
+ * @author Tee Kok Siang
+ */
 public class FindCommand extends Command {
     private final String query;
+    /** Minimum number of word count for a FindCommand */
+    public static final int MIN_WORD_COUNT = 6;
+    /** Position for extracting query for a FindCommand */
+    public static final int QUERY_START_POSITION = 5;
 
+    /**
+     * Constructs a DoneCommand object.
+     *
+     * @param query Query keyword for searching tasks.
+     */
     public FindCommand(String query) {
         this.query = query;
     }
 
+    /**
+     * Executes a FindCommand to search tasks.
+     * Search the task list by the query keyword.
+     * Displays the search result.
+     *
+     * @param taskList List of tasks.
+     * @param ui UI to handle user interaction.
+     * @param storage Storage to save the task list in the hard disk.
+     * @return Formatted response message.
+     */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
         List<Task> tasks = taskList.getTasks();

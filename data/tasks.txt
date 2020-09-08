@@ -1,2 +1,2 @@
 D | 1 | a2 | 2020-09-02
-T | 0 | read book
+T | 1 | read book

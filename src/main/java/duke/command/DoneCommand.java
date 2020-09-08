@@ -1,12 +1,13 @@
 package duke.command;
 
-import duke.DukeException;
+import duke.Exception.DukeException;
+import duke.Exception.TaskNotFoundException;
 import duke.Storage;
 import duke.TaskList;
 import duke.ui.Ui;
 
 /**
- * Represents a done task command.
+ * Represents a completing {@link duke.task.Task} command.
  * @author Tee Kok Siang
  */
 public class DoneCommand extends Command {
@@ -34,7 +35,7 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         if (taskNumber > taskList.size() || taskNumber < 1) {
-            throw new DukeException("The task number is not found");
+            throw new TaskNotFoundException();
         }
         taskList.doneTask(taskNumber);
         // display update task success message
