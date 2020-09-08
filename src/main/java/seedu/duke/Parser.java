@@ -24,6 +24,7 @@ public class Parser {
         String deadlineCommand = "deadline";
         String eventCommand = "event";
         String findCommand = "find";
+        String sortCommand = "sort";
 
         if (input.equals(listCommand)) {
             return new ListCommand();
@@ -45,6 +46,8 @@ public class Parser {
                 return new AddDeadline(words);
             } else if (words[0].equals(eventCommand)) {
                 return new AddEvent(words);
+            } else if (words[0].equals(sortCommand)) {
+                return new SortCommand(words);
             } else { // user typed a command not in duke
                 throw new DukeNotSureException("Man I don't know what you want? :s I'm not very smart ok??");
             }

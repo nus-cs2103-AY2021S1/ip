@@ -1,6 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.TaskList;
+import seedu.duke.exception.DukeCommandException;
 import seedu.duke.ui.Ui;
 import seedu.duke.task.Event;
 
@@ -26,9 +27,8 @@ public class AddEvent extends AddCommand {
      * @throws DateTimeException If the user inputs a wrong format of the date.
      */
     @Override
-    public void execute(TaskList ls, Ui ui) throws DateTimeException {
+    public void execute(TaskList ls, Ui ui) throws DateTimeException, DukeCommandException {
         String[] input = words[1].split(" /by ");
-        assert input.length > 1 : "Should have two parts to the command.";
         LocalDateTime day = LocalDateTime.parse(input[1], FORMATTER);
         Event newE = new Event(input[0], day, false);
         ls.add(newE);

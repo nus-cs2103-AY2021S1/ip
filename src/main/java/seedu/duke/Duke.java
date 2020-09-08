@@ -29,6 +29,9 @@ public class Duke {
         } catch (IOException e) {
             this.ui.showLoadingError();
             this.tasklist = new TaskList();
+        } catch (DukeException e) {
+            this.ui.showError(e.getMessage());
+            this.tasklist = new TaskList();
         }
     }
 
