@@ -23,12 +23,13 @@ public class DoneCommand extends Command {
     @Override
     public void execute(TaskList ls, Ui ui) throws DukeException {
         int number = Integer.parseInt(words[1]);
-        if (number > ls.size()) {
-            throw new DukeNotSureException("This task doesn't seem to exist? :s");
+        if (number > ls.size() || number < 0) {
+            throw new DukeNotSureException("This task doesn't seem to exist? Pick a proper task, good god.");
         } else {
             Task oldTask = ls.get(number - 1);
             oldTask.checkTask();
-            ui.printResult(("Nice! I've marked this task as done:" + "\n" + oldTask.getStatus()));
+            ui.printResult(("Did you really finish it? Eh, good for you I guess. Deleting:" + "\n"
+                    + oldTask.getStatus()));
         }
     }
 }

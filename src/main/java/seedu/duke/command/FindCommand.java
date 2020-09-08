@@ -29,7 +29,7 @@ public class FindCommand extends Command {
             }
         }
 
-        ui.printResult("Here are the matching tasks in your list:");
+        ui.printResult("Alright here's what I can find:");
 
         for (Task task : matches) {
             ui.printResult(((ls.indexOf(task) + 1) + ". " + task.getStatus()));

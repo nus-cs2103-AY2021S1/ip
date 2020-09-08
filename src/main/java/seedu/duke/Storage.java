@@ -1,11 +1,12 @@
 package seedu.duke;
 
+import seedu.duke.exception.DukeException;
+import seedu.duke.exception.DukeStorageException;
 import seedu.duke.task.Deadline;
 import seedu.duke.task.Event;
 import seedu.duke.task.Task;
 import seedu.duke.task.ToDo;
 import seedu.duke.ui.Ui;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -23,6 +24,8 @@ public class Storage {
 
     public static final String DEFAULT_STORAGE_FILEPATH = "duke.txt";
     public static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d MMM yyyy kkmm", Locale.ENGLISH);
+    public static String TICK = "\u2713";
+    public static String CROSS = "\u2718";
 
     public final String path;
 
@@ -39,39 +42,47 @@ public class Storage {
      * @return List containing the tasks
      * @throws IOException When the path is incorrect
      */
-    public ArrayList<Task> load() throws IOException {
+    public ArrayList<Task> load() throws IOException, DukeException {
         File f = new File(this.path);
         f.createNewFile();
+        assert f.exists() : "duke.txt should have been created or already exists";
         Scanner s = new Scanner(f); // create a Scanner using the File as the source
         ArrayList<Task> ls = new ArrayList<>();
+        assert ls.size() == 0: "Should be a new list of tasks.";
 
         while (s.hasNext()) {
             String line = s.nextLine();
             String[] arr = line.split("\\*");
             String task = arr[0];
+            assert task.equals("E") || task.equals("T") || task.equals("D") :
+                    "Should have a prefix before each task in the text file.";
             switch (task) {
                 case "E": { // case where the task is an event
-                    boolean status = arr[1].equals("\u2713");
+                    boolean status = arr[1].equals(TICK);
                     String todo = arr[2];
                     LocalDateTime deadline = LocalDateTime.parse(arr[3], FORMATTER);
                     ls.add(new Event(todo, deadline, status));
                     break;
                 }
                 case "T": {
-                    boolean status = arr[1].equals("\u2713");
+                    boolean status = arr[1].equals(TICK);
                     String todo = arr[2];
                     ls.add(new ToDo(todo, status));
                     break;
                 }
-                default: {
-                    boolean status = arr[1].equals("\u2713");
+                case "D": {
+                    boolean status = arr[1].equals(TICK);
                     String todo = arr[2];
                     LocalDateTime deadline = LocalDateTime.parse(arr[3], FORMATTER);
                     ls.add(new Deadline(todo, deadline, status));
                     break;
                 }
+                default: {
+                    throw new DukeStorageException("Gee somehow your duke text file got corrupted. Seriously?");
+                }
             }
         }
+        assert ls.size() >= 0 : "Should have added the tasks or an empty list.";
         return ls;
     }
 
@@ -87,9 +98,9 @@ public class Storage {
             for (Task t : ls.getList()) {
                 String check = "";
                 if (t.isComplete()) {
-                    check = "\u2713";
+                    check = TICK;
                 } else {
-                    check = "\u2718";
+                    check = CROSS;
                 }
                 String toAdd = t.getType() + "*" + check + "*" + t.toString();
                 String addition = "";
