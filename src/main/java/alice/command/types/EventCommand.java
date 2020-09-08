@@ -1,8 +1,8 @@
-package alice.command;
+package alice.command.types;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
+import alice.command.InvalidCommandException;
 import alice.command.result.CommandResult;
 import alice.command.result.EventCommandResult;
 import alice.storage.AliceStorageException;
@@ -11,7 +11,7 @@ import alice.storage.StorageFile;
 import alice.task.Event;
 import alice.task.Task;
 import alice.task.TaskList;
-import alice.util.Parser;
+import alice.task.time.TaskDateTime;
 
 /**
  * Represents the command to add a new event in ALICE.
@@ -23,7 +23,7 @@ public class EventCommand implements Command {
             + "] <desc> /on <datetime>";
 
     private final String description;
-    private final LocalDateTime on;
+    private final TaskDateTime on;
 
     /**
      * Creates a new command to create a new {@code Event} with the details provided.
@@ -31,7 +31,7 @@ public class EventCommand implements Command {
      * @param description the description of the event.
      * @param on          the datetime of when the event is happening.
      */
-    private EventCommand(String description, LocalDateTime on) {
+    private EventCommand(String description, TaskDateTime on) {
         this.description = description;
         this.on = on;
 
@@ -61,7 +61,7 @@ public class EventCommand implements Command {
             String description = arguments[0];
             String dateTime = arguments[1];
 
-            LocalDateTime eventDateTime = Parser.parseDateTime(dateTime);
+            TaskDateTime eventDateTime = TaskDateTime.parseDateTime(dateTime);
             return new EventCommand(description, eventDateTime);
         } else if (argument.isBlank()) {
             // Empty event description

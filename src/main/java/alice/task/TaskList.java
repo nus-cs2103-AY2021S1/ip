@@ -3,6 +3,7 @@ package alice.task;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.function.Consumer;
 
 import alice.AliceException;
 import alice.command.InvalidCommandException;
@@ -23,21 +24,22 @@ public class TaskList {
     /**
      * Creates a new TaskList from previously saved tasks.
      *
-     * @param encodedTasks list of string of saved tasks from the previous session,
-     *                     or null if saved data does not exist.
-     * @throws AliceException if the saved files are corrupted.
+     * @param encodedTasks list of string of saved tasks from the previous session, if any.
+     * @param logger       the consumer that takes in a String to be logged in the StorageFile
+     *                     if the file is corrupted.
      */
-    public TaskList(List<String> encodedTasks) throws AliceException {
+    public TaskList(List<String> encodedTasks, Consumer<String> logger) {
         tasks = new ArrayList<>();
-        if (encodedTasks != null) {
-            for (int i = 0; i < encodedTasks.size(); i++) {
-                String currTask = encodedTasks.get(i);
-                String[] typeAndDetails = currTask.split(" \\| ", 2);
+        for (int i = 0; i < encodedTasks.size(); i++) {
+            String currTask = encodedTasks.get(i);
+            String[] typeAndDetails = currTask.split(" \\| ", 2);
 
-                if (typeAndDetails.length != 2) {
-                    throw new AliceException("Corrupted data");
-                }
+            if (typeAndDetails.length != 2) {
+                logger.accept("Partially corrupted data");
+                continue;
+            }
 
+            try {
                 switch (typeAndDetails[0]) {
                 case "T":
                     tasks.add(Todo.decode(typeAndDetails[1]));
@@ -49,11 +51,14 @@ public class TaskList {
                     tasks.add(Event.decode(typeAndDetails[1]));
                     break;
                 default:
-                    throw new AliceException("Corrupted data");
+                    logger.accept("Partially corrupted data");
+                    break;
                 }
+            } catch (AliceException ex) {
+                // corrupted line, skip the line and continue.
+                logger.accept("Partially corrupted data");
             }
         }
-        // Create empty TaskList if encodedTask === null
     }
 
     /**

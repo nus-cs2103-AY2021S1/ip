@@ -1,9 +1,9 @@
 package alice;
 
-import alice.command.Command;
 import alice.command.InvalidCommandException;
 import alice.command.result.CommandResult;
 import alice.command.result.InvalidCommandResult;
+import alice.command.types.Command;
 import alice.storage.SaveStatus;
 import alice.storage.StorageFile;
 import alice.task.TaskList;
@@ -14,7 +14,7 @@ import alice.util.Parser;
  * Represents the ALICE program.
  */
 public class Alice {
-    private TaskList tasks;
+    private final TaskList tasks;
     private final StorageFile storageFile;
 
     private Cli cli;
@@ -35,14 +35,7 @@ public class Alice {
      */
     public Alice(String filePath) {
         storageFile = new StorageFile(filePath);
-        try {
-            // Read stored data
-            tasks = new TaskList(storageFile.load());
-        } catch (AliceException ex) {
-            // If save file is corrupted
-            // Starts with a new file.
-            tasks = new TaskList();
-        }
+        tasks = storageFile.load();
     }
 
     /**

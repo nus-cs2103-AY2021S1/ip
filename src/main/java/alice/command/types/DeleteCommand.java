@@ -1,7 +1,8 @@
-package alice.command;
+package alice.command.types;
 
 import java.util.List;
 
+import alice.command.InvalidCommandException;
 import alice.command.result.CommandResult;
 import alice.command.result.DeleteCommandResult;
 import alice.command.result.InvalidCommandResult;

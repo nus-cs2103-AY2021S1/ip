@@ -22,7 +22,8 @@ public class TaskListTest {
     @Test
     void loadSavedTasks() throws AliceException {
         List<String> encodedTasks = List.of("T | 1 | Task");
-        TaskList tasks = new TaskList(encodedTasks);
+        TaskList tasks = new TaskList(encodedTasks, x -> {
+        });
 
         assertEquals(1, tasks.getNumberOfTasks());
         assertEquals("1. [T][✔] Task", tasks.getAllTasks());

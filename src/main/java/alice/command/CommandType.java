@@ -2,6 +2,17 @@ package alice.command;
 
 import java.util.function.Function;
 
+import alice.command.types.ByeCommand;
+import alice.command.types.ClearCommand;
+import alice.command.types.Command;
+import alice.command.types.DeadlineCommand;
+import alice.command.types.DeleteCommand;
+import alice.command.types.DoneCommand;
+import alice.command.types.EventCommand;
+import alice.command.types.FindCommand;
+import alice.command.types.HelpCommand;
+import alice.command.types.ListCommand;
+import alice.command.types.TodoCommand;
 import alice.util.CheckedFunction;
 
 public enum CommandType {
