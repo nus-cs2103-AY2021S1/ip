@@ -9,6 +9,7 @@ import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
+import duke.command.UpdateCommand;
 import duke.common.DukeException;
 
 /**
@@ -46,6 +47,8 @@ public class Parser {
             return new FindCommand(fullCommand);
         case "bye":
             return new ByeCommand();
+        case "update":
+            return new UpdateCommand(fullCommand);
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means");
         }

@@ -14,8 +14,8 @@ import java.util.Objects;
  */
 public class Event extends Task {
 
-    private final LocalDateTime at;
-    private final LocalDateTime end;
+    private LocalDateTime at;
+    private LocalDateTime end;
 
     /**
      * Class constructor.
@@ -41,12 +41,30 @@ public class Event extends Task {
     }
 
     /**
+     * Update start date and time for task.
+     *
+     * @param at input start date time for to update existing task.
+     */
+    public void setAt(LocalDateTime at) {
+        this.at = at;
+    }
+
+    /**
      * Returns end date and time of the event object.
      *
      * @return localDateTime of start event.
      */
     public LocalDateTime getEnd() {
         return end;
+    }
+
+    /**
+     * Update end date and time for task.
+     *
+     * @param end input end date time for to update existing task.
+     */
+    public void setEnd(LocalDateTime end) {
+        this.end = end;
     }
 
     /**

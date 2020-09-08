@@ -8,7 +8,7 @@ package duke.task;
  * @version v1.0
  */
 public class Task {
-    private final String description;
+    private String description;
     private boolean isDone;
 
     /**
@@ -46,6 +46,15 @@ public class Task {
      */
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * Update the task description.
+     *
+     * @param description input value to update existing task.
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     /**

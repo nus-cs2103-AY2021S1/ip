@@ -34,7 +34,7 @@ public class Ui {
                 + "\t e.g. deadline return book /by 1/12/2020 1800\n"
                 + "5. event {description} /at {dd/mm/yyyy} {hhmm}-{hhmm}\n"
                 + "\t e.g. event meeting /at 1/12/2020 1800-1900\n" + "7. delete {item number}\n"
-                + "8. find {item to find}\n" + "9. bye\n";
+                + "8. find {item to find}\n" + "9. update {item number} /{desc OR date} {value}\n" + "10. bye";
     }
 
     /**
