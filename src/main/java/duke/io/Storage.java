@@ -33,7 +33,7 @@ public class Storage {
         
         //Find text file inside data folder
         this.filePath = filePath;
-        file = new File("filePath");
+        file = new File(filePath);
         layout = new Layout();
         
         try {

@@ -1,17 +1,12 @@
 package duke.io;
 
 import duke.task.DukeException;
+import duke.task.Task;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 
 public class Parser {
-    private final Layout layout;
-    
-    public Parser() {
-        this.layout = new Layout();
-    }
-    
 
     /**
      * Return date and description of task from user input.
@@ -19,7 +14,7 @@ public class Parser {
      * @param arr Array of words in user input.
      * @return Array of date and description.
      */
-    public String [] getDateAndDescription(String [] arr) {
+    public static String [] getDateAndDescription(String [] arr) {
         boolean reached = false;
         StringBuilder date = new StringBuilder();
         StringBuilder description = new StringBuilder();
@@ -50,7 +45,7 @@ public class Parser {
      * @return single word.
      * @throws DukeException
      */
-    public String getFilterWord(String [] arr) throws DukeException{
+    public static String getFilterWord(String [] arr) throws DukeException{
         if (arr.length < 2) {
             throw new DukeException("Please specify a filter word");
         } 
@@ -66,7 +61,7 @@ public class Parser {
      * @return date of task.
      * @throws DukeException
      */
-    public String getDate(String [] arr) throws DukeException {
+    public static String getDate(String [] arr) throws DukeException {
         if (arr.length < 2) {
             throw new DukeException("Please specify a filter date");
         }
@@ -83,7 +78,7 @@ public class Parser {
      * @param date Date to format.
      * @return ArrayList of LocalDate object and String that represents 12 hour time.
      */
-    public ArrayList<Object> dateAndTimeFormatter(String date) {
+    public static ArrayList<Object> dateAndTimeFormatter(String date) {
         String [] arr = date.split(" ");
         LocalDate localDate = null;
         String time = null;
@@ -107,7 +102,7 @@ public class Parser {
      * @param str user input date.
      * @return LocalDate object with user input date.
      */
-    public LocalDate checkDate(String str) {
+    public static LocalDate checkDate(String str) {
         String [] arr = str.split("/");
         String year;
         String month;
@@ -136,13 +131,13 @@ public class Parser {
         return null;
     }
 
-    private String checkTime(String str) {
+    private static String checkTime(String str) {
         int len = str.length();
         String lastTwoChars = str.substring(len - 2);
         String formattedTime = "";
 
-        if (len == 4 && stringToInteger(str) != null) {
-            int time = stringToInteger(str);
+        if (len == 4 && tryStringToInteger(str) != null) {
+            int time = tryStringToInteger(str);
             String period = "am";
             if (time >= 1200) {
                 period = "pm";
@@ -157,8 +152,8 @@ public class Parser {
             if (arr.length == 1) {
                 return arr[0];
             } else if (arr.length == 2) {
-                int hour = stringToInteger(arr[0]);
-                int minute = stringToInteger(arr[1].substring(0, arr[1].length() - 2));
+                int hour = tryStringToInteger(arr[0]);
+                int minute = tryStringToInteger(arr[1].substring(0, arr[1].length() - 2));
 
                 if (0 <= hour && hour <= 12 && 0 <= minute && minute < 60) {
                     return str;
@@ -171,7 +166,7 @@ public class Parser {
         return null;
     }
 
-    private Integer stringToInteger(String str) {
+    private static Integer tryStringToInteger(String str) {
         Integer i;
         try {
             i = Integer.parseInt(str);
@@ -181,7 +176,7 @@ public class Parser {
         return i;
     }
 
-    private String formatTime(String t) {
+    private static String formatTime(String t) {
         String [] splitArr = t.split("\\.");
 
         if (splitArr.length == 1) {

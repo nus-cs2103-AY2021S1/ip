@@ -22,8 +22,7 @@ public class DateAndTimeFormatter {
      * @return ArrayList of LocalDate object and String that represents 12 hour time.
      */
     private ArrayList<Object> dateAndTimeFormatter(String date) {
-        Parser parser = new Parser();
-        return parser.dateAndTimeFormatter(date);
+        return Parser.dateAndTimeFormatter(date);
     }
     
     public LocalDate getDate() {

@@ -8,15 +8,16 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 public class FindTaskByDate extends Command {
-    
-    public FindTaskByDate(ArrayList<Task> tasks) {
-        super(tasks);
+    String [] input;
+    public FindTaskByDate(String [] input) {
+        this.input = input;
     }
 
-    public String findTaskByDate(String [] arr) {
+    @Override
+    public String execute(ArrayList<Task> tasks, Layout layout) {
         String date;
         try {
-            date = parser.getDate(arr);
+            date = Parser.getDate(input);
             ArrayList<Task> shallowCopy = new ArrayList<>(tasks);
             shallowCopy.removeIf(task ->
                     !(task.isSameDate(date))
@@ -25,7 +26,6 @@ public class FindTaskByDate extends Command {
         } catch (DukeException e) {
             return layout.print(e.getMessage());
         }
-
     }
     
 }
