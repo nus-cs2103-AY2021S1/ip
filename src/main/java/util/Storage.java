@@ -40,6 +40,8 @@ public class Storage {
         File data = new File(filePath); // create a File for the given file path
         Scanner s = new Scanner(data); // create a Scanner using the File as the source
         while (s.hasNext()) {
+            // File should not be more than 100 lines
+            assert list.size() != 100;
             // Read the data line
             String dataLine = s.nextLine();
             // Split data line into components
@@ -90,7 +92,7 @@ public class Storage {
      * @param list ArrayList of Tasks Duke currently has.
      * @throws DukeException  If Duke is unable to save into file.
      */
-    public void saveToFile(ArrayList<Task> list) throws DukeException {
+    public boolean saveToFile(ArrayList<Task> list) throws DukeException {
         try {
             // Create file if there is none
             createFile();
@@ -101,6 +103,8 @@ public class Storage {
         } catch (IOException e) {
             throw new DukeException("Sorry, something went wrong and I couldn't save my data... ");
         }
+        // List should at most have 100 tasks.
+        assert list.size() <= 100;
         for (int i = 0; i < list.size(); i++) {
             // Try to write into save file
             try {
@@ -108,8 +112,10 @@ public class Storage {
             } catch (IOException e) {
                 System.out.print("Something happened and this failed to be saved: ");
                 System.out.println(list.get(i));
+                return false;
             }
         }
+        return true;
     }
 
     /**
