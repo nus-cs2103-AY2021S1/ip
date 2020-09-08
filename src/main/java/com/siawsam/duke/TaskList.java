@@ -143,7 +143,7 @@ public class TaskList implements Serializable {
         return results;
     }
     
-    public Response tagItem(int itemIndex, String tagName, TagList tagList) {
+    Response tagItem(int itemIndex, String tagName, TagList tagList) {
         if (itemIndex > itemList.size()) {
             throw new IllegalArgumentException("Item #" + itemIndex + " does "
                                                        + "not exist and cannot "
@@ -153,7 +153,7 @@ public class TaskList implements Serializable {
         try {
             Task task = itemList.get(itemIndex - 1);
             if (task.isTagged()) {
-                return new Response(Ui.taskAlreadyTagged());
+                return new Response(Ui.showTaskAlreadyTagged());
             }
             
             Tag tag = tagList.addTaggableToTag(tagName, task);
@@ -162,6 +162,22 @@ public class TaskList implements Serializable {
         } catch (DukeException exception) {
             return new Response(Ui.showErrorMessage(exception));
         }
+    }
+    
+    Response untagItem(int itemIndex, TagList tagList) {
+        if (itemIndex > itemList.size()) {
+            throw new IllegalArgumentException("Item #" + itemIndex + " does "
+                                                       + "not exist and cannot "
+                                                       + "be untagged.");
+        }
+        
+        Task task = itemList.get(itemIndex - 1);
+        if (!task.isTagged()) {
+            return new Response(Ui.showItemNotTagged());
+        }
+        tagList.untag(task.getTag(), task);
+        task.removeTag();
+        return new Response(Ui.showSuccessfulUntag());
     }
     
     @Override

@@ -68,8 +68,16 @@ public class Ui {
         return "This task has been tagged: " + task;
     }
     
-    static String taskAlreadyTagged() {
+    static String showSuccessfulUntag() {
+        return "Task successfully untagged.";
+    }
+    
+    static String showTaskAlreadyTagged() {
         return "This task has already been tagged. Untag before adding new tag.";
+    }
+    
+    static String showItemNotTagged() {
+        return "This item does not have a tag.";
     }
     
     static String printTags(TagList tagList) {

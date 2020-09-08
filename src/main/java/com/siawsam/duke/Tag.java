@@ -15,6 +15,14 @@ public class Tag {
         taggedItems.add(taggable);
     }
     
+    void removeItem(Taggable taggable) {
+        taggedItems.remove(taggable);
+    }
+    
+    boolean isTagEmpty() {
+        return taggedItems.isEmpty();
+    }
+    
     String getTagName() {
         return tagName;
     }

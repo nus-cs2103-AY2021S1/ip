@@ -42,6 +42,14 @@ public class TagList {
         return tag;
     }
     
+    public void untag(Tag tag, Taggable taggable) {
+        tag.removeItem(taggable);
+        // we don't keep tags that have no taggables inside
+        if (tag.isTagEmpty()) {
+            tags.remove(tag);
+        }
+    }
+    
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();

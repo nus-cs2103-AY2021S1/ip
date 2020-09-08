@@ -43,6 +43,10 @@ public class Task implements Serializable, Taggable {
         this.tag = tag;
     }
     
+    public void removeTag() {
+        tag = null;
+    }
+    
     Tag getTag() {
         return tag;
     }
