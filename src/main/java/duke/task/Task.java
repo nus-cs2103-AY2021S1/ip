@@ -43,8 +43,8 @@ public class Task {
         return this.description;
     }
 
-    public Priority getPriority() {
-        return this.priority;
+    public String getPriority() {
+        return this.priority == null ? "" : this.priority.toString();
     }
 
     public void addPriority(Priority priority) {

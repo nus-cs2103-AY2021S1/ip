@@ -52,15 +52,15 @@ public class Storage {
     String convertTaskToText (Task task) {
         if (task instanceof TodoTask) {
             return "T" + " | " + (task.getIsDone() ? "1" : "0") + " | " + task.getDescription()
-                   + " | " + task.getPriority().toString();
+                   + " | " + task.getPriority();
         } else if (task instanceof DeadlineTask) {
             return "D" + " | " + (task.getIsDone() ? "1" : "0") + " | " + task.getDescription() + " | "
                     + ((DeadlineTask) task).getDeadline().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"))
-                    + " | " + task.getPriority().toString();
+                    + " | " + task.getPriority();
         } else {
             return "E" + " | " + (task.getIsDone() ? "1" : "0") + " | " + task.getDescription() + " | "
                     + ((EventTask) task).getTiming().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"))
-                    + " | " + task.getPriority().toString();
+                    + " | " + task.getPriority();
         }
     }
 
@@ -100,39 +100,32 @@ public class Storage {
 
                 switch (details[0]) {
                 case "T":
-                    TodoTask todoTask;
-                    if (details.length == 4) {
-                        todoTask = new TodoTask(details[2], Priority.valueOf(details[3]));
-                    } else {
-                        todoTask = new TodoTask(details[2]);
-                    }
+                    TodoTask todoTask = new TodoTask(details[2]);
                     if (details[1].equals("1")) {
                         todoTask.markAsDone();
+                    }
+                    if (details.length == 4) {
+                        todoTask.addPriority(Priority.valueOf(details[3]));
                     }
                     tasks.add(todoTask);
                     break;
                 case "D":
-                    DeadlineTask deadlineTask;
-                    if (details.length == 5) {
-                        deadlineTask = new DeadlineTask(details[2], Priority.valueOf(details[4]), details[3]);
-                    } else {
-                        deadlineTask = new DeadlineTask(details[2], details[3]);
-                    }
-
+                    DeadlineTask deadlineTask = new DeadlineTask(details[2], details[3]);
                     if (details[1].equals("1")) {
                         deadlineTask.markAsDone();
+                    }
+                    if (details.length == 5) {
+                        deadlineTask.addPriority(Priority.valueOf(details[4]));
                     }
                     tasks.add(deadlineTask);
                     break;
                 case "E":
-                    EventTask eventTask;
-                    if (details.length == 5) {
-                        eventTask = new EventTask(details[2], Priority.valueOf(details[4]), details[3]);
-                    } else {
-                        eventTask = new EventTask(details[2], details[3]);
-                    }
+                    EventTask eventTask = new EventTask(details[2], details[3]);
                     if (details[1].equals("1")) {
                         eventTask.markAsDone();
+                    }
+                    if (details.length == 5) {
+                        eventTask.addPriority(Priority.valueOf(details[4]));
                     }
                     tasks.add(eventTask);
                     break;
