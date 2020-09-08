@@ -97,6 +97,7 @@ public class Parser {
     }
 
     private static String getTaskDescription() {
+        assert inputArr.length > 1 : "inputArr length should be more than 1";
         StringBuilder desc = new StringBuilder();
         int i = 1;
         while ((i < inputArr.length) && (!inputArr[i].contains("/by")) && (!inputArr[i].contains("/at"))) {
@@ -108,6 +109,7 @@ public class Parser {
     }
 
     private static String getTaskTimeDate() {
+        assert inputArr.length > 2 : "inputArr length should be more than 1";
         String dateTime = "";
         int i = 0;
         while (!inputArr[i].contains("/by") && (!inputArr[i].contains("/at"))) {
@@ -130,6 +132,6 @@ public class Parser {
 
     private static void isValidDate(String dateString) {
         LocalDate d = LocalDate.parse(dateString);
-            d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 }

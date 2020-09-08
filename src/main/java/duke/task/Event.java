@@ -19,6 +19,7 @@ public class Event extends Task {
     }
 
     private String parseDateTime(String at) {
+        assert(at.length() == 10) : "Wrong date length";
         LocalDate d = LocalDate.parse(at);
         return d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
