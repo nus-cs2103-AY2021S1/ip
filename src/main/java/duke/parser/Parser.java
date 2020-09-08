@@ -20,6 +20,10 @@ public class Parser {
      */
     public static Command parse(String userInput) throws DukeException {
         String[] inputSplit = userInput.split(" ", 2);
+        return determineCommand(inputSplit);
+    }
+
+    private static Command determineCommand(String[] inputSplit) throws DukeException {
         String userCommand = inputSplit[0];
         if (userCommand.equals("bye")) {
             return new ByeCommand();
