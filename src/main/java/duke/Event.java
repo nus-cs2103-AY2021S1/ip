@@ -29,8 +29,14 @@ public class Event extends Task {
         return "[E]" + super.toString() + " (at: " + formattedDate + ")";
     }
 
+    public String recordStringWithTags() {
+        return "[E]" + super.toString() + " (at: " + formattedDate + ")" +
+                (this.tags.size() == 0 ? "" :"\ntags: " + super.getTags());
+    }
+
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + start + ")";
+        return "[E]" + super.toString() + " (at: " + start + ")" +
+                (this.tags.size() == 0 ? "" :"\ntags: " + super.getTags());
     }
 }

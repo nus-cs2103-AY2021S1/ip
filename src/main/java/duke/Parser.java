@@ -10,9 +10,13 @@ public class Parser {
     private static final String EMPTY_COMMAND = "";
     private static final String BYE_COMMAND = "bye";
     private static final String LIST_COMMAND = "list";
+    private static final String SHOW_TAGS_COMMAND = "show tags";
     private static final String DONE_COMMAND = "done";
     private static final String DELETE_COMMAND = "delete";
     private static final String FIND_COMMAND = "find";
+    private static final String FIND_TAG_COMMAND = "findtag";
+    private static final String REMOVE_TAG_COMMAND = "removetag";
+    private static final String TAG_COMMAND = "tag";
     private static final String NEW_TODO_COMMAND = "todo";
     private static final String NEW_DEADLINE_COMMAND = "deadline";
     private static final String NEW_EVENT_COMMAND = "event";
@@ -66,6 +70,50 @@ public class Parser {
     }
 
     /**
+     * Executes a tag command.
+     *
+     * @param userInputWords Array of words from user input.
+     * @param tasks The user's current task list.
+     * @param isRunningOnGui A boolean that returns true if the application is running on GUI.
+     * @return Returns a response to the user.
+     * @throws DukeException  If user input is incorrect. tag 1 HAPPY
+     */
+    public static String executeTagCommand(
+            String[] userInputWords, TaskList tasks, boolean isRunningOnGui) throws DukeException {
+        int index = Integer.parseInt(userInputWords[1]);
+        if (index > tasks.size() || index < 0) {
+            throw new DukeException("That task number does not exist.");
+        }
+        Tag tag = Tag.StringToTag(userInputWords[2]);
+        tasks.get(index - 1).addTag(tag);
+        Task t = tasks.get(index - 1);
+        ArrayList<Task> tasksCopy = tasks.clone();
+        Storage.store(tasksCopy);
+        return ui.tag(t, tag, isRunningOnGui);
+    }
+
+    /**
+     * Executes a remove tag command.
+     *
+     * @param userInputWords Array of words from user input.
+     * @param tasks The user's current task list.
+     * @param isRunningOnGui A boolean that returns true if the application is running on GUI.
+     * @return Returns a response to the user.
+     * @throws DukeException  If user input is incorrect. tag 1 HAPPY
+     */
+    public static String executeRemoveTagCommand(
+            String[] userInputWords, TaskList tasks, boolean isRunningOnGui) throws DukeException {
+        int index = Integer.parseInt(userInputWords[1]);
+        String tagToRemove = userInputWords[2];
+        if (index > tasks.size() || index < 0) {
+            throw new DukeException("That task number does not exist.");
+        }
+        Task t = tasks.get(index - 1);
+        boolean isTagRemoved = t.removeTag(tagToRemove) == 1;
+        return ui.removeTag(t, isRunningOnGui, isTagRemoved, tagToRemove);
+    }
+
+    /**
      * Executes a find command.
      *
      * @param userInputWords Array of words from user input.
@@ -78,6 +126,21 @@ public class Parser {
         String keyWord = userInputWords[1];
         ArrayList<Task> foundTasks = tasks.find(keyWord);
         return ui.find(foundTasks, isRunningOnGui);
+    }
+
+    /**
+     * Executes a find tag command.
+     *
+     * @param userInputWords Array of words from user input.
+     * @param tasks The user's current task list.
+     * @param isRunningOnGui A boolean that returns true if the application is running on GUI.
+     * @return Returns a response to the user.
+     */
+    public static String executeFindTagCommand(
+            String[] userInputWords, TaskList tasks, boolean isRunningOnGui) {
+        String keyTag = userInputWords[1];
+        ArrayList<Task> foundTasks = tasks.findTag(keyTag);
+        return ui.findTag(foundTasks, isRunningOnGui);
     }
 
     /**
@@ -192,6 +255,14 @@ public class Parser {
             return executeDeleteCommand(userInputWords, tasks, isRunningOnGui);
         } else if (userInputWords.length == 2 && userInputWords[0].equals(FIND_COMMAND)) {
             return executeFindCommand(userInputWords, tasks, isRunningOnGui);
+        }  else if (userInputWords.length == 2 && userInputWords[0].equals(FIND_TAG_COMMAND)) {
+            return executeFindTagCommand(userInputWords, tasks, isRunningOnGui);
+        } else if (userInputWords.length == 3 && userInputWords[0].equals(TAG_COMMAND)) {
+            return executeTagCommand(userInputWords, tasks, isRunningOnGui);
+        } else if (userInputWords.length == 3 && userInputWords[0].equals(REMOVE_TAG_COMMAND)) {
+            return executeRemoveTagCommand(userInputWords, tasks, isRunningOnGui);
+        } else if (userInputWords.length == 2 && input.equals(SHOW_TAGS_COMMAND)) {
+            return ui.showTags(tasks, isRunningOnGui);
         } else {
             switch (userInputWords[0]) {
             case NEW_TODO_COMMAND:

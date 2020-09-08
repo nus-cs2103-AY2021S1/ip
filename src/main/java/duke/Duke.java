@@ -43,7 +43,6 @@ public class Duke {
                     tasks = storage.load();
                     ui = new Ui();
                 } catch (DukeException e) {
-                    assert false;
                     ui.showLoadingError(e);
                 }
             }

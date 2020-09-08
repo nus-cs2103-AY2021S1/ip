@@ -66,6 +66,31 @@ public class Ui {
         }
     }
 
+    public String showTags(TaskList tasks, boolean isRunningOnGui) {
+        if (isRunningOnGui) {
+            if (tasks.size() == 0) {
+                return "There are no tasks in your list yet.";
+            } else {
+                String response = "Here are the tasks in your list:";
+                for (int i = 0; i < tasks.getTasks().size(); i++) {
+                    String taskString = "\n" + (i + 1) + ". " + tasks.getTasks().get(i).recordStringWithTags();
+                    response += taskString;
+                }
+                return response;
+            }
+        } else {
+            if (tasks.size() == 0) {
+                System.out.println("There are no tasks in your list yet.");
+            } else {
+                System.out.println("Here are the tasks in your list:");
+                for (int i = 0; i < tasks.getTasks().size(); i++) {
+                    System.out.println((i + 1) + ". " + tasks.getTasks().get(i).recordStringWithTags());
+                }
+            }
+            return "";
+        }
+    }
+
     /**
      * Notifies the user that the specified task has been marked done.
      *
@@ -78,6 +103,23 @@ public class Ui {
             return response;
         } else {
             System.out.println("Nice! I've marked this task as done:");
+            System.out.println(t.recordString());
+            return "";
+        }
+    }
+
+    /**
+     * Notifies the user that the specified task has been tagged.
+     *
+     * @param t The specified task that was marked done.
+     */
+    public String tag(Task t, Tag tag, boolean isRunningOnGui) {
+        if (isRunningOnGui) {
+            String response = "Nice! I've tagged this task with " + tag + ":";
+            response += "\n" + t.recordString();
+            return response;
+        } else {
+            System.out.println("Nice! I've tagged this task with " + tag + ":");
             System.out.println(t.recordString());
             return "";
         }
@@ -156,6 +198,36 @@ public class Ui {
     }
 
     /**
+     * Displays the tasks in the user's TaskList that match the input string.
+     *
+     * @param tasks The list of Tasks that contains the input string.
+     */
+    public String findTag(ArrayList<Task> tasks, boolean isRunningOnGui) {
+        if (isRunningOnGui) {
+            if (tasks.size() == 0) {
+                return "Could not find any tasks.";
+            } else {
+                String response = "Here are the matching tasks in your list:";
+                for (int i = 0; i < tasks.size(); i++) {
+                    String matchingTask = "\n" + (i + 1) + ". " + tasks.get(i).recordStringWithTags();
+                    response += matchingTask;
+                }
+                return response;
+            }
+        } else {
+            if (tasks.size() == 0) {
+                System.out.println("Could not find any tasks.");
+            } else {
+                System.out.println("Here are the matching tasks in your list:");
+                for (int i = 0; i < tasks.size(); i++) {
+                    System.out.println((i + 1) + ". " + tasks.get(i).recordStringWithTags());
+                }
+            }
+            return "";
+        }
+    }
+
+    /**
      * Initializes the Duke UI to receive user inputs.
      *
      * @param tasks The specified task that was marked done.
@@ -173,6 +245,16 @@ public class Ui {
             }
         } catch (DukeException e) {
             showLoadingError(e);
+        }
+    }
+
+    public String removeTag(Task t, boolean isRunningOnGui, boolean isTagRemoved, String tagRemoved) {
+        if (!isTagRemoved) {
+            return "The specified task does not have the specified tag: " + tagRemoved;
+        } else {
+            String response = "Nice! I've removed the tag: " + tagRemoved;
+            response += "\nfrom " + t.recordString();
+            return response;
         }
     }
 }

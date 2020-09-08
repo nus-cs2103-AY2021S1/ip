@@ -14,6 +14,7 @@ public class Storage {
     private static final char DEADLINE = 'D';
     private static final char EVENT = 'E';
     private static final char DONE = 'O';
+    private static final char TAG = 'a';
     private static final char NOT_DONE = 'X';
     private static final int START_OF_TASK_NAME = 7;
     private static final int DONE_OR_NOT = 4;
@@ -140,11 +141,24 @@ public class Storage {
                 Event newEvent = generateEvent(task);
                 loadedTasks.add(newEvent);
                 break;
+            case (TAG):
+                String[] tags = task.split(" ");
+                TAG_COMMAND(loadedTasks, tags);
+                break;
             default:
                 throw new DukeException("I'm sorry, something went wrong!");
             }
         }
         return new TaskList(loadedTasks);
+    }
+
+    public void TAG_COMMAND(ArrayList<Task> tasks, String[] tags) throws DukeException {
+        for (int i = 1; i < tags.length; i++) {
+            String tag = tags[i].substring(1).toLowerCase();
+            Tag tagToBeAdded = Tag.StringToTag(tag);
+            int indexToAddTags = tasks.size() - 1;
+            tasks.get(indexToAddTags).addTag(tagToBeAdded);
+        }
     }
 
     /**

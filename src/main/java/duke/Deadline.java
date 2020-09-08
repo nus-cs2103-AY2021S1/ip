@@ -29,8 +29,14 @@ public class Deadline extends Task {
         return "[D]" + super.toString() + " (by: " + formattedDate + ")";
     }
 
+    public String recordStringWithTags() {
+        return "[D]" + super.toString() + " (at: " + formattedDate + ")" +
+                (this.tags.size() == 0 ? "" :"\ntags: " + super.getTags());
+    }
+
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + by + ")" +
+                (this.tags.size() == 0 ? "" :"\ntags: " + super.getTags());
     }
 }
