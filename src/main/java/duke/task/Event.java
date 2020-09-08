@@ -61,10 +61,12 @@ public class Event extends Task {
 
     @Override
     public String getTaskDetailsForSave() {
-        return "E | " + (isDone ? 1 : 0) + " | " + description + " | "
-                + startDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + " "
-                + startDateTime.format(DateTimeFormatter.ofPattern("HH:mm")) + " "
-                + endDateTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+        String startDate = startDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+        String startTime = startDateTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+        String endTime = endDateTime.format(DateTimeFormatter.ofPattern("HH:mm"));
+
+        return "E | " + (isDone ? 1 : 0) + " | " + description + " | "  + startDate + " "
+                + startTime + " " + endTime;
     }
 
     @Override

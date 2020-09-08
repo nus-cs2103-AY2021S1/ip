@@ -46,6 +46,7 @@ public class Storage {
      * @throws DukeException If there is error while creating the local file.
      */
     public void newStorage() throws DukeException {
+        assert filepath.contains("data/") : "Filepath should direct to data/directory. ";
         new File("data/").mkdirs();
         try {
             new File(filepath).createNewFile();

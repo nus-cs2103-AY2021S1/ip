@@ -16,12 +16,16 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            tasks = new TaskList();
-            try {
-                storage.newStorage();
-            } catch (DukeException ex) {
-                ui.printError(e.getMessage());
-            }
+            startNewFile();
+        }
+    }
+
+    public void startNewFile() {
+        this.tasks = new TaskList();
+        try {
+            storage.newStorage();
+        } catch (DukeException ex) {
+            ui.printError(ex.getMessage());
         }
     }
 
