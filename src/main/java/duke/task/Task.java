@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Represents a Task. A <code>Task</code> object contains a description, keeps track of
  * whether it has been completed and stores a type.

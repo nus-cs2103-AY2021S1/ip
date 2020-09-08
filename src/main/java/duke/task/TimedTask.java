@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Represents a TimedTask. A <code>TimedTask</code> object contains a description,
  * keeps track of whether it has been completed, stores a type as well as time.

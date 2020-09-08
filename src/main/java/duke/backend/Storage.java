@@ -1,3 +1,13 @@
+package duke.backend;
+
+import duke.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.task.Todo;
+import duke.task.Task;
+import duke.task.TimedTask;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -46,7 +56,7 @@ public class Storage {
     /**
      * Writes what is in the task list into the user's safe file.
      *
-     * @param tasks TaskList to be read.
+     * @param tasks duke.task.TaskList to be read.
      * @throws DukeException When no file is found.
      */
     public void writeFile(TaskList tasks) throws IOException {

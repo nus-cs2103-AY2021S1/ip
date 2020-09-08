@@ -1,9 +1,14 @@
+package duke.task;
+
+import duke.backend.Storage;
+import duke.ui.Ui;
+
 import java.io.IOException;
 import java.util.ArrayList;
 
 /**
  * Responsible for storing a list of Tasks and interaction with the Tasks.
- * A <code>TaskList</code> contains an <code>ArrayList</code> object.
+ * A <code>duke.task.TaskList</code> contains an <code>ArrayList</code> object.
  */
 public class TaskList {
     private ArrayList<Task> tasks;

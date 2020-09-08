@@ -1,3 +1,5 @@
+package duke.task;
+
 /**
  * Represents a Deadline Task. A <code>Deadline</code> object contains a description,
  * keeps track of whether it has been completed as well as the time.

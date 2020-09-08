@@ -1,3 +1,9 @@
+package duke;
+
+import duke.backend.Storage;
+import duke.task.*;
+import duke.ui.Ui;
+
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
@@ -18,7 +24,7 @@ public class Parser {
     private static final String FIND = "find";
     private static final String HELP = "help";
 
-    // Special Strings used by Parser.
+    // Special Strings used by duke.Parser.
     private static final String SPACE = " ";
     private static final String EMPTY_STRING = "";
     private static final String DEADLINE_SEPARATOR = " /by ";
