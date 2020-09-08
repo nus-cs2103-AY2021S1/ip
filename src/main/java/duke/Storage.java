@@ -24,7 +24,7 @@ public class Storage {
      *
      * @param filePath the path location of the load or save file
      */
-    public Storage (String filePath) {
+    public Storage(String filePath) {
         this.filePath = filePath;
     }
 
@@ -36,7 +36,7 @@ public class Storage {
      * @return a List of tasks
      * @throws IOException produced by failed or interrupted I/O operations
      */
-    public List<Task> load() throws IOException {
+    public List<Task> load() throws IOException, DukeException {
         File f = new File(filePath);
         if (!f.exists()) {
             f.getParentFile().mkdirs();
@@ -52,23 +52,29 @@ public class Storage {
             Task newTask;
 
             assert symbol.equals("[T]") || symbol.equals("[D]") || symbol.equals("[E]");
-            if (symbol.equals("[T]")) {
-                newTask = new Todo(description);
-            } else if (symbol.equals("[D]")) {
-                String date = arrOfStr[3];
-                String[] dateSplit = date.split(" ", 0);
-                if (dateSplit.length > 3) {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy hhmm a");
-                    LocalDateTime localDateTime = LocalDateTime.parse(date, formatter);
-                    newTask = new Deadline(description, localDateTime);
-                } else {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
-                    LocalDate localDate = LocalDate.parse(date, formatter);
-                    newTask = new Deadline(description, localDate);
-                }
-            } else {
-                String by = arrOfStr[3];
-                newTask = new Event(description, by);
+            switch (symbol) {
+                case "[T]":
+                    newTask = new Todo(description);
+                    break;
+                case "[D]":
+                    String date = arrOfStr[3];
+                    String[] dateSplit = date.split(" ", 0);
+                    if (dateSplit.length > 3) {
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy hhmm a");
+                        LocalDateTime localDateTime = LocalDateTime.parse(date, formatter);
+                        newTask = new Deadline(description, localDateTime);
+                    } else {
+                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+                        LocalDate localDate = LocalDate.parse(date, formatter);
+                        newTask = new Deadline(description, localDate);
+                    }
+                    break;
+                case "[E]":
+                    String by = arrOfStr[3];
+                    newTask = new Event(description, by);
+                    break;
+                default:
+                    throw new DukeException("Invalid task type detected - unable to load");
             }
 
             if (status.equals("[✓]")) {
@@ -105,7 +111,7 @@ public class Storage {
     /**
      * Writes content to a file based on the text specified and overwrites the file.
      *
-     * @param filePath the path location of the load or save file
+     * @param filePath  the path location of the load or save file
      * @param textToAdd the text to be written to the file
      * @throws IOException produced by failed or interrupted I/O operations
      */
@@ -118,7 +124,7 @@ public class Storage {
     /**
      * Appends information to a file based on the text specified and overwrites the file.
      *
-     * @param filePath the path location of the load or save file
+     * @param filePath     the path location of the load or save file
      * @param textToAppend the text to be appended to the file
      * @throws IOException produced by failed or interrupted I/O operations
      */

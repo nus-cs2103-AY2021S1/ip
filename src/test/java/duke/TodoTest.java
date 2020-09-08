@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 public class TodoTest {
 
-    private Task task = new Todo("read book");
+    private final Task task = new Todo("read book");
 
     @Test
     public void testToString() {
