@@ -35,6 +35,7 @@ public class DoneCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         int taskNumber = new TaskIndexStringChecker(getStringArray()).checkTask(tasks);
+        assert taskNumber <= tasks.totalTask() : "Task number is greater than total number of tasks!";
         Task taskToMarkDone = tasks.getTask(taskNumber - 1);
         taskToMarkDone.markDone();
         storage.write(tasks);

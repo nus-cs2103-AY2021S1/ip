@@ -57,8 +57,10 @@ public class AddCommand extends Command {
     protected Task processTask(TaskType taskType) throws DukeException {
         String taskName = new TaskNameStringChecker(getStringArray()).checkTaskString(taskType);
         if (taskType.equals(TaskType.TODO)) {
+            assert getStringArray().length > 1 : "Length of input string should be longer than 1!";
             return new Todo(taskName);
         }
+        assert getStringArray().length >= 4 : "Length of input string should be longer than 4!";
         DateTime dateTime = new DateTimeStringChecker(getStringArray()).checkDateTime(taskType);
         return (taskType.equals(TaskType.DEADLINE)
                 ? new Deadline(taskName, dateTime)

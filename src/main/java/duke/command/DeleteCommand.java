@@ -35,6 +35,7 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         int taskNumber = new TaskIndexStringChecker(getStringArray()).checkTask(tasks);
+        assert taskNumber <= tasks.totalTask() : "Task number is greater than total number of tasks!";
         Task taskToDelete = tasks.getTask(taskNumber - 1);
         tasks.deleteTask(taskNumber - 1);
         storage.write(tasks);

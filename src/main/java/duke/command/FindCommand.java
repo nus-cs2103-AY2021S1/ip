@@ -39,6 +39,7 @@ public class FindCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         new FindTaskStringChecker(getStringArray()).checkTaskName();
         String keyword = Arrays.stream(getStringArray()).skip(1).collect(Collectors.joining(" "));
+        assert !keyword.equals("") : "Keyword is empty!";
         return ui.printMatches(tasks.findTask(keyword));
     }
 }
