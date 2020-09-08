@@ -1,4 +1,5 @@
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
@@ -8,8 +9,8 @@ import java.util.List;
  * Handles the user input commands and executes them.
  */
 public class Parser {
-    private static boolean isProgramRunning = true;
     private static TaskList tasks;
+    private final String IMPOSSIBLE_DATE = "2000-01-01";
 
     /**
      * Creates a Parser object.
@@ -19,15 +20,6 @@ public class Parser {
      */
     public Parser(TaskList tasks) {
         this.tasks = tasks;
-    }
-
-    /**
-     * Returns a boolean value for others to know if the Parser object is still running.
-     *
-     * @return boolean value of isRunning.
-     */
-    public boolean isRunning() {
-        return this.isProgramRunning;
     }
 
     /**
@@ -78,15 +70,6 @@ public class Parser {
         System.out.println("     Noted. I've removed this task:\n"
                 + "       " + taskSubject
                 + "\n     Now you have " + this.tasks.getLength() + " task(s) in the list.");
-    }
-
-    /**
-     * A command to close the Parser object for it to stop running.
-     * Sets isProgramRunning to false.
-     */
-    public void close() {
-        this.isProgramRunning = false;
-        System.out.println("     Bye. Hope to see you again soon!");
     }
 
     /**
@@ -339,29 +322,46 @@ public class Parser {
         List<Task> tasks = this.getTasks();
         List<Task> filteredTasks = new ArrayList<>();
         int size = tasks.size();
-        LocalDate now = LocalDate.now().minusDays(3);
+        LocalDate now = LocalDate.now().plusDays(3);
 
         for (int i = 0; i < size; i++) {
             Task currentTask = tasks.get(i);
-            if (!(currentTask.getType().equals("T"))
-                    && currentTask.getCompletionStatus() == false
-            //        && now.isBefore(currentTask.getTime())
-            ) {
+            String taskType = currentTask.getType();
+            LocalDate taskTime;
 
+            if (taskType.equals(Task.EVENT_TASK)) {
+                Event currentEventTask = (Event)currentTask;
+                String formattedTime = currentEventTask.getFormattedTime();
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+                taskTime = LocalDate.parse(formattedTime, dateFormatter);
+
+            } else if (taskType.equals(Task.DEADLINE_TASK)) {
+                Deadline currentDeadlineTask = (Deadline)currentTask;
+                String formattedTime = currentDeadlineTask.getFormattedTime();
+                DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+                taskTime = LocalDate.parse(formattedTime, dateFormatter);
+            } else {
+                taskTime = LocalDate.parse(IMPOSSIBLE_DATE);
+            }
+
+            if (!(currentTask.getType().equals(Task.TODO_TASK))
+                    && currentTask.getCompletionStatus() == false
+                    && now.isAfter(taskTime)) {
+                filteredTasks.add(currentTask);
             }
         }
 
         for (int i = 0; i < size; i++) {
             Task currentTask = tasks.get(i);
             if (currentTask.getCompletionStatus() == false
-                    && currentTask.getType().equals("T")) {
+                    && currentTask.getType().equals(Task.TODO_TASK)) {
                 filteredTasks.add(currentTask);
             }
         }
 
         if (filteredTasks.size() < 1) {
             return "***Reminder:\n"
-                    + "There are no urgent tasks to be completed within 3 days.\n"
+                    + "There are no urgent tasks to be completed.\n"
                     + "You can take a break! :)";
 
         } else {

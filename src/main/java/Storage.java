@@ -113,9 +113,9 @@ public class Storage {
         for (int i = 0; i < totalTasks; i++) {
             Task writeTask = tasksToWrite.get(i);
             String taskString = writeTask.toString();
-            String replacement1 = taskString.replace(TICK, CONVERTED_TICK);
-            String replacement2 = replacement1.replace(CROSS, CONVERTED_CROSS);
-            fw.write(replacement2 + "\n");
+            String replaceTick = taskString.replace(TICK, CONVERTED_TICK);
+            String replaceCross = replaceTick.replace(CROSS, CONVERTED_CROSS);
+            fw.write(replaceCross + "\n");
         }
 
         fw.close();

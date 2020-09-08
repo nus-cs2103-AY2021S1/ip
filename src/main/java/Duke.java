@@ -2,8 +2,6 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 /**
@@ -57,18 +55,6 @@ public class Duke {
      *
      * @return boolean that states whether file is successfully loaded into Duke program or not.
      */
-    public static void main(String[] args) {
-        System.out.println(LocalDate.now().plusDays(3));
-        LocalDate timeDescription;
-        timeDescription = LocalDate.parse("2020-04-03");
-        String formatted = timeDescription.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
-        LocalDate time = LocalDate.parse(formatted, dateFormatter);
-        System.out.println(time);
-        System.out.println(timeDescription);
-        System.out.println(timeDescription.isEqual(time));
-    }
-
     public boolean getFileLoadedStatus() {
         return isFileLoaded;
     }

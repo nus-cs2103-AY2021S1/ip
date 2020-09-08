@@ -1,5 +1,3 @@
-import java.time.LocalDate;
-
 /**
  * Represents a Task object which is a parent class of:
  * Deadline, Event and Todo.
@@ -7,7 +5,6 @@ import java.time.LocalDate;
 public class Task {
     protected String description;
     protected String type;
-    private LocalDate timeDescription;
     protected boolean isDone;
     protected static final String DEADLINE_TASK = "D";
     protected static final String EVENT_TASK = "E";
