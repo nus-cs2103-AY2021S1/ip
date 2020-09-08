@@ -76,8 +76,12 @@ public abstract class Task {
         }
     }
 
+    public void update(String str) {
+        this.description = str;
+    }
+
     /**
-     * Returns a String formatted to how an Deadline should be saved in the associated
+     * Returns a String formatted to how a Task should be saved in the associated
      * save file.
      *
      * @return a formatted String to be written to the save file
