@@ -35,7 +35,8 @@ public class Processor {
      * @param tasks User's task list.
      */
     public static void handleListCommand(StringBuilder response, Ui ui, TaskList tasks) {
-        String taskListInString = ui.getFullList(tasks);
+        String headerMessage = "Here are the tasks in your list:\n";
+        String taskListInString = ui.getFullList(headerMessage, tasks);
         response.append(taskListInString);
     }
 
@@ -158,6 +159,13 @@ public class Processor {
         response.append(message);
     }
 
+    public static void handleSortCommand(
+            StringBuilder response, Ui ui, TaskList tasks) {
+        TaskList sortedList = tasks.sortDescription();
+        String headerMessage = "Here is your task list sorted alphabetically:\n";
+        String message = ui.getFullList(headerMessage, sortedList);
+        response.append(message);
+    }
     /**
      * Processes the run of the program.
      * @param tasks The user's task list.
@@ -189,6 +197,8 @@ public class Processor {
                 handleEventCommand(userInput, response, ui, tasks);
             } else if (command.equals("find")) {
                 handleFindCommand(userInput, response, ui, tasks);
+            } else if (command.equals("sort")) {
+                handleSortCommand(response, ui, tasks);
             } else {
                 throw new InvalidCommandException();
             }

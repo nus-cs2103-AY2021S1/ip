@@ -74,6 +74,16 @@ public class TaskList {
         taskList.remove(taskToBeDeleted);
     }
 
+    /**
+     * Sorts the task list alphabetically.
+     * @return a task list that is sorted based on the alphabetical order of the tasks.
+     */
+    public TaskList sortDescription() {
+        List<Task> sortedList = new ArrayList<>(this.taskList);
+        sortedList.sort((task1, task2) -> task1.getDescription().compareTo(task2.getDescription()));
+        return new TaskList(sortedList);
+    }
+
     @Override
     public String toString() {
         String result = "Here are the tasks in your list:\n";
