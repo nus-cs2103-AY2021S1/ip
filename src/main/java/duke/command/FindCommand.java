@@ -1,5 +1,8 @@
 package duke.command;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -9,7 +12,7 @@ import duke.task.Task;
 
 public class FindCommand extends Command {
 
-    public static final String COMMAND_WORD = "find";
+    public static final List<String> COMMAND_WORDS = new ArrayList<>(List.of("find", "f"));
     private String keyWords;
 
     public FindCommand(String keyWords) {

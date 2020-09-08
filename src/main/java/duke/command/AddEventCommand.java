@@ -1,6 +1,8 @@
 package duke.command;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import duke.Storage;
 import duke.TaskList;
@@ -15,7 +17,7 @@ import duke.task.Task;
  */
 public class AddEventCommand extends AddCommand {
 
-    public static final String COMMAND_WORD = "event";
+    public static final List<String> COMMAND_WORDS = new ArrayList<>(List.of("event", "ev", "e"));
     public static final String COMMAND_SPLIT_WORD = "/at";
     private String taskDescription;
     private String taskLocation;

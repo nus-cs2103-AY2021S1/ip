@@ -1,5 +1,8 @@
 package duke.command;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -11,7 +14,7 @@ import duke.UiForGui;
  */
 public class ExitCommand extends Command {
 
-    public static final String COMMAND_WORD = "bye";
+    public static final List<String> COMMAND_WORDS = new ArrayList<>(List.of("bye", "b"));
 
     /**
      * Creates and initializes an ExitCommand object. Its isExit boolean flag is marked as true to indicate to the

@@ -16,6 +16,6 @@ public class EventWrongFormatException extends WrongFormatException {
      * Creates and initializes an EventWrongFormatException object.
      */
     public EventWrongFormatException() {
-        super(AddEventCommand.COMMAND_WORD, correctFormatDescription);
+        super(AddEventCommand.COMMAND_WORDS.get(0), correctFormatDescription);
     }
 }

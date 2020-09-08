@@ -15,6 +15,6 @@ public class DeadlineWrongFormatException extends WrongFormatException {
      * Creates and initializes a DeadlineWrongFormatException object.
      */
     public DeadlineWrongFormatException() {
-        super(AddDeadlineCommand.COMMAND_WORD, correctFormatDescription);
+        super(AddDeadlineCommand.COMMAND_WORDS.get(0), correctFormatDescription);
     }
 }

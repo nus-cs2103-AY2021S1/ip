@@ -3,6 +3,8 @@ package duke.command;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import duke.Storage;
 import duke.TaskList;
@@ -17,7 +19,7 @@ import duke.task.Task;
  */
 public class AddDeadlineCommand extends AddCommand {
 
-    public static final String COMMAND_WORD = "deadline";
+    public static final List<String> COMMAND_WORDS = new ArrayList<>(List.of("deadline", "d"));
     public static final String COMMAND_SPLIT_WORD = "/by";
     private String taskDescription;
     private LocalDate deadlineDate;

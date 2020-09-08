@@ -27,10 +27,6 @@ import duke.exception.WrongFormatException;
  */
 public class Parser {
 
-    private static final int INDEX_OF_DESCRIPTION_START_FOR_TODO = 5;
-    private static final int INDEX_OF_DESCRIPTION_START_FOR_EVENT = 6;
-    private static final int INDEX_OF_DESCRIPTION_START_FOR_DEADLINE = 9;
-    private static final int INDEX_OF_DESCRIPTION_START_FOR_FIND = 5;
     private static final int INDEX_OF_HOURS_START = 0;
     private static final int INDEX_OF_HOURS_END = 2;
     private static final int INDEX_OF_MINUTES_START = 2;
@@ -45,25 +41,57 @@ public class Parser {
     public static Command parse(String fullCommand) throws WrongFormatException {
         String[] commandWords = fullCommand.split(" ");
         String firstWord = commandWords[0];
-        if (fullCommand.equals(ExitCommand.COMMAND_WORD)) { // Exit the program
+        if (isExitCommand(fullCommand)) { // Exit the program
             return new ExitCommand();
-        } else if (fullCommand.equals(ListCommand.COMMAND_WORD)) { // List out task list
+        } else if (isListCommand(fullCommand)) { // List out task list
             return new ListCommand();
-        } else if (firstWord.equals(DoneCommand.COMMAND_WORD)) { // Done with a task
+        } else if (isDoneCommand(firstWord)) { // Done with a task
             return createDoneCommand(commandWords);
-        } else if (firstWord.equals(DeleteCommand.COMMAND_WORD)) { // Delete a task
+        } else if (isDeleteCommand(firstWord)) { // Delete a task
             return createDeleteCommand(commandWords);
-        } else if (firstWord.equals(AddTodoCommand.COMMAND_WORD)) { // Add To-Do task
-            return createAddTodoCommand(fullCommand);
-        } else if (firstWord.equals(AddEventCommand.COMMAND_WORD)) { // Add Event task
-            return createAddEventCommand(fullCommand);
-        } else if (firstWord.equals(AddDeadlineCommand.COMMAND_WORD)) { // Add Deadline task
-            return createAddDeadlineCommand(fullCommand);
-        } else if (firstWord.equals(FindCommand.COMMAND_WORD)) { // Find task(s) in task list
-            return createFindCommand(fullCommand);
+        } else if (isAddTodoCommand(firstWord)) { // Add To-Do task
+            return createAddTodoCommand(fullCommand, firstWord);
+        } else if (isAddEventCommand(firstWord)) { // Add Event task
+            return createAddEventCommand(fullCommand, firstWord);
+        } else if (isAddDeadlineCommand(firstWord)) { // Add Deadline task
+            return createAddDeadlineCommand(fullCommand, firstWord);
+        } else if (isFindCommand(firstWord)) { // Find task(s) in task list
+            return createFindCommand(fullCommand, firstWord);
         } else { // Unknown command entered
             return new UnknownCommand();
         }
+    }
+
+    private static boolean isExitCommand(String fullCommand) {
+        return ExitCommand.COMMAND_WORDS.contains(fullCommand.toLowerCase());
+    }
+
+    private static boolean isListCommand(String fullCommand) {
+        return ListCommand.COMMAND_WORDS.contains(fullCommand.toLowerCase());
+    }
+
+    private static boolean isDoneCommand(String firstWord) {
+        return DoneCommand.COMMAND_WORDS.contains(firstWord.toLowerCase());
+    }
+
+    private static boolean isDeleteCommand(String firstWord) {
+        return DeleteCommand.COMMAND_WORDS.contains(firstWord.toLowerCase());
+    }
+
+    private static boolean isAddTodoCommand(String firstWord) {
+        return AddTodoCommand.COMMAND_WORDS.contains(firstWord.toLowerCase());
+    }
+
+    private static boolean isAddEventCommand(String firstWord) {
+        return AddEventCommand.COMMAND_WORDS.contains(firstWord.toLowerCase());
+    }
+
+    private static boolean isAddDeadlineCommand(String firstWord) {
+        return AddDeadlineCommand.COMMAND_WORDS.contains(firstWord.toLowerCase());
+    }
+
+    private static boolean isFindCommand(String firstWord) {
+        return FindCommand.COMMAND_WORDS.contains(firstWord.toLowerCase());
     }
 
     private static Command createDoneCommand(String[] commandWords) throws DoneWrongFormatException {
@@ -92,9 +120,10 @@ public class Parser {
         }
     }
 
-    private static Command createAddTodoCommand(String fullCommand) throws TodoWrongFormatException {
+    private static Command createAddTodoCommand(String fullCommand, String firstWord) throws TodoWrongFormatException {
         try {
-            String taskDescription = fullCommand.substring(INDEX_OF_DESCRIPTION_START_FOR_TODO).trim();
+            int indexOfStartOfDescription = firstWord.length() + 1;
+            String taskDescription = fullCommand.substring(indexOfStartOfDescription).trim();
             if (taskDescription.isEmpty()) {
                 throw new TodoWrongFormatException();
             }
@@ -104,10 +133,12 @@ public class Parser {
         }
     }
 
-    private static Command createAddEventCommand(String fullCommand) throws EventWrongFormatException {
+    private static Command createAddEventCommand(String fullCommand, String firstWord)
+            throws EventWrongFormatException {
         try {
+            int indexOfStartOfDescription = firstWord.length() + 1;
             String[] commandParts = fullCommand.split(AddEventCommand.COMMAND_SPLIT_WORD);
-            String taskDescription = commandParts[0].substring(INDEX_OF_DESCRIPTION_START_FOR_EVENT).trim();
+            String taskDescription = commandParts[0].substring(indexOfStartOfDescription).trim();
             if (taskDescription.isEmpty()) {
                 throw new EventWrongFormatException();
             }
@@ -121,10 +152,12 @@ public class Parser {
         }
     }
 
-    private static Command createAddDeadlineCommand(String fullCommand) throws DeadlineWrongFormatException {
+    private static Command createAddDeadlineCommand(String fullCommand, String firstWord)
+            throws DeadlineWrongFormatException {
         try {
+            int indexOfStartOfDescription = firstWord.length() + 1;
             String[] commandParts = fullCommand.split(AddDeadlineCommand.COMMAND_SPLIT_WORD);
-            String taskDescription = commandParts[0].substring(INDEX_OF_DESCRIPTION_START_FOR_DEADLINE).trim();
+            String taskDescription = commandParts[0].substring(indexOfStartOfDescription).trim();
             if (taskDescription.isEmpty()) {
                 throw new DeadlineWrongFormatException();
             }
@@ -147,9 +180,10 @@ public class Parser {
         }
     }
 
-    private static Command createFindCommand(String fullCommand) throws FindWrongFormatException {
+    private static Command createFindCommand(String fullCommand, String firstWord) throws FindWrongFormatException {
         try {
-            String keyWords = fullCommand.substring(INDEX_OF_DESCRIPTION_START_FOR_FIND).trim();
+            int indexOfStartOfDescription = firstWord.length() + 1;
+            String keyWords = fullCommand.substring(indexOfStartOfDescription).trim();
             if (keyWords.isEmpty()) {
                 throw new FindWrongFormatException();
             }

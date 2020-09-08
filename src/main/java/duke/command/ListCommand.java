@@ -1,5 +1,8 @@
 package duke.command;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -11,7 +14,7 @@ import duke.UiForGui;
  */
 public class ListCommand extends Command {
 
-    public static final String COMMAND_WORD = "list";
+    public static final List<String> COMMAND_WORDS = new ArrayList<>(List.of("list", "ls", "l"));
 
     /**
      * Executes the command and lists out the tasks in the task list and presents them to the user.
