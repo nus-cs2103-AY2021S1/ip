@@ -16,7 +16,7 @@ public class Deadline extends Task {
 
     @Override
     public String getSaveFormat() {
-        return super.getSaveFormat() + Storage.line + deadline;
+        return super.getSaveFormat() + Storage.LINE + deadline;
     }
 
     @Override

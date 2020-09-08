@@ -1,11 +1,5 @@
 package duke;
 
-import duke.exception.DukeException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -14,15 +8,22 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.exception.DukeException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
+
 public class Storage {
 
-    public static final String line = "//";
+    public static final String LINE = "//";
     private String directoryName;
     private String fileName;
     private File databaseFile;
     private FileWriter fw;
 
     public Storage(String directoryName, String fileName) {
+        assert directoryName != null && fileName != null : "Directory and file names should be non-null strings";
         this.directoryName = directoryName;
         this.fileName = fileName;
 
@@ -62,7 +63,7 @@ public class Storage {
     }
 
     private Task generateTaskFromFile(String nextLine) throws DukeException {
-        String[] taskCharacteristics = nextLine.split(line);
+        String[] taskCharacteristics = nextLine.split(LINE);
         boolean isDone = taskCharacteristics[1].equals("1");
         String type = taskCharacteristics[0];
         String desc = taskCharacteristics[2];
