@@ -34,6 +34,7 @@ public class MainWindow extends AnchorPane {
     }
 
     public void setDuke(Duke d) {
+        assert duke == null: "Duke should not be null";
         duke = d;
     }
 

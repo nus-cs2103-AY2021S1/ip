@@ -48,6 +48,7 @@ public class TaskList {
      * @param task Task to be added.
      */
     public void addTask(Task task) {
+        assert task == null: "Task should not be null";
         tasks.add(task);
     }
 
@@ -66,6 +67,7 @@ public class TaskList {
         ArrayList<String> lst = new ArrayList<>();
         int i = 1;
         for (Task task : tasks) {
+            assert task == null: "Task should not be null";
             if (task.fulfilCriteria(date, keyWord)) {
                 lst.add((i++) + ". " + task.toString());
             }

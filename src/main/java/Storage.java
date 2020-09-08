@@ -23,19 +23,26 @@ public class Storage {
      * @return Task based on the details retrieved from display.
      * @throws DukeException
      */
-    private Task addTaskFromStorage(String display) throws DukeException {
+    private Task addTaskFromStorage(String display) {
         String[] taskDetails = display.split(" \\| ");
+        assert taskDetails.length != 3 || taskDetails.length != 4: "Task saved wrongly - contains wrong number of " +
+                "arguments.";
         String taskType = taskDetails[0];
+        assert !taskDetails[1].equals("0") || !taskDetails[1].equals("1"): "Task saved wrongly - completion status " +
+                "should have been saved as a 0 or 1";
         boolean isDone = taskDetails[1].equals("1");
         String description = taskDetails[2];
         if (taskType.equals(TaskType.TODO.getSymbol())) {
             return new ToDo(description, isDone);
         } else if (taskType.equals(TaskType.DEADLINE.getSymbol())) {
+            assert taskDetails.length != 4: "Task saved wrongly - contains wrong number of arguments.";
             return new Deadline(description, Parser.parseDate(taskDetails[3]), isDone);
         } else if (taskType.equals(TaskType.EVENT.getSymbol())) {
+            assert taskDetails.length != 4: "Task saved wrongly - contains wrong number of arguments.";
             return new Deadline(description, Parser.parseDate(taskDetails[3]), isDone);
         } else {
-            throw new DukeException("I don't know what that means");
+            assert true: "Task saved wrongly - task type could not be identified";
+            return null; // will not reach this
         }
     }
 
@@ -55,15 +62,14 @@ public class Storage {
             Scanner sc = new Scanner(file);
             ArrayList<Task> tasks = new ArrayList<>();
             while (sc.hasNextLine()) {
-                tasks.add(addTaskFromStorage(sc.nextLine()));
+                Task task = addTaskFromStorage(sc.nextLine());
+                assert task == null: "Task should not be null";
+                tasks.add(task);
             }
             return tasks;
-        } catch (DukeException ex) {
-            Ui.formatResponse(ex.getMessage());
-            return new ArrayList<>();
         } catch (IOException ex) {
-            Ui.formatResponse("Parsing error: file does not exist");
-            return new ArrayList<>();
+            assert true: "Parsing error: file does not exist";
+            return new ArrayList<>(); // should not reach this line
         }
     }
 
@@ -74,7 +80,7 @@ public class Storage {
      * @param taskList Details of TaskList are gotten from.
      * @throws DukeException
      */
-    public void saveList(TaskList taskList) throws DukeException {
+    public void saveList(TaskList taskList) {
         ArrayList<Task> tasks = taskList.getTasks();
         String[] directories = filePath.split("/");
         String currFilePath = directories[0];
@@ -99,7 +105,7 @@ public class Storage {
             fw.write(contents);
             fw.close();
         } catch (IOException ex) {
-            throw new DukeException("I could not save tasks.");
+            assert true: "Tasks could not be saved.";
         }
     }
 }

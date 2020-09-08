@@ -41,6 +41,7 @@ public class AddCommand extends Command {
         } else if (taskType == TaskType.EVENT) {
             task = new Event(description, date, false);
         }
+        assert task == null: "Task should not be null";
         tasks.addTask(task);
         storage.saveList(tasks);
         return Ui.getAddTask(task, tasks);
