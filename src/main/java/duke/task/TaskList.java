@@ -6,6 +6,7 @@ import java.util.List;
 import duke.Storage;
 import duke.Ui;
 import duke.exception.DukeException;
+import duke.operation.Operation;
 
 /**
  * A class contains the task list and deal with the command run on the task list.
@@ -39,28 +40,28 @@ public class TaskList {
      * @throws DukeException thrown if the storage process goes wrong.
      */
     public void runCommand(String[] commands, Ui ui, Storage storage) throws DukeException {
-        switch (commands[0]) {
-        case "list": {
+        switch (Operation.toOperation(commands[0])) {
+        case LIST: {
             printList(ui);
             break;
         }
-        case "find": {
+        case FIND: {
             find(ui, commands[1]);
             break;
         }
-        case "done": {
+        case DONE: {
             markAsDone(ui, Integer.parseInt(commands[1]) - 1);
             storage.store(taskList);
             break;
         }
-        case "delete": {
+        case DELETE: {
             delete(ui, Integer.parseInt(commands[1]) - 1);
             storage.store(taskList);
             break;
         }
-        case "todo":
-        case "deadline":
-        case "event":
+        case TODO:
+        case DEADLINE:
+        case EVENT:
             addTask(ui, commands[0], commands[1], commands[2]);
             storage.store(taskList);
             break;
@@ -129,16 +130,16 @@ public class TaskList {
      */
     public void addTask(Ui ui, String type, String description, String time) {
         Task task;
-        switch (type) {
-        case "todo": {
+        switch (Operation.toOperation(type)) {
+        case TODO: {
             task = new Todo(description);
             break;
         }
-        case "deadline": {
+        case DEADLINE: {
             task = new Deadline(description, time);
             break;
         }
-        case "event": {
+        case EVENT: {
             task = new Event(description, time);
             break;
         }

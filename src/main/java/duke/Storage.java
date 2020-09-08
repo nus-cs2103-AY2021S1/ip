@@ -89,7 +89,7 @@ public class Storage {
 
             while ((line = bufferedReader.readLine()) != null) {
                 if (!line.isBlank()) {
-                    taskList.add(parseTask(line));
+                    taskList.add(parseStorageToTask(line));
                 }
             }
             return taskList;
@@ -98,7 +98,7 @@ public class Storage {
         }
     }
 
-    private Task parseTask(String line) throws DukeException {
+    private Task parseStorageToTask(String line) throws DukeException {
         String[] commands = line.split(" \\| ");
         boolean isDone = commands[1].equals("1");
         switch (commands[0]) {

@@ -1,6 +1,7 @@
 package duke;
 
 import duke.exception.DukeException;
+import duke.operation.Operation;
 import duke.task.TaskList;
 
 
@@ -40,7 +41,7 @@ public class Duke {
         while (!this.isExit) {
             try {
                 String[] commands = Parser.parse(fullCommand);
-                if (commands[0].equals("bye")) {
+                if (Operation.toOperation(commands[0]) == Operation.BYE) {
                     this.isExit = true;
                     break;
                 }
@@ -65,7 +66,7 @@ public class Duke {
     public String getResponse(String input) {
         try {
             String[] commands = Parser.parse(input);
-            if (commands[0].equals("bye")) {
+            if (Operation.toOperation(commands[0]) == Operation.BYE) {
                 isExit = true;
                 ui.bye();
                 return getUiShowingString(ui);
