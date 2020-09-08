@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
 
@@ -74,9 +75,9 @@ public class Ui {
      *
      * @param operation Type of command.
      * @param currentTask Task that was modified.
-     * @param listSize Size of task list.
+     * @param taskList Task list.
      */
-    public static void printSuccess(String operation, Task currentTask, int listSize) {
+    public static void printSuccess(String operation, Task currentTask, ArrayList<Task> taskList) {
         // Prints success message and list size after task added/deleted
         indent(1);
         switch (operation) {
@@ -91,13 +92,20 @@ public class Ui {
             indent(2);
             System.out.println(currentTask);
             return;
+        case "find":
+            System.out.println("I have found the matching tasks in your list: ");
+            indent(2);
+            for (Task t: taskList) {
+                System.out.println(t);
+            }
+            return;
         default:
             return;
         }
         indent(2);
         System.out.println(currentTask);
         indent(1);
-        System.out.println("You have " + listSize + " task(s) in the list.");
+        System.out.println("You have " + taskList.size() + " task(s) in the list.");
     }
 
     /**

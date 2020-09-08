@@ -1,8 +1,12 @@
+C:\Users\User\Desktop\github\ip\src\main\java\duke\DialogBox.java
 C:\Users\User\Desktop\github\ip\src\main\java\duke\Duke.java
 C:\Users\User\Desktop\github\ip\src\main\java\duke\DukeException.java
+C:\Users\User\Desktop\github\ip\src\main\java\duke\Launcher.java
+C:\Users\User\Desktop\github\ip\src\main\java\duke\Main.java
+C:\Users\User\Desktop\github\ip\src\main\java\duke\MainWindow.java
 C:\Users\User\Desktop\github\ip\src\main\java\duke\Parser.java
 C:\Users\User\Desktop\github\ip\src\main\java\duke\Storage.java
-C:\Users\User\Desktop\github\ip\src\main\java\duke\taskListHandler.java
+C:\Users\User\Desktop\github\ip\src\main\java\duke\TaskListHandler.java
 C:\Users\User\Desktop\github\ip\src\main\java\duke\Ui.java
 C:\Users\User\Desktop\github\ip\src\main\java\duke\command\AbstractModifyTaskCommand.java
 C:\Users\User\Desktop\github\ip\src\main\java\duke\command\AddAbstractTaskCommand.java

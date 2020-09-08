@@ -52,7 +52,7 @@ public class TaskListHandler {
     /**
      * Prints the list and the number of items in the list.
      *
-     * @throws DukeException If task list is currently empty.
+     * @throws DukeException if task list is currently empty.
      */
     public void printList() throws DukeException {
         if (tasks.isEmpty()) {
@@ -72,13 +72,29 @@ public class TaskListHandler {
     }
 
     /**
-     * Provides indentation for formatting.
+     * Finds tasks in the task list matching the keyword both entirely and partially.
      *
-     * @param times The number of 4 spaces to be printed.
+     * @param keyword The word to search for.
+     * @return Task list containing the tasks containing the keyword.
+     * @throws DukeException if keyword input by the user is empty.
      */
-    public static void indent(int times) {
-        for (int i = 0; i < times; i++) {
-            System.out.print("    ");
+    public ArrayList<Task> findTasksByKeyword(String keyword) throws DukeException {
+        boolean hasFoundTask = false;
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        try {
+            for (Task task : tasks) {
+                if (task.getDescription().contains(keyword)) {
+                    foundTasks.add(task);
+                    hasFoundTask = true;
+                }
+            }
+            if (!hasFoundTask) {
+                // Unable to find any matching task
+                return new ArrayList<>();
+            }
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("\u2639 Oops, the keyword to search for cannot be empty!");
         }
+        return foundTasks;
     }
 }

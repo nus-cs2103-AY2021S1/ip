@@ -123,6 +123,7 @@ public class Storage {
             }
             // Prints the number of tasks loaded
             System.out.println("Successfully loaded: " + list.size() + " task(s)");
+            System.out.println();
             return list;
 
         } catch (IOException e1) {

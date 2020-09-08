@@ -27,15 +27,10 @@ public abstract class AddAbstractTaskCommand extends Command {
      * @param storage Storage instance.
      */
     @Override
-    public void execute(TaskListHandler handler, Storage storage) {
-        try {
-            ArrayList<Task> taskList = handler.getTasks();
-            handler.addToList(newTask);
-            Ui.printSuccess("add", newTask, taskList.size());
-            storage.saveToFile(taskList);
-        } catch (DukeException e) {
-            System.out.println(e.getMessage());
-            DukeException.tryAgain();
-        }
+    public void execute(TaskListHandler handler, Storage storage) throws DukeException {
+        ArrayList<Task> taskList = handler.getTasks();
+        handler.addToList(newTask);
+        Ui.printSuccess("add", newTask, taskList);
+        storage.saveToFile(taskList);
     }
 }
