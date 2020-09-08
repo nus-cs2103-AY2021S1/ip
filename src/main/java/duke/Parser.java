@@ -7,6 +7,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.StatisticsCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -50,6 +51,8 @@ public class Parser {
         case "find":
             String[] keyword = getKeyword();
             return new FindCommand(keyword);
+        case "statistics":
+            return new StatisticsCommand();
         case "deadline":
             String desc;
             String dateTime;
