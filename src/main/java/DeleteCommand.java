@@ -5,8 +5,7 @@ import java.util.ArrayList;
  * Handles "delete" command.
  */
 public class DeleteCommand extends Command {
-    private static final String TAB = "  ";
-    private static final String DELETE_TITLE = TAB + " Noted. I've removed this task:";
+    private static final String DELETE_TITLE = "Noted. I've removed this task:";
     private String[] input;
 
     /**
@@ -29,12 +28,12 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DeleteException {
         ArrayList<Task> store = tasks.getTaskList();
         if (this.input.length == 1) { //incomplete done command
-            throw new DeleteException(" ☹ OOPS!!! The description of a delete cannot be empty.");
+            throw new DeleteException("☹ OOPS!!! The description of a delete cannot be empty.");
         }
 
         int indexOfMarkingTask = Integer.parseInt(this.input[1]) - 1;
         if (indexOfMarkingTask + 1 > store.size() || indexOfMarkingTask + 1 <= 0) {
-            throw new DeleteException(" ☹ OOPS!!! There is no such task.");
+            throw new DeleteException("☹ OOPS!!! There is no such task.");
         }
 
         //complete done command
@@ -42,8 +41,8 @@ public class DeleteCommand extends Command {
         store.remove(indexOfMarkingTask);
         storage.save(new TaskList(store));
         return DELETE_TITLE + "\n"
-                + TAB + "   " + deletingTask + "\n"
-                + TAB + " Now you have " + store.size() + " tasks in the list.";
+                + deletingTask + "\n"
+                + "Now you have " + store.size() + " tasks in the list.";
     }
 
     /**
