@@ -1,10 +1,6 @@
 package duke;
 
-import java.util.Scanner;
-import java.lang.StringBuilder;
-
 public class Ui {
-    private Scanner scanner;
 
     private static final String MESSAGE_CURRENT_TASKS = "Now you have %d task(s) in the list.";
     private static final String MESSAGE_ADD_TASK = "Got it. I've added this task:";
@@ -16,9 +12,7 @@ public class Ui {
             + "\tii) CREATE <filepath>: create a new task-list from scratch.";
     private static final String MESSAGE_GOODBYE = "Bye. Hope to see you again soon!";
 
-    public Ui() {
-        this.scanner = new Scanner(System.in);
-    }
+    public Ui() {}
 
     private static String showLines(String... lines) {
         StringBuilder stringBuilder = new StringBuilder();
@@ -112,7 +106,7 @@ public class Ui {
     }
 
     public String showAddedTask(String task, int numTasks) {
-        return showLines(MESSAGE_ADD_TASK, " "+ task, String.format(MESSAGE_CURRENT_TASKS, numTasks));
+        return showLines(MESSAGE_ADD_TASK, " " + task, String.format(MESSAGE_CURRENT_TASKS, numTasks));
     }
 
     public String showDoneTask(String task) {
