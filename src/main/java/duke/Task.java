@@ -16,6 +16,7 @@ public class Task {
      * @param taskType Type of the task.
      */
     public Task(String taskTitle, Boolean isDone, TaskTypes taskType) {
+        assert !taskTitle.isEmpty() : "taskTitle should not be empty.";
         this.taskTitle = taskTitle;
         this.isDone = isDone;
         this.taskType = taskType;

@@ -16,6 +16,7 @@ public class Duke {
      * @param filePath A string of file path to store the task list.
      */
     public Duke(String filePath) {
+        assert !filePath.isEmpty() : "Data filePath is missing.";
         ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
@@ -42,6 +43,8 @@ public class Duke {
         String inputMsg = sc.nextLine();
 
         while (!inputMsg.equals("bye")) {
+            assert !inputMsg.isEmpty() : "Input command should not be empty!";
+
             Parser.parseUserInput(inputMsg);
             // waiting for user to key in the next request
             inputMsg = sc.nextLine();
@@ -61,6 +64,7 @@ public class Duke {
     }
 
     public String getResponse(String input) {
+        assert !input.isEmpty() : "Input command should not be empty!";
         return Parser.parseUserInput(input);
     }
     public void save() {
