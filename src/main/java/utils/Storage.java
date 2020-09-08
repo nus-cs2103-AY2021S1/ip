@@ -27,6 +27,8 @@ public class Storage {
     private ObjectInputStream objIn;
 
     private String path;
+    private FileOutputStream fileOut;
+    private ObjectOutputStream objOut;
 
     private Storage() {
 
@@ -68,18 +70,14 @@ public class Storage {
      * @return the array list
      * @throws DukeIoException when data is corrupted
      */
-    @SuppressWarnings("unchecked")
     public ArrayList<Task> load() throws DukeIoException {
 
         //Solution below adapted from https://www.javatpoint.com/serialization-in-java
         try {
-            if (objIn == null) {
-                return new ArrayList<>();
-            }
-            ArrayList<Task> ret = (ArrayList<Task>) objIn.readObject();
 
-            objIn.close();
-            fileIn.close();
+            ArrayList<Task> ret = readIn();
+
+            closeIn();
 
             return ret;
         } catch (ClassNotFoundException e) {
@@ -87,6 +85,23 @@ public class Storage {
         } catch (IOException e) {
             return new ArrayList<>();
         }
+    }
+
+    private void closeIn() throws IOException {
+        if (objIn != null) {
+            objIn.close();
+        }
+        if (fileIn != null) {
+            fileIn.close();
+        }
+    }
+
+    @SuppressWarnings("unchecked")
+    private ArrayList<Task> readIn() throws IOException, ClassNotFoundException {
+        if (objIn == null) {
+            return new ArrayList<>();
+        }
+        return (ArrayList<Task>) objIn.readObject();
     }
 
     /**
@@ -99,15 +114,27 @@ public class Storage {
 
         //Solution below adapted from https://www.javatpoint.com/serialization-in-java
         try {
-            FileOutputStream fileOut = new FileOutputStream(path);
-            ObjectOutputStream objOut = new ObjectOutputStream(fileOut);
-            objOut.writeObject(tasks);
-            objOut.flush();
-            objOut.close();
-            fileOut.close();
+            setupOut();
+            writeOut(tasks);
+            closeOut();
         } catch (IOException e) {
             throw new DukeIoException(e.getMessage(), "");
         }
+    }
+
+    private void writeOut(ArrayList<Task> tasks) throws IOException {
+        objOut.writeObject(tasks);
+    }
+
+    private void setupOut() throws IOException {
+        fileOut = new FileOutputStream(path);
+        objOut = new ObjectOutputStream(fileOut);
+    }
+
+    private void closeOut() throws IOException {
+        objOut.flush();
+        objOut.close();
+        fileOut.close();
     }
 
 }
