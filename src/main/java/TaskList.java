@@ -27,7 +27,7 @@ public class TaskList {
      * Adds a new Deadline to the database.
      *
      * @return the details of the deadline added to the database.
-     * @throws DukeException if an invalid date time format is passed in
+     * @throws DukeException if an invalid date time format is passed in.
      */
     public String addNewDeadline(String[] taskInformation) throws DukeException {
         if (taskInformation.length == 0) {
@@ -49,7 +49,7 @@ public class TaskList {
      * Adds a new Event to the database.
      *
      * @return details of the event added to the database.
-     * @throws DukeException if an invalid date time format is passed in
+     * @throws DukeException if an invalid date time format is passed in.
      */
     public String addNewEvent(String[] taskInformation) throws DukeException {
         if (taskInformation.length == 0) {
@@ -97,7 +97,7 @@ public class TaskList {
      *
      * @return a success string if the task was successfully deleted.
      * @throws DukeException if database is empty, if the index passed in is out of bounds
-     * Or if index passed in is not a number.
+     * or if index passed in is not a number.
      */
     public String deleteTask(String indexStr) throws DukeException {
         String output;
@@ -132,7 +132,7 @@ public class TaskList {
      * Searches for all relevant tasks using the given keyword.
      *
      * @return a string of all the relevant tasks.
-     * @throws DukeException if no relevant tasks are found
+     * @throws DukeException if no relevant tasks are found.
      */
     public String findTasks(String keyword) throws DukeException {
         String output = "";
@@ -157,7 +157,7 @@ public class TaskList {
     /**
      * Returns the database.
      *
-     * @return ArrayList of tasks
+     * @return ArrayList of tasks.
      */
     public ArrayList<Task> getDatabase() {
         return this.database;
@@ -167,7 +167,7 @@ public class TaskList {
      * Returns all the saved tasks in the database.
      *
      * @return a string of all the tasks in the database.
-     * @throws DukeException if the database is empty
+     * @throws DukeException if the database is empty.
      */
     public String listAllTasks() throws DukeException {
         String output;
@@ -189,7 +189,7 @@ public class TaskList {
      *
      * @return a success string if the task was successfully deleted.
      * @throws DukeException if the database is empty, or if the index is out of bounds
-     * Or if index passed in is not a number.
+     * or if index passed in is not a number.
      */
     public String markTaskAsDone(String indexStr) throws DukeException {
         String output;

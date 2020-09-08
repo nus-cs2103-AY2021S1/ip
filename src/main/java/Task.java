@@ -5,7 +5,7 @@ public abstract class Task {
     /**
      * This constructor will be called by constructors of its subclasses.
      *
-     * @param description takes in the description of the task
+     * @param description takes in the description of the task.
      */
     public Task(String description) {
         this.description = description;
@@ -15,8 +15,8 @@ public abstract class Task {
     /**
      * This constructor will be called by constructors of its subclasses.
      *
-     * @param description takes in the description of the task
-     * @param isDone takes in the task completion status
+     * @param description takes in the description of the task.
+     * @param isDone takes in the task completion status.
      */
     public Task(String description, boolean isDone) {
         this.description = description;
@@ -26,7 +26,7 @@ public abstract class Task {
     /**
      * Returns the description of the task.
      *
-     * @return the description of the task
+     * @return the description of the task.
      */
     public String getDescription() {
         return this.description;
@@ -35,7 +35,7 @@ public abstract class Task {
     /**
      * Returns true if the task has been completed and false otherwise.
      *
-     * @return the completion status of the task
+     * @return the completion status of the task.
      */
     public boolean getDoneStatus() {
         return this.isDone;
