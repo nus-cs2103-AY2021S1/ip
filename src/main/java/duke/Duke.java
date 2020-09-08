@@ -2,10 +2,9 @@ package duke;
 
 import duke.command.AddCommand;
 import duke.command.ByeCommand;
+import duke.command.DoneCommand;
 import duke.command.HelpCommand;
 import duke.command.ListCommand;
-
-import java.util.ArrayList;
 
 /**
  * This class handles the logic behind the Duke chatbot.
@@ -69,19 +68,7 @@ public class Duke {
             break;
         case DONE:
             int index = Integer.parseInt(input.substring(5)) - 1;
-
-            try {
-                if (index >= userTasks.getTaskListSize()) {
-                    throw new DukeException("", ExceptionType.INDEX_OUT_OF_BOUNDS);
-                } else {
-                    userTasks.markTaskAsDone(index);
-                    response += ui.markAsDoneMessage(userTasks.getTask(index));
-                }
-                storage.saveToFile(userTasks.getTaskList());
-            } catch (DukeException ex) {
-                response += ui.errorMessage(ex);
-            }
-
+            response += new DoneCommand().execute(index, userTasks, storage);
             break;
         case DELETE:
             index = Integer.parseInt(input.substring(7)) - 1;
