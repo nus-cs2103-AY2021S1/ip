@@ -20,11 +20,11 @@ public class ToDoTest {
         TaskList tasks = new TaskList(new ArrayList<Task>());
         Ui ui = new Ui();
         Parser parser = new Parser(ui , tasks);
-        String expectedOutput = "_____________________________________________\n" +
+        String expectedOutput = "____________________________________________________________\n" +
                 "     Got it. I've added this task:\n" +
                 "       [T][✘]  PI\n" +
                 "     Now you have 1 task in the list.\n" +
-                "_____________________________________________\n";
+                "____________________________________________________________\n";
         String actualOutput = parser.parse("todo PI");
         assertEquals(expectedOutput,actualOutput );
     }
@@ -37,11 +37,11 @@ public class ToDoTest {
         TaskList tasks = new TaskList(tasksArr);
         Ui ui = new Ui();
         Parser parser = new Parser(ui , tasks);
-        String expectedOutput = "_____________________________________________\n" +
+        String expectedOutput = "____________________________________________________________\n" +
                 "     Noted. I've removed this task:\n" +
                 "       [T][✘]  homework\n" +
                 "     Now you have 0 tasks in the list.\n" +
-                "_____________________________________________";
+                "____________________________________________________________";
         String actualOutput = parser.parse("delete 1");
         assertEquals(expectedOutput,actualOutput );
     }

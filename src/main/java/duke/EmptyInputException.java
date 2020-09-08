@@ -21,6 +21,8 @@ public class EmptyInputException extends Exception {
      * @return String;
      */
     public String toString() {
-        return "☹ OOPS!!! The description of a " + this.taskName + " cannot be empty.\n";
+        return "_____________________________________________\n"
+                + "     ☹ OOPS!!! The description of a " + this.taskName + " cannot be empty.\n"
+                + "_____________________________________________";
     }
 }
