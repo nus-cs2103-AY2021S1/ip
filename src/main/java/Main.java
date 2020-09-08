@@ -19,11 +19,14 @@ public class Main extends Application {
         duke.myStorage.createDirectory("ToDo");
         duke.myStorage.populateList(duke.myTaskList);
         try {
+            stage.setTitle("JARVIS");
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            scene.getStylesheets().add("/view/stylesheet.css");
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
+
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

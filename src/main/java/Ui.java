@@ -32,13 +32,9 @@ public class Ui {
      * @return string of a Duke image
      */
     public String greeting() {
-        String logo = " ____        _        \n"
-            + "|  _ \\ _   _| | _____ \n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-      //  System.out.println("Hello from\n" + logo);
-        return logo;
+        String greetings= "Welcome to Jarvis List \n" +
+            "type help to show list of commands";
+        return greetings;
 
 
     }
@@ -55,6 +51,7 @@ public class Ui {
                 "remove <taskToRemovePermanently>";
         return myHelp;
     }
+
 
 
 }
