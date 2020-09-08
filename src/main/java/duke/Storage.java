@@ -26,7 +26,6 @@ public class Storage {
      * @param taskList given list of tasks.
      * @return String list of tasks in String format.
      */
-    // Loop through every task and transform it into a string file format
     public String listToString(ArrayList<Task> taskList) {
         String taskListStr = "";
         for (Task t : taskList) {
@@ -41,14 +40,12 @@ public class Storage {
      * @param userTasks list of tasks to be saved.
      */
     public void saveToFile(ArrayList<Task> userTasks) {
-        // Check if data folder exists, if not create
         Path folderPath = Paths.get("..", "..", "..", "data");
         if (!Files.exists(folderPath)) {
             File folderDir = new File(folderPath.toString());
             folderDir.mkdir();
         }
 
-        // Get OS-independent file path to text file
         String filePath = Paths.get("..", "..", "..", "data", "Tasklist.txt")
                 .toString();
 
@@ -68,17 +65,15 @@ public class Storage {
      * @return ArrayList<Task> list of tasks read from file.
      */
     public ArrayList<Task> readFromFile() {
-        // Check if data folder exists, if not create
+
         Path folderPath = Paths.get("..", "..", "..", "data");
         if (!Files.exists(folderPath)) {
             File folderDir = new File(folderPath.toString());
             folderDir.mkdir();
         }
 
-        // Initialise ArrayList to return
         ArrayList<Task> savedTasks = new ArrayList<Task>();
 
-        // Check if file exists, if return empty list
         Path filePath = Paths.get("..", "..", "..", "data", "Tasklist.txt");
         if (!Files.exists(filePath)) {
             return savedTasks;
@@ -88,14 +83,13 @@ public class Storage {
             File myFile = new File(filePath.toString());
             Scanner taskReader = new Scanner(myFile);
 
-            // Keep reading new line until file end
             while (taskReader.hasNextLine()) {
                 String taskString = taskReader.nextLine();
 
                 if (taskString.equals("")) {
                     continue;
                 }
-                // Only work with non empty lines
+
                 switch (taskString.charAt(1)) {
                 case 'T':
                     boolean isDone = taskString.split("  ")[0]

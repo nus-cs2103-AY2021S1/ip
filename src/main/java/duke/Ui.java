@@ -8,8 +8,6 @@ import java.util.ArrayList;
  */
 public class Ui {
 
-    // Initialise strings to separate messages from Duke
-    // and commands from CLI
     private final String SERVANT_SPEAK = "Duke:\n";
     private final String USER_PROMPT = "Your Command Sire:";
 
