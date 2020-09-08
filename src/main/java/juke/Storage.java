@@ -1,5 +1,6 @@
 package juke;
 
+import juke.exception.UnknownTaskException;
 import juke.task.Deadline;
 import juke.task.Event;
 import juke.task.Task;
@@ -21,6 +22,7 @@ public class Storage {
 
     /**
      * Loads an existing stored list of tasks (if any).
+     *
      * @return ArrayList of Tasks.
      */
     public ArrayList<Task> load() {
@@ -32,34 +34,23 @@ public class Storage {
 
             while (scanner.hasNext()) {
                 String[] next = scanner.nextLine().split("/");
-                Task task = null;
-                switch (next[0]) {
-                case "T":
-                    task = new Todo(next[2]);
-                    break;
-                case "D":
-                    task = new Deadline(next[2], next[3]);
-                    break;
-                case "E":
-                    task = new Event(next[2], next[3]);
-                    break;
-                }
-                if (next[1].equals("1")) {
-                    task.markAsDone();
-                }
+                Task task = this.assignTask(next);
                 list.add(task);
             }
+
             return list;
-        } catch (FileNotFoundException exc) {
-            System.out.println(exc.getMessage());
+        } catch (FileNotFoundException ex) {
+            return new ArrayList<>();
+        } catch (UnknownTaskException ex) {
+            System.out.println("Task File Corrupted");
             return new ArrayList<>();
         }
-
     }
 
     /**
      * Checks and identifies storage file (if available), or else
      * creates a new and empty file.
+     *
      * @param root User project root path.
      * @return Storage file.
      */
@@ -82,6 +73,7 @@ public class Storage {
 
     /**
      * Saves the current list of tasks to file.
+     *
      * @throws IOException
      */
     public void saveTasksToFile() throws IOException {
@@ -95,4 +87,31 @@ public class Storage {
         fw.close();
     }
 
+    private boolean taskIsDone(String task) {
+        return task.equals("1");
+    }
+
+    private Task assignTask(String[] next) throws UnknownTaskException {
+        Task task;
+
+        switch (next[0]) {
+        case "T":
+            task = new Todo(next[2]);
+            break;
+        case "D":
+            task = new Deadline(next[2], next[3]);
+            break;
+        case "E":
+            task = new Event(next[2], next[3]);
+            break;
+        default:
+            throw new UnknownTaskException("A task seems to be corrupted");
+        }
+
+        if (this.taskIsDone(next[1])) {
+            task.markAsDone();
+        }
+
+        return task;
+    }
 }
