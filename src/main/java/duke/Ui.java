@@ -94,8 +94,8 @@ public class Ui {
             return;
         case "find":
             System.out.println("I have found the matching tasks in your list: ");
-            indent(2);
             for (Task t: taskList) {
+                indent(2);
                 System.out.println(t);
             }
             return;

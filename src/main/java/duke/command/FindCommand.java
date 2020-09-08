@@ -28,7 +28,7 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskListHandler handler, Storage storage) throws DukeException {
         // Second word is the keyword to search for
-        String keyword = input.split(" ")[1];
+        String keyword = input.substring(5);
         ArrayList<Task> foundTasks = handler.findTasksByKeyword(keyword);
         if (!foundTasks.isEmpty()) {
             Ui.printSuccess("find", foundTasks.get(0), foundTasks);
