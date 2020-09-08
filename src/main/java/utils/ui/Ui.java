@@ -1,12 +1,10 @@
 package utils.ui;
 
-import java.util.Scanner;
-
 /**
  * The UI Handler. Handles User Input and Output
  * through the Command Line Interface.
  */
-public interface UI {
+public interface Ui {
 
     /**
      * Prints a given input as a <code>string</code>.

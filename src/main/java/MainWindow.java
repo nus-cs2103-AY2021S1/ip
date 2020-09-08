@@ -1,3 +1,6 @@
+import java.util.Locale;
+import java.util.ResourceBundle;
+
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -9,8 +12,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import utils.ui.DialogBox;
 
-import java.util.Locale;
-import java.util.ResourceBundle;
 
 //@@author AdithyaNarayan-reused
 //Reused from https://se-education.org/guides/tutorials/javaFxPart1.html with minor modifications
@@ -21,7 +22,7 @@ import java.util.ResourceBundle;
 public class MainWindow extends AnchorPane {
 
     @FXML
-    public ImageView sendImage;
+    private ImageView sendImage;
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -38,13 +39,15 @@ public class MainWindow extends AnchorPane {
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
     private final Image sendLogo = new Image(this.getClass().getResourceAsStream("/images/sendLogo.png"));
 
+    /**
+     * Initialize a dependencies of the main window.
+     */
     @FXML
     public void initialize() {
         strings = ResourceBundle.getBundle("StringsBundle", Locale.ENGLISH);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         sendImage.setImage(sendLogo);
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(strings.getString("output.greeting"), dukeImage));
-
     }
 
     public void setDuke(Duke d) {

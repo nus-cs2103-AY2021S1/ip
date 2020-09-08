@@ -1,18 +1,16 @@
 package utils.ui;
 
-import utils.ui.UI;
-
 import java.util.Scanner;
 
 /**
  * The CLI Handler. Handles User Input and Output
  * through the Command Line Interface.
  */
-public class CLI implements UI {
+public class Cli implements Ui {
 
     private final Scanner scanner;
 
-    public CLI() {
+    public Cli() {
         scanner = new Scanner(System.in);
     }
 

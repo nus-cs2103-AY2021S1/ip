@@ -5,20 +5,11 @@ import java.util.ResourceBundle;
 import commands.Command;
 import exceptions.DukeException;
 import exceptions.DukeIoException;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
 import tasks.TaskList;
-import utils.*;
-import utils.ui.CLI;
-import utils.ui.GUI;
-import utils.ui.UI;
+import utils.Parser;
+import utils.Storage;
+import utils.ui.Cli;
+import utils.ui.Ui;
 
 /**
  * The main driver Class for the Duke Application.
@@ -26,9 +17,20 @@ import utils.ui.UI;
 public class Duke {
 
     private static ResourceBundle strings;
-    private static UI ui;
+    private static Ui ui;
     private static TaskList tasks;
     private static Storage storage;
+
+    /**
+     * Instantiates a new Duke.
+     */
+    public Duke() {
+        try {
+            initializeDuke();
+        } catch (DukeIoException e) {
+            ui.print(e.getMessage());
+        }
+    }
 
     private static void initializeDuke() throws DukeIoException {
         // read the appropriate string resources
@@ -45,7 +47,7 @@ public class Duke {
      */
     public static void main(String[] args) {
 
-        ui = new CLI();
+        ui = new Cli();
 
         try {
             initializeDuke();
@@ -72,14 +74,6 @@ public class Duke {
                 ui.print(e.getMessage());
             }
 
-        }
-    }
-
-    public Duke() {
-        try {
-            initializeDuke();
-        } catch (DukeIoException e) {
-            ui.print(e.getMessage());
         }
     }
 

@@ -21,17 +21,36 @@ public class TaskList {
         return tasks.get(index);
     }
 
+    /**
+     * Add a given task to the list.
+     *
+     * @param task the task to add
+     * @throws DukeIoException the duke io exception
+     */
     public void add(Task task) throws DukeIoException {
         tasks.add(task);
         notifyObserver();
     }
 
+    /**
+     * Mark the task at a particular index as done.
+     *
+     * @param index the index of the task (assumed to be valid)
+     * @throws DukeIoException the duke io exception
+     */
     public void markAsDone(int index) throws DukeIoException {
         assert index < tasks.size() : "Invalid index";
         tasks.get(index).markAsDone();
         notifyObserver();
     }
 
+    /**
+     * Remove the task at a given index.
+     *
+     * @param index the index
+     * @return the task
+     * @throws DukeIoException the duke io exception
+     */
     public Task remove(int index) throws DukeIoException {
         Task task = tasks.remove(index);
         notifyObserver();

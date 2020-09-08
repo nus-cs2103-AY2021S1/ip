@@ -7,6 +7,12 @@ import java.time.format.FormatStyle;
 public class Event extends Task {
     protected LocalDate at;
 
+    /**
+     * Instantiates a new Event.
+     *
+     * @param description the description of the event as a <code>String</code>
+     * @param at          the date at which the event takes place
+     */
     public Event(String description, LocalDate at) {
         super(description);
         this.at = at;

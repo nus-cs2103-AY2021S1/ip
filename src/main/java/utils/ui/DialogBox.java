@@ -16,6 +16,12 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Instantiates a new Dialog box.
+     *
+     * @param l  the text label of the dialog
+     * @param iv the image view of the sender
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
