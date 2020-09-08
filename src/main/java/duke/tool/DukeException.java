@@ -1,5 +1,7 @@
 package duke.tool;
 
+import duke.ui.Ui;
+
 /**
  * Represents the exception thrown by duke.Duke.
  */
@@ -7,6 +9,7 @@ public class DukeException extends Exception {
 
     /**
      * Constructs a duke.Duke exception.
+     *
      * @param message message of the exception.
      */
     public DukeException(String message) {
@@ -15,14 +18,14 @@ public class DukeException extends Exception {
 
     /**
      * Outputs exception as a string.
+     *
      * @return string representation of the exception.
      */
     @Override
     public String toString() {
         String emoji = Emoji.ERROR.toString();
-        String msgForException = "    ____________________________________________\n"
+        return Ui.SEPARATION_LINE
                 + "    " + emoji + this.getMessage() + "\n"
-                + "    ____________________________________________\n";
-        return msgForException;
+                + Ui.SEPARATION_LINE;
     }
 }

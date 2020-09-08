@@ -9,6 +9,7 @@ public class Task {
 
     /**
      * Construct a task item.
+     *
      * @param taskDescription title of the task.
      * @param isDone status of the task.
      */
@@ -19,6 +20,7 @@ public class Task {
 
     /**
      * Outputs the description of the task.
+     *
      * @return the description of the task.
      */
     public String getTaskDescription() {
@@ -27,6 +29,7 @@ public class Task {
 
     /**
      * Gets the corresponding symbol based on the status of task.
+     *
      * @return symbol corresponding to the status of task.
      */
     public String getStatusIcon() {
@@ -48,6 +51,7 @@ public class Task {
 
     /**
      * Represents the string written into data.txt.
+     *
      * @return A string written into the data.txt.
      */
     public String toWrite() {

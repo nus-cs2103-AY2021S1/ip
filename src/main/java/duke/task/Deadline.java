@@ -11,6 +11,7 @@ public class Deadline extends Task {
 
     /**
      * Constructs a deadline object.
+     *
      * @param description title of the deadline.
      * @param by deadline timing.
      * @param isDone status.
@@ -28,6 +29,7 @@ public class Deadline extends Task {
 
     /**
      * Represents the string written into data.txt.
+     *
      * @return A string written into the data.txt.
      */
     @Override

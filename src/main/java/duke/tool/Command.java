@@ -15,14 +15,16 @@ public class Command {
 
     /**
      * Handles invalid user input.
+     *
      * @throws DukeException exception indicating invalid input.
      */
-    public String invalidInput() throws DukeException {
+    public String handleInvalidInput() throws DukeException {
         throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
     /**
      * Marks task as done.
+     *
      * @param num index.
      * @param taskList a list of tasks.
      * @throws DukeException indicates that the task is not found.
@@ -30,12 +32,10 @@ public class Command {
     public String markAsDone(int num, TaskList taskList) throws DukeException {
         if (num > 0 && num <= taskList.getSize()) {
             taskList.get(num - 1).markAsDone();
-            String msgForDone = "    ____________________________________________\n"
+            return Ui.SEPARATION_LINE
                     + "    Nice! I 've marked this task as done: \n"
                     + "       " + taskList.get(num - 1).toString() + "\n"
-                    + "    ____________________________________________\n";
-            //System.out.println(msgForDone);
-            return msgForDone;
+                    + Ui.SEPARATION_LINE;
         } else {
             throw new DukeException(
                     "OOPS!!! The task is not found. Please try again."
@@ -45,35 +45,34 @@ public class Command {
 
     /**
      * Lists all the tasks in the list.
+     *
      * @param taskList a list of tasks.
      */
     public String list(TaskList taskList) {
-        String msgForList = "    ____________________________________________\n";
-        msgForList += "    Here are the tasks in your list: \n";
+        StringBuilder msgForList = new StringBuilder(Ui.SEPARATION_LINE);
+        msgForList.append("    Here are the tasks in your list: \n");
         for (int i = 0; i < taskList.getSize(); i++) {
-            msgForList += "    " + (i + 1) + ". "
-                    + taskList.get(i).toString() + "\n";
+            msgForList.append("    ").append(i + 1).append(". ").append(taskList.get(i).toString()).append("\n");
         }
-        msgForList += "    ____________________________________________\n";
-        //System.out.println(msgForList);
-        return msgForList;
+        msgForList.append(Ui.SEPARATION_LINE);
+        return msgForList.toString();
     }
 
     /**
      * Deletes a task from the list.
+     *
      * @param num index of the task.
      * @param taskList a list of tasks.
      * @throws DukeException indicates that the task is not found.
      */
     public String delete(int num, TaskList taskList) throws DukeException {
         if (num > 0 && num <= taskList.getSize()) {
-            String msgForDelete = "    ____________________________________________\n"
+            String msgForDelete = Ui.SEPARATION_LINE
                     + "    Noted. I've removed this task: \n"
                     + "       " + taskList.get(num - 1).toString() + "\n";
             taskList.remove(num - 1);
             msgForDelete += taskList.countNum() + "\n"
-                    + "    ____________________________________________\n";
-            //System.out.println(msgForDelete);
+                    + Ui.SEPARATION_LINE;
             return msgForDelete;
         } else {
             throw new DukeException(
@@ -84,6 +83,7 @@ public class Command {
 
     /**
      * Handles to-do task.
+     *
      * @param instruction to-do instructions
      * @param taskList a list of tasks.
      * @param ui handles system output.
@@ -104,9 +104,10 @@ public class Command {
 
     /**
      * Handles deadline task.
+     *
      * @param instruction deadline-instructions.
      * @param taskList a list of tasks.
-     * @param ui
+     * @param ui handles system output.
      * @throws DukeException indicates that the description or deadline timing is missing.
      */
     public String handleDeadline(String instruction, TaskList taskList, Ui ui) throws DukeException {
@@ -146,6 +147,7 @@ public class Command {
 
     /**
      * Handles event.
+     *
      * @param instruction event-instruction.
      * @param taskList a list of tasks.
      * @param ui Handles system output.
@@ -187,6 +189,7 @@ public class Command {
 
     /**
      * Finds a task by searching for a keyword.
+     *
      * @param taskList a list of tasks.
      * @param input find instructions.
      * @throws DukeException indicates that the instruction is empty.
@@ -200,17 +203,16 @@ public class Command {
         } else {
             String query = input.substring(5);
             int count = 0;
-            String output = "";
-            output += "    ____________________________________________\n"
-                    + "    Here are the matching tasks in your list:";
+            StringBuilder output = new StringBuilder();
+            output.append(Ui.SEPARATION_LINE + "    Here are the matching tasks in your list:");
             for (int i = 0; i < taskList.getSize(); i++) {
                 if (taskList.get(i).getTaskDescription().contains(query)) {
                     count += 1;
-                    output += "    " + count + "." + taskList.get(i).toString();
+                    output.append("    ").append(count).append(".").append(taskList.get(i).toString());
                 }
             }
-            output += "    ____________________________________________\n";
-            return output;
+            output.append(Ui.SEPARATION_LINE);
+            return output.toString();
         }
     }
 }

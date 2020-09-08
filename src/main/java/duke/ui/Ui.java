@@ -12,38 +12,35 @@ import duke.tool.Emoji;
  */
 public class Ui {
 
+    public static final String SEPARATION_LINE = "    ____________________________________________\n";
+
     /**
      * Prints welcome message.
      */
     public String printWelcomeMessage() {
         String emoji = Emoji.CHICKEN.toString();
-        String welcomeMessage = "    ____________________________________________\n"
+        return SEPARATION_LINE
                 + "    Hello! I'm ByteMe " + emoji + emoji + emoji + "\n"
                 + "    What can I do for you? (Don't bite me!)\n"
-                + "    ____________________________________________\n";
-
-        //System.out.println(welcomeMessage);
-        return welcomeMessage;
+                + SEPARATION_LINE;
     }
 
     /**
      * Prints bye message.
      */
     public String sendBye() {
-        String msgForBye = "    ____________________________________________\n"
+        return SEPARATION_LINE
                 + "    Bye. Hope to see you again soon! \n"
-                + "    ____________________________________________\n";
-        //System.out.println(msgForBye);
-        return msgForBye;
+                + SEPARATION_LINE;
     }
 
     /**
      * Outputs the number of tasks.
+     *
      * @param i number of tasks.
      */
     public String sendCount(int i) {
-        String countMsg = "    Now you have " + i + " tasks in the list.";
-        return countMsg;
+        return "    Now you have " + i + " tasks in the list.";
     }
 
     /**
@@ -52,51 +49,45 @@ public class Ui {
      * @param todo a to-do item.
      */
     public String printAddedToDo(TaskList tl, Todo todo) {
-        String msgForToDo = "    ____________________________________________\n"
+        return SEPARATION_LINE
                 + "    Got it. I 've added this task: \n"
                 + "      " + todo.toString() + "\n"
                 + tl.countNum() + "\n"
-                + "    ____________________________________________\n";
-        //System.out.println(msgForToDo);
-        return msgForToDo;
+                + SEPARATION_LINE;
     }
 
     /**
      * Prints the newly added deadline item.
+     *
      * @param tl a list of tasks.
      * @param ddl a deadline item.
      */
     public String printAddedDdl(TaskList tl, Deadline ddl) {
-        String msgForToDo = "    ____________________________________________\n"
+        return SEPARATION_LINE
                 + "    Got it. I 've added this task: \n"
                 + "      " + ddl.toString() + "\n"
                 + tl.countNum() + "\n"
-                + "    ____________________________________________\n";
-        //System.out.println(msgForToDo);
-        return msgForToDo;
+                + SEPARATION_LINE;
     }
 
     /**
      * Prints the newly added event item.
+     *
      * @param tl a list of tasks.
      * @param event a event item.
      */
     public String printAddedEvent(TaskList tl, Event event) {
-        String msgForEvent = "    ____________________________________________\n"
+        return SEPARATION_LINE
                 + "    Got it. I 've added this task: \n"
                 + "      " + event.toString() + "\n"
                 + tl.countNum() + "\n"
-                + "    ____________________________________________\n";
-        //System.out.println(msgForEvent);
-        return msgForEvent;
+                + SEPARATION_LINE;
     }
 
     /**
      * Prints loading error.
      */
     public String showLoadingError() {
-        String errorMsg = "Loading error!";
-        return errorMsg;
-        //System.out.println("Loading error!");
+        return "Loading error!";
     }
 }
