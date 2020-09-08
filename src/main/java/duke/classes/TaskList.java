@@ -176,7 +176,7 @@ public class TaskList {
             String[] keywords;
             switch (task.getType()) {
             case TODO:
-                keywords = description.split("\\s");
+                keywords = stringSplit.apply(description);
                 Arrays.stream(keywords)
                         .filter((keyword) -> keyword.equals(finalQuery))
                         .forEach((keyword) -> {
@@ -186,7 +186,7 @@ public class TaskList {
             case EVENT:
             case DEADLINE:
                 // to retrieve just the activity
-                keywords = description.substring(0, description.indexOf("/") - 1).split("\\s");
+                keywords = stringSplit.apply(description.substring(0, description.indexOf("/") - 1));
                 // add to collection
                 for (String keyword : keywords) {
                     if (keyword.equals(query)) {

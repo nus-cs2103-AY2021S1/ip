@@ -132,7 +132,7 @@ public class Data {
                 int idx = description.indexOf('/');
                 String activity = description.substring(0, idx - 1);
                 String timing = description.substring(idx);
-                line = formatTask(task, idx, activity, timing);
+                line = formatTask(task, done, activity, timing);
                 break;
             default:
                 break;
@@ -145,14 +145,14 @@ public class Data {
     /**
      * Outputs the format of string for deadline/event tasks that are saved into disk.
      * @param task Task
-     * @param index Index of task
+     * @param done Status of task
      * @param activity Content of task
      * @param timing Time of task
      * @return String saved into disk
      */
-    private String formatTask(Task task, int index, String activity, String timing) {
+    private String formatTask(Task task, int done, String activity, String timing) {
         String type = task.getType() == TaskType.DEADLINE ? "D" : "E";
-        return String.format("%s---%d---%s---%s", type, index, activity, timing);
+        return String.format("%s---%d---%s---%s", type, done, activity, timing);
     }
 
 }
