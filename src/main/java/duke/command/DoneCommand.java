@@ -38,7 +38,8 @@ public class DoneCommand extends Command {
      * @throws DukeLoadingErrorException If I/O operation fails during Storage#save.
      * @throws DukeInvalidIndexException If invalid index is given.
      */
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeLoadingErrorException, DukeInvalidIndexException {
+    public String execute(TaskList taskList, Ui ui, Storage storage)
+            throws DukeLoadingErrorException, DukeInvalidIndexException {
         try {
             Task completedTask = taskList.completeTask(taskNo);
             storage.saveTasks(taskList);

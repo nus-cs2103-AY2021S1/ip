@@ -1,7 +1,6 @@
 package duke;
 
 import java.time.format.DateTimeParseException;
-import java.util.Arrays;
 
 import duke.command.AddCommand;
 import duke.command.ByeCommand;
