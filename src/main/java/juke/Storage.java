@@ -28,12 +28,12 @@ public class Storage {
     public ArrayList<Task> load() {
         try {
             String root = System.getProperty("user.dir");
-            File f = this.checkAndCreateFile(root);
+            File file = this.checkAndCreateFile(root);
 
-            assert f.exists() : "File not created";
+            assert file.exists() : "File not created";
 
             ArrayList<Task> list = new ArrayList<>();
-            Scanner scanner = new Scanner(f);
+            Scanner scanner = new Scanner(file);
 
             while (scanner.hasNext()) {
                 String[] next = scanner.nextLine().split("/");
