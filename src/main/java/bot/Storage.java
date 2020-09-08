@@ -41,7 +41,7 @@ public class Storage {
             f.createNewFile();
         }
         assert f.exists();
-        String content = Files.readString(Paths.get(filePath), StandardCharsets.US_ASCII);
+        String content = Files.readString(Paths.get(filePath), StandardCharsets.UTF_8);
         String[] items = content.split("\n");
         for (String item : items) {
             if (item.length() != 0) {
