@@ -45,6 +45,7 @@ public class Format<T> {
      * @return The above described Format object.
      */
     public Format<String> shorten() {
+        assert content instanceof String;
         try {
             String input = (String) content;
             int length = input.length();
@@ -79,6 +80,7 @@ public class Format<T> {
      *         is equal to the content.
      */
     public Task stringToTask() {
+        assert content instanceof String;
         try {
             String input = (String) content;
             String[] inputArray = input.split(FormatString.SPACE.toString());
