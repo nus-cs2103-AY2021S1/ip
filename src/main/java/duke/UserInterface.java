@@ -89,17 +89,15 @@ public class UserInterface {
     public String sendWelcomeMessage() {
 
         String startingMessage1 =
-                "Hello, I am Pikachu! My pika service creates a to-do list for you!\n"
-                + "1. type 'list' and I list all that you said, along if it is completed\n"
-                + "2. check out the following pika commands!\n"
-                + BORDER + "if 'event', type the task followed by a '/at <duration>' to indicate duration\n"
-                + BORDER + "if 'deadline', type the task followed by a '/by <deadline>' to indicate deadline\n"
-                + BORDER + "if 'delete' type the task followed by a number within the list index to delete\n"
-                + BORDER + "if 'done' type the task followed by a number within the list index to mark it\n"
-                + BORDER + "if 'find <key word search>' type the task followed "
-                         + "by a key word you want to use for search within your list\n"
-                + "3. type 'done x' where x is the index of the item you want to be indicated done\n"
-                + "4. or you can say 'bye' to end us </3\n";
+                "Pika pika pika!!! Pika Pika CHU!\n"
+                + "\u2022 'list', to list all your task!\n"
+                + "\u2022 'event <task> /at <duration>'\n"
+                + "\u2022 'deadline <task> /by <deadline>' \n"
+                + "\u2022 'delete x' delete a task!\n"
+                + "\u2022 'done x' complete a task to tick it\n"
+                + "\u2022 'find <key word search>'\n"
+                + "\u2022 'help' to bring this page up!\n";
+        ;
 
         String startingMessage2 = "Hello! I am PikaDuke, I can help you keep track of your tasks!\n";
 
