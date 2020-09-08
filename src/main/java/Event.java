@@ -2,19 +2,20 @@ import java.time.LocalDateTime;
 
 public class Event extends Task {
     private LocalDateTime startDate;
-    public Event(String in, LocalDateTime start) {
 
+    public Event(String in, LocalDateTime start) {
         super(in);
         this.startDate = start;
     }
+
     public String toString() {
-        String donez;
-        if (done) {
-            donez = "✓";
+        String doneStatus;
+        if (isDone) {
+            doneStatus = "✓";
         } else {
-            donez = "✗";
+            doneStatus = "✗";
         }
-        return "[E] [" + donez + "] " + task + " (at: " + dateToString(startDate) + ")";
+        return "[E] [" + doneStatus + "] " + task + " (at: " + dateToString(startDate) + ")";
     }
 
     public String saveText() {

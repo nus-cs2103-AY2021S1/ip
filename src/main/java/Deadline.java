@@ -2,18 +2,20 @@ import java.time.LocalDateTime;
 
 public class Deadline extends Task {
     private LocalDateTime deadline;
+
     public Deadline(String in, LocalDateTime deadline) {
         super(in);
         this.deadline = deadline;
     }
+
     public String toString() {
-        String donez;
-        if (done) {
-            donez = "✓";
+        String doneStatus;
+        if (isDone) {
+            doneStatus = "✓";
         } else {
-            donez = "✗";
+            doneStatus = "✗";
         }
-        return "[D] [" + donez + "] " + task + " (by: " + dateToString(deadline) + ")";
+        return "[D] [" + doneStatus + "] " + task + " (by: " + dateToString(deadline) + ")";
     }
 
     public String saveText() {

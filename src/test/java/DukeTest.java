@@ -10,9 +10,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class DukeTest {
     @Test
     public void parserTestReturnError(){
-        assertEquals(Parser.parse("dfgjdhg"), Command.error);
-        assertEquals(Parser.parse("todo"), Command.error);
-        assertEquals(Parser.parse("event"), Command.error);
+        assertEquals(Parser.parse("dfgjdhg"), Command.ERROR);
+        assertEquals(Parser.parse("blabla"), Command.ERROR);
     }
 
     @Test

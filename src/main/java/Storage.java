@@ -18,9 +18,10 @@ public class Storage {
 
     /**
      * Converts all tasks in the list to a string and writes that to the save file.
+     *
      * @param taskList The list of tasks.
      */
-    public void save(List<Task> taskList) {
+    public void saveTasks(List<Task> taskList) {
         String toWrite = "";
         for (Task t : taskList) {
             toWrite += t.saveText();
@@ -39,39 +40,105 @@ public class Storage {
     }
 
     /**
+     * Converts all notes in the list to a string and writes that to the save file.
+     *
+     * @param noteList The list of notes.
+     */
+    public void saveNotes(List<Note> noteList) {
+        String toWrite = "";
+        for (Note t : noteList) {
+            toWrite += t.saveText();
+            toWrite += "\n";
+        }
+        try {
+            File tasks = new File(filePath);
+            tasks.createNewFile();
+            FileWriter myWriter = new FileWriter(tasks);
+            myWriter.write(toWrite);
+            myWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred while saving the task list! D:");
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * Converts the text in the save file back to Tasks.
+     *
      * @return List of Tasks that is converted from text.
      */
-    public List<Task> read() {
+    public List<Task> readTasks() {
         List<Task> result = new ArrayList<Task>();
         File myObj = new File(filePath);
-        Scanner myReader;
+
         try {
             if (!myObj.exists()) {
-                try {
-                    myObj.createNewFile();
-                } catch (IOException f) {
-                    System.out.println("An error occurred while creating the task list file! D:");
-                    f.printStackTrace();
-                }
+                createFile(myObj);
             }
-            myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                result.add(Task.readText(data));
-            }
-            myReader.close();
+            readFileTasks(result, myObj);
         } catch (FileNotFoundException e) {
-            System.out.println("An error occurred while trying to read the tasklist save file!");
+            System.out.println("An error occurred while trying to read the task list save file!");
             e.printStackTrace();
         }
         return result;
     }
 
     /**
+     * Converts the text in the save file back to Notes.
+     *
+     * @return List of Notes that is converted from text.
+     */
+    public List<Note> readNotes() {
+        List<Note> result = new ArrayList<Note>();
+        File myObj = new File(filePath);
+
+        try {
+            if (!myObj.exists()) {
+                createFile(myObj);
+            }
+            readFileNotes(result, myObj);
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred while trying to read the task list save file!");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    private void readFileTasks(List<Task> result, File myObj) throws FileNotFoundException {
+        Scanner myReader;
+        myReader = new Scanner(myObj);
+        while (myReader.hasNextLine()) {
+            String data = myReader.nextLine();
+            result.add(Task.readText(data));
+        }
+        myReader.close();
+    }
+
+    private void readFileNotes(List<Note> result, File myObj) throws FileNotFoundException {
+        Scanner myReader;
+        myReader = new Scanner(myObj);
+        StringBuilder text = new StringBuilder();
+        while (myReader.hasNextLine()) {
+            String data = myReader.nextLine();
+            text.append(data);
+        }
+        Note.readAllText(result,text.toString());
+        myReader.close();
+    }
+
+    private void createFile(File myObj) {
+        try {
+            myObj.createNewFile();
+        } catch (IOException f) {
+            System.out.println("An error occurred while creating the task list file! D:");
+            f.printStackTrace();
+        }
+    }
+
+    /**
      * Clears the save file of all text.
      */
     public void clear() {
-        save(new ArrayList<Task>());
+        saveTasks(new ArrayList<Task>());
     }
 }

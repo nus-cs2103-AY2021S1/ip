@@ -1,10 +1,15 @@
 public enum Command {
-    blank,
-    clear,
-    list,
-    done,
-    delete,
-    add,
-    find,
-    error
+    BLANK,
+    CLEAR,
+    LIST,
+    NOTES,
+    NEW,
+    DONE,
+    DELETE,
+    ADD,
+    WRITE,
+    VIEW,
+    COMPLETE,
+    FIND,
+    ERROR
 }
