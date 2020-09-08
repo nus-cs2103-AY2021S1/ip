@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 /**
  * Implements task objects.
  *
@@ -66,4 +68,6 @@ public class Task {
     public void markAsNotDone() {
         isDone = false;
     }
+
+    public void changeTime(LocalDate time) {}
 }

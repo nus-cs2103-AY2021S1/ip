@@ -44,6 +44,7 @@ public class Event extends Task {
         return "E" + super.saveToHardDisk() + " | " + time;
     }
 
+    @Override
     public void changeTime(LocalDate time) {
         this.time = time;
     }

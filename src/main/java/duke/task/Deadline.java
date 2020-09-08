@@ -44,6 +44,7 @@ public class Deadline extends Task {
         return "D" + super.saveToHardDisk() + " | " + time;
     }
 
+    @Override
     public void changeTime(LocalDate time) {
         this.time = time;
     }

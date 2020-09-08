@@ -147,7 +147,7 @@ public class Parser {
                     String type = separated[2];
                     String newDetails = Arrays.stream(Arrays.copyOfRange(separated, 3, separated.length))
                             .reduce("", (accumulated, current) -> accumulated + current + " ").trim();
-                    command = new UpdateCommand();
+                    command = new UpdateCommand(index, type, newDetails);
                 } catch (NumberFormatException error) {
                     errorMessage = " Task index must be an integer :(";
                 }
