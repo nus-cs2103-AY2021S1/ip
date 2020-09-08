@@ -31,6 +31,27 @@ public class DeadlineCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DeadlineException {
         ArrayList<Task> store = tasks.getTaskList();
+        int index = getIndexOfBy();
+        if (input.length == 1 || index == 1) { //no description
+            throw new DeadlineException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
+        } else if (index == input.length - 1 || index == 0) { //no time
+            throw new DeadlineException(" ☹ OOPS!!! The time of a deadline cannot be empty.");
+        }
+        String description = getDescriptionFromUserInput(index);
+        Date date = getDateFromUserInput(index);
+        Deadline newTask = new Deadline(description, new SimpleDateFormat("MMM dd yyyy HH:mm").format(date));
+        store.add(newTask);
+        storage.save(new TaskList(store));
+        return ADD_TASK_TITLE + "\n"
+                + TAB + "   " + newTask + "\n"
+                + TAB + " Now you have " + store.size() + " tasks in the list.";
+    }
+
+    /**
+     * Gets the index number of "/by".
+     * @return index number of "/by".
+     */
+    public int getIndexOfBy() {
         int index = 0;
         for (int i = 1; i < input.length; i++) {
             if (input[i].equals("/by")) {
@@ -38,34 +59,44 @@ public class DeadlineCommand extends Command {
                 break;
             }
         }
-        if (input.length == 1 || index == 1) { //no description
-            throw new DeadlineException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
-        } else if (index == input.length - 1 || index == 0) { //no time
-            throw new DeadlineException(" ☹ OOPS!!! The time of a deadline cannot be empty.");
-        }
+        return index;
+    }
+    /**
+     * Get the description of the task from the user input.
+     * @param index index number of "/by".
+     * @return description.
+     */
+    public String getDescriptionFromUserInput(int index) {
         String description = "";
-        String time = "";
         for (int i = 1; i < index; i++) {
             description = description + input[i] + " ";
         }
+        // trim is to remove the extra space at the end of the description
+        // caused when description is retrieved from user input
+        return description.trim();
+    }
+
+    /**
+     * Get the time of the task from the user input.
+     * @param index index number of "/by".
+     * @return time.
+     */
+    public Date getDateFromUserInput(int index) throws DeadlineException {
+        String time = "";
         for (int i = index + 1; i < input.length; i++) {
             time = time + input[i] + " ";
         }
-
+        // trim is to remove the extra space at the end of the time
+        // caused when time is retrieved from user input
+        time = time.trim();
         Date date;
         try {
             SimpleDateFormat formatter = new SimpleDateFormat("dd/M/yyyy hhmm");
-            date = formatter.parse(time.trim());
+            date = formatter.parse(time);
         } catch (ParseException e) {
             throw new DeadlineException(" ☹ OOPS!!! The time of a deadline must be in the format of dd/M/yyyy hhmm.");
         }
-
-        Deadline newTask = new Deadline(description.trim(), new SimpleDateFormat("MMM dd yyyy HH:mm").format(date));
-        store.add(newTask);
-        storage.save(new TaskList(store));
-        return ADD_TASK_TITLE + "\n"
-                + TAB + "   " + newTask + "\n"
-                + TAB + " Now you have " + store.size() + " tasks in the list.";
+        return date;
     }
 
     /**
