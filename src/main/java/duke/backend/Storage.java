@@ -13,6 +13,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -78,13 +79,15 @@ public class Storage {
             String[] Parsed = body.split(TIME_SEPARATOR, 2);
             String Description = Parsed[0];
             String deadline = Parsed[1];
-            return new Deadline(Description, deadline, isDone);
+            LocalDate date = LocalDate.parse(deadline);
+            return new Deadline(Description, date, isDone);
         }
         if (type.equals(EVENT_ICON)) {
             String[] Parsed = body.split(TIME_SEPARATOR, 2);
             String Description = Parsed[0];
             String eventTime = Parsed[1];
-            return new Event(Description, eventTime, isDone);
+            LocalDate date = LocalDate.parse(eventTime);
+            return new Event(Description, date, isDone);
         }
         throw new DukeException("Error finding task");
     }

@@ -1,17 +1,19 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 /**
  * Represents a Deadline Task. A <code>Deadline</code> object contains a description,
  * keeps track of whether it has been completed as well as the time.
  */
 public class Deadline extends TimedTask {
 
-    public Deadline(String description, String deadline) {
+    public Deadline(String description, LocalDate deadline) {
         super(description, deadline);
         super.type = Task.Type.DEADLINE;
     }
 
-    public Deadline(String description, String deadline, boolean isDone) {
+    public Deadline(String description, LocalDate deadline, boolean isDone) {
         super(description, deadline);
         super.type = Task.Type.DEADLINE;
         super.isDone = isDone;
@@ -20,5 +22,9 @@ public class Deadline extends TimedTask {
     public String getTypeIcon() {
         String icon = "[D]";
         return icon;
+    }
+
+    public void snooze() {
+        super.date = super.date.plusDays(1);
     }
 }
