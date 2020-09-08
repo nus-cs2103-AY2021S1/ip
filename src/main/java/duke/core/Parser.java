@@ -45,7 +45,6 @@ public class Parser {
         } else if (command.split(" ")[0].equals("list")) {
             parsedCommand = evaluateListDate(command);
         } else if (command.split(" ")[0].equals("done")) {
-            //evaluateCompleteOrDelete(map, command, Command.DONE);
             parsedCommand = evaluateCompleteOrDelete(command, CommandType.DONE);
         } else if (command.split(" ")[0].equals("delete")) {
             parsedCommand = evaluateCompleteOrDelete(command, CommandType.DELETE);
@@ -93,6 +92,7 @@ public class Parser {
                                 + command.split(" ")[0]
                                 + " description" + string + "time");
             }
+
             try {
                 String time;
                 String description = content.split(string)[0];
