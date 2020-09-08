@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.Ui;
 import duke.Storage;
 
@@ -20,29 +21,31 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage){
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        String output;
         switch (commandType) {
         case TODO:
             ToDo toDo = new ToDo(details[0]);
             tasks.addTask(toDo);
             storage.addLine(toDo.toFileString());
-            ui.showAddedTask(toDo.toString(), tasks.getNumTasks());
+            output = ui.showAddedTask(toDo.toString(), tasks.getNumTasks());
             break;
         case DEADLINE:
             Deadline deadline = new Deadline(details[0], details[1]);
             tasks.addTask(deadline);
             storage.addLine(deadline.toFileString());
-            ui.showAddedTask(deadline.toString(), tasks.getNumTasks());
+            output = ui.showAddedTask(deadline.toString(), tasks.getNumTasks());
             break;
         case EVENT:
             Event event = new Event(details[0], details[1]);
             tasks.addTask(event);
             storage.addLine(event.toFileString());
-            ui.showAddedTask(event.toString(), tasks.getNumTasks());
+            output = ui.showAddedTask(event.toString(), tasks.getNumTasks());
             break;
         default:
-            break;
+            throw DukeException.INVALID_COMMAND_EXCEPTION;
         }
+        return output;
     }
 
     @Override

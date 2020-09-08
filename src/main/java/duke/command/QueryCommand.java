@@ -21,20 +21,25 @@ public class QueryCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         String[] lines = tasks.getTasks();
+
         if (commandType.equals(CommandType.LIST)) {
-            ui.showTasks(lines);
-        } else {
-            ArrayList<String> finds = new ArrayList<>();
-            for (String line : lines) {
-                if (line.toLowerCase().contains(String.format(".*%s.*", searchQuery))) {
-                    finds.add(line);
-                }
-            }
-            ui.showFoundTasks((String[]) finds.toArray());
+            return ui.showTasks(lines);
         }
 
+        ArrayList<String> finds = new ArrayList<>();
+        for (String line : lines) {
+            if (line.toLowerCase().contains(String.format(".*%s.*", searchQuery))) {
+                finds.add(line);
+            }
+        }
+
+        if (finds.size() == 0) {
+            return ui.showNoSuchTasks(searchQuery);
+        }
+
+        return ui.showFoundTasks(finds.toArray(new String[1]));
     }
 
     @Override

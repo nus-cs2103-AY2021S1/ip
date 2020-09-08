@@ -32,6 +32,12 @@ public class TaskList {
         tasks.add(task);
     }
 
+    public void loadTasks(ArrayList<Task> tasks) {
+        for (Task t : tasks) {
+            this.tasks.add(t);
+        }
+    }
+
     public Task markTaskAsDone(int index) throws DukeException {
         try {
             Task task = tasks.get(index - 1);
