@@ -34,7 +34,7 @@ public class TaskList {
      */
 
     public static Task doneTask(String remain) {
-
+        assert Integer.parseInt(remain) > 0;
         int index = Integer.parseInt(remain);
         Task task = tasks.get(index - 1);
         task.markAsDone();
@@ -108,6 +108,7 @@ public class TaskList {
      * @param store the arraylist of tasks stored
      */
     public static void addTaskFromFile(String task, ArrayList<Task> store) {
+        assert task.split(" ").length >= 4;
         String type = task.split(" ", 2)[0];
         String remain = task.split(" ", 2)[1];
         String done = remain.split(" ", 2)[0];
@@ -155,6 +156,7 @@ public class TaskList {
      */
 
     public static Task deleteTask(String command) {
+        assert Integer.parseInt(command) > 0;
         int index = Integer.parseInt(command);
         Task k = tasks.get(index - 1);
         tasks.remove(k);
