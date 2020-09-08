@@ -1,43 +1,46 @@
+package task;
+
+import duke.DukeException;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-public class Event extends Task {
+
+public class Deadline extends Task {
 
     /** Date of the task **/
-    protected LocalDate atDate;
+    protected LocalDate byDate;
     /** Time of the task **/
-    protected LocalTime atTime;
+    protected LocalTime byTime;
 
-    private Event(String taskName, String taskDateTime) throws DukeException {
+    private Deadline(String taskName, String taskDateTime) throws DukeException {
         super(taskName);
-        this.tag = "E";
+        this.tag = "D";
         parseTime(taskDateTime.trim().replace("/", "-"));
     }
 
     /**
-     * Creates Event task
+     * Creates task.Deadline task
      *
      * @param taskDescription description of the task
-     * @return Event task
+     * @return task.Deadline task
      * @throws DukeException if the format of the task description is wrong
      */
-    public static Event create(String taskDescription) throws DukeException {
-        if (!taskDescription.contains("/at")) {
-            throw new DukeException("Please include '/at' in front of the event time period");
+    public static Deadline create(String taskDescription) throws DukeException {
+        if (!taskDescription.contains("/by")) {
+            throw new DukeException("Please include '/by' in front of the deadline");
         }
-        String[] nameTimePair = taskDescription.split(" /at");
+        String[] nameTimePair = taskDescription.split(" /by");
         String taskName = nameTimePair[0];
-        String taskTime = nameTimePair[1];
-        return new Event(taskName, taskTime);
+        String taskDateTime = nameTimePair[1];
+        return new Deadline(taskName, taskDateTime);
     }
 
-
-    public static Event create(String taskName, String taskTime) throws DukeException {
-        return new Event(taskName, taskTime);
+    public static Deadline create(String taskName, String taskTime) throws DukeException {
+        return new Deadline(taskName, taskTime);
     }
-
 
     /**
      * Converts string date/time in LocalDate and LocalTime
@@ -47,43 +50,36 @@ public class Event extends Task {
      * @throws DukeException if the format of the task date/time is wrong
      */
     private void parseTime(String taskDateTime) throws DukeException {
-
-        assert taskDateTime != null : "taskDateTime cannot be empty";
-
         String[] dateTime = taskDateTime.replace("/", "-").split(" ", 2);
         try {
-            this.atDate = LocalDate.parse(dateTime[0]);
+            this.byDate = LocalDate.parse(dateTime[0]);
         } catch (DateTimeParseException e) {
             throw new DukeException("please enter a valid yyyy-mm-dd format");
         }
-
         try {
             if (dateTime.length == 2) {
-                this.atTime = LocalTime.parse(dateTime[1]);
+                this.byTime = LocalTime.parse(dateTime[1]);
             }
         } catch (DateTimeParseException e) {
             throw new DukeException("please enter a valid HH:MM format");
         }
     }
-
-
     /**
-     * return the summarised form of the task
+     *  * return the summarised form of the task
      *
      * @return String format of the summarised details of the task
      */
     @Override
     public String toString() {
         String symbol = isDone ? "\u2713" : "\u2718";
-        if (atTime != null) {
-            return String.format("[%s][%s] %s (at: %s %s)", tag, symbol, taskName,
-            atDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")), atTime.toString());
+        if (byTime != null) {
+            return String.format("[%s][%s] %s (by: %s %s)", tag, symbol, taskName,
+                    byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")), byTime.toString());
         } else {
-            return String.format("[%s][%s] %s (at: %s)", tag, symbol, taskName,
-                    atDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+            return String.format("[%s][%s] %s (by: %s)", tag, symbol, taskName,
+                    byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
         }
     }
-
 
     /**
      * return the summarised form of the task in the format to be saved
@@ -93,11 +89,10 @@ public class Event extends Task {
     @Override
     public String safeFileFormat() {
         int done = isDone ? 1 : 0;
-        if (atTime == null) {
-            return String.format("%s | %d | %s | %s \n", tag, done, taskName, atDate.toString());
+        if (byTime == null) {
+            return String.format("%s | %d | %s | %s \n", tag, done, taskName, byDate.toString());
         } else {
-            return String.format("%s | %d | %s | %s %s \n", tag, done, taskName, atDate.toString(), atTime.toString());
+            return String.format("%s | %d | %s | %s %s \n", tag, done, taskName, byDate.toString(), byTime.toString());
         }
     }
-
 }

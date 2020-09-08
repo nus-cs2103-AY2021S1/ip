@@ -1,3 +1,7 @@
+package task;
+
+import duke.DukeException;
+
 import java.util.ArrayList;
 
 public class TaskList {
@@ -21,21 +25,25 @@ public class TaskList {
      * @throws DukeException  If the index is not within the range of tasks.
      */
 
-    public void doneTask(int index) throws DukeException {
+    public String doneTask(int index) throws DukeException {
         if (index < 0 || index > taskList.size() - 1) {
             throw new DukeException("please give a correct task index");
         }
+
         Task doneTask = taskList.get(index);
+        if(doneTask.isDone){
+            throw new DukeException("This task has already been completed idiot");
+        }
         doneTask.complete();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(String.format("  %s", doneTask.toString()));
+        String output = "Nice! I've marked this task as done:\n";
+        output += String.format("  %s\n", doneTask.toString());
+        return output;
     }
 
     /**
      * List and prints all the task in taskList
      *
      */
-
     public String listTask() {
         StringBuilder outputString = new StringBuilder();
         for (int i = 0; i < taskList.size(); i++) {

@@ -1,10 +1,17 @@
+package duke;
+
+import task.TaskList;
+import utility.Parser;
+import utility.Storage;
+import utility.Ui;
+
 public class Duke {
 
-    /** TaskList class that stores and deals with the tasks **/
+    /** task.TaskList class that stores and deals with the tasks **/
     private TaskList taskList;
-    /** Parser class that parse and deal with the commands given **/
+    /** utility.Parser class that parse and deal with the commands given **/
     private Parser parser;
-    /** Storage class that handles loads and saves the task from/to hard drive **/
+    /** utility.Storage class that handles loads and saves the task from/to hard drive **/
     private Storage storage;
     /** UI class that is responsible for the interaction with the user **/
     private Ui ui;

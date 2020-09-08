@@ -1,6 +1,12 @@
+package utility;
+
+import command.*;
+import duke.DukeException;
+import task.*;
+
 public class Parser {
 
-    /** TaskList class that stores and deals with the tasks **/
+    /** task.TaskList class that stores and deals with the tasks **/
     private TaskList taskList;
 
     /**
@@ -22,44 +28,32 @@ public class Parser {
 
         try {
             Commands command = getCommand(inputs[0]);
-            String taskDescription = "";
-            if (inputs.length > 1) {
-                taskDescription = inputs[1];
-            } else if (inputs[0].equals("todo") || inputs[0].equals("deadline") || inputs[0].equals("event")) {
-                throw new DukeException(String.format("The description of %s cannot be empty", command.toString()));
-            }
+            String taskDescription = getTaskDescription(inputs,command);
 
             switch (command) {
             case DONE: {
-                int index = Integer.parseInt(taskDescription) - 1;
-                taskList.getTask(index).complete();
-                return taskList.getTask(index).toString();
+                return new Done(taskList, taskDescription).execute();
             }
             case LIST: {
-                return taskList.listTask();
+                return new List(taskList, taskDescription).execute();
             }
             case BYE: {
-                taskList.setTaskListNotUpdating();
-                return "Bye, Have a Great Time!";
+                return new Bye(taskList, taskDescription).execute();
             }
             case FIND: {
-                return taskList.findTask(taskDescription);
+                return new Find(taskList, taskDescription).execute();
             }
             case TODO: {
-                Task newTask = new Todo(taskDescription);
-                return taskList.addTask(newTask, true);
+                return new ITodo(taskList, taskDescription).execute();
             }
             case DEADLINE: {
-                Task newTask = Deadline.create(taskDescription);
-                return taskList.addTask(newTask, true);
+                return new IDeadline(taskList, taskDescription).execute();
             }
             case EVENT: {
-                Task newTask = Event.create(taskDescription);
-                return taskList.addTask(newTask, true);
+                return new IEvent(taskList, taskDescription).execute();
             }
             case DELETE: {
-                int index = Integer.parseInt(taskDescription) - 1;
-                return taskList.deleteTask(index);
+                return new Delete(taskList, taskDescription).execute();
             }
             default: {
                 throw new DukeException("smlj??????");
@@ -87,5 +81,15 @@ public class Parser {
             command = Commands.UNKNOWN;
         }
         return command;
+    }
+
+    public String getTaskDescription(String[] inputs, Commands command) throws DukeException {
+        String taskDescription = "";
+        if (inputs.length > 1) {
+            taskDescription = inputs[1];
+        } else if (inputs[0].equals("todo") || inputs[0].equals("deadline") || inputs[0].equals("event")) {
+            throw new DukeException(String.format("The description of %s cannot be empty", command.toString()));
+        }
+        return taskDescription;
     }
 }
