@@ -32,7 +32,7 @@ public class DoneCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            if (isNumberAbsent()) {
+            if (isNumberOrDescriptionAbsent()) {
                 throw new DoneException(true, false); //when number is absent
             } else {
                 int ID = Integer.parseInt(commandDescription.substring(lengthOfKeyword + 1));
@@ -47,14 +47,7 @@ public class DoneCommand extends Command {
             throw dukeException;
         }
     }
-    /**
-     * Returns whether the number is present.
-     *
-     * @return true is the number is absent and false if number is present.
-     */
-    private boolean isNumberAbsent(){
-        return commandDescription.length() == lengthOfKeyword || commandDescription.length() == lengthOfKeyword + 1; // keyword is absent if user input is only 4/5
-    }
+
 
     /**
      * Returns whether the task is present in the list.

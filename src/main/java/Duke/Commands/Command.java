@@ -44,4 +44,13 @@ abstract public class Command {
      * @throws DukeException if there are exceptions present
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+
+    /**
+     * Returns whether the number/description is present.
+     *
+     * @return true is the number/description is absent and false if number is present.
+     */
+    protected boolean isNumberOrDescriptionAbsent(){
+        return commandDescription.length() == lengthOfKeyword || commandDescription.length() == lengthOfKeyword + 1; //since the delete number appears after length of keyword/+1
+    }
 }

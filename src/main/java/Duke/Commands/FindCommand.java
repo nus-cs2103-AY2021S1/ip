@@ -38,7 +38,7 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            if (wordsToFindAbsent()) {
+            if (isNumberOrDescriptionAbsent()) {
                 throw new FindException(false, true, "");
             }
             String find = commandDescription.substring(5);
@@ -94,9 +94,6 @@ public class FindCommand extends Command {
         return s;
     }
 
-    private boolean wordsToFindAbsent(){
-        return commandDescription.length() == lengthOfKeyword || commandDescription.length() == lengthOfKeyword + 1;  //since keywords present after length of 5
-    }
 
 }
 

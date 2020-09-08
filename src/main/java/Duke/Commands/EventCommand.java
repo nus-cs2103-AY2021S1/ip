@@ -38,7 +38,7 @@ public class EventCommand extends AddCommand{
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            if (isDescriptionAbsent()) {
+            if (isNumberOrDescriptionAbsent()) {
                 throw new EventException(true, false, false, false, false);
             }
             String[] dataSplit = splitData(); //splits String into different of Event name, start and end time and/or date
@@ -50,14 +50,6 @@ public class EventCommand extends AddCommand{
         }
     }
 
-    /**
-     * checks whether the commandDescription contains the description
-     *
-     * @return true if description absent and false otherwise.
-     */
-    private boolean isDescriptionAbsent(){
-        return commandDescription.length() == lengthOfKeyword || commandDescription.length() == lengthOfKeyword + 1; // since description is present after index 6
-    }
     /**
      * splits the data into Deadline description and the Deadline date and/ or time. If the date and/or time is absent
      * then DeadlineException is thrown.

@@ -32,7 +32,7 @@ public class TodoCommand extends AddCommand{
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
         try {
-            if (isDescriptionAbsent()) {
+            if (isNumberOrDescriptionAbsent()) {
                 throw new TodoException();
             }
             ToDo t = new ToDo(todoDescription());
@@ -41,15 +41,6 @@ public class TodoCommand extends AddCommand{
             ui.setDukeException(dukeException);
             throw dukeException;
         }
-    }
-
-    /**
-     * checks whether the commandDescription contains the description
-     *
-     * @return true if description absent and false otherwise.
-     */
-    private boolean isDescriptionAbsent(){
-        return commandDescription.length() == lengthOfKeyword || commandDescription.length() == lengthOfKeyword + 1; //since if the description is absent length is only 4 or 5
     }
 
     /**

@@ -34,7 +34,7 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            if (isNumberAbsent()) {
+            if (isNumberOrDescriptionAbsent()) {
                 throw new DeleteException(true, false); //when number is absent
             } else {
                 int ID = Integer.parseInt(commandDescription.substring(lengthOfKeyword + 1));
@@ -48,15 +48,6 @@ public class DeleteCommand extends Command {
             ui.setDukeException(dukeException);
             throw dukeException;
         }
-    }
-
-    /**
-     * Returns whether the number is present.
-     *
-     * @return true is the number is absent and false if number is present.
-     */
-    private boolean isNumberAbsent(){
-        return commandDescription.length() == lengthOfKeyword || commandDescription.length() == lengthOfKeyword + 1; //since the delete number appears after length of 5
     }
 
     /**

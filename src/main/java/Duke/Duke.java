@@ -24,6 +24,7 @@ public class Duke {
      * the filePath mentioned is empty or absent
      *
      * @param filePath represents where the filepath of where the file may exist.
+     * @param shortFormPath contains all the pre user defined short forms
      */
     public Duke(String filePath, String shortFormPath) {
         ui = new Ui();

@@ -37,7 +37,7 @@ public class DeadlineCommand extends AddCommand {
      * description
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
-        if (isDescriptionAbsent()) {
+        if (isNumberOrDescriptionAbsent()) {
             ui.setDukeException(new DeadlineException(true, false, false));
             throw new DeadlineException(true, false, false); //Since description is absent
         }
@@ -50,15 +50,6 @@ public class DeadlineCommand extends AddCommand {
             ui.setDukeException(dukeException);
             throw dukeException;
         }
-    }
-
-    /**
-     * checks whether the commandDescription contains the description
-     *
-     * @return true if description absent and false otherwise.
-     */
-    private boolean isDescriptionAbsent(){
-        return commandDescription.length() == lengthOfKeyword || commandDescription.length() == lengthOfKeyword + 1; // since description can only appear after length of 9
     }
 
     /**

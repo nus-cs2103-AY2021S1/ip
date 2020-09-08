@@ -11,6 +11,9 @@ import Duke.Helpers.Ui;
 import java.io.FileWriter;
 import java.io.IOException;
 
+/**
+ * used to add short cuts
+ */
 public class ShortCutCommand extends Command{
 
     /**
@@ -24,18 +27,18 @@ public class ShortCutCommand extends Command{
     }
 
     /**
-     *
+     * Duke gives String depending on input, in this case that short cut has been added
      *
      * @param tasks used to access tasks in its list and change if necessary
      * @param ui
      * @param storage to change the input there if necessary
-     * @return
+     * @return String that short cut is added
      * @throws DukeException when the user input is wrong such as
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            if (isDescriptionAbsent()) {
+            if (isNumberOrDescriptionAbsent()) {
                 throw new ShortCutException(true, false, false, "");
             }
 
@@ -54,10 +57,15 @@ public class ShortCutCommand extends Command{
             throw dukeException;
         }
     }
-    private boolean isDescriptionAbsent(){
-        return commandDescription.length() == lengthOfKeyword || commandDescription.length() == lengthOfKeyword + 1; // since description can only appear after length of keyword
-    }
-    private String[] splitDescription(String input) throws ShortCutException {
+
+    /**
+     * splits input into original form and short form
+     *
+     * @param input by user
+     * @return String array containing original form index 0 and short form index 1
+     * @throws DukeException when there are errors in user input
+     */
+    private String[] splitDescription(String input) throws DukeException {
         boolean originalOfShortFormPresent = false;
         int index = -1;
         String originalKeyWord = "";
@@ -80,10 +88,23 @@ public class ShortCutCommand extends Command{
         return ShortCuts.getShortCuts().containsKey(input);
     }
 
+    /**
+     * Informs user that short cut has been added
+     *
+     * @return String that short cut is added
+     */
     private String shortCutMessage(){
         return "  short cut successfully added";
     }
 
+    /**
+     * adds new short cuts by user into file
+     *
+     * @param shortCut by user
+     * @param original duke function name
+     * @param storage where the file is contained in
+     * @throws DukeException thrown when file doesn't exist
+     */
     private void updateShortCutFile(String shortCut, String original, Storage storage) throws DukeException {
         try {
             FileWriter fw = new FileWriter(storage.getShortFormsFilePath(), true); //updates the file in storage as new task is added
@@ -93,6 +114,5 @@ public class ShortCutCommand extends Command{
         }catch (IOException i){
             throw new FileAbsentException(storage.getShortFormsFilePath());
         }
-
     }
 }

@@ -35,7 +35,6 @@ public class ExitCommand extends Command {
      * @throws DukeException not thrown
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        //System.out.println(exitMessage());
         return exitMessage();
     }
 
