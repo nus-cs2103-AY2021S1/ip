@@ -11,9 +11,9 @@ public class EventCommand extends Command {
     @Override
     public CommandResult execute(TaskList tasks, Storage storage) {
         String[] s = this.arguments.split(" /at ");
-        String desc = s[0];
+        String description = s[0];
         String at = s[1];
-        Task task = new Event(desc, at);
+        Task task = new Event(description, at);
         tasks.addTask(task);
         try {
             storage.save(tasks.getTasks());

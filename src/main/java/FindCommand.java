@@ -13,9 +13,9 @@ public class FindCommand extends Command {
     @Override
     public CommandResult execute(TaskList tasks, Storage storage) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
-        ArrayList<Task> taskList = tasks.getTasks();
+        ArrayList<Task> currentTasks = tasks.getTasks();
 
-        for (Task t : taskList) {
+        for (Task t : currentTasks) {
             if (t.getDescription().toLowerCase().contains(arguments.toLowerCase())) {
                 matchingTasks.add(t);
             }
