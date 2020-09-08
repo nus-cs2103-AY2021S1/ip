@@ -31,6 +31,11 @@ public class ConcreteTaskStub extends Task {
     }
 
     @Override
+    boolean isDuplicate(Object obj) {
+        return true;
+    }
+
+    @Override
     public boolean match(String test) {
         return true;
     }

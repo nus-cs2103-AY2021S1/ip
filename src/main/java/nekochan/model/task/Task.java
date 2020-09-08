@@ -58,6 +58,8 @@ public abstract class Task implements Encodable<Task>, Searchable {
 
     abstract boolean isSimilar(Object obj);
 
+    abstract boolean isDuplicate(Object obj);
+
     /**
      * Returns a new instance of this {@code Task} with the same details.
      *

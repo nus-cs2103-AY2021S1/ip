@@ -228,7 +228,7 @@ public class Event extends Task {
      * @return true if the {@code Object} is an {@code Event} and has the same details.
      */
     @Override
-    public boolean equals(Object obj) {
+    public boolean isDuplicate(Object obj) {
         if (obj == this) {
             return true;
         }

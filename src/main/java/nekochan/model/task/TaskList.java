@@ -57,7 +57,7 @@ public class TaskList {
      */
     public TaskList addTask(Task task) throws NekoSimilarTaskException, NekoDuplicateTaskException {
         // Do not add task if there is an exact copy.
-        boolean hasDuplicate = tasks.stream().anyMatch((x) -> x.equals(task));
+        boolean hasDuplicate = tasks.stream().anyMatch((x) -> x.isDuplicate(task));
         if (hasDuplicate) {
             throw new NekoDuplicateTaskException(Messages.DUPLICATE_TASK_ERROR);
         }

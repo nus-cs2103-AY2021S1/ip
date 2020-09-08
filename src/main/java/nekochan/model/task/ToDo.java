@@ -127,7 +127,7 @@ public class ToDo extends Task {
      * @return true if the {@code Object} is a {@code ToDo} and has the same details.
      */
     @Override
-    public boolean equals(Object obj) {
+    public boolean isDuplicate(Object obj) {
         if (obj == this) {
             return true;
         }

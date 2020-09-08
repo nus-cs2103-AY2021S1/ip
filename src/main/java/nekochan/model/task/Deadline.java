@@ -158,7 +158,7 @@ public class Deadline extends Task {
      * @return true if the {@code Object} is a {@code Deadline} and has the same details.
      */
     @Override
-    public boolean equals(Object obj) {
+    public boolean isDuplicate(Object obj) {
         if (obj == this) {
             return true;
         }

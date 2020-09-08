@@ -2,7 +2,6 @@ package nekochan.model.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -120,28 +119,28 @@ public class EventTest {
     @Test
     public void isSimilar_similarDeadline_true() {
         Event e1 = Event.createTask("Description from 20/03/2019 to 21/03/2019");
-        Event e2 = Event.createTask("description from 20/03/2019 to 21/03/2019");
+        Event e2 = Event.createTask("description from 20/03/2019 to 21/03/2019").setCompleted();;;
         assertTrue(e1.isSimilar(e2));
     }
 
     @Test
     public void isSimilar_differentDate_false() {
         Event e1 = Event.createTask("Description from 20/03/2019 to 22/03/2019");
-        Event e2 = Event.createTask("description from 20/03/2019 to 21/03/2019");
+        Event e2 = Event.createTask("description from 20/03/2019 to 21/03/2019").setCompleted();;;
         assertFalse(e1.isSimilar(e2));
     }
 
     @Test
     public void equals_sameDeadline_true() {
         Event e1 = Event.createTask("Description from 20/03/2019 to 21/03/2019");
-        Event e2 = Event.createTask("Description from 20/03/2019 to 21/03/2019");
-        assertEquals(e1, e2);
+        Event e2 = Event.createTask("Description from 20/03/2019 to 21/03/2019").setCompleted();;;
+        assertTrue(e1.isDuplicate(e2));
     }
 
     @Test
     public void equals_similarDeadline_false() {
         Event e1 = Event.createTask("Description from 20/03/2019 to 21/03/2019");
-        Event e2 = Event.createTask("description from 20/03/2019 to 21/03/2019");
-        assertNotEquals(e1, e2);
+        Event e2 = Event.createTask("description from 20/03/2019 to 21/03/2019").setCompleted();;;
+        assertFalse(e1.isDuplicate(e2));
     }
 }
