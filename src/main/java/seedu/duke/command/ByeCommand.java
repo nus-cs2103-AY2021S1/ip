@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.command;
 
 /**
  * A command that represents shutting down Duke.
@@ -16,4 +16,5 @@ public class ByeCommand extends Command {
     public boolean isExit() {
         return true;
     }
+
 }

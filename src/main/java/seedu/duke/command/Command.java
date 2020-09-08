@@ -1,4 +1,8 @@
-package seedu.duke;
+package seedu.duke.command;
+
+import seedu.duke.exception.DukeException;
+import seedu.duke.TaskList;
+import seedu.duke.Ui;
 
 /**
  * Class that represents user commands.

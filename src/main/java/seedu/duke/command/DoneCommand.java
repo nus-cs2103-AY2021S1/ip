@@ -1,4 +1,9 @@
-package seedu.duke;
+package seedu.duke.command;
+
+import seedu.duke.*;
+import seedu.duke.exception.DukeException;
+import seedu.duke.exception.DukeNotSureException;
+import seedu.duke.task.Task;
 
 /**
  * Class that represents marking a task as done.

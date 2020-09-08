@@ -10,32 +10,22 @@ import java.util.Scanner;
 public class Ui {
 
     private final Scanner in;
-    private final PrintStream out;
 
     public Ui() {
-        this(System.in, System.out);
+        this(System.in);
     }
 
-    public Ui(InputStream in, PrintStream out) {
+    public Ui(InputStream in) {
         this.in = new Scanner(in);
-        this.out = out;
-    }
-
-    /**
-     * Prints a line separator.
-     */
-    public void linePrinter() {
-        System.out.println("\n---------------------------------------\n");
     }
 
     /**
      * Prints the starting introduction of Duke.
      */
     public void start() {
-        linePrinter();
         printResult("Hey I'm Duke...\n" +
-                "What do you wanna do?");
-        linePrinter();
+                "What do you wanna do?\n" +
+                "I ain't got all day.");
     }
 
     /**
@@ -51,7 +41,7 @@ public class Ui {
     public void bye() {
         String byeText = "Running away huh??";
         printResult(byeText);
-        linePrinter();
+        System.exit(0);
     }
 
     /**
@@ -75,7 +65,7 @@ public class Ui {
      * @param lines String representing the output from Duke.
      */
     public void printResult(String lines) {
-        System.out.println(lines.replaceAll("(?m)^", "\t"));
+        System.out.println(lines);
     }
 
 }

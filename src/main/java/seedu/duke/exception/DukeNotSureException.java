@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.exception;
 
 /**
  * Exception that happens when there is an error in user input.

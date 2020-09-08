@@ -1,4 +1,9 @@
-package seedu.duke;
+package seedu.duke.command;
+
+import seedu.duke.exception.DukeNotSureException;
+import seedu.duke.task.Task;
+import seedu.duke.TaskList;
+import seedu.duke.Ui;
 
 /**
  * A command that deletes a task.

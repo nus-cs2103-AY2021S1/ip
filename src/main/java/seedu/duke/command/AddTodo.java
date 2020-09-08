@@ -1,4 +1,9 @@
-package seedu.duke;
+package seedu.duke.command;
+
+import seedu.duke.TaskList;
+import seedu.duke.Ui;
+import seedu.duke.command.AddCommand;
+import seedu.duke.task.ToDo;
 
 /**
  * Class that represents adding a todo task.

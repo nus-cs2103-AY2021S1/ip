@@ -1,15 +1,15 @@
-package seedu.duke;
+package seedu.duke.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Class that represents an event task.
+ * Class that represents a task that has a deadline.
  */
-public class Event extends Task {
-    protected LocalDateTime time;
+public class Deadline extends Task {
+    private LocalDateTime time;
 
-    public Event(String name, LocalDateTime time, boolean status) {
+    public Deadline(String name, LocalDateTime time, boolean status) {
         super(name, status);
         this.time = time;
     }
@@ -20,7 +20,7 @@ public class Event extends Task {
      */
     @Override
     public String getStatus() {
-        return "[E]" + super.getStatus() + " (at: "
+        return "[D]" + super.getStatus() + " (by: "
                 + this.time.format(DateTimeFormatter.ofPattern("d MMM yyyy kkmm")) + ")";
     }
 
@@ -38,6 +38,6 @@ public class Event extends Task {
      */
     @Override
     public String getType() {
-        return "E";
+        return "D";
     }
 }

@@ -1,5 +1,9 @@
 package seedu.duke;
 
+import seedu.duke.command.*;
+import seedu.duke.exception.DukeException;
+import seedu.duke.exception.DukeNotSureException;
+
 /**
  * Takes care of parsing user commands.
  */

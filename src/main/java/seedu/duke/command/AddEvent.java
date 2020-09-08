@@ -1,18 +1,22 @@
-package seedu.duke;
+package seedu.duke.command;
+
+import seedu.duke.TaskList;
+import seedu.duke.Ui;
+import seedu.duke.command.AddCommand;
+import seedu.duke.task.Event;
 
 import java.time.DateTimeException;
-
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Locale;
 
 /**
- * Class that represents adding a task with a deadline.
+ * Class that represents adding an event task.
  */
-public class AddDeadline extends AddCommand {
+public class AddEvent extends AddCommand {
     public static DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d MMM yyyy kkmm", Locale.ENGLISH);
 
-    public AddDeadline(String[] words) {
+    public AddEvent(String[] words) {
         super(words);
     }
 
@@ -26,10 +30,10 @@ public class AddDeadline extends AddCommand {
     public void execute(TaskList ls, Ui ui) throws DateTimeException {
         String[] input = words[1].split(" /by ");
         LocalDateTime day = LocalDateTime.parse(input[1], FORMATTER);
-        Deadline newDL = new Deadline(input[0], day, false);
-        ls.add(newDL);
+        Event newE = new Event(input[0], day, false);
+        ls.add(newE);
         String thing = "Alright then, add more things to your ever-growing list of tasks:\n"
-                + newDL.getStatus().replaceAll("(?m)^", "\t")
+                + newE.getStatus().replaceAll("(?m)^", "\t")
                 + "\nNow you have " + ls.size() + " tasks in the list.";
         ui.printResult(thing);
     }

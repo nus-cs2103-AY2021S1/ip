@@ -1,4 +1,4 @@
-package seedu.duke;
+package seedu.duke.command;
 
 /**
  * Class that represents adding a task.
