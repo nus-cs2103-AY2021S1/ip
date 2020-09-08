@@ -51,13 +51,16 @@ public class Storage {
 
     String convertTaskToText (Task task) {
         if (task instanceof TodoTask) {
-            return "T" + " | " + (task.getIsDone() ? "1" : "0") + " | " + task.getDescription();
+            return "T" + " | " + (task.getIsDone() ? "1" : "0") + " | " + task.getDescription()
+                   + " | " + task.getPriority();
         } else if (task instanceof DeadlineTask) {
             return "D" + " | " + (task.getIsDone() ? "1" : "0") + " | " + task.getDescription() + " | "
-                    + ((DeadlineTask) task).getDeadline().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+                    + ((DeadlineTask) task).getDeadline().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"))
+                    + " | " + task.getPriority();
         } else {
             return "E" + " | " + (task.getIsDone() ? "1" : "0") + " | " + task.getDescription() + " | "
-                    + ((EventTask) task).getTiming().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"));
+                    + ((EventTask) task).getTiming().format(DateTimeFormatter.ofPattern("dd-MM-yyyy HH:mm"))
+                    + " | " + task.getPriority();
         }
     }
 
