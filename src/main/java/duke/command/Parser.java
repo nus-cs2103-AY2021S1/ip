@@ -168,7 +168,7 @@ public class Parser {
         try {
             parsedIndex = Integer.parseInt(index) - 1;
         } catch (NumberFormatException e) {
-            throw new DukeException("Please input a number for the task number.");
+            throw new DukeException("Please use a number for the task number.");
         }
         switch(com) {
         case("done"):
@@ -196,6 +196,9 @@ public class Parser {
                 throw new DukeException("Please choose a task to view, using \"view <task number>\"");
             }
             Task currentTask = list.getTask(parsedIndex);
+            if (currentTask == null) {
+                throw new DukeException("Please choose a valid task number to view");
+            }
             return currentTask.getFullTask();
         default:
             throw new DukeException("Something went wrong with processing the command! Please try again!");
