@@ -43,7 +43,6 @@ public class Task {
    * @return Whether task name matches
    */
   public boolean matchesWordList(String[] words) {
-    String[] getWords = taskName.split(" ");
     boolean matchesTask = false;
     for (String word : words) {
       if (matchesWord(word)) {
