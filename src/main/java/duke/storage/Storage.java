@@ -55,15 +55,15 @@ public class Storage {
         try {
             Scanner scanner = new Scanner(file);
             TaskList taskList = new TaskList();
-            while (scanner.hasNext()) {
-                String line = scanner.nextLine();
-                try {
-                    taskList.add(createTask(line));
-                } catch (InvalidSaveException e) {
-                    System.err.println("Not a valid line: " + line);
-                    continue;
-                }
-            }
+            scanner.useDelimiter("\n");
+            scanner.tokens()
+                    .forEach(line -> {
+                        try {
+                            taskList.add(createTask(line));
+                        } catch (InvalidSaveException e) {
+                            System.err.println("Not a valid save line: " + line);
+                        }
+                    });
             return taskList;
         } catch (FileNotFoundException e1) {
             try {
