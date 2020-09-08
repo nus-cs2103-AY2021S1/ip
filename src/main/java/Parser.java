@@ -9,14 +9,20 @@ public class Parser {
     public static String DONE = "done";
     public static String DELETE = "delete";
     public static String FIND = "find";
-    public static String LIST = "list";
+    public static String LIST = "tasks";
     public static String CLEAR = "clear";
+    public static String NEW = "new";
+    public static String NOTES = "notes";
+    public static String VIEW = "view";
+    public static String COMPLETE = "complete";
     public static int TODO_LENGTH = "todo ".length();
     public static int DEADLINE_LENGTH = "deadline ".length();
     public static int EVENT_LENGTH = "event ".length();
     public static int DONE_LENGTH = "done ".length();
     public static int DELETE_LENGTH = "delete ".length();
     public static int FIND_LENGTH = "find ".length();
+    public static int VIEW_LENGTH = "view ".length();
+    public static int NEW_LENGTH = "new ".length();
     public static int AT_LENGTH = "/at ".length();
     public static int BY_LENGTH = "/by ".length();
     public static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d/M/yy HHmm");
@@ -26,8 +32,12 @@ public class Parser {
      * @param in The string to be parsed.
      * @return The command called by the input string.
      */
-    public static Command parse(String in) {
-        if ("".equals(in)) {
+    public static Command parse(String in, boolean isWriting) {
+        if (in.startsWith(COMPLETE)){
+            return Command.COMPLETE;
+        } else if (isWriting) {
+            return Command.WRITE;
+        } else if ("".equals(in)) {
             return Command.BLANK;
         } else if (in.equals(CLEAR)) {
             return Command.CLEAR;
@@ -39,6 +49,12 @@ public class Parser {
             return Command.DELETE;
         } else if (in.startsWith(FIND)){
             return Command.FIND;
+        } else if (in.startsWith(NEW)){
+            return Command.NEW;
+        } else if (in.startsWith(NOTES)){
+            return Command.NOTES;
+        } else if (in.startsWith(VIEW)){
+            return Command.VIEW;
         } else if (in.startsWith(TODO) || in.startsWith(DEADLINE) || in.startsWith(EVENT)){
             return Command.ADD;
         } else {

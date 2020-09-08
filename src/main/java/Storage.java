@@ -21,9 +21,32 @@ public class Storage {
      *
      * @param taskList The list of tasks.
      */
-    public void save(List<Task> taskList) {
+    public void saveTasks(List<Task> taskList) {
         String toWrite = "";
         for (Task t : taskList) {
+            toWrite += t.saveText();
+            toWrite += "\n";
+        }
+        try {
+            File tasks = new File(filePath);
+            tasks.createNewFile();
+            FileWriter myWriter = new FileWriter(tasks);
+            myWriter.write(toWrite);
+            myWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred while saving the task list! D:");
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Converts all notes in the list to a string and writes that to the save file.
+     *
+     * @param noteList The list of notes.
+     */
+    public void saveNotes(List<Note> noteList) {
+        String toWrite = "";
+        for (Note t : noteList) {
             toWrite += t.saveText();
             toWrite += "\n";
         }
@@ -44,7 +67,7 @@ public class Storage {
      *
      * @return List of Tasks that is converted from text.
      */
-    public List<Task> read() {
+    public List<Task> readTasks() {
         List<Task> result = new ArrayList<Task>();
         File myObj = new File(filePath);
 
@@ -52,7 +75,7 @@ public class Storage {
             if (!myObj.exists()) {
                 createFile(myObj);
             }
-            readFile(result, myObj);
+            readFileTasks(result, myObj);
         } catch (FileNotFoundException e) {
             System.out.println("An error occurred while trying to read the task list save file!");
             e.printStackTrace();
@@ -60,13 +83,46 @@ public class Storage {
         return result;
     }
 
-    private void readFile(List<Task> result, File myObj) throws FileNotFoundException {
+    /**
+     * Converts the text in the save file back to Notes.
+     *
+     * @return List of Notes that is converted from text.
+     */
+    public List<Note> readNotes() {
+        List<Note> result = new ArrayList<Note>();
+        File myObj = new File(filePath);
+
+        try {
+            if (!myObj.exists()) {
+                createFile(myObj);
+            }
+            readFileNotes(result, myObj);
+        } catch (FileNotFoundException e) {
+            System.out.println("An error occurred while trying to read the task list save file!");
+            e.printStackTrace();
+        }
+        return result;
+    }
+
+    private void readFileTasks(List<Task> result, File myObj) throws FileNotFoundException {
         Scanner myReader;
         myReader = new Scanner(myObj);
         while (myReader.hasNextLine()) {
             String data = myReader.nextLine();
             result.add(Task.readText(data));
         }
+        myReader.close();
+    }
+
+    private void readFileNotes(List<Note> result, File myObj) throws FileNotFoundException {
+        Scanner myReader;
+        myReader = new Scanner(myObj);
+        StringBuilder text = new StringBuilder();
+        while (myReader.hasNextLine()) {
+            String data = myReader.nextLine();
+            text.append(data);
+        }
+        Note.readAllText(result,text.toString());
         myReader.close();
     }
 
@@ -83,6 +139,6 @@ public class Storage {
      * Clears the save file of all text.
      */
     public void clear() {
-        save(new ArrayList<Task>());
+        saveTasks(new ArrayList<Task>());
     }
 }
