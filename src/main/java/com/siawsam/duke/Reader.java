@@ -10,16 +10,20 @@ import java.io.ObjectInputStream;
  */
 public class Reader {
     /**
-     * Checks if a file exists.
+     * Checks if a list of files exists.
      *
-     * @param path The file path to check.
-     * @return True if the file exists, False otherwise.
+     * @param filePaths The file paths to check.
+     * @return True if all files exist, False otherwise.
      */
-    static boolean doFilesExist(String taskListFilePath, String tagsFilePath) {
-        File taskListFile = new File(taskListFilePath);
-        File tagsFile = new File(tagsFilePath);
-        return taskListFile.exists() && taskListFile.isFile()
-                && tagsFile.exists() && tagsFile.isFile();
+    static boolean doFilesExist(String... filePaths) {
+        for (String path : filePaths) {
+            File file = new File(path);
+            boolean isInvalidFile = !(file.exists() && file.isFile());
+            if (isInvalidFile) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
