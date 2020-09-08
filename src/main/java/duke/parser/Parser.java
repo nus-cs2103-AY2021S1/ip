@@ -45,7 +45,7 @@ public class Parser {
      * @return An integer array that consists of task number(s).
      * @throws DukeException If integer array is empty.
      */
-    public static int[] parse(String inputString) throws DukeException {
+    public static int[] parseMultipleTasks(String inputString) throws DukeException {
         int[] taskNumbers;
         if (inputString.isBlank()) {
             throw new DukeException("Yo! Enter the task numbers(s).");
