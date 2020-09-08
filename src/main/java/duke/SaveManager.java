@@ -89,6 +89,8 @@ public class SaveManager {
         // Convert Tasks in taskManager to save data format
         taskManager.forEach(task -> saveData[0] += this.toSaveFormat(task.convertToHashMap()));
 
+        assert saveData.length == 1;
+
         // Attempts to write to save file
         try {
             BufferedWriter bw = Files.newBufferedWriter(this.saveFilePath);

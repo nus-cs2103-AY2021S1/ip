@@ -51,6 +51,8 @@ public class FindCommand extends ComplexCommand {
                     + "Use case: list <key words>");
         }
 
+        assert this.params.length() > 0;
+
         return this.params;
 
     }

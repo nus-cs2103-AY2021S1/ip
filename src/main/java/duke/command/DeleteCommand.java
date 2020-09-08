@@ -67,6 +67,8 @@ public class DeleteCommand extends ComplexCommand {
             throw new DukeInputException("Index input out of range");
         }
 
+        assert index > 0 && index <= taskManagerSize;
+
         return index;
     }
 

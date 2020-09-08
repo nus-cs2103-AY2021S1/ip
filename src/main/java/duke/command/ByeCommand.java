@@ -37,6 +37,8 @@ public class ByeCommand extends Command {
             ui.displayException(e);
         }
 
+        assert this.isByeCommand;
+
     }
 
 }

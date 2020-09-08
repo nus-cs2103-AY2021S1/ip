@@ -57,6 +57,8 @@ public class DateTimeParser {
             }
         }
 
+        assert dateTimeSplit.length == 1;
+
         return new DateTime(date);
     }
 

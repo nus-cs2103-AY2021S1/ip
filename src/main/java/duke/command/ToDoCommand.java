@@ -52,6 +52,8 @@ public class ToDoCommand extends ComplexCommand {
                     + "Use case: todo <name>");
         }
 
+        assert this.params.length() > 0;
+
         return this.params;
     }
 

@@ -102,6 +102,8 @@ public class Duke {
                     break;
                 }
 
+                assert !command.isByeCommand();
+
             } catch (DukeInputException e) {
                 ui.displayException(e);
             }

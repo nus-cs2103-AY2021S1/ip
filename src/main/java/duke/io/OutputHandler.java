@@ -51,8 +51,13 @@ public class OutputHandler {
     /**
      * Concatenates messages in buffer then displays them.
      * Buffer is then cleared.
+     * No displaying occurs if buffer is empty.
      */
     public void flush() {
+
+        if (this.isEmpty()) {
+            return;
+        }
 
         // Concatenate messages in buffer
         String stringToPrint = this.outputBuffer
@@ -62,6 +67,8 @@ public class OutputHandler {
         printNow(stringToPrint);
 
         this.outputBuffer.clear();
+
+        assert this.isEmpty();
     }
 
 }
