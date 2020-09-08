@@ -1,11 +1,11 @@
 package duke.commands;
 
 import duke.Storage;
-import duke.tasklist.TaskList;
 import duke.Ui;
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeInvalidIndexException;
 import duke.task.Task;
+import duke.tasklist.TaskList;
 
 /**
  * Handles the deletion of a task in the chatbot.

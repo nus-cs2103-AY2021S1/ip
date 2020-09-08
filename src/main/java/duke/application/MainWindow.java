@@ -1,7 +1,6 @@
 package duke.application;
 
 import duke.Duke;
-import duke.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -37,6 +36,9 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    /**
+     * Displays the greetings to users.
+     */
     public void greetUser() {
         String introAndReminder = duke.getResponse("reminder");
         addToDialogContainer(
@@ -66,7 +68,5 @@ public class MainWindow extends AnchorPane {
             System.exit(0);
         }
         userInput.clear();
-
-
     }
 }

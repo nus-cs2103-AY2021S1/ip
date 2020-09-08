@@ -1,10 +1,9 @@
 package duke.commands;
 
 import duke.Storage;
-import duke.tasklist.TaskList;
 import duke.Ui;
 import duke.exceptions.DukeException;
-
+import duke.tasklist.TaskList;
 
 /**
  * The interface of commands.

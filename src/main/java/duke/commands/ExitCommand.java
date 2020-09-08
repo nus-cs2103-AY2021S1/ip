@@ -1,8 +1,8 @@
 package duke.commands;
 
 import duke.Storage;
-import duke.tasklist.TaskList;
 import duke.Ui;
+import duke.tasklist.TaskList;
 
 /**
  * Handles exit command of the chatbot.

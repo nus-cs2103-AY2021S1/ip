@@ -127,7 +127,12 @@ public class Ui {
                 .append("\n");
         return buffer.toString();
     }
-    
+
+    /**
+     * Displays the current deadlines/events this week.
+     * @param weeklyTasks The deadlines/events this week.
+     * @return The string version of the deadlines/events this week in proper format.
+     */
     public String currentWeekTasks(List<Task> weeklyTasks) {
         StringBuilder buffer = new StringBuilder();
         if (weeklyTasks.size() == 0) {

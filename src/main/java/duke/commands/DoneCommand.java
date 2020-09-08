@@ -1,12 +1,12 @@
 package duke.commands;
 
 import duke.Storage;
-import duke.tasklist.TaskList;
 import duke.Ui;
 import duke.exceptions.DukeAlreadyDoneException;
 import duke.exceptions.DukeException;
 import duke.exceptions.DukeInvalidIndexException;
 import duke.task.Task;
+import duke.tasklist.TaskList;
 
 /**
  * Handles the marking of a task as done in the chatbot.

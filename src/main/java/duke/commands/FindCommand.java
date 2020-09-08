@@ -1,9 +1,9 @@
 package duke.commands;
 
 import duke.Storage;
-import duke.tasklist.tasklistfilter.SearchFilter;
-import duke.tasklist.TaskList;
 import duke.Ui;
+import duke.tasklist.TaskList;
+import duke.tasklist.tasklistfilter.SearchFilter;
 import duke.tasklist.tasklistfilter.TaskListFilter;
 
 /**
