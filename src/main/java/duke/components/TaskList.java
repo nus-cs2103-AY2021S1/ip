@@ -57,6 +57,7 @@ public class TaskList {
 
         Task currentTask = null;
         if (date == null) {
+            assert description.substring(0, 4).equals("todo") : "description should start with 'todo'";
             try {
                 currentTask = new ToDo(description);
                 myList.add(currentTask);
@@ -67,6 +68,8 @@ public class TaskList {
 
         } else if (time == null) {
             try {
+                assert description.substring(0, 8).equals("deadline") :
+                        "description should start with 'deadline'";
                 currentTask = new Deadline(description, date);
                 myList.add(currentTask);
 
@@ -76,6 +79,7 @@ public class TaskList {
 
         } else {
             try {
+                assert description.substring(0, 5).equals("event") : "description should start with 'event'";
                 currentTask = new Event(description, date, time);
                 myList.add(currentTask);
 
