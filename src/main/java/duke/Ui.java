@@ -107,7 +107,7 @@ public class Ui {
         ArrayList<String> toPrint = new ArrayList<>();
         toPrint.add(String.format("You currently have %d task(s)", taskList.size()));
         for (int i = 0; i < taskList.size(); i++) {
-            toPrint.add(String.format("%d.%s", i + 1, taskList.get(i)));
+            toPrint.add(String.format("%d. %s", i + 1, taskList.get(i)));
         }
         return generateResponseCollection(toPrint);
     }
@@ -119,10 +119,11 @@ public class Ui {
      * @param taskList The taskList.
      */
     public String generateTaskListString(String message, TaskList taskList) {
+        assert(message != null && !message.equals("")); // called this function even without a special message
         ArrayList<String> toPrint = new ArrayList<>();
         toPrint.add(message);
         for (int i = 0; i < taskList.size(); i++) {
-            toPrint.add(String.format("%d.%s", i + 1, taskList.get(i)));
+            toPrint.add(String.format("%d. %s", i + 1, taskList.get(i)));
         }
         return generateResponseCollection(toPrint);
     }
