@@ -15,7 +15,7 @@ public class TaskListTest {
     @Test
     public void addTask() {
         String actResult = this.taskList.addTask(Command.TODO, "borrow book");
-        String expResult =  "Got it. MUG has added this task:\n"
+        String expResult = "Got it. MUG has added this task:\n"
                 + "[T][\u2718] borrow book"
                 + "\nNow you have "
                 + 3
