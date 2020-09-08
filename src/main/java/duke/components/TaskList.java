@@ -100,11 +100,12 @@ public class TaskList {
     }
     public ArrayList<Task> findTasks(String keyword){
         ArrayList<Task> findList = new ArrayList<>();
-        for(int i = 0 ; i < myList.size();i++){
-            if(myList.get(i).getDescription().contains(keyword)){
-                findList.add(myList.get(i));
+
+        myList.forEach(task-> {
+            if (task.getDescription().contains(keyword)) {
+                findList.add(task);
             }
-        }
+        } );
         return findList;
     }
 
