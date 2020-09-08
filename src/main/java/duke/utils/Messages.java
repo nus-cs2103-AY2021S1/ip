@@ -19,12 +19,16 @@ public class Messages {
             + "The correct command is:\nfind <keyword>";
     public static final String INVALID_TODAY_COMMAND = "OOPS!!! Invalid Today Command.\n"
             + "The correct command is:\ntoday";
-    public static final String INVALID_UNCOMPLETED_COMMAND = "OOPS!!! Invalid Uncompleted Command. \n"
+    public static final String INVALID_UNCOMPLETED_COMMAND = "OOPS!!! Invalid Uncompleted Command.\n"
             + "The correct command is:\nuncompleted";
-    public static final String INVALID_COMPLETED_COMMAND = "OOPS!! Invalid Completed Command. \n"
+    public static final String INVALID_COMPLETED_COMMAND = "OOPS!! Invalid Completed Command.\n"
             + "The correct command is:\ncompleted";
-    public static final String INVALID_OVERDUE_COMMAND = "OOPS!! Invalid Overdue Command. \n"
+    public static final String INVALID_OVERDUE_COMMAND = "OOPS!! Invalid Overdue Command.\n"
             + "The correct command is:\noverdue";
+    public static final String INVALID_TAG_COMMAND = "OOPS! Invalid Tag Command.\n"
+            + "The correct command is:\ntag <task index> #<tag name>";
+    public static final String INVALID_TAG_FORMAT_COMMAND = "Oh no! Looks like you have inputted the wrong format."
+            + "The correct command should be:\ntag <task index> #<tag name>";
     public static final String INVALID_DATE_TIME_FORMAT = "OOPS!! You have inputted an incorrect date and time format";
     public static final String MISSING_DATE_AND_TIME_FOR_DEADLINE = "OOPS!!! Missing date/time.\n"
             + "Correct command is:\ndeadline <task description> /by <datetime>";

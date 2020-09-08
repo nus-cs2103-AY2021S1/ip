@@ -10,13 +10,9 @@ public class Todo extends Task {
         super(content);
     }
 
-    public Todo(String content, boolean isDone) {
-        super(content, isDone);
-    }
-
     @Override
     public String toDataFileFormat() {
-        return String.format("T | %d | %s", isDone ? 1 : 0, content);
+        return String.format("T | %d | %s | %s", isDone ? 1 : 0, tagName, content);
     }
 
     @Override

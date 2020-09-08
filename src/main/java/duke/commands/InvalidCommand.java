@@ -1,7 +1,7 @@
 package duke.commands;
 
 import duke.exceptions.DukeException;
-import duke.storage.Storage;
+
 import duke.task.TaskManager;
 
 public class InvalidCommand extends Command {
@@ -12,7 +12,7 @@ public class InvalidCommand extends Command {
     }
 
     @Override
-    public CommandOutput executeCommand(TaskManager taskManger, Storage storage) throws DukeException {
+    public CommandOutput executeCommand(TaskManager taskManger) throws DukeException {
         throw new DukeException(errorMessage);
     }
 }

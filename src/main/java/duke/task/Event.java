@@ -15,11 +15,6 @@ public class Event extends Task implements TimeBased {
         this.dateTime = dateTime;
     }
 
-    public Event(String content, DukeDateTime dateTime, boolean isDone) {
-        super(content, isDone);
-        this.dateTime = dateTime;
-    }
-
     @Override
     public DukeDateTime getDukeDateTime() {
         return this.dateTime;
@@ -40,7 +35,7 @@ public class Event extends Task implements TimeBased {
 
     @Override
     public String toDataFileFormat() {
-        return String.format("E | %d | %s | %s", isDone ? 1 : 0, content, dateTime);
+        return String.format("E | %d | %s | %s | %s", isDone ? 1 : 0, tagName, content, dateTime);
     }
 
     @Override

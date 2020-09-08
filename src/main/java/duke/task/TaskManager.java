@@ -102,4 +102,10 @@ public class TaskManager {
         updatedTask.markTaskAsDone();
         tasks.set(taskIndex - 1, updatedTask);
     }
+
+    public void setTagToTask(int taskIndex, String tagName) {
+        Task task = tasks.get(taskIndex - 1);
+        task.setTag(tagName);
+        tasks.set(taskIndex - 1, task);
+    }
 }

@@ -1,3 +1,4 @@
-T | 0 | read book
-D | 1 | return book | 07 Sep 2020 9:00 AM
-E | 0 | project meeting | 07 Sep 2020 7:00 PM
+T | 1 | sports | read book
+T | 1 | sports | run 5KM
+E | 0 | school | school | 08 Sep 2020 6:00 PM
+D | 0 |  |  | 08 Sep 2020 5:30 PM

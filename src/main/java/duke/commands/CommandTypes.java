@@ -14,7 +14,7 @@ public enum CommandTypes {
     BYE {
         @Override
         public void checkInput(String input) throws DukeException {
-            String patternString = "^(?)bye\\s*$";
+            String patternString = "^(?i)bye\\s*$";
             if (!Pattern.matches(patternString, input)) {
                 throw new DukeException(Messages.INVALID_COMMAND_INPUT_MESSAGE);
             }
@@ -23,7 +23,7 @@ public enum CommandTypes {
     LIST {
         @Override
         public void checkInput(String input) throws DukeException {
-            String patternString = "^(?)list\\s*$";
+            String patternString = "^(?i)list\\s*$";
             if (!Pattern.matches(patternString, input)) {
                 throw new DukeException(Messages.INVALID_COMMAND_INPUT_MESSAGE);
             }
@@ -131,6 +131,25 @@ public enum CommandTypes {
             String content = input.replaceFirst("^overdue", "");
             if (!content.isBlank()) {
                 throw new DukeException(Messages.INVALID_OVERDUE_COMMAND);
+            }
+        }
+    },
+    TAG {
+        @Override
+        public void checkInput(String input) throws DukeException {
+            String userInputWithoutTagCommandTrimmed = input.replaceFirst("^(?i)tag", "").trim();
+            String[] userInputArgsWithoutTagCommand = userInputWithoutTagCommandTrimmed.split(" ");
+            if (userInputArgsWithoutTagCommand.length != 2) {
+                throw new DukeException(Messages.INVALID_TAG_FORMAT_COMMAND);
+            }
+            String patternString = "#\\w*";
+            if (!Pattern.matches(patternString, userInputArgsWithoutTagCommand[1])) {
+                throw new DukeException(Messages.INVALID_TAG_FORMAT_COMMAND);
+            }
+            try {
+                int taskToBeTaggedIndex = Integer.parseInt(userInputArgsWithoutTagCommand[0]);
+            } catch (NumberFormatException e) {
+                throw new DukeException(Messages.INVALID_TAG_COMMAND);
             }
         }
     };
