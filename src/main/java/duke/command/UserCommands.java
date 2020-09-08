@@ -15,6 +15,7 @@ enum UserCommands {
      * @param commandWord
      */
     UserCommands(String commandWord) {
+        assert commandWord != null;
         this.commandWord = commandWord;
     }
 

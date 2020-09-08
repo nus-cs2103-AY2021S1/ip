@@ -15,7 +15,6 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
-import duke.ui.Ui;
 
 /**
  * Represents the local storage of the program and stores the user's task list.
@@ -40,12 +39,12 @@ public class Storage {
      * Saves the task list in a file specified by the file path.
      *
      * @param tasks Task list to be saved as a file.
-     * @param ui User interface to display if an error occurs when saving the task list.
      * @throws SaveToStorageErrorException If file path is invalid.
      */
-    public void save(TaskList tasks, Ui ui) throws SaveToStorageErrorException {
+    public void save(TaskList tasks) throws SaveToStorageErrorException {
         List<String> taskListText = new ArrayList<>();
 
+        assert tasks.getTotalNumberOfTasks() > 0;
         // Convert each task into a string
         for (int i = 1; i <= tasks.getTotalNumberOfTasks(); i++) {
             Task task = tasks.getTask(i);
@@ -85,6 +84,8 @@ public class Storage {
 
             // Task list file already exists
         } else {
+            assert Files.exists(filePath);
+
             try {
                 List<Task> savedTaskList = readSavedTaskList(Files.readAllLines(filePath));
                 return new TaskList(savedTaskList);
@@ -144,6 +145,9 @@ public class Storage {
                 parseIsDoneStatus(event, taskIndicator);
 
                 savedTaskList.add(event);
+            } else {
+                // Should not reach here
+                assert false;
             }
         }
 
@@ -168,7 +172,9 @@ public class Storage {
      * @return Description and date of the deadline or event.
      */
     private static String[] parseTaskText(String taskText, String typeOfTask) {
+        assert taskText.contains(" (");
         String[] taskDescriptionAndDate = taskText.split(" \\(", 2);
+
         if (TaskList.TASK_DEADLINE_INDICATOR.equals(typeOfTask)) {
             String[] date = taskDescriptionAndDate[1].split(TEXT_DEADLINE_SEPARATOR);
             taskDescriptionAndDate[1] = date[1].substring(0, date[1].length() - 1);
@@ -190,6 +196,7 @@ public class Storage {
      * @param taskIndicator A tick if the task is done or a cross if the task is not done.
      */
     private static void parseIsDoneStatus(Task task, String taskIndicator) {
+        assert !task.hasDoneStatus();
         if (taskIndicator.contains(Task.STATUS_TICK)) {
             task.markAsDone();
         }
