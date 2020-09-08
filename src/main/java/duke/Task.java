@@ -41,6 +41,13 @@ public class Task {
     }
 
     /**
+     * Marks the task as incomplete.
+     */
+    public void markAsIncomplete() {
+        this.isDone = false;
+    }
+
+    /**
      * Returns an array of Strings representing the state of the task, to be passed to Storage to
      * be formatted and written to a file.
      * @return Array of Strings representing the current state of the Task.

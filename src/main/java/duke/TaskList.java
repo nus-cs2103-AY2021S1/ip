@@ -3,10 +3,19 @@ package duke;
 import java.util.ArrayList;
 
 public class TaskList {
-    private final ArrayList<Task> taskList;
+    private ArrayList<Task> taskList;
+    private Task lastModifiedTask;
+    private int lastModifiedIndex;
+    private Action mostRecentAction;
+    private boolean canUndo;
 
+    /**
+     * Creates a TaskList which contains all the tasks added by the user so far.
+     */
     public TaskList() {
         taskList = new ArrayList<>();
+        mostRecentAction = null;
+        canUndo = false;
     }
 
     /**
@@ -15,6 +24,10 @@ public class TaskList {
      */
     public void addTask(Task task) {
         taskList.add(task);
+        mostRecentAction = Action.ADDTASK;
+        canUndo = true;
+        lastModifiedTask = task;
+        lastModifiedIndex = taskList.size() - 1;
     }
 
     /**
@@ -22,7 +35,26 @@ public class TaskList {
      * @param index The index of the task to be deleted.
      */
     public void deleteTask(int index) {
+        lastModifiedIndex = index - 1;
+        lastModifiedTask = taskList.get(lastModifiedIndex);
         taskList.remove(index - 1);
+        mostRecentAction = Action.DELETETASK;
+        canUndo = true;
+    }
+
+    /**
+     * Marks the task at the specified 1-index as complete, and returns the completed task.
+     * @param index The index of the task to be marked complete.
+     * @return The task that has been marked as complete.
+     */
+    public Task markTaskComplete(int index) {
+        lastModifiedIndex = index - 1;
+        lastModifiedTask = taskList.get(lastModifiedIndex);
+        Task completedTask = taskList.get(index - 1);
+        completedTask.markAsDone();
+        canUndo = true;
+        mostRecentAction = Action.MARKTASKCOMPLETE;
+        return completedTask;
     }
 
     /**
@@ -78,4 +110,58 @@ public class TaskList {
         }
         return output;
     }
+
+    /**
+     * Removes the most recent task added to the TaskList.
+     */
+    public void undoAddTask() {
+        assert lastModifiedIndex == taskList.size() - 1;
+        taskList.remove(taskList.size() - 1);
+        canUndo = false;
+    }
+
+    /**
+     * Inserts the deleted task back into the TaskList.
+     */
+    public void undoDeleteTask() {
+        assert lastModifiedIndex < taskList.size();
+        taskList.add(lastModifiedIndex, lastModifiedTask);
+        canUndo = false;
+    }
+
+    /**
+     * Marks the recently completed task as incomplete.
+     */
+    public void undoMarkTaskComplete() {
+        assert lastModifiedIndex < taskList.size();
+        taskList.get(lastModifiedIndex).markAsIncomplete();
+        canUndo = false;
+    }
+
+    /**
+     * Undoes the previous action, restoring the internal tasklist to its previous state.
+     */
+    public void undo() {
+        if (canUndo) {
+            switch (mostRecentAction) {
+            case ADDTASK:
+                undoAddTask();
+                break;
+            case DELETETASK:
+                undoDeleteTask();
+                break;
+            case MARKTASKCOMPLETE:
+                undoMarkTaskComplete();
+                break;
+            default:
+                break;
+            }
+        }
+    }
+}
+
+enum Action {
+    ADDTASK,
+    DELETETASK,
+    MARKTASKCOMPLETE
 }
