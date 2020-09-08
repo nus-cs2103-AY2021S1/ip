@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.AddCommand;
+import duke.command.AddPriorityCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
@@ -51,9 +52,16 @@ public class Parser {
             return new ListCommand();
         case "find":
             return new FindCommand(commands[1]);
+        case "add priority":
+            return preparePriority(commands[1]);
         default:
             throw new InvalidCommandException("Invalid Command: " + commands[0]);
         }
+    }
+
+    static Command preparePriority(String command) {
+        String[] details = command.trim().split(" ");
+        return new AddPriorityCommand(Integer.valueOf(details[0]), Priority.valueOf(details[1].toUpperCase()));
     }
 
     /**
