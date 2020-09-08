@@ -81,6 +81,7 @@ public class Duke {
         try {
             Parser p = new Parser();
             Command c = p.parseCommand(input);
+            assert c != null;
             return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return e.toString();
