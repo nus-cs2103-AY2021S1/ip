@@ -32,6 +32,7 @@ public class Parser {
     protected Command commandHandler(String inputText) {
         try {
             String[] splitArr = inputText.split(" ");
+
             String command = splitArr[0];
 
             if (command.equals("find")) {
@@ -43,7 +44,7 @@ public class Parser {
                 return new ListCommand();
             } else if (command.equals("done")) {
                 if (splitArr.length == 1) {
-                    throw new UnknownTaskException("No juke.task number entered");
+                    throw new UnknownTaskException("No task number entered");
                 }
                 int taskNo = Integer.parseInt(splitArr[1]) - 1;
                 return new DoneCommand(taskNo);
@@ -84,7 +85,7 @@ public class Parser {
                 return new TaskCommand(new Event(description, at));
             } else if (command.equals("delete")) {
                 if (splitArr.length == 1) {
-                    throw new UnknownTaskException("No juke.task number entered");
+                    throw new UnknownTaskException("No task number entered");
                 }
                 int taskNo = Integer.parseInt(splitArr[1]) - 1;
                 return new DeleteCommand(taskNo);
