@@ -19,11 +19,14 @@ public class Parser {
      */
     public static String parse(TaskList lst, String msg) throws JimmyException {
 
+        assert msg != null : "msg should not be null";
+
         String[] arr = msg.split(" ");
         boolean isLong = arr.length > 1;
         String reply = "";
 
         if (!isLong) {
+
             switch (msg) {
 
             case "list":
@@ -67,8 +70,8 @@ public class Parser {
                 } else {
                     Task t = lst.getTask(index);
                     lst.del(index);
-                    reply = "Noted. I've removed this task:" + "\n\t  " + t +
-                        "\n\tNow you have " + lst.getNumTasks() + " tasks in the list.";
+                    reply = "Noted. I've removed this task:" + "\n\t  " + t
+                        + "\n\tNow you have " + lst.getNumTasks() + " tasks in the list.";
                 }
                 break;
 
@@ -84,8 +87,8 @@ public class Parser {
                     t = new Deadline(msg);
                 }
                 lst.addTask(t);
-                reply = "Got it. I've added this task:\n\t  " +
-                    t + "\n\tNow you have " + lst.getNumTasks()
+                reply = "Got it. I've added this task:\n\t  "
+                    + t + "\n\tNow you have " + lst.getNumTasks()
                     + " tasks in the list.";
                 break;
 
