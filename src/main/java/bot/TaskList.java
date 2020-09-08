@@ -36,6 +36,7 @@ public class TaskList {
      * @throws IllegalArgumentException the index given is invalid.
      */
     public Task get(int index) throws IllegalArgumentException {
+        assert index >= 0;
         try {
             return list.get(index);
         } catch (IllegalArgumentException | IndexOutOfBoundsException e) {
@@ -51,6 +52,7 @@ public class TaskList {
      * @throws IllegalArgumentException the index given is invalid.
      */
     public Task remove(int index) throws IllegalArgumentException {
+        assert index >= 0;
         try {
             Task task = this.list.get(index);
             this.list.remove(index);

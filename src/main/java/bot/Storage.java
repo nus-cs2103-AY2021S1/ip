@@ -40,6 +40,7 @@ public class Storage {
             System.out.println(responseWrapper(response));
             f.createNewFile();
         }
+        assert f.exists();
         String content = Files.readString(Paths.get(filePath), StandardCharsets.US_ASCII);
         String[] items = content.split("\n");
         for (String item : items) {
@@ -66,6 +67,7 @@ public class Storage {
 
     private Task lineToObj(String line) {
         String[] words = line.split(" \\| ");
+        assert words.length != 0;
         char firstChar = line.charAt(0);
         switch (firstChar) {
         case 'D':
