@@ -1,17 +1,17 @@
 package duke.command;
 
+import java.io.IOException;
+import java.util.ArrayList;
+
 import duke.error.IncorrectFormat;
 import duke.parts.Storage;
 import duke.parts.TaskList;
 import duke.parts.Ui;
 import duke.task.Task;
 
-import java.io.IOException;
-import java.util.ArrayList;
+public class FindCommand extends Command {
 
-public class FindCommand extends Command{
-
-    String input;
+    private String input;
 
     public FindCommand(String input) {
         this.input = input;

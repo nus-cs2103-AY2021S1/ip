@@ -1,16 +1,17 @@
 package duke.task;
 
-import duke.error.EventDateParseException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import duke.error.EventDateParseException;
+
 /**
  * Class that represents an event item in the taskList.
  */
-public class Event extends Task{
-    LocalDate time;
+public class Event extends Task {
+    private LocalDate time;
+
     public Event(String description, String time) throws EventDateParseException {
         super(description);
         try {
@@ -48,7 +49,7 @@ public class Event extends Task{
     @Override
     public String writeToFile() {
         int done = isDone ? 1 : 0;
-        return String.format("E//%d//%s//%s\n", done, this.description, this.time );
+        return String.format("E//%d//%s//%s\n", done, this.description, this.time);
     }
 
     /**

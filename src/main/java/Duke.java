@@ -1,3 +1,5 @@
+import java.io.IOException;
+
 import duke.command.Command;
 import duke.error.IncorrectFormat;
 import duke.error.UnknownAction;
@@ -5,8 +7,6 @@ import duke.parts.Parser;
 import duke.parts.Storage;
 import duke.parts.TaskList;
 import duke.parts.Ui;
-
-import java.io.IOException;
 
 public class Duke {
     private Storage storage;

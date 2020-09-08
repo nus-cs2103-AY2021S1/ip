@@ -28,7 +28,7 @@ public class ToDo extends Task {
     @Override
     public String writeToFile() {
         int done = isDone ? 1 : 0;
-        return String.format("T//%d//%s\n", done, this.description );
+        return String.format("T//%d//%s\n", done, this.description);
     }
 
     @Override

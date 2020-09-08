@@ -9,7 +9,7 @@ import duke.parts.Ui;
  * It is executed when the execute method is called.
  */
 
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
 
     /**
      * Executes the delete command.
