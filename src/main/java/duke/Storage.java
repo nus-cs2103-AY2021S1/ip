@@ -36,7 +36,7 @@ public class Storage {
                 File dir = new File(String.valueOf(path));
                 dir.mkdir();
             }
-            java.nio.file.Path filePath = java.nio.file.Paths.get(s, "src", "data", "duke.txt");
+            Path filePath = Paths.get(s, "src", "data", "duke.txt");
             dukeFilePath = String.valueOf(filePath);
             File f = new File(String.valueOf(filePath));
             if (!f.createNewFile()) {
@@ -68,6 +68,10 @@ public class Storage {
             if (data[1].equals("0")) {
                 todo.markAsDone();
             }
+            if (data.length == 4) {
+                String tag = data[3];
+                todo.addTag(tag);
+            }
             taskList.addTask(todo);
             break;
         case "D":
@@ -75,12 +79,20 @@ public class Storage {
             if (data[1].equals("0")) {
                 deadline.markAsDone();
             }
+            if (data.length == 5) {
+                String tag = data[4];
+                deadline.addTag(tag);
+            }
             taskList.addTask(deadline);
             break;
         case "E":
             Event event = new Event(data[2], data[3]);
             if (data[1].equals("0")) {
                 event.markAsDone();
+            }
+            if (data.length == 5) {
+                String tag = data[4];
+                event.addTag(tag);
             }
             taskList.addTask(event);
             break;
@@ -103,6 +115,9 @@ public class Storage {
                     writer.write(data[0] + "  " + data[1] + "  " + data[2] + System.lineSeparator());
                 } else if (data.length == 4) {
                     writer.write(data[0] + "  " + data[1] + "  " + data[2] + "  " + data[3] + System.lineSeparator());
+                } else if (data.length == 5) { // have tag
+                    writer.write(data[0] + "  " + data[1] + "  " + data[2] + "  "
+                            + data[3] + "  " + data[4] + System.lineSeparator());
                 }
             }
             writer.close();

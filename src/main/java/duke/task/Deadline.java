@@ -27,12 +27,21 @@ public class Deadline extends Task {
         } else {
             done = "1";
         }
-        String[] str = new String[]{"D", done, this.getTaskName(), byTime};
+        String[] str;
+        if (!this.isTagged()) {
+            str = new String[]{"D", done, this.getTaskName(), byTime};
+        } else {
+            str = new String[]{"D", done, this.getTaskName(), byTime, this.getTagName()};
+        }
         return str;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + byTime + ")";
+        if (!this.isTagged()) {
+            return "[D]" + super.toString() + " (by: " + byTime + ")";
+        } else {
+            return "[D]" + super.toString() + " (by: " + byTime + ") " + this.getTagName();
+        }
     }
 }

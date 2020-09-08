@@ -3,6 +3,8 @@ package duke.task;
 public class Task {
     private String taskName;
     private boolean isCompleted;
+    private String tagName;
+    private boolean isTagged = false;
 
     /**
      * Constructs a task object.
@@ -33,12 +35,39 @@ public class Task {
     }
 
     /**
+     * Returns true if the task is tagged, false if not done yet.
+     *
+     * @return Boolean indicating tag of task.
+     */
+    public boolean isTagged() {
+        return isTagged;
+    }
+
+    /**
+     * Returns the tag name of the task.
+     *
+     * @return Tag name.
+     */
+    public String getTagName() {
+        return this.tagName;
+    }
+
+    /**
      * Marks the task as done or completed.
      */
     public void markAsDone() {
         isCompleted = true;
     }
 
+    /**
+     * Adds tag to task.
+     *
+     * @param tag
+     */
+    public void addTag(String tag) {
+        this.tagName = tag;
+        this.isTagged = true;
+    }
     /**
      * Returns the task in array form.
      *

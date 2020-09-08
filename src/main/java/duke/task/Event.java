@@ -27,12 +27,21 @@ public class Event extends Task {
         } else {
             done = "1";
         }
-        String[] str = new String[]{"E", done, this.getTaskName(), atTime};
+        String[] str;
+        if (!this.isTagged()) {
+            str = new String[]{"E", done, this.getTaskName(), atTime};
+        } else {
+            str = new String[]{"E", done, this.getTaskName(), atTime, this.getTagName()};
+        }
         return str;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + atTime + ")";
+        if (!this.isTagged()) {
+            return "[E]" + super.toString() + " (at: " + atTime + ")";
+        } else {
+            return "[E]" + super.toString() + " (at: " + atTime + ") " + this.getTagName();
+        }
     }
 }
