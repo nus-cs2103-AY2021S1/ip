@@ -22,8 +22,7 @@ public class Parser {
     }
 
     /**
-     * Returns a boolean value for others to know if the Parser
-     * object is still running.
+     * Returns a boolean value for others to know if the Parser object is still running.
      *
      * @return boolean value of isRunning.
      */
@@ -32,144 +31,7 @@ public class Parser {
     }
 
     /**
-     * Processes user input for classification and execution.
-     *
-     * @param str is the line of String obtained from user input.
-     *
-     * Reads and makes sense of user input commands which includes:
-     * (bye, list, todo, deadline, event, delete)
-     *
-     * It then executes the commands.
-     *
-     * @throws DukeException when command is wrong, unidentifiable or missing.
-     */
-    public void checkUserInput(String str) throws DukeException {
-        System.out.println("    _______________________________________________________________________");
-
-        str = str.trim();
-        int commandSpace = str.indexOf(" ");
-
-        if (str.length() < 3) {
-            throw new DukeException("*Invalid command.*\n"
-                    + "     Commands: bye, list, todo, event, deadline, delete");
-
-        } else if (str.equals("bye")) {
-            close();
-
-        } else if (str.equals("list")) {
-            displayList();
-
-        } else if (commandSpace < 0) {
-            throw new DukeException("*Invalid command.*\n"
-                    + "     Commands: bye, list, todo, event, deadline, delete");
-
-        } else if (str.substring(0, 5).equals("done ")) {
-            int length = str.length();
-            String index = str.substring(5, length);
-            int realIndex = Integer.parseInt(index) - 1;
-
-            if (realIndex >= this.tasks.getLength() || realIndex < 0) {
-                throw new DukeException("*Invalid task index, please try again.*");
-            }
-            markDone(realIndex);
-
-        } else if (str.substring(0, 5).equals("todo ")) {
-            int length = str.length();
-            if (length == 5) {
-                throw new DukeException("*Please fill in todo description*");
-            }
-
-            Todo newTodo = new Todo(str.substring(5, length));
-            store(newTodo);
-
-        } else if (str.substring(0, 5).equals("find ")) {
-            int length = str.length();
-            if (length == 5) {
-                throw new DukeException("*Please fill in a keyword to find*");
-            }
-
-            String stringToFind = str.substring(5, length);
-            findTask(stringToFind);
-
-        } else if (commandSpace <= 4) {
-            throw new DukeException("*Invalid command.*\n"
-                    + "     Commands: bye, list, todo, event, deadline, delete");
-
-        } else if (str.substring(0, 6).equals("event ")) {
-            int length = str.length();
-            if (length == 6) {
-                throw new DukeException("*Please fill in event description*");
-            }
-
-            int timePrefix = str.indexOf("/at");
-            if (timePrefix < 0) {
-                throw new DukeException("*Please fill in event completion time in the following format:*\n"
-                        + "     eg. event CCA meeting /at YYYY-MM-DD");
-            }
-
-            LocalDate date;
-            String dateString = str.substring(timePrefix + 4, length);
-            try {
-                date = LocalDate.parse(dateString);
-            } catch (DateTimeParseException e) {
-                throw new DukeException("*Please fill in the time in the YYYY-MM-DD format*");
-            }
-
-            Event newEvent = new Event(str.substring(6, timePrefix), date);
-            store(newEvent);
-
-        } else if (commandSpace <= 5) {
-            throw new DukeException("*Invalid command.*\n"
-                    + "     Commands: bye, list, todo, event, deadline, delete");
-
-        } else if (str.substring(0, 7).equals("delete ")) {
-            int length = str.length();
-            String index = str.substring(7, length);
-            int realIndex = Integer.parseInt(index) - 1;
-
-            if (realIndex >= this.tasks.getLength() || realIndex < 0) {
-                throw new DukeException("       *Invalid task index, please try again.*");
-            }
-            delete(realIndex);
-
-        } else if (commandSpace <= 6) {
-            throw new DukeException("       *Invalid command.*\n"
-                    + "     Commands: bye, list, todo, event, deadline, delete");
-
-        } else if (str.substring(0, 9).equals("deadline ")) {
-            int length = str.length();
-            if (length == 9) {
-                throw new DukeException("       *Please fill in deadline description*");
-            }
-
-            int timePrefix = str.indexOf("/by");
-            if (timePrefix < 0) {
-                throw new DukeException("*Please fill in deadline completion time in the following format:*\n"
-                        + "     eg. deadline return book to Jurong Regional Library /by YYYY-MM-DD");
-            }
-
-            LocalDate date;
-            String dateString = str.substring(timePrefix + 4, length);
-            try {
-                date = LocalDate.parse(dateString);
-            } catch (DateTimeParseException e) {
-                throw new DukeException("*Please fill in the time in the YYYY-MM-DD format*");
-            }
-
-            Deadline newDeadline = new Deadline(str.substring(9, timePrefix), date);
-            store(newDeadline);
-
-        } else {
-            throw new DukeException("*Invalid command.*\n"
-                    + "     Commands: bye, list, todo, event, deadline, delete");
-        }
-
-        System.out.println("    _______________________________________________________________________\n");
-    }
-
-    /**
-     * Communicates with TaskList class and passes current Task object
-     * to TaskList class for storing.
+     * Communicates with TaskList class and passes current Task object to TaskList class for storing.
      *
      * @param task to pass over Task object for storage.
      */
@@ -181,8 +43,7 @@ public class Parser {
     }
 
     /**
-     * Communicates with TaskList class and gets current Task list
-     * to print for user to see.
+     * Communicates with TaskList class and gets current Task list to print for user to see.
      */
     public void displayList() {
         List<Task> currLst = this.tasks.getTasks();
@@ -197,8 +58,7 @@ public class Parser {
     }
 
     /**
-     * Communicates with TaskList class and passes current Task object
-     * to TaskList class for marking the Task as done.
+     * Communicates with TaskList class and passes current Task object to TaskList class for marking the Task as done.
      *
      * @param index of the particular Task in Task list.
      */
@@ -209,8 +69,7 @@ public class Parser {
     }
 
     /**
-     * Communicates with TaskList class and passes current Task object
-     * to TaskList class for removal.
+     * Communicates with TaskList class and passes current Task object to TaskList class for removal.
      *
      * @param index of the particular Task in Task list.
      */
@@ -239,9 +98,9 @@ public class Parser {
 
     /**
      * Communicates with TaskList class and to get the current stored Task list.
-     * Filters the tasks based on the keyword searched
+     * Filters the tasks based on the keyword searched.
      *
-     * @param keyword String will be searched within all tasks
+     * @param keyword String will be searched within all tasks.
      * If matched, it will be printed.
      */
     public void findTask(String keyword) {
@@ -270,8 +129,7 @@ public class Parser {
     /**
      * Processes user input for classification and execution.
      *
-     * @param str is the line of String obtained from user input when user
-     * is using the JavaFX GUI.
+     * @param str is the line of String obtained from user input when user is using the JavaFX GUI.
      *
      * Reads and makes sense of user input commands which includes:
      * (bye, list, todo, deadline, event, delete)
@@ -287,8 +145,9 @@ public class Parser {
         int commandSpace = str.indexOf(" ");
 
         if (trimmedStr.length() < 3) {
-            throw new DukeException("*Invalid command.*\n"
-                    + "  Commands: bye, list, find, done, delete, todo, event, deadline");
+            throw new DukeException("*Invalid command.*"
+                    + "\n  Duke Commands: bye, list, find, done, delete, todo, "
+                    + "\n                 event, deadline");
         }
 
 
@@ -311,8 +170,9 @@ public class Parser {
             return output;
 
         } else if (commandSpace <= 0) {
-            throw new DukeException("*Invalid command.*\n"
-                    + "  Commands: bye, list, find, done, delete, todo, event, deadline");
+            throw new DukeException("*Invalid command.*"
+                    + "\n  Duke Commands: bye, list, find, done, delete, todo, "
+                    + "\n                 event, deadline");
         }
 
 
@@ -377,8 +237,9 @@ public class Parser {
             return output;
 
         } else if (commandSpace <= 4) {
-            throw new DukeException("*Invalid command.*\n"
-                    + "  Commands: bye, list, find, done, delete, todo, event, deadline");
+            throw new DukeException("*Invalid command.*"
+                    + "\n  Duke Commands: bye, list, find, done, delete, todo, "
+                    + "\n                 event, deadline");
         }
 
 
@@ -410,8 +271,9 @@ public class Parser {
                     + "Now you have " + this.tasks.getLength() + " task(s) in the list.";
 
         } else if (commandSpace <= 5) {
-            throw new DukeException("*Invalid command.*\n"
-                    + "  Commands: bye, list, find, done, delete, todo, event, deadline");
+            throw new DukeException("*Invalid command.*"
+                    + "\n  Duke Commands: bye, list, find, done, delete, todo, "
+                    + "\n                 event, deadline");
         }
 
 
@@ -433,8 +295,9 @@ public class Parser {
                     + "Now you have " + this.tasks.getLength() + " task(s) in the list.";
 
         } else if (commandSpace <= 6) {
-            throw new DukeException("*Invalid command.*\n"
-                    + "  Commands: bye, list, find, done, delete, todo, event, deadline");
+            throw new DukeException("*Invalid command.*"
+                    + "\n  Duke Commands: bye, list, find, done, delete, todo, "
+                    + "\n                 event, deadline");
         }
 
 
@@ -466,8 +329,9 @@ public class Parser {
                     + "Now you have " + this.tasks.getLength() + " task(s) in the list.";
 
         } else {
-            throw new DukeException("*Invalid command.*\n"
-                    + "  Commands: bye, list, find, done, delete, todo, event, deadline");
+            throw new DukeException("*Invalid command.*"
+                    + "\n  Duke Commands: bye, list, find, done, delete, todo, "
+                    + "\n                 event, deadline");
         }
     }
 }

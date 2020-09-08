@@ -4,6 +4,7 @@
  */
 public class DukeException extends Exception {
     private String message;
+
     /**
      * Creates a DukeException object.
      * It is used for Duke error printing.
