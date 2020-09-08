@@ -41,8 +41,11 @@ public class DeleteCommand extends Command {
         }
 
         if (delNum > 0 && delNum <= tasks.getTaskSize()) {
+            int initialNum = tasks.getTaskSize();
             String deletedTask = ui.printDeletedTask(tasks.getTask(delNum - 1));
             tasks.deleteTask(delNum - 1);
+
+            assert initialNum - tasks.getTaskSize() == 1 : "failed to delete task";
 
             return deletedTask + "\n" + ui.printTasksSize(tasks.getTaskSize());
         } else {
