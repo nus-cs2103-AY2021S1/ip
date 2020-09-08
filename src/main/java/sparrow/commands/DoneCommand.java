@@ -2,6 +2,7 @@ package sparrow.commands;
 
 import sparrow.data.task.Task;
 import sparrow.data.task.TaskList;
+import sparrow.data.trivia.VocabList;
 import sparrow.storage.Storage;
 import sparrow.ui.Ui;
 
@@ -16,7 +17,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, VocabList vocabList, Ui ui, Storage storage) {
         try {
             Task completedTask = tasks.markAsDone(getTargetIndex());
             storage.saveToFile(tasks);
