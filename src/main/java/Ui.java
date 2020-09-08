@@ -24,6 +24,7 @@ public class Ui {
      * @param result contains a String message after a command has been executed
      */
     public String showResponse(CommandResult result) {
+        assert !result.responseToUser.equals("") : "Response to user cannot be empty";
         return result.responseToUser;
     }
 }

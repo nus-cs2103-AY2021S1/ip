@@ -17,7 +17,7 @@ public class ToDoCommand extends Command {
         } catch (DukeException e) {
             System.err.println(e);
         }
-        String message = this.ADD_MESSAGE + "  " + task.toString()
+        String message = ADD_MESSAGE + "  " + task.toString()
                 + "\n" + tasks.replyNumTasks();
         return new CommandResult(message);
     }

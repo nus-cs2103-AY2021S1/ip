@@ -6,5 +6,6 @@ public class CommandResult {
 
     CommandResult(String responseToUser) {
         this.responseToUser = responseToUser;
+        assert !this.responseToUser.equals("") : "Response cannot be empty";
     }
 }
