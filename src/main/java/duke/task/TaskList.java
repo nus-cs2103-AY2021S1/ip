@@ -1,8 +1,6 @@
 package duke.task;
 
 import duke.command.DukeException;
-import duke.command.Parser;
-import duke.ui.Ui;
 
 import java.util.ArrayList;
 import java.util.PriorityQueue;

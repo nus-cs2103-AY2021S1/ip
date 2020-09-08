@@ -36,6 +36,7 @@ public class Parser {
      * @throws DukeException Exception for unidentified commands
      */
     public static String process(String command, TaskList taskList, Storage storage) throws DukeException {
+        assert command.length() > 0 : "command cannot be empty";
         String[] stringarr = command.split(" ");
         String finalString;
         if (stringarr[0].equals("list")) {
