@@ -123,7 +123,7 @@ public class TaskList {
         }
         String output = addItemToTodolist(item, instruction);
         output += "\n  New todo item added to the list!";
-        output += "\n  There are now " + (numberOfTasks + 1) + " todo items in the list";
+        output += "\n  There are now " + numberOfTasks + " todo items in the list";
         return output;
     }
 
