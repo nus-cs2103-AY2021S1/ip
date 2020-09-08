@@ -1,6 +1,7 @@
 package duke.controllers;
 
 import duke.Duke;
+import duke.Parser;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -49,6 +50,21 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialogBox(input, userImage),
                 DialogBox.getDukeDialogBox(response, dukeImage)
         );
+        if (Parser.isBye(input)) {
+            duke.saveCurrentTasks();
+        }
+
         userInput.clear();
+    }
+
+    /**
+     * Creates Duke welcome message dialog box.
+     */
+    @FXML
+    private void welcomeUser() {
+        String dukeWelcome = duke.getWelcomeMessage();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialogBox(dukeWelcome, dukeImage)
+        );
     }
 }

@@ -14,7 +14,7 @@ public class Parser {
         } else if (inputParts[0].compareTo("event") == 0) {
             return TaskType.Event;
         } else {
-            throw new UndefinedWordException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+            throw new UndefinedWordException("You're not making any sense bro.\n");
         }
     }
 

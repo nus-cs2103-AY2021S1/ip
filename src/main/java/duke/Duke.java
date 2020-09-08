@@ -1,7 +1,10 @@
 package duke;
 
+import java.io.File;
+
 public class Duke {
     private TaskList tasks;
+    public static final String FILE_PATH = "prevTasks.txt";
 
     public Duke() {
         this.tasks = new TaskList();
@@ -38,26 +41,25 @@ public class Duke {
         return outputMsg;
     }
 
-    // Let's find some way to integrate this
-    /*
-    public static void main(String[] args) {
+    public String getWelcomeMessage() {
         String logo =
-            "   __ _____   __  ___  ___  ___  ___\n"
-            + "  / // / _ | / / / _ \\/ _ \\/ _ \\/ _ \\\n"
-            + " / _  / __ |/ /__\\_, / // / // / // /\n"
-            + "/_//_/_/ |_/____/___/\\___/\\___/\\___/\n";
-
+                "   __ _____   __  ___  ___  ___  ___\n"
+                        + "  / // / _ | / / / _ \\/ _ \\/ _ \\/ _ \\\n"
+                        + " / _  / __ |/ /__\\_, / // / // / // /\n"
+                        + "/_//_/_/ |_/____/___/\\___/\\___/\\___/\n"
+                        + "Hello! I'm Hal9000\nWhat can I do for you?\n";
         // Intro message
-        System.out.println(logo);
-        FormatPrinter.print(
-            "Hello! I'm Hal9000\nWhat can I do for you?\n"
-        );
+        return Formatter.formatResponse(logo);
+    }
 
-        Duke hal9000 = new Duke();
-        File prevTasks = FileOpener.openFile("prevTasks.txt");
-        TaskLoader.loadTasks(prevTasks, hal9000.getTasks());
-        hal9000.op();
-        TaskStorage.saveTask(prevTasks, hal9000.getTasks());
-    } */
+    public void loadPrevTasks() {
+        File prevTasks = FileOpener.openFile(FILE_PATH);
+        TaskLoader.loadTasks(prevTasks, this.getTasks());
+    }
+
+    public void saveCurrentTasks() {
+        File prevTasks = FileOpener.openFile(FILE_PATH);
+        TaskStorage.saveTask(prevTasks, this.getTasks());
+    }
 
 }

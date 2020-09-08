@@ -10,16 +10,19 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;;
 
 public class MainGUI extends Application {
-    private Duke duke = new Duke();
+    private Duke hal9000 = new Duke();
 
     @Override
     public void start(Stage stage) {
         try {
+            // setting up Hal9000
+            hal9000.loadPrevTasks();
+
             FXMLLoader fxmlLoader = new FXMLLoader(MainGUI.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke); // using controller!! Important part
+            fxmlLoader.<MainWindow>getController().setDuke(hal9000); // using controller!! Important part
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
