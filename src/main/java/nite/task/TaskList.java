@@ -1,6 +1,7 @@
 package nite.task;
 
 import java.util.ArrayList;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -61,7 +62,6 @@ public class TaskList {
             break;
         }
         if (taskLine[1].equals("1")) {
-            assert task != null : "Task should not be null.";
             task.markAsDone();
         }
         return task;
@@ -73,13 +73,10 @@ public class TaskList {
      * @return String representation of list of tasks.
      */
     public String listTasks() {
-        String tasks = "";
-        Task task;
-        for (int i = 0; i < this.tasks.size(); i++) {
-            task = this.tasks.get(i);
-            tasks += String.format("  %d.%s%n", i + 1, task);
-        }
-        return tasks;
+        AtomicInteger counter = new AtomicInteger(1);
+        Stream<String> stringsStream = tasks.stream().map(t -> String.format("  %d.%s%n",
+                counter.getAndIncrement(), t));
+        return stringsStream.reduce("", (s, t) -> s += String.format("  %s", t));
     }
 
     /**
@@ -107,9 +104,8 @@ public class TaskList {
      * @return List containing lines of text.
      */
     public ArrayList<String> tasksToText() {
-        ArrayList<String> strings = tasks.stream().map(Task::toData)
+        return tasks.stream().map(Task::toData)
                 .collect(Collectors.toCollection(ArrayList::new));
-        return strings;
     }
 
     /**
@@ -119,11 +115,11 @@ public class TaskList {
      */
     public String findTasks(String keyword) {
         assert !keyword.isEmpty() : "Keyword should not be empty.";
+        AtomicInteger counter = new AtomicInteger(1);
         Stream<Task> matchingTasks = tasks.stream().filter(t -> t.hasKeyword(keyword));
-        Stream<String> stringsStream = matchingTasks.map(t -> String.format("  %s%n", t));
-        String matchingTasksString = stringsStream.reduce("", (s, t)
-                -> s += String.format("  %s%n", t));
-        return matchingTasksString;
+        Stream<String> stringsStream = matchingTasks.map(t -> String.format("  %d.%s%n",
+                counter.getAndIncrement(), t));
+        return stringsStream.reduce("", (s, t) -> s += String.format("  %s", t));
     }
 
     /**
@@ -140,7 +136,7 @@ public class TaskList {
     }
 
     /**
-     * Marks a tast in the list as done.
+     * Marks a task in the list as done.
      *
      * @param taskNumber Position of Task in the list of tasks.
      * @return Task which was marked as done.
