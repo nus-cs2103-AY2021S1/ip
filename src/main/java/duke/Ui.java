@@ -3,102 +3,103 @@ package duke;
 import java.util.List;
 
 /**
- * The Ui class to handle user interface methods
+ * The JavafxUi class to handle user interface methods for the javajx interface
  *
  * @author  Hope Leong
  * @version 0.1
  * @since   27/8/2020
  */
 public class Ui {
-    final String outputLine = "--------------------------------------------------";
+    final String outputLine = "--------------------------";
 
     /**
-     * Ui constructor
+     * JavafxUi constructor
      */
     Ui() {
 
     }
 
+
     /**
-     * drawLine method which outputs a line
+     * drawLine method which returns a line
      */
-    public void drawLine() {
-        System.out.println(outputLine);
+    public String drawLine() {
+        return outputLine;
     }
 
     /**
-     * addTask method which outputs the task information
-     * @param task the task added
+     * addTask method which returns the task information
      */
-    public void addTask(Task task) {
-        System.out.println("added: " + task.toString());
+    public String addTask(Task task) {
+        return "added: " + task.toString() + "\n";
     }
 
     /**
-     * deleteTask method which outputs the task information
-     * @param task the task deleted
+     * deleteTask method which returns the task information
      */
-    public void deleteTask(Task task) {
+    public String deleteTask(Task task) {
         if (task == null) {
-            deleteAll();
+            return deleteAll();
         } else {
-            System.out.println("Noted. I've removed this task: " + "\n" + task.toString());
+            return "Noted. I've removed this task: " + "\n" + task.toString() + "\n";
         }
 
     }
 
     /**
-     * doneTask method which outputs the task information
-     * @param task the task done
+     * doneTask method which returns the task information
      */
-    public void doneTask(Task task) {
-        System.out.println("Nice! I've marked this task as done: ");
-        System.out.println(task.toString());
+    public String doneTask(Task task) {
+        return "Nice! I've marked this task as done: \n" + task.toString() + "\n";
     }
 
     /**
-     * listCount method which outputs the number of tasks
-     * @param count the size of the list
+     * listCount method which returns the number of tasks
      */
-    public void listCount(int count) {
-        System.out.println("Now you have " + count + " tasks in the list.");
-        drawLine();
+    public String listCount(int count) {
+        return "Now you have " + count + " tasks in the list. \n"
+               + drawLine();
     }
 
     /**
-     * bye method which outputs a message when the user exits
+     * bye method which returns a message when the user exits
      */
-    public void bye() {
-        System.out.println("Bye. Hope to see you again soon!");
-        drawLine();
+    public String bye() {
+        return "Bye. Hope to see you again soon! \n"
+                + drawLine();
     }
 
     /**
-     * deleteAll method which outputs a message when the user deletes all tasks
+     * deleteAll method which returns a message when the user deletes all tasks
      */
-    public void deleteAll() {
-        System.out.println("All tasks have been deleted!");
+    public String deleteAll() {
+        return "All tasks have been deleted!" + "\n";
     }
 
     /**
-     * printList method which outputs all the tasks in the list
-     * @param list list of tasks
+     * printList method which returns all the tasks in the list
+     * @param tasks list of tasks
      */
-    public void printList(List<Task> list) {
-        int tempIndex = 1;
-        for (Task x: list) {
-            System.out.println(tempIndex + "." + x.toString());
-            tempIndex += 1;
+    public String printList(List<Task> tasks) {
+        String output = "";
+        int index = 1;
+        for (Task x: tasks) {
+            if (x != null) {
+                output += index + ". " + x.toString() + "\n";
+            }
+            index += 1;
+
         }
-        drawLine();
+        output += drawLine();
+        return output;
     }
 
     /**
-     * foundWord method which outputs all the tasks in the list that contain the word
-     * @param list list of tasks in the list that contain the word
+     * foundWord method which returns all the tasks in the list that contain the word
+     * @param tasks list of tasks in the list that contain the word
      */
-    public void foundWord(List<Task> list) {
-        System.out.println("Here are the matching tasks in your list:");
-        printList(list);
+    public String foundWord(List<Task> tasks) {
+        return "Here are the matching tasks in your list:\n"
+                + printList(tasks);
     }
 }

@@ -14,9 +14,12 @@ public class DialogBox extends HBox {
     private ImageView displayPicture;
 
     /**
-     * Flips the dialog box such that the ImageView is on the left and text on the right.
+     * DialogBox constructor which generates a dialogbox with text and an image
+     * @param l the label
+     * @param iv the image
      */
     public DialogBox(Label l, ImageView iv) {
+        super(5);
         text = l;
         displayPicture = iv;
         text.setWrapText(true);
@@ -24,6 +27,19 @@ public class DialogBox extends HBox {
         displayPicture.setFitHeight(100.0);
         this.setAlignment(Pos.TOP_RIGHT);
         this.getChildren().addAll(text, displayPicture);
+    }
+
+    /**
+     * DialogBox constructor which generates a dialogbox with the logo
+     * @param iv the logo
+     */
+    public DialogBox(ImageView iv) {
+        super(5);
+        displayPicture = iv;
+        displayPicture.setFitWidth(328 / 1.5);
+        displayPicture.setFitHeight(117 / 1.5);
+        this.setAlignment(Pos.BOTTOM_CENTER);
+        this.getChildren().addAll(displayPicture);
     }
 
     /**

@@ -45,22 +45,24 @@ public class Storage {
     /**
      * saveFile method which saves the list of tasks as a file on the computer
      *
-     * @param list takes in the list of tasks
+     * @param tasks takes in the list of tasks
      * @throws DukeException when the file path cannot be found
      */
-    public void saveFile(List<Task> list) throws DukeException {
+    public void saveFile(List<Task> tasks) throws DukeException {
         try {
             FileWriter fw = new FileWriter(String.valueOf(path));
             String contents = "";
-            for (Task x : list) {
+            for (Task x : tasks) {
                 if (x.getClass().getSimpleName().equals("ToDo")) {
                     String temp = "ToDo\n" + x.getDone() + "\n" + x.getName() + "\n\n";
                     contents += temp;
                 } else if (x.getClass().getSimpleName().equals("Deadlines")) {
-                    String temp = "Deadlines\n" + x.getDone() + "\n" + x.getName() + "\n" + x.getTime() + "\n\n";
+                    String temp = "Deadlines\n" + x.getDone() + "\n" + x.getName() + "\n"
+                            + x.getDate() + "\n" + x.getTime() + "\n\n";
                     contents += temp;
                 } else {
-                    String temp = "Events\n" + x.getDone() + "\n" + x.getName() + "\n" + x.getTime() + "\n\n";
+                    String temp = "Events\n" + x.getDone() + "\n" + x.getName() + "\n"
+                            + x.getDate() + "\n" + x.getTime() + "\n\n";
                     contents += temp;
                 }
             }
@@ -80,37 +82,43 @@ public class Storage {
     public List<Task> loadFile() throws DukeException {
         try {
             Scanner sc = new Scanner(path);
-            List<Task> list = new ArrayList<>();
+            List<Task> tasks = new ArrayList<>();
             while (sc.hasNextLine()) {
                 String type = sc.nextLine();
                 String done = sc.nextLine();
                 String name = sc.nextLine();
                 if (type.equals("ToDo")) {
-                    sc.nextLine();
                     Task temp = new ToDo(name);
                     if (done.equals("true")) {
                         temp.completeTask();
                     }
-                    list.add(temp);
+                    tasks.add(temp);
+                    sc.nextLine();
                 } else if (type.equals("Deadlines")) {
+                    String date = sc.nextLine();
                     String time = sc.nextLine();
-                    sc.nextLine();
-                    Task temp = new Deadlines(name, time);
+                    assert !date.isBlank();
+                    assert !time.isBlank();
+                    Task temp = new Deadlines(name, date, time);
                     if (done.equals("true")) {
                         temp.completeTask();
                     }
-                    list.add(temp);
+                    tasks.add(temp);
+                    sc.nextLine();
                 } else {
+                    String date = sc.nextLine();
                     String time = sc.nextLine();
-                    sc.nextLine();
-                    Task temp = new Events(name, time);
+                    assert !date.isBlank();
+                    assert !time.isBlank();
+                    Task temp = new Events(name, date, time);
                     if (done.equals("true")) {
                         temp.completeTask();
                     }
-                    list.add(temp);
+                    tasks.add(temp);
+                    sc.nextLine();
                 }
             }
-            return list;
+            return tasks;
 
         } catch (IOException e) {
             throw new DukeException("Unable to find load file");

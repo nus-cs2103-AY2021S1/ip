@@ -21,11 +21,10 @@ public class Events extends Task {
      * @param name name of event
      * @param time date and time of event in the form of a string
      */
-    Events(String name, String time) {
-        super(name, time);
-        String[] at = time.split(" ");
-        this.date = parseDate(at[1]);
-        String[] timeArray = at[2].split("-");
+    Events(String name, String date, String time) {
+        super(name, date, time);
+        this.date = parseDate(date);
+        String[] timeArray = time.split("-", 2);
         this.startTime = parseTime(timeArray[0]);
         this.endTime = parseTime(timeArray[1]);
     }
@@ -71,9 +70,9 @@ public class Events extends Task {
     @Override
     public String toString() {
         if (super.getDone()) {
-            return "[E]" + "[" + "C" + "] " + super.getName() + "(at: " + printDateTime() + ")";
+            return "[E]" + "[\u2714] " + super.getName() + " (at: " + printDateTime() + ")";
         } else {
-            return "[E]" + "[" + "X" + "] " + super.getName() + "(at: " + printDateTime() + ")";
+            return "[E]" + "[\u2718] " + super.getName() + " (at: " + printDateTime() + ")";
         }
 
     }
