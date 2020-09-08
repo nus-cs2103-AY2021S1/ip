@@ -1,4 +1,4 @@
 E/0/Computing Day /2020-09-02
-T/1/read Book
-D/0/Stats Homework /2200-02-19
+T/1/Write Book
+D/1/CS2103T homework /2000-02-19
 D/1/get some wins /1999-09-01

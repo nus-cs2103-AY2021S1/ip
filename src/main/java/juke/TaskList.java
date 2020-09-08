@@ -122,6 +122,13 @@ public class TaskList {
         return output.toString();
     }
 
+    /**
+     * Updates a task with the given description.
+     *
+     * @param taskNo         The index position of task.
+     * @param newDescription The new description to be used.
+     * @return Successful message upon change.
+     */
     public String updateDescription(int taskNo, String newDescription) {
         assert taskNo < list.size() : "Invalid Task index";
 
@@ -136,6 +143,13 @@ public class TaskList {
         return output.toString();
     }
 
+    /**
+     * Updates a task with the given date.
+     *
+     * @param taskNo  The index position of task.
+     * @param newDate The new date to be used.
+     * @return Successful message upon change.
+     */
     public String updateDate(int taskNo, LocalDate newDate) {
         assert taskNo < list.size() : "Invalid Task index";
 
@@ -157,6 +171,14 @@ public class TaskList {
         return output.toString();
     }
 
+    /**
+     * Updates a task with the given description and given date.
+     *
+     * @param taskNo         The index position of task.
+     * @param newDescription The new description to be used.
+     * @param newDate        The new Date to be used.
+     * @return Successful message upon change.
+     */
     public String updateDescriptionAndDate(int taskNo, String newDescription, LocalDate newDate) {
         assert taskNo < list.size() : "Invalid Task index";
 

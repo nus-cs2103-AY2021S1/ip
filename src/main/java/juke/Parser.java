@@ -154,6 +154,11 @@ public class Parser {
     private UpdateCommand handleUpdateCommand(String inputText) throws InvalidArgumentsException {
 
         String[] splitByIndex = inputText.split("/number ");
+
+        if (splitByIndex.length == 1) {
+            throw new InvalidArgumentsException("Index argument not provided");
+        }
+
         String[] splitByDescription = inputText.split("/description ");
         String[] splitByDate = inputText.split("/date ");
 
@@ -164,14 +169,14 @@ public class Parser {
         int index = Integer.parseInt(splitByIndex[1].split(" /")[0]) - 1;
 
         if (isUpdateBothDateAndDescription) {
-            String date = splitByDate[1];
-            String description = splitByDescription[1];
+            String date = splitByDate[1].split("/")[0];
+            String description = splitByDescription[1].split("/")[0];
             return new UpdateDescriptionAndDateCommand(index, description, date);
         } else if (isUpdateDate) {
-            String date = splitByDate[1];
+            String date = splitByDate[1].split("/")[0];
             return new UpdateDateCommand(index, date);
         } else if (isUpdateDescription) {
-            String description = splitByDescription[1];
+            String description = splitByDescription[1].split("/")[0];
             return new UpdateDescriptionCommand(index, description);
         } else {
             throw new InvalidArgumentsException("Arguments not provided");

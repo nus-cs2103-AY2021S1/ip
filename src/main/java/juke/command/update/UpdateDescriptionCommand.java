@@ -3,10 +3,18 @@ package juke.command.update;
 import juke.Storage;
 import juke.TaskList;
 
+/**
+ * Represents the command to update a task's description.
+ */
 public class UpdateDescriptionCommand extends UpdateCommand {
 
     private String newDescription;
 
+    /**
+     * Constructs an UpdateDescriptionCommand.
+     * @param index Index position of task.
+     * @param newDescription New description to be used.
+     */
     public UpdateDescriptionCommand(int index, String newDescription) {
         super(index);
         this.newDescription = newDescription;
