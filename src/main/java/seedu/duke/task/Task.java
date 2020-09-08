@@ -1,6 +1,7 @@
 package seedu.duke.task;
 
 import java.time.LocalDateTime;
+import java.util.Comparator;
 
 /**
  * Class that represents the tasks the user can add to their list.

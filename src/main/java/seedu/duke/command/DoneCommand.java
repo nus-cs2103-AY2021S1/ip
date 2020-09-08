@@ -28,7 +28,7 @@ public class DoneCommand extends Command {
         } else {
             Task oldTask = ls.get(number - 1);
             oldTask.checkTask();
-            ui.printResult(("Did you really finish it? Eh, good for you I guess. Deleting:" + "\n"
+            ui.printResult(("Did you really finish it? Eh, good for you I guess. Marked:" + "\n"
                     + oldTask.getStatus()));
         }
     }
