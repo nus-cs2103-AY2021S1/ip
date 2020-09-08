@@ -1,10 +1,6 @@
 package luke;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.BufferedWriter;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -33,12 +29,14 @@ public class Storage {
         List<Task> tasks = new ArrayList<>();
         try (BufferedReader br = new BufferedReader(new FileReader(filePath))) {
             String readLine = null;
-
             while((readLine = br.readLine()) != null){
                 Task parsedTask = Parser.parseTask(readLine);
                 tasks.add(parsedTask);
             }
-        } catch (IOException e) {
+        } catch (FileNotFoundException e) {
+            throw new LukeException(e.getMessage());
+        }
+        catch (IOException e) {
            throw new LukeException(e.getMessage());
         }
         return tasks;
@@ -59,7 +57,6 @@ public class Storage {
             }
             bw.write(dataString);
             bw.flush();
-//            printAddSuccess(tasks, task);
         } catch (IOException e) {
             System.out.println(e);
         }

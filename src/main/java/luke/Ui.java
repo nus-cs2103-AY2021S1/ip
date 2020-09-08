@@ -43,18 +43,18 @@ public class Ui {
 
     public String showListResult(TaskList tasks) {
         if (tasks.getSize() < 1) {
-            return "You don't have any tasks in your list :(\n";
+            return "You don't have any tasks in your list :(";
         } else {
-            String taskSummary = "Here are the tasks in your list.";
+            String taskSummary = "Here are the tasks in your list.\n";
             for (int i = 0; i < tasks.getSize(); i++) {
                 Task current = tasks.getTask(i);
-                taskSummary += String.format("\n\t%d.%s", i + 1, current);
+                taskSummary += String.format("-> %d.%s\n", i + 1, current);
             }
-            return String.format("%s\n", taskSummary);
+            return String.format("%s", taskSummary);
         }
     }
 
     public String showExitResult() {
-        return "See you next time.";
+        return "";
     }
 }

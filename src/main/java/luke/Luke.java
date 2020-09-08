@@ -23,7 +23,6 @@ public class Luke {
         try {
             this.tasks = new TaskList(storage.load());
         } catch (LukeException e) {
-//            ui.showLoadingError();
             this.tasks = new TaskList();
         }
         this.ui = new Ui();
@@ -32,7 +31,7 @@ public class Luke {
     public String getResponse(String input) {
         try {
             Command command = Parser.parseCommand(input);
-            return command.execute(storage, tasks, ui);
+            return command.execute(this.storage, this.tasks, this.ui);
         } catch (LukeException e) {
             ui.showError(e.getMessage());
         }
