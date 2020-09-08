@@ -119,6 +119,10 @@ public class Duke extends Application {
         return "Duke heard: " + input;
     }
 
+    public void exit() {
+        ((Stage) userInput.getScene().getWindow()).close();
+    }
+
 
 
 }

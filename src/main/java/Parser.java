@@ -28,7 +28,7 @@ public class Parser {
             taskList.lookFor(inputSuffix);
             break;
         case "bye":
-            dukeApp.stop();
+            dukeApp.exit();
             break;
         default:
             throw new DukeNoSuchInputException();
