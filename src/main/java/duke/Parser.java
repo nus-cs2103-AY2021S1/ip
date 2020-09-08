@@ -17,6 +17,11 @@ public class Parser {
      */
     public Command parseCommand(String command) throws DukeException {
         String[] simpleSplitArgs = command.split(" ", 2);
+        String[] tagSplitArgs = new String[]{""};
+        if (simpleSplitArgs.length > 1) {
+            tagSplitArgs = simpleSplitArgs[1].split(" #"); // tagSplitArgs[1]~ all tags if tagSplitArgs[0] is not ""
+        }
+
         String commandType = simpleSplitArgs[0];
 
         if (commandType.equals(CommandType.BYE.getName())) {
@@ -37,23 +42,24 @@ public class Parser {
             } else {
                 throw new DukeException("you need keyword for filtering (hint: find <index>)!");
             }
+            // TOOD: Add function to find by tags
         } else if (commandType.equals(CommandType.TODO.getName())) {
             if (simpleSplitArgs.length > 1) {
-                return new AddCommand(CommandType.TODO, simpleSplitArgs[1], null);
+                return new AddCommand(CommandType.TODO, simpleSplitArgs[1], tagSplitArgs, null);
             } else {
                 throw new DukeException("you need description for todo (hint: todo <some description>)!");
             }
         } else if (commandType.equals(CommandType.DEADLINE.getName())) {
             String[] allSplitArgs = simpleSplitArgs[1].split(" /by ");
             if (allSplitArgs.length > 1) {
-                return new AddCommand(CommandType.DEADLINE, allSplitArgs[0], parseDateAndTime(allSplitArgs[1]));
+                return new AddCommand(CommandType.DEADLINE, allSplitArgs[0], tagSplitArgs, parseDateAndTime(allSplitArgs[1]));
             } else {
                 throw new DukeException("you need date and time for deadline (hint: deadline something /by YYYY-MM-DD)!");
             }
         } else if (commandType.equals(CommandType.EVENT.getName())) {
             String[] allSplitArgs = simpleSplitArgs[1].split(" /at ");
             if (allSplitArgs.length > 1) {
-                return new AddCommand(CommandType.EVENT, allSplitArgs[0], parseDateAndTime(allSplitArgs[1]));
+                return new AddCommand(CommandType.EVENT, allSplitArgs[0], tagSplitArgs, parseDateAndTime(allSplitArgs[1]));
             } else {
                 throw new DukeException("you need date and time for event (hint: event something /at YYY-MM-DD)!");
             }
