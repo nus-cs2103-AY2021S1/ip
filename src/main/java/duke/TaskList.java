@@ -65,11 +65,14 @@ public class TaskList {
     public Task addTask(Command task) {
         Task newTask;
         if (task.getClass() == TodoCommand.class) {
+            assert task.getParameters().length == 1 : "insufficient amount of parameters";
             newTask = new Todo(task.getParameters()[0]);
         } else if (task.getClass() == EventCommand.class) {
+            assert task.getParameters().length == 2 : "insufficient amount of parameters";
             newTask = new Event(task.getParameters()[0].strip(),
                     LocalDateTime.parse(task.getParameters()[1].strip(), formatter));
         } else {
+            assert task.getParameters().length == 2 : "insufficient amount of parameters";
             newTask = new Deadline(task.getParameters()[0].strip(),
                     LocalDateTime.parse(task.getParameters()[1].strip(), formatter));
         }

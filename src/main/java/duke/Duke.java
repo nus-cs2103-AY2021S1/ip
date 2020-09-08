@@ -81,6 +81,7 @@ public class Duke {
      * @throws DukeExceptions.NoUndoneTaskException
      */
     private String doneHandler(String[] parameters) throws DukeExceptions.NoUndoneTaskException {
+        assert parameters.length == 1 : "No Index input to markdone task";
         if (!this.taskList.isEmpty() || this.taskList.allDone()) {
             int index = Integer.parseInt(parameters[0].strip()) - 1;
             this.taskList.completeTask(index);
@@ -119,6 +120,7 @@ public class Duke {
      */
 
     private String deleteTaskHandler(String[] parameters) throws DukeExceptions.NoTaskToDeleteException {
+        assert parameters.length == 1 : "No Index input to delete task";
         if (!this.taskList.isEmpty()) {
             int index = Integer.parseInt(parameters[0].strip()) - 1;
             Task task = this.taskList.deleteTask(index);
