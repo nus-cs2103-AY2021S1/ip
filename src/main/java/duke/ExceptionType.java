@@ -10,5 +10,6 @@ public enum ExceptionType {
     EMPTY_DESCRIPTION,
     DEADLINE_NO_BY,
     EVENT_NO_START_END,
-    INDEX_OUT_OF_BOUNDS
+    INDEX_OUT_OF_BOUNDS,
+    DEFAULT
 }
