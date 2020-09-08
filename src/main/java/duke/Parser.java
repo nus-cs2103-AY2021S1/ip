@@ -39,7 +39,7 @@ public class Parser {
      * @param s The input.
      * @return An integer index.
      */
-    public int parseDone(String s) {
+    public int parseDoneIndex(String s) {
         return Integer.parseInt(s.split(" ")[1]) - 1;
     }
 
@@ -49,7 +49,7 @@ public class Parser {
      * @param s The input.
      * @return An integer index.
      */
-    public int parseDelete(String s) {
+    public int parseDeleteIndex(String s) {
         return Integer.parseInt(s.split(" ")[1]) - 1;
     }
 
@@ -59,7 +59,7 @@ public class Parser {
      * @param s The input.
      * @return A string keyword.
      */
-    public String parseFind(String s) {
+    public String parseFindKeyword(String s) {
         return s.split(" ")[1];
     }
 
@@ -71,7 +71,7 @@ public class Parser {
      * @throws IllegalArgumentException Unrecognizable task command.
      * @throws IndexOutOfBoundsException Task formatted wrongly.
      */
-    public Task parseInputTask(String s) throws IllegalArgumentException, IndexOutOfBoundsException {
+    public Task parseAddedTask(String s) throws IllegalArgumentException, IndexOutOfBoundsException {
         String[] processed;
         Task task;
         try {
@@ -88,10 +88,10 @@ public class Parser {
                 task = new DeadlineTask(processed[0], processed[1]);
                 break;
             default:
-                throw new IllegalArgumentException();
+                throw new IllegalArgumentException("Unrecognizable task command.");
             }
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Unrecognizable task command.");
+            throw e;
         } catch (IndexOutOfBoundsException e) {
             throw new IndexOutOfBoundsException("Task formatted wrongly.");
         }
@@ -100,7 +100,7 @@ public class Parser {
 
     private boolean isTask(String s) {
         try {
-            parseInputTask(s);
+            parseAddedTask(s);
             return true;
         } catch (Exception e) {
             return false;
@@ -111,7 +111,7 @@ public class Parser {
      * Determines the type of command.
      *
      * @param input The input.
-     * @return A PARSER_RESULT value.
+     * @return A parserResult value.
      * @throws IllegalArgumentException Unrecognizable command.
      */
     public ParserResult parseInput(String input) throws IllegalArgumentException {

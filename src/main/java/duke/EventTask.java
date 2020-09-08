@@ -35,13 +35,13 @@ public class EventTask extends Task {
         return "[E]" + super.toString() + " (at: " + periodString + ")";
     }
 
-    private String toSaveStringPeriod() {
+    private String toSavedStringPeriod() {
         return period == null ? periodString : period.toString();
     }
 
     @Override
-    public String toSaveString() {
-        return String.format("E @@ %s @@ %s @@ %s", toSaveStringDone(), desc, toSaveStringPeriod());
+    public String toSavedString() {
+        return String.format("E @@ %s @@ %s @@ %s", toSavedStringIsDone(), desc, toSavedStringPeriod());
     }
 
     @Override
