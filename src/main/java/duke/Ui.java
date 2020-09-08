@@ -2,11 +2,9 @@ package duke;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.FilenameFilter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 public class Ui {
 
@@ -22,6 +20,9 @@ public class Ui {
     /** TaskList object to store Task objects and modify the list */
     protected TaskList taskList;
 
+    /** Storage object to store and read Task objects */
+    protected Storage storage;
+
     protected static boolean sleepMode = false;
 
 
@@ -36,7 +37,8 @@ public class Ui {
     public Ui(String filePath, String fileName, List<Task> memoTask) {
         this.filePath = filePath;
         this.fileName = fileName;
-        this.parser = new Parser();
+        parser = new Parser();
+        storage = new Storage(filePath, fileName);
         taskList = new TaskList(memoTask, filePath, fileName);
     }
 
@@ -86,6 +88,12 @@ public class Ui {
         case "bye":
             sleepMode = true;
             response.add("Bye. Hope to see you again soon!");
+            break;
+        case "archive":
+            response.addAll(processArchiveRequest());
+            break;
+        case "listArchive":
+            response.addAll(processListArchiveRequest());
             break;
         case "list":
         default:
@@ -152,6 +160,10 @@ public class Ui {
         case "done":
         case "delete":
             return processEditRequest(commandTask);
+        case "loadArchive":
+            return processLoadArchiveRequest(commandTask[1]);
+        case "binArchive":
+            return processBinArchiveRequest(commandTask[1]);
         case "todo":
         case "event":
         case "deadline":
@@ -162,13 +174,132 @@ public class Ui {
 
 
     /**
-     * Returns specified user input of 'editing' requests, i.e. 'done' and 'delete'.
+     * Returns system response to 'editing' requests, i.e. 'done' and 'delete'.
      *
      * @param commandTask  processed user input of command.
-     * @return further-processed user input of modification commands.
+     * @return System response to user input of modification commands.
      */
     public List<String> processEditRequest(String[] commandTask) {
         List<String> response = taskList.editTask(commandTask);
+        return response;
+    }
+
+
+    /**
+     * Returns system response to 'archive' request.
+     *
+     * @return system response to 'archive' request.
+     */
+    public List<String> processArchiveRequest() {
+        List<String> response = new ArrayList<>();
+
+        // fileTimeCode is unique to every file since it indicates the creation time of the file
+        long fileTimeCode = new Date().getTime();
+        String archiveFileName = "Archive-" + fileTimeCode + ".txt";
+
+        Storage s = new Storage(filePath, archiveFileName);
+        boolean success = s.write_memory(taskList.showList());
+        if (success) {
+            response.add("Tasks successfully archived! Enter 'listArchive' to observe a new file being added.");
+        } else {
+            response.addAll(HandleException.handleException(
+                    DukeException.ExceptionType.READ_FILE));
+        }
+        return response;
+    }
+
+
+    /**
+     * Returns system response to 'listArchive' request.
+     *
+     * @return system response to 'listArchive' request.
+     */
+    public List<String> processListArchiveRequest() {
+        List<String> response = new ArrayList<>();
+        File archiveDirPath = new File(filePath);
+        FilenameFilter archiveFilefilter = (directory, fileName) -> {
+            return fileName.startsWith("Archive-");
+        };
+
+        File filesList[] = archiveDirPath.listFiles(archiveFilefilter);
+        Arrays.sort(filesList, Comparator.comparingLong(File::lastModified));
+        String output = "";
+        output += "* Please Note:\n";
+        output += "Your current list will be discarded once you switch to an archive file.\n";
+        output += "Key in 'archive' to save your work before continuing with 'loadArchive FILE_NAME'.\n\n";
+        output += "Use 'File name' of the archive file for any further operation.\n";
+        for(File file : filesList) {
+            output += "\n" + "File name: " + file.getName();
+            output += "\n" + "Archived at: " + new Date(file.lastModified()) + "\n";
+        }
+        response.add(output);
+        return response;
+    }
+
+
+    /**
+     * Returns system response to 'loadArchiveLoad' request.
+     *
+     * @param arcFileName  Name of the file to load and read from.
+     * @return system response to 'loadArchiveLoad' request.
+     */
+    public List<String> processLoadArchiveRequest(String arcFileName) {
+        List<String> response = new ArrayList<>();
+        File testPath = new File (filePath + arcFileName);
+        if (!testPath.exists()) {
+            response.add("☹ OOPS!!! Invalid input of filename. Please copy and paste with care.");
+            return response;
+        }
+
+        try {
+            response.addAll(loadArchiveHelper(arcFileName));
+        } catch (Exception e) {
+            response.addAll(HandleException.handleException(DukeException.ExceptionType.READ_FILE));
+        }
+        return response;
+    }
+
+
+    public List<String> loadArchiveHelper(String arcFileName) throws IOException {
+        List<String> response = new ArrayList<>();
+        Storage s = new Storage(filePath, arcFileName);
+        List<Task> tl = s.readMemoTasks();
+        boolean successReplacement = storage.write_memory(tl);
+        if (!successReplacement) {
+            response.addAll(HandleException.handleException(DukeException.ExceptionType.READ_FILE));
+            return response;
+        }
+        taskList = new TaskList(tl, filePath, fileName);
+        File arcFile = new File(filePath, arcFileName);
+        Date arcFileCreationDate = new Date(arcFile.lastModified());
+        String output = "";
+        output += "Task List successfully loaded from Archive file '" + arcFileName + "' created at  "
+                + arcFileCreationDate + "!";
+        output += "\nEnter 'list' to see the tasks!";
+        response.add(output);
+        return response;
+    }
+
+
+    /**
+     * Returns system response to 'binArchiveLoad' request.
+     *
+     * @param arcFileName  Name of the archive file to delete.
+     * @return system response to 'binArchiveLoad' request.
+     */
+    public List<String> processBinArchiveRequest(String arcFileName) {
+        List<String> response = new ArrayList<>();
+        File testPathFile = new File (filePath + arcFileName);
+        if (!testPathFile.exists()) {
+            response.add("☹ OOPS!!! Invalid input of filename. Please copy and paste with care.");
+            return response;
+        }
+
+        Date binFileCreationDate = new Date(testPathFile.lastModified());
+        testPathFile.delete();
+        response.add("Successful deletion of archive file '" + arcFileName + "' created at "
+                + binFileCreationDate + "!" + "\nEnter 'listArchive' to see the current file list!");
+
         return response;
     }
 

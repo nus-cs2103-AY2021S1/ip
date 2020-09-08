@@ -67,7 +67,7 @@ public class Duke extends Application {
                     DialogBox.getDukeDialog("Let us start with an empty list now.", duke));
         }
 
-        this.ui = new Ui(MEMORY_FILE_DIR, MEMORY_FILE_NAME, tasks.showList());
+        ui = new Ui(MEMORY_FILE_DIR, MEMORY_FILE_NAME, tasks.showList());
     }
 
 

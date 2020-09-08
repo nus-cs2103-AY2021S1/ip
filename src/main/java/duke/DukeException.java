@@ -32,12 +32,20 @@ public class DukeException extends Throwable {
         IMPROPER_DATETIME
     }
 
+
     /** Command Guide for Users */
-    public static String fullGuide = "Please follow the format below:\n"
-            + "\n'help'" + "\n'list'" + "\n'done TASK_NUMBER'" + "\n'delete TASK_NUMBER'"
-            + "\n'todo MY_TASK'" + "\n'deadline MY_TASK /by DATE_OR_TIME'"
-            + "\n'event MY_TASK /at DATE_OR_TIME'" + "\n'find KEYWORD'" + "\n'bye'\n\nNOTE: "
-            + "\nAcceptable Form of DATE_OR_TIME: 'YYYY-MM-DD HHMM', 'YYYY-MM-DD', 'YYYY-MM-DD HH', 'YYYY-MM-DD H' or 'undecided'";
+    public static String fullGuide = "Please follow the formats below:\n"
+            + "\n1. 'help'" + "\n2. 'list'" + "\n3. 'done TASK_NUMBER'" + "\n4. 'delete TASK_NUMBER'"
+            + "\n5. 'todo MY_TASK'" + "\n6. 'deadline MY_TASK /by DATE_OR_TIME'"
+            + "\n7. 'event MY_TASK /at DATE_OR_TIME'" + "\n8. 'find KEYWORD'" + "\n9. 'archive'"
+            + "\n10. 'listArchive'" + "\n11. 'loadArchive ARCHIVE_FILE_NAME'"
+            + "\n12. 'binArchive ARCHIVE_FILE_NAME'" + "\n13. 'bye'" + "\n\nLegend: "
+            + "\n1 -> Get command guide\n2 -> List all tasks in the current version"
+            + "\n3 & 4 -> Modify the status of a task\n5 & 6 & 7 -> Add a new task"
+            + "\n8 -> Search for task(s) matching a certain keyword\n9 -> Archive your current version of task list"
+            + "\n10 -> List all existing archive files"
+            + "\n11 -> Load a certain version of task list to your current work space"
+            + "\n12 -> Delete a certain archive file\n13 -> Let Duke enter the sleep mode";
 
 
     /**
