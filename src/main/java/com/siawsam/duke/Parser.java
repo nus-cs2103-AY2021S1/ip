@@ -10,8 +10,9 @@ public class Parser {
     /**
      * An array of valid parameterized Duke commands.
      */
-    private static final List<String> PARAMETERIZED_COMMANDS = Arrays.asList("done", "delete", "find");
+    private static final List<String> PARAMETERIZED_COMMANDS = Arrays.asList("done", "delete", "find", "tag");
     private final TaskList userTaskList;
+    private final TagList tagList = new TagList();
     private final Storage storage;
     
     /**
@@ -55,6 +56,8 @@ public class Parser {
                 return Response.terminatingResponse(Ui.showGoodbyeMessage());
             case "list":
                 return new Response(Ui.printList(userTaskList));
+            case "tags":
+                return new Response(Ui.printTags(tagList));
             case "save":
                 return storage.save(userTaskList);
             default:
@@ -73,6 +76,8 @@ public class Parser {
             return parseDeleteCommand(literal);
         case "find":
             return parseFindCommand(literal);
+        case "tag":
+            return parseTagCommand(literal);
         default:
             assert !PARAMETERIZED_COMMANDS.contains(command) : "invalid parameterized command";
             return Response.emptyResponse();
@@ -119,5 +124,13 @@ public class Parser {
         } catch (DukeException ex) {
             return new Response(Ui.showErrorMessage(ex));
         }
+    }
+    
+    private Response parseTagCommand(String literal) {
+        String parameters = literal.split("tag")[1].trim();
+        int itemIndex = Integer.parseInt(parameters.split(" ")[0]);
+        String tagName = parameters.split(Integer.toString(itemIndex))[1].trim();
+        
+        return userTaskList.tagItem(itemIndex, tagName, tagList);
     }
 }

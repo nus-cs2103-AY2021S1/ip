@@ -5,21 +5,26 @@ import java.util.List;
 
 public class Tag {
     private final String tagName;
-    private final List<Task> taggedTasks = new ArrayList<>();
+    private final List<Taggable> taggedItems = new ArrayList<>();
     
     Tag(String tagName) {
         this.tagName = tagName;
     }
     
-    void addTask(Task task) {
-        taggedTasks.add(task);
+    void addItem(Taggable taggable) {
+        taggedItems.add(taggable);
     }
     
     String getTagName() {
         return tagName;
     }
     
-    List<Task> getTaggedTasks() {
-        return taggedTasks;
+    List<Taggable> getTaggedItems() {
+        return taggedItems;
+    }
+    
+    @Override
+    public String toString() {
+        return getTagName() + " (" + taggedItems.size() + " items)";
     }
 }

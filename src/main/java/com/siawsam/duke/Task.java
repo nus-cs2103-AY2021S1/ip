@@ -47,6 +47,10 @@ public class Task implements Serializable, Taggable {
         return tag;
     }
     
+    boolean isTagged() {
+        return tag != null;
+    }
+    
     /**
      * Returns a string representation of the task.
      *
@@ -54,6 +58,10 @@ public class Task implements Serializable, Taggable {
      */
     public String toString() {
         String status = isDone ? "\u2713" : "\u2718";
-        return "[" + status + "] " + taskDescription;
+        String taskString = "[" + status + "] " + taskDescription;
+        if (tag == null) {
+            return taskString;
+        }
+        return taskString + " (tag: #" + tag.getTagName() + ")";
     }
 }

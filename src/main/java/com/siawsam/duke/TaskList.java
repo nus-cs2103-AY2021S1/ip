@@ -143,6 +143,27 @@ public class TaskList implements Serializable {
         return results;
     }
     
+    public Response tagItem(int itemIndex, String tagName, TagList tagList) {
+        if (itemIndex > itemList.size()) {
+            throw new IllegalArgumentException("Item #" + itemIndex + " does "
+                                                       + "not exist and cannot "
+                                                       + "be tagged.");
+        }
+        
+        try {
+            Task task = itemList.get(itemIndex - 1);
+            if (task.isTagged()) {
+                return new Response(Ui.taskAlreadyTagged());
+            }
+            
+            Tag tag = tagList.addTaggableToTag(tagName, task);
+            task.addTag(tag);
+            return new Response(Ui.showSuccessfulTag(task));
+        } catch (DukeException exception) {
+            return new Response(Ui.showErrorMessage(exception));
+        }
+    }
+    
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
