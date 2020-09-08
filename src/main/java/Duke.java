@@ -29,6 +29,8 @@ public class Duke extends Application {
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
+        assert user != null;
+        assert duke != null;
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
