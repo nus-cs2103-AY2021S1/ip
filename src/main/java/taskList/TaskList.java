@@ -18,6 +18,9 @@ import java.util.ArrayList;
 public class TaskList {
     private final ArrayList<Task> todoList;
     private int numberOfTasks;
+    private String completedTask = "     \\\\(^o^)/ *.*.* \\\\(^o^)/"
+            + "\n  Yay! This task has been completed:"
+            + "\n  ";
 
     /**
      * It creates a new array list for the todo list and sets the counter to 0.
@@ -60,9 +63,7 @@ public class TaskList {
             String output = "";
             Task item = todoList.get(Integer.valueOf(indexString) - 1);
             item.completeTask();
-            output += "     \\\\(^o^)/ *.*.* \\\\(^o^)/"
-                    + "\n  Yay! This task has been completed:"
-                    + "\n  " + item.getItem();
+            output += completedTask + item.getItem();
             return output;
         } catch (Exception e) {
             throw new DukeException("Oops! Invalid task number. Please try again >.<");
@@ -82,17 +83,28 @@ public class TaskList {
         assert(input.contains(" "));
         String indexString = input.split(" ")[1];
         try {
-            int index = Integer.valueOf(indexString) - 1;
-            Task item = todoList.get(index);
+            Task item = deleteItemFromTodolist(indexString);
             String output = "";
             output += "  Noted. This task has now been removed from the list:" + "\n    " + item.getItem();
-            todoList.remove(index);
-            numberOfTasks -= 1;
             output += "\n  There are now " + numberOfTasks + " todo items in the list";
             return output;
         } catch (Exception e) {
             throw new DukeException("Oops! Invalid task number. Please try again >.<");
         }
+    }
+
+    /**
+     * Deletes the task of the given index from the todolist.
+     *
+     * @param indexString
+     * @return Task that is deleted
+     */
+    public Task deleteItemFromTodolist(String indexString) {
+        int index = Integer.valueOf(indexString) - 1;
+        Task item = todoList.get(index);
+        todoList.remove(index);
+        numberOfTasks -= 1;
+        return item;
     }
 
     /**
@@ -109,6 +121,21 @@ public class TaskList {
         if (item.equals("") || item.equals(" ")) {
             throw new DukeException("Oops! The description cannot be empty >.<");
         }
+        String output = addItemToTodolist(item, instruction);
+        output += "\n  New todo item added to the list!";
+        output += "\n  There are now " + (numberOfTasks + 1) + " todo items in the list";
+        return output;
+    }
+
+    /**
+     * Adds task to the todo list.
+     *
+     * @param item
+     * @param instruction
+     * @return String of the task to be outputted to the user
+     * @throws DukeException
+     */
+    public String addItemToTodolist(String item, String instruction) throws DukeException  {
         String output = "";
         if (instruction.equals("todo")) {
             output += addTodoItem(item, false);
@@ -117,8 +144,6 @@ public class TaskList {
         } else {
             output += addEvent(item, false);
         }
-        output += "\n  New todo item added to the list!";
-        output += "\n  There are now " + (numberOfTasks + 1) + " todo items in the list";
         return output;
     }
 
@@ -180,19 +205,30 @@ public class TaskList {
      * @return String returns all the tasks that match the search query
      */
     public String findItem(String input) {
-        String result = "";
         String query = input.substring(4);
+        String result = findItemsFromTodolist(query);
+        if (result.length() == 0) {
+            result = "  There is no matching tasks in your list.";
+        } else {
+            result = "  Here are the matching tasks in your list: " + result;
+        }
+        return result;
+    }
+
+    /**
+     * Based on the query given, finds the tasks in the list and returns their Strings
+     *
+     * @param query
+     * @return String of all the tasks found in the list
+     */
+    public String findItemsFromTodolist(String query) {
+        String result = "";
         int count = 0;
         for (Task task : todoList) {
             if (task.getTask().contains(query)) {
                 count += 1;
                 result += "\n    " + count + "." + task.getItem();
             }
-        }
-        if (count == 0) {
-            result = "  There is no matching tasks in your list.";
-        } else {
-            result = "  Here are the matching tasks in your list: " + result;
         }
         return result;
     }

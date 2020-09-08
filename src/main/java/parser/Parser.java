@@ -138,20 +138,40 @@ public class Parser {
         int firstHour = (int) time.charAt(0) - '0';
         int secondHour = (int) time.charAt(1) - '0';
         int hours = firstHour * 10 + secondHour;
-        String amPM;
-        String convertedTime;
+        String amPM = getAmPm(hours);
+        hours = hours % 12;
+        String convertedTime = convertHour(hours);
+        return convertedTime + "." + time.substring(2, 4) + amPM;
+    }
+
+    /**
+     * Based on the hour given, determines whether it's morning or afternoon
+     * and returns the appropriate AM or PM String.
+     *
+     * @param hours
+     * @return String of whether it's am or pm
+     */
+    public static String getAmPm(int hours) {
         if (hours < 12) {
-            amPM = "am";
+            return "am";
         } else {
-            amPM = "pm";
+            return "pm";
         }
+    }
+
+    /**
+     * Converts 24 hour time to 12 hour time
+     *
+     * @param hours
+     * @return String of the hour part of the time
+     */
+    public static String convertHour(int hours) {
         hours = hours % 12;
         if (hours == 0) {
-            convertedTime = "12";
+            return "12";
         } else {
-            convertedTime = Integer.toString(hours);
+            return Integer.toString(hours);
         }
-        return convertedTime + "." + time.substring(2, 4) + amPM;
     }
 
     /**
