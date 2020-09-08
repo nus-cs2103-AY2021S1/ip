@@ -61,7 +61,12 @@ public class Duke {
                 }
             } else if (Arrays.asList(Duke.COMMANDS).contains(command[0].toLowerCase())) {
                 // add Task to LIST
-                addTask(input);
+                try {
+                    addTask(input);
+                } catch (InvalidInputException e) {
+                    System.out.println(e.getMessage());
+                    System.out.println("Please enter valid input");
+                }
             } else {
                 // invalid inputs
                 System.out.println("Sorry, I don't understand! Please enter valid input.");
@@ -71,14 +76,19 @@ public class Duke {
         } // end while loop
     }
 
-    // Adds Task to LIST
-    public static void addTask(String input) {
+    // Adds Task to LIST. Checks inputs and throws exceptions for invalid inputs
+    public static void addTask(String input) throws InvalidInputException {
         StringBuilder sb = new StringBuilder();
         String[] splitSpace = input.split(" ");
         Task task;
 
         if (splitSpace[0].toLowerCase().equals(Duke.COMMANDS[0])) {
             // case: todo
+            if (splitSpace.length == 1) {
+                // throws exception if input is "todo" (missing task name)
+                throw new InvalidInputException("Todo command incomplete");
+            }
+
             for (String str : splitSpace) {
                 if (str.toLowerCase().equals(Duke.COMMANDS[0])) {
                     continue;
@@ -89,11 +99,41 @@ public class Duke {
             task = new ToDo(sb.toString());
         } else if (splitSpace[0].toLowerCase().equals(Duke.COMMANDS[1])) {
             // case: deadline
+            if (!input.contains(" /by")) {
+                // throws exception if invalid input format: does not contain "/by"
+                throw new InvalidInputException("Deadline command is missing \"/by\" keyword");
+            }
+
+            if (input.split(" /")[0].toLowerCase().equals(Duke.COMMANDS[1])) {
+                // throws exception if invalid input format: "deadline /by taskDeadline"
+                throw new InvalidInputException("Missing deadline task description");
+            }
+
+            if (input.split(" ")[(input.split(" ").length - 1)].equals("/by")) {
+                // throws exception if invalid input format: "deadline taskName /by"
+                throw new InvalidInputException("Missing task deadline");
+            }
+
             String name = input.split(" /")[0].substring(9);
             String deadline = input.split("/")[1].substring(3);
             task = new Deadline(name, deadline);
         } else {
             // case: event
+            if (!input.contains(" /at")) {
+                // throws exception if invalid input format: does not contain "/at"
+                throw new InvalidInputException("Event command is missing \"/at\" keyword");
+            }
+
+            if (input.split(" /")[0].toLowerCase().equals(Duke.COMMANDS[2])) {
+                // throws exception if invalid input format: "event /at eventTime"
+                throw new InvalidInputException("Missing event task description");
+            }
+
+            if (input.split(" ")[(input.split(" ").length - 1)].equals("/at")) {
+                // throws exception if invalid input format: "event eventName /at"
+                throw new InvalidInputException("Missing event date");
+            }
+
             String name = input.split(" /")[0].substring(6);
             String time = input.split("/")[1].substring(3);
             task = new Event(name, time);
