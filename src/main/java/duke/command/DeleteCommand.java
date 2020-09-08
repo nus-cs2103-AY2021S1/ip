@@ -12,13 +12,13 @@ public class DeleteCommand extends Command {
     /**
      * Initializes a DeleteCommand instance
      * @param number index of the task to be deleted
-     * @throws DukeException if the task does not exist in the list
+     * @throws DukeException if the user input is invalid
      */
     public DeleteCommand(String number) throws DukeException {
         try {
             this.index = Integer.parseInt(number) - 1;
         } catch (NumberFormatException e) {
-            throw new DukeException("Sorry, I can't seem to find the task...");
+            throw new DukeException("Invalid input detected...");
         }
     }
 
