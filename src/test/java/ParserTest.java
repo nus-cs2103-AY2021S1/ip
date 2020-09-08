@@ -1,10 +1,12 @@
-import duke.DukeException;
-import duke.Parser;
-import duke.command.DeleteCommand;
-import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import duke.Parser;
+import duke.command.DeleteCommand;
+
 
 public class ParserTest {
 
@@ -35,7 +37,9 @@ public class ParserTest {
             DeleteCommand dc = (DeleteCommand) new Parser().parse(s);
             assertEquals(new DeleteCommand(1).getTaskNumber(),
                     dc.getTaskNumber());
-        } catch (Exception e) {}
+        } catch (Exception e) {
+            //Do nothing
+        }
     }
 
 }

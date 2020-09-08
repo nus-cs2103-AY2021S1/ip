@@ -132,8 +132,8 @@ public class Parser {
      */
     private Command parseTodo(String[] userInputArr, String userInput) throws DukeException {
         if (userInputArr.length < 2) {
-            throw new DukeException("☹ OOPS!!! " +
-                    "The description of a todo cannot be empty.\n");
+            throw new DukeException("☹ OOPS!!! "
+                    + "The description of a todo cannot be empty.\n");
         }
         String todoName = userInput.substring(5);
         ToDo todo = new ToDo(todoName);
