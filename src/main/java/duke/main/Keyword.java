@@ -10,7 +10,8 @@ public enum Keyword {
     DELETE("delete"),
     BYE("bye"),
     DONE("done"),
-    FIND("find");
+    FIND("find"),
+    SORT("sort");
 
     private String keyword;
 
