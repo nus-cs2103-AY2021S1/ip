@@ -36,7 +36,7 @@ public class DoneCommand extends Command {
         String response;
 
         try {
-            response = this.concatenateOutputs(ui, null , taskList);
+            response = this.getResponse(ui, null , taskList);
             return response;
 
         } catch (Exception ex) {
@@ -53,7 +53,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public String concatenateOutputs(Ui ui, Task task, TaskList taskList) {
+    public String getResponse(Ui ui, Task task, TaskList taskList) {
         assert task == null;
 
         String response;

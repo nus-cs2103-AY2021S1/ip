@@ -6,6 +6,7 @@ package sparkles.task;
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String typeOfTask;
 
     /**
      * Create a Task object representing a Task from the user.
@@ -15,6 +16,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        typeOfTask = null;
     }
 
     public String getDescription() {
@@ -78,7 +80,9 @@ public class Task {
         } else {
             Task t = (Task) obj;
 
-            return t.description.equals(this.description);
+            boolean sameDesc = this.description.equals(t.description);
+            boolean sameTypeOfTask = this.typeOfTask.equals(t.typeOfTask);
+            return sameDesc && sameTypeOfTask;
         }
     }
 

@@ -50,17 +50,30 @@ public class AddCommand extends Command {
      * @return final response to the command
      */
     @Override
-    public String concatenateOutputs(Ui ui, Task task, TaskList taskList) {
+    public String getResponse(Ui ui, Task task, TaskList taskList) {
         String response;
 
-        ui.print("     Got it. I've added this task");
+        if (taskExist(taskList, task)) {
+            response = respondDuplicate(ui);
+        } else {
+            ui.print("     Got it. I've added this task");
 
-        response = "Got it. I've added this task\n";
-        response += task.printTask().trim() + "\n";
+            response = "Got it. I've added this task\n";
+            response += task.printTask().trim() + "\n";
 
-        taskList.add(task);
+            taskList.add(task);
 
-        response += ui.showListSize(taskList.getListSize());
+            response += ui.showListSize(taskList.getListSize());
+        }
         return response;
+    }
+
+    public boolean taskExist(TaskList taskList, Task task) {
+        return taskList.hasTheSameTask(task);
+    }
+
+    public String respondDuplicate(Ui ui) {
+        ui.print("     Task already exist! Please verify again.");
+        return "Task already exist! Please verify again.";
     }
 }

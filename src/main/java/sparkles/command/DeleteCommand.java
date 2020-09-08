@@ -40,9 +40,7 @@ public class DeleteCommand extends Command {
             index = Integer.parseInt(command.substring(7));
             Task task = taskList.getStorage().get(index - 1);
 
-            ui.print("     Noted, I have removed this task:");
-
-            response = this.concatenateOutputs(ui, task, taskList);
+            response = this.getResponse(ui, task, taskList);
             return response;
         } catch (Exception ex) {
             if (ex instanceof StringIndexOutOfBoundsException) {
@@ -58,7 +56,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public String concatenateOutputs(Ui ui, Task task, TaskList taskList) {
+    public String getResponse(Ui ui, Task task, TaskList taskList) {
         String response;
 
         ui.print("     Noted, I have removed this task:");

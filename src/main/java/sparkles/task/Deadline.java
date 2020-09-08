@@ -25,6 +25,7 @@ public class Deadline extends Task {
         super(description);
         parseDateAndTime(by);
         this.by = by;
+        super.typeOfTask = "D";
     }
 
     private void parseDateAndTime(String by) {
@@ -62,6 +63,15 @@ public class Deadline extends Task {
     @Override
     public String convertToDiskFormat() {
         return "     D | " + super.convertToDiskFormat() + " | " + by;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (super.equals(obj)) {
+            Deadline d = (Deadline) obj;
+            return this.by.equals(d.by);
+        }
+        return false;
     }
 
     @Override

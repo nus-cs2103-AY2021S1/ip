@@ -45,7 +45,7 @@ public class AddEventCommand extends AddCommand {
             at = arr[1];
             task = new Event(desc, at);
 
-            response = this.concatenateOutputs(ui, task, taskList);
+            response = this.getResponse(ui, task, taskList);
         } catch (Exception ex) {
             throw new SparklesException("     OOPS!! The description and time of an Event cannot be empty!");
         } finally {

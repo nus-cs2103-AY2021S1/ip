@@ -45,7 +45,7 @@ public class AddDeadlineCommand extends AddCommand {
             by = arr[1];
             task = new Deadline(desc, by);
 
-            response = this.concatenateOutputs(ui, task, taskList);
+            response = this.getResponse(ui, task, taskList);
         } catch (Exception ex) {
             throw new SparklesException("     OOPS!! The description and deadline of a Deadline cannot be empty!");
         } finally {

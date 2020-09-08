@@ -43,7 +43,7 @@ public class FindCommand extends Command {
         }
 
         try {
-            response = this.concatenateOutputs(ui, null, taskList);
+            response = this.getResponse(ui, null, taskList);
 
         } catch (Exception ex) {
             if (ex instanceof StringIndexOutOfBoundsException) {
@@ -55,7 +55,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String concatenateOutputs(Ui ui, Task task, TaskList taskList) {
+    public String getResponse(Ui ui, Task task, TaskList taskList) {
         assert task == null;
 
         String response = "";

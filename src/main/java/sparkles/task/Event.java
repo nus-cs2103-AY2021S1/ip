@@ -22,6 +22,7 @@ public class Event extends Task {
         super(description);
         this.date = parseDate(at);
         this.at = at;
+        super.typeOfTask = "E";
     }
 
     private LocalDate parseDate(String at) {
