@@ -9,8 +9,8 @@ import java.io.IOException;
  * retrieved in/from a local file.
  *
  * @author Siqi
- * @version 1.0
- * @since 2020-08-25
+ * @version 1.1
+ * @since 2020-09-08
  */
 public class Storage {
     /**
@@ -20,15 +20,17 @@ public class Storage {
 
     /**
      * Storage constructor.
-     * @param filePath
+     *
+     * @param filePath The path of the local file.
      */
     public Storage(final String filePath) {
         this.filePath = filePath;
     }
 
     /**
-     * This method loads the data from a local file and returns it in TaskList.
-     * @return This returns a TaskList loaded from the file.
+     * Loads the data from a local file and returns it as a TaskList.
+     *
+     * @return The TaskList loaded from the file.
      * @throws DukeException When there is a problem finding/creating the file.
      */
     public TaskList load() throws DukeException {
@@ -44,7 +46,7 @@ public class Storage {
                 while (s.hasNext()) {
                     String taskString = s.nextLine();
                     if (!taskString.isEmpty()) {
-                        Parser.addTaskFromFile(taskString, taskList);
+                        Parser.parseTaskFromFile(taskString, taskList);
                     } else {
                         continue;
                     }
@@ -65,7 +67,8 @@ public class Storage {
     }
 
     /**
-     * This method saves data from the program into a local file.
+     * Saves data from the program into a local file.
+     *
      * @param listToAdd         This is the task list to be saved.
      * @throws DukeException    When there is a problem writing to local file.
      */

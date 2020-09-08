@@ -5,8 +5,8 @@ import java.time.format.DateTimeFormatter;
  * Represents an event task.
  *
  * @author Siqi
- * @version 1.0
- * @since 2020-08-25
+ * @version 1.1
+ * @since 2020-09-08
  */
 public class Event extends Task {
     /**
@@ -20,57 +20,62 @@ public class Event extends Task {
 
     /**
      * Event constructor with date only.
-     * @param description   The description of the event.
+     *
+     * @param desc   The description of the event.
      * @param at            The date of the event.
      */
-    public Event(final String description, final LocalDate at) {
-        super(description);
+    public Event(final String desc, final LocalDate at) {
+        super(desc);
         this.at = at;
     }
 
     /**
      * Event constructor with date and time.
-     * @param description   The description of the event.
+     *
+     * @param desc          The description of the event.
      * @param at            The date of the event.
      * @param time          The time of the event.
      */
-    public Event(final String description, final LocalDate at,
+    public Event(final String desc, final LocalDate at,
                  final String time) {
-        super(description);
+        super(desc);
         this.at = at;
         this.time = time;
     }
 
     /**
      * Event constructor with date and marked as done.
-     * @param description   The description of the event.
+     *
+     * @param desc   The description of the event.
      * @param isDone        The event is marked as done.
      * @param at            The date of the event.
      */
-    public Event(final String description, final boolean isDone,
+    public Event(final String desc, final boolean isDone,
                  final LocalDate at) {
-        super(description, isDone);
+        super(desc, isDone);
         this.at = at;
         this.time = null;
     }
 
     /**
      * Event constructor with date and time and marked as done.
-     * @param description   The description of the event.
+     *
+     * @param desc          The description of the event.
      * @param isDone        The event is marked as done.
      * @param at            The date of the event.
      * @param time          The time of the event.
      */
-    public Event(final String description, final boolean isDone,
+    public Event(final String desc, final boolean isDone,
                  final LocalDate at, final String time) {
-        super(description, isDone);
+        super(desc, isDone);
         this.at = at;
         this.time = time;
     }
 
     /**
-     * This method formats the task for display to the user.
-     * @return This returns a string containing the task details.
+     * Formats the task for display to the user.
+     *
+     * @return The string containing the task details.
      */
     public String display() {
         if (time == null || time.isEmpty()) {
