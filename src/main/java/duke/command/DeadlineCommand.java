@@ -35,6 +35,8 @@ public class DeadlineCommand extends Command {
                   parseArray[1], DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")));
             } catch (DateTimeParseException e) {
                 throw new DukeCommandException("Invalid date!");
+            } catch (AssertionError e) {
+                throw new DukeCommandException("Assertion error");
             }
 
             list.getList().add(deadline);

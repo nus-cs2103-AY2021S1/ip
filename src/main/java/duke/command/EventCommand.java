@@ -1,5 +1,6 @@
 package duke.command;
 
+import java.lang.reflect.InvocationTargetException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
@@ -36,6 +37,8 @@ public class EventCommand extends Command {
                   parseArray[1], DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm")));
             } catch (DateTimeParseException e) {
                 throw new DukeCommandException("Invalid date!");
+            } catch (AssertionError e) {
+                throw new DukeCommandException("Assertion error");
             }
             list.getList().add(event);
 
