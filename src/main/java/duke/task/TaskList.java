@@ -145,6 +145,7 @@ public class TaskList {
         default:
             task = null;
         }
+        assert task != null : "Task is null. Please check the code.";
         taskList.add(task);
         ui.printAdd(task, taskList.size());
     }

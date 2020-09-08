@@ -1,5 +1,3 @@
 T | 0 | readbook
 T | 1 | meeting
 D | 1 | return book | 2020-08-26
-E | 1 | group meeting | Monday
-T | 0 | practice
