@@ -48,14 +48,14 @@ public class TaskList {
      */
     public String find(String keyword) {
         String result = "";
-        for (Task t : tasks) {
-            if (t.getName().contains(keyword)) {
-                if (result.equals("")) {
-                    result += "\n   " + t.toString();
-                } else {
-                    result = "  " + t.toString();
-                }
+        for (Task currentTask : tasks) {
+            if (!currentTask.getName().contains(keyword)) {
+                continue;
+            } else if (result.equals("")) {
+                result += "\n" + currentTask.toString();
+                continue;
             }
+            result += " " + currentTask.toString();
         }
         return result;
     }
@@ -153,7 +153,7 @@ public class TaskList {
         for (int i = 1; i <= tasks.size(); i++) {
             output += i + "." + tasks.get(i - 1).toString();
             if (i != tasks.size()) {
-                output += "\n";
+                output += "\n"; //Add a new line only if the current task is not the last.
             }
         }
         return output;
