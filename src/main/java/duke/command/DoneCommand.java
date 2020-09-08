@@ -35,6 +35,7 @@ public class DoneCommand extends Command {
         if (details.length == 1) {
             throw new DukeException("Please specify a task to complete!");
         }
+
         int taskNumber;
         try {
             taskNumber = Integer.parseInt(details[1]);
@@ -60,14 +61,15 @@ public class DoneCommand extends Command {
         } else if (doneIndex <= 0) {
             throw new DukeException("Please enter a valid number between 0 and " + taskList.size());
         }
+
         Task doneTask = taskList.get(doneIndex);
         if (doneTask.isCompleted()) {
             ui.outputMessage(createAlreadyDoneMessage());
-        } else {
-            doneTask.markDone();
-            ui.outputMessage(createDoneMessage(doneTask));
-            storage.updateFile(taskList);
         }
+        doneTask.markDone();
+        ui.outputMessage(createDoneMessage(doneTask));
+        storage.updateFile(taskList);
+
     }
 
 

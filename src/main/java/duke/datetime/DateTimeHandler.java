@@ -23,6 +23,10 @@ public class DateTimeHandler {
     /** DateTimeFormatter object of standard time format */
     public static final DateTimeFormatter STANDARD_2400_FORMAT = DateTimeFormatter.ofPattern(
             STANDARD_2400_FORMAT_STRING);
+    /** Length of standard datetime format string */
+    private static final int STANDARD_DATETIME_LENGTH = STANDARD_DATETIME_FORMAT_STRING.length();
+    /** Length of standard 2400 format string */
+    private static final int STANDARD_2400_LENGTH = STANDARD_2400_FORMAT_STRING.length();
 
     /**
      * Returns a LocalDateTime object from the parsed string.
@@ -34,7 +38,7 @@ public class DateTimeHandler {
      */
     public static LocalDateTime parseDateTime(String dateTime) throws DukeException {
         try {
-            return LocalDateTime.parse(dateTime, STANDARD_DATETIME_FORMAT);
+            return formatToLocalDateTime(dateTime);
         } catch (DateTimeParseException e) {
             throw new DukeException(dateTime + " is an invalid datetime format! Please use "
                     + STANDARD_DATETIME_FORMAT_STRING + " (24hr)");
@@ -45,30 +49,34 @@ public class DateTimeHandler {
      * Returns a pair of LocalDateTime objects from the parsed event timings string.
      * This method handles invalid string formats as well.
      * Besides invalid format, this method checks that the latter timing is later than the earlier timing.
+     * Format 1: DD-MM-YYYY HHMM-HHMM
+     * Format 2: DD-MM-YYYY HHMM-DD-MM-YYYY HHMM
      *
      * @param eventTiming string to be converted into a pair of LocalDateTime objects.
      * @return pair of LocalDateTime objects from the details given.
      * @throws DukeException if the format of the event-timing string is invalid or end timing later than start.
      */
     public static Pair<LocalDateTime, LocalDateTime> parseEventTimings(String eventTiming) throws DukeException {
-        int acceptableLength1 = STANDARD_DATETIME_FORMAT_STRING.length() + 1 + STANDARD_2400_FORMAT_STRING.length();
-        int acceptableLength2 = STANDARD_DATETIME_FORMAT_STRING.length() * 2 + 1;
+        int acceptableLength1 = STANDARD_DATETIME_LENGTH + 1 + STANDARD_2400_LENGTH;
+        int acceptableLength2 = STANDARD_DATETIME_LENGTH * 2 + 1;
 
-        if (eventTiming.length() != acceptableLength1 && eventTiming.length() != acceptableLength2) {
+        boolean isFormat1Length = eventTiming.length() == acceptableLength1;
+        boolean isFormat2Length = eventTiming.length() == acceptableLength2;
+        if (!isFormat1Length && !isFormat2Length) {
             throw new DukeException(getEventStringFormatError(eventTiming));
         }
 
-        String firstTiming = eventTiming.substring(0, STANDARD_DATETIME_FORMAT_STRING.length());
-        String secondTiming = eventTiming.substring(STANDARD_DATETIME_FORMAT_STRING.length() + 1);
+        String firstTiming = eventTiming.substring(0, STANDARD_DATETIME_LENGTH);
+        String secondTiming = eventTiming.substring(STANDARD_DATETIME_LENGTH + 1);
 
         try {
-            LocalDateTime dateTime1 = LocalDateTime.parse(firstTiming, STANDARD_DATETIME_FORMAT);
+            LocalDateTime dateTime1 = formatToLocalDateTime(firstTiming);
             LocalDateTime dateTime2;
 
-            if (secondTiming.length() == STANDARD_DATETIME_FORMAT_STRING.length()) {
-                dateTime2 = LocalDateTime.parse(secondTiming, STANDARD_DATETIME_FORMAT);
+            if (secondTiming.length() == STANDARD_DATETIME_LENGTH) {
+                dateTime2 = formatToLocalDateTime(secondTiming);;
             } else {
-                LocalTime time = LocalTime.parse(secondTiming, STANDARD_2400_FORMAT);
+                LocalTime time = formatToLocalTime(secondTiming);
                 dateTime2 = LocalDateTime.of(dateTime1.toLocalDate(), time);
             }
 
@@ -90,6 +98,16 @@ public class DateTimeHandler {
         return eventTiming + " is not a valid event timing. Please use either\n"
                 + STANDARD_DATETIME_FORMAT_STRING + "-" + STANDARD_DATETIME_FORMAT_STRING + " (24hr)\n"
                 + STANDARD_DATETIME_FORMAT_STRING + "-" + STANDARD_2400_FORMAT_STRING + " (24hr)";
+    }
+
+    /** Returns a LocalDateTime object from the string provided */
+    private static LocalDateTime formatToLocalDateTime(String datetimeString) throws DateTimeParseException {
+        return LocalDateTime.parse(datetimeString, STANDARD_DATETIME_FORMAT);
+    }
+
+    /** Returns a LocalTime object from the string provided */
+    private static LocalTime formatToLocalTime(String timeString) throws DateTimeParseException {
+        return LocalTime.parse(timeString, STANDARD_2400_FORMAT);
     }
 
 

@@ -31,7 +31,7 @@ public class TaskParser {
      *
      * @param taskDescription description of the task, starting with the type as the first word.
      * @return task corresponding to the description given.
-     * @throws DukeException if the commaand given is not a valid type.
+     * @throws DukeException if the command given is not a valid type.
      */
     public static Task parse(String taskDescription) throws DukeException {
         String[] details = taskDescription.split(" ", 2);
@@ -41,6 +41,7 @@ public class TaskParser {
         if (details.length == 1 || details[1].isBlank()) {
             throw new DukeException("The description of a " + details[0] + " task cannot be empty.");
         }
+
         Task addedTask;
         switch (details[0]) {
         case TO_DO:

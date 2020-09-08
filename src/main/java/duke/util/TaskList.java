@@ -10,26 +10,7 @@ import duke.task.Task;
  * An aggregation of tasks.
  * Functions largely similar to java.util.List.
  */
-public class TaskList implements Iterable<Task> {
-
-    /** List of tasks stored */
-    protected List<Task> listOfTasks;
-
-    /**
-     * Constructs a new task list.
-     */
-    public TaskList() {
-        listOfTasks = new ArrayList<>();
-    }
-
-    /**
-     * Adds a task to the task list.
-     *
-     * @param task task to be added.
-     */
-    public void add(Task task) {
-        listOfTasks.add(task);
-    }
+public class TaskList extends ArrayList<Task> {
 
     /**
      * Returns the task at the provided index.
@@ -38,8 +19,9 @@ public class TaskList implements Iterable<Task> {
      * @param index index of the task to be returned from the list.
      * @return task at the index provided.
      */
+    @Override
     public Task get(int index) {
-        return listOfTasks.get(index - 1);
+        return super.get(index - 1);
     }
 
     /**
@@ -49,33 +31,16 @@ public class TaskList implements Iterable<Task> {
      * @param index index of the task to be removed from the list.
      * @return task removed.
      */
+    @Override
     public Task remove(int index) {
-        return listOfTasks.remove(index - 1);
-    }
-
-    /**
-     * Returns an iterator for the tasks inside the list.
-     *
-     * @return iterator object for the tasks in the list.
-     */
-    public Iterator<Task> iterator() {
-        return listOfTasks.iterator();
-    }
-
-    /**
-     * Returns the size of the task list.
-     *
-     * @return size of task list.
-     */
-    public int size() {
-        return listOfTasks.size();
+        return super.remove(index - 1);
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         int count = 1;
-        for (Task task : listOfTasks) {
+        for (Task task : this) {
             if (count != 1) {
                 builder.append('\n');
             }
@@ -90,7 +55,7 @@ public class TaskList implements Iterable<Task> {
      * @return string informing the user about the number of tasks in the list.
      */
     public String createTaskNumberCountMessage() {
-        return "Now you have " + listOfTasks.size() + " tasks in the list.";
+        return "Now you have " + size() + " tasks in the list.";
     }
 
 }
