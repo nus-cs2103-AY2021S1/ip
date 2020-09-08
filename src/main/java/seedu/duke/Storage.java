@@ -7,7 +7,6 @@ import seedu.duke.task.Event;
 import seedu.duke.task.Task;
 import seedu.duke.task.ToDo;
 import seedu.duke.ui.Ui;
-
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
