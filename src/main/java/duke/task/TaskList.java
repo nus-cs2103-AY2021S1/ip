@@ -49,6 +49,8 @@ public class TaskList {
      * @param n Index of the task to be marked as done.
      */
     public String markTaskAsDone(int n) {
+        // Asserts that index is within the correct range.
+        assert n <= taskList.size();
         String message = "Nice! I've marked this task as done: \n";
         Task task = taskList.get(n - 1);
         task.markAsDone();
@@ -61,6 +63,8 @@ public class TaskList {
      * @param n Index of the task to be deleted.
      */
     public String deleteTask(int n) {
+        // Asserts that index is within the correct range.
+        assert n <= taskList.size();
         String message = "Noted. I've removed this task:\n";
         Task task = taskList.get(n - 1);
         System.out.println(indentation + "  " + task.toString());
