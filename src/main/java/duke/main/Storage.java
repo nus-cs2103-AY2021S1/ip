@@ -119,6 +119,7 @@ public class Storage {
             // check whether the current line is the end of file's line
             if (!taskInString.equals("")) {
                 Task task = this.translateStringToTask(taskInString);
+                assert task != null : "Task does not exist";
                 tasks.addTask(task);
             }
         }

@@ -43,6 +43,9 @@ public class DialogBox extends HBox {
         this.setBackground(new Background(new BackgroundFill(color,null, null)));
     }
 
+    private String getText() {
+        return this.dialog.getText();
+    }
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
@@ -56,6 +59,7 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(String text, Image image) {
         DialogBox db = new DialogBox(text, image);
         db.setBackgroundColor(Color.GREEN);
+        assert !db.getText().equals("") : "User input cannot be empty";
         return db;
     }
 
@@ -63,6 +67,7 @@ public class DialogBox extends HBox {
         DialogBox dukeBox = new DialogBox(text, image);
         dukeBox.flip();
         dukeBox.setBackgroundColor(Color.YELLOW);
+        assert !dukeBox.getText().equals("") : "Duke's response cannot be empty";
         return dukeBox;
     }
 }

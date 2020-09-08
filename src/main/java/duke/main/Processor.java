@@ -14,6 +14,10 @@ import duke.task.TaskList;
  */
 public class Processor {
 
+    private static boolean isValidIndex(int index, TaskList tasks) {
+        return index > 0 && index <= tasks.getSize();
+    }
+
     /**
      * Handles the case when user input bye command.
      * @param ui The UI that handles interaction between program and user.
@@ -43,7 +47,8 @@ public class Processor {
      * @param tasks User's task list.
      * @throws DukeException when the index is invalid.
      */
-    public static void handleDoneCommand(String userInput, StringBuilder response, Ui ui, TaskList tasks) throws DukeException {
+    public static void handleDoneCommand(
+            String userInput, StringBuilder response, Ui ui, TaskList tasks) throws DukeException {
         int taskNumber = Parser.getIndexTask(userInput);
         int taskIndex = taskNumber - 1;
         Task task = tasks.getTask(taskIndex);
@@ -60,7 +65,8 @@ public class Processor {
      * @param tasks User's task list.
      * @throws DukeException when the index is invalid.
      */
-    public static void handleDeleteCommand(String userInput, StringBuilder response, Ui ui, TaskList tasks) throws DukeException {
+    public static void handleDeleteCommand(
+            String userInput, StringBuilder response, Ui ui, TaskList tasks) throws DukeException {
         int taskNumber = Parser.getIndexTask(userInput);
         int taskIndex = taskNumber - 1;
         Task deletedTask = tasks.getTask(taskIndex);
@@ -77,7 +83,8 @@ public class Processor {
      * @param tasks User's task list.
      * @throws DukeException can be thrown when task description is empty.
      */
-    public static void handleTodoCommand(String userInput, StringBuilder response, Ui ui, TaskList tasks) throws DukeException {
+    public static void handleTodoCommand(
+            String userInput, StringBuilder response, Ui ui, TaskList tasks) throws DukeException {
         String argument = Parser.getArgs(userInput);
         String taskDescription = Parser.findDescription(argument);
         Task task = new ToDo(taskDescription);
@@ -95,7 +102,8 @@ public class Processor {
      * @throws DukeException can be thrown when the task description or the time is empty, or
      *                       date format is incorrect.
      */
-    public static void handleDeadlineCommand(String userInput, StringBuilder response, Ui ui, TaskList tasks) throws DukeException {
+    public static void handleDeadlineCommand(
+            String userInput, StringBuilder response, Ui ui, TaskList tasks) throws DukeException {
         String argument = Parser.getArgs(userInput);
         String taskDescription = Parser.findDescription(argument);
         String deadlineTime = Parser.findTime(argument, "by");
@@ -118,7 +126,8 @@ public class Processor {
      * @throws DukeException can be thrown when the task description or the time is empty, or
      *                       date format is incorrect.
      */
-    public static void handleEventCommand(String userInput, StringBuilder response, Ui ui, TaskList tasks) throws DukeException {
+    public static void handleEventCommand(
+            String userInput, StringBuilder response, Ui ui, TaskList tasks) throws DukeException {
         String argument = Parser.getArgs(userInput);
         String taskDescription = Parser.findDescription(argument);
         String eventTime = Parser.findTime(argument, "at");
@@ -141,7 +150,8 @@ public class Processor {
      * @throws DukeException can be thrown when the task description or the time is empty, or
      *                       date format is incorrect.
      */
-    public static void handleFindCommand(String userInput, StringBuilder response, Ui ui, TaskList tasks) throws DukeException {
+    public static void handleFindCommand(
+            String userInput, StringBuilder response, Ui ui, TaskList tasks) throws DukeException {
         String keyword = Parser.getArgs(userInput);
         TaskList correspondTaskList = tasks.findTaskWithKeyword(keyword);
         String message = ui.getMatchingList(correspondTaskList);
