@@ -31,6 +31,9 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+    * Sets MainWindow's Duke object.
+    */
     public void setDuke(Duke duke) {
         this.duke = duke;
     }
@@ -45,7 +48,7 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
         if (duke.respondToUserInput(input)) {
             Platform.exit();
-        };
+        }
         userInput.clear();
     }
 

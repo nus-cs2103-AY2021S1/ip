@@ -9,6 +9,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import duke.exceptions.IllegalValueException;
 import duke.tasks.Task;
@@ -53,27 +54,32 @@ public class TaskDecoder {
             throw new IllegalValueException("Encoded task in invalid format. Unable to decode." + encodedTask);
         }
         String command = matcher.group("eventType");
-        boolean isDone = matcher.group("isDone").equals("0") ? false : true;
+        boolean isDone = !matcher.group("isDone").equals("0");
         String description = matcher.group("description");
-        if (command.equals("T")) {
+        assert !command.equals("") && !matcher.group("isDone").equals("") && !description.equals("")
+                : "Save field is empty";
+        switch (command) {
+        case "T":
             return new TaskToDo(description, isDone);
-        } else if (command.equals("E")) {
+        case "E": {
             String pattern = ("(\\S+)(\\s)(\\d{4})([-])(\\d{4})");
             String date = matcher.group("date");
+            assert Pattern.compile(pattern).matcher(date).matches() : "Date input for " + description + " is incorrect";
             LocalDate eventDate = LocalDate.parse(date.replaceAll(pattern, "$1"));
             String startTemp = date.replaceAll(pattern, "$3");
             String endTemp = date.replaceAll(pattern, "$5");
             LocalTime startTime = LocalTime.parse(startTemp, DateTimeFormatter.ofPattern("Hmm"));
             LocalTime endTime = LocalTime.parse(endTemp, DateTimeFormatter.ofPattern("Hmm"));
-
             Task taskEvent = new TaskEvent(description, eventDate, startTime, endTime);
             if (isDone) {
                 taskEvent.setDone();
             }
             return taskEvent;
-        } else if (command.equals("D")) {
+        }
+        case "D": {
             String date = matcher.group("date");
             String pattern = ("([\\S]+)(\\s)([\\S]+)");
+            assert Pattern.compile(pattern).matcher(date).matches() : "Date input for " + description + " is incorrect";
             LocalDate deadlineDate = LocalDate.parse(date.replaceAll(pattern, "$1"));
             String timeTemp = date.replaceAll(pattern, "$3");
             LocalTime deadlineTime = LocalTime.parse(timeTemp, DateTimeFormatter.ofPattern("Hmm"));
@@ -83,7 +89,8 @@ public class TaskDecoder {
                 taskDeadline.setDone();
             }
             return taskDeadline;
-        } else {
+        }
+        default:
             throw new AssertionError("Regex is not checking properly");
         }
     }

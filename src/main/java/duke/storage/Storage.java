@@ -1,6 +1,5 @@
 package duke.storage;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -90,15 +89,12 @@ public class Storage {
         if (!Files.exists(path) || !Files.isRegularFile(path)) {
             return new TaskList();
         }
-
+        assert Files.exists(path) && Files.isRegularFile(path) : "A non-existent file scenario"
+                + " should already be handled";
         try {
             // read the file
             List<String> dataLines = Files.readAllLines(path);
             return TaskDecoder.decodeTasksFromSave(dataLines);
-            // should be handled above so it's an assertion instead of an exception
-        } catch (FileNotFoundException fnfe) {
-            throw new AssertionError("A non-existent file scenario should already have been handled earlier.");
-            // io exception for example no permission to read a file, some process closed the stream
         } catch (IOException ioe) {
             throw new StorageOperationException("Error reading file: " + path);
             // illegalValueException is when arguments cannot form a task
