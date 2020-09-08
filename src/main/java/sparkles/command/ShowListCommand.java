@@ -33,21 +33,31 @@ public class ShowListCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws SparklesException {
         taskList.updateList(storage.load());
-        List<Task> tasks = taskList.getStorage();
+
         String response = "";
 
-        if (tasks.isEmpty()) {
-
+        if (taskList.isEmpty()) {
             ui.print("     Tasks list is Empty.");
-            response = "Tasks list is Empty.";
 
-        } else {
-
-            for (int i = 0; i < tasks.size(); i++) {
-                Task task = tasks.get(i);
-                response += task.printTask(i + 1).trim() + "\n";
-            }
+            return "Tasks list is Empty.";
         }
+
+        response = this.concatenateOutputs(ui, null, taskList);
+        return response;
+    }
+
+    @Override
+    public String concatenateOutputs(Ui ui, Task task, TaskList taskList) {
+        assert task == null;
+
+        String response = "";
+        List<Task> listFromTask = taskList.getStorage();
+
+        for (int i = 0; i < listFromTask.size(); i++) {
+            Task t = listFromTask.get(i);
+            response += t.printTask(i + 1).trim() + "\n";
+        }
+
         return response;
     }
 }

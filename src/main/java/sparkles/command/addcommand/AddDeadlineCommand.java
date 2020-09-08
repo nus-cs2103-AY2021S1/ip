@@ -1,7 +1,6 @@
 package sparkles.command.addcommand;
 
 import sparkles.SparklesException;
-import sparkles.command.Command;
 import sparkles.task.Deadline;
 import sparkles.task.Task;
 import sparkles.task.TaskList;
@@ -11,7 +10,7 @@ import sparkles.util.Ui;
 /**
  * Represents an AddDeadlineCommand.
  */
-public class AddDeadlineCommand extends Command {
+public class AddDeadlineCommand extends AddCommand {
 
     public AddDeadlineCommand(String command) {
         super(command);
@@ -45,12 +44,8 @@ public class AddDeadlineCommand extends Command {
             desc = arr[0].substring(9).trim();
             by = arr[1];
             task = new Deadline(desc, by);
-            ui.print("     Got it. I've added this task");
-            response = "Got it. I've added this task\n";
-            response += task.printTask().trim() + "\n";
 
-            taskList.add(task);
-            response += ui.showListSize(taskList.getListSize());
+            response = this.concatenateOutputs(ui, task, taskList);
         } catch (Exception ex) {
             throw new SparklesException("     OOPS!! The description and deadline of a Deadline cannot be empty!");
         } finally {
