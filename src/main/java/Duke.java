@@ -1,8 +1,8 @@
-import duke.Command;
-import duke.Storage;
-import duke.Ui;
-import duke.resource.Parser;
+import duke.logic.Storage;
+import duke.task.Task;
+import duke.ui.Ui;
 import duke.resource.TaskList;
+import duke.resource.Wrapper;
 import duke.util.DukeException;
 
 /**
@@ -13,75 +13,49 @@ public class Duke {
 
     private static final String FILEPATH = "./src/main/data/duke.txt";
 
-    private final Ui ui;
-    private TaskList tasks;
-    private final Storage storage;
+    private final Wrapper wrapper;
 
     /**
-     * Constructor that creates a Duke object, so Launcher can be ran.
+     * Constructor that creates a Duke object.
      */
 
     public Duke() {
-        this.ui = new Ui();
-        this.storage = new Storage(FILEPATH);
+        Storage storage = new Storage(FILEPATH);
+        TaskList tasks = null;
+        Ui ui = new Ui();
         ui.printWelcome();
         try {
-            tasks = TaskList.parse(this.storage.load());
+            tasks = TaskList.parse(storage.load());
             ui.printLoaded(tasks);
         } catch (DukeException e) {
+            tasks = new TaskList();
             ui.printError(e);
+        } finally {
+            this.wrapper = new Wrapper(storage, tasks, ui);
         }
     }
 
-    /**
-     * Runs Duke's user input scanning that only terminates when a "bye" command is given.
-     */
-
-//    public void run() {
-//        ui.start();
-//        boolean isExit = false;
-//        while (!isExit) {
-//            try {
-//                String command = ui.read();
-//                Command c = Parser.parse(command);
-//                c.execute(tasks, ui, storage);
-//                isExit = c.shouldExit();
-//            } catch (DukeException e) {
-//                ui.printError(e);
-//            }
-//        }
-//    }
-
     public String welcome() {
-        String ret = ui.welcome();
+        String ret = wrapper.getUi().welcome();
         try {
-            tasks = TaskList.parse(this.storage.load());
-            ret += ui.printLoaded(tasks);
+            TaskList tasks = TaskList.parse(wrapper.getStorage().load());
+            ret += wrapper.getUi().printLoaded(tasks);
         } catch (DukeException e) {
-            ret += ui.showError(e);
+            ret += wrapper.getUi().showError(e);
         }
         return ret;
     }
 
-    public Ui getUi() {
-        return this.ui;
+    public Storage getStorage() {
+        return this.wrapper.getStorage();
     }
 
     public TaskList getTaskList() {
-        return this.tasks;
+        return this.wrapper.getTaskList();
     }
 
-    public Storage getStorage() {
-        return this.storage;
+    public Ui getUi() {
+        return this.wrapper.getUi();
     }
 
-    /**
-     * Creates a new Duke object and runs it, starting the entire chat-bot.
-     *
-     * @param args input arguments for main; unused
-     */
-
-    public static void main(String[] args) {
-//        new Duke().run();
-    }
 }

@@ -1,4 +1,4 @@
-package duke;
+package duke.logic;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -51,6 +51,7 @@ public class Storage {
                     System.out.println("    Error: " + de.getMessage());
                 }
             });
+            return list;
         } catch (FileNotFoundException e) {
             new File("./src/main/data").mkdirs();
             try {
@@ -66,7 +67,6 @@ public class Storage {
                             + "    If you'd like to import one, simply copy the file\n"
                             + "    over to the above location and rerun me!");
         }
-        return list;
     }
 
     /**

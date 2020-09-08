@@ -1,6 +1,4 @@
-package duke.resource;
-
-import duke.Command;
+package duke.logic;
 
 /**
  * Parser class that parses the user input.

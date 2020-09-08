@@ -1,8 +1,9 @@
-package duke;
+package duke.logic;
 
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
+import duke.ui.Ui;
 import duke.resource.TaskList;
 import duke.task.Deadline;
 import duke.task.Event;

@@ -1,3 +1,4 @@
+import duke.ui.DialogBox;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
@@ -12,10 +13,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import duke.Command;
-import duke.resource.Parser;
-
-import java.util.concurrent.CompletableFuture;
+import duke.logic.Command;
+import duke.logic.Parser;
 
 public class DukeGui extends Application {
 
@@ -50,7 +49,7 @@ public class DukeGui extends Application {
                 DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage))
         );
         if (c.shouldExit()) {
-            CompletableFuture.runAsync(Platform::exit);
+            Platform.exit();
         }
         userInput.clear();
     }
