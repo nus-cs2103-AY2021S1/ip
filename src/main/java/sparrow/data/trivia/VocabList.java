@@ -1,14 +1,17 @@
 package sparrow.data.trivia;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class VocabList {
-    private List<Vocabulary> vocabList;
+    private final List<Vocabulary> vocabList;
 
     public VocabList() {
-        this.vocabList = new ArrayList<Vocabulary>(Arrays.asList(new Vocabulary("phone"), new Vocabulary("wallet")));
+        this.vocabList = new ArrayList<>();
+    }
+
+    public VocabList(List<Vocabulary> vocabList) {
+        this.vocabList = vocabList;
     }
 
     public List<Vocabulary> getVocabList() {

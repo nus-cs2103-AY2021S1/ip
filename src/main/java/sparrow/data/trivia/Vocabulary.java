@@ -27,6 +27,10 @@ public class Vocabulary {
         this.hasDefinition = true;
     }
 
+    public boolean hasDefinition() {
+        return hasDefinition;
+    }
+
     public String define() {
         return hasDefinition ? definition : DICTIONARY_PREFIX + word;
     }

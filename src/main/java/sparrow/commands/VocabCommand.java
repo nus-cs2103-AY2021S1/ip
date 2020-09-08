@@ -24,6 +24,8 @@ public class VocabCommand extends Command {
     @Override
     public String execute(TaskList tasks, VocabList vocabList, Ui ui, Storage storage) {
         vocabList.getVocabList().add(newVocab);
+        storage.saveTaskListToFile(tasks);
+        storage.saveVocabListToFile(vocabList);
         return newVocab.getWord() + ADD_VOCAB_SUCCESS;
     }
 }

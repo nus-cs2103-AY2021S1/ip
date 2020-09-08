@@ -20,7 +20,8 @@ public class DoneCommand extends Command {
     public String execute(TaskList tasks, VocabList vocabList, Ui ui, Storage storage) {
         try {
             Task completedTask = tasks.markAsDone(getTargetIndex());
-            storage.saveToFile(tasks);
+            storage.saveTaskListToFile(tasks);
+            storage.saveVocabListToFile(vocabList);
             return String.format(MESSAGE_COMPLETED_TASK_SUCCESS, completedTask);
         } catch (IndexOutOfBoundsException e) {
             return "INDEX OUT OF BOUNDS";

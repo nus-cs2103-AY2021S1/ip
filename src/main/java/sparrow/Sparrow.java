@@ -19,8 +19,8 @@ public class Sparrow {
         ui = new Ui();
         try {
             storage = new Storage(filePath);
-            tasks = storage.loadFromFile();
-            vocabList = new VocabList();
+            tasks = storage.loadTaskListFromFile();
+            vocabList = storage.loadVocabListFromFile();
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -30,8 +30,8 @@ public class Sparrow {
         ui = new Ui();
         try {
             storage = new Storage();
-            tasks = storage.loadFromFile();
-            vocabList = new VocabList();
+            tasks = storage.loadTaskListFromFile();
+            vocabList = storage.loadVocabListFromFile();
         } catch (Exception e) {
             e.printStackTrace();
         }

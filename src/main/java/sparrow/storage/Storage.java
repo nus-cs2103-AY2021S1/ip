@@ -5,15 +5,22 @@ import sparrow.data.task.Todo;
 import sparrow.data.task.Deadline;
 import sparrow.data.task.Event;
 import sparrow.data.task.TaskList;
+import sparrow.data.trivia.VocabList;
+import sparrow.data.trivia.Vocabulary;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * Represents the file used to store the task list.
@@ -33,7 +40,6 @@ public class Storage {
         if (!isValidPath(path)) {
             throw new Exception("Invalid file extension");
         }
-
     }
 
     private boolean isValidPath(Path filePath) {
@@ -45,12 +51,20 @@ public class Storage {
      * If no file found, returns an empty list.
      * @return Task list.
      */
-    public TaskList loadFromFile() {
+    public TaskList loadTaskListFromFile() {
         File f = new File(path.toString());
 
         if (f.exists()) {
             try {
-                return decodeTaskList(Files.readAllLines(path));
+                List<String> allLines = Files.readAllLines(path);
+                List<String> encodedTaskList = new ArrayList<>();
+                for (String line : allLines) {
+                    if (line.equals("---")) {
+                        break;
+                    }
+                    encodedTaskList.add(line);
+                }
+                return decodeTaskList(encodedTaskList);
             } catch (IOException e) {
                 e.printStackTrace();
             }
@@ -64,7 +78,7 @@ public class Storage {
         return new TaskList();
     }
 
-    public void saveToFile(TaskList tasks) {
+    public void saveTaskListToFile(TaskList tasks) {
         try {
             Files.write(path, encodeTaskList(tasks));
         } catch (IOException e) {
@@ -97,6 +111,7 @@ public class Storage {
      * @return Task object.
      */
     public Task stringToTask(String input) {
+        System.out.println(input);
         Task task = null;
         String[] inputArr = input.split("\\s+\\|\\s+", 4);
         boolean isTaskDone = Integer.parseInt(inputArr[1]) == 1;
@@ -169,5 +184,86 @@ public class Storage {
      */
     public LocalDate stringToDate(String dateStr) throws DateTimeParseException {
         return LocalDate.parse(dateStr);
+    }
+
+    public String vocabToString(Vocabulary vocab) {
+        StringBuilder sb = new StringBuilder(vocab.getWord());
+        if (vocab.hasDefinition()) {
+            sb.append(" | ").append(vocab.define());
+        }
+        return sb.toString();
+    }
+
+    public Vocabulary stringToVocab(String input) {
+        String[] inputArr = input.split("\\s+\\|\\s+", 2);
+        if (inputArr.length == 2) {
+            return new Vocabulary(inputArr[0], inputArr[1]);
+        } else if (inputArr.length == 1) {
+            return new Vocabulary(inputArr[0]);
+        } else {
+            System.out.println("No vocab created");
+            return null;
+        }
+
+    }
+
+    public VocabList decodeVocabList(List<String> encodedVocabList) {
+        ArrayList<Vocabulary> vocabs = new ArrayList<>();
+        for (String encodedVocab : encodedVocabList) {
+            if (!encodedVocab.isBlank()) {
+                vocabs.add(stringToVocab(encodedVocab));
+            }
+        }
+        return new VocabList(vocabs);
+    }
+
+    public List<String> encodeVocabList(VocabList vocabs) {
+        List<String> encodedVocabList = new ArrayList<>();
+        for (Vocabulary vocab : vocabs.getVocabList()) {
+            encodedVocabList.add(vocabToString(vocab));
+        }
+        return encodedVocabList;
+    }
+
+    public VocabList loadVocabListFromFile() {
+        File f = new File(path.toString());
+
+        if (f.exists()) {
+            try {
+                List<String> allLines = Files.readAllLines(path);
+                List<String> encodedVocabList = new ArrayList<>();
+                boolean isVocabYet = false;
+                for (String line : allLines) {
+                    if (line.equals("---")) {
+                        isVocabYet = true;
+                        continue;
+                    }
+
+                    if (isVocabYet) {
+                        encodedVocabList.add(line);
+                    }
+                }
+                return decodeVocabList(encodedVocabList);
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        } else {
+            try {
+                f.createNewFile();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+        return new VocabList();
+    }
+
+    public void saveVocabListToFile(VocabList vocabs) {
+        try {
+            Files.write(path, Arrays.asList("---"), StandardOpenOption.APPEND);
+            Files.write(path, encodeVocabList(vocabs), StandardOpenOption.APPEND);
+        } catch (IOException e) {
+            // TODO create exception for this
+            System.out.println("Error saving to file" + e.toString());
+        }
     }
 }

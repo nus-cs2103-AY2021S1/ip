@@ -20,7 +20,8 @@ public class AddTaskCommand extends Command {
     @Override
     public String execute(TaskList tasks, VocabList vocabList, Ui ui, Storage storage) {
         tasks.addTask(toAdd);
-        storage.saveToFile(tasks);
+        storage.saveTaskListToFile(tasks);
+        storage.saveVocabListToFile(vocabList);
         return String.format(MESSAGE_SUCCESS, toAdd);
     }
 }

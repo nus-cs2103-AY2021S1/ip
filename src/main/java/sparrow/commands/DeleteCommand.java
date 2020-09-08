@@ -21,7 +21,7 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, VocabList vocabList, Ui ui, Storage storage) {
         try {
             Task deletedTask = tasks.deleteTask(getTargetIndex());
-            storage.saveToFile(tasks);
+            storage.saveTaskListToFile(tasks);
             return String.format(MESSAGE_DELETE_TASK_SUCCESS, deletedTask);
         } catch (IndexOutOfBoundsException e) {
             return "INDEX OUT OF BOUNDS";
