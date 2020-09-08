@@ -1,4 +1,4 @@
-package main.java;
+package main.java.task;
 
 public class Task {
     protected String description;
