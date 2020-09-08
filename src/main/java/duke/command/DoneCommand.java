@@ -38,9 +38,15 @@ public class DoneCommand extends Command {
     public String execute(TaskList tasklist, Storage storage) throws InvalidDoneInputException, IOException {
         try {
             int num = Integer.parseInt(input.replaceAll("\\s+", ""));
-            if (num > tasklist.getNumOfTask() || num <= 0) {
+
+            boolean isInvalidInput = num > tasklist.getNumOfTask() || num <= 0;
+            boolean isValidInput = !isInvalidInput;
+
+            if (isInvalidInput) {
                 throw new InvalidDoneInputException();
             }
+
+            assert isValidInput;
             Task task = tasklist.markDone(num);
             tasklist.updateData(storage);
             return Ui.showDone(task);

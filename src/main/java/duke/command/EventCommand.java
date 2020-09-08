@@ -92,9 +92,15 @@ public class EventCommand extends Command {
     public String execute(TaskList tasks, Storage storage) throws InvalidEventInputException,
             InvalidDateTimeException, IOException {
         String[] eventTaskArray = input.split(" /at ");
-        if (eventTaskArray.length != 2) {
+
+        boolean isInvalidInput = eventTaskArray.length != 2;
+        boolean isValidInput = !isInvalidInput;
+
+        if (isInvalidInput) {
             throw new InvalidEventInputException();
         }
+
+        assert isValidInput;
         String eventDescription = eventTaskArray[0];
         String at = eventTaskArray[1];
         Event event = createEvent(eventDescription, at);
