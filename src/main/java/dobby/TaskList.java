@@ -4,6 +4,7 @@ import java.text.ParseException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 import dobby.task.Deadline;
 import dobby.task.Event;
@@ -37,22 +38,22 @@ public class TaskList {
             String by = str.substring(str.indexOf("(by: ") + 5, str.length() - 1); //Aug 28 2020 4:00 pm
 
             int thirdIndex = by.indexOf(' ', 10);
-            String dt = by.substring(0, thirdIndex);
-            String tm = by.substring(thirdIndex + 1);
-            LocalDate date = LocalDate.parse(dt, DateTimeFormatter.ofPattern("MMM d yyyy"));
+            String dateText = by.substring(0, thirdIndex);
+            String timeText = by.substring(thirdIndex + 1);
+            LocalDate date = LocalDate.parse(dateText, DateTimeFormatter.ofPattern("MMM d yyyy"));
 
-            task = new Deadline(description, tm, date);
+            task = new Deadline(description, timeText, date);
             tasks.add(task);
         } else { // EVENT
             String description = str.substring(str.indexOf(' ') + 1, str.indexOf("(at: ") - 1);
             String at = str.substring(str.indexOf("(at: ") + 5, str.length() - 1);
             int thirdIndex = at.indexOf(' ', 10);
 
-            String dt = at.substring(0, thirdIndex);
-            LocalDate date = LocalDate.parse(dt, DateTimeFormatter.ofPattern("MMM d yyyy"));
+            String dateText = at.substring(0, thirdIndex);
+            LocalDate date = LocalDate.parse(dateText, DateTimeFormatter.ofPattern("MMM d yyyy"));
 
-            String tm = at.substring(thirdIndex + 1);
-            task = new Event(description, tm, date);
+            String timeText = at.substring(thirdIndex + 1);
+            task = new Event(description, timeText, date);
 
             tasks.add(task);
         }
@@ -121,6 +122,7 @@ public class TaskList {
      */
     public String findOfType(String type) {
         String message = "";
+        assert List.of("T", "D", "E").contains(type) : "Type can be T, D, or E only";
 
         int counter = 0;
         for (Task task: this.tasks) {
@@ -143,6 +145,7 @@ public class TaskList {
      */
     public String findWithKeyword(String keyword) {
         String message = "";
+        assert keyword != null : "String to search for cannot be empty";
 
         int counter = 0;
         for (Task task: this.tasks) {

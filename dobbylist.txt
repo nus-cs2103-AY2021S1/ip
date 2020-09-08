@@ -1,3 +1,4 @@
-[D][✘] ip task for week 3 (by: Aug 27 2020 11:59 pm)
-[E][✘] lecture (at: Aug 28 2020 4:00 pm)
-[T][✘] push new levels to github
+[T][✘] test
+[D][✘] testing (by: Sep 11 2020 )
+[D][✘] testing (by: Sep 11 2020 12:00 pm)
+[D][✘] testing (by: Sep 11 2020 )

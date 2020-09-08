@@ -10,6 +10,7 @@ public class FindCommand implements Command {
     @Override
     public String parseInput(TaskList tasks, String text) throws DobbyException {
         String message = "";
+        assert text.startsWith("find") : "Find command must start with find";
         try {
             String keyword = (text.substring(text.indexOf(' '))).substring(1);
 
@@ -22,6 +23,7 @@ public class FindCommand implements Command {
                         + "Keyword required cannot be empty. Please try again.\n  "
                         + USAGE);
             }
+            assert !keyword.equals(null) : "String to search for cannot be null.";
 
             message = tasks.findWithKeyword(keyword);
         } catch (StringIndexOutOfBoundsException e) {

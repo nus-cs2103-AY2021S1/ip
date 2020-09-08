@@ -21,6 +21,7 @@ public class HelpCommand implements Command {
 
     @Override
     public String parseInput(TaskList tasks, String text) throws DobbyException {
+        assert text.equals("help") : "Help command must be help";
         return ALL_COMMANDS;
     }
 
