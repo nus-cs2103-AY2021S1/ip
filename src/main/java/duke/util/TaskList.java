@@ -10,7 +10,7 @@ import duke.task.Task;
  * An aggregation of tasks.
  * Functions largely similar to java.util.List.
  */
-public class TaskList implements Iterable<Task> {
+public class TaskList extends ArrayList<Task> {
 
     /** List of tasks stored */
     protected List<Task> listOfTasks;
@@ -23,21 +23,13 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
-     * Adds a task to the task list.
-     *
-     * @param task task to be added.
-     */
-    public void add(Task task) {
-        listOfTasks.add(task);
-    }
-
-    /**
      * Returns the task at the provided index.
      * Note that index starts at 1.
      *
      * @param index index of the task to be returned from the list.
      * @return task at the index provided.
      */
+    @Override
     public Task get(int index) {
         return listOfTasks.get(index - 1);
     }
@@ -49,17 +41,9 @@ public class TaskList implements Iterable<Task> {
      * @param index index of the task to be removed from the list.
      * @return task removed.
      */
+    @Override
     public Task remove(int index) {
         return listOfTasks.remove(index - 1);
-    }
-
-    /**
-     * Returns an iterator for the tasks inside the list.
-     *
-     * @return iterator object for the tasks in the list.
-     */
-    public Iterator<Task> iterator() {
-        return listOfTasks.iterator();
     }
 
     /**
