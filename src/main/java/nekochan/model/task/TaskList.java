@@ -12,30 +12,29 @@ import nekochan.exceptions.NekoTaskNotFoundException;
 import nekochan.util.Messages;
 
 /**
- * The {@code TaskList} class is an ordered collection of {@link Task}.
+ * The {@code TaskList} class is an ordered and immutable collection of {@link Task}.
  * This class provides methods to add, delete and mark as complete {@code Task}.
  * This class also provides methods to list and remove all {@code Task}.
- * Implements the {@code Iterable} interface.
  */
 public class TaskList {
 
-    private List<Task> store;
+    private final List<Task> tasks;
 
     /**
      * Constructs an empty {@code TaskList} instance.
      */
     public TaskList() {
-        store = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
-     * Constructs a deep copy of the supplied {@code TaskList} instance.
+     * Constructs a new copy of the supplied {@code TaskList} instance.
      *
      * @param copy the {@code TaskList} to copy.
      */
     public TaskList(TaskList copy) {
-        store = new ArrayList<>();
-        copy.store.forEach((task) -> store.add(task.deepCopy()));
+        tasks = new ArrayList<>();
+        copy.tasks.forEach((task) -> tasks.add(task.deepCopy()));
     }
 
     /**
@@ -44,29 +43,32 @@ public class TaskList {
      * @param list the list of {@code Task} whose contents are to be imported into this {@code TaskList}.
      */
     public TaskList(List<Task> list) {
-        store = list;
+        tasks = list;
     }
 
     /**
-     * Adds the specified {@code Task} to the end of this {@code TaskList}.
+     * Adds the specified {@code task} to the end of this {@code TaskList}.
+     * Returns a new immutable {@code TaskList} instance containing the added {@code task}.
      *
-     * @param task the task to be inserted.
-     * @return the task that was inserted.
+     * @param task the task to be added.
+     * @return a new immutable {@code TaskList} instance containing the added {@code task}.
      * @throws NekoSimilarTaskException if a similar copy of {@code task} exists.
      * @throws NekoDuplicateTaskException if a duplicate copy of {@code task} exists.
      */
     public TaskList addTask(Task task) throws NekoSimilarTaskException, NekoDuplicateTaskException {
         // Do not add task if there is an exact copy.
-        boolean hasDuplicate = store.stream().anyMatch((x) -> x.equals(task));
+        boolean hasDuplicate = tasks.stream().anyMatch((x) -> x.equals(task));
         if (hasDuplicate) {
             throw new NekoDuplicateTaskException(Messages.DUPLICATE_TASK_ERROR);
         }
 
-        // Add task but show an error if there is a similar task.
-        List<Task> similars = store.stream().filter((x) -> x.isSimilar(task)).collect(Collectors.toList());
+        // Add task but throw an error if there is a similar task.
+        List<Task> similars = tasks.stream().filter((x) -> x.isSimilar(task)).collect(Collectors.toList());
         boolean hasSimilars = similars.size() > 0;
+
         TaskList nextState = new TaskList(this);
-        nextState.store.add(task);
+        nextState.tasks.add(task);
+
         if (hasSimilars) {
             throw new NekoSimilarTaskException(Messages.SIMILAR_TASK_ERROR, similars);
         }
@@ -74,17 +76,19 @@ public class TaskList {
     }
 
     /**
-     * Marks the {@code Task} at the specified index in this {@code TaskList} as complete.
+     * Returns a new immutable {@code TaskList} instance containing the {@code Task} at the specified {@code index}
+     * marked as completed.
      *
      * @param index the index of the {@code Task} to mark as complete.
-     * @return the {@code Task} that was marked as complete.
+     * @return a new immutable {@code TaskList} instance containing the {@code Task} at the specified {@code index}
+     *         marked as completed.
      * @throws NekoTaskNotFoundException if the index is out of range.
      */
     public TaskList markAsComplete(int index) throws NekoTaskNotFoundException {
         try {
             TaskList nextState = new TaskList(this);
-            Task selected = store.get(index);
-            nextState.store.set(index, selected.setCompleted());
+            Task selected = tasks.get(index);
+            nextState.tasks.set(index, selected.setCompleted());
             return nextState;
         } catch (IndexOutOfBoundsException e) {
             throw new NekoException(Messages.MISSING_TASK_ERROR);
@@ -92,16 +96,18 @@ public class TaskList {
     }
 
     /**
-     * Deletes the {@code Task} at the specified index in this {@code TaskList}.
+     * Returns a new immutable {@code TaskList} instance where the {@code Task} at the specified {@code index} has been
+     * deleted.
      *
      * @param index the index of the {@code Task} to delete.
-     * @return the {@code Task} that was deleted.
+     * @return a new immutable {@code TaskList} instance where the {@code Task} at the specified {@code index} has been
+     *         deleted.
      * @throws NekoTaskNotFoundException if the index is out of range.
      */
     public TaskList deleteTask(int index) throws NekoTaskNotFoundException {
         try {
             TaskList nextState = new TaskList(this);
-            nextState.store.remove(index);
+            nextState.tasks.remove(index);
             return nextState;
         } catch (IndexOutOfBoundsException e) {
             throw new NekoTaskNotFoundException(Messages.MISSING_TASK_ERROR);
@@ -109,7 +115,9 @@ public class TaskList {
     }
 
     /**
-     * Deletes all existing {@code Task} in this {@code TaskList}.
+     * Returns a new empty {@code TaskList} instance.
+     *
+     * @return a new empty {@code TaskList} instance.
      */
     public TaskList clearList() {
         return new TaskList();
@@ -121,7 +129,7 @@ public class TaskList {
      * @return the number of {@code Task} in this {@code TaskList}.
      */
     public int getTaskCount() {
-        return store.size();
+        return tasks.size();
     }
 
     /**
@@ -130,12 +138,19 @@ public class TaskList {
      * @return a stream containing the tasks stored in this {@code TaskList}.
      */
     public Stream<Task> getStream() {
-        return this.store.stream();
+        return this.tasks.stream();
     }
 
+    /**
+     * Returns the {@code Task} at the specified {@code index} in this {@code TaskList}.
+     *
+     * @param index the index of the {@code Task}.
+     * @return the {@code Task} at the specified {@code index}.
+     * @throws NekoTaskNotFoundException if the {@code index} is out of range.
+     */
     public Task getTask(int index) throws NekoTaskNotFoundException {
         try {
-            return this.store.get(index);
+            return this.tasks.get(index);
         } catch (IndexOutOfBoundsException e) {
             throw new NekoTaskNotFoundException(Messages.MISSING_TASK_ERROR);
         }

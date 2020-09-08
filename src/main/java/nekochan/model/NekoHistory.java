@@ -5,21 +5,21 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import nekochan.exceptions.NekoDuplicateTaskException;
-import nekochan.exceptions.NekoException;
 import nekochan.exceptions.NekoHistoryException;
 import nekochan.exceptions.NekoSimilarTaskException;
 import nekochan.exceptions.NekoStorageException;
+import nekochan.exceptions.NekoTaskNotFoundException;
 import nekochan.model.task.Task;
 import nekochan.model.task.TaskList;
 import nekochan.storage.Storage;
 import nekochan.util.Messages;
 
 /**
- * The {@code NekoHistory} class records the state of the {@link TaskList} before changes are enacted on it.
+ * The {@code NekoHistory} class records the states of the {@link TaskList} after each change is enacted on it.
  */
 public class NekoHistory {
 
-    private List<TaskList> histories;
+    private final List<TaskList> histories;
     private int version;
 
     /**
@@ -35,7 +35,7 @@ public class NekoHistory {
 
     private void saveState(TaskList nextState) {
         if (version != histories.size() - 1) {
-            histories.subList(version + 1, histories.size()).clear();
+            revertState();
         }
         histories.add(nextState);
         version++;
@@ -61,6 +61,7 @@ public class NekoHistory {
 
     /**
      * Creates a new state where the specified {@code task} has been added to the {@code TaskList}.
+     * Returns the added {@code Task}.
      *
      * @param task the {@code Task} to be added.
      * @return the added {@code Task}.
@@ -79,35 +80,40 @@ public class NekoHistory {
     }
 
     /**
-     * Creates a new state where the {@code Task} at the specified {@code index} has been marked as complete.
+     * Marks the {@code Task} at the specified {@code index} as complete and saves the new state.
+     * Returns the {@code Task} that was marked as complete.
      *
      * @param index the index of the {@code Task} to mark as complete.
      * @return the {@code Task} that was marked as complete.
+     * @throws NekoTaskNotFoundException if the specified {@code index} is out of range.
      */
-    public Task markAsComplete(int index) {
+    public Task markAsComplete(int index) throws NekoTaskNotFoundException {
         try {
             TaskList nextState = getCurrent().markAsComplete(index);
             saveState(nextState);
             return nextState.getTask(index);
-        } catch (NekoException e) {
+        } catch (NekoTaskNotFoundException e) {
             revertState();
             throw e;
         }
     }
 
     /**
-     * Creates a new state where the {@code Task} at the specified {@code index} has been deleted.
+     * Deletes the {@code Task} at the specified {@code index} and saves the new state.
+     * Returns the deleted {@code Task}.
      *
      * @param index the index of the {@code Task} to delete.
      * @return the deleted {@code Task}.
+     * @throws NekoTaskNotFoundException if the specified {@code index} is out of range.
      */
-    public Task deleteTask(int index) {
+    public Task deleteTask(int index) throws NekoTaskNotFoundException {
         try {
+            // Retrieve the task before it is deleted for command response.
             Task deletedTask = getCurrent().getTask(index);
             TaskList nextState = getCurrent().deleteTask(index);
             saveState(nextState);
             return deletedTask;
-        } catch (NekoException e) {
+        } catch (NekoTaskNotFoundException e) {
             revertState();
             throw e;
         }
@@ -117,12 +123,7 @@ public class NekoHistory {
      * Creates a new state where all {@code Task} have been removed from the {@code TaskList}.
      */
     public void clearAllTasks() {
-        try {
-            saveState(getCurrent().clearList());
-        } catch (NekoException e) {
-            revertState();
-            throw e;
-        }
+        saveState(getCurrent().clearList());
     }
 
     /**
