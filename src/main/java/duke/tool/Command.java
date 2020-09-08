@@ -30,6 +30,7 @@ public class Command {
     public String markAsDone(int num, TaskList taskList) throws DukeException {
         if (num > 0 && num <= taskList.getSize()) {
             taskList.get(num - 1).markAsDone();
+            assert taskList.get(num - 1).getStatus() : "markAsDone not working";
             String msgForDone = "    ____________________________________________\n"
                     + "    Nice! I 've marked this task as done: \n"
                     + "       " + taskList.get(num - 1).toString() + "\n"
@@ -55,7 +56,6 @@ public class Command {
                     + taskList.get(i).toString() + "\n";
         }
         msgForList += "    ____________________________________________\n";
-        //System.out.println(msgForList);
         return msgForList;
     }
 
@@ -71,9 +71,9 @@ public class Command {
                     + "    Noted. I've removed this task: \n"
                     + "       " + taskList.get(num - 1).toString() + "\n";
             taskList.remove(num - 1);
+            assert taskList.getSize() >= 0 : "Deletion error";
             msgForDelete += taskList.countNum() + "\n"
                     + "    ____________________________________________\n";
-            //System.out.println(msgForDelete);
             return msgForDelete;
         } else {
             throw new DukeException(
@@ -90,6 +90,7 @@ public class Command {
      * @throws DukeException indicates that the description is empty.
      */
     public String handleTodo(String instruction, TaskList taskList, Ui ui) throws DukeException {
+        assert instruction.length() >= 4 : "Parsing error";
         if (instruction.substring(4).isBlank()) {
             String emoji = Emoji.SMILE.toString();
             String exceptionMsg = "OOPS!!! I'm sorry, but the description cannot be empty. \n"
@@ -110,6 +111,7 @@ public class Command {
      * @throws DukeException indicates that the description or deadline timing is missing.
      */
     public String handleDeadline(String instruction, TaskList taskList, Ui ui) throws DukeException {
+        assert instruction.length() >= 8 : "Parsing error";
         int index = instruction.indexOf("/by");
         if (index == 8) {
             String emoji = Emoji.SMILE.toString();
@@ -152,6 +154,7 @@ public class Command {
      * @throws DukeException indicates that the timing or the description is missing.
      */
     public String handleEvent(String instruction, TaskList taskList, Ui ui) throws DukeException {
+        assert instruction.length() >= 5 : "Parsing error";
         int index = instruction.indexOf("/at");
         if (index == 5) {
             String emoji = Emoji.SMILE.toString();
@@ -192,6 +195,7 @@ public class Command {
      * @throws DukeException indicates that the instruction is empty.
      */
     public String find(TaskList taskList, String input) throws DukeException {
+        assert input.length() >= 4 : "Parsing error";
         if (input.length() == 4) {
             String emoji = Emoji.SMILE.toString();
             String exceptionMsg = "OOPS!!! I'm sorry, but the description cannot be empty. \n"

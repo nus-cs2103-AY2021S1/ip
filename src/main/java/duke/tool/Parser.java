@@ -31,7 +31,6 @@ public class Parser {
             } else if (instruction.equals("bye")) {
                 storage.writeData(taskList.getList());
                 output = ui.sendBye();
-                //break;
             } else if (len >= 5 && instruction.substring(0, 5).equals("done ")) {
                 int num = Integer.parseInt(instruction.substring(5));
                 output = command.markAsDone(num, taskList);
@@ -51,9 +50,7 @@ public class Parser {
             }
         } catch (NumberFormatException ex) {
             output = ex.getMessage();
-            //System.out.println(new DukeException("OOPS!!! I' m sorry, but you have to enter an integer."));
         } catch (DukeException ex) {
-            //System.out.println(ex);
             output = ex.toString();
         }
         return output;
