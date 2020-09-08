@@ -150,7 +150,7 @@ public class Ui {
                 "event <description> /at <date> [time]",
                 "deadline <description> /by <date> [time]",
                 "done <task number>", "remove <task number>",
-                "remove all", "bye"
+                "remove all", "sort <name/type/datetime>", "bye"
         };
         StringBuilder sb = new StringBuilder("Here are the available commands:\n");
         for (String command: commands) {
