@@ -1,11 +1,12 @@
 package duke;
 
+import java.util.concurrent.CompletableFuture;
+
 import duke.gui.DialogBox;
 import javafx.application.Application;
 import javafx.application.Platform;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -13,8 +14,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.util.concurrent.CompletableFuture;
 
 /**
  * GUI class handling the graphical aspects of the Duke chatbot.
@@ -151,13 +150,11 @@ public class DukeGui extends Application implements Ui {
         try {
             wait();
         } catch (InterruptedException e) {
+            if (!isUpdated) {
+                return null;
+            }
         }
-        if (isUpdated) {
-            return enteredMessage;
-        } else {
-            return null;
-        }
-
+        return enteredMessage;
     }
 
     /**

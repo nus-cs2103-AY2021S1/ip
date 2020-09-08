@@ -6,7 +6,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
 
-import duke.DukeException;
 import duke.InvalidSaveException;
 import duke.task.Deadline;
 import duke.task.Event;

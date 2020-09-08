@@ -2,9 +2,10 @@ package duke.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
 import duke.DukeException;
 import duke.InvalidSaveException;
-import org.junit.jupiter.api.Test;
 
 public class ToDoTest {
 

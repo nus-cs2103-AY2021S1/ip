@@ -9,8 +9,9 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDateTime;
 
-import duke.DukeException;
 import org.junit.jupiter.api.Test;
+
+import duke.DukeException;
 
 public class DateTimeHandlerTest {
 

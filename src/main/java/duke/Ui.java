@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
  * Standard user-interface class that handles interactions between the user and the engine.
  */
