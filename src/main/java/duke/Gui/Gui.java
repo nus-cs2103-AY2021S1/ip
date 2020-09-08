@@ -35,6 +35,21 @@ public class Gui {
         return responseList;
     }
 
+    public ArrayList<String> addTag(String[] arrOfTags) {
+        ArrayList<String> responseList = new ArrayList<>();
+        assert responseList instanceof ArrayList : "Return type of the result of this method should be an ArrayList";
+        final String ADD_TAG_MESSAGE_PREFIX = "The following tags ";
+        final String ADD_TAG_MESSAGE_SUFFIX = "\nhave been added to the following task: ";
+
+        responseList.add(ADD_TAG_MESSAGE_PREFIX);
+        for (int i = 1; i < arrOfTags.length; i++) {
+            responseList.add("#" + arrOfTags[i] + " ");
+        }
+        responseList.add(ADD_TAG_MESSAGE_SUFFIX);
+
+        return responseList;
+    }
+
     public String showError(String e) {
         return (e);
     }

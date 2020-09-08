@@ -32,6 +32,8 @@ public class Parser {
                 return new DeleteCommand(fullCommand);
             case FIND:
                 return new FindCommand(fullCommand);
+            case TAG:
+                return new TagCommand(fullCommand);
             case TODO:
             case DEADLINE:
             case EVENT:

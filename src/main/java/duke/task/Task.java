@@ -2,9 +2,13 @@ package duke.task;
 
 import duke.component.DukeException;
 
+import java.util.ArrayList;
+
 public abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected ArrayList<String> listOfTags;
+    protected String stringOfTags;
 
     /**
      * constructor for task abstract class.
@@ -14,6 +18,8 @@ public abstract class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.listOfTags = new ArrayList<String>();
+        this.stringOfTags = "";
     }
 
     /**
@@ -32,6 +38,15 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public void addTag(String tag) {
+        String tagAdded = "#" + tag;
+        this.listOfTags.add(tagAdded);
+        this.stringOfTags = this.stringOfTags + tagAdded;
+    }
+
+    public void removeTag(int index) {
+        this.listOfTags.remove(index - 1);
+    }
 
     public String toString() {
         return this.getStatusIcon() + description;
@@ -55,7 +70,8 @@ public abstract class Task {
     }
 
     public boolean isContain(String term) {
-        final boolean isContainsTerm = this.description.contains(term);
+        String stringToSearch = this.description + this.stringOfTags;
+        final boolean isContainsTerm = stringToSearch.contains(term);
         return isContainsTerm;
     }
 

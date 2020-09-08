@@ -28,7 +28,8 @@ public class DoneCommand extends Command {
      * @throws DukeException exception thrown when exception caught while running.
      */
     @Override
-    public ArrayList<String> execute(TaskList taskList, Gui gui, Storage storage, ArrayList<String> responseList) throws DukeException {
+    public ArrayList<String> execute(TaskList taskList, Gui gui, Storage storage, ArrayList<String> responseList)
+            throws DukeException {
         try {
             String numberCharacter = this.fullCommand.substring(5);
             int index = Integer.parseInt(numberCharacter) - 1;

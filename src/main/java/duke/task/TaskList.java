@@ -32,6 +32,10 @@ public class TaskList {
         return list.get(index);
     }
 
+    public void modifyItem(int index, Task task) {
+        list.set(index, task);
+    }
+
     public int getTasksLeft() {
         return this.list.size();
     }
