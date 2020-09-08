@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 import java.util.Optional;
 
 /**
@@ -24,12 +26,22 @@ public class Todo extends Task {
         return Task.TODO_SAVE_SYMBOL;
     }
 
+    @Override
+    public Optional<String> getFieldIdentifier() {
+        return Optional.empty();
+    }
+
     /**
      * Returns empty Optional to tell Storage to leave date segment blank.
      */
     @Override
     public Optional<String> getDate() {
         return Optional.empty();
+    }
+
+    @Override
+    public Task duplicate() {
+        return new Todo(description);
     }
 
     @Override

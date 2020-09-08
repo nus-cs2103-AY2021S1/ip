@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 import java.util.Optional;
 
 /**
@@ -13,6 +15,9 @@ public abstract class Task {
     public static final String TODO_SAVE_SYMBOL = "T";
     public static final String DEADLINE_SAVE_SYMBOL = "D";
     public static final String EVENT_SAVE_SYMBOL = "E";
+
+    public static final String DEADLINE_FIELD_IDENTIFIER = "/by";
+    public static final String EVENT_FIELD_IDENTIFIER = "/at";
     /**
      * Constructs a Task object.
      * @param description Description of the given Task.
@@ -65,6 +70,13 @@ public abstract class Task {
     public abstract String getSaveSymbol();
 
     /**
+     * Returns field identifier of a Task if any.
+     * "/by" for Deadline
+     * "/at" for Event
+     */
+    public abstract Optional<String> getFieldIdentifier();
+
+    /**
      * Returns a stored date/time in the form of an Optional.
      * Todo does not have any date associated, so this returns an empty Optional.
      * Deadline and Event tasks will have an associated date/time.
@@ -83,4 +95,10 @@ public abstract class Task {
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.getDescription();
     }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public abstract Task duplicate();
 }

@@ -18,7 +18,7 @@ public class DeleteCommandTest {
             tasks.add(new Todo("have fun"));
             int taskNumber = 7;
             Command newDeleteCommand = new DeleteCommand(taskNumber);
-            newDeleteCommand.execute(tasks, new Ui(), new Storage("./data/duke.txt"));
+            newDeleteCommand.execute(new Ui(), new Storage("./data/duke.txt"), tasks, );
         } catch (DukeException e) {
             assertEquals("☹ OOPS!!! Task does not exist/invalid task number.", e.toString());
         }

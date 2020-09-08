@@ -11,8 +11,6 @@ import java.io.FileWriter;
 import java.util.Scanner;
 
 import java.util.ArrayList;
-import java.util.List;
-
 
 /**
  * The Storage class handles the reading and writing of data from the hard disk.
@@ -61,7 +59,7 @@ public class Storage {
     /**
      * Reads stored information from file and returns a List of tasks to be fed to Duke's TaskList.
      */
-    public List<Task> load() throws DukeException {
+    public ArrayList<Task> load() throws DukeException {
         try {
             File file = new File(filePath);
             if (!file.exists()) {
@@ -72,7 +70,7 @@ public class Storage {
             }
 
             Scanner sc = new Scanner(file);
-            List<Task> tasks = new ArrayList<>(Duke.MAX_NUM_OF_TASKS);
+            ArrayList<Task> tasks = new ArrayList<>(Duke.MAX_NUM_OF_TASKS);
             int lineNumber = 0;
 
             while (sc.hasNext()) {
@@ -105,12 +103,12 @@ public class Storage {
                 } else if (nextEntryTaskType.equals(Task.DEADLINE_SAVE_SYMBOL)
                         && nextEntryLength == 4) { // Deadline Task.
                     String by = nextEntryArray[3];
-                    t = new Deadline(nextEntryDescription, by);
+                    t = Deadline.createDeadline(nextEntryDescription, by);
 
                 } else if (nextEntryTaskType.equals(Task.EVENT_SAVE_SYMBOL)
                         && nextEntryLength == 4) { // Event Task.
                     String at = nextEntryArray[3];
-                    t = new Event(nextEntryDescription, at);
+                    t = Event.createEvent(nextEntryDescription, at);
 
                 } else {
                     // Unknown Task type.

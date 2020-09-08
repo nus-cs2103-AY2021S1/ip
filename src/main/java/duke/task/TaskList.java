@@ -11,7 +11,7 @@ import java.util.List;
  */
 public class TaskList {
 
-    private List<Task> tasks;
+    private ArrayList<Task> tasks;
 
     /**
      * TaskList constructor called when first running Duke.
@@ -24,7 +24,7 @@ public class TaskList {
      * TaskList constructor called when reading data from Storage.
      * @param tasks A List of tasks retrieved from the hard disk.
      */
-    public TaskList(List<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
@@ -61,5 +61,11 @@ public class TaskList {
         assert i > 0 && i <= tasks.size();
 
         tasks.remove(i - 1);
+    }
+
+    public void replace(int i, Task updatedTask) {
+        assert i > 0 && i <= tasks.size();
+
+        tasks.set(i - 1, updatedTask);
     }
 }

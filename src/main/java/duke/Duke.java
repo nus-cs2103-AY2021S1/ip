@@ -6,11 +6,14 @@ import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import javafx.scene.control.Label;
-
+import duke.action.*;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+
+import java.util.LinkedList;
+import java.util.Optional;
+import java.util.Queue;
 
 
 /**
@@ -22,6 +25,7 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private Queue<Action> actionQueue;
 
     public static final String DEFAULT_SAVE_FILE = ".\\data\\duke.txt";
     public static final int MAX_NUM_OF_TASKS = 100;
@@ -32,6 +36,7 @@ public class Duke {
      */
     private Duke(String filePath) {
         ui = new Ui();
+        actionQueue = new LinkedList<>();
         try {
             storage = new Storage(filePath);
             tasks = new TaskList(storage.load());
@@ -64,7 +69,7 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                c.execute(ui, storage, tasks, actionQueue);
                 storage.store(tasks);
                 if (c.isExit()) {
                     running = false;
@@ -92,11 +97,19 @@ public class Duke {
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         PrintStream ps = new PrintStream(baos);
         PrintStream old = System.out;
+        System.setOut(ps);
 
         try {
-            Command c = Parser.parse(input);
-            System.setOut(ps);
-            c.execute(tasks, ui, storage);
+            if (actionQueue.size() != 0) {
+                Action a = actionQueue.peek();
+                Optional<Action> next = a.receiveInputAndGetNextAction(input);
+                actionQueue.poll(); // remove action if successfully completed.
+                next.ifPresent(x -> x.prompt(ui));
+                next.ifPresent(actionQueue::add);
+            } else {
+                Command c = Parser.parse(input);
+                c.execute(ui, storage, tasks, actionQueue);
+            }
             storage.store(tasks);
 
             // Put things back

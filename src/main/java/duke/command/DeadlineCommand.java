@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.action.Action;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Deadline;
@@ -9,6 +10,8 @@ import duke.ui.Ui;
 import duke.storage.Storage;
 
 import duke.exception.DukeException;
+
+import java.util.Queue;
 
 /**
  * Represents a call to create a new Deadline Task.
@@ -36,8 +39,8 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        Task t = new Deadline(description, deadline);
+    public void execute(Ui ui, Storage storage, TaskList tasks, Queue<Action> commandQueue) throws DukeException {
+        Task t = Deadline.createDeadline(description, deadline);
         tasks.add(t);
         ui.addTaskMessage(t, tasks);
     }

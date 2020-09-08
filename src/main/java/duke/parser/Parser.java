@@ -3,6 +3,7 @@ package duke.parser;
 import duke.command.*;
 
 import duke.exception.DukeException;
+import duke.task.Task;
 
 /**
  * Parser takes in and makes sense of the user input read by Ui.
@@ -40,8 +41,18 @@ public class Parser {
                 return prepareFind(suffix);
             case ExitCommand.COMMAND_WORD:
                 return new ExitCommand();
+            case UpdateCommand.COMMAND_WORD:
+                return prepareUpdate(suffix);
             default:
                 throw new DukeException();
+        }
+    }
+
+    private static Command prepareUpdate(String suffix) throws DukeException {
+        if (!suffix.matches("\\d+")) {
+            throw new DukeException("update should be followed by a single task number.");
+        } else {
+            return new UpdateCommand(Integer.parseInt(suffix));
         }
     }
 
@@ -76,7 +87,7 @@ public class Parser {
      */
     private static Command prepareEvent(String suffix) throws DukeException {
         try {
-            String[] suffixArray = suffix.split("/at ");
+            String[] suffixArray = suffix.split(Task.EVENT_FIELD_IDENTIFIER);
             return new EventCommand(suffixArray[0].strip(), suffixArray[1].strip());
         } catch (Exception e) {
             throw new DukeException("Ensure that events have correct description.");

@@ -132,4 +132,27 @@ public class Ui {
     public void exitMessage() {
         System.out.println("Bye. Hope to see you again soon!");
     }
+
+    public void showUpdateMessage(Task t, int taskNumber) {
+        String message =
+                "Nice! I've updated this task:\n"
+                        + "  " + taskNumber + ". " + t.toString();
+        System.out.println(message);
+    }
+
+    public void showConfirmationMessage() {
+        System.out.println("Are you sure? { y / n }");
+    }
+
+    public void showRepeatConfirmationMessage() {
+        System.out.println("Answer must be either a 'y' or 'n'.");
+    }
+
+    public void showCancelledActionMessage() {
+        System.out.println("Action was not carried out.");
+    }
+
+    public void showUpdateActionMessage() {
+        System.out.println("Please enter changes.");
+    }
 }

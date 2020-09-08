@@ -19,11 +19,16 @@ public class Event extends Task {
      * @param description Description of Task
      * @param at Time at which the Event occurs.
      */
-    public Event(String description, String at) throws DukeException {
+    private Event(String description, String at, LocalDate atLocalDate) {
         super(description);
         this.at = at;
+        this.atLocalDate = atLocalDate;
+    }
+
+    public static Event createEvent(String description, String at) throws DukeException {
         try {
-            this.atLocalDate = LocalDate.parse(at);
+            LocalDate atLocalDate = LocalDate.parse(at);
+            return new Event(description, at, atLocalDate);
         } catch (Exception e) {
             throw new DukeException("Date is not in YYYY-MM-DD format");
         }
@@ -37,12 +42,22 @@ public class Event extends Task {
         return Task.EVENT_SAVE_SYMBOL;
     }
 
+    @Override
+    public Optional<String> getFieldIdentifier() {
+        return Optional.of(Task.EVENT_FIELD_IDENTIFIER);
+    }
+
     /**
      * Returns Optional containing the event date.
      */
     @Override
     public Optional<String> getDate() {
         return Optional.of(this.at);
+    }
+
+    @Override
+    public Task duplicate() {
+        return new Event(description, at, atLocalDate);
     }
 
     @Override

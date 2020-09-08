@@ -20,11 +20,16 @@ public class Deadline extends Task {
      * @param description Description of Task.
      * @param by Date due for the Deadline.
      */
-    public Deadline(String description, String by) throws DukeException {
+    public Deadline(String description, String by, LocalDate byLocalDate) {
         super(description);
         this.by = by;
+        this.byLocalDate = byLocalDate;
+    }
+
+    public static Deadline createDeadline(String description, String by) throws DukeException {
         try {
-            this.byLocalDate = LocalDate.parse(by);
+            LocalDate byLocalDate = LocalDate.parse(by);
+            return new Deadline(description, by, byLocalDate);
         } catch (Exception e) {
             throw new DukeException("Date is not in YYYY-MM-DD format");
         }
@@ -38,12 +43,22 @@ public class Deadline extends Task {
         return Task.DEADLINE_SAVE_SYMBOL;
     }
 
+    @Override
+    public Optional<String> getFieldIdentifier() {
+        return Optional.of(Task.DEADLINE_FIELD_IDENTIFIER);
+    }
+
     /**
      * Returns Optional containing the deadline.
      */
     @Override
     public Optional<String> getDate() {
         return Optional.of(this.by);
+    }
+
+    @Override
+    public Task duplicate() {
+        return new Deadline(description, by, byLocalDate);
     }
 
     @Override
