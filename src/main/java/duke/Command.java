@@ -50,25 +50,25 @@ public class Command {
             return ui.showList(tasks);
         case DONE:
             if (inputs.length <= 1) {
-                throw new DukeException("OOPS! duke.task.Task number cannot be empty for done action!");
+                throw new DukeException("OOPS! Task number cannot be empty for done action!");
             }
             try {
                 Task doneTask = tasks.markTaskAsDone(Integer.parseInt(inputs[1]));
                 storage.saveTaskListToFile(tasks);
                 return ui.showMarkedAsDone(doneTask);
             } catch (NumberFormatException | IndexOutOfBoundsException ex) {
-                throw new DukeException("OOPS! duke.task.Task number is invalid!");
+                throw new DukeException("OOPS! Task number is invalid!");
             }
         case DELETE:
             if (inputs.length <= 1) {
-                throw new DukeException("OOPS! duke.task.Task number cannot be empty for delete action!");
+                throw new DukeException("OOPS! Task number cannot be empty for delete action!");
             }
             try {
                 Task deleteTask = tasks.deleteTask(Integer.parseInt(inputs[1]));
                 storage.saveTaskListToFile(tasks);
                 return ui.showDeletedTask(deleteTask, tasks);
             } catch (NumberFormatException | IndexOutOfBoundsException ex) {
-                throw new DukeException("OOPS! duke.task.Task number is invalid!");
+                throw new DukeException("OOPS! Task number is invalid!");
             }
         case TODO:
             if (inputs.length <= 1) {
@@ -104,6 +104,17 @@ public class Command {
                 throw new DukeException("OOPS! The keyword for search cannot be empty!");
             }
             return ui.showMatchingTasks(tasks, inputs[1]);
+        case SNOOZE:
+            if (inputs.length <= 1) {
+                throw new DukeException("OOPS! Task number cannot be empty for snooze action!");
+            }
+            try {
+                Task snoozedTask = tasks.snoozeTask(Integer.parseInt(inputs[1]));
+                storage.saveTaskListToFile(tasks);
+                return ui.showSnoozedTask(snoozedTask, tasks);
+            } catch (NumberFormatException | IndexOutOfBoundsException ex) {
+                throw new DukeException("OOPS! Task number is invalid!");
+            }
         default:
             throw new DukeException("OOPS! I'm sorry, but I don't know what that means :-(");
         }
