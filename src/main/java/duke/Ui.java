@@ -25,12 +25,6 @@ public class Ui {
         System.out.println(intro);
     }
 
-    /**
-     * Prints Welcome screen.
-     */
-    public void showWelcome() {
-        System.out.println(Ui.getWelcome());
-    }
     public static String getWelcome() {
         String logo = " .----------------.  .----------------.  .----------------.  .----------------.\n"
                 + "| .--------------. || .--------------. || .--------------. || .--------------. |\n"
@@ -43,15 +37,7 @@ public class Ui {
                 + "| |              | || |              | || |              | || |              | |\n"
                 + "| '--------------' || '--------------' || '--------------' || '--------------' |\n"
                 + " '----------------'  '----------------'  '----------------'  '----------------'\n";
-//        String intro = "\n\n" + logo + "\n" + DIVIDER + INDENT + "Hola! I am dook\n" + INDENT
-//                + "how i can help u?\n" + DIVIDER;
         String intro = "Hola! I am dook, how can i help you?:)";
         return intro;
-    }
-    public String readCommand() {
-        return sc.nextLine();
-    }
-    public void showExit() {
-        print("see u later alligator");
     }
 }

@@ -37,27 +37,31 @@ public class Storage {
         while (s.hasNext()) {
             String str = s.nextLine();
             String[] args = str.split(" \\| ");
-            boolean done = args[1].equals("1");
+
+            // Deconstruct Task
+            String TaskType = args[0];
+            boolean isDone = args[1].equals("1");
             String description = args[2];
+
             Task task;
-            switch (args[0]) {
+            switch (TaskType) {
             case "T":
                 task = new Todo(description);
-                if (done) {
+                if (isDone) {
                     task.markAsDone();
                 }
                 tasks.add(task);
                 break;
             case "D":
                 task = new Deadline(description, LocalDateTime.parse(args[3]));
-                if (done) {
+                if (isDone) {
                     task.markAsDone();
                 }
                 tasks.add(task);
                 break;
             case "E":
                 task = new Event(description, LocalDateTime.parse(args[3]));
-                if (done) {
+                if (isDone) {
                     task.markAsDone();
                 }
                 tasks.add(task);
