@@ -25,10 +25,6 @@ public class Duke {
     private TextField userInput;
 
     public Duke() {
-        this("filepath");
-    }
-
-    public Duke(String filePath) {
         try {
             ui = new Ui();
             storage = new Storage(FILE_DIRECTORY, FILE_NAME);
