@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.time.LocalDateTime;
+import java.util.regex.Pattern;
 
 import duke.DukeException;
 import duke.InvalidSaveException;
@@ -15,8 +16,12 @@ public class Event extends Task {
 
     /** Symbol representing the type of Task this is */
     public static final String SYMBOL = "E";
-    /** String separator used to separate the task description and the timing*/
+    /** String separator used to separate the task description and the timing */
     public static final String SPLITTER = " /at ";
+    /** Number of separate fields in a event save summary */
+    private static final int NUM_FIELDS_SUMMARY = 4;
+    /** Number of separate fields required to create a event task */
+    private static final int NUM_FIELDS_DESCRIPTION = 2;
 
     /** Timing of the start of event */
     private LocalDateTime startTiming;
@@ -32,9 +37,9 @@ public class Event extends Task {
     public Event(String taskDescription) throws DukeException {
         super(taskDescription.split(SPLITTER)[0]);
         String[] details = taskDescription.split(SPLITTER);
-        if (details.length == 1) {
+        if (details.length < NUM_FIELDS_DESCRIPTION) {
             throw new DukeException("Please specify a timing!");
-        } else if (details.length > 2) {
+        } else if (details.length > NUM_FIELDS_DESCRIPTION) {
             throw new DukeException("Please follow the format of \"{task} /at {deadline}\"");
         }
         processEventTimingString(taskDescription.split(SPLITTER)[1]);
@@ -95,31 +100,28 @@ public class Event extends Task {
      */
     @Override
     public String getSummary() {
-        return String.format("%s|%d|%s|%s",
-                SYMBOL,
-                isCompleted() ? 1 : 0,
-                getTaskDescription(),
-                getTimingString());
+        return super.getSummary() + SYMBOL_SEPARATOR + getTimingString();
     }
 
     /**
      * Returns an Event object corresponding to the summary given.
+     * Deadline summary has to be of the form "E|{0 or 1 representing completion}|{description}|{event duration}".
      *
      * @param summary string summary of the Event object to be reconstructed.
      * @return Event object representing the summary given.
      * @throws InvalidSaveException if the summary in the save file is invalid.
      */
     public static Event reconstructFromSummary(String summary) throws InvalidSaveException {
-        String[] details = summary.split("\\|");
-        if (details.length != 4) {
+        String[] details = summary.split(Pattern.quote(SYMBOL_SEPARATOR));
+        if (details.length != NUM_FIELDS_SUMMARY) {
             throw new InvalidSaveException("Wrong number of details!");
-        } else if (!(details[1].equals("1") || details[1].equals("0"))) {
+        } else if (!isValidSaveSymbol(details[1])) {
             throw new InvalidSaveException("Invalid completion status! Ensure that it is either 0 or 1");
         }
 
         try {
             Event event = new Event(details[2], details[3]);
-            boolean isDone = details[1].equals("1");
+            boolean isDone = details[1].equals(SYMBOL_DONE);
             if (isDone) {
                 event.markDone();
             }
@@ -129,5 +131,14 @@ public class Event extends Task {
         }
     }
 
+    /**
+     * Returns 'E' representing an Event type.
+     *
+     * @return string "E".
+     */
+    @Override
+    public String getSymbol() {
+        return SYMBOL;
+    }
 
 }

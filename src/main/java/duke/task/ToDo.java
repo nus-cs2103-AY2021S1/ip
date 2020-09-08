@@ -2,6 +2,8 @@ package duke.task;
 
 import duke.InvalidSaveException;
 
+import java.util.regex.Pattern;
+
 /**
  * Encapsulates Tasks that are to be completed.
  * Object only carries information about the task to be completed.
@@ -10,6 +12,8 @@ public class ToDo extends Task {
 
     /** Symbol representing the type of Task this is */
     public static final String SYMBOL = "T";
+    /** Number of separate fields in a todo save summary */
+    private static final int NUM_FIELDS_SUMMARY = 3;
 
     /**
      * Creates a ToDo object with the given task description.
@@ -32,19 +36,6 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns a summary of the ToDo.
-     *
-     * @return string containing type, completion status and description.
-     */
-    @Override
-    public String getSummary() {
-        return String.format("%s|%d|%s",
-                SYMBOL,
-                isCompleted() ? 1 : 0,
-                getTaskDescription());
-    }
-
-    /**
      * Returns a ToDo object corresponding to the summary given.
      *
      * @param summary string summary of the ToDo object to be reconstructed.
@@ -52,18 +43,28 @@ public class ToDo extends Task {
      * @throws InvalidSaveException if the summary in the save file is invalid.
      */
     public static ToDo reconstructFromSummary(String summary) throws InvalidSaveException {
-        String[] details = summary.split("\\|");
-        if (details.length != 3) {
+        String[] details = summary.split(Pattern.quote(SYMBOL_SEPARATOR));
+        if (details.length != NUM_FIELDS_SUMMARY) {
             throw new InvalidSaveException("Wrong number of details!");
-        } else if (!(details[1].equals("1") || details[1].equals("0"))) {
+        } else if (!isValidSaveSymbol(details[1])) {
             throw new InvalidSaveException("Invalid completion status! Ensure that it is either 0 or 1");
         }
 
-        boolean isDone = details[1].equals("1");
+        boolean isDone = details[1].equals(SYMBOL_DONE);
         ToDo newToDo = new ToDo(details[2]);
         if (isDone) {
             newToDo.markDone();
         }
         return newToDo;
+    }
+
+    /**
+     * Returns a 'T' representing a ToDo type.
+     *
+     * @return string "T".
+     */
+    @Override
+    public String getSymbol() {
+        return SYMBOL;
     }
 }

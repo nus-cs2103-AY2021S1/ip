@@ -2,12 +2,21 @@ package duke.task;
 
 import duke.storage.PrintSummary;
 
+import java.util.regex.Pattern;
+
 /**
  * Encapsulates a Task with a description.
  *
  * Task can be completed and will be mark as done. By default, it is initialised as incomplete.
  */
 public abstract class Task implements PrintSummary {
+
+    /** summary symbol for representing the task is complete */
+    protected static final String SYMBOL_DONE = "1";
+    /** summary symbol for representing the task is not complete */
+    protected static final String SYMBOL_NOT_DONE = "0";
+    /** summary symbol for separating components */
+    public static final String SYMBOL_SEPARATOR = "|";
 
     /** description of the task */
     private String description;
@@ -74,8 +83,25 @@ public abstract class Task implements PrintSummary {
      *
      * @return string summarising the object.
      */
-    public abstract String getSummary();
+    public String getSummary() {
+        String[] details = new String[] {
+                getSymbol(),
+                isCompleted() ? SYMBOL_DONE : SYMBOL_NOT_DONE,
+                getTaskDescription()
+        };
+        return String.join(SYMBOL_SEPARATOR, details);
+    }
 
+    protected static boolean isValidSaveSymbol(String symbol) {
+        return symbol.equals(SYMBOL_DONE) || symbol.equals(SYMBOL_NOT_DONE);
+    }
+
+    /**
+     * Returns a symbol representing the type of task.
+     *
+     * @return string containing a symbol for that type of task.
+     */
+    public abstract String getSymbol();
 
 
 }

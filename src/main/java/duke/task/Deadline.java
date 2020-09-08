@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.time.LocalDateTime;
+import java.util.regex.Pattern;
 
 import duke.DukeException;
 import duke.InvalidSaveException;
@@ -79,29 +80,26 @@ public class Deadline extends Task {
      */
     @Override
     public String getSummary() {
-        return String.format("%s|%d|%s|%s",
-                SYMBOL,
-                isCompleted() ? 1 : 0,
-                getTaskDescription(),
-                getTimingString());
+        return super.getSummary() + SYMBOL_SEPARATOR + getTimingString();
     }
 
     /**
      * Returns an Deadline object corresponding to the summary given.
+     * Deadline summary has to be of the form "D|{0 or 1 representing completion}|{description}|{deadline}".
      *
      * @param summary string summary of the Deadline object to be reconstructed.
      * @return Deadline object representing the summary given.
      * @throws InvalidSaveException if the summary in the save file is invalid.
      */
     public static Deadline reconstructFromSummary(String summary) throws InvalidSaveException {
-        String[] details = summary.split("\\|");
+        String[] details = summary.split(Pattern.quote(SYMBOL_SEPARATOR));
         if (details.length != NUM_FIELDS_SUMMARY) {
             throw new InvalidSaveException("Wrong number of details!");
-        } else if (!(details[1].equals("1") || details[1].equals("0"))) {
+        } else if (!isValidSaveSymbol(details[1])) {
             throw new InvalidSaveException("Invalid completion status! Ensure that it is either 0 or 1");
         }
 
-        boolean isDone = details[1].equals("1");
+        boolean isDone = details[1].equals(SYMBOL_DONE);
         try {
             Deadline newDeadline = new Deadline(details[2], details[3]);
             if (isDone) {
@@ -111,6 +109,16 @@ public class Deadline extends Task {
         } catch (DukeException e) {
             throw new InvalidSaveException("Invalid datetime format in save!");
         }
+    }
+
+    /**
+     * Returns a "D" representing Deadline type.
+     *
+     * @return string "D".
+     */
+    @Override
+    public String getSymbol() {
+        return SYMBOL;
     }
 
 
