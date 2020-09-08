@@ -1,6 +1,8 @@
 package utility;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 import tasks.Deadline;
 import tasks.Event;
@@ -166,9 +168,29 @@ public class TaskList {
         if (input.length() <= 7) {
             throw new DukeException("Exception occurred: Kindly enter a number for deletion.");
         }
+        System.out.println("HI");
+        // An array of the positions that are to be deleted.
+        String[] posArr = input.substring(7).split(" ");
+        StringBuilder out = new StringBuilder();
+        try {
+            Integer[] intArr = new Integer[posArr.length];
+            for (int i = 0; i < posArr.length; i++) {
+                intArr[i] = Integer.parseInt(posArr[i]);
+            }
+            Arrays.sort(intArr, Collections.reverseOrder());
+            for (Integer pos : intArr) {
+                out.append("Noted. I've removed this task:\n").append(this.taskList.get(pos - 1)).append("\n");
+                this.taskList.remove(pos - 1);
+            }
+        } catch (NumberFormatException e) {
+            return "Kindly provide a valid number";
+        }
+        return String.valueOf(out);
+        /*
         int position = Integer.parseInt(input.substring(7));
         String out = "Noted. I've removed this task:\n" + this.taskList.get(position - 1);
-        this.taskList.remove(position - 1);
+
         return out;
+         */
     }
 }
