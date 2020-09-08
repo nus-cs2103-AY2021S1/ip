@@ -6,6 +6,7 @@ import command.DeleteCommand;
 import command.DoneCommand;
 import command.FindCommand;
 import command.ListCommand;
+import command.UndoCommand;
 
 /**
  * A Parser object deals with making sense of user command.
@@ -15,7 +16,7 @@ import command.ListCommand;
  * @since 2020-09-01
  */
 public class Parser {
-    private TaskList currList;
+    private final TaskList currList;
 
     public Parser(TaskList currList) {
         this.currList = currList;
@@ -39,6 +40,8 @@ public class Parser {
             return new DeleteCommand();
         } else if (actionType.equals("find")) {
             return new FindCommand();
+        } else if (actionType.equals("undo")) {
+            return new UndoCommand();
         } else {
             return new AddToListCommand();
         }

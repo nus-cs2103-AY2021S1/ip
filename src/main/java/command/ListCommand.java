@@ -3,6 +3,7 @@ package command;
 import duke.TaskList;
 import duke.Ui;
 import exception.DukeException;
+import storage.CommandStorage;
 
 /**
  * A ListCommand object lists all tasks in the list.
@@ -18,11 +19,13 @@ public class ListCommand extends Command {
      * @param inputMsg User's input message to the chat bot.
      * @param currList Current list of tasks.
      * @param ui Ui object relevant to the chat bot.
+     * @param commandStorage CommandStorage object to store user commands.
      * @return String message representing tasks in the list.
      * @throws DukeException If no task has been added yet.
      */
     @Override
-    public String execute(String inputMsg, TaskList currList, Ui ui) throws DukeException {
+    public String execute(String inputMsg, TaskList currList, Ui ui, CommandStorage commandStorage)
+            throws DukeException {
         assert currList != null : "TaskList cannot be null";
         assert ui != null : "Ui cannot be null";
 

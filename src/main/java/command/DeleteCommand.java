@@ -3,6 +3,7 @@ package command;
 import duke.TaskList;
 import duke.Ui;
 import exception.DukeException;
+import storage.CommandStorage;
 import task.Task;
 
 /**
@@ -20,11 +21,13 @@ public class DeleteCommand extends Command {
      * @param inputMsg User input which contains the task number to be deleted.
      * @param currList Current list of tasks.
      * @param ui Ui object relevant to the chat bot.
+     * @param commandStorage CommandStorage object to store user commands.
      * @return String message indicating task has been deleted.
      * @throws DukeException If task number indicated does not exist.
      */
     @Override
-    public String execute(String inputMsg, TaskList currList, Ui ui) throws DukeException {
+    public String execute(String inputMsg, TaskList currList, Ui ui, CommandStorage commandStorage)
+            throws DukeException {
         assert currList != null : "TaskList cannot be null";
         assert ui != null : "Ui cannot be null";
 
@@ -35,6 +38,7 @@ public class DeleteCommand extends Command {
             throw new DukeException("There is no such task number!");
         } else {
             Task currTask = currList.get(taskNumber - 1);
+            commandStorage.updateLastDeletedTask(currTask);
             return ui.deleteTask(taskNumber, currTask, currList);
         }
     }

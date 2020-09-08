@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import duke.TaskList;
 import duke.Ui;
 import exception.DukeException;
+import storage.CommandStorage;
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -53,11 +54,13 @@ public class AddToListCommand extends Command {
      * @param inputMsg User's input message to the chat bot.
      * @param currList Current list of tasks.
      * @param ui Ui object relevant to the chat bot.
+     * @param commandStorage CommandStorage object to store user commands.
      * @return String message indicating task has been added.
      * @throws DukeException If user does not give a task description.
      */
     @Override
-    public String execute(String inputMsg, TaskList currList, Ui ui) throws DukeException {
+    public String execute(String inputMsg, TaskList currList, Ui ui, CommandStorage commandStorage)
+            throws DukeException {
         assert currList != null : "TaskList cannot be null";
         assert ui != null : "Ui cannot be null";
 

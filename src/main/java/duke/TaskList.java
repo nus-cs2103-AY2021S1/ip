@@ -13,7 +13,7 @@ import task.Task;
  */
 public class TaskList {
 
-    private ArrayList<Task> tasks;
+    private final ArrayList<Task> tasks;
 
     public TaskList() {
         this.tasks = new ArrayList<>();
@@ -55,6 +55,14 @@ public class TaskList {
     }
 
     /**
+     * @param i Index to add the task to.
+     * @param t Task to be added to the list.
+     */
+    public void add(int i, Task t) {
+        this.tasks.add(i, t);
+    }
+
+    /**
      * Searches for and returns the list of tasks containing keyword.
      *
      * @param keyword Keyword user is searching for.
@@ -62,8 +70,7 @@ public class TaskList {
      */
     public ArrayList<Task> searchFor(String keyword) {
         ArrayList<Task> searchResult = new ArrayList<>();
-        for (int i = 0; i < this.tasks.size(); i++) {
-            Task currTask = this.tasks.get(i);
+        for (Task currTask : this.tasks) {
             String currTaskName = currTask.getTaskName();
             if (currTaskName.contains(keyword)) {
                 searchResult.add(currTask);

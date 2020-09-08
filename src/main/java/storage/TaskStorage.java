@@ -1,4 +1,4 @@
-package duke;
+package storage;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -15,6 +15,7 @@ import java.util.Locale;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import duke.TaskList;
 import exception.DukeException;
 import task.Deadline;
 import task.Event;
@@ -22,29 +23,26 @@ import task.Task;
 import task.Todo;
 
 /**
- * A Storage object deals with loading tasks from the file and saving tasks in the file.
+ * A TaskStorage object deals with loading tasks from the file and saving tasks in the file.
  *
  * @author amelia
  * @version 1.0
- * @since 2020-08-26
+ * @since 2020-09-08
  */
-public class Storage {
+public class TaskStorage extends Storage {
 
-    private String filePath;
-
-    Storage(String filePath) {
-        assert filePath != null : "File path cannot be null";
-        this.filePath = filePath;
+    public TaskStorage(String filePath) {
+        super(filePath);
     }
 
     /**
      * Store all tasks in a file.
      *
-     * @param tasks List of tasks as a duke.TaskList object.
+     * @param tasks List of tasks as a TaskList object.
      * @throws IOException If directory or file does not exist.
      */
     public void writeToFile(TaskList tasks) throws IOException {
-        String output = "";
+        String output;
         if (tasks.getNumberOfTasks() == 0) {
             // user has not added any task
             output = "Nothing has been added to the list yet!";
@@ -61,7 +59,7 @@ public class Storage {
             // file does not exist
             file.createNewFile();
         }
-        FileWriter fw = new FileWriter("../data/duke.txt");
+        FileWriter fw = new FileWriter(this.filePath);
         fw.write(output);
         fw.close();
     }
@@ -169,11 +167,7 @@ public class Storage {
 
             // check for completion
             boolean isCompleted;
-            if (completionState.equals("done")) {
-                isCompleted = true;
-            } else {
-                isCompleted = false;
-            }
+            isCompleted = completionState.equals("done");
 
             Task currTask;
             if (taskType.equals("T")) { // task.Todo
