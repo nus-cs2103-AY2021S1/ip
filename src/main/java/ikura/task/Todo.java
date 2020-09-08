@@ -3,8 +3,6 @@
 
 package ikura.task;
 
-import java.util.Optional;
-
 import ikura.util.InvalidInputException;
 
 /**

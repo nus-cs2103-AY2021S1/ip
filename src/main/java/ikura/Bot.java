@@ -155,7 +155,8 @@ public class Bot {
                     if (descs.hasDate()) {
 
                         if (task instanceof DatedTask) {
-                            ((DatedTask) task).setDate(descs.getDate().get());
+                            var datedTask = ((DatedTask) task);
+                            datedTask.setDate(descs.getDate().get());
                         } else {
                             this.ui.println("this task does not accept a date (task not modified)");
                             return;
