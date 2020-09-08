@@ -1,5 +1,7 @@
 package duke.tasks;
 
+import java.time.temporal.ChronoUnit;
+
 public class TaskToDo extends Task {
 
     public TaskToDo(String description) {
@@ -19,6 +21,16 @@ public class TaskToDo extends Task {
     @Override
     public String[] getSaveData() {
         return new String[] {"T", isDone ? "1" : "0", description, "na"};
+    }
+
+    @Override
+    public void postpone(int amount, ChronoUnit timeUnit) {
+
+    }
+
+    @Override
+    public void advance(int amount, ChronoUnit timeUnit) {
+
     }
 
     @Override

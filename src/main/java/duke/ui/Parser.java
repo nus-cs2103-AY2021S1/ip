@@ -1,11 +1,15 @@
 package duke.ui;
 
+import static duke.commands.CommandReschedule.VALID_TIME_UNITS;
+
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import duke.TimeModification;
 import duke.commands.Command;
 import duke.commands.CommandAddDeadline;
 import duke.commands.CommandAddEvent;
@@ -14,7 +18,11 @@ import duke.commands.CommandDelete;
 import duke.commands.CommandDone;
 import duke.commands.CommandFind;
 import duke.commands.CommandList;
+import duke.commands.CommandRescheduleAdvance;
+import duke.commands.CommandReschedulePostpone;
 import duke.exceptions.DukeException;
+import duke.exceptions.InvalidArgumentsException;
+import duke.exceptions.InvalidTimeUnitException;
 import duke.tasks.Task;
 import duke.tasks.TaskDeadline;
 import duke.tasks.TaskEvent;
@@ -26,7 +34,7 @@ import duke.tasks.TaskToDo;
  */
 public class Parser {
 
-    private static final Pattern COMMAND_INPUT_FORMAT = Pattern.compile("(?<command>^[ltdef]\\w+)" + "\\s?"
+    private static final Pattern COMMAND_INPUT_FORMAT = Pattern.compile("(?<command>^[ltdefpa]\\w+)" + "\\s?"
             + "(?<arguments>.*)");
 
     private TaskList taskList;
@@ -78,9 +86,37 @@ public class Parser {
             return new CommandAddEvent(taskList, ui, parseEvent(arguments));
         case CommandAddDeadline.COMMAND_STRING:
             return new CommandAddDeadline(taskList, ui, parseDeadline(arguments));
+        case CommandReschedulePostpone.COMMAND_STRING:
+            return new CommandReschedulePostpone(taskList, ui, parseReschedule(arguments));
+        case CommandRescheduleAdvance.COMMAND_STRING:
+            return new CommandRescheduleAdvance(taskList, ui, parseReschedule(arguments));
         default:
             throw new DukeException("☹ BLEHHHHHH!!! I'm (not) sorry, but I don't know what that means :/");
         }
+    }
+
+    private TimeModification parseReschedule(String arguments) throws DukeException {
+        Pattern timeModPattern = Pattern.compile("(?<taskIndex>\\d+)\\s+(/by)\\s+(?<amount>\\d+)\\s+(?<unit>\\w+)");
+        Matcher matcher = timeModPattern.matcher(arguments);
+        if (!matcher.matches()) {
+            throw new InvalidArgumentsException("reschedule");
+        }
+        int index = Integer.parseInt(matcher.group("taskIndex")) - 1;
+        int amount = Integer.parseInt(matcher.group("amount"));
+        ChronoUnit timeUnit = ChronoUnit.CENTURIES;
+        String timeUnitInput = matcher.group("unit").toLowerCase();
+        boolean found = false;
+        for (int i = 0; i < VALID_TIME_UNITS.size() && !found; i++) {
+            if (VALID_TIME_UNITS.get(i).toString().toLowerCase().contains(timeUnitInput)) {
+                timeUnit = VALID_TIME_UNITS.get(i);
+                found = true;
+            }
+        }
+        if (!found) {
+            throw new InvalidTimeUnitException();
+        }
+
+        return new TimeModification(index, amount, timeUnit);
     }
 
     private int parseDoneOrDelete(String arguments) throws DukeException {
