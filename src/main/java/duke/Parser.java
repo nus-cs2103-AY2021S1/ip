@@ -26,6 +26,8 @@ public class Parser {
         String[] arr = command.split(" ");
         String keyWord = arr[0];
 
+        assert keyWord.length() == 0: "Not valid";
+
         if (keyWord.equals("bye")) {
             return new ExitCommand(command);
         } else if (keyWord.equals("list")) {
