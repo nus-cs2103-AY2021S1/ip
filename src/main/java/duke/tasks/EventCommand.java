@@ -24,7 +24,7 @@ public class EventCommand extends Command {
             //add event task to list of tasks
             tasks.event(this.eventTask);
         } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
-            return Task.invalidInput();
+            return Event.invalidInput();
         }
 
         //write to file
