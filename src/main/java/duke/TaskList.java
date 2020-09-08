@@ -76,6 +76,7 @@ public class TaskList {
             }
             return result.toString();
         }
+        assert false : "Execution should never reach here";
     }
     public Task getTask(int index) {
         return tasks.get(index);
