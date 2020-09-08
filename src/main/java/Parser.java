@@ -1,3 +1,6 @@
+import java.util.ArrayList;
+import java.util.EnumSet;
+
 /**
  * The {@code Parser} class processes and parses user input, coming up with a response.
  */
@@ -35,6 +38,11 @@ public class Parser {
 
             case "bye":
                 reply = "Bye. Hope to see you again soon!";
+                break;
+
+            case "help":
+                reply = "Here are a list of commands available:\n"
+                    + getHelpOptions();
                 break;
 
             case "todo":
@@ -86,6 +94,9 @@ public class Parser {
                 reply = "Here are the matching tasks in your list:\n\t" + tasks;
                 break;
 
+            case "help":
+
+
             default:
                 throw new JimmyException(ErrorMessage.UNKNOWN_FUNCTION);
             }
@@ -135,4 +146,14 @@ public class Parser {
             return new Deadline(message);
         }
     }
+
+    private static String getHelpOptions() {
+        ArrayList<HelpMessage> helpMessageList = new ArrayList<>(EnumSet.allOf(HelpMessage.class));
+        StringBuilder helpMessages = new StringBuilder();
+        for (HelpMessage message : helpMessageList) {
+            helpMessages.append(message.getHelpMessage() + "\n");
+        }
+        return helpMessages.toString();
+    }
+
 }
