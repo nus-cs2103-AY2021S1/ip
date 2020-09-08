@@ -8,9 +8,6 @@ import duke.DateTime;
  */
 public class Event extends Task {
 
-    /** DateTime object to store the date and any specified time of the event. */
-    private DateTime dateTime;
-
     /**
      * Creates an Event task containing the description, date and time of the task.
      *
@@ -18,8 +15,7 @@ public class Event extends Task {
      * @param dateTime Stores the date and any specified time of the task deadline.
      */
     public Event(String name, DateTime dateTime) {
-        super(name);
-        this.dateTime = dateTime;
+        super(name, dateTime);
     }
 
     /**
@@ -29,7 +25,7 @@ public class Event extends Task {
      */
     public String appendFile() {
         String doneString = (isDone() == true ? "1" : "0");
-        return "event" + " | " + doneString + " | " + getName() + " | " + dateTime.getFileFormattedDateTime();
+        return "event" + " | " + doneString + " | " + getName() + " | " + getDateTime().getFileFormattedDateTime();
     }
 
     /**
@@ -41,7 +37,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         String doneString = (isDone() == true ? "✓" : "✗");
-        return "[E]" + "[" + doneString + "] " + getName() + " (at: " + dateTime.getPrintFormattedDate()
-                + " " + dateTime.getPrintFormattedTime() + ")";
+        return "[E]" + "[" + doneString + "] " + getName() + " (at: " + getDateTime().getPrintFormattedDate()
+                + " " + getDateTime().getPrintFormattedTime() + ")";
     }
 }

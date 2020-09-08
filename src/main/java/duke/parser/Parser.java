@@ -10,7 +10,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
-
+import duke.command.ViewCommand;
 
 /**
  * Deals with parsing and making sense of the user command.
@@ -18,7 +18,7 @@ import duke.command.ListCommand;
 public class Parser {
 
     /** Input string of the user. */
-    private String inputString;
+    private final String inputString;
 
     /**
      * Initialises the parser with the user's input string.
@@ -60,6 +60,8 @@ public class Parser {
             return new ListCommand(splitInput);
         } else if (commandType.equals("find")) {
             return new FindCommand(splitInput);
+        } else if (commandType.equals("view")) {
+            return new ViewCommand(splitInput);
         } else if (commandType.equals("bye")) {
             return new ExitCommand(splitInput);
         } else if (containsString(commandType, addCommands)) {

@@ -1,6 +1,9 @@
 package duke.task;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
+
+import duke.DateTime;
 
 /**
  * Represents the container that stores all of the tasks at every point in time.
@@ -65,6 +68,23 @@ public class TaskList {
         ArrayList<Task> foundTasks = new ArrayList<>();
         for (int i = 0; i < getTaskList().size(); i++) {
             if (getTask(i).getName().contains(keyword)) {
+                foundTasks.add(getTask(i));
+            }
+        }
+        return foundTasks;
+    }
+
+    /**
+     * Finds all matching tasks from the task list based on the date.
+     *
+     * @param date Date to match with task dates.
+     * @return ArrayList containing all matching tasks that match the specified date.
+     */
+    public ArrayList<Task> findTaskByDate(LocalDate date) {
+        ArrayList<Task> foundTasks = new ArrayList<>();
+        for (int i = 0; i < getTaskList().size(); i++) {
+            DateTime taskDateTime = getTask(i).getDateTime();
+            if (taskDateTime != null && taskDateTime.checkDateEqual(date)) {
                 foundTasks.add(getTask(i));
             }
         }
