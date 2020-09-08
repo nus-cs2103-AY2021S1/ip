@@ -7,7 +7,9 @@ import java.util.Objects;
  */
 public class Task {
     protected final String description;
+    protected String time;
     protected TaskStatus status;
+    protected TaskType type;
 
     /**
      * Denotes whether task is done or not done.
@@ -31,6 +33,7 @@ public class Task {
     public Task(String desc) {
         this.status = TaskStatus.NOTDONE;
         this.description = desc;
+        this.time = null;
     }
 
     /**
@@ -107,5 +110,22 @@ public class Task {
     @Override
     public int hashCode() {
         return Objects.hash(description, status);
+    }
+
+    /**
+     * Returns a deep copy of the current task to be retrieved later when undo is called.
+     *
+     * @return Deep copy of the given task.
+     */
+    public Task deepCopy() {
+        if (type == TaskType.DEADLINE) {
+            return Deadline.deepCopyDeadline(this);
+        } else if (type == TaskType.EVENT) {
+            return Event.deepCopyEvent(this);
+        } else if (type == TaskType.TODO) {
+            return Todo.deepCopyTodo(this);
+        } else {
+            return this;
+        }
     }
 }

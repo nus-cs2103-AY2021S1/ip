@@ -1,7 +1,5 @@
 package duke.command;
 
-import java.util.Objects;
-
 import duke.task.Task;
 
 /**

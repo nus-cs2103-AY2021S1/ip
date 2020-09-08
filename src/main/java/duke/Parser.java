@@ -10,7 +10,9 @@ import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
+import duke.command.RedoCommand;
 import duke.command.TodoCommand;
+import duke.command.UndoCommand;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -39,24 +41,32 @@ public class Parser {
         case "list":
             return new ListCommand();
         case "done":
+            handler.saveCurrentTaskList(input);
             Task currentTask = Parser.parseModifyTaskCommand(input, handler);
             return new DoneCommand(currentTask);
         case "delete":
+            handler.saveCurrentTaskList(input);
             Task delTask = Parser.parseModifyTaskCommand(input, handler);
             return new DeleteCommand(delTask);
         case "todo":
+            handler.saveCurrentTaskList(input);
             Task newToDo = Parser.parseNewTaskCommand(input, Task.TaskType.TODO);
             return new TodoCommand(newToDo);
         case "deadline":
+            handler.saveCurrentTaskList(input);
             Task newDeadline = Parser.parseNewTaskCommand(input, Task.TaskType.DEADLINE);
             return new DeadlineCommand(newDeadline);
         case "event":
+            handler.saveCurrentTaskList(input);
             Task newEvent = Parser.parseNewTaskCommand(input, Task.TaskType.EVENT);
             return new EventCommand(newEvent);
         case "clear":
+            handler.saveCurrentTaskList(input);
             return new ClearCommand();
         case "find":
             return new FindCommand(input);
+        case "undo":
+            return new UndoCommand();
         default:
             return new InvalidCommand(input);
         }
@@ -84,7 +94,7 @@ public class Parser {
             // Task number is input after done/delete in the whole command in string
             // Minus one to access the index in the task list
             int indexOfTask = Integer.parseInt(stringArr[1]) - 1;
-            assert indexOfTask >=0 : "The index of the task to modify is negative!";
+            assert indexOfTask >= 0 : "The index of the task to modify is negative!";
             return handler.getTasks().get(indexOfTask);
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("\u2639 Oops, " + '"' + stringArr[1] + '"'

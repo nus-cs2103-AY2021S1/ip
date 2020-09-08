@@ -32,8 +32,7 @@ public class FindCommand extends Command {
         ArrayList<Task> foundTasks = handler.findTasksByKeyword(keyword);
         if (!foundTasks.isEmpty()) {
             Ui.printSuccess("find", foundTasks.get(0), foundTasks);
-        }
-        else {
+        } else {
             // Unable to find any matching task
             Ui.indent(1);
             System.out.println("I couldn't find any tasks matching " + '"' + keyword + '"' + ".");

@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Stack;
 
 import duke.task.Task;
 
@@ -9,6 +10,10 @@ import duke.task.Task;
  */
 public class TaskListHandler {
     protected ArrayList<Task> tasks;
+    protected Stack<ArrayList<Task>> undoTaskLists;
+    protected Stack<String> inputsToUndo;
+    // protected Stack<ArrayList<Task>> redoTaskLists;
+    // protected Stack<String> inputsToRedo;
 
     /**
      * Stores tasks from save file or empty task list if save file unavailable.
@@ -17,6 +22,10 @@ public class TaskListHandler {
      */
     public TaskListHandler(ArrayList<Task> list) {
         this.tasks = list;
+        this.inputsToUndo = new Stack<>();
+        this.undoTaskLists = new Stack<>();
+        // this.inputsToRedo = new Stack<>();
+        // this.redoTaskLists = new Stack<>();
     }
 
     /**
@@ -97,4 +106,67 @@ public class TaskListHandler {
         }
         return foundTasks;
     }
+
+    /**
+     * Provides the functionality of undo-ing a previous command by reverting task list to the state
+     * before the previous command was given.
+     *
+     *
+     * @throws DukeException If there are no more previous modifications to the task list.
+     */
+    public void retrievePreviousTaskList() throws DukeException {
+        if (undoTaskLists.empty()) {
+            throw new DukeException("\u2639 Oops, there are no more commands to undo!");
+        }
+        String previousCommand = inputsToUndo.pop();
+        System.out.println("The previous command: " + '"' + previousCommand + '"' + " has been undone!");
+        ArrayList<Task> previousTaskList = undoTaskLists.pop();
+        tasks = previousTaskList;
+        /* // Redo requires pushing the popped undo-list into a redo-stack
+
+        ArrayList<Task> redoTasks = new ArrayList<>();
+        for (Task t: previousTaskList) {
+            redoTasks.add(t.deepCopy());
+        }
+        redoTaskLists.push(redoTasks);
+        inputsToRedo.push(previousCommand);
+
+         */
+    }
+
+    /**
+     * Provides the history for undo command by saving current task list.
+     * Keeps a deep-copy of all the tasks in the current task list and the given user input for future retrieval.
+     * This is only called prior to commands that modify the task list.
+     *
+     * @param command Current user input given.
+     */
+    public void saveCurrentTaskList(String command) {
+        ArrayList<Task> savedTaskList = new ArrayList<>();
+        for (Task t: tasks) {
+            savedTaskList.add(t.deepCopy());
+        }
+        undoTaskLists.push(savedTaskList);
+        inputsToUndo.push(command);
+    }
+
+    /*
+
+    public void restoreRedoTaskList() throws DukeException {
+        if (redoTaskLists.empty()) {
+            throw new DukeException("\u2639 Oops, there are no more commands to redo!");
+        }
+        String futureCommand = inputsToRedo.pop();
+        System.out.println("The previous command: " + '"' + futureCommand + '"' + " has been redone!");
+        ArrayList<Task> futureTaskList = redoTaskLists.pop();
+        for (Task t: futureTaskList) {
+            System.out.println(t);
+        }
+        tasks = futureTaskList;
+        // Pushing the popped undo-list into a redo-stack
+        undoTaskLists.push(futureTaskList);
+        inputsToUndo.push(futureCommand);
+    }
+
+     */
 }

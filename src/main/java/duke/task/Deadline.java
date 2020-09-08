@@ -9,7 +9,6 @@ import java.time.format.DateTimeParseException;
  * Inherits from Task.
  */
 public class Deadline extends Task {
-    protected String by;
 
     /**
      * Initializes with a description and the time that deadline should be completed by.
@@ -19,7 +18,8 @@ public class Deadline extends Task {
      */
     public Deadline(String desc, String by) {
         super(desc);
-        this.by = by;
+        this.type = TaskType.DEADLINE;
+        this.time = by;
         parseDate(by);
     }
 
@@ -34,7 +34,7 @@ public class Deadline extends Task {
         try {
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
             LocalDateTime parsedDateTime = LocalDateTime.parse(input, formatter);
-            by = parsedDateTime.format(DateTimeFormatter.ofPattern("d MMM yyyy, hh:mm a"));
+            time = parsedDateTime.format(DateTimeFormatter.ofPattern("d MMM yyyy, hh:mm a"));
         } catch (DateTimeParseException e) {
             System.out.print("");
         }
@@ -47,7 +47,7 @@ public class Deadline extends Task {
      */
     @Override
     public String printSaveFormat() {
-        return "deadline " + super.printSaveFormat() + " /by " + by;
+        return "deadline " + super.printSaveFormat() + " /by " + time;
     }
 
     /**
@@ -57,6 +57,18 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + by + ")";
+        return "[D]" + super.toString() + " (by: " + time + ")";
+    }
+
+    /**
+     * Subroutine for deep-copying a deadline
+     *
+     * @param t Deadline task to be copied.
+     * @return Deep copy of the deadline task given.
+     */
+    public static Deadline deepCopyDeadline(Task t) {
+        Deadline deadlineCopy = new Deadline(t.description, t.time);
+        deadlineCopy.status = t.status;
+        return deadlineCopy;
     }
 }
