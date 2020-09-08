@@ -1,7 +1,4 @@
 
-[T][✘] testing
-[T][✘] testing
-[T][✘] testing
-[T][✘] tester
-[D][✘] book /by 2019-09-18 1900
-[T][✘] testing
+[T][✓]  tester [Recurring Weekly]
+[T][✘]  tester [Recurring Weekly]
+[D][✘] tester2 /by 2020-02-03 1900

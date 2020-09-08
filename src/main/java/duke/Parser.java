@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class Parser {
@@ -27,6 +29,7 @@ public class Parser {
      * @throws IOException
      * @throws ClassNotFoundException
      */
+    @SuppressWarnings("checkstyle:SeparatorWrap")
     public void parse(String str) throws DukeException, IOException {
 
         ArrayList<Task> store = this.tasks.getList();
@@ -44,7 +47,8 @@ public class Parser {
                 for (Task task : store) {
                     if (task.getDescription() != null) {
                         System.out.println(counter + ". [" + task.getType()
-                                + "][" + task.getStatusIcon() + "] " + task.getDescription());
+                                + "][" + task.getStatusIcon() + "] " + task.getDescription()
+                                + task.recurringPrinter());
                         counter++;
                     }
                 }
@@ -60,6 +64,34 @@ public class Parser {
 
                 //Store the current Task to the TaskList after marking as done.
                 Task curr = store.get(num);
+
+                if (curr.recurring && curr instanceof Deadlines) {
+                    LocalDate date = ((Deadlines) curr).getDate();
+                    LocalDate newDate = date.plusWeeks(1);
+                    String formattedDate = newDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                    ((Deadlines) curr).setDeadline(formattedDate);
+                    System.out.println("-------------------------");
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println("The same task has to be completed next week!");
+                    System.out.println("I have added the same task to the list for next week");
+                    System.out.println("  [" + curr.getStatusIcon() + "] " + curr.getDescription());
+                    System.out.println("-------------------------");
+                    break;
+                }
+
+                if (curr.recurring && curr instanceof Events) {
+                    LocalDate date = ((Events) curr).getDate();
+                    LocalDate newDate = date.plusWeeks(1);
+                    String formattedDate = newDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                    ((Events) curr).setStart(formattedDate);
+                    System.out.println("-------------------------");
+                    System.out.println("Nice! I've marked this task as done:");
+                    System.out.println("The same task has to be completed next week!");
+                    System.out.println("I have added the same task to the list for next week");
+                    System.out.println("  [" + curr.getStatusIcon() + "] " + curr.getDescription());
+                    System.out.println("-------------------------");
+                    break;
+                }
                 curr.markAsDone();
 
                 System.out.println("-------------------------");
@@ -78,12 +110,16 @@ public class Parser {
 
                     //Add the Task to the TaskList.
                     ToDos curr = new ToDos(description);
+                    if (str.contains("recurring")) {
+                        curr.recurring = true;
+                        curr.removeRecurring();
+                    }
                     store.add(curr);
 
                     System.out.println("-------------------------");
                     System.out.println("Got it. I've added this task:");
                     System.out.println("  [" + curr.getType() + "][" + curr.getStatusIcon() + "] "
-                            + curr.getDescription());
+                            + curr.getDescription() + curr.recurringPrinter());
                     System.out.println("Now you have " + store.size() + " tasks in the list.");
                     System.out.println("-------------------------");
 
@@ -96,7 +132,8 @@ public class Parser {
                     for (Task task : store) {
                         if (task.getDescription() != null) {
                             result.append("[" + task.getType() + "]"
-                                    + "[" + task.getStatusIcon() + "] " + task.getDescription());
+                                    + "[" + task.getStatusIcon() + "] " + task.getDescription()
+                                    + task.recurringPrinter());
                             result.append("\n");
                         }
                     }
@@ -119,6 +156,10 @@ public class Parser {
                     int index = description.indexOf("/") + 4;
                     curr.setDeadline(description.substring(index));
                     curr.setDateTime();
+                    if (str.contains("recurring")) {
+                        curr.recurring = true;
+                        curr.removeRecurring();
+                    }
 
                     //Add the current Task to the TaskList.
                     store.add(curr);
@@ -127,7 +168,7 @@ public class Parser {
                     System.out.println("Got it. I've added this task:");
                     System.out.println("  [" + curr.getType() + "][" + curr.getStatusIcon() + "] "
                             + curr.getDescription().substring(0, description.indexOf("/"))
-                            + "(by: " + curr.getDeadline() + ")");
+                            + "(by: " + curr.getDeadline() + ")" + curr.recurringPrinter());
                     System.out.println("Now you have " + store.size() + " tasks in the list.");
                     System.out.println("-------------------------");
 
@@ -140,7 +181,8 @@ public class Parser {
                     for (Task task : store) {
                         if (task.getDescription() != null) {
                             result.append("[" + task.getType() + "]"
-                                    + "[" + task.getStatusIcon() + "] " + task.getDescription());
+                                    + "[" + task.getStatusIcon() + "] " + task.getDescription()
+                                    + task.recurringPrinter());
                             result.append("\n");
                         }
                     }
@@ -163,6 +205,10 @@ public class Parser {
                     int index = description.indexOf("/") + 4;
                     curr.setStart(description.substring(index));
                     curr.setDateTime();
+                    if (str.contains("recurring")) {
+                        curr.recurring = true;
+                        curr.removeRecurring();
+                    }
 
                     //Add the current task to the TaskList.
                     store.add(curr);
@@ -171,7 +217,8 @@ public class Parser {
                     System.out.println("Got it. I've added this task:");
                     System.out.println("  [" + curr.getType() + "][" + curr.getStatusIcon() + "] "
                             + curr.getDescription().substring(0, description.indexOf("/"))
-                            + "(at: " + curr.getStart() + ")");
+                            + "(at: " + curr.getStart() + ")"
+                            + curr.recurringPrinter());
                     System.out.println("Now you have " + store.size() + " tasks in the list.");
                     System.out.println("-------------------------");
 
@@ -184,7 +231,8 @@ public class Parser {
                     for (Task task : store) {
                         if (task.getDescription() != null) {
                             result.append("[" + task.getType() + "]" + "[" + task.getStatusIcon()
-                                    + "] |" + task.getDescription());
+                                    + "] |" + task.getDescription()
+                                    + curr.recurringPrinter());
                             result.append("\n");
                         }
                     }
@@ -258,8 +306,8 @@ public class Parser {
 
                 for (Task task : store) {
                     if (task.getDescription() != null) {
-                        result = result + counter + ". [" + task.getType()
-                                + "][" + task.getStatusIcon() + "] " + task.getDescription() + "\n";
+                        result = result + counter + ". " + task.toString()
+                                + task.recurringPrinter() + "\n";
                         counter++;
                     }
                 }
@@ -272,6 +320,31 @@ public class Parser {
 
                 int num = Integer.parseInt(str.substring(5)) - 1;
                 Task curr = store.get(num);
+
+                if (curr.recurring && curr instanceof Deadlines) {
+                    LocalDate date = ((Deadlines) curr).getDate();
+                    LocalDate newDate = date.plusWeeks(1);
+                    String formattedDate = newDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                    ((Deadlines) curr).setDeadline(formattedDate);
+                    return "-------------------------\n"
+                        + "Nice! I've marked this task as done: \n"
+                        + "The same task has to be completed next week! \n"
+                        + "I have added the same task to the list for next week"
+                        + "  [" + curr.getStatusIcon() + "] " + curr.getDescription() + "\n"
+                        + "-------------------------\n";
+                } else if (curr.recurring && curr instanceof Events) {
+                    LocalDate date = ((Events) curr).getDate();
+                    LocalDate newDate = date.plusWeeks(1);
+                    String formattedDate = newDate.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
+                    ((Events) curr).setStart(formattedDate);
+                    return "-------------------------\n"
+                            + "Nice! I've marked this task as done: \n"
+                            + "The same task has to be completed next week! \n"
+                            + "I have added the same task to the list for next week"
+                            + "  [" + curr.getStatusIcon() + "] " + curr.getDescription() + "\n"
+                            + "-------------------------\n";
+                }
+
                 curr.markAsDone();
                 result = result + "Nice! I've marked this task as done:\n";
                 result = result + "  [" + curr.getStatusIcon() + "] " + curr.getDescription() + "\n";
@@ -283,11 +356,15 @@ public class Parser {
                     }
 
                     ToDos curr = new ToDos(str.substring(5));
+                    if (str.contains("recurring")) {
+                        curr.recurring = true;
+                        curr.removeRecurring();
+                    }
                     store.add(curr);
 
                     result = result + "Got it. I've added this task:\n";
                     result = result + "  [" + curr.getType() + "][" + curr.getStatusIcon() + "] "
-                            + curr.getDescription() + "\n";
+                            + curr.getDescription() + curr.recurringPrinter() + "\n";
                     result = result + "Now you have " + store.size() + " tasks in the list.\n";
 
                     Path relativePath = Paths.get("duke.txt");
@@ -299,7 +376,8 @@ public class Parser {
                     for (Task task : store) {
                         if (task.getDescription() != null) {
                             res.append("[" + task.getType() + "]"
-                                    + "[" + task.getStatusIcon() + "] " + task.getDescription());
+                                    + "[" + task.getStatusIcon() + "] " + task.getDescription()
+                                    + task.recurringPrinter());
                             res.append("\n");
                         }
                     }
@@ -318,12 +396,19 @@ public class Parser {
                     int index = description.indexOf("/") + 4;
                     curr.setDeadline(description.substring(index));
                     curr.setDateTime();
+
+                    if (str.contains("recurring")) {
+                        curr.recurring = true;
+                        curr.removeRecurring();
+                    }
+
                     store.add(curr);
 
                     result = result + "Got it. I've added this task:\n";
                     result = result + "  [" + curr.getType() + "][" + curr.getStatusIcon() + "] "
                             + curr.getDescription().substring(0, description.indexOf("/"))
-                            + "(by: " + curr.getDeadline() + ")" + "\n";
+                            + "(by: " + curr.getDeadline() + ")"
+                            + curr.recurringPrinter() + "\n";
                     result = result + "Now you have " + store.size() + " tasks in the list.\n";
 
                     Path relativePath = Paths.get("duke.txt");
@@ -336,7 +421,8 @@ public class Parser {
                     for (Task task : store) {
                         if (task.getDescription() != null) {
                             res.append("[" + task.getType() + "]"
-                                    + "[" + task.getStatusIcon() + "] " + task.getDescription());
+                                    + "[" + task.getStatusIcon() + "] " + task.getDescription()
+                                    + task.recurringPrinter());
                             res.append("\n");
                         }
                     }
@@ -357,12 +443,18 @@ public class Parser {
 
                     curr.setStart(description.substring(index));
                     curr.setDateTime();
+
+                    if (str.contains("recurring")) {
+                        curr.recurring = true;
+                        curr.removeRecurring();
+                    }
                     store.add(curr);
 
                     result = result + "Got it. I've added this task:\n";
                     result = result + "  [" + curr.getType() + "][" + curr.getStatusIcon() + "] "
                             + curr.getDescription().substring(0, description.indexOf("/"))
-                            + "(at: " + curr.getStart() + ")\n";
+                            + "(at: " + curr.getStart() + ")"
+                            + curr.recurringPrinter() + "\n";
                     result = result + "Now you have " + store.size() + " tasks in the list.\n";
 
                     Path relativePath = Paths.get("data/duke.txt");
@@ -374,7 +466,7 @@ public class Parser {
                     for (Task task : store) {
                         if (task.getDescription() != null) {
                             res.append("[" + task.getType() + "]" + "[" + task.getStatusIcon()
-                                    + "] |" + task.getDescription());
+                                    + "] |" + task.getDescription() + curr.recurringPrinter());
                             res.append("\n");
                         }
                     }

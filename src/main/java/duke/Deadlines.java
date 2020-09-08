@@ -32,6 +32,10 @@ public class Deadlines extends Task {
         return this.deadline;
     }
 
+    public LocalDate getDate() {
+        return this.date;
+    }
+
     /**
      * Sets the LocalDate of the Deadline.
      */
@@ -48,6 +52,7 @@ public class Deadlines extends Task {
      */
     public String toString() {
         return "  [D][" + this.getStatusIcon() + "] "
-                + this.getDescription().substring(0, description.indexOf("/")) + "(by: " + this.getDeadline() + ")";
+                + this.getDescription().substring(0, description.indexOf("/")) + "(by: "
+                + this.getDeadline() + ")" + this.recurringPrinter();
     }
 }
