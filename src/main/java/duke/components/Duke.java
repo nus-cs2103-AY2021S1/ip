@@ -41,7 +41,7 @@ public class Duke extends Application {
     private Ui ui;
     private Parser parser;
 
-    public Duke(){
+    public Duke() {
 
     }
 
@@ -86,10 +86,9 @@ public class Duke extends Application {
 
                 ui.printDeleteTask(tasks.deleteTask(parser.getDeleteTaskNum()), tasks.getMyList());
 
-            } else if (parser.isValid) {
+            } else if (!parser.isValid) {
 
-                ui.printNotValid();
-
+                ui.returnNotValid();
             }
             parser = new Parser();
             parser.parse(ui.waitForNextInput());
@@ -151,7 +150,7 @@ public class Duke extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Step 3. Add functionality to handle user input.
@@ -189,12 +188,12 @@ public class Duke extends Application {
         userInput.clear();
 
 
-
     }
 
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
@@ -205,6 +204,7 @@ public class Duke extends Application {
 
         return textToAdd;
     }
+
     /**
      * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
@@ -219,6 +219,7 @@ public class Duke extends Application {
         );
         userInput.clear();
     }
+
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
@@ -232,46 +233,47 @@ public class Duke extends Application {
         parser.parse(input);
         String output;
 
-            if (parser.isList) {
+        if (parser.isList) {
 
-                output = ui.returnTaskList(tasks.getMyList());
+            output = ui.returnTaskList(tasks.getMyList());
 
-            } else if (parser.isDone) {
+        } else if (parser.isDone) {
 
-                output = ui.returnDoneTask(
-                        tasks.finishTaskNum(
-                                parser.getDoneTaskNum()
-                        )
-                );
-            } else if (parser.isFind) {
+            output = ui.returnDoneTask(
+                    tasks.finishTaskNum(
+                            parser.getDoneTaskNum()
+                    )
+            );
+        } else if (parser.isFind) {
 
-                output = ui.returnFindTask(tasks.findTasks(parser.getFindTask()));
+            output = ui.returnFindTask(tasks.findTasks(parser.getFindTask()));
 
-            } else if (parser.isTask) {
+        } else if (parser.isTask) {
 
-                output = ui.returnAddTask(
-                        tasks.addTask(parser.getDescription(), parser.getDate(), parser.getTime()),
-                        tasks.getMyList()
-                );
+            output = ui.returnAddTask(
+                    tasks.addTask(parser.getDescription(), parser.getDate(), parser.getTime()),
+                    tasks.getMyList()
+            );
 
-            } else if (parser.isDelete) {
+        } else if (parser.isDelete) {
 
-                output = ui.returnDeleteTask(tasks.deleteTask(parser.getDeleteTaskNum()), tasks.getMyList());
+            output = ui.returnDeleteTask(tasks.deleteTask(parser.getDeleteTaskNum()), tasks.getMyList());
 
-            }else if(parser.isBye){
+        } else if (parser.isBye) {
 
-                output = ui.returnBye();
+            output = ui.returnBye();
 
-            } else {
+        } else if (!parser.isValid) {
 
-                output = ui.returnNotValid();
-            }
+            output = ui.returnNotValid();
+        } else {
+            output = "error";
+        }
 
-            storage.overwriteWith(tasks.getMyList());
-            return output;
+        storage.overwriteWith(tasks.getMyList());
+        return output;
 
     }
-
 
 
 }
