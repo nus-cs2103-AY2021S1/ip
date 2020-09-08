@@ -20,7 +20,6 @@ public class Duke {
 
     public Duke() {
         ui = new Ui();
-        //ui.showWelcomeMessage();
         storage = new Storage(filePath);
         try {
             tasks = storage.load();
@@ -40,7 +39,6 @@ public class Duke {
      */
     public Duke(String filePath) throws DukeException {
         ui = new Ui();
-        //ui.showWelcomeMessage();
         storage = new Storage(filePath);
         try {
             tasks = storage.load();
