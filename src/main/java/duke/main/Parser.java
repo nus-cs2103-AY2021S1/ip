@@ -71,10 +71,10 @@ public class Parser {
                 command = new AddToDoCommand(input.substring(5), taskList);
                 break;
             case "event":
-                command = new AddEventCommand(input.substring(5), taskList);
+                command = new AddEventCommand(input.substring(6), taskList);
                 break;
             case "deadline":
-                command = new AddDeadlineCommand(input.substring(5), taskList);
+                command = new AddDeadlineCommand(input.substring(9), taskList);
                 break;
             default:
                 throw new InvalidCommandException();
