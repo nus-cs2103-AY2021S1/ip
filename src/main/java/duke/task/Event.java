@@ -12,7 +12,8 @@ public class Event extends Task {
         super(description, isDone);
         this.at = at;
         try {
-            this.atDateTime = LocalDateTime.parse(reformatedDateTime());
+            String reformatedDateTime = reformateDateTime();
+            this.atDateTime = LocalDateTime.parse(reformatedDateTime);
         } catch (DateTimeParseException e) {
             System.out.println("Invalid input! Enter appropriate date and time format");
         }
@@ -20,18 +21,14 @@ public class Event extends Task {
 
     public String toString() {
         String icon = this.completed ? "[" + "\u2713" + "]" : "[" + "\u2718" + "]";
-        if (atDateTime == null) {
-            return "[E]" + icon + " " + this.description + " (at: " + this.at + ")";
-        } else {
-            return "[E]" + icon + " " + this.description + " (at: "
-                    + this.atDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
-        }
+        return "[E]" + icon + " " + this.description + " (at: "
+                + this.atDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
     }
 
     /**
-     * Encode duke.task into a String to be saved in text file.
+     * Encode task into a String to be saved in text file.
      *
-     * @return String of encoded duke.task details.
+     * @return String of encoded task details.
      */
     public String toEncoding() {
         int completedBinary = this.completed ? 1 : 0;
@@ -40,10 +37,11 @@ public class Event extends Task {
 
     /**
      * Converts the event details into a format readable by Java LocalDateTime API.
+     * Format of "yyyy-mm-ddThh:mm:ss" required
      *
      * @return String of converted event details.
      */
-    private String reformatedDateTime() {
+    private String reformateDateTime() {
         String[] bySplit = this.at.split(" ", 2);
         String date = bySplit[0];
         String[] dateSplit = date.split("/", 3);

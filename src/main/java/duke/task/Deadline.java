@@ -12,7 +12,8 @@ public class Deadline extends Task {
         super(description, isDone);
         this.by = by;
         try {
-            this.byDateTime = LocalDateTime.parse(reformatedDateTime());
+            String reformatedDateTime = reformateDateTime();
+            this.byDateTime = LocalDateTime.parse(reformatedDateTime);
         } catch (DateTimeParseException e) {
             System.out.println("Invalid input! Enter appropriate date and time format");
         }
@@ -20,12 +21,8 @@ public class Deadline extends Task {
 
     public String toString() {
         String icon = this.completed ? "[" + "\u2713" + "]" : "[" + "\u2718" + "]";
-        if (this.byDateTime == null) {
-            return "[D]" + icon + " " + this.description + " (by: " + this.by + ")";
-        } else {
-            return "[D]" + icon + " " + this.description + " (by: "
-                    + this.byDateTime.format(DateTimeFormatter.ofPattern("MMM d yyy HH:mm")) + ")";
-        }
+        return "[D]" + icon + " " + this.description + " (by: "
+                + this.byDateTime.format(DateTimeFormatter.ofPattern("MMM d yyy HH:mm")) + ")";
     }
 
     /**
@@ -40,10 +37,11 @@ public class Deadline extends Task {
 
     /**
      * Converts the deadline details into a format readable by Java LocalDateTime API.
+     * Format of "yyyy-mm-ddThh:mm:ss" required
      *
      * @return String of converted deadline details.
      */
-    private String reformatedDateTime() {
+    private String reformateDateTime() {
         String[] bySplit = this.by.split(" ", 2);
         String date = bySplit[0];
         String[] dateSplit = date.split("/", 3);

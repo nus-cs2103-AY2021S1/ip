@@ -1,2 +1,4 @@
 T>0>todo 1
 D>0>deadline 1>02/09/2020 2359
+T>0>t2
+W>0>meeting>mon 1200
