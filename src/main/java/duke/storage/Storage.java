@@ -49,6 +49,7 @@ public class Storage {
      * @param record This is the Task to be saved.
      */
     public void saveRecord(String record) {
+        assert record.length() > 0 : "record cannot be empty";
         recordArrayLst.add(record);
     }
 
@@ -61,6 +62,7 @@ public class Storage {
      * @param index The index of the task in the list.
      */
     public void updateRecord(String record, int index) {
+        assert index > 0 : "index must be bigger than 0";
         int i = index - 1;
         recordArrayLst.set(i, record);
     }
@@ -73,6 +75,7 @@ public class Storage {
      * @param index The index of the targeted task in the list.
      */
     public void deleteRecord(int index) {
+        assert index > 0 : "index must be bigger than 0";
         int i = index - 1;
         recordArrayLst.remove(i);
     }

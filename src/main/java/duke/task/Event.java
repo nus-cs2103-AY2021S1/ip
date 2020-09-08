@@ -26,6 +26,7 @@ public class Event extends Task {
     }
 
     public static Event createEvent(String task, String event) {
+        assert event.length() > 0 : "Assert error: Event cannot be empty";
         return new Event(task, event);
     }
 
