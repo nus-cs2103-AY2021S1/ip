@@ -31,7 +31,7 @@ public class Ui {
      * @return Greetings.
      */
     public String greet() {
-        return "              █████████\n"
+        return "                   █████████\n"
             + "  ███████          ███        ███\n"
             + "  █      █       ███             ███\n"
             + "   █      █    ██                   ██\n"
