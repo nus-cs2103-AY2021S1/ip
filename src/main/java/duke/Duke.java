@@ -11,9 +11,9 @@ import duke.util.Ui;
  */
 public class Duke {
 
-    private Storage storage;
+    private final Storage storage;
     private TaskList tasks;
-    private Ui ui;
+    private final Ui ui;
     private boolean isQuitting;
 
     /**
@@ -22,13 +22,15 @@ public class Duke {
      * @param filePath path of the saved tasks file.
      */
     public Duke(String filePath) {
+
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         this.isQuitting = false;
+
         try {
             this.tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.chatPrint(e.getMessage());
+            ui.printWithFormatting(e.getMessage());
             this.tasks = new TaskList();
         }
     }
@@ -37,24 +39,27 @@ public class Duke {
      * Runs the Duke program
      */
     public void run() {
+
         this.ui.greet();
+
         while (!this.isQuitting) {
             try {
                 Command c = Parser.parse(this.ui.getInput());
                 c.execute(this.tasks, this.ui, this.storage);
                 this.isQuitting = c.isQuitting();
             } catch (DukeException e) {
-                ui.chatPrint(e.getMessage());
+                ui.printWithFormatting(e.getMessage());
             }
         }
     }
 
     public String getResponse(String input) {
+
         try {
             Command c = Parser.parse(input);
             return c.execute(this.tasks, this.ui, this.storage);
         } catch (DukeException e) {
-            this.ui.chatPrint(e.getMessage());
+            this.ui.printWithFormatting(e.getMessage());
             return e.getMessage();
         }
     }

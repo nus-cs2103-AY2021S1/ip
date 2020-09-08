@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import duke.task.Deadline;
@@ -16,7 +17,7 @@ import duke.task.Todo;
  */
 public class TaskList {
 
-    private List<Task> tasks;
+    private final List<Task> tasks;
 
     /**
      * Initializes a newly created TaskList with an empty list of tasks.
@@ -45,18 +46,18 @@ public class TaskList {
      * Returns the size of the list.
      * @return size of list.
      */
-    public int size() {
+    public int getSize() {
         return this.tasks.size();
     }
 
     /**
      * Returns a filtered list of tasks according to the given keyword.
-     * @param key keyword of the find command.
+     * @param keyword keyword of the find command.
      * @return filtered list of tasks.
      */
-    public List<Task> find(String key) {
-        return this.tasks.stream().filter(task -> task.getDesc().contains(key))
-                .collect(Collectors.toList());
+    public List<Task> find(String keyword) {
+        Predicate<Task> hasKeyword = task -> task.getDescription().contains(keyword);
+        return this.tasks.stream().filter(hasKeyword).collect(Collectors.toList());
     }
 
     /**
@@ -64,8 +65,8 @@ public class TaskList {
      * @param idx index of task to be set as done.
      * @return task set as done.
      */
-    public Task setDone(int idx) {
-        Task doneTask = tasks.get(idx).setDone();
+    public Task setAsDone(int idx) {
+        Task doneTask = tasks.get(idx).setAsDone();
         this.tasks.set(idx, doneTask);
         return doneTask;
     }
@@ -99,17 +100,17 @@ public class TaskList {
      * Add a deadline or event task to the list with a date.
      *
      * @param type type of the task.
-     * @param desc description of the task.
+     * @param description description of the task.
      * @param date date of the task.
      * @param isDone whether the task is done.
      * @return added task.
      */
-    public Task addTimedTask(String type, String desc, LocalDate date, boolean isDone) {
+    public Task addTimedTask(String type, String description, LocalDate date, boolean isDone) {
         Task newTask;
         if (type.equals("deadline")) {
-            newTask = new Deadline(desc, date, isDone);
+            newTask = new Deadline(description, date, isDone);
         } else {
-            newTask = new Event(desc, date, isDone);
+            newTask = new Event(description, date, isDone);
         }
         this.tasks.add(newTask);
         return newTask;
@@ -119,18 +120,18 @@ public class TaskList {
      * Add a deadline or event task to the list with a date and time.
      *
      * @param type type of the task.
-     * @param desc description of the task.
+     * @param description description of the task.
      * @param date date of the task.
      * @param time time of the task.
      * @param isDone whether the task is done.
      * @return added task.
      */
-    public Task addTimedTask(String type, String desc, LocalDate date, LocalTime time, boolean isDone) {
+    public Task addTimedTask(String type, String description, LocalDate date, LocalTime time, boolean isDone) {
         Task newTask;
         if (type.equals("deadline")) {
-            newTask = new Deadline(desc, date, time, isDone);
+            newTask = new Deadline(description, date, time, isDone);
         } else {
-            newTask = new Event(desc, date, time, isDone);
+            newTask = new Event(description, date, time, isDone);
         }
         this.tasks.add(newTask);
         return newTask;

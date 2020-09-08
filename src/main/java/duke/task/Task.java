@@ -5,27 +5,27 @@ package duke.task;
  */
 public class Task {
 
-    protected String desc;
+    protected String description;
     protected boolean isDone;
 
     /**
      * Initializes a newly created Task with a description.
      *
-     * @param desc description of task.
+     * @param description description of task.
      */
-    public Task(String desc) {
-        this.desc = desc;
+    public Task(String description) {
+        this.description = description;
         this.isDone = false;
     }
 
     /**
      * Initializes a newly created Task with a description and whether it is done.
      *
-     * @param desc description of task.
+     * @param description description of task.
      * @param isDone whether task is done.
      */
-    public Task(String desc, boolean isDone) {
-        this.desc = desc;
+    public Task(String description, boolean isDone) {
+        this.description = description;
         this.isDone = isDone;
     }
 
@@ -34,8 +34,8 @@ public class Task {
      *
      * @return description of task.
      */
-    public String getDesc() {
-        return this.desc;
+    public String getDescription() {
+        return this.description;
     }
 
     /**
@@ -43,8 +43,8 @@ public class Task {
      *
      * @return task set as done.
      */
-    public Task setDone() {
-        Task doneTask = new Task(this.desc);
+    public Task setAsDone() {
+        Task doneTask = new Task(this.description);
         doneTask.isDone = true;
         return doneTask;
     }
@@ -55,7 +55,7 @@ public class Task {
      * @return formatted task.
      */
     public String formatTask() {
-        return ("P | " + (isDone ? "V" : "X") + " | " + desc);
+        return ("P | " + (isDone ? "V" : "X") + " | " + description);
     }
 
     /**
@@ -65,7 +65,7 @@ public class Task {
      */
     @Override
     public String toString() {
-        return ("[" + (isDone ? "V" : "X") + "] " + desc);
+        return ("[" + (isDone ? "V" : "X") + "] " + description);
     }
 
     /**
@@ -80,7 +80,7 @@ public class Task {
             return true;
         } else if (o instanceof Task) {
             Task c = (Task) o;
-            return this.desc.equals(c.desc);
+            return this.description.equals(c.description);
         } else {
             return false;
         }

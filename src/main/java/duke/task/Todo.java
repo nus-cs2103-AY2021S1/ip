@@ -30,8 +30,8 @@ public class Todo extends Task {
      * @return task set as done.
      */
     @Override
-    public Task setDone() {
-        Task doneTask = new Todo(this.desc);
+    public Task setAsDone() {
+        Task doneTask = new Todo(this.description);
         doneTask.isDone = true;
         return doneTask;
     }
@@ -42,7 +42,7 @@ public class Todo extends Task {
      * @return formatted task.
      */
     public String formatTask() {
-        return ("T | " + (isDone ? "V" : "X") + " | " + desc);
+        return ("T | " + (isDone ? "V" : "X") + " | " + description);
     }
 
     /**

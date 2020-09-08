@@ -33,12 +33,16 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (this.idx >= tasks.size()) {
+
+        boolean isOutOfBounds = this.idx >= tasks.getSize() || this.idx < 0;
+
+        if (isOutOfBounds) {
             throw new DukeException("Oh dear! That task doesn't exist!");
         }
-        Task doneTask = tasks.setDone(this.idx);
+
+        Task doneTask = tasks.setAsDone(this.idx);
         storage.save(tasks.getList());
-        return ui.onDone(doneTask);
+        return ui.printDoneMessage(doneTask);
     }
 
     /**
