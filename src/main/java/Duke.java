@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.ArrayList;
 
 import duke.command.DukeException;
 import duke.command.Parser;
@@ -47,7 +48,13 @@ public class Duke {
      */
     public Duke() {
         this.taskList = TaskList.createTaskList();
-        this.storage = Storage.createDukeFile("Saved");
+        this.storage = Storage.createDukeFile("Saved", taskList);
+        try {
+            ArrayList<String> taskHistory = this.storage.loadFile();
+            Parser.processOldTasks(taskHistory, this.taskList);
+        } catch (IOException e) {
+            System.out.println(Ui.showError(e.getMessage()));
+        }
     }
 
 

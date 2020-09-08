@@ -1,13 +1,18 @@
 package duke.task;
 
+import duke.command.DukeException;
+
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 public class TaskList {
 
     private ArrayList<Task> tasklist;
+    private PriorityQueue<Task> taskPriority;
 
     private TaskList() {
         this.tasklist = new ArrayList<>();
+        this.taskPriority = new PriorityQueue<>(new TaskComparator());
     }
 
     /**
@@ -17,6 +22,7 @@ public class TaskList {
      */
     public String addTask(Task task) {
         tasklist.add(task);
+        taskPriority.add(task);
         return task.toString();
     }
 
@@ -25,11 +31,19 @@ public class TaskList {
      * @param taskNumber The index of the task in the tasklist
      * @return String representation of the Task object that is deleted
      */
-    public String deleteTask(int taskNumber) {
-        assert taskNumber >= 0 : "taskNumber cannot be negative";
-        int i = taskNumber - 1;
-        Task removedTask = this.tasklist.get(i);
-        this.tasklist.remove(i);
+    public String deleteTask(int taskNumber) throws DukeException {
+        assert !taskPriority.isEmpty() : "Cannot delete from an Empty Tasklist";
+        if (taskNumber > getListSize()) {
+            String message = "Index not found! Are you sure you are typing the correct index?";
+            throw new DukeException(message);
+        }
+        Task removedTask = null;
+        for (int i = 0; i < taskNumber; i++) {
+            removedTask = taskPriority.poll();
+        }
+        this.tasklist.remove(removedTask);
+        this.taskPriority.clear();
+        refillTaskPriorityQueue();
         return removedTask.toString();
     }
 
@@ -38,12 +52,45 @@ public class TaskList {
      * @param taskNumber The index of the task in the tasklist
      * @return String representation of the Task object that is updated
      */
-    public String updateTask(int taskNumber) {
-        assert taskNumber >= 0 : "taskNumber cannot be negative";
-        int i = taskNumber - 1;
-        Task updatedTask = this.tasklist.get(i);
+    public String updateTask(int taskNumber) throws DukeException {
+        assert !taskPriority.isEmpty() : "Cannot delete from an Empty Tasklist";
+        if (taskNumber > getListSize()) {
+            String message = "Index not found! Are you sure you are typing the correct index?";
+            throw new DukeException(message);
+        }
+        Task updatedTask = null;
+        for (int i = 0; i < taskNumber; i++) {
+            updatedTask = taskPriority.poll();
+        }
         updatedTask.setDone();
+        this.taskPriority.clear();
+        refillTaskPriorityQueue();
         return updatedTask.toString();
+    }
+
+    public String setTaskAsImportant(int taskNumber) throws DukeException {
+        assert !taskPriority.isEmpty() : "Cannot delete from an Empty Tasklist";
+        if (taskNumber > getListSize()) {
+            String message = "Index not found! Are you sure you are typing the correct index?";
+            throw new DukeException(message);
+        }
+        Task importantTask = null;
+        for (int i = 0; i < taskNumber; i++) {
+            importantTask = taskPriority.poll();
+        }
+        importantTask.setAsImportant();
+        this.taskPriority.clear();
+        refillTaskPriorityQueue();
+        return importantTask.toString();
+    }
+
+
+    /**
+     * Refreshes the Tasklist arraylist to remove all tasks in it
+     */
+    public void refreshTasklist() {
+        this.tasklist = new ArrayList<>();
+        this.taskPriority.clear();
     }
 
     /**
@@ -63,6 +110,14 @@ public class TaskList {
         return this.tasklist.get(index);
     }
 
+    public Task getTask() {
+        return this.taskPriority.poll();
+    }
+
+    public PriorityQueue<Task> getTaskPriorityQueue() {
+        return this.taskPriority;
+    }
+
     /**
      * Creates a tasklist object
      * @return TaskList Object
@@ -71,4 +126,12 @@ public class TaskList {
         return new TaskList();
     }
 
+    /**
+     *
+     */
+    public void refillTaskPriorityQueue() {
+        for (int i = 0; i < getListSize(); i++) {
+            this.taskPriority.add(this.getTask(i));
+        }
+    }
 }

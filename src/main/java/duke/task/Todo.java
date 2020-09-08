@@ -1,6 +1,8 @@
 package duke.task;
 
 
+import java.time.LocalDateTime;
+
 /**
  * <h1> Todo Task class </h1>
  *
@@ -16,6 +18,7 @@ public class Todo extends Task {
 
     protected Todo(String task) {
         super(task);
+        this.date = LocalDateTime.now();
     }
 
     public static Todo createTodo(String task) {
@@ -24,7 +27,11 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        String done = this.done ? "\u2713" : "\u2718";
-        return "[T][" + done + "] " + this.task;
+        String done = this.done ? "O" : "X";
+        if (isImportant) {
+            return "[T][" + done + "]** " + this.task;
+        } else {
+            return "[T][" + done + "] " + this.task;
+        }
     }
 }

@@ -1,6 +1,6 @@
 package duke.task;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -16,32 +16,30 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
-    protected LocalDate deadline;
-
-    protected Deadline(String task, LocalDate deadline) {
+    protected Deadline(String task, LocalDateTime date) {
         super(task);
-        this.deadline = deadline;
-    }
-
-    public LocalDate getDeadline() {
-        return this.deadline;
+        this.date = date;
     }
 
     /**
      * Creates a Deadline object
      * @param task the task as per user input
-     * @param deadline the deadline as per user input
+     * @param date the deadline as per user input
      * @return a Deadline object
      */
-    public static Deadline createDeadline(String task, LocalDate deadline) {
-        assert deadline != null : "Assertion Failure: Deadline is Null";
-        return new Deadline(task, deadline);
+        public static Deadline createDeadline(String task, LocalDateTime date) {
+        assert date != null : "Assertion Failure: Deadline is Null";
+        return new Deadline(task, date);
     }
 
     @Override
     public String toString() {
-        String done = this.done ? "\u2713" : "\u2718";
-        String date = this.deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return "[D][" + done + "] " + this.task + "(by: " + date + ")";
+        String done = this.done ? "O" : "X";
+        String date = this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
+        if (isImportant) {
+            return "[D][" + done + "]** " + this.task + "by: " + date;
+        } else {
+            return "[D][" + done + "] " + this.task + "by: " + date;
+        }
     }
 }

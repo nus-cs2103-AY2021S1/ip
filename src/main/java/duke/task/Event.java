@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 /**
  * <h1> Event Task class </h1>
@@ -14,25 +16,23 @@ package duke.task;
  */
 public class Event extends Task {
 
-    protected String event;
-
-    protected Event(String task, String event) {
+    protected Event(String task, LocalDateTime date) {
         super(task);
-        this.event = event;
+        this.date = date;
     }
 
-    private String getEvent() {
-        return this.event;
-    }
-
-    public static Event createEvent(String task, String event) {
-        assert event.length() > 0 : "Assert error: Event cannot be empty";
-        return new Event(task, event);
+    public static Event createEvent(String task, LocalDateTime date) {
+        return new Event(task, date);
     }
 
     @Override
     public String toString() {
-        String done = this.done ? "\u2713" : "\u2718";
-        return "[E][" + done + "] " + this.task + "(at:" + this.event + ")";
+        String done = this.done ? "O" : "X";
+        String date = this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
+        if (isImportant) {
+            return "[E][" + done + "]** " + this.task + "at: " + date;
+        } else {
+            return "[E][" + done + "] " + this.task + "at: " + date;
+        }
     }
 }
