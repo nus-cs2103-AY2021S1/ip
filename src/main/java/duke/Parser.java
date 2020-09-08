@@ -23,6 +23,7 @@ import duke.task.Todo;
 public class Parser {
 
     private static Command parseDone(String input) throws DukeException {
+        assert input.contains("done");
         if (input.matches("done\\s*")) {
             throw new EmptyArgumentException("duke.task.Task Index");
         }
@@ -34,12 +35,14 @@ public class Parser {
         return new DoneCommand(index);
     }
     private static Command parseTodoTask(String input) throws DukeException {
+        assert input.contains("todo");
         if (input.matches("todo\\s*")) {
             throw new EmptyArgumentException("todo's description");
         }
         return new AddTaskCommand(new Todo(input.substring(5)));
     }
     private static Command parseDeadlineTask(String input) throws DukeException {
+        assert input.contains("deadline");
         if (input.matches("deadline\\s*")) {
             throw new EmptyArgumentException("deadline's description");
         }
@@ -52,6 +55,7 @@ public class Parser {
         return new AddTaskCommand(new Deadline(split[0].stripTrailing(), dateTime));
     }
     private static Command parseEventTask(String input) throws DukeException {
+        assert input.contains("event");
         if (input.matches("event\\s*")) {
             throw new EmptyArgumentException("event's description");
         }
@@ -63,6 +67,7 @@ public class Parser {
         return new AddTaskCommand(new Event(split[0].stripTrailing(), parseDateTime(dateTimeString)));
     }
     private static Command parseDelete(String input) throws DukeException {
+        assert input.contains("delete");
         if (input.matches("delete\\s*")) {
             throw new EmptyArgumentException("Task Index");
         }
@@ -74,6 +79,7 @@ public class Parser {
         return new DeleteCommand(index);
     }
     private static Command parseFind(String input) throws EmptyArgumentException {
+        assert input.contains("find");
         if (input.matches("find\\s*")) {
             throw new EmptyArgumentException("find argument");
         }
@@ -122,6 +128,12 @@ public class Parser {
         } else if (input.matches("find.*")) {
             return parseFind(input);
         } else {
+            assert !input.contains("done")
+                    && !input.contains("todo")
+                    && !input.contains("deadline")
+                    && !input.contains("event")
+                    && !input.contains("delete")
+                    && !input.contains("find");
             throw new InvalidCommandException();
         }
     }

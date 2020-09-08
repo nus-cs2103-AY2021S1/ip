@@ -30,6 +30,7 @@ public class Storage {
     }
 
     private List<Task> parseData(File f) throws FileNotFoundException {
+        assert f != null : "File should not be null";
         List<Task> tasks = new ArrayList<>();
 
         Scanner s = new Scanner(f);
@@ -66,6 +67,7 @@ public class Storage {
                 tasks.add(task);
                 break;
             default:
+                assert false : "Data File has unknown types";
                 System.out.println(Ui.INDENT + "Corrupted Data Entry found : " + str);
             }
         }
