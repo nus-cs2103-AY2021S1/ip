@@ -30,6 +30,7 @@ public class Parser {
             return new ExitCommand();
         } else if (input.indexOf("delete") == 0) {
             String index = input.replaceAll("\\D+","");
+            assert Integer.parseInt(index) > 0;
             return new DeleteCommand(Integer.parseInt(index));
         } else if (input.indexOf("find") == 0) {
             int space = input.indexOf(" ") + 1;

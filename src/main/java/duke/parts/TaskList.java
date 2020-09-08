@@ -26,12 +26,14 @@ public class TaskList {
     }
 
     public Task deleteTask(int index, Storage storage) {
+        assert index < tasks.size() && index >= 0 ;
         Task removed = tasks.remove(index);
         updateList(storage);
         return removed;
     }
 
     public int numTask() {
+
         return tasks.size();
     }
 
