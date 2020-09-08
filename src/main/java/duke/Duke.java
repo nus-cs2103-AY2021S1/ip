@@ -36,6 +36,7 @@ public class Duke {
      */
     public String processInput(String input) {
         int index;
+        String returnMessage = "";
         try {
             String[] words = parser.splitIntoComponents(input);
             String command = words[0];
@@ -43,55 +44,61 @@ public class Duke {
             //Common functions
             case "bye":
                 storage.saveFile(tasks.toSaveFormat());
-                return ui.showBye();
+                returnMessage = ui.showBye();
+                break;
             case "done":
                 index = Integer.parseInt(words[1]);
                 tasks.doTask(index);
-                return ui.showTaskDone(tasks.getTaskStatus(index));
+                returnMessage = ui.showTaskDone(tasks.getTaskStatus(index));
+                break;
             case "list":
                 if (tasks.getTotalTask() == 0) {
-                    return ui.show("Currently, you have no tasks on hand");
+                    returnMessage = ui.show("Currently, you have no tasks on hand");
                 } else {
-                    return ui.showTasks(tasks.toString());
+                    returnMessage = ui.showTasks(tasks.toString());
                 }
+                break;
 
             //3 different types of task
             case "event":
                 try {
                     Task addedEvent = tasks.addEvent(words[1], words[2]);
-                    return ui.showTaskAdded(addedEvent.toString(), tasks.getTotalTask());
+                    returnMessage = ui.showTaskAdded(addedEvent.toString(), tasks.getTotalTask());
                 } catch (IndexOutOfBoundsException err) {
-                    return ui.showError("Error: Please key in as: \n"
+                    returnMessage = ui.showError("Error: Please key in as: \n"
                             + "event [title] /at YYYY-MM-DD [startTime] [endTime]"
                             + "where start and end time is in HH:MM ");
                 }
+                break;
             case "todo":
                 try {
                     Task addedToDo = tasks.addTodo(words[1]);
-                    return ui.showTaskAdded(addedToDo.toString(), tasks.getTotalTask());
+                    returnMessage = ui.showTaskAdded(addedToDo.toString(), tasks.getTotalTask());
                 } catch (IndexOutOfBoundsException err) {
-                    return ui.showError("Error: Please key in as: \n "
+                    returnMessage = ui.showError("Error: Please key in as: \n "
                             + "event [title]");
                 }
+                break;
             case "deadline":
                 try {
                     Task addedDeadline = tasks.addDeadLine(words[1], words[2]);
-                    return ui.showTaskAdded(addedDeadline.toString(), tasks.getTotalTask());
+                    returnMessage = ui.showTaskAdded(addedDeadline.toString(), tasks.getTotalTask());
                 } catch (IndexOutOfBoundsException err) {
-                    return ui.showError("Error: Please key in as: \n "
+                    returnMessage = ui.showError("Error: Please key in as: \n "
                             + "event [title] /by YYYY-MM-DD HH:MM");
                 }
+                break;
 
             //Delete Task
             case "delete":
                 try {
                     index = Integer.parseInt(words[1]);
                     Task deletedTask = tasks.deleteTask(index);
-                    return ui.showDeletedTasks(deletedTask.toString());
+                    returnMessage = ui.showDeletedTasks(deletedTask.toString());
                 } catch (NumberFormatException err) {
                     //echo("Error. Please key in an integer after \"done\"");
                 } catch (IndexOutOfBoundsException err) {
-                    return ui.showError("Key in \"delete [x]\" to delete x^th item");
+                    returnMessage = ui.showError("Key in \"delete [x]\" to delete x^th item");
                 }
                 break;
 
@@ -99,17 +106,20 @@ public class Duke {
             case "find":
                 String result = tasks.find(words[1]);
                 if (result.equals("")) {
-                    return ui.show("No match found");
+                    returnMessage = ui.show("No match found");
                 } else {
-                    return ui.show("These following tasks match the keyword you entered: \n" + result);
+                    returnMessage = ui.show("These following tasks match the keyword you entered: \n" + result);
                 }
+                break;
 
             //When command does not match any of those above
             default:
-                return ui.showError("OOPS!!! I don't know what does it mean by: \"" + input + "\"");
+                returnMessage = ui.showError("OOPS!!! I don't know what does it mean by: \"" + input + "\"");
             }
         } catch (DukeException err) {
-            return ui.showError(err.getMessage());
+            returnMessage = ui.showError(err.getMessage());
         }
+        assert !returnMessage.equals("") : "Error, none of the case catch the command";
+        return returnMessage;
     }
 }

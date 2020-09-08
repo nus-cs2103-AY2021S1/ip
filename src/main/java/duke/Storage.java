@@ -26,6 +26,7 @@ public class Storage {
      * @param filePath filePath of the file that wish to be load/ write
      */
     public Storage(String filePath) {
+        assert !filePath.equals("") : "Empty FilePath";
         this.file = new File(filePath);
         this.filePath = filePath;
     }
@@ -60,7 +61,7 @@ public class Storage {
             String[] dataRead;
             while (scanner.hasNext()) {
                 dataRead = readSavedData(scanner.nextLine());
-                Task newTask = createSavedTask(dataRead);
+                Task newTask = loadSavedTask(dataRead);
                 loadedTask.add(newTask);
             }
             return loadedTask;
@@ -72,7 +73,7 @@ public class Storage {
             }
             File f = new File(parentDirectory);
             f.mkdirs();
-            throw new DukeException("Can't Find Save File. Starting New");
+            throw new DukeException("Can't Find Save File. Creating New File");
         }
     }
 
@@ -96,7 +97,7 @@ public class Storage {
      * @return Task created based on the command
      * @throws DukeException If the command requires (What, When) parts but one or more parts is missing.
      */
-    private Task createSavedTask(String[] args) throws DukeException {
+    private Task loadSavedTask(String[] args) throws DukeException {
         Task newTask;
         try {
             switch(args[0]) {

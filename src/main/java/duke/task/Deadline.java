@@ -16,7 +16,7 @@ public class Deadline extends Task {
     /**
      * Create an instance of Deadline.
      * @param name The name of the task.
-     * @param taskDetail The timing of the Deadline.
+     * @param taskDetail The timing of the Deadline, which has a date and [optionally] a timing.
      * @throws DukeException If taskDetail is badly formatted.
      */
     public Deadline(String name, String taskDetail) throws DukeException {
