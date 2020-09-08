@@ -37,9 +37,11 @@ public class Parser {
      */
     public static String executeDoneCommand(
             String[] userInputWords, TaskList tasks, boolean isRunningOnGui) throws DukeException {
-        int index = Integer.parseInt(userInputWords[1]);
-        if (index > tasks.size() || index < 0) {
-            throw new DukeException("That task number does not exist.");
+        Integer index;
+        try {
+            index = Integer.parseInt(userInputWords[1]);
+        } catch (Exception e) {
+            throw new DukeException("Please input a valid task number.");
         }
         tasks.get(index - 1).setDone();
         Task t = tasks.get(index - 1);
@@ -59,7 +61,12 @@ public class Parser {
      */
     public static String executeDeleteCommand(
             String[] userInputWords, TaskList tasks, boolean isRunningOnGui) throws DukeException {
-        int index = Integer.parseInt(userInputWords[1]);
+        Integer index;
+        try {
+            index = Integer.parseInt(userInputWords[1]);
+        } catch (Exception e) {
+            throw new DukeException("Please input a valid task number.");
+        }
         if (index > tasks.size() || index < 0) {
             throw new DukeException("That task number does not exist.");
         }
@@ -80,7 +87,12 @@ public class Parser {
      */
     public static String executeTagCommand(
             String[] userInputWords, TaskList tasks, boolean isRunningOnGui) throws DukeException {
-        int index = Integer.parseInt(userInputWords[1]);
+        Integer index;
+        try {
+            index = Integer.parseInt(userInputWords[1]);
+        } catch (Exception e) {
+            throw new DukeException("Please input a valid task number.");
+        }
         if (index > tasks.size() || index < 0) {
             throw new DukeException("That task number does not exist.");
         }
