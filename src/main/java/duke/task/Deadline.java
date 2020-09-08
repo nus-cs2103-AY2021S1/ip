@@ -4,14 +4,17 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.Optional;
+import java.util.function.Function;
+import java.util.function.Supplier;
 
 /**
  * Represents a task with info of by when it must be done
  */
 public class Deadline extends Task {
 
-    private LocalDate date;
-    private Optional<LocalTime> time;
+    private final LocalDate date;
+    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
+    private final Optional<LocalTime> time;
 
     /**
      * Initializes a newly created Deadline with a description, date, and whether it is done.
@@ -46,11 +49,14 @@ public class Deadline extends Task {
      * @return task set as done.
      */
     @Override
-    public Task setDone() {
+    public Task setAsDone() {
+
         boolean wasDone = this.isDone;
-        Task doneTask = this.time.map(
-            localTime -> new Deadline(this.desc, this.date, localTime, this.isDone))
-            .orElseGet(() -> new Deadline(this.desc, this.date, this.isDone));
+        Function<LocalTime, Deadline> toDeadline = localTime ->
+                new Deadline(this.description, this.date, localTime, this.isDone);
+        Supplier<Deadline> justDateDeadline = () -> new Deadline(this.description, this.date, this.isDone);
+
+        Task doneTask = this.time.map(toDeadline).orElseGet(justDateDeadline);
         doneTask.isDone = true;
         assert this.isDone == wasDone;
         return doneTask;
@@ -63,9 +69,14 @@ public class Deadline extends Task {
      */
     @Override
     public String formatTask() {
-        return ("D" + " | " + (isDone ? "V" : "X") + " | " + desc + " | "
-                + this.date.format(DateTimeFormatter.ofPattern("yyyy/MM/dd"))
-                + this.time.map(localTime -> " " + localTime.format(DateTimeFormatter.ofPattern("HHmm")))
+
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+        DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HHmm");
+        Function<LocalTime, String> convertToString = localTime -> " " + localTime.format(timeFormat);
+
+        return ("D" + " | " + (isDone ? "V" : "X") + " | " + description + " | "
+                + this.date.format(dateFormat)
+                + this.time.map(convertToString)
                 .orElse(""));
     }
 
@@ -76,8 +87,12 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
+
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("MMM d yyyy");
+        Function<LocalTime, String> convertToString = time -> " " + time.toString();
+
         return "[D]" + super.toString() + " (by: "
-                + this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
-                + this.time.map(time -> " " + time.toString()).orElse("") + ")";
+                + this.date.format(dateFormat)
+                + this.time.map(convertToString).orElse("") + ")";
     }
 }

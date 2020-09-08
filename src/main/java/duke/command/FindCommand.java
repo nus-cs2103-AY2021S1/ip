@@ -31,7 +31,7 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         assert tasks != null && ui != null && storage != null;
-        return ui.onFind(tasks.find(this.keyword));
+        return ui.printFoundTasks(tasks.find(this.keyword));
     }
 
     /**

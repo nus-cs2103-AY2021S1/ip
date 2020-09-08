@@ -49,6 +49,7 @@ application {
 }
 
 shadowJar {
+    //noinspection GroovyAssignabilityCheck
     archiveBaseName = "duke"
     archiveClassifier = null
 }

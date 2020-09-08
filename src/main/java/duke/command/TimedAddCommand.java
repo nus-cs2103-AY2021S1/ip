@@ -13,11 +13,12 @@ import duke.util.Ui;
 /**
  * Represents an add timed task command in the Duke program.
  */
-public class AddTimedCommand extends AddCommand {
+public class TimedAddCommand extends AddCommand {
 
-    private String type;
-    private LocalDate date;
-    private Optional<LocalTime> time;
+    private final String type;
+    private final LocalDate date;
+    @SuppressWarnings("OptionalUsedAsFieldOrParameterType")
+    private final Optional<LocalTime> time;
 
     /**
      * Initializes a newly created add timed task command with a type, description, and date
@@ -26,7 +27,7 @@ public class AddTimedCommand extends AddCommand {
      * @param desc description of task.
      * @param date date of task.
      */
-    public AddTimedCommand(String type, String desc, LocalDate date) {
+    public TimedAddCommand(String type, String desc, LocalDate date) {
         super(desc);
         this.type = type;
         this.date = date;
@@ -41,7 +42,7 @@ public class AddTimedCommand extends AddCommand {
      * @param date date of task.
      * @param time time of task.
      */
-    public AddTimedCommand(String type, String desc, LocalDate date, LocalTime time) {
+    public TimedAddCommand(String type, String desc, LocalDate date, LocalTime time) {
         super(desc);
         this.type = type;
         this.date = date;
@@ -60,13 +61,13 @@ public class AddTimedCommand extends AddCommand {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         assert tasks != null && ui != null && storage != null;
-        int previousSize = tasks.size();
+        int previousSize = tasks.getSize();
         Task newTask = this.time.map(
             time -> tasks.addTimedTask(this.type, this.desc, this.date, time, false))
             .orElseGet(() -> tasks.addTimedTask(this.type, this.desc, this.date, false));
-        assert tasks.size() == previousSize + 1;
+        assert tasks.getSize() == previousSize + 1;
         storage.save(tasks.getList());
-        return ui.onAdd(newTask, tasks.size());
+        return ui.printAddMessage(newTask, tasks.getSize());
     }
 
     /**
@@ -78,8 +79,8 @@ public class AddTimedCommand extends AddCommand {
     public boolean equals(Object obj) {
         if (this == obj) {
             return true;
-        } else if (obj instanceof AddTimedCommand) {
-            AddTimedCommand ac = (AddTimedCommand) obj;
+        } else if (obj instanceof TimedAddCommand) {
+            TimedAddCommand ac = (TimedAddCommand) obj;
             return this.desc.equals(ac.desc)
                     && this.type.equals(ac.type)
                     && this.date.equals(ac.date)

@@ -10,8 +10,7 @@ import duke.task.Task;
  */
 public class Ui {
 
-    private Scanner sc;
-    private String line = "____________________________________________________________";
+    private final Scanner sc;
 
     /**
      * Initializes a newly created Ui with a Scanner.
@@ -37,18 +36,18 @@ public class Ui {
     public String greet() {
         String textToPrint = "Hello! I'm Duke\n"
                 + "What can I do for you?";
-        chatPrint(textToPrint);
+        printWithFormatting(textToPrint);
         return textToPrint;
     }
 
     /**
-     * Prints a farewell message to the user.
+     * Prints a goodbye message to the user.
      *
      * @return the printed message.
      */
-    public String farewell() {
+    public String sayBye() {
         String textToPrint = "Bye. Hope to see you again soon!";
-        chatPrint(textToPrint);
+        printWithFormatting(textToPrint);
         return textToPrint;
     }
 
@@ -58,7 +57,7 @@ public class Ui {
      * @param tasks list of tasks.
      * @return the printed message.
      */
-    public String onList(List<Task> tasks) {
+    public String printList(List<Task> tasks) {
         assert tasks != null;
         int id = 1;
         StringBuilder output = new StringBuilder("Here are the tasks in your list:");
@@ -66,7 +65,7 @@ public class Ui {
             output.append("\n").append(id).append(". ").append(task);
             id++;
         }
-        chatPrint(output.toString());
+        printWithFormatting(output.toString());
         assert id == tasks.size() + 1;
         return output.toString();
     }
@@ -77,7 +76,7 @@ public class Ui {
      * @param tasks a list of tasks.
      * @return the printed message.
      */
-    public String onFind(List<Task> tasks) {
+    public String printFoundTasks(List<Task> tasks) {
         assert tasks != null;
         int id = 1;
         StringBuilder output = new StringBuilder("Here are the matching tasks in your list:");
@@ -85,7 +84,7 @@ public class Ui {
             output.append("\n").append(id).append(". ").append(task);
             id++;
         }
-        chatPrint(output.toString());
+        printWithFormatting(output.toString());
         assert id == tasks.size() + 1;
         return output.toString();
     }
@@ -96,11 +95,11 @@ public class Ui {
      * @param task a done task.
      * @return the printed message.
      */
-    public String onDone(Task task) {
+    public String printDoneMessage(Task task) {
         assert task != null;
         String textToPrint = "Nice! I've marked this task as done:\n"
                 + "   " + task;
-        chatPrint(textToPrint);
+        printWithFormatting(textToPrint);
         return textToPrint;
     }
 
@@ -111,12 +110,12 @@ public class Ui {
      * @param size size of the list.
      * @return the printed message.
      */
-    public String onDelete(Task task, int size) {
+    public String printDeleteMessage(Task task, int size) {
         assert task != null && size >= 0;
         String textToPrint = "Noted. I've removed this task:\n"
                 + "   " + task + "\n"
                 + "Now you have " + size + " tasks in the list.";
-        chatPrint(textToPrint);
+        printWithFormatting(textToPrint);
         return textToPrint;
     }
 
@@ -127,12 +126,12 @@ public class Ui {
      * @param size size of the list.
      * @return the printed message.
      */
-    public String onAdd(Task task, int size) {
+    public String printAddMessage(Task task, int size) {
         assert task != null && size >= 0;
         String textToPrint = "Got it. I've added this task:\n"
                 + "   " + task + "\n"
                 + "Now you have " + size + " tasks in the list.";
-        chatPrint(textToPrint);
+        printWithFormatting(textToPrint);
         return textToPrint;
     }
 
@@ -141,8 +140,9 @@ public class Ui {
      *
      * @param toPrint string to print.
      */
-    public void chatPrint(String toPrint) {
+    public void printWithFormatting(String toPrint) {
         assert toPrint != null;
+        String line = "____________________________________________________________";
         System.out.println(line);
         System.out.println(toPrint);
         System.out.println(line + "\n");

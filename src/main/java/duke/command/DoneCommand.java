@@ -11,7 +11,7 @@ import duke.util.Ui;
  */
 public class DoneCommand extends Command {
 
-    private int idx;
+    private final int idx;
 
     /**
      * Initializes a newly created done command with a task index.
@@ -33,15 +33,19 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+
         assert tasks != null && ui != null && storage != null;
-        int previousSize = tasks.size();
-        if (this.idx >= tasks.size() || this.idx < 0) {
+        int previousSize = tasks.getSize();
+        boolean isOutOfBounds = this.idx >= tasks.getSize() || this.idx < 0;
+
+        if (isOutOfBounds) {
             throw new DukeException("Oh dear! That task doesn't exist!");
         }
-        Task doneTask = tasks.setDone(this.idx);
-        assert tasks.size() == previousSize;
+
+        Task doneTask = tasks.setAsDone(this.idx);
+        assert tasks.getSize() == previousSize;
         storage.save(tasks.getList());
-        return ui.onDone(doneTask);
+        return ui.printDoneMessage(doneTask);
     }
 
     /**

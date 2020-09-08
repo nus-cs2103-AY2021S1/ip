@@ -43,16 +43,23 @@ public class Storage {
      * @throws DukeException if there are any I/O issues.
      */
     public List<Task> load() throws DukeException {
+
         List<Task> tasks = new ArrayList<>();
         assert this.filePath != null;
+
         try {
             int lastSlash = this.filePath.lastIndexOf('/');
-            if (lastSlash != -1) {
-                String folderDir = filePath.substring(0, lastSlash);
-                Files.createDirectories(Paths.get("./" + folderDir));
+            boolean isInDirectory = lastSlash != -1;
+
+            if (isInDirectory) {
+                String directoryPath = filePath.substring(0, lastSlash);
+                Files.createDirectories(Paths.get("./" + directoryPath));
             }
+
             File file = new File(this.filePath);
-            if (!file.createNewFile()) {
+            boolean hasExistingFile = !file.createNewFile();
+
+            if (hasExistingFile) {
                 loadFromFile(tasks);
             }
         } catch (IOException ex) {
@@ -68,25 +75,38 @@ public class Storage {
      * @throws DukeException if there are any I/O issues.
      */
     private void loadFromFile(List<Task> tasks) throws DukeException {
+
         assert this.filePath != null;
+
         try {
             File f = new File(this.filePath);
             Scanner s = new Scanner(f);
             int lineCounter = 0;
+
             while (s.hasNext()) {
                 lineCounter++;
                 String line = s.nextLine();
-                String[] attr = line.split(" \\| ");
-                formatCheck(attr, lineCounter);
-                switch (attr[0]) {
+                String[] attributes = line.split(" \\| ");
+
+                checkFormat(attributes, lineCounter);
+
+                String type = attributes[0];
+                String doneStatus = attributes[1];
+                String description = attributes[2];
+                String meta;
+                boolean isDone = doneStatus.equals("V");
+
+                switch (type) {
                 case "T":
-                    tasks.add(new Todo(attr[2], attr[1].equals("V")));
+                    tasks.add(new Todo(description, isDone));
                     break;
                 case "D":
-                    tasks.add(taskCreator("deadline", attr));
+                    meta = attributes[3];
+                    tasks.add(createTask("deadline", description, meta, isDone));
                     break;
                 default:
-                    tasks.add(taskCreator("event", attr));
+                    meta = attributes[3];
+                    tasks.add(createTask("event", description, meta, isDone));
                     break;
                 }
             }
@@ -101,26 +121,35 @@ public class Storage {
      * Processes a string from the save file to a task.
      *
      * @param type type of task.
-     * @param attr attributes of task.
+     * @param description description of task.
+     * @param meta metadata of task.
+     * @param isDone whether the task is done.
      * @return task derived from string.
      */
-    private Task taskCreator(String type, String[] attr) {
-        assert type != null && attr.length >= 3;
-        String meta = attr[3];
-        if (meta.contains(" ")) {
-            LocalDate date = LocalDate.parse(meta.substring(0, meta.indexOf(' ')),
-                    DateTimeFormatter.ofPattern("yyyy/MM/dd"));
-            LocalTime time = LocalTime.parse(meta.substring(meta.indexOf(' ') + 1),
-                    DateTimeFormatter.ofPattern("HHmm"));
+    private Task createTask(String type, String description, String meta, boolean isDone) {
+
+        assert type != null && description != null && meta != null;
+        boolean hasTime = meta.contains(" ");
+
+        DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy/MM/dd");
+
+        if (hasTime) {
+            DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HHmm");
+            String dateAsString = meta.substring(0, meta.indexOf(' '));
+            String timeAsString = meta.substring(meta.indexOf(' ') + 1);
+
+            LocalDate date = LocalDate.parse(dateAsString, dateFormat);
+            LocalTime time = LocalTime.parse(timeAsString, timeFormat);
+
             return type.equals("deadline")
-                    ? new Deadline(attr[2], date, time, attr[1].equals("V"))
-                    : new Event(attr[2], date, time, attr[1].equals("V"));
+                    ? new Deadline(description, date, time, isDone)
+                    : new Event(description, date, time, isDone);
         } else {
             assert !meta.contains(" ");
-            LocalDate date = LocalDate.parse(meta, DateTimeFormatter.ofPattern("yyyy/MM/dd"));
+            LocalDate date = LocalDate.parse(meta, dateFormat);
             return type.equals("deadline")
-                    ? new Deadline(attr[2], date, attr[1].equals("V"))
-                    : new Event(attr[2], date, attr[1].equals("V"));
+                    ? new Deadline(description, date, isDone)
+                    : new Event(description, date, isDone);
         }
     }
 
@@ -131,10 +160,22 @@ public class Storage {
      * @param lineCounter current line number.
      * @throws DukeException if there are any formatting issues.
      */
-    private void formatCheck(String[] attr, int lineCounter) throws DukeException {
-        if (attr.length < 3 || (!attr[1].equals("V") && !attr[1].equals("X"))
-                || ((attr[0].equals("D") || attr[0].equals("E")) && attr.length != 4)
-                || (!attr[0].equals("D") && !attr[0].equals("E")) && !attr[0].equals("T")) {
+    private void checkFormat(String[] attr, int lineCounter) throws DukeException {
+
+        String type = attr[0];
+        String doneStatus = attr[1];
+
+        boolean hasIncompleteAttributes = attr.length < 3;
+        boolean hasNoMeta = attr.length != 4;
+        boolean hasInvalidDoneStatus = !doneStatus.equals("V") && !doneStatus.equals("X");
+        boolean hasNoTimestamp = (type.equals("D") || type.equals("E")) && hasNoMeta;
+        boolean hasInvalidTaskType = !type.equals("D") && !type.equals("E") && !type.equals("T");
+
+        boolean hasInvalidType = hasInvalidTaskType || hasInvalidDoneStatus;
+        boolean isIncomplete = hasIncompleteAttributes || hasNoTimestamp;
+        boolean isInvalid = hasInvalidType || isIncomplete;
+
+        if (isInvalid) {
             throw new DukeException("Oh dear! Invalid task in line " + lineCounter + ".");
         }
     }
@@ -146,10 +187,13 @@ public class Storage {
      * @throws DukeException if there are any I/O issues.
      */
     public void save(List<Task> tasks) throws DukeException {
+
         StringBuilder taskData = new StringBuilder();
+
         for (Task ts : tasks) {
             taskData.append(ts.formatTask()).append("\n");
         }
+
         try {
             writeToFile(taskData.toString());
         } catch (IOException ex) {
@@ -164,7 +208,9 @@ public class Storage {
      * @throws IOException if there are any I/O issues.
      */
     private void writeToFile(String textToAdd) throws IOException {
+
         assert textToAdd != null;
+
         FileWriter fw = new FileWriter(this.filePath);
         fw.write(textToAdd);
         fw.close();

@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import duke.task.Deadline;
@@ -16,7 +17,7 @@ import duke.task.Todo;
  */
 public class TaskList {
 
-    private List<Task> tasks;
+    private final List<Task> tasks;
 
     /**
      * Initializes a newly created TaskList with an empty list of tasks.
@@ -45,19 +46,19 @@ public class TaskList {
      * Returns the size of the list.
      * @return size of list.
      */
-    public int size() {
+    public int getSize() {
         return this.tasks.size();
     }
 
     /**
      * Returns a filtered list of tasks according to the given keyword.
-     * @param key keyword of the find command.
+     * @param keyword keyword of the find command.
      * @return filtered list of tasks.
      */
-    public List<Task> find(String key) {
-        assert key != null;
-        return this.tasks.stream().filter(task -> task.getDesc().contains(key))
-                .collect(Collectors.toList());
+    public List<Task> find(String keyword) {
+        assert keyword != null;
+        Predicate<Task> hasKeyword = task -> task.getDescription().contains(keyword);
+        return this.tasks.stream().filter(hasKeyword).collect(Collectors.toList());
     }
 
     /**
@@ -65,10 +66,10 @@ public class TaskList {
      * @param idx index of task to be set as done.
      * @return task set as done.
      */
-    public Task setDone(int idx) {
+    public Task setAsDone(int idx) {
         int previousSize = this.tasks.size();
         assert idx >= 0 && idx < previousSize;
-        Task doneTask = tasks.get(idx).setDone();
+        Task doneTask = tasks.get(idx).setAsDone();
         this.tasks.set(idx, doneTask);
         assert this.tasks.size() == previousSize;
         return doneTask;
@@ -109,20 +110,20 @@ public class TaskList {
      * Add a deadline or event task to the list with a date.
      *
      * @param type type of the task.
-     * @param desc description of the task.
+     * @param description description of the task.
      * @param date date of the task.
      * @param isDone whether the task is done.
      * @return added task.
      */
-    public Task addTimedTask(String type, String desc, LocalDate date, boolean isDone) {
-        assert desc != null && date != null;
+    public Task addTimedTask(String type, String description, LocalDate date, boolean isDone) {
+        assert description != null && date != null;
         int previousSize = this.tasks.size();
         Task newTask;
         if (type.equals("deadline")) {
-            newTask = new Deadline(desc, date, isDone);
+            newTask = new Deadline(description, date, isDone);
         } else {
             assert type.equals("event");
-            newTask = new Event(desc, date, isDone);
+            newTask = new Event(description, date, isDone);
         }
         this.tasks.add(newTask);
         assert this.tasks.size() == previousSize + 1;
@@ -133,20 +134,20 @@ public class TaskList {
      * Add a deadline or event task to the list with a date and time.
      *
      * @param type type of the task.
-     * @param desc description of the task.
+     * @param description description of the task.
      * @param date date of the task.
      * @param time time of the task.
      * @param isDone whether the task is done.
      * @return added task.
      */
-    public Task addTimedTask(String type, String desc, LocalDate date, LocalTime time, boolean isDone) {
-        assert desc != null && date != null && time != null;
+    public Task addTimedTask(String type, String description, LocalDate date, LocalTime time, boolean isDone) {
+        assert description != null && date != null && time != null;
         int previousSize = this.tasks.size();
         Task newTask;
         if (type.equals("deadline")) {
-            newTask = new Deadline(desc, date, time, isDone);
+            newTask = new Deadline(description, date, time, isDone);
         } else {
-            newTask = new Event(desc, date, time, isDone);
+            newTask = new Event(description, date, time, isDone);
         }
         this.tasks.add(newTask);
         assert this.tasks.size() == previousSize + 1;
