@@ -24,8 +24,8 @@ public class Ui {
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        String sentence = "Hola! Duke reporting for duty\nWhat can I do for you sir?";
-        return logo + sentence;
+        String message = "Hola! Duke reporting for duty\nWhat can I do for you sir?";
+        return logo + message;
     }
 
     /**
@@ -44,9 +44,15 @@ public class Ui {
         return INDENTATION + message;
     }
 
+    /**
+     * Adds line break to the end of the message.
+     * @param message The message string to be added a line break.
+     * @return The message with a line break at the end of the string.
+     */
     private String addLineBreak(String message) {
         return message + "\n";
     }
+
     /**
      * Builds a complete message from multiple small messages.
      * @param strings String array contains all the small messages.
@@ -62,8 +68,9 @@ public class Ui {
     }
 
     /**
-     * Prints out response to users when they mark a task as done.
+     * Returns the response to users when they mark a task as done.
      * @param task The task that is marked as done.
+     * @return The message notifying user that the task is marked as done.
      */
     public String getMarkTaskAsDoneMessage(Task task) {
         String result = "Nice! I've marked this task as done:\n";
@@ -73,10 +80,11 @@ public class Ui {
     }
 
     /**
-     * Prints out response to users when they modify the task list.
+     * Returns the response to users when they modify the task list.
      * @param message Message to be included.
      * @param task The task that is being added/deleted from the task list.
-     * @param taskList The task list of the user.
+     * @param tasks The task list of the user.
+     * @return The message notifying the user of the current task list.
      */
     private String taskListModify(String message, Task task, TaskList taskList) {
         assert task != null : "task does not exist";
@@ -84,56 +92,64 @@ public class Ui {
         String newTaskListLength = "Now you have " + taskList.getSize() + " items in the list";
         String taskDescription = indentMessage(task.toString());
         String[] strings = {message, taskDescription, newTaskListLength};
-        String result = buildMessage(strings);
-        return result;
+        String finalMessage = buildMessage(strings);
+        return finalMessage;
     }
 
     /**
-     * Prints out messages to the user when they add a task to the task list.
+     * Returns the messages to the user when they add a task to the task list.
      * @param task The task to be added.
-     * @param taskList The user's task list.
+     * @param tasks The user's task list.
+     * @return The message notifying the user that the task is successfully added
+     *         to the task list.
      */
-    public String getAddTaskMessage(Task task, TaskList taskList) {
-        return taskListModify("Got it. I've added this task: ", task, taskList);
+    public String getAddTaskMessage(Task task, TaskList tasks) {
+        return taskListModify("Got it. I've added this task: ", task, tasks);
     }
 
     /**
-     * Prints out messages to the user when they delete a task from the task list.
+     * Returns the messages to the user when they delete a task from the task list.
      * @param task The task to be deleted.
-     * @param taskList The user's task list.
+     * @param tasks The user's task list.
+     * @return The message notifying the user that a task is successfully deleted
+     *         from the task list.
      */
-    public String getDeleteTaskMessage(Task task, TaskList taskList) {
-        return taskListModify("Noted. I've removed this task: ", task, taskList);
+    public String getDeleteTaskMessage(Task task, TaskList tasks) {
+        return taskListModify("Noted. I've removed this task: ", task, tasks);
     }
 
     /**
-     * Prints out the task list containing all the tasks having a certain keyword.
-     * @param taskList Task list that contains all the tasks having a certain keyword,
+     * Returns the message which is the task list containing all the tasks having a certain keyword.
+     * @param tasks Task list that contains all the tasks having a certain keyword.
+     * @return The message notifying the user of the tasks that contain the particular keyword.
      */
-    public String getMatchingList(TaskList taskList) {
-        String result = "Here are the matching tasks in your list:\n";
-        for (int i = 0; i < taskList.getSize(); i++) {
+    public String getMatchingList(TaskList tasks) {
+        String message = "Here are the matching tasks in your list:\n";
+        int numOfTasks = tasks.getSize();
+        for (int i = 0; i < numOfTasks; i++) {
             int taskNumber = i + 1;
-            String taskDetail = taskList.getTask(i).toString();
+            String taskDetail = tasks.getTask(i).toString();
             String taskDetailWithLineBreak = addLineBreak(taskDetail);
-            result = result + indentMessage(taskNumber + "." + taskDetailWithLineBreak);
+            message = message + indentMessage(taskNumber + "." + taskDetailWithLineBreak);
         }
-        return result;
+        return message;
     }
 
     /**
-     * Prints out the full task list to the user.
-     * @param taskList The user's task list.
+     * Returns the message containing the full task list to the user.
+     * @param tasks The user's task list.
+     * @return The message notifying user of the current task list.
      */
-    public String getFullList(TaskList taskList) {
-        String result = "Here are the tasks in your list:\n";
-        for (int i = 0; i < taskList.getSize(); i++) {
+    public String getFullList(TaskList tasks) {
+        String message = "Here are the tasks in your list:\n";
+        int numOfTasks = tasks.getSize();
+        for (int i = 0; i < numOfTasks; i++) {
             int taskNumber = i + 1;
-            String taskDetail = taskList.getTask(i).toString();
+            String taskDetail = tasks.getTask(i).toString();
             String taskDetailWithLineBreak = addLineBreak(taskDetail);
-            result = result + indentMessage(taskNumber + "." + taskDetailWithLineBreak);
+            message = message + indentMessage(taskNumber + "." + taskDetailWithLineBreak);
         }
-        return result;
+        return message;
     }
 
     /**

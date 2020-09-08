@@ -19,7 +19,7 @@ import duke.task.ToDo;
  * loads the data from the hard disk when Duke starts up.
  */
 public class Storage {
-    private static final String folderPath = "data/";
+    private static final String FOLDER_PATH = "data/";
     private final String storagePath;
 
     /**
@@ -27,7 +27,7 @@ public class Storage {
      * @param fileName Name of the saved file.
      */
     public Storage(String fileName) {
-        this.storagePath = folderPath + fileName;
+        this.storagePath = FOLDER_PATH + fileName;
     }
 
     /**
@@ -52,7 +52,8 @@ public class Storage {
         List<Task> tasks = taskList.getTaskList();
         StringBuilder data = new StringBuilder();
         for (Task task : tasks) {
-            data.append(task.getStorageString());
+            String taskStorageString = task.getStorageString();
+            data.append(taskStorageString);
         }
         writeToFile(data.toString());
     }
@@ -63,7 +64,7 @@ public class Storage {
      * @throws IOException when the directory to the saved file is not found.
      */
     public List<String> readStorageFile() throws IOException {
-        File folder = new File(this.folderPath);
+        File folder = new File(this.FOLDER_PATH);
         File file = new File(this.storagePath);
         if (!folder.exists()) {
             folder.mkdirs();
@@ -81,6 +82,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Converts the string representation of task in the saved file to a task object.
+     * @param savedTask String representation of task in the saved file.
+     * @return The corresponding task.
+     * @throws IOException when the folder or the saved file cannot be found.
+     */
     private Task translateStringToTask(String savedTask) throws IOException {
         String[] arr = savedTask.split(" \\| ");
         String command = arr[0];
@@ -107,12 +114,15 @@ public class Storage {
      */
     public TaskList formTaskList() throws IOException {
         List<String> taskListInString = this.readStorageFile();
-        TaskList taskList = new TaskList();
+        TaskList tasks = new TaskList();
         for (String taskInString : taskListInString) {
-            Task task = this.translateStringToTask(taskInString);
-            assert task != null : "Task does not exist";
-            taskList.addTask(task);
+            // check whether the current line is the end of file's line
+            if (!taskInString.equals("")) {
+                Task task = this.translateStringToTask(taskInString);
+                assert task != null : "Task does not exist";
+                tasks.addTask(task);
+            }
         }
-        return taskList;
+        return tasks;
     }
 }

@@ -35,8 +35,8 @@ public class Parser {
      * @return The keyword command.
      */
     public static String getCommand(String userInput) {
-        String[] arr = userInput.split(" ", 2);
-        return arr[0];
+        String[] components = userInput.split(" ", 2);
+        return components[0];
     }
 
     /**
@@ -46,11 +46,11 @@ public class Parser {
      * @throws EmptyTaskException
      */
     public static String getArgs(String userInput) throws EmptyTaskException {
-        String[] arr = userInput.split(" ", 2);
-        if (arr.length == 1) {
+        String[] components = userInput.split(" ", 2);
+        if (components.length == 1) {
             throw new EmptyTaskException();
         } else {
-            return arr[1];
+            return components[1];
         }
     }
 
@@ -61,11 +61,11 @@ public class Parser {
      * @throws InvalidIndexException
      */
     public static int getIndexTask(String userInput) throws InvalidIndexException {
-        String[] arr = userInput.split(" ", 2);
-        if (arr.length < 2) {
+        String[] components = userInput.split(" ", 2);
+        if (components.length < 2) {
             throw new InvalidIndexException();
         } else {
-            return Integer.parseInt(arr[1]);
+            return Integer.parseInt(components[1]);
         }
     }
 
@@ -76,11 +76,11 @@ public class Parser {
      * @throws EmptyTaskException
      */
     public static String findDescription(String userInput) throws EmptyTaskException {
-        String[] arr = userInput.split("/");
-        if (arr[0].length() == 0) {
+        String[] components = userInput.split("/");
+        if (components[0].length() == 0) {
             throw new EmptyTaskException();
         } else {
-            return arr[0];
+            return components[0];
         }
     }
 
@@ -92,11 +92,11 @@ public class Parser {
      * @throws EmptyDateException
      */
     public static String findTime(String userInput, String keyword) throws EmptyDateException {
-        String[] arr = userInput.split("/" + keyword + " ");
-        if (arr.length < 2) {
+        String[] components = userInput.split("/" + keyword + " ");
+        if (components.length < 2) {
             throw new EmptyDateException();
         } else {
-            return arr[1];
+            return components[1];
         }
     }
 
@@ -107,8 +107,8 @@ public class Parser {
      * @throws InvalidDateFormatException
      */
     public static boolean isValidDate(String time) throws InvalidDateFormatException {
-        String[] stringArr = time.split("-");
-        if (stringArr.length != 3) {
+        String[] times = time.split("-");
+        if (times.length != 3) {
             throw new InvalidDateFormatException(false);
         }
         return true;
@@ -120,7 +120,7 @@ public class Parser {
      * @return True if there is time included, false otherwise.
      */
     public static boolean hasTime(String time) {
-        String[] stringArr = time.split(" ");
-        return stringArr.length == 2;
+        String[] components = time.split(" ");
+        return components.length == 2;
     }
 }
