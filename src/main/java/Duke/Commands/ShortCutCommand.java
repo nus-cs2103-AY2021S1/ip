@@ -39,18 +39,18 @@ public class ShortCutCommand extends Command{
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             if (isNumberOrDescriptionAbsent()) {
-                throw new ShortCutException(true, false, false, false, "");
+                throw new ShortCutException(true, false, false, false, ""); //if description is absent
             }
 
             String[] splitData = splitDescription(commandDescription);
             if (shortCutPresent(splitData[1])) {
-                throw new ShortCutException(false, false, true, false, splitData[1]);
-            }else if(!containsUselessShortCut(splitData[0])){
-                throw new ShortCutException(false, false, false, true, splitData[1]);
+                throw new ShortCutException(false, false, true, false, splitData[1]); //if short cut is already present
+            }else if(containsUselessShortCut(splitData[0])){
+                throw new ShortCutException(false, false, false, true, splitData[1]); //if short cut exception is useless
             }else if (!shortCutPresent(splitData[0])) {
                 ShortCuts.addShortCut(splitData[0], splitData[1]);
                 updateShortCutFile(splitData[1], splitData[0], storage);
-                return shortCutMessage();
+                return shortCutMessage(); //when it is correct
             } else {
                 return null;
             }
@@ -73,7 +73,7 @@ public class ShortCutCommand extends Command{
         String originalKeyWord = "";
 
         for(int i = lengthOfKeyword + 1; i < input.length(); i++){
-            if(input.charAt(i) == ' '){
+            if(input.charAt(i) == ' '){ //after " " comes short form
                 index = i;
                 originalOfShortFormPresent = true;
                 break;
@@ -81,7 +81,7 @@ public class ShortCutCommand extends Command{
             originalKeyWord = originalKeyWord + input.charAt(i);
         }
         if(!originalOfShortFormPresent || commandDescription.substring(index + 1).length() == 0){
-            throw new ShortCutException(false, true, false, false, "");
+            throw new ShortCutException(false, true, false, false, ""); //happens when there is nothing after keyword
         }
         String[] splitData = new String[]{originalKeyWord, commandDescription.substring(index + 1)};
         return splitData;
@@ -94,7 +94,7 @@ public class ShortCutCommand extends Command{
      * @return true if hashMap contains input and false otherwise.
      */
     private boolean shortCutPresent(String input) {
-        return ShortCuts.getShortCuts().containsKey(input);
+        return ShortCuts.getShortCuts().containsKey(input); //if present is true
     }
 
     /**
@@ -125,7 +125,13 @@ public class ShortCutCommand extends Command{
         }
     }
 
+    /**
+     * Checks whether original form given is uselss
+     *
+     * @param originalForm given by user
+     * @return true if useless and false otherwise
+     */
     private boolean containsUselessShortCut(String originalForm){
-        return ShortCuts.getShortCuts().containsValue(originalForm);
+        return !ShortCuts.getShortCuts().containsValue(originalForm); //since the short cut in ShorCut contains value of all tasks recognised by user
     }
 }
