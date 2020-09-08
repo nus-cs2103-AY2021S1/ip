@@ -8,12 +8,11 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 
-
-
 public class Storage {
 
     private String pathName;
     private String fileName;
+
     /**
      * Returns a storage class which takes in two String arguments of pathName and fileName (data and duke.txt)
      * It is a constructor of the storage class which will create duke.txt if it does not exist;
@@ -23,7 +22,7 @@ public class Storage {
      * @param fileName The name of the file
      * @return A Storage
      */
-    public Storage (String pathName, String fileName) {
+    public Storage(String pathName, String fileName) {
         this.pathName = pathName;
         this.fileName = fileName;
     }
@@ -73,12 +72,12 @@ public class Storage {
         if (!file.exists()) {
             file.mkdirs();
             dukeSave.createNewFile();
+        }
+
+        if (dukeSave.exists()) {
+            this.load();
         } else {
-            if (dukeSave.exists()) {
-                this.load();
-            } else {
-                dukeSave.createNewFile();
-            }
+            dukeSave.createNewFile();
         }
 
     }
