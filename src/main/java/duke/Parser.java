@@ -3,6 +3,7 @@ package duke;
 import java.util.Arrays;
 
 import duke.exception.DukeException;
+import duke.operation.Operation;
 
 /**
  * A class deals with making sense of the user command.
@@ -24,30 +25,30 @@ public class Parser {
         String[] temp;
         String key;
         commands = Arrays.copyOf(commands, 3);
-        switch (commands[0]) {
-        case "bye":
-        case "find":
-        case "list": {
+        switch (Operation.toOperation(commands[0])) {
+        case BYE:
+        case FIND:
+        case LIST: {
             return commands;
         }
-        case "done": {
+        case DONE: {
             if (!isNumeric(commands[1])) {
                 throw new DukeException(" ☹ OOPS!!! The argument of done command is not a number.");
             }
             return commands;
         }
-        case "delete": {
+        case DELETE: {
             if (!isNumeric(commands[1])) {
                 throw new DukeException(" ☹ OOPS!!! The argument of delete command is not a number.");
             }
             return commands;
         }
-        case "todo":
+        case TODO:
             if (commands[1] == null || commands[1].isBlank()) {
                 throw new DukeException(" ☹ OOPS!!! The description of a todo cannot be empty.");
             }
             return commands;
-        case "deadline":
+        case DEADLINE:
             key = " /by ";
             if (commands[1].isBlank()) {
                 throw new DukeException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
@@ -59,7 +60,7 @@ public class Parser {
             commands[1] = temp[0];
             commands[2] = temp[1];
             return commands;
-        case "event":
+        case EVENT:
             key = " /at ";
             if (commands[1].isBlank()) {
                 throw new DukeException(" ☹ OOPS!!! The description of a event cannot be empty.");
