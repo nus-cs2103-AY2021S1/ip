@@ -38,6 +38,8 @@ public class TaskList {
      * @param taskNo Index of task to remove.
      */
     public String removeFromList(int taskNo) {
+        assert taskNo < list.size() : "Invalid Task index";
+
         Task removedTask = this.list.remove(taskNo);
 
         StringBuilder output = new StringBuilder();
@@ -69,6 +71,8 @@ public class TaskList {
      * @param taskNo Index of Task to mark.
      */
     public String markTaskAsDone(int taskNo) {
+        assert taskNo < list.size() : "Invalid Task index";
+       
         Task toBeDone = this.list.get(taskNo);
         toBeDone.markAsDone();
         this.list.set(taskNo, toBeDone);

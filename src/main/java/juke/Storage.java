@@ -29,6 +29,9 @@ public class Storage {
         try {
             String root = System.getProperty("user.dir");
             File f = this.checkAndCreateFile(root);
+
+            assert f.exists() : "File not created";
+
             ArrayList<Task> list = new ArrayList<>();
             Scanner scanner = new Scanner(f);
 
@@ -78,6 +81,9 @@ public class Storage {
      */
     public void saveTasksToFile() throws IOException {
         String root = System.getProperty("user.dir");
+
+        assert Files.exists(Paths.get(root, "data", "dukeTaskList.txt")) : "File does not exist";
+
         FileWriter fw = new FileWriter(Paths.get(root, "data", "dukeTaskList.txt").toString());
         for (int i = 0; i < TaskList.list.size(); i++) {
             Task task = TaskList.list.get(i);

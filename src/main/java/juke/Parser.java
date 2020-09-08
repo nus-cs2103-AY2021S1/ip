@@ -33,6 +33,7 @@ public class Parser {
     protected Command commandHandler(String inputText) {
         try {
             String[] splitArr = inputText.split(" ");
+
             String command = splitArr[0];
 
             switch (command) {
