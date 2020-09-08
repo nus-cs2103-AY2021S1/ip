@@ -3,8 +3,7 @@
  * Handle "bye" command.
  */
 public class ByeCommand extends Command {
-    public static final String TAB = "  ";
-    private static final String END = TAB + " Bye. Hope to see you again soon!";
+    private static final String END = "Bye. Hope to see you again soon!";
 
     /**
      * Executes the command.

@@ -7,6 +7,6 @@ public class DukeException extends Exception {
         super(msg);
     }
     public DukeException() {
-        super(" ☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        super("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 }
