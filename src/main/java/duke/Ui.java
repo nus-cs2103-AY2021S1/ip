@@ -138,4 +138,31 @@ public class Ui {
         }
         return fullList;
     }
+
+    public static void printHelpInstructions(String helpTopic) {
+        if (helpTopic.equals("deadline")) {
+            System.out.println("For deadlines type 'deadline ' + 'your deadline' + '/by' + specific 'timing' ");
+            System.out.println("in the format: YYYY-MM-DD");
+        } else if (helpTopic.equals("event")) {
+            System.out.println("For events type 'event ' + 'your event' + '/at' + specific 'location'");
+        }else if (helpTopic.equals("todo")) {
+            System.out.println("For todo type 'todo ' + 'your task'");
+        } else {
+            System.out.println("sorry this is not a valid help command");
+        }
+    }
+
+    public String printHelpInstructions(String helpTopic, boolean isChat) {
+        if (helpTopic.equals("deadline")) {
+            String str1 = "For deadlines type 'deadline ' + 'your deadline' + '/by' + specific 'timing'\n";
+            String str2 = "in the format: YYYY-MM-DD";
+            return str1 + str2;
+        } else if (helpTopic.equals("event")) {
+            return "For events type 'event ' + 'your event' + '/at' + specific 'location'";
+        }else if (helpTopic.equals("todo")) {
+            return "For todo type 'todo ' + 'your task'";
+        } else {
+            return "sorry this is not a valid help command";
+        }
+    }
 }

@@ -1,13 +1,7 @@
 package duke;
 
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 
 /**
  * Handles the main logic of inputs and what Command to execute.
@@ -38,6 +32,8 @@ public class Parser {
             return new DeleteCommand(input, num);
         } else if (checker.equals("find")) {
             return new FindCommand(input);
+        } else if (checker.equals("help")) {
+            return new HelpCommand(input);
         } else {
             return new AddCommand(input);
         }
