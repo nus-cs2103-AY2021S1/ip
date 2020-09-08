@@ -23,7 +23,7 @@ public class DeleteCommand extends Command {
      * @throws IndexOutOfBoundsDukeException If task number is invalid.
      */
     @Override
-    String execute(TaskList tasks, Ui ui, Storage storage, Map<String, Runnable> runnables)
+    String execute(TaskList tasks, NotesList notes, Ui ui, Storage storage, Map<String, Runnable> runnables)
             throws IndexOutOfBoundsDukeException {
         return tasks.deleteTask(taskNumber);
     }

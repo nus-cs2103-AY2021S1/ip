@@ -12,7 +12,7 @@ public class ListCommand extends Command {
     k * @param storage Storage object.
      */
     @Override
-    String execute(TaskList tasks, Ui ui, Storage storage, Map<String, Runnable> runnables) {
+    String execute(TaskList tasks, NotesList notes, Ui ui, Storage storage, Map<String, Runnable> runnables) {
         return String.format("Here are the tasks in your list!\n"
                 + "%s", tasks);
     }

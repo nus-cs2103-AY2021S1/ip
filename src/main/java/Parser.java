@@ -1,13 +1,20 @@
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.MissingFormatArgumentException;
+
 /**
  * Class to handle parsing of input into commands.
  */
 public class Parser {
 
     /**
-     * Parses the given command in string form into a Command object.
+     * Parses the given command in string form into a logic.commands.Command object.
+     *
      * @param textCommand the command to be parsed in string formed.
-     * @return Command after being parsed.
-     * @throws EmptyBodyException If command in string form is empty.
+     * @return logic.commands.Command after being parsed.
+     * @throws EmptyBodyException    If command in string form is empty.
      * @throws UnknownInputException If command in string form is not a recognised command.
      */
     public static Command parse(String textCommand) throws EmptyBodyException, UnknownInputException {
@@ -35,19 +42,101 @@ public class Parser {
             return new DoneCommand(taskNumber);
         }
         case "todo": {
-            return new AddCommand("todo", remaining);
+            return new AddCommand(TaskType.TODO, remaining);
         }
         case "deadline": {
-            return new AddCommand("deadline", remaining);
+            return new AddCommand(TaskType.DEADLINE, remaining);
         }
         case "event": {
-            return new AddCommand("event", remaining);
+            return new AddCommand(TaskType.EVENT, remaining);
         }
         case "find": {
             return new FindCommand(remaining);
         }
         default:
             throw new UnknownInputException(firstWord);
+        }
+    }
+
+    // todo need change: right now it's to add notes only but might need to change for editing notes
+    public static Command parseNotesCommand(String command) throws UnknownInputException {
+        Validator.requireNonNull(command);
+
+        String[] rawCommand = command.split(" ", 2);
+        String firstWord = rawCommand[0];
+        String remaining = rawCommand[1];
+
+        List<String> rawParameters = Arrays.asList(remaining.split("(?=\\w*t/)\\w+"));
+        Map<String, Object> parameters = new HashMap<>();
+
+        rawParameters.forEach(parameter -> {
+            String[] rawSplitParameters = parameter.split("/", 2);
+
+            String name = rawSplitParameters[0];
+            Object value = rawSplitParameters[1];
+
+            parameters.put(name, value);
+        });
+
+        String title = null;
+        String description = null;
+        Priority priority = null;
+
+        for (Map.Entry<String, Object> entry : parameters.entrySet()) {
+            switch (entry.getKey()) {
+            case "title": case "t": {
+                title = (String) entry.getValue();
+                break;
+            }
+            case "description": case "d": {
+                description = (String) entry.getValue();
+                break;
+            }
+            case "priority": case "p": {
+                priority = parsePriority((String) entry.getValue());
+                break;
+            }
+            default: {
+                throw new UnknownInputException("Unknown parameter name " + entry.getKey()); //todo change to duke exceptions
+            }
+            }
+        }
+
+        switch (firstWord) {
+        case "add": {
+            try {
+                Validator.requireNonNull(title, description, priority);
+                return new AddNoteCommand(title, description, priority);
+            } catch (NullPointerException e) {
+                throw new MissingFormatArgumentException(""); // todo: need implement
+            }
+        }
+        default: {
+            throw new UnknownInputException("Unknown notes command: " + firstWord); //todo change to duke exceptions
+        }
+        }
+
+    }
+
+    private static Priority parsePriority(String priority) throws UnknownInputException {
+        switch (priority) {
+        case "high":
+        case "h":
+        case "High": {
+            return Priority.HIGH;
+        }
+        case "medium":
+        case "m":
+        case "Medium": {
+            return Priority.MEDIUM;
+        }
+        case "low":
+        case "l":
+        case "Low": {
+            return Priority.LOW;
+        }
+        default:
+            throw new UnknownInputException("Unknown priority: " + priority); // todo: change exception name
         }
     }
 }

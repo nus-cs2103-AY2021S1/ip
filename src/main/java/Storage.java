@@ -37,22 +37,26 @@ public class Storage {
     /**
      * Creates the file
      */
-    public void createFile() throws IOException {
-        File file = new File(this.filePath);
-        boolean createdDirectory = file.getParentFile().mkdirs();
-        boolean createdFile = file.createNewFile();
+    public void createFile() {
+        try {
+            File file = new File(this.filePath);
+            boolean createdDirectory = file.getParentFile().mkdirs();
+            boolean createdFile = file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     /**
      * Saves a list to the file. Creates the file if it does not exist.
      *
-     * @param lst TaskList to save to the file.
+     * @param object Object to save to file.
      */
-    public void save(TaskList lst) {
+    public void save(Object object) {
         try {
             FileOutputStream fileOutputStream = new FileOutputStream(this.filePath);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(lst);
+            objectOutputStream.writeObject(object);
             objectOutputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
@@ -65,17 +69,16 @@ public class Storage {
      *
      * @return The TaskList read from the file if one is read, otherwise an empty TaskList.
      */
-    public TaskList read() {
+    public Object read() {
         try {
             if (doesFileExist()) {
                 FileInputStream fileInputStream = new FileInputStream(this.filePath);
                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-                TaskList lst = (TaskList) objectInputStream.readObject();
+                Object object = objectInputStream.readObject();
                 objectInputStream.close();
-                return lst;
+                return object;
             } else {
-                createFile();
-                return new TaskList();
+                throw new UnsupportedOperationException("File does not exist");
             }
 
         } catch (IOException | ClassNotFoundException e) {
