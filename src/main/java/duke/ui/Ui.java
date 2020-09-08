@@ -11,8 +11,6 @@ import duke.task.TaskList;
 public class Ui {
     private static String horizontalLine = "________________________________________";
 
-    private Scanner sc = new Scanner(System.in);
-
     /**
      * Prints the welcome message
      */
@@ -113,9 +111,26 @@ public class Ui {
     /**
      * Show the user the result of a find command.
      * @param tasks The list of tasks that fulfill the requirement
+     * @return The message  results
      */
     public String showFindResult(TaskList tasks) {
-        String response = "Here are the matching task(s) in your list: \n";
-        return response + tasks.toString();
+        return "Here are the matching task(s) in your list: \n" + tasks.toString();
+    }
+
+    /**
+     * Show this message when undoing a command successfully
+     * @param tasks the new task list after undoing the command
+     * @return The message noticing that the user has successfully undo a command
+     */
+    public String showUndoSuccessfulMsg(TaskList tasks) {
+        return "You have undone successfully. Here is your current list:\n" + tasks.toString();
+    }
+
+    /**
+     * Show this message when cannot undo anymore
+     * @return The message noticing that the user cannot undo anymore
+     */
+    public String showUnableToUndoMessage() {
+        return "You cannot undo anymore.";
     }
 }

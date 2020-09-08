@@ -10,6 +10,7 @@ import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.StartCommand;
 import duke.command.ToDoCommand;
+import duke.command.UndoCommand;
 import duke.exception.DukeException;
 import duke.exception.InadequateCommandException;
 import duke.exception.InvalidIndexException;
@@ -28,19 +29,19 @@ public class Parser {
         String[] splitInput = fullCommand.split("\\s+", 2);
 
         // command: hello
-        boolean isStartCommand = splitInput[0].equals(StartCommand.COMMAND);
+        boolean isStartCommand = splitInput[0].equals(StartCommand.COMMAND) && splitInput.length == 1;
         if (isStartCommand) {
             return createStartCommand();
         }
 
         // command: bye
-        boolean isExitCommand = splitInput[0].equals(ExitCommand.COMMAND);
+        boolean isExitCommand = splitInput[0].equals(ExitCommand.COMMAND) && splitInput.length == 1;
         if (isExitCommand) {
             return createExitCommand();
         }
 
         // command: list
-        boolean isListCommand = splitInput[0].equals(ListCommand.COMMAND);
+        boolean isListCommand = splitInput[0].equals(ListCommand.COMMAND) && splitInput.length == 1;
         if (isListCommand) {
             return createListCommand();
         }
@@ -76,7 +77,17 @@ public class Parser {
         if (isDeadlineCommand || isEventCommand) {
             return createDeadlineOrEventCommand(splitInput);
         }
+
+        // command: undo
+        boolean isUndoCommand = splitInput[0].equals(UndoCommand.COMMAND);
+        if (isUndoCommand) {
+            return createUndoCommand();
+        }
         return new Command();
+    }
+
+    private static Command createUndoCommand() {
+        return new UndoCommand();
     }
 
     public static Command createStartCommand() {
