@@ -67,6 +67,17 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
+     * Creates dialog box for reminders of tasks on pressing the Reminder button.
+     */
+    @FXML
+    private void handleReminderAction() {
+        String reminder = duke.getReminder();
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(reminder, dukeImage)
+        );
+    }
+
+    /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */

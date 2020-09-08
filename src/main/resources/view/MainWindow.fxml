@@ -20,5 +20,6 @@
                </children></VBox>
             </content>
         </ScrollPane>
+      <Button fx:id="reminderButton" mnemonicParsing="false" onAction="#handleReminderAction" prefHeight="30.0" prefWidth="75.0" text="Reminders" textFill="#2d6dbf" />
     </children>
 </AnchorPane>
