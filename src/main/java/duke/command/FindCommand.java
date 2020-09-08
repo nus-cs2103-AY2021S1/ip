@@ -3,7 +3,7 @@ package duke.command;
 import java.util.ArrayList;
 
 import duke.exception.DukeException;
-import duke.storage.Storage;
+import duke.storage.StateManager;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -26,13 +26,13 @@ public class FindCommand extends Command {
      * Prints all tasks in the TaskList that contain the keyWord.
      *
      * @param taskList The TaskList used by Duke.
-     * @param storage  The Storage used by Duke.
+     * @param stateManager  The Storage used by Duke.
      * @return CommandResult object for ui
      * @throws DukeException
      */
     @Override
-    public CommandResult execute(TaskList taskList, Storage storage) throws DukeException {
-        assert taskList != null && storage != null;
+    public CommandResult execute(TaskList taskList, StateManager stateManager) throws DukeException {
+        assert taskList != null && stateManager != null;
 
         if (taskList.numberOfTasks() > 0) {
             //ArrayList<Task> tasksWithKeyWord = taskList.find(keyWords);

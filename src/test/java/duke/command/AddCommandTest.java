@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import duke.storage.StateManager;
 import org.junit.jupiter.api.Test;
 
 import duke.exception.DukeException;
@@ -21,7 +22,7 @@ public class AddCommandTest {
         try {
             Task todo = new ToDo("description");
             Command command = new AddCommand(todo);
-            command.execute(new TaskList(), new Storage("data/duke.txt"));
+            command.execute(new TaskList(), new StateManager("data/duke.txt"));
         } catch (DukeException e) {
             fail("Should not have failed at adding todo task");
         }
@@ -33,7 +34,7 @@ public class AddCommandTest {
             Task event = new Event("description",
                     LocalDate.parse("2012-12-02"), LocalTime.parse("16:00:00"));
             Command command = new AddCommand(event);
-            command.execute(new TaskList(), new Storage("data/duke.txt"));
+            command.execute(new TaskList(), new StateManager("data/duke.txt"));
         } catch (DukeException e) {
             fail("Should not have failed at adding event task");
         }
@@ -45,7 +46,7 @@ public class AddCommandTest {
             Task deadline = new Deadline("description",
                     LocalDate.parse("2012-12-02"), LocalTime.parse("16:00:00"));
             Command command = new AddCommand(deadline);
-            command.execute(new TaskList(), new Storage("data/duke.txt"));
+            command.execute(new TaskList(), new StateManager("data/duke.txt"));
         } catch (DukeException e) {
             fail("Should not have failed at adding deadline task");
         }

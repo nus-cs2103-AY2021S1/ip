@@ -19,7 +19,7 @@ public class StorageTest {
     public void invalidStorageFile() {
         try {
             Storage storage = new Storage("src/test/data/invalidDuke.txt");
-            storage.load();
+            storage.loadTasks();
             fail("Should have thrown an exception due to invalid storage text file");
         } catch (DukeException e) {
             return;
@@ -30,7 +30,7 @@ public class StorageTest {
     public void validStorageFile() {
         try {
             Storage storage = new Storage("src/test/data/duke.txt");
-            storage.load();
+            storage.loadTasks();
         } catch (DukeException e) {
             fail("Should not have thrown an exception due to valid storage text file");
         }
@@ -46,7 +46,7 @@ public class StorageTest {
             TaskList taskList = new TaskList(tasks);
             Storage storage = new Storage("data/duke.txt");
             storage.updateStorage(taskList);
-            ArrayList<Task> returnedTaskList = storage.load();
+            ArrayList<Task> returnedTaskList = storage.loadTasks();
         } catch (DukeException e) {
             fail(e.getMessage());
             //fail("Should not throw exception when updating or reading from file");

@@ -36,7 +36,7 @@ public class Storage {
      * @return The ArrayList of tasks from the storage file.
      * @throws DukeException If the storage file cannot be read, found or created if not created yet.
      */
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> loadTasks() throws DukeException {
         return getTaskListFromFile();
     }
 
