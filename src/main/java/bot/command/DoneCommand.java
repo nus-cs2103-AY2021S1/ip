@@ -14,7 +14,7 @@ public class DoneCommand extends Command {
 
     public DoneCommand(String cmd, int ind) {
         super(cmd);
-        itemIndex = ind-1;
+        itemIndex = ind - 1;
     }
 
     /**
@@ -33,11 +33,11 @@ public class DoneCommand extends Command {
             Task task = taskList.get(itemIndex);
             task.markAsDone();
             storage.saveUserData(taskList);
-            return "Nice! I've marked this task as done: \n    " +
-                    task + "\n";
+            return "Nice! I've marked this task as done: \n    "
+                    + task + "\n";
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Sorry, do what? Please give me a valid input." +
-                    " Thank you.");
+            throw new IllegalArgumentException("Sorry, do what? Please give me a valid input."
+                    + " Thank you.");
         } catch (IOException e) {
             throw new IOException("Sorry, I can't seem to save it.");
         }

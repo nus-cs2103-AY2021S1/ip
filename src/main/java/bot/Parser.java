@@ -30,7 +30,7 @@ public class Parser {
         if (input.length() == 0) {
             throw new InvalidInputException("Please input something");
         }
-        try{
+        try {
             String[] words = input.split(" ");
             String[] args = new String[2];
             switch(words[0]) {
@@ -76,8 +76,8 @@ public class Parser {
             }
         }
         if (name.length() == 0) {
-            throw new InvalidInputException("Sorry, do what? Please give me a valid input." +
-                    " Thank you.");
+            throw new InvalidInputException("Sorry, do what? Please give me a valid input."
+                    + " Thank you.");
         }
         return name.toString();
     }
@@ -96,51 +96,8 @@ public class Parser {
         StringBuilder name = new StringBuilder();
         StringBuilder deadline = new StringBuilder();
         int indexDateDelimiter = -1;
-        for(int i = 0; i < words.length; i++) {
-            if (words[i].equals("/by")){
-                indexDateDelimiter = i;
-            }
-        }
-        try{
-            for(int i = 1; i < indexDateDelimiter; i++) {
-                name.append(words[i]);
-                name.append(" ");
-            }
-            for(int i = indexDateDelimiter + 1; i < words.length; i++) {
-                deadline.append(words[i]);
-                deadline.append(" ");
-            }
-            if (indexDateDelimiter == -1 || name.length() == 0 || deadline.length() == 0) {
-                throw new InvalidInputException("Sorry, do what? Please give me a valid input." +
-                        " Thank you.");
-            }
-        } catch (InvalidInputException e) {
-            throw new InvalidInputException("Sorry, do what? Please give me a valid input." +
-                    " Thank you.");
-        }
-        name.deleteCharAt(name.length() - 1);
-        deadline.deleteCharAt(deadline.length() - 1);
-        output[0] = name.toString();
-        output[1] = deadline.toString();
-        return output;
-    }
-
-  /**
-   * Returns the name and date assuming the the input is the command for Event.
-   * @param input user's input
-   * @return an array of 2 String, first String is the name of event * while second is the
-   *     event's date
-   * @throws InvalidInputException command's arugument is invalid
-   */
-  public String[] parseEvent(String input) throws InvalidInputException {
-        String[] output = new String[2];
-        String[] words = input.split(" ");
-        StringBuilder name = new StringBuilder();
-        StringBuilder deadline = new StringBuilder();
-
-        int indexDateDelimiter = -1;
         for (int i = 0; i < words.length; i++) {
-            if (words[i].equals("/at")){
+            if (words[i].equals("/by")) {
                 indexDateDelimiter = i;
             }
         }
@@ -154,12 +111,56 @@ public class Parser {
                 deadline.append(" ");
             }
             if (indexDateDelimiter == -1 || name.length() == 0 || deadline.length() == 0) {
-                throw new InvalidInputException("Sorry, do what? Please give me a valid input." +
-                        " Thank you.");
+                throw new InvalidInputException("Sorry, do what? Please give me a valid input."
+                        + " Thank you.");
             }
         } catch (InvalidInputException e) {
-            throw new InvalidInputException("Sorry, do what? Please give me a valid input." +
-                    " Thank you.");
+            throw new InvalidInputException("Sorry, do what? Please give me a valid input."
+                    + " Thank you.");
+        }
+        name.deleteCharAt(name.length() - 1);
+        deadline.deleteCharAt(deadline.length() - 1);
+        output[0] = name.toString();
+        output[1] = deadline.toString();
+        return output;
+    }
+
+    /**
+    * Returns the name and date assuming the the input is the command for Event.
+    *
+    * @param input user's input
+    * @return an array of 2 String, first String is the name of event * while second is the
+    *     event's date
+    * @throws InvalidInputException command's arugument is invalid
+    */
+    public String[] parseEvent(String input) throws InvalidInputException {
+        String[] output = new String[2];
+        String[] words = input.split(" ");
+        StringBuilder name = new StringBuilder();
+        StringBuilder deadline = new StringBuilder();
+
+        int indexDateDelimiter = -1;
+        for (int i = 0; i < words.length; i++) {
+            if (words[i].equals("/at")) {
+                indexDateDelimiter = i;
+            }
+        }
+        try {
+            for (int i = 1; i < indexDateDelimiter; i++) {
+                name.append(words[i]);
+                name.append(" ");
+            }
+            for (int i = indexDateDelimiter + 1; i < words.length; i++) {
+                deadline.append(words[i]);
+                deadline.append(" ");
+            }
+            if (indexDateDelimiter == -1 || name.length() == 0 || deadline.length() == 0) {
+                throw new InvalidInputException("Sorry, do what? Please give me a valid input."
+                        + " Thank you.");
+            }
+        } catch (InvalidInputException e) {
+            throw new InvalidInputException("Sorry, do what? Please give me a valid input."
+                    + " Thank you.");
         }
         name.deleteCharAt(name.length() - 1);
         deadline.deleteCharAt(deadline.length() - 1);
@@ -177,8 +178,8 @@ public class Parser {
     public int parseIndex(String input) throws InvalidInputException {
         String[] words = input.split(" ");
         if (words.length != 2) {
-            throw new InvalidInputException("Sorry, do what? Please give me a valid input." +
-                    " Thank you.");
+            throw new InvalidInputException("Sorry, do what? Please give me a valid input."
+                    + " Thank you.");
         }
         return Integer.parseInt(words[1]);
     }
