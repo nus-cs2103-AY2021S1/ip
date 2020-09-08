@@ -46,4 +46,8 @@ public class TaskList {
     public boolean isEmpty() {
         return storage.isEmpty();
     }
+
+    public boolean hasTheSameTask(Task task) {
+        return storage.contains(task);
+    }
 }

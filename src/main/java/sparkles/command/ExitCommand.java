@@ -27,7 +27,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        return this.concatenateOutputs(ui, null, null);
+        return this.getResponse(ui, null, null);
     }
 
     /**
@@ -41,7 +41,7 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public String concatenateOutputs(Ui ui, Task task, TaskList taskList) {
+    public String getResponse(Ui ui, Task task, TaskList taskList) {
         assert task == null;
         assert taskList == null;
 

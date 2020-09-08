@@ -40,7 +40,7 @@ public class AddTodoCommand extends AddCommand {
             desc = command.substring(5).trim();
             task = new Todo(desc);
 
-            response = this.concatenateOutputs(ui, task, taskList);
+            response = this.getResponse(ui, task, taskList);
         } catch (Exception ex) {
             throw new SparklesException("     OOPS!! The description of a todo cannot be empty!");
         } finally {

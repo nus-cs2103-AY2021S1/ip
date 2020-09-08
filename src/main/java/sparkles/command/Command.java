@@ -32,5 +32,5 @@ public abstract class Command {
         return false;
     }
 
-    public abstract String concatenateOutputs(Ui ui, Task task, TaskList taskList);
+    public abstract String getResponse(Ui ui, Task task, TaskList taskList);
 }
