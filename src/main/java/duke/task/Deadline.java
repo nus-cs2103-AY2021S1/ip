@@ -81,7 +81,8 @@ public class Deadline extends Task {
                 try {
                     String[] inputDate = splitDeadline[0].trim().split("/");
                     String formatDate = inputDate[0] + "-" + inputDate[1] + "-" + inputDate[2];
-                    LocalDate date = LocalDate.parse(formatDate);
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+                    LocalDate date = LocalDate.parse(formatDate, formatter);
 
                     if (splitDeadline.length != 1) {
                         LocalTime time = LocalTime.parse(splitDeadline[1].trim());

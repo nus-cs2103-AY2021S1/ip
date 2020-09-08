@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.Locale;
 
 import duke.DukeException;
 
@@ -74,8 +75,9 @@ public class Event extends Task {
                 try {
                     String[] inputDate = splitEventTime[0].split("/");
                     String formatDate = inputDate[0] + "-" + inputDate[1] + "-" + inputDate[2];
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
-                    LocalDate date = LocalDate.parse(formatDate);
+                    LocalDate date = LocalDate.parse(formatDate,formatter);
                     String[] times = splitEventTime[1].trim().split("-");
                     LocalTime startTime = LocalTime.parse(times[0]);
                     LocalTime endTime = LocalTime.parse(times[1]);

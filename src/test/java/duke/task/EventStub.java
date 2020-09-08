@@ -18,8 +18,9 @@ public class EventStub extends Task {
     }
 
     public static Task createTask() {
-        return new EventStub("project meeting", LocalDate.parse("2019-02-20"), LocalTime.parse("12:00"),
-                LocalTime.parse("14:00"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return new EventStub("project meeting", LocalDate.parse("2019-02-20", formatter),
+                LocalTime.parse("12:00"), LocalTime.parse("14:00"));
     }
 
     @Override

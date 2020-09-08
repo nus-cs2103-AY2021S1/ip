@@ -16,7 +16,9 @@ public class DeadlineStub extends Task {
     }
 
     public static Task createTask() {
-        return new DeadlineStub("project", LocalDate.parse("2019-02-20"), LocalTime.parse("12:00"));
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        return new DeadlineStub("project", LocalDate.parse("2019-02-20", formatter),
+                LocalTime.parse("12:00"));
     }
 
     @Override
