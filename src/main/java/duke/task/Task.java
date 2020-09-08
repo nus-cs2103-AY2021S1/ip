@@ -60,7 +60,7 @@ public abstract class Task {
      */
     public String addNote(String note) {
         this.notes = new Notes(note);
-        return this.toString() + "\n" + this.notes.toString();
+        return this.toString() + "\nNote:\n" + this.notes.toString();
     }
 
     /**
@@ -88,6 +88,18 @@ public abstract class Task {
             result += "[0] ";
         }
         result += this.task;
+        return result;
+    }
+
+    /**
+     * Provides the string representation of the entire task including its note.
+     *
+     * @return The string representation of the entire task.
+     */
+    public String getFullTask() {
+        String result = "";
+        result += this.toString();
+        result += "\nNote:\n" + this.notes.toString();
         return result;
     }
 

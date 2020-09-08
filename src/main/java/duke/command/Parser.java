@@ -9,8 +9,10 @@ import java.util.regex.Pattern;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
+
 
 /**
  * Parser class which is used to process commands passed down by the user and returns
@@ -20,6 +22,8 @@ public class Parser {
 
     private TaskList list;
     private boolean isExit;
+    private Pattern pattern = Pattern.compile("^(.*?)\\s(.*?)(?:\\s/..\\s?(.*))?$");
+    private Pattern notePattern = Pattern.compile("^([0-9]*)\\s(.*?)$");
 
     /**
      * Constructor for Parser object.
@@ -50,7 +54,6 @@ public class Parser {
      */
     public String processCommand(String command) throws DukeException {
         assert (command != null) : "Parser - processCommand: command input is null!";
-        Pattern pattern = Pattern.compile("^(.*?)\\s(.*?)(?:\\s/..\\s?(.*))?$");
         Matcher matcher = pattern.matcher(command);
         if (matcher.find()) {
             String com = matcher.group(1);
@@ -63,11 +66,14 @@ public class Parser {
             case ("done"):
             case ("delete"):
             case ("find"):
+            case ("view"):
                 return this.processList(com, index);
             case ("todo"):
             case ("deadline"):
             case ("event"):
                 return this.processTask(com, task, date);
+            case ("note"):
+                return this.processNote(task);
             default:
                 throw new DukeException("Sorry, I did not understand: " + command
                         + "\nUse \"help\" to look at available commands.");
@@ -94,9 +100,11 @@ public class Parser {
                         + "event <description> /at <dd/MM/yyyy> - create an event Task (date is optional)\n"
                         + "deadline <description> /by <dd/MM/yyyy> - create a deadline Task (date is optional)\n"
                         + "\n"
-                        + "done <index> - mark the specified task as done\n"
-                        + "undo <index> - mark the specified task as not done\n"
-                        + "delete <index> - deletes the specified task from the list";
+                        + "done <task number> - mark the specified task as done\n"
+                        + "undo <task number> - mark the specified task as not done\n"
+                        + "delete <task number> - deletes the specified task from the list\n"
+                        + "find <keyword> - provides a list of the tasks containing the keyword in its description.\n"
+                        + "view <task number> - views the task and showing the note attached to the task.";
             default:
                 throw new DukeException("Sorry, I did not understand: " + command
                         + "\nUse \"help\" to look at available commands.");
@@ -156,30 +164,60 @@ public class Parser {
     private String processList(String com, String index) throws DukeException {
         assert (com != null) : "Parser - processList: com is null!";
         assert (index != null) : "Parser - processList: task is null!";
+        int parsedIndex;
+        try {
+            parsedIndex = Integer.parseInt(index) - 1;
+        } catch (NumberFormatException e) {
+            throw new DukeException("Please input a number for the task number.");
+        }
         switch(com) {
         case("done"):
             if (index.equals("")) {
                 throw new DukeException("Please choose a task to mark as done, with \"done <task number>\"");
             }
-            return list.markDone(Integer.parseInt(index) - 1);
+            return list.markDone(parsedIndex);
         case("undo"):
             if (index.equals("")) {
                 throw new DukeException("Please choose a task to undo, with \"undo <task number>\"");
             }
-            return list.revertDone(Integer.parseInt(index) - 1);
+            return list.revertDone(parsedIndex);
         case("delete"):
             if (index.equals("")) {
                 throw new DukeException("Please choose a task to delete, with \"delete <task number>\"");
             }
-            return list.deleteItem(Integer.parseInt(index) - 1);
+            return list.deleteItem(parsedIndex);
         case("find"):
             if (index.equals("")) {
                 throw new DukeException("Please input a word to find tasks with, using \"find <word>\"");
             }
             return list.findWord(index);
+        case ("view"):
+            if (index.equals("")) {
+                throw new DukeException("Please choose a task to view, using \"view <task number>\"");
+            }
+            Task currentTask = list.getTask(parsedIndex);
+            return currentTask.getFullTask();
         default:
             throw new DukeException("Something went wrong with processing the command! Please try again!");
         }
+    }
+
+    /**
+     * Helper function to process note command.
+     *
+     * @param input The String containing "index noteContent".
+     * @return String result of the note saved.
+     * @throws DukeException A custom Exception that carries a message for the user if thrown.
+     */
+    private String processNote(String input) throws DukeException {
+        Matcher matcher = notePattern.matcher(input);
+
+        if (!matcher.find()) {
+            throw new DukeException("Please use the format \"note <index> <note content>\"");
+        }
+        int index = Integer.parseInt(matcher.group(1)) - 1;
+        String note = matcher.group(2);
+        return this.list.editNote(index, note);
     }
 
     /**

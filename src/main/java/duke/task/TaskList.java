@@ -35,6 +35,18 @@ public class TaskList {
     }
 
     /**
+     * Gets the task at the index of the list.
+     * @param index The index of the task required.
+     * @return The task if index is valid, else null.
+     */
+    public Task getTask(int index) {
+        if (index >= this.list.size() || index < 0) {
+            return null;
+        }
+        return this.list.get(index);
+    }
+
+    /**
      * Adds a Task to the list.
      *
      * @param item Task object to be added on to the list.
