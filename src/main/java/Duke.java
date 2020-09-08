@@ -42,6 +42,7 @@ public class Duke {
         }
     }
 
+    // For implementation of JavaFX.
     public String getResponse(String input) {
         if (Parser.isBye(input)) {
             System.exit(0);
@@ -53,6 +54,7 @@ public class Duke {
         }
     }
 
+    // For implementation of JavaFX.
     public String getGreetings() {
         return ui.sayGreetings();
     }

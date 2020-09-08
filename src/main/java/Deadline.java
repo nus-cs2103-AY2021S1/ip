@@ -14,4 +14,9 @@ public class Deadline extends TimedTask {
         super.type = Task.Type.DEADLINE;
         super.isDone = isDone;
     }
+
+    public String getTypeIcon() {
+        String icon = "[D]";
+        return icon;
+    }
 }

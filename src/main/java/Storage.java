@@ -11,6 +11,13 @@ import java.util.Scanner;
  * object.
  */
 public class Storage {
+    private static final String RIGHT_ICON_BRACKET = "]";
+    private static final String TIME_SEPARATOR = " - ";
+
+    private static final String TODO_ICON = "T";
+    private static final String DEADLINE_ICON = "D";
+    private static final String EVENT_ICON = "E";
+
     private File file;
 
     public Storage(String filepath) {
@@ -25,16 +32,15 @@ public class Storage {
      * @throws DukeException When no file is found.
      */
     public ArrayList<Task> loadFile() throws FileNotFoundException, DukeException {
-        if (file.exists()) {
-            Scanner scanner = new Scanner(file);
-            ArrayList<Task> tasks = new ArrayList<>();
-            while (scanner.hasNext()) {
-                tasks.add(getTask(scanner.nextLine()));
-            }
-            return tasks;
-        } else {
+        if (!file.exists()) {
             throw new DukeException("No file found");
         }
+        Scanner scanner = new Scanner(file);
+        ArrayList<Task> tasks = new ArrayList<>();
+        while (scanner.hasNext()) {
+            tasks.add(getTask(scanner.nextLine()));
+        }
+        return tasks;
     }
 
     /**
@@ -50,26 +56,26 @@ public class Storage {
     }
 
     private static Task getTask(String line) throws DukeException {
-        String[] parsed = line.split("]", 3);
+        String[] parsed = line.split(RIGHT_ICON_BRACKET, 3);
         String type = parsed[0].substring(1);
         String status = parsed[1].substring(1);
-        boolean isDone = (status.equals("\u2713"));
+        boolean isDone = (status.equals("\u2713")); // \u2713 is tick, \u2718 is cross.
         String body = parsed[2].substring(1);
-        switch (type) {
-        case "T":
+        if (type.equals(TODO_ICON)) {
             return new Todo(body, isDone);
-        case "D":
-            String[] dParsed = body.split(" - ", 2);
-            String dDescription = dParsed[0];
-            String deadline = dParsed[1];
-            return new Deadline(dDescription, deadline, isDone);
-        case "E":
-            String[] eParsed = body.split(" - ", 2);
-            String eDescription = eParsed[0];
-            String eventTime = eParsed[1];
-            return new Event(eDescription, eventTime, isDone);
-        default:
-            throw new DukeException("Error finding task");
         }
+        if (type.equals(DEADLINE_ICON)) {
+            String[] Parsed = body.split(TIME_SEPARATOR, 2);
+            String Description = Parsed[0];
+            String deadline = Parsed[1];
+            return new Deadline(Description, deadline, isDone);
+        }
+        if (type.equals(EVENT_ICON)) {
+            String[] Parsed = body.split(TIME_SEPARATOR, 2);
+            String Description = Parsed[0];
+            String eventTime = Parsed[1];
+            return new Event(Description, eventTime, isDone);
+        }
+        throw new DukeException("Error finding task");
     }
 }

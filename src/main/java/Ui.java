@@ -25,7 +25,7 @@ public class Ui {
      * Greets the user.
      */
     public String sayGreetings() {
-        String message = BOT_NAME + "Hello! How may I help you?";
+        String message = BOT_NAME + "Hello! How may I help you? Type \"help\" for more info.";
         System.out.println(message);
         return message;
     }
@@ -35,6 +35,20 @@ public class Ui {
      */
     public String sayGoodbye() {
         String message = BOT_NAME + "Bye. Hope to see you again!";
+        System.out.println(message);
+        return message;
+    }
+
+    public String giveHelp() {
+        String message = "Commands available:\n" +
+                "todo <description> - add a todo eg. \"todo CS2103T quiz\".\n" +
+                "deadline <description> - add a deadline eg. \"deadline CS2101 OP1 slides /by tomorrow\".\n" +
+                "event <description> - add an event eg. \"event Duke's birthday party /at 2021-8-10\".\n" +
+                "done <n> - mark task number 'n' as done eg. \"done 1\".\n" +
+                "delete <n> - delete task with task number 'n' eg. \"delete 2\".\n" +
+                "find - find tasks with matching descriptions eg. \"find CS2101\".\n" +
+                "list - to list out current tasks, if any.\n" +
+                "bye - to exit Duke.";
         System.out.println(message);
         return message;
     }

@@ -2,7 +2,7 @@
  * Represents a Task. A <code>Task</code> object contains a description, keeps track of
  * whether it has been completed and stores a type.
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected Type type;
@@ -11,13 +11,12 @@ public class Task {
      * Task types available.
      */
     public enum Type {
-        TODO, DEADLINE, EVENT, NONE
+        TODO, DEADLINE, EVENT
     }
 
     protected Task(String desc) {
         this.description = desc;
         this.isDone = false;
-        this.type = Type.NONE;
     }
 
     @Override
@@ -26,30 +25,11 @@ public class Task {
     }
 
     protected String getStatusIcon() {
-        String icon = (isDone ? "\u2713" : "\u2718");
+        String icon = (isDone ? "\u2713" : "\u2718"); // 2713 tick, 2718 cross
         return "[" + icon + "]";
     }
 
-    protected String getTypeIcon() {
-        String icon;
-        switch (type) {
-        case TODO:
-            icon = "T";
-            break;
-        case DEADLINE:
-            icon = "D";
-            break;
-        case EVENT:
-            icon = "E";
-            break;
-        case NONE:
-            icon = "?";
-            break;
-        default:
-            icon = "!";
-        }
-        return "[" + icon + "]";
-    }
+    protected abstract String getTypeIcon();
 
     public void markDone() {
         isDone = true;
