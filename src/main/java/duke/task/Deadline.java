@@ -8,9 +8,7 @@ import java.time.format.DateTimeParseException;
  * Deadline class that represents a Task with a deadline. Extends from the Task class.
  */
 
-public class Deadline extends Task {
-
-    private final LocalDateTime deadline;
+public class Deadline extends DatedTask {
 
     /**
      * Constructor that creates a Deadline object that has a description of the
@@ -26,9 +24,7 @@ public class Deadline extends Task {
 
     public Deadline(String description, String deadline, boolean isDone)
             throws DateTimeParseException {
-        super(description, "D", isDone);
-        this.deadline = LocalDateTime.parse(deadline,
-                DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+        super(description, "D", deadline, isDone);
     }
 
     /**
@@ -41,13 +37,13 @@ public class Deadline extends Task {
     @Override
     public String toSave() {
         return String.format("%s | %s", super.toSave(),
-                this.deadline.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm")));
+                this.time.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm")));
     }
 
     @Override
     public String toString() {
         return String.format("%s (by: %s)", super.toString(),
-                this.deadline.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm")));
+                this.time.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm")));
     }
 
 }

@@ -8,9 +8,7 @@ import java.time.format.DateTimeParseException;
  * Event class that represents a Task that is an event. Extends from the Task class.
  */
 
-public class Event extends Task {
-
-    private final LocalDateTime time;
+public class Event extends DatedTask {
 
     /**
      * Constructor that creates an Event object that has a description of the
@@ -26,9 +24,7 @@ public class Event extends Task {
 
     public Event(String description, String time, boolean isDone)
             throws DateTimeParseException {
-        super(description, "E", isDone);
-        this.time = LocalDateTime.parse(time,
-                DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+        super(description, "E", time, isDone);
     }
 
     /**

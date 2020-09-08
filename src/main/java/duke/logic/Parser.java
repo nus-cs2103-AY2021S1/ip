@@ -9,6 +9,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.ToDoCommand;
+import duke.command.UpdateCommand;
 import duke.resource.Wrapper;
 
 import java.util.ArrayList;
@@ -36,6 +37,7 @@ public class Parser {
             "todo", new ToDoCommand(),
             "event", new EventCommand(),
             "delete", new DeleteCommand(),
+            "update", new UpdateCommand(),
             "deadline", new DeadlineCommand()
     );
 

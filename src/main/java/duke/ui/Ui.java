@@ -124,6 +124,9 @@ public class Ui {
         return ret.toString();
     }
 
+    public String showUpdate(Task task) {
+        return String.format("I have updated this task:\n%s", task.toString());
+    }
 
     /**
      * Prints a welcome message for the user.
