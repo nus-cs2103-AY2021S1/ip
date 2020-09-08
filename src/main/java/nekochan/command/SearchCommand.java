@@ -5,8 +5,8 @@ import java.util.List;
 
 import nekochan.exceptions.IncompleteNekoCommandException;
 import nekochan.model.NekoHistory;
+import nekochan.model.task.Task;
 import nekochan.storage.Storage;
-import nekochan.task.Task;
 import nekochan.util.Messages;
 
 /**

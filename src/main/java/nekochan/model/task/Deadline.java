@@ -1,4 +1,4 @@
-package nekochan.task;
+package nekochan.model.task;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,11 +17,21 @@ public class Deadline extends Task {
 
     private static final String DEADLINE_DELIMITER = "by";
 
-    private LocalDateTime due;
+    private final LocalDateTime due;
 
     private Deadline(String description, LocalDateTime due) {
         super(description);
         this.due = due;
+    }
+
+    private Deadline(String description, LocalDateTime due, boolean isCompleted) {
+        super(description, isCompleted);
+        this.due = due;
+    }
+
+    @Override
+    public Deadline setCompleted() {
+        return new Deadline(description, due, true);
     }
 
     /**
@@ -100,7 +110,7 @@ public class Deadline extends Task {
     @Override
     public Deadline deepCopy() {
         // Both description and due are immutable.
-        return new Deadline(description, due);
+        return new Deadline(description, due, isCompleted);
     }
 
     /**

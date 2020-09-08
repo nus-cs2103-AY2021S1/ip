@@ -1,4 +1,4 @@
-package nekochan.task;
+package nekochan.model.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;

@@ -1,9 +1,18 @@
-package nekochan.task;
+package nekochan.model.task;
 
 public class ConcreteTaskStub extends Task {
 
     ConcreteTaskStub(String description) {
         super(description);
+    }
+
+    ConcreteTaskStub(String description, boolean isCompleted) {
+        super(description, isCompleted);
+    }
+
+    @Override
+    public ConcreteTaskStub setCompleted() {
+        return new ConcreteTaskStub(description, true);
     }
 
     @Override

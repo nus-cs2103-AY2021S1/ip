@@ -9,9 +9,9 @@ import nekochan.exceptions.NekoException;
 import nekochan.exceptions.NekoHistoryException;
 import nekochan.exceptions.NekoSimilarTaskException;
 import nekochan.exceptions.NekoStorageException;
+import nekochan.model.task.Task;
+import nekochan.model.task.TaskList;
 import nekochan.storage.Storage;
-import nekochan.task.Task;
-import nekochan.task.TaskList;
 import nekochan.util.Messages;
 
 /**
@@ -33,12 +33,11 @@ public class NekoHistory {
         version = 0;
     }
 
-    private void saveState() {
+    private void saveState(TaskList nextState) {
         if (version != histories.size() - 1) {
             histories.subList(version + 1, histories.size()).clear();
         }
-        TaskList newVersion = new TaskList(getCurrent());
-        histories.add(newVersion);
+        histories.add(nextState);
         version++;
     }
 
@@ -70,8 +69,9 @@ public class NekoHistory {
      */
     public Task addTask(Task task) throws NekoSimilarTaskException, NekoDuplicateTaskException {
         try {
-            saveState();
-            return getCurrent().addTask(task);
+            TaskList nextState = getCurrent().addTask(task);
+            saveState(nextState);
+            return task;
         } catch (NekoDuplicateTaskException e) {
             revertState();
             throw e;
@@ -86,8 +86,9 @@ public class NekoHistory {
      */
     public Task markAsComplete(int index) {
         try {
-            saveState();
-            return getCurrent().markAsComplete(index);
+            TaskList nextState = getCurrent().markAsComplete(index);
+            saveState(nextState);
+            return nextState.getTask(index);
         } catch (NekoException e) {
             revertState();
             throw e;
@@ -102,8 +103,10 @@ public class NekoHistory {
      */
     public Task deleteTask(int index) {
         try {
-            saveState();
-            return getCurrent().deleteTask(index);
+            Task deletedTask = getCurrent().getTask(index);
+            TaskList nextState = getCurrent().deleteTask(index);
+            saveState(nextState);
+            return deletedTask;
         } catch (NekoException e) {
             revertState();
             throw e;
@@ -115,8 +118,7 @@ public class NekoHistory {
      */
     public void clearAllTasks() {
         try {
-            saveState();
-            getCurrent().clearList();
+            saveState(getCurrent().clearList());
         } catch (NekoException e) {
             revertState();
             throw e;

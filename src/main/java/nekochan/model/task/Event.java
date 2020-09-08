@@ -1,4 +1,4 @@
-package nekochan.task;
+package nekochan.model.task;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,13 +23,24 @@ public class Event extends Task {
 
     private static final String ALL_DAY_KEYWORD = "all day";
 
-    private LocalDateTime startDateTime;
-    private LocalDateTime endDateTime;
+    private final LocalDateTime startDateTime;
+    private final LocalDateTime endDateTime;
 
     private Event(String description, LocalDateTime start, LocalDateTime end) {
         super(description);
         startDateTime = start;
         endDateTime = end;
+    }
+
+    private Event(String description, LocalDateTime start, LocalDateTime end, boolean isCompleted) {
+        super(description, isCompleted);
+        startDateTime = start;
+        endDateTime = end;
+    }
+
+    @Override
+    public Event setCompleted() {
+        return new Event(description, startDateTime, endDateTime, true);
     }
 
     private static Event createAllDayEvent(String description, String dateTimeComponent) {
@@ -162,7 +173,7 @@ public class Event extends Task {
 
     @Override
     public Event deepCopy() {
-        return new Event(description, startDateTime, endDateTime);
+        return new Event(description, startDateTime, endDateTime, isCompleted);
     }
 
     /**

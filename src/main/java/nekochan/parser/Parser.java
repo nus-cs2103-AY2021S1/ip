@@ -11,7 +11,7 @@ import nekochan.command.RedoCommand;
 import nekochan.command.SearchCommand;
 import nekochan.command.UndoCommand;
 import nekochan.exceptions.ParseNekoCommandException;
-import nekochan.task.TaskType;
+import nekochan.model.task.TaskType;
 import nekochan.util.Messages;
 
 /**

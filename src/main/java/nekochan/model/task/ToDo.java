@@ -1,4 +1,4 @@
-package nekochan.task;
+package nekochan.model.task;
 
 import nekochan.exceptions.NekoStorageException;
 import nekochan.exceptions.NekoTaskCreationException;
@@ -12,6 +12,15 @@ public class ToDo extends Task {
 
     private ToDo(String description) {
         super(description);
+    }
+
+    private ToDo(String description, boolean isCompleted) {
+        super(description, isCompleted);
+    }
+
+    @Override
+    public ToDo setCompleted() {
+        return new ToDo(description, true);
     }
 
     /**
@@ -76,7 +85,7 @@ public class ToDo extends Task {
 
     @Override
     public ToDo deepCopy() {
-        return new ToDo(description);
+        return new ToDo(description, isCompleted);
     }
 
     /**

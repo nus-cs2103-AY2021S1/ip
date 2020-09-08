@@ -12,11 +12,11 @@ import java.util.List;
 import java.util.Scanner;
 
 import nekochan.exceptions.NekoStorageException;
-import nekochan.task.Deadline;
-import nekochan.task.Event;
-import nekochan.task.Task;
-import nekochan.task.TaskList;
-import nekochan.task.ToDo;
+import nekochan.model.task.Deadline;
+import nekochan.model.task.Event;
+import nekochan.model.task.Task;
+import nekochan.model.task.TaskList;
+import nekochan.model.task.ToDo;
 import nekochan.util.Messages;
 
 /**

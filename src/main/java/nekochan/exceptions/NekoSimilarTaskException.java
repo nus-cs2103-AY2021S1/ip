@@ -2,7 +2,7 @@ package nekochan.exceptions;
 
 import java.util.List;
 
-import nekochan.task.Task;
+import nekochan.model.task.Task;
 
 public class NekoSimilarTaskException extends NekoException {
 

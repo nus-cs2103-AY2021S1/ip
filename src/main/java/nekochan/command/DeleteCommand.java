@@ -2,9 +2,9 @@ package nekochan.command;
 
 import nekochan.exceptions.IncompleteNekoCommandException;
 import nekochan.model.NekoHistory;
+import nekochan.model.task.Task;
+import nekochan.model.task.TaskList;
 import nekochan.storage.Storage;
-import nekochan.task.Task;
-import nekochan.task.TaskList;
 import nekochan.util.Messages;
 
 /**

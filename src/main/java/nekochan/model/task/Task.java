@@ -1,4 +1,4 @@
-package nekochan.task;
+package nekochan.model.task;
 
 import nekochan.Encodable;
 import nekochan.Searchable;
@@ -17,8 +17,8 @@ public abstract class Task implements Encodable<Task>, Searchable {
     private static final String INCOMPLETE_ICON = "\u2718";
 
 
-    protected String description;
-    protected boolean isCompleted;
+    protected final String description;
+    protected final boolean isCompleted;
 
     /**
      * Constructs an instance of a task.
@@ -27,19 +27,21 @@ public abstract class Task implements Encodable<Task>, Searchable {
      * @throws NekoTaskCreationException if the {@code description} is empty.
      */
     protected Task(String description) throws NekoTaskCreationException {
+        this(description, false);
+    }
+
+    protected Task(String description, boolean isCompleted) throws NekoTaskCreationException {
         if (description.trim().length() == 0) {
             throw new NekoTaskCreationException(Messages.PARSE_TASK_DESCRIPTION_ERROR);
         }
         this.description = description;
-        isCompleted = false;
+        this.isCompleted = isCompleted;
     }
 
     /**
      * Marks a task as complete.
      */
-    public void setCompleted() {
-        isCompleted = true;
-    }
+    public abstract Task setCompleted();
 
     abstract boolean isSimilar(Object obj);
 

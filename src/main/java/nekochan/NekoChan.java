@@ -4,9 +4,9 @@ import nekochan.command.Command;
 import nekochan.command.Response;
 import nekochan.exceptions.NekoStorageException;
 import nekochan.model.NekoHistory;
+import nekochan.model.task.TaskList;
 import nekochan.parser.Parser;
 import nekochan.storage.Storage;
-import nekochan.task.TaskList;
 
 /**
  * The {@code NekoChan} class controls the logic of the chat bot.

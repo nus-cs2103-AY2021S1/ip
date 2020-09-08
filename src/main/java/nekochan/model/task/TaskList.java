@@ -1,4 +1,4 @@
-package nekochan.task;
+package nekochan.model.task;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,6 +8,7 @@ import java.util.stream.Stream;
 import nekochan.exceptions.NekoDuplicateTaskException;
 import nekochan.exceptions.NekoException;
 import nekochan.exceptions.NekoSimilarTaskException;
+import nekochan.exceptions.NekoTaskNotFoundException;
 import nekochan.util.Messages;
 
 /**
@@ -54,7 +55,7 @@ public class TaskList {
      * @throws NekoSimilarTaskException if a similar copy of {@code task} exists.
      * @throws NekoDuplicateTaskException if a duplicate copy of {@code task} exists.
      */
-    public Task addTask(Task task) throws NekoSimilarTaskException, NekoDuplicateTaskException {
+    public TaskList addTask(Task task) throws NekoSimilarTaskException, NekoDuplicateTaskException {
         // Do not add task if there is an exact copy.
         boolean hasDuplicate = store.stream().anyMatch((x) -> x.equals(task));
         if (hasDuplicate) {
@@ -64,11 +65,12 @@ public class TaskList {
         // Add task but show an error if there is a similar task.
         List<Task> similars = store.stream().filter((x) -> x.isSimilar(task)).collect(Collectors.toList());
         boolean hasSimilars = similars.size() > 0;
-        store.add(task);
+        TaskList nextState = new TaskList(this);
+        nextState.store.add(task);
         if (hasSimilars) {
             throw new NekoSimilarTaskException(Messages.SIMILAR_TASK_ERROR, similars);
         }
-        return task;
+        return nextState;
     }
 
     /**
@@ -76,13 +78,14 @@ public class TaskList {
      *
      * @param index the index of the {@code Task} to mark as complete.
      * @return the {@code Task} that was marked as complete.
-     * @throws NekoException if the index is out of range.
+     * @throws NekoTaskNotFoundException if the index is out of range.
      */
-    public Task markAsComplete(int index) throws NekoException {
+    public TaskList markAsComplete(int index) throws NekoTaskNotFoundException {
         try {
+            TaskList nextState = new TaskList(this);
             Task selected = store.get(index);
-            selected.setCompleted();
-            return selected;
+            nextState.store.set(index, selected.setCompleted());
+            return nextState;
         } catch (IndexOutOfBoundsException e) {
             throw new NekoException(Messages.MISSING_TASK_ERROR);
         }
@@ -93,21 +96,23 @@ public class TaskList {
      *
      * @param index the index of the {@code Task} to delete.
      * @return the {@code Task} that was deleted.
-     * @throws NekoException if the index is out of range.
+     * @throws NekoTaskNotFoundException if the index is out of range.
      */
-    public Task deleteTask(int index) throws NekoException {
+    public TaskList deleteTask(int index) throws NekoTaskNotFoundException {
         try {
-            return store.remove(index);
+            TaskList nextState = new TaskList(this);
+            nextState.store.remove(index);
+            return nextState;
         } catch (IndexOutOfBoundsException e) {
-            throw new NekoException(Messages.MISSING_TASK_ERROR);
+            throw new NekoTaskNotFoundException(Messages.MISSING_TASK_ERROR);
         }
     }
 
     /**
      * Deletes all existing {@code Task} in this {@code TaskList}.
      */
-    public void clearList() {
-        store = new ArrayList<>();
+    public TaskList clearList() {
+        return new TaskList();
     }
 
     /**
@@ -126,5 +131,13 @@ public class TaskList {
      */
     public Stream<Task> getStream() {
         return this.store.stream();
+    }
+
+    public Task getTask(int index) throws NekoTaskNotFoundException {
+        try {
+            return this.store.get(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new NekoTaskNotFoundException(Messages.MISSING_TASK_ERROR);
+        }
     }
 }

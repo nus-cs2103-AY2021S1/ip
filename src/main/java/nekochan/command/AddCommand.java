@@ -6,12 +6,12 @@ import nekochan.exceptions.IncompleteNekoCommandException;
 import nekochan.exceptions.NekoException;
 import nekochan.exceptions.NekoSimilarTaskException;
 import nekochan.model.NekoHistory;
+import nekochan.model.task.Deadline;
+import nekochan.model.task.Event;
+import nekochan.model.task.Task;
+import nekochan.model.task.TaskType;
+import nekochan.model.task.ToDo;
 import nekochan.storage.Storage;
-import nekochan.task.Deadline;
-import nekochan.task.Event;
-import nekochan.task.Task;
-import nekochan.task.TaskType;
-import nekochan.task.ToDo;
 import nekochan.util.Messages;
 
 /**

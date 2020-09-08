@@ -1,4 +1,4 @@
-package nekochan.task;
+package nekochan.model.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -29,7 +29,7 @@ public class TaskTest {
     @Test
     public void setCompleted_success() {
         ConcreteTaskStub task = new ConcreteTaskStub("Description");
-        task.setCompleted();
-        assertEquals("[\u2713] Description", task.toString());
+        ConcreteTaskStub completedTask = task.setCompleted();
+        assertEquals("[\u2713] Description", completedTask.toString());
     }
 }
