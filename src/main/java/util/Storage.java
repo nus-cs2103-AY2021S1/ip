@@ -104,7 +104,7 @@ public class Storage {
             throw new DukeException("Sorry, something went wrong and I couldn't save my data... ");
         }
         // List should at most have 100 tasks.
-        assert list.size() == 100;
+        assert list.size() <= 100;
         for (int i = 0; i < list.size(); i++) {
             // Try to write into save file
             try {
