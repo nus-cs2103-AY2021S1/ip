@@ -41,7 +41,7 @@ public class Storage {
         Scanner scanner = new Scanner(data); // create a Scanner using the File as the source
         while (scanner.hasNext()) {
             // File should not be more than 100 lines
-            assert list.size() != 100;
+            assert tasks.size() != 100;
             // Read the data line
             String dataLine = scanner.nextLine();
             // Split data line into components
