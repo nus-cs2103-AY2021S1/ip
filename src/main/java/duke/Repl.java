@@ -5,7 +5,6 @@ import java.util.Scanner;
 import duke.enums.Command;
 import duke.exceptions.DukeException;
 import duke.messages.DukeResponse;
-import duke.tasks.TaskManager;
 import duke.utils.PrettyPrinter;
 import duke.utils.ResourceHandler;
 
@@ -23,8 +22,6 @@ public class Repl {
     private static final Scanner scanner = new Scanner(System.in);
     /** {@code PrettyPrinter} object for formatting the REPL output. */
     private static final PrettyPrinter prettyPrinter = new PrettyPrinter(LEFT_PADDING_SIZE, DIVIDER_LENGTH);
-    /** {@code TaskManager} object to keep track of tasks. */
-    private static final TaskManager taskManager = new TaskManager();
 
     /**
      * Runs the REPL.
@@ -55,7 +52,7 @@ public class Repl {
             // Check that the user input is of the correct format for the command.
             command.validate(input);
             // Execute the command.
-            dukeResponse = command.execute(taskManager, input);
+            dukeResponse = command.execute(input);
         } catch (DukeException e) {
             dukeResponse = new DukeResponse(e.getMessage());
         } catch (IllegalArgumentException e) {

@@ -47,7 +47,7 @@ public class PersistentMap<K, V> implements Map<K, V> {
      */
     private void syncStateToFile() {
         try {
-            storageManager.saveToFile(gson.toJson(map));
+            storageManager.saveToFile(gson.toJson(map, mapType));
         } catch (IOException e) {
             System.err.println(e.getMessage());
         }

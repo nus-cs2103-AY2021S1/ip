@@ -10,13 +10,54 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.TaskManager;
 import duke.tasks.ToDo;
+import duke.utils.AliasManager;
 import duke.utils.DateTimeParser;
 import duke.utils.ResourceHandler;
+import duke.utils.Store;
 
 /**
  * Commands that can be used in <i>Duke</i>.
  */
 public enum Command {
+    /**
+     * Defines an alias for a command.
+     */
+    ALIAS {
+        /**
+         * Validates whether the user input is of the correct format for the 'alias' command.
+         *
+         * @param input the user input.
+         * @throws DukeException if the user input is invalid.
+         */
+        @Override
+        public void validate(String input) throws DukeException {
+            String regex = "^(?i)alias\\s+\\S+\\s+\\S+\\s*$|^alias\\s+-l$$";
+            if (!Pattern.matches(regex, input)) {
+                String template = String.format("%s\n%s", ResourceHandler.getString("exception.invalidArgs"),
+                        ResourceHandler.getString("command.aliasFormat"));
+                String message = MessageFormat.format(template, "alias");
+                throw new DukeException(message);
+            }
+        }
+
+        /**
+         * Executes the 'alias' command.
+         *
+         * @param input the user input.
+         * @return the output of running the 'alias' command.
+         */
+        @Override
+        public DukeResponse execute(String input) {
+            String lineWithoutCommand = input.replaceFirst("^alias", "");
+            String[] args = lineWithoutCommand.split("\\s+", 2);
+            String commandString = args[0].trim();
+            String alias = args[1].trim();
+            Command command = Command.valueOf(commandString.toUpperCase());
+            String response = aliasManager.addAlias(alias, command);
+            return new DukeResponse(response);
+        }
+    },
+
     /**
      * Terminates the running of <i>Duke</i>.
      */
@@ -40,12 +81,11 @@ public enum Command {
         /**
          * Executes the 'bye' command.
          *
-         * @param taskManager the {@code TaskManager} object that is keeping track of tasks.
          * @param input the user input.
          * @return the output of running the 'bye' command.
          */
         @Override
-        public DukeResponse execute(TaskManager taskManager, String input) {
+        public DukeResponse execute(String input) {
             String response = ResourceHandler.getString("repl.farewell");
             // Return a `DukeResponse` with the exit flag enabled.
             return new DukeResponse(response, true);
@@ -76,13 +116,12 @@ public enum Command {
         /**
          * Executes the 'deadline' command.
          *
-         * @param taskManager the {@code TaskManager} object that is keeping track of tasks.
          * @param input the user input.
          * @return the output of running the 'deadline' command.
          * @throws DukeException if an error occurs while running the 'deadline' command.
          */
         @Override
-        public DukeResponse execute(TaskManager taskManager, String input) throws DukeException {
+        public DukeResponse execute(String input) throws DukeException {
             String lineWithoutCommand = input.replaceFirst("^deadline", "");
             String[] args = lineWithoutCommand.split("/by", 2);
             String deadlineName = args[0].trim();
@@ -117,16 +156,15 @@ public enum Command {
         /**
          * Executes the 'delete' command.
          *
-         * @param taskManager the {@code TaskManager} object that is keeping track of tasks.
          * @param input the user input.
          * @return the output of running the 'delete' command.
          */
         @Override
-        public DukeResponse execute(TaskManager taskManager, String input) {
+        public DukeResponse execute(String input) {
             String lineWithoutCommand = input.replaceFirst("^delete", "");
-            String listIndexStr = lineWithoutCommand.trim();
-            // `listIndexStr` is guaranteed to be a string made up of only digit characters after validation.
-            int listIndex = Integer.parseInt(listIndexStr) - 1;
+            String listIndexString = lineWithoutCommand.trim();
+            // `listIndexString` is guaranteed to be a string made up of only digit characters after validation.
+            int listIndex = Integer.parseInt(listIndexString) - 1;
             String response;
             try {
                 response = taskManager.removeTask(listIndex);
@@ -162,16 +200,15 @@ public enum Command {
         /**
          * Executes the 'done' command.
          *
-         * @param taskManager the {@code TaskManager} object that is keeping track of tasks.
          * @param input the user input.
          * @return the output of running the 'done' command.
          */
         @Override
-        public DukeResponse execute(TaskManager taskManager, String input) {
+        public DukeResponse execute(String input) {
             String lineWithoutCommand = input.replaceFirst("^done", "");
-            String listIndexStr = lineWithoutCommand.trim();
-            // `listIndexStr` is guaranteed to be a string made up of only digit characters after validation.
-            int listIndex = Integer.parseInt(listIndexStr) - 1;
+            String listIndexString = lineWithoutCommand.trim();
+            // `listIndexString` is guaranteed to be a string made up of only digit characters after validation.
+            int listIndex = Integer.parseInt(listIndexString) - 1;
             String response;
             try {
                 response = taskManager.markAsDone(listIndex);
@@ -207,13 +244,12 @@ public enum Command {
         /**
          * Executes the 'event' command.
          *
-         * @param taskManager the {@code TaskManager} object that is keeping track of tasks.
          * @param input the user input.
          * @return the output of running the 'event' command.
          * @throws DukeException if an error occurs while running the 'event' command.
          */
         @Override
-        public DukeResponse execute(TaskManager taskManager, String input) throws DukeException {
+        public DukeResponse execute(String input) throws DukeException {
             String lineWithoutCommand = input.replaceFirst("^event", "");
             String[] args = lineWithoutCommand.split("/at", 2);
             String eventName = args[0].trim();
@@ -248,12 +284,11 @@ public enum Command {
         /**
          * Executes the 'find' command.
          *
-         * @param taskManager the {@code TaskManager} object that is keeping track of tasks.
          * @param input the user input.
          * @return the output of running the 'find' command.
          */
         @Override
-        public DukeResponse execute(TaskManager taskManager, String input) {
+        public DukeResponse execute(String input) {
             String lineWithoutCommand = input.replaceFirst("^find", "");
             String[] searchKeywords = lineWithoutCommand.trim().split("\\s+");
             String response = taskManager.getMatchingTasks(searchKeywords);
@@ -284,12 +319,11 @@ public enum Command {
         /**
          * Executes the 'list' command.
          *
-         * @param taskManager the {@code TaskManager} object that is keeping track of tasks.
          * @param input the user input.
          * @return the output of running the 'list' command.
          */
         @Override
-        public DukeResponse execute(TaskManager taskManager, String input) {
+        public DukeResponse execute(String input) {
             String response = taskManager.toString();
             return new DukeResponse(response);
         }
@@ -318,12 +352,11 @@ public enum Command {
         /**
          * Executes the 'overdue' command.
          *
-         * @param taskManager the {@code TaskManager} object that is keeping track of tasks.
          * @param input the user input.
          * @return the output of running the 'overdue' command.
          */
         @Override
-        public DukeResponse execute(TaskManager taskManager, String input) {
+        public DukeResponse execute(String input) {
             String response = taskManager.getOverdueTasks();
             return new DukeResponse(response);
         }
@@ -353,12 +386,11 @@ public enum Command {
         /**
          * Executes the 'todo' command.
          *
-         * @param taskManager the {@code TaskManager} object that is keeping track of tasks.
          * @param input the user input.
          * @return the output of running the 'todo' command.
          */
         @Override
-        public DukeResponse execute(TaskManager taskManager, String input) {
+        public DukeResponse execute(String input) {
             String lineWithoutCommand = input.replaceFirst("^todo", "");
             String toDoName = lineWithoutCommand.trim();
             String response = taskManager.addTask(new ToDo(toDoName));
@@ -389,16 +421,20 @@ public enum Command {
         /**
          * Executes the 'upcoming' command.
          *
-         * @param taskManager the {@code TaskManager} object that is keeping track of tasks.
          * @param input the user input.
          * @return the output of running the 'upcoming' command.
          */
         @Override
-        public DukeResponse execute(TaskManager taskManager, String input) {
+        public DukeResponse execute(String input) {
             String response = taskManager.getUpcomingTasks();
             return new DukeResponse(response);
         }
     };
+
+    /** {@code TaskManager} object that is keeping track of tasks. */
+    private static final TaskManager taskManager = Store.getTaskManager();
+    /** {@code AliasManager} object that is keeping track of aliases. */
+    private static final AliasManager aliasManager = Store.getAliasManager();
 
     /**
      * Validates whether the user input is of the correct format.
@@ -411,10 +447,9 @@ public enum Command {
     /**
      * Executes the command.
      *
-     * @param taskManager the {@code TaskManager} object that is keeping track of tasks.
      * @param input the user input.
      * @return a {@code DukeResponse}.
      * @throws DukeException if an error occurs while running the command.
      */
-    public abstract DukeResponse execute(TaskManager taskManager, String input) throws DukeException;
+    public abstract DukeResponse execute(String input) throws DukeException;
 }

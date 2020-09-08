@@ -1,7 +1,6 @@
 package duke.tasks;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -18,7 +17,7 @@ import duke.utils.ResourceHandler;
 public class TaskManager {
     /** List of {@code Task} objects. */
     private final List<Task> tasks = new PersistentList<>("./data/tasks.txt",
-            new TypeToken<ArrayList<Task>>(){}.getType(),
+            new TypeToken<List<Task>>(){}.getType(),
             RuntimeTypeAdapterFactory.of(Task.class)
                     .registerSubtype(Deadline.class)
                     .registerSubtype(Event.class)
