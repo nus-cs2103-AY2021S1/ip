@@ -28,6 +28,11 @@ public class Storage {
         this.directoryPath = directoryPath;
         this.filePath = filePath;
         this.lines = new ArrayList<String>();
+        try {
+            this.processData();
+        } catch (IOException ignored) {
+            //Exceptions are ignored as processData() checks if the path is valid, if not create the path
+        }
     }
 
     /**
@@ -51,6 +56,7 @@ public class Storage {
         if (!data.exists()) {
             data.createNewFile();
         }
+        assert data.exists() : "file does not exist!";
         Scanner fileReader = new Scanner(data);
         StringBuffer buffer = new StringBuffer();
         while (fileReader.hasNextLine()) {
@@ -65,8 +71,7 @@ public class Storage {
     }
 
     /**
-     * Simply returns the ArrayList. Call this method only after calling processData or else you will only get an empty
-     * ArrayList.
+     * Simply returns the ArrayList.
      *
      * @return the ArrayList stored in the class.
      */

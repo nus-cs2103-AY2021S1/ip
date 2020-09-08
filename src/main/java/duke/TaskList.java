@@ -49,6 +49,8 @@ public class TaskList {
      * @param index the index of the task to be replaced.
      */
     public void updateTask(String task, int index) {
+        // Index has to be a valid index in lines
+        assert index <= (lines.size() - 1) && index >= 0 : "Invalid Index";
         lines.set(index, task);
     }
 

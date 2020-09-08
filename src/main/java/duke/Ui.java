@@ -27,6 +27,7 @@ public class Ui {
      */
 
     public static String updateDoneTask(String doneTask) {
+        assert doneTask.length() >= 5 : "Invalid task done";
         return doneTask.substring(0, 4) + "\u2713" + doneTask.substring(5);
     }
 
