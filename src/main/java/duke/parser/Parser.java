@@ -31,8 +31,8 @@ public class Parser {
             return prepareAddEvent(input);
         } else if ("list".equals(input)) {
             return new ListCommand(input);
-        } else if (input.startsWith("done")) {
-            return prepareUpdateTask(input);
+        } else if (input.startsWith("done") || isPriority(input)) {
+            return prepareUpdateStatus(input);
         } else if (input.startsWith("delete")) {
             return prepareDeleteTask(input);
         } else if (input.startsWith("find")) {
@@ -59,9 +59,10 @@ public class Parser {
         return new AddCommand(AddCommand.Type.EVENT, description);
     }
 
-    private static Command prepareUpdateTask(String command) {
-        String todoIndex = command.substring(4).trim();
-        return new UpdateCommand(command, todoIndex);
+    private static Command prepareUpdateStatus(String command) {
+        String index = command.replaceAll("[^0-9]", "");
+        String word = command.replaceAll("[^A-Za-z]", "");
+        return new UpdateCommand(word, index);
     }
 
     private static Command prepareDeleteTask(String command) {
@@ -72,6 +73,10 @@ public class Parser {
     private static Command prepareFindTask(String command) {
         String keyword = command.substring(4).trim();
         return new FindCommand(keyword);
+    }
+
+    private static boolean isPriority(String command) {
+        return command.startsWith("high") || command.startsWith("low") || command.startsWith("mid");
     }
 }
 
