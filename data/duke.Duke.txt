@@ -1,4 +1,4 @@
-D, 0, 2105 Assignment , 2020-08-18
-E, 0, Meeting with Val , 2020-09-07 10AM
-E, 0, Meeting with Christal , 2020-09-07 2000
-E, 0, Lunch with Erika , 2020-09-07 1250
+D, 0, 2105 Assignment , 2020-09-18
+D, 0, CS2100 Assignment , 2020-09-12
+E, 0, CS2105 tutorial , 2020-09-08 1500
+E, 0, CS2100 Lecture , 2020-09-08 1600

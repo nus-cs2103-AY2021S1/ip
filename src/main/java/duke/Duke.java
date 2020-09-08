@@ -85,7 +85,7 @@ public class Duke {
             case BYE:
                 return ui.bye();
         }
-        return input;
+        return DukeException.INVALID_COMMAND_EXCEPTION.toString();
     }
 
 
