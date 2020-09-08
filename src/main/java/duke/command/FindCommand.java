@@ -63,11 +63,9 @@ public class FindCommand extends Command {
      */
     protected TaskList getMatchingTasks(String searchString, TaskList taskList) {
         TaskList matchingList = new TaskList();
-        for (Task task : taskList) {
-            if (task.getTaskDescription().contains(searchString)) {
-                matchingList.add(task);
-            }
-        }
+        taskList.stream()
+                .filter(task -> task.getTaskDescription().contains(searchString))
+                .forEach(task -> matchingList.add(task));
         return matchingList;
     }
 
