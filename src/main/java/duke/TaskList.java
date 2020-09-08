@@ -41,12 +41,12 @@ public class TaskList {
     /**
      * Marks a task as done.
      *
-     * @param taskNumber Represents the task to be marked as done.
+     * @param taskNumber Represents the task to be marked as done, in array index form.
      * @return Task that is marked as done.
      * @throws DukeException if the task number is not within the range of the TaskList.
      */
     public Task markTaskDoneInList(int taskNumber) throws DukeException {
-        if (taskNumber < 0 || taskNumber > tasks.size()) {
+        if (taskNumber < 0 || taskNumber >= tasks.size()) {
             throw new DukeException("Please enter a valid task number\n");
         } else {
             Task task = tasks.get(taskNumber);
@@ -58,12 +58,12 @@ public class TaskList {
     /**
      * Deletes task from TaskList.
      *
-     * @param taskNumber Represents the task to be deleted.
+     * @param taskNumber Represents the task to be deleted, in array index form.
      * @return Task that is deleted
      * @throws DukeException if the task number is not within the range of the TaskList.
      */
     public Task deleteTaskFromList(int taskNumber) throws DukeException {
-        if (taskNumber < 0 || taskNumber > tasks.size()) {
+        if (taskNumber < 0 || taskNumber >= tasks.size()) {
             throw new DukeException("Please enter a valid task number\n");
         } else {
             Task task = tasks.get(taskNumber);
