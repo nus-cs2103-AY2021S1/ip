@@ -19,6 +19,7 @@ public class Deadline extends Task {
     }
 
     private String parseDateTime(String by) {
+        assert(by.length() == 10) : "Wrong date length";
         LocalDate d = LocalDate.parse(by);
         return d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
