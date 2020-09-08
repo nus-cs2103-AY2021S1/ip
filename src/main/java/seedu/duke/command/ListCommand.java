@@ -2,7 +2,7 @@ package seedu.duke.command;
 
 import seedu.duke.task.Task;
 import seedu.duke.TaskList;
-import seedu.duke.Ui;
+import seedu.duke.ui.Ui;
 
 /**
  * Class that represents the list command.

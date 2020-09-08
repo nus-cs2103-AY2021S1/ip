@@ -1,8 +1,7 @@
 package seedu.duke.command;
 
 import seedu.duke.TaskList;
-import seedu.duke.Ui;
-import seedu.duke.command.AddCommand;
+import seedu.duke.ui.Ui;
 import seedu.duke.task.ToDo;
 
 /**

@@ -9,6 +9,7 @@ import java.util.Locale;
 import seedu.duke.command.Command;
 import seedu.duke.exception.DukeException;
 import seedu.duke.task.Task;
+import seedu.duke.ui.Ui;
 
 /**
  * Runs the Duke program, where user types in commands to add, delete, and mark tasks as done.
@@ -54,31 +55,7 @@ public class Duke {
                 this.ui.bye();
             }
         }
-
-        try {
-            String tasks = "";
-
-            for (Task t : this.tasklist.getList()) {
-                String check = "";
-                if (t.isComplete()) {
-                    check = "\u2713";
-                } else {
-                    check = "\u2718";
-                }
-                String toAdd = t.getType() + "*" + check + "*" + t.toString();
-                String addition = "";
-                if (t.getTime() == null) {
-                    addition = "\n";
-                } else {
-                    addition = "*" + t.getTime().format(FORMATTER) + "\n";
-                }
-                tasks = tasks + toAdd + addition;
-            }
-
-            this.storage.save(tasks);
-        } catch (IOException e) {
-            this.ui.showError("Whoops! Some kind of error :/ see here: " + e.getMessage());
-        }
+        this.storage.save(this.tasklist, this.ui);
     }
 
     public static void main(String[] args) {
@@ -104,30 +81,7 @@ public class Duke {
         }
 
         if (isExit) {
-            try {
-                String tasks = "";
-
-                for (Task t : this.tasklist.getList()) {
-                    String check = "";
-                    if (t.isComplete()) {
-                        check = "\u2713";
-                    } else {
-                        check = "\u2718";
-                    }
-                    String toAdd = t.getType() + "*" + check + "*" + t.toString();
-                    String addition = "";
-                    if (t.getTime() == null) {
-                        addition = "\n";
-                    } else {
-                        addition = "*" + t.getTime().format(FORMATTER) + "\n";
-                    }
-                    tasks = tasks + toAdd + addition;
-                }
-
-                this.storage.save(tasks);
-            } catch (IOException e) {
-                this.ui.showError("Whoops! Some kind of error :/ see here: " + e.getMessage());
-            }
+            this.storage.save(this.tasklist, this.ui);
             this.ui.bye();
         }
 

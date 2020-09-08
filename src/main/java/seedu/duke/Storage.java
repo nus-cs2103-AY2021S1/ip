@@ -4,6 +4,7 @@ import seedu.duke.task.Deadline;
 import seedu.duke.task.Event;
 import seedu.duke.task.Task;
 import seedu.duke.task.ToDo;
+import seedu.duke.ui.Ui;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -69,13 +70,38 @@ public class Storage {
 
     /**
      * Writes the tasks from the current running Duke and saves it in a text file
-     * @param textToAdd The string version of the task to be added
-     * @throws IOException When the path is incorrect
+     * @param ls The list of tasks of the current Duke.
+     * @param ui The Ui of the current Duke.
      */
-    public void save(String textToAdd) throws IOException {
-        FileWriter fw = new FileWriter(this.path);
-        fw.write(textToAdd + System.lineSeparator());
-        fw.close();
+    public void save(TaskList ls, Ui ui) {
+        try {
+            String tasks = "";
+
+            for (Task t : ls.getList()) {
+                String check = "";
+                if (t.isComplete()) {
+                    check = "\u2713";
+                } else {
+                    check = "\u2718";
+                }
+                String toAdd = t.getType() + "*" + check + "*" + t.toString();
+                String addition = "";
+                if (t.getTime() == null) {
+                    addition = "\n";
+                } else {
+                    addition = "*" + t.getTime().format(FORMATTER) + "\n";
+                }
+                tasks = tasks + toAdd + addition;
+            }
+            FileWriter fw = new FileWriter(this.path);
+
+            fw.write(tasks + System.lineSeparator());
+
+            fw.close();
+        } catch (IOException e) {
+            ui.showError("Whoops! Some kind of error :/ see here: " + e.getMessage());
+        }
+
     }
 
 

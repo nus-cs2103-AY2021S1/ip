@@ -4,6 +4,7 @@ import seedu.duke.*;
 import seedu.duke.exception.DukeException;
 import seedu.duke.exception.DukeNotSureException;
 import seedu.duke.task.Task;
+import seedu.duke.ui.Ui;
 
 /**
  * Class that represents marking a task as done.

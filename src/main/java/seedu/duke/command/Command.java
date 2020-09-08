@@ -2,7 +2,7 @@ package seedu.duke.command;
 
 import seedu.duke.exception.DukeException;
 import seedu.duke.TaskList;
-import seedu.duke.Ui;
+import seedu.duke.ui.Ui;
 
 /**
  * Class that represents user commands.

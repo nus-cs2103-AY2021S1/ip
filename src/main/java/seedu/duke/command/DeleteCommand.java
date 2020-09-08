@@ -3,7 +3,7 @@ package seedu.duke.command;
 import seedu.duke.exception.DukeNotSureException;
 import seedu.duke.task.Task;
 import seedu.duke.TaskList;
-import seedu.duke.Ui;
+import seedu.duke.ui.Ui;
 
 /**
  * A command that deletes a task.
