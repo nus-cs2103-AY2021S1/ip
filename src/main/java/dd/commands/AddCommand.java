@@ -30,7 +30,10 @@ public class AddCommand extends Command {
     }
 
     private String addTodo() {
+        int initialNum = tasks.getTaskSize();
         tasks.addTask(new Todo(item));
+
+        assert (tasks.getTaskSize() - initialNum) == 1 : "failed adding todo task";
 
         return ui.startAddTodo(tasks.getLastTask()) + "\n" + ui.printTasksSize(tasks.getTaskSize());
     }
@@ -44,8 +47,11 @@ public class AddCommand extends Command {
 
             if (isValidInput) {
                 // valid
+                int initialNum = tasks.getTaskSize();
                 String formattedDate = dth.categorizeInput(temp[1]);
                 tasks.addTask(new Deadline(temp[0], formattedDate));
+
+                assert (tasks.getTaskSize() - initialNum) == 1 : "failed adding deadline task";
 
                 return ui.startAddDeadline(tasks.getLastTask()) + "\n"
                         + ui.printTasksSize(tasks.getTaskSize());
@@ -68,8 +74,11 @@ public class AddCommand extends Command {
 
             if (isValidInput) {
                 // valid
+                int initialNum = tasks.getTaskSize();
                 String formattedDate = dth.categorizeInput(temp[1]);
                 tasks.addTask(new Event(temp[0], formattedDate));
+
+                assert (tasks.getTaskSize() - initialNum) == 1 : "failed adding event task";
 
                 return ui.startAddEvent(tasks.getLastTask()) + "\n"
                         + ui.printTasksSize(tasks.getTaskSize());
@@ -111,8 +120,7 @@ public class AddCommand extends Command {
             output = addEvent();
             break;
         default:
-            output = ""; //TODO
-            break;
+            assert false : "invalid command: " + command;
         }
 
         return output;

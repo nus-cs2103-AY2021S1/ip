@@ -77,7 +77,10 @@ public class DateTimeHandler {
         // parse the input according to the defined input format
         LocalDate parsedDate = LocalDate.parse(input, inputFormat);
 
-        return parsedDate.format(outputFormat);
+        String outputDate = parsedDate.format(outputFormat);
+        assert outputDate.length() == 11;
+
+        return outputDate;
     }
 
     private String convertDateTime(String input) {
@@ -89,7 +92,10 @@ public class DateTimeHandler {
         // parse the input according to the defined input format
         LocalDateTime parsedDate = LocalDateTime.parse(input, inputFormat);
 
-        return parsedDate.format(outputFormat);
+        String outputDateTime = parsedDate.format(outputFormat);
+        assert outputDateTime.length() == 20;
+
+        return outputDateTime;
     }
 
     /**
@@ -113,13 +119,19 @@ public class DateTimeHandler {
                 LocalDate deadlineDate = LocalDate.parse(((Deadline) t).getDate(), taskFormat);
 
                 if (deadlineDate.isEqual(queryDate)) {
+                    int initialNum = tasksOnDate.size();
                     tasksOnDate.add(t);
+
+                    assert tasksOnDate.size() - initialNum == 1 : "matched task was not added into list";
                 }
             } else if (t instanceof Event) {
                 LocalDate eventDate = LocalDate.parse(((Event) t).getDate(), taskFormat);
 
                 if (eventDate.isEqual(queryDate)) {
+                    int initialNum = tasksOnDate.size();
                     tasksOnDate.add(t);
+
+                    assert tasksOnDate.size() - initialNum == 1 : "matched task was not added into list";
                 }
             }
         }
