@@ -1,6 +1,8 @@
 package main.java.com.jacob.duke;
 
 import main.java.com.jacob.duke.command.Command;
+import main.java.com.jacob.duke.io.Parser;
+import main.java.com.jacob.duke.io.Storage;
 
 public class Duke {
     private Storage storage;

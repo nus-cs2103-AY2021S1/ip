@@ -2,8 +2,9 @@ package main.java.com.jacob.duke.command;
 
 import java.util.List;
 
+import main.java.com.jacob.duke.DukeException;
 import main.java.com.jacob.duke.DukeList;
-import main.java.com.jacob.duke.Storage;
+import main.java.com.jacob.duke.io.Storage;
 import main.java.com.jacob.duke.Ui;
 
 import main.java.com.jacob.duke.task.Task;
@@ -26,13 +27,17 @@ public class DoneCommand implements Command {
      * @param ui UI object to deal with program output.
      * @param dukeList Task List Representation.
      * @param storage Storage object to deal with interfacing with file system.
+     * @throws DukeException throws exception if the note does not exist
      */
     @Override
-    public String execute(Ui ui, DukeList dukeList, Storage storage) {
+    public String execute(Ui ui, DukeList dukeList, Storage storage) throws DukeException {
         List<Task> taskList = dukeList.getTaskList();
 
         int taskNumber = Integer.parseInt(fullCommand.substring(5)) - 1;
         Task theTask = taskList.get(taskNumber);
+        if (theTask == null) {
+            throw new DukeException("No such task exists! ");
+        }
         String lineToEdit = theTask.convertToFile();
 
         theTask.setDone();

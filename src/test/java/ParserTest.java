@@ -3,7 +3,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import main.java.com.jacob.duke.DukeException;
-import main.java.com.jacob.duke.Parser;
+import main.java.com.jacob.duke.io.Parser;
 import main.java.com.jacob.duke.command.ByeCommand;
 import main.java.com.jacob.duke.command.Command;
 import main.java.com.jacob.duke.command.DeadlineCommand;

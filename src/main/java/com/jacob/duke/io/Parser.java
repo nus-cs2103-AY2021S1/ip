@@ -1,5 +1,6 @@
-package main.java.com.jacob.duke;
+package main.java.com.jacob.duke.io;
 
+import main.java.com.jacob.duke.DukeException;
 import main.java.com.jacob.duke.command.ByeCommand;
 import main.java.com.jacob.duke.command.Command;
 import main.java.com.jacob.duke.command.DeadlineCommand;
@@ -28,15 +29,19 @@ public class Parser {
         assert(splitStrings.length >= 1);
 
         String firstInput = splitStrings[0];
+        checkDescriptionNotEmpty(firstInput, fullCommand);
+
         Command c;
         switch (firstInput) {
         case "todo":
             c = new TodoCommand(fullCommand);
             break;
         case "deadline":
+            checkBreakpointExists("/", fullCommand, "deadline");
             c = new DeadlineCommand(fullCommand);
             break;
         case "event":
+            checkBreakpointExists("/", fullCommand, "event");
             c = new EventCommand(fullCommand);
             break;
         case "delete":
@@ -58,6 +63,7 @@ public class Parser {
             c = new ByeCommand();
             break;
         case "note":
+            checkBreakpointExists("?", fullCommand, "note");
             c = new NoteCommand(fullCommand);
             break;
         case "note-list":
@@ -72,4 +78,16 @@ public class Parser {
         return c;
     }
 
+    private void checkDescriptionNotEmpty(String commandType, String fullCommand) throws DukeException {
+        if (commandType.length() + 1 >= fullCommand.length() && !fullCommand.equals("bye")
+                && !fullCommand.equals("list") && !fullCommand.equals("note-list")) {
+            throw new DukeException("A " + commandType + " cannot be empty!");
+        }
+    }
+
+    private void checkBreakpointExists(String breakpoint, String fullCommand, String commandType) throws DukeException {
+        if (!fullCommand.contains(breakpoint)) {
+            throw new DukeException("Your " + commandType + " command is incomplete!!!");
+        }
+    }
 }

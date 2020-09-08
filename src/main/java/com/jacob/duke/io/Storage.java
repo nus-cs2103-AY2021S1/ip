@@ -1,4 +1,4 @@
-package main.java.com.jacob.duke;
+package main.java.com.jacob.duke.io;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -11,6 +11,7 @@ import java.io.InputStreamReader;
 import java.nio.file.Files;
 import java.util.List;
 
+import main.java.com.jacob.duke.DukeList;
 import main.java.com.jacob.duke.note.Note;
 import main.java.com.jacob.duke.task.Deadline;
 import main.java.com.jacob.duke.task.Event;
@@ -23,8 +24,9 @@ public class Storage {
     private String filename;
 
     /**
-     * Constructor for the Storage object
-     * @param filename path of the file to be accessed
+     * Constructor for the Storage object.
+     *
+     * @param filename path of the file to be accessed.
      */
     public Storage(String filename) {
         this.filename = filename;
@@ -119,8 +121,9 @@ public class Storage {
     }
 
     /**
-     * Handles the file and creates the required note and task objects based on file information
-     * @return List which containing the task objects in a list representation
+     * Handles the file and creates the required note and task objects based on file information.
+     *
+     * @return List which containing the task objects in a list representation.
      */
     public DukeList readFile() {
         stringBufferOfTasks = new StringBuffer();
@@ -188,15 +191,17 @@ public class Storage {
     }
 
     /**
-     * Add a string of text to the end of task buffer representing a task
-     * @param addedText text to be added
+     * Add a string of text to the end of task buffer representing a task.
+     *
+     * @param addedText text to be added.
      */
     public void appendTextToTasks(String addedText) {
         appendText(addedText, stringBufferOfTasks);
     }
     /**
-     * Add a string of text to the end of notes buffer representing a note
-     * @param addedText text to be added
+     * Add a string of text to the end of notes buffer representing a note.
+     *
+     * @param addedText text to be added.
      */
     public void appendTextToNotes(String addedText) {
         appendText(addedText, stringBufferOfNotes);
@@ -208,15 +213,17 @@ public class Storage {
         sb.append(addedText);
     }
     /**
-     * Remove a specific line of note from string buffer
-     * @param lineToEdit line to be removed
+     * Remove a specific line of note from string buffer.
+     *
+     * @param lineToEdit line to be removed.
      */
     public void removeTextFromTasks(String lineToEdit) {
         removeText(lineToEdit, stringBufferOfTasks);
     }
     /**
-     * Remove a specific line of task from string buffer
-     * @param lineToEdit line to be removed
+     * Remove a specific line of task from string buffer.
+     *
+     * @param lineToEdit line to be removed.
      */
     public void removeTextFromNotes(String lineToEdit) {
         removeText(lineToEdit, stringBufferOfNotes);

@@ -3,7 +3,7 @@ import java.util.List;
 
 import main.java.com.jacob.duke.DukeException;
 import main.java.com.jacob.duke.DukeList;
-import main.java.com.jacob.duke.Storage;
+import main.java.com.jacob.duke.io.Storage;
 import main.java.com.jacob.duke.Ui;
 import main.java.com.jacob.duke.task.Deadline;
 import main.java.com.jacob.duke.task.Task;
@@ -26,17 +26,11 @@ public class DeadlineCommand implements Command {
      * @param ui UI object to deal with program output.
      * @param dukeList Task List Representation.
      * @param storage Storage object to deal with interfacing with file system.
-     * @throws DukeException In case there are internal errors.
      */
     @Override
-    public String execute(Ui ui, DukeList dukeList, Storage storage) throws DukeException {
+    public String execute(Ui ui, DukeList dukeList, Storage storage) {
         List<Task> taskList = dukeList.getTaskList();
         int breakpoint = inputCommand.indexOf("/") - 1;
-        if (inputCommand.length() <= "deadline ".length()) {
-            throw new DukeException("☹ OOPS!!! The description of a Deadline cannot be empty.");
-        } else if (breakpoint == -2) {
-            throw new DukeException("Hey a deadline cannot have no actual date!!");
-        }
         String description = inputCommand.substring("deadline".length() + 1, breakpoint);
         String dateTime = inputCommand.substring(breakpoint + 5);
         Task theDeadline = new Deadline(description, dateTime);

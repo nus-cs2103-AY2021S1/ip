@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import main.java.com.jacob.duke.Storage;
+import main.java.com.jacob.duke.io.Storage;
 import main.java.com.jacob.duke.task.Deadline;
 import main.java.com.jacob.duke.task.Event;
 import main.java.com.jacob.duke.task.Task;
