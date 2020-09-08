@@ -13,7 +13,6 @@ All notable changes to this project will be documented in this file. See [standa
 ### Bug Fixes
 
 * Fix gradle shadowJar script ([22ef78f](https://github.com/therizhao/ip/commit/22ef78fcd9a890177ea8311a57441c7e93147f94))
-* Fix imports in main class for guilauncher ([2c974a0](https://github.com/therizhao/ip/commit/2c974a08f0e73d84aa776c6ec819f30c9e28d7ac))
 
 ## 0.3.0 (2020-09-02)
 
