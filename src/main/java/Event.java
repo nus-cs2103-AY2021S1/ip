@@ -19,6 +19,6 @@ public class Event extends Task{
 
     @Override
     public String write(){
-            return "E|" + super.toString() + "|" + this.at;
+            return "E|" + this.getStatusIcon() + "|" + this.description + "|" + this.at;
     }
 }

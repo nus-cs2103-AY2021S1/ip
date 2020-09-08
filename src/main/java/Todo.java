@@ -11,6 +11,6 @@ public class Todo extends Task{
 
     @Override
     public String write(){
-        return "T|" + super.toString();
+        return "T|" + this.getStatusIcon() + "|" + this.description;
     }
 }

@@ -11,10 +11,10 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public static void writeToFile(ArrayList<Task> lst){
+    public static void writeToFile(TaskList lst){
         try{
             FileWriter fw = new FileWriter(filePath);
-            for(Task t : lst){
+            for(Task t : lst.tasks){
                 fw.write(t.write() + '\n');
             }
             fw.close();
@@ -30,16 +30,15 @@ public class Storage {
             while(fileReader.hasNextLine()){
                 String nextLine = fileReader.nextLine();
                 String[] split = nextLine.split("\\|");
-                switch (split[0]){
+                switch(split[0]){
                     case "T":
-                        tasks.add(new Todo(split[1]));
+                        tasks.add(new Todo(split[2]));
                         break;
                     case "D":
-                        tasks.add(new Deadline(split[1], LocalDate.parse(split[2])));
+                        tasks.add(new Deadline(split[2], LocalDate.parse(split[3])));
                         break;
                     case "E":
-                        tasks.add(new Event(split[1], LocalDate.parse(split[2])));
-                        break;
+                        tasks.add(new Event(split[2], LocalDate.parse(split[3])));
                 }
             }
             fileReader.close();

@@ -20,6 +20,6 @@ public class Deadline extends Task {
 
     @Override
     public String write(){
-            return "D|" + super.toString() + "|" + this.by;
+            return "D|" + this.getStatusIcon() + "|" + this.description + "|" + this.by;
     }
 }
