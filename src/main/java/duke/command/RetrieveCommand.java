@@ -3,6 +3,9 @@ package duke.command;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.exception.InvalidTaskDateException;
 import duke.storage.Storage;
@@ -41,22 +44,13 @@ public class RetrieveCommand extends Command {
     @Override
     public CommandResponse execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskDateException {
         try {
-            TaskList retrievedTasks = new TaskList();
 
-            for (Task t : tasks.getList()) {
-                if (t instanceof Deadline) {
-                    Deadline d = (Deadline) t;
-                    if (d.getDateTime().toLocalDate().isEqual(date)) {
-                        retrievedTasks.addTask(t);
-                    }
-                }
-                if (t instanceof Event) {
-                    Event e = (Event) t;
-                    if (e.getDateTime().toLocalDate().isEqual(date)) {
-                        retrievedTasks.addTask(t);
-                    }
-                }
-            }
+            List<Task> retrievedList = tasks.getList()
+                    .stream()
+                    .filter(task -> checkIfSameDate(task))
+                    .collect(Collectors.toList());
+
+            TaskList retrievedTasks = new TaskList(new ArrayList<>(retrievedList));
 
             boolean shouldExit = getIsExit();
             assert !shouldExit : "shouldExit should be false";
@@ -64,6 +58,22 @@ public class RetrieveCommand extends Command {
         } catch (DateTimeParseException e) {
             throw new InvalidTaskDateException();
         }
+    }
+
+    private boolean checkIfSameDate(Task t) {
+        if (t instanceof Deadline) {
+            Deadline d = (Deadline) t;
+            if (d.getDateTime().toLocalDate().isEqual(date)) {
+                return true;
+            }
+        }
+        if (t instanceof Event) {
+            Event e = (Event) t;
+            if (e.getDateTime().toLocalDate().isEqual(date)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private String createResponseMessage(TaskList tasks) {
