@@ -16,7 +16,7 @@ public class FindCommand extends Command {
         ArrayList<Task> currentTasks = tasks.getTasks();
 
         for (Task t : currentTasks) {
-            if (t.getDescription().toLowerCase().contains(arguments.toLowerCase())) {
+            if (t.getDescription().contains(arguments.toLowerCase())) {
                 matchingTasks.add(t);
             }
         }

@@ -12,7 +12,7 @@ public class Parser {
      */
     public static Command parseCommand(String userInput)
             throws DukeException {
-        String[] input = userInput.trim().split(" ", 2);
+        String[] input = userInput.trim().toLowerCase().split(" ", 2);
         String commandWord = input[0];
         String arguments = "";
 
@@ -24,6 +24,7 @@ public class Parser {
         commandsWithArgs.add(EventCommand.COMMAND_WORD);
         commandsWithArgs.add(ToDoCommand.COMMAND_WORD);
         commandsWithArgs.add(FindCommand.COMMAND_WORD);
+        commandsWithArgs.add(DoAfterCommand.COMMAND_WORD);
 
         if (commandsWithArgs.contains(commandWord)) {
             if (input.length > 1) {
@@ -52,6 +53,8 @@ public class Parser {
             return new ToDoCommand(arguments);
         case FindCommand.COMMAND_WORD:
             return new FindCommand(arguments);
+        case DoAfterCommand.COMMAND_WORD:
+            return new DoAfterCommand(arguments);
         default:
             throw new DukeException("OOPS! I'm sorry, but I don't know what that means.");
         }

@@ -28,22 +28,39 @@ public class Storage {
     public void save(ArrayList<Task> tasks) throws DukeException {
         if (this.hasDirectory) {
             try {
-                FileWriter fw = new FileWriter(this.PATH.toString());
+                FileWriter fw = new FileWriter(PATH.toString());
                 String newText = "";
 
                 for (Task t : tasks) {
-                    char type = t.getType().toUpperCase().charAt(0);
-                    if (type == 'T' || type == 'D' || type == 'E') {
-                        int doneStatus = t.getDoneStatus() ? 1 : 0;
-                        String description = t.getDescription();
-                        String timing = t.getTiming();
-                        newText += String.format("%c|%d|%s", type, doneStatus, description);
+                    String tempType = t.getType();
+                    String type;
 
-                        if (timing.equals("")) {
-                            newText += "\n";
-                        } else {
-                            newText += String.format("|%s%n", timing);
-                        }
+                    switch (tempType) {
+                    case "todo":
+                        type = "T";
+                        break;
+                    case "event":
+                        type = "E";
+                        break;
+                    case "deadline":
+                        type = "D";
+                        break;
+                    case "doafter":
+                        type = "DA";
+                        break;
+                    default:
+                        throw new DukeException("Type not recognised");
+                    }
+
+                    int doneStatus = t.getDoneStatus() ? 1 : 0;
+                    String description = t.getDescription();
+                    String timing = t.getTiming();
+                    newText += String.format("%s|%d|%s", type, doneStatus, description);
+
+                    if (timing.equals("")) {
+                        newText += "\n";
+                    } else {
+                        newText += String.format("|%s%n", timing);
                     }
                 }
 
@@ -83,6 +100,9 @@ public class Storage {
                 case "D":
                     t = new Deadline(description, timing);
                     break;
+                case "DA":
+                    t = new DoAfter(description, timing);
+                    break;
                 default:
                     throw new DukeException("OOPS!!! I'm sorry, "
                             + "but I don't recognise the command from the text file.");
@@ -111,13 +131,13 @@ public class Storage {
     public TaskList loadFile() {
         if (this.hasDirectory) {
             try {
-                return loadTasks(this.PATH.toString());
+                return loadTasks(PATH.toString());
             } catch (Exception e) {
                 System.err.println(e);
             }
         } else {
             try {
-                File file = new File(this.PATH.toString());
+                File file = new File(PATH.toString());
                 file.getParentFile().mkdir();
                 file.createNewFile();
                 this.hasDirectory = true;

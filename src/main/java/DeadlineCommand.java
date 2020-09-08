@@ -20,9 +20,9 @@ public class DeadlineCommand extends Command {
     @Override
     public CommandResult execute(TaskList tasks, Storage storage) {
         String[] s = this.arguments.split(" /by ");
-        String desc = s[0];
+        String description = s[0];
         String by = formatDate(s[1]);
-        Task task = new Deadline(desc, by);
+        Task task = new Deadline(description, by);
         tasks.addTask(task);
         try {
             storage.save(tasks.getTasks());
