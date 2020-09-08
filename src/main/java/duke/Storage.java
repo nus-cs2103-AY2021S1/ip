@@ -37,26 +37,25 @@ public class Storage {
             
             while (sc.hasNext()) {
                 String taskInfo = sc.nextLine();
-                String[] arr = taskInfo.split(",");
-                switch (arr[0]) {
+                String[] taskArr = taskInfo.split(",");
+                Task task;
+                switch (taskArr[0]) {
                 case "T":
-                    Todo t = new Todo(arr[2]);
-                    if (arr[1].equals("1")) t.setCompleted();
-                    tasks.add(t);
+                    task = new Todo(taskArr[2]);
                     break;
                 case "D":
-                    Deadline d = new Deadline(arr[2], arr[3]);
-                    if (arr[1].equals("1")) d.setCompleted();
-                    tasks.add(d);
+                    task = new Deadline(taskArr[2], taskArr[3]);
                     break;
                 case "E":
-                    Event e = new Event(arr[2], arr[3], arr[4]);
-                    if (arr[1].equals("1")) e.setCompleted();
-                    tasks.add(e);
+                    task = new Event(taskArr[2], taskArr[3], taskArr[4]);
                     break;
                 default:
                     throw new DukeException("Unrecognised category character when loading from tasks.txt");
                 }
+                if (isMarkedDone(taskArr)) {
+                    task.setCompleted();
+                }
+                tasks.add(task);
             }
             sc.close();
             return tasks;
@@ -72,6 +71,10 @@ public class Storage {
                 throw new DukeException(io.getMessage());
             }
         }
+    }
+
+    private boolean isMarkedDone(String[] taskArr) {
+        return taskArr[1].equals("1");
     }
 
     /**
