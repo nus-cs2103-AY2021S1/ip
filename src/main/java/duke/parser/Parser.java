@@ -2,6 +2,7 @@ package duke.parser;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
 import java.util.function.Predicate;
 
 import duke.command.ByeCommand;
@@ -13,6 +14,7 @@ import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.ToDoCommand;
+import duke.command.UpdateCommand;
 import duke.exception.DukeException;
 
 /**
@@ -31,6 +33,7 @@ public class Parser {
         DEADLINE,
         EVENT,
         FIND,
+        UPDATE,
     }
     private static String errorMessage = null;
 
@@ -133,6 +136,21 @@ public class Parser {
                 }
                 String keyword = input.substring(5);
                 command = new FindCommand(keyword);
+                break;
+            case UPDATE:
+                if (separated.length <= 3) {
+                    errorMessage = " Details cannot be empty :(";
+                    break;
+                }
+                try {
+                    int index = Integer.parseInt(separated[1]);
+                    String type = separated[2];
+                    String newDetails = Arrays.stream(Arrays.copyOfRange(separated, 3, separated.length))
+                            .reduce("", (accumulated, current) -> accumulated + current + " ").trim();
+                    command = new UpdateCommand();
+                } catch (NumberFormatException error) {
+                    errorMessage = " Task index must be an integer :(";
+                }
                 break;
             default:
                 throw new DukeException(" Command type not found");
