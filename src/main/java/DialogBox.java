@@ -55,10 +55,11 @@ public class DialogBox extends HBox {
         return db;
     }
 
-    public static DialogBox welcome(Image img) {
+    public static DialogBox displayWelcome(Image img) {
         String msg = "Hello, I'm Duke!" + "\n" + "How can I help you?";
         DialogBox welcome = new DialogBox(msg, img);
         welcome.flip();
         return  welcome;
     }
+
 }

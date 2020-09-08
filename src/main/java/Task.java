@@ -3,8 +3,9 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Initialise a Task that is by default not done.
-     * @param desc contains description.
+     * Initialises a Task that is by default not done.
+     *
+     * @param desc Description of Task.
      */
     public Task(String desc) {
         this.desc = desc;
@@ -13,14 +14,15 @@ public class Task {
 
     /**
      * Produces the check or cross mark depending on isDone.
-     * @return string that contains either check or cross mark.
+     *
+     * @return String that contains either check or cross mark.
      */
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
     }
 
     /**
-     * sets isDone to true.
+     * Sets isDone to true.
      */
     public void setDone() {
         this.isDone = true;
@@ -30,4 +32,5 @@ public class Task {
     public String toString() {
         return "[" + getStatusIcon() + "] " + this.desc;
     }
+
 }

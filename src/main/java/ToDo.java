@@ -1,8 +1,9 @@
 public class ToDo extends Task {
 
     /**
-     * Initialise a todo.
-     * @param desc contains description.
+     * Initialises a Todo.
+     *
+     * @param desc Description of Todo.
      */
     public ToDo(String desc) {
         super(desc);
@@ -12,4 +13,5 @@ public class ToDo extends Task {
     public String toString() {
         return "[T]" + super.toString();
     }
+
 }

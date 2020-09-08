@@ -14,6 +14,7 @@ public class Storage {
 
     /**
      * Check if file exists, if it does then read it, else create a file.
+     *
      * @return TaskList containing any tasks from file.
      */
     public TaskList readFile() {
@@ -27,10 +28,11 @@ public class Storage {
 
     /**
      * Overwrites and updates the file at the path for changes to the tasks.
+     *
      * @param tasks TaskList containing all tasks.
-     * @param path where file is located.
+     * @param path Path where file is located.
      */
-    public static void fileUpdate(TaskList tasks, Path path) {
+    public static void updateFile(TaskList tasks, Path path) {
         try {
             FileWriter fw = new FileWriter(path.toString());
             for (Task t : tasks.getList()) {
@@ -52,6 +54,5 @@ public class Storage {
         }
 
     }
-
 
 }

@@ -7,9 +7,10 @@ public class Event extends Task{
     protected LocalDate date;
 
     /**
-     * Initialise an Event.
-     * @param desc contains description.
-     * @param at contains deadline.
+     * Initialises an Event.
+     *
+     * @param desc Description of Event..
+     * @param at Time/Date of event.
      */
     public Event(String desc, String at) {
         super(desc);
@@ -30,4 +31,5 @@ public class Event extends Task{
                     + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + ")";
         }
     }
+
 }
