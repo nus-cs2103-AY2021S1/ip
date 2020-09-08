@@ -18,6 +18,7 @@ public class FindCommand extends Command {
     private final String keyword;
 
     public FindCommand(String keyword) {
+        super();
         this.keyword = keyword;
     }
 

@@ -1,5 +1,6 @@
 package sparrow.storage;
 
+import sparrow.data.exceptions.FileErrorException;
 import sparrow.data.task.Task;
 import sparrow.data.task.Todo;
 import sparrow.data.task.Deadline;
@@ -45,32 +46,28 @@ public class Storage {
      * If no file found, returns an empty list.
      * @return Task list.
      */
-    public TaskList loadFromFile() {
+    public TaskList loadFromFile() throws FileErrorException {
         File f = new File(path.toString());
 
-        if (f.exists()) {
-            try {
-                return decodeTaskList(Files.readAllLines(path));
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
-        } else {
-            try {
+        try {
+            if (!f.exists()) {
                 f.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace();
+                return new TaskList();
             }
+
+            return decodeTaskList(Files.readAllLines(path));
+        } catch (IOException e) {
+            throw new FileErrorException("Error creating text file.", e.getCause());
         }
-        return new TaskList();
     }
 
-    public void saveToFile(TaskList tasks) {
+    public void saveToFile(TaskList tasks) throws FileErrorException {
         assert isValidPath(path);
         try {
             Files.write(path, encodeTaskList(tasks));
         } catch (IOException e) {
             // TODO create exception for this
-            System.out.println("Error saving to file" + e.toString());
+            throw new FileErrorException("Error saving to file.", e.getCause());
         }
     }
 
