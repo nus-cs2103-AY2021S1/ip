@@ -1,5 +1,7 @@
 package duke;
 
+import duke.command.HelpCommand;
+
 import java.util.ArrayList;
 
 /**
@@ -39,7 +41,7 @@ public class Duke {
 
         switch (command) {
         case HELP:
-            response += ui.availableCommands();
+            response += new HelpCommand().getResponse();
             break;
         case TODO:
             description = input.substring(4);
