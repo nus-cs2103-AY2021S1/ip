@@ -2,10 +2,6 @@ package duke.scanner;
 
 import java.util.Scanner;
 
-import duke.command.Command;
-import duke.exception.DukeException;
-import duke.parser.Parser;
-
 /**
  * CommandScanner that scans for commands
  */
@@ -17,12 +13,11 @@ public class CommandScanner {
     }
 
     /**
-     * Returns next command in the user input
+     * Returns next command as as string from the user input
      *
-     * @return a Command object that represent the next command in the user input
-     * @throws DukeException when the command is invalid
+     * @return a String that represent the next command in the user input
      */
-    public Command nextCommand() throws DukeException {
-        return Parser.parseCommandString(this.sc.nextLine());
+    public String nextCommand() {
+        return this.sc.nextLine();
     }
 }

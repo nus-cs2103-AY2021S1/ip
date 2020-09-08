@@ -7,8 +7,6 @@ import duke.command.Command;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.response.Response;
-import duke.scanner.CommandScanner;
-import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
@@ -16,35 +14,24 @@ import duke.ui.Ui;
  * Duke class
  */
 public class Duke {
-    private String fileString;
     private TaskList taskList;
+    private final PrintStream originalSystemOut = System.out;
 
     /**
-     * Duke's constructor for gui based program
+     * Duke's constructor
      */
     public Duke() {
         this.taskList = new TaskList();
     }
 
-    /**
-     * Duke's constructor for cli based program
-     *
-     * @param fileString name of the file where the commands will be output to
-     */
-    public Duke(String fileString) {
-        this.fileString = fileString;
-        this.taskList = new TaskList();
-    }
-
     private ByteArrayOutputStream setupOutStream() {
-        PrintStream originalOut = System.out;
         ByteArrayOutputStream outContent = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outContent));
         return outContent;
     }
 
     private void restoreOutStream() {
-        System.setOut(System.out);
+        System.setOut(this.originalSystemOut);
     }
 
     /**
@@ -70,32 +57,7 @@ public class Duke {
         return response;
     }
 
-    /**
-     * Runs the duke's cli based program
-     */
-    public void runCli() {
-        Ui.showGreet();
-        CommandScanner cmdScanner = new CommandScanner();
-
-        try {
-            Storage storage = Storage.create(this.fileString);
-
-            while (true) {
-                try {
-                    Command cmd = cmdScanner.nextCommand();
-                    cmd.execute(this.taskList);
-                    storage.write(this.taskList);
-                    if (cmd.isExit()) {
-                        break;
-                    }
-                } catch (DukeException e) {
-                    Ui.showError(e.getMessage());
-                }
-            }
-        } catch (DukeException e) {
-            Ui.showError(e.getMessage());
-        } catch (Exception e) {
-            Ui.showUnexpectedError(e.getMessage());
-        }
+    public TaskList getTaskList() {
+        return taskList;
     }
 }
