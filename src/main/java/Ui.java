@@ -89,7 +89,7 @@ public class Ui {
             if (!cur.toString().contains(keyWord)) {
                 continue;
             }
-            stringToReturn += ("" + i + "." + cur + "/n");
+            stringToReturn += ("" + i + "." + cur + "\n");
         }
         stringToReturn += LINE;
         return stringToReturn;

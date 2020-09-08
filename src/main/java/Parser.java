@@ -15,6 +15,8 @@ public class Parser {
         String[] pieces = command.split(" ", 2);
         if (command.equals("bye")) { // terminating command
             return ui.bye();
+        } else if (command.equals("Hi")) {
+            return ui.greet();
         } else if (command.equals("list")) { // listing command
             if (taskList.list.isEmpty()) {
                 return ui.emptyList();

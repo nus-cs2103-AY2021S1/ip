@@ -96,6 +96,7 @@ public class Duke extends Application {
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
+        dialogContainer.setSpacing(20.0);
         scrollPane.setContent(dialogContainer);
 
         userInput = new TextField();
@@ -110,7 +111,7 @@ public class Duke extends Application {
         stage.show();
 
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
+        stage.setTitle("Duke - Chat Bot");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);
@@ -191,8 +192,6 @@ public class Duke extends Application {
         );
         userInput.clear();
     }
-
-
 
     private String getResponse(String input, Duke testBot) {
         return Parser.respond(input, testBot.ui, testBot.tasks, testBot.storage.filePath);

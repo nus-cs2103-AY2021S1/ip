@@ -53,7 +53,6 @@ public class Storage {
             String currentTask = "" + i + "." + cur + "\n";
             output = output + currentTask;
         }
-        // System.out.println(output);
         try {
             FileWriting.writeToFile(filePath, output);
         } catch (IOException e) {
