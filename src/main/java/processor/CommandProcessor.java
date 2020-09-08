@@ -134,7 +134,6 @@ public class CommandProcessor {
                 Task task = new DeadlineTask(description, time);
                 return this.taskList.addToTaskList(task);
             }
-
         } catch (DukeException e) {
             return e.toString();
         }
@@ -156,7 +155,6 @@ public class CommandProcessor {
                 Task task = new EventTask(description, time);
                 return this.taskList.addToTaskList(task);
             }
-
         } catch (DukeException e) {
             return e.toString();
         }
