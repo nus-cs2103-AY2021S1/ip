@@ -27,6 +27,7 @@ public class TaskList {
     }
 
     public void markAsDone(int index) throws DukeIoException {
+        assert index < tasks.size() : "Invalid index";
         tasks.get(index).markAsDone();
         notifyObserver();
     }
@@ -42,6 +43,7 @@ public class TaskList {
     }
 
     private void notifyObserver() throws DukeIoException {
+        assert storageObserver != null : "No Observers";
         storageObserver.save(tasks);
     }
 
