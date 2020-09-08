@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import duke.TaskList;
 import duke.Ui;
 import exception.DukeException;
+import storage.CommandStorage;
 import task.Task;
 
 /**
@@ -21,11 +22,13 @@ public class FindCommand extends Command {
      * @param inputMsg User's input message to the chat bot.
      * @param currList Current list of tasks.
      * @param ui Ui object relevant to the chat bot.
+     * @param commandStorage CommandStorage object to store user commands.
      * @return String message representing tasks with matching keywords.
      * @throws DukeException If user does not specify a keyword or there were no matches.
      */
     @Override
-    public String execute(String inputMsg, TaskList currList, Ui ui) throws DukeException {
+    public String execute(String inputMsg, TaskList currList, Ui ui, CommandStorage commandStorage)
+            throws DukeException {
         assert currList != null : "TaskList cannot be null";
         assert ui != null : "Ui cannot be null";
 
