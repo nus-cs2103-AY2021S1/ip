@@ -12,7 +12,7 @@ public class Todo extends Task {
      * Constructor that is overloaded to create a deadline object from the database.
      *
      * @param doneStatus the state of the task from the user's previous session
-     * @param s the description of the todo
+     * @param s          the description of the todo
      */
     public Todo(String priority, int doneStatus, String s) {
         super(priority, doneStatus, s);
@@ -21,11 +21,11 @@ public class Todo extends Task {
     @Override
     public String formatTaskForDatabase() {
         int status = super.getDoneStatus() ? 1 : 0;
-        return super.priority.name() +"|" + "T|" + status + "|" + super.description;
+        return super.priority.name() + "|" + "T|" + status + "|" + super.description;
     }
 
     @Override
     public String toString() {
-        return "[" + super.priority.name() + "]" + "[T]" + super.toString() ;
+        return "[" + super.priority.name() + "]" + "[T]" + super.toString();
     }
 }

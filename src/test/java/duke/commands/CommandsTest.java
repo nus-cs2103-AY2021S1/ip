@@ -4,8 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import duke.exceptions.DukeException;
 import duke.storage.Storage;
+import duke.task.Task;
 import duke.task.TaskList;
+import duke.task.Todo;
+
+
+
 
 
 public class CommandsTest {
@@ -22,5 +28,25 @@ public class CommandsTest {
         addDeadline.execute(tasks, storage);
         addEvent.execute(tasks, storage);
         assertEquals(3, tasks.size());
+    }
+
+    @Test
+    public void testListCommand() throws DukeException {
+        ListCommand list = new ListCommand("list");
+
+        Storage storage = new Storage();
+        TaskList tasks = new TaskList();
+
+        tasks.addTask(new Todo("mid", 1, "eat"));
+        tasks.addTask(new Todo("low", 1, "eat"));
+        tasks.addTask(new Todo("high", 1, "eat"));
+        tasks.addTask(new Todo("mid", 1, "eat"));
+
+        list.execute(tasks, storage);
+        Task.Priority priorityFirst = tasks.getTask(1).getPriority();
+        Task.Priority priorityLast = tasks.getTask(4).getPriority();
+
+        assertEquals(Task.Priority.HIGH, priorityFirst);
+        assertEquals(Task.Priority.LOW, priorityLast);
     }
 }

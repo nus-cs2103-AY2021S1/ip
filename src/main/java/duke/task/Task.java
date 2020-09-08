@@ -10,7 +10,7 @@ public abstract class Task {
     protected String description;
     private boolean isDone;
 
-    public enum Priority {
+    public enum Priority implements Comparable<Priority> {
         HIGH, MID, LOW
     }
 
@@ -70,6 +70,9 @@ public abstract class Task {
         return this.isDone;
     }
 
+    public Priority getPriority() {
+        return this.priority;
+    }
     /**
      * Returns a string that is formatted having the taskType, done status, description, and time
      * of the task to be stored in the database.

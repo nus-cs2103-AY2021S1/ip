@@ -45,8 +45,8 @@ public class TaskTest {
         LocalDateTime dateTime = LocalDateTime.parse("04-21-2020 23:45", formatter);
         Deadline deadline = new Deadline("read book", dateTime);
 
-        assertEquals("T|0|Task", todo.formatTaskForDatabase());
-        assertEquals("D|0|read book|2020-04-21T23:45", deadline.formatTaskForDatabase());
+        assertEquals("MID|T|0|Task", todo.formatTaskForDatabase());
+        assertEquals("MID|D|0|read book|2020-04-21T23:45", deadline.formatTaskForDatabase());
     }
 
     @Test
@@ -57,7 +57,7 @@ public class TaskTest {
 
         Event event = new Event("book read", dateTime);
 
-        assertEquals("[D][\u2718] read book (By: Apr 21 2020 23:45)", deadline.toString());
-        assertEquals("[E][\u2718] book read (At: Apr 21 2020 23:45)", event.toString());
+        assertEquals("[MID][D][\u2718] read book (By: Apr 21 2020 23:45)", deadline.toString());
+        assertEquals("[MID][E][\u2718] book read (At: Apr 21 2020 23:45)", event.toString());
     }
 }

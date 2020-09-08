@@ -20,6 +20,7 @@ public class ListCommand extends Command {
     }
 
     private String listAllTasks(TaskList tasks) {
+        tasks.sortByPriority();
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Here are all the tasks you currently have! \n");
         IntStream.range(0, tasks.size()).forEach(index -> {

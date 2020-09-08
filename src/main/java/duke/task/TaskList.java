@@ -1,6 +1,8 @@
 package duke.task;
 
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.function.Consumer;
 
 import duke.exceptions.DukeException;
@@ -60,6 +62,21 @@ public class TaskList {
 
     public void forEach(Consumer<Task> consumer) {
         this.tasks.forEach(consumer);
+    }
+
+    /**
+     * Sorts the task list by priority HIGH, MEDIUM, LOW
+     *
+     * @return the task list object after being sorted by priority
+     */
+    public TaskList sortByPriority() {
+        Collections.sort(this.tasks, new Comparator<Task>() {
+            @Override
+            public int compare(Task task1, Task task2) {
+                return task1.priority.compareTo(task2.priority);
+            }
+        });
+        return this;
     }
 
     public boolean isIndexInRange(int index) {

@@ -15,7 +15,7 @@ public class Deadline extends Task {
     /**
      * Constructor to create a deadline object.
      *
-     * @param detail is the description entered by the user.
+     * @param detail   is the description entered by the user.
      * @param deadline is the time for the deadline entered by the user.
      * @throws DukeException if the detail entered is invalid.
      */
@@ -28,8 +28,8 @@ public class Deadline extends Task {
      * Constructor that is overloaded to create a deadline object from the database.
      *
      * @param doneStatus the state of the task from the user's previous session
-     * @param detail the description of the deadline
-     * @param deadline the time of the deadline.
+     * @param detail     the description of the deadline
+     * @param deadline   the time of the deadline.
      */
     public Deadline(String priority, int doneStatus, String detail, LocalDateTime deadline) {
         super(priority, doneStatus, detail);
@@ -39,7 +39,7 @@ public class Deadline extends Task {
     @Override
     public String formatTaskForDatabase() {
         int status = super.getDoneStatus() ? 1 : 0;
-        return super.priority.name() +"|" + "D|" + status + "|" + super.description + "|" + this.deadline;
+        return super.priority.name() + "|" + "D|" + status + "|" + super.description + "|" + this.deadline;
     }
 
     @Override
