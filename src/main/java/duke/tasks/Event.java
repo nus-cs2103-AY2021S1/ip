@@ -31,9 +31,11 @@ public class Event extends Task {
     /**
      * Prints out an error when the format of the deadline is incorrect.
      */
-    public static void invalidInput() {
-        invalidInput("OOPS!!! The format of the Event is wrong.");
+    public static String invalidInput() {
+        return "OOPS!!! The format of the Event is wrong.";
     }
+
+
 
     @Override
     public String toString() {

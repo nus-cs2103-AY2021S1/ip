@@ -5,14 +5,14 @@ package duke.tasks;
  * from users.
  */
 public class ListCommand extends Command {
-    protected String list;
+    private String listTask;
 
     /**
      * Constructor that stores the list string.
      * @param str input from user.
      */
     public ListCommand(String str) {
-        this.list = str;
+        this.listTask = str;
     }
 
     @Override

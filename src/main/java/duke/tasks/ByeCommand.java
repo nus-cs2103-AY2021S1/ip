@@ -9,10 +9,6 @@ import java.io.IOException;
 public class ByeCommand extends Command {
     public ByeCommand() { }
 
-    public boolean isExit() {
-        return true;
-    }
-
     @Override
     public String execute(TaskList tasks, UI ui, Storage storage) throws IOException {
         return null;

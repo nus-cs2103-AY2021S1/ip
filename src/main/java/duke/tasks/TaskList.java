@@ -66,10 +66,14 @@ public class TaskList {
      * @param toPrint contains int to mark the specific task as done.
      */
     public void done(String toPrint) {
-        String command = toPrint.replaceAll("[^\\d.]", "");
-        int indexCommand = Integer.parseInt(command.trim());
-        Task completedTask = this.taskLs.get(indexCommand - 1);
-        completedTask.markAsDone();
+        try {
+            String command = toPrint.replaceAll("[^\\d.]", "");
+            int indexCommand = Integer.parseInt(command.trim());
+            Task completedTask = this.taskLs.get(indexCommand - 1);
+            completedTask.markAsDone();
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            throw e;
+        }
     }
 
     public String doneString(String toPrint) {
@@ -87,17 +91,17 @@ public class TaskList {
      * Creates a todo task and adds it to the list of tasks.
      * @param toPrint Description of task.
      */
-    public void todo(String toPrint) {
+    public void todo(String toPrint) throws DukeException {
         try {
             toPrint = toPrint.substring(4);
-            if (toPrint.isEmpty()) {
+            if (toPrint.isEmpty() | toPrint.length() == 1) {
                 throw new DukeException("");
             }
             Todo taskTodo = new Todo(toPrint);
             this.taskLs.add(taskTodo);
 
         } catch (DukeException e) {
-            Todo.invalidInput();
+            throw e;
         }
     }
 
@@ -118,12 +122,12 @@ public class TaskList {
     public void event(String toPrint) {
         try {
             toPrint = toPrint.substring(5);
-            String[] arrtoPrint = toPrint.split("/at ");
-            Event taskEvent = new Event(arrtoPrint[0], arrtoPrint[1]);
+            String[] arrToPrint = toPrint.split("/at ");
+            Event taskEvent = new Event(arrToPrint[0], arrToPrint[1]);
             this.taskLs.add(taskEvent);
 
         } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
-            Event.invalidInput();
+            throw e;
         }
     }
 
@@ -154,7 +158,7 @@ public class TaskList {
 
 
         } catch (ArrayIndexOutOfBoundsException | DateTimeParseException e) {
-            Deadline.invalidInput();
+            throw e;
         }
     }
 
@@ -175,17 +179,21 @@ public class TaskList {
      * @param toPrint Keyword entered by user.
      */
     public String find(String toPrint) {
-        TaskList duplicateTaskLs = new TaskList();
-        duplicateTaskLs.taskLs = new ArrayList<>(this.getTaskLs());
+        try {
+            TaskList duplicateTaskLs = new TaskList();
+            duplicateTaskLs.taskLs = new ArrayList<>(this.getTaskLs());
 
-        toPrint = toPrint.substring(4);
-        String finalToPrint = toPrint;
+            toPrint = toPrint.substring(4);
+            String finalToPrint = toPrint;
 
-        duplicateTaskLs.taskLs.removeIf(n -> !n.getDescription().contains(finalToPrint));
+            duplicateTaskLs.taskLs.removeIf(n -> !n.getDescription().contains(finalToPrint));
 
-        String printGui = "";
-        printGui = printGui + "Here are the matching tasks in your list: " + "\n";
-        return duplicateTaskLs.findList(printGui);
+            String printGui = "";
+            printGui = printGui + "Here are the matching tasks in your list: " + "\n";
+            return duplicateTaskLs.findList(printGui);
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            return "Format of find command is incorrect";
+        }
     }
 
     /**

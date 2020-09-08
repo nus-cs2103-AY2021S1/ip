@@ -32,10 +32,11 @@ public class Duke {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    protected String getResponse(String input) throws IOException {
+    protected String getResponse(String input) throws IOException, DukeException {
         Command resultCommand = parser.parse(input);
         return resultCommand.execute(tasks, ui, storage);
     }
+
 
 
     public static void main(String[] args) throws DukeException, IOException {
@@ -43,12 +44,3 @@ public class Duke {
 
 
 }
-
-//    public static boolean isValidDate(String dateStr) {
-//        try {
-//            LocalDate.parse(dateStr);
-//        } catch (DateTimeParseException e){
-//            return false;
-//        }
-//        return true;
-//    }

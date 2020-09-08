@@ -43,12 +43,14 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws IOException {
+    private void handleUserInput() throws IOException, DukeException {
         String input = userInput.getText();
         if (input.startsWith("bye")) {
             Platform.exit();
         } else {
             String response = duke.getResponse(input);
+            assert response != null : "No response to be printed";
+
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
                     DialogBox.getDukeDialog(response, dukeImage)
