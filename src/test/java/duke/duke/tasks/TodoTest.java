@@ -16,13 +16,13 @@ public class TodoTest {
 
     @Test
     public void todoToStringTest() {
-        Todo task = new Todo("borrow book", 1, false);
-        assert task.toString().equals("[T][✘] borrow book");
+        Todo task = new Todo("borrow book", 1, false, "N");
+        assert task.toString().equals("[T][✘] borrow book ");
     }
 
     @Test
     public void todoStatusTest() {
-        Todo task = new Todo("borrow book", 1, false);
-        assert task.getStatusWithIndex().equals("1. [T][✘] borrow book");
+        Todo task = new Todo("borrow book", 1, false, "N");
+        assert task.getStatusWithIndex().equals("1. [T][✘] borrow book ");
     }
 }

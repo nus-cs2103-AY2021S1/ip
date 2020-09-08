@@ -13,6 +13,7 @@ public class Task {
     protected String description;
     protected boolean isDone;
     protected int index;
+    protected String tag;
     protected final String done = "[\u2713] ";
     protected final String start = "[\u2718] ";
     protected TaskType type;
@@ -43,6 +44,22 @@ public class Task {
         this.description = description;
         isDone = isOver;
         this.index = index;
+    }
+
+    /**
+     * Constructor for a new Task, with additional customisation for completion status.
+     *
+     * @param description   Activity
+     * @param index         Index of task
+     * @param isOver        Completion status of task
+     * @param tag           Tag of the task
+     */
+
+    public Task(String description, int index, boolean isOver, String tag) {
+        this.description = description;
+        isDone = isOver;
+        this.index = index;
+        this.tag = tag;
     }
 
     public String getDescription() {
@@ -85,6 +102,22 @@ public class Task {
     }
     public String getIcon(boolean isDone) {
         return isDone ? done : start;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
+    /**
+     * Converts "N" (tasks with no tag) to space for representation.
+     * @return String - empty
+     */
+    public String convert() {
+        return tag.equals("N") ? "" : tag;
     }
     /**
      * Returns the text version of task with index.

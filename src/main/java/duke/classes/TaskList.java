@@ -73,7 +73,7 @@ public class TaskList {
         } else if (todo.length() <= 4) {
             throw new EmptyDukeException("The description of your todo is empty.");
         } else {
-            Todo curr = new Todo(todo.substring(5), count, false);
+            Todo curr = new Todo(todo.substring(5), count, false, "N");
             todoList.add(curr);
             return curr;
         }
@@ -96,7 +96,7 @@ public class TaskList {
         } else if (deadline.length() <= 8) {
             throw new EmptyDukeException("The description of your deadline is empty.");
         } else {
-            Deadline curr = new Deadline(deadline.substring(9), count, false);
+            Deadline curr = new Deadline(deadline.substring(9), count, false, "N");
             todoList.add(curr);
             return curr;
         }
@@ -119,7 +119,7 @@ public class TaskList {
         } else if (event.length() <= 5) {
             throw new EmptyDukeException("The description of your event is empty.");
         } else {
-            Event curr = new Event(event.substring(6), count, false);
+            Event curr = new Event(event.substring(6), count, false, "N");
             todoList.add(curr);
             return curr;
         }
@@ -212,5 +212,16 @@ public class TaskList {
         return task.getType() == TaskType.DEADLINE
                 ? new Deadline(description, len, task.hasDone())
                 : new Event(description, len, task.hasDone());
+    }
+
+    /**
+     * Tags a task.
+     * @param command String of command
+     * @return Task tagged
+     */
+    public Task tagTask(String command) {
+        Task task = todoList.get(Character.getNumericValue(command.charAt(4)) - 1);
+        task.setTag(command.substring(6));
+        return task;
     }
 }

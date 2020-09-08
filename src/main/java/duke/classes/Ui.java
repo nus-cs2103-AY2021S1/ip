@@ -130,4 +130,14 @@ public class Ui {
         return error;
     }
 
+    /**
+     * Tags the task.
+     * @param task Task
+     * @return String of task
+     */
+    public String printTagging(Task task) {
+        System.out.println(line + "\nNoted. I've tagged this task as :\n  " + task.toString());
+        return "\nNoted. I've tagged this task as:\n  " + task.toString();
+    }
+
 }

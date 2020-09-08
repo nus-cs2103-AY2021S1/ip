@@ -63,6 +63,12 @@ public enum Command {
         public String toString() {
             return "bye";
         }
+    },
+    TAG {
+        @Override
+        public String toString() {
+            return "tag";
+        }
     }
 
 }
