@@ -13,6 +13,7 @@ import duke.ui.Ui;
 public class Parser {
     private enum type {
         DEADLINE {
+            @Override
             public String toString() {
                 return "deadline";
             }
@@ -36,6 +37,7 @@ public class Parser {
             }
         },
         TODO {
+            @Override
             public String toString() {
                 return "todo";
             }
@@ -59,16 +61,15 @@ public class Parser {
         if (input.equals(("bye"))) {
             storage.Save();
             result = ui.stopBot();
-            return result;
         } else if (input.equals("hi") || input.equals("hello")) {
-            return ui.printGreeting();
+            result = ui.printGreeting();
         } else if (input.equals("list")) {
-            //ui.printTaskList(tasks);
             result = ui.showTaskList(tasks);
+        } else if (input.equals("help")) {
+            result = helpCommand();
         } else if (input.contains("done")) {
             result = doneCommand(input, tasks, storage, ui);
         } else {
-            //ui.printBorder();
             if (input.contains(type.TODO.toString())) {
                 result = toDoCommand(input, tasks, storage, ui);
             } else if (input.contains(type.DEADLINE.toString())) {
@@ -84,6 +85,18 @@ public class Parser {
             }
         }
         return result;
+    }
+
+    private static String helpCommand() {
+        String intro = "Hello! Here are the current commands you can use to make your tasklist:\n\n";
+        String list = "list: prints current task list\n";
+        String done = "done [index]: marks task at index done\n";
+        String todo = "todo [description]: creates todo task\n";
+        String deadline = "deadline [description] /by dd-mm-yyyy: creates deadline task with deadline\n";
+        String event = "event [description] /at dd-mm-yyyy: creates event task with date\n";
+        String find = "find [keyword] : prints tasks with keyword in current task list\n";
+        String help = intro + list + done + todo + deadline + event + find;
+        return help;
     }
 
     private static String findCommand(String input, TaskList tasks, Storage storage, Ui ui) throws MocoException {
