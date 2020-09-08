@@ -50,14 +50,15 @@ public enum Command {
         public DukeResponse execute(String input) {
             String regex = "^(?i)alias\\s+-l$";
             if (Pattern.matches(regex, input)) {
+                // Display list of aliases.
                 return new DukeResponse(aliasManager.toString());
             }
 
+            // Add a new alias.
             String lineWithoutCommand = input.replaceFirst("^alias", "");
             String[] args = lineWithoutCommand.trim().split("\\s+", 2);
-            String commandString = args[0].trim();
+            String command = args[0].trim();
             String alias = args[1].trim();
-            Command command = Command.valueOf(commandString.toUpperCase());
             String response = aliasManager.addAlias(alias, command);
             return new DukeResponse(response);
         }

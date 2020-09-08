@@ -1,5 +1,6 @@
 package duke.utils;
 
+import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -25,17 +26,24 @@ public class AliasManager {
      * Associates an alias with a command.
      *
      * @param alias the alias for the command.
-     * @param command the command to be aliased.
+     * @param commandString the command to be aliased in string representation.
      * @return a string representation of the action of adding an alias.
      */
-    public String addAlias(String alias, Command command) {
-        Command previousCommand = aliases.putIfAbsent(alias, command);
+    public String addAlias(String alias, String commandString) {
         String response;
-        if (previousCommand == null) {
-            response = ResourceHandler.getString("aliasManager.addAlias");
-        } else {
-            response = ResourceHandler.getString("aliasManager.aliasInUse");
+        try {
+            Command command = Command.valueOf(commandString.toUpperCase());
+            Command previousCommand = aliases.putIfAbsent(alias, command);
+            if (previousCommand == null) {
+                response = ResourceHandler.getString("aliasManager.addAlias");
+            } else {
+                response = ResourceHandler.getString("aliasManager.aliasInUse");
+            }
+        } catch (IllegalArgumentException e) {
+            response = MessageFormat.format(ResourceHandler.getString("aliasManager.invalidCommand"),
+                    commandString);
         }
+
         return response;
     }
 
