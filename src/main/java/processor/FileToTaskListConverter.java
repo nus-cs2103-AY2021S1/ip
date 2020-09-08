@@ -32,7 +32,7 @@ public abstract class FileToTaskListConverter {
      *
      * @param data the file loaded to be converted.
      * @return a TaskList containing all tasks inscribed in file
-     * @throws FileCorruptedException If file is not formmatted in the correct order. ie
+     * @throws FileCorruptedException If file is not formatted in the correct order. ie
      *  not in [type]//[status]//[task description]//[date if applicable]//[time if applicable]
      */
     public static TaskList convert(File data) throws FileCorruptedException {
@@ -60,17 +60,7 @@ public abstract class FileToTaskListConverter {
             StringBuilder sb = new StringBuilder();
             for (int i = 0; i < list.size(); i++) {
                 Task task = list.getTask(i);
-                String type = task.getType();
-
-                sb.append(type + "//");
-                sb.append(task.isDone() ? "O" : "X");
-                sb.append("//");
-                sb.append(task.getDescription() + "//");
-
-                if (type.equals("D") || type.equals("E")) {
-                    sb.append(task.getDateInput() + "//");
-                    sb.append(task.getTimeInput());
-                }
+                sb.append((task.getDetails()));
                 sb.append("\n");
             }
             fw.write(sb.toString());
@@ -95,12 +85,10 @@ public abstract class FileToTaskListConverter {
             File directory = data.getParentFile();
 
             try {
-                if (directory.exists() && directory.isDirectory()) {
-                    data.createNewFile();
-                } else {
+                if (!directory.exists() || !directory.isDirectory()) {
                     directory.mkdirs();
-                    data.createNewFile();
                 }
+                data.createNewFile();
             } catch (IOException ioe) {
                 System.out.println("Unable to open/create file");
             }
@@ -112,7 +100,7 @@ public abstract class FileToTaskListConverter {
         try {
             String[] words = info.split("//");
             char type = words[0].charAt(0);
-            boolean isDone = words[1].equals("✓");
+            boolean isDone = words[1].equals("O");
             String description = words[2];
 
             switch (type) {
@@ -125,11 +113,7 @@ public abstract class FileToTaskListConverter {
             default:
                 return new Task("No Task !!!!");
             }
-        } catch (DukeException de) {
-            throw new FileCorruptedException();
-        } catch (IndexOutOfBoundsException ioobe) {
-            throw new FileCorruptedException();
-        } catch (PatternSyntaxException pse) {
+        } catch (DukeException | IndexOutOfBoundsException | PatternSyntaxException e) {
             throw new FileCorruptedException();
         }
     }

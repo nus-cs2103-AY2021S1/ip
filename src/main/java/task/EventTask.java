@@ -10,12 +10,13 @@ import exception.DateTimeInvalidFormatException;
 /**
  * Encapsulates the details of a task with a event time range.
  *
- * <p>The 'EventTask' class extends from Task class and supports operators,
+ * <p>The 'EventTask' class extends from Task class and implement TimeRelated interface.
+ * It supports operators,supports operators,
  * supported include: </p>
  *
  * <p> (i) getters </p>
  */
-public class EventTask extends Task {
+public class EventTask extends Task implements TimeRelated {
     protected static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("kk:mm");
     protected static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy");
     protected LocalDate date;
@@ -143,13 +144,21 @@ public class EventTask extends Task {
     }
 
     /**
-     * Gets the type of Tasks.
+     * Gets details of the task in [type]//[status]//[description]//[date]//[time] format
      *
-     * @return type of Task.
+     * @return details of the task.
      */
     @Override
-    public String getType() {
-        return "E";
+    public String getDetails() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("E//");
+        sb.append(getStatusIcon());
+        sb.append("//");
+        sb.append(getDescription() + "//");
+        sb.append(getDateInput() + "//");
+        sb.append(getTimeInput());
+
+        return sb.toString();
     }
 
     /**

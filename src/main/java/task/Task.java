@@ -58,15 +58,6 @@ public class Task {
     }
 
     /**
-     * Gets the type of Tasks.
-     *
-     * @return type of Task.
-     */
-    public String getType() {
-        return "1"; // dummy type;
-    }
-
-    /**
      * Gets description of this object.
      *
      * @return description of this object.
@@ -76,21 +67,18 @@ public class Task {
     }
 
     /**
-     * Gets the date inputted by user in string.
+     * Gets details of the task in [type]//[status]//[description] format
      *
-     * @return date inputted by user.
+     * @return details of the task.
      */
-    public String getDateInput() {
-        return "No date available";
-    }
+    public String getDetails() {
+        StringBuilder sb = new StringBuilder();
+        sb.append("T//");
+        sb.append(getStatusIcon());
+        sb.append("//");
+        sb.append(getDescription() + "//");
 
-    /**
-     * Gets the date inputted by user in string.
-     *
-     * @return time inputted by user.
-     */
-    public String getTimeInput() {
-        return "No time available";
+        return sb.toString();
     }
 
     /**
