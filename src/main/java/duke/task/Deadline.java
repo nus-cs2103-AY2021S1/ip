@@ -28,6 +28,7 @@ public class Deadline extends Task {
      * @return Deadline
      */
     public static Deadline createDeadline(String task, LocalDateTime date) {
+        assert date != null : "Assertion Failure: Deadline is Null";
         return new Deadline(task, date);
     }
 
