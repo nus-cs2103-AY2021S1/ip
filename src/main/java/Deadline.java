@@ -5,8 +5,8 @@ import java.time.format.DateTimeFormatter;
  * Represents a deadline task.
  *
  * @author Siqi
- * @version 1.0
- * @since 2020-08-25
+ * @version 1.`
+ * @since 2020-09-08
  */
 public class Deadline extends Task {
     /**
@@ -20,58 +20,63 @@ public class Deadline extends Task {
 
     /**
      * Deadline constructor with date only.
-     * @param description   The description of the deadline task.
-     * @param by            The date that the deadline task is due.
+     *
+     * @param desc   The description of the deadline task.
+     * @param by     The date that the deadline task is due.
      */
-    public Deadline(final String description, final LocalDate by) {
-        super(description);
+    public Deadline(final String desc, final LocalDate by) {
+        super(desc);
         this.by = by;
         this.time = null;
     }
 
     /**
      * Deadline constructor with date and time.
-     * @param description The description for the deadline task.
+     *
+     * @param desc  The description for the deadline task.
      * @param by    The date that the deadline task is due.
      * @param time  The time that the deadline task is due.
      */
-    public Deadline(final String description, final LocalDate by,
+    public Deadline(final String desc, final LocalDate by,
                     final String time) {
-        super(description);
+        super(desc);
         this.by = by;
         this.time = time;
     }
 
     /**
      * Deadline constructor with date and marked as done.
-     * @param description   The description of the deadline task.
+     *
+     * @param desc          The description of the deadline task.
      * @param isDone        The deadline task is marked as done.
      * @param by            The date that the deadline task is due.
      */
-    public Deadline(final String description, final boolean isDone,
+    public Deadline(final String desc, final boolean isDone,
                     final LocalDate by) {
-        super(description, isDone);
+        super(desc, isDone);
         this.by = by;
         this.time = null;
     }
 
     /**
      * Deadline constructor with date and time and marked as done.
-     * @param description   The description of the deadline task.
+     *
+     * @param desc          The description of the deadline task.
      * @param isDone        The deadline task is marked as done.
      * @param by            The date that the deadline task is due.
      * @param time          The time that the deadline task is due.
      */
-    public Deadline(final String description, final boolean isDone,
+    public Deadline(final String desc, final boolean isDone,
                     final LocalDate by, final String time) {
-        super(description, isDone);
+        super(desc, isDone);
         this.by = by;
         this.time = time;
     }
 
     /**
-     * This method formats the task for display to the user.
-     * @return This returns a string containing the task details.
+     * Formats the task for display to the user.
+     *
+     * @return The string containing the task details.
      */
     public String display() { //format time here
         if (time == null || time.isEmpty()) {

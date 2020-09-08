@@ -2,12 +2,13 @@
  * Represents a to do task.
  *
  * @author Siqi
- * @version 1.0
- * @since 2020-08-25
+ * @version 1.1
+ * @since 2020-09-08
  */
 public class Todo extends Task {
     /**
-     * To do constructor.
+     * A basic Todo constructor.
+     *
      * @param description The description of the task.
      */
     public Todo(final String description) {
@@ -15,7 +16,8 @@ public class Todo extends Task {
     }
 
     /**
-     * To do constructor, marked as done.
+     * Todo constructor that creates a todo task that is marked as done.
+     *
      * @param description The description of the task.
      * @param isDone      The task is marked as done.
      */
@@ -24,7 +26,7 @@ public class Todo extends Task {
     }
 
     /**
-     * This method formats the task for display to the user.
+     * Formats the task for display to the user.
      * @return This returns a string containing the task details.
      */
     public String display() {

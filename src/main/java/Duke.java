@@ -2,8 +2,8 @@
  * Represents a to do list chatbot called Duke.
  *
  * @author Siqi
- * @version 1.0
- * @since 2020-08-25
+ * @version 1.1
+ * @since 2020-09-08
  */
 public class Duke  {
     /**
@@ -13,22 +13,28 @@ public class Duke  {
     /**
      * Task list that stores tasks.
      */
-    private TaskList tasks;
+    private TaskList taskList;
     /**
      * UI object that handles interactions with the user.
      */
     private Ui ui;
 
+    private final String EXIT_STRING = "Bye bye!!! See you again next time :)";
+
+    /**
+     * Duke constructor.
+     */
     public Duke() {
         this.ui = new Ui();
         this.storage = new Storage("data/duke.txt");
         try {
-            tasks = storage.load();
+            taskList = storage.load();
         } catch (DukeException de) {
             ui.printLoadingError(de);
-            tasks = new TaskList();
+            taskList = new TaskList();
         }
     }
+
     /**
      * Duke constructor.
      * @param filePath The path of the local copy where Duke saves list to.
@@ -37,10 +43,10 @@ public class Duke  {
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         try {
-            tasks = storage.load();
+            taskList = storage.load();
         } catch (DukeException de) {
             ui.printLoadingError(de);
-            tasks = new TaskList();
+            taskList = new TaskList();
         }
     }
 
@@ -54,16 +60,31 @@ public class Duke  {
         boolean isEnd = false;
         while (!isEnd) {
             input = ui.readCommand();
-            isEnd = Parser.execute(tasks, ui, storage, input).equals("bye then");
+            String resultString;
+            try {
+                Command command = Parser.parse(input);
+                resultString = command.execute(this.storage, this.ui, this.taskList);
+            } catch (DukeException e) {
+                resultString = e.getMessage();
+            }
+            isEnd = resultString.equals(EXIT_STRING);
         }
     }
 
     protected String getResponse(String input) {
-        return Parser.execute(tasks, ui, storage, input);
+        String resultString;
+        try {
+            Command command = Parser.parse(input);
+            resultString = command.execute(this.storage, this.ui, this.taskList);
+        } catch (DukeException e) {
+            resultString = e.getMessage();
+        }
+        return resultString;
     }
 
     /**
      * This is the main method which makes use of the run method.
+     *
      * @param args Unused
      */
     public static void main(final String[] args) {
