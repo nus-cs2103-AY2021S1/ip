@@ -55,6 +55,8 @@ public class CommandHandler {
         } catch (DukeException e) {
             log.append(e.getMessage());
         }
+
+        assert log.length() != 0;
     }
 
     public String getLog() {
