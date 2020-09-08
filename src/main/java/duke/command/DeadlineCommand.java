@@ -28,9 +28,7 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        if (this.nextCommandArr.length < 2) {
-            return new DukeException("The description of a deadline cannot be empty~").toString();
-        } else {
+        if (this.nextCommandArr.length >= 2) {
             try {
                 String[] deadlineArr = nextCommandArr[1].split("/by");
                 Deadline newDeadline = new Deadline(deadlineArr[0], deadlineArr[1].strip());
@@ -39,6 +37,8 @@ public class DeadlineCommand extends Command {
             } catch (Exception e) {
                 return new DukeException("Please input a proper due date for your deadline~").toString();
             }
+        } else {
+            return new DukeException("The description of a deadline cannot be empty~").toString();
         }
     }
 
