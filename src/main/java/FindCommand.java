@@ -5,8 +5,7 @@ import java.util.ArrayList;
  *  Handles "find" command.
  */
 public class FindCommand extends Command {
-    private static final String TAB = "  ";
-    private static final String FIND_TITLE = TAB + " Here are the matching tasks in your list:";
+    private static final String FIND_TITLE = "Here are the matching tasks in your list:";
     private String[] input;
 
     /**
@@ -48,12 +47,12 @@ public class FindCommand extends Command {
             }
         }
         if (filteredList.size() == 0) {
-            throw new FindException(" ☹ OOPS!!! There is no task with this keyword.");
+            throw new FindException("☹ OOPS!!! There is no task with this keyword.");
         }
         int i = 1;
         String output = FIND_TITLE + "\n";
         for (Task task : filteredList) {
-            output += TAB + " " + i++ + "." + task + "\n";
+            output += i++ + "." + task + "\n";
         }
         return output;
     }

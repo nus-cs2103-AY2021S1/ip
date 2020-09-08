@@ -8,8 +8,7 @@ import java.util.Date;
  * Handles "deadline" command.
  */
 public class DeadlineCommand extends Command {
-    private static final String TAB = "  ";
-    private static final String ADD_TASK_TITLE = TAB + " Got it. I've added this task:";
+    private static final String ADD_TASK_TITLE = "Got it. I've added this task:";
     private String[] input;
 
     /**
@@ -33,9 +32,9 @@ public class DeadlineCommand extends Command {
         ArrayList<Task> store = tasks.getTaskList();
         int index = getIndexOfBy();
         if (input.length == 1 || index == 1) { //no description
-            throw new DeadlineException(" ☹ OOPS!!! The description of a deadline cannot be empty.");
+            throw new DeadlineException("☹ OOPS!!! The description of a deadline cannot be empty.");
         } else if (index == input.length - 1 || index == 0) { //no time
-            throw new DeadlineException(" ☹ OOPS!!! The time of a deadline cannot be empty.");
+            throw new DeadlineException("☹ OOPS!!! The time of a deadline cannot be empty.");
         }
         String description = getDescriptionFromUserInput(index);
         Date date = getDateFromUserInput(index);
@@ -43,8 +42,8 @@ public class DeadlineCommand extends Command {
         store.add(newTask);
         storage.save(new TaskList(store));
         return ADD_TASK_TITLE + "\n"
-                + TAB + "   " + newTask + "\n"
-                + TAB + " Now you have " + store.size() + " tasks in the list.";
+                + newTask + "\n"
+                + "Now you have " + store.size() + " tasks in the list.";
     }
 
     /**

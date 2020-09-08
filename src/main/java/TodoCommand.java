@@ -5,8 +5,7 @@ import java.util.ArrayList;
  * Handles "todo" command.
  */
 public class TodoCommand extends Command {
-    private static final String TAB = "  ";
-    private static final String ADD_TASK_TITLE = TAB + " Got it. I've added this task:";
+    private static final String ADD_TASK_TITLE = "Got it. I've added this task:";
     private String[] input;
 
     /**
@@ -29,7 +28,7 @@ public class TodoCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws TodoException {
         ArrayList<Task> store = tasks.getTaskList();
         if (input.length == 1) {
-            throw new TodoException(" ☹ OOPS!!! The description of a todo cannot be empty.");
+            throw new TodoException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
         String description = "";
         for (int i = 1; i < input.length; i++) {
@@ -40,8 +39,8 @@ public class TodoCommand extends Command {
         store.add(newTask);
         storage.save(new TaskList(store));
         return ADD_TASK_TITLE + "\n"
-                + TAB + "   " + newTask + "\n"
-                + TAB + " Now you have " + store.size() + " tasks in the list.";
+                + newTask + "\n"
+                + "Now you have " + store.size() + " tasks in the list.";
     }
 
     /**

@@ -5,8 +5,7 @@ import java.util.ArrayList;
  * Handles "done" command.
  */
 public class DoneCommand extends Command {
-    private static final String TAB = "  ";
-    private static final String DONE_TITLE = TAB + " Nice! I've marked this task as done:";
+    private static final String DONE_TITLE = "Nice! I've marked this task as done:";
     private String[] input;
 
     /**
@@ -29,12 +28,12 @@ public class DoneCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DoneException {
         ArrayList<Task> store = tasks.getTaskList();
         if (input.length == 1) { //incomplete done command
-            throw new DoneException(" ☹ OOPS!!! The description of a done cannot be empty.");
+            throw new DoneException("☹ OOPS!!! The description of a done cannot be empty.");
         }
 
         int indexOfMarkingTask = Integer.parseInt(input[1]) - 1;
         if (indexOfMarkingTask + 1 > store.size() || indexOfMarkingTask + 1 <= 0) {
-            throw new DoneException(" ☹ OOPS!!! There is no such task.");
+            throw new DoneException("☹ OOPS!!! There is no such task.");
         }
 
         //complete done command
@@ -43,7 +42,7 @@ public class DoneCommand extends Command {
         store.set(indexOfMarkingTask, markedTask);
         storage.save(new TaskList(store));
         return DONE_TITLE + "\n"
-                + TAB + "   " + markedTask;
+                + markedTask;
     }
 
     /**
