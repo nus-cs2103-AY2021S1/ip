@@ -12,6 +12,7 @@ public class Ui {
     public static final String EXIT_MESSAGE = "Bye. See you again soon!";
 
     public void printResponse(String message) {
+        assert message != null : "Message should not be null";
         String divider = "\n\t-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-\n";
         System.out.println(divider.concat("\t".concat(message.concat("\n"))).concat(divider));
     }

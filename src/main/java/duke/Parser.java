@@ -96,6 +96,7 @@ public class Parser {
     }
 
     public static Command parse(String fullCommand) throws DukeException {
+<<<<<<< HEAD
         boolean isTodoCommand = fullCommand.startsWith(AddCommand.TODO_COMMAND);
         boolean isDeadlineCommand = fullCommand.startsWith(AddCommand.DEADLINE_COMMAND);
         boolean isEventCommand = fullCommand.startsWith(AddCommand.EVENT_COMMAND);
@@ -104,6 +105,10 @@ public class Parser {
         if (fullCommand.equalsIgnoreCase(Command.BYE_COMMAND)) {
             return new ByeCommand();
         } else if (fullCommand.equalsIgnoreCase(Command.LIST_COMMAND)) {
+=======
+        assert fullCommand != null : "Command should not be null";
+        if (fullCommand.equalsIgnoreCase("list")) {
+>>>>>>> master
             return new ListCommand();
         } else if (fullCommand.startsWith(Command.DONE_COMMAND)) {
             int taskNumber = extractTaskNumber(fullCommand);

@@ -64,6 +64,7 @@ public class Storage {
     }
 
     public void writeFile(TaskList taskList) {
+        assert taskList != null : "TaskList should not be null";
         List<Task> tasks = taskList.getTasks();
         StringBuilder stringBuilder = new StringBuilder();
         for (Task task : tasks) {
@@ -80,6 +81,7 @@ public class Storage {
     }
 
     private Task getTaskFromLine(String line) {
+        assert line != null : "Line should not be null";
         List<String> words = Arrays.asList(line.split(" \\| "));
         Task task;
         if (words.get(0).equals("T")) {
