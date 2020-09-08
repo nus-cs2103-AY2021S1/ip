@@ -13,7 +13,10 @@ import ikura.task.Task;
 import ikura.task.Todo;
 import ikura.task.Event;
 import ikura.task.Deadline;
+import ikura.task.DatedTask;
+import ikura.task.TaskParser;
 import ikura.util.StreamUtils;
+import ikura.task.TaskDescription;
 
 import java.util.InputMismatchException;
 import java.util.NoSuchElementException;
@@ -36,7 +39,8 @@ public class Bot {
         "delete",   this::cmdDelete,
         "todo",     this::cmdAddTask,
         "event",    this::cmdAddTask,
-        "deadline", this::cmdAddTask
+        "deadline", this::cmdAddTask,
+        "edit",     this::cmdEditTask
     );
 
     /**
@@ -75,7 +79,7 @@ public class Bot {
 
         var cmd = sc.next().strip();
 
-        if (cmd.equals("bye")) {
+        if (cmd.equals("quit")) {
             this.ui.println("goodbye");
             return false;
         }
@@ -98,6 +102,87 @@ public class Bot {
         this.tasks.save();
 
         return true;
+    }
+
+
+    private void cmdEditTask(String cmd, String input) {
+        assert cmd.equals("edit");
+
+        var usage = "edit <task number> [/title <new title>] [/desc <new description>] [/date <new date>]";
+
+        // usage: edit <N> [/title owo] [/desc uwu] [/date kekw]
+        // first, extract the task number.
+        int taskIndex = 0;
+
+        Runnable printUsage = () -> {
+            this.ui.println("invalid arguments");
+            this.ui.println("usage: %s", usage);
+        };
+
+
+        {
+            // split into 2, because we wanna just pass the rest of the stuff at the end to the TaskParser.
+            var pieces = input.split(" ", 2);
+            if (pieces.length < 2) {
+                printUsage.run();
+                return;
+            }
+
+            try {
+                taskIndex = Integer.parseInt(pieces[0].strip());
+            } catch (NumberFormatException e) {
+                this.ui.println("invalid task number '%s'", pieces[0]);
+                this.ui.println("usage: %s", usage);
+                return;
+            }
+
+            // java is dumb, yet again.
+            final var taskIdx = taskIndex;
+
+            this.tasks.getTaskByNumber(taskIdx)
+                .ifPresentOrElse(task -> {
+
+                    TaskDescription descs = null;
+
+                    try {
+                        descs = TaskParser.parse("edit", pieces[1], "date",
+                            /* dateCompuslory: */ false, usage);
+                    } catch (InvalidInputException e) {
+                        this.ui.println("error: %s", e);
+                        this.ui.println("usage: %s", e.getUsage());
+                    }
+
+                    if (descs.hasDate()) {
+
+                        if (task instanceof DatedTask) {
+                            ((DatedTask) task).setDate(descs.getDate().get());
+                        } else {
+                            this.ui.println("this task does not accept a date (task not modified)");
+                            return;
+                        }
+                    }
+
+                    System.out.printf("%s, %s\n", descs.hasTitle(), descs.hasDescription());
+
+                    if (descs.hasTitle() && !descs.getTitle().get().isEmpty()) {
+                        task.setTitle(descs.getTitle().get());
+                    }
+
+                    if (descs.hasDescription()) {
+                        task.setDescription(descs.getDescription().get());
+                    }
+
+                    this.ui.println("successfully updated task:");
+                    this.ui.println("  %s", task);
+                }, () -> {
+                    this.ui.println("task number %d does not exist", taskIdx);
+                    return;
+                });
+
+
+
+
+        }
     }
 
 

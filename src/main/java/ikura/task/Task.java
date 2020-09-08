@@ -100,6 +100,13 @@ public abstract class Task implements Observable<Task> {
         this.updateObservers();
     }
 
+    /**
+     * Check if the task has an associated date.
+     *
+     * @return true if the task has a date, false otherwise.
+     */
+    public abstract boolean hasDate();
+
     @Override
     public String toString() {
         return String.format("[%s] %s", this.done ? "\u2713" : "\u2718", this.title);

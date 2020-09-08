@@ -42,6 +42,11 @@ public class Todo extends Task {
             && ((Todo) other).getTitle().equals(this.getTitle());
     }
 
+    @Override
+    public boolean hasDate() {
+        return false;
+    }
+
     /**
      * Parses a Todo from the given input. In this case it is simply used verbatim
      * as the task's description.
@@ -52,7 +57,9 @@ public class Todo extends Task {
      */
     public static Todo parse(String input) throws InvalidInputException {
 
-        var desc = TaskParser.parse("todo", input, /* dateSpec: */ Optional.empty(), getUsage());
+        var desc = TaskParser.parse("todo", input, /* dateSpec: */ "",
+            /* dateCompulsory: */ false, getUsage());
+
         assert desc.hasTitle();
         assert !desc.hasDate();
 

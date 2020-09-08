@@ -12,9 +12,7 @@ import ikura.util.InvalidInputException;
 /**
  * A class representing a Event task. It has a description (name), and a date.
  */
-public class Event extends Task {
-
-    private final LocalDate eventDate;
+public class Event extends DatedTask {
 
     /**
      * Constructs a new Event task with the given title and date.
@@ -23,8 +21,7 @@ public class Event extends Task {
      * @param deadline the date of this event.
      */
     public Event(String title, LocalDate date) {
-        super(title);
-        this.eventDate = date;
+        this(title, "", date);
     }
 
     /**
@@ -35,30 +32,20 @@ public class Event extends Task {
      * @param deadline    the date of this event.
      */
     public Event(String title, String description, LocalDate date) {
-        super(title, description);
-        this.eventDate = date;
-    }
-
-    /**
-     * Gets the date of the event.
-     *
-     * @return the date.
-     */
-    public LocalDate getEventDate() {
-        return this.eventDate;
+        super(title, description, date);
     }
 
     @Override
     public String toString() {
         return String.format("[E] %s (at: %s)", super.toString(),
-            this.eventDate.format(DateTimeFormatter.ofPattern("d MMMM yyyy")));
+            this.getDate().format(DateTimeFormatter.ofPattern("d MMMM yyyy")));
     }
 
     @Override
     public boolean equals(Object other) {
         return (other instanceof Event)
             && ((Event) other).getTitle().equals(this.getTitle())
-            && ((Event) other).getEventDate().equals(this.getEventDate())
+            && ((Event) other).getDate().equals(this.getDate())
             && ((Event) other).getDescription().equals(this.getDescription());
     }
 
@@ -73,7 +60,7 @@ public class Event extends Task {
      */
     public static Event parse(String input) throws InvalidInputException {
 
-        var desc = TaskParser.parse("event", input, Optional.of("at"), getUsage());
+        var desc = TaskParser.parse("event", input, "at", /* dateCompulsory: */ true, getUsage());
         assert desc.hasTitle() && desc.hasDate();
 
         if (desc.hasDescription()) {

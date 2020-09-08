@@ -19,16 +19,16 @@ public class TaskParser {
      * Parses the provided input, extracting the task's description and the date. The input should
      * be of the form "(description) /(dateSpec) (date)".
      *
-     * @param kind      the specific kind; eg. "deadline" or "event".
-     * @param input     the user input.
-     * @param dateSpec  the keyword for specifying the date (after the slash); either 'at' or 'by'. If
-     *                  it is empty, then the task does not accept a date.
-     * @param usage     the correct usage for the command (used for the error message).
+     * @param kind           the specific kind; eg. "deadline" or "event".
+     * @param input          the user input.
+     * @param dateSpec       the keyword for specifying the date (after the slash); either 'at' or 'by'.
+     * @param dateCompulsory whether or not the date is compulsory for this particular command.
+     * @param usage          the correct usage for the command (used for the error message).
      * @return a Pair of strings; first is the title, and second is the date.
      * @throws InvalidInputException when the input is malformed.
      */
-    public static TaskDescription parse(String kind, String input, Optional<String> dateSpec, String usage)
-        throws InvalidInputException {
+    public static TaskDescription parse(String kind, String input, String dateSpec,
+        boolean dateCompulsory, String usage) throws InvalidInputException {
 
         // TODO: make kind an enum
         // TODO: allow '/' in description or title via escapes or something
@@ -38,7 +38,7 @@ public class TaskParser {
         }
 
         var pieces = input.split("/");
-        if (pieces.length == 1 && dateSpec.isPresent()) {
+        if (pieces.length == 1 && dateCompulsory) {
             throw new InvalidInputException(String.format("%s requires a date", kind), usage);
         }
 
@@ -47,10 +47,12 @@ public class TaskParser {
         LocalDate date = null;
 
         for (int i = 1; i < pieces.length; i++) {
-            if (dateSpec.isPresent() && pieces[i].startsWith(dateSpec.get())) {
-                date = parseDate(pieces[i].substring(dateSpec.get().length()).strip());
+            if (!dateSpec.isEmpty() && pieces[i].startsWith(dateSpec)) {
+                date = parseDate(pieces[i].substring(dateSpec.length()).strip());
             } else if (pieces[i].startsWith("desc ")) {
                 desc = pieces[i].substring(5).strip();
+            } else if (pieces[i].startsWith("title ")) {
+                title = pieces[i].substring(6).strip();
             } else {
                 throw new InvalidInputException(String.format("Unexpected argument '%s'", pieces[i]), usage);
             }

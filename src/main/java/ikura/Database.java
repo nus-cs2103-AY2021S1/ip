@@ -231,7 +231,7 @@ public class Database {
                             var event = (Event) task;
                             return String.format("%c%c%s|%s|%s", 'E',
                                 task.isDone() ? '1' : '0',
-                                event.getEventDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                                event.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                                 task.getTitle(),
                                 task.getDescription());
 
@@ -240,7 +240,7 @@ public class Database {
                             var deadline = (Deadline) task;
                             return String.format("%c%c%s|%s|%s", 'D',
                                 task.isDone() ? '1' : '0',
-                                deadline.getDeadline().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
+                                deadline.getDate().format(DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                                 task.getTitle(),
                                 task.getDescription());
                         } else {

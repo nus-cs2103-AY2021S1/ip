@@ -12,9 +12,7 @@ import ikura.util.InvalidInputException;
 /**
  * A class representing a Deadline task. It has a description (name), and a deadline (date).
  */
-public class Deadline extends Task {
-
-    private final LocalDate deadline;
+public class Deadline extends DatedTask {
 
     /**
      * Constructs a new Deadline task with the given description and deadline.
@@ -23,8 +21,7 @@ public class Deadline extends Task {
      * @param deadline the deadline of this task.
      */
     public Deadline(String name, LocalDate deadline) {
-        super(name);
-        this.deadline = deadline;
+        this(name, "", deadline);
     }
 
     /**
@@ -35,31 +32,21 @@ public class Deadline extends Task {
      * @param deadline    the date of this event.
      */
     public Deadline(String title, String description, LocalDate deadline) {
-        super(title, description);
-        this.deadline = deadline;
-    }
-
-    /**
-     * Gets the deadline of the task.
-     *
-     * @return the deadline.
-     */
-    public LocalDate getDeadline() {
-        return this.deadline;
+        super(title, description, deadline);
     }
 
     @Override
     public String toString() {
 
         return String.format("[D] %s (by: %s)", super.toString(),
-            this.deadline.format(DateTimeFormatter.ofPattern("d MMMM yyyy")));
+            this.getDate().format(DateTimeFormatter.ofPattern("d MMMM yyyy")));
     }
 
     @Override
     public boolean equals(Object other) {
         return (other instanceof Deadline)
             && ((Deadline) other).getTitle().equals(this.getTitle())
-            && ((Deadline) other).getDeadline().equals(this.getDeadline())
+            && ((Deadline) other).getDate().equals(this.getDate())
             && ((Deadline) other).getDescription().equals(this.getDescription());
     }
 
@@ -74,7 +61,7 @@ public class Deadline extends Task {
      */
     public static Deadline parse(String input) throws InvalidInputException {
 
-        var desc = TaskParser.parse("deadline", input, Optional.of("by"), getUsage());
+        var desc = TaskParser.parse("deadline", input, "by", /* dateCompulsory: */ true, getUsage());
         assert desc.hasTitle() && desc.hasDate();
 
         if (desc.hasDescription()) {
