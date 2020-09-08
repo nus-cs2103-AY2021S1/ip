@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Deadline;
-
-import java.time.LocalDate;
 
 public class DeadlineCommand implements Command {
     private final LocalDate deadlineTime;
@@ -17,10 +17,10 @@ public class DeadlineCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Deadline newTask = new Deadline(deadlineDesc, deadlineTime);
         tasks.addTask(newTask);
-        ui.displayTaskAdd(newTask, tasks.getCount());
+        return ui.displayTaskAdd(newTask, tasks.getCount());
     }
 
     @Override

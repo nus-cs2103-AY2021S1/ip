@@ -33,37 +33,39 @@ public class Ui {
         printMessage(GREETING);
     }
 
-    public void displayTaskAdd(Task t, int numberOfItems) {
-        printMessage(TASK_ADDED + t.toString() + String.format(
+    public String displayTaskAdd(Task t, int numberOfItems) {
+        return printMessage(TASK_ADDED + t.toString() + String.format(
                 TASK_LIST_NUMBER, numberOfItems
         ));
     }
 
-    public void displayTaskComplete(Task t) {
-        printMessage(TASK_COMPLETED + t.toString());
+    public String displayTaskComplete(Task t) {
+        return printMessage(TASK_COMPLETED + t.toString());
     }
 
-    public void displayTaskDelete(Task t, int numberOfItems) {
-        printMessage(TASK_REMOVED + t.toString() + String.format(
+    public String displayTaskDelete(Task t, int numberOfItems) {
+        return printMessage(TASK_REMOVED + t.toString() + String.format(
                 TASK_LIST_NUMBER, numberOfItems
         ));
     }
 
-    public void listTasks(TaskList tl) {
-        printMessage(TASK_READ + tl);
+    public String listTasks(TaskList tl) {
+        return printMessage(TASK_READ + tl);
     }
 
-    public void showError(String message) {
-        printMessage(ERROR + message);
+    public String showError(String message) {
+        return printMessage(ERROR + message);
     }
 
-    public void exit() {
+    public String exit() {
         sc.close();
-        printMessage(FAREWELL);
+        return printMessage(FAREWELL);
     }
 
-    private void printMessage(String message) {
-        System.out.println(DASH + "\n" + message + "\n" + DASH);
+    private String printMessage(String message) {
+        String prettyMessage = DASH + "\n" + message + "\n" + DASH;
+        System.out.println(prettyMessage);
+        return prettyMessage;
     }
 
     public String readCommand() {

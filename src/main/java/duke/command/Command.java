@@ -10,6 +10,6 @@ import duke.exception.DukeException;
 
 public interface Command {
 
-    void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException;
+    String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException;
     boolean isExit();
 }

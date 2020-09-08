@@ -12,8 +12,8 @@ public class FindCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.listTasks(
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        return ui.listTasks(
                 tasks.findTasks(toFind));
     }
 

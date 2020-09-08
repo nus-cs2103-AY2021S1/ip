@@ -13,10 +13,10 @@ public class DeleteCommand implements Command {
         this.taskNumber = taskNumber;
     }
 
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         Task deletedTask = tasks.getTask(taskNumber);
         tasks.deleteTask(taskNumber);
-        ui.displayTaskDelete(deletedTask, tasks.getCount());
+        return ui.displayTaskDelete(deletedTask, tasks.getCount());
     }
 
     @Override

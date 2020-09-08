@@ -1,11 +1,11 @@
 package duke.command;
 
+import java.time.LocalDate;
+
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Event;
-
-import java.time.LocalDate;
 
 public class EventCommand implements Command {
 
@@ -18,10 +18,10 @@ public class EventCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Event newTask = new Event(eventDesc, eventTime);
         tasks.addTask(newTask);
-        ui.displayTaskAdd(newTask, tasks.getCount());
+        return ui.displayTaskAdd(newTask, tasks.getCount());
     }
 
     @Override

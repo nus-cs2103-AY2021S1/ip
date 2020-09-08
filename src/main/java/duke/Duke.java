@@ -1,11 +1,15 @@
 package duke;
 
+import java.io.IOException;
+import java.util.List;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.task.Task;
-
-import java.io.IOException;
-import java.util.List;
+import javafx.scene.control.Button;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
 
 public class Duke {
 
@@ -15,6 +19,14 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private ScrollPane scrollpane;
+    private VBox dialogContainer;
+    private Button sendButton;
+    private TextField userInput;
+
+    public Duke() {
+        this("filepath");
+    }
 
     public Duke(String filePath) {
         try {
@@ -49,4 +61,9 @@ public class Duke {
         new Duke("data/tasks.txt").run();
     }
 
+    public String getResponse(String userText) throws DukeException, IOException {
+        String fullCommand = userText.trim();
+        Command c = Parser.parse(fullCommand);
+        return c.execute(tasks, ui, storage);
+    }
 }

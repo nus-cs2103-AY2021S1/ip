@@ -13,10 +13,10 @@ public class TodoCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Todo newTask = new Todo(description);
         tasks.addTask(newTask);
-        ui.displayTaskAdd(newTask, tasks.getCount());
+        return ui.displayTaskAdd(newTask, tasks.getCount());
     }
 
     @Override
