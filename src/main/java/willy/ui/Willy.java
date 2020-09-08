@@ -32,7 +32,8 @@ public class Willy extends Application {
             + "\\  \\    /    \\    /  /\n"
             + " \\  \\  /  /\\  \\  /  /\n"
             + "  \\  \\/  /  \\  \\/  /\n"
-            + "   \\____/     \\___/ ILLY ~(^-^)~\n";
+            + "   \\____/     \\___/ ILLY ~(^-^)~\n" +
+            "\tYour personal life secretary\n";
     private static String introGUI = "\t __       ___        __\n"
             + "\t \\  \\    /    \\     /  /\n"
             + "\t  \\  \\  /  /\\  \\  /  /\n"
@@ -43,7 +44,7 @@ public class Willy extends Application {
 
     public Willy() {
         this.isOnJavaFX = false;
-        System.out.println(logo + "    Your personal life secretary");
+        System.out.println(logo);
         Greet startDuke = new Greet();
         System.out.println(startDuke); // prints out intro
         storage = new TaskStore();
@@ -64,24 +65,12 @@ public class Willy extends Application {
         return style;
     }
 
-    public static String getLogo() {
-        return logo;
-    }
-
-    public static String getIntroGUI() {
-        return introGUI;
-    }
-
-    public static boolean isOnJavaFX() {
-        return isOnJavaFX;
-    }
-
     public static String response(String message) {
         return  style + "\t" + message + "\n" + style;
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
 
         // normal code to start Willy
         new Willy(true);
@@ -144,9 +133,8 @@ public class Willy extends Application {
 
             // check when to end the bot
             if (message.equals(lastGreeting)) {
-                String endGreeting = new Greet(message).getExitGreeting();
-                String response = "\n" + endGreeting;
-                System.out.print(response);
+                Greet endGreeting = new Greet(message);
+                System.out.println(endGreeting);
                 break;
             }
 

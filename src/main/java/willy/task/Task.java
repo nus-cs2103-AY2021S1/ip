@@ -1,7 +1,7 @@
 package willy.task;
 
 /**
- * Work that people need to do that will be keep tracked of by the bot.
+ * Work people need to do that will be keep tracked of by the bot.
  * Status of task to be marked done or undone.
  */
 public class Task {

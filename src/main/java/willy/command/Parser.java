@@ -18,10 +18,6 @@ public class Parser {
         this.list = list;
     }
 
-    public TaskList getList() {
-        return list;
-    }
-
     /**
      * Interpret the message and carry out an action.
      *
@@ -32,16 +28,13 @@ public class Parser {
         String response="";
 
         if (isOnJavaFX) {
-            // check when to end the bot
             if (message.equals(Willy.getLastGreeting())) {
-                String endGreeting = new Greet(message).getExitGreeting();
-                response = "\n" + endGreeting;
-                return response;
+                Greet endGreeting = new Greet(message);
+                return endGreeting.toString();
             }
         }
 
         if (message.equals("list")) {
-            // reads list
             response = list.readList();
         }
 
@@ -72,7 +65,7 @@ public class Parser {
 
         }
 
-        // deadline input format: dd/MM/yyyy HHmm, output format: dd MMM yyyy HH:mm a
+        // Deadline input format: dd/MM/yyyy HHmm, output format: dd MMM yyyy HH:mm a
         else if (message.contains("deadline")) {
             try {
                 int separatorIndex = message.indexOf("/");
@@ -87,7 +80,7 @@ public class Parser {
             }
         }
 
-        // deadline input format: dd/MM/yyyy HH:mm, output format: dd MMM yyyy HH:mm a
+        // Deadline input format: dd/MM/yyyy HH:mm, output format: dd MMM yyyy HH:mm a
         else if (message.contains("event")) {
             try {
                 int separatorIndex = message.indexOf("/");
@@ -111,11 +104,10 @@ public class Parser {
             response = error.toString();
         }
 
-        if (isOnJavaFX) {
-            return response;
-        } else {
+        if (!isOnJavaFX) {
             System.out.println(response);
             return "";
         }
+        return response;
     }
 }

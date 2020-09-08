@@ -19,6 +19,11 @@ public class TaskList {
     private final String TASK_DONE_MESSAGE = "Niceee I've marked this task as done!";
     private final String NO_MATCHING_TASK_MESSAGE = "There are no matching tasks found in the list. Try something else?";
     private final String MATCHING_TASK_MESSAGE = "Here are the matching tasks in your list:";
+    private final String ADD_TASK_RESPONSE = "Ay here is the task you just added:\n";
+    private final String REMOVE_TASK_RESPONSE = "Okai here is the task you just deleted:\n";
+    private final String EMPTY_LIST_RESPONSE = "\tThere is no task in your list:>\n";
+    private final String NON_EMPTY_LIST_RESPONSE = "\tHere are the tasks in your list to jolt ur memory:>\n";
+
 
     public TaskList(ArrayList<Task> listOfTasks, TaskStore storage) {
         this.listOfTasks = listOfTasks;
@@ -42,16 +47,12 @@ public class TaskList {
         listOfTasks.add(task);
         storage.updateStorage(listOfTasks);
         String willyResponse = Willy.response(
-                "Ay here is the task you just added:\n" +
+                ADD_TASK_RESPONSE +
                 "\t  " + task + "\n" +
                 "\tNow you have " + listOfTasks.size() +
-                " task(s) ah dun forget");
-        if (Willy.isOnJavaFX()) {
-            return willyResponse;
-        } else {
-            System.out.println(willyResponse);
-            return "";
-        }
+                " task(s), please don't forget!");
+
+        return willyResponse;
     }
 
     /**
@@ -67,16 +68,13 @@ public class TaskList {
             listOfTasks.remove(i);
             storage.updateStorage(listOfTasks);
             String willyResponse = Willy.response(
-                    "Okai here is the task you just deleted:\n" +
-                            "\t  " + task + "\n" +
-                            "\tNow you have " + listOfTasks.size() +
-                            " task(s) left ~");
-            if (Willy.isOnJavaFX()) {
-                return willyResponse;
-            } else {
-                System.out.println(willyResponse);
-                return "";
-            }
+                    REMOVE_TASK_RESPONSE +
+                    "\t  " + task + "\n" +
+                    "\tNow you have " + listOfTasks.size() +
+                    " task(s) left ~");
+
+            return willyResponse;
+
         } catch (Exception e) {
             WillyException error = new WillyException(NON_EXISTENT_TASK_MESSAGE);
             return error.toString();
@@ -91,9 +89,9 @@ public class TaskList {
     public String readList() {
         String list = Willy.getStyle();
         if (listOfTasks.size() == 0) {
-            list += "\tThere is no task in your list:>\n";
+            list += EMPTY_LIST_RESPONSE;
         } else {
-            list += "\tHere are the tasks in your list to jolt ur memory:>\n";
+            list += NON_EMPTY_LIST_RESPONSE;
 
             for (int i = 0; i < listOfTasks.size(); i++) {
                 Task task = listOfTasks.get(i);
@@ -102,13 +100,7 @@ public class TaskList {
         }
 
         list = list + Willy.getStyle();
-
-        if (Willy.isOnJavaFX()) {
-            return list;
-        } else {
-            System.out.println(list);
-            return "";
-        }
+        return list;
     }
 
     /**
@@ -125,12 +117,8 @@ public class TaskList {
             storage.updateStorage(listOfTasks);
             String willyResponse = Willy.response(TASK_DONE_MESSAGE + "\n\t   " + task);
 
-            if (Willy.isOnJavaFX()) {
-                return willyResponse;
-            } else {
-                System.out.println(willyResponse);
-                return "";
-            }
+            return willyResponse;
+
         } catch (Exception e) {
             WillyException error = new WillyException(NON_EXISTENT_TASK_MESSAGE);
             return error.toString();
@@ -164,11 +152,6 @@ public class TaskList {
         }
         filteredList = filteredList + Willy.getStyle();
 
-        if (Willy.isOnJavaFX()) {
-            return filteredList;
-        } else {
-            System.out.println(filteredList);
-            return "";
-        }
+        return filteredList;
     }
 }

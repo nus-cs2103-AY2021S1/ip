@@ -22,10 +22,6 @@ public class EventsTask extends Task {
         return stringPeriod;
     }
 
-    public LocalDateTime getPeriod() {
-        return period;
-    }
-
     @Override
     public String toString() {
         return super.toString() + "(at: " +
