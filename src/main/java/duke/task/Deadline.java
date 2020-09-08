@@ -5,6 +5,7 @@ import java.time.LocalTime;
 import java.time.Month;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.Locale;
 
 import duke.DukeException;
 
@@ -20,12 +21,14 @@ public class Deadline extends Task {
         super(description);
         this.toDoBy = toDoBy;
         this.time = time;
+        Locale.setDefault(Locale.UK);
     }
 
     Deadline(String description, LocalDate toDoBy) {
         super(description);
         this.toDoBy = toDoBy;
         this.time = null;
+        Locale.setDefault(Locale.UK);
     }
 
     /**
@@ -37,6 +40,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String toDoBy, Boolean isDone) {
         super(description, isDone);
+        Locale.setDefault(Locale.UK);
         String[] scheduledTime = toDoBy.split(" ");
         this.toDoBy = LocalDate.of(Integer.parseInt(scheduledTime[2]),
                 Month.valueOf(scheduledTime[1].trim().toUpperCase()).getValue(),
