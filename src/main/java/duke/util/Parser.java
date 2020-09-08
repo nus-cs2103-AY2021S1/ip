@@ -7,6 +7,7 @@ import java.time.format.DateTimeParseException;
 
 import duke.DukeException;
 import duke.command.AddCommand;
+import duke.command.AliasCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -20,8 +21,8 @@ import duke.command.TimedAddCommand;
  */
 public class Parser {
 
-    enum CommandType {
-        BYE, LIST, FIND, DONE, DELETE, TODO, DEADLINE, EVENT
+    public enum CommandType {
+        BYE, LIST, FIND, DONE, DELETE, TODO, DEADLINE, EVENT, ALIAS, UNKNOWN
     }
 
     /**
@@ -31,14 +32,21 @@ public class Parser {
      * @return corresponding command.
      * @throws DukeException if there are any date/time parsing issues or unknown commands.
      */
-    public static Command parse(String input) throws DukeException {
+    public static Command parse(String input, AliasMap aliasMap) throws DukeException {
 
         assert input != null;
         String trimmedInput = input.trim();
         String command = trimmedInput.split(" ")[0];
 
         try {
-            CommandType type = CommandType.valueOf(command.toUpperCase());
+            CommandType type = aliasMap.getCommand(command);
+
+            if (type.equals(CommandType.UNKNOWN)) {
+                type = CommandType.valueOf(command.toUpperCase());
+            }
+
+            assert !type.equals(CommandType.UNKNOWN);
+
             switch (type) {
             case BYE:
                 return new ByeCommand();
@@ -54,14 +62,21 @@ public class Parser {
                 int deleteIdx = Integer.parseInt(trimmedInput.split(" ")[1]) - 1;
                 return new DeleteCommand(deleteIdx);
             case TODO:
-                taskFormatCheck(command, trimmedInput);
+                checkTaskFormat(type.toString().toLowerCase(), trimmedInput);
                 assert !trimmedInput.contains("/");
                 int startOfDescription = trimmedInput.indexOf(' ') + 1;
                 String description = trimmedInput.substring(startOfDescription);
                 return new AddCommand(description);
             case DEADLINE:
             case EVENT:
-                return getAddTimedCommand(trimmedInput, command);
+                return getAddTimedCommand(trimmedInput, type.toString().toLowerCase());
+            case ALIAS:
+                checkAliasFormat(trimmedInput);
+                String mapping = trimmedInput.substring(trimmedInput.indexOf(' '));
+                String alias = mapping.split("=")[0].trim();
+                String typeAsString = mapping.split("=")[1].trim();
+                CommandType commandToMap = CommandType.valueOf(typeAsString.toUpperCase());
+                return new AliasCommand(alias, commandToMap);
             default:
                 throw new DukeException("Oh dear! I'm sorry, but I don't know what that means :(");
             }
@@ -83,7 +98,7 @@ public class Parser {
      */
     private static TimedAddCommand getAddTimedCommand(String input, String command) throws DukeException {
 
-        taskFormatCheck(command, input);
+        checkTaskFormat(command, input);
         assert input.contains("/");
 
         int startOfInfo = input.indexOf(' ') + 1;
@@ -120,7 +135,7 @@ public class Parser {
      * @param input user input.
      * @throws DukeException if there are any formatting issues.
      */
-    private static void taskFormatCheck(String type, String input) throws DukeException {
+    private static void checkTaskFormat(String type, String input) throws DukeException {
 
         assert type != null && input != null;
         assert type.equals("todo") || type.equals("deadline") || type.equals("event");
@@ -157,6 +172,66 @@ public class Parser {
         }
         if (type.equals("event") && hasNoTimestamp) {
             throw new DukeException("Oh dear! An event must contain a timestamp!");
+        }
+    }
+
+    /**
+     * Checks for any alias formatting issues
+     *
+     * @param input user input.
+     * @throws DukeException if there are any formatting issues.
+     */
+    private static void checkAliasFormat(String input) throws DukeException {
+
+        boolean hasNoSpace = !input.contains(" ");
+        boolean hasNoEquals = !input.contains("=");
+
+        if (hasNoSpace) {
+            throw new DukeException("Oh dear! An alias command must have a mapping!");
+        } else if (hasNoEquals) {
+            throw new DukeException("Oh dear! An alias command must contain '='!");
+        }
+
+        String mapping = input.substring(input.indexOf(' '));
+        int idxOfEquals = mapping.indexOf('=');
+        String alias = mapping.substring(0, idxOfEquals).trim();
+        boolean moreThanOneWord = alias.contains(" ");
+        boolean hasNoAlias = alias.length() == 0;
+
+        String aliasInUpperCase = alias.toUpperCase();
+        boolean isACommandType = false;
+        for (CommandType type : CommandType.values()) {
+            if (aliasInUpperCase.equals(type.name())) {
+                isACommandType = true;
+                break;
+            }
+        }
+
+        if (moreThanOneWord) {
+            throw new DukeException("Oh dear! An alias can only consist of one word!");
+        } else if (hasNoAlias) {
+            throw new DukeException("Oh dear! An alias command needs an alias to map!");
+        } else if (isACommandType) {
+            throw new DukeException("Oh dear! An alias cannot be a command type!");
+        }
+
+        boolean endsWithEquals = idxOfEquals + 1 >= mapping.length();
+
+        if (endsWithEquals) {
+            throw new DukeException("Oh dear! An alias command needs a command type to map to!");
+        }
+
+        String type = mapping.substring(idxOfEquals + 1).trim();
+        boolean hasNoType = type.length() == 0;
+
+        if (hasNoType) {
+            throw new DukeException("Oh dear! An alias command needs a command type to map to!");
+        }
+
+        try {
+            CommandType.valueOf(type.toUpperCase());
+        } catch (IllegalArgumentException ex) {
+            throw new DukeException("Oh dear! " + type + " is not a valid command type!");
         }
     }
 }

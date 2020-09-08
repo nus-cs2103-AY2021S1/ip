@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.DukeException;
 import duke.task.Task;
+import duke.util.AliasMap;
 import duke.util.Storage;
 import duke.util.TaskList;
 import duke.util.Ui;
@@ -28,11 +29,12 @@ public class DeleteCommand extends Command {
      * @param tasks TaskList of the program.
      * @param ui user interface of the program.
      * @param storage storage of the program.
+     * @param aliasMap alias mapping.
      * @return the execution message.
      * @throws DukeException if the task doesn't exist.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage, AliasMap aliasMap) throws DukeException {
 
         assert tasks != null && ui != null && storage != null;
         int previousSize = tasks.getSize();
