@@ -6,11 +6,22 @@ import duke.Ui;
 import duke.DukeException;
 import duke.ExceptionType;
 
+/**
+ * This class marks a particular task chosen by user as done.
+ */
 public class DoneCommand extends Command {
     public DoneCommand() {
         super();
     }
 
+    /**
+     * Marks task at index given as done.
+     *
+     * @param index index of task in task list.
+     * @param userTasks list of user tasks.
+     * @param storage storage object.
+     * @return response after execution of command.
+     */
     public String execute(int index, TaskList userTasks, Storage storage) {
         try {
             if (index >= userTasks.getTaskListSize()) {
