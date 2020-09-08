@@ -101,7 +101,7 @@ public class TaskList implements Serializable {
                 .map(TaskWithDate.class::cast)
                 .sorted(Comparator.comparing(TaskWithDate::getDate))
                 .filter((task) -> optionalDate.map(localDate -> task.getDate().isBefore(localDate)).orElse(true))
-                .map((task) -> task.getStatus())
+                .map(Task::getStatus)
                 .toArray(String[]::new);
     }
 
