@@ -39,14 +39,14 @@ public class Duke {
 
         switch (command) {
         case HELP:
-            response += ui.printAvailableCommands();
+            response += ui.availableCommands();
             break;
         case TODO:
             description = input.substring(4);
             t = new ToDo(description);
             userTasks.addTask(t);
             storage.saveToFile(userTasks.getTaskList());
-            response += ui.printTaskAddedMessage(t, userTasks.getTaskListSize());
+            response += ui.taskAddedMessage(t, userTasks.getTaskListSize());
             break;
         case DEADLINE:
             inputSplit = input.split(" /by ");
@@ -55,7 +55,7 @@ public class Duke {
             t = new Deadline(description, by);
             userTasks.addTask(t);
             storage.saveToFile(userTasks.getTaskList());
-            response += ui.printTaskAddedMessage(t, userTasks.getTaskListSize());
+            response += ui.taskAddedMessage(t, userTasks.getTaskListSize());
             break;
         case EVENT:
             inputSplit = input.split(" /at ");
@@ -65,71 +65,71 @@ public class Duke {
             t = new Event(description, at, timeRange);
             userTasks.addTask(t);
             storage.saveToFile(userTasks.getTaskList());
-            response += ui.printTaskAddedMessage(t, userTasks.getTaskListSize());
+            response += ui.taskAddedMessage(t, userTasks.getTaskListSize());
             break;
         case LIST_ALL:
-            response += ui.printAllTasks(userTasks.getTaskList());
+            response += ui.allTasksToString(userTasks.getTaskList());
             break;
         case LIST_ALL_DONE:
             ArrayList<Task> tasksDone = new TaskFinder()
                     .findAllDone(userTasks.getTaskList());
-            response += ui.printAllTasksDone(tasksDone);
+            response += ui.allTasksDoneToString(tasksDone);
             break;
         case LIST_ALL_NOT_DONE:
             ArrayList<Task> tasksNotDone = new TaskFinder()
                     .findAllNotDone(userTasks.getTaskList());
-            response += ui.printAllTasksNotDone(tasksNotDone);
+            response += ui.allTasksNotDoneToString(tasksNotDone);
             break;
         case LIST_TODOS:
             ArrayList<Task> toDos = new TaskFinder()
                     .findToDos(userTasks.getTaskList());
-            response += ui.printToDos(toDos);
+            response += ui.toDosToString(toDos);
             break;
         case LIST_TODOS_DONE:
             ArrayList<Task> toDosDone = new TaskFinder()
                     .findToDosDone(userTasks.getTaskList());
-            response += ui.printToDosDone(toDosDone);
+            response += ui.toDosDoneToString(toDosDone);
             break;
         case LIST_TODOS_NOT_DONE:
             ArrayList<Task> toDosNotDone = new TaskFinder()
                     .findToDosNotDone(userTasks.getTaskList());
-            response += ui.printToDosNotDone(toDosNotDone);
+            response += ui.toDosNotDoneToString(toDosNotDone);
             break;
         case LIST_DEADLINES:
             ArrayList<Task> deadlines = new TaskFinder()
                     .findDeadlines(userTasks.getTaskList());
-            response += ui.printDeadlines(deadlines);
+            response += ui.deadlinesToString(deadlines);
             break;
         case LIST_DEADLINES_DONE:
             ArrayList<Task> deadlinesDone = new TaskFinder()
                     .findDeadlinesDone(userTasks.getTaskList());
-            response += ui.printDeadlinesDone(deadlinesDone);
+            response += ui.deadlinesDoneToString(deadlinesDone);
             break;
         case LIST_DEADLINES_NOT_DONE:
             ArrayList<Task> deadlinesNotDone = new TaskFinder()
                     .findDeadlinesNotDone(userTasks.getTaskList());
-            response += ui.printDeadlinesNotDone(deadlinesNotDone);
+            response += ui.deadlinesNotDoneToString(deadlinesNotDone);
             break;
         case LIST_EVENTS:
             ArrayList<Task> events = new TaskFinder()
                     .findEvents(userTasks.getTaskList());
-            response += ui.printEvents(events);
+            response += ui.eventsToString(events);
             break;
         case LIST_EVENTS_DONE:
             ArrayList<Task> eventsDone = new TaskFinder()
                     .findEventsDone(userTasks.getTaskList());
-            response += ui.printEventsDone(eventsDone);
+            response += ui.eventsDoneToString(eventsDone);
             break;
         case LIST_EVENTS_NOT_DONE:
             ArrayList<Task> eventsNotDone = new TaskFinder()
                     .findEventsNotDone(userTasks.getTaskList());
-            response += ui.printEventsNotDone(eventsNotDone);
+            response += ui.eventsNotDoneToString(eventsNotDone);
             break;
         case LIST_BY_KEYWORD:
             String keyword = input.split("find ")[1];
             ArrayList<Task> filteredTasks = new TaskFinder()
                     .findByKeyword(userTasks.getTaskList(), keyword);
-            response += ui.printFilteredTasksByKeyword(filteredTasks, keyword);
+            response += ui.filteredTasksByKeywordToString(filteredTasks, keyword);
             break;
         case DONE:
             int index = Integer.parseInt(input.substring(5)) - 1;
@@ -139,11 +139,11 @@ public class Duke {
                     throw new DukeException("", ExceptionType.INDEX_OUT_OF_BOUNDS);
                 } else {
                     userTasks.markTaskAsDone(index);
-                    response += ui.printMarkAsDoneMessage(userTasks.getTask(index));
+                    response += ui.markAsDoneMessage(userTasks.getTask(index));
                 }
                 storage.saveToFile(userTasks.getTaskList());
             } catch (DukeException ex) {
-                response += ui.printError(ex);
+                response += ui.errorMessage(ex);
             }
 
             break;
@@ -156,50 +156,50 @@ public class Duke {
                 } else {
                     t = userTasks.getTask(index);
                     userTasks.deleteTask(index);
-                    response += ui.printTaskDeletedMessage(t);
+                    response += ui.taskDeletedMessage(t);
                 }
                 storage.saveToFile(userTasks.getTaskList());
             } catch (DukeException ex) {
-                response += ui.printError(ex);
+                response += ui.errorMessage(ex);
             }
 
             break;
         case BYE:
-            response += ui.printByeMessage();
+            response += ui.byeMessage();
         break;
         case INVALID_IS_EMPTY:
             try {
                 throw new DukeException("", ExceptionType.EMPTY_INPUT);
             } catch (DukeException ex) {
-                response += ui.printError(ex);
+                response += ui.errorMessage(ex);
                 break;
             }
         case INVALID_COMMAND:
             try {
                 throw new DukeException("", ExceptionType.INVALID_COMMAND);
             } catch (DukeException ex) {
-                response += ui.printError(ex);
+                response += ui.errorMessage(ex);
                 break;
             }
         case INVALID_EMPTY_DESCRIPTION:
             try {
                 throw new DukeException("", ExceptionType.EMPTY_DESCRIPTION);
             } catch (DukeException ex) {
-                response += ui.printError(ex);
+                response += ui.errorMessage(ex);
                 break;
             }
         case INVALID_DEADLINE_NO_BY:
             try {
                 throw new DukeException("", ExceptionType.DEADLINE_NO_BY);
             } catch (DukeException ex) {
-                response += ui.printError(ex);
+                response += ui.errorMessage(ex);
                 break;
             }
         case INVALID_EVENT_NO_START_END:
             try {
                 throw new DukeException("", ExceptionType.EVENT_NO_START_END);
             } catch (DukeException ex) {
-                response += ui.printError(ex);
+                response += ui.errorMessage(ex);
                 break;
             }
         }
