@@ -24,14 +24,17 @@ public class DateTimeHandler {
      * @return true if input is valid, false if not.
      */
     public boolean isValidInput(String input) {
-        if (input.length() == 10) {
+        int dateLength = 10;
+        int dateTimeLength = 15;
+
+        if (input.length() == dateLength) {
             try {
                 convertDate(input);
                 return true;
             } catch (DateTimeParseException e) {
                 return false;
             }
-        } else if (input.length() == 15) {
+        } else if (input.length() == dateTimeLength) {
             try {
                 convertDateTime(input);
                 return true;
@@ -52,10 +55,16 @@ public class DateTimeHandler {
      * convertDateTime() method if date and time input is given.
      */
     public String categorizeInput(String input) {
-        if (input.length() == 10) {
+        int dateLength = 10;
+        int dateTimeLength = 15;
+
+        if (input.length() == dateLength) {
             return convertDate(input);
-        } else {
+        } else if (input.length() == dateTimeLength) {
             return convertDateTime(input);
+        } else {
+            assert false : "invalid input to categorize";
+            return input;
         }
     }
 
