@@ -35,9 +35,6 @@ public class Duke {
         String[] inputSplit = new String[] {};
         String description, response = "";
 
-        // Get input from user
-//        input = inputParser.getInput();
-
         CommandType command = inputParser.parseInput(input);
 
         switch (command) {
@@ -135,10 +132,8 @@ public class Duke {
             response += ui.printFilteredTasksByKeyword(filteredTasks, keyword);
             break;
         case DONE:
-            // Get the index stated after "done" by parsing the string
             int index = Integer.parseInt(input.substring(5)) - 1;
 
-            // Mark item as done
             try {
                 if (index >= userTasks.getTaskListSize()) {
                     throw new DukeException("", ExceptionType.INDEX_OUT_OF_BOUNDS);
@@ -146,19 +141,15 @@ public class Duke {
                     userTasks.markTaskAsDone(index);
                     response += ui.printMarkAsDoneMessage(userTasks.getTask(index));
                 }
-
-                // Update Tasklist.txt after marking task as done
                 storage.saveToFile(userTasks.getTaskList());
-
             } catch (DukeException ex) {
                 response += ui.printError(ex);
             }
+
             break;
         case DELETE:
-            // Get the index stated after "delete" by parsing the string
             index = Integer.parseInt(input.substring(7)) - 1;
 
-            // Delete item
             try {
                 if (index >= userTasks.getTaskListSize()) {
                     throw new DukeException("", ExceptionType.INDEX_OUT_OF_BOUNDS);
@@ -167,13 +158,11 @@ public class Duke {
                     userTasks.deleteTask(index);
                     response += ui.printTaskDeletedMessage(t);
                 }
-
-                // Update Tasklist.txt after removing task
                 storage.saveToFile(userTasks.getTaskList());
-
             } catch (DukeException ex) {
                 response += ui.printError(ex);
             }
+
             break;
         case BYE:
             response += ui.printByeMessage();
