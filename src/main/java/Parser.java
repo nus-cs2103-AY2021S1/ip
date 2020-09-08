@@ -15,14 +15,19 @@ public class Parser {
         if (input.equals("bye")) { //bye command
             return new ByeCommand();
         } else if (input.equals("list")) { //list command
+            System.out.println("list");
             return new ListCommand();
+        } else if (input.equals("undo")) {
+            return new UndoCommand();
         } else if (firstWord.equals("find")) { //find command
             return new FindCommand(words);
         } else if (firstWord.equals("done")) { //done command
             return new DoneCommand(words);
         } else if (firstWord.equals("delete")) { //done command
+            System.out.println("delete");
             return new DeleteCommand(words);
         } else if (firstWord.equals("todo")) { //todo command
+            System.out.println("todo");
             return new TodoCommand(words);
         } else if (firstWord.equals("deadline")) { //complete deadline command
             return new DeadlineCommand(words);

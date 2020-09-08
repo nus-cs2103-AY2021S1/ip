@@ -26,6 +26,7 @@ public class TodoCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws TodoException {
+        UndoStack.add(tasks);
         ArrayList<Task> store = tasks.getTaskList();
         if (input.length == 1) {
             throw new TodoException("☹ OOPS!!! The description of a todo cannot be empty.");
