@@ -108,7 +108,7 @@ public class TaskList implements Serializable {
                     }
 
                 })
-                .map((task) -> task.getStatus())
+                .map(Task::getStatus)
                 .toArray(String[]::new);
     }
 
