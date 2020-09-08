@@ -1,6 +1,8 @@
 package duke;
 
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import duke.task.TaskList;
 
@@ -28,16 +30,9 @@ public class Ui {
      * @param list a Tasklist object
      */
     public String showList(TaskList list) {
-        String print = "";
-        print += "Here are the tasks in your list:\n";
-        for (int i = 0; i < list.size(); i++) {
-            if (i == list.size() - 1) {
-                print += String.format("%d. ", i + 1) + list.get(i);
-            } else {
-                print += String.format("%d. ", i + 1) + list.get(i) + "\n";
-            }
-        }
-        return print;
+        return "Here are the tasks in your list:\n" + IntStream.range(0, list.size())
+                .mapToObj(i -> String.format("%d. %s", i + 1, list.getList().get(i).toString()))
+                .collect(Collectors.joining("\n"));
     }
 
     /**
