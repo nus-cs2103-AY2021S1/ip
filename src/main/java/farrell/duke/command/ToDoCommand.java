@@ -1,4 +1,8 @@
-package main.java.farrell.duke;
+package main.java.farrell.duke.command;
+
+import main.java.farrell.duke.DukeException;
+import main.java.farrell.duke.task.TaskList;
+import main.java.farrell.duke.task.ToDo;
 
 public class ToDoCommand extends Command{
     private String description;

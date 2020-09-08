@@ -1,4 +1,4 @@
-package main.java.farrell.duke;
+package main.java.farrell.duke.gui;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -9,6 +9,8 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import main.java.farrell.duke.Duke;
+import main.java.farrell.duke.DukeException;
 
 /**
  * Encapsulates behavior for interacting with the user.
@@ -64,24 +66,18 @@ public class UiManager extends Application {
         primaryStage.setMinHeight(600);
 
         // Setup event handlers
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput(userInput.getText());
-        });
+        sendButton.setOnMouseClicked((event) -> handleUserInput(userInput.getText()));
 
-        userInput.setOnAction((event) -> {
-            handleUserInput(userInput.getText());
-        });
+        userInput.setOnAction((event) -> handleUserInput(userInput.getText()));
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
         primaryStage.show();
 
         // Initialise program
-        try {
-            duke = new Duke(this);
-        } catch (DukeException exception) {
-            sendDukeMessage(exception.getMessage());
-        }
+        duke = new Duke(this);
+        displayStartMessage();
+
     }
 
     @Override
@@ -91,7 +87,10 @@ public class UiManager extends Application {
     }
 
     private void handleUserInput(String input) {
-        duke.run(input);
+        sendUserMessage(input);
+
+        String output = duke.run(input);
+        sendDukeMessage(output);
 
         userInput.clear();
     }

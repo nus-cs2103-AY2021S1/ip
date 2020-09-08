@@ -1,4 +1,6 @@
-package main.java.farrell.duke;
+package main.java.farrell.duke.command;
+
+import main.java.farrell.duke.DukeException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;

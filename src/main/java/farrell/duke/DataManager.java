@@ -4,11 +4,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import main.java.farrell.duke.task.Task;
+import main.java.farrell.duke.task.TaskList;
+import main.java.farrell.duke.task.TaskType;
 
 /**
  * Encapsulates behavior for reading and writing to files.
@@ -40,7 +42,7 @@ public class DataManager {
 
             FileWriter fw = new FileWriter(dataFile);
             for (Task task : tasks) {
-                String data = convertTaskToData(task);
+                String data = task.convertToData();
                 fw.write(data + "\n");
             }
             fw.close();
@@ -77,62 +79,9 @@ public class DataManager {
         }
     }
 
-    private String convertTaskToData(Task task) throws DukeException {
-        switch (task.getTaskType()) {
-        case TODO:
-            ToDo todo = (ToDo) task;
-            return convertTodoToData(todo);
-        case EVENT:
-            Event event = (Event) task;
-            return convertEventToData(event);
-        case DEADLINE:
-            Deadline deadline = (Deadline) task;
-            return convertDeadlineToData(deadline);
-        default:
-            throw new DukeException("Invalid Task Type Encountered.");
-        }
-    }
-
-    private String convertTodoToData(ToDo todo) {
-        return todo.getTaskType().name() + "|"
-                + (todo.isDone() ? "true" : "false") + "|"
-                + todo.getDescription();
-    }
-
-    private String convertEventToData(Event event) {
-        return event.getTaskType().name() + "|"
-                + (event.isDone() ? "true" : "false") + "|"
-                + event.getDescription() + "|"
-                + event.getTime().format(DateTimeFormatter.ISO_LOCAL_DATE);
-    }
-
-    private String convertDeadlineToData(Deadline deadline) {
-        return deadline.getTaskType().name() + "|"
-                + (deadline.isDone() ? "true" : "false") + "|"
-                + deadline.getDescription() + "|"
-                + deadline.getTime().format(DateTimeFormatter.ISO_LOCAL_DATE);
-    }
-
     private Task convertDataToTask(String dataLine) throws DukeException {
         String[] data = dataLine.split("\\|");
         TaskType taskType = TaskType.enumFromString(data[0]);
-        try {
-            switch (taskType) {
-            case TODO:
-                return new ToDo(data[2], Boolean.parseBoolean(data[1]));
-            case EVENT:
-                return new Event(data[2],
-                        Boolean.parseBoolean(data[1]),
-                        LocalDate.parse(data[3]));
-            case DEADLINE:
-                return new Deadline(data[2],
-                        Boolean.parseBoolean(data[1]),
-                        LocalDate.parse(data[3]));
-            default:
-                throw new DukeException("Invalid data format provided!");
-            }
-        } catch (IndexOutOfBoundsException exception) {
-            throw new DukeException("Not enough data provided!");
-        }
+        return taskType.getTaskFromData(data);
     }
 }

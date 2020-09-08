@@ -1,5 +1,10 @@
 package main.java.farrell.duke;
 
+import main.java.farrell.duke.command.Command;
+import main.java.farrell.duke.command.CommandParser;
+import main.java.farrell.duke.gui.UiManager;
+import main.java.farrell.duke.task.TaskList;
+
 /**
  * A personal assistant chatbot that helps to keep track of tasks.
  */
@@ -10,20 +15,20 @@ public class Duke {
     /** An object that handles saving and loading data */
     private DataManager dataManager = new DataManager();
 
-    /** An object that handles user interaction */
-    private UiManager uiManager;
-
     /**
      * Starts a new instance of the program.
      * Existing data is loaded (if available).
      * Display a startup message.
-     * @param uiManager The UIManager to handle the startup message.
+     * @param uiManager The UIManager to handle the startup error messages.
      * @throws DukeException If unable to load data
      */
-    public Duke(UiManager uiManager) throws DukeException {
-        this.uiManager = uiManager;
-        taskList = dataManager.load();
-        uiManager.displayStartMessage();
+    public Duke(UiManager uiManager) {
+        try {
+            taskList = dataManager.load();
+        } catch (DukeException exception) {
+            uiManager.sendDukeMessage(exception.getMessage());
+            taskList = new TaskList();
+        }
     }
 
     /**
@@ -34,21 +39,20 @@ public class Duke {
      * 3. Execute the command.
      * 4. Display the program output to the user.
      */
-    public void run(String input) {
+    public String run(String input) {
         try {
-            uiManager.sendUserMessage(input);
             Command command = CommandParser.parse(input);
             String output = command.execute(taskList);
 
             dataManager.save(taskList);
 
-            uiManager.sendDukeMessage(output);
-
             if (command.shouldExit()) {
                 System.exit(0);
             }
+
+            return output;
         } catch (DukeException exception) {
-            uiManager.sendDukeMessage(exception.getMessage());
+            return exception.getMessage();
         }
     }
 }

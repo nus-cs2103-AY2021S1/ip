@@ -1,4 +1,8 @@
-package main.java.farrell.duke;
+package main.java.farrell.duke.command;
+
+import main.java.farrell.duke.DukeException;
+import main.java.farrell.duke.task.Task;
+import main.java.farrell.duke.task.TaskList;
 
 public class DeleteCommand extends Command {
     private int taskIndex;

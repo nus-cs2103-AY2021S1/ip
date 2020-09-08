@@ -1,6 +1,4 @@
-package main.java.farrell.duke;
-
-import java.time.LocalDate;
+package main.java.farrell.duke.task;
 
 /**
  * Encapsulates data common to a task.
@@ -11,10 +9,10 @@ public class Task {
     protected TaskType taskType;
 
     /** The task's details */
-    private String description;
+    protected String description;
 
     /** The completion status of the task */
-    private boolean isDone;
+    protected boolean isDone;
 
     Task(String description, boolean isDone) {
         this.description = description;
@@ -49,6 +47,11 @@ public class Task {
      */
     public String getStatusString() {
         return (isDone ? "\u2713" : "\u2718");
+    }
+
+    public String convertToData() {
+        return (isDone ? "true" : "false") + "|"
+                + description;
     }
 
     @Override

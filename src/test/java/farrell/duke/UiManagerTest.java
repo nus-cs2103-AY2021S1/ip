@@ -10,7 +10,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import main.java.farrell.duke.UiManager;
+import main.java.farrell.duke.gui.UiManager;
 
 public class UiManagerTest {
     private TestManager testManager = new TestManager();

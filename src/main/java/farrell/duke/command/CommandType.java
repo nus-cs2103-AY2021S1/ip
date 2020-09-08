@@ -1,4 +1,4 @@
-package main.java.farrell.duke;
+package main.java.farrell.duke.command;
 
 /**
  * Enumeration of the commands accepted by the program.

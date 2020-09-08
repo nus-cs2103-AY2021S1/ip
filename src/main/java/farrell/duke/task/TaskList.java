@@ -1,4 +1,8 @@
-package main.java.farrell.duke;
+package main.java.farrell.duke.task;
+
+import main.java.farrell.duke.DukeException;
+import main.java.farrell.duke.task.Task;
+import main.java.farrell.duke.task.TimedTask;
 
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -11,11 +15,11 @@ public class TaskList {
     /** The list of tasks */
     private List<Task> taskList;
 
-    TaskList() {
+    public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
-    TaskList(List<Task> taskList) {
+    public TaskList(List<Task> taskList) {
         this.taskList = taskList;
     }
 

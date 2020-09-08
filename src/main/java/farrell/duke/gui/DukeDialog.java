@@ -1,4 +1,4 @@
-package main.java.farrell.duke;
+package main.java.farrell.duke.gui;
 
 import javafx.geometry.Pos;
 import javafx.scene.control.Label;
