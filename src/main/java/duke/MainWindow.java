@@ -43,7 +43,8 @@ public class MainWindow extends AnchorPane {
     public void setDuke(Duke d) {
         duke = d;
         DialogBox db = DialogBox.getDukeDialog("Hello! This is J.A.R.V.I.S.\nHow may I help you?", dukeImage);
-        dialogContainer.getChildren().addAll(db);
+        DialogBox dbTwo = DialogBox.getDukeDialog("Enter 'help' for command guide.", dukeImage);
+        dialogContainer.getChildren().addAll(db, dbTwo);
     }
 
 

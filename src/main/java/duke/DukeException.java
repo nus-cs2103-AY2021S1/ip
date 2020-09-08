@@ -32,6 +32,13 @@ public class DukeException extends Throwable {
         IMPROPER_DATETIME
     }
 
+    /** Command Guide for Users */
+    public static String fullGuide = "Please follow the format below:\n"
+            + "\n'help'" + "\n'list'" + "\n'done TASK_NUMBER'" + "\n'delete TASK_NUMBER'"
+            + "\n'todo MY_TASK'" + "\n'deadline MY_TASK /by DATE_OR_TIME'"
+            + "\n'event MY_TASK /at DATE_OR_TIME'" + "\n'find KEYWORD'" + "\n'bye'\n\nNOTE: "
+            + "\nAcceptable Form of DATE_OR_TIME: 'YYYY-MM-DD HHMM', 'YYYY-MM-DD', 'YYYY-MM-DD HH', 'YYYY-MM-DD H' or 'undecided'";
+
 
     /**
      * Return String representation of DukeException object in form of List<String>.
@@ -40,18 +47,10 @@ public class DukeException extends Throwable {
     public List<String> toArrList() {
         List<String> output = new ArrayList<>();
 
-        String full_guide = "Please follow the format below:\n"
-                + "\n'list'" + "\n'done TASK_NUMBER'" + "\n'delete TASK_NUMBER'"
-                + "\n'todo MY_TASK'" + "\n'deadline MY_TASK /by DATE_OR_TIME'"
-                + "\n'event MY_TASK /at DATE_OR_TIME'"
-                + "\n'find KEYWORD'"
-                + "\n'bye'\n\nNOTE: "
-                + "\nAcceptable Form of DATE_OR_TIME: 'YYYY-MM-DD HHMM', 'YYYY-MM-DD', 'YYYY-MM-DD HH', 'YYYY-MM-DD H' or 'undecided''";
-
         switch(et) {
         case NO_MEANING:
             output.add("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-            output.add(full_guide);
+            output.add(fullGuide);
             break;
         case EMPTY_ILLEGAL:
             output.add("☹ OOPS!!! Your number input is empty or invalid.");
@@ -69,24 +68,24 @@ public class DukeException extends Throwable {
             output.add("☹ OOPS!!! The description of a deadline cannot be empty or incomplete.\n"
                     + "\nUse '/by undecided' if you want to decide later!");
             output.add("Please follow the format: \n'deadline MY_TASK /by DATE_OR_TIME'\n"
-                    + "\n(Acceptable DATE/TIME format:\n'YYYY-MM-DD HHMM', 'YYYY-MM-DD', 'YYYY-MM-DD HH', 'YYYY-MM-DD H' or 'undecided'.)");
+                    + "\n(Acceptable DATE/TIME format:\n'YYYY-MM-DD HHMM', 'YYYY-MM-DD', 'YYYY-MM-DD HH', 'YYYY-MM-DD H' or 'undecided')");
             break;
         case EVENT_INCOMPLETE:
             output.add("☹ OOPS!!! The description of an event cannot be empty or incomplete.\n"
                     + "\nUse '/at undecided' if you want to decide later!");
             output.add("Please follow the format: \n'event MY_TASK /at DATE_OR_TIME'\n"
-                    + "\nAcceptable DATE/TIME format:\n 'YYYY-MM-DD HHMM', 'YYYY-MM-DD', 'YYYY-MM-DD HH', 'YYYY-MM-DD H' or 'undecided'.");
+                    + "\nAcceptable DATE/TIME format:\n 'YYYY-MM-DD HHMM', 'YYYY-MM-DD', 'YYYY-MM-DD HH', 'YYYY-MM-DD H' or 'undecided'");
             break;
         case READ_FILE:
             output.add("☹ OOPS!!! There seems to be some problem accessing the memory file!");
             break;
         case IMPROPER_DATETIME:
             output.add("☹ OOPS!!! We are unable to understand the DateTime provided.");
-            output.add("Please use the formats 'YYYY-MM-DD HHMM', 'YYYY-MM-DD', 'YYYY-MM-DD HH', 'YYYY-MM-DD H' or 'undecided'.!");
+            output.add("Please use the formats 'YYYY-MM-DD HHMM', 'YYYY-MM-DD', 'YYYY-MM-DD HH', 'YYYY-MM-DD H' or 'undecided'!");
             break;
         default:
             output.add("☹ OOPS!!! Unspecified problem detected!");
-            output.add(full_guide);
+            output.add(fullGuide);
             break;
         }
 
