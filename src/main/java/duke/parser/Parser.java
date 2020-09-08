@@ -45,7 +45,7 @@ public class Parser {
      * @return An integer array that consists of task number(s).
      * @throws DukeException If integer array is empty.
      */
-    public static int[] parse(String inputString) throws DukeException {
+    public static int[] parseMultipleTasks(String inputString) throws DukeException {
         int[] taskNumbers;
         if (inputString.isBlank()) {
             throw new DukeException("Yo! Enter the task numbers(s).");
@@ -63,6 +63,11 @@ public class Parser {
         return taskNumbers;
     }
 
+    /**
+     * User Command and Details Input is parsed here for processing, to split command keyword and details.
+     * @param inputString User Input string; User Command and Details.
+     * @return A string array with command at index 0 and details at index 1.
+     */
     public static String[] parseCommand(String inputString) {
         String[] splitStrings;
         splitStrings = inputString.split(" ", 2);
