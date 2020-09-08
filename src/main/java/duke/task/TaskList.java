@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.DukeException;
 import duke.backend.Storage;
 import duke.ui.Ui;
 
@@ -66,6 +67,19 @@ public class TaskList {
         tasks.remove(taskNumber - 1);
         storage.writeFile(this);
         return ui.sayDeletedTask(task, getListSize());
+    }
+
+    public String snoozeTask(Ui ui, int taskNumber, Storage storage) throws DukeException, IOException {
+        assert taskNumber > 0 : "Number should be greater than 0";
+        Task task = tasks.get(taskNumber - 1);
+        if (task.type == Task.Type.TODO) {
+            throw new DukeException("TODO cannot be snoozed");
+        }
+        TimedTask newTask = (TimedTask) task;
+        newTask.snooze();
+        tasks.set(taskNumber - 1, newTask);
+        storage.writeFile(this);
+        return ui.sayTaskSnoozed(newTask);
     }
 
     /**

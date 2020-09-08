@@ -23,6 +23,7 @@ public class Parser {
     private static final String EVENT = "event";
     private static final String FIND = "find";
     private static final String HELP = "help";
+    private static final String SNOOZE = "snooze";
 
     // Special Strings used by duke.Parser.
     private static final String SPACE = " ";
@@ -32,7 +33,6 @@ public class Parser {
     private static final String SEPARATOR = " /";
 
     // For time formatting.
-    private static final String TIME_FORMAT = "d MMM yyyy";
     private static final String NOW = "now";
 
     /**
@@ -67,6 +67,9 @@ public class Parser {
         }
         if (commandKeyword.equals(HELP)) {
             return handleHelpCommand(ui);
+        }
+        if (commandKeyword.equals(SNOOZE)) {
+            return handleSnoozeCommand(ui, tasks, storage, parsedInput);
         }
         // The user's command keyword is not recognised.
         throw new DukeException("Invalid command keyword");
@@ -177,13 +180,13 @@ public class Parser {
 
     private static Deadline getDeadline(String[] parsedInput) throws DukeException {
         String description = getDescription(parsedInput[1]);
-        String time = getTime(parsedInput[1], Task.Type.DEADLINE);
+        LocalDate time = getTime(parsedInput[1], Task.Type.DEADLINE);
         return new Deadline(description, time);
     }
 
     private static Event getEvent(String[] parsedInput) throws DukeException {
         String description = getDescription(parsedInput[1]);
-        String time = getTime(parsedInput[1], Task.Type.EVENT);
+        LocalDate time = getTime(parsedInput[1], Task.Type.EVENT);
         return new Event(description, time);
     }
 
@@ -191,7 +194,7 @@ public class Parser {
         return body.split(SEPARATOR, 2)[0];
     }
 
-    private static String getTime(String body, Task.Type type) throws DukeException {
+    private static LocalDate getTime(String body, Task.Type type) throws DukeException {
         String time;
         if (type == Task.Type.DEADLINE) {
             time = body.split(DEADLINE_SEPARATOR, 2)[1];
@@ -201,9 +204,9 @@ public class Parser {
             throw new DukeException("Unidentified task type");
         }
         if (time.toLowerCase().equals(NOW)) {
-            return LocalDate.now().format(DateTimeFormatter.ofPattern(TIME_FORMAT));
+            return LocalDate.now();
         } else {
-            return LocalDate.parse(time).format(DateTimeFormatter.ofPattern(TIME_FORMAT));
+            return LocalDate.parse(time);
         }
     }
 
@@ -242,6 +245,16 @@ public class Parser {
             return true;
         } catch (DateTimeParseException e) {
             return false;
+        }
+    }
+
+    private static String handleSnoozeCommand(Ui ui, TaskList tasks, Storage storage, String[] parsedInput) throws DukeException, IOException {
+        if (isValidSize(tasks, parsedInput)) {
+            int taskNumber = getNumber(parsedInput);
+            assert taskNumber > 0 : "Number should be greater than 0";
+            return tasks.snoozeTask(ui, taskNumber, storage);
+        } else {
+            throw new DukeException("Invalid number for SNOOZE command");
         }
     }
 }

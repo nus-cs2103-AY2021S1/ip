@@ -115,4 +115,10 @@ public class Ui {
         System.out.println(message);
         return message;
     }
+
+    public String sayTaskSnoozed(Task task) {
+        String message = BOT_NAME + "I have snoozed this task!\n" + task;
+        System.out.println(message);
+        return message;
+    }
 }
