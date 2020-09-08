@@ -12,13 +12,13 @@ public class DoneCommand extends Command {
     /**
      * Represents a DoneCommand
      * @param number the index of the task to be marked done
-     * @throws DukeException if the task does not exist in the list
+     * @throws DukeException if the user input is invalid
      */
     public DoneCommand(String number) throws DukeException {
         try {
             this.index = Integer.parseInt(number) - 1;
         } catch (NumberFormatException e) {
-            throw new DukeException("Sorry, I can't seem to find the task...");
+            throw new DukeException("Invalid input detected...");
         }
     }
 

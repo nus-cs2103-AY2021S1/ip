@@ -8,6 +8,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.RemindCommand;
 import duke.command.SortCommand;
 import duke.command.UpdateCommand;
 import duke.exception.DukeException;
@@ -23,6 +24,7 @@ public class Parser {
      * @throws DukeException if user input does not follow convention
      */
     public static Command parse(String input) throws DukeException {
+        input = input.trim().toLowerCase();
         if (input.equals("bye")) {
             return new ByeCommand();
         }
@@ -60,6 +62,10 @@ public class Parser {
 
             case "update": {
                 return new UpdateCommand(second);
+            }
+
+            case "remind": {
+                return new RemindCommand(second);
             }
 
             default: {
