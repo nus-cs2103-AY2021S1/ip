@@ -31,11 +31,12 @@ public class AddCommand extends Command {
 
     private String addTodo() {
         int initialNum = tasks.getTaskSize();
-        tasks.addTask(new Todo(item));
+        Todo addedTodo = new Todo(item);
+        tasks.addTodo(addedTodo);
 
         assert (tasks.getTaskSize() - initialNum) == 1 : "failed adding todo task";
 
-        return ui.startAddTodo(tasks.getLastTask()) + "\n" + ui.printTasksSize(tasks.getTaskSize());
+        return ui.startAddTodo(addedTodo) + "\n" + ui.printTasksSize(tasks.getTaskSize());
     }
 
     private String addDeadline() throws DukeException {
@@ -49,11 +50,13 @@ public class AddCommand extends Command {
                 // valid
                 int initialNum = tasks.getTaskSize();
                 String formattedDate = dth.categorizeInput(temp[1]);
-                tasks.addTask(new Deadline(temp[0], formattedDate));
+                Deadline addedDeadline = new Deadline(temp[0], formattedDate);
+                tasks.addTask(addedDeadline);
+                tasks.sortTasks();
 
                 assert (tasks.getTaskSize() - initialNum) == 1 : "failed adding deadline task";
 
-                return ui.startAddDeadline(tasks.getLastTask()) + "\n"
+                return ui.startAddDeadline(addedDeadline) + "\n"
                         + ui.printTasksSize(tasks.getTaskSize());
             } else {
                 // not valid date
@@ -76,11 +79,13 @@ public class AddCommand extends Command {
                 // valid
                 int initialNum = tasks.getTaskSize();
                 String formattedDate = dth.categorizeInput(temp[1]);
-                tasks.addTask(new Event(temp[0], formattedDate));
+                Event addedEvent = new Event(temp[0], formattedDate);
+                tasks.addTask(addedEvent);
+                tasks.sortTasks();
 
                 assert (tasks.getTaskSize() - initialNum) == 1 : "failed adding event task";
 
-                return ui.startAddEvent(tasks.getLastTask()) + "\n"
+                return ui.startAddEvent(addedEvent) + "\n"
                         + ui.printTasksSize(tasks.getTaskSize());
             } else {
                 // not valid date

@@ -1,5 +1,7 @@
 package dd.tasks;
 
+import java.time.LocalDateTime;
+
 /**
  * A task stored in the task list.
  */
@@ -44,6 +46,15 @@ public class Task {
      */
     public void markAsDone() {
         this.isDone = true;
+    }
+
+    /**
+     * Returns LocalDate or LocalDateTime form of date or date and time of task.
+     *
+     * @return LocalDate or LocalDateTime form of date or date and time of task.
+     */
+    public LocalDateTime getDateTime() {
+        return null;
     }
 
     @Override

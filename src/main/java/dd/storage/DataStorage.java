@@ -44,6 +44,13 @@ public class DataStorage {
         return loadResults;
     }
 
+    /**
+     * Parse data to file at exit.
+     *
+     * @param taskList TaskList to be converted and written to file.
+     * @throws IOException when it is unable to be written to file.
+     * @throws RuntimeException when taskList is empty.
+     */
     private void convertData(ArrayList<Task> taskList) throws IOException, RuntimeException {
         FileWriter fw = new FileWriter("./src/data/duke.txt");
         String input = taskList.get(0).saveString();

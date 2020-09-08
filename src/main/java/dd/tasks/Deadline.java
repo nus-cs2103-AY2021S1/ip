@@ -1,5 +1,9 @@
 package dd.tasks;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 /**
  * A deadline task with a specific due date or date and time.
  */
@@ -23,12 +27,33 @@ public class Deadline extends Task {
     /**
      * Returns due date of deadline.
      *
-     * @return Due date of deadline.
+     * @return String of due date of deadline.
      */
     public String getDate() {
         int dateLength = 11;
 
         return by.substring(0, dateLength);
+    }
+
+    /**
+     * Returns LocalDate or LocalDateTime form of date or date and time of deadline.
+     *
+     * @return LocalDate or LocalDateTime form of date or date and time of deadline.
+     */
+    @Override
+    public LocalDateTime getDateTime() {
+        int dateLength = 11;
+        int dateTimeLength = 20;
+
+        assert by.length() == dateLength || by.length() == dateTimeLength : "by string is not valid";
+
+        if (by.length() == dateLength) {
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd MMM yyyy");
+            return LocalDate.parse(by, format).atStartOfDay();
+        } else {
+            DateTimeFormatter format = DateTimeFormatter.ofPattern("dd MMM yyyy hh:mm a");
+            return LocalDateTime.parse(by, format);
+        }
     }
 
     /**
