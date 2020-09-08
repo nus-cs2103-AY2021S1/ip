@@ -18,6 +18,10 @@ public class DukeException extends Exception {
             + "An event must have a start and end time.\n";
     protected final String MESSAGE_INDEX_OUT_OF_BOUNDS = "    I am sorry my Lord. "
             + "That task cannot be found!";
+    protected final String MESSAGE_DEFAULT = "    I am sorry my Lord. "
+            + "Please try another command.\n\n"
+            + "    You may type \"help\" for a list"
+            + " of available commands.\n";
 
     protected ExceptionType exceptionType;
 
@@ -52,6 +56,9 @@ public class DukeException extends Exception {
             break;
         case INDEX_OUT_OF_BOUNDS:
             errorMessage = MESSAGE_INDEX_OUT_OF_BOUNDS;
+            break;
+        default:
+            errorMessage = MESSAGE_DEFAULT;
             break;
         }
         return errorMessage;
