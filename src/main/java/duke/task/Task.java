@@ -58,8 +58,25 @@ public class Task {
      */
     public boolean containsWord(String word) {
         String [] arr = description.split(" ");
-        return Arrays.stream(arr).filter(str -> str.equals(word)).toArray().length > 0;
+        try {
+            return Arrays.stream(arr).filter(str -> str.contains(word)).toArray().length > 0;
+        } catch (Exception e) {
+            System.out.println("EXCEPTION");
+            return true;
+        }
     }
+    
+    public boolean fuzzyMatch(String word) {
+        String [] arr = description.split(" ");
+        return Arrays.stream(arr).filter(str -> partialEquals(word, str)).toArray().length > 0;
+    }
+    
+    private boolean partialEquals(String inputWord, String descriptionWord) {
+        int mid = (int) Math.ceil(inputWord.length() / 2.0);
+        return descriptionWord.length() >= mid && inputWord.substring(0, mid).equals(descriptionWord.substring(0,
+                mid));
+    }
+    
 
     /**
      * Return true or false - whether date of task is equal to input date.

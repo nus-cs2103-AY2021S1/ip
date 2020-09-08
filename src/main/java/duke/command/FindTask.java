@@ -26,11 +26,16 @@ public class FindTask extends Command {
         String filterWord;
         try {
             filterWord = Parser.getFilterWord(input);
-            ArrayList<Task> tasksCopy = new ArrayList<>(tasks);
-            tasksCopy.removeIf(task ->
+            ArrayList<Task> tasksMatch = new ArrayList<>(tasks);
+            tasksMatch.removeIf(task ->
                     !(task.containsWord(filterWord))
             );
-            return layout.printTaskList(true, tasksCopy);
+            ArrayList<Task> taskFuzzyMatch = new ArrayList<>(tasks);
+            taskFuzzyMatch.removeIf(task ->
+                    task.containsWord(filterWord) || !(task.fuzzyMatch(filterWord))
+            );
+            tasksMatch.addAll(taskFuzzyMatch);
+            return layout.printTaskList(true, tasksMatch);
         } catch (DukeException e) {
             return layout.print(e.getMessage());
         }
