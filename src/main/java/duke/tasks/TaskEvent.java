@@ -1,8 +1,11 @@
 package duke.tasks;
 
+import static duke.commands.CommandReschedule.VALID_TIME_UNITS;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class TaskEvent extends Task {
 
@@ -42,4 +45,43 @@ public class TaskEvent extends Task {
                         ));
     }
 
+    /**
+     * Postpones the event.
+     * @param amount amount of timeUnit to add.
+     * @param timeUnit minutes, hours, days, months, years.
+     */
+    @Override
+    public void postpone(int amount, ChronoUnit timeUnit) {
+        assert VALID_TIME_UNITS.contains(timeUnit) : "invalid time unit provided";
+        switch (timeUnit) {
+        case MINUTES: case HOURS:
+            startTime = startTime.plus(amount, timeUnit);
+            endTime = endTime.plus(amount, timeUnit);
+            break;
+        case DAYS: case MONTHS: case YEARS:
+            eventDate = eventDate.plus(amount, timeUnit);
+            break;
+        default:
+        }
+    }
+
+    /**
+     * Advances the event.
+     * @param amount amount of timeUnit to add.
+     * @param timeUnit minutes, hours, days, months, years.
+     */
+    @Override
+    public void advance(int amount, ChronoUnit timeUnit) {
+        assert VALID_TIME_UNITS.contains(timeUnit) : "invalid time unit provided";
+        switch (timeUnit) {
+        case MINUTES: case HOURS:
+            startTime.minus(amount, timeUnit);
+            endTime.minus(amount, timeUnit);
+            break;
+        case DAYS: case MONTHS: case YEARS:
+            eventDate.minus(amount, timeUnit);
+            break;
+        default:
+        }
+    }
 }
