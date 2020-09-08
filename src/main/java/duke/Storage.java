@@ -28,7 +28,7 @@ public class Storage {
      * @return a taskList
      * @throws IOException error creating the file
      */
-    public TaskList loadFile() throws IOException {
+    public TaskList loadTaskList() throws IOException {
         try {
             TaskList tasks = new TaskList();
             File file = new File(dest);
@@ -54,11 +54,11 @@ public class Storage {
      * @param taskList the taskList to be saved
      * @throws FileNotFoundException couldn't find the file at destination.
      */
-    public void writeFile(TaskList taskList) throws FileNotFoundException {
+    public void saveTaskList(TaskList taskList) throws FileNotFoundException {
         try {
             BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(dest));
             for (Task task: taskList) {
-                bufferedWriter.write(task.toSaveString());
+                bufferedWriter.write(task.toSavedString());
                 bufferedWriter.newLine();
             }
             bufferedWriter.close();

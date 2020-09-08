@@ -3,6 +3,7 @@ package duke;
 import java.io.IOException;
 
 public class Duke {
+    private static final String DEFAULT_STORAGE_LOCATION = "data/duke.txt";
     private final Ui ui;
     private final Parser parser;
     private boolean hasExited;
@@ -10,16 +11,32 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
 
+    private enum ResponsePrefix {
+        ADD("Noted, I have added the following task(s):"),
+        DONE("Noted, I have marked the following task(s) as done:"),
+        DELETE("Noted, I have deleted the following task(s):"),
+        FIND("Noted, I have found the following %d task(s)");
+
+        private String string;
+        ResponsePrefix(String string) {
+            this.string = string;
+        }
+        @Override
+        public String toString() {
+            return string;
+        }
+    }
+
     /**
      * Constructor with default directory of database.
      */
     public Duke() {
-        dest = "data/duke.txt";
+        dest = DEFAULT_STORAGE_LOCATION;
         ui = new Ui();
         parser = new Parser();
         try {
             storage = new Storage(dest);
-            taskList = storage.loadFile();
+            taskList = storage.loadTaskList();
         } catch (IOException e) {
             ui.printNicely(e.getMessage());
         }
@@ -34,7 +51,7 @@ public class Duke {
         TaskList taskList;
         try {
             storage = new Storage(dest);
-            taskList = storage.loadFile();
+            taskList = storage.loadTaskList();
         } catch (IOException e) {
             ui.printNicely(e.getMessage());
             return;
@@ -48,25 +65,23 @@ public class Duke {
                 String input = ui.nextLine();
                 switch (parser.parseInput(input)) {
                 case ADD:
-                    taskList.add(parser.parseInputTask(input));
-                    ui.printNicely("Noted, I have added the following task:",
-                            parser.parseInputTask(input).toString());
+                    taskList.add(parser.parseAddedTask(input));
+                    ui.printNicely(ResponsePrefix.ADD.toString(), parser.parseAddedTask(input).toString());
                     break;
                 case DONE:
-                    taskList.markDone(parser.parseDone(input));
-                    ui.printNicely("Noted, I have marked the following task as done:",
-                            taskList.get(parser.parseDone(input)).toString());
+                    taskList.markDone(parser.parseDoneIndex(input));
+                    ui.printNicely(ResponsePrefix.DONE.toString(),
+                            taskList.get(parser.parseDoneIndex(input)).toString());
                     break;
                 case DELETE:
-                    ui.printNicely("Noted, I have deleted the following task:",
-                            taskList.get(parser.parseDelete(input)).toString());
-                    taskList.delete(parser.parseDelete(input));
+                    ui.printNicely(ResponsePrefix.DELETE.toString(),
+                            taskList.get(parser.parseDeleteIndex(input)).toString());
+                    taskList.delete(parser.parseDeleteIndex(input));
                     ui.listOut(taskList);
                     break;
                 case FIND:
-                    TaskList newList = taskList.find(parser.parseFind(input));
-                    ui.listOut(String.format("I have found the following %d task(s)", newList.size()),
-                            newList);
+                    TaskList newList = taskList.find(parser.parseFindKeyword(input));
+                    ui.listOut(String.format(ResponsePrefix.FIND.toString(), newList.size()), newList);
                     break;
                 case LIST:
                     ui.listOut(taskList);
@@ -78,7 +93,7 @@ public class Duke {
                 default:
                     throw new IOException("Cannot be understood.");
                 }
-                storage.writeFile(taskList);
+                storage.saveTaskList(taskList);
             } catch (Exception e) {
                 ui.printNicely(e.getMessage());
             }
@@ -101,25 +116,25 @@ public class Duke {
             input = input.trim();
             switch (parser.parseInput(input)) {
             case ADD:
-                taskList.add(parser.parseInputTask(input));
-                response = new StringBuilder(ui.generateResponse("Noted, I have added the following task:",
-                        parser.parseInputTask(input).toString()));
+                taskList.add(parser.parseAddedTask(input));
+                response = new StringBuilder(ui.generateResponse(ResponsePrefix.ADD.toString(),
+                        parser.parseAddedTask(input).toString()));
                 break;
             case DONE:
-                taskList.markDone(parser.parseDone(input));
-                response = new StringBuilder(ui.generateResponse("Noted, I have marked the following task as done:",
-                        taskList.get(parser.parseDone(input)).toString()));
+                taskList.markDone(parser.parseDoneIndex(input));
+                response = new StringBuilder(ui.generateResponse(ResponsePrefix.DONE.toString(),
+                        taskList.get(parser.parseDoneIndex(input)).toString()));
                 break;
             case DELETE:
-                response = new StringBuilder(ui.generateResponse("Noted, I have deleted the following task:",
-                        taskList.get(parser.parseDelete(input)).toString()));
-                taskList.delete(parser.parseDelete(input));
+                response = new StringBuilder(ui.generateResponse(ResponsePrefix.DELETE.toString(),
+                        taskList.get(parser.parseDeleteIndex(input)).toString()));
+                taskList.delete(parser.parseDeleteIndex(input));
                 response.append(ui.generateTaskListString(taskList));
                 break;
             case FIND:
-                TaskList newList = taskList.find(parser.parseFind(input));
+                TaskList newList = taskList.find(parser.parseFindKeyword(input));
                 response = new StringBuilder(ui.generateTaskListString(
-                        String.format("I have found the following %d task(s)", newList.size()),
+                        String.format(ResponsePrefix.FIND.toString(), newList.size()),
                         newList));
                 break;
             case LIST:
@@ -132,7 +147,7 @@ public class Duke {
             default:
                 throw new IOException("Cannot be understood.");
             }
-            storage.writeFile(taskList);
+            storage.saveTaskList(taskList);
         } catch (Exception e) {
             response = new StringBuilder(ui.generateResponse(e.getMessage()));
         }

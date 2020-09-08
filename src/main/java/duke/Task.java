@@ -24,11 +24,11 @@ public abstract class Task {
         return isDone ? '\u2713' : '\u2717';
     }
 
-    protected String toSaveStringDone() {
+    protected String toSavedStringIsDone() {
         return isDone ? "1" : "0";
     }
 
-    public abstract String toSaveString();
+    public abstract String toSavedString();
 
     public abstract boolean contains(String s);
 }

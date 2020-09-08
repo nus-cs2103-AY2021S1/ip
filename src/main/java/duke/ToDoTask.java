@@ -15,8 +15,8 @@ public class ToDoTask extends Task {
     }
 
     @Override
-    public String toSaveString() {
-        return String.format("T @@ %s @@ %s", toSaveStringDone(), desc);
+    public String toSavedString() {
+        return String.format("T @@ %s @@ %s", toSavedStringIsDone(), desc);
     }
 
     @Override
