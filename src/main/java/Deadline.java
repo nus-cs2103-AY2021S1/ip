@@ -23,7 +23,7 @@ public class Deadline extends Task {
 
     @Override
     public String getPrintMessage() {
-        return Convert.by(getMessage());
+        return Converter.by(getMessage());
     }
 
     @Override

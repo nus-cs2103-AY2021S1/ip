@@ -21,7 +21,7 @@ public class Storage {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
                 String task = scanner.nextLine();
-                lst.add(Convert.add(task));
+                lst.add(Converter.add(task));
             }
         } catch (FileNotFoundException ex) {
             //System.out.println(Parser.format(ex.toString()));

@@ -88,6 +88,7 @@ public class Parser {
                 }
             } else if (priorCommand.equals("find")) {
                 try {
+                    // level-9 new feature
                     String extraCommand = currentCommand.split(" ", 2)[1];
                     List<Task> subList = new ArrayList<>();
                     // check whether extraCommand is a subString of any task message
