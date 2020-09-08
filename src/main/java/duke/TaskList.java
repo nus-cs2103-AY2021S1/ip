@@ -38,15 +38,11 @@ public class TaskList {
      * @throws DukeException when there is an error with the user input
      */
     public Task addDeadline(String specifications) throws DukeException {
-        String[] specificationsArray = specifications.split("/by", 2);
+        String[] specificationsArray = specifications.split("/by ", 2);
         if (specificationsArray.length <= 1) {
             throw new DukeException("You need to specify a date and time!");
         }
-        String[] dateTimeArray = specificationsArray[1].split(" ", 3);
-        if (dateTimeArray.length <= 1) {
-            throw new DukeException("You need to specify a time!");
-        }
-        Task newTask = new Deadlines(specificationsArray[0], dateTimeArray[1], dateTimeArray[2]);
+        Task newTask = new Deadlines(specificationsArray[0], specificationsArray[1]);
         tasks.add(newTask);
         return newTask;
     }
@@ -57,17 +53,21 @@ public class TaskList {
      * @throws DukeException when there is an error with the user input
      */
     public Task addEvent(String specifications) throws DukeException {
-        String[] specificationsArray = specifications.split("/at", 2);
+        String[] specificationsArray = specifications.split("/at ", 2);
         if (specificationsArray.length == 1) {
             throw new DukeException("Description of event cannot be empty!");
         }
-        String[] dateTimeArray = specificationsArray[1].split(" ", 3);
-        String date = dateTimeArray[1];
-        String time = dateTimeArray[2];
+        String[] dateTimeArray = specificationsArray[1].split(" ", 2);
+        String[] timeArray = dateTimeArray[1].split("-",2);
+        String date = dateTimeArray[0];
+        String startTime = timeArray[0];
+        String endTime = timeArray[1];
+        String startDateTime = date + " " + startTime;
+        String endDateTime = date + " " + endTime;
         if (dateTimeArray.length <= 1) {
             throw new DukeException("You need to specify a time!");
         }
-        Task newTask = new Events(specificationsArray[0], dateTimeArray[1], dateTimeArray[2]);
+        Task newTask = new Events(specificationsArray[0], startDateTime, endDateTime);
         tasks.add(newTask);
         return newTask;
     }
@@ -145,12 +145,21 @@ public class TaskList {
                 if (word.equals(y)) {
                     findArray.add(x);
                     break inner;
-                } else {
-                    findArray.add(null);
                 }
             }
+            findArray.add(null);
         }
         return findArray;
+    }
+
+    public Task rescheduleTask(String num, String hours) {
+
+        int intNum = Integer.parseInt(num);
+        int intHours = Integer.parseInt(hours);
+        Task temp = tasks.get(intNum - 1);
+        temp.rescheduleTask(intHours);
+        tasks.set(intNum-1, temp);
+        return temp;
     }
 
 }

@@ -58,11 +58,11 @@ public class Storage {
                     contents += temp;
                 } else if (x.getClass().getSimpleName().equals("Deadlines")) {
                     String temp = "Deadlines\n" + x.getDone() + "\n" + x.getName() + "\n"
-                            + x.getDate() + "\n" + x.getTime() + "\n\n";
+                            + x.getStartDateTime() + "\n\n";
                     contents += temp;
                 } else {
                     String temp = "Events\n" + x.getDone() + "\n" + x.getName() + "\n"
-                            + x.getDate() + "\n" + x.getTime() + "\n\n";
+                            + x.getStartDateTime() + "\n" + x.getEndDateTime() + "\n\n";
                     contents += temp;
                 }
             }
@@ -95,22 +95,17 @@ public class Storage {
                     tasks.add(temp);
                     sc.nextLine();
                 } else if (type.equals("Deadlines")) {
-                    String date = sc.nextLine();
-                    String time = sc.nextLine();
-                    assert !date.isBlank();
-                    assert !time.isBlank();
-                    Task temp = new Deadlines(name, date, time);
+                    String startDateTime = sc.nextLine();
+                    Task temp = new Deadlines(name, startDateTime);
                     if (done.equals("true")) {
                         temp.completeTask();
                     }
                     tasks.add(temp);
                     sc.nextLine();
                 } else {
-                    String date = sc.nextLine();
-                    String time = sc.nextLine();
-                    assert !date.isBlank();
-                    assert !time.isBlank();
-                    Task temp = new Events(name, date, time);
+                    String startDateTime = sc.nextLine();
+                    String endDateTime = sc.nextLine();
+                    Task temp = new Events(name, startDateTime, endDateTime);
                     if (done.equals("true")) {
                         temp.completeTask();
                     }

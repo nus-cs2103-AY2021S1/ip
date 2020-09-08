@@ -180,6 +180,15 @@ public class Duke extends Application {
         case "find":
             output += ui.foundWord(taskList.findWord(inputArray[1]));
             return output;
+        case "reschedule":
+            String[] specificationsArray = inputArray[1].split(" ",2);
+            output += ui.rescheduledTask(taskList.rescheduleTask(specificationsArray[0],specificationsArray[1]));
+            storage.saveFile(taskList.getTasks());
+            return output;
+        case "snooze":
+            output += ui.rescheduledTask(taskList.rescheduleTask(inputArray[1],"1"));
+            storage.saveFile(taskList.getTasks());
+            return output;
         default:
             return "Sorry I don't know what you mean. \nType /help to see the list of commands available!";
         }

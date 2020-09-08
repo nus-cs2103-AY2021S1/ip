@@ -102,4 +102,9 @@ public class Ui {
         return "Here are the matching tasks in your list:\n"
                 + printList(tasks);
     }
+
+    public String rescheduledTask(Task task) {
+        return "The following task has been rescheduled to:\n"
+                + task.toString();
+    }
 }
