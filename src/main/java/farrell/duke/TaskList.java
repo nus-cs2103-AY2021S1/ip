@@ -94,13 +94,13 @@ public class TaskList {
     /**
      * Returns a formatted string representing a list of tasks sorted by description.
      * The list is sorted in ascending order by default.
-     * @param descending Whether to sort the list by descending order instead.
+     * @param ascending Whether to sort the list by descending order instead.
      * @return The list of tasks as a formatted string.
      */
-    public String sortByDescriptionToString(boolean descending) {
-        Comparator<Task> comparator = descending
-                ? Comparator.comparing(Task::getDescription).reversed()
-                : Comparator.comparing(Task::getDescription);
+    public String sortByDescriptionToString(boolean ascending) {
+        Comparator<Task> comparator = ascending
+                ? Comparator.comparing(Task::getDescription)
+                : Comparator.comparing(Task::getDescription).reversed();
         taskList.sort(comparator);
         return toString();
     }
