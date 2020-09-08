@@ -1,33 +1,38 @@
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
+ *
+ * @version 1.1
+ * @since 2020-09-08
  */
 public class MainWindow extends AnchorPane {
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
 
     private Duke duke;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/icebear.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/grizz.jpg"));
 
+    /**
+     * Initializes a main window for Duke GUI.
+     */
     @FXML
     public void initialize() {
         dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog("Yooo, I'm Grizz.\nWhat can I do for you today?\n"
-                        + "Please enter dates and times like this: yyyy-mm-dd hhmm", dukeImage)
+                DialogBox.getDukeDialog("Hey there! I'm Grizz.\n" +
+                                "What can I do for you today?\n", dukeImage)
         );
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
@@ -37,7 +42,8 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other
+     * containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML

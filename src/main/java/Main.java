@@ -8,6 +8,9 @@ import java.io.IOException;
 
 /**
  * A GUI for Duke using FXML.
+ *
+ * @version 1.1
+ * @since 2020-09-08
  */
 public class Main extends Application {
 
