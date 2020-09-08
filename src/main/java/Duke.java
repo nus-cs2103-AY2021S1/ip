@@ -1,10 +1,27 @@
+/**
+ * Represents the Duke bot.
+ */
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+    private final Storage storage;
+    private final TaskList taskList;
+
+    /**
+     * Creates a Duke bot.
+     */
+    public Duke() {
+        this.taskList = new TaskList();
+        this.storage = new Storage(taskList, "duke");
+    }
+
+    public TaskList getTaskList() {
+        return taskList;
+    }
+
+    public Storage getStorage() {
+        return storage;
+    }
+
+    public String getResponse(String input) {
+        return Parser.parse(taskList, storage, input);
     }
 }
