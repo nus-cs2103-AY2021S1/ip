@@ -30,6 +30,61 @@ public class Parser {
         return null;
     }
 
+    private static boolean isEmptyFromIdx(String userInput, int idx) {
+        return userInput.length() == idx || userInput.substring(idx).isBlank();
+    }
+
+    private static int parseTaskIndex(String userInput, int taskIdx) throws DukeException {
+        try {
+            return Integer.parseInt(userInput.substring(taskIdx + 1)) - 1;
+        } catch (StringIndexOutOfBoundsException ex) {
+            throw new DukeException("task index is empty");
+        } catch (NumberFormatException ex) {
+            throw new DukeException("task index is not a valid number");
+        }
+    }
+
+    private static AddCommand parseTaskWithDate(String userInput, TaskType taskType, String dateIndicator) throws TaskException {
+        int startIdxofDateIndicator = userInput.indexOf(dateIndicator);
+        int endIdxofDateIndicator = startIdxofDateIndicator + dateIndicator.length();
+        boolean isEmptyTime = startIdxofDateIndicator == -1 || isEmptyFromIdx(userInput, endIdxofDateIndicator);
+        if (isEmptyTime) {
+            throw new TaskException(taskType, "time", TaskExceptionType.EMPTY);
+        }
+
+        int startIdxOfDescription = taskType.toString().length();
+        boolean isEmptyDescription = userInput.substring(startIdxOfDescription, startIdxofDateIndicator).isBlank();
+        if (isEmptyDescription) {
+            throw new TaskException(taskType, "description", TaskExceptionType.EMPTY);
+        }
+
+        Date date = parseDate(userInput.substring(endIdxofDateIndicator));
+        if (date == null) {
+            throw new TaskException(taskType, "time", TaskExceptionType.FORMAT);
+        }
+
+        String description = userInput.substring(startIdxOfDescription, startIdxofDateIndicator);
+        return new AddCommand(taskType, description, date);
+    }
+
+    private static AddCommand parseAddTask(String userInput) throws TaskException {
+        if (userInput.startsWith(TaskType.TODO.toString())) {
+            if (isEmptyFromIdx(userInput, TaskType.TODO.toString().length())) {
+                throw new TaskException(TaskType.TODO, "description", TaskExceptionType.EMPTY);
+            }
+            String description = userInput.substring(TaskType.TODO.toString().length());
+            return new AddCommand(TaskType.TODO, description, null);
+        } else if (userInput.startsWith(TaskType.DEADLINE.toString())) {
+            return parseTaskWithDate(userInput, TaskType.DEADLINE, " /by ");
+        } else if (userInput.startsWith(TaskType.EVENT.toString())) {
+            return parseTaskWithDate(userInput, TaskType.EVENT, " /at ");
+        } else {
+            assert true: "Task type could not be identified.";
+            return null; // won't hit
+        }
+
+    }
+
     /**
      * Parses in a user input that is a String and generates a command based on the input.
      *
@@ -39,75 +94,35 @@ public class Parser {
      * @throws TaskException
      */
     public static Command parse(String userInput) throws DukeException, TaskException {
-        if (userInput.equals("list")) {
-            return new ListCommand(null, null);
-        } else if (userInput.startsWith("done")) {
-            try {
-                int idx = Integer.parseInt(userInput.substring(5)) - 1;
-                return new DoneCommand(idx);
-            } catch (StringIndexOutOfBoundsException | NumberFormatException ex) {
-                throw new DukeException("task index is empty / not a valid number");
+        if (userInput.equals(ListCommand.toInputString())) {
+            return new ListCommand();
+        } else if (userInput.startsWith(DoneCommand.toInputString())) {
+            int taskIdx = parseTaskIndex(userInput, DoneCommand.toInputString().length());
+            return new DoneCommand(taskIdx);
+        } else if (userInput.startsWith(DeleteCommand.toInputString())) {
+            int taskIdx = parseTaskIndex(userInput, DeleteCommand.toInputString().length());
+            return new DeleteCommand(taskIdx);
+        } else if (userInput.startsWith(ListDateCommand.toInputString())) {
+            if (isEmptyFromIdx(userInput, ListDateCommand.toInputString().length())) {
+                throw new DukeException("time is empty");
             }
-        } else if (userInput.startsWith("delete")) {
-            try {
-                int idx = Integer.parseInt(userInput.substring(7)) - 1;
-                return new DeleteCommand(idx);
-            } catch (StringIndexOutOfBoundsException | NumberFormatException ex) {
-                throw new DukeException("task index is empty / not a valid number");
+            Date date = parseDate(userInput.substring(ListDateCommand.toInputString().length()));
+            if (date == null) {
+                throw new DukeException("time is the wrong format");
             }
-        } else if (userInput.startsWith("tasks due on")) {
-            if (userInput.length() == 12 || userInput.substring(12).isBlank()
-                    || parseDate(userInput.substring(13)) == null) {
-                throw new DukeException("time is empty / of the wrong format");
-            } else {
-                return new ListCommand(parseDate(userInput.substring(13)), null);
-            }
-        } else if (userInput.startsWith("find")) {
-            if (userInput.length() == 4 || userInput.substring(4).isBlank()) {
+            return new ListDateCommand(date);
+        } else if (userInput.startsWith(ListKeywordCommand.toInputString())) {
+            if (isEmptyFromIdx(userInput, ListKeywordCommand.toInputString().length())) {
                 throw new DukeException("keyword is empty");
-            } else {
-                return new ListCommand(null, userInput.substring(5));
             }
-        } else if (userInput.equals("bye")) {
+            String keyWord = userInput.substring(ListKeywordCommand.toInputString().length());
+            return new ListKeywordCommand(keyWord);
+        } else if (userInput.equals(ExitCommand.toInputString())) {
             return new ExitCommand();
+        } else if (userInput.startsWith(TaskType.TODO.toString()) || userInput.startsWith(TaskType.DEADLINE.toString()) || userInput.startsWith(TaskType.EVENT.toString())){
+            return parseAddTask(userInput);
         } else {
-            if (userInput.startsWith("todo")) {
-                if (userInput.length() == 4 || userInput.substring(4).isBlank()) {
-                    throw new TaskException(TaskType.TODO, "description", TaskExceptionType.EMPTY);
-                } else {
-                    return new AddCommand(TaskType.TODO, userInput.substring(5), null);
-                }
-            } else if (userInput.startsWith("deadline")) {
-                int idx = userInput.indexOf(" /by ");
-                if (idx == -1 || userInput.substring(idx + 5).isBlank()) {
-                    throw new TaskException(TaskType.DEADLINE, "time", TaskExceptionType.IDENTIFY);
-                } else if (idx <= 9 || userInput.substring(9, idx).isBlank()) {
-                    throw new TaskException(TaskType.DEADLINE, "description", TaskExceptionType.EMPTY);
-                } else {
-                    if (parseDate(userInput.substring(idx + 5)) == null) {
-                        throw new TaskException(TaskType.DEADLINE, "time", TaskExceptionType.FORMAT);
-                    } else {
-                        return new AddCommand(TaskType.DEADLINE, userInput.substring(9, idx),
-                                parseDate(userInput.substring(idx + 5)));
-                    }
-                }
-            } else if (userInput.length() >= 5 && userInput.startsWith("event")) {
-                int idx = userInput.indexOf(" /at ");
-                if (idx == -1 || userInput.substring(idx + 5).isBlank()) {
-                    throw new TaskException(TaskType.EVENT, "time", TaskExceptionType.IDENTIFY);
-                } else if (idx <= 6 || userInput.substring(6, idx).isBlank()) {
-                    throw new TaskException(TaskType.EVENT, "description", TaskExceptionType.EMPTY);
-                } else {
-                    if (parseDate(userInput.substring(idx + 5)) == null) {
-                        throw new TaskException(TaskType.EVENT, "time", TaskExceptionType.FORMAT);
-                    } else {
-                        return new AddCommand(TaskType.EVENT, userInput.substring(6, idx),
-                                parseDate(userInput.substring(idx + 5)));
-                    }
-                }
-            } else {
-                throw new DukeException("I don't know what that means");
-            }
+            throw new DukeException("I don't know what that means");
         }
     }
 }

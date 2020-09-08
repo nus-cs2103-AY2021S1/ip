@@ -24,6 +24,18 @@ public class AddCommand extends Command {
         this.date = date;
     }
 
+    private Task createNewTask() {
+        if (taskType == TaskType.TODO) {
+            return new ToDo(description, false);
+        } else if (taskType == TaskType.DEADLINE) {
+            return new Deadline(description, date, false);
+        } else if (taskType == TaskType.EVENT) {
+            return new Event(description, date, false);
+        } else {
+            return null;
+        }
+    }
+
     /**
      * Adds a task to the TaskList, updates storage with added task.
      *
@@ -33,14 +45,8 @@ public class AddCommand extends Command {
      */
     @Override
     public ArrayList<String> execute(TaskList tasks, Storage storage) throws DukeException {
-        Task task = null;
-        if (taskType == TaskType.TODO) {
-            task = new ToDo(description, false);
-        } else if (taskType == TaskType.DEADLINE) {
-            task = new Deadline(description, date, false);
-        } else if (taskType == TaskType.EVENT) {
-            task = new Event(description, date, false);
-        }
+        Task task = createNewTask();
+        assert task == null: "Task cannot be null";
         tasks.addTask(task);
         storage.saveList(tasks);
         return Ui.getAddTask(task, tasks);

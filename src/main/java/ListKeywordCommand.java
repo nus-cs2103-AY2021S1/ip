@@ -1,11 +1,16 @@
 import java.util.ArrayList;
-import java.util.Date;
 
-/**
- * ListCommand is a request to display all current tasks.
- */
+public class ListKeywordCommand extends ListCommand {
+    private final String keyWord;
 
-public class ListCommand extends Command {
+    /**
+     * Creates a ListCommand.
+     *
+     * @param keyWord Keyword that tasks to be displayed must contain in their description.
+     */
+    public ListKeywordCommand(String keyWord) {
+        this.keyWord = keyWord;
+    }
 
     /**
      * Displays all current tasks with their TaskType, done status and description.
@@ -16,10 +21,10 @@ public class ListCommand extends Command {
      */
     @Override
     public ArrayList<String> execute(TaskList tasks, Storage storage) {
-        return Ui.getTaskList(tasks, null, null);
+        return Ui.getTaskList(tasks, null, keyWord);
     }
 
     public static String toInputString() {
-        return "list";
+        return "find";
     }
 }

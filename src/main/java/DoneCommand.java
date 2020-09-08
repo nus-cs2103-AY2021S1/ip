@@ -26,5 +26,9 @@ public class DoneCommand extends Command {
         storage.saveList(tasks);
         return Ui.getDoneTask(tasks.getTask(idx));
     }
+
+    public static String toInputString() {
+        return "done";
+    }
 }
 
