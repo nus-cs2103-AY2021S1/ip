@@ -105,8 +105,7 @@ public class ListCommand extends Command {
             output = checkDesc();
             break;
         default:
-            output = ""; //TODO
-            break;
+            assert false : "invalid command: " + command;
         }
 
         return output;

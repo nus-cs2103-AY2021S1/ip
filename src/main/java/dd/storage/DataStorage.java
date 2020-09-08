@@ -51,7 +51,10 @@ public class DataStorage {
 
         while (!taskList.isEmpty()) {
             input = input + "\n" + taskList.get(0).saveString();
+            int initialNum = taskList.size();
             taskList.remove(0);
+
+            assert initialNum - taskList.size() == 1 : "error iterating through task list";
         }
 
         fw.write(input);
