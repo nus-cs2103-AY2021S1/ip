@@ -13,10 +13,10 @@ public class EventCommand implements Command {
     @Override
     public String parseInput(TaskList tasks, String text) throws DobbyException {
         String message;
-        String at = "";
         assert text.startsWith("event") : "Event command must start with event";
         try {
-            text = text.substring(6).trim();
+            int commandLen = "event".length();
+            text = text.substring(commandLen + 1).trim();
 
             if (text.indexOf("/at") < 0 && text.length() >= 1) { // non-empty description and /by missing
                 throw new DobbyException("Incorrect usage of command.\nSchedule details cannot be empty. "
@@ -26,9 +26,9 @@ public class EventCommand implements Command {
                         + "Please try again.\n  " + USAGE);
             }
 
-            at = text.substring(text.indexOf("/at") + 4).trim();
-            text = text.substring(0, text.indexOf("/at") - 1).trim();
-            Event event = new Event(text, at);
+            String at = text.substring(text.indexOf("/at") + 4).trim();
+            String description = text.substring(0, text.indexOf("/at") - 1).trim();
+            Event event = new Event(description, at);
 
             if (at.lastIndexOf(' ') > 0) {
                 if (at.substring(1 + at.lastIndexOf(' ')).length() > 4) {
@@ -56,6 +56,7 @@ public class EventCommand implements Command {
         } catch (DobbyException e) { // empty description or /at missing
             return e.getMessage();
         }
+        assert message != null : "Return message to user cannot be empty";
         return message;
     }
 }

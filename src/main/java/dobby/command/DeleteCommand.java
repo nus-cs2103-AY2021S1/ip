@@ -13,7 +13,8 @@ public class DeleteCommand implements Command {
         String message = "";
         assert text.startsWith("delete") : "Delete command must start with delete";
         try {
-            text = text.substring(6).trim();
+            int commandLen = "delete".length();
+            text = text.substring(commandLen).trim();
 
             int index = Integer.parseInt(text);
             if (tasks.getSize() < index) { // if index is out of range throw exception
@@ -21,6 +22,7 @@ public class DeleteCommand implements Command {
                         + "Task number must be within the correct range.\n  "
                         + USAGE);
             }
+
             assert index <= tasks.getSize() : "Task to delete must be in correct range";
             Task task = tasks.getTask(index - 1);
             tasks.removeTask(index - 1);
@@ -33,6 +35,7 @@ public class DeleteCommand implements Command {
                     + "Please enter a task number after delete.\n  "
                     + USAGE);
         }
+        assert message != null : "Return message to user cannot be empty";
         return message;
     }
 }

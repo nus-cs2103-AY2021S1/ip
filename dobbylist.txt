@@ -1,4 +1,3 @@
-[T][✘] test
-[D][✘] testing (by: Sep 11 2020 )
-[D][✘] testing (by: Sep 11 2020 12:00 pm)
-[D][✘] testing (by: Sep 11 2020 )
+[D][✓] testing (by: Sep 11 2020 12:00 pm)
+[E][✘] lecture (at: Sep 14 2020 9:30 am)
+[T][✘] prepare presentation

@@ -127,7 +127,7 @@ public class TaskList {
         int counter = 0;
         for (Task task: this.tasks) {
             if ((task.getTag()).equals("[" + type + "]")) {
-                message = String.format("%d. %s", ++counter, task.getDescription());
+                message = message + String.format("%d. %s\n", ++counter, task.getDescription());
             }
         }
 
@@ -149,8 +149,8 @@ public class TaskList {
 
         int counter = 0;
         for (Task task: this.tasks) {
-            if ((task.getDescription()).indexOf(keyword) >= 0) {
-                message = String.format("%d. %s\n", ++counter, task.getDescription());
+            if ((task.getDescription()).contains(keyword)) {
+                message = message + String.format("%d. %s\n", ++counter, task.getDescription());
             }
         }
 

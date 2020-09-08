@@ -12,8 +12,10 @@ public class TodoCommand implements Command {
         String message = "";
         assert text.startsWith("todo") : "Todo command must start with todo";
         try {
-            text = text.substring(5).trim();
-            Todo todo = new Todo(text);
+            int commandLen = "todo".length();
+            String description = text.substring(commandLen + 1).trim();
+
+            Todo todo = new Todo(description);
             tasks.addToList(todo);
             message = "Great! I've added the following task:\n  " + todo.getDescription()
                     + String.format("\nNow you have %d task%s in the list.", tasks.getSize(),

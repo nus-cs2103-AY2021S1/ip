@@ -57,7 +57,8 @@ public class Storage {
             }
 
             if ((this.tasks).getSize() > 0) {
-                fileWriter.write(tasks.getTask((this.tasks).getSize() - 1).getDescription());
+                Task lastTask = tasks.getTask((this.tasks).getSize() - 1);
+                fileWriter.write(lastTask.getDescription());
             }
             fileWriter.close();
         } catch (IOException e) {

@@ -13,13 +13,16 @@ public class DoneCommand implements Command {
         String message = "";
         assert text.startsWith("done") : "Done command must start with done";
         try {
-            text = text.substring(4).trim();
+            int commandLen = "done".length();
+            text = text.substring(commandLen).trim();
+
             int index = Integer.parseInt(text);
             if (tasks.getSize() < index) { // if index is out of range throw exception
                 throw new DobbyException("Incorrect usage of command.\n"
                         + "Task number must be within the correct range.\n  "
                         + USAGE);
             }
+
             Task task = tasks.getTask(index - 1);
             task.setDone();
             assert task.isDone() : "Task should be marked done";
@@ -32,6 +35,7 @@ public class DoneCommand implements Command {
                     + "Please enter a task number after done.\n  "
                     + USAGE);
         }
+        assert message != null : "Return message to user cannot be empty";
         return message;
     }
 
