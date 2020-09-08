@@ -3,6 +3,7 @@ package duck.task;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Optional;
 
@@ -21,7 +22,7 @@ public class TaskList implements Serializable {
     private List<Task> tasks;
 
     public TaskList() {
-        this.tasks = new ArrayList<Task>();
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -31,19 +32,19 @@ public class TaskList implements Serializable {
      * @return String array of statuses.
      */
     public String[] getStatuses() {
-        String[] statuses = new String[this.tasks.size()];
-        for (int i = 0; i < this.tasks.size(); i++) {
-            statuses[i] = "" + (i + 1) + ". " + this.tasks.get(i).getStatus();
+        String[] statuses = new String[tasks.size()];
+        for (int i = 0; i < tasks.size(); i++) {
+            statuses[i] = "" + (i + 1) + ". " + tasks.get(i).getStatus();
         }
         return statuses;
     }
 
     public void addTask(Task t) {
-        this.tasks.add(t);
+        tasks.add(t);
     }
 
     public int getLength() {
-        return this.tasks.size();
+        return tasks.size();
     }
 
     /**
@@ -56,10 +57,10 @@ public class TaskList implements Serializable {
      * @throws DuckException If invalid index is given.
      */
     public Task markDone(int index) throws DuckException {
-        if (index > this.tasks.size() || index < 1) {
+        if (index > tasks.size() || index < 1) {
             throw new DuckException("No such task with that number!");
         } else {
-            Task task = this.tasks.get(index - 1);
+            Task task = tasks.get(index - 1);
             task.markDone();
             return task;
         }
@@ -75,11 +76,11 @@ public class TaskList implements Serializable {
      * @throws DuckException If invalid index is given.
      */
     public Task deleteTask(int index) throws DuckException {
-        if (index > this.tasks.size() || index < 1) {
+        if (index > tasks.size() || index < 1) {
             throw new DuckException("No such task with that number!");
         } else {
-            Task task = this.tasks.get(index - 1);
-            this.tasks.remove(index - 1);
+            Task task = tasks.get(index - 1);
+            tasks.remove(index - 1);
             return task;
         }
     }
@@ -95,10 +96,10 @@ public class TaskList implements Serializable {
      */
     public String[] getStatusesByDate(Optional<LocalDate> optionalDate) {
 
-        return this.tasks.stream()
+        return tasks.stream()
                 .filter(TaskWithDate.class::isInstance)
                 .map(TaskWithDate.class::cast)
-                .sorted((task1, task2) -> task1.getDate().compareTo(task2.getDate()))
+                .sorted(Comparator.comparing(TaskWithDate::getDate))
                 .filter((task) -> {
                     if (optionalDate.isPresent()) {
                         return task.getDate().isBefore(optionalDate.get());
@@ -122,7 +123,7 @@ public class TaskList implements Serializable {
      */
     public String[] getStatusesByFind(String input) throws DuckException {
         String description = Parser.parseDescription(input);
-        return this.tasks.stream()
+        return tasks.stream()
                 .filter((task) -> task.getDescription().contains(description))
                 .map(Task::getStatus)
                 .toArray(String[]::new);

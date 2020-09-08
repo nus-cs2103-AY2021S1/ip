@@ -21,7 +21,7 @@ public abstract class TaskWithDate extends Task {
     }
 
     public LocalDate getDate() {
-        return this.date;
+        return date;
     }
 
     /**
@@ -30,6 +30,6 @@ public abstract class TaskWithDate extends Task {
      * @return Formatted date.
      */
     public String getDateAsString() {
-        return this.date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 }

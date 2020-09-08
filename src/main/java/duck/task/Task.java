@@ -17,19 +17,19 @@ public abstract class Task implements Serializable {
      */
     public Task(String description) {
         this.description = description;
-        this.isDone = false;
+        isDone = false;
     }
 
     public String getDescription() {
-        return this.description;
+        return description;
     }
 
     public boolean getDone() {
-        return this.isDone;
+        return isDone;
     }
 
     public void markDone() {
-        this.isDone = true;
+        isDone = true;
     }
 
     /**
@@ -39,8 +39,8 @@ public abstract class Task implements Serializable {
      * @return Status of task.
      */
     public String getStatus() {
-        String check = this.isDone ? "\u2713" : "\u2718";
-        String status = "[" + check + "] " + this.getDescription();
+        String check = isDone ? "\u2713" : "\u2718";
+        String status = "[" + check + "] " + getDescription();
         return status;
     }
 }

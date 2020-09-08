@@ -42,7 +42,6 @@ public class LocalStorage implements Storage {
      * @param taskList List of tasks to be saved.
      * @throws DuckException If file is unable to be saved due to corruption.
      */
-
     public void save(TaskList taskList) throws DuckException {
         try {
             ensureFileExists();

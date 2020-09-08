@@ -32,16 +32,16 @@ public class Duck {
      */
     public Duck() {
         try {
-            this.taskList = storage.load();
+            taskList = storage.load();
         } catch (DuckException e) {
-            this.taskList = new TaskList();
+            taskList = new TaskList();
         }
 
-        this.responses = new ArrayList<>();
+        responses = new ArrayList<>();
     }
 
     private String getNumberOfTasks() {
-        return "Now you have " + this.taskList.getLength() + " tasks in the list.";
+        return "Now you have " + taskList.getLength() + " tasks in the list.";
     }
 
     /**
@@ -59,7 +59,7 @@ public class Duck {
      */
     private void save() {
         try {
-            this.storage.save(this.taskList);
+            storage.save(this.taskList);
         } catch (DuckException e) {
             System.out.println(e.toString());
         }
@@ -80,7 +80,7 @@ public class Duck {
      */
     private void listTasks() {
         responses.add("Here are the tasks in your list");
-        String[] statuses = this.taskList.getStatuses();
+        String[] statuses = taskList.getStatuses();
         responses.addAll(Arrays.asList(statuses));
     }
 
@@ -102,7 +102,7 @@ public class Duck {
             responses.add("You can filter up to a date by using \"due [/at | /by] yyyy-mm-dd\"");
         }
 
-        String[] statusesByDueDate = this.taskList.getStatusesByDate(optionalDate);
+        String[] statusesByDueDate = taskList.getStatusesByDate(optionalDate);
         responses.addAll(Arrays.asList(statusesByDueDate));
     }
 
@@ -116,7 +116,7 @@ public class Duck {
     private void listByFind(String input) throws DuckException {
         input = input.substring(4);
 
-        String[] statusesByFind = this.taskList.getStatusesByFind(input);
+        String[] statusesByFind = taskList.getStatusesByFind(input);
         responses.add("Here are the matching tasks in your list:");
         Collections.addAll(responses, statusesByFind);
 
@@ -130,7 +130,7 @@ public class Duck {
      */
     private void markTaskAsDone(String input) throws DuckException {
         int taskNumber = Parser.parseTaskNumber(input);
-        Task task = this.taskList.markDone(taskNumber);
+        Task task = taskList.markDone(taskNumber);
         responses.add("Nice! I've marked this as done");
         responses.add("  " + task.getStatus());
         save();
@@ -144,7 +144,7 @@ public class Duck {
      */
     private void deleteTask(String input) throws DuckException {
         int taskNumber = Parser.parseTaskNumber(input);
-        Task task = this.taskList.deleteTask(taskNumber);
+        Task task = taskList.deleteTask(taskNumber);
         responses.add("Noted. I've removed this task");
         responses.add("  " + task.getStatus());
         responses.add(getNumberOfTasks());
@@ -159,7 +159,7 @@ public class Duck {
      */
     private void createNewTask(String input) throws DuckException {
         Task newTask = TaskFactory.createTaskFromInput(input);
-        this.taskList.addTask(newTask);
+        taskList.addTask(newTask);
         responses.add("Got it. I've added this task");
         responses.add("  " + newTask.getStatus());
         responses.add(getNumberOfTasks());
