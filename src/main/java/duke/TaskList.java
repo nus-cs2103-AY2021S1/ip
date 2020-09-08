@@ -1,10 +1,10 @@
 package duke;
 
-import duke.exception.DukeException;
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.exception.DukeException;
+import duke.task.Task;
 
 public class TaskList {
     private List<Task> taskList;
@@ -19,6 +19,7 @@ public class TaskList {
     @Override
     public String toString() {
         StringBuilder res = new StringBuilder();
+        assert taskList != null : "List of tasks should not be null.";
         for (int i = 1; i <= taskList.size(); i++) {
             res.append(i)
                     .append(". ")
