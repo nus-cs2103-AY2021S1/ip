@@ -18,6 +18,8 @@ public class Parser {
      */
     public String parseCommand(String[] inputs) {
 
+        assert inputs != null : "inputs cannot be empty";
+
         try {
             Commands command = getCommand(inputs[0]);
             String taskDescription = "";
@@ -64,7 +66,7 @@ public class Parser {
             }
             }
         } catch (DukeException e) {
-           return e.getMessage();
+            return e.getMessage();
         }
     }
 
@@ -75,6 +77,9 @@ public class Parser {
      * @param commandInput command from the user
      */
     public Commands getCommand(String commandInput) {
+
+        assert commandInput != null : "commandInput cannot be null";
+
         Commands command;
         try {
             command = Commands.valueOf(commandInput.toUpperCase());

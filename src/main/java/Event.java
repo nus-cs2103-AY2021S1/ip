@@ -2,6 +2,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
 public class Event extends Task {
 
     /** Date of the task **/
@@ -46,6 +47,9 @@ public class Event extends Task {
      * @throws DukeException if the format of the task date/time is wrong
      */
     private void parseTime(String taskDateTime) throws DukeException {
+
+        assert taskDateTime != null : "taskDateTime cannot be empty";
+
         String[] dateTime = taskDateTime.replace("/", "-").split(" ", 2);
         try {
             this.atDate = LocalDate.parse(dateTime[0]);
