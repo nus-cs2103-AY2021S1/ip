@@ -16,6 +16,9 @@ public class Parser {
         if (command.trim().length() == 0) {
             throw new EmptyTaskException();
         }
+        if (userInput.startsWith("#")) {
+            return new HashtagCommand(parseTagToFind(userInput.substring(1)));
+        }
         switch (command) {
         case ("bye") :
             return new ByeCommand();
@@ -123,16 +126,21 @@ public class Parser {
 
     public static TagList parseTag(String detail) {
         int i = detail.trim().indexOf("#");
-        String tagList = detail.substring(i);
+        String tagList = detail.substring(i).trim();
         String spaceRemovedString = tagList.replace(" ", "");
         String[] tagArr = spaceRemovedString.trim().split("#");
         TagList res = new TagList();
         for (String s : tagArr) {
-            if (!s.equals(" ")) {
+            if (!s.equals("")) {
                 Tag currTag = new Tag(s);
                 res.addTag(currTag);
             }
         }
+        System.out.println(res.getTagList().size());
         return res;
+    }
+
+    public static Tag parseTagToFind(String tag) {
+        return new Tag(tag);
     }
 }

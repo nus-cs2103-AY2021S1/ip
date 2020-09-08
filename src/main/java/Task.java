@@ -24,10 +24,6 @@ public class Task {
         return "";
     }
 
-    public Task deserialiseTask() {
-        return this;
-    }
-
     public void setTaskAsDone() {
         this.isDone = true;
     }

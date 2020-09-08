@@ -10,6 +10,8 @@ public class Ui {
     private static final String LIST_REPLY = "Checking the whole list doesn't make you finish anything faster... \n";
     private static final String FIND_REPLY = "Found 'em. But at what cost... \n";
     private static final String CANNOT_FIND_REPLY = "Sorry can't find any tasks with such keyword.";
+    private static final String FIND_TAG_REPLY = "These are the tasks with the tag: \n";
+    private static final String CANNOT_FIND_TAG_REPLY = "Sorry can't find any tasks with such tag.";
     private static final String DELETE_REPLY = "Good good... Okay removed! Looks more apt for a lazy ass like you. \n";
     private static final String ADD_REPLY_TOP = "Wow, another task. Added. You sure you can finish them all? \n";
     private static final String ADD_REPLY_BOT = "Now you have a grand total of %d";
@@ -72,6 +74,14 @@ public class Ui {
             print(FIND_REPLY + taskManager.convertTaskListToString(foundTasks));
         } else {
             print(CANNOT_FIND_REPLY);
+        }
+    }
+
+    public void replyFindTag(TaskManager taskManager, ArrayList<Task> foundTasks) {
+        if (foundTasks.size() > 0) {
+            print(FIND_TAG_REPLY + taskManager.convertTaskListToString(foundTasks));
+        } else {
+            print(CANNOT_FIND_TAG_REPLY);
         }
     }
 
