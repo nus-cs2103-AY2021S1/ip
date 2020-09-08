@@ -19,7 +19,7 @@ public class Storage {
      */
     public static boolean loadTasksFrom(String filepath, TaskList taskList) {
         assert taskList != null;
-        assert taskList.numTasks() == 0;
+        assert taskList.numOfTasks() == 0;
         File dataFile = new File(filepath);
 
         try {
