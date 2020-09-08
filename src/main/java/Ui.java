@@ -1,3 +1,6 @@
+/**
+ * interactions between user and duke
+ */
 public class Ui {
     private static String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -5,6 +8,9 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
+    /**
+     * shows hello message
+     */
     public static void showWelcome(){
         System.out.println("Hello from\n" + logo);
         String hello = "Hello! I'm Duke";
@@ -12,6 +18,9 @@ public class Ui {
         System.out.println(hello + "\n" + question);
     }
 
+    /**
+     * says goodbye to user
+     */
     public static void showGoodbye(){
         System.out.println("Bye. Hope to see you again soon!");
     }

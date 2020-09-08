@@ -1,3 +1,7 @@
+/**
+ * Saves tasks into a file
+ */
+
 import java.io.File;
 import java.io.FileWriter;
 import java.time.LocalDate;
@@ -7,10 +11,18 @@ import java.util.Scanner;
 public class Storage {
     private static String filePath;
 
+    /**
+     * Storage constructor
+     * @param filePath the filepath to be read from and write to
+     */
     public Storage(String filePath){
         this.filePath = filePath;
     }
 
+    /**
+     * write list of tasks into a file
+     * @param lst list of tasks to be written
+     */
     public static void writeToFile(TaskList lst){
         try{
             FileWriter fw = new FileWriter(filePath);
@@ -23,6 +35,10 @@ public class Storage {
         }
     }
 
+    /**
+     * read list of tasks from a file
+     * @return a list of tasks that has been read form the file
+     */
     static ArrayList<Task> readFile(){
         ArrayList<Task> tasks = new ArrayList<>();
         try{

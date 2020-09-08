@@ -1,7 +1,8 @@
-import java.util.ArrayList;
-import java.util.Scanner;
-import java.time.LocalDate;
+/**
+ * Main class
+ */
 
+import java.util.Scanner;
 
 public class Duke {
 
@@ -9,14 +10,20 @@ public class Duke {
     private TaskList inputTasks;
     private Ui ui;
 
-
+    /**
+     * Duke constructor
+     * @param filePath the file for storage of tasks
+     */
     public Duke(String filePath) {
         ui = new Ui();
         storage = new Storage(filePath);
         inputTasks = new TaskList(storage.readFile());
     }
 
-    public void run() throws DukeException {
+    /**
+     * runs Duke
+     */
+    public void run(){
         ui.showWelcome();
         Scanner sc = new Scanner(System.in);
         String ans = sc.nextLine();
@@ -36,7 +43,11 @@ public class Duke {
 
     }
 
-    public static void main(String[] args) throws DukeException {
+    /**
+     * Start of the program
+     * @param args command-line arguments for execution
+     */
+    public static void main(String[] args){
         new Duke("./data/duke.txt").run();
     }
 }
