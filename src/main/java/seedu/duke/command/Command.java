@@ -12,6 +12,10 @@ public class Command {
 
     public Command() {}
 
+    /**
+     * Overloaded constructor for commands that have followups, eg. delete, find.
+     * @param words The rest of the user input, apart from the command.
+     */
     public Command(String[] words) {
         this.words = words;
     }

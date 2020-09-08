@@ -17,7 +17,7 @@ public class DeleteCommand extends Command {
      * Deletes the task from the list of current tasks.
      * @param ls The current list of tasks.
      * @param ui The ui that takes of printing output.
-     * @throws DukeNotSureException If the task being deleted does not exist.
+     * @throws DukeNotSureException If the given number does not correspond to a task in the list.
      */
     @Override
     public void execute(TaskList ls, Ui ui) throws DukeNotSureException {
