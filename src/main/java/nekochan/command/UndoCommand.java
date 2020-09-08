@@ -31,7 +31,7 @@ public class UndoCommand extends Command {
      * @return a {@code Response} object containing the result of executing this {@code UndoCommand}.
      * @throws IncompleteNekoCommandException if this {@code UndoCommand} was not executed.
      */
-    public Response feedback() throws IncompleteNekoCommandException {
+    public Response getResponse() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
             throw new IncompleteNekoCommandException(Messages.INCOMPLETE_UNDO_COMMAND);
         }

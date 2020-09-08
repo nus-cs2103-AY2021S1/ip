@@ -30,7 +30,7 @@ public class RedoCommand extends Command {
      * @return a {@code Response} object containing the result of executing this {@code RedoCommand}.
      * @throws IncompleteNekoCommandException if this {@code RedoCommand} was not executed.
      */
-    public Response feedback() throws IncompleteNekoCommandException {
+    public Response getResponse() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
             throw new IncompleteNekoCommandException(Messages.INCOMPLETE_REDO_COMMAND);
         }

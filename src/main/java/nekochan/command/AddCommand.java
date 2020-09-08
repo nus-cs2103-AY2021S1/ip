@@ -73,7 +73,7 @@ public class AddCommand extends Command {
      * @throws IncompleteNekoCommandException if this {@code AddCommand} was not executed.
      */
     @Override
-    public Response feedback() throws IncompleteNekoCommandException {
+    public Response getResponse() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
             throw new IncompleteNekoCommandException(Messages.INCOMPLETE_ADD_COMMAND);
         }

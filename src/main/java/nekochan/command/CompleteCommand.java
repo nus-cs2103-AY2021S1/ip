@@ -46,7 +46,7 @@ public class CompleteCommand extends Command {
      * @throws IncompleteNekoCommandException if this {@code CompleteCommand} was not executed.
      */
     @Override
-    public Response feedback() throws IncompleteNekoCommandException {
+    public Response getResponse() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
             throw new IncompleteNekoCommandException(Messages.INCOMPLETE_COMPLETE_COMMAND);
         }

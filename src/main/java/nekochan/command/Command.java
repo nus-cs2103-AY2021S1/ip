@@ -24,5 +24,5 @@ public abstract class Command {
      * @return a {@code Response} object containing the result of executing this {@code Command}.
      * @throws NekoException if this {@code Command} has not been executed.
      */
-    public abstract Response feedback() throws NekoException;
+    public abstract Response getResponse() throws NekoException;
 }

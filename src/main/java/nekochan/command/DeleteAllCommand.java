@@ -34,7 +34,7 @@ public class DeleteAllCommand extends Command {
      * @throws IncompleteNekoCommandException if this {@code DeleteAllCommand} was not executed.
      */
     @Override
-    public Response feedback() throws IncompleteNekoCommandException {
+    public Response getResponse() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
             throw new IncompleteNekoCommandException(Messages.INCOMPLETE_DELETE_ALL_COMMAND);
         }

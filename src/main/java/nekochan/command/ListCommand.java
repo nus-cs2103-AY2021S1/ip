@@ -37,7 +37,7 @@ public class ListCommand extends Command {
      * @throws IncompleteNekoCommandException if this {@code ListCommand} was not executed.
      */
     @Override
-    public Response feedback() throws IncompleteNekoCommandException {
+    public Response getResponse() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
             throw new IncompleteNekoCommandException(Messages.INCOMPLETE_LIST_COMMAND);
         }

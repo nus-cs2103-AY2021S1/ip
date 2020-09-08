@@ -29,7 +29,7 @@ public class ExitCommand extends Command {
      * @return a {@code Response} object containing the result of executing this {@code ExitCommand}.
      * @throws IncompleteNekoCommandException if this {@code ExitCommand} was not executed.
      */
-    public Response feedback() throws IncompleteNekoCommandException {
+    public Response getResponse() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
             throw new IncompleteNekoCommandException(Messages.INCOMPLETE_EXIT_COMMAND);
         }
