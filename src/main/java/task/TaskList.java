@@ -1,6 +1,9 @@
 package task;
 
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -119,5 +122,14 @@ public class TaskList {
         listDisplay.append("    ____________________________________________________\n");
 
         return listDisplay.toString();
+    }
+
+    /**
+     * Sorts the TaskList by given comparator.
+     *
+     * @param comparator the comparator used for comparing different task
+     */
+    public void sort(Comparator<Task> comparator) {
+        Collections.sort(this.taskList, comparator);
     }
 }
