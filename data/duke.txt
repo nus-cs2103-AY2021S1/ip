@@ -1,4 +1,3 @@
-T | 1 | leisure | read book
-E | 0 |  | project meeting | 08 Sep 2020 7:00 PM
-D | 0 |  | return book | 09 Sep 2020 2:00 PM
-D | 1 | assignment | submit CS2100 assignment | 06 Sep 2020 9:00 AM
+T | 0 |  | read book
+D | 1 | assignment | submit CS2107 assignment | 05 Sep 2020 6:00 PM
+E | 0 | project | project meeting | 08 Sep 2020 11:00 PM

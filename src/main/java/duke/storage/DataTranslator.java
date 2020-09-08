@@ -43,11 +43,11 @@ public class DataTranslator {
                     break;
                 case "D":
                     DukeDateTime deadlineDukeDateTime = DateTimeParser.parseDateTime(parsedLine[4]);
-                    task = new Deadline(parsedLine[2], deadlineDukeDateTime);
+                    task = new Deadline(parsedLine[3], deadlineDukeDateTime);
                     break;
                 case "E":
                     DukeDateTime eventDukeDateTime = DateTimeParser.parseDateTime(parsedLine[4]);
-                    task = new Event(parsedLine[2], eventDukeDateTime);
+                    task = new Event(parsedLine[3], eventDukeDateTime);
                     break;
                 default:
                     assert parsedLine[0] != "T" || parsedLine[0] != "D" || parsedLine[0] != "E"
