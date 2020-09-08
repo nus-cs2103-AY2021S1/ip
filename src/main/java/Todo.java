@@ -14,4 +14,9 @@ public class Todo extends Task {
         super.isDone = isDone;
         super.type = Task.Type.TODO;
     }
+
+    public String getTypeIcon() {
+        String icon = "[T]";
+        return icon;
+    }
 }

@@ -7,6 +7,7 @@ import java.time.format.DateTimeParseException;
  * Responsible for parsing the user's input and processing the desired command.
  */
 public class Parser {
+    // A list of all commands recognised by Duke.
     private static final String BYE = "bye";
     private static final String LIST = "list";
     private static final String DONE = "done";
@@ -15,20 +16,24 @@ public class Parser {
     private static final String DEADLINE = "deadline";
     private static final String EVENT = "event";
     private static final String FIND = "find";
+    private static final String HELP = "help";
 
+    // Special Strings used by Parser.
+    private static final String SPACE = " ";
     private static final String EMPTY_STRING = "";
-
     private static final String DEADLINE_SEPARATOR = " /by ";
     private static final String EVENT_SEPARATOR = " /at ";
     private static final String SEPARATOR = " /";
 
+    // For time formatting.
+    private static final String TIME_FORMAT = "d MMM yyyy";
     private static final String NOW = "now";
 
     /**
      *
      */
     public static String parseInput(String input, Ui ui, TaskList tasks, Storage storage) throws DukeException, IOException {
-        String[] parsedInput = input.split(" ", 2);
+        String[] parsedInput = input.split(SPACE, 2);
         String commandKeyword = parsedInput[0].toLowerCase();
         if (commandKeyword.equals(BYE)) {
             return handleByeCommand(ui);
@@ -54,11 +59,28 @@ public class Parser {
         if (commandKeyword.equals(FIND)) {
             return handleFindCommand(ui, tasks, parsedInput);
         }
+        if (commandKeyword.equals(HELP)) {
+            return handleHelpCommand(ui);
+        }
+        // The user's command keyword is not recognised.
         throw new DukeException("Invalid command keyword");
     }
 
+    /**
+     *
+     */
+    public static boolean isBye(String input) {
+        String commandKeyword = input.split(SPACE, 2)[0].toLowerCase();
+        return commandKeyword.equals(BYE);
+    }
+
+    // ===== HANDLER AND HELPER METHODS =====
     private static String handleByeCommand(Ui ui) {
         return ui.sayGoodbye();
+    }
+
+    private static String handleHelpCommand(Ui ui) {
+        return ui.giveHelp();
     }
 
     private static String handleListCommand(Ui ui, TaskList tasks) {
@@ -83,6 +105,25 @@ public class Parser {
         } else {
             throw new DukeException("Invalid number for DELETE command");
         }
+    }
+
+    private static boolean isValidSize(TaskList tasks, String[] parsedInput) {
+        boolean hasDescription = parsedInput.length > 1;
+        if (!hasDescription) {
+            return false;
+        }
+        String num = parsedInput[1];
+        try {
+            int number = Integer.parseInt(num);
+            return tasks.getListSize() >= number && number > 0;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
+    private static int getNumber(String[] parsedInput) {
+        String numberString = parsedInput[1];
+        return Integer.parseInt(numberString);
     }
 
     private static String handleTodoCommand(Ui ui, TaskList tasks, Storage storage, String[] parsedInput) throws DukeException, IOException {
@@ -120,44 +161,21 @@ public class Parser {
         }
     }
 
-    /**
-     *
-     */
-    public static boolean isBye(String input){
-        String commandKeyword = input.split(" ", 2)[0].toLowerCase();
-        return commandKeyword.equals(BYE);
-    }
-
-    private static boolean isValidSize(TaskList tasks, String[] parsedInput) {
-        boolean hasDescription = parsedInput.length > 1;
-        if (!hasDescription) {
-            return false;
-        }
-        String num = parsedInput[1];
-        try {
-            int number = Integer.parseInt(num);
-            return tasks.getListSize() >= number && number > 0;
-        } catch (NumberFormatException e) {
-            return false;
-        }
-    }
-
-    private static int getNumber(String[] parsedInput) {
-        String numberString = parsedInput[1];
-        return Integer.parseInt(numberString);
+    private static boolean isValidFindFormat(String[] parsedInput) {
+        return parsedInput.length > 1;
     }
 
     private static Todo getTodo(String[] parsedInput) {
         return new Todo(parsedInput[1]);
     }
 
-    private static Deadline getDeadline(String[] parsedInput) {
+    private static Deadline getDeadline(String[] parsedInput) throws DukeException {
         String description = getDescription(parsedInput[1]);
         String time = getTime(parsedInput[1], Task.Type.DEADLINE);
         return new Deadline(description, time);
     }
 
-    private static Event getEvent(String[] parsedInput) {
+    private static Event getEvent(String[] parsedInput) throws DukeException {
         String description = getDescription(parsedInput[1]);
         String time = getTime(parsedInput[1], Task.Type.EVENT);
         return new Event(description, time);
@@ -167,22 +185,23 @@ public class Parser {
         return body.split(SEPARATOR, 2)[0];
     }
 
-    private static String getTime(String body, Task.Type type) {
-        String time = EMPTY_STRING;
+    private static String getTime(String body, Task.Type type) throws DukeException {
+        String time;
         if (type == Task.Type.DEADLINE) {
             time = body.split(DEADLINE_SEPARATOR, 2)[1];
-        }
-        if (type == Task.Type.EVENT) {
+        } else if (type == Task.Type.EVENT) {
             time = body.split(EVENT_SEPARATOR, 2)[1];
+        } else {
+            throw new DukeException("Unidentified task type");
         }
         if (time.toLowerCase().equals(NOW)) {
-            return LocalDate.now().format(DateTimeFormatter.ofPattern("d MMM yyyy"));
+            return LocalDate.now().format(DateTimeFormatter.ofPattern(TIME_FORMAT));
         } else {
-            return LocalDate.parse(time).format(DateTimeFormatter.ofPattern("d MMM yyyy"));
+            return LocalDate.parse(time).format(DateTimeFormatter.ofPattern(TIME_FORMAT));
         }
     }
 
-    private static boolean isValidFormat(String[] parsedInput, Task.Type type) {
+    private static boolean isValidFormat(String[] parsedInput, Task.Type type) throws DukeException {
         boolean hasDescription = parsedInput.length > 1;
         if (!hasDescription) {
             return false;
@@ -200,17 +219,14 @@ public class Parser {
         return false;
     }
 
-    private static boolean isValidFindFormat(String[] parsedInput) {
-        return parsedInput.length > 1;
-    }
-
-    private static boolean isValidTime(String body, Task.Type type) throws DateTimeParseException {
-        String time = EMPTY_STRING;
+    private static boolean isValidTime(String body, Task.Type type) throws DateTimeParseException, DukeException {
+        String time;
         if (type == Task.Type.DEADLINE) {
             time = body.split(DEADLINE_SEPARATOR, 2)[1];
-        }
-        if (type == Task.Type.EVENT) {
+        } else if (type == Task.Type.EVENT) {
             time = body.split(EVENT_SEPARATOR, 2)[1];
+        } else {
+            throw new DukeException("Unidentified task type");
         }
         if (time.toLowerCase().equals(NOW)) {
             return true;

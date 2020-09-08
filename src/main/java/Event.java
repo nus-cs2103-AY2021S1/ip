@@ -14,4 +14,9 @@ public class Event extends TimedTask {
         super.type = Task.Type.EVENT;
         super.isDone = isDone;
     }
+
+    public String getTypeIcon() {
+        String icon = "[E]";
+        return icon;
+    }
 }

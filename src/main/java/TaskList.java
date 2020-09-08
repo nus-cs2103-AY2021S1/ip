@@ -32,15 +32,13 @@ public class TaskList {
         if (tasks.size() == 0) {
             return ui.sayCurrentListIsEmpty();
         }
-        else {
-            String currentList = "";
-            int count = 1;
-            for (Task task : tasks) {
-                currentList += count + ". " + task + "\n";
-                count++;
-            }
-            return ui.sayCurrentList(currentList);
+        String currentList = "";
+        int count = 1;
+        for (Task task : tasks) {
+            currentList += count + ". " + task + "\n";
+            count++;
         }
+        return ui.sayCurrentList(currentList);
     }
 
     /**
@@ -93,10 +91,10 @@ public class TaskList {
                 noneFound = false;
             }
         }
-        if (!noneFound) {
-            return ui.sayFoundTasks(foundTasks);
-        } else {
+        if (noneFound) {
             return ui.sayNoMatchingFileFound();
+        } else {
+            return ui.sayFoundTasks(foundTasks);
         }
     }
 
