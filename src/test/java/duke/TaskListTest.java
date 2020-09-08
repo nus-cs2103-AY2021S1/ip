@@ -8,6 +8,8 @@ import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
+/** JUnit test for TaskList class.
+ */
 public class TaskListTest {
     @Test
     public void addTaskTest() {
@@ -16,10 +18,10 @@ public class TaskListTest {
         String listString = "";
         int size = 0;
 
-        // test 0
+        // test 0: ensures that list is empty (pre condition: duke.txt is empty)
         assertEquals("", list.toString());
 
-        // test 1
+        // test 1: add todo task
         try {
             task = new TodoStub("abc");
             listString = "1." + task.toString();
@@ -30,7 +32,7 @@ public class TaskListTest {
             fail();
         }
 
-        // test 2
+        // test 2: add event task
         try {
             task = new EventStub("today/at8-09-2020 8:00");
             list.addTask("event", "today/at8-09-2020 8:00");
@@ -42,7 +44,7 @@ public class TaskListTest {
         }
 
 
-        // test 3
+        // test 3: add deadline task
         for (int i = 9; i < 24; i++) {
             try {
                 task = new DeadlineStub("lock/by9-10-2021 " + i + ":00");
@@ -55,7 +57,7 @@ public class TaskListTest {
         }
         assertEquals(listString, list.toString());
 
-        // test 4
+        // test 4: add a series of event task
         for (int i = 1; i < 10; i++) {
             try {
                 task = new EventStub("test/at9-10-2021 " + i + ":00");
@@ -68,7 +70,7 @@ public class TaskListTest {
         }
         assertEquals(listString, list.toString());
 
-        // test 5
+        // test 5: add event task with INVALID format
         try {
             list.addTask("event", "today8-09-2020 8:00");
             fail();
@@ -77,7 +79,7 @@ public class TaskListTest {
         }
     }
 
-
+    @Test
     public void getTimedTasksTest() {
         TaskList list = new TaskList();
         Task task;
@@ -86,10 +88,10 @@ public class TaskListTest {
         // test 0
         // start condition: duke.txt empty
         try {
-            list.getTimedTasks(LocalDate.parse("9-12-2020", DateTimeFormatter.ofPattern("d-M-yyyy k:mm")));
+            list.getTimedTasks(LocalDate.parse("9-12-2020", DateTimeFormatter.ofPattern("d-M-yyyy")));
             fail();
         } catch (DukeException e) {
-            assertEquals("OOPS!!! I'm sorry, no such task :<", e.getMessage());
+            assertEquals("OOPS!!! I'm sorry, no tasks on that date :<", e.getMessage());
         }
 
         // test 2
@@ -98,7 +100,7 @@ public class TaskListTest {
             list.addTask("event", "today/at8-09-2020 8:00");
             listString = "1." + task.toString();
             assertEquals(listString, list.getTimedTasks(LocalDate.parse(("8-09-2020"),
-                    DateTimeFormatter.ofPattern("d-M-yyyy k:mm"))).toString());
+                    DateTimeFormatter.ofPattern("d-M-yyyy"))).toString());
         } catch (DukeException e) {
             fail();
         }
@@ -110,12 +112,10 @@ public class TaskListTest {
                 task = new DeadlineStub("lock/by9-10-2021 " + i + ":00");
                 list.addTask("deadline", "lock/by9-10-2021 " + i + ":00");
                 int listIndex = i - 8;
-                listString += listIndex + "." + task.toString();
-                if (i < 23) {
-                    listString += "\n";
-                }
+                String maybeLinebreak = listIndex == 1 ? "" : "\n";
+                listString += maybeLinebreak + listIndex + "." + task.toString();
                 assertEquals(listString, list.getTimedTasks(LocalDate.parse("9-10-2021",
-                        DateTimeFormatter.ofPattern("d-M-yyyy k:mm"))).toString());
+                        DateTimeFormatter.ofPattern("d-M-yyyy"))).toString());
             } catch (DukeException e) {
                 fail();
             }

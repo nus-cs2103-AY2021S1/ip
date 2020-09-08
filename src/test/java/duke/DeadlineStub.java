@@ -2,6 +2,8 @@ package duke;
 
 import java.time.LocalDateTime;
 
+/** Stub for Deadline class, for JUnit testing purposes.
+ */
 public class DeadlineStub extends TimedTask {
 
     public DeadlineStub(String description) {

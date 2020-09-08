@@ -2,6 +2,8 @@ package duke;
 
 import java.time.LocalDateTime;
 
+/** Stub for Event class, for JUnit testing purposes.
+ */
 public class EventStub extends TimedTask {
 
     public EventStub(String description) {

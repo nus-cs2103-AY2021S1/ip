@@ -6,10 +6,10 @@ import java.util.Scanner;
  * Handles Duke's File I/O.
  */
 public class Ui {
-    private final Scanner sc = new Scanner(System.in);
-    private final String line = "------------------------------"
+    private static final Scanner INPUT_READER = new Scanner(System.in);
+    private static final String LINE = "------------------------------"
             + "------------------------------";
-    private final String logo = " ____        _        \n"
+    private static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
@@ -19,14 +19,14 @@ public class Ui {
      * Prints out the Duke logo.
      */
     public String getLogo() {
-        return this.logo;
+        return LOGO;
     }
 
     /**
      * Prints out the welcome message.
      */
     public String getWelcomeMessage() {
-        return "Hello! I'm Duke.\nWhat can I do for you?\n" + this.line;
+        return "Hello! I'm Duke.\nWhat can I do for you?\n" + LINE;
     }
 
     /**
@@ -35,7 +35,7 @@ public class Ui {
      * @return String of trimmed input line.
      */
     public String readLine() {
-        return this.sc.nextLine();
+        return INPUT_READER.nextLine();
     }
 
     /**
@@ -44,7 +44,7 @@ public class Ui {
      * @param message message to be printed.
      */
     public String getLine(String message) {
-        return message;// + "\n" + this.line;
+        return message;
     }
 
     /**
