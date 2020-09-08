@@ -12,6 +12,10 @@ public class Deadline extends Task {
         this.by = by;
     }
 
+    public void editDate(LocalDate newBy) {
+        this.by = newBy;
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + by.getDayOfWeek() + ", "

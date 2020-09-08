@@ -13,6 +13,10 @@ public class Task {
         this.isDone = true;
     }
 
+    public void editDescription(String newDesc) {
+        this.description = newDesc;
+    }
+
     public String getStatusIcon() {
         return (isDone ? "✓" : "✘"); //return tick or X symbols
     }
