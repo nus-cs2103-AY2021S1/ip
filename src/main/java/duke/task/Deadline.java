@@ -33,13 +33,13 @@ public class Deadline extends Task {
     @Override
     public String toFileString() {
         String done = super.isDone ? "1" : "0";
-        return "D | " + done + " | " + super.description + " | " +  by;
+        return "D | " + done + " | " + priority.toString() + " | " + super.description + " | " +  by;
     }
 
     @Override
     public String toString() {
         LocalDate localDate = LocalDate.parse(by);
         String formattedDate = localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-        return "[D]" + super.toString() + " (by: " + formattedDate + ")";
+        return "[D]" + super.toString() + " (by: " + formattedDate + ") [" + priority.toString() + "]";
     }
 }

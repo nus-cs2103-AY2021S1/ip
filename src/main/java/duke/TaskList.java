@@ -3,6 +3,7 @@ package duke;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.Exception.InvalidPriorityLevel;
 import duke.task.Task;
 
 /**
@@ -27,6 +28,10 @@ public class TaskList {
 
     public void doneTask(int taskNumber) {
         tasks.get(taskNumber - 1).markDone();
+    }
+
+    public void priorityTask(int taskNumber, int priorityLevel) {
+        tasks.get(taskNumber - 1).markPriority(priorityLevel);
     }
 
     public Task getTask(int taskNumber) {

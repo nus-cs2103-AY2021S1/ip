@@ -85,15 +85,17 @@ public class Storage {
         List<String> words = Arrays.asList(line.split(" \\| "));
         Task task;
         if (words.get(0).equals("T")) {
-            task = new Todo(words.get(2));
+            task = new Todo(words.get(3));
         } else if (words.get(0).equals("D")) {
-            task = new Deadline(words.get(2), words.get(3));
+            task = new Deadline(words.get(3), words.get(4));
         } else {
-            task = new Event(words.get(2), words.get(3));
+            task = new Event(words.get(3), words.get(4));
         }
         if (words.get(1).equals("1")) {
             task.markDone();
         }
+        String priorityLevel = words.get(2);
+        task.markPriority(Task.Priority.valueOf(priorityLevel));
         return task;
     }
 }

@@ -32,10 +32,14 @@ public abstract class Command {
     public static final String LIST_COMMAND = "list";
     /** Indicates a AddCommand for adding a Todo task */
     public static final String TODO_COMMAND = "todo";
+    /** Indicates a PriorityCommand for prioritising a task */
+    public static final String PRIORITY_COMMAND = "priority";
     /** Space character for separating a Command */
     public static final String SPLIT_DELIMITER = " ";
     /** Minimum number of word count for a Command that contains task number */
     public static final int TASK_NUMBER_COMMAND_WORD_COUNT = 2;
+    /** Indicates the position of task number in the command */
+    public static final int TASK_NUMBER_POSITION = 1;
 
     /**
      * Constructs a Command object.

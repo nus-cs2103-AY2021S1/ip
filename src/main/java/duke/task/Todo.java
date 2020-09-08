@@ -22,11 +22,11 @@ public class Todo extends Task {
     @Override
     public String toFileString() {
         String done = super.isDone ? "1" : "0";
-        return "T | " + done + " | " + super.description;
+        return "T | " + done + " | " + priority.toString() + " | " + super.description + " | " + priority.toString();
     }
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "[T]" + super.toString() + " [" + priority.toString() + "]";
     }
 }

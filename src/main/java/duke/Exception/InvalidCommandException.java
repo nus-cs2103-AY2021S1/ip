@@ -7,6 +7,6 @@ package duke.Exception;
 public class InvalidCommandException extends DukeException {
     public InvalidCommandException() {
         super(":( Oops!!! I'm sorry, but I don't know what that means "
-                + ":-(\n\tCommands: list | done | delete | todo | deadline | event | bye");
+                + ":-(\n\tCommands: list | done | priority | delete | todo | deadline | event | bye");
     }
 }

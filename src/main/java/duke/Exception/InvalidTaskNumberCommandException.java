@@ -6,6 +6,6 @@ package duke.Exception;
  */
 public class InvalidTaskNumberCommandException extends DukeException {
     public InvalidTaskNumberCommandException() {
-        super(":( Oops!!! Please type \"[action] [task number]\"");
+        super(":( Oops!!! Please type \"[action] [task number] [optional arguments...]\"");
     }
 }

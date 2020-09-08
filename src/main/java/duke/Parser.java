@@ -4,13 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import duke.Exception.*;
-import duke.command.AddCommand;
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -41,9 +35,23 @@ public class Parser {
         } else {
             // convert the task number into int
             try {
-                return Integer.parseInt(commandWords.get(1));
+                return Integer.parseInt(commandWords.get(Command.TASK_NUMBER_POSITION));
             } catch (NumberFormatException numberFormatException) {
                 throw new InvalidTaskNumberException();
+            }
+        }
+    }
+
+    private static int extractTaskPriorityLevel(String command) throws InvalidPriorityCommandException, InvalidPriorityLevel {
+        List<String> commandWords = Arrays.asList(command.split(Command.SPLIT_DELIMITER));
+        if (commandWords.size() != PriorityCommand.WORD_COUNT) {
+            throw new InvalidPriorityCommandException();
+        } else {
+            // convert the task number into int
+            try {
+                return Integer.parseInt(commandWords.get(PriorityCommand.PRIORITY_LEVEL_POSITION));
+            } catch (NumberFormatException numberFormatException) {
+                throw new InvalidPriorityLevel();
             }
         }
     }
@@ -95,8 +103,7 @@ public class Parser {
         return task;
     }
 
-    public static Command parse(String fullCommand) throws DukeException {
-<<<<<<< HEAD
+    public static Command parse(String fullCommand) throws DukeException, InvalidPriorityCommandException {
         boolean isTodoCommand = fullCommand.startsWith(AddCommand.TODO_COMMAND);
         boolean isDeadlineCommand = fullCommand.startsWith(AddCommand.DEADLINE_COMMAND);
         boolean isEventCommand = fullCommand.startsWith(AddCommand.EVENT_COMMAND);
@@ -105,10 +112,6 @@ public class Parser {
         if (fullCommand.equalsIgnoreCase(Command.BYE_COMMAND)) {
             return new ByeCommand();
         } else if (fullCommand.equalsIgnoreCase(Command.LIST_COMMAND)) {
-=======
-        assert fullCommand != null : "Command should not be null";
-        if (fullCommand.equalsIgnoreCase("list")) {
->>>>>>> master
             return new ListCommand();
         } else if (fullCommand.startsWith(Command.DONE_COMMAND)) {
             int taskNumber = extractTaskNumber(fullCommand);
@@ -125,6 +128,10 @@ public class Parser {
         } else if (isAddCommand) {
             Task newTask = parseAddCommand(fullCommand);
             return new AddCommand(newTask);
+        } else if (fullCommand.startsWith(Command.PRIORITY_COMMAND)) {
+            int taskNumber = extractTaskNumber(fullCommand);
+            int priorityLevel = extractTaskPriorityLevel(fullCommand);
+            return new PriorityCommand(taskNumber, priorityLevel);
         } else {
             throw new InvalidCommandException();
         }
