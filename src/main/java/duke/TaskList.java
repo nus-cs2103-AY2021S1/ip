@@ -85,6 +85,25 @@ public class TaskList {
     }
 
     /**
+     * Snoozes a task.
+     *
+     * @param idx Index of the task that the user wants to mark as done.
+     * @return The task marked as done.
+     * @throws DukeException If there is error in the input.
+     */
+    public Task snoozeTask(int idx) throws DukeException {
+        Task task = taskList.get(idx - 1);
+        if (task instanceof ToDo) {
+            throw new DukeException("OOPS! A ToDo cannot be snoozed!");
+        } else if (task instanceof Event) {
+            ((Event) task).snoozeEvent();
+        } else if (task instanceof Deadline) {
+            ((Deadline) task).snoozeDeadline();
+        }
+        return task;
+    }
+
+    /**
      * Finds the tasks that matches the keyword.
      *
      * @param keyword Keyword for finding matching tasks.

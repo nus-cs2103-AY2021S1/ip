@@ -49,6 +49,11 @@ public class Deadline extends Task {
         }
     }
 
+    public Deadline snoozeDeadline() {
+        this.date = this.date.plusDays(1);
+        return this;
+    }
+
     @Override
     public String getTaskDetailsForSave() {
         return "D | " + (isDone ? 1 : 0) + " | " + description + " | "

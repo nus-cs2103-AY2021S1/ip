@@ -78,7 +78,9 @@ public class Ui {
                 + "list: \n"
                 + "    see all the tasks you have now. \n"
                 + "find: \n"
-                + "    search your task list with keywords. \n"
+                + "    search your task list with keywords. \n    format: find {keywords} \n"
+                + "snooze: \n"
+                + "    snooze your task by one day. \n    format: snooze {taskNumber} \n"
                 + "bye: \n"
                 + "    say goodbye to me :<";
         return formatPrint(supportedCommands);
@@ -130,6 +132,17 @@ public class Ui {
      */
     public String showDeletedTask(Task task, TaskList taskList) {
         return formatPrint(String.format("Got it. I've deleted this task: \n   %s\nNow you have %d task%s in the list.",
+                task, taskList.getSize(), taskList.getSize() > 1 ? "s" : ""));
+    }
+
+    /**
+     * Shows the snoozed task.
+     * @param task Snoozed task.
+     * @param taskList List of tasks.
+     * @return The text to be displayed.
+     */
+    public String showSnoozedTask(Task task, TaskList taskList) {
+        return formatPrint(String.format("Got it. I've snoozed this task by 1 day: \n   %s\nNow you have %d task%s in the list.",
                 task, taskList.getSize(), taskList.getSize() > 1 ? "s" : ""));
     }
 

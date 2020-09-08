@@ -42,6 +42,8 @@ public class Parser {
             return CommandType.HELP;
         case "find":
             return CommandType.FIND;
+        case "snooze":
+            return CommandType.SNOOZE;
         default:
             throw new DukeException("OOPS! I'm sorry, but I don't know what that means :-(");
         }

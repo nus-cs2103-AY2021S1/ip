@@ -62,6 +62,12 @@ public class Event extends Task {
         }
     }
 
+    public Event snoozeEvent() {
+        this.startDateTime = this.startDateTime.plusDays(1);
+        this.endDateTime = this.endDateTime.plusDays(1);
+        return this;
+    }
+
     @Override
     public String getTaskDetailsForSave() {
         String startDate = startDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
