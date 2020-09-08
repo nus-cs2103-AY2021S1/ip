@@ -1,12 +1,12 @@
 package storage;
 
+import duke.DukeException;
+import tasklist.TaskList;
+
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.util.Scanner;
-
-import duke.DukeException;
-import tasklist.TaskList;
 
 /**
  * Storage deals with loading tasks from a file and saving tasks in the same file
@@ -57,7 +57,9 @@ public class Storage {
      * @param task the string of task from the file
      */
     public void formatStringToTask(String task) {
+        assert(task.contains(" "));
         String[] split = task.split(" ");
+        assert(task.length() >= 6);
         String body = task.substring(6);
         try {
             switch (split[0]) {

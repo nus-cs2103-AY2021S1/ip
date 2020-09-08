@@ -1,13 +1,13 @@
 package tasklist;
 
-import java.util.ArrayList;
-
 import duke.DukeException;
 import parser.Parser;
 import task.Deadline;
 import task.Event;
 import task.Task;
 import task.Todo;
+
+import java.util.ArrayList;
 
 /**
  * TaskList contains the list of tasks and the functions that change the list of
@@ -53,7 +53,9 @@ public class TaskList {
      * @throws DukeException
      */
     public String completeItem(String input) throws DukeException {
+        assert(input.contains(" "));
         String indexString = input.split(" ")[1];
+        assert(Integer.valueOf(indexString) > 0);
         try {
             String output = "";
             Task item = todoList.get(Integer.valueOf(indexString) - 1);
@@ -77,6 +79,7 @@ public class TaskList {
      * @throws DukeException
      */
     public String deleteItem(String input) throws DukeException {
+        assert(input.contains(" "));
         String indexString = input.split(" ")[1];
         try {
             int index = Integer.valueOf(indexString) - 1;
