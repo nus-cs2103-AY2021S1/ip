@@ -101,6 +101,7 @@ public class Parser {
             }
 
         } else if (message.contains("find")) {
+            assert message.length() > 5 : "Please insert a keyword for us to find";
             String keyword = message.substring(5);
             response = list.findTask(keyword);
         }

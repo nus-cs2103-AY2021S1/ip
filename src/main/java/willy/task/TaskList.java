@@ -60,6 +60,7 @@ public class TaskList {
      * @param taskNum Task number that the user wants the bot to remove.
      */
     public String removeTask(int taskNum) {
+        assert taskNum > 0 : "Please insert a task number greater than 0" ;
         try {
             int i = taskNum - 1;
             Task task = listOfTasks.get(i);
@@ -116,6 +117,7 @@ public class TaskList {
      * @param taskNum Index of the task according to the list shown to the user.
      */
     public String setTaskDone(int taskNum) {
+        assert taskNum > 0 : "Please insert a task number greater than 0";
         try {
             int i = taskNum - 1;
             Task task = listOfTasks.get(i);
