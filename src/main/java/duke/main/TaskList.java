@@ -169,6 +169,16 @@ public class TaskList {
     }
 
     /**
+     * Returns true if and only if the task exists in the list.
+     *
+     * @param task Task to be detected in the task list.
+     * @return True if the task exists in the list, false otherwise.
+     */
+    public boolean contains(Task task) {
+        return tasks.contains(task);
+    }
+
+    /**
      * Returns the length of the list of Tasks.
      *
      * @return Length of TaskList contents.
