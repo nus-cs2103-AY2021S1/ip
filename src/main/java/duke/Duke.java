@@ -4,7 +4,6 @@ import duke.command.CommandHandler;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import duke.command.CommandHandler;
 
 public class Duke {
     private TaskList tasks;
@@ -49,6 +48,7 @@ public class Duke {
     public String getResponse(String input) {
         CommandHandler commandHandler = new CommandHandler(input, ui, tasks);
         commandHandler.execute();
+
         return commandHandler.getLog();
     }
 }

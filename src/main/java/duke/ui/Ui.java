@@ -5,23 +5,14 @@ import java.util.Scanner;
 
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.util.MagicStrings;
 
 /**
  * Deals with user interactions by scanning and printing.
  */
 public class Ui {
     private Scanner sc;
-    private static final String MESSAGE_WELCOME = "Hello! I'm Clara! :D How may I help you? :)\n";
-    private static final String MESSAGE_GOODBYE = "Bye! Have a great day and hope to see you soon! :D\n";
-    private static final String HEADER_ERROR = "Apologies!\n";
-    private static final String HEADER_TASK_FIND = "These are the tasks that you are looking for.:)\n";
-    private static final String HEADER_TASK_ALL = "These are the tasks in your list. Jiayous! :)\n";
-    private static final String HEADER_TASK_NONE = "You have no task in your list. :D\n";
-    private static final String HEADER_TASK_ADD = "Okay! I've added this task:";
 
-    private static final String HEADER_TASK_DONE = "Nice! I've marked this task as done:\n\t\t";
-    private static final String HEADER_TASK_DELETE= "Okay! I've removed this task:\n\t\t";
-    private static final String MESSAGE_TASK_UPDATE = "This is your updated tasks. Jiayous! :D";
     public Ui() {
         this.sc = new Scanner(System.in);
     }
@@ -48,7 +39,7 @@ public class Ui {
      * @return Welcome message.
      */
     public String printHello() {
-        return MESSAGE_WELCOME;
+        return MagicStrings.MESSAGE_WELCOME;
     }
 
     /**
@@ -57,7 +48,7 @@ public class Ui {
      * @return Goodbye message.
      */
     public String printBye() {
-        return MESSAGE_GOODBYE;
+        return MagicStrings.MESSAGE_GOODBYE;
     }
 
     /**
@@ -72,9 +63,9 @@ public class Ui {
         StringBuilder str = new StringBuilder();
 
         if (tasks.size() > 0) {
-            str.append(isForFind ? HEADER_TASK_FIND : HEADER_TASK_ALL);
+            str.append(isForFind ? MagicStrings.HEADER_TASK_FIND : MagicStrings.HEADER_TASK_ALL);
         } else {
-            str.append(HEADER_TASK_NONE);
+            str.append(MagicStrings.HEADER_TASK_NONE);
         }
 
         for (int i = 0; i < tasks.size(); i++) {
@@ -95,14 +86,14 @@ public class Ui {
     }
 
     public String printTaskAsDone(Task task) {
-        return HEADER_TASK_DONE + task.toString();
+        return MagicStrings.HEADER_TASK_DONE + task.toString();
     }
 
     public String printTaskDeleted(Task task) {
-        return HEADER_TASK_DELETE + task.toString();
+        return MagicStrings.HEADER_TASK_DELETE + task.toString();
     }
 
     public String printTaskAdded(Task task) {
-        return HEADER_TASK_ADD + task.toString();
+        return MagicStrings.HEADER_TASK_ADD + task.toString();
     }
 }

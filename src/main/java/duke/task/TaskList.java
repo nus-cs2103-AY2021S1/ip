@@ -5,7 +5,7 @@ import java.util.List;
 
 import duke.DukeException;
 import duke.util.Parser;
-import duke.util.Strings;
+import duke.util.MagicStrings;
 
 /**
  * Represents a list of tasks.
@@ -30,7 +30,7 @@ public class TaskList {
         String[] split = input.split(" ", 2);
 
         if (split.length < 2) {
-            throw new DukeException(Strings.ERROR_TODO_DESCRIPTION_EMPTY);
+            throw new DukeException(MagicStrings.ERROR_TODO_DESCRIPTION_EMPTY);
         } else {
             String keyword = split[0];
             String description = split[1];
@@ -43,7 +43,7 @@ public class TaskList {
             case "deadline":
                 String[] splitSlash = description.split(" /by ");
                 if (splitSlash.length != 2) {
-                    throw new DukeException(Strings.ERROR_DEADLINE_FORMAT_INCORRECT);
+                    throw new DukeException(MagicStrings.ERROR_DEADLINE_FORMAT_INCORRECT);
                 }
                 task = new Deadline(splitSlash[0], false, Parser.parseDate(splitSlash[1]));
                 this.tasks.add(task);
@@ -51,7 +51,7 @@ public class TaskList {
             case "event":
                 splitSlash = description.split(" /at ");
                 if (splitSlash.length != 2) {
-                    throw new DukeException(Strings.ERROR_EVENT_FORMAT_INCORRECT);
+                    throw new DukeException(MagicStrings.ERROR_EVENT_FORMAT_INCORRECT);
                 }
                 task = new Event(splitSlash[0], false, Parser.parseDate(splitSlash[1]));
                 this.tasks.add(task);
@@ -68,13 +68,14 @@ public class TaskList {
      */
     public void markTaskAsDone(int index) throws DukeException {
         Task task = this.tasks.get(index);
-        task.toggleIsDone();
+        Task updatedTask = new Task(task.description, true);
+
         try {
-            this.tasks.set(index, task);
+            this.tasks.set(index, updatedTask);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(Strings.ERROR_INDEX_OUT_OF_BOUNDS);
+            throw new DukeException(MagicStrings.ERROR_INDEX_OUT_OF_BOUNDS);
         } catch (NumberFormatException e) {
-            throw new DukeException(Strings.ERROR_DONE_FORMAT_INCORRECT);
+            throw new DukeException(MagicStrings.ERROR_DONE_FORMAT_INCORRECT);
         }
     }
 
@@ -87,9 +88,9 @@ public class TaskList {
         try {
             this.tasks.remove(index);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException(Strings.ERROR_INDEX_OUT_OF_BOUNDS);
+            throw new DukeException(MagicStrings.ERROR_INDEX_OUT_OF_BOUNDS);
         } catch (NumberFormatException e) {
-            throw new DukeException(Strings.ERROR_DELETE_FORMAT_INCORRECT);
+            throw new DukeException(MagicStrings.ERROR_DELETE_FORMAT_INCORRECT);
         }
     }
 

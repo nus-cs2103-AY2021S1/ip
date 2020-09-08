@@ -25,4 +25,14 @@ public class Parser {
             throw new DukeException("Sorry! Wrong time format!");
         }
     }
+
+    /**
+     * Parse command into sections.
+     * @param command User's input.
+     * @return Array of command sections.
+     * @throws DukeException
+     */
+    public static String[] splitCommand(String command) {
+        return command.split(" ", 2);
+    }
 }
