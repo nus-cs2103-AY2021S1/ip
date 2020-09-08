@@ -18,7 +18,7 @@ public class DoneCommand extends Command {
      * Marks the given task as done.
      * @param ls The current list of tasks.
      * @param ui The ui that takes of printing output.
-     * @throws DukeException If the given task does not exist.
+     * @throws DukeException If the given number does not correspond to a task in the list.
      */
     @Override
     public void execute(TaskList ls, Ui ui) throws DukeException {

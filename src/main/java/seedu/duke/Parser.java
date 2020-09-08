@@ -31,24 +31,22 @@ public class Parser {
             return new ByeCommand();
         } else {
             String[] words = input.split(" ", 2);
-            if (words.length < 2) { // some kind of error
-                throw new DukeNotSureException("Huh?? What are you trying to do??");
-            } else if (words[0].equals(doneCommand)) { // the case where a task is done
+            if (words.length > 2) { // nothing was written after the command
+                throw new DukeNotSureException("Huh?? What are you trying to do?? Write what you have to do!");
+            } else if (words[0].equals(doneCommand)) {
                 return new DoneCommand(words);
-            } else if (words[0].equals(deleteCommand)) { // the case where a task is deleted
+            } else if (words[0].equals(deleteCommand)) {
                 return new DeleteCommand(words);
             } else if (words[0].equals(findCommand)) {
                 return new FindCommand(words);
-            } else { // the case where tasks are added
-                if (words[0].equals(toDoCommand)) {
-                    return new AddTodo(words);
-                } else if (words[0].equals(deadlineCommand)) {
-                    return new AddDeadline(words);
-                } else if (words[0].equals(eventCommand)) {
-                    return new AddEvent(words);
-                } else {
-                    throw new DukeNotSureException("Man I don't know what you want? :s");
-                }
+            } else if (words[0].equals(toDoCommand)) {
+                return new AddTodo(words);
+            } else if (words[0].equals(deadlineCommand)) {
+                return new AddDeadline(words);
+            } else if (words[0].equals(eventCommand)) {
+                return new AddEvent(words);
+            } else { // user typed a command not in duke
+                throw new DukeNotSureException("Man I don't know what you want? :s I'm not very smart ok??");
             }
         }
     }

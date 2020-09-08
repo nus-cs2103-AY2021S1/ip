@@ -49,20 +49,27 @@ public class Storage {
             String line = s.nextLine();
             String[] arr = line.split("\\*");
             String task = arr[0];
-            if (task.equals("E")) { // case where the task is an event
-                boolean status = arr[1].equals("\u2713");
-                String todo = arr[2];
-                LocalDateTime deadline = LocalDateTime.parse(arr[3], FORMATTER);
-                ls.add(new Event(todo, deadline, status));
-            } else if (task.equals("T")) {
-                boolean status = arr[1].equals("\u2713");
-                String todo = arr[2];
-                ls.add(new ToDo(todo, status));
-            } else {
-                boolean status = arr[1].equals("\u2713");
-                String todo = arr[2];
-                LocalDateTime deadline = LocalDateTime.parse(arr[3], FORMATTER);
-                ls.add(new Deadline(todo, deadline, status));
+            switch (task) {
+                case "E": { // case where the task is an event
+                    boolean status = arr[1].equals("\u2713");
+                    String todo = arr[2];
+                    LocalDateTime deadline = LocalDateTime.parse(arr[3], FORMATTER);
+                    ls.add(new Event(todo, deadline, status));
+                    break;
+                }
+                case "T": {
+                    boolean status = arr[1].equals("\u2713");
+                    String todo = arr[2];
+                    ls.add(new ToDo(todo, status));
+                    break;
+                }
+                default: {
+                    boolean status = arr[1].equals("\u2713");
+                    String todo = arr[2];
+                    LocalDateTime deadline = LocalDateTime.parse(arr[3], FORMATTER);
+                    ls.add(new Deadline(todo, deadline, status));
+                    break;
+                }
             }
         }
         return ls;
