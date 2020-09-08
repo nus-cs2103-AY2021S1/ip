@@ -6,6 +6,8 @@ import java.text.ParseException;
 import command.Command;
 import controller.MainWindow;
 import exception.DukeException;
+import storage.CommandStorage;
+import storage.TaskStorage;
 
 /**
  * A Duke object represents the chat bot which responds to users' inputs.
@@ -16,21 +18,23 @@ import exception.DukeException;
  */
 public class Duke {
 
-    private Storage storage;
+    private final TaskStorage taskStorage;
+    private final CommandStorage commandStorage;
     private TaskList tasks;
-    private Ui ui;
-    private Parser parser;
+    private final Ui ui;
+    private final Parser parser;
 
     /**
      * Public constructor of Duke to create a Duke object to deal with user inputs.
      *
-     * @param filePath Path where file containing past and new tasks can be loaded from and saved to.
+     * @param filePath Path where user commands and tasks can be loaded from and saved to.
      */
     public Duke(String filePath) {
         ui = new Ui();
-        storage = new Storage(filePath);
+        taskStorage = new TaskStorage(filePath + "duke.txt");
+        commandStorage = new CommandStorage(filePath + "commands.txt", null);
         try {
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(taskStorage.load());
         } catch (DukeException | IOException | ParseException e) {
             tasks = new TaskList();
         }
@@ -46,14 +50,16 @@ public class Duke {
      */
     public String getResponse(String input) throws IOException {
         if (input.equals("bye")) {
-            storage.writeToFile(tasks);
+            taskStorage.writeToFile(tasks);
+            commandStorage.reset();
             MainWindow.endDuke();
+            return ui.endDuke();
         }
+        commandStorage.writeToFile(input);
         Command command = parser.processMsg(input);
         try {
-            String response = command.execute(input, tasks, ui);
-            return response;
-        } catch (DukeException e) {
+            return command.execute(input, tasks, ui, commandStorage);
+        } catch (DukeException | ParseException e) {
             return e.getMessage();
         }
     }
