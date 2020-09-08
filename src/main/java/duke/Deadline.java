@@ -15,7 +15,7 @@ public class Deadline extends Task {
 
     public Deadline(String description, boolean isDone, String by) {
         super(description, isDone);
-        this.by = LocalDateTime.parse(by);  //  use default formatter that leaves no whitespace to trim
+        this.by = LocalDateTime.parse(by); // use default formatter that leaves no whitespace to trim
     }
 
     /**

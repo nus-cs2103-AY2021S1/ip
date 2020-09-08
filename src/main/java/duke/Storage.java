@@ -1,6 +1,10 @@
 package duke;
 
-import java.io.*;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -14,6 +18,8 @@ public class Storage {
      * @return true if the file is loaded successfully, false otherwise.
      */
     public static boolean loadTasksFrom(String filepath, TaskList taskList) {
+        assert taskList != null;
+        assert taskList.numTasks() == 0;
         File dataFile = new File(filepath);
         
         try {
@@ -53,6 +59,7 @@ public class Storage {
      * @return true if the Tasks have been successfully stored to the file, false otherwise.
      */
     public static boolean saveTasksTo(String filepath, TaskList taskList) {
+        assert taskList != null;
         ArrayList<Task> tasksArray = taskList.getAllTasks();
         String fileOutput = "";
         

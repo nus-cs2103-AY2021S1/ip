@@ -5,6 +5,8 @@ public class Parser {
     private Ui ui;
     
     public Parser(TaskList taskList, Ui ui) {
+        assert taskList != null;
+        assert ui != null;
         this.taskList = taskList;
         this.ui = ui;
     }

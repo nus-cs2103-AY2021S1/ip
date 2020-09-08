@@ -5,11 +5,13 @@ public class Task {
     protected boolean isDone;
 
     public Task(String description) {
+        assert description.length() != 0;
         this.description = description;
         this.isDone = false;
     }
     
     public Task(String description, boolean isDone) {
+        assert description.length() != 0;
         this.description = description;
         this.isDone = isDone;
     }
