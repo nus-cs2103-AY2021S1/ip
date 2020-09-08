@@ -24,6 +24,7 @@ public class Event extends Task {
         if (eventParts.length == 1) {
             throw new DukeEmptyDescException(TaskType.EVENT);
         } else {
+
             String at = eventParts[1];
             if (Ui.isBlankString(at)) {
                 throw new DukeEmptyDescException(TaskType.EVENT);

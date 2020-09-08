@@ -14,6 +14,8 @@ public class TaskList extends ArrayList<Task> {
      */
     public void completeTask(int i) {
         String prefix = "Roger roger! I'm gonna mark this task as done:\n";
+        assert i >= 0;
+        assert i < this.size();
         Task task = super.get(i);
         task.complete();
         Ui.printWithLines(String.format("  %s%s\n", prefix, task));
@@ -36,6 +38,8 @@ public class TaskList extends ArrayList<Task> {
      * Deletes a specific task from itself.
      */
     public void deleteTask(int index) {
+        assert index >= 0;
+        assert index < this.size();
         Task task = super.get(index);
         super.remove(index);
         String prefix = "Very well! I shall delete this task:\n";
