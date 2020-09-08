@@ -50,7 +50,8 @@ public class Duke{
             case EXIT:
                 // Try to Save the data
                 try {
-                    storage.saveToFile(tasks.getTasks());
+                    boolean saveSuccess = storage.saveToFile(tasks.getTasks());
+                    assert saveSuccess; // Save should be successful
                 } catch (DukeException e) {
                     output = ui.getError(e);
                 } finally {
@@ -82,7 +83,8 @@ public class Duke{
                 output = ui.getOutputSymbol() + tasks.searchForKeyword(userInput);
                 break;
             default:
-                throw new DukeException("Sorry I think I something went wrong...");
+                assert false : cmd;
+                //throw new DukeException("Sorry I think I something went wrong...");
             }
         } catch (DukeException e) {
             output = ui.getLineBreak() + ui.getError(e);
