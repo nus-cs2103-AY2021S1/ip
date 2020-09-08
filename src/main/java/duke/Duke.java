@@ -10,7 +10,7 @@ import java.time.LocalDate;
  * helps you keep track of your tasks.
  *
  * @author Augustine Kau
- * @version 0.1
+ * @version 0.2
  * @since 2020-08-18
  */
 public class Duke {
