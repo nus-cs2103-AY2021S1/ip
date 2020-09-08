@@ -35,10 +35,11 @@ public class TaskListTest {
     public void deleteTask() {
         String actResult = this.taskList.deleteTask(3);
         String expResult = "Noted. Mug has removed this task:\n"
-                + "[T][\u2713] borrow book"
-                + "\nNow you have "
-                + 2
-                + " tasks in the list.";
+            + "[T][\u2713] borrow book"
+            + "\nNow you have "
+            + 2
+            + " tasks in the list.";
+
         assertEquals(expResult, actResult);
     }
 
