@@ -3,6 +3,9 @@ package duke.task;
 import duke.ui.Ui;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toCollection;
 
 public class TaskList {
     private ArrayList<Task> todoList;
@@ -54,25 +57,26 @@ public class TaskList {
         this.todoList.add(newEvent);
     }
 
-    public void find(String keyword) {
-        ArrayList<Task> tempArrayList = new ArrayList<>();
-        for (Task task : this.todoList) {
-            String taskDetails = task.toString();
-            if (taskDetails.contains(keyword)) {
-                tempArrayList.add(task);
-            }
-        }
+    public void find(String[] keywords) {
+        ArrayList<Task> tempArrayList = todoList.stream()
+                .filter(task -> matchesAllKeywords(task, keywords)).collect(toCollection(ArrayList::new));
         this.ui.printMatchingTasks(tempArrayList);
     }
 
-    public ArrayList<Task> findForGui(String keyword) {
-        ArrayList<Task> tempArrayList = new ArrayList<>();
-        for (Task task : this.todoList) {
-            String taskDetails = task.toString();
-            if (taskDetails.contains(keyword)) {
-                tempArrayList.add(task);
+    public ArrayList<Task> findForGui(String[] keywords) {
+        ArrayList<Task> tempArrayList = todoList.stream()
+                .filter(task -> matchesAllKeywords(task, keywords)).collect(toCollection(ArrayList::new));
+        return tempArrayList;
+    }
+
+    private boolean matchesAllKeywords(Task task, String[] keywords) {
+        boolean containsKeyword = true;
+        for (String keyword : keywords) {
+            if (!task.toString().contains(keyword)) {
+                containsKeyword = false;
+                break;
             }
         }
-        return tempArrayList;
+        return containsKeyword;
     }
 }
