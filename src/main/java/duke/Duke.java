@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -26,7 +24,6 @@ public class Duke extends Application {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
-    private JavafxUi javafxUi;
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -34,22 +31,14 @@ public class Duke extends Application {
     private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image logo = new Image(this.getClass().getResourceAsStream("/images/DaLogo.png"));
 
     /**
      * Duke constructor to initialize a Duke object, initializes a Ui, Storage and TaskList object.
      * @exception DukeException On input error and file path error.
      */
     public Duke() throws DukeException {
-        String logo =
-                " ____        _        \n"
-                        + "|  _ \\ _   _| | _____ \n"
-                        + "| | | | | | | |/ / _ \\\n"
-                        + "| |_| | |_| |   <  __/\n"
-                        + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
         ui = new Ui();
-        javafxUi = new JavafxUi();
-        ui.drawLine();
         storage = new Storage();
         taskList = new TaskList(storage.loadFile());
 
@@ -90,7 +79,7 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
-
+        dialogContainer.getChildren().addAll(new DialogBox(new ImageView(logo)));
 
         // adding functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
@@ -123,7 +112,7 @@ public class Duke extends Application {
     private String getResponse(String input) {
         try {
             assert !input.isBlank();
-            String response = javafxBot(input);
+            String response = parseUserInput(input);
             assert !response.isBlank();
             return response;
         } catch (DukeException e) {
@@ -135,101 +124,64 @@ public class Duke extends Application {
     /**
      * Main method which runs the bot
      * @param args user input
-     * @throws DukeException if bot does not understand user input
      */
     public static void main(String[] args) {
         Application.launch(Duke.class, args);
     }
 
-
     /**
-     * Bot method which handles the inputs and responds to the user while calling the appropriate classes
-     * @exception DukeException On input error and file path error.
-     */
-    public void bot() throws DukeException {
-        Scanner sc = new Scanner(System.in);
-        while (sc.hasNext()) {
-            String input = sc.nextLine();
-            // splits the input into the different words in order to understand what the user wants
-            String first = input.split(" ")[0];
-            // user exits the program
-            if (input.equals("bye")) {
-                ui.bye();
-                break;
-            // user sees the list of tasks
-            } else if (input.equals("list")) {
-                ui.printList(taskList.getList());
-            // user sets a specific task as completed
-            } else if (input.split(" ")[0].equals("done")) {
-                ui.doneTask(taskList.done(Integer.parseInt(input.split(" ")[1])));
-                ui.listCount(taskList.countList());
-                ui.drawLine();
-                storage.saveFile(taskList.getList());
-            // user creates a new task
-            } else if (first.equals("todo") || first.equals("deadline") || first.equals("event")) {
-                ui.addTask(taskList.add(input));
-                ui.listCount(taskList.countList());
-                ui.drawLine();
-                storage.saveFile(taskList.getList());
-            // user deletes a task
-            } else if (first.equals("delete")) {
-                ui.deleteTask(taskList.delete(input));
-                ui.listCount(taskList.countList());
-                ui.drawLine();
-                storage.saveFile(taskList.getList());
-            // user searches for a keyword
-            } else if (first.equals("find")) {
-                ui.foundWord(taskList.findWord(input));
-            // user types something the bot does not understand
-            } else {
-                throw new DukeException("Sorry I don't know what you mean");
-            }
-        }
-    }
-
-    /**
-     * javafxBot method which handles the inputs and responds to the user while calling the appropriate classes
-     * in the javafx interface
+     * parseUserInput method which handles the inputs and responds to the user while calling the appropriate classes
      * @param input user input
      * @exception DukeException On input error and file path error.
      */
-    public String javafxBot(String input) throws DukeException {
-        // String to output
+    public String parseUserInput(String input) throws DukeException {
         String output = "";
         // splits the input into the different words in order to understand what the user wants
-        String first = input.split(" ")[0];
-        // user exits the program
-        if (input.equals("bye")) {
-            output += javafxUi.bye();
-        // user sees the list of tasks
-        } else if (input.equals("list")) {
-            output += javafxUi.printList(taskList.getList());
-            output += javafxUi.drawLine();
-        // user sets a specific task as completed
-        } else if (input.split(" ")[0].equals("done")) {
-            output += javafxUi.doneTask(taskList.done(Integer.parseInt(input.split(" ")[1])));
-            output += javafxUi.listCount(taskList.countList());
-            output += javafxUi.drawLine();
-            storage.saveFile(taskList.getList());
-        // user creates a new task
-        } else if (first.equals("todo") || first.equals("deadline") || first.equals("event")) {
-            output += javafxUi.addTask(taskList.add(input));
-            output += javafxUi.listCount(taskList.countList());
-            output += javafxUi.drawLine();
-            storage.saveFile(taskList.getList());
-        // user deletes a task
-        } else if (first.equals("delete")) {
-            output += javafxUi.deleteTask(taskList.delete(input));
-            output += javafxUi.listCount(taskList.countList());
-            output += javafxUi.drawLine();
-            storage.saveFile(taskList.getList());
-        // user searches for a keyword
-        } else if (first.equals("find")) {
-            output += javafxUi.foundWord(taskList.findWord(input));
-        // user types something the bot does not understand
-        } else {
-            throw new DukeException("Sorry I don't know what you mean");
+        String[] inputArray = input.split(" ", 2);
+        String userCommand = inputArray[0];
+        switch (userCommand) {
+        case "bye":
+            output += ui.bye();
+            return output;
+        case "list":
+            output += ui.printList(taskList.getTasks());
+            output += ui.drawLine();
+            return output;
+        case "done":
+            output += ui.doneTask(taskList.done(Integer.parseInt(inputArray[1])));
+            output += ui.listCount(taskList.countList());
+            output += ui.drawLine();
+            storage.saveFile(taskList.getTasks());
+            return output;
+        case "todo":
+            output += ui.addTask(taskList.addTodo(inputArray[1]));
+            output += ui.listCount(taskList.countList());
+            output += ui.drawLine();
+            storage.saveFile(taskList.getTasks());
+            return output;
+        case "deadline":
+            output += ui.addTask(taskList.addDeadline(inputArray[1]));
+            output += ui.listCount(taskList.countList());
+            output += ui.drawLine();
+            storage.saveFile(taskList.getTasks());
+            return output;
+        case "event":
+            output += ui.addTask(taskList.addEvent(inputArray[1]));
+            output += ui.listCount(taskList.countList());
+            output += ui.drawLine();
+            storage.saveFile(taskList.getTasks());
+            return output;
+        case "delete":
+            output += ui.deleteTask(taskList.delete(inputArray[1]));
+            output += ui.listCount(taskList.countList());
+            output += ui.drawLine();
+            storage.saveFile(taskList.getTasks());
+            return output;
+        case "find":
+            output += ui.foundWord(taskList.findWord(inputArray[1]));
+            return output;
+        default:
+            return "Sorry I don't know what you mean. \nType /help to see the list of commands available!";
         }
-        return output;
     }
 }

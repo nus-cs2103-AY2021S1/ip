@@ -23,35 +23,35 @@ public class TaskListTest {
 
     @Test
     public void testAddToDo() throws DukeException {
-        taskList.add("todo eat");
+        taskList.addTodo("eat");
         assertEquals(taskList.countList(), 1);
     }
 
     @Test
     public void testAddDeadline() throws DukeException {
-        taskList.add("deadline /by 27/08/2020 2359");
+        taskList.addDeadline("assignment /by 27/08/2020 2359");
         assertEquals(taskList.countList(), 1);
     }
 
     @Test
     public void testAddEvent() throws DukeException {
-        taskList.add("event sleep /at 28/08/2020 0000-0800");
+        taskList.addEvent("sleep /at 28/08/2020 0000-0800");
         assertEquals(taskList.countList(), 1);
     }
 
     @Test
     public void delete() throws DukeException {
-        taskList.add("event sleep /at 28/08/2020 0000-0800");
-        taskList.add("deadline /by 27/08/2020 2359");
+        taskList.addEvent("sleep /at 28/08/2020 0000-0800");
+        taskList.addDeadline("assignment /by 27/08/2020 2359");
         taskList.delete("delete 1");
         assertEquals(taskList.countList(), 1);
     }
 
     @Test
     public void deleteAll() throws DukeException {
-        taskList.add("event sleep /at 28/08/2020 0000-0800");
-        taskList.add("deadline /by 27/08/2020 2359");
-        taskList.add("todo eat");
+        taskList.addEvent("sleep /at 28/08/2020 0000-0800");
+        taskList.addDeadline("assignment /by 27/08/2020 2359");
+        taskList.addTodo("eat");
         taskList.delete("delete all");
         assertEquals(taskList.countList(), 0);
     }

@@ -20,11 +20,10 @@ public class Deadlines extends Task {
      * @param name name of deadline
      * @param time date and time of deadline in the form of a string
      */
-    Deadlines(String name, String time) {
-        super(name, time);
-        String[] by = time.split(" ");
-        this.date = parseDate(by[1]);
-        this.time = parseTime(by[2]);
+    Deadlines(String name, String date, String time) {
+        super(name, date, time);
+        this.date = parseDate(date);
+        this.time = parseTime(time);
     }
 
     /**
@@ -66,9 +65,9 @@ public class Deadlines extends Task {
     @Override
     public String toString() {
         if (super.getDone()) {
-            return "[D]" + "[" + "C" + "] " + super.getName() + "(by: " + printDateTime() + ")";
+            return "[D]" + "[\u2714] " + super.getName() + " (by: " + printDateTime() + ")";
         } else {
-            return "[D]" + "[" + "X" + "] " + super.getName() + "(by: " + printDateTime() + ")";
+            return "[D]" + "[\u2718] " + super.getName() + " (by: " + printDateTime() + ")";
         }
     }
 }

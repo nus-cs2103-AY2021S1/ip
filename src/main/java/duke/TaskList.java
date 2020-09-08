@@ -11,80 +11,83 @@ import java.util.List;
  * @since   27/8/2020
  */
 public class TaskList {
-    private List<Task> list;
+    private List<Task> tasks;
 
     /**
      * TaskList constructor to initialize a TaskList object
-     * @param list list of tasks from the load file
+     * @param tasks list of tasks from the load file
      */
-    TaskList(List<Task> list) {
-        this.list = list;
+    TaskList(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
-     * add method which takes in the user input and adds the appropriate task to the list
-     * @param input user input where the user specifies what he wants to add
+     * addTodo method which takes in the user input and adds a ToDo to the list
+     * @param specifications user specifications of what he wants to add
      * @throws DukeException when there is an error with the user input
      */
-    public Task add(String input) throws DukeException {
-
-        if (input.split(" ")[0].equals("todo")) {
-            String[] temp = input.split(" ", 2);
-            if (temp.length == 1) {
-                throw new DukeException("Description of todo cannot be empty!");
-            }
-            Task newTask = new ToDo(temp[1]);
-            list.add(newTask);
-            return newTask;
-
-        } else if (input.split(" ")[0].equals("deadline")) {
-            String[] temp = input.split(" ", 2);
-            if (temp.length <= 1) {
-                throw new DukeException("Description of deadline cannot be empty!");
-            }
-            String[] temp2 = temp[1].split("/by", 2);
-            if (temp2.length <= 1) {
-                throw new DukeException("You need to specify a time!");
-            }
-            Task newTask = new Deadlines(temp2[0], temp2[1]);
-            list.add(newTask);
-            return newTask;
-
-        } else if (input.split(" ")[0].equals("event")) {
-            String[] temp = input.split(" ", 2);
-            if (temp.length == 1) {
-                throw new DukeException("Description of event cannot be empty!");
-            }
-            String[] temp2 = temp[1].split("/at", 2);
-            if (temp2.length <= 1) {
-                throw new DukeException("You need to specify a time!");
-            }
-            Task newTask = new Events(temp2[0], temp2[1]);
-            list.add(newTask);
-            return newTask;
-
-        } else {
-            throw new DukeException("Sorry I don't know what you mean by that");
-        }
-
+    public Task addTodo(String specifications) throws DukeException {
+        Task newTask = new ToDo(specifications);
+        tasks.add(newTask);
+        return newTask;
     }
+
+    /**
+     * addDeadline method which takes in the user input and adds a Deadlines to the list
+     * @param specifications user specifications of what he wants to add
+     * @throws DukeException when there is an error with the user input
+     */
+    public Task addDeadline(String specifications) throws DukeException {
+        String[] specificationsArray = specifications.split("/by", 2);
+        if (specificationsArray.length <= 1) {
+            throw new DukeException("You need to specify a date and time!");
+        }
+        String[] dateTimeArray = specificationsArray[1].split(" ", 3);
+        if (dateTimeArray.length <= 1) {
+            throw new DukeException("You need to specify a time!");
+        }
+        Task newTask = new Deadlines(specificationsArray[0], dateTimeArray[1], dateTimeArray[2]);
+        tasks.add(newTask);
+        return newTask;
+    }
+
+    /**
+     * addEvent method which takes in the user input and adds a Events to the list
+     * @param specifications user specifications of what he wants to add
+     * @throws DukeException when there is an error with the user input
+     */
+    public Task addEvent(String specifications) throws DukeException {
+        String[] specificationsArray = specifications.split("/at", 2);
+        if (specificationsArray.length == 1) {
+            throw new DukeException("Description of event cannot be empty!");
+        }
+        String[] dateTimeArray = specificationsArray[1].split(" ", 3);
+        String date = dateTimeArray[1];
+        String time = dateTimeArray[2];
+        if (dateTimeArray.length <= 1) {
+            throw new DukeException("You need to specify a time!");
+        }
+        Task newTask = new Events(specificationsArray[0], dateTimeArray[1], dateTimeArray[2]);
+        tasks.add(newTask);
+        return newTask;
+    }
+
 
     /**
      * delete method which takes in the user input and deletes the appropriate task from the list
-     * @param input user input where the user specifies what he wants to delete
+     * @param num user input where the user specifies what he wants to delete
      * @return returns the task deleted
      * @throws DukeException when there is an error with the user input
      */
-    public Task delete(String input) throws DukeException {
+    public Task delete(String num) throws DukeException {
         try {
-            String num = input.split(" ")[1];
             if (num.equals("all")) {
                 deleteAll();
                 return null;
             } else {
                 int intNum = Integer.parseInt(num);
-                Task temp = list.get(intNum - 1);
-                list.remove(intNum - 1);
+                Task temp = tasks.get(intNum - 1);
+                tasks.remove(intNum - 1);
                 return temp;
             }
         } catch (NumberFormatException e) {
@@ -100,15 +103,15 @@ public class TaskList {
      * @return returns the completed task
      */
     public Task done(int num) {
-        return list.set(num - 1, list.get(num - 1).completeTask());
+        return tasks.set(num - 1, tasks.get(num - 1).completeTask());
     }
 
     /**
      * getList method which returns the list of tasks
      * @return returns the list of tasks
      */
-    public List<Task> getList() {
-        return list;
+    public List<Task> getTasks() {
+        return tasks;
     }
 
     /**
@@ -116,34 +119,34 @@ public class TaskList {
      * @return returns the number of tasks in the list
      */
     public int countList() {
-        return list.size();
+        return tasks.size();
     }
 
     /**
      * deleteAll method which deletes all tasks in the list
      */
     public void deleteAll() {
-        list = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
      * findWord method that goes through all the tasks in the list and returns a new list of tasks that contain the
      * word specified by the user
-     * @param input input of user
+     * @param word word user wants to find
      * @return returns a new list of tasks that contain specifed word
      */
-    public List<Task> findWord(String input) {
-        String[] inputArray = input.split(" ", 2);
-        String word = inputArray[1];
+    public List<Task> findWord(String word) {
         assert !word.isBlank();
         List<Task> findArray = new ArrayList<>();
-        for (Task x: list) {
+        for (Task x: tasks) {
             String[] nameArray = x.getName().split(" ");
             inner:
             for (String y: nameArray) {
                 if (word.equals(y)) {
                     findArray.add(x);
                     break inner;
+                } else {
+                    findArray.add(null);
                 }
             }
         }
