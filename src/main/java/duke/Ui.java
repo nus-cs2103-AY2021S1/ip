@@ -49,6 +49,7 @@ public class Ui {
         return returnString;
     }
 
+
     private String showTotalTasks(int total) {
         return "\n Now you have " + total + " tasks in the task list.";
     }

@@ -8,8 +8,6 @@ import duke.DateTime;
  */
 public class Deadline extends Task {
 
-    /** DateTime object to store the date and any specified time of the deadline. */
-    private DateTime dateTime;
 
     /**
      * Creates a Deadline task containing the description, date and time of the task.
@@ -18,8 +16,7 @@ public class Deadline extends Task {
      * @param dateTime Stores the date and any specified time of the task deadline.
      */
     public Deadline(String name, DateTime dateTime) {
-        super(name);
-        this.dateTime = dateTime;
+        super(name, dateTime);
     }
 
     /**
@@ -29,7 +26,7 @@ public class Deadline extends Task {
      */
     public String appendFile() {
         String doneString = (isDone() == true ? "1" : "0");
-        return "deadline" + " | " + doneString + " | " + getName() + " | " + dateTime.getFileFormattedDateTime();
+        return "deadline" + " | " + doneString + " | " + getName() + " | " + getDateTime().getFileFormattedDateTime();
     }
 
     /**
@@ -41,8 +38,8 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String doneString = (isDone() == true ? "✓" : "✗");
-        return "[D]" + "[" + doneString + "] " + getName() + " (by: " + dateTime.getPrintFormattedDate()
-                + " " + dateTime.getPrintFormattedTime() + ")";
+        return "[D]" + "[" + doneString + "] " + getName() + " (by: " + getDateTime().getPrintFormattedDate()
+                + " " + getDateTime().getPrintFormattedTime() + ")";
     }
 }
 

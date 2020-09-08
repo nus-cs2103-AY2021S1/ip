@@ -25,6 +25,16 @@ public class DateTime {
     }
 
     /**
+     * Returns if supplied date is the same day as the date stored.
+     *
+     * @param date Date to be checked for equality.
+     * @return True if both dates are refering to the same day.
+     */
+    public boolean checkDateEqual(LocalDate date) {
+        return date.equals(this.date);
+    }
+
+    /**
      * Retrieves the formatted version of the date stored.
      * For printing to file.
      *
