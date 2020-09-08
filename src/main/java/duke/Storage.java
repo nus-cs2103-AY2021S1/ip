@@ -23,8 +23,6 @@ public class Storage {
 
     /**
      * Storage Class constructor. Create a new directory if there isn't one at the given path.
-     *
-     * @param path give the path of the save data
      */
     public Storage() {
         this.path = txtPath;

@@ -37,6 +37,7 @@ public class Duke {
         while (!isExit) {
             String fullCommand = ui.readCommand();
             try {
+                assert fullCommand.length() == 0: "Not valid command";
                 Command c = Parser.parse(fullCommand);
                 c.execute(list, ui, saveData);
                 isExit = c.isExit();
