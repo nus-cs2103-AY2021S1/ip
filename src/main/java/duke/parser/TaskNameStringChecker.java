@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import duke.DukeException;
+import duke.task.TaskType;
 
 /**
  * Utility class that checks ensures correctness of task names.
@@ -24,14 +25,14 @@ public class TaskNameStringChecker extends StringChecker {
      * Ensures task name is specified and of the correct format.
      * No illegal delimiters used to write to file is allowed in task names.
      *
-     * @param delimiter Delimiter that is used to separate the task name and the task date.
+     * @param taskType Type of the task to be checked.
      * @return Extracted task name.
      * @throws DukeException If the task name is not present or illegal characters are present.
      */
-    public String checkTaskString(String delimiter) throws DukeException {
-        checkTaskNamePresent(delimiter);
-        super.checkNoIllegalCharacters(extractTaskName(delimiter), "|");
-        return extractTaskName(delimiter);
+    public String checkTaskString(TaskType taskType) throws DukeException {
+        checkTaskNamePresent(taskType.getDelimiter());
+        super.checkNoIllegalCharacters(extractTaskName(taskType.getDelimiter()), "|");
+        return extractTaskName(taskType.getDelimiter());
     }
 
     private String extractTaskName(String delimiter) {

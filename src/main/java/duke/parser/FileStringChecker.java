@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.stream.Collectors;
 
 import duke.DukeException;
+import duke.task.TaskType;
 
 /**
  * Ensures that input strings read from data file is in the correct format.
@@ -23,20 +24,12 @@ public class FileStringChecker extends StringChecker {
      */
     public String checkFile() throws DukeException {
         String[] taskArray = super.getStringArray();
-        String taskType = taskArray[0];
-
-        switch (taskType) {
-        case "todo":
-            return checkFileInputLine(taskArray, 3, 3, "");
-
-        case "deadline":
-            return checkFileInputLine(taskArray, 5, 4, "/by");
-
-        case "event":
-            return checkFileInputLine(taskArray, 5, 4, "/at");
-
-        default:
-            throw new DukeException("File input command " + taskType + " is not a recognised task type!");
+        try {
+            TaskType taskType = Enum.valueOf(TaskType.class, taskArray[0].toUpperCase());
+            return checkFileInputLine(taskArray, taskType.getMaxLength(), taskType.getMinLength(),
+                    taskType.getDelimiter());
+        } catch (IllegalArgumentException e) {
+            throw new DukeException("File input command " + taskArray[0] + " is not a recognised task type!");
         }
     }
 

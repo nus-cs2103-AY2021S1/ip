@@ -54,6 +54,7 @@ public class Storage {
 
                 line = br.readLine();
             }
+
             br.close();
             fr.close();
             return newTaskList;

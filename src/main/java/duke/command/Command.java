@@ -12,15 +12,15 @@ import duke.task.TaskList;
 public abstract class Command {
 
     /** String array storing the user input. */
-    private String[] userStrings;
+    private String[] userString;
 
     /**
      * Creates a new Command and initialises its string array.
      *
-     * @param userStrings Tokenized array form of the input command string.
+     * @param userString Tokenized array form of the input command string.
      */
-    Command(String[] userStrings) {
-        this.userStrings = userStrings;
+    Command(String[] userString) {
+        this.userString = userString;
     }
 
     /**
@@ -30,6 +30,7 @@ public abstract class Command {
      * @param tasks The task list to operate on.
      * @param ui The user-interaction object responsible for all system printing and user-interaction.
      * @param storage Represents the logic needed to write to an user-specified file.
+     * @return String to be printed out.
      * @throws DukeException If the execution of the command fails.
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
@@ -48,7 +49,7 @@ public abstract class Command {
      *
      * @return The string array.
      */
-    protected String[] getArray() {
-        return userStrings;
+    protected String[] getStringArray() {
+        return userString;
     }
 }

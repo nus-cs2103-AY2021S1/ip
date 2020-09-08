@@ -20,10 +20,10 @@ public class FindCommand extends Command {
     /**
      * Initialises the find command with the user input string array.
      *
-     * @param userStrings String array that represents the user input.
+     * @param userString String array that represents the user input.
      */
-    public FindCommand(String[] userStrings) {
-        super(userStrings);
+    public FindCommand(String[] userString) {
+        super(userString);
     }
 
     /**
@@ -32,14 +32,14 @@ public class FindCommand extends Command {
      * @param tasks Task list to operate on.
      * @param ui Deals with interactions with the user.
      * @param storage Deals with loading tasks from the file and saving tasks in the file.
+     * @return String to be printed out.
      * @throws DukeException If find command is not followed by any keyword.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        new FindTaskStringChecker(getArray()).checkTaskName();
-        String keyword = Arrays.stream(getArray()).skip(1).collect(Collectors.joining(" "));
+        new FindTaskStringChecker(getStringArray()).checkTaskName();
+        String keyword = Arrays.stream(getStringArray()).skip(1).collect(Collectors.joining(" "));
         assert !keyword.equals("") : "Keyword is empty!";
         return ui.printMatches(tasks.findTask(keyword));
     }
-
 }
