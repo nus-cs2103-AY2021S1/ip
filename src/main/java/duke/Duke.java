@@ -77,7 +77,7 @@ public class Duke {
             break;
         case BYE:
             response += new ByeCommand().getResponse();
-        break;
+            break;
         case INVALID_IS_EMPTY:
             try {
                 throw new DukeException("", ExceptionType.EMPTY_INPUT);
