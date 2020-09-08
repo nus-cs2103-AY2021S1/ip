@@ -31,41 +31,72 @@ public class EventCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws EventException {
         ArrayList<Task> store = tasks.getTaskList();
-        int index = 0;
-        for (int i = 1; i < input.length; i++) {
-            if (input[i].equals("/at")) {
-                index = i;
-                break;
-            }
-        }
+        int index = getIndexOfAt();
         if (input.length == 1 || index == 1) { // no description
             throw new EventException(" ☹ OOPS!!! The description of a event cannot be empty.");
         } else if (index == input.length - 1 || index == 0) { //no time
             throw new EventException(" ☹ OOPS!!! The time of a event cannot be empty.");
         }
-        String description = "";
-        String time = "";
-        for (int i = 1; i < index; i++) {
-            description = description + input[i] + " ";
-        }
-        for (int i = index + 1; i < input.length; i++) {
-            time = time + input[i] + " ";
-        }
-
-        Date date;
-        try {
-            SimpleDateFormat formatter = new SimpleDateFormat("dd/M/yyyy hhmm");
-            date = formatter.parse(time.trim());
-        } catch (ParseException e) {
-            throw new EventException(" ☹ OOPS!!! The time of a deadline must be in the format of dd/M/yyyy hhmm.");
-        }
-
-        Event newTask = new Event(description.trim(), new SimpleDateFormat("MMM dd yyyy HH:mm").format(date));
+        String description = getDescriptionFromUserInput(index);
+        Date date = getDateFromUserInput(index);
+        Event newTask = new Event(description, new SimpleDateFormat("MMM dd yyyy HH:mm").format(date));
         store.add(newTask);
         storage.save(new TaskList(store));
         return ADD_TASK_TITLE + "\n"
                 + TAB + "   " + newTask + "\n"
                 + TAB + " Now you have " + store.size() + " tasks in the list.";
+    }
+
+    /**
+     * Gets the index number of "/at".
+     * @return index number of "/at".
+     */
+    public int getIndexOfAt() {
+        int index = 0;
+        for (int i = 1; i < input.length; i++) {
+            if (input[i].equals("/by")) {
+                index = i;
+                break;
+            }
+        }
+        return index;
+    }
+    /**
+     * Get the description of the task from the user input.
+     * @param index index number of "/at".
+     * @return description.
+     */
+    public String getDescriptionFromUserInput(int index) {
+        String description = "";
+        for (int i = 1; i < index; i++) {
+            description = description + input[i] + " ";
+        }
+        // trim is to remove the extra space at the end of the description
+        // caused when description is retrieved from user input
+        return description.trim();
+    }
+
+    /**
+     * Get the time of the task from the user input.
+     * @param index index number of "/at".
+     * @return time.
+     */
+    public Date getDateFromUserInput(int index) throws EventException {
+        String time = "";
+        for (int i = index + 1; i < input.length; i++) {
+            time = time + input[i] + " ";
+        }
+        // trim is to remove the extra space at the end of the time
+        // caused when time is retrieved from user input
+        time = time.trim();
+        Date date;
+        try {
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/M/yyyy hhmm");
+            date = formatter.parse(time);
+        } catch (ParseException e) {
+            throw new EventException(" ☹ OOPS!!! The time of a deadline must be in the format of dd/M/yyyy hhmm.");
+        }
+        return date;
     }
 
     /**
