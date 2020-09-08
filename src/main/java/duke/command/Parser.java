@@ -5,7 +5,6 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
-import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -30,53 +29,42 @@ public class Parser {
      * it the correct private methods to
      * instantiate the Task objects to be recorded
      *
-     * @param command This is the user input
+     * @param cmd This is the user input
      * @param taskList This is the taskList class that stores the current lists of tasks
-     * @param storage This is the Storage object that records the tasks
      * @throws DukeException Exception for unidentified commands
      */
-    public static String process(String command, TaskList taskList, Storage storage) throws DukeException {
-        String[] stringarr = command.split(" ");
-        String finalString;
-        if (stringarr[0].equals("list")) {
-            String response = processorList(taskList);
-            finalString = Ui.showCommandMessage(response);
-        } else if (stringarr[0].equals("done")) {
-            int index = Integer.parseInt(stringarr[1]);
-            String response = taskList.updateTask(index);
-            finalString = Ui.showResponse(response, command);
-        } else if (stringarr[0].equals("delete")) {
-            int index = Integer.parseInt(stringarr[1]);
-            String response = taskList.deleteTask(index);
-            finalString = Ui.showResponse(response, command);
-        } else if (stringarr[0].equals("find")) {
-            String response = processorFind(command, taskList);
-            finalString = Ui.showCommandMessage(response);
-        } else if (stringarr[0].equals("refresh")) {
-            String response = processorRefresh(taskList, storage);
-            finalString = Ui.showCommandMessage(response);
-        } else if (stringarr[0].equals("important")) {
-            int index = Integer.parseInt(stringarr[1]);
-            String response = taskList.setTaskAsImportant(index);
-            finalString = Ui.showResponse(response, command);
+    public static String process(String cmd, TaskList taskList, boolean isDone) throws DukeException {
+        String[] stringArr = cmd.split(" ");
+        String response;
+        if (stringArr[0].equals("list")) {
+            response = processorList(taskList);
+        } else if (stringArr[0].equals("done")) {
+            int index = Integer.parseInt(stringArr[1]);
+            response = taskList.updateTask(index);
+        } else if (stringArr[0].equals("delete")) {
+            int index = Integer.parseInt(stringArr[1]);
+            response = taskList.deleteTask(index);
+        } else if (stringArr[0].equals("find")) {
+            response = processorFind(cmd, taskList);
+        } else if (stringArr[0].equals("refresh")) {
+            response = processorRefresh(taskList);
+        } else if (stringArr[0].equals("important")) {
+            int index = Integer.parseInt(stringArr[1]);
+            response = taskList.setTaskAsImportant(index);
+        } else if (stringArr[0].equals("todo")) {
+            response = processorAddTodo(cmd, taskList, isDone);
+        } else if (stringArr[0].equals("deadline")) {
+            response = processorAddDeadline(cmd, taskList, isDone);
+        } else if (stringArr[0].equals("event")) {
+            response = processorAddEvent(cmd, taskList, isDone);
         } else {
-            String response = processorAdd(command, taskList, false);
-            finalString = Ui.showResponse(response, command);
+            String message = "OOPS!!! I'm sorry, but I don't know what that means :-(";
+            throw new DukeException(message);
         }
-        return finalString;
+        return Ui.showResponse(response, cmd);
     }
 
-    /**
-     * Overloaded method that processes tasks that are formatted and saved in the textfile
-     * @param command command passed for processing
-     * @param taskList the tasklist that stores the tasks
-     * @throws DukeException for invalid commands
-     */
-    public static void process(String command, TaskList taskList, boolean isDone) throws DukeException {
-        processorAdd(command, taskList, isDone);
-    }
-
-    private static String processorRefresh(TaskList taskList, Storage storage) {
+    private static String processorRefresh(TaskList taskList) {
         taskList.refreshTasklist();
         return "Records and Tasks refreshed.";
     }
@@ -121,53 +109,58 @@ public class Parser {
         return stringBuilder.toString();
     }
 
-    private static String processorAdd(String cmd, TaskList taskList, boolean isDone) throws DukeException {
-        String[] stringarr = cmd.split(" ", 2);
-        Task taskObj = null;
-        if (stringarr[0].equals("todo")) {
-            if (stringarr.length <= 1) {
-                String message = "The description of a Todo cannot be empty";
-                throw new DukeException(message);
-            } else {
-                Todo todo = Todo.createTodo(stringarr[1]);
-                taskObj = todo;
-            }
-        } else if (stringarr[0].equals("deadline")) {
-            if (stringarr.length <= 1) {
-                String message = "The description of a Deadline cannot be empty";
-                throw new DukeException(message);
-            } else {
-                try {
-                    String[] secondarr = stringarr[1].split("/by", 2);
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
-                    LocalDateTime date = LocalDateTime.parse(secondarr[1].trim(), formatter);
-                    Deadline deadline = Deadline.createDeadline(secondarr[0], date);
-                    taskObj = deadline;
-                } catch (DateTimeParseException e) {
-                    String message = "That does not look like a proper Date. " +
-                            "Please input MMM d yyyy HH:mm eg. Aug 25 2020 15:00";
-                    throw new DukeException(message);
-                }
-            }
-        } else if (stringarr[0].equals("event")) {
-            if (stringarr.length <= 1) {
-                String message = "The description of an Event cannot be empty";
-                throw new DukeException(message);
-            } else {
-                try {
-                    String[] secondarr = stringarr[1].split("/at", 2);
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
-                    LocalDateTime date = LocalDateTime.parse(secondarr[1].trim(), formatter);
-                    Event event = Event.createEvent(secondarr[0], date);
-                    taskObj = event;
-                } catch (DateTimeParseException e) {
-                    String message = "That does not look like a proper Date. " +
-                            "Please input MMM d yyyy HH:mm eg. Aug 25 2020 15:00";
-                    throw new DukeException(message);
-                }
-            }
-        } else {
-            String message = "OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private static String processorAddTodo(String cmd, TaskList taskList, boolean isDone) throws DukeException {
+        String[] stringArr = cmd.split(" ", 2);
+        Task taskObj;
+        if (stringArr.length <= 1) {
+            String message = "The description of a Todo cannot be empty";
+            throw new DukeException(message);
+        }
+        taskObj = Todo.createTodo(stringArr[1]);
+        if (isDone) {
+            taskObj.setDone();
+        }
+        return taskList.addTask(taskObj);
+    }
+
+    private static String processorAddEvent(String cmd, TaskList taskList, boolean isDone) throws DukeException {
+        String[] stringArr = cmd.split(" ", 2);
+        Task taskObj;
+        if (stringArr.length <= 1) {
+            String message = "The description of an Event cannot be empty";
+            throw new DukeException(message);
+        }
+        try {
+            String[] secondArr = stringArr[1].split("/at", 2);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
+            LocalDateTime date = LocalDateTime.parse(secondArr[1].trim(), formatter);
+            taskObj = Event.createEvent(secondArr[0], date);
+        } catch (DateTimeParseException e) {
+            String message = "That does not look like a proper Date. "
+                    + "Please input MMM d yyyy HH:mm eg. Aug 25 2020 15:00";
+            throw new DukeException(message);
+        }
+        if (isDone) {
+            taskObj.setDone();
+        }
+        return taskList.addTask(taskObj);
+    }
+
+    private static String processorAddDeadline(String cmd, TaskList taskList, boolean isDone) throws DukeException {
+        String[] stringArr = cmd.split(" ", 2);
+        Task taskObj;
+        if (stringArr.length <= 1) {
+            String message = "The description of a Deadline cannot be empty";
+            throw new DukeException(message);
+        }
+        try {
+            String[] secondArr = stringArr[1].split("/by", 2);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy HH:mm");
+            LocalDateTime date = LocalDateTime.parse(secondArr[1].trim(), formatter);
+            taskObj = Deadline.createDeadline(secondArr[0], date);
+        } catch (DateTimeParseException e) {
+            String message = "That does not look like a proper Date. "
+                    + "Please input MMM d yyyy HH:mm eg. Aug 25 2020 15:00";
             throw new DukeException(message);
         }
         if (isDone) {
@@ -177,9 +170,9 @@ public class Parser {
     }
 
     /**
-     *
-     * @param taskHistory
-     * @return
+     * Processes the Old Tasks that are scanned from the Text file.
+     * @param taskHistory ArrayList of String of Tasks from the Text File
+     * @return String
      */
     public static String processOldTasks(ArrayList<String> taskHistory, TaskList taskList) {
         for (int i = 0; i < taskHistory.size(); i++) {
