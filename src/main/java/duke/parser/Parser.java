@@ -32,6 +32,9 @@ public class Parser {
         //get first word of command
         String[] instruction = noWhiteSpace.split(" ", 2);
 
+        assert (instruction.length == 1 | instruction.length == 2)
+                : "instruction array should be of length 1 or 2";
+
         if (instruction[0].equals("bye")) {
             return new ExitCommand();
         } else if (instruction[0].equals("list")) {
