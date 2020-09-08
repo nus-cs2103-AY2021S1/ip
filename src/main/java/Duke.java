@@ -3,8 +3,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 
 public class Duke {
-    private static final String DATABASE_DIRECTORY_PATH = Paths.get(System.getProperty("user.dir"),
-            "../../../", "data").toString();
+    private static final String DATABASE_DIRECTORY_PATH = Paths.get(System.getProperty("user.dir"),"data").toString();
     private Parser parser;
     private Storage storage;
     private TaskList tasks;
@@ -13,17 +12,18 @@ public class Duke {
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     /**
+     * Initialises a new bot.
      */
     public Duke() {
-        super();
         this.ui = new Ui();
+        System.out.println(Duke.DATABASE_DIRECTORY_PATH);
         this.storage = new Storage(Duke.DATABASE_DIRECTORY_PATH);
         this.parser = new Parser();
 
         try {
             this.tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            this.ui.showErrorMessage("Could not load saved tasks");
+            this.ui.showErrorMessage(e.getMessage());
             this.tasks = new TaskList();
         }
     }
@@ -43,7 +43,7 @@ public class Duke {
 
     public String getResponse(String input) {
         try {
-            String output = this.parser.parseCommands(this.tasks, input);
+            String output = this.parser.parseCommands(this.tasks, this.ui, input);
             this.storage.save(this.tasks.getDatabase());
             return output;
         } catch (DukeException e) {

@@ -1,5 +1,5 @@
 import java.time.format.DateTimeFormatter;
-import java.util.Scanner;
+import java.util.Arrays;
 
 public class Parser {
     public static final DateTimeFormatter DATE_INPUT_FORMAT = DateTimeFormatter.ofPattern("dd/MM/yyyy");
@@ -8,42 +8,50 @@ public class Parser {
 
     /**
      * Executes the relevant functions based on the given user command.
+     *
+     * @return the output from executing a command.
      */
-    public void parseCommands(TaskList tasks, String command, Scanner sc) throws DukeException {
-        switch (command) {
+    public String parseCommands(TaskList tasks, Ui ui, String command) throws DukeException {
+        String output;
+        String[] split = command.split(" ");
+
+        switch (split[0]) {
         case "bye":
+            output = ui.getExitMessage();
             break;
 
         case "deadline":
-            tasks.addNewDeadline(sc);
+            output = tasks.addNewDeadline(Arrays.copyOfRange(split, 1, split.length));
             break;
 
         case "delete":
-            tasks.deleteTask(sc);
+            output = tasks.deleteTask(split[1]);
             break;
 
         case "done":
-            tasks.markTaskAsDone(sc);
+            output = tasks.markTaskAsDone(split[1]);
             break;
 
         case "event":
-            tasks.addNewEvent(sc);
+            output = tasks.addNewEvent(Arrays.copyOfRange(split, 1, split.length));
             break;
 
         case "find":
-            tasks.findTasks(sc);
+            output = tasks.findTasks(split[1]);
             break;
 
         case "list":
-            tasks.listAllTasks();
+            output = tasks.listAllTasks();
             break;
 
         case "todo":
-            tasks.addNewToDo(sc);
+            output = tasks.addNewToDo(split[1]);
             break;
 
         default:
             throw new DukeException("Oops! I am sorry but I don't understand what that means");
         }
+
+        return output;
     }
 }

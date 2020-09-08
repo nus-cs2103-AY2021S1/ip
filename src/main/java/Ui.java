@@ -25,9 +25,11 @@ public class Ui {
     }
 
     /**
-     * Shows exit message when user exits the application.
+     * Returns exit message when user exits the application.
+     *
+     * @return the exit message.
      */
-    public void showExitMessage() {
-        System.out.println("Goodbye! See you again soon!");
+    public String getExitMessage() {
+        return "Goodbye! See you again soon!";
     }
 }
