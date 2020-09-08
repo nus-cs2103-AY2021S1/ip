@@ -15,18 +15,27 @@ public class Parser {
             myUi.horizontalRule();
             String[] fullArg = currInput.split("/");
             String[] args1 = fullArg[0].split(" ");
+
+            if(currInput.equals("help")){
+                return myUi.help();
+            }
+
             if (currInput.equals("bye")) {
                 response += "Bye. Hope to see you again soon!\n";
                 myUi.horizontalRule();
             }
 
-            if (args1[0].equals("find")) {
+            else if (args1[0].equals("find")) {
                 String findItem = "";
                 for (int i = 1; i < args1.length; i++) {
                     findItem += args1[i] + " ";
                 }
                 response+=myTasklist.findTaskUI(findItem);
-            } else if (args1[0].equals("todo")) {
+
+            }
+
+
+            else if (args1[0].equals("todo")) {
                 String task = "";
                 for (int i = 1; i < args1.length; i++) {
                     task += args1[i] + " ";
@@ -38,8 +47,12 @@ public class Parser {
                 }
                 response+=myTasklist.numTaskUI();
             } else if (args1[0].equals("delete")) {
+
                 response+=myTasklist.deleteTaskUI(Integer.parseInt(args1[1]) - 1);
-            } else if (args1[0].equals("deadline")) {
+            }else if (args1[0].equals("remove")) {
+
+                response+=myTasklist.forceDeleteUI(Integer.parseInt(args1[1]) - 1);
+            } else if (args1[0].equals("deadline")||args1[0].equals("weekly")) {
                 String task = "";
                 for (int i = 1; i < args1.length; i++) {
                     task += args1[i] + " ";
@@ -63,7 +76,7 @@ public class Parser {
                         //System.out.println(time);
 
                         LocalDate d1 = LocalDate.parse(year + "-" + month + "-" + day);
-                        response+=myTasklist.addTaskUI("[D]", task, d1);
+                        response+=myTasklist.addTaskUI(args1[0].equals("deadline")?"[D]":"[W]", task, d1);
 
                     } else {
                         response+=myTasklist.addTaskUI("[D]", task, fullArg[1]);

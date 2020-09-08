@@ -9,7 +9,8 @@ import java.io.Serializable;
  */
 public class Task implements Serializable {
 
-    private String type;// can be [T] [E] or [D]
+    private String type;// can be [T] [E] [D] or [W]
+
     private boolean done = false;
     private String details;
     private String deadLine = null;
@@ -17,6 +18,17 @@ public class Task implements Serializable {
 
     public LocalDate localDeadline;
 
+    public boolean isRecurrent(){
+        return this.type.equals("[W]");
+    }
+
+    public Task getNextRecurrent(){
+
+        assert localDeadline!=null:"localDeadline can't be null";
+        assert type.equals("[W]"):"Only [W] task can be generated";
+
+        return new Task( this.type, this.details,  this.localDeadline.plusDays(7));
+    }
 
     /**
      * Tells if tasks is finish

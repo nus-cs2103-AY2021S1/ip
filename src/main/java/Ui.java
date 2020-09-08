@@ -43,6 +43,19 @@ public class Ui {
 
     }
 
+    public String help(){
+        String myHelp =
+            "--These are Jarvis Functions--\n" +
+                "help \n" +
+                "list\n" +
+                "todo <taskName>\n" +
+                "deadline/weekly <taskName> /by 2/12/2019 1800\n" +
+                "find <taskName>\n"+
+                "delete <weeklyTaskIndex> \n " +
+                "remove <taskToRemovePermanently>";
+        return myHelp;
+    }
+
 
 }
 

@@ -117,6 +117,26 @@ public class TaskList {
 
 
     public String deleteTaskUI(int index) {
+
+        Task myTask = this.tasks.get(index);
+
+        if(myTask.isRecurrent()){
+            Task nextTask = myTask.getNextRecurrent();
+            this.tasks.remove(index);
+            this.tasks.add(nextTask);
+
+            return "removed: " + myTask+"\nadded recurring: "+myTask+"\n";
+
+        }
+        else{
+            this.tasks.remove(index);
+            return "removed: " + myTask;
+        }
+
+
+    }
+
+    public String forceDeleteUI(int index) {
         Task myTask = this.tasks.get(index);
         this.tasks.remove(index);
         return "removed: " + myTask;
