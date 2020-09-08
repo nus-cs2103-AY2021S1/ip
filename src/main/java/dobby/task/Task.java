@@ -4,7 +4,7 @@ package dobby.task;
  * Parent class for all tasks
  */
 public class Task {
-    private final String description;
+    private String description;
     private boolean isDone;
     private String tag;
 
@@ -37,6 +37,10 @@ public class Task {
 
     public void setDone() {
         this.isDone = true;
+    }
+
+    public void setDescription(String des) {
+        this.description = des;
     }
 
     public String getTag() {

@@ -7,7 +7,6 @@ import dobby.TaskList;
 import dobby.task.Deadline;
 
 public class DeadlineCommand implements Command {
-
     protected static final String USAGE = "deadline _description_ /by dd/mm/yyyy hhhh(optional)";
 
     @Override
