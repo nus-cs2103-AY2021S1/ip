@@ -12,6 +12,9 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 
 /**
@@ -31,62 +34,64 @@ public class Parser {
         inputArr = userInput.split("\\s+");
         String command = inputArr[0];
 
-        if (command.equals("list")) {
+        switch (command) {
+        case "list":
             return new ListCommand();
-        } else if (command.equals("done")) {
+        case "done": {
             String lastChar = inputArr[inputArr.length - 1];
             return new DoneCommand(Integer.parseInt(lastChar) - 1);
-        } else if (command.equals("delete")) {
+        }
+        case "delete": {
             String lastChar = inputArr[inputArr.length - 1];
             return new DeleteCommand(Integer.parseInt(lastChar) - 1);
-        } else if (command.equals("bye")) {
+        }
+        case "bye":
             return new ExitCommand();
-        } else if (command.equals("find")) {
+        case "find":
             String[] keyword = getKeyword();
             return new FindCommand(keyword);
-        } else if (command.equals("deadline") || command.equals("todo") || command.equals("event")) {
+        case "deadline":
             String desc;
             String dateTime;
             Task task;
-            switch (command) {
-            case "deadline":
-                try {
-                    desc = getTaskDescription();
-                } catch (StringIndexOutOfBoundsException e) {
-                    throw new DukeException("Please add the description of the deadline!!");
-                }
-                try {
-                    dateTime = getTaskTimeDate();
-                } catch (StringIndexOutOfBoundsException e) {
-                    throw new DukeException("Please add the date and time of the deadline!!");
-                }
-                task = new Deadline(desc, dateTime);
-                return new AddCommand(task);
-            case "event":
-                try {
-                    desc = getTaskDescription();
-                } catch (StringIndexOutOfBoundsException e) {
-                    throw new DukeException("Please add the description of the event!!");
-                }
-                try {
-                    dateTime = getTaskTimeDate();
-                } catch (StringIndexOutOfBoundsException e) {
-                    throw new DukeException("Please add the date and time of the event!!");
-                }
-                task = new Event(desc, dateTime);
-                return new AddCommand(task);
-            case "todo":
-                try {
-                    desc = getTaskDescription();
-                } catch (StringIndexOutOfBoundsException e) {
-                    throw new DukeException("Please add the description of the todo!!");
-                }
-                task = new Todo(desc);
-                return new AddCommand(task);
-            default:
-                return null;
+            try {
+                desc = getTaskDescription();
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new DukeException("Please add the description of the deadline!!");
             }
-        } else {
+            try {
+                dateTime = getTaskTimeDate();
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new DukeException("Please add the date and time of the deadline!!");
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Please enter the dates as YYYY-MM-DD");
+            }
+            task = new Deadline(desc, dateTime);
+            return new AddCommand(task);
+        case "event":
+            try {
+                desc = getTaskDescription();
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new DukeException("Please add the description of the event!!");
+            }
+            try {
+                dateTime = getTaskTimeDate();
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new DukeException("Please add the date and time of the event!!");
+            } catch (DateTimeParseException e) {
+                throw new DukeException("Please enter the dates as YYYY-MM-DD");
+            }
+            task = new Event(desc, dateTime);
+            return new AddCommand(task);
+        case "todo":
+            try {
+                desc = getTaskDescription();
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new DukeException("Please add the description of the todo!!");
+            }
+            task = new Todo(desc);
+            return new AddCommand(task);
+        default:
             throw new DukeException("Sorry I dont understand!! Please give a proper command.");
         }
     }
@@ -114,10 +119,17 @@ public class Parser {
             dateTime = dateTime + inputArr[i] + " ";
             i++;
         }
-        return dateTime.substring(0, dateTime.length() - 1);
+        String cleanedDateTime = dateTime.substring(0, dateTime.length() - 1);
+        isValidDate(cleanedDateTime);
+        return cleanedDateTime;
     }
 
     private static String[] getKeyword() {
         return Arrays.copyOfRange(inputArr, 1, inputArr.length);
+    }
+
+    private static void isValidDate(String dateString) {
+        LocalDate d = LocalDate.parse(dateString);
+            d.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 }
