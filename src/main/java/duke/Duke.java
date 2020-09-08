@@ -80,4 +80,11 @@ public class Duke {
         }
         return false;
     }
+
+    /**
+     * Starts Duke by showing the welcome message.
+     */
+    public void startDuke() {
+        ui.showWelcomeMessage();
+    }
 }

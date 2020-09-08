@@ -14,6 +14,7 @@ import duke.commands.CommandAddEvent;
 import duke.tasks.TaskDeadline;
 import duke.tasks.TaskEvent;
 import duke.tasks.TaskList;
+import javafx.scene.layout.VBox;
 
 public class ParserTest {
 
@@ -21,7 +22,7 @@ public class ParserTest {
     public void getCommandFromInput_eventDescriptionDurationString_createsAddEventCommand() {
         String input = "event john mayer concert /at 2020-09-10 1800-2200";
         TaskList taskList = new TaskList();
-        Ui ui = new Ui(System.in);
+        Ui ui = new Ui(System.in, new VBox());
         Parser parser = new Parser(taskList, ui);
         CommandAdd expectedCommand = new CommandAddEvent(taskList, ui,
                 new TaskEvent("john mayer concert", LocalDate.parse("2020-09-10"),
@@ -34,7 +35,7 @@ public class ParserTest {
     public void getCommandFromInput_deadlineDescriptionDeadlineString_createsAddDeadlineCommand() {
         String input = "deadline mop floor /by 2020-09-10 2000";
         TaskList taskList = new TaskList();
-        Ui ui = new Ui(System.in);
+        Ui ui = new Ui(System.in, new VBox());
         Parser parser = new Parser(taskList, ui);
         CommandAdd expectedCommand = new CommandAddDeadline(taskList, ui,
                 new TaskDeadline("mop floor", LocalDateTime.of(2020, 9, 10, 20, 0)));

@@ -31,10 +31,8 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void initializeDuke() {
-        Ui ui = new Ui(System.in, dialogContainer);
-        duke = new Duke(ui);
-        ui.showWelcomeMessage();
+    public void setDuke(Duke duke) {
+        this.duke = duke;
     }
 
     /**
@@ -49,5 +47,9 @@ public class MainWindow extends AnchorPane {
             Platform.exit();
         };
         userInput.clear();
+    }
+
+    public VBox getDialogContainer() {
+        return dialogContainer;
     }
 }
