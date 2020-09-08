@@ -48,19 +48,19 @@ public class Storage {
      */
     public void rewriteFile() {
         try {
-            FileWriter fw = new FileWriter(this.filePath);
-            fw.flush();
+            FileWriter fileWriter = new FileWriter(this.filePath);
+            fileWriter.flush();
 
             for (int i = 0; i < (this.tasks).getSize() - 1; i++) {
                 Task task = (this.tasks).getTask(i);
-                fw.write(task.getDescription() + System.lineSeparator());
+                fileWriter.write(task.getDescription() + System.lineSeparator());
             }
 
             if ((this.tasks).getSize() > 0) {
                 Task lastTask = tasks.getTask((this.tasks).getSize() - 1);
-                fw.write(lastTask.getDescription());
+                fileWriter.write(lastTask.getDescription());
             }
-            fw.close();
+            fileWriter.close();
         } catch (IOException e) {
             Ui.reply(e.getMessage());
         }

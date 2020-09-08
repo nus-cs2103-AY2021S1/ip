@@ -10,6 +10,7 @@ public class TodoCommand implements Command {
     @Override
     public String parseInput(TaskList tasks, String text) throws DobbyException {
         String message = "";
+        assert text.startsWith("todo") : "Todo command must start with todo";
         try {
             int commandLen = "todo".length();
             String description = text.substring(commandLen + 1).trim();
@@ -23,6 +24,7 @@ public class TodoCommand implements Command {
             throw new DobbyException("Incorrect usage of command.\nDescription cannot be empty. "
                     + "Please try again.\n  " + USAGE);
         }
+        assert message != null : "Return message to user cannot be empty";
         return message;
     }
 

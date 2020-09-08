@@ -11,6 +11,7 @@ public class DoneCommand implements Command {
     @Override
     public String parseInput(TaskList tasks, String text) throws DobbyException {
         String message = "";
+        assert text.startsWith("done") : "Done command must start with done";
         try {
             int commandLen = "done".length();
             text = text.substring(commandLen).trim();
@@ -24,6 +25,7 @@ public class DoneCommand implements Command {
 
             Task task = tasks.getTask(index - 1);
             task.setDone();
+            assert task.isDone() : "Task should be marked done";
 
             message = "Great! I've marked this task as done:\n  " + task.getDescription();
         } catch (DobbyException e) { // if index is out of range return message

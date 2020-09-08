@@ -11,6 +11,7 @@ public class DeleteCommand implements Command {
     @Override
     public String parseInput(TaskList tasks, String text) throws DobbyException {
         String message = "";
+        assert text.startsWith("delete") : "Delete command must start with delete";
         try {
             int commandLen = "delete".length();
             text = text.substring(commandLen).trim();
@@ -21,7 +22,7 @@ public class DeleteCommand implements Command {
                         + "Task number must be within the correct range.\n  "
                         + USAGE);
             }
-
+            assert index <= tasks.getSize() : "Task to delete must be in correct range";
             Task task = tasks.getTask(index - 1);
             tasks.removeTask(index - 1);
 

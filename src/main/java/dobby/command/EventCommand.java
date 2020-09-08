@@ -13,6 +13,7 @@ public class EventCommand implements Command {
     @Override
     public String parseInput(TaskList tasks, String text) throws DobbyException {
         String message;
+        assert text.startsWith("event") : "Event command must start with event";
         try {
             int commandLen = "event".length();
             text = text.substring(commandLen + 1).trim();
@@ -25,14 +26,17 @@ public class EventCommand implements Command {
                         + "Please try again.\n  " + USAGE);
             }
 
-            String at = text.substring(text.indexOf("/at") + 4);
-            String description = text.substring(0, text.indexOf("/at") - 1);
+            String at = text.substring(text.indexOf("/at") + 4).trim();
+            String description = text.substring(0, text.indexOf("/at") - 1).trim();
             Event event = new Event(description, at);
 
-            if (at.substring(1 + at.lastIndexOf(' ')).length() > 4) {
-                throw new DobbyException("Incorrect usage of command.\n"
-                        + "Details of time should be in 24hr format with only 4 digits. Please try again.\n  "
-                        + USAGE);
+
+            if (at.lastIndexOf(' ') > 0) {
+                if (at.substring(1 + at.lastIndexOf(' ')).length() > 4) {
+                    throw new DobbyException("Incorrect usage of command.\n"
+                            + "Details of time should be in 24hr format with only 4 digits. Please try again.\n  "
+                            + USAGE);
+                }
             }
 
             tasks.addToList(event);

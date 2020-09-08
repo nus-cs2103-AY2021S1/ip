@@ -13,6 +13,7 @@ public class DeadlineCommand implements Command {
     @Override
     public String parseInput(TaskList tasks, String text) throws DobbyException {
         String message = "";
+        assert text.startsWith("deadline") : "Deadline command must start with deadline";
         try {
             int commandLen = "deadline".length();
             text = text.substring(commandLen + 1).trim();
@@ -29,10 +30,12 @@ public class DeadlineCommand implements Command {
             String description = text.substring(0, text.indexOf("/by") - 1).trim();
             Deadline deadline = new Deadline(description, by);
 
-            if (by.substring(1 + by.lastIndexOf(' ')).length() > 4) {
-                throw new DobbyException("Incorrect usage of command.\n"
-                        + "Details of time should be in 24hr format with only 4 digits. "
-                        + "Please try again.\n  " + USAGE);
+            if (by.lastIndexOf(' ') > 0) {
+                if (by.substring(1 + by.lastIndexOf(' ')).length() > 4) {
+                    throw new DobbyException("Incorrect usage of command.\n"
+                            + "Details of time should be in 24hr format with only 4 digits. "
+                            + "Please try again.\n  " + USAGE);
+                }
             }
 
             tasks.addToList(deadline);
