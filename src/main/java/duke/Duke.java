@@ -6,6 +6,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.HelpCommand;
 import duke.command.ListCommand;
+import duke.parser.InputParser;
 
 /**
  * This class handles the logic behind the Duke chatbot.
@@ -45,23 +46,18 @@ public class Duke {
             response += new HelpCommand().getResponse();
             break;
         case TODO:
-            String description = input.substring(4);
+            String description = inputParser.parseToDoInput(input);
             response += new AddCommand(new ToDo(description))
                     .execute(userTasks, storage);
             break;
         case DEADLINE:
-            String[] inputSplit = input.split(" /by ");
-            String by = inputSplit[1];
-            description = inputSplit[0].substring(8);
-            response += new AddCommand(new Deadline(description, by))
+            String[] deadlineParams = inputParser.parseDeadlineInput(input);
+            response += new AddCommand(new Deadline(deadlineParams[0], deadlineParams[1]))
                     .execute(userTasks, storage);
             break;
         case EVENT:
-            inputSplit = input.split(" /at ");
-            String at = inputSplit[1].split(" ")[0];
-            String timeRange = inputSplit[1].split(" ")[1];
-            description = inputSplit[0].substring(5);
-            response += new AddCommand(new Event(description, at, timeRange))
+            String[] eventParams = inputParser.parseEventInput(input);
+            response += new AddCommand(new Event(eventParams[0], eventParams[1], eventParams[2]))
                     .execute(userTasks, storage);
             break;
         case LIST:
