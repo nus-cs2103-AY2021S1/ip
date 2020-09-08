@@ -37,28 +37,9 @@ public class Duke {
         return resultCommand.execute(tasks, ui, storage);
     }
 
-    /**
-     * The Duke program is run and commands are executed.
-     * @throws IOException File containing list of task may not be found.
-     */
-    public void run() throws IOException, DukeException {
-        UI.intro();
-        boolean isExit = false;
-        while (!isExit) {
-            String toPrint = ui.nextInput();
-            ui.dividerLine();
 
-            Command c = parser.parse(toPrint);
-            c.execute(tasks, ui, storage);
-            isExit = c.isExit();
-
-            ui.dividerLine();
-        }
-        System.out.println("Bye. Hope to see you again soon!");
-    }
 
     public static void main(String[] args) throws DukeException, IOException {
-        new Duke().run();
     }
 
 
