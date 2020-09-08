@@ -1,14 +1,11 @@
 package Duke.Commands;
 
 import Duke.Errors.DukeException;
-import Duke.Errors.FileAbsentException;
 import Duke.Errors.TodoException;
 import Duke.Helpers.Storage;
 import Duke.Helpers.TaskList;
 import Duke.Helpers.Ui;
 import Duke.Tasks.ToDo;
-
-import java.io.IOException;
 
 /**
  * has the method if ToDo is keyword deadline
@@ -17,10 +14,10 @@ public class TodoCommand extends AddCommand{
     /**
      * Assigns string to a value of string
      *
-     * @param string assigns string to this this.string
+     * @param input assigns string to this this.string
      */
-    public TodoCommand(String string) {
-        super(string);
+    public TodoCommand(String input, int lengthOfKeyword) {
+        super(input, lengthOfKeyword);
     }
 
     /**
@@ -34,15 +31,15 @@ public class TodoCommand extends AddCommand{
      * description
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
-        if (isDescriptionAbsent()) {
-            throw new TodoException();
-        } else {
-            try {
-                ToDo t = new ToDo(todoDescription());
-                return updateTaskList(storage, t, tasks);
-            }catch (IOException i){
-                throw new FileAbsentException(storage.getFilePath());
+        try {
+            if (isDescriptionAbsent()) {
+                throw new TodoException();
             }
+            ToDo t = new ToDo(todoDescription());
+            return updateTaskList(storage, t, tasks);
+        }catch (DukeException dukeException){
+            ui.setDukeException(dukeException);
+            throw dukeException;
         }
     }
 
@@ -52,7 +49,7 @@ public class TodoCommand extends AddCommand{
      * @return true if description absent and false otherwise.
      */
     private boolean isDescriptionAbsent(){
-        return commandDescription.length() == 4 || commandDescription.length() == 5; //since if the description is absent length is only 4 or 5
+        return commandDescription.length() == lengthOfKeyword || commandDescription.length() == lengthOfKeyword + 1; //since if the description is absent length is only 4 or 5
     }
 
     /**
@@ -61,7 +58,7 @@ public class TodoCommand extends AddCommand{
      * @return name of task
      */
     private String todoDescription(){
-        return commandDescription.substring(5);
+        return commandDescription.substring(lengthOfKeyword + 1);
     }
 
 }

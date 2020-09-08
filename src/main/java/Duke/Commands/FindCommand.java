@@ -19,10 +19,10 @@ public class FindCommand extends Command {
     /**
      * Assigns string to a value of string
      *
-     * @param string assigns string to this this.string
+     * @param input assigns string to this this.string
      */
-    public FindCommand(String string) {
-        super(string);
+    public FindCommand(String input, int lengthOfKeyword) {
+        super(input, lengthOfKeyword);
     }
 
     /**
@@ -37,17 +37,21 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if(wordsToFindAbsent()){
-            throw new FindException(false, true, "");
-        }else{
+        try {
+            if (wordsToFindAbsent()) {
+                throw new FindException(false, true, "");
+            }
             String find = commandDescription.substring(5);
             String[] strings = find.split(" ", -2); // keywords split into different Strings
             setTasks(strings, tasks);
-            if(this.tasks.size() == 0){
+            if (this.tasks.size() == 0) {
                 throw new FindException(true, false, find);
-            }else{
+            } else {
                 return findMessage();
             }
+        }catch (DukeException dukeException){
+            ui.setDukeException(dukeException);
+            throw dukeException;
         }
     }
 
@@ -81,17 +85,17 @@ public class FindCommand extends Command {
 
     public String findMessage() throws FindException {
         String s = "  Here are the matching tasks in your list:";
-        System.out.println("  Here are the matching tasks in your list:");
+        //System.out.println("  Here are the matching tasks in your list:");
         for(int i = 0; i < this.tasks.size(); i++){
             Task task = this.tasks.get(i);
-            System.out.println("  " + (i + 1) + "." + task.toString());
+            //System.out.println("  " + (i + 1) + "." + task.toString());
             s = s + "\n" + "  " + (i + 1) + "." + task.toString(); // concatenates all the Task present in tasks
         }
         return s;
     }
 
     private boolean wordsToFindAbsent(){
-        return commandDescription.length() == 4 || commandDescription.length() == 5;  //since keywords present after length of 5
+        return commandDescription.length() == lengthOfKeyword || commandDescription.length() == lengthOfKeyword + 1;  //since keywords present after length of 5
     }
 
 }

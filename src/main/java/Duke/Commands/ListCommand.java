@@ -12,10 +12,10 @@ public class ListCommand extends Command {
     /**
      * Assigns string to a value of string
      *
-     * @param string assigns string to this this.string
+     * @param input assigns string to this this.string
      */
-    public ListCommand(String string) {
-        super(string);
+    public ListCommand(String input, int lengthOfKeyword) {
+        super(input, lengthOfKeyword);
     }
 
     /**
@@ -40,7 +40,7 @@ public class ListCommand extends Command {
     private String listMessage(TaskList tasks){
         String s = "";
         for(int i = 0; i < tasks.getAllTasks().size(); i++){
-            System.out.println("  " + tasks.getAllTasks().get(i)); // concatenates all the string representation of Tasks TaskList
+            //System.out.println("  " + tasks.getAllTasks().get(i)); // concatenates all the string representation of Tasks TaskList
             s = s + "\n" + "  " + tasks.getAllTasks().get(i);
         }
         return s;

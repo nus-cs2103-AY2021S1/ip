@@ -16,10 +16,10 @@ import java.io.IOException;
 public class DoneCommand extends Command {
     /**
      * assigns string to a value of string
-     * @param string assigns string to this this.string
+     * @param input assigns string to this this.string
      */
-    public DoneCommand(String string) {
-        super(string);
+    public DoneCommand (String input, int lengthOfKeyword) {
+        super(input, lengthOfKeyword);
     }
 
     /**
@@ -31,15 +31,20 @@ public class DoneCommand extends Command {
      * @throws DukeException thrown if the ID is more than number of ID is absent
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (isNumberAbsent()) {
-            throw new DoneException(true, false); //when number is absent
-        }else{
-            int ID = Integer.parseInt(commandDescription.substring(5));
-            if (isNumberNotInList(ID, tasks)) {
-                throw new DoneException(false, true); //when number is not in list
+        try {
+            if (isNumberAbsent()) {
+                throw new DoneException(true, false); //when number is absent
             } else {
-                return rewrite(storage, tasks, ID); //where the file in Storage is updated and TaskList is updated
+                int ID = Integer.parseInt(commandDescription.substring(lengthOfKeyword + 1));
+                if (isNumberNotInList(ID, tasks)) {
+                    throw new DoneException(false, true); //when number is not in list
+                } else {
+                    return rewrite(storage, tasks, ID); //where the file in Storage is updated and TaskList is updated
+                }
             }
+        }catch (DukeException dukeException){
+            ui.setDukeException(dukeException);
+            throw dukeException;
         }
     }
     /**
@@ -48,7 +53,7 @@ public class DoneCommand extends Command {
      * @return true is the number is absent and false if number is present.
      */
     private boolean isNumberAbsent(){
-        return commandDescription.length() == 4 || commandDescription.length() == 5; // keyword is absent if user input is only 4/5
+        return commandDescription.length() == lengthOfKeyword || commandDescription.length() == lengthOfKeyword + 1; // keyword is absent if user input is only 4/5
     }
 
     /**

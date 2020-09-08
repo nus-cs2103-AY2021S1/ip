@@ -3,13 +3,11 @@ package Duke.Commands;
 import Duke.Errors.DeadlineException;
 import Duke.Errors.DukeException;
 import Duke.Errors.EventException;
-import Duke.Errors.FileAbsentException;
 import Duke.Helpers.Storage;
 import Duke.Helpers.TaskList;
 import Duke.Helpers.Ui;
 import Duke.Tasks.Event;
 
-import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -23,10 +21,10 @@ public class EventCommand extends AddCommand{
     /**
      * Assigns string to a value of string
      *
-     * @param string assigns string to this this.string
+     * @param input assigns string to this this.string
      */
-    public EventCommand(String string) {
-        super(string);
+    public EventCommand(String input, int lengthOfKeyword) {
+        super(input, lengthOfKeyword);
     }
 
     /**
@@ -39,15 +37,16 @@ public class EventCommand extends AddCommand{
      * @throws DukeException if there no description after Event no time or time is wrong format
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (isDescriptionAbsent()) {
-            throw new EventException(true, false, false, false, false);
-        }
-        String[] dataSplit = splitData(); //splits String into different of Event name, start and end time and/or date
-        Event event = provide(dataSplit[0], dataSplit[1], dataSplit[2]); //gives the event or throws exception
         try {
+            if (isDescriptionAbsent()) {
+                throw new EventException(true, false, false, false, false);
+            }
+            String[] dataSplit = splitData(); //splits String into different of Event name, start and end time and/or date
+            Event event = provide(dataSplit[0], dataSplit[1], dataSplit[2]); //gives the event or throws exception
             return updateTaskList(storage, event, tasks); //updates the Task list in Storage and TaskList since the Event is added
-        } catch (IOException i) {
-            throw new FileAbsentException(storage.getFilePath());
+        } catch (DukeException dukeException) {
+            ui.setDukeException(dukeException);
+            throw dukeException;
         }
     }
 
@@ -57,7 +56,7 @@ public class EventCommand extends AddCommand{
      * @return true if description absent and false otherwise.
      */
     private boolean isDescriptionAbsent(){
-        return commandDescription.length() == 5 || commandDescription.length() == 6; // since description is present after index 6
+        return commandDescription.length() == lengthOfKeyword || commandDescription.length() == lengthOfKeyword + 1; // since description is present after index 6
     }
     /**
      * splits the data into Deadline description and the Deadline date and/ or time. If the date and/or time is absent
@@ -74,7 +73,7 @@ public class EventCommand extends AddCommand{
         boolean startPresent = false;
         boolean endPresent = false;
         String start = "";
-        for (int i = 5; i < commandDescription.length(); i++) {
+        for (int i = lengthOfKeyword + 1; i < commandDescription.length(); i++) {
             if (commandDescription.charAt(i) == '/') {
                 index = i;
                 startPresent = true; //the presence of / indicates that the start time is present.

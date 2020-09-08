@@ -13,7 +13,8 @@ abstract public class Command {
      * commandName which contains information on task and details to perform task
      * isExit is used to tell whether program terminates, where id true, it terminates
      */
-    public String commandDescription;
+    protected String commandDescription;
+    protected int lengthOfKeyword;
     boolean isExit = false;
 
     /**
@@ -21,8 +22,9 @@ abstract public class Command {
      *
      * @param commandDescription assigns this.string to string
      */
-    public Command(String commandDescription){
+    public Command(String commandDescription, int lengthOfKeyword){
         this.commandDescription = commandDescription;
+        this.lengthOfKeyword = lengthOfKeyword;
     }
 
     /**

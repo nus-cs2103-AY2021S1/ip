@@ -11,6 +11,7 @@ import java.util.Scanner;
  * deals with interactions with the user
  */
 public class Ui {
+    private DukeException dukeException;
     private Scanner sc;
     public Ui(){
         sc =  new Scanner(System.in);
@@ -24,6 +25,9 @@ public class Ui {
         }
 
     }
+    public void setDukeException(DukeException dukeException){
+        this.dukeException = dukeException;
+    }
     /**
      * This prints out if there is an error when tasks are loaded
      *
@@ -32,7 +36,9 @@ public class Ui {
     public void showLoadingError(DukeException d){
         System.out.println(d.getMessage());
     }
-
+    public void showLoadingError(){
+        System.out.println(dukeException.getMessage());
+    }
     /**
      * prints welcome message
      */

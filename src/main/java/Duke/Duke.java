@@ -87,10 +87,10 @@ public class Duke {
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                System.out.println(c.execute(tasks, ui, storage));
                 isExit = c.isExit(); //if true exits program as bye is mentioned
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                ui.showLoadingError();
             } finally {
                 ui.showLine();
             }

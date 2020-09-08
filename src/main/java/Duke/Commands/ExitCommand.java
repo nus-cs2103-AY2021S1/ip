@@ -11,10 +11,10 @@ import Duke.Helpers.Ui;
 public class ExitCommand extends Command {
     /**
      * assigns string to a value of string
-     * @param string assigns string to this this.string
+     * @param input assigns string to this this.string
      */
-    public ExitCommand(String string) {
-        super(string);
+    public ExitCommand(String input, int lengthOfKeyword) {
+        super(input, lengthOfKeyword);
     }
 
     /**
@@ -35,7 +35,7 @@ public class ExitCommand extends Command {
      * @throws DukeException not thrown
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        System.out.println(exitMessage());
+        //System.out.println(exitMessage());
         return exitMessage();
     }
 

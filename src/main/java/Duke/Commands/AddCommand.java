@@ -1,5 +1,7 @@
 package Duke.Commands;
 
+import Duke.Errors.DukeException;
+import Duke.Errors.FileAbsentException;
 import Duke.Helpers.Storage;
 import Duke.Helpers.TaskList;
 import Duke.Tasks.Task;
@@ -19,10 +21,10 @@ abstract public class AddCommand extends Command {
     /**
      * constructor that assigns string value of string
      *
-     * @param string passes it to super class constructor
+     * @param input passes it to super class constructor
      */
-    public AddCommand(String string) {
-        super(string);
+    public AddCommand(String input, int lengthOfKeyword) {
+        super(input, lengthOfKeyword);
     }
 
     /**
@@ -43,15 +45,19 @@ abstract public class AddCommand extends Command {
      * @param storage where the file here is updated
      * @param task this task is added into storage and taskList
      * @param taskList where the tasks here is updated with task added
-     * @throws IOException when the file in storage is not present
+     * @throws DukeException when the file in storage is not present
      */
-    protected static String updateTaskList(Storage storage, Task task, TaskList taskList) throws IOException {
-        FileWriter fw = new FileWriter(storage.getFilePath(), true); //updates the file in storage as new task is added
-        taskList.getAllTasks().add(task);
-        fw.write(task.inputListFormat() + "\n");
-        fw.close();
+    protected static String updateTaskList(Storage storage, Task task, TaskList taskList) throws DukeException {
+        try {
+            FileWriter fw = new FileWriter(storage.getFilePath(), true); //updates the file in storage as new task is added
+            taskList.getAllTasks().add(task);
+            fw.write(task.inputListFormat() + "\n");
+            fw.close();
+        }catch (IOException i){
+            throw new FileAbsentException(storage.getFilePath());
+        }
         Task.tasks.add(task); //adds task to taskList
-        System.out.println(stringToUpdateTaskList(task, taskList));
+        //System.out.println(stringToUpdateTaskList(task, taskList));
         return stringToUpdateTaskList(task, taskList);
     }
 

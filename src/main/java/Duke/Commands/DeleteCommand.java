@@ -16,10 +16,10 @@ import java.io.IOException;
 public class DeleteCommand extends Command {
     /**
      * assigns string to a value of string
-     * @param string assigns string to this this.string
+     * @param input assigns string to this this.string
      */
-    public DeleteCommand(String string) {
-        super(string);
+    public DeleteCommand(String input, int lengthOfKeyword) {
+        super(input, lengthOfKeyword);
     }
 
     /**
@@ -33,15 +33,20 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        if (isNumberAbsent()) {
-            throw new DeleteException(true, false); //when number is absent
-        }else{
-            int ID = Integer.parseInt(commandDescription.substring(7));
-            if (isNumberNotInList(ID, tasks)) {
-                throw new DeleteException(false, true); //when ID is more than number of tasks in list
-            }else {
-                return rewrite(storage, tasks, ID); //to update TaskList and file in Storage
+        try {
+            if (isNumberAbsent()) {
+                throw new DeleteException(true, false); //when number is absent
+            } else {
+                int ID = Integer.parseInt(commandDescription.substring(lengthOfKeyword + 1));
+                if (isNumberNotInList(ID, tasks)) {
+                    throw new DeleteException(false, true); //when ID is more than number of tasks in list
+                } else {
+                    return rewrite(storage, tasks, ID); //to update TaskList and file in Storage
+                }
             }
+        }catch (DukeException dukeException){
+            ui.setDukeException(dukeException);
+            throw dukeException;
         }
     }
 
@@ -51,7 +56,7 @@ public class DeleteCommand extends Command {
      * @return true is the number is absent and false if number is present.
      */
     private boolean isNumberAbsent(){
-        return commandDescription.length() == 4 || commandDescription.length() == 5; //since the delete number appears after length of 5
+        return commandDescription.length() == lengthOfKeyword || commandDescription.length() == lengthOfKeyword + 1; //since the delete number appears after length of 5
     }
 
     /**
@@ -128,13 +133,13 @@ public class DeleteCommand extends Command {
      * @throws DukeException throws if file is absent
      */
     private String rewrite(Storage storage, TaskList tasks, int ID)  throws DukeException{
-        deleteTaskInTaskList(tasks, ID); //deleted the task with ID in TaskList
-        String newTaskList = newInputInStorageFIle(tasks); //gives new file input and deletes
         try {
+            deleteTaskInTaskList(tasks, ID); //deleted the task with ID in TaskList
+            String newTaskList = newInputInStorageFIle(tasks); //gives new file input and deletes
             updateTaskInStorage(newTaskList, storage); //replaces old list in storage file with this
-            System.out.println(deleteTaskString(tasks, ID));
+            //System.out.println(deleteTaskString(tasks, ID));
             return deleteTaskString(tasks, ID);
-        } catch (FileAbsentException f) {
+        } catch (DukeException dukeException) {
             throw new FileAbsentException(storage.getFilePath());
         }
     }

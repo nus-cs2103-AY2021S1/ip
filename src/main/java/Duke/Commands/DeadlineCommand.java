@@ -2,13 +2,11 @@ package Duke.Commands;
 
 import Duke.Errors.DeadlineException;
 import Duke.Errors.DukeException;
-import Duke.Errors.FileAbsentException;
 import Duke.Helpers.Storage;
 import Duke.Helpers.TaskList;
 import Duke.Helpers.Ui;
 import Duke.Tasks.Deadline;
 
-import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -22,10 +20,10 @@ public class DeadlineCommand extends AddCommand {
     /**
      * assigns string to a value of string
      *
-     * @param string assigns string to this this.string
+     * @param input assigns string to this this.string
      */
-    public DeadlineCommand(String string) {
-        super(string);
+    public DeadlineCommand(String input, int lengthOfKeyword) {
+        super(input, lengthOfKeyword);
     }
 
     /**
@@ -40,14 +38,17 @@ public class DeadlineCommand extends AddCommand {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException{
         if (isDescriptionAbsent()) {
+            ui.setDukeException(new DeadlineException(true, false, false));
             throw new DeadlineException(true, false, false); //Since description is absent
         }
-        String[] dataSplit = splitData(); //Split into description name and time and/or date
-        Deadline d = deadlineTask(dataSplit[0], dataSplit[1]); //gives the Deadline
+
         try {
+            String[] dataSplit = splitData(); //Split into description name and time and/or date
+            Deadline d = deadlineTask(dataSplit[0], dataSplit[1]); //gives the Deadline
             return updateTaskList(storage, d, tasks); //updates the tasks and file in storage
-        }catch (IOException i){
-            throw new FileAbsentException(storage.getFilePath());
+        }catch (DukeException dukeException){
+            ui.setDukeException(dukeException);
+            throw dukeException;
         }
     }
 
@@ -57,7 +58,7 @@ public class DeadlineCommand extends AddCommand {
      * @return true if description absent and false otherwise.
      */
     private boolean isDescriptionAbsent(){
-        return commandDescription.length() == 8 || commandDescription.length() == 9; // since description can only appear after length of 9
+        return commandDescription.length() == lengthOfKeyword || commandDescription.length() == lengthOfKeyword + 1; // since description can only appear after length of 9
     }
 
     /**
@@ -72,7 +73,7 @@ public class DeadlineCommand extends AddCommand {
         String s = "";
         int index = -1;
         boolean time = false;
-        for (int i = 8; i < commandDescription.length(); i++) {
+        for (int i = lengthOfKeyword; i < commandDescription.length(); i++) {
             if (commandDescription.charAt(i) == '/') {
                 index = i;
                 time = true;//since date appears after /
