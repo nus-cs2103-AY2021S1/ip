@@ -22,6 +22,7 @@ public class DeleteCommand implements Command {
                         + "Task number must be within the correct range.\n  "
                         + USAGE);
             }
+
             assert index <= tasks.getSize() : "Task to delete must be in correct range";
             Task task = tasks.getTask(index - 1);
             tasks.removeTask(index - 1);
@@ -34,6 +35,7 @@ public class DeleteCommand implements Command {
                     + "Please enter a task number after delete.\n  "
                     + USAGE);
         }
+        assert message != null : "Return message to user cannot be empty";
         return message;
     }
 }

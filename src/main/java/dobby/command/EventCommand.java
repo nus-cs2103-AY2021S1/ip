@@ -30,7 +30,6 @@ public class EventCommand implements Command {
             String description = text.substring(0, text.indexOf("/at") - 1).trim();
             Event event = new Event(description, at);
 
-
             if (at.lastIndexOf(' ') > 0) {
                 if (at.substring(1 + at.lastIndexOf(' ')).length() > 4) {
                     throw new DobbyException("Incorrect usage of command.\n"
@@ -57,6 +56,7 @@ public class EventCommand implements Command {
         } catch (DobbyException e) { // empty description or /at missing
             return e.getMessage();
         }
+        assert message != null : "Return message to user cannot be empty";
         return message;
     }
 }

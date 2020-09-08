@@ -35,6 +35,7 @@ public class DoneCommand implements Command {
                     + "Please enter a task number after done.\n  "
                     + USAGE);
         }
+        assert message != null : "Return message to user cannot be empty";
         return message;
     }
 

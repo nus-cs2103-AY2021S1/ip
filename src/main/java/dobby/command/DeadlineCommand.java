@@ -59,6 +59,7 @@ public class DeadlineCommand implements Command {
         } catch (DobbyException e) { // empty description or /by missing
             return e.getMessage();
         }
+        assert message != null : "Return message to user cannot be empty";
         return message;
     }
 }
