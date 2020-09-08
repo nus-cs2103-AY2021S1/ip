@@ -1,11 +1,12 @@
 package nite.task;
 
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a Task created by the user.
  */
-public class Task {
+public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected final DateTimeFormatter inputDateTimePattern =
@@ -56,9 +57,7 @@ public class Task {
      *
      * @return Text representation of Task.
      */
-    public String toData() {
-        return "";
-    }
+    public abstract String toData();
 
     /**
      * Checks if a task contains the given keyword in its description.
@@ -69,5 +68,16 @@ public class Task {
     public boolean hasKeyword(String keyword) {
         assert !keyword.isEmpty() : "Keyword should not be empty.";
         return description.contains(keyword);
+    }
+
+    /**
+     * Returns the type of the Task.
+     *
+     * @return Type of Task.
+     */
+    public abstract String typeOfTask();
+
+    public LocalDateTime getTime() {
+        return null;
     }
 }

@@ -54,4 +54,18 @@ public class Deadline extends Task {
         return String.format("D%s%s%s%s%s%s%n", separator, isDone, separator,
                 super.description, separator, timeBy);
     }
+
+    /**
+     * Returns the type of the Deadline Task.
+     *
+     * @return String representing Deadline.
+     */
+    @Override
+    public String typeOfTask() {
+        return "deadline";
+    }
+
+    public LocalDateTime getTime() {
+        return timeBy;
+    }
 }
