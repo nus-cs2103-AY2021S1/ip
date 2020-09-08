@@ -1,7 +1,6 @@
 package duke.tasks;
 
 import java.text.MessageFormat;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -18,7 +17,7 @@ import duke.utils.ResourceHandler;
 public class TaskManager {
     /** List of {@code Task} objects. */
     private final List<Task> tasks = new PersistentList<>("./data/tasks.txt",
-            new TypeToken<ArrayList<Task>>(){}.getType(),
+            new TypeToken<List<Task>>(){}.getType(),
             RuntimeTypeAdapterFactory.of(Task.class)
                     .registerSubtype(Deadline.class)
                     .registerSubtype(Event.class)
@@ -127,9 +126,9 @@ public class TaskManager {
     public String toString() {
         StringBuilder formattedList =
                 new StringBuilder(ResourceHandler.getString("taskManager.listTasksPrefix") + "\n");
-        for (int i = 0; i < tasks.size(); i++) {
-            formattedList.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
-        }
+        IntStream.range(0, tasks.size())
+                .mapToObj(i -> String.format("%d. %s\n", i + 1, tasks.get(i)))
+                .forEach(formattedList::append);
         return formattedList.toString();
     }
 }

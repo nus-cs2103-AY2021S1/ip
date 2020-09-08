@@ -13,9 +13,6 @@ import java.util.ListIterator;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.TypeAdapterFactory;
-import com.google.gson.reflect.TypeToken;
-
-import duke.tasks.Task;
 
 /**
  * An {@code ArrayList} wrapper that syncs the state of the list to a file whenever it's updated.
@@ -31,7 +28,7 @@ public class PersistentList<E> implements List<E> {
     private final Type listType;
 
     /**
-     * Constructs a {@code PersistentList} object with the specified file, type, and {@code TypeAdapterFactory}
+     * Constructs a {@code PersistentList} object with the specified file, type, and {@code TypeAdapterFactory}.
      *
      * @param filePath the path of the file to read from and write to.
      * @param listType the type of the list.
@@ -64,7 +61,6 @@ public class PersistentList<E> implements List<E> {
     private List<E> readStateFromFile() {
         try {
             String data = storageManager.readFromFile();
-            Type listType = new TypeToken<ArrayList<Task>>(){}.getType();
             return gson.fromJson(data, listType);
         } catch (IOException e) {
             System.err.println(e.getMessage());

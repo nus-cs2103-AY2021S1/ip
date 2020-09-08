@@ -5,9 +5,9 @@ import java.util.Scanner;
 import duke.enums.Command;
 import duke.exceptions.DukeException;
 import duke.messages.DukeResponse;
-import duke.tasks.TaskManager;
 import duke.utils.PrettyPrinter;
 import duke.utils.ResourceHandler;
+import duke.utils.Store;
 
 /**
  * A read-eval-print loop (REPL) that reads in a command from the user, executes it, and prints out the result.
@@ -23,8 +23,6 @@ public class Repl {
     private static final Scanner scanner = new Scanner(System.in);
     /** {@code PrettyPrinter} object for formatting the REPL output. */
     private static final PrettyPrinter prettyPrinter = new PrettyPrinter(LEFT_PADDING_SIZE, DIVIDER_LENGTH);
-    /** {@code TaskManager} object to keep track of tasks. */
-    private static final TaskManager taskManager = new TaskManager();
 
     /**
      * Runs the REPL.
@@ -48,14 +46,16 @@ public class Repl {
      * @return a {@code DukeResponse}.
      */
     public static DukeResponse getResponse(String input) {
-        String firstToken = input.split(" ")[0];
+        String firstToken = input.trim().split(" ")[0];
         DukeResponse dukeResponse;
         try {
-            Command command = Command.valueOf(firstToken.toUpperCase());
+            Command command = Store.getAliasManager().getCommand(firstToken);
+            // Substitute any aliases if necessary.
+            String substitutedInput = input.replaceFirst(firstToken, command.toString());
             // Check that the user input is of the correct format for the command.
-            command.validate(input);
+            command.validate(substitutedInput);
             // Execute the command.
-            dukeResponse = command.execute(taskManager, input);
+            dukeResponse = command.execute(substitutedInput);
         } catch (DukeException e) {
             dukeResponse = new DukeResponse(e.getMessage());
         } catch (IllegalArgumentException e) {
