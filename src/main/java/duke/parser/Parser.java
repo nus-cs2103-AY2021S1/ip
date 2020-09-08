@@ -60,6 +60,7 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new DukeException("Yo! Enter the task numbers(s) correctly.");
         }
+        assert taskNumbers != null : "Error in stream operations";
         return taskNumbers;
     }
 
