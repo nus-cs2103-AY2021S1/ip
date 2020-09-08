@@ -44,7 +44,6 @@ public class DialogBox extends HBox {
         setSpacing(IMAGE_TEXT_SPACING);
     }
 
-    private final double TEXT_IMAGE_SPACING = 5.0;
     private static final Background DUKE_BACKGROUND =
             new Background(new BackgroundFill(Color.LIGHTBLUE, CornerRadii.EMPTY, Insets.EMPTY));
     private static final Background USER_BACKGROUND =

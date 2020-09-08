@@ -17,6 +17,9 @@ public class Deadline extends Task {
     /** Time of the deadline of the Task */
     protected LocalTime time;
 
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("h:mm a");
+
     /**
      * Creates a Task with a deadline which has not been marked as done.
      *
@@ -52,8 +55,7 @@ public class Deadline extends Task {
     @Override
     public String toDisplayString() {
         return "[D]" + super.toDisplayString() + " (by: "
-                + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " "
-                + time.format(DateTimeFormatter.ofPattern("h:mm a")) + ")";
+                + date.format(DATE_FORMAT) + " " + time.format(TIME_FORMAT) + ")";
     }
 
     /**
@@ -66,8 +68,7 @@ public class Deadline extends Task {
     @Override
     public String toSavedString() {
         return "D" + " | " + super.toSavedString() + " | "
-                + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " "
-                + time.format(DateTimeFormatter.ofPattern("h:mm a"));
+                + date.format(DATE_FORMAT) + " " + time.format(TIME_FORMAT);
     }
 
 }

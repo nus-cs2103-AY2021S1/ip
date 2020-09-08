@@ -38,7 +38,7 @@ public class AddCommand extends Command {
                     + "  " + task.toDisplayString() + "\n"
                     + "Now you have " + tasks.size() + " tasks in the list";
         } catch (DateTimeException dateTimeException) {
-            throw new DukeException("Please enter a valid date and time in the format 'DD-MM-YYYY HHMM'!");
+            throw new DukeException(ErrorMessage.INVALID_DATE_TIME_FORMAT.getMessage());
         }
     }
 

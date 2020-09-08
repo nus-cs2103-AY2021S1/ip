@@ -1,4 +1,2 @@
-D | 1 | new task | Dec 20 2020 8:20 PM
-T | 0 | new task
-D | 0 | CS2103 week 5 | Dec 20 2020 8:20 PM
-E | 0 | lol | Dec 20 2020 8:20 PM
+T | 0 | read book
+D | 0 | read book | Dec 20 2020 8:20 PM

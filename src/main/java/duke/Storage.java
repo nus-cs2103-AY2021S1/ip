@@ -48,10 +48,9 @@ public class Storage {
             }
         } catch (FileNotFoundException fileNotFoundException) {
             assert(!Paths.get(filepath).toFile().exists());
-            throw new DukeException("Warning: Unable to find file containing task history. " +
-                    "Please carry on if this is the first time using Duke.");
+            throw new DukeException(ErrorMessage.MISSING_TASKS_FILE.getMessage());
         } catch (IOException ioException) {
-            throw new DukeException("Warning: Unable to read task history.");
+            throw new DukeException(ErrorMessage.UNABLE_READ_TASK_HISTORY.getMessage());
         }
         return tasks;
     }
@@ -70,16 +69,13 @@ public class Storage {
                 File data = new File("data");
                 data.mkdir();
             }
-
             String latestTaskListString = tasks.toSavedString();
             BufferedWriter writer = new BufferedWriter(new FileWriter(filepath));
             writer.write(latestTaskListString);
             writer.close();
-
             assert(Paths.get(filepath).toFile().exists());
-
         } catch (IOException ioException) {
-            throw new DukeException("Unable to save task list.");
+            throw new DukeException(ErrorMessage.UNABLE_SAVE_TASK_LIST.getMessage());
         }
     }
 

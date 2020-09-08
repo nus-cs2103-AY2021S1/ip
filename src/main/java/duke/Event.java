@@ -18,6 +18,9 @@ public class Event extends Task {
     /** Time of the occurrence of the Event */
     protected LocalTime time;
 
+    private static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("MMM dd yyyy");
+    private static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("h:mm a");
+
     /**
      * Creates an Event which has not been marked as done.
      *
@@ -53,8 +56,8 @@ public class Event extends Task {
     @Override
     public String toDisplayString() {
         return "[E]" + super.toDisplayString() + " (at: "
-                + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " "
-                + time.format(DateTimeFormatter.ofPattern("h:mm a")) + ")";
+                + date.format(DATE_FORMAT) + " "
+                + time.format(TIME_FORMAT) + ")";
     }
 
     /**
@@ -67,8 +70,8 @@ public class Event extends Task {
     @Override
     public String toSavedString() {
         return "E" + " | " + super.toSavedString() + " | "
-                + date.format(DateTimeFormatter.ofPattern("MMM dd yyyy")) + " "
-                + time.format(DateTimeFormatter.ofPattern("h:mm a"));
+                + date.format(DATE_FORMAT) + " "
+                + time.format(TIME_FORMAT);
     }
 
 }

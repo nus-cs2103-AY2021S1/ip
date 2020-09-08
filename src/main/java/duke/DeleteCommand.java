@@ -39,7 +39,7 @@ public class DeleteCommand extends Command {
                     + "Now you have " + tasks.size() + " tasks in the list.";
         } catch (IndexOutOfBoundsException exception) {
             assert(taskNumber <= 0 || taskNumber > tasks.size());
-            throw new DukeException("Please enter a valid task number!");
+            throw new DukeException(ErrorMessage.INVALID_TASK_NUMBER.getMessage());
         }
     }
 

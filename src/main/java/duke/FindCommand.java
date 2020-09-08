@@ -10,13 +10,12 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String execute(Tasklist tasks, Storage storage) {
+    public String execute(Tasklist tasks, Storage storage) throws DukeException {
         if (query.isBlank()) {
-            return "Please enter a valid query!";
-        } else {
-            return "Here are the matching tasks in your list:\n"
-                    + tasks.matchedTasksOnly(query);
+            throw new DukeException(ErrorMessage.INVALID_QUERY.getMessage());
         }
+        return "Here are the matching tasks in your list:\n"
+                + tasks.matchedTasksOnly(query);
     }
 
     @Override

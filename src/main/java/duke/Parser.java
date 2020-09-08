@@ -48,7 +48,7 @@ public class Parser {
         case "E":
             return new Event(description, isDone, parseDate(splitTask[3], SAVED_DATE_TIME_FORMAT));
         default:
-            throw new DukeException("Unable to read task.");
+            throw new DukeException(ErrorMessage.UNABLE_READ_TASK_HISTORY.getMessage());
         }
     }
 
@@ -97,13 +97,13 @@ public class Parser {
             case "delete":
                 return new DeleteCommand(Integer.parseInt(splitCommand[1]));
             default:
-                throw new DukeException("Unknown command type.");
+                throw new DukeException(ErrorMessage.INVALID_COMMAND_TYPE.getMessage());
             }
 
         } catch (DateTimeException dateTimeException) {
-            throw new DukeException("Please enter the date and time in the format 'DD-MM-YYYY HHMM'!");
+            throw new DukeException(ErrorMessage.INVALID_DATE_TIME_FORMAT.getMessage());
         } catch (Exception exception) {
-            throw new DukeException("Unable to read command. Please enter it in the correct format!");
+            throw new DukeException(ErrorMessage.INVALID_COMMAND_FORMAT.getMessage());
         }
     }
 
