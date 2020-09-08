@@ -55,6 +55,7 @@ public class TaskList {
      * @return filtered list of tasks.
      */
     public List<Task> find(String key) {
+        assert key != null;
         return this.tasks.stream().filter(task -> task.getDesc().contains(key))
                 .collect(Collectors.toList());
     }
@@ -65,8 +66,11 @@ public class TaskList {
      * @return task set as done.
      */
     public Task setDone(int idx) {
+        int previousSize = this.tasks.size();
+        assert idx >= 0 && idx < previousSize;
         Task doneTask = tasks.get(idx).setDone();
         this.tasks.set(idx, doneTask);
+        assert this.tasks.size() == previousSize;
         return doneTask;
     }
 
@@ -77,8 +81,11 @@ public class TaskList {
      * @return removed task.
      */
     public Task remove(int idx) {
+        int previousSize = this.tasks.size();
+        assert idx >= 0 && idx < previousSize;
         Task rmTask = tasks.get(idx);
         this.tasks.remove(idx);
+        assert this.tasks.size() == previousSize - 1;
         return rmTask;
     }
 
@@ -90,8 +97,11 @@ public class TaskList {
      * @return added task.
      */
     public Task addTodo(String desc, boolean isDone) {
+        assert desc != null;
+        int previousSize = this.tasks.size();
         Task newTask = new Todo(desc, isDone);
         this.tasks.add(newTask);
+        assert this.tasks.size() == previousSize + 1;
         return newTask;
     }
 
@@ -105,13 +115,17 @@ public class TaskList {
      * @return added task.
      */
     public Task addTimedTask(String type, String desc, LocalDate date, boolean isDone) {
+        assert desc != null && date != null;
+        int previousSize = this.tasks.size();
         Task newTask;
         if (type.equals("deadline")) {
             newTask = new Deadline(desc, date, isDone);
         } else {
+            assert type.equals("event");
             newTask = new Event(desc, date, isDone);
         }
         this.tasks.add(newTask);
+        assert this.tasks.size() == previousSize + 1;
         return newTask;
     }
 
@@ -126,6 +140,8 @@ public class TaskList {
      * @return added task.
      */
     public Task addTimedTask(String type, String desc, LocalDate date, LocalTime time, boolean isDone) {
+        assert desc != null && date != null && time != null;
+        int previousSize = this.tasks.size();
         Task newTask;
         if (type.equals("deadline")) {
             newTask = new Deadline(desc, date, time, isDone);
@@ -133,6 +149,7 @@ public class TaskList {
             newTask = new Event(desc, date, time, isDone);
         }
         this.tasks.add(newTask);
+        assert this.tasks.size() == previousSize + 1;
         return newTask;
     }
 }

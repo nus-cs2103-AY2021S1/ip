@@ -28,6 +28,7 @@ public class Parser {
      * @throws DukeException if there are any date/time parsing issues or unknown commands.
      */
     public static Command parse(String input) throws DukeException {
+        assert input != null;
         String trimmedInput = input.trim();
         String command = trimmedInput.split(" ")[0];
         try {
@@ -47,11 +48,13 @@ public class Parser {
                 return new DeleteCommand(deleteIdx);
             case "todo":
                 taskFormatCheck(command, trimmedInput);
+                assert !trimmedInput.contains("/");
                 String desc = trimmedInput.substring(trimmedInput.indexOf(' ') + 1);
                 return new AddCommand(desc);
             case "deadline":
             case "event":
                 taskFormatCheck(command, trimmedInput);
+                assert trimmedInput.contains("/");
                 String tInfo = trimmedInput.substring(trimmedInput.indexOf(' ') + 1);
                 String tDesc = tInfo.substring(0, tInfo.indexOf('/') - 1);
                 String meta = tInfo.substring(tInfo.indexOf('/') + 4);
@@ -84,6 +87,8 @@ public class Parser {
      * @throws DukeException if there are any formatting issues.
      */
     private static void taskFormatCheck(String type, String input) throws DukeException {
+        assert type != null && input != null;
+        assert type.equals("todo") || type.equals("deadline") || type.equals("event");
         int idxSpace = input.indexOf(' ');
         int idxMeta = input.indexOf('/');
         int infoLength = idxMeta - (idxSpace + 1);
@@ -101,10 +106,10 @@ public class Parser {
         if (type.equals("event") && !info.contains("/at")) {
             throw new DukeException("Oh dear! An event must contain '/at'!");
         }
-        if (type.equals("deadline") && info.substring(idxMeta).length() < 5) {
+        if (type.equals("deadline") && input.substring(idxMeta).length() < 5) {
             throw new DukeException("Oh dear! A deadline must contain a timestamp!");
         }
-        if (type.equals("event") && info.substring(idxMeta).length() < 5) {
+        if (type.equals("event") && input.substring(idxMeta).length() < 5) {
             throw new DukeException("Oh dear! An event must contain a timestamp!");
         }
     }

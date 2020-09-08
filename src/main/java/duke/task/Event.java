@@ -47,10 +47,12 @@ public class Event extends Task {
      */
     @Override
     public Task setDone() {
+        boolean wasDone = this.isDone;
         Task doneTask = this.time.map(
             localTime -> new Event(this.desc, this.date, localTime, this.isDone))
             .orElseGet(() -> new Event(this.desc, this.date, this.isDone));
         doneTask.isDone = true;
+        assert this.isDone == wasDone;
         return doneTask;
     }
 
