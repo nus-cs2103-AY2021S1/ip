@@ -93,6 +93,7 @@ public class Parser {
                                 + command.split(" ")[0]
                                 + " description" + string + "time");
             }
+
             try {
                 String time;
                 String description = content.split(string)[0];
