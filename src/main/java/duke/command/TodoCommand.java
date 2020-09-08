@@ -20,9 +20,14 @@ public class TodoCommand extends Command {
      * @throws InvalidTodoInputException
      */
     public TodoCommand(String input) throws InvalidTodoInputException {
-        if (input.length() == 0) {
+        boolean isInvalidInput = input.length() == 0;
+        boolean isValidInput = ! isInvalidInput;
+
+        if (isInvalidInput) {
             throw new InvalidTodoInputException();
         }
+
+        assert isValidInput;
         this.input = input.startsWith(" ")
                 ? input.substring(1)
                 : input;

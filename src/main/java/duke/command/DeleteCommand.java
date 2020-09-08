@@ -38,9 +38,15 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasklist, Storage storage) throws InvalidDeleteInputException {
         try {
             int num = Integer.parseInt(input.replaceAll("\\s+", ""));
-            if (num > tasklist.getNumOfTask() || num <= 0) {
+
+            boolean isInvalidInput = num > tasklist.getNumOfTask() || num <= 0;
+            boolean isValidInput = !isInvalidInput;
+
+            if (isInvalidInput) {
                 throw new InvalidDeleteInputException();
             }
+
+            assert isValidInput;
             Task task = tasklist.deleteTask(num);
             tasklist.updateData(storage);
             return Ui.showDelete(task, tasklist);

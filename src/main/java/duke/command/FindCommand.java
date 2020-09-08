@@ -19,13 +19,14 @@ public class FindCommand extends Command {
     public FindCommand(String input) throws NullFindInputException {
 
         //Removes all whitespaces and checks if input is empty
-        if (input.replaceAll("\\s+", "").length() == 0) {
+        boolean isInvalidInput = input.replaceAll("\\s+", "").length() == 0;
+        boolean isValidInput = !isInvalidInput;
+        if (isInvalidInput) {
             throw new NullFindInputException();
         }
 
-        this.input = input.startsWith(" ")
-                ? input.substring(1)
-                : input;
+        assert isValidInput;
+        this.input = input.trim();
     }
     @Override
     public boolean isExited() {

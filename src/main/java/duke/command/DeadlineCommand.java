@@ -22,9 +22,12 @@ public class DeadlineCommand extends Command {
      * @throws NullDeadlineInputException
      */
     public DeadlineCommand(String input) throws NullDeadlineInputException {
-        if (input.length() == 0) {
+        boolean isEmptyInput = input.trim().length() == 0;
+        boolean isNotEmptyInput = !isEmptyInput;
+        if (isEmptyInput) {
             throw new NullDeadlineInputException();
         }
+        assert isNotEmptyInput;
         this.input = input;
     }
 
@@ -36,9 +39,17 @@ public class DeadlineCommand extends Command {
      */
     private String setDate(String date) throws InvalidDateTimeException {
         String[] split = date.split("/");
-        if (date.length() != 10 || split.length != 3) {
+
+        boolean isIncorrectLength = date.length() != 10;
+        boolean isIncorrectFormat = split.length != 3;
+        boolean isInvalidDate = isIncorrectLength || isIncorrectFormat;
+        boolean isValidDate = !isInvalidDate;
+
+        if (isInvalidDate) {
             throw new InvalidDateTimeException();
         }
+
+        assert isValidDate;
         String setDate = split[0] + "-" + split[1] + "-" + split[2];
         return setDate;
     }
@@ -50,9 +61,15 @@ public class DeadlineCommand extends Command {
      * @throws InvalidDateTimeException
      */
     private String setTime(String time) throws InvalidDateTimeException {
-        if (time.length() != 4) {
+
+        boolean isIncorrectLength = time.length() != 4;
+        boolean isValidTime = !isIncorrectLength;
+
+        if (isIncorrectLength) {
             throw new InvalidDateTimeException();
         }
+
+        assert isValidTime;
         String setTime = time.substring(0, 2) + ":" + time.substring(2);
         return setTime;
     }
@@ -67,9 +84,14 @@ public class DeadlineCommand extends Command {
     private Deadline createDeadline(String description, String datetime) throws InvalidDateTimeException {
         String[] datetimeArray = datetime.split(" ");
 
-        if (datetimeArray.length != 2) {
+        boolean isInvalidFormat = datetimeArray.length != 2;
+        boolean isValidFormat = !isInvalidFormat;
+
+        if (isInvalidFormat) {
             throw new InvalidDateTimeException();
         }
+
+        assert isValidFormat;
         String date = setDate(datetimeArray[0]);
         String time = setTime(datetimeArray[1]);
         return new Deadline(description, date, time);
@@ -92,9 +114,15 @@ public class DeadlineCommand extends Command {
     public String execute(TaskList tasklist, Storage storage) throws InvalidDeadlineInputException,
             IOException, InvalidDateTimeException {
         String[] deadlineTaskArray = input.split(" /by ");
-        if (deadlineTaskArray.length != 2) {
+
+        boolean isInvalidInput = deadlineTaskArray.length != 2;
+        boolean isValidInput = ! isInvalidInput;
+
+        if (isInvalidInput) {
             throw new InvalidDeadlineInputException();
         }
+
+        assert isValidInput;
         String deadlineDescription = deadlineTaskArray[0];
         String by = deadlineTaskArray[1];
         Deadline deadline = createDeadline(deadlineDescription, by);
