@@ -33,11 +33,13 @@ public class Storage {
         assert f.exists(); //file should exist to keep track of tasks
         try {
             Scanner sc = new Scanner(f);
-            do{
-                String shortFormString = sc.nextLine();
-                String[] shortFormDictionary = shortFormDictionary(shortFormString);
-                ShortCuts.getShortCuts().put(shortFormDictionary[0], shortFormDictionary[1]);
-            }while (sc.hasNextLine());
+            if(sc.hasNextLine()) {
+                do {
+                    String shortFormString = sc.nextLine();
+                    String[] shortFormDictionary = shortFormDictionary(shortFormString);
+                    ShortCuts.getShortCuts().put(shortFormDictionary[0], shortFormDictionary[1]);
+                } while (sc.hasNextLine());
+            }
         }catch (IOException i){
             throw new FileAbsentException(shortFormsFilePath);
         }

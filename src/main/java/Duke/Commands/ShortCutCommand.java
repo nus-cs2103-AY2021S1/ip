@@ -39,13 +39,15 @@ public class ShortCutCommand extends Command{
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             if (isNumberOrDescriptionAbsent()) {
-                throw new ShortCutException(true, false, false, "");
+                throw new ShortCutException(true, false, false, false, "");
             }
 
             String[] splitData = splitDescription(commandDescription);
             if (shortCutPresent(splitData[1])) {
-                throw new ShortCutException(false, false, true, splitData[1]);
-            } else if (!shortCutPresent(splitData[1])) {
+                throw new ShortCutException(false, false, true, false, splitData[1]);
+            }else if(!containsUselessShortCut(splitData[0])){
+                throw new ShortCutException(false, false, false, true, splitData[1]);
+            }else if (!shortCutPresent(splitData[0])) {
                 ShortCuts.addShortCut(splitData[0], splitData[1]);
                 updateShortCutFile(splitData[1], splitData[0], storage);
                 return shortCutMessage();
@@ -79,11 +81,18 @@ public class ShortCutCommand extends Command{
             originalKeyWord = originalKeyWord + input.charAt(i);
         }
         if(!originalOfShortFormPresent || commandDescription.substring(index + 1).length() == 0){
-            throw new ShortCutException(false, true, false, "");
+            throw new ShortCutException(false, true, false, false, "");
         }
         String[] splitData = new String[]{originalKeyWord, commandDescription.substring(index + 1)};
         return splitData;
     }
+
+    /**
+     * returns boolean value of whether input is already present
+     *
+     * @param input short cut added by user
+     * @return true if hashMap contains input and false otherwise.
+     */
     private boolean shortCutPresent(String input) {
         return ShortCuts.getShortCuts().containsKey(input);
     }
@@ -114,5 +123,9 @@ public class ShortCutCommand extends Command{
         }catch (IOException i){
             throw new FileAbsentException(storage.getShortFormsFilePath());
         }
+    }
+
+    private boolean containsUselessShortCut(String originalForm){
+        return ShortCuts.getShortCuts().containsValue(originalForm);
     }
 }

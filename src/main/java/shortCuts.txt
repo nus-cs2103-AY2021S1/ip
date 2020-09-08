@@ -1,1 +1,5 @@
 by bye
+li list
+to todo
+dead deadline
+fi find

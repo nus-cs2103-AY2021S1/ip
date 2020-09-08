@@ -9,6 +9,7 @@ public class ShortCutException extends DukeException {
     private boolean isDescriptionAbsent;
     private boolean isShortCutAbsent;
     private boolean isShortCutAlreadyPresent;
+    private boolean isUselessShortCut;
     private String shortCut;
 
     /**
@@ -17,12 +18,15 @@ public class ShortCutException extends DukeException {
      * @param isDescriptionAbsent true is description is not given by user, false otherwise
      * @param isShortCutAbsent true if short form is not given by user, false otherwise
      * @param isShortCutAlreadyPresent true if short cut is already present
+     * @param isUselessShortCut true if short cut's original value means nothing to Duke
      * @param shortCut shortcut provided by user
      */
-    public ShortCutException(boolean isDescriptionAbsent, boolean isShortCutAbsent, boolean isShortCutAlreadyPresent, String shortCut){
+    public ShortCutException(boolean isDescriptionAbsent, boolean isShortCutAbsent,
+                             boolean isShortCutAlreadyPresent, boolean isUselessShortCut, String shortCut){
         this.isDescriptionAbsent = isDescriptionAbsent;
         this.isShortCutAbsent = isShortCutAbsent;
         this.isShortCutAlreadyPresent = isShortCutAlreadyPresent;
+        this.isUselessShortCut = isUselessShortCut;
         this.shortCut = shortCut;
     }
 
@@ -32,13 +36,15 @@ public class ShortCutException extends DukeException {
      * @return String for the reason this Exception is thrown
      */
     public String toString(){
-        if(isDescriptionAbsent){
+        if(isDescriptionAbsent) {
             return descriptionAbsent();//when description is absent
-        }else if(isShortCutAbsent){
+        }else if(isShortCutAbsent) {
             return shortCutAbsent(); //when short cut is absent
-        }else if(isShortCutAlreadyPresent){
+        }else if(isShortCutAlreadyPresent) {
             return shortCutAlreadyPresent(); //when short cut is already present
-        }else {
+        }else if(isUselessShortCut){
+            return uselessShortCut(); //when short cut has no meaning
+        } else {
             return "default";
         }
     }
@@ -71,4 +77,12 @@ public class ShortCutException extends DukeException {
         return this.shortCut + " is already present as a short form for" + ShortCuts.getShortCuts().get(this.shortCut);
     }
 
+    /**
+     * Describes that short cut has no meaning
+     *
+     * @return String informing user that short cut has no meaning
+     */
+    private String uselessShortCut(){
+        return this.shortCut + " has no meaning";
+    }
 }
