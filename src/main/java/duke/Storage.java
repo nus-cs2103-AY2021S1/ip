@@ -72,6 +72,7 @@ public class Storage {
                     boolean isDone = arr[1].equals("1");
                     boolean isTime;
                     Date date;
+                    assert arr[0].equals("T") || arr[0].equals("D") || arr[0].equals("E");
                     switch (arr[0]) {
                     case "T":
                         tasks.add(new ToDo(arr[2], isDone));
@@ -89,6 +90,7 @@ public class Storage {
                         tasks.add(new Event(arr[2], date, isTime, isDone));
                         break;
                     default:
+                        assert false;
                     }
                 }
             } catch (FileNotFoundException e) {
