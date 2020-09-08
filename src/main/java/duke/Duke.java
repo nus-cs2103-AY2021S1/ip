@@ -20,6 +20,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Starts a new file when the file does not contain any information or
+     * does not exist.
+     */
     public void startNewFile() {
         this.tasks = new TaskList();
         try {
@@ -35,6 +39,7 @@ public class Duke {
 
     /**
      * Returns a response to be displayed.
+     *
      * @param input User input string.
      * @return The response.
      */

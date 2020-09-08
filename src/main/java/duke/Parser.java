@@ -4,6 +4,7 @@ public class Parser {
 
     /**
      * Returns the command object parsed from user input.
+     *
      * @param input User input.
      * @return Command parsed from use input.
      * @throws DukeException If input command type is incorrect.
@@ -16,6 +17,7 @@ public class Parser {
 
     /**
      * Converts user input command to CommandType Enum.
+     *
      * @param input User input of command.
      * @return CommandType Enum.
      * @throws DukeException

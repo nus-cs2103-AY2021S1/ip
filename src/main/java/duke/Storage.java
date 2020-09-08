@@ -17,6 +17,7 @@ public class Storage {
 
     /**
      * Return a list of tasks saved in local storage.
+     *
      * @return List of tasks saved in local storage.
      * @throws DukeException If there is error in the local storage file.
      */
@@ -43,6 +44,7 @@ public class Storage {
 
     /**
      * Creates new storage file for saving the tasks.
+     *
      * @throws DukeException If there is error while creating the local file.
      */
     public void newStorage() throws DukeException {
@@ -57,6 +59,7 @@ public class Storage {
 
     /**
      * Saves the updated task list to local storage.
+     *
      * @param taskList Task list.
      * @throws DukeException If there is error when writing to the local file.
      */
@@ -69,6 +72,7 @@ public class Storage {
 
     /**
      * Initialises the file writer.
+     *
      * @return File Writer to the local storage file.
      * @throws DukeException If there is error when initialising the file.
      */

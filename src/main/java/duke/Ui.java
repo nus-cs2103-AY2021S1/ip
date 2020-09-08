@@ -1,8 +1,8 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.Scanner;
+
+import duke.task.Task;
 
 public class Ui {
 
@@ -12,6 +12,10 @@ public class Ui {
         this.sc = new Scanner(System.in);
     }
 
+    /**
+     * Reads input from the scanner.
+     * @return User input.
+     */
     public String readInputs() {
         String input = sc.nextLine().strip();
         return input;
@@ -85,7 +89,7 @@ public class Ui {
      * @return The text to be displayed.
      */
     public String printBye() {
-         return formatPrint("Bye! Hope to see you again soon! ");
+        return formatPrint("Bye! Hope to see you again soon! ");
     }
 
     /**

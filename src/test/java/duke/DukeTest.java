@@ -1,11 +1,12 @@
 package duke;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeTest {
     @Test
@@ -16,9 +17,9 @@ public class DukeTest {
         tasks.addTask(new Event("meet CS2103 group", "2020-05-25 12:34 13:34"));
         String taskList = tasks.printList();
         String expectedList = "Here are the tasks in your list:\n"
-        + "1. [T][✘] clean my room\n"
-        + "2. [D][✘] do CS2103 (by: May 25 2020)\n"
-        + "3. [E][✘] meet CS2103 group (at: May 25 2020 12:34 to May 25 2020 13:34)";
+                + "1. [T][✘] clean my room\n"
+                + "2. [D][✘] do CS2103 (by: May 25 2020)\n"
+                + "3. [E][✘] meet CS2103 group (at: May 25 2020 12:34 to May 25 2020 13:34)";
         assertEquals(taskList, expectedList);
     }
 
@@ -31,9 +32,9 @@ public class DukeTest {
         tasks.markTaskAsDone(1);
         String taskList = tasks.printList();
         String expectedList = "Here are the tasks in your list:\n"
-        + "1. [T][✓] clean my room\n"
-        + "2. [D][✘] do CS2103 (by: May 25 2020)\n"
-        + "3. [E][✘] meet CS2103 group (at: May 25 2020 12:34 to May 25 2020 13:34)";
+                + "1. [T][✓] clean my room\n"
+                + "2. [D][✘] do CS2103 (by: May 25 2020)\n"
+                + "3. [E][✘] meet CS2103 group (at: May 25 2020 12:34 to May 25 2020 13:34)";
         assertEquals(taskList, expectedList);
     }
 

@@ -1,13 +1,13 @@
 package duke;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
-
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 public class TaskList {
     protected List<Task> taskList;
@@ -16,6 +16,9 @@ public class TaskList {
         taskList = new ArrayList<>();
     }
 
+    /**
+     * Creates a task list with a list of task input in string format.
+     */
     public TaskList(List<String> tasks) throws DukeException {
         taskList = new ArrayList<>();
         generateTaskList(tasks);
@@ -23,6 +26,7 @@ public class TaskList {
 
     /**
      * Returns the number of tasks in the task list.
+     *
      * @return Number of tasks.
      */
     public int getSize() {
@@ -31,6 +35,7 @@ public class TaskList {
 
     /**
      * Adds a task into the task list.
+     *
      * @param task The task to be added.
      * @return The task added to the list.
      */
@@ -41,6 +46,7 @@ public class TaskList {
 
     /**
      * Returns a string of task list in the correct format.
+     *
      * @return String of formatted task list.
      */
     public String printList() {
@@ -58,6 +64,7 @@ public class TaskList {
 
     /**
      * Deletes a task from the list.
+     *
      * @param num Index of the task that the user wants to delete.
      * @return Deleted task.
      */
@@ -69,6 +76,7 @@ public class TaskList {
 
     /**
      * Marks a task as done.
+     *
      * @param idx Index of the task that the user wants to mark as done.
      * @return The task marked as done.
      */
@@ -78,17 +86,24 @@ public class TaskList {
 
     /**
      * Finds the tasks that matches the keyword.
+     *
      * @param keyword Keyword for finding matching tasks.
      * @return List of matching tasks.
      */
     public List<Task> findTasks(String keyword) {
         List<Task> matchingTasks = taskList
                 .stream()
-                .filter(Task -> Task.description.contains(keyword))
+                .filter(Task -> Task.getDescription().contains(keyword))
                 .collect(Collectors.toList());
         return matchingTasks;
     }
 
+    /**
+     * Prints the tasks found by search.
+     *
+     * @param tasks Tasks to be printed.
+     * @return String to be printed.
+     */
     public String printMatchingTasks(List<Task> tasks) {
         String output = "Here are the matching tasks in your list:\n";
         int count = tasks.size();
@@ -104,6 +119,7 @@ public class TaskList {
 
     /**
      * Generates a list of tasks from strings read from file.
+     *
      * @param tasks List of tasks in strings.
      * @throws DukeException If there is error in the input.
      */
@@ -132,6 +148,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Returns the list of task to save to storage.
+     *
+     * @return List of task to save to storage.
+     */
     public String getTaskListForSave() {
         String allTasks = "";
         for (Task task : taskList) {

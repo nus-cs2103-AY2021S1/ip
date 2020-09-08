@@ -1,12 +1,12 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.DukeException;
 
 public class Event extends Task {
     protected LocalDateTime startDateTime;
@@ -14,6 +14,7 @@ public class Event extends Task {
 
     /**
      * Creates an event object.
+     *
      * @param description Description of the event.
      * @param time Time of the event.
      * @throws DukeException If time format is not correct.
@@ -30,6 +31,7 @@ public class Event extends Task {
 
     /**
      * Creates an event object with done/not done status.
+     *
      * @param isDone Whether the event is done.
      * @param description Description of the event.
      * @param time Time of the event.
@@ -44,6 +46,7 @@ public class Event extends Task {
 
     /**
      * Converts string date and time to LocalDateTime.
+     *
      * @param date String date input.
      * @param time String time input.
      * @return Converted LocalDateTime object.
@@ -65,7 +68,7 @@ public class Event extends Task {
         String startTime = startDateTime.format(DateTimeFormatter.ofPattern("HH:mm"));
         String endTime = endDateTime.format(DateTimeFormatter.ofPattern("HH:mm"));
 
-        return "E | " + (isDone ? 1 : 0) + " | " + description + " | "  + startDate + " "
+        return "E | " + (isDone ? 1 : 0) + " | " + description + " | " + startDate + " "
                 + startTime + " " + endTime;
     }
 

@@ -36,6 +36,9 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    /**
+     * Shows greetings in GUI.
+     */
     public void showGreetings() {
         // print greetings
         dialogContainer.getChildren().addAll(
@@ -61,6 +64,9 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Disables text field input from user.
+     */
     public void disableInput() {
         sendButton.setDisable(true);
         userInput.setDisable(true);

@@ -12,6 +12,7 @@ public class Command {
 
     /**
      * Creates a Command object.
+     *
      * @param commandType Type of command given.
      * @param inputs Inputs related to the command given.
      */
@@ -22,12 +23,22 @@ public class Command {
 
     /**
      * Returns whether the use is exiting the program.
+     *
      * @return Whether the user is exiting ths program.
      */
     public boolean isExit() {
         return isExit;
     }
 
+    /**
+     * Executes a command.
+     *
+     * @param ui The text UI of the program.
+     * @param tasks The task list of the program.
+     * @param storage The storage of the program.
+     * @return Text to be displayed in GUI.
+     * @throws DukeException When there is error in reading or executing the command.
+     */
     public String execute(Ui ui, TaskList tasks, Storage storage) throws DukeException {
         switch (commandType) {
         case BYE:

@@ -1,10 +1,10 @@
 package duke.task;
 
-import duke.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+
+import duke.DukeException;
 
 public class Deadline extends Task {
 
@@ -12,6 +12,7 @@ public class Deadline extends Task {
 
     /**
      * Creates a Deadline object.
+     *
      * @param description Description of the deadline.
      * @param date Date of the deadline.
      * @throws DukeException If date format is wrong.
@@ -22,6 +23,7 @@ public class Deadline extends Task {
     }
     /**
      * Creates a Deadline object with done/not done status.
+     *
      * @param isDone Whether the deadline is done.
      * @param description Description of the deadline.
      * @param date Date of the deadline.
@@ -34,6 +36,7 @@ public class Deadline extends Task {
 
     /**
      * Converts string date to LocalDate.
+     *
      * @param date String date input.
      * @return Converted LocalDate object.
      * @throws DukeException If date format is wrong.
