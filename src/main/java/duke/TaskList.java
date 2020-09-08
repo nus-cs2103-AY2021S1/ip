@@ -47,7 +47,7 @@ public class TaskList {
      * Returns the number of Tasks stored in the TaskList.
      * @return The number of elements in the data structure which stores the Tasks.
      */
-    public int numTasks() {
+    public int numOfTasks() {
         return taskList.size();
     }
 
@@ -64,7 +64,7 @@ public class TaskList {
         return output;
     }
     
-    public String find(String keyword) {
+    public String findTask(String keyword) {
         String output = "Here are the matching tasks in your list: \n";
         for (int i = 0; i < taskList.size(); i++) {
             if (taskList.get(i).toString().contains(keyword)) {

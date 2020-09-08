@@ -54,7 +54,7 @@ public class Ui {
     public String printAddTaskConfirmation(Task task, TaskList taskList) {
         return "Got it. I've added this task: \n" 
                 + task 
-                + "\nNow you have " + taskList.numTasks() + " tasks in the list.";
+                + "\nNow you have " + taskList.numOfTasks() + " tasks in the list.";
     }
 
     /**
@@ -66,7 +66,7 @@ public class Ui {
     public String printRemoveTaskConfirmation(Task task, TaskList taskList) {
         return "Noted. I've removed this task: \n"
                 + task 
-                + "\nNow you have " + taskList.numTasks() + " tasks in the list.";
+                + "\nNow you have " + taskList.numOfTasks() + " tasks in the list.";
     }
 
     /**
@@ -97,8 +97,6 @@ public class Ui {
         private Parser parser;
         
         // UI variables
-        
-        
         public Duke() {
             taskList = new TaskList();
             ui = new Ui();
