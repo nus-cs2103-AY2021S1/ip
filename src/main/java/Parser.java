@@ -334,4 +334,46 @@ public class Parser {
                     + "\n                 event, deadline");
         }
     }
+
+    public String getUrgentTasks() {
+        List<Task> tasks = this.getTasks();
+        List<Task> filteredTasks = new ArrayList<>();
+        int size = tasks.size();
+        LocalDate now = LocalDate.now().minusDays(3);
+
+        for (int i = 0; i < size; i++) {
+            Task currentTask = tasks.get(i);
+            if (!(currentTask.getType().equals("T"))
+                    && currentTask.getCompletionStatus() == false
+            //        && now.isBefore(currentTask.getTime())
+            ) {
+
+            }
+        }
+
+        for (int i = 0; i < size; i++) {
+            Task currentTask = tasks.get(i);
+            if (currentTask.getCompletionStatus() == false
+                    && currentTask.getType().equals("T")) {
+                filteredTasks.add(currentTask);
+            }
+        }
+
+        if (filteredTasks.size() < 1) {
+            return "***Reminder:\n"
+                    + "There are no urgent tasks to be completed within 3 days.\n"
+                    + "You can take a break! :)";
+
+        } else {
+            String output = "Here are your tasks to be completed within 3 days:\n";
+            int partialSize = filteredTasks.size();
+            int index = 1;
+            for (int i = 0; i < partialSize; i++) {
+                output = output + "  " + index + "." + filteredTasks.get(i) + "\n";
+                index++;
+            }
+
+            return output;
+        }
+    }
 }

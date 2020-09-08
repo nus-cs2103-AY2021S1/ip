@@ -21,6 +21,10 @@ public class Event extends Task {
         this.formattedTimeDescription = this.timeDescription.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
 
+    public LocalDate getTime() {
+        return timeDescription;
+    }
+
     /**
      * Creates an Event object.
      * It is mainly for file reading.

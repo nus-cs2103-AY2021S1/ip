@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 /**
  * Represents a Task object which is a parent class of:
  * Deadline, Event and Todo.
@@ -5,6 +7,7 @@
 public class Task {
     protected String description;
     protected String type;
+    private LocalDate timeDescription;
     protected boolean isDone;
     protected static final String DEADLINE_TASK = "D";
     protected static final String EVENT_TASK = "E";
@@ -48,6 +51,14 @@ public class Task {
      */
     public String getStatusIcon() {
         return (isDone ? TICK_ICON : CROSS_ICON);
+    }
+
+    /**
+     * Returns a boolean value that describes the completion of the Task object.
+     * @return a boolean value.
+     */
+    public boolean getCompletionStatus() {
+        return isDone;
     }
 
     /**
