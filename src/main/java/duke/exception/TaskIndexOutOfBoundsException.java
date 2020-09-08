@@ -6,25 +6,12 @@ package duke.exception;
  */
 public class TaskIndexOutOfBoundsException extends DukeException {
 
-    /** The index specified by the user */
-    private String index;
-
     /**
      * Creates and initializes an TaskIndexOutOfBoundsException object.
      *
      * @param index The index specified by the user.
      */
     public TaskIndexOutOfBoundsException(String index) {
-        this.index = index;
-    }
-
-    /**
-     * Returns an error message. Informs the user that there is no task with the specified index.
-     *
-     * @return The error message.
-     */
-    @Override
-    public String getMessage() {
-        return super.getMessage() + " There is no task no. " + index;
+        super(" There is no task no. " + index);
     }
 }

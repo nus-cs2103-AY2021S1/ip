@@ -6,8 +6,6 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.UiForGui;
-import duke.exception.EventWrongFormatException;
-import duke.exception.WrongFormatException;
 import duke.task.Event;
 import duke.task.Task;
 
@@ -17,16 +15,20 @@ import duke.task.Task;
  */
 public class AddEventCommand extends AddCommand {
 
-    /** The entire command entered by the user */
-    private String fullCommand;
+    public static final String COMMAND_WORD = "event";
+    public static final String COMMAND_SPLIT_WORD = "/at";
+    private String taskDescription;
+    private String taskLocation;
 
     /**
      * Creates and initializes an AddEventCommand object.
      *
-     * @param fullCommand The entire command entered by the user.
+     * @param taskDescription The task description as entered by the user.
+     * @param taskLocation The task location as entered by the user.
      */
-    public AddEventCommand(String fullCommand) {
-        this.fullCommand = fullCommand;
+    public AddEventCommand(String taskDescription, String taskLocation) {
+        this.taskDescription = taskDescription;
+        this.taskLocation = taskLocation;
     }
 
     /**
@@ -35,39 +37,28 @@ public class AddEventCommand extends AddCommand {
      * @param tasks The list of tasks in the program.
      * @param ui The Ui object being used in the program.
      * @param storage The Storage object being used in the program.
-     * @throws EventWrongFormatException If the add event command is in a wrong format.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws EventWrongFormatException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        Task newTask = new Event(taskDescription, taskLocation);
+        tasks.addTask(newTask);
+        ui.showReplyForAddTask(newTask, tasks);
         try {
-            String[] commandParts = fullCommand.split("/at");
-            Task newTask = new Event(commandParts[0].substring(6).trim(), commandParts[1].trim());
-            tasks.addTask(newTask);
-            ui.showReplyForAddTask(newTask, tasks);
-            try {
-                storage.writeToFile(tasks);
-            } catch (IOException e) {
-                System.err.println(e.getMessage());
-            }
-        } catch (IndexOutOfBoundsException | WrongFormatException e) { // add event command is in a wrong format
-            throw new EventWrongFormatException();
+            storage.writeToFile(tasks);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
         }
     }
 
     @Override
-    public String execute(TaskList tasks, UiForGui uiForGui, Storage storage) throws EventWrongFormatException {
+    public String execute(TaskList tasks, UiForGui uiForGui, Storage storage) {
+        Task newTask = new Event(taskDescription, taskLocation);
+        tasks.addTask(newTask);
         try {
-            String[] commandParts = fullCommand.split("/at");
-            Task newTask = new Event(commandParts[0].substring(6).trim(), commandParts[1].trim());
-            tasks.addTask(newTask);
-            try {
-                storage.writeToFile(tasks);
-            } catch (IOException e) {
-                System.err.println(e.getMessage());
-            }
-            return uiForGui.showReplyForAddTask(newTask, tasks);
-        } catch (IndexOutOfBoundsException | WrongFormatException e) { // add event command is in a wrong format
-            throw new EventWrongFormatException();
+            storage.writeToFile(tasks);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
         }
+        return uiForGui.showReplyForAddTask(newTask, tasks);
     }
 }

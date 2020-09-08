@@ -4,13 +4,15 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-import duke.exception.WrongFormatException;
-
 /**
  * Encapsulates the deadline task type. A deadline task has a description of the task and the date and time of when
  * the task should be completed by.
  */
 public class Deadline extends Task {
+
+    public static final String TASK_TYPE_SYMBOL = "[D]";
+    private static final String TASK_TYPE_NAME = "deadline";
+    private static final String DATE_TIME_FORMAT = "d MMM yyyy @ hh:mma";
 
     /** Date that the task should be completed by */
     protected LocalDate date;
@@ -22,61 +24,29 @@ public class Deadline extends Task {
      * Creates and initializes a deadline task that has not been completed by default.
      *
      * @param description The description of the task.
-     * @param by The date and time that the task should be completed by.
-     * @throws WrongFormatException If no description is provided.
+     * @param deadlineDate The date of the deadline of the task.
+     * @param deadlineDateAndTime The date and time of the deadline of the task.
      */
-    public Deadline(String description, String by) throws WrongFormatException {
-        super(description, "[D]", "deadline", false);
-        String[] dateAndTimeParts = by.split(" ");
-        String byDate = dateAndTimeParts[0];
-        String byTime = dateAndTimeParts[1];
-        this.date = LocalDate.parse(byDate);
-        this.dateAndTime = this.date.atTime(Integer.parseInt(byTime.substring(0, 2)),
-                Integer.parseInt(byTime.substring(2, 4)));
+    public Deadline(String description, LocalDate deadlineDate, LocalDateTime deadlineDateAndTime) {
+        this(description, deadlineDate, deadlineDateAndTime, false);
     }
 
     /**
      * Creates and initializes a deadline task that can be marked as completed.
      *
      * @param description The description of the task.
-     * @param by The date and time that the task should be completed by.
+     * @param deadlineDate The date of the deadline of the task.
+     * @param deadlineDateAndTime The date and time of the deadline of the task.
      * @param isDone Marks whether the task has been completed or not.
-     * @throws WrongFormatException If no description is provided.
      */
-    public Deadline(String description, String by, boolean isDone) throws WrongFormatException {
-        super(description, "[D]", "deadline", isDone);
-        String[] dateAndTimeParts = by.split(" ");
-        String byDate = dateAndTimeParts[0];
-        String byTime = dateAndTimeParts[1];
-        this.date = LocalDate.parse(byDate);
-        this.dateAndTime = this.date.atTime(Integer.parseInt(byTime.substring(0, 2)),
-                Integer.parseInt(byTime.substring(2, 4)));
-    }
-
-    /**
-     * Formats the string that will be written in the save file to represent this particular deadline task.
-     *
-     * @return The string that will be written in the save file to represent this particular deadline task.
-     */
-    @Override
-    public String toStringForMemory() {
-        return super.toStringForMemory() + "|" + dateAndTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
-    }
-
-    /**
-     * Formats the way the deadline task is presented to the user as part of the task list.
-     *
-     * @return The String that represents the deadline task when it is presented to the user as part of the task list.
-     */
-    @Override
-    public String toStringForGui() {
-        return super.toStringForGui() + " (by: " + dateAndTime.format(DateTimeFormatter
-                .ofPattern("d MMM yyyy @ hh:mma")) + ")";
-    }
-
-    @Override
-    public String toStringForCli() {
-        return super.toStringForCli() + " (by: " + dateAndTime.format(DateTimeFormatter
-                .ofPattern("d MMM yyyy @ hh:mma")) + ")";
+    public Deadline(String description, LocalDate deadlineDate, LocalDateTime deadlineDateAndTime, boolean isDone) {
+        super(description,
+                " (by: " + deadlineDateAndTime.format(DateTimeFormatter.ofPattern(DATE_TIME_FORMAT)) + ")",
+                "|" + deadlineDateAndTime.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME),
+                TASK_TYPE_SYMBOL,
+                TASK_TYPE_NAME,
+                isDone);
+        this.date = deadlineDate;
+        this.dateAndTime = deadlineDateAndTime;
     }
 }

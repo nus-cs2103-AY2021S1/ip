@@ -1,20 +1,20 @@
 package duke.task;
 
-import duke.exception.WrongFormatException;
-
 /**
  * Encapsulates the to-do task type. A to-do task only has a description of the task.
  */
 public class ToDo extends Task {
 
+    public static final String TASK_TYPE_SYMBOL = "[T]";
+    private static final String TASK_TYPE_NAME = "todo";
+
     /**
      * Creates and initializes a to-do task that has not been completed by default.
      *
      * @param description The description of the task.
-     * @throws WrongFormatException If no description is provided.
      */
-    public ToDo(String description) throws WrongFormatException {
-        super(description, "[T]", "todo", false);
+    public ToDo(String description) {
+        this(description, false);
     }
 
     /**
@@ -22,9 +22,13 @@ public class ToDo extends Task {
      *
      * @param description The description of the task.
      * @param isDone Marks whether the task has been completed or not.
-     * @throws WrongFormatException If no description is provided.
      */
-    public ToDo(String description, boolean isDone) throws WrongFormatException {
-        super(description, "[T]", "todo", isDone);
+    public ToDo(String description, boolean isDone) {
+        super(description,
+                "",
+                "",
+                TASK_TYPE_SYMBOL,
+                TASK_TYPE_NAME,
+                isDone);
     }
 }

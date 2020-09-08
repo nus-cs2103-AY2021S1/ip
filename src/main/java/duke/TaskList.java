@@ -1,11 +1,9 @@
 package duke;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.exception.WrongFormatException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -15,6 +13,8 @@ import duke.task.ToDo;
  * Stores the user's list of tasks.
  */
 public class TaskList {
+
+    private static final String DONE = Integer.toString(Task.DONE_SYMBOL_MEMORY);
 
     /** The user's list of tasks */
     private List<Task> tasks = new ArrayList<>();
@@ -28,9 +28,8 @@ public class TaskList {
      * Creates and initializes a list of tasks and populates it with tasks specified by the listOfTasks.
      *
      * @param listOfTasks The list of tasks in String format, to populate the task list with.
-     * @throws WrongFormatException If an error is present in the format of a task in the save file.
      */
-    public TaskList(List<String> listOfTasks) throws WrongFormatException {
+    public TaskList(List<String> listOfTasks) {
         initiateTaskList(listOfTasks);
     }
 
@@ -38,22 +37,26 @@ public class TaskList {
      * Populates the task list with tasks specified by the listOfTasks.
      *
      * @param listOfTasks The list of tasks in String format, to populate the task list with.
-     * @throws WrongFormatException If an error is present in the format of a task in the save file.
      */
-    private void initiateTaskList(List<String> listOfTasks) throws WrongFormatException {
+    private void initiateTaskList(List<String> listOfTasks) {
         assert listOfTasks != null : "listOfTasks is null";
-        for (String s : listOfTasks) {
-            String[] splitLine = s.split("\\|");
-            switch (splitLine[0]) {
-            case "[T]": // To-Do
-                tasks.add(new ToDo(splitLine[2], !splitLine[1].equals("0")));
+        for (String taskString : listOfTasks) {
+            String[] taskStringParts = taskString.split("\\|");
+            String taskTypeSymbol = taskStringParts[0];
+            String doneSymbol = taskStringParts[1];
+            String taskDescription = taskStringParts[2];
+            switch (taskTypeSymbol) {
+            case ToDo.TASK_TYPE_SYMBOL:
+                tasks.add(new ToDo(taskDescription, doneSymbol.equals(DONE)));
                 break;
-            case "[E]": // duke.task.Event
-                tasks.add(new Event(splitLine[2], splitLine[3], !splitLine[1].equals("0")));
+            case Event.TASK_TYPE_SYMBOL:
+                String eventLocation = taskStringParts[3];
+                tasks.add(new Event(taskDescription, eventLocation, doneSymbol.equals(DONE)));
                 break;
-            case "[D]": // duke.task.Deadline
-                tasks.add(new Deadline(splitLine[2], LocalDateTime.parse(splitLine[3]).format(DateTimeFormatter
-                        .ofPattern("yyyy-MM-dd HHmm")), !splitLine[1].equals("0")));
+            case Deadline.TASK_TYPE_SYMBOL:
+                String deadline = taskStringParts[3];
+                tasks.add(new Deadline(taskDescription, LocalDateTime.parse(deadline).toLocalDate(),
+                                LocalDateTime.parse(deadline), doneSymbol.equals(DONE)));
                 break;
             default:
                 assert false : "Error in last save. The save file may have been tampered with and some tasks may have "

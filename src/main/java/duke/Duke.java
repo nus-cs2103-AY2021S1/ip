@@ -6,10 +6,7 @@ import java.util.concurrent.TimeUnit;
 import duke.command.Command;
 import duke.command.UnknownCommand;
 import duke.exception.DukeException;
-import duke.exception.WrongFormatException;
 import javafx.application.Platform;
-
-
 
 /**
  * Represents the Duke chat bot. Duke can keep a record of user's inputs as a list of tasks, mark them as completed
@@ -43,7 +40,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-        } catch (FileNotFoundException | WrongFormatException e) {
+        } catch (FileNotFoundException e) {
             ui.showError(e);
             tasks = new TaskList();
         }
@@ -54,10 +51,10 @@ public class Duke {
      */
     public Duke() {
         uiForGui = new UiForGui();
-        storage = new Storage("./data/duke.txt");
+        storage = new Storage(FILE_PATH);
         try {
             tasks = new TaskList(storage.load());
-        } catch (FileNotFoundException | WrongFormatException e) {
+        } catch (FileNotFoundException e) {
             uiForGui.showError(e);
             tasks = new TaskList();
         }
@@ -98,13 +95,17 @@ public class Duke {
     public Response getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            if (c.isExit()) {
-                Thread newThread = new Thread(() -> exitProgram());
-                newThread.start();
-            }
+            exitIfIsExit(c);
             return new Response(c.execute(tasks, uiForGui, storage), c);
         } catch (DukeException e) {
             return new Response(uiForGui.showError(e), new UnknownCommand());
+        }
+    }
+
+    private void exitIfIsExit(Command command) {
+        if (command.isExit()) {
+            Thread newThread = new Thread(() -> exitProgram());
+            newThread.start();
         }
     }
 

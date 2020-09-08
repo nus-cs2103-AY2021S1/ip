@@ -1,14 +1,13 @@
 package duke.command;
 
 import java.io.IOException;
-import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 import duke.UiForGui;
-import duke.exception.DeadlineWrongFormatException;
-import duke.exception.WrongFormatException;
 import duke.task.Deadline;
 import duke.task.Task;
 
@@ -18,16 +17,23 @@ import duke.task.Task;
  */
 public class AddDeadlineCommand extends AddCommand {
 
-    /** The entire command entered by the user */
-    private String fullCommand;
+    public static final String COMMAND_WORD = "deadline";
+    public static final String COMMAND_SPLIT_WORD = "/by";
+    private String taskDescription;
+    private LocalDate deadlineDate;
+    private LocalDateTime deadlineDateAndTime;
 
     /**
      * Creates and initializes an AddDeadlineCommand object.
      *
-     * @param fullCommand The entire command entered by the user.
+     * @param taskDescription The task description as entered by the user.
+     * @param deadlineDate The date of the deadline.
+     * @param deadlineDateAndTime The date and time of the deadline.
      */
-    public AddDeadlineCommand(String fullCommand) {
-        this.fullCommand = fullCommand;
+    public AddDeadlineCommand(String taskDescription, LocalDate deadlineDate, LocalDateTime deadlineDateAndTime) {
+        this.taskDescription = taskDescription;
+        this.deadlineDate = deadlineDate;
+        this.deadlineDateAndTime = deadlineDateAndTime;
     }
 
     /**
@@ -36,41 +42,28 @@ public class AddDeadlineCommand extends AddCommand {
      * @param tasks The list of tasks in the program.
      * @param ui The Ui object being used in the program.
      * @param storage The Storage object being used in the program.
-     * @throws DeadlineWrongFormatException If the add deadline command is in a wrong format.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DeadlineWrongFormatException {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        Task newTask = new Deadline(taskDescription, deadlineDate, deadlineDateAndTime);
+        tasks.addTask(newTask);
+        ui.showReplyForAddTask(newTask, tasks);
         try {
-            String[] commandParts = fullCommand.split("/by");
-            Task newTask = new Deadline(commandParts[0].substring(9).trim(), commandParts[1].trim());
-            tasks.addTask(newTask);
-            ui.showReplyForAddTask(newTask, tasks);
-            try {
-                storage.writeToFile(tasks);
-            } catch (IOException e) {
-                System.err.println(e.getMessage());
-            }
-        } catch (IndexOutOfBoundsException | WrongFormatException | DateTimeException | NumberFormatException e) {
-            // add deadline command is in a wrong format
-            throw new DeadlineWrongFormatException();
+            storage.writeToFile(tasks);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
         }
     }
 
     @Override
-    public String execute(TaskList tasks, UiForGui uiForGui, Storage storage) throws DeadlineWrongFormatException {
+    public String execute(TaskList tasks, UiForGui uiForGui, Storage storage) {
+        Task newTask = new Deadline(taskDescription, deadlineDate, deadlineDateAndTime);
+        tasks.addTask(newTask);
         try {
-            String[] commandParts = fullCommand.split("/by");
-            Task newTask = new Deadline(commandParts[0].substring(9).trim(), commandParts[1].trim());
-            tasks.addTask(newTask);
-            try {
-                storage.writeToFile(tasks);
-            } catch (IOException e) {
-                System.err.println(e.getMessage());
-            }
-            return uiForGui.showReplyForAddTask(newTask, tasks);
-        } catch (IndexOutOfBoundsException | WrongFormatException | DateTimeException | NumberFormatException e) {
-            // add deadline command is in a wrong format
-            throw new DeadlineWrongFormatException();
+            storage.writeToFile(tasks);
+        } catch (IOException e) {
+            System.err.println(e.getMessage());
         }
+        return uiForGui.showReplyForAddTask(newTask, tasks);
     }
 }
