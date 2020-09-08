@@ -100,7 +100,13 @@ public class Ui {
      */
     public static ArrayList<String> getTaskList(TaskList tasks, Date date, String keyWord) {
         assert tasks == null: "TaskList should not be null";
-        ArrayList<String> lst = tasks.toString(date, keyWord);
+        ArrayList<String> lst = new ArrayList<>();
+        int idx = 1;
+        for (Task task : tasks.getTasks()) {
+            if (task.fulfilCriteria(date, keyWord)) {
+                lst.add((idx++) + ". " + task.toString());
+            }
+        }
         lst.add(0, "Here are the " + ((keyWord == null) ? "" : "matching ") + "tasks in your list" + ((date == null)
                 ? "" : " that occur on " + formatDate(date)) + ":");
         return lst;

@@ -31,9 +31,8 @@ public abstract class Task {
     public void markAsDone() throws TaskException {
         if (isDone) {
             throw new TaskException(taskType, "done status", TaskExceptionType.DONE);
-        } else {
-            isDone = true;
         }
+        isDone = true;
     }
 
     /**
@@ -58,8 +57,9 @@ public abstract class Task {
      * @return boolean indicates whether Task passed the criteria.
      */
     public boolean fulfilCriteria(Date date, String keyWord) {
-        return (date == null || isOccuringOn(date)) && (keyWord == null
-                || description.toLowerCase().contains(keyWord.toLowerCase()));
+        boolean fulfilDateCriteria = date == null || isOccuringOn(date);
+        boolean fulfilKeywordCriteria = keyWord == null || description.toLowerCase().contains(keyWord.toLowerCase());
+        return fulfilDateCriteria && fulfilKeywordCriteria;
     }
 
     @Override

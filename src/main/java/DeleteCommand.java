@@ -25,4 +25,8 @@ public class DeleteCommand extends Command {
         storage.saveList(tasks);
         return Ui.getDeletedTask(tasks.removeTask(idx), tasks);
     }
+
+    public static String toInputString() {
+        return "delete";
+    }
 }

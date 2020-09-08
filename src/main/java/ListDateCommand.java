@@ -1,11 +1,17 @@
 import java.util.ArrayList;
 import java.util.Date;
 
-/**
- * ListCommand is a request to display all current tasks.
- */
+public class ListDateCommand extends ListCommand {
+    private final Date on;
 
-public class ListCommand extends Command {
+    /**
+     * Creates a ListCommand.
+     *
+     * @param on      Date that tasks to be displayed occur on.
+     */
+    public ListDateCommand(Date on) {
+        this.on = on;
+    }
 
     /**
      * Displays all current tasks with their TaskType, done status and description.
@@ -16,10 +22,10 @@ public class ListCommand extends Command {
      */
     @Override
     public ArrayList<String> execute(TaskList tasks, Storage storage) {
-        return Ui.getTaskList(tasks, null, null);
+        return Ui.getTaskList(tasks, on, null);
     }
 
     public static String toInputString() {
-        return "list";
+        return "tasks due on";
     }
 }

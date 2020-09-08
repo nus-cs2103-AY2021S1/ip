@@ -1,5 +1,4 @@
 import java.util.ArrayList;
-import java.util.Date;
 
 /**
  * TaskList contains all the tasks.
@@ -56,22 +55,4 @@ public class TaskList {
         return tasks.size();
     }
 
-    /**
-     * Overloaded toString method that returns list of indexed tasks according to provided date and keyWord.
-     *
-     * @param date Date to filter tasks by, if null all Tasks will pass.
-     * @param keyWord Keyword to filter tasks by, if null all Tasks will pass.
-     * @return String representing list of tasks that fulfil date and keyword criteria.
-     */
-    public ArrayList<String> toString(Date date, String keyWord) {
-        ArrayList<String> lst = new ArrayList<>();
-        int i = 1;
-        for (Task task : tasks) {
-            assert task == null: "Task should not be null";
-            if (task.fulfilCriteria(date, keyWord)) {
-                lst.add((i++) + ". " + task.toString());
-            }
-        }
-        return lst;
-    }
 }
