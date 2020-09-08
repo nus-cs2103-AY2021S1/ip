@@ -13,6 +13,10 @@ import java.util.Scanner;
 public class Storage {
     private static String filePath;
     private static List<Task> savedTasks;
+    private static final char TICK = '\u2713';
+    private static final char CROSS = '\u2718';
+    private static final char CONVERTED_TICK = '1';
+    private static final char CONVERTED_CROSS = '0';
 
     /**
      * Creates a Storage object.
@@ -60,13 +64,13 @@ public class Storage {
             isDone = true;
         }
 
-        if (type.equals("T")) {
+        if (type.equals(Task.TODO_TASK)) {
             int end = task.length();
             description = task.substring(7, end);
             Todo newTodo = new Todo(description, isDone);
             Storage.savedTasks.add(newTodo);
 
-        } else if (type.equals("E")) {
+        } else if (type.equals(Task.EVENT_TASK)) {
             int start = task.indexOf("(");
             int end = task.lastIndexOf(")");
             timeDescription = task.substring(start + 5, end);
@@ -74,7 +78,7 @@ public class Storage {
             Event newEvent = new Event(description, timeDescription, isDone);
             Storage.savedTasks.add(newEvent);
 
-        } else if (type.equals("D")) {
+        } else if (type.equals(Task.DEADLINE_TASK)) {
             int start = task.indexOf("(");
             int end = task.lastIndexOf(")");
             timeDescription = task.substring(start + 5, end);
@@ -89,7 +93,7 @@ public class Storage {
      *
      * @return a list of Task objects.
      */
-    public static List<Task> getTaskList() {
+    public static List<Task> getSavedTasks() {
         return Storage.savedTasks;
     }
 
@@ -109,8 +113,8 @@ public class Storage {
         for (int i = 0; i < totalTasks; i++) {
             Task writeTask = tasksToWrite.get(i);
             String taskString = writeTask.toString();
-            String replacement1 = taskString.replace('\u2713', '1');
-            String replacement2 = replacement1.replace('\u2718', '0');
+            String replacement1 = taskString.replace(TICK, CONVERTED_TICK);
+            String replacement2 = replacement1.replace(CROSS, CONVERTED_CROSS);
             fw.write(replacement2 + "\n");
         }
 

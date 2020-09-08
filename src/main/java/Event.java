@@ -16,7 +16,7 @@ public class Event extends Task {
      * @param timeDescription is the LocalDate input representing date.
      */
     public Event(String description, LocalDate timeDescription) {
-        super(description, "E");
+        super(description, Task.EVENT_TASK);
         this.timeDescription = timeDescription;
         this.formattedTimeDescription = this.timeDescription.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
@@ -34,8 +34,17 @@ public class Event extends Task {
      * @param isDone states if the Event object is completed or not.
      */
     public Event(String description, String formattedTimeDescription, boolean isDone) {
-        super(description, "E", isDone);
+        super(description, Task.EVENT_TASK, isDone);
         this.formattedTimeDescription = formattedTimeDescription;
+    }
+
+    /**
+     * Returns the String description of the completion time of Event object.
+     *
+     * @return Task description.
+     */
+    public String getFormattedTime() {
+        return this.formattedTimeDescription;
     }
 
     /**
@@ -46,6 +55,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[" + getType() + "]" + "[" + getStatusIcon() + "] " + description
-                + "(at: " + this.formattedTimeDescription + ")";
+                + "(at: " + getFormattedTime() + ")";
     }
 }

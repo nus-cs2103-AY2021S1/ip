@@ -9,7 +9,12 @@ public class Task {
     protected String type;
     private LocalDate timeDescription;
     protected boolean isDone;
-    protected static final String DEADLINE = "D";
+    protected static final String DEADLINE_TASK = "D";
+    protected static final String EVENT_TASK = "E";
+    protected static final String TODO_TASK = "T";
+
+    private final String TICK_ICON = "\u2713";
+    private final String CROSS_ICON = "\u2718";
 
     /**
      * Creates a Task object.
@@ -45,7 +50,7 @@ public class Task {
      * @return a tick or a cross.
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? TICK_ICON : CROSS_ICON);
     }
 
     /**
@@ -89,6 +94,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + getType() + "]" + "[" + getStatusIcon() + "] " + description;
+        return "[" + getType() + "]" + "[" + getStatusIcon() + "] " + getDescription();
     }
 }

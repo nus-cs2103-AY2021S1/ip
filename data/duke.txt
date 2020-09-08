@@ -1,2 +1,3 @@
-[T][0] watch anime
+[T][1] watch anime
 [E][1] play badminton (at: Aug 19 2020)
+[D][0] CS2103T Week 5 ip (by: Sep 9 2020)
