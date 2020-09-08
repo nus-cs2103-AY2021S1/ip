@@ -126,9 +126,9 @@ public class TaskManager {
     public String toString() {
         StringBuilder formattedList =
                 new StringBuilder(ResourceHandler.getString("taskManager.listTasksPrefix") + "\n");
-        for (int i = 0; i < tasks.size(); i++) {
-            formattedList.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
-        }
+        IntStream.range(0, tasks.size())
+                .mapToObj(i -> String.format("%d. %s\n", i + 1, tasks.get(i)))
+                .forEach(formattedList::append);
         return formattedList.toString();
     }
 }

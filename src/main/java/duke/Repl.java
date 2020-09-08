@@ -45,7 +45,7 @@ public class Repl {
      * @return a {@code DukeResponse}.
      */
     public static DukeResponse getResponse(String input) {
-        String firstToken = input.split(" ")[0];
+        String firstToken = input.trim().split(" ")[0];
         DukeResponse dukeResponse;
         try {
             Command command = Command.valueOf(firstToken.toUpperCase());

@@ -13,7 +13,6 @@ import java.util.function.Function;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-import com.google.gson.TypeAdapterFactory;
 
 /**
  * A {@code HashMap} wrapper that syncs the state of the map to a file whenever it's updated.
@@ -33,11 +32,10 @@ public class PersistentMap<K, V> implements Map<K, V> {
      *
      * @param filePath the path of the file to read from and write to.
      * @param mapType the type of the list.
-     * @param typeAdapterFactory custom type adapter factory to handle polymorphism.
      */
-    public PersistentMap(String filePath, Type mapType, TypeAdapterFactory typeAdapterFactory) {
+    public PersistentMap(String filePath, Type mapType) {
         storageManager = new StorageManager(filePath);
-        gson = new GsonBuilder().registerTypeAdapterFactory(typeAdapterFactory).setPrettyPrinting().create();
+        gson = new GsonBuilder().setPrettyPrinting().create();
         this.mapType = mapType;
         map = readStateFromFile();
     }
@@ -521,7 +519,7 @@ public class PersistentMap<K, V> implements Map<K, V> {
      */
     @Override
     public V putIfAbsent(K key, V value) {
-        V previousValue = putIfAbsent(key, value);
+        V previousValue = map.putIfAbsent(key, value);
         syncStateToFile();
         return previousValue;
     }

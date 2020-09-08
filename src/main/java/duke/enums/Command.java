@@ -31,7 +31,7 @@ public enum Command {
          */
         @Override
         public void validate(String input) throws DukeException {
-            String regex = "^(?i)alias\\s+\\S+\\s+\\S+\\s*$|^alias\\s+-l$$";
+            String regex = "^(?i)alias\\s+\\S+\\s+\\S+\\s*$|^(?i)alias\\s+-l$";
             if (!Pattern.matches(regex, input)) {
                 String template = String.format("%s\n%s", ResourceHandler.getString("exception.invalidArgs"),
                         ResourceHandler.getString("command.aliasFormat"));
@@ -48,8 +48,13 @@ public enum Command {
          */
         @Override
         public DukeResponse execute(String input) {
+            String regex = "^(?i)alias\\s+-l$";
+            if (Pattern.matches(regex, input)) {
+                return new DukeResponse(aliasManager.toString());
+            }
+
             String lineWithoutCommand = input.replaceFirst("^alias", "");
-            String[] args = lineWithoutCommand.split("\\s+", 2);
+            String[] args = lineWithoutCommand.trim().split("\\s+", 2);
             String commandString = args[0].trim();
             String alias = args[1].trim();
             Command command = Command.valueOf(commandString.toUpperCase());
