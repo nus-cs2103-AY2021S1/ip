@@ -12,6 +12,7 @@ public class DoneCommand extends Command{
         super();
         this.taskIndex = taskIndex;
     }
+
     /**
      * Execute the command
      * @param inputTasks the list of tasks used

@@ -15,7 +15,7 @@ public class Parser {
         String[] commandline = input.split(" ");
         Command command;
         int taskIndex;
-        switch (commandline[0]){
+        switch (commandline[0]) {
             case "list":
                 command = new ListCommand();
                 break;
@@ -30,14 +30,14 @@ public class Parser {
             case "todo":
                 if(input.length() == 4){
                     throw new DukeException("☹ OOPS!!! You cannot leave descriptions of a todo empty");
-                }else {
+                } else {
                     command = new AddCommand(new Todo(input.substring(5)));
                 }
                 break;
             case "deadline":
                 if(input.length() == 8){
                     throw new DukeException("☹ OOPS!!! You cannot leave descriptions of a deadline empty");
-                }else {
+                } else {
                     command = new AddCommand(new Deadline(input.substring(9, input.indexOf('/') - 1),
                             LocalDate.parse(input.substring(input.indexOf('/') + 4))));
                 }
@@ -45,9 +45,16 @@ public class Parser {
             case "event":
                 if(input.length() == 5){
                     throw new DukeException("☹ OOPS!!! You cannot leave descriptions of an event empty");
-                }else {
+                } else {
                     command = new AddCommand(new Event(input.substring(6, input.indexOf('/') - 1),
                             LocalDate.parse(input.substring(input.indexOf('/') + 4))));
+                }
+                break;
+            case "find":
+                if(input.length() == 4){
+                    throw new DukeException("☹ OOPS!!! You cannot find empty task");
+                } else {
+                    command = new FindCommand(input.substring(5));
                 }
                 break;
             default:
