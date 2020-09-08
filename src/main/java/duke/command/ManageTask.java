@@ -1,15 +1,18 @@
 package duke.command;
 
+import duke.io.Layout;
 import duke.task.DukeException;
 import duke.task.Task;
-import duke.task.TaskList;
 
 import java.util.ArrayList;
 
 public class ManageTask extends Command {
+    private Action type; 
+    private String inputIndex;
     
-    public ManageTask(ArrayList<Task> tasks) {
-        super(tasks);
+    public ManageTask(Action type, String inputIndex) {
+        this.type = type;
+        this.inputIndex = inputIndex;
     }
 
     public enum Action {
@@ -20,13 +23,14 @@ public class ManageTask extends Command {
     /**
      * Modify specific tasks in the task list.
      * Actions include deleting and marking a task as done.
-     *
-     * @param type Type of action to execute: delete or mark done.
-     * @param i Index of the task in the task list.
+     * @param tasks Existing task list.
+     * @param layout Format the return output.
+     * @return String to return to the user.
      */
-    public String manageTask(Action type, String i) {
+    @Override
+    public String execute(ArrayList<Task> tasks, Layout layout) {
         try {
-            int index = Integer.parseInt(i);
+            int index = Integer.parseInt(inputIndex);
             assert index > 1;
             Task task = tasks.get(index - 1);
             switch (type) {
@@ -40,13 +44,12 @@ public class ManageTask extends Command {
                 return "Should never reach here";
             }
         } catch (IndexOutOfBoundsException e) {
-            DukeException d = new DukeException("Task " + i + " cannot be found");
+            DukeException d = new DukeException("Task " + inputIndex + " cannot be found");
             return layout.print(d.getMessage());
         } catch (NumberFormatException e) {
-            DukeException d = new DukeException(i + " is not an integer");
+            DukeException d = new DukeException(inputIndex + " is not an integer");
             return layout.print(d.getMessage());
         }
-
     }
     
 }

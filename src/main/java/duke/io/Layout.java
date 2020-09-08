@@ -5,7 +5,7 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 /**
- * Represents a printer. 
+ * Formats the input into an output to be returned. 
  */
 public class Layout {
 

@@ -52,19 +52,6 @@ public class Task {
     }
 
     /**
-     * Return specified deadline or event time in a different format 
-     * if valid date and time are given.
-     * For ease of readability.
-     * 
-     * @param date Date to format.
-     * @return ArrayList of LocalDate object and String that represents 12 hour time.
-     */
-    protected ArrayList<Object> dateAndTimeFormatter(String date) {
-        Parser parser = new Parser();
-        return parser.dateAndTimeFormatter(date);
-    }
-
-    /**
      * Return true or false - whether task contains input word.
      * @param word Input filter word.
      * @return boolean.

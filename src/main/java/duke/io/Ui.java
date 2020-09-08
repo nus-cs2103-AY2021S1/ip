@@ -2,8 +2,6 @@ package duke.io;
 
 import duke.task.TaskList;
 
-import java.util.Scanner;
-
 /**
  * Manage interaction with the user.
  */
@@ -25,19 +23,5 @@ public class Ui {
         String greeting = "Hello! I'm" + "\n" + logo + "\n\t" + "What can I do for you?";
         return layout.print(greeting);
     }
-
-//    /**
-//     * Listen to user input.
-//     * Execute associated action for each command.
-//     */
-//    public void listen() {
-//        greet();
-//        
-//        Scanner sc = new Scanner(System.in);
-//        while(sc.hasNextLine()) {
-//            String [] arr = sc.nextLine().split(" ");
-//
-//            taskList.readCommands(sc, arr);
-//        }
-//    }
+    
 }

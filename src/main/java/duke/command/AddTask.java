@@ -6,39 +6,40 @@ import duke.task.Deadline;
 import duke.task.DukeException;
 import duke.task.Event;
 import duke.task.Task;
-import duke.task.TaskList;
 import duke.task.Todo;
 
 import java.util.ArrayList;
 
 public class AddTask extends Command {
 
-    protected String [] arr;
+    Type type;
+    protected String [] input;
     
-    public AddTask(ArrayList<Task> tasks) {
-        super(tasks);
+    public AddTask(Type type, String [] input) {
+        this.type = type;
+        this.input = input;
     }
-
 
     public enum Type {
         TODO,
         DEADLINE,
         EVENT
     };
-    
+
     /**
-     * Add specific tasks to task list.
-     *
-     * @param type Type of task.
-     * @param arr Array of words from the tasks's description and (if any) date.
+     * Add specific task to the task list.
+     * @param tasks Existing task list.
+     * @param layout Format the return output.
+     * @return String to return to the user.
      */
-    public String addTask(Type type, String [] arr) {
+    @Override
+    public String execute(ArrayList<Task> tasks, Layout layout) {
         Task task;
 
         try {
-            String date = parser.getDateAndDescription(arr)[0];
-            String description = parser.getDateAndDescription(arr)[1];
-            if (description.equals("") || arr.length == 1) {
+            String date = Parser.getDateAndDescription(input)[0];
+            String description = Parser.getDateAndDescription(input)[1];
+            if (description.equals("") || input.length == 1) {
                 throw new DukeException("The description of a " + type + " cannot be empty");
             }
 
@@ -68,5 +69,4 @@ public class AddTask extends Command {
             return layout.print(e.getMessage());
         }
     }
-    
 }

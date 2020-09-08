@@ -1,6 +1,7 @@
 package duke.task;
 
 import duke.command.AddTask;
+import duke.command.Command;
 import duke.command.Exit;
 import duke.command.FindTask;
 import duke.command.FindTaskByDate;
@@ -19,56 +20,52 @@ import java.util.Scanner;
 public class TaskList {
     private final ArrayList<Task> tasks;
     private final Storage storage;
-    private final Layout layout;
     
     public TaskList(ArrayList<Task> tasks, Storage storage) {
         this.tasks = tasks;
         this.storage = storage;
-        this.layout = new Layout();
     }
     
     /**
-     * Read commands by user and execute associated action.
+     * Read commands by user and return associated command.
      *
      * @param arr Array of words in user input.
      */
-    public String readCommands(String[] arr) {
+    public Command getCommands(String[] arr) throws DukeException {
         try {
             switch (arr[0]) {
             case "bye":
-                return new Exit(tasks).closeDuke(storage);
+                return new Exit(storage);
             case "list":
-                return new ShowTasks(tasks).showTasks();
+                return new ShowTasks();
             case "done":
-                ManageTask doneTaskCommand = new ManageTask(tasks);
-                return doneTaskCommand.manageTask(ManageTask.Action.DONE, arr[1]);
+                return new ManageTask(ManageTask.Action.DONE, arr[1]);
             case "delete":
-                ManageTask deleteTaskCommand = new ManageTask(tasks);
-                return deleteTaskCommand.manageTask(ManageTask.Action.DELETE, arr[1]);
+                return new ManageTask(ManageTask.Action.DELETE, arr[1]);
             case "help":
-                return new Help(tasks).getCommands();
+                return new Help();
             case "deadline":
-                AddTask addDeadlineCommand = new AddTask(tasks);
-                return addDeadlineCommand.addTask(AddTask.Type.DEADLINE, arr);
+                return new AddTask(AddTask.Type.DEADLINE, arr);
             case "event":
-                AddTask addEventCommand = new AddTask(tasks);
-                return addEventCommand.addTask(AddTask.Type.EVENT, arr);
+                return new AddTask(AddTask.Type.EVENT, arr);
             case "todo":
-                AddTask addTodoCommand = new AddTask(tasks);
-                return addTodoCommand.addTask(AddTask.Type.TODO, arr);
+                return new AddTask(AddTask.Type.TODO, arr);
             case "find":
-                return new FindTask(tasks).findTask(arr);
+                return new FindTask(arr);
             case "date":
-                return new FindTaskByDate(tasks).findTaskByDate(arr);
+                return new FindTaskByDate(arr);
             default:
                 DukeException e = new DukeException("I do not understand your command");
-                return layout.print(e.getMessage());
-
+                throw e;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             DukeException d = new DukeException("Please specify task number");
-            return layout.print(d.getMessage());
+            throw d;
         }
+    }
+    
+    public ArrayList<Task> getTasks() {
+        return tasks;
     }
 
 }
