@@ -17,6 +17,10 @@ public class Deadline extends Task {
     public static final String SPLITTER = " /by ";
     /** Symbol representing the type of Task this is */
     public static final String SYMBOL = "D";
+    /** Number of separate fields in a deadline save summary */
+    private static final int NUM_FIELDS_SUMMARY = 4;
+    /** Number of separate fields required to create a deadline task */
+    private static final int NUM_FIELDS_DESCRIPTION = 2;
 
     /** Deadline of the task */
     private LocalDateTime deadline;
@@ -30,9 +34,9 @@ public class Deadline extends Task {
     public Deadline(String taskDescription) throws DukeException {
         super(taskDescription.split(SPLITTER)[0]);
         String[] details = taskDescription.split(SPLITTER);
-        if (details.length == 1) {
+        if (details.length < NUM_FIELDS_DESCRIPTION) {
             throw new DukeException("Please specify a deadline!");
-        } else if (details.length > 2) {
+        } else if (details.length > NUM_FIELDS_DESCRIPTION) {
             throw new DukeException("Please follow the format of \"{task} /by {deadline}\"");
         }
 
@@ -91,7 +95,7 @@ public class Deadline extends Task {
      */
     public static Deadline reconstructFromSummary(String summary) throws InvalidSaveException {
         String[] details = summary.split("\\|");
-        if (details.length != 4) {
+        if (details.length != NUM_FIELDS_SUMMARY) {
             throw new InvalidSaveException("Wrong number of details!");
         } else if (!(details[1].equals("1") || details[1].equals("0"))) {
             throw new InvalidSaveException("Invalid completion status! Ensure that it is either 0 or 1");

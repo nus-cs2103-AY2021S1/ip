@@ -15,6 +15,8 @@ public class DialogBox extends HBox {
 
     /** default radius of user's image in the dialog box */
     private static final double IMAGE_RADIUS = 35.0;
+    /** default spacing between dialog and text box */
+    private static final double SPACING = 10;
 
     /** text to be contained in the text box */
     private TextBox text;
@@ -31,7 +33,7 @@ public class DialogBox extends HBox {
         getChildren().addAll(this.text, displayPicture);
 
         setAlignment(Pos.TOP_RIGHT);
-        setSpacing(10.0);
+        setSpacing(SPACING);
     }
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
