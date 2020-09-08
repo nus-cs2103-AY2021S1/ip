@@ -72,7 +72,8 @@ public class TaskList {
                 index++;
             }
         }
-        assert (index >= 0): "Invalid number of tasks";
+
+        assert (index >= 0) : "Invalid number of tasks";
         return index;
     }
 
@@ -85,12 +86,13 @@ public class TaskList {
     protected ArrayList<Task> findTask(String keyWord) {
         ArrayList<Task> foundTasks = new ArrayList<>();
         foundTasks = this.taskList.stream().filter(task -> task.description.equals(keyWord))
-                                            .collect(Collectors.toCollection(ArrayList::new));
+                .collect(Collectors.toCollection(ArrayList::new));
         return foundTasks;
     }
 
     /**
      * Retrieve a tasklist with only events and deadlines.
+     *
      * @return ArrayList containing only events and deadlines.
      */
     protected ArrayList<Task> filterTask() {
@@ -100,6 +102,7 @@ public class TaskList {
 
     /**
      * Sorts tasks in tasklist in chronological order.
+     *
      * @return ArrayList of tasks sorted in chronological order.
      */
     protected ArrayList<Task> sortTask() {
@@ -119,29 +122,29 @@ public class TaskList {
 
     /**
      * Retrieves task to be updated.
+     *
      * @param taskNumber index of the updating tasks.
      * @return the task to be updated.
      */
     protected Task getTaskToUpdate(int taskNumber) {
-        assert (taskNumber >= 1): "invalid task number";
+        assert (taskNumber >= 1) : "invalid task number";
         return this.taskList.get(taskNumber - 1);
     }
 
     /**
      * Returns the updated version of a task.
+     *
      * @param detailToUpdate string containing what to update.
      * @return new updated task.
      * @throws DukeException
      */
     protected Task getUpdatedTask(String detailToUpdate) throws DukeException {
         try {
-            Task updatingTask = null;
-            for (Task task: taskList) {
-                if (task.isBeingUpdated) {
-                    updatingTask = task;
-                }
-            }
-            String[] updateDetails = detailToUpdate.split(" ");
+            Task updatingTask = this.taskList.stream()
+                    .filter(task -> task.isBeingUpdated)
+                    .findFirst()
+                    .get();
+            String[] updateDetails = detailToUpdate.split(" ", 2);
             if (updateDetails[0].equals("date")) {
                 LocalDate newDate = LocalDate.parse(updateDetails[1]);
                 if (updatingTask instanceof Deadline) {
@@ -152,8 +155,8 @@ public class TaskList {
             } else if (updateDetails[0].equals("desc")) {
                 String newDescription = updateDetails[1];
                 if (updatingTask instanceof Deadline) {
-                    return new Deadline(newDescription, ((Deadline) updatingTask).getTaskDeadline() );
-                } else if (updatingTask instanceof Event){
+                    return new Deadline(newDescription, ((Deadline) updatingTask).getTaskDeadline());
+                } else if (updatingTask instanceof Event) {
                     return new Event(newDescription, ((Event) updatingTask).getTaskDeadline());
                 } else {
                     return new Todo(newDescription);
@@ -161,6 +164,7 @@ public class TaskList {
             } else {
                 throw new InvalidCommandException();
             }
+
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidCommandException();
         }
@@ -168,13 +172,12 @@ public class TaskList {
 
     /**
      * Updates the tasklist with the updated task.
+     *
      * @param updatedTask the new updated task.
      */
     protected void updateTask(Task updatedTask) {
-        for (int i = 0; i < taskList.size(); i++) {
-            if (taskList.get(i).isBeingUpdated) {
-                taskList.set(i, updatedTask);
-            }
-        }
+        this.taskList = this.taskList.stream()
+                .map(task -> task.isBeingUpdated ? updatedTask : task)
+                .collect(Collectors.toCollection(ArrayList::new));
     }
 }

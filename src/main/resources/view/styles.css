@@ -1,0 +1,25 @@
+
+.scroll-bar {
+    -fx-background-image: url("/images/pixelDreams.jpg");
+    -fx-background-size: 150% 150%
+    -fx-background-position: bottom center;
+    -fx-background: transparent;
+}
+
+.user-input {
+    -fx-background-color: peachpuff;
+    -fx-text-fill: black;
+    -fx-font-size: 13;
+    -fx-font-family: "Comic Sans MS", cursive, sans-serif;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0.0, 0.0);
+    -fx-size
+}
+
+.chat-bubble {
+    -fx-spacing: 5.0;
+    -fx-background-color: oldlace;
+    -fx-background-radius: 15;
+    -fx-border-width: 10.0;
+    -fx-border-color: thistle;
+    -fx-border-radius: 10.0;
+}

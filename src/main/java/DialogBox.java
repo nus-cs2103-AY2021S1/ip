@@ -11,6 +11,9 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+
+import javax.swing.plaf.ColorUIResource;
 
 /**
  * An example of a custom control using FXML.
@@ -32,7 +35,7 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        dialog.setTextFill(Color.web("#000000"));
         dialog.setText(text);
         displayPicture.setImage(img);
     }
