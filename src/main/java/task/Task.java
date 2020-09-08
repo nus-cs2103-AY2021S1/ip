@@ -34,15 +34,20 @@ public class Task {
         this.isCompleted = true;
     }
 
+    /**
+     * Marks the current task as uncompleted by changing its boolean attribute isCompleted.
+     */
+    public void markAsUncompleted() {
+        this.isCompleted = false;
+    }
+
     @Override
     public String toString() {
         String task = "[";
         if (isCompleted) {
             task += "done";
-            // task += "\u2713";
         } else {
             task += "not done";
-            // task += "\u274C";
         }
         task += "] " + taskName;
         return task;
