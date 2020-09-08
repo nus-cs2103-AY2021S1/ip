@@ -46,6 +46,16 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns date of deadline.
+     * @return Date of deadline as a String.
+     */
+    @Override
+    public String getDate() {
+        return this.dateAndTime.format(
+                DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+
+    /**
      * Returns a string representation of a Deadline task.
      * @return String representation of a Deadline task.
      */

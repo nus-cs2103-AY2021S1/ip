@@ -46,6 +46,16 @@ public class Event extends Task {
     }
 
     /**
+     * Returns date of event.
+     * @return Date of event as a String.
+     */
+    @Override
+    public String getDate() {
+        return this.dateAndTime.format(
+                DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+    }
+
+    /**
      * Returns string representation of an event.
      * @return String representation of an event.
      */

@@ -1,5 +1,8 @@
 package duke;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.stream.Collectors;
 
@@ -40,6 +43,28 @@ public class TaskList {
         findings = tasks.stream().filter(x -> x.description
                 .contains(keyword)).collect(Collectors.toCollection(ArrayList::new));
         return findings;
+    }
+
+    /**
+     * Returns an ArrayList of tasks in schedule.
+     * @param userInput User input as string.
+     * @return Arraylist of tasks in schedule.
+     */
+    public ArrayList<Task> findScheduledTasks(String userInput) throws DukeException {
+        try {
+            ArrayList<Task> scheduledTasks;
+            String dateAsString = userInput.substring(9);
+            LocalDate dateOfScheduledTask = LocalDate.parse(dateAsString,
+                    DateTimeFormatter.ofPattern("dd/MM/yyyy"));
+            scheduledTasks = tasks.stream().filter(x -> x.getDate().equals(dateAsString)).collect(
+                    Collectors.toCollection(ArrayList::new));
+            return scheduledTasks;
+        } catch (StringIndexOutOfBoundsException ex) {
+            throw new DukeException("Scheduled date cannot be empty! :(");
+        } catch (DateTimeParseException ex) {
+            throw new DukeException("You have keyed in an invalid format for date!\n"
+                    + "valid format: dd/mm/yyyy");
+        }
     }
 
     /**

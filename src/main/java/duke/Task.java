@@ -1,5 +1,7 @@
 package duke;
 
+import java.time.LocalDate;
+
 /**
  * Represents a task.
  */
@@ -59,6 +61,14 @@ public class Task {
      * @return Date and time as a string.
      */
     public String getTime() {
+        return "";
+    }
+
+    /**
+     * Returns date of task.
+     * @return Date of task.
+     */
+    public String getDate() {
         return "";
     }
 

@@ -64,6 +64,24 @@ public class Ui {
     }
 
     /**
+     * Returns scheduled tasks.
+     * @param scheduledTasks TaskList containing scheduled tasks.
+     * @return Scheduled Tasks.
+     */
+    public String displayScheduledTasks(ArrayList<Task> scheduledTasks) {
+        if (scheduledTasks.isEmpty()) {
+            return "There are no tasks scheduled for this date! >_<";
+        } else {
+            StringBuilder list = new StringBuilder();
+            list.append("Here are the tasks scheduled for this date:\n");
+            IntStream.range(0, scheduledTasks.size()).forEach(i ->
+                    list.append(String.format("%d. %s\n", i + 1, scheduledTasks
+                    .get(i))));
+            return list.toString();
+        }
+    }
+
+    /**
      * Returns task to be deleted and displayed text when deleted.
      * @param userInput User input.
      * @param taskList User's tasks.

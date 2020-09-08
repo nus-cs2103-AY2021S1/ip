@@ -52,6 +52,8 @@ public class Parser {
             return new DeleteCommand(userInput);
         case FIND:
             return new FindCommand(userInput);
+        case SCHEDULE:
+            return new ScheduleCommand(userInput);
         default:
             throw new DukeException(
                     "You have keyed in an invalid command!\n"

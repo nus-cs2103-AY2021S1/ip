@@ -3,7 +3,6 @@ package duke;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
-import java.util.regex.PatternSyntaxException;
 
 /**
  * Represents an add command for a task.
@@ -115,7 +114,7 @@ public class AddCommand extends Command {
                 tasks.addTask(event);
                 storage.writeToFile(tasks.getTasks());
                 return ui.displayAddEvent(event, tasks);
-            } catch (PatternSyntaxException | ArrayIndexOutOfBoundsException ex) {
+            } catch (ArrayIndexOutOfBoundsException ex) {
                 throw new DukeException("You have keyed in an "
                         + "invalid input for 'event'!");
             } catch (DateTimeParseException | IOException ex) {
