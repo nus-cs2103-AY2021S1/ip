@@ -15,7 +15,6 @@ public class Ui {
      */
     public static String greet() {
         String message = "Hello! I'm Dobby.\n" + (new HelpCommand()).getAllCommands();
-        reply(message);
         return message;
     }
 

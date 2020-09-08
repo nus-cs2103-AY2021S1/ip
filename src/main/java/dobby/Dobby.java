@@ -3,7 +3,6 @@ package dobby;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Scanner;
 
 /**
  * Main class which begins the running of the chat bot
@@ -16,29 +15,6 @@ public class Dobby {
     private boolean isInitialized = false;
 
     public Dobby() {
-    }
-
-    /**
-     * Takes in user input as long as user gives and terminated when user
-     * enter bye
-     */
-    public void run() {
-        ui.greet();
-
-        Scanner scanner = new Scanner(System.in);
-
-        while (true) {
-            String text = ui.getInput();
-            try {
-                ui.reply(parser.getMessage(text));
-            } catch (DobbyException e) { // prints error message
-                ui.reply(e.getMessage());
-            }
-            if (text.equals("bye")) { // terminates program after bye command
-                storage.rewriteFile();
-                System.exit(0);
-            }
-        }
     }
 
     /**
@@ -77,6 +53,9 @@ public class Dobby {
         }
         try {
             response = this.parser.getMessage(input);
+            if (input.equalsIgnoreCase("bye")) {
+                storage.rewriteFile();
+            }
         } catch (DobbyException e) {
             response = e.getMessage();
         }
@@ -90,6 +69,6 @@ public class Dobby {
     public static void main(String[] args) {
         Dobby dobby = new Dobby();
         dobby.initialize();
-        dobby.run();
+        dobby.ui.greet();
     }
 }
