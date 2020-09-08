@@ -126,14 +126,21 @@ public class Parser {
             return giveStringList();
         } else {
             String[] words = line.split("\\s+");
-            if (words[0].equals("done")) {
-                return giveStringDone(line, path);
-            } else if (words[0].equals("delete")) {
-                return giveStringDelete(line, path);
-            } else if (words[0].equals("find")) {
-                return giveStringFind(words, line, path);
-            } else {
-                return giveStringClassify(line, path);
+            switch (words[0]) {
+                case "done":
+                    return giveStringDone(line, path);
+                case "delete":
+                    return giveStringDelete(line, path);
+                case "find":
+                    return giveStringFind(words, line, path);
+                case "update":
+                    return giveStringUpdate(words, line, path);
+                case "updateTime":
+                    return giveStringUpdateTime(words, line, path);
+                case "updateDesc":
+                    return giveStringUpdateDesc(words, line, path);
+                default:
+                    return giveStringClassify(line, path);
             }
         }
     }
@@ -183,26 +190,22 @@ public class Parser {
     }
 
     public String giveStringFind(String[] words, String line, Path path) {
-        if (words.length > 1) {
-            String keyword = line.substring(5);
-            TaskList matches = findMatches(tasks, keyword);
-            String string = "Here are the matching tasks in your list:" + "\n";
-            int counter = 1;
-            for (Task task : matches.getList()) {
-                if (counter == tasks.size()) {
-                    string += counter + "." + task.toString();
-                } else {
-                    string += counter + "." + task.toString() + "\n";
-                    counter++;
-                }
+        String keyword = line.substring(5);
+        TaskList matches = findMatches(tasks, keyword);
+        String string = "Here are the matching tasks in your list:" + "\n";
+        int counter = 1;
+        for (Task task : matches.getList()) {
+            if (counter == tasks.size()) {
+                string += counter + "." + task.toString();
+            } else {
+                string += counter + "." + task.toString() + "\n";
+                counter++;
             }
-            if (counter == 1) {
-                return "There are no matching tasks in your list :(";
-            }
-            return string;
-        } else {
-            return "OOPS!! Missing keyword to find!";
         }
+        if (counter == 1) {
+            return "There are no matching tasks in your list :(";
+        }
+        return string;
     }
 
     public String giveStringClassify(String line, Path path) {
@@ -220,6 +223,84 @@ public class Parser {
         }
     }
 
+    public String giveStringUpdate(String[] words, String line, Path path) {
+        try {
+            int index = findIndex(line, tasks.size());
+            Task current = tasks.get(index);
+            String newline = buildString(words);
+            Task updated = classifyTasks(newline);
+            tasks.update(index, updated);
+            Storage.updateFile(tasks, path);
+            return current + "\n" + " updated to " + "\n" + updated;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
+    public String giveStringUpdateTime(String[] words, String line, Path path) {
+        try {
+            int index = findIndex(line, tasks.size());
+            Task current = tasks.get(index);
+            String newline = buildString(words);
+            Task updated = updateTime(current, newline);
+            tasks.update(index, updated);
+            Storage.updateFile(tasks, path);
+            return current + "\n" + " updated to \n" + updated;
+        } catch (DukeException e) {
+            return  e.getMessage();
+        }
+    }
+
+    public String giveStringUpdateDesc(String[] words, String line, Path path) {
+        try {
+            int index = findIndex(line, tasks.size());
+            Task current = tasks.get(index);
+            String newline = buildString(words);
+            Task updated = updateDesc(current, newline);
+            tasks.update(index, updated);
+            Storage.updateFile(tasks, path);
+            return current + "\n" + " updated to \n" + updated;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
+    public String buildString(String[] words) {
+        String newline = "";
+        for (int i = 2; i < words.length; i++) {
+            if (i == words.length - 1) {
+                newline += words[i];
+            } else {
+                newline += words[i] + " ";
+            }
+        }
+        return newline;
+    }
+
+    public Task updateTime(Task task, String line) throws DukeException {
+        if (task instanceof ToDo) {
+            throw new DukeException("OOPS! Todo has no time parameter to update!");
+        } else if (task instanceof Event) {
+            return new Event(task.desc, line);
+        } else if (task instanceof Deadline) {
+            return new Deadline(task.desc, line);
+        } else {
+            throw new DukeException("OOPS! That's an invalid task! Something might have went wrong!");
+        }
+    }
+
+    public Task updateDesc(Task task, String line) throws DukeException {
+        if (task instanceof ToDo) {
+            return new ToDo(line);
+        } else if (task instanceof Event) {
+            return new Event(line, ((Event) task).at);
+        } else if (task instanceof Deadline) {
+            return new Deadline(line, ((Deadline) task).by);
+        } else {
+            throw new DukeException("OOPS! That's an invalid task! Something might have went wrong!");
+        }
+    }
+
     /**
      * Returns the index of task to be deleted/completed if possible.
      *
@@ -232,7 +313,7 @@ public class Parser {
         assert numTask > -1 : "completeDelete function was passed with negative numTask value";
         String[] words = str.split("\\s+");
         int len = words.length;
-        if (len == 2) {
+        if (len > 2) {
             String num = words[1];
             boolean result = num.matches(".*\\d.*");
             if (result) {

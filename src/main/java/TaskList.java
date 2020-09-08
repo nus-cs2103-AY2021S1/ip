@@ -47,6 +47,11 @@ public class TaskList {
         this.list.remove(index);
     }
 
+    public void update(int index, Task updated) {
+        this.list.remove(index);
+        this.list.add(updated);
+    }
+
     public ArrayList<Task> getList() {
         return this.list;
     }
