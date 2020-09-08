@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 
 /**
- * <h1>duke.Duke!</h1>
+ * <h1>Duke!</h1>
  * The duke.Duke program implements an application that
  * helps you keep track of your tasks.
  *

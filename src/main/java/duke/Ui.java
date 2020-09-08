@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * <h>duke.Ui</h>
+ * <h>Ui</h>
  * Deals with interactions with the user.
  */
 public class Ui {
