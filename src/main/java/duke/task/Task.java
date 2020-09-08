@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 /**
  * Implements task objects.
  *
@@ -58,4 +60,29 @@ public class Task {
     public String getDescription() {
         return description;
     }
+
+    /**
+     * Changes task description.
+     *
+     * @param description Description to be saved.
+     */
+    public void changeDescription(String description) {
+        this.description = description;
+    }
+
+    /**
+     * Changes task progress mark.
+     *
+     * @param isDone Progress indicator to be saved.
+     */
+    public void changeIsDone(boolean isDone) {
+        this.isDone = isDone;
+    }
+
+    /**
+     * Changes time description.
+     *
+     * @param time Time to be saved.
+     */
+    public void changeTime(LocalDate time) {}
 }
