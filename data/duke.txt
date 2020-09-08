@@ -1,2 +1,2 @@
-D | ✓ | damn  | 2020-10-01
-T | ✓ | add games
+T | ✓ | play dote | low
+D | ✘ | CS2100 assignment  | 2020-09-20 | high

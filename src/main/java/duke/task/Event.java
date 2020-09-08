@@ -8,8 +8,9 @@ public class Event extends Task {
     private LocalDate eventTime;
     private LocalDateTime time;
 
-    public Event(String description, String time, boolean hasTime, boolean isDone) {
-        super(description, isDone);
+    public Event(
+            String description, String time, boolean hasTime, boolean isDone, String priority) {
+        super(description, isDone, priority);
         if (!hasTime) {
             this.eventTime = LocalDate.parse(time);
         } else {
@@ -21,7 +22,7 @@ public class Event extends Task {
     @Override
     public String getStorageString() {
         return "E | " + this.getStatusIcon() + " | " + this.description
-            + " | " + this.time + "\n";
+            + " | " + this.time + " | " + this.priority.toString() + "\n";
     }
 
     @Override
@@ -37,6 +38,7 @@ public class Event extends Task {
 
         }
         return "[E][" + this.getStatusIcon() + "] "
-                + this.description + " (at: " + timeFormat + ")";
+                + this.description + " (at: " + timeFormat + ")"
+                + " (Priority: " + this.priority.toString() + ")";
     }
 }

@@ -86,10 +86,10 @@ public class Ui {
      * @param tasks The task list of the user.
      * @return The message notifying the user of the current task list.
      */
-    private String taskListModify(String message, Task task, TaskList taskList) {
+    private String taskListModify(String message, Task task, TaskList tasks) {
         assert task != null : "task does not exist";
-        assert taskList != null : "task list does not exist";
-        String newTaskListLength = "Now you have " + taskList.getSize() + " items in the list";
+        assert tasks != null : "task list does not exist";
+        String newTaskListLength = "Now you have " + tasks.getSize() + " items in the list";
         String taskDescription = indentMessage(task.toString());
         String[] strings = {message, taskDescription, newTaskListLength};
         String finalMessage = buildMessage(strings);
