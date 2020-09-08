@@ -137,8 +137,8 @@ public class Parser {
                 throw new InadequateCommandException(type, "time");
             }
 
-            String description = content.substring(0, timeIdx);
-            String time = content.substring(timeIdx + 5);
+            String description = content.substring(0, timeIdx).trim();
+            String time = content.substring(timeIdx + 5).trim();
 
             if (time.split("\\s+").length == 0) {
                 throw new InadequateCommandException(type, "time");

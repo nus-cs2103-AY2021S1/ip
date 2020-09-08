@@ -27,8 +27,8 @@ public class Event extends Task {
         isInDateFormat = false;
         int idx = eventTime.indexOf(" to ");
         if (idx != -1) {
-            Optional<LocalDate> optStart = DateParser.parse(eventTime.substring(0, idx));
-            Optional<LocalDate> optEnd = DateParser.parse(eventTime.substring(idx + 4));
+            Optional<LocalDate> optStart = DateParser.parse(eventTime.substring(0, idx).trim());
+            Optional<LocalDate> optEnd = DateParser.parse(eventTime.substring(idx + 4).trim());
             if (optStart.isPresent() && optEnd.isPresent()) {
                 startTime = optStart.get();
                 endTime = optEnd.get();
