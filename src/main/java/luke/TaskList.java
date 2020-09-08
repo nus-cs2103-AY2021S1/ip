@@ -1,9 +1,5 @@
 package luke;
 
-import luke.exception.DeleteIndexOutofboundsException;
-import luke.exception.DoneIndexOutofboundsException;
-import luke.exception.InvalidDeleteException;
-import luke.exception.InvalidDoneException;
 import luke.task.Task;
 
 import java.util.ArrayList;
@@ -52,20 +48,20 @@ public class TaskList {
      *
      * @param input destination file
      */
-    public void completeTask(String input) throws InvalidDoneException, DoneIndexOutofboundsException {
-        if (input.equals("done") || input.equals("done ")) {
-            throw new InvalidDoneException("\n\tThe index of done cannot be empty.\n\tPlease make sure you follow the correct format.");
-        }
-        String numbering = input.replaceAll("\\D+", ""); //extract only the digits from the input
-        int index = Integer.parseInt(numbering) - 1;
-        if (index < 0 || index >= this.tasks.size()) {
-            throw new DoneIndexOutofboundsException("\n\tYou have typed in an invalid number.\n\tPlease check your list again.");
-        } else {
-            Task done = this.tasks.get(index);
-            done.markAsDone();
-            System.out.printf("Luke:\n\tThe following task has successfully been marked as done!\n\t\t%s\nYou:\n", done);
-        }
-    }
+//    public void completeTask(String input) throws InvalidDoneException, DoneIndexOutofboundsException {
+//        if (input.equals("done") || input.equals("done ")) {
+//            throw new InvalidDoneException("\n\tThe index of done cannot be empty.\n\tPlease make sure you follow the correct format.");
+//        }
+//        String numbering = input.replaceAll("\\D+", ""); //extract only the digits from the input
+//        int index = Integer.parseInt(numbering) - 1;
+//        if (index < 0 || index >= this.tasks.size()) {
+//            throw new DoneIndexOutofboundsException("\n\tYou have typed in an invalid number.\n\tPlease check your list again.");
+//        } else {
+//            Task done = this.tasks.get(index);
+//            done.markAsDone();
+//            System.out.printf("Luke:\n\tThe following task has successfully been marked as done!\n\t\t%s\nYou:\n", done);
+//        }
+//    }
 
     public Task deleteTask(int taskNumber) {
         int idx = taskNumber - 1;
