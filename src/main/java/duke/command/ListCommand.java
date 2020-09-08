@@ -1,6 +1,13 @@
 package duke.command;
 
-import duke.*;
+import duke.Ui;
+import duke.TaskList;
+import duke.CommandType;
+import duke.InputParser;
+import duke.Task;
+import duke.TaskFinder;
+import duke.DukeException;
+import duke.ExceptionType;
 
 import java.util.ArrayList;
 
