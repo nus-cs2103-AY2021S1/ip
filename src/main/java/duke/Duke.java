@@ -1,5 +1,6 @@
 package duke;
 
+import duke.command.AddCommand;
 import duke.command.ByeCommand;
 import duke.command.HelpCommand;
 
@@ -36,7 +37,7 @@ public class Duke {
 
         Task task = new Task("");
         String[] inputSplit = new String[] {};
-        String description, response = "";
+        String response = "";
 
         CommandType command = inputParser.parseInput(input);
 
@@ -45,30 +46,24 @@ public class Duke {
             response += new HelpCommand().getResponse();
             break;
         case TODO:
-            description = input.substring(4);
-            task = new ToDo(description);
-            userTasks.addTask(task);
-            storage.saveToFile(userTasks.getTaskList());
-            response += ui.taskAddedMessage(task, userTasks.getTaskListSize());
+            String description = input.substring(4);
+            response += new AddCommand(new ToDo(description))
+                    .execute(userTasks, storage);
             break;
         case DEADLINE:
             inputSplit = input.split(" /by ");
             String by = inputSplit[1];
             description = inputSplit[0].substring(8);
-            task = new Deadline(description, by);
-            userTasks.addTask(task);
-            storage.saveToFile(userTasks.getTaskList());
-            response += ui.taskAddedMessage(task, userTasks.getTaskListSize());
+            response += new AddCommand(new Deadline(description, by))
+                    .execute(userTasks, storage);
             break;
         case EVENT:
             inputSplit = input.split(" /at ");
             String at = inputSplit[1].split(" ")[0];
             String timeRange = inputSplit[1].split(" ")[1];
             description = inputSplit[0].substring(5);
-            task = new Event(description, at, timeRange);
-            userTasks.addTask(task);
-            storage.saveToFile(userTasks.getTaskList());
-            response += ui.taskAddedMessage(task, userTasks.getTaskListSize());
+            response += new AddCommand(new Event(description, at, timeRange))
+                    .execute(userTasks, storage);
             break;
         case LIST_ALL:
             response += ui.allTasksToString(userTasks.getTaskList());
