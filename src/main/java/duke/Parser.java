@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * <h>duke.Parser</h>
+ * <h>Parser</h>
  * Deals with making sense of the user command.
  */
 public class Parser {
