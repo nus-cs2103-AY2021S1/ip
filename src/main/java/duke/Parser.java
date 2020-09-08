@@ -14,9 +14,7 @@ public class Parser {
     public static Command parse(String query) throws DukeException {
         String[] queryArr = query.split(" ", 2);
 
-        // String command = processArr[0];
-        // if command is not list/bye: String input = processArr[1];
-
+        assert !queryArr[0].equals(""): "No query available";
         try {
             switch (queryArr[0]) { // command
             case "list":
