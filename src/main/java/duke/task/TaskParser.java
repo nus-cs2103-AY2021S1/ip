@@ -35,8 +35,11 @@ public class TaskParser {
      */
     public static Task parse(String taskDescription) throws DukeException {
         String[] details = taskDescription.split(" ", 2);
-        if (details.length == 1 && VALID_TASK_TYPES.contains(details[0])) {
-            throw new DukeException("The description of a " + details[0] + " cannot be empty.");
+        if (!VALID_TASK_TYPES.contains(details[0])) {
+            throw new DukeException(details[0] + " is not a valid type of command!");
+        }
+        if (details.length == 1 || details[1].isBlank()) {
+            throw new DukeException("The description of a " + details[0] + " task cannot be empty.");
         }
         Task addedTask;
         switch (details[0]) {

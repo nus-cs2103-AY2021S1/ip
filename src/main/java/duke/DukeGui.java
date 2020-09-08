@@ -117,9 +117,12 @@ public class DukeGui extends Application implements Ui {
      */
     private void handleUserInput() {
         String text = userInput.getText();
+        userInput.clear();
+        if (text.isBlank()) {
+            return;
+        }
         registerResponse(text);
         dialogContainer.getChildren().add(DialogBox.getUserDialog(text, userImage));
-        userInput.clear();
     }
 
     /**

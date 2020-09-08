@@ -26,7 +26,7 @@ public class CommandParser {
      * @throws DukeException if the user input given is invalid, with the reason provided.
      */
     public static Command parse(String userInput) throws DukeException {
-        String firstWord = userInput.split(" ")[0];
+        String firstWord = userInput.split(" ", 2)[0];
         switch (firstWord) {
         case INDICATOR_CLOSING:
             return ExitCommand.create();
