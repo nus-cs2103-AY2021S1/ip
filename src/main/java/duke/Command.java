@@ -18,6 +18,7 @@ public class Command {
     protected Integer index;
     protected String description;
     protected LocalDate date;
+    protected Integer hours;
 
     /**
      * Creates an invalid command.
@@ -37,6 +38,7 @@ public class Command {
         index = null;
         description = null;
         date = null;
+        hours = null;
     }
 
     /**
@@ -51,6 +53,7 @@ public class Command {
         this.index = index;
         description = null;
         date = null;
+        hours = null;
     }
 
     /**
@@ -60,11 +63,27 @@ public class Command {
      * @param description the description of the task
      */
     public Command(TaskType taskType, String description) {
-        assert taskType == TaskType.TODO || taskType == TaskType.FIND : "taskType not supported for this constructor";
+        assert taskType == TaskType.FIND : "taskType not supported for this constructor";
         this.taskType = taskType;
         index = null;
         this.description = description;
         date = null;
+        hours = null;
+    }
+
+    /**
+     * Creates a Command representing a task of either a DEADLINE or EVENT.
+     *
+     * @param taskType    the type of task
+     * @param description the description of the task
+     * @param hours       the duration of the task
+     */
+    public Command(TaskType taskType, String description, Integer hours) {
+        assert taskType == TaskType.TODO : "taskType not supported for this constructor";
+        this.taskType = taskType;
+        index = null;
+        this.description = description;
+        this.hours = hours;
     }
 
     /**
@@ -81,6 +100,7 @@ public class Command {
         index = null;
         this.description = description;
         this.date = date;
+        hours = null;
     }
 
     /**
@@ -149,7 +169,7 @@ public class Command {
                 print = "Great! I've marked this task as done:\n " + doneTask;
                 break;
             case TODO:
-                print = addToList(list, new Todo(description));
+                print = addToList(list, new Todo(description, hours));
                 break;
             case DEADLINE:
                 print = addToList(list, new Deadline(description, date));

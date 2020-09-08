@@ -14,10 +14,10 @@ public class CommandTest {
     @Test
     public void addToList_simpleTodo_success() {
         TaskList taskListExpected = new TaskList();
-        taskListExpected.add(new Todo("read book"));
+        taskListExpected.add(new Todo("read book", 2));
 
         TaskList taskListActual = new TaskList();
-        Command command = new Command(TaskType.TODO, "read book");
+        Command command = new Command(TaskType.TODO, "read book", 2);
         command.execute(taskListActual);
 
         assertEquals(taskListExpected, taskListActual);

@@ -32,13 +32,18 @@ public class Parser {
             }
             int index = Integer.parseInt(splitInput[1]);
             return new Command(taskType, index);
-        case TODO:
-            // Fallthrough
         case FIND:
             if (input.length() <= 5 || input.split(" ").length < 2) {
                 throw new IllegalArgumentException("The description of this TaskType cannot be empty.");
             }
             return new Command(taskType, input.substring(5));
+        case TODO:
+            int indexOfTakes = input.indexOf(" /takes ");
+            if (splitInput.length < 2) {
+                throw new IllegalArgumentException("The description of this kind of task cannot be empty.");
+            }
+            int hours = Integer.parseInt(input.substring(indexOfTakes + 8).split(" ")[0]);
+            return new Command(taskType, input.substring(splitInput[0].length() + 1, indexOfTakes), hours);
         case DEADLINE:
             // Fallthrough
         case EVENT:
