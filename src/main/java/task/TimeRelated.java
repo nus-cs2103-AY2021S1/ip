@@ -1,5 +1,12 @@
 package task;
 
+/**
+ * Contracts date and time getters.
+ *
+ * <p>The 'TimeRelated' supports operators, supported include: </p>
+ *
+ * <p> (i) Getters to date and time input as String </p>
+ */
 public interface TimeRelated {
 
     /**
