@@ -64,6 +64,9 @@ public class Duke {
         System.setErr(new PrintStream(guiError));
     }
 
+    /**
+     * Reverts the input and output streams to the standard system ones.
+     */
     public void resetGuiStreams() {
         System.setOut(originalOutput);
         System.setErr(originalError);

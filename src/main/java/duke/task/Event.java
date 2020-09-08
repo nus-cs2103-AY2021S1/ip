@@ -6,7 +6,6 @@ package duke.task;
  * Inherits from Task.
  */
 public class Event extends Task {
-    protected final String at;
 
     /**
      * Initializes with a description and the time of event.
@@ -16,7 +15,8 @@ public class Event extends Task {
      */
     public Event(String desc, String at) {
         super(desc);
-        this.at = at;
+        this.type = TaskType.EVENT;
+        this.time = at;
     }
 
     /**
@@ -26,7 +26,7 @@ public class Event extends Task {
      */
     @Override
     public String printSaveFormat() {
-        return "event " + super.printSaveFormat() + " /at " + at;
+        return "event " + super.printSaveFormat() + " /at " + time;
     }
 
     /**
@@ -36,6 +36,18 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        return "[E]" + super.toString() + " (at: " + time + ")";
+    }
+
+    /**
+     * Subroutine for deep-copying an event
+     *
+     * @param t Event task to be copied.
+     * @return Deep copy of the event task given.
+     */
+    public static Event deepCopyEvent(Task t) {
+        Event eventCopy = new Event(t.description, t.time);
+        eventCopy.status = t.status;
+        return eventCopy;
     }
 }

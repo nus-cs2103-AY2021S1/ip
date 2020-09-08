@@ -49,8 +49,10 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         if (input.equals("bye")) {
+            // Delay code by James_D adapted from:
+            // https://stackoverflow.com/questions/27334455/how-to-close-a-stage-after-a-certain-amount-of-time-javafx
             Stage stage = (Stage) scrollPane.getScene().getWindow();
-            PauseTransition delay = new PauseTransition(Duration.seconds(2));
+            PauseTransition delay = new PauseTransition(Duration.seconds(1.5));
             delay.setOnFinished(event -> stage.close());
             delay.play();
         }
@@ -62,6 +64,9 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
+    /**
+     *  Shows the greeting message as the first message given by Duke.
+     */
     public void showGreeting() {
         dialogContainer.getChildren().addAll(
             DialogBox.getDukeDialog(Ui.getGreeting(), dukeImage)
