@@ -33,6 +33,7 @@ public class Duke {
         if (ui.getDoneStatus()) {
             this.isWorking = false;
         }
+        assert !reply.equals(""); // reply should not be empty string
         return reply;
     }
 }
