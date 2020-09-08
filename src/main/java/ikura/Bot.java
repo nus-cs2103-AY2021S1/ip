@@ -28,6 +28,17 @@ public class Bot {
     private final TaskList tasks;
     private final Frontend ui;
 
+    private final Map<String, BiConsumer<String, String>> COMMAND_MAP = Map.of(
+        "done",     this::cmdDone,
+        "list",     this::cmdList,
+        "find",     this::cmdFind,
+        "reset",    this::cmdReset,
+        "delete",   this::cmdDelete,
+        "todo",     this::cmdAddTask,
+        "event",    this::cmdAddTask,
+        "deadline", this::cmdAddTask
+    );
+
     /**
      * Constructs a new Bot using the given Frontend interface and the given TaskList.
      *
@@ -75,16 +86,7 @@ public class Bot {
 
         this.ui.beginLog();
 
-        Optional.ofNullable(Map.<String, BiConsumer<String, String>>of(
-            "done",     this::cmdDone,
-            "list",     this::cmdList,
-            "find",     this::cmdFind,
-            "reset",    this::cmdReset,
-            "delete",   this::cmdDelete,
-            "todo",     this::cmdAddTask,
-            "event",    this::cmdAddTask,
-            "deadline", this::cmdAddTask
-        ).get(cmd)).ifPresentOrElse(x -> {
+        Optional.ofNullable(COMMAND_MAP.get(cmd)).ifPresentOrElse(x -> {
             x.accept(cmd, input);
         }, () -> {
             this.ui.println("unknown command '%s'", cmd);
