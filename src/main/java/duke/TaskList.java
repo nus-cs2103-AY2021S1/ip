@@ -49,8 +49,9 @@ public class TaskList {
      * @return Task in the taskList according to the index.
      */
     public Task getTask(int index) {
-        assert 0 <= index && index < taskList.size() : "invalid index, index is out of range";
-        Task task = taskList.get(index);
+        Integer taskIndex = index - 1;
+        assert 0 <= taskIndex && taskIndex < taskList.size() : "invalid index, index is out of range";
+        Task task = taskList.get(taskIndex);
         return task;
     }
 

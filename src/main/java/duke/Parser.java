@@ -121,5 +121,28 @@ public class Parser {
         return keyword;
     }
 
+    static HashMap<String, Object> parseSetPriorityInstr(String userInput) throws DukeException{
+        // check if input is valid
+        String[] splitUserInput = userInput.split(" ");
+        if (splitUserInput.length != 5) {
+            throw new DukeException("☹ OOPS!!! Invalid format for priority command. \n"
+                    + "Example: priority 2 to task 3");
+        }
+
+        // get data
+        Integer priorityLevel = Integer.parseInt(splitUserInput[1]);
+        if (!(1 <= priorityLevel && priorityLevel <= 3)) {
+            throw new DukeException("\"☹ OOPS!!! Priority level can only be either 1, 2, or 3.");
+        }
+        Integer taskIndex = Integer.parseInt(splitUserInput[4]);
+        HashMap<String, Object> parsedData = new HashMap<String, Object>() {
+            {
+                put("priorityLevel", priorityLevel);
+                put("taskIndex", taskIndex);
+            }
+        };
+        return parsedData;
+    }
+
 
 }

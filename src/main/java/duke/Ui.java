@@ -145,4 +145,11 @@ public class Ui {
         System.out.println(message);
         return message;
     }
+
+    public String showSetPriorityOfTask(Task task) {
+        String message = "Priority is added to the task as follow \n"
+                + task.toString();
+        System.out.println(message);
+        return message;
+    }
 }

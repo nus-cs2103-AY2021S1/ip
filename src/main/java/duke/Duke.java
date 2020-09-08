@@ -167,8 +167,28 @@ public class Duke {
                 Task event = new Event(description, localTime);
                 tasks.addTask(event);
                 assert tasks.taskList.contains(event) : "event is not added to taskList";
-                if (!loading){
+                if (!loading) {
                     response = ui.showAddedTask(event, tasks.taskList);
+                }
+            } catch (DukeException e) {
+                response = ui.showError(e.getMessage());
+            }
+
+        } else if (instructionType.equals("priority")) {
+            // add priority to the task
+            // ex) priority 1 to task 1 (priority levels are 1, 2, and 3)
+            try {
+                // parse instruction
+                HashMap<String, Object> parsedData = Parser.parseSetPriorityInstr(userInput);
+                Integer priorityLevel = (Integer) parsedData.get("priorityLevel");
+                Integer taskIndex = (Integer) parsedData.get("taskIndex");
+
+                // execute
+                Task task = tasks.getTask(taskIndex);
+                task.setPriorityLevel(priorityLevel);
+                assert task.getPriorityLevel() != null : "priority is not added to the task";
+                if (!loading) {
+                    response = ui.showSetPriorityOfTask(task);
                 }
             } catch (DukeException e) {
                 response = ui.showError(e.getMessage());

@@ -1,4 +1,7 @@
 package duke;
+
+import java.util.HashMap;
+
 /**
  * Is responsible for basic functionality of task.
  * They are different types of task.
@@ -6,6 +9,14 @@ package duke;
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected Integer priorityLevel;
+    private HashMap<Integer, String> priorityIcons = new HashMap<Integer, String> () {
+        {
+            put(1,"!");
+            put(2, "!!");
+            put(3, "!!!");
+        }
+    };
 
     /**
      * Constructor of Task.
@@ -26,11 +37,23 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    public String getPriorityIcon() {
+        return priorityIcons.get(priorityLevel);
+    }
+
     /**
      * Mark task as done.
      */
     public void markAsDone() {
         isDone = true;
+    }
+
+    public Integer getPriorityLevel() {
+        return this.priorityLevel;
+    }
+
+    public void setPriorityLevel(Integer priorityLevel) {
+        this.priorityLevel = priorityLevel;
     }
 
     /**
@@ -40,6 +63,12 @@ public class Task {
      */
     @Override
     public String toString() {
-        return String.format("[%s] %s", getStatusIcon(), description);
+        if (priorityLevel != null) {
+            // task with priority level
+            return String.format("[%s] [%s] %s", getStatusIcon(), getPriorityIcon(), description);
+        } else {
+            // task without priority level
+            return String.format("[%s] %s", getStatusIcon(), description);
+        }
     }
 }

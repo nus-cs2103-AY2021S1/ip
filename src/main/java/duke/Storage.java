@@ -86,6 +86,12 @@ public class Storage {
             if (task.isDone) {
                 fileWriter.write(String.format("done %s\n", index));
             }
+
+            // add set priority instruction if task has priority level
+            if (task.getPriorityLevel() != null) {
+                fileWriter.write(String.format("priority %s to task %s\n", task.getPriorityLevel(), index));
+            }
+
             index += 1;
         }
         fileWriter.close();
