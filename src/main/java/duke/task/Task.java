@@ -1,6 +1,5 @@
 package duke.task;
 
-
 import java.time.LocalDateTime;
 
 /**
@@ -27,8 +26,7 @@ public class Task {
 
     /**
      * Returns the current task as a String.
-     *
-     * @return the task as a String.
+     * @return String
      */
     public String getTask() {
         return this.task;
@@ -37,8 +35,7 @@ public class Task {
 
     /**
      * Returns the status of whether the task is done.
-     *
-     * @return the status of the task.
+     * @return Boolean
      */
     public boolean isDone() {
         return this.done;
@@ -48,13 +45,14 @@ public class Task {
      * Returns the date of the task
      * @return LocalDateTime
      */
-    public LocalDateTime getDate() { return this.date; }
+    public LocalDateTime getDate() {
+        return this.date;
+    }
 
     /**
      * Instantiates a Task object.
-     *
      * @param task the task to be done from User Input.
-     * @return Task Object.
+     * @return Task
      */
     public static Task setTask(String task) {
         return new Task(task);
@@ -68,7 +66,19 @@ public class Task {
         this.done = true;
     }
 
-    public void setAsImportant() { this.isImportant = true; }
+    /**
+     * Changes the status of isImportance from false to true
+     * to indicate that a Task is important
+     */
+    public void setAsImportant() {
+        this.isImportant = true;
+    }
 
-    public boolean isTaskImportant() { return this.isImportant; }
+    /**
+     * Returns a boolean on whether a task is important
+     * @return Boolean
+     */
+    public boolean isTaskImportant() {
+        return this.isImportant;
+    }
 }

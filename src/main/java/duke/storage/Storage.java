@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-import duke.task.*;
+import duke.task.Task;
 import duke.task.TaskList;
 
 /**
@@ -41,7 +41,7 @@ public class Storage {
             recordArrayLst.add(sc.nextLine());
         }
         return recordArrayLst;
-    };
+    }
 
     /**
      * Saves the current list of task to a textfile.

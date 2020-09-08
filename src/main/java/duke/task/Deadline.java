@@ -23,15 +23,22 @@ public class Deadline extends Task {
 
     /**
      * Creates a Deadline object
-     * @param task the task as per user input
-     * @param date the deadline as per user input
-     * @return a Deadline object
+     * @param task Task to be added
+     * @param date Date to be added
+     * @return Deadline
      */
-        public static Deadline createDeadline(String task, LocalDateTime date) {
+    public static Deadline createDeadline(String task, LocalDateTime date) {
         assert date != null : "Assertion Failure: Deadline is Null";
         return new Deadline(task, date);
     }
 
+    /**
+     * Returns a string representation of a Deadline Object
+     * [D][X]** (task) by: (date) for tasks marked as Important
+     * [D][X] (task) by: (date) for tasks not marked as Important
+     * X for Undone Task, O for Done Task.
+     * @return String
+     */
     @Override
     public String toString() {
         String done = this.done ? "O" : "X";

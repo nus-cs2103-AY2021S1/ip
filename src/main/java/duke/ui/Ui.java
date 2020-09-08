@@ -16,18 +16,25 @@ public class Ui {
 
     /**
      * Prints out a line to mark an individual message
+     * @return String
      */
     public static String showLine() {
         return "_________________________________________\n";
     }
 
+    /**
+     * Prints out a line and a message
+     * @param message String message
+     * @return String
+     */
     public static String showCommandMessage(String message) {
         return "_________________________________________\n" + message + "\n";
     }
 
     /**
-     * Prints out the Welcome Message when Duke is intialised
+     * Prints out the Welcome Message when Duke is initialised
      * as an opening message
+     * @return String
      */
     public static String welcomeMessage() {
         String logo = " ____        _        \n"
@@ -52,6 +59,7 @@ public class Ui {
 
     /**
      * Prints out the Goodbye Message when Duke is exited
+     * @return String
      */
     public static String goodbyeMessage() {
         return "_________________________________________\n"
@@ -62,8 +70,8 @@ public class Ui {
     /**
      * Print out the error message when an exception is catch
      * by wrapping it in separating lines to format the message.
-     *
      * @param error The error message
+     * @return String
      */
     public static String showError(String error) {
         return "Sorry an error occurred!! \n"
@@ -76,6 +84,7 @@ public class Ui {
      * Prints a formatted response of a successful Task execution
      * @param response The String representation of the response from the command input
      * @param command The String command from the command from User Input
+     * @return String
      */
     public static String showResponse(String response, String command) {
         return "Task: " + command + "\nExecution Success: \n"
@@ -86,6 +95,7 @@ public class Ui {
 
     /**
      * Prints a formatted response to inform the user that saving is in progress.
+     * @return String
      */
     public static String showSaving(String summary) {
         return "Currently saving tasks. Do not Exit! \n" + summary + "\n";
