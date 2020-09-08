@@ -116,6 +116,6 @@ public class Deadline extends Task {
                 // ON PURPOSE: ignored because we only want the formatter that handles things properly
             }
             return false;
-        }).findAny().orElseThrow(() -> new DukeException(Message.ERRR_NO_TIME_FORMATTER.getMsg()));
+        }).findAny().orElseThrow(() -> new DukeException(Message.ERROR_NO_TIME_FORMATTER.getMsg()));
     }
 }

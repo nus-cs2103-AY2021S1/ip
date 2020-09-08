@@ -7,7 +7,7 @@ import java.util.Map;
  * An Enumeration of the various Messages words that shall be used by Duke's UI
  */
 public enum Message {
-    GREETING,
+    GREETING("Hello I'm Duke\nWhat can I do for you?"),
     EXIT_GREETING("Bye. Hope to see you again soon!"),
     DONE_MSG("Nice! I've marked this task as done"),
     DELETE_MSG("Noted. I've removed this task:"),
@@ -15,7 +15,7 @@ public enum Message {
     FETCHING_MSG("Here are the tasks in your list:"),
     FOUND_MSG("Here are the matching tasks in your list:"),
     ERROR_NO_DATE_FORMATTER("Can't find Date Formatter"),
-    ERRR_NO_TIME_FORMATTER("Can't find Time Formatter"),
+    ERROR_NO_TIME_FORMATTER("Can't find Time Formatter"),
     ERROR_BAD_TIME_INPUT("what kinda date/time is that"),
     ERROR_NO_FIND("Couldn't find anything related to the search term"),
     ERROR_UNKNOWN_CMD("upset parser: unknown command"),
@@ -45,6 +45,7 @@ public enum Message {
         }
         Message.keyableMap = messageLabelMap;
     }
+    
     /**
      * Returns the string representation for that Message
      *
