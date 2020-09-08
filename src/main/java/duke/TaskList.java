@@ -24,15 +24,14 @@ public class TaskList {
     }
 
     public TaskList(List<String> data) {
-
+        this.tasks = new ArrayList<>();
         if (!data.isEmpty()) {
-
             for (String command : data) {
                 command = command.substring(3);
                 String[] commandPortions = command.split("]", 3);
                 String category = commandPortions[0];
                 String mark = commandPortions[1].substring(commandPortions[1].length() - 1);
-                int status = (mark == "\u2713") ? Task.DONE : Task.DOING;
+                int status = (mark.equals("\u2713")) ? Task.DONE : Task.DOING;
                 String commandDetails = commandPortions[2].substring(1);
 
                 Task task = new Task(0, 0, "");
@@ -41,11 +40,11 @@ public class TaskList {
                 String UPDATED_FORMAT = "yyyy/MM/dd";
 
                 switch (category) {
-                    case "T":
+                    case "ToDo":
                         task = new ToDo(Task.TASK_TODO, status, commandDetails);
                         break;
 
-                    case "D":
+                    case "Deadline":
                         String[] deadlineSplitter = commandDetails.split("by: ");
 
                         String originalDate = deadlineSplitter[1];
@@ -63,7 +62,7 @@ public class TaskList {
                         task = new Deadline(Task.TASK_DEADLINE, status, deadlineSplitter[0], updatedDate);
                         break;
 
-                    case "E":
+                    case "Event":
                         String[] eventSplitter = commandDetails.split("at: ");
 
                         String originalEventDate = eventSplitter[1];

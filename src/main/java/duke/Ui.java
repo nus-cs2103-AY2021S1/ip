@@ -29,6 +29,9 @@ public class Ui {
         this.output = out;
     }
 
+    public String getGreetingMessage() {
+        return Message_GREETING;
+    }
     public void printGreet() {
         System.out.println(Message_GREETING);
     }

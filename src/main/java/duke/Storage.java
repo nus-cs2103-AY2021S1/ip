@@ -42,9 +42,8 @@ public class Storage {
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
                 inputs.add(data);
-                System.out.println(data);
+                //System.out.println(data);
             }
-
             myReader.close();
         } catch (FileNotFoundException e) {
             System.out.println("Creating the file to save");
