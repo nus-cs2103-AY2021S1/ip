@@ -1,12 +1,13 @@
 package duke.task;
 
-import duke.exception.InvalidDateException;
-import duke.exception.MissingDateException;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import duke.exception.InvalidDateException;
+import duke.exception.MissingDateException;
 
 public class EventTest {
     @Test
