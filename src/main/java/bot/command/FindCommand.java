@@ -42,8 +42,8 @@ public class FindCommand extends Command {
             string.delete(string.length() - 5, string.length());
             return string.toString();
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Sorry, do what? Please give me a valid input." +
-                    " Thank you.");
+            throw new IllegalArgumentException("Sorry, do what? Please give me a valid input."
+                    + " Thank you.");
         }
     }
 }

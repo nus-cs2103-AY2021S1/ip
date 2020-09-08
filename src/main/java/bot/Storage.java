@@ -80,8 +80,8 @@ public class Storage {
     }
 
     private String responseWrapper(String str) {
-        final String TEXT_LINE = "_________________________________________________________" +
-                "_________________________________________";
+        final String TEXT_LINE = "_________________________________________________________"
+                + "_________________________________________";
         return TEXT_LINE + "\n    " + str + "\n" + TEXT_LINE;
     }
 }

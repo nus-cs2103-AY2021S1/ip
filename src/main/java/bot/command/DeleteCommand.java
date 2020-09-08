@@ -14,7 +14,7 @@ public class DeleteCommand extends Command {
 
     public DeleteCommand(String cmd, int ind) {
         super(cmd);
-        itemIndex = ind-1;
+        itemIndex = ind - 1;
     }
 
     /**
@@ -31,12 +31,12 @@ public class DeleteCommand extends Command {
         try {
             Task task = taskList.remove(itemIndex);
             storage.saveUserData(taskList);
-            return "Noted. I've removed this task: \n    " +
-                    task + "\n    " +
-                    "Now you have " + taskList.getSize() + " tasks in the list.";
+            return "Noted. I've removed this task: \n    "
+                    + task + "\n    "
+                    + "Now you have " + taskList.getSize() + " tasks in the list.";
         } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Sorry, do what? Please give me a valid input." +
-                    " Thank you.");
+            throw new IllegalArgumentException("Sorry, do what? Please give me a valid input."
+                    + " Thank you.");
         } catch (IOException e) {
             throw new IOException("Sorry, I can't seem to save it.");
         }

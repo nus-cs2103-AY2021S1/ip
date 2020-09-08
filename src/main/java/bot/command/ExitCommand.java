@@ -6,7 +6,7 @@ import bot.TaskList;
 /**
  * A type of command that indicates the termination of the program.
  */
-public class ExitCommand extends Command{
+public class ExitCommand extends Command {
     public ExitCommand(String cmd) {
         super(cmd);
     }

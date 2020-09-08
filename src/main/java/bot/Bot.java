@@ -51,7 +51,7 @@ public class Bot {
         boolean isEnded = false;
         ui.greet();
 
-        while(!isEnded) {
+        while (!isEnded) {
             try {
                 Command cmd = parser.parseInput(scanner.nextLine());
                 String response = cmd.run(this.taskList, this.storage);
