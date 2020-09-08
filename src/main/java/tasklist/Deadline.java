@@ -15,7 +15,7 @@ public class Deadline extends Task {
     }
 
     public Deadline(String task, String deadline, boolean isDone) {
-        super(task,isDone);
+        super(task, isDone);
         LocalDateTime dateTime = LocalDateTime.parse(deadline, DateTimeFormatter.ISO_LOCAL_DATE_TIME);
         this.deadline = dateTime;
     }

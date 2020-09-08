@@ -66,6 +66,7 @@ public class Storage {
         return list;
     }
 
+
     /**
      * Saves a task onto duke.txt
      * @param path The file path of duke.txt.

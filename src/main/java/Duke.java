@@ -9,12 +9,15 @@ import java.io.FileNotFoundException;
 
 public class Duke {
     private final static String FILE_PATH = System.getProperty("user.dir") + "/data/duke.txt";
+    private final static String ARCHIVE_PATH = System.getProperty("user.dir") + "/data/archive.txt";
 
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
     private String input;
     private String output;
+    private Storage archivedStorage;
+    private TaskList archivedTasks;
 
     /**
      * Creates and initialises a Duke.
@@ -23,16 +26,21 @@ public class Duke {
         ui = new Ui();
 
         storage = new Storage(FILE_PATH);
+        archivedStorage = new Storage(ARCHIVE_PATH);
 
         try {
             File file = new File(FILE_PATH);
             tasks = new TaskList(storage.load());
+            archivedTasks = new TaskList(archivedStorage.load());
         } catch (FileNotFoundException e) {
             File newFile = new File(FILE_PATH);
+            File newArchive = new File(ARCHIVE_PATH);
             try {
                 boolean isSuccessful = newFile.createNewFile();
+                boolean archiveCreated = newArchive.createNewFile();
 
                 tasks = new TaskList(storage.load());
+                archivedTasks = new TaskList(archivedStorage.load());
             } catch (IOException ex) {
                 System.out.println("An error occurred, file could not be created.");
                 e.printStackTrace();
@@ -51,7 +59,7 @@ public class Duke {
             if (splitInput[0].equals("bye")) {
                 output = "Bye. Hope to see you again soon!";
             } else {
-                output = Parser.commandParser(input, tasks);
+                output = Parser.commandParser(input, tasks, archivedTasks);
             }
         } catch (DukeException e) {
             output = e.getMessage();

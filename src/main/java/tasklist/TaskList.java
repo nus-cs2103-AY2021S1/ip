@@ -61,6 +61,25 @@ public class TaskList {
         return text;
     }
 
+    public String archiveTask(int index, TaskList archiveList) {
+        String text="";
+        String path = System.getProperty("user.dir") + "/data/duke.txt";
+        String archivePath = System.getProperty("user.dir") + "/data/archive.txt";
+
+        Task removedTask = this.todoList.get(index);
+        this.todoList.remove(index);
+
+        text += "Noted. I've archived this task:" + "\n" + removedTask.toString() + "\n" +
+                "Now you have " + this.todoList.size() + " tasks in the list.";
+
+        Storage.rewriteList(path, this.todoList);
+        Storage.saveTask(archivePath, archiveList.todoList ,removedTask);
+
+        archiveList.todoList.add(removedTask);
+
+        return text;
+    }
+
     /**
      * Lists all the tasks in the TaskList.
      * @return a String with all the tasks.

@@ -43,7 +43,7 @@ public class Parser {
      * @param list The current TaskList.
      * @throws DukeException if there is an error with the input or input is not given in the correct format.
      */
-    public static String commandParser(String input, TaskList list) throws DukeException {
+    public static String commandParser(String input, TaskList list, TaskList archives) throws DukeException {
         assert !input.equals(""): "Input cannot be empty";
 
         String[] splitInput = input.split(" ");
@@ -55,7 +55,9 @@ public class Parser {
         } else if (splitInput[0].equals("delete")) {
             return deleteHandler(splitInput, list);
         } else if (splitInput[0].equals("find")) {
-            return findHandler(input,splitInput,list);
+            return findHandler(input, splitInput, list);
+        } else if (splitInput[0].equals("archive")) {
+            return archiveHandler(splitInput, list, archives);
         } else {
             try {
                 return commandTask(input,list);
@@ -64,6 +66,23 @@ public class Parser {
             }
         }
     }
+
+    public static String archiveHandler(String[] splitInput, TaskList list, TaskList archives) throws DukeException {
+        if(splitInput.length == 1) {
+            throw new DukeException("☹ OOPS!!! Please specify which task to archive");
+        } else {
+            String taskToArchive = splitInput[1];
+                int taskNumberInt = Integer.parseInt(taskToArchive) - 1; //task number to archive
+
+                if (taskNumberInt + 1 > list.getLength()) {
+                    throw new DukeException("☹ OOPS!!! Your task number is out of bounds");
+                } else {
+                    Task archivedTask =  list.get(taskNumberInt);
+                    return list.archiveTask(taskNumberInt, archives);
+                }
+        }
+    }
+
 
     public static String doneHandler(String[] splitInput, TaskList list) throws DukeException {
         if (splitInput.length == 1) {
