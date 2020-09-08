@@ -23,18 +23,6 @@ public abstract class Task {
     }
 
     /**
-     * Creates a task containing the description and done status of the task.
-     * Initialises the initial done status based on input.
-     *
-     * @param name Description of the task.
-     * @param done Done status of the task.
-     */
-    Task(String name, boolean done) {
-        this.name = name;
-        this.done = done;
-    }
-
-    /**
      * Marks the task as done by setting the done status to true.
      */
     public void markDone() {

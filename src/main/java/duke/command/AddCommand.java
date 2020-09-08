@@ -1,13 +1,17 @@
 package duke.command;
 
-
 import duke.DateTime;
 import duke.DukeException;
 import duke.Storage;
 import duke.Ui;
 import duke.parser.DateTimeStringChecker;
 import duke.parser.TaskNameStringChecker;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.TaskType;
+import duke.task.Todo;
 
 
 /**
@@ -20,23 +24,23 @@ public class AddCommand extends Command {
     private boolean isDone;
 
     /**
-     * Creates a new AddCommand and initialises its done status to false.
+     * Creates a new AddCommand and initialises its default done status to false.
      *
-     * @param userStrings Tokenized array form of the input command string.
+     * @param userString Tokenized array form of the input command string.
      */
-    public AddCommand(String[] userStrings) {
-        super(userStrings);
+    public AddCommand(String[] userString) {
+        super(userString);
         isDone = false;
     }
 
     /**
-     * Creates a new AddCommand and allows the initialisation of its done status.
+     * Creates a new AddCommand and allows specific initialisation of its done status.
      *
-     * @param userStrings Tokenized array form of the input command string.
+     * @param userString Tokenized array form of the input command string.
      * @param isDone The done status to set for the task represented by the command.
      */
-    public AddCommand(String[] userStrings, boolean isDone) {
-        super(userStrings);
+    public AddCommand(String[] userString, boolean isDone) {
+        super(userString);
         this.isDone = isDone;
     }
 
@@ -51,11 +55,11 @@ public class AddCommand extends Command {
      * or has wrong date/time formatting.
      */
     protected Task processTask(TaskType taskType) throws DukeException {
-        String taskName = new TaskNameStringChecker(getArray()).checkTaskString(taskType);
+        String taskName = new TaskNameStringChecker(getStringArray()).checkTaskString(taskType);
         if (taskType.equals(TaskType.TODO)) {
             return new Todo(taskName);
         }
-        DateTime dateTime = new DateTimeStringChecker(getArray()).checkDateTime(taskType);
+        DateTime dateTime = new DateTimeStringChecker(getStringArray()).checkDateTime(taskType);
         return (taskType.equals(TaskType.DEADLINE)
                 ? new Deadline(taskName, dateTime)
                 : new Event(taskName, dateTime));
@@ -69,7 +73,7 @@ public class AddCommand extends Command {
      * @throws DukeException If task string does not contain task name, is unrecognized.
      */
     protected Task addTask(TaskList tasks) throws DukeException {
-        Task task = processTask(Enum.valueOf(TaskType.class, getArray()[0]));
+        Task task = processTask(Enum.valueOf(TaskType.class, getStringArray()[0].toUpperCase()));
         tasks.addTask(task);
         return task;
     }
@@ -94,6 +98,7 @@ public class AddCommand extends Command {
      * @param tasks The task list to operate on.
      * @param ui The user-interaction object responsible for all system printing and user-interaction.
      * @param storage Represents the logic needed to write to an user-specified file.
+     * @return String to be printed out.
      * @throws DukeException If the addition of the task fails.
      */
     @Override

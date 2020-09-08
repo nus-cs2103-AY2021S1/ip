@@ -25,9 +25,9 @@ public class FileStringChecker extends StringChecker {
     public String checkFile() throws DukeException {
         String[] taskArray = super.getStringArray();
         try {
-            TaskType taskType = Enum.valueOf(TaskType.class, taskArray[0]);
-            return checkFileInputLine(taskArray, taskType.getMaxLength(), taskType.getMinLength()
-                    , taskType.getDelimiter());
+            TaskType taskType = Enum.valueOf(TaskType.class, taskArray[0].toUpperCase());
+            return checkFileInputLine(taskArray, taskType.getMaxLength(), taskType.getMinLength(),
+                    taskType.getDelimiter());
         } catch (IllegalArgumentException e) {
             throw new DukeException("File input command " + taskArray[0] + " is not a recognised task type!");
         }

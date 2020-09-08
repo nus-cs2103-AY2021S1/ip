@@ -12,10 +12,10 @@ public class ExitCommand extends Command {
     /**
      * Creates a new ExitCommand.
      *
-     * @param userStrings Tokenized array form of the input command string.
+     * @param userString Tokenized array form of the input command string.
      */
-    public ExitCommand(String[] userStrings) {
-        super(userStrings);
+    public ExitCommand(String[] userString) {
+        super(userString);
     }
 
     /**
@@ -24,6 +24,7 @@ public class ExitCommand extends Command {
      * @param tasks The task list to operate on.
      * @param ui The user-interaction object responsible for all system printing and user-interaction.
      * @param storage Represents the logic needed to write to an user-specified file.
+     * @return String to be printed out. In this case, it will be null as the program will exit.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {

@@ -4,8 +4,8 @@ package duke.task;
  * Represents the different task types available.
  */
 public enum TaskType {
-    TODO("", 3,3), DEADLINE("/by", 4, 5)
-    , EVENT("/at", 4, 5);
+    TODO("", 3, 3), DEADLINE("/by", 4, 5),
+    EVENT("/at", 4, 5);
 
     private String delimiter;
     private int minLength;

@@ -6,7 +6,6 @@ import java.util.Scanner;
 import duke.task.Task;
 import duke.task.TaskList;
 
-
 /**
  * Deals with interactions with the user.
  */

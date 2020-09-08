@@ -16,10 +16,10 @@ public class DoneCommand extends Command {
     /**
      * Creates a new DoneCommand.
      *
-     * @param userStrings Tokenized array form of the input command string.
+     * @param userString Tokenized array form of the input command string.
      */
-    public DoneCommand(String[] userStrings) {
-        super(userStrings);
+    public DoneCommand(String[] userString) {
+        super(userString);
     }
 
     /**
@@ -29,11 +29,12 @@ public class DoneCommand extends Command {
      * @param tasks The task list to operate on.
      * @param ui The user-interaction object responsible for all system printing and user-interaction.
      * @param storage Represents the logic needed to write to an user-specified file.
+     * @return String to be printed out.
      * @throws DukeException If the user-specified task index is not an Integer or not found in the task list.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        int taskNumber = new TaskIndexStringChecker(getArray()).checkTask(tasks);
+        int taskNumber = new TaskIndexStringChecker(getStringArray()).checkTask(tasks);
         Task taskToMarkDone = tasks.getTask(taskNumber - 1);
         taskToMarkDone.markDone();
         storage.write(tasks);

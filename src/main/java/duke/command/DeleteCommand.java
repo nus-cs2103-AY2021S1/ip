@@ -16,10 +16,10 @@ public class DeleteCommand extends Command {
     /**
      * Creates a new DeleteCommand.
      *
-     * @param userStrings Tokenized array form of the input command string.
+     * @param userString Tokenized array form of the input command string.
      */
-    public DeleteCommand(String[] userStrings) {
-        super(userStrings);
+    public DeleteCommand(String[] userString) {
+        super(userString);
     }
 
     /**
@@ -29,11 +29,12 @@ public class DeleteCommand extends Command {
      * @param tasks The task list to operate on.
      * @param ui The user-interaction object responsible for all system printing and user-interaction.
      * @param storage Represents the logic needed to write to an user-specified file.
+     * @return String to be printed out.
      * @throws DukeException If the user-specified task index is not an Integer or not found in the task list.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        int taskNumber = new TaskIndexStringChecker(getArray()).checkTask(tasks);
+        int taskNumber = new TaskIndexStringChecker(getStringArray()).checkTask(tasks);
         Task taskToDelete = tasks.getTask(taskNumber - 1);
         tasks.deleteTask(taskNumber - 1);
         storage.write(tasks);
