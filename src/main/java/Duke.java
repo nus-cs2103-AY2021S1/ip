@@ -13,6 +13,7 @@ public class Duke {
     public Duke() {
         ui = new Ui();
         try {
+            UndoStack.initialize();
             storage = new Storage("./data/duke.txt");
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {

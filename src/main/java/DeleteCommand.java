@@ -26,6 +26,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DeleteException {
+        UndoStack.add(tasks);
         ArrayList<Task> store = tasks.getTaskList();
         if (this.input.length == 1) { //incomplete done command
             throw new DeleteException("☹ OOPS!!! The description of a delete cannot be empty.");

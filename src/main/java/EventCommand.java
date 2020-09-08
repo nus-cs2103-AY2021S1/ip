@@ -29,6 +29,7 @@ public class EventCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws EventException {
+        UndoStack.add(tasks);
         ArrayList<Task> store = tasks.getTaskList();
         int index = getIndexOfAt();
         if (input.length == 1 || index == 1) { // no description
