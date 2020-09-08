@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
  * as well as the date that the task should be completed by.
  */
 public class Deadline extends Task {
-    private String type = "D";
     private String by;
     private LocalDate date;
     private String time = "";
@@ -18,7 +17,7 @@ public class Deadline extends Task {
      * is completed, the task name and the date of the deadline.
      */
     public Deadline(String isCompleted, String taskName, String by) {
-        super(isCompleted, taskName);
+        super("D", isCompleted, taskName);
         this.by = by;
         // In case time is included
         String dateAndTime[] = by.split("\\s");
@@ -28,6 +27,11 @@ public class Deadline extends Task {
             // If time is given as well
             this.time = dateAndTime[1].trim();
         }
+    }
+
+    @Override
+    public String getDateAndTime() {
+        return this.by;
     }
 
     /**

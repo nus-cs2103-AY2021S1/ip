@@ -25,13 +25,6 @@ public class TaskManager {
     }
 
     public void manage() {
-        try {
-            // Try to load data from text file
-            this.storage.loadFromTextFile(this.taskList);
-        } catch (FileNotFoundException e) {
-            // If text file does not exist yet, create the text file
-            this.storage.createFile();
-        }
         // Take in user input
         Scanner sc = new Scanner(System.in); // Create a Scanner object
         boolean isExit = false;

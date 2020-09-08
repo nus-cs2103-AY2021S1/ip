@@ -30,7 +30,6 @@ public class Duke {
         this.parser = new Parser();
         this.taskList = new TaskList();
         this.storage = new Storage();
-        this.taskManager = new TaskManager(taskList, ui, storage, parser);
         try {
             // Try to load data from text file
             this.storage.loadFromTextFile(this.taskList);
@@ -38,6 +37,7 @@ public class Duke {
             // If text file does not exist yet, create the text file
             this.storage.createFile();
         }
+        this.taskManager = new TaskManager(taskList, ui, storage, parser);
     }
 
     /**

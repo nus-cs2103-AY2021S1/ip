@@ -11,6 +11,7 @@ public enum CommandEnum {
     DEADLINE("deadline"),
     DELETE("delete"),
     FIND("find"),
+    RESCHEDULE("reschedule"),
     INVALID;
 
     private static HashMap<String, CommandEnum> lookup = new HashMap<String, CommandEnum>();

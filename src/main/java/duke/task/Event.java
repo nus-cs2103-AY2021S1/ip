@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
  * as well as the date that the event will occur.
  */
 public class Event extends Task {
-    private String type = "E";
     private String at;
     private LocalDate date;
     private String time = "";
@@ -18,7 +17,7 @@ public class Event extends Task {
      * is completed, the task name and the event date.
      */
     public Event(String isCompleted, String taskName, String at) {
-        super(isCompleted, taskName);
+        super("E", isCompleted, taskName);
         this.at = at;
         String dateAndTime[] = at.split("\\s");
         assert dateAndTime[0] != null;
@@ -27,6 +26,11 @@ public class Event extends Task {
             // If time is given as well
             this.time = dateAndTime[1].trim();
         }
+    }
+
+    @Override
+    public String getDateAndTime() {
+        return this.at;
     }
 
     /**

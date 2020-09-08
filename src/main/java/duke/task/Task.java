@@ -6,18 +6,20 @@ package duke.task;
  */
 public abstract class Task {
     private String taskName;
-    private boolean taskCompleted;
+    private boolean isCompleted;
+    private String type;
 
     /**
      * Constructs a new Task.
      */
-    public Task(String isCompleted, String taskName) {
+    public Task(String type, String isCompleted, String taskName) {
         this.taskName = taskName;
         if (isCompleted.equals("0")) {
-            this.taskCompleted = false;
+            this.isCompleted = false;
         } else {
-            this.taskCompleted = true;
+            this.isCompleted = true;
         }
+        this.type = type;
     }
 
     /**
@@ -26,8 +28,22 @@ public abstract class Task {
      * @return all details regarding this task
      */
     public String completeTask() {
-        this.taskCompleted = true;
+        this.isCompleted = true;
         return this.toString();
+    }
+
+    public boolean isCompleted() {
+        return this.isCompleted;
+    }
+
+    public String getType() {
+        return this.type;
+    }
+
+    public abstract String getDateAndTime();
+
+    public String getTaskName() {
+        return this.taskName;
     }
 
     /**
@@ -35,7 +51,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        if (taskCompleted) {
+        if (isCompleted) {
             return "[✓] " + taskName;
         } else {
             return "[✗] " + taskName;

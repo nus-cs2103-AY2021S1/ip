@@ -1,1 +1,4 @@
-T | 1 | test
+T | 1 | read book
+E | 0 | competition | 2020-09-07 6pm-7pm
+D | 1 | homework submission | 2020-09-20 2359hrs
+T | 0 | eat dinner

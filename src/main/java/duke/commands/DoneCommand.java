@@ -1,5 +1,7 @@
 package duke.commands;
 
+import duke.Duke;
+import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -16,14 +18,15 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(TaskList taskList, Ui ui, Storage storage) {
+    public CommandResult execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task targetTask = taskList.get(indexOfTaskToBeDone - 1);
         String message = targetTask.completeTask();
-        try {
-            storage.modifyLineInTextFile(indexOfTaskToBeDone, "done");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+//        try {
+//            storage.modifyLineInTextFile(indexOfTaskToBeDone, "done");
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+        storage.saveTasks(taskList);
         ui.printDone(message);
         return new CommandResult(message);
     }
