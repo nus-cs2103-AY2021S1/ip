@@ -8,6 +8,8 @@ public class AddCommand extends Command {
     private String taskDescription;
 
     public AddCommand(String input) {
+        assert input != null;
+
         String[] splitInput = input.split(" ", 2);
         this.taskType = splitInput[0]; //
         this.taskDescription = splitInput[1];
