@@ -1,5 +1,6 @@
-public class InvalidDoneCommandException extends IllegalStateException {
-    public InvalidDoneCommandException(String errorMsg) {
-        super(errorMsg);
+public class InvalidDoneCommandException extends DukeException {
+    public InvalidDoneCommandException() {
+        super("This task is already done!\n"
+                + "Check out each task's status by using 'list'!");
     }
 }

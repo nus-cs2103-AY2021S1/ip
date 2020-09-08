@@ -1,5 +1,6 @@
-public class EmptyListException extends IllegalStateException {
-    public EmptyListException(String errorMsg) {
-        super(errorMsg);
+public class EmptyListException extends DukeException {
+    public EmptyListException() {
+        super("There are no tasks on your list\n"
+                + "Use the 'add' command to start adding tasks!");
     }
 }

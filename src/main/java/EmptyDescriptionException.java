@@ -1,5 +1,5 @@
-public class EmptyDescriptionException extends IllegalArgumentException {
-    public EmptyDescriptionException(String errorMsg) {
-        super(errorMsg);
+public class EmptyDescriptionException extends DukeException {
+    public EmptyDescriptionException() {
+        super("Oops, the description can't be empty!");
     }
 }

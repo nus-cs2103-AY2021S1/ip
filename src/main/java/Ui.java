@@ -1,7 +1,10 @@
+import java.util.Scanner;
+
 /**
  * Supports interactions with user.
  */
 public class Ui {
+    protected Scanner sc;
     protected static final String[] CMD_ARR = {"help", "add", "list", "done", "delete", "date", "bye"};
     protected static final String DIVIDER = "____________________________________________________________";
     protected static final String LOGO = " __________________________________________________________\n"
@@ -15,6 +18,9 @@ public class Ui {
             + "|                                                          |\n"
             + "|__________________________________________________________|\n";
 
+    public Ui (Scanner sc) {
+        this.sc = sc;
+    }
     /**
      * Displays the startup UI and prompts user to enter input.
      * @param taskList List of tasks.
@@ -26,59 +32,14 @@ public class Ui {
         System.out.println("Hello, I am BaronBot!");
         System.out.println("What can I do for you?");
         this.printDivider();
-        Parser.parse(this, taskList);
     }
 
-    /**
-     * Displays the exception message for an empty list and prompts the user to
-     * enter additional input.
-     *
-     * @param e EmptyListException.
-     */
-    public void showEmptyListException(EmptyListException e) {
-        System.out.println(e.getMessage());
-        System.out.println("Use the 'add' command to start adding tasks!");
+    public String readCommand() {
+        return sc.nextLine().toLowerCase();
     }
 
-    /**
-     * Displays the exception message for unknown commands and prompts the user to
-     * enter correct input.
-     *
-     * @param e UnknownCommandException.
-     */
-    public void showUnknownCommandException(UnknownCommandException e) {
-        System.out.println(e.getMessage());
-        System.out.println("How about entering 'help' instead?");
-    }
-
-    /**
-     * Displays the exception message for invalid task types.
-     *
-     * @param e InvalidTaskTypeException.
-     */
-    public void showInvalidTaskTypeException(InvalidTaskTypeException e) {
-        System.out.println(e.getMessage());
-    }
-
-    /**
-     * Displays the exception message for empty descriptions being entered by
-     * the user.
-     *
-     * @param e EmptyDescriptionException.
-     */
-    public void showEmptyDescriptionException(EmptyDescriptionException e) {
-        System.out.println(e.getMessage());
-    }
-
-    /**
-     * Displays the exception message for entering the wrong task format and prompts the user to
-     * enter correct input.
-     *
-     * @param e ArrayIndexOutOfBoundsException.
-     */
-    public void showWrongFormat(ArrayIndexOutOfBoundsException e) {
-        System.out.println("Hmmm, looks like the format didn't work");
-        System.out.println("Refer to the example for help! :P");
+    public void displayError(String errorMsg) {
+        System.out.println(errorMsg);
     }
 
     /**
@@ -196,19 +157,8 @@ public class Ui {
      * @param e ArrayIndexOutOfBoundsException.
      */
     public void showIndexOutOfBoundsException(IndexOutOfBoundsException e){
-        System.out.println("Sorry that task doesn't exist :/");
-        System.out.println("Try using 'list' to find out what tasks you have!");
-    }
-
-    /**
-     * Displays the exception message for trying to mark a task that is already done as done again
-     * and prompts the user to enter correct input.
-     *
-     * @param e InvalidDoneCommandException.
-     */
-    public void showInvalidDoneCommandException(InvalidDoneCommandException e) {
-        System.out.println(e.getMessage());
-        System.out.println("Check out each task's status by using 'list'!");
+        System.out.println();
+        System.out.println();
     }
 
     /**

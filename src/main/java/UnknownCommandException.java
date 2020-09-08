@@ -1,5 +1,6 @@
-public class UnknownCommandException extends Exception {
-    public UnknownCommandException(String errorMsg) {
-        super(errorMsg);
+public class UnknownCommandException extends DukeException {
+    public UnknownCommandException() {
+        super("Sorry I didn't understand that :(\n"
+                + "How about entering 'help' instead?");
     }
 }

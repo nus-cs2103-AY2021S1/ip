@@ -3,13 +3,14 @@ import org.junit.jupiter.api.Test;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
+import java.util.Scanner;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class DukeUiTest {
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-    Ui ui = new Ui();
+    Ui ui = new Ui(new Scanner(System.in));
 
     @BeforeEach
     public void setUp() {

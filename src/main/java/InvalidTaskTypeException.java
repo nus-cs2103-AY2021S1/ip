@@ -1,5 +1,5 @@
-public class InvalidTaskTypeException extends Exception {
-    public InvalidTaskTypeException(String errorMsg) {
-        super(errorMsg);
+public class InvalidTaskTypeException extends DukeException {
+    public InvalidTaskTypeException() {
+        super("Oops that wasn't a valid task type!");
     }
 }
