@@ -30,8 +30,8 @@ public class Task {
 
     public String getSaveFormat() {
         int isDoneInt = isDone ? 1 : 0;
-        return taskMarker + Storage.line + isDoneInt
-                + Storage.line + description;
+        return taskMarker + Storage.LINE + isDoneInt
+                + Storage.LINE + description;
     }
 
     protected String boxFormat(String symbol) {

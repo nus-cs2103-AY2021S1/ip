@@ -1,10 +1,18 @@
 package duke;
 
-import duke.command.*;
-import duke.exception.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+
+import duke.command.Command;
+import duke.command.DeadlineCommand;
+import duke.command.DeleteCommand;
+import duke.command.EventCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.MarkDoneCommand;
+import duke.command.TodoCommand;
+import duke.exception.DukeException;
 
 /**
  * Contains methods for processing user input, converting it to a {@link Command}
@@ -67,6 +75,7 @@ public class Parser {
                 LocalDate deadlineTime = LocalDate.parse(deadlineDetails[1].trim());
                 return new DeadlineCommand(deadlineDesc, deadlineTime);
             default:
+                assert taskType.equals("event") : "The last case in the switch statement should be event.";
                 String[] eventDetails = description.split("/at", 2);
                 String eventDesc = eventDetails[0].trim();
                 LocalDate eventTime = LocalDate.parse(eventDetails[1].trim());
