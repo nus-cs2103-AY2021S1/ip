@@ -78,10 +78,14 @@ public class Storage {
 
         try {
             File file = new File(filePath);
-            if (!file.getParentFile().exists()) {
-                throw new DukeException(" ☹ OOPS!!! The folder does not exist.");
-            } else if (!file.exists()) {
-                throw new DukeException(" ☹ OOPS!!! The file does not exist.");
+            File fileParent = file.getParentFile();
+            if (!fileParent.exists()) {
+                boolean isSuccess = fileParent.mkdirs();
+                if(!isSuccess) throw new DukeException("Oops! Fail to create the storage dictionary.");
+            }
+            if (!file.exists()) {
+                boolean isSuccess = file.createNewFile();
+                if(!isSuccess) throw new DukeException("Oops! Fail to create the storage file.");
             }
             fileReader = new FileReader(filePath);
             bufferedReader = new BufferedReader(fileReader);
