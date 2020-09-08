@@ -1,4 +1,4 @@
-import duke.TaskList;
+import duke.tasklist.TaskList;
 import duke.task.Deadline;
 import duke.task.Task;
 import duke.task.Todo;

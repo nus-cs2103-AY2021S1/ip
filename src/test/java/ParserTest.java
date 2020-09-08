@@ -1,6 +1,6 @@
 import duke.Parser;
 import duke.Storage;
-import duke.TaskList;
+import duke.tasklist.TaskList;
 import duke.Ui;
 import duke.commands.AddCommand;
 import duke.commands.Command;

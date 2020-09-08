@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import duke.commands.Command;
 import duke.exceptions.DukeException;
+import duke.tasklist.TaskList;
 
 /**
  * Duke helps you manage tasks through a chatbot.
@@ -53,7 +54,6 @@ public class Duke {
      * @return The appropriate response message.
      */
     public String getResponse(String input) {
-        ui.intro();
         try {
             Command command = Parser.parse(input);
             return command.execute(tasks, ui, storage);

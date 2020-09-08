@@ -3,13 +3,7 @@ package duke;
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
 
-import duke.commands.AddCommand;
-import duke.commands.Command;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.ExitCommand;
-import duke.commands.FindCommand;
-import duke.commands.ListCommand;
+import duke.commands.*;
 import duke.exceptions.DukeDateTimeParseException;
 import duke.exceptions.DukeDeadlineFormatException;
 import duke.exceptions.DukeEmptyActionException;
@@ -63,7 +57,9 @@ public class Parser {
                 return parseDoneDeleteCommand(commandLine);
             } else if (isFind(commandLine)) {
                 return parseFindCommand(commandLine);
-            } else if (commandLine.equals("bye")) {
+            } else if (isReminder(commandLine)) {
+                return new RemindCommand();
+            } else if (isBye(commandLine)) {
                 return new ExitCommand();
             } else {
                 throw new DukeInvalidTaskException();
@@ -141,6 +137,24 @@ public class Parser {
      */
     static boolean isList(String string) {
         return string.equals("list");
+    }
+
+    /**
+     * Checks if the input is bye.
+     * @param string The user input.
+     * @return Returns a boolean.
+     */
+    static boolean isBye(String string) {
+        return string.equals("bye");
+    }
+
+    /**
+     * Checks if the input is reminder.
+     * @param string The user input.
+     * @return Returns a boolean.
+     */
+    static boolean isReminder(String string) {
+        return string.equals("reminder");
     }
 
     /**

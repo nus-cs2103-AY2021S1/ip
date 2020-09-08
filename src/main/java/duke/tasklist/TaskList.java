@@ -1,11 +1,10 @@
-package duke;
+package duke.tasklist;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import duke.task.Task;
-
+import duke.tasklist.tasklistfilter.TaskListFilter;
 
 
 /**
@@ -76,10 +75,10 @@ public class TaskList {
 
     /**
      * Filters the list of tasks with the keyword.
-     * @param keyword The keyword.
+     * @param listFilter The filter for the tasklist.
      * @return A filtered list of tasks.
      */
-    public List<Task> findTasks(String keyword) {
+    public List<Task> findTasks(TaskListFilter listFilter) {
         /*
         List<Task> filteredTasks = new ArrayList<>();
         // Original version
@@ -100,9 +99,12 @@ public class TaskList {
         */
 
         // Stream Version
+        //        return tasks.stream()
+        //                .filter(task -> task.getDescription().contains(keyword))
+        //                .collect(Collectors.toList());
         return tasks.stream()
-                .filter(task -> task.getDescription().contains(keyword))
-                .collect(Collectors.toList());
+        .filter(task -> listFilter.filter(task))
+        .collect(Collectors.toList());
 
     }
 }

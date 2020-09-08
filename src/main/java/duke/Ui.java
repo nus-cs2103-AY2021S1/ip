@@ -16,9 +16,8 @@ public class Ui {
      * Displays the introductions.
      * @return The introductions.
      */
-    String intro() {
-        return reply("Hello, I'm Ravenloss") + "\n"
-                + reply("What can I do for you?");
+    public String intro() {
+        return reply("Hello, I'm Ravenloss!!!\n");
     }
 
     /**
@@ -126,6 +125,24 @@ public class Ui {
                 .append("\n")
                 .append(reply("Now you have " + sizeLeft + " tasks in the list."))
                 .append("\n");
+        return buffer.toString();
+    }
+    
+    public String currentWeekTasks(List<Task> weeklyTasks) {
+        StringBuilder buffer = new StringBuilder();
+        if (weeklyTasks.size() == 0) {
+            buffer = new StringBuilder(reply("You have no pending events or deadlines this week!"));
+        } else {
+            buffer.append(reply("Here are your pending events or deadlines this week!:"))
+                    .append("\n");
+            for (int i = 0; i < weeklyTasks.size(); i++) {
+                String number = (i + 1) + ".";
+                Task currentTask = weeklyTasks.get(i);
+
+                // Sample output: 1.[T][✘] Task with keyword
+                buffer.append(reply(number + currentTask.toString())).append("\n");
+            }
+        }
         return buffer.toString();
     }
 }

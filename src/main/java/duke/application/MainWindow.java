@@ -1,6 +1,7 @@
 package duke.application;
 
 import duke.Duke;
+import duke.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.control.Button;
@@ -36,6 +37,13 @@ public class MainWindow extends AnchorPane {
         duke = d;
     }
 
+    public void greetUser() {
+        String introAndReminder = duke.getResponse("reminder");
+        addToDialogContainer(
+                DialogBox.getDukeDialog(introAndReminder, dukeImage)
+        );
+    }
+
     @SafeVarargs
     private void addToDialogContainer(Node... nodes) {
         dialogContainer.getChildren().addAll(nodes);
@@ -48,7 +56,6 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-
 
         String response = duke.getResponse(input);
         addToDialogContainer(
