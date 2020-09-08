@@ -22,10 +22,9 @@ public class Ui {
      */
     public String addTask(Task newTask, TaskList currList) {
         currList.add(newTask);
-        String outputMsg = "Got it. I've added this task:\n"
+        return "Got it. I've added this task:\n"
                 + newTask.toString()
                 + "\nYou have " + currList.getNumberOfTasks() + " tasks in the list.";
-        return outputMsg;
     }
 
     /**
@@ -38,10 +37,9 @@ public class Ui {
      */
     public String deleteTask(int taskNumber, Task currTask, TaskList currList) {
         currList.remove(taskNumber - 1);
-        String output = "Noted. I've removed this task:\n"
+        return "Noted. I've removed this task:\n"
                 + currTask.toString()
                 + "\nNow you have " + currList.getNumberOfTasks() + " tasks in the list.";
-        return output;
     }
 
     /**
@@ -64,5 +62,21 @@ public class Ui {
     public String findTask(ArrayList<Task> searchResult) {
         TaskList result = new TaskList(searchResult);
         return result.displayTasks();
+    }
+
+    /**
+     * Undo the previous action and displays successful message together with updated list of tasks.
+     *
+     * @param currList Current lists of tasks.
+     * @return String representing success message.
+     */
+    public String undoCommand(TaskList currList) {
+        return "Got it. I've undone your previous action!\n"
+                + "Here is your updated list of tasks.\n"
+                + currList.displayTasks();
+    }
+
+    public String endDuke() {
+        return "Good bye!";
     }
 }
