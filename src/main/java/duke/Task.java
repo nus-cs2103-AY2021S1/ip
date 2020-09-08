@@ -1,11 +1,14 @@
 package duke;
 
+import java.util.HashSet;
+
 /**
  * Abstract class representing a task.
  */
 public abstract class Task {
     protected String description;
     protected boolean isDone = false;
+    protected HashSet<String> tagSet = new HashSet<>();
 
     /**
      * Constructor that initializes with description.
@@ -33,7 +36,13 @@ public abstract class Task {
      * @return String of .txt format
      */
     protected String getTxtFormat() {
-        return (this.isDone ? "1, " : "0, ") + this.description;
+        StringBuilder tags = new StringBuilder();
+        for (String t: tagSet) {
+            tags.append("#");
+            tags.append(t);
+            tags.append(" ");
+        }
+        return (this.isDone ? "1, " : "0, ") + this.description + tags.toString();
     }
 
     /**
@@ -44,7 +53,30 @@ public abstract class Task {
     @Override
     public String toString() {
         String status = (this.isDone) ? "[✓]" : "[✗]";
-        return status + " " + description;
+        StringBuilder tags = new StringBuilder();
+        for (String t: tagSet) {
+            tags.append("#");
+            tags.append(t);
+            tags.append(" ");
+        }
+        return status + " " + description + " " + tags.toString();
+    }
+
+    public boolean hasTag(String tag) {
+        return this.tagSet.contains(tag);
+    }
+
+    public Task addTag(String tag) throws DukeException {
+        if (this.tagSet.contains(tag)) {
+            throw new DukeException("Tag already exist for task " + this.toString());
+        }
+        this.tagSet.add(tag);
+        return this;
+    }
+
+    public Task untag(String tag) {
+        this.tagSet.remove(tag);
+        return this;
     }
 
     public String getDescription() {

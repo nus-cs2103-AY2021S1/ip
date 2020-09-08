@@ -29,6 +29,18 @@ public class Parser {
                 return new ExitCommand();
             case "find":
                 return new FindCommand(queryArr[1]);
+            case "tag": // format: tag <itemNumber> <newTag>
+                String[] tagInfo = queryArr[1].split(" ", 2);
+                return new TagCommand(Integer.parseInt(tagInfo[0]) - 1, tagInfo[1]);
+            case "untag":
+                try {
+                    String[] untagInfo = queryArr[1].split(" ", 2);
+                    return new UntagCommand(Integer.parseInt(untagInfo[0]) - 1, untagInfo[1]);
+                } catch (NumberFormatException e) {
+                    return new UntagCommand(queryArr[1]);
+                }
+            case "findtag":
+                return new FindTagCommand(queryArr[1]);
             default:
                 return new AddCommand(queryArr[0], queryArr[1]);
             }
