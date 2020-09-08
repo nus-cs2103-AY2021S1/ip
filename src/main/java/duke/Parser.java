@@ -10,6 +10,7 @@ public class Parser {
 
     /**
      * Sets taskList for Parser.
+     *
      * @param list TaskList that manages tasks.
      */
     public static void setTaskList(TaskList list) {
@@ -18,6 +19,7 @@ public class Parser {
 
     /**
      * Returns a boolean to indicate whether program should be stopped.
+     *
      * @param command Command from user input.
      * @return Returns a boolean.
      */
@@ -27,6 +29,7 @@ public class Parser {
 
     /**
      * Processes commands and add the tasks to taskList.
+     *
      * @param command Command from user input.
      * @throws DukeException DukeException if command is not in legal form.
      */
@@ -110,6 +113,7 @@ public class Parser {
 
     /**
      * Returns the taskList.
+     *
      * @return TaskList.
      */
     public static TaskList getTaskList() {

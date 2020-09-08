@@ -8,6 +8,7 @@ import duke.DukeException;
 
 public class TimeParser {
     /** Returns the date in format "MMM d yyyy".
+     *
      * @param str String of date in form yyyy-mm-dd.
      * @return String of date in form "MMM d yyyy".
      */
@@ -22,6 +23,7 @@ public class TimeParser {
 
     /**
      * Checks if the date string is in valid form.
+     *
      * @param str String of date.
      * @return Boolean indicating whether date string is valid.
      */

@@ -6,6 +6,7 @@ public class Task {
 
     /**
      * Constructs a task object.
+     *
      * @param taskName Name of task.
      */
     public Task(String taskName) {
@@ -15,6 +16,7 @@ public class Task {
 
     /**
      * Returns the task name.
+     *
      * @return String indicating name of task.
      */
     public String getTaskName() {
@@ -23,6 +25,7 @@ public class Task {
 
     /**
      * Returns true if the task is completed, false if not done yet.
+     *
      * @return Boolean indicating progress of task.
      */
     public boolean isCompleted() {
@@ -38,6 +41,7 @@ public class Task {
 
     /**
      * Returns the task in array form.
+     *
      * @return String array.
      */
     public String[] taskToArray() {
