@@ -13,7 +13,6 @@ import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
-import duke.ui.Ui;
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -29,9 +28,14 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/UserAvatar.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DukeAvatar.png"));
+    private final Image userImage = new Image(this.getClass()
+            .getResourceAsStream("/images/UserAvatar.png"));
+    private final Image dukeImage = new Image(this.getClass()
+            .getResourceAsStream("/images/DukeAvatar.png"));
 
+    /**
+     * Initialises the Main Window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

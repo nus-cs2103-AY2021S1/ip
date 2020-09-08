@@ -13,7 +13,7 @@ import duke.ui.Ui;
 /**
  * Represents a chat-bot named Duke.
  */
-public class Duke  {
+public class Duke {
 
     private final Storage storage;
     private final Ui ui;

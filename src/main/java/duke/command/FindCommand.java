@@ -8,6 +8,11 @@ public class FindCommand extends Command {
 
     private final String keyWord;
 
+    /**
+     * Constructs a FindCommand object.
+     *
+     * @param keyWord keyword to find tasks
+     */
     public FindCommand(String keyWord) {
         assert !keyWord.isEmpty() : "Command description is missing.";
         this.keyWord = keyWord;
@@ -19,7 +24,7 @@ public class FindCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList taskList, Ui ui, Storage storage)  {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         return taskList.findTasks(this.keyWord);
     }
 }

@@ -7,19 +7,13 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
-import javafx.scene.paint.ImagePattern;
-import javafx.scene.shape.Circle;
+
 
 /**
  * An example of a custom control using FXML.
@@ -29,9 +23,6 @@ import javafx.scene.shape.Circle;
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
-
-//    @FXML
-//    private Circle displayPicture;
 
     @FXML
     private ImageView displayPicture;
@@ -47,7 +38,6 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-//        displayPicture.setFill(new ImagePattern(img));
         displayPicture.setImage(img);
     }
 
@@ -76,10 +66,6 @@ public class DialogBox extends HBox {
         // Spacing between Image and Text
         db.setSpacing(10.0);
 
-        // Border for Duke Dialog
-//        db.setStyle("-fx-padding: 10;" + "-fx-border-style: solid inside;"
-//                + "-fx-border-width: 2;" + "-fx-border-insets: 0;"
-//                + "-fx-border-radius: 10;" + "-fx-border-color: darkseagreen;");
         return db;
     }
 }
