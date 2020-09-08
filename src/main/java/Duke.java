@@ -7,6 +7,7 @@ import main.java.task.Todo;
 import main.java.DukeException;
 
 import java.io.*;
+import java.time.LocalDate;
 import java.util.*;
 
 import static java.lang.Integer.parseInt;
@@ -100,23 +101,25 @@ public class Duke {
                     try {
                         String wholeTask = command.split(" ",2)[1];
                         String[] descAndDeadline = wholeTask.split(" /by ");
-                        tasks.add(new Deadline(descAndDeadline[0], descAndDeadline[1]));
+                        tasks.add(new Deadline(descAndDeadline[0], LocalDate.parse(descAndDeadline[1])));
                         int length = tasks.size();
                         System.out.println(Speaking.ADD.line + tasks.get(length-1) +
                                 "\nYou now have " + length + (length == 1 ? " thing" : " things") + " in your list");
                     } catch (Exception e) {
-                        throw new main.java.DukeException(Speaking.INVALIDINPUT.line + " Did you put a task before and deadline after ' /by '?");
+                        throw new main.java.DukeException(Speaking.INVALIDINPUT.line
+                                + " Format for dates is yyyy-mm-dd. Also, did you put a task before and deadline after ' /by '?");
                     }
                 } else if (getFirstWord(command).equals("event")) {
                     try {
                         String wholeTask = command.split(" ",2)[1];
                         String[] descAndTime = wholeTask.split(" /at ");
-                        tasks.add(new Event(descAndTime[0], descAndTime[1]));
+                        tasks.add(new Event(descAndTime[0], LocalDate.parse(descAndTime[1])));
                         int length = tasks.size();
                         System.out.println(Speaking.ADD.line + tasks.get(length-1) +
                                 "\nYou now have " + length + (length == 1 ? " thing" : " things") + " in your list");
                     } catch (Exception e) {
-                        throw new main.java.DukeException(Speaking.INVALIDINPUT.line + " Did you put a task before and time after ' /at '?");
+                        throw new main.java.DukeException(Speaking.INVALIDINPUT.line
+                                + " Format for dates is yyyy-mm-dd. Also, did you put a task before and time after ' /at '?");
                     }
                 } else if (getFirstWord(command).equals("delete")) {
                     try {
@@ -190,13 +193,13 @@ public class Duke {
                     }
                     tasks.add(todo);
                 } else if (words[0].equals("D")) {
-                    Deadline deadline = new Deadline(words[2], words[3]);
+                    Deadline deadline = new Deadline(words[2], LocalDate.parse(words[3]));
                     if (words[1].equals("1")) {
                         deadline.markAsDone();
                     }
                     tasks.add(deadline);
                 } else if (words[0].equals("E")) {
-                    Event event = new Event(words[2], words[3]);
+                    Event event = new Event(words[2], LocalDate.parse(words[3]));
                     if (words[1].equals("1")) {
                         event.markAsDone();
                     }
