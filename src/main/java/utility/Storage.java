@@ -1,3 +1,8 @@
+package utility;
+
+import duke.DukeException;
+import task.*;
+
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -8,9 +13,9 @@ import java.nio.file.Paths;
 
 public class Storage {
 
-    /** TaskList class that stores and deals with the tasks **/
+    /** task.TaskList class that stores and deals with the tasks **/
     private TaskList taskList;
-    /** Parser class that parse and deal with the commands given **/
+    /** utility.Parser class that parse and deal with the commands given **/
     private Parser parser;
     /** Path to where the file is stored **/
     private Path storageFilePath;

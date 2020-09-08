@@ -1,3 +1,5 @@
+package task;
+
 public abstract class Task {
 
     /** Alphabet tag for the respective task **/
@@ -56,6 +58,10 @@ public abstract class Task {
      */
     public boolean fitsTask(String description) {
         return taskName.contains(description);
+    }
+
+    public boolean isDone(){
+        return isDone;
     }
 
 }
