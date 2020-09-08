@@ -26,7 +26,9 @@ public class Event extends Task {
      * @return Date of event.
      */
     public String getDate() {
-        return at.substring(0, 11);
+        int dateLength = 11;
+
+        return at.substring(0, dateLength);
     }
 
     /**
