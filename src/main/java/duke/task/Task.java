@@ -34,13 +34,6 @@ public class Task {
         return this.description;
     }
 
-    /**
-     * Toggles the isDone status of the task.
-     */
-    protected void toggleIsDone() {
-        this.isDone = true;
-    }
-
     @Override
     public String toString() {
         String box = this.isDone ? "\u2713" : "\u2718";

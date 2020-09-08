@@ -4,7 +4,6 @@ import duke.command.CommandHandler;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
-import duke.command.CommandHandler;
 
 public class Duke {
     private TaskList tasks;
@@ -52,6 +51,7 @@ public class Duke {
         assert commandHandler != null : "command handler can't be null";
 
         commandHandler.execute();
+
         return commandHandler.getLog();
     }
 }

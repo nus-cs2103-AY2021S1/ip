@@ -3,7 +3,8 @@ package duke.command;
 import duke.DukeException;
 import duke.ui.Ui;
 import duke.task.TaskList;
-import duke.util.Strings;
+import duke.util.Parser;
+import duke.util.MagicStrings;
 
 public class CommandHandler {
     private Ui ui;
@@ -20,7 +21,7 @@ public class CommandHandler {
 
     public void execute() {
         try {
-            String[] split = command.split(" ", 2);
+            String[] split = Parser.splitCommand(command);
 
             switch (split[0]) {
             case "list":
@@ -49,7 +50,7 @@ public class CommandHandler {
                 log.append(ui.printBye());
                 break;
             default:
-                throw new DukeException(Strings.ERROR_COMMAND_FORMAT_INCORRECT);
+                throw new DukeException(MagicStrings.ERROR_COMMAND_FORMAT_INCORRECT);
             }
         } catch (DukeException e) {
             log.append(e.getMessage());

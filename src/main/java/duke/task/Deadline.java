@@ -7,7 +7,7 @@ import java.util.Date;
  * Represents a task that needs to be done before a specific time.
  */
 public class Deadline extends Task {
-    protected final Date doBy;
+    private final Date doBy;
 
     /**
      * Constructor
