@@ -17,6 +17,8 @@ public class Duke {
 
         try {
             List<String> files = Storage.readSavedFile(filePath);
+
+            assert files != null;
             for (String value : files) {
                 Task task = TextAndTaskConverter.textConverter(value);
                 taskManager.getTasksList().add(task);
@@ -42,6 +44,8 @@ public class Duke {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
         Command ioHandler = Parser.parseInput(input);
+
+        assert ioHandler != null;
         System.out.println(ioHandler.handle(input, taskManager, fileHandler));
     }
 
@@ -51,6 +55,8 @@ public class Duke {
      */
     public String getResponse(String input) throws IOException {
         Command ioHandler = Parser.parseInput(input);
+
+        assert ioHandler != null;
         return ioHandler.handle(input, taskManager, fileHandler);
     }
 }

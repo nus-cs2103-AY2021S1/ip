@@ -1,4 +1,5 @@
 import java.io.IOException;
+import java.util.ArrayList;
 
 public class DeleteCommand extends Command {
 
@@ -10,12 +11,18 @@ public class DeleteCommand extends Command {
     }
 
     public String handle(String input, TaskManager taskManager, Storage fileHandler) throws IOException {
-        Task deletedTask = taskManager.getTask(taskNum - 1);
-        taskManager.removeTask(taskNum);
-        fileHandler.writeToFile(taskManager);
+        if (taskManager.getTasksList().isEmpty() || taskManager.getTasksList().size() < taskNum) {
+            return "There's nothing to delete!";
 
-        return "Noted. I've removed this task:\n"
-                + deletedTask + "\nNow you have " + taskManager.getNumTasks()
-                + " tasks in the list";
+        } else {
+
+            Task deletedTask = taskManager.getTask(taskNum - 1);
+            taskManager.removeTask(taskNum);
+            fileHandler.writeToFile(taskManager);
+
+            return "Noted. I've removed this task:\n"
+                    + deletedTask + "\nNow you have " + taskManager.getNumTasks()
+                    + " tasks in the list";
+        }
     }
 }

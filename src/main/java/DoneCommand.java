@@ -11,9 +11,17 @@ public class DoneCommand extends Command {
 
     @Override
     public String handle(String input, TaskManager taskManager, Storage fileHandler) throws IOException {
-        taskManager.setTaskDone(this.taskNum);
-        fileHandler.writeToFile(taskManager);
-        return "Nice! I've marked this task as done:\n"
-                + taskManager.getTask(taskNum - 1);
+        if (taskManager.getTasksList().isEmpty() || taskManager.getTasksList().size() < taskNum) {
+            return "This task doesn't exist!";
+
+        } else if (taskManager.getTask(this.taskNum - 1).isDone) {
+            return "This task is already done!";
+
+        } else {
+            taskManager.setTaskDone(this.taskNum);
+            fileHandler.writeToFile(taskManager);
+            return "Nice! I've marked this task as done:\n"
+                    + taskManager.getTask(taskNum - 1);
+        }
     }
 }

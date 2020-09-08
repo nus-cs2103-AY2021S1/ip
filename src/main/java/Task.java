@@ -4,7 +4,7 @@
 public class Task {
 
     private final String description;
-    private boolean isDone;
+    public boolean isDone;
 
     public Task(String description) {
         this.description = description;
@@ -13,7 +13,6 @@ public class Task {
 
     public String getStatusIcon() {
         return (isDone ? "\u2713" : "\u2718");
-
     }
 
     public boolean getDone() {
