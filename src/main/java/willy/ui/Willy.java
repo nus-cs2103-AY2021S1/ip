@@ -26,12 +26,13 @@ import willy.command.Parser;
 public class Willy extends Application {
 
     private static TaskStore storage;
+    private static String lastGreeting = "bye";
     private static String style = "\t_____________________________________________________________________________\n";
     private static String logo = "__       ____       __\n"
             + "\\  \\    /    \\    /  /\n"
             + " \\  \\  /  /\\  \\  /  /\n"
             + "  \\  \\/  /  \\  \\/  /\n"
-            + "   \\____/     \\____/ ILLY ~(^-^)~\n";
+            + "   \\____/     \\___/ ILLY ~(^-^)~\n";
     private static String introGUI = "\t __       ___        __\n"
             + "\t \\  \\    /    \\     /  /\n"
             + "\t  \\  \\  /  /\\  \\  /  /\n"
@@ -53,6 +54,10 @@ public class Willy extends Application {
         this.isOnJavaFX = boo;
         storage = new TaskStore();
         storage.createFile();
+    }
+
+    public static String getLastGreeting() {
+        return lastGreeting;
     }
 
     public static String getStyle() {
@@ -134,7 +139,17 @@ public class Willy extends Application {
         Parser parser = new Parser(list);
 
         while (input.hasNext()) {
+
             String message = input.nextLine();
+
+            // check when to end the bot
+            if (message.equals(lastGreeting)) {
+                String endGreeting = new Greet(message).getExitGreeting();
+                String response = "\n" + endGreeting;
+                System.out.print(response);
+                break;
+            }
+
             parser.parse(message, false);
         }
         input.close();

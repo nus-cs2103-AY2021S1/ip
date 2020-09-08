@@ -3,13 +3,13 @@ package willy.command;
 import willy.exceptions.WillyException;
 import willy.task.*;
 import willy.ui.Greet;
+import willy.ui.Willy;
 
 /**
  * In charge of executing actions based on the user's command.
  */
 public class Parser {
     private TaskList list;
-    private static String lastGreeting = "bye";
     private final String MISSING_INFO_MESSAGE = "Hmmm are you missing description/deadline of the task? \n\tCheck and try again?";
     private final String NO_TASK_MESSAGE = "Please add in a task!";
     private final String NO_SENSE_MESSAGE = "Hmmm sorry I'm not sure what you are saying, try something else?:(";
@@ -30,12 +30,14 @@ public class Parser {
      */
     public String parse(String message, boolean isOnJavaFX) {
         String response="";
-        // check when to end the bot
-        if (message.equals(lastGreeting)) {
-            // prints out exit
-            String endGreeting = new Greet(message).getExitGreeting();
-            response = "\n" + endGreeting;
-            return response;
+
+        if (isOnJavaFX) {
+            // check when to end the bot
+            if (message.equals(Willy.getLastGreeting())) {
+                String endGreeting = new Greet(message).getExitGreeting();
+                response = "\n" + endGreeting;
+                return response;
+            }
         }
 
         if (message.equals("list")) {
