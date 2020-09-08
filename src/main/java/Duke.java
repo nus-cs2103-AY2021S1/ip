@@ -89,17 +89,7 @@ public class Duke {
                     findTasks.add(task);
                 }
             }
-            String found = "";
-            int index = 1;
-            for (Task tsk : findTasks) {
-                String desc =  tsk.getDescription();
-                String taskType = tsk.getType();
-                String statusIcon = tsk.getStatusIcon();
-                found = found + index + "." + "[" + taskType + "][" + statusIcon + "] " + desc + "\n";
-                index++;
-            }
-            return ui.printMatchingTasks() + found;
-
+            return ui.printMatchingTasks(findTasks);
         }
 
         case "delete": {
@@ -116,17 +106,7 @@ public class Duke {
         }
 
         case "list": {
-            Iterator<Task> iter = taskList.getTasks().iterator();
-            int index = 1;
-            String message = "";
-            while (iter.hasNext()) {
-                Task currentTask = iter.next();
-                String next = currentTask.getDescription();
-                message = message + index + "." + "[" + currentTask.getType() + "]["
-                        + currentTask.getStatusIcon() + "] " + next + "\n";
-                index++;
-            }
-            return ui.showList() + message;
+            return ui.showList(taskList.getTasks());
         }
 
         case BYE:

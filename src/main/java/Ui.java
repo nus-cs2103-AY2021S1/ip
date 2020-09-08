@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Scanner;
 
 /**
@@ -87,11 +88,22 @@ public class Ui {
     }
 
     /**
-     * Prints the showList message.
+     * Prints the showList message with the list of tasks.
      */
-    public String showList() {
+    public String showList(ArrayList<Task> taskList) {
 
-        return "Here are the tasks in your list:\n";
+        String header = "Here are the tasks in your list:\n";
+        Iterator<Task> iter = taskList.iterator();
+        int index = 1;
+        String message = "";
+        while (iter.hasNext()) {
+            Task currentTask = iter.next();
+            String next = currentTask.getDescription();
+            message = message + index + "." + "[" + currentTask.getType() + "]["
+                    + currentTask.getStatusIcon() + "] " + next + "\n";
+            index++;
+        }
+        return header + message;
     }
 
     /**
@@ -103,11 +115,22 @@ public class Ui {
     }
 
     /**
-     * Prints the matchingTasks message.
+     * Prints the matchingTasks message with the matching tasks.
      */
-    public String printMatchingTasks() {
+    public String printMatchingTasks(ArrayList<Task> findTasks) {
 
-        return "Here are the matching tasks in your list:\n";
+        String header = "Here are the matching tasks in your list:\n";
+        String found = "";
+        int index = 1;
+        for (Task tsk : findTasks) {
+            String desc =  tsk.getDescription();
+            String taskType = tsk.getType();
+            String statusIcon = tsk.getStatusIcon();
+            found = found + index + "." + "[" + taskType + "][" + statusIcon + "] " + desc + "\n";
+            index++;
+        }
+        return header + found;
+
     }
 }
 
