@@ -29,7 +29,8 @@ public class Storage {
 
     private String currentDir = System.getProperty("user.dir");
     private Path dataDir = Paths.get(currentDir, "src", "main", "data");
-    private Path fileDir = Paths.get(currentDir, "src", "main", "data", "list.txt");
+    private Path listFileDir = Paths.get(currentDir, "src", "main", "data", "list.txt");
+    private Path notesFileDir = Paths.get(currentDir, "src", "main", "data", "notes.txt");
     /**
      * Checks if the /data directory exists.
      *
@@ -44,8 +45,17 @@ public class Storage {
      *
      * @return True if it exists, False otherwise.
      */
-    private boolean fileExists() {
-        return Files.exists(fileDir);
+    private boolean listFileExists() {
+        return Files.exists(listFileDir);
+    }
+
+    /**
+     * Checks if the /data/list.txt file exists.
+     *
+     * @return True if it exists, False otherwise.
+     */
+    private boolean notesFileExists() {
+        return Files.exists(notesFileDir);
     }
 
     /**
@@ -53,12 +63,12 @@ public class Storage {
      *
      * @return list.txt File
      */
-    private File createFile() throws DukeException {
-        File newFile = new File(dataDir.toString(), "list.txt");
+    private File createFile(String filename) throws DukeException {
+        File newFile = new File(dataDir.toString(), filename);
         System.out.println("Creating File...");
         try {
             newFile.createNewFile();
-            System.out.println("Save file created at: " + this.fileDir);
+            System.out.println("Save file created at: " + this.listFileDir);
             return newFile;
         } catch (IOException e) {
             e.printStackTrace();
@@ -66,8 +76,8 @@ public class Storage {
                     + "\nIf restarting the application still fails, in the"
                     + "\ndirectory of the DukeLauncher.jar, please create the"
                     + "\nfollowing directories: src/main/data/"
-                    + "\nAfterwards, create a \"list.txt\" file in data."
-                    + "\nRestart Duke.");
+                    + "\nAfterwards, create a \"list.txt\" file and \"notes.txt\" in data"
+                    + "\nif not present. Restart Duke.");
         }
     }
 
@@ -77,14 +87,31 @@ public class Storage {
      *
      * @return list.txt File
      */
-    private File getFile() throws DukeException {
-        if (fileExists()) {
-            return fileDir.toFile();
+    private File getListFile() throws DukeException {
+        if (listFileExists()) {
+            return listFileDir.toFile();
         } else if (dirExists()) {
-            return createFile();
+            return createFile("list.txt");
         } else {
             dataDir.toFile().mkdirs();
-            return createFile();
+            return createFile("list.txt");
+        }
+    }
+
+    /**
+     * Private method that gets the notes.txt file if present, else a new
+     * file is created.
+     *
+     * @return notes.txt File
+     */
+    private File getNotesFile() throws DukeException {
+        if (notesFileExists()) {
+            return notesFileDir.toFile();
+        } else if (dirExists()) {
+            return createFile("notes.txt");
+        } else {
+            dataDir.toFile().mkdirs();
+            return createFile("notes.txt");
         }
     }
 
@@ -99,13 +126,18 @@ public class Storage {
         assert (list != null) : "Storage - updateFile: TaskList is null!";
         try {
             System.out.println("Saving changes...");
-            File file = getFile();
-            FileWriter writer = new FileWriter(file);
+            File listFile = getListFile();
+            File notesFile = getNotesFile();
+            FileWriter listWriter = new FileWriter(listFile);
+            FileWriter notesWriter = new FileWriter(notesFile);
             for (Task t : list.getList()) {
-                writer.write(t.getSaveString());
-                writer.write("\n");
+                listWriter.write(t.getSaveString());
+                listWriter.write("\n");
+                notesWriter.write(t.getNotesSaveString());
+                notesWriter.write("\n");
             }
-            writer.close();
+            listWriter.close();
+            notesWriter.close();
             System.out.println("Changes saved.");
             return "Changes saved.";
         } catch (IOException e) {
@@ -124,9 +156,11 @@ public class Storage {
     public TaskList getList() {
         try {
             TaskList list = new TaskList();
-            Scanner scanner = new Scanner(this.getFile());
-            while (scanner.hasNextLine()) {
-                Matcher matcher = pattern.matcher(scanner.nextLine());
+            Scanner listScanner = new Scanner(this.getListFile());
+            Scanner notesScanner = new Scanner(this.getNotesFile());
+            while (listScanner.hasNextLine() && notesScanner.hasNextLine()) {
+                Matcher matcher = pattern.matcher(listScanner.nextLine());
+                String note = notesScanner.nextLine();
                 if (!matcher.find()) {
                     continue;
                 }
@@ -139,13 +173,13 @@ public class Storage {
                 }
                 switch (matcher.group(1)) {
                 case ("T"):
-                    list.addItem(new Todo(task, done));
+                    list.addItem(new Todo(task, done, note));
                     break;
                 case ("D"):
-                    list.addItem(new Deadline(task, done, localDate));
+                    list.addItem(new Deadline(task, done, localDate, note));
                     break;
                 case ("E"):
-                    list.addItem(new Event(task, done, localDate));
+                    list.addItem(new Event(task, done, localDate, note));
                     break;
                 default:
                     System.out.println("Could not parse: " + matcher.group(0));

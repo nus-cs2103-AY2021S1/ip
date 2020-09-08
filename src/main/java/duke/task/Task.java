@@ -8,15 +8,22 @@ public abstract class Task {
 
     private boolean done;
     private String task;
+    private Notes notes;
 
     Task(String task) {
         this.done = false;
         this.task = task;
+        this.notes = new Notes("null");
     }
-
     Task(String task, boolean done) {
         this.done = done;
         this.task = task;
+        this.notes = new Notes("null");
+    }
+    Task(String task, boolean done, String notes) {
+        this.done = done;
+        this.task = task;
+        this.notes = new Notes(notes);
     }
     public boolean isDone() {
         return this.done;
@@ -45,7 +52,31 @@ public abstract class Task {
         return "Guess you made a mistake huh?\n" + this.toString();
     }
 
-    /** Provides the string representation of the Task when it is saved.
+    /**
+     * Adds a note to the current Task.
+     *
+     * @param note The note to be added.
+     * @return The String representation of the task and the note.
+     */
+    public String addNote(String note) {
+        this.notes = new Notes(note);
+        return this.toString() + "\n" + this.notes.toString();
+    }
+
+    /**
+     * Provides the string representation of the Task note when it is saved.
+     *
+     * @return The string representation of the note to be used in saving.
+     */
+    public String getNotesSaveString() {
+        if (this.notes.getNote() == null) {
+            return "null";
+        }
+        return this.notes.getNote();
+    }
+
+    /**
+     * Provides the string representation of the Task when it is saved.
      *
      * @return The string representation of the Task to be used in saving.
      */

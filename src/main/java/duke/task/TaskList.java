@@ -78,6 +78,21 @@ public class TaskList {
     }
 
     /**
+     * Adds a note to the specified Task.
+     *
+     * @param index The index of the specific task to add the note to.
+     * @param noteContent The content of the note.
+     * @return String result that describes the task and the note.
+     */
+    public String editNote(int index, String noteContent) {
+        if (index >= this.list.size() || index < 0) {
+            return "Please choose a valid task to add the note to";
+        }
+        Task taskToAdd = this.list.get(index);
+        return taskToAdd.addNote(noteContent);
+    }
+
+    /**
      * Marks a Task as completed.
      *
      * @param index The index of the Task object to be marked as done.
