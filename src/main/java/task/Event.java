@@ -19,6 +19,11 @@ public class Event extends Task {
     }
 
     @Override
+    public String getTime() {
+        return this.eventTime;
+    }
+
+    @Override
     public String toString() {
         String time = date == null
                 ? String.format(" (at: %s)", eventTime)

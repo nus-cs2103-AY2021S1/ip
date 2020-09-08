@@ -15,6 +15,7 @@ import java.util.Scanner;
 
 public class Storage {
     private final static String filePath = "list.txt";
+    private final static String archivePath = "archived.txt";
 
     /**
      * Converts parameters of a task into a string representation used in storage
@@ -65,30 +66,33 @@ public class Storage {
     }
 
     /**
-     * Creates a storage file
+     * Creates a storage file for task list
      *
+     * @param archive whether adds to the archive list
      * @throws IOException if error occurs in file accessing
      */
-    public static void createListFile() throws IOException {
-        Files.createFile(Paths.get(filePath));
+    public static void createListFile(boolean archive) throws IOException {
+        Files.createFile(Paths.get(archive ? archivePath : filePath));
     }
 
     /**
      * Adds a task to the storage file given its parameters
      *
-     * @param type task type
-     * @param done whether the task is done (0 for undone, 1 for done)
-     * @param name task name
-     * @param time task time (empty string if not applicable)
+     * @param type    task type
+     * @param done    whether the task is done (0 for undone, 1 for done)
+     * @param name    task name
+     * @param time    task time (empty string if not applicable)
+     * @param archive whether adds to the archive list
      * @throws IOException if error occurs in file accessing
      */
-    public static void addToList(TaskType type, int done, String name, String time) throws IOException {
+    public static void addToList(TaskType type, int done, String name,
+                                 String time, boolean archive) throws IOException {
         try {
-            File file = new File(filePath);
+            File file = new File(archive ? archivePath : filePath);
             if (!file.exists()) {
-                createListFile();
+                createListFile(archive);
             }
-            FileWriter fw = new FileWriter(filePath, true);
+            FileWriter fw = new FileWriter(archive ? archivePath : filePath, true);
             fw.write(convertToText(type, done, name, time));
             fw.close();
         } catch (IOException e) {
@@ -99,15 +103,16 @@ public class Storage {
     /**
      * Reloads the stored task list
      *
+     * @param archive whether reads from the archive list
      * @return stored list of task
      * @throws IOException if error occurs in file accessing
      */
-    public static List<Task> readList() throws IOException {
+    public static List<Task> readList(boolean archive) throws IOException {
         try {
-            File file = new File(filePath);
+            File file = new File(archive ? archivePath : filePath);
             List<Task> list = new ArrayList<>();
             if (!file.exists()) {
-                createListFile();
+                createListFile(archive);
                 return list;
             } else {
                 Scanner s = new Scanner(file);

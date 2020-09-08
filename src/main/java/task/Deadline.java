@@ -19,6 +19,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public String getTime() {
+        return this.deadline;
+    }
+
+    @Override
     public String toString() {
         String time = date == null
                 ? String.format(" (by: %s)", deadline)

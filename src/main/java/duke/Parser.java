@@ -17,6 +17,16 @@ public class Parser {
     }
 
     /**
+     * Checks if a command line is a "list archived" command
+     *
+     * @param line string of a command
+     * @return list archived or not
+     */
+    public static boolean isListArchived(String line) {
+        return line.contains("list archived");
+    }
+
+    /**
      * Checks if a command line is an "exit" command
      *
      * @param line string of a command
@@ -46,9 +56,26 @@ public class Parser {
         return line.length() >= 6 && line.startsWith("delete");
     }
 
+    /**
+     * Checks if a command line is a "find" command
+     *
+     * @param line string of a command
+     * @return find or not
+     */
     public static boolean isFind(String line) {
         return line.length() >= 4 && line.startsWith("find");
     }
+
+    /**
+     * Checks if a command line is an "archive" command
+     *
+     * @param line string of a command
+     * @return archive or not
+     */
+    public static boolean isArchive(String line) {
+        return line.length() >= 7 && line.startsWith("archive");
+    }
+
 
     /**
      * Extracts task type from a given "add" command line

@@ -18,6 +18,14 @@ public abstract class Task {
     }
 
     /**
+     * Gets time of the task if applicable, or an empty string otherwise
+     * @return task name
+     */
+    public String getTime() {
+        return "";
+    }
+
+    /**
      * Sets the task to be done
      */
     public void setDone() {

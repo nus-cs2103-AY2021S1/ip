@@ -125,5 +125,19 @@ public class Ui {
         }
     }
 
+    /**
+     * Returns a message for an archive command result
+     *
+     * @param task the task archived
+     * @return a message or an error
+     */
+    public static String showArchive(String task) {
+        assert !task.isEmpty();
+        String message = "Noted! I've archived this task:\n";
+        message += task;
+        message += "\nYou can always use <list archived> command to show archived tasks :)";
+        return message;
+    }
+
 
 }
