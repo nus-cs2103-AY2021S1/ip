@@ -168,8 +168,12 @@ public class Duck {
 
 
     /**
-     * Receives input continuously until "bye" command is given.
-     * Main loop of the bot.
+     * Handles input from user and returns responses in the form of an
+     * array of String. Each entry in the String array corresponds to a
+     * new line of response.
+     *
+     * @param input Input from user.
+     * @return Responses in the form of String[].
      */
     public String[] handleInput(String input) {
         responses.clear();
