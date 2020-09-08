@@ -16,6 +16,7 @@ import java.util.List;
 public class Parser {
 
     public static Task parseTask(String taskStr) throws LukeException {
+        assert taskStr != "" : "Task should not be empty.";
         String[] taskDetails = taskStr.split(" \\| ");
         Task parsedTask = null;
         if (taskDetails[0].equals("T")) {
@@ -32,15 +33,15 @@ public class Parser {
     }
 
     public static Command parseCommand(String input) throws LukeException {
+        assert input != "" : "User input should not be empty.";
         List<String> commandSplit = Arrays.asList(input.split(" "));
         String commandType = commandSplit.get(0);
-
         try {
             switch (commandType) {
             case "list":
                 return new ListCommand();
             case "todo":
-                return new AddCommand(new Todo(commandSplit.get(1)));
+                parseTodoCommand(commandSplit);
             case "deadline":
                 String[] deadlineDetails = commandSplit.get(1).split("/by");
                 String deadlineDescription = deadlineDetails[0].trim();
@@ -60,12 +61,21 @@ public class Parser {
             default:
                 throw new LukeUnknownCommandException(commandType);
             }
-
         } catch (DateTimeException dateTimeException) {
             throw new LukeException("Please enter the date and time in the format 'DD-MM-YYYY HHMM'!");
         } catch (Exception exception) {
             throw new LukeException("Unable to read command. Please enter it in the correct format!");
         }
+    }
+
+    private static Command parseTodoCommand(List<String> commandSplit) throws LukeUnknownCommandException {
+        try {
+            String description = commandSplit.get(1);
+            return new AddCommand(new Todo(description));
+        } catch (IndexOutOfBoundsException e) {
+            throw new LukeUnknownCommandException(commandSplit.get(0));
+        }
+
     }
 
 }

@@ -23,12 +23,14 @@ public class Ui {
     }
 
     public String showAddResult(Task newTask, int numOfTasks) {
+        assert numOfTasks >= 0 : "Number of tasks should not be negative";
         return String.format("The following task has been successfully added.\n"
                 + "-> %s\n"
                 + "Now you have %d tasks in your list.\n", newTask, numOfTasks);
     }
 
     public String showDeleteResult(Task newTask, int numOfTasks) {
+        assert numOfTasks >= 0 : "Number of tasks should not be negative";
         return String.format("The following task has been successfully deleted.\n"
                 + "-> %s\n"
                 + "Now you have %d tasks in your list.\n", newTask, numOfTasks);
