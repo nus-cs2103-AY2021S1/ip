@@ -113,4 +113,8 @@ public class Ui {
         System.out.println(INDENT + "Bye. Hope to see you again soon");
         return INDENT + "Bye. Hope to see you again soon";
     }
+
+    public String printSort() {
+        return "";
+    }
 }

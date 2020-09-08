@@ -63,4 +63,8 @@ public class Deadline extends Task {
         return String.format("%s %s(By: %s)", getStatusIcon(), this.description, printTime());
     }
 
+    public LocalDate getTime() {
+        return time;
+    }
+
 }

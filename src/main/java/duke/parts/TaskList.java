@@ -1,6 +1,7 @@
 package duke.parts;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 import duke.task.Task;
 
@@ -49,7 +50,6 @@ public class TaskList {
      * @return Number of tasks stored in the list.
      */
     public int numTask() {
-
         return tasks.size();
     }
 
@@ -68,4 +68,10 @@ public class TaskList {
         }
         return temp;
     }
+
+    public void sort(Storage storage) {
+        Collections.sort(tasks, new TaskComparator());
+        this.updateList(storage);
+    }
+
 }

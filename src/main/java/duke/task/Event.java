@@ -60,4 +60,8 @@ public class Event extends Task {
     public String getOutput() {
         return String.format("%s %s(At: %s)", getStatusIcon(), this.description, printTime());
     }
+
+    public LocalDate getTime() {
+        return time;
+    }
 }

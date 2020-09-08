@@ -1,11 +1,6 @@
 package duke.parts;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.PrintCommand;
+import duke.command.*;
 import duke.error.UnknownAction;
 
 
@@ -28,7 +23,9 @@ public class Parser {
             return new PrintCommand();
         } else if (input.equals("bye")) {
             return new ExitCommand();
-        } else if (input.indexOf("delete") == 0) {
+        } else if (input.equals("sort")){
+            return new SortCommand();
+        }else if (input.indexOf("delete") == 0) {
             String index = input.replaceAll("\\D+","");
             assert Integer.parseInt(index) > 0;
             return new DeleteCommand(Integer.parseInt(index));
