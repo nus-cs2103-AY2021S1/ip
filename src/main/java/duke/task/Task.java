@@ -17,6 +17,10 @@ public class Task {
         this.taskDescription = taskDescription;
         this.isDone = isDone;
     }
+    
+    public boolean getStatus() {
+        return this.isDone;
+    }
 
     /**
      * Outputs the description of the task.
