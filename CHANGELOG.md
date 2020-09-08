@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [0.4.0](https://github.com/therizhao/ip/compare/v0.3.0...v0.4.0) (2020-09-08)
+
+
+### Features
+
+* **C-Tagging:** Add task tagging feature ([8170ab3](https://github.com/therizhao/ip/commit/8170ab33d02a91a9585d23f8eaf3d36c9f178681)), closes [#30](https://github.com/therizhao/ip/issues/30)
+
+
+### Bug Fixes
+
+* Fix gradle shadowJar script ([22ef78f](https://github.com/therizhao/ip/commit/22ef78fcd9a890177ea8311a57441c7e93147f94))
+* Fix imports in main class for guilauncher ([2c974a0](https://github.com/therizhao/ip/commit/2c974a08f0e73d84aa776c6ec819f30c9e28d7ac))
+
 ## 0.3.0 (2020-09-02)
 
 
