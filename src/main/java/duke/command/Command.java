@@ -14,6 +14,9 @@ public abstract class Command {
      *
      * @param handler Task list.
      * @param storage Storage instance.
+     * @param input User input.
+     *
+     * @throws DukeException If error encountered while executing command.
      */
     public abstract void execute(TaskListHandler handler, Storage storage, String input) throws DukeException;
 

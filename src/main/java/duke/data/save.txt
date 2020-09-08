@@ -1,9 +1,7 @@
-7
+5
 todo assignment
 todo resume
 deadline send email /by 10 Oct 2020, 09:00 PM
-todo aaaa
-todo asdasdsa
 todo aaaaaaaa
-todo asdf
-0 1 2 3 4 
+todo asddasd
+0 1 2 
