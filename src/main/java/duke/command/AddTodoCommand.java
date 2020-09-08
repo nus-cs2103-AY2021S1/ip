@@ -37,6 +37,10 @@ public class AddTodoCommand extends Command {
                 throw new DukeException("☹ OOPS!!! Check todo formatting, include description");
             }
             Todo task = new Todo(this.getCommand().substring(5));
+            String description = this.getCommand().substring(5);
+            if (detectDuplicate(list, description)) {
+                throw new DukeException("☹ OOPS!!! This is a duplicated task!.");
+            }
             list.add(task);
             String saySomthing = ("Got it. I've added this task:\n" + task.toString()
                     + "\n" + String.format("Now you have %d tasks in the list.", list.size()));
