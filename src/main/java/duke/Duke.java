@@ -1,5 +1,6 @@
 package duke;
 
+import duke.command.ByeCommand;
 import duke.command.HelpCommand;
 
 import java.util.ArrayList;
@@ -167,7 +168,7 @@ public class Duke {
 
             break;
         case BYE:
-            response += ui.byeMessage();
+            response += new ByeCommand().getResponse();
         break;
         case INVALID_IS_EMPTY:
             try {
