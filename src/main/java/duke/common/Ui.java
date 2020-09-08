@@ -16,6 +16,7 @@ public class Ui {
     }
 
     private static void displayString(String s) {
+        assert (s != null) : "Display String only";
         Main.getWindow().displayText(s);
     }
 
