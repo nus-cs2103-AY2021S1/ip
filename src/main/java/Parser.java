@@ -149,12 +149,14 @@ public class Parser {
                 count++;
             }
         }
+        assert count > 0 : "Something went wrong with the Parser.giveStringList() function";
         return string;
     }
 
     public String giveStringDone(String line, Path path) {
         try {
             int index = findIndex(line, tasks.size());
+            assert index > -1 : "An exception should have been caught before this";
             tasks.get(index).setDone();
             Storage.updateFile(tasks, path);
             String string = "Nice! I've marked this task as done:" + "\n";
@@ -168,6 +170,7 @@ public class Parser {
     public String giveStringDelete(String line, Path path) {
         try {
             int index = findIndex(line, tasks.size());
+            assert index > -1 : "An exception should have been caught before this";
             String string = "Noted. I've removed this task:" + "\n";
             string += tasks.get(index).toString() + "\n";
             string += "Now you have " + (tasks.size() - 1) + " tasks in the list.";
@@ -226,6 +229,7 @@ public class Parser {
      * @throws DukeException If input is invalid or out of bounds.
      */
     public static int findIndex(String str, int numTask) throws DukeException {
+        assert numTask > -1 : "completeDelete function was passed with negative numTask value";
         String[] words = str.split("\\s+");
         int len = words.length;
         if (len == 2) {
@@ -236,6 +240,7 @@ public class Parser {
                 if (index >= numTask || index < 0) {
                     throw new DukeException("OOPS!!! Out of bounds of the list of tasks.");
                 }
+                assert index > -1 && index < numTask : "An exception should have been thrown.";
                 return index;
             }
         }
@@ -325,7 +330,7 @@ public class Parser {
     public static Task classifyTasks(String str) throws DukeException {
         String[] words = str.split("\\s+");
         int len = words.length;
-
+        assert len > -1 : "Something went wrong with the Parser.classifyTasks() function";
         switch (words[0]) {
             case "todo":
                 return giveTodo(words, len);
