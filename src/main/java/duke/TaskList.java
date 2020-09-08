@@ -1,5 +1,7 @@
 package duke;
 
+import static java.util.stream.Collectors.toList;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -43,12 +45,11 @@ public class TaskList {
      * @return Returns a list of tasks that matches keyword.
      */
     public List<Task> findTasks(String keyword) {
-        List<Task> searchResults = new ArrayList<>();
-        tasks.forEach(task -> {
-            if (task.getDescription().contains(keyword)) {
-                searchResults.add(task);
-            }
-        });
+        List<Task> searchResults =
+            tasks.stream()
+                 .filter(task -> task.getDescription().contains(keyword))
+                 .collect(toList());
+
         return searchResults;
 
     }
