@@ -27,9 +27,12 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    private Image logoImage = new Image(this.getClass().getResourceAsStream("/images/logo.png"));
+    private Image userImage = new Image(
+            this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image dukeImage = new Image(
+            this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image logoImage = new Image(
+            this.getClass().getResourceAsStream("/images/logo.png"));
 
     /**
      * Initialise the main window
@@ -37,8 +40,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         imageView.setImage(logoImage);
-        DialogBox logo = DialogBox.getDukeDialog(Ui.logoMsg(), dukeImage);
-        DialogBox greeting = DialogBox.getDukeDialog(Ui.greetingMsg(), dukeImage);
+        DialogBox logo = DialogBox.getDukeDialog(Ui.getLogoMsg(), dukeImage);
+        DialogBox greeting = DialogBox.getDukeDialog(Ui.getGreetingMsg(), dukeImage);
         dialogContainer.getChildren().addAll(logo, greeting);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
@@ -48,18 +51,13 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and
+     * the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
-        userInput.clear();
 
         if (input.equals("bye")) {
             Platform.runLater(() -> {
@@ -67,11 +65,18 @@ public class MainWindow extends AnchorPane {
                     exitPlatform();
                 } catch (InterruptedException e) {
                     dialogContainer.getChildren().addAll(
-                            DialogBox.getUserDialog(e.getMessage(), dukeImage)
-                    );
+                            DialogBox.getUserDialog(e.getMessage(), dukeImage));
                 }
             });
         }
+
+
+        String response = duke.getResponse(input);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getUserDialog(input, userImage),
+                DialogBox.getDukeDialog(response, dukeImage)
+        );
+        userInput.clear();
     }
 
     private void exitPlatform() throws InterruptedException {

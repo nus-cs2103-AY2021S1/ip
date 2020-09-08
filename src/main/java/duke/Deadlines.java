@@ -13,24 +13,26 @@ public class Deadlines extends Task {
     /**
      * Deadlines class constructor
      *
-     * @param taskTitle A string of deadline task name
+     * @param taskTitle    A string of deadline task name
      * @param deadlineTime A string of deadline time
-     * @param isDone Status of the deadline task
+     * @param isDone       Status of the deadline task
      */
     public Deadlines(String taskTitle, String deadlineTime, Boolean isDone) {
         super(taskTitle, isDone, TaskTypes.TASK_TYPE_DEADLINE);
-        this.deadlineTime = LocalDateTime.parse(deadlineTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        this.deadlineTime = LocalDateTime.parse(deadlineTime,
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
     /**
      * Loads deadline tasks from the file at beginning
      *
-     * @param taskTitle A string of deadline task name
+     * @param taskTitle    A string of deadline task name
      * @param deadlineTime A string of deadline time
-     * @param isDone Status of the deadline task
-     * @param tasks The overall user's task list
+     * @param isDone       Status of the deadline task
+     * @param tasks        The overall user's task list
      */
-    public static void loadDeadlineTask(String taskTitle, String deadlineTime, Boolean isDone, ArrayList<Task> tasks) {
+    public static void loadDeadlineTask(String taskTitle, String deadlineTime,
+                                        Boolean isDone, ArrayList<Task> tasks) {
         deadlineTime = deadlineTime.replace('T', ' ');
         Deadlines deadline = new Deadlines(taskTitle, deadlineTime, isDone);
         tasks.add(deadline);
@@ -57,6 +59,7 @@ public class Deadlines extends Task {
 
     /**
      * Returns a string follows the format of the file
+     *
      * @return A string follows the format of the file
      */
     @Override

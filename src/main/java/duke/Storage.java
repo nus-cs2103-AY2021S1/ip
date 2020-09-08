@@ -41,28 +41,32 @@ public class Storage {
                             ? true
                             : false;
 
-                    switch (lineSegment[0]) {
-                    case "T":
-                        ToDos.loadTodoTask(lineSegment[2], isDone, tasks);
-                        break;
-                    case "D":
-                        Deadlines.loadDeadlineTask(lineSegment[2], lineSegment[3], isDone, tasks);
-                        break;
-                    case "E":
-                        Events.loadEventTask(lineSegment[2], lineSegment[3], isDone, tasks);
-                        break;
-                    default:
-                        break;
-                    }
+                    addDifferentTypeOfTask(tasks, lineSegment, isDone);
                     lineData = bufferedReader.readLine();
                 }
                 bufferedReader.close();
                 fileReader.close();
             }
         } catch (IOException e) {
-            Warnings.invalidFileInput(e);
+            Warnings.getInvalidFileInputMsg(e);
         }
         return tasks;
+    }
+
+    private void addDifferentTypeOfTask(ArrayList<Task> tasks, String[] lineSegment, boolean isDone) {
+        switch (lineSegment[0]) {
+        case "T":
+            ToDos.loadTodoTask(lineSegment[2], isDone, tasks);
+            break;
+        case "D":
+            Deadlines.loadDeadlineTask(lineSegment[2], lineSegment[3], isDone, tasks);
+            break;
+        case "E":
+            Events.loadEventTask(lineSegment[2], lineSegment[3], isDone, tasks);
+            break;
+        default:
+            break;
+        }
     }
 
     /**
@@ -84,7 +88,7 @@ public class Storage {
             }
             fileWriter.close();
         } catch (IOException e) {
-            Warnings.invalidFileOutput(e);
+            Warnings.getInvalidFileOutputMsg(e);
         }
     }
 }
