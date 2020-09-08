@@ -2,7 +2,8 @@
 
 ## Features 
 
-### Feature 1 
+### Feature 1
+ 
 Description of feature.
 
 ## Usage
@@ -18,3 +19,4 @@ Example of usage:
 Expected outcome:
 
 `outcome`
+`

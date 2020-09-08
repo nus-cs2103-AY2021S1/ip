@@ -1,7 +1,51 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
+Hello! I'm Duke
+What can I do for you?
+Got it. I've added this task:
+ [T][ ] buy book
+Date format is wrong. It should be yyyy-mm-dd and within possible date ranges
+Date format is wrong. It should be yyyy-mm-dd and within possible date ranges
+Date format is wrong. It should be yyyy-mm-dd and within possible date ranges
+Error! The description of a event is missing a date.
+Date format is wrong. It should be yyyy-mm-dd and within possible date ranges
+Got it. I've added this task:
+ [E][ ] funny (at: May 25 2019)
+Error! The description of a deadline is missing a date.
+Got it. I've added this task:
+ [E][ ] return book (by: Jul 29 2020)
+Date format is wrong. It should be yyyy-mm-dd and within possible date ranges
+Got it. I've added this task:
+ [E][ ] funny (by: May 25 2019)
+Got it. I've added this task:
+ [T][ ] team bundling
+Got it. I've added this task:
+ [T][ ] eat chicken nuggets
+Good job. This task is marked as done:
+ [T][x] team bundling
+Task at index 100 doesn't exist
+There are 6 tasks currently. Please a number between 1 and 6 inclusive.
+Date format is wrong. It should be yyyy-mm-dd and within possible date ranges
+Good job. This task is marked as done:
+ [E][x] funny (at: May 25 2019)
+1. [T][ ] buy book
+2. [E][x] funny (at: May 25 2019)
+3. [E][ ] return book (by: Jul 29 2020)
+4. [E][ ] funny (by: May 25 2019)
+5. [T][x] team bundling
+6. [T][ ] eat chicken nuggets
 
+Task at index 100 doesn't exist
+There are 6 tasks currently. Please a number between 1 and 6 inclusive.
+Noted. I've remove this task:
+ [E][ ] return book (by: Jul 29 2020)
+1. [T][ ] buy book
+2. [E][x] funny (at: May 25 2019)
+3. [E][ ] funny (by: May 25 2019)
+4. [T][x] team bundling
+5. [T][ ] eat chicken nuggets
+
+Noted. I've remove this task:
+ [T][x] team bundling
+1. [E][x] funny (at: May 25 2019)
+2. [E][ ] funny (by: May 25 2019)
+
+Bye! Hope to never see you again!
