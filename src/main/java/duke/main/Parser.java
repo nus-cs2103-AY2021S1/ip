@@ -2,10 +2,7 @@ package duke.main;
 
 import java.util.Scanner;
 
-import duke.exception.EmptyDateException;
-import duke.exception.EmptyTaskException;
-import duke.exception.InvalidDateFormatException;
-import duke.exception.InvalidIndexException;
+import duke.exception.*;
 
 /**
  * Reads and parses the user input.
@@ -96,7 +93,9 @@ public class Parser {
         if (components.length < 2) {
             throw new EmptyDateException();
         } else {
-            return components[1];
+            String timeAndPriority = components[1];
+            String time = timeAndPriority.split(" /priority")[0];
+            return time;
         }
     }
 
@@ -122,5 +121,24 @@ public class Parser {
     public static boolean hasTime(String time) {
         String[] components = time.split(" ");
         return components.length == 2;
+    }
+
+    public static boolean hasPriority(String userInput) {
+        String[] components = userInput.split("/priority ");
+        return components.length > 1;
+    }
+
+    private static boolean isValidPriority(String priority) {
+        return priority.equals("high") || priority.equals("medium") || priority.equals("low");
+    }
+
+    public static String getPriority(String userInput) throws InvalidPriority {
+        String[] components = userInput.split("/priority ");
+        String priority = components[1];
+        if (isValidPriority(priority)) {
+            return priority;
+        } else {
+            throw new InvalidPriority();
+        }
     }
 }

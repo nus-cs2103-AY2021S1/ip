@@ -14,10 +14,6 @@ import duke.task.TaskList;
  */
 public class Processor {
 
-    private static boolean isValidIndex(int index, TaskList tasks) {
-        return index > 0 && index <= tasks.getSize();
-    }
-
     /**
      * Handles the case when user input bye command.
      * @param ui The UI that handles interaction between program and user.
@@ -88,7 +84,16 @@ public class Processor {
             String userInput, StringBuilder response, Ui ui, TaskList tasks) throws DukeException {
         String argument = Parser.getArgs(userInput);
         String taskDescription = Parser.findDescription(argument);
-        Task task = new ToDo(taskDescription);
+        boolean hasPriority = Parser.hasPriority(userInput);
+
+        Task task;
+        if (hasPriority) {
+            String priority = Parser.getPriority(userInput);
+            task = new ToDo(taskDescription, false, priority);
+        } else {
+            task = new ToDo(taskDescription, false, "low");
+        }
+
         tasks.addTask(task);
         String message = ui.getAddTaskMessage(task, tasks);
         response.append(message);
@@ -107,12 +112,21 @@ public class Processor {
             String userInput, StringBuilder response, Ui ui, TaskList tasks) throws DukeException {
         String argument = Parser.getArgs(userInput);
         String taskDescription = Parser.findDescription(argument);
-        String deadlineTime = Parser.findTime(argument, "by");
+        String deadLineTime = Parser.findTime(argument, "by");
         // check whether the date time format is correct
-        Parser.isValidDate(deadlineTime);
+        Parser.isValidDate(deadLineTime);
         // check whether time is included
-        boolean hasTime = Parser.hasTime(deadlineTime);
-        Task deadLine = new DeadLine(taskDescription, deadlineTime, hasTime, false);
+        boolean hasTime = Parser.hasTime(deadLineTime);
+        boolean hasPriority = Parser.hasPriority(userInput);
+
+        Task deadLine;
+        if (hasPriority) {
+            String priority = Parser.getPriority(userInput);
+            deadLine = new DeadLine(taskDescription, deadLineTime, hasTime, false, priority);
+        } else {
+            deadLine = new DeadLine(taskDescription, deadLineTime, hasTime, false, "low");
+        }
+
         tasks.addTask(deadLine);
         String message = ui.getAddTaskMessage(deadLine, tasks);
         response.append(message);
@@ -136,7 +150,16 @@ public class Processor {
         Parser.isValidDate(eventTime);
         // check whether time is included
         boolean hasTime = Parser.hasTime(eventTime);
-        Task event = new Event(taskDescription, eventTime, hasTime, false);
+        boolean hasPriority = Parser.hasPriority(userInput);
+
+        Task event;
+        if (hasPriority) {
+            String priority = Parser.getPriority(userInput);
+            event = new Event(taskDescription, eventTime, hasTime, false, priority);
+        } else {
+            event = new Event(taskDescription, eventTime, hasTime, false, "low");
+        }
+
         tasks.addTask(event);
         String message = ui.getAddTaskMessage(event, tasks);
         response.append(message);

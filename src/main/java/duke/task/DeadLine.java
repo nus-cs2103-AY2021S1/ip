@@ -8,13 +8,14 @@ public class DeadLine extends Task {
     private LocalDate deadLine;
     private LocalDateTime deadLineWithTime;
 
-    public DeadLine(String description, String deadLine, boolean hasTime, boolean isDone) {
-        super(description, isDone);
+    public DeadLine(
+            String description, String time, boolean hasTime, boolean isDone, String priority) {
+        super(description, isDone, priority);
         if (!hasTime) {
-            this.deadLine = LocalDate.parse(deadLine);
+            this.deadLine = LocalDate.parse(time);
         } else {
             DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-            this.deadLineWithTime = LocalDateTime.parse(deadLine, format);
+            this.deadLineWithTime = LocalDateTime.parse(time, format);
         }
     }
 
@@ -22,7 +23,7 @@ public class DeadLine extends Task {
     @Override
     public String getStorageString() {
         return "D | " + this.getStatusIcon() + " | " + this.description
-                + " | " + this.deadLine + "\n";
+                + " | " + this.deadLine + " | " + this.priority.toString() +"\n";
     }
 
     @Override
@@ -34,6 +35,7 @@ public class DeadLine extends Task {
             datePrintFormat = deadLineWithTime.format(DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm"));
         }
         return "[D][" + this.getStatusIcon() + "] "
-                + this.description + " (by: " + datePrintFormat + ")";
+                + this.description + " (by: " + datePrintFormat + ")"
+                + " (Priority: " + this.priority.toString() + ")";
     }
 }

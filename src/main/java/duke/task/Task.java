@@ -3,15 +3,30 @@ package duke.task;
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected Priority priority;
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.priority = Priority.LOW;
     }
 
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
+        this.priority = Priority.LOW;
+    }
+
+    public Task(String description, boolean isDone, String priority) {
+        this.description = description;
+        this.isDone = isDone;
+        if (priority.equals("high")) {
+            this.priority = Priority.HIGH;
+        } else if (priority.equals("medium")) {
+            this.priority = Priority.MEDIUM;
+        } else {
+            this.priority = Priority.LOW;
+        }
     }
 
     public String getStatusIcon() {

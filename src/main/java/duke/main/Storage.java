@@ -89,19 +89,20 @@ public class Storage {
      * @throws IOException when the folder or the saved file cannot be found.
      */
     private Task translateStringToTask(String savedTask) throws IOException {
-        String[] arr = savedTask.split(" \\| ");
-        String command = arr[0];
-        boolean isDone = arr[1].equals("\u2713");
-        String description = arr[2];
-        String timeNotProcessed = arr.length == 3 ? "" : arr[3];
+        String[] components = savedTask.split(" \\| ");
+        String command = components[0];
+        boolean isDone = components[1].equals("\u2713");
+        String description = components[2];
+        String timeNotProcessed = components.length == 4 ? "" : components[3];
         boolean hasTime = timeNotProcessed.contains("T");
         String timeProcessed = timeNotProcessed.replace("T", " ");
+        String priority = components.length == 5 ? components[4] : components[3];
         if (command.equals("T")) {
-            return new ToDo(description, isDone);
+            return new ToDo(description, isDone, priority);
         } else if (command.equals("E")) {
-            return new Event(description, timeProcessed, hasTime, isDone);
+            return new Event(description, timeProcessed, hasTime, isDone, priority);
         } else if (command.equals("D")) {
-            return new DeadLine(description, timeProcessed, hasTime, isDone);
+            return new DeadLine(description, timeProcessed, hasTime, isDone, priority);
         } else {
             throw new IOException("Saved task is invalid");
         }
