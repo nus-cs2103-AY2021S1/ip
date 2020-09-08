@@ -9,6 +9,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -30,6 +31,9 @@ public class MainWindow extends AnchorPane {
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
     private Image logoImage = new Image(this.getClass().getResourceAsStream("/images/logo.png"));
 
+    /**
+     * Initialise the main window
+     */
     @FXML
     public void initialize() {
         imageView.setImage(logoImage);

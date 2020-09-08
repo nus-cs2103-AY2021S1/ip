@@ -3,7 +3,7 @@ package duke;
 import java.io.IOException;
 
 /**
- * Displays different kinds of warning messages when error occurs.
+ * Display different kinds of warning messages when error occurs.
  */
 public class Warnings extends Ui {
     private static final String DIVIDER_WARNING = "###########################";
