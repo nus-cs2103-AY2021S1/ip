@@ -44,6 +44,9 @@ public class Ui {
         return INDENTATION + message;
     }
 
+    private String addLineBreak(String message) {
+        return message + "\n";
+    }
     /**
      * Builds a complete message from multiple small messages.
      * @param strings String array contains all the small messages.
@@ -52,7 +55,8 @@ public class Ui {
     private String buildMessage(String[] strings) {
         String result = "";
         for (int i = 0; i < strings.length; i++) {
-            result += strings[i] + (i == (strings.length - 1) ? "" : "\n");
+            String message = strings[i];
+            result += addLineBreak(message);
         }
         return result;
     }
@@ -64,6 +68,7 @@ public class Ui {
     public String getMarkTaskAsDoneMessage(Task task) {
         String result = "Nice! I've marked this task as done:\n";
         result += indentMessage(task.toString());
+        result = addLineBreak(result);
         return result;
     }
 
@@ -74,6 +79,8 @@ public class Ui {
      * @param taskList The task list of the user.
      */
     private String taskListModify(String message, Task task, TaskList taskList) {
+        assert task != null : "task does not exist";
+        assert taskList != null : "task list does not exist";
         String newTaskListLength = "Now you have " + taskList.getSize() + " items in the list";
         String taskDescription = indentMessage(task.toString());
         String[] strings = {message, taskDescription, newTaskListLength};
@@ -107,9 +114,9 @@ public class Ui {
         String result = "Here are the matching tasks in your list:\n";
         for (int i = 0; i < taskList.getSize(); i++) {
             int taskNumber = i + 1;
-            String taskDescription = taskList.getTask(i).toString()
-                    + (i == taskList.getSize() - 1 ? "" : "\n");
-            result = result + indentMessage(taskNumber + "." + taskDescription);
+            String taskDetail = taskList.getTask(i).toString();
+            String taskDetailWithLineBreak = addLineBreak(taskDetail);
+            result = result + indentMessage(taskNumber + "." + taskDetailWithLineBreak);
         }
         return result;
     }
@@ -122,9 +129,9 @@ public class Ui {
         String result = "Here are the tasks in your list:\n";
         for (int i = 0; i < taskList.getSize(); i++) {
             int taskNumber = i + 1;
-            String taskDescription = taskList.getTask(i).toString()
-                    + (i == taskList.getSize() - 1 ? "" : "\n");
-            result = result + indentMessage(taskNumber + "." + taskDescription);
+            String taskDetail = taskList.getTask(i).toString();
+            String taskDetailWithLineBreak = addLineBreak(taskDetail);
+            result = result + indentMessage(taskNumber + "." + taskDetailWithLineBreak);
         }
         return result;
     }
