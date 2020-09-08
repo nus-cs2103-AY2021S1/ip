@@ -137,6 +137,8 @@ public class TaskList implements Observable<TaskList> /* CRTP KEKW */ {
      */
     public void clearTasks() {
         this.tasks.clear();
+
+        this.updateObservers();
     }
 
     /**

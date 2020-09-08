@@ -51,8 +51,8 @@ public class TaskParser {
         for (int i = 1; i < pieces.length; i++) {
             if (dateSpec.isPresent() && pieces[i].startsWith(dateSpec.get())) {
                 date = parseDate(pieces[i].substring(dateSpec.get().length()).strip());
-            } else if (pieces[i].startsWith("desc")) {
-                desc = pieces[i];
+            } else if (pieces[i].startsWith("desc ")) {
+                desc = pieces[i].substring(5).strip();
             } else {
                 throw new InvalidInputException(String.format("Unexpected argument '%s'", pieces[i]), usage);
             }
