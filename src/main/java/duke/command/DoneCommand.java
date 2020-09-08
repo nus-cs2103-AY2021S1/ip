@@ -4,6 +4,7 @@ import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
 
+import duke.exception.DukeInvalidIndexException;
 import duke.exception.DukeLoadingErrorException;
 
 import duke.task.Task;
@@ -35,11 +36,16 @@ public class DoneCommand extends Command {
      * @param ui Ui responsible for the operation.
      * @param storage Storage where the changes are written to.
      * @throws DukeLoadingErrorException If I/O operation fails during Storage#save.
+     * @throws DukeInvalidIndexException If invalid index is given.
      */
-    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeLoadingErrorException {
-        Task completedTask = taskList.completeTask(taskNo);
-        storage.saveTasks(taskList);
-        String uiMessage = String.format("Nice! I've marked this task as done:\n%s", completedTask.toString());
-        return ui.print(uiMessage);
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeLoadingErrorException, DukeInvalidIndexException {
+        try {
+            Task completedTask = taskList.completeTask(taskNo);
+            storage.saveTasks(taskList);
+            String uiMessage = String.format("Nice! I've marked this task as done:\n%s", completedTask.toString());
+            return ui.print(uiMessage);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeInvalidIndexException();
+        }
     }
 }

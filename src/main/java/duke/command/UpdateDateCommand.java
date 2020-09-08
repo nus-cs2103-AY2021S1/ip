@@ -3,6 +3,7 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DukeInvalidIndexException;
 import duke.exception.DukeInvalidUpdateException;
 import duke.exception.DukeLoadingErrorException;
 import duke.task.Task;
@@ -34,16 +35,21 @@ public class UpdateDateCommand extends UpdateCommand {
      * @param storage Storage where the changes are written to.
      * @throws DukeLoadingErrorException If I/O operation fails during Storage#save.
      * @throws DukeInvalidUpdateException when attempting to update an invalid detail.
+     * @throws DukeInvalidIndexException If invalid index is given.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage)
-            throws DukeLoadingErrorException, DukeInvalidUpdateException {
-        Task updatedTask = taskList.updateTaskDate(super.taskNo, this.date);
-        storage.saveTasks(taskList);
-        String uiMessage = String.format(
-                "Noted. I've updated this task:\n%s\n%s",
-                updatedTask.toString(),
-                taskList.getTaskSizeMessage());
-        return ui.print(uiMessage);
+            throws DukeLoadingErrorException, DukeInvalidUpdateException, DukeInvalidIndexException {
+        try {
+            Task updatedTask = taskList.updateTaskDate(super.taskNo, this.date);
+            storage.saveTasks(taskList);
+            String uiMessage = String.format(
+                    "Noted. I've updated this task:\n%s\n%s",
+                    updatedTask.toString(),
+                    taskList.getTaskSizeMessage());
+            return ui.print(uiMessage);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeInvalidIndexException();
+        }
     }
 }

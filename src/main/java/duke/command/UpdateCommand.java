@@ -3,6 +3,7 @@ package duke.command;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DukeInvalidIndexException;
 import duke.exception.DukeInvalidUpdateException;
 import duke.exception.DukeLoadingErrorException;
 
@@ -29,7 +30,8 @@ public abstract class UpdateCommand extends Command {
      * @param storage Storage where the changes are written to.
      * @throws DukeLoadingErrorException If I/O operation fails during Storage#save.
      * @throws DukeInvalidUpdateException when attempting to update an invalid detail.
+     * @throws DukeInvalidIndexException If invalid index is given.
      */
     public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeLoadingErrorException,
-            DukeInvalidUpdateException;
+            DukeInvalidUpdateException, DukeInvalidIndexException;
 }

@@ -94,9 +94,7 @@ public class Parser {
                 return new UpdateDateCommand(taskNo, details[1]);
             } else {
                 details = command.split(" /desc ");
-                System.out.println(Arrays.toString(details));
                 if (details.length < 2) {
-                    System.out.println("hello");
                     throw new DukeEmptyInputException("You have not entered a new description for your task!");
                 }
                 int taskNo = Integer.parseInt(details[0]);
