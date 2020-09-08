@@ -1,6 +1,5 @@
 package duke;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Parser {
@@ -188,7 +187,6 @@ public class Parser {
             this.isEnd = true;
             dukeOutput = this.userInteract.showBye();
             break;
-
         default:
             throw new NoResponseException();
         }

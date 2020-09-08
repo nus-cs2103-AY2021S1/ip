@@ -93,7 +93,7 @@ public class Storage {
         FileWriter fw = new FileWriter("data/duke.txt");
         List<String> fileString = tasks.convertToFileFormat();
         for (int k = 0; k < fileString.size(); k++) {
-            fw.write(fileString.get(k) + "\n");
+            fw.write(fileString.get(k));
         }
         fw.close();
     }

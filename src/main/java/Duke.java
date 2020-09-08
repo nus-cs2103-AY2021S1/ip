@@ -11,6 +11,7 @@ import duke.Ui;
 public class Duke {
     protected Storage storage;
     protected Ui ui;
+    protected Parser parser;
     private TaskList tasks;
 
     /**
@@ -23,6 +24,7 @@ public class Duke {
         this.storage = new Storage(path, fileName);
         this.tasks = storage.load();
         this.ui = new Ui();
+        this.parser = new Parser(this.ui, this.tasks);
     }
 
     /**
@@ -33,7 +35,6 @@ public class Duke {
      * @return String which a response from ui and will be shown on the GUI;
      */
     protected String getResponse(String input) throws EmptyInputException, NoResponseException, IOException {
-        Parser parser = new Parser(this.ui, this.tasks);
         String response = parser.parse(input);
         if (parser.getIsEnd()) {
             this.storage.storeFile(tasks);
