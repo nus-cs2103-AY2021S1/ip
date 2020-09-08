@@ -2,10 +2,7 @@ package duke.storage;
 
 import duke.exception.DukeException;
 
-import duke.task.Task;
-import duke.task.ToDo;
-import duke.task.Event;
-import duke.task.Deadline;
+import duke.task.*;
 
 import duke.tasklist.TaskList;
 
@@ -62,7 +59,7 @@ public class Storage {
      * @param fileScanner the text file scanner.
      * @return ArrayList of tasks corresponding to those in the text file.
      */
-    private ArrayList<Task> createTaskListFromFile(Scanner fileScanner) {
+    private ArrayList<Task> createTaskListFromFile(Scanner fileScanner) throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
         while (fileScanner.hasNext()) {
             String task = fileScanner.nextLine();
@@ -78,7 +75,7 @@ public class Storage {
      * @param task a single line from the text file.
      * @return Task corresponding to the parameter String task.
      */
-    private Task createTask(String task) {
+    private Task createTask(String task) throws DukeException {
         String[] taskSplit = task.split(">", 4);
         String taskType = taskSplit[0];
         boolean taskIsDone = taskSplit[1].equals("1") ? true : false;
@@ -88,9 +85,14 @@ public class Storage {
         } else if (taskType.equals("D")) {
             String taskBy = taskSplit[3];
             return new Deadline(taskDescription, taskBy, taskIsDone);
-        } else {
+        } else if (taskType.equals("E")) {
             String taskAt = taskSplit[3];
             return new Event(taskDescription, taskAt, taskIsDone);
+        } else if (taskType.equals("W")) {
+            String taskEvery = taskSplit[3];
+            return new WeeklyTask(taskDescription, taskEvery, taskIsDone);
+        } else {
+            throw new DukeException("Failed to load duke task file!");
         }
     }
 
