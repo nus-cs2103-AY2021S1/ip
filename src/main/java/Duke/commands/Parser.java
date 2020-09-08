@@ -91,9 +91,10 @@ public class Parser {
                             TaskList.markDone(x);
                             return TaskList.getListView() + "BARK BARK!!! (Task marked as done!!!)";
                         } else if (input.substring(0, spaceIndex).equals(UI.getMessage("DELETE"))) {
+                            String deleteMsg = "Bark bark: bork bark. (Removing task: " +
+                                    TaskList.getThingsOnList().get(x) + ".";
                             TaskList.deleteFromList(x);
-                            return ("Bark bark: bork bark. (Removing task: " +
-                                    TaskList.getThingsOnList().get(x) + ".");
+                            return deleteMsg;
                         }
                     } catch (NumberFormatException e) {
                         throw new DukeExceptions("Bark bark. (That number isn't on the list.)");
@@ -130,7 +131,7 @@ public class Parser {
                         throw new DukeExceptions("Bark bark bark! (Please use me with proper commands!)");
                     } else {
                         return ("Bark. Bork: bark bark woof. (Roger. I've added this task:\n" +
-                                TaskList.getLastTask() + "\n    " +
+                                TaskList.getLastTask() + "\n" +
                                 "Now you have " + TaskList.getThingsOnListSize() + " tasks in the list.)");
                     }
                 }
