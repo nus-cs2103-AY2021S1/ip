@@ -30,6 +30,7 @@ public class MainWindow extends AnchorPane {
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image mascotImage = new Image(this.getClass().getResourceAsStream("/images/DaMascot.png"));
 
     @FXML
     public void initialize() {
@@ -39,6 +40,9 @@ public class MainWindow extends AnchorPane {
         txtF.getChildren().add(text);
     }
 
+    /**
+     * Checks if user's data file is loaded successfully.
+     */
     public void checkFileLoaded() {
         boolean isFileLoaded = duke.getFileLoadedStatus();
         String fileLoadedStatusMessage;
@@ -51,12 +55,25 @@ public class MainWindow extends AnchorPane {
         }
 
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(fileLoadedStatusMessage, dukeImage)
+                DialogBox.getDukeDialog(fileLoadedStatusMessage, mascotImage)
         );
     }
 
+    /**
+     * References the same Duke object initialised in Main.
+     * @param d is the Duke object initialised by Main.
+     */
     public void setDuke(Duke d) {
         duke = d;
+    }
+
+    /**
+     * Shows and reminds user of the upcoming tasks to complete.
+     */
+    public void showReminder(String reminders) {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(reminders, mascotImage)
+        );
     }
 
     /**
@@ -73,7 +90,7 @@ public class MainWindow extends AnchorPane {
     private void handleReminderAction() {
         String reminder = duke.getReminder();
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(reminder, dukeImage)
+                DialogBox.getDukeDialog(reminder, mascotImage)
         );
     }
 

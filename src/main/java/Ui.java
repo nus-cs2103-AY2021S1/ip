@@ -30,8 +30,8 @@ public class Ui {
      */
     public static String loadFileSuccessMessage() {
         return "*File has successfully loaded!*\n"
-                + "\nDuke Commands: bye, list, find, done, delete, todo, "
-                + "\n               event, deadline";
+                + "\nDuke Commands: "
+                + "\nbye, list, find, done, delete, todo, event, deadline";
     }
 
     /**

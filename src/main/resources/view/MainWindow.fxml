@@ -11,15 +11,19 @@
     <children>
         <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" AnchorPane.bottomAnchor="1.0" />
         <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" />
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" vvalue="1.0">
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" layoutY="26.0" prefHeight="531.0" prefWidth="400.0" vvalue="1.0">
             <content>
-                <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0">
+                <VBox fx:id="dialogContainer" prefHeight="530.0" prefWidth="388.0">
                <children>
-                  <TextFlow fx:id="txtF" prefHeight="55.0" prefWidth="388.0" />
-                  <Button fx:id="loadFileButton" mnemonicParsing="false" onAction="#checkFileLoaded" prefHeight="30.0" prefWidth="88.0" text="File loaded?" textFill="#4254e3" />
+                  <TextFlow fx:id="txtF" prefHeight="83.0" prefWidth="388.0" />
                </children></VBox>
             </content>
         </ScrollPane>
-      <Button fx:id="reminderButton" mnemonicParsing="false" onAction="#handleReminderAction" prefHeight="30.0" prefWidth="75.0" text="Reminders" textFill="#2d6dbf" />
+      <TextFlow prefHeight="28.0" prefWidth="400.0" AnchorPane.bottomAnchor="572.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+         <children>
+            <Button fx:id="loadFileButton" mnemonicParsing="false" onAction="#checkFileLoaded" prefHeight="20.0" prefWidth="75.0" text="File Status" textFill="#4254e3" />
+            <Button fx:id="reminderButton" mnemonicParsing="false" onAction="#handleReminderAction" prefHeight="20.0" prefWidth="75.0" text="Reminder" textFill="#2d6dbf" />
+         </children>
+      </TextFlow>
     </children>
 </AnchorPane>

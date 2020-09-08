@@ -24,6 +24,8 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
+            String reminders = duke.getReminder();
+            fxmlLoader.<MainWindow>getController().showReminder(reminders);
 
         } catch (IOException e) {
             e.printStackTrace();
