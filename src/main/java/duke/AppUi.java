@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.*;
+
 import java.util.ArrayList;
 import java.util.function.Supplier;
 
@@ -119,6 +121,13 @@ public class AppUi extends Ui {
         }
     }
 
+    /**
+     * Returns message after add multiple tasks
+     * @param type type of the task
+     * @param overallListSize the overall list size
+     * @param list list of tasks
+     * @return message after add multiple tasks
+     */
     public String getAfterAddMsgVarargs(int type, int overallListSize, Task ... list){
         String res = "Got it. I've added this task:\n";
         for (int i = 0; i < list.length; i++) {

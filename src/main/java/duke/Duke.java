@@ -54,6 +54,7 @@ public class Duke extends Application {
             tasks = new TaskList(TaskList.readTextFile2List(storage.load()));
             isTextFileExist = true;
         } catch (Exception e) {
+            e.printStackTrace();
             tasks = new TaskList();
             isTextFileExist = false;
         }

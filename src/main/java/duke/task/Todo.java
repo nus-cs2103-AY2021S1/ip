@@ -1,6 +1,5 @@
-package duke;
+package duke.task;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 
 public class Todo extends Task {
@@ -11,11 +10,11 @@ public class Todo extends Task {
      * @return the description of the Todo
      */
     public static String getDescription(String input) {
-        int start = 0;
-        while (!input.substring(start, start + 4).equals("todo")) {
-            start++;
+        int len = input.length(), end = 0;
+        while (end < len && input.charAt(end) != '#') {
+            end++;
         }
-        return input.substring(start + 5);
+        return input.substring(0, end);
     }
 
     /**
@@ -27,14 +26,16 @@ public class Todo extends Task {
 
         assert !input.equals("") : "input string passed into of method of Todo class is empty";
 
-        String description = getDescription(input);
-        if (description.equals("")) {
+        String trimmed = trim(input, TaskType.TODO);
+        if (trimmed.equals("")) {
             return null;
         }
-        String[] descriptions = description.split(",");
+        String[] descriptions = trimmed.split(",");
         ArrayList<Todo> res = new ArrayList<>();
-        for(String des : descriptions){
-            res.add(new Todo(des));
+        for (String des : descriptions) {
+            String description = getDescription(des);
+            String[] tags = getTags(des);
+            res.add(new Todo(description, tags));
         }
         return res;
     }
@@ -54,6 +55,28 @@ public class Todo extends Task {
      */
     public Todo(String description, boolean isDone){
         super(description, isDone);
+        this.tagList = new TagList();
+    }
+
+    /**
+     * Constructs a Todo object
+     * @param description the description of the Todo
+     * @param tags list of tags of the Todo
+     */
+    public Todo(String description, String[] tags) {
+        super(description);
+        this.tagList = TagList.of(tags);
+    }
+
+    /**
+     * Construct a Todo object
+     * @param description the description of the Todo
+     * @param isDone whether the todo is done
+     * @param tags the tags of the todo
+     */
+    public Todo(String description, boolean isDone, String tags) {
+        super(description, isDone);
+        this.tagList = TagList.of(tags);
     }
 
 
@@ -63,6 +86,6 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return "[T]" + super.toString() + "\n";
     }
 }

@@ -1,5 +1,7 @@
 package duke;
 
+import duke.task.*;
+
 import java.io.*;
 
 public class Storage {
@@ -32,15 +34,16 @@ public class Storage {
             for (int i = 0; i < list.getSize(); i++) {
                 if (list.get(i) instanceof Todo) {
                     Todo todo = (Todo) list.get(i);
-                    fileWriter.write("T|" + (todo.isDone ? "1" : "0") + "|" + todo.getDescription() + "\n");
+                    fileWriter.write("T|" + (todo.getDone() ? "1" : "0") + "|" + todo.getDescription()
+                            + "|" + todo.getTagList().fileToString() + "\n");
                 } else if (list.get(i) instanceof Deadline) {
                     Deadline ddl = (Deadline) list.get(i);
-                    fileWriter.write("D|" + (ddl.isDone ? "1" : "0") + "|" + ddl.getDescription()
-                            + "|" + ddl.getBy() + "\n");
+                    fileWriter.write("D|" + (ddl.getDone() ? "1" : "0") + "|" + ddl.getDescription()
+                            + "|" + ddl.getBy() + "|" + ddl.getTagList().fileToString() + "\n");
                 } else {
                     Event event = (Event) list.get(i);
-                    fileWriter.write("E|" + (event.isDone ? "1" : "0") + "|" + event.getDescription()
-                            + "|" + event.getAt() + "\n");
+                    fileWriter.write("E|" + (event.getDone() ? "1" : "0") + "|" + event.getDescription()
+                            + "|" + event.getAt() + "|" + event.getTagList().fileToString() + "\n");
                 }
             }
             fileWriter.close();
