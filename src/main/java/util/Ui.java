@@ -78,7 +78,7 @@ public class Ui {
     }
 
     /**
-     * Prints Duke's symbols before response.
+     * Returns a line break and Duke's symbols before response.
      *
      * @return The string containing output symbols.
      */
@@ -87,7 +87,7 @@ public class Ui {
     }
 
     /**
-     * Returns the line breaker string.
+     * Returns the line break string.
      *
      * @returns Line break as String.
      */

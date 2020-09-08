@@ -2,7 +2,6 @@ package util.task;
 
 /**
  * To-do inherits from Task.
- *
  * To-do is similar to a Task.
  */
 public class Todo extends Task {
