@@ -1,6 +1,7 @@
 package duke;
 
 import duke.command.Command;
+import duke.command.RemindCommand;
 import duke.exception.DukeException;
 import duke.parser.Parser;
 import duke.storage.Storage;
@@ -53,33 +54,6 @@ public class Duke extends Application {
 
     public Duke () {
 
-    }
-
-    /**
-     * Executes the programme provided that Duke has been initialized.
-     * Following the convention for user input is crucial for an expected behavior.
-     * Exception will be thrown upon undefined user input.
-     */
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readLine();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
     }
 
     @Override
@@ -148,20 +122,6 @@ public class Duke extends Application {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
     private String initialize() {
         this.ui = new Ui();
         this.tasks = new TaskList();
@@ -169,10 +129,11 @@ public class Duke extends Application {
         try {
             this.storage = new Storage("data/tasks.txt");
             storage.loadData(tasks);
-            return ui.showWelcome();
+            return ui.showWelcome() + "\n" + new RemindCommand("72")
+                    .execute(this.tasks, this.ui, this.storage);
         } catch (DukeException e) {
             tasks.empty();
-            return ui.showWelcome() + ui.showErrorLoad(e.getMessage());
+            return ui.showWelcome() + "\n" + ui.showErrorLoad(e.getMessage());
         }
     }
 
@@ -208,7 +169,7 @@ public class Duke extends Application {
             return c.execute(this.tasks, this.ui, this.storage);
 
         } catch (DukeException e) {
-            return e.getMessage();
+            return ui.showError(e);
         }
     }
 

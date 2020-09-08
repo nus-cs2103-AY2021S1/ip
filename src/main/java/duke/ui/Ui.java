@@ -1,7 +1,5 @@
 package duke.ui;
 
-import java.util.Scanner;
-
 import duke.task.Task;
 import duke.tasklist.TaskList;
 
@@ -10,36 +8,24 @@ import duke.tasklist.TaskList;
  * This includes reading user input and displaying the correspondent output.
  */
 public class Ui {
-    private final String lineBreak = "   ____________________________"
-            + "________________________________";
+
     private final String logo = " ____        _\n"
             + "|  _ \\ _   _| | _____\n"
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
-    private Scanner sc;
 
-    public Ui() {
-        sc = new Scanner(System.in);
-    }
 
     public String showWelcome() {
         return "Hello from\n" + logo + "\nHey, I'm Emilia \u2764 !\nWhat can I do for you?\n";
     }
 
-    public String showError(String errorMessage) {
-        return errorMessage;
+    public String showError(Exception e) {
+        return e.getMessage();
     }
 
     public String showErrorLoad(String errorMessage) {
         return errorMessage + "\n" + "Initialize an empty TaskList!\n";
-    }
-    public void showLine() {
-        System.out.println(lineBreak);
-    }
-
-    public String readLine() {
-        return sc.nextLine().trim().toLowerCase();
     }
 
     public String showBye() {
@@ -110,4 +96,7 @@ public class Ui {
         return "I have sorted the list of tasks! Todo tasks will be display lastly.\n";
     }
 
+    public String showRemind() {
+        return "Please take a look at the tasks that will occur soon:\n";
+    }
 }
