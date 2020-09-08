@@ -7,12 +7,11 @@ public class Duke {
     public static String HORIZONTAL_LINE =
             "_________________________________________________________________________________________";
     public static ArrayList<Task> LIST = new ArrayList<>();
-    public static String[] COMMANDS = {"todo", "deadline", "event", "list", "done", "bye"};
+    public static String[] COMMANDS = {"todo", "deadline", "event", "list", "done", "bye", "delete"};
 
     public static void main(String[] args) {
         startUpMessage();
         programLoop();
-
     }
 
     // Prints start up message upon running
@@ -52,12 +51,22 @@ public class Duke {
             } else if (command[0].toLowerCase().equals(Duke.COMMANDS[4])) {
                 // marks task at specified index as done
                 try {
-                    int index = Integer.valueOf(command[1]);
-                    Task current = Duke.LIST.get(index - 1);
-                    current.completeTask();
-                    System.out.println("Nice! I have marked this task as done:\n\t" + current.printTask());
-                } catch (IndexOutOfBoundsException e) {
-                    System.out.println("Please input a valid index");
+                    markDone(input);
+                } catch (InvalidInputException e) {
+                    System.out.println(e.getMessage());
+                    System.out.println("Please enter valid input");
+                } catch (IndexOutOfBoundsException obe) {
+                    System.out.println("Please enter valid index");
+                }
+            } else if (command[0].toLowerCase().equals(Duke.COMMANDS[6])) {
+                // delete Task from LIST
+                try {
+                    deleteTask(input);
+                } catch (InvalidInputException e) {
+                    System.out.println(e.getMessage());
+                    System.out.println("Please enter valid input");
+                } catch (IndexOutOfBoundsException obe) {
+                    System.out.println("Please enter valid index");
                 }
             } else if (Arrays.asList(Duke.COMMANDS).contains(command[0].toLowerCase())) {
                 // add Task to LIST
@@ -76,6 +85,64 @@ public class Duke {
         } // end while loop
     }
 
+    public static void markDone(String input) throws IndexOutOfBoundsException, InvalidInputException {
+
+        if (input.split(" ").length == 1) {
+            // throws exception if invalid input format: "done" (missing index)
+            throw new InvalidInputException("Task index not specified");
+        }
+
+        if (input.split(" ").length > 2) {
+            // throws exception if invalid input format: > 2 strings separated by " "
+            // e.g "done 1 2 3", "done 12 text"
+            throw new InvalidInputException("Sorry, command unclear! Please specify only one index");
+        }
+
+        int index;
+
+        try {
+            // parse int for index of task to be marked as done
+            index = Integer.valueOf(input.split(" ")[1]);
+        } catch (NumberFormatException e) {
+            // throws exception if invalid input format: Invalid integer
+            // e.g "done abc"
+            throw new InvalidInputException("Please enter a valid integer");
+        }
+
+        Task current = Duke.LIST.get(index - 1);
+        current.completeTask();
+        System.out.println("Nice! I have marked this task as done:\n\t" + current.printTask());
+    }
+
+    public static void deleteTask(String input) throws IndexOutOfBoundsException, InvalidInputException {
+
+        if (input.split(" ").length == 1) {
+            // throws exception if invalid input format: "delete" (missing index)
+            throw new InvalidInputException("Task index not specified");
+        }
+
+        if (input.split(" ").length > 2) {
+            // throws exception if invalid input format: > 2 strings separated by " "
+            // e.g "delete 1 2 3", "delete 12 text"
+            throw new InvalidInputException("Sorry, command unclear! Please specify only one index");
+        }
+
+        int index;
+
+        try {
+            // parse int for index of task to be deleted
+            index = Integer.valueOf(input.split(" ")[1]);
+        } catch (NumberFormatException e) {
+            // throws exception if invalid input format: Invalid integer
+            // e.g "delete abc"
+            throw new InvalidInputException("Please enter a valid integer");
+        }
+
+        Task current = Duke.LIST.remove(index - 1);
+        System.out.println("Okay! I have removed this task:\n\t" + current.printTask());
+        System.out.println("Now you have " + Duke.LIST.size() + " tasks in your list");
+    }
+
     // Adds Task to LIST. Checks inputs and throws exceptions for invalid inputs
     public static void addTask(String input) throws InvalidInputException {
         StringBuilder sb = new StringBuilder();
@@ -85,7 +152,7 @@ public class Duke {
         if (splitSpace[0].toLowerCase().equals(Duke.COMMANDS[0])) {
             // case: todo
             if (splitSpace.length == 1) {
-                // throws exception if input is "todo" (missing task name)
+                // throws exception if invalid input format: "todo" (missing task name)
                 throw new InvalidInputException("Todo command incomplete");
             }
 
