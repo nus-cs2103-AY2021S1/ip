@@ -10,6 +10,6 @@ public class BotbotException extends Exception {
      * @param e Error message.
      */
     public BotbotException(String e) {
-        super("    oops! " + e + "\n");
+        super("oops! " + e + "\n");
     }
 }

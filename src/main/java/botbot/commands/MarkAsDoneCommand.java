@@ -26,16 +26,17 @@ public class MarkAsDoneCommand extends Command {
      * @param storage Storage to save updated task list to.
      * @param tasks Task list to mark task as done from.
      * @param ui Ui to print status of execution.
+     * @return Status of execution.
      */
     @Override
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
+    public String execute(Storage storage, TaskList tasks, Ui ui) {
         try {
             Task task = tasks.get(id);
             task.markAsDone();
             storage.save(tasks);
-            ui.printStatus("    nice! I've marked this task as done:\n      " + task + "\n");
+            return ui.printStatus("nice! I've marked this task as done:\n  " + task + "\n");
         } catch (IndexOutOfBoundsException e) {
-            ui.printStatus("    oops! invalid task number!\n");
+            return ui.printStatus("oops! invalid task number!\n");
         }
     }
 }

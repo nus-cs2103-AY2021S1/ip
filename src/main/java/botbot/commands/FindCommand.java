@@ -13,13 +13,14 @@ public class FindCommand extends Command {
     }
     
     @Override
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
+    public String execute(Storage storage, TaskList tasks, Ui ui) {
         TaskList matches = new TaskList();
         for (Task task : tasks) {
             if (task.getDescription().contains(keyword)) {
                 matches.add(task);
             }
         }
-        ui.printStatus("    here are the matches in your list:\n" + matches);
+        String response = "here are the matches in your list:\n" + matches;
+        return ui.printStatus(response);
     }
 }

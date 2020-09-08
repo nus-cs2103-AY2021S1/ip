@@ -14,6 +14,7 @@ public abstract class Command {
      * @param storage Storage to save task list to.
      * @param tasks Task list to execute command on.
      * @param ui Ui to print status of execution.
+     * @return Status of execution.
      */
-    public abstract void execute(Storage storage, TaskList tasks, Ui ui);
+    public abstract String execute(Storage storage, TaskList tasks, Ui ui);
 }

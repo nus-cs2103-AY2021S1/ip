@@ -1,7 +1,6 @@
 package botbot;
 
 import botbot.commands.Command;
-import botbot.commands.ExitCommand;
 import botbot.exceptions.BotbotException;
 
 /**
@@ -23,25 +22,12 @@ public class Botbot {
         tasks = new TaskList(storage.load());
     }
 
-    /**
-     * Runs the chatbot.
-     */
-    public void run() {
-        ui.greet();
-        boolean isRunning = true;
-        while (isRunning) {
-            try {
-                String input = ui.getUserInput();
-                Command c = Parser.parseCommand(input);
-                c.execute(storage, tasks, ui);
-                isRunning = !ExitCommand.isExit(c);
-            } catch (BotbotException e) {
-                ui.printStatus(e.getMessage());
-            }
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parseCommand(input);
+            return c.execute(storage, tasks, ui);
+        } catch (BotbotException e) {
+            return ui.printStatus(e.getMessage());
         }
-    }
-    
-    public static void main(String[] args) {
-        new Botbot("data/botbot.txt").run();
     }
 }

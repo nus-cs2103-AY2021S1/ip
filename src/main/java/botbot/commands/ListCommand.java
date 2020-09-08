@@ -14,13 +14,14 @@ public class ListCommand extends Command {
      * @param storage Storage of the bot.
      * @param tasks Task list to list.
      * @param ui Ui to print list.
+     * @return Status of execution.
      */
     @Override
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
+    public String execute(Storage storage, TaskList tasks, Ui ui) {
         if (tasks.size() <= 0) {
-            ui.printStatus("    your list is empty!\n");
+            return ui.printStatus("your list is empty!\n");
         } else {
-            ui.printStatus("    here's your list:\n" + tasks);
+            return ui.printStatus("here's your list:\n" + tasks);
         }
     }
 }
