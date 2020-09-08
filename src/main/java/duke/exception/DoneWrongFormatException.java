@@ -15,6 +15,6 @@ public class DoneWrongFormatException extends WrongFormatException {
      * Creates and initializes a DoneWrongFormatException object.
      */
     public DoneWrongFormatException() {
-        super(DoneCommand.COMMAND_WORD, correctFormatDescription);
+        super(DoneCommand.COMMAND_WORDS.get(0), correctFormatDescription);
     }
 }

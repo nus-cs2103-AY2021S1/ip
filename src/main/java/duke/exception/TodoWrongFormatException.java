@@ -15,6 +15,6 @@ public class TodoWrongFormatException extends WrongFormatException {
      * Creates and initializes a TodoWrongFormatException object.
      */
     public TodoWrongFormatException() {
-        super(AddTodoCommand.COMMAND_WORD, correctFormatDescription);
+        super(AddTodoCommand.COMMAND_WORDS.get(0), correctFormatDescription);
     }
 }

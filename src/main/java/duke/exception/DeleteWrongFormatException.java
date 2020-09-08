@@ -15,6 +15,6 @@ public class DeleteWrongFormatException extends WrongFormatException {
      * Creates and initializes a DeleteWrongFormatException object.
      */
     public DeleteWrongFormatException() {
-        super(DeleteCommand.COMMAND_WORD, correctFormatDescription);
+        super(DeleteCommand.COMMAND_WORDS.get(0), correctFormatDescription);
     }
 }

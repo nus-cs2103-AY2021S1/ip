@@ -1,6 +1,8 @@
 package duke.command;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import duke.Storage;
 import duke.TaskList;
@@ -15,7 +17,7 @@ import duke.task.Task;
  */
 public class DeleteCommand extends Command {
 
-    public static final String COMMAND_WORD = "delete";
+    public static final List<String> COMMAND_WORDS = new ArrayList<>(List.of("delete", "del"));
     public static final int EXPECTED_NUMBER_OF_ARGUMENTS = 2;
     private int taskIndex;
     private int userSpecifiedIndex;
