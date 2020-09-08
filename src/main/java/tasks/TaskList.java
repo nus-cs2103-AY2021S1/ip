@@ -1,6 +1,7 @@
 package tasks;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 import exceptions.DukeIoException;
 import utils.Storage;
@@ -61,12 +62,30 @@ public class TaskList {
         this.storageObserver = storage;
     }
 
-    private void notifyObserver() throws DukeIoException {
-        assert storageObserver != null : "No Observers";
-        storageObserver.save(tasks);
+    public void notifyObserver() throws DukeIoException {
+         assert storageObserver != null : "No Observers";
+         storageObserver.save(tasks);
     }
 
     public int size() {
         return tasks.size();
+    }
+
+    public TaskList copy() {
+        ArrayList<Task> newTasks = tasks
+                .stream()
+                .map(Task::copy)
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        TaskList ret = new TaskList(newTasks);
+
+        ret.setObserver(storageObserver);
+
+        return ret;
+    }
+
+    @Override
+    public String toString() {
+        return tasks.toString();
     }
 }

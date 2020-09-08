@@ -19,6 +19,14 @@ public class Event extends Task {
     }
 
     @Override
+    public Event copy() {
+        Event ret = new Event(description, at);
+        ret.isDone = isDone;
+
+        return ret;
+    }
+
+    @Override
     public String toString() {
         String eventAt = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).format(at);
         return "[E]" + super.toString() + " (at: " + eventAt + ")" + "\n";
