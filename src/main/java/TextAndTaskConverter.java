@@ -6,12 +6,6 @@ import java.time.LocalTime;
  */
 public class TextAndTaskConverter {
 
-    private final String text;
-
-    TextAndTaskConverter(String text) {
-        this.text = text;
-    }
-
     /**
      * Converts texts into tasks.
      * @param text line of text read from the saved file.

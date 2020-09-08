@@ -9,37 +9,41 @@ import java.util.List;
  */
 public class FileHandler {
 
+    private String filePath;
+
+    public FileHandler(String filePath) {
+        this.filePath = filePath;
+    }
+
     /**
      * Writes tasks to the .txt file to store the data.
-     * @param file .txt file.
-     * @param tm task manager that contains the list of tasks.
+     * @param taskManager task manager that contains the list of tasks.
      * @throws IOException
      */
-    public static void writeToFile(String file, TaskManager tm) throws IOException {
+    public void writeToFile(TaskManager taskManager) throws IOException {
+        FileWriter fileWriter = new FileWriter(this.filePath);
+        ArrayList<Task> tasksList = taskManager.getTasksList();
 
-        FileWriter writer = new FileWriter(file);
-        ArrayList<Task> tasksList = tm.getTasksList();
+        for (Task task : tasksList) {
 
-        for (int i = 0; i < tasksList.size(); i++) {
-
-            if (tasksList.get(i) instanceof Todo) {
-                writer.write("T ## " + (tasksList.get(i).getDone() ? 1 : 0) + " ## "
-                        + tasksList.get(i).getDescription() + "\n");
+            if (task instanceof Todo) {
+                fileWriter.write("T ## " + (task.getDone() ? 1 : 0) + " ## "
+                        + task.getDescription() + "\n");
             }
 
-            if (tasksList.get(i) instanceof Deadline) {
-                writer.write("D ## " + (tasksList.get(i).getDone() ? 1 : 0) + " ## "
-                        + ((Deadline) tasksList.get(i)).getDescription() + " ## "
-                        + ((Deadline) tasksList.get(i)).getDate() + "\n");
+            if (task instanceof Deadline) {
+                fileWriter.write("D ## " + (task.getDone() ? 1 : 0) + " ## "
+                        + ((Deadline) task).getDescription() + " ## "
+                        + ((Deadline) task).getDate() + "\n");
             }
 
-            if (tasksList.get(i) instanceof Event) {
-                writer.write("E ## " + (tasksList.get(i).getDone() ? 1 : 0) + " ## "
-                        + ((Event) tasksList.get(i)).getDescription() + " ## "
-                        + ((Event) tasksList.get(i)).getDate() + " " + ((Event) tasksList.get(i)).getTime() + "\n");
+            if (task instanceof Event) {
+                fileWriter.write("E ## " + (task.getDone() ? 1 : 0) + " ## "
+                        + ((Event) task).getDescription() + " ## "
+                        + ((Event) task).getDate() + " " + ((Event) task).getTime() + "\n");
             }
         }
-        writer.close();
+        fileWriter.close();
     }
 
     /**
@@ -48,11 +52,12 @@ public class FileHandler {
      * @return list of lines read in the file.
      * @throws IOException
      */
-    public static List<String> readSavedFile(String fileName) throws IOException {
+    public static ArrayList<String> readSavedFile(String fileName) throws IOException {
         File file = new File(fileName);
         if (file.exists()) {
-            return Files.readAllLines(Paths.get(fileName));
+            return (ArrayList<String>) Files.readAllLines(Paths.get(fileName));
         } else {
+            file.createNewFile();
             return null;
         }
     }

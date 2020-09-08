@@ -6,8 +6,10 @@ import javafx.scene.layout.VBox;
 import javafx.scene.image.Image;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.List;
+import java.util.Scanner;
 
 /**
  * The Duke program keeps track of the list of tasks to be done.
@@ -22,49 +24,50 @@ public class Duke {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/duke2.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/duke1.png"));
 
-//    public static void main(String[] args) {
-//        String logo = " ____        _        \n"
-//                + "|  _ \\ _   _| | _____ \n"
-//                + "| | | | | | | |/ / _ \\\n"
-//                + "| |_| | |_| |   <  __/\n"
-//                + "|____/ \\__,_|_|\\_\\___|\n";
-//
-//        System.out.println(logo +"Hello! I'm Duke\n" + "What can I do for you?");
-//
-//        IOHandler handler = new IOHandler();
-//
-//        handler.handleIO();
-//
-//        System.out.print("Bye. Hope to see you again soon!");
-//    }
 
+    private TaskManager taskManager;
+    private FileHandler fileHandler;
 
+    public Duke(String filePath) throws IOException {
+        this.fileHandler = new FileHandler(filePath);
+        this.taskManager = new TaskManager();
 
-    public Duke() throws IOException {
+        try {
+            List<String> files = FileHandler.readSavedFile(filePath);
+            for (String value : files) {
+                Task task = TextAndTaskConverter.textConverter(value);
+                taskManager.getTasksList().add(task);
+            }
 
-        String fileName = "data/duke.txt";
-        File file = new File(fileName);
-
-        if (!file.exists()) {
-            file.createNewFile();
-        }
-
-        List<String> files = FileHandler.readSavedFile(fileName);
-        for (String value : files) {
-            Task task = TextAndTaskConverter.textConverter(value);
-            taskManager.getTasksList().add(task);
+        } catch (FileNotFoundException e) {
+            System.out.println("File not found!");
         }
     }
 
-    IOHandler handler = new IOHandler();
+    public static void main(String[] args) throws IOException {
+        String logo = " ____        _        \n"
+                + "|  _ \\ _   _| | _____ \n"
+                + "| | | | | | | |/ / _ \\\n"
+                + "| |_| | |_| |   <  __/\n"
+                + "|____/ \\__,_|_|\\_\\___|\n";
+
+        System.out.println(logo +"Hello! I'm Duke\n" + "What can I do for you?");
+        Duke duke = new Duke("data/duke.txt");
+    }
+
+    private void run() throws IOException {
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
+        IOHandler ioHandler = Parser.parseInput(input);
+        System.out.println(ioHandler.handleIO(input, taskManager, fileHandler));
+    }
 
     /**
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) throws IOException {
-        //FileHandler.writeToFile(this.fileName, this.taskManager);
-
-        return IOHandler.handleIO(input);
+        IOHandler ioHandler = Parser.parseInput(input);
+        return ioHandler.handleIO(input, taskManager, fileHandler);
     }
 }

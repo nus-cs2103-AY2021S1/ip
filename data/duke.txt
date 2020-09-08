@@ -1,2 +1,4 @@
-T ## 0 ## eat
-T ## 0 ## play
+T ## 1 ## go for a run
+D ## 0 ## homework  ## 2020-11-22
+E ## 0 ## meeting  ## 2020-12-12 18:00
+T ## 0 ## run at night
