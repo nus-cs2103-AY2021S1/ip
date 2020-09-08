@@ -42,9 +42,11 @@ public class Storage {
         try {
             ArrayList<Task> tasks = new ArrayList<>();
             String next;
+            
             if (record.createNewFile()) {
                 throw new FileNotFoundException("Creating new record");
             }
+
             while (scanner.hasNextLine()) {
                 next = scanner.nextLine();
                 assert next != null : "the command should not be null";
@@ -75,6 +77,7 @@ public class Storage {
                 }
             }
             return tasks;
+
         } catch (FileNotFoundException fileNotFoundException) {
             throw fileNotFoundException;
 
