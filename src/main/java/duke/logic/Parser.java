@@ -54,42 +54,45 @@ public class Parser {
      * @return whether or not a command/userInput is valid
      * @throws MocoException If command is not valid.
      */
-    public static boolean parse(String input, TaskList tasks, Ui ui, Storage storage) throws MocoException {
+    public static String parse(String input, TaskList tasks, Ui ui, Storage storage) throws MocoException {
+        String result;
         if (input.equals(("bye"))) {
             storage.Save();
-            return false;
+            result = ui.stopBot();
+            return result;
         } else if (input.equals("hi") || input.equals("hello")) {
-            ui.printGreeting();
+            return ui.printGreeting();
         } else if (input.equals("list")) {
-            ui.printTaskList(tasks);
+            //ui.printTaskList(tasks);
+            result = ui.showTaskList(tasks);
         } else if (input.contains("done")) {
-            doneCommand(input, tasks, storage, ui);
+            result = doneCommand(input, tasks, storage, ui);
         } else {
-            ui.printBorder();
+            //ui.printBorder();
             if (input.contains(type.TODO.toString())) {
-                toDoCommand(input, tasks, storage, ui);
+                result = toDoCommand(input, tasks, storage, ui);
             } else if (input.contains(type.DEADLINE.toString())) {
-                deadlineCommand(input, tasks, storage, ui);
+                result = deadlineCommand(input, tasks, storage, ui);
             } else if (input.contains(type.EVENT.toString())) {
-                eventCommand(input, tasks, storage, ui);
+                result = eventCommand(input, tasks, storage, ui);
             } else if (input.contains(type.DELETE.toString())) {
-                deleteCommand(input, tasks, storage, ui);
+                result = deleteCommand(input, tasks, storage, ui);
             } else if (input.contains(type.FIND.toString())) {
-                findCommand(input, tasks, storage, ui);
+                result = findCommand(input, tasks, storage, ui);
             } else {
                 throw new MocoException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
-        return true;
+        return result;
     }
 
-    private static void findCommand(String input, TaskList tasks, Storage storage, Ui ui) throws MocoException {
+    private static String findCommand(String input, TaskList tasks, Storage storage, Ui ui) throws MocoException {
         try {
             if (input.length() > 5) {
                 String keyword = input.substring(5);
                 TaskList tl = tasks.findTasks(keyword);
                 if (tl.size() > 0) {
-                    ui.findTasks(tl);
+                    return ui.findTasks(tl);
                 } else {
                     throw new MocoException(" ☹ OOPS!!! You have no task that contains the keyword " + keyword + "!");
                 }
@@ -101,13 +104,13 @@ public class Parser {
         }
     }
 
-    private static void doneCommand(String input, TaskList tasks, Storage storage, Ui ui) throws MocoException {
+    private static String doneCommand(String input, TaskList tasks, Storage storage, Ui ui) throws MocoException {
         try {
             if (input.length() > 5) {
                 int index = Integer.parseInt(input.substring(5)) - 1;
                 tasks.get(index).markAsDone();
                 storage.Save();
-                ui.doneTask(tasks.get(index));
+                return ui.doneTask(tasks.get(index));
             } else {
                 throw new MocoException(" ☹ OOPS!!! What task did you complete? Please specific a valid task index.");
             }
@@ -118,13 +121,13 @@ public class Parser {
         }
     }
 
-    private static void toDoCommand(String input, TaskList tasks, Storage storage, Ui ui) throws MocoException {
+    private static String toDoCommand(String input, TaskList tasks, Storage storage, Ui ui) throws MocoException {
         try {
             if (input.length() > 5) {
                 Todo t = new Todo(input.substring(5));
                 tasks.addTask(t);
                 storage.Save();
-                ui.addTask(t, tasks);
+                return ui.addTask(t, tasks);
             } else {
                 throw new MocoException("☹ Insufficient details! The description of a todo cannot be empty.");
             }
@@ -133,7 +136,7 @@ public class Parser {
         }
     }
 
-    private static void deadlineCommand(String input, TaskList tasks, Storage storage, Ui ui) throws MocoException {
+    private static String deadlineCommand(String input, TaskList tasks, Storage storage, Ui ui) throws MocoException {
         try {
             String[] s = input.split("/by ", 2);
             if (s[0].length() > 9) {
@@ -143,7 +146,7 @@ public class Parser {
                 Deadline dl = new Deadline(desc[1], by);
                 tasks.addTask(dl);
                 storage.Save();
-                ui.addTask(dl, tasks);
+                return ui.addTask(dl, tasks);
             } else {
                 throw new MocoException(" ☹ Insufficient details! The description of a deadline cannot be empty.");
             }
@@ -155,7 +158,7 @@ public class Parser {
         }
     }
 
-    private static void eventCommand(String input, TaskList tasks, Storage storage, Ui ui) throws MocoException {
+    private static String eventCommand(String input, TaskList tasks, Storage storage, Ui ui) throws MocoException {
         try {
             String[] s = input.split("/at ", 2);
             if (s[0].length() > 6) {
@@ -165,7 +168,7 @@ public class Parser {
                 Event e = new Event(desc[1], at);
                 tasks.addTask(e);
                 storage.Save();
-                ui.addTask(e, tasks);
+                return ui.addTask(e, tasks);
             } else {
                 throw new MocoException(" ☹ Insufficient details! The description of an event cannot be empty.");
             }
@@ -177,14 +180,14 @@ public class Parser {
         }
     }
 
-    private static void deleteCommand(String input, TaskList tasks, Storage storage, Ui ui) throws MocoException {
+    private static String deleteCommand(String input, TaskList tasks, Storage storage, Ui ui) throws MocoException {
         try {
             if (input.length() > 7) {
                 int index = Integer.parseInt(input.substring(7)) - 1;
                 Task t = tasks.get(index);
                 tasks.deleteTask(index);
                 storage.Save();
-                ui.deleteTask(t);
+                return ui.deleteTask(t);
             } else {
                 throw new MocoException("Please provide the index of the task you would like to remove.");
             }

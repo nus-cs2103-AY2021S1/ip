@@ -21,9 +21,6 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
-        if (tasks.size() > 0) {
-            System.out.println("\nYou have a saved list! Here: \n" + this.toString());
-        }
     }
 
     /**
@@ -84,7 +81,7 @@ public class TaskList {
     public String toString() {
         String s = "";
         for (int i = 0; i < tasks.size(); i++) {
-            s += (i + 1) + " " + tasks.get(i) + "\n";
+            s += (i + 1) + ". " + tasks.get(i) + "\n";
         }
         return s;
     }

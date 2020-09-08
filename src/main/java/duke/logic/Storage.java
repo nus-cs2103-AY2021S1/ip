@@ -63,7 +63,9 @@ public class Storage {
     }
 
     private void addToTaskList(String[] s, ArrayList<Task> tasks) {
-        boolean isDone = s[2].equals("\u2713");
+        boolean isDone = s[1].equals("\u2713");
+        System.out.println("s[1]: " + s[1]);
+        System.out.println(isDone);
         switch (s[0]) {
             case "T":
                 Todo t = new Todo(s[2], isDone);

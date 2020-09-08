@@ -1,54 +1,68 @@
 package duke.ui;
 import duke.logic.TaskList;
 import duke.task.Task;
-import java.util.Scanner;
 
 public class Ui {
-    private Scanner userInput;
-    private String lastError;
+
+    protected static TaskList tasks;
 
     /**
      * Constructor for Ui, initialises allowing for user inputs
      */
-    public Ui() {
-        userInput = new Scanner(System.in);
+    public Ui(TaskList tasks) {
+        this.tasks = tasks;
     }
 
     /**
-     * Gets user input to Moco
-     *
-     * @return new user input/command.
+     * Prints previously saved task list for user
      */
-    public String getInput() {
-        return userInput.nextLine();
+    public static String showStartingTaskList() {
+        if (tasks.size() > 0) {
+            return "\nYou have a saved list! Here: \n" + tasks.toString();
+        } else {
+            return "";
+        }
     }
+
+//    /**
+//     * Gets user input to Moco
+//     *
+//     * @return new user input/command.
+//     */
+//    public String getInput() {
+//        return userInput.nextLine();
+//    }
 
     /**
      * Prints statements to user when Moco starts up (initialises).
      */
-    public void startBot() {
-        printBorder();
-        System.out.println("Hello I'm Moco, a task list bot to help you stay on top of your tasks!\n");
-        System.out.println("What can I do for you?\n");
-        printBorder();
+    public String startBot() {
+//        printBorder();
+//        System.out.println("Hello I'm Moco, a task list bot to help you stay on top of your tasks!\n");
+//        System.out.println("What can I do for you?\n");
+//        printBorder();
+        return "Hello I'm Moco, a task list bot to help you stay on top of your tasks!\n"
+                + "What can I do for you?\n";
     }
 
     /**
      * Prints statements to user when Moco stops (end).
      */
-    public void stopBot() {
-        printBorder();
-        System.out.println("Bye. Moco hopes to see you again soon!");
-        printBorder();
+    public String stopBot() {
+        //printBorder();
+        //System.out.println("Bye. Moco hopes to see you again soon!");
+        //printBorder();
+        return "Bye. Moco hopes to see you again soon!";
     }
 
     /**
      * Prints statements to user when user says "hi" or "hello".
      */
-    public void printGreeting() {
-        printBorder();
-        System.out.println("Hello! My name is Moco, I am excited to help! c:");
-        printBorder();
+    public static String printGreeting() {
+//        printBorder();
+//        System.out.println("Hello! My name is Moco, I am excited to help! c:");
+//        printBorder();
+        return "Hello! My name is Moco, I am excited to help! c:";
     }
 
     /**
@@ -63,11 +77,12 @@ public class Ui {
      *
      * @param tasks tasks to print as a list
      */
-    public void printTaskList(TaskList tasks) {
-        printBorder();
-        System.out.println("Here are the tasks in your list:");
-        System.out.println(tasks);
-        printBorder();
+    public String showTaskList(TaskList tasks) {
+//        printBorder();
+//        System.out.println("Here are the tasks in your list:");
+//        System.out.println(tasks);
+//        printBorder();
+        return "Here are the tasks in your list:\n" + tasks;
     }
 
     /**
@@ -75,11 +90,12 @@ public class Ui {
      *
      * @param t specified task that is completed
      */
-    public void doneTask(Task t) {
-        printBorder();
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(t);
-        printBorder();
+    public String doneTask(Task t) {
+//        printBorder();
+//        System.out.println("Nice! I've marked this task as done:");
+//        System.out.println(t);
+//        printBorder();
+        return "Nice! I've marked this task as done:\n" + t;
     }
 
     /**
@@ -88,10 +104,12 @@ public class Ui {
      *
      * @param taskList tasks to print as a list
      */
-    public void findTasks(TaskList taskList) {
-        System.out.println("Here are the tasks in your list with your requested keyword: \n");
-        System.out.println(taskList);
-        printBorder();
+    public String findTasks(TaskList taskList) {
+//        System.out.println("Here are the tasks in your list with your requested keyword: \n");
+//        System.out.println(taskList);
+//        printBorder();
+        return "Here are the tasks in your list with your requested keyword: \n"
+                + taskList;
     }
 
     /**
@@ -99,9 +117,10 @@ public class Ui {
      *
      * @param task task to be deleted
      */
-    public void deleteTask(Task task) {
-        System.out.println("Noted. I've removed this task:\n" + task);
-        printBorder();
+    public String deleteTask(Task task) {
+//        System.out.println("Noted. I've removed this task:\n" + task);
+//        printBorder();
+        return "Noted. I've removed this task:\n" + task;
     }
 
     /**
@@ -111,9 +130,12 @@ public class Ui {
      * @param task  task to be deleted
      * @param tasks taskList that task has been added to
      */
-    public void addTask(Task task, TaskList tasks) {
-        System.out.println("Got it. I've added this task:\n" + task);
-        System.out.println("Now you have " + tasks.size() + " tasks in the list.\n");
-        printBorder();
+    public String addTask(Task task, TaskList tasks) {
+//        System.out.println("Got it. I've added this task:\n" + task);
+//        System.out.println("Now you have " + tasks.size() + " tasks in the list.\n");
+//        printBorder();
+        String result = "Got it. I've added this task:\n" + task
+                + "\nNow you have " + tasks.size() + " tasks in the list.\n";
+        return result;
     }
 }
