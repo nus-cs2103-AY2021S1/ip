@@ -5,6 +5,11 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
+/**
+ * Implements update command objects.
+ *
+ * @author Audrey Felicio Anwar
+ */
 public class UpdateCommand extends Command {
     private int index;
     private String type;
@@ -23,6 +28,15 @@ public class UpdateCommand extends Command {
         this.newDetails = newDetails;
     }
 
+    /**
+     * Executes the given command.
+     *
+     * @param tasks Task list the user currently have.
+     * @param ui Tool to interact with user.
+     * @param storage Storage to load and save data.
+     * @return Responses to be passed to user.
+     * @throws DukeException If there is an error.
+     */
     @Override
     public String executeCommand(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.updateTask(index, type, newDetails, ui);
