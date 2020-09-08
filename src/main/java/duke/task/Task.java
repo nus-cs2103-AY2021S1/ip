@@ -9,6 +9,8 @@ public abstract class Task {
     protected String description;
     /** Indicates if task is done */
     protected boolean isDone;
+    /** Date format */
+    public static final String DATE_FORMAT = "([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))";
 
     /**
      * Constructs a Task object.

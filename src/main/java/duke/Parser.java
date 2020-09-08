@@ -3,6 +3,7 @@ package duke;
 import java.util.Arrays;
 import java.util.List;
 
+import duke.Exception.*;
 import duke.command.AddCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
@@ -34,85 +35,98 @@ public class Parser {
     }
 
     private static int extractTaskNumber(String command) throws DukeException {
-        List<String> words = Arrays.asList(command.split(" "));
-        if (words.size() != 2) {
-            throw new DukeException(":( Oops!!! Please type \"[action] [task number]\"");
+        List<String> commandWords = Arrays.asList(command.split(Command.SPLIT_DELIMITER));
+        if (commandWords.size() < Command.TASK_NUMBER_COMMAND_WORD_COUNT) {
+            throw new InvalidTaskNumberCommandException();
         } else {
             // convert the task number into int
             try {
-                return Integer.parseInt(words.get(1));
+                return Integer.parseInt(commandWords.get(1));
             } catch (NumberFormatException numberFormatException) {
-                throw new DukeException(":( Oops!!! The task number is invalid. :-(");
+                throw new InvalidTaskNumberException();
             }
         }
     }
 
     public static Task parseAddCommand(String command) throws DukeException {
-        List<String> words = Arrays.asList(command.split(" "));
-        String taskType = words.get(0);
+        List<String> commandWords = Arrays.asList(command.split(Command.SPLIT_DELIMITER));
+        String taskType = commandWords.get(0);
         Task task;
-        if (taskType.equalsIgnoreCase("todo")) {
-            if (words.size() <= 1) {
-                throw new DukeException(":( Oops!!! The description of a Todo task cannot be empty. :-(");
-            }
-            String taskDescription = combineWords(words.subList(1, words.size()));
+        String taskDescription;
+        if (commandWords.size() < AddCommand.MIN_WORD_COUNT) {
+            throw new EmptyTaskDescriptionException();
+        }
+        if (taskType.equalsIgnoreCase(Command.TODO_COMMAND)) {
+            taskDescription = combineWords(commandWords.subList(1, commandWords.size()));
             task = new Todo(taskDescription);
-        } else if (taskType.equalsIgnoreCase("deadline")) {
-            int index = words.indexOf("/by");
-            if (words.size() <= 1 || index == 1) {
-                throw new DukeException(":( Oops!!! The description of a Deadline task cannot be empty. :-(");
+        } else if (taskType.equalsIgnoreCase(Command.DEADLINE_COMMAND)) {
+            int index = commandWords.indexOf(Deadline.BY_KEYWORD);
+            if (index == Deadline.INVALID_BY_POSITION) {
+                throw new EmptyTaskDescriptionException();
             }
-            if (index == -1 || words.size() - index <= 1) {
-                throw new DukeException(":( Oops!!! Please type \"deadline [task description] /by [yyyy-mm-dd]\" "
-                        + "to add a Deadline task");
+            boolean hasByKeyword = index != -1;
+            boolean hasDate = commandWords.size() - index > 1;
+            if (!hasByKeyword || !hasDate) {
+                throw new InvalidDeadlineCommandException();
             }
-            String taskDescription = combineWords(words.subList(1, index));
-            String by = combineWords(words.subList(index + 1, words.size()));
-            if (!by.matches("([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))")) {
-                throw new DukeException(":( Oops!!! Please type \"deadline [task description] /by [yyyy-mm-dd]\" "
-                        + "to add a Deadline task");
+            taskDescription = combineWords(commandWords.subList(1, index));
+            String by = combineWords(commandWords.subList(index + 1, commandWords.size()));
+            boolean isDateValid = by.matches(Task.DATE_FORMAT);
+            if (!isDateValid) {
+                throw new InvalidDeadlineCommandException();
             }
             task = new Deadline(taskDescription, by);
-        } else if (taskType.equalsIgnoreCase("event")) {
-            int index = words.indexOf("/at");
-            if (words.size() <= 1 || index == 1) {
-                throw new DukeException(":( Oops!!! The description of a Event task cannot be empty. :-(");
+        } else if (taskType.equalsIgnoreCase(Command.EVENT_COMMAND)) {
+            int index = commandWords.indexOf(Event.AT_KEYWORD);
+            if (index == Event.INVALID_AT_POSITION) {
+                throw new EmptyTaskDescriptionException();
             }
-            if (index == -1 || words.size() - index <= 1) {
-                throw new DukeException(":( Oops!!! Please type \"event [task description] /at [event time] \" "
-                        + "to add a Event task");
+            boolean hasAtKeyword = index != -1;
+            boolean hasDate = commandWords.size() - index > 1;
+            if (!hasAtKeyword || !hasDate) {
+                throw new InvalidEventCommandException();
             }
-            String taskDescription = combineWords(words.subList(1, index));
-            String at = combineWords(words.subList(index + 1, words.size()));
+            taskDescription = combineWords(commandWords.subList(1, index));
+            String at = combineWords(commandWords.subList(index + 1, commandWords.size()));
             task = new Event(taskDescription, at);
         } else {
-            throw new DukeException(":( Oops!!! I'm sorry, but I don't know what that means "
-                    + ":-(\n\tCommands: list | done | delete | todo | deadline | event | bye");
+            throw new InvalidCommandException();
         }
         return task;
     }
 
     public static Command parse(String fullCommand) throws DukeException {
+<<<<<<< HEAD
+        boolean isTodoCommand = fullCommand.startsWith(AddCommand.TODO_COMMAND);
+        boolean isDeadlineCommand = fullCommand.startsWith(AddCommand.DEADLINE_COMMAND);
+        boolean isEventCommand = fullCommand.startsWith(AddCommand.EVENT_COMMAND);
+        boolean isAddCommand = isTodoCommand || isDeadlineCommand || isEventCommand;
+
+        if (fullCommand.equalsIgnoreCase(Command.BYE_COMMAND)) {
+            return new ByeCommand();
+        } else if (fullCommand.equalsIgnoreCase(Command.LIST_COMMAND)) {
+=======
         assert fullCommand != null : "Command should not be null";
         if (fullCommand.equalsIgnoreCase("list")) {
+>>>>>>> master
             return new ListCommand();
-        } else if (fullCommand.startsWith("done")) {
+        } else if (fullCommand.startsWith(Command.DONE_COMMAND)) {
             int taskNumber = extractTaskNumber(fullCommand);
             return new DoneCommand(taskNumber);
-        } else if (fullCommand.startsWith("delete")) {
+        } else if (fullCommand.startsWith(Command.DELETE_COMMAND)) {
             int taskNumber = extractTaskNumber(fullCommand);
             return new DeleteCommand(taskNumber);
-        } else if (fullCommand.equalsIgnoreCase("bye")) {
-            return new ByeCommand();
-        } else if (fullCommand.startsWith("find")) {
-            if (fullCommand.length() <= 5) {
-                throw new DukeException(":( Oops!!! Please type \"find [keyword]\" to find a task");
+        } else if (fullCommand.startsWith(Command.FIND_COMMAND)) {
+            if (fullCommand.length() < FindCommand.MIN_WORD_COUNT) {
+                throw new InvalidFindCommandException();
             }
-            String query = fullCommand.substring(5);
+            String query = fullCommand.substring(FindCommand.QUERY_START_POSITION);
             return new FindCommand(query);
-        } else {
+        } else if (isAddCommand) {
             Task newTask = parseAddCommand(fullCommand);
             return new AddCommand(newTask);
+        } else {
+            throw new InvalidCommandException();
         }
     }
 }

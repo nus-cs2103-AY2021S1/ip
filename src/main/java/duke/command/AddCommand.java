@@ -6,10 +6,12 @@ import duke.ui.Ui;
 import duke.task.Task;
 
 /**
- * Represents an add task command.
+ * Represents an adding {@link duke.task.Task} command.
  * @author Tee Kok Siang
  */
 public class AddCommand extends Command {
+    /** Minimum number of word count for a AddCommand */
+    public static final int MIN_WORD_COUNT = 2;
     /**
      * Constructs an AddCommand object.
      *
