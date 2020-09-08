@@ -9,6 +9,6 @@
       <TextField fx:id="input" promptText="Enter Command..." BorderPane.alignment="CENTER" onKeyPressed="#handleUserInput" />
    </bottom>
    <center>
-      <TextArea fx:id="output" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" />
+      <TextArea fx:id="output" prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER" wrapText="true"/>
    </center>
 </BorderPane>
