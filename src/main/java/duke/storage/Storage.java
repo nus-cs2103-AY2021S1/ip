@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Scanner;
+import java.util.regex.Pattern;
 
 import duke.InvalidSaveException;
 import duke.task.Deadline;
@@ -83,7 +84,7 @@ public class Storage {
      * @throws InvalidSaveException if the symbol read is not a valid symbol of a task type.
      */
     protected Task createTask(String taskSummary) throws InvalidSaveException {
-        String identifier = taskSummary.split("\\|", 2)[0];
+        String identifier = taskSummary.split(Pattern.quote(Task.SYMBOL_SEPARATOR), 2)[0];
         switch (identifier) {
         case Event.SYMBOL:
             return Event.reconstructFromSummary(taskSummary);

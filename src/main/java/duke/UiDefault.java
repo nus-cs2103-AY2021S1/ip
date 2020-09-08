@@ -32,7 +32,11 @@ public class UiDefault implements Ui {
      */
     @Override
     public String getInput() {
-        return scanner.nextLine();
+        String userInput = "";
+        while (userInput.isBlank()) {
+            userInput = scanner.nextLine();
+        }
+        return userInput;
     }
 
     /**

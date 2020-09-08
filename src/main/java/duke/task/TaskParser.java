@@ -41,6 +41,7 @@ public class TaskParser {
         if (details.length == 1 || details[1].isBlank()) {
             throw new DukeException("The description of a " + details[0] + " task cannot be empty.");
         }
+
         Task addedTask;
         switch (details[0]) {
         case TO_DO:
