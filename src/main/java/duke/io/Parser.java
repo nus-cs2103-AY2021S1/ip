@@ -35,7 +35,6 @@ public class Parser {
                 }
             }
         }
-       
         return new String[]{date.toString(), description.toString()};
     }
 
@@ -132,6 +131,11 @@ public class Parser {
     }
 
     private static String checkTime(String str) {
+        
+        if (str.length() < 3) {
+            return null;
+        }
+        
         int len = str.length();
         String lastTwoChars = str.substring(len - 2);
         String formattedTime = "";

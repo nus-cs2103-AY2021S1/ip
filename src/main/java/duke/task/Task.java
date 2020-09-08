@@ -63,7 +63,7 @@ public class Task {
 
     /**
      * Return true or false - whether date of task is equal to input date.
-     * Always overriden.
+     * Always overidden.
      * @param word Input date.
      * @return boolean.
      */
