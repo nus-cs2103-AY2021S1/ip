@@ -1,6 +1,7 @@
 package sparrow.commands;
 
 import sparrow.data.task.TaskList;
+import sparrow.data.trivia.VocabList;
 import sparrow.storage.Storage;
 import sparrow.ui.Ui;
 
@@ -17,7 +18,7 @@ public class Command {
 
     }
 
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, VocabList vocabList, Ui ui, Storage storage) {
         throw new UnsupportedOperationException("This method is to be implemented by child classes!");
     }
 

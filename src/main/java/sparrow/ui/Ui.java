@@ -1,8 +1,10 @@
 package sparrow.ui;
 
 import sparrow.data.task.Task;
+import sparrow.data.trivia.Vocabulary;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -49,7 +51,7 @@ public class Ui {
     /**
      * Converts input list to string.
      */
-    public String taskListToString(ArrayList<Task> tasks) {
+    public String taskListToString(List<Task> tasks) {
         StringBuilder sb = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             String temp = String.format("%d. %s\n", i + 1, tasks.get(i));
@@ -57,4 +59,14 @@ public class Ui {
         }
         return sb.toString();
     }
+
+    public String vocabListToString(List<Vocabulary> vocabList) {
+        StringBuilder sb = new StringBuilder();
+        for (Vocabulary vocabulary : vocabList) {
+            String temp = String.format("%s\n", vocabulary.getWord());
+            sb.append(temp);
+        }
+        return sb.toString();
+    }
+
 }

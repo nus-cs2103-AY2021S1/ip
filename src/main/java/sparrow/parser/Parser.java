@@ -32,8 +32,10 @@ public class Parser {
     public static final Pattern KEYWORDS_ARGS_FORMAT =
             Pattern.compile("(?<keyword>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
 
-    public static final Pattern FILTER_ARGS_FORMAT=
+    public static final Pattern FILTER_ARGS_FORMAT =
             Pattern.compile("(?<keywords>\\S+) (?<dateFilter>[0-9-]+)");
+
+    public static final Pattern VOCAB_FORMAT = Pattern.compile("(?<word>\\S+)( (?<definition>.*))?");
 
     public Command parseCommand(String userInput) {
         assert !userInput.isBlank() : "No input entered"; // do I need this assertion?
@@ -64,13 +66,19 @@ public class Parser {
             return prepareDone(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ListCommand(arguments.trim());
 
         case FindCommand.COMMAND_WORD:
             return prepareFind(arguments);
 
         case FilterCommand.COMMAND_WORD:
             return prepareFilter(arguments);
+
+        case VocabCommand.COMMAND_WORD:
+            return prepareVocab(arguments);
+
+        case DefineCommand.COMMAND_WORD:
+            return prepareDefine(arguments);
 
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
@@ -150,7 +158,7 @@ public class Parser {
         if (!matcher.matches()) {
             return new IncorrectCommand("Please pass a keyword to search for.");
         }
-        return new FindCommand(matcher.group("keywords"));
+        return new FindCommand(matcher.group("keyword"));
     }
 
     private Command prepareFilter(String args) {
@@ -165,6 +173,29 @@ public class Parser {
             return new FilterCommand(dateFilter);
         } catch (DateTimeParseException e) {
             return new IncorrectCommand("Please pass a proper date to filter by.");
+        }
+    }
+
+    private Command prepareDefine(String args) {
+        final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            return new IncorrectCommand("Please enter a word to define.");
+        }
+        return new DefineCommand(matcher.group("keyword"));
+    }
+
+    private Command prepareVocab(String args) {
+        final Matcher matcher = VOCAB_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            return new IncorrectCommand("Wrong format for new vocabulary.");
+        }
+
+        if (matcher.group("definition") == null) {
+            System.out.println("no definition provided");
+            return new VocabCommand(matcher.group("word"));
+        } else {
+            System.out.println("definition provided");
+            return new VocabCommand(matcher.group("word"), matcher.group("definition"));
         }
     }
 
