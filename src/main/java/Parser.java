@@ -16,6 +16,9 @@ public class Parser {
         if (command.trim().length() == 0) {
             throw new EmptyTaskException();
         }
+        if (userInput.startsWith("#")) {
+            return new HashtagCommand(parseTagToFind(userInput.substring(1)));
+        }
         switch (command) {
         case ("bye") :
             return new ByeCommand();
@@ -56,7 +59,16 @@ public class Parser {
         if (detail.equals("")) {
             throw new MissingDescriptionException(TaskType.TODO);
         } else {
-            return new ToDoTask(detail, false);
+            if (detail.contains("#")) {
+                TagList taglist = parseTag(detail);
+                // excludes the tags in description
+                int i = detail.indexOf("#");
+                String newDetail = detail.substring(0, i);
+
+                return new ToDoTask(newDetail, false, taglist);
+            } else {
+                return new ToDoTask(detail, false, null);
+            }
         }
     }
 
@@ -64,11 +76,23 @@ public class Parser {
         if (detail.equals("")) {
             throw new MissingDescriptionException(TaskType.DEADLINE);
         } else {
-            String descriptionAndTime = detail.replace("/by", "%");
-            String description = descriptionAndTime.split("%")[0];
-            String time = descriptionAndTime.split("%")[1];
-            DateAndTime dateAndTime = parseTime(time.trim());
-            return new DeadlineTask(description, false, dateAndTime);
+            if (!detail.contains("#")) {
+                String descriptionAndTime = detail.replace("/by", "%");
+                String description = descriptionAndTime.split("%")[0];
+                String time = descriptionAndTime.split("%")[1];
+                DateAndTime dateAndTime = parseTime(time.trim());
+                return new DeadlineTask(description, false, dateAndTime, null);
+            } else {
+                int i = detail.indexOf("#");
+                String newDetail = detail.substring(0, i);
+                String descriptionAndTime = newDetail.replace("/by", "%");
+                String description = descriptionAndTime.split("%")[0];
+                String time = descriptionAndTime.split("%")[1];
+                DateAndTime dateAndTime = parseTime(time.trim());
+                TagList taglist = parseTag(detail);
+                System.out.println(taglist.getTagList().size());
+                return new DeadlineTask(description, false, dateAndTime, taglist);
+            }
         }
     }
 
@@ -80,7 +104,12 @@ public class Parser {
             String description = descriptionAndTime.split("%")[0];
             String time = descriptionAndTime.split("%")[1];
             DateAndTime dateAndTime = parseTime(time.trim());
-            return new EventTask(description, false, dateAndTime);
+            if (!detail.contains("#")) {
+                return new EventTask(description, false, dateAndTime, null);
+            } else {
+                TagList taglist = parseTag(detail);
+                return new EventTask(description, false, dateAndTime, taglist);
+            }
         }
     }
 
@@ -93,5 +122,25 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new InvalidNumberInput();
         }
+    }
+
+    public static TagList parseTag(String detail) {
+        int i = detail.trim().indexOf("#");
+        String tagList = detail.substring(i).trim();
+        String spaceRemovedString = tagList.replace(" ", "");
+        String[] tagArr = spaceRemovedString.trim().split("#");
+        TagList res = new TagList();
+        for (String s : tagArr) {
+            if (!s.equals("")) {
+                Tag currTag = new Tag(s);
+                res.addTag(currTag);
+            }
+        }
+        System.out.println(res.getTagList().size());
+        return res;
+    }
+
+    public static Tag parseTagToFind(String tag) {
+        return new Tag(tag);
     }
 }

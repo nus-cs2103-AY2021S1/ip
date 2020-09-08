@@ -5,9 +5,18 @@
 public class EventTask extends Task {
     private DateAndTime eventTime;
 
-    public EventTask(String taskName, boolean isDone, DateAndTime eventTime) {
-        super(taskName, isDone);
+    public EventTask(String taskName, boolean isDone, DateAndTime eventTime, TagList tagList) {
+        super(taskName, isDone, tagList);
         this.eventTime = eventTime;
+    }
+
+    @Override
+    public String serialiseTask() {
+        int isDone = getTaskStatus() ? 1 : 0;
+        return "event %% " + getTaskDescription() + " %% " + isDone + " %% "
+                + getEventTime().getDate() + " %% "
+                + getEventTime().getTime() + " %% "
+                + getTagList();
     }
 
     public DateAndTime getEventTime() {

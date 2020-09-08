@@ -94,6 +94,20 @@ public class TaskManager {
         return res;
     }
 
+    public ArrayList<Task> findTaskWithTag(Tag tag) {
+        ArrayList<Task> res = new ArrayList<>();
+        for (Task task : this.taskList) {
+            if (task.getTagList() != null) {
+                if (task.getTagList().getTagList().contains(tag)) {
+                    res.add(task);
+                } else {
+                    System.out.println(tag);
+                }
+            }
+        }
+        return res;
+    }
+
     /**
      * Converts a given task list into a formatted string representation.
      *
