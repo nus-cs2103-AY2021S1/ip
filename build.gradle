@@ -39,7 +39,7 @@ test {
         exceptionFormat "full"
         showCauses true
         showStackTraces true
-        showStandardStreams = false
+        showStandardStreams = true
     }
 
     systemProperty "file.encoding", "utf-8"
