@@ -34,7 +34,7 @@ public class Duke {
      * Command that user can input
      */
     enum Command {
-        BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE, CHECK, FIND
+        BYE, LIST, DONE, TODO, DEADLINE, EVENT, DELETE, CHECK, FIND, HELP
     }
 
     /**
@@ -97,6 +97,8 @@ public class Duke {
             return cmdCheck(arr[1]);
         case FIND:
             return cmdFind(arr[1]);
+        case HELP:
+            return ui.outputHelp();
         default:
             return ui.outputInvalidInput();
         }
