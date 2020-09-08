@@ -17,8 +17,10 @@ public class Ui {
 
     /**
      * Prints the welcome message to the user.
+     *
+     * @return Welcome message.
      */
-    void greet() {
+    public static String greet() {
         String logo = "\n.-. .-')                .-') _  .-. .-')                .-') _\n"
                 + "\\  ( OO )              (  OO) ) \\  ( OO )              (  OO) )\n"
                 + " ;-----.\\  .-'),-----. /     '._ ;-----.\\  .-'),-----. /     '._\n"
@@ -28,31 +30,26 @@ public class Ui {
                 + " | |  \\  |  \\ |  | |  |   |  |   | |  \\  |  \\ |  | |  |   |  |\n"
                 + " | '--'  /   `'  '-'  '   |  |   | '--'  /   `'  '-'  '   |  |\n"
                 + " `------'      `-----'    `--'   `------'      `-----'    `--'\n";
-        System.out.println("helluu! I'm\n" + logo + "\nwhat would you like me to do?\n");
+        return "helluu! I'm\n" + logo + "\nwhat would you like me to do?\n";
     }
 
     /**
      * Prints the exit message to the user.
-     */
-    public void exit() {
-        System.out.println("    bye! see you soon!");
-    }
-
-    /**
-     * Reads the next command from the user.
      *
-     * @return Input by user.
+     * @return Exit message.
      */
-    String getUserInput() {
-        return sc.nextLine();
+    public static String exit() {
+        return "bye! see you soon!";
     }
 
     /**
-     * Prints the status of a command's execution.
+     * Prints and returns the status of a command's execution.
      *
      * @param status Status of command execution.
+     * @return Status message.
      */
-    public void printStatus(String status) {
+    public String printStatus(String status) {
         System.out.println(status);
+        return status;
     }
 }

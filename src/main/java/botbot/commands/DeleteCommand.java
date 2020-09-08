@@ -26,18 +26,20 @@ public class DeleteCommand extends Command {
      * @param storage Storage to save updated task list to.
      * @param tasks Task list to delete task from.
      * @param ui Ui to print status of execution.
+     * @return Status of execution.
      */
     @Override
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
+    public String execute(Storage storage, TaskList tasks, Ui ui) {
         try {
             Task task = tasks.get(id);
             tasks.delete(id);
             storage.save(tasks);
             int numOfTasks = tasks.size();
-            ui.printStatus(String.format("    ok! I've removed this task:\n      %s\n    you now have "
-                    + "%d task" + (numOfTasks > 1 ? "s" : "") + " in your list\n", task, numOfTasks));
+            String response = String.format("ok! I've removed this task:\n  %s\nyou now have %d task"
+                    + (numOfTasks > 1 ? "s" : "") + " in your list\n", task, numOfTasks);
+            return ui.printStatus(response);
         } catch (IndexOutOfBoundsException e) {
-            ui.printStatus("    oops! invalid task number!\n");
+            return ui.printStatus("oops! invalid task number!\n");
         }
     }
 }

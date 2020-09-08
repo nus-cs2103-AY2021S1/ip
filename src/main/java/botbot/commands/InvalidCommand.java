@@ -25,9 +25,10 @@ public class InvalidCommand extends Command {
      * @param storage Storage of the bot.
      * @param tasks Task list of the bot.
      * @param ui Ui to print error message.
+     * @return Error message.
      */
     @Override
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
-        ui.printStatus(error);
+    public String execute(Storage storage, TaskList tasks, Ui ui) {
+        return ui.printStatus(error);
     }
 }

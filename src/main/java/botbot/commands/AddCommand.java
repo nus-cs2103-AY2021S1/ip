@@ -26,13 +26,15 @@ public class AddCommand extends Command {
      * @param storage Storage to save updated task list to.
      * @param tasks Task list to add task to.
      * @param ui Ui to print status of execution.
+     * @return Status of execution.
      */
     @Override
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
+    public String execute(Storage storage, TaskList tasks, Ui ui) {
         tasks.add(task);
         storage.save(tasks);
         int numOfTasks = tasks.size();
-        ui.printStatus(String.format("    ok! I've added this task:\n      %s\n    you now have %d task"
-                + (numOfTasks > 1 ? "s" : "") + " in your list\n", task, numOfTasks));
+        String response = String.format("ok! I've added this task:\n  %s\nyou now have %d task"
+                + (numOfTasks > 1 ? "s" : "") + " in your list\n", task, numOfTasks);
+        return ui.printStatus(response);
     }
 }

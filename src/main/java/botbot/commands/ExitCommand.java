@@ -14,10 +14,11 @@ public class ExitCommand extends Command {
      * @param storage Storage to save task list to.
      * @param tasks Task list of the bot.
      * @param ui Ui to exit from.
+     * @return Status of execution.
      */
     @Override
-    public void execute(Storage storage, TaskList tasks, Ui ui) {
-        ui.exit();
+    public String execute(Storage storage, TaskList tasks, Ui ui) {
+        return Ui.exit();
     }
 
     /**
