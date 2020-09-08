@@ -5,7 +5,7 @@ import duke.gui.MainWindow;
 /**
  * <code>OutputHandler</code> connected for display via GUI.
  */
-public class OutputHandlerForGui extends OutputHandler{
+public class OutputHandlerForGui extends OutputHandler {
 
     /**
      * GUI main window for buffer contents to be outputted into.

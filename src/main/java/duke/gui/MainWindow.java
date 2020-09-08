@@ -30,15 +30,6 @@ public class MainWindow extends AnchorPane {
     private DukeGui dukeGui;
 
     /**
-     * Sets <code>dukeGui</code>.
-     *
-     * @param d Given <code>DukeGui</code> object.
-     */
-    public void setDukeGui(DukeGui d) {
-        dukeGui = d;
-    }
-
-    /**
      * User avatar image.
      */
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
@@ -57,6 +48,15 @@ public class MainWindow extends AnchorPane {
      * Default font for Duke.
      */
     private Font dukeFont = Font.font("Consolas", 12);
+
+    /**
+     * Sets <code>dukeGui</code>.
+     *
+     * @param d Given <code>DukeGui</code> object.
+     */
+    public void setDukeGui(DukeGui d) {
+        dukeGui = d;
+    }
 
     /**
      * Initialization of <code>Listener</code> that sets the window to the latest messages.

@@ -26,7 +26,7 @@ public class DukeGui extends Application {
      * @param stage The stage where the application is set on.
      */
     @Override
-    public void start(Stage stage){
+    public void start(Stage stage) {
         try {
             // Initialize GUI
             FXMLLoader fxmlLoader = new FXMLLoader(DukeGui.class.getResource("/view/MainWindow.fxml"));
