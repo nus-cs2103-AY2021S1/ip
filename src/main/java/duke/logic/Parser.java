@@ -64,7 +64,12 @@ public class Parser {
             return ui.printGreeting();
         } else if (input.equals("list")) {
             //ui.printTaskList(tasks);
-            result = ui.showTaskList(tasks);
+            if (tasks.size() > 0) {
+                assert tasks.size() == 0;
+                result = ui.showTaskList(tasks);
+            } else {
+                result = "You have no tasks";
+            }
         } else if (input.contains("done")) {
             result = doneCommand(input, tasks, storage, ui);
         } else {
