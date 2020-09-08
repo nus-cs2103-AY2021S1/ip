@@ -7,15 +7,20 @@ import java.io.IOException;
  */
 public class Storage {
     /** The file path associated with the current running instance of Duke. */
-    private final String filePath;
+    private final String taskListFilePath;
+    private final String tagsFilePath;
+    private TaskList loadedTaskList;
+    private TagList loadedTagList;
 
     /**
      * Constructs a new Storage instance with an associated file path.
      *
-     * @param filePath The file path associated with a running instance of Duke.
+     * @param taskListFilePath file path associated with a saved task list.
+     * @param tagsFilePath file path associated with a saved tag list.
      */
-    public Storage(String filePath) {
-        this.filePath = filePath;
+    public Storage(String taskListFilePath, String tagsFilePath) {
+        this.taskListFilePath = taskListFilePath;
+        this.tagsFilePath = tagsFilePath;
     }
 
     /**
@@ -25,8 +30,17 @@ public class Storage {
      * @throws IOException if an IO exception occurs while reading.
      * @throws ClassNotFoundException if the file cannot be deserialized into a TaskList.
      */
-    TaskList load() throws IOException, ClassNotFoundException {
-        return Reader.readListFromFile(filePath);
+    void load() throws IOException, ClassNotFoundException {
+        loadedTaskList = Reader.readListFromFile(taskListFilePath);
+        loadedTagList = Reader.readTagsFromFile(tagsFilePath);
+    }
+    
+    TaskList getLoadedTasks() {
+        return loadedTaskList;
+    }
+    
+    TagList getLoadedTags() {
+        return loadedTagList;
     }
 
     /**
@@ -35,8 +49,8 @@ public class Storage {
      * @param taskList The TaskList instance to save.
      * @return A response representing the result of the save operation.
      */
-    Response save(TaskList taskList) {
-        return Writer.writeListToFile(taskList, filePath);
+    Response save(TaskList taskList, TagList tagList) {
+        return Writer.writeToFile(taskList, tagList, taskListFilePath, tagsFilePath);
     }
 
     /**
@@ -44,8 +58,7 @@ public class Storage {
      *
      * @return True if file exists, False if otherwise.
      */
-    boolean doesStorageFileExist() {
-        return Reader.doesFileExist(filePath);
+    boolean doStorageFilesExist() {
+        return Reader.doFilesExist(taskListFilePath, tagsFilePath);
     }
-
 }

@@ -15,9 +15,11 @@ public class Reader {
      * @param path The file path to check.
      * @return True if the file exists, False otherwise.
      */
-    static boolean doesFileExist(String path) {
-        File file = new File(path);
-        return file.exists() && file.isFile();
+    static boolean doFilesExist(String taskListFilePath, String tagsFilePath) {
+        File taskListFile = new File(taskListFilePath);
+        File tagsFile = new File(tagsFilePath);
+        return taskListFile.exists() && taskListFile.isFile()
+                && tagsFile.exists() && tagsFile.isFile();
     }
 
     /**
@@ -33,5 +35,11 @@ public class Reader {
         FileInputStream fileInputStream = new FileInputStream(path);
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
         return (TaskList) objectInputStream.readObject();
+    }
+    
+    static TagList readTagsFromFile(String path) throws ClassNotFoundException, IOException {
+        FileInputStream fileInputStream = new FileInputStream(path);
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+        return (TagList) objectInputStream.readObject();
     }
 }

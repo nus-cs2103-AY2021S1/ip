@@ -18,7 +18,7 @@ public class Parser {
             "untag"
     );
     private final TaskList userTaskList;
-    private final TagList tagList = new TagList();
+    private final TagList tagList;
     private final Storage storage;
     
     /**
@@ -28,6 +28,7 @@ public class Parser {
      */
     public Parser(Storage storage) {
         userTaskList = new TaskList();
+        tagList = new TagList();
         this.storage = storage;
     }
     
@@ -37,8 +38,9 @@ public class Parser {
      * @param storage      A Storage instance to use when the parser needs to save to disk.
      * @param userTaskList A TaskList instance that represents the existing save.
      */
-    Parser(Storage storage, TaskList userTaskList) {
+    Parser(Storage storage, TaskList userTaskList, TagList tagList) {
         this.userTaskList = userTaskList;
+        this.tagList = tagList;
         this.storage = storage;
     }
     
@@ -65,7 +67,7 @@ public class Parser {
             case "tags":
                 return new Response(Ui.printTags(tagList));
             case "save":
-                return storage.save(userTaskList);
+                return storage.save(userTaskList, tagList);
             default:
                 return parseAddCommand(literal);
             }

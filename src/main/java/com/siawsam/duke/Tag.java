@@ -1,9 +1,10 @@
 package com.siawsam.duke;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Tag {
+public class Tag implements Serializable {
     private final String tagName;
     private final List<Taggable> taggedItems = new ArrayList<>();
     

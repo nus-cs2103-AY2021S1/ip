@@ -1,9 +1,10 @@
 package com.siawsam.duke;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TagList {
+public class TagList implements Serializable {
     private final List<Tag> tags = new ArrayList<>();
     
     private Tag createAndAddTag(String tagName) {
@@ -44,9 +45,10 @@ public class TagList {
     
     public void untag(Tag tag, Taggable taggable) {
         tag.removeItem(taggable);
-        // we don't keep tags that have no taggables inside
+        //we don't keep tags that have no Taggables inside
         if (tag.isTagEmpty()) {
-            tags.remove(tag);
+            // compare tags by their names since equality is not preserved by serialization
+            tags.removeIf(t -> t.getTagName().equals(tag.getTagName()));
         }
     }
     
