@@ -21,6 +21,7 @@ public class Event extends Task {
         super(isCompleted, taskName);
         this.at = at;
         String dateAndTime[] = at.split("\\s");
+        assert dateAndTime[0] != null;
         this.date = LocalDate.parse(dateAndTime[0]);
         if (dateAndTime.length > 1) {
             // If time is given as well
