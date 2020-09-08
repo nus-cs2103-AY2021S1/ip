@@ -30,24 +30,32 @@ public class Parser {
         case "list":
             return new ListCommand();
         case "done":
-            return new DoneCommand(Integer.parseInt(parts[1].trim()));
+            String doneTaskIndex = parts[1].trim();
+            return new DoneCommand(Integer.parseInt(doneTaskIndex));
         case "delete":
-            return new DeleteCommand(Integer.parseInt(parts[1].trim()));
+            String deleteTaskIndex = parts[1].trim();
+            return new DeleteCommand(Integer.parseInt(deleteTaskIndex));
         case "find":
-            return new FindCommand(parts[1].trim());
+            String keyword = parts[1].trim();
+            return new FindCommand(keyword);
         case "todo":
-            return new ToDoCommand(parts[1].trim());
+            String toDoDescription = parts[1].trim();
+            return new ToDoCommand(toDoDescription);
         case "deadline":
             try {
                 String[] deadline = parts[1].split("/by");
-                return new DeadlineCommand(deadline[0].trim(), deadline[1].trim());
+                String deadlineDescription = deadline[0].trim();
+                String dateBy = deadline[1].trim();
+                return new DeadlineCommand(deadlineDescription, dateBy);
             } catch (Exception e) {
                 throw new DukeException("Deadline formatting is wrong! Please include /by.");
             }
         case "event":
             try {
                 String[] event = parts[1].split("/at");
-                return new EventCommand(event[0].trim(), event[1].trim());
+                String eventDescription = event[0].trim();
+                String dateAt = event[1].trim();
+                return new EventCommand(eventDescription, dateAt);
             } catch (Exception e) {
                 throw new DukeException("Event formatting is wrong! Please include /at.");
             }

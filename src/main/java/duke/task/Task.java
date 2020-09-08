@@ -58,11 +58,5 @@ public abstract class Task {
      *
      * @return string containing its description and its status icon.
      */
-    public String infoString() {
-        String x = "0";
-        if (isDone) {
-            x = "1";
-        }
-        return "T | " + x + " | " + this.description;
-    }
+    public abstract String infoString();
 }
