@@ -8,9 +8,9 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
-import duke.command.RedoCommand;
 import duke.command.TodoCommand;
 import duke.command.UndoCommand;
 import duke.task.Deadline;
@@ -67,6 +67,8 @@ public class Parser {
             return new FindCommand(input);
         case "undo":
             return new UndoCommand();
+        case "help":
+            return new HelpCommand(input);
         default:
             return new InvalidCommand(input);
         }

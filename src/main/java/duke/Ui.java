@@ -1,6 +1,5 @@
 package duke;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -13,9 +12,9 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
-import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
+import duke.command.UndoCommand;
 import duke.task.Task;
 
 /**
@@ -147,6 +146,12 @@ public class Ui {
         logo = "DUKE!";
     }
 
+    /**
+     * Provides the user with how to use an individual command or all commands if none specified.
+     *
+     * @param input Command specified by the user.
+     * @throws DukeException if Invalid command entered after help.
+     */
     public static void printHelp(String input) throws DukeException {
         if (input.contains(" ")) {
             String commandGiven = input.trim().split(" ")[1];
@@ -178,6 +183,9 @@ public class Ui {
             case "find":
                 System.out.println(FindCommand.COMMAND_USAGE);
                 break;
+            case "undo":
+                System.out.println(UndoCommand.COMMAND_USAGE);
+                break;
             default:
                 throw new DukeException("\u2639 Oops, " + '"' + commandGiven + '"' + " is not a valid command for "
                     + "help! \n"
@@ -185,26 +193,6 @@ public class Ui {
             }
         } else {
             int counter = 1;
-            System.out.println(counter + ") " + ByeCommand.COMMAND_USAGE);
-            System.out.println();
-            System.out.println();
-            counter++;
-            System.out.println(counter + ") " + ListCommand.COMMAND_USAGE);
-            System.out.println();
-            System.out.println();
-            counter++;
-            System.out.println(counter + ") " + ClearCommand.COMMAND_USAGE);
-            System.out.println();
-            System.out.println();
-            counter++;
-            System.out.println(counter + ") " + DoneCommand.COMMAND_USAGE);
-            System.out.println();
-            System.out.println();
-            counter++;
-            System.out.println(counter + ") " + DeleteCommand.COMMAND_USAGE);
-            System.out.println();
-            System.out.println();
-            counter++;
             System.out.println(counter + ") " + DeadlineCommand.COMMAND_USAGE);
             System.out.println();
             System.out.println();
@@ -217,7 +205,31 @@ public class Ui {
             System.out.println();
             System.out.println();
             counter++;
+            System.out.println(counter + ") " + ByeCommand.COMMAND_USAGE);
+            System.out.println();
+            System.out.println();
+            counter++;
+            System.out.println(counter + ") " + ListCommand.COMMAND_USAGE);
+            System.out.println();
+            System.out.println();
+            counter++;
             System.out.println(counter + ") " + FindCommand.COMMAND_USAGE);
+            System.out.println();
+            System.out.println();
+            counter++;
+            System.out.println(counter + ") " + ClearCommand.COMMAND_USAGE);
+            System.out.println();
+            System.out.println();
+            counter++;
+            System.out.println(counter + ") " + UndoCommand.COMMAND_USAGE);
+            System.out.println();
+            System.out.println();
+            counter++;
+            System.out.println(counter + ") " + DoneCommand.COMMAND_USAGE);
+            System.out.println();
+            System.out.println();
+            counter++;
+            System.out.println(counter + ") " + DeleteCommand.COMMAND_USAGE);
         }
     }
 }

@@ -8,7 +8,10 @@ import duke.TaskListHandler;
  * Inherits from generic command class.
  */
 public class UndoCommand extends Command {
-
+    public static final String COMMAND_WORD = "undo";
+    public static final String COMMAND_USAGE = COMMAND_WORD + ": Undo the previous command, "
+        + "but cannot undo an undo command.\n\n"
+        + "Example: " + COMMAND_WORD;
     /**
      * Reverts the previous command given by the user.
      *
