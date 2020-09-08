@@ -1,5 +1,6 @@
 package sparkles.command;
 
+import sparkles.task.Task;
 import sparkles.task.TaskList;
 import sparkles.util.Storage;
 import sparkles.util.Ui;
@@ -26,10 +27,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.print("     Bye. Hope to see you again!");
-        ui.showLine();
-        System.exit(0);
-        return "Bye. Hope to see you again!";
+        return this.concatenateOutputs(ui, null, null);
     }
 
     /**
@@ -40,5 +38,16 @@ public class ExitCommand extends Command {
     @Override
     public boolean isExit() {
         return true;
+    }
+
+    @Override
+    public String concatenateOutputs(Ui ui, Task task, TaskList taskList) {
+        assert task == null;
+        assert taskList == null;
+
+        ui.print("     Bye. Hope to see you again!");
+        ui.showLine();
+        System.exit(0);
+        return "Bye. Hope to see you again!";
     }
 }

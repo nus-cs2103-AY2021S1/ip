@@ -1,7 +1,6 @@
 package sparkles.command.addcommand;
 
 import sparkles.SparklesException;
-import sparkles.command.Command;
 import sparkles.task.Event;
 import sparkles.task.Task;
 import sparkles.task.TaskList;
@@ -11,7 +10,7 @@ import sparkles.util.Ui;
 /**
  * Represents an AddEventCommand.
  */
-public class AddEventCommand extends Command {
+public class AddEventCommand extends AddCommand {
 
     public AddEventCommand(String command) {
         super(command);
@@ -45,12 +44,8 @@ public class AddEventCommand extends Command {
             desc = arr[0].substring(6).trim();
             at = arr[1];
             task = new Event(desc, at);
-            ui.print("     Got it. I've added this task");
-            response = "Got it. I've added this task\n";
-            response += task.printTask().trim() + "\n";
 
-            taskList.add(task);
-            response += ui.showListSize(taskList.getListSize());
+            response = this.concatenateOutputs(ui, task, taskList);
         } catch (Exception ex) {
             throw new SparklesException("     OOPS!! The description and time of an Event cannot be empty!");
         } finally {

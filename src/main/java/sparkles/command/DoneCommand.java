@@ -33,35 +33,46 @@ public class DoneCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws SparklesException {
-        int index;
         String response;
 
         try {
-            index = Integer.parseInt(command.substring(5));
-            Task task = taskList.getStorage().get(index - 1);
-            if (task.getStatusIcon().equals("O")) {
-                ui.print("     Task is already marked as done!");
-                response = "Task is already marked as done!";
-            } else {
-                task.markAsDone();
-                ui.print("     Nice! I have marked this task as done :-)");
-                response = "Nice! I have marked this task as done :-)";
-            }
+            response = this.concatenateOutputs(ui, null , taskList);
             return response;
 
         } catch (Exception ex) {
             if (ex instanceof StringIndexOutOfBoundsException) {
                 throw new SparklesException("     OOPS!! Task in the list to be marked as done is not specified!");
+            } else if (taskList.getStorage().isEmpty()) {
+                throw new SparklesException("     OOPS!! Task list is empty!");
             } else {
-                if (taskList.getStorage().isEmpty()) {
-                    throw new SparklesException("     OOPS!! Task list is empty!");
-
-                } else {
-                    throw new SparklesException("     OOPS!! Task does not exist!");
-                }
+                throw new SparklesException("     OOPS!! Task does not exist!");
             }
         } finally {
             storage.updateFile(taskList.getStorage());
         }
+    }
+
+    @Override
+    public String concatenateOutputs(Ui ui, Task task, TaskList taskList) {
+        assert task == null;
+
+        String response;
+        int index;
+
+        index = Integer.parseInt(command.substring(5));
+        Task t = taskList.getStorage().get(index - 1);
+
+        if (t.getStatusIcon().equals("O")) {
+            ui.print("     Task is already marked as done!");
+
+            response = "Task is already marked as done!";
+        } else {
+            t.markAsDone();
+            ui.print("     Nice! I have marked this task as done :-)");
+
+            response = "Nice! I have marked this task as done :-)";
+        }
+
+        return response;
     }
 }

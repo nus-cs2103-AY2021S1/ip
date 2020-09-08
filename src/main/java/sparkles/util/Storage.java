@@ -92,14 +92,9 @@ public class Storage {
 
         File parent = file.getParentFile();
         if (!parent.exists()) {
-            if (parent.mkdir()) {
-                createFile(file);
-            } else {
-                System.out.println("     Task.txt did not exist, cannot create parent file");
-            }
-        } else {
-            createFile(file);
+            parent.mkdir();
         }
+        createFile(file);
     }
 
     private void createFile(File file) {
@@ -125,10 +120,14 @@ public class Storage {
             task = new Todo(arr[2]);
         } else if (arr[0].equals("D")) {
             task = new Deadline(arr[2], arr[3]);
-        } else {
+        } else if (arr[0].equals("E")) {
             task = new Event(arr[2], arr[3]);
+        } else {
+            task = null;
         }
+
         if (arr[1].equals("O")) {
+            assert task != null;
             task.markAsDone();
         }
         return task;

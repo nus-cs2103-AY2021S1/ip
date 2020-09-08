@@ -1,5 +1,6 @@
 package sparkles.command;
 
+import sparkles.task.Task;
 import sparkles.task.TaskList;
 import sparkles.util.Storage;
 import sparkles.util.Ui;
@@ -26,8 +27,18 @@ public class TaskUnclearCommand extends Command {
      */
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return this.concatenateOutputs(ui, null, null);
+    }
+
+    @Override
+    public String concatenateOutputs(Ui ui, Task task, TaskList taskList) {
+        assert task == null;
+        assert taskList == null;
+
+        String response = "Task need to be more specific!";
         ui.print("     Task need to be more specific!");
-        return "Task need to be more specific!";
+
+        return response;
     }
 
 }
