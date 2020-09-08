@@ -43,4 +43,8 @@ public class Event extends Task {
     public String saveToHardDisk() {
         return "E" + super.saveToHardDisk() + " | " + time;
     }
+    
+    public void changeTime(LocalDate time) {
+        this.time = time;
+    }
 }

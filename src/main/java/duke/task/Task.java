@@ -58,4 +58,12 @@ public class Task {
     public String getDescription() {
         return description;
     }
+
+    public void changeDescription(String description) {
+        this.description = description;
+    }
+
+    public void markAsNotDone() {
+        isDone = false;
+    }
 }

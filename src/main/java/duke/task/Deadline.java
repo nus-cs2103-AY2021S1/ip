@@ -43,4 +43,8 @@ public class Deadline extends Task {
     public String saveToHardDisk() {
         return "D" + super.saveToHardDisk() + " | " + time;
     }
+
+    public void changeTime(LocalDate time) {
+        this.time = time;
+    }
 }
