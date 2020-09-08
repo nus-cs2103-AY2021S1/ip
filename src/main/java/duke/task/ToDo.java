@@ -48,7 +48,7 @@ public class ToDo extends Task {
 
         HashMap<String, String> dict = super.convertToHashMap();
 
-        dict.put("type", "duke.task.ToDo");
+        dict.put("type", TaskType.TODO.toSaveString());
 
         return dict;
     }

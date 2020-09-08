@@ -31,13 +31,11 @@ public class FindCommand extends ComplexCommand {
     public void execute(Ui ui, TaskManager taskManager, SaveManager saveManager) {
 
         try {
-            // Parse input and filter tasks
             String keywords = this.parseParams();
             TaskManager filteredTasks = taskManager.filter(task -> task.getName().contains(keywords));
 
-            // Display filtered tasks to screen
-            ui.queueDisplay("Here are the matching tasks in your list:");
-            ui.queueDisplay(filteredTasks.toString());
+            ui.queueMessageToDisplay("Here are the matching tasks in your list:");
+            ui.queueMessageToDisplay(filteredTasks.toString());
 
         } catch (DukeInputException e) {
             ui.displayException(e);
@@ -57,8 +55,4 @@ public class FindCommand extends ComplexCommand {
 
     }
 
-    @Override
-    public boolean isByeCommand() {
-        return false;
-    }
 }

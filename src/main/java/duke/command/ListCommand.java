@@ -18,7 +18,7 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(Ui ui, TaskManager taskManager, SaveManager saveManager) {
-        ui.queueDisplay(taskManager.toString());
+        ui.queueMessageToDisplay(taskManager.toString());
     }
 
 }

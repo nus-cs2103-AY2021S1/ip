@@ -48,7 +48,7 @@ public class Ui {
      * Passes a string to <code>outputHandler</code>, to be printed when flushed.
      * @param output String to be printed by <code>inputHandler</code>
      */
-    public void queueDisplay(String output) {
+    public void queueMessageToDisplay(String output) {
         this.outputHandler.storeOutput(output);
     }
 
@@ -56,7 +56,7 @@ public class Ui {
      * Prints all messages stored in <code>outputHandler</code> buffer.
      * Does nothing if no messages in buffer.
      */
-    public void display() {
+    public void displayQueuedMessages() {
         if (!this.outputHandler.isEmpty()) {
             this.outputHandler.flush();
         }
@@ -86,10 +86,10 @@ public class Ui {
      * @param task <code>Task</code> that was just added into Duke.
      * @param taskManagerSize Number of tasks already in Duke.
      */
-    public void displayAfterAddTask(Task task, int taskManagerSize) {
-        this.queueDisplay("Successfully added a new task:");
-        this.queueDisplay("\t" + task.toString());
-        this.queueDisplay("Now you have " + taskManagerSize + " tasks in the list.");
+    public void displayAfterAddTaskMessage(Task task, int taskManagerSize) {
+        this.queueMessageToDisplay("Successfully added a new task:");
+        this.queueMessageToDisplay("\t" + task.toString());
+        this.queueMessageToDisplay("Now you have " + taskManagerSize + " tasks in the list.");
     }
 
     /**

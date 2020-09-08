@@ -32,17 +32,14 @@ public class DoneCommand extends ComplexCommand {
     public void execute(Ui ui, TaskManager taskManager, SaveManager saveManager) {
 
         try {
-            // Attempt to parse parameter and get task at given index
             int index = this.parseParams(taskManager.size());
 
             Task temp = taskManager.getTask(index - 1);
 
-            // Mark task as done
             temp.doTask();
 
-            // Display status message to user
-            ui.queueDisplay("Nice! I've marked this task as done:");
-            ui.queueDisplay("\t" + temp.toString());
+            ui.queueMessageToDisplay("Nice! I've marked this task as done:");
+            ui.queueMessageToDisplay("\t" + temp.toString());
 
         } catch (DukeInputException e) {
             ui.displayException(e);

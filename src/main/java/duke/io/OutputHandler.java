@@ -59,10 +59,8 @@ public class OutputHandler {
                 .stream()
                 .reduce("", (x,y) -> x + "\n" + y);
 
-        // Display messages
         printNow(stringToPrint);
 
-        // Clear buffer
         this.outputBuffer.clear();
     }
 

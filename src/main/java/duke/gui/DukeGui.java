@@ -41,7 +41,6 @@ public class DukeGui extends Application {
             fxmlLoader.<MainWindow>getController().setDukeGui(this);
             stage.show();
 
-            // Send greeting
             this.duke.initialize();
         } catch (IOException e) {
             e.printStackTrace();

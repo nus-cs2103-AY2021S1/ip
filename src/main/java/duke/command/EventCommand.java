@@ -32,14 +32,12 @@ public class EventCommand extends ComplexCommand {
     public void execute(Ui ui, TaskManager taskManager, SaveManager saveManager) {
 
         try {
-            // Attempt to parse parameters and create a new Event
             String[] splitParams = this.parseParams();
             Event newEvent = new Event(splitParams[0], splitParams[1]);
 
-            // Add new event to taskManager
             taskManager.storeTask(newEvent);
 
-            ui.displayAfterAddTask(newEvent, taskManager.size());
+            ui.displayAfterAddTaskMessage(newEvent, taskManager.size());
 
         } catch (DukeInputException e) {
             ui.displayException(e);

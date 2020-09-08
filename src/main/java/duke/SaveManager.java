@@ -13,6 +13,7 @@ import duke.exception.DukeSaveDataException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.TaskType;
 import duke.task.ToDo;
 
 
@@ -142,26 +143,21 @@ public class SaveManager {
     private Task loadTaskFromMap(HashMap<String, String> params) throws DukeSaveDataException {
 
         // Determine Task type from params
-        String type = params.get("type");
+        String type = params.get("type").toLowerCase();
         String name = params.get("name");
         boolean isDone = params.get("done").equals("true");
 
         // Create new Task based on type
-        switch (type) {
-        case "duke.task.Task":
+        if (TaskType.TASK.toSaveString().equals(type)) {
             return new Task(name, isDone);
-
-        case "duke.task.ToDo":
+        } else if (TaskType.TODO.toSaveString().equals(type)) {
             return new ToDo(name, isDone);
-
-        case "duke.task.Deadline":
+        } else if (TaskType.DEADLINE.toSaveString().equals(type)) {
             return new Deadline(name, params.get("deadline"), isDone);
-
-        case "duke.task.Event":
+        } else if (TaskType.EVENT.toSaveString().equals(type)) {
             return new Event(name, params.get("when"), isDone);
-
-        default:
-            //If unable to determine type, throw DukeSaveDataException
+        } else {
+            // Throw DukeSaveDataException if unable to parse task save string.
             throw new DukeSaveDataException("Save Data Error: " + params.toString());
         }
     }

@@ -32,14 +32,12 @@ public class DeleteCommand extends ComplexCommand {
     public void execute(Ui ui, TaskManager taskManager, SaveManager saveManager) {
 
         try {
-            // Attempt to parse parameters then remove task with given index
             int index = this.parseParams(taskManager.size());
             Task temp = taskManager.removeTask(index - 1);
 
-            // Display status message to user
-            ui.queueDisplay("Alright. I've removed this task:");
-            ui.queueDisplay("\t" + temp.toString());
-            ui.queueDisplay("Now you have " + taskManager.size() + " tasks in the list.");
+            ui.queueMessageToDisplay("Alright. I've removed this task:");
+            ui.queueMessageToDisplay("\t" + temp.toString());
+            ui.queueMessageToDisplay("Now you have " + taskManager.size() + " tasks in the list.");
 
         } catch (DukeInputException e) {
             ui.displayException(e);

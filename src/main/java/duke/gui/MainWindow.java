@@ -76,7 +76,6 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        // Gets user input from text field
         String input = userInput.getText();
 
         // Echos user input in GUI
@@ -89,7 +88,6 @@ public class MainWindow extends AnchorPane {
             Platform.exit();
         }
 
-        // Clear user input from text field.
         userInput.clear();
     }
 

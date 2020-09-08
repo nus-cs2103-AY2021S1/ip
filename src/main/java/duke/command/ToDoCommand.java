@@ -32,13 +32,11 @@ public class ToDoCommand extends ComplexCommand {
     public void execute(Ui ui, TaskManager taskManager, SaveManager saveManager) {
 
         try {
-            // Attempt to create task
             ToDo newToDo = new ToDo(this.parseParams());
 
-            // Store new task
             taskManager.storeTask(newToDo);
 
-            ui.displayAfterAddTask(newToDo, taskManager.size());
+            ui.displayAfterAddTaskMessage(newToDo, taskManager.size());
 
         } catch (DukeInputException e) {
             ui.displayException(e);
