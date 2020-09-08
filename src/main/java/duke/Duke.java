@@ -56,6 +56,8 @@ public class Duke {
             ui.printNicely(e.getMessage());
             return;
         }
+        assert(taskList != null);
+        assert(storage != null);
         ui.greet();
         ui.listOut(taskList);
         while (!hasExited) {
