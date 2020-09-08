@@ -11,8 +11,7 @@ import Tasks.Todo;
  * Components.Parser processes strings.
  */
 public class Parser {
-    private static int whichTask = -1;
-    private static String searchText = "";
+    private static Command lastCommand;
 
     private static boolean isNum(String s) {
         if (s == null) {
@@ -26,14 +25,6 @@ public class Parser {
         return true;
     }
 
-    public static int getWhichTask() {
-        return whichTask;
-    }
-
-    public static String getSearchText() {
-        return searchText;
-    }
-
     /**
      * Processes string and assigns it to a command type.
      * @param s command as a String
@@ -43,24 +34,27 @@ public class Parser {
     public static Command parse(String s, int size) {
         String[] done = s.split(" ");
         if (s.equals("bye")) {
-            return new ExitCommand();
+            return lastCommand = new ExitCommand();
         } else if (done.length == 2 && (done[0].equals("done")
                 || done[0].equals("delete"))
                     && isNum(done[1]) && Integer.parseInt(done[1]) <= size
                     && Integer.parseInt(done[1]) > 0) {
-            whichTask = Integer.parseInt(done[1]) - 1;
+            Integer whichTask = Integer.parseInt(done[1]) - 1;
+            assert (whichTask != null);
             if (done[0].equals("done")) {
-                return new DoneCommand(whichTask);
+                return lastCommand = new DoneCommand(whichTask);
             } else {
-                return new DeleteCommand(whichTask);
+                return lastCommand = new DeleteCommand(whichTask);
             }
         } else if (s.equals("list")) {
-            return new ListCommand();
+            return lastCommand = new ListCommand();
+        } else if (s.equals("undo")) {
+            return lastCommand = new UndoCommand(lastCommand);
         } else if (done[0].equals("find") && done.length > 1) {
-            searchText = s.replaceFirst("find ", "");
-            return new FindCommand(searchText);
+            String searchText = s.replaceFirst("find ", "");
+            return lastCommand = new FindCommand(searchText);
         } else {
-            return createTask(s);
+            return lastCommand = createTask(s);
         }
     }
 

@@ -28,4 +28,9 @@ public class ErrorCommand extends Command {
             return Ui.ignoreMessage();
         }
     }
+
+    @Override
+    public String undo(TaskList list) {
+        return Ui.cannotUndoMessage();
+    }
 }

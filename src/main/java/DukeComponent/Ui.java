@@ -67,5 +67,26 @@ public class Ui {
     public static String exitMessage() {
         return print("\tBye. Hope to see you again soon!\n");
     }
+
+    public static String undoAddMessage(Task task, int total) {
+        return print("\tGot it. I've reversed adding: \n"
+                + "\t" + task + "\n"
+                + "\tNow you have " + total + " tasks in the list.\n");
+    }
+
+    public static String undoDeleteMessage(Task task, int total) {
+        return print("\tGot it. I've added the following back to the list: \n"
+                + "\t" + task + "\n"
+                + "\tNow you have " + total + " tasks in the list.\n");
+    }
+
+    public static String undoDoneMessage(Task task) {
+        return print("\tGot it. I've marked this task as undone:\n"
+                + "\t" + task + "\n");
+    }
+
+    public static String cannotUndoMessage() {
+        return print("\tSorry. The last command cannot be undone.\n");
+    }
 }
 

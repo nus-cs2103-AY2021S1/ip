@@ -34,6 +34,10 @@ public class Task {
         completed = true;
     }
 
+    public void setNotCompleted() {
+        completed = false;
+    }
+
     @Override
     public String toString() {
         return (completed ? "[✓]" : "[✗]") + " " + name;

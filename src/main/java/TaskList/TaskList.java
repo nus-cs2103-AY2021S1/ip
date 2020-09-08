@@ -32,6 +32,17 @@ public class TaskList {
     }
 
     /**
+     * Adds a task to list at the specified index and updates saved data in storage.
+     * @param task task to be added
+     * @param index index at which the task is to be inserted
+     */
+    public void addTaskAt(Task task, int index) {
+        taskList.add(index, task);
+        storage.reset();
+        storage.addAll(this);
+    }
+
+    /**
      * Returns the number of tasks in list.
      */
     public int size() {
@@ -61,6 +72,12 @@ public class TaskList {
 
     public void setCompleted(int whichTask) {
         taskList.get(whichTask).setCompleted();
+        storage.reset();
+        storage.addAll(this);
+    }
+
+    public void setNotCompleted(int whichTask) {
+        taskList.get(whichTask).setNotCompleted();
         storage.reset();
         storage.addAll(this);
     }
