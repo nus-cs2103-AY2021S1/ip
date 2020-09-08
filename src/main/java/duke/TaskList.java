@@ -27,15 +27,17 @@ public class TaskList {
         this.tasks = new ArrayList<>();
         if (!data.isEmpty()) {
             for (String command : data) {
+                assert command.length() > 2 : "incorrect command length";
                 command = command.substring(3);
                 String[] commandPortions = command.split("]", 3);
                 String category = commandPortions[0];
+                assert commandPortions.length > 2 : "incorrect command portions";
                 String mark = commandPortions[1].substring(commandPortions[1].length() - 1);
                 int status = (mark.equals("\u2713")) ? Task.DONE : Task.DOING;
                 String commandDetails = commandPortions[2].substring(1);
 
                 Task task = new Task(0, 0, "");
-                String[] array;
+
                 String ORIGINAL_FORMAT = "MMM dd yyyy";
                 String UPDATED_FORMAT = "yyyy/MM/dd";
 
@@ -46,6 +48,8 @@ public class TaskList {
 
                     case "Deadline":
                         String[] deadlineSplitter = commandDetails.split("by: ");
+
+                        assert deadlineSplitter.length == 2 : "unable to format the time";
 
                         String originalDate = deadlineSplitter[1];
                         String updatedDate;
@@ -64,6 +68,8 @@ public class TaskList {
 
                     case "Event":
                         String[] eventSplitter = commandDetails.split("at: ");
+
+                        assert eventSplitter.length == 2 : "unable to format the time";
 
                         String originalEventDate = eventSplitter[1];
                         String updatedEventDate;
@@ -116,6 +122,7 @@ public class TaskList {
      */
 
     public void deleteTask(Task task) {
+        assert this.tasks.contains(task) : "unable to remove task that is not in the list";
         this.tasks.remove(task);
         taskCounts--;
     }

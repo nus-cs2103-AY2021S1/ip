@@ -20,7 +20,6 @@ public class GUI {
         String output = "This is your task list: \n";
 
         for (int i = 1; i < taskList.taskCounts + 1; i++) {
-
             Task task = taskList.tasks.get(i - 1);
             String oneLine = "" + i + "." + task + "\n";
             output = output + oneLine;

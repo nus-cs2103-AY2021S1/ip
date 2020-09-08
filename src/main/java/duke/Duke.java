@@ -25,7 +25,6 @@ public class Duke extends Application {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    private GUI gui;
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -125,27 +124,12 @@ public class Duke extends Application {
     }
 
 
-    /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
 
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
     /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void dukeGreet() {
 
-    }
     private void handleUserInput() {
 
         Label userText = new Label("Me :\n" + userInput.getText());
@@ -157,19 +141,18 @@ public class Duke extends Application {
         userInput.clear();
     }
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     *
      */
     private String getResponse(String input) {
         String filePath = "./data/duke.txt";
-        this.gui = new GUI();
+        GUI gui = new GUI();
         this.storage = new Storage(filePath);
         if (this.storage.load().isEmpty()) {
             this.tasks = new TaskList();
         }else{
             this.tasks = new TaskList(storage.load());
         }
-        String output = ParserGUI.processCommand(input, this.gui, this.tasks, this.storage.filePath);
+        String output = ParserGUI.processCommand(input, gui, this.tasks, this.storage.filePath);
         return "Ka To: \n" + output;
     }
 

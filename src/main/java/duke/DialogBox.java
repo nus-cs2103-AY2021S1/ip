@@ -1,27 +1,29 @@
 package duke;
 
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
+
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.Background;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
-public class DialogBox extends HBox {
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
-    private Label text;
-    private ImageView displayPicture;
-    private Circle circle = new Circle(40);
+public class DialogBox extends HBox {
 
 
     public DialogBox(Label l, Image iv, Image background) {
-        text = l;
+        Circle circle = new Circle(40);
         circle.setFill(new ImagePattern(iv));
-        text.setWrapText(true);
+        l.setWrapText(true);
 
         // create a background image
         BackgroundImage backgroundimage = new BackgroundImage(background,
@@ -37,8 +39,7 @@ public class DialogBox extends HBox {
         this.setBackground(backgroundImage);
 
         this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(text, circle);
-
+        this.getChildren().addAll(l, circle);
     }
 
     /**

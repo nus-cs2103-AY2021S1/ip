@@ -22,9 +22,6 @@ public class Task {
         this.command = command;
     }
 
-    public int getCategory() {
-        return this.category;
-    }
 
     public String getStatusIcon() {
         return ((this.status == DONE) ? "\u2713" : "\u2718");
@@ -42,11 +39,6 @@ public class Task {
     public void markTaskAsDeleted() {
         this.status = DOING;
     }
-
-    public void setCategory(int category) {
-        this.category = category;
-    }
-
 
     /**
      * Returns string representation of the task according to the category
