@@ -15,7 +15,6 @@ import duke.exception.DukeInvalidTaskException;
 
 public class Event extends Task {
     private String day;
-    private LocalDate dateTime;
 
     /**
      * Initializes the Event object
@@ -31,10 +30,38 @@ public class Event extends Task {
         assert taskName != null : "TaskName should not be null!";
         assert day != null : "Day should not be null!";
         assert !day.equals(" ");
+        repeatedFrequency = Frequency.NONE;
         if (!day.equals(null) && !day.equals(" ")) {
             this.day = day;
             try {
-                this.dateTime = LocalDate.parse(day);
+                super.dateTime = LocalDate.parse(day);
+            } catch (DateTimeParseException err) {
+                System.out.println("for dates, please input the date in yyyy-mm-dd format");
+            }
+        } else {
+            throw new DukeInvalidDayException();
+        }
+    }
+
+    /**
+     * Initializes the Event object
+     * @param taskName name or description of task
+     * @param day day in which task has to be completed
+     * @param frequency frequency to repeat task
+     * @throws DukeInvalidDayException
+     * @throws DukeInvalidTaskException
+     */
+    public Event(String taskName, String day, Frequency frequency)
+            throws DukeInvalidDayException, DukeInvalidTaskException {
+        super(taskName);
+        assert taskName != null : "TaskName should not be null!";
+        assert day != null : "Day should not be null!";
+        assert !day.equals(" ");
+        repeatedFrequency = frequency;
+        if (!day.equals(null) && !day.equals(" ")) {
+            this.day = day;
+            try {
+                super.dateTime = LocalDate.parse(day);
             } catch (DateTimeParseException err) {
                 System.out.println("for dates, please input the date in yyyy-mm-dd format");
             }
@@ -65,7 +92,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        String finished = this.done ? "✓" : "✗";
+        String finished = this.isDone ? "✓" : "✗";
         String toReturn = dateTime == null
                             ? "[E]" + "[" + finished + "] " + taskName + " (at: " + day + ")"
                             : "[E]" + "[" + finished + "] " + taskName + " (at: "

@@ -10,6 +10,7 @@ import duke.exception.DukeInvalidTaskException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
+import duke.tasks.Task.Frequency;
 import duke.tasks.Todo;
 
 /**
@@ -75,10 +76,13 @@ public class TaskList {
 
     public String addEvent (String line) throws DukeInvalidDayException, DukeInvalidTaskException {
         assert line != null : "event given cannot be null";
-        String[] splits = line.split("event |/at ");
+        String[] splits = line.split("deadline |/at |/repeat ");
+        boolean isRepetitive = splits.length == 4;
         String toReturn = Ui.showLine();
         if (splits.length > 2) {
-            Event task = new Event(splits[1], splits[2]);
+            Event task = isRepetitive
+                            ? new Event(splits[1], splits[2], evaluateFrequency(splits[3]))
+                            : new Event(splits[1], splits[2]);
             todo.add(task);
             toReturn += "Got it. I've added this to task: \n" + task + "\n"
                     + "Now you have " + todo.size() + " tasks in the list \n"
@@ -103,10 +107,13 @@ public class TaskList {
      */
     public String addDeadline (String line) throws DukeInvalidDateException, DukeInvalidTaskException {
         assert line != null : "deadline task given cannot be null";
-        String[] splits = line.split("deadline |/by ");
+        String[] splits = line.split("deadline |/by |/repeat ");
+        boolean isRepetitive = splits.length == 4;
         String toReturn = Ui.showLine();
         if (splits.length > 2) {
-            Deadline task = new Deadline(splits[1], splits[2]);
+            Deadline task = isRepetitive
+                                ? new Deadline(splits[1], splits[2], evaluateFrequency(splits[3]))
+                                : new Deadline(splits[1], splits[2]);
             todo.add(task);
             toReturn += "Got it. I've added this to task: \n" + task + "\n"
                     + "Now you have " + todo.size() + " tasks in the list \n"
@@ -151,12 +158,21 @@ public class TaskList {
      */
 
     public String checkOff (Integer taskNumber) {
-        todo.get(taskNumber - 1).checkOff();
-        String toReturn = Ui.showLine();
-        toReturn += "Nice! I've marked this task as done: \n"
-                + todo.get(taskNumber - 1) + "\n";
-        toReturn += Ui.showLine();
-        storage.overwriteFile(todo);
+        Task task = todo.get(taskNumber - 1);
+        boolean isRepetitive = task.getIsRepetitive();
+        System.out.println(isRepetitive);
+        System.out.println(task.getDate());
+        String toReturn = Ui.showLine() + "Nice! I've marked this task as done: \n";
+        if (isRepetitive) {
+            task.updateDate();
+            toReturn += "As this task is a repetitive task, the date has been updated. \n"
+                        + todo.get(taskNumber - 1) + "\n" + Ui.showLine();
+        } else {
+            task.checkOff();
+            toReturn += task + "\n";
+            toReturn += Ui.showLine();
+            storage.overwriteFile(todo);
+        }
         return toReturn;
     }
 
@@ -168,19 +184,19 @@ public class TaskList {
         return this.todo;
     }
 
-//    private boolean checkValidityOfTask (String[] splits, String taskType) throws DukeInvalidDateException,
-//            DukeInvalidDayException, DukeInvalidTaskException {
-//        assert taskType.equals("event") || taskType.equals("deadline") : "this task type is not usable";
-//        if (splits.length > 2) {
-//            return true;
-//        } else if (splits.length > 1) {
-//            if (taskType.equals("event")) {
-//                throw new DukeInvalidDayException();
-//            } else {
-//                throw new DukeInvalidDateException();
-//            }
-//        } else {
-//            throw new DukeInvalidTaskException();
-//        }
-//    }
+    private Frequency evaluateFrequency(String frequency) {
+        switch (frequency) {
+        case "daily":
+            return Frequency.DAILY;
+        case "weekly":
+            return Frequency.WEEKLY;
+        case "monthly":
+            return Frequency.MONTHLY;
+        case "yearly":
+            return Frequency.YEARLY;
+        default:
+            return Frequency.NONE;
+        }
+
+    }
 }

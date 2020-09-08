@@ -16,7 +16,6 @@ import duke.exception.DukeInvalidTaskException;
 
 public class Deadline extends Task {
     private String date;
-    private LocalDate dateTime;
 
     /**
      * Initializes a Deadline object
@@ -32,10 +31,39 @@ public class Deadline extends Task {
         assert taskName != null : "TaskName should not be null!";
         assert date != null : "Date should not be null!";
         assert !date.equals(" ");
+        repeatedFrequency = Frequency.NONE;
         if (!date.equals(null) && !date.equals(" ")) {
             this.date = date;
             try {
-                this.dateTime = LocalDate.parse(date);
+                super.dateTime = LocalDate.parse(date);
+            } catch (DateTimeParseException err) {
+                System.out.println("for dates, please input the date in yyyy-mm-dd format");
+            }
+        } else {
+            throw new DukeInvalidDateException();
+        }
+    }
+    /**
+     * Initializes a Deadline object that is repetitive
+     * @param taskName name or description of task
+     * @param date date in which task has to be completed
+     * @param frequency frequency of the task to be repeated
+     * @throws DukeInvalidDateException
+     * @throws DukeInvalidTaskException
+     */
+    public Deadline(String taskName, String date, Frequency frequency)
+            throws DukeInvalidDateException, DukeInvalidTaskException {
+        super(taskName);
+        assert taskName != null : "TaskName should not be null!";
+        assert date != null : "Date should not be null!";
+        assert !date.equals(" ");
+        assert frequency != null : "Frequency cannot be null!";
+        repeatedFrequency = frequency;
+        setIsRepetitive();
+        if (!date.equals(null) && !date.equals(" ")) {
+            this.date = date;
+            try {
+                super.dateTime = LocalDate.parse(date);
             } catch (DateTimeParseException err) {
                 System.out.println("for dates, please input the date in yyyy-mm-dd format");
             }
@@ -66,7 +94,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String finished = this.done ? "✓" : "✗";
+        String finished = this.isDone ? "✓" : "✗";
         String toReturn = dateTime == null
                             ? "[D]" + "[" + finished + "] " + taskName + " (by: " + date + ")"
                             : "[D]" + "[" + finished + "] " + taskName + " (by: "

@@ -28,7 +28,7 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        String finished = this.done ? "✓" : "✗";
+        String finished = this.isDone ? "✓" : "✗";
         return "[T]" + "[" + finished + "] " + taskName;
     }
 }

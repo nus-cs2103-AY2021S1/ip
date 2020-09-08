@@ -1,13 +1,26 @@
 package duke.tasks;
 
+import java.time.LocalDate;
+
 import duke.exception.DukeInvalidTaskException;
+
 
 /**
  * Task object
  */
 public class Task {
     protected String taskName;
-    protected Boolean done;
+    protected Boolean isDone;
+    protected Boolean isRepetitive = false;
+    protected LocalDate dateTime;
+    public enum Frequency {
+        DAILY,
+        WEEKLY,
+        MONTHLY,
+        YEARLY,
+        NONE
+    }
+    protected Frequency repeatedFrequency;
 
     /**
      * Initializes the task object
@@ -19,7 +32,7 @@ public class Task {
         assert taskName != null : "TaskName should not be null!";
         if (!taskName.equals(null) && !taskName.equals(" ")) {
             this.taskName = taskName;
-            this.done = false;
+            this.isDone = false;
         } else {
             throw new DukeInvalidTaskException();
         }
@@ -29,7 +42,7 @@ public class Task {
      * Marks the task as done
      */
     public void checkOff() {
-        this.done = true;
+        this.isDone = true;
     }
 
     /**
@@ -37,7 +50,7 @@ public class Task {
      * @return a boolean indicating if the task is done
      */
     public Boolean isDone() {
-        return this.done;
+        return this.isDone;
     }
 
     /**
@@ -48,14 +61,58 @@ public class Task {
         return this.taskName;
     }
 
+    protected void setIsRepetitive() {
+        isRepetitive = true;
+    }
+
+    /**
+     * checks if task is repetitive
+     * @return true if task is repetitive
+     */
+    public Boolean getIsRepetitive() {
+        return isRepetitive;
+    }
+
+    /**
+     * updates the date based on frequency stated
+     */
+    public void updateDate() {
+        assert dateTime != null : "dateTime should not be null!";
+        System.out.println("update date");
+        System.out.println(dateTime == null);
+        switch (repeatedFrequency) {
+        case DAILY:
+            System.out.println(dateTime.toString());
+            dateTime = dateTime.plusDays(1);
+            break;
+        case WEEKLY:
+            System.out.println(dateTime.toString());
+            dateTime = dateTime.plusWeeks(1);
+            break;
+        case MONTHLY:
+            dateTime = dateTime.plusMonths(1);
+            break;
+        case YEARLY:
+            dateTime = dateTime.plusYears(1);
+            break;
+        default:
+            System.out.println("This is not a repetitive task");
+            break;
+        }
+    }
+    public String getDate() {
+        return dateTime.toString();
+    }
+
     /**
      * Gets a representation of the task object
      * @return String object representing the task
      */
     @Override
     public String toString() {
-        String finished = this.done ? "✓" : "✗";
+        String finished = this.isDone ? "✓" : "✗";
         String toReturn = "[" + finished + "]" + taskName;
         return toReturn;
     }
+
 }
