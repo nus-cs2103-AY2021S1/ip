@@ -1,7 +1,6 @@
 package duke.storage;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
@@ -131,15 +130,4 @@ public class Storage {
         }
     }
 
-    private void printFileContents() {
-        Scanner s = null; // create a Scanner using the File as the source
-        try {
-            s = new Scanner(this.file);
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }
-        while (s.hasNext()) {
-            System.out.println(s.nextLine());
-        }
-    }
 }
