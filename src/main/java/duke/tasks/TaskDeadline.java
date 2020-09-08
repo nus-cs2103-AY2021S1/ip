@@ -37,7 +37,6 @@ public class TaskDeadline extends Task {
      * @param amount amount of timeUnit to add.
      * @param timeUnit minutes, hours, days, months, years.
      */
-    @Override
     public void postpone(int amount, ChronoUnit timeUnit) {
         assert VALID_TIME_UNITS.contains(timeUnit) : "invalid time unit provided";
         deadline = deadline.plus(amount, timeUnit);
@@ -48,9 +47,8 @@ public class TaskDeadline extends Task {
      * @param amount amount of timeUnit to add.
      * @param timeUnit minutes, hours, days, months, years.
      */
-    @Override
     public void advance(int amount, ChronoUnit timeUnit) {
         assert VALID_TIME_UNITS.contains(timeUnit) : "invalid time unit provided";
-        deadline.minus(amount, timeUnit);
+        deadline = deadline.minus(amount, timeUnit);
     }
 }

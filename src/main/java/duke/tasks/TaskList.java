@@ -48,6 +48,4 @@ public class TaskList {
     public int getRemainingTaskCount() {
         return (int) taskList.stream().filter(x -> !x.isDone()).count();
     }
-
-    public void set(int taskIndex, Task task) { taskList.set(taskIndex, task); }
 }

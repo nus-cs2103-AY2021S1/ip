@@ -37,7 +37,8 @@ public class CommandRescheduleAdvance extends CommandReschedule {
         } else if (task instanceof TaskEvent) {
             ((TaskEvent) task).advance(amount, timeUnit);
         }
-        String output = "Okay, I've brought it forward. Updated as follows: \n"
+        String output = String.format("Advancing by %d %s\n", amount, timeUnit)
+                + "Okay, I've brought it forward. Updated as follows: \n"
                 + taskList.get(taskIndex);
         ui.outputBlockToUser(output);
     }

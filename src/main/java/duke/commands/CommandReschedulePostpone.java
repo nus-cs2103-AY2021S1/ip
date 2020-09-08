@@ -3,6 +3,9 @@ package duke.commands;
 import java.time.temporal.ChronoUnit;
 
 import duke.TimeModification;
+import duke.tasks.Task;
+import duke.tasks.TaskDeadline;
+import duke.tasks.TaskEvent;
 import duke.tasks.TaskList;
 import duke.ui.Ui;
 
@@ -28,18 +31,13 @@ public class CommandReschedulePostpone extends CommandReschedule {
 
     @Override
     public void execute() {
-        /*Task task = taskList.get(taskIndex);
+        Task task = taskList.get(taskIndex);
         if (task.toString().charAt(1) == 'D') {
-            TaskDeadline newTask = (TaskDeadline) task;
-            newTask.postpone(amount, timeUnit);
-            taskList.set(taskIndex, newTask);
+            ((TaskDeadline) task).postpone(amount, timeUnit);
         } else if (task.toString().charAt(1) == 'E') {
-            TaskEvent newTask = (TaskEvent) task;
-            newTask.postpone(amount, timeUnit);
-            taskList.set(taskIndex, newTask);
-        }*/
-        taskList.get(taskIndex).postpone(amount, timeUnit);
-        String output = "Adding " + amount + timeUnit + "\n"
+            ((TaskEvent) task).postpone(amount, timeUnit);
+        }
+        String output = String.format("Pushing back by %d %s\n", amount, timeUnit)
                 + "Okay, I've postponed it. Updated as follows: \n"
                 + taskList.get(taskIndex);
         ui.outputBlockToUser(output);

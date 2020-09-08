@@ -50,7 +50,6 @@ public class TaskEvent extends Task {
      * @param amount amount of timeUnit to add.
      * @param timeUnit minutes, hours, days, months, years.
      */
-    @Override
     public void postpone(int amount, ChronoUnit timeUnit) {
         assert VALID_TIME_UNITS.contains(timeUnit) : "invalid time unit provided";
         switch (timeUnit) {
@@ -70,16 +69,15 @@ public class TaskEvent extends Task {
      * @param amount amount of timeUnit to add.
      * @param timeUnit minutes, hours, days, months, years.
      */
-    @Override
     public void advance(int amount, ChronoUnit timeUnit) {
         assert VALID_TIME_UNITS.contains(timeUnit) : "invalid time unit provided";
         switch (timeUnit) {
         case MINUTES: case HOURS:
-            startTime.minus(amount, timeUnit);
-            endTime.minus(amount, timeUnit);
+            startTime = startTime.minus(amount, timeUnit);
+            endTime = endTime.minus(amount, timeUnit);
             break;
         case DAYS: case MONTHS: case YEARS:
-            eventDate.minus(amount, timeUnit);
+            eventDate = eventDate.minus(amount, timeUnit);
             break;
         default:
         }

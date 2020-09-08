@@ -1,7 +1,5 @@
 package duke.tasks;
 
-import java.time.temporal.ChronoUnit;
-
 /**
  * Represents a task with a description
  * that can be checked as done/undone.
@@ -37,8 +35,8 @@ public abstract class Task {
 
     public abstract String[] getSaveData();
 
-    public abstract void postpone(int amount, ChronoUnit timeUnit);
+    /*public abstract void postpone(int amount, ChronoUnit timeUnit);
 
-    public abstract void advance(int amount, ChronoUnit timeUnit);
+    public abstract void advance(int amount, ChronoUnit timeUnit);*/
 }
 
