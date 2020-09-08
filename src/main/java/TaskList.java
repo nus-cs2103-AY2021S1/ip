@@ -48,7 +48,12 @@ public class TaskList {
     public Task getTask(int index) {
         return tasks.get(index - 1);
     }
-    
+
+    /**
+     * Creates and returns a new TaskList with tasks that match the user date input.
+     * @param date date of the Tasks.
+     * @return a new TaskList with tasks that match the user date input.
+     */
     public TaskList getTasksOnDate(String date) {
         LocalDate userInputDate = LocalDate.parse(date,
                 DateTimeFormatter.ofPattern("dd-MM-yyyy"));
