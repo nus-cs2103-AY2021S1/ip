@@ -30,7 +30,13 @@ public class Parser {
             command = new ListCommand();
             break;
         case "done":
-            command = new DoneCommand(Integer.parseInt(inputArr[1]));
+            try {
+                command = new DoneCommand(Integer.parseInt(inputArr[1]));
+            } catch (NumberFormatException e) {
+                throw new DukeException("Invalid format!");
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("Please include item number!");
+            }
             break;
         case "find":
             try {

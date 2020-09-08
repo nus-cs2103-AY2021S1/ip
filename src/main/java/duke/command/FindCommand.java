@@ -12,6 +12,7 @@ public class FindCommand extends Command {
     private final String keyWord;
 
     public FindCommand(String keyWord) {
+        assert !keyWord.isEmpty() : "Command description is missing.";
         this.keyWord = keyWord;
     }
 

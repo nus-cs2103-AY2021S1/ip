@@ -39,12 +39,16 @@ public class TaskList {
         }
     }
 
-    public String setDoneTask(int index, Storage storage) {
+    public String setDoneTask(int index, Storage storage) throws DukeException {
         String reply;
-        Task task = tasks.get(index - 1); // index - 1 to match the index in ArrayList
-        task.markDone();
-        reply = "Nice! I've marked this task as done:"
-                + "\n\t" + task;
+        try {
+            Task task = tasks.get(index - 1); // index - 1 to match the index in ArrayList
+            task.markDone();
+            reply = "Nice! I've marked this task as done:"
+                    + "\n\t" + task;
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Missing or invalid item number!");
+        }
         try {
             storage.rewriteFile(tasks);
         } catch (IOException e) {
