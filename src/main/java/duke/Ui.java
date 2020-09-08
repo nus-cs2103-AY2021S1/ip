@@ -5,14 +5,14 @@ package duke;
  */
 public class Ui {
 
-    private static String border = "-----------------------------------------------------------";
-    private static String indentation = "    ";
+    private static final String BORDER = "-----------------------------------------------------------";
+    private static final String INDENTATION = "    ";
 
     /**
      * Prints the formatting for the Duke application.
      */
     public void printBorder() {
-        System.out.println(indentation + border);
+        System.out.println(INDENTATION + BORDER);
     }
 
     /**
@@ -20,7 +20,7 @@ public class Ui {
      */
     public void greet() {
         printBorder();
-        System.out.println(indentation + "Hello! I'm Duke\n    What can I do for you?");
+        System.out.println(INDENTATION + "Hello! I'm Duke\n    What can I do for you?");
         printBorder();
     }
 
@@ -29,7 +29,7 @@ public class Ui {
      */
     public void exit() {
         printBorder();
-        System.out.println(indentation + "Bye. Hope to see you again soon!");
+        System.out.println(INDENTATION + "Bye. Hope to see you again soon!");
         printBorder();
     }
 
@@ -42,12 +42,12 @@ public class Ui {
         printBorder();
         assert taskList.getTasks().size() >= 0;
         if (taskList.getTasks().size() == 0) {
-            System.out.println(indentation + "You have no tasks in your list!");
+            System.out.println(INDENTATION + "You have no tasks in your list!");
         } else {
-            System.out.println(indentation + "Here are the tasks in your list:");
+            System.out.println(INDENTATION + "Here are the tasks in your list:");
             for (Task task : taskList.getTasks()) {
                 int index = taskList.getTasks().indexOf(task) + 1;
-                System.out.println(indentation + index + "." + task);
+                System.out.println(INDENTATION + index + "." + task);
             }
         }
         printBorder();
@@ -66,8 +66,8 @@ public class Ui {
         taskList.replace(oldTask, newTask);
 
         printBorder();
-        System.out.println(indentation + "Nice! I've marked this task as done:");
-        System.out.println(indentation + indentation + newTask.getStatusIcon() + " " + newTask.description);
+        System.out.println(INDENTATION + "Nice! I've marked this task as done:");
+        System.out.println(INDENTATION + INDENTATION + newTask.getStatusIcon() + " " + newTask.description);
         printBorder();
     }
 
@@ -79,15 +79,21 @@ public class Ui {
      */
     public void findMatching(TaskList taskList, String textToMatch) {
         printBorder();
-        System.out.println(indentation + "Here are the matching tasks in your list:");
+        boolean canFind = false;
+        String output = (INDENTATION + "Here are the matching tasks in your list:\n");
         int index = 1;
         for (Task task : taskList.getTasks()) {
             String description = task.getDescription();
             if (description.contains(textToMatch)) {
-                System.out.println(indentation + index + "." + task);
+                output += (INDENTATION + index + "." + task + "\n");
                 index++;
+                canFind = true;
             }
         }
+        if (!canFind) {
+            output = (INDENTATION + "There are no matching tasks in your list!");
+        }
+        System.out.println(output);
         printBorder();
     }
 }

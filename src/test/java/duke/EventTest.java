@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 public class EventTest {
 
-    private Task task = new Event("read book", "31 Dec 2020");
+    private final Task task = new Event("read book", "31 Dec 2020");
 
     @Test
     public void testToString() {

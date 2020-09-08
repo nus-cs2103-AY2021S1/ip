@@ -9,8 +9,8 @@ import java.util.List;
  */
 public class TaskList {
 
-    private static String border = "-----------------------------------------------------------";
-    private static String indentation = "    ";
+    private static final String BORDER = "-----------------------------------------------------------";
+    private static final String INDENTATION = "    ";
     private List<Task> tasks;
 
     /**
@@ -33,7 +33,7 @@ public class TaskList {
      * Prints the formatting for the Duke application.
      */
     public static void printBorder() {
-        System.out.println(indentation + border);
+        System.out.println(INDENTATION + BORDER);
     }
 
     /**
@@ -59,9 +59,9 @@ public class TaskList {
         Storage.appendToFile(Storage.getFilePath(), textToAppend);
 
         assert tasks.size() >= 0;
-        System.out.println(indentation + "Got it. I've added this task:");
-        System.out.println(indentation + indentation + task);
-        System.out.println(indentation + "Now you have " + (tasks.size() != 1
+        System.out.println(INDENTATION + "Got it. I've added this task:");
+        System.out.println(INDENTATION + INDENTATION + task);
+        System.out.println(INDENTATION + "Now you have " + (tasks.size() != 1
                 ? tasks.size() + " tasks in the list."
                 : tasks.size() + " task in the list."));
         printBorder();
@@ -81,9 +81,9 @@ public class TaskList {
 
         assert tasks.size() >= 0;
         printBorder();
-        System.out.println(indentation + "Noted. I've removed this task:");
-        System.out.println(indentation + indentation + task);
-        System.out.println(indentation + "Now you have " + (tasks.size() != 1
+        System.out.println(INDENTATION + "Noted. I've removed this task:");
+        System.out.println(INDENTATION + INDENTATION + task);
+        System.out.println(INDENTATION + "Now you have " + (tasks.size() != 1
                 ? tasks.size() + " tasks in the list."
                 : tasks.size() + " task in the list."));
         printBorder();

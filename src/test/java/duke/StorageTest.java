@@ -6,7 +6,7 @@ import org.junit.jupiter.api.Test;
 
 public class StorageTest {
 
-    private Storage storage = new Storage("./data/duke.txt");
+    private final Storage storage = new Storage("./data/duke.txt");
 
     @Test
     public void testGetFilePath() {

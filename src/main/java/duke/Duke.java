@@ -15,7 +15,7 @@ public class Duke {
     /**
      * Constructor to take in a specified filepath to create a Duke object.
      */
-    public Duke() {
+    public Duke() throws DukeException {
         ui = new Ui();
         storage = new Storage("./data/duke.txt");
         try {
@@ -35,21 +35,23 @@ public class Duke {
      */
     public void run() throws IOException, DukeException {
         Parser parser = new Parser(ui);
-        parser.interact(tasks, Storage.getFilePath());
+        parser.parse(tasks, Storage.getFilePath());
     }
 
     public String getResponse(String input) throws IOException {
-        return Parser.interact(input, tasks, Storage.getFilePath());
+        return Parser.parse(input, tasks, Storage.getFilePath());
     }
 
     /**
      * Creates a new Duke object with a specified filepath and runs it.
      *
      * @param args arguments for main function
-     * @throws IOException produced by failed or interrupted I/O operations
-     * @throws DukeException thrown if the Duke program does not recognise user input
      */
-    public static void main(String[] args) throws IOException, DukeException {
-        new Duke().run();
+    public static void main(String[] args) {
+        try {
+            new Duke().run();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
     }
 }
