@@ -1,6 +1,7 @@
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String duration = "";
 
     public Task(String description) {
         this.description = description;
@@ -10,6 +11,12 @@ public class Task {
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
+    }
+
+    public Task(String description, boolean isDone, String duration) {
+        this.description = description;
+        this.isDone = isDone;
+        this.duration = duration;
     }
 
     public String getDescription() {
@@ -25,6 +32,17 @@ public class Task {
     }
 
     public String toString(){
-        return "[T]" + this.getStatusIcon() + this.description;
+        String returnString = "";
+        returnString += "[T]" + this.getStatusIcon() + this.description;
+        if (!duration.equals("")) returnString += " (duration: " + this.duration + ")";
+        return returnString;
+    }
+
+    public void setDuration(String duration) {
+        this.duration = duration;
+    }
+
+    public String getDuration() {
+        return duration;
     }
 }

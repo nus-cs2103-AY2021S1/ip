@@ -43,8 +43,9 @@ public class Storage {
         }
 
         printWriter.print(task.isDone ? "1 ~ " : "0 ~ ");
-        printWriter.print(task.getDescription() + "\n");
-
+        printWriter.print(task.getDescription());
+        printWriter.print(" ~ " + task.getDuration());
+        printWriter.print("\n");
     }
 
     /**

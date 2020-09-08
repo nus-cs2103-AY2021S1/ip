@@ -32,18 +32,25 @@ public class TaskList {
         if (java.nio.file.Files.exists(File)) {
             Scanner scanner = new Scanner(File);
             while (scanner.hasNextLine()) {
+                Task taskAdded = null;
                 String taskData = scanner.nextLine();
                 String[] taskDataDivided = taskData.split(" ~ ");
                 boolean isDone = taskDataDivided[1].equals("1");
                 switch (taskDataDivided[0]) {
                     case "E":
-                        returnTaskList.add(new Event(taskDataDivided[2], taskDataDivided[3], isDone));
+                        taskAdded = new Event(taskDataDivided[2], taskDataDivided[3], isDone);
+                        if (taskDataDivided.length > 4) taskAdded.setDuration(taskDataDivided[4]);
+                        returnTaskList.add(taskAdded);
                         break;
                     case "D":
-                        returnTaskList.add(new Deadline(taskDataDivided[2], taskDataDivided[3], isDone));
+                        taskAdded = new Deadline(taskDataDivided[2], taskDataDivided[3], isDone);
+                        if (taskDataDivided.length > 4) taskAdded.setDuration(taskDataDivided[4]);
+                        returnTaskList.add(taskAdded);
                         break;
                     case "T":
-                        returnTaskList.add(new Task(taskDataDivided[2], isDone));
+                        taskAdded = new Task(taskDataDivided[2], isDone);
+                        if (taskDataDivided.length > 3) taskAdded.setDuration(taskDataDivided[3]);
+                        returnTaskList.add(taskAdded);
                         break;
                 }
             }
@@ -79,6 +86,14 @@ public class TaskList {
         }
     }
 
+    public void setDuration(String userInput) {
+        String[] splitBySpaces = userInput.split(" ");
+        int indexSettingDuration = Integer.parseInt(splitBySpaces[1]);
+        String durationSet = splitBySpaces[2];
+        Task taskSettingDurationFor = taskList.get(indexSettingDuration-1);
+        taskSettingDurationFor.setDuration(durationSet);
+    }
+
     /**
      * Add Task given to the list
      * @param task
@@ -110,6 +125,7 @@ public class TaskList {
         }
         return returnArrayList;
     }
+    
 
     public String printTaskList() {
         String returnString = "";

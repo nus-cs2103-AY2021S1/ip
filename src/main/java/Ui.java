@@ -31,7 +31,7 @@ public class Ui {
                 return "ok sure good job i guess\n" + taskList.getList().get(doneIndex-1) + "\n";
             case "delete" :
                 int indexDeleted = Integer.parseInt(userInput.replace("delete ", ""));
-                return "ok deleted this task alr:\n" + taskList.getList().get(indexDeleted-1) + "\n" + "Now you left " + (taskList.getSize())
+                return "ok deleted this task alr:\n" + taskList.getList().get(indexDeleted-1) + "\n" + "Now you left " + (taskList.getSize()-1)
                         + " task(s)";
             case "find" :
                 ArrayList<Task> taskArrayList = taskList.searchFor(userInput.split(" ")[1]);
@@ -44,6 +44,9 @@ public class Ui {
                     }
                     return returnString;
                 }
+            case "duration" :
+                int indexSettingDuration = Integer.parseInt(userInput.split(" ")[1]);
+                return "duration has been set for:\n" + taskList.getList().get(indexSettingDuration-1);
             default :
                 throw new DukeException();
         }
@@ -59,21 +62,4 @@ public class Ui {
         return returnString + "\n";
     }
 
-    public void showToDoMessage(Task thisTask, TaskList taskList) {
-        showAddedMessage();
-        System.out.println(thisTask.toString().replace("todo ","") + "\n" +
-                "Now got " + (taskList.getSize() + 1) + " task in the list\n");
-    }
-
-    public void showDeadlineMessage(Task thisTask, TaskList taskList) {
-        showAddedMessage();
-        System.out.println(thisTask.toString() + "\n" +
-                "Now got " + (taskList.getSize() + 1) + " task in the list\n");
-    }
-
-    public void showEventMessage(Task thisTask, TaskList taskList) {
-        showAddedMessage();
-        System.out.println(thisTask.toString() + "\n" +
-                "Now got " + (taskList.getSize() + 1) + " task in the list\n");
-    }
 }

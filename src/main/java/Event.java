@@ -24,6 +24,9 @@ public class Event extends Task{
 
     @Override
     public String toString() {
-        return "[E]" + getStatusIcon() + this.description + " (at:" + this.timeFrame + ")";
+        String returnString = "";
+        returnString += "[E]" + getStatusIcon() + this.description + " (at:" + this.timeFrame + ")";
+        if (!duration.equals("")) returnString += " (duration: " + this.duration + ")";
+        return returnString;
     }
 }

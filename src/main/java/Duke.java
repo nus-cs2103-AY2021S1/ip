@@ -27,7 +27,7 @@ public class Duke {
             return ui.showAddTaskMessage(thisTask, taskList);
         } else {
             TaskList originalTaskList = TaskList.copy(taskList);
-            parser.processOtherActionInput(userInput, taskList, ui);
+            parser.processOtherActionInput(userInput, taskList);
             storage.saveToDisk();
             return ui.showOtherActionMessage(userInput, originalTaskList);
         }
