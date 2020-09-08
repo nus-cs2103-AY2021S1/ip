@@ -1,0 +1,17 @@
+todo read book
+todo
+deadline cook book /by Sunday
+deadline cook book Sunday
+deadline
+event cook book /at Monday
+event cook book Monday
+event
+list
+done 0
+done 100
+done 2
+delete 0
+delete 100
+delete 2
+list
+bye
