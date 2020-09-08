@@ -8,6 +8,7 @@ import duke.tasks.ToDo;
 
 import java.io.IOException;
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 /**
  * Represents the add commands that adds different types of tasks to the task list
@@ -15,6 +16,7 @@ import java.time.LocalDate;
 public class AddCommand extends Command {
     private final CommandType commandType;
     private final String description;
+    private final String[] tags;
     private final LocalDate timeOfTask;
 
     /**
@@ -23,10 +25,11 @@ public class AddCommand extends Command {
      * @param description The description of the task by the user
      * @param timeOfTask The time for the task (if given)
      */
-    public AddCommand(CommandType commandType, String description, LocalDate timeOfTask) {
+    public AddCommand(CommandType commandType, String description, String[] tags, LocalDate timeOfTask) {
         this.commandType = commandType;
         this.description = description;
         this.timeOfTask = timeOfTask;
+        this.tags = tags;
     }
 
     /**
@@ -38,10 +41,12 @@ public class AddCommand extends Command {
         switch(commandType) {
         case TODO:
             if (description.equals("")) {
-                throw new DukeException("Todo description cannot be empty lah!");
+                throw new DukeException("Todo description cannot be empty lah!"); //TODO: if this is duplicate?
+            } else {
+                Task todo = new ToDo(description);
+                addTags(todo);
+                return addThenSave(tasks, ui, storage, todo);
             }
-            Task todo = new ToDo(description);
-            return addThenSave(tasks, ui, storage, todo);
         case DEADLINE:
             if (description.equals("")) {
                 throw new DukeException("Deadline description cannot be empty lah!");
@@ -49,6 +54,7 @@ public class AddCommand extends Command {
                 throw new DukeException("Date and time of deadline cannot be empty lah!");
             } else {
                 Task deadline = new Deadline(description, timeOfTask);
+                addTags(deadline);
                 return addThenSave(tasks, ui, storage, deadline);
             }
         case EVENT:
@@ -58,6 +64,7 @@ public class AddCommand extends Command {
                 throw new DukeException("Date and time of event cannot be empty lah!");
             } else {
                 Task event = new Event(description, timeOfTask);
+                addTags(event);
                 return addThenSave(tasks, ui, storage, event);
             }
         default:
@@ -74,7 +81,19 @@ public class AddCommand extends Command {
             storage.save(tasks);
             return ui.showAddTaskMessage(tasks, task);
         } catch (IOException e) {
+            System.out.println(e.getStackTrace());
             throw new DukeException("cannot save due to exception lah!");
+        }
+    }
+
+    /**
+     * Adds all tags to the given Task
+     */
+    private void addTags(Task t) {
+        if ((!tags[0].equals("")) && tags.length > 1) {
+            for(int i = 1; i < tags.length; i++) {
+                t.addTag(new Tag(tags[i]));
+            }
         }
     }
 }

@@ -23,7 +23,7 @@ public class Duke {
         storage = new Storage(filePath);
         try {
             tasks = storage.load();
-        } catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) { // TODO: why is this not catching filenotfound?
             tasks = new TaskList();
             System.out.println(ui.showNewSaveFileMessage()); // TODO: fix this system print
         } catch (IOException | ClassNotFoundException e) {
