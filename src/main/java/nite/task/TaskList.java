@@ -147,4 +147,17 @@ public class TaskList {
         t.markAsDone();
         return t;
     }
+
+    /**
+     * Returns a sorted list of tasks based on timing.
+     *
+     * @param type Type of task, either todo, deadline, or event.
+     * @return A sorted ArrayList of tasks.
+     */
+    public ArrayList<Task> sortedTasks(String type) {
+        assert !type.isEmpty() : "Task type cannot be empty.";
+        Stream<Task> tasksOfType = tasks.stream().filter(t -> t.typeOfTask().equals(type));
+        Stream<Task> sortedTasks = tasksOfType.sorted(new TaskComparator());
+        return sortedTasks.collect(Collectors.toCollection(ArrayList::new));
+    }
 }

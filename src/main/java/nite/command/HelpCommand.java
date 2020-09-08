@@ -34,6 +34,7 @@ public class HelpCommand extends Command {
                 + "  mark task as done\n    done <task number>\n"
                 + "  list all tasks\n    list\n"
                 + "  find a task\n    find <keyword>\n"
+                + "  sort tasks\n    sort <taskType> <taskType> <taskType>\n"
                 + "  exit Nite\n    bye\n";
         return ui.showAction(commandsList);
     }

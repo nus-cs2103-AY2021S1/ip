@@ -9,6 +9,7 @@ import nite.command.FindCommand;
 import nite.command.HelpCommand;
 import nite.command.InvalidCommand;
 import nite.command.ListCommand;
+import nite.command.SortCommand;
 import nite.exception.NiteException;
 import nite.task.Deadline;
 import nite.task.Event;
@@ -55,6 +56,8 @@ public class Parser {
             command = new AddCommand(parseTask("event", fullCommand));
         } else if (fullCommand.startsWith("find")) {
             command = new FindCommand(fullCommand.split(" ")[1]);
+        } else if (fullCommand.startsWith("sort")) {
+            command = new SortCommand(fullCommand.split(" "));
         } else {
             command = new InvalidCommand(fullCommand);
         }

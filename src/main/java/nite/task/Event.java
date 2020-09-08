@@ -60,4 +60,18 @@ public class Event extends Task {
         return String.format("D%s%s%s%s%s%s%n", separator, isDone, separator,
                 super.description, separator, timeInterval);
     }
+
+    /**
+     * Returns the type of the Event Task.
+     *
+     * @return String representing Event.
+     */
+    @Override
+    public String typeOfTask() {
+        return "event";
+    }
+
+    public LocalDateTime getTime() {
+        return timeStart;
+    }
 }

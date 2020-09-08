@@ -34,4 +34,15 @@ public class ToDo extends Task {
         String separator = "~";
         return "T" + separator + isDone + separator + super.description + "\n";
     }
+
+
+    /**
+     * Returns the type of the Todo Task.
+     *
+     * @return String representing Todo.
+     */
+    @Override
+    public String typeOfTask() {
+        return "todo";
+    }
 }
