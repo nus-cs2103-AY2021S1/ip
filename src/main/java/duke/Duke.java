@@ -8,6 +8,7 @@ public class Duke {
     private Ui ui;
     private Storage storage;
     private TaskList taskList;
+    private TaskList archiveList;
 
 
 
@@ -15,10 +16,11 @@ public class Duke {
      * Creates a Duke object containing a Ui object, Storage object, and TaskList Object.
      * @param filepath filepath where the text file containing the list is stored.
      */
-    public Duke(String filepath) {
+    public Duke(String filepath, String archivePath) {
         ui = new Ui();
-        storage = new Storage(filepath);
-        taskList = new TaskList(storage.readFile());
+        storage = new Storage(filepath, archivePath);
+        taskList = new TaskList(storage.readMain());
+        archiveList = new TaskList(storage.readArchive());
     }
 
 
@@ -45,7 +47,7 @@ public class Duke {
      * @param args
      */
     public static void main(String[] args) {
-        Duke duke = new Duke("/data/duke.txt");
+        Duke duke = new Duke("/data/duke.txt", "/data/archive.txt");
         duke.run();
     }
 

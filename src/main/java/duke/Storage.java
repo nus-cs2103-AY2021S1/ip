@@ -39,30 +39,38 @@ public class Storage {
      * File path where the text file is stored.
      */
     private Path filepath;
-
+    private Path archivePath;
 
     /**
      * Initialises Storage with filepath where text file is stored.
      *
      * @param filepath Filepath where the text file is stored.
      */
-    public Storage(String filepath) {
+    public Storage(String filepath, String archivePath) {
         this.filepath = Paths.get(System.getProperty("user.dir") + filepath);
+        this.archivePath = Paths.get(System.getProperty("user.dir") + archivePath);
     }
 
+    public ArrayList<Task> readMain() {
+        return readFile(filepath);
+    }
+
+    public ArrayList<Task> readArchive() {
+        return readFile(archivePath);
+    }
     /**
      * Reads existing text file and converts the text into tasks to be placed
      * into an ArrayList. If the text file does not exists, it is created.
      *
      * @return an ArrayList containing the tasks from the text file.
      */
-    public ArrayList<Task> readFile() {
+    private ArrayList<Task> readFile(Path path) {
         ArrayList<Task> tasks = new ArrayList<>();
         //From https://www.sghill.net/how-do-i-make-cross-platform-file-paths-in-java.html
-        if (!Files.isRegularFile(filepath)) {
-            createFile();
+        if (!Files.isRegularFile(path)) {
+            createFile(path);
         } else {
-            File f = new File(filepath.toString());
+            File f = new File(path.toString());
             try {
                 Scanner s = new Scanner(f);
                 while (s.hasNext()) {
@@ -72,7 +80,7 @@ public class Storage {
                 }
             } catch (FileNotFoundException e) {
                 System.out.println("Unable to find file :(");
-                createFile();
+                createFile(path);
             } catch (ParseException e) {
                 System.out.println("Unable to parse date :(");
             }
@@ -85,7 +93,7 @@ public class Storage {
         boolean isTime;
         Date date;
         try {
-                    assert arr[0].equals("T") || arr[0].equals("D") || arr[0].equals("E");
+            assert arr[0].equals("T") || arr[0].equals("D") || arr[0].equals("E");
             switch (arr[0]) {
             case "T":
                 tasks.add(new ToDo(arr[2], isDone));
@@ -114,17 +122,17 @@ public class Storage {
      * Creates the text file to contain the tasks at the filepath where
      * it is supposed to be.
      */
-    public void createFile() {
-        if (!Files.isDirectory(filepath.getParent())) {
+    private void createFile(Path path) {
+        if (!Files.isDirectory(path.getParent())) {
             try {
-                Files.createDirectory(filepath.getParent());
+                Files.createDirectory(path.getParent());
             } catch (IOException e) {
                 System.out.println("Failed to create directory");
             }
         }
 
         try {
-            Files.createFile(filepath);
+            Files.createFile(path);
         } catch (IOException e) {
             System.out.println("Failed to create file");
         }
@@ -135,9 +143,9 @@ public class Storage {
      *
      * @param arrayList ArrayList containing the tasks.
      */
-    public void writeToFile(ArrayList<Task> arrayList) {
+    private void writeToFile(ArrayList<Task> arrayList, Path path) {
         try {
-            FileWriter fw = new FileWriter(filepath.toString());
+            FileWriter fw = new FileWriter(path.toString());
             for (Task task : arrayList) {
                 fw.write(task.toStoredTextString() + "\n");
             }
@@ -146,4 +154,15 @@ public class Storage {
             System.out.println("Unable to write to file");
         }
     }
+
+    public void writeToMain(ArrayList<Task> arrayList) {
+        writeToFile(arrayList, filepath);
+    }
+
+    public void writeToArchive(ArrayList<Task> arrayList) {
+        writeToFile(arrayList, archivePath);
+    }
+
+
+
 }

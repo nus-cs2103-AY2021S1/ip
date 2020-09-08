@@ -48,7 +48,7 @@ public class DoneCommand extends Command {
     public String getExecuteString(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task task = tasks.markTaskDoneInList(taskNumber);
-            storage.writeToFile(tasks.getTasks());
+            storage.writeToMain(tasks.getTasks());
             return ui.getMarkedTaskString(task);
         } catch (DukeException e) {
             throw e;

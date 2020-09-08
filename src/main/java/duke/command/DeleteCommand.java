@@ -48,7 +48,7 @@ public class DeleteCommand extends Command {
     public String getExecuteString(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             Task task = tasks.deleteTaskFromList(taskNumber);
-            storage.writeToFile(tasks.getTasks());
+            storage.writeToMain(tasks.getTasks());
             return ui.getDeletedTaskString(task, tasks.size());
         } catch (DukeException e) {
             throw e;
