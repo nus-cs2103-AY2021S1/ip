@@ -37,6 +37,7 @@ public class Duke {
                 String userInput = ui.getUserInput();
                 Command command = Parser.parse(userInput);
                 String response = command.execute(this.taskList, this.ui, this.storage);
+                assert response instanceof String : "Commands must return String type when executed";
                 ui.printResponse(response);
                 this.exit = command.isExit();
             } catch (DukeException e) {
