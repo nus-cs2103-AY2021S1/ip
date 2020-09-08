@@ -27,7 +27,7 @@ public class DeadlineTask extends Task {
     public String serialiseTask() {
         int isDone = getTaskStatus() ? 1 : 0;
         return "deadline %% " + getTaskDescription() + " %% " + isDone + " %% "
-                + getDeadlineTime() + " %% " + getTagList();
+                + getDeadlineTime().getDate().toString() + " %% " + getTagList();
     }
 
     @Override

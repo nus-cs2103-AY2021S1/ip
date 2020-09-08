@@ -18,13 +18,13 @@ public class TaskSaveAndLoadManager {
      */
     public void saveTaskManager(TaskManager taskManager) throws IOException, DukeException {
         System.out.println(taskManager.getTaskList().size());
-//        for (int i = 0; i < taskManager.getTaskList().size(); i++) {
-//            if (i == 0) {
-//                FileReadWrite.writeToFile(taskManager.getTaskList().get(0).serialiseTask());
-//            } else {
-//                FileReadWrite.appendToFile(taskManager.getTaskList().get(i).serialiseTask());
-//            }
-//        }
+        for (int i = 0; i < taskManager.getTaskList().size(); i++) {
+            if (i == 0) {
+                FileReadWrite.writeToFile(taskManager.getTaskList().get(0).serialiseTask());
+            } else {
+                FileReadWrite.appendToFile(taskManager.getTaskList().get(i).serialiseTask());
+            }
+        }
     }
 
     /**
@@ -63,6 +63,7 @@ public class TaskSaveAndLoadManager {
 
     public TaskManager loadTaskManager() throws IOException {
         List<String> loadedData = FileReadWrite.loadFromSavedFile();
+        // System.out.println(loadedData.get(0));
         ArrayList<Task> taskList = new ArrayList<>();
         if (loadedData != null) {
             for (String string : loadedData) {
@@ -123,14 +124,14 @@ public class TaskSaveAndLoadManager {
         String isDoneString = splitDataString[2];
         boolean isDone;
         isDone = Integer.parseInt(isDoneString) == 1;
-        if (taskType == "todo") {
+        if (taskType.equals("todo")) {
             if (string.contains("#")) {
                 TagList tagList = loadTagList(string);
                 return new ToDoTask(taskDescription, isDone, tagList);
             } else {
                 return new ToDoTask(taskDescription, isDone, null);
             }
-        } else if (taskType == "deadline") {
+        } else if (taskType.equals("deadline")) {
             DateAndTime dt = new DateAndTime(LocalDate.parse(splitDataString[3]));
             if (string.contains("#")) {
                 TagList tagList = loadTagList(string);
@@ -138,7 +139,7 @@ public class TaskSaveAndLoadManager {
             } else {
                 return new DeadlineTask(taskDescription, isDone, dt,null);
             }
-        } else if (taskType == "event") {
+        } else if (taskType.equals("event")) {
             DateAndTime dt = new DateAndTime(LocalDate.parse(splitDataString[3]),
                                 LocalTime.parse(splitDataString[4]));
             if (string.contains("#")) {
