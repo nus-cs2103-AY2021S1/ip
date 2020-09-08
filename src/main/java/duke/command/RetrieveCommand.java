@@ -3,6 +3,9 @@ package duke.command;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.exception.InvalidTaskDateException;
 import duke.storage.Storage;
@@ -41,13 +44,13 @@ public class RetrieveCommand extends Command {
     @Override
     public CommandResponse execute(TaskList tasks, Ui ui, Storage storage) throws InvalidTaskDateException {
         try {
-            TaskList retrievedTasks = new TaskList();
 
-            tasks.getList().forEach(task -> {
-                if (checkIfSameDate(task)) {
-                    retrievedTasks.addTask(task);
-                }
-            });
+            List<Task> retrievedList = tasks.getList()
+                    .stream()
+                    .filter(task -> checkIfSameDate(task))
+                    .collect(Collectors.toList());
+
+            TaskList retrievedTasks = new TaskList(new ArrayList<>(retrievedList));
 
             boolean shouldExit = getIsExit();
             assert !shouldExit : "shouldExit should be false";
