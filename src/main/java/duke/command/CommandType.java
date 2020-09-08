@@ -14,6 +14,7 @@ public enum CommandType {
     DELETE("delete"),
     FIND("find"),
     LIST("list"),
+    SORT("sort"),
     BYE("bye"),
     INVALID;
 

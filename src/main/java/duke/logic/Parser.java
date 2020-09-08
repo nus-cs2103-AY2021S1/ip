@@ -17,6 +17,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
+import duke.command.SortCommand;
 import duke.command.TodoCommand;
 import duke.exception.DukeDateTimeParseException;
 import duke.exception.DukeException;
@@ -83,6 +84,9 @@ public class Parser {
             break;
         case LIST:
             command = new ListCommand();
+            break;
+        case SORT:
+            command = new SortCommand();
             break;
         case BYE:
             command = new ExitCommand();

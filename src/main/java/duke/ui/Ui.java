@@ -79,6 +79,16 @@ public class Ui {
     }
 
     /**
+     * Returns string representation of the message when the list of tasks is sorted.
+     * @return The message indicating the list has been sorted
+     */
+    public String showSortMessage(List<Task> tasks) {
+        return tasks.isEmpty()
+                ? "There are no tasks to sort!"
+                : "Alright! I have sorted your tasks in order!";
+    }
+
+    /**
      * Returns string representation of the list of tasks to the user.
      *
      * @param tasks The list of tasks to be displayed.

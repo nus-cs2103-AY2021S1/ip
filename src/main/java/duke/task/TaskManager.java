@@ -81,4 +81,12 @@ public class TaskManager {
                         .anyMatch(keyword -> task.getDescription().contains(keyword)))
                 .collect(Collectors.toList());
     }
+
+    /**
+     * Sorts task according to their date-time and their task type.
+     */
+    public void sortTasks() {
+        tasks.sort(new TaskDateTimeComparator());
+        tasks.sort(new TaskComparator());
+    }
 }
