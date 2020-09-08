@@ -1,13 +1,13 @@
 package duke;
 
 import duke.command.AddCommand;
-import duke.command.AddPriorityCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.PriorityCommand;
 import duke.exception.InvalidCommandException;
 import duke.exception.InvalidInputException;
 import duke.exception.InvalidTaskTypeException;
@@ -52,16 +52,31 @@ public class Parser {
             return new ListCommand();
         case "find":
             return new FindCommand(commands[1]);
-        case "addpriority":
+        case "priority":
             return preparePriority(commands[1]);
         default:
             throw new InvalidCommandException("Invalid Command: " + commands[0]);
         }
     }
 
-    static Command preparePriority(String command) {
+    static Command preparePriority(String command) throws InvalidCommandException {
         String[] details = command.trim().split(" ");
-        return new AddPriorityCommand(Integer.valueOf(details[0]), Priority.valueOf(details[1].toUpperCase()));
+
+        switch(details[0]) {
+        case "/add" : {
+            return new PriorityCommand(Action.ADD,
+                Integer.valueOf(details[1]), Priority.valueOf(details[2].toUpperCase()));
+        }
+        case "/update": {
+            return new PriorityCommand(Action.UPDATE,
+                Integer.valueOf(details[1]), Priority.valueOf(details[2].toUpperCase()));
+        }
+        case "/delete": {
+            return new PriorityCommand(Action.DELETE, Integer.valueOf(details[1]));
+        }
+        default:
+            throw new InvalidCommandException("Invalid Command: " + details[0]);
+        }
     }
 
     /**
