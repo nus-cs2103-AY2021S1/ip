@@ -10,6 +10,7 @@ public class CommandHandler {
     private TaskList tasks;
     private StringBuilder log;
     private String command;
+
     public CommandHandler(String command, Ui ui, TaskList tasks) {
         this.command = command;
         this.ui = ui;
@@ -53,6 +54,8 @@ public class CommandHandler {
         } catch (DukeException e) {
             log.append(e.getMessage());
         }
+
+        assert log.length() != 0;
     }
 
     public String getLog() {

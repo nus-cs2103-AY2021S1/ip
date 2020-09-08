@@ -36,6 +36,8 @@ public class Storage {
     public Task deserializeTask(String serializedTask) throws RuntimeException {
         String[] tokens = serializedTask.split(" \\| ");
 
+        assert tokens.length > 2 : "task should be split to at least 3 - index, status, description";
+
         String taskIndex = tokens[0];
         boolean isDone = tokens[1].equals("1");
         String description = tokens[2];
