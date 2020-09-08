@@ -6,10 +6,7 @@ import java.util.List;
 import duke.tools.FormatString;
 
 /**
- * This class is to edit the file in
- * the Directory class.
- * It has two methods: deleteLine,
- * and setTaskDone.
+ * This class is to edit the file with a provided path.
  */
 public class DukeFileEditor extends DukeFile {
 
@@ -60,9 +57,11 @@ public class DukeFileEditor extends DukeFile {
         if (doesFileExist()) {
             List<String> taskStrings = readFile();
             String requiredTask = taskStrings.remove(lineNum - 1);
+
             String editedTask = requiredTask.substring(0, 4)
                     + FormatString.TICK.toString()
                     + requiredTask.substring(5);
+
             taskStrings.add(lineNum - 1, editedTask);
             write(taskStrings);
         }

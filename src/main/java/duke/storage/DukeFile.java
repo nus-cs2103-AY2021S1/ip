@@ -9,6 +9,10 @@ import java.util.List;
 
 import duke.exception.DukeException;
 
+/**
+ * This class makes general approaches to access a file
+ * given a directory.
+ */
 public class DukeFile {
     protected Path path;
 
@@ -58,6 +62,12 @@ public class DukeFile {
         }
     }
 
+    /**
+     * Writes the taskStrings List into the file
+     * with the class field path.
+     *
+     * @param taskStrings A List of String with task information.
+     */
     protected void write(List<String> taskStrings) {
         try {
             BufferedWriter writer = Files.newBufferedWriter(path);

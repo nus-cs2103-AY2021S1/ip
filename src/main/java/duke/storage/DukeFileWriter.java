@@ -16,7 +16,7 @@ public class DukeFileWriter extends DukeFile {
     private boolean appendToFile;
 
     /**
-     * Initializes a DukeFileWriter object.
+     * Constructs a DukeFileWriter object.
      *
      * @param path A string which contains
      *             the directory of the file

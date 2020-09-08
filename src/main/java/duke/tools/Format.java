@@ -17,7 +17,7 @@ public class Format<T> {
     private final T content;
 
     /**
-     * Initializes Format object with content.
+     * Constructs Format object with content.
      *
      * @param content object of any type.
      */
@@ -51,6 +51,7 @@ public class Format<T> {
             int length = input.length();
             int frontPos = 0;
             int backPos = length - 1;
+
             while (frontPos < length && input.charAt(frontPos) == ' ') {
                 frontPos++;
             }
@@ -62,6 +63,7 @@ public class Format<T> {
             if (frontPos > backPos) {
                 return new Format<>(FormatString.EMPTY.toString());
             }
+
             return new Format<>(input.substring(frontPos, backPos + 1));
         } catch (ClassCastException e) {
             System.out.println(DukeException.classCastException());
@@ -86,11 +88,13 @@ public class Format<T> {
             String[] inputArray = input.split(FormatString.SPACE.toString());
             char typeOfTask = inputArray[0].charAt(1);
             boolean isDone = false;
+
             if (inputArray[0].substring(4, 5).equals(FormatString.TICK.toString())) {
                 isDone = true;
             }
 
             Task task;
+
             if (typeOfTask == 'T') {
                 task = new Todo(inputArray[1]);
             } else {
@@ -105,9 +109,11 @@ public class Format<T> {
                     task = new Event(inputArray[1], time);
                 }
             }
+
             if (isDone) {
                 task.setDone();
             }
+
             return task;
         } catch (ClassCastException e) {
             System.out.println(DukeException.classCastException());
@@ -118,7 +124,6 @@ public class Format<T> {
     @Override
     public String toString() {
         if (this.content instanceof Task) {
-
             return FormatString.UNDERSCORE.toString()
                     + FormatString.NEXTLINE.toString()
                     + Statement.TASKADDED.toString()

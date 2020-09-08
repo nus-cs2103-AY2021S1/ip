@@ -7,7 +7,7 @@ public class Deadline extends Task {
     protected String time;
 
     /**
-     * Initializes a Deadline object.
+     * Constructs a Deadline object.
      *
      * @param description A string describing
      *                    the task.
@@ -21,7 +21,6 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString()
-                + " (by: " + time + ")";
+        return "[D]" + super.toString() + " (by: " + time + ")";
     }
 }
