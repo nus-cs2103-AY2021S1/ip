@@ -1,7 +1,12 @@
 package duke.task;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import duke.tag.Tag;
 
 /** Task */
 public class Task {
@@ -11,6 +16,7 @@ public class Task {
     private final String name;
     private final TaskType taskType;
     private final Optional<LocalDate> date;
+    private final List<Tag> tags = new ArrayList<>();
     private boolean isDone;
 
     /**
@@ -36,6 +42,24 @@ public class Task {
         this.isDone = false;
         this.taskType = type;
         this.date = Optional.of(date);
+    }
+
+    /**
+     * Adds a tag to the task's list of tags
+     *
+     * @param tag to be added
+     */
+    public void addTag(Tag tag) {
+        this.tags.add(tag);
+    }
+
+    /**
+     * Returns the list of tags of the task in string format
+     *
+     * @return the list of tags of the task in string format
+     */
+    public String getTagsString() {
+        return String.join(", ", this.tags.stream().map(tag -> tag.toString()).collect(Collectors.toList()));
     }
 
     /**
@@ -76,6 +100,10 @@ public class Task {
 
     @Override
     public String toString() {
-        return String.format("%s%s %s", this.taskType, this.getStatus(), this.name);
+        if (this.tags.isEmpty()) {
+            return String.format("%s%s %s", this.taskType, this.getStatus(), this.name);
+        }
+
+        return String.format("%s%s %s (tags: %s)", this.taskType, this.getStatus(), this.name, this.getTagsString());
     }
 }

@@ -1,17 +1,21 @@
 package duke.task;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import java.time.LocalDate;
+
+import java.util.Optional;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.time.LocalDate;
-import java.util.Optional;
+import duke.tag.Tag;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TaskTest {
-    String name;
-    TaskType type;
-    LocalDate date;
+    private String name;
+    private TaskType type;
+    private LocalDate date;
 
     @BeforeEach
     void setUp() {
@@ -31,8 +35,16 @@ public class TaskTest {
     }
 
     @Test
-    void testToString() {
+    void testToString_withoutTags() {
         assertEquals(new Task(name, type).toString(), "[T][ ] test");
+    }
+
+    @Test
+    void testToString_withTags() {
+        Task task = new Task(name, type);
+        task.addTag(new Tag("sign"));
+        task.addTag(new Tag("dogs"));
+        assertEquals(task.toString(), "[T][ ] test (tags: sign, dogs)");
     }
 
     @Test

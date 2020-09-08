@@ -1,7 +1,8 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import org.junit.jupiter.api.Test;
+
+import duke.exception.DukeException;
 
 public class CommandTest {
     @Test
@@ -47,5 +48,10 @@ public class CommandTest {
     @Test
     void create_commandTypeFind_returnFindCommand() throws DukeException {
         assert Command.create(CommandType.FIND, "something") instanceof FindCommand;
+    }
+
+    @Test
+    void create_commandTypeTag_returnTagCommand() throws DukeException {
+        assert Command.create(CommandType.TAG, "something") instanceof TagCommand;
     }
 }

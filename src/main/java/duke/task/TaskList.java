@@ -71,7 +71,7 @@ public class TaskList implements Iterable<Task> {
     /**
      * Returns task at the specified index in the tasklist
      *
-     * @param index of the task in the tasklist
+     * @param index of the task in the tasklist (index starts from 1)
      * @return the task at the specified index in the tasklist
      * @throws DukeException when index is out of bounds in tasklist
      */
