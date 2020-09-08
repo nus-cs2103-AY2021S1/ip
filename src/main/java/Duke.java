@@ -18,8 +18,6 @@ public class Duke {
 
     private static ResourceBundle strings;
     private static Ui ui;
-    private static TaskList tasks;
-    private static Storage storage;
 
     /**
      * Instantiates a new Duke.
@@ -35,9 +33,7 @@ public class Duke {
     private static void initializeDuke() throws DukeIoException {
         // read the appropriate string resources
         strings = ResourceBundle.getBundle("StringsBundle", Locale.ENGLISH);
-        storage = Storage.createStorage("database", "tasks.ser");
-        tasks = new TaskList(storage.load());
-        tasks.setObserver(storage);
+        Command.setupCommands();
     }
 
     /**
@@ -68,7 +64,7 @@ public class Duke {
 
             try {
                 output = Command.createCommand(mainCommand)
-                        .execute(parameters, tasks);
+                        .execute(parameters);
                 ui.print(output);
             } catch (DukeException e) {
                 ui.print(e.getMessage());
@@ -83,7 +79,7 @@ public class Duke {
 
         try {
             return Command.createCommand(mainCommand)
-                    .execute(parameters, tasks);
+                    .execute(parameters);
         } catch (DukeException e) {
             return e.getMessage();
         }

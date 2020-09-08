@@ -69,6 +69,7 @@ public class DialogBox extends HBox {
 
         text.setStyle("-fx-background-color: white; -fx-background-radius: 32;");
         text.setPadding(new Insets(12));
+        text.setMinHeight(Double.NEGATIVE_INFINITY);
         return this;
     }
 

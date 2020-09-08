@@ -10,6 +10,6 @@
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0"/>
     </padding>
-    <Label fx:id="dialog" text="Label" wrapText="true"/>
+    <Label minHeight="-Infinity" fx:id="dialog" text="Label" wrapText="true"/>
     <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true"/>
 </fx:root>

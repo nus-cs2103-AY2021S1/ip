@@ -4,7 +4,7 @@ import java.io.Serializable;
 
 public class Task implements Serializable {
     protected String description;
-    protected Boolean isDone;
+    protected boolean isDone;
 
     /**
      * Instantiates a new Task.
@@ -26,6 +26,13 @@ public class Task implements Serializable {
 
     public String getDescription() {
         return description;
+    }
+
+    public Task copy() {
+        Task ret = new Task(description);
+        ret.isDone = isDone;
+
+        return ret;
     }
 
     @Override

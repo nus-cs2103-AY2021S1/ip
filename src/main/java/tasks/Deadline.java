@@ -20,6 +20,14 @@ public class Deadline extends Task {
     }
 
     @Override
+    public Deadline copy() {
+        Deadline ret = new Deadline(description, by);
+        ret.isDone = isDone;
+
+        return ret;
+    }
+
+    @Override
     public String toString() {
         String deadlineBy = DateTimeFormatter.ofLocalizedDate(FormatStyle.FULL).format(by);
         return "[D]" + super.toString() + " (by: " + deadlineBy + ")" + "\n";
