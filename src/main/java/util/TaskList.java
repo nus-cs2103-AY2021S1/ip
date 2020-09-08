@@ -180,4 +180,45 @@ public class TaskList {
             return m;
         }
     }
+
+    /**
+     * Identifies what task user wants to update and
+     * returns current description of task.
+     *
+     * @param command The update command and its details.
+     * @return Current details of task user wants to update
+     * @throws DukeException If index noted in command is invalid.
+     */
+    public String fetchTaskToUpdate(String command) throws DukeException {
+        String[] instructions = command.split(" ", 2);
+        int index = Integer.parseInt(instructions[1]) - 1;
+        try {
+            Task t = tasks.get(index);
+            return String.format("%s\n -> %s\n%s\n",
+                    "Here is the details of the specified task!",
+                    t.toString(),
+                    "What would you like to change its description to?");
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException("Sorry, I don't think that's a valid index...");
+        }
+    }
+
+    /**
+     * Updates previously mentioned task with provided description.
+     *
+     * @param newDescription The new description for task.
+     * @return String of updated task.
+     * @throws DukeException If index noted in command is invalid.
+     */
+    public String updateTask(String command, String newDescription) {
+        String[] instructions = command.split(" ", 2);
+        int index = Integer.parseInt(instructions[1]) - 1;
+        // Check for index is within range;
+        assert (index < tasks.size() && index >= 0);
+        Task t = tasks.get(index);
+        t.setDescription(newDescription);
+        return String.format("%s\n -> %s\n",
+                "Here is the details of the updated task!",
+                t.toString());
+    }
 }

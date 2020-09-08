@@ -52,6 +52,15 @@ public class Task {
     }
 
     /**
+     * Set Task description to specified string.
+     *
+     * @param description  New description for the task.
+     */
+    public void setDescription(String description) {
+        this.name = description;
+    }
+
+    /**
      * Returns details of the Task in a format loadable by Duke.
      *
      * @return String in proper format for Duke's save file.

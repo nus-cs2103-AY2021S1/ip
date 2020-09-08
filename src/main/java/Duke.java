@@ -14,13 +14,18 @@ public class Duke{
     private TaskList tasks;
     private Ui ui;
 
+    private boolean isUpdating;
+    private String updateCommand = "";
+
     /**
      * Duke's Default Constructor.
+     * Initialize isUpdating as false.
      * Initializes ui, storage and tasks.
      * Loads in save file (if any).
      * Uses a default filePath
      */
     public Duke() {
+        isUpdating = false;
         ui = new Ui();
         storage = new Storage("data/tasks.txt");
         try {
@@ -34,7 +39,6 @@ public class Duke{
 
     /**
      * Own function to generate a response to user input.
-     * Code based off run().
      *
      * @param input User input.
      */
@@ -42,6 +46,18 @@ public class Duke{
         // Read user input
         String userInput = input;
         String output = "";
+        // If Duke is getting input for updating a task
+        if (isUpdating) {
+            // Assert that updateCommand is not empty string
+            assert !updateCommand.isEmpty();
+            // Updates task
+            output = ui.getOutputSymbol() + tasks.updateTask(updateCommand, input);
+            // Reset Duke back to default state
+            isUpdating = false;
+            updateCommand = "";
+            // returns the Updated task details
+            return output + ui.getLineBreak();
+        }
         try {
             // Parse out the command from the user input
             Command cmd = Parser.parse(userInput);
@@ -81,6 +97,12 @@ public class Duke{
                 break;
             case FIND:
                 output = ui.getOutputSymbol() + tasks.searchForKeyword(userInput);
+                break;
+            case UPDATE:
+                output = ui.getOutputSymbol() + tasks.fetchTaskToUpdate(userInput);
+                // Valid task to update, then set Duke status to isUpdating
+                this.isUpdating = true;
+                updateCommand = userInput;
                 break;
             default:
                 assert false : cmd;
