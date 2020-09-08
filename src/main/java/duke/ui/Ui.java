@@ -64,6 +64,19 @@ public class Ui {
         generateDivider();
     }
 
+    public void printTaskRescheduled(String oldTask, String newTask) {
+        generateDivider();
+        System.out.println("Got it. I've rescheduled this task:");
+        generateLeftPadding();
+        System.out.println(oldTask);
+        generateLeftPadding();
+        generateLeftPadding();
+        System.out.println("To:");
+        generateLeftPadding();
+        System.out.println(newTask);
+        generateDivider();
+    }
+
     public void printTaskDeleted(String message, int size) {
         generateDivider();
         System.out.println("Noted. I've removed this task:");

@@ -1,14 +1,6 @@
 package duke.parser;
 
-import duke.commands.ByeCommand;
-import duke.commands.Command;
-import duke.commands.DeadlineCommand;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.EventCommand;
-import duke.commands.FindCommand;
-import duke.commands.ListCommand;
-import duke.commands.TodoCommand;
+import duke.commands.*;
 import duke.enums.CommandEnum;
 import duke.exceptions.DukeException;
 import duke.ui.Ui;
@@ -59,6 +51,11 @@ public class Parser {
         case FIND : {
             return parseFind(splitCommand[1]);
         }
+        case RESCHEDULE: {
+            String[] indexAndDate = splitCommand[1].split(" ", 2);
+            int indexOfTaskToReschedule = Integer.parseInt(indexAndDate[0]);
+            return parseReschedule(indexOfTaskToReschedule, indexAndDate[1]);
+        }
         default: {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -97,5 +94,9 @@ public class Parser {
 
     public static FindCommand parseFind(String keyword) {
         return new FindCommand(keyword);
+    }
+
+    public static RescheduleCommand parseReschedule(int indexOfTaskToReschedule, String newDateAndTime) {
+        return new RescheduleCommand(indexOfTaskToReschedule, newDateAndTime);
     }
 }

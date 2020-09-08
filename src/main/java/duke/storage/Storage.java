@@ -8,9 +8,11 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.exceptions.DukeException;
+import duke.task.Task;
 import duke.task.TaskList;
 
 public class Storage {
@@ -90,6 +92,34 @@ public class Storage {
         reader.close();
         inputFile.delete();
         tempFile.renameTo(inputFile);
+    }
+
+    public void saveTasks(TaskList taskList) throws DukeException {
+        try {
+            FileWriter writer = new FileWriter("data/data.txt");
+            for (Task task: taskList.getList()) {
+                int bit = task.isCompleted() ? 1 : 0;
+                String taskType = task.getType();
+                String lineToWrite;
+                switch (taskType) {
+                case("T"): {
+                    lineToWrite = taskType + " | " + bit + " | " + task.getTaskName();
+                    break;
+                }
+                case ("E"):
+                case ("D"):
+                    lineToWrite = taskType + " | " + bit + " | " + task.getTaskName() + " | " + task.getDateAndTime();
+                    break;
+                default: {
+                    throw new DukeException("Write to file error");
+                }
+                }
+                writer.write(lineToWrite + this.lineSeparator);
+            }
+            writer.close();
+        } catch (IOException e) {
+            throw new DukeException("Save data error");
+        }
     }
 
     public void loadFromTextFile(TaskList taskList) throws FileNotFoundException {

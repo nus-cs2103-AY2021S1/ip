@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -8,7 +9,7 @@ import duke.task.Task;
 import java.util.ArrayList;
 
 public abstract class Command {
-    public abstract CommandResult execute(TaskList taskList, Ui ui, Storage storage);
+    public abstract CommandResult execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
     public abstract boolean isExit();
 
@@ -37,6 +38,13 @@ public abstract class Command {
         str.append("Noted. I've removed this task:\n");
         str.append(targetTask.toString()).append("\n");
         str.append("Now you have ").append(size).append(" tasks in the list.");
+        return str.toString();
+    }
+
+    public String rescheduleTaskToString(Task targetTask) {
+        StringBuilder str = new StringBuilder();
+        str.append("Got it. I've rescheduled this task:\n");
+        str.append(targetTask.toString()).append("\n");
         return str.toString();
     }
 }

@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -14,9 +15,9 @@ public class DeadlineCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(TaskList taskList, Ui ui, Storage storage) {
+    public CommandResult execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         taskList.addDeadline("0", deadlineTaskDetails[0], deadlineTaskDetails[1]);
-        storage.writeToFile("D", "0", deadlineTaskDetails[0], deadlineTaskDetails[1]);
+        storage.saveTasks(taskList);
         int size = taskList.getSize();
         Task targetTask = taskList.get(size - 1);
         ui.printTaskAdded(targetTask.toString(), size);

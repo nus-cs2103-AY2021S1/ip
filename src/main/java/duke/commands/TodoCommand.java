@@ -1,5 +1,6 @@
 package duke.commands;
 
+import duke.exceptions.DukeException;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -14,9 +15,10 @@ public class TodoCommand extends Command {
     }
 
     @Override
-    public CommandResult execute(TaskList taskList, Ui ui, Storage storage) {
+    public CommandResult execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         taskList.addTodo("0", todoTaskDetails);
-        storage.writeToFile("T", "0", todoTaskDetails, "");
+//        storage.writeToFile("T", "0", todoTaskDetails, "");
+        storage.saveTasks(taskList);
         int size = taskList.getSize();
         Task targetTask = taskList.get(size - 1);
         ui.printTaskAdded(targetTask.toString(), size);
