@@ -41,6 +41,7 @@ public class TaskList {
      * @throws WrongFormatException If an error is present in the format of a task in the save file.
      */
     private void initiateTaskList(List<String> listOfTasks) throws WrongFormatException {
+        assert listOfTasks != null : "listOfTasks is null";
         for (String s : listOfTasks) {
             String[] splitLine = s.split("\\|");
             switch (splitLine[0]) {
@@ -55,7 +56,8 @@ public class TaskList {
                         .ofPattern("yyyy-MM-dd HHmm")), !splitLine[1].equals("0")));
                 break;
             default:
-                System.err.println("Error in last save. Now loading a new, empty task list.");
+                assert false : "Error in last save. The save file may have been tampered with and some tasks may have "
+                        + "been corrupted.";
                 break;
             }
         }

@@ -88,6 +88,7 @@ public class Duke {
                 ui.showError(e);
             }
         }
+        assert isExit : "program terminated prematurely";
     }
 
     /**
@@ -110,7 +111,7 @@ public class Duke {
     /**
      * Terminates the GUI version of Duke.
      */
-    public void exitProgram() {
+    private void exitProgram() {
         try {
             TimeUnit.SECONDS.sleep(3);
         } catch (InterruptedException e) {
