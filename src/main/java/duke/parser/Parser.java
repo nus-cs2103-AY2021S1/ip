@@ -1,21 +1,23 @@
 package duke.parser;
 
-import duke.command.Command;
-import duke.command.CommandType;
-import duke.exception.DukeException;
-import duke.ui.Ui;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
 import java.util.stream.Stream;
+
+import duke.command.Command;
+import duke.command.CommandType;
+import duke.exception.DukeException;
+import duke.ui.Ui;
+import duke.util.IndexDescriptionPair;
 
 /**
  * Parser that parses raw user input into digestible output
  */
 public class Parser {
     /**
-     * Returns the description excluding the command type in the command string
+     * Returns the description excluding the command type in the command string<br />
+     * CommandString Format: `command_type` `description_to_be_returned`
      *
      * @param commandType   of the commandString
      * @param commandString to be parsed to get the description
@@ -35,7 +37,8 @@ public class Parser {
     }
 
     /**
-     * Returns the index in the command string
+     * Returns the index in the command string<br />
+     * CommandString Format: `command_type` `index_to_be_returned`
      *
      * @param commandType   of the commandString
      * @param commandString to be parsed to get the index
@@ -43,12 +46,41 @@ public class Parser {
      * @throws DukeException when the index is invalid, i.e. when it cannot be parsed as an integer
      */
     public static int getTaskTargetIndex(CommandType commandType, String commandString)
-            throws DukeException {
+        throws DukeException {
         String description = Parser.getTaskDescription(commandType, commandString);
         try {
             return Integer.parseInt(description);
         } catch (NumberFormatException e) {
             throw Ui.taskIndexFormatException(commandType);
+        }
+    }
+
+    /**
+     * Returns the index and additional description in the command string<br />
+     * CommandString Format: `command_type` `index_to_be_returned` `description_to_be_returned`
+     *
+     * @param commandType   of the commandString
+     * @param commandString to be parsed to get the index description pair
+     * @return an int that represent the index in the command string
+     * @throws DukeException when the index is invalid, i.e. when it cannot be parsed as an integer
+     */
+    public static IndexDescriptionPair getTaskTargetIndexDescription(CommandType commandType, String commandString)
+        throws DukeException {
+        DukeException indexDescriptionFormatException = Ui.taskIndexDescriptionFormatException(commandType, "<tags>");
+        String indexDescription = Parser.getTaskDescription(commandType, commandString);
+
+        String[] rawDescriptionPair = indexDescription.split(" ", 2);
+
+        if (rawDescriptionPair.length != 2 || rawDescriptionPair[1].equals("")) {
+            throw indexDescriptionFormatException;
+        }
+
+        try {
+            int index = Integer.parseInt(rawDescriptionPair[0]);
+            String description = rawDescriptionPair[1];
+            return new IndexDescriptionPair(index, description);
+        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+            throw indexDescriptionFormatException;
         }
     }
 

@@ -10,7 +10,8 @@ public enum CommandType {
     DONE("done"),
     BYE("bye"),
     DELETE("delete"),
-    FIND("find");
+    FIND("find"),
+    TAG("tag");
 
     private String name;
 

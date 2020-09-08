@@ -1,12 +1,12 @@
 package duke.ui;
 
+import java.io.IOException;
+import java.time.LocalDate;
+
 import duke.command.CommandType;
 import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
-
-import java.io.IOException;
-import java.time.LocalDate;
 
 public class Ui {
     /**
@@ -66,8 +66,12 @@ public class Ui {
         System.out.printf("Good job. This task is marked as done:\n %s%n", task);
     }
 
-    public static void showDelete(Task task) {
+    public static void showDeleted(Task task) {
         System.out.printf("Noted. I've remove this task:\n %s%n", task);
+    }
+
+    public static void showTagged(Task task) {
+        System.out.printf("Noted. I've tagged this task:\n %s%n", task);
     }
 
     public static void showAddTask(Task task) {
@@ -92,17 +96,23 @@ public class Ui {
 
     public static DukeException taskDateEmptyException(CommandType type) {
         return new DukeException(
-                String.format("Error! The description of a %s is missing a date.", type));
+            String.format("Error! The description of a %s is missing a date.", type));
+    }
+
+    public static DukeException taskIndexDescriptionFormatException(CommandType type, String descriptionFormat) {
+        return new DukeException(
+            String
+                .format("Input format is wrong. Please make sure it is `%s <task-index> %s`", type, descriptionFormat));
     }
 
     public static DukeException taskIndexFormatException(CommandType type) {
         return new DukeException(
-                String.format("Input format is wrong. Please make sure it is `%s <task-index>`", type));
+            String.format("Input format is wrong. Please make sure it is `%s <task-index>`", type));
     }
 
     public static DukeException taskDateFormatException() {
         return new DukeException(
-                "Date format is wrong. It should be yyyy-mm-dd and within possible date ranges");
+            "Date format is wrong. It should be yyyy-mm-dd and within possible date ranges");
     }
 
     public static DukeException taskIndexOutOfBoundsException(int index, TaskList tasks) {

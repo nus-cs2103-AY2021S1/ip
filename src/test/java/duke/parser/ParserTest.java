@@ -1,12 +1,16 @@
 package duke.parser;
 
-import duke.command.CommandType;
-import duke.exception.DukeException;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
+
+import duke.command.CommandType;
+import duke.exception.DukeException;
+import duke.util.IndexDescriptionPair;
 
 class ParserTest {
 
@@ -33,7 +37,30 @@ class ParserTest {
     @Test
     void getTaskTargetIndex_invalidCommand_throwsException() {
         assertThrows(DukeException.class, () ->
-                Parser.getTaskTargetIndex(CommandType.DELETE, "del hello world")
+            Parser.getTaskTargetIndex(CommandType.DELETE, "del hello world")
+        );
+    }
+
+    @Test
+    void getTaskTargetIndexDescription_validCommand_returnIndexDescription() throws DukeException {
+        assertEquals(Parser.getTaskTargetIndexDescription(CommandType.TAG, "tag 100 dogs"),
+            new IndexDescriptionPair(100, "dogs"));
+        assertEquals(Parser.getTaskTargetIndexDescription(CommandType.TAG, "tag 10 paper balls"),
+            new IndexDescriptionPair(10, "paper balls"));
+        assertNotEquals(Parser.getTaskTargetIndexDescription(CommandType.TAG, "tag 10 paper balls"),
+            new IndexDescriptionPair(20, "paper balls"));
+    }
+
+    @Test
+    void getTaskTargetIndexDescription_invalidCommand_throwsException() {
+        assertThrows(DukeException.class, () ->
+            Parser.getTaskTargetIndexDescription(CommandType.TAG, "tag 1dance")
+        );
+        assertThrows(DukeException.class, () ->
+            Parser.getTaskTargetIndexDescription(CommandType.TAG, "tag 13 ")
+        );
+        assertThrows(DukeException.class, () ->
+            Parser.getTaskTargetIndexDescription(CommandType.TAG, "tag 13")
         );
     }
 

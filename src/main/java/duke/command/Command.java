@@ -49,6 +49,8 @@ public abstract class Command {
             return new ByeCommand(commandString);
         case FIND:
             return new FindCommand(commandString);
+        case TAG:
+            return new TagCommand(commandString);
         default:
             throw Ui.commandInvalidException();
         }

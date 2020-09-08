@@ -22,6 +22,6 @@ public class DeleteCommand extends UpdateCommand {
     public void execute(TaskList tasks) throws DukeException {
         int index = super.getTaskTargetIndex();
         Task task = tasks.remove(index);
-        Ui.showDelete(task);
+        Ui.showDeleted(task);
     }
 }
