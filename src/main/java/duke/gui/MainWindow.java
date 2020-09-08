@@ -84,7 +84,7 @@ public class MainWindow extends AnchorPane {
 
         if (input.equals("bye")) {
             dialogContainer.getChildren().add(DialogBox
-                    .getDukeDialog(duke.getUi().printByeMessage(), dukeImage));
+                    .getDukeDialog(duke.getUi().byeMessage(), dukeImage));
             Timeline timeline = new Timeline(new KeyFrame(
                     Duration.millis(1500), x -> Platform.exit()
             ));

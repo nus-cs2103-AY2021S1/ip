@@ -9,6 +9,7 @@ public enum CommandType {
     TODO,
     DEADLINE,
     EVENT,
+    LIST,
     LIST_ALL,
     LIST_ALL_DONE,
     LIST_ALL_NOT_DONE,
