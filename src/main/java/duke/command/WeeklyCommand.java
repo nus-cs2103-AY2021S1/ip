@@ -34,7 +34,7 @@ public class WeeklyCommand extends Command {
                     + "Now you have " + taskList.size() + " tasks in the list.";
             return response;
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Please specify your event description and details!");
+            throw new DukeException("Please specify your recurring task details!");
         }
     }
 

@@ -23,7 +23,7 @@ public class WeeklyTask extends Task {
     }
 
     public String toString() {
-        return "[W] " + this.description + " (by: "
+        return "[Weekly] " + this.description + " (at: "
                 + this.atDateTime.format(DateTimeFormatter.ofPattern("MMM d yyy HH:mm")) + ")";
     }
 
