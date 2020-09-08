@@ -68,30 +68,7 @@ public class Storage {
                 while (s.hasNext()) {
                     String string = s.nextLine();
                     String[] arr = string.split(" \\| ");
-
-                    boolean isDone = arr[1].equals("1");
-                    boolean isTime;
-                    Date date;
-                    assert arr[0].equals("T") || arr[0].equals("D") || arr[0].equals("E");
-                    switch (arr[0]) {
-                    case "T":
-                        tasks.add(new ToDo(arr[2], isDone));
-                        break;
-                    case "D":
-                        isTime = arr[4].equals("1");
-                        date = (isTime) ? DATE_TIME_CONVERTER_FORMAT.parse(arr[3])
-                                : DATE_CONVERTER_FORMAT.parse(arr[3]);
-                        tasks.add(new Deadline(arr[2], date, isTime, isDone));
-                        break;
-                    case "E":
-                        isTime = arr[4].equals("1");
-                        date = (isTime) ? DATE_TIME_CONVERTER_FORMAT.parse(arr[3])
-                                : DATE_CONVERTER_FORMAT.parse(arr[3]);
-                        tasks.add(new Event(arr[2], date, isTime, isDone));
-                        break;
-                    default:
-                        assert false;
-                    }
+                    parseArrayString(arr, tasks);
                 }
             } catch (FileNotFoundException e) {
                 System.out.println("Unable to find file :(");
@@ -101,6 +78,36 @@ public class Storage {
             }
         }
         return tasks;
+    }
+
+    private void parseArrayString(String[] arr, ArrayList<Task> tasks) throws ParseException {
+        boolean isDone = arr[1].equals("1");
+        boolean isTime;
+        Date date;
+        try {
+                    assert arr[0].equals("T") || arr[0].equals("D") || arr[0].equals("E");
+            switch (arr[0]) {
+            case "T":
+                tasks.add(new ToDo(arr[2], isDone));
+                break;
+            case "D":
+                isTime = arr[4].equals("1");
+                date = (isTime) ? DATE_TIME_CONVERTER_FORMAT.parse(arr[3])
+                        : DATE_CONVERTER_FORMAT.parse(arr[3]);
+                tasks.add(new Deadline(arr[2], date, isTime, isDone));
+                break;
+            case "E":
+                isTime = arr[4].equals("1");
+                date = (isTime) ? DATE_TIME_CONVERTER_FORMAT.parse(arr[3])
+                        : DATE_CONVERTER_FORMAT.parse(arr[3]);
+                tasks.add(new Event(arr[2], date, isTime, isDone));
+                break;
+            default:
+                        assert false;
+            }
+        } catch (ParseException e) {
+            throw e;
+        }
     }
 
     /**
