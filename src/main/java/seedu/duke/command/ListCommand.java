@@ -19,7 +19,11 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList ls, Ui ui) {
-        ui.printResult("Here are the tasks in your list:");
+        ui.printResult("Don't you dare run away from your responsibilities: ");
+
+        if (ls.size() == 0) {
+            ui.printResult("Nothing here. Good for you, for now.");
+        }
 
         for (Task task : ls.getList()) {
             ui.printResult(((ls.indexOf(task) + 1) + ". " + task.getStatus()));

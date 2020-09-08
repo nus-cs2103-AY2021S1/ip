@@ -28,6 +28,7 @@ public class AddEvent extends AddCommand {
     @Override
     public void execute(TaskList ls, Ui ui) throws DateTimeException {
         String[] input = words[1].split(" /by ");
+        assert input.length > 1 : "Should have two parts to the command.";
         LocalDateTime day = LocalDateTime.parse(input[1], FORMATTER);
         Event newE = new Event(input[0], day, false);
         ls.add(newE);
