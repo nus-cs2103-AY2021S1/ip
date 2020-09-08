@@ -2,7 +2,6 @@ package util.task;
 
 /**
  * Parent Class for all Tasks.
- *
  * Task contains a name describing the task and
  * a isDone boolean that indicates whether
  * the task is completed.

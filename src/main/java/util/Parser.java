@@ -16,19 +16,18 @@ public class Parser {
      */
     public static Command parse(String userInput) throws DukeException {
         // Check if it is a single word command
-        if(userInput.equals("bye")) {
+        if (userInput.equals("bye")) {
             System.out.println();
             return Command.EXIT;
         } else if (userInput.equals("list")) {
             return Command.LIST;
         }
 
-        // Check command
         // Process input
         String[] instructions = userInput.split(" ", 2);
-
+        // Check command
         if (instructions[0].equals("todo")) {
-            /** Command for to do Tasks creation **/
+            // Command for to do Tasks creation
             // Add check for command details
             if (hasCmdDetails(instructions)) {
                 // If command has details, return command to add to do
@@ -39,7 +38,7 @@ public class Parser {
                         + instructions[0] + " command. Sorry! D:");
             }
         } else if (instructions[0].equals("deadline")) {
-            /** Command: "deadline <taskName> /by <deadline>" **/
+            // Command: "deadline <taskName> /by <deadline>"
             if (hasCmdDetails(instructions)) {
                 // Extract Details from command
                 String[] details = instructions[1].split(" /by ", 2);
@@ -60,7 +59,7 @@ public class Parser {
             }
 
         } else if (instructions[0].equals("event")) {
-            /** Command: "deadline <taskName> /at <event>" **/
+            // Command: "deadline <taskName> /at <event>"
             if (hasCmdDetails(instructions)) {
                 // Extract Details from command
                 String[] details = instructions[1].split(" /at ", 2);
@@ -125,8 +124,7 @@ public class Parser {
     }
 
     /**
-     * Returns lateral location of the specified position.
-     * If the position is unset, NaN is returned.
+     * Checks whether command has follow-up details.
      *
      * @param cmd String array with the command sectioned out.
      * @return True/False value of whether the command is complete.
@@ -135,7 +133,7 @@ public class Parser {
     public static boolean hasCmdDetails(String[] cmd) throws DukeException {
         try {
             if (cmd[1].equals("") || cmd[1].trim().length() == 0) {
-                /** Make sure command has follow up details **/
+                // Make sure command has follow up details
                 // Check if there is second word
                 // Check if second word is just whitespace
                 // If so, command has no details

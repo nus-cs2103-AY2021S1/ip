@@ -35,13 +35,15 @@ public class Storage {
      */
     public ArrayList<Task> loadFileContents() throws FileNotFoundException {
         // Initialize list to be returned
-        ArrayList<Task> list = new ArrayList<>(100);
+        ArrayList<Task> tasks = new ArrayList<>(100);
 
         File data = new File(filePath); // create a File for the given file path
-        Scanner s = new Scanner(data); // create a Scanner using the File as the source
-        while (s.hasNext()) {
+        Scanner scanner = new Scanner(data); // create a Scanner using the File as the source
+        while (scanner.hasNext()) {
+            // File should not be more than 100 lines
+            assert tasks.size() != 100;
             // Read the data line
-            String dataLine = s.nextLine();
+            String dataLine = scanner.nextLine();
             // Split data line into components
             String[] taskDetails = dataLine.split(" - ", 0);
             // Depending on first letter, determine what task it is
@@ -50,19 +52,19 @@ public class Storage {
                 if (taskDetails[1].equals("1")) {
                     t.setStatus(true);
                 }
-                list.add(t);
+                tasks.add(t);
             } else if (taskDetails[0].equals("D")) {
                 try {
                     // Try to add Deadline based off file
+                    // Check if string can be recognized as a valid LocalDate
+                    // If can't, throw Duke's exception
                     Task t = new Deadline(taskDetails[2], LocalDate.parse(taskDetails[3]));
                     if (taskDetails[1].equals("1")) {
                         t.setStatus(true);
                     }
-                    list.add(t);
+                    tasks.add(t);
                 } catch(Exception e) {
-                    //If can't, throw Duke's exception
-                    // Check if string can be recognized as a valid LocalDate
-                    // If can't, print out error message
+                    // Print out error message
                     System.out.println("Er, I found an error in the storage data.");
                     System.out.println("This line will be excluded from my task list:\n"
                             + dataLine);
@@ -72,7 +74,7 @@ public class Storage {
                 if (taskDetails[1].equals("1")) {
                     t.setStatus(true);
                 }
-                list.add(t);
+                tasks.add(t);
             } else {
                 // Basic Error, if invalid task, print error message
                 System.out.print("Sorry I could not comprehend this: ");
@@ -81,7 +83,7 @@ public class Storage {
             // End of Loop
         }
         // return the final task list
-        return list;
+        return tasks;
     }
 
     /**
@@ -90,7 +92,7 @@ public class Storage {
      * @param list ArrayList of Tasks Duke currently has.
      * @throws DukeException  If Duke is unable to save into file.
      */
-    public void saveToFile(ArrayList<Task> list) throws DukeException {
+    public boolean saveToFile(ArrayList<Task> list) throws DukeException {
         try {
             // Create file if there is none
             createFile();
@@ -101,6 +103,8 @@ public class Storage {
         } catch (IOException e) {
             throw new DukeException("Sorry, something went wrong and I couldn't save my data... ");
         }
+        // List should at most have 100 tasks.
+        assert list.size() <= 100;
         for (int i = 0; i < list.size(); i++) {
             // Try to write into save file
             try {
@@ -108,8 +112,10 @@ public class Storage {
             } catch (IOException e) {
                 System.out.print("Something happened and this failed to be saved: ");
                 System.out.println(list.get(i));
+                return false;
             }
         }
+        return true;
     }
 
     /**

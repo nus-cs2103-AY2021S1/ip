@@ -131,19 +131,6 @@ public class TaskList {
     }
 
     /**
-     * Prints out all of the tasks in the TaskList.
-     */
-    public void printAllTasks() {
-        // Prints all tasks in Duke's list
-        for (int i = 0; i < tasks.size(); i++) {
-            // Enumerator
-            System.out.print((i+1) + ".");
-
-            // Actual Task
-            System.out.println(tasks.get(i));
-        }
-    }
-    /**
      * Gets all of the tasks in the TaskList.
      *
      * @return List of all tasks as a String.
