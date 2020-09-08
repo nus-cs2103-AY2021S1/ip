@@ -45,7 +45,6 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        // Set details into components
         dialog.setText(text);
         dialog.setFont(font);
         displayPicture.setImage(img);

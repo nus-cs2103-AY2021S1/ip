@@ -62,12 +62,10 @@ public class OutputHandler {
         // Concatenate messages in buffer
         String stringToPrint = this.outputBuffer
                 .stream()
-                .reduce("", (x,y) -> x + "\n" + y);
+                .reduce("", (x, y) -> x + "\n" + y);
 
-        // Display messages
         printNow(stringToPrint);
 
-        // Clear buffer
         this.outputBuffer.clear();
 
         assert this.isEmpty();

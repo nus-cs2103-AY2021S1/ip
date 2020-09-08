@@ -59,7 +59,7 @@ public class Event extends Task {
 
         HashMap<String, String> dict = super.convertToHashMap();
 
-        dict.put("type", "duke.task.Event");
+        dict.put("type", TaskType.EVENT.toSaveString());
         dict.put("when", this.when.toSaveString());
 
         return dict;

@@ -32,14 +32,12 @@ public class DeadlineCommand extends ComplexCommand {
     public void execute(Ui ui, TaskManager taskManager, SaveManager saveManager) {
 
         try {
-            // Attempt to parse parameters and create new Deadline
-            String[] splitParams = this.parseParams();
+            String[] splitParams = this.parseParams(); //throws DukeInputException on bad inputs
             Deadline newDeadline = new Deadline(splitParams[0], splitParams[1]);
 
-            // Store new deadline in taskManager
             taskManager.storeTask(newDeadline);
 
-            ui.displayAfterAddTask(newDeadline, taskManager.size());
+            ui.displayAfterAddTaskMessage(newDeadline, taskManager.size());
 
         } catch (DukeInputException e) {
             ui.displayException(e);

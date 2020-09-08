@@ -66,7 +66,7 @@ public class Task {
      */
     public HashMap<String, String> convertToHashMap() {
         HashMap<String, String> dict = new HashMap<>();
-        dict.put("type", "duke.task.Task");
+        dict.put("type", TaskType.TASK.toSaveString());
         dict.put("name", this.name);
         dict.put("done", this.isDone ? "true" : "false");
         return dict;
@@ -81,7 +81,6 @@ public class Task {
 
         String checkMark;
 
-        // Print tick if done and cross if not done
         if (this.isDone) {
             checkMark = "Y";
         } else {

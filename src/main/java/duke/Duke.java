@@ -90,20 +90,14 @@ public class Duke {
      */
     public void run() {
 
-        // Main software loop.
         while (true) {
 
             try {
-                // Parse user input into software command.
                 Command command = Parser.parse(this.ui.readCommand());
-
-                // Execute user command.
                 command.execute(this.ui, this.taskManager, this.saveManager);
+                this.ui.displayQueuedMessages();
 
-                // Send messages from app
-                this.ui.display();
-
-                // Terminate software loop if exit command is given.
+                // Terminate loop on Bye Command
                 if (command.isByeCommand()) {
                     break;
                 }
@@ -111,7 +105,6 @@ public class Duke {
                 assert !command.isByeCommand();
 
             } catch (DukeInputException e) {
-                // Display Exception without terminating loop if one is thrown.
                 ui.displayException(e);
             }
 
@@ -136,7 +129,7 @@ public class Duke {
             command.execute(this.ui, this.taskManager, this.saveManager);
 
             // Send messages from app
-            this.ui.display();
+            this.ui.displayQueuedMessages();
 
             return command.isByeCommand();
 
@@ -161,11 +154,9 @@ public class Duke {
      * @param args CLI arguments. None required.
      */
     public static void main(String[] args) {
-        // Initialize Duke with save data and send welcome message
         Duke duke = new Duke(Path.of("data/data.txt"));
         duke.initialize();
 
-        // Start input loop
         duke.run();
 
     }

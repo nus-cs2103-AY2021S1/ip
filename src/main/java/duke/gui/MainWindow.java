@@ -30,15 +30,6 @@ public class MainWindow extends AnchorPane {
     private DukeGui dukeGui;
 
     /**
-     * Sets <code>dukeGui</code>.
-     *
-     * @param d Given <code>DukeGui</code> object.
-     */
-    public void setDukeGui(DukeGui d) {
-        dukeGui = d;
-    }
-
-    /**
      * User avatar image.
      */
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
@@ -59,6 +50,15 @@ public class MainWindow extends AnchorPane {
     private Font dukeFont = Font.font("Consolas", 12);
 
     /**
+     * Sets <code>dukeGui</code>.
+     *
+     * @param d Given <code>DukeGui</code> object.
+     */
+    public void setDukeGui(DukeGui d) {
+        dukeGui = d;
+    }
+
+    /**
      * Initialization of <code>Listener</code> that sets the window to the latest messages.
      */
     @FXML
@@ -76,7 +76,6 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        // Gets user input from text field
         String input = userInput.getText();
 
         // Echos user input in GUI
@@ -89,7 +88,6 @@ public class MainWindow extends AnchorPane {
             Platform.exit();
         }
 
-        // Clear user input from text field.
         userInput.clear();
     }
 

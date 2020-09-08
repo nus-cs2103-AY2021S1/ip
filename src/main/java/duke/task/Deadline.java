@@ -59,7 +59,7 @@ public class Deadline extends Task {
 
         HashMap<String, String> dict = super.convertToHashMap();
 
-        dict.put("type", "duke.task.Deadline");
+        dict.put("type", TaskType.DEADLINE.toSaveString());
         dict.put("deadline", this.deadline.toSaveString());
 
         return dict;
