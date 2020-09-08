@@ -62,5 +62,4 @@ public class Duke {
         }
         return stringBuilder.toString();
     }
-
 }
