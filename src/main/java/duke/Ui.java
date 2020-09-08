@@ -17,8 +17,8 @@ public class Ui {
                     + "how could I serve you now? \n"
                     + "You could ask me any question if you like! \n"
                     + "____________________________________________________________";
-    private static final String Message_Bye = "Ka To: \n" +
-            "I am happy to serve you. See you soon!";
+    private static final String Message_Bye = "Ka To: \n"
+                    + "I am happy to serve you. See you soon!";
 
     public Ui() {
         this(System.in, System.out);
@@ -161,6 +161,9 @@ public class Ui {
 
     /**
      * Prints the relevant task to the key word
+     *
+     * @param keyWord String keyword to be searched
+     * @param taskList TaskList taskList to be searched within
      */
 
     public void printFound(String keyWord, TaskList taskList){
