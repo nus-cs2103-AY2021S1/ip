@@ -11,9 +11,9 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     protected LocalDate dueDate;
 
-    public Deadline(String name, LocalDate details) {
+    public Deadline(String name, LocalDate date) {
         super(name);
-        this.dueDate = details;
+        this.dueDate = date;
     }
 
     /**

@@ -125,8 +125,7 @@ public class Parser {
     }
 
     /**
-     * Returns lateral location of the specified position.
-     * If the position is unset, NaN is returned.
+     * Checks whether command has follow-up details.
      *
      * @param cmd String array with the command sectioned out.
      * @return True/False value of whether the command is complete.

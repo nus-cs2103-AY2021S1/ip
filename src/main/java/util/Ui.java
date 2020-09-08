@@ -7,8 +7,8 @@ import java.util.Scanner;
  * */
 public class Ui {
     /** Constants **/
-    private final String outputBreaker = ">>> ";
-    private final String lineBreaker = "--.--.--.--.--.--.--.--.--.--.--." +
+    private final String outputSymbol = ">>> ";
+    private final String lineBreak = "--.--.--.--.--.--.--.--.--.--.--." +
             "--.--.--.--.--.--.--.--.--.--.--";
     // Text Images
     private final String logo = " ____        _        \n"
@@ -46,7 +46,7 @@ public class Ui {
         return greetings +
                 "\nHello, I'm Duke! " +
                 "What can I help you with today?" +
-                "\n" + lineBreaker + "\n";
+                "\n" + lineBreak + "\n";
     }
 
     /**
@@ -55,9 +55,9 @@ public class Ui {
      * @return Duke's farewell as a String
      */
     public String getFarewells() {
-        return outputBreaker +
+        return outputSymbol +
                 "Bye! Hoped I helped!" +
-                "\n" + lineBreaker;
+                "\n" + lineBreak;
     }
 
     /**
@@ -74,7 +74,7 @@ public class Ui {
      * Prints Duke's symbols before response.
      */
     public void printOutputSymbol() {
-        System.out.print(outputBreaker);
+        System.out.print(outputSymbol);
     }
 
     /**
@@ -83,7 +83,7 @@ public class Ui {
      * @return The string containing output symbols.
      */
     public String getOutputSymbol() {
-        return lineBreaker + "\n" + outputBreaker;
+        return lineBreak + "\n" + outputSymbol;
     }
 
     /**
@@ -91,8 +91,8 @@ public class Ui {
      *
      * @returns Line break as String.
      */
-    public String getLineBreaker() {
-        return lineBreaker + "\n";
+    public String getLineBreak() {
+        return lineBreak + "\n";
     }
 
     /**
