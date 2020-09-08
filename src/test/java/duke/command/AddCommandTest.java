@@ -19,11 +19,11 @@ public class AddCommandTest {
 
 
         public StorageStub(String filepath) {
-            super(filepath);
+            super(filepath, "");
         }
 
         @Override
-        public void writeToFile(ArrayList<Task> arrayList) {
+        public void writeToMain(ArrayList<Task> arrayList) {
             //Do nothing
         }
     }
@@ -35,8 +35,9 @@ public class AddCommandTest {
     @Test
     public void testAddCommand() {
         TaskList tasks = new TaskList();
+        TaskList archives = new TaskList();
         AddCommand c = new AddCommand(new ToDo("Read book"));
-        c.execute(tasks, new UiStub(), new StorageStub(""));
+        c.execute(tasks, archives, new UiStub(), new StorageStub(""));
         assertEquals(new ToDo("Read book").toString(),
                 tasks.getTasks().get(0).toString());
 

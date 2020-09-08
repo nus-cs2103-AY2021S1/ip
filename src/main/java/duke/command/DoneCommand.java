@@ -30,8 +30,9 @@ public class DoneCommand extends Command {
      * @throws DukeException if task number does not exist.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        ui.printString(getExecuteString(tasks, ui, storage));
+    public void execute(TaskList tasks, TaskList archives,
+                        Ui ui, Storage storage) throws DukeException {
+        ui.printString(getExecuteString(tasks, archives, ui, storage));
     }
 
     /**
@@ -45,10 +46,11 @@ public class DoneCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public String getExecuteString(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String getExecuteString(TaskList tasks, TaskList archives,
+                                   Ui ui, Storage storage) throws DukeException {
         try {
             Task task = tasks.markTaskDoneInList(taskNumber);
-            storage.writeToFile(tasks.getTasks());
+            storage.writeToMain(tasks.getTasks());
             return ui.getMarkedTaskString(task);
         } catch (DukeException e) {
             throw e;

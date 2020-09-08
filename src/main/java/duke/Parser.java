@@ -4,13 +4,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
+import duke.command.*;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
@@ -73,6 +67,9 @@ public class Parser {
             case "event":
                 return parseEvent(userInputArr, userInput);
 
+            case "archive":
+                return archiveEvent(userInputArr);
+
             default:
                 throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
             }
@@ -84,6 +81,7 @@ public class Parser {
             throw new DukeException("Please enter a task number in numeric format\n");
         }
     }
+
 
 
     /**
@@ -190,6 +188,17 @@ public class Parser {
 
         Event event = new Event(eventArr[0], dateEvent, isTimeEvent);
         return new AddCommand(event);
+    }
+
+    private Command archiveEvent(String[] userInputArr) throws DukeException {
+        if (userInputArr.length < 2) {
+            throw new DukeException("Please enter a task number to be archived\n");
+        }
+        String taskNumber = userInputArr[1];
+
+        int taskNumberInt = Integer.parseInt(taskNumber) - 1;
+        return new ArchiveCommand(taskNumberInt);
+
     }
 
     /**

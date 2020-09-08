@@ -8,6 +8,7 @@ public class Duke {
     private Ui ui;
     private Storage storage;
     private TaskList taskList;
+    private TaskList archiveList;
 
 
 
@@ -15,10 +16,11 @@ public class Duke {
      * Creates a Duke object containing a Ui object, Storage object, and TaskList Object.
      * @param filepath filepath where the text file containing the list is stored.
      */
-    public Duke(String filepath) {
+    public Duke(String filepath, String archivePath) {
         ui = new Ui();
-        storage = new Storage(filepath);
-        taskList = new TaskList(storage.readFile());
+        storage = new Storage(filepath, archivePath);
+        taskList = new TaskList(storage.readMain());
+        archiveList = new TaskList(storage.readArchive());
     }
 
 
@@ -32,7 +34,7 @@ public class Duke {
             try {
                 String userInput = ui.readInput();
                 Command c = new Parser().parse(userInput);
-                c.execute(taskList, ui, storage);
+                c.execute(taskList, archiveList, ui, storage);
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.printString(e.getMessage());
@@ -45,15 +47,15 @@ public class Duke {
      * @param args
      */
     public static void main(String[] args) {
-        Duke duke = new Duke("/data/duke.txt");
+        Duke duke = new Duke("/data/duke.txt", "/data/archive.txt");
         duke.run();
     }
 
 
-    String getResponse(String input) {
+    public String getResponse(String input) {
         try {
             Command c = new Parser().parse(input);
-            String output = c.getExecuteString(taskList, ui, storage);
+            String output = c.getExecuteString(taskList, archiveList, ui, storage);
             return output;
         } catch (DukeException e) {
             return e.getMessage();

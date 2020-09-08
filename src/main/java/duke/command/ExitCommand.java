@@ -18,7 +18,7 @@ public class ExitCommand extends Command {
      * @param storage Storage to update the text file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, TaskList archives, Ui ui, Storage storage) {
         ui.printGoodbye();
     }
 
@@ -31,7 +31,8 @@ public class ExitCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public String getExecuteString(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String getExecuteString(TaskList tasks, TaskList archives,
+                                   Ui ui, Storage storage) throws DukeException {
         return ui.getGoodbyeString();
     }
 

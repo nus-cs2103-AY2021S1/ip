@@ -179,4 +179,9 @@ public class Ui {
     }
 
 
+    public String getArchivedTaskString(Task task) {
+        return "Nice! I've removed this task from the main list, "
+                + "and added this task to the archive: \n"
+                + task + "\n";
+    }
 }

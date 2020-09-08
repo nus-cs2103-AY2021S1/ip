@@ -17,7 +17,9 @@ public abstract class Command {
      * @param storage Storage to update the text file.
      * @throws DukeException If there is an error.
      */
-    public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract void execute(TaskList tasks, TaskList archives,
+                                 Ui ui, Storage storage)
+            throws DukeException;
 
     /**
      * Returns executed message, depending on child classes.
@@ -27,7 +29,8 @@ public abstract class Command {
      * @return String of executed message
      * @throws DukeException If there is an error.
      */
-    public abstract String getExecuteString(TaskList tasks, Ui ui, Storage storage) throws DukeException;
+    public abstract String getExecuteString(TaskList tasks, TaskList archives,
+                                            Ui ui, Storage storage) throws DukeException;
 
     /**
      * Checks if it is the exit command.
