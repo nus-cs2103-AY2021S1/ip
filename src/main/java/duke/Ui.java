@@ -18,21 +18,12 @@ public class Ui {
     }
 
     /**
-     * Gets the user input.
-     *
-     * @return User input.
-     */
-    public String getUserInput() {
-        return scanner.nextLine();
-    }
-
-    /**
      * Shows the greeting message.
      */
     public String showGreeting() {
         String message = "Eh what's up\n"
                 + "What do you want?";
-        return wrapMessage(message);
+        return wrapMessageInBorders(message);
     }
 
     /**
@@ -40,14 +31,14 @@ public class Ui {
      */
     public String showGoodbye() {
         String message = "Alright I'll see you around!\n";
-        return wrapMessage(message);
+        return wrapMessageInBorders(message);
     }
 
     /**
      * Shows the loading file error.
      */
     public String showLoadingError() {
-        return (wrapMessage("Error loading file!"));
+        return (wrapMessageInBorders("Error loading file!"));
     }
 
     /**
@@ -64,7 +55,7 @@ public class Ui {
                     + task
                     + "\n";
         }
-        return wrapMessage(message);
+        return wrapMessageInBorders(message);
     }
 
     /**
@@ -80,7 +71,7 @@ public class Ui {
                 + "Now you have "
                 + tasks.getSize()
                 + " tasks in the list.";
-        return wrapMessage(message);
+        return wrapMessageInBorders(message);
     }
 
     /**
@@ -96,7 +87,7 @@ public class Ui {
                 + "Now you have "
                 + tasks.getSize()
                 + " tasks in the list.";
-        return wrapMessage(message);
+        return wrapMessageInBorders(message);
     }
 
     /**
@@ -107,7 +98,7 @@ public class Ui {
     public String showDoneTask(Task task) {
         String message = "Nice! I've marked this task as done:\n"
                 + task;
-        return wrapMessage(message);
+        return wrapMessageInBorders(message);
     }
 
     /**
@@ -124,7 +115,7 @@ public class Ui {
                     + task
                     + "\n";
         }
-        return wrapMessage(message);
+        return wrapMessageInBorders(message);
     }
 
     /**
@@ -133,7 +124,7 @@ public class Ui {
      * @param message The error message to be shown.
      */
     public String showError(String message) {
-        return wrapMessage(message);
+        return wrapMessageInBorders(message);
     }
 
     /**
@@ -142,7 +133,7 @@ public class Ui {
      * @param message The message to be wrapped.
      * @return The wrapped message.
      */
-    public String wrapMessage(String message) {
+    public String wrapMessageInBorders(String message) {
         if (message.endsWith("\n")) {
             // If the message ends with a newline, remove the newline
             message = message.substring(0, message.length() - 1);
