@@ -39,29 +39,45 @@ public class Storage {
      * File path where the text file is stored.
      */
     private Path filepath;
+    /**
+     * File path where the archive file is stored
+     */
     private Path archivePath;
 
     /**
      * Initialises Storage with filepath where text file is stored.
      *
-     * @param filepath Filepath where the text file is stored.
+     * @param filepath    Filepath where the text file is stored.
+     * @param archivePath Filepath where the archive file is stored.
      */
     public Storage(String filepath, String archivePath) {
         this.filepath = Paths.get(System.getProperty("user.dir") + filepath);
         this.archivePath = Paths.get(System.getProperty("user.dir") + archivePath);
     }
 
+    /**
+     * Read the main text file and convert into ArrayList of Tasks.
+     *
+     * @return ArrayList of Tasks
+     */
     public ArrayList<Task> readMain() {
         return readFile(filepath);
     }
 
+    /**
+     * Read the archive text file and convert into ArrayList of Archived Tasks.
+     *
+     * @return ArrayList of Archived Tasks
+     */
     public ArrayList<Task> readArchive() {
         return readFile(archivePath);
     }
+
     /**
-     * Reads existing text file and converts the text into tasks to be placed
+     * Reads text file and converts the text into tasks to be placed
      * into an ArrayList. If the text file does not exists, it is created.
      *
+     * @param path file path where text file is stored
      * @return an ArrayList containing the tasks from the text file.
      */
     private ArrayList<Task> readFile(Path path) {
@@ -88,6 +104,11 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * @param arr   A line from the text file split into an array.
+     * @param tasks ArrayList of tasks.
+     * @throws ParseException if incorrect date format.
+     */
     private void parseArrayString(String[] arr, ArrayList<Task> tasks) throws ParseException {
         boolean isDone = arr[1].equals("1");
         boolean isTime;
@@ -121,6 +142,8 @@ public class Storage {
     /**
      * Creates the text file to contain the tasks at the filepath where
      * it is supposed to be.
+     *
+     * @param path path of text file.
      */
     private void createFile(Path path) {
         if (!Files.isDirectory(path.getParent())) {
@@ -142,6 +165,7 @@ public class Storage {
      * Converts the tasks into String to be stored into the text file.
      *
      * @param arrayList ArrayList containing the tasks.
+     * @param path path of file.
      */
     private void writeToFile(ArrayList<Task> arrayList, Path path) {
         try {
@@ -155,14 +179,21 @@ public class Storage {
         }
     }
 
+    /**
+     * Write into the Main file contained at filepath.
+     * @param arrayList ArrayList of Tasks that the text file is being written to.
+     */
     public void writeToMain(ArrayList<Task> arrayList) {
         writeToFile(arrayList, filepath);
     }
 
+    /**
+     * Write into the Main file contained at archivePath.
+     * @param arrayList ArrayList of Tasks that the text file is being written to.
+     */
     public void writeToArchive(ArrayList<Task> arrayList) {
         writeToFile(arrayList, archivePath);
     }
-
 
 
 }

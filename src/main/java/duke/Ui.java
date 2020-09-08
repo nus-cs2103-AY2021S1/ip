@@ -179,6 +179,11 @@ public class Ui {
     }
 
 
+    /**
+     * Returns message of that the task is archived.
+     * @param task Task to be archived.
+     * @return String of message.
+     */
     public String getArchivedTaskString(Task task) {
         return "Nice! I've removed this task from the main list, "
                 + "and added this task to the archive: \n"

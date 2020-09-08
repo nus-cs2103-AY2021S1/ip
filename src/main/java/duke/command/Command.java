@@ -24,6 +24,7 @@ public abstract class Command {
     /**
      * Returns executed message, depending on child classes.
      * @param tasks TaskList that is being executed on.
+     * @param archives TaskList that contains archived tasks.
      * @param ui Ui to update the user.
      * @param storage Storage to update the text file.
      * @return String of executed message
