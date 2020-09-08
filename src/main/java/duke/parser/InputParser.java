@@ -1,4 +1,7 @@
-package duke;
+package duke.parser;
+
+import duke.CommandType;
+import duke.Ui;
 
 import java.util.Scanner;
 
@@ -188,5 +191,27 @@ public class InputParser {
                 && input.split(" /at ")[1].split(" ").length == 2
                 && input.split(" /at ")[1].split(" ")[1]
                 .split("-").length == 2;
+    }
+
+    public String parseToDoInput(String input) {
+        String description = input.substring(4);
+        return description;
+    }
+
+    public String[] parseDeadlineInput(String input) {
+        String[] parsedInput = input.split(" /by ");
+        String by = parsedInput[1];
+        String description = parsedInput[0].substring(8);
+        String[] deadlineParams = {by, description};
+        return deadlineParams;
+    }
+
+    public String[] parseEventInput(String input) {
+        String[] parsedInput = input.split(" /at ");
+        String at = parsedInput[1].split(" ")[0];
+        String timeRange = parsedInput[1].split(" ")[1];
+        String description = parsedInput[0].substring(5);
+        String[] eventParams = {description, at, timeRange};
+        return eventParams;
     }
 }
