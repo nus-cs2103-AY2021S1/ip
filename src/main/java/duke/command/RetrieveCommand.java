@@ -43,20 +43,11 @@ public class RetrieveCommand extends Command {
         try {
             TaskList retrievedTasks = new TaskList();
 
-            for (Task t : tasks.getList()) {
-                if (t instanceof Deadline) {
-                    Deadline d = (Deadline) t;
-                    if (d.getDateTime().toLocalDate().isEqual(date)) {
-                        retrievedTasks.addTask(t);
-                    }
+            tasks.getList().forEach(task -> {
+                if (checkIfSameDate(task)) {
+                    retrievedTasks.addTask(task);
                 }
-                if (t instanceof Event) {
-                    Event e = (Event) t;
-                    if (e.getDateTime().toLocalDate().isEqual(date)) {
-                        retrievedTasks.addTask(t);
-                    }
-                }
-            }
+            });
 
             boolean shouldExit = getIsExit();
             assert !shouldExit : "shouldExit should be false";
@@ -64,6 +55,22 @@ public class RetrieveCommand extends Command {
         } catch (DateTimeParseException e) {
             throw new InvalidTaskDateException();
         }
+    }
+
+    private boolean checkIfSameDate(Task t) {
+        if (t instanceof Deadline) {
+            Deadline d = (Deadline) t;
+            if (d.getDateTime().toLocalDate().isEqual(date)) {
+                return true;
+            }
+        }
+        if (t instanceof Event) {
+            Event e = (Event) t;
+            if (e.getDateTime().toLocalDate().isEqual(date)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     private String createResponseMessage(TaskList tasks) {
