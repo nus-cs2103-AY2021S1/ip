@@ -1,21 +1,26 @@
 import java.io.File;
 import java.io.FileWriter;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.time.LocalDate;
-public class StoreData {
-    public static String filePath = "./data/duke.txt";
+
+public class Storage {
+    private static String filePath;
+
+    public Storage(String filePath){
+        this.filePath = filePath;
+    }
 
     public static void writeToFile(ArrayList<Task> lst){
-       try{
-           FileWriter fw = new FileWriter(filePath);
-           for(Task t : lst){
-               fw.write(t.write() + '\n');
-           }
+        try{
+            FileWriter fw = new FileWriter(filePath);
+            for(Task t : lst){
+                fw.write(t.write() + '\n');
+            }
             fw.close();
-       }catch (Exception e){
-           System.out.println(e);
-       }
+        }catch (Exception e){
+            System.out.println(e);
+        }
     }
 
     static ArrayList<Task> readFile(){
@@ -43,5 +48,4 @@ public class StoreData {
         }
         return tasks;
     }
-
 }

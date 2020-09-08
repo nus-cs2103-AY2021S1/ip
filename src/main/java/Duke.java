@@ -5,6 +5,30 @@ import java.time.LocalDate;
 
 public class Duke {
 
+    private Storage storage;
+    private TaskList tasks;
+    private Ui ui;
+
+    public Duke(String filePath){
+        ui = new Ui();
+        storage = new Storage(filePath);
+        tasks = new TaskList();
+    }
+
+    public void run(){
+        ui.showWelcome();
+        Scanner sc = new Scanner(System.in);
+        String ans = sc.nextLine();
+        while(ans != null){
+            try{
+        }
+
+    }
+
+    public static void main(String[] args){
+        new Duke("./data/duke.txt").run();
+    }
+
     public static void main(String[] args){
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
@@ -19,11 +43,11 @@ public class Duke {
         System.out.println(hello + "\n" + question);
 
         String ans = sc.nextLine();
-        ArrayList<Task> tasks = StoreData.readFile();
+        ArrayList<Task> tasks = Storage.readFile();
         while (ans != null) {
             try {
                 if (ans.equals("list")) {
-                    System.out.println("Here are the tasks n your list:" + "\n");
+                    System.out.println("Here are the tasks in your list:" + "\n");
                     for (int i = 0; i < tasks.size(); i++) {
                         Integer listNum = i + 1;
                         System.out.println(listNum.toString() + "." + tasks.get(i).toString());
@@ -76,7 +100,7 @@ public class Duke {
                 System.out.println(new DukeException().toString());
             }
 
-            StoreData.writeToFile(tasks);
+            Storage.writeToFile(tasks);
             ans = sc.nextLine();
             if (ans.equals("bye")) {
                 break;

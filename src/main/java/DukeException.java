@@ -1,4 +1,4 @@
-public class DukeException {
+public class DukeException{
 
     public String message;
     public boolean isValid;
