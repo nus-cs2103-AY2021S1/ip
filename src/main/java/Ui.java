@@ -18,8 +18,7 @@ public class Ui {
      * @return user input.
      */
     public String receiveUserInput() {
-        String userInput = scanner.nextLine();
-        return userInput;
+        return scanner.nextLine();
     }
 
     /**

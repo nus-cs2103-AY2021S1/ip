@@ -1,3 +1,0 @@
-[T][✘] homework for CS2105
-[E][✓] TN's birthday - 7 Sep 2020
-[D][✓] assignment 1 - 7 Sep 2020

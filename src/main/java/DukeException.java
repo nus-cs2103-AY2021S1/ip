@@ -12,9 +12,4 @@ public class DukeException extends Exception {
     public String getMessage() {
         return exception;
     }
-
-    @Override
-    public String toString() {
-        return "DukeException[" + exception + "]";
-    }
 }
