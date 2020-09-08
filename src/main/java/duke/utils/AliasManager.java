@@ -31,15 +31,25 @@ public class AliasManager {
      */
     public String addAlias(String alias, String commandString) {
         String response;
+
+        // Check that alias is not an existing command.
+        for (Command command : Command.values()) {
+            if (command.name().equalsIgnoreCase(alias)) {
+                return ResourceHandler.getString("aliasManager.aliasConflict");
+            }
+        }
+
         try {
             Command command = Command.valueOf(commandString.toUpperCase());
-            Command previousCommand = aliases.putIfAbsent(alias, command);
+            Command previousCommand = aliases.putIfAbsent(alias.toLowerCase(), command);
+            // If `previousCommand` is not `null`, then the alias is already in use.
             if (previousCommand == null) {
                 response = ResourceHandler.getString("aliasManager.addAlias");
             } else {
                 response = ResourceHandler.getString("aliasManager.aliasInUse");
             }
         } catch (IllegalArgumentException e) {
+            // `commandString` does not correspond to a command.
             response = MessageFormat.format(ResourceHandler.getString("aliasManager.invalidCommand"),
                     commandString);
         }
