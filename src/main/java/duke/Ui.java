@@ -14,7 +14,8 @@ public class Ui {
             + "Send \"find <string of choice>\" to see all related tasks.\n"
             + "Send \"done <item number>\" to mark an item as done\n"
             + "Send \"delete <item number>\" to delete and item from the list\n"
-            + "Send \"bye\" to end our conversation.";
+            + "Send \"bye\" to end our conversation.\n"
+            + "Send \"help\" to end see the commands again.";
 
     /**
      * Prints error message when error occurs while loading data.
@@ -38,5 +39,13 @@ public class Ui {
      */
     public String showOutput(String output) {
         return output;
+    }
+
+    /**
+     * Gets instruction message.
+     * @return The instruction message.
+     */
+    public String getInstructions() {
+        return instructions;
     }
 }

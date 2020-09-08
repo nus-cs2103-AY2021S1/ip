@@ -31,6 +31,8 @@ public class Parser {
             return new AddCommand(convertCommandToEnum(strings[0]), description);
         case BYE:
             return new ExitCommand();
+        case HELP:
+            return new HelpCommand();
         default:
             throw new DukeException("Please key in a correct command.");
         }
@@ -54,6 +56,8 @@ public class Parser {
             return CommandEnum.DEADLINE;
         case "event":
             return CommandEnum.EVENT;
+        case "help":
+            return CommandEnum.HELP;
         default:
             throw new DukeException("Please key in a correct command.");
         }

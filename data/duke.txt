@@ -3,3 +3,6 @@ D | 0 | drink water | 2020-04-01
 T | 0 | make bed
 D | 0 | eat | 2020-12-03
 E | 1 | snack | 2020-07-12
+T | 0 | eat
+T | 0 | wake
+T | 0 | fly
