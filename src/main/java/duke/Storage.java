@@ -31,11 +31,11 @@ public class Storage {
     public TaskList loadList() throws DukeException {
         try {
             TaskList list = new TaskList();
-            //this.file = new File("../data/duke.txt"); // for testcase running
             this.file = new File("./data/duke.txt");
             Scanner sc = new Scanner(this.file);
             while (sc.hasNext()) { // e.g. deadline, 1, description/by date
                 String[] arr = sc.nextLine().split(", ");
+                assert arr.length > 3: "duke.txt data not in correct format";
                 if (arr.length == 3) {
                     list.addTask(arr[0], arr[2], arr[1].equals("1"));
                 } else {

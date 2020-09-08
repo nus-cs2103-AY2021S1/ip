@@ -119,10 +119,10 @@ public class TaskList implements Iterable<Task> {
     public TaskList getTimedTasks(LocalDate date) throws DukeException { // input of form "dd-MM-yyyy"
         try {
             ArrayList<Task> timedTasks = new ArrayList<>(this.list);
-            timedTasks.removeIf(i -> i instanceof Todo);
+            timedTasks.removeIf(i -> !(i instanceof TimedTask));
             Task[] timedTasksArr = timedTasks.toArray(new Task[0]);
             for (Task i : timedTasksArr) {
-                assert i instanceof TimedTask;
+                assert i instanceof TimedTask: "Non-timed tasks found.";
                 if (!((TimedTask) i).getDate().equals(date)) {
                     timedTasks.remove(i);
                 }

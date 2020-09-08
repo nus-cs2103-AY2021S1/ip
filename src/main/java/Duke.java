@@ -12,7 +12,6 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -30,39 +29,39 @@ public class Duke extends Application {
     private Scene scene;
 
     private final Storage storage;
-    private final TaskList list;
+    private final TaskList taskList;
     private final Ui ui;
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
     private Duke(String filePath) {
-        TaskList list1;
+        TaskList taskList;
         this.storage = new Storage(filePath);
         try {
-            list1 = this.storage.loadList();
+            taskList = this.storage.loadList();
         } catch (DukeException e) {
             System.out.println(e.getMessage());
             System.out.println("Creating a new list instead...");
             // perhaps create the specified filePath and request for user confirmation?
-            list1 = new TaskList();
+            taskList = new TaskList();
         }
-        this.list = list1;
+        this.taskList = taskList;
         this.ui = new Ui();
     }
 
     public Duke() {
-        TaskList list1;
+        TaskList taskList;
         this.storage = new Storage("./data/duke.txt");
         try {
-            list1 = this.storage.loadList();
+            taskList = this.storage.loadList();
         } catch (DukeException e) {
             System.out.println(e.getMessage());
             System.out.println("Creating a new list instead...");
             // perhaps create the specified filePath and request for user confirmation?
-            list1 = new TaskList();
+            taskList = new TaskList();
         }
-        this.list = list1;
+        this.taskList = taskList;
         this.ui = new Ui();
     }
 
@@ -70,7 +69,6 @@ public class Duke extends Application {
      * Starts the Duke ChatBot with storage file at ./data/duke.txt.
      */
     public static void main(String[] args) {
-        // Duke chatBot = new Duke("../data/duke.txt");
         Duke chatBot = new Duke("./data/duke.txt");
         chatBot.run();
     }
@@ -83,7 +81,7 @@ public class Duke extends Application {
             try {
                 String query = ui.readLine();
                 Command c = Parser.parse(query);
-                String response = c.execute(this.list, this.ui, this.storage);
+                String response = c.execute(this.taskList, this.ui, this.storage);
                 System.out.println(response);
                 isExit = c.isExit();
             } catch (DukeException e) {
@@ -202,7 +200,8 @@ public class Duke extends Application {
         String response;
         try {
             Command c = Parser.parse(input);
-            response = c.execute(this.list, this.ui, this.storage);
+            assert c != null: "No command available";
+            response = c.execute(this.taskList, this.ui, this.storage);
         } catch (DukeException e) {
             response = ui.getError(e);
         }
