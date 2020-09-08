@@ -28,8 +28,8 @@ public class AddCommand extends Command {
      * @param storage Storage to update the text file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.printString(getExecuteString(tasks, ui, storage));
+    public void execute(TaskList tasks, TaskList archives, Ui ui, Storage storage) {
+        ui.printString(getExecuteString(tasks,archives, ui, storage));
     }
 
     /**
@@ -41,7 +41,7 @@ public class AddCommand extends Command {
      * @return String of message of the command executed
      */
     @Override
-    public String getExecuteString(TaskList tasks, Ui ui, Storage storage) {
+    public String getExecuteString(TaskList tasks, TaskList archives, Ui ui, Storage storage) {
         tasks.addTask(task);
         storage.writeToMain(tasks.getTasks());
         return ui.getAddTaskString(task, tasks.size());

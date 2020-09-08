@@ -111,7 +111,7 @@ public class Storage {
                 tasks.add(new Event(arr[2], date, isTime, isDone));
                 break;
             default:
-                        assert false;
+                assert false;
             }
         } catch (ParseException e) {
             throw e;
