@@ -40,6 +40,9 @@ public class AddEventCommand extends Command {
             }
             String[] holder = this.getCommand().split("event")[1].split("/at ");
             String description = holder[0].trim();
+            if (detectDuplicate(list, description)) {
+                throw new DukeException("☹ OOPS!!! This is a duplicated task!.");
+            }
             String at = holder[1].trim();
             Event task = new Event(description, at);
 

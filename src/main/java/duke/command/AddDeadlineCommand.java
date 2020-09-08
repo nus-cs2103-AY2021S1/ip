@@ -38,6 +38,9 @@ public class AddDeadlineCommand extends Command {
             }
             String[] holder = this.getCommand().split("deadline")[1].split("/by ");
             String description = holder[0].trim();
+            if (detectDuplicate(list, description)) {
+                throw new DukeException("☹ OOPS!!! This is a duplicated task!.");
+            }
             String by = holder[1].trim();
             Deadline task = new Deadline(description, by);
             list.add(task);

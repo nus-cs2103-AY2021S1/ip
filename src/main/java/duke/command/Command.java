@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.Ui;
+import duke.task.Task;
 import duke.task.TaskList;
 
 /**
@@ -47,6 +48,22 @@ public abstract class Command {
      */
     public String execute(TaskList list, Ui ui, Storage saveData) {
         return null;
+    }
+
+    /**
+     * Method check for duplicate task
+     *
+     * @param list     TaskList object from the current Duke instance
+     * @param description   description of current task
+     * @return true if task is duplicated otherwise false
+     */
+    public boolean detectDuplicate(TaskList list, String description) {
+        for (Task task: list.getList()) {
+            if (description.equals(task.getDescription())) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
