@@ -10,7 +10,7 @@ import java.util.stream.Stream;
  */
 public class Storage {
 
-    public Path path;
+    private Path path;
 
     public Storage(Path path) {
         this.path = path;
@@ -23,6 +23,8 @@ public class Storage {
      */
     public ArrayList<Task> showTasks() throws DukeException {
         try {
+
+            assert path != null : "Path cannot be null";
 
             if (!Files.exists(path)) {
                 Files.createFile(path);
@@ -70,8 +72,8 @@ public class Storage {
 
     /**
      * Saves the tasks to the hard disk.
-     * @param taskList containing the tasks.
-     * @throws DukeException with the failure to save message
+     * @param taskList arrayList containing the tasks.
+     * @throws DukeException Exception with the "failure to save" message
      */
     public void saveTasks(ArrayList<Task> taskList) throws DukeException {
 
