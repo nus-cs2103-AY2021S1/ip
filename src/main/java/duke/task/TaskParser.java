@@ -31,7 +31,7 @@ public class TaskParser {
      *
      * @param taskDescription description of the task, starting with the type as the first word.
      * @return task corresponding to the description given.
-     * @throws DukeException if the commaand given is not a valid type.
+     * @throws DukeException if the command given is not a valid type.
      */
     public static Task parse(String taskDescription) throws DukeException {
         String[] details = taskDescription.split(" ", 2);
