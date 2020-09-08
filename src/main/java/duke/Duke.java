@@ -58,14 +58,16 @@ public class Duke {
      * It continuously queries the ui for the next user response and responds appropriately.
      */
     public void run() {
+        assert ui != null;
         ui.startup();
 
         boolean isExit = false;
         while (!isExit) {
             try {
                 String userInput = ui.getInput();
-                assert !userInput.isBlank();
                 Command command = CommandParser.parse(userInput);
+                assert command != null;
+
                 command.execute(taskList, ui, storage);
                 isExit = command.isExit();
             } catch (DukeException e) {
