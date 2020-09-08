@@ -26,6 +26,7 @@ public class Parser {
      */
     public static Command parse(String nextCommand) throws DukeException {
         String[] nextCommandArr = nextCommand.split(" ", 2);
+        assert nextCommandArr.length <= 2 : "The length of next command array cannot be more than 2";
         Command next;
         EnumCommand enumCommand;
         String command = nextCommandArr[0];
@@ -76,6 +77,7 @@ public class Parser {
         default:
             throw new DukeException("Sorry, I don't know what that means~");
         }
+        assert next != null : "Command cannot be empty";
         return next;
     }
 }
