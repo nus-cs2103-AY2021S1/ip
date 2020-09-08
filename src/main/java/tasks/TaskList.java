@@ -7,9 +7,9 @@ import java.util.stream.IntStream;
 
 import command.Command;
 import mugexception.MugException;
-import validator.Validator;
 import storage.Storage;
 import storage.UndoStorage;
+import validator.Validator;
 
 /**
  * Operation for the list of Task.

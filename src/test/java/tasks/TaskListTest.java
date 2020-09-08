@@ -48,7 +48,7 @@ public class TaskListTest {
         String expResult = "Here is your tasks:\n"
                 + "1. [T][\u2718] read book\n"
                 + "2. [T][\u2718] return book\n"
-                + "3. [T][\u2718] borrow book";
+                + "3. [T][\u2718] borrow book\n";
         assertEquals(expResult, actResult);
     }
 
