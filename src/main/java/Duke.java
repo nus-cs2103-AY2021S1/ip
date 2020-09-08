@@ -16,8 +16,9 @@ public class Duke {
     public Duke() {}
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Generates response to user input.
+     * @param in the user input string.
+     * @return response to user input.
      */
     String getResponse(String in) {
         if (in.equals("bye")) {
@@ -30,8 +31,10 @@ public class Duke {
             storage.clear();
             tasks = new TaskList(new ArrayList<Task>());
         } else if (cmd == Command.list) {
+            assert tasks != null : "Tasks is null";
             return Ui.print(tasks.toString());
         } else if (cmd == Command.find) {
+            assert in.length() >= 5 : "input is too short";
             String keyword = in.substring(5);
             if (keyword.length() == 0) {
                 return Ui.errorMsg("you haven't entered a search keyword!");
@@ -41,6 +44,7 @@ public class Duke {
         } else if (cmd == Command.done) {
             int current;
             try {
+                assert in.length() >= 5 : "input is too short";
                 current = Integer.parseInt(in.substring(5));
             } catch (Exception e){
                 return Ui.errorMsg("you haven't entered a task number to complete!");
@@ -51,6 +55,7 @@ public class Duke {
                 return Ui.errorMsg("that is not the number of a task in the list!");
             } else {
                 task = tasks.get(current);
+                assert task != null : "task is null";
                 if (task.done) {
                     return Ui.errorMsg("you have already completed " + task.task + "!");
                 }
@@ -61,6 +66,7 @@ public class Duke {
         } else if (cmd == Command.delete){
             int current;
             try {
+                assert in.length() >= 7 : "input is too short";
                 current = Integer.parseInt(in.substring(7));
             } catch (Exception e){
                 return Ui.errorMsg("you haven't entered a task number to delete!");
@@ -71,6 +77,7 @@ public class Duke {
                 return Ui.errorMsg("that is not the number of a task in the list!");
             } else {
                 task = tasks.get(current);
+                assert task != null : "task is null";
                 tasks.delete(current);
                 return Ui.print("i've removed the following task from the list:\n\t" + task + "\nnow you have " + tasks.size() + " items in your tasklist.");
 
@@ -81,6 +88,7 @@ public class Duke {
                 tasks.add(temp);
                 return Ui.print("i've added this task for you: \n\t" + temp + "\nnow you have " + tasks.size() + " items in your tasklist.");
             } else {
+                assert Parser.msg != null : "parser error message is null";
                 return Parser.msg;
             }
         } else {
