@@ -12,16 +12,6 @@ import duke.task.Task;
  */
 public class TaskList extends ArrayList<Task> {
 
-    /** List of tasks stored */
-    protected List<Task> listOfTasks;
-
-    /**
-     * Constructs a new task list.
-     */
-    public TaskList() {
-        listOfTasks = new ArrayList<>();
-    }
-
     /**
      * Returns the task at the provided index.
      * Note that index starts at 1.
@@ -31,7 +21,7 @@ public class TaskList extends ArrayList<Task> {
      */
     @Override
     public Task get(int index) {
-        return listOfTasks.get(index - 1);
+        return get(index - 1);
     }
 
     /**
@@ -43,23 +33,14 @@ public class TaskList extends ArrayList<Task> {
      */
     @Override
     public Task remove(int index) {
-        return listOfTasks.remove(index - 1);
-    }
-
-    /**
-     * Returns the size of the task list.
-     *
-     * @return size of task list.
-     */
-    public int size() {
-        return listOfTasks.size();
+        return remove(index - 1);
     }
 
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
         int count = 1;
-        for (Task task : listOfTasks) {
+        for (Task task : this) {
             if (count != 1) {
                 builder.append('\n');
             }
@@ -74,7 +55,7 @@ public class TaskList extends ArrayList<Task> {
      * @return string informing the user about the number of tasks in the list.
      */
     public String createTaskNumberCountMessage() {
-        return "Now you have " + listOfTasks.size() + " tasks in the list.";
+        return "Now you have " + size() + " tasks in the list.";
     }
 
 }
