@@ -19,6 +19,35 @@ public class Duke {
     private TaskList taskList;
     private Ui ui;
 
+    public Duke() {
+        String filePath = "./data";
+        String fileName = "data.txt";
+        this.ui = new Ui();
+        this.storage = new Storage(filePath + "/" + fileName);
+        try {
+            File dir = new File(filePath);
+            File file = new File(filePath, fileName);
+            if (dir.exists() && file.exists()) {
+                this.taskList = new TaskList(storage.load());
+            } else if (dir.exists()) {
+                // case where only folder exist
+                storage.createFile();
+                this.taskList = new TaskList();
+            } else {
+                // case where folder does not exist
+                dir.mkdir();
+                storage.createFile();
+                this.taskList = new TaskList();
+            }
+        } catch (FileNotFoundException e) {
+            ui.printException(e);
+            System.exit(1);
+        } catch (IOException e) {
+            ui.printException(e);
+            System.exit(1);
+        }
+    }
+
     private String printTasks(TaskList tasklist, boolean isFind) {
         String output = String.format("Here are the %stasks in your list:", isFind ? "matching " : "");
         for (int i = 0; i < tasklist.size(); i++) {
@@ -29,7 +58,7 @@ public class Duke {
         return output;
     }
 
-    public void execute(Command command) {
+    public String execute(Command command) {
         String output = "";
         int commandType = command.getCommandType();
         boolean print = true;
@@ -50,7 +79,7 @@ public class Duke {
             storage.save(taskList);
             print = false;
         } else if (commandType == Command.INVALID) {
-            print = false;
+            output = "Sorry, I don't understand that command..";
         } else if (commandType == Command.FIND) {
             String keyword = command.getAdditionalInfo().getDescription();
             TaskList tempTaskList = new TaskList();
@@ -78,63 +107,41 @@ public class Duke {
             output += "Got it. I've added this task:\n  " + newTask;
             output += "\nNow you have " + taskList.size() + " tasks in the list.";
         }
-        if (print) {
-            ui.printMessage(output);
-        }
+
+        return print ? output : "";
     }
 
-    private void run() {
-        start();
-        runLoopUntilExit();
-        exit();
-    }
-
-    private void runLoopUntilExit() {
+    String getResponse(String input) {
         Command command;
-        do {
-            String input = ui.getUserInput();
-            command = Parser.parse(input);
-            this.execute(command);
-        } while (command.getCommandType() != Command.EXIT);
-    }
-
-    private void start() {
-        String filePath = "./data";
-        String fileName = "data.txt";
-        try {
-            this.ui = new Ui();
-            this.storage = new Storage(filePath + "/" + fileName);
-            File dir = new File(filePath);
-            File file = new File(filePath, fileName);
-            if (dir.exists() && file.exists()) {
-                this.taskList = new TaskList(storage.load());
-            } else if (dir.exists()) {
-                // case where only folder exist
-                storage.createFile();
-                this.taskList = new TaskList();
-            } else {
-                // case where folder does not exist
-                dir.mkdir();
-                storage.createFile();
-                this.taskList = new TaskList();
-            }
-            ui.showWelcomeMessage();
-        } catch (FileNotFoundException e) {
-            ui.showStartFailedMessage();
-            ui.printException(e);
-            System.exit(1);
-        } catch (IOException e) {
-            ui.printException(e);
-            System.exit(1);
+        command = Parser.parse(input);
+        if (command.getCommandType() == Command.EXIT) {
+            System.exit(0);
+        } else {
+            return this.execute(command);
         }
+        return "";
     }
 
-    private void exit() {
-        ui.showGoodbyeMessage();
-        System.exit(0);
-    }
+//    private void run() {
+//        runLoopUntilExit();
+//        exit();
+//    }
+
+//    private void runLoopUntilExit() {
+//        Command command;
+//        do {
+//            String input = ui.getUserInput();
+//            command = Parser.parse(input);
+//            this.execute(command);
+//        } while (command.getCommandType() != Command.EXIT);
+//    }
+
+//    private void exit() {
+//        ui.showGoodbyeMessage();
+//        System.exit(0);
+//    }
 
     public static void main(String[] args) {
-        new Duke().run();
+        new Duke();
     }
 }

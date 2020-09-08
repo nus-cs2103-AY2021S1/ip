@@ -11,6 +11,7 @@ public class Ui {
 
     /**
      * Creates a 'frame' for the output that is being printed
+     *
      * @param s The output that is going to get printed.
      */
     public static void printMessage(String s) {
@@ -21,10 +22,11 @@ public class Ui {
 
     /**
      * Prints message in exception.
+     *
      * @param e Duke Exception
      */
     public static void printException(Exception e) {
-        String errorMessage = "☹ OOPS!!! " + e.getMessage();
+        String errorMessage = "Something went wrong.. Exception: " + e.getMessage();
         printMessage(errorMessage);
     }
 
@@ -46,6 +48,7 @@ public class Ui {
 
     /**
      * Returns what the user input.
+     *
      * @return One line of user input.
      */
     public String getUserInput() {
