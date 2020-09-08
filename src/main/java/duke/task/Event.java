@@ -21,10 +21,23 @@ public class Event extends Task {
         this.date = date;
     }
 
+    /**
+     * Creates a Event object
+     * @param task Task to be added
+     * @param date Date to be added
+     * @return Event
+     */
     public static Event createEvent(String task, LocalDateTime date) {
         return new Event(task, date);
     }
 
+    /**
+     * Returns a string representation of a Deadline Object
+     * [E][X]** (task) at: (date) for tasks marked as Important
+     * [E][X] (task) at: (date) for tasks not marked as Important
+     * X for Undone Task, O for Done Task.
+     * @return String
+     */
     @Override
     public String toString() {
         String done = this.done ? "O" : "X";
