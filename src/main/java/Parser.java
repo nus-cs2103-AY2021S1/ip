@@ -9,7 +9,7 @@ public class Parser {
     /**
      * Executes the relevant functions based on the given user command.
      *
-     * @return the output from executing a command.
+     * @return the output from executing the command.
      */
     public String parseCommands(TaskList tasks, Ui ui, String command) throws DukeException {
         String output;

@@ -1,9 +1,10 @@
 import java.nio.file.Paths;
+
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 
 public class Duke {
-    private static final String DATABASE_DIRECTORY_PATH = Paths.get(System.getProperty("user.dir"),"data").toString();
+    private static final String DATABASE_DIRECTORY_PATH = Paths.get(System.getProperty("user.dir"), "data").toString();
     private Parser parser;
     private Storage storage;
     private TaskList tasks;
@@ -31,7 +32,7 @@ public class Duke {
     /**
      * Creates a label with the specified text and adds it to the dialog container.
      *
-     * @param text String containing text to add
+     * @param text String containing text to add.
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
@@ -41,6 +42,11 @@ public class Duke {
         return textToAdd;
     }
 
+    /**
+     * Returns the response of the bot depending on the user input.
+     *
+     * @return the response of the bot.
+     */
     public String getResponse(String input) {
         try {
             String output = this.parser.parseCommands(this.tasks, this.ui, input);

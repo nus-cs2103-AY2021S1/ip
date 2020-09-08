@@ -13,9 +13,9 @@ public class Deadline extends Task {
 
     /**
      * Returns the deadline of the task.
-     * Deadline is returned in the format MMM dd yyyy h.mma e.g. Sep 04 2020 4.00pm
+     * Deadline is returned in the format MMM dd yyyy h.mma e.g. Sep 04 2020 4.00pm.
      *
-     * @return deadline of the task
+     * @return deadline of the task.
      */
     public String getDeadline() {
         return this.deadline;
