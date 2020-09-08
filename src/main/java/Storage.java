@@ -16,6 +16,7 @@ public class Storage {
      * @param filePath the path of data file.
      */
     public Storage(String filePath) {
+        assert filePath.length() > 0 : "File Path should not be empty";
         this.filePath = filePath;
     }
 
@@ -51,8 +52,9 @@ public class Storage {
      * @param tasks an updated list of tasks.
      */
     public void save(TaskList tasks) {
+        assert tasks != null : "There is not task to be saved";
         try {
-            FileWriter fw = new FileWriter("./data/duke.txt");
+            FileWriter fw = new FileWriter(filePath);
             for (Task task : tasks.getTaskList()) {
                 fw.write(task.toStringOfDatabase() + "\n");
             }

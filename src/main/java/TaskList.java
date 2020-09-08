@@ -18,6 +18,7 @@ public class TaskList {
      * @param tasks list of existing tasks.
      */
     public TaskList(ArrayList<Task> tasks) {
+        assert tasks != null : "Null should not be passed in to the constructor of TaskList.";
         this.tasks = tasks;
     }
 
