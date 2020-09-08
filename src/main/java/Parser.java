@@ -64,9 +64,13 @@ public class Parser {
                 description += command[i] + " ";
             }
             Task task = new Todo(description);
-            duke.getTasks().addTask(task);
-            duke.getStorage().writeFile(duke.getTasks().getTaskList());
-            return duke.getUi().printAddTask(task, duke.getTasks());
+            if (detectDuplicates(task.toString(), duke.getTasks())) {
+                return "Duke has detected duplicates ._.";
+            } else {
+                duke.getTasks().addTask(task);
+                duke.getStorage().writeFile(duke.getTasks().getTaskList());
+                return duke.getUi().printAddTask(task, duke.getTasks());
+            }
         } else if (command[0].equals("deadline")) {
             String description = "";
             String date = "";
@@ -87,9 +91,13 @@ public class Parser {
                 }
             }
             Task task = new Deadline(description, LocalDate.parse(date));
-            duke.getTasks().addTask(task);
-            duke.getStorage().writeFile(duke.getTasks().getTaskList());
-            return duke.getUi().printAddTask(task, duke.getTasks());
+            if (detectDuplicates(task.toString(), duke.getTasks())) {
+                return "Duke has detected duplicates ._.";
+            } else {
+                duke.getTasks().addTask(task);
+                duke.getStorage().writeFile(duke.getTasks().getTaskList());
+                return duke.getUi().printAddTask(task, duke.getTasks());
+            }
         } else if (command[0].equals("event")) {
             String description = "";
             String date = "";
@@ -109,13 +117,26 @@ public class Parser {
                     }
                 }
             }
-
             Task task = new Event(description, LocalDate.parse(date));
-            duke.getTasks().addTask(task);
-            duke.getStorage().writeFile(duke.getTasks().getTaskList());
-            return duke.getUi().printAddTask(task, duke.getTasks());
+            if (detectDuplicates(task.toString(), duke.getTasks())) {
+                return "Duke has detected duplicates ._.";
+            } else {
+                duke.getTasks().addTask(task);
+                duke.getStorage().writeFile(duke.getTasks().getTaskList());
+                return duke.getUi().printAddTask(task, duke.getTasks());
+            }
         }
         return "";
+    }
+    
+    public boolean detectDuplicates(String str, TaskList taskList) {
+        for (int i = 0; i < taskList.getSize(); i++) {
+            boolean isDuplicate = str.equals(taskList.getTask(i).toString());
+            if (isDuplicate) {
+                return true;
+            }
+        }
+        return false;
     }
     
     /**
