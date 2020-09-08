@@ -42,9 +42,18 @@ public class TaskList {
         if (event.isEmpty()) {
             throw new IllegalArgumentException("☹ OOPS!!! Missing arguments for event task");
         }
-        String newDesc = event.substring(0, event.indexOf('/') - 1);
-        String time = event.substring(event.indexOf('/') + 4);
-        tasks.add(new Event(newDesc, time));
+        if (event.contains("/between")) {
+            String[] elements = event.split("/between");
+            String[] times = elements[1].split("and");
+            String newDesc = elements[0].trim();
+            String happenAt = times[0].trim();
+            String endAt = times[1].trim();
+            tasks.add(new Event(newDesc, happenAt, endAt));
+        } else {
+            String newDesc = event.substring(0, event.indexOf('/') - 1);
+            String time = event.substring(event.indexOf('/') + 4);
+            tasks.add(new Event(newDesc, time));
+        }
     }
 
     /**

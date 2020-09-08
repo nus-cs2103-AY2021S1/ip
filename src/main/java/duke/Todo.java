@@ -4,7 +4,12 @@ package duke;
  * Represent an todo with no deadline
  */
 public class Todo extends Task {
+
     public Todo(String desc) {
+        super(desc);
+    }
+
+    public Todo(String desc, String rawStartAt, String rawEndAt) {
         super(desc);
     }
 
