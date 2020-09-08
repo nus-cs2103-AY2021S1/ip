@@ -42,6 +42,7 @@ public class TaskList {
      */
 
     public void addTask(Task task) {
+        assert (task != null);
         this.tasks.add(task);
     }
 

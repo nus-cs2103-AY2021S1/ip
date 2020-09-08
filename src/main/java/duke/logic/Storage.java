@@ -75,6 +75,7 @@ public class Storage {
      */
 
     public void save(TaskList tasks) {
+        assert (tasks != null);
         String toWrite = tasks.stream()
                 .map(Task::toSave)
                 .reduce((x, y) -> x + "\n" + y)
