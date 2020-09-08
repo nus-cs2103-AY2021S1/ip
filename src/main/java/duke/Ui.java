@@ -292,4 +292,31 @@ public class Ui {
     public String outputFindError() {
         return "Key in something for me to find!";
     }
+
+    public String outputHelp() {
+        return "Here's how I can help:"
+                + "\nType: 'list'"
+                + "\n>> Shows your current todo list"
+                + "\nType: 'todo <task name>'"
+                + "\n>> Add <task name> as a todo task into the list"
+                + "\n>>eg: todo learn cooking"
+                + "\nType: 'deadline <task name> /by <date> <time>"
+                + "\n>> Add <task name> that is due by <date> at <time> as a deadline task into the list"
+                + "\n>> eg: deadline CS2103T project /by 2020-08-26 23:59"
+                + "\nType: 'event <task name> /at <date>'"
+                + "\n>> Add <task name> that is held at <date> as a event task into the list"
+                + "\n>> eg: event welcome tea /at 2020-08-29"
+                + "\nType: 'done <number>'"
+                + "\n>> Mark the <number> task in the list as done"
+                + "\n>> eg: done 2"
+                + "\nType: 'delete <number>'"
+                + "\n>> Deletes the <number> task in the list"
+                + "\n>> eg: delete 2"
+                + "\nType: 'check <date>'"
+                + "\n>> Check what task has not completed on <date>"
+                + "\n>> eg: check 2020-08-08"
+                + "\nType: 'find <keyword>'"
+                + "\n>> Find any task matching the word <keyword>"
+                + "\n>> eg: check tea";
+    }
 }
