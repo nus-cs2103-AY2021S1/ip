@@ -17,9 +17,9 @@ public abstract class Task {
     protected static final DateTimeFormatter SAVE_DATE_FORMATTER = DateTimeFormatter.ofPattern("yyyy-MM-dd");
     protected static final DateTimeFormatter TIME_FORMATTER = DateTimeFormatter.ofPattern("HH:mm");
 
-    private Optional<LocalDate> date;
-    private final String taskName;
-    private boolean isDone;
+    protected Optional<LocalDate> date;
+    protected final String taskName;
+    protected boolean isDone;
 
     protected Task(String name) {
         this.taskName = name;

@@ -135,8 +135,13 @@ public class TaskList {
      * @param index The index of task that is concerned.
      * @return String representation of the task at concerned.
      */
-    public String getTaskStatus(int index) {
-        return tasks.get(index - 1).toString();
+    public String getTaskStatus(int index) throws DukeException {
+        try {
+            return tasks.get(index - 1).toString();
+        } catch (IndexOutOfBoundsException err) {
+            throw new DukeException("Please key in an index between 1 and " + tasks.size());
+        }
+
     }
 
     /**
