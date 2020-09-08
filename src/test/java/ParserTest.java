@@ -14,7 +14,7 @@ import duke.task.TaskType;
 public class ParserTest {
     @Test
     public void simpleTodo_todoReadBook_success() {
-        assertEquals(new Command(TaskType.TODO, "read book"), Parser.parse("todo read book"));
+        assertEquals(new Command(TaskType.TODO, "read book", 2), Parser.parse("todo read book /takes 2 hours"));
     }
 
     @Test
