@@ -45,6 +45,7 @@ public class TaskList {
      * @return task at index num.
      */
     public Task get(int num) {
+        assert num >= 0 && num < taskList.size() : "Unable to retrieve task";
         return taskList.get(num);
     }
 
@@ -53,6 +54,7 @@ public class TaskList {
      * @param num index.
      */
     public void remove(int num) {
+        assert num >= 0 && num < taskList.size() : "Removing unsuccessful";
         taskList.remove(num);
     }
 
@@ -62,6 +64,7 @@ public class TaskList {
      */
     public void addToDo(Todo newToDo) {
         this.taskList.add(newToDo);
+        assert this.taskList.size() >= 1 : "Adding unsuccessful";
     }
 
     /**
@@ -70,6 +73,7 @@ public class TaskList {
      */
     public void addDeadline(Deadline newDdl) {
         this.taskList.add(newDdl);
+        assert this.taskList.size() >= 1 : "Adding unsuccessful";
     }
 
     /**
@@ -78,5 +82,6 @@ public class TaskList {
      */
     public void addEvent(Event newEvent) {
         this.taskList.add(newEvent);
+        assert this.taskList.size() >= 1 : "Adding unsuccessful";
     }
 }
