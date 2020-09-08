@@ -108,6 +108,8 @@ public class Duke {
                     break;
                 }
 
+                assert !command.isByeCommand();
+
             } catch (DukeInputException e) {
                 // Display Exception without terminating loop if one is thrown.
                 ui.displayException(e);

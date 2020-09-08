@@ -63,6 +63,8 @@ public class EventCommand extends ComplexCommand {
                     + "Please add a /at timing to the task.");
         }
 
+        assert splitParams.length == 2;
+
         return splitParams;
 
     }

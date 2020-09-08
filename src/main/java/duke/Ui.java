@@ -60,6 +60,8 @@ public class Ui {
         if (!this.outputHandler.isEmpty()) {
             this.outputHandler.flush();
         }
+
+        assert this.outputHandler.isEmpty();
     }
 
     /**
