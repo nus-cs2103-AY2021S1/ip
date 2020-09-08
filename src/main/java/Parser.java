@@ -26,8 +26,10 @@ public class Parser {
             dateString = dateString.replaceAll("\\/", "-");
         }
         String[] dateStringArr = dateString.split("-");
+        assert dateStringArr.length == 3: "date string is supposed to have 3 components (yyyy-mm-dd)";
         dateString = "";
         for (int i = 0; i < dateStringArr.length; i++) {
+            assert dateStringArr[i].length() > 0 : "each component of date string needs to have a non-zero length";
             if (dateStringArr[i].length() < 2) {
                 dateStringArr[i] = "0" + dateStringArr[i];
             }
@@ -48,6 +50,7 @@ public class Parser {
      */
     public static String handleDoneInput(final String input,
             final TaskList taskList) throws DukeException {
+        assert input.startsWith("done") : "input supposed to start with done";
         if (!input.substring(DONE).trim().isEmpty()
                 //to make sure the input after "done" is a number
                 && input.substring(DONE).trim().matches("[0-9]+")) {
@@ -73,6 +76,7 @@ public class Parser {
      */
     public static String handleDeleteInput(final String input,
                      final TaskList taskList) throws DukeException {
+        assert input.startsWith("delete") : "input supposed to start with delete";
         if (!input.substring(DELETE).trim().isEmpty()
                 //to make sure the input after "done" is a number
                 && input.substring(DELETE).trim().matches("[0-9]+")) {
@@ -99,6 +103,7 @@ public class Parser {
      */
     private static String handleTodoInput(final String input,
                     final TaskList taskList) throws DukeException {
+        assert input.startsWith("todo") : "input supposed to start with todo";
         //to make sure to do task is not empty
         if (!input.substring(TODO).trim().isEmpty()) {
            return taskList.addTodo(input);
@@ -116,6 +121,7 @@ public class Parser {
      */
     private static String handleDeadlineInput(final String input,
                         final TaskList taskList) throws DukeException {
+        assert input.startsWith("deadline") : "input supposed to start with deadline";
         //to make sure deadline is not empty
         if (!input.substring(DEADLINE).trim().isEmpty()
                 //to make sure deadline contains /by
@@ -129,8 +135,10 @@ public class Parser {
             String by = descriptionAndTime.trim().split("/by ")[1].trim();
             try {
                 if (by.contains(" ")) { //user gave a time input
-                    String dateString = by.split(" ")[0].trim();
-                    String timeString = by.split(" ")[1].trim();
+                    String[] byAfterSplit = by.split(" ");
+                    assert byAfterSplit.length == 2 : "deadline should contain a date and a time, since it contains a whitespace";
+                    String dateString = byAfterSplit[0].trim();
+                    String timeString = byAfterSplit[1].trim();
                     dateString = formatDate(dateString);
                     LocalDate d1 = LocalDate.parse(dateString);
                     if (timeString.length() == 4) {
@@ -175,6 +183,7 @@ public class Parser {
      */
     private static String handleEventInput(final String input,
                          final TaskList taskList) throws DukeException {
+        assert input.startsWith("event") : "input is supposed to start with event";
         //to make sure event is not empty
         if (!input.substring(EVENT).trim().isEmpty()
                 //to make sure event contains at
@@ -184,12 +193,16 @@ public class Parser {
                 //to make sure event contains a time/date
                 && !input.substring(EVENT).trim().endsWith("/at")) {
             String descriptionAndTime = input.substring(EVENT);
-            String description = descriptionAndTime.split("/at ")[0];
-            String at = descriptionAndTime.split("/at ")[1].trim();
+            String[] descriptionAndTimeAfterSplit = descriptionAndTime.split("/at ");
+            assert descriptionAndTimeAfterSplit.length == 2 : "descriptionAndTimeAfterSplit should have length of 2";
+            String description = descriptionAndTimeAfterSplit[0];
+            String at = descriptionAndTimeAfterSplit[1].trim();
             try {
                 if (at.contains(" ")) { //user gave a time input
-                    String dateString = at.split(" ")[0].trim();
-                    String timeString = at.split(" ")[1].trim();
+                    String[] atAfterSplit = at.split(" ");
+                    assert atAfterSplit.length == 2 : "atAfterSplit should have length of 2";
+                    String dateString = atAfterSplit[0].trim();
+                    String timeString = atAfterSplit[1].trim();
                     dateString = formatDate(dateString);
                     LocalDate d2 = LocalDate.parse(dateString);
                     if (timeString.length() == 4) {
@@ -234,6 +247,7 @@ public class Parser {
      */
     public static TaskList handleFindInput(final String input,
                        final TaskList taskList) throws DukeException {
+        assert input.startsWith("find") : "input should start with find";
         //to make sure to do task is not empty
         if (!input.substring(FIND).trim().isEmpty()) {
            return taskList.findTasks(input.substring(FIND).trim());
@@ -250,6 +264,10 @@ public class Parser {
      */
     public static TaskList addTaskFromFile(final String taskString,
                                            final TaskList list) {
+        assert Character.toString(taskString.charAt(0)).equals("[") :  "first char should be [";
+        assert Character.toString(taskString.charAt(2)).equals("]") :  "third char should be ]";
+        assert Character.toString(taskString.charAt(3)).equals("[") :  "fourth char should be [";
+        assert Character.toString(taskString.charAt(5)).equals("]") :  "sixth char should be ]";
         if (Character.toString(taskString.charAt(1)).equals("T")) {
             if (Character.toString(taskString.charAt(4)).equals("0")) {
                 list.add(new Todo(taskString.substring(6).trim()));
