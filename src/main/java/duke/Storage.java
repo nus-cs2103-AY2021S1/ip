@@ -24,6 +24,8 @@ public class Storage {
      */
     private String filepath;
 
+    public Storage() {}
+
     /**
      * Constructs a new Storage that reads/writes the file in the specified filepath.
      * @param filepath The source/destination filepath
@@ -32,15 +34,9 @@ public class Storage {
         this.filepath = filepath;
     }
 
-    /**
-     * Loads a list of tasks from the source file, if it exists. Otherwise, creates a file
-     * at the filepath and returns an empty list.
-     * @return A list of tasks parsed from the source file, if any; otherwise, an empty list
-     * @throws DukeException If an I/O error occurs when trying to create the file and parent
-     * folders, if any
-     */
-    public ArrayList<Task> load() throws DukeException {
+    public File makeFile(String filepath) throws DukeException {
         try {
+            this.filepath = filepath;
             String parentFilepath = Path.of(filepath).getParent().toString();
             File parentFolder = new File(parentFilepath);
             if (!parentFolder.exists()) {
@@ -50,6 +46,22 @@ public class Storage {
             if (!taskFile.exists()) {
                 taskFile.createNewFile();
             }
+            return taskFile;
+        } catch (IOException e) {
+            throw DukeException.FILE_LOADING_EXCEPTION;
+        }
+    }
+    /**
+     * Loads a list of tasks from the source file, if it exists. Otherwise, creates a file
+     * at the filepath and returns an empty list.
+     * @return A list of tasks parsed from the source file, if any; otherwise, an empty list
+     * @throws DukeException If an I/O error occurs when trying to create the file and parent
+     * folders, if any
+     */
+    public ArrayList<Task> loadFromFilepath(String filepath) throws DukeException {
+        try {
+            this.filepath = filepath;
+            File taskFile = new File(filepath);
             Scanner scanner = new Scanner(taskFile);
             ArrayList<Task> tasks = new ArrayList<>();
             while (scanner.hasNext()) {
@@ -67,13 +79,15 @@ public class Storage {
      * If an I/O error occurs, shows an error message.
      * @param line A line of text to be appended to the destination file
      */
-    public void addLine(String line) {
+    public void addLine(String line) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(filepath, true);
             fileWriter.write(line + System.lineSeparator());
             fileWriter.close();
+        } catch (NullPointerException e) {
+            throw DukeException.FILE_LOADING_EXCEPTION;
         } catch (IOException e) {
-            System.out.println("Encountered an unexpected error with the file :(");
+            throw DukeException.FILE_NO_ACCESS_EXCEPTION;
         }
     }
 

@@ -17,19 +17,23 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        String output;
         switch (this.commandType) {
         case DONE:
             Task doneTask = tasks.markTaskAsDone(index);
-            ui.showDoneTask(doneTask.toString());
+            output = ui.showDoneTask(doneTask.toString());
             storage.replaceLine(index, doneTask.toFileString());
             break;
         case DELETE:
             Task deletedTask = tasks.deleteTask(index);
-            ui.showDeletedTask(deletedTask.toString(), tasks.getNumTasks());
+            output = ui.showDeletedTask(deletedTask.toString(), tasks.getNumTasks());
             storage.deleteLine(index);
             break;
+        default:
+            output = ui.showErrorMessage(DukeException.INVALID_COMMAND_EXCEPTION.getMessage());
         }
+        return output;
     }
 
     @Override

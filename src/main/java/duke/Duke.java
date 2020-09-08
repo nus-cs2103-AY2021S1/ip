@@ -10,34 +10,24 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
 
-    public Duke(String filepath) {
-        this.ui = new Ui();
-        this.storage = new Storage(filepath);
+    public Duke() {
+        ui = new Ui();
+        tasks = new TaskList();
+        storage = new Storage();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    String getResponse(String input) {
         try {
-            tasks = new TaskList(storage.load());
+            Command command = Parser.parse(input);
+            String output = command.execute(tasks, ui, storage);
+            return output;
         } catch (DukeException e) {
-            ui.showLoadingError(e.getMessage());
-            tasks = new TaskList();
+            return ui.showErrorMessage(e.getMessage());
         }
-    }
-
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command command = Parser.parse(fullCommand);
-                command.execute(tasks, ui, storage);
-                isExit = command.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
     }
 
 }

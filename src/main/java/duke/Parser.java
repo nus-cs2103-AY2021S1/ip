@@ -11,6 +11,7 @@ import duke.command.AddCommand;
 import duke.command.ExitCommand;
 import duke.command.QueryCommand;
 import duke.command.EditCommand;
+import duke.command.FileCommand;
 
 import java.util.NoSuchElementException;
 import java.util.Scanner;
@@ -37,6 +38,12 @@ public class Parser {
             String commandString = parsingScanner.next();
             Command command; // Has to be declared beforehand for correct scope
             switch (commandString.toLowerCase()) {
+            case "load":
+                command = new FileCommand(CommandType.LOAD, parsingScanner.nextLine());
+                break;
+            case "create":
+                command = new FileCommand(CommandType.CREATE, parsingScanner.nextLine());
+                break;
             case "bye":
                 command = new ExitCommand(CommandType.BYE);
                 break;

@@ -43,7 +43,11 @@ public class DukeException extends Exception {
      * specified filepath.
      */
     public static final DukeException FILE_LOADING_EXCEPTION = new DukeException(
-            "Sorry, the specified file does not seem to exist.");
+            "Sorry, the file does not seem to exist.\n"
+            + "Try: CREATE <filepath>.");
+
+    public static final DukeException FILE_NO_ACCESS_EXCEPTION = new DukeException(
+            "Sorry, I cannot seem to access the file");
 
     /**
      * Sole constructor. Used for creating static instances of DukeException;
