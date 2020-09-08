@@ -10,7 +10,7 @@ import duke.task.Task;
  * Implements the <code>Command</code> interface. <code>AddCommand</code> executes a command
  * to add a specific task as specified by the user.
  */
-public class AddCommand implements Command {
+public class AddCommand implements UndoableCommand {
     private final Task t;
 
     public AddCommand(Task t) {

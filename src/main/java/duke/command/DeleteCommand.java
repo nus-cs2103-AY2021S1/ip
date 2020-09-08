@@ -10,7 +10,7 @@ import duke.task.Task;
  * Implements the <code>Command</code> interface. <code>DeleteCommand</code> executes
  * a command to delete a specific task as specified by the user.
  */
-public class DeleteCommand implements Command {
+public class DeleteCommand implements UndoableCommand {
     private final String command;
     private Task deletedTask;
 

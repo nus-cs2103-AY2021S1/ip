@@ -10,7 +10,7 @@ import duke.task.Task;
  * Implements the <code>Command</code> interface. <code>DoneCommand</code> executes
  * a command to specify a specific <code>Task</code> as done.
  */
-public class DoneCommand implements Command {
+public class DoneCommand implements UndoableCommand {
     private final String command;
     private Task doneTask;
 

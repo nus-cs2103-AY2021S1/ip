@@ -10,6 +10,7 @@ import duke.Ui;
 import duke.command.Command;
 import duke.command.ExitCommand;
 import duke.command.UndoCommand;
+import duke.command.UndoableCommand;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.stage.Stage;
@@ -20,7 +21,7 @@ import javafx.util.Duration;
  * existing tasks.
  */
 public class Yuki {
-    protected static final List<Command> PREV_COMMANDS = new ArrayList<>();
+    protected static final List<UndoableCommand> PREV_COMMANDS = new ArrayList<>();
     protected static final Ui UI = new Ui();
     protected Storage storage;
     protected TaskList taskList;
@@ -58,7 +59,9 @@ public class Yuki {
                     PREV_COMMANDS.remove(latestCommand);
                 } else {
                     c = Parser.parse(commandMessage.trim());
-                    PREV_COMMANDS.add(c);
+                    if (c instanceof UndoableCommand) {
+                        PREV_COMMANDS.add((UndoableCommand) c);
+                    }
                 }
 
                 String s = c.execute(storage, UI, taskList);
@@ -114,7 +117,9 @@ public class Yuki {
                 PREV_COMMANDS.remove(latestCommand);
             } else {
                 c = Parser.parse(input);
-                PREV_COMMANDS.add(c);
+                if (c instanceof UndoableCommand) {
+                    PREV_COMMANDS.add((UndoableCommand) c);
+                }
             }
 
             String s = c.execute(storage, Yuki.UI, taskList);

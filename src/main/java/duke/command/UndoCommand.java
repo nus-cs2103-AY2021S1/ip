@@ -10,14 +10,14 @@ import duke.Ui;
  * a previous <code>Command</code> specified.
  */
 public class UndoCommand implements Command {
-    private final Command prevCommand;
+    private final UndoableCommand prevCommand;
 
     /**
      * Creates an <code>UndoCommand</code> containing a previous <code>Command</code>.
      *
      * @param prevCommand the previous command to undo
      */
-    public UndoCommand(Command prevCommand) {
+    public UndoCommand(UndoableCommand prevCommand) {
         this.prevCommand = prevCommand;
     }
 
@@ -35,17 +35,6 @@ public class UndoCommand implements Command {
             return " There's no command to undo! *woof*\n";
         }
         return prevCommand.undo(storage, ui, taskList);
-    }
-
-    /**
-     * Undo this command.
-     * @param storage Storage of this <code>Duke</code>
-     * @param ui Ui containing all prints for user interactions
-     * @param taskList List of task for this <code>Duke</code>
-     * @return a string representation of the message informing user if the command has been successfully executed
-     */
-    public String undo(Storage storage, Ui ui, TaskList taskList) {
-        return " There's no need to undo this action! *woof*\n";
     }
 
     /**

@@ -21,15 +21,4 @@ public interface Command {
      */
     String execute(Storage storage, Ui ui, TaskList taskList) throws DukeException;
 
-    /**
-     * Undo this command.
-     *
-     * @param storage Storage of this <code>Duke</code>
-     * @param ui Ui containing all prints for user interactions
-     * @param taskList List of task for this <code>Duke</code>
-     * @return a string representation of the message informing user if the command has been successfully executed
-     * @throws DukeException if system fails to undo this action
-     */
-    String undo(Storage storage, Ui ui, TaskList taskList) throws DukeException;
-
 }
