@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.Locale;
 
 public class EventStub extends Task {
     private final LocalDate schedule;
@@ -15,6 +16,7 @@ public class EventStub extends Task {
         this.schedule = schedule;
         this.startTime = startTime;
         this.endTime = endTime;
+        Locale.setDefault(Locale.UK);
     }
 
     public static Task createTask() {

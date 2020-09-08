@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
+import java.util.Locale;
 
 public class DeadlineStub extends Task {
     private final LocalDate toDoBy;
@@ -13,6 +14,7 @@ public class DeadlineStub extends Task {
         super(description);
         this.toDoBy = toDoBy;
         this.time = time;
+        Locale.setDefault(Locale.UK);
     }
 
     public static Task createTask() {
