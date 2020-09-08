@@ -35,6 +35,7 @@ public class Deadline extends Task {
         } else if (details.length > 2) {
             throw new DukeException("Please follow the format of \"{task} /by {deadline}\"");
         }
+
         deadline = DateTimeHandler.parseDateTime(taskDescription.split(SPLITTER)[1]);
     }
 
@@ -95,7 +96,8 @@ public class Deadline extends Task {
         } else if (!(details[1].equals("1") || details[1].equals("0"))) {
             throw new InvalidSaveException("Invalid completion status! Ensure that it is either 0 or 1");
         }
-        boolean isDone = details[1].equals("1") ? true : false;
+
+        boolean isDone = details[1].equals("1");
         try {
             Deadline newDeadline = new Deadline(details[2], details[3]);
             if (isDone) {

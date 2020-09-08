@@ -15,6 +15,7 @@ public class CommandParser {
     protected static final String INDICATOR_DONE = "done";
     /** delete-type string indicator */
     protected static final String INDICATOR_DELETE = "delete";
+    /** find-type string indicator */
     protected static final String INDICATOR_FIND = "find";
 
     /**

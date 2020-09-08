@@ -116,6 +116,7 @@ public class Event extends Task {
         } else if (!(details[1].equals("1") || details[1].equals("0"))) {
             throw new InvalidSaveException("Invalid completion status! Ensure that it is either 0 or 1");
         }
+
         try {
             Event event = new Event(details[2], details[3]);
             boolean isDone = details[1].equals("1");

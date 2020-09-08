@@ -120,6 +120,7 @@ public class DukeGui extends Application implements Ui {
         if (text.isBlank()) {
             return;
         }
+
         registerResponse(text);
         dialogContainer.getChildren().add(DialogBox.getUserDialog(text, userImage));
     }

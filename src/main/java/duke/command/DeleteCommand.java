@@ -35,6 +35,7 @@ public class DeleteCommand extends Command {
         if (details.length == 1) {
             throw new DukeException("Please specify a task to delete!");
         }
+
         int taskNumber;
         try {
             taskNumber = Integer.parseInt(details[1]);
@@ -60,6 +61,7 @@ public class DeleteCommand extends Command {
         } else if (itemIndex <= 0) {
             throw new DukeException("Please enter a valid number between 0 and " + taskList.size());
         }
+
         Task removedTask = taskList.remove(itemIndex);
         ui.outputMessage(createDeleteMessage(removedTask, taskList));
         storage.updateFile(taskList);
