@@ -38,6 +38,7 @@ public class TaskList {
      * @param storage Storage of the system
      */
     public Task deleteTask(int index, Storage storage) {
+        assert index < tasks.size() && index >= 0 ;
         Task removed = tasks.remove(index);
         updateList(storage);
         return removed;
@@ -48,6 +49,7 @@ public class TaskList {
      * @return Number of tasks stored in the list.
      */
     public int numTask() {
+
         return tasks.size();
     }
 
