@@ -21,10 +21,22 @@ public class Deadline extends Task {
         this.date = date;
     }
 
+    /**
+     * Creates a Deadline object
+     * @param task Task to be added
+     * @param date Date to be added
+     * @return Deadline
+     */
     public static Deadline createDeadline(String task, LocalDateTime date) {
         return new Deadline(task, date);
     }
 
+    /**
+     * Returns a string representation of a Deadline Object
+     * [D][X]** (task) by: (date) for tasks marked as Important
+     * [D][X] (task) by: (date) for tasks not marked as Important
+     * @return String
+     */
     @Override
     public String toString() {
         String done = this.done ? "O" : "X";
