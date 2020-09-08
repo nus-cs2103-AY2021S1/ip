@@ -58,6 +58,11 @@ public class Event extends Task {
         this.status = status;
     }
 
+    /**
+     * Snooze the task by one day
+     *
+     * @return a new Task with the new dateTime.
+     */
     public Task snoozeTask() {
 
         LocalDateTime newDateTime = this.dateTime.minusDays(-1);
@@ -65,6 +70,12 @@ public class Event extends Task {
         return new Event(this.taskString, this.preposition, newDateTime, this.status);
     }
 
+    /**
+     * Snooze the task by the given days
+     *
+     * @param days number of days to snooze the task
+     * @return a new Task with the new dateTime.
+     */
     public Task snoozeTask(int days) {
 
         LocalDateTime newDateTime = this.dateTime.minusDays(-1 * days);

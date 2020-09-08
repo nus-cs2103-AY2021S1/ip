@@ -6,6 +6,7 @@ import dukeclass.Parser;
 import dukeclass.Storage;
 import dukeclass.TaskList;
 import dukeclass.Ui;
+import javafx.application.Platform;
 
 /**
  * Encapsulates a chat robot that you can chat with to set tasks for yourself.
@@ -35,6 +36,7 @@ public class Duke {
     public String getResponse(String input) {
         if (input.equals("bye")) {
             this.endDuke();
+            Platform.exit();
             return Ui.endMessage();
         } else{
             try {
@@ -61,8 +63,6 @@ public class Duke {
     public static void startDuke() {
 
         System.out.println(Ui.welcomeMessage());
-
-        System.out.println("Loading done");
 
     }
 

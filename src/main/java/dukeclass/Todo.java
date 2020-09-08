@@ -18,7 +18,7 @@ public class Todo extends Task {
      * Constructor for Todo task but with ability to set status
      *
      * @param taskString  the task given by the user
-     * @param status  status of the taskd
+     * @param status  status of the task
      */
     public Todo(String taskString, boolean status) {
         super(taskString);

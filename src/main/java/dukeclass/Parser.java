@@ -1,5 +1,7 @@
 package dukeclass;
 
+import dukeexception.InvalidInputException;
+
 import java.util.Arrays;
 import java.util.Scanner;
 
