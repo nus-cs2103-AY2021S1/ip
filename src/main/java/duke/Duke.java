@@ -68,18 +68,22 @@ public class Duke {
             if (commands[0].equals("bye")) {
                 isExit = true;
                 ui.bye();
-                return "[DUKE]\n" + ui.showingString;
+                return getUiShowingString(ui);
             }
             tasks.runCommand(commands, ui, storage);
-            return "[DUKE]\n" + ui.showingString;
+            return getUiShowingString(ui);
         } catch (DukeException e) {
             ui.showError(e.getMsg());
-            return "[DUKE]\n" + ui.showingString;
+            return getUiShowingString(ui);
         }
     }
 
     public String showWelcomeToGui() {
         ui.showWelcome();
+        return getUiShowingString(ui);
+    }
+
+    private String getUiShowingString(Ui ui) {
         return "[DUKE]\n" + ui.showingString;
     }
 }

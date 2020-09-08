@@ -64,6 +64,14 @@ public class Ui {
         System.out.print(line);
     }
 
+    private String convertListToString(List<Task> taskList) {
+        StringBuilder listString = new StringBuilder();
+        for (int i = 0; i < taskList.size(); i++) {
+            listString.append(" ").append(i + 1).append(". ").append(taskList.get(i)).append("\n");
+        }
+        return listString.toString();
+    }
+
     /**
      * Prints out the list of tasks.
      *
@@ -80,9 +88,7 @@ public class Ui {
         StringBuffer finalString = new StringBuffer();
         printLine();
         finalString.append(" Here are the tasks in your list:\n");
-        for (int i = 0; i < taskList.size(); i++) {
-            finalString.append(" ").append(i + 1).append(". ").append(taskList.get(i)).append("\n");
-        }
+        finalString.append(convertListToString(taskList));
         System.out.println(finalString);
         printLine();
         showingString = finalString.toString();
@@ -150,9 +156,7 @@ public class Ui {
         StringBuffer finalString = new StringBuffer();
         printLine();
         finalString.append(" Here are the matching tasks in your list:\n");
-        for (int i = 0; i < findResult.size(); i++) {
-            finalString.append(" ").append(i + 1).append(". ").append(findResult.get(i)).append("\n");
-        }
+        finalString.append(convertListToString(findResult));
         System.out.println(finalString);
         printLine();
         showingString = finalString.toString();
