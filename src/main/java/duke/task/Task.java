@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.Priority;
+
 /**
  * Represents a Task
  */
@@ -9,6 +11,8 @@ public class Task {
     protected String description;
     /** Status of task. */
     protected boolean isDone;
+    /** Priority of Task */
+    protected Priority priority;
 
     /**
      * Constructs a new instance of a Task with attributes defined in parameters.
@@ -17,6 +21,18 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.priority = null;
+    }
+
+    /**
+     * Constructs a new instance of a Task with attributes defined in parameters.
+     * @param description Description of task.
+     * @param priority Priority of task.
+     */
+    public Task(String description, Priority priority) {
+        this.description = description;
+        this.isDone = false;
+        this.priority = priority;
     }
 
     public boolean getIsDone() {
@@ -25,6 +41,22 @@ public class Task {
 
     public String getDescription() {
         return this.description;
+    }
+
+    public String getPriority() {
+        return this.priority == null ? "" : this.priority.toString();
+    }
+
+    public void addPriority(Priority priority) {
+        this.priority = priority;
+    }
+
+    public void updatePriority(Priority priority) {
+        this.priority = priority;
+    }
+
+    public void removePriority() {
+        this.priority = null;
     }
 
     /**

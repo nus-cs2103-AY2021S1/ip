@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Priority;
 import duke.Storage;
 import duke.TaskList;
 import duke.TaskType;
@@ -19,6 +20,7 @@ public class AddCommand extends Command {
     private String description;
     private String date;
     private TaskType type;
+    private Priority priority;
 
     /**
      * Constructs a new instance of an AddCommand.
