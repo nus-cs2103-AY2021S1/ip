@@ -32,8 +32,10 @@ public class Parser {
     public static final Pattern KEYWORDS_ARGS_FORMAT =
             Pattern.compile("(?<keyword>\\S+(?:\\s+\\S+)*)"); // one or more keywords separated by whitespace
 
-    public static final Pattern FILTER_ARGS_FORMAT=
+    public static final Pattern FILTER_ARGS_FORMAT =
             Pattern.compile("(?<keywords>\\S+) (?<dateFilter>[0-9-]+)");
+
+    public static final Pattern VOCAB_FORMAT = Pattern.compile("(?<word>\\S+)( (?<definition>.*))?");
 
     public Command parseCommand(String userInput) {
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
@@ -70,6 +72,9 @@ public class Parser {
 
         case FilterCommand.COMMAND_WORD:
             return prepareFilter(arguments);
+
+        case VocabCommand.COMMAND_WORD:
+            return prepareVocab(arguments);
 
         case DefineCommand.COMMAND_WORD:
             return prepareDefine(arguments);
@@ -169,6 +174,21 @@ public class Parser {
             return new IncorrectCommand("Please enter a word to define.");
         }
         return new DefineCommand(matcher.group("keyword"));
+    }
+
+    private Command prepareVocab(String args) {
+        final Matcher matcher = VOCAB_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            return new IncorrectCommand("Wrong format for new vocabulary.");
+        }
+
+        if (matcher.group("definition") == null) {
+            System.out.println("no definition provided");
+            return new VocabCommand(matcher.group("word"));
+        } else {
+            System.out.println("definition provided");
+            return new VocabCommand(matcher.group("word"), matcher.group("definition"));
+        }
     }
 
 }
