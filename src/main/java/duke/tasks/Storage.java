@@ -28,6 +28,7 @@ public class Storage {
      * @throws IOException file may not be found in the path.
      */
     public static void writeToFile(String filePath, String textToAdd) throws IOException {
+        assert textToAdd != null : "List of tasks cannot be empty";
         File f = new File(filePath);
         FileWriter fw = new FileWriter(filePath);
         fw.write(textToAdd);

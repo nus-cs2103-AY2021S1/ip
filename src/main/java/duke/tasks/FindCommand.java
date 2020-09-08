@@ -7,7 +7,7 @@ import java.io.IOException;
  * from users.
  */
 public class FindCommand extends Command {
-    protected String toFind;
+    private String toFind;
 
     /**
      * Constructor that stores the find command string.

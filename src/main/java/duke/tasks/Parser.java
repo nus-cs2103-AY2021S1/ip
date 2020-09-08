@@ -12,7 +12,9 @@ public class Parser {
      * @param toPrint input from the user.
      * @return type of command to be executed.
      */
-    public static Command parse(String toPrint) {
+    public static Command parse(String toPrint) throws DukeException {
+        assert toPrint != null : "Input cannot be empty";
+
         if (toPrint.startsWith("list")) {
             return new ListCommand(toPrint);
         } else if (toPrint.startsWith("done")) {
@@ -30,8 +32,7 @@ public class Parser {
         } else if (toPrint.startsWith("find")) {
             return new FindCommand(toPrint);
         } else {
-            System.out.println("OOPS!!! I'm sorry, but I don't know what that means :-(");
-            return null;
+            return new ErrorCommand();
         }
     }
 
