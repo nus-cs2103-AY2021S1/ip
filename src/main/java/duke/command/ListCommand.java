@@ -1,13 +1,12 @@
 package duke.command;
 
-import duke.logic.Storage;
 import duke.resource.TaskList;
 import duke.resource.Wrapper;
 import duke.ui.Ui;
 
 import java.util.List;
 
-public class ListCommand implements Commands {
+public class ListCommand implements Command {
 
     @Override
     public String apply(Wrapper wrapper, List<String> input) {

@@ -13,7 +13,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-import duke.logic.Command;
 import duke.logic.Parser;
 
 public class DukeGui extends Application {
@@ -27,13 +26,6 @@ public class DukeGui extends Application {
     private Scene scene;
     private Duke duke;
 
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
     private void displayIntro() {
         Label introText = new Label(duke.welcome());
         dialogContainer.getChildren().addAll(
@@ -42,10 +34,8 @@ public class DukeGui extends Application {
 
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
-//        Command c = Parser.parse(userInput.getText());
-//        Label dukeText = new Label(c.parse(duke.getTaskList(), duke.getUi(), duke.getStorage()));
         Parser parser = duke.getParser();
-        Label dukeText = new Label(parser.parses(userInput.getText()));
+        Label dukeText = new Label(parser.parse(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(userImage)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage))

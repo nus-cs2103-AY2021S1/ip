@@ -8,7 +8,7 @@ import duke.ui.Ui;
 
 import java.util.List;
 
-public class FindCommand implements Commands {
+public class FindCommand implements Command {
 
     @Override
     public String apply(Wrapper wrapper, List<String> input) {

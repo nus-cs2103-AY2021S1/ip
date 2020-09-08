@@ -8,7 +8,7 @@ import duke.ui.Ui;
 
 import java.util.List;
 
-public class DeleteCommand implements Commands {
+public class DeleteCommand implements Command {
 
     @Override
     public String apply(Wrapper wrapper, List<String> input) {

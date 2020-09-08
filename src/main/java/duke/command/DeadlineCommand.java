@@ -10,7 +10,7 @@ import duke.ui.Ui;
 import java.time.format.DateTimeParseException;
 import java.util.List;
 
-public class DeadlineCommand implements Commands {
+public class DeadlineCommand implements Command {
 
     @Override
     public String apply(Wrapper wrapper, List<String> input) {

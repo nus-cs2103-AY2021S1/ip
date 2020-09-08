@@ -1,6 +1,6 @@
 package duke.logic;
 
-import duke.command.Commands;
+import duke.command.Command;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
@@ -28,7 +28,7 @@ public class Parser {
         this.wrapper = wrapper;
     }
 
-    public static final Map<String, Commands> COMMANDS = Map.of(
+    public static final Map<String, Command> COMMANDS = Map.of(
             "bye", new ExitCommand(),
             "done", new DoneCommand(),
             "find", new FindCommand(),
@@ -39,7 +39,7 @@ public class Parser {
             "deadline", new DeadlineCommand()
     );
 
-    public String parses(String fullCommand) {
+    public String parse(String fullCommand) {
         String[] parsedString = fullCommand.split(" ");
         String command = parsedString[0];
         if (Optional.ofNullable(COMMANDS.get(command)).isEmpty()) {
@@ -48,17 +48,6 @@ public class Parser {
         List<String> inputs = new ArrayList<>(List.of(parsedString));
         inputs.remove(0);
         return COMMANDS.get(command).apply(this.wrapper, inputs);
-    }
-
-    /**
-     * Parses the given user input, then returns a Command object with the associated input.
-     *
-     * @param command a String that contains the user input
-     * @return a Command object with the associated input
-     */
-
-    public static Command parse(String command) {
-        return new Command(command.split(" "));
     }
 
 }

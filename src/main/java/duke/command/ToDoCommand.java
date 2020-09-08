@@ -9,7 +9,7 @@ import duke.ui.Ui;
 
 import java.util.List;
 
-public class ToDoCommand implements Commands {
+public class ToDoCommand implements Command {
 
     @Override
     public String apply(Wrapper wrapper, List<String> input) {
