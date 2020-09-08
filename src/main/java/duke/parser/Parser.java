@@ -48,7 +48,6 @@ public class Parser {
             }
 
         case TODO:
-            assert !(rest.isEmpty()) : "You need to enter a name";
             if (rest.isEmpty()) {
                 throw new DukeException("ME FINKZ DAT U NED 2 ENTR NAYM 4 UR TODO ITEM LULZ");
             } else {
