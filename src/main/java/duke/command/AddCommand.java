@@ -48,6 +48,7 @@ public class AddCommand extends Command {
                 return taskList.addEvent(taskName, storage);
 
             default:
+                assert false : "Task does not belong to the 3 types of tasks can be added into task list.";
                 return "";
 
             }
