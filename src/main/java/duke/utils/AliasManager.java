@@ -48,6 +48,27 @@ public class AliasManager {
     }
 
     /**
+     * Returns the {@code Command} that corresponds to the alias. Note that every command is an alias for
+     * itself.
+     *
+     * @param alias the alias that is being looked up.
+     * @return the corresponding {@code Command}.
+     */
+    public Command getCommand(String alias) {
+        Command command;
+        try {
+            command = Command.valueOf(alias.toUpperCase());
+        } catch (IllegalArgumentException e) {
+            command = aliases.get(alias);
+        }
+        // Throw an `IllegalArgumentException` to signify that no commands match.
+        if (command == null) {
+            throw new IllegalArgumentException();
+        }
+        return command;
+    }
+
+    /**
      * Returns a list of aliases under the {@code AliasManager}.
      *
      * @return a list of aliases under the {@code AliasManager}.

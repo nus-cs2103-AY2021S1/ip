@@ -8,9 +8,7 @@ import duke.exceptions.DukeException;
 import duke.messages.DukeResponse;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
-import duke.tasks.TaskManager;
 import duke.tasks.ToDo;
-import duke.utils.AliasManager;
 import duke.utils.DateTimeParser;
 import duke.utils.ResourceHandler;
 import duke.utils.Store;
@@ -51,15 +49,15 @@ public enum Command {
             String regex = "^(?i)alias\\s+-l$";
             if (Pattern.matches(regex, input)) {
                 // Display list of aliases.
-                return new DukeResponse(aliasManager.toString());
+                return new DukeResponse(Store.getAliasManager().toString());
             }
 
             // Add a new alias.
-            String lineWithoutCommand = input.replaceFirst("^alias", "");
+            String lineWithoutCommand = input.replaceFirst("^(?i)alias", "");
             String[] args = lineWithoutCommand.trim().split("\\s+", 2);
             String command = args[0].trim();
             String alias = args[1].trim();
-            String response = aliasManager.addAlias(alias, command);
+            String response = Store.getAliasManager().addAlias(alias, command);
             return new DukeResponse(response);
         }
     },
@@ -128,12 +126,12 @@ public enum Command {
          */
         @Override
         public DukeResponse execute(String input) throws DukeException {
-            String lineWithoutCommand = input.replaceFirst("^deadline", "");
+            String lineWithoutCommand = input.replaceFirst("^(?i)deadline", "");
             String[] args = lineWithoutCommand.split("/by", 2);
             String deadlineName = args[0].trim();
             String dueDateString = args[1].trim();
             LocalDateTime dueDate = DateTimeParser.parseDateTime(dueDateString);
-            String response = taskManager.addTask(new Deadline(deadlineName, dueDate));
+            String response = Store.getTaskManager().addTask(new Deadline(deadlineName, dueDate));
             return new DukeResponse(response);
         }
     },
@@ -167,13 +165,13 @@ public enum Command {
          */
         @Override
         public DukeResponse execute(String input) {
-            String lineWithoutCommand = input.replaceFirst("^delete", "");
+            String lineWithoutCommand = input.replaceFirst("^(?i)delete", "");
             String listIndexString = lineWithoutCommand.trim();
             // `listIndexString` is guaranteed to be a string made up of only digit characters after validation.
             int listIndex = Integer.parseInt(listIndexString) - 1;
             String response;
             try {
-                response = taskManager.removeTask(listIndex);
+                response = Store.getTaskManager().removeTask(listIndex);
             } catch (IndexOutOfBoundsException e) {
                 response = ResourceHandler.getString("repl.invalidTaskIndex");
             }
@@ -211,13 +209,13 @@ public enum Command {
          */
         @Override
         public DukeResponse execute(String input) {
-            String lineWithoutCommand = input.replaceFirst("^done", "");
+            String lineWithoutCommand = input.replaceFirst("^(?i)done", "");
             String listIndexString = lineWithoutCommand.trim();
             // `listIndexString` is guaranteed to be a string made up of only digit characters after validation.
             int listIndex = Integer.parseInt(listIndexString) - 1;
             String response;
             try {
-                response = taskManager.markAsDone(listIndex);
+                response = Store.getTaskManager().markAsDone(listIndex);
             } catch (IndexOutOfBoundsException e) {
                 response = ResourceHandler.getString("repl.invalidTaskIndex");
             }
@@ -256,12 +254,12 @@ public enum Command {
          */
         @Override
         public DukeResponse execute(String input) throws DukeException {
-            String lineWithoutCommand = input.replaceFirst("^event", "");
+            String lineWithoutCommand = input.replaceFirst("^(?i)event", "");
             String[] args = lineWithoutCommand.split("/at", 2);
             String eventName = args[0].trim();
             String dateTimeString = args[1].trim();
             LocalDateTime dateTime = DateTimeParser.parseDateTime(dateTimeString);
-            String response = taskManager.addTask(new Event(eventName, dateTime));
+            String response = Store.getTaskManager().addTask(new Event(eventName, dateTime));
             return new DukeResponse(response);
         }
     },
@@ -295,9 +293,9 @@ public enum Command {
          */
         @Override
         public DukeResponse execute(String input) {
-            String lineWithoutCommand = input.replaceFirst("^find", "");
+            String lineWithoutCommand = input.replaceFirst("^(?i)find", "");
             String[] searchKeywords = lineWithoutCommand.trim().split("\\s+");
-            String response = taskManager.getMatchingTasks(searchKeywords);
+            String response = Store.getTaskManager().getMatchingTasks(searchKeywords);
             return new DukeResponse(response);
         }
     },
@@ -330,7 +328,7 @@ public enum Command {
          */
         @Override
         public DukeResponse execute(String input) {
-            String response = taskManager.toString();
+            String response = Store.getTaskManager().toString();
             return new DukeResponse(response);
         }
     },
@@ -363,7 +361,7 @@ public enum Command {
          */
         @Override
         public DukeResponse execute(String input) {
-            String response = taskManager.getOverdueTasks();
+            String response = Store.getTaskManager().getOverdueTasks();
             return new DukeResponse(response);
         }
     },
@@ -397,9 +395,9 @@ public enum Command {
          */
         @Override
         public DukeResponse execute(String input) {
-            String lineWithoutCommand = input.replaceFirst("^todo", "");
+            String lineWithoutCommand = input.replaceFirst("^(?i)todo", "");
             String toDoName = lineWithoutCommand.trim();
-            String response = taskManager.addTask(new ToDo(toDoName));
+            String response = Store.getTaskManager().addTask(new ToDo(toDoName));
             return new DukeResponse(response);
         }
     },
@@ -432,15 +430,10 @@ public enum Command {
          */
         @Override
         public DukeResponse execute(String input) {
-            String response = taskManager.getUpcomingTasks();
+            String response = Store.getTaskManager().getUpcomingTasks();
             return new DukeResponse(response);
         }
     };
-
-    /** {@code TaskManager} object that is keeping track of tasks. */
-    private static final TaskManager taskManager = Store.getTaskManager();
-    /** {@code AliasManager} object that is keeping track of aliases. */
-    private static final AliasManager aliasManager = Store.getAliasManager();
 
     /**
      * Validates whether the user input is of the correct format.
