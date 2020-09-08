@@ -13,21 +13,13 @@ public class DeleteCommand extends Command {
         this.idx = idx;
     }
 
-    /**
-     * Executes the DELETE command, removes a task from the existing taskList based on index,
-     * where indexing starts from 1.
-     *
-     * @param taskList
-     * @param ui
-     * @param storage
-     * @throws DukeException
-     */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.display("TASK IZ NAO DELETZ!!!!1!11!\n" + "  "
-                    + taskList.popTask(this.idx)
-                    + "\nNAO U HAS " + taskList.getNumberOfTasks() + " FINGS IN DA LIST LULZIES");
+    public String getResponse(TaskList taskList, Storage storage) throws DukeException {
+        String msg = "TASK IZ NAO DELETZ!!!!1!11!\n" + "  "
+                + taskList.popTask(this.idx)
+                + "\nNAO U HAS " + taskList.getNumberOfTasks() + " FINGS IN DA LIST LULZIES";
         storage.save(taskList);
+        return msg;
     }
 
     @Override

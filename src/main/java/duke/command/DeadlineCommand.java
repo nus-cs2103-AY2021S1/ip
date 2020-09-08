@@ -16,19 +16,12 @@ public class DeadlineCommand extends Command {
         this.by = by;
     }
 
-    /**
-     * Executes the DEADLINE command, adds a Deadline task to the existing taskList and
-     * save the updated taskList to a log file.
-     * @param taskList
-     * @param ui
-     * @param storage
-     * @throws DukeException
-     */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.display("I PUT NEW TING IN DA LIST\n  " + taskList.addDeadline(this.taskName, this.by)
-                + "\nNAO U HAS " + taskList.getNumberOfTasks() + " FINGS IN DA LIST LULZIES");
+    public String getResponse(TaskList taskList, Storage storage) throws DukeException {
+        String msg = "I PUT NEW TING IN DA LIST\n  " + taskList.addDeadline(this.taskName, this.by)
+                + "\nNAO U HAS " + taskList.getNumberOfTasks() + " FINGS IN DA LIST LULZIES";
         storage.save(taskList);
+        return msg;
     }
 
     @Override

@@ -18,6 +18,10 @@ public class Command {
         return this.isExit;
     }
 
+    public String getResponse(TaskList taskList, Storage storage) throws DukeException {
+        return "CAN I HAZ CHEEZBURGER?";
+    }
+
     /**
      * Executes the default command, which displays a standard string regardless
      * of input.
@@ -28,7 +32,7 @@ public class Command {
      * @throws DukeException
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        ui.display("CAN I HAZ CHEEZBURGER?");
+        ui.display(getResponse(taskList, storage));
     }
 
     @Override

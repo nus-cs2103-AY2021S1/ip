@@ -6,21 +6,31 @@ import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-public class Duke {
 
+public class Duke {
+    private static final String LOG_FILEPATH = "data/tasks.txt";
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
 
-    public Duke(String filePath) {
+    public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        this.storage = new Storage(LOG_FILEPATH);
         try {
             tasks = new TaskList(storage.load());
             ui.showLoadedTasks(tasks);
         } catch (DukeException e) {
             ui.showLoadingError(e.getMessage());
             tasks = new TaskList();
+        }
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.getResponse(tasks, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
         }
     }
 
@@ -43,7 +53,9 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke().run();
     }
+
+
 
 }
