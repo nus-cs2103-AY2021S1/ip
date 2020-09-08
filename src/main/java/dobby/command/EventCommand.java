@@ -13,9 +13,9 @@ public class EventCommand implements Command {
     @Override
     public String parseInput(TaskList tasks, String text) throws DobbyException {
         String message;
-        String at = "";
         try {
-            text = text.substring(6).trim();
+            int commandLen = "event".length();
+            text = text.substring(commandLen + 1).trim();
 
             if (text.indexOf("/at") < 0 && text.length() >= 1) { // non-empty description and /by missing
                 throw new DobbyException("Incorrect usage of command.\nSchedule details cannot be empty. "
@@ -25,9 +25,9 @@ public class EventCommand implements Command {
                         + "Please try again.\n  " + USAGE);
             }
 
-            at = text.substring(text.indexOf("/at") + 4);
-            text = text.substring(0, text.indexOf("/at") - 1);
-            Event event = new Event(text, at);
+            String at = text.substring(text.indexOf("/at") + 4);
+            String description = text.substring(0, text.indexOf("/at") - 1);
+            Event event = new Event(description, at);
 
             if (at.substring(1 + at.lastIndexOf(' ')).length() > 4) {
                 throw new DobbyException("Incorrect usage of command.\n"

@@ -14,10 +14,10 @@ public class ScheduledCommand implements Command {
     public String parseInput(TaskList tasks, String text) throws DobbyException {
         String message;
         try {
-            String dt = text.substring(text.indexOf(' ') + 1);
-            String day = dt.substring(0, dt.indexOf('/'));
-            String month = dt.substring(dt.indexOf('/') + 1, dt.lastIndexOf('/'));
-            String year = dt.substring(dt.lastIndexOf('/') + 1);
+            String date = text.substring(text.indexOf(' ') + 1);
+            String day = date.substring(0, date.indexOf('/'));
+            String month = date.substring(date.indexOf('/') + 1, date.lastIndexOf('/'));
+            String year = date.substring(date.lastIndexOf('/') + 1);
             LocalDate parsedDate = LocalDate.parse(year + "-" + month + "-" + day);
 
             message = tasks.getScheduledTasks(parsedDate);

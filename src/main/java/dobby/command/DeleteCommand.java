@@ -12,7 +12,8 @@ public class DeleteCommand implements Command {
     public String parseInput(TaskList tasks, String text) throws DobbyException {
         String message = "";
         try {
-            text = text.substring(6).trim();
+            int commandLen = "delete".length();
+            text = text.substring(commandLen).trim();
 
             int index = Integer.parseInt(text);
             if (tasks.getSize() < index) { // if index is out of range throw exception
@@ -20,6 +21,7 @@ public class DeleteCommand implements Command {
                         + "Task number must be within the correct range.\n  "
                         + USAGE);
             }
+
             Task task = tasks.getTask(index - 1);
             tasks.removeTask(index - 1);
 
