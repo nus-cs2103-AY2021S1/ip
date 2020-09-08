@@ -27,6 +27,7 @@ public class Parser {
      * @throws IllegalArgumentException if user input does not match the appropriate commands
      */
     public Command parse(String input) throws IllegalArgumentException {
+        assert input.length() > 0 : "no input given";
         Scanner sc = new Scanner(input);
         String command = sc.next().toLowerCase();
         switch (command) {
