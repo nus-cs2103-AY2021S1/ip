@@ -71,18 +71,10 @@ public class Duke {
     public void parseInput(String input) {
         try {
             Command c = Parser.parse(input);
+//            Ui.displayTasks(tasks);
             c.execute(tasks, ui, storage);
         } catch (DukeException | IOException e) {
             Ui.display(e.getMessage());
         }
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    public String getResponse(String input) {
-        parseInput(input);
-        return "NIL";
     }
 }

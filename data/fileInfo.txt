@@ -1,11 +1,6 @@
 D | 1 | yas | 2012-01-01
-T | 0 | thisisfine
-D | 0 | imnotfine | 2030-04-05
-T | 1 | potato
-T | 0 | list
-T | 0 | HAHAHAHAHAHHAHAHA
-T | 0 | test
-T | 0 | homework by tmr
-E | 0 | tutorial | 2020-03-04
-T | 0 | ip
-D | 0 | spotify | 2020-08-09
+D | 1 | pore | 2012-02-19
+T | 0 | pretty
+D | 0 | yas | 2012-01-01
+E | 1 | pepega | 2010-04-30
+

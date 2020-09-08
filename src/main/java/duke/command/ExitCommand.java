@@ -23,7 +23,6 @@ public class ExitCommand extends Command {
     public void execute (TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         Storage.writeToFile(tasks.getList());
         Ui.display("Bye! Hope to see you again! :D");
-        //System.exit(0);
         Main.closeWindow();
     }
 
