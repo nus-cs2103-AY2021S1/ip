@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * DeleteCommand is a request to delete a Task.
  */
@@ -16,9 +18,10 @@ public class DeleteCommand extends Command {
      * @param tasks   TaskList to be modified.
      * @param storage Storage to be updated.
      * @throws DukeException
+     * @return ArrayList containing response message from Duke.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) throws DukeException {
+    public ArrayList<String> execute(TaskList tasks, Storage storage) throws DukeException {
         storage.saveList(tasks);
         return Ui.getDeletedTask(tasks.removeTask(idx), tasks);
     }

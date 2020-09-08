@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * DeleteCommand is a request to stop Duke from running.
  */
@@ -9,9 +11,10 @@ public class ExitCommand extends Command {
      *
      * @param tasks   TaskList to be modified.
      * @param storage Storage to be activated if there are any changes to TaskList.
+     * @return ArrayList containing response message from Duke.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) {
+    public ArrayList<String> execute(TaskList tasks, Storage storage) {
         return Ui.getGoodbye();
     }
 

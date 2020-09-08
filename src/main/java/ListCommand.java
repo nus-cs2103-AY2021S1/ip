@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -25,10 +26,10 @@ public class ListCommand extends Command {
      *
      * @param tasks   TaskList to be printed.
      * @param storage Storage is not activated.
+     * @return ArrayList containing response message from Duke.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) {
+    public ArrayList<String> execute(TaskList tasks, Storage storage) {
         return Ui.getTaskList(tasks, on, keyWord);
-//        ui.showTaskList(tasks, on, keyWord);
     }
 }

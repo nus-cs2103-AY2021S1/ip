@@ -81,7 +81,7 @@ public class Parser {
                 int idx = userInput.indexOf(" /by ");
                 if (idx == -1 || userInput.substring(idx + 5).isBlank()) {
                     throw new TaskException(TaskType.DEADLINE, "time", TaskExceptionType.IDENTIFY);
-                } else if (userInput.substring(9, idx).isBlank()) {
+                } else if (idx <= 9 || userInput.substring(9, idx).isBlank()) {
                     throw new TaskException(TaskType.DEADLINE, "description", TaskExceptionType.EMPTY);
                 } else {
                     if (parseDate(userInput.substring(idx + 5)) == null) {

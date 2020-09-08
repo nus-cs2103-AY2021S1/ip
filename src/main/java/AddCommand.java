@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -31,7 +32,7 @@ public class AddCommand extends Command {
      * @throws DukeException
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) throws DukeException {
+    public ArrayList<String> execute(TaskList tasks, Storage storage) throws DukeException {
         Task task = null;
         if (taskType == TaskType.TODO) {
             task = new ToDo(description, false);

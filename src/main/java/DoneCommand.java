@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * DoneCommand is a request to mark a Task as done.
  */
@@ -16,9 +18,10 @@ public class DoneCommand extends Command {
      * @param tasks   TaskList to be modified.
      * @param storage Storage to be updated.
      * @throws DukeException
+     * @return ArrayList containing response message from Duke.
      */
     @Override
-    public String execute(TaskList tasks, Storage storage) throws DukeException, TaskException {
+    public ArrayList<String> execute(TaskList tasks, Storage storage) throws DukeException, TaskException {
         tasks.markAsDone(idx);
         storage.saveList(tasks);
         return Ui.getDoneTask(tasks.getTask(idx));

@@ -11,7 +11,8 @@ public class Ui {
     private static final String LINE = "____________________________________________________________";
     private static final ArrayList<String> WELCOME_MSG = new ArrayList<>(Arrays.asList("Hello! I'm Duke", "What can I"
             + " do for you?"));
-    private static final String GOODBYE_MSG = "Bye. Hope to see you again soon!";
+    private static final ArrayList<String> GOODBYE_MSG = new ArrayList<>(Arrays.asList("Bye. Hope to see you again " +
+            "soon!"));
     private static final String DONE_MSG = "Nice! I've marked this task as done:";
     private static final String DELETED_MSG = "Noted. I've removed this task:";
     private static final String ADD_MSG = "Got it. I've added this task:";
@@ -27,10 +28,10 @@ public class Ui {
      * @return String of formatted responses.
      */
     public static String formatResponse(ArrayList<String> response) {
-        String indentLine = LINE + "\n";
+        String indentLine = INDENT + LINE + "\n";
         String result = indentLine;
         for (String resp : response) {
-            result += resp + "\n";
+            result += INDENT + INDENT + resp + "\n";
         }
         result += indentLine;
         return result;
@@ -38,32 +39,24 @@ public class Ui {
 
     /**
      * Formats each feedback message, e.g. enclosed in two lines.
-     * Overloaded formatResponse, takes in a variable number of strings, puts them in a ArrayList and passes it to the
-     * other formatResponse method.
      *
-     * @param response Variable number of Strings of feedback messages.
+     * @param response ArrayList of feedback messages.
      * @return String of formatted responses.
      */
-    public static String formatResponse(String ... response) {
-        ArrayList<String> lst = new ArrayList<>();
-        for (String resp : response) {
-            lst.add(resp);
-        }
-        return formatResponse(lst);
+    public static String formatResponse(String response) {
+        return formatResponse(new ArrayList<>(Arrays.asList(response)));
     }
 
-    public static String formatMultilineResponse(String ... response) {
-        ArrayList<String> lst = new ArrayList<>();
-        for (String resp : response) {
-            lst.add(resp);
-        }
-        return formatMultilineResponse(lst);
-    }
-
-    public static String formatMultilineResponse(ArrayList<String> response) {
+    /**
+     * Formats each feedback message.
+     *
+     * @param response ArrayList of feedback messages.
+     * @return String of formatted responses.
+     */
+    public static String formatMultiLine(ArrayList<String> response) {
         String result = "";
         for (String resp : response) {
-            result += INDENT + resp + "\n";
+            result += resp + "\n";
         }
         return result;
     }
@@ -71,23 +64,23 @@ public class Ui {
     /**
      * Returns formatted welcome message.
      *
-     * @return String Formatted welcome message.
+     * @return ArrayList welcome message.
      */
-    public static String getWelcome() {
-        return formatMultilineResponse(WELCOME_MSG);
+    public static ArrayList<String> getWelcome() {
+        return WELCOME_MSG;
     }
 
     /**
      * Returns formatted goodbye message.
      *
-     * @return String Formatted goodbye message.
+     * @return String goodbye message.
      */
-    public static String getGoodbye() {
-        return INDENT + GOODBYE_MSG;
+    public static ArrayList<String> getGoodbye() {
+        return GOODBYE_MSG;
     }
 
     /**
-     * Returns a String with count of tasks.
+     * Returns a ArrayList String with count of tasks.
      *
      * @param tasks TaskList to count number of tasks from.
      * @return String with count of tasks.
@@ -97,50 +90,61 @@ public class Ui {
     }
 
     /**
-     * Returns a String containing details of all the tasks that pass date and keyWord criteria.
+     * Returns a ArrayList String containing details of all the tasks that pass date and keyWord criteria.
      *
      * @param tasks   Tasks to filter from.
      * @param date    Date to filter tasks by.
      * @param keyWord Keyword to filter tasks by.
-     * @return String containing details of tasks that fulfil the criteria.
+     * @return ArrayList containing details of tasks that fulfil the criteria.
      */
-    public static String getTaskList(TaskList tasks, Date date, String keyWord) {
+    public static ArrayList<String> getTaskList(TaskList tasks, Date date, String keyWord) {
         ArrayList<String> lst = tasks.toString(date, keyWord);
         lst.add(0, "Here are the " + ((keyWord == null) ? "" : "matching ") + "tasks in your list" + ((date == null)
                 ? "" : " that occur on " + formatDate(date)) + ":");
-        return formatMultilineResponse(lst);
+        return lst;
     }
 
     /**
-     * Returns a String of a feedback message that task is marked as done.
+     * Returns a ArrayList String of a feedback message that task is marked as done.
      *
      * @param task Task that is done.
-     * @return Feedback message that task is marked as done.
+     * @return ArrayList feedback message that task is marked as done.
      */
-    public static String getDoneTask(Task task) {
-        return formatMultilineResponse(DONE_MSG, INDENT + task.toString());
+    public static ArrayList<String> getDoneTask(Task task) {
+        ArrayList<String> lst = new ArrayList<>();
+        lst.add(DONE_MSG);
+        lst.add(INDENT + task.toString());
+        return lst;
     }
 
     /**
-     * Returns a String of a feedback message that task is deleted.
+     * Returns a ArrayList String of a feedback message that task is deleted.
      *
      * @param task     Task that is deleted.
      * @param taskList
-     * @return
+     * @return ArrayList
      */
-    public static String getDeletedTask(Task task, TaskList taskList) {
-        return formatMultilineResponse(DELETED_MSG, INDENT + task.toString(), getListCount(taskList));
+    public static ArrayList<String> getDeletedTask(Task task, TaskList taskList) {
+        ArrayList<String> lst = new ArrayList<>();
+        lst.add(DELETED_MSG);
+        lst.add(INDENT + task.toString());
+        lst.add(getListCount(taskList));
+        return lst;
     }
 
     /**
-     * Returns a String of a feedback message that task is added to taskList.
+     * Returns a ArrayList String of a feedback message that task is added to taskList.
      *
      * @param task     Task that is added.
      * @param taskList TaskList
-     * @return Feedback message that task is added to taskList.
+     * @return ArrayList feedback message that task is added to taskList.
      */
-    public static String getAddTask(Task task, TaskList taskList) {
-        return formatMultilineResponse(ADD_MSG, INDENT + task.toString(), getListCount(taskList));
+    public static ArrayList<String> getAddTask(Task task, TaskList taskList) {
+        ArrayList<String> lst = new ArrayList<>();
+        lst.add(ADD_MSG);
+        lst.add(INDENT + task.toString());
+        lst.add(getListCount(taskList));
+        return lst;
     }
 
 }

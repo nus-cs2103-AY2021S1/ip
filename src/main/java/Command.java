@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 /**
  * A Command is a parsed request from the user.
  */
@@ -10,7 +12,7 @@ public abstract class Command {
      * @param storage Storage to be activated if there are any changes to TaskList.
      * @throws DukeException
      */
-    public abstract String execute(TaskList tasks, Storage storage) throws DukeException, TaskException;
+    public abstract ArrayList<String> execute(TaskList tasks, Storage storage) throws DukeException, TaskException;
 
     /**
      * Returns false for all commands except ExitCommand.

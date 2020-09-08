@@ -30,7 +30,7 @@ public class Duke {
     public String getResponse(String text) {
         try {
             Command c = Parser.parse(text);
-            return c.execute(tasks, storage);
+            return Ui.formatMultiLine(c.execute(tasks, storage));
         } catch (DukeException | TaskException e) {
             return e.getMessage();
         }
