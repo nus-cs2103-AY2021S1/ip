@@ -26,6 +26,23 @@ public class Event extends Task {
     }
 
     /**
+     * Constructor for tasks of event type.
+     *
+     * @param description               Description of the activity
+     * @param index                     Numbers for the indexing process of the tasks
+     * @param isDone                    Task completion status
+     * @param tag                       Tag
+     * @throws DukeInvalidTimeException Wrong definition for the task timing
+     */
+
+    public Event(String description, int index, boolean isDone, String tag) throws DukeInvalidTimeException {
+        super(description, index, isDone, tag);
+        super.type = TaskType.EVENT;
+        int idx = description.indexOf('/');
+        super.setTime(idx);
+    }
+
+    /**
      * Returns the text version of task with index & date formatted to MMM d yyyy h:mm a.
      *
      * @return String representation for event objects with indexing and date conversion.
@@ -37,7 +54,7 @@ public class Event extends Task {
         String task = description.substring(0, idx);
         String end = String.format("at: %s", super.getTime().format(DateTimeFormatter.ofPattern("MMM d yyyy, h:mm a")));
         String icon = super.getIcon(isDone);
-        return String.format("%s. %s%s%s(%s)", index, super.type, icon, task, end);
+        return String.format("%s. %s%s%s(%s) %s", index, super.type, icon, task, end, super.convert());
     }
 
     /**
@@ -52,6 +69,6 @@ public class Event extends Task {
         String task = description.substring(0, idx);
         String end = new StringBuilder(description.substring(idx + 1)).insert(2, ':').toString();
         String icon = super.getIcon(isDone);
-        return String.format("%s%s%s(%s)", super.type, icon, task, end);
+        return String.format("%s%s%s(%s) %s", super.type, icon, task, end, super.convert());
     }
 }

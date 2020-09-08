@@ -74,15 +74,18 @@ public class Data {
             boolean isDone = Integer.parseInt(currStrings[1]) == 1;
             String activity = currStrings[2];
             String description;
+            String tag;
             // Loading tasks from file
             switch (type) {
             case "T":
-                currTask = new Todo(activity, i, isDone);
+                tag = currStrings[3];
+                currTask = new Todo(activity, i, isDone, tag);
                 break;
             case "D":
             case "E":
+                tag = currStrings[4];
                 description = activity + " " + currStrings[3];
-                currTask = readTask(description, type, i, isDone);
+                currTask = readTask(description, type, i, isDone, tag);
                 break;
             default:
                 break;
@@ -102,11 +105,11 @@ public class Data {
      * Abstracts the process of reading deadline/event tasks.
      * @return Task - either Deadline/Event
      */
-    private Task readTask(String description, String type, int index, boolean isComplete)
+    private Task readTask(String description, String type, int index, boolean isComplete, String tag)
             throws DukeInvalidTimeException {
         return type.equals("D")
-                ? new Deadline(description, index, isComplete)
-                : new Event(description, index, isComplete);
+                ? new Deadline(description, index, isComplete, tag)
+                : new Event(description, index, isComplete, tag);
     }
 
     /**
@@ -122,17 +125,18 @@ public class Data {
             String line = "";
             int done = task.hasDone() ? 1 : 0;
             String description = task.getDescription();
+            String tag = task.getTag();
             // Saving tasks to disk in specific format
             switch (task.getType()) {
             case TODO:
-                line = String.format("T---%d---%s", done, description);
+                line = String.format("T---%d---%s---%s", done, description, tag);
                 break;
             case DEADLINE:
             case EVENT:
                 int idx = description.indexOf('/');
                 String activity = description.substring(0, idx - 1);
                 String timing = description.substring(idx);
-                line = formatTask(task, done, activity, timing);
+                line = formatTask(task, done, activity, timing, tag);
                 break;
             default:
                 break;
@@ -150,9 +154,9 @@ public class Data {
      * @param timing Time of task
      * @return String saved into disk
      */
-    private String formatTask(Task task, int done, String activity, String timing) {
+    private String formatTask(Task task, int done, String activity, String timing, String tag) {
         String type = task.getType() == TaskType.DEADLINE ? "D" : "E";
-        return String.format("%s---%d---%s---%s", type, done, activity, timing);
+        return String.format("%s---%d---%s---%s---%s", type, done, activity, timing, tag);
     }
 
 }

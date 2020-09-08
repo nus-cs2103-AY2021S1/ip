@@ -42,6 +42,8 @@ public class Parser {
             return Command.DONE;
         } else if (command.startsWith("bye")) {
             return Command.BYE;
+        } else if (command.startsWith("tag")) {
+            return Command.TAG;
         } else {
             return Command.TASK;
         }

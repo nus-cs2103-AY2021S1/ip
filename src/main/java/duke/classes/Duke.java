@@ -112,6 +112,10 @@ public class Duke {
         case FIND:
             completedString = findTask(task);
             break;
+        case TAG:
+            Task taskToBeTagged = taskList.tagTask(task);
+            completedString = ui.printTagging(taskToBeTagged);
+            break;
         case TODO:
         case EVENT:
         case DEADLINE:

@@ -19,6 +19,18 @@ public class Todo extends Task {
     }
 
     /**
+     * Constructor for tasks of todo type.
+     * @param description   Description of the activity
+     * @param index         Numbers for the indexing process of the tasks
+     * @param isDone        Task completion status
+     * @param tag           Tag
+     */
+    public Todo(String description, int index, boolean isDone, String tag) {
+        super(description, index, isDone, tag);
+        super.type = TaskType.TODO;
+    }
+
+    /**
      * Returns the text version of task with index.
      * @return String representation for todo objects with indexing.
      */
@@ -35,6 +47,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return String.format("%s%s%s", super.type, isDone ? super.done : super.start, description);
+        return String.format("%s%s%s %s", super.type, isDone ? super.done : super.start, description, super.convert());
     }
 }
