@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
 
 
@@ -54,6 +55,14 @@ public class Tasklist {
      */
     public void deleteTask(int taskNumber) {
         taskList.remove(taskNumber - 1);
+    }
+
+    /**
+     * Sorts the Tasks in the list by alphabetical order.
+     */
+    public void sort() {
+        Comparator<Task> taskComparator = Comparator.comparing(task -> task.getDescription());
+        taskList.sort(taskComparator);
     }
 
     /**
