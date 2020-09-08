@@ -9,6 +9,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import java.time.LocalDateTime;
 
+import duke.DukeException;
 import org.junit.jupiter.api.Test;
 
 public class DateTimeHandlerTest {
@@ -19,10 +20,14 @@ public class DateTimeHandlerTest {
         String time2 = "24-12-2020 0100";
         String expected1 = "2000-09-24T18:00";
         String expected2 = "2020-12-24T01:00";
-        LocalDateTime localDateTime1 = parseDateTime(time1);
-        assertEquals(expected1, localDateTime1.toString());
-        assertEquals(expected2, parseDateTime(time2).toString());
-        assertEquals(time1, STANDARD_DATETIME_FORMAT.format(localDateTime1));
+        try {
+            LocalDateTime localDateTime1 = parseDateTime(time1);
+            assertEquals(expected1, localDateTime1.toString());
+            assertEquals(expected2, parseDateTime(time2).toString());
+            assertEquals(time1, STANDARD_DATETIME_FORMAT.format(localDateTime1));
+        } catch (DukeException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test
@@ -51,8 +56,12 @@ public class DateTimeHandlerTest {
         String input2 = "24-09-2000 1800-26-09-2000 2000";
         String expected1 = "(2000-09-24T18:00, 2000-09-24T20:00)";
         String expected2 = "(2000-09-24T18:00, 2000-09-26T20:00)";
-        assertEquals(expected1, parseEventTimings(input1).toString());
-        assertEquals(expected2, parseEventTimings(input2).toString());
+        try {
+            assertEquals(expected1, parseEventTimings(input1).toString());
+            assertEquals(expected2, parseEventTimings(input2).toString());
+        } catch (DukeException e) {
+            e.printStackTrace();
+        }
     }
 
     @Test

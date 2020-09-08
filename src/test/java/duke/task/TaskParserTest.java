@@ -4,12 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import duke.DukeException;
 import org.junit.jupiter.api.Test;
 
 public class TaskParserTest {
 
     @Test
-    public void testParse_validStrings_success() {
+    public void testParse_validStrings_success() throws DukeException {
         String toDoInput = "something";
         assertEquals(new ToDo(toDoInput).toString(),
                 TaskParser.parse(TaskParser.TO_DO + " " + toDoInput).toString());

@@ -2,6 +2,8 @@ package duke.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import duke.DukeException;
+import duke.InvalidSaveException;
 import org.junit.jupiter.api.Test;
 
 public class ToDoTest {
@@ -27,7 +29,7 @@ public class ToDoTest {
      * 2. The same ToDo can be recreated from the summary.
      */
     @Test
-    public void testSummary_standardToDos_success() {
+    public void testSummary_standardToDos_success() throws InvalidSaveException, DukeException {
         String input1 = "meeting";
         String input2 = "attend carnival park";
         ToDo event1 = new ToDo(input1);

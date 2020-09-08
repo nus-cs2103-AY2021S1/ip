@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import duke.DukeException;
+import duke.InvalidSaveException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -15,7 +17,7 @@ public class DeadlineTest {
      * Tests to see if the Deadline created with valid timing strings will be successful.
      */
     @Test
-    public void createDeadline_validStrings_success() {
+    public void createDeadline_validStrings_success() throws DukeException {
         String input1 = "meeting /by 21-09-2020 0800";
         String input2 = "meeting /by 23-09-2020 1000";
         String output1 = "[D][\u2718] meeting (by: 21-09-2020 0800)";
@@ -52,7 +54,7 @@ public class DeadlineTest {
      * 2. The same Deadline can be recreated from the summary.
      */
     @Test
-    public void testSummary_standardDeadlines_success() {
+    public void testSummary_standardDeadlines_success() throws InvalidSaveException, DukeException {
         String input1 = "meeting /by 21-09-2020 0800";
         String input2 = "carnival@park /by 23-10-2020 0800";
         Deadline event1 = new Deadline(input1);

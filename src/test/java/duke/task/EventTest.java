@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
+import duke.DukeException;
+import duke.InvalidSaveException;
 import org.junit.jupiter.api.Test;
 
 /**
@@ -15,7 +17,7 @@ public class EventTest {
      * Tests to see if the Event created with valid timing strings will be successful.
      */
     @Test
-    public void createEvent_validStrings_success() {
+    public void createEvent_validStrings_success() throws DukeException {
         String input1 = "meeting /at 21-09-2020 0800-1000";
         String input2 = "meeting /at 21-09-2020 0800-21-09-2020 1000";
         String input3 = "meeting /at 21-09-2020 0800-23-09-2020 1000";
@@ -62,7 +64,7 @@ public class EventTest {
      * 2. The same Event can be recreated from the summary.
      */
     @Test
-    public void testSummary_standardEvents_success() {
+    public void testSummary_standardEvents_success() throws DukeException, InvalidSaveException {
         String input1 = "meeting /at 21-09-2020 0800 21-09-2020 1000";
         String input2 = "carnival@park /at 23-10-2020 0800 05-11-2020 2300";
         Event event1 = new Event(input1);
