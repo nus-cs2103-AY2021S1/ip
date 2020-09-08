@@ -3,6 +3,7 @@ package duke;
 import duke.command.AddCommand;
 import duke.command.ByeCommand;
 import duke.command.HelpCommand;
+import duke.command.ListCommand;
 
 import java.util.ArrayList;
 
@@ -33,10 +34,8 @@ public class Duke {
      * @return String response to user input.
      * @throws DukeException Any exception caught will throw a DukeException.
      */
-    public String getResponse (String input) throws DukeException {
+    public String getResponse(String input) throws DukeException {
 
-        Task task = new Task("");
-        String[] inputSplit = new String[] {};
         String response = "";
 
         CommandType command = inputParser.parseInput(input);
@@ -51,7 +50,7 @@ public class Duke {
                     .execute(userTasks, storage);
             break;
         case DEADLINE:
-            inputSplit = input.split(" /by ");
+            String[] inputSplit = input.split(" /by ");
             String by = inputSplit[1];
             description = inputSplit[0].substring(8);
             response += new AddCommand(new Deadline(description, by))
@@ -65,69 +64,8 @@ public class Duke {
             response += new AddCommand(new Event(description, at, timeRange))
                     .execute(userTasks, storage);
             break;
-        case LIST_ALL:
-            response += ui.allTasksToString(userTasks.getTaskList());
-            break;
-        case LIST_ALL_DONE:
-            ArrayList<Task> tasksDone = new TaskFinder()
-                    .findAllDone(userTasks.getTaskList());
-            response += ui.allTasksDoneToString(tasksDone);
-            break;
-        case LIST_ALL_NOT_DONE:
-            ArrayList<Task> tasksNotDone = new TaskFinder()
-                    .findAllNotDone(userTasks.getTaskList());
-            response += ui.allTasksNotDoneToString(tasksNotDone);
-            break;
-        case LIST_TODOS:
-            ArrayList<Task> toDos = new TaskFinder()
-                    .findToDos(userTasks.getTaskList());
-            response += ui.toDosToString(toDos);
-            break;
-        case LIST_TODOS_DONE:
-            ArrayList<Task> toDosDone = new TaskFinder()
-                    .findToDosDone(userTasks.getTaskList());
-            response += ui.toDosDoneToString(toDosDone);
-            break;
-        case LIST_TODOS_NOT_DONE:
-            ArrayList<Task> toDosNotDone = new TaskFinder()
-                    .findToDosNotDone(userTasks.getTaskList());
-            response += ui.toDosNotDoneToString(toDosNotDone);
-            break;
-        case LIST_DEADLINES:
-            ArrayList<Task> deadlines = new TaskFinder()
-                    .findDeadlines(userTasks.getTaskList());
-            response += ui.deadlinesToString(deadlines);
-            break;
-        case LIST_DEADLINES_DONE:
-            ArrayList<Task> deadlinesDone = new TaskFinder()
-                    .findDeadlinesDone(userTasks.getTaskList());
-            response += ui.deadlinesDoneToString(deadlinesDone);
-            break;
-        case LIST_DEADLINES_NOT_DONE:
-            ArrayList<Task> deadlinesNotDone = new TaskFinder()
-                    .findDeadlinesNotDone(userTasks.getTaskList());
-            response += ui.deadlinesNotDoneToString(deadlinesNotDone);
-            break;
-        case LIST_EVENTS:
-            ArrayList<Task> events = new TaskFinder()
-                    .findEvents(userTasks.getTaskList());
-            response += ui.eventsToString(events);
-            break;
-        case LIST_EVENTS_DONE:
-            ArrayList<Task> eventsDone = new TaskFinder()
-                    .findEventsDone(userTasks.getTaskList());
-            response += ui.eventsDoneToString(eventsDone);
-            break;
-        case LIST_EVENTS_NOT_DONE:
-            ArrayList<Task> eventsNotDone = new TaskFinder()
-                    .findEventsNotDone(userTasks.getTaskList());
-            response += ui.eventsNotDoneToString(eventsNotDone);
-            break;
-        case LIST_BY_KEYWORD:
-            String keyword = input.split("find ")[1];
-            ArrayList<Task> filteredTasks = new TaskFinder()
-                    .findByKeyword(userTasks.getTaskList(), keyword);
-            response += ui.filteredTasksByKeywordToString(filteredTasks, keyword);
+        case LIST:
+            response += new ListCommand().execute(userTasks, input);
             break;
         case DONE:
             int index = Integer.parseInt(input.substring(5)) - 1;
@@ -152,7 +90,7 @@ public class Duke {
                 if (index >= userTasks.getTaskListSize()) {
                     throw new DukeException("", ExceptionType.INDEX_OUT_OF_BOUNDS);
                 } else {
-                    task = userTasks.getTask(index);
+                    Task task = userTasks.getTask(index);
                     userTasks.deleteTask(index);
                     response += ui.taskDeletedMessage(task);
                 }
