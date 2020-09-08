@@ -12,6 +12,7 @@ public class Todo extends Task {
      */
     public Todo(String description) {
         super(description);
+        assert !(description.equals("")) : "todo item is empty";
     }
 
     /**

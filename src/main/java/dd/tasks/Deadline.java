@@ -16,6 +16,8 @@ public class Deadline extends Task {
     public Deadline(String description, String by) {
         super(description);
         this.by = by;
+        assert !(description.equals("")) : "deadline item is empty";
+        assert !(by.equals("")) : "deadline date is empty";
     }
 
     /**
