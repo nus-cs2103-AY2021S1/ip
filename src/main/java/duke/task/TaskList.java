@@ -62,4 +62,12 @@ public class TaskList {
         list.add(task);
     }
 
+    /**
+     * Method that return a list of Task objects
+     * @return list of Task
+     */
+    public List<Task> getList() {
+        return this.list;
+    }
+
 }
