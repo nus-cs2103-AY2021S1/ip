@@ -8,6 +8,7 @@ package task;
  * <p> (i) Getters to details </p>
  */
 public class Task {
+    public static final String TYPE = "T";
     protected String description;
     protected boolean isDone;
 
@@ -79,6 +80,15 @@ public class Task {
         sb.append(getDescription() + "//");
 
         return sb.toString();
+    }
+
+    /**
+     * Gets the type of Tasks.
+     *
+     * @return type of Task.
+     */
+    public String getType() {
+        return Task.TYPE;
     }
 
     /**

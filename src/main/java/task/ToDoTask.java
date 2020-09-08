@@ -8,6 +8,7 @@ package task;
  * <p> (i) Getters to details </p>
  */
 public class ToDoTask extends Task {
+    public static final String TYPE = "T";
 
     /**
      * Constructor to create this object.
@@ -26,6 +27,16 @@ public class ToDoTask extends Task {
      */
     public ToDoTask(String description, boolean isDone) {
         super(description, isDone);
+    }
+
+    /**
+     * Gets the type of Tasks.
+     *
+     * @return type of Task.
+     */
+    @Override
+    public String getType() {
+        return ToDoTask.TYPE;
     }
 
     /**

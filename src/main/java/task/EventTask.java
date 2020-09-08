@@ -17,6 +17,7 @@ import exception.DateTimeInvalidFormatException;
  * <p> (i) getters </p>
  */
 public class EventTask extends Task implements TimeRelated {
+    public static final String TYPE = "E";
     protected static final DateTimeFormatter TIME_FORMAT = DateTimeFormatter.ofPattern("kk:mm");
     protected static final DateTimeFormatter DATE_FORMAT = DateTimeFormatter.ofPattern("dd MMM yyyy");
     protected LocalDate date;
@@ -159,6 +160,16 @@ public class EventTask extends Task implements TimeRelated {
         sb.append(getTimeInput());
 
         return sb.toString();
+    }
+
+    /**
+     * Gets the type of Tasks.
+     *
+     * @return type of Task.
+     */
+    @Override
+    public String getType() {
+        return EventTask.TYPE;
     }
 
     /**
