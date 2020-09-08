@@ -49,7 +49,7 @@ public class DukeException extends Throwable {
 
 
     /**
-     * Return String representation of DukeException object in form of List<String>.
+     * Returns String representation of DukeException object in form of List<String>.
      *
      */
     public List<String> toArrList() {
