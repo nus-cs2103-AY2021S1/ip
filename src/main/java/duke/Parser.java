@@ -76,6 +76,7 @@ public class Parser {
     public String parse(String userCommand) throws EmptyInputException, NoResponseException {
         String[] words = this.getDukeType(userCommand);
         String dukeOutput = "";
+        assert this.currentType != null : "This command is not supported by Duke";
         switch (this.currentType) {
         case DEADLINE:
             if (words.length == 1) {
