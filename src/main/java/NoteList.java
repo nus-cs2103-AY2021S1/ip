@@ -51,7 +51,7 @@ public class NoteList {
         } else {
             result.append("1. ").append(notesList.get(0).getName());
             for (int i = 2; i <= notesList.size(); i++) {
-                result.append(" ✰\n✰ ").append(i).append(". ").append(notesList.get(i - 1));
+                result.append(" ✰\n✰ ").append(i).append(". ").append(notesList.get(i - 1).getName());
             }
         }
         return result.toString();
