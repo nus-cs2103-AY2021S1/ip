@@ -7,13 +7,14 @@ public class Parser {
     protected TaskList tasks;
     private UserInput currentType = null;
     private Ui userInteract;
+
     /**
      * Returns a parser which interprets the user's command
      * This is a constructor of parser which takes in two arguments of user interact class and task list
      * Utilizes user interact class to return a response string and adds new tasks into the task list
      *
      * @param userInteract A class that return different types of duke response
-     * @param tasks List of tasks
+     * @param tasks        List of tasks
      * @return A parser
      */
     public Parser(Ui userInteract, TaskList tasks) {
@@ -81,78 +82,78 @@ public class Parser {
         case DEADLINE:
             if (words.length == 1) {
                 throw new EmptyInputException("deadline");
-            } else {
-                String deadlineTask = "";
-                String deadlineDate = "";
-                int byPosition = 0;
-                for (int i = 1; i < words.length; i++) {
-                    if (!words[i].equals("/by")) {
-                        deadlineTask = deadlineTask + words[i] + " ";
-                    } else {
-                        byPosition = i;
-                        break;
-                    }
-                }
-
-                for (int k = byPosition + 1; k < words.length; k++) {
-                    if (k != words.length - 1) {
-                        deadlineDate = deadlineDate + words[k] + " ";
-                    } else {
-                        deadlineDate = deadlineDate + words[k];
-                    }
-                }
-                deadlineTask = deadlineTask.trim();
-                Deadline newDeadline = new Deadline(deadlineTask, deadlineDate);
-                this.tasks.add(newDeadline);
-                dukeOutput = this.userInteract.showAdd(newDeadline, this.tasks);
             }
+            String deadlineTask = "";
+            String deadlineDate = "";
+            int byPosition = 0;
+            for (int i = 1; i < words.length; i++) {
+                if (!words[i].equals("/by")) {
+                    deadlineTask = deadlineTask + words[i] + " ";
+                } else {
+                    byPosition = i;
+                    break;
+                }
+            }
+
+            for (int k = byPosition + 1; k < words.length; k++) {
+                if (k != words.length - 1) {
+                    deadlineDate = deadlineDate + words[k] + " ";
+                } else {
+                    deadlineDate = deadlineDate + words[k];
+                }
+            }
+            deadlineTask = deadlineTask.trim();
+            Deadline newDeadline = new Deadline(deadlineTask, deadlineDate);
+            this.tasks.add(newDeadline);
+            dukeOutput = this.userInteract.showAdd(newDeadline, this.tasks);
+
             break;
 
         case TODO:
             if (words.length == 1) {
                 throw new EmptyInputException("todo");
-            } else {
-                String todoTask = "";
-                for (int i = 1; i < words.length; i++) {
-                    if (i != words.length - 1) {
-                        todoTask = todoTask + words[i] + " ";
-                    } else {
-                        todoTask = todoTask + words[i];
-                    }
-                }
-                ToDo newToDo = new ToDo(todoTask);
-                this.tasks.add(newToDo);
-                dukeOutput = this.userInteract.showAdd(newToDo, this.tasks);
             }
+            String todoTask = "";
+            for (int i = 1; i < words.length; i++) {
+                if (i != words.length - 1) {
+                    todoTask = todoTask + words[i] + " ";
+                } else {
+                    todoTask = todoTask + words[i];
+                }
+            }
+            ToDo newToDo = new ToDo(todoTask);
+            this.tasks.add(newToDo);
+            dukeOutput = this.userInteract.showAdd(newToDo, this.tasks);
+
             break;
 
         case EVENT:
             if (words.length == 1) {
                 throw new EmptyInputException("event");
-            } else {
-                String eventTask = "";
-                String eventDate = "";
-                int atPosition = 0;
-                for (int i = 1; i < words.length; i++) {
-                    if (!words[i].equals("/at")) {
-                        eventTask = eventTask + words[i] + " ";
-                    } else {
-                        atPosition = i;
-                        break;
-                    }
-                }
-
-                for (int k = atPosition + 1; k < words.length; k++) {
-                    if (k != words.length - 1) {
-                        eventDate = eventDate + words[k] + " ";
-                    } else {
-                        eventDate = eventDate + words[k];
-                    }
-                }
-                Event newEvent = new Event(eventTask, eventDate);
-                this.tasks.add(newEvent);
-                dukeOutput = this.userInteract.showAdd(newEvent, this.tasks);
             }
+            String eventTask = "";
+            String eventDate = "";
+            int atPosition = 0;
+            for (int i = 1; i < words.length; i++) {
+                if (!words[i].equals("/at")) {
+                    eventTask = eventTask + words[i] + " ";
+                } else {
+                    atPosition = i;
+                    break;
+                }
+            }
+
+            for (int k = atPosition + 1; k < words.length; k++) {
+                if (k != words.length - 1) {
+                    eventDate = eventDate + words[k] + " ";
+                } else {
+                    eventDate = eventDate + words[k];
+                }
+            }
+            Event newEvent = new Event(eventTask, eventDate);
+            this.tasks.add(newEvent);
+            dukeOutput = this.userInteract.showAdd(newEvent, this.tasks);
+
             break;
 
         case FIND:
