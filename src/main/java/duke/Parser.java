@@ -67,6 +67,8 @@ public class Parser {
             case "hello":
             case "help":
             case "list":
+            case "archive":
+            case "listArchive":
                 return new String[]{input};
             default:
                 return parseException(cleanInput);
@@ -83,6 +85,10 @@ public class Parser {
         case "done":
         case "delete":
             return parseModifications(commandType, taskContent);
+        case "loadArchive":
+            return parseLoadArchive(taskContent);
+        case "binArchive":
+            return parseBinArchive(taskContent);
         case "todo":
         case "event":
         case "deadline":
@@ -92,6 +98,28 @@ public class Parser {
             return new String[] {"exception", "no_meaning"};
         }
 
+    }
+
+
+    /**
+     * Returns Specific information of a 'read' command in Segments.
+     *
+     * @param fileName  User input of index of the archive file to load.
+     * @returns  Specific information of 'read' command.
+     */
+    private String[] parseLoadArchive(String fileName) {
+        return new String[] {"loadArchive", fileName};
+    }
+
+
+    /**
+     * Returns Specific information of a 'bin' command in Segments.
+     *
+     * @param fileName  User input of index of the archive file to delete.
+     * @returns  Specific information of 'bin' command.
+     */
+    private String[] parseBinArchive(String fileName) {
+        return new String[] {"binArchive", fileName};
     }
 
 
