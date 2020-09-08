@@ -20,6 +20,8 @@ public enum Command {
             "Deletes a task from the list. Usage: delete <Task ID>"),
     FIND_CMD("find", false,
             "Finds all tasks containing the query string. Usage: find <Query String>"),
+    LOAD_CMD("load", false,
+            "Loads commands from a file. Usage: load <File Location>"),
     HELP_CMD("help", true,
             "Displays this help message.");
 

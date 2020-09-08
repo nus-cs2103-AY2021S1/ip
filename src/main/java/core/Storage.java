@@ -32,14 +32,24 @@ public class Storage {
     }
 
     /**
-     * Loads the task list from a file.
+     * Loads the task list from the default file location {@code ./data/saved.txt}.
      * @throws IOException if there was an error reading from the file
      */
     public static void load() throws IOException {
-        final File saveFile = new File("./data/saved.txt");
+        load("./data/saved.txt");
+    }
+
+    /**
+     * Loads the task list from a file.
+     * @param fileName the file name of the file to load
+     * @throws IOException if there was an error reading from the file
+     */
+    public static void load(String fileName) throws IOException {
+        final File saveFile = new File(fileName);
         if (saveFile.exists()) {
             Files.lines(saveFile.toPath())
                     .forEach(new CommandHandler());
         }
     }
+
 }

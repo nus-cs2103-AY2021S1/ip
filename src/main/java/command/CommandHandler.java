@@ -93,6 +93,14 @@ public class CommandHandler implements Consumer<String>, Function<String, String
             case FIND_CMD:
                 output = findTasks(stripped);
                 break;
+            case LOAD_CMD:
+                try {
+                    Storage.load(stripped);
+                    output = "File loaded. New task list:\n" + listTasks();
+                } catch (IOException e) {
+                    throw new CommandException(input, "Could not read the given file.");
+                }
+                break;
             case HELP_CMD:
                 output = "Commands: \n" + Arrays.stream(Command.values())
                         .map(Command::getHelpMessage)
