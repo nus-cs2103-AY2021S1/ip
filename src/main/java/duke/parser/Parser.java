@@ -12,6 +12,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.ViewDayCommand;
 import duke.exception.DukeException;
 
 /**
@@ -59,7 +60,8 @@ public class Parser {
         } catch (DateTimeParseException error) {
             throw new DukeException("OOPS!!! It seems like you've provided us "
                     + "with the wrong date time format for your event. "
-                    + "Please structure it as yyyy-mm-dd hh:mm");
+                    + "Please structure it as dd.mm.yy HHmm where H refers to hour and m refers to min"
+                    + "\n\n For example, 05.02.20 1200 represents 5th Feb 2020, 12pm");
         }
     }
 
@@ -106,7 +108,9 @@ public class Parser {
 
         // Switch block checks for the appropriate commands to create based on user input.
         switch (userWord[0]) {
-        case "find" :
+        case "view":
+            return new ViewDayCommand(userWord[1], dateFormatter);
+        case "find":
             return new FindCommand(userWord[1]);
             //Fallthrough
 

@@ -36,6 +36,16 @@ public class Deadline extends Task {
         return "D///" + super.toData() + localDate.toString() + " " + localTime.toString();
     }
 
+    @Override
+    public boolean hasDate() {
+        return true;
+    }
+
+    @Override
+    public boolean isOnDate(LocalDate date) {
+        return this.localDate.equals(date);
+    }
+
     /**
      * Prints the string representation for the task for the user.
      * @return The string representation for the task for the user.
