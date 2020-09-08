@@ -9,7 +9,15 @@ import java.util.Arrays;
  */
 public class Parser {
 
-    public Parser() {}
+    private static final String LIST = "list";
+    private static final String HELP = "help";
+    private static final String SPACE = " ";
+    private static final String DONE = "done";
+    private static final String DELETE = "delete";
+    private static final String TODO = "todo";
+    private static final String DEADLINE = "deadline";
+    private static final String EVENT = "event";
+    private static final String FIND = "find";
 
     /**
      * Interprets the given user input with the current task list and storage.
@@ -26,50 +34,50 @@ public class Parser {
         assert storage != null : "Storage should not be null";
 
         ArrayList<Task> list = taskList.getList();
-        if (input.equals("list")) {
+        if (input.equals(LIST)) {
             showList(list);
             return;
         }
 
-        if (input.equals("help")) {
+        if (input.equals(HELP)) {
             showHelpInterface();
             return;
         }
 
-        if (input.contains(" ")) {
-            int i = input.indexOf(" ");
-            String firstWord = input.substring(0, i);
+        if (input.contains(SPACE)) {
+            int indexOfSpace = input.indexOf(SPACE);
+            String firstWord = input.substring(0, indexOfSpace);
 
             switch (firstWord) {
-                case "done":
-                    setDone(input, i, list, storage);
+                case DONE:
+                    setDone(input, indexOfSpace, list, storage);
                     break;
-                case "delete":
-                    dealWithDelete(input, i, taskList, list, storage);
+                case DELETE:
+                    dealWithDelete(input, indexOfSpace, taskList, list, storage);
                     break;
-                case "todo":
-                    dealWithTodo(input, i, taskList, list, storage);
+                case TODO:
+                    dealWithTodo(input, indexOfSpace, taskList, list, storage);
                     break;
-                case "deadline":
-                    dealWithDeadline(input, i, taskList, list, storage);
+                case DEADLINE:
+                    dealWithDeadline(input, indexOfSpace, taskList, list, storage);
                     break;
-                case "event":
-                    dealWithEvent(input, i, taskList, list, storage);
+                case EVENT:
+                    dealWithEvent(input, indexOfSpace, taskList, list, storage);
                     break;
-                case "find":
-                    dealWithFind(input, i, list);
+                case FIND:
+                    dealWithFind(input, indexOfSpace, list);
                     break;
                 default:
                     throw new DukeUnknownCommandException();
             }
         } else {
             switch (input) {
-                case "todo":
-                    throw new DukeEmptyDescriptionException("todo");
-                case "deadline":
-                    throw new DukeEmptyDescriptionException("deadline");
-                case "event":
-                    throw new DukeEmptyDescriptionException("event");
+                case TODO:
+                    throw new DukeEmptyDescriptionException(TODO);
+                case DEADLINE:
+                    throw new DukeEmptyDescriptionException(DEADLINE);
+                case EVENT:
+                    throw new DukeEmptyDescriptionException(EVENT);
                 default:
                     throw new DukeUnknownCommandException();
             }

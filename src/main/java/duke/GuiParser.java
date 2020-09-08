@@ -9,7 +9,16 @@ import java.util.Arrays;
  */
 public class GuiParser {
 
-    public GuiParser() {}
+    private static final String BYE = "bye";
+    private static final String LIST = "list";
+    private static final String HELP = "help";
+    private static final String SPACE = " ";
+    private static final String DONE = "done";
+    private static final String DELETE = "delete";
+    private static final String TODO = "todo";
+    private static final String DEADLINE = "deadline";
+    private static final String EVENT = "event";
+    private static final String FIND = "find";
 
     /**
      * Interprets the given user input with the current task list and storage.
@@ -25,48 +34,48 @@ public class GuiParser {
         assert taskList != null : "TaskList should not be null";
         assert storage != null : "Storage should not be null";
 
-        if (input.equals("bye")) {
+        if (input.equals(BYE)) {
             return "Bye. Hope to see you again soon!";
         }
 
         ArrayList<Task> list = taskList.getList();
 
-        if (input.equals("list")) {
+        if (input.equals(LIST)) {
             return showListGui(list);
         }
 
-        if (input.equals("help")) {
+        if (input.equals(HELP)) {
             return helpInterface();
         }
 
-        if (input.contains(" ")) {
-            int i = input.indexOf(" ");
-            String firstWord = input.substring(0, i);
+        if (input.contains(SPACE)) {
+            int indexOfSpace = input.indexOf(SPACE);
+            String firstWord = input.substring(0, indexOfSpace);
 
             switch (firstWord) {
-                case "done":
-                    return setDoneGui(input, i, list, storage);
-                case "delete":
-                    return dealWithDeleteGui(input, i, taskList, list, storage);
-                case "todo":
-                    return dealWithTodoGui(input, i, taskList, list, storage);
-                case "deadline":
-                    return dealWithDeadlineGui(input, i, taskList, list, storage);
-                case "event":
-                    return dealWithEventGui(input, i, taskList, list, storage);
-                case "find":
-                    return dealWithFindGui(input, i, list);
+                case DONE:
+                    return setDoneGui(input, indexOfSpace, list, storage);
+                case DELETE:
+                    return dealWithDeleteGui(input, indexOfSpace, taskList, list, storage);
+                case TODO:
+                    return dealWithTodoGui(input, indexOfSpace, taskList, list, storage);
+                case DEADLINE:
+                    return dealWithDeadlineGui(input, indexOfSpace, taskList, list, storage);
+                case EVENT:
+                    return dealWithEventGui(input, indexOfSpace, taskList, list, storage);
+                case FIND:
+                    return dealWithFindGui(input, indexOfSpace, list);
                 default:
                     throw new DukeUnknownCommandException();
             }
         } else {
             switch (input) {
-                case "todo":
-                    throw new DukeEmptyDescriptionException("todo");
-                case "deadline":
-                    throw new DukeEmptyDescriptionException("deadline");
-                case "event":
-                    throw new DukeEmptyDescriptionException("event");
+                case TODO:
+                    throw new DukeEmptyDescriptionException(TODO);
+                case DEADLINE:
+                    throw new DukeEmptyDescriptionException(DEADLINE);
+                case EVENT:
+                    throw new DukeEmptyDescriptionException(EVENT);
                 default:
                     throw new DukeUnknownCommandException();
             }

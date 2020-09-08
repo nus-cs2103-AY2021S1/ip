@@ -1,5 +1,7 @@
 package duke;
 
+import com.sun.scenario.effect.impl.prism.PrRenderInfo;
+
 import java.io.*;
 import java.util.ArrayList;
 
@@ -12,6 +14,40 @@ public class Storage {
     private PrintWriter printWriter;
     private ArrayList<duke.Task> list;
     private String filePath;
+    private static final String STANDARDFILEPATH = "data/tasks.txt";
+    private static final String COLON = ":";
+    private static final String TODO = "T";
+    private static final String DEADLINE = "D";
+    private static final String EVENT = "E";
+
+    /**
+     * Class constructor.
+     *
+     * @param filePath
+     * @throws IOException
+     */
+    public Storage(String filePath) throws IOException {
+        assert filePath != null : "FilePath should not be null";
+
+        try{
+            setFilePath(filePath);
+            setBr(new BufferedReader(new FileReader(filePath)));
+        } catch (FileNotFoundException e) {
+            setFilePath(STANDARDFILEPATH);
+            String directoryName = "data";
+            String fileName = "tasks.txt";
+            File directory = new File(directoryName);
+            if (!directory.exists()) {
+                directory.mkdir();
+            }
+            File file = new File(directoryName + "/" + fileName);
+            if (!file.exists()) {
+                file.createNewFile();
+            }
+            setBr(new BufferedReader(new FileReader(STANDARDFILEPATH)));
+            setPrintWriter(new PrintWriter(STANDARDFILEPATH));
+        }
+    }
 
     public BufferedReader getBr() {
         return br;
@@ -37,29 +73,6 @@ public class Storage {
         this.filePath = filePath;
     }
 
-    public Storage(String filePath) throws IOException {
-        assert filePath != null : "FilePath should not be null";
-
-        try{
-            setFilePath(filePath);
-            setBr(new BufferedReader(new FileReader(filePath)));
-        } catch (FileNotFoundException e) {
-            setFilePath("data/tasks.txt");
-            String directoryName = "data";
-            String fileName = "tasks.txt";
-            File directory = new File(directoryName);
-            if (!directory.exists()) {
-                directory.mkdir();
-            }
-            File file = new File(directoryName + "/" + fileName);
-            if (!file.exists()) {
-                file.createNewFile();
-            }
-            setBr(new BufferedReader(new FileReader("data/tasks.txt")));
-            setPrintWriter(new PrintWriter("data/tasks.txt"));
-        }
-    }
-
     /**
      * Loads the tasks.txt file when the bot is run.
      *
@@ -80,13 +93,13 @@ public class Storage {
 
             String icon = String.valueOf(lineOfText.charAt(3));
             switch (icon) {
-                case "T":
+                case TODO:
                     loadTodo(lineOfText, isDone, list);
                     break;
-                case "D":
+                case DEADLINE:
                     loadDeadline(lineOfText, isDone, list);
                     break;
-                case "E":
+                case EVENT:
                     loadEvent(lineOfText, isDone, list);
                     break;
                 default:
@@ -106,7 +119,7 @@ public class Storage {
      * @param list Task list.
      */
     private void loadEvent(String lineOfText, boolean isDone, ArrayList<Task> list) {
-        int indexOfColon = lineOfText.indexOf(":");
+        int indexOfColon = lineOfText.indexOf(COLON);
         String name = lineOfText.substring(9, indexOfColon - 4);
         String date = lineOfText.substring(indexOfColon + 2, lineOfText.length() - 1);
         Event event = new Event(name, date);
@@ -124,7 +137,7 @@ public class Storage {
      * @param list Task list.
      */
     private void loadDeadline(String lineOfText, boolean isDone, ArrayList<Task> list) {
-        int indexOfColon = lineOfText.indexOf(":");
+        int indexOfColon = lineOfText.indexOf(COLON);
         String name = lineOfText.substring(9, indexOfColon - 4);
         String date = lineOfText.substring(indexOfColon + 2, lineOfText.length() - 1);
         Deadline deadline = new Deadline(name, date);

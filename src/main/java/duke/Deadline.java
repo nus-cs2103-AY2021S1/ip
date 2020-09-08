@@ -8,8 +8,17 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
+    private final String ICON = "[D]";
+    private final DateTimeFormatter FORMATOFDATE = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+
     private LocalDate date;
 
+    /**
+     * Class constructor.
+     *
+     * @param name Name of deadline.
+     * @param date Date deadline is due.
+     */
     public Deadline(String name, String date) {
         super(name);
         this.date = LocalDate.parse(date);
@@ -17,7 +26,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.getStatusIcon() + " " + super.getTaskName() + " (by: " +
-                date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + ")";
+        return ICON + super.getStatusIcon() + " " + super.getTaskName() + " (by: " +
+                date.format(FORMATOFDATE) + ")";
     }
 }

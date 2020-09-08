@@ -9,7 +9,15 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
     private LocalDate date;
+    private final String ICON = "[E]";
+    private final DateTimeFormatter FORMATOFDATE = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
+    /**
+     * Class constructor.
+     * 
+     * @param name Name of event.
+     * @param date Date of event.
+     */
     public Event(String name, String date) {
         super(name);
         this.date = LocalDate.parse(date);
@@ -17,7 +25,7 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + super.getStatusIcon() + " " + super.getTaskName() + " (at: " +
-                date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd")) + ")";
+        return ICON + super.getStatusIcon() + " " + super.getTaskName() + " (at: " +
+                date.format(FORMATOFDATE) + ")";
     }
 }

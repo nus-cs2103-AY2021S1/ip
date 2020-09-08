@@ -5,12 +5,19 @@ package duke;
  */
 public class Todo extends Task {
 
+    private final String ICON = "[D]";
+
+    /**
+     * Class constructor.
+     *
+     * @param name Name of todo.
+     */
     public Todo(String name) {
         super(name);
     }
 
     @Override
     public String toString() {
-        return "[T]" + super.getStatusIcon() + " " + super.getTaskName();
+        return ICON + super.getStatusIcon() + " " + super.getTaskName();
     }
 }
