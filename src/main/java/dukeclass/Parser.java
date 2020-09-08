@@ -79,6 +79,7 @@ public class Parser {
         try {
             String[] splitString = userInput.split(" ");
 
+            assert splitString.length > 0;
 
             if (splitString[0].equals("help")) {
 
@@ -129,6 +130,7 @@ public class Parser {
 
                 } else {
                     //invalid input exception
+                    assert splitString.length < 2 || splitString.length > 3;
                 }
 
                 return Ui.printTaskList(list);
@@ -139,6 +141,7 @@ public class Parser {
                 return Ui.printTask(currTask);
 
             }
+            //assert false;
 
         } catch (Exception e) {
             return Ui.unknownInputErrorMessage(e);
