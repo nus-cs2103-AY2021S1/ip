@@ -5,3 +5,57 @@ Hello from
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
 
+What can I do for you?
+____________________________________________________________
+Got it. I've added this task:
+	[T][✘] study for CS2105
+Now you have 1 tasks in the list
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+	[D][✘] submit homework (by: 17 August 5pm)
+Now you have 2 tasks in the list
+____________________________________________________________
+____________________________________________________________
+Got it. I've added this task:
+	[E][✘] watch movie (at: 17 August 8pm-10pm)
+Now you have 3 tasks in the list
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1.[T][✘] study for CS2105
+2.[D][✘] submit homework (by: 17 August 5pm)
+3.[E][✘] watch movie (at: 17 August 8pm-10pm)
+____________________________________________________________
+____________________________________________________________
+Nice! I've marked this task as done:
+	[T][✓] study for CS2105
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1.[T][✓] study for CS2105
+2.[D][✘] submit homework (by: 17 August 5pm)
+3.[E][✘] watch movie (at: 17 August 8pm-10pm)
+____________________________________________________________
+____________________________________________________________
+Nice! I've marked this task as done:
+	[D][✓] submit homework (by: 17 August 5pm)
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1.[T][✓] study for CS2105
+2.[D][✓] submit homework (by: 17 August 5pm)
+3.[E][✘] watch movie (at: 17 August 8pm-10pm)
+____________________________________________________________
+____________________________________________________________
+Nice! I've marked this task as done:
+	[E][✓] watch movie (at: 17 August 8pm-10pm)
+____________________________________________________________
+____________________________________________________________
+Here are the tasks in your list:
+1.[T][✓] study for CS2105
+2.[D][✓] submit homework (by: 17 August 5pm)
+3.[E][✓] watch movie (at: 17 August 8pm-10pm)
+____________________________________________________________
+____________________________________________________________
+Bye. Hope to see you again soon!
