@@ -66,6 +66,7 @@ public class TaskList {
      * @return A string containing all relevant tasks from the list.
      */
     public String iterateFind(String keyword) {
+        assert keyword.length() > 0 : "Keyword should have at least 1 character";
         StringBuilder builder = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             Task current = tasks.get(i);
