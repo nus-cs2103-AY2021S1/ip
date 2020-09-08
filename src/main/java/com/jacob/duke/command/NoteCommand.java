@@ -1,6 +1,5 @@
 package main.java.com.jacob.duke.command;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import main.java.com.jacob.duke.DukeException;
