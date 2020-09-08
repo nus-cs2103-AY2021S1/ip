@@ -61,6 +61,8 @@ public class DeadlineCommand extends ComplexCommand {
                     + "Please add a /by deadline to the task.");
         }
 
+        assert splitParams.length == 2;
+
         return splitParams;
     }
 
