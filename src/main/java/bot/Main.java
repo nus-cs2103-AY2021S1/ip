@@ -13,8 +13,6 @@ import java.util.Scanner;
  * The type Main.
  */
 public class Main extends Application {
-    private Bot duke = new Bot("Straw Bot", "./assets/userData.txt");
-
     public static void main(String[] args) {
         Bot bot = new Bot("Straw Bot", "./assets/userData.txt");
         bot.init(new Scanner(System.in));
@@ -27,7 +25,8 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            stage.setTitle("STRAW BOT :)");
+            fxmlLoader.<MainWindow>getController().setDuke("Straw Bot", "./assets/userData.txt");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
