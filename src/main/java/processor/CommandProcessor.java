@@ -11,6 +11,7 @@ import exception.InvalidCommandException;
 import task.DeadlineTask;
 import task.EventTask;
 import task.Task;
+import task.TaskComparator;
 import task.TaskList;
 import task.ToDoTask;
 
@@ -39,6 +40,7 @@ public class CommandProcessor {
         map.put("event", (command) -> eventCommand(command));
         map.put("delete", (command) -> deleteCommand(command));
         map.put("find", (command) -> findCommand(command));
+        map.put("sort", (command) -> sortCommand());
         return map;
     }
 
@@ -199,7 +201,7 @@ public class CommandProcessor {
             List<Task> list = new ArrayList<>();
 
             for (int i = 0; i < size; i++) {
-                Task task = taskList.getTask(i);
+                Task task = this.taskList.getTask(i);
                 String taskInfo = task.toString();
                 if (taskInfo.contains(searchWord)) {
                     list.add(task);
@@ -211,5 +213,10 @@ public class CommandProcessor {
         } catch (DukeException e) {
             return e.toString();
         }
+    }
+
+    private String sortCommand() {
+        this.taskList.sort(new TaskComparator());
+        return this.taskList.showList();
     }
 }
