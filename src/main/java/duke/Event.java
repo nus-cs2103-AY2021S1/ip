@@ -2,7 +2,7 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 
@@ -22,13 +22,12 @@ public class Event extends Task {
      * Creates an Event which has not been marked as done.
      *
      * @param description Details of the Event.
-     * @param date Date of the occurrence of the Event.
-     * @param time Time of the occurrence of the Event.
+     * @param dateTime Date and time of the occurrence of the Event.
      */
-    public Event(String description, LocalDate date, LocalTime time) {
+    public Event(String description, LocalDateTime dateTime) {
         super(description);
-        this.date = date;
-        this.time = time;
+        this.date = dateTime.toLocalDate();
+        this.time = dateTime.toLocalTime();
     }
 
     /**
@@ -36,13 +35,12 @@ public class Event extends Task {
      *
      * @param description Details of the Event.
      * @param isDone Boolean value that indicates if the Task has been completed.
-     * @param date Date of the occurrence of the Event.
-     * @param time Time of the occurrence of the Event.
+     * @param dateTime Date and time of the occurrence of the Event.
      */
-    public Event(String description, boolean isDone, LocalDate date, LocalTime time) {
+    public Event(String description, boolean isDone, LocalDateTime dateTime) {
         super(description, isDone);
-        this.date = date;
-        this.time = time;
+        this.date = dateTime.toLocalDate();
+        this.time = dateTime.toLocalTime();
     }
 
     /**

@@ -11,6 +11,9 @@ import java.time.format.DateTimeFormatter;
  */
 public class Parser {
 
+    private static final String DEADLINE_DELIMITER = "/by";
+    private static final String EVENT_DELIMITER = "/at";
+
     /** Format for date and time used when user inputs a task */
     private static final DateTimeFormatter INPUT_DATE_TIME_FORMAT
             = DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm");
@@ -18,6 +21,10 @@ public class Parser {
     /** Format for date and time used when Duke saves a task list */
     private static final DateTimeFormatter SAVED_DATE_TIME_FORMAT
             = DateTimeFormatter.ofPattern("MMM dd yyyy h:mm a");
+
+    private static LocalDateTime parseDate(String fullDateTime, DateTimeFormatter format) {
+        return LocalDateTime.parse(fullDateTime, format);
+    }
 
     /**
      * Parses a line read from the task list from the storage space
@@ -29,7 +36,6 @@ public class Parser {
      */
     public static Task parseTask(String fullTask) throws DukeException {
         String[] splitTask = fullTask.split(" \\| ");
-
         String type = splitTask[0];
         String description = splitTask[2];
         boolean isDone = Integer.parseInt(splitTask[1]) == 1;
@@ -38,14 +44,26 @@ public class Parser {
         case "T":
             return new Todo(description, isDone);
         case "D":
-            LocalDateTime by = LocalDateTime.parse(splitTask[3], SAVED_DATE_TIME_FORMAT);
-            return new Deadline(description, isDone, by.toLocalDate(), by.toLocalTime());
+            return new Deadline(description, isDone, parseDate(splitTask[3], SAVED_DATE_TIME_FORMAT));
         case "E":
-            LocalDateTime at = LocalDateTime.parse(splitTask[3], SAVED_DATE_TIME_FORMAT);
-            return new Event(description, isDone, at.toLocalDate(), at.toLocalTime());
+            return new Event(description, isDone, parseDate(splitTask[3], SAVED_DATE_TIME_FORMAT));
         default:
             throw new DukeException("Unable to read task.");
         }
+    }
+
+    private static Deadline parseDeadline(String fullDeadline) {
+        String[] splitDeadline = fullDeadline.split(DEADLINE_DELIMITER);
+        String description = splitDeadline[0].trim();
+        LocalDateTime dateTime = parseDate(splitDeadline[1].trim(), INPUT_DATE_TIME_FORMAT);
+        return new Deadline(description, dateTime);
+    }
+
+    private static Event parseEvent(String fullEvent) {
+        String[] splitEvent = fullEvent.split(EVENT_DELIMITER);
+        String description = splitEvent[0].trim();
+        LocalDateTime dateTime = parseDate(splitEvent[1].trim(), INPUT_DATE_TIME_FORMAT);
+        return new Event(description, dateTime);
     }
 
     /**
@@ -71,15 +89,9 @@ public class Parser {
             case "find":
                 return new FindCommand(splitCommand[1]);
             case "deadline":
-                String[] splitDeadline = splitCommand[1].split("/by");
-                String deadlineDescription = splitDeadline[0].trim();
-                LocalDateTime by = LocalDateTime.parse(splitDeadline[1].trim(), INPUT_DATE_TIME_FORMAT);
-                return new AddCommand(new Deadline(deadlineDescription, by.toLocalDate(), by.toLocalTime()));
+                return new AddCommand(parseDeadline(splitCommand[1]));
             case "event":
-                String[] splitEvent = splitCommand[1].split("/at");
-                String eventDescription = splitEvent[0].trim();
-                LocalDateTime at = LocalDateTime.parse(splitEvent[1].trim(), INPUT_DATE_TIME_FORMAT);
-                return new AddCommand(new Event(eventDescription, at.toLocalDate(), at.toLocalTime()));
+                return new AddCommand(parseEvent(splitCommand[1]));
             case "done":
                 return new DoneCommand(Integer.parseInt(splitCommand[1]));
             case "delete":
