@@ -9,6 +9,7 @@ import duke.ui.Ui;
  * Parses the user input into command.
  */
 public class Parser {
+
     private static DateTimeFormatter validFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
 
     public static DateTimeFormatter getValidFormat() {
@@ -17,13 +18,14 @@ public class Parser {
 
     /**
      * Parses the user input into different commands.
+     *
      * @param storage class containing the data.
      * @param ui handles system output.
      * @param taskList a list of tasks.
      * @param command handles different commands.
      */
     public String parse(Storage storage, Ui ui, TaskList taskList, Command command, String instruction) {
-        String output = "";
+        String output;
         int len = instruction.length();
         try {
             if (instruction.equals("list")) {
@@ -46,7 +48,7 @@ public class Parser {
             } else if (len >= 5 && instruction.substring(0, 5).equals("event")) {
                 output = command.handleEvent(instruction, taskList, ui);
             } else {
-                output = command.invalidInput();
+                output = command.handleInvalidInput();
             }
         } catch (NumberFormatException ex) {
             output = ex.getMessage();

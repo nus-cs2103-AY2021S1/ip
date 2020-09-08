@@ -17,6 +17,7 @@ import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
+
     @FXML
     private Label dialog;
     @FXML

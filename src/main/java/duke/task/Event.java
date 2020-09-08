@@ -11,6 +11,7 @@ public class Event extends Task {
 
     /**
      * Constructs an event object.
+     *
      * @param description title of the event.
      * @param time time of event happening time.
      * @param isDone status.
@@ -28,6 +29,7 @@ public class Event extends Task {
 
     /**
      * Represents the string written into data.txt.
+     *
      * @return A string written into the data.txt.
      */
     @Override
