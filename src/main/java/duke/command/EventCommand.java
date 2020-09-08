@@ -29,9 +29,7 @@ public class EventCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        if (this.nextCommandArr.length < 2) {
-            return new DukeException("The description of an event cannot be empty~").toString();
-        } else {
+        if (this.nextCommandArr.length >= 2) {
             try {
                 String[] eventArr = this.nextCommandArr[1].split("/at");
                 Event newEvent = new Event(eventArr[0], eventArr[1].strip());
@@ -40,6 +38,8 @@ public class EventCommand extends Command {
             } catch (Exception e) {
                 return new DukeException("Please input a proper date for your event~").toString();
             }
+        } else {
+            return new DukeException("The description of an event cannot be empty~").toString();
         }
     }
 
