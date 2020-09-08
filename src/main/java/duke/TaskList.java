@@ -39,6 +39,7 @@ public class TaskList {
      * @param listOfTasks The list of tasks in String format, to populate the task list with.
      */
     private void initiateTaskList(List<String> listOfTasks) {
+        assert listOfTasks != null : "listOfTasks is null";
         for (String taskString : listOfTasks) {
             String[] taskStringParts = taskString.split("\\|");
             String taskTypeSymbol = taskStringParts[0];
@@ -58,7 +59,8 @@ public class TaskList {
                                 LocalDateTime.parse(deadline), doneSymbol.equals(DONE)));
                 break;
             default:
-                System.err.println("Error in last save. Now loading a new, empty task list.");
+                assert false : "Error in last save. The save file may have been tampered with and some tasks may have "
+                        + "been corrupted.";
                 break;
             }
         }

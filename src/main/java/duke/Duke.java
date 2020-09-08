@@ -85,6 +85,7 @@ public class Duke {
                 ui.showError(e);
             }
         }
+        assert isExit : "program terminated prematurely";
     }
 
     /**
