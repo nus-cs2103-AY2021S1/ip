@@ -25,23 +25,25 @@ public class Duke {
      *
      * @param filePath represents where the filepath of where the file may exist.
      */
-    public Duke(String filePath) {
+    public Duke(String filePath, String shortFormPath) {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(filePath, shortFormPath);
         try {
             tasks = new TaskList(storage.load());
+            storage.setShortForm();
         } catch (DukeException e) {
-            ui.showLoadingError(e);
+            ui.setDukeException(e);
+            ui.showLoadingError();
             tasks = new TaskList();
         }
     }
-    public Duke(String filePath, String input){
-        storage = new Storage(filePath);
+    public Duke(String filePath, String input, String shortFormPath){
+        storage = new Storage(filePath, shortFormPath);
         try {
             ui = new Ui(input);
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
-            ui.showLoadingError(e);
+            ui.showLoadingError();
             tasks = new TaskList();
         }
     }
@@ -103,7 +105,7 @@ public class Duke {
      *  Then, prints out relevant information using the output() func.
      */
     public static void main(String[] args) throws IOException {
-        Duke duke = new Duke("src/main/java/tasks.txt");
+        Duke duke = new Duke("src/main/java/tasks.txt", "src/main/java/shortCuts.txt");
         duke.run();
         //String s = duke.getResponse("ToDo read book");
         /*PrintStream fileOut = new PrintStream("src/main/java/output.txt");

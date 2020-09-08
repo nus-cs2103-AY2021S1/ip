@@ -30,12 +30,7 @@ public class Ui {
     }
     /**
      * This prints out if there is an error when tasks are loaded
-     *
-     * @param d this is the error that is thrown whose string message gets printed
      */
-    public void showLoadingError(DukeException d){
-        System.out.println(d.getMessage());
-    }
     public void showLoadingError(){
         System.out.println(dukeException.getMessage());
     }

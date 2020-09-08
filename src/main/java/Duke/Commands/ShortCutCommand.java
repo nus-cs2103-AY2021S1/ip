@@ -1,11 +1,15 @@
 package Duke.Commands;
 
 import Duke.Errors.DukeException;
+import Duke.Errors.FileAbsentException;
 import Duke.Errors.ShortCutException;
 import Duke.Helpers.ShortCuts;
 import Duke.Helpers.Storage;
 import Duke.Helpers.TaskList;
 import Duke.Helpers.Ui;
+
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class ShortCutCommand extends Command{
 
@@ -36,11 +40,11 @@ public class ShortCutCommand extends Command{
             }
 
             String[] splitData = splitDescription(commandDescription);
-
             if (shortCutPresent(splitData[1])) {
                 throw new ShortCutException(false, false, true, splitData[1]);
             } else if (!shortCutPresent(splitData[1])) {
                 ShortCuts.addShortCut(splitData[0], splitData[1]);
+                updateShortCutFile(splitData[1], splitData[0], storage);
                 return shortCutMessage();
             } else {
                 return null;
@@ -78,5 +82,17 @@ public class ShortCutCommand extends Command{
 
     private String shortCutMessage(){
         return "  short cut successfully added";
+    }
+
+    private void updateShortCutFile(String shortCut, String original, Storage storage) throws DukeException {
+        try {
+            FileWriter fw = new FileWriter(storage.getShortFormsFilePath(), true); //updates the file in storage as new task is added
+            String newShortCutToAdd = shortCut + " " + original;
+            fw.write(newShortCutToAdd + "\n");
+            fw.close();
+        }catch (IOException i){
+            throw new FileAbsentException(storage.getShortFormsFilePath());
+        }
+
     }
 }

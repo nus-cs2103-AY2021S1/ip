@@ -4,7 +4,9 @@ import java.util.HashMap;
 
 public class ShortCuts {
     private static HashMap<String, String> shortCuts = new HashMap<>();
-
+    private ShortCuts(String shortCut, String originalForm){
+        shortCuts.put(shortCut, originalForm);
+    }
     /**
      * gets the shortCuts and sets default values of short cut to proper keywords
      *
@@ -19,15 +21,15 @@ public class ShortCuts {
      * default short cuts provided by Duke
      */
     public static void defaultShortCut(){
-        shortCuts.put("s", "short"); //s is short form for short
-        shortCuts.put("b", "bye"); //b is short form for bye
-        shortCuts.put("l", "list"); //l is short form for list
-        shortCuts.put("d", "delete"); //d is short form for delete
-        shortCuts.put("do", "done"); //do is short form for done
-        shortCuts.put("t", "todo"); //t is short form for todo
-        shortCuts.put("e", "event"); //e is short form for event
-        shortCuts.put("de", "deadline"); //de is short form for deadline
-        shortCuts.put("f", "find"); //f is short for find
+            shortCuts.put("s", "short"); //s is short form for short
+            shortCuts.put("b", "bye"); //b is short form for bye
+            shortCuts.put("l", "list"); //l is short form for list
+            shortCuts.put("d", "delete"); //d is short form for delete
+            shortCuts.put("do", "done"); //do is short form for done
+            shortCuts.put("t", "todo"); //t is short form for todo
+            shortCuts.put("e", "event"); //e is short form for event
+            shortCuts.put("de", "deadline"); //de is short form for deadline
+            shortCuts.put("f", "find"); //f is short for find
     }
 
     /**
@@ -37,7 +39,7 @@ public class ShortCuts {
      * @param shortForm the short form given by user
      */
     public static void addShortCut(String originalForm, String shortForm) {
-        shortCuts.put(shortForm, originalForm); //adds new short cut being input by user
+        new ShortCuts(shortForm, originalForm);
     }
 
     /**
@@ -57,4 +59,5 @@ public class ShortCuts {
         }
         return shortCuts.containsKey(keyWord);//checks whether hashmap contains keyword.
     }
+
 }

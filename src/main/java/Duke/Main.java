@@ -11,7 +11,7 @@ import java.io.IOException;
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-    private Duke duke = new Duke("src/main/java/tasks.txt");
+    private Duke duke = new Duke("src/main/java/tasks.txt", "src/main/java/shortCuts.txt");
 
     /**
      * Implements the abstract start method in Application class

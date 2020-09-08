@@ -1,5 +1,7 @@
 package Duke.Errors;
 
+import Duke.Helpers.ShortCuts;
+
 public class ShortCutException extends DukeException {
     private boolean isDescriptionAbsent;
     private boolean isShortCutAbsent;
@@ -19,19 +21,22 @@ public class ShortCutException extends DukeException {
         }else if(isShortCutAbsent){
             return shortCutAbsent();
         }else if(isShortCutAlreadyPresent){
-            return null;
+            return shortCutAlreadyPresent();
         }else {
             return "default";
         }
     }
 
-    public String descriptionAbsent() {
+    private String descriptionAbsent() {
         return "  The description of short cannot be empty";
     }
 
-    public String shortCutAbsent(){
+    private String shortCutAbsent(){
         return "short cut is not provided";
     }
-
+    private String shortCutAlreadyPresent(){
+        assert ShortCuts.getShortCuts().containsKey(this.shortCut);
+        return this.shortCut + " is already present as a short form for" + ShortCuts.getShortCuts().get(this.shortCut);
+    }
 
 }

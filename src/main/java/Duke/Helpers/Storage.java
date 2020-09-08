@@ -19,15 +19,29 @@ import java.util.Scanner;
  */
 public class Storage {
     private String filePath;
-
+    private String shortFormsFilePath;
     /**
      * Constructor assigns filePath to filePath
      * @param filePath assigns this value to variable
      */
-    public Storage(String filePath){
+    public Storage(String filePath, String shortFormsFile){
         this.filePath = filePath;
+        this.shortFormsFilePath = shortFormsFile;
     }
-
+    public void setShortForm() throws DukeException{
+        File f = new File(this.shortFormsFilePath);
+        assert f.exists(); //file should exist to keep track of tasks
+        try {
+            Scanner sc = new Scanner(f);
+            do{
+                String shortFormString = sc.nextLine();
+                String[] shortFormDictionary = shortFormDictionary(shortFormString);
+                ShortCuts.getShortCuts().put(shortFormDictionary[0], shortFormDictionary[1]);
+            }while (sc.hasNextLine());
+        }catch (IOException i){
+            throw new FileAbsentException(shortFormsFilePath);
+        }
+    }
     /**
      * Converts the string form of tasks on the file to Task objects
      *
@@ -35,6 +49,7 @@ public class Storage {
      * @throws DukeException when a file with FilePath doesnt exist.
      */
     public List<Task> load() throws DukeException {
+
         File f = new File(this.filePath);
         assert f.exists(); //file should exist to keep track of tasks
         try {
@@ -133,5 +148,20 @@ public class Storage {
      */
     public String getFilePath() {
         return filePath;
+    }
+    public String[] shortFormDictionary(String shortFormString){
+        String shortForm = "";
+        int index = -1;
+        for(int i = 0; i < shortFormString.length(); i++){
+            if(shortFormString.charAt(i) == ' '){
+                index = i;
+                break;
+            }
+            shortForm = shortForm + shortFormString.charAt(i);
+        }
+        return new String[]{shortForm, shortFormString.substring(index + 1)};
+    }
+    public String getShortFormsFilePath(){
+        return shortFormsFilePath;
     }
 }
