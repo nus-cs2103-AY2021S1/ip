@@ -35,6 +35,7 @@ public class Deadline extends Task {
      * Returns a string representation of a Deadline Object
      * [D][X]** (task) by: (date) for tasks marked as Important
      * [D][X] (task) by: (date) for tasks not marked as Important
+     * X for Undone Task, O for Done Task.
      * @return String
      */
     @Override
