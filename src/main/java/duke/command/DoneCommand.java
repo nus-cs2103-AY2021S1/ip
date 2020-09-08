@@ -17,6 +17,11 @@ public class DoneCommand extends Command {
 
     private int taskNumber;
 
+    /**
+     * Constructs a DoneCommand which represents a Command to mark a Task with the given taskNumber as completed.
+     *
+     * @param taskNumber used to identify the Task to be mark as completed
+     */
     public DoneCommand(int taskNumber) {
         this.taskNumber = taskNumber;
     }

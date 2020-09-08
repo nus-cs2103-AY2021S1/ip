@@ -16,6 +16,12 @@ public class TodoCommand extends Command {
 
     private final String description;
 
+    /**
+     * Constructs a TodoCommand object which represents a Command to create
+     * an Todo task with the given description.
+     *
+     * @param description description of the Todo to be created
+     */
     public TodoCommand(String description) {
         this.description = description;
     }

@@ -6,7 +6,7 @@ import java.io.IOException;
 import java.util.List;
 
 /**
- * Manages the history of the Duke app.
+ * Manages the state and history of the Duke app.
  */
 public class DukeStateManager {
 
@@ -63,7 +63,6 @@ public class DukeStateManager {
             throw new IOException(e);
         }
         return currentNode.state;
-
     }
 
 }

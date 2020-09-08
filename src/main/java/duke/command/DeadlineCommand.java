@@ -20,6 +20,13 @@ public class DeadlineCommand extends Command {
     private final String description;
     private final String dateStr;
 
+    /**
+     * Constructs a DeadlineCommand object which represents a Command to create
+     * a Deadline task with the given description and date String.
+     *
+     * @param description description of the Deadline to be created
+     * @param dateStr String to describe the datetime of the Deadline
+     */
     public DeadlineCommand(String description, String dateStr) {
         this.description = description;
         this.dateStr = dateStr;

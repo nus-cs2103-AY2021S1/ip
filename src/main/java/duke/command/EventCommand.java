@@ -20,6 +20,13 @@ public class EventCommand extends Command {
     private final String description;
     private final String dateStr;
 
+    /**
+     * Constructs a EventCommand object which represents a Command to create
+     * an Event task with the given description and date String.
+     *
+     * @param description description of the Event to be created
+     * @param dateStr String to describe the date of time of the Event
+     */
     public EventCommand(String description, String dateStr) {
         this.description = description;
         this.dateStr = dateStr;
