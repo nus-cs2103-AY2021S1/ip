@@ -195,18 +195,21 @@ public class Duke {
                 System.out.println(Arrays.toString(words));
 
                 if (words[0].equals("T")) {
+                    assert (words.length == 3) : "Data file is corrupted - incorrect format for todos";
                     Todo todo = new Todo(words[2]);
                     if (words[1].equals("1")) {
                         todo.markAsDone();
                     }
                     tasks.add(todo);
                 } else if (words[0].equals("D")) {
+                    assert (words.length == 4) : "Data file is corrupted - incorrect format for deadlines";
                     Deadline deadline = new Deadline(words[2], LocalDate.parse(words[3]));
                     if (words[1].equals("1")) {
                         deadline.markAsDone();
                     }
                     tasks.add(deadline);
                 } else if (words[0].equals("E")) {
+                    assert (words.length == 4) : "Data file is corrupted - incorrect format for events";
                     Event event = new Event(words[2], LocalDate.parse(words[3]));
                     if (words[1].equals("1")) {
                         event.markAsDone();
@@ -214,7 +217,7 @@ public class Duke {
                     tasks.add(event);
                 } else {
                     System.out.println(words[0]);
-                    System.out.println("Idk what is happening welp");
+                    System.out.println("Idk what is happening help");
                 }
             }
             sc.close();
