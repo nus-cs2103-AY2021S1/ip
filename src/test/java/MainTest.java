@@ -22,6 +22,8 @@ import ikura.TextFrontend;
 import ikura.util.Pair;
 import ikura.util.Either;
 
+import java.util.Arrays;
+
 public class MainTest {
 
     private static final String DB_PATH   = "data/tasks.txt";
@@ -66,6 +68,12 @@ public class MainTest {
             .reduce((a, b) -> a + '\n' + b)
             .get()
             + '\n';
+
+        var x = output.getBytes();
+        var y = test.snd().getBytes();
+
+        System.err.printf("actual = %s\n\n", Arrays.toString(x));
+        System.err.printf("expect = %s\n\n", Arrays.toString(y));
 
         if (!output.equals(test.snd())) {
             try {
