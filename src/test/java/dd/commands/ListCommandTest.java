@@ -3,12 +3,8 @@ package dd.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import dd.exception.DukeException;
@@ -22,25 +18,9 @@ import dd.ui.Ui;
 
 public class ListCommandTest {
 
-    //@@author g-erm-reused
-    //Reused from https://www.baeldung.com/java-testing-system-out-println
-    private final PrintStream standardOut = System.out;
-    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-
-    @BeforeEach
-    public void setUp() {
-        System.setOut(new PrintStream(outputStreamCaptor));
-    }
-
-    @AfterEach
-    public void tearDown() {
-        System.setOut(standardOut);
-    }
-    //@@author
-
     @Test
     public void list_success() throws DukeException {
-        String res = "1. [T][✘] borrow book\n ";
+        String res = "Here is your current list of task(s)!\n1. [T][✘] borrow book\n";
 
         Todo t = new Todo("borrow book");
         ArrayList<Task> a = new ArrayList<>();
@@ -52,16 +32,16 @@ public class ListCommandTest {
         Ui ui = new Ui();
         DataStorage ds = new DataStorage();
 
-        new ListCommand("list", "").execute(tasks, ui, ds);
+        String actual = new ListCommand("list", "").execute(tasks, ui, ds);
 
         assertEquals(res.replaceAll("\\p{Cntrl}", " "),
-                outputStreamCaptor.toString().replaceAll("\\p{Cntrl}", " "));
+                actual.replaceAll("\\p{Cntrl}", " "));
     }
 
     @Test
     public void checkDate_success() throws DukeException {
-        String res = "Here is your list of task(s) on 31-12-2020:\n "
-                + "1. [D][✘] return book (by: 31 Dec 2020)\n ";
+        String res = "Here is your list of task(s) on 31-12-2020:\n"
+                + "1. [D][✘] return book (by: 31 Dec 2020)\n";
 
         Todo t = new Todo("borrow book");
         Deadline d = new Deadline("return book", "31 Dec 2020");
@@ -76,10 +56,10 @@ public class ListCommandTest {
         Ui ui = new Ui();
         DataStorage ds = new DataStorage();
 
-        new ListCommand("check", "31-12-2020").execute(tasks, ui, ds);
+        String actual = new ListCommand("check", "31-12-2020").execute(tasks, ui, ds);
 
         assertEquals(res.replaceAll("\\p{Cntrl}", " "),
-                outputStreamCaptor.toString().replaceAll("\\p{Cntrl}", " "));
+                actual.replaceAll("\\p{Cntrl}", " "));
     }
 
     @Test
@@ -100,9 +80,9 @@ public class ListCommandTest {
         DataStorage ds = new DataStorage();
 
         try {
-            new ListCommand("check", "9 June").execute(tasks, ui, ds);
+            String actual = new ListCommand("check", "9 June").execute(tasks, ui, ds);
 
-            assertEquals("", outputStreamCaptor.toString().replaceAll("\\p{Cntrl}", " "));
+            assertEquals("", actual.replaceAll("\\p{Cntrl}", " "));
             fail();
         } catch (DukeException e) {
             assertEquals(res.replaceAll("\\p{Cntrl}", " "),
@@ -128,9 +108,9 @@ public class ListCommandTest {
         DataStorage ds = new DataStorage();
 
         try {
-            new ListCommand("check", "09-06-2020").execute(tasks, ui, ds);
+            String actual = new ListCommand("check", "09-06-2020").execute(tasks, ui, ds);
 
-            assertEquals("", outputStreamCaptor.toString().replaceAll("\\p{Cntrl}", " "));
+            assertEquals("", actual.replaceAll("\\p{Cntrl}", " "));
             fail();
         } catch (DukeException e) {
             assertEquals(res.replaceAll("\\p{Cntrl}", " "),
@@ -140,9 +120,9 @@ public class ListCommandTest {
 
     @Test
     public void checkDesc_success() throws DukeException {
-        String res = "Here is the list of task(s) related to book:\n "
-                + "1. [T][✘] borrow book\n "
-                + "2. [D][✘] return book (by: 31 Dec 2020)\n ";
+        String res = "Here is the list of task(s) related to book:\n"
+                + "1. [T][✘] borrow book\n"
+                + "2. [D][✘] return book (by: 31 Dec 2020)\n";
 
         Todo t = new Todo("borrow book");
         Deadline d = new Deadline("return book", "31 Dec 2020");
@@ -160,10 +140,10 @@ public class ListCommandTest {
         Ui ui = new Ui();
         DataStorage ds = new DataStorage();
 
-        new ListCommand("find", "book").execute(tasks, ui, ds);
+        String actual = new ListCommand("find", "book").execute(tasks, ui, ds);
 
         assertEquals(res.replaceAll("\\p{Cntrl}", " "),
-                outputStreamCaptor.toString().replaceAll("\\p{Cntrl}", " "));
+                actual.replaceAll("\\p{Cntrl}", " "));
     }
 
     @Test
@@ -184,9 +164,9 @@ public class ListCommandTest {
         DataStorage ds = new DataStorage();
 
         try {
-            new ListCommand("find", "meeting").execute(tasks, ui, ds);
+            String actual = new ListCommand("find", "meeting").execute(tasks, ui, ds);
 
-            assertEquals("", outputStreamCaptor.toString().replaceAll("\\p{Cntrl}", " "));
+            assertEquals("", actual.replaceAll("\\p{Cntrl}", " "));
             fail();
         } catch (DukeException e) {
             assertEquals(res.replaceAll("\\p{Cntrl}", " "),

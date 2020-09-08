@@ -27,10 +27,11 @@ public class DoneCommand extends Command {
      * @param tasks Current TaskList to modify.
      * @param ui Ui used to print statements.
      * @param ds DataStorage used to load or write data.
+     * @return Output to confirm done task if successful.
      * @throws DukeException If invalid task number is given in item.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, DataStorage ds) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, DataStorage ds) throws DukeException {
         int taskNum;
 
         try {
@@ -41,17 +42,9 @@ public class DoneCommand extends Command {
 
         if (taskNum > 0 && taskNum <= tasks.getTaskSize()) {
             tasks.getTask(taskNum - 1).markAsDone();
-            ui.printDoneTask(tasks.getTask(taskNum - 1));
+            return ui.printDoneTask(tasks.getTask(taskNum - 1));
         } else {
             throw new DukeException().invalidTaskNumber();
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

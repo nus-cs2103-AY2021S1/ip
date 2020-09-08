@@ -3,11 +3,6 @@ package dd.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import dd.exception.DukeException;
@@ -18,28 +13,12 @@ import dd.ui.Ui;
 
 public class DeleteCommandTest {
 
-    //@@author g-erm-reused
-    //Reused from https://www.baeldung.com/java-testing-system-out-println
-    private final PrintStream standardOut = System.out;
-    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-
-    @BeforeEach
-    public void setUp() {
-        System.setOut(new PrintStream(outputStreamCaptor));
-    }
-
-    @AfterEach
-    public void tearDown() {
-        System.setOut(standardOut);
-    }
-    //@@author
-
     @Test
     public void execute_success() throws DukeException {
         Todo delTask = new Todo("borrow book");
 
-        String res = "Alright! I've deleted the task:\n  " + delTask
-                + "\n " + "You now have 0 task(s) in your list!\n ";
+        String res = "Alright! I've deleted the task:  \n" + delTask
+                + "\n" + "You now have 0 task(s) in your list!";
 
         TaskList tasks = new TaskList();
         tasks.addTask(delTask);
@@ -47,10 +26,10 @@ public class DeleteCommandTest {
         Ui ui = new Ui();
         DataStorage ds = new DataStorage();
 
-        new DeleteCommand("delete", "1").execute(tasks, ui, ds);
+        String actual = new DeleteCommand("delete", "1").execute(tasks, ui, ds);
 
         assertEquals(res.replaceAll("\\p{Cntrl}", " "),
-                outputStreamCaptor.toString().replaceAll("\\p{Cntrl}", " "));
+                actual.replaceAll("\\p{Cntrl}", " "));
     }
 
     @Test
@@ -62,9 +41,9 @@ public class DeleteCommandTest {
         DataStorage ds = new DataStorage();
 
         try {
-            new DeleteCommand("delete", "1").execute(tasks, ui, ds);
+            String actual = new DeleteCommand("delete", "1").execute(tasks, ui, ds);
 
-            assertEquals("", outputStreamCaptor.toString().replaceAll("\\p{Cntrl}", " "));
+            assertEquals("", actual.replaceAll("\\p{Cntrl}", " "));
             fail();
         } catch (DukeException e) {
             assertEquals(res.replaceAll("\\p{Cntrl}", " "),

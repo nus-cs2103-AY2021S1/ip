@@ -29,15 +29,15 @@ public class AddCommand extends Command {
         super(command, item);
     }
 
-    private void addTodo() {
+    private String addTodo() {
         tasks.addTask(new Todo(item));
 
-        ui.startAddTodo(tasks.getLastTask());
-        ui.printTasksSize(tasks.getTaskSize());
+        return ui.startAddTodo(tasks.getLastTask()) + "\n" + ui.printTasksSize(tasks.getTaskSize());
     }
 
-    private void addDeadline() throws DukeException {
-        String[] temp = item.split(" /by "); // create array of [task desc, task date]
+    private String addDeadline() throws DukeException {
+        // create array of [task desc, task date]
+        String[] temp = item.split(" /by ");
 
         if (temp.length == 2) {
             boolean isValidInput = dth.isValidInput(temp[1]);
@@ -47,8 +47,8 @@ public class AddCommand extends Command {
                 String formattedDate = dth.categorizeInput(temp[1]);
                 tasks.addTask(new Deadline(temp[0], formattedDate));
 
-                ui.startAddDeadline(tasks.getLastTask());
-                ui.printTasksSize(tasks.getTaskSize());
+                return ui.startAddDeadline(tasks.getLastTask()) + "\n"
+                        + ui.printTasksSize(tasks.getTaskSize());
             } else {
                 // not valid date
                 throw new DukeException().invalidDate();
@@ -59,8 +59,9 @@ public class AddCommand extends Command {
         }
     }
 
-    private void addEvent() throws DukeException {
-        String[] temp = item.split(" /at "); // create array of [task desc, task date]
+    private String addEvent() throws DukeException {
+        // create array of [task desc, task date]
+        String[] temp = item.split(" /at ");
 
         if (temp.length == 2) {
             boolean isValidInput = dth.isValidInput(temp[1]);
@@ -70,8 +71,8 @@ public class AddCommand extends Command {
                 String formattedDate = dth.categorizeInput(temp[1]);
                 tasks.addTask(new Event(temp[0], formattedDate));
 
-                ui.startAddEvent(tasks.getLastTask());
-                ui.printTasksSize(tasks.getTaskSize());
+                return ui.startAddEvent(tasks.getLastTask()) + "\n"
+                        + ui.printTasksSize(tasks.getTaskSize());
             } else {
                 // not valid date
                 throw new DukeException().invalidDate();
@@ -88,29 +89,32 @@ public class AddCommand extends Command {
      * @param taskList Current TaskList to modify.
      * @param u Ui used to print statements.
      * @param ds DataStorage used to load or write data.
+     * @return String to confirm details of task added.
      * @throws DukeException If no date string contained in item,
      * or invalid date string is given to Deadline or Event tasks.
      */
     @Override
-    public void execute(TaskList taskList, Ui u, DataStorage ds) throws DukeException {
+    public String execute(TaskList taskList, Ui u, DataStorage ds) throws DukeException {
         tasks = taskList;
         ui = u;
         this.dth = new DateTimeHandler();
+        String output = "";
 
-        if (command.equals("todo")) {
-            addTodo();
-        } else if (command.equals("deadline")) {
-            addDeadline();
-        } else if (command.equals("event")) {
-            addEvent();
+        switch (command) {
+        case "todo":
+            output = addTodo();
+            break;
+        case "deadline":
+            output = addDeadline();
+            break;
+        case "event":
+            output = addEvent();
+            break;
+        default:
+            output = ""; //TODO
+            break;
         }
-    }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+        return output;
     }
 }

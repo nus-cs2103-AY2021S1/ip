@@ -8,7 +8,6 @@ import dd.commands.ExitCommand;
 import dd.commands.HelpCommand;
 import dd.commands.ListCommand;
 import dd.exception.DukeException;
-import dd.ui.Ui;
 import javafx.animation.PauseTransition;
 import javafx.application.Platform;
 import javafx.util.Duration;
@@ -38,14 +37,15 @@ public class Parser {
             PauseTransition delay = new PauseTransition(Duration.seconds(2));
             delay.setOnFinished(event -> Platform.exit());
             delay.play();
+
         } else if (input.equals("help")) {
             // help command
             c = new HelpCommand("help", "");
+
         } else if (input.equals("list")) {
             // list command
-            new Ui().startList();
-
             c = new ListCommand("list", "");
+
         } else if (input.startsWith("todo")) {
             // add to-do command
             if (input.length() < 5) {
@@ -53,6 +53,7 @@ public class Parser {
             } else {
                 c = new AddCommand("todo", input.substring(5));
             }
+
         } else if (input.startsWith("deadline")) {
             // add deadline command
             if (input.length() < 9) {
@@ -60,6 +61,7 @@ public class Parser {
             } else {
                 c = new AddCommand("deadline", input.substring(9));
             }
+
         } else if (input.startsWith("event")) {
             // add event command
             if (input.length() < 6) {
@@ -67,6 +69,7 @@ public class Parser {
             } else {
                 c = new AddCommand("event", input.substring(6));
             }
+
         } else if (input.startsWith("done")) {
             // done command
             if (input.length() < 5) {
@@ -74,6 +77,7 @@ public class Parser {
             } else {
                 c = new DoneCommand("done", input.substring(5));
             }
+
         } else if (input.startsWith("delete")) {
             // delete command
             if (input.length() < 7) {
@@ -81,6 +85,7 @@ public class Parser {
             } else {
                 c = new DeleteCommand("delete", input.substring(7));
             }
+
         } else if (input.startsWith("check")) {
             // check list command
             if (input.length() < 6) {
@@ -88,6 +93,7 @@ public class Parser {
             } else {
                 c = new ListCommand("check", input.substring(6));
             }
+
         } else if (input.startsWith("find")) {
             // list find command
             if (input.length() < 5) {
@@ -95,10 +101,12 @@ public class Parser {
             } else {
                 c = new ListCommand("find", input.substring(5));
             }
+
         } else {
             // not valid task
             throw new DukeException("Invalid command, I don't understand :(\n"
                     + "Type 'help' for a list of possible commands.");
+
         }
 
         return c;

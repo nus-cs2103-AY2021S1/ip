@@ -9,9 +9,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -28,8 +25,8 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
 
     // images from bigheads.io
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/bigheadUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/bigheadDD.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/BigheadUser.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/BigheadDD.png"));
 
     @FXML
     public void initialize() {
@@ -37,29 +34,12 @@ public class MainWindow extends AnchorPane {
     }
 
     public void setDuke() {
-        //@@author g-erm-reused
-        //Reused from https://stackoverflow.com/questions/8708342/redirect-console-output-to-string-in-java
-        //with adaptation
-
-        // Create a stream to hold the output
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(baos);
-        // IMPORTANT: Save the old System.out!
-        PrintStream old = System.out;
-        // Tell Java to use your special stream
-        System.setOut(ps);
-
         duke = new Duke();
-
-        // Put things back
-        System.out.flush();
-        System.setOut(old);
+        String output = duke.initializeDuke();
 
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(baos.toString(), dukeImage)
+                DialogBox.getDukeDialog(output, dukeImage)
         );
-
-        //@@author
 
         printGreeting();
     }

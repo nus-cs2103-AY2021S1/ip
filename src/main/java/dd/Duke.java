@@ -1,8 +1,6 @@
 package dd;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.PrintStream;
 
 import dd.commands.Command;
 import dd.exception.DukeException;
@@ -20,80 +18,57 @@ public class Duke {
     private Ui ui;
     private TaskList tasks;
 
-    public boolean isExit = false;
-
     /**
      * Class Constructor.
      */
     public Duke() {
         this.ds = new DataStorage();
         this.ui = new Ui();
-
-        try {
-            tasks = new TaskList(ds.loadData());
-        } catch (IOException e) {
-            ui.showLoadingError();
-            tasks = new TaskList();
-        }
     }
 
+    /**
+     * Indicates results from loading data.
+     *
+     * @return String to indicate results from loading data.
+     */
+    public String initializeDuke() {
+        String output;
+        try {
+            tasks = new TaskList(ds.loadData());
+            output = ds.getLoadResults();
+        } catch (IOException e) {
+            output = ui.showLoadingError();
+            tasks = new TaskList();
+        }
+
+        return output;
+    }
+
+    /**
+     * Prints greeting to user.
+     *
+     * @return starting greeting of the system.
+     */
     public String sendGreeting() {
-        //@@author g-erm-reused
-        //Reused from https://stackoverflow.com/questions/8708342/redirect-console-output-to-string-in-java
-        //with adaptation
-
-        // Create a stream to hold the output
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(baos);
-        // IMPORTANT: Save the old System.out!
-        PrintStream old = System.out;
-        // Tell Java to use your special stream
-        System.setOut(ps);
-
-        ui.greeting();
-
-        // Put things back
-        System.out.flush();
-        System.setOut(old);
-
-        return baos.toString();
-
-        //@@author
+        return ui.greeting();
     }
 
     /**
      * Takes in user input, parses into a command and executes
      * the next command till an exit command is given.
+     *
+     * @return reply to user based on the input.
      */
     public String getResponse(String input) {
-
-        //@@author g-erm-reused
-        //Reused from https://stackoverflow.com/questions/8708342/redirect-console-output-to-string-in-java
-        //with adaptation
-
-        // Create a stream to hold the output
-        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        PrintStream ps = new PrintStream(baos);
-        // IMPORTANT: Save the old System.out!
-        PrintStream old = System.out;
-        // Tell Java to use your special stream
-        System.setOut(ps);
+        String ddReply;
 
         try {
             Command c = Parser.parse(input);
-
-            c.execute(tasks, ui, ds);
-            isExit = c.isExit();
+            ddReply = c.execute(tasks, ui, ds);
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            ddReply = ui.showError(e.getMessage());
         }
 
-        // Put things back
-        System.out.flush();
-        System.setOut(old);
-
-        return baos.toString();
-
-        //@@author
+        return ddReply;
     }
 }

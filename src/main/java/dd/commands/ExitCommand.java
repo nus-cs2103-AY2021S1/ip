@@ -27,19 +27,12 @@ public class ExitCommand extends Command {
      * @param tasks Current TaskList to modify.
      * @param u Ui used to print statements.
      * @param ds DataStorage used to load or write data.
+     * @return Exit greeting string from DD.
      * @throws DukeException If no data is able to be written.
      */
     @Override
-    public void execute(TaskList tasks, Ui u, DataStorage ds) throws DukeException {
-        u.exit();
-        ds.writeData(tasks.getTaskList());
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isExit() {
-        return true;
+    public String execute(TaskList tasks, Ui u, DataStorage ds) throws DukeException {
+        String output = u.exit() + "\n" + ds.writeData(tasks.getTaskList());
+        return output;
     }
 }

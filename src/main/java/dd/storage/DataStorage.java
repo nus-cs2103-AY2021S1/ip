@@ -17,6 +17,7 @@ import dd.ui.Ui;
 public class DataStorage {
 
     private Ui ui = new Ui();
+    private String loadResults;
 
     /**
      * Returns file created or opened to read and save data.
@@ -27,11 +28,20 @@ public class DataStorage {
         File f = new File("./src/data/duke.txt"); // create a File for the given file path
 
         if (f.createNewFile()) {
-            ui.dataCreate(f.getName());
+            loadResults = ui.dataCreate(f.getName());
         } else {
-            ui.dataExists();
+            loadResults = ui.dataExists();
         }
         return f;
+    }
+
+    /**
+     * Indicates whether data was loaded successfully.
+     *
+     * @return String that indicates whether loading the file was successful.
+     */
+    public String getLoadResults() {
+        return loadResults;
     }
 
     private void convertData(ArrayList<Task> taskList) throws IOException, RuntimeException {
@@ -52,15 +62,16 @@ public class DataStorage {
      * Writes data to file based on ArrayList of tasks given.
      *
      * @param taskList ArrayList of tasks to be written to file.
+     * @return String to show result of writing data to file.
      * @throws DukeException If no tasks are in taskList,
      * and no tasks are to be written to file.
      */
-    public void writeData(ArrayList<Task> taskList) throws DukeException {
+    public String writeData(ArrayList<Task> taskList) throws DukeException {
         try {
             convertData(taskList);
-            ui.updateData();
+            return ui.updateData();
         } catch (IOException e) {
-            ui.showError("Error writing to file.");
+            return ui.showError("Error writing to file.");
         } catch (RuntimeException e) {
             throw new DukeException().noData();
         }

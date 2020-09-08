@@ -1,7 +1,5 @@
 package dd.ui;
 
-import java.util.Scanner;
-
 import dd.tasks.Task;
 
 /**
@@ -10,170 +8,197 @@ import dd.tasks.Task;
  */
 public class Ui {
 
-    private final Scanner sc = new Scanner(System.in);
-
     /**
-     * Prints output to indicate data created at given file name.
+     * Indicate data created at given file name.
      *
      * @param fName File name that data is created in.
+     * @return String that indicates file is created.
      */
-    public void dataCreate(String fName) {
-        System.out.println("New data created: " + fName);
+    public String dataCreate(String fName) {
+        return "New data created: " + fName;
     }
 
     /**
-     * Prints output to indicate data already exists.
+     * Indicate data already exists.
+     *
+     * @return String that indicates data exists.
      */
-    public void dataExists() {
-        System.out.println("Data already exists.");
+    public String dataExists() {
+        return "Data already exists.";
     }
 
     /**
-     * Prints exit output.
+     * Returns exit output.
+     *
+     * @return DD exit string.
      */
-    public void exit() {
-        System.out.println("You're leaving? Bye :( Come back soon!");
+    public String exit() {
+        return "You're leaving? Bye :( Come back soon!";
     }
 
     /**
-     * Prints greeting output.
+     * Returns greeting output.
+     *
+     * @return DD greeting string.
      */
-    public void greeting() {
+    public String greeting() {
         String logo = " ____   ____\n"
                 + "|  _ \\ |  _ \\\n"
                 + "| | | || | | |\n"
                 + "| |_| || |_| |\n"
                 + "|____/ |____/\n";
-        System.out.println("Hi! I'm\n" + logo + "Your personal task manager!\n"
-                + "Type 'help' for a list of possible commands!");
+        return "Hi! I'm\n" + logo + "Your personal task manager!\n"
+                + "Type 'help' for a list of possible commands!";
     }
 
     /**
-     * Prints all possible user commands.
+     * Returns all possible user commands.
+     *
+     * @return Possible user commands for user.
      */
-    public void printAllCommands() {
-        System.out.println("Here are all the possible commands:\n"
-                + " todo\n deadline\n event\n list\n find\n check\n done\n delete\n bye");
+    public String printAllCommands() {
+        return "Here are all the possible commands and how to use them:\n"
+                + "  To add a todo, enter: \"todo (todo item)\". \n"
+                + "    For example: \"todo borrow book\". \n"
+                + "  To add a deadline, enter: \"deadline (name) /by (date) (OPTIONAL time)\". \n"
+                + "    For example: \"deadline return book /by 31-12-2020\". \n"
+                + "  To add an event, enter: \"event (name) /at (date) (OPTIONAL time)\". \n"
+                + "    For example: \"event team meeting /at 31-12-2020 1800\". \n"
+                + "  To check your list of tasks, enter: \"list\". \n"
+                + "  To check your list of tasks on a particular date, enter: \"check (date)\". \n"
+                + "    For example: \"check 31-12-2020\". \n"
+                + "  To find list of tasks related to a word, enter: \"find (word)\". \n"
+                + "    For example: \"find book\". \n"
+                + "  To mark a task as done, enter: \"done (task number in list)\". \n"
+                + "  To delete a task, enter: \"delete (task number in list)\". \n"
+                + "  If you want to leave, you can just say \"bye\"!! \n";
     }
 
     /**
-     * Prints output to indicate task given is deleted.
+     * Indicate task given is deleted.
      *
      * @param t Task that is deleted.
+     * @return String that confirms deleted task.
      */
-    public void printDeletedTask(Task t) {
-        System.out.println("Alright! I've deleted the task:\n  " + t);
+    public String printDeletedTask(Task t) {
+        return "Alright! I've deleted the task:\n  " + t;
     }
 
     /**
-     * Prints output to indicate task given is marked as done.
+     * Indicate task given is marked as done.
      *
      * @param t Task that is marked as done.
+     * @return String that confirms task that is mark as done.
      */
-    public void printDoneTask(Task t) {
-        System.out.println("Wow!! Good job!!\n  " + t);
+    public String printDoneTask(Task t) {
+        return "Wow!! Good job!!\n  " + t;
     }
 
     /**
-     * Prints output for listing of task according to task index and Task given.
+     * Returns string for listing of task according to task index and Task given.
      *
      * @param taskIndex Index of task.
      * @param t Task to be printed.
+     * @return String of task details.
      */
-    public void printTask(int taskIndex, Task t) {
-        System.out.println(taskIndex + ". " + t);
+    public String printTask(int taskIndex, Task t) {
+        return taskIndex + ". " + t;
     }
 
     /**
-     * Prints output to indicate number of tasks in list.
+     * Indicates number of tasks in list.
      *
      * @param taskSize Number of tasks in list.
+     * @return String to indicate the number of tasks in list.
      */
-    public void printTasksSize(int taskSize) {
-        System.out.println("You now have " + taskSize + " task(s) in your list!");
+    public String printTasksSize(int taskSize) {
+        return "You now have " + taskSize + " task(s) in your list!";
     }
 
     /**
-     * Takes the user input.
-     *
-     * @return Input entered by user.
-     */
-    public String readInput() {
-        return sc.nextLine();
-    }
-
-    /**
-     * Prints error message given.
+     * Returns error message given.
      *
      * @param msg Error message to be printed.
+     * @return Error message.
      */
-    public void showError(String msg) {
-        System.out.println(msg);
+    public String showError(String msg) {
+        return msg;
     }
 
     /**
-     * Prints output to indicate loading error.
+     * Indicates loading error.
+     *
+     * @return String to show that loading error occurred.
      */
-    public void showLoadingError() {
-        System.out.println("An error occurred, unable to load prior data. New list created.");
+    public String showLoadingError() {
+        return "An error occurred, unable to load prior data. New list created.";
     }
 
     /**
-     * Prints output to indicate to-do given is added.
+     * Indicate to-do given is added.
      *
      * @param t To-do that is added.
+     * @return String to confirm to-do task added.
      */
-    public void startAddTodo(Task t) {
-        System.out.println("Ok, To-do added:\n  " + t);
+    public String startAddTodo(Task t) {
+        return "Ok, To-do added:\n  " + t;
     }
 
     /**
-     * Prints output to indicate deadline given is added.
+     * Indicate deadline given is added.
      *
      * @param t Deadline that is added.
+     * @return String to confirm deadline task added.
      */
-    public void startAddDeadline(Task t) {
-        System.out.println("Ok, Deadline added:\n  " + t);
+    public String startAddDeadline(Task t) {
+        return "Ok, Deadline added:\n  " + t;
     }
 
     /**
-     * Prints output to indicate event given is added.
+     * Indicate event given is added.
      *
      * @param t Event that is added.
+     * @return String to confirm event task added.
      */
-    public void startAddEvent(Task t) {
-        System.out.println("Ok, Event added:\n  " + t);
+    public String startAddEvent(Task t) {
+        return "Ok, Event added:\n  " + t;
     }
 
     /**
-     * Prints output to indicate date that is being checked.
+     * Indicate date that is being checked.
      *
      * @param date Date that is being checked.
+     * @return String to confirm date checked.
      */
-    public void startCheckDate(String date) {
-        System.out.println("Here is your list of task(s) on " + date + ":");
+    public String startCheckDate(String date) {
+        return "Here is your list of task(s) on " + date + ":";
     }
 
     /**
-     * Prints output to indicate description that is being checked.
+     * Indicate description that is being checked.
      *
      * @param desc Description that is being checked.
+     * @return String to confirm description being checked.
      */
-    public void startCheckDesc(String desc) {
-        System.out.println("Here is the list of task(s) related to " + desc + ":");
+    public String startCheckDesc(String desc) {
+        return "Here is the list of task(s) related to " + desc + ":";
     }
 
     /**
-     * Prints output to indicate start of listing of tasks.
+     * Indicate start of listing of tasks.
+     *
+     * @return String to show the start of list.
      */
-    public void startList() {
-        System.out.println("Here is your current list of task(s)!");
+    public String startList() {
+        return "Here is your current list of task(s)!";
     }
 
     /**
-     * Prints output to indicate data is updated.
+     * Indicate data is updated.
+     *
+     * @return String to indicate that data is updated.
      */
-    public void updateData() {
-        System.out.println("Updated your data!");
+    public String updateData() {
+        return "Updated your data!";
     }
 }

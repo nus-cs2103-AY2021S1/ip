@@ -30,14 +30,8 @@ public abstract class Command {
      * @param taskList Current TaskList to modify.
      * @param u Ui used to print statements.
      * @param ds DataStorage used to load or write data.
+     * @return Appropriate response from DD according to user input given.
      * @throws DukeException If details in item are invalid.
      */
-    public abstract void execute(TaskList taskList, Ui u, DataStorage ds) throws DukeException;
-
-    /**
-     * Returns whether exit command is given.
-     *
-     * @return true if exit command is given, false if not.
-     */
-    public abstract boolean isExit();
+    public abstract String execute(TaskList taskList, Ui u, DataStorage ds) throws DukeException;
 }

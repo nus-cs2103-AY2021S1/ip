@@ -3,11 +3,6 @@ package dd.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import dd.exception.DukeException;
@@ -20,50 +15,35 @@ import dd.ui.Ui;
 
 public class AddCommandTest {
 
-    //@@author g-erm-reused
-    //Reused from https://www.baeldung.com/java-testing-system-out-println
-    private final PrintStream standardOut = System.out;
-    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-
-    @BeforeEach
-    public void setUp() {
-        System.setOut(new PrintStream(outputStreamCaptor));
-    }
-
-    @AfterEach
-    public void tearDown() {
-        System.setOut(standardOut);
-    }
-    //@@author
-
     @Test
     public void addTodo_success() throws DukeException {
-        String res = "Ok, To-do added:\n  " + new Todo("borrow book")
-                + "\n " + "You now have 1 task(s) in your list!\n ";
+        String res = "Ok, To-do added:  \n" + new Todo("borrow book")
+                + "\n" + "You now have 1 task(s) in your list!";
 
         TaskList tasks = new TaskList();
         Ui ui = new Ui();
         DataStorage ds = new DataStorage();
 
-        new AddCommand("todo", "borrow book").execute(tasks, ui, ds);
+        String actual = new AddCommand("todo", "borrow book").execute(tasks, ui, ds);
 
         assertEquals(res.replaceAll("\\p{Cntrl}", " "),
-                outputStreamCaptor.toString().replaceAll("\\p{Cntrl}", " "));
+                actual.replaceAll("\\p{Cntrl}", " "));
     }
 
     @Test
     public void addDeadline_success() throws DukeException {
-        String res = "Ok, Deadline added:\n  " + new Deadline("return book", "31 Dec 2020")
-                + "\n " + "You now have 1 task(s) in your list!\n ";
+        String res = "Ok, Deadline added:  \n" + new Deadline("return book", "31 Dec 2020")
+                + "\n" + "You now have 1 task(s) in your list!";
 
         TaskList tasks = new TaskList();
         Ui ui = new Ui();
         DataStorage ds = new DataStorage();
 
-        new AddCommand("deadline", "return book /by 31-12-2020").execute(tasks, ui, ds);
+        String actual = new AddCommand("deadline", "return book /by 31-12-2020")
+                .execute(tasks, ui, ds);
 
         assertEquals(res.replaceAll("\\p{Cntrl}", " "),
-                outputStreamCaptor.toString().replaceAll("\\p{Cntrl}", " "));
+                actual.replaceAll("\\p{Cntrl}", " "));
     }
 
     @Test
@@ -77,9 +57,10 @@ public class AddCommandTest {
         DataStorage ds = new DataStorage();
 
         try {
-            new AddCommand("deadline", "return book").execute(tasks, ui, ds);
+            String actual = new AddCommand("deadline", "return book")
+                    .execute(tasks, ui, ds);
 
-            assertEquals("", outputStreamCaptor.toString().replaceAll("\\p{Cntrl}", " "));
+            assertEquals("", actual.replaceAll("\\p{Cntrl}", " "));
             fail();
         } catch (DukeException e) {
             assertEquals(res.replaceAll("\\p{Cntrl}", " "),
@@ -97,9 +78,10 @@ public class AddCommandTest {
         DataStorage ds = new DataStorage();
 
         try {
-            new AddCommand("deadline", "return book /by 9 June").execute(tasks, ui, ds);
+            String actual = new AddCommand("deadline", "return book /by 9 June")
+                    .execute(tasks, ui, ds);
 
-            assertEquals("", outputStreamCaptor.toString().replaceAll("\\p{Cntrl}", " "));
+            assertEquals("", actual.replaceAll("\\p{Cntrl}", " "));
             fail();
         } catch (DukeException e) {
             assertEquals(res.replaceAll("\\p{Cntrl}", " "),
@@ -109,17 +91,18 @@ public class AddCommandTest {
 
     @Test
     public void addEvent_success() throws DukeException {
-        String res = "Ok, Event added:\n  " + new Event("meeting", "31 Dec 2020 02:00 PM")
-                + "\n " + "You now have 1 task(s) in your list!\n ";
+        String res = "Ok, Event added:  \n" + new Event("meeting", "31 Dec 2020 02:00 PM")
+                + "\n" + "You now have 1 task(s) in your list!";
 
         TaskList tasks = new TaskList();
         Ui ui = new Ui();
         DataStorage ds = new DataStorage();
 
-        new AddCommand("event", "meeting /at 31-12-2020 1400").execute(tasks, ui, ds);
+        String actual = new AddCommand("event", "meeting /at 31-12-2020 1400")
+                .execute(tasks, ui, ds);
 
         assertEquals(res.replaceAll("\\p{Cntrl}", " "),
-                outputStreamCaptor.toString().replaceAll("\\p{Cntrl}", " "));
+                actual.replaceAll("\\p{Cntrl}", " "));
     }
 
     @Test
@@ -133,9 +116,10 @@ public class AddCommandTest {
         DataStorage ds = new DataStorage();
 
         try {
-            new AddCommand("event", "return book /at").execute(tasks, ui, ds);
+            String actual = new AddCommand("event", "return book /at")
+                    .execute(tasks, ui, ds);
 
-            assertEquals("", outputStreamCaptor.toString().replaceAll("\\p{Cntrl}", " "));
+            assertEquals("", actual.replaceAll("\\p{Cntrl}", " "));
             fail();
         } catch (DukeException e) {
             assertEquals(res.replaceAll("\\p{Cntrl}", " "),
@@ -153,9 +137,10 @@ public class AddCommandTest {
         DataStorage ds = new DataStorage();
 
         try {
-            new AddCommand("event", "meeting /at 9 June").execute(tasks, ui, ds);
+            String actual = new AddCommand("event", "meeting /at 9 June")
+                    .execute(tasks, ui, ds);
 
-            assertEquals("", outputStreamCaptor.toString().replaceAll("\\p{Cntrl}", " "));
+            assertEquals("", actual.replaceAll("\\p{Cntrl}", " "));
             fail();
         } catch (DukeException e) {
             assertEquals(res.replaceAll("\\p{Cntrl}", " "),

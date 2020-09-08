@@ -27,10 +27,11 @@ public class DeleteCommand extends Command {
      * @param tasks Current TaskList to modify.
      * @param ui Ui used to print statements.
      * @param ds DataStorage used to load or write data.
+     * @return Output to confirm deleted task if successful, and indicate the updated task list size.
      * @throws DukeException If invalid task number is given in item.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, DataStorage ds) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, DataStorage ds) throws DukeException {
         int delNum;
 
         try {
@@ -40,20 +41,12 @@ public class DeleteCommand extends Command {
         }
 
         if (delNum > 0 && delNum <= tasks.getTaskSize()) {
-            ui.printDeletedTask(tasks.getTask(delNum - 1));
+            String deletedTask = ui.printDeletedTask(tasks.getTask(delNum - 1));
             tasks.deleteTask(delNum - 1);
 
-            ui.printTasksSize(tasks.getTaskSize());
+            return deletedTask + "\n" + ui.printTasksSize(tasks.getTaskSize());
         } else {
             throw new DukeException().invalidTaskNumber();
         }
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isExit() {
-        return false;
     }
 }

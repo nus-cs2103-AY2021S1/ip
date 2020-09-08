@@ -3,11 +3,6 @@ package dd.commands;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import dd.exception.DukeException;
@@ -18,28 +13,12 @@ import dd.ui.Ui;
 
 public class DoneCommandTest {
 
-    //@@author g-erm-reused
-    //Reused from https://www.baeldung.com/java-testing-system-out-println
-    private final PrintStream standardOut = System.out;
-    private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
-
-    @BeforeEach
-    public void setUp() {
-        System.setOut(new PrintStream(outputStreamCaptor));
-    }
-
-    @AfterEach
-    public void tearDown() {
-        System.setOut(standardOut);
-    }
-    //@@author
-
     @Test
     public void execute_success() throws DukeException {
         Todo doneTask = new Todo("borrow book");
         doneTask.markAsDone();
 
-        String res = "Wow!! Good job!!\n  " + doneTask + "\n ";
+        String res = "Wow!! Good job!!  \n" + doneTask;
 
         TaskList tasks = new TaskList();
         tasks.addTask(doneTask);
@@ -47,10 +26,10 @@ public class DoneCommandTest {
         Ui ui = new Ui();
         DataStorage ds = new DataStorage();
 
-        new DoneCommand("done", "1").execute(tasks, ui, ds);
+        String actual = new DoneCommand("done", "1").execute(tasks, ui, ds);
 
         assertEquals(res.replaceAll("\\p{Cntrl}", " "),
-                outputStreamCaptor.toString().replaceAll("\\p{Cntrl}", " "));
+                actual.replaceAll("\\p{Cntrl}", " "));
     }
 
     @Test
@@ -62,9 +41,9 @@ public class DoneCommandTest {
         DataStorage ds = new DataStorage();
 
         try {
-            new DoneCommand("done", "1").execute(tasks, ui, ds);
+            String actual = new DoneCommand("done", "1").execute(tasks, ui, ds);
 
-            assertEquals("", outputStreamCaptor.toString().replaceAll("\\p{Cntrl}", " "));
+            assertEquals("", actual.replaceAll("\\p{Cntrl}", " "));
             fail();
         } catch (DukeException e) {
             assertEquals(res.replaceAll("\\p{Cntrl}", " "),

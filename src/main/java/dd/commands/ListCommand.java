@@ -29,16 +29,19 @@ public class ListCommand extends Command {
         super(command, item);
     }
 
-    private void list(ArrayList<Task> tasks) {
+    private String list(ArrayList<Task> tasks) {
         int curr = 0;
+        String res = "";
 
         while (curr < tasks.size()) {
-            ui.printTask(curr + 1, tasks.get(curr));
+            res += ui.printTask(curr + 1, tasks.get(curr)) + "\n";
             curr += 1;
         }
+
+        return res;
     }
 
-    private void checkDate() throws DukeException {
+    private String checkDate() throws DukeException {
         boolean isValidInput = dth.isValidInput(item);
 
         if (isValidInput && item.length() == 10) {
@@ -48,8 +51,7 @@ public class ListCommand extends Command {
             if (tasksOnDate.isEmpty()) {
                 throw new DukeException().emptyCheckDate(item);
             } else {
-                ui.startCheckDate(item);
-                list(tasksOnDate);
+                return ui.startCheckDate(item) + "\n" + list(tasksOnDate);
             }
         } else {
             // not valid date
@@ -57,7 +59,7 @@ public class ListCommand extends Command {
         }
     }
 
-    private void checkDesc() throws DukeException {
+    private String checkDesc() throws DukeException {
         ArrayList<Task> tasksWithDesc = new ArrayList<>();
 
         for (Task t : tasks.getTaskList()) {
@@ -71,8 +73,7 @@ public class ListCommand extends Command {
         if (tasksWithDesc.isEmpty()) {
             throw new DukeException().emptyCheckDesc(item);
         } else {
-            ui.startCheckDesc(item);
-            list(tasksWithDesc);
+            return ui.startCheckDesc(item) + "\n" + list(tasksWithDesc);
         }
     }
 
@@ -82,29 +83,32 @@ public class ListCommand extends Command {
      * @param taskList Current TaskList to modify.
      * @param u Ui used to print statements.
      * @param ds DataStorage used to load or write data.
+     * @return String to indicate resulting tasks from list.
      * @throws DukeException If invalid date string is given to a check command,
      * or if no tasks match given date or description in check and find commands.
      */
     @Override
-    public void execute(TaskList taskList, Ui u, DataStorage ds) throws DukeException {
+    public String execute(TaskList taskList, Ui u, DataStorage ds) throws DukeException {
         tasks = taskList;
         ui = u;
         this.dth = new DateTimeHandler();
+        String output = "";
 
-        if (command.equals("list")) {
-            list(tasks.getTaskList());
-        } else if (command.equals("check")) {
-            checkDate();
-        } else if (command.equals("find")) {
-            checkDesc();
+        switch (command) {
+        case "list":
+            output = u.startList() + "\n" + list(tasks.getTaskList());
+            break;
+        case "check":
+            output = checkDate();
+            break;
+        case "find":
+            output = checkDesc();
+            break;
+        default:
+            output = ""; //TODO
+            break;
         }
-    }
 
-    /**
-     * {@inheritDoc}
-     */
-    @Override
-    public boolean isExit() {
-        return false;
+        return output;
     }
 }

@@ -44,7 +44,8 @@ public class DateTimeHandler {
     }
 
     /**
-     * Returns the appropriate method based on input given.
+     * Returns the appropriate method based on whether input consists of only date
+     * or both date and time.
      *
      * @param input String containing input date or date and time.
      * @return convertDate() method if date input given,
