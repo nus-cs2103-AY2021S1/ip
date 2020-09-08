@@ -6,7 +6,8 @@ public class DukeException extends Exception {
     public enum DukeExceptionType {
         TODO,
         EVENT,
-        DEADLINE
+        DEADLINE,
+        VIEW_SCHEDULE
     }
 
     DukeExceptionType dukeExceptionType;

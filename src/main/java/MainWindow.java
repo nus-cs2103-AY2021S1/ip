@@ -17,13 +17,13 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
+//    @FXML
+//    private Button sendButton;
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/spongebob.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/pirate.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/spongebob.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/pirate.png"));
 
     @FXML
     public void initialize() {
@@ -60,13 +60,10 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
-        userInput.clear();
         if(input.equals("bye")) {
             closeStage();
         }
-//        Ui ui = duke.getUi();
-//        TaskList taskList = duke.getTaskList();
-//        duke.getStorage().updateTasksOnSavedFile(taskList, ui);
+        userInput.clear();
     }
 
     /**

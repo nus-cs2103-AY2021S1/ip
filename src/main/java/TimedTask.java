@@ -38,8 +38,16 @@ public class TimedTask extends Task {
      * Returns the date and time of the Task.
      * @return the date and time of the Task.
      */
-    public String getDateTime() {
+    public String getDateTimeString() {
         return dateTime.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"));
+    }
+
+    /**
+     * Returns the date and time as a LocalDateTime
+     * @return the date and time as a LocalDateTime
+     */
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
     /**
@@ -57,6 +65,6 @@ public class TimedTask extends Task {
     @Override
     public String toString() {
         return String.format("%s (at: %s)", super.toString(),
-                dateTime.format(DateTimeFormatter.ofPattern("dd MMM yyyy HH:mm")));
+                getDateTimeString());
     }
 }

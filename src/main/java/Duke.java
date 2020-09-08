@@ -12,7 +12,7 @@ public class Duke {
         this.storage = new Storage(".//.//.//savedTasks.txt");
         this.taskList = new TaskList();
         this.parser = new Parser(ui, taskList, storage);
-        storage.loadTasksFromSavedFile(taskList,ui);
+        storage.loadTasksOnSavedFile(taskList,ui);
     }
     
     /**
@@ -24,7 +24,7 @@ public class Duke {
         this.storage = new Storage(filePath);
         this.taskList = new TaskList();
         this.parser = new Parser(ui, taskList, storage);
-        storage.loadTasksFromSavedFile(taskList,ui);
+        storage.loadTasksOnSavedFile(taskList,ui);
     }
     
     public Ui getUi() {
@@ -45,7 +45,9 @@ public class Duke {
      * @return Returns the response of the parser as a String after parsing the user input.
      */
     public String getResponse(String input) {
+        storage.saveTasksToSavedFile(taskList, ui);
         return parser.parseInput(input);
+        
     }
     
 }

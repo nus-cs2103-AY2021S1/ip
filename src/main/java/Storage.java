@@ -25,7 +25,7 @@ public class Storage {
      * @param taskList the TaskList which contains the Tasks to save.
      * @param ui the Ui which is currently in use.
      */
-    public void loadTasksFromSavedFile(TaskList taskList, Ui ui) {
+    public void saveTasksToSavedFile(TaskList taskList, Ui ui) {
         File savedTasks = new File(filePath);
         boolean exists = savedTasks.exists();
         try {
@@ -41,7 +41,7 @@ public class Storage {
                 ui.showSuccessMessage("File found, loading file");
             } else { //file does not exist, create new file
                 boolean isCreated = savedTasks.createNewFile();
-                updateTasksOnSavedFile(taskList, ui);
+                saveTasksToSavedFile(taskList, ui);
                 if(isCreated) {
                     ui.showSuccessMessage("New save file created");
                 } else {
@@ -58,7 +58,7 @@ public class Storage {
      * @param taskList the TaskList that is currently in use.
      * @param ui the Ui that is currently in use.
      */
-    public void updateTasksOnSavedFile(TaskList taskList, Ui ui) {
+    public void loadTasksOnSavedFile(TaskList taskList, Ui ui) {
         try {
             BufferedReader taskReader = new BufferedReader(new FileReader(filePath));
             String line = taskReader.readLine();

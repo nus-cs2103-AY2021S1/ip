@@ -74,6 +74,14 @@ public class Parser {
                 int deleteNumber = Integer.parseInt((input.split("delete "))[1]);
                 result = ui.showDeleteTaskMessage(deleteNumber, taskList);
                 taskList.deleteTask(deleteNumber);
+            } else if(input.startsWith("view schedule")) {
+                String[] viewScheduleInput = input.split("view schedule");
+                if(viewScheduleInput.length < 2) {
+                    throw new DukeIllegalArgumentException("", DukeException.DukeExceptionType.VIEW_SCHEDULE);
+                }
+                String deadlineName = (viewScheduleInput[1].split(" /on "))[1];
+                TaskList matchingTasksOnDate = taskList.getTasksOnDate(deadlineName);
+                result = ui.showCurrentTasks(matchingTasksOnDate);
             } else {
                 throw new DukeUnknownArgumentException("");
             }
@@ -82,7 +90,7 @@ public class Parser {
         } catch (DateTimeParseException e) {
             result = ui.showErrorMessage("Please key in date and time as follows: DD-MM-YYYY HHMM");
         }
-        storage.updateTasksOnSavedFile(taskList, ui);
+        storage.saveTasksToSavedFile(taskList, ui);
         return result;
     }
 }

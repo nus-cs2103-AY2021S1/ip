@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 /**
@@ -44,6 +47,24 @@ public class TaskList {
      */
     public Task getTask(int index) {
         return tasks.get(index - 1);
+    }
+    
+    public TaskList getTasksOnDate(String date) {
+        LocalDate userInputDate = LocalDate.parse(date,
+                DateTimeFormatter.ofPattern("dd-MM-yyyy"));
+        System.out.println(userInputDate.toString());
+        TaskList tasksOnDate = new TaskList();
+        for(Task task: tasks) {
+            if(task instanceof TimedTask) {
+                LocalDateTime taskDateTime = ((TimedTask) task).getDateTime();
+                LocalDate taskDate = taskDateTime.toLocalDate();
+                if(taskDate.equals(userInputDate)) {
+                    tasksOnDate.addTask(task);
+                }
+            }
+        }
+        return tasksOnDate;
+        
     }
 
     /**

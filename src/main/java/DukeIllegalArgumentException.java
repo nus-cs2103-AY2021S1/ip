@@ -25,6 +25,9 @@ public class DukeIllegalArgumentException extends DukeException {
             case DEADLINE:
                 message = "deadline";
                 return String.format("I can't hear youuuuuuuu! The description of a %s cannot be empty.", message);
+            case VIEW_SCHEDULE:
+                message = "view schedule";
+                return String.format("I can't hear youuuuuuuu! The description of a %s cannot be empty.", message);
             default:
                 return "I can't hear youuuuuuuu! The description cannot be empty.";
         }
