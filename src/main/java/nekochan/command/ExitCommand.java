@@ -1,8 +1,8 @@
 package nekochan.command;
 
 import nekochan.exceptions.IncompleteNekoCommandException;
+import nekochan.model.NekoHistory;
 import nekochan.storage.Storage;
-import nekochan.task.TaskList;
 import nekochan.util.Messages;
 
 /**
@@ -15,11 +15,11 @@ public class ExitCommand extends Command {
     /**
      * Executes this {@code ExitCommand} by saving the specified {@code list} to file.
      *
-     * @param list    the currently loaded {@link TaskList} object.
+     * @param history the currently loaded {@link NekoHistory} object.
      * @param storage the currently loaded {@link Storage} object.
      */
-    public void execute(TaskList list, Storage storage) {
-        storage.save(list);
+    public void execute(NekoHistory history, Storage storage) {
+        history.save(storage);
         super.isCompleted = true;
     }
 
@@ -29,7 +29,7 @@ public class ExitCommand extends Command {
      * @return a {@code Response} object containing the result of executing this {@code ExitCommand}.
      * @throws IncompleteNekoCommandException if this {@code ExitCommand} was not executed.
      */
-    public Response feedback() throws IncompleteNekoCommandException {
+    public Response getResponse() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
             throw new IncompleteNekoCommandException(Messages.INCOMPLETE_EXIT_COMMAND);
         }

@@ -5,13 +5,13 @@ import java.util.List;
 import nekochan.exceptions.IncompleteNekoCommandException;
 import nekochan.exceptions.NekoException;
 import nekochan.exceptions.NekoSimilarTaskException;
+import nekochan.model.NekoHistory;
+import nekochan.model.task.Deadline;
+import nekochan.model.task.Event;
+import nekochan.model.task.Task;
+import nekochan.model.task.TaskType;
+import nekochan.model.task.ToDo;
 import nekochan.storage.Storage;
-import nekochan.task.Deadline;
-import nekochan.task.Event;
-import nekochan.task.Task;
-import nekochan.task.TaskList;
-import nekochan.task.TaskType;
-import nekochan.task.ToDo;
 import nekochan.util.Messages;
 
 /**
@@ -50,19 +50,18 @@ public class AddCommand extends Command {
 
     /**
      * Executes this {@code AddCommand} by adding the created {@code Task} to the specified {@code list}.
-     *
-     * @param list    the currently loaded {@link TaskList} object.
+     * @param history the currently loaded {@link NekoHistory} object.
      * @param storage the currently loaded {@link Storage} object.
      */
     @Override
-    public void execute(TaskList list, Storage storage) {
+    public void execute(NekoHistory history, Storage storage) {
         try {
-            list.add(createdTask);
+            history.addTask(createdTask);
         } catch (NekoSimilarTaskException e) {
             similarTasks = e.getSimilarTask();
         } finally {
-            remainingTaskCount = list.getTaskCount();
-            storage.save(list);
+            remainingTaskCount = history.getCurrentTaskCount();
+            history.save(storage);
             super.isCompleted = true;
         }
     }
@@ -74,7 +73,7 @@ public class AddCommand extends Command {
      * @throws IncompleteNekoCommandException if this {@code AddCommand} was not executed.
      */
     @Override
-    public Response feedback() throws IncompleteNekoCommandException {
+    public Response getResponse() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
             throw new IncompleteNekoCommandException(Messages.INCOMPLETE_ADD_COMMAND);
         }

@@ -1,7 +1,7 @@
-package nekochan.task;
+package nekochan.model.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -75,21 +75,21 @@ public class ToDoTest {
     @Test
     public void isSimilar_similarDeadline_true() {
         ToDo t1 = ToDo.createTask("Return Book");
-        ToDo t2 = ToDo.createTask("return book");
+        ToDo t2 = ToDo.createTask("return book").setCompleted();;;
         assertTrue(t1.isSimilar(t2));
     }
 
     @Test
     public void equals_sameDeadline_true() {
         ToDo t1 = ToDo.createTask("return book");
-        ToDo t2 = ToDo.createTask("return book");
-        assertEquals(t1, t2);
+        ToDo t2 = ToDo.createTask("return book").setCompleted();;;
+        assertTrue(t1.isDuplicate(t2));
     }
 
     @Test
     public void equals_similarDeadline_false() {
         ToDo t1 = ToDo.createTask("Return Book");
-        ToDo t2 = ToDo.createTask("return book");
-        assertNotEquals(t1, t2);
+        ToDo t2 = ToDo.createTask("return book").setCompleted();;;
+        assertFalse(t1.isDuplicate(t2));
     }
 }

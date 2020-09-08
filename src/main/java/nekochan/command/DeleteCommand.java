@@ -1,9 +1,10 @@
 package nekochan.command;
 
 import nekochan.exceptions.IncompleteNekoCommandException;
+import nekochan.model.NekoHistory;
+import nekochan.model.task.Task;
+import nekochan.model.task.TaskList;
 import nekochan.storage.Storage;
-import nekochan.task.Task;
-import nekochan.task.TaskList;
 import nekochan.util.Messages;
 
 /**
@@ -30,14 +31,14 @@ public class DeleteCommand extends Command {
      * Executes this {@code DeleteCommand}.
      * Deletes the {@code Task} in the specified {@code list} at the stored {@code index}.
      *
-     * @param list    the currently loaded {@link TaskList} object.
+     * @param history the currently loaded {@link NekoHistory} object.
      * @param storage the currently loaded {@link Storage} object.
      */
     @Override
-    public void execute(TaskList list, Storage storage) {
-        deletedTask = list.deleteTask(index);
-        remainingTaskCount = list.getTaskCount();
-        storage.save(list);
+    public void execute(NekoHistory history, Storage storage) {
+        deletedTask = history.deleteTask(index);
+        remainingTaskCount = history.getCurrentTaskCount();
+        history.save(storage);
         super.isCompleted = true;
     }
 
@@ -48,7 +49,7 @@ public class DeleteCommand extends Command {
      * @throws IncompleteNekoCommandException if this {@code DeleteCommand} was not executed.
      */
     @Override
-    public Response feedback() throws IncompleteNekoCommandException {
+    public Response getResponse() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
             throw new IncompleteNekoCommandException(Messages.INCOMPLETE_DELETE_COMMAND);
         }

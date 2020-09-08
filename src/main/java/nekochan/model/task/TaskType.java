@@ -1,4 +1,4 @@
-package nekochan.task;
+package nekochan.model.task;
 
 /**
  * An enum containing the types of {@link Task} supported by the program.

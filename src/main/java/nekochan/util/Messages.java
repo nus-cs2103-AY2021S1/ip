@@ -11,6 +11,8 @@ public class Messages {
     public static final String INCOMPLETE_COMPLETE_COMMAND = "Complete command was not completed.\n";
     public static final String INCOMPLETE_DELETE_ALL_COMMAND = "Delete all command was not completed.\n";
     public static final String INCOMPLETE_EXIT_COMMAND = "Exit command was not completed.\n";
+    public static final String INCOMPLETE_REDO_COMMAND = "Redo command was not completed.\n";
+    public static final String INCOMPLETE_UNDO_COMMAND = "Undo command was not completed.\n";
 
     public static final String PARSE_COMMAND_COMPLETE_MISSING_ARGUMENT = "What did you complete exactly?\n";
     public static final String PARSE_COMMAND_DELETE_MISSING_ARGUMENT = "What do you want to remove exactly?\n";
@@ -42,6 +44,9 @@ public class Messages {
     public static final String STORAGE_ERROR_MISSING_SAVE = "I think I lost my memory... Let me start afresh.\n";
     public static final String STORAGE_ERROR_CORRUPT = "There's something wrong with my memory...\n";
 
+    public static final String HISTORY_REDO_LIMIT_EXCEEDED = "I can't tell the future!";
+    public static final String HISTORY_UNDO_LIMIT_EXCEEDED = "I've told you all I know!";
+
     public static final String MESSAGE_WELCOME = "Konnichiwa!\nWhat can I do for you?\n";
     public static final String MESSAGE_ADD = "Got it. I've added this task:\n";
     public static final String MESSAGE_EMPTY_LIST = "Congratulations! You don't have any tasks left to do.\n";
@@ -53,6 +58,8 @@ public class Messages {
     public static final String MESSAGE_TASK_COUNT = "Now you have %d tasks in your list.\n";
     public static final String MESSAGE_SEARCH = "Here's everything I found:\n";
     public static final String MESSAGE_EMPTY_SEARCH = "I couldn't find anything for you.\n";
+    public static final String MESSAGE_UNDO = "You're lucky I could reverse time.\n";
+    public static final String MESSAGE_REDO = "So this is how the future looks like.\n";
 
     public static String getTotalTaskMessage(int count) {
         return String.format(MESSAGE_TASK_COUNT, count);

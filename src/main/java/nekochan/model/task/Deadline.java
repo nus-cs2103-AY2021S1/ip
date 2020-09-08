@@ -1,4 +1,4 @@
-package nekochan.task;
+package nekochan.model.task;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,11 +17,24 @@ public class Deadline extends Task {
 
     private static final String DEADLINE_DELIMITER = "by";
 
-    private LocalDateTime due;
+    private final LocalDateTime due;
 
     private Deadline(String description, LocalDateTime due) {
         super(description);
         this.due = due;
+    }
+
+    private Deadline(String description, LocalDateTime due, boolean isCompleted) {
+        super(description, isCompleted);
+        this.due = due;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Deadline setCompleted() {
+        return new Deadline(description, due, true);
     }
 
     /**
@@ -70,6 +83,47 @@ public class Deadline extends Task {
     }
 
     /**
+     * Returns true if the specified {@code obj} is a {@code Deadline} and has the same (case insensitive) description
+     * and due datetime as this {@code Deadline}.
+     *
+     * @param obj the reference object with which to compare.
+     * @return true if the {@code Object} is a {@code Deadline} and are similar.
+     */
+    @Override
+    boolean isSimilar(Object obj) {
+        if (obj == this) {
+            return true;
+        }
+
+        if (!(obj instanceof Deadline)) {
+            return false;
+        }
+
+        Deadline other = (Deadline) obj;
+        return other.description.toLowerCase().equals(description.toLowerCase())
+                && other.due.equals(due);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public Deadline deepCopy() {
+        // Both description and due are immutable.
+        return new Deadline(description, due, isCompleted);
+    }
+
+    /**
+     * Returns a string representation of this {@code Deadline}.
+     *
+     * @return a string representation of this {@code Deadline}.
+     */
+    @Override
+    public String toString() {
+        return "[D]" + super.toString() + " (by: " + DateParser.parseLocalDateTimeToString(due) + ")";
+    }
+
+    /**
      * Returns an encoded string representation of this {@code Deadline}.
      *
      * @return an encoded string representation of this {@code Deadline}.
@@ -98,35 +152,13 @@ public class Deadline extends Task {
     }
 
     /**
-     * Returns true if the specified {@code obj} is a {@code Deadline} and has the same (case insensitive) description
-     * and due datetime as this {@code Deadline}.
-     *
-     * @param obj the reference object with which to compare.
-     * @return true if the {@code Object} is a {@code Deadline} and are similar.
-     */
-    @Override
-    boolean isSimilar(Object obj) {
-        if (obj == this) {
-            return true;
-        }
-
-        if (!(obj instanceof Deadline)) {
-            return false;
-        }
-
-        Deadline other = (Deadline) obj;
-        return other.description.toLowerCase().equals(description.toLowerCase())
-                && other.due.equals(due);
-    }
-
-    /**
      * Returns true if the specified {@code obj} is a {@code Deadline} and has the same details.
      *
      * @param obj the reference object with which to compare.
      * @return true if the {@code Object} is a {@code Deadline} and has the same details.
      */
     @Override
-    public boolean equals(Object obj) {
+    public boolean isDuplicate(Object obj) {
         if (obj == this) {
             return true;
         }
@@ -138,15 +170,5 @@ public class Deadline extends Task {
         Deadline other = (Deadline) obj;
         return other.description.equals(description)
                 && other.due.equals(due);
-    }
-
-    /**
-     * Returns a string representation of this {@code Deadline}.
-     *
-     * @return a string representation of this {@code Deadline}.
-     */
-    @Override
-    public String toString() {
-        return "[D]" + super.toString() + " (by: " + DateParser.parseLocalDateTimeToString(due) + ")";
     }
 }

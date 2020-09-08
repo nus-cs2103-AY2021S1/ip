@@ -7,9 +7,11 @@ import nekochan.command.DeleteAllCommand;
 import nekochan.command.DeleteCommand;
 import nekochan.command.ExitCommand;
 import nekochan.command.ListCommand;
+import nekochan.command.RedoCommand;
 import nekochan.command.SearchCommand;
+import nekochan.command.UndoCommand;
 import nekochan.exceptions.ParseNekoCommandException;
-import nekochan.task.TaskType;
+import nekochan.model.task.TaskType;
 import nekochan.util.Messages;
 
 /**
@@ -28,6 +30,8 @@ public class Parser {
         DEADLINE("deadline"),
         EVENT("event"),
         DELETE("delete"),
+        UNDO("undo"),
+        REDO("redo"),
         SEARCH("search");
 
         private final String input;
@@ -72,6 +76,10 @@ public class Parser {
             return new ExitCommand();
         case LIST:
             return new ListCommand();
+        case UNDO:
+            return new UndoCommand();
+        case REDO:
+            return new RedoCommand();
         case COMPLETE:
             try {
                 int index = Integer.parseInt(userInput.split(" ")[1]) - 1;

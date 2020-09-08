@@ -1,8 +1,7 @@
-package nekochan.task;
+package nekochan.model.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -84,28 +83,28 @@ public class DeadlineTest {
     @Test
     public void isSimilar_similarDeadline_true() {
         Deadline d1 = Deadline.createTask("Description by 1 Jan 2020 11:59");
-        Deadline d2 = Deadline.createTask("description by 1 Jan 2020 11:59");
+        Deadline d2 = Deadline.createTask("description by 1 Jan 2020 11:59").setCompleted();;
         assertTrue(d1.isSimilar(d2));
     }
 
     @Test
     public void isSimilar_differentDate_false() {
         Deadline d1 = Deadline.createTask("Description by 1 Jan 2020 11:59");
-        Deadline d2 = Deadline.createTask("description by 2 Jan 2020 11:59");
+        Deadline d2 = Deadline.createTask("description by 2 Jan 2020 11:59").setCompleted();
         assertFalse(d1.isSimilar(d2));
     }
 
     @Test
     public void equals_sameDeadline_true() {
         Deadline d1 = Deadline.createTask("Description by 1 Jan 2020 11:59");
-        Deadline d2 = Deadline.createTask("Description by 1 Jan 2020 11:59");
-        assertEquals(d1, d2);
+        Deadline d2 = Deadline.createTask("Description by 1 Jan 2020 11:59").setCompleted();
+        assertTrue(d1.isDuplicate(d2));
     }
 
     @Test
     public void equals_similarDeadline_false() {
         Deadline d1 = Deadline.createTask("Description by 1 Jan 2020 11:59");
-        Deadline d2 = Deadline.createTask("description by 1 Jan 2020 11:59");
-        assertNotEquals(d1, d2);
+        Deadline d2 = Deadline.createTask("description by 1 Jan 2020 11:59").setCompleted();
+        assertFalse(d1.isDuplicate(d2));
     }
 }

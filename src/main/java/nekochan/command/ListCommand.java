@@ -1,12 +1,11 @@
 package nekochan.command;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import nekochan.exceptions.IncompleteNekoCommandException;
+import nekochan.model.NekoHistory;
+import nekochan.model.task.TaskList;
 import nekochan.storage.Storage;
-import nekochan.task.Task;
-import nekochan.task.TaskList;
 import nekochan.util.Messages;
 
 /**
@@ -16,21 +15,18 @@ import nekochan.util.Messages;
 public class ListCommand extends Command {
 
     private static final boolean IS_EXIT = false;
+    private static final boolean IS_UNDOABLE = false;
 
-    private List<Task> existingTasks;
+    private List<String> existingTasks;
 
     /**
      * Executes this {@code ListCommand}.
-     *
-     * @param list    the currently loaded {@link TaskList} object.
+     * @param history the currently loaded {@link NekoHistory} object.
      * @param storage the currently loaded {@link Storage} object.
      */
     @Override
-    public void execute(TaskList list, Storage storage) {
-        existingTasks = new ArrayList<>();
-        for (Task task : list) {
-            existingTasks.add(task);
-        }
+    public void execute(NekoHistory history, Storage storage) {
+        existingTasks = history.listAll();
         super.isCompleted = true;
     }
 
@@ -41,7 +37,7 @@ public class ListCommand extends Command {
      * @throws IncompleteNekoCommandException if this {@code ListCommand} was not executed.
      */
     @Override
-    public Response feedback() throws IncompleteNekoCommandException {
+    public Response getResponse() throws IncompleteNekoCommandException {
         if (!super.isCompleted) {
             throw new IncompleteNekoCommandException(Messages.INCOMPLETE_LIST_COMMAND);
         }
@@ -51,7 +47,7 @@ public class ListCommand extends Command {
         } else {
             responseMessage = Messages.MESSAGE_LIST;
             for (int i = 0; i < existingTasks.size(); i++) {
-                responseMessage += String.format("%d. %s\n", i + 1, existingTasks.get(i).toString());
+                responseMessage += String.format("%d. %s\n", i + 1, existingTasks.get(i));
             }
         }
 
