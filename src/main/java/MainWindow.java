@@ -27,12 +27,10 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
+        assert(userImage != null);
+        assert(dukeImage != null);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        printToUser("Hi spongebob, what kind of patties are you flipping today?");
-//        System.out.println(duke);
-//        Ui ui = duke.getUi();
-//        TaskList taskList = duke.getTaskList();
-//        printToUser(duke.getStorage().load(taskList, ui));
+        printToUser(Ui.showGreetingMessage());
     }
 
     public void setDuke(Duke duke) {
@@ -66,9 +64,9 @@ public class MainWindow extends AnchorPane {
         if(input.equals("bye")) {
             closeStage();
         }
-        Ui ui = duke.getUi();
-        TaskList taskList = duke.getTaskList();
-        duke.getStorage().save(taskList, ui);
+//        Ui ui = duke.getUi();
+//        TaskList taskList = duke.getTaskList();
+//        duke.getStorage().updateTasksOnSavedFile(taskList, ui);
     }
 
     /**

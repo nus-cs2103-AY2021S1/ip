@@ -1,8 +1,8 @@
 import org.junit.Test;
-
 import static org.junit.Assert.assertEquals;
 
 public class TaskListTest {
+    
     @Test
     public void addTask() {
         TaskList taskList = new TaskList();

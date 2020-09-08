@@ -2,8 +2,6 @@
  * Ui class deals with interactions with the user.
  */
 public class Ui {
-    private static final String LINE = "______________________________________________" + "\n";
-    
     /**
      * Constructor that creates a Ui object.
      */
@@ -13,18 +11,16 @@ public class Ui {
      * Returns a greeting message
      * @return returns a String containing a greeting message.
      */
-    public String printHi() {
-        String greeting = "Hello! I'm the Captain" + "\n" + "Who lives in a pineapple under the sea" + "\n";
-        return LINE + greeting + LINE;
+    public static String showGreetingMessage() {
+        return "Hello! I'm the Captain" + "\n" + "Who lives in a pineapple under the sea" + "\n";
     }
 
     /**
      * Returns a goodbye message
      * @return returns a String containing a goodbye message.
      */
-    public String printBye() {
-        String goodbye = "Bye. Hope to see you again soon!";
-        return LINE + goodbye + "\n" + LINE;
+    public static String showGoodbyeMessage() {
+        return "Bye. Hope to see you again soon!";
     }
 
     /**
@@ -33,12 +29,10 @@ public class Ui {
      * @param taskList the Tasklist to add the Task to.
      * @return returns a String containing information about the task added.
      */
-    public String printAdd(Task task, TaskList taskList) {
-        return LINE
-                + "Got it. I've added this task: " + "\n"
+    public String showAddTaskMessage(Task task, TaskList taskList) {
+        return "Got it. I've added this task: " + "\n"
                 + task.toString() + "\n"
-                + String.format("Now you have %s patties to flip.", taskList.size()) + "\n"
-                + LINE;
+                + String.format("Now you have %s patties to flip.", taskList.size());
     }
 
     /**
@@ -47,12 +41,10 @@ public class Ui {
      * @param taskList the TaskList to delete the Task from.
      * @return returns a String containing information about the task deleted.
      */
-    public String printDelete(int index, TaskList taskList) {
-        return LINE
-                + "Noted. I've removed this patty: " + "\n"
+    public String showDeleteTaskMessage(int index, TaskList taskList) {
+        return "Noted. I've removed this patty: " + "\n"
                 + taskList.getTask(index).toString() + "\n"
-                + String.format("Now you have %s patties to flip.", taskList.size() - 1) + "\n"
-                + LINE;
+                + String.format("Now you have %s patties to flip.", taskList.size() - 1);
     }
 
     /**
@@ -60,8 +52,8 @@ public class Ui {
      * @param e the Exception that was thrown by the application.
      * @return returns a String containing information about the error.
      */
-    public String printError(Exception e) {
-        return LINE + "Arghhhh there seems to be an error: " + e + "\n" + LINE;
+    public String showErrorMessage(Exception e) {
+        return "Arghhhh there seems to be an error: " + e;
     }
 
     /**
@@ -70,8 +62,8 @@ public class Ui {
      * @param message the message that the application wants to print for the user.
      * @return returns a String containing information about the error.
      */
-    public String printError(String message) {
-        return LINE + "Arghhhh there seems to be an error: " + message + "\n" + LINE;
+    public String showErrorMessage(String message) {
+        return "Arghhhh there seems to be an error: " + message;
     }
 
     /**
@@ -79,9 +71,8 @@ public class Ui {
      * @param taskList the TaskList which contain the Tasks to be printed out.
      * @return returns a String containing information about the tasks that exist currently.
      */
-    public String showTasks(TaskList taskList) {
+    public String showCurrentTasks(TaskList taskList) {
         StringBuilder output = new StringBuilder();
-        output.append(LINE);
         if(taskList.size() > 0) {
             output.append("Here are the patties on your cooking station:" + "\n");
             for (int i = 1; i <= taskList.size(); i++) {
@@ -89,17 +80,9 @@ public class Ui {
                 output.append(String.format("%s. %s", i, taskList.getTask(i).toString())).append("\n");
             }
         } else { //no tasks
-            output.append("You have no more patties to flip!" + "\n" + LINE);
+            output.append("You have no more patties to flip!");
         }
         return output.toString();
-    }
-
-    /**
-     * Returns a message to inform the user that a save file is being read.
-     * @return returns a String informing the user that a save file is being read.
-     */
-    public String loadTasks() {
-        return LINE + "Retrieving patties from the freezer..." + "\n" + LINE;
     }
 
     /**
@@ -107,8 +90,8 @@ public class Ui {
      * @param message the message to be printed out.
      * @return returns a String to inform the user that an operation succeeded.
      */
-    public String printSuccess(String message) {
-        return LINE + "Success: " + message + "\n" + LINE;
+    public String showSuccessMessage(String message) {
+        return "Success: " + message;
     }
 
     /**
@@ -119,11 +102,11 @@ public class Ui {
      * @return returns a String to inform the user that a specific Task in the TaskList
      * has been marked as completed.
      */
-    public String markDone(int index, TaskList taskList) {
+    public String showTasksAfterMarkDone(int index, TaskList taskList) {
         assert(index < taskList.size());
         Task task = taskList.getTask(index);
-        return LINE + "Nice! I've marked this patty as cooked:" +  "\n" +
-                task.toString() + "\n" + LINE;
+        return "Nice! I've marked this patty as cooked:" +  "\n" +
+                task.toString();
     }
 
     /**
@@ -134,7 +117,7 @@ public class Ui {
      * @return returns a String containing a list of Tasks in the current
      * TaskList that matches a specified word.
      */
-    public String find(String word, TaskList taskList) {
+    public String findTask(String word, TaskList taskList) {
         assert(!word.isEmpty());
         assert(taskList.size() > 0);
         TaskList temp = new TaskList();
@@ -146,15 +129,14 @@ public class Ui {
         }
         StringBuilder output = new StringBuilder();
         if(temp.size() > 0) {
-            output.append(LINE + "Here these patties match your description:");
+            output.append("Here these patties match your description:");
             for (int i = 1; i <= temp.size(); i++) {
                 //print out task with numbering
-                output.append(String.format("%s. %s%n", i, temp.getTask(i).toString()) + "\n");
+                output.append(String.format("%s. %s%n", i, temp.getTask(i).toString())).append("\n");
             }
         } else { //no matching tasks
             output.append("You have no matching patties!");
         }
-        output.append("\n" + LINE);
         return output.toString();
     }
 }

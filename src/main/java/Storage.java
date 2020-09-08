@@ -25,7 +25,7 @@ public class Storage {
      * @param taskList the TaskList which contains the Tasks to save.
      * @param ui the Ui which is currently in use.
      */
-    public String save(TaskList taskList, Ui ui) {
+    public void loadTasksFromSavedFile(TaskList taskList, Ui ui) {
         File savedTasks = new File(filePath);
         boolean exists = savedTasks.exists();
         try {
@@ -38,18 +38,18 @@ public class Storage {
                 }
                 taskWriter.write(currentTasks.toString());
                 taskWriter.close();
-                return ui.printSuccess("File found, loading file");
+                ui.showSuccessMessage("File found, loading file");
             } else { //file does not exist, create new file
                 boolean isCreated = savedTasks.createNewFile();
-                save(taskList, ui);
+                updateTasksOnSavedFile(taskList, ui);
                 if(isCreated) {
-                    return ui.printSuccess("New save file created");
+                    ui.showSuccessMessage("New save file created");
                 } else {
-                    return ui.printError("Failed to create save file");
+                    ui.showErrorMessage("Failed to create save file");
                 }
             }
         } catch (IOException ex) {
-            return ui.printError(ex);
+            ui.showErrorMessage(ex);
         }
     }
 
@@ -58,7 +58,7 @@ public class Storage {
      * @param taskList the TaskList that is currently in use.
      * @param ui the Ui that is currently in use.
      */
-    public String load(TaskList taskList, Ui ui) {
+    public void updateTasksOnSavedFile(TaskList taskList, Ui ui) {
         try {
             BufferedReader taskReader = new BufferedReader(new FileReader(filePath));
             String line = taskReader.readLine();
@@ -66,13 +66,12 @@ public class Storage {
                 processTask(line, taskList, ui);
                 line = taskReader.readLine();
             }
-            return ui.showTasks(taskList);
+            ui.showCurrentTasks(taskList);
         } catch (FileNotFoundException e) {
             //Folder not yet created, do nothing
         } catch (IOException e) {
-            ui.printError(e);
+            ui.showErrorMessage(e);
         }
-        return null;
     }
 
     /**
@@ -101,7 +100,7 @@ public class Storage {
             Deadline newDeadline = new Deadline(taskName, isDone, taskDateTime);
             taskList.addTask(newDeadline);
         } else {
-            ui.printError("Save file on device corrupted");
+            ui.showErrorMessage("Save file on device corrupted");
         }
     }
 }

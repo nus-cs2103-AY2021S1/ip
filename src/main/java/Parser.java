@@ -1,14 +1,12 @@
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 
 /**
  * Parser class deals with making sense of user input.
  */
 public class Parser {
-    private Ui ui;
-    private TaskList taskList;
-    private Storage storage;
-    
+    private final Ui ui;
+    private final TaskList taskList;
+    private final Storage storage;
     
     Parser(Ui ui, TaskList taskList, Storage storage) {
         this.ui = ui;
@@ -21,20 +19,20 @@ public class Parser {
      * @param input the user input as a String.
      */
     public String parseInput(String input) {
-        String result = "";
+        String result;
         try {
             if (input.equals("bye")) { //exit condition
-                result = ui.printBye();
+                result = Ui.showGoodbyeMessage();
             } else if (input.equals("list")) {
-                result = ui.showTasks(taskList);
+                result = ui.showCurrentTasks(taskList);
             } else if (input.startsWith("find")) {
                 String word = input.split("find ")[1];
-                result = ui.find(word, taskList);
+                result = ui.findTask(word, taskList);
             } else if (input.startsWith("done")) {
                 String[] number = input.split("done ");
                 int index = Integer.parseInt(number[1]);
                 taskList.markDone(index);
-                result = ui.markDone(index, taskList);
+                result = ui.showTasksAfterMarkDone(index, taskList);
             } else if (input.startsWith("deadline")) {
                 //whatever is after deadline
                 String[] deadlineInput = input.split("deadline ");
@@ -48,7 +46,7 @@ public class Parser {
                 String deadlineTime = (deadlineInput[1].split(" /by "))[1];
                 Deadline newDeadline = new Deadline(deadlineName, deadlineTime);
                 taskList.addTask(newDeadline);
-                result = ui.printAdd(newDeadline, taskList);
+                result = ui.showAddTaskMessage(newDeadline, taskList);
                 
             } else if (input.startsWith("todo")) {
                 String[] todoInput = input.split("todo ");
@@ -58,7 +56,7 @@ public class Parser {
                 String todoName = todoInput[1];
                 Todo newTodo = new Todo(todoName);
                 taskList.addTask(newTodo);
-                result = ui.printAdd(newTodo, taskList);
+                result = ui.showAddTaskMessage(newTodo, taskList);
             } else if (input.startsWith("event")) {
                 if(input.split("event ").length < 2) {
                     throw new DukeIllegalArgumentException("", DukeException.DukeExceptionType.EVENT);
@@ -71,20 +69,20 @@ public class Parser {
                 String eventTime = (eventInput.split(" /at "))[1];
                 Event newEvent = new Event(eventName, eventTime);
                 taskList.addTask(newEvent);
-                result = ui.printAdd(newEvent, taskList);
+                result = ui.showAddTaskMessage(newEvent, taskList);
             } else if (input.startsWith("delete")) {
                 int deleteNumber = Integer.parseInt((input.split("delete "))[1]);
-                result = ui.printDelete(deleteNumber, taskList);
+                result = ui.showDeleteTaskMessage(deleteNumber, taskList);
                 taskList.deleteTask(deleteNumber);
             } else {
                 throw new DukeUnknownArgumentException("");
             }
         } catch (DukeException e) {
-            result = ui.printError(e);
+            result = ui.showErrorMessage(e);
         } catch (DateTimeParseException e) {
-            result = ui.printError("Please key in date and time as follows: DD-MM-YYYY HHMM");
+            result = ui.showErrorMessage("Please key in date and time as follows: DD-MM-YYYY HHMM");
         }
-        storage.save(taskList, ui);
+        storage.updateTasksOnSavedFile(taskList, ui);
         return result;
     }
 }
