@@ -88,7 +88,6 @@ public class Duke {
         HashMap<String, String> parameters = Parser.parseParameters(input);
 
         try {
-            System.out.println(mainCommand);
             return Command.createCommand(mainCommand)
                     .execute(parameters, tasks);
         } catch (DukeException e) {
