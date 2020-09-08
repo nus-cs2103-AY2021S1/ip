@@ -2,34 +2,55 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Parser {
+    //constants used to parse user input
+    public static String TODO = "todo";
+    public static String DEADLINE = "deadline";
+    public static String EVENT = "event";
+    public static String DONE = "done";
+    public static String DELETE = "delete";
+    public static String FIND = "find";
+    public static String LIST = "list";
+    public static String CLEAR = "clear";
+    public static int TODO_LENGTH = "todo ".length();
+    public static int DEADLINE_LENGTH = "deadline ".length();
+    public static int EVENT_LENGTH = "event ".length();
+    public static int DONE_LENGTH = "done ".length();
+    public static int DELETE_LENGTH = "delete ".length();
+    public static int FIND_LENGTH = "find ".length();
+    public static int AT_LENGTH = "/at ".length();
+    public static int BY_LENGTH = "/by ".length();
+    public static DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("d/M/yy HHmm");
     /**
      * Converts the string to a type of command.
+     *
      * @param in The string to be parsed.
      * @return The command called by the input string.
      */
     public static Command parse(String in) {
         if ("".equals(in)) {
-            return Command.blank;
-        } else if ("clear".equals(in)) {
-            return Command.clear;
-        } else if ("list".equals(in)) {
-            return Command.list;
-        } else if (in.startsWith("done ")){
-            return Command.done;
-        } else if (in.startsWith("delete ")){
-            return Command.delete;
-        } else if (in.startsWith("find ")){
-            return Command.find;
-        } else if (in.startsWith("todo ") || in.startsWith("deadline ") || in.startsWith("event ")){
-            return Command.add;
+            return Command.BLANK;
+        } else if (in.equals(CLEAR)) {
+            return Command.CLEAR;
+        } else if (in.equals(LIST)) {
+            return Command.LIST;
+        } else if (in.startsWith(DONE)){
+            return Command.DONE;
+        } else if (in.startsWith(DELETE)){
+            return Command.DELETE;
+        } else if (in.startsWith(FIND)){
+            return Command.FIND;
+        } else if (in.startsWith(TODO) || in.startsWith(DEADLINE) || in.startsWith(EVENT)){
+            return Command.ADD;
         } else {
-            return Command.error;
+            return Command.ERROR;
         }
     }
 
     public static String msg;
+
     /**
      * Handles reading add task commands and creating the task.
+     *
      * @param in The string to be parsed.
      * @return The task required by the input string.
      */
@@ -37,7 +58,7 @@ public class Parser {
         String taskName;
         Task temp = null;
         if (in.startsWith("todo ")){
-            taskName = in.substring(5);
+            taskName = in.substring(TODO_LENGTH);
             if (taskName.length() == 0) {
                 msg = Ui.errorMsg("the task description cannot be nothing D:");
             } else {
@@ -45,26 +66,31 @@ public class Parser {
             }
         } else if (in.startsWith("deadline ")){
             int ind = in.indexOf("/by ");
-            if (ind < 0 || ind == in.length() - 4) {
-                msg = Ui.errorMsg("you haven't entered a time that this task is due by. you can do that by typing \"deadline xxx /by dd/mm/yy hhmm\". \n" +
+
+            if (ind < 0 || in.endsWith("/by ")) {
+                msg = Ui.errorMsg("you haven't entered a time that this task is due by. " +
+                        "you can do that by typing \"deadline xxx /by dd/mm/yy hhmm\". \n" +
                         "e.g.: deadline read textbook /by 12/3/20 1500");
-            } else if (ind - 1 <= 9) {
+            } else if (ind - 1 <= DEADLINE_LENGTH) {
                 msg = Ui.errorMsg("the task description cannot be nothing D:");
             } else {
-                taskName = in.substring(9,ind - 1);
-                LocalDateTime dead = LocalDateTime.parse(in.substring(ind + 4), DateTimeFormatter.ofPattern("d/M/yy HHmm"));
+                taskName = in.substring(DEADLINE_LENGTH,ind - 1);
+                LocalDateTime dead = LocalDateTime.parse(in.substring(ind + BY_LENGTH),
+                        dateFormat);
                 temp = new Deadline(taskName,dead);
             }
         } else if (in.startsWith("event ")){
             int ind = in.indexOf("/at ");
-            if (ind < 0 || ind == in.length() - 4) {
-                msg = Ui.errorMsg("you haven't entered a time that this task happens at. you can do that by typing \"event xxx /at dd/mm/yy hhmm\". \n" +
+            if (ind < 0 || in.endsWith("/at ")) {
+                msg = Ui.errorMsg("you haven't entered a time that this task happens at. " +
+                        "you can do that by typing \"event xxx /at dd/mm/yy hhmm\". \n" +
                         "e.g.: event read textbook /at 12/3/20 1500");
-            } else if (ind - 1 <= 6) {
+            } else if (ind - 1 <= EVENT_LENGTH) {
                 msg = Ui.errorMsg("the task description cannot be nothing D:");
             } else {
-                taskName = in.substring(6,ind - 1);
-                LocalDateTime time = LocalDateTime.parse(in.substring(ind + 4), DateTimeFormatter.ofPattern("d/M/yy HHmm"));
+                taskName = in.substring(EVENT_LENGTH,ind - 1);
+                LocalDateTime time = LocalDateTime.parse(in.substring(ind + AT_LENGTH),
+                        dateFormat);
                 temp = new Event(taskName,time);
             }
         }

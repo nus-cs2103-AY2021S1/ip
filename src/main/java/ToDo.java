@@ -5,13 +5,13 @@ public class ToDo extends Task {
     }
 
     public String toString() {
-        String donez;
-        if (done) {
-            donez = "✓";
+        String doneStatus;
+        if (isDone) {
+            doneStatus = "✓";
         } else {
-            donez = "✗";
+            doneStatus = "✗";
         }
-        return "[T] [" + donez + "] " + task;
+        return "[T] [" + doneStatus + "] " + task;
     }
 
     public String saveText() {

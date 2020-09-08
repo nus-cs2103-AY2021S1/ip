@@ -18,6 +18,7 @@ public class Storage {
 
     /**
      * Converts all tasks in the list to a string and writes that to the save file.
+     *
      * @param taskList The list of tasks.
      */
     public void save(List<Task> taskList) {
@@ -40,32 +41,42 @@ public class Storage {
 
     /**
      * Converts the text in the save file back to Tasks.
+     *
      * @return List of Tasks that is converted from text.
      */
     public List<Task> read() {
         List<Task> result = new ArrayList<Task>();
         File myObj = new File(filePath);
-        Scanner myReader;
+
         try {
             if (!myObj.exists()) {
-                try {
-                    myObj.createNewFile();
-                } catch (IOException f) {
-                    System.out.println("An error occurred while creating the task list file! D:");
-                    f.printStackTrace();
-                }
+                createFile(myObj);
             }
-            myReader = new Scanner(myObj);
-            while (myReader.hasNextLine()) {
-                String data = myReader.nextLine();
-                result.add(Task.readText(data));
-            }
-            myReader.close();
+            readFile(result, myObj);
         } catch (FileNotFoundException e) {
-            System.out.println("An error occurred while trying to read the tasklist save file!");
+            System.out.println("An error occurred while trying to read the task list save file!");
             e.printStackTrace();
         }
         return result;
+    }
+
+    private void readFile(List<Task> result, File myObj) throws FileNotFoundException {
+        Scanner myReader;
+        myReader = new Scanner(myObj);
+        while (myReader.hasNextLine()) {
+            String data = myReader.nextLine();
+            result.add(Task.readText(data));
+        }
+        myReader.close();
+    }
+
+    private void createFile(File myObj) {
+        try {
+            myObj.createNewFile();
+        } catch (IOException f) {
+            System.out.println("An error occurred while creating the task list file! D:");
+            f.printStackTrace();
+        }
     }
 
     /**

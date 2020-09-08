@@ -14,6 +14,7 @@ public class Ui {
 
     /**
      * Prints a message with the associated formatting.
+     *
      * @param msg The message to be printed.
      */
     public static String print(String msg) {

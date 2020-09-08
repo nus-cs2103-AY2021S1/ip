@@ -2,37 +2,52 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class Task {
-    protected boolean done;
+    protected boolean isDone;
     protected String task;
+
     public Task (String in) {
         task = in;
-        done = false;
-    }
-    public void complete() {
-        done = true;
-    }
-    public String saveText() {
-        return done + " | " + task;
+        isDone = false;
     }
 
+    public void complete() {
+        isDone = true;
+    }
+
+    public String saveText() {
+        return isDone + " | " + task;
+    }
+
+    //constants used to parse save text
+    public static String separator = " \\| ";
+    public static DateTimeFormatter dateFormat= DateTimeFormatter.ofPattern("dd MMM yyyy HHmm");
     /**
      * Converts a line of text in save file to a Task object.
+     *
      * @param in The string to be converted.
      * @return Task represented by the input string.
      */
     public static Task readText(String in) {
-        String[] result = in.split(" \\| ");
+        String[] result = in.split(separator);
         String taskType = result[0];
-        boolean temp = Boolean.parseBoolean(result[1]);
+        boolean isComplete = Boolean.parseBoolean(result[1]);
+        String taskName = result[2];
+        String taskTime;
         Task tempTask;
         if (taskType.equals("T")) {
-            tempTask = new ToDo(result[2]);
-        } else if (taskType.equals("D")) {
-            tempTask = new Deadline(result[2],LocalDateTime.parse(result[3],DateTimeFormatter.ofPattern("dd MMM yyyy HHmm")));
+            tempTask = new ToDo(taskName);
         } else {
-            tempTask = new Event(result[2],LocalDateTime.parse(result[3],DateTimeFormatter.ofPattern("dd MMM yyyy HHmm")));
+            taskTime = result[3];
+            if (taskType.equals("D")) {
+                tempTask = new Deadline(taskName,LocalDateTime.parse(taskTime,dateFormat));
+            } else if (taskType.equals("E")) {
+                tempTask = new Event(taskName,LocalDateTime.parse(taskTime,dateFormat));
+            } else {
+                System.out.println("error reading save file");
+                return null;
+            }
         }
-        if (temp) {
+        if (isComplete) {
             tempTask.complete();
         }
         return tempTask;
@@ -40,6 +55,7 @@ public class Task {
 
     /**
      * Converts the date and time to the list display format.
+     *
      * @param date Date to be converted
      * @return String to be printed.
      */
@@ -49,6 +65,7 @@ public class Task {
 
     /**
      * Converts the date and time to the save file format.
+     *
      * @param date Date to be converted
      * @return String to be written to the save file.
      */
