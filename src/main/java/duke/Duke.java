@@ -92,6 +92,18 @@ public class Duke {
         }
     }
 
+    private String doneWrapper(Command command) {
+        try {
+            return this.doneHandler(command.getParameters());
+        } catch (DukeExceptions.NoUndoneTaskException e) {
+            return DukeExceptions.printNoUndoneTaskError();
+        } catch (IndexOutOfBoundsException e) {
+            return DukeExceptions.printIndexSizeMismatchError();
+        } catch (NumberFormatException e) {
+            return DukeExceptions.noIndexKeyedError();
+        }
+    }
+
 
     /**
      * Handles addition of new Tasks and updates it in both hard disk accordingly as well as the task list.
@@ -108,6 +120,18 @@ public class Duke {
             return this.ui.printAddedNewTask(newTask, this.taskList.getNoTask());
         } else {
             throw new DukeExceptions.IncompleteCommandException(command.getClass().toString());
+        }
+    }
+
+    private String addTaskWrapper(Command command) {
+        try {
+            return this.addTaskHandler(command);
+        } catch (DukeExceptions.IncompleteCommandException e) {
+            return DukeExceptions.printIncompleteCommandError();
+        } catch (ArrayIndexOutOfBoundsException e) {
+            return DukeExceptions.printNoDateInput();
+        } catch (DateTimeParseException e) {
+            return DukeExceptions.printIncorrectDateFormatError();
         }
     }
 
@@ -131,6 +155,18 @@ public class Duke {
         }
     }
 
+    private String deleteWrapper(Command command) {
+        try {
+            return this.deleteTaskHandler(command.getParameters());
+        } catch (DukeExceptions.NoTaskToDeleteException e) {
+            return DukeExceptions.printNoTaskToDeleteError();
+        } catch (IndexOutOfBoundsException e) {
+            return DukeExceptions.printIndexSizeMismatchError();
+        } catch (NumberFormatException e) {
+            return DukeExceptions.noIndexKeyedError();
+        }
+    }
+
     /**
      * Returns True if Duke bot is still running.
      *
@@ -140,6 +176,16 @@ public class Duke {
         return this.isRunning;
     }
 
+    /**
+     *  Returns True if Command is a task related command
+     * @param command any possible command
+     * @return boolean value indicating if the command is a task related command
+     */
+    public boolean isTaskCommand(Command command){
+        return command.getClass() == TodoCommand.class
+                || command.getClass() == EventCommand.class
+                || command.getClass() == DeadLineCommand.class;
+    }
 
     /**
      * saves tasks to hard disk
@@ -165,37 +211,11 @@ public class Duke {
         } else if (command.getClass() == ListCommand.class) {
             return this.ui.printTaskList(this.taskList);
         } else if (command.getClass() == DoneCommand.class) {
-            try {
-                return this.doneHandler(command.getParameters());
-            } catch (DukeExceptions.NoUndoneTaskException e) {
-                return DukeExceptions.printNoUndoneTaskError();
-            } catch (IndexOutOfBoundsException e) {
-                return DukeExceptions.printIndexSizeMismatchError();
-            } catch (NumberFormatException e) {
-                return DukeExceptions.noIndexKeyedError();
-            }
-        } else if (command.getClass() == TodoCommand.class
-                || command.getClass() == EventCommand.class
-                || command.getClass() == DeadLineCommand.class) {
-            try {
-                return this.addTaskHandler(command);
-            } catch (DukeExceptions.IncompleteCommandException e) {
-                return DukeExceptions.printIncompleteCommandError();
-            } catch (ArrayIndexOutOfBoundsException e) {
-                return DukeExceptions.printNoDateInput();
-            } catch (DateTimeParseException e) {
-                return DukeExceptions.printIncorrectDateFormatError();
-            }
+            return this.doneWrapper(command);
+        } else if (isTaskCommand(command)) {
+            return this.addTaskWrapper(command);
         } else if (command.getClass() == DelCommand.class) {
-            try {
-                return this.deleteTaskHandler(command.getParameters());
-            } catch (DukeExceptions.NoTaskToDeleteException e) {
-                return DukeExceptions.printNoTaskToDeleteError();
-            } catch (IndexOutOfBoundsException e) {
-                return DukeExceptions.printIndexSizeMismatchError();
-            } catch (NumberFormatException e) {
-                return DukeExceptions.noIndexKeyedError();
-            }
+            return this.deleteWrapper(command);
         } else if (command.getClass() == DateCommand.class) {
             return ui.printGetTaskOnDThisDate(command.getParameters()[0], this.taskList);
         } else if (command.getClass() == FindCommand.class) {

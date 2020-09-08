@@ -37,8 +37,8 @@ public class TaskList {
         this.taskList = new ArrayList<Task>();
         FileReader fr = new FileReader(savedTasks); //reads the file
         BufferedReader br = new BufferedReader(fr); //creates a buffering character input stream
-        String line;
-        while ((line = br.readLine()) != null) {
+        String line = br.readLine();
+        while (line != null) {
             String[] parameters = line.split("\\|");
             String taskType = parameters[0];
             boolean completionStatus = parameters[1].equals("1");
@@ -52,6 +52,7 @@ public class TaskList {
                 task = new Deadline(taskDescription, LocalDateTime.parse(parameters[3].strip()), completionStatus);
             }
             this.taskList.add(task);
+            line = br.readLine();
         }
         fr.close();
     }
