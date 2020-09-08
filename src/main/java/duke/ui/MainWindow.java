@@ -32,12 +32,10 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Initializes Duke.
-     */
-    public void initializeDuke() {
-        Ui ui = new Ui(System.in, dialogContainer);
-        duke = new Duke(ui);
-        ui.showWelcomeMessage();
+    * Sets MainWindow's Duke object.
+    */
+    public void setDuke(Duke duke) {
+        this.duke = duke;
     }
 
     /**
@@ -52,5 +50,9 @@ public class MainWindow extends AnchorPane {
             Platform.exit();
         }
         userInput.clear();
+    }
+
+    public VBox getDialogContainer() {
+        return dialogContainer;
     }
 }

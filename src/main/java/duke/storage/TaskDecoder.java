@@ -5,6 +5,7 @@ import static duke.storage.Storage.TASK_DATA_ARGS_FORMAT;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.regex.Matcher;
@@ -67,11 +68,8 @@ public class TaskDecoder {
             LocalDate eventDate = LocalDate.parse(date.replaceAll(pattern, "$1"));
             String startTemp = date.replaceAll(pattern, "$3");
             String endTemp = date.replaceAll(pattern, "$5");
-            LocalTime startTime = LocalTime.parse(startTemp.substring(0, 2) + ":"
-                    + endTemp.substring(2, 4));
-            LocalTime endTime = LocalTime.parse(endTemp.substring(0, 2) + ":"
-                    + endTemp.substring(2, 4));
-
+            LocalTime startTime = LocalTime.parse(startTemp, DateTimeFormatter.ofPattern("Hmm"));
+            LocalTime endTime = LocalTime.parse(endTemp, DateTimeFormatter.ofPattern("Hmm"));
             Task taskEvent = new TaskEvent(description, eventDate, startTime, endTime);
             if (isDone) {
                 taskEvent.setDone();
@@ -84,8 +82,7 @@ public class TaskDecoder {
             assert Pattern.compile(pattern).matcher(date).matches() : "Date input for " + description + " is incorrect";
             LocalDate deadlineDate = LocalDate.parse(date.replaceAll(pattern, "$1"));
             String timeTemp = date.replaceAll(pattern, "$3");
-            LocalTime deadlineTime = LocalTime.parse(timeTemp.substring(0, 2)
-                    + ":" + timeTemp.substring(2, 4));
+            LocalTime deadlineTime = LocalTime.parse(timeTemp, DateTimeFormatter.ofPattern("Hmm"));
             LocalDateTime deadline = deadlineDate.atTime(deadlineTime);
             Task taskDeadline = new TaskDeadline(description, deadline);
             if (isDone) {
