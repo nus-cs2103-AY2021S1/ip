@@ -69,6 +69,7 @@ public class Duke {
         } else if (cmd == Command.VIEW) {
             int current;
             try {
+                assert in.length() >= Parser.VIEW_LENGTH : "input is too short";
                 current = Integer.parseInt(in.substring(Parser.VIEW_LENGTH));
                 current--;
                 Note note;
@@ -126,7 +127,6 @@ public class Duke {
                     assert task != null : "task is null";
                     tasks.delete(current);
                     result = Ui.print("i've removed the following task from the list:\n\t" + task + "\nnow you have " + tasks.size() + " items in your tasklist.");
-
                 }
             } catch (Exception e){
                 result = Ui.errorMsg("you haven't entered a task number to delete!");
