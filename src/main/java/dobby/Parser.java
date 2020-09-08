@@ -12,6 +12,7 @@ import dobby.command.InvalidInput;
 import dobby.command.ListCommand;
 import dobby.command.ScheduledCommand;
 import dobby.command.TodoCommand;
+import dobby.command.UpdateCommand;
 
 /**
  * Parses the input given by the user and interacts with TaskList accordingly
@@ -60,6 +61,8 @@ public class Parser {
                 return (new ByeCommand()).parseInput(tasks, text);
             case "help":
                 return (new HelpCommand()).parseInput(tasks, text);
+            case "update":
+                return (new UpdateCommand()).parseInput(tasks, text);
             default:
                 return (new InvalidInput()).parseInput(tasks, text);
             }

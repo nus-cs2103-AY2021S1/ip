@@ -16,6 +16,7 @@ public class HelpCommand implements Command {
             + "\n  " + ScheduledCommand.USAGE
             + "\n  " + FindCommand.USAGE
             + "\n  " + FindtypeCommand.USAGE
+            + "\n  " + UpdateCommand.USAGE
             + "\n  " + HelpCommand.USAGE
             + "\n  " + ByeCommand.USAGE;
 

@@ -213,7 +213,7 @@ public class ParserTest {
             noType = e.getMessage();
         }
 
-        assertEquals("1. [T][\u2718] test findtype command", message);
+        assertEquals("1. [T][\u2718] test findtype command\n", message);
         assertEquals("Incorrect usage of command. Please try again."
                 + "\n  findtype _T/D/E_", noType);
     }

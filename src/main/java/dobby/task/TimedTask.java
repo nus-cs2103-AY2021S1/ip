@@ -7,8 +7,8 @@ import java.time.format.DateTimeFormatter;
  * Parent class for deadline and event classes
  */
 public class TimedTask extends Task {
-    private final LocalDate date;
-    private final String time;
+    private LocalDate date;
+    private String time;
     private final String tag;
 
     /**
@@ -85,9 +85,12 @@ public class TimedTask extends Task {
         if (tm / 100 > 12) {
             hr = String.format("%d:", (tm / 100) % 12);
             ampm = " pm";
-        } else {
+        } else if (tm / 100 < 12) {
             hr = String.format("%d:", (tm / 100));
             ampm = " am";
+        } else if (tm / 100 == 12) {
+            hr = "12:";
+            ampm = " pm";
         }
 
         if (tm % 100 == 0) {
@@ -99,10 +102,6 @@ public class TimedTask extends Task {
             }
         }
 
-        if (time.equals("1200")) {
-            return "12:00 pm";
-        }
-
         return hr + min + ampm;
     }
 
@@ -110,6 +109,14 @@ public class TimedTask extends Task {
     public String getDescription() {
         String message = this.tag + super.getDescription() + " " + this.getSchedule();
         return message;
+    }
+
+    public void setDate(String date) {
+        this.date = parseDate(date);
+    }
+
+    public void setTime(String time) {
+        this.time = parseTime(time);
     }
 
     /**
