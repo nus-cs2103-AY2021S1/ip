@@ -47,6 +47,7 @@ public class TaskList {
      *
      */
     public String markTaskDone(Ui ui, int taskNumber, Storage storage) throws IOException {
+        assert taskNumber > 0 : "Number should be greater than 0";
         Task task = tasks.get(taskNumber - 1);
         task.markDone();
         storage.writeFile(this);
@@ -57,6 +58,7 @@ public class TaskList {
      *
      */
     public String deleteTask(Ui ui, int taskNumber, Storage storage) throws IOException {
+        assert taskNumber > 0 : "Number should be greater than 0";
         Task task = tasks.get(taskNumber - 1);
         tasks.remove(taskNumber - 1);
         storage.writeFile(this);
@@ -79,23 +81,22 @@ public class TaskList {
      *
      */
     public String findTask(Ui ui, String[] parsedInput) {
-        if (tasks.size() > 0) {
-            String body = parsedInput[1];
-            String foundTasks = "";
-            boolean noneFound = true;
-            for (Task task : tasks) {
-                if (task.toString().contains(body)) {
-                    foundTasks += task + "\n";
-                    noneFound = false;
-                }
-            }
-            if (!noneFound) {
-                return ui.sayFoundTasks(foundTasks);
-            } else {
-                return ui.sayNoMatchingFileFound();
-            }
-        } else {
+        if (tasks.size() <= 0) {
             return ui.sayCurrentListIsEmpty();
+        }
+        String body = parsedInput[1];
+        String foundTasks = "";
+        boolean noneFound = true;
+        for (Task task : tasks) {
+            if (task.toString().contains(body)) {
+                foundTasks += task + "\n";
+                noneFound = false;
+            }
+        }
+        if (!noneFound) {
+            return ui.sayFoundTasks(foundTasks);
+        } else {
+            return ui.sayNoMatchingFileFound();
         }
     }
 

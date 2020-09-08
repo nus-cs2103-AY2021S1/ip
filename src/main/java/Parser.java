@@ -24,8 +24,6 @@ public class Parser {
 
     private static final String NOW = "now";
 
-    // test commit
-
     /**
      *
      */
@@ -70,6 +68,7 @@ public class Parser {
     private static String handleDoneCommand(Ui ui, TaskList tasks, Storage storage, String[] parsedInput) throws DukeException, IOException {
         if (isValidSize(tasks, parsedInput)) {
             int taskNumber = getNumber(parsedInput);
+            assert taskNumber > 0 : "Number should be greater than 0";
             return tasks.markTaskDone(ui, taskNumber, storage);
         } else {
             throw new DukeException("Invalid number for DONE command");
@@ -79,6 +78,7 @@ public class Parser {
     private static String handleDeleteCommand(Ui ui, TaskList tasks, Storage storage, String[] parsedInput) throws DukeException, IOException {
         if (isValidSize(tasks, parsedInput)) {
             int taskNumber = getNumber(parsedInput);
+            assert taskNumber > 0 : "Number should be greater than 0";
             return tasks.deleteTask(ui, taskNumber, storage);
         } else {
             throw new DukeException("Invalid number for DELETE command");
