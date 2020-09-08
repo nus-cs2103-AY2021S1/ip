@@ -127,6 +127,8 @@ public class TaskList implements Observable<TaskList> /* CRTP KEKW */ {
      * @param task the task to remove.
      */
     public void removeTask(Task task) {
+        assert this.tasks.size() > 0;
+
         this.tasks.remove(task);
 
         this.updateObservers();
