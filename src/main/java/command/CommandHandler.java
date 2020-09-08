@@ -1,6 +1,7 @@
 package command;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 import java.util.function.Consumer;
 import java.util.function.Function;
@@ -91,6 +92,11 @@ public class CommandHandler implements Consumer<String>, Function<String, String
                 break;
             case FIND_CMD:
                 output = findTasks(stripped);
+                break;
+            case HELP_CMD:
+                output = "Commands: \n" + Arrays.stream(Command.values())
+                        .map(Command::getHelpMessage)
+                        .collect(Collectors.joining("\n"));
                 break;
             default:
                 throw new IllegalStateException("Unexpected state");
