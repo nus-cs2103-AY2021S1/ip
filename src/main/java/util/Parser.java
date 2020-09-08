@@ -23,10 +23,9 @@ public class Parser {
             return Command.LIST;
         }
 
-        // Check command
         // Process input
         String[] instructions = userInput.split(" ", 2);
-
+        // Check command
         if (instructions[0].equals("todo")) {
             // Command for to do Tasks creation
             // Add check for command details
