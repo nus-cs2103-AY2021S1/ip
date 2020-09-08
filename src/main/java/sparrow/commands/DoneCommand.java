@@ -1,5 +1,6 @@
 package sparrow.commands;
 
+import sparrow.data.exceptions.FileErrorException;
 import sparrow.data.task.Task;
 import sparrow.data.task.TaskList;
 import sparrow.data.trivia.VocabList;
@@ -25,6 +26,8 @@ public class DoneCommand extends Command {
             return String.format(MESSAGE_COMPLETED_TASK_SUCCESS, completedTask);
         } catch (IndexOutOfBoundsException e) {
             return "INDEX OUT OF BOUNDS";
+        } catch (FileErrorException fee) {
+            return fee.getMessage();
         }
     }
 }

@@ -1,5 +1,6 @@
 package sparrow.commands;
 
+import sparrow.data.exceptions.FileErrorException;
 import sparrow.data.task.Task;
 import sparrow.data.task.TaskList;
 import sparrow.data.trivia.VocabList;
@@ -19,9 +20,13 @@ public class AddTaskCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, VocabList vocabList, Ui ui, Storage storage) {
-        tasks.addTask(toAdd);
-        storage.saveTaskListToFile(tasks);
-        storage.saveVocabListToFile(vocabList);
-        return String.format(MESSAGE_SUCCESS, toAdd);
+        try {
+            tasks.addTask(toAdd);
+            storage.saveTaskListToFile(tasks);
+            storage.saveVocabListToFile(vocabList);
+            return String.format(MESSAGE_SUCCESS, toAdd);
+        } catch (FileErrorException fee) {
+            return fee.getMessage();
+        }
     }
 }

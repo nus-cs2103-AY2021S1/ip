@@ -1,5 +1,6 @@
 package sparrow.storage;
 
+import sparrow.data.exceptions.FileErrorException;
 import sparrow.data.task.Task;
 import sparrow.data.task.Todo;
 import sparrow.data.task.Deadline;
@@ -8,10 +9,8 @@ import sparrow.data.task.TaskList;
 import sparrow.data.trivia.VocabList;
 import sparrow.data.trivia.Vocabulary;
 
-import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
-import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
@@ -20,7 +19,6 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.Scanner;
 
 /**
  * Represents the file used to store the task list.
@@ -51,7 +49,7 @@ public class Storage {
      * If no file found, returns an empty list.
      * @return Task list.
      */
-    public TaskList loadTaskListFromFile() {
+    public TaskList loadTaskListFromFile() throws FileErrorException {
         File f = new File(path.toString());
 
         if (f.exists()) {
@@ -66,24 +64,24 @@ public class Storage {
                 }
                 return decodeTaskList(encodedTaskList);
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new FileErrorException("Error loading task list.", e.getCause());
             }
         } else {
             try {
                 f.createNewFile();
+                return new TaskList();
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new FileErrorException("Error creating text file.", e.getCause());
             }
         }
-        return new TaskList();
     }
 
-    public void saveTaskListToFile(TaskList tasks) {
+    public void saveTaskListToFile(TaskList tasks) throws FileErrorException {
+        assert isValidPath(path);
         try {
             Files.write(path, encodeTaskList(tasks));
         } catch (IOException e) {
-            // TODO create exception for this
-            System.out.println("Error saving to file" + e.toString());
+            throw new FileErrorException("Error saving task list to file.", e.getCause());
         }
     }
 
@@ -225,7 +223,7 @@ public class Storage {
         return encodedVocabList;
     }
 
-    public VocabList loadVocabListFromFile() {
+    public VocabList loadVocabListFromFile() throws FileErrorException {
         File f = new File(path.toString());
 
         if (f.exists()) {
@@ -245,25 +243,24 @@ public class Storage {
                 }
                 return decodeVocabList(encodedVocabList);
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new FileErrorException("Error loading vocab list.", e.getCause());
             }
         } else {
             try {
                 f.createNewFile();
             } catch (IOException e) {
-                e.printStackTrace();
+                throw new FileErrorException("Error creating text file.", e.getCause());
             }
         }
         return new VocabList();
     }
 
-    public void saveVocabListToFile(VocabList vocabs) {
+    public void saveVocabListToFile(VocabList vocabs) throws FileErrorException {
         try {
             Files.write(path, Arrays.asList("---"), StandardOpenOption.APPEND);
             Files.write(path, encodeVocabList(vocabs), StandardOpenOption.APPEND);
         } catch (IOException e) {
-            // TODO create exception for this
-            System.out.println("Error saving to file" + e.toString());
+            throw new FileErrorException("Error saving vocab list to file", e.getCause());
         }
     }
 }

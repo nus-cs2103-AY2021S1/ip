@@ -1,5 +1,6 @@
 package sparrow.commands;
 
+import sparrow.data.exceptions.FileErrorException;
 import sparrow.data.task.Task;
 import sparrow.data.task.TaskList;
 import sparrow.data.trivia.VocabList;
@@ -25,6 +26,8 @@ public class DeleteCommand extends Command {
             return String.format(MESSAGE_DELETE_TASK_SUCCESS, deletedTask);
         } catch (IndexOutOfBoundsException e) {
             return "INDEX OUT OF BOUNDS";
+        } catch (FileErrorException fee) {
+            return fee.getMessage();
         }
     }
 }
