@@ -21,7 +21,7 @@ public class Dobby {
      * Loads the dobbylist storage file and initializes other components of package
      */
     public void initialize() {
-        File dobbyFile = new File("../dobbylist.txt");
+        File dobbyFile = new File("./dobbylist.txt");
 
         try {
             if (!dobbyFile.exists()) {
