@@ -24,13 +24,11 @@ public class Duke {
         Storage storage = new Storage(FILEPATH);
         TaskList tasks = null;
         Ui ui = new Ui();
-        ui.printWelcome();
         try {
             tasks = TaskList.parse(storage.load());
-            ui.printLoaded(tasks);
+            ui.showLoaded(tasks);
         } catch (DukeException e) {
             tasks = new TaskList();
-            ui.printError(e);
         } finally {
             this.wrapper = new Wrapper(storage, tasks, ui);
             this.parser = new Parser(wrapper);
@@ -41,7 +39,7 @@ public class Duke {
         String ret = wrapper.getUi().welcome();
         try {
             TaskList tasks = TaskList.parse(wrapper.getStorage().load());
-            ret += wrapper.getUi().printLoaded(tasks);
+            ret += wrapper.getUi().showLoaded(tasks);
         } catch (DukeException e) {
             ret += wrapper.getUi().showError(e);
         }
