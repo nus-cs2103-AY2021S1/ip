@@ -17,6 +17,8 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.RedoCommand;
+import duke.command.UndoCommand;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -73,6 +75,10 @@ public class Parser {
             return createAddCommand(splitString);
         } else if (splitString[0].equals("find") && splitString.length >= 2) {
             return createFindCommand(splitString);
+        } else if (string.equals("undo")) {
+            return new UndoCommand();
+        } else if (string.equals("redo")) {
+            return new RedoCommand();
         } else {
             throw new DukeException("Oops! I'm sorry, I don't know what that means.");
         }

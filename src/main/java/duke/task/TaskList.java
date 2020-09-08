@@ -91,4 +91,8 @@ public class TaskList {
         }
         return foundTasks;
     }
+
+    public void updateTaskList(TaskList newTaskList) {
+        tasks = newTaskList.tasks;
+    }
 }

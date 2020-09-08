@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.storage.Storage;
+import duke.storage.StateManager;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -22,16 +22,16 @@ public class DoneCommand extends Command {
      * and updates the Storage.
      *
      * @param taskList The TaskList used by Duke.
-     * @param storage  The Storage used by Duke.
+     * @param stateManager  The Storage used by Duke.
      * @return CommandResult object for ui
      * @throws DukeException If unable to find the task or update the storage.
      */
     @Override
-    public CommandResult execute(TaskList taskList, Storage storage) throws DukeException {
-        assert taskList != null && storage != null;
+    public CommandResult execute(TaskList taskList, StateManager stateManager) throws DukeException {
+        assert taskList != null && stateManager != null;
         Task taskToSetDone = taskList.getTask(indexOfTask);
         taskList.setTaskDone(indexOfTask);
-        storage.updateStorage(taskList);
+        stateManager.updateState(taskList);
         return new CommandResult("Nice! I've marked this task as done:\n"
                 + taskToSetDone.toString());
     }

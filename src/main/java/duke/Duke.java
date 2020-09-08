@@ -4,7 +4,7 @@ import duke.command.Command;
 import duke.command.CommandResult;
 import duke.exception.DukeException;
 import duke.parser.Parser;
-import duke.storage.Storage;
+import duke.storage.StateManager;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
@@ -27,7 +27,7 @@ public class Duke {
 
     private Ui ui;
     private TaskList tasks;
-    private Storage storage;
+    private StateManager stateManager;
 
     /**
      * Initializes a Duke object.
@@ -36,9 +36,9 @@ public class Duke {
      */
     public Duke(String pathName) {
         ui = new Ui();
-        storage = new Storage(pathName);
         try {
-            tasks = new TaskList(storage.load());
+            stateManager = new StateManager(pathName);
+            tasks = new TaskList(stateManager.getListOfTasks());
         } catch (DukeException e) {
             ui.showError(e.getMessage());
             tasks = new TaskList();
@@ -55,7 +55,7 @@ public class Duke {
     public CommandResult getResponse(String input) {
         try {
             Command c = Parser.parse(input);
-            CommandResult output = c.execute(tasks, storage);
+            CommandResult output = c.execute(tasks, stateManager);
             return output;
         } catch (DukeException e) {
             return new CommandResult(e.getMessage());

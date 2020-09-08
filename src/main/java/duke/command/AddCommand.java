@@ -1,7 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
-import duke.storage.Storage;
+import duke.storage.StateManager;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -22,15 +22,15 @@ public class AddCommand extends Command {
      * Adds the taskToAdd to the TaskList and updates the Storage.
      *
      * @param tasks The TaskList.
-     * @param storage The Storage.
+     * @param stateManager The Storage.
      * @return CommandResult object for ui
      * @throws DukeException If storage could not be updated.
      */
     @Override
-    public CommandResult execute(TaskList tasks, Storage storage) throws DukeException {
-        assert tasks != null && storage != null;
+    public CommandResult execute(TaskList tasks, StateManager stateManager) throws DukeException {
+        assert tasks != null && stateManager != null;
         tasks.addTask(taskToAdd);
-        storage.updateStorage(tasks);
+        stateManager.updateState(tasks);
         return new CommandResult("Got it. I've added this task:\n"
                 + taskToAdd.toString() + "\n"
                 + "Now you have " + tasks.numberOfTasks() + " tasks in the list.");

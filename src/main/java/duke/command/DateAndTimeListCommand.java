@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 
 import duke.exception.DukeException;
-import duke.storage.Storage;
+import duke.storage.StateManager;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -32,12 +32,12 @@ public class DateAndTimeListCommand extends Command {
      * and prints them in the Ui.
      *
      * @param taskList The TaskList used by Duke.
-     * @param storage  The Storage used by Duke.
+     * @param stateManager  The Storage used by Duke.
      * @throws DukeException
      */
     @Override
-    public CommandResult execute(TaskList taskList, Storage storage) throws DukeException {
-        assert taskList != null && storage != null;
+    public CommandResult execute(TaskList taskList, StateManager stateManager) throws DukeException {
+        assert taskList != null && stateManager != null;
         int numberOfTasksFound = 0;
         StringBuilder stringBuilder = new StringBuilder();
         stringBuilder.append("Here are the tasks with the date: "
