@@ -77,6 +77,6 @@ public class Parser {
     }
 
     String getKeyword(String s) {
-        return s.split(" ")[1];
+        return s.substring(5);
     }
 }

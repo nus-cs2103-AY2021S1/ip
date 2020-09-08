@@ -2,15 +2,12 @@ import java.io.IOException;
 import java.util.Scanner;
 
 public class Duke {
-    static String HOME = System.getProperty("user.home");
-    static java.nio.file.Path PATH = java.nio.file.Paths.get(HOME, "ip", "data.txt");
+    private static final String HOME = System.getProperty("user.home");
+    private static final java.nio.file.Path PATH = java.nio.file.Paths.get(HOME, "ip", "data.txt");
 
-    static Scanner sc = new Scanner(System.in);
-    static Ui ui = new Ui();
-    static Parser parser = new Parser();
-
-    static String s;
-    static TaskList tasklist;
+    private static Ui ui = new Ui();
+    private static Parser parser = new Parser();
+    private static TaskList tasklist;
 
     String getResponse(String input) {
         try {
@@ -32,7 +29,8 @@ public class Duke {
             } else if (input.startsWith("find")) {
                 String keyword = parser.getKeyword(input);
                 return ui.find(keyword);
-            } else { // unknown input
+            } else {
+                // unknown input
                 throw new UnknownInputException();
             }
         } catch (DukeException | IOException e) {
@@ -47,7 +45,7 @@ public class Duke {
         tasklist = new TaskList(total);
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         // use launcher to launch
     }
 }

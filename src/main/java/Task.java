@@ -6,16 +6,16 @@ public class Task {
     /** Name of task */
     protected String name;
     /** Status of task, can either be complete or incomplete */
-    protected boolean completed;
+    protected boolean isCompleted;
 
     Task(String name) {
         this.name = name;
-        this.completed = false;
+        this.isCompleted = false;
     }
 
     Task(String name, boolean completed) {
         this.name = name;
-        this.completed = completed;
+        this.isCompleted = completed;
     }
 
     String getName() {
@@ -36,7 +36,7 @@ public class Task {
      * @return o if task is complete, x if task is incomplete.
      */
     public String getStatusIcon() {
-        return (this.completed ? "o" : "x"); //return O or X symbols
+        return (this.isCompleted ? "o" : "x");
     }
 
     /**
@@ -50,6 +50,6 @@ public class Task {
 
     @Override
     public String toString() {
-            return "[" + this.getStatusIcon() + "] " + this.name;
+        return "[" + this.getStatusIcon() + "] " + this.name;
     }
 }
