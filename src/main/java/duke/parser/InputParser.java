@@ -193,11 +193,23 @@ public class InputParser {
                 .split("-").length == 2;
     }
 
+    /**
+     * Parses input to get description of to do task.
+     *
+     * @param input input to be parsed.
+     * @return description of to do task.
+     */
     public String parseToDoInput(String input) {
         String description = input.substring(4);
         return description;
     }
 
+    /**
+     * Parses input to get parameters for deadline task creation.
+     *
+     * @param input input to be parsed.
+     * @return parameters to be passed into deadline constructor.
+     */
     public String[] parseDeadlineInput(String input) {
         String[] parsedInput = input.split(" /by ");
         String by = parsedInput[1];
@@ -206,6 +218,12 @@ public class InputParser {
         return deadlineParams;
     }
 
+    /**
+     * Parses input to get parameters for event task creation.
+     *
+     * @param input input to be parsed.
+     * @return parameters to be passed into event constructor.
+     */
     public String[] parseEventInput(String input) {
         String[] parsedInput = input.split(" /at ");
         String at = parsedInput[1].split(" ")[0];
