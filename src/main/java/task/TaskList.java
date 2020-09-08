@@ -23,7 +23,7 @@ public class TaskList {
      * Constructor to create this object.
      */
     public TaskList() {
-        List<task.Task> taskList = new ArrayList<>();
+        List<Task> taskList = new ArrayList<>();
         this.taskList = taskList;
     }
 
@@ -32,7 +32,7 @@ public class TaskList {
      *
      * @param list the list of tasks to be encapsulated.
      */
-    public TaskList(List<task.Task> list) {
+    public TaskList(List<Task> list) {
         this.taskList = list;
     }
 
@@ -42,7 +42,7 @@ public class TaskList {
      * @param task the task to be added.
      * @return string containing information on deletion and list size.
      */
-    public String addToTaskList(task.Task task) {
+    public String addToTaskList(Task task) {
         this.taskList.add(task);
         return "    ____________________________________________________\n"
                 + "     Got it. I've added this task:\n"
@@ -63,7 +63,9 @@ public class TaskList {
      * @return string containing information on deletion and list size.
      */
     public String deleteFromTaskList(int index) {
-        task.Task task = getTask(index);
+        assert index >= 0 && index < size();
+
+        Task task = getTask(index);
         this.taskList.remove(index);
         return "    ____________________________________________________\n"
                 + "     Noted. I've removed this task:\n"
@@ -83,7 +85,8 @@ public class TaskList {
      * @param index the index of task to be receive.
      * @return Task at this particular index
      */
-    public task.Task getTask(int index) {
+    public Task getTask(int index) {
+        assert index >= 0 && index <= size();
         return this.taskList.get(index);
     }
 
