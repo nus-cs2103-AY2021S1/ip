@@ -1,4 +1,4 @@
-T ND test todo        
+T ND test todo           
 D D do homeword /time 20/4/2020
 E D 1 /time 2020
-T ND 1   
+T ND 1      

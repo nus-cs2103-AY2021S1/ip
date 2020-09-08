@@ -26,22 +26,28 @@ public class Parser {
      * @throws DukeException If the parsing process faces any problem
      */
     public static Command parse(String fullCommand) throws DukeException {
-        String[] splitInput = fullCommand.split("\\s+", 2);
+        String[] splitInput = fullCommand.trim().split("\\s+", 2);
 
         // command: hello
-        boolean isStartCommand = splitInput[0].equals(StartCommand.COMMAND) && splitInput.length == 1;
+        boolean hasNoFollowUpStart = splitInput.length == 1 || splitInput[1].equals("");
+        boolean hasStartSpecifier = splitInput[0].equals(StartCommand.COMMAND);
+        boolean isStartCommand = hasStartSpecifier && hasNoFollowUpStart;
         if (isStartCommand) {
             return createStartCommand();
         }
 
         // command: bye
-        boolean isExitCommand = splitInput[0].equals(ExitCommand.COMMAND) && splitInput.length == 1;
+        boolean hasNoFollowUpExit = splitInput.length == 1 || splitInput[1].equals("");
+        boolean hasExitSpecifier = splitInput[0].equals(ExitCommand.COMMAND);
+        boolean isExitCommand = hasExitSpecifier && hasNoFollowUpExit;
         if (isExitCommand) {
             return createExitCommand();
         }
 
         // command: list
-        boolean isListCommand = splitInput[0].equals(ListCommand.COMMAND) && splitInput.length == 1;
+        boolean hasNoFollowUpList = splitInput.length == 1 || splitInput[1].equals("");
+        boolean hasListSpecifier = splitInput[0].equals(ListCommand.COMMAND);
+        boolean isListCommand = hasListSpecifier && hasNoFollowUpList;
         if (isListCommand) {
             return createListCommand();
         }
