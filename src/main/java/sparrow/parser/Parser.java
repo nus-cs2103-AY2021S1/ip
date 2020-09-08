@@ -36,6 +36,7 @@ public class Parser {
             Pattern.compile("(?<keywords>\\S+) (?<dateFilter>[0-9-]+)");
 
     public Command parseCommand(String userInput) {
+        assert !userInput.isBlank() : "No input entered"; // do I need this assertion?
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());
         if (!matcher.matches()) {
             // doesn't seem to enter this block
@@ -81,6 +82,7 @@ public class Parser {
     }
 
     private Command prepareAddTodo(String args) {
+        assert !args.isEmpty();
         final Matcher matcher = TODO_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand("Description of a Todo can't be empty.");
@@ -91,6 +93,7 @@ public class Parser {
 
     // TODO: trim whitespace from end of deadline description
     private Command prepareAddDeadline(String args) {
+        assert !args.isEmpty();
         final Matcher matcher = DEADLINE_FORMAT.matcher((args.trim()));
         if (!matcher.matches()) {
             return new IncorrectCommand("Wrong deadline format.");
@@ -106,6 +109,7 @@ public class Parser {
 
     // TODO: trim whitespace from end of event description
     private Command prepareAddEvent(String args) {
+        assert !args.isEmpty();
         final Matcher matcher = EVENT_FORMAT.matcher((args.trim()));
         if (!matcher.matches()) {
             return new IncorrectCommand("Wrong event format.");
@@ -120,6 +124,7 @@ public class Parser {
     }
 
     private Command prepareDelete(String args) {
+        assert !args.isEmpty();
         try {
             int targetIndex = Integer.parseInt(args.trim());
             return new DeleteCommand(targetIndex);
@@ -129,6 +134,7 @@ public class Parser {
     }
 
     private Command prepareDone(String args) {
+        assert !args.isEmpty();
         try {
             int targetIndex = Integer.parseInt(args.trim());
             return new DoneCommand(targetIndex);
@@ -139,6 +145,7 @@ public class Parser {
 
     // TODO: add functionality to search by >1 keyword
     private Command prepareFind(String args) {
+        assert !args.isEmpty();
         final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             return new IncorrectCommand("Please pass a keyword to search for.");
@@ -147,6 +154,7 @@ public class Parser {
     }
 
     private Command prepareFilter(String args) {
+        assert !args.isEmpty();
         final Matcher matcher = FILTER_ARGS_FORMAT.matcher(args.trim());
         if (!matcher.matches()) {
             System.out.println("Wrong filter format");

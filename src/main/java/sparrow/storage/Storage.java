@@ -62,6 +62,7 @@ public class Storage {
     }
 
     public void saveToFile(TaskList tasks) throws FileErrorException {
+        assert isValidPath(path);
         try {
             Files.write(path, encodeTaskList(tasks));
         } catch (IOException e) {
