@@ -68,6 +68,10 @@ public class TaskList {
         }
     }
 
+    public static void update(int x, String newTask) {
+        thingsOnList.get(x).update(newTask);
+    }
+
     public static String getListView() {
         String list = "";
         if (thingsOnList.size() == 0) {

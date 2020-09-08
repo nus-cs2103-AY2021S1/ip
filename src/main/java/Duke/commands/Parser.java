@@ -13,6 +13,8 @@ import java.io.PrintStream;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.BufferedReader;
+import java.lang.reflect.InvocationTargetException;
+import java.security.SecureRandom;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -81,9 +83,11 @@ public class Parser {
                 int spaceIndex = input.indexOf(" ");
                 if (spaceIndex != -1 && spaceIndex != input.length() - 1
                         && (input.contains(UI.getMessage("DELETE"))
-                        || input.contains(UI.getMessage("DONE")))) {
+                        || input.contains(UI.getMessage("DONE")) || input.contains("update"))) {
                     try {
-                        int x = Integer.parseInt(input.substring(spaceIndex + 1)) - 1;
+                        String afterCommand = input.substring(spaceIndex + 1);
+                        System.out.println(input.substring(spaceIndex + 1));
+                        int x = Integer.parseInt(input.substring(spaceIndex + 1, afterCommand.indexOf(" ") + 7)) - 1;
                         if (x + 1 > TaskList.getThingsOnListSize()) {
                             throw new DukeExceptions("Woof? (This task doesn't exist?)");
                         }
@@ -95,9 +99,17 @@ public class Parser {
                                     TaskList.getThingsOnList().get(x) + ".";
                             TaskList.deleteFromList(x);
                             return deleteMsg;
+                        } else if (input.substring(0, spaceIndex).equals("update")) {
+                            System.out.println(input + " " + spaceIndex);
+                            String newTask = input.substring(spaceIndex + 3);
+                            String updateMsg = "Bark bark: (bark) (Message " + (x + 1) + " updated to: " + newTask + ")";
+                            TaskList.update(x, newTask);
+                            return updateMsg;
                         }
                     } catch (NumberFormatException e) {
                         throw new DukeExceptions("Bark bark. (That number isn't on the list.)");
+                    } catch (StringIndexOutOfBoundsException e) {
+                        throw new DukeExceptions("Bark bark. (Enter a new task.)");
                     }
                 } else {
                     int cmdIndex = input.indexOf("/");
