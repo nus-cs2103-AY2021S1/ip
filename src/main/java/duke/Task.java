@@ -46,7 +46,6 @@ public class Task {
         String remain = task.split(" ", 2)[1];
         String isDone = remain.split(" ", 2)[0];
         String title = remain.split(" ", 2)[1];
-        //System.out.println(title);
         if (type.equals("todo")) {
             store.add(new Todo(title, Boolean.valueOf(isDone)));
         } else {

@@ -7,6 +7,8 @@ import java.time.format.DateTimeFormatter;
  */
 
 public class Event extends Task {
+
+    private static final DateTimeFormatter MMM_D_YYYY = DateTimeFormatter.ofPattern("MMM d yyyy");
     protected LocalDate at;
 
     /**
@@ -42,6 +44,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: "
-                + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                + at.format(MMM_D_YYYY) + ")";
     }
 }

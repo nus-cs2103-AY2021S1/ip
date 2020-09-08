@@ -50,6 +50,7 @@ public class Duke extends Application {
             ui.showLoadingError();
             tasks = new TaskList();
         }
+        ui.welcome();
     }
     /*
     public Duke() {
@@ -72,51 +73,50 @@ public class Duke extends Application {
 
     public String run(String input) {
         //...
+        assert !input.isEmpty();
         Parser p = new Parser();
-        //Ui.welcome();
-        boolean isExit = false;
-        while (!isExit) {
-            Command command = p.parse(input);
-            try {
-                if (command.equals(Command.BYE)) {
-                    isExit = true;
-                } else if (command.equals(Command.TODO)) {
-                    input = input.split(" ", 2)[1];
-                    Task task = TaskList.createTodo(input);
-                    return Ui.addedTask(task, tasks.getSize());
-                } else if (command.equals(Command.EVENT)) {
-                    input = input.split(" ", 2)[1];
-                    Task task = TaskList.createEvent(input);
-                    return Ui.addedTask(task, tasks.getSize());
-                } else if (command.equals(Command.DEADLINE)) {
-                    input = input.split(" ", 2)[1];
-                    Task task = TaskList.createDeadline(input);
-                    return Ui.addedTask(task, tasks.getSize());
-                } else if (command.equals(Command.DELETE)) {
-                    input = input.split(" ", 2)[1];
-                    Task task = TaskList.deleteTask(input);
-                    return Ui.deletedTask(task);
-                } else if (command.equals(Command.DONE)) {
-                    input = input.split(" ", 2)[1];
-                    Task task = TaskList.doneTask(input);
-                    return Ui.doneTask(task);
-                } else if (command.equals(Command.FIND)) {
-                    input = input.split(" ", 2)[1];
-                    List<Task> tasks = TaskList.findTask(input);
-                    return Ui.tasksFound(tasks);
-                } else if (command.equals(Command.PRINT_TASKS)) {
-                    return Ui.printTaskList(tasks.getTaskList());
-                } else if (command.equals(Command.ERROR)) {
-                    return Ui.commandError();
-                } else {
-                    return input;
-                }
-            } catch (DukeException e) {
-                return Ui.showError(e);
+
+        Command command = p.parse(input);
+        try {
+            switch (command) {
+            case BYE:
+                storage.updateDatabase(tasks.getTaskList(), filePath);
+                return Ui.bye();
+            case TODO:
+                input = input.split(" ", 2)[1];
+                Task todo = TaskList.createTodo(input);
+                return Ui.addedTask(todo, tasks.getSize());
+            case EVENT:
+                input = input.split(" ", 2)[1];
+                Task event = TaskList.createEvent(input);
+                return Ui.addedTask(event, tasks.getSize());
+            case DEADLINE:
+                input = input.split(" ", 2)[1];
+                Task deadline = TaskList.createDeadline(input);
+                return Ui.addedTask(deadline, tasks.getSize());
+            case DELETE:
+                input = input.split(" ", 2)[1];
+                Task taskToDelete = TaskList.deleteTask(input);
+                return Ui.deletedTask(taskToDelete);
+            case DONE:
+                input = input.split(" ", 2)[1];
+                Task doneTask = TaskList.doneTask(input);
+                return Ui.doneTask(doneTask);
+            case FIND:
+                input = input.split(" ", 2)[1];
+                List<Task> tasksFound = TaskList.findTask(input);
+                return Ui.tasksFound(tasksFound);
+            case PRINT_TASKS:
+                return Ui.printTaskList(tasks.getTaskList());
+            case ERROR:
+                return Ui.commandError();
+            default:
+                return input;
             }
+            //return input;
+        } catch (DukeException e) {
+            return Ui.showError(e);
         }
-        storage.updateDatabase(tasks.getTaskList(), filePath);
-        return Ui.bye();
     }
 
     /**
@@ -234,4 +234,3 @@ public class Duke extends Application {
         return "Meimei says: " + run(input);
     }
 }
-

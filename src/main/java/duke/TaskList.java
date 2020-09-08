@@ -33,12 +33,16 @@ public class TaskList {
      * @return task specified
      */
 
-    public static Task doneTask(String remain) {
+    public static Task doneTask(String remain) throws DukeException {
         assert Integer.parseInt(remain) > 0;
-        int index = Integer.parseInt(remain);
-        Task task = tasks.get(index - 1);
-        task.markAsDone();
-        return task;
+        try {
+            int index = Integer.parseInt(remain);
+            Task task = tasks.get(index - 1);
+            task.markAsDone();
+            return task;
+        } catch (AssertionError e) {
+            throw new DukeException("command not found");
+        }
     }
 
     /**
