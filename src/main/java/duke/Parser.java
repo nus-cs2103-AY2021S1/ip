@@ -110,6 +110,8 @@ public class Parser {
         }
         Task t = tasks.get(index - 1);
         boolean isTagRemoved = t.removeTag(tagToRemove) == 1;
+        ArrayList<Task> tasksCopy = tasks.clone();
+        Storage.store(tasksCopy);
         return ui.removeTag(t, isRunningOnGui, isTagRemoved, tagToRemove);
     }
 
