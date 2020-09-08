@@ -41,7 +41,7 @@ public class Parser {
      * @return A string array that splits the user's command by ' '.
      */
 
-    public String[] getDukeType(String userCommand) {
+    public String[] getDukeType(String userCommand) throws NoResponseException {
         String[] words = userCommand.split(" ");
         if (words[0].equals("deadline")) {
             this.currentType = UserInput.DEADLINE;
@@ -76,9 +76,10 @@ public class Parser {
     public String parse(String userCommand) throws EmptyInputException, NoResponseException {
         String[] words = this.getDukeType(userCommand);
         String dukeOutput = "";
+        assert (this.currentType != null) : "Sorry, This is out of duke commands";
         switch (this.currentType) {
         case DEADLINE:
-            if (words.length == 1) {
+            if (words.length <= 1) {
                 throw new EmptyInputException("deadline");
             } else {
                 String deadlineTask = "";

@@ -19,11 +19,11 @@ public class DeadlineTest {
         TaskList tasks = new TaskList(new ArrayList<Task>());
         Ui ui = new Ui();
         Parser parser = new Parser(ui , tasks);
-        String expectedOutput = "____________________________________________________________\n" +
+        String expectedOutput = "_____________________________________________\n" +
                 "     Got it. I've added this task:\n" +
                 "       [D][✘]  CS2103 (by: Aug 27 2019)\n" +
                 "     Now you have 1 task in the list.\n" +
-                "____________________________________________________________\n";
+                "_____________________________________________\n";
         String actualOutput = parser.parse("deadline CS2103 /by 2019-08-27");
         assertEquals(expectedOutput,actualOutput );
     }
@@ -38,11 +38,11 @@ public class DeadlineTest {
         TaskList tasks = new TaskList(tasksArr);
         Ui ui = new Ui();
         Parser parser = new Parser(ui , tasks);
-        String expectedOutput = "____________________________________________________________\n" +
+        String expectedOutput = "_____________________________________________\n" +
                 "     Noted. I've removed this task:\n" +
                 "       [D][✘]  homework (by: Aug 27 2019)\n" +
                 "     Now you have 1 tasks in the list.\n" +
-                "____________________________________________________________";
+                "_____________________________________________";
         String actualOutput = parser.parse("delete 1");
         assertEquals(expectedOutput,actualOutput );
     }
