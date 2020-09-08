@@ -19,7 +19,7 @@ public class ByeCommand extends Command {
      * @param storage Storage instance.
      */
     @Override
-    public void execute(TaskListHandler handler, Storage storage) {
+    public void execute(TaskListHandler handler, Storage storage, String input) {
         System.out.println("Bye bye! Hope to see you again soon!");
         System.out.println();
         System.out.println("Duke closing... ");

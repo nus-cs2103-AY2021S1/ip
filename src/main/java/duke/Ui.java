@@ -57,7 +57,7 @@ public class Ui {
             try {
                 String input = scanner.nextLine();
                 Command c = Parser.parse(input, handler);
-                c.execute(handler, storage);
+                c.execute(handler, storage, input);
                 System.out.println();
             } catch (NoSuchElementException e1) {
                 // Encounter end of file, terminate
@@ -89,7 +89,6 @@ public class Ui {
      */
     public static void printSuccess(String operation, Task currentTask, ArrayList<Task> taskList) {
         // Prints success message and list size after task added/deleted
-        indent(1);
         switch (operation) {
         case "add":
             System.out.print("Yes! I have successfully added:\n");
@@ -99,23 +98,20 @@ public class Ui {
             break;
         case "done":
             System.out.println("Good job! You completed:");
-            indent(2);
-            System.out.println(currentTask);
-            return;
+            break;
         case "find":
             System.out.println("I have found the matching tasks in your list: ");
             for (Task t: taskList) {
-                indent(2);
+                indent(1);
                 System.out.println(t);
             }
             return;
         default:
             return;
         }
-        indent(2);
-        System.out.println(currentTask);
         indent(1);
-        System.out.println("You have " + taskList.size() + " task(s) in the list.");
+        System.out.println(currentTask);
+        System.out.println();
     }
 
     /**
@@ -136,7 +132,7 @@ public class Ui {
         String doForYou = "What can I do for you?";
         return logo + "\n"
             + greeting + "\n"
-            + doForYou;
+            + doForYou + "\n";
     }
 
     /**
@@ -187,11 +183,13 @@ public class Ui {
                 System.out.println(UndoCommand.COMMAND_USAGE);
                 break;
             default:
-                throw new DukeException("\u2639 Oops, " + '"' + commandGiven + '"' + " is not a valid command for "
+                throw new DukeException("\u2639 Whoops, " + '"' + commandGiven + '"' + " is not a valid command for "
                     + "help! \n"
                     + "Try entering 'help' to show all commands.");
             }
         } else {
+            System.out.println("Here's how to use all the commands!");
+            System.out.println();
             int counter = 1;
             System.out.println(counter + ") " + DeadlineCommand.COMMAND_USAGE);
             System.out.println();

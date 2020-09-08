@@ -41,36 +41,30 @@ public class Parser {
         case "list":
             return new ListCommand();
         case "done":
-            handler.saveCurrentTaskList(input);
             Task currentTask = Parser.parseModifyTaskCommand(input, handler);
             return new DoneCommand(currentTask);
         case "delete":
-            handler.saveCurrentTaskList(input);
             Task delTask = Parser.parseModifyTaskCommand(input, handler);
             return new DeleteCommand(delTask);
         case "todo":
-            handler.saveCurrentTaskList(input);
             Task newToDo = Parser.parseNewTaskCommand(input, Task.TaskType.TODO);
             return new TodoCommand(newToDo);
         case "deadline":
-            handler.saveCurrentTaskList(input);
             Task newDeadline = Parser.parseNewTaskCommand(input, Task.TaskType.DEADLINE);
             return new DeadlineCommand(newDeadline);
         case "event":
-            handler.saveCurrentTaskList(input);
             Task newEvent = Parser.parseNewTaskCommand(input, Task.TaskType.EVENT);
             return new EventCommand(newEvent);
         case "clear":
-            handler.saveCurrentTaskList(input);
             return new ClearCommand();
         case "find":
-            return new FindCommand(input);
+            return new FindCommand();
         case "undo":
             return new UndoCommand();
         case "help":
-            return new HelpCommand(input);
+            return new HelpCommand();
         default:
-            return new InvalidCommand(input);
+            return new InvalidCommand();
         }
     }
 
@@ -86,9 +80,14 @@ public class Parser {
         String[] stringArr = input.split(" ");
         // DONE OR DELETE will be the first string in the whole command in string
         String lowerCaseOperation = stringArr[0].toLowerCase();
-        if (stringArr.length != 2) {
+        if (stringArr.length == 1) {
             // if more than one task is given as the arguments
-            throw new DukeException("\u2639 Oops, too many task numbers entered after "
+            throw new DukeException("\u2639 Whoops, please enter a task number after "
+                + lowerCaseOperation + "!");
+        }
+        if (stringArr.length > 2) {
+            // if more than one task is given as the arguments
+            throw new DukeException("\u2639 Whoops, too many task numbers entered after "
                 + lowerCaseOperation + "!");
         }
         try {
@@ -99,10 +98,10 @@ public class Parser {
             assert indexOfTask >= 0 : "The index of the task to modify is negative!";
             return handler.getTasks().get(indexOfTask);
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("\u2639 Oops, " + '"' + stringArr[1] + '"'
+            throw new DukeException("\u2639 Whoops, " + '"' + stringArr[1] + '"'
                 + " is not a valid task number for " + lowerCaseOperation + "!");
         } catch (NumberFormatException e) {
-            throw new DukeException("\u2639 Oops, " + '"' + stringArr[1] + '"' + " is not a number!");
+            throw new DukeException("\u2639 Whoops, " + '"' + stringArr[1] + '"' + " is not a number!");
         }
     }
 
@@ -120,7 +119,7 @@ public class Parser {
             // if given empty arguments or space as task
             String dummyTask = input.split(" ")[1].trim();
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("\u2639 Oops, the description of "
+            throw new DukeException("\u2639 Whoops, the description of "
                 + tasktype.toString().toLowerCase() + " cannot be empty");
         }
 
@@ -134,14 +133,14 @@ public class Parser {
             try {
                 return parseTaskWithTimeSubroutine(input, tasktype, "/by");
             } catch (IndexOutOfBoundsException e) {
-                throw new DukeException("\u2639 Oops wrong format, use add deadline format: "
+                throw new DukeException("\u2639 Whoops wrong format, use add deadline format: "
                     + "deadline [task] /by [time (can be 'YYYY-MM-DD HHMM')]");
             }
         } else if (tasktype == Task.TaskType.EVENT) {
             try {
                 return parseTaskWithTimeSubroutine(input, tasktype, "/at");
             } catch (IndexOutOfBoundsException e) {
-                throw new DukeException("\u2639 Oops wrong format, use add event format: "
+                throw new DukeException("\u2639 Whoops wrong format, use add event format: "
                     + "event [task] /at [time]");
             }
         } else {
@@ -189,7 +188,7 @@ public class Parser {
     public static void checkIsFieldEmpty(String nameOfField, String field) throws DukeException {
         // check whether the argument given is empty
         if (field.trim().isEmpty()) {
-            throw new DukeException("\u2639 Oops, " + nameOfField + " cannot be empty!");
+            throw new DukeException("\u2639 Whoops, " + nameOfField + " cannot be empty!");
         }
     }
 }

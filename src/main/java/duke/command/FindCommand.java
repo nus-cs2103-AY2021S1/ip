@@ -17,12 +17,6 @@ public class FindCommand extends Command {
         + "Fields: " + "[description] \n"
         + "Example: " + COMMAND_WORD + " books ";
 
-    protected String input;
-
-    public FindCommand(String input) {
-        this.input = input;
-    }
-
     /**
      * Finds tasks matching the keyword.
      *
@@ -31,7 +25,7 @@ public class FindCommand extends Command {
      * @throws DukeException if keyword to search for is empty.
      */
     @Override
-    public void execute(TaskListHandler handler, Storage storage) throws DukeException {
+    public void execute(TaskListHandler handler, Storage storage, String input) throws DukeException {
         // Second word is the keyword to search for
         String keyword = input.substring(5);
         ArrayList<Task> foundTasks = handler.findTasksByKeyword(keyword);
@@ -39,7 +33,6 @@ public class FindCommand extends Command {
             Ui.printSuccess("find", foundTasks.get(0), foundTasks);
         } else {
             // Unable to find any matching task
-            Ui.indent(1);
             System.out.println("I couldn't find any tasks matching " + '"' + keyword + '"' + ".");
         }
     }

@@ -9,11 +9,6 @@ import duke.TaskListHandler;
  * Inherits from generic command class.
  */
 public class InvalidCommand extends Command {
-    protected final String invalidInput;
-
-    public InvalidCommand(String invalidInput) {
-        this.invalidInput = invalidInput;
-    }
 
     /**
      * Notifies user that command is not recognized and asks the user to input again.
@@ -22,8 +17,8 @@ public class InvalidCommand extends Command {
      * @param storage Storage instance.
      */
     @Override
-    public void execute(TaskListHandler handler, Storage storage) throws DukeException {
-        throw new DukeException("\u2639 Oops, I'm sorry but I don't know what "
-            + '"' + invalidInput + '"' + " means :-(");
+    public void execute(TaskListHandler handler, Storage storage, String input) throws DukeException {
+        throw new DukeException("\u2639 Whoops, I'm sorry but I don't know what "
+            + '"' + input + '"' + " means :-(");
     }
 }

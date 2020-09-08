@@ -20,7 +20,7 @@ public class UndoCommand extends Command {
      * @throws DukeException If there are no more previous commands to revert.
      */
     @Override
-    public void execute(TaskListHandler handler, Storage storage) throws DukeException {
+    public void execute(TaskListHandler handler, Storage storage, String input) throws DukeException {
         handler.retrievePreviousTaskList();
         System.out.println();
         handler.printList();

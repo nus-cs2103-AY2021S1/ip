@@ -19,12 +19,13 @@ public class ClearCommand extends Command {
      * @param storage Storage instance.
      */
     @Override
-    public void execute(TaskListHandler handler, Storage storage) throws DukeException {
+    public void execute(TaskListHandler handler, Storage storage, String input) throws DukeException {
         ArrayList<Task> taskList;
         taskList = handler.clearList();
         for (Task t1 : taskList) {
             System.out.println(t1);
         }
+        handler.saveCurrentTaskList(input);
         storage.saveToFile(taskList);
     }
 }

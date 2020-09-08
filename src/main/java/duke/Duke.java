@@ -45,7 +45,7 @@ public class Duke {
         setGuiStreams();
         try {
             Command c = Parser.parse(input, handlerVar);
-            c.execute(handlerVar, storageVar);
+            c.execute(handlerVar, storageVar, input);
             System.out.println();
         } catch (NoSuchElementException e1) {
             System.out.println(e1.getMessage());

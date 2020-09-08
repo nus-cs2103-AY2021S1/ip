@@ -21,7 +21,7 @@ public class ListCommand extends Command {
      * @param storage Storage instance.
      */
     @Override
-    public void execute(TaskListHandler handler, Storage storage) throws DukeException {
+    public void execute(TaskListHandler handler, Storage storage, String input) throws DukeException {
         // Prints the given list
         handler.printList();
     }

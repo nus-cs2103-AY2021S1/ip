@@ -66,17 +66,16 @@ public class TaskListHandler {
     public void printList() throws DukeException {
         if (tasks.isEmpty()) {
             // Asks user for tasks when printing empty list
-            throw new DukeException("\u2639 Oops, the list of tasks is empty, pls add tasks first!");
+            throw new DukeException("\u2639 Whoops, the list of tasks is empty, pls add tasks first!");
         }
         int listPos = 1;
-        Ui.indent(1);
         System.out.println("Here are the tasks in your list:");
         for (int i = 0; i < tasks.size(); i++, listPos++) {
-            Ui.indent(2);
+            Ui.indent(1);
             System.out.println(listPos + ". " + tasks.get(i));
         }
-        assert listPos > 0 : "Wrong task number printed!";
-        Ui.indent(1);
+        assert listPos > 0 : "Invalid task number encountered when printing task list!";
+        System.out.println();
         System.out.println("You have " + tasks.size() + " task(s) in the list");
     }
 
@@ -102,7 +101,7 @@ public class TaskListHandler {
                 return new ArrayList<>();
             }
         } catch (IndexOutOfBoundsException e) {
-            throw new DukeException("\u2639 Oops, the keyword to search for cannot be empty!");
+            throw new DukeException("\u2639 Whoops, the keyword to search for cannot be empty!");
         }
         return foundTasks;
     }
@@ -116,7 +115,7 @@ public class TaskListHandler {
      */
     public void retrievePreviousTaskList() throws DukeException {
         if (undoTaskLists.empty()) {
-            throw new DukeException("\u2639 Oops, there are no more commands to undo!");
+            throw new DukeException("\u2639 Whoops, there are no more commands to undo!");
         }
         String previousCommand = inputsToUndo.pop();
         System.out.println("The previous command: " + '"' + previousCommand + '"' + " has been undone!");
@@ -154,7 +153,7 @@ public class TaskListHandler {
 
     public void restoreRedoTaskList() throws DukeException {
         if (redoTaskLists.empty()) {
-            throw new DukeException("\u2639 Oops, there are no more commands to redo!");
+            throw new DukeException("\u2639 Whoops, there are no more commands to redo!");
         }
         String futureCommand = inputsToRedo.pop();
         System.out.println("The previous command: " + '"' + futureCommand + '"' + " has been redone!");

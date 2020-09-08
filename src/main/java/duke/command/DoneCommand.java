@@ -31,10 +31,15 @@ public class DoneCommand extends AbstractModifyTaskCommand {
      * @param storage Storage instance.
      */
     @Override
-    public void execute(TaskListHandler handler, Storage storage) throws DukeException {
+    public void execute(TaskListHandler handler, Storage storage, String input) throws DukeException {
         ArrayList<Task> tasks = handler.getTasks();
+        if (task.isDone()) {
+            throw new DukeException("\u2639 Whoops, The following task has already been completed: \n" + "    " + task);
+        }
         task.markAsDone();
         Ui.printSuccess("done", task, tasks);
+        handler.printList();
+        handler.saveCurrentTaskList(input);
         storage.saveToFile(tasks);
     }
 }

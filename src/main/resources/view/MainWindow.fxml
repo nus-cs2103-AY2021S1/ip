@@ -10,7 +10,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="835.0" prefWidth="602.0" xmlns="http://javafx.com/javafx/11" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
   <children>
-    <TextField fx:id="userInput" layoutX="13.0" layoutY="777.0" onAction="#handleUserInput" prefHeight="50.0" prefWidth="459.0" promptText="talk to Duke..." style="-fx-background-color: #D4F1F4; -fx-prompt-text-fill: grey; -fx-background-radius: 15;" AnchorPane.bottomAnchor="8.0">
+    <TextField fx:id="userInput" layoutX="13.0" layoutY="777.0" onAction="#handleUserInput" prefHeight="50.0" prefWidth="459.0" promptText="type help to view all commands " style="-fx-background-color: #D4F1F4; -fx-prompt-text-fill: grey; -fx-background-radius: 15;" AnchorPane.bottomAnchor="8.0">
          <font>
             <Font name="Segoe UI Italic" size="16.0" />
          </font>

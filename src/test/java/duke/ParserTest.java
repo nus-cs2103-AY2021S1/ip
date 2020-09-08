@@ -58,7 +58,7 @@ class ParserTest {
                 DukeException.class, () -> Parser.checkIsFieldEmpty(nameOfField, emptyTaskDesc),
                 "Expected checkIsFieldEmpty() to throw, but it didn't"
         );
-        assertTrue(thrown.getMessage().contains("\u2639 Oops, " + nameOfField + " cannot be empty"));
+        assertTrue(thrown.getMessage().contains("\u2639 Whoops, " + nameOfField + " cannot be empty"));
         System.out.println("Passed: checkIsFieldEmptyTest!");
     }
 }

@@ -79,7 +79,7 @@ public class Storage {
             // Once save file is newly created, isEmptySave will be true
             this.isEmptySave = savefile.createNewFile();
         } catch (IOException e) {
-            throw new DukeException("\u2639 Oops, error checking if save file exists");
+            throw new DukeException("\u2639 Whoops, error checking if save file exists");
         }
     }
 
@@ -114,7 +114,7 @@ public class Storage {
                     Task newEvent = Parser.parseNewTaskCommand(input, Task.TaskType.EVENT);
                     list.add(newEvent);
                 } else {
-                    throw new DukeException("\u2639 Oops, error parsing " + '"' + input + '"' + " in save file");
+                    throw new DukeException("\u2639 Whoops, error parsing " + '"' + input + '"' + " in save file");
                 }
             }
             while (sc.hasNext()) {
@@ -128,12 +128,12 @@ public class Storage {
             return list;
 
         } catch (IOException e1) {
-            throw new DukeException("\u2639 Oops, error reading from " + location + FILE_NAME);
+            throw new DukeException("\u2639 Whoops, error reading from " + location + FILE_NAME);
         } catch (IndexOutOfBoundsException | NoSuchElementException | NumberFormatException e) {
-            throw new DukeException("\u2639 Oops, save file is corrupted, error encountered: "
+            throw new DukeException("\u2639 Whoops, save file is corrupted, error encountered: "
                 + e.getLocalizedMessage().toLowerCase());
         } catch (DukeException e) {
-            throw new DukeException("\u2639 Oops, save file is corrupted, error loading task");
+            throw new DukeException("\u2639 Whoops, save file is corrupted, error loading task");
         }
     }
 
@@ -191,7 +191,7 @@ public class Storage {
             }
             writer.flush();
         } catch (IOException e) {
-            throw new DukeException("\u2639 Oops, error saving to save file");
+            throw new DukeException("\u2639 Whoops, error saving to save file");
         }
     }
 }
