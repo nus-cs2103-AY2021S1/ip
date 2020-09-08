@@ -1,15 +1,15 @@
 package duke.task;
 
+import java.util.Scanner;
+
+import java.io.FileNotFoundException;
+import java.time.format.DateTimeParseException;
+
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.commands.Command;
 import duke.exceptions.DukeException;
 import duke.ui.Ui;
-
-import java.io.FileNotFoundException;
-import java.time.format.DateTimeParseException;
-
-import java.util.Scanner;
 
 public class TaskManager {
     private Ui ui;
@@ -33,10 +33,10 @@ public class TaskManager {
             this.storage.createFile();
         }
         // Take in user input
-        Scanner sc = new Scanner(System.in);  // Create a Scanner object
+        Scanner sc = new Scanner(System.in); // Create a Scanner object
         boolean isExit = false;
         while (!isExit) {
-            String fullCommand = sc.nextLine();  // Read user input
+            String fullCommand = sc.nextLine(); // Read user input
             try {
                 try {
                     Command c = Parser.parse(fullCommand);

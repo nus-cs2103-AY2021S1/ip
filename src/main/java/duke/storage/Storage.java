@@ -1,17 +1,17 @@
 package duke.storage;
 
-import duke.task.TaskList;
-
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
-
-import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.util.Scanner;
+
+import duke.exceptions.DukeException;
+import duke.task.TaskList;
 
 public class Storage {
     private String rootPath;
@@ -99,15 +99,17 @@ public class Storage {
             String currentLine = s.nextLine();
             String details[] = currentLine.split("\\|");
             switch(details[0].trim()) {
-                // Trims away whitespaces at the start and end of string
+            // Trims away whitespaces at the start and end of string
             case "T":
                 taskList.addTodo(details[1].trim(), details[2].trim());
                 break;
-            case "D" :
+            case "D":
                 taskList.addDeadline(details[1].trim(), details[2].trim(), details[3].trim());
                 break;
             case "E":
                 taskList.addEvent(details[1].trim(), details[2].trim(), details[3].trim());
+            default:
+                break;
             }
         }
         s.close();
