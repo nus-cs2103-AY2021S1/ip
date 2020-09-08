@@ -38,7 +38,6 @@ public class FindCommand extends Command {
             throw new UltronException("find", getArgument(), ExceptionType.NO_ARGUMENTS_SUPPLIED);
         }
         assert getArgument().length() > 0;
-        boolean isPrinted = false;
         StringBuilder message = new StringBuilder();
         message.append("Why do you always bothering me?\n");
         List<Task> result = taskList.getTasks()
