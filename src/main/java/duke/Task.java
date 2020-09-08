@@ -49,6 +49,12 @@ public class Task {
                 + "____________________________________________________________";
         return doneString;
     }
+
+    public String writeToFile() {
+        String isDoneString = this.isDone ? " 1 @ " : " 0 @ ";
+        return isDoneString + this.description;
+    }
+
     @Override
     public String toString() {
         return this.getStatusIcon() + "  " + this.description;

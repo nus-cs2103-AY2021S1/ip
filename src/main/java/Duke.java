@@ -8,7 +8,6 @@ import duke.TaskList;
 import duke.Ui;
 
 
-
 public class Duke {
     protected Storage storage;
     protected Ui ui;
@@ -36,9 +35,11 @@ public class Duke {
     protected String getResponse(String input) throws EmptyInputException, NoResponseException, IOException {
         Parser parser = new Parser(this.ui, this.tasks);
         String response = parser.parse(input);
+        if (parser.getIsEnd()) {
+            this.storage.storeFile(tasks);
+        }
         return response;
     }
-
 
 
 }

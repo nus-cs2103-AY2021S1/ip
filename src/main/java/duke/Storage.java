@@ -5,6 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -90,15 +91,9 @@ public class Storage {
      */
     public void storeFile(TaskList tasks) throws IOException {
         FileWriter fw = new FileWriter("data/duke.txt");
-        for (int k = 0; k < tasks.size(); k++) {
-            Task currentTask = tasks.get(k);
-            if (currentTask instanceof ToDo) {
-                fw.write(((ToDo) currentTask).writeToFile());
-            } else if (currentTask instanceof Deadline) {
-                fw.write(((Deadline) currentTask).writeToFile());
-            } else if (currentTask instanceof Event) {
-                fw.write(((Event) currentTask).writeToFile());
-            }
+        List<String> fileString = tasks.convertToFileFormat();
+        for (int k = 0; k < fileString.size(); k++) {
+            fw.write(fileString.get(k) + "\n");
         }
         fw.close();
     }

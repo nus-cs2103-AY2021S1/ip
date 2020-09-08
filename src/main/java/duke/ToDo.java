@@ -12,7 +12,7 @@ public class ToDo extends Task {
      */
     public String writeToFile() {
         String isDoneString = this.isDone ? " 1 @ " : " 0 @ ";
-        return "T @" + isDoneString + this.description + System.lineSeparator();
+        return "T @" + super.writeToFile() + System.lineSeparator();
     }
 
     /**

@@ -1,5 +1,6 @@
 package duke;
 
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -100,7 +101,7 @@ public class Ui {
      *
      * @return String;
      */
-    public String showFind(TaskList matchedTasks) {
+    public String showFind(List<Task> matchedTasks) {
         String dukeOutput = "_____________________________________________\n";
         if (matchedTasks.size() == 0) {
             dukeOutput = dukeOutput + "Sorry, Duke can not find a matching task.\n";

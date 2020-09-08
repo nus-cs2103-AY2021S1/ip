@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Parser {
     protected boolean isEnd;
@@ -62,6 +63,10 @@ public class Parser {
             this.currentType = UserInput.FIND;
         }
         return words;
+    }
+
+    public boolean getIsEnd() {
+        return this.isEnd;
     }
 
     /**
@@ -160,17 +165,7 @@ public class Parser {
 
         case FIND:
             String keyWord = words[1];
-            TaskList matchedTasks = new TaskList(new ArrayList<Task>());
-            for (int k = 0; k < tasks.size(); k++) {
-                Task currentTask = tasks.get(k);
-                String description = currentTask.description;
-                String[] descriptionArr = description.split(" ");
-                for (int i = 0; i < descriptionArr.length; i++) {
-                    if (descriptionArr[i].equals(keyWord)) {
-                        matchedTasks.add(currentTask);
-                    }
-                }
-            }
+            List<Task> matchedTasks = this.tasks.findMatchingTask(keyWord);
             dukeOutput = this.userInteract.showFind(matchedTasks);
 
             break;

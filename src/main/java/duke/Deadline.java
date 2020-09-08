@@ -23,9 +23,8 @@ public class Deadline extends Task {
      * @return String represents Deadline task in duke.txt.
      */
     public String writeToFile() {
-        String isDoneString = this.isDone ? " 1 @ " : " 0 @ ";
         String date = " @ " + this.date;
-        return "D @" + isDoneString + this.description + date + System.lineSeparator();
+        return "D @" + super.writeToFile() + date + System.lineSeparator();
     }
 
     /**
