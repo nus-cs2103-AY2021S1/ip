@@ -42,13 +42,15 @@ public class DukeGui extends Application {
 
     private void handleUserInput() {
         Label userText = new Label(userInput.getText());
-        Command c = Parser.parse(userInput.getText());
-        Label dukeText = new Label(c.parse(duke.getTaskList(), duke.getUi(), duke.getStorage()));
+//        Command c = Parser.parse(userInput.getText());
+//        Label dukeText = new Label(c.parse(duke.getTaskList(), duke.getUi(), duke.getStorage()));
+        Parser parser = duke.getParser();
+        Label dukeText = new Label(parser.parses(userInput.getText()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(userImage)),
                 DialogBox.getDukeDialog(dukeText, new ImageView(dukeImage))
         );
-        if (c.shouldExit()) {
+        if (duke.shouldExit()) {
             Platform.exit();
         }
         userInput.clear();

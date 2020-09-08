@@ -1,5 +1,5 @@
+import duke.logic.Parser;
 import duke.logic.Storage;
-import duke.task.Task;
 import duke.ui.Ui;
 import duke.resource.TaskList;
 import duke.resource.Wrapper;
@@ -13,6 +13,7 @@ public class Duke {
 
     private static final String FILEPATH = "./src/main/data/duke.txt";
 
+    private final Parser parser;
     private final Wrapper wrapper;
 
     /**
@@ -32,6 +33,7 @@ public class Duke {
             ui.printError(e);
         } finally {
             this.wrapper = new Wrapper(storage, tasks, ui);
+            this.parser = new Parser(wrapper);
         }
     }
 
@@ -44,6 +46,14 @@ public class Duke {
             ret += wrapper.getUi().showError(e);
         }
         return ret;
+    }
+
+    public boolean shouldExit() {
+        return wrapper.isShouldExit();
+    }
+
+    public Parser getParser() {
+        return this.parser;
     }
 
     public Storage getStorage() {

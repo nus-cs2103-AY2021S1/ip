@@ -5,6 +5,7 @@ import duke.ui.Ui;
 
 public class Wrapper {
 
+    private boolean shouldExit = false;
     private final Storage storage;
     private final TaskList taskList;
     private final Ui ui;
@@ -23,9 +24,16 @@ public class Wrapper {
         return this.taskList;
     }
 
-
     public Ui getUi() {
         return this.ui;
+    }
+
+    public void exit() {
+        this.shouldExit = true;
+    }
+
+    public boolean isShouldExit() {
+        return this.shouldExit;
     }
 
 }

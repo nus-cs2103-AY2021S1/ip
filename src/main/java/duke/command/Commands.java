@@ -3,9 +3,10 @@ package duke.command;
 import duke.resource.Wrapper;
 
 import java.util.function.BiFunction;
+import java.util.List;
 
-public interface Commands extends BiFunction<Wrapper, String, String> {
+public interface Commands extends BiFunction<Wrapper, List<String>, String> {
 
-    public String apply(Wrapper wrapper, String input);
+    public String apply(Wrapper wrapper, List<String> input);
 
 }
