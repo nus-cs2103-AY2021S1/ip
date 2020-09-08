@@ -36,6 +36,7 @@ public class DoneCommand extends Command {
             return "Nice! I've marked this task as done:\n" + "  "
                     + completedTask.toDisplayString();
         } catch (IndexOutOfBoundsException exception) {
+            assert(taskNumber <= 0 || taskNumber > tasks.size());
             throw new DukeException("Please enter a valid task number!");
         }
     }
