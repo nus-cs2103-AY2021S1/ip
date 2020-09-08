@@ -103,12 +103,15 @@ public class Storage {
         boolean isDone = commands[1].equals("1");
         switch (commands[0]) {
         case "T": {
+            assert commands.length == 3 : "Wrong storage format for Todo Task.";
             return new Todo(isDone, commands[2]);
         }
         case "D": {
+            assert commands.length == 4 : "Wrong storage format for Deadline Task.";
             return new Deadline(isDone, commands[2], commands[3]);
         }
         case "E": {
+            assert commands.length == 4 : "Wrong storage format for Event Task.";
             return new Event(isDone, commands[2], commands[3]);
         }
         default: {
