@@ -49,7 +49,7 @@ public class TaskList {
      */
     public String readList() {
         if (this.taskListLen() == 0) {
-            return "MUG don't have any of your task \"_\"";
+            return "Mug don't have any of your task \"_\"";
         } else {
             StringBuilder results = new StringBuilder("Here is your tasks:\n");
             IntStream.range(0, this.taskListLen())
@@ -109,7 +109,7 @@ public class TaskList {
             // append task to local storage
             store.appendTask(command, info);
 
-            return "Got it. MUG has added this task:\n"
+            return "Got it. Mug has added this task:\n"
                     + task
                     + "\nNow you have "
                     + this.taskListLen()
@@ -128,7 +128,7 @@ public class TaskList {
      */
     public String deleteTask(int taskId) {
         if (taskId > this.taskListLen() || taskId < 1) {
-            return "MUG don't have this task to Delete @_@";
+            return "Mug don't have this task to Delete @_@";
         } else {
             //assert
             assert(taskId <= this.taskListLen());
@@ -138,7 +138,7 @@ public class TaskList {
                 this.taskList.remove(taskIndex);
                 this.store.deleteTask(taskId);
 
-                return "Noted. MUG has removed this task:\n"
+                return "Noted. Mug has removed this task:\n"
                         + deletedTask
                         + "\nNow you have "
                         + this.taskListLen()
@@ -157,21 +157,21 @@ public class TaskList {
      */
     public String taskDone(int taskId) {
         if (taskId > this.taskListLen() || taskId < 1) {
-            return "MUG don't have this task to mark as Done :>";
+            return "Mug don't have this task to mark as Done :>";
         } else {
             //assert
             assert(taskId <= this.taskListLen());
             int taskIndex = taskId - 1;
             Task doneTask = this.taskList.get(taskIndex);
             if (doneTask.isDone()) {
-                return "MUG had marked this task as done:\n"
+                return "Mug had marked this task as done:\n"
                         + doneTask;
             } else {
                 try {
                     doneTask = doneTask.markAsDone();
                     this.taskList.set(taskIndex, doneTask);
                     this.store.doneTask(taskId);
-                    return "Congratz! MUG has marked this task as done:\n"
+                    return "Congratz! Mug has marked this task as done:\n"
                             + doneTask;
                 } catch (MugException ex) {
                     return ex.getMessage();
@@ -202,7 +202,7 @@ public class TaskList {
                     }
                 });
         if (taskNum.get() == 0) {
-            return "Opps!! MUG don't have the task you searching :)";
+            return "Opps!! Mug don't have the task you searching :)";
         } else {
             return results.toString();
         }
