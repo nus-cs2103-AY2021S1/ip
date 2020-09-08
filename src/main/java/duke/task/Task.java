@@ -65,8 +65,8 @@ public class Task {
         this.description = description;
     }
 
-    public void markAsNotDone() {
-        isDone = false;
+    public void changeIsDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     public void changeTime(LocalDate time) {}

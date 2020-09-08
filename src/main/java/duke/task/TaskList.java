@@ -165,6 +165,13 @@ public class TaskList {
                 toBeUpdated.changeDescription(newDetails);
             } else if (type.equals("time")) {
                 toBeUpdated.changeTime(LocalDate.parse(newDetails));
+            } else if (type.equals("mark")) {
+                int indicator = Integer.parseInt(newDetails);
+                if (indicator != 0 && indicator != 1) {
+                    throw new DukeException(" Please provide 0 or 1 after mark");
+                }
+                boolean isDone = indicator == 0 ? false : true;
+                toBeUpdated.changeIsDone(isDone);
             } else {
                 throw new DukeException(" Attribute to be changed not found :(");
             }
@@ -172,6 +179,8 @@ public class TaskList {
                     "   " + toBeUpdated);
         } catch (DateTimeParseException error) {
             throw new DukeException(" I cannot recognize the date you put in :(");
+        } catch (NumberFormatException error) {
+            throw new DukeException(" Please provide 0 or 1 after mark");
         }
     }
 }
