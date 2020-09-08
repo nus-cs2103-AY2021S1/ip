@@ -5,6 +5,7 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.function.Predicate;
 
+import main.java.com.jacob.duke.note.Note;
 import main.java.com.jacob.duke.task.Task;
 
 public class Ui {
@@ -32,7 +33,7 @@ public class Ui {
     }
 
     /**
-     * Show UI for the delete command.
+     * Show UI for the delete task command.
      *
      * @param taskDescription The currently operated task's status.
      * @param taskList List representation of the current task list.
@@ -42,7 +43,6 @@ public class Ui {
         return String.format(" Noted. I've removed this task:\n "
                 + "   %s\n"
                 + " Now you have %d tasks in the list.\n", taskDescription, taskList.size());
-
     }
 
     /**
@@ -69,7 +69,6 @@ public class Ui {
      * @param taskList List representation of the current task list.
      * @throws DukeException Duke Exception thrown if the command is incorrect.
      */
-    @SuppressWarnings("checkstyle:JavadocMethod")
     public String showFilteredDateTimeList(String inputCommand, List<Task> taskList) throws DukeException {
         assert (inputCommand != null && taskList != null);
         if (inputCommand.length() <= "list-due ".length()) {
@@ -108,7 +107,7 @@ public class Ui {
         }
         String keyword = inputCommand.substring("find ".length());
 
-        if (keyword.equals("")) {
+        if (keyword.trim().equals("")) {
             throw new DukeException(" Search String cannot be empty!");
         }
         Predicate<String> searchStringPredicate = x -> x.contains(keyword);
@@ -130,5 +129,47 @@ public class Ui {
      */
     public String sayBye() {
         return " Bye. Hope to see you again soon!";
+    }
+
+    /**
+     * Show UI for the newly added note.
+     *
+     * @param noteStatus The currently operated task's status.
+     * @param noteList List representation of the current task list.
+     */
+    public String showNewNoteAdded(String noteStatus, List<Note> noteList) {
+        assert (noteStatus != null && noteList != null);
+        return String.format(
+                " Got it. I've added this note: \n   %s\n Now you have %d notes in the list.\n",
+                noteStatus, noteList.size());
+    }
+    /**
+     * Show UI for the delete note command.
+     *
+     * @param noteDescription The currently operated task's status.
+     * @param noteList List representation of the current task list.
+     */
+    public String showNoteDeleted(String noteDescription, List<Note> noteList) {
+        assert (noteDescription != null && noteList != null);
+        return String.format(" Noted. I've removed this task:\n "
+                + "   %s\n"
+                + " Now you have %d notes in the list.\n", noteDescription, noteList.size());
+
+    }
+    /**
+     * Show UI of the print all notes command.
+     *
+     * @param noteList List representation of the current task list.
+     */
+    public String showAllNotes(List<Note> noteList) {
+        assert (noteList != null);
+        int count = 1;
+        StringBuffer currentNoteList = new StringBuffer();
+        currentNoteList.append(" Here are the notes you stored:\n");
+        for (Note t: noteList) {
+            currentNoteList.append("  " + count + ". " + t.getCurrentStatus() + "\n");
+            count++;
+        }
+        return currentNoteList.toString();
     }
 }

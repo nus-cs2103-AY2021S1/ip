@@ -3,8 +3,8 @@ package main.java.com.jacob.duke.command;
 import java.util.List;
 
 import main.java.com.jacob.duke.DukeException;
+import main.java.com.jacob.duke.DukeList;
 import main.java.com.jacob.duke.Storage;
-import main.java.com.jacob.duke.TaskList;
 import main.java.com.jacob.duke.Ui;
 import main.java.com.jacob.duke.task.Task;
 
@@ -15,8 +15,8 @@ public class FindCommand implements Command {
         this.inputCommand = fullCommand;
     }
     @Override
-    public String execute(Ui ui, TaskList tasks, Storage storage) throws DukeException {
-        List<Task> taskList = tasks.getTaskList();
+    public String execute(Ui ui, DukeList dukeList, Storage storage) throws DukeException {
+        List<Task> taskList = dukeList.getTaskList();
         return ui.showKeywordList(inputCommand, taskList);
     }
 

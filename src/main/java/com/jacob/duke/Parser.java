@@ -4,11 +4,14 @@ import main.java.com.jacob.duke.command.ByeCommand;
 import main.java.com.jacob.duke.command.Command;
 import main.java.com.jacob.duke.command.DeadlineCommand;
 import main.java.com.jacob.duke.command.DeleteCommand;
+import main.java.com.jacob.duke.command.DeleteNoteCommand;
 import main.java.com.jacob.duke.command.DoneCommand;
 import main.java.com.jacob.duke.command.EventCommand;
 import main.java.com.jacob.duke.command.FindCommand;
+import main.java.com.jacob.duke.command.NoteCommand;
 import main.java.com.jacob.duke.command.PrintFilteredListDateTimeCommand;
 import main.java.com.jacob.duke.command.PrintListCommand;
+import main.java.com.jacob.duke.command.PrintNoteListCommand;
 import main.java.com.jacob.duke.command.TodoCommand;
 
 public class Parser {
@@ -53,6 +56,15 @@ public class Parser {
             break;
         case "bye":
             c = new ByeCommand();
+            break;
+        case "note":
+            c = new NoteCommand(fullCommand);
+            break;
+        case "note-list":
+            c = new PrintNoteListCommand();
+            break;
+        case "note-delete":
+            c = new DeleteNoteCommand(fullCommand);
             break;
         default:
             throw new DukeException(" :( OOPS!!! I'm sorry, but I don't know what that means :-(");

@@ -3,8 +3,8 @@ package main.java.com.jacob.duke.command;
 import java.util.List;
 
 import main.java.com.jacob.duke.DukeException;
+import main.java.com.jacob.duke.DukeList;
 import main.java.com.jacob.duke.Storage;
-import main.java.com.jacob.duke.TaskList;
 import main.java.com.jacob.duke.Ui;
 import main.java.com.jacob.duke.task.Event;
 import main.java.com.jacob.duke.task.Task;
@@ -24,16 +24,16 @@ public class EventCommand implements Command {
      * Executes command for pre-determined Event Command.
      *
      * @param ui UI object to deal with program output.
-     * @param tasks Task List Representation.
+     * @param dukeList Task List Representation.
      * @param storage Storage object to deal with interfacing with file system.
      * @throws DukeException In case there are internal errors.
      */
     @Override
-    public String execute(Ui ui, TaskList tasks, Storage storage) throws DukeException {
-        List<Task> taskList = tasks.getTaskList();
+    public String execute(Ui ui, DukeList dukeList, Storage storage) throws DukeException {
+        List<Task> taskList = dukeList.getTaskList();
         int breakpoint = inputCommand.indexOf("/") - 1;
         if (inputCommand.length() <= "event ".length()) {
-            throw new DukeException("☹ OOPS!!! The description of a event cannot be incomplete.");
+            throw new DukeException(" OOPS!!! The description of a event cannot be incomplete.");
         } else if (breakpoint == -2) {
             throw new DukeException("Hey, a event cannot have no actual date and time!!");
         }
@@ -42,7 +42,7 @@ public class EventCommand implements Command {
         Task theEvent = new Event(description, dateTime);
         taskList.add(theEvent);
 
-        storage.appendText(theEvent.convertToFile());
+        storage.appendTextToTasks(theEvent.convertToFile());
 
         return ui.showNewTaskAdded(theEvent.getCurrentStatus(), taskList);
 

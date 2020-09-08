@@ -18,7 +18,7 @@ public class StorageTest {
 
     @Test
     public void readFile_foundFile_success() {
-        List<Task> taskList = storageReadObject.readFile();
+        List<Task> taskList = storageReadObject.readFile().getTaskList();
         List<Task> dummyTaskList = new ArrayList<>();
         dummyTaskList.add(new Deadline("omo"));
         dummyTaskList.add(new Todo("omo"));
@@ -31,11 +31,11 @@ public class StorageTest {
         Storage storageWriteObject = new Storage("data/writeTest.txt");
         String s1 = new Deadline("omo", "2019-10-15 1800").convertToFile();
         String s2 = new Todo("omo").convertToFile();
-        storageWriteObject.appendText(s1);
-        storageWriteObject.appendText(s2);
+        storageWriteObject.appendTextToTasks(s1);
+        storageWriteObject.appendTextToTasks(s2);
         storageWriteObject.writeToFile();
 
-        List<Task> dummyTaskList = storageWriteObject.readFile();
+        List<Task> dummyTaskList = storageWriteObject.readFile().getTaskList();
         assertEquals(Deadline.class, dummyTaskList.get(dummyTaskList.size() - 2).getClass());
         assertEquals(Todo.class, dummyTaskList.get(dummyTaskList.size() - 1).getClass());
     }
@@ -44,23 +44,24 @@ public class StorageTest {
         Storage storageWriteObject = new Storage("data/writeTest.txt");
 
         //change deadline to event
-        List<Task> dummyTaskList = storageWriteObject.readFile();
+        List<Task> dummyTaskList = storageWriteObject.readFile().getTaskList();
         String original = dummyTaskList.get(0).convertToFile();
         String replacement = new Event("omo", "2019-10-15 1800").convertToFile();
-        storageWriteObject.replacement(original, replacement);
+        storageWriteObject.replacementInTasks(original, replacement);
 
         storageWriteObject.writeToFile();
-        dummyTaskList = storageWriteObject.readFile();
+        dummyTaskList = storageWriteObject.readFile().getTaskList();
 
         assertEquals(Event.class, dummyTaskList.get(dummyTaskList.size() - 2).getClass());
 
         //re-read the updated
         String original1 = dummyTaskList.get(0).convertToFile();
         String replacement1 = new Deadline("omo", "2019-10-15 1800").convertToFile();
-        storageWriteObject.replacement(original1, replacement1);
+        storageWriteObject.replacementInTasks(original1, replacement1);
 
         storageWriteObject.writeToFile();
-        dummyTaskList = storageWriteObject.readFile();
+        dummyTaskList = storageWriteObject.readFile().getTaskList();
+        System.out.println(dummyTaskList);
         assertEquals(Deadline.class, dummyTaskList.get(dummyTaskList.size() - 2).getClass());
     }
 

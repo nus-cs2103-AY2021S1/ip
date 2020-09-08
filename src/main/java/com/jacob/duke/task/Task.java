@@ -77,10 +77,10 @@ public class Task {
      */
     public String convertToFile() {
         if (dueDateTime != null) {
-            return String.format("%s,%s,%s,%s", type, isDone ? 1 : 0 , getDescription(),
+            return String.format("%s~%s~%s~%s", type, isDone ? 1 : 0 , getDescription(),
                     dueDateTime.format(DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm")));
         }
-        return String.format("%s,%s,%s", type, isDone ? 1 : 0, getDescription());
+        return String.format("%s~%s~%s", type, isDone ? 1 : 0, getDescription());
     }
 
     /**

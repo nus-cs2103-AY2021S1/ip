@@ -3,8 +3,8 @@ package main.java.com.jacob.duke.command;
 import java.util.List;
 
 import main.java.com.jacob.duke.DukeException;
+import main.java.com.jacob.duke.DukeList;
 import main.java.com.jacob.duke.Storage;
-import main.java.com.jacob.duke.TaskList;
 import main.java.com.jacob.duke.Ui;
 import main.java.com.jacob.duke.task.Task;
 
@@ -24,18 +24,18 @@ public class DeleteCommand implements Command {
      * Executes command for pre-determined delete Command.
      *
      * @param ui UI object to deal with program output.
-     * @param tasks Task List Representation.
+     * @param dukeList Task List Representation.
      * @param storage Storage object to deal with interfacing with file system.
      * @throws DukeException In case there are internal errors.
      */
     @Override
-    public String execute(Ui ui, TaskList tasks, Storage storage) throws DukeException {
-        List<Task> taskList = tasks.getTaskList();
+    public String execute(Ui ui, DukeList dukeList, Storage storage) throws DukeException {
+        List<Task> taskList = dukeList.getTaskList();
         Task theRemovedTask = taskList.remove(Integer.parseInt(inputCommand.substring(7)) - 1);
         if (theRemovedTask == null) {
             throw new DukeException("No such task exists! ");
         }
-        storage.removeText(theRemovedTask.convertToFile());
+        storage.removeTextFromTasks(theRemovedTask.convertToFile());
 
         return ui.showTaskDeleted(theRemovedTask.getCurrentStatus(), taskList);
     }

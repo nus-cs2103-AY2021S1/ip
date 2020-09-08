@@ -9,16 +9,17 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 
 import java.nio.file.Files;
-import java.util.ArrayList;
 import java.util.List;
 
+import main.java.com.jacob.duke.note.Note;
 import main.java.com.jacob.duke.task.Deadline;
 import main.java.com.jacob.duke.task.Event;
 import main.java.com.jacob.duke.task.Task;
 import main.java.com.jacob.duke.task.Todo;
 
 public class Storage {
-    private StringBuffer stringBufferOfData = new StringBuffer();
+    private StringBuffer stringBufferOfTasks = new StringBuffer();
+    private StringBuffer stringBufferOfNotes = new StringBuffer();
     private String filename;
 
     /**
@@ -56,15 +57,13 @@ public class Storage {
         }
     }
 
-
-    //handle the file lines at initialization
-    private void handleFileCommands(String inputCommand, List<Task> taskList, int count) {
-
-        //parse input command (in format :  type, done, description, datetime) into task
-        String[] inputs = inputCommand.split(",");
+    //handleTaskCommandsFromFile
+    private void convertFileToTask(String[] inputs, DukeList dukeList) {
+        List<Task> taskList = dukeList.getTaskList();
         String type = inputs[0];
         int isDone = Integer.parseInt(inputs[1]);
         String description = inputs[2];
+        int count = dukeList.getTaskList().size();
 
         switch (type) {
         case "T":
@@ -95,33 +94,51 @@ public class Storage {
         }
     }
 
+    // convert note commands from file and turn into note objects
+    private void convertFileToNote(String[] inputs, DukeList dukeList) {
+        String question = inputs[1];
+        String answer = inputs[2];
+        Note note = new Note(question, answer);
+        int count = dukeList.getNoteList().size();
+        dukeList.getNoteList().add(count, note);
+    }
+
+    //handle the file lines at initialization
+    private void handleFileCommands(String fileLine, DukeList dukeList) {
+        String[] inputs = fileLine.split("~");
+        String type = inputs[0];
+
+        //parse whether it is a note or task item
+        if (type.equals("N")) {
+            convertFileToNote(inputs, dukeList);
+            stringBufferOfNotes.append(fileLine).append("\r\n");
+        } else {
+            convertFileToTask(inputs, dukeList);
+            stringBufferOfTasks.append(fileLine).append("\r\n");
+        }
+    }
+
     /**
-     * Handles the file and creates the taskList objects based on file information
+     * Handles the file and creates the required note and task objects based on file information
      * @return List which containing the task objects in a list representation
      */
-    public List<Task> readFile() {
-        List<Task> taskList = new ArrayList<>();
-        stringBufferOfData = new StringBuffer();
+    public DukeList readFile() {
+        stringBufferOfTasks = new StringBuffer();
+        stringBufferOfNotes = new StringBuffer();
+        DukeList dukeList = new DukeList();
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(
                     new DataInputStream(new FileInputStream(this.filename))));
-            int count = 0;
             for (String line; (line = reader.readLine()) != null; ) {
-                //System.out.println(line);
-                //parse the line here and add to taskList
-                this.handleFileCommands(line, taskList, count++);
-
-                //add to the buffer
-                stringBufferOfData.append(line).append("\r\n");
+                //parse the line here and add to dukelist
+                this.handleFileCommands(line, dukeList);
             }
-            System.out.println(taskList);
-
             //handle resource leakage
             reader.close();
         } catch (IOException e) {
             System.out.println("The file " + filename + " could not be found or opened! " + e.getMessage());
         }
-        return taskList;
+        return dukeList;
     }
 
     /**
@@ -130,7 +147,8 @@ public class Storage {
     public void writeToFile() {
         try {
             BufferedWriter bfWriter = new BufferedWriter(new FileWriter(filename));
-            bfWriter.write(stringBufferOfData.toString()); //writes the edited string buffer to the new file
+            bfWriter.write(stringBufferOfTasks.toString()); //writes the edited string buffer to the new file
+            bfWriter.write(stringBufferOfNotes.toString()); //adds the edited note buffer to the file
             bfWriter.close(); //closes the file
 
         } catch (Exception e) { //if an exception occurs
@@ -139,41 +157,73 @@ public class Storage {
     }
 
     /**
-     * Replaces a specific line of text in the string buffer read
-     * @param lineToEdit text to be replaced
-     * @param replacementText text to be replace with
-     * @throws StringIndexOutOfBoundsException in case the string cannot be found
+     * Replaces a specific line in task buffer.
+     *
+     * @param lineToEdit text to be replaced.
+     * @param replacementText text to be replace with.
+     * @throws StringIndexOutOfBoundsException in case the string cannot be found.
      */
-    public void replacement(String lineToEdit, String replacementText) throws StringIndexOutOfBoundsException {
-        //System.out.println(sb);//used for debugging to check that my string buffer has correct contents and spacing
+    public void replacementInTasks(String lineToEdit, String replacementText) {
+        replacement(lineToEdit, replacementText, stringBufferOfTasks);
+    }
+    /**
+     * Replaces a specific line in notes buffer.
+     *
+     * @param lineToEdit text to be replaced.
+     * @param replacementText text to be replace with.
+     * @throws StringIndexOutOfBoundsException in case the string cannot be found.
+     */
+    public void replacementInNotes(String lineToEdit, String replacementText) {
+        replacement(lineToEdit, replacementText, stringBufferOfNotes);
+    }
 
+    private void replacement(String lineToEdit, String replacementText, StringBuffer sb) throws StringIndexOutOfBoundsException {
         //Find the original text
-        int startIndex = stringBufferOfData.indexOf(lineToEdit);
+        int startIndex = sb.indexOf(lineToEdit);
         int endIndex = startIndex + lineToEdit.length();
 
         //replace text
-        stringBufferOfData.replace(startIndex, endIndex, replacementText);
+        sb.replace(startIndex, endIndex, replacementText);
 
     }
 
     /**
-     * Add a string of text to the end
-     * @param replacementText text to be added
+     * Add a string of text to the end of task buffer representing a task
+     * @param addedText text to be added
      */
-    public void appendText(String replacementText) {
+    public void appendTextToTasks(String addedText) {
+        appendText(addedText, stringBufferOfTasks);
+    }
+    /**
+     * Add a string of text to the end of notes buffer representing a note
+     * @param addedText text to be added
+     */
+    public void appendTextToNotes(String addedText) {
+        appendText(addedText, stringBufferOfNotes);
+    }
+    private void appendText(String addedText, StringBuffer sb) {
         //add a separator for the newline before appending
         String newLine = System.getProperty("line.separator");
-        replacementText = replacementText + newLine;
-        stringBufferOfData.append(replacementText);
+        addedText = addedText + newLine;
+        sb.append(addedText);
     }
-
     /**
-     * Remove a specific line of text from string buffer
+     * Remove a specific line of note from string buffer
      * @param lineToEdit line to be removed
      */
-    public void removeText(String lineToEdit) {
+    public void removeTextFromTasks(String lineToEdit) {
+        removeText(lineToEdit, stringBufferOfTasks);
+    }
+    /**
+     * Remove a specific line of task from string buffer
+     * @param lineToEdit line to be removed
+     */
+    public void removeTextFromNotes(String lineToEdit) {
+        removeText(lineToEdit, stringBufferOfNotes);
+    }
+    private void removeText(String lineToEdit, StringBuffer sb) {
         String newLine = System.getProperty("line.separator");
         lineToEdit = lineToEdit + newLine;
-        replacement(lineToEdit, "");
+        replacement(lineToEdit, "", sb);
     }
 }
