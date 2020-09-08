@@ -1,4 +1,3 @@
-
 import javafx.application.Application;
 
 /**

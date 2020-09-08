@@ -38,9 +38,13 @@ public class Duke {
     }
 
     String getResponse(String input) throws UnknownAction, IOException, IncorrectFormat {
-        Command c = Parser.parse(input);
-        String output = c.execute(tasks, ui, storage);
-        return output;
+        try {
+            Command c = Parser.parse(input);
+            String output = c.execute(tasks, ui, storage);
+            return output;
+        } catch (Exception e) {
+            return e.getMessage();
+        }
     }
 
     private void run() {

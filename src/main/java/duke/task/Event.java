@@ -1,16 +1,23 @@
 package duke.task;
 
+import duke.error.EventDateParseException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Class that represents an event item in the taskList.
  */
 public class Event extends Task{
     LocalDate time;
-    public Event(String description, String time) {
+    public Event(String description, String time) throws EventDateParseException {
         super(description);
-        this.time = LocalDate.parse(time);
+        try {
+            this.time = LocalDate.parse(time);
+        } catch (DateTimeParseException e) {
+            throw new EventDateParseException(time);
+        }
     }
 
     public Event(String description, boolean isDone, String time) {

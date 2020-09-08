@@ -1,7 +1,10 @@
 package duke.task;
 
+import duke.error.DeadlineDateParseException;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Class that represents a deadline item in the taskList.
@@ -10,9 +13,13 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task {
     LocalDate time;
 
-    public Deadline(String description, String time) {
+    public Deadline(String description, String time) throws DeadlineDateParseException {
         super(description);
-        this.time = LocalDate.parse(time);;
+        try {
+            this.time = LocalDate.parse(time);;
+        } catch (DateTimeParseException e) {
+            throw new DeadlineDateParseException(time);
+        }
     }
 
     public Deadline(String description, boolean isDone, String time) {

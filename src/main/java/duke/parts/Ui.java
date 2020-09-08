@@ -7,8 +7,8 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Ui {
-    static String LINE = "    ____________________________________________________________";
-    static String INDENT = "    ";
+    static final String LINE = "    ____________________________________________________________";
+    static final String INDENT = "    ";
     private Scanner sc = new Scanner(System.in);
 
     public void showWelcome() {
@@ -26,40 +26,37 @@ public class Ui {
     }
 
     public String printNumTask(int numTask) {
-        System.out.println(String.format("%syou have %d tasks in the list.", INDENT, numTask));
         return String.format("%syou have %d tasks in the list.", INDENT, numTask);
     }
 
     public String showDelete(Task removed, int numLeft) {
-        System.out.println(INDENT + "Tasked removed: ");
-        System.out.println(INDENT + removed.getOutput());
         String taskLeft = printNumTask(numLeft);
         String output = INDENT + "Tasked removed: " + "\n"
                                 + INDENT + removed.getOutput() + "\n"
                                 + taskLeft;
-
+        System.out.println(output);
         return output;
     }
 
     public String printList(Storage storage) throws IOException {
         ArrayList<Task> arrTask = storage.load();
         String output = printNumTask(arrTask.size()) + "\n";
-        System.out.println(INDENT + "Here are the tasks in your list:");
         output += INDENT + "Here are the tasks in your list:\n";
         for (int i = 0; i < arrTask.size(); i++) {
-            System.out.println(String.format("%s%d. %s", INDENT,  i + 1, arrTask.get(i).getOutput()));
-            output += String.format("%s%d. %s\n", INDENT,  i + 1, arrTask.get(i).getOutput());
+            output += String.format("%s%d. %s", INDENT,  i + 1, arrTask.get(i).getOutput());
+            if (i < arrTask.size() - 1) {
+                output += "\n";
+            }
         }
+        System.out.println(output);
         return output;
     }
 
     public String printNew(Task task, String type, int numTask) {
-        System.out.println(String.format("%sAdding %s to the list:", INDENT, type));
-        System.out.println(String.format("%s %s", INDENT, task.getOutput()));
-        printNumTask(numTask);
         String output = String.format("%sAdding %s to the list:\n", INDENT, type)
                         + String.format("%s %s\n", INDENT, task.getOutput())
                                 + printNumTask(numTask);
+        System.out.println(output);
         return output;
     }
 
