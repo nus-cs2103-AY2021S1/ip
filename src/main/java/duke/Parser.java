@@ -3,7 +3,12 @@ package duke;
 public class Parser {
     private TaskList taskList;
     private Ui ui;
-    
+
+    /**
+     * Creates a Parser that handles the processing for all input into the programme.
+     * @param taskList The central Tasklist where Tasks are stored.
+     * @param ui The UI handler that handles printing of statements.
+     */
     public Parser(TaskList taskList, Ui ui) {
         this.taskList = taskList;
         this.ui = ui;
@@ -44,19 +49,19 @@ public class Parser {
         Storage.saveTasksTo("data/duke.txt", taskList);
         return ui.showGoodbyeScreen();
     }
-    
+
     private String processDone(String input) throws DukeException {
         if (input.length() == 4) {
             throw new DukeException("OOPS!!! Please specify a task to mark as complete.");
         } else {
-            int taskIndex = Integer.parseInt(input.substring(5));    // this is not corrected for 0 index
+            int taskIndex = Integer.parseInt(input.substring(5)); // this is not corrected for 0 index
             Task completedTask = taskList.getTask(taskIndex);
             completedTask.markAsDone();
 
             return ui.printMarkTaskCompleteConfirmation(completedTask);
         }
     }
-    
+
     private String processDelete(String input) throws DukeException {
         if (input.length() == 6) {
             throw new DukeException(" OOPS!!! Please specify a task to delete.");
@@ -74,7 +79,7 @@ public class Parser {
             }
         }
     }
-    
+
     private String processFind(String input) throws DukeException {
         if (input.length() == 4) {
             throw new DukeException(" OOPS!!! Please specify a keyword to search for.");
@@ -82,7 +87,7 @@ public class Parser {
             return taskList.findTask(input.substring(5));
         }
     }
-    
+
     private String processEvent(String input) throws DukeException {
         if (input.length() <= 5) {
             throw new DukeException(" OOPS!!! The description of an event cannot be empty.");
@@ -101,7 +106,7 @@ public class Parser {
             }
         }
     }
-    
+
     private String processDeadline(String input) throws DukeException {
         if (input.length() <= 8) {
             throw new DukeException(" OOPS!!! The description of a deadline cannot be empty.");
@@ -120,7 +125,7 @@ public class Parser {
             }
         }
     }
-    
+
     private String processTodo(String input) throws DukeException {
         if (input.length() <= 4 || input.substring(5).trim().length() == 0) {
             throw new DukeException(" OOPS!!! The description of a todo cannot be empty.");

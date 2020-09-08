@@ -4,11 +4,20 @@ public class Task {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Creates a new Task with the specified description, which is marked incomplete by default.
+     * @param description Description of the task.
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
     }
-    
+
+    /**
+     * Creates a new Task with the specified description and completion status.
+     * @param description Description of the task.
+     * @param isDone Completion status of the task.
+     */
     public Task(String description, boolean isDone) {
         this.description = description;
         this.isDone = isDone;
@@ -30,7 +39,7 @@ public class Task {
     }
 
     /**
-     * Returns an array of Strings representing the state of the task, to be passed to Storage to 
+     * Returns an array of Strings representing the state of the task, to be passed to Storage to
      * be formatted and written to a file.
      * @return Array of Strings representing the current state of the Task.
      */
@@ -41,7 +50,7 @@ public class Task {
                     : "0";
         output[1] = "Task";
         output[2] = description;
-        
+
         return output;
     }
 
