@@ -3,7 +3,7 @@ package duke;
 import java.io.FileDescriptor;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.text.MessageFormat;
 
 import duke.utils.ResourceHandler;
@@ -45,12 +45,8 @@ public class Duke {
      * Launches the command line interface version of the Duke chatbot.
      */
     private static void launchCli() {
-        try {
-            // Set the encoding of `System.out` to UTF-8.
-            System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out), true, "UTF-8"));
-        } catch (UnsupportedEncodingException e) {
-            System.err.println(e.getMessage());
-        }
+        // Set the encoding of `System.out` to UTF-8.
+        System.setOut(new PrintStream(new FileOutputStream(FileDescriptor.out), true, StandardCharsets.UTF_8));
         Repl.run();
     }
 
