@@ -2,6 +2,7 @@ import duke.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
@@ -15,8 +16,7 @@ public class ParserTest {
         String fullTask = "D | 0 | Sample Task | Oct 12 2020 8:00 PM";
         Task actualTask = Parser.parseTask(fullTask);
         Task expectedTask = new Deadline("Sample Task", false,
-                LocalDate.of(2020, 10, 12),
-                LocalTime.of(20, 0));
+                LocalDateTime.of(2020, 10, 12, 20, 0));
         assertEquals(expectedTask.toDisplayString(), actualTask.toDisplayString());
     }
 
@@ -25,8 +25,7 @@ public class ParserTest {
         String fullTask = "E | 1 | Sample Event | Oct 12 2020 8:00 PM";
         Task actualTask = Parser.parseTask(fullTask);
         Task expectedTask = new Event("Sample Event", true,
-                LocalDate.of(2020, 10, 12),
-                LocalTime.of(20, 0));
+                LocalDateTime.of(2020, 10, 12, 20, 0));
         assertEquals(expectedTask.toDisplayString(), actualTask.toDisplayString());
     }
 
