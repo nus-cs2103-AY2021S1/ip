@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -9,45 +9,6 @@ public class Deadline extends Task {
     protected String by;
     protected LocalDate date;
     protected LocalTime time;
-
-    /**
-     * Gets the description of the deadline
-     * @param s user input
-     * @return the description of the deadline
-     */
-    public static String getDescription(String s) {
-        String firstWord = "deadline", secondWord = "/by";
-        int start = 0, len = s.length();
-        while (!s.substring(start, start + 8).equals(firstWord)) {
-            start++;
-        }
-        start += 9;
-        if (start >= len) {
-            return s.substring(len);
-        }
-        int end = start + 1;
-        while (end + 3 < len && !s.substring(end, end + 3).equals(secondWord)) {
-            end++;
-        }
-        if (end + 3 >= len) {
-            end = len + 1;
-        }
-        return s.substring(start, end - 1);
-    }
-
-    /**
-     * Gets the time of the deadline
-     * @param s user input
-     * @return the time of the deadline
-     */
-    public static String getTime(String s) {
-        String word = "/by";
-        int i = 0, len = s.length();
-        while (i + 3 < len && !s.substring(i, i + 3).equals(word)) {
-            i++;
-        }
-        return i + 3 == len ? "" : s.substring(i + 4);
-    }
 
     /**
      * Changes the date format in the user input
@@ -92,8 +53,9 @@ public class Deadline extends Task {
      * @return a Deadline object
      */
     public static Deadline of(String input) {
-        String by = getTime(input), description = getDescription(input);
+        String trimmed = trim(input, TaskType.DEADLINE), by = getTime(trimmed, TaskType.DEADLINE), description = getDescription(trimmed, TaskType.DEADLINE);
         String[] command = input.split(" ");
+        String[] tags = getTags(input);
         int ptr = 0;
         while (command[ptr].equals("")) {
             ptr++;
@@ -101,18 +63,20 @@ public class Deadline extends Task {
         if (description.equals("") || by.equals("") || command[command.length - 1].equals("/by") || ptr == command.length - 1) {
             return null;
         }
-        Deadline deadline = new Deadline(description, by);
+        Deadline deadline = new Deadline(description, by, tags);
         try {
             LocalDate date = LocalDate.parse(changeDateFormat(command));
             deadline.setDate(date);
         } catch (Exception e) {
-
+            //e.printStackTrace();
+            System.out.println("Exception at Deadline first of method first catch block");
         }
         try {
             LocalTime time = LocalTime.parse(getLocalTime(command));
             deadline.setTime(time);
         } catch (Exception e) {
-
+            //e.printStackTrace();
+            System.out.println("Exception at Deadline first of method second catch block");
         }
         return deadline;
     }
@@ -132,15 +96,31 @@ public class Deadline extends Task {
             LocalDate d = LocalDate.parse(dateAndTime[0]);
             ddl.setDate(d);
         } catch (Exception e) {
-
+            //e.printStackTrace();
+            System.out.println("Exception at Deadline second of method first catch block");
         }
         try {
             LocalTime t = LocalTime.parse(dateAndTime[1]);
             ddl.setTime(t);
         } catch (Exception e) {
-
+            //e.printStackTrace();
+            System.out.println("Exception at Deadline second of method second catch block");
         }
         return ddl;
+    }
+
+    /**
+     * Creates a Deadline object
+     * @param description description of the deadline
+     * @param by by of the deadline
+     * @param isDone whether the deadline is done
+     * @param tags tags of the deadline
+     * @return the Deadline object
+     */
+    public static Deadline of(String description, String by, boolean isDone, String tags) {
+        Deadline deadline = Deadline.of(description, by, isDone);
+        deadline.setTagList(TagList.of(tags));
+        return deadline;
     }
 
     /**
@@ -162,6 +142,19 @@ public class Deadline extends Task {
     public Deadline(String description, String by, boolean isDone) {
         super(description, isDone);
         this.by = by;
+        this.tagList = new TagList();
+    }
+
+    /**
+     * Construct a Deadline object
+     * @param description description of the deadline
+     * @param by by of the deadline
+     * @param tags tags of the deadline
+     */
+    public Deadline(String description, String by, String[] tags) {
+        super(description);
+        this.by = by;
+        this.tagList = TagList.of(tags);
     }
 
     /**
@@ -218,8 +211,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: "
+        return "[D]" + super.toString() + "\n     (by: "
                 + (date == null ? by : (date.toString() + " (" + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")"))
-                + (time != null ? " " + time.toString() : "") + ")";
+                + (time != null ? " " + time.toString() : "") + ")\n";
     }
 }

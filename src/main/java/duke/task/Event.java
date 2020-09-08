@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -9,45 +9,6 @@ public class Event extends Task {
     protected String at;
     protected LocalDate date;
     protected LocalTime time;
-
-    /**
-     * Gets the description of the event
-     * @param s user input
-     * @return the description of the event
-     */
-    public static String getDescription(String s) {
-        String firstWord = "event", secondWord = "/at";
-        int start = 0, len = s.length();
-        while (!s.substring(start, start + 5).equals(firstWord)) {
-            start++;
-        }
-        start += 6;
-        if (start >= len) {
-            return s.substring(len);
-        }
-        int end = start + 1;
-        while (end + 3 < len && !s.substring(end, end + 3).equals(secondWord)) {
-            end++;
-        }
-        if (end + 3 >= len) {
-            end = len + 1;
-        }
-        return s.substring(start, end - 1);
-    }
-
-    /**
-     * Gets the time of the event
-     * @param s user input
-     * @return the time of the event
-     */
-    public static String getTime(String s) {
-        String word = "/at";
-        int i = 0, len = s.length();
-        while (i + 3 < len && !s.substring(i, i + 3).equals(word)) {
-            i++;
-        }
-        return i + 3 == len ? "" : s.substring(i + 4);
-    }
 
     /**
      * Changes the date format in user input
@@ -92,8 +53,9 @@ public class Event extends Task {
      * @return a Event object
      */
     public static Event of(String input) {
-        String by = getTime(input), description = getDescription(input);
+        String trimmed = trim(input, TaskType.EVENT), by = getTime(trimmed, TaskType.EVENT), description = getDescription(trimmed, TaskType.EVENT);
         String[] command = input.split(" ");
+        String[] tags = getTags(trimmed);
         int ptr = 0;
         while (command[ptr].equals("")) {
             ptr++;
@@ -101,24 +63,26 @@ public class Event extends Task {
         if (description.equals("") || by.equals("") || command[command.length - 1].equals("/at") || ptr == command.length - 1) {
             return null;
         }
-        Event event = new Event(description, by);
+        Event event = new Event(description, by, tags);
         try {
             LocalDate date = LocalDate.parse(changeDateFormat(command));
             event.setDate(date);
         } catch (Exception e) {
-
+            //e.printStackTrace();
+            System.out.println("Exception at Event first of method first catch block");
         }
         try {
             LocalTime time = LocalTime.parse(getLocalTime(command));
             event.setTime(time);
         } catch (Exception e) {
-
+            //e.printStackTrace();
+            System.out.println("Exception at Event first of method second catch block");
         }
         return event;
     }
 
     /**
-     * Create a Event object
+     * Creates a Event object
      * @param description description of the event
      * @param at at of the event
      * @param isDone whether the event is done
@@ -135,14 +99,30 @@ public class Event extends Task {
             LocalDate d = LocalDate.parse(dateAndTime[0]);
             event.setDate(d);
         } catch (Exception e) {
-
+            //e.printStackTrace();
+            System.out.println("Exception at Event second of method first catch block");
         }
         try {
             LocalTime t = LocalTime.parse(dateAndTime[1]);
             event.setTime(t);
         } catch (Exception e) {
-
+            //e.printStackTrace();
+            System.out.println("Exception at Event second of method second catch block");
         }
+        return event;
+    }
+
+    /**
+     * Creates a Event object
+     * @param description description of the event
+     * @param at at of the event
+     * @param isDone whether the event is done
+     * @param tags tags of the event
+     * @return the Event object
+     */
+    public static Event of(String description, String at, boolean isDone, String tags) {
+        Event event = Event.of(description, at, isDone);
+        event.setTagList(TagList.of(tags));
         return event;
     }
 
@@ -165,6 +145,19 @@ public class Event extends Task {
     public Event(String description, String at, boolean isDone) {
         super(description, isDone);
         this.at = at;
+        this.tagList = new TagList();
+    }
+
+    /**
+     * Construct a Event object
+     * @param description description of the Event
+     * @param at at of the Event
+     * @param tags tags of the Event
+     */
+    public Event(String description, String at, String[] tags) {
+        super(description);
+        this.at = at;
+        this.tagList = TagList.of(tags);
     }
 
     /**
@@ -221,8 +214,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: "
+        return "[E]" + super.toString() + "\n     (at: "
                 + (date == null ? at : (date.toString() + " (" + date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")"))
-                + (time != null ? (" " + time.toString()) : "") + ")";
+                + (time != null ? " " + time.toString() : "") + ")\n";
     }
 }

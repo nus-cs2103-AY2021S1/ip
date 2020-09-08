@@ -1,10 +1,13 @@
 package duke;
 
+import duke.task.*;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.util.ArrayList;
 
 public class TaskList {
+
     protected ArrayList<Task> list;
 
     /**
@@ -48,11 +51,23 @@ public class TaskList {
         while ((line = reader.readLine()) != null) {
             String[] part = line.split("\\|");
             if (part[0].equals("T")) {
-                list.add(new Todo(part[2], part[1].equals("1")));
+                if (part.length > 3) {
+                    list.add(new Todo(part[2], part[1].equals("1"), part[3]));
+                } else {
+                    list.add(new Todo(part[2], part[1].equals("1")));
+                }
             } else if (part[0].equals("D")) {
-                list.add(Deadline.of(part[2], part[3], part[1].equals("1")));
+                if (part.length > 4) {
+                    list.add(Deadline.of(part[2], part[3], part[1].equals("1"), part[4]));
+                } else {
+                    list.add(Deadline.of(part[2], part[3], part[1].equals("1")));
+                }
             } else {
-                list.add(Event.of(part[2], part[3], part[1].equals("1")));
+                if (part.length > 4) {
+                    list.add(Event.of(part[2], part[3], part[1].equals("1"), part[4]));
+                } else {
+                    list.add(Event.of(part[2], part[3], part[1].equals("1")));
+                }
             }
         }
         return list;
@@ -104,7 +119,7 @@ public class TaskList {
      * @return the removed Task
      */
     public Task delete(int index) {
-        if (index > 0 && index < list.size()) {
+        if (index > 0 && index <= list.size()) {
             return list.remove(index - 1);
         } else {
             return null;

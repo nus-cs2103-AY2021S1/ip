@@ -1,7 +1,7 @@
 package duke.Command;
 
 import duke.AppUi;
-import duke.Task;
+import duke.task.Task;
 import duke.TaskList;
 
 public class DoneCommand extends Command {
