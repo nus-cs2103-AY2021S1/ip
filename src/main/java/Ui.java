@@ -8,12 +8,12 @@ import java.util.Scanner;
  * This is class to interact with the user.
  */
 public class Ui {
-    static String HOME = System.getProperty("user.home");
-    java.nio.file.Path PATH = java.nio.file.Paths.get(HOME, "ip", "data.txt");
-    String line = "______________________";
-    String enter = "\n";
+    private static String HOME = System.getProperty("user.home");
+    private java.nio.file.Path PATH = java.nio.file.Paths.get(HOME, "ip", "data.txt");
+    private String line = "______________________";
+    private String enter = "\n";
 
-    Parser p = new Parser();
+    private Parser p = new Parser();
 
     /**
      * Greets user.
