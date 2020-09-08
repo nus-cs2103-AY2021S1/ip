@@ -4,6 +4,6 @@ import duke.Ui;
 
 public class HelpCommand extends Command {
     public HelpCommand() {
-        super(new Ui().availableCommands());
+        response = new Ui().availableCommands();
     }
 }

@@ -6,6 +6,6 @@ import duke.Ui;
 
 public class ByeCommand extends Command {
     public ByeCommand() {
-        super(new Ui().byeMessage());
+        response = new Ui().byeMessage();
     }
 }

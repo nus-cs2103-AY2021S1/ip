@@ -34,7 +34,7 @@ public class Duke {
      */
     public String getResponse (String input) throws DukeException {
 
-        Task t = new Task("");
+        Task task = new Task("");
         String[] inputSplit = new String[] {};
         String description, response = "";
 
@@ -46,29 +46,29 @@ public class Duke {
             break;
         case TODO:
             description = input.substring(4);
-            t = new ToDo(description);
-            userTasks.addTask(t);
+            task = new ToDo(description);
+            userTasks.addTask(task);
             storage.saveToFile(userTasks.getTaskList());
-            response += ui.taskAddedMessage(t, userTasks.getTaskListSize());
+            response += ui.taskAddedMessage(task, userTasks.getTaskListSize());
             break;
         case DEADLINE:
             inputSplit = input.split(" /by ");
             String by = inputSplit[1];
             description = inputSplit[0].substring(8);
-            t = new Deadline(description, by);
-            userTasks.addTask(t);
+            task = new Deadline(description, by);
+            userTasks.addTask(task);
             storage.saveToFile(userTasks.getTaskList());
-            response += ui.taskAddedMessage(t, userTasks.getTaskListSize());
+            response += ui.taskAddedMessage(task, userTasks.getTaskListSize());
             break;
         case EVENT:
             inputSplit = input.split(" /at ");
             String at = inputSplit[1].split(" ")[0];
             String timeRange = inputSplit[1].split(" ")[1];
             description = inputSplit[0].substring(5);
-            t = new Event(description, at, timeRange);
-            userTasks.addTask(t);
+            task = new Event(description, at, timeRange);
+            userTasks.addTask(task);
             storage.saveToFile(userTasks.getTaskList());
-            response += ui.taskAddedMessage(t, userTasks.getTaskListSize());
+            response += ui.taskAddedMessage(task, userTasks.getTaskListSize());
             break;
         case LIST_ALL:
             response += ui.allTasksToString(userTasks.getTaskList());
@@ -157,9 +157,9 @@ public class Duke {
                 if (index >= userTasks.getTaskListSize()) {
                     throw new DukeException("", ExceptionType.INDEX_OUT_OF_BOUNDS);
                 } else {
-                    t = userTasks.getTask(index);
+                    task = userTasks.getTask(index);
                     userTasks.deleteTask(index);
-                    response += ui.taskDeletedMessage(t);
+                    response += ui.taskDeletedMessage(task);
                 }
                 storage.saveToFile(userTasks.getTaskList());
             } catch (DukeException ex) {

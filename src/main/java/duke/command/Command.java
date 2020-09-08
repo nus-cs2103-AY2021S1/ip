@@ -8,12 +8,10 @@ public class Command {
     protected String response;
 
     /**
-     * Initialise response with a given String.
-     *
-     * @param response response String after execution of command.
+     * Initialise response with an empty String.
      */
-    public Command(String response) {
-        this.response = response;
+    public Command() {
+        response = "";
     }
 
     /**
