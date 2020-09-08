@@ -33,7 +33,7 @@ public class Duke {
             ui = new Ui(tasksData);
         } catch (Exception e) {
             layout = new Layout();
-            DukeException d = new DukeException(" Unable to load tasks from hard disk");
+            DukeException d = new DukeException("Unable to load tasks from hard disk");
             layout.print(d.getMessage());
             tasksData = new TaskList(new ArrayList<>(), storage);
             ui = new Ui(tasksData);
