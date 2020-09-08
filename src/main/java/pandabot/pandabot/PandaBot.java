@@ -16,9 +16,11 @@ public class PandaBot {
     private Storage storage;
 
     private boolean isExit;
+    
 
     /**
      * Creates a new PandaBot object.
+     *
      * @param fileName the file name of the save file
      */
     public PandaBot(String fileName) {
@@ -28,6 +30,9 @@ public class PandaBot {
         isExit = false;
     }
 
+    /**
+     * Creates a new PandaBot object, without requiring a file name.
+     */
     public PandaBot() {
         this("PandaBot_GUI_Save.txt");
     }
@@ -42,14 +47,14 @@ public class PandaBot {
         while (!isExit) {
             try {
                 String fullCommand = ui.readCmd();
-                ui.printLine(); // show the divider line ("_______")
+                ui.printHorizontalLine();
                 Command c = Parser.parse(fullCommand);
                 ui.printMessage(c.execute(tasks, ui, storage));
                 isExit = c.isExit();
             } catch (PandaBotException e) {
                 ui.printMessage(e.getMessage());
             } finally {
-                ui.printLine();
+                ui.printHorizontalLine();
             }
         }
     }

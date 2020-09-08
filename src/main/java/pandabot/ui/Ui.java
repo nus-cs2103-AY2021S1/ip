@@ -20,7 +20,7 @@ public class Ui {
     }
 
     /**
-     * Prints the welcome logo.
+     * Prints the welcome message.
      */
     public void printWelcome() {
         String logo = " ____                    _\n"
@@ -45,7 +45,7 @@ public class Ui {
     /**
      * Prints a horizontal line.
      */
-    public void printLine() {
+    public void printHorizontalLine() {
         System.out.println(" ___________________________________________________");
     }
 

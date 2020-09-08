@@ -1,6 +1,5 @@
 package pandabot.parser;
 
-
 import pandabot.commands.AddCommand;
 import pandabot.commands.ByeCommand;
 import pandabot.commands.Command;
@@ -29,7 +28,8 @@ public class Parser {
      * @throws PandaBotException If the input cannot be understood or is invalid
      */
     public static Command parse(String input) throws PandaBotException {
-        String[] cmd = input.split(" ", 2); // obtain first word and the rest of the string
+        // split up first word as the command from the rest of the input
+        String[] cmd = input.split(" ", 2);
         switch(cmd[0]) {
         case "bye":
             return new ByeCommand();
@@ -71,7 +71,10 @@ public class Parser {
     }
 
     private static void verifyArguments(String[] cmd, int len) throws PandaBotInsufficientArgumentException {
-        if (cmd.length < len) {
+        boolean isInsufficientArguments = cmd.length < len;
+        boolean isEmptyArgument = cmd[cmd.length - 1].length() == 0;
+
+        if (isInsufficientArguments || isEmptyArgument) {
             throw new PandaBotInsufficientArgumentException();
         }
     }

@@ -19,7 +19,6 @@ public class TaskList {
         this.taskList = taskList;
     }
 
-
     /**
      * Returns the list of tasks stored.
      *
@@ -110,6 +109,7 @@ public class TaskList {
             result.append(i + 1).append(". ").append(t.toString()).append("\n");
             i++;
         }
+
         return result.toString();
     }
 }

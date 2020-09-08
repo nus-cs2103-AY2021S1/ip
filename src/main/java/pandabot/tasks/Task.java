@@ -35,6 +35,11 @@ public abstract class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
+    /**
+     * Returns a String representation of the task description.
+     *
+     * @return a String representation of the task description
+     */
     public String getDescription() {
         return description;
     }

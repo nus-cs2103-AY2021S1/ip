@@ -68,7 +68,7 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             BufferedReader reader = Files.newBufferedReader(saveFilePath);
-            loadTask(tasks, reader);
+            loadTasks(tasks, reader);
             reader.close();
         } catch (IOException e) {
             System.out.println("OOPS! :c There was an error in reading save file: " + e.getMessage() + "\n"
@@ -79,7 +79,7 @@ public class Storage {
         return tasks;
     }
 
-    private void loadTask(ArrayList<Task> tasks, BufferedReader reader) throws IOException {
+    private void loadTasks(ArrayList<Task> tasks, BufferedReader reader) throws IOException {
         String task;
         while ((task = reader.readLine()) != null) {
             // convert the line read into a task
@@ -108,7 +108,6 @@ public class Storage {
             throw new PandaBotLoadingTasksErrorException(input);
         }
 
-        // update the done status
         String isDone = tDes[1];
         if (isDone.equals("1")) {
             task.markTaskDone();
@@ -133,7 +132,7 @@ public class Storage {
             writer.close();
         } catch (IOException e) {
             System.out.println("OOPS! :c There is an error in trying to write to the save file."
-                                + "I can't save the entire list of tasks here.");
+                                + "I couldn't save the entire list of tasks here.");
         }
     }
 
