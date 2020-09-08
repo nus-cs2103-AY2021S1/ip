@@ -4,6 +4,7 @@ import java.text.MessageFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.typeadapters.RuntimeTypeAdapterFactory;
@@ -77,9 +78,9 @@ public class TaskManager {
                 .sorted().collect(Collectors.toList());
         StringBuilder formattedList =
                 new StringBuilder(ResourceHandler.getString("taskManager.upcomingTasksPrefix") + "\n");
-        for (int i = 0; i < sortedUpcomingTasks.size(); i++) {
-            formattedList.append(String.format("%d. %s\n", i + 1, sortedUpcomingTasks.get(i)));
-        }
+        IntStream.range(0, sortedUpcomingTasks.size())
+                .mapToObj(i -> String.format("%d. %s\n", i + 1, sortedUpcomingTasks.get(i)))
+                .forEach(formattedList::append);
         return formattedList.toString();
     }
 
@@ -94,9 +95,9 @@ public class TaskManager {
                 .sorted().collect(Collectors.toList());
         StringBuilder formattedList =
                 new StringBuilder(ResourceHandler.getString("taskManager.overdueTasksPrefix") + "\n");
-        for (int i = 0; i < sortedOverdueTasks.size(); i++) {
-            formattedList.append(String.format("%d. %s\n", i + 1, sortedOverdueTasks.get(i)));
-        }
+        IntStream.range(0, sortedOverdueTasks.size())
+                .mapToObj(i -> String.format("%d. %s\n", i + 1, sortedOverdueTasks.get(i)))
+                .forEach(formattedList::append);
         return formattedList.toString();
     }
 
@@ -111,9 +112,9 @@ public class TaskManager {
                 .collect(Collectors.toList());
         StringBuilder formattedList =
                 new StringBuilder(ResourceHandler.getString("taskManager.matchingTasksPrefix") + "\n");
-        for (int i = 0; i < matchingTasks.size(); i++) {
-            formattedList.append(String.format("%d. %s\n", i + 1, matchingTasks.get(i)));
-        }
+        IntStream.range(0, matchingTasks.size())
+                .mapToObj(i -> String.format("%d. %s\n", i + 1, matchingTasks.get(i)))
+                .forEach(formattedList::append);
         return formattedList.toString();
     }
 
