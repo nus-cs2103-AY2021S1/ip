@@ -8,7 +8,6 @@ public class Deadline extends Task {
     private LocalDate timeDescription;
     private String formattedTimeDescription;
 
-
     /**
      * Creates a Deadline object.
      * It is mainly for file writing.
@@ -17,7 +16,7 @@ public class Deadline extends Task {
      * @param timeDescription is the LocalDate input representing date.
      */
     public Deadline(String description, LocalDate timeDescription) {
-        super(description, Task.DEADLINE);
+        super(description, Task.DEADLINE_TASK);
         this.timeDescription = timeDescription;
         this.formattedTimeDescription = this.timeDescription.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
     }
@@ -31,8 +30,17 @@ public class Deadline extends Task {
      * @param isDone states if the Deadline object is completed or not.
      */
     public Deadline(String description, String formattedTimeDescription, boolean isDone) {
-        super(description, "D", isDone);
+        super(description, Task.DEADLINE_TASK, isDone);
         this.formattedTimeDescription = formattedTimeDescription;
+    }
+
+    /**
+     * Returns the String description of the completion time of Deadline object.
+     *
+     * @return Task description.
+     */
+    public String getFormattedTime() {
+        return this.formattedTimeDescription;
     }
 
     /**
@@ -42,7 +50,7 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[" + getType() + "]" + "[" + getStatusIcon() + "] " + description
-                + "(by: " + this.formattedTimeDescription + ")";
+        return "[" + getType() + "]" + "[" + getStatusIcon() + "] " + getDescription()
+                + "(by: " + getFormattedTime() + ")";
     }
 }

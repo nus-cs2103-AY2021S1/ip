@@ -6,6 +6,8 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.TextFlow;
+import javafx.scene.text.Text;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -19,6 +21,10 @@ public class MainWindow extends AnchorPane {
     private TextField userInput;
     @FXML
     private Button sendButton;
+    @FXML
+    private TextFlow txtF;
+    @FXML
+    private Button loadFileButton;
 
     private Duke duke;
 
@@ -28,6 +34,25 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        String welcomeMessage = Ui.welcomeGreetings();
+        Text text = new Text(welcomeMessage);
+        txtF.getChildren().add(text);
+    }
+
+    public void checkFileLoaded() {
+        boolean isFileLoaded = duke.getFileLoadedStatus();
+        String fileLoadedStatusMessage;
+
+        if (!isFileLoaded) {
+            fileLoadedStatusMessage = Ui.loadFileErrorMessage();
+
+        } else {
+            fileLoadedStatusMessage = Ui.loadFileSuccessMessage();
+        }
+
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(fileLoadedStatusMessage, dukeImage)
+        );
     }
 
     public void setDuke(Duke d) {
@@ -53,6 +78,7 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+
         userInput.clear();
     }
 }
