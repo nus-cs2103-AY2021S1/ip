@@ -11,7 +11,7 @@ public class DeadlineTest {
     @Test
     public void testToData() {
         try {
-            assertEquals("D~0~tP AB3 familiarization~2020-08-26 2359\n",
+            assertEquals(String.format("D~0~tP AB3 familiarization~2020-08-26 2359%n"),
                     new Deadline("tP AB3 familiarization", "2020-08-26 2359").toData());
         } catch (NiteException ex) {
             fail();
