@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
-
 import java.time.format.DateTimeParseException;
+
 /**
  * Parses input by the user and identifies the commands.
  */
@@ -22,9 +22,8 @@ public class Parser {
      * @return int A number that represents the status of the input.
      * @throws InvalidCommandException If command is of invalid format.
      */
-    public int parse(String currInput, int sizeOfList) throws InvalidCommandException{
+    public int parse(String currInput, int sizeOfList) throws InvalidCommandException {
         assert(sizeOfList >= 0);
-      
         //Cuts white space before and after the command
         String input = currInput.trim();
 
@@ -71,10 +70,16 @@ public class Parser {
     }
 
     public String getUpdateType(String input) {
-        return  input.trim().split("\\W+")[1];
+        return input.trim().split("\\W+")[1];
     }
 
-    public void verifyTaskCanUpdate(String updateType, String taskType) throws InvalidCommandException{
+    /**
+     * Checks if the following task type can be updated based on the user's update command.
+     * @param updateType The type of update the user is initiating.
+     * @param taskType The type of the task that the user wishes to update.
+     * @throws InvalidCommandException
+     */
+    public void verifyTaskCanUpdate(String updateType, String taskType) throws InvalidCommandException {
         if (updateType.equals("time") || updateType.equals("date")) {
             if (taskType.equals("Task")) {
                 throw new InvalidCommandException("Sorry, can't update the task this way");
@@ -136,17 +141,24 @@ public class Parser {
         }
     }
 
-    public int processUpdate(String input, String updateType) throws InvalidCommandException{
+    /**
+     * Processes the update that the user has input.
+     * @param input The user input which is suppose to match his update type.
+     * @param updateType The update type that the user is initiating.
+     * @return int The status of the update.
+     * @throws InvalidCommandException If the input does not match the update type that the user is initiating.
+     */
+    public int processUpdate(String input, String updateType) throws InvalidCommandException {
         String trimmedInput = input.trim();
-        int GET_DATE = 1;
-        int GET_TIME = 2;
-        int GET_TASK = 3;
-        int GET_DESC = 4;
+        int changeDate = 1;
+        int changeTime = 2;
+        int changeTask = 3;
+        int changeDesc = 4;
 
         if (updateType.equals("time")) {
             try {
                 LocalTime.parse(trimmedInput);
-                return GET_TIME;
+                return changeTime;
             } catch (DateTimeParseException e) {
                 throw new InvalidCommandException("Please give your time in hh:mm format!");
             }
@@ -154,19 +166,19 @@ public class Parser {
         if (updateType.equals("date")) {
             try {
                 LocalDate.parse(trimmedInput);
-                return GET_DATE;
+                return changeDate;
             } catch (DateTimeParseException e) {
                 throw new InvalidCommandException("Please give your date in yyyy-mm-dd format!");
             }
         }
         if (updateType.equals("task")) {
-            return GET_TASK;
+            return changeTask;
         }
 
-        return GET_DESC;
+        return changeDesc;
     }
 
-    private static void verifyTodo(String input) throws InvalidCommandException{
+    private static void verifyTodo(String input) throws InvalidCommandException {
         String[] parts = input.split(" ");
 
         if (parts.length <= 1) {
@@ -176,8 +188,8 @@ public class Parser {
 
     private static void verifyDeadline(String input) throws InvalidCommandException {
         if (!input.contains(" /by ")) {
-            throw new InvalidCommandException("Sorry, missing /by keyword, make sure to leave a space before " +
-                    "and after the /by keyword!");
+            throw new InvalidCommandException(
+                    "Sorry, missing /by keyword, make sure to leave a space before and after the /by keyword!");
         }
 
         //Checks if there is a spacing after the deadline word
@@ -206,8 +218,8 @@ public class Parser {
 
     private static void verifyEvent(String input) throws InvalidCommandException {
         if (!input.contains(" /at ")) {
-            throw new InvalidCommandException("Sorry, missing /at keyword, make sure to leave a space before " +
-                    "and after the /at keyword!");
+            throw new InvalidCommandException(
+                    "Sorry, missing /at keyword, make sure to leave a space before and after the /at keyword!");
         }
 
         //Checks if there is a spacing after the deadline word
@@ -280,7 +292,7 @@ public class Parser {
         return input.startsWith("find");
     }
 
-    private static void verifyFindCommand(String input) throws InvalidCommandException{
+    private static void verifyFindCommand(String input) throws InvalidCommandException {
         if (input.length() == 4 || input.split(" ").length < 2) {
             throw new InvalidCommandException("find what?");
         } else if (!(input.charAt(4) == ' ')) {
@@ -296,7 +308,7 @@ public class Parser {
         return parts[0].equals("update");
     }
 
-    private static void verifyUpdateCommand(String input, int numOfTasks) throws InvalidCommandException{
+    private static void verifyUpdateCommand(String input, int numOfTasks) throws InvalidCommandException {
         //Split the verify command into 3 parts, the command, what to update and the number
         String[] words = input.split("\\W+");
 
@@ -304,8 +316,8 @@ public class Parser {
             throw new InvalidCommandException("Sorry wrong format");
         }
 
-        if (!words[1].equals("time") && !words[1].equals("date") && !words[1].equals("task") &&
-            !words[1].equals("desc")) {
+        if (!words[1].equals("time") && !words[1].equals("date") && !words[1].equals("task")
+                && !words[1].equals("desc")) {
             throw new InvalidCommandException("Sorry I can't update that");
         }
 
@@ -351,7 +363,7 @@ public class Parser {
             String date = parts[0].trim();
 
             return LocalDate.parse(date);
-        } catch (DateTimeParseException e ) {
+        } catch (DateTimeParseException e) {
             throw new InvalidCommandException("Please give your date in yyyy-mm-dd format!");
         }
     }

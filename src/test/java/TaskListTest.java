@@ -1,14 +1,15 @@
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class TaskListTest {
 
-    String home = System.getProperty("user.home");
-    File testFile = new File(home + "/ip/src/main/java/Data/TestFile.txt");
+    private String home = System.getProperty("user.home");
+    private File testFile = new File(home + "/ip/src/main/java/Data/TestFile.txt");
 
     @Test
     void generateList_validFile() {
@@ -30,7 +31,7 @@ class TaskListTest {
             File file = new File("testFile.txt");
             taskList.generateList(file);
         } catch (FileNotFoundException e) {
-
+            System.out.println("good");
         } catch (Exception e) {
             fail();
         }

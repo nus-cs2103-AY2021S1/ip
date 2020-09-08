@@ -1,11 +1,12 @@
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class ParserTest {
 
     @Test
-    void parse_listCommand_1() {
+    void parse_listCommand1() {
         Parser parser = new Parser();
 
         try {
@@ -16,7 +17,7 @@ class ParserTest {
     }
 
     @Test
-    void parse_listCommandWithSpace_1() {
+    void parse_listCommandWithSpace1() {
         Parser parser = new Parser();
 
         try {
@@ -27,7 +28,7 @@ class ParserTest {
     }
 
     @Test
-    void parse_doneCommand_2() {
+    void parse_doneCommand2() {
         Parser parser = new Parser();
 
         try {
@@ -38,7 +39,7 @@ class ParserTest {
     }
 
     @Test
-    void parse_deleteCommand_3() {
+    void parse_deleteCommand3() {
         Parser parser = new Parser();
 
         try {
@@ -49,7 +50,7 @@ class ParserTest {
     }
 
     @Test
-    void parse_findCommand_4() {
+    void parse_findCommand4() {
         Parser parser = new Parser();
 
         try {
@@ -141,7 +142,7 @@ class ParserTest {
         try {
             parser.getTask("event description description /at ");
         } catch (InvalidCommandException e) {
-            assertEquals("Sorry, missing event date and time :(", e.toString());
+            assertEquals("Sorry, missing event time and date :(", e.toString());
         } catch (InvalidInputException e) {
             fail();
         }

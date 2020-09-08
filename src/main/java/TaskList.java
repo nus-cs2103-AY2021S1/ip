@@ -1,12 +1,10 @@
 import java.io.File;
 import java.io.FileNotFoundException;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -83,6 +81,11 @@ public class TaskList {
         taskList.set(index, taskList.get(index).changeDesc(newDesc));
     }
 
+    /**
+     * Modifies the time of the given event or deadline task.
+     * @param index The index of the task.
+     * @param newTime The new time of the task.
+     */
     public void modifyTime(int index, LocalTime newTime) {
         Task taskToBeModified = taskList.get(index);
         if (taskToBeModified instanceof Deadline) {
@@ -94,6 +97,11 @@ public class TaskList {
         }
     }
 
+    /**
+     * Modifies the date of the given event or deadline.
+     * @param index The index of the task.
+     * @param newDate The new date of the task.
+     */
     public void modifyDate(int index, LocalDate newDate) {
         Task taskToBeModified = taskList.get(index);
         if (taskToBeModified instanceof Deadline) {
@@ -149,7 +157,8 @@ public class TaskList {
                 String date = dateTime[1];
                 String time = dateTime[2];
 
-                return new Event(desc, LocalDate.parse(date, myDateFormat), LocalTime.parse(time, myTimeFormat)).markDone();
+                return new Event(desc, LocalDate.parse(date, myDateFormat),
+                        LocalTime.parse(time, myTimeFormat)).markDone();
             }
         } else {
             //Is a deadline task
@@ -176,7 +185,8 @@ public class TaskList {
                 String date = dateTime[1];
                 String time = dateTime[2];
 
-                return new Deadline(desc, LocalDate.parse(date, myDateFormat), LocalTime.parse(time, myTimeFormat)).markDone();
+                return new Deadline(desc, LocalDate.parse(date, myDateFormat),
+                        LocalTime.parse(time, myTimeFormat)).markDone();
             }
         }
     }

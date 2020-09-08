@@ -5,6 +5,10 @@ public class Task {
     protected String description;
     protected boolean isComplete;
 
+    /**
+     * Constructor of the task object.
+     * @param description The description of the task.
+     */
     public Task(String description) {
         this.description = description;
         isComplete = false;

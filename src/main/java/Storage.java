@@ -1,12 +1,9 @@
-import java.nio.file.Files;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
-
-import java.io.BufferedWriter;
-
 import java.io.IOException;
-
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.LocalDate;
@@ -20,6 +17,9 @@ public class Storage {
     private TaskList taskList;
     private boolean isInitialised;
 
+    /**
+     * Constructor of the storage object that stores the user's tasks.
+     */
     public Storage() {
         this.taskList = new TaskList();
         isInitialised = false;
@@ -99,7 +99,7 @@ public class Storage {
      * @throws FileNotFoundException If the file is not found.
      * @throws IOException If the parent directory does not exists.
      */
-    public void initialise() throws FileNotFoundException, IOException{
+    public void initialise() throws FileNotFoundException, IOException {
         this.isInitialised = true;
 
         String home = System.getProperty("user.home");
@@ -133,7 +133,7 @@ public class Storage {
      * @throws IOException If the parent directory is not found.
      * @throws FileNotFoundException If the file is lost or deleted.
      */
-    public void save() throws IOException, FileNotFoundException{
+    public void save() throws IOException, FileNotFoundException {
 
         String home = System.getProperty("user.home");
         Path path = Paths.get(home, "ip", "src", "main", "java", "Data");

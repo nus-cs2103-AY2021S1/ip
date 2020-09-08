@@ -1,6 +1,5 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
-
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -10,6 +9,12 @@ public class Event extends Task {
     private LocalDate startDate;
     private LocalTime startTime;
 
+    /**
+     * Constructor of the event object.
+     * @param description The description of the event.
+     * @param startDate The starting date of the event.
+     * @param startTime The starting time of the event.
+     */
     public Event(String description, LocalDate startDate, LocalTime startTime) {
         super(description);
         this.startDate = startDate;
@@ -53,7 +58,7 @@ public class Event extends Task {
         DateTimeFormatter myTimeFormat = DateTimeFormatter.ofPattern("h:mm a");
 
         String formattedDate = this.startDate.format(myDateFormat);
-        String formattedTime =this.startTime.format(myTimeFormat);
+        String formattedTime = this.startTime.format(myTimeFormat);
 
         if (this.isComplete) {
             return "[E][\u2713] " + this.description + "(at:" + formattedDate + ", " + formattedTime + ")";

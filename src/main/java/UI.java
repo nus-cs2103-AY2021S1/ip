@@ -32,7 +32,7 @@ public class UI {
     /**
      * Reads a starting message at the start of UI.
      */
-    public String startUpMessage(){
+    public String startUpMessage() {
         return "Hi! I'm Duke" + this.readSavedTasks() + "\n" + "What can I do for you?";
     }
 
@@ -82,7 +82,12 @@ public class UI {
         return exception.getMessage();
     }
 
-
+    /**
+     * Processes the input of the user.
+     * @param input The user input.
+     * @return String The response of the Duke bot.
+     * @throws IOException If there is an error with the user input.
+     */
     public String processInput(String input) throws IOException {
         if (!this.storage.isInitialised()) {
             return "Storage not initialised!";
@@ -114,7 +119,8 @@ public class UI {
                 int index = this.parser.getIndex(input);
                 this.storage.markDone(index);
 
-                return "Nice! I've marked this task as done:" + "\n" + "  " + this.storage.getTaskFromList(index).toString();
+                return "Nice! I've marked this task as done:"
+                        + "\n" + "  " + this.storage.getTaskFromList(index).toString();
             }
             if (isDeleteCommand(parseResult)) {
                 int index = this.parser.getIndex(input);
@@ -152,9 +158,9 @@ public class UI {
             Task newTask = this.parser.getTask(input);
             this.storage.addTask(newTask);
 
-            return "Got it. I've added this task:" + "\n" + "  " +
-                    this.storage.getTaskFromList(this.storage.getSizeofTasks() - 1) +
-                    "\n" + "Now you have " + this.storage.getSizeofTasks() + " tasks in the list.";
+            return "Got it. I've added this task:"
+                    + "\n" + "  " + this.storage.getTaskFromList(this.storage.getSizeofTasks() - 1)
+                    + "\n" + "Now you have " + this.storage.getSizeofTasks() + " tasks in the list.";
         } catch (InvalidCommandException e) {
             return e + "\n" + "Please enter a valid command";
         } catch (InvalidInputException e) {

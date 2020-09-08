@@ -1,20 +1,20 @@
 import javafx.application.Application;
-import javafx.scene.control.Label;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-import javafx.scene.image.Image;
 
 /**
  * The Duke chat bot that can help you keep track of your upcoming schedules.
  * Use the commands todo, event, deadline to differentiate your schedules.
  */
-public class Duke extends Application{
+public class Duke extends Application {
     private Storage storage;
     private UI ui;
 
@@ -27,16 +27,22 @@ public class Duke extends Application{
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Constructor of the Duke chat bot.
+     */
     public Duke() {
         this.storage = new Storage();
         this.ui = UI.initialise(this.storage);
     }
 
+    /**
+     * Activates the storage of the Duke bot and runs the bot.
+     */
     public void run() {
         try {
             this.storage.initialise();
         } catch (Exception e) {
-           this.ui.showError(e);
+            this.ui.showError(e);
         }
     }
 
@@ -94,11 +100,11 @@ public class Duke extends Application{
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         sendButton.setOnMouseClicked((event) -> {
-           handleUserInput();
+            handleUserInput();
         });
 
         userInput.setOnAction((event) -> {
-           handleUserInput();
+            handleUserInput();
         });
 
         //Scroll down to the end every time dialogContainer's height changes.
@@ -142,7 +148,7 @@ public class Duke extends Application{
     String getResponse(String input) {
         try {
             return this.ui.processInput(input);
-        } catch (Exception e){
+        } catch (Exception e) {
             return this.ui.showError(e);
         }
     }
