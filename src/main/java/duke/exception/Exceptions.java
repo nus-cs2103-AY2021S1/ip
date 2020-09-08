@@ -44,7 +44,6 @@ public enum Exceptions {
     },
 
     FILEEXCEPTION {
-        @SuppressWarnings("checkstyle:SingleSpaceSeparator")
         @Override
         public String toString() {
             return FormatString.FOURSPACE.toString()
@@ -52,13 +51,6 @@ public enum Exceptions {
                     + "The file exists but is a directory rather than a regular file,\n"
                     + "or does not exist but cannot be created,\n"
                     + "or cannot be opened for any other reason";
-        }
-    },
-
-    READLINEEXCEPTION {
-        @Override
-        public String toString() {
-            return "OOPS!!! There is a problem reading";
         }
     },
 

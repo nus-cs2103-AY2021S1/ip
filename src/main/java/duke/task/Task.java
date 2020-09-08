@@ -11,7 +11,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Initializes a Task object.
+     * Constructs a Task object.
      * @param description A string describing
      *                    the task.
      */
@@ -42,7 +42,6 @@ public class Task {
 
     @Override
     public String toString() {
-        return getStatusIcon() + " "
-                + this.description;
+        return getStatusIcon() + " " + this.description;
     }
 }

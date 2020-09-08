@@ -3,14 +3,13 @@ package duke.main;
 import duke.ui.Ui;
 
 /**
- * This is the main class that
- * is directly called by the users.
+ * This is the main class that is directly called by the users.
  */
 public class Duke {
     private Ui ui;
 
     /**
-     * Initializes Duke object.
+     * Constructs Duke object.
      */
     public Duke() {
         this.ui = new Ui();

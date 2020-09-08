@@ -64,15 +64,6 @@ public class DukeException {
     }
 
     /**
-     * Returns an error message when readline() throws exceptions.
-     *
-     * @return An error message.
-     */
-    public static String readLineException() {
-        return new Format<>(Exceptions.READLINEEXCEPTION.toString()).toString();
-    }
-
-    /**
      * Returns an error message when user input time differently from yyyy-mm-dd.
      *
      * @return An error message.

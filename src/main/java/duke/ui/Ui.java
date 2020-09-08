@@ -56,8 +56,8 @@ public class Ui {
      */
     public String greet() {
         return new Format<>(
-                new Response(Statement.GREET.toString())
-        ).toString();
+                new Response(Statement.GREET.toString()))
+                .toString();
     }
 
     /**
@@ -66,7 +66,7 @@ public class Ui {
      */
     public String exit() {
         return new Format<>(
-                new Response(Statement.BYE.toString())
-        ).toString();
+                new Response(Statement.BYE.toString()))
+                .toString();
     }
 }

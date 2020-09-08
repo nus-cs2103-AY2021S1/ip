@@ -33,8 +33,10 @@ public class DukeFileReader extends DukeFile {
         if (!doesFileExist()) {
             createFile();
         }
+
         TaskList<Task> taskList = new TaskList<>();
         List<String> taskStrings = readFile();
+
         for (String taskString : taskStrings) {
             Format<String> stringFormat = new Format<>(taskString);
             taskList.addMemory(stringFormat.stringToTask());
@@ -51,6 +53,7 @@ public class DukeFileReader extends DukeFile {
      */
     public TaskList<Task> matchContent(String content) {
         TaskList<Task> taskList = new TaskList<>();
+
         if (doesFileExist()) {
             List<String> taskStrings = readFile();
             for (String taskString : taskStrings) {
@@ -60,6 +63,7 @@ public class DukeFileReader extends DukeFile {
                 }
             }
         }
+
         return taskList;
     }
 }

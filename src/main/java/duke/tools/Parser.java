@@ -25,7 +25,7 @@ public class Parser {
     private static final int taskTime = 2;
 
     /**
-     * Initializes the Parser.
+     * Constructs the Parser.
      */
     public Parser() {
         taskList = new TaskList<>();
