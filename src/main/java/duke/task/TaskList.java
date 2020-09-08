@@ -7,7 +7,6 @@ import java.util.ArrayList;
 
 import duke.exception.DukeException;
 import duke.storage.Storage;
-import duke.ui.Ui;
 
 /**
  * contains the task list e.g., it has operations to add/delete tasks in the list
@@ -62,7 +61,7 @@ public class TaskList {
      *
      * @param index index of Task to be deleted from ArrayList
      * @param storage storage to save and load the Tasks when the program runs
-     * @throws DukeException
+     * @throws DukeException DukeException when index number is invalid
      */
     public String deleteTask(int index, Storage storage) throws DukeException {
         String reply;

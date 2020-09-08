@@ -15,8 +15,8 @@ import duke.ui.Ui;
  */
 public class Duke  {
 
-    private Storage storage;
-    private Ui ui;
+    private final Storage storage;
+    private final Ui ui;
     private TaskList taskList;
 
     /**
