@@ -69,9 +69,11 @@ public class Deadline extends Task {
      * @return
      */
     public String toPrint() throws DukeException {
-        if (date == null && by == null) {
+        if (by == null) {
+            assert date == null;
             return super.toPrint();
-        } else if (date != null && by != null) {
+        } else if (by != null) {
+            assert date != null;
             return super.toPrint() + "|" + date + "|" + by;
         } else {
             throw new DateTimeException();
@@ -81,6 +83,7 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         if (by == null) {
+            assert date == null;
             return "[" + tag + "] " + super.toString();
         } else {
             return "[" + tag + "] " + super.toString() + "\n            (by: "
