@@ -48,6 +48,9 @@ public class Duke {
      */
     public String getResponse(String input) {
         CommandHandler commandHandler = new CommandHandler(input, ui, tasks);
+
+        assert commandHandler != null : "command handler can't be null";
+
         commandHandler.execute();
         return commandHandler.getLog();
     }
