@@ -94,7 +94,7 @@ public class Parser {
             for (int i = 0; i < taskList.getListSize(); i++) {
                 Task currentTask = taskList.getTask();
                 if (currentTask.getTask().contains(key)) {
-                    String findResponse = counter + "." + taskList.getTask(i).toString() + "\n";
+                    String findResponse = counter + "." + currentTask.toString() + "\n";
                     stringBuilder.append(findResponse);
                     counter++;
                 }
@@ -173,8 +173,7 @@ public class Parser {
         if (isDone) {
             taskObj.setDone();
         }
-        taskList.addTask(taskObj);
-        return taskObj.toString();
+        return taskList.addTask(taskObj);
     }
 
     /**
