@@ -1,5 +1,4 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
 import java.time.format.DateTimeParseException;
 
 /**
@@ -17,13 +16,10 @@ public class Event extends Task {
      * @param desc Full description of Event inclusive of time/date.
      */
     public Event(String desc) {
-        super(desc.split("event ")[1].split(" /at ")[0], "E");
-        this.timing = desc.split("event ")[1].split(" /at ")[1];
+        super(Task.getDescriptionFromStringInput(desc, TimeConstraintKeyword.EVENT_KEYWORD), "E");
+        this.timing = Task.getTimeConstraintFromStringInput(desc, TimeConstraintKeyword.EVENT_KEYWORD);
         try {
-            String[] split = this.timing.split(" ");
-            LocalDate date = LocalDate.parse(split[0]);
-            String restOfTime = this.timing.split(split[0])[1];
-            this.timing = date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + restOfTime;
+            this.timing = tryFormatDateElseThrow(timing);
         } catch (DateTimeParseException e) {
             // no date
         }

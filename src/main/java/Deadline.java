@@ -1,5 +1,4 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
+
 import java.time.format.DateTimeParseException;
 
 /**
@@ -17,13 +16,10 @@ public class Deadline extends Task {
      * @param desc Full description of the Deadline inclusive of time/date.
      */
     public Deadline(String desc) {
-        super(desc.split("deadline ")[1].split(" /by ")[0], "D");
-        this.timing = desc.split("deadline ")[1].split(" /by ")[1];
+        super(Task.getDescriptionFromStringInput(desc, TimeConstraintKeyword.DEADLINE_KEYWORD), "D");
+        this.timing = Task.getTimeConstraintFromStringInput(desc, TimeConstraintKeyword.DEADLINE_KEYWORD);
         try {
-            String[] split = this.timing.split(" ");
-            LocalDate date = LocalDate.parse(split[0]);
-            String restOfTime = this.timing.split(split[0])[1];
-            this.timing = date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + restOfTime;
+            this.timing = tryFormatDateElseThrow(timing);
         } catch (DateTimeParseException e) {
             // no date
         }

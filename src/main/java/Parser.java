@@ -21,7 +21,7 @@ public class Parser {
 
         String[] arr = msg.split(" ");
         boolean isLong = arr.length > 1;
-        String reply = "";
+        String reply;
 
         if (!isLong) {
             switch (msg) {
@@ -69,8 +69,8 @@ public class Parser {
             case "deadline":
                 Task taskToBeAdded = getAppropriateTask(firstWord, msg);
                 lst.addTask(taskToBeAdded);
-                reply = "Got it. I've added this task:\n\t  "
-                    + taskToBeAdded + "\n\tNow you have "
+                reply = "Got it. I've added this task:\n  "
+                    + taskToBeAdded + "\nNow you have "
                     + lst.getNumTasks()
                     + " tasks in the list.";
 
@@ -114,7 +114,7 @@ public class Parser {
     private static String ifDeleteGetReply(TaskList taskList, String firstWord, int index, String reply) {
         if (firstWord.equals("delete")) {
             Task taskToBeDeleted = taskList.getTask(index);
-            taskList.del(index);
+            taskList.deleteTask(index);
             return "Noted. I've removed this task:" + "\n\t  " + taskToBeDeleted
                 + "\n\tNow you have " + taskList.getNumTasks() + " tasks in the list.";
         } else {

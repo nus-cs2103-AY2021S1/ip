@@ -1,3 +1,6 @@
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * The {@code Task} class represents a task that
@@ -63,5 +66,41 @@ public class Task {
 
     public String getTiming() {
         return null;
+    }
+
+    public boolean containsKey(String key) {
+        return this.description.contains(key);
+    }
+
+    /**
+     * Filters description for long String input.
+     * Used in children classes of Event and Deadline
+     * which contain additional time constraints.
+     *
+     * @param input       Full input description typed by user.
+     * @param taskKeyWord Keyword that separates time constraint from task description.
+     * @return Task Description without time constraints.
+     */
+    protected static String getDescriptionFromStringInput(String input, TimeConstraintKeyword taskKeyWord) {
+        return getFullDescriptionArray(input, taskKeyWord.getKeyWord())[0];
+    }
+
+    protected static String getTimeConstraintFromStringInput(String input, TimeConstraintKeyword taskKeyWord) {
+        return getFullDescriptionArray(input, taskKeyWord.getKeyWord())[1];
+    }
+
+    private static String[] getFullDescriptionArray(String input, String taskKeyWord) {
+        String[] inputArray = input.split(" ", 2);
+        String fullDescription = inputArray[1];
+        String[] fullDescriptionArray = fullDescription.split(taskKeyWord, 2);
+        return fullDescriptionArray;
+    }
+
+    protected static String tryFormatDateElseThrow(String timeConstraint) throws DateTimeParseException {
+        String[] timeConstraintArray = timeConstraint.split(" ", 2);
+        String potentiallyValidDate = timeConstraintArray[0];
+        String remainingTimeConstraint = timeConstraintArray[1];
+        LocalDate date = LocalDate.parse(potentiallyValidDate);
+        return date.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + " " + remainingTimeConstraint;
     }
 }

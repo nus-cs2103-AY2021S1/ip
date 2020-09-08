@@ -32,40 +32,46 @@ public class TaskList {
         return this.lst.size();
     }
 
-    public void del(int i) {
+    public void deleteTask(int i) {
         this.lst.remove(i - 1);
     }
 
-    // Overrides toString() method of Object Class to display contents of list neatly
     @Override
     public String toString() {
-        String msg = ". . . list is currently empty . . .";  // Default message given empty list
-        if (!this.lst.isEmpty()) {
-            int i = 1;
-            msg = ((i) + ". " + this.getTask(i) + "\n");
-            for (Task t : this.lst) {
-                if (i == 1) {
-                    i++;
-                    continue;
-                }
-                msg += ((i++) + ". " + t + "\n");
-            }
+
+        if (this.lst.isEmpty()) {
+            return getDefaultMessage();
+        } else {
+            return getStringTaskList();
         }
-        return msg;
     }
 
-    public String findTasksWith(String s) {
-        String msg = "";
-        int i = 1;
-        for (Task t : this.lst) {
-            if (t.getDescription().contains(s)) {
-                if (i == 1) {
-                    msg = ((i) + ". " + this.getTask(i++) + "\n");
-                } else {
-                    msg += ("\t" + (i++) + ". " + t + "\n");
-                }
-            }
+    private String getDefaultMessage() {
+        return "List is currently empty";
+    }
+
+    private String getStringTaskList() {
+        int taskNumber = 1;
+        StringBuilder stringList = new StringBuilder();
+        for (Task currTask : this.lst) {
+            stringList.append(taskNumber++ + ". " + currTask + "\n");
         }
-        return msg;
+
+        return stringList.toString();
+    }
+
+    public String findTasksWith(String key) {
+        StringBuilder tasks = new StringBuilder();
+        int index = 1;
+        for (Task currentTask : this.lst) {
+            ifContainsThenAppend(currentTask, tasks, key, index++);
+        }
+        return tasks.toString();
+    }
+
+    private void ifContainsThenAppend(Task currentTask, StringBuilder tasks, String key, int index) {
+        if (currentTask.containsKey(key)) {
+            tasks.append(index + ". " + currentTask + "\n");
+        }
     }
 }

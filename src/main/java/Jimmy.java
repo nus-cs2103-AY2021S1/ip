@@ -9,7 +9,7 @@ public class Jimmy {
 
     private final Ui ui;
     private final Storage storage;
-    private final TaskList planner;
+    private final TaskList taskList;
     private boolean isLoaded;
 
     /**
@@ -18,7 +18,7 @@ public class Jimmy {
     public Jimmy() {
         this.ui = new Ui();
         this.storage = new Storage();
-        this.planner = new TaskList();
+        this.taskList = new TaskList();
         this.isLoaded = false;
     }
 
@@ -27,7 +27,7 @@ public class Jimmy {
      * program. Method does nothing if no prior data is found.
      */
     public void loadList() {
-        storage.loadList(planner);
+        storage.loadList(taskList);
         this.isLoaded = true;
     }
 
@@ -36,7 +36,7 @@ public class Jimmy {
      * reference. Method is usually called when the program terminates.
      */
     public void saveList() {
-        storage.updateList(planner);
+        storage.updateList(taskList);
     }
 
     /**
@@ -51,7 +51,6 @@ public class Jimmy {
         boolean isExit = false;
         while (!isExit) {
             isExit = readInputPrintOutput();
-            System.out.println("reaches here");
         }
         saveList();
     }
@@ -62,11 +61,10 @@ public class Jimmy {
         try {
             String command = ui.readUserInput();
             isExit = command.equals("bye");
-            reply = Parser.parse(planner, command);
+            reply = Parser.parse(taskList, command);
         } catch (JimmyException e) {
             reply = e.getMessage();
         } finally {
-            System.out.println("reaches finally");
             ui.printOutput(reply);
         }
 
@@ -85,7 +83,7 @@ public class Jimmy {
             loadList();
         }
         try {
-            String reply = Parser.parse(planner, input);
+            String reply = Parser.parse(taskList, input);
             if (input.equals("bye")) {
                 saveList();
                 reply += "\n Click the \" X \" button to close this window.";

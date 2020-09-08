@@ -63,7 +63,6 @@ public class Ui {
      * @param input {@code String} that is formatted and printed.
      */
     public void printOutput(String input) {
-        System.out.println(this.div() +
-            "\t" + input + this.div());
+        System.out.println(this.div() + input + this.div());
     }
 }
