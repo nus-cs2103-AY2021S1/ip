@@ -41,6 +41,7 @@ public class Parser {
      * @throws DukeException
      */
     public String scenarios(String input) throws DukeException {
+        assert(input.contains(" "));
         String[] instructions = input.split(" ");
         String command = instructions[0];
         switch (command) {
@@ -84,6 +85,7 @@ public class Parser {
      */
     public static LocalDate formatDate(String dateTime) throws DukeException {
         try {
+            assert(dateTime.contains(" "));
             String[] split = dateTime.split(" ");
             String[] dayMonthYear = split[0].split("/");
             String date = dayMonthYear[2] + "-" + dayMonthYear[1] + "-";
@@ -131,6 +133,8 @@ public class Parser {
      * @return String of the time that the task is due
      */
     public static String formatTime(String time) {
+        assert((int) time.charAt(0) > '0');
+        assert((int) time.charAt(1) > '0');
         int firstHour = (int) time.charAt(0) - '0';
         int secondHour = (int) time.charAt(1) - '0';
         int hours = firstHour * 10 + secondHour;
@@ -181,6 +185,7 @@ public class Parser {
      * @throws DukeException
      */
     public static Deadline parseDeadline(String item, boolean isCompleted) throws DukeException {
+        assert(item.contains("/by "));
         String[] splitItem = item.split("/by ");
         if (splitItem.length == 1) {
             throw new DukeException("Incorrect format. Please add a deadline to finish task by.");
@@ -201,6 +206,7 @@ public class Parser {
      * @throws DukeException
      */
     public static Event parseEvent(String item, boolean isCompleted) throws DukeException {
+        assert(item.contains("/at "));
         String[] splitItem = item.split("/at ");
         if (splitItem.length == 1) {
             throw new DukeException("Incorrect format. Please add a time/date the event is held at.");

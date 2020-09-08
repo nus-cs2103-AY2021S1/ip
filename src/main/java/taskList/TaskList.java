@@ -56,7 +56,9 @@ public class TaskList {
      * @throws DukeException
      */
     public String completeItem(String input) throws DukeException {
+        assert(input.contains(" "));
         String indexString = input.split(" ")[1];
+        assert(Integer.valueOf(indexString) > 0);
         try {
             String output = "";
             Task item = todoList.get(Integer.valueOf(indexString) - 1);
@@ -78,6 +80,7 @@ public class TaskList {
      * @throws DukeException
      */
     public String deleteItem(String input) throws DukeException {
+        assert(input.contains(" "));
         String indexString = input.split(" ")[1];
         try {
             Task item = deleteItemFromTodolist(indexString);
