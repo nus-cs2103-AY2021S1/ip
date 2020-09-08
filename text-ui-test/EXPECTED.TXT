@@ -1,0 +1,7 @@
+.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.
+ Woof! I am Yuki your assigned Task Manager!
+ I have just created a new file to store all your tasks!
+ If you ever get stuck, enter help and I will be here for you!
+ So... What is my first assignment?
+ *Woof woof*
+.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.~.

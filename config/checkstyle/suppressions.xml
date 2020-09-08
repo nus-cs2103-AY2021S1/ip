@@ -13,4 +13,6 @@
     <suppress checks="MissingJavadocMethodCheck" files="./test/java/duke/ParserStub.java"/>
     <suppress checks="JavadocType" files="./test/java/duke/StorageStub.java"/>
     <suppress checks="MissingJavadocMethodCheck" files="./test/java/duke/StorageStub.java"/>
+    <suppress checks="JavadocType" files="./test/java/duke/task/DeadlineStub.java"/>
+    <suppress checks="MissingJavadocMethodCheck" files="./test/java/duke/task/DeadlineStub.java"/>
 </suppressions>
