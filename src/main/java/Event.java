@@ -18,11 +18,11 @@ public class Event extends Task {
     Event(String description, String dateAndTime, TaskType taskType) {
         super(description, taskType);
         String[] dateAndTimeSplit = dateAndTime.split(" ");
-        String[] dateSplit = dateAndTimeSplit[0].split("/");
+        String[] dateSplit = dateAndTimeSplit[1].split("/");
         this.date = LocalDate.of(Integer.parseInt(dateSplit[2]),
                 Integer.parseInt(dateSplit[1]),
                 Integer.parseInt(dateSplit[0]));
-        String[] timeSplit = dateAndTimeSplit[1].split("-");
+        String[] timeSplit = dateAndTimeSplit[2].split("-");
         String timeStartUnformatted = timeSplit[0];
         String timeStartFormatted = timeStartUnformatted.substring(0, 2)
                 + ":"
@@ -52,6 +52,11 @@ public class Event extends Task {
         this.timeEnd = timeEnd;
     }
 
+    @Override
+    public String buildSaveString() {
+        return super.buildSaveString() + "/"  + this.date + " " + this.timeStart + "-" + this.timeEnd;
+    }
+
     /**
      * Returns string representation of the Event object.
      *
@@ -59,7 +64,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[Event]" + super.toString()
+        return "[Event]" + super.toString() + " "
                 + "(at: " + this.date + " " + this.timeStart + "-" + this.timeEnd + ")";
     }
 }

@@ -10,23 +10,31 @@ public class Parser {
                 if (taskList.isEmpty()) {
                     throw new EmptyListException("There are no tasks on your list");
                 }
-                if (input.equals("help")) {
-                    ui.printHelp();
-                } else if (input.equals("add")) {
-                    Parser.processAdd(taskList, sc, ui);
-                    Storage.saveTaskChanges(taskList);
-                } else if (input.equals("list")) {
-                    ui.printList(taskList);
-                } else if (input.equals("done")) {
-                    Parser.processDone(taskList, sc, ui);
-                    Storage.saveTaskChanges(taskList);
-                } else if (input.equals("delete")) {
-                    Parser.processDelete(taskList, sc, ui);
-                    Storage.saveTaskChanges(taskList);
-                } else if (input.equals("find")) {
-                    Parser.processFind(taskList, sc, ui);
-                } else {
-                    throw new UnknownCommandException("Sorry I didn't understand that :(");
+                switch (input) {
+                    case "help":
+                        ui.printHelp();
+                        break;
+                    case "add":
+                        Parser.processAdd(taskList, sc, ui);
+                        Storage.saveTaskChanges(taskList);
+                        break;
+                    case "list":
+                        ui.printList(taskList);
+                        break;
+                    case "done":
+                        Parser.processDone(taskList, sc, ui);
+                        Storage.saveTaskChanges(taskList);
+                        break;
+                    case "delete":
+                        Parser.processDelete(taskList, sc, ui);
+                        Storage.saveTaskChanges(taskList);
+                        break;
+                    case "find":
+                        Parser.processFind(taskList, sc, ui);
+                        break;
+                    default:
+                        throw new UnknownCommandException("Sorry I didn't understand that :(");
+
                 }
             } catch (UnknownCommandException e1) {
                 ui.showUnknownCommandException(e1);

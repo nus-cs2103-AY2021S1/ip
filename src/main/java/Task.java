@@ -75,6 +75,23 @@ public class Task {
         return taskType;
     }
 
+    public String buildSaveString() {
+        String type = "";
+        switch (this.taskType) {
+            case TODO:
+                type = "T";
+                break;
+            case DEADLINE:
+                type = "D";
+                break;
+            case EVENT:
+                type = "E";
+                break;
+        }
+        String doneStatus = isDone? "1" : "0";
+        return type + "|" + doneStatus +"|" + this.description;
+    }
+
     /**
      * Returns string representation of the Task object.
      *

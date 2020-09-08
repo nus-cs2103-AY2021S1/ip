@@ -17,11 +17,11 @@ public class Deadline extends Task{
     Deadline(String description, String dateAndTime, TaskType taskType) {
         super(description, taskType);
         String[] dateAndTimeSplit = dateAndTime.split(" ");
-        String[] dateSplit = dateAndTimeSplit[0].split("/");
+        String[] dateSplit = dateAndTimeSplit[1].split("/");
         this.date = LocalDate.of(Integer.parseInt(dateSplit[2]),
                 Integer.parseInt(dateSplit[1]),
                 Integer.parseInt(dateSplit[0]));
-        String timeUnformatted = dateAndTimeSplit[1];
+        String timeUnformatted = dateAndTimeSplit[2];
         String timeFormatted = timeUnformatted.substring(0, 2)
                 + ":"
                 + timeUnformatted.substring(2, 4);
@@ -43,6 +43,11 @@ public class Deadline extends Task{
         this.time = time;
     }
 
+    @Override
+    public String buildSaveString() {
+        return super.buildSaveString() + "/"  + this.date + " " + this.time;
+    }
+
     /**
      * Returns string representation of the Deadline object.
      *
@@ -51,7 +56,7 @@ public class Deadline extends Task{
     @Override
     public String toString() {
         return "[Deadline]"
-                + super.toString()
+                + super.toString() + " "
                 + "(by: " + this.date + " " + this.time + ")";
     }
 }

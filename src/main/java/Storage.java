@@ -42,7 +42,7 @@ public class Storage {
             }
             BufferedWriter writer = new BufferedWriter(new FileWriter("./data/Tasks.txt"));
             for (int j = 0; j < taskList.getTaskListSize(); j++) {
-                writer.write(taskList.getTask(j).toString() + "\n");
+                writer.write(taskList.getTask(j).buildSaveString() + "\n");
             }
             writer.close();
         } catch (IOException e) {
@@ -50,36 +50,36 @@ public class Storage {
         }
     }
 
+    public static Task extractTask(String taskString) {
+        String[] taskStringSplit = taskString.split("\\|");
+        String taskType = taskStringSplit[0];
+        String doneStatus = taskStringSplit[1];
+        boolean isDone = doneStatus.equals("1") ? true : false;
+        String info = taskStringSplit[2];
+        if (taskType.equals("T")) {
+            return new Todo(info, TaskType.TODO, isDone);
+        } else {
+            String[] infoSplit = info.split("/");
+            String description = infoSplit[0];
+            String[] dateAndTimeSplit = infoSplit[1].split(" ");
+            LocalDate date = LocalDate.parse(dateAndTimeSplit[0]);
+            if (taskType.equals("D")) {
+                LocalTime time = LocalTime.parse(dateAndTimeSplit[1]);
+                return new Deadline(description, TaskType.DEADLINE, isDone, date, time);
+            } else {
+                String[] timePeriod = dateAndTimeSplit[1].split("-");
+                LocalTime timeStart = LocalTime.parse(timePeriod[0]);
+                LocalTime timeEnd = LocalTime.parse(timePeriod[1]);
+                return new Event(description, TaskType.EVENT, isDone, date, timeStart, timeEnd);
+            }
+        }
+    }
+
     public static List<Task> buildTasks(List<String> strings) {
         List<Task> tasks = new ArrayList<>();
         for (String taskString : strings) {
-            String[] taskStringSplit = taskString.split(" ");
-            if (taskStringSplit.length > 1) {
-                String[] descriptionSplit = taskStringSplit[0].split("]");
-                String statusIcon = descriptionSplit[1].substring(1);
-                boolean isDone = statusIcon.equals("\u2713") ? true : false;
-                String taskDescription = descriptionSplit[2] + " ";
-                LocalDate date = LocalDate.parse(taskStringSplit[2]);
-                int timeStringLength = taskStringSplit[3].length();
-                String timeString = taskStringSplit[3].substring(0, timeStringLength - 1);
-                if (timeString.length() == 5) {
-                    LocalTime time = LocalTime.parse(timeString);
-                    Task deadline = new Deadline(taskDescription, TaskType.DEADLINE, isDone, date, time);
-                    tasks.add(deadline);
-                } else {
-                    LocalTime timeStart = LocalTime.parse(timeString.split("-")[0]);
-                    LocalTime timeEnd = LocalTime.parse(timeString.split("-")[1]);
-                    Task event = new Event(taskDescription, TaskType.DEADLINE, isDone, date, timeStart, timeEnd);
-                    tasks.add(event);
-                }
-            } else {
-                String[] descriptionSplit = taskStringSplit[0].split("]");
-                String statusIcon = descriptionSplit[1].substring(1);
-                String taskDescription = descriptionSplit[2];
-                boolean isDone = statusIcon.equals("\u2713") ? true : false;
-                Task todo = new Todo(taskDescription, TaskType.TODO, isDone);
-                tasks.add(todo);
-            }
+            Task task = extractTask(taskString);
+            tasks.add(task);
         }
         return tasks;
     }
