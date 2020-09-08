@@ -3,7 +3,7 @@ package duke.command;
 import duke.Ui;
 import duke.TaskList;
 import duke.CommandType;
-import duke.InputParser;
+import duke.parser.InputParser;
 import duke.Task;
 import duke.TaskFinder;
 import duke.DukeException;
