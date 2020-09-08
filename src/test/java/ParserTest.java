@@ -3,7 +3,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 
 import main.java.com.jacob.duke.DukeException;
-import main.java.com.jacob.duke.Parser;
 import main.java.com.jacob.duke.command.ByeCommand;
 import main.java.com.jacob.duke.command.Command;
 import main.java.com.jacob.duke.command.DeadlineCommand;
@@ -14,6 +13,9 @@ import main.java.com.jacob.duke.command.FindCommand;
 import main.java.com.jacob.duke.command.PrintFilteredListDateTimeCommand;
 import main.java.com.jacob.duke.command.PrintListCommand;
 import main.java.com.jacob.duke.command.TodoCommand;
+
+import main.java.com.jacob.duke.io.Parser;
+
 
 
 public class ParserTest {

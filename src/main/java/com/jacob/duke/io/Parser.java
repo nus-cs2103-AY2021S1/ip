@@ -1,14 +1,18 @@
-package main.java.com.jacob.duke;
+package main.java.com.jacob.duke.io;
 
+import main.java.com.jacob.duke.DukeException;
 import main.java.com.jacob.duke.command.ByeCommand;
 import main.java.com.jacob.duke.command.Command;
 import main.java.com.jacob.duke.command.DeadlineCommand;
 import main.java.com.jacob.duke.command.DeleteCommand;
+import main.java.com.jacob.duke.command.DeleteNoteCommand;
 import main.java.com.jacob.duke.command.DoneCommand;
 import main.java.com.jacob.duke.command.EventCommand;
 import main.java.com.jacob.duke.command.FindCommand;
+import main.java.com.jacob.duke.command.NoteCommand;
 import main.java.com.jacob.duke.command.PrintFilteredListDateTimeCommand;
 import main.java.com.jacob.duke.command.PrintListCommand;
+import main.java.com.jacob.duke.command.PrintNoteListCommand;
 import main.java.com.jacob.duke.command.TodoCommand;
 
 public class Parser {
@@ -25,15 +29,19 @@ public class Parser {
         assert(splitStrings.length >= 1);
 
         String firstInput = splitStrings[0];
+        checkDescriptionNotEmpty(firstInput, fullCommand);
+
         Command c;
         switch (firstInput) {
         case "todo":
             c = new TodoCommand(fullCommand);
             break;
         case "deadline":
+            checkBreakpointExists("/", fullCommand, "deadline");
             c = new DeadlineCommand(fullCommand);
             break;
         case "event":
+            checkBreakpointExists("/", fullCommand, "event");
             c = new EventCommand(fullCommand);
             break;
         case "delete":
@@ -54,10 +62,32 @@ public class Parser {
         case "bye":
             c = new ByeCommand();
             break;
+        case "note":
+            checkBreakpointExists("?", fullCommand, "note");
+            c = new NoteCommand(fullCommand);
+            break;
+        case "note-list":
+            c = new PrintNoteListCommand();
+            break;
+        case "note-delete":
+            c = new DeleteNoteCommand(fullCommand);
+            break;
         default:
             throw new DukeException(" :( OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
         return c;
     }
 
+    private void checkDescriptionNotEmpty(String commandType, String fullCommand) throws DukeException {
+        if (commandType.length() + 1 >= fullCommand.length() && !fullCommand.equals("bye")
+                && !fullCommand.equals("list") && !fullCommand.equals("note-list")) {
+            throw new DukeException("A " + commandType + " cannot be empty!");
+        }
+    }
+
+    private void checkBreakpointExists(String breakpoint, String fullCommand, String commandType) throws DukeException {
+        if (!fullCommand.contains(breakpoint)) {
+            throw new DukeException("Your " + commandType + " command is incomplete!!!");
+        }
+    }
 }

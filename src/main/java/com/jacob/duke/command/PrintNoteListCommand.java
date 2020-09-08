@@ -1,23 +1,18 @@
 package main.java.com.jacob.duke.command;
-
 import java.util.List;
 
 import main.java.com.jacob.duke.DukeException;
 import main.java.com.jacob.duke.DukeList;
 import main.java.com.jacob.duke.Ui;
 import main.java.com.jacob.duke.io.Storage;
-import main.java.com.jacob.duke.task.Task;
+import main.java.com.jacob.duke.note.Note;
 
 
-public class FindCommand implements Command {
-    private String inputCommand;
-    public FindCommand(String fullCommand) {
-        this.inputCommand = fullCommand;
-    }
+public class PrintNoteListCommand implements Command {
     @Override
     public String execute(Ui ui, DukeList dukeList, Storage storage) throws DukeException {
-        List<Task> taskList = dukeList.getTaskList();
-        return ui.showKeywordList(inputCommand, taskList);
+        List<Note> noteList = dukeList.getNoteList();
+        return ui.showAllNotes(noteList);
     }
 
     @Override
