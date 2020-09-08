@@ -7,6 +7,7 @@ import duke.task.ToDo;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class TaskList {
     protected List<Task> taskList;
@@ -81,12 +82,10 @@ public class TaskList {
      * @return List of matching tasks.
      */
     public List<Task> findTasks(String keyword) {
-        List<Task> matchingTasks = new ArrayList<>();
-        for (Task task : taskList) {
-            if (task.description.contains(keyword)) {
-                matchingTasks.add(task);
-            }
-        }
+        List<Task> matchingTasks = taskList
+                .stream()
+                .filter(Task -> Task.description.contains(keyword))
+                .collect(Collectors.toList());
         return matchingTasks;
     }
 
