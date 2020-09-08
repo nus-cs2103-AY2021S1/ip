@@ -71,6 +71,9 @@ public class Parser {
         case FilterCommand.COMMAND_WORD:
             return prepareFilter(arguments);
 
+        case DefineCommand.COMMAND_WORD:
+            return prepareDefine(arguments);
+
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
@@ -143,7 +146,7 @@ public class Parser {
         if (!matcher.matches()) {
             return new IncorrectCommand("Please pass a keyword to search for.");
         }
-        return new FindCommand(matcher.group("keywords"));
+        return new FindCommand(matcher.group("keyword"));
     }
 
     private Command prepareFilter(String args) {
@@ -158,6 +161,14 @@ public class Parser {
         } catch (DateTimeParseException e) {
             return new IncorrectCommand("Please pass a proper date to filter by.");
         }
+    }
+
+    private Command prepareDefine(String args) {
+        final Matcher matcher = KEYWORDS_ARGS_FORMAT.matcher(args.trim());
+        if (!matcher.matches()) {
+            return new IncorrectCommand("Please enter a word to define.");
+        }
+        return new DefineCommand(matcher.group("keyword"));
     }
 
 }
