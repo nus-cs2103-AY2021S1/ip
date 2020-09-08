@@ -21,10 +21,22 @@ public class Todo extends Task {
         this.date = LocalDateTime.now();
     }
 
+    /**
+     * Creates a Todo object
+     * @param task Task to be added
+     * @return Todo
+     */
     public static Todo createTodo(String task) {
         return new Todo(task);
     }
 
+    /**
+     * Returns a string representation of a Todo Object
+     * [T][X]** (task) for tasks marked as Important
+     * [T][X] (task) for tasks not marked as Important
+     * X for Undone Task, O for Done Task.
+     * @return String
+     */
     @Override
     public String toString() {
         String done = this.done ? "O" : "X";
