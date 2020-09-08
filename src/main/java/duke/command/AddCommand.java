@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.Priority;
 import duke.Storage;
 import duke.TaskList;
 import duke.TaskType;
@@ -17,10 +16,9 @@ public class AddCommand extends Command {
      */
     public static final String MESSAGE_SUCCESS = "Got it. I've added this task:\n%s\n%s";
 
-    private String description;
-    private String date;
-    private TaskType type;
-    private Priority priority;
+    protected String description;
+    protected String date;
+    protected TaskType type;
 
     /**
      * Constructs a new instance of an AddCommand.
@@ -55,15 +53,4 @@ public class AddCommand extends Command {
         return false;
     }
 
-    public String getDescription() {
-        return this.description;
-    }
-
-    public String date() {
-        return this.date;
-    }
-
-    public TaskType getType() {
-        return this.type;
-    }
 }
