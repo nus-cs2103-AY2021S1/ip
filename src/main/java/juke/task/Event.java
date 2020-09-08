@@ -31,7 +31,14 @@ public class Event extends Task {
                 type,
                 super.taskSaver(),
                 at.format(DateTimeFormatter.ISO_LOCAL_DATE));
-        // return type + "/" + super.taskSaver() + "/" + at.format(DateTimeFormatter.ISO_LOCAL_DATE);
+    }
+
+    /**
+     * Sets the At date to given date
+     * @param at New Date to be changed to.
+     */
+    public void setAtDate(LocalDate at) {
+        this.at = at;
     }
 
     /**

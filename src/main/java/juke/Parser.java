@@ -1,10 +1,10 @@
 package juke;
 
-import juke.exception.EmptyDescriptionException;
-import juke.exception.EmptyTimeException;
-import juke.exception.UnknownCommandException;
-import juke.exception.UnknownTaskException;
-import juke.exception.UnknownTimeException;
+import juke.command.update.UpdateCommand;
+import juke.command.update.UpdateDateCommand;
+import juke.command.update.UpdateDescriptionAndDateCommand;
+import juke.command.update.UpdateDescriptionCommand;
+import juke.exception.*;
 
 import juke.task.Deadline;
 import juke.task.Event;
@@ -33,7 +33,6 @@ public class Parser {
     protected Command commandHandler(String inputText) {
         try {
             String[] splitArr = inputText.split(" ");
-
             String command = splitArr[0];
 
             switch (command) {
@@ -53,9 +52,12 @@ public class Parser {
                 return this.handleDeadlineCommand(inputText, splitArr);
             case ("event"):
                 return this.handleEventCommand(inputText, splitArr);
+            case ("update"):
+                return this.handleUpdateCommand(inputText);
             default:
                 throw new UnknownCommandException("Unknown command entered");
             }
+
         } catch (EmptyDescriptionException empty) {
             return new ErrorCommand("Mate, you've gotta let me know what you're gonna be doing.");
         } catch (UnknownCommandException com) {
@@ -66,6 +68,8 @@ public class Parser {
             return new ErrorCommand("There has to be a time, surely. Don't leave it blank!");
         } catch (UnknownTaskException ex) {
             return new ErrorCommand("C'mon, I don't live in your head, you gotta tell me the task number!");
+        } catch (InvalidArgumentsException ex) {
+            return new ErrorCommand("You haven't provided the needed arguments, dumbo!");
         }
     }
 
@@ -145,5 +149,32 @@ public class Parser {
         String description = newSplitArr[0];
         String by = newSplitArr[1];
         return new TaskCommand(new Deadline(description, by));
+    }
+
+    private UpdateCommand handleUpdateCommand(String inputText) throws InvalidArgumentsException {
+
+        String[] splitByIndex = inputText.split("/number ");
+        String[] splitByDescription = inputText.split("/description ");
+        String[] splitByDate = inputText.split("/date ");
+
+        boolean isUpdateDate = splitByDate.length > 1;
+        boolean isUpdateDescription = splitByDescription.length > 1;
+        boolean isUpdateBothDateAndDescription = isUpdateDescription && isUpdateDate;
+
+        int index = Integer.parseInt(splitByIndex[1].split(" /")[0]) - 1;
+
+        if (isUpdateBothDateAndDescription) {
+            String date = splitByDate[1];
+            String description = splitByDescription[1];
+            return new UpdateDescriptionAndDateCommand(index, description, date);
+        } else if (isUpdateDate) {
+            String date = splitByDate[1];
+            return new UpdateDateCommand(index, date);
+        } else if (isUpdateDescription) {
+            String description = splitByDescription[1];
+            return new UpdateDescriptionCommand(index, description);
+        } else {
+            throw new InvalidArgumentsException("Arguments not provided");
+        }
     }
 }

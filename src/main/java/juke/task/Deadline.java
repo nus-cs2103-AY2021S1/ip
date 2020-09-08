@@ -31,7 +31,14 @@ public class Deadline extends Task {
                 type,
                 super.taskSaver(),
                 by.format(DateTimeFormatter.ISO_LOCAL_DATE));
-        // return type + "/" + super.taskSaver() + "/" + by.format(DateTimeFormatter.ISO_LOCAL_DATE);
+    }
+
+    /**
+     * Sets the by date for Deadline.
+     * @param by New date to change to.
+     */
+    public void setByDate(LocalDate by) {
+        this.by = by;
     }
 
     /**
