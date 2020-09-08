@@ -30,6 +30,7 @@ public class MainWindow<List> extends AnchorPane {
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Pikachu.png"));
 
     private final Runnable handleExit = () -> {
+        assert !userInput.isDisabled() && !sendButton.isDisabled() : "userInput and sendButton shouldn't be disabled";
         userInput.setDisable(true);
         sendButton.setDisable(true);
     };

@@ -37,6 +37,11 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage, Map<String, Runnable> runnables)
             throws EmptyBodyException, UnknownInputException {
+        assert tasks != null : "tasks shouldn't be null";
+        assert ui != null : "ui shouldn't be null";
+        assert storage != null : "storage shouldn't be null";
+        assert runnables != null : "runnables shouldn't be null";
+
         switch (this.type) {
         case "todo": {
             Task newTodo = new Todo(description);
