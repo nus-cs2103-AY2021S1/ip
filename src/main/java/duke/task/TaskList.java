@@ -8,10 +8,10 @@ import duke.common.DukeException;
  * Represents all of the users tasks in a list.
  */
 public class TaskList {
-    private static ArrayList<Task> tasks;
+    private ArrayList<Task> tasks;
 
     public TaskList(ArrayList<Task> tasks) {
-        TaskList.tasks = tasks;
+        this.tasks = tasks;
     }
 
     /**
