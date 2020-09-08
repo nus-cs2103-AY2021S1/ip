@@ -14,15 +14,11 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.fail;
 
-import ikura.Bot;
 import ikura.Database;
 import ikura.TaskList;
-import ikura.TextFrontend;
-
 import ikura.util.Pair;
+import ikura.TextFrontend;
 import ikura.util.Either;
-
-import java.util.Arrays;
 
 public class MainTest {
 
@@ -68,12 +64,6 @@ public class MainTest {
             .reduce((a, b) -> a + '\n' + b)
             .get()
             + '\n';
-
-        var x = output.getBytes();
-        var y = test.snd().getBytes();
-
-        System.err.printf("actual = %s\n\n", Arrays.toString(x));
-        System.err.printf("expect = %s\n\n", Arrays.toString(y));
 
         if (!output.equals(test.snd())) {
             try {

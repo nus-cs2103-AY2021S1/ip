@@ -1,7 +1,7 @@
 plugins {
     id 'java'
     id 'application'
-    // id 'checkstyle'
+    id 'checkstyle'
     id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
 
@@ -39,7 +39,7 @@ test {
         exceptionFormat "full"
         showCauses true
         showStackTraces true
-        showStandardStreams = true
+        showStandardStreams = false
     }
 
     systemProperty "file.encoding", "utf-8"
@@ -54,9 +54,9 @@ shadowJar {
     archiveClassifier = null
 }
 
-// checkstyle {
-//     toolVersion = '8.29'
-// }
+checkstyle {
+    toolVersion = '8.29'
+}
 
 run {
     systemProperty "file.encoding", "utf-8"
