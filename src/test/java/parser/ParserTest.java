@@ -17,7 +17,7 @@ public class ParserTest {
         try {
             Parser.input(Command.TODO, 1, true);
         } catch (MugException ex) {
-            String expect = "HEY!!! Don't be stingy give MUG more information >.<";
+            String expect = "HEY!!! Don't be stingy give Mug more information >.<";
             assertEquals(expect, ex.getMessage());
         }
     }
@@ -27,7 +27,7 @@ public class ParserTest {
         try {
             Parser.info(Command.TODO, "", true);
         } catch (MugException ex) {
-            String expect = "HEY!!! Don't be stingy give MUG more information >.<";
+            String expect = "HEY!!! Don't be stingy give Mug more information >.<";
             assertEquals(expect, ex.getMessage());
         }
     }

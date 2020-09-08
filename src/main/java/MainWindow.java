@@ -32,6 +32,9 @@ public class MainWindow extends AnchorPane {
                 + "What can Mug do for you ?_?";
     }
 
+    /**
+     * Initials the Mug main window.
+     */
     @FXML
     public void initialize() {
         DialogBox welcome = DialogBox.getMugDialog(MainWindow.welcome(), mugImage);
