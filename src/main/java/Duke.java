@@ -100,18 +100,18 @@ public class Duke {
                         String toAdd = command.split(" ", 2)[1];
                         tasks.add(new Todo(toAdd));
                         int length = tasks.size();
-                        System.out.println(Speaking.ADD.line + tasks.get(length-1) +
+                        System.out.println(Speaking.ADD.line + tasks.get(length - 1) +
                                 "\nYou now have " + length + (length == 1 ? " thing" : " things") + " in your list");
                     } catch (Exception e) {
                         throw new main.java.DukeException(Speaking.INVALIDINPUT.line + " Did you put your task after a space?");
                     }
                 } else if (getFirstWord(command).equals("deadline")) {
                     try {
-                        String wholeTask = command.split(" ",2)[1];
+                        String wholeTask = command.split(" ", 2)[1];
                         String[] descAndDeadline = wholeTask.split(" /by ");
                         tasks.add(new Deadline(descAndDeadline[0], LocalDate.parse(descAndDeadline[1])));
                         int length = tasks.size();
-                        System.out.println(Speaking.ADD.line + tasks.get(length-1) +
+                        System.out.println(Speaking.ADD.line + tasks.get(length - 1) +
                                 "\nYou now have " + length + (length == 1 ? " thing" : " things") + " in your list");
                     } catch (Exception e) {
                         throw new main.java.DukeException(Speaking.INVALIDINPUT.line
@@ -119,11 +119,11 @@ public class Duke {
                     }
                 } else if (getFirstWord(command).equals("event")) {
                     try {
-                        String wholeTask = command.split(" ",2)[1];
+                        String wholeTask = command.split(" ", 2)[1];
                         String[] descAndTime = wholeTask.split(" /at ");
                         tasks.add(new Event(descAndTime[0], LocalDate.parse(descAndTime[1])));
                         int length = tasks.size();
-                        System.out.println(Speaking.ADD.line + tasks.get(length-1) +
+                        System.out.println(Speaking.ADD.line + tasks.get(length - 1) +
                                 "\nYou now have " + length + (length == 1 ? " thing" : " things") + " in your list");
                     } catch (Exception e) {
                         throw new main.java.DukeException(Speaking.INVALIDINPUT.line
@@ -139,6 +139,19 @@ public class Duke {
                                 "\nYou now have " + length + (length == 1 ? " thing" : " things") + " in your list");
                     } catch (Exception e) {
                         throw new main.java.DukeException(Speaking.INVALIDINPUT.line + " Specify the task number correctly.");
+                    }
+                } else if (getFirstWord(command).equals("update")) {
+                    try {
+                        int taskNumber = parseInt(command.split(" ")[1]) - 1;
+                        Task taskToBeEdited = tasks.get(taskNumber);
+                        System.out.println("You're so troublesome... What updated task description do you want?");
+                        String newTaskDesc = sc.nextLine();
+                        taskToBeEdited.editDescription(newTaskDesc);
+                        System.out.println("Donezorimasu. Your task is now: \n    " + taskToBeEdited);
+                        // TODO: for event and deadline, edit deadline
+                    } catch (Exception e) {
+                        throw new DukeException(Speaking.INVALIDINPUT.line
+                                + " Did you specify the task number correctly?");
                     }
                 } else {
                     throw new main.java.DukeException(Speaking.INVALIDCOMMAND.line);
