@@ -9,7 +9,7 @@ import duke.ui.Ui;
 import duke.util.IndexDescriptionPair;
 
 /**
- * TagCommand deletes the task specified in the tasklist
+ * TagCommand add a tag to the task specified in the tasklist
  */
 public class TagCommand extends Command {
     public TagCommand(String commandString) {
