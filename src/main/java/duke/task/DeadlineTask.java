@@ -39,8 +39,12 @@ public class DeadlineTask extends Task {
 
     @Override
     public String toString() {
-        return "[D][" + getStatusIcon() + "] " + description + " (by: "
-                + deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy, hh:mm a")) + ")";
+        return getPriority().isEmpty()
+            ? "[D][" + getStatusIcon() + "] " + description + " (by: "
+                + deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy, hh:mm a")) + ")"
+            : "[D][" + getStatusIcon() + "] " + description + " (by: "
+                + deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy, hh:mm a")) + ")"
+                + " Priority: " + getPriority();
     }
 
 }

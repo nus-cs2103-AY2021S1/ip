@@ -38,8 +38,12 @@ public class EventTask extends Task {
 
     @Override
     public String toString() {
-        return "[E][" + getStatusIcon() + "] " + description + " (by: "
-                + timing.format(DateTimeFormatter.ofPattern("d MMM yyyy, hh:mm a")) + ")";
+        return getPriority().isEmpty()
+            ? "[E][" + getStatusIcon() + "] " + description + " (by: "
+                + timing.format(DateTimeFormatter.ofPattern("d MMM yyyy, hh:mm a")) + ")"
+            : "[E][" + getStatusIcon() + "] " + description + " (by: "
+                + timing.format(DateTimeFormatter.ofPattern("d MMM yyyy, hh:mm a")) + ")"
+                + " Priority: " + getPriority();
     }
 
 }

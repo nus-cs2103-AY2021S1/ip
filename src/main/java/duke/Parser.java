@@ -52,7 +52,7 @@ public class Parser {
             return new ListCommand();
         case "find":
             return new FindCommand(commands[1]);
-        case "add priority":
+        case "addpriority":
             return preparePriority(commands[1]);
         default:
             throw new InvalidCommandException("Invalid Command: " + commands[0]);

@@ -14,6 +14,8 @@ public class TodoTask extends Task {
 
     @Override
     public String toString() {
-        return "[T][" + getStatusIcon() + "] " + description;
+        return getPriority().isEmpty()
+            ? "[T][" + getStatusIcon() + "] " + description
+            : "[T][" + getStatusIcon() + "] " + description + " Priority: " + getPriority();
     }
 }
