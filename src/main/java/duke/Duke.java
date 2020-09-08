@@ -25,26 +25,8 @@ public class Duke {
         tasks = new TaskList(storage.load());
     }
 
-    public void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
-    }
-
     public String getResponse(String input) {
+        assert input != null : "Input should not be null";
         try {
             Command c = Parser.parse(input);
             return c.execute(tasks, ui, storage);

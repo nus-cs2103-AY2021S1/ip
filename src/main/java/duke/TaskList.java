@@ -21,6 +21,7 @@ public class TaskList {
     }
 
     public void addTask(Task task) {
+        assert task != null : "Task should not be null";
         tasks.add(task);
     }
 
@@ -45,6 +46,7 @@ public class TaskList {
     }
 
     public static String getTaskMessage(List<Task> tasks) {
+        assert tasks != null : "Tasks should not be null";
         StringBuilder taskMessage = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
             String task = String.format("\n\t%d. %s", (i + 1), tasks.get(i));
