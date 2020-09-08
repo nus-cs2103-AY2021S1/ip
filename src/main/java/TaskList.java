@@ -26,11 +26,31 @@ public class TaskList {
     public void doneTask(int taskIndex){
         tasks.get(taskIndex).markAsDone();
     }
+
     public void showTaskList(){
         System.out.println("Here are the tasks in your list:" + "\n");
         for (int i = 0; i < getSize(); i++) {
             Integer listNum = i + 1;
             System.out.println(listNum.toString() + "." + tasks.get(i).toString());
+        }
+    }
+
+    public void findKeyword(String keyword){
+        ArrayList<Task> keyTasks = new ArrayList<>();
+        for(int i = 0; i < getSize(); i++){
+            if(this.tasks.get(i).description.contains(keyword)){
+                keyTasks.add(this.tasks.get(i));
+            }
+        }
+
+        if(keyTasks.size() == 0){
+            System.out.println("Sorry there is no matching task :-(");
+        }
+
+        System.out.println("Here are the matching tasks in your list:\n");
+        for(int i = 0; i < keyTasks.size(); i++){
+            Integer listNum = i + 1;
+            System.out.println(listNum.toString() + "." + keyTasks.get(i).toString());
         }
     }
 }
