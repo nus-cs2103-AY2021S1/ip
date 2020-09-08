@@ -7,9 +7,10 @@ public class Deadline extends Task {
     protected LocalDate date;
 
     /**
-     * Initialise a deadline.
-     * @param desc contains description.
-     * @param by contains deadline.
+     * Initialises a deadline.
+     *
+     * @param desc Description of Deadline.
+     * @param by Due date of deadline.
      */
     public Deadline(String desc, String by) {
         super(desc);
@@ -31,4 +32,5 @@ public class Deadline extends Task {
                     + by + ")";
         }
     }
+    
 }

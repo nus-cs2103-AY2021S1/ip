@@ -19,12 +19,18 @@ public class Duke {
      * Runs the Duke by initialise the Parser.
      */
     public void run() {
-        Parser parser = new Parser(ui);
-        parser.parser(tasks, filePath);
+        Parser parser = new Parser(tasks, ui);
+        parser.parser(filePath);
     }
 
+    /**
+     * Generates response from Duke based on user input.
+     *
+     * @param input Input from user.
+     * @return Response by Duke.
+     */
     public String getResponse(String input){
-        Parser parser = new Parser(this.ui);
+        Parser parser = new Parser(tasks, this.ui);
         String output = parser.parser(input, this.tasks);
         return "Duke: " + "\n" + output;
     }

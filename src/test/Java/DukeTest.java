@@ -26,7 +26,7 @@ public class DukeTest {
         Event event = new Event("stay behind", "today");
         String desc = "event stay behind /at today";
         assertEquals(event.toString(),
-                Parser.taskClassify(desc).toString());
+                Parser.classifyTasks(desc).toString());
     }
 
 

@@ -6,156 +6,226 @@ import java.util.Scanner;
 
 public class Parser {
     private Ui ui;
+    private TaskList tasks;
 
-    public Parser(Ui ui) {
+    public Parser(TaskList tasks, Ui ui) {
+        this.tasks = tasks;
         this.ui = ui;
     }
 
     /**
-     * Processes inputs from the user.
-     * @param tasks TaskList containing all tasks.
-     * @param filePath for path of file.
+     * Processes inputs from the user from terminal.
+     * Parses and generates output to terminal.
+     *
+     * @param filePath Path of file as string.
      */
-    public void parser(TaskList tasks, String filePath) {
+    public void parser(String filePath) {
         Scanner scanner = new Scanner(System.in);
         Path path = Paths.get(filePath);
 
         while (scanner.hasNextLine()) {
             String line = scanner.nextLine();
             if (line.equals("bye")) {
-                ui.bye();
+                ui.displayBye();
                 break;
             } else if (line.equals("list")) {
-                ui.list(tasks);
+                ui.displayList(tasks);
             } else {
                 String[] words = line.split("\\s+");
                 if (words[0].equals("done")) {
-                    try {
-                        int index = completeDelete(line, tasks.size());
-                        tasks.get(index).setDone();
-                        Storage.fileUpdate(tasks, path);
-                        ui.done(tasks, index);
-                    } catch (DukeException e) {
-                        System.out.println(e.getMessage());
-                    }
+                    performDone(line, path);
                 } else if (words[0].equals("delete")) {
-                    try {
-                        int index = completeDelete(line, tasks.size());
-                        ui.remove(tasks, index);
-                        tasks.delete(index);
-                        Storage.fileUpdate(tasks, path);
-                    } catch (DukeException e) {
-                        System.out.println(e.getMessage());
-                    }
+                    performDelete(line, path);
                 } else if (words[0].equals("find")) {
-                    if (words.length > 1) {
-                        String keyword = line.substring(5);
-                        TaskList matches = matchFinder(tasks, keyword);
-                        ui.foundMatches(matches);
-                    }
+                    performFind(words, line);
                 } else {
-                    try {
-                        Task task = taskClassify(line);
-                        tasks.add(task);
-                        Storage.fileUpdate(tasks, path);
-                        ui.add(task, tasks.size());
-                    } catch (DukeException e) {
-                        System.out.println(e.getMessage());
-                    }
+                    performClassify(line, path);
                 }
             }
         }
     }
 
+    /**
+     * Processes the "done" command and displays msg in terminal.
+     *
+     * @param line Input from user.
+     * @param path Path of file as string.
+     */
+    public void performDone(String line, Path path) {
+        try {
+            int index = findIndex(line, tasks.size());
+            tasks.get(index).setDone();
+            Storage.updateFile(tasks, path);
+            ui.displayDone(tasks, index);
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
-    public String parser(String line, TaskList tasks) {
-        Path path = Paths.get("./duke.txt");
-        if (line.equals("bye")) {
-            return "Bye! Hope to see you again ;)";
-        } else if (line.equals("list")) {
-            int count = 1;
-            String string = "";
-            for (Task task : tasks.getList()) {
-                if (count == tasks.size()) {
-                    string += count + "." + task.toString();
-                } else {
-                    string += count + "." + task.toString() + "\n";
-                    count++;
-                }
-            }
-            return string;
-        } else {
-            String[] words = line.split("\\s+");
-            if (words[0].equals("done")) {
-                try {
-                    int index = completeDelete(line, tasks.size());
-                    tasks.get(index).setDone();
-                    Storage.fileUpdate(tasks, path);
-                    String string = "Nice! I've marked this task as done:" + "\n";
-                    string += tasks.get(index).toString();
-                    return string;
-                } catch (DukeException e) {
-                    return e.getMessage();
-                }
-            } else if (words[0].equals("delete")) {
-                try {
-                    int index = completeDelete(line, tasks.size());
-                    String string = "Noted. I've removed this task:" + "\n";
-                    string += tasks.get(index).toString() + "\n";
-                    string += "Now you have " + (tasks.size() - 1) + " tasks in the list.";
-                    tasks.delete(index);
-                    Storage.fileUpdate(tasks, path);
-                    return string;
-                } catch (DukeException e) {
-                    return e.getMessage();
-                }
-            } else if (words[0].equals("find")) {
-                if (words.length > 1) {
-                    String keyword = line.substring(5);
-                    TaskList matches = matchFinder(tasks, keyword);
-                    String string = "Here are the matching tasks in your list:" + "\n";
-                    int counter = 1;
-                    for (Task task : matches.getList()) {
-                        if (counter == tasks.size()) {
-                            string += counter + "." + task.toString();
-                        } else {
-                            string += counter + "." + task.toString() + "\n";
-                            counter++;
-                        }
-                    }
-                    if (counter == 1) {
-                        return "There are no matching tasks in your list :(";
-                    }
-                    return string;
-                } else {
-                    return "OOPS!! Missing keyword to find!";
-                }
-            } else {
-                try {
-                    Task task = taskClassify(line);
-                    tasks.add(task);
-                    Storage.fileUpdate(tasks, path);
-                    String string = "Got it. I've added this task:" + "\n";
-                    string += "  " + task.toString() + "\n";
-                    string += "Now you have " + tasks.size() + " tasks in the list.";
-                    return string;
+    /**
+     * Processes the "delete" command and displays msg in terminal.
+     *
+     * @param line Input from user.
+     * @param path Path of file as string.
+     */
+    public void performDelete(String line, Path path) {
+        try {
+            int index = findIndex(line, tasks.size());
+            ui.displayRemove(tasks, index);
+            tasks.delete(index);
+            Storage.updateFile(tasks, path);
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+    }
 
-                } catch (DukeException e) {
-                    return e.getMessage();
-                }
-            }
+    /**
+     * Processes the "find" command and displays msg in terminal.
+     *
+     * @param words Array containing words in input from user.
+     * @param line Input from user.
+     */
+    public void performFind(String[] words, String line) {
+        if (words.length > 1) {
+            String keyword = line.substring(5);
+            TaskList matches = findMatches(tasks, keyword);
+            ui.displayMatches(matches);
         }
     }
 
 
     /**
-     * returns the index of task to be deleted/completed if possible.
-     * @param str input line from user.
-     * @param numTask total number of tasks.
-     * @return int index of task in TaskList.
-     * @throws DukeException if input is invalid or out of bounds.
+     * Classifies and adds the task based on user input and displays msg in terminal.
+     *
+     * @param line Input from user.
+     * @param path Path of file as string.
      */
-    public static int completeDelete(String str, int numTask) throws DukeException {
+    public void performClassify(String line, Path path) {
+        try {
+            Task task = classifyTasks(line);
+            tasks.add(task);
+            Storage.updateFile(tasks, path);
+            ui.displayAdd(task, tasks.size());
+        } catch (DukeException e) {
+            System.out.println(e.getMessage());
+        }
+    }
+
+    /**
+     * Processes inputs from the user from GUI.
+     * Parses and generates output to GUI.
+     *
+     * @param line Input from user..
+     * @param tasks TaskList containing pre-existing tasks.
+     */
+    public String parser(String line, TaskList tasks) {
+        Path path = Paths.get("./duke.txt");
+        if (line.equals("bye")) {
+            return "Bye! Hope to see you again ;)";
+        } else if (line.equals("list")) {
+            return giveStringList();
+        } else {
+            String[] words = line.split("\\s+");
+            if (words[0].equals("done")) {
+                return giveStringDone(line, path);
+            } else if (words[0].equals("delete")) {
+                return giveStringDelete(line, path);
+            } else if (words[0].equals("find")) {
+                return giveStringFind(words, line, path);
+            } else {
+                return giveStringClassify(line, path);
+            }
+        }
+    }
+
+    public String giveStringList() {
+        int count = 1;
+        String string = "";
+        for (Task task : tasks.getList()) {
+            if (count == tasks.size()) {
+                string += count + "." + task.toString();
+            } else {
+                string += count + "." + task.toString() + "\n";
+                count++;
+            }
+        }
+        return string;
+    }
+
+    public String giveStringDone(String line, Path path) {
+        try {
+            int index = findIndex(line, tasks.size());
+            tasks.get(index).setDone();
+            Storage.updateFile(tasks, path);
+            String string = "Nice! I've marked this task as done:" + "\n";
+            string += tasks.get(index).toString();
+            return string;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
+    public String giveStringDelete(String line, Path path) {
+        try {
+            int index = findIndex(line, tasks.size());
+            String string = "Noted. I've removed this task:" + "\n";
+            string += tasks.get(index).toString() + "\n";
+            string += "Now you have " + (tasks.size() - 1) + " tasks in the list.";
+            tasks.delete(index);
+            Storage.updateFile(tasks, path);
+            return string;
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
+    public String giveStringFind(String[] words, String line, Path path) {
+        if (words.length > 1) {
+            String keyword = line.substring(5);
+            TaskList matches = findMatches(tasks, keyword);
+            String string = "Here are the matching tasks in your list:" + "\n";
+            int counter = 1;
+            for (Task task : matches.getList()) {
+                if (counter == tasks.size()) {
+                    string += counter + "." + task.toString();
+                } else {
+                    string += counter + "." + task.toString() + "\n";
+                    counter++;
+                }
+            }
+            if (counter == 1) {
+                return "There are no matching tasks in your list :(";
+            }
+            return string;
+        } else {
+            return "OOPS!! Missing keyword to find!";
+        }
+    }
+
+    public String giveStringClassify(String line, Path path) {
+        try {
+            Task task = classifyTasks(line);
+            tasks.add(task);
+            Storage.updateFile(tasks, path);
+            String string = "Got it. I've added this task:" + "\n";
+            string += "  " + task.toString() + "\n";
+            string += "Now you have " + tasks.size() + " tasks in the list.";
+            return string;
+
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
+    }
+
+    /**
+     * Returns the index of task to be deleted/completed if possible.
+     *
+     * @param str Input line from user.
+     * @param numTask Total number of tasks.
+     * @return Index of task in TaskList.
+     * @throws DukeException If input is invalid or out of bounds.
+     */
+    public static int findIndex(String str, int numTask) throws DukeException {
         String[] words = str.split("\\s+");
         int len = words.length;
         if (len == 2) {
@@ -172,6 +242,12 @@ public class Parser {
         throw new DukeException("OOPS!!! Invalid task provided.");
     }
 
+    /**
+     * Reads the data in file.
+     *
+     * @param file File to be read from.
+     * @return TaskList containing all the tasks in the file.
+     */
     public static TaskList reader(File file) {
         try {
             Scanner s = new Scanner(file);
@@ -181,27 +257,7 @@ public class Parser {
                 String splitOn = "\\s*@\\s*";
                 String[] words = line.split(splitOn);
                 int done = Integer.parseInt(words[1]);
-                if (words.length == 3) {
-                    ToDo toDo = new ToDo(words[2]);
-                    if (done == 1) {
-                        toDo.setDone();
-                    }
-                    tasks.add(toDo);
-                } else {
-                    if (words[0].equals("[E]")) {
-                        Event event = new Event(words[2], words[3]);
-                        if (done == 1) {
-                            event.setDone();
-                        }
-                        tasks.add(event);
-                    } else {
-                        Deadline deadline = new Deadline(words[2], words[3]);
-                        if (done == 1) {
-                            deadline.setDone();
-                        }
-                        tasks.add(deadline);
-                    }
-                }
+                processData(words, done, tasks);
             }
             return tasks;
         } catch (FileNotFoundException e) {
@@ -210,7 +266,45 @@ public class Parser {
         }
     }
 
-    public static TaskList matchFinder(TaskList tasks, String keyword) {
+    /**
+     * Processes the data in the file based on its syntax and adds tasks to TaskList.
+     *
+     * @param words Array containing words in a single line.
+     * @param done Int that represents whether the task is done.
+     * @param tasks TaskList where tasks are to be added to.
+     */
+    public static void processData(String[] words, int done, TaskList tasks) {
+        if (words.length == 3) {
+            ToDo toDo = new ToDo(words[2]);
+            if (done == 1) {
+                toDo.setDone();
+            }
+            tasks.add(toDo);
+        } else {
+            if (words[0].equals("[E]")) {
+                Event event = new Event(words[2], words[3]);
+                if (done == 1) {
+                    event.setDone();
+                }
+                tasks.add(event);
+            } else {
+                Deadline deadline = new Deadline(words[2], words[3]);
+                if (done == 1) {
+                    deadline.setDone();
+                }
+                tasks.add(deadline);
+            }
+        }
+    }
+
+    /**
+     * Finds matching tasks in TaskList based on keywords.
+     *
+     * @param tasks TaskList containing all current tasks.
+     * @param keyword Keyword.
+     * @return TaskLst containing only matching tasks.
+     */
+    public static TaskList findMatches(TaskList tasks, String keyword) {
         TaskList matches = new TaskList();
         for (Task task : tasks.getList()) {
             String desc = task.desc;
@@ -223,85 +317,124 @@ public class Parser {
 
     /**
      * Returns the task of correct type based on input.
-     * @param str input by user.
-     * @return task.
-     * @throws DukeException for any invalid inputs.
+     *
+     * @param str Input by user.
+     * @return Task.
+     * @throws DukeException For any invalid inputs.
      */
-    public static Task taskClassify(String str) throws DukeException {
+    public static Task classifyTasks(String str) throws DukeException {
         String[] words = str.split("\\s+");
         int len = words.length;
 
         switch (words[0]) {
             case "todo":
-                if (len == 1) {
-                    throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
-                } else {
-                    String desc = "";
-                    for (int i = 1; i < len; i++) {
-                        if (i == len - 1) {
-                            desc += words[i];
-                            break;
-                        }
-                        desc += words[i] + " ";
-                    }
-                    return new ToDo(desc);
-                }
+                return giveTodo(words, len);
             case "deadline":
-                if (len == 1) {
-                    throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
-                } else {
-                    String desc = "";
-                    String time = "";
-                    int count = 0;
-                    for (int i = 1; i < len; i++) {
-                        if (words[i].equals("/by")) {
-                            count = i + 1;
-                            desc = desc.substring(0, desc.length() - 1);
-                            break;
-                        }
-                        desc += words[i] + " ";
-                    }
-                    if (count == 0 || count == len) {
-                        throw new DukeException("OOPS!!! The date/time of a deadline cannot be empty.");
-                    }
-                    for (int j = count; j < len; j++) {
-                        if (j == len - 1) {
-                            time += words[j];
-                            break;
-                        }
-                        time += words[j] + " ";
-                    }
-                    return new Deadline(desc, time);
-                }
+                return giveDeadline(words, len);
             case "event":
-                if (len == 1) {
-                    throw new DukeException("OOPS!!! The description of a event cannot be empty.");
-                } else {
-                    String desc = "";
-                    String time = "";
-                    int count = 0;
-                    for (int i = 1; i < len; i++) {
-                        if (words[i].equals("/at")) {
-                            count = i + 1;
-                            desc = desc.substring(0, desc.length() - 1);
-                            break;
-                        }
-                        desc += words[i] + " ";
-                    }
-                    if (count == 0 || count == len) {
-                        throw new DukeException("OOPS!!! The date/time of a event cannot be empty.");
-                    }
-                    for (int j = count; j < len; j++) {
-                        if (j == len - 1) {
-                            time += words[j];
-                            break;
-                        }
-                        time += " " + words[j];
-                    }
-                    return new Event(desc, time);
-                }
+                return giveEvent(words, len);
             default:
                 throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
     }
+
+
+    /**
+     * Creates a ToDo based on user input.
+     *
+     * @param words Array containing words in input of user.
+     * @param len Number of current tasks.
+     * @return ToDo.
+     * @throws DukeException For any invalid input.
+     */
+    public static ToDo giveTodo(String[] words, int len) throws DukeException {
+        if (len == 1) {
+            throw new DukeException("OOPS!!! The description of a todo cannot be empty.");
+        } else {
+            String desc = "";
+            for (int i = 1; i < len; i++) {
+                if (i == len - 1) {
+                    desc += words[i];
+                    break;
+                }
+                desc += words[i] + " ";
+            }
+            return new ToDo(desc);
+        }
+    }
+
+    /**
+     * Creates a Deadline based on user input.
+     *
+     * @param words Array containing words in input of user.
+     * @param len Number of current tasks.
+     * @return Deadline.
+     * @throws DukeException For any invalid input.
+     */
+    public static Deadline giveDeadline(String[] words, int len) throws DukeException {
+        if (len == 1) {
+            throw new DukeException("OOPS!!! The description of a deadline cannot be empty.");
+        } else {
+            String desc = "";
+            String time = "";
+            int count = 0;
+            for (int i = 1; i < len; i++) {
+                if (words[i].equals("/by")) {
+                    count = i + 1;
+                    desc = desc.substring(0, desc.length() - 1);
+                    break;
+                }
+                desc += words[i] + " ";
+            }
+            if (count == 0 || count == len) {
+                throw new DukeException("OOPS!!! The date/time of a deadline cannot be empty.");
+            }
+            for (int j = count; j < len; j++) {
+                if (j == len - 1) {
+                    time += words[j];
+                    break;
+                }
+                time += words[j] + " ";
+            }
+            return new Deadline(desc, time);
+        }
+    }
+
+    /**
+     * Creates an Event based on user input.
+     *
+     * @param words Array containing words in input of user.
+     * @param len Number of current tasks.
+     * @return Event.
+     * @throws DukeException For any invalid input.
+     */
+    public static Event giveEvent(String[] words, int len) throws DukeException {
+        if (len == 1) {
+            throw new DukeException("OOPS!!! The description of a event cannot be empty.");
+        } else {
+            String desc = "";
+            String time = "";
+            int count = 0;
+            for (int i = 1; i < len; i++) {
+                if (words[i].equals("/at")) {
+                    count = i + 1;
+                    desc = desc.substring(0, desc.length() - 1);
+                    break;
+                }
+                desc += words[i] + " ";
+            }
+            if (count == 0 || count == len) {
+                throw new DukeException("OOPS!!! The date/time of a event cannot be empty.");
+            }
+            for (int j = count; j < len; j++) {
+                if (j == len - 1) {
+                    time += words[j];
+                    break;
+                }
+                time += " " + words[j];
+            }
+            return new Event(desc, time);
+        }
+    }
+
 }
