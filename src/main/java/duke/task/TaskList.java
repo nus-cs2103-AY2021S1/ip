@@ -6,11 +6,17 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import javafx.util.Pair;
+
 /**
  * Keeps track of the tasks.
  */
 public class TaskList {
+    private static final String ADD_KEY = "add";
+    private static final String REMOVE_KEY = "remove";
+    private static final String DONE_KEY = "done";
     private ArrayList<Task> tasks;
+    private ArrayList<Pair<String, Pair<Task, Integer>>> prevCommands; // <command, <task, index>>
 
     /**
      * Creates a task list with elements.
@@ -18,6 +24,7 @@ public class TaskList {
      */
     public TaskList(Collection<Task> tasks) {
         this.tasks = new ArrayList<>(tasks);
+        prevCommands = new ArrayList<>();
     }
 
     /**
@@ -33,6 +40,8 @@ public class TaskList {
      */
     public void add(Task task) {
         assert task != null : "task cannot be null";
+        Pair<Task, Integer> infoPair = new Pair<>(null, tasks.size());
+        prevCommands.add(new Pair<>(ADD_KEY, infoPair));
         tasks.add(task);
     }
 
@@ -43,6 +52,8 @@ public class TaskList {
      */
     public Task remove(int index) {
         assert index >= 0 && index < tasks.size() : "index out of bound";
+        Pair<Task, Integer> infoPair = new Pair<>(tasks.get(index), index);
+        prevCommands.add(new Pair<>(REMOVE_KEY, infoPair));
         return tasks.remove(index);
     }
 
@@ -61,6 +72,9 @@ public class TaskList {
      * @param index The position of the task
      */
     public void markAsDone(int index) {
+        assert index >= 0 && index < tasks.size() : "index out of bound";
+        Pair<Task, Integer> infoPair = new Pair<>(null, index);
+        prevCommands.add(new Pair<>(DONE_KEY, infoPair));
         tasks.set(index, tasks.get(index).markAsDone());
     }
 
@@ -70,6 +84,37 @@ public class TaskList {
      */
     public int size() {
         return tasks.size();
+    }
+
+    /**
+     * Undo the latest change to the Task List
+     * @return true if able to undo, false otherwise
+     */
+    public boolean undo() {
+        if (prevCommands.size() == 0) {
+            return false;
+        }
+        Pair<String, Pair<Task, Integer>> prevCommand = prevCommands.remove(prevCommands.size() - 1);
+        String key = prevCommand.getKey();
+        Pair<Task, Integer> info = prevCommand.getValue();
+        if (key.equals(ADD_KEY)) {
+            assert info.getValue() != null : "undo error, cannot store index";
+            int index = info.getValue();
+            tasks.remove(index);
+        } else if (key.equals(REMOVE_KEY)) {
+            assert info.getKey() != null : "undo error, cannot store task";
+            assert info.getValue() != null : "undo error, cannot store index";
+            int index = info.getValue();
+            Task task = info.getKey();
+            tasks.add(index, task);
+        } else if (key.equals(DONE_KEY)) {
+            assert info.getValue() != null : "undo error, cannot store index";
+            int index = info.getValue();
+            tasks.set(index, tasks.get(index).markAsUndone());
+        } else {
+            System.out.println("error in undoing");
+        }
+        return true;
     }
 
     /**

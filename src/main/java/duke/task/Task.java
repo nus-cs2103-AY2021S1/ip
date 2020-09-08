@@ -26,6 +26,11 @@ public abstract class Task {
         return this;
     }
 
+    Task markAsUndone() {
+        isDone = false;
+        return this;
+    }
+
     /**
      * Represents the done status of the task through icon.
      * @return An icon

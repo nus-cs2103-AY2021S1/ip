@@ -59,6 +59,7 @@ public class Duke {
 
     /**
      * Store data into the data file
+     * Called when the program is closed
      */
     public void cleanUp() {
         try {
