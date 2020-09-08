@@ -3,12 +3,13 @@ package sparrow.data.task;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Encapsulates task list with operations to be carried out on list.
  */
 public class TaskList {
-    private final ArrayList<Task> tasks;
+    private final List<Task> tasks;
 
     /**
      * Constructs an empty task list.
@@ -25,7 +26,7 @@ public class TaskList {
         this.tasks = tasks;
     }
 
-    public ArrayList<Task> getTasks() {
+    public List<Task> getTasks() {
         return tasks;
     }
 

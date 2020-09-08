@@ -30,4 +30,9 @@ public class Vocabulary {
     public String define() {
         return hasDefinition ? definition : DICTIONARY_PREFIX + word;
     }
+
+    @Override
+    public String toString() {
+        return String.format("%s: %s", word, define());
+    }
 }

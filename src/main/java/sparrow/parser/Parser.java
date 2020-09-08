@@ -65,7 +65,7 @@ public class Parser {
             return prepareDone(arguments);
 
         case ListCommand.COMMAND_WORD:
-            return new ListCommand();
+            return new ListCommand(arguments.trim());
 
         case FindCommand.COMMAND_WORD:
             return prepareFind(arguments);
