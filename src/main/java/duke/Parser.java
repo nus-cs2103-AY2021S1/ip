@@ -43,7 +43,7 @@ public class Parser {
             // Fallthrough
         case EVENT:
             int indexOfBy = input.indexOf(taskType == TaskType.EVENT ? " /at " : " /by ");
-            if (input.length() <= (taskType == TaskType.EVENT ? 6 : 9) || splitInput.length < 2) {
+            if (splitInput.length < 2) {
                 throw new IllegalArgumentException("The description of this kind of task cannot be empty.");
             }
             String dateString = input.substring(indexOfBy + 5);
@@ -53,7 +53,7 @@ public class Parser {
                         + "Usage: deadline return book /by 2020-12-30 OR event library renewal /at 2020-12-29");
             }
             LocalDate date = LocalDate.parse(dateString);
-            return new Command(taskType, input.substring((taskType == TaskType.EVENT ? 6 : 9), indexOfBy), date);
+            return new Command(taskType, input.substring(splitInput[0].length() + 1, indexOfBy), date);
         default:
             throw new IllegalArgumentException("Your input must start with one of the following:\n"
                 + "\"todo\", \"deadline\", \"event\", \"list\", \"done\" or \"delete\".");
