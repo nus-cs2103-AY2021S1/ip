@@ -58,6 +58,51 @@ public class Ui {
         return wrapMessageInBorders(message);
     }
 
+    public String showStatistics(TaskList tasks) {
+        int numOfTodo = 0;
+        int numOfDoneTodo = 0;
+        int numOfEvent = 0;
+        int numOfDoneEvent = 0;
+        int numOfDeadline = 0;
+        int numOfDoneDeadline = 0;
+        int numOfDone = 0;
+
+        for (int i = 0; i < tasks.getSize(); i++) {
+            Task task = tasks.getTask(i);
+            switch (task.getType()) {
+            case "todo":
+                numOfTodo++;
+                if (task.getDoneStatus()) {
+                    numOfDone++;
+                    numOfDoneTodo++;
+                }
+                break;
+            case "deadline":
+                numOfDeadline++;
+                if (task.getDoneStatus()) {
+                    numOfDone++;
+                    numOfDoneDeadline++;
+                }
+                break;
+            case "event":
+                numOfEvent++;
+                if (task.getDoneStatus()) {
+                    numOfDone++;
+                    numOfDoneEvent++;
+                }
+                break;
+            }
+        }
+
+        String message = "Here are some statistics about your tasks:\n\n"
+                + "You have completed " + numOfDoneTodo + " out of " + numOfTodo + " Todos.\n"
+                + "You have completed " + numOfDoneDeadline + " out of " + numOfDeadline + " Deadlines.\n"
+                + "You have completed " + numOfDoneEvent + " out of " + numOfEvent + " Events.\n"
+                + "\n"
+                + "In total, you have completed " + numOfDone + " out of " + tasks.getSize() + " tasks.\n";
+        return wrapMessageInBorders(message);
+    }
+
     /**
      * Shows the add message when the user adds a task.
      *

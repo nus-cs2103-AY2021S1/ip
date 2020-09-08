@@ -3,6 +3,7 @@ package duke.task;
 public class Task {
     protected String description;
     protected boolean isDone;
+    protected String type;
 
     /**
      * Initialize the Task object.
@@ -46,6 +47,15 @@ public class Task {
      */
     public void markAsDone() {
         isDone = true;
+    }
+
+    /**
+     * Type of task.
+     *
+     * @return Task type.
+     */
+    public String getType() {
+        return type;
     }
 
     /**
