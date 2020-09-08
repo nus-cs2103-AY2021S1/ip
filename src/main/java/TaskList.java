@@ -74,12 +74,11 @@ public class TaskList {
     /**
      * Adds a todo task to the list.
      *
-     * @param input     This contains information about task to be added.
-     * @return          String to be printed.
+     * @param desc  The description of the todo task to be added.
+     * @return      String to be printed.
      */
-    public String addTodo(final String input) {
-        String desc = input.substring(4).trim();
-        Task newTask = new Todo(desc);
+    public String addTodo(final String desc, final Tag tag) {
+        Task newTask = new Todo(desc, false, tag);
         this.taskList.add(newTask);
         return Ui.printTaskAdded(newTask, taskList);
     }
@@ -92,22 +91,9 @@ public class TaskList {
      * @param timeString    The time associated with the deadline task.
      * @return              The string to be printed.
      */
-    public String addDeadline(final String desc, final LocalDate dateObject,
+    public String addDeadline(final String desc, final Tag tag, final LocalDate dateObject,
                             final String timeString) {
-        Task newTask = new Deadline(desc, dateObject, timeString);
-        this.taskList.add(newTask);
-        return Ui.printTaskAdded(newTask, this.taskList);
-    }
-
-    /**
-     * Adds a deadline task (with date only) to the list.
-     *
-     * @param desc          The description of the deadline task.
-     * @param dateObject    The date associated with the deadline task.
-     * @return String to be printed.
-     */
-    public String addDeadline(final String desc, final LocalDate dateObject) {
-        Task newTask = new Deadline(desc, dateObject);
+        Task newTask = new Deadline(desc, false, dateObject, timeString, tag);
         this.taskList.add(newTask);
         return Ui.printTaskAdded(newTask, this.taskList);
     }
@@ -120,22 +106,9 @@ public class TaskList {
      * @param timeString    The time associated with the deadline task.
      * @return String to be printed.
      */
-    public String addEvent(final String desc, final LocalDate dateObject,
+    public String addEvent(final String desc, final Tag tag, final LocalDate dateObject,
                          final String timeString) {
-        Task newTask = new Event(desc.trim(), dateObject, timeString);
-        this.taskList.add(newTask);
-        return Ui.printTaskAdded(newTask, this.taskList);
-    }
-
-    /**
-     * Adds an event task (with date only) in the list.
-     *
-     * @param desc          The description of the event task.
-     * @param dateObject    The date associated with the event task.
-     * @return String to be printed.
-     */
-    public String addEvent(final String desc, final LocalDate dateObject) {
-        Task newTask = new Event(desc, dateObject);
+        Task newTask = new Event(desc, false, dateObject, timeString, tag);
         this.taskList.add(newTask);
         return Ui.printTaskAdded(newTask, this.taskList);
     }

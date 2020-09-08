@@ -24,6 +24,21 @@ public class TodoCommand extends Command {
         this.command = command;
     }
 
+    private String parseDescAndTag(String descAndTag, TaskList taskList) {
+        boolean containsTag = descAndTag.contains("#");
+        if (containsTag) {
+            String[] descAndTagArray = descAndTag.split("#");
+            assert descAndTagArray.length == 2 : "descAndTagArray should have length of 2";
+            String desc = descAndTagArray[0].trim();
+            String tagString = descAndTagArray[1].trim();
+            Tag tag = new Tag(tagString);
+            return taskList.addTodo(desc, tag);
+        } else {
+            return taskList.addTodo(descAndTag, new Tag());
+        }
+
+    }
+
     /**
      * Executes the command.
      *
@@ -36,10 +51,10 @@ public class TodoCommand extends Command {
      */
     @Override
     public String execute(Storage storage, Ui ui, TaskList taskList) throws DukeException {
-        String desc = this.command.substring(TODO_LENGTH).trim();
-        boolean isDescEmpty = desc.isEmpty();
-        if (!isDescEmpty) {
-            return taskList.addTodo(this.command);
+        String descAndTag = this.command.substring(TODO_LENGTH).trim();
+        boolean isDescAndTagEmpty = descAndTag.isEmpty();
+        if (!isDescAndTagEmpty) {
+            return parseDescAndTag(descAndTag, taskList);
         } else {
             throw new DukeException("Please enter a valid todo");
         }

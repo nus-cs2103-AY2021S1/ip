@@ -15,85 +15,94 @@ public class Parser {
             " you saved in your local file.";
 
 
-    private static Deadline createDeadline(String desc, String dateTime,
+    private static Deadline createDeadline(String desc, Tag tag, String dateTime,
            boolean isTaskDone, boolean containsTime) throws DukeException {
-        if (isTaskDone && containsTime) {
+        if (containsTime) {
             String[] dateTimeArray = dateTime.split(" ");
             String date = dateTimeArray[0].trim();
             String time = dateTimeArray[1].trim();
             LocalDate dateObject = LocalDate.parse(date);
-            return new Deadline(desc, true, dateObject, time);
-        } else if (isTaskDone && !containsTime) {
-            LocalDate dateObj = LocalDate.parse(dateTime);
-            return new Deadline(desc, true, dateObj);
-        } else if (!isTaskDone && containsTime) {
-            String[] dateTimeArray = dateTime.split(" ");
-            String date = dateTimeArray[0].trim();
-            String time = dateTimeArray[1].trim();
-            LocalDate dateObject = LocalDate.parse(date);
-            return new Deadline(desc, dateObject, time);
-        } else if (!isTaskDone && !containsTime) {
+            return new Deadline(desc, isTaskDone, dateObject, time, tag);
+        } else if (!containsTime) {
             LocalDate dateObject = LocalDate.parse(dateTime);
-            return new Deadline(desc, dateObject);
-        } else { //task is marked as done
+            return new Deadline(desc, isTaskDone, dateObject, "", tag);
+        } else {
             throw new DukeException(PARSE_ERROR);
         }
     }
 
-    private static Event createEvent(String desc, String dateTime,
+    private static Event createEvent(String desc, Tag tag, String dateTime,
                         boolean isTaskDone, boolean containsTime) throws DukeException {
-        if (isTaskDone && containsTime) {
+        if (containsTime) {
             String[] dateTimeArray = dateTime.split(" ");
             String date = dateTimeArray[0].trim();
             String time = dateTimeArray[1].trim();
             LocalDate dateObject = LocalDate.parse(date);
-            return new Event(desc, dateObject, time);
-        } else if (isTaskDone && !containsTime) {
+            return new Event(desc, isTaskDone, dateObject, time, tag);
+        } else if (!containsTime) {
             LocalDate dateObj = LocalDate.parse(dateTime);
-            return new Event(desc, dateObj);
-        } else if (!isTaskDone && containsTime) {
-            String[] dateTimeArray = dateTime.split(" ");
-            String date = dateTimeArray[0].trim();
-            String time = dateTimeArray[1].trim();
-            LocalDate dateObject = LocalDate.parse(date);
-            return new Event(desc, true, dateObject, time);
-        } else if (!isTaskDone && !containsTime) {
-            LocalDate dateObj = LocalDate.parse(dateTime);
-            return new Event(desc, true, dateObj);
+            return new Event(desc, isTaskDone, dateObj, "", tag);
         } else {
             throw new DukeException(PARSE_ERROR);
         }
     }
     private static Todo parseTodoInput(String taskString) {
-        String desc = taskString.substring(LABEL_LENGTH).trim();
+        String descTag = taskString.substring(LABEL_LENGTH).trim();
         boolean isTaskDone = taskString.startsWith("[T][1]");
-        if (isTaskDone) {
-            return new Todo(desc, true);
+        boolean containsTag = descTag.contains("#");
+        if (containsTag) {
+            String[] descTagArray = descTag.split("#");
+            assert descTagArray.length == 2 : "descTagArray should have length of 2";
+            String desc = descTagArray[0].trim();
+            String tagString = descTagArray[1].trim();
+            Tag tag = new Tag(tagString);
+            return new Todo(desc, isTaskDone, tag);
         } else {
-            return new Todo(desc);
+            return new Todo(descTag, isTaskDone, new Tag());
         }
     }
 
     private static Deadline parseDeadlineInput(String taskString) throws DukeException {
-        String[] descDateTimeArray = taskString.substring(LABEL_LENGTH).split(BY_STRING);
-        String desc = descDateTimeArray[0].trim();
-        String dateTime = descDateTimeArray[1].trim();
+        String[] descTagDateTimeArray = taskString.substring(LABEL_LENGTH).split(BY_STRING);
+        String descTag = descTagDateTimeArray[0].trim();
+        String dateTime = descTagDateTimeArray[1].trim();
 
         boolean isTaskDone = taskString.startsWith("[D][1]");
         boolean containsTime = dateTime.contains(" ");
+        boolean containsTag = descTag.contains("#");
 
-        return createDeadline(desc, dateTime, isTaskDone, containsTime);
+        if (containsTag) {
+            String[] descTagArray = descTag.split("#");
+            assert descTagArray.length == 2 : "descTagArray should have length of 2";
+            String desc = descTagArray[0].trim();
+            String tagString = descTagArray[1].trim();
+            Tag tag = new Tag(tagString);
+            return createDeadline(desc, tag, dateTime, isTaskDone, containsTime);
+        } else {
+            return createDeadline(descTag, new Tag(), dateTime, isTaskDone, containsTime);
+        }
+
     }
 
     private static Event parseEventInput(String taskString) throws DukeException {
-        String[] descDateTimeArray = taskString.substring(LABEL_LENGTH).split(AT_STRING);
-        String desc = descDateTimeArray[0].trim();
-        String dateTime = descDateTimeArray[1].trim();
+        String[] descTagDateTimeArray = taskString.substring(LABEL_LENGTH).split(AT_STRING);
+        String descTag = descTagDateTimeArray[0].trim();
+        String dateTime = descTagDateTimeArray[1].trim();
 
         boolean isTaskDone = taskString.startsWith("[E][1]");
         boolean containsTime = dateTime.contains(" ");
+        boolean containsTag = descTag.contains("#");
 
-        return createEvent(desc, dateTime, isTaskDone, containsTime);
+        if (containsTag) {
+            String[] descTagArray = descTag.split("#");
+            assert descTagArray.length == 2 : "descTagArray should have length of 2";
+            String desc = descTagArray[0].trim();
+            String tagString = descTagArray[1].trim();
+            Tag tag = new Tag(tagString);
+            return createEvent(desc, tag, dateTime, isTaskDone, containsTime);
+        } else {
+            return createEvent(descTag, new Tag(), dateTime, isTaskDone, containsTime);
+        }
     }
 
     /**

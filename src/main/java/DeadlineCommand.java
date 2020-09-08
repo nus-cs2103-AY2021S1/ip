@@ -37,12 +37,12 @@ public class DeadlineCommand extends Command {
         return dateString;
     }
 
-    private String initiateAddDeadline(String desc, LocalDate dateObject,
+    private String initiateAddDeadline(String desc, Tag tag, LocalDate dateObject,
             String timeString, TaskList taskList) throws DukeException {
         try {
             int time = Integer.parseInt(timeString);
             if (time >= 0000 && time <= 2359) {
-                return taskList.addDeadline(desc, dateObject, timeString);
+                return taskList.addDeadline(desc, tag, dateObject, timeString);
             } else {
                 throw new DukeException("Please enter a "
                         + "valid time between 0000 and 2359");
@@ -53,7 +53,7 @@ public class DeadlineCommand extends Command {
         }
     }
 
-    private String parseTime(String desc, String dateTime,
+    private String parseTime(String desc, Tag tag, String dateTime,
                              TaskList taskList) throws DukeException {
         String[] dateTimeArray = dateTime.split(" ");
         String dateString = dateTimeArray[0].trim();
@@ -61,28 +61,28 @@ public class DeadlineCommand extends Command {
         dateString = formatDate(dateString);
         LocalDate dateObject = LocalDate.parse(dateString);
         if (timeString.length() == TIME_LENGTH) {
-            return initiateAddDeadline(desc, dateObject,
+            return initiateAddDeadline(desc, tag, dateObject,
                     timeString, taskList);
         } else {
-            return taskList.addDeadline(desc, dateObject);
+            return taskList.addDeadline(desc, tag, dateObject, "");
         }
     }
 
-    private String parseDate(String desc, String date,
+    private String parseDate(String desc, Tag tag, String date,
                              TaskList taskList) {
         String formattedDate = formatDate(date);
         LocalDate dateObject = LocalDate.parse(formattedDate);
-        return taskList.addDeadline(desc, dateObject);
+        return taskList.addDeadline(desc, tag, dateObject, "");
     }
 
-    private String parseDateTime(String desc, String dateTime,
+    private String parseDateTime(String desc, Tag tag, String dateTime,
                                  TaskList taskList) throws DukeException {
         boolean containsTimeInput = dateTime.contains(" ");
         try {
             if (containsTimeInput) {
-                return parseTime(desc, dateTime, taskList);
+                return parseTime(desc, tag, dateTime, taskList);
             } else {
-                return parseDate(desc, dateTime, taskList);
+                return parseDate(desc, tag, dateTime, taskList);
             }
         } catch (DateTimeException dte) {
             throw new DukeException("Please enter your date "
@@ -91,11 +91,21 @@ public class DeadlineCommand extends Command {
         }
     }
 
-    private String splitDescDateTime(String descDateTimeString, TaskList taskList) throws DukeException {
-        String[] descDateTimeArray = descDateTimeString.split(BY_STRING);
-        String desc = descDateTimeArray[0].trim();
-        String dateTime = descDateTimeArray[1].trim();
-        return parseDateTime(desc, dateTime, taskList);
+    private String splitDescTagDateTime(String descTagDateTimeString, TaskList taskList) throws DukeException {
+        String[] descTagDateTimeArray = descTagDateTimeString.split(BY_STRING);
+        String descTag = descTagDateTimeArray[0].trim();
+        String dateTime = descTagDateTimeArray[1].trim();
+        boolean containsTag = descTag.contains("#");
+        if (containsTag) {
+            String[] descTagArray = descTag.split("#");
+            assert descTagArray.length == 2 : "descTagArray should have length of 2";
+            String desc = descTagArray[0].trim();
+            String tagString = descTagArray[1].trim();
+            Tag tag = new Tag(tagString);
+            return parseDateTime(desc, tag, dateTime, taskList);
+        } else {
+            return parseDateTime(descTag, new Tag(), dateTime, taskList);
+        }
     }
 
     /**
@@ -110,16 +120,16 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public String execute(Storage storage, Ui ui, TaskList taskList) throws DukeException {
-        String descDateTimeString = this.command.substring(DEADLINE_LENGTH).trim();
-        boolean isDescDateTimeEmpty = descDateTimeString.isEmpty();
-        boolean containsDesc = descDateTimeString.contains(BY_STRING) &&
-                !descDateTimeString.startsWith(BY_STRING);
-        boolean containsDateTime = !descDateTimeString.endsWith(BY_STRING);
+        String descTagDateTimeString = this.command.substring(DEADLINE_LENGTH).trim();
+        boolean isDescTagDateTimeEmpty = descTagDateTimeString.isEmpty();
+        boolean containsDesc = descTagDateTimeString.contains(BY_STRING) &&
+                !descTagDateTimeString.startsWith(BY_STRING);
+        boolean containsDateTime = !descTagDateTimeString.endsWith(BY_STRING);
         
-        if (!isDescDateTimeEmpty
+        if (!isDescTagDateTimeEmpty
                 && containsDateTime
                 && containsDesc) {
-            return splitDescDateTime(descDateTimeString, taskList);
+            return splitDescTagDateTime(descTagDateTimeString, taskList);
         } else {
             throw new DukeException("Please enter a valid deadline");
         }

@@ -15,6 +15,8 @@ public abstract class Task {
      */
     private boolean isDone;
 
+    private Tag tag;
+
     /**
      * Task constructor that creates a task marked as not done.
      *
@@ -23,6 +25,7 @@ public abstract class Task {
     public Task(final String desc) {
         this.desc = desc;
         this.isDone = false;
+        this.tag = null;
     }
 
     /**
@@ -34,6 +37,19 @@ public abstract class Task {
     public Task(final String desc, final boolean isDone) {
         this.desc = desc;
         this.isDone = isDone;
+        this.tag = null;
+    }
+
+    public Task(final String desc, final boolean isDone, final Tag tag) {
+        this.desc = desc;
+        this.isDone = isDone;
+        this.tag = tag;
+    }
+
+    public Task(final String desc, final Tag tag) {
+        this.desc = desc;
+        this.isDone = false;
+        this.tag = tag;
     }
 
     private String getStatusIcon() {
@@ -61,8 +77,15 @@ public abstract class Task {
 
     @Override
     public String toString() {
-        return "["
-                + this.getStatusIcon() + "] "
-                + this.desc;
+        boolean containsTag = !this.tag.toString().isBlank();
+        if (containsTag) {
+            return "["
+                    + this.getStatusIcon() + "] "
+                    + this.desc + " #" + this.tag.toString();
+        } else {
+            return "["
+                    + this.getStatusIcon() + "] "
+                    + this.desc;
+        }
     }
 }

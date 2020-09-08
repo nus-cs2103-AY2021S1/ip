@@ -18,44 +18,44 @@ public class Event extends Task {
      */
     private String time;
 
-    /**
-     * Event constructor with date only.
-     *
-     * @param desc   The description of the event.
-     * @param at            The date of the event.
-     */
-    public Event(final String desc, final LocalDate at) {
-        super(desc);
-        this.at = at;
-    }
-
-    /**
-     * Event constructor with date and time.
-     *
-     * @param desc          The description of the event.
-     * @param at            The date of the event.
-     * @param time          The time of the event.
-     */
-    public Event(final String desc, final LocalDate at,
-                 final String time) {
-        super(desc);
-        this.at = at;
-        this.time = time;
-    }
-
-    /**
-     * Event constructor with date and marked as done.
-     *
-     * @param desc   The description of the event.
-     * @param isDone        The event is marked as done.
-     * @param at            The date of the event.
-     */
-    public Event(final String desc, final boolean isDone,
-                 final LocalDate at) {
-        super(desc, isDone);
-        this.at = at;
-        this.time = null;
-    }
+//    /**
+//     * Event constructor with date only.
+//     *
+//     * @param desc   The description of the event.
+//     * @param at            The date of the event.
+//     */
+//    public Event(final String desc, final LocalDate at) {
+//        super(desc);
+//        this.at = at;
+//    }
+//
+//    /**
+//     * Event constructor with date and time.
+//     *
+//     * @param desc          The description of the event.
+//     * @param at            The date of the event.
+//     * @param time          The time of the event.
+//     */
+//    public Event(final String desc, final LocalDate at,
+//                 final String time) {
+//        super(desc);
+//        this.at = at;
+//        this.time = time;
+//    }
+//
+//    /**
+//     * Event constructor with date and marked as done.
+//     *
+//     * @param desc   The description of the event.
+//     * @param isDone        The event is marked as done.
+//     * @param at            The date of the event.
+//     */
+//    public Event(final String desc, final boolean isDone,
+//                 final LocalDate at) {
+//        super(desc, isDone);
+//        this.at = at;
+//        this.time = null;
+//    }
 
     /**
      * Event constructor with date and time and marked as done.
@@ -66,8 +66,8 @@ public class Event extends Task {
      * @param time          The time of the event.
      */
     public Event(final String desc, final boolean isDone,
-                 final LocalDate at, final String time) {
-        super(desc, isDone);
+                 final LocalDate at, final String time, final Tag tag) {
+        super(desc, isDone, tag);
         this.at = at;
         this.time = time;
     }

@@ -18,45 +18,45 @@ public class Deadline extends Task {
      */
     private String time;
 
-    /**
-     * Deadline constructor with date only.
-     *
-     * @param desc   The description of the deadline task.
-     * @param by     The date that the deadline task is due.
-     */
-    public Deadline(final String desc, final LocalDate by) {
-        super(desc);
-        this.by = by;
-        this.time = null;
-    }
-
-    /**
-     * Deadline constructor with date and time.
-     *
-     * @param desc  The description for the deadline task.
-     * @param by    The date that the deadline task is due.
-     * @param time  The time that the deadline task is due.
-     */
-    public Deadline(final String desc, final LocalDate by,
-                    final String time) {
-        super(desc);
-        this.by = by;
-        this.time = time;
-    }
-
-    /**
-     * Deadline constructor with date and marked as done.
-     *
-     * @param desc          The description of the deadline task.
-     * @param isDone        The deadline task is marked as done.
-     * @param by            The date that the deadline task is due.
-     */
-    public Deadline(final String desc, final boolean isDone,
-                    final LocalDate by) {
-        super(desc, isDone);
-        this.by = by;
-        this.time = null;
-    }
+//    /**
+//     * Deadline constructor with date only.
+//     *
+//     * @param desc   The description of the deadline task.
+//     * @param by     The date that the deadline task is due.
+//     */
+//    public Deadline(final String desc, final LocalDate by) {
+//        super(desc);
+//        this.by = by;
+//        this.time = null;
+//    }
+//
+//    /**
+//     * Deadline constructor with date and time.
+//     *
+//     * @param desc  The description for the deadline task.
+//     * @param by    The date that the deadline task is due.
+//     * @param time  The time that the deadline task is due.
+//     */
+//    public Deadline(final String desc, final LocalDate by,
+//                    final String time) {
+//        super(desc);
+//        this.by = by;
+//        this.time = time;
+//    }
+//
+//    /**
+//     * Deadline constructor with date and marked as done.
+//     *
+//     * @param desc          The description of the deadline task.
+//     * @param isDone        The deadline task is marked as done.
+//     * @param by            The date that the deadline task is due.
+//     */
+//    public Deadline(final String desc, final boolean isDone,
+//                    final LocalDate by) {
+//        super(desc, isDone);
+//        this.by = by;
+//        this.time = null;
+//    }
 
     /**
      * Deadline constructor with date and time and marked as done.
@@ -67,8 +67,8 @@ public class Deadline extends Task {
      * @param time          The time that the deadline task is due.
      */
     public Deadline(final String desc, final boolean isDone,
-                    final LocalDate by, final String time) {
-        super(desc, isDone);
+                    final LocalDate by, final String time, final Tag tag) {
+        super(desc, isDone, tag);
         this.by = by;
         this.time = time;
     }
