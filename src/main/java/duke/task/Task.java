@@ -38,6 +38,10 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    /**
+     * adds tag to a ask
+     * @param tag string of tag to be added to task
+     */
     public void addTag(String tag) {
         String tagAdded = "#" + tag;
         this.listOfTags.add(tagAdded);

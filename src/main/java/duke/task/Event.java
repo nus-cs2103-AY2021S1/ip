@@ -67,8 +67,9 @@ public class Event extends Task {
         DateTimeFormatter dtfTime = DateTimeFormatter.ISO_LOCAL_TIME;
         assert dtfDate instanceof DateTimeFormatter : "date formatter has to be of type DateTimeFormatter";
         assert dtfTime instanceof DateTimeFormatter : "time formatter has to be of type DateTimeFormatter";
-        final String EVENT_STRING_SHOWED_TO_USER =  "[E]" + super.toString() + "(at: " + this.date.format(dtfDate) +
-                " " + this.time.format(dtfTime) + ") " + this.stringOfTags;
+        final String EVENT_STRING_SHOWED_TO_USER =
+                "[E]" + super.toString() + this.stringOfTags + " " + "(at: " + this.date.format(dtfDate) +
+                " " + this.time.format(dtfTime) + ")";
         return EVENT_STRING_SHOWED_TO_USER;
     }
 
@@ -84,8 +85,8 @@ public class Event extends Task {
         assert dtfDate instanceof DateTimeFormatter : "date formatter has to be of type DateTimeFormatter";
         assert dtfTime instanceof DateTimeFormatter : "time formatter has to be of type DateTimeFormatter";
         final String EVENT_STRING_TO_SAVE =
-                "E " + "| " + status + " | " + this.description + "| " + this.date.format(dtfDate) + " " +
-                        this.time.format(dtfTime) + " " + this.stringOfTags;
+                "E " + "| " + status + " | " + this.description+ this.stringOfTags + " " + "| " + this.date.format(dtfDate) + " " +
+                        this.time.format(dtfTime);
         return EVENT_STRING_TO_SAVE;
     }
 

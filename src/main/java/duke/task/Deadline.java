@@ -65,8 +65,8 @@ public class Deadline extends Task {
         assert dtfDate instanceof DateTimeFormatter : "date formatter has to be of type DateTimeFormatter";
         assert dtfTime instanceof DateTimeFormatter : "time formatter has to be of type DateTimeFormatter";
         final String DEADLINE_STRING_SHOWED_TO_USER =
-                "[D]" + super.toString() + "(by: " + this.date.format(dtfDate) + " " + this.time.format(dtfTime) +
-                ") " + this.stringOfTags;
+                "[D]" + super.toString() + this.stringOfTags + " " + "(by: " + this.date.format(dtfDate) + " " + this.time.format(dtfTime) +
+                ")";
         return DEADLINE_STRING_SHOWED_TO_USER;
     }
 
@@ -82,8 +82,8 @@ public class Deadline extends Task {
         assert dtfDate instanceof DateTimeFormatter : "date formatter has to be of type DateTimeFormatter";
         assert dtfTime instanceof DateTimeFormatter : "time formatter has to be of type DateTimeFormatter";
         final String DEADLINE_STRING_TO_SAVE =
-                "D " + "| " + status + " | " + this.description + "| " + this.date.format(dtfDate) + " " +
-                this.time.format(dtfTime) + " " + this.stringOfTags;
+                "D " + "| " + status + " | " + this.description + this.stringOfTags + " " + "| " + this.date.format(dtfDate) + " " +
+                this.time.format(dtfTime);
         return DEADLINE_STRING_TO_SAVE;
     }
 

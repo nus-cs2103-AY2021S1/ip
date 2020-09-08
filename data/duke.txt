@@ -1,5 +1,5 @@
 T | 0 | gg
 T | 1 | byee
-E | 1 | go gym | Sep 21 2020 12:34:00
-T | 1 | ddf
-T | 1 | go mad #hello #mac #e
+E | 1 | go gym | Sep 21 2020 12:34:00 #mac
+T | 1 | ddf  #h  #mac #mac
+D | 0 | go to apple store #mac| Sep 10 2020 18:00:00
