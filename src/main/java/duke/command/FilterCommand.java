@@ -31,6 +31,7 @@ public class FilterCommand extends Command {
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
             String listItems = "";
+            // Reformat the date to be readable by LocalDate
             String[] dateSplit = date.split("/", 3);
             String reformatedDate = dateSplit[2] + "-" + dateSplit[1] + "-" + dateSplit[0];
             LocalDate filterDate = LocalDate.parse(reformatedDate);
@@ -39,8 +40,8 @@ public class FilterCommand extends Command {
                     listItems = listItems + i + ". " + taskList.get(i - 1) + "\n";
                 }
             }
-            String response = "Here are your task due on "
-                    + filterDate.format(DateTimeFormatter.ofPattern("MMM d yyy")) + ": \n" + listItems;
+            String response = "Here are your task due on " + filterDate.format(DateTimeFormatter.ofPattern("MMM d yyy"))
+                    + ": \n" + listItems;
             return response;
         } catch (DateTimeParseException e) {
             throw new DukeException("Please enter a valid date!");
