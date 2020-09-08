@@ -18,13 +18,14 @@ import duke.task.Task;
  */
 public class Storage {
     /** Checks whether the user chooses to terminate when corrupted save file encountered. */
-    protected static boolean hasLoadingError = false;
     protected static final String FILE_NAME = "/save.txt";
+    protected static boolean hasLoadingError = false;
     protected final String location;
     protected final File savefile;
-    protected FileWriter writer;
-    protected boolean isEmptySave;
     protected ArrayList<Task> listFromFile;
+    protected boolean isEmptySave;
+    protected FileWriter writer;
+
 
     /**
      * @param specifiedLocation The directory for the save file.

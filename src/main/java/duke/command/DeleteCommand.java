@@ -13,6 +13,11 @@ import duke.task.Task;
  * Inherits from generic AbstractModifyTaskCommand class.
  */
 public class DeleteCommand extends AbstractModifyTaskCommand {
+    public static final String COMMAND_WORD = "delete";
+    public static final String COMMAND_USAGE = COMMAND_WORD + ": Deletes the task specified by the task number in the" +
+        " list.\n\n"
+        + "Fields: " + "[task number] \n"
+        + "Example: " + COMMAND_WORD + " 3 ";
 
     public DeleteCommand(Task task) {
         super(task);

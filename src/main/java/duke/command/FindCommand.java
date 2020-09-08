@@ -12,6 +12,11 @@ import duke.task.Task;
  * Inherits from generic command class.
  */
 public class FindCommand extends Command {
+    public static final String COMMAND_WORD = "find";
+    public static final String COMMAND_USAGE = COMMAND_WORD + ": Searches for tasks matching the given keyword.\n\n"
+        + "Fields: " + "[description] \n"
+        + "Example: " + COMMAND_WORD + " books ";
+
     protected String input;
 
     public FindCommand(String input) {

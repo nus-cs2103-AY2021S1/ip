@@ -8,6 +8,9 @@ import duke.TaskListHandler;
 import duke.task.Task;
 
 public class ClearCommand extends Command {
+    public static final String COMMAND_WORD = "clear";
+    public static final String COMMAND_USAGE = COMMAND_WORD + ": Removes ALL tasks.\n\n"
+        + "Example: " + COMMAND_WORD;
 
     /**
      * Clears the task list, printing success and saving updated list to save file.
