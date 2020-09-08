@@ -50,9 +50,9 @@ public class Task {
      */
     public String toString() {
         if (isDone()) {
-            return "[Completed] " + this.description;
+            return "[\u2713] " + this.description;
         } else {
-            return "[Pending] " + this.description;
+            return "[\u2718] " + this.description;
         }
     }
 

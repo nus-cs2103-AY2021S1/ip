@@ -1,1 +1,2 @@
-[E][Pending] ding] project meeting   /at 08/10/2020 2000
+[D][✘] return book   /by 08/10/2020 1800
+[D][✘] return book   /by 08/10/2020 1800
