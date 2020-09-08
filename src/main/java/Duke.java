@@ -2,6 +2,8 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 
 /**
@@ -92,12 +94,31 @@ public class Duke {
      * Runs the the Duke program by terminal / .jar file.
      */
     public static void main(String[] args) {
+        System.out.println(LocalDate.now().plusDays(3));
+        LocalDate timeDescription;
+        timeDescription = LocalDate.parse("2020-04-03");
+        String formatted = timeDescription.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+        LocalDate time = LocalDate.parse(formatted, dateFormatter);
+        System.out.println(time);
+        System.out.println(timeDescription);
+        System.out.println(timeDescription.isEqual(time));
         Duke duke = new Duke();
         duke.run();
     }
 
     /**
-     * Gets response from Duke based on user input.
+     * Gets reminders from user's file data.
+     * Passes reminders to MainWindow to display as text.
+     *
+     * @return String representation of reminders of unfinished/urgent tasks.
+     */
+    public String getReminder() {
+        return parser.getUrgentTasks();
+    }
+
+    /**
+     * Returns response from Duke based on user input.
      *
      * @param input represents user input in String format.
      *
