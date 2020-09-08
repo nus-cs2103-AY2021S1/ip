@@ -1,16 +1,16 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.parts.Storage;
 import duke.parts.TaskList;
 import duke.parts.Ui;
-
-import java.io.IOException;
 
 /**
  * Represents a command which is used to print the list of tasks.
  * It is executed when the execute method is called.
  */
-public class PrintCommand extends Command{
+public class PrintCommand extends Command {
 
     /**
      * Executes the print command.
