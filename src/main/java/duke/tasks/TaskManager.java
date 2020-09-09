@@ -10,7 +10,9 @@ import java.util.List;
  * <code>TaskManager</code> handles every operation related to tasks.
  */
 public class TaskManager {
-    private List<Task> tasks;
+    private List<Todo> todos;
+    private List<Deadline> deadlines;
+    private List<Event> events;
 
     /**
      * Constructs a new <code>TaskManager</code> object
@@ -18,25 +20,37 @@ public class TaskManager {
      * an empty <code>ArrayList</code>.
      */
     public TaskManager() {
-        this.tasks = new ArrayList<>();
+        todos = new ArrayList<>();
+        deadlines = new ArrayList<>();
+        events = new ArrayList<>();
     }
 
-    /**
-     * Constructs a new <code>TaskManager</code> object
-     * and initialises its <code>tasks</code> field using the provided
-     * argument.
-     * @param tasks the list of duke.tasks to be initialised with
-     */
-    public TaskManager(List<Task> tasks) {
-        this.tasks = tasks;   
+    public void initialiseTodos(List<Todo> todos) {
+        this.todos = todos;
     }
 
-    /**
-     * Adds a task.
-     * @param task the task to be added
-     */
-    public void add(Task task) throws DukeException {
-        tasks.add(task);
+    public void initialiseDeadlines(List<Deadline> deadlines) {
+        this.deadlines = deadlines;
+    }
+
+    public void initialiseEvents(List<Event> events) {
+        this.events = events;
+    }
+
+    public void addTodo(Todo todo) throws DukeException {
+        todos.add(todo);
+        save();
+    }
+
+    public void addDeadline(Deadline deadline) throws DukeException {
+        deadlines.add(deadline);
+        deadlines.sort(Deadline::compareTo);
+        save();
+    }
+
+    public void addEvent(Event event) throws DukeException {
+        events.add(event);
+        events.sort(Event::compareTo);
         save();
     }
 
@@ -47,10 +61,15 @@ public class TaskManager {
      * class where it will handle the saving of the information.
      */
     private void save() throws DukeException {
-        assert tasks != null : "the task list was never initialised";
         StringBuilder sb = new StringBuilder();
-        for (Task task : tasks) {
-            sb.append(task.saveText()).append("\n");
+        for (Todo todo : todos) {
+            sb.append(todo.saveText()).append("\n");
+        }
+        for (Deadline deadline : deadlines) {
+            sb.append(deadline.saveText()).append("\n");
+        }
+        for (Event event : events) {
+            sb.append(event.saveText()).append("\n");
         }
         Storage.writeTasksFile(sb.toString());
     }
@@ -61,10 +80,36 @@ public class TaskManager {
      */
     public String listTasks() {
         int i = 1;
-        StringBuffer sb = new StringBuffer("Here are your duke.tasks\n");
-        for (Task task: tasks) {
-            sb.append("\n").append(i).append(". ").append(task);
-            i++;
+        StringBuilder sb = new StringBuilder();
+        if (!todos.isEmpty()) {
+            sb.append("Here are your todos:\n");
+            for (Todo todo : todos) {
+                sb.append(i).append(". ").append(todo).append("\n");
+                i++;
+            }
+            sb.append("\n");
+        } else {
+            sb.append("You have no todos.\n");
+        }
+        if (!deadlines.isEmpty()) {
+            sb.append("Here are your deadlines:\n");
+            for (Deadline deadline : deadlines) {
+                sb.append(i).append(". ").append(deadline).append("\n");
+                i++;
+            }
+            sb.append("\n");
+        } else {
+            sb.append("You have no deadlines.\n");
+        }
+        if (!events.isEmpty()) {
+            sb.append("Here are your events:\n");
+            for (Event event : events) {
+                sb.append(i).append(". ").append(event).append("\n");
+                i++;
+            }
+            sb.append("\n");
+        } else {
+            sb.append("You have no events.\n");
         }
         return sb.toString();
     }
@@ -78,15 +123,23 @@ public class TaskManager {
      * @throws DukeException if the provided task number is out of bounds of the range of the <code>ArrayList</code>
      */
     public Task markDone(int taskNum) throws DukeException {
-        try {
-            Task task = tasks.get(taskNum - 1);
-            task.setCompleted();
-            save();
-            return task;
-        } catch (IndexOutOfBoundsException e) {
+        int totalNumber = getTotalNumberOfItems();
+        if (taskNum < 0 || taskNum >= totalNumber) {
             throw new DukeException("you gave an invalid task number!");
         }
-        
+        Task task;
+        if (taskNum <= todos.size()) {
+            task = todos.get(taskNum - 1);
+        } else if (taskNum <= todos.size() + deadlines.size()) {
+            int ind = taskNum - todos.size() - 1;
+            task = deadlines.get(ind);
+        } else {
+            int ind = taskNum - todos.size() - deadlines.size() - 1;
+            task = events.get(ind);
+        }
+        task.setCompleted();
+        save();
+        return task;
     }
 
     /**
@@ -95,13 +148,24 @@ public class TaskManager {
      * @throws DukeException if the provided task number is out of bounds of the range of the <code>ArrayList</code>
      */
     public Task deleteTask(int taskNum) throws DukeException {
-        try {
-            Task task = tasks.remove(taskNum - 1);
-            save();
-            return task;
-        } catch (IndexOutOfBoundsException e) {
+        int totalNumber = getTotalNumberOfItems();
+        if (taskNum < 0 || taskNum > totalNumber) {
             throw new DukeException("you gave an invalid task number!");
         }
+        Task task;
+        if (taskNum <= todos.size()) {
+            task = todos.remove(taskNum - 1);
+        } else if (taskNum <= todos.size() + deadlines.size()) {
+            task = deadlines.remove(taskNum - 1 - todos.size());
+        } else {
+            task = events.remove(taskNum - 1 - todos.size() - deadlines.size());
+        }
+        save();
+        return task;
+    }
+
+    private boolean hasKeyword(String keyword, Task task) {
+        return task.getName().toLowerCase().contains((keyword.toLowerCase()));
     }
 
     /**
@@ -112,9 +176,19 @@ public class TaskManager {
      */
     public String findTask(String keyword) {
         List<Task> temp = new ArrayList<>();
-        for (Task task : tasks) {
-            if (task.getName().toLowerCase().contains(keyword.toLowerCase())) {
-                temp.add(task);
+        for (Todo todo : todos) {
+            if (hasKeyword(keyword, todo)) {
+                temp.add(todo);
+            }
+        }
+        for (Deadline deadline : deadlines) {
+            if (hasKeyword(keyword, deadline)) {
+                temp.add(deadline);
+            }
+        }
+        for (Event event : events) {
+            if (hasKeyword(keyword, event)) {
+                temp.add(event);
             }
         }
         if (temp.isEmpty()) {
@@ -126,6 +200,10 @@ public class TaskManager {
             }
             return sb.toString();
         }
+    }
+
+    private int getTotalNumberOfItems() {
+        return todos.size() + deadlines.size() + events.size();
     }
 
     @Override
