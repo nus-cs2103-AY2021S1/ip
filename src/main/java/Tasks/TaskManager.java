@@ -174,15 +174,21 @@ public class TaskManager {
     }
 
     public static String listing2() {
-        String result = "";
-        result = result + "These are your current tasks!";
-        int count = 1;
-        for (task i : store) {
-            result = result + System.lineSeparator();
-            result = result + count + ". " + read(i);
-            count++;
+        String start = "These are your current tasks!";
+        ArrayList<String> results = new ArrayList<>();
+        results.add(start);
+        store.forEach(task->results.add(read(task)));
+        return printListOfStrings(results);
+    }
+
+    public static String printListOfStrings(ArrayList<String> results) {
+        String ans = "";
+        ans = results.get(0);
+        for (int i = 1; i < results.size(); i++) {
+            ans = ans + System.lineSeparator();
+            ans += i + ". " + results.get(i);
         }
-        return result;
+        return ans;
     }
 
     public static String newTask2(String name, String itype, String date, String fileDir) throws ErrorExceptions {
