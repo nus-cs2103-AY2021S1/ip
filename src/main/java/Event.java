@@ -8,6 +8,11 @@ public class Event extends Task {
         this.time = time;
     }
 
+    public Event(String description, String time, boolean isDone) {
+        super(description, isDone);
+        this.time = time;
+    }
+
     @Override
     public void printDescription() {
         System.out.println("[E][" + getStatusIcon()
