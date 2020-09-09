@@ -25,6 +25,11 @@ public class DeleteCommand extends Command {
     @Override
     String execute(TaskList tasks, NotesList notes, Ui ui, Storage storage, Map<String, Runnable> runnables)
             throws IndexOutOfBoundsDukeException {
+        assert tasks != null : "tasks shouldn't be null";
+        assert ui != null : "ui shouldn't be null";
+        assert storage != null : "storage shouldn't be null";
+        assert runnables != null : "runnables shouldn't be null";
+
         return tasks.deleteTask(taskNumber);
     }
 
