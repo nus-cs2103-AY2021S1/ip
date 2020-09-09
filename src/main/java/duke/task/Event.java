@@ -57,7 +57,22 @@ public class Event extends Task {
 
     @Override
     public Task duplicate() {
-        return new Event(description, at, atLocalDate);
+        Event duplicateEvent = new Event(description, at, atLocalDate);
+        if (this.isDone()) {
+            duplicateEvent.markAsDone();
+        }
+
+        return duplicateEvent;
+    }
+
+    @Override
+    public void setField(String fieldContent) throws DukeException {
+        try {
+            this.at = fieldContent;
+            this.atLocalDate = LocalDate.parse(fieldContent);
+        } catch (Exception e) {
+            throw new DukeException("Date is not in YYYY-MM-DD format");
+        }
     }
 
     @Override

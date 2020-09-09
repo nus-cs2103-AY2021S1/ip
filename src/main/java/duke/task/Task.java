@@ -101,4 +101,6 @@ public abstract class Task {
     }
 
     public abstract Task duplicate();
+
+    public abstract void setField(String fieldContent) throws DukeException;
 }

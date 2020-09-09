@@ -41,7 +41,17 @@ public class Todo extends Task {
 
     @Override
     public Task duplicate() {
-        return new Todo(description);
+        Todo duplicateTodo = new Todo(description);
+        if (this.isDone()) {
+            duplicateTodo.markAsDone();
+        }
+
+        return duplicateTodo;
+    }
+
+    @Override
+    public void setField(String fieldContent) throws DukeException {
+        throw new DukeException("Todo should modify field content.");
     }
 
     @Override

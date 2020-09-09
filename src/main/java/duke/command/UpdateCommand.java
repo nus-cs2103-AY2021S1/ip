@@ -47,7 +47,7 @@ public class UpdateCommand extends Command {
             throw new DukeException("Task does not exist/invalid task number.");
         }
 
-        Action a = new UpdateAction(ui, tasks, actionQueue, taskNumber);
+        Action a = new UpdateAction(ui, tasks, taskNumber);
         a.prompt(ui);
         actionQueue.add(a);
     }

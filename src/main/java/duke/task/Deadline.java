@@ -58,7 +58,22 @@ public class Deadline extends Task {
 
     @Override
     public Task duplicate() {
-        return new Deadline(description, by, byLocalDate);
+        Deadline duplicateDeadline = new Deadline(description, by, byLocalDate);
+        if (this.isDone()) {
+            duplicateDeadline.markAsDone();
+        }
+
+        return duplicateDeadline;
+    }
+
+    @Override
+    public void setField(String fieldContent) throws DukeException {
+        try {
+            this.by = fieldContent;
+            this.byLocalDate = LocalDate.parse(fieldContent);
+        } catch (Exception e) {
+            throw new DukeException("Date is not in YYYY-MM-DD format");
+        }
     }
 
     @Override

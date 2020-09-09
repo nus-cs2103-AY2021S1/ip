@@ -133,6 +133,11 @@ public class Ui {
         System.out.println("Bye. Hope to see you again soon!");
     }
 
+    /**
+     * Display message when a Task has been updated.
+     * @param t Updated Task.
+     * @param taskNumber The position of the Task in TaskList.
+     */
     public void showUpdateMessage(Task t, int taskNumber) {
         String message =
                 "Nice! I've updated this task:\n"
@@ -140,18 +145,30 @@ public class Ui {
         System.out.println(message);
     }
 
+    /**
+     * Display message to prompt a 'y' or 'n' from user.
+     */
     public void showConfirmationMessage() {
         System.out.println("Are you sure? { y / n }");
     }
 
+    /**
+     * Follow up message from method:showConfirmationMessage if User input was neither 'y' or 'n'.
+     */
     public void showRepeatConfirmationMessage() {
         System.out.println("Answer must be either a 'y' or 'n'.");
     }
 
+    /**
+     * Display message when User has aborted an Action.
+     */
     public void showCancelledActionMessage() {
         System.out.println("Action was not carried out.");
     }
 
+    /**
+     * Display message to prompt User to provide changes to a Task.
+     */
     public void showUpdateActionMessage() {
         System.out.println("Please enter changes.");
     }
