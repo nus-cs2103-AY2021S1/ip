@@ -4,6 +4,10 @@ package duke;
  * The Parser class deals with making sense of the user command.
  */
 public class Parser {
+    
+    public static Command start() {
+        return new ReminderCommand();
+    }
 
     /**
      * Reads the user input and determines which command to execute.

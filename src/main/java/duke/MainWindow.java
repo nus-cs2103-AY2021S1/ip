@@ -7,6 +7,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.io.IOException;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -49,10 +52,14 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
     
-    public void showWelcomeMessage() {
-        String message = duke.showWelcomeMessage();
-        dialogContainer.getChildren().add(
-                DialogBox.getDukeDialog(message, dukeImage)
-        );
+    public void showWelcomeMessage() throws IOException, DukeException {
+        try {
+            String message = duke.showWelcomeMessage();
+            dialogContainer.getChildren().add(
+                    DialogBox.getDukeDialog(message, dukeImage)
+            );
+        } catch (DukeException | IOException e) {
+            System.out.println(e.getMessage());
+        }
     }
 }

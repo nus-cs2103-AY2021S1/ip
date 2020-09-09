@@ -2,15 +2,6 @@ package duke;
 
 import java.io.IOException;
 
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
-import javafx.scene.layout.VBox;
-import javafx.stage.Stage;
-import javafx.scene.image.Image;
-
 /**
  * The Duke program represents a person assistant
  * chatbot that helps the user manage tasks and store them
@@ -45,6 +36,11 @@ public class Duke {
         }
     }
     
+    public String giveReminders() throws IOException, DukeException {
+        Command start = Parser.start();
+        return start.execute(taskList, ui, store);
+    }
+    
     /**
      * Runs the chatbot until an exit command is issued.
      */
@@ -58,8 +54,12 @@ public class Duke {
         }
     }
     
-    public String showWelcomeMessage() {
-        return this.ui.greet();
+    public String showWelcomeMessage() throws DukeException, IOException {
+        try {
+            return this.ui.greetUser() + "\n" + giveReminders();
+        } catch (DukeException | IOException e) {
+            return e.getMessage();
+        }
     }
     
     public String getResponse(String input) {

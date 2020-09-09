@@ -18,7 +18,7 @@ public class Ui {
     /**
      * Greets the user.
      */
-    public String greet() {
+    public String greetUser() {
         return ("Hello, I'm Bo-Chan!\n" + "How may I help you?");
     }
 
@@ -104,5 +104,13 @@ public class Ui {
     public String showTaskTotal(TaskList taskList) {
         int total = taskList.getSize();
         return ("You now have " + Integer.toString(total) + " task(s) in the list.");
+    }
+    
+    public String showNotOverdue() {
+        return ("These are your current tasks:" + "\n");
+    }
+    
+    public String showOverdue() {
+        return ("These are your overdue tasks:" + "\n");
     }
 }
