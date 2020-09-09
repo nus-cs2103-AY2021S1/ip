@@ -1,11 +1,10 @@
 import java.nio.file.*;
-import java.util.List;
 
 /**
  * Duke is a Personal Assistant bot that helps you to keep track of various tasks.
  */
 public class Duke {
-    private TaskList taskList;
+    private TaskList tasks;
     private Storage storage;
     private Ui ui;
 
@@ -14,7 +13,7 @@ public class Duke {
         String home = System.getProperty("user.dir");
         Path savePath = Paths.get(home, "data", "duke.txt");
         this.storage = new Storage(savePath);
-        this.taskList = new TaskList(storage.load());
+        this.tasks = new TaskList(storage.load());
     }
 
     public static void main(String[] args) {
@@ -41,39 +40,38 @@ public class Duke {
         }
     }
 
-
     private boolean handleCommand(String[] commands) throws DukeException {
         Task task;
         switch (commands[0]) {
         case "todo":
             Parser.checkValidAddCommand(commands);
-            task = taskList.addTask(new Todo(commands[1]));
-            ui.showAdd(task, taskList);
+            task = tasks.addTask(new Todo(commands[1]));
+            ui.showAdd(task, tasks);
             break;
         case "deadline":
             Parser.checkValidAddCommand(commands);
-            task = taskList.addTask(Deadline.create(commands[1]));
-            ui.showAdd(task, taskList);
+            task = tasks.addTask(Deadline.create(commands[1]));
+            ui.showAdd(task, tasks);
             break;
         case "event":
             Parser.checkValidAddCommand(commands);
-            task = taskList.addTask(Event.create(commands[1]));
-            ui.showAdd(task, taskList);
+            task = tasks.addTask(Event.create(commands[1]));
+            ui.showAdd(task, tasks);
             break;
         case "list":
-            ui.showTaskList(taskList);
+            ui.showTaskList(tasks);
             break;
         case "done":
-            task = taskList.markTaskDone(commands);
+            task = tasks.markTaskDone(commands);
             ui.showDone(task);
             break;
         case "delete":
-            task = taskList.deleteTask(commands);
-            ui.showDelete(task, taskList);
+            task = tasks.deleteTask(commands);
+            ui.showDelete(task, tasks);
             break;
         case "bye":
             ui.showBye();
-            storage.save(taskList);
+            storage.save(tasks);
             return false;
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

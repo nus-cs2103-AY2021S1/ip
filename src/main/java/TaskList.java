@@ -4,10 +4,10 @@ import java.util.List;
  * TaskList contains the task list e.g., it has operations to add/delete tasks in the list
  */
 public class TaskList {
-    private List<Task> taskList;
+    private List<Task> tasks;
 
-    TaskList(List<Task> taskList) {
-        this.taskList = taskList;
+    TaskList(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     /**
@@ -15,7 +15,7 @@ public class TaskList {
      * @return the size of the task list
      */
     public int size() {
-        return taskList.size();
+        return tasks.size();
     }
 
     /**
@@ -24,7 +24,7 @@ public class TaskList {
      * @return the task that has been added to the task list
      */
     public Task addTask(Task task) {
-        taskList.add(task);
+        tasks.add(task);
         return task;
     }
 
@@ -35,8 +35,8 @@ public class TaskList {
      * @throws DukeException
      */
     public Task markTaskDone(String[] commands) throws DukeException {
-        int index = Parser.getTaskIndex(commands, taskList);
-        Task task = taskList.get(index);
+        int index = Parser.getTaskIndex(commands, tasks);
+        Task task = tasks.get(index);
         task.markDone();
         return task;
     }
@@ -48,8 +48,8 @@ public class TaskList {
      * @throws DukeException
      */
     public Task deleteTask(String[] commands) throws DukeException {
-        int index = Parser.getTaskIndex(commands, taskList);
-        Task task = taskList.remove(index);
+        int index = Parser.getTaskIndex(commands, tasks);
+        Task task = tasks.remove(index);
         return task;
     }
 
@@ -58,14 +58,14 @@ public class TaskList {
      * @return a List of Tasks
      */
     public List<Task> getTasks() {
-        return taskList;
+        return tasks;
     }
 
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
-        for (int i = 0; i < taskList.size(); i++) {
-            stringBuilder.append((i+1) + "."+ taskList.get(i) +"\n");
+        for (int i = 0; i < tasks.size(); i++) {
+            stringBuilder.append((i+1) + "."+ tasks.get(i) +"\n");
         }
         stringBuilder.setLength(stringBuilder.length() - 1);
         return stringBuilder.toString();
