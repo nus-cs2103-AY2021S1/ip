@@ -43,10 +43,10 @@ public class Duke {
     private void run() throws IOException {
         Scanner scanner = new Scanner(System.in);
         String input = scanner.nextLine();
-        Command ioHandler = Parser.parseInput(input);
+        Command command = Parser.parseInput(input);
 
-        assert ioHandler != null;
-        System.out.println(ioHandler.handle(input, taskManager, fileHandler));
+        assert command != null;
+        System.out.println(command.handle(input, taskManager, fileHandler));
     }
 
     /**
@@ -54,9 +54,9 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     public String getResponse(String input) throws IOException {
-        Command ioHandler = Parser.parseInput(input);
+        Command command = Parser.parseInput(input);
 
-        assert ioHandler != null;
-        return ioHandler.handle(input, taskManager, fileHandler);
+        assert command != null;
+        return command.handle(input, taskManager, fileHandler);
     }
 }

@@ -17,7 +17,6 @@ public class TextAndTaskConverter {
         String priority = splitLine[2];
         String description = splitLine[3];
 
-
         if (splitLine.length == 4) {
             Todo task = new Todo(description);
             if (done.trim().equals("1")) {
