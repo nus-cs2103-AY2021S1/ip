@@ -93,6 +93,34 @@ public class Parser {
                 ArrayList<String> matchingTasks = lines.find(keyword);
                 return Ui.listMatchingTasks(matchingTasks);
             }
+        } else if (inputString.indexOf("tag ") == 0) {
+            boolean missingTagDetails = inputString.length() <= 6
+                    || inputString.length() == 7 && inputString.lastIndexOf(" ") == 6;
+            if (missingTagDetails) {
+                throw new DukeException("Hey, your tag command is missing details! Check it again!");
+            } else {
+                String taskIndex = inputString.substring(4, 6);
+                boolean singleDigit = taskIndex.contains(" ");
+                if (singleDigit) {
+                    try {
+                        int index = Integer.parseInt(taskIndex.substring(0, 1));
+                        String description = inputString.substring(6);
+                        lines.tagItem(index - 1, description);
+                        return Ui.taggedTask(lines.getTask(index - 1));
+                    } catch (NumberFormatException e) {
+                        throw new DukeException("That is not a valid index input!");
+                    }
+                } else {
+                    try {
+                        int index = Integer.parseInt(taskIndex.substring(0, 2));
+                        String description = inputString.substring(7);
+                        lines.tagItem(index - 1, description);
+                        return Ui.taggedTask(lines.getTask(index - 1));
+                    } catch (NumberFormatException e) {
+                        throw new DukeException("That is not a valid index input!");
+                    }
+                }
+            }
         } else {
             Task task = null;
             if (inputString.indexOf("todo ") == 0) {
