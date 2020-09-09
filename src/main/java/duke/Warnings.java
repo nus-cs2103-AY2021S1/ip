@@ -148,12 +148,33 @@ public class Warnings extends Ui {
         return warningMsg;
     }
 
+    /**
+     * Display warning message when error occurs while try to archive a task.
+     *
+     * @param tasksSize Number of tasks in active TaskList.
+     * @return System warning message.
+     */
     public static String getInvalidArchiveMsg(int tasksSize) {
         String warningMsg = DIVIDER_WARNING
                 + "\n [• ▂ •]What? "
                 + "\n I couldn't archive this task, please re-enter a valid task index!"
                 + "\n And make sure you follow this format - 'archive <Task_Index>'."
                 + "\n You have " + tasksSize + " tasks in total."
+                + "\n **Type 'help' to see what I can do. |^_^|"
+                + "\n" + DIVIDER_WARNING + "\n";
+        System.out.println(warningMsg);
+        return warningMsg;
+    }
+
+    /**
+     * Display warning message when error occurs while try to find tasks.
+     *
+     * @return System warning message.
+     */
+    public static String getInvalidFindMsg() {
+        String warningMsg = DIVIDER_WARNING
+                + "\n [• ▂ •]What? "
+                + "\n Please make sure you follow this format - 'find <Keyword>'."
                 + "\n **Type 'help' to see what I can do. |^_^|"
                 + "\n" + DIVIDER_WARNING + "\n";
         System.out.println(warningMsg);

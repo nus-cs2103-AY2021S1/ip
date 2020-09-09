@@ -61,15 +61,20 @@ public class Parser {
         } catch (IndexOutOfBoundsException e) {
             return Warnings.getInvalidArchiveMsg(tasks.getTaskListSize());
         } catch (NumberFormatException e) {
-            // if the user doesn't key in a valid index after keyword "delete"
+            // if the user doesn't key in a valid index after keyword "archive"
             return Warnings.getInvalidArchiveMsg(tasks.getTaskListSize());
         }
     }
 
     private static String parseFind(String inputMsg, TaskList tasks) {
-        String keyword = inputMsg.split("find ")[1];
-        ArrayList<Task> matchedTasks = TaskList.findTask(keyword, tasks.getTaskList());
-        return Ui.getMatchingTasksMsg(keyword, matchedTasks);
+        try {
+            String keyword = inputMsg.split("find ")[1];
+            ArrayList<Task> matchedTasks = TaskList.findTask(keyword, tasks.getTaskList());
+            return Ui.getMatchingTasksMsg(keyword, matchedTasks);
+        } catch (IndexOutOfBoundsException e) {
+            // if the user doesn't key in a valid index after keyword "find"
+            return Warnings.getInvalidFindMsg();
+        }
     }
 
     private static String parseDelete(String inputMsg, TaskList tasks) {
