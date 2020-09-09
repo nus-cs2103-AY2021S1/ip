@@ -102,8 +102,10 @@ public class TaskStorage {
         FileWriter taskWriter = new FileWriter(taskFile);
         FileWriter isDoneWriter = new FileWriter(isDoneFile);
 
+        // Remove all current contents in the files
         taskWriter.write("");
         isDoneWriter.write("");
+
         for (Task task : tasks) {
             taskWriter.append(taskToString(task) + '\n');
             isDoneWriter.append(Boolean.toString(task.isTaskDone()) + '\n');

@@ -25,6 +25,8 @@ public class UiPrint {
      * @param length the length of the line
      */
     public static void drawLine(char ch, int length) {
+        assert length >= 0 : "the length of a line cannot be negative";
+
         System.out.println(getLine(ch, length));
     }
 
@@ -35,6 +37,8 @@ public class UiPrint {
      * @return the formed line
      */
     public static String getLine(char ch, int length) {
+        assert length >= 0 : "the length of a line cannot be negative";
+
         String line = "\n";
         for (int i = 0; i < length; i++) {
             line += ch;

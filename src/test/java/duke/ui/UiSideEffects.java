@@ -5,7 +5,6 @@ public class UiSideEffects {
     private static UiSideEffects instance;
     //CHECKSTYLE:OFF: VisibilityModifier
     public boolean uiGreet;
-    public boolean uiEcho;
     public boolean uiReportCurrentTasks;
     public boolean uiReportNewTask;
     public boolean uiReportDoneTask;
@@ -29,7 +28,6 @@ public class UiSideEffects {
      */
     public void reset() {
         uiGreet = false;
-        uiEcho = false;
         uiReportCurrentTasks = false;
         uiReportNewTask = false;
         uiReportDeleteTask = false;

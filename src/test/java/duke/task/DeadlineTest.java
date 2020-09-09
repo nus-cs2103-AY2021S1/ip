@@ -6,6 +6,7 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
+import duke.exception.EmptyTimeException;
 import duke.exception.ExceptionMessage;
 import duke.exception.IncorrectFormatException;
 
@@ -27,12 +28,26 @@ public class DeadlineTest {
     }
 
     @Test
-    public void createDeadline_noDeadline_exceptionThrown() {
-        // lambda used here
+    public void createDeadline_incorrectFormat_exceptionThrown() {
+        String incorrectFormatInput = "read book";
+
+		// lambda used here
         Exception exception = assertThrows(
-                IncorrectFormatException.class, () -> Deadline.createDeadline("read book"));
+                IncorrectFormatException.class, () -> Deadline.createDeadline(incorrectFormatInput));
 
         String errMessage = ExceptionMessage.DEADLINE_INCORRECT_FORMAT_MESSAGE;
+
+        assertEquals(errMessage, exception.getMessage());
+    }
+
+    @Test
+    public void createDeadline_blankTime_exceptionThrown() {
+        String blankTimeInput = "read book /by      ";
+
+        Exception exception = assertThrows(
+                EmptyTimeException.class, () -> Deadline.createDeadline(blankTimeInput));
+
+        String errMessage = ExceptionMessage.EMPTY_TIME_MESSAGE;
 
         assertEquals(errMessage, exception.getMessage());
     }

@@ -18,11 +18,6 @@ public class UiStub extends UiResponse {
     }
 
     @Override
-    public void echo(String str) {
-        sideEffects.uiEcho = true;
-    }
-
-    @Override
     public void reportCurrentTasks() {
         sideEffects.uiReportCurrentTasks = true;
     }
