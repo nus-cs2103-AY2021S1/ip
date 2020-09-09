@@ -1,8 +1,8 @@
 package chatbot.util.comparator;
 
-import chatbot.data.Task;
-
 import java.util.Comparator;
+
+import chatbot.data.Task;
 
 public class TaskByDateReverseComparator implements Comparator<Task> {
 

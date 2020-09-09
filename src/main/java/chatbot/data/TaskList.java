@@ -1,13 +1,13 @@
 package chatbot.data;
 
-import chatbot.common.Message;
-
-import chatbot.exception.ChatbotException;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Iterator;
 import java.util.function.Predicate;
+
+import chatbot.common.Message;
+import chatbot.exception.ChatbotException;
+
 
 /**
  * A class containing a list of tasks, with methods for adding new tasks, deleting and returning
@@ -112,12 +112,15 @@ public class TaskList {
         return tasks;
     }
 
+    /**
+     * Retrieve tasks by order, specified by a comparator.
+     * @param comp comparator to decide order
+     * @return list of tasks in the specified order
+     */
     public ArrayList<Task> retrieveTasksByOrder(Comparator<Task> comp) {
-        ArrayList<Task> copyOfTasks = new ArrayList<>();
-        for (Task t : tasks) {
-            copyOfTasks.add(t);
-        }
+        ArrayList<Task> copyOfTasks = new ArrayList<>(tasks);
         copyOfTasks.sort(comp);
+
         return copyOfTasks;
     }
 }

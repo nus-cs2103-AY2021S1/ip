@@ -7,8 +7,12 @@ package chatbot.exception;
 
 public class ChatbotException extends Exception {
 
-    String message;
+    protected final String message;
 
+    /**
+     * Constructs an exception specific to the chatbot.
+     * @param message
+     */
     public ChatbotException(String message) {
         super(message);
         this.message = message;

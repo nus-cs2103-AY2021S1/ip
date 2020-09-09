@@ -1,11 +1,11 @@
 package chatbot.parser;
 
-import chatbot.commands.*;
-
+import chatbot.commands.Command;
+import chatbot.commands.ExitCommand;
+import chatbot.commands.ShowAllCommand;
 import chatbot.common.CommandType;
 import chatbot.common.Message;
 import chatbot.common.TaskType;
-
 import chatbot.exception.ChatbotException;
 
 /**

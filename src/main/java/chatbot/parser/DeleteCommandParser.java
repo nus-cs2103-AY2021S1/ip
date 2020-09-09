@@ -2,7 +2,6 @@ package chatbot.parser;
 
 import chatbot.commands.Command;
 import chatbot.commands.DeleteCommand;
-
 import chatbot.exception.ChatbotException;
 import chatbot.exception.ParseException;
 

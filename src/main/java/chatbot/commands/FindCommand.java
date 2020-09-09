@@ -1,18 +1,16 @@
 package chatbot.commands;
 
-import chatbot.data.Task;
-import chatbot.data.TaskList;
-
-import chatbot.storage.Storage;
-
-import chatbot.ui.Ui;
-
 import java.util.ArrayList;
 import java.util.function.Predicate;
 
+import chatbot.data.Task;
+import chatbot.data.TaskList;
+import chatbot.storage.Storage;
+import chatbot.ui.Ui;
+
 public class FindCommand extends Command {
 
-    Predicate<Task> pred;
+    private final Predicate<Task> pred;
 
     public FindCommand(Predicate<Task> pred) {
         this.pred = pred;

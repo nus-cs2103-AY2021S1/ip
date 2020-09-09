@@ -1,26 +1,23 @@
 package chatbot.parser;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+
 import chatbot.commands.AddCommand;
 import chatbot.commands.Command;
-
 import chatbot.common.Message;
 import chatbot.common.TaskType;
-
 import chatbot.data.Deadline;
 import chatbot.data.Event;
 import chatbot.data.Todo;
-
 import chatbot.exception.ChatbotException;
 import chatbot.exception.InvalidDateFormatException;
 import chatbot.exception.NoArgumentException;
 import chatbot.exception.ParseException;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
 public class AddCommandParser implements Parser {
 
-    TaskType type;
+    private final TaskType type;
 
     public AddCommandParser(TaskType type) {
         this.type = type;

@@ -1,15 +1,14 @@
 package chatbot;
 
+import java.nio.file.Path;
+
 import chatbot.commands.Command;
 import chatbot.commands.ExitCommand;
-
 import chatbot.data.TaskList;
 import chatbot.exception.ChatbotException;
 import chatbot.parser.ChatbotParser;
 import chatbot.storage.Storage;
 import chatbot.ui.Ui;
-
-import java.nio.file.Path;
 
 public class Chatbot {
 
@@ -19,13 +18,21 @@ public class Chatbot {
 
     private Path filePath;
 
+    /**
+     * Constructs a chatbot with storage capabilities.
+     */
     public Chatbot() {
-        initialiseDataPath("chatbot.txt");
+        initialiseDataPath();
         initialiseUI();
         initialiseStorage();
         initialiseTaskList(taskStorage);
     }
 
+    /**
+     * Generates a response from user input.
+     * @param input user input
+     * @return response message
+     */
     public String getResponse(String input) {
         String response;
 
@@ -47,23 +54,28 @@ public class Chatbot {
         return response;
     }
 
+    /**
+     * Generates a welcome message.
+     * @return Welcome message
+     */
     public String generateWelcomeMessage() {
         return ui.getWelcomeMessage();
     }
 
-    public void initialiseDataPath(String path) {
+    private void initialiseDataPath() {
+        String path = "chatbot.txt";
         this.filePath = Path.of(path);
     }
 
-    public void initialiseUI() {
+    private void initialiseUI() {
         ui = new Ui();
     }
 
-    public void initialiseStorage() {
+    private void initialiseStorage() {
         taskStorage = new Storage(filePath);
     }
 
-    public void initialiseTaskList(Storage store) {
+    private void initialiseTaskList(Storage store) {
         // load tasks from disk
         try {
             taskList = new TaskList(store.loadTasks());

@@ -2,11 +2,8 @@ package chatbot.commands;
 
 import chatbot.data.Task;
 import chatbot.data.TaskList;
-
 import chatbot.exception.ChatbotException;
-
 import chatbot.storage.Storage;
-
 import chatbot.ui.Ui;
 
 /**
@@ -15,7 +12,7 @@ import chatbot.ui.Ui;
 
 public class DeleteCommand extends Command {
 
-    int index;
+    private final int index;
 
     public DeleteCommand(int index) {
         this.index = index;

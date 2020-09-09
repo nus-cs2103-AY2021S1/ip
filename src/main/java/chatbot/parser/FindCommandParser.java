@@ -1,24 +1,20 @@
 package chatbot.parser;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.function.Predicate;
+
 import chatbot.commands.Command;
 import chatbot.commands.FindCommand;
-
 import chatbot.common.CommandType;
-
 import chatbot.data.Task;
-
 import chatbot.exception.ChatbotException;
 import chatbot.exception.InvalidDateFormatException;
 import chatbot.exception.ParseException;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-
-import java.util.function.Predicate;
-
 public class FindCommandParser implements Parser {
 
-    CommandType type;
+    private final CommandType type;
 
     public FindCommandParser(CommandType type) {
         this.type = type;
@@ -30,8 +26,8 @@ public class FindCommandParser implements Parser {
         case DATE:
             try {
                 LocalDate date = LocalDate.parse(args);
-                Predicate<Task> pred = task ->
-                        (task.getDate() != null && task.getDate().equals(date));
+                Predicate<Task> pred = task -> (
+                        task.getDate() != null && task.getDate().equals(date));
 
                 return new FindCommand(pred);
             } catch (DateTimeParseException e) {
@@ -40,6 +36,8 @@ public class FindCommandParser implements Parser {
         case FIND:
             Predicate<Task> pred = task -> (task.getDescription().contains(args));
             return new FindCommand(pred);
+        default:
+            break;
         }
 
         throw new ParseException();

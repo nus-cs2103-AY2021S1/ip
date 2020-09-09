@@ -1,9 +1,9 @@
 package chatbot.util.comparator;
 
-import chatbot.data.Task;
-
 import java.time.LocalDate;
 import java.util.Comparator;
+
+import chatbot.data.Task;
 
 /**
  * Compares tasks by chronological order. Tasks which are not dated are preceded

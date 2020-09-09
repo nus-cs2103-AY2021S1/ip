@@ -1,16 +1,15 @@
 package chatbot.parser;
 
-import chatbot.commands.AddCommand;
-import chatbot.commands.Command;
-
-import chatbot.common.Message;
-import chatbot.exception.ChatbotException;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import chatbot.commands.AddCommand;
+import chatbot.commands.Command;
+import chatbot.common.Message;
+import chatbot.exception.ChatbotException;
 
 public class ParserTest {
 

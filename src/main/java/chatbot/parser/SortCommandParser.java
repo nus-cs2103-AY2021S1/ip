@@ -2,10 +2,8 @@ package chatbot.parser;
 
 import chatbot.commands.Command;
 import chatbot.commands.SortCommand;
-
 import chatbot.exception.ChatbotException;
 import chatbot.exception.ParseException;
-
 import chatbot.util.comparator.TaskByDateComparator;
 
 public class SortCommandParser implements Parser {

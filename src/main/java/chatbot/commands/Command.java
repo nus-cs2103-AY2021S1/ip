@@ -10,14 +10,15 @@ public abstract class Command {
      * Returns true if this command instructs the program to exit.
      * @return if program should exits
      */
-    abstract public boolean isExit();
+    public abstract boolean isExit();
 
     /**
      * Executes the command.
      * @param taskList the TaskList object for handling tasks
      * @param ui the UI object for text-ui display
      * @param storage the Storage object for persistence
+     * @return String response text from executing the command
      * @throws ChatbotException if execution unsuccessful
      */
-    abstract public String execute(TaskList taskList, Ui ui, Storage storage) throws ChatbotException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws ChatbotException;
 }

@@ -1,24 +1,20 @@
 package chatbot.storage;
 
-import chatbot.common.Message;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.stream.Stream;
 
+import chatbot.common.Message;
 import chatbot.data.Deadline;
 import chatbot.data.Event;
 import chatbot.data.Task;
 import chatbot.data.Todo;
-
 import chatbot.exception.ChatbotException;
 
-import java.io.IOException;
-
-import java.nio.file.Files;
-import java.nio.file.Path;
-
-import java.time.LocalDate;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.stream.Stream;
 
 /**
  * A storage class that contains methods for loading and saving tasks.
@@ -89,6 +85,12 @@ public class Storage {
         }
     }
 
+    /**
+     * Save the current tasks to disk.
+     * @param taskList list of tasks
+     * @return true if save is successful
+     * @throws ChatbotException if save is unsuccessful
+     */
     public boolean saveTasks(ArrayList<Task> taskList) throws ChatbotException {
 
         Iterator<Task> iter = taskList.iterator();
@@ -100,11 +102,13 @@ public class Storage {
 
             Task tsk = iter.next();
             String timestamp = tsk.getDate() == null ? "-" : tsk.getDate().toString();
-            String entry = tsk.getType() + separator +
-                    tsk.getStatus() + separator +
-                    tsk.getDescription() + separator +
-                    timestamp  +
-                    System.lineSeparator();
+            String entry = tsk.getType() + separator
+                    + tsk.getStatus() + separator
+                    + tsk.getDescription()
+                    + separator
+                    + timestamp
+                    + System.lineSeparator();
+
             dataStr = dataStr.concat(entry);
         }
 
