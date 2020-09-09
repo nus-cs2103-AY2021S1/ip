@@ -44,6 +44,14 @@ public class DateTime extends TimePoint {
         this.haveTime = true;
     }
 
+    public static DateTime getToday() {
+        return new DateTime(LocalDate.now());
+    }
+
+    public boolean hasSameDate(DateTime date) {
+        return this.date.equals(date.date);
+    }
+
     /**
      * Returns string representation of this <code>DateTime</code> for display in dd MMMM yyyy h:mma.
      * See <code>java.time.format.DateTimeFormatter</code> for meaning of the abbreviated time format pattern.
