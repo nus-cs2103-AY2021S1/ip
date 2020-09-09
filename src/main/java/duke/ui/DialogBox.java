@@ -25,6 +25,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Constructs a DialogBox object that handles the user interface of the program.
+     *
+     * @param text Text to be displayed.
+     * @param img Image displayed of either the user or "Bob".
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -49,6 +55,7 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }

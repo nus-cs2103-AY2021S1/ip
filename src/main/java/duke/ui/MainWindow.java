@@ -31,6 +31,11 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets the Duke object that will be processing all the user commands and displays greetings by the "Bob".
+     *
+     * @param d Duke object.
+     */
     public void setDuke(Duke d) {
         duke = d;
         displayGreetings();

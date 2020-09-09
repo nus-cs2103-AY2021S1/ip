@@ -6,7 +6,7 @@ package duke.exception;
  */
 public class InvalidTaskDateException extends InvalidUserCommandException {
     /**
-     * Creates a new InvalidTaskDateException with the specified invalid date.
+     * Constructs a new InvalidTaskDateException with the specified invalid date.
      *
      * @param invalidDate
      */

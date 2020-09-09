@@ -5,7 +5,7 @@ package duke.exception;
  */
 public class InvalidIndexNumberException extends NumberFormatException {
     /**
-     * Creates a new InvalidIndexNumberException with no specified detail message.
+     * Constructs a new InvalidIndexNumberException with no specified detail message.
      */
     public InvalidIndexNumberException() {
         super("OOPS! Please enter a numerical number to mark tasks as done :)");

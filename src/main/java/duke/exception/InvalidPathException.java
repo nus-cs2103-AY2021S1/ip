@@ -5,7 +5,7 @@ package duke.exception;
  */
 public class InvalidPathException extends StorageException {
     /**
-     * Creates a new InvalidPathException with no detail message.
+     * Constructs a new InvalidPathException with no detail message.
      */
     public InvalidPathException() {
         super("Invalid path!! Closing program");
