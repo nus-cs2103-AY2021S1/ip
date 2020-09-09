@@ -20,29 +20,39 @@ public class Duke {
     public String getResponse(String input) {
         parser.parse(input);
         switch(parser.getSplitUserInput()[0].toLowerCase()) {
-            case "assist":
-                return Ui.assist();
-            case "dismiss":
-                new Timer().schedule(new TimerTask() {
-                    public void run () { System.exit(0); }
-                }, 1000);
-                return Ui.dismiss();
-            case "scroll":
-                return tasks.printAllTasks();
-            case "find":
-                return tasks.returnSearchedTask(parser.getSplitUserInput());
-            case "delete":
-                int deleteIndex = tasks.getDeleteTaskIndex(parser.getSplitUserInput());
-                storage.removeFromFile(deleteIndex);
-                return tasks.getDeletedTaskMessage(parser.getSplitUserInput());
-            case "conquer":
-                int conquerIndex = tasks.getConquerTaskIndex(parser.getSplitUserInput());
-                storage.overwriteInFile(conquerIndex);
-                return tasks.getConquerTaskMessage(parser.getSplitUserInput());
-            default:
-                Task t = tasks.addTask(parser.getSanitisedUserInput());
-                storage.writeToFile(t, parser.getSanitisedUserInput());
-                return tasks.getAddedTaskMessage(parser.getSanitisedUserInput());
+        case "assist":
+            return Ui.assist();
+        case "dismiss":
+            new Timer().schedule(new TimerTask() {
+                public void run () { System.exit(0); }
+            }, 1000);
+            return Ui.dismiss();
+        case "scroll":
+            return tasks.printAllTasks();
+        case "find":
+            return tasks.returnSearchedTask(parser.getSplitUserInput());
+        case "delete":
+            String deletedMessage = tasks.deleteTaskAndGetMessage(parser.getSplitUserInput());
+            storage.removeFromFile(tasks.getDeletedTaskIndex());
+            return deletedMessage;
+        case "conquer":
+            String conqueredMessage = tasks.conquerTaskAndGetMessage(parser.getSplitUserInput());
+            storage.overwriteInFile(tasks.getConqueredTaskIndex());
+            return conqueredMessage;
+        case "todo":
+            String todoMessage = tasks.addTodoAndGetMessage(parser.getSplitUserInput());
+            storage.writeToFile(tasks.getAddedTask(), parser.getSplitUserInput());
+            return todoMessage;
+        case "deadline":
+            String deadlineMessage = tasks.addDeadlineAndGetMessage(parser.getSplitUserInput());
+            storage.writeToFile(tasks.getAddedTask(), parser.getSplitUserInput());
+            return deadlineMessage;
+        case "event":
+            String eventMessage = tasks.addEventAndGetMessage(parser.getSplitUserInput());
+            storage.writeToFile(tasks.getAddedTask(), parser.getSplitUserInput());
+            return eventMessage;
+        default:
+            return Ui.printWrongInputErrorMessage();
         }
     }
     
