@@ -7,10 +7,7 @@ import duke.exception.DukeException;
 import duke.exception.EmptyListException;
 import duke.exception.OutOfBoundsException;
 import duke.exception.SomethingWentWrongException;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.task.*;
 
 @SuppressWarnings("ALL")
 public class TaskList {
@@ -186,16 +183,33 @@ public class TaskList {
      * @return
      * @throws DukeException
      */
-    public Task repeatTask(int index, LocalDateTime end, long recurrence) throws DukeException {
+    public Task repeatTask(int index, LocalDateTime end, long recurrence,
+                           RecurrenceType recurType) throws DukeException {
         Task task = list.get(index);
         String desc = task.getText();
         LocalDateTime start = task.getDateTime();
         TaskType type = task.getType();
-        LocalDateTime date = start.plusDays(recurrence);
+        LocalDateTime date = incrementDate(start, recurrence, recurType);
         while (date.isBefore(end) || date.isEqual(end)) {
             add(desc, date, type);
-            date = date.plusDays(recurrence);
+            date = incrementDate(date, recurrence, recurType);
         }
         return task;
+    }
+
+    private LocalDateTime incrementDate(LocalDateTime current, long recurrence,
+                                        RecurrenceType recurType) throws SomethingWentWrongException {
+        switch (recurType) {
+        case DAY:
+            return current.plusDays(recurrence);
+        case WEEK:
+            return current.plusWeeks(recurrence);
+        case MONTH:
+            return current.plusMonths(recurrence);
+        case YEAR:
+            return current.plusYears(recurrence);
+        default:
+            throw new SomethingWentWrongException();
+        }
     }
 }

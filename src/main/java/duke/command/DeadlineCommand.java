@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.TaskType;
+import duke.task.TaskType;
 import duke.Ui;
 import duke.exception.DukeException;
 import duke.exception.PastDateTimeException;

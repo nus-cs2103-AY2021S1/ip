@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.TaskType;
-
 import java.time.LocalDateTime;
 
 public abstract class Task {
