@@ -55,6 +55,9 @@ public class Ui {
      * Returns a string representation of the task list in the program.
      */
     public String printList(TaskList lst) {
+
+        assert lst != null : "lst should be a valid list";
+
         String s = lst.toString();
 
         if (lst.getSize() == 0) {
@@ -90,6 +93,9 @@ public class Ui {
      * @param task Task that was added
      */
     public String printTaskAdded(TaskList lst, Task task) {
+        assert task != null : "task should be valid";
+        assert lst != null : "lst should be valid";
+
         String s = "Got it. I've added this task:\n" + task.toString()
                 + "\nNow you have " + lst.getSize() + " tasks in the list.";
 
@@ -102,6 +108,8 @@ public class Ui {
      * @param task Task to be marked done.
      */
     public String printTaskDone(Task task) {
+        assert task != null : "task should be valid";
+
         String s = "Nice! I've marked this task as done:\n" + task.toString();
         return s;
     }
@@ -113,6 +121,9 @@ public class Ui {
      * @param task Task to be deleted
      */
     public String printTaskDeleted(TaskList lst, Task task) {
+        assert task != null : "task should be valid";
+        assert lst != null : "lst should be valid";
+
         String s = "Noted. I've removed this task:\n" + task.toString()
                 + "\nNow you have " + lst.getSize() + " tasks in the list.";
         return s;

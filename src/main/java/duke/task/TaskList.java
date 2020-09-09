@@ -67,6 +67,8 @@ public class TaskList {
      * @return list of tasks.
      */
     public List<Task> getList() {
+        assert this.lst != null : "list attribute should be initialized";
+
         return this.lst;
     }
 
@@ -86,6 +88,8 @@ public class TaskList {
      * @param tsk Task to be added.
      */
     public void add(Task tsk) {
+        assert tsk != null : "task should be valid";
+
         this.lst.add(tsk);
     }
 
@@ -136,6 +140,8 @@ public class TaskList {
      * @param itemNumber task number in the list(not index number)
      */
     public void markDone(int itemNumber) {
+        assert itemNumber > 0 : "itemNumber should be a valid item number in the list";
+
         Task doneItem = this.lst.get(itemNumber - 1);
         doneItem.markAsDone();
     }
@@ -147,6 +153,8 @@ public class TaskList {
      * @return Task that was deleted from the list.
      */
     public Task delete(int itemNumber) {
+        assert itemNumber > 0 : "itemNumber should be a valid item number in the list";
+
         Task item = this.lst.get(itemNumber - 1);
         this.lst.remove(item);
         return item;
