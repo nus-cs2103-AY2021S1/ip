@@ -19,6 +19,7 @@ public class Main {
 
         if (args.length == 0) {
             System.out.println(usage);
+            return;
         }
 
         // Run either CMD or GUI depending on program argument
