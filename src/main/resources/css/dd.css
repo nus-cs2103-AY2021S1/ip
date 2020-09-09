@@ -17,6 +17,7 @@
     -fx-border-radius: 15;
     -fx-font-family: "Youre So Cool";
     -fx-font-size: 15;
+    -fx-prompt-text-fill: #00000070;
     -fx-text-fill: black;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
 }
