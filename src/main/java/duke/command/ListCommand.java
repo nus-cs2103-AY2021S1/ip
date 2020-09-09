@@ -25,6 +25,7 @@ public class ListCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage)
             throws InvalidInputException {
+        assert tasks.taskListSize() >= 0;
         if (tasks.taskListSize() == 0) {
             return ui.printMessage("List is empty! Start adding to your task list!");
         } else {

@@ -19,6 +19,8 @@ public class Event extends Task {
     public Event(String description, LocalDateTime date) {
         super(description);
         this.date = date;
+        assert !description.isEmpty()
+                : "description cannot be empty";
     }
 
     /**

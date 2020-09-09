@@ -34,9 +34,15 @@ public class DoneCommand extends Command {
             throws InvalidInputException, InvalidFileException {
         if (super.input.length() <= 4) {
             throw new InvalidInputException(
-                    "☹ OOPS!!! Please choose a task to be completed.");
+                    "OOPS!!! Please choose a task to be completed.");
         }
         int index = Integer.parseInt(super.input.substring(5)) - 1;
+        assert index >= 0;
+        if (index > tasks.taskListSize()) {
+            throw new InvalidInputException(
+                    "OOPS!!! Invalid index."
+            );
+        }
         Task taskDone = tasks.getTask(index);
         tasks.markAsDone(index);
         storage.save(tasks);

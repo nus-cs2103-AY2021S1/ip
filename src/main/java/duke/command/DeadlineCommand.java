@@ -26,6 +26,13 @@ public class DeadlineCommand extends Command {
         super(input);
     }
 
+    private boolean isValidLength(String input) {
+        return input.length() <= 8;
+    }
+    private boolean containsKeyword(String input) {
+        return input.contains("/by");
+    }
+
     /**
      * Execute a Deadline Command to add a Deadline into TaskList.
      *
@@ -38,10 +45,14 @@ public class DeadlineCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage)
             throws InvalidInputException, InvalidFileException {
-        if (super.input.length() <= 8) {
-            throw new InvalidInputException("☹ OOPS!!! The description of a deadline cannot be empty.\n");
+        if (isValidLength(super.input)) {
+            throw new InvalidInputException("OOPS!!! The description of a deadline cannot be empty.\n");
+        }
+        if (!containsKeyword(super.input)) {
+            throw new InvalidInputException("OOPS!!! Please use '/by' keyword\n");
         }
         try {
+            assert super.input.contains("/by") : "Deadline does not have keyword command.";
             String[] split = super.input.substring(9).split("/by ", 2);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             LocalDateTime date = LocalDateTime.parse(split[1], formatter);
