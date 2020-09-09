@@ -121,9 +121,7 @@ public class Ui {
      */
     public void showTaskListView(List<? extends Task> taskList) {
         final List<String> formattedTasks = new ArrayList<>();
-        for (Task task : taskList) {
-            formattedTasks.add(task.toString());
-        }
+        taskList.forEach(task -> formattedTasks.add(task.toString()));
         showToUsersAsIndexedList(formattedTasks);
     }
 
@@ -132,9 +130,7 @@ public class Ui {
      */
     public String getTaskListView(List<? extends Task> taskList) {
         final List<String> formattedTasks = new ArrayList<>();
-        for (Task task : taskList) {
-            formattedTasks.add(task.toString());
-        }
+        taskList.forEach(task -> formattedTasks.add(task.toString()));
         return getIndexedListForViewing(formattedTasks);
     }
 
@@ -155,9 +151,7 @@ public class Ui {
     public String getResultToUser(CommandResult result) {
         final Optional<List<? extends Task>> tasks = result.getRelevantTasks();
         StringBuilder sb = new StringBuilder();
-        tasks.ifPresent(list -> {
-            sb.append(getTaskListView(list));
-        });
+        tasks.ifPresent(list -> sb.append(getTaskListView(list)));
         sb.append(result.feedbackToUser);
         return sb.toString();
     }
