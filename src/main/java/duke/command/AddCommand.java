@@ -1,7 +1,6 @@
 package duke.command;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.exception.DukeException;
 import duke.task.Task;
 
@@ -17,7 +16,7 @@ public class AddCommand extends Command {
         this.taskToAdd = task;
     }
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage) throws DukeException {
         tasks.addATask(this.taskToAdd);
         storage.writeData(tasks);
         StringBuilder str = new StringBuilder("Added new task:\n");

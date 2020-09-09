@@ -11,25 +11,25 @@ public class Duke {
 
     private Storage storage;
     private TaskList tasks;
-    private Ui ui;
+
 
     public Duke() {
-        ui = new Ui();
+
         storage = new Storage("duke.txt");
         try {
             tasks = storage.loadData();
         } catch (DukeException e) {
-            ui.printError(e);
+
             tasks = new TaskList();
         }
 
     }
 
 
-
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets response based on input
+     * @param input
+     * @return the string containing the response
      */
     public String getResponse(String input) {
         String output;
@@ -38,8 +38,7 @@ public class Duke {
             assert(c!=null);
             assert(tasks != null);
             assert(storage != null);
-            output = c.execute(tasks,ui,storage);
-
+            output = c.execute(tasks,storage);
         } catch (DukeException e) {
             output = e.toString();
         }
