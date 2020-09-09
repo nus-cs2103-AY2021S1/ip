@@ -41,6 +41,7 @@ public class TaskList {
      * @return is the deleted task.
      */
     public Task deleteTask(int taskNum) {
+        assert (taskNum > 0 && taskNum <= this.tasks.size()) : "taskNum cannot be less than 1 or more than task size.";
         Task deletedTask = this.tasks.get(taskNum - 1);
         this.tasks.remove(taskNum - 1);
         return deletedTask;
@@ -51,6 +52,7 @@ public class TaskList {
      * @param taskNum is the index of the task to be marked as completed.
      */
     public void markAsDone(int taskNum) {
+        assert (taskNum > 0 && taskNum <= this.tasks.size()) : "taskNum cannot be less than 1 or more than task size.";
         this.tasks.get(taskNum - 1).markAsDone();
     }
 
