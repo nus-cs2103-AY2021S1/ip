@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.stream.IntStream;
+
 /**
  * Defines common methods used by Duke Program.
  */
@@ -20,9 +22,7 @@ public class CommonMethod {
         assert end <= array.length : "mergeArray - end index is out of bounds";
         assert start >= 0 && start < array.length : "mergeArray - start index out of bounds";
         StringBuilder output = new StringBuilder();
-        for (int i = start; i < end; i++) {
-            output.append(array[i]).append(" ");
-        }
+        IntStream.range(0, end).forEach(i -> output.append(array[i]).append(" "));
         return output.toString().trim();
     }
 

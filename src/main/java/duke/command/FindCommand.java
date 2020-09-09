@@ -1,5 +1,6 @@
 package duke.command;
 import java.util.ArrayList;
+import java.util.stream.IntStream;
 
 import duke.logic.CommandInteractionUi;
 import duke.logic.StorageManager;
@@ -24,7 +25,7 @@ public class FindCommand extends Command {
 
     @Override
     public boolean getExitStatus() {
-        return true;
+        return false;
     }
 
     /**
@@ -59,15 +60,13 @@ public class FindCommand extends Command {
                 StringBuilder output = new StringBuilder(
                         uiManager.getFindFilteredList(keyword, filteredList.size() > 1) + "\n");
                 for (int i = 0; i < filteredList.size(); i++) {
-                    output.append(uiManager.getNumberedTask(filteredList.get(i), i));
-                    output.append("\n");
+                    output.append(uiManager.getNumberedTask(filteredList.get(i), i)).append("\n");
                 }
                 response = output.toString();
             } else {
                 uiManager.printFindFilteredList(keyword, filteredList.size() > 1);
-                for (int i = 0; i < filteredList.size(); i++) {
-                    uiManager.printNumberedTask(filteredList.get(i), i);
-                }
+                IntStream.range(0, filteredList.size())
+                        .forEach(i -> uiManager.printNumberedTask(filteredList.get(i), i));
             }
         }
     }
