@@ -35,6 +35,7 @@ public class DukeTaskList {
      * @param task the task to be added
      */
     public void addTask(Task task) {
+        assert task != null : "task cannot be null";
         tasks.add(task);
     }
 
