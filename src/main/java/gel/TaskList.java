@@ -32,9 +32,10 @@ public class TaskList {
 
     public String doneTask(String input) throws GelException {
         int index = Integer.parseInt(input.substring(5)) - 1;
-        if (index >= listOfTasks.size() || index < 0) {
+        if (index >= listOfTasks.size() || index <= 0) {
             throw new GelException("    Please input a valid number from 1 - " + listOfTasks.size());
         }
+        assert index > 0 && index < listOfTasks.size() : "index <= 0 not caught!";
         Task taskToBeDone = listOfTasks.remove(index);
         taskToBeDone.markAsDone();
         listOfTasks.add(index, taskToBeDone);

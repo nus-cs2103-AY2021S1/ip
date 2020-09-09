@@ -51,6 +51,7 @@ public class Storage {
         }
         File file = new File(filePath);
         boolean newFileCreated = file.createNewFile();
+        assert file.exists();
     }
 
     /**
@@ -76,7 +77,8 @@ public class Storage {
             } else if (task instanceof Event) {
                 bw.write("E," + isDone + task.getDescription() + "," + ((Event) task).getAt());
                 bw.newLine();
-            } else if (task instanceof Deadline) {
+            } else {
+                assert task instanceof Deadline : "Task is of type that doesn't exists.";
                 bw.write("D," + isDone + task.getDescription() + "," + ((Deadline) task).getBy());
                 bw.newLine();
             }
