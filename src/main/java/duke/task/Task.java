@@ -8,6 +8,8 @@ import duke.ui.UiPrint;
  */
 public class Task {
 
+    public static final String NO_TAG = "no tag";
+
     private String icon;
     private String description;
     private String taskInfo;
@@ -18,15 +20,15 @@ public class Task {
         this.icon = icon;
         this.description = description;
         this.taskInfo = taskInfo;
-        tag = "";
+        tag = NO_TAG;
         isDone = false;
     }
 
     /**
      * Marks the task as done.
      */
-    public void markAsDone() {
-        isDone = true;
+    public void setTaskDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     /**
@@ -52,7 +54,7 @@ public class Task {
     @Override
     public String toString() {
         String statusIcon = isDone ? UiPrint.TICK : UiPrint.CROSS;
-        String tag = this.tag == "" ? "" : " #" + this.tag;
+        String tag = this.tag.equals(NO_TAG) ? "" : " #" + this.tag;
 
         return icon + statusIcon + " " + description + tag;
     }
