@@ -67,16 +67,16 @@ public class Storage {
      */
     public TaskList read() {
         try {
-            if (doesFileExist()) {
-                FileInputStream fileInputStream = new FileInputStream(this.filePath);
-                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-                TaskList lst = (TaskList) objectInputStream.readObject();
-                objectInputStream.close();
-                return lst;
-            } else {
+            if (!doesFileExist()) {
                 createFile();
                 return new TaskList();
             }
+
+            FileInputStream fileInputStream = new FileInputStream(this.filePath);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            TaskList lst = (TaskList) objectInputStream.readObject();
+            objectInputStream.close();
+            return lst;
 
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Error reading file");
