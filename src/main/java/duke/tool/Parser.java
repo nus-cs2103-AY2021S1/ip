@@ -47,6 +47,8 @@ public class Parser {
                 output = command.handleDeadline(instruction, taskList, ui);
             } else if (len >= 5 && instruction.substring(0, 5).equals("event")) {
                 output = command.handleEvent(instruction, taskList, ui);
+            } else if (len >= 9 && instruction.substring(0, 9).equals("free time")) {
+                output = command.findFreeTime(taskList, instruction, ui);
             } else {
                 output = command.handleInvalidInput();
             }

@@ -1,7 +1,10 @@
 package duke.tool;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
+import duke.model.Interval;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
@@ -223,6 +226,29 @@ public class Command {
             }
             output.append(Ui.SEPARATION_LINE);
             return output.toString();
+        }
+    }
+
+    /**
+     * Outputs the free time of a day.
+     *
+     * @param taskList list of tasks.
+     * @param input user instructions.
+     * @param ui system output.
+     * @return string representation of free slots in a day.
+     */
+    public String findFreeTime(TaskList taskList, String input, Ui ui) throws DukeException {
+        if (input.length() == 9) {
+            String emoji = Emoji.SMILE.toString();
+            String exceptionMsg = "OOPS!!! I'm sorry, but the date cannot be empty. \n"
+                    + "    You can do it by adding description after 'free time  '." + emoji;
+            throw new DukeException(exceptionMsg);
+        } else {
+            String date = input.substring(10);
+            LocalDate dateTime = LocalDate.parse(date);
+            ScheduleManager scheduleManager = new ScheduleManager(dateTime, dateTime, taskList, new TimeConverter());
+            ArrayList<Interval> result = scheduleManager.findFreeSlots();
+            return ui.showFreeSlots(result);
         }
     }
 }

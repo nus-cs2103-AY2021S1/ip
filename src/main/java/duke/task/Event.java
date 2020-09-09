@@ -21,6 +21,10 @@ public class Event extends Task {
         this.time = time;
     }
 
+    public LocalDateTime getTime() {
+        return time;
+    }
+
     @Override
     public String toString() {
         DateTimeFormatter format = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
