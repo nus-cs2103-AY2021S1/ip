@@ -79,7 +79,7 @@ public class Duke {
                         ui.printMsg(ui.showListDoneAskMsg());
                         try {
                             userInput = ui.readInput(isGui);
-                            int[] tasksArray = Parser.parse(userInput);
+                            int[] tasksArray = Parser.parseMultipleTasks(userInput);
                             TaskList doneList = new TaskList();
                             for (int index : tasksArray) {
                                 try {
@@ -223,7 +223,7 @@ public class Duke {
                         try {
                             userInput = ui.readInput(isGui);
                             TaskList deletedTasks = new TaskList();
-                            int[] tasksArray = Parser.parse(userInput);
+                            int[] tasksArray = Parser.parseMultipleTasks(userInput);
                             for (int index : tasksArray) {
                                 try {
                                     if (index > tasks.size() || index <= 0) {
@@ -357,7 +357,7 @@ public class Duke {
                     throw new DukeException("Yo! Enter the task number(s).");
                 }
                 userInput = guiInputArray[1];
-                int[] tasksArray = Parser.parse(userInput);
+                int[] tasksArray = Parser.parseMultipleTasks(userInput);
                 TaskList doneList = new TaskList();
                 for (int index : tasksArray) {
                     try {
@@ -464,7 +464,7 @@ public class Duke {
                 }
                 userInput = guiInputArray[1];
                 TaskList deletedTasks = new TaskList();
-                int[] tasksArray = Parser.parse(userInput);
+                int[] tasksArray = Parser.parseMultipleTasks(userInput);
                 for (int index : tasksArray) {
                     try {
                         if (index > tasks.size() || index <= 0) {
