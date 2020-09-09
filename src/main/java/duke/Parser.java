@@ -65,6 +65,7 @@ public class Parser {
                         taskList.deleteTask(task);
                         ui.deleteTaskSuccessful(task, taskList);
                     }
+
                 }
                 Storage.updateTasks(taskList.getTaskCounts(), taskList.tasks, filePath);
                 break;
@@ -157,6 +158,55 @@ public class Parser {
                 }
                 Storage.updateTasks(taskList.getTaskCounts(), taskList.tasks, filePath);
                 break;
+
+                }
+                Storage.updateTasks(taskList.getTaskCounts(), taskList.tasks, filePath);
+                break;
+            case "find":
+                if (taskList.tasks.isEmpty()) {
+                    ui.printEmptyList();
+                } else {
+                    ui.printFound(portions[1], taskList);
+                }
+                break;
+            case "bye":
+                ui.printBye();
+                System.exit(0);
+            case "todo":
+            case "deadline":
+            case "event":
+                if (portions.length == 1) {
+                    ui.failToFindDetails();
+                } else if(commandFront.equals("todo")){
+                    ToDo toDo = new ToDo(Task.TASK_TODO, Task.DOING, portions[1]);
+                    taskList.addTask(toDo);
+                    ui.addTaskSuccessful(toDo, taskList);
+                } else if(commandFront.equals("deadline")) {
+                    String[] deadlineSplitter = portions[1].split("/by ");
+                    if (deadlineSplitter.length == 1) {
+                        ui.failToFindTime();
+                    } else {
+                        String detail = deadlineSplitter[0];
+                        String date = deadlineSplitter[1];
+                        Deadline deadline = new Deadline(Task.TASK_DEADLINE, Task.DOING, detail, date);
+                        taskList.addTask(deadline);
+                        ui.addTaskSuccessful(deadline, taskList);
+                    }
+                }else {
+                    String[] eventSplitter = portions[1].split("/at ");
+                    if (eventSplitter.length == 1) {
+                        ui.failToFindTime();
+                    } else {
+                        String detail = eventSplitter[0];
+                        String date = eventSplitter[1];
+                        Event event = new Event(Task.TASK_EVENT, Task.DOING, detail, date);
+                        taskList.addTask(event);
+                        ui.addTaskSuccessful(event, taskList);
+                    }
+                }
+                Storage.updateTasks(taskList.getTaskCounts(), taskList.tasks, filePath);
+                break;
+
             default:
                 ui.failToUnderstand();
                 break;
