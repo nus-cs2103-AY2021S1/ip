@@ -38,11 +38,6 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getDukeDialog(d.getGreeting(), grandmaImage)
         );
     }
-
-    /**
-     * Creates two dialog boxes, one echoing user input and the other containing Grandma's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
-     */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();

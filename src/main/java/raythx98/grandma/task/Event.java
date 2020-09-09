@@ -14,28 +14,28 @@ import raythx98.grandma.exception.TaskLoadingException;
 public class Event extends Task {
 
     protected LocalDate date = null;
-    protected LocalTime at = null;
+    protected LocalTime time = null;
 
     /**
-     * Something.
+     * Constructor for Event.
      *
-     * @param description
-     * @param at
+     * @param description task description.
+     * @param period date and time of task.
      */
-    public Event(String description, String at) {
+    public Event(String description, String period) {
         super(description);
         tag = EVENT_TAG;
-        String[] atSplit = at.split(" ", 2);
-        date = LocalDate.parse(atSplit[0], DateTimeFormatter.ofPattern(DATE_FORMAT));
-        if (atSplit.length > 1) {
-            this.at = LocalTime.parse(atSplit[1], DateTimeFormatter.ofPattern(TIME_FORMAT));
+        String[] splitPeriod = period.split(" ", 2);
+        date = LocalDate.parse(splitPeriod[0], DateTimeFormatter.ofPattern(DATE_FORMAT));
+        if (splitPeriod.length > 1) {
+            this.time = LocalTime.parse(splitPeriod[1], DateTimeFormatter.ofPattern(TIME_FORMAT));
         }
     }
 
     /**
-     * Something.
+     * Constructor for Event.
      *
-     * @param description
+     * @param description task description.
      */
     public Event(String description) {
         super(description);
@@ -43,36 +43,36 @@ public class Event extends Task {
     }
 
     /**
-     * Something.
+     * Constructor for Event.
      *
-     * @param taskDescriptions
+     * @param taskInformation a varargs of taskInformation
      * @throws DukeException
      */
-    public Event(String ... taskDescriptions) throws DukeException {
-        super(taskDescriptions[2]);
+    public Event(String ... taskInformation) throws DukeException {
+        super(taskInformation[2]);
         tag = EVENT_TAG;
-        if (taskDescriptions.length == 3) {
-        } else if (taskDescriptions.length == 5) {
-            this.date = LocalDate.parse(taskDescriptions[3]);
-            this.at = LocalTime.parse(taskDescriptions[4]);
+        if (taskInformation.length == 3) {
+        } else if (taskInformation.length == 5) {
+            this.date = LocalDate.parse(taskInformation[3]);
+            this.time = LocalTime.parse(taskInformation[4]);
         } else {
             throw new TaskLoadingException();
         }
-        if (taskDescriptions[1].equals(TICK_BINARY)) {
+        if (taskInformation[1].equals(TICK_BINARY)) {
             this.markAsDone();
         }
     }
 
     /**
-     * Something.
+     * Encodes the task to be saved upon exit.
      *
-     * @return
+     * @return encoded task.
      */
-    public String toPrint() throws DukeException {
-        if (date == null && at == null) {
-            return super.toPrint();
-        } else if (date != null && at != null) {
-            return super.toPrint() + "|" + date + "|" + at;
+    public String encodeTask() throws DukeException {
+        if (date == null && time == null) {
+            return super.encodeTask();
+        } else if (date != null && time != null) {
+            return super.encodeTask() + "|" + date + "|" + time;
         } else {
             throw new DateTimeException();
         }
@@ -80,12 +80,12 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        if (at == null) {
+        if (time == null) {
             return "[" + tag + "] " + super.toString();
         } else {
             return "[" + tag + "] " + super.toString() + "\n            (by: "
                     + date.format(DateTimeFormatter.ofPattern(OUTPUT_DATE_FORMAT))
-                    + ", " + at.format(DateTimeFormatter.ofPattern(OUTPUT_TIME_FORMAT)) + ")";
+                    + ", " + time.format(DateTimeFormatter.ofPattern(OUTPUT_TIME_FORMAT)) + ")";
         }
     }
 }

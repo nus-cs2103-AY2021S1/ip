@@ -8,6 +8,9 @@ import raythx98.grandma.task.Task;
 import raythx98.grandma.task.TaskList;
 import raythx98.grandma.ui.Ui;
 
+/**
+ * Represents a Add Event Command.
+ */
 public class AddEventCommand extends AddCommand {
     public AddEventCommand(String taskDescriptionDeadline) {
         super(taskDescriptionDeadline);
@@ -25,7 +28,7 @@ public class AddEventCommand extends AddCommand {
             throw new WrongDescriptionException();
         }
         tasks.addTask(task);
-        ui.addShowOnScreen("Got it, here yur task bij\n    " + task.toString()
+        ui.appendMessage("Got it, here yur task bij\n    " + task.toString()
                 + "\nNow you have " + tasks.getSize() + " tasks in the list.");
     }
 }

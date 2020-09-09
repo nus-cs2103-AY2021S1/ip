@@ -1,5 +1,7 @@
 package raythx98.grandma;
 
+import java.io.FileNotFoundException;
+
 import raythx98.grandma.command.Command;
 import raythx98.grandma.exception.DukeException;
 import raythx98.grandma.parser.Parser;
@@ -7,10 +9,8 @@ import raythx98.grandma.storage.Storage;
 import raythx98.grandma.task.TaskList;
 import raythx98.grandma.ui.Ui;
 
-import java.io.FileNotFoundException;
-
 /**
- * Something.
+ * Represents the grandma bot.
  */
 public class Grandma {
     private Storage storage;
@@ -19,8 +19,9 @@ public class Grandma {
     private Parser parser;
 
     /**
-     * Something.
-     * @param filePath
+     * initialises Grandma and other class variables.
+     *
+     * @param filePath specified filepath to store the task information.
      */
     public Grandma(String filePath) {
         ui = new Ui();
@@ -29,35 +30,37 @@ public class Grandma {
         try {
             tasks = storage.load();
         } catch (DukeException e) {
-            e.printStackTrace();
+            ui.getError(e);
         } catch (FileNotFoundException e) {
             tasks = new TaskList();
         }
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Takes a string as an input from user and returns string to output in Grandma.
+     *
+     * @param input string input from user.
+     * @return string to be shown on the screen.
      */
     public String getResponse(String input) {
         try {
-            ui.resetString();
+            ui.resetTextOnScreen();
             Command command = parser.parse(tasks, input);
             command.execute(tasks, ui, storage);
-            return ui.finalShowOnScreen();
+            return ui.getTextOnScreen();
         } catch (DukeException e) {
-            return ui.showError(e);
+            return ui.getError(e);
         } catch (Exception e) {
-            return ui.showUncheckedException();
+            return ui.getUncheckedException();
         }
     }
 
     /**
-     * Something.
+     * Get greeting message from ui.
      *
-     * @return
+     * @return a greeting message String.
      */
     public String getGreeting() {
-        return ui.greet();
+        return ui.greetingMessage();
     }
 }

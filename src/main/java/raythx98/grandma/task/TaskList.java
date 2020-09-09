@@ -6,71 +6,71 @@ import java.util.List;
 import raythx98.grandma.exception.InvalidIndexException;
 
 /**
- * Deals with manipulation on the list of tasks
+ * Represents tasks.
  */
 public class TaskList {
 
-    private List<Task> taskList = new ArrayList<>();
+    private List<Task> tasks = new ArrayList<>();
 
     /**
      * Removes a task from List of tasks based on the index.
      *
-     * @param idx Index of task to be removed.
+     * @param index Index of task to be removed.
      * @return String which represents the task removed.
      */
-    public String removeTask (int idx) {
-        Task task = taskList.get(idx);
-        taskList.remove(idx);
+    public String removeTask (int index) {
+        Task task = tasks.get(index);
+        tasks.remove(index);
         return task.toString();
     }
 
-    public Task getTask(int idx) {
-        return taskList.get(idx);
+    public Task getTask(int index) {
+        return tasks.get(index);
     }
 
     public int getSize() {
-        return taskList.size();
+        return tasks.size();
     }
 
     public void addTask(Task task) {
-        taskList.add(task);
+        tasks.add(task);
     }
 
     /**
-     * Returns a list of all tasks at the moment.
+     * Returns a string representation of the list of all tasks that match the key word.
      *
-     * @return String which lists all tasks at the moment.
+     * @return String representation of the list of all tasks that match the key word
      */
-    public String findTask(String str) throws InvalidIndexException {
-        TaskList match = new TaskList();
-        for (Task i: taskList) {
+    public String findTask(String keyWord) throws InvalidIndexException {
+        TaskList matchedTasks = new TaskList();
+        for (Task i: tasks) {
             String taskDescription = i.getDescription().toLowerCase();
-            String toCompare = str.toLowerCase();
-            if (taskDescription.contains(toCompare)) {
-                match.addTask(i);
+            String lowerCaseTaskDescription = keyWord.toLowerCase();
+            if (taskDescription.contains(lowerCaseTaskDescription)) {
+                matchedTasks.addTask(i);
             }
         }
-        if (match.getSize() == 0) {
+        if (matchedTasks.getSize() == 0) {
             throw new InvalidIndexException();
         }
-        return match.toString();
+        return matchedTasks.toString();
     }
 
     /**
-     * Something.
+     * Returns a string representation of the tasks.
      *
-     * @return
+     * @return String representation of the tasks.
      */
     public String toString() {
-        String string = "";
+        String task = "";
         if (getSize() >= 1) {
-            string = "    1. " + taskList.get(0).toString();
-            for (int num = 2; num <= getSize(); num++) {
-                string = string + "\n    " + num + ". " + taskList.get(num - 1).toString();
+            task = "    1. " + tasks.get(0).toString();
+            for (int i = 2; i <= getSize(); i++) {
+                task = task + "\n    " + i + ". " + tasks.get(i - 1).toString();
             }
         } else {
-            string = "empty";
+            task = "empty";
         }
-        return string;
+        return task;
     }
 }

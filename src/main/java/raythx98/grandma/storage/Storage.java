@@ -24,9 +24,9 @@ public class Storage {
     private TaskList tasks;
 
     /**
-     * Something.
+     * Constructor for Storage.
      *
-     * @param filepath
+     * @param filepath path of file.
      */
     public Storage(String filepath) {
         this.filepath = filepath;
@@ -34,37 +34,37 @@ public class Storage {
     }
 
     /**
-     * Something.
+     * Save current information of tasks.
      */
     public void save() throws DukeException {
         if (tasks.getSize() > 0) {
-            Writer.overwrite(filepath, tasks.getTask(0).toPrint());
+            Writer.overwrite(filepath, tasks.getTask(0).encodeTask());
             for (int i = 1; i < tasks.getSize(); i++) {
-                Writer.writeOn(filepath, "\n" + tasks.getTask(i).toPrint());
+                Writer.writeOn(filepath, "\n" + tasks.getTask(i).encodeTask());
             }
         }
     }
 
     /**
-     * Something.
+     * Load information of tasks.
      *
-     * @return
+     * @return tasks loaded.
      */
     public TaskList load() throws DukeException, FileNotFoundException {
         File myObj = new File(filepath);
         Scanner myReader = new Scanner(myObj);
         while (myReader.hasNextLine()) {
-            String data = myReader.nextLine();
-            String[] dataSplit = data.split("\\|");
-            switch (dataSplit[0]) {
+            String taskInformation = myReader.nextLine();
+            String[] taskInformationSplit = taskInformation.split("\\|");
+            switch (taskInformationSplit[0]) {
             case TODO:
-                tasks.addTask(new ToDo(dataSplit));
+                tasks.addTask(new ToDo(taskInformationSplit));
                 break;
             case DEADLINE:
-                tasks.addTask(new Deadline(dataSplit));
+                tasks.addTask(new Deadline(taskInformationSplit));
                 break;
             case EVENT:
-                tasks.addTask(new Event(dataSplit));
+                tasks.addTask(new Event(taskInformationSplit));
                 break;
             default:
                 throw new UnknownCommandException();

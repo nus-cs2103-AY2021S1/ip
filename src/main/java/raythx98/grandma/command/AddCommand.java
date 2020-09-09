@@ -5,6 +5,9 @@ import raythx98.grandma.storage.Storage;
 import raythx98.grandma.task.TaskList;
 import raythx98.grandma.ui.Ui;
 
+/**
+ * Represents an abstract Add Command from which other Add Commands inherit.
+ */
 public abstract class AddCommand extends Command {
     protected final String taskDescriptionDeadline;
     public AddCommand(String taskDescriptionDeadline) {

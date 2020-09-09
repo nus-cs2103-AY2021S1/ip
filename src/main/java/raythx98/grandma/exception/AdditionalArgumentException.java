@@ -1,7 +1,7 @@
 package raythx98.grandma.exception;
 
 /**
- * Checked exception as a result of an empty description.
+ * Checked exception as a result of an additional arguments.
  */
 public class AdditionalArgumentException extends DukeException {
     public AdditionalArgumentException() {

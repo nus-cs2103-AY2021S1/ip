@@ -5,33 +5,35 @@ package raythx98.grandma.ui;
  */
 public class Ui {
 
-    private String toShowOnScreen = "";
+    private String textOnScreen = "";
 
     /**
-     * Prints a greeting message.
+     * Returns a greeting message.
+     *
+     * @return greeting message.
      */
-    public String greet() {
+    public String greetingMessage() {
         return "Hello mah dud, itza ol' grandma robo speakin :D "
-                + help()
+                + appendHelpMessage()
                 + "\nwhat duh hell du yu wan?";
     }
 
     /**
-     * Prints a farewell message.
+     * appends a farewell message to textOnScreen.
      */
-    public void farewell() {
-        toShowOnScreen += "Never come back,\n"
+    public void appendFarewellMessage() {
+        textOnScreen += "Never come back,\n"
                 + "dun wanna see yu ever agin.\n"
                 + "Exiting in 5... \n\nminutes? hours? idk you'll find out \nlul GTFO";
     }
 
     /**
-     * Something.
+     * append and return a help message to textOnScreen.
      *
-     * @return
+     * @return help message.
      */
-    public String help() {
-        toShowOnScreen += "These r wud u tell your ol' grandma here...\n"
+    public String appendHelpMessage() {
+        textOnScreen += "These r wud u tell your ol' grandma here...\n"
                 + "Yu wan add more tasks\n        todo {description} \n                /by {YYYY-MM-DD HHmm}\n"
                 + "        deadline {description} \n                /by {YYYY-MM-DD HHmm}\n"
                 + "        event {description} \n                /at {YYYY-MM-DD HHmm}\n"
@@ -40,48 +42,50 @@ public class Ui {
                 + "Yu wan see ur tasks coz u forget\n        list\n"
                 + "Yu wan find ur tasks coz u noob\n        find {keyword}\n"
                 + "Yu wanna gtfo\n        bye";
-        return toShowOnScreen;
+        return textOnScreen;
     }
 
     /**
-     * Something.
+     * reset textOnScreen to an empty String.
      */
-    public void resetString() {
-        toShowOnScreen = "";
+    public void resetTextOnScreen() {
+        textOnScreen = "";
     }
 
     /**
-     * Something.
-     * @param string
-     */
-    public void addShowOnScreen(String string) {
-        toShowOnScreen += string;
-    }
-
-    /**
-     * Something.
+     * Appends a string to textOnScreen.
      *
-     * @return asd.
+     * @param message the string to be appended.
      */
-    public String finalShowOnScreen() {
-        return toShowOnScreen;
+    public void appendMessage(String message) {
+        textOnScreen += message;
     }
 
     /**
-     * Prints the error message.
+     * Return textOnScreen.
      *
-     * @param e String of error to be printed.
+     * @return String textOnScreen.
      */
-    public String showError(Exception e) {
-        return e.getMessage();
+    public String getTextOnScreen() {
+        return textOnScreen;
     }
 
     /**
-     * Something.
+     * Returns the error message.
      *
-     * @return Soemthing.
+     * @param exception the Exception to be handled.
+     * @return the error message.
      */
-    public String showUncheckedException() {
+    public String getError(Exception exception) {
+        return exception.getMessage();
+    }
+
+    /**
+     * Return an error message.
+     *
+     * @return Error message.
+     */
+    public String getUncheckedException() {
         return "Wtf kind of error u giving me";
     }
 }

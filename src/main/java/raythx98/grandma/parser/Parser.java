@@ -27,38 +27,38 @@ public class Parser {
     /**
      * Parses the user data by making processing input.
      *
-     * @param tasks    List of tasks at the moment.
-     * @param nextLine String to be parsed.
+     * @param tasks List of tasks at the moment.
+     * @param input String to be parsed.
      * @return
      */
-    public Command parse(TaskList tasks, String nextLine) throws DukeException, NumberFormatException {
-        String[] spaceSplit = nextLine.split(" ", 2);
-        if (nextLine.isEmpty()) {
+    public Command parse(TaskList tasks, String input) throws DukeException, NumberFormatException {
+        String[] splitBySpace = input.split(" ", 2);
+        if (input.isEmpty()) {
             throw new EmptyDescriptionException();
         }
-        switch (spaceSplit[0]) {
+        switch (splitBySpace[0]) {
         case "bye":
-            if (spaceSplit.length > 1) {
+            if (splitBySpace.length > 1) {
                 throw new AdditionalArgumentException();
             }
             return new ExitCommand();
         case "list":
-            if (spaceSplit.length > 1) {
+            if (splitBySpace.length > 1) {
                 throw new AdditionalArgumentException();
             }
             return new ListCommand();
         case "help":
-            if (spaceSplit.length > 1) {
+            if (splitBySpace.length > 1) {
                 throw new AdditionalArgumentException();
             }
             return new HelpCommand();
         case "done":
-            if (spaceSplit.length < 2) {
+            if (splitBySpace.length < 2) {
                 throw new InsufficientArgumentException();
             }
             int doneIndex;
             try {
-                doneIndex = Integer.parseInt(spaceSplit[1]) - 1;
+                doneIndex = Integer.parseInt(splitBySpace[1]) - 1;
             } catch (NumberFormatException e) {
                 throw new WrongArgumentException();
             }
@@ -67,12 +67,12 @@ public class Parser {
             }
             return new DoneCommand(doneIndex);
         case "delete":
-            if (spaceSplit.length < 2) {
+            if (splitBySpace.length < 2) {
                 throw new InsufficientArgumentException();
             }
             int deleteIndex;
             try {
-                deleteIndex = Integer.parseInt(spaceSplit[1]) - 1;
+                deleteIndex = Integer.parseInt(splitBySpace[1]) - 1;
             } catch (NumberFormatException e) {
                 throw new WrongArgumentException();
             }
@@ -81,27 +81,27 @@ public class Parser {
             }
             return new DeleteCommand(deleteIndex);
         case "find":
-            if (spaceSplit.length < 2) {
+            if (splitBySpace.length < 2) {
                 throw new EmptyDescriptionException();
             }
-            return new FindCommand(spaceSplit[1]);
+            return new FindCommand(splitBySpace[1]);
         case "todo":
-            if (spaceSplit.length < 2) {
+            if (splitBySpace.length < 2) {
                 throw new EmptyDescriptionException();
             } else {
-                return new AddTodoCommand(spaceSplit[1]);
+                return new AddTodoCommand(splitBySpace[1]);
             }
         case "deadline":
-            if (spaceSplit.length < 2) {
+            if (splitBySpace.length < 2) {
                 throw new EmptyDescriptionException();
             } else {
-                return new AddDeadlineCommand(spaceSplit[1]);
+                return new AddDeadlineCommand(splitBySpace[1]);
             }
         case "event":
-            if (spaceSplit.length < 2) {
+            if (splitBySpace.length < 2) {
                 throw new EmptyDescriptionException();
             } else {
-                return new AddEventCommand(spaceSplit[1]);
+                return new AddEventCommand(splitBySpace[1]);
             }
         default:
             throw new UnknownCommandException();
