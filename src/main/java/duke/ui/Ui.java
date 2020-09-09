@@ -140,4 +140,14 @@ public class Ui {
     public String showCloneSuccess(Task task) {
         return "I have cloned this task:\n" + task.toString();
     }
+
+    /**
+     * Show this message after updating a task
+     * @param index The positon of the updated task
+     * @param task The updated version of the task
+     * @return The message noticing that the task has been updated
+     */
+    public String showUpdateComplete(int index, Task task) {
+        return "The task at position " + index + " has been updated to this:\n" + task.toString();
+    }
 }

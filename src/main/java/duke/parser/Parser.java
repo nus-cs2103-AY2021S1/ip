@@ -12,6 +12,7 @@ import duke.command.ListCommand;
 import duke.command.StartCommand;
 import duke.command.ToDoCommand;
 import duke.command.UndoCommand;
+import duke.command.UpdateCommand;
 import duke.exception.DukeException;
 import duke.exception.InadequateCommandException;
 import duke.exception.InvalidIndexException;
@@ -97,8 +98,30 @@ public class Parser {
             return createCloneCommand(splitInput);
         }
 
+        boolean isUpdateCommand = splitInput[0].equals(UpdateCommand.COMMAND);
+        if (isUpdateCommand) {
+            return createUpdateCommand(splitInput);
+        }
+
         // unregonised command
         return new Command();
+    }
+
+    private static Command createUpdateCommand(String[] splitInput) throws DukeException {
+        assert splitInput.length >= 0 && splitInput.length <= 2 : "size of an array can be lesser than 0";
+        if (splitInput.length == 1) {
+            throw new DukeException("Missing index and specifier(s)");
+        }
+        String[] splitInfo = splitInput[1].trim().split("\\s+", 2);
+        if (splitInfo.length == 1) {
+            throw new DukeException("Missing specifier(s)");
+        }
+        try {
+            int index = Integer.parseInt(splitInfo[0]) - 1;
+            return new UpdateCommand(index, splitInfo[1]);
+        } catch (NumberFormatException e) {
+            throw new InvalidIndexException();
+        }
     }
 
     private static Command createUndoCommand() {
@@ -172,9 +195,8 @@ public class Parser {
     private static Command createFindCommand(String[] splitInput) throws DukeException {
         if (splitInput.length == 1) {
             throw new DukeException("Missing keyword");
-        } else {
-            return new FindCommand(splitInput[1].split("\\s+"));
         }
+        return new FindCommand(splitInput[1].split("\\s+"));
     }
 
     private static Command createDoneCommand(String[] splitInput) throws InvalidIndexException {

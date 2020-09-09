@@ -15,6 +15,7 @@ public class TaskList {
     private static final String ADD_KEY = "add";
     private static final String REMOVE_KEY = "remove";
     private static final String DONE_KEY = "done";
+    private static final String UPDATE_KEY = "update";
     private ArrayList<Task> tasks;
     private ArrayList<Pair<String, Pair<Task, Integer>>> prevCommands; // <command, <task, index>>
 
@@ -55,6 +56,13 @@ public class TaskList {
         Pair<Task, Integer> infoPair = new Pair<>(null, index);
         prevCommands.add(new Pair<>(ADD_KEY, infoPair));
         tasks.add(index, task);
+    }
+
+    public void set(int index, Task task) {
+        assert task != null : "task cannot be null";
+        Pair<Task, Integer> infoPair = new Pair<>(tasks.get(index), index);
+        prevCommands.add(new Pair<>(UPDATE_KEY, infoPair));
+        tasks.set(index, task);
     }
 
     /**
@@ -123,6 +131,12 @@ public class TaskList {
             assert info.getValue() != null : "undo error, cannot store index";
             int index = info.getValue();
             tasks.set(index, tasks.get(index).markAsUndone());
+        } else if (key.equals(UPDATE_KEY)) {
+            assert info.getKey() != null : "undo error, cannot store task";
+            assert info.getValue() != null : "undo error, cannot store index";
+            int index = info.getValue();
+            Task task = info.getKey();
+            tasks.set(index, task);
         } else {
             System.out.println("error in undoing");
         }
@@ -136,6 +150,9 @@ public class TaskList {
     @Override
     public String toString() {
         String str = "";
+        if (tasks.size() == 0) {
+            return str;
+        }
         for (int i = 0; i < tasks.size() - 1; i++) {
             str += (i + 1) + ". " + tasks.get(i).toString() + "\n";
         }
