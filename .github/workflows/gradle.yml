@@ -34,7 +34,7 @@ jobs:
         run: ./gradlew check
         
       - name: Run test with Gradle
-          run: ./gradlew test 
+        run: ./gradlew test 
 
       - name: Perform IO redirection test (*NIX)
         if: runner.os == 'Linux'
