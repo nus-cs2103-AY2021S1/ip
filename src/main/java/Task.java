@@ -19,7 +19,7 @@ public class Task {
     /**
      * Marks the task as done or completed.
      */
-    public void set_Task_As_Done() {
+    public void setTaskAsDone() {
         this.isDone = true;
     }
 

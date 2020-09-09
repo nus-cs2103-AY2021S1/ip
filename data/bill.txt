@@ -8,3 +8,6 @@ T | ✘ | hey
 T | ✘ | yes
 T | ✘ | no
 T | ✘ | llll
+T | ✘ | 2
+T | ✘ | hey
+T | ✘ | lah
