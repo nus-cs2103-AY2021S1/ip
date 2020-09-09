@@ -1,6 +1,7 @@
 package duke.exception;
 
 import duke.command.CommandFormat;
+import duke.task.Task;
 
 public class ExceptionMessage {
 
@@ -28,5 +29,9 @@ public class ExceptionMessage {
 
     public static String getUnknownTaskMessage(String unknownTask) {
         return unknownTask + "is not a task type";
+    }
+
+    public static String getDuplicateTaskMessage(Task task) {
+        return task.getDescription() + " already exits in the current task list.\n";
     }
 }
