@@ -105,6 +105,8 @@ public class InputParser {
      * @return list command type.
      */
     public CommandType parseList(String input) {
+        assert(!input.isEmpty());
+
         if (input.equals("list all")) {
             return CommandType.LIST_ALL;
         }
@@ -152,6 +154,7 @@ public class InputParser {
         if (input.equals("list events not done")) {
             return CommandType.LIST_EVENTS_NOT_DONE;
         }
+
         return CommandType.INVALID_COMMAND;
     }
 
@@ -200,6 +203,7 @@ public class InputParser {
      * @return description of to do task.
      */
     public String parseToDoInput(String input) {
+        assert (!input.isEmpty());
         String description = input.substring(4);
         return description;
     }
@@ -211,6 +215,7 @@ public class InputParser {
      * @return parameters to be passed into deadline constructor.
      */
     public String[] parseDeadlineInput(String input) {
+        assert (!input.isEmpty());
         String[] parsedInput = input.split(" /by ");
         String by = parsedInput[1];
         String description = parsedInput[0].substring(8);
@@ -225,6 +230,7 @@ public class InputParser {
      * @return parameters to be passed into event constructor.
      */
     public String[] parseEventInput(String input) {
+        assert (!input.isEmpty());
         String[] parsedInput = input.split(" /at ");
         String at = parsedInput[1].split(" ")[0];
         String timeRange = parsedInput[1].split(" ")[1];

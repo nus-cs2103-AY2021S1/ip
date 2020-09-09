@@ -27,6 +27,7 @@ public class DoneCommand extends Command {
             if (index >= userTasks.getTaskListSize()) {
                 throw new DukeException("", ExceptionType.INDEX_OUT_OF_BOUNDS);
             } else {
+                assert (index >= 0);
                 userTasks.markTaskAsDone(index);
                 response = new Ui().markAsDoneMessage(userTasks.getTask(index));
             }

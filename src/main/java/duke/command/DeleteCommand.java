@@ -28,6 +28,7 @@ public class DeleteCommand extends Command {
             if (index >= userTasks.getTaskListSize()) {
                 throw new DukeException("", ExceptionType.INDEX_OUT_OF_BOUNDS);
             } else {
+                assert (index >= 0);
                 Task task = userTasks.getTask(index);
                 userTasks.deleteTask(index);
                 response = new Ui().taskDeletedMessage(task);

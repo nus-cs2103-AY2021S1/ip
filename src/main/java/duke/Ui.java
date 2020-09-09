@@ -80,6 +80,7 @@ public class Ui {
      * @return String.
      */
     public String taskAddedMessage(Task task, int size) {
+        assert (size >= 0);
         return SERVANT_SPEAK
                 + "    As you wish Sire. I have added the task:\n       "
                 + task.toString() + "\n"

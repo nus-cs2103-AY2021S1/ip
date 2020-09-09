@@ -22,8 +22,4 @@ public class Command {
     public String getResponse() {
         return response;
     }
-
-    public String execute() {
-        return getResponse();
-    }
 }

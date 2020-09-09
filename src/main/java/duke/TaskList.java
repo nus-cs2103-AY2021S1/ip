@@ -28,6 +28,7 @@ public class TaskList {
      * @return Task task retrieved from the task list.
      */
     public Task getTask(int index) {
+        assert (index >= 0);
         return taskList.get(index);
     }
 
@@ -55,6 +56,7 @@ public class TaskList {
      * @param index index of task to be deleted from the task list.
      */
     public void deleteTask(int index) {
+        assert (index >= 0);
         taskList.remove(index);
     }
 
@@ -64,6 +66,7 @@ public class TaskList {
      * @param index index of task to be marked as done.
      */
     public void markTaskAsDone(int index) {
+        assert (index >= 0);
         taskList.get(index).setDone();
     }
 
