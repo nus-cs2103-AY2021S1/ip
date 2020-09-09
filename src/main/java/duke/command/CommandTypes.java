@@ -17,6 +17,7 @@ public enum CommandTypes {
 
     /**
      * Creates a new command type from the user.
+     *
      * @param command is one the command types from the user.
      */
     CommandTypes(String command) {

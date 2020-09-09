@@ -10,6 +10,7 @@ public abstract class Task {
 
     /**
      * Creates a new task with the given description.
+     *
      * @param description is the description of the task.
      */
     public Task(String description) {
@@ -19,6 +20,7 @@ public abstract class Task {
 
     /**
      * Gets the status icon which is either a tick or cross.
+     *
      * @return a tick if the task is done or cross if the task is not done.
      */
     public String getStatusIcon() {
@@ -34,6 +36,7 @@ public abstract class Task {
 
     /**
      * Gets the boolean value of the task which is either true or false.
+     *
      * @return true if the task is done or false if the task is not done.
      */
     public boolean getIsDone() {
@@ -42,6 +45,7 @@ public abstract class Task {
 
     /**
      * Gives a string indicating whether a task is done and the description of the task.
+     *
      * @param isFinished is the value 1 if task is done or 0 if task is not done.
      * @return a string indicating 1 or 0 and the description of the task.
      */
@@ -51,6 +55,7 @@ public abstract class Task {
 
     /**
      * Returns a string representation of the task.
+     *
      * @return a string representation of the task.
      */
     @Override

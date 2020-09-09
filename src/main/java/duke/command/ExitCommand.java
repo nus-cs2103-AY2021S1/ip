@@ -18,6 +18,7 @@ public class ExitCommand extends Command {
 
     /**
      * Exits from the program.
+     *
      * @param tasks is the task list that the command will execute with.
      * @param storage is the storage that the command will execute with.
      * @return a command response after executing the exit command.
@@ -31,6 +32,7 @@ public class ExitCommand extends Command {
 
     /**
      * Indicates whether the command is an exit command.
+     *
      * @return is true only if it is an exit command.
      */
     @Override

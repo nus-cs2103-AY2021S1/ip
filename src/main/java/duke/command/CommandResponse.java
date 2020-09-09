@@ -10,6 +10,7 @@ public class CommandResponse {
 
     /**
      * Makes a command response with the string response and boolean isExit parameters.
+     *
      * @param response is the string representation of this response.
      * @param isExit indicates whether the response is an exit command response.
      */
@@ -20,6 +21,7 @@ public class CommandResponse {
 
     /**
      * Retrieves the string response.
+     *
      * @return the string response.
      */
     public String getResponse() {
@@ -28,6 +30,7 @@ public class CommandResponse {
 
     /**
      * Gives the boolean of isExit.
+     *
      * @return either true or false.
      */
     public boolean isExit() {

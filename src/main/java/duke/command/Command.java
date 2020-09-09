@@ -17,6 +17,7 @@ public abstract class Command {
 
     /**
      * Executes a command with the given tasks and storage.
+     *
      * @param tasks is the task list that the command will execute with.
      * @param storage is the storage that the command will execute with.
      * @return a command response after executing the command.
@@ -26,6 +27,7 @@ public abstract class Command {
 
     /**
      * Indicates whether the command is an exit command.
+     *
      * @return false by default and only true if the command is an exit command.
      */
     public boolean isExit() {

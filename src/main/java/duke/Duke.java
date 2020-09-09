@@ -13,6 +13,7 @@ public class Duke {
 
     /**
      * Creates a new Duke chat bot that loads and saves tasks in the filepath.
+     *
      * @param filePath is the path in which tasks are loaded and saved in.
      */
     public Duke(String filePath) {
@@ -27,6 +28,7 @@ public class Duke {
 
     /**
      * Gives a command response to user input.
+     *
      * @param input The input from the user.
      * @return the command response to the user.
      */
