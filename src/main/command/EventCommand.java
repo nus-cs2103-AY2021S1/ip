@@ -1,6 +1,7 @@
 package main.command;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 
 import main.task.Event;
 import main.task.TaskList;
@@ -10,7 +11,7 @@ import main.ui.Ui;
  * Represents the add event command.
  * @author Joshua Liang XingYa
  * @author joshualiang.xy@gmail.com
- * @version v0.2
+ * @version v0.3
  * @since v0.1
  */
 public class EventCommand implements Command {
@@ -21,9 +22,11 @@ public class EventCommand implements Command {
      * with the description and the deadline of the task.
      * @param description the description of the task.
      * @param dateTime the time of the event occurring.
+     * @param options the options of the task.
      */
-    public EventCommand(String description, LocalDateTime dateTime) {
-        event = new Event(description, dateTime);
+    public EventCommand(String description, LocalDateTime dateTime,
+                        HashSet<Option> options) {
+        event = new Event(description, dateTime, options);
     }
 
     /**

@@ -1,6 +1,7 @@
 package main.command;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 
 import main.task.Deadline;
 import main.task.TaskList;
@@ -21,9 +22,11 @@ public class DeadlineCommand implements Command {
      * with the description and the deadline of the task.
      * @param description the description of the task.
      * @param dateTime the deadline of the task.
+     * @param options the options of the task.
      */
-    public DeadlineCommand(String description, LocalDateTime dateTime) {
-        deadline = new Deadline(description, dateTime);
+    public DeadlineCommand(String description, LocalDateTime dateTime,
+                           HashSet<Option> options) {
+        deadline = new Deadline(description, dateTime, options);
     }
 
     /**

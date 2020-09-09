@@ -17,7 +17,7 @@ public class TaskList {
      * Constructs an instance of TaskList.
      */
     public TaskList() {
-        this.tasks = new ArrayList<>();
+        tasks = new ArrayList<>();
     }
 
     /**
@@ -66,6 +66,7 @@ public class TaskList {
     public boolean equals(Object obj) {
         if (obj instanceof TaskList) {
             TaskList o = (TaskList) obj;
+
             return tasks.equals(o.tasks);
         }
         return false;

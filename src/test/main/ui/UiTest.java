@@ -3,11 +3,13 @@ package main.ui;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import main.exception.InvalidOptionException;
 import main.task.Deadline;
 import main.task.Event;
 import main.task.TaskList;
@@ -43,12 +45,13 @@ public class UiTest {
     class List {
         @Test
         @DisplayName("should return the message with the list of tasks")
-        public void printTaskList_taskList_messageWithListOfTasks() {
+        public void printTaskList_taskList_messageWithListOfTasks()
+                throws InvalidOptionException {
             TaskList tasks = new TaskList();
             tasks.add(new Todo("task 1"));
-            tasks.add(new Deadline("task 2", "1993-12-06T10:10", true));
+            tasks.add(new Deadline("task 2", "", "1993-12-06T10:10", true));
             tasks.add(new Event("task 3",
-                    LocalDateTime.of(3121, 12, 29, 23, 54)));
+                    LocalDateTime.of(3121, 12, 29, 23, 54), new HashSet<>()));
             assertEquals("1. [T][\u2718] task 1\n2. [D][\u2713] task 2\n"
                             + "(by: Monday, 06 Dec 1993, 10:10AM)\n"
                             + "3. [E][\u2718] task 3\n(at: Thursday, 29 Dec 3121,"
@@ -77,12 +80,13 @@ public class UiTest {
     class Find {
         @Test
         @DisplayName("should return the message with the list of tasks")
-        public void printFoundList_taskList_messageWithListOfTasks() {
+        public void printFoundList_taskList_messageWithListOfTasks()
+                throws InvalidOptionException {
             TaskList tasks = new TaskList();
             tasks.add(new Todo("task 1"));
-            tasks.add(new Deadline("task 2", "1993-12-06T10:10", true));
+            tasks.add(new Deadline("task 2", "", "1993-12-06T10:10", true));
             tasks.add(new Event("task 3",
-                    LocalDateTime.of(3121, 12, 29, 23, 54)));
+                    LocalDateTime.of(3121, 12, 29, 23, 54), new HashSet<>()));
             assertEquals("Here are the matching tasks in your list:\n"
                             + "1. [T][\u2718] task 1\n2. [D][\u2713] task 2\n"
                             + "(by: Monday, 06 Dec 1993, 10:10AM)\n"
@@ -122,12 +126,13 @@ public class UiTest {
 
         @Test
         @DisplayName("should return message indicating deadline has been added")
-        public void printAddSuccess_deadline_addSuccessMessage() {
+        public void printAddSuccess_deadline_addSuccessMessage()
+                throws InvalidOptionException {
             assertEquals("Got it. I've added this task:\n[D][\u2713] task 2\n"
                             + "(by: Monday, 06 Dec 1993, 10:10AM)\n"
                             + "Now you have 0 tasks in the list.",
                     ui.printAddSuccess(
-                            new Deadline("task 2", "1993-12-06T10:10", true),
+                            new Deadline("task 2", "", "1993-12-06T10:10", true),
                             0));
         }
 
@@ -138,7 +143,9 @@ public class UiTest {
                             + "(at: Thursday, 29 Dec 3121, 11:54PM)\n"
                             + "Now you have 5 tasks in the list.",
                     ui.printAddSuccess(new Event("task 3",
-                            LocalDateTime.of(3121, 12, 29, 23, 54)), 5));
+                            LocalDateTime.of(3121, 12, 29, 23, 54),
+                            new HashSet<>()
+                    ), 5));
         }
 
         @Test
@@ -163,12 +170,13 @@ public class UiTest {
 
         @Test
         @DisplayName("should return message indicating deadline has been removed")
-        public void printRemoveSuccess_deadline_addSuccessMessage() {
+        public void printRemoveSuccess_deadline_addSuccessMessage()
+                throws InvalidOptionException {
             assertEquals("Noted. I've removed this task:\n[D][\u2713] task 2\n"
                             + "(by: Monday, 06 Dec 1993, 10:10AM)\n"
                             + "Now you have 0 tasks in the list.",
                     ui.printRemoveSuccess(
-                            new Deadline("task 2", "1993-12-06T10:10", true), 0));
+                            new Deadline("task 2", "", "1993-12-06T10:10", true), 0));
         }
 
         @Test
@@ -178,7 +186,9 @@ public class UiTest {
                             + "(at: Thursday, 29 Dec 3121, 11:54PM)\n"
                             + "Now you have 5 tasks in the list.",
                     ui.printRemoveSuccess(new Event("task 3",
-                            LocalDateTime.of(3121, 12, 29, 23, 54)), 5));
+                            LocalDateTime.of(3121, 12, 29, 23, 54),
+                            new HashSet<>()
+                    ), 5));
         }
 
         @Test
@@ -202,11 +212,12 @@ public class UiTest {
 
         @Test
         @DisplayName("should return message indicating deadline as done")
-        public void printDoneSuccess_deadline_doneSuccessMessage() {
+        public void printDoneSuccess_deadline_doneSuccessMessage()
+                throws InvalidOptionException {
             assertEquals("Nice! I've marked this task as done:\n"
                             + "[D][\u2713] task 2\n(by: Monday, 06 Dec 1993, 10:10AM)",
                     ui.printDoneSuccess(
-                            new Deadline("task 2", "1993-12-06T10:10", true)));
+                            new Deadline("task 2", "", "1993-12-06T10:10", true)));
         }
 
         @Test
@@ -215,7 +226,8 @@ public class UiTest {
             assertEquals("Nice! I've marked this task as done:\n"
                             + "[E][\u2718] task 3\n(at: Thursday, 29 Dec 3121, 11:54PM)",
                     ui.printDoneSuccess(new Event("task 3",
-                            LocalDateTime.of(3121, 12, 29, 23, 54))));
+                            LocalDateTime.of(3121, 12, 29, 23, 54),
+                            new HashSet<>())));
         }
     }
 

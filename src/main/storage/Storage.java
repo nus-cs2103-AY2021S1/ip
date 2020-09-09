@@ -9,6 +9,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
+import main.exception.InvalidOptionException;
 import main.task.Deadline;
 import main.task.Event;
 import main.task.TaskList;
@@ -18,7 +19,7 @@ import main.task.Todo;
  * Handles the reading and writing of tasks to disk.
  * @author Joshua Liang XingYa
  * @author joshualiang.xy@gmail.com
- * @version v0.2
+ * @version v0.3
  * @since v0.1
  */
 public class Storage {
@@ -60,7 +61,8 @@ public class Storage {
      * @param tasks the list of tasks.
      * @throws IOException if there are any issues regarding files.
      */
-    public static void setTasks(TaskList tasks) throws IOException {
+    public static void setTasks(TaskList tasks) throws IOException,
+            InvalidOptionException {
         String currDir = System.getProperty("user.dir");
         Path filePath = Paths.get(currDir, "data", "tasks.csv");
         File file = filePath.toFile();
@@ -78,19 +80,20 @@ public class Storage {
             line = br.readLine();
 
             String taskType = task[0];
-            String taskTime = task[1];
-            String taskName = task[3];
-            boolean isTaskDone = task[2].equals("1");
+            String taskRecurrenceAlias = task[1];
+            String taskTime = task[2];
+            String taskName = task[4];
+            boolean isTaskDone = task[3].equals("1");
 
             switch (taskType) {
             case "T":
                 tasks.add(new Todo(taskName, isTaskDone));
                 break;
             case "D":
-                tasks.add(new Deadline(taskName, taskTime, isTaskDone));
+                tasks.add(new Deadline(taskName, taskRecurrenceAlias, taskTime, isTaskDone));
                 break;
             case "E":
-                tasks.add(new Event(taskName, taskTime, isTaskDone));
+                tasks.add(new Event(taskName, taskRecurrenceAlias, taskTime, isTaskDone));
                 break;
             default:
                 break;

@@ -4,7 +4,7 @@ package main.task;
  * Represents tasks.
  * @author Joshua Liang XingYa
  * @author joshualiang.xy@gmail.com
- * @version v0.2
+ * @version v0.3
  * @since v0.1
  */
 public class Task {
@@ -67,7 +67,10 @@ public class Task {
     public boolean equals(Object obj) {
         if (obj instanceof Task) {
             Task o = (Task) obj;
-            return this.name.equals(o.name) && this.isDone == o.isDone;
+            boolean isSameName = name.equals(o.name);
+            boolean isSameDoneState = isDone == o.isDone;
+
+            return isSameName && isSameDoneState;
         }
         return false;
     }

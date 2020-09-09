@@ -4,7 +4,7 @@ package main.task;
  * Represents todo tasks.
  * @author Joshua Liang XingYa
  * @author joshualiang.xy@gmail.com
- * @version v0.2
+ * @version v0.3
  * @since v0.1
  */
 public class Todo extends Task {
@@ -33,7 +33,7 @@ public class Todo extends Task {
      */
     @Override
     public String write() {
-        return String.format("T,%s", super.write());
+        return String.format("T,,%s", super.write());
     }
 
     @Override
@@ -45,6 +45,7 @@ public class Todo extends Task {
     public boolean equals(Object obj) {
         if (obj instanceof Todo) {
             Task o = (Task) obj;
+
             return super.equals(o);
         }
         return false;
