@@ -22,6 +22,7 @@ public class Storage {
 
     /**
      * Creates a new Storage file where tasks can be loaded from and saved to.
+     *
      * @param filepath represents the path of the file.
      */
     public Storage(String filepath) {
@@ -36,6 +37,7 @@ public class Storage {
 
     /**
      * Loads tasks from the file.
+     *
      * @return a list of all the tasks from the file.
      * @throws DukeException when there are problems with loading from the file.
      */
@@ -68,6 +70,7 @@ public class Storage {
 
     /**
      * Saves tasks into the file.
+     *
      * @param tasks takes in a list of tasks to be saved into the file.
      * @throws DukeException when there are problems saving into the file.
      */

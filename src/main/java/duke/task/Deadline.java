@@ -12,6 +12,7 @@ public class Deadline extends Task {
 
     /**
      * Creates a new Deadline with the given description and date.
+     *
      * @param description is the description of the deadline.
      * @param by is the deadline date.
      */
@@ -22,6 +23,7 @@ public class Deadline extends Task {
 
     /**
      * Gives a Deadline task from the full task description in the file.
+     *
      * @param loadTask is the full task description in the file.
      * @return a Deadline task.
      */
@@ -36,6 +38,7 @@ public class Deadline extends Task {
 
     /**
      * Gives a string indicating whether the deadline is done and the description of the deadline.
+     *
      * @param isFinished is the value 1 if deadline is done or 0 if deadline is not done.
      * @return a string indicating 1 or 0 and the description of the deadline.
      */
@@ -46,6 +49,7 @@ public class Deadline extends Task {
 
     /**
      * Returns a string representation of the deadline.
+     *
      * @return a string representation of the deadline.
      */
     @Override

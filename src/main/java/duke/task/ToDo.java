@@ -7,6 +7,7 @@ public class ToDo extends Task {
 
     /**
      * Creates a new ToDo with the given description.
+     *
      * @param description is the description of the todo.
      */
     public ToDo(String description) {
@@ -15,6 +16,7 @@ public class ToDo extends Task {
 
     /**
      * Gives a Todo task from the full task description in the file.
+     *
      * @param loadTask is the full task description in the file.
      * @return a Todo task
      */
@@ -29,6 +31,7 @@ public class ToDo extends Task {
 
     /**
      * Gives a string indicating whether the todo is done and the description of the todo.
+     *
      * @param isFinished is the value 1 if todo is done or 0 if todo is not done.
      * @return a string indicating 1 or 0 and the description of the todo.
      */
@@ -39,6 +42,7 @@ public class ToDo extends Task {
 
     /**
      * Returns a string representation of the todo.
+     *
      * @return a string representation of the todo.
      */
     @Override

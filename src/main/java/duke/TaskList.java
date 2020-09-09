@@ -21,6 +21,7 @@ public class TaskList {
 
     /**
      * Creates a task list with the specified tasks.
+     *
      * @param tasks represents the tasks to be stored in the task list.
      */
     public TaskList(List<Task> tasks) {
@@ -29,6 +30,7 @@ public class TaskList {
 
     /**
      * Adds a task into the task list.
+     *
      * @param task is the task to be added.
      */
     public void addTask(Task task) {
@@ -37,6 +39,7 @@ public class TaskList {
 
     /**
      * Deletes a task from the task list.
+     *
      * @param taskNum is the index of the task in the task list.
      * @return is the deleted task.
      */
@@ -48,6 +51,7 @@ public class TaskList {
 
     /**
      * Marks a specified task from the task list as done.
+     *
      * @param taskNum is the index of the task to be marked as completed.
      */
     public void markAsDone(int taskNum) {
@@ -56,6 +60,7 @@ public class TaskList {
 
     /**
      * Retrieves a specified task from the task list.
+     *
      * @param taskNum is the index of the task to be retrieved.
      * @return the specified task from the list.
      */
@@ -65,6 +70,7 @@ public class TaskList {
 
     /**
      * Makes a list of all the tasks from the task list.
+     *
      * @return a list of all the tasks in the task list.
      */
     public List<Task> getTasks() {
@@ -73,6 +79,7 @@ public class TaskList {
 
     /**
      * Gets the number of tasks in the task list.
+     *
      * @return the number of tasks.
      */
     public int getNumOfTasks() {
@@ -81,14 +88,15 @@ public class TaskList {
 
     /**
      * Gets a task list of tasks containing the keyword.
+     *
      * @param keyword is the keyword used to find the tasks.
      * @return a task list of tasks containing the keyword.
      */
     public TaskList getMatchingTasks(String keyword) {
         TaskList taskList = new TaskList();
-        for (int i = 0; i < this.tasks.size(); i++) {
-            if (this.tasks.get(i).toString().contains(keyword)) {
-                taskList.addTask(this.tasks.get(i));
+        for (Task task : this.tasks) {
+            if (task.toString().contains(keyword)) {
+                taskList.addTask(task);
             }
         }
         return taskList;
@@ -96,13 +104,14 @@ public class TaskList {
 
     /**
      * Creates a string representation of the task list.
+     *
      * @return a string representation of the task list.
      */
     @Override
     public String toString() {
         StringBuilder orderedList = new StringBuilder();
         for (int i = 1; i <= this.tasks.size(); i++) {
-            orderedList.append("\n\t" + i + "." + this.tasks.get(i - 1));
+            orderedList.append("\n\t").append(i).append(".").append(this.tasks.get(i - 1));
         }
         return orderedList.toString();
     }

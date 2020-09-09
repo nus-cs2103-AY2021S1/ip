@@ -21,6 +21,7 @@ public class Parser {
 
     /**
      * Parses the command from the user so that the chat bot can understand.
+     *
      * @param fullCommand is the actual full command from the user.
      * @return represents the command that can be interpreted from the user.
      * @throws DukeException when user commands are not valid.

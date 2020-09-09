@@ -15,6 +15,7 @@ public class DoneCommand extends Command {
 
     /**
      * Creates a new done command to mark a task with the specified index as done.
+     *
      * @param taskNum is the index of the task to be marked as done.
      */
     public DoneCommand(int taskNum) {
@@ -23,6 +24,7 @@ public class DoneCommand extends Command {
 
     /**
      * Marks a task from the task list as done.
+     *
      * @param tasks is the task list that the command will execute with.
      * @param storage is the storage that the command will execute with.
      * @return a command response after executing the done command.

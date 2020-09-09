@@ -13,6 +13,7 @@ public class FindCommand extends Command {
 
     /**
      * Creates a new find command with the intended keyword.
+     *
      * @param keyword is the keyword used to find the tasks.
      */
     public FindCommand(String keyword) {
@@ -21,6 +22,7 @@ public class FindCommand extends Command {
 
     /**
      * Finds the tasks which matches the keyword.
+     *
      * @param tasks is the tasks the command will execute with.
      * @param storage is the storage the command will execute with.
      * @return a command response after executing the find command.

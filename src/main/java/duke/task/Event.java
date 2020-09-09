@@ -12,6 +12,7 @@ public class Event extends Task {
 
     /**
      * Creates a new Event with the given description and date.
+     *
      * @param description is the description of the event.
      * @param at is the event date.
      */
@@ -22,6 +23,7 @@ public class Event extends Task {
 
     /**
      * Gives an Event task from the full task description in the file.
+     *
      * @param loadTask is the full task description in the file.
      * @return an Event task.
      */
@@ -36,6 +38,7 @@ public class Event extends Task {
 
     /**
      * Gives a string indicating whether the event is done and the description of the event.
+     *
      * @param isFinished is the value 1 if event is done or 0 if event is not done.
      * @return a string indicating 1 or 0 and the description of the event.
      */
@@ -46,6 +49,7 @@ public class Event extends Task {
 
     /**
      * Returns a string representation of the event.
+     *
      * @return a string representation of the event.
      */
     @Override
