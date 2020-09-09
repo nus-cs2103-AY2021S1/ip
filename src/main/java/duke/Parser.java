@@ -32,6 +32,7 @@ public class Parser {
         String[] splitInput = userInput.split(" ", 2);
 
         // Extract command type
+        assert(splitInput[0] != null);
         String userCommand = splitInput[0];
         Command command = this.extractCommandType(userCommand);
 
@@ -41,6 +42,7 @@ public class Parser {
             // Extract user action if command is not BYE or LIST
             // BYE and LIST commands have no user action
             if (!userInput.equals("bye") && !userInput.equals("list")) {
+                assert(splitInput[1] != null);
                 userAction = splitInput[1];
 
                 // Check if user action is present for BYE and LIST commands
