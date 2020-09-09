@@ -3,3 +3,6 @@ T | 1 | pop
 E | 1 | tank  | 2020-12-12
 T | 0 | asd
 T | 0 | asdf
+T | 1 | temp
+T | 1 | this
+T | 0 | this
