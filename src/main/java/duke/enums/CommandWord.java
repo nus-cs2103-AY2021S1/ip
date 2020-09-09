@@ -7,8 +7,8 @@ import java.util.Map;
  * An Enumeration of the various command words that shall be use on Duke
  */
 public enum CommandWord {
-    LIST_MODE("list"), ECHO_MODE("echo"), TODO_CMD("todo"), DEADLINE_CMD("deadline"), EVENT_CMD("event"),
-    EXIT_CMD("bye"), LIST_CMD("list"), DONE_CMD("done"), DELETE_CMD("delete"), INVALID;
+    ECHO_MODE("echo"), TODO_CMD("todo"), DEADLINE_CMD("deadline"), EVENT_CMD("event"),
+    EXIT_CMD("bye"), LIST_CMD("list"), DONE_CMD("done"), DELETE_CMD("delete"), FIND_CMD("find"), INVALID;
     private static Map<String, CommandWord> keyableMap;
     private String cmd;
     CommandWord() {

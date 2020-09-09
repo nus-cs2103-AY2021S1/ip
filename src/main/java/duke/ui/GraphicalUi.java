@@ -108,7 +108,4 @@ public class GraphicalUi extends javafx.application.Application implements Ui {
     @Override
     public void displayError(String message) {
     }
-    @Override
-    public void displayLoadError() {
-    }
 }

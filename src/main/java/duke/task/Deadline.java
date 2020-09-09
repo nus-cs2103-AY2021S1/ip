@@ -55,41 +55,40 @@ public class Deadline extends Task {
      * Sets the Date and Time attributes of a Deadline by choosing the correct formatter and formatting the user input
      * information for these fields
      *
-     * @param dateString Unformatted date and time fields
+     * @param dateTimeString Unformatted date and time fields
      *
      * @throws DukeException If the Date and Time user input is not understandable
      */
-    public void setDateTime(String dateString) throws DukeException {
+    public void setDateTime(String dateTimeString) throws DukeException {
         try {
-            dateString = dateString.strip();
-            String[] dateTimeSeparated = dateString.split(" ");
-            String date = dateTimeSeparated[0];
-            String time = dateTimeSeparated[1];
-            DateTimeFormatter chosenDateFormatter = chooseDateFormatter(date);
-            DateTimeFormatter chosenTimeFormatter = chooseTimeFormatter(time);
-            LocalDate localDate = LocalDate.parse(date, chosenDateFormatter);
-            LocalTime localTime = LocalTime.parse(time, chosenTimeFormatter);
+            dateTimeString = dateTimeString.strip();
+            String[] dateTimeSeparated = dateTimeString.split(" ");
+            String dateString = dateTimeSeparated[0];
+            String timeString = dateTimeSeparated[1];
+            DateTimeFormatter chosenDateFormatter = chooseDateFormatter(dateString);
+            DateTimeFormatter chosenTimeFormatter = chooseTimeFormatter(timeString);
+            LocalDate localDate = LocalDate.parse(dateString, chosenDateFormatter);
+            LocalTime localTime = LocalTime.parse(timeString, chosenTimeFormatter);
             this.date = localDate;
             this.time = localTime;
         } catch (Exception e) {
             throw new DukeException(Message.ERROR_BAD_TIME_INPUT.getMsg());
-            // todo: send this throwing of exception to the parser
         }
     }
     /**
      * Filters through the Enumeration for DateTime formatters and selects the correct Formatter based on the format
      * that the user inputs the Date information in
      *
-     * @param date String representation for a date
+     * @param dateString String representation for a date
      *
      * @return DateTimeFormatter that can be used to format this user input for Date
      *
      * @throws DukeException If the User's date format isn't supported by the existing Formatters in the Enumeration
      */
-    private DateTimeFormatter chooseDateFormatter(String date) throws DukeException {
+    private DateTimeFormatter chooseDateFormatter(String dateString) throws DukeException {
         return DateTimeFormat.getFormatterStream().filter(formatter -> {
             try {
-                LocalDate.parse(date, formatter);
+                LocalDate.parse(dateString, formatter);
                 return true;
             } catch (DateTimeParseException ignored) {
                 // ON PURPOSE: ignored because we only want the formatter that handles things properly
@@ -101,19 +100,19 @@ public class Deadline extends Task {
      * Filters through the Enumeration for DateTime formatters and selects the correct Formatter based on the format
      * that the user inputs the Date information in
      *
-     * @param time String representation for a time
+     * @param timeString String representation for a time
      *
      * @return DateTimeFormatter that can be used to format this user input for Time
      *
      * @throws DukeException If the User's time format isn't supported by the existing Formatters in the Enumeration
      */
-    private DateTimeFormatter chooseTimeFormatter(String time) throws DukeException {
+    private DateTimeFormatter chooseTimeFormatter(String timeString) throws DukeException {
         return DateTimeFormat.getFormatterStream().filter(formatter -> {
             try {
-                LocalTime.parse(time, formatter);
+                LocalTime.parse(timeString, formatter);
                 return true;
             } catch (Exception ignored) {
-                // ON PURPOSE: ignored because we only want the formatter that handles things properly
+                // ignored because we only want the formatter that handles things properly
             }
             return false;
         }).findAny().orElseThrow(() -> new DukeException(Message.ERROR_NO_TIME_FORMATTER.getMsg()));

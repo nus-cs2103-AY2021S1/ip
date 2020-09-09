@@ -49,9 +49,7 @@ public class MainWindow extends AnchorPane {
                                              DialogBox.getDukeDialog(response, dukeImage));
         userInput.clear();
     }
-    // todo: 1) add greeting upon startup [done]
-    //       2) dynamic resizing of DialogBox for vertical height to display long list
-    //       3) make it pretty :) try a matrix rain for the background, or just some stupid animation rendered
+    // todo: 2) dynamic resizing of DialogBox for vertical height to display long list
     /*
     Gif cropped from: http://gifgifs.com/crop/
     gif taken from: https://www.reddit.com/r/Cinemagraphs/comments/8ceghg/reflections/
