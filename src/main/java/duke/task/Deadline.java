@@ -108,7 +108,7 @@ public class Deadline extends Task {
      * @throws DukeException If the User's time format isn't supported by the existing Formatters in the Enumeration
      */
     private DateTimeFormatter chooseTimeFormatter(String time) throws DukeException {
-        return DateTimeFormat.getFormatterStream().filter(formatter -> {
+        return DateTimeFormat.getFormatterStream().filter(formatter -> { // lambda used
             try {
                 LocalTime.parse(time, formatter);
                 return true;
