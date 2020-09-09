@@ -75,6 +75,9 @@ public class Ui {
 
                                     if (!parser.isEmptyDescription(description)) {
 
+                                        assert (dateAndTime.contains("-") && dateAndTime.contains(":"))
+                                                : "Invalid date or time format\n please follow this: 2020-03-03 18:00";
+
                                         byOrAt = new DateAndTime(dateAndTime);
 
                                         correctedInput = input.substring(Parser.EVT_VALIDATION.length());
@@ -97,6 +100,9 @@ public class Ui {
                                                 Parser.DDL_VALIDATION.length() + 1);
 
                                     if (!parser.isEmptyDescription(description)) {
+
+                                        assert (dateAndTime.contains("-") && dateAndTime.contains(":"))
+                                                : "Invalid date or time format\n please follow this: 2020-03-03 18:00" ;
 
                                         byOrAt = new DateAndTime(dateAndTime);
 
