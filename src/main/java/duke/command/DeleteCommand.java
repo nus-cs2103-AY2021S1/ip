@@ -9,6 +9,7 @@ import duke.ui.Ui;
 
 /**
  * Represents a deleting {@link duke.task.Task} command.
+ *
  * @author Tee Kok Siang
  */
 public class DeleteCommand extends Command {

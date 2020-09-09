@@ -25,9 +25,9 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 
-
 /**
  * Represents a parser for parsing the command.
+ *
  * @author Tee Kok Siang
  */
 public class Parser {
@@ -73,7 +73,7 @@ public class Parser {
         }
     }
 
-    public static Task parseAddCommand(String command) throws EmptyTaskDescriptionException,
+    private static Task parseAddCommand(String command) throws EmptyTaskDescriptionException,
             InvalidDeadlineCommandException, InvalidEventCommandException, InvalidCommandException {
         List<String> commandWords = Arrays.asList(command.split(Command.SPLIT_DELIMITER));
         String taskType = commandWords.get(0);
@@ -121,6 +121,13 @@ public class Parser {
         return task;
     }
 
+    /**
+     * Parses the input to a {@link Command}.
+     * Extracts the keyword from the input and return a {@link Command}.
+     *
+     * @param fullCommand The input from the user to be parsed to a {@link Command}.
+     * @return Command which is parsed from the input.
+     */
     public static Command parse(String fullCommand) throws InvalidPriorityCommandException,
             InvalidTaskNumberException, InvalidTaskNumberCommandException, InvalidPriorityLevel,
             InvalidCommandException, InvalidDeadlineCommandException, InvalidEventCommandException,

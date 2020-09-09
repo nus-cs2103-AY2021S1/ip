@@ -6,6 +6,7 @@ import duke.ui.Ui;
 
 /**
  * Represents a Duke application.
+ *
  * @author Tee Kok Siang
  */
 public class Duke {

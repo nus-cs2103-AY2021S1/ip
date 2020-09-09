@@ -7,6 +7,7 @@ import duke.task.Task;
 
 /**
  * Represents a list of tasks.
+ *
  * @author Tee Kok Siang
  */
 public class TaskList {
@@ -20,6 +21,9 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Adds a {@link Task} into the TaskList.
+     */
     public void addTask(Task task) {
         assert task != null : "Task should not be null";
         tasks.add(task);

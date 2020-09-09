@@ -1,23 +1,29 @@
 package duke;
 
-import duke.exception.DukeException;
-import duke.command.Command;
-import duke.task.Task;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import duke.command.Command;
+import duke.exception.DukeException;
+import duke.exception.InvalidCommandException;
+import duke.task.Task;
 
 public class ParserTest {
     @Test
-    public void testParserUnknownCommand(){
-        DukeException exception = assertThrows(DukeException.class,
-                () -> Parser.parse("This command will throw DukeException"));
-        assertEquals(exception.getLocalizedMessage(), ":( Oops!!! I'm sorry, but I don't know what that means :-(\n\tCommands: " +
-                "list | done | delete | todo | deadline | event");
+    public void parse_unknownCommand_exceptionThrown() {
+        DukeException exception = assertThrows(DukeException.class, () ->
+                Parser.parse("This command will throw DukeException"));
+        InvalidCommandException invalidCommandException = new InvalidCommandException();
+        String expectedExceptionMessage = invalidCommandException.getLocalizedMessage();
+        System.out.println(exception.getLocalizedMessage());
+        assertEquals(expectedExceptionMessage, exception.getLocalizedMessage());
     }
 
     @Test
-    public void testParserByeCommand() {
+    public void parse_byeCommand_parsedCorrectly() {
         try {
             Command command = Parser.parse("bye");
             assertTrue(command.isExit());
@@ -27,7 +33,7 @@ public class ParserTest {
     }
 
     @Test
-    public void testParserAddCommand(){
+    public void parse_addCommand_parsedCorrectly() {
         try {
             Command command = Parser.parse("todo read book");
             Task task = command.getTask();

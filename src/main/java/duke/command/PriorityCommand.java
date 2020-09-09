@@ -10,6 +10,7 @@ import duke.ui.Ui;
 
 /**
  * Represents a prioritising {@link duke.task.Task} command.
+ *
  * @author Tee Kok Siang
  */
 public class PriorityCommand extends Command {

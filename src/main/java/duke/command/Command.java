@@ -8,6 +8,7 @@ import duke.ui.Ui;
 
 /**
  * Represents a command.
+ *
  * @author Tee Kok Siang
  */
 public abstract class Command {

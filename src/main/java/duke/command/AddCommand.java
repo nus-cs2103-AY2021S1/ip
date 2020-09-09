@@ -7,6 +7,7 @@ import duke.ui.Ui;
 
 /**
  * Represents an adding {@link duke.task.Task} command.
+ *
  * @author Tee Kok Siang
  */
 public class AddCommand extends Command {

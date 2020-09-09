@@ -9,6 +9,7 @@ import duke.ui.Ui;
 
 /**
  * Represents a listing {@link duke.TaskList} command.
+ *
  * @author Tee Kok Siang
  */
 public class ListCommand extends Command {

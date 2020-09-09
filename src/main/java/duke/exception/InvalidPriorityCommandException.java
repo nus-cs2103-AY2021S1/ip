@@ -2,6 +2,7 @@ package duke.exception;
 
 /**
  * Represents a custom exception when the {@link duke.command.FindCommand} is invalid.
+ *
  * @author Tee Kok Siang
  */
 public class InvalidPriorityCommandException extends DukeException {

@@ -8,6 +8,7 @@ import duke.ui.Ui;
 
 /**
  * Represents a completing {@link duke.task.Task} command.
+ *
  * @author Tee Kok Siang
  */
 public class DoneCommand extends Command {

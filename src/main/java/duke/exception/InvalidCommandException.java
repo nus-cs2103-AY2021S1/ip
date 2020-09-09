@@ -2,6 +2,7 @@ package duke.exception;
 
 /**
  * Represents a custom exception when the command is invalid.
+ *
  * @author Tee Kok Siang
  */
 public class InvalidCommandException extends DukeException {

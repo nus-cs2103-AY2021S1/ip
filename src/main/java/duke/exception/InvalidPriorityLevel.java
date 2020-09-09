@@ -2,6 +2,7 @@ package duke.exception;
 
 /**
  * Represents a custom exception when the {@link duke.task.Task} priority level is invalid.
+ *
  * @author Tee Kok Siang
  */
 public class InvalidPriorityLevel extends DukeException {

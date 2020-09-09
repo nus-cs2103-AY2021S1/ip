@@ -5,28 +5,15 @@ package duke.task;
  * @author Tee Kok Siang
  */
 public class Todo extends Task {
+    /** Keyword for reading and writing from/to a file */
+    public static final String TODO_KEYWORD = "T";
+
     /**
      * Constructs a Todo object.
      *
      * @param description Task description.
      */
     public Todo(String description) {
-        super(description);
-    }
-
-    /**
-     * Returns formatted Todo task information.
-     * It will be used to write into the file.
-     * @return Formatted Todo task information.
-     */
-    @Override
-    public String toFileString() {
-        String done = super.isDone ? "1" : "0";
-        return "T | " + done + " | " + priority.toString() + " | " + super.description + " | " + priority.toString();
-    }
-
-    @Override
-    public String toString() {
-        return "[T]" + super.toString() + " [" + priority.toString() + "]";
+        super(description, TODO_KEYWORD);
     }
 }

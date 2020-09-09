@@ -6,6 +6,7 @@ import duke.ui.Ui;
 
 /**
  * Represents an exiting application command.
+ *
  * @author Tee Kok Siang
  */
 public class ByeCommand extends Command {

@@ -10,6 +10,7 @@ import duke.ui.Ui;
 
 /**
  * Represents a searching {@link duke.task.Task} command.
+ *
  * @author Tee Kok Siang
  */
 public class FindCommand extends Command {

@@ -2,6 +2,7 @@ package duke.exception;
 
 /**
  * Represents a custom exception when the task number is not found.
+ *
  * @author Tee Kok Siang
  */
 public class TaskNotFoundException extends DukeException {

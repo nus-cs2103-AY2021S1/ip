@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 /**
  * Represents a UI to handle user interaction.
+ *
  * @author Tee Kok Siang
  */
 public class Ui {
@@ -13,6 +14,11 @@ public class Ui {
 
     private final Scanner scanner = new Scanner(System.in);
 
+    /**
+     * Prints the message and wraps it with the divider.
+     *
+     * @param message Message to be printed.
+     */
     public void printResponse(String message) {
         assert message != null : "Message should not be null";
         String divider = "\n\t-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-*-\n";
@@ -23,6 +29,9 @@ public class Ui {
         printResponse(GREET_MESSAGE);
     }
 
+    /**
+     * Prints the exit message and closes the scanner.
+     */
     public void showBye() {
         printResponse(EXIT_MESSAGE);
         scanner.close();

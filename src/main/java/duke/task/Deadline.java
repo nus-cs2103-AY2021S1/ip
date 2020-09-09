@@ -5,9 +5,12 @@ import java.time.format.DateTimeFormatter;
 
 /**
  * Represents a deadline task.
+ *
  * @author Tee Kok Siang
  */
 public class Deadline extends Task {
+    /** Keyword for reading and writing from/to a file */
+    public static final String DEADLINE_KEYWORD = "D";
     /** Keyword for extracting the Deadline date */
     public static final String BY_KEYWORD = "/by";
     /** Position for the keyword */
@@ -21,25 +24,25 @@ public class Deadline extends Task {
      * @param by Task deadline.
      */
     public Deadline(String description, String by) {
-        super(description);
+        super(description, DEADLINE_KEYWORD);
         this.by = by;
     }
 
     /**
      * Returns formatted deadline task information.
      * It will be used to write into the file.
+     *
      * @return Formatted deadline task information.
      */
     @Override
     public String toFileString() {
-        String done = super.isDone ? "1" : "0";
-        return "D | " + done + " | " + priority.toString() + " | " + super.description + " | " +  by;
+        return super.toFileString() + " | " + by;
     }
 
     @Override
     public String toString() {
         LocalDate localDate = LocalDate.parse(by);
         String formattedDate = localDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy"));
-        return "[D]" + super.toString() + " (by: " + formattedDate + ") [" + priority.toString() + "]";
+        return super.toString() + " (by: " + formattedDate + ")";
     }
 }
