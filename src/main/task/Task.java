@@ -67,7 +67,10 @@ public class Task {
     public boolean equals(Object obj) {
         if (obj instanceof Task) {
             Task o = (Task) obj;
-            return this.name.equals(o.name) && this.isDone == o.isDone;
+            boolean isSameName = name.equals(o.name);
+            boolean isSameDoneState = isDone == o.isDone;
+
+            return isSameName && isSameDoneState;
         }
         return false;
     }

@@ -45,6 +45,7 @@ public class Todo extends Task {
     public boolean equals(Object obj) {
         if (obj instanceof Todo) {
             Task o = (Task) obj;
+
             return super.equals(o);
         }
         return false;

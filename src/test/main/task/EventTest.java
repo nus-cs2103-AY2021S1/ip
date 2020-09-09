@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -12,9 +13,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import main.command.Option;
 import main.exception.InvalidOptionException;
 
 public class EventTest {
+    private static final LocalDateTime NOW = LocalDateTime.now();
     private static Event eventOne;
     private static Event eventTwo;
 
@@ -24,6 +27,74 @@ public class EventTest {
                 LocalDateTime.of(1993, 12, 6, 10, 10), new HashSet<>());
         eventTwo = new Event(
                 "task 2", "", "4198-01-13T23:39", true);
+    }
+
+    @Nested
+    @DisplayName("recurrence")
+    class Recurrence {
+        @Test
+        @DisplayName("should reset done state and push back event to one day away")
+        public void constructor_recurringDaily_event() throws InvalidOptionException {
+            Event test = new Event("task 2", "rd",
+                    "2020-09-09T14:39", true);
+            LocalDateTime date = LocalDateTime.of(2020, 9, 9, 14, 39);
+            HashSet<Option> options = new HashSet<>();
+            options.add(Option.RECURRING_DAILY);
+
+            assertEquals(new Event(
+                    "task 2",
+                    date.plusDays(date.until(NOW, ChronoUnit.DAYS) + 1),
+                    options
+            ), test);
+        }
+
+        @Test
+        @DisplayName("should reset done state and push back event to one week away")
+        public void constructor_recurringWeekly_event() throws InvalidOptionException {
+            Event test = new Event("task 2", "rw",
+                    "2020-09-09T14:39", true);
+            LocalDateTime date = LocalDateTime.of(2020, 9, 9, 14, 39);
+            HashSet<Option> options = new HashSet<>();
+            options.add(Option.RECURRING_WEEKLY);
+
+            assertEquals(new Event(
+                    "task 2",
+                    date.plusWeeks(date.until(NOW, ChronoUnit.WEEKS) + 1),
+                    options
+            ), test);
+        }
+
+        @Test
+        @DisplayName("should reset done state and push back event to one month away")
+        public void constructor_recurringMonthly_event() throws InvalidOptionException {
+            Event test = new Event("task 2", "rm",
+                    "2020-09-09T14:39", true);
+            LocalDateTime date = LocalDateTime.of(2020, 9, 9, 14, 39);
+            HashSet<Option> options = new HashSet<>();
+            options.add(Option.RECURRING_MONTHLY);
+
+            assertEquals(new Event(
+                    "task 2",
+                    date.plusMonths(date.until(NOW, ChronoUnit.MONTHS) + 1),
+                    options
+            ), test);
+        }
+
+        @Test
+        @DisplayName("should reset done state and push back event to one year away")
+        public void constructor_recurringYearly_event() throws InvalidOptionException {
+            Event test = new Event("task 2", "ry",
+                    "2020-09-09T14:39", true);
+            LocalDateTime date = LocalDateTime.of(2020, 9, 9, 14, 39);
+            HashSet<Option> options = new HashSet<>();
+            options.add(Option.RECURRING_YEARLY);
+
+            assertEquals(new Event(
+                    "task 2",
+                    date.plusYears(date.until(NOW, ChronoUnit.YEARS) + 1),
+                    options
+            ), test);
+        }
     }
 
     @Nested
@@ -41,6 +112,15 @@ public class EventTest {
         public void write_altEventTask_altString() {
             assertEquals("E,,4198-01-13T23:39,1,task 2\n",
                     eventTwo.write());
+        }
+
+        @Test
+        @DisplayName("should return a string with the recurrence alias")
+        public void write_recurringEventTask_string() throws InvalidOptionException {
+            Event test = new Event("task 3", "rw", "4000-11-23T12:44", true);
+
+            assertEquals("E,rw,4000-11-23T12:44,1,task 3\n",
+                    test.write());
         }
     }
 
@@ -108,6 +188,24 @@ public class EventTest {
         public void equals_altEventTwo_false() throws InvalidOptionException {
             assertFalse(eventOne.equals(
                     new Event("task 1", "", "2020-12-06T10:10", false)));
+        }
+
+        @Test
+        @DisplayName("should return false if events have different recurrence")
+        public void equals_altRecurrenceEvent_false() throws InvalidOptionException {
+            Event recurringDaily = new Event("task 1", "rd",
+                    "1993-12-06T10:10", false);
+            Event recurringWeekly = new Event("task 1", "rw",
+                    "1993-12-06T10:10", false);
+            Event recurringMonthly = new Event("task 1", "rm",
+                    "1993-12-06T10:10", false);
+            Event recurringYearly = new Event("task 1", "ry",
+                    "1993-12-06T10:10", false);
+
+            assertFalse(eventOne.equals(recurringMonthly));
+            assertFalse(recurringDaily.equals(recurringMonthly));
+            assertFalse(recurringMonthly.equals(recurringYearly));
+            assertFalse(recurringYearly.equals(recurringDaily));
         }
     }
 }

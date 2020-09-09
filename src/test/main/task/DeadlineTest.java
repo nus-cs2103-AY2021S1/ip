@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.HashSet;
 
 import org.junit.jupiter.api.BeforeEach;
@@ -12,9 +13,11 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import main.command.Option;
 import main.exception.InvalidOptionException;
 
 public class DeadlineTest {
+    private static final LocalDateTime NOW = LocalDateTime.now();
     private static Deadline deadlineOne;
     private static Deadline deadlineTwo;
 
@@ -24,6 +27,74 @@ public class DeadlineTest {
                 LocalDateTime.of(1993, 12, 6, 10, 10), new HashSet<>());
         deadlineTwo = new Deadline(
                 "task 2", "", "4198-01-13T23:39", true);
+    }
+
+    @Nested
+    @DisplayName("recurrence")
+    class Recurrence {
+        @Test
+        @DisplayName("should reset done state and push back deadline to one day away")
+        public void constructor_recurringDaily_deadline() throws InvalidOptionException {
+            Deadline test = new Deadline("task 2", "rd",
+                    "2020-09-09T14:39", true);
+            LocalDateTime date = LocalDateTime.of(2020, 9, 9, 14, 39);
+            HashSet<Option> options = new HashSet<>();
+            options.add(Option.RECURRING_DAILY);
+
+            assertEquals(new Deadline(
+                    "task 2",
+                    date.plusDays(date.until(NOW, ChronoUnit.DAYS) + 1),
+                    options
+            ), test);
+        }
+
+        @Test
+        @DisplayName("should reset done state and push back deadline to one week away")
+        public void constructor_recurringWeekly_deadline() throws InvalidOptionException {
+            Deadline test = new Deadline("task 2", "rw",
+                    "2020-09-09T14:39", true);
+            LocalDateTime date = LocalDateTime.of(2020, 9, 9, 14, 39);
+            HashSet<Option> options = new HashSet<>();
+            options.add(Option.RECURRING_WEEKLY);
+
+            assertEquals(new Deadline(
+                    "task 2",
+                    date.plusWeeks(date.until(NOW, ChronoUnit.WEEKS) + 1),
+                    options
+            ), test);
+        }
+
+        @Test
+        @DisplayName("should reset done state and push back deadline to one month away")
+        public void constructor_recurringMonthly_deadline() throws InvalidOptionException {
+            Deadline test = new Deadline("task 2", "rm",
+                    "2020-09-09T14:39", true);
+            LocalDateTime date = LocalDateTime.of(2020, 9, 9, 14, 39);
+            HashSet<Option> options = new HashSet<>();
+            options.add(Option.RECURRING_MONTHLY);
+
+            assertEquals(new Deadline(
+                    "task 2",
+                    date.plusMonths(date.until(NOW, ChronoUnit.MONTHS) + 1),
+                    options
+            ), test);
+        }
+
+        @Test
+        @DisplayName("should reset done state and push back deadline to one year away")
+        public void constructor_recurringYearly_deadline() throws InvalidOptionException {
+            Deadline test = new Deadline("task 2", "ry",
+                    "2020-09-09T14:39", true);
+            LocalDateTime date = LocalDateTime.of(2020, 9, 9, 14, 39);
+            HashSet<Option> options = new HashSet<>();
+            options.add(Option.RECURRING_YEARLY);
+
+            assertEquals(new Deadline(
+                    "task 2",
+                    date.plusYears(date.until(NOW, ChronoUnit.YEARS) + 1),
+                    options
+            ), test);
+        }
     }
 
     @Nested
@@ -41,6 +112,15 @@ public class DeadlineTest {
         public void write_altDeadlineTask_altString() {
             assertEquals("D,,4198-01-13T23:39,1,task 2\n",
                     deadlineTwo.write());
+        }
+
+        @Test
+        @DisplayName("should return a string with the recurrence alias")
+        public void write_recurringDeadlineTask_string() throws InvalidOptionException {
+            Deadline test = new Deadline("task 3", "rw", "4000-11-23T12:44", true);
+
+            assertEquals("D,rw,4000-11-23T12:44,1,task 3\n",
+                    test.write());
         }
     }
 
@@ -108,6 +188,24 @@ public class DeadlineTest {
         public void equals_altDeadlineTwo_false() throws InvalidOptionException {
             assertFalse(deadlineOne.equals(
                     new Deadline("task 1", "", "2020-12-06T10:10", false)));
+        }
+
+        @Test
+        @DisplayName("should return false if deadlines have different recurrence")
+        public void equals_altRecurrenceDeadline_false() throws InvalidOptionException {
+            Deadline recurringDaily = new Deadline("task 1", "rd",
+                    "1993-12-06T10:10", false);
+            Deadline recurringWeekly = new Deadline("task 1", "rw",
+                    "1993-12-06T10:10", false);
+            Deadline recurringMonthly = new Deadline("task 1", "rm",
+                    "1993-12-06T10:10", false);
+            Deadline recurringYearly = new Deadline("task 1", "ry",
+                    "1993-12-06T10:10", false);
+
+            assertFalse(deadlineOne.equals(recurringMonthly));
+            assertFalse(recurringDaily.equals(recurringMonthly));
+            assertFalse(recurringMonthly.equals(recurringYearly));
+            assertFalse(recurringYearly.equals(recurringDaily));
         }
     }
 }

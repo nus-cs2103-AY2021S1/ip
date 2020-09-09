@@ -66,9 +66,11 @@ public class Deadline extends Task {
 
         LocalDateTime now = LocalDateTime.now();
         boolean hasDeadlinePassed = parsedTime.isBefore(now);
+        boolean hasRecurrence = recurrence != null;
+        boolean isToBeReset = hasDeadlinePassed && hasRecurrence;
         long addedTime;
 
-        if (hasDeadlinePassed && recurrence != null) {
+        if (isToBeReset) {
             switch (recurrence) {
             case RECURRING_DAILY:
                 addedTime = parsedTime.until(now, ChronoUnit.DAYS) + 1;
@@ -93,7 +95,7 @@ public class Deadline extends Task {
             this.time = parsedTime;
         }
 
-        if (isDone && (!hasDeadlinePassed || recurrence == null)) {
+        if (isDone && !isToBeReset) {
             setDone();
         }
     }
@@ -120,7 +122,10 @@ public class Deadline extends Task {
     public boolean equals(Object obj) {
         if (obj instanceof Deadline) {
             Deadline o = (Deadline) obj;
-            return super.equals(o) && this.time.equals(o.time);
+            boolean isSameRecurrence = recurrence == o.recurrence;
+            boolean isSameTime = time.equals(o.time);
+
+            return super.equals(o) && isSameTime && isSameRecurrence;
         }
         return false;
     }

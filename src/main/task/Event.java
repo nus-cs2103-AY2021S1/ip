@@ -119,7 +119,10 @@ public class Event extends Task {
     public boolean equals(Object obj) {
         if (obj instanceof Event) {
             Event o = (Event) obj;
-            return super.equals(o) && this.time.equals(o.time);
+            boolean isSameRecurrence = recurrence == o.recurrence;
+            boolean isSameTime = time.equals(o.time);
+
+            return super.equals(o) && isSameTime && isSameRecurrence;
         }
         return false;
     }
