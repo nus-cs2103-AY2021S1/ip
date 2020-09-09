@@ -25,7 +25,7 @@ public class Deadline extends Task  {
     public static Deadline create(String description) throws DukeException {
         String[] keywords = description.split(" /by ", 2);
         if (keywords.length < 2) {
-            throw new DukeException("☹ OOPS!!! Add a date using \" /by <date>\".");
+            throw new DukeException("☹ OOPS!!! Add a date using \" /by YYYY-MM-DD\".");
         }
         return new Deadline(keywords[0], keywords[1]);
     }

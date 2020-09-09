@@ -23,7 +23,7 @@ public class Parser {
      */
     public static int getTaskIndex(String[] commands, List<Task> taskList) throws DukeException {
         if (commands.length < 2) {
-            throw new DukeException("☹ OOPS!!! Please put a number to select a task for the \""
+            throw new DukeException("Please put a number to select a task for the \""
                    + commands[0] + "\" action!");
         }
         try {
@@ -31,9 +31,9 @@ public class Parser {
             Task task = taskList.get(index - 1);
             return index - 1;
         }  catch (NumberFormatException nfe) {
-            throw new DukeException("☹ OOPS!!! Please input an actual number e.g. 1, 2, 3.");
+            throw new DukeException("Please input an actual number e.g. 1, 2, 3.");
         } catch (IndexOutOfBoundsException iobe) {
-            throw new DukeException("☹ OOPS!!! Please select a valid task.");
+            throw new DukeException("Please select a valid task.");
         }
     }
 
@@ -44,7 +44,7 @@ public class Parser {
      */
     public static void checkValidAddCommand(String[] commands) throws DukeException {
         if (commands.length < 2) {
-            throw new DukeException("☹ OOPS!!! The description of a " + commands[0] + " cannot be empty.");
+            throw new DukeException("The description of a " + commands[0] + " cannot be empty.");
         }
     }
 }

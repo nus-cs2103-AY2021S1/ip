@@ -29,16 +29,26 @@ public class Ui {
         this.out = out;
     }
 
-    public void showSearchResults(String result) {
+    /**
+     * Gets search results from taskList when searching the list
+     * @param result
+     * @return a string of search results
+     */
+    public String getSearchResults(String result) {
         if (result.isBlank()) {
-            out.println("No matching tasks, sorry");
+            return ("No matching tasks, sorry");
         } else {
-            out.println("Here are the matching tasks in your list:");
-            out.println(result);
+            return "Here are the matching tasks in your list:\n"
+                    + (result);
         }
     }
 
-    private boolean shouldIgnore(String line) {
+    /**
+     * Checks when to ignore a command line
+     * @param line
+     * @return returns true if line should be ignored, else false
+     */
+    public boolean shouldIgnore(String line) {
         return line.trim().isEmpty();
     }
 
@@ -66,25 +76,27 @@ public class Ui {
      */
     public void showWelcome() {
         showLine();
-        out.println((
-                " ____        _\n" +
-                "|  _ \\ _   _| | _____\n" +
-                "| | | | | | | |/ / _\\\n" +
-                "| |_| | |_| |   <  __/\n" +
-                "|____/ \\__,_|_|\\_\\___|\n" +
-                "Hello! I'm Thuya\n" +
-                "What may I do for you, sir/madam?")
-        );
+        out.println(getWelcomeMessage());
         showLine();
     }
 
     /**
-     * Shows the message for a successful deletion of a task
-     * @param task
-     * @param taskList
+     * Returns the welcome message
+     * @return the welcome message
      */
-    public void showDelete(Task task, TaskList taskList) {
-        out.println(
+    public String getWelcomeMessage() {
+        return "Hello! I'm Thuya\n"
+                + "What may I do for you, sir/madam?";
+    }
+
+    /**
+     * Gets the message for a successfully deletion of a task
+     * @param task that was succesfully deleted
+     * @param taskList TaskList that task was deleted to
+     * @return message when task is successfully deleted
+     */
+    public String getDeleteMessage(Task task, TaskList taskList) {
+        return (
             "Noted. I've removed this task:\n"
             + task.toString() + "\n"
             + "Now you have "+ taskList.size() +" tasks in the list."
@@ -92,12 +104,13 @@ public class Ui {
     }
 
     /**
-     * Prints a successful adding of task message
-     * @param task
-     * @param taskList
+     * Gets the message when task is successfully
+     * @param task task that was successfully added
+     * @param taskList taskList that task was added to
+     * @return message that task is successfully added
      */
-    public void showAdd(Task task, TaskList taskList) {
-        out.println(
+    public String getAddTaskMessage(Task task, TaskList taskList) {
+        return (
             "Got it. I've added this task:\n" +
             task.toString() + "\n" +
             "Now you have "+ taskList.size() + " tasks in the list."
@@ -105,36 +118,49 @@ public class Ui {
     }
 
     /**
-     * Shows the exit message when user is finished with the program
+     * Generates the exit message when user is finished with the program
+     * @return the exit message
      */
-    public void showBye() {
-        out.println("Bye. Hope to see you again soon!");
+    public String getByeMessage() {
+        return ("Bye. Hope to see you again soon!");
     }
 
     /**
-     * Prints a duke exception message
+     * Gets the exception message when duke encounters an error
      * @param dukeException
+     * @return the exception message
      */
-    public void showException(DukeException dukeException) {
-        out.println(dukeException.getMessage());
+    public String getExceptionMessage(DukeException dukeException) {
+        return "Oops Duke ran into an error: " + dukeException.getMessage();
     }
 
     /**
-     * Prints the task marked as done
+     * gets the done task message
      * @param task
+     * @return message that task is done
      */
-    public void showDone(Task task) {
-        out.println(
+    public String getTaskDoneMessage(Task task) {
+        return (
             "Nice! I've marked this task as done:\n" +
              task.toString()
         );
     }
 
     /**
-     * Shows the list of tasks and related information that the user currently has
-     * @param taskList
+     * Prints out the message.
+     * @param message message to be printed out
      */
-    public void showTaskList(TaskList taskList) {
-        out.println((taskList.toString()));
+    public void show(String message) {
+        out.println(message);
     }
+
+    /**
+     * Returns the list of tasks and related information that the user currently has
+     * @param taskList
+     * @return list of task in string form
+     */
+    public String getTaskList(TaskList taskList) {
+        return taskList.toString();
+    }
+
 }
