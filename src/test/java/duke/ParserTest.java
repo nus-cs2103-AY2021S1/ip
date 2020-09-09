@@ -37,7 +37,8 @@ public class ParserTest {
 
     @Test
     public void testInteract_invalidCommand() throws IOException {
-        assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-(",
+        assertEquals("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n" +
+                        "Type \"help\" for a list of commands",
                 Parser.parse("blah", taskList, filePath));
     }
 }

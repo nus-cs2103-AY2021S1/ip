@@ -72,7 +72,7 @@ public class Ui {
     }
 
     /**
-     * find all tasks containing search keyword(s)
+     * Find all tasks containing search keyword(s).
      *
      * @param taskList a TaskList object containing a list of tasks
      * @param textToMatch the text to be used to find matching tasks
@@ -95,5 +95,23 @@ public class Ui {
         }
         System.out.println(output);
         printBorder();
+    }
+
+    /**
+     * Displays help menu.
+     */
+    public void help() {
+        String output = " Command │       Description        │                   Usage\n"
+                + "─────────┼──────────────────────────┼───────────────────────────────────────────\n"
+                + "bye      │ exits the program        │ bye\n"
+                + "list     │ list all current tasks   │ list\n"
+                + "done     │ marks a task done        │ done {task number}\n"
+                + "delete   │ deletes a task           │ delete {task number}\n"
+                + "find     │ finds all matching tasks │ find {text to match}\n"
+                + "help     │ displays help menu       │ help\n"
+                + "todo     │ adds a todo task         │ todo {task name}\n"
+                + "deadline │ adds a deadline task     │ deadline {task name} /by {dd/MM/yyyy HHmm}\n"
+                + "event    │ adds an event task       │ event {task name} /at {duration}";
+        System.out.println(output);
     }
 }
