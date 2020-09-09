@@ -57,6 +57,8 @@ public class Duke {
             String eventMessage = tasks.addEventAndGetMessage(parser.getSplitUserInput());
             storage.writeToFile(tasks.getAddedTask(), parser.getSplitUserInput());
             return eventMessage;
+        case "schedule":
+            return tasks.getTasksForADate(parser.getSplitUserInput());
         default:
             return Ui.printWrongInputErrorMessage();
         }

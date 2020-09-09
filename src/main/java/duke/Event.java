@@ -9,7 +9,6 @@ import java.util.Date;
  * Represents an event.
  */
 public class Event extends Task {
-    private LocalDate date;
     private Date time = null;
     private SimpleDateFormat timeFormatter = new SimpleDateFormat("h:mm a");
     private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");

@@ -1,11 +1,14 @@
 package duke;
 
+import java.time.LocalDate;
+
 /**
  * Represents a Parser that parses user input.
  */
 public class Task {
     protected boolean isDone;
     protected String description;
+    protected LocalDate date;
     
     /**
      * Creates an instance of a Task.
@@ -45,6 +48,10 @@ public class Task {
      */
     public String getDescription() {
         return this.description;
+    }
+
+    public LocalDate getDate() {
+        return this.date;
     }
 
     /**

@@ -9,9 +9,8 @@ import java.util.Date;
  * Represents a deadline task.
  */
 public class Deadline extends Task {
-    private LocalDate date;
     private Date time = null;
-    SimpleDateFormat timeFormatter = new SimpleDateFormat("h:mm a");
+    private SimpleDateFormat timeFormatter = new SimpleDateFormat("h:mm a");
     private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     /**
@@ -46,6 +45,8 @@ public class Deadline extends Task {
             return String.format("(by: %s, %s)", this.date.format(dateFormatter), timeFormatter.format(this.time));
         }
     }
+    
+
     
     /**
      * Returns String representation of a deadline task.

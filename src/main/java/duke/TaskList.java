@@ -1,5 +1,6 @@
 package duke;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 
 /**
@@ -258,5 +259,16 @@ public class TaskList {
      */
     public Task getAddedTask() {
         return this.addedTask;
+    }
+    
+    public String getTasksForADate(String[] input) {
+        LocalDate date = LocalDate.parse(input[1]);
+        ArrayList<Task> relevantTasks = new ArrayList<>();
+        for (Task t : storedTasks) {
+            if (t.getDate() != null && t.getDate().equals(date)) {
+                relevantTasks.add(t);
+            }
+        }
+        return Ui.printScheduleForDate(relevantTasks);
     }
 }
