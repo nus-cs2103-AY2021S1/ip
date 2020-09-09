@@ -90,9 +90,7 @@ public class DukeList {
     private Task addHelper(String descriptionString) throws DukeInvalidDescriptionException, DukeInvalidCommandException {
         String[] strArr = Parser.parseLineToArray(descriptionString);
         TaskType taskType = Parser.getTaskKeyword(descriptionString);
-
-        String formattedDescriptionString;
-
+        
         Task newTask = this.handleTasks(strArr, taskType);
         this.taskList.add(newTask);
 
