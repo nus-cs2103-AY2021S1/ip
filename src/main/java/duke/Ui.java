@@ -12,7 +12,7 @@ import java.util.stream.Collectors;
 public class Ui {
 
     private static final String GREETING = "Hello Boss! How can I help you?";
-    private static final String HORIZONTAL_LINE = "--------------------------------------";
+//    private static final String HORIZONTAL_LINE = "--------------------------------------";
     private static final String SHOW_TASK = "Here are the tasks in your list:";
     private static final String BYE = "Bye Boss! Hope to see you again!";
     private static final String TAB = "   ";
@@ -48,19 +48,22 @@ public class Ui {
      * Shows all the list.
      */
     public String showList() {
+        if (TaskList.getTaskLists().size() == 0) {
+            return "Currently, you do not have any item in the list.";
+        }
         String list = "";
         for (int i = 0; i < TaskList.getTaskLists().size(); i++) {
             int number = i + 1;
             list = list + number + "." + TaskList.getTaskLists().get(i) + "\n";
         }
-        return SHOW_TASK + "\n" + list + HORIZONTAL_LINE;
+        return SHOW_TASK + "\n" + list;
     }
 
     /**
      * Returns bye message.
      */
     public String bye() {
-        return BYE + "\n" + HORIZONTAL_LINE;
+        return BYE + "\n";
     }
 
     /**
@@ -80,7 +83,6 @@ public class Ui {
                 output += number + "." + TaskList.getTempLists().get(i) + "\n";
             }
         }
-        output += HORIZONTAL_LINE;
         return output;
     }
 
@@ -92,8 +94,7 @@ public class Ui {
     public String printTask(Task task) {
         return "Got it. I've added this task:" + "\n"
                 + TAB + task + "\n"
-                + "Now you have " + TaskList.getTaskLists().size() + " tasks in the list." + "\n"
-                + HORIZONTAL_LINE;
+                + "Now you have " + TaskList.getTaskLists().size() + " tasks in the list." + "\n";
     }
 
     /**
@@ -102,8 +103,7 @@ public class Ui {
      * @param index number of list item to be marked done.
      */
     public String printDone(int index) {
-        return "Nice! I've marked this task as done:" + "\n" + TAB + TaskList.getTaskLists().get(index) + "\n"
-                + HORIZONTAL_LINE;
+        return "Nice! I've marked this task as done:" + "\n" + TAB + TaskList.getTaskLists().get(index) + "\n";
     }
 
     /**
@@ -115,8 +115,7 @@ public class Ui {
         return "Noted. I've removed this task:" + "\n"
                 + TAB + TaskList.getTaskLists().get(indexToDelete) + "\n"
                 + TaskList.getTaskLists().remove(indexToDelete) + "\n"
-                + "Now you have " + TaskList.getTaskLists().size() + " tasks in the list." + "\n"
-                + HORIZONTAL_LINE;
+                + "Now you have " + TaskList.getTaskLists().size() + " tasks in the list." + "\n";
     }
 
     /**
@@ -158,7 +157,7 @@ public class Ui {
      * @param e error message.
      */
     public void printError(String e) {
-        System.out.println(e + "\n" + HORIZONTAL_LINE);
+        System.out.println(e + "\n");
     }
 
     /**
