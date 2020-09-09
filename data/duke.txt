@@ -1,4 +1,4 @@
-E | 1 | graduation | 2020-02-20
+E | 0 | fdsl | 2020-02-02
 T | 0 | graduation
 E | 0 | fdsl | 2020-02-02
-E | 0 | adfs | 1010-02-02
+E | 0 | fdsl | 2020-02-02

@@ -54,6 +54,14 @@ public class Ui {
     }
 
     /**
+     * Sets responseMessage to duplicate message.
+     */
+    public void setDuplicateMessage() {
+        resetMessage();
+        responseMessage.append("Banana! There is a duplicate in the list!");
+    }
+
+    /**
      * Sets responseMessage to deleted message.
      * @param task Task that is deleted.
      * @param tasksNumber Number of tasks.

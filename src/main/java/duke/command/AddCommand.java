@@ -4,10 +4,7 @@ import duke.DukeException;
 import duke.Parser;
 import duke.Storage;
 import duke.Ui;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.TaskList;
-import duke.task.Todo;
+import duke.task.*;
 
 /**
  * Represents command that is specific to the add command.
@@ -45,31 +42,44 @@ public class AddCommand extends Command {
         switch (inputCommand) {
         case TODO:
             try {
-                taskList.addList(new Todo(Parser.getTodoDescription(input)));
-                ui.setAddedMessage(new Todo(Parser.getTodoDescription(input)), taskList.getListSize());
-                storage.saveListToFile(taskList.getList());
+                Todo todo = new Todo(Parser.getTodoDescription(input));
+                if (!taskList.getList().contains(todo)) {
+                    taskList.addList(todo);
+                    ui.setAddedMessage(new Todo(Parser.getTodoDescription(input)), taskList.getListSize());
+                    storage.saveListToFile(taskList.getList());
+                } else {
+                    ui.setDuplicateMessage();
+                }
             } catch (Exception e) {
                 throw new DukeException("Banana! Something's wrong with the todo description...");
             }
             break;
         case DEADLINE:
             try {
-                taskList.addList(new Deadline(Parser.getDeadlineStrings(input)[0],
-                        Parser.getDeadlineStrings(input)[1]));
-                ui.setAddedMessage(new Deadline(Parser.getDeadlineStrings(input)[0],
-                        Parser.getDeadlineStrings(input)[1]), taskList.getListSize());
-                storage.saveListToFile(taskList.getList());
+                Deadline deadline = new Deadline(Parser.getDeadlineStrings(input)[0],
+                        Parser.getDeadlineStrings(input)[1]);
+                if (!taskList.getList().contains(deadline)) {
+                    taskList.addList(deadline);
+                    ui.setAddedMessage(deadline, taskList.getListSize());
+                    storage.saveListToFile(taskList.getList());
+                } else {
+                    ui.setDuplicateMessage();
+                }
             } catch (Exception e) {
                 throw new DukeException("Banana! Something's wrong with the deadline description...");
             }
             break;
         case EVENT:
             try {
-                taskList.addList(new Event(Parser.getEventTimeStrings(input)[0],
-                        Parser.getEventTimeStrings(input)[1]));
-                ui.setAddedMessage(new Event(Parser.getEventTimeStrings(input)[0],
-                        Parser.getEventTimeStrings(input)[1]), taskList.getListSize());
-                storage.saveListToFile(taskList.getList());
+                Event event = new Event(Parser.getEventTimeStrings(input)[0],
+                        Parser.getEventTimeStrings(input)[1]);
+                if (taskList.getList().stream().map(Task::toString).noneMatch(s -> s == event.toString())) {
+                    taskList.addList(event);
+                    ui.setAddedMessage(event, taskList.getListSize());
+                    storage.saveListToFile(taskList.getList());
+                } else {
+                    ui.setDuplicateMessage();
+                }
             } catch (Exception e) {
                 throw new DukeException("Banana! Something's wrong with the event description...");
             }
