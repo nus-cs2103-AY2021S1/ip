@@ -3,9 +3,8 @@ package chatbot.parser;
 import chatbot.commands.Command;
 import chatbot.commands.DoneCommand;
 
-import chatbot.common.Message;
-
 import chatbot.exception.ChatbotException;
+import chatbot.exception.ParseException;
 
 public class DoneCommandParser implements Parser {
     @Override
@@ -14,7 +13,7 @@ public class DoneCommandParser implements Parser {
             int index = Integer.parseInt(args) - 1;
             return new DoneCommand(index);
         } catch (NumberFormatException e) {
-            throw new ChatbotException(Message.MESSAGE_UNKNOWN_COMMAND);
+            throw new ParseException();
         }
     }
 }

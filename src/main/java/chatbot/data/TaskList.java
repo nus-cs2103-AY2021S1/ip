@@ -1,6 +1,7 @@
 package chatbot.data;
 
 import chatbot.common.Message;
+
 import chatbot.exception.ChatbotException;
 
 import java.util.ArrayList;

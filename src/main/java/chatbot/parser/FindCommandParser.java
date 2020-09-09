@@ -4,11 +4,12 @@ import chatbot.commands.Command;
 import chatbot.commands.FindCommand;
 
 import chatbot.common.CommandType;
-import chatbot.common.Message;
 
 import chatbot.data.Task;
 
 import chatbot.exception.ChatbotException;
+import chatbot.exception.InvalidDateFormatException;
+import chatbot.exception.ParseException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -34,13 +35,13 @@ public class FindCommandParser implements Parser {
 
                 return new FindCommand(pred);
             } catch (DateTimeParseException e) {
-                throw new ChatbotException(Message.MESSAGE_INVALID_DATE_FORMAT);
+                throw new InvalidDateFormatException();
             }
         case FIND:
             Predicate<Task> pred = task -> (task.getDescription().contains(args));
             return new FindCommand(pred);
         }
 
-        throw new ChatbotException(Message.MESSAGE_UNKNOWN_COMMAND);
+        throw new ParseException();
     }
 }

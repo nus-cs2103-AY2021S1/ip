@@ -11,6 +11,9 @@ import chatbot.data.Event;
 import chatbot.data.Todo;
 
 import chatbot.exception.ChatbotException;
+import chatbot.exception.InvalidDateFormatException;
+import chatbot.exception.NoArgumentException;
+import chatbot.exception.ParseException;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -27,7 +30,7 @@ public class AddCommandParser implements Parser {
     public Command parse(String args) throws ChatbotException {
 
         if (args.length() == 0) {
-            throw new ChatbotException(Message.MESSAGE_EMPTY_TASK);
+            throw new NoArgumentException(Message.MESSAGE_EMPTY_TASK);
         }
 
         switch (type) {
@@ -45,9 +48,9 @@ public class AddCommandParser implements Parser {
                 return new AddCommand(e);
 
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new ChatbotException(Message.MESSAGE_EMPTY_DATE);
+                throw new NoArgumentException(Message.MESSAGE_EMPTY_DATE);
             } catch (DateTimeParseException e) {
-                throw new ChatbotException(Message.MESSAGE_INVALID_DATE_FORMAT);
+                throw new InvalidDateFormatException();
             }
         case DEADLINE:
             try {
@@ -59,14 +62,14 @@ public class AddCommandParser implements Parser {
 
                 return new AddCommand(dl);
             } catch (ArrayIndexOutOfBoundsException e) {
-                throw new ChatbotException(Message.MESSAGE_EMPTY_DATE);
+                throw new NoArgumentException(Message.MESSAGE_EMPTY_DATE);
             } catch (DateTimeParseException e) {
-                throw new ChatbotException(Message.MESSAGE_INVALID_DATE_FORMAT);
+                throw new InvalidDateFormatException();
             }
         default:
             break;
         }
 
-        throw new ChatbotException(Message.MESSAGE_UNKNOWN_COMMAND);
+        throw new ParseException();
     }
 }
