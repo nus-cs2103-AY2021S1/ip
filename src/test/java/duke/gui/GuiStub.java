@@ -46,4 +46,9 @@ public class GuiStub extends GuiResponse {
     public void showAllCommands(DukeCommandSet commandSet) {
         sideEffects.guiShowAllCommands = true;
     }
+
+    @Override
+    public void reportTagTask(Task task) {
+        sideEffects.guiReportTagTask = true;
+    }
 }

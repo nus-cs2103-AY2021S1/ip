@@ -11,6 +11,7 @@ public class UiSideEffects {
     public boolean uiReportDeleteTask;
     public boolean uiReportExit;
     public boolean uiShowAllCommands;
+    public boolean uiReportTagTask;
     //CHECKSTYLE:ON: VisibilityModifier
 
     private UiSideEffects() {
@@ -34,5 +35,6 @@ public class UiSideEffects {
         uiReportDoneTask = false;
         uiReportExit = false;
         uiShowAllCommands = false;
+        uiReportTagTask = false;
     }
 }
