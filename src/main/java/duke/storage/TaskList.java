@@ -12,6 +12,7 @@ public class TaskList {
     protected static final String TASK_TODO_INDICATOR = "[T]";
     protected static final String TASK_DEADLINE_INDICATOR = "[D]";
     protected static final String TASK_EVENT_INDICATOR = "[E]";
+    private static final int OFFSET_LIST_INDEX = 1;
 
     private final List<Task> listOfTasks;
 
@@ -41,7 +42,7 @@ public class TaskList {
      */
     public void updateTaskList(Task newTask, int index) {
         this.deleteTask(index);
-        this.listOfTasks.add(index - 1, newTask);
+        this.listOfTasks.add(index - OFFSET_LIST_INDEX, newTask);
     }
     /**
      * Returns the total number of tasks currently in the task list.
@@ -59,7 +60,7 @@ public class TaskList {
      * @return Task stored at the specified index.
      */
     public Task getTask(int index) {
-        return this.listOfTasks.get(index - 1);
+        return this.listOfTasks.get(index - OFFSET_LIST_INDEX);
     }
 
     /**
@@ -68,7 +69,19 @@ public class TaskList {
      * @param index Index of the task to be deleted.
      */
     public void deleteTask(int index) {
-        this.listOfTasks.remove(index - 1);
+        this.listOfTasks.remove(index - OFFSET_LIST_INDEX);
+    }
+
+    /**
+     * Retrieves the index of the task in the task list if the task is found in the task list. Returns -1 if the task
+     * is not found in the task list.
+     *
+     * @param task Task to be determined if it is in the task list.
+     * @return Index of the task in the task list if the task is found in the task list. Otherwise, returns -1.
+     */
+    public int getTaskListIndex(Task task) {
+        int index = this.listOfTasks.indexOf(task) + OFFSET_LIST_INDEX;
+        return index;
     }
 
     /**

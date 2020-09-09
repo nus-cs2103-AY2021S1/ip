@@ -189,6 +189,7 @@ public class Ui {
      *
      * @param newTask New task added to the task list.
      * @param tasks Task list saved in the local storage.
+     * @return Message informing user that a new task has been successfully added to the task list.
      */
     public String showAddedNewTaskMessage(Task newTask, TaskList tasks) {
         String output = showResponseIndicator();
@@ -202,6 +203,7 @@ public class Ui {
      *
      * @param deletedTask Task to be deleted from the task list.
      * @param tasks Task list saved in the local storage.
+     * @return Message informing that user that the indicated task has been successfully deleted from the task list.
      */
     public String showDeleteTaskMessage(Task deletedTask, TaskList tasks) {
         String output = showResponseIndicator();
@@ -214,6 +216,7 @@ public class Ui {
      * Informs user that indicated task has been successfully marked as done.
      *
      * @param doneTask Task to be marked done.
+     * @return Message informing user that the indicated task has been successfully marked as done.
      */
     public String showMarkDoneMessage(Task doneTask) {
         String output = showResponseIndicator();
@@ -229,6 +232,7 @@ public class Ui {
      * Informs user that indicated task is already marked as done.
      *
      * @param doneTask Task that is already marked done.
+     * @return Message informing user that the indicated task is already marked as done.
      */
     public String showAlreadyMarkDoneMessage(Task doneTask) {
         String output = showResponseIndicator();
@@ -236,6 +240,21 @@ public class Ui {
         // Bob's response
         output += "OOPS. It seems like this task has already been completed:" + SKIPLINE;
         output += doneTask.toString() + SKIPLINE;
+        return output;
+    }
+
+    /**
+     * Informs user that indicated task already exists in the task list.
+     *
+     * @param duplicateTask Task that already exists in the task list.
+     * @return Message informing user that indicated task already exists in the task list.
+     */
+    public String showTaskIsAlreadyInTaskListMessage(Task duplicateTask) {
+        String output = showResponseIndicator();
+
+        // Bob's response
+        output += "OOPS. It seems like this task already exists:" + SKIPLINE;
+        output += duplicateTask.toString() + SKIPLINE;
         return output;
     }
 
