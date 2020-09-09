@@ -29,31 +29,33 @@ public class Parser {
         PrintStream old = System.out;
         System.setOut(printStream);
 
-        if (!input.equals("bye")) {
-            try {
-                if (input.equals("list")) {
-                    this.parseList();
-                } else if (input.equals("help")) {
-                    this.parseHelp();
-                } else if (input.equals("delete all")) {
-                    this.parseDeleteAll();
-                } else if (input.startsWith("find")) {
-                    this.parseFind(input);
-                } else if (isValidNumberCommand(input)) {
-                    this.parseNumberCommand(input);
-                } else {
-                    this.parseTaskCommand(input);
-                }
-                this.converter.storeTasks();
-            } catch (InvalidCommandException e) {
-                System.out.println(e.getMessage());
-            }
-            System.out.flush();
-            System.setOut(old);
-            return output.toString();
-        } else {
+        if (input.equals("bye")) {
             return null;
         }
+
+        try {
+            if (input.equals("list")) {
+                this.parseList();
+            } else if (input.equals("help")) {
+                this.parseHelp();
+            } else if (input.equals("delete all")) {
+                this.parseDeleteAll();
+            } else if (input.startsWith("find")) {
+                this.parseFind(input);
+            } else if (isValidNumberCommand(input)) {
+                this.parseNumberCommand(input);
+            } else {
+                this.parseTaskCommand(input);
+            }
+            this.converter.storeTasks();
+
+        } catch (InvalidCommandException e) {
+            System.out.println(e.getMessage());
+        }
+
+        System.out.flush();
+        System.setOut(old);
+        return output.toString();
     }
 
     /**
