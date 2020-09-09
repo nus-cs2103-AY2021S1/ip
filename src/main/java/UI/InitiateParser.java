@@ -20,6 +20,7 @@ public class InitiateParser {
     }
 
     public static String parser2(String input) {
+        assert input.equals("") == false;
         try {
             return InputManager.parse2(input);
         } catch (ErrorExceptions e) {

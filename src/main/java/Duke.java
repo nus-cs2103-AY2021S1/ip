@@ -16,8 +16,7 @@ public class Duke {
     static String getResponse(String input) {
         UserInterface UI = new UserInterface();
         UI.input(input);
-        UI.parse();
-        if (UI.getStop() == true) {
+        if (input.equals("bye")) {
             Platform.exit();
         }
         return UI.parse2();

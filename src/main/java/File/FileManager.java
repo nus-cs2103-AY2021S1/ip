@@ -32,6 +32,7 @@ public class FileManager {
      * @throws IOException missing file.
      */
     public static void add(String location, String text) throws IOException {
+        assert location.equals("") == false;
         FileWriter f = new FileWriter(location, true);
         f.write(text);
         f.write(System.lineSeparator());
@@ -46,6 +47,7 @@ public class FileManager {
      * @throws IOException error when editing the file.
      */
     public static void edit(String location, ArrayList<task> store) throws IOException {
+        assert location.equals("") == false;
         FileWriter fw = new FileWriter(location);
         for (task i : store) {
             fw.append(TaskManager.read(i));
@@ -62,6 +64,7 @@ public class FileManager {
      * @throws ErrorExceptions error reading the text.
      */
     private static String getName(String s) throws ErrorExceptions {
+        assert s.equals("") == false;
         Scanner sc = new Scanner(s);
         String name = "";
         try {
@@ -85,6 +88,7 @@ public class FileManager {
      * @throws ErrorExceptions error reading the date and time.
      */
     private static String getDate(String s) throws ErrorExceptions {
+        assert s.equals("") == false;
         Scanner sc = new Scanner(s);
         String date = "";
         try {
@@ -119,6 +123,7 @@ public class FileManager {
      * @throws ErrorExceptions error reading the type in the file.
      */
     private static int getType(String s) throws ErrorExceptions {
+        assert s.equals("") == false;
         Scanner sc = new Scanner(s);
         try {
             String current = sc.next();
@@ -146,6 +151,7 @@ public class FileManager {
      * @throws ErrorExceptions error when reading the file.
      */
     private static boolean getDone(String s) throws ErrorExceptions {
+        assert s.equals("") == false;
         Scanner sc = new Scanner(s);
         try {
             String current = sc.next();
@@ -172,6 +178,7 @@ public class FileManager {
      * @param store ArrayList to store the tasks.
      */
     public static void read(File f, ArrayList<task> store) {
+        assert f.exists();
         try {
             Scanner sc = new Scanner(f);
             while (sc.hasNext()) {
