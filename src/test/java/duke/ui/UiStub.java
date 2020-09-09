@@ -46,4 +46,9 @@ public class UiStub extends UiResponse {
     public void showAllCommands(DukeCommandSet commandSet) {
         sideEffects.uiShowAllCommands = true;
     }
+
+    @Override
+    public void reportTagTask(Task task) {
+        sideEffects.uiReportTagTask = true;
+    }
 }
