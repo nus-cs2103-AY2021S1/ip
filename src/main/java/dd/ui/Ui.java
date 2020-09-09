@@ -7,6 +7,8 @@ import dd.tasks.Task;
  * appropriate statements.
  */
 public class Ui {
+    private final String smileyLine = "*********************"
+            + "*****************************";
 
     /**
      * Indicate data created at given file name.
@@ -42,12 +44,7 @@ public class Ui {
      * @return DD greeting string.
      */
     public String greeting() {
-        String logo = " ____   ____\n"
-                + "|  _ \\ |  _ \\\n"
-                + "| | | || | | |\n"
-                + "| |_| || |_| |\n"
-                + "|____/ |____/\n";
-        return "Hi! I'm\n" + logo + "Your personal task manager!\n"
+        return "Hi! I'm Timmi, your personal Task Manager!\n"
                 + "Type 'help' for a list of possible commands!";
     }
 
@@ -57,21 +54,30 @@ public class Ui {
      * @return Possible user commands for user.
      */
     public String printAllCommands() {
+        String lineBreak = "----------------------------------------------------------"
+                + "-------------------------------------------------------\n";
         return "Here are all the possible commands and how to use them:\n"
-                + "  To add a todo, enter: \"todo (todo item)\". \n"
-                + "    For example: \"todo borrow book\". \n"
-                + "  To add a deadline, enter: \"deadline (name) /by (date) (OPTIONAL time)\". \n"
-                + "    For example: \"deadline return book /by 31-12-2020\". \n"
-                + "  To add an event, enter: \"event (name) /at (date) (OPTIONAL time)\". \n"
-                + "    For example: \"event team meeting /at 31-12-2020 1800\". \n"
-                + "  To check your list of tasks, enter: \"list\". \n"
-                + "  To check your list of tasks on a particular date, enter: \"check (date)\". \n"
-                + "    For example: \"check 31-12-2020\". \n"
-                + "  To find list of tasks related to a word, enter: \"find (word)\". \n"
-                + "    For example: \"find book\". \n"
-                + "  To mark a task as done, enter: \"done (task number in list)\". \n"
-                + "  To delete a task, enter: \"delete (task number in list)\". \n"
-                + "  If you want to leave, you can just say \"bye\"!! \n";
+                + smileyLine + "\n"
+                + "   To add a todo, enter: \"todo <item name>\". \n"
+                + "     For example: \"todo borrow book\". \n"
+                + lineBreak
+                + "   To add a deadline, enter: \"deadline <item name> /by <date> <(OPTIONAL) time>\". \n"
+                + "     For example: \"deadline return book /by 31-12-2020\". \n"
+                + lineBreak
+                + "   To add an event, enter: \"event <item name> /at <date> <(OPTIONAL) time>\". \n"
+                + "     For example: \"event team meeting /at 31-12-2020 1800\". \n"
+                + lineBreak
+                + "   To check your list of tasks, enter: \"list\". \n"
+                + lineBreak
+                + "   To check your list of tasks on a particular date, enter: \"check <date>\". \n"
+                + lineBreak
+                + "   To find list of tasks related to a word, enter: \"find <your query word>\". \n"
+                + lineBreak
+                + "   To mark a task as done, enter: \"done <task number in list>\". \n"
+                + lineBreak
+                + "   To delete a task, enter: \"delete <task number in list>\". \n"
+                + lineBreak
+                + "   And if you want to leave and save your data, you can just say \"bye\" I guess......\n";
     }
 
     /**
@@ -171,7 +177,8 @@ public class Ui {
      * @return String to confirm date checked.
      */
     public String startCheckDate(String date) {
-        return "Here is your list of task(s) on " + date + ":";
+        return "Here is your list of task(s) on " + date + ":\n"
+                + smileyLine;
     }
 
     /**
@@ -181,7 +188,8 @@ public class Ui {
      * @return String to confirm description being checked.
      */
     public String startCheckDesc(String desc) {
-        return "Here is the list of task(s) related to " + desc + ":";
+        return "Here is the list of task(s) related to " + desc + ":\n"
+                + smileyLine;
     }
 
     /**
@@ -190,7 +198,8 @@ public class Ui {
      * @return String to show the start of list.
      */
     public String startList() {
-        return "Here is your current list of task(s)!";
+        return "Here is your current list of task(s)!\n"
+                + smileyLine;
     }
 
     /**

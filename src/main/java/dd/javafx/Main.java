@@ -21,7 +21,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/appIcon.png")));
-            stage.setTitle("DD the Task Manager");
+            stage.setTitle("Timmi the Task Manager");
             stage.setScene(scene);
             stage.setResizable(false);
             fxmlLoader.<MainWindow>getController().setDuke();

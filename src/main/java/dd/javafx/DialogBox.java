@@ -35,7 +35,6 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setStyle("-fx-font-family: monospace");
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -52,8 +51,7 @@ public class DialogBox extends HBox {
 
     public static DialogBox getUserDialog(String text, Image img) {
         var userDialog = new DialogBox(text, img);
-        userDialog.dialog.setStyle("-fx-font-family: 'Comic Sans MS'");
-        userDialog.dialog.setStyle("-fx-background-color: #F69EFC70");
+        userDialog.dialog.setStyle("-fx-background-color: #539818");
         return userDialog;
     }
 
