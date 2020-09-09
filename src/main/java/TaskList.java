@@ -7,6 +7,11 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    /**
+     * Returns search results that contain the search from commands
+     * @param commands
+     * @return string of search results
+     */
     public String getSearchResult(String[] commands) {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
