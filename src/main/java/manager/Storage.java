@@ -71,9 +71,13 @@ public class Storage {
      * @param taskList as specified
      */
     public void listSavedTasks(List<Task> taskList) {
-        System.out.println("Oohhh okay, remember you have these tasks:");
-        for (int i = 0; i < taskList.size(); i++) {
-            System.out.println((i + 1) + "." + taskList.get(i));
+        if (taskList.size() == 0) {
+            System.out.println("Oohhh, your task list is empty. Let's add some tasks!");
+        } else {
+            System.out.println("Oohhh okay, remember you have these tasks:");
+            for (int i = 0; i < taskList.size(); i++) {
+                System.out.println((i + 1) + "." + taskList.get(i));
+            }
         }
     }
 
@@ -96,6 +100,7 @@ public class Storage {
         case "E":
             return new Event(description, words[3], isDone);
         default:
+            assert false : "Unknown task type from storage";
             return null;
         }
     }

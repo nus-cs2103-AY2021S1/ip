@@ -33,7 +33,7 @@ public class ParserTest {
 
         parser.handleUserInput();
 
-        assertEquals("Oohhh okay, remember you have these tasks:\r\n"
+        assertEquals("Oohhh, your task list is empty. Let's add some tasks!\r\n"
                         + "Ooooohh yeahhhh cannnnn do, I'm Mr. Meeseeks! I've added this task:\r\n"
                         + "[T][✘] disarm neutrino bomb\r\n"
                         + "Now you have 1 tasks in the list.\r\n"
