@@ -1,38 +1,48 @@
+@font-face {
+    src: url('cool.otf');
+}
+
 .chatbg{
-    -fx-background-image: url('../images/background.jpg');
-    -fx-background-size: 100% 100%;
+    -fx-background-image: url('../images/peach.png');
+    -fx-background-size: 800px 600px;
+    -fx-background-position: bottom;
 }
 
 .input{
-    -fx-background-color: #96E5FF;
+    -fx-background-color: #faa07e;
     -fx-background-radius: 15;
     -fx-padding: 10px;
     -fx-border-insets: 5px;
     -fx-background-insets: 5px;
     -fx-border-radius: 15;
+    -fx-font-family: "Youre So Cool";
+    -fx-font-size: 15;
     -fx-text-fill: black;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.3), 10, 0.5, 0.0, 0.0);
 }
 
 .button{
-    -fx-background-color: #B069E7;
+    -fx-background-color: #85c5e5;
     -fx-background-radius: 15;
     -fx-padding: 10px;
     -fx-border-insets: 5px;
     -fx-background-insets: 5px;
     -fx-border-radius: 15;
-    -fx-text-fill: white;
+    -fx-font-family: "Youre So Cool";
+    -fx-font-size: 14;
+    -fx-text-fill: black;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0.0, 0.0);
 }
 
 .dialog{
-    -fx-background-color: #6BFEFF70;
+    -fx-background-color: #5c4742;
     -fx-background-radius: 15;
-    -fx-padding: 10px;
-    -fx-border-insets: 5px;
+    -fx-padding: 15px;
+    -fx-border-insets: 15px;
     -fx-background-insets: 5px;
     -fx-border-radius: 15;
-    -fx-text-fill: black;
-    -fx-font-weight: bold;
+    -fx-text-fill: white;
+    -fx-font-family: "Youre So Cool";
+    -fx-font-size: 15;
     -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0.0, 0.0);
 }
