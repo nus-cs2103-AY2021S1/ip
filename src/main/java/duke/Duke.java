@@ -66,14 +66,25 @@ public class Duke {
         boolean running = true;
         while (running) {
             try {
-                String fullCommand = ui.readCommand();
-                ui.showLine(); // show the divider line ("_______")
-                Command c = Parser.parse(fullCommand);
-                c.execute(ui, storage, tasks, actionQueue);
-                storage.store(tasks);
-                if (c.isExit()) {
-                    running = false;
+                String userInput = ui.readUserInput();
+                ui.showLine(); // show the divider line ("######")
+                if (actionQueue.size() != 0) {
+                    Action a = actionQueue.peek();
+                    Optional<Action> next = a.receiveInputAndGetNextAction(
+                            userInput);
+                    actionQueue.poll(); // remove action if successfully completed.
+                    next.ifPresent(x-> x.prompt(ui));
+                    next.ifPresent(actionQueue::add);
+
+                } else {
+                    Command c = Parser.parse(userInput);
+                    c.execute(ui, storage, tasks, actionQueue);
+                    if (c.isExit()) {
+                        running = false;
+                    }
                 }
+
+                storage.store(tasks);
             } catch (DukeException e) {
                 ui.showError(e);
             } finally {

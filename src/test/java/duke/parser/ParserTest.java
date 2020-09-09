@@ -13,7 +13,7 @@ public class ParserTest {
             String input = "todo";
             Command newCommand = Parser.parse(input);
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! The description of a todo cannot be empty.", e.toString());
+            assertEquals(">_< OOPS!!! \n" + "The description of a todo cannot be empty.", e.toString());
         }
     }
 
@@ -23,7 +23,7 @@ public class ParserTest {
             String input = "deadline 12345 6";
             Command newCommand = Parser.parse(input);
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! Ensure that deadlines have correct description.", e.toString());
+            assertEquals(">_< OOPS!!! \n" + "Ensure that deadlines have correct description.", e.toString());
         }
     }
 
@@ -33,7 +33,7 @@ public class ParserTest {
             String input = "event /at 0";
             Command newCommand = Parser.parse(input);
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! Ensure that events have correct description.", e.toString());
+            assertEquals(">_< OOPS!!! \n" + "Ensure that events have correct description.", e.toString());
         }
     }
 
@@ -43,7 +43,7 @@ public class ParserTest {
             String input = "delete a";
             Command newCommand = Parser.parse(input);
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! delete should be followed by a single task number.", e.toString());
+            assertEquals(">_< OOPS!!! \n" + "delete should be followed by a single task number.", e.toString());
         }
     }
 
@@ -53,7 +53,7 @@ public class ParserTest {
             String input = "done";
             Command newCommand = Parser.parse(input);
         } catch (DukeException e) {
-            assertEquals("☹ OOPS!!! done should be followed by a single task number.", e.toString());
+            assertEquals(">_< OOPS!!! \n" + "done should be followed by a single task number.", e.toString());
         }
     }
 }
