@@ -9,7 +9,7 @@ public class Clear extends Command {
         this.description = "Clears the screen with newline characters";
     }
 
-    public String response() {
+    public String respond() {
         return "Dont you get it Morty? We're in a GUI you idiot, you cant" +
                 " just clear all the stuff I've said away.";
     }

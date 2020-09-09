@@ -23,15 +23,13 @@ public class Deadline extends Task {
         this.date = date;
         this.time = time;
         this.saveRep = "[D] " + super.toString() + " (" + preposition + ": " +
-                date + " " +
-                time + ")";
+                date + " " + time + ")";
     }
 
     @Override
     public void updateSaveRep(){
         this.saveRep = "[D] " + super.toString() + " (" + preposition + ": " +
-                date + " " +
-                time + ")";
+                date + " " + time + ")";
     }
 
     @Override

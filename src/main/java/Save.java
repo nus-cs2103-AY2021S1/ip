@@ -8,8 +8,8 @@ import java.io.IOException;
  */
 public class Save extends Command {
 
-    String DIR_PATH = "./data/";
-    String FILE_NAME = "duke.txt";
+    final String DIR_PATH = "./data/";
+    final String FILE_NAME = "duke.txt";
 
     Save() {
         this.name = "save";

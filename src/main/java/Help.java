@@ -23,7 +23,7 @@ public class Help extends Command {
      * @return String Response to User.
      * @throws UnknownCommandException If User types in an Unknown Command.
      */
-    public String response() throws UnknownCommandException {
+    public String respond() throws UnknownCommandException {
         if (query.length == 1) {
             return listCommands();
         } else {

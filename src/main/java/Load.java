@@ -33,7 +33,7 @@ public class Load extends Command {
     public String load() throws FileNotFoundException, DukeException {
         boolean success = readFile();
         if (success) {
-            return "Successfully loaded tasks, obviously:\n" + DataStorageInterface.listOfTasks();
+            return "Successfully loaded tasks, obviously:\n" + DataStorageInterface.printListOfTasks();
         } else {
             return "There was some error. Could not load tasks successfully. " +
                     "Your idiot father must have *BUURRRRRPS* messed up the files somehow";
@@ -75,13 +75,10 @@ public class Load extends Command {
         String[] splitData = data.split("\\s+");
         String taskType = splitData[1];
         boolean isDone = splitData[2].equals("[DONE]");
+        Task task;
         if (taskType.equals("[T]")) {
             String taskName = concatenateStrArr(splitData, 3, splitData.length);
-            Task task = new ToDo(taskName);
-            if (isDone) {
-                task.markDone();
-            }
-            return task;
+            task = new ToDo(taskName);
         } else {
             int index = 3;
             while (!splitData[index].startsWith("(")) {
@@ -90,27 +87,21 @@ public class Load extends Command {
             String taskName = concatenateStrArr(splitData,3,index);
             String preposition = getPreposition(splitData[index]);
             index++;
-            String dateRep = splitData[index];
-            LocalDate date = LocalDate.parse(dateRep);
+            LocalDate date = getDate(splitData[index]);
             index++;
-            String timeRep = splitData[index].replace(")","");
-            LocalTime time = LocalTime.parse(timeRep);
+            LocalTime time = getTime(splitData[index]);
             if (taskType.equals("[D]")) {
-                Task task = new Deadline(taskName,preposition,date, time);
-                if (isDone) {
-                    task.markDone();
-                }
-                return task;
+                task = new Deadline(taskName,preposition, date, time);
             } else if (taskType.equals("[E]")) {
-                Task task = new Event(taskName, preposition,date, time);
-                if (isDone) {
-                    task.markDone();
-                }
-                return task;
+                task = new Event(taskName, preposition, date, time);
             } else {
                 throw new WrongFileFormatException(filePath);
             }
         }
+        if (isDone) {
+            task.markDone();
+        }
+        return task;
     }
 
     private String concatenateStrArr(String[] strArr, int startIndex, int endIndex) {
@@ -128,4 +119,15 @@ public class Load extends Command {
     private String getPreposition(String dirtyPrep) {
         return dirtyPrep.replace("(","").replace(":","");
     }
+
+    private LocalDate getDate(String date) {
+        String dateRep = date;
+        return LocalDate.parse(dateRep);
+    }
+
+    private LocalTime getTime(String time) {
+        String timeRep = time.replace(")","");
+        return LocalTime.parse(timeRep);
+    }
+
 }
