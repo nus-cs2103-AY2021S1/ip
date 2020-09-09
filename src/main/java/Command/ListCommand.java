@@ -8,11 +8,10 @@ import Tasks.TaskManager;
 public class ListCommand extends Command {
     /**
      * Prints all the existing task and its information.
+     * Returns all the existing tasks.
+     *
+     * @return String current tracking list.
      */
-    public static void execute() {
-        TaskManager.listing();
-    }
-
     public static String execute2() {
         return TaskManager.listing2();
     }

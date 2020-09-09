@@ -1,9 +1,2 @@
-[T][X] return 
-[D][X] test (by: 12 Dec 1212 1200)
-[T][X] read 
-[T][X] read 
-[T][X] add read book 
 [T][X] read book 
 [T][X] gradle test 
-[T][X] GUI added 
-[T][X] GUI added 

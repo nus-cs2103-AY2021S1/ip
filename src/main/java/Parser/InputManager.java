@@ -5,7 +5,6 @@ import java.util.Scanner;
 
 import Errors.ErrorExceptions;
 import Tasks.TaskManager;
-import Tasks.task;
 
 
 
@@ -18,50 +17,133 @@ public class InputManager {
 
     /**
      * Determines what bridge Parse to call based on the user input.
+     * Returns the appropriate message of the action called.
      *
      * @param input user input.
+     * @return String action message.
      * @throws ErrorExceptions when selected task do not exists.
      */
-    public static void parse(String input) throws ErrorExceptions {
+    public static String parse2(String input) throws ErrorExceptions {
         Scanner sc = new Scanner(input);
         String current = sc.next();
         TaskManager.fileDir(fileDir);
         if (current.equals("bye")) {
-            ParseExit.execute();
+            return runBye();
         } else if (current.equals("delete")) {
-            try {
-                int index = sc.nextInt();
-                ParseDelete.execute(index);
-            } catch (NoSuchElementException e) {
-                throw new ErrorExceptions("There is no such tasks!");
-            }
+            return runDelete(sc);
         } else if (current.equals("done")) {
-            try {
-                task t;
-                int index = sc.nextInt();
-                ParseCompleted.execute(index);
-            } catch (NoSuchElementException e) {
-                throw new ErrorExceptions("There is no such tasks!");
-            }
+            return runDone(sc);
         } else if (current.equals("list")) {
-            ParseList.execute();
+            return runList();
         } else if (current.equals("show")) {
-            ParseShow.execute();
+            return runShow();
         } else if (current.equals("filter")) {
-            try {
-                String date = sc.next();
-                ParseFilter.execute(date);
-            } catch (NoSuchElementException e) {
-                throw new ErrorExceptions("Missing date!");
-            }
+            return runFilter(sc);
         } else if (current.equals("find")) {
-            try {
-                ParseFind.execute(input);
-            } catch (ErrorExceptions e) {
-                System.out.println(e);
-            }
+            return runFind(sc, input);
         } else { // add tasks
-            ParseAddTask.execute(current, input);
+            return runAdd(current, input);
+        }
+    }
+
+    /**
+     * Runs the method for receiving "Bye" command.
+     *
+     * @return String the String when saying bye.
+     */
+    public static String runBye() {
+        return ParseExit.execute2();
+    }
+
+    /**
+     * Runs the method when deleting command is received.
+     *
+     * @param sc scanner of the input.
+     * @return String the String when deleting a task.
+     * @throws ErrorExceptions when the task entered is not found.
+     */
+    public static String runDelete(Scanner sc) throws ErrorExceptions {
+        try {
+            int index = sc.nextInt();
+            return ParseDelete.execute2(index);
+        } catch (NoSuchElementException e) {
+            throw new ErrorExceptions("There is no such tasks!");
+        }
+    }
+
+    /**
+     * Runs the method when receiving a mark as done command.
+     *
+     * @param sc scanner of the input.
+     * @return String the done message.
+     * @throws ErrorExceptions when the task cannot be found.
+     */
+    public static String runDone(Scanner sc) throws ErrorExceptions {
+        try {
+            int index = sc.nextInt();
+            return ParseCompleted.execute2(index);
+        } catch (NoSuchElementException e) {
+            throw new ErrorExceptions("There is no such tasks!");
+        }
+    }
+
+    /**
+     * Runs the method for showing all tracked tasks.
+     *
+     * @return String list of all task.
+     */
+    public static String runList() {
+        return ParseList.execute2();
+    }
+
+    /**
+     * Runs the show all commands method.
+     *
+     * @return String show all commands.
+     */
+    public static String runShow() {
+        return ParseShow.execute2();
+    }
+    /**
+     * Runs the method when an add task command in received.
+     *
+     * @param current current command.
+     * @param input overall user input.
+     * @return String adding of task message.
+     * @throws ErrorExceptions
+     */
+    public static String runAdd(String current, String input) throws ErrorExceptions {
+        return ParseAddTask.execute2(current, input);
+    }
+
+    /**
+     * Runs the filter by date method.
+     *
+     * @param sc scanner with input.
+     * @return String all the task after filtering.
+     * @throws ErrorExceptions
+     */
+    public static String runFilter(Scanner sc) throws ErrorExceptions {
+        try {
+            String date = sc.next();
+            return ParseFilter.execute2(date);
+        } catch (NoSuchElementException e) {
+            throw new ErrorExceptions("Missing date!");
+        }
+    }
+
+    /**
+     * Runs the find by name method.
+     *
+     * @param sc scanner with input.
+     * @param input user input.
+     * @return String all the filtered results.
+     */
+    public static String runFind(Scanner sc, String input) {
+        try {
+            return ParseFind.execute2(input);
+        } catch (ErrorExceptions e) {
+            return e.toString();
         }
     }
 
@@ -165,48 +247,5 @@ public class InputManager {
      */
     public static String getFileDir() {
         return fileDir;
-    }
-
-    public static String parse2(String input) throws ErrorExceptions {
-        Scanner sc = new Scanner(input);
-        String current = sc.next();
-        TaskManager.fileDir(fileDir);
-        if (current.equals("bye")) {
-            return ParseExit.execute2();
-        } else if (current.equals("delete")) {
-            try {
-                int index = sc.nextInt();
-                return ParseDelete.execute2(index);
-            } catch (NoSuchElementException e) {
-                throw new ErrorExceptions("There is no such tasks!");
-            }
-        } else if (current.equals("done")) {
-            try {
-                task t;
-                int index = sc.nextInt();
-                return ParseCompleted.execute2(index);
-            } catch (NoSuchElementException e) {
-                throw new ErrorExceptions("There is no such tasks!");
-            }
-        } else if (current.equals("list")) {
-            return ParseList.execute2();
-        } else if (current.equals("show")) {
-            return ParseShow.execute2();
-        } else if (current.equals("filter")) {
-            try {
-                String date = sc.next();
-                return ParseFilter.execute2(date);
-            } catch (NoSuchElementException e) {
-                throw new ErrorExceptions("Missing date!");
-            }
-        } else if (current.equals("find")) {
-            try {
-                return ParseFind.execute2(input);
-            } catch (ErrorExceptions e) {
-                return e.toString();
-            }
-        } else { // add tasks
-            return ParseAddTask.execute2(current, input);
-        }
     }
 }

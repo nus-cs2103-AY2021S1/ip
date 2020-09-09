@@ -11,31 +11,19 @@ import UI.UserInterface;
 public class CompletedCommand extends Command {
     /**
      * Marks the selected task as completed.
+     * Returns the completion message.
      *
      * @param i task index.
+     * @return String completion message.
      * @throws ErrorExceptions failed to locate specified task.
      */
-    public static void execute(int i) throws ErrorExceptions {
-        task t;
-        int index = i;
-        try {
-            t = TaskManager.getTask(index);
-            TaskManager.completed(t);
-            UserInterface.done();
-            System.out.println("    " + TaskManager.read(t));
-            System.out.println("The tracked Tasks.task has been marked as completed! Congrats~~!");
-        } catch (IndexOutOfBoundsException e) {
-            throw new ErrorExceptions("There is no such Tasks.task!");
-        }
-    }
-
     public static String execute2(int i) throws ErrorExceptions {
         task t;
         int index = i;
         try {
             t = TaskManager.getTask(index);
             TaskManager.completed(t);
-            UserInterface.done();
+            UserInterface.done2();
             return "    " + TaskManager.read(t) + System.lineSeparator()
                     + "The tracked Tasks.task has been marked as completed! Congrats~~!";
         } catch (IndexOutOfBoundsException e) {
