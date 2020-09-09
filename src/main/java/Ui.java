@@ -32,10 +32,6 @@ public class Ui {
         return in;
     }
 
-    public PrintStream getOut() {
-        return out;
-    }
-
     /**
      * This method is used to greet the user.
      */
@@ -178,7 +174,6 @@ public class Ui {
 
     public String  missingDescription(String type) {
         assert (type == "T" | type == "D" | type =="E") : "Incorrect type.";
-
         Exception ex = new InvalidInputException("Hey, you forget the description for your " + type +"!");
         String stringToReturn = LINE + ex.getMessage() + "\n" + LINE;
         return stringToReturn;

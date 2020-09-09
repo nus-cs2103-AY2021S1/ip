@@ -62,64 +62,73 @@ public class Parser {
             }
         } else {
             if (pieces.length == 1) {
-                String stringToReturn = "";
-                switch (pieces[0]) {
-                case "todo":
-                    stringToReturn = ui.missingDescription("todo");
-                    break;
-
-                case "deadline":
-                    stringToReturn = ui.missingDescription("deadline");
-                    break;
-
-                case "event":
-                    stringToReturn = ui.missingDescription("event");
-                    break;
-
-                default:
-                    stringToReturn = ui.unknownCommand();
-                    break;
-                }
-                assert (stringToReturn != "") : "Switch statement error.";
-                return stringToReturn;
+                String s = Parser.incompleteCommand(ui, pieces[0]);
+                return s;
             } else {
-                Task t = new Task("");
-                String[] array;
-                switch (pieces[0]) {
-                    case "todo":
-                        t = new ToDo(pieces[1]);
-                        break;
-
-                    case "deadline":
-                        array = pieces[1].split("/by ");
-                        if (array.length == 1) {
-                            ui.missingDeadline();
-                        } else {
-                            t = new Deadline(array[0], array[1]);
-                        }
-                        break;
-
-
-                    case "event":
-                        array = pieces[1].split("/at ");
-                        if (array.length == 1) {
-                            ui.missingEventTime();
-                        } else {
-                            t = new Deadline(array[0], array[1]);
-                        }
-                        break;
-
-                    default:
-                        break;
-                }
-                if (t.description != "") {
-                    taskList.addTask(t);
-                    Storage.updateTasks(taskList.getNoOfTasks(), taskList.list, filePath);
-                    return ui.addSuccessful(t, taskList);
-                } else {
-                    return "";
-                }
+                return successfulCommand(ui, taskList, pieces[0], pieces[1], filePath);
             }
+        }
+    }
+
+    public static String incompleteCommand(Ui ui, String command){
+        String stringToReturn = "";
+        switch (command) {
+            case "todo":
+                stringToReturn = ui.missingDescription("todo");
+                break;
+
+            case "deadline":
+                stringToReturn = ui.missingDescription("deadline");
+                break;
+
+            case "event":
+                stringToReturn = ui.missingDescription("event");
+                break;
+
+            default:
+                stringToReturn = ui.unknownCommand();
+                break;
+        }
+        assert (stringToReturn != "") : "Switch statement error.";
+        return stringToReturn;
+    }
+
+    public static String successfulCommand(Ui ui, TaskList taskList,String firstCommandWord,
+                                           String secondCommandWord,String filePath) {
+        Task t = new Task("");
+        String[] array;
+        switch (firstCommandWord) {
+            case "todo":
+                t = new ToDo(secondCommandWord);
+                break;
+
+            case "deadline":
+                array = secondCommandWord.split("/by ");
+                if (array.length == 1) {
+                    ui.missingDeadline();
+                } else {
+                    t = new Deadline(array[0], array[1]);
+                }
+                break;
+
+            case "event":
+                array = secondCommandWord.split("/at ");
+                if (array.length == 1) {
+                    ui.missingEventTime();
+                } else {
+                    t = new Deadline(array[0], array[1]);
+                }
+                break;
+
+            default:
+                break;
+        }
+        if (t.description != "") {
+            taskList.addTask(t);
+            Storage.updateTasks(taskList.getNoOfTasks(), taskList.list, filePath);
+            return ui.addSuccessful(t, taskList);
+        } else {
+            return "";
         }
     }
 }
