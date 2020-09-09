@@ -74,7 +74,7 @@ public class DukeTest {
         Path currentDir = Paths.get("").toAbsolutePath();
         int len = currentDir.getNameCount();
         int index = -1;
-        for (int i = 0; i < len; i++) {
+        for (int i = len - 1; i >= 0; i++) {
             if (currentDir.getName(i).toString().equals("ip")) {
                 index = i;
                 break;
