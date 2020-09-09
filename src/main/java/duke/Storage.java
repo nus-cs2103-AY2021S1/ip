@@ -106,9 +106,13 @@ public class Storage {
                 FileWriter fWriter = new FileWriter(storageFile);
                 BufferedWriter writer = new BufferedWriter(fWriter);
 
-                for (String bufferedLine : this.fileBuffer) {
-                    writer.append(bufferedLine).append("\n");
-                }
+                this.fileBuffer.forEach(bufferedLine -> {
+                    try {
+                        writer.append(bufferedLine).append("\n");
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                });
 
                 writer.close();
             }
