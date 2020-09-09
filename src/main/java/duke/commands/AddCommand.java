@@ -24,6 +24,7 @@ public class AddCommand extends Command {
 
     /**
      * Adds a new task to the taskList
+     *
      * @param taskList
      * @param ui
      * @param storage
@@ -36,6 +37,9 @@ public class AddCommand extends Command {
 
         //asserts the command to have the proper format
         assert(inputList.length > 2);
+
+        System.out.println("HI!");
+
         if (inputList.length != 2) {
             throw new IncompleteCommandException();
         }

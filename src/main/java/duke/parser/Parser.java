@@ -20,6 +20,7 @@ public class Parser {
     private final static String EVENT_KEY = "event";
     private final static String DELETE_KEY = "delete";
     private final static String FIND_KEY = "find";
+    private final static String HELP_KEY = "help";
 
     /**
      * Checks for BYE Command
@@ -107,6 +108,16 @@ public class Parser {
         return checker.equals(FIND_KEY);
     }
 
+    /**
+     * Checks for HELP Command
+     *
+     * @param checker
+     * @return boolean
+     */
+    public static boolean isHelp(String checker) {
+        return checker.equals(HELP_KEY);
+    }
+
 
     /**
      * Checks if input is a number
@@ -148,6 +159,10 @@ public class Parser {
 
         if (isEvent(inputList[0].trim()) || isDeadline(inputList[0].trim()) || isToDo(inputList[0].trim())){
             return new AddCommand(input);
+        }
+
+        if (isHelp(inputList[0].trim())){
+            return new HelpCommand(input);
         }
 
         throw new IncompleteCommandException();
