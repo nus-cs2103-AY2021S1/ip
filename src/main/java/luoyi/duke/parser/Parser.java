@@ -9,6 +9,8 @@ import luoyi.duke.commands.EventCommand;
 import luoyi.duke.commands.FindCommand;
 import luoyi.duke.commands.HelpCommand;
 import luoyi.duke.commands.ListCommand;
+import luoyi.duke.commands.SortCommand;
+import luoyi.duke.commands.SortType;
 import luoyi.duke.commands.ToDoCommand;
 import luoyi.duke.common.Message;
 import luoyi.duke.data.exception.DukeIllegalArgumentException;
@@ -51,6 +53,15 @@ public class Parser {
         } else if (commandStr.matches("^help.*")) {
             // Handle help command
             return parseHelpCommand(commandStr);
+        } else if (commandStr.matches("^sort.*")) {
+            // Handle sort command
+            if (commandStr.equals("sort time")) {
+                return SortCommand.getSortCommand(SortType.TIME);
+            } else if (commandStr.equals("sort description")) {
+                return SortCommand.getSortCommand(SortType.DESCRIPTION);
+            }
+            throw new DukeIllegalArgumentException(
+                    Message.ERR_WRONG_SORT_CMD.toString());
         } else if (commandStr.equals("bye")) {
             return ByeCommand.getByeCommand();
         }

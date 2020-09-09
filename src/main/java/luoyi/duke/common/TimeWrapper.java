@@ -8,7 +8,7 @@ import luoyi.duke.parser.TimeParser;
 /**
  * Time wrapper class to store a time that maybe contains explicit time representation.
  */
-public class TimeWrapper {
+public class TimeWrapper implements Comparable<TimeWrapper> {
     private final LocalDate date;
     private final LocalDateTime dateTime;
     private final String message;
@@ -75,5 +75,33 @@ public class TimeWrapper {
             return message;
         }
         return "No data found.";
+    }
+
+    @Override
+    public int compareTo(TimeWrapper o) {
+        if (this.dateTime != null) {
+            if (o.dateTime != null) {
+                return this.dateTime.compareTo(o.dateTime);
+            } else if (o.date != null) {
+                return this.dateTime.toLocalDate().compareTo(o.date);
+            } else if (o.message != null) {
+                return 1;
+            }
+        } else if (this.date != null) {
+            if (o.dateTime != null) {
+                return this.date.compareTo(o.dateTime.toLocalDate());
+            } else if (o.date != null) {
+                return this.date.compareTo(o.date);
+            } else if (o.message != null) {
+                return 1;
+            }
+        } else if (this.message != null) {
+            if (o.dateTime != null || o.date != null) {
+                return -1;
+            } else if (o.message != null) {
+                return this.message.compareTo(o.message);
+            }
+        }
+        throw new RuntimeException("Invalid TimeWrapper Object!");
     }
 }

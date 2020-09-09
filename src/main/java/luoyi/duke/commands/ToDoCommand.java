@@ -15,7 +15,7 @@ import luoyi.duke.data.task.ToDo;
  * A command must be initiated with a Duke object before
  * it can execute.
  */
-public class ToDoCommand extends TaskCommand {
+public class ToDoCommand extends StoringCommand {
     private final String description;
     private ToDoCommand(String description, IDuke duke) {
         super(-1, duke);

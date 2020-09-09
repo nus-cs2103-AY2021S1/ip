@@ -6,15 +6,15 @@ import luoyi.duke.data.task.TaskList;
 import luoyi.duke.storage.Storage;
 
 /**
- * Abstract TaskCommand which supports creating and storing a Task.
+ * Abstract StoringCommand which supports storing tasks.
  */
-public abstract class TaskCommand extends Command {
+public abstract class StoringCommand extends Command {
     /**
      * Returns a new Command.
      * @param targetIndex Target index for operation by the command.
      * @param duke        Duke object to perform action on.
      */
-    protected TaskCommand(int targetIndex, IDuke duke) {
+    protected StoringCommand(int targetIndex, IDuke duke) {
         super(targetIndex, duke);
     }
 

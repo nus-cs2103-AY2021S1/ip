@@ -15,7 +15,7 @@ import luoyi.duke.data.task.ITask;
  * A command must be initiated with a Duke object before
  * it can execute.
  */
-public class DeadlineCommand extends TaskCommand {
+public class DeadlineCommand extends StoringCommand {
     private final String description;
     private final String time;
 

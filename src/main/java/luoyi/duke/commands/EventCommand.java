@@ -15,7 +15,7 @@ import luoyi.duke.data.task.ITask;
  * A command must be initiated with a Duke object before
  * it can execute.
  */
-public class EventCommand extends TaskCommand {
+public class EventCommand extends StoringCommand {
     private final String description;
     private final String time;
     private EventCommand(String description, String time, IDuke duke) {

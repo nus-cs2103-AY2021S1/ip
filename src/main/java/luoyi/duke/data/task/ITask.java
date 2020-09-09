@@ -1,5 +1,9 @@
 package luoyi.duke.data.task;
 
+import java.util.Optional;
+
+import luoyi.duke.common.TimeWrapper;
+
 public interface ITask {
     /**
      * Returns a task which is completed.
@@ -28,6 +32,14 @@ public interface ITask {
      * @return
      */
     String getDescription();
+
+    /**
+     * Returns the time object stored in the task.
+     * The time object may or may not exist.
+     *
+     * @return Optional time object.
+     */
+    Optional<TimeWrapper> getTime();
 
     /**
      * Checks if the task occurs at some date.
