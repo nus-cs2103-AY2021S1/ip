@@ -20,6 +20,7 @@ public class Parser {
      * @throws DukeException
      */
     void parse(String input) throws DukeException {
+        assert !input.isEmpty() : "error: input is null";
         String[] words = input.split(" ");
         String command = words[0];
         Task newTask;
