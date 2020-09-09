@@ -1,4 +1,4 @@
-package duke;
+package duke.parser;
 
 /**
  * Represents an exception that happened when the command received is not recognised.

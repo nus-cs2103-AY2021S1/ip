@@ -1,6 +1,8 @@
 package duke;
 
 import duke.command.Command;
+import duke.parser.Parser;
+import duke.parser.UnknownCommandException;
 import duke.storage.Storage;
 import duke.storage.StorageException;
 import duke.task.TaskException;
