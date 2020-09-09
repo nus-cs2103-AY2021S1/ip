@@ -31,21 +31,26 @@ public class Storage {
      */
     public Task convertFromHardDisk(String s) {
         String[] data = s.split(" / ");
+        assert data.length > 0;
         String taskType = data[0];
         boolean isDone = data[1].equals("1");
         String description = data[2];
         Task task;
         if (taskType.equals("T")) {
+            assert data.length == 3;
             task = new Todo(description);
         } else if (taskType.equals("D")) {
+            assert data.length == 4;
             String date = data[3];
             task = new Deadline(description, date);
         } else {
+            assert data.length == 4;
             String date = data[3];
             task = new Event(description, date);
         }
         if (isDone) {
             task.markAsDone();
+            assert task.isDone();
         }
         return task;
     }
@@ -58,14 +63,18 @@ public class Storage {
      */
     public String convertToHardDisk(Task t) {
         String[] info = t.getInfo();
+        assert info.length > 0;
         String taskType = info[0];
         String description = info[1];
         String isDone = t.isDone() ? "1" : "0";
         if (taskType.equals("T")) {
+            assert info.length == 3;
             return taskType + " / " + isDone + " / " + description;
         } else if (taskType.equals("D")) {
+            assert info.length == 4;
             return taskType + " / " + isDone + " / " + description + " / " + info[2];
         } else {
+            assert info.length == 4;
             return taskType + " / " + isDone + " / " + description + " / " + info[2];
         }
     }
@@ -93,6 +102,7 @@ public class Storage {
                         "be saved until the directory and the file are created.");
             }
         }
+
         // ArrayList to store task
         ArrayList<Task> storage = new ArrayList<>();
         try {
@@ -134,6 +144,7 @@ public class Storage {
                 Task t = storage.get(i);
                 text.append(convertToHardDisk(t)).append("\n");
             }
+            assert text.toString().split("\n").length == storage.size();
             fw.write(text.toString());
             fw.close();
         } catch (IOException e) {

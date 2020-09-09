@@ -19,7 +19,6 @@ public class FindCommand extends Command {
             Task t = tasks.get(i);
             String description = t.getInfo()[1];
             if (containSameWord(keyword, description)) {
-                System.out.println(keyword + " " + description);
                 temp.add(t);
             }
         }
@@ -30,7 +29,6 @@ public class FindCommand extends Command {
         boolean hasSameWord = false;
         String[] stringArr = b.split(" ");
         for (String s : stringArr) {
-            //System.out.println(s + " " + a);
             if (s.equals(a)) {
                 hasSameWord = true;
                 break;

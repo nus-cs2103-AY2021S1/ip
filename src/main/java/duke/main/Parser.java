@@ -41,7 +41,6 @@ public class Parser {
      */
     public static void checkInput(String ... input) throws DukeException {
         String command = input[0];
-        System.out.println(command);
         if (command.equals("")) {
             throw new NoInputException();
         } else if (!VALID_COMMAND.contains(input[0])) {
@@ -82,6 +81,7 @@ public class Parser {
     public static Command parse(String ... c) throws DukeException {
         // Check command input
         checkInput(c);
+        assert c.length > 0;
         String commandType = c[0];
         switch (commandType) {
         case "bye":

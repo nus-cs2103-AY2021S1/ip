@@ -32,6 +32,7 @@ public class DoneCommand extends Command {
         tasks = t;
         task = tasks.get(taskNumber - 1);
         task.markAsDone();
+        assert task.isDone();
     }
 
     public String getReply() {
