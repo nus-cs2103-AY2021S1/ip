@@ -16,3 +16,4 @@ bin/
 ACTUAL.TXT
 EXPECTED-UNIX.TXT
 data.txt
+temp.txt
