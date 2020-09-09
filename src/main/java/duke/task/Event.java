@@ -13,11 +13,11 @@ public class Event extends Task {
     private final LocalDateTime dateTime;
 
     public Event(String description, LocalDateTime dateTime) {
-        this(description, dateTime, false);
+        this(description, dateTime, TaskPriority.NONE, Collections.emptyList(), false);
     }
 
-    public Event(String description, LocalDateTime dateTime, boolean isDone) {
-        this(description, dateTime, isDone, TaskPriority.NONE, Collections.emptyList());
+    public Event(String description, LocalDateTime dateTime, TaskPriority priority, List<String> tags) {
+        this(description, dateTime, priority, tags, false);
     }
 
     /**
@@ -29,8 +29,8 @@ public class Event extends Task {
      * @param priority Priority of event.
      * @param tags List of tags.
      */
-    public Event(String description, LocalDateTime dateTime, boolean isDone, TaskPriority priority, List<String> tags) {
-        super(description, isDone, priority, tags);
+    public Event(String description, LocalDateTime dateTime,  TaskPriority priority, List<String> tags, boolean isDone) {
+        super(description, priority, tags, isDone);
         this.dateTime = dateTime;
     }
 

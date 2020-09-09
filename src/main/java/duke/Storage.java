@@ -7,12 +7,15 @@ import java.nio.file.Paths;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.TaskPriority;
 import duke.task.Todo;
 
 /**
@@ -57,31 +60,33 @@ public class Storage {
                 for (String line : lines) {
                     String[] params = line.split("\\s\\|\\s");
                     String type = params[0];
-                    String description = params[2];
-                    boolean isDone = params[1].equals("1");
+                    String description = params[4];
+                    TaskPriority priority = TaskPriority.valueOf(params[1]);
+                    List<String> tags = Arrays.asList(params[2].substring(1, params[2].length() - 1).split(", "));
+                    boolean isDone = params[3].equals("1");
 
-                    if (!params[1].equals("0") && !params[1].equals("1")) {
+                    if (!params[3].equals("0") && !params[3].equals("1")) {
                         throw new DukeException();
                     }
 
                     switch (type) {
                     case "T":
-                        tasks.add(new Todo(description, isDone));
+                        tasks.add(new Todo(description, priority, tags, isDone));
 
                         break;
                     case "D":
-                        tasks.add(new Deadline(description, LocalDateTime.parse(params[3]), isDone));
+                        tasks.add(new Deadline(description, LocalDateTime.parse(params[5]), priority, tags, isDone));
 
                         break;
                     case "E":
-                        tasks.add(new Event(description, LocalDateTime.parse(params[3]), isDone));
+                        tasks.add(new Event(description, LocalDateTime.parse(params[5]), priority, tags, isDone));
 
                         break;
                     default:
                         throw new DukeException();
                     }
                 }
-            } catch (DukeException | IOException | ArrayIndexOutOfBoundsException | DateTimeParseException e) {
+            } catch (DukeException | IOException | ArrayIndexOutOfBoundsException | DateTimeParseException | IllegalArgumentException e) {
                 throw new DukeException("Data file is corrupt. Ignoring saved tasks :-(");
             }
         }

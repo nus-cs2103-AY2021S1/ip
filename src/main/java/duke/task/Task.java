@@ -9,9 +9,9 @@ import java.util.List;
  */
 public abstract class Task {
     private final String description;
-    private boolean isDone;
     private final TaskPriority priority;
     private final List<String> tags;
+    private boolean isDone;
 
     /**
      * The task constructor.
@@ -22,12 +22,12 @@ public abstract class Task {
      * @param tags List of tags.
      */
 
-    public Task(String description, boolean isDone, TaskPriority priority, List<String> tags) {
+    public Task(String description, TaskPriority priority, List<String> tags, boolean isDone) {
         assert(!description.isBlank()) : "Task description should not be empty";
         this.description = description;
-        this.isDone = isDone;
         this.priority = priority;
         this.tags = new ArrayList<>(tags);
+        this.isDone = isDone;
     }
 
     public abstract boolean isDue(LocalDate date);
@@ -69,7 +69,7 @@ public abstract class Task {
      * @return a string representation of the task.
      */
     public String toSaveData() {
-        return (this.isDone ? 1 : 0) + " | " + this.description;
+        return this.priority + " | " + this.tags + " | " + (this.isDone ? 1 : 0) + " | " + this.description;
     }
 
     /**

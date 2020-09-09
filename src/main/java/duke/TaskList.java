@@ -25,52 +25,18 @@ public class TaskList {
         this.tasks = new ArrayList<>(tasks);
     }
 
-    /**
-     * Adds a task to the TaskList and returns it.
-     *
-     * @param type The type of the task.
-     * @param description The description of the task.
-     * @param dateTime The date/time of the task if applicable.
-     * @return the added task.
-     * @throws DukeException if the task cannot be added.
-     */
-    public Task addTask(TaskType type, String description, LocalDateTime dateTime) throws DukeException {
-        switch (type) {
-        case TODO:
-            assert(dateTime == null) : "dateTime should be null for todos";
-            return addTodo(description);
-        case DEADLINE:
-            return addDeadline(description, dateTime);
-        case EVENT:
-            return addEvent(description, dateTime);
-        default:
-            throw new DukeException("Task type not recognised!");
-        }
-    }
-
     public Task addTask(TaskType type, String description, LocalDateTime dateTime, TaskPriority priority, List<String> tags) throws DukeException {
         switch (type) {
         case TODO:
             assert(dateTime == null) : "dateTime should be null for todos";
             return addTodo(description, priority, tags);
         case DEADLINE:
-            return addDeadline(description, dateTime);
+            return addDeadline(description, dateTime, priority, tags);
         case EVENT:
-            return addEvent(description, dateTime);
+            return addEvent(description, dateTime, priority, tags);
         default:
             throw new DukeException("Task type not recognised!");
         }
-    }
-
-    private Todo addTodo(String description) throws DukeException {
-        if (description.isBlank()) {
-            throw new DukeException("The description of a todo cannot be empty.");
-        }
-
-        Todo todo = new Todo(description);
-        this.tasks.add(todo);
-
-        return todo;
     }
 
     private Todo addTodo(String description, TaskPriority priority, List<String> tags) throws DukeException {
@@ -84,23 +50,23 @@ public class TaskList {
         return todo;
     }
 
-    private Deadline addDeadline(String description, LocalDateTime dateTime) throws DukeException {
+    private Deadline addDeadline(String description, LocalDateTime dateTime, TaskPriority priority, List<String> tags) throws DukeException {
         if (description.isBlank()) {
             throw new DukeException("The description of a deadline cannot be empty.");
         }
 
-        Deadline deadline = new Deadline(description, dateTime);
+        Deadline deadline = new Deadline(description, dateTime, priority, tags);
         this.tasks.add(deadline);
 
         return deadline;
     }
 
-    private Event addEvent(String description, LocalDateTime dateTime) throws DukeException {
+    private Event addEvent(String description, LocalDateTime dateTime, TaskPriority priority, List<String> tags) throws DukeException {
         if (description.isBlank()) {
             throw new DukeException("The description of an event cannot be empty.");
         }
 
-        Event event = new Event(description, dateTime);
+        Event event = new Event(description, dateTime, priority, tags);
         this.tasks.add(event);
 
         return event;

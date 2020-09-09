@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import duke.command.AddCommand;
+import duke.command.Argument;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
@@ -96,6 +97,27 @@ public class Parser {
         return time;
     }
 
+    public static Argument parseAddCommandArgs(String argsStr) throws DukeException {
+        String[] args = argsStr.split("\\s");
+        String description = Arrays.stream(args).filter(arg -> !(arg.startsWith("#") || arg.startsWith("!"))).collect(Collectors.joining(" "));
+        List<String> tags = Arrays.stream(args).filter(arg -> arg.startsWith("#")).map(arg -> arg.substring(1)).collect(Collectors.toList());
+        long priorityCount = Arrays.stream(args).filter(arg -> arg.startsWith("!")).count();
+
+        if (priorityCount > 1) {
+            throw new DukeException("Please specify only one task priority!");
+        }
+
+        String priorityStr = Arrays.stream(args).filter(arg -> arg.startsWith("!")).findFirst().orElse("!NONE");
+
+        try {
+            TaskPriority priority = TaskPriority.valueOf(priorityStr.substring(1).toUpperCase());
+
+            return new Argument(description, priority, tags);
+        } catch (IllegalArgumentException e) {
+            throw new DukeException("Task priority not recognised. Please use one of NONE, LOW, MEDIUM or HIGH.");
+        }
+    }
+
     /**
      * Parses the command given and returns a Command object for execution.
      *
@@ -150,42 +172,29 @@ public class Parser {
 
             return new FindCommand(argsStr);
         case "todo": {
-            String[] args = argsStr.split("\\s");
-            String description = Arrays.stream(args).filter(arg -> !(arg.startsWith("#") || arg.startsWith("!"))).collect(Collectors.joining(" "));
-            List<String> tags = Arrays.stream(args).filter(arg -> arg.startsWith("#")).map(arg -> arg.substring(1)).collect(Collectors.toList());
-            long priorityCount = Arrays.stream(args).filter(arg -> arg.startsWith("!")).count();
+            Argument args = Parser.parseAddCommandArgs(argsStr);
 
-            if (priorityCount > 1) {
-                throw new DukeException("Please specify only one task priority!");
-            }
-
-            String priorityStr = Arrays.stream(args).filter(arg -> arg.startsWith("!")).findFirst().orElse("!NONE");
-
-            try {
-                TaskPriority priority = TaskPriority.valueOf(priorityStr.substring(1).toUpperCase());
-
-                return new AddCommand(TaskType.TODO, description, priority, tags);
-            } catch (IllegalArgumentException e) {
-                throw new DukeException("Task priority not recognised. Please use one of NONE, LOW, MEDIUM or HIGH.");
-            }
+            return new AddCommand(TaskType.TODO, args.getDescription(), args.getPriority(), args.getTags());
         }
         case "deadline": {
-            String[] deadlineArgs = argsStr.split("\\s/by\\s");
+            Argument args = Parser.parseAddCommandArgs(argsStr);
+            String[] deadlineArgs = args.getDescription().split("\\s/by\\s");
             String description = deadlineArgs[0];
-            String by = deadlineArgs.length > 1
+            String dateTime = deadlineArgs.length > 1
                     ? String.join(" ", Arrays.copyOfRange(deadlineArgs, 1, deadlineArgs.length))
                     : "";
 
-            return new AddCommand(TaskType.DEADLINE, description, Parser.parseDateTime(by));
+            return new AddCommand(TaskType.DEADLINE, description, Parser.parseDateTime(dateTime), args.getPriority(), args.getTags());
         }
         case "event": {
-            String[] eventArgs = argsStr.split("\\s/at\\s");
+            Argument args = Parser.parseAddCommandArgs(argsStr);
+            String[] eventArgs = args.getDescription().split("\\s/at\\s");
             String description = eventArgs[0];
-            String at = eventArgs.length > 1
+            String dateTime = eventArgs.length > 1
                     ? String.join(" ", Arrays.copyOfRange(eventArgs, 1, eventArgs.length))
                     : "";
 
-            return new AddCommand(TaskType.EVENT, description, Parser.parseDateTime(at));
+            return new AddCommand(TaskType.EVENT, description, Parser.parseDateTime(dateTime), args.getPriority(), args.getTags());
         }
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");

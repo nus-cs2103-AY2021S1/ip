@@ -9,19 +9,15 @@ import java.util.List;
  */
 public class Todo extends Task {
     public Todo(String description) {
-        this(description, false);
+        this(description, TaskPriority.NONE, Collections.emptyList(), false);
     }
 
     public Todo(String description, TaskPriority priority, List<String> tags) {
-        this(description, false, priority, tags);
+        this(description, priority, tags, false);
     }
 
-    public Todo(String description, boolean isDone) {
-        this(description, isDone, TaskPriority.NONE, Collections.emptyList());
-    }
-
-    public Todo(String description, boolean isDone, TaskPriority priority, List<String> tags) {
-        super(description, isDone, priority, tags);
+    public Todo(String description, TaskPriority priority, List<String> tags, boolean isDone) {
+        super(description, priority, tags, isDone);
     }
 
     /**

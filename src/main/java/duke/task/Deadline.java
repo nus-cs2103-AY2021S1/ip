@@ -13,11 +13,11 @@ public class Deadline extends Task {
     private final LocalDateTime dateTime;
 
     public Deadline(String description, LocalDateTime dateTime) {
-        this(description, dateTime, false);
+        this(description, dateTime, TaskPriority.NONE, Collections.emptyList(), false);
     }
 
-    public Deadline(String description, LocalDateTime dateTime, boolean isDone) {
-        this(description, dateTime, isDone, TaskPriority.NONE, Collections.emptyList());
+    public Deadline(String description, LocalDateTime dateTime, TaskPriority priority, List<String> tags) {
+        this(description, dateTime, priority, tags, false);
     }
 
     /**
@@ -29,8 +29,8 @@ public class Deadline extends Task {
      * @param priority Priority of deadline.
      * @param tags List of tags.
      */
-    public Deadline(String description, LocalDateTime dateTime, boolean isDone, TaskPriority priority, List<String> tags) {
-        super(description, isDone, priority, tags);
+    public Deadline(String description, LocalDateTime dateTime, TaskPriority priority, List<String> tags, boolean isDone) {
+        super(description, priority, tags, isDone);
         this.dateTime = dateTime;
     }
 
