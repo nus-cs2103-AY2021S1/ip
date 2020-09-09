@@ -1,10 +1,10 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.util.MagicStrings;
-import duke.util.Parser;
 import duke.task.TaskList;
 import duke.ui.Ui;
+import duke.util.MagicStrings;
+import duke.util.Parser;
 
 /**
  * Handles user's input as command to be executed.
@@ -49,7 +49,7 @@ public class CommandHandler {
             case "deadline":
             case "event":
                 tasks.addTask(command);
-                log.append(ui.printTaskAdded(tasks.getTaskAtIndex(tasks.getLength()-1)));
+                log.append(ui.printTaskAdded(tasks.getTaskAtIndex(tasks.getLength() - 1)));
                 break;
             case "delete":
                 index = Integer.parseInt(split[1]) - 1;
