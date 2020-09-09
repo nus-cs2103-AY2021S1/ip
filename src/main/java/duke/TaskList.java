@@ -22,8 +22,17 @@ public class TaskList {
      * Adds a task to the TaskList
      * @param t Task to be added
      */
-    public void addATask(Task t) {
-        tasks.add(t);
+    public boolean addATask(Task t) {
+        boolean duplicate = false;
+        for (Task task : tasks) {
+            if (task.getDescription().equals(t.getDescription())) {
+                duplicate = true;
+            }
+        }
+        if (!duplicate) {
+            tasks.add(t);
+        }
+        return !duplicate;
     }
 
     /**

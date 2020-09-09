@@ -17,11 +17,14 @@ public class AddCommand extends Command {
     }
     @Override
     public String execute(TaskList tasks, Storage storage) throws DukeException {
-        tasks.addATask(this.taskToAdd);
-        storage.writeData(tasks);
-        StringBuilder str = new StringBuilder("Added new task:\n");
-        str.append(taskToAdd.toString());
-        str.append("\nYou now have " + tasks.getNumberOfTasks() + " tasks!");
-        return str.toString();
+        if (tasks.addATask(this.taskToAdd)) {
+            storage.writeData(tasks);
+            StringBuilder str = new StringBuilder("Added new task:\n");
+            str.append(taskToAdd.toString());
+            str.append("\nYou now have " + tasks.getNumberOfTasks() + " tasks!");
+            return str.toString();
+        } else {
+            return "You cannot add duplicate tasks!";
+        }
     }
 }
