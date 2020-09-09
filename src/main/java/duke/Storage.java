@@ -16,9 +16,11 @@ import java.io.IOException;
  */
 public class Storage {
     private static int globalIndex = 1;
+    private int DONE_SYMBOL = 1;
 
     /**
      * Creates an instance of a Storage.
+     * 
      * @param filePath Location where the Storage is initialised.
      */
     public Storage(Path filePath) {
@@ -29,12 +31,13 @@ public class Storage {
                 newDir.createNewFile();
             }
         } catch (Exception e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 
     /**
      * Copies stored tasks into a list of tasks.
+     * 
      * @return ArrayList of stored tasks.
      */
     public ArrayList<Task> load() {
@@ -66,12 +69,14 @@ public class Storage {
                         storedTasks.add(event);
                         globalIndex++;
                         break;
+                    default:
+                        throw new DukeException("Invalid item found");
                     }
                 }
             }
         } catch (Exception e) {
-            System.out.println(e);
-        }
+            System.out.println(e.getMessage());
+        } 
         return storedTasks;
     }
 
@@ -101,12 +106,13 @@ public class Storage {
                 fw.close();
             }
         } catch (IOException e) {
-            System.out.println(e);
+            System.out.println(e.getMessage());
         }
     }
 
     /**
      * Removes a specific task from file containing stored tasks.
+     * 
      * @param taskIndex Number corresponding to the specific task to be removed.
      */
     public void removeFromFile(int taskIndex) {
@@ -137,12 +143,13 @@ public class Storage {
             Files.delete(Paths.get(tempFilePath));
             
         } catch (IOException err) {
-            System.out.println(err);
+            System.out.println(err.getMessage());
         }
     }
 
     /**
      * Modifies a specific task in file containing stored tasks.
+     * 
      * @param taskIndex Number corresponding to the specific task to be modified.
      */
     public void overwriteInFile(int taskIndex) {
@@ -162,7 +169,7 @@ public class Storage {
                 if (Integer.parseInt(task[0]) != taskIndex) {
                     fw.write(currentLine + "\n");
                 } else {
-                    fw.write(taskIndex + "|" + task[1] + "|" + 1 + "|" + task[3] + "\n");
+                    fw.write(taskIndex + "|" + task[1] + "|" + DONE_SYMBOL + "|" + task[3] + "\n");
                 }
             }
             fw.close();
@@ -172,7 +179,7 @@ public class Storage {
             Files.delete(Paths.get(tempFilePath));
             
         } catch (IOException err) {
-            System.out.println(err);
+            System.out.println(err.getMessage());
         }
     }
 }

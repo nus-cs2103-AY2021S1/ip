@@ -16,13 +16,21 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.image.Image;
 
-
+/**
+ * Creates user and Duke dialog boxes in GUI.
+ */
 public class DialogBox extends HBox {
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
 
+    /**
+     * Constructor for the DialogBox class.
+     * 
+     * @param text Text to be displayed.
+     * @param img Image to be displayed.
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -50,10 +58,24 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Returns user's DialogBox.
+     * 
+     * @param text Text to be displayed.
+     * @param img Image to be displayed.
+     * @return User's DialogBox with specified text and image.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
+    /**
+     * Returns Duke's DialogBox.
+     * 
+     * @param text Text to be displayed.
+     * @param img Image to be displayed.
+     * @return Duke's DialogBox with specified text and image.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
