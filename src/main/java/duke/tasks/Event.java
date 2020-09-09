@@ -10,23 +10,23 @@ import duke.timeformatter.TimeFormatter;
 public class Event extends Task {
 
     /**
-     * Event's occurrence.
-     */
-    protected LocalDate at;
-
-    /**
      * @param description description of the event.
      * @param at          date of the event.
      */
     public Event(String description, LocalDate at) {
-        super(description);
-        this.at = at;
+        super(description, at);
     }
 
     @Override
     public String toString() {
         return "[E]" + getStatusIcon() + super.toString() + "(at: "
-                + TimeFormatter.prettyDate(at) + ")";
+                + TimeFormatter.prettyDate(localDate) + ")";
+    }
+
+    @Override
+    public String getTaskType() {
+        return "Event";
     }
 }
+
 

@@ -33,8 +33,9 @@ public class DoneCommand extends UserCommand {
                 throw new InvalidDoneCommandException();
             } else {
                 taskList.getTask(itemToBeMarkedAsDone - 1).markAsDone();
+                return ui.printResponse("Nice! I've marked this task as done: " + "\n" + "[\u2713]"
+                        + taskList.getTask(itemToBeMarkedAsDone - 1).getDescription());
             }
         }
-        return "";
     }
 }
