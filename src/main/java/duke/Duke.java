@@ -1,24 +1,29 @@
 package duke;
 
-/**
- * Presents Duke class with "Ka To"
- * Interacts with the user and answers user commands
- * Manages the task list of the user
- * Follows the coding standard
- */
-
 import javafx.application.Application;
+
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
+
 import javafx.scene.image.Image;
+
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+
 import javafx.stage.Stage;
 
+
+/**
+ * Presents Duke class with "Ka To"
+ * Interacts with the user and answers user commands
+ * Starts the GUI chat window
+ * Manages the task list of the user
+ * Follows the coding standard
+ */
 
 public class Duke extends Application {
 
@@ -38,20 +43,26 @@ public class Duke extends Application {
     public Duke(){
     }
     public Duke(String filePath) {
+        //initialise ui and storage
         this.ui = new Ui();
-
         this.storage = new Storage(filePath);
+
+        //load the storage file into task list
         if (this.storage.load().isEmpty()) {
+
+            // create new task list if empty file
             this.tasks = new TaskList();
         }else{
-            System.out.println(storage.load());
             this.tasks = new TaskList(storage.load());
         }
     }
 
     //run the ui and parser
     private void run() {
+        // KaTo greets the user
         this.ui.printGreet();
+
+        // KaTo takes in user commands
         while (this.ui.input.hasNextLine()) {
             String command = this.ui.getInput();
             Parser.processCommand(command, this.ui, this.tasks, this.storage.filePath);
@@ -72,6 +83,7 @@ public class Duke extends Application {
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
+        // KaTo greats user in the chat window
         Label dukeText = new Label("Hello, Ka To here, how can I serve you?");
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(dukeText, duke, dukeBackground)
@@ -124,7 +136,6 @@ public class Duke extends Application {
     }
 
 
-
     /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -134,25 +145,35 @@ public class Duke extends Application {
 
         Label userText = new Label("Me :\n" + userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
+
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, user, userBackground),
                 DialogBox.getDukeDialog(dukeText, duke, dukeBackground)
         );
         userInput.clear();
     }
+
     /**
+     * Gets and processes user commands
+     * Returns the response to those commands
      *
+     * @param input String user input
+     * @return output String KaTo response
      */
     private String getResponse(String input) {
+
         String filePath = "./data/duke.txt";
         GUI gui = new GUI();
         this.storage = new Storage(filePath);
+
         if (this.storage.load().isEmpty()) {
             this.tasks = new TaskList();
         }else{
             this.tasks = new TaskList(storage.load());
         }
+        // get the KaTo response
         String output = ParserGUI.processCommand(input, gui, this.tasks, this.storage.filePath);
+
         return "Ka To: \n" + output;
     }
 
