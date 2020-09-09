@@ -23,10 +23,28 @@ import org.junit.jupiter.api.Test;
 import duke.exception.InvalidSaveFileException;
 
 public class DukeTest {
-    private static final Path TEST_FILE_PATH = Paths.get("temp-data", "duke.txt");
+    private static final Path TEST_SAVE_PATH = Paths.get("temp-data", "duke.txt");
     private static final ByteArrayOutputStream OUT_CONTENT = new ByteArrayOutputStream();
     private static final PrintStream ORIGINAL_OUT = System.out;
     private static final InputStream SYSIN_BACKUP = System.in;
+    private static final String TEST_DIR;
+
+    static {
+        Path currentDir = Paths.get("").toAbsolutePath();
+        int len = currentDir.getNameCount();
+        int index = -1;
+        for (int i = len - 1; i >= 0; i--) {
+            if (currentDir.getName(i).toString().equals("ip")) {
+                index = i;
+                break;
+            }
+        }
+        Path rootDir = currentDir;
+        for (int i = 0; i < len - index - 1; i++) {
+            rootDir = rootDir.getParent();
+        }
+        TEST_DIR = Paths.get(rootDir.toString(), "build", "resources", "test", "duke-test").toString();
+    }
 
     // recursive function to delete directory that stores the save file
     private static void deleteDirectory(File directoryToBeDeleted) {
@@ -40,7 +58,7 @@ public class DukeTest {
     }
 
     private static void clearPath() {
-        Path topDir = TEST_FILE_PATH.subpath(0, 1);
+        Path topDir = TEST_SAVE_PATH.subpath(0, 1);
         if (!java.nio.file.Files.exists(topDir)) {
             return;
         }
@@ -52,7 +70,7 @@ public class DukeTest {
     static void setUpStreams() throws IOException {
         clearPath();
         System.setOut(new PrintStream(OUT_CONTENT));
-        BufferedReader reader = new BufferedReader(new FileReader(Paths.get("duke-test", "input.txt").toString()));
+        BufferedReader reader = new BufferedReader(new FileReader(Paths.get(TEST_DIR, "input.txt").toString()));
         String[] input = reader.lines().toArray(String[]::new);
         reader.close();
         ByteArrayInputStream inputStream = new ByteArrayInputStream(String.join("\n", input).getBytes());
@@ -68,25 +86,10 @@ public class DukeTest {
 
     @Test
     public void testInputs() throws IOException, InvalidSaveFileException {
-        Duke duke = new Duke(TEST_FILE_PATH);
+        Duke duke = new Duke(TEST_SAVE_PATH);
         duke.runCli();
 
-        Path currentDir = Paths.get("").toAbsolutePath();
-        int len = currentDir.getNameCount();
-        int index = -1;
-        for (int i = len - 1; i >= 0; i++) {
-            if (currentDir.getName(i).toString().equals("ip")) {
-                index = i;
-                break;
-            }
-        }
-        Path rootDir = currentDir;
-        for (int i = 0; i < len - index - 1; i++) {
-            rootDir = rootDir.getParent();
-        }
-        String testDir = Paths.get(rootDir.toString(), "duke-test").toString();
-
-        String expectedFilePath = Paths.get(testDir, "EXPECTED.txt").toString();
+        String expectedFilePath = Paths.get(TEST_DIR, "EXPECTED.txt").toString();
         File file = new File(expectedFilePath);
         FileInputStream fis = new FileInputStream(file);
         byte[] data = new byte[(int) file.length()];
@@ -96,7 +99,7 @@ public class DukeTest {
 
         String actualOutput = OUT_CONTENT.toString();
 
-        String actualFilePath = Paths.get(testDir, "ACTUAL.txt").toString();
+        String actualFilePath = Paths.get(TEST_DIR, "ACTUAL.txt").toString();
         FileWriter myWriter = new FileWriter(actualFilePath);
         myWriter.write(actualOutput);
         myWriter.close();
