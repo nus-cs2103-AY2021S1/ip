@@ -10,6 +10,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ToolBar;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -56,9 +57,9 @@ public class Main extends Application {
             toolBar.setMinHeight(height);
             toolBar.setMaxHeight(height);
             toolBar.getItems().add(new WindowButtons());
-
+            stage.setTitle("PikaDuke To-Do List");
             stage.setScene(scene);
-
+            stage.getIcons().add(new Image("/images/sendbutton.png"));
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {

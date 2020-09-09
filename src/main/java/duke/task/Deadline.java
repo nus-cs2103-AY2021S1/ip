@@ -28,7 +28,7 @@ public class Deadline extends Task {
      * @param isDone Completion status of the task.
      */
     public Deadline(String task, LocalDateTime duration, boolean isDone) {
-        super(task, TaskType.EVENT, duration, isDone);
+        super(task, TaskType.DEADLINE, duration, isDone);
     }
 
     @Override
