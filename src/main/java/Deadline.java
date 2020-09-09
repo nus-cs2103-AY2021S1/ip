@@ -44,7 +44,7 @@ public class Deadline extends Task {
      */
     public String toSaveString() {
         return String.format("D | %s | %s | %s",
-                super.doneString(), this.description, this.deadline.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm")));
+                super.getDoneString(), this.description, this.deadline.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm")));
     }
 
 }

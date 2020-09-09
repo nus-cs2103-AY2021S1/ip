@@ -27,7 +27,7 @@ public class ToDos extends Task {
 
     @Override
     public String toSaveString() {
-        return String.format("T | %s | %s", super.doneString(), this.description);
+        return String.format("T | %s | %s", super.getDoneString(), this.description);
     }
 
 }

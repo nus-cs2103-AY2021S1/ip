@@ -15,19 +15,6 @@ public class TaskList {
     }
 
     /**
-     * Overloaded constructor that takes in a List of Takes and creates a TaskList object
-     * and adds Tasks in the List.
-     * @param taskList
-     */
-    public TaskList(List<Task> taskList) {
-        this.taskList = new ArrayList<>(taskList);
-    }
-
-    public static TaskList parse(List<Task> tasks) {
-        return new TaskList(tasks);
-    }
-
-    /**
      * Adds a Task to the TaskList.
      * @param task task the Task to be added.
      */
@@ -47,7 +34,7 @@ public class TaskList {
         return this.taskList.get(num - 1);
     }
 
-    public int size() {
+    public int getSize() {
         return this.taskList.size();
     }
 }

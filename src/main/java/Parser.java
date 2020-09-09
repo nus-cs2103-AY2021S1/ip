@@ -1,7 +1,4 @@
-import com.sun.java.accessibility.util.GUIInitializedListener;
-
 import java.time.format.DateTimeParseException;
-import java.util.Scanner;
 
 /**
  * Parser class that deals with loading tasks from the file and
@@ -22,6 +19,7 @@ public class Parser {
      * Evaluates the syntax of the input command and executes it,
      * throwing a DukeException if the syntax is correct.
      * @param input the user input
+     * @return String containing message corresponding to action
      */
     public String action(String input) {
         String result;
@@ -67,9 +65,9 @@ public class Parser {
                     } else {
                         try {
                             String due = arr[1];
-                            Task dl = new Deadline(des, due);
-                            taskList.addTask(dl);
-                            result = ui.printAdd(taskList, dl);
+                            Task deadline = new Deadline(des, due);
+                            taskList.addTask(deadline);
+                            result = ui.printAdd(taskList, deadline);
                             storage.saveTasks(taskList, ui);
                         } catch (DateTimeParseException e) {
                             result = ui.printError("Please use this format: \n" +
@@ -83,13 +81,13 @@ public class Parser {
                     throw new DukeException("The description of a event cannot be empty!");
                 } else {
                     String[] arr = array[1].split(" /at ");
-                    String des = arr[0];
+                    String description = arr[0];
                     if (arr.length == 1) {
                         throw new DukeException("The deadline of the event cannot be empty!");
                     } else {
                         try {
                             String due = arr[1];
-                            Task event = new Events(des, due);
+                            Task event = new Events(description, due);
                             taskList.addTask(event);
                             result = ui.printAdd(taskList, event);
                             storage.saveTasks(taskList, ui);
@@ -110,7 +108,4 @@ public class Parser {
         }
         return result;
     }
-
-
-
 }
