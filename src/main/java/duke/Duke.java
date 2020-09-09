@@ -27,6 +27,11 @@ public class Duke {
      */
     public void run() {
         ui.showWelcome();
+        relp();
+        ui.sayGoodBye();
+    }
+
+    private void relp() {
         boolean isExit = false;
         while (!isExit) {
             try {
@@ -41,8 +46,6 @@ public class Duke {
                 ui.showLine();
             }
         }
-
-        ui.sayGoodBye();
     }
 
     public String getResponse(String command) throws DukeException {

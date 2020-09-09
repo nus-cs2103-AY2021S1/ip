@@ -50,11 +50,11 @@ public class FileHelper {
      */
     public static void save(String path, String fileName, List<String> data) {
 
-        File directory = new File(path);
-        if (!directory.exists()) {
-            directory.mkdir();
-        }
+        createDirectoryIfNotExist(path);
+        writeToFile(path, fileName, data);
+    }
 
+    private static void writeToFile(String path, String fileName, List<String> data) {
         try {
             FileWriter writer = new FileWriter(path + "/" + fileName);
 
@@ -64,6 +64,13 @@ public class FileHelper {
             writer.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private static void createDirectoryIfNotExist(String path) {
+        File directory = new File(path);
+        if (!directory.exists()) {
+            directory.mkdir();
         }
     }
 }
