@@ -1,0 +1,6 @@
+D ## 0 ## read book  ## 2019-12-12
+T ## 1 ## go for a run
+D ## 0 ## homework  ## 2020-11-22
+E ## 0 ## meeting  ## 2020-12-12 18:00
+D ## 0 ## cs assignment  ## 2020-03-14
+T ## 0 ## math assignment

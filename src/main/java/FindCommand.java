@@ -14,8 +14,8 @@ public class FindCommand extends Command {
     public String handle(String input, TaskManager taskManager, Storage fileHandler) {
 
         ArrayList<String> tasksFound = new ArrayList<>();
-        for (int i = 0; i < taskManager.getTasksList().size(); i++) {
-            String found = taskManager.getTasksList().get(i).toString();
+        for (int i = 0; i < taskManager.getTaskList().size(); i++) {
+            String found = taskManager.getTaskList().get(i).toString();
             if (found.contains(this.searchWord)) {
                 tasksFound.add(found);
             }

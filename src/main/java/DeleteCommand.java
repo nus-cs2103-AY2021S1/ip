@@ -1,5 +1,4 @@
 import java.io.IOException;
-import java.util.ArrayList;
 
 public class DeleteCommand extends Command {
 
@@ -13,8 +12,7 @@ public class DeleteCommand extends Command {
     }
 
     public String handle(String input, TaskManager taskManager, Storage fileHandler) throws IOException {
-
-        if (taskManager.getTasksList().isEmpty() || taskManager.getTasksList().size() < taskNum) {
+        if (taskManager.getTaskList().isEmpty() || taskManager.getTaskList().size() < taskNum) {
             return "There's nothing to delete!";
 
         } else {
