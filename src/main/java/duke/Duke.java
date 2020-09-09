@@ -1,12 +1,74 @@
 package duke;
 
-        
+
+import javafx.application.Application;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.stage.Stage;
+
 import java.io.IOException;
 
+public class Duke extends Application{
 
-public class Duke {
+    @Override
+    public void start(Stage stage) {
+        Label helloWorld = new Label("Hello World!"); // Creating a new Label control
+        Scene scene = new Scene(helloWorld); // Setting the scene to be our Label
+
+        stage.setScene(scene); // Setting the stage to show our screen
+        stage.show(); // Render the stage.
+    }
+    
     private TaskList taskList;
     private UI userInterface = new UI();
+    
+    
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    String getResponse(String input)  {
+        String command = input.toLowerCase();
+        try {
+            if (command.equals("bye")) {
+                Storage.writeToFile(taskList);
+                return userInterface.goodbye();
+            } else if (command.equals("list")) {
+
+               return userInterface.listTasks(taskList);
+
+            } else if (command.split("\\s+")[0].equals("find")) {
+                String keyword = Parser.parseKeyWord(command);
+                return UI.listTasks(taskList.search(keyword));
+                
+            } else if (command.split("\\s+")[0].equals("done")) {
+                Task task = taskList.get(Integer.parseInt(command.split("\\s+")[1]) - 1);
+                task.setDone();
+                return userInterface.taskCompletedMessage(task);
+                
+            }else if (command.split("\\s+")[0].equals("delete")){
+                if (command.split("\\s+").length != 2) {
+                    throw new IllegalUserInputException("PLease specify the correct argument number");
+                }
+                try {
+                    int i = Integer.parseInt(command.split("\\s+")[1]);
+                    Task.decrementTask();
+                    Task task = taskList.get(i-1);
+                    taskList.deleteTaskIndex(i-1);
+                    return userInterface.taskDeletedMessage(task);
+                } catch (TaskListError e) {
+                    System.out.println(e.getDetails());
+                }
+            } else {
+                   return storeInput(input, taskList, userInterface);
+            }
+            
+        }catch (IOException | IllegalArgumentException e) {
+            System.out.println(e);
+        }
+        return "Somethign went wrong!";
+    }
     
     public Duke() {
         try {
@@ -72,7 +134,7 @@ public class Duke {
     
     
     
-    public static void storeInput(String command, TaskList taskList,UI userInterface) {
+    public static String storeInput(String command, TaskList taskList,UI userInterface) {
         String cmd1 = command.split("\\s+")[0];
         String cmd2;
         Task task =null;
@@ -98,8 +160,8 @@ public class Duke {
 
         if (task != null) {
             taskList.addTask(task);
-            userInterface.taskAddedMessage(task);
+            return userInterface.taskAddedMessage(task);
         }
-        return;
+        return "Something went wrong!";
     }
 }
