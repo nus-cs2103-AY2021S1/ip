@@ -63,24 +63,40 @@ public class Storage {
 
             while (sc.hasNext()) {
                 String[] taskArray;
-                taskArray = sc.nextLine().split(" \\| ");
+                String stringToParse = sc.nextLine();
+                taskArray = stringToParse.split(" \\| ");
                 String taskType = taskArray[0];
                 String isDone = taskArray[1];
                 String taskName = taskArray[2];
                 Task task = null;
+                boolean hasTag = stringToParse.contains("@");
                 switch (taskType) {
                 case "T":
-                    task = new Todo(taskName);
+                    task = new Todo(taskName, hasTag);
                     break;
                 case "D":
-                    task = new Deadline(taskName,
-                            LocalDateTime.parse(taskArray[3].replace(", " , "T"),
-                                    DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HHmm")));
+                    if (hasTag) {
+                        task = new Deadline(taskName, LocalDateTime.parse(taskArray[3]
+                                .split(" @")[0]
+                                .replace(", ", "T"),
+                                DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HHmm")), hasTag);
+                    } else {
+                        task = new Deadline(taskName, LocalDateTime.parse(taskArray[3]
+                                .replace(", ", "T"),
+                                DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HHmm")), hasTag);
+                    }
                     break;
                 case "E":
-                    task = new Event(taskName,
-                            LocalDateTime.parse(taskArray[3].replace(", ", "T"),
-                                    DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HHmm")));
+                    if (hasTag) {
+                        task = new Event(taskName, LocalDateTime.parse(taskArray[3]
+                                .split(" @")[0]
+                                .replace(", ", "T"),
+                                DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HHmm")), hasTag);
+                    } else {
+                        task = new Event(taskName, LocalDateTime.parse(taskArray[3]
+                                .replace(", ", "T"),
+                                DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HHmm")), hasTag);
+                    }
                     break;
                 default:
                     break;

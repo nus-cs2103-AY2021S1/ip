@@ -3,15 +3,17 @@ package duke.task;
 public abstract class Task {
     protected String description;
     protected boolean isDone;
+    protected boolean hasTag;
 
     /**
      * Creates a Task.
      *
      * @param description description of task
      */
-    public Task(String description) {
+    public Task(String description, boolean hasTag) {
         this.description = description;
         this.isDone = false;
+        this.hasTag = hasTag;
     }
 
     public String getStatusIcon() {

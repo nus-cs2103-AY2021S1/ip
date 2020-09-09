@@ -2,8 +2,12 @@ package duke.task;
 
 public class Todo extends Task {
 
-    public Todo(String description) {
-        super(description);
+    public Tag tag;
+    public Todo(String description, boolean hasTag) {
+        super(description, hasTag);
+        if (hasTag) {
+            this.tag = new Tag(description.substring(description.indexOf("@") + 1));
+        }
     }
 
     @Override
