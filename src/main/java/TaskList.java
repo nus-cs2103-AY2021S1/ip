@@ -36,8 +36,6 @@ public class TaskList {
      * @return String representation of data.
      */
     public String taskToString(Task t) {
-        String s = t.toString();
-
         String type = t.getType();
         String status = t.getStatusIcon();
         String name = t.getName();
@@ -81,7 +79,40 @@ public class TaskList {
         reader = new BufferedReader(new FileReader(fileToBeModified));
 
         newText = newTotal + System.lineSeparator();
-        String line = reader.readLine(); // skips the first line
+        reader.readLine(); // skips the first line (total)
+        String line = reader.readLine();
+
+        while (line != null) {
+            newText = newText + line + System.lineSeparator();
+            line = reader.readLine();
+        }
+
+        writer = new FileWriter(fileToBeModified);
+        writer.write(newText);
+
+        reader.close();
+        writer.close();
+    }
+
+    /**
+     * Updates Statistics for user.
+     *
+     * @param s New statistics.
+     * @throws IOException If FileWriter is unable to find file.
+     */
+    public void updateStatistics(Statistics s) throws IOException {
+        String newStatistics = s.statisticsToData();
+        File fileToBeModified = PATH.toFile();
+        String newText = "";
+        BufferedReader reader = null;
+        FileWriter writer = null;
+
+        reader = new BufferedReader(new FileReader(fileToBeModified));
+
+        String line = reader.readLine();
+        newText = line + System.lineSeparator();
+        reader.readLine(); // skips the second line (statistics)
+        newText = newText + newStatistics + System.lineSeparator();
         line = reader.readLine();
 
         while (line != null) {
@@ -169,7 +200,7 @@ public class TaskList {
         Scanner myReader = new Scanner(PATH);
 
         String taskData = "";
-        for (int i = 0; i <= taskNumber; i++) {
+        for (int i = -1; i <= taskNumber; i++) {
             taskData = myReader.nextLine();
         }
         Task t = parser.stringToTask(taskData);
@@ -189,7 +220,7 @@ public class TaskList {
     public Task delete(int taskNumber) throws IOException {
         Scanner myReader = new Scanner(PATH);
         String taskData = "";
-        for (int i = 0; i <= taskNumber; i++) {
+        for (int i = -1; i <= taskNumber; i++) {
             taskData = myReader.nextLine();
         }
         Task t = parser.stringToTask(taskData);

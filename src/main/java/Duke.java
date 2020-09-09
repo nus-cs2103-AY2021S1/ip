@@ -8,6 +8,7 @@ public class Duke {
     private static Ui ui = new Ui();
     private static Parser parser = new Parser();
     private static TaskList tasklist;
+    private static Statistics statistics;
 
     String getResponse(String input) {
         try {
@@ -16,19 +17,30 @@ public class Duke {
             } else if (input.equals("list")) {
                 return ui.list();
             } else if (input.startsWith("done")) {
+                statistics = statistics.addCompletedTask();
+                tasklist.updateStatistics(statistics);
+
                 int n = parser.getTaskNumber(input);
                 Task t = tasklist.complete(n);
                 return ui.complete(t);
             } else if (input.startsWith("delete")) {
+                statistics = statistics.addDeletedTask();
+                tasklist.updateStatistics(statistics);
+
                 int n = parser.getTaskNumber(input);
                 Task t = tasklist.delete(n);
                 return ui.delete(t, tasklist.getTotal());
             } else if (input.startsWith("todo") || input.startsWith("deadline") || input.startsWith("event")) {
+                statistics = statistics.addTask();
+                tasklist.updateStatistics(statistics);
+
                 Task t = tasklist.add(input);
                 return ui.add(t, tasklist.getTotal());
             } else if (input.startsWith("find")) {
                 String keyword = parser.getKeyword(input);
                 return ui.find(keyword);
+            } else if (input.startsWith("statistics")) {
+                return statistics.toString();
             } else {
                 // unknown input
                 throw new UnknownInputException();
@@ -43,6 +55,11 @@ public class Duke {
         Scanner myReader = new Scanner(PATH);
         int total = myReader.nextInt();
         tasklist = new TaskList(total);
+        myReader.nextLine();
+
+        String data = myReader.nextLine();
+        statistics = new Statistics(data);
+        statistics = statistics.reset();
     }
 
     public static void main(String[] args) {

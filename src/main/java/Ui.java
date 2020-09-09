@@ -33,7 +33,8 @@ public class Ui {
         try {
             int counter = 1;
             Scanner myReader = new Scanner(PATH);
-            myReader.nextLine();
+            myReader.nextLine(); // skip first line (total)
+            myReader.nextLine(); // skip second line (statistics)
 
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();

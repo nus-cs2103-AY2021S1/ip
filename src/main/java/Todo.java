@@ -34,7 +34,7 @@ public class Todo extends Task {
             return true;
         } else if (obj == null || obj.getClass() != this.getClass()) {
             return false;
-        } else if (this.name.equals(test.name) && (this.completed == test.completed)) {
+        } else if (this.name.equals(test.name) && (this.isCompleted == test.isCompleted)) {
             return true;
         } else {
             return false;
