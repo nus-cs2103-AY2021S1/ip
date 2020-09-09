@@ -7,11 +7,11 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
-public class CommandHandler {
+public class Parser {
     Scanner sc;
-    ArrayList<Task> taskList;
+    TaskList taskList;
 
-    public CommandHandler(ArrayList<Task> taskList) {
+    public Parser(TaskList taskList) {
         this.sc = new Scanner(System.in);
         this.taskList = taskList;
     }

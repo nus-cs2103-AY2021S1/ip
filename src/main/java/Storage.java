@@ -7,16 +7,18 @@ import java.io.File;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 
-public class Loader {
+public class Storage {
 
     ArrayList<Task> taskArrayList;
+    String filePath;
 
-    public Loader() {
+    public Storage(String filePath) {
         this.taskArrayList = new ArrayList<>();
+        this.filePath = filePath;
     }
 
     public void fill() throws IOException {
-        File f = new File("./command.txt");
+        File f = new File(filePath);
         Scanner sc;
         try {
             sc = new Scanner(f);
