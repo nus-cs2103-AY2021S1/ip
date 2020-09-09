@@ -74,7 +74,6 @@ public class TaskList {
         for (int i = 0; i < totalTasks; i++) {
             if (tasks.get(i - 1).description.contains(filter)) {
                 filteredTasks.add(tasks.get(i));
-                //System.out.println(i + "." + tasks.get(i - 1));
             }
         }
         return filteredTasks;
