@@ -126,6 +126,42 @@ public class ParserTest {
         }
 
         @Test
+        @DisplayName("should generate add todo object with tags")
+        public void parse_todoCommandWithTags_objectAddTodoCommand()
+                throws StuffException {
+            Command command = Parser.parse(
+                    new String[] {
+                        "todo",
+                        "name",
+                        "#abc",
+                        "#123"
+                    });
+
+            assertEquals(new TodoCommand(
+                            "name",
+                            new String[] { "abc", "123" }
+                    ),
+                    command);
+        }
+
+        @Test
+        @DisplayName("should generate add todo object with tags")
+        public void parse_todoCommandWithEmptyTagsAndOptions_objectAddTodoCommand()
+                throws StuffException {
+            Command command = Parser.parse(
+                    new String[] {
+                        "todo",
+                        "-",
+                        "--",
+                        "name",
+                        "#",
+                        "#"
+                    });
+
+            assertEquals(new TodoCommand("name", new String[0]), command);
+        }
+
+        @Test
         @DisplayName("should throw exception if no second argument")
         public void parse_todoCommandNoSecondArg_throwException() {
             EmptyMessageException exception = assertThrows(
@@ -174,6 +210,62 @@ public class ParserTest {
                     "name",
                             LocalDateTime.of(1400, 1, 31, 14, 53),
                             options,
+                            new String[0]
+                    ),
+                    command);
+        }
+
+        @Test
+        @DisplayName("should generate add deadline object with tags")
+        public void parse_deadlineCommandWithTags_objectAddDeadlineCommand()
+                throws StuffException {
+            Command command = Parser.parse(
+                    new String[] {
+                        "deadline",
+                        "-rm",
+                        "name",
+                        "/by",
+                        "1400-1-31",
+                        "1453",
+                        "#abc",
+                        "#123"
+                    });
+            HashSet<Option> options = new HashSet<>();
+            options.add(Option.RECURRING_MONTHLY);
+
+            assertEquals(new DeadlineCommand(
+                            "name",
+                            LocalDateTime.of(1400, 1, 31, 14, 53),
+                            options,
+                            new String[] { "abc", "123" }
+                    ),
+                    command);
+        }
+
+        @Test
+        @DisplayName("should generate add deadline object without extra options or tags")
+        public void parse_deadlineCommandWithEmptyTagsAndOptions_objectAddDeadlineCommand()
+                throws StuffException {
+            Command command = Parser.parse(
+                    new String[] {
+                        "deadline",
+                        "-",
+                        "--",
+                        "-",
+                        "name",
+                        "/by",
+                        "1400-1-31",
+                        "1453",
+                        "#",
+                        "#",
+                        "#",
+                        "#"
+                    });
+
+            assertEquals(new DeadlineCommand(
+                            "name",
+                            LocalDateTime.of(1400, 1, 31, 14, 53),
+                            new HashSet<>(),
                             new String[0]
                     ),
                     command);
@@ -319,7 +411,7 @@ public class ParserTest {
 
         @Test
         @DisplayName("should generate add recurring event object")
-        public void parse_deadlineCommandWithOptions_objectAddDeadlineCommand()
+        public void parse_eventCommandWithOptions_objectAddEventCommand()
                 throws StuffException {
             Command command = Parser.parse(
                     new String[] {
@@ -337,6 +429,62 @@ public class ParserTest {
                     "name",
                             LocalDateTime.of(1400, 1, 31, 14, 53),
                             options,
+                            new String[0]
+                    ),
+                    command);
+        }
+
+        @Test
+        @DisplayName("should generate add event object with tags")
+        public void parse_eventCommandWithTags_objectAddEventCommand()
+                throws StuffException {
+            Command command = Parser.parse(
+                    new String[] {
+                        "event",
+                        "-ry",
+                        "name",
+                        "/at",
+                        "1400-1-31",
+                        "1453",
+                        "#abc",
+                        "#123"
+                    });
+            HashSet<Option> options = new HashSet<>();
+            options.add(Option.RECURRING_YEARLY);
+
+            assertEquals(new EventCommand(
+                            "name",
+                            LocalDateTime.of(1400, 1, 31, 14, 53),
+                            options,
+                            new String[] { "abc", "123" }
+                    ),
+                    command);
+        }
+
+        @Test
+        @DisplayName("should generate add event object without extra options or tags")
+        public void parse_eventCommandWithEmptyTagsAndOptions_objectAddEventCommand()
+                throws StuffException {
+            Command command = Parser.parse(
+                    new String[] {
+                        "event",
+                        "-",
+                        "--",
+                        "-",
+                        "name",
+                        "/at",
+                        "1400-1-31",
+                        "1453",
+                        "#",
+                        "#",
+                        "#",
+                        "#"
+                    });
+
+            assertEquals(new EventCommand(
+                            "name",
+                            LocalDateTime.of(1400, 1, 31, 14, 53),
+                            new HashSet<>(),
                             new String[0]
                     ),
                     command);

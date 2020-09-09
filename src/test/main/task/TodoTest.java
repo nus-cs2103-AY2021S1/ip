@@ -28,6 +28,32 @@ public class TodoTest {
         public void write_altTodoTask_altString() {
             assertEquals("T,,,1,,task 2\n", TODO_TWO.write());
         }
+
+        @Test
+        @DisplayName("should return a string with tags")
+        public void write_taggedTodoTask_string() {
+            Todo test = new Todo(
+                    "task 3",
+                    true,
+                    new String[] { "abc", "123", "apple" }
+            );
+
+            assertEquals("T,,,1,abc;123;apple,task 3\n",
+                    test.write());
+        }
+
+        @Test
+        @DisplayName("should return an alternate string with tags")
+        public void write_taggedAltTodoTask_string() {
+            Todo test = new Todo(
+                    "task 3",
+                    true,
+                    new String[] { "happy" }
+            );
+
+            assertEquals("T,,,1,happy,task 3\n",
+                    test.write());
+        }
     }
 
     @Nested
@@ -94,6 +120,14 @@ public class TodoTest {
         public void equals_altTodo_false() {
             assertFalse(TODO_ONE.equals(
                     new Todo("task 1", true, new String[0])));
+        }
+
+        @Test
+        @DisplayName("should return false if tags are different")
+        public void equals_differentTagDeadline_false() {
+            Todo test = new Todo("task 1", new String[] { "abc" });
+
+            assertFalse(TODO_ONE.equals(test));
         }
     }
 }

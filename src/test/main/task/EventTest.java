@@ -135,6 +135,36 @@ public class EventTest {
             assertEquals("E,rw,4000-11-23T12:44,1,,task 3\n",
                     test.write());
         }
+
+        @Test
+        @DisplayName("should return a string with tags")
+        public void write_taggedEventTask_string() throws InvalidOptionException {
+            Event test = new Event(
+                    "task 3",
+                    "rw",
+                    "4000-11-23T12:44",
+                    true,
+                    new String[] { "happy" }
+            );
+
+            assertEquals("E,rw,4000-11-23T12:44,1,happy,task 3\n",
+                    test.write());
+        }
+
+        @Test
+        @DisplayName("should return an alternate string with tags")
+        public void write_taggedAltEventTask_string() throws InvalidOptionException {
+            Event test = new Event(
+                    "task 3",
+                    "rw",
+                    "4000-11-23T12:44",
+                    true,
+                    new String[] { "abc", "123", "apple" }
+            );
+
+            assertEquals("E,rw,4000-11-23T12:44,1,abc;123;apple,task 3\n",
+                    test.write());
+        }
     }
 
     @Nested
@@ -255,6 +285,19 @@ public class EventTest {
             assertFalse(recurringDaily.equals(recurringMonthly));
             assertFalse(recurringMonthly.equals(recurringYearly));
             assertFalse(recurringYearly.equals(recurringDaily));
+        }
+
+        @Test
+        @DisplayName("should return false if tags are different")
+        public void equals_differentTagDeadline_false() {
+            Event test = new Event(
+                    "task 1",
+                    LocalDateTime.of(1993, 12, 6, 10, 10),
+                    new HashSet<>(),
+                    new String[] { "abc" }
+            );
+
+            assertFalse(eventOne.equals(test));
         }
     }
 }

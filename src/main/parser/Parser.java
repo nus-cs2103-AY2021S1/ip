@@ -139,11 +139,17 @@ public class Parser {
             String arg = input[i];
 
             if (arg.startsWith("--")) {
-                fullOptions.add(arg.substring(2));
+                if (arg.length() > 2) {
+                    fullOptions.add(arg.substring(2));
+                }
             } else if (arg.startsWith("-")) {
-                shortOptions.add(arg.substring(1));
+                if (arg.length() > 1) {
+                    shortOptions.add(arg.substring(1));
+                }
             } else if (arg.startsWith("#")) {
-                tags.add(arg.substring(1));
+                if (arg.length() > 1) {
+                    tags.add(arg.substring(1));
+                }
             } else {
                 description.add(arg);
             }

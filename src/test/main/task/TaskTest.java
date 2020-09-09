@@ -26,6 +26,30 @@ public class TaskTest {
         public void write_altTask_altString() {
             assertEquals(",0,,task 2\n", TASK_TWO.write());
         }
+
+        @Test
+        @DisplayName("should return a string with tags")
+        public void write_taggedTask_string() {
+            Task test = new Task(
+                    "task 3",
+                    true,
+                    new String[] { "abc", "123", "apple" }
+            );
+
+            assertEquals(",1,abc;123;apple,task 3\n", test.write());
+        }
+
+        @Test
+        @DisplayName("should return an alternate string with tags")
+        public void write_taggedAltTask_string() {
+            Task test = new Task(
+                    "task 3",
+                    true,
+                    new String[] { "happy" }
+            );
+
+            assertEquals(",1,happy,task 3\n", test.write());
+        }
     }
 
     @Nested
@@ -63,6 +87,14 @@ public class TaskTest {
         @DisplayName("should return false for a task with different name")
         public void equals_task_false() {
             assertFalse(TASK_ONE.equals(new Task("different", new String[0])));
+        }
+
+        @Test
+        @DisplayName("should return false if tags are different")
+        public void equals_differentTagDeadline_false() {
+            Task test = new Task("task 1", new String[] { "abc" });
+
+            assertFalse(TASK_ONE.equals(test));
         }
     }
 }

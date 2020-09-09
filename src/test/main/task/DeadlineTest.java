@@ -131,6 +131,36 @@ public class DeadlineTest {
             assertEquals("D,rw,4000-11-23T12:44,1,,task 3\n",
                     test.write());
         }
+
+        @Test
+        @DisplayName("should return a string with tags")
+        public void write_taggedDeadlineTask_string() throws InvalidOptionException {
+            Deadline test = new Deadline(
+                    "task 3",
+                    "rw",
+                    "4000-11-23T12:44",
+                    true,
+                    new String[] { "happy" }
+            );
+
+            assertEquals("D,rw,4000-11-23T12:44,1,happy,task 3\n",
+                    test.write());
+        }
+
+        @Test
+        @DisplayName("should return an alternate string with tags")
+        public void write_taggedAltDeadlineTask_string() throws InvalidOptionException {
+            Deadline test = new Deadline(
+                    "task 3",
+                    "rw",
+                    "4000-11-23T12:44",
+                    true,
+                    new String[] { "abc", "123", "apple" }
+                );
+
+            assertEquals("D,rw,4000-11-23T12:44,1,abc;123;apple,task 3\n",
+                    test.write());
+        }
     }
 
     @Nested
@@ -251,6 +281,19 @@ public class DeadlineTest {
             assertFalse(recurringDaily.equals(recurringMonthly));
             assertFalse(recurringMonthly.equals(recurringYearly));
             assertFalse(recurringYearly.equals(recurringDaily));
+        }
+
+        @Test
+        @DisplayName("should return false if tags are different")
+        public void equals_differentTagDeadline_false() throws InvalidOptionException {
+            Deadline test = new Deadline(
+                    "task 1",
+                    LocalDateTime.of(1993, 12, 6, 10, 10),
+                    new HashSet<>(),
+                    new String[] { "abc" }
+            );
+
+            assertFalse(deadlineOne.equals(test));
         }
     }
 }
