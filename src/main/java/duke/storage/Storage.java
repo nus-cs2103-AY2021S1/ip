@@ -7,7 +7,6 @@ import duke.task.*;
 import duke.tasklist.TaskList;
 
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -19,8 +18,8 @@ import java.util.Scanner;
 public class Storage {
     private static File file;
 
-    public Storage(String filePath) {
-        this.file = new File(filePath);
+    public Storage() {
+        this.file = new File("src/main/java/duke/data/duke.txt");
     }
 
     /**

@@ -3,6 +3,7 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Date;
 
 public class Event extends Task {
     protected String at;
@@ -21,8 +22,8 @@ public class Event extends Task {
 
     public String toString() {
         String icon = this.completed ? "[" + "\u2713" + "]" : "[" + "\u2718" + "]";
-        return "[E]" + icon + " " + this.description + " (at: "
-                + this.atDateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
+        String DateTime = this.atDateTime.format(DateTimeFormatter.ofPattern("MMM d yyy HH:mm"));
+        return "[E]" + icon + " " + this.description + " (at: " + DateTime + ")";
     }
 
     /**

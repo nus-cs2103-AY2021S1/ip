@@ -3,6 +3,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.LocalDate;
+import java.util.Date;
 
 public class Deadline extends Task {
     protected String by;
@@ -21,8 +22,8 @@ public class Deadline extends Task {
 
     public String toString() {
         String icon = this.completed ? "[" + "\u2713" + "]" : "[" + "\u2718" + "]";
-        return "[D]" + icon + " " + this.description + " (by: "
-                + this.byDateTime.format(DateTimeFormatter.ofPattern("MMM d yyy HH:mm")) + ")";
+        String DateTime = this.byDateTime.format(DateTimeFormatter.ofPattern("MMM d yyy HH:mm"));
+        return "[D]" + icon + " " + this.description + " (by: " + DateTime + ")";
     }
 
     /**
