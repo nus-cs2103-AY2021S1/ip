@@ -1,5 +1,3 @@
-import javafx.application.Platform;
-
 /**
  * Represents a Duke chatbot that can store, delete, mark tasks as done and display them.
  */
