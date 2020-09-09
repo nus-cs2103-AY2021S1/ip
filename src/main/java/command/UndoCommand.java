@@ -32,7 +32,7 @@ public class UndoCommand extends Command {
      */
     @Override
     public String execute(String inputMsg, TaskList currList, Ui ui, CommandStorage commandStorage)
-            throws ParseException, IOException, DukeException {
+            throws IOException, DukeException {
         ArrayList<String> pastCommands = commandStorage.load();
         int numberOfCommands = pastCommands.size();
         if (numberOfCommands <= 1) {
