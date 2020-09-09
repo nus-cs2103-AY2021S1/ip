@@ -41,12 +41,13 @@ public class Ui {
     }
     
     public String showDeletedTask(Task task, int length) {
+        assert length >= 0 : "length must not be negative";
         return "Noted. I've removed this task:\n" + task + "\n" 
                 + "Now you have " + length + " tasks in the list.\n";
     }
     
     public String showAddedTask(Task task, int length) {
-        length++;
+        assert length >= 0 : "length must not be negative";
         return "Got it. I've added this task:\n" + task + "\n"
                 + "Now you have " + length + " tasks in the list.\n";
     }
@@ -56,13 +57,17 @@ public class Ui {
     }
     
     public String showList(TaskList taskList) {
+        StringBuilder display = new StringBuilder();
+        if (taskList.taskListLength() == 0) {
+            return "You have no tasks!";
+        }
         for (int i = 0; i < taskList.taskListLength(); i++) {
             if (i == 0) {
-                return "Here are the tasks in your list:\n";
+                display.append("Here are the tasks in your list:\n");
             }
             Task task = taskList.getTaskList().get(i);
-            return (i + 1) + ". " + task + "\n";
+            display.append(i + 1).append(". ").append(task).append("\n");
         }
-        return "";
+        return display.toString();
     } 
 }

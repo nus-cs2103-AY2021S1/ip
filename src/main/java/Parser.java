@@ -11,6 +11,7 @@ public class Parser {
      * @throws DukeException unidentified strings.
      */
     public static Command parse(String s) throws DukeException {
+        assert s.length() > 0 : "input should not be empty";
         if (s.equals("list")) {
             return new ListCommand();
         } else if (s.equals("bye")) {
@@ -30,9 +31,7 @@ public class Parser {
         } else if (s.startsWith("deadline")) {
             Deadline deadline = parseDeadline(s);
             return new AddCommand(deadline);
-
         } else if (s.startsWith("find")) {
-            // String input = parseFind(s);
             return new FindCommand(s);
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");

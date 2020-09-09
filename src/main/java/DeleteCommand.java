@@ -26,6 +26,7 @@ public class DeleteCommand extends Command {
             throw new DukeException("ERROR: Task does not exist");
         }
         Task deletedTask = tasks.deleteTask(index);
+        storage.save(tasks);
         return ui.showDeletedTask(deletedTask, tasks.taskListLength());
     }
 
