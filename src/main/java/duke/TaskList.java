@@ -25,7 +25,19 @@ public class TaskList {
         this.tasks = new ArrayList<>(tasks);
     }
 
-    public Task addTask(TaskType type, String description, LocalDateTime dateTime, TaskPriority priority, List<String> tags) throws DukeException {
+    /**
+     * Adds a task to the TaskList and returns it.
+     *
+     * @param type The type of the task.
+     * @param description The description of the task.
+     * @param dateTime The date/time of the task if applicable.
+     * @param priority The priority of the task.
+     * @param tags The tags associated with the task.
+     * @return the added task.
+     * @throws DukeException if the task cannot be added.
+     */
+    public Task addTask(TaskType type, String description, LocalDateTime dateTime,
+                        TaskPriority priority, List<String> tags) throws DukeException {
         switch (type) {
         case TODO:
             assert(dateTime == null) : "dateTime should be null for todos";
@@ -50,7 +62,8 @@ public class TaskList {
         return todo;
     }
 
-    private Deadline addDeadline(String description, LocalDateTime dateTime, TaskPriority priority, List<String> tags) throws DukeException {
+    private Deadline addDeadline(String description, LocalDateTime dateTime,
+                                 TaskPriority priority, List<String> tags) throws DukeException {
         if (description.isBlank()) {
             throw new DukeException("The description of a deadline cannot be empty.");
         }
@@ -61,7 +74,8 @@ public class TaskList {
         return deadline;
     }
 
-    private Event addEvent(String description, LocalDateTime dateTime, TaskPriority priority, List<String> tags) throws DukeException {
+    private Event addEvent(String description, LocalDateTime dateTime,
+                           TaskPriority priority, List<String> tags) throws DukeException {
         if (description.isBlank()) {
             throw new DukeException("The description of an event cannot be empty.");
         }

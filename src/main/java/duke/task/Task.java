@@ -17,9 +17,9 @@ public abstract class Task {
      * The task constructor.
      *
      * @param description The description of the task.
-     * @param isDone The boolean keeping track of whether the task is done.
      * @param priority Priority of task.
      * @param tags List of tags.
+     * @param isDone The boolean keeping track of whether the task is done.
      */
 
     public Task(String description, TaskPriority priority, List<String> tags, boolean isDone) {

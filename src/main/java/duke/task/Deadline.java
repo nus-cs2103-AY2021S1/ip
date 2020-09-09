@@ -25,11 +25,12 @@ public class Deadline extends Task {
      *
      * @param description The description of the deadline.
      * @param dateTime The date/time the deadline is due by.
-     * @param isDone The boolean keeping track of whether the deadline is done.
      * @param priority Priority of deadline.
      * @param tags List of tags.
+     * @param isDone The boolean keeping track of whether the deadline is done.
      */
-    public Deadline(String description, LocalDateTime dateTime, TaskPriority priority, List<String> tags, boolean isDone) {
+    public Deadline(String description, LocalDateTime dateTime,
+                    TaskPriority priority, List<String> tags, boolean isDone) {
         super(description, priority, tags, isDone);
         this.dateTime = dateTime;
     }

@@ -25,11 +25,12 @@ public class Event extends Task {
      *
      * @param description The description of the event.
      * @param dateTime The date/time the event is due by.
-     * @param isDone The boolean keeping track of whether the event is done.
      * @param priority Priority of event.
      * @param tags List of tags.
+     * @param isDone The boolean keeping track of whether the event is done.
      */
-    public Event(String description, LocalDateTime dateTime,  TaskPriority priority, List<String> tags, boolean isDone) {
+    public Event(String description, LocalDateTime dateTime,
+                 TaskPriority priority, List<String> tags, boolean isDone) {
         super(description, priority, tags, isDone);
         this.dateTime = dateTime;
     }

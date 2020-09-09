@@ -10,6 +10,13 @@ public class Argument {
     private final TaskPriority priority;
     private final List<String> tags;
 
+    /**
+     * The Argument constructor.
+     *
+     * @param description The description from the arguments.
+     * @param priority THe priority from the arguments.
+     * @param tags The list of tags from the arguments.
+     */
     public Argument(String description, TaskPriority priority, List<String> tags) {
         this.description = description;
         this.priority = priority;

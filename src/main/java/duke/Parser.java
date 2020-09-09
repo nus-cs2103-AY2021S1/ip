@@ -97,10 +97,19 @@ public class Parser {
         return time;
     }
 
+    /**
+     * Parses the command arguments given and returns an Argument object containing the arguments.
+     *
+     * @param argsStr A string containing the command arguments.
+     * @return an Argument object containing the arguments.
+     * @throws DukeException if the arguments cannot be parsed.
+     */
     public static Argument parseAddCommandArgs(String argsStr) throws DukeException {
         String[] args = argsStr.split("\\s");
-        String description = Arrays.stream(args).filter(arg -> !(arg.startsWith("#") || arg.startsWith("!"))).collect(Collectors.joining(" "));
-        List<String> tags = Arrays.stream(args).filter(arg -> arg.startsWith("#")).map(arg -> arg.substring(1)).collect(Collectors.toList());
+        String description = Arrays.stream(args).filter(arg -> !(arg.startsWith("#") || arg.startsWith("!")))
+                .collect(Collectors.joining(" "));
+        List<String> tags = Arrays.stream(args).filter(arg -> arg.startsWith("#")).map(arg -> arg.substring(1))
+                .collect(Collectors.toList());
         long priorityCount = Arrays.stream(args).filter(arg -> arg.startsWith("!")).count();
 
         if (priorityCount > 1) {
@@ -184,7 +193,8 @@ public class Parser {
                     ? String.join(" ", Arrays.copyOfRange(deadlineArgs, 1, deadlineArgs.length))
                     : "";
 
-            return new AddCommand(TaskType.DEADLINE, description, Parser.parseDateTime(dateTime), args.getPriority(), args.getTags());
+            return new AddCommand(TaskType.DEADLINE, description, Parser.parseDateTime(dateTime),
+                    args.getPriority(), args.getTags());
         }
         case "event": {
             Argument args = Parser.parseAddCommandArgs(argsStr);
@@ -194,7 +204,8 @@ public class Parser {
                     ? String.join(" ", Arrays.copyOfRange(eventArgs, 1, eventArgs.length))
                     : "";
 
-            return new AddCommand(TaskType.EVENT, description, Parser.parseDateTime(dateTime), args.getPriority(), args.getTags());
+            return new AddCommand(TaskType.EVENT, description, Parser.parseDateTime(dateTime),
+                    args.getPriority(), args.getTags());
         }
         default:
             throw new DukeException("I'm sorry, but I don't know what that means :-(");

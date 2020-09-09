@@ -31,18 +31,21 @@ public class AddCommand extends Command {
         this(type, description, null, priority, tags);
     }
 
+    public AddCommand(TaskType type, String description, LocalDateTime dateTime) {
+        this(type, description, dateTime, TaskPriority.NONE, Collections.emptyList());
+    }
+
     /**
      * The add command constructor.
      *
      * @param type The command type.
      * @param description The description.
      * @param dateTime The date/time if applicable.
+     * @param priority The priority.
+     * @param tags The list of tags.
      */
-    public AddCommand(TaskType type, String description, LocalDateTime dateTime) {
-        this(type, description, dateTime, TaskPriority.NONE, Collections.emptyList());
-    }
-
-    public AddCommand(TaskType type, String description, LocalDateTime dateTime, TaskPriority priority, List<String> tags) {
+    public AddCommand(TaskType type, String description, LocalDateTime dateTime,
+                      TaskPriority priority, List<String> tags) {
         this.type = type;
         this.description = description;
         this.dateTime = dateTime;
