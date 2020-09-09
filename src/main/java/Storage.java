@@ -1,4 +1,10 @@
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 
 /**
  * Storage class that handles the reading and writing process from a designated text file,
@@ -22,12 +28,12 @@ public class Storage {
      */
     public void saveTasks(TaskList taskList, Ui ui) {
         File savedFile = new File(file);
-        boolean exists = savedFile.exists();
+        boolean fileExists = savedFile.exists();
         try {
-            if (exists) {
+            if (fileExists) {
                 BufferedWriter writer = new BufferedWriter(new FileWriter(file));
                 StringBuilder tasks = new StringBuilder();
-                for (int i = 1; i <= taskList.size(); i++) {
+                for (int i = 1; i <= taskList.getSize(); i++) {
                     Task task = taskList.getTask(i);
                     tasks.append(task.toSaveString());
                     tasks.append("\n");
