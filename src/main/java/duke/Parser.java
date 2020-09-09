@@ -34,7 +34,9 @@ public class Parser {
                     return Command.EVENT;
                 } else if (key.equals("deadline")) {
                     return Command.DEADLINE;
-                } else {
+                } else if (key.equals("prioritize")) {
+                    return Command.PRIORITIZE;
+                }else {
                     return Command.ERROR;
                 }
             } catch (ArrayIndexOutOfBoundsException e) {
