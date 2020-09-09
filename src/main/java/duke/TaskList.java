@@ -59,11 +59,10 @@ public class TaskList {
             Task task = storedTasks.get(taskNumber - 1);
             if (task.isDone()) {
                 throw new DukeException("This task is already done: " + task.getDescription());
-            } else {
-                task.markAsDone();
-                assert task.isDone;
-                return task;
             }
+            task.markAsDone();
+            assert task.isDone;
+            return task;
         }
     }
 
