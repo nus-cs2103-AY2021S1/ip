@@ -80,6 +80,7 @@ public class Storage {
                 if (!temp[1].equals("1") && !temp[1].equals("0")) {
                     throw new CorruptedFileException("Sorry, the input file is corrupted.");
                 }
+                assert temp.equals("1") || temp.equals("0") : "temp should be equals to 0 or 1";
                 if (temp[0].equals("T")) {
                     taskList.add(new Todo(temp[2], func.apply(temp[1])));
                 } else if (temp[0].equals("D")) {
