@@ -15,15 +15,20 @@ public class TaskList {
      * @param commands
      * @return string of search results
      */
-    public String getSearchResult(String[] commands) {
+    public String getSearchResult(String[] commands) throws DukeException {
         StringBuilder stringBuilder = new StringBuilder();
+        if (commands.length < 2) {
+            throw new DukeException("Please give a search term!");
+        }
+        String searchTerm = commands[1];
         for (int i = 0; i < tasks.size(); i++) {
             Task currentTask = tasks.get(i);
-            if (currentTask.name.contains(commands[1])) {
+            if (currentTask.name.contains(searchTerm)) {
                 stringBuilder.append((i+1) + "." + currentTask.toString() + '\n');
             }
         }
-        return stringBuilder.subSequence(0, stringBuilder.length() - 1).toString();
+        stringBuilder.setLength(stringBuilder.length() - 1);
+        return stringBuilder.toString();
     }
 
     /**
