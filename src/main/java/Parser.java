@@ -1,6 +1,6 @@
 public class Parser {
 
-    public static TaskList list_of_Content;
+    public static TaskList listOfContent;
 
     /**
      * Returns a boolean to indicate whether program should exit.
@@ -16,7 +16,7 @@ public class Parser {
      * @param list TaskList that manages tasks.
      */
     public static void initiateTaskList(TaskList list) {
-        list_of_Content = list;
+        listOfContent = list;
     }
 
     /**
@@ -32,16 +32,16 @@ public class Parser {
             String firstChar = isDone[0];
 
         if (input.equals("bye")) {
-            Storage.write(list_of_Content);
+            Storage.write(listOfContent);
             return Ui.exitMessage();
    
         }
         if (input.equals("list")) {
                 System.out.println("Here are the tasks in your list: ");
-                return list_of_Content.showAllContent();
+                return listOfContent.showAllContent();
             } else if (firstChar.equals("find")) {
                 String keyword = isDone[isDone.length - 1];
-                return list_of_Content.findKeyword(keyword);
+                return listOfContent.findKeyword(keyword);
             } else if (firstChar.equals("done")) {
 
                 if (isDone.length == 1) {
@@ -54,14 +54,14 @@ public class Parser {
                 String lastChar = isDone[isDone.length - 1];
                 int index = Integer.parseInt(lastChar);
 
-                if (index > list_of_Content.getSizeOfList()) {
-                    int no_of_tasks = list_of_Content.getSizeOfList();
+                if (index > listOfContent.getSizeOfList()) {
+                    int no_of_tasks = listOfContent.getSizeOfList();
                     throw new InvalidException("There are only " + no_of_tasks + " tasks in the list; Please restate" +
                             " the task to be mark as done");
                 }
 
-                Task current = list_of_Content.getTheList().get(index - 1);
-                current.set_Task_As_Done();
+                Task current = listOfContent.getTheList().get(index - 1);
+                current.setTaskAsDone();
                 System.out.println("Nice! I've marked this task as done: ");
                 System.out.println(current.timeConverted());
                 return current.timeConverted();
@@ -79,17 +79,17 @@ public class Parser {
                 String lastChar = isDone[isDone.length - 1];
                 int index = Integer.parseInt(lastChar);
 
-                if (index > list_of_Content.getSizeOfList()) {
-                    int no_of_tasks = list_of_Content.getSizeOfList();
+                if (index > listOfContent.getSizeOfList()) {
+                    int no_of_tasks = listOfContent.getSizeOfList();
                     throw new InvalidException("There are only " + no_of_tasks + " tasks in the list; Please restate" +
                             " the task to be deleted");
                 }
-                Task toBeRemove = list_of_Content.getTheList().get(index - 1);
-                            int no_of_tasks_left = list_of_Content.getSizeOfList();
+                Task toBeRemove = listOfContent.getTheList().get(index - 1);
+                            int no_of_tasks_left = listOfContent.getSizeOfList();
                 System.out.println(" Noted. I've removed this task:  ");
                 System.out.println(toBeRemove);
                 System.out.println(" Now you have " + no_of_tasks_left + " tasks in the list. ");
-                return list_of_Content.removeTask(index - 1);
+                return listOfContent.removeTask(index - 1);
 
             } else {
                 if (firstChar.equals("todo")) {
@@ -99,11 +99,11 @@ public class Parser {
                                 "please provide me with the task to be completed");
                     }
                     ToDo new_task = new ToDo(input.substring(firstChar.length() + 1));
-                    list_of_Content.addTask(new_task);
+                    listOfContent.addTask(new_task);
                     System.out.println("Got it. I've added this task: ");
                     System.out.println(new_task.timeConverted());
-                    System.out.println("Now you have " + list_of_Content.getSizeOfList() + " tasks in the list.");
-                    return list_of_Content.addStringTask(new_task);
+                    System.out.println("Now you have " + listOfContent.getSizeOfList() + " tasks in the list.");
+                    return listOfContent.addStringTask(new_task);
 
                 } else if (firstChar.equals("deadline")) {
                     
@@ -123,11 +123,11 @@ public class Parser {
                     String task = input.substring(firstChar.length() + 1, index);
                     String time = input.substring(index + 4);
                     Deadline deadline = new Deadline(task, time);
-                    list_of_Content.addTask(deadline);
+                    listOfContent.addTask(deadline);
                                         System.out.println("Got it. I've added this task: ");
                     System.out.println(deadline.timeConverted());
-                    System.out.println("Now you have " + list_of_Content.getSizeOfList() + " tasks in the list.");
-                    return list_of_Content.addStringTask(deadline);
+                    System.out.println("Now you have " + listOfContent.getSizeOfList() + " tasks in the list.");
+                    return listOfContent.addStringTask(deadline);
 
                 } else if (firstChar.equals("event")) {
 
@@ -145,11 +145,11 @@ public class Parser {
                     String task = input.substring(firstChar.length() + 1, index);
                     String duration = input.substring(index + 4);
                     Task event = new Event(task, duration);
-                    list_of_Content.addTask(event);
+                    listOfContent.addTask(event);
                                         System.out.println("Got it. I've added this task: ");
                     System.out.println(event.timeConverted());
-                    System.out.println("Now you have " + list_of_Content.getSizeOfList() + " tasks in the list.");
-                    return list_of_Content.addStringTask(event);
+                    System.out.println("Now you have " + listOfContent.getSizeOfList() + " tasks in the list.");
+                    return listOfContent.addStringTask(event);
 
                 } else {
                     throw new InvalidException("OOPS!!! I'm sorry, but I don't know what that means :-(");

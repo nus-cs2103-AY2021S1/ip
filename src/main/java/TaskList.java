@@ -84,12 +84,12 @@ public class TaskList {
         return list_of_Contents;
     }
 
-    public void set_Task_As_Done(int n) {
+    public void setTaskAsDone(int n) {
 
         assert n <= list_of_Contents.size();
         System.out.println("Nice! I've marked this task as done: ");
         Task task = list_of_Contents.get(n - 1);
-        task.set_Task_As_Done();
+        task.setTaskAsDone();
         System.out.println(task.toString());
     }
 
