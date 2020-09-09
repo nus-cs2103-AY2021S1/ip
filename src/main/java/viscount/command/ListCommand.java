@@ -98,4 +98,21 @@ public class ListCommand extends Command {
             }
         }
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (o == null || o.getClass() != this.getClass()) {
+            return false;
+        }
+
+        ListCommand listCommand = (ListCommand) o;
+        boolean hasSameTaskTypeModifier = this.taskTypeModifier.equals(listCommand.taskTypeModifier);
+        boolean hasSameDateString = this.dateString.equals(listCommand.dateString);
+        boolean hasSameFindString = this.findString.equals(listCommand.findString);
+        return hasSameTaskTypeModifier && hasSameDateString && hasSameFindString;
+    }
 }

@@ -75,4 +75,21 @@ public class AddCommand extends Command {
 
         return newTask;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (o == null || o.getClass() != this.getClass()) {
+            return false;
+        }
+
+        AddCommand addCommand = (AddCommand) o;
+        boolean hasSameTaskType = this.taskType.equals(addCommand.taskType);
+        boolean hasSameDescription = this.description.equals(addCommand.description);
+        boolean hasSameDateTime = this.dateTime.isEqual(addCommand.dateTime);
+        return hasSameTaskType && hasSameDescription && hasSameDateTime;
+    }
 }

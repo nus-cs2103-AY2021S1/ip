@@ -34,4 +34,18 @@ public class DeleteCommand extends Command {
         storage.saveToDisk(taskList.getTasks());
         return ui.getDeleteResponse(removedTask, taskList.getTasksSize());
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (o == null || o.getClass() != this.getClass()) {
+            return false;
+        }
+
+        DeleteCommand deleteCommand = (DeleteCommand) o;
+        return this.taskIndex == deleteCommand.taskIndex;
+    }
 }

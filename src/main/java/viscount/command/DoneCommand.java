@@ -33,4 +33,18 @@ public class DoneCommand extends Command {
         storage.saveToDisk(taskList.getTasks());
         return ui.getDoneResponse(taskList.getTask(taskIndex));
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (o == null || o.getClass() != this.getClass()) {
+            return false;
+        }
+
+        DoneCommand doneCommand = (DoneCommand) o;
+        return this.taskIndex == doneCommand.taskIndex;
+    }
 }
