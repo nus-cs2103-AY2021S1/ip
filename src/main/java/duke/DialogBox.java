@@ -17,13 +17,20 @@ import javafx.scene.shape.Circle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ * Creates the chatBox for user or KaTo
+ * Modifies the chat background image and the profile image
+ */
+
+
 public class DialogBox extends HBox {
 
-
-    public DialogBox(Label l, Image iv, Image background) {
+    public DialogBox(Label label, Image image, Image background) {
+        // set profile image to circle shape
         Circle circle = new Circle(40);
-        circle.setFill(new ImagePattern(iv));
-        l.setWrapText(true);
+        circle.setFill(new ImagePattern(image));
+
+        label.setWrapText(true);
 
         // create a background image
         BackgroundImage backgroundimage = new BackgroundImage(background,
@@ -37,9 +44,9 @@ public class DialogBox extends HBox {
 
         // set background
         this.setBackground(backgroundImage);
-
         this.setAlignment(Pos.TOP_RIGHT);
-        this.getChildren().addAll(l, circle);
+
+        this.getChildren().addAll(label, circle);
     }
 
     /**
@@ -53,16 +60,14 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
     }
 
-    public static DialogBox getUserDialog(Label l, Image iv, Image background) {
-        return new DialogBox(l, iv, background);
+    public static DialogBox getUserDialog(Label label, Image image, Image background) {
+        return new DialogBox(label, image, background);
     }
 
-    public static DialogBox getDukeDialog(Label l, Image iv, Image background) {
-        var db = new DialogBox(l, iv, background);
-        db.flip();
-        return db;
+    public static DialogBox getDukeDialog(Label label, Image image, Image background) {
+        var dialogBox = new DialogBox(label, image, background);
+        dialogBox.flip();
+        return dialogBox;
     }
-
-
 
 }
