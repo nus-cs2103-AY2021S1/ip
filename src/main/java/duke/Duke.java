@@ -43,8 +43,8 @@ public class Duke {
 
     private void runUntilExitCommand() {
         boolean isExitCommand = false;
-        String input = ui.readCommand();
         while (!isExitCommand) {
+            String input = ui.readCommand();
             Command command;
             try {
                 ui.printDivider();
@@ -55,7 +55,6 @@ public class Duke {
                 ui.displayError(e.getMessage());
             }
             ui.printAdditionActionMessage();
-            input = ui.readCommand();
         }
     }
 
