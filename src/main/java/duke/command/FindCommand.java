@@ -3,7 +3,7 @@ package duke.command;
 import duke.task.TaskList;
 import duke.utils.Ui;
 
-public class FindCommand extends Command{
+public class FindCommand extends Command {
 
     private String searchText;
     public FindCommand(String searchText) {

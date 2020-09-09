@@ -14,6 +14,9 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
+    /**
+     * Constructor for Duke class.
+     */
     public Duke(String path, String fileName) {
         ui = new Ui();
         tasks = new TaskList(path, fileName);

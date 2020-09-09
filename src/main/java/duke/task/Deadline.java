@@ -13,6 +13,9 @@ public class Deadline extends Task {
     private LocalDate date;
     private LocalDateTime dateTime;
 
+    /**
+     * Constructor for a Deadline Task.
+     */
     public Deadline(String description, String time) {
         super(description);
         this.time = time;
@@ -24,6 +27,9 @@ public class Deadline extends Task {
         dateTime = date.atTime(hour, minute);
     }
 
+    /**
+     * Constructor for a Deadline Task.
+     */
     public Deadline(boolean isDone, String description, String time) {
         super(isDone, description);
         this.time = time;
@@ -37,7 +43,8 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm")) + ")";
+        return "[D]" + super.toString() + " (by: "
+                + dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy, HH:mm")) + ")";
     }
 
     @Override

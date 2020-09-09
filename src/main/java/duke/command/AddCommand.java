@@ -2,9 +2,9 @@ package duke.command;
 
 import duke.task.Deadline;
 import duke.task.Event;
-import duke.task.ToDo;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.task.ToDo;
 import duke.utils.Ui;
 
 /**
@@ -12,9 +12,12 @@ import duke.utils.Ui;
  */
 
 public class AddCommand extends Command {
-    String taskType;
-    String info;
+    private String taskType;
+    private String info;
 
+    /**
+     * Constructor for AddCommand class
+     */
     public AddCommand(String taskType, String info) {
         this.taskType = taskType;
         this.info = info;

@@ -1,11 +1,12 @@
 package duke.utils;
 
-import duke.exceptions.DukeException;
+import java.util.List;
+import java.util.Scanner;
+
 import duke.task.Task;
 import duke.task.TaskList;
 
-import java.util.List;
-import java.util.Scanner;
+
 
 /**
  * A class that deals with interactions with the user.
@@ -22,8 +23,8 @@ public class Ui {
                 + "|   <  |   <\n"
                 + "|_|\\_\\ |_|\\_\\\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm KK\n" +
-                " What can I do for you?");
+        System.out.println("Hello! I'm KK\n"
+                + " What can I do for you?");
     }
 
     /**
@@ -32,8 +33,8 @@ public class Ui {
      * @return a string that user has input
      */
     public String readCommand() {
-        Scanner scanner = new Scanner(System.in);  // Create a Scanner object
-        String input = scanner.nextLine();  // Read user input
+        Scanner scanner = new Scanner(System.in);
+        String input = scanner.nextLine();
         return input;
     }
 
@@ -67,7 +68,7 @@ public class Ui {
      * @param doneTask the task that has been done.
      */
     public String showDoneMessage(Task doneTask) {
-        String message = "Nice! I've marked this task as done:\n" + doneTask.toString() ;
+        String message = "Nice! I've marked this task as done:\n" + doneTask.toString();
         System.out.println(message);
         return message;
     }
@@ -95,6 +96,11 @@ public class Ui {
         return tasks.printList();
     }
 
+    /**
+     * Displays the list info in the console.
+     *
+     * @param tasks a list of task list
+     */
     public String showListMessage(List<Task> tasks) {
         String message = "";
         int size = tasks.size();
@@ -105,7 +111,7 @@ public class Ui {
         return message;
     }
 
-    public void showLine(){
+    public void showLine() {
         System.out.println("-----------------------");
     }
 

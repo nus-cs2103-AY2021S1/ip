@@ -1,6 +1,12 @@
 package duke.utils;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
 import duke.exceptions.DukeException;
 import duke.task.TaskType;
 
@@ -36,12 +42,12 @@ public class Parser {
             String taskType = parts[0];
             if (TaskType.isTask(taskType)) {
                 if (parts.length < 2 || parts[1].isEmpty()) {
-                    throw new DukeException(String.format("☹ OOPS!!! The description of %s cannot be empty.", parts[0]));
+                    throw new DukeException(String.format("OOPS!!! The description of %s cannot be empty.", parts[0]));
                 } else {
-                    return new AddCommand(parts[0],parts[1]);
+                    return new AddCommand(parts[0], parts[1]);
                 }
             } else {
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         }
     }

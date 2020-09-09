@@ -5,11 +5,18 @@ package duke.task;
  */
 public class Event extends Task {
     private String time;
+
+    /**
+     * Constructor for an Event Task.
+     */
     public Event(String description, String time) {
         super(description);
         this.time = time;
     }
 
+    /**
+     * Constructor for an Event Task.
+     */
     public Event(boolean isDone, String description, String time) {
         super(isDone, description);
         this.time = time;

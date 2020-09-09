@@ -21,7 +21,7 @@ public class FileHelper {
      * @param fileName the name of the file that you wants to read.
      * @return a list of String which every string represents a task in a format.
      */
-    public static List<String> ReadFromFile(String path, String fileName) {
+    public static List<String> readFromFile(String path, String fileName) {
 
         List<String> data = new ArrayList<>();
 
@@ -34,7 +34,7 @@ public class FileHelper {
                     data.add(line);
                 }
             }
-        } catch(IOException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return data;
