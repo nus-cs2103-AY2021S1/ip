@@ -51,6 +51,7 @@ public class FindCommand implements Command {
         ArrayList<String> lines = new ArrayList<>();
         lines.add(Message.FOUND_MSG.getMsg());
         AtomicInteger counter = new AtomicInteger();
+        // filters from the stream, only exact word matches for every task in stream
         allTasks.stream()
                 .filter(task -> this.containsExactWord(task.getDescription(), searchTerm))
                 .forEach(foundTask -> lines.add(counter.incrementAndGet() + ". " + foundTask.toString()));
