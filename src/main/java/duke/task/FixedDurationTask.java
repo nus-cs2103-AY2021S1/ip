@@ -7,6 +7,7 @@ import duke.util.DukeException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.Duration;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.Optional;
 
@@ -25,6 +26,13 @@ public class FixedDurationTask extends Task {
     public FixedDurationTask(String description, String duration) {
         super("F", description);
         this.duration = parseDuration(duration);
+        startDate = Optional.empty();
+        startTime = Optional.empty();
+    }
+
+    public FixedDurationTask(String description, long durationSeconds) {
+        super("F", description);
+        this.duration = Duration.ofSeconds(durationSeconds);
         startDate = Optional.empty();
         startTime = Optional.empty();
     }
@@ -50,6 +58,7 @@ public class FixedDurationTask extends Task {
         if (temp[0].contains("h")) {
             hour = Integer.parseInt(temp[0].split("h")[0]);
             if (temp.length > 1 && temp[1].contains("m")) {
+                System.out.println("Contains m");
                 minute = Integer.parseInt(temp[1].split("m")[0]);
             } else {
                 minute = 0;
@@ -101,4 +110,23 @@ public class FixedDurationTask extends Task {
         return LocalTime.parse(timeString);
     }
 
+    @Override
+    public String getDescription() {
+        return String.format("%s / %s / %s %s", description, duration.getSeconds(),
+                startDate.map(LocalDate::toString).orElse(""),
+                startTime.map(LocalTime::toString).orElse(""));
+    }
+
+    @Override
+    public String toString() {
+        String info = "";
+        if (startDate.isPresent() && startTime.isPresent()) {
+            info += String.format(" (start: %s, %s)",
+                    startDate.get().format(DateTimeFormatter.ofPattern("d MMM")),
+                    startTime.get().format(DateTimeFormatter.ofPattern("h:mm a")));
+        }
+        long sec = duration.getSeconds();
+        info += String.format(" (for: %dh %dm)", sec / 3600, (sec % 3600) / 60);
+        return super.toString() + info;
+    }
 }

@@ -125,8 +125,8 @@ public class Ui {
      */
     public String getSuccessMessage(String type, Task task) throws DukeException {
         StringBuilder sb = new StringBuilder("Okay I've ");
-        assert List.of("add", "remove", "done").contains(type)
-                : "Task manipulation type can only be one of [add, remove, done].";
+        assert List.of("add", "remove", "done", "start").contains(type)
+                : "Task manipulation type can only be one of [add, remove, done, start].";
         switch(type) {
         case "add":
             sb.append("added:");
@@ -137,6 +137,9 @@ public class Ui {
         case "done":
             sb.append("marked this task as done:");
             break;
+        case "start":
+            sb.append("set this task's start date time:");
+            break;
         default:
             throw new DukeException("Unrecognized task manipulation type!");
         }
@@ -145,12 +148,14 @@ public class Ui {
     }
 
     public String getListOfCommands() {
-        String[] commands = new String[] {
+        String[] commands = new String[]{
                 "help", "list", "todo <description>",
                 "event <description> /at <date> [time]",
                 "deadline <description> /by <date> [time]",
-                "done <task number>", "remove <task number>",
-                "remove all", "sort <name/type/datetime>", "bye"
+                "fixed <description> /for <duration>",
+                "done <task no.>", "remove <task no.>",
+                "remove all", "sort <name/type/datetime>",
+                "start <task no.> <date> <time>", "bye"
         };
         StringBuilder sb = new StringBuilder("Here are the available commands:\n");
         for (String command: commands) {

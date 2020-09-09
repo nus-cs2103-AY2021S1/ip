@@ -23,10 +23,10 @@ public class Deadline extends TaskWithDateTime {
     @Override
     public String toString() {
         String dt = String.format(" (by: %s",
-                date.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+                date.format(DateTimeFormatter.ofPattern("d MMM")));
         if (time.isPresent()) {
             dt += String.format(", %s)",
-                    time.get().format(DateTimeFormatter.ofPattern("hh:mm a")));
+                    time.get().format(DateTimeFormatter.ofPattern("h:mm a")));
         } else {
             dt += ")";
         }

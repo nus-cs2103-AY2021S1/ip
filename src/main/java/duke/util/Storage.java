@@ -4,6 +4,7 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.task.Event;
 import duke.task.Deadline;
+import duke.task.FixedDurationTask;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -71,7 +72,7 @@ public class Storage {
             Scanner sc = new Scanner(file);
             while (sc.hasNext()) {
                 String[] t = sc.nextLine().split(",");
-                assert List.of("T", "E", "D").contains(t[0]) : "Subtype should be T, E, or D only";
+                assert List.of("T", "E", "D", "F").contains(t[0]) : "Subtype should be T, E, F, or D only";
 
                 switch (t[0]) {
                 case "T":
@@ -82,6 +83,16 @@ public class Storage {
                     break;
                 case "E":
                     list.add(new Event(t[2], t[3], t[1].equals("1")));
+                    break;
+                case "F":
+                    FixedDurationTask fdt = new FixedDurationTask(t[2], Integer.parseInt(t[3]));
+                    if (t[1].equals("1")) {
+                        fdt.markAsDone();
+                    }
+                    if (t.length > 4) {
+                        fdt.setStartDateTimeFromString(t[4]);
+                    }
+                    list.add(fdt);
                     break;
                 default:
                     throw new DukeException("Corrupted file, previous data will not be loaded!");
@@ -104,14 +115,15 @@ public class Storage {
         try {
             FileWriter fw = new FileWriter(file);
             for (Task t: list) {
-                String toWrite = String.format("%s,%s", t.getType(), (t.getDone() ? "1" : "0"));
+                StringBuilder toWrite = new StringBuilder(
+                        String.format("%s,%s", t.getType(), (t.getDone() ? "1" : "0")));
                 String desc = t.getDescription();
-                if (List.of("D", "E").contains(t.getType())) {
+                if (List.of("D", "E", "F").contains(t.getType())) {
+                    toWrite.append(",");
                     String[] descSplit = desc.split(" / ");
-                    toWrite += "," + descSplit[descSplit.length - 2];
-                    toWrite += "," + descSplit[descSplit.length - 1];
+                    toWrite.append(String.join(",", descSplit));
                 } else {
-                    toWrite += "," + desc;
+                    toWrite.append(",").append(desc);
                 }
                 fw.write(toWrite + "\n");
             }

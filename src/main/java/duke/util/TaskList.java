@@ -1,10 +1,6 @@
 package duke.util;
 
-import duke.task.Task;
-import duke.task.TaskWithDateTime;
-import duke.task.Todo;
-import duke.task.Event;
-import duke.task.Deadline;
+import duke.task.*;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -102,6 +98,15 @@ public class TaskList {
                 throw new DukeException("Invalid " + type + " description!");
             }
             break;
+        case "fixed":
+            try {
+                split = description.split(" /for ");
+                desc = split[0];
+                String duration = split[1];
+                task = new FixedDurationTask(desc, duration);
+            } catch (IndexOutOfBoundsException ioobe) {
+                throw new DukeException("Invalid " + type + " description!");
+            }
         }
         return task;
     }
