@@ -1,15 +1,15 @@
 /**
  * Returns list of tasks.
  */
-public class Ls extends Command {
+public class TaskList extends Command {
 
-    Ls() {
+    TaskList() {
         this.name = "list";
         this.usage = "list";
         this.description = "Lists all the tasks";
     }
 
     public String response() {
-        return DataStorageInterface.listOfTasks();
+        return DataStorageInterface.printListOfTasks();
     }
 }

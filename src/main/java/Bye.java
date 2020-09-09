@@ -9,7 +9,7 @@ public class Bye extends Command {
         this.description = "I will go to sleep";
     }
 
-    public String response() {
+    public String respond() {
         return "I-I'm gonna go sleep Morty, d-dont disturb me anymore unless you " +
                 " wanna get blasted by my *BURRRRRPPP* lazers";
     }

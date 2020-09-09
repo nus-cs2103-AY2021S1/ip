@@ -6,7 +6,7 @@ public abstract class Command {
     protected String usage;
     protected String description;
 
-    Command(){}
+    Command() {}
 
     public String getName() {
         return name;

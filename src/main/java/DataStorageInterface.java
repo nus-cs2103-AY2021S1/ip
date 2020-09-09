@@ -117,9 +117,8 @@ public class DataStorageInterface {
      * @return Task that is added.
      * @throws WrongUsageException If deadline command is used wrongly.
      */
-    public static Task addDeadline(String title,
-                                   String preposition,
-                                   LocalDate date, LocalTime time) throws WrongUsageException {
+    public static Task addDeadline(String title, String preposition, LocalDate date, LocalTime time)
+            throws WrongUsageException {
         Task newTask = new Deadline(title,preposition,date, time);
         DataStorage.taskList.add(newTask);
         return newTask;
@@ -163,7 +162,7 @@ public class DataStorageInterface {
      *
      * @return String representation of all tasks in the task list.
      */
-    public static String listOfTasks() {
+    public static String printListOfTasks() {
         StringBuilder acc = new StringBuilder();
         int i = 0;
         for (Task t: DataStorage.taskList) {
@@ -206,7 +205,13 @@ public class DataStorageInterface {
         throw new UnknownCommandException(query);
     }
 
-    public static String filteredTasks(String searchQuery) {
+    /**
+     * Returns all tasks that contain keyword queried by User.
+     *
+     * @param searchQuery query term by User.
+     * @return String representation of all tasks containing keyword queried by User.
+     */
+    public static String getQueriedTasks(String searchQuery) {
         ArrayList<Task> newTaskList = new ArrayList<>();
         for (Task t: DataStorage.taskList) {
             if (t.getTitle().toLowerCase().contains(searchQuery.toLowerCase())) {
