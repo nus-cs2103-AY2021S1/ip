@@ -28,7 +28,6 @@ public class Storage {
         try {
             File f = new File(this.filePath);
             BufferedReader reader = new BufferedReader(new FileReader(f));
-            //loads txt into ls
             while (true) {
                 String line = reader.readLine();
                 if (line == null || line.isEmpty()) {
@@ -54,6 +53,7 @@ public class Storage {
      * @param ls task list
      */
     void saveFile(TaskList ls) {
+        System.out.println("Saving...");
         File f = new File(this.filePath);
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(f));
