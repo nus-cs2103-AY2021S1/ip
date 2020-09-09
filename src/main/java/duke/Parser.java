@@ -3,7 +3,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
 import duke.task.TimeParser;
-import duke.task.Todo;
+import duke.task.ToDo;
 
 public class Parser {
     private static TaskList taskList;
@@ -146,7 +146,7 @@ public class Parser {
         if (userInput.equals("")) {
             throw new DukeException("The description of a todo cannot be empty.");
         } else {
-            Todo todo = new Todo(userInput);
+            ToDo todo = new ToDo(userInput);
             taskList.addTask(todo);
             return taskList.addedTaskToString(todo);
         }

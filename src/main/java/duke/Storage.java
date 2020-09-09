@@ -12,7 +12,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
-import duke.task.Todo;
+import duke.task.ToDo;
 
 
 public class Storage {
@@ -64,7 +64,7 @@ public class Storage {
     public static void memoryProcessor(String[] data, TaskList taskList) {
         switch (data[0]) {
         case "T":
-            Todo todo = new Todo(data[2]);
+            ToDo todo = new ToDo(data[2]);
             if (data[1].equals("0")) {
                 todo.markAsDone();
             }
