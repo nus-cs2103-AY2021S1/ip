@@ -4,13 +4,13 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import duke.exception.BlankTagException;
-import duke.exception.InvalidIndexException;
 import org.junit.jupiter.api.Test;
 
 import duke.DukeStub;
+import duke.exception.BlankTagException;
 import duke.exception.ExceptionMessage;
 import duke.exception.IncorrectFormatException;
+import duke.exception.InvalidIndexException;
 import duke.ui.UiSideEffects;
 
 public class TagCommandTest {
