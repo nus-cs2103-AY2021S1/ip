@@ -85,8 +85,23 @@ public class Parser {
                     ui.failToFindDetails();
                 } else if(commandFront.equals("todo")){
                     ToDo toDo = new ToDo(Task.TASK_TODO, Task.DOING, portions[1]);
-                    taskList.addTask(toDo);
-                    ui.addTaskSuccessful(toDo, taskList);
+
+                    boolean hasDuplicates = false;
+                    //find duplicates
+                    for(int i = 0; i < taskList.taskCounts; i++){
+                        if (taskList.tasks.get(i).toString().equals(toDo.toString())) {
+                            hasDuplicates = true;
+                            break;
+                        }
+                    }
+                    //add task if no duplicates
+                    if(hasDuplicates){
+                        ui.findDuplicates();
+                    }else {
+                        taskList.addTask(toDo);
+                        ui.addTaskSuccessful(toDo, taskList);
+                    }
+
                 } else if(commandFront.equals("deadline")) {
                     String[] deadlineSplitter = portions[1].split("/by ");
                     if (deadlineSplitter.length == 1) {
@@ -95,8 +110,23 @@ public class Parser {
                         String detail = deadlineSplitter[0];
                         String date = deadlineSplitter[1];
                         Deadline deadline = new Deadline(Task.TASK_DEADLINE, Task.DOING, detail, date);
-                        taskList.addTask(deadline);
-                        ui.addTaskSuccessful(deadline, taskList);
+
+
+                        boolean hasDuplicates = false;
+                        //find duplicates
+                        for(int i = 0; i < taskList.taskCounts; i++){
+                            if (taskList.tasks.get(i).toString().equals(deadline.toString())) {
+                                hasDuplicates = true;
+                                break;
+                            }
+                        }
+                        //add task if no duplicates
+                        if(hasDuplicates){
+                            ui.findDuplicates();
+                        }else {
+                            taskList.addTask(deadline);
+                            ui.addTaskSuccessful(deadline, taskList);
+                        }
                     }
                 }else {
                     String[] eventSplitter = portions[1].split("/at ");
@@ -106,8 +136,23 @@ public class Parser {
                         String detail = eventSplitter[0];
                         String date = eventSplitter[1];
                         Event event = new Event(Task.TASK_EVENT, Task.DOING, detail, date);
-                        taskList.addTask(event);
-                        ui.addTaskSuccessful(event, taskList);
+
+
+                        boolean hasDuplicates = false;
+                        //find duplicates
+                        for(int i = 0; i < taskList.taskCounts; i++){
+                            if (taskList.tasks.get(i).toString().equals(event.toString())) {
+                                hasDuplicates = true;
+                                break;
+                            }
+                        }
+                        //add task if no duplicates
+                        if(hasDuplicates){
+                            ui.findDuplicates();
+                        }else {
+                            taskList.addTask(event);
+                            ui.addTaskSuccessful(event, taskList);
+                        }
                     }
                 }
                 Storage.updateTasks(taskList.getTaskCounts(), taskList.tasks, filePath);

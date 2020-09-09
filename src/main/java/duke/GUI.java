@@ -115,6 +115,10 @@ public class GUI {
         return "Sorry, I could not answer that ..";
     }
 
+    public String findDuplicates() {
+        return "Sorry, this task is already added..";
+    }
+
     /**
      * Returns the relevant task to the key word
      *

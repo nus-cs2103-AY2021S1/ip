@@ -159,6 +159,12 @@ public class Ui {
         System.out.println("Sorry, I could not answer that ..");
     }
 
+    public void findDuplicates() {
+        System.out.println("Ka To:");
+        System.out.println(" ");
+        System.out.println("Sorry, this task is already added..");
+    }
+
     /**
      * Prints the relevant task to the key word
      *
