@@ -56,6 +56,8 @@ public class Ui {
                     "to do an unknown task.");
         }
 
+        assert TaskList.taskStorage.get(ref) != null;
+
         Task done = TaskList.taskStorage.get(ref).markAsDone();
         TaskList.taskStorage.remove(TaskList.taskStorage.get(ref));
         TaskList.taskStorage.add(ref, done);
@@ -74,6 +76,14 @@ public class Ui {
 
         int ref = Integer.parseInt(Character.toString(
                 input.charAt(Parser.DEL_VALID.length() - 1))) - 1;
+
+        if (TaskList.taskStorage.get(ref) == null) {
+            return ("I am afraid that it is not possible" +
+                    "to delete an unknown task.");
+        }
+
+        assert TaskList.taskStorage.get(ref) != null;
+
         TaskList.delete(ref);
         Storage.write(TaskList.taskStorage);
 
@@ -127,6 +137,10 @@ public class Ui {
 
         String dateAndTime = input.substring(input.indexOf("/")
                 + Parser.BYORAT.length());
+
+        assert (dateAndTime.contains("-") && dateAndTime.contains(":"))
+                : "Invalid date or time format \n please follow this: 2020-02-02 18:00";
+
         byOrAt = new DateAndTime(dateAndTime);
         correctedInput = input.substring(Parser.EVT_VALIDATION.length());
         TaskList.write(correctedInput, Parser.EVT, byOrAt);
@@ -156,6 +170,10 @@ public class Ui {
 
         String dateAndTime = input.substring(input.indexOf("/")
                 + Parser.BYORAT.length());
+
+        assert (dateAndTime.contains("-") && dateAndTime.contains(":"))
+                : "Invalid date or time format \n please follow this: 2020-02-02 18:00";
+
         byOrAt = new DateAndTime(dateAndTime);
         correctedInput = input.substring(Parser.DDL_VALIDATION.length());
         TaskList.write(correctedInput, Parser.DDL, byOrAt);
