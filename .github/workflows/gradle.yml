@@ -19,7 +19,7 @@ jobs:
     - name: Set up repository
       uses: actions/checkout@master
       with:
-      ref: master
+        ref: master
 
     - name: Merge to master
       run: git checkout --progress --force ${{ github.sha }}
@@ -32,6 +32,5 @@ jobs:
       with:
         java-version: '11'
         java-package: jdk+fx
-
     - name: Build and check with Gradle
       run: ./gradlew check
