@@ -19,11 +19,16 @@ public class Parser {
     public final static String EMPTY = " ";
     public final static String BYORAT = "/by ";
     public final static String FIND = "find";
+    public final static String REMINDER = "reminder";
 
     /**
      * Constructs a Parser object to tackle the user inputs/commands.
      */
     public Parser() {
+    }
+
+    public boolean isReminder(String input){
+        return input.contains(REMINDER);
     }
 
     public boolean isBye(String input) {

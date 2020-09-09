@@ -33,6 +33,14 @@ public class DateAndTime {
 
     }
 
+    public LocalDate getDate(){
+        return this.date;
+    }
+
+    public LocalTime getTime(){
+        return this.time;
+    }
+
     /**
      * Overridden toString() method to print out the desired format of date and time.
      *

@@ -52,9 +52,9 @@ public class TaskList {
      */
     public static String read() {
         String starter = "Here are the tasks in your list:\n" ;
-        String content = "";
+        StringBuilder content = new StringBuilder();
         for (int i = 0; i < taskStorage.size(); i++) {
-            content = content + ((i + 1) + "." + taskStorage.get(i)) + "\n";
+            content.append(i + 1).append(".").append(taskStorage.get(i)).append("\n");
         }
         return starter + content;
     }
@@ -86,17 +86,55 @@ public class TaskList {
     public static String find(String feature) {
 
         String starter = "Here are the matching tasks in your list:\n";
-        String content = "";
+        StringBuilder content = new StringBuilder();
 
         for (Task task : TaskList.taskStorage) {
             if (task.description.contains(feature)) {
-                content = content + (task) + "\n";
+                content.append(task).append("\n");
+            }
+        }
+        return starter + content;
+    }
+
+    /**
+     *
+     * @return
+     */
+    public static String remind(){
+
+        ArrayList<Deadline> mostUrgent = new ArrayList<>(0);
+
+        for(Task task : TaskList.taskStorage){
+
+            if(task instanceof Deadline){
+
+                 if(mostUrgent.isEmpty()){
+                     mostUrgent.add((Deadline) task);
+                 }
+
+                 if(((Deadline) task).compareTo(mostUrgent.get(0)) < 0){
+                     mostUrgent.remove(0);
+                     mostUrgent.add((Deadline) task);
+                 }
+
+                 if(((Deadline) task).compareTo(mostUrgent.get(0)) == 0){
+                     mostUrgent.add((Deadline) task);
+                 }
             }
         }
 
+        if(mostUrgent.isEmpty()){
+            return ("Nice ! No upcoming deadline :). ");
+        }
+
+        String starter = "Your nearest deadline is: \n";
+        StringBuilder content = new StringBuilder();
+
+        for (Deadline deadline : mostUrgent) {
+            content.append(deadline).append("\n");
+        }
+
         return starter + content;
-
     }
-
 
 }
