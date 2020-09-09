@@ -1,16 +1,43 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * Encapsulates a parser class, supports the function to parse the user input into a command.
+ */
 public class Parser {
+
+    final static String BYE = "bye";
+    final static String LIST = "list";
+    final static String DONE = "done";
+    final static String DELETE = "delete";
+    final static String FIND = "find";
+    final static String TODO = "todo";
+    final static String DEADLINE = "deadline";
+    final static String EVENT = "event";
     
-    private static int getTaskIndex(String input, String command) throws DukeException {
-        int indexPosition = command.equals("done") ? 5 : command.equals("delete") ? 7 : 0;
-        
-        if (input.equals(command) || input.equals(command + " ")) {
+
+    /**
+     * Returns a task index for a done or delete user input.
+     *
+     * @param input       user input.
+     * @param commandType type of command, either a done or delete.
+     * @return an integer representing a task index.
+     * @throws DukeException if input has an invalid format.
+     */
+    private static int getTaskIndex(String input, String commandType) throws DukeException {
+
+        final int TASK_INDEX_POSITION = commandType.equals(DONE)
+                ? 5
+                : commandType.equals(DELETE)
+                ? 7
+                : 0;
+        assert TASK_INDEX_POSITION != 0 : "Command type should be done or delete.";
+
+        if (input.equals(commandType) || input.equals(commandType + " ")) {
             throw new InvalidTaskIndexException(input);
-        } else if (input.startsWith(command + " ") && input.length() > indexPosition) {
+        } else if (input.startsWith(commandType + " ") && input.length() > TASK_INDEX_POSITION) {
             try {
-                return Integer.parseInt(input.substring(indexPosition));
+                return Integer.parseInt(input.substring(TASK_INDEX_POSITION));
             } catch (NumberFormatException e) {
                 throw new InvalidTaskIndexException(input);
             }
@@ -18,75 +45,105 @@ public class Parser {
             throw new DukeException();
         }
     }
-    
+
+    /**
+     * Takes in a user input starting with 'done' and returns a done command.
+     * @param input user input that starts with 'done'.
+     * @return a done command.
+     * @throws DukeException if user input has an invalid format.
+     */
     private static DoneCommand done(String input) throws DukeException {
-        return new DoneCommand(getTaskIndex(input, "done"));
+        return new DoneCommand(getTaskIndex(input, DONE));
     }
 
+    /**
+     * Takes in a user input starting with 'delete' and returns a delete command.
+     * @param input user input that starts with 'delete'.
+     * @return a delete command.
+     * @throws DukeException if user input has an invalid format.
+     */
     private static DeleteCommand delete(String input) throws DukeException {
-        return new DeleteCommand(getTaskIndex(input, "delete"));
+        return new DeleteCommand(getTaskIndex(input, DELETE));
     }
-    
+
+    /**
+     * Takes in a user input starting with 'find' and returns a find command.
+     * @param input user input that starts with 'find'.
+     * @return a find command.
+     * @throws DukeException if user input has an invalid format.
+     */
     private static FindCommand find(String input) throws DukeException {
-        if (input.equals("find") || input.equals("find ")) {
-            throw new EmptyDescriptionException("find");
-        } else if (input.startsWith("find ") && input.length() > 5) {
-            return new FindCommand(input.substring(5));
+        final int KEYWORD_INDEX = 5;
+
+        if (input.equals(FIND) || input.equals(FIND + " ")) {
+            throw new EmptyDescriptionException(FIND);
+        } else if (input.startsWith(FIND + " ") && input.length() > KEYWORD_INDEX) {
+            return new FindCommand(input.substring(KEYWORD_INDEX));
         } else {
             throw new DukeException();
         }
     }
 
+    /**
+     * Takes in a user input starting with 'todo' and returns an add command that adds a new todo.
+     * @param input user input that starts with 'todo'.
+     * @return an add command.
+     * @throws DukeException if user input has an invalid format.
+     */
     private static AddCommand newTodo(String input) throws DukeException {
-        if (input.equals("todo") || input.equals("todo ")) {
-            throw new EmptyDescriptionException("todo");
-        } else if (input.startsWith("todo ") && input.length() > 5) {
-            Todo newTodo = new Todo(input.substring(5));
+        final int DESCRIPTION_INDEX = 5;
+
+        if (input.equals(TODO) || input.equals(TODO + " ")) {
+            throw new EmptyDescriptionException(TODO);
+        } else if (input.startsWith(TODO + " ") && input.length() > DESCRIPTION_INDEX) {
+            Todo newTodo = new Todo(input.substring(DESCRIPTION_INDEX));
             return new AddCommand(newTodo);
         } else {
             throw new DukeException();
         }
     }
 
-    private static AddCommand newDeadline(String input) throws DukeException {
-        if (input.equals("deadline") || input.equals("deadline ")) {
-            throw new EmptyDescriptionException("deadline");
-        } else if (input.startsWith("deadline ") && input.length() > 9) {
-            if (!input.contains(" /by ")) {
-                throw new InvalidDateTimeException("deadline");
-            } else {
-                int index = input.indexOf(" /by ");
-                String description = input.substring(9, index);
-                String date = input.substring(index + 5);
-                try {
-                    LocalDate deadlineDate = LocalDate.parse(date);
-                    Deadline newDeadline = new Deadline(description, deadlineDate);
-                    return new AddCommand(newDeadline);
-                } catch (DateTimeParseException e) {
-                    throw new InvalidDateTimeException("deadline");
-                }
-            }
-        } else {
-            throw new DukeException();
-        }
-    }
+    /**
+     * Creates an add command for tasks with timings. Takes in a user input starting with 'deadline' or
+     * 'event' and returns an add command for those tasks.
+     * @param input user input that starts with 'deadline' or 'event'.
+     * @return an add command.
+     * @throws DukeException if user input has an invalid format.
+     */
+    private static AddCommand newTaskWithTiming(String input, String taskType) throws DukeException {
+        final int DESCRIPTION_INDEX = taskType.equals(DEADLINE)
+                ? 9
+                : taskType.equals(EVENT)
+                    ? 6
+                    : 0;
+        final int TIME_INDEX = 5;
+        final String TIME_DESCRIPTOR = taskType.equals(DEADLINE)
+                ? " /by "
+                : taskType.equals(EVENT)
+                    ? " /at "
+                    : "";
+        assert DESCRIPTION_INDEX != 0 : "Task type should deadline or event.";
 
-    private static AddCommand newEvent(String input) throws DukeException {
-        if (input.equals("event") || input.equals("event ")) {
-            throw new EmptyDescriptionException("event");
-        } else if (input.startsWith("event ") && input.length() > 6) {
-            if (!input.contains(" /at ")) {
-                throw new InvalidDateTimeException("event");
+        if (input.equals(taskType) || input.equals(taskType + " ")) {
+            throw new EmptyDescriptionException(taskType);
+        } else if (input.startsWith(taskType + " ") && input.length() > DESCRIPTION_INDEX) {
+            if (!input.contains(TIME_DESCRIPTOR)) {
+                throw new InvalidDateTimeException(taskType);
             } else {
-                int index = input.indexOf(" /at ");
-                String description = input.substring(6, index);
-                String date = input.substring(index + 5);
+                int index = input.indexOf(TIME_DESCRIPTOR);
+                String description = input.substring(DESCRIPTION_INDEX, index);
+                String date = input.substring(index + TIME_INDEX);
                 try {
                     LocalDate eventDate = LocalDate.parse(date);
-                    Event newEvent = new Event(description, eventDate);
-                    return new AddCommand(newEvent);
+                    Task newTask;
+                    if (taskType.equals(DEADLINE)) {
+                        newTask = new Deadline(description, eventDate);
+                    } else {
+                        newTask = new Event(description, eventDate);
+                    }
+                    return new AddCommand(newTask);
                 } catch (DateTimeParseException e) {
-                    throw new InvalidDateTimeException("event");
+                    throw new InvalidDateTimeException(taskType);
                 }
             }
         } else {
@@ -94,23 +151,49 @@ public class Parser {
         }
     }
 
+    /**
+     * Takes in a user input starting with 'deadline' and returns an add command.
+     * @param input user input that starts with 'deadline'.
+     * @return an add command.
+     * @throws DukeException if user input has an invalid format.
+     */
+    private static AddCommand newDeadline(String input) throws DukeException {
+        return newTaskWithTiming(input, DEADLINE);
+    }
+
+    /**
+     * Takes in a user input starting with 'event' and returns an add command.
+     * @param input user input that starts with 'event'.
+     * @return an add command.
+     * @throws DukeException if user input has an invalid format.
+     */
+    private static AddCommand newEvent(String input) throws DukeException {
+        return newTaskWithTiming(input, EVENT);
+    }
+
+    /**
+     * Parses the user's input and returns the corresponding command.
+     * @param input user's input
+     * @return a command
+     * @throws DukeException if user input has an invalid format.
+     */
     static Command parse(String input) throws DukeException {
-        if (input.equals("bye")) {
+        if (input.equals(BYE)) {
             return new ExitCommand();
-        } else if (input.equals("list") || input.equals("list ")) {
+        } else if (input.equals(LIST) || input.equals(LIST + " ")) {
             return new ListCommand();
         } else {
-            if (input.startsWith("done")) {
+            if (input.startsWith(DONE)) {
                 return done(input);
-            } else if (input.startsWith("delete")) {
+            } else if (input.startsWith(DELETE)) {
                 return delete(input);
-            } else if (input.startsWith("find")) {
+            } else if (input.startsWith(FIND)) {
                 return find(input);
-            } else if (input.startsWith("todo")) {
+            } else if (input.startsWith(TODO)) {
                 return newTodo(input);
-            } else if (input.startsWith("deadline")) {
+            } else if (input.startsWith(DEADLINE)) {
                 return newDeadline(input);
-            } else if (input.startsWith("event")) {
+            } else if (input.startsWith(EVENT)) {
                 return newEvent(input);
             } else {
                 throw new DukeException();
