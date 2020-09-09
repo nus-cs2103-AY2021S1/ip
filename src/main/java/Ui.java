@@ -3,12 +3,6 @@ import java.util.Scanner;
 
 public class Ui {
     
-    private final Scanner sc;
-    
-    public Ui() {
-        sc = new Scanner(System.in);
-    }
-    
     public String showLoadingError() {
         return "ERROR: file does not exist.";
     }
@@ -30,10 +24,6 @@ public class Ui {
 
     public String showBye() {
         return "Bye. Hope to see you again soon!";
-    }
-
-    public String readCommand() {
-        return sc.nextLine();
     }
     
     public String showLine() {
@@ -60,14 +50,13 @@ public class Ui {
         StringBuilder display = new StringBuilder();
         if (taskList.taskListLength() == 0) {
             return "You have no tasks!";
-        }
-        for (int i = 0; i < taskList.taskListLength(); i++) {
-            if (i == 0) {
-                display.append("Here are the tasks in your list:\n");
+        } else {
+            display.append("Here are the tasks in your list:\n");
+            for (int i = 0; i < taskList.taskListLength(); i++) {
+                Task task = taskList.getTaskList().get(i);
+                display.append(i + 1).append(". ").append(task).append("\n");
             }
-            Task task = taskList.getTaskList().get(i);
-            display.append(i + 1).append(". ").append(task).append("\n");
-        }
+        }    
         return display.toString();
     } 
 }

@@ -45,7 +45,8 @@ public class Parser {
      * @return an integer which represents the index of the task.
      */
     public static int parseDone(String s) {
-        int index = Integer.parseInt(s.substring(5));
+        final int DONE = 5;
+        int index = Integer.parseInt(s.substring(DONE));
         return index - 1;
     }
 
