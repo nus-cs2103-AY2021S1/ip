@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import duke.DukeException;
-import duke.util.Parser;
 import duke.util.MagicStrings;
+import duke.util.Parser;
 
 /**
  * Represents a list of tasks.

@@ -69,7 +69,7 @@ public class Ui {
         }
 
         for (int i = 0; i < tasks.size(); i++) {
-            str.append(printTask(tasks.get(i), i+1));
+            str.append(printTask(tasks.get(i), i + 1));
         }
         return str.toString();
     }

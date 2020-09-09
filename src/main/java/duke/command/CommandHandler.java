@@ -1,17 +1,27 @@
 package duke.command;
 
 import duke.DukeException;
-import duke.ui.Ui;
-import duke.task.TaskList;
-import duke.util.Parser;
 import duke.util.MagicStrings;
+import duke.util.Parser;
+import duke.task.TaskList;
+import duke.ui.Ui;
 
+/**
+ * Handles user's input as command to be executed.
+ */
 public class CommandHandler {
     private Ui ui;
     private TaskList tasks;
     private StringBuilder log;
     private String command;
 
+    /**
+     * Constructor
+     *
+     * @param command User's command input.
+     * @param ui Duke's UI.
+     * @param tasks Duke's Task List.
+     */
     public CommandHandler(String command, Ui ui, TaskList tasks) {
         this.command = command;
         this.ui = ui;
@@ -19,6 +29,9 @@ public class CommandHandler {
         this.log = new StringBuilder();
     }
 
+    /**
+     * Executes user's commands and updates the activity log.
+     */
     public void execute() {
         try {
             String[] split = Parser.splitCommand(command);
@@ -59,8 +72,10 @@ public class CommandHandler {
         assert log.length() != 0;
     }
 
+    /**
+     * @return Activity log.
+     */
     public String getLog() {
         return log.toString();
     }
 }
-

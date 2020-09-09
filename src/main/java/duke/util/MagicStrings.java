@@ -27,5 +27,5 @@ public class MagicStrings {
     public static final String HEADER_TASK_NONE = "You have no task in your list. :D\n";
     public static final String HEADER_TASK_ADD = "Okay! I've added this task:";
     public static final String HEADER_TASK_DONE = "Nice! I've marked this task as done:\n\t\t";
-    public static final String HEADER_TASK_DELETE= "Okay! I've removed this task:\n\t\t";
+    public static final String HEADER_TASK_DELETE = "Okay! I've removed this task:\n\t\t";
 }
