@@ -69,13 +69,8 @@ public class TaskList {
      * @return ArrayList of tasks containing keyword.
      */
     public ArrayList<Task> searchFor(String keyword) {
-        ArrayList<Task> searchResult = new ArrayList<>();
-        for (Task currTask : this.tasks) {
-            String currTaskName = currTask.getTaskName();
-            if (currTaskName.contains(keyword)) {
-                searchResult.add(currTask);
-            }
-        }
+        ArrayList<Task> searchResult = new ArrayList<>(this.tasks);
+        searchResult.removeIf(currTask -> !currTask.getTaskName().contains(keyword));
         return searchResult;
     }
 
