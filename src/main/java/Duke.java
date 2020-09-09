@@ -40,6 +40,12 @@ public class Duke {
         return ui.greet();
     }
 
+    /**
+     * Reads from user's command line and creates a Duke object and starts the process.
+     *
+     * @param args User's command line.
+     * @throws IOException
+     */
     public static void main(String[] args) throws IOException {
         String home = System.getProperty("user.home");
         boolean fileExists = new java.io.File(home + "/iP/File.txt").exists();

@@ -23,7 +23,7 @@ public class TaskList {
         int size = list.size();
         String string = "";
         for (int i = 1; i <= size; i++) {
-            string += "\n"+i+". "+list.get(i-1);
+            string += "\n" + i + ". " + list.get(i - 1);
         }
         return string;
     }
