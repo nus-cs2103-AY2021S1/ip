@@ -13,39 +13,46 @@ public class TextAndTaskConverter {
      */
     public static Task convertTextToTask(String text) {
         String[] splitLine = text.split(" ## ");
-        String description = splitLine[2];
+        String done = splitLine[1];
+        String priority = splitLine[2];
+        String description = splitLine[3];
 
-        if (splitLine.length == 3) {
+
+        if (splitLine.length == 4) {
             Todo task = new Todo(description);
-            if (splitLine[1].trim().equals("1")) {
+            if (done.trim().equals("1")) {
                 task.setDone();
             }
+            task.setPriority(Integer.parseInt(priority));
             return task;
 
-        } else if (splitLine.length == 4) {
+        } else if (splitLine.length == 5) {
             Task task = null;
             String taskType = splitLine[0].trim();
 
             if (taskType.equals("D")) {
-                LocalDate date = LocalDate.parse(splitLine[3]);
+                LocalDate date = LocalDate.parse(splitLine[4]);
                 task = new Deadline(description, date);
 
-                if (splitLine[1].equals("1")) {
+                if (done.equals("1")) {
                     task.setDone();
                 }
 
             } else if (taskType.equals("E")) {
-                String[] dateAndTime = splitLine[3].split(" ", 2);
+                String[] dateAndTime = splitLine[4].split(" ", 2);
 
                 LocalDate date = LocalDate.parse(dateAndTime[0]);
                 LocalTime time = LocalTime.parse(dateAndTime[1]);
 
                 task = new Event(description, date, time);
 
-                if (splitLine[1].equals("1")) {
+                if (done.equals("1")) {
                     task.setDone();
                 }
             }
+
+            assert task != null;
+            task.setPriority(Integer.parseInt(priority));
             return task;
 
         } else {

@@ -5,10 +5,12 @@ public class Task {
 
     private final String description;
     public boolean isDone;
+    private int priority = 3; //set to lowest priority
 
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.priority = priority;
     }
 
     public String getStatusIcon() {
@@ -27,8 +29,16 @@ public class Task {
         this.isDone = true;
     }
 
+    public void setPriority(int priority) {
+        this.priority = priority;
+    }
+
+    public int getPriority() {
+        return this.priority;
+    }
+
     @Override
     public String toString() {
-        return getStatusIcon() + this.description;
+        return getStatusIcon() + this.priority + this.description;
     }
 }

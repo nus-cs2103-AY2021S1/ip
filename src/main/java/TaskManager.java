@@ -35,6 +35,10 @@ public class TaskManager {
         return taskList;
     }
 
+    public void setTaskPriority(int taskNum, int priority) {
+        taskList.get(taskNum - 1).setPriority(priority);
+    }
+
     /**
      * Removes a task from the list.
      * @param taskNum number of tasks in the list.
