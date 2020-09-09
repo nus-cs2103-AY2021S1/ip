@@ -54,14 +54,8 @@ public class Cait {
         }
     }
 
-    protected String printLine() {
-        return "\n*********************************\n";
-    }
-
     protected String getResponse(String input) {
-        //String result = printLine();
         String result = parser.manageTask(input);
-        //result += printLine();
         return result;
     }
 

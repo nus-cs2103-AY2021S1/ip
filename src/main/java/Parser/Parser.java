@@ -7,14 +7,12 @@ import java.io.IOException;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.HashMap;
 
 import dukeexception.DukeException;
 import storage.Storage;
 import tasklist.TaskList;
 import tasks.Deadline;
 import tasks.Event;
-import tasks.Task;
 import tasks.Todo;
 
 /**
@@ -27,8 +25,6 @@ public class Parser {
 
     /** Tasklist for dealing with the user's data */
     protected TaskList tasks;
-
-    protected HashMap<String, Task> commandList = new HashMap<String, Task>();
 
     /**
      * Constructs a new Parser object.
@@ -124,13 +120,6 @@ public class Parser {
                 reply += setMultipleDoneTask(indexes);
                 reply += "Task marked as done! Good job!";
 
-                //int index = parseInt(command.split(" ")[1]);
-                //storage.setDoneLine(index);
-                //String doneTask = storage.printLine(index);
-                //doneTask = storage.processLine(doneTask);
-                //assert index > 0;
-                //reply += doneTask;
-
             } catch (IndexOutOfBoundsException e) {
                 reply = printIndexOutOfBounds();
             } catch (NumberFormatException e) {
@@ -183,14 +172,7 @@ public class Parser {
                     reply = tasks.getFromList(i).toString();
                 }
 
-                //sort list
                 Arrays.sort(indexes, Collections.reverseOrder());
-                //int index = parseInt(command.split(" ")[1]);
-                //String deletedTask = storage.printLine(index);
-                //deletedTask = storage.processLine(deletedTask);
-                //storage.deleteFromFile(index);
-
-                //assert index > 0;
 
                 reply = "Deleting tasks...\n";
                 reply += deleteMultipleTasks(indexes);
@@ -327,11 +309,6 @@ public class Parser {
         return reply;
     }
 
-    protected String undoTask(String command) {
-        String reply = "";
-        return reply;
-    }
-
     /**
      * Reads the user's input and manages it according to the input.
      * @param command the input given by the user
@@ -367,9 +344,6 @@ public class Parser {
                 break;
             case "find":
                 reply = handleFind(command);
-                break;
-            case "undo":
-                reply = undoTask(command);
                 break;
             default:
                 reply = "Sorry! I don't understand that command. Please try again!";

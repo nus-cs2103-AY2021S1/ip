@@ -1,7 +1,5 @@
 package tasklist;
 
-import static java.lang.Integer.parseInt;
-
 import java.util.ArrayList;
 
 import storage.Storage;
@@ -92,7 +90,6 @@ public class TaskList {
     public void setDoneList(int index) {
         //exceptions are already caught in handleDone() method in Parser class
         try {
-            //int index = parseInt(command.split(" ")[1]);
             Task doneTask = tasks.get(index - 1);
             assert index > 0;
             doneTask.markAsDone();
@@ -111,7 +108,6 @@ public class TaskList {
     public void deleteList(int index) {
         //exceptions are already caught in handleDelete() method in Parser class
         try {
-            //int index = parseInt(command.split(" ")[1]);
             tasks.remove(index - 1);
             assert index > 0;
         } catch (IndexOutOfBoundsException e) {
