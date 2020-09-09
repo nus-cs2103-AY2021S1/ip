@@ -24,8 +24,9 @@ public class Storage {
      */
     public Storage(String filePath) throws IOException {
         File tempFile = new File(filePath);
+        boolean fileNonExistent = !tempFile.exists();
 
-        if (!tempFile.exists()) {
+        if (fileNonExistent) {
             tempFile.createNewFile();
         }
         this.file = tempFile;

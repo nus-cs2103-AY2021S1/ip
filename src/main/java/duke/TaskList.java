@@ -82,13 +82,13 @@ public class TaskList {
      * @return Int number of number of Tasks
      */
     private int getNumOfDoneTask() {
-        int num = 0;
+        int numOfDoneTask = 0;
         for (Task task : list) {
             if (task.checkIsDone()) {
-                num++;
+                numOfDoneTask++;
             }
         }
-        return num;
+        return numOfDoneTask;
     }
 
     /**

@@ -36,9 +36,17 @@ public class EventCommand extends Command {
      */
     private String setDate(String date) throws InvalidDateTimeException {
         String[] split = date.split("/");
-        if (date.length() != 10 || split.length != 3) {
+
+        boolean isIncorrectLength = date.length() != 10;
+        boolean isIncorrectFormat = split.length != 3;
+        boolean isInvalidDate = isIncorrectLength || isIncorrectFormat;
+        boolean isValidDate = !isInvalidDate;
+
+        if (isInvalidDate) {
             throw new InvalidDateTimeException();
         }
+
+        assert isValidDate;
         String setDate = split[0] + "-" + split[1] + "-" + split[2];
         return setDate;
     }
@@ -50,9 +58,15 @@ public class EventCommand extends Command {
      * @throws InvalidDateTimeException
      */
     private String setTime(String time) throws InvalidDateTimeException {
-        if (time.length() != 4) {
+
+        boolean isIncorrectLength = time.length() != 4;
+        boolean isValidTime = !isIncorrectLength;
+
+        if (isIncorrectLength) {
             throw new InvalidDateTimeException();
         }
+
+        assert isValidTime;
         String setTime = time.substring(0, 2) + ":" + time.substring(2);
         return setTime;
     }

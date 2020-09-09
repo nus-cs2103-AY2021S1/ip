@@ -121,8 +121,15 @@ public class Ui {
         show("Update file failed");
     }
 
+    /**
+     * Show tasks found.
+     * @param input
+     * @param tasksFound
+     * @return
+     */
     public static String showTaskFound(String input, String tasksFound) {
-        return show("Here are the matching tasks in your list:\n", tasksFound);
+        return show("Here are the matching tasks in your list that contains \""
+                +  input + "\":\n", tasksFound);
     }
 
     public static String showNoTaskFound(String input) {

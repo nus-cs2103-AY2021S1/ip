@@ -28,9 +28,7 @@ public class TodoCommand extends Command {
         }
 
         assert isValidInput;
-        this.input = input.startsWith(" ")
-                ? input.substring(1)
-                : input;
+        this.input = input.trim();
     }
 
     @Override

@@ -33,6 +33,13 @@ public class Task {
     }
 
     /**
+     * Mark Task as not done.
+     */
+    public void markAsNotDone() {
+        this.isDone = false;
+    }
+
+    /**
      * Check Task isDone status.
      * @return  boolean value
      */
