@@ -23,14 +23,22 @@ public class Storage {
      */
     public void writeToFile(Task task) throws IOException {
         FileWriter fw = new FileWriter(this.filePath, true);
-        if (task instanceof Todo) {
-            fw.write(((Todo) task).getIdentifier() + " | " + (task.getDone() ? 1 : 0) + " | " + task.getDescription() + "\n");
-        } else if (task instanceof Deadline) {
-            fw.write(((Deadline) task).getIdentifier() + " | " + (task.getDone() ? 1 : 0) + " | " + task.getDescription() + "| " + ((Deadline) task).getDate() + "\n");
-        } else {
-            fw.write(((Event) task).getIdentifier() + " | " + (task.getDone() ? 1 : 0) + " | " + task.getDescription() + "| " + ((Event) task).getDate() + "\n");
+
+        String writtenTask = task.getIdentifier() + describeTask(task);
+
+        if (task instanceof Deadline) {
+            writtenTask += ((Deadline) task).getDate();
         }
+        else if (task instanceof Event) {
+            writtenTask += ((Event) task).getDate();
+        }
+        else writtenTask += "\n"; //adds a new line
+        fw.write(writtenTask);
         fw.close();
+    }
+
+    public static String describeTask(Task task) {
+        return " | " + (task.getDone() ? 1 : 0) + " | " + task.getDescription();
     }
 
     /**

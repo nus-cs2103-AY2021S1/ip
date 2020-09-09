@@ -17,3 +17,8 @@ T | 0 | live life
 T | 0 | enjoy life
 T | 1 | read a book
 T | 0 | borrow book
+T | 0 | enjoy life
+D | 0 | homework 
+T | 0 | enjoy life
+D | 0 | homework 
+Aug 8 2020

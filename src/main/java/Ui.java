@@ -11,7 +11,7 @@ public class Ui {
      *
      * @return String of a greeting
      */
-    public String Greet() {
+    public String greet() {
         String greeting = "Hello! I'm Duke. What can I do for you?";
         return greeting;
 

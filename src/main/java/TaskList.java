@@ -74,6 +74,7 @@ public class TaskList {
         StringBuilder sb = new StringBuilder();
         int counter = 0;
         sb.append("Here are the matching tasks in your list:\n");
+
         for (Task t : taskArrayList) {
             if (t.getDescription().contains(substring)) {
                 counter++;
