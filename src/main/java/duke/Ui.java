@@ -51,8 +51,10 @@ public class Ui {
                 + "\n     5.done <task index> -- mark this task as done"
                 + "\n     6.delete <task index> -- mark this task from task list"
                 + "\n     7.find <keyword> -- find all tasks in the task list which contains the keyword"
-                + "\n     8.help -- show all commands"
-                + "\n     9.bye -- exit the chatbot"
+                + "\n     8.archive <task index> -- archive this task"
+                + "\n     8.list archive -- show all archived tasks"
+                + "\n     9.help -- show all commands"
+                + "\n     10.bye -- exit the chatbot"
                 + "\n" + DIVIDER_HELP + "\n";
         System.out.println(commandList);
         return commandList;
@@ -191,6 +193,36 @@ public class Ui {
         return getAllTasks(tasks, outputMsg);
     }
 
+    public static String getAllArchivedTasksMsg(ArrayList<Task> tasks) {
+        String outputMsg = "";
+        if (tasks.isEmpty()) {
+            outputMsg = DIVIDER
+                    + "\n (⊙ ‿ ⊙)"
+                    + "\n Archived task list is empty, there's no archived task yet."
+                    + "\n" + DIVIDER + "\n";
+            System.out.println(outputMsg);
+            return outputMsg;
+        }
+
+        outputMsg = DIVIDER
+                + "\n (⊙ ‿ ⊙)"
+                + "\n You have " + tasks.size() + " archived tasks in total."
+                + "\n Here they are:";
+        System.out.println(outputMsg);
+        return getAllTasks(tasks, outputMsg);
+    }
+
+    public static String getAddingArchiveTaskMsg(Task taskToArchive, ArchivedTaskList archivedTasks) {
+        String outputMsg = DIVIDER
+                + "\n (ಠ‿↼)"
+                + "\n Noted. This task has been archived from your task list:"
+                + "\n      Task " + taskToArchive
+                + "\n Now you have " + archivedTasks.getTaskListSize() + " tasks in the archived task list."
+                + "\n" + DIVIDER + "\n";
+        System.out.println(outputMsg);
+        return outputMsg;
+    }
+
     /**
      * Prints and returns out all tasks that match the keyword stored in the task list.
      *
@@ -226,4 +258,5 @@ public class Ui {
         System.out.println(outputMsg);
         return outputMsg;
     }
+
 }

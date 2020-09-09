@@ -12,14 +12,16 @@ import java.util.ArrayList;
  */
 public class Storage {
     private final String filePath;
+    private final String archivedFilePath;
 
     /**
      * Storage class construction.
      *
      * @param filePath A string of file path to store the task list.
      */
-    public Storage(String filePath) {
+    public Storage(String filePath, String archivedFilePath) {
         this.filePath = filePath;
+        this.archivedFilePath = archivedFilePath;
     }
 
     /**
@@ -86,6 +88,52 @@ public class Storage {
             fileWriter = new FileWriter(file, false);
 
             for (Task task : tasks) {
+                fileWriter.write(task.writeToFile() + "\n");
+            }
+            fileWriter.close();
+        } catch (IOException e) {
+            Warnings.getInvalidFileOutputMsg(e);
+        }
+    }
+
+    public ArrayList<Task> loadArchivedTasks() {
+        assert !archivedFilePath.isEmpty() : "Archived data filePath is missing.";
+        ArrayList<Task> archivedTasks = new ArrayList<>();
+        try {
+            File archivedFile = new File(archivedFilePath);
+            if (archivedFile.exists()) {
+                FileReader fileReader = new FileReader(archivedFile);
+                BufferedReader bufferedReader = new BufferedReader(fileReader);
+                String lineData = bufferedReader.readLine();
+                while (lineData != null) {
+                    String[] lineSegment = lineData.split(" \\| ");
+                    boolean isDone = lineSegment[1].equals("1")
+                            ? true
+                            : false;
+
+                    addDifferentTypeOfTask(archivedTasks, lineSegment, isDone);
+                    lineData = bufferedReader.readLine();
+                }
+                bufferedReader.close();
+                fileReader.close();
+            }
+        } catch (IOException e) {
+            Warnings.getInvalidFileInputMsg(e);
+        }
+        return archivedTasks;
+    }
+
+    public void writeArchivedTasks(ArchivedTaskList archivedTaskList) {
+        assert !archivedFilePath.isEmpty() : "Archived data filePath is missing.";
+        try {
+            ArrayList<Task> archivedTasks = archivedTaskList.getArchivedTaskList();
+            File archivedFile = new File(archivedFilePath);
+            archivedFile.getParentFile().mkdirs();
+            FileWriter fileWriter;
+
+            fileWriter = new FileWriter(archivedFile, false);
+
+            for (Task task : archivedTasks) {
                 fileWriter.write(task.writeToFile() + "\n");
             }
             fileWriter.close();
