@@ -21,13 +21,13 @@ public class Parser {
             if (taskList.list.isEmpty()) {
                 return ui.emptyList();
             } else {
-                return ui.returnAll(taskList);
+                return ui.returnAllTasks(taskList);
             }
         } else if (pieces[0].equals("find")) { // listing command
             if (taskList.list.isEmpty()) {
                 return ui.emptyList();
             } else {
-                return ui.returnRelevant(taskList, pieces[1]);
+                return ui.returnRelevantTasks(taskList, pieces[1]);
             }
         } else if (pieces[0].equals("done")) { // Mark Done task command
             if (pieces.length == 1) { // task number is missing

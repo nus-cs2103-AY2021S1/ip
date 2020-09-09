@@ -62,11 +62,11 @@ public class Ui {
      * This method is used to print all the tasks in the task list.
      * @param taskList The task list used for printing.
      */
-    public void printAll(TaskList taskList) {
-        System.out.println(returnAll(taskList));
+    public void printAllTasks(TaskList taskList) {
+        System.out.println(returnAllTasks(taskList));
     }
 
-    public String returnAll(TaskList taskList) {
+    public String returnAllTasks(TaskList taskList) {
         String stringToReturn = LINE + "Here are the tasks in your list: \n";
         for (int i = 1; i < taskList.getNoOfTasks() + 1; i++) {
             Task cur = taskList.list.get(i - 1);
@@ -77,11 +77,11 @@ public class Ui {
     }
 
 
-    public void printRelevant(TaskList taskList, String keyWord) {
-        System.out.println(returnRelevant(taskList,keyWord));
+    public void printRelevantTasks(TaskList taskList, String keyWord) {
+        System.out.println(returnRelevantTasks(taskList,keyWord));
     }
 
-    public String returnRelevant(TaskList taskList, String keyWord) {
+    public String returnRelevantTasks(TaskList taskList, String keyWord) {
         String stringToReturn = LINE + "Here are the matching tasks in your list: \n";
         int n = taskList.getNoOfTasks();
         for (int i = 1; i < n + 1; i++) {
@@ -170,7 +170,7 @@ public class Ui {
         return "Creating the storage file...";
     }
 
-    public String  missingDescription(String type) {
+    public String missingDescription(String type) {
         Exception ex = new InvalidInputException("Hey, you forget the description for your " + type +"!");
         String stringToReturn = LINE + ex.getMessage() + "\n" + LINE;
         return stringToReturn;
