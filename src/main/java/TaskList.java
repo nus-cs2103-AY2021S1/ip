@@ -17,16 +17,16 @@ public class TaskList {
      * List tasks to system output.
      */
     public String listTasks() {
-        String message = "";
+        StringBuilder message = new StringBuilder();
         if (tasks.isEmpty()) {
-            message += "You have no remaining tasks! Cheers!\n";
+            message.append("You have no remaining tasks! Cheers!\n");
         } else {
-            message += "Here are the tasks in your list:\n";
+            message.append("Here are the tasks in your list:\n");
             for (int i = 0; i < tasks.size(); i++) {
-                message += i + 1 + "." + tasks.get(i) + "\n";
+                message.append(i).append(1).append(".").append(tasks.get(i)).append("\n");
             }
         }
-        return message;
+        return message.toString();
     }
 
     /**
@@ -73,17 +73,17 @@ public class TaskList {
      * @param keyword keyword that task names must contain
      */
     public String searchKeyword(String keyword) {
-        String message = "";
+        StringBuilder message = new StringBuilder();
         if (tasks.isEmpty()) {
-            message += "You have no remaining tasks to search from!\n";
+            message.append("You have no remaining tasks to search from!\n");
         } else {
-            message += "Here are the matching tasks in your list:\n";
+            message.append("Here are the matching tasks in your list:\n");
             for (int i = 0; i < tasks.size(); i++) {
                 if (tasks.get(i).containsKeyword(keyword)) {
-                    message += i + 1 + "." + tasks.get(i) + "\n";
+                    message.append(i).append(1).append(".").append(tasks.get(i)).append("\n");
                 }
             }
         }
-        return message;
+        return message.toString();
     }
 }

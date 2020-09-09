@@ -14,8 +14,7 @@ public class Parser {
         String[] userTokens = userInput.split(" ");
         String userCommand = userTokens[0];
         Parser.validateCommand(userCommand);
-        String keyword = userTokens[1];
-        return keyword;
+        return userTokens[1];
     }
 
     /**
