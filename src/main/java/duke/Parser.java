@@ -48,28 +48,24 @@ public class Parser {
         String commandContent;
         if (commandType.equals(COMMAND_BYE)) {
             return new ByeCommand();
-        } else if (commandType.equals(COMMAND_DONE)) {
-            commandContent = inputArr[1];
-            return new DoneCommand(commandContent);
         } else if (commandType.equals(COMMAND_LIST)) {
             return new ListCommand();
+        }
+        assert inputArr.length == 2 : "No Available Condition for Operation!";
+        commandContent = inputArr[1];
+        if (commandType.equals(COMMAND_DONE)) {
+            return new DoneCommand(commandContent);
         } else if (commandType.equals(COMMAND_FIND)) {
-            commandContent = inputArr[1];
             return new FindCommand(commandContent);
         } else if (commandType.equals(COMMAND_DELETE)) {
-            commandContent = inputArr[1];
             return new DeleteCommand(commandContent);
-        } else if (commandType.equals(COMMAND_TODO)){
-            commandContent = inputArr[1];
+        } else if (commandType.equals(COMMAND_TODO)) {
             return new AddToDoCommand(commandContent);
         } else if (commandType.equals(COMMAND_EVENT)) {
-            commandContent = inputArr[1];
             return new AddEventCommand(commandContent);
         } else if (commandType.equals(COMMAND_DEADLINE)) {
-            commandContent = inputArr[1];
             return new AddDeadlineCommand(commandContent);
-        } else {
-            return new AddCommand(input);
         }
+        return new AddCommand(input);
     }
 }
