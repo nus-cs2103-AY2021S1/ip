@@ -27,9 +27,9 @@ class FindCommandTest {
         // Execute the FindCommand
         new FindCommand(taskList, "t some c").execute();
 
-        String expectedOutput = "Here are the matching tasks in your list:\r\n"
-                + "1. [T][O] Eat some chips\r\n"
-                + "Number of tasks found: 1\r\n";
+        String expectedOutput = "Here are the matching tasks in your list:" + System.lineSeparator()
+                + "1. [T][O] Eat some chips" + System.lineSeparator()
+                + "Number of tasks found: 1" + System.lineSeparator();
 
         // Check output is same as expected
         assertEquals(expectedOutput, outContent.toString());
