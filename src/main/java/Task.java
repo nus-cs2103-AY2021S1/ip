@@ -6,6 +6,7 @@ public class Task {
     protected String description;
     protected boolean isDone;
     protected String type;
+    protected String tag;
 
     /**
      * Constructor for a task.
@@ -15,6 +16,7 @@ public class Task {
         this.description = description;
         this.isDone = false;
         this.type = null;
+        this.tag = null;
     }
 
     /**
@@ -35,7 +37,6 @@ public class Task {
 
     /**
      * A getter for icon that shows completion status of a task.
-     * @param args unused
      * @return A tick for completed task, a cross for uncompleted task.
      */
     public String getStatusIcon() {
@@ -59,6 +60,10 @@ public class Task {
         this.isDone = false;
     }
 
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
+
     /**
      * This method is used to set the type of a task.
      */
@@ -66,6 +71,8 @@ public class Task {
         assert (type == "T" | type == "D" | type =="E") : "Incorrect type.";
         this.type = type;
     }
+
+
 
     @Override
     public String toString() {

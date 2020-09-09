@@ -12,7 +12,7 @@ public class Parser {
      * @return String Response to be returned
      */
     public static String respond(String command, Ui ui, TaskList taskList, String filePath) {
-        String[] pieces = command.split(" ", 2);
+        String[] pieces = command.split(" ", 3);
         assert(pieces[0] != null) : "Incorrect splitting.";
         if (command.equals("bye")) { // terminating command
             return ui.bye();
@@ -60,6 +60,20 @@ public class Parser {
                     return ui.deleteSuccessful(removed, taskList);
                 }
             }
+        } else if (pieces[0].equals("tag")) {
+            int task = Integer.parseInt(pieces[1]); // get the task number
+            if (task > taskList.noOfTasks) {
+                return ui.uncreatedTask(); // task has not been created
+            } else {
+                assert (taskList.list.get(task - 1) != null) : "Incorrect index.";
+                Task cur = taskList.list.get(task - 1);
+                String tag = pieces[2];
+                cur.setTag(tag);
+                Storage.updateTasks(taskList.getNoOfTasks(), taskList.list, filePath);
+                return ui.setTagSuccessful(cur);
+
+
+
         } else {
             if (pieces.length == 1) {
                 String s = Parser.incompleteCommand(ui, pieces[0]);

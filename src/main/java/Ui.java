@@ -139,6 +139,10 @@ public class Ui {
         return stringToReturn;
     }
 
+    public String setTagSuccessful(Task task) {
+        String stringToReturn = LINE + "Nice! New tag set. \n" + LINE;
+        return stringToReturn;
+    }
 
     // MODIFY
     public String markDoneSuccessful(Task done) {
