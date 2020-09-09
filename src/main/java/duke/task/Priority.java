@@ -11,6 +11,16 @@ public enum Priority {
         this.priority = priority;
     }
 
+    public int getEquivalentNumber() {
+        if (this.priority.equals("high")) {
+            return 1;
+        } else if (this.priority.equals("medium")) {
+            return 2;
+        } else {
+            return 3;
+        }
+    }
+
     @Override
     public String toString() {
         return this.priority;

@@ -42,6 +42,10 @@ public class Task {
         return this.description;
     }
 
+    public Priority getPriority() {
+        return this.priority;
+    }
+
     public boolean hasKeyword(String keyword) {
         String[] strings = this.description.split(" ");
         for (String word : strings) {

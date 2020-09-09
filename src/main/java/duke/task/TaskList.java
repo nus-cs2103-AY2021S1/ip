@@ -84,6 +84,13 @@ public class TaskList {
         return new TaskList(sortedList);
     }
 
+    public TaskList sortPriority() {
+        List<Task> sortedList = new ArrayList<>(this.taskList);
+        sortedList.sort((task1, task2) ->
+                task1.getPriority().getEquivalentNumber() - task2.getPriority().getEquivalentNumber());
+        return new TaskList(sortedList);
+    }
+
     @Override
     public String toString() {
         String result = "Here are the tasks in your list:\n";
