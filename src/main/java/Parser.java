@@ -67,6 +67,7 @@ public class Parser {
                     return new Event(name, time);
                 }
             } else { // to-do
+                assert s.startsWith("todo");
                 String[] arr = s.split(" ", 2);
                 name = arr[1];
                 return new Todo(name);

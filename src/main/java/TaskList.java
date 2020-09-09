@@ -21,10 +21,12 @@ public class TaskList {
     int total;
 
     TaskList(int total) {
+        assert total >= 0;
         this.total = total;
     }
 
     int getTotal() {
+        assert total >= 0;
         return this.total;
     }
 

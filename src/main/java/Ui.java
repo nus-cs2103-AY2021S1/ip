@@ -16,25 +16,6 @@ public class Ui {
     private Parser p = new Parser();
 
     /**
-     * Greets user.
-     *
-     * @return Next line that user inputs.
-     */
-    public String greet() {
-        String result = "";
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|";
-
-        result += logo + enter;
-        result += "welcome to my crib" + enter;
-
-        return result;
-    }
-
-    /**
      * Bids user farewell.
      */
     public String exit() {
