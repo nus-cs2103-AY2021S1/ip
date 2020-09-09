@@ -90,7 +90,7 @@ public class Parser {
                     assert !description.equals("") : "Nothing to find!";
 
                     return tasks.find(input.substring(5));
-                } else return "Input format incorrect.";
+                } else return finalErrorMessage();
             } catch (FileNotFoundException e) {
                 return e.getMessage();
             } catch (IOException e) {
@@ -101,5 +101,9 @@ public class Parser {
                 return e.getMessage();
             }
         }
+    }
+
+    public static String finalErrorMessage() {
+        return "Input not understood";
     }
 }

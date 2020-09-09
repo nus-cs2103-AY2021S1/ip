@@ -37,7 +37,7 @@ public class Duke {
      * Driver method that handles input/output between user and system
      */
     public void run() {
-        ui.Greet();
+        ui.greet();
         Parser parser = new Parser(tasks, storage);
         Scanner sc = new Scanner(System.in);
         String input = sc.nextLine();
