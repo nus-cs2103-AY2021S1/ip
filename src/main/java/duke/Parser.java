@@ -5,6 +5,18 @@ package duke;
  */
 public class Parser {
 
+    // Error messages
+    private static final String ERR_UNKNOWN_COMMAND = "I'm sorry, but I don't know what that means.\n";
+    private static final String ERR_BYE_WITH_USER_ACTION = "Do you mean \"bye\"?\n";
+    private static final String ERR_LIST_WITH_USER_ACTION = "Do you mean \"list\"?\n";
+    private static final String ERR_DELETE_WITHOUT_USER_ACTION = "Which task do you want to delete?\n";
+    private static final String ERR_DONE_WITHOUT_USER_ACTION = "Which task have you done?\n";
+    private static final String ERR_GET_WITHOUT_USER_ACTION = "Which date you want to get tasks from?\n";
+    private static final String ERR_FIND_WITHOUT_USER_ACTION = "Include a search term.\n";
+    private static final String ERR_TODO_WITHOUT_USER_ACTION = "The description of a todo cannot be empty.\n";
+    private static final String ERR_EVENT_WITHOUT_USER_ACTION = "The description of an event cannot be empty.\n";
+    private static final String ERR_DEADLINE_WITHOUT_USER_ACTION = "The description of a deadline cannot be empty.\n";
+
     private final Storage storage;
 
     /**
@@ -45,10 +57,10 @@ public class Parser {
 
                 // Check if user action is present for BYE and LIST commands
                 if (command == Command.BYE) {
-                    throw new DukeInputException("Do you mean \"bye\"?\n");
+                    throw new DukeInputException(Parser.ERR_BYE_WITH_USER_ACTION);
                 }
                 if (command == Command.LIST) {
-                    throw new DukeInputException("Do you mean \"list\"?\n");
+                    throw new DukeInputException(Parser.ERR_LIST_WITH_USER_ACTION);
                 }
             }
 
@@ -89,7 +101,7 @@ public class Parser {
         case "deadline":
             return Command.DEADLINE;
         default: // Unknown command
-            throw new DukeInputException("I'm sorry, but I don't know what that means. \u2639\n");
+            throw new DukeInputException(Parser.ERR_UNKNOWN_COMMAND);
         }
     }
 
@@ -102,19 +114,19 @@ public class Parser {
     private void handleMissingUserAction(Command command) throws DukeInputException {
         switch (command) {
         case DELETE:
-            throw new DukeInputException("Which task do you want to delete?\n");
+            throw new DukeInputException(Parser.ERR_DELETE_WITHOUT_USER_ACTION);
         case DONE:
-            throw new DukeInputException("Which task have you done?\n");
+            throw new DukeInputException(Parser.ERR_DONE_WITHOUT_USER_ACTION);
         case GET:
-            throw new DukeInputException("Include the date you want to get tasks from.\n");
+            throw new DukeInputException(Parser.ERR_GET_WITHOUT_USER_ACTION);
         case FIND:
-            throw new DukeInputException("Include a search term.\n");
+            throw new DukeInputException(Parser.ERR_FIND_WITHOUT_USER_ACTION);
         case TODO:
-            throw new DukeInputException("The description of a todo cannot be empty.\n");
+            throw new DukeInputException(Parser.ERR_TODO_WITHOUT_USER_ACTION);
         case EVENT:
-            throw new DukeInputException("The description of an event cannot be empty.\n");
+            throw new DukeInputException(Parser.ERR_EVENT_WITHOUT_USER_ACTION);
         case DEADLINE:
-            throw new DukeInputException("The description of a deadline cannot be empty.\n");
+            throw new DukeInputException(Parser.ERR_DEADLINE_WITHOUT_USER_ACTION);
         default:
             break;
         }
