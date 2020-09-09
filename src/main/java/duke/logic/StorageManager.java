@@ -106,11 +106,9 @@ public class StorageManager {
     public void saveData(ArrayList<DukeTask> dataList) throws DukeIoException {
         assert dataList != null : "saveDate input dataList cannot be null";
         StringBuilder dataString = new StringBuilder();
-        for (DukeTask task : dataList) {
-            String addition = generateAdditionString(task);
-            dataString.append(addition).append(System.lineSeparator());
-        }
-
+        dataList.forEach(task -> {
+            dataString.append(generateAdditionString(task)).append(System.lineSeparator());
+        });
         String output = dataString.toString();
 
         try {
