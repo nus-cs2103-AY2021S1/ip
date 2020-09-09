@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class TaskList {
-    ArrayList<Task> store;
+public class TaskList implements java.io.Serializable {
+    private ArrayList<Task> store;
 
     public TaskList(ArrayList<Task> store) {
         this.store = store;

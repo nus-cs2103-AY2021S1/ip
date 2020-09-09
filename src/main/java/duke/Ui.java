@@ -60,7 +60,10 @@ public class Ui {
     public String handleInput(String input) {
         try {
 
+            // Parse the commands
             Command command = Parser.parseLine(tasks, input);
+
+            // Execute the object
             String result = command.execute();
 
             // After every command, save to disk
