@@ -68,6 +68,7 @@ public class Storage {
                 .map(String::trim)
                 .filter(Predicate.not(String::isBlank))
                 .map(CsvToTask::parse)
+                .filter(Objects::nonNull)
                 .forEach(taskList::add);
 
         fileScanner.close();

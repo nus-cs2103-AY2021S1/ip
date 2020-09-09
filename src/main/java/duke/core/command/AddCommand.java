@@ -38,7 +38,7 @@ public class AddCommand implements ReversibleExecutable {
 
         // Add task
         this.taskList.add(task);
-        System.out.println("\t+ Add: " + task.toString());
+        System.out.println("+ Add: " + task.toString());
     }
 
     /**
@@ -47,7 +47,7 @@ public class AddCommand implements ReversibleExecutable {
     @Override
     public void reverse() {
         this.taskList.remove(task);
-        System.out.println("\t- Undo Add: " + task.toString());
+        System.out.println("- Undo Add: " + task.toString());
     }
 
 }

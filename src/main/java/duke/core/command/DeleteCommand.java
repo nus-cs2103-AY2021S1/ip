@@ -36,7 +36,7 @@ public class DeleteCommand implements ReversibleExecutable {
     public void execute() {
         this.removeIndex = this.taskList.indexOf(task);
         this.taskList.remove(removeIndex);
-        System.out.println("\t- Delete: " + task.toString());
+        System.out.println("- Delete: " + task.toString());
     }
 
     /**
@@ -45,7 +45,7 @@ public class DeleteCommand implements ReversibleExecutable {
     @Override
     public void reverse() {
         this.taskList.add(removeIndex, task);
-        System.out.println("\t+ Undo Delete: " + task.toString());
+        System.out.println("+ Undo Delete: " + task.toString());
     }
 
 }

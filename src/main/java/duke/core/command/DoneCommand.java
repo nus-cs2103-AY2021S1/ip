@@ -25,7 +25,7 @@ public class DoneCommand implements ReversibleExecutable {
     @Override
     public void execute() {
         task.setCompleted(true);
-        System.out.println("\t# Done: " + task.toString());
+        System.out.println("# Done: " + task.toString());
     }
 
     /**
@@ -34,7 +34,7 @@ public class DoneCommand implements ReversibleExecutable {
     @Override
     public void reverse() {
         task.setCompleted(false);
-        System.out.println("\t# Undo Done: " + task.toString());
+        System.out.println("# Undo Done: " + task.toString());
     }
 
 }

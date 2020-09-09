@@ -1,19 +1,19 @@
 package duke.gui;
 
 import duke.core.DataStore;
-import duke.core.task.Task;
 import duke.core.Logic;
+import duke.core.task.Task;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ListView;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 import java.io.ByteArrayOutputStream;
@@ -23,8 +23,6 @@ import java.io.PrintStream;
  * GUI application for Duke (Duke GUI)
  */
 public class Duke extends Application {
-
-    private static final String WELCOME_MESSAGE = "Welcome to Duke!";
 
     // Todo: Observable is deprecated.
     //  Replace observableList with java.beans.PropertyChangeListener
@@ -38,22 +36,32 @@ public class Duke extends Application {
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         System.setOut(new PrintStream(outputStream));
 
+        // Redirect System.err to errorStream
+        ByteArrayOutputStream errorStream = new ByteArrayOutputStream();
+        System.setErr(new PrintStream(errorStream));
+
         // UI Elements (button, textField, etc.)
-        ScrollPane outputScrollPane = new ScrollPane();
-        Label outputLabel = new Label(WELCOME_MESSAGE);
-        TextField inputField = new TextField();
         Button clearButton = new Button("Clear");
+        VBox outputChatBox = new VBox();
+        ScrollPane outputScrollPane = new ScrollPane();
+        TextField inputField = new TextField();
         ListView<Task> taskView = new ListView<>(taskList);
 
         // Configure layout for UI Elements
-        taskView.setFocusTraversable(false);
         clearButton.setMaxSize(Double.MAX_VALUE, Double.MAX_VALUE);
-        outputScrollPane.setContent(outputLabel);
+        outputChatBox.setSpacing(15);
+        outputChatBox.setPrefSize(420, 400);
+        outputScrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
+        outputScrollPane.setContent(outputChatBox);
+        taskView.setMinSize(300, 400);
+        taskView.setFocusTraversable(false);
+        taskView.setCellFactory(listView -> new IndexListCell<>());
+
         BorderPane leftPane = new BorderPane();
-        leftPane.setPrefWidth(200d);
         leftPane.setTop(clearButton);
         leftPane.setCenter(outputScrollPane);
         leftPane.setBottom(inputField);
+
         BorderPane mainPane = new BorderPane();
         mainPane.setLeft(leftPane);
         mainPane.setCenter(taskView);
@@ -64,31 +72,41 @@ public class Duke extends Application {
         stage.setTitle("Duke");
         stage.show(); // Render the stage.
 
+        Display display = new Display(outputChatBox);
+        display.clear();
+
+        // Clear the output screen
+        clearButton.setOnAction(event -> display.clear());
+
         // Run main logic when user presses enter
         inputField.setOnKeyPressed(keyEvent -> {
             if (keyEvent.getCode() == KeyCode.ENTER) {
-                // Get input
+
+                // Print input
                 String input = inputField.getText();
+                display.in(input);
                 inputField.setText("");
-                System.out.println("> " + input);
 
                 // Execute logic
                 Logic.execute(dataStore, input);
-                // Refresh GUI
-                taskView.refresh();
 
-                // Post processing
-                outputLabel.setText(outputStream.toString()); // Display output
-                mainPane.layout(); // Refresh layout
-                outputScrollPane.setVvalue(1.0d); // Automatically scroll down
+                // Print output
+                display.out(outputStream.toString());
+                outputStream.reset();
+
+                // Print error
+                display.err(errorStream.toString());
+                errorStream.reset();
+
+                // Autoscroll ScrollPane
+                outputScrollPane.layout();
+                outputScrollPane.setVvalue(1.0d);
+
+                // Update list of task
+                taskView.refresh();
             }
         });
 
-        // Clear the output screen
-        clearButton.setOnAction(event -> {
-            outputStream.reset();
-            outputLabel.setText(WELCOME_MESSAGE);
-        });
     }
 
 }
