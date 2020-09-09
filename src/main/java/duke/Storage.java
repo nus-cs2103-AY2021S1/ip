@@ -34,7 +34,7 @@ public class Storage {
     public Storage(String fileDirectory, String fileName) {
         this.fileDirectory = fileDirectory;
         this.fileName = fileName;
-        this.parser = new Parser();
+        parser = new Parser();
     }
 
 
@@ -46,14 +46,19 @@ public class Storage {
      */
     public void reachFile() throws IOException {
         assert (!fileDirectory.isBlank() && !fileName.isBlank());
+
+        // If directory provided does not exist, create a directory
         File dataFolder = new File(fileDirectory);
         if (!dataFolder.exists() && !dataFolder.isDirectory()) {
             dataFolder.mkdirs();
         }
+
+        // If the file does not exist, create a new file
         File taskListFile = new File(fileDirectory + fileName);
         if (!taskListFile.exists()) {
             taskListFile.createNewFile();
         }
+
         this.memoFile = taskListFile;
     }
 
@@ -68,12 +73,14 @@ public class Storage {
         List<Task> taskCollections = new ArrayList<>();
         Scanner sc;
 
+        // Reach the designated file before reading it
         reachFile();
 
         try {
             assert (memoFile != null);
             sc = new Scanner(memoFile);
         } catch (Exception e) {
+            // If problems encountered while trying to read the file, return an empty list
             return taskCollections;
         }
 
@@ -82,7 +89,7 @@ public class Storage {
             if (currTask.isBlank()) {
                 continue;
             }
-
+            // parse the task line read from the file
             String[] taskInfo = parser.localFileTaskParser(currTask);
             assert (taskInfo.length > 1);
             String taskType = taskInfo[0];
@@ -110,11 +117,15 @@ public class Storage {
     public String taskToMemoStr(Task t) {
         String memoStr = "";
         String[] info = t.getInfo();
+
         memoStr += "\n" + info[0] + SpecialFormat.SPLIT_NOTN + info[1]
                 + SpecialFormat.SPLIT_NOTN + info[2];
+
+        // For Deadline or Event, add datetime property
         if (t.getType().equals("D") || t.getType().equals("E")) {
             memoStr += SpecialFormat.SPLIT_NOTN + info[3];
         }
+
         return memoStr;
     }
 
@@ -123,7 +134,7 @@ public class Storage {
      * Returns true if file is successfully read and written, false otherwise.
      * Overwrites local memory with the current List of Task objects.
      * Creates a new file with current task-list if file does not exist.
-     * Recovers the old list if the local file is accidentally deleted.
+     * Recovers the old list if the local file or even directory is accidentally deleted.
      *
      * @param taskList  Current List of Task objects.
      * @return  true if successfully read and written file, false if failure.
@@ -136,12 +147,15 @@ public class Storage {
             FileWriter fw = new FileWriter(fileDirectory + fileName);
             Iterator taskIter = taskList.iterator();
             String textToAppend = "";
+
             while (taskIter.hasNext()) {
                 Task t = (Task) taskIter.next();
                 textToAppend += taskToMemoStr(t);
             }
+
             fw.write(textToAppend);
             fw.close();
+
             return true;
         } catch (Exception e) {
             return false;

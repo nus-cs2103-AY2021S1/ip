@@ -196,8 +196,3 @@ public class Duke extends Application {
     }
 
 }
-
-
-//compile when current directory is at IndividualProject/text-ui-test
-//javac -cp ../src/ ../src/main/java/Task.java   etc. (Task, Deadline, Event, Todo, Duke)
-//sh runtest.sh

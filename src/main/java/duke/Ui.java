@@ -57,6 +57,7 @@ public class Ui {
         }
 
         List<String> response;
+        // Parse the command and obtain the segmented parsed-command information
         String[] commandTask = parser.commandParser(input);
 
         if (commandTask.length == 1) {
@@ -111,10 +112,10 @@ public class Ui {
      * @return system response to 'hello' command.
      */
     public String processListCommand() {
-        int temp = 1;
         String output = "Here are the tasks in your list:\n";
-        Iterator task_iter;
-        task_iter = taskList.showList().iterator();
+        Iterator task_iter = taskList.showList().iterator();
+
+        int temp = 1;
         while (task_iter.hasNext()) {
             output += "\n" + temp + ". " + task_iter.next();
             temp++;
@@ -193,12 +194,13 @@ public class Ui {
     public List<String> processArchiveRequest() {
         List<String> response = new ArrayList<>();
 
-        // fileTimeCode is unique to every file since it indicates the creation time of the file
+        // fileTimeCode is unique for every file since it implies its creation time
         long fileTimeCode = new Date().getTime();
         String archiveFileName = "Archive-" + fileTimeCode + ".txt";
 
         Storage s = new Storage(filePath, archiveFileName);
         boolean success = s.write_memory(taskList.showList());
+
         if (success) {
             response.add("Tasks successfully archived! Enter 'listArchive' to observe a new file being added.");
         } else {
@@ -223,11 +225,13 @@ public class Ui {
 
         File filesList[] = archiveDirPath.listFiles(archiveFilefilter);
         Arrays.sort(filesList, Comparator.comparingLong(File::lastModified));
+
         String output = "";
         output += "* Please Note:\n";
         output += "Your current list will be discarded once you switch to an archive file.\n";
         output += "Key in 'archive' to save your work before continuing with 'loadArchive FILE_NAME'.\n\n";
         output += "Use 'File name' of the archive file for any further operation.\n";
+
         for(File file : filesList) {
             output += "\n" + "File name: " + file.getName();
             output += "\n" + "Archived at: " + new Date(file.lastModified()) + "\n";
@@ -260,15 +264,25 @@ public class Ui {
     }
 
 
+    /**
+     * Returns system response to a successful 'loadArchiveLoad' operation.
+     * Helps with the operation of loading an archived list to the current list.
+     *
+     * @param arcFileName  Name of the file to load and read from.
+     * @return system response to successful 'loadArchiveLoad' operation.
+     */
     public List<String> loadArchiveHelper(String arcFileName) throws IOException {
         List<String> response = new ArrayList<>();
         Storage s = new Storage(filePath, arcFileName);
+        // Read the tasks from the archive file
         List<Task> tl = s.readMemoTasks();
+        // Rewrite memory of the current file (to load the archived list)
         boolean successReplacement = storage.write_memory(tl);
         if (!successReplacement) {
             response.addAll(HandleException.handleException(DukeException.ExceptionType.READ_FILE));
             return response;
         }
+        // If successfully loaded to the current setting, return response message
         taskList = new TaskList(tl, filePath, fileName);
         File arcFile = new File(filePath, arcFileName);
         Date arcFileCreationDate = new Date(arcFile.lastModified());
@@ -290,11 +304,14 @@ public class Ui {
     public List<String> processBinArchiveRequest(String arcFileName) {
         List<String> response = new ArrayList<>();
         File testPathFile = new File (filePath + arcFileName);
+
+        // Check if the file exists (if the user inputs the wrong filename)
         if (!testPathFile.exists()) {
             response.add("☹ OOPS!!! Invalid input of filename. Please copy and paste with care.");
             return response;
         }
 
+        // Delete that archived file and return response message
         Date binFileCreationDate = new Date(testPathFile.lastModified());
         testPathFile.delete();
         response.add("Successful deletion of archive file '" + arcFileName + "' created at "
@@ -326,6 +343,7 @@ public class Ui {
         List<String> response = new ArrayList<>();
         List<Task> matchList = taskList.searchTask(keyword);
 
+        // If there is no match, return a corresponding message
         if (matchList.size() == 0) {
             response.add("Sorry, there is no match for your keyword!");
             return response;
@@ -334,10 +352,12 @@ public class Ui {
         String output = "Here are the tasks that match your keyword:\n";
         Iterator itr = matchList.iterator();
         int taskNumber = 1;
+
         while (itr.hasNext()) {
             output += "\n" + taskNumber + "." + itr.next();
             taskNumber++;
         }
+
         response.add(output);
         return response;
     }
@@ -351,8 +371,7 @@ public class Ui {
      */
     public List<String> processException(String exceptionType) {
         List<String> response = new ArrayList<>();
-        response.addAll(
-                HandleException.handleException(
+        response.addAll(HandleException.handleException(
                         returnException(exceptionType)));
         return response;
     }

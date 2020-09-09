@@ -37,7 +37,7 @@ public class TaskList {
      */
     public TaskList(List<Task> taskCollections, String memoFileDir, String memoFileName) {
         this.taskCollections = taskCollections;
-        this.parser = new Parser();
+        parser = new Parser();
         this.memoFileDir = memoFileDir;
         this.memoFileName = memoFileName;
     }
@@ -77,13 +77,18 @@ public class TaskList {
 
         while (itr.hasNext()) {
             Task currTask = (Task) itr.next();
-            if (currTask.getDescription().toLowerCase().contains(keywordLowerCase)) {
+            String taskContentLowerCase = currTask.getDescription().toLowerCase();
+            // If keyword is present in the task content, it is a matching result
+            if (taskContentLowerCase.contains(keywordLowerCase)) {
                 searchResult.add(currTask);
                 continue;
             }
-            if (currTask.getType().equals("D") || currTask.getType().equals("E")) {
-                // search keyword in DateTime section of a 'event' or 'deadline' task
-                if (currTask.getInfo()[3].toLowerCase().contains(keywordLowerCase)) {
+
+            // search keyword in DateTime section of a 'Event' or 'Deadline' task
+            String taskType = currTask.getType();
+            if (taskType.equals("D") || taskType.equals("E")) {
+                String dateTimeLowerCase = currTask.getInfo()[3].toLowerCase();
+                if (dateTimeLowerCase.contains(keywordLowerCase)) {
                     searchResult.add(currTask);
                 }
             }
@@ -111,9 +116,20 @@ public class TaskList {
                 ? new Event(taskContent, commandArr[2])
                 : new Deadline(taskContent, commandArr[2]);
         try {
+            // Add the task to the current task list
             taskCollections.add(t);
-            new Storage(memoFileDir, memoFileName).appendToFile(memoFileDir + memoFileName, t, taskCollections);
-            output.add(addSuccessMsg("add", t.toString()));
+
+            // Update the local memory file with the new task
+            Storage s = new Storage(memoFileDir, memoFileName);
+            boolean success = s.appendToFile(memoFileDir + memoFileName, t, taskCollections);
+
+            if (success) {
+                output.add(addSuccessMsg("add", t.toString()));
+            } else {
+                output.addAll(HandleException.handleException(
+                        DukeException.ExceptionType.READ_FILE
+                ));
+            }
         } catch (Exception e) {
             output.addAll(HandleException.handleException(
                     DukeException.ExceptionType.READ_FILE));
@@ -138,7 +154,9 @@ public class TaskList {
             int actionNumber = taskNumber - 1;
             String taskContent = taskCollections.get(actionNumber).toString();
 
+            // Update the task list with the new task status
             editTaskCollections(actionType, actionNumber);
+            // Update local file with new task status
             boolean success = new Storage(memoFileDir, memoFileName).write_memory(taskCollections);
             if (success) {
                 output.add(addSuccessMsg(actionType, taskContent));
@@ -147,12 +165,12 @@ public class TaskList {
                         DukeException.ExceptionType.READ_FILE
                 ));
             }
-
         } catch (Exception ex) {
             output.addAll(HandleException.handleException(
                     DukeException.ExceptionType.EMPTY_ILLEGAL));
         }
         return output;
+
     }
 
 

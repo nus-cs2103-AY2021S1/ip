@@ -19,7 +19,7 @@ public class DateTimeConverter {
      * @param timeStyle  FormatStyle for LocalTime.
      */
     public DateTimeConverter(FormatStyle dateStyle, FormatStyle timeStyle) {
-        this.dtf = DateTimeFormatter.ofLocalizedDateTime(dateStyle, timeStyle);
+        dtf = DateTimeFormatter.ofLocalizedDateTime(dateStyle, timeStyle);
     }
 
 
@@ -100,20 +100,24 @@ public class DateTimeConverter {
         dateTime = dateTime.trim();
         if (dateTime.contains(" ")) {
             String[] parts = dateTime.split(" ", 2);
-            if (parts[0].length() <= 4) {
+            boolean firstPartIsTime = parts[0].length() <= 4;
+            if (firstPartIsTime) {
                 time = parts[0];
                 date = parts[1];
             } else {
                 time = parts[1];
                 date = parts[0];
             }
+            // If time input contains only a single digit for hour
             if (time.length() == 1) {
                 time = "0" + time;
             }
+            // If time input contains only two digits for hour
             if (time.length() == 2) {
                 time += "00";
             }
         } else {
+            // If no input for time, set a default time for the task based on its type
             date = dateTime;
             time = taskType.equals("event")
                     ? "0000"

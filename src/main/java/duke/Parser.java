@@ -43,8 +43,9 @@ public class Parser {
         if (taskType.equals("T")) {
             taskDetails = taskContent.split(SpecialFormat.SPLIT_NOTN, 2);
             return new String[] {taskType, taskDetails[0], taskDetails[1]};
-        } else {  // if taskType has value of "E" or "D", representing Event or Deadline object
+        } else {    // if taskType has value of "E" or "D", representing Event or Deadline object
             taskDetails = taskContent.split(SpecialFormat.SPLIT_NOTN, 3);
+
             // taskDetails[0] isDone, taskDetails[1] taskAction, taskDetails[2] datetime
             return new String[] {taskType, taskDetails[0], taskDetails[1], taskDetails[2]};
         }
@@ -59,43 +60,67 @@ public class Parser {
      * @returns  Specific information of a Command in the form of String array.
      */
     public String[] commandParser(String input) {
-
         String cleanInput = input.trim();
+
         if (!cleanInput.contains(" ")) {   // single word command
-            switch (cleanInput) {
+            return simpleCommandParser(cleanInput);
+        }
+
+        return complexCommandParser(cleanInput);
+    }
+
+
+    /**
+     * Returns Specific information of a single-word Command in Segments.
+     * Returns Specific information of an exception in Segments if exceptions caught.
+     *
+     * @param cleanInput  cleaned User input of command.
+     * @returns  Specific information of a simple Command in the form of String array.
+     */
+    public String[] simpleCommandParser(String cleanInput) {
+        switch (cleanInput) {
             case "bye":
             case "hello":
             case "help":
             case "list":
             case "archive":
             case "listArchive":
-                return new String[]{input};
+                return new String[]{cleanInput};
             default:
                 return parseException(cleanInput);
-            }
         }
 
+    }
+
+
+    /**
+     * Returns Specific information of a multi-word Command in Segments.
+     * Returns Specific information of an exception in Segments if exceptions caught.
+     *
+     * @param cleanInput  cleaned User input of command.
+     * @returns  Specific information of a complex Command in the form of String array.
+     */
+    public String[] complexCommandParser(String cleanInput) {
         String[] inputSplitArr = cleanInput.split(" ", 2);
         String commandType = inputSplitArr[0];
         String taskContent = inputSplitArr[1];
 
         switch (commandType) {
-        case "find":
-            return parseFind(taskContent);
-        case "done":
-        case "delete":
-            return parseModifications(commandType, taskContent);
-        case "loadArchive":
-            return parseLoadArchive(taskContent);
-        case "binArchive":
-            return parseBinArchive(taskContent);
-        case "todo":
-        case "event":
-        case "deadline":
-            return parseNewEvent(commandType, taskContent);
-
-        default:
-            return new String[] {"exception", "no_meaning"};
+            case "find":
+                return parseFind(taskContent);
+            case "done":
+            case "delete":
+                return parseModifications(commandType, taskContent);
+            case "loadArchive":
+                return parseLoadArchive(taskContent);
+            case "binArchive":
+                return parseBinArchive(taskContent);
+            case "todo":
+            case "event":
+            case "deadline":
+                return parseNewEvent(commandType, taskContent);
+            default:
+                return new String[] {"exception", "no_meaning"};
         }
 
     }
@@ -188,19 +213,19 @@ public class Parser {
                     commandType.equals("event") ? " /at " : " /by ", 2);
 
             String taskAction = taskDetails[0];
-            String dateTime = taskDetails[1];
+            String taskDateTime = taskDetails[1];
 
-            dateTime = dateTimeParser(commandType, dateTime);
+            String dateTime = dateTimeParser(commandType, taskDateTime);
 
             if (dateTime.equals("improperDateTime")) {
                 return new String[]{"exception", "improperDateTime"};
             }
 
             return new String[]{commandType, taskAction, dateTime};
-
         } catch (Exception ex) {
             return parseException(commandType);
         }
+
     }
 
 
@@ -223,6 +248,7 @@ public class Parser {
         default:
             return new String[] {"exception", "no_meaning"};
         }
+
     }
 
 }
