@@ -136,21 +136,6 @@ public class Ui {
         return "Sorry but I don't understand what '" + userCommand + "' means :(";
     }
 
-    /**
-     * Retrieves "Bob's" response to a change in the task list.
-     *
-     * @param tasks Task list saved in the local storage.
-     * @param task Task that is either added into the task list or deleted from the task list.
-     * @param taskIndicator Indicates if the task is being added to the task list or deleted from the task list.
-     * @return Message notifying users that the task has been added/deleted.
-     */
-    private String getUpdatedTaskListMessage(TaskList tasks, Task task, String taskIndicator) {
-        String message = getNotedUpdateInTaskListMessage(taskIndicator);
-        message += task.toString();
-        message += getNumberOfTasksInTaskList(tasks);
-        message += getSuccessfullySavedMessage();
-        return message;
-    }
 
     /**
      * Returns message notifying users that a task has been added or deleted from the task list.
@@ -170,6 +155,29 @@ public class Ui {
      */
     private String getNumberOfTasksInTaskList(TaskList tasks) {
         return SKIPLINE + "You now have " + tasks.getTotalNumberOfTasks() + " task(s) in your list" + SKIPLINE;
+    }
+
+    /**
+     * Informs user that the updated task list has been successfully saved to the file.
+     */
+    private String getSuccessfullySavedMessage() {
+        return SKIPLINE + "Successfully saved task list to file :)";
+    }
+
+    /**
+     * Retrieves "Bob's" response to a change in the task list.
+     *
+     * @param tasks Task list saved in the local storage.
+     * @param task Task that is either added into the task list or deleted from the task list.
+     * @param taskIndicator Indicates if the task is being added to the task list or deleted from the task list.
+     * @return Message notifying users that the task has been added/deleted.
+     */
+    private String getUpdatedTaskListMessage(TaskList tasks, Task task, String taskIndicator) {
+        String message = getNotedUpdateInTaskListMessage(taskIndicator);
+        message += task.toString();
+        message += getNumberOfTasksInTaskList(tasks);
+        message += getSuccessfullySavedMessage();
+        return message;
     }
 
     /**
@@ -237,13 +245,6 @@ public class Ui {
         String output = showResponseIndicator();
         output += e.getLocalizedMessage();
         return output;
-    }
-
-    /**
-     * Informs user that the updated task list has been successfully saved to the file.
-     */
-    private String getSuccessfullySavedMessage() {
-        return SKIPLINE + "Successfully saved task list to file :)";
     }
 
     /**

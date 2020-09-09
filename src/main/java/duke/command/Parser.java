@@ -191,6 +191,24 @@ public class Parser {
     }
 
     /**
+     * Processes the list index in the user command and returns the numerical value of the task
+     * index as an integer. If a non-numerical number is found, an exception is thrown.
+     *
+     * @param inputIndex List index indicated in the user command.
+     * @return Integer value of list index.
+     * @throws InvalidIndexNumberException If inputIndex is not an integer.
+     */
+    private static int parseTaskIndex(String inputIndex) throws InvalidIndexNumberException {
+        try {
+            int index = Integer.parseInt(inputIndex);
+            return index;
+        } catch (NumberFormatException e) {
+            // Unable to convert inputIndex from String to an int
+            throw new InvalidIndexNumberException();
+        }
+    }
+
+    /**
      * Deletes the specified task from the task list.
      *
      * @param taskToDelete List index of the task to be deleted.
@@ -219,24 +237,6 @@ public class Parser {
         // If index specified by users is not a number or task list fails to load or save
         } catch (InvalidUserCommandException | StorageException e) {
             return ui.showErrorMessage(e);
-        }
-    }
-
-    /**
-     * Processes the list index in the user command and returns the numerical value of the task
-     * index as an integer. If a non-numerical number is found, an exception is thrown.
-     *
-     * @param inputIndex List index indicated in the user command.
-     * @return Integer value of list index.
-     * @throws InvalidIndexNumberException If inputIndex is not an integer.
-     */
-    private static int parseTaskIndex(String inputIndex) throws InvalidIndexNumberException {
-        try {
-            int index = Integer.parseInt(inputIndex);
-            return index;
-        } catch (NumberFormatException e) {
-            // Unable to convert inputIndex from String to an int
-            throw new InvalidIndexNumberException();
         }
     }
 
@@ -286,6 +286,21 @@ public class Parser {
     }
 
     /**
+     * Adds the task to the list of tasks containing the keyword if the task contains the keyword indicated by users.
+     *
+     * @param keyword Keyword indicated by users.
+     * @param task The task to be determined if it contains the keyword.
+     * @param tasksContainingKeyword A list consisting of tasks that contains the keyword.
+     */
+    private static void addTaskIfIncludesKeyword(String keyword, Task task, List<Task> tasksContainingKeyword) {
+        boolean containsKeyword = task.toString().contains(keyword);
+
+        if (containsKeyword) {
+            tasksContainingKeyword.add(task);
+        }
+    }
+
+    /**
      * Retrieves the tasks that contain a keyword indicated by users.
      *
      * @param keyword Keyword indicated by users.
@@ -301,21 +316,6 @@ public class Parser {
         }
 
         return tasksContainingKeyword;
-    }
-
-    /**
-     * Adds the task to the list of tasks containing the keyword if the task contains the keyword indicated by users.
-     *
-     * @param keyword Keyword indicated by users.
-     * @param task The task to be determined if it contains the keyword.
-     * @param tasksContainingKeyword A list consisting of tasks that contains the keyword.
-     */
-    private static void addTaskIfIncludesKeyword(String keyword, Task task, List<Task> tasksContainingKeyword) {
-        boolean containsKeyword = task.toString().contains(keyword);
-
-        if (containsKeyword) {
-            tasksContainingKeyword.add(task);
-        }
     }
 
     /**

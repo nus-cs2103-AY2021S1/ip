@@ -58,6 +58,15 @@ public class Storage {
     }
 
     /**
+     * Determines if the indicated file path contains a directory.
+     *
+     * @return true if the file path contains a directory and returns false otherwise.
+     */
+    private boolean containsDirectory() {
+        return filePath.toString().contains("\\");
+    }
+
+    /**
      * Creates a new file at the designated filepath if the file does not already exist.
      *
      * @return A new task list that will save the tasks the user adds.
@@ -114,37 +123,6 @@ public class Storage {
     }
 
     /**
-     * Reads the text stored in the task list file and returns a List of Tasks of the specified
-     * tasks in the task list file.
-     *
-     * @param savedTaskListText Text stored in the task list file.
-     * @return List of Tasks containing the specified tasks in the task list file.
-     */
-    private List<Task> readSavedTaskList(List<String> savedTaskListText) {
-        List<Task> savedTaskList = readTasks(savedTaskListText);
-        return savedTaskList;
-    }
-
-    /**
-     * Retrieves the text stored in the task list file and returns a List of Tasks of the specified
-     * tasks in the task list file.
-     *
-     * @param savedTaskListText Text stored in the task list file.
-     * @return List of Tasks containing the specified tasks in the task list file.
-     */
-    private List<Task> readTasks(List<String> savedTaskListText) {
-        List<Task> savedTaskList = new ArrayList<>();
-
-        for (String task: savedTaskListText) {
-            // Split the description of each task to obtain the type of task indicator
-            String[] taskDetails = getTaskDetails(task);
-            readTask(taskDetails, savedTaskList);
-        }
-
-        return savedTaskList;
-    }
-
-    /**
      * Retrieves the task details from the text stored in the task list file.
      * The task details include the type indicator which indicates whether the task is a todo, deadline or event task,
      * as well as the task description.
@@ -179,26 +157,18 @@ public class Storage {
     }
 
     /**
-     * Processes the text of the task stored in the task list file.
+     * Processes the status of the task stored in the task list and returns a Task object with the
+     * appropriate status.
      *
-     * @param taskDetails Task details consisting of the task indicator and the task description.
-     * @param savedTaskList List of Tasks containing the tasks stored in the local storage.
+     * @param task Task which status is to be processed.
+     * @param taskIndicator A tick if the task is done or a cross if the task is not done.
      */
-    private void readTask(String[] taskDetails, List<Task> savedTaskList) {
-        String taskIndicator = getTaskIndicator(taskDetails);
-        String taskDescription = getTaskDescription(taskDetails);
-
-        boolean isTodoTask = taskIndicator.contains(TaskList.TASK_TODO_INDICATOR);
-        boolean isDeadlineTask = taskIndicator.contains(TaskList.TASK_DEADLINE_INDICATOR);
-        boolean isEventTask = taskIndicator.contains(TaskList.TASK_EVENT_INDICATOR);
-
-        if (isTodoTask) {
-            addTodoTask(taskIndicator, taskDescription, savedTaskList);
-        } else if (isDeadlineTask) {
-            addDeadlineTask(taskIndicator, taskDescription, savedTaskList);
-        } else if (isEventTask) {
-            addEventTask(taskIndicator, taskDescription, savedTaskList);
+    private static void parseIsDoneStatus(Task task, String taskIndicator) {
+        if (taskIndicator.contains(Task.STATUS_TICK)) {
+            task.markAsDone();
         }
+
+        // Else the task is not done. Do nothing
     }
 
     /**
@@ -215,6 +185,53 @@ public class Storage {
         parseIsDoneStatus(todo, taskIndicator);
 
         savedTaskList.add(todo);
+    }
+
+    /**
+     * Creates a new Deadline object containing the description and the date of the deadline.
+     *
+     * @param deadlineDetails Description and the date of the deadline.
+     * @return A new Deadline object.
+     */
+    private Deadline getDeadlineTask(String[] deadlineDetails) {
+        String deadlineDescription = deadlineDetails[0];
+        String deadlineDate = deadlineDetails[1];
+        return new Deadline(deadlineDescription, deadlineDate);
+    }
+
+    /**
+     * Creates a new Event object containing the description and the date of event.
+     *
+     * @param eventDetails Description and the date of the event.
+     * @return A new Event object.
+     */
+    private Event getEventTask(String[] eventDetails) {
+        String eventDescription = eventDetails[0];
+        String eventDate = eventDetails[1];
+        return new Event(eventDescription, eventDate);
+    }
+
+    /**
+     * Processes the text of either a deadline task or an event task stored in the task list file
+     * and returns just the description and date of the deadline or event.
+     *
+     * @param taskText Text of deadline/event task stored in the task list file.
+     * @param typeOfTask Indicates if the task is either a deadline task or an event task.
+     * @return Description and date of the deadline or event.
+     */
+    private static String[] parseTaskText(String taskText, String typeOfTask) {
+        String[] taskDescriptionAndDate = taskText.split(" \\(", 2);
+        if (TaskList.TASK_DEADLINE_INDICATOR.equals(typeOfTask)) {
+            String[] date = taskDescriptionAndDate[1].split(TEXT_DEADLINE_SEPARATOR);
+            taskDescriptionAndDate[1] = date[1].substring(0, date[1].length() - 1);
+        }
+
+        if (TaskList.TASK_EVENT_INDICATOR.equals(typeOfTask)) {
+            String[] date = taskDescriptionAndDate[1].split(TEXT_EVENT_SEPARATOR);
+            taskDescriptionAndDate[1] = date[1].substring(0, date[1].length() - 1);
+        }
+
+        return taskDescriptionAndDate;
     }
 
     /**
@@ -252,73 +269,56 @@ public class Storage {
     }
 
     /**
-     * Creates a new Deadline object containing the description and the date of the deadline.
+     * Processes the text of the task stored in the task list file.
      *
-     * @param deadlineDetails Description and the date of the deadline.
-     * @return A new Deadline object.
+     * @param taskDetails Task details consisting of the task indicator and the task description.
+     * @param savedTaskList List of Tasks containing the tasks stored in the local storage.
      */
-    private Deadline getDeadlineTask(String[] deadlineDetails) {
-        String deadlineDescription = deadlineDetails[0];
-        String deadlineDate = deadlineDetails[1];
-        return new Deadline(deadlineDescription, deadlineDate);
+    private void readTask(String[] taskDetails, List<Task> savedTaskList) {
+        String taskIndicator = getTaskIndicator(taskDetails);
+        String taskDescription = getTaskDescription(taskDetails);
+
+        boolean isTodoTask = taskIndicator.contains(TaskList.TASK_TODO_INDICATOR);
+        boolean isDeadlineTask = taskIndicator.contains(TaskList.TASK_DEADLINE_INDICATOR);
+        boolean isEventTask = taskIndicator.contains(TaskList.TASK_EVENT_INDICATOR);
+
+        if (isTodoTask) {
+            addTodoTask(taskIndicator, taskDescription, savedTaskList);
+        } else if (isDeadlineTask) {
+            addDeadlineTask(taskIndicator, taskDescription, savedTaskList);
+        } else if (isEventTask) {
+            addEventTask(taskIndicator, taskDescription, savedTaskList);
+        }
     }
 
     /**
-     * Creates a new Event object containing the description and the date of event.
+     * Retrieves the text stored in the task list file and returns a List of Tasks of the specified
+     * tasks in the task list file.
      *
-     * @param eventDetails Description and the date of the event.
-     * @return A new Event object.
+     * @param savedTaskListText Text stored in the task list file.
+     * @return List of Tasks containing the specified tasks in the task list file.
      */
-    private Event getEventTask(String[] eventDetails) {
-        String eventDescription = eventDetails[0];
-        String eventDate = eventDetails[1];
-        return new Event(eventDescription, eventDate);
-    }
+    private List<Task> readTasks(List<String> savedTaskListText) {
+        List<Task> savedTaskList = new ArrayList<>();
 
-    /**
-     * Determines if the indicated file path contains a directory.
-     *
-     * @return true if the file path contains a directory and returns false otherwise.
-     */
-    private boolean containsDirectory() {
-        return filePath.toString().contains("\\");
-    }
-
-    /**
-     * Processes the text of either a deadline task or an event task stored in the task list file
-     * and returns just the description and date of the deadline or event.
-     *
-     * @param taskText Text of deadline/event task stored in the task list file.
-     * @param typeOfTask Indicates if the task is either a deadline task or an event task.
-     * @return Description and date of the deadline or event.
-     */
-    private static String[] parseTaskText(String taskText, String typeOfTask) {
-        String[] taskDescriptionAndDate = taskText.split(" \\(", 2);
-        if (TaskList.TASK_DEADLINE_INDICATOR.equals(typeOfTask)) {
-            String[] date = taskDescriptionAndDate[1].split(TEXT_DEADLINE_SEPARATOR);
-            taskDescriptionAndDate[1] = date[1].substring(0, date[1].length() - 1);
+        for (String task: savedTaskListText) {
+            // Split the description of each task to obtain the type of task indicator
+            String[] taskDetails = getTaskDetails(task);
+            readTask(taskDetails, savedTaskList);
         }
 
-        if (TaskList.TASK_EVENT_INDICATOR.equals(typeOfTask)) {
-            String[] date = taskDescriptionAndDate[1].split(TEXT_EVENT_SEPARATOR);
-            taskDescriptionAndDate[1] = date[1].substring(0, date[1].length() - 1);
-        }
-
-        return taskDescriptionAndDate;
+        return savedTaskList;
     }
 
     /**
-     * Processes the status of the task stored in the task list and returns a Task object with the
-     * appropriate status.
+     * Reads the text stored in the task list file and returns a List of Tasks of the specified
+     * tasks in the task list file.
      *
-     * @param task Task which status is to be processed.
-     * @param taskIndicator A tick if the task is done or a cross if the task is not done.
+     * @param savedTaskListText Text stored in the task list file.
+     * @return List of Tasks containing the specified tasks in the task list file.
      */
-    private static void parseIsDoneStatus(Task task, String taskIndicator) {
-        if (taskIndicator.contains(Task.STATUS_TICK)) {
-            task.markAsDone();
-        }
-
-        // Else the task is not done. Do nothing
+    private List<Task> readSavedTaskList(List<String> savedTaskListText) {
+        List<Task> savedTaskList = readTasks(savedTaskListText);
+        return savedTaskList;
     }
 }
