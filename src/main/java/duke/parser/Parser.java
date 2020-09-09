@@ -9,6 +9,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.InvalidCommand;
 import duke.command.ListCommand;
+import duke.command.TagCommand;
 import duke.exception.DukeException;
 
 /**
@@ -51,6 +52,8 @@ public class Parser {
             return parseDeleteCommand(commandArg);
         case FIND:
             return parseFindCommand(commandArg);
+        case TAG:
+            return parseTagCommand(commandArg);
         case INVALID:
         default:
             return new InvalidCommand();
@@ -108,5 +111,23 @@ public class Parser {
             throw new DukeException("You have to tell me what to search for!");
         }
         return new FindCommand(commandArg);
+    }
+
+    private static TagCommand parseTagCommand(String commandArg) throws DukeException {
+        String[] commandArgArr = commandArg.split(" ", 2);
+        int taskIdx;
+
+        try {
+            taskIdx = Integer.parseInt(commandArgArr[0]);
+        } catch (NumberFormatException e) {
+            throw new DukeException("Sorry I'm not sure what task do you want me to tag!");
+        }
+
+        if (commandArgArr.length < 2) {
+            throw new DukeException("You have to tell me what to tag for your task!");
+        }
+
+        String[] tags = commandArgArr[1].split(" ");
+        return new TagCommand(taskIdx, tags);
     }
 }

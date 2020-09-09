@@ -24,12 +24,14 @@ public class Deadline extends Task {
      * @param description Description of the deadline.
      * @param by Time that the deadline is due by.
      */
-    public Deadline(boolean isDone, String description, DateTime by) {
+    public Deadline(boolean isDone, String tags, String description, DateTime by) {
         this(description, by);
 
         if (isDone) {
             this.markDone();
         }
+
+        this.addTagsFromData(tags);
     }
 
     @Override

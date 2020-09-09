@@ -18,11 +18,14 @@ public class ToDo extends Task {
      * @param isDone Todo completion status.
      * @param description Description of the todo.
      */
-    public ToDo(boolean isDone, String description) {
+    public ToDo(boolean isDone, String tags, String description) {
         this(description);
+
         if (isDone) {
             this.markDone();
         }
+
+        this.addTagsFromData(tags);
     }
 
     @Override

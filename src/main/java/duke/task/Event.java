@@ -24,12 +24,14 @@ public class Event extends Task {
      * @param description Description of the event.
      * @param at Time that the event is happening at.
      */
-    public Event(boolean isDone, String description, DateTime at) {
+    public Event(boolean isDone, String tags, String description, DateTime at) {
         this(description, at);
 
         if (isDone) {
             this.markDone();
         }
+
+        this.addTagsFromData(tags);
     }
 
     @Override

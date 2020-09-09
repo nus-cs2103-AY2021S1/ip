@@ -82,10 +82,12 @@ public class TaskList {
             String serializedTask;
 
             if (taskType.equals("T")) {
-                serializedTask = String.format("%s|%s|%s\n", task.getTaskType(), task.isDone(), task.getDescription());
+                serializedTask = String.format("%s|%s|%s|%s\n", task.getTaskType(), task.isDone(),
+                    task.tagsToString(), task.getDescription());
             } else {
-                serializedTask = String.format("%s|%s|%s|%s\n", task.getTaskType(),
-                        task.isDone(), task.getDescription(), task.getDateTime().getOriginalInput());
+                serializedTask = String.format("%s|%s|%s|%s|%s\n", task.getTaskType(),
+                    task.isDone(), task.tagsToString(), task.getDescription(),
+                    task.getDateTime().getOriginalInput());
             }
 
             data.append(serializedTask);
@@ -104,7 +106,8 @@ public class TaskList {
         StringBuilder output = new StringBuilder();
 
         for (int i = 0; i < size(); i++) {
-            output.append(String.format("%d. %s\n", i + 1, tasks.get(i)));
+            Task task = tasks.get(i);
+            output.append(String.format("%d. %s\n   Tags: %s\n", i + 1, task, task.tagsToString()));
         }
 
         output.deleteCharAt(output.length() - 1);
