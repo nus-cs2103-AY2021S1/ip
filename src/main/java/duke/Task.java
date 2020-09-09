@@ -9,6 +9,7 @@ public abstract class Task {
     
     /**
      * Creates a new task with the specified description.
+     * 
      * @param description The description of the task.
      */
     public Task(String description) {
@@ -18,10 +19,11 @@ public abstract class Task {
 
     /**
      * Gets the string of the completion status of the task.
+     * 
      * @return A string of the status icon.
      */
     public String getStatusIcon() {
-        return (isDone ? "✓" : "✘");
+        return (isDone ? "\u2713" : "\u2718");
     }
 
     /**
@@ -37,6 +39,7 @@ public abstract class Task {
 
     /**
      * Returns a string representation of the Task.
+     * 
      * @return A String containing the description and completion status of the task.
      */
     @Override
@@ -46,6 +49,7 @@ public abstract class Task {
 
     /**
      * Returns a string representation of the Task stored in the storage.
+     * 
      * @return A String representing the code of the task stored in the storage.
      */
     public abstract String encode();

@@ -11,6 +11,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor of a Deadline object.
+     * 
      * @param description The description of the task.
      * @param by The deadine of the task.
      */
@@ -21,6 +22,7 @@ public class Deadline extends Task {
 
     /**
      * Returns a string representation of a Deadline object to be stored in the storage.
+     * 
      * @return A String representing the code of the task stored in the storage.
      */
     @Override
@@ -31,6 +33,7 @@ public class Deadline extends Task {
 
     /**
      * Returns a string representation of a Deadline object.
+     * 
      * @return A String containing the description and completion status of the Deadline object.
      */
     @Override

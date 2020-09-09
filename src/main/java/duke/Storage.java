@@ -17,6 +17,7 @@ public class Storage {
 
     /**
      * Constructor for a Storage object.
+     * 
      * @param filePath filePath of the file
      */
     public Storage(String filePath) {
@@ -25,6 +26,7 @@ public class Storage {
 
     /**
      * Loads the data of the file given and returns it in an ArrayList.
+     * 
      * @return An ArrayList of tasks stored in the file.
      * @throws DukeException if file is not found.
      */
@@ -67,6 +69,7 @@ public class Storage {
 
     /**
      * Updates the data file to store all the Tasks.
+     * 
      * @param taskList A TaskList of the tasks.
      * @throws DukeException if IOException occurs.
      */

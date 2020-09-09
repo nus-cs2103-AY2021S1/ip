@@ -10,6 +10,7 @@ public class TaskList {
 
     /**
      * Constructor for a TaskList object with an existing list.
+     * 
      * @param taskList An arraylist of Tasks.
      */
     public TaskList(ArrayList<Task> taskList) {
@@ -25,6 +26,7 @@ public class TaskList {
 
     /**
      * Gets the list in the TaskList object.
+     * 
      * @return An arraylist containing all the Tasks.
      */
     public ArrayList<Task> getList() {
@@ -33,6 +35,7 @@ public class TaskList {
 
     /**
      * Retrieves a task from the TaskList object.
+     * 
      * @param number index of the task.
      * @return the specified Task object.
      * @throws DukeException if index is out of bounds.
@@ -47,6 +50,7 @@ public class TaskList {
 
     /**
      * Adds a new task to the tasklist.
+     * 
      * @param task A task object.
      */
     public void addTask(Task task) {
@@ -55,6 +59,7 @@ public class TaskList {
 
     /**
      * Changes the completion status of the Task to completed.
+     * 
      * @param number index of the Task to be completed.
      */
     public void finishTask(int number) {
@@ -65,6 +70,7 @@ public class TaskList {
 
     /**
      * Removes the task in the tasklist.
+     * 
      * @param number index of the task to be removed.
      */
     public Task deleteTask(int number) {
@@ -75,6 +81,7 @@ public class TaskList {
 
     /**
      * Gets the size of the tasklist object.
+     * 
      * @return integer of the size of the tasklist object.
      */
     public int getSize() {
