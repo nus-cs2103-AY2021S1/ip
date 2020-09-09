@@ -14,8 +14,8 @@ import gel.task.Todo;
  * Contains the task list e.g., it has operations to add/delete tasks in the list.
  */
 public class TaskList {
-    private List<Task> listOfTasks;
-    private Ui ui;
+    private final List<Task> listOfTasks;
+    private final Ui ui;
 
     public TaskList(Ui ui) {
         listOfTasks = new ArrayList<>();
@@ -30,7 +30,7 @@ public class TaskList {
         return ui.showSearchResults(this.listOfTasks, keyword);
     }
 
-    public String doneTask(String input) throws GelException {
+    public String markTaskAsDone(String input) throws GelException {
         int index = Integer.parseInt(input.substring(5)) - 1;
         if (index >= listOfTasks.size() || index < 0) {
             throw new GelException("    Please input a valid number from 1 - " + listOfTasks.size());

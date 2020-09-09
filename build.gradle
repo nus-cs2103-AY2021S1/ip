@@ -42,7 +42,7 @@ test {
 }
 
 application {
-    mainClassName = "Gel"
+    mainClassName = "Launcher"
 }
 
 shadowJar {
