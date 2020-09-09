@@ -4,7 +4,13 @@ import duke.DukeException;
 import duke.Parser;
 import duke.Storage;
 import duke.Ui;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
+
+import java.util.stream.Stream;
 
 /**
  * Represents command that is specific to the add command.
@@ -39,11 +45,13 @@ public class AddCommand extends Command {
         assert ui != null : "ui is null";
         assert storage != null : "storage is null";
 
+        Stream<String> stream = taskList.getList().stream().map(Task::toString);
+
         switch (inputCommand) {
         case TODO:
             try {
                 Todo todo = new Todo(Parser.getTodoDescription(input));
-                if (!taskList.getList().contains(todo)) {
+                if (stream.noneMatch(task -> task.equals(todo.toString()))) {
                     taskList.addList(todo);
                     ui.setAddedMessage(new Todo(Parser.getTodoDescription(input)), taskList.getListSize());
                     storage.saveListToFile(taskList.getList());
@@ -58,7 +66,7 @@ public class AddCommand extends Command {
             try {
                 Deadline deadline = new Deadline(Parser.getDeadlineStrings(input)[0],
                         Parser.getDeadlineStrings(input)[1]);
-                if (!taskList.getList().contains(deadline)) {
+                if (stream.noneMatch(task -> task.equals(deadline.toString()))) {
                     taskList.addList(deadline);
                     ui.setAddedMessage(deadline, taskList.getListSize());
                     storage.saveListToFile(taskList.getList());
@@ -73,7 +81,7 @@ public class AddCommand extends Command {
             try {
                 Event event = new Event(Parser.getEventTimeStrings(input)[0],
                         Parser.getEventTimeStrings(input)[1]);
-                if (taskList.getList().stream().map(Task::toString).noneMatch(s -> s == event.toString())) {
+                if (stream.noneMatch(task -> task.equals(event.toString()))) {
                     taskList.addList(event);
                     ui.setAddedMessage(event, taskList.getListSize());
                     storage.saveListToFile(taskList.getList());
