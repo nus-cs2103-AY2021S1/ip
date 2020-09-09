@@ -41,13 +41,13 @@ public class DeadlineCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws CommandException {
         try {
-            StringBuilder str = new StringBuilder();
-            LocalDate temp = LocalDate.parse(by);
-            Deadline current = new Deadline(description, temp);
+            StringBuilder uiOutput = new StringBuilder();
+            LocalDate date = LocalDate.parse(by);
+            Deadline current = new Deadline(description, date);
             tasks.addTask(current);
-            str.append("Got it bro, I've added this task:\n  ").append(current.toString() + "\n").append(
+            uiOutput.append("Got it bro, I've added this task:\n  ").append(current.toString() + "\n").append(
                     "Now you have ").append(tasks.getCount()).append(" tasks in the list.");
-            ui.setMessage(str.toString());
+            ui.setMessage(uiOutput.toString());
             storage.write(tasks.getTasks());
         } catch (IOException e) {
             throw new CommandException(e.getMessage());

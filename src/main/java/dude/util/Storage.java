@@ -102,10 +102,10 @@ public class Storage {
      * @return String representation of TaskList.
      */
     private String taskConverter(List<Task> taskList) {
-        StringBuilder str = new StringBuilder();
+        StringBuilder uiOutput = new StringBuilder();
         for (Task t : taskList) {
-            str.append(t.toSave()).append("\n");
+            uiOutput.append(t.toSave()).append("\n");
         }
-        return str.toString();
+        return uiOutput.toString();
     }
 }

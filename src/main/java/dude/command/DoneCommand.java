@@ -36,10 +36,10 @@ public class DoneCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws CommandException {
         try {
             tasks.getTask(index - 1).markAsDone();
-            StringBuilder str = new StringBuilder();
-            str.append("Solid bro!! I've marked this task as done:\n").append(
+            StringBuilder uiOutput = new StringBuilder();
+            uiOutput.append("Solid bro!! I've marked this task as done:\n").append(
                     tasks.getTask(index - 1).toString() + "\n");
-            ui.setMessage(str.toString());
+            ui.setMessage(uiOutput.toString());
             storage.write(tasks.getTasks());
         } catch (IOException e) {
             throw new CommandException(e.getMessage());

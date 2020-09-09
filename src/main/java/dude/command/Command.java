@@ -9,7 +9,7 @@ import dude.ui.Ui;
  * The abstract task contains the action of the command and whether the command calls for an exit.
  */
 public abstract class Command {
-    protected boolean isExit;
+    protected boolean willExit;
     private String action;
 
     /**
@@ -19,12 +19,12 @@ public abstract class Command {
      */
     public Command(String action) {
         this.action = action;
-        isExit = false;
+        willExit = false;
     }
 
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws CommandException;
 
     public boolean getExitStatus() {
-        return isExit;
+        return willExit;
     }
 }

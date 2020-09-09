@@ -35,12 +35,12 @@ public class DeleteCommand extends Command {
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) throws CommandException {
         try {
-            StringBuilder str = new StringBuilder();
-            str.append("Understood. I've removed this task:\n  ").append(
+            StringBuilder uiOutput = new StringBuilder();
+            uiOutput.append("Understood. I've removed this task:\n  ").append(
                     tasks.getTask(index - 1).toString()).append("Now you have ").append(
                     tasks.getCount() - 1).append(" tasks in the list.");
             tasks.deleteTask(index - 1);
-            ui.setMessage(str.toString());
+            ui.setMessage(uiOutput.toString());
             storage.write(tasks.getTasks());
         } catch (IOException e) {
             throw new CommandException(e.getMessage());

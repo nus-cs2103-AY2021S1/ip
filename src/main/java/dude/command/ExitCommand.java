@@ -29,7 +29,7 @@ public class ExitCommand extends Command {
      * @throws CommandException
      */
     public void execute(TaskList tasks, Ui ui, Storage storage) {
-        isExit = true;
+        willExit = true;
         ui.sendOff();
     }
 }

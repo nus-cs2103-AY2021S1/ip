@@ -46,9 +46,9 @@ public class Dude {
      */
     public DialogWrapper getResponse(String input) {
         try {
-            Command command = Parser.parse(input);
-            command.execute(tasks, ui, storage);
-            return new DialogWrapper(ui.getMessage(), command.getExitStatus());
+            Command inputCommand = Parser.parse(input);
+            inputCommand.execute(tasks, ui, storage);
+            return new DialogWrapper(ui.getMessage(), inputCommand.getExitStatus());
         } catch (CommandException | InvalidArgumentException | InvalidCommandException e) {
             return new DialogWrapper(e.getMessage(), false);
         }
@@ -59,13 +59,13 @@ public class Dude {
      */
     public void run() {
         ui.greet();
-        boolean isExit = false;
-        while (!isExit) {
+        boolean willExit = false;
+        while (!willExit) {
             try {
-                String fullCommand = ui.readCommand();
-                Command command = Parser.parse(fullCommand);
-                command.execute(tasks, ui , storage);
-                isExit = command.getExitStatus();
+                String input = ui.readCommand();
+                Command inputCommand = Parser.parse(input);
+                inputCommand.execute(tasks, ui , storage);
+                willExit = inputCommand.getExitStatus();
                 ui.showMessage();
             } catch (CommandException | InvalidArgumentException | InvalidCommandException e) {
                 ui.showError(e.getMessage());
