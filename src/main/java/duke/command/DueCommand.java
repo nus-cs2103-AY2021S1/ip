@@ -6,9 +6,9 @@ import java.util.ArrayList;
 import java.util.stream.Stream;
 
 import duke.exception.InvalidCommandException;
-import duke.util.DukeDateTime;
 import duke.task.Task;
 import duke.task.TaskList;
+import duke.util.DukeDateTime;
 
 // Handles all the logic behind any "due" command from the user.
 public class DueCommand extends Command {

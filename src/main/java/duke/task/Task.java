@@ -57,8 +57,8 @@ public abstract class Task {
     /**
      * Returns true if the task is due in n number of days else return false.
      *
-     * @param n int time period in days
+     * @param n int time period in days.
      * @return boolean Whether the task is due in the specified period.
      */
-    public boolean isDueInNDays(int n){return false;};
+    public abstract boolean isDueInNDays(int n);
 }

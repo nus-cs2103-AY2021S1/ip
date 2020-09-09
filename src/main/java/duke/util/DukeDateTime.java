@@ -70,6 +70,14 @@ public class DukeDateTime {
                 .format(DateTimeFormatter.ofPattern(FORMAT_24H));
     }
 
+    /**
+     * Returns true if the date given is before (current date + n days) and the date given falls after
+     * the current date. Also returns true if the date given is equal to current date.
+     *
+     * @param date LocalDate the input date to be used as the frame of reference.
+     * @param n int time period in days.
+     * @return boolean Whether the task is due in the specified period.
+     */
     public static boolean isWithinNDays(LocalDate date, int n) {
         assert n >= 0 : "isWithinNDays should receive a non-negative input";
         LocalDate now = LocalDate.now();

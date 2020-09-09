@@ -7,9 +7,19 @@ import duke.exception.InvalidCommandException;
 import duke.task.Task;
 import duke.task.TaskList;
 
+// Handles all the logic behind any "remind" command from the user.
 public class RemindCommand {
     private static final String ERROR_INVALID_FORMAT = "Please input a valid number";
 
+    /**
+     * Executes any "due" command issued by the user.
+     * Returns the information of the tasks that are due within the time period specified.
+     *
+     * @param in String "remind" command issued by user.
+     * @param taskList TaskList list that contains tasks added by the user.
+     * @return String response message to user including tasks that are due within the specified time period.
+     * @throws InvalidCommandException If an invalid number of days is provided.
+     */
     public static String execute(String in, TaskList taskList) throws InvalidCommandException {
         try {
             int numberDays = Integer.parseInt(in.replaceFirst("remind ", ""));
