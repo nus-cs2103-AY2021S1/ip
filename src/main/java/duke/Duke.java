@@ -273,190 +273,42 @@ public class Duke {
      * Main execution of Duke Chat bot for GUI
      */
     public void runGui() {
-        String[] GuiInputArray;
-        String[] userInputArray;
+        String[] guiInputArray;
 
         userInput = ui.readInput(isGui);
-        GuiInputArray = Parser.parseCommand(userInput);
-        switch (GuiInputArray[0]) {
+        guiInputArray = Parser.parseCommand(userInput);
+        switch (guiInputArray[0]) {
         case "bye":
-            ui.setGuiOutput(ui.showByeMsg());
-            hasExit = true;
+            byeCommand();
             break;
         case "list":
-            if (tasks.isEmpty()) {
-                ui.setGuiOutput(ui.showListEmptyMsg());
-            } else {
-                ui.setGuiOutput(ui.showListMsg() + "\n" + ui.showTaskList(tasks));
-            }
+            listCommand();
             break;
         case "done":
-            if (tasks.isEmpty()) {
-                ui.setGuiOutput(ui.showListEmptyMsg());
-            } else {
-                try {
-                    if (GuiInputArray.length <= 1) {
-                        throw new DukeException("Yo! Enter the task number(s).");
-                    }
-                    userInput = GuiInputArray[1];
-                    int[] tasksArray = Parser.parse(userInput);
-                    TaskList doneList = new TaskList();
-                    for (int index : tasksArray) {
-                        try {
-                            if (index > tasks.size() || index <= 0) {
-                                throw new DukeException("This task #" + index + " does not exist.");
-                            }
-                            Task task = tasks.getTask(index);
-                            task.setDone();
-                            doneList.addTask(task);
-                        } catch (DukeException e) {
-                            ui.setGuiOutput(ui.showErrorMsg(e));
-                        }
-                    }
-                    if (!doneList.isEmpty()) {
-                        ui.setGuiOutput(ui.showListDoneMsg() + "\n" + ui.showTaskList(doneList));
-                    }
-                } catch (DukeException e) {
-                    ui.setGuiOutput(ui.showErrorMsg(e));
-                }
-            }
-
-            try {
-                storeFile.saveFile(tasks);
-            } catch (DukeException e) {
-                ui.setGuiOutput(ui.showErrorMsg(e));
-            }
-
+            doneCommand(guiInputArray);
+            saveFileOperation();
             break;
         case "find":
-            if (tasks.isEmpty()) {
-                ui.setGuiOutput(ui.showListEmptyMsg());
-            } else {
-                try {
-                    if (GuiInputArray.length <= 1) {
-                        throw new DukeException("Yo! Enter a keyword.");
-                    }
-                    userInput = GuiInputArray[1];
-                    if (userInput.equals("")) {
-                        throw new DukeException("Yo! Enter a keyword.");
-                    }
-                    TaskList foundTasks;
-                    foundTasks = tasks.findTasks(userInput);
-                    if (!foundTasks.isEmpty()) {
-                        ui.setGuiOutput(ui.showFoundMsg(userInput) + "\n" + ui.showTaskList(foundTasks));
-                    } else {
-                        ui.setGuiOutput(ui.showNotFoundMsg(userInput));
-                    }
-                } catch (DukeException e) {
-                    ui.setGuiOutput(ui.showErrorMsg(e));
-                }
-            }
+            findCommand(guiInputArray);
             break;
         case "todo":
-            try {
-                if (GuiInputArray.length <= 1) {
-                    throw new DukeException("Yo! Task details are missing.");
-                }
-                userInput = GuiInputArray[1];
-                if (userInput.equals("")) {
-                    throw new DukeException("Yo! Task details are missing.");
-                }
-                Task toDo = new Todo(userInput);
-                tasks.addTask(toDo);
-                ui.setGuiOutput(ui.showTaskAddedMsg(toDo));
-            } catch (DukeException e) {
-                ui.setGuiOutput(ui.showErrorMsg(e));
-            }
-
-            try {
-                storeFile.saveFile(tasks);
-            } catch (DukeException e) {
-                ui.setGuiOutput(ui.showErrorMsg(e));
-            }
-
+            todoCommand(guiInputArray);
+            saveFileOperation();
             break;
         case "deadline":
-            try {
-                if (GuiInputArray.length <= 1) {
-                    throw new DukeException("Yo! Command Syntax Error. '<Details> /by or /at <dd/MM/yy [HH:MM]>'");
-                }
-                userInput = GuiInputArray[1];
-                userInputArray = Parser.parseDetails(userInput);
-                Task deadLine = new Deadline(userInputArray[0], userInputArray[1]);
-                tasks.addTask(deadLine);
-                ui.setGuiOutput(ui.showTaskAddedMsg(deadLine));
-            } catch (DukeException e) {
-                ui.setGuiOutput(ui.showErrorMsg(e));
-            }
-
-            try {
-                storeFile.saveFile(tasks);
-            } catch (DukeException e) {
-                ui.setGuiOutput(ui.showErrorMsg(e));
-            }
-
+            deadlineCommand(guiInputArray);
+            saveFileOperation();
             break;
         case "event":
-            try {
-                if (GuiInputArray.length <= 1) {
-                    throw new DukeException("Yo! Command Syntax Error. '<Details> /by or /at <dd/MM/yy [HH:MM]>'");
-                }
-                userInput = GuiInputArray[1];
-                userInputArray = Parser.parseDetails(userInput);
-                Task event = new Event(userInputArray[0], userInputArray[1]);
-                tasks.addTask(event);
-                ui.setGuiOutput(ui.showTaskAddedMsg(event));
-            } catch (DukeException e) {
-                ui.setGuiOutput(ui.showErrorMsg(e));
-            }
-
-            try {
-                storeFile.saveFile(tasks);
-            } catch (DukeException e) {
-                ui.setGuiOutput(ui.showErrorMsg(e));
-            }
-
+            eventCommand(guiInputArray);
+            saveFileOperation();
             break;
         case "delete":
-            if (tasks.isEmpty()) {
-                ui.setGuiOutput(ui.showListEmptyMsg());
-            } else {
-                try {
-                    if (GuiInputArray.length <= 1) {
-                        throw new DukeException("Yo! Enter the task numbers(s).");
-                    }
-                    userInput = GuiInputArray[1];
-                    TaskList deletedTasks = new TaskList();
-                    int[] tasksArray = Parser.parse(userInput);
-                    for (int index : tasksArray) {
-                        try {
-                            if (index > tasks.size() || index <= 0) {
-                                throw new DukeException("This task #" + index + " does not exist.");
-                            }
-                            Task task = tasks.getTask(index);
-                            tasks.removeTask(index);
-                            deletedTasks.addTask(task);
-                        } catch (DukeException e) {
-                            ui.setGuiOutput(ui.showErrorMsg(e));
-                        }
-                    }
-                    if (!deletedTasks.isEmpty()) {
-                        ui.setGuiOutput(ui.showTaskDeleteMsg() + "\n" + ui.showTaskList(deletedTasks));
-                    }
-                } catch (DukeException e) {
-                    ui.setGuiOutput(ui.showErrorMsg(e));
-                }
-            }
-
-            try {
-                storeFile.saveFile(tasks);
-            } catch (DukeException e) {
-                ui.setGuiOutput(ui.showErrorMsg(e));
-            }
-
+            deleteCommand(guiInputArray);
+            saveFileOperation();
             break;
         case "help":
-            ui.setGuiOutput(ui.showHelp());
+            helpCommand();
             break;
         default:
             try {
@@ -481,5 +333,168 @@ public class Duke {
 
     public boolean hasExit() {
         return this.hasExit;
+    }
+
+    private void byeCommand() {
+        ui.setGuiOutput(ui.showByeMsg());
+        hasExit = true;
+    }
+
+    private void listCommand() {
+        if (tasks.isEmpty()) {
+            ui.setGuiOutput(ui.showListEmptyMsg());
+        } else {
+            ui.setGuiOutput(ui.showListMsg() + "\n" + ui.showTaskList(tasks));
+        }
+    }
+
+    private void doneCommand(String[] guiInputArray) {
+        if (tasks.isEmpty()) {
+            ui.setGuiOutput(ui.showListEmptyMsg());
+        } else {
+            try {
+                if (guiInputArray.length <= 1) {
+                    throw new DukeException("Yo! Enter the task number(s).");
+                }
+                userInput = guiInputArray[1];
+                int[] tasksArray = Parser.parse(userInput);
+                TaskList doneList = new TaskList();
+                for (int index : tasksArray) {
+                    try {
+                        if (index > tasks.size() || index <= 0) {
+                            throw new DukeException("This task #" + index + " does not exist.");
+                        }
+                        Task task = tasks.getTask(index);
+                        task.setDone();
+                        doneList.addTask(task);
+                    } catch (DukeException e) {
+                        ui.setGuiOutput(ui.showErrorMsg(e));
+                    }
+                }
+                if (!doneList.isEmpty()) {
+                    ui.setGuiOutput(ui.showListDoneMsg() + "\n" + ui.showTaskList(doneList));
+                }
+            } catch (DukeException e) {
+                ui.setGuiOutput(ui.showErrorMsg(e));
+            }
+        }
+    }
+
+    private void findCommand(String[] guiInputArray) {
+        if (tasks.isEmpty()) {
+            ui.setGuiOutput(ui.showListEmptyMsg());
+        } else {
+            try {
+                if (guiInputArray.length <= 1) {
+                    throw new DukeException("Yo! Enter a keyword.");
+                }
+                userInput = guiInputArray[1];
+                if (userInput.equals("")) {
+                    throw new DukeException("Yo! Enter a keyword.");
+                }
+                TaskList foundTasks;
+                foundTasks = tasks.findTasks(userInput);
+                if (!foundTasks.isEmpty()) {
+                    ui.setGuiOutput(ui.showFoundMsg(userInput) + "\n" + ui.showTaskList(foundTasks));
+                } else {
+                    ui.setGuiOutput(ui.showNotFoundMsg(userInput));
+                }
+            } catch (DukeException e) {
+                ui.setGuiOutput(ui.showErrorMsg(e));
+            }
+        }
+    }
+
+    private void todoCommand(String[] guiInputArray) {
+        try {
+            if (guiInputArray.length <= 1) {
+                throw new DukeException("Yo! Task details are missing.");
+            }
+            userInput = guiInputArray[1];
+            if (userInput.equals("")) {
+                throw new DukeException("Yo! Task details are missing.");
+            }
+            Task toDo = new Todo(userInput);
+            tasks.addTask(toDo);
+            ui.setGuiOutput(ui.showTaskAddedMsg(toDo));
+        } catch (DukeException e) {
+            ui.setGuiOutput(ui.showErrorMsg(e));
+        }
+    }
+
+    private void deadlineCommand(String[] guiInputArray) {
+        String[] userInputArray;
+        try {
+            if (guiInputArray.length <= 1) {
+                throw new DukeException("Yo! Command Syntax Error. '<Details> /by or /at <dd/MM/yy [HH:MM]>'");
+            }
+            userInput = guiInputArray[1];
+            userInputArray = Parser.parseDetails(userInput);
+            Task deadLine = new Deadline(userInputArray[0], userInputArray[1]);
+            tasks.addTask(deadLine);
+            ui.setGuiOutput(ui.showTaskAddedMsg(deadLine));
+        } catch (DukeException e) {
+            ui.setGuiOutput(ui.showErrorMsg(e));
+        }
+    }
+
+    private void eventCommand(String[] guiInputArray) {
+        String[] userInputArray;
+        try {
+            if (guiInputArray.length <= 1) {
+                throw new DukeException("Yo! Command Syntax Error. '<Details> /by or /at <dd/MM/yy [HH:MM]>'");
+            }
+            userInput = guiInputArray[1];
+            userInputArray = Parser.parseDetails(userInput);
+            Task event = new Event(userInputArray[0], userInputArray[1]);
+            tasks.addTask(event);
+            ui.setGuiOutput(ui.showTaskAddedMsg(event));
+        } catch (DukeException e) {
+            ui.setGuiOutput(ui.showErrorMsg(e));
+        }
+    }
+
+    private void deleteCommand(String[] guiInputArray) {
+        if (tasks.isEmpty()) {
+            ui.setGuiOutput(ui.showListEmptyMsg());
+        } else {
+            try {
+                if (guiInputArray.length <= 1) {
+                    throw new DukeException("Yo! Enter the task numbers(s).");
+                }
+                userInput = guiInputArray[1];
+                TaskList deletedTasks = new TaskList();
+                int[] tasksArray = Parser.parse(userInput);
+                for (int index : tasksArray) {
+                    try {
+                        if (index > tasks.size() || index <= 0) {
+                            throw new DukeException("This task #" + index + " does not exist.");
+                        }
+                        Task task = tasks.getTask(index);
+                        tasks.removeTask(index);
+                        deletedTasks.addTask(task);
+                    } catch (DukeException e) {
+                        ui.setGuiOutput(ui.showErrorMsg(e));
+                    }
+                }
+                if (!deletedTasks.isEmpty()) {
+                    ui.setGuiOutput(ui.showTaskDeleteMsg() + "\n" + ui.showTaskList(deletedTasks));
+                }
+            } catch (DukeException e) {
+                ui.setGuiOutput(ui.showErrorMsg(e));
+            }
+        }
+    }
+
+    private void helpCommand() {
+        ui.setGuiOutput(ui.showHelp());
+    }
+
+    private void saveFileOperation() {
+        try {
+            storeFile.saveFile(tasks);
+        } catch (DukeException e) {
+            ui.setGuiOutput(ui.showErrorMsg(e));
+        }
     }
 }
