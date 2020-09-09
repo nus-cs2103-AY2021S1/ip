@@ -174,11 +174,10 @@ public class Parser {
         String endTime = separatedStartAndEndTiming[1];
         // parse string representation for the date:
         StringBuilder dateStringBuilder = new StringBuilder();
-        for (int i = 0; i < timeInfo.length - 2; i++) {
+        for (int i = 0; i <= timeInfo.length - 2; i++) {
             dateStringBuilder.append(timeInfo[i]).append(" ");
         }
-        dateStringBuilder.append(timeInfo[timeInfo.length - 2]);
-        String dateString = dateStringBuilder.toString();
+        String dateString = dateStringBuilder.toString().stripTrailing();
         if (dateString.isEmpty()) {
             throw new DukeException(Message.ERROR_EVENT_DATE.getMsg());
         }

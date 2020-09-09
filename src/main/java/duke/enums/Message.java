@@ -53,7 +53,4 @@ public enum Message {
     public String getMsg() {
         return this.msg;
     }
-    public static Message getLabel(String msg) {
-        return keyableMap.getOrDefault(msg, Message.INVALID);
-    }
 }
