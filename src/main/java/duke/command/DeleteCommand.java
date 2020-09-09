@@ -38,9 +38,11 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
 
-        //check if second argument is integer & valid
+        //checks if second argument of instruction is valid
         try {
-            if ((Integer.parseInt(this.markItem) < 1) || (Integer.parseInt(this.markItem) > tasks.getSize())) {
+            boolean isAboveZero = (Integer.parseInt(this.markItem) < 1);
+            boolean isBelowListSize = (Integer.parseInt(this.markItem) > tasks.getSize());
+            if (isAboveZero || isBelowListSize) {
                 throw new DukeException("Please enter a valid item number from the list!");
             }
         } catch (NumberFormatException e) { //second argument wrong format

@@ -45,37 +45,6 @@ public class Duke {
 
 
     /**
-     * Main program loop until termination when "bye" is called by the user.
-     */
-    public void run() {
-
-        //print greeting message
-        ui.printGreeting();
-
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.printDivider();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.printDivider();
-                System.out.println();
-            }
-        }
-
-    }
-
-
-    public static void main(String[] args) {
-        new Duke("DukenizerTaskList.txt").run();
-    }
-
-    /**
      * Returns Greeting message to user.
      *
      * @return Greeting message.
@@ -94,7 +63,9 @@ public class Duke {
 
         String output = "";
 
+        //execute correct command
         try {
+
             Command c = Parser.parse(input);
             output += c.execute(tasks, ui, storage);
         } catch (DukeException e) {

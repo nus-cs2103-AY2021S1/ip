@@ -19,6 +19,7 @@ import duke.task.TaskList;
  */
 public class Storage {
 
+    private static final String PIPE_SEPARATOR = "|";
     private final Path path;
 
     /**
@@ -39,6 +40,7 @@ public class Storage {
      * @throws DukeException when file is not found
      */
     public String load() throws DukeException {
+
         if (Files.exists((path))) {
 
             // create a File for the given file path
@@ -46,12 +48,12 @@ public class Storage {
 
             try {
                 Scanner s = new Scanner(f);
-                String list = "";
+                StringBuilder list = new StringBuilder();
                 while (s.hasNext()) {
-                    list += s.nextLine();
-                    list += "|";
+                    list.append(s.nextLine());
+                    list.append(PIPE_SEPARATOR);
                 }
-                return list;
+                return list.toString();
 
             } catch (FileNotFoundException e) {
                 e.printStackTrace();
@@ -87,23 +89,6 @@ public class Storage {
         }
     }
 
-    /**
-     * Appends a text file at a specified file path relative to the source
-     *
-     * @param filePath     Specified file path of file.
-     * @param textToAppend String value to append to file.
-     */
-    public void appendToFile(String filePath, String textToAppend) {
-        try {
-            // create a FileWriter in append mode
-            FileWriter fw = new FileWriter(filePath, true);
-            fw.write(textToAppend);
-            fw.close();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-    }
 
     /**
      * Saves tasks in the TaskList Object into the hard disk so that it can be retrieved again.
@@ -111,14 +96,14 @@ public class Storage {
      * @param lst TaskList Object
      */
     public void saveListToHardDisk(TaskList lst) {
-        String list = "";
+        StringBuilder list = new StringBuilder();
         for (int i = 0; i < lst.getSize(); i++) {
             Task targetTask = lst.get(i);
 
-            list += targetTask.getStoreAs();
-            list += "\n";
+            list.append(targetTask.getStoreAs());
+            list.append("\n");
         }
 
-        writeToFile(this.path.toString(), list);
+        writeToFile(this.path.toString(), list.toString());
     }
 }
