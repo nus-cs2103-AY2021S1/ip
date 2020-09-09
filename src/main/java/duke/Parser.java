@@ -226,6 +226,8 @@ public class Parser {
             return handleFind(input);
         } else if (input.startsWith("repeat")) {
             return handleRepeat(input);
+        } else if (input.startsWith("sort")) {
+            return new SortCommand();
         } else {
             throw (new UnknownCommandException());
         }
