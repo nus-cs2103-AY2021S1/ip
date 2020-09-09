@@ -12,7 +12,6 @@ import java.util.stream.Collectors;
 public class Ui {
 
     private static final String GREETING = "Hello Boss! How can I help you?";
-//    private static final String HORIZONTAL_LINE = "--------------------------------------";
     private static final String SHOW_TASK = "Here are the tasks in your list:";
     private static final String BYE = "Bye Boss! Hope to see you again!";
     private static final String TAB = "   ";
