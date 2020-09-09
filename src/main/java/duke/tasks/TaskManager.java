@@ -196,21 +196,10 @@ public class TaskManager {
      */
     public String findTask(String keyword) {
         List<Task> temp = new ArrayList<>();
-        for (Todo todo : todos) {
-            if (hasKeyword(keyword, todo)) {
-                temp.add(todo);
-            }
-        }
-        for (Deadline deadline : deadlines) {
-            if (hasKeyword(keyword, deadline)) {
-                temp.add(deadline);
-            }
-        }
-        for (Event event : events) {
-            if (hasKeyword(keyword, event)) {
-                temp.add(event);
-            }
-        }
+        todos.stream().filter(todo -> hasKeyword(keyword, todo)).forEach(temp::add);
+        deadlines.stream().filter(deadline -> hasKeyword(keyword, deadline)).forEach(temp::add);
+        events.stream().filter(event -> hasKeyword(keyword, event)).forEach(temp::add);
+
         if (temp.isEmpty()) {
             return "Sorry there are no tasks that matches your keyword";
         } else {
