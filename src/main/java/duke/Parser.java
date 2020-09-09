@@ -12,6 +12,7 @@ public class Parser {
      * @param inputMsg
      */
     public static String parseUserInput(String inputMsg) {
+        assert !inputMsg.isEmpty() : "Input command should not be empty.";
         TaskList tasks = Duke.tasks;
 
         if (inputMsg.equals("list")) {

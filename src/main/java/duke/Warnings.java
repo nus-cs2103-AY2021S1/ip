@@ -15,6 +15,7 @@ public class Warnings extends Ui {
      * @return System warning message.
      */
     public static String getInvalidDoneTaskIndexMsg(int tasksSize) {
+        assert tasksSize >= 0 : "Task size should not be less than 0.";
         String warningMsg = DIVIDER_WARNING
                 + "\n [• ▂ •]What? "
                 + "\n I couldn't find this task, please re-enter a valid task index!"
@@ -96,6 +97,7 @@ public class Warnings extends Ui {
      * @return System warning message.
      */
     public static String getInvalidDeleteMsg(int tasksSize) {
+        assert tasksSize >= 0 : "Task size should not be less than 0.";
         String warningMsg = DIVIDER_WARNING
                 + "\n [• ▂ •]What? "
                 + "\n I couldn't find this task, please re-enter a valid task index!"
