@@ -12,6 +12,10 @@ public class Event extends Task{
         this.at = LocalDate.parse(at);
     }
 
+    public LocalDate getEventDate() {
+        return this.at;
+    }
+
     /**
      * Returns the format for permanent storage of an event task in file.
      * @return string format for storing
