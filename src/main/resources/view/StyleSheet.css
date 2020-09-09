@@ -1,0 +1,19 @@
+#dialogContainer {
+    -fx-background-color: #FF5E5B;
+}
+
+#dialog {
+    -fx-background-color: #00CECB;
+    -fx-border-radius: 20 20 20 20;
+    -fx-background-radius: 20 20 20 20;
+}
+
+#userInput {
+    -fx-background-color: #FFFFEA;
+    -fx-text-fill: #555B6E;
+}
+
+#sendButton {
+    -fx-background-color: #555B6E;
+    -fx-text-fill: #FFFFEA;
+}

@@ -34,7 +34,6 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        dialog.setFont(Font.font("Monospaced", 12));
         dialog.setText(text);
         displayPicture.setImage(img);
     }
