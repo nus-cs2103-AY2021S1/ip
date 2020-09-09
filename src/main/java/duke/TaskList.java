@@ -1,7 +1,7 @@
 package duke;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 /**
  * Represents a task list with a stored tasks in a list.
@@ -91,12 +91,10 @@ public class TaskList {
      * @return Result task list of tasks with descriptions containing the search description.
      */
     public List<Task> generateResultTaskList(String searchDescription) {
-        List<Task> resultTaskList = new ArrayList<>();
-        for (Task task : storedTasks) {
-            if (task.getDescription().contains(searchDescription)) {
-                resultTaskList.add(task);
-            }
-        }
+        List<Task> resultTaskList = storedTasks
+                .stream()
+                .filter(task -> task.getDescription().contains(searchDescription))
+                .collect(Collectors.toList());
         return resultTaskList;
     }
 
