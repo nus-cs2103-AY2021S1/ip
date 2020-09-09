@@ -48,10 +48,20 @@ public class UiTest {
         public void printTaskList_taskList_messageWithListOfTasks()
                 throws InvalidOptionException {
             TaskList tasks = new TaskList();
-            tasks.add(new Todo("task 1"));
-            tasks.add(new Deadline("task 2", "", "1993-12-06T10:10", true));
-            tasks.add(new Event("task 3",
-                    LocalDateTime.of(3121, 12, 29, 23, 54), new HashSet<>()));
+            tasks.add(new Todo("task 1", new String[0]));
+            tasks.add(new Deadline(
+                    "task 2",
+                    "",
+                    "1993-12-06T10:10",
+                    true,
+                    new String[0]
+            ));
+            tasks.add(new Event(
+                    "task 3",
+                    LocalDateTime.of(3121, 12, 29, 23, 54),
+                    new HashSet<>(),
+                    new String[0]
+            ));
             assertEquals("1. [T][\u2718] task 1\n2. [D][\u2713] task 2\n"
                             + "(by: Monday, 06 Dec 1993, 10:10AM)\n"
                             + "3. [E][\u2718] task 3\n(at: Thursday, 29 Dec 3121,"
@@ -63,7 +73,7 @@ public class UiTest {
         @DisplayName("should return the message with alternate list of tasks")
         public void printTaskList_altTaskList_messageWithListOfTasks() {
             TaskList tasks = new TaskList();
-            tasks.add(new Todo("test task"));
+            tasks.add(new Todo("test task", new String[0]));
             assertEquals("1. [T][\u2718] test task\n", ui.printTaskList(tasks));
         }
 
@@ -83,10 +93,20 @@ public class UiTest {
         public void printFoundList_taskList_messageWithListOfTasks()
                 throws InvalidOptionException {
             TaskList tasks = new TaskList();
-            tasks.add(new Todo("task 1"));
-            tasks.add(new Deadline("task 2", "", "1993-12-06T10:10", true));
-            tasks.add(new Event("task 3",
-                    LocalDateTime.of(3121, 12, 29, 23, 54), new HashSet<>()));
+            tasks.add(new Todo("task 1", new String[0]));
+            tasks.add(new Deadline(
+                    "task 2",
+                    "",
+                    "1993-12-06T10:10",
+                    true,
+                    new String[0]
+            ));
+            tasks.add(new Event(
+                    "task 3",
+                    LocalDateTime.of(3121, 12, 29, 23, 54),
+                    new HashSet<>(),
+                    new String[0]
+            ));
             assertEquals("Here are the matching tasks in your list:\n"
                             + "1. [T][\u2718] task 1\n2. [D][\u2713] task 2\n"
                             + "(by: Monday, 06 Dec 1993, 10:10AM)\n"
@@ -99,7 +119,7 @@ public class UiTest {
         @DisplayName("should return the message with alternate list of tasks")
         public void printFoundList_altTaskList_messageWithListOfTasks() {
             TaskList tasks = new TaskList();
-            tasks.add(new Todo("test task"));
+            tasks.add(new Todo("test task", new String[0]));
             assertEquals("Here are the matching tasks in your list:\n"
                             + "1. [T][\u2718] test task\n",
                     ui.printFoundList(tasks));
@@ -121,7 +141,7 @@ public class UiTest {
         public void printAddSuccess_todo_addSuccessMessage() {
             assertEquals("Got it. I've added this task:\n[T][\u2718] task 1\n"
                             + "Now you have 3 tasks in the list.",
-                    ui.printAddSuccess(new Todo("task 1"), 3));
+                    ui.printAddSuccess(new Todo("task 1", new String[0]), 3));
         }
 
         @Test
@@ -132,8 +152,15 @@ public class UiTest {
                             + "(by: Monday, 06 Dec 1993, 10:10AM)\n"
                             + "Now you have 0 tasks in the list.",
                     ui.printAddSuccess(
-                            new Deadline("task 2", "", "1993-12-06T10:10", true),
-                            0));
+                            new Deadline(
+                                    "task 2",
+                                    "",
+                                    "1993-12-06T10:10",
+                                    true,
+                                    new String[0]
+                            ),
+                            0
+                    ));
         }
 
         @Test
@@ -142,9 +169,11 @@ public class UiTest {
             assertEquals("Got it. I've added this task:\n[E][\u2718] task 3\n"
                             + "(at: Thursday, 29 Dec 3121, 11:54PM)\n"
                             + "Now you have 5 tasks in the list.",
-                    ui.printAddSuccess(new Event("task 3",
+                    ui.printAddSuccess(new Event(
+                            "task 3",
                             LocalDateTime.of(3121, 12, 29, 23, 54),
-                            new HashSet<>()
+                            new HashSet<>(),
+                            new String[0]
                     ), 5));
         }
 
@@ -153,7 +182,7 @@ public class UiTest {
         public void printAddSuccess_taskNumOne_singularTaskMessage() {
             assertEquals("Got it. I've added this task:\n[T][\u2718] task 1\n"
                             + "Now you have 1 task in the list.",
-                    ui.printAddSuccess(new Todo("task 1"), 1));
+                    ui.printAddSuccess(new Todo("task 1", new String[0]), 1));
         }
     }
 
@@ -165,7 +194,7 @@ public class UiTest {
         public void printRemoveSuccess_todo_addSuccessMessage() {
             assertEquals("Noted. I've removed this task:\n[T][\u2718] task 1\n"
                             + "Now you have 3 tasks in the list.",
-                    ui.printRemoveSuccess(new Todo("task 1"), 3));
+                    ui.printRemoveSuccess(new Todo("task 1", new String[0]), 3));
         }
 
         @Test
@@ -176,7 +205,15 @@ public class UiTest {
                             + "(by: Monday, 06 Dec 1993, 10:10AM)\n"
                             + "Now you have 0 tasks in the list.",
                     ui.printRemoveSuccess(
-                            new Deadline("task 2", "", "1993-12-06T10:10", true), 0));
+                            new Deadline(
+                                    "task 2",
+                                    "",
+                                    "1993-12-06T10:10",
+                                    true,
+                                    new String[0]
+                            ),
+                            0
+                    ));
         }
 
         @Test
@@ -185,10 +222,14 @@ public class UiTest {
             assertEquals("Noted. I've removed this task:\n[E][\u2718] task 3\n"
                             + "(at: Thursday, 29 Dec 3121, 11:54PM)\n"
                             + "Now you have 5 tasks in the list.",
-                    ui.printRemoveSuccess(new Event("task 3",
+                    ui.printRemoveSuccess(new Event(
+                            "task 3",
                             LocalDateTime.of(3121, 12, 29, 23, 54),
-                            new HashSet<>()
-                    ), 5));
+                            new HashSet<>(),
+                            new String[0]
+                            ),
+                            5
+                    ));
         }
 
         @Test
@@ -196,7 +237,7 @@ public class UiTest {
         public void printRemoveSuccess_taskNumOne_singularTaskMessage() {
             assertEquals("Noted. I've removed this task:\n[T][\u2718] task 1\n"
                             + "Now you have 1 task in the list.",
-                    ui.printRemoveSuccess(new Todo("task 1"), 1));
+                    ui.printRemoveSuccess(new Todo("task 1", new String[0]), 1));
         }
     }
 
@@ -207,7 +248,7 @@ public class UiTest {
         @DisplayName("should return message indicating todo as done")
         public void printDoneSuccess_todo_doneSuccessMessage() {
             assertEquals("Nice! I've marked this task as done:\n[T][\u2718] task 1",
-                    ui.printDoneSuccess(new Todo("task 1")));
+                    ui.printDoneSuccess(new Todo("task 1", new String[0])));
         }
 
         @Test
@@ -217,7 +258,13 @@ public class UiTest {
             assertEquals("Nice! I've marked this task as done:\n"
                             + "[D][\u2713] task 2\n(by: Monday, 06 Dec 1993, 10:10AM)",
                     ui.printDoneSuccess(
-                            new Deadline("task 2", "", "1993-12-06T10:10", true)));
+                            new Deadline(
+                                    "task 2",
+                                    "",
+                                    "1993-12-06T10:10",
+                                    true,
+                                    new String[0]
+                            )));
         }
 
         @Test
@@ -225,9 +272,12 @@ public class UiTest {
         public void printDoneSuccess_event_doneSuccessMessage() {
             assertEquals("Nice! I've marked this task as done:\n"
                             + "[E][\u2718] task 3\n(at: Thursday, 29 Dec 3121, 11:54PM)",
-                    ui.printDoneSuccess(new Event("task 3",
+                    ui.printDoneSuccess(new Event(
+                            "task 3",
                             LocalDateTime.of(3121, 12, 29, 23, 54),
-                            new HashSet<>())));
+                            new HashSet<>(),
+                            new String[0]
+                    )));
         }
     }
 

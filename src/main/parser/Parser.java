@@ -78,8 +78,12 @@ public class Parser {
         }
     }
 
-    private static Command parseAdd(String command, String description, HashSet<Option> options)
-            throws InvalidDeadlineFormatException,
+    private static Command parseAdd(
+            String command,
+            String description,
+            HashSet<Option> options,
+            String[] tags
+    ) throws InvalidDeadlineFormatException,
                 InvalidDateException,
                 InvalidEventFormatException,
                 UnknownCommandException {
@@ -90,7 +94,7 @@ public class Parser {
 
         switch (command) {
         case COMMAND_TODO:
-            return new TodoCommand(description);
+            return new TodoCommand(description, tags);
         case COMMAND_DEADLINE:
             nameAndTime = description.split(" /by ", 2);
             isSingleArgument = nameAndTime.length == 1;
@@ -99,7 +103,12 @@ public class Parser {
                 throw new InvalidDeadlineFormatException();
             }
 
-            return new DeadlineCommand(nameAndTime[0], toDateTime(nameAndTime[1]), options);
+            return new DeadlineCommand(
+                    nameAndTime[0],
+                    toDateTime(nameAndTime[1]),
+                    options,
+                    tags
+            );
         case COMMAND_EVENT:
             nameAndTime = description.split(" /at ", 2);
             isSingleArgument = nameAndTime.length == 1;
@@ -108,7 +117,12 @@ public class Parser {
                 throw new InvalidEventFormatException();
             }
 
-            return new EventCommand(nameAndTime[0], toDateTime(nameAndTime[1]), options);
+            return new EventCommand(
+                    nameAndTime[0],
+                    toDateTime(nameAndTime[1]),
+                    options,
+                    tags
+            );
         default:
             throw new UnknownCommandException();
         }
@@ -119,14 +133,23 @@ public class Parser {
         List<String> shortOptions = new ArrayList<>();
         List<String> fullOptions = new ArrayList<>();
         List<String> description = new ArrayList<>();
+        List<String> tags = new ArrayList<>();
 
         for (int i = 1; i < input.length; i++) {
             String arg = input[i];
 
             if (arg.startsWith("--")) {
-                fullOptions.add(arg.substring(2));
+                if (arg.length() > 2) {
+                    fullOptions.add(arg.substring(2));
+                }
             } else if (arg.startsWith("-")) {
-                shortOptions.add(arg.substring(1));
+                if (arg.length() > 1) {
+                    shortOptions.add(arg.substring(1));
+                }
+            } else if (arg.startsWith("#")) {
+                if (arg.length() > 1) {
+                    tags.add(arg.substring(1));
+                }
             } else {
                 description.add(arg);
             }
@@ -136,7 +159,8 @@ public class Parser {
             command,
             fullOptions.toArray(new String[0]),
             shortOptions.toArray(new String[0]),
-            description.toArray(new String[0])
+            description.toArray(new String[0]),
+            tags.toArray(new String[0])
         };
     }
 
@@ -180,6 +204,7 @@ public class Parser {
         String command = processedInput[0][0];
         String description = String.join(" ", processedInput[3]);
         HashSet<Option> options = parseOptions(processedInput[1], processedInput[2]);
+        String[] tags = processedInput[4];
         boolean isSingleArgument = description.length() == 0;
         int taskNum;
 
@@ -212,7 +237,7 @@ public class Parser {
                     throw new EmptyMessageException(command);
                 }
 
-                return parseAdd(command, description, options);
+                return parseAdd(command, description, options, tags);
             case COMMAND_FIND:
                 if (isSingleArgument) {
                     return new FindCommand("");

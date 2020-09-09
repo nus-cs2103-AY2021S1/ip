@@ -12,9 +12,10 @@ public class Todo extends Task {
     /**
      * Constructs a Todo instance with the name of the task.
      * @param name the name of the task.
+     * @param tags the tags associated with the task.
      */
-    public Todo(String name) {
-        super(name);
+    public Todo(String name, String[] tags) {
+        super(name, tags);
     }
 
     /**
@@ -22,9 +23,10 @@ public class Todo extends Task {
      * and the done state of the task.
      * @param name the name of the task.
      * @param isDone the done state of the task.
+     * @param tags the tags associated with the task.
      */
-    public Todo(String name, boolean isDone) {
-        super(name, isDone);
+    public Todo(String name, boolean isDone, String[] tags) {
+        super(name, isDone, tags);
     }
 
     /**

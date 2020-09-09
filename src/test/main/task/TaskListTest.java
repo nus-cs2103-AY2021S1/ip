@@ -19,10 +19,20 @@ public class TaskListTest {
 
     @BeforeEach
     public void beforeEach() throws InvalidOptionException {
-        taskOne = new Todo("task 1", true);
-        taskTwo = new Deadline("task 2",
-                LocalDateTime.of(1993, 12, 6, 10, 10), new HashSet<>());
-        taskThree = new Event("task 1", "", "1993-12-06T10:10", false);
+        taskOne = new Todo("task 1", true, new String[0]);
+        taskTwo = new Deadline(
+                "task 2",
+                LocalDateTime.of(1993, 12, 6, 10, 10),
+                new HashSet<>(),
+                new String[0]
+        );
+        taskThree = new Event(
+                "task 1",
+                "",
+                "1993-12-06T10:10",
+                false,
+                new String[0]
+        );
     }
 
     @Nested

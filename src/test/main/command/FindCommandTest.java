@@ -26,11 +26,15 @@ public class FindCommandTest {
 
     @BeforeEach
     public void beforeEach() throws InvalidOptionException {
-        taskOne = new Todo("task 1", true);
-        taskTwo = new Deadline("task 2",
-                LocalDateTime.of(193, 7, 26, 13, 50), new HashSet<>());
+        taskOne = new Todo("task 1", true, new String[] { "abc", "134" });
+        taskTwo = new Deadline(
+                "task 2",
+                LocalDateTime.of(193, 7, 26, 13, 50),
+                new HashSet<>(),
+                new String[0]
+        );
         Event taskThree = new Event(
-                "task 3", "", "1993-12-06T10:10", false);
+                "task 3", "", "1993-12-06T10:10", false, new String[0]);
         tasks = new TaskList();
         tasks.add(taskOne);
         tasks.add(taskTwo);
@@ -82,6 +86,16 @@ public class FindCommandTest {
             TaskList foundList = new TaskList();
             assertEquals(UI.printFoundList(foundList),
                     new FindCommand("").execute(UI, tasks));
+        }
+
+        @Test
+        @DisplayName("should return task if search term is found in tags")
+        public void execute_tagTerm_stringOfTasks() {
+            TaskList foundList = new TaskList();
+            foundList.add(taskOne);
+
+            assertEquals(UI.printFoundList(foundList),
+                    new FindCommand("ab 34").execute(UI, tasks));
         }
     }
 

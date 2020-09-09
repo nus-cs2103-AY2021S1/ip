@@ -27,9 +27,11 @@ public class Deadline extends Task {
      * @param name the name of task.
      * @param time the deadline of task.
      * @param options the options of the task.
+     * @param tags the tags associated with the task.
      */
-    public Deadline(String name, LocalDateTime time, HashSet<Option> options) {
-        super(name);
+    public Deadline(String name, LocalDateTime time,
+                    HashSet<Option> options, String[] tags) {
+        super(name, tags);
         this.time = time;
 
         for (Option option : options) {
@@ -56,10 +58,11 @@ public class Deadline extends Task {
      * @param recurrenceAlias the alias of the recurrence.
      * @param time the deadline of task.
      * @param isDone the done state of the task.
+     * @param tags the tags associated with the task.
      */
-    public Deadline(String name, String recurrenceAlias, String time, boolean isDone)
-            throws InvalidOptionException {
-        super(name);
+    public Deadline(String name, String recurrenceAlias, String time,
+                    boolean isDone, String[] tags) throws InvalidOptionException {
+        super(name, tags);
         LocalDateTime parsedTime = LocalDateTime.parse(time);
         recurrence = recurrenceAlias.length() == 0
                 ? null : Option.getOptionFromShortAlias(recurrenceAlias);

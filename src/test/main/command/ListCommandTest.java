@@ -25,11 +25,15 @@ public class ListCommandTest {
 
     @BeforeEach
     public void beforeEach() throws InvalidOptionException {
-        Todo taskOne = new Todo("task 1", true);
-        taskTwo = new Deadline("task 2",
-                LocalDateTime.of(193, 7, 26, 13, 50), new HashSet<>());
+        Todo taskOne = new Todo("task 1", true, new String[0]);
+        taskTwo = new Deadline(
+                "task 2",
+                LocalDateTime.of(193, 7, 26, 13, 50),
+                new HashSet<>(),
+                new String[0]
+        );
         Event taskThree = new Event(
-                "task 3", "", "1993-12-06T10:10", false);
+                "task 3", "", "1993-12-06T10:10", false, new String[0]);
         tasks = new TaskList();
         tasks.add(taskOne);
         tasks.add(taskTwo);

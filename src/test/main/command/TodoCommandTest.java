@@ -24,11 +24,15 @@ public class TodoCommandTest {
 
     @BeforeEach
     public void beforeEach() throws InvalidOptionException {
-        Todo taskOne = new Todo("task 1", true);
-        Deadline taskTwo = new Deadline("task 2",
-                LocalDateTime.of(193, 7, 26, 13, 50), new HashSet<>());
+        Todo taskOne = new Todo("task 1", true, new String[0]);
+        Deadline taskTwo = new Deadline(
+                "task 2",
+                LocalDateTime.of(193, 7, 26, 13, 50),
+                new HashSet<>(),
+                new String[0]
+        );
         Event taskThree = new Event(
-                "task 3", "", "1993-12-06T10:10", false);
+                "task 3", "", "1993-12-06T10:10", false, new String[0]);
         tasks = new TaskList();
         tasks.add(taskOne);
         tasks.add(taskTwo);
@@ -42,8 +46,8 @@ public class TodoCommandTest {
         @DisplayName("should add task to list and return add success string")
         public void execute_todoTask_addSuccess() {
             String name = "test";
-            TodoCommand command = new TodoCommand(name);
-            Todo task = new Todo(name);
+            TodoCommand command = new TodoCommand(name, new String[0]);
+            Todo task = new Todo(name, new String[0]);
 
             assertEquals(3, tasks.size());
             assertEquals(UI.printAddSuccess(task, 4), command.execute(UI, tasks));
@@ -55,8 +59,8 @@ public class TodoCommandTest {
         @DisplayName("should add alternate task to list and return add success string")
         public void execute_altTodoTask_addSuccess() {
             String name = "test 2";
-            TodoCommand command = new TodoCommand(name);
-            Todo task = new Todo(name);
+            TodoCommand command = new TodoCommand(name, new String[0]);
+            Todo task = new Todo(name, new String[0]);
 
             assertEquals(3, tasks.size());
             assertEquals(UI.printAddSuccess(task, 4), command.execute(UI, tasks));
@@ -74,7 +78,8 @@ public class TodoCommandTest {
             assertTrue(new EventCommand(
                     "test",
                     LocalDateTime.of(1992, 10, 3, 19, 2),
-                    new HashSet<>()
+                    new HashSet<>(),
+                    new String[0]
                 ).hasCommandAfter());
         }
     }

@@ -23,10 +23,11 @@ public class EventCommand implements Command {
      * @param description the description of the task.
      * @param dateTime the time of the event occurring.
      * @param options the options of the task.
+     * @param tags the tags associated with the task.
      */
     public EventCommand(String description, LocalDateTime dateTime,
-                        HashSet<Option> options) {
-        event = new Event(description, dateTime, options);
+                        HashSet<Option> options, String[] tags) {
+        event = new Event(description, dateTime, options, tags);
     }
 
     /**
