@@ -41,7 +41,7 @@ public class Duke {
                 cmd.execute(input);
                 return cmd.toString();
             } catch (DukeException e) {
-                return "OOPS! Something went wrong while executing: " + e.toString();
+                return "OOPS! Something went wrong while executing:\n" + e.getMessage();
             }
         }
     }
