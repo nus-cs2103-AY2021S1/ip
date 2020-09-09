@@ -55,18 +55,21 @@ public class Parser {
      * @return an event.
      */
     public static Event parseEvent(String display) throws DukeException {
-        if (display.length() == 5 || display.length() == 6) { // "event" or "event "
+        final int EVENT = 5;
+        final int EVENT_WITH_SPACING = 6;
+        if (display.length() == EVENT || display.length() == EVENT_WITH_SPACING) { // "event" or "event "
             throw new DukeException("☹ OOPS!!! The description of an event cannot be empty.");
         }
         if (display.contains("/")) {
             int index = display.indexOf("/");
+            final int EVENT_DATE_AND_TIME = index + 4;
             if (display.substring(index + 1).equals("")
                     || display.substring(index + 3).equals("")
-                    || display.substring(index + 4).equals("")) {
+                    || display.substring(EVENT_DATE_AND_TIME).equals("")) {
                 throw new DukeException("☹ OOPS!!! Please key in a valid date and time.");
             }
-            String description = display.substring(6, index - 1);
-            String eventDate = display.substring(index + 4);
+            String description = display.substring(EVENT_WITH_SPACING, index - 1);
+            String eventDate = display.substring(EVENT_DATE_AND_TIME);
             try {
                 LocalDate date = LocalDate.parse(eventDate);
                 return new Event(description, date);
@@ -85,10 +88,12 @@ public class Parser {
      * @return an integer.
      */
     public static int parseDelete(String s) throws DukeException {
-        if (s.length() == 6 || s.length() == 7) {
+        final int DELETE = 6;
+        final int DELETE_WITH_SPACING = 7;
+        if (s.length() == DELETE || s.length() == DELETE_WITH_SPACING) {
             throw new DukeException("ERROR: Specify the task number which you want to delete.");
         }
-        int index = Integer.parseInt(s.substring(7));
+        int index = Integer.parseInt(s.substring(DELETE_WITH_SPACING));
         return index - 1;
     }
 
@@ -98,7 +103,9 @@ public class Parser {
      * @return a todo.
      */
     public static Todo parseTodo(String s) throws DukeException {
-        if (s.length() == 4 || s.length() == 5) {
+        final int TODO = 4;
+        final int TODO_WITH_SPACING = 5;
+        if (s.length() == TODO || s.length() == TODO_WITH_SPACING) {
             throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
         }
         String description = s.substring(5);
@@ -111,18 +118,21 @@ public class Parser {
      * @return a deadline.
      */
     public static Deadline parseDeadline(String s) throws DukeException {
-        if (s.length() == 8 || s.length() == 9) {
+        final int DEADLINE = 8;
+        final int DEADLINE_WITH_SPACING = 9;
+        if (s.length() == DEADLINE || s.length() == DEADLINE_WITH_SPACING) {
             throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
         }
         if (s.contains("/")) {
             int index = s.indexOf("/");
+            final int DEADLINE_DATE_AND_TIME = index + 4;
             if (s.substring(index + 1).equals("")
                     || s.substring(index + 3).equals("")
-                    || s.substring(index + 4).equals("")) {
+                    || s.substring(DEADLINE_DATE_AND_TIME).equals("")) {
                 throw new DukeException("☹ OOPS!!! Please key in a valid date and time.");
             }
-            String description = s.substring(9, index - 1);
-            String deadlineDate = s.substring(index + 4);
+            String description = s.substring(DEADLINE_WITH_SPACING, index - 1);
+            String deadlineDate = s.substring(DEADLINE_DATE_AND_TIME);
             try {
                 LocalDate date = LocalDate.parse(deadlineDate);
                 return new Deadline(description, date);
