@@ -13,8 +13,9 @@ public class Parser {
      * @throws IOException
      */
     public static String process(String order) throws IOException {
+        assert order.length() > 0 : "command length should be more at least 1 character";
         if (order.equals("bye")) {
-            Storage.writeData(TaskList.list);//write data into the new file before exiting
+            Storage.writeData(TaskList.list); //write data into the new file before exiting
             return "    Bye-bye, see you next time!";
         } else if (order.equals("list")) {
             if (TaskList.list.size() == 0) {
@@ -27,6 +28,7 @@ public class Parser {
             Task temp = TaskList.list.get(index);
             temp.finish();
             TaskList.list.set(index, temp);
+            assert TaskList.list.get(index).getStatusIcon().equals("\u2713") : "attribute isDone should be set to true";
             Storage.writeData(TaskList.list);
             return "    Great! I have marked this task as done:\n" + temp;
         } else if (order.length() >= 4 && order.substring(0, 4).equals("todo")) {
@@ -57,7 +59,7 @@ public class Parser {
                 String content = order.substring(6, indexOfSlash);
                 String time = order.substring(indexOfSlash + 4);
                 LocalDate ddl = LocalDate.parse(time);
-                TaskList.list.add(new Event(false,content, ddl));
+                TaskList.list.add(new Event(false, content, ddl));
                 Storage.writeData(TaskList.list);
 
                 return "    added:" + content + "\n" + "    Now you have " + TaskList.list.size() + " task(s) in the list";
