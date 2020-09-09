@@ -177,4 +177,25 @@ public class TaskList {
         text += "\nCount: " + i;
         return text;
     }
+
+    /**
+     * Sets the given task to repeat for the given duration and recurrence.
+     * @param index The task index.
+     * @param end The end dateTime of the duration.
+     * @param recurrence How often the recurrence is.
+     * @return
+     * @throws DukeException
+     */
+    public Task repeatTask(int index, LocalDateTime end, long recurrence) throws DukeException {
+        Task task = list.get(index);
+        String desc = task.getText();
+        LocalDateTime start = task.getDateTime();
+        TaskType type = task.getType();
+        LocalDateTime date = start.plusDays(recurrence);
+        while (date.isBefore(end) || date.isEqual(end)) {
+            add(desc, date, type);
+            date = date.plusDays(recurrence);
+        }
+        return task;
+    }
 }

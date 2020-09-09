@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.TaskType;
+
 import java.time.LocalDateTime;
 import java.time.format.TextStyle;
 import java.util.Locale;
@@ -53,4 +55,15 @@ public class Event extends Task {
                 ? "done event " + text + " /at " + newDateTime
                 : "event " + text + " /at " + newDateTime;
     }
+
+    @Override
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    @Override
+    public TaskType getType() {
+        return TaskType.EVENT;
+    }
+
 }

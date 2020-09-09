@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.TaskType;
+
 import java.time.LocalDateTime;
 
 public abstract class Task {
@@ -45,4 +47,14 @@ public abstract class Task {
         String pattern = "(.*)" + keyword + "(.*)";
         return text.matches(pattern);
     }
+
+    public String getText() {
+        return text;
+    }
+
+    public LocalDateTime getDateTime() {
+        return LocalDateTime.now();
+    }
+
+    public abstract TaskType getType();
 }

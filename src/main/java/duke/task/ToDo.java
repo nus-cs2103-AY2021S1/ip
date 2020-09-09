@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.TaskType;
+
 import java.time.LocalDateTime;
 
 public class ToDo extends Task {
@@ -25,5 +27,10 @@ public class ToDo extends Task {
     @Override
     public boolean compareTime(LocalDateTime givenDateTime, long hours) {
         return false;
+    }
+
+    @Override
+    public TaskType getType() {
+        return TaskType.TODO;
     }
 }

@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.TaskType;
+
 import java.time.LocalDateTime;
 import java.time.format.TextStyle;
 import java.util.Locale;
@@ -53,5 +55,15 @@ public class Deadline extends Task {
         return done
                 ? "done deadline " + text + " /by " + newDateTime
                 : "deadline " + text + " /by " + newDateTime;
+    }
+
+    @Override
+    public LocalDateTime getDateTime() {
+        return dateTime;
+    }
+
+    @Override
+    public TaskType getType() {
+        return TaskType.DEADLINE;
     }
 }
