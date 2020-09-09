@@ -6,6 +6,7 @@ import java.time.format.DateTimeParseException;
 import java.util.Scanner;
 
 /** Duke class to encapsulate the behaviour of a task manager */
+@SuppressWarnings("checkstyle:Regexp")
 public class Duke {
     private static Scanner scan = new Scanner(System.in);
     private static final String SAVE_PATH = "./src/data/SaveData.txt";
@@ -32,9 +33,11 @@ public class Duke {
     /** Driver method for Duke */
     private String run(String userInput) {
         while (!userInput.equals("bye")) {
+            String command;
+            String details;
             try {
-                String command = Parser.getCommand(userInput);
-                String details = Parser.getDetails(userInput);
+                command = Parser.getCommand(userInput);
+                details = Parser.getDetails(userInput);
 
                 // Catch illegal commands
                 checkIllegalCommand(command);
@@ -44,58 +47,70 @@ public class Duke {
                 checkExistingTask(command, details, tasks.length());
                 // Check illegal argument
                 checkIllegalArgument(command, details);
-
-                // Decide the actions
-                String[] description;
-                Task taskToUpdate;
-                switch (command) {
-                case "list":
-                    return Ui.prettyPrint(tasks);
-                case "done":
-                    taskToUpdate = tasks.updateTaskStatus(Parser.getIndex(userInput), true);
-                    storage.saveTask(tasks);
-                    return Ui.prettyPrint("Nice! I've marked this task as done: \n" + "\t" + taskToUpdate);
-                case "todo":
-                    taskToUpdate = tasks.addTask(new ToDo(Parser.getDetails(userInput)));
-                    storage.saveTask(tasks);
-                    return Ui.updateTaskText("added", taskToUpdate, tasks.length());
-                case "event":
-                    description = Parser.stringSplit(details, " /at ");
-                    taskToUpdate = tasks.addTask(new Event(description[0], LocalDate.parse(description[1])));
-                    storage.saveTask(tasks);
-                    return Ui.updateTaskText("added", taskToUpdate, tasks.length());
-                case "deadline":
-                    description = Parser.stringSplit(details, " /by ");
-                    taskToUpdate = tasks.addTask(new Deadline(description[0], LocalDate.parse(description[1])));
-                    storage.saveTask(tasks);
-                    return Ui.updateTaskText("added", taskToUpdate, tasks.length());
-                case "delete":
-                    taskToUpdate = tasks.removeTask(Parser.getIndex(userInput));
-                    storage.saveTask(tasks);
-                    return Ui.updateTaskText("removed", taskToUpdate, tasks.length());
-                case "clear":
-                    return ("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-                case "hello":
-                    return Ui.greet();
-                case "find":
-                    return Ui.prettyPrint(tasks.contains(details));
-                default:
-                    break;
-                }
             } catch (DukeIllegalCommandException | DukeMissingArgumentException | DukeTaskOutOfBoundsException e) {
                 return (e.toString());
             } catch (DateTimeParseException e) {
                 return ("date time wrong");
-            } catch (IOException e) {
-                return "file not found";
             } catch (Exception e) {
                 return ("Write a number pls");
             }
+            actionPicker(userInput);
             // Gets the new input
             userInput = scan.nextLine();
         }
 
         return Ui.prettyPrint("Bye. Hope to see you again soon!");
+    }
+    /**
+     * Decide what action to perform
+     *
+     * @param userInput The line of user input
+     * @return The output string to be displayed
+     */
+    private String actionPicker(String userInput) {
+        String command = Parser.getCommand(userInput);
+        String details = Parser.getDetails(userInput);
+        // Decide the actions
+        String[] description;
+        Task taskToUpdate;
+        try {
+            switch (command) {
+            case "list":
+                return Ui.prettyPrint(tasks);
+            case "done":
+                taskToUpdate = tasks.updateTaskStatus(Parser.getIndex(userInput), true);
+                storage.saveTask(tasks);
+                return Ui.prettyPrint("Nice! I've marked this task as done: \n" + "\t" + taskToUpdate);
+            case "todo":
+                taskToUpdate = tasks.addTask(new ToDo(Parser.getDetails(userInput)));
+                storage.saveTask(tasks);
+                return Ui.updateTaskText("added", taskToUpdate, tasks.length());
+            case "event":
+                description = Parser.stringSplit(details, " /at ");
+                taskToUpdate = tasks.addTask(new Event(description[0], LocalDate.parse(description[1])));
+                storage.saveTask(tasks);
+                return Ui.updateTaskText("added", taskToUpdate, tasks.length());
+            case "deadline":
+                description = Parser.stringSplit(details, " /by ");
+                taskToUpdate = tasks.addTask(new Deadline(description[0], LocalDate.parse(description[1])));
+                storage.saveTask(tasks);
+                return Ui.updateTaskText("added", taskToUpdate, tasks.length());
+            case "delete":
+                taskToUpdate = tasks.removeTask(Parser.getIndex(userInput));
+                storage.saveTask(tasks);
+                return Ui.updateTaskText("removed", taskToUpdate, tasks.length());
+            case "clear":
+                return ("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            case "hello":
+                return Ui.greet();
+            case "find":
+                return Ui.prettyPrint(tasks.contains(details));
+            default:
+                return "";
+            }
+        } catch (IOException e) {
+            return "file not found";
+        }
     }
 
     /**
