@@ -7,18 +7,17 @@ import org.junit.jupiter.api.Test;
 import duke.CommonMethod;
 
 public class CommonMethodTest {
-
     @Test
-    public void testMergeArray() {
-        String[] array = {"Hello", "World!"};
-        assertEquals("Hello World!", CommonMethod.mergeArray(array, 0, 2));
+    public void isLeapYearTest() {
+        assertFalse(CommonMethod.isLeapYear(2017));
+        assertTrue(CommonMethod.isLeapYear(2016));
+        assertTrue(CommonMethod.isLeapYear(2000));
+        assertFalse(CommonMethod.isLeapYear(2100));
     }
 
     @Test
-    public void testIsLeapYear() {
-        assertFalse(CommonMethod.isLeapYear(1981)); // not a multiple of 4
-        assertTrue(CommonMethod.isLeapYear(2012)); // multiple of 4, not divisible by 100, leap
-        assertFalse(CommonMethod.isLeapYear(1700)); // multiple of 100, not divisible by 400, not leap
-        assertTrue(CommonMethod.isLeapYear(1600)); // multiple of 100, divisible by 400, leap
+    public void mergeArrayTest() {
+        String[] array = {"Hello", "World"};
+        assertEquals(CommonMethod.mergeArray(array, 0, 2), "Hello World");
     }
 }

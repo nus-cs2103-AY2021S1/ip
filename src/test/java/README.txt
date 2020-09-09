@@ -1,7 +1,10 @@
-Things i never tested:
+TESTING:
 
-Implementations of DukeTask -- they are quite simple
-Implementations of DukeExceptions -- they are also quite simple
-CommonString -- just constants
+Classes ignored for testing (and why):
+1. Duke
+    Implementation under Duke is rather dependent on the other classes.
+    It doesn't do much on its own so it is better (imo) to test the other classes in detail.
 
-Other explanations are in the README of the test subpackages
+2. CommonString
+    It just contains some Strings and returns them.
+
