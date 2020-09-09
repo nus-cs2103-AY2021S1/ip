@@ -84,6 +84,16 @@ public class Parser {
                     }
                     break;
 
+                case "find":
+                    try {
+                        handleFind();
+                    } catch (DukeException e) {
+                        System.out.println("    ____________________________________________________________");
+                        System.out.println("     " + e.getMessage());
+                        System.out.println("    ____________________________________________________________\n");
+                    }
+                    break;
+
                 default:
                     try {
                         handleDefault();
@@ -175,6 +185,27 @@ public class Parser {
         System.out.print("     ");
         currentTask.printDescription();
         System.out.println("     Now you have " + taskList.size() + " tasks in the list.");
+        System.out.println("    ____________________________________________________________\n");
+    }
+
+    /**
+     * handles instruction "find"
+     */
+    public void handleFind() throws DukeException {
+        String input = sc.nextLine();
+        if (input.isEmpty()) {
+            throw new DukeException("\u2639 OOPS!!! I need to know the keyword!!");
+        }
+        String keyword = input.replaceFirst(" ", "");
+        System.out.println("    ____________________________________________________________");
+        System.out.println("     Here are the matching tasks in your list:");
+        for (int i = 0, count = 1; i < taskList.size(); i++) {
+            if (taskList.get(i).description.contains(keyword)) {
+                System.out.print("     " + count + ".");
+                taskList.get(i).printDescription();
+                count++;
+            }
+        }
         System.out.println("    ____________________________________________________________\n");
     }
 
