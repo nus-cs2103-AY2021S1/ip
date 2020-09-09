@@ -45,7 +45,6 @@ public enum Message {
         }
         Message.keyableMap = messageLabelMap;
     }
-    
     /**
      * Returns the string representation for that Message
      *
@@ -53,8 +52,5 @@ public enum Message {
      */
     public String getMsg() {
         return this.msg;
-    }
-    public static Message getLabel(String msg) {
-        return keyableMap.getOrDefault(msg, Message.INVALID);
     }
 }

@@ -148,31 +148,36 @@ public class Parser {
         if (separatedInput.length <= 1) {
             throw new DukeException(Message.ERROR_EVENT_FORMAT.getMsg());
         }
-        String[] words = separatedInput[0].split(" ");
+        // parse description field for the event:
+        String words = separatedInput[0];
+        StringTokenizer wordsTokenizer = new StringTokenizer(words);
+        String command = wordsTokenizer.nextToken();
+        assert command.equals(CommandWord.EVENT_CMD.getCmd()) : "[parseEvent()]: incorrect command";
+        StringBuilder descriptionBuilder = new StringBuilder();
+        while (wordsTokenizer.hasMoreTokens()) {
+            descriptionBuilder.append(wordsTokenizer.nextToken()).append(" ");
+        }
+        String description = descriptionBuilder.toString().stripTrailing();
+        // parse start and end timing for the event:
         String[] timeInfo = separatedInput[1].split(" ");
-        String duration = timeInfo[timeInfo.length - 1];
-        String[] separatedTime = duration.split(TIME_DELIMITER);
-        if (separatedTime.length <= 1) {
+        String startAndEndTiming = timeInfo[timeInfo.length - 1];
+        String[] separatedStartAndEndTiming = startAndEndTiming.split(TIME_DELIMITER);
+        if (separatedStartAndEndTiming.length <= 1) {
             throw new DukeException(Message.ERROR_EVENT_TIME.getMsg());
         }
+        String startTime = separatedStartAndEndTiming[0];
+        String endTime = separatedStartAndEndTiming[1];
+        // parse string representation for the date:
         StringBuilder dateStringBuilder = new StringBuilder();
-        for (int i = 0; i < timeInfo.length - 2; i++) {
+        for (int i = 0; i <= timeInfo.length - 2; i++) {
             dateStringBuilder.append(timeInfo[i]).append(" ");
         }
-        dateStringBuilder.append(timeInfo[timeInfo.length - 2]);
-        String dateString = dateStringBuilder.toString();
+        String dateString = dateStringBuilder.toString().stripTrailing();
         if (dateString.isEmpty()) {
             throw new DukeException(Message.ERROR_EVENT_DATE.getMsg());
         }
-        String startTime = separatedTime[0];
-        String endTime = separatedTime[1];
-        StringBuilder newDescription = new StringBuilder();
-        for (int i = 1; i < words.length - 1; i++) {
-            newDescription.append(words[i]).append(" ");
-        }
-        newDescription.append(words[words.length - 1]);
         return new String[]{"E",
-                            newDescription.toString().stripTrailing(),
+                            description,
                             dateString,
                             startTime,
                             endTime};

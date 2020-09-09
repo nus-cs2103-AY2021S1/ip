@@ -12,6 +12,3 @@ public class DukeException extends Exception {
         return super.toString();
     }
 }
-
-// nb: might have to create children exception classes in the future, avoided
-//     because it's simple message passing for now
