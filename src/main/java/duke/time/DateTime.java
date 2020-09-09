@@ -45,6 +45,23 @@ public class DateTime extends TimePoint {
     }
 
     /**
+     * Query system for today's date and initialize a new <code>DateTime</code> with today's date.
+     * @return Today's date.
+     */
+    public static DateTime getToday() {
+        return new DateTime(LocalDate.now());
+    }
+
+    /**
+     * Compares if another <code>DateTime</code> object has the same date.
+     * @param date <code>DateTime</code> object to compare to.
+     * @return Whether the two <code>DateTime</code> objects have the same date.
+     */
+    public boolean hasSameDate(DateTime date) {
+        return this.date.equals(date.date);
+    }
+
+    /**
      * Returns string representation of this <code>DateTime</code> for display in dd MMMM yyyy h:mma.
      * See <code>java.time.format.DateTimeFormatter</code> for meaning of the abbreviated time format pattern.
      *

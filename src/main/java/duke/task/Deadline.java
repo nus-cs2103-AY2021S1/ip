@@ -38,6 +38,10 @@ public class Deadline extends Task {
         this.deadline = TimePoint.parseTime(deadline);
     }
 
+    public TimePoint getDeadline() {
+        return this.deadline;
+    }
+
     /**
      * Returns String formatted for representation of <code>Deadline</code> for display.
      *

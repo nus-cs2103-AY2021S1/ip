@@ -8,6 +8,7 @@ import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.RemindCommand;
 import duke.command.ToDoCommand;
 import duke.exception.DukeInputException;
 
@@ -35,6 +36,8 @@ public class Parser {
                 return new ByeCommand();
             case "list":
                 return new ListCommand();
+            case "remind":
+                return new RemindCommand();
             default:
                 break;
             }

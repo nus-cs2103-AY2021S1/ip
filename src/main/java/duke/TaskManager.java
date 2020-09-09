@@ -95,6 +95,15 @@ public class TaskManager {
         return this.taskStorage.size();
     }
 
+    /**
+     * Returns whether the <code>TaskManager</code> has no <code>Task</code>s.
+     *
+     * @return Whether <code>taskStorage</code> is empty.
+     */
+    public boolean isEmpty() {
+        return this.size() == 0;
+    }
+
     /** Filters <code>storage</code> and returns a new <code>TaskManager</code> with the filtered <code>Task</code>s.
      * The returned <code>TaskManager</code> can be mutated with no effect on this object.
      * However, all <code>Task</code>s are still linked and any effects such as <code>Task.doTask()</code> will

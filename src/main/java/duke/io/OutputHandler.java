@@ -1,6 +1,7 @@
 package duke.io;
 
 import java.util.ArrayList;
+import java.util.Optional;
 
 /**
  * Class for handling all output to display instructions.
@@ -60,11 +61,13 @@ public class OutputHandler {
         }
 
         // Concatenate messages in buffer
-        String stringToPrint = this.outputBuffer
+        Optional<String> stringToPrint = this.outputBuffer
                 .stream()
-                .reduce("", (x, y) -> x + "\n" + y);
+                .reduce((x, y) -> x + "\n" + y);
 
-        printNow(stringToPrint);
+        assert stringToPrint.isPresent();
+
+        printNow(stringToPrint.get());
 
         this.outputBuffer.clear();
 
