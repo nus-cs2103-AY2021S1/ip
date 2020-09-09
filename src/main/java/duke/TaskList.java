@@ -58,6 +58,21 @@ public class TaskList {
         return task;
     }
 
+    public Task editTaskDescription(int num, String description) {
+        int index = num -1;
+        this.list.get(index).setDescription(description);
+        return this.list.get(index);
+    }
+
+    //public Task editTaskDatetime(int num, String date, String time) {
+    //    int index = num -1;
+    //    Task t = this.list.get(index);
+    //    if (t instanceof Event || t instanceof Deadline) {
+    //        t.setDateTime();
+    //    }
+    //}
+
+
     /**
      * Mark Task as done.
      * @param num Int Task number to be mark done

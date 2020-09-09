@@ -7,6 +7,7 @@ public class Task {
 
     protected String description;
     protected boolean isDone;
+    //protected DateAndTime dateTime;
 
     /**
      * Initialise a Task object
@@ -48,11 +49,19 @@ public class Task {
     }
 
     /**
-     * Get Task description
+     * Get Task description.
      * @return  String of description
      */
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * Set Task description.
+     * @param description  New description
+     */
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     /**

@@ -7,7 +7,7 @@ import duke.exception.InvalidDateTimeException;
  */
 public class Event extends Task {
 
-    private final DateAndTime dateTime;
+    private DateAndTime dateTime;
 
     /**
      * Initialise a Event object
@@ -20,6 +20,10 @@ public class Event extends Task {
         super(description);
         this.dateTime = new DateAndTime(date, time);
     }
+
+    //public void setDateTime(String date, String time) throws InvalidDateTimeException {
+    //    this.dateTime = new DateAndTime(date, time);
+    //}
 
     /**
      * Convert Event object to a string representation.

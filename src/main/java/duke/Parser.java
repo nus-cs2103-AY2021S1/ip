@@ -11,6 +11,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.TodoCommand;
+import duke.command.UpdateCommand;
 import duke.exception.DukeException;
 import duke.exception.InvalidInputException;
 
@@ -31,13 +32,14 @@ public class Parser {
         boolean isListCommand = input.equals("list");
         boolean isDoneCommand = input.length() >= 4 && input.startsWith("done");
         boolean isDeleteCommand = input.length() >= 6 && input.startsWith("delete");
-        boolean isTodoCommmand = input.length() >= 4 && input.startsWith("todo");
+        boolean isTodoCommand = input.length() >= 4 && input.startsWith("todo");
         boolean isEventCommand = input.length() >= 5 && input.startsWith("event");
         boolean isDeadlineCommand = input.length() >= 8 && input.startsWith("deadline");
         boolean isFindCommand = input.length() >= 4 && input.startsWith("find");
+        boolean isUpdateCommand = input.length() >= 6 && input.startsWith("update");
 
         boolean isInvalidCommand = !(isExitCommand || isListCommand || isDoneCommand || isDeleteCommand
-                || isTodoCommmand || isEventCommand || isDeadlineCommand || isFindCommand);
+                || isTodoCommand || isEventCommand || isDeadlineCommand || isFindCommand || isUpdateCommand);
 
         if (isExitCommand) {
             return new ExitCommand();
@@ -47,14 +49,16 @@ public class Parser {
             return new DoneCommand(input.substring(4));
         } else if (isDeleteCommand) {
             return new DeleteCommand(input.substring(6));
-        } else if (isTodoCommmand) {
+        } else if (isTodoCommand) {
             return new TodoCommand(input.substring(4));
         } else if (isEventCommand) {
             return new EventCommand(input.substring(5));
         } else if (isDeadlineCommand) {
             return new DeadlineCommand(input.substring(8));
         } else if (isFindCommand) {
-            return new FindCommand(input.substring((4)));
+            return new FindCommand(input.substring(4));
+        } else if (isUpdateCommand) {
+            return new UpdateCommand(input.substring(6));
         } else {
             assert isInvalidCommand;
             throw new InvalidInputException();
