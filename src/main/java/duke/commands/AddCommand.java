@@ -38,4 +38,23 @@ public class AddCommand extends Command {
         returnStr.append(ui.printNumberOfTasks(TaskList.getList().size()));
         return returnStr.toString();
     }
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof AddCommand)) {
+            return false;
+        }
+
+        AddCommand command = (AddCommand) o;
+        boolean isEqual = true;
+        for (int i = 0; i < this.myTasks.length; i++) {
+            System.out.println(this.myTasks[i].getType());
+            System.out.println(command.myTasks[i].getType());
+            isEqual = this.myTasks[i].equals(command.myTasks[i]);
+        }
+        return isEqual;
+    }
 }
+

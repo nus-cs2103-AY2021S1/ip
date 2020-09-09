@@ -7,6 +7,7 @@ public class Task {
     private Boolean isDone;
     private final String taskDetails;
     private final TaskType type;
+    private Priority priority;
 
     /**
      * Creates a duke.task.Task instance
@@ -17,6 +18,20 @@ public class Task {
         this.isDone = false;
         this.taskDetails = taskName;
         this.type = type;
+        this.priority = Priority.LOW;
+    }
+
+    /**
+     * Creates a duke.task.Task instance with priority level.
+     * @param taskName The duke.task description.
+     * @param type Type of duke.task.
+     * @param priority Task priority level.
+     */
+    public Task(String taskName, TaskType type, Priority priority) {
+        this.isDone = false;
+        this.taskDetails = taskName;
+        this.type = type;
+        this.priority = priority;
     }
 
     /**
@@ -44,6 +59,24 @@ public class Task {
 
     @Override
     public String toString() {
-        return this.taskDetails;
+        assert this.priority != null : "Priority not found!";
+        return "[" + priority.toString() + "] " + this.taskDetails;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Task)) {
+            return false;
+        }
+
+        Task task = (Task) o;
+
+        /*return (this.priority == task.priority) && (this.taskDetails == task.taskDetails)
+                && (this.type == task.type) && (this.isDone == task.isDone);*/
+        return (this.priority.equals(task.priority)) && (this.taskDetails.equals(task.taskDetails))
+                && (this.type.equals(task.type)) && (this.isDone.equals(task.isDone));
     }
 }

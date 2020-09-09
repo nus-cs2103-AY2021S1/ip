@@ -10,11 +10,7 @@ import duke.commands.ErrorCommand;
 import duke.commands.PrintlistCommand;
 import duke.commands.RemoveCommand;
 import duke.commands.SearchCommand;
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-
+import duke.task.*;
 
 
 /**
@@ -77,7 +73,7 @@ public class Parser {
         }
     }
 
-    private static ArrayList<String> checkCommas(String input) {
+    public static ArrayList<String> checkCommas(String input) {
         ArrayList<String> returnArray = new ArrayList<>();
         if (input.contains(",")) {
             int commaIndex = input.indexOf(",");
@@ -96,7 +92,11 @@ public class Parser {
         ArrayList<String> todos = checkCommas(input.substring(5));
         ArrayList<Task> todoTasks = new ArrayList<>();
         for (String s : todos) {
-            todoTasks.add(new ToDo(s));
+            if (checkPriority(s)) {
+                todoTasks.add(handlePriority(s, TaskType.T));
+            } else {
+                todoTasks.add(new ToDo(s));
+            }
         }
         return new AddCommand(todoTasks.toArray(new Task[0]));
     }
@@ -110,8 +110,12 @@ public class Parser {
         for (String s : events) {
             if (checkPlan(s)) {
                 throw new DukeException("Oh no, you do not have a planned timing for your event!");
-            } else if (input.contains("/")) {
-                eventTasks.add(new Event(parseDate(s, "on")));
+            } else if (s.contains("/")) {
+                if (checkPriority(s)) {
+                    eventTasks.add(handlePriority(parseDate(s, "on"), TaskType.E));
+                } else {
+                    eventTasks.add(new Event(parseDate(s, "on")));
+                }
             } else {
                 eventTasks.add(new Event(s));
             }
@@ -128,26 +132,39 @@ public class Parser {
         for (String s : events) {
             if (checkPlan(s)) {
                 throw new DukeException("Oh no, you do not have a planned timing for your deadline!");
-            } else if (input.contains("/")) {
-                eventTasks.add(new Deadline(parseDate(s, "by")));
+            } else if (s.contains("/")) {
+                if (checkPriority(s)) {
+                    System.out.println(s);
+                    eventTasks.add(handlePriority(parseDate(s, "by"), TaskType.D));
+                } else {
+                    eventTasks.add(new Deadline(parseDate(s, "by")));
+                }
             } else {
-                eventTasks.add(new Deadline(s));
+                eventTasks.add(handlePriority(s, TaskType.D));
             }
         }
         return new AddCommand(eventTasks.toArray(new Task[0]));
     }
 
     private static String parseDate(String input, String keyword) {
-        int notePos = input.indexOf("/") + 1;
-        String note = input.substring(notePos);
-        String echo = input.substring(0, notePos - 1) + " ------> " + note;
-        if (input.contains(keyword)) {
-            int byPos = input.indexOf(keyword) + 3;
-            String time = input.substring(byPos);
+        String removePriorityString = input;
+        String priorityString = "";
+        if (input.contains("-PL")) {
+            priorityString = " " + input.substring(input.indexOf("-PL"));
+            System.out.println(priorityString);
+            removePriorityString = input.substring(0, input.indexOf("-PL") - 1);
+        }
+        System.out.println(removePriorityString);
+        int notePos = removePriorityString.indexOf("/") + 1;
+        String note = removePriorityString.substring(notePos);
+        String echo = removePriorityString.substring(0, notePos - 1) + " ------> " + note + priorityString;
+        if (removePriorityString.contains(keyword)) {
+            int byPos = removePriorityString.indexOf(keyword) + 3;
+            String time = removePriorityString.substring(byPos);
             try {
                 String parsedTime = formatDate(time);
-                return input.substring(0, notePos - 1)
-                        + keyword + " " + parsedTime;
+                return removePriorityString.substring(0, notePos - 1)
+                        + keyword + " " + parsedTime + priorityString;
             } catch (Exception e) {
                 return echo;
             }
@@ -182,5 +199,38 @@ public class Parser {
         return parseDate.getDayOfWeek() + " " + parseDate.getDayOfMonth() + " "
                 + parseDate.getMonth() + " " + parseDate.getYear();
     }
+
+    private static Task handlePriority(String input, TaskType taskType) {
+        String priorityString = input.substring(input.indexOf("-PL") + 3);
+        System.out.println(input);
+        String taskDetail = input.substring(0, input.indexOf("-PL"));
+        int level = 1;
+        level = Integer.parseInt(priorityString);
+        Priority priority;
+        switch (level) {
+            case 2 :
+                priority = Priority.MEDIUM;
+                break;
+            case 3 :
+                priority = Priority.HIGH;
+                break;
+            default :
+                priority = Priority.LOW;
+                break;
+        }
+        System.out.println("success");
+        if (taskType == TaskType.T) {
+            return new ToDo(taskDetail, priority);
+        } else if (taskType == TaskType.E) {
+            return new Event(taskDetail, priority);
+        } else {
+            return new Deadline(taskDetail, priority);
+        }
+    }
+
+    private static boolean checkPriority(String input) {
+        return input.contains("-PL");
+    }
+
 
 }
