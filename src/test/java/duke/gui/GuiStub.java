@@ -18,11 +18,6 @@ public class GuiStub extends GuiResponse {
     }
 
     @Override
-    public void echo(String str) {
-        sideEffects.guiEcho = true;
-    }
-
-    @Override
     public void reportCurrentTasks() {
         sideEffects.guiReportCurrentTasks = true;
     }

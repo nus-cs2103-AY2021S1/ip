@@ -5,7 +5,6 @@ public class GuiSideEffects {
     private static GuiSideEffects instance;
     //CHECKSTYLE:OFF: VisibilityModifier
     public boolean guiGreet;
-    public boolean guiEcho;
     public boolean guiReportCurrentTasks;
     public boolean guiReportNewTask;
     public boolean guiReportDoneTask;
@@ -29,7 +28,6 @@ public class GuiSideEffects {
      */
     public void reset() {
         guiGreet = false;
-        guiEcho = false;
         guiReportCurrentTasks = false;
         guiReportNewTask = false;
         guiReportDeleteTask = false;
