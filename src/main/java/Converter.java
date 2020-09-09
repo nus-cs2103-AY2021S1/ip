@@ -45,10 +45,6 @@ public class Converter {
         String taskType = s.split(" ; ")[0];
         String isDone = s.split(" ; ")[1];
         String message = s.split(" ; ")[2];
-        // use for test purposes
-        /*System.out.println(taskType);
-        System.out.println(isDone);
-        System.out.println(message);*/
 
         if (taskType.equals("T")) {
             return new Todo(message, getStatus(Integer.parseInt(isDone)));
@@ -69,10 +65,6 @@ public class Converter {
      * @return boolean status
      */
     static boolean getStatus(int i) {
-        if (i == 0) {
-            return false;
-        } else {
-            return true;
-        }
+        return i == 0 ? false : true;
     }
 }
