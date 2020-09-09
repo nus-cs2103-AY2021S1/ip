@@ -90,6 +90,7 @@ public class Storage {
     /**
      * Writes the list of tasks to the file "tasks.txt".
      * @param fileContent the comma seperated string information to be written to the file
+     * @throws DukeException if something went wrong while saving to the file.
      */
     public static void writeTasksFile(String fileContent) throws DukeException {
         try {
