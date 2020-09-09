@@ -147,4 +147,16 @@ public class Warnings extends Ui {
         String warningMsg = warningMsg1 + "\n" + e + warningMsg2;
         return warningMsg;
     }
+
+    public static String getInvalidArchiveMsg(int tasksSize) {
+        String warningMsg = DIVIDER_WARNING
+                + "\n [• ▂ •]What? "
+                + "\n I couldn't archive this task, please re-enter a valid task index!"
+                + "\n And make sure you follow this format - 'archive <Task_Index>'."
+                + "\n You have " + tasksSize + " tasks in total."
+                + "\n **Type 'help' to see what I can do. |^_^|"
+                + "\n" + DIVIDER_WARNING + "\n";
+        System.out.println(warningMsg);
+        return warningMsg;
+    }
 }

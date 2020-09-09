@@ -7,6 +7,7 @@ import java.util.Scanner;
  */
 public class Duke {
     protected static TaskList tasks;
+    protected static ArchivedTaskList archivedTasks;
     private Storage storage;
     private Ui ui;
 
@@ -17,19 +18,23 @@ public class Duke {
      */
     public Duke(String filePath) {
         assert !filePath.isEmpty() : "Data filePath is missing.";
+        String archivedFilePath = filePath + "/../archivedTasks.txt";
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(filePath, archivedFilePath);
         tasks = new TaskList(storage.load());
+        archivedTasks = new ArchivedTaskList(storage.loadArchivedTasks());
     }
 
     /**
-     * asd
+     *
      */
     public Duke() {
         String filePath = "data/tasks.txt";
+        String archivedFilePath = "data/archivedTasks.txt";
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage(filePath, archivedFilePath);
         tasks = new TaskList(storage.load());
+        archivedTasks = new ArchivedTaskList(storage.loadArchivedTasks());
     }
 
     /**
@@ -80,5 +85,6 @@ public class Duke {
      */
     public void save() {
         storage.writeTasks(tasks);
+        storage.writeArchivedTasks(archivedTasks);
     }
 }

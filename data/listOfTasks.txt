@@ -1,4 +1,0 @@
-T | 0 | 123123
-T | 1 | asdfa
-E | 0 | asdfasdf  |  24
-T | 0 | onemoretime

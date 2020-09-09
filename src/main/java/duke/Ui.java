@@ -51,8 +51,11 @@ public class Ui {
                 + "\n     5.done <task index> -- mark this task as done"
                 + "\n     6.delete <task index> -- mark this task from task list"
                 + "\n     7.find <keyword> -- find all tasks in the task list which contains the keyword"
-                + "\n     8.help -- show all commands"
-                + "\n     9.bye -- exit the chatbot"
+                + "\n     8.archive <task index> -- archive this task"
+                + "\n     9.archive all -- archive all tasks"
+                + "\n     10.list archive -- show all archived tasks"
+                + "\n     11.help -- show all commands"
+                + "\n     12.bye -- exit the chatbot"
                 + "\n" + DIVIDER_HELP + "\n";
         System.out.println(commandList);
         return commandList;
@@ -168,7 +171,7 @@ public class Ui {
     }
 
     /**
-     * Prints and returns out all tasks stored in the task list.
+     * Prints and returns all tasks stored in the task list.
      *
      * @param tasks The overall user's task list.
      * @return System reply message.
@@ -189,6 +192,66 @@ public class Ui {
                 + "\n You have " + tasks.size() + " tasks in total."
                 + "\n Here they are:";
         return getAllTasks(tasks, outputMsg);
+    }
+
+    /**
+     * Prints and returns all archived tasks in archive task list.
+     *
+     * @param archivedTasks The archived task list.
+     * @return System reply message.
+     */
+    public static String getAllArchivedTasksMsg(ArchivedTaskList archivedTasks) {
+        String outputMsg = "";
+        if (archivedTasks.getArchivedTaskList().isEmpty()) {
+            outputMsg = DIVIDER
+                    + "\n (⊙ ‿ ⊙)"
+                    + "\n Archived task list is empty, there's no archived task yet."
+                    + "\n" + DIVIDER + "\n";
+            System.out.println(outputMsg);
+            return outputMsg;
+        }
+
+        outputMsg = DIVIDER
+                + "\n (⊙ ‿ ⊙)"
+                + "\n You have " + archivedTasks.getArchivedTaskList().size()
+                + " archived tasks in total."
+                + "\n Here they are:";
+        System.out.println(outputMsg);
+        return getAllTasks(archivedTasks.getArchivedTaskList(), outputMsg);
+    }
+
+    /**
+     * Prints and returns confirmation message if the task has been archived.
+     *
+     * @param taskToArchive The task which is going to be archived.
+     * @param archivedTasks The ArchivedTaskList of archived task list.
+     * @return System reply message.
+     */
+    public static String getAddingArchiveTaskMsg(Task taskToArchive, ArchivedTaskList archivedTasks) {
+        String outputMsg = DIVIDER
+                + "\n (ಠ‿↼)"
+                + "\n Noted. This task has been archived from your task list:"
+                + "\n      Task " + taskToArchive
+                + "\n Now you have " + archivedTasks.getTaskListSize() + " tasks in the archived task list."
+                + "\n" + DIVIDER + "\n";
+        System.out.println(outputMsg);
+        return outputMsg;
+    }
+
+    /**
+     * Prints and returns confirmation message if all task has been archived.
+     *
+     * @param archivedTasks The ArchivedTaskList of archived task list.
+     * @return System reply message.
+     */
+    public static String getArchiveAllTaskMsg(ArchivedTaskList archivedTasks) {
+        String outputMsg = DIVIDER
+                + "\n (ಠ‿↼)"
+                + "\n Noted. All tasks have been archived."
+                + "\n Now you have " + archivedTasks.getTaskListSize() + " tasks in the archived task list."
+                + "\n" + DIVIDER + "\n";
+        System.out.println(outputMsg);
+        return outputMsg;
     }
 
     /**

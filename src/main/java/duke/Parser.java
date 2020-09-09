@@ -14,6 +14,7 @@ public class Parser {
     public static String parseUserInput(String inputMsg) {
         assert !inputMsg.isEmpty() : "Input command should not be empty.";
         TaskList tasks = Duke.tasks;
+        ArchivedTaskList archivedTasks = Duke.archivedTasks;
 
         if (inputMsg.equals("list")) {
             return Ui.getAllTasksMsg(tasks.getTaskList());
@@ -31,11 +32,37 @@ public class Parser {
             return parseDelete(inputMsg, tasks);
         } else if (inputMsg.startsWith("find")) {
             return parseFind(inputMsg, tasks);
+        } else if (inputMsg.startsWith("archive")) {
+            return parseArchive(inputMsg, tasks, archivedTasks);
+        } else if (inputMsg.equals("list archive")) {
+            return Ui.getAllArchivedTasksMsg(archivedTasks);
         } else if (inputMsg.equals("bye")) {
             return Ui.getByeMsg();
         } else {
             // if the user randomly enter any other commands which are not inside the command list
             return Warnings.getInvalidInputMsg();
+        }
+    }
+
+    private static String parseArchive(String inputMsg, TaskList tasks, ArchivedTaskList archivedTasks) {
+        try {
+            String indexStr = inputMsg.split("archive ")[1];
+            assert !indexStr.isEmpty() : "Index should not be empty.";
+
+            if (indexStr.equals("all")) {
+                ArchivedTaskList.archiveAllTasks(tasks.getTaskList(), archivedTasks.getArchivedTaskList());
+                return Ui.getArchiveAllTaskMsg(archivedTasks);
+            }
+
+            int index = Integer.parseInt(inputMsg.split("archive ")[1]);
+            Task taskToArchive = TaskList.deleteTask(index, tasks.getTaskList());
+            ArchivedTaskList.addArchivedTask(taskToArchive, archivedTasks.getArchivedTaskList());
+            return Ui.getAddingArchiveTaskMsg(taskToArchive, archivedTasks);
+        } catch (IndexOutOfBoundsException e) {
+            return Warnings.getInvalidArchiveMsg(tasks.getTaskListSize());
+        } catch (NumberFormatException e) {
+            // if the user doesn't key in a valid index after keyword "delete"
+            return Warnings.getInvalidArchiveMsg(tasks.getTaskListSize());
         }
     }
 
