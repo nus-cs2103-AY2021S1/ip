@@ -1,7 +1,7 @@
 package raythx98.grandma.exception;
 
 /**
- * Checked exception as a result of being unable to load task.
+ * Checked exception as a result of invalid date and time.
  */
 public class DateTimeException extends DukeException {
     public DateTimeException() {

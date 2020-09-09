@@ -8,6 +8,9 @@ import raythx98.grandma.task.TaskList;
 import raythx98.grandma.task.ToDo;
 import raythx98.grandma.ui.Ui;
 
+/**
+ * Represents a Add To do Command.
+ */
 public class AddTodoCommand extends AddCommand {
     public AddTodoCommand(String taskDescriptionDeadline) {
         super(taskDescriptionDeadline);
@@ -25,7 +28,7 @@ public class AddTodoCommand extends AddCommand {
             throw new WrongDescriptionException();
         }
         tasks.addTask(task);
-        ui.addShowOnScreen("Got it, here yur task bij\n    " + task.toString()
+        ui.appendMessage("Got it, here yur task bij\n    " + task.toString()
                 + "\nNow you have " + tasks.getSize() + "tasks in the list.");
     }
 }

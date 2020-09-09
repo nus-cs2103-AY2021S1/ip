@@ -6,16 +6,16 @@ import raythx98.grandma.task.TaskList;
 import raythx98.grandma.ui.Ui;
 
 /**
- * Represents an abstract Command from which other *Commands inherit.
+ * Represents an abstract Command from which other Commands inherit.
  */
 public abstract class Command {
 
     /**
-     * Something.
+     * Executes the given command
      *
-     * @param tasks
-     * @param ui
-     * @param storage
+     * @param tasks tasks.
+     * @param ui the ui.
+     * @param storage the storage.
      * @throws DukeException
      */
     public abstract void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
