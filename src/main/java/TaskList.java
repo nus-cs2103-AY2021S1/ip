@@ -23,6 +23,7 @@ public class TaskList {
     }
     
     public Task deleteTask(int index) {
+        assert index > 0 : "index cannot be zero or negative";
         Task task = taskList.get(index);
         taskList.remove(index);
         return task;
@@ -33,18 +34,19 @@ public class TaskList {
     }
 
     public String findTask(String display) {
+        assert display.length() > 0 : "input cannot be empty";
         ArrayList<String> matches = new ArrayList<>();
         String task = display.substring(5);
-        for (int i = 0; i < taskList.size(); i++) {
-            String currentTask = taskList.get(i).toString();
+        for (Task value : taskList) {
+            String currentTask = value.toString();
             if (currentTask.contains(task)) {
                 matches.add(currentTask);
             }
         }
-        String reply = "Here are the matching tasks in your list:\n";
-        for (int i = 0; i < matches.size(); i++) {
-            reply += matches.get(i) + "\n";
+        StringBuilder reply = new StringBuilder("Here are the matching tasks in your list:\n");
+        for (String match : matches) {
+            reply.append(match).append("\n");
         }
-        return reply;
+        return reply.toString();
     }
 }

@@ -45,6 +45,8 @@ public class Storage {
     }
 
     public Task readFiles(String data) throws DukeException {
+
+        assert data.length() > 0 : "input should not be empty";
         final int DESCRIPTION = 8;
         if (data.startsWith("T")) {
             String description = data.substring(DESCRIPTION);

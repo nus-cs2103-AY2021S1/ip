@@ -23,6 +23,7 @@ public class DoneCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = tasks.getTaskList().get(index);
         task.markAsDone();
+        storage.save(tasks);
         return ui.showDone(task);
     }
 
