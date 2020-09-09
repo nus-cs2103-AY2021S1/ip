@@ -72,7 +72,7 @@ public class Ui {
      * 
      * @return a String object of an empty list message.
      */
-    public String showNoTask() {
+    public String showEmptyList() {
         return "No tasks in your list yet";
     }
 

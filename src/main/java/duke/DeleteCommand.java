@@ -1,8 +1,16 @@
 package duke;
 
+/**
+ * Represents a command to delete tasks.
+ */
 public class DeleteCommand extends Command {
     private int number;
-    
+
+    /**
+     * Constructs a command to delete tasks.
+     * 
+     * @param number Index of the task to be deleted.
+     */
     public DeleteCommand(int number) {
         this.number = number;
     }
