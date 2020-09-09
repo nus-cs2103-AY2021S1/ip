@@ -2,6 +2,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Parser {
+    // Todo: handle magic strings
+    // Todo: extract TaskList class
     // constant SPACE and LINE for format purposes
     public static String SPACE = "     ";
     // public static String LINE = "____________________________________________________________\n";

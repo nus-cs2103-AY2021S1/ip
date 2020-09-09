@@ -24,7 +24,6 @@ public class Storage {
                 lst.add(Converter.add(task));
             }
         } catch (FileNotFoundException ex) {
-            //System.out.println(Parser.format(ex.toString()));
             ex.printStackTrace();
         }
     }
