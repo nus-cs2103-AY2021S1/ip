@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root fx:id="dialogRow" alignment="CENTER" fillHeight="false" maxHeight="-Infinity" minHeight="-Infinity"
+         spacing="5.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx"
+         xmlns:fx="http://javafx.com/fxml">
+    <HBox fx:id="dialogBox" alignment="CENTER" maxHeight="-Infinity" spacing="5.0"
+          style="-fx-background-color: black; -fx-background-radius: 13;">
+        <HBox.margin>
+            <Insets left="13.0" right="5.0"/>
+        </HBox.margin>
+        <padding>
+            <Insets bottom="13.0" left="13.0" right="13.0" top="13.0"/>
+        </padding>
+        <effect>
+            <DropShadow blurType="GAUSSIAN" color="#000000"/>
+        </effect>
+        <Label fx:id="dialog" lineSpacing="5.0" text="Label" textFill="white" wrapText="true">
+            <font>
+                <Font name="Lucida Fax Regular" size="12.0"/>
+            </font>
+        </Label>
+    </HBox>
+    <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true"/>
+</fx:root>

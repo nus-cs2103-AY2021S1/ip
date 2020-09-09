@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4595842c-0f9a-4dd5-8878-dc4861ca0b43" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../../java/duke/main/Launcher.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/duke/main/Main.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/duke/ui/DialogBox.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../../java/duke/ui/MainWindow.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../images/Duke.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../images/DukeMask.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../images/User.png" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/DialogBox.fxml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/MainWindow.fxml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/duke/exception/DukeException.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/duke/exception/DukeException.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/duke/exception/Exceptions.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/duke/exception/Exceptions.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/duke/main/Duke.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/duke/main/Duke.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/duke/main/Format.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/duke/tools/Format.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/duke/main/FormatString.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/duke/tools/FormatString.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/duke/main/Parser.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/duke/tools/Parser.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/duke/main/Response.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/duke/tools/Response.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/duke/main/Time.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/duke/tools/Time.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/duke/main/Ui.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/duke/ui/Ui.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/duke/storage/EditFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/duke/storage/EditFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/duke/storage/ReadFile.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/duke/storage/ReadFile.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../java/duke/task/Task.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../java/duke/task/Task.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../test/java/FormatTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../test/java/FormatTest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../../../test/java/ParserTest.java" beforeDir="false" afterPath="$PROJECT_DIR$/../../../test/java/ParserTest.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="CodeStyleSettingsInfer">
+    <option name="done" value="true" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../../../.." />
+  </component>
+  <component name="ProjectCodeStyleSettingsMigration">
+    <option name="version" value="1" />
+  </component>
+  <component name="ProjectId" id="1gwVoU54pdJQRzvT0nZ0Ucwf7B6" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="project.structure.last.edited" value="Project" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4595842c-0f9a-4dd5-8878-dc4861ca0b43" name="Default Changelist" comment="" />
+      <created>1599025816176</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1599025816176</updated>
+    </task>
+    <servers />
+  </component>
+</project>
