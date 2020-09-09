@@ -14,40 +14,62 @@ public class TaskManager {
     private List<Deadline> deadlines;
     private List<Event> events;
 
-    /**
-     * Constructs a new <code>TaskManager</code> object
-     * and initialises its <code>tasks</code> field as
-     * an empty <code>ArrayList</code>.
-     */
     public TaskManager() {
         todos = new ArrayList<>();
         deadlines = new ArrayList<>();
         events = new ArrayList<>();
     }
 
+    /**
+     * Sets the todo list with the given argument.
+     * @param todos the todo list to be set.
+     */
     public void initialiseTodos(List<Todo> todos) {
         this.todos = todos;
     }
 
+    /**
+     * Sets the deadline list with the given argument.
+     * @param deadlines the deadline list to be set.
+     */
     public void initialiseDeadlines(List<Deadline> deadlines) {
         this.deadlines = deadlines;
     }
 
+    /**
+     * Sets the event list with the given argument.
+     * @param events the event list to be set.
+     */
     public void initialiseEvents(List<Event> events) {
         this.events = events;
     }
 
+    /**
+     * Adds a todo.
+     * @param todo the todo to be added.
+     * @throws DukeException if something went wrong while saving.
+     */
     public void addTodo(Todo todo) throws DukeException {
         todos.add(todo);
         save();
     }
 
+    /**
+     * Adds a deadline and sorts the deadline list.
+     * @param deadline the deadline to be added.
+     * @throws DukeException if something went wrong while saving.
+     */
     public void addDeadline(Deadline deadline) throws DukeException {
         deadlines.add(deadline);
         deadlines.sort(Deadline::compareTo);
         save();
     }
 
+    /**
+     * Adds a event and sorts the events list.
+     * @param event the event to be added.
+     * @throws DukeException if something went wrong while saving.
+     */
     public void addEvent(Event event) throws DukeException {
         events.add(event);
         events.sort(Event::compareTo);
@@ -55,10 +77,8 @@ public class TaskManager {
     }
 
     /**
-     * Gets the "save" text represenation of each <code>Task</code>
-     * and creates a <code>String</code> of the information to be saved.
-     * This string information is then passed on to the <code>Storage</code>
-     * class where it will handle the saving of the information.
+     * Gets each task from the three lists and saves them to Task.txt file.
+     * @throws DukeException if something went wrong while writing to the file.
      */
     private void save() throws DukeException {
         StringBuilder sb = new StringBuilder();
@@ -75,8 +95,8 @@ public class TaskManager {
     }
 
     /**
-     * Creates a string representation of all the duke.tasks.
-     * @return the string representation of all the duke.tasks
+     * Creates a string representation of all the tasks.
+     * @return the string representation of all the tasks
      */
     public String listTasks() {
         int i = 1;
@@ -115,12 +135,10 @@ public class TaskManager {
     }
 
     /**
-     * Marks a particular task as done. The task to be marked as done
-     * is identified by the <code>taskNum</code>. <code>taskNum - 1</code>
-     * is the index position of the task in the <code>ArrayList</code>.
+     * Marks a particular task as done.
      * @param taskNum the number of the task in the task list
      * @return the <code>Task</code> that is marked done
-     * @throws DukeException if the provided task number is out of bounds of the range of the <code>ArrayList</code>
+     * @throws DukeException if the provided task number is out of the range of number of tasks.
      */
     public Task markDone(int taskNum) throws DukeException {
         checkValidIndex(taskNum);
