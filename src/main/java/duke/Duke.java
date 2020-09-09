@@ -33,14 +33,10 @@ public class Duke extends Application {
 
     /**
      * The constructor method for a Duke object.
+     * The constructor method for creating a Duke object
      */
     public Duke() {
         storage = new Storage("src/main/data/", "src/main/data/data.txt");
-        try {
-            storage.processData();
-        } catch (java.io.IOException ignored) {
-            /* Exceptions are ignored */
-        }
         parser = new Parser(storage.getData());
     }
 
@@ -63,8 +59,8 @@ public class Duke extends Application {
 
     /**
      * Iteration 2:
-     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing duke.Duke's reply and then appends them
+     * to the dialog container. Clears the user input after processing.
      */
     private void handleUserInput() {
         dialogContainer.getChildren().addAll(
