@@ -22,13 +22,17 @@ public class FindCommand extends Command {
 
     /**
      * Executes find command of user.
-     * @param tasks tasks of user.
+     * @param taskList tasks of user.
      * @param ui user interface object.
      * @param storage Storage object to retrieve and store data from file.
      */
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
-        ui.setFindTaskByKeywordMessage(input.substring(5), tasks.getList());
+    public void execute(TaskList taskList, Ui ui, Storage storage) {
+
+        assert taskList != null : "TaskList is null";
+        assert ui != null : "ui is null";
+        assert storage != null : "storage is null";
+        ui.setFindTaskByKeywordMessage(input.substring(5), taskList.getList());
     }
 
 }

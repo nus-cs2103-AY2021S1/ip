@@ -31,6 +31,11 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+
+        assert taskList != null : "TaskList is null";
+        assert ui != null : "ui is null";
+        assert storage != null : "storage is null";
+
         if (Parser.isValidIndex(input, taskList.getListSize())) {
             int index = Parser.getIndex(input);
             ui.setDeletedMessage(taskList.getList().get(index), taskList.getListSize());

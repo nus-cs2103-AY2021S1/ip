@@ -32,6 +32,11 @@ public class DoneCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
+
+        assert taskList != null : "TaskList is null";
+        assert ui != null : "ui is null";
+        assert storage != null : "storage is null";
+
         if (Parser.isValidIndex(input, taskList.getListSize())) {
             Task task = taskList.getList().get(Parser.getIndex(input));
             task.markAsDone();

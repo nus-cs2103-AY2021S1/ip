@@ -24,6 +24,11 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) {
+
+        assert taskList != null : "TaskList is null";
+        assert ui != null : "ui is null";
+        assert storage != null : "storage is null";
+
         ui.setShowListMessage(taskList.getList());
     }
 }
