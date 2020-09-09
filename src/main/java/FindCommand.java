@@ -5,6 +5,8 @@ public class FindCommand extends Command {
     String searchWord;
 
     public FindCommand(String input) {
+        assert input != null;
+
         String[] splitInput = input.split(" ");
         this.searchWord = splitInput[1];
     }

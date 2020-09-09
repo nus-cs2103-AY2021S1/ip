@@ -5,6 +5,8 @@ public class DoneCommand extends Command {
     private int taskNum;
 
     public DoneCommand(String input) {
+        assert input != null;
+
         String[] splitInput = input.split(" ");
         this.taskNum = Integer.parseInt(splitInput[1]);
     }
