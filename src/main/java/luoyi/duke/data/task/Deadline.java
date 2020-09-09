@@ -6,12 +6,10 @@ import luoyi.duke.common.TimeWrapper;
  * A Deadline class.
  * A Deadline is a task that needs to be done before a specific date/time.
  */
-public class Deadline extends Task {
-    private final TimeWrapper time;
+public class Deadline extends TimedTask {
 
     private Deadline(String description, TimeWrapper time, boolean isDone) {
-        super(description, isDone);
-        this.time = time;
+        super(description, time, isDone);
     }
 
     /**
@@ -38,10 +36,6 @@ public class Deadline extends Task {
     @Override
     public String getDataString() {
         return String.format("D|%d|%s|%s", isDone ? 1 : 0, description, time);
-    }
-
-    public boolean isSameTime(String date) {
-        return time.equals(TimeWrapper.getTimeWrapper(date));
     }
 
     @Override

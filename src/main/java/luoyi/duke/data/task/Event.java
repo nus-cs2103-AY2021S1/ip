@@ -6,12 +6,10 @@ import luoyi.duke.common.TimeWrapper;
  * An Event class.
  * An Event is a task that start at a specific time and ends at a specific time.
  */
-public class Event extends Task {
-    private final TimeWrapper time;
+public class Event extends TimedTask {
 
     private Event(String description, TimeWrapper time, boolean isDone) {
-        super(description, isDone);
-        this.time = time;
+        super(description, time, isDone);
     }
 
     /**
