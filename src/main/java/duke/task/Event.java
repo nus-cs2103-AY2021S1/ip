@@ -118,7 +118,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         return printCompletionFlag() + " | E | " + description
-                + " | Period: " + dateFrom.format(Task.DATE_FORMAT_DISPLAY) + " to "
+                + "\nPeriod: " + dateFrom.format(Task.DATE_FORMAT_DISPLAY) + " to "
                 + dateTill.format(Task.DATE_FORMAT_DISPLAY);
     }
 }

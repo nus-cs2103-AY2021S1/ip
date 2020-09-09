@@ -95,6 +95,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return printCompletionFlag() + " | D | " + description + " | By: " + deadline.format(Task.DATE_FORMAT_DISPLAY);
+        return printCompletionFlag() + " | D | " + description + "\nBy: " + deadline.format(Task.DATE_FORMAT_DISPLAY);
     }
 }
