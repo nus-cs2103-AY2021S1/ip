@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 
 import duke.exception.InvalidEventException;
-import duke.parser.DateTimeParsing;
+import duke.util.DukeDateTime;
 
 public class EventTest {
     @Test
@@ -34,8 +34,8 @@ public class EventTest {
     public void isDueOn() throws InvalidEventException {
         String description = "This is a test on isDueOn. /at 2018-09-21 15:00";
         Event event = Event.createEvent(description);
-        LocalDate date1 = DateTimeParsing.parseDate("2018-09-21");
-        LocalDate date2 = DateTimeParsing.parseDate("2019-09-21");
+        LocalDate date1 = DukeDateTime.parseDate("2018-09-21");
+        LocalDate date2 = DukeDateTime.parseDate("2019-09-21");
         assertTrue(event.isDueOn(date1));
         assertFalse(event.isDueOn(date2));
     }
@@ -51,5 +51,13 @@ public class EventTest {
 
         String expected2 = "[E][\u2713] This is a test on toString. (at: Feb 3 2022 08:00 AM)";
         assertEquals(expected2, event.toString());
+    }
+
+    @Test
+    public void isDueInNDays() throws InvalidEventException {
+        String description = "This is a test on isDueInNDays. /at 2021-09-08 08:00";
+        Event event = Event.createEvent(description);
+        assertTrue(event.isDueInNDays(365));
+        assertFalse(event.isDueInNDays(5));
     }
 }

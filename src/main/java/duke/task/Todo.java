@@ -37,6 +37,12 @@ public class Todo extends Task {
     }
 
     @Override
+    public boolean isDueInNDays(int n) {
+        assert n >= 0 : "isDueWithinNDays should receive a non-negative input";
+        return true;
+    }
+
+    @Override
     public String toString() {
         return TODO_ICON + super.toString();
     }

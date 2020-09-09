@@ -23,4 +23,9 @@ public class TodoStub extends Task {
     public String toString() {
         return "This todo stub was " + (isDone ? "" : "not") + " marked as done";
     }
+
+    @Override
+    public boolean isDueInNDays(int n) {
+        return false;
+    }
 }

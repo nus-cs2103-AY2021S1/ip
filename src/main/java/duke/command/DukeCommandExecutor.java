@@ -36,6 +36,8 @@ public class DukeCommandExecutor implements CommandExecutor {
             return FindCommand.execute(in, taskList);
         case List:
             return ListCommand.execute(taskList);
+        case Remind:
+            return RemindCommand.execute(in, taskList);
         case Task:
             return TaskCommand.execute(in, taskList);
         default:

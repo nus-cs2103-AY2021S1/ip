@@ -10,7 +10,7 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 
 import duke.exception.InvalidDeadlineException;
-import duke.parser.DateTimeParsing;
+import duke.util.DukeDateTime;
 
 public class DeadlineTest {
     @Test
@@ -34,8 +34,8 @@ public class DeadlineTest {
     public void isDueOn() throws InvalidDeadlineException {
         String description = "This is a test on isDueOn. /by 2018-09-21 15:00";
         Deadline deadline = Deadline.createDeadline(description);
-        LocalDate date1 = DateTimeParsing.parseDate("2018-09-21");
-        LocalDate date2 = DateTimeParsing.parseDate("2019-09-21");
+        LocalDate date1 = DukeDateTime.parseDate("2018-09-21");
+        LocalDate date2 = DukeDateTime.parseDate("2019-09-21");
         assertTrue(deadline.isDueOn(date1));
         assertFalse(deadline.isDueOn(date2));
     }
@@ -51,5 +51,13 @@ public class DeadlineTest {
 
         String expected2 = "[D][\u2713] This is a test on toString. (by: Feb 3 2022 08:00 AM)";
         assertEquals(expected2, deadline.toString());
+    }
+
+    @Test
+    public void isDueInNDays() throws InvalidDeadlineException {
+        String description = "This is a test on isDueInNDays /by 2021-09-08 08:00";
+        Deadline deadline = Deadline.createDeadline(description);
+        assertTrue(deadline.isDueInNDays(365));
+        assertFalse(deadline.isDueInNDays(5));
     }
 }

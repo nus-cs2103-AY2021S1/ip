@@ -4,12 +4,12 @@ import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
 import duke.exception.InvalidEventException;
-import duke.parser.DateTimeParsing;
+import duke.util.DukeDateTime;
 
 public class Event extends Task {
     private static final String EVENT_SYMBOL = "[E]";
     private static final String EVENT_NAME = "event ";
-    private static final String EVENT_AT = "/at ";
+    private static final String EVENT_KEYWORD = "/at ";
 
     private final String time12h;
     private final LocalDate date;
@@ -28,15 +28,18 @@ public class Event extends Task {
      * @throws InvalidEventException If the format of the details is invalid.
      */
     protected static Event createEvent(String details) throws InvalidEventException {
-        String[] info = details.split("/");
-        if (info.length == 1) {
+        boolean hasKeyword = details.contains(EVENT_KEYWORD);
+
+        if (!hasKeyword) {
             throw new InvalidEventException();
         }
+
+        String[] info = details.split(EVENT_KEYWORD);
         String desc = info[0];
-        String[] dateTime = info[1].replaceFirst("at ", "").split(" ");
+        String[] dateTime = info[1].trim().split(" ");
         try {
-            LocalDate date = DateTimeParsing.parseDate(dateTime[0]);
-            String time12h = DateTimeParsing.to12HTimeFormat(dateTime[1]);
+            LocalDate date = DukeDateTime.parseDate(dateTime[0]);
+            String time12h = DukeDateTime.to12HTimeFormat(dateTime[1]);
             return new Event(desc, time12h, date);
         } catch (DateTimeParseException | NumberFormatException e) {
             throw new InvalidEventException();
@@ -50,14 +53,21 @@ public class Event extends Task {
 
     @Override
     public String toSaveString() {
-        String date = DateTimeParsing.localDateToString(this.date);
-        String time = DateTimeParsing.to24HTimeFormat(time12h);
-        return (isDone ? 1 : 0) + EVENT_NAME + description + EVENT_AT + date + " " + time;
+        String date = DukeDateTime.localDateToString(this.date);
+        String time = DukeDateTime.to24HTimeFormat(time12h);
+        return (isDone ? 1 : 0) + EVENT_NAME + description + EVENT_KEYWORD + date + " " + time;
+    }
+
+    @Override
+    public boolean isDueInNDays(int n) {
+        assert n >= 0 : "isDueInNDays should receive a non-negative input";
+
+        return DukeDateTime.isWithinNDays(date, n);
     }
 
     @Override
     public String toString() {
-        String formattedDate = DateTimeParsing.localDateToFormattedString(date);
+        String formattedDate = DukeDateTime.localDateToFormattedString(date);
         return EVENT_SYMBOL + super.toString() + "(at: " + formattedDate + " " + time12h + ")";
     }
 }

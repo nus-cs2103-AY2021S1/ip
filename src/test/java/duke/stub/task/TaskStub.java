@@ -18,4 +18,9 @@ public class TaskStub extends Task {
     public boolean isDueOn(LocalDate date) {
         return false;
     }
+
+    @Override
+    public boolean isDueInNDays(int n) {
+        return false;
+    }
 }

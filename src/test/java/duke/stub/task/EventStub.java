@@ -2,8 +2,8 @@ package duke.stub.task;
 
 import java.time.LocalDate;
 
-import duke.parser.DateTimeParsing;
 import duke.task.Task;
+import duke.util.DukeDateTime;
 
 public class EventStub extends Task {
     public EventStub() {
@@ -17,7 +17,12 @@ public class EventStub extends Task {
 
     @Override
     public boolean isDueOn(LocalDate date) {
-        LocalDate stubDate = DateTimeParsing.parseDate("2000-01-01");
+        LocalDate stubDate = DukeDateTime.parseDate("2000-01-01");
         return date.equals(stubDate);
+    }
+
+    @Override
+    public boolean isDueInNDays(int n) {
+        return true;
     }
 }

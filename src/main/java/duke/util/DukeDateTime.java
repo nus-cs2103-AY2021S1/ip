@@ -1,4 +1,4 @@
-package duke.parser;
+package duke.util;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -6,7 +6,7 @@ import java.time.format.DateTimeFormatter;
 
 
 // Class that deals with any parsing or conversion of date and time.
-public class DateTimeParsing {
+public class DukeDateTime {
     private static final String FORMAT_24H = "HH:mm";
     private static final String FORMAT_12H = "hh:mm a";
 
@@ -68,5 +68,24 @@ public class DateTimeParsing {
         return LocalTime
                 .parse(time, DateTimeFormatter.ofPattern(FORMAT_12H))
                 .format(DateTimeFormatter.ofPattern(FORMAT_24H));
+    }
+
+    /**
+     * Returns true if the date given is before (current date + n days) and the date given falls after
+     * the current date. Also returns true if the date given is equal to current date.
+     *
+     * @param date LocalDate the input date to be used as the frame of reference.
+     * @param n int time period in days.
+     * @return boolean Whether the task is due in the specified period.
+     */
+    public static boolean isWithinNDays(LocalDate date, int n) {
+        assert n >= 0 : "isWithinNDays should receive a non-negative input";
+        LocalDate now = LocalDate.now();
+        LocalDate nDaysLater = now.plusDays(n);
+        boolean isNow = date.equals(now);
+        boolean isDueWithin = date.isBefore(nDaysLater) || date.equals(nDaysLater);
+        boolean isActive = date.isAfter(now);
+        boolean isDue = isNow || (isDueWithin && isActive);
+        return isDue;
     }
 }
