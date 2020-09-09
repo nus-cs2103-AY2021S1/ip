@@ -6,7 +6,9 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.util.DateTimeHandler;
 
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
+import java.util.stream.Stream;
 
 /**
  * Encapsulates the execution of user's command.
@@ -155,25 +157,24 @@ public class Executor {
      */
     private String displayTasksFromDate(String dateString) throws DukeInputException {
         String requiredDate = DateTimeHandler.parseDate(dateString);
-        boolean hasRequiredTasks = false;
         StringBuilder requiredTasks = new StringBuilder();
+        Stream<Task> taskStream = this.taskList.getTaskList().stream();
+        AtomicInteger counter = new AtomicInteger();
 
-        int number = 0;
-        for (int i = 0; i < this.taskList.getNumOfTasks(); i++) {
-            String taskString = this.taskList.getTask(i).toString();
-            if (taskString.contains(requiredDate)) {
-                hasRequiredTasks = true;
-                number++;
-                requiredTasks.append(number).append(". ").append(taskString).append("\n");
-            }
-        }
+        taskStream
+                .filter(x -> x.toString().contains(requiredDate))
+                .forEach(x -> requiredTasks
+                        .append(counter.incrementAndGet())
+                        .append(". ")
+                        .append(x.toString())
+                        .append("\n"));
 
-        if (hasRequiredTasks) {
-            String taskMessage = "Here are the task(s) from " + requiredDate + ":\n" + requiredTasks.toString();
-            return this.ui.displayMessage(taskMessage);
-        } else {
+        if (requiredTasks.length() == 0) {
             return this.ui.displayMessage("You have no tasks from " + requiredDate + ".");
         }
+
+        String taskMessage = "Here are the task(s) from " + requiredDate + ":\n" + requiredTasks.toString();
+        return this.ui.displayMessage(taskMessage);
     }
 
     /**
@@ -183,28 +184,24 @@ public class Executor {
      * @return String describing the result of searching a keyword.
      */
     private String findTasks(String keyword) {
-        boolean hasRelevantTasks = false;
         StringBuilder relevantTasks = new StringBuilder();
+        Stream<Task> taskStream = this.taskList.getTaskList().stream();
+        AtomicInteger counter = new AtomicInteger();
 
-        // Add tasks with keyword contained in the description
-        int number = 0;
-        for (int i = 0; i < this.taskList.getNumOfTasks(); i++) {
-            Task task = this.taskList.getTask(i);
-            String taskDescription = task.getDescription();
-            if (taskDescription.contains(keyword)) {
-                hasRelevantTasks = true;
-                number++;
-                relevantTasks.append(number).append(". ").append(task.toString()).append("\n");
-            }
-        }
+        taskStream
+                .filter(x -> x.getDescription().contains(keyword))
+                .forEach(x -> relevantTasks
+                        .append(counter.incrementAndGet())
+                        .append(". ")
+                        .append(x.toString())
+                        .append("\n"));
 
-        // Print message according to whether any relevant tasks have been found
-        if (hasRelevantTasks) {
-            String taskMessage = "Here are the matching task(s) in your list:\n" + relevantTasks.toString();
-            return this.ui.displayMessage(taskMessage);
-        } else {
+        if (relevantTasks.length() == 0) {
             return this.ui.displayMessage("You have no matching tasks for the keyword: \"" + keyword + "\".\n");
         }
+
+        String taskMessage = "Here are the matching task(s) in your list:\n" + relevantTasks.toString();
+        return this.ui.displayMessage(taskMessage);
     }
 
     /**
