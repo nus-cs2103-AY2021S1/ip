@@ -43,6 +43,7 @@ public class TaskList {
      */
     public void addTask(Task newTask) {
         storedTasks.add(newTask);
+        assert storedTasks.contains(newTask);
     }
 
     /**
@@ -60,6 +61,7 @@ public class TaskList {
                 throw new DukeException("This task is already done: " + task.getDescription());
             } else {
                 task.markAsDone();
+                assert task.isDone;
                 return task;
             }
         }
@@ -77,6 +79,7 @@ public class TaskList {
         } else {
             Task taskToDelete = storedTasks.get(taskNumber - 1);
             storedTasks.remove(taskToDelete);
+            assert !storedTasks.contains(taskToDelete);
             return taskToDelete;
         }
     }

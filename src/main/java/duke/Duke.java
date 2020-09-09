@@ -64,10 +64,11 @@ public class Duke {
      * Generates response from user input.
      *
      * @param input User input.
-     * @return Response which echos the user's input.
+     * @return Response from the user's input.
      */
     public String getResponse(String input) {
         try {
+            assert isInProgram;
             Command command = Parser.parse(input);
             command.execute(taskList, ui, storage);
             isInProgram = command.isInProgram();

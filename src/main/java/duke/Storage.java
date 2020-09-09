@@ -24,10 +24,13 @@ public class Storage {
                 while (sc.hasNextLine()) {
                     String[] taskInformation = sc.nextLine().split("\\" + SPLITTER);
                     if (taskInformation[0].equals(TaskType.TODO.getInitial())) {
+                        assert taskInformation.length == 3;
                         taskList.add(new ToDo(taskInformation[2], isDone(taskInformation[1])));
                     } else if (taskInformation[0].equals(TaskType.DEADLINE.getInitial())) {
+                        assert taskInformation.length == 4;
                         taskList.add(new Deadline(taskInformation[2], isDone(taskInformation[1]), taskInformation[3]));
                     } else if (taskInformation[0].equals(TaskType.EVENT.getInitial())) {
+                        assert taskInformation.length == 4;
                         taskList.add(new Event(taskInformation[2], isDone(taskInformation[1]), taskInformation[3]));
                     } else {
                         throw new DukeException("File formatting is wrong...");
