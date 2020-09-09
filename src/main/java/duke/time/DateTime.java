@@ -44,10 +44,19 @@ public class DateTime extends TimePoint {
         this.haveTime = true;
     }
 
+    /**
+     * Query system for today's date and initialize a new <code>DateTime</code> with today's date.
+     * @return Today's date.
+     */
     public static DateTime getToday() {
         return new DateTime(LocalDate.now());
     }
 
+    /**
+     * Compares if another <code>DateTime</code> object has the same date.
+     * @param date <code>DateTime</code> object to compare to.
+     * @return Whether the two <code>DateTime</code> objects have the same date.
+     */
     public boolean hasSameDate(DateTime date) {
         return this.date.equals(date.date);
     }

@@ -1,22 +1,34 @@
 package duke.command;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 import duke.SaveManager;
 import duke.TaskManager;
 import duke.Ui;
-import duke.exception.DukeInputException;
 import duke.task.Deadline;
 import duke.time.DateTime;
 
+/**
+ * Class that represents user command to remind them about <code>Deadline</code>s that are due today.
+ */
 public class RemindCommand extends Command {
 
+    /**
+     * Filter all <code>Deadline</code>s from <code>taskManager</code> with date set to today, as returned by
+     * <code>DateTime.getToday()</code>, then reminds the user about them.
+     * Note: Only <code>DateTime</code> dated deadlines can be filtered. If the <code>Deadline</code> is
+     * initialized with a <code>TimePoint</code> that relies on a description, it will not be filtered.
+     *
+     * @param ui Print-out and display manager.
+     * @param taskManager <code>Task</code> manipulation manager.
+     * @param saveManager Handles saving and loading.
+     */
     @Override
     public void execute(Ui ui, TaskManager taskManager, SaveManager saveManager) {
 
         DateTime date = DateTime.getToday();
 
+        // Get all deadlines due on date
         TaskManager deadlines = new TaskManager(taskManager
                 .filter(task -> task instanceof Deadline)
                 .getAllTasks()
