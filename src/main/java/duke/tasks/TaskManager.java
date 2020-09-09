@@ -123,10 +123,7 @@ public class TaskManager {
      * @throws DukeException if the provided task number is out of bounds of the range of the <code>ArrayList</code>
      */
     public Task markDone(int taskNum) throws DukeException {
-        int totalNumber = getTotalNumberOfItems();
-        if (taskNum < 0 || taskNum >= totalNumber) {
-            throw new DukeException("you gave an invalid task number!");
-        }
+        checkValidIndex(taskNum);
         Task task;
         if (taskNum <= todos.size()) {
             task = todos.get(taskNum - 1);
@@ -142,16 +139,21 @@ public class TaskManager {
         return task;
     }
 
+    private void checkValidIndex(int taskNum) throws DukeException {
+        int totalNumber = getTotalNumberOfItems();
+        if (taskNum < 0 || taskNum >= totalNumber) {
+            String errorResponse = String.format("You gave an invalid task number. Give a number from 0 to %d.", totalNumber);
+            throw new DukeException(errorResponse);
+        }
+    }
+
     /**
      * Deletes a task from the list.
      * @param taskNum the task number of the task to be deleted
      * @throws DukeException if the provided task number is out of bounds of the range of the <code>ArrayList</code>
      */
     public Task deleteTask(int taskNum) throws DukeException {
-        int totalNumber = getTotalNumberOfItems();
-        if (taskNum < 0 || taskNum > totalNumber) {
-            throw new DukeException("you gave an invalid task number!");
-        }
+        checkValidIndex(taskNum);
         Task task;
         if (taskNum <= todos.size()) {
             task = todos.remove(taskNum - 1);
