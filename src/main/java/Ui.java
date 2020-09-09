@@ -1,176 +1,212 @@
 /**
- * Ui class is the main processor for users inputs,
+ * Ui class is the main handler of users inputs,
  * Ui takes in user inputs, categorises it and stores it.
  */
 public class Ui {
 
-    //private final Scanner scanner;
     private final Parser parser;
+    private String description;
+    private String correctedInput;
+    private DateAndTime byOrAt;
 
     /**
      * Constructs a ui object to handle user inputs.
      */
     public Ui() {
-        //scanner = new Scanner(System.in);
         parser = new Parser();
     }
 
     /**
-     * Work horse of the Duke project, handles all possible user inputs exactly.
-     * Currently, the designing of deal() function is not in line with our 2103 coding
-     * standards, I will continue to work on it :).
+     * A helper which deals with the Bye instruction.
+     * @return a string to say bye to the user
+     */
+    private String dealBye(){
+        return " Bye. Hope to see you again soon!";
+    }
+
+    /**
+     * A helper which deals with the List instruction.
+     * @return loads and returns all tasks stored
+     */
+    private String dealList(){
+        return TaskList.read();
+    }
+
+    /**
+     * A helper which deals with the Find instruction.
+     * @param input a string, which is text entered by the user
+     * @return all tasks containing the string
+     */
+    private String dealFind(String input){
+        return TaskList.find(input.substring(Parser.FIND.length() + 1));
+    }
+
+    /**
+     * A helper which deals with the Done instruction.
+     * @param input a string, which is text entered by the user
+     * @return a task, which now has a completion state of a tick
+     */
+    private String dealDone(String input){
+
+        int ref = Integer.parseInt(Character.toString(
+                input.charAt(Parser.DONE_VALID.length() - 1))) - 1;
+
+        if (TaskList.taskStorage.get(ref) == null) {
+            return ("I am afraid that it is not possible" +
+                    "to do an unknown task.");
+        }
+
+        Task done = TaskList.taskStorage.get(ref).markAsDone();
+        TaskList.taskStorage.remove(TaskList.taskStorage.get(ref));
+        TaskList.taskStorage.add(ref, done);
+        Storage.write(TaskList.taskStorage);
+
+        return ("Nice! I've marked this task as done:\n"
+                + TaskList.taskStorage.get(ref));
+    }
+
+    /**
+     * A helper which deals with the Delete instruction.
+     * @param input a string, which is text entered by the user
+     * @return a string representation of a task, which now has a completion state of a tick
+     */
+    private String dealDelete(String input){
+
+        int ref = Integer.parseInt(Character.toString(
+                input.charAt(Parser.DEL_VALID.length() - 1))) - 1;
+        TaskList.delete(ref);
+        Storage.write(TaskList.taskStorage);
+
+        return TaskList.delete(ref);
+    }
+
+    /**
+     * A helper which deals with the Todo instruction.
+     * @param input a string, which is text entered by the user
+     * @return a string representation of a Todo task
+     */
+    private String dealTodo(String input){
+
+        if (!parser.isValidTodo(input)) {
+            return ("The description of a todo cannot be empty lah.");
+        }
+
+        description = input.substring(Parser.TODO_VALIDATION.length(),
+                Parser.TODO_VALIDATION.length() + 1);
+
+        if (parser.isEmptyDescription(description)) {
+            return ("OOPS!!! The description of a todo cannot be empty.");
+        }
+
+        correctedInput = input.substring(Parser.TODO_VALIDATION.length());
+        byOrAt = new DateAndTime();
+        TaskList.write(correctedInput, Parser.TODO, byOrAt);
+        Storage.write(TaskList.taskStorage);
+
+        return TaskList.write(correctedInput, Parser.TODO, byOrAt);
+
+    }
+
+    /**
+     * A helper which deals with the Event instruction.
+     * @param input a string, which is text entered by the user
+     * @return a string representation of an Event task
+     */
+    private String dealEvent(String input){
+
+        if (!parser.isValidEvent(input)){
+            return ("The description of an event cannot be empty lah.");
+        }
+
+        description = input.substring(Parser.EVT_VALIDATION.length(),
+                Parser.EVT_VALIDATION.length() + 1);
+
+        if(parser.isEmptyDescription(description)){
+            return ("The description of an event cannot be empty lah.");
+        }
+
+        String dateAndTime = input.substring(input.indexOf("/")
+                + Parser.BYORAT.length());
+        byOrAt = new DateAndTime(dateAndTime);
+        correctedInput = input.substring(Parser.EVT_VALIDATION.length());
+        TaskList.write(correctedInput, Parser.EVT, byOrAt);
+        Storage.write(TaskList.taskStorage);
+
+        return TaskList.write(correctedInput, Parser.EVT, byOrAt);
+
+    }
+
+    /**
+     * A helper which deals with the Deadline instruction.
+     * @param input a string, which is text entered by the user
+     * @return a string representation of a Deadline task
+     */
+    private String dealDeadline(String input){
+
+        if(!parser.isValidDeadline(input)){
+            return ("The description of a deadline cannot be empty lah.");
+        }
+
+        description = input.substring(Parser.DDL_VALIDATION.length(),
+                Parser.DDL_VALIDATION.length() + 1);
+
+        if (parser.isEmptyDescription(description)) {
+            return ("The description of a deadline cannot be empty lah.");
+        }
+
+        String dateAndTime = input.substring(input.indexOf("/")
+                + Parser.BYORAT.length());
+        byOrAt = new DateAndTime(dateAndTime);
+        correctedInput = input.substring(Parser.DDL_VALIDATION.length());
+        TaskList.write(correctedInput, Parser.DDL, byOrAt);
+        Storage.write(TaskList.taskStorage);
+
+        return TaskList.write(correctedInput, Parser.DDL, byOrAt);
+
+    }
+
+    /**
+     * Workhorse of the project, deal with all possible instructions exactly as desired.
+     * @param input string text from the user
+     * @return a string representing results of the instruction
      */
     public String deal(String input) {
 
         Storage.read();
 
-        if (!parser.isBye(input)) {
-
-            if (!parser.isList(input) && !parser.isFind(input)) {
-
-                if (!parser.isDone(input) && !parser.isDelete(input)) {
-
-                    if (parser.isTodo(input) || parser.isEvent(input)
-                            || parser.isDeadline(input)) {
-
-                        String description;
-                        String correctedInput;
-                        DateAndTime byOrAt;
-
-                        if (parser.isTodo(input)) {
-
-                            if (parser.isValidTodo(input)) {
-
-                                description = input.substring(Parser.TODO_VALIDATION.length(),
-                                            Parser.TODO_VALIDATION.length() + 1);
-
-                                if (!parser.isEmptyDescription(description)) {
-
-                                    correctedInput = input.substring(Parser.TODO_VALIDATION.length());
-                                    byOrAt = new DateAndTime();
-                                    TaskList.write(correctedInput, Parser.TODO, byOrAt);
-                                    Storage.write(TaskList.taskStorage);
-
-                                    return TaskList.write(correctedInput, Parser.TODO, byOrAt);
-
-                                } else {
-                                    return ("OOPS!!! The description of a todo cannot be empty.");
-                                }
-
-                            } else {
-                                return ("The description of a todo cannot be empty lah.");
-                            }
-
-                        } else {
-
-                            String dateAndTime = input.substring(input.indexOf("/")
-                                        + Parser.BYORAT.length());
-
-                            if (parser.isEvent(input)) {
-
-                                if (parser.isValidEvent(input)) {
-
-                                    description = input.substring(Parser.EVT_VALIDATION.length(),
-                                                Parser.EVT_VALIDATION.length() + 1);
-
-                                    if (!parser.isEmptyDescription(description)) {
-
-                                        byOrAt = new DateAndTime(dateAndTime);
-
-                                        correctedInput = input.substring(Parser.EVT_VALIDATION.length());
-                                        TaskList.write(correctedInput, Parser.EVT, byOrAt);
-                                        Storage.write(TaskList.taskStorage);
-
-                                        return TaskList.write(correctedInput, Parser.EVT, byOrAt);
-                                    } else {
-                                        return ("The description of an event cannot be empty lah.");
-                                    }
-                                } else {
-                                    return ("The description of an event cannot be empty lah.");
-                                }
-
-                            } else {
-
-                                if (parser.isValidDeadline(input)) {
-
-                                    description = input.substring(Parser.DDL_VALIDATION.length(),
-                                                Parser.DDL_VALIDATION.length() + 1);
-
-                                    if (!parser.isEmptyDescription(description)) {
-
-                                        byOrAt = new DateAndTime(dateAndTime);
-
-                                        correctedInput = input.substring(Parser.DDL_VALIDATION.length());
-                                        TaskList.write(correctedInput, Parser.DDL, byOrAt);
-                                        Storage.write(TaskList.taskStorage);
-
-                                        return TaskList.write(correctedInput, Parser.DDL, byOrAt);
-                                    } else {
-                                        return ("The description of a deadline cannot be empty lah.");
-                                    }
-                                } else {
-                                    return ("The description of a deadline cannot be empty lah.");
-                                }
-
-                            }
-                        }
-
-                    } else {
-                        return ("OOPS!!! I'm sorry, but I don't know what that means :-(");
-                    }
-
-                } else {
-
-                    if (parser.isDone(input)) {
-
-                        int ref = Integer.parseInt(Character.toString(
-                                    input.charAt(Parser.DONE_VALID.length() - 1))) - 1;
-
-                        if (TaskList.taskStorage.get(ref) != null) {
-
-                            Task done = TaskList.taskStorage.get(ref).markAsDone();
-                            TaskList.taskStorage.remove(TaskList.taskStorage.get(ref));
-
-                            TaskList.taskStorage.add(ref, done);
-
-                            Storage.write(TaskList.taskStorage);
-
-                            return ("Nice! I've marked this task as done:\n"
-                                        + TaskList.taskStorage.get(ref));
-
-                        } else {
-
-                            return ("I am afraid that it is not possible" +
-                                        "to do an unknown task.");
-
-                        }
-
-                    } else {
-
-                        int ref = Integer.parseInt(Character.toString(
-                                    input.charAt(Parser.DEL_VALID.length() - 1))) - 1;
-
-                        TaskList.delete(ref);
-
-                        Storage.write(TaskList.taskStorage);
-                        return TaskList.delete(ref);
-
-                    }
-
-                }
-            } else {
-
-                if (!parser.isFind(input)) {
-                    return TaskList.read();
-                } else {
-                    return TaskList.find(input.substring(Parser.FIND.length() + 1));
-                }
-            }
-
-        } else {
-            return " Bye. Hope to see you again soon!";
-
+        if (parser.isBye(input)) {
+            return dealBye();
         }
+
+        if (parser.isList(input)) {
+            return dealList();
+        }
+
+        if (parser.isFind(input)) {
+            return dealFind(input);
+        }
+
+        if(parser.isDone(input)){
+            return dealDone(input);
+        }
+
+        if(parser.isDelete(input)){
+            return dealDelete(input);
+        }
+
+        if(parser.isTodo(input)){
+            return dealTodo(input);
+        }
+
+        if(parser.isEvent(input)){
+            return dealEvent(input);
+        }
+
+        if(parser.isDeadline(input)){
+            return dealDeadline(input);
+        }
+
+        return ("OOPS!!! I'm sorry, but I don't know what that means :-(");
 
     }
 
