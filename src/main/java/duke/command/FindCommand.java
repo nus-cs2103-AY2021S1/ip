@@ -1,6 +1,5 @@
 package duke.command;
 
-import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -10,8 +9,8 @@ import duke.Ui;
  */
 public class FindCommand extends Command {
     public static final String COMMAND_WORD_FIND = "find";
-    private static final String MESSAGE_ADD_ACKNOWLEDGEMENT = "HmmMm let me recall... I think I've eaten the " +
-            "following that match your description: ";
+    private static final String MESSAGE_ADD_ACKNOWLEDGEMENT = "HmmMm let me recall... I think I've eaten the "
+            + "following that match your description: ";
     private String keyword;
 
     /**

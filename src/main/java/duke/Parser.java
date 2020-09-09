@@ -1,15 +1,14 @@
 package duke;
 
-import duke.command.ListCommand;
+import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
-import duke.command.OwoCommand;
-import duke.command.UwuCommand;
 import duke.command.DoneCommand;
-import duke.command.AddCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
-
+import duke.command.ListCommand;
+import duke.command.OwoCommand;
+import duke.command.UwuCommand;
 import duke.tasks.Deadline;
 import duke.tasks.Todo;
 
@@ -45,7 +44,6 @@ public class Parser {
             if (checkInputLength(splitCommand, 2)) {
                 return prepareDone(splitCommand[1]);
             }
-
         case OwoCommand.COMMAND_WORD:
             return new OwoCommand();
 
@@ -85,7 +83,7 @@ public class Parser {
         }
     }
 
-    private static Command prepareDone(String input) throws DukeException{
+    private static Command prepareDone(String input) throws DukeException {
         try {
             int taskNum = Integer.parseInt(input);
             return new DoneCommand(taskNum);
@@ -94,17 +92,17 @@ public class Parser {
         }
     }
 
-    private static Command prepareAdd(String command, String descript) throws DukeException {
+    private static Command prepareAdd(String command, String description) throws DukeException {
         switch (command) {
         case ("todo"):
-            return new AddCommand(new Todo(descript));
+            return new AddCommand(new Todo(description));
         case ("deadline"):
-            String[] delete = descript.split(" /by ", 2);
+            String[] delete = description.split(" /by ", 2);
             if (checkInputLength(delete, 2)) {
                 return new AddCommand(new Deadline(delete[0], delete[1].replace('/', '-')));
             }
         case ("event"):
-            String[] event = descript.split(" /at ", 2);
+            String[] event = description.split(" /at ", 2);
             if (checkInputLength(event, 2)) {
                 return new AddCommand(new Deadline(event[0], event[1].replace('/', '-')));
             }

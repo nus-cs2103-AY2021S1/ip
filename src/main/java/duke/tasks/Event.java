@@ -9,7 +9,7 @@ import duke.DukeException;
 /**
  * Represents tasks that start at a specific date.
  */
-public class Event extends Task{
+public class Event extends Task {
     private char type = 'E';
     private LocalDate date;
     private final String AT = "bought at: ";

@@ -10,10 +10,6 @@ public class Duke {
     private TaskList tasks;
     private Ui ui;
 
-    public static Duke createDuke() {
-        return new Duke("data/tasks.txt");
-    }
-
     private Duke(String filePath) {
         ui = new Ui();
         try {
@@ -23,6 +19,10 @@ public class Duke {
             ui.showError(e.toString());
             tasks = new TaskList();
         }
+    }
+
+    public static Duke createDuke() {
+        return new Duke("data/tasks.txt");
     }
 
     public String getWelcome() {
