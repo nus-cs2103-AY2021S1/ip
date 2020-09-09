@@ -79,6 +79,6 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description + " (" + this.priority + ") " + this.tags;
+        return "[" + this.getStatusIcon() + "] " + this.priority.toSymbol() + " " + this.description + " " + this.tags;
     }
 }

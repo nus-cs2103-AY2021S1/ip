@@ -18,8 +18,8 @@
     prefHeight="600.0"
     prefWidth="400.0"
     type="javafx.scene.layout.AnchorPane"
-    xmlns="http://javafx.com/javafx/11.0.1"
-    xmlns:fx="http://javafx.com/fxml/1"
+    xmlns="http://javafx.com/javafx"
+    xmlns:fx="http://javafx.com/fxml"
 >
     <ScrollPane
         fx:id="scrollPane"

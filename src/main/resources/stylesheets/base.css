@@ -1,4 +1,12 @@
+@font-face {
+    src: url('../fonts/FiraCode.ttf');
+}
+
 .user-dialog-box .label {
     -fx-text-fill: #7851A9;
     -fx-font-weight: bold;
+}
+
+.label {
+    -fx-font-family: 'Fira Code';
 }

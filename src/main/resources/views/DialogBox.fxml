@@ -7,8 +7,8 @@
 
 <fx:root
    type="javafx.scene.layout.HBox"
-   xmlns="http://javafx.com/javafx/11.0.1"
-   xmlns:fx="http://javafx.com/fxml/1"
+   xmlns="http://javafx.com/javafx"
+   xmlns:fx="http://javafx.com/fxml"
 >
     <padding>
         <Insets top="8.0" left="8.0" right="8.0" />
