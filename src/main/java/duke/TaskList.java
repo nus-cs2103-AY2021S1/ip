@@ -84,10 +84,11 @@ public class TaskList {
     }
 
     /**
-     * Generates result task list of tasks with descriptions containing the search description.
+     * Generates result task list of tasks where search description matches the task description.
+     * This includes tasks with descriptions matching the search description only partially.
      *
      * @param searchDescription String to be searched.
-     * @return Result task list of tasks with descriptions containing the search description.
+     * @return Result task list of tasks where search description matches the task description.
      */
     public List<Task> generateResultTaskList(String searchDescription) {
         List<Task> resultTaskList = storedTasks
