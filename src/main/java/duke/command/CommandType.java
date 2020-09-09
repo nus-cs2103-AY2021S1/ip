@@ -14,6 +14,7 @@ public enum CommandType {
     DONE,
     EVENT,
     FIND,
+    HELP,
     INVALID,
     LIST,
     TODO,

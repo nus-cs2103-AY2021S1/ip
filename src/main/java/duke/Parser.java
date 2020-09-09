@@ -1,17 +1,6 @@
 package duke;
 
-import duke.command.ByeCommand;
-import duke.command.Command;
-import duke.command.CommandType;
-import duke.command.DateCommand;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.EventCommand;
-import duke.command.FindCommand;
-import duke.command.InvalidCommand;
-import duke.command.ListCommand;
-import duke.command.ToDoCommand;
+import duke.command.*;
 
 /**
  * Encapsulates behavior for parsing commands.
@@ -57,6 +46,8 @@ public class Parser {
             return new DeadlineCommand(argument);
         case FIND:
             return new FindCommand(argument);
+        case HELP:
+            return new HelpCommand();
         case INVALID: default:
             return new InvalidCommand();
         }
