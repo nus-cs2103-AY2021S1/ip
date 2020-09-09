@@ -84,7 +84,7 @@ public class Parser {
         }
     }
 
-    public static String incompleteCommand(Ui ui, String command){
+    public static String incompleteCommand(Ui ui, String comma nd){
         String stringToReturn = "";
         switch (command) {
             case "todo":
