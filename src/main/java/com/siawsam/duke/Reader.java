@@ -10,14 +10,20 @@ import java.io.ObjectInputStream;
  */
 public class Reader {
     /**
-     * Checks if a file exists.
+     * Checks if a list of files exist.
      *
-     * @param path The file path to check.
-     * @return True if the file exists, False otherwise.
+     * @param filePaths The file paths to check.
+     * @return True if all files exist, False otherwise.
      */
-    static boolean doesFileExist(String path) {
-        File file = new File(path);
-        return file.exists() && file.isFile();
+    static boolean doFilesExist(String... filePaths) {
+        for (String path : filePaths) {
+            File file = new File(path);
+            boolean isInvalidFile = !(file.exists() && file.isFile());
+            if (isInvalidFile) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
@@ -33,5 +39,20 @@ public class Reader {
         FileInputStream fileInputStream = new FileInputStream(path);
         ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
         return (TaskList) objectInputStream.readObject();
+    }
+    
+    /**
+     * Reads a serialized {@link TagList tag list} instance from disk.
+     *
+     * @param path The file path of the serialized TagList.
+     * @return The deserialized {@link TagList tag list} instance.
+     * @throws ClassNotFoundException if the file given doesn't contain a serialized
+     * {@link TagList tag list} instance.
+     * @throws IOException if an IO exception occurs while reading the file.
+     */
+    static TagList readTagsFromFile(String path) throws ClassNotFoundException, IOException {
+        FileInputStream fileInputStream = new FileInputStream(path);
+        ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+        return (TagList) objectInputStream.readObject();
     }
 }

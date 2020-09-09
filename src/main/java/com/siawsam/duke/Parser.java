@@ -10,8 +10,15 @@ public class Parser {
     /**
      * An array of valid parameterized Duke commands.
      */
-    private static final List<String> PARAMETERIZED_COMMANDS = Arrays.asList("done", "delete", "find");
+    private static final List<String> PARAMETERIZED_COMMANDS = Arrays.asList(
+            "done",
+            "delete",
+            "find",
+            "tag",
+            "untag"
+    );
     private final TaskList userTaskList;
+    private final TagList tagList;
     private final Storage storage;
     
     /**
@@ -21,6 +28,7 @@ public class Parser {
      */
     public Parser(Storage storage) {
         userTaskList = new TaskList();
+        tagList = new TagList();
         this.storage = storage;
     }
     
@@ -30,8 +38,9 @@ public class Parser {
      * @param storage      A Storage instance to use when the parser needs to save to disk.
      * @param userTaskList A TaskList instance that represents the existing save.
      */
-    Parser(Storage storage, TaskList userTaskList) {
+    Parser(Storage storage, TaskList userTaskList, TagList tagList) {
         this.userTaskList = userTaskList;
+        this.tagList = tagList;
         this.storage = storage;
     }
     
@@ -55,8 +64,10 @@ public class Parser {
                 return Response.terminatingResponse(Ui.showGoodbyeMessage());
             case "list":
                 return new Response(Ui.printList(userTaskList));
+            case "tags":
+                return new Response(Ui.printTags(tagList));
             case "save":
-                return storage.save(userTaskList);
+                return storage.save(userTaskList, tagList);
             default:
                 return parseAddCommand(literal);
             }
@@ -73,6 +84,10 @@ public class Parser {
             return parseDeleteCommand(literal);
         case "find":
             return parseFindCommand(literal);
+        case "tag":
+            return parseTagCommand(literal);
+        case "untag":
+            return parseUntagCommand(literal);
         default:
             assert !PARAMETERIZED_COMMANDS.contains(command) : "invalid parameterized command";
             return Response.emptyResponse();
@@ -117,6 +132,25 @@ public class Parser {
             Task addedTask = userTaskList.addItem(literal);
             return new Response(Ui.showSuccessfulAdd(addedTask));
         } catch (DukeException ex) {
+            return new Response(Ui.showErrorMessage(ex));
+        }
+    }
+    
+    private Response parseTagCommand(String literal) {
+        String parameters = literal.split("tag")[1].trim();
+        int itemIndex = Integer.parseInt(parameters.split(" ")[0]);
+        String tagName = parameters.split(Integer.toString(itemIndex))[1].trim();
+        
+        return userTaskList.tagItem(itemIndex, tagName, tagList);
+    }
+    
+    private Response parseUntagCommand(String literal) {
+        try {
+            return userTaskList.untagItem(
+                    Integer.parseInt(literal.split(" ")[1]),
+                    tagList
+            );
+        } catch (IllegalArgumentException ex) {
             return new Response(Ui.showErrorMessage(ex));
         }
     }

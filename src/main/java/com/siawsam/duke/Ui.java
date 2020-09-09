@@ -63,4 +63,24 @@ public class Ui {
     static String printList(TaskList taskList) {
         return taskList.toString();
     }
+    
+    static String showSuccessfulTag(Task task) {
+        return "This task has been tagged: " + task;
+    }
+    
+    static String showSuccessfulUntag() {
+        return "Task successfully untagged.";
+    }
+    
+    static String showTaskAlreadyTagged() {
+        return "This task has already been tagged. Untag before adding new tag.";
+    }
+    
+    static String showItemNotTagged() {
+        return "This item does not have a tag.";
+    }
+    
+    static String printTags(TagList tagList) {
+        return "These are your tags:\n" + tagList.toString();
+    }
 }

@@ -143,6 +143,58 @@ public class TaskList implements Serializable {
         return results;
     }
     
+    /**
+     * Tags an item.
+     *
+     * @param itemIndex The index of the item in the tasklist to tag.
+     * @param tagName The name of the tag.
+     * @param tagList The tag list instance to handle the tagging.
+     * @return A Response representing the result of the tagging operation.
+     */
+    Response tagItem(int itemIndex, String tagName, TagList tagList) {
+        if (itemIndex > itemList.size()) {
+            throw new IllegalArgumentException("Item #" + itemIndex + " does "
+                                                       + "not exist and cannot "
+                                                       + "be tagged.");
+        }
+        
+        try {
+            Task task = itemList.get(itemIndex - 1);
+            if (task.isTagged()) {
+                return new Response(Ui.showTaskAlreadyTagged());
+            }
+            
+            Tag tag = tagList.addTaggableToTag(tagName, task);
+            task.addTag(tag);
+            return new Response(Ui.showSuccessfulTag(task));
+        } catch (DukeException exception) {
+            return new Response(Ui.showErrorMessage(exception));
+        }
+    }
+    
+    /**
+     * Untags an item.
+     *
+     * @param itemIndex The index of the item in the tasklist to untag.
+     * @param tagList The tag list instance to handle the untagging.
+     * @return A Response representing the result of the untagging operation.
+     */
+    Response untagItem(int itemIndex, TagList tagList) {
+        if (itemIndex > itemList.size()) {
+            throw new IllegalArgumentException("Item #" + itemIndex + " does "
+                                                       + "not exist and cannot "
+                                                       + "be untagged.");
+        }
+        
+        Task task = itemList.get(itemIndex - 1);
+        if (!task.isTagged()) {
+            return new Response(Ui.showItemNotTagged());
+        }
+        tagList.untag(task.getTag(), task);
+        task.removeTag();
+        return new Response(Ui.showSuccessfulUntag());
+    }
+    
     @Override
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();

@@ -9,7 +9,11 @@ public class Duke {
     /**
      * The file path for saving tasks.
      */
-    static final String FILE_PATH = "savedTasks.txt";
+    static final String FILE_PATH_TASKS = "savedTasks.txt";
+    /**
+     * The file path for saving tags.
+     */
+    static final String FILE_PATH_TAGS = "savedTags.txt";
     private Parser parser;
     
     /**
@@ -20,11 +24,13 @@ public class Duke {
      * @throws ClassNotFoundException if the file exists but doesn't contain valid Duke data.
      */
     public Response loadFromDisk() throws IOException, ClassNotFoundException {
-        Storage storage = new Storage(FILE_PATH);
+        Storage storage = new Storage(FILE_PATH_TASKS, FILE_PATH_TAGS);
         
-        if (storage.doesStorageFileExist()) {
-            TaskList savedList = storage.load();
-            parser = new Parser(storage, savedList);
+        if (storage.doStorageFilesExist()) {
+            storage.load();
+            TaskList savedList = storage.getLoadedTasks();
+            TagList savedTags = storage.getLoadedTags();
+            parser = new Parser(storage, savedList, savedTags);
             return new Response(Ui.showSuccessfulLoad());
         } else {
             parser = new Parser(storage);
