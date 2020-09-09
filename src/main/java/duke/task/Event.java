@@ -2,6 +2,8 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
+import java.util.Date;
 
 /**
  * Encapsulates an event task.
@@ -29,6 +31,18 @@ public class Event extends Task {
     protected Event(String description, boolean isDone, LocalDate at) {
         super(description, isDone);
         this.at = at;
+    }
+
+    public void updateTaskDescription(String newDescription) {
+        this.description = newDescription;
+    }
+
+    public void updateTaskTime(String newTime) throws YooException {
+        try {
+            this.at = LocalDate.parse(newTime);
+        } catch (DateTimeParseException e) {
+            throw new YooException("Date format should be yyyy-mm-dd!\nPlease try again (>_<)");
+        }
     }
 
     @Override

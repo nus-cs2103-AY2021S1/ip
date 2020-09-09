@@ -23,10 +23,6 @@ public class Ui {
         }
     }
 
-    protected String showError(String message) {
-        return message;
-    }
-
     protected String showExit() {
         return "Bye! Come back soon ( ^-^)/";
     }
@@ -59,5 +55,9 @@ public class Ui {
 
     protected String showCannotFindKeyword() {
         return "Sorry, no matching tasks were found (\u3063*\u00B4\u25A1`)\u3063";
+    }
+
+    protected String updateSuccess(Task t) {
+        return "Update successful! (＾◡＾)\n" + t;
     }
 }

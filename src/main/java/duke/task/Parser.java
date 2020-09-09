@@ -47,6 +47,9 @@ public class Parser {
             case "delete":
                 result = deleteTask(tasks, cmd, ui);
                 break;
+            case "update":
+                result = updateTask(tasks, cmd, ui);
+                break;
             case "todo":
                 result = addTodo(tasks, cmd, ui);
                 break;
@@ -93,6 +96,65 @@ public class Parser {
         }
     }
 
+    /*
+    update command is as such: update [task Index] /[type of update] [update]
+    for example, to update task #1's description to "helloWorld": update 1 /d helloWorld
+    for example, to update task #2's time to "2019-10-10": update 2 /t 2019-10-10
+    */
+    private static String updateTask(TaskList tasks, String[] cmd, Ui ui) throws YooException {
+        try {
+            //[0] contains task index, [1] contains rest of the command
+            String[] taskIndexAndInfo = cmd[1].split(" \\/", 2);
+
+            //retrieve index of task to update
+            int index = Integer.parseInt(taskIndexAndInfo[0]);
+
+            //if index is within range of task list
+            if(index <= tasks.length() && index > 0) {
+                Task t = tasks.get(index - 1);
+                return executeTaskUpdate(taskIndexAndInfo, t, ui);
+            } else {
+                assert index <= 0 || index > tasks.length();
+                throw new YooException("No such task (>_<)");
+            }
+
+        } catch (NumberFormatException e) {
+            throw new YooException("Please enter a valid task index (>_<)");
+        } catch (IndexOutOfBoundsException e) {
+            throw new YooException("Sorry, your update information is missing (\u3063*\u00B4\u25A1`)\u3063");
+        }
+    }
+
+    private static String executeTaskUpdate(String[] taskIndexAndInfo, Task t, Ui ui) throws YooException {
+        try {
+            //checks if user wants to update description or time, [0] contains d or t, [1] contains update information
+            String[] updateInfo = taskIndexAndInfo[1].split(" ", 2);
+
+            boolean isTodo = t instanceof Todo;
+            boolean isDeadline = t instanceof Deadline;
+            boolean isEvent = t instanceof Event;
+
+            if (updateInfo[0].equals("d")) {
+                t.updateTaskDescription(updateInfo[1]);
+
+            } else if (updateInfo[0].equals("t") && isTodo) {
+                throw new YooException("Todo tasks don't have a date, please try again (>_<)");
+
+            } else if (updateInfo[0].equals("t") && isDeadline) {
+                ((Deadline) t).updateTaskTime(updateInfo[1]);
+
+            } else if (updateInfo[0].equals("t") && isEvent) {
+                ((Event) t).updateTaskTime(updateInfo[1]);
+
+            } else {
+                throw new YooException("Please enter a valid task type, /d or /t ! (>_<)");
+            }
+            return ui.updateSuccess(t);
+        } catch (IndexOutOfBoundsException e) {
+            throw new YooException("Sorry, your update information is missing (\u3063*\u00B4\u25A1`)\u3063");
+        }
+    }
+
     private static String markAsDone(TaskList tasks, String[] cmd, Ui ui) throws YooException {
         try {
             //retrieve the index of task to be marked as done
@@ -110,7 +172,6 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new YooException("Please enter a valid task index (>_<)");
         }
-        return result;
     }
 
     private static String deleteTask(TaskList tasks, String[] cmd, Ui ui) throws YooException {
@@ -129,7 +190,6 @@ public class Parser {
         } catch (NumberFormatException e) {
             throw new YooException("Please enter a valid task index (>_<)");
         }
-        return result;
     }
 
     private static String addTodo(TaskList tasks, String[] cmd, Ui ui) {
