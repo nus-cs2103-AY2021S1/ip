@@ -2,6 +2,7 @@ package duke.data;
 
 import java.util.ArrayList;
 
+import duke.exception.DuplicateTaskException;
 import duke.exception.ExceptionMessage;
 import duke.exception.InvalidIndexException;
 import duke.task.Task;
@@ -27,7 +28,7 @@ public class DukeTaskList {
      */
     public Task getTask(int index) {
         indexCheck(index);
-        return tasks.get(index);
+        return tasks.get(index - 1);
     }
 
     /**
@@ -36,7 +37,23 @@ public class DukeTaskList {
      */
     public void addTask(Task task) {
         assert task != null : "task cannot be null";
+
+        if (hasDuplicate(task)) {
+            String errMessage = ExceptionMessage.getDuplicateTaskMessage(task);
+            throw new DuplicateTaskException(errMessage);
+        }
+
         tasks.add(task);
+    }
+
+    private boolean hasDuplicate(Task task) {
+        for (Task t : tasks) {
+            if (t.getDescription().equals(task.getDescription())) {
+                return true;
+            }
+        }
+
+        return false;
     }
 
     /**
@@ -46,7 +63,7 @@ public class DukeTaskList {
      */
     public Task deleteTask(int index) {
         Task taskDelete = getTask(index);
-        tasks.remove(index);
+        tasks.remove(index - 1);
 
         return taskDelete;
     }
@@ -76,7 +93,7 @@ public class DukeTaskList {
     }
 
     private void indexCheck(int index) {
-        if (index >= getSize() || index < 0) {
+        if (index - 1 >= getSize() || index < 1) {
             throw new InvalidIndexException(ExceptionMessage.getInvalidIndexMessage(index + ""));
         }
     }

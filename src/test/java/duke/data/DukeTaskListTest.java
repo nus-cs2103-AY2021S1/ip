@@ -30,7 +30,7 @@ public class DukeTaskListTest {
     public void getTask_validIndex_success() {
         Task taskToBeGet = ToDo.createToDo("read book");
         taskList.addTask(taskToBeGet);
-        int validIndex = 0;
+        int validIndex = 1;
 
         try {
             Task taskGet = taskList.getTask(validIndex);
@@ -59,7 +59,7 @@ public class DukeTaskListTest {
             taskList.addTask(taskToBeAdded);
 
             assertEquals(currentSize + 1, taskList.getSize());
-            assertEquals(taskToBeAdded, taskList.getTask(currentSize));
+            assertEquals(taskToBeAdded, taskList.getTask(currentSize + 1));
         } catch (Exception exception) {
             fail(exception.getMessage());
         }
@@ -69,7 +69,7 @@ public class DukeTaskListTest {
     public void deleteTask_validIndex_taskDeleted() {
         Task taskToBeDeleted = ToDo.createToDo("read book");
         taskList.addTask(taskToBeDeleted);
-        int validIndex = taskList.getSize() - 1;
+        int validIndex = taskList.getSize();
         int currentSize = taskList.getSize();
 
         try {
@@ -101,7 +101,7 @@ public class DukeTaskListTest {
         newTaskList.addTask(ToDo.createToDo("return book"));
         assertEquals(2, newTaskList.getSize());
 
-        newTaskList.deleteTask(0);
+        newTaskList.deleteTask(1);
         assertEquals(1, newTaskList.getSize());
 
         newTaskList.setTasks(new ArrayList<>());

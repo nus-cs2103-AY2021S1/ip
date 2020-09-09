@@ -28,4 +28,7 @@ public class CommandFormat {
 
     public static final String HELP_CMD_FORMAT =
             "help";
+
+    public static final String TAG_CMD_FORMAT =
+            "tag <task index> <tag>";
 }

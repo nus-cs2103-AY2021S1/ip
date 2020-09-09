@@ -49,8 +49,8 @@ public class UiResponse {
 
         System.out.println("Current tasks:\n");
 
-        for (int i = 0; i < duke.getTaskList().getSize(); i++) {
-            System.out.println(i + 1 + ". " + duke.getTaskList().getTask(i));
+        for (int i = 1; i <= duke.getTaskList().getSize(); i++) {
+            System.out.println(i + ". " + duke.getTaskList().getTask(i));
         }
 
         if (duke.getTaskList().getSize() == 0) {
@@ -162,6 +162,18 @@ public class UiResponse {
             description += allCommands.get(commandName).getDescription();
             System.out.println(description + "\n");
         }
+
+        UiPrint.drawLine(UiPrint.STAR, 50);
+    }
+
+    /**
+     * Reports that the task has been tagged.
+     * @param task the tagged task
+     */
+    public void reportTagTask(Task task) {
+        UiPrint.drawLine(UiPrint.STAR, 50);
+
+        System.out.println(task.getDescription() + " has been tagged with " + task.getTag());
 
         UiPrint.drawLine(UiPrint.STAR, 50);
     }

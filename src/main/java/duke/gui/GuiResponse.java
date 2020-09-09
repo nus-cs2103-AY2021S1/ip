@@ -50,8 +50,8 @@ public class GuiResponse {
 
         response.append("Current tasks:\n\n");
 
-        for (int i = 0; i < duke.getTaskList().getSize(); i++) {
-            response.append(i + 1 + ". " + duke.getTaskList().getTask(i) + '\n');
+        for (int i = 1; i <= duke.getTaskList().getSize(); i++) {
+            response.append(i + ". " + duke.getTaskList().getTask(i) + '\n');
         }
 
         if (duke.getTaskList().getSize() == 0) {
@@ -147,5 +147,15 @@ public class GuiResponse {
             response.append("\"" + commandName + "\"\n");
             response.append(allCommands.get(commandName).getDescription() + "\n\n");
         }
+    }
+
+    /**
+     * Reports that the task has been tagged.
+     * @param task the tagged task
+     */
+    public void reportTagTask(Task task) {
+        resetResponse();
+
+        response.append(task.getDescription() + " has been tagged with " + task.getTag());
     }
 }
