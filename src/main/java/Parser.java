@@ -46,12 +46,14 @@ public class Parser {
      * @throws NumberFormatException
      */
     public static LocalDateTime changeDateAndTime(String[] dateAndTime) throws NumberFormatException {
+        assert (dateAndTime.length == 2);
         String date = dateAndTime[0];
         String time = dateAndTime[1];
         return tryParseLocalDateTime(date + " " + time);
     }
 
     public static LocalDate changeDate(String[] dateAndTime) throws NumberFormatException {
+        assert (dateAndTime.length == 1);
         String date = dateAndTime[0];
         return tryParseLocalDate(date);
     }
