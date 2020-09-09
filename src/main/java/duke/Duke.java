@@ -18,6 +18,10 @@ public class Duke {
         parser = new Parser();
         taskList = new TaskList(storage.loadTasks());
     }
+    
+    public String getWelcome() {
+        return ui.getOutputMessage();
+    }
 
     /**
      * Takes in input from the user, processes the input and returns the appropriate response to the user

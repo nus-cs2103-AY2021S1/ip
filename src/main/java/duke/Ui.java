@@ -2,8 +2,6 @@ package duke;
 
 import duke.tasks.Task;
 
-import java.nio.charset.Charset;
-
 
 /**
  * Ui which sets output message to the user
@@ -44,20 +42,18 @@ public class Ui {
         return String.format ("%s\n %s\n %s", border, outputMessage, border);
     }
     
-    /**
-     * Returns the welcome message upon starting Duke
-     * 
-     * @return welcome message
-     */
-    public String showWelcomeMessage() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        String welcomeMessage = "Hello from\n" + logo + "\n";
-        welcomeMessage += "Hello! I'm Duke ^_^\n";
-        welcomeMessage += "What can I do for you??\n";
+    private String showWelcomeMessage() {
+        String face = "\uff3e\uff0d\uff3e\u273f";
+        String welcomeMessage = "Hello! I'm Eirudy  " + face + "\n";
+        welcomeMessage += "Here are some commands you can use\n\n";
+        welcomeMessage += "* Todo <description>\n";
+        welcomeMessage += "* Deadline <description> /by <deadline>\n";
+        welcomeMessage += "* Event <description> /at <event_time>\n\n";
+        welcomeMessage += "List : Lists out all your tasks\n";
+        welcomeMessage += "Done <number> : Sets task at <number> to done\n";
+        welcomeMessage += "Delete <number> : Removes task at <number>\n";
+        welcomeMessage += "Find <word> : Lists tasks which contain <word>\n";
+        welcomeMessage += "Undo : Undo your last change to your tasks\n";
         return welcomeMessage;
     }
 

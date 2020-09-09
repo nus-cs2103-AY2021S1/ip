@@ -145,6 +145,9 @@ public class Parser {
             
         } catch (DukeInvalidUndoException e) {
             ui.setOutputMessage(e.getExceptionMessage());
+            
+        } catch (NumberFormatException e) {
+            ui.setOutputMessage("Please enter a number");
         }
     }
     
@@ -155,7 +158,7 @@ public class Parser {
      * @param input user input 
      * @return index of specified task in taskList
      */
-    private int parseIndex (String input) throws DukeInvalidIndexException {
+    private int parseIndex (String input) throws DukeInvalidIndexException, NumberFormatException {
         int index = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;
         if (index < 0) {
             throw new DukeInvalidIndexException("Index starts from 1 instead of 0 :)");
