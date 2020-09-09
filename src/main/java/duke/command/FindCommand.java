@@ -43,11 +43,11 @@ public class FindCommand extends Command {
         assert uiManager != null : "FindCommand must have a uiManager";
         assert taskList != null : "FindCommand must have a taskList";
         ArrayList<DukeTask> filteredList = new ArrayList<>();
-        for (DukeTask task : taskList.getTaskList()) {
+        taskList.getTaskList().forEach(task -> {
             if (task.getDescription().contains(keyword)) {
                 filteredList.add(task);
             }
-        }
+        });
 
         if (filteredList.size() == 0) {
             if (isGuiTask) {
@@ -59,9 +59,8 @@ public class FindCommand extends Command {
             if (isGuiTask) {
                 StringBuilder output = new StringBuilder(
                         uiManager.getFindFilteredList(keyword, filteredList.size() > 1) + "\n");
-                for (int i = 0; i < filteredList.size(); i++) {
-                    output.append(uiManager.getNumberedTask(filteredList.get(i), i)).append("\n");
-                }
+                IntStream.range(0, filteredList.size())
+                        .forEach(i -> output.append(uiManager.getNumberedTask(filteredList.get(i), i)).append("\n"));
                 response = output.toString();
             } else {
                 uiManager.printFindFilteredList(keyword, filteredList.size() > 1);

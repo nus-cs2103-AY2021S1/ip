@@ -38,9 +38,10 @@ public class ListCommand extends Command {
         assert taskList != null : "ListCommand must have a taskList";
         if (isGuiTask) {
             StringBuilder output = new StringBuilder();
-            for (int i = 0; i < taskList.getSize(); i++) {
-                output.append(uiManager.getNumberedTask(taskList.getTaskList().get(i), i)).append("\n");
-            }
+            IntStream.range(0, taskList.getSize())
+                    .forEach(i -> {
+                        output.append(uiManager.getNumberedTask(taskList.getTaskList().get(i), i)).append("\n");
+                    });
             output.append("\n").append(uiManager.getTaskStatus(taskList.getSize()));
             response = output.toString();
         } else {
