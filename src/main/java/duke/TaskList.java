@@ -16,6 +16,7 @@ public class TaskList implements java.io.Serializable {
     }
     public void addTask(Task task) {
         store.add(task);
+        assert store.size() >= 0;
     }
 
     public void deleteTask(int taskIndex) {
@@ -23,6 +24,7 @@ public class TaskList implements java.io.Serializable {
             throw new MissingTaskException();
         }
         Task task = store.remove(taskIndex);
+        assert store.size() >= 0;
         System.out.println("duke.Task deleted:");
         System.out.println(task);
     }
