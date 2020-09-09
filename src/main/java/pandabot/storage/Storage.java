@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import pandabot.exceptions.PandaBotException;
 import pandabot.exceptions.PandaBotLoadingTasksErrorException;
 import pandabot.tasks.Deadline;
+import pandabot.tasks.DoAfter;
 import pandabot.tasks.Event;
 import pandabot.tasks.Task;
 import pandabot.tasks.ToDo;
@@ -94,17 +95,24 @@ public class Storage {
     private Task convertToTask(String input) throws PandaBotException {
         String[] taskDetails = input.split(" \\| ");
         Task task;
-        switch (taskDetails[0]) {
-        case "T":
-            task = new ToDo(taskDetails[2]);
-            break;
-        case "D":
-            task = new Deadline(taskDetails[2], taskDetails[3]);
-            break;
-        case "E":
-            task = new Event(taskDetails[2], taskDetails[3]);
-            break;
-        default:
+        try {
+            switch (taskDetails[0]) {
+            case "T":
+                task = new ToDo(taskDetails[2]);
+                break;
+            case "D":
+                task = new Deadline(taskDetails[2], taskDetails[3]);
+                break;
+            case "E":
+                task = new Event(taskDetails[2], taskDetails[3]);
+                break;
+            case "A":
+                task = new DoAfter(taskDetails[2], taskDetails[3]);
+                break;
+            default:
+                throw new PandaBotLoadingTasksErrorException(input);
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
             throw new PandaBotLoadingTasksErrorException(input);
         }
 
