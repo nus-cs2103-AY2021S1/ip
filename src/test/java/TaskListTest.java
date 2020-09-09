@@ -1,3 +1,7 @@
+import duke.exception.MissingDeadlineException;
+import duke.exception.MissingTaskException;
+import duke.task.Task;
+import duke.tool.TaskList;
 import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
