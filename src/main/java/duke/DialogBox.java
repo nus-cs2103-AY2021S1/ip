@@ -49,6 +49,13 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Retrieves the dialog box containing the user's image and a label containing the user text.
+     *
+     * @param text User text.
+     * @param img Image representing the user.
+     * @return Dialog box representing the user's response.
+     */
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox dialogBox = new DialogBox(text, img);
         String userDialogStyle = "-fx-background-color: salmon; "
@@ -58,6 +65,13 @@ public class DialogBox extends HBox {
         return dialogBox;
     }
 
+    /**
+     * Retrieves the dialog box containing Duke's image and a label containing Duke's text.
+     *
+     * @param text Duke's text.
+     * @param img Image representing Duke.
+     * @return Dialog box representing Duke's response.
+     */
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         String dukeDialogStyle = "-fx-background-color: lightSteelBlue; "

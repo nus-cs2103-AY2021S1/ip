@@ -1,5 +1,8 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
+
 import duke.Parser;
 import duke.Storage;
 import duke.Ui;
@@ -9,9 +12,6 @@ import duke.exception.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
-
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
 
 import java.util.ArrayList;
 
@@ -46,8 +46,7 @@ public class CommandTest {
         DukeException ex = Assertions.assertThrows(DukeException.class, () -> {
             Parser.parse("event eat").execute(tasks, ui, storage);
         });
-        String expected = "Oh no! Your event task has an incorrect format. The task cannot be created.\n"
-                + "Type 'commands' for a list of all my functions and their commands.";
+        String expected = "Oh no! Your event task has an incorrect format. The task cannot be created.";
         assertEquals(expected, ex.getMessage());
     }
 
@@ -59,8 +58,7 @@ public class CommandTest {
         DukeException ex = Assertions.assertThrows(DukeException.class, () -> {
             Parser.parse("event /at 1/2/2020 1:00").execute(tasks, ui, storage);
         });
-        String expected = "Oh no! Your event task is missing a description. The task cannot be created.\n"
-                + "Type 'commands' for a list of all my functions and their commands.";
+        String expected = "Oh no! Your event task is missing a description. The task cannot be created.";
         assertEquals(expected, ex.getMessage());
     }
 
@@ -72,8 +70,7 @@ public class CommandTest {
         DukeException ex = Assertions.assertThrows(DukeException.class, () -> {
             Parser.parse("deadline eat /by").execute(tasks, ui, storage);
         });
-        String expected = "Oh no! Your deadline task is missing a time stamp. The task cannot be created.\n"
-                + "Type 'commands' for a list of all my functions and their commands.";
+        String expected = "Oh no! Your deadline task is missing a time stamp. The task cannot be created.";
         assertEquals(expected, ex.getMessage());
     }
 
@@ -87,7 +84,7 @@ public class CommandTest {
         });
         String expected = "Oh no! The task date format is incorrect. \n"
                 + "Please input a valid date using the format: 'dd/mm/yyyy hh:mm'. For eg, 10/8/2020 18:00\n"
-                + "Type 'commands' for a list of all my functions and their commands.";
+                + "Type 'help' for a list of all my functions and their commands.";
         assertEquals(expected, ex.getMessage());
     }
 
@@ -100,8 +97,7 @@ public class CommandTest {
             Parser.parse("deadline /by").execute(tasks, ui, storage);
         });
         String expected = "Oh no! Your deadline task is missing a description and time stamp. "
-                + "The task cannot be created.\n"
-                + "Type 'commands' for a list of all my functions and their commands.";
+                + "The task cannot be created.";
         assertEquals(expected, ex.getMessage());
     }
 
@@ -128,8 +124,7 @@ public class CommandTest {
         DukeException ex = Assertions.assertThrows(DukeException.class, () -> {
             Parser.parse("delete 10").execute(tasks, ui, storage);
         });
-        String expected = "Oh no! Invalid Task! The task ID you provided is not valid. \n"
-                + "Type 'commands' for a list of all my functions and their commands.";
+        String expected = "Oh no! Invalid Task! The task ID you provided is not valid. ";
         assertEquals(expected, ex.getMessage());
     }
 
@@ -150,8 +145,7 @@ public class CommandTest {
         DukeException ex = Assertions.assertThrows(DukeException.class, () -> {
             Parser.parse("done 10").execute(new TaskList(new ArrayList<>()), new Ui(), new Storage());
         });
-        String expected = "Oh no! Invalid Task! The task ID you provided is not valid. \n"
-                + "Type 'commands' for a list of all my functions and their commands.";
+        String expected = "Oh no! Invalid Task! The task ID you provided is not valid. ";
         assertEquals(expected, ex.getMessage());
     }
 
@@ -181,7 +175,9 @@ public class CommandTest {
         DukeException ex = Assertions.assertThrows(DukeException.class, () -> {
             Parser.parse("find_by_date 10 May").execute(new TaskList(new ArrayList<>()), new Ui(), new Storage());
         });
-        String expected = "Oh no! The task date format is incorrect. Please input a valid date using the format: 'dd/mm/yyyy'";
+        String expected = "Oh no! The task date format is incorrect. "
+                + "Please input a valid date using the format: 'dd/mm/yyyy'\n"
+                + "Type 'help' for a list of all my functions and their commands.";
         assertEquals(expected, ex.getMessage());
     }
 
@@ -203,7 +199,7 @@ public class CommandTest {
             Parser.parse("find").execute(new TaskList(new ArrayList<>()), new Ui(), new Storage());
         });
         String expected = "Oh no! No keyword for the search was entered. Please enter a keyword!\n"
-                + "Type 'commands' for a list of all my functions and their commands.";
+                + "Type 'help' for a list of all my functions and their commands.";
         assertEquals(expected, ex.getMessage());
     }
 
@@ -213,7 +209,7 @@ public class CommandTest {
             Parser.parse("find").execute(new TaskList(new ArrayList<>()), new Ui(), new Storage());
         });
         String expected = "Oh no! No keyword for the search was entered. Please enter a keyword!\n"
-                + "Type 'commands' for a list of all my functions and their commands.";
+                + "Type 'help' for a list of all my functions and their commands.";
         assertEquals(expected, ex.getMessage());
     }
 

@@ -53,6 +53,8 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        assert input != null;
+        assert response != null;
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
@@ -63,6 +65,10 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Handles the closing of the GUI when the user inputs the command
+     * to exit the session with Duke.
+     */
     private void handleExit() {
         TimerTask timerTask = new TimerTask() {
             @Override
