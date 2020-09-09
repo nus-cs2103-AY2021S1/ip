@@ -23,10 +23,11 @@ public class DeadlineCommand implements Command {
      * @param description the description of the task.
      * @param dateTime the deadline of the task.
      * @param options the options of the task.
+     * @param tags the tags associated with the task.
      */
     public DeadlineCommand(String description, LocalDateTime dateTime,
-                           HashSet<Option> options) {
-        deadline = new Deadline(description, dateTime, options);
+                           HashSet<Option> options, String[] tags) {
+        deadline = new Deadline(description, dateTime, options, tags);
     }
 
     /**

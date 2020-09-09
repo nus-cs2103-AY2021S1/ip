@@ -46,7 +46,12 @@ public class FindCommand implements Command {
 
                 for (int i = 0; i < foundTasks.size(); i++) {
                     Task task = foundTasks.get(i);
-                    boolean isFound = task.getName().contains(searchTerm);
+                    boolean isFoundInName = task.getName().contains(searchTerm);
+                    boolean isFoundInTags = Arrays
+                            .stream(task.getTags())
+                            .parallel()
+                            .anyMatch(tag -> tag.contains(searchTerm));
+                    boolean isFound = isFoundInName || isFoundInTags;
 
                     if (isFound) {
                         tempTaskList.add(task);

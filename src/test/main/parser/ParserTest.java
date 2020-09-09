@@ -115,14 +115,14 @@ public class ParserTest {
         public void parse_todoCommand_objectAddTodoCommand()
                 throws StuffException {
             Command command = Parser.parse(new String[] { "todo", "name" });
-            assertEquals(new TodoCommand("name"), command);
+            assertEquals(new TodoCommand("name", new String[0]), command);
         }
 
         @Test
         @DisplayName("should generate add todo object with alt data")
         public void parse_todoCommand_altDataAddTodoCommand() throws StuffException {
             Command command = Parser.parse(new String[] { "todo", "another" });
-            assertEquals(new TodoCommand("another"), command);
+            assertEquals(new TodoCommand("another", new String[0]), command);
         }
 
         @Test
@@ -145,9 +145,12 @@ public class ParserTest {
                 throws StuffException {
             Command command = Parser.parse(
                     new String[] { "deadline", "name", "/by", "1400-1-31", "1453" });
-            assertEquals(new DeadlineCommand("name",
+            assertEquals(new DeadlineCommand(
+                    "name",
                             LocalDateTime.of(1400, 1, 31, 14, 53),
-                            new HashSet<>()),
+                            new HashSet<>(),
+                            new String[0]
+                    ),
                     command);
         }
 
@@ -167,9 +170,12 @@ public class ParserTest {
             HashSet<Option> options = new HashSet<>();
             options.add(Option.RECURRING_WEEKLY);
 
-            assertEquals(new DeadlineCommand("name",
+            assertEquals(new DeadlineCommand(
+                    "name",
                             LocalDateTime.of(1400, 1, 31, 14, 53),
-                            options),
+                            options,
+                            new String[0]
+                    ),
                     command);
         }
 
@@ -179,9 +185,12 @@ public class ParserTest {
                 throws StuffException {
             Command command = Parser.parse(
                     new String[] { "deadline", "test", "/by", "1285-5-3", "2144" });
-            assertEquals(new DeadlineCommand("test",
+            assertEquals(new DeadlineCommand(
+                    "test",
                             LocalDateTime.of(1285, 5, 3, 21, 44),
-                            new HashSet<>()),
+                            new HashSet<>(),
+                            new String[0]
+                    ),
                     command);
         }
 
@@ -299,9 +308,12 @@ public class ParserTest {
                 throws StuffException {
             Command command = Parser.parse(
                     new String[] { "event", "name", "/at", "1400-1-31", "1453" });
-            assertEquals(new EventCommand("name",
+            assertEquals(new EventCommand(
+                    "name",
                             LocalDateTime.of(1400, 1, 31, 14, 53),
-                            new HashSet<>()),
+                            new HashSet<>(),
+                            new String[0]
+                    ),
                     command);
         }
 
@@ -321,9 +333,12 @@ public class ParserTest {
             HashSet<Option> options = new HashSet<>();
             options.add(Option.RECURRING_YEARLY);
 
-            assertEquals(new EventCommand("name",
+            assertEquals(new EventCommand(
+                    "name",
                             LocalDateTime.of(1400, 1, 31, 14, 53),
-                            options),
+                            options,
+                            new String[0]
+                    ),
                     command);
         }
 
@@ -333,9 +348,12 @@ public class ParserTest {
                 throws StuffException {
             Command command = Parser.parse(
                     new String[] { "event", "test", "/at", "1285-5-3", "2144" });
-            assertEquals(new EventCommand("test",
+            assertEquals(new EventCommand(
+                    "test",
                             LocalDateTime.of(1285, 5, 3, 21, 44),
-                            new HashSet<>()),
+                            new HashSet<>(),
+                            new String[0]
+                    ),
                     command);
         }
 

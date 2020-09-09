@@ -46,7 +46,7 @@ public class Storage {
 
         FileWriter fw = new FileWriter(file);
         BufferedWriter bw = new BufferedWriter(fw);
-        bw.write("Task Type,Task Time,Done State,Task Name\n");
+        bw.write("Task Type,Recurrence,Task Time,Done State,Tags,Task Name\n");
 
         for (int i = 0; i < tasks.size(); i++) {
             bw.write(tasks.get(i).write());
@@ -82,18 +82,30 @@ public class Storage {
             String taskType = task[0];
             String taskRecurrenceAlias = task[1];
             String taskTime = task[2];
-            String taskName = task[4];
+            String taskName = task[5];
+            String[] tags = task[4].split(";");
             boolean isTaskDone = task[3].equals("1");
 
             switch (taskType) {
             case "T":
-                tasks.add(new Todo(taskName, isTaskDone));
+                tasks.add(new Todo(taskName, isTaskDone, tags));
                 break;
             case "D":
-                tasks.add(new Deadline(taskName, taskRecurrenceAlias, taskTime, isTaskDone));
+                tasks.add(new Deadline(
+                        taskName,
+                        taskRecurrenceAlias,
+                        taskTime,
+                        isTaskDone,
+                        tags
+                    ));
                 break;
             case "E":
-                tasks.add(new Event(taskName, taskRecurrenceAlias, taskTime, isTaskDone));
+                tasks.add(new Event(taskName,
+                        taskRecurrenceAlias,
+                        taskTime,
+                        isTaskDone,
+                        tags
+                    ));
                 break;
             default:
                 break;

@@ -8,7 +8,7 @@ import main.ui.Ui;
  * Represents the add todo command.
  * @author Joshua Liang XingYa
  * @author joshualiang.xy@gmail.com
- * @version v0.2
+ * @version v0.3
  * @since v0.1
  */
 public class TodoCommand implements Command {
@@ -18,9 +18,10 @@ public class TodoCommand implements Command {
      * Constructs an TodoCommand instance and the Todo object
      * with the description of the task.
      * @param description the description of the task.
+     * @param tags the tags associated with the task.
      */
-    public TodoCommand(String description) {
-        todo = new Todo(description);
+    public TodoCommand(String description, String[] tags) {
+        todo = new Todo(description, tags);
     }
 
     /**
