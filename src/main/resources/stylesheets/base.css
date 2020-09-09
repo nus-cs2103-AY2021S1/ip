@@ -2,9 +2,13 @@
     src: url('../fonts/FiraCode.ttf');
 }
 
+@font-face {
+    src: url('../fonts/FiraCode-Bold.ttf');
+}
+
 .user-dialog-box .label {
     -fx-text-fill: #7851A9;
-    -fx-font-weight: bold;
+    -fx-font-family: 'Fira Code Bold';
 }
 
 .label {
