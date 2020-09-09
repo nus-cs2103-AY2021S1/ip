@@ -1,3 +1,5 @@
+package task;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
@@ -8,6 +10,7 @@ import org.junit.jupiter.api.Test;
 import duke.CommonString;
 
 import duke.task.DukeTaskWithTime;
+import stub.DukeTaskWithTimeStub;
 
 
 public class DukeTaskWithTimeTest {

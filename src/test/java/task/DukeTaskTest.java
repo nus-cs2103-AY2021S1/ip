@@ -1,3 +1,5 @@
+package task;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
@@ -5,7 +7,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import org.junit.jupiter.api.Test;
 
 import duke.task.DukeTask;
-
+import stub.DukeTaskStub;
 
 // To test that the methods defined in abstract class DukeTask works properly
 public class DukeTaskTest {

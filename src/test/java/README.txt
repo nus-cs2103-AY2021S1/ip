@@ -1,5 +1,8 @@
 TESTING:
 
+Yet to test:
+StorageManager, InputValidator, Commands
+
 Classes ignored for testing (and why):
 1. Duke
     Implementation under Duke is rather dependent on the other classes.
@@ -8,3 +11,11 @@ Classes ignored for testing (and why):
 2. CommonString
     It just contains some Strings and returns them.
 
+3. UIManager
+    It is just printing stuff so easy to validate.
+
+4. Helper methods under UserInputParser
+    Should write something to test them
+
+5. GUI
+    Not sure how to test

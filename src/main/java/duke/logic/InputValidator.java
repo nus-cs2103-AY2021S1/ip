@@ -51,12 +51,13 @@ public class InputValidator {
      * @throws InvalidInstructionLengthException If validation fails.
      */
     public static boolean validateSizeTwoAndInt(String[] instructionArray)
-            throws InvalidInstructionLengthException {
+            throws InvalidInstructionLengthException, InvalidInstructionFormatException {
         assert instructionArray != null : "validateSizeTwoAndInt array cannot be null";
         if (instructionArray.length == 2) {
             if (isNumeric(instructionArray[1])) {
                 return true;
             }
+            throw new InvalidInstructionFormatException();
         }
         throw new InvalidInstructionLengthException();
     }
@@ -80,7 +81,7 @@ public class InputValidator {
             throws MissingFieldException, InvalidInstructionFormatException {
         assert instructionArray != null : "validateDescriptionAndDateTime array cannot be null";
 
-        if (index == -1) { // does not exist
+        if (index == -1 || index == 1) { // does not exist
             throw new InvalidInstructionFormatException();
         }
 

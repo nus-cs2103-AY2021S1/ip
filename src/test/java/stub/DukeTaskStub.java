@@ -1,3 +1,5 @@
+package stub;
+
 import duke.task.DukeTask;
 
 /**
