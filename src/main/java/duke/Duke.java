@@ -35,9 +35,9 @@ public class Duke {
         tasks = storage.load();
     }
 
-    public String getResponse(String userinput) {
+    public String getResponse(String userInput) {
         try {
-            UserCommand command = Parser.parse(userinput);
+            UserCommand command = Parser.parse(userInput);
             String s = command.execute(tasks, ui);
             storage.save(tasks);
             return s;

@@ -18,11 +18,11 @@ public class ArrayListToTextConverter {
      */
     public static void convertTaskListToText(TaskList tasks, String filePath) {
         try {
-            FileOutputStream writeData = new FileOutputStream(filePath);
-            ObjectOutputStream writeStream = new ObjectOutputStream(writeData);
-            writeStream.writeObject(tasks);
-            writeStream.flush();
-            writeStream.close();
+            FileOutputStream fileOutputStream = new FileOutputStream(filePath);
+            ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(tasks);
+            objectOutputStream.flush();
+            objectOutputStream.close();
 
         } catch (IOException e) {
             e.printStackTrace();

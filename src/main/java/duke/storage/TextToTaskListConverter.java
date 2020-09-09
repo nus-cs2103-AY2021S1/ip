@@ -18,10 +18,10 @@ public class TextToTaskListConverter {
      */
     public static TaskList readFile(String filePath) {
         try {
-            FileInputStream readData = new FileInputStream(filePath);
-            ObjectInputStream readStream = new ObjectInputStream(readData);
-            TaskList taskList = (TaskList) readStream.readObject();
-            readStream.close();
+            FileInputStream fileInputStream = new FileInputStream(filePath);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            TaskList taskList = (TaskList) objectInputStream.readObject();
+            objectInputStream.close();
             return taskList;
         } catch (FileNotFoundException e) {
             System.out.println("File not found.Creating new save file");
