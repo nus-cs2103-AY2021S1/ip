@@ -1,5 +1,8 @@
 package duke.command;
 
+import duke.error.DeleteListEmptyException;
+import duke.error.DeleteNegativeIndex;
+import duke.error.DeleteOutOfBounds;
 import duke.parts.Storage;
 import duke.parts.TaskList;
 import duke.parts.Ui;
@@ -24,7 +27,8 @@ public class DeleteCommand extends Command {
      * @param storage The storage of the system.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage)
+            throws DeleteListEmptyException, DeleteOutOfBounds, DeleteNegativeIndex {
         Task removed = tasks.deleteTask(index - 1, storage);
         String output = ui.showDelete(removed, tasks.numTask());
         return output;

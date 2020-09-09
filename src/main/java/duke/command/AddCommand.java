@@ -34,31 +34,35 @@ public class AddCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage)
             throws IncorrectFormat, EventDateParseException, DeadlineDateParseException {
-        int indexOfSpace = input.indexOf(" ");
-        int indexOfSlash = input.indexOf("/");
-        int length = input.length();
-        Task newTask;
-        String output = "";
-        switch (input.substring(0, indexOfSpace)) {
-        case "todo":
-            newTask = new ToDo(input.substring(indexOfSpace, length));
-            output += ui.printNew(newTask, "ToDo", tasks.numTask() + 1);
-            break;
-        case "deadline":
-            String dateStringDeadline = input.substring(indexOfSlash + 1, input.length());
-            newTask = new Deadline(input.substring(indexOfSpace, indexOfSlash), dateStringDeadline);
-            output += ui.printNew(newTask, "Deadline", tasks.numTask() + 1);
-            break;
-        case "event":
-            String dateStringEvent = input.substring(indexOfSlash + 1, input.length());
-            newTask = new Event(input.substring(indexOfSpace, indexOfSlash), dateStringEvent);
-            output += ui.printNew(newTask, "Event", tasks.numTask() + 1);
-            break;
-        default:
-            throw new IncorrectFormat();
+        try {
+            int indexOfSpace = input.indexOf(" ");
+            int indexOfSlash = input.indexOf("/");
+            int length = input.length();
+            Task newTask;
+            String output = "";
+            switch (input.substring(0, indexOfSpace)) {
+            case "todo":
+                newTask = new ToDo(input.substring(indexOfSpace, length));
+                output += ui.printNew(newTask, "ToDo", tasks.numTask() + 1);
+                break;
+            case "deadline":
+                String dateStringDeadline = input.substring(indexOfSlash + 1, input.length());
+                newTask = new Deadline(input.substring(indexOfSpace, indexOfSlash), dateStringDeadline);
+                output += ui.printNew(newTask, "Deadline", tasks.numTask() + 1);
+                break;
+            case "event":
+                String dateStringEvent = input.substring(indexOfSlash + 1, input.length());
+                newTask = new Event(input.substring(indexOfSpace, indexOfSlash), dateStringEvent);
+                output += ui.printNew(newTask, "Event", tasks.numTask() + 1);
+                break;
+            default:
+                throw new IncorrectFormat();
+            }
+            tasks.addTask(newTask, storage);
+            return output;
+        } catch (IndexOutOfBoundsException e) {
+            return "    Please give a description for your task";
         }
-        tasks.addTask(newTask, storage);
-        return output;
     }
 
     @Override

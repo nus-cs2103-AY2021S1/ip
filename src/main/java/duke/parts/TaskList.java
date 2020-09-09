@@ -3,6 +3,9 @@ package duke.parts;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import duke.error.DeleteListEmptyException;
+import duke.error.DeleteNegativeIndex;
+import duke.error.DeleteOutOfBounds;
 import duke.task.Task;
 
 /**
@@ -38,7 +41,17 @@ public class TaskList {
      * @param index Index of task to be deleted
      * @param storage Storage of the system
      */
-    public Task deleteTask(int index, Storage storage) {
+    public Task deleteTask(int index, Storage storage) throws DeleteNegativeIndex, DeleteOutOfBounds, DeleteListEmptyException {
+        if(tasks.size() == 0) {
+            throw new DeleteListEmptyException();
+        }
+        if (index < 0) {
+            throw new DeleteNegativeIndex();
+        }
+
+        if (index >= tasks.size() ) {
+            throw new DeleteOutOfBounds(index + 1);
+        }
         assert index < tasks.size() && index >= 0 ;
         Task removed = tasks.remove(index);
         updateList(storage);
