@@ -16,10 +16,14 @@ public class Todo extends Task {
 
     @Override
     public String inputStyle() {
-        return "todo " + super.inputStyle();
+        return "todo " + super.inputStyle() + " #" + super.priority;
     }
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        if (super.priority == Priority.HIGH) {
+            return "#" + super.priority.toString() + " [T]" + super.toString();
+        } else {
+            return "[T]" + super.toString();
+        }
     }
 }
