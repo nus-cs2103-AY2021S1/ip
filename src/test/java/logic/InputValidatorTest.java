@@ -39,13 +39,13 @@ public class InputValidatorTest {
     public void testDescriptionAndDateTime() throws MissingFieldException, InvalidInstructionFormatException {
 
         assertTrue(InputValidator
-                .validateDescriptionAndDateTime(new String[]{"type", "desc", "index", "date", "time"}, 2));
+                .validateDescription(new String[]{"type", "desc", "index", "date", "time"}, 2));
         assertThrows(InvalidInstructionFormatException.class, () -> InputValidator
-                .validateDescriptionAndDateTime(new String[]{"type", "desc", "index", "date", "time"}, -1));
+                .validateDescription(new String[]{"type", "desc", "index", "date", "time"}, -1));
         assertThrows(MissingFieldException.class, () -> InputValidator
-                .validateDescriptionAndDateTime(new String[]{"type", "", "index", "date", "time"}, 2));
+                .validateDescription(new String[]{"type", "", "index", "date", "time"}, 2));
         assertThrows(MissingFieldException.class, () -> InputValidator
-                .validateDescriptionAndDateTime(new String[]{"type", "desc", "index", "date or time"}, 2));
+                .validateDescription(new String[]{"type", "desc", "index", "date or time"}, 2));
     }
 
     @Test
