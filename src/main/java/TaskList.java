@@ -14,7 +14,7 @@ public class TaskList {
     }
 
     public TaskList() {
-        this.tasks = new ArrayList<>();
+        this.tasks = new ArrayList<Task>();
         this.totalTasks = 0;
     }
 
@@ -70,7 +70,7 @@ public class TaskList {
     }
 
     public ArrayList<Task> listFilteredTasks(String filter) {
-        ArrayList<Task> filteredTasks = new ArrayList<>();
+        ArrayList<Task> filteredTasks = new ArrayList<Task>();
         for (int i = 0; i < totalTasks; i++) {
             if (tasks.get(i - 1).description.contains(filter)) {
                 filteredTasks.add(tasks.get(i));
