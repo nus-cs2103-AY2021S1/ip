@@ -1,6 +1,9 @@
 package duke.task;
 
 import duke.exception.MissingDeadlineException;
+import duke.tool.Parser;
+
+import java.time.LocalDate;
 
 /**
  * Represents a task with a deadline.
@@ -16,9 +19,13 @@ public class Deadline extends Task {
             throw new MissingDeadlineException("deadline");
         } else {
             String date = desc.split(SPLIT_IDENTIFIER, 2)[1];
-            this.deadline = containsTime(date)
-                                ? formatDateTime(date)
-                                : formatDate(date);
+            String[] recurrence = Parser.parseDescription(date);
+            this.deadline = containsTime(recurrence[0])
+                                ? formatDateTime(recurrence[0])
+                                : formatDate(recurrence[0]);
+            if (recurrence.length != 1) {
+                addRecurrence(recurrence[1], LocalDate.now());
+            }
         }
     }
 
@@ -31,11 +38,12 @@ public class Deadline extends Task {
     @Override
     public String formatTaskForFile() {
         return taskType + " | " + (isDone ? "1" : "0") + " | " +
-                description + " | " + deadline;
+                description + " | " + deadline + (isRecurring() ? " | " + recurrence + " @ " + dateRepeated : "");
     }
 
     @Override
     public String toString() {
-        return "[D]" + getStatusIcon() + description + " (by: " + deadline + ")";
+        return "[D]" + getStatusIcon() + description + " (by: " + deadline + ")" +
+                (isRecurring() ? " (repeats: every " + recurrence + ")" : "");
     }
 }

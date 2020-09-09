@@ -115,4 +115,8 @@ public class Ui {
         list += matchingTasks;
         return list;
     }
+
+    public String test(String str) {
+        return str;
+    }
 }

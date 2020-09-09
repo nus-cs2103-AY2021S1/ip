@@ -18,4 +18,10 @@ public class Parser {
         return str.split(" ", 2);
     }
 
+    public static String[] parseDescription(String str) {
+        return str.split( " /every ");
+    }
+
+    public static String[] parseRecurrence(String str) { return str.split(" @ "); }
+
 }
