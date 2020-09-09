@@ -82,7 +82,8 @@ public class Parser {
         assert cmd.length == len : "Command arguments should match the number of arguments required.";
     }
 
-    private static String[] obtainDescription(String description, String separator) throws PandaBotInsufficientArgumentException {
+    private static String[] obtainDescription(String description, String separator)
+            throws PandaBotInsufficientArgumentException {
         String[] res = description.split(separator, 2);
         verifyArguments(res, 2);
         return res;
