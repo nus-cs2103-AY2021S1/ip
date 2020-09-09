@@ -42,7 +42,8 @@ public class TaskList {
         if (taskArrayList.size() == 0){
             return "There are no tasks!\n";
         }
-        else return Ui.printList(this.taskArrayList);
+
+        return Ui.printList(this.taskArrayList);
     }
 
     /**
