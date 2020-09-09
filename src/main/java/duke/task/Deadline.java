@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.exception.EmptyTimeException;
 import duke.exception.ExceptionMessage;
 import duke.exception.IncorrectFormatException;
 import duke.time.Time;
@@ -46,6 +47,11 @@ public class Deadline extends Task {
         if (splitStr.length != 2) {
             String errMessage = ExceptionMessage.DEADLINE_INCORRECT_FORMAT_MESSAGE;
             throw new IncorrectFormatException(errMessage);
+        }
+
+        if (splitStr[1].isBlank()) {
+            String errMessage = ExceptionMessage.EMPTY_TIME_MESSAGE;
+            throw new EmptyTimeException(errMessage);
         }
     }
 
