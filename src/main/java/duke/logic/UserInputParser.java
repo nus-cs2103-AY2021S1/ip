@@ -103,14 +103,14 @@ public class UserInputParser {
             break;
         case DEADLINE:
             int byIndex = findIndex(instructionArray, BY_INDICATOR);
-            if (InputValidator.validateDescriptionAndDateTime(instructionArray, byIndex)
+            if (InputValidator.validateDescription(instructionArray, byIndex)
                     && (InputValidator.validateDateAndTime(instructionArray, byIndex))) {
                 return new AddCommand(generateTaskWithDate(DEADLINE, instructionArray, BY_INDICATOR));
             }
             break;
         case EVENT:
             int atIndex = findIndex(instructionArray, AT_INDICATOR);
-            if (InputValidator.validateDescriptionAndDateTime(instructionArray, atIndex)
+            if (InputValidator.validateDescription(instructionArray, atIndex)
                     && (InputValidator.validateDateAndTime(instructionArray, atIndex))) {
                 return new AddCommand(generateTaskWithDate(EVENT, instructionArray, AT_INDICATOR));
             }

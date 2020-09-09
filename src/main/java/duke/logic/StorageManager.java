@@ -107,22 +107,7 @@ public class StorageManager {
         assert dataList != null : "saveDate input dataList cannot be null";
         StringBuilder dataString = new StringBuilder();
         for (DukeTask task : dataList) {
-            String addition = "";
-            if (task instanceof TodoTask) {
-                addition = "T" + FILE_DATA_SEPARATOR
-                        + (task.getDoneStatus() ? "1" : "0") + FILE_DATA_SEPARATOR
-                        + task.getDescription();
-            } else if (task instanceof EventTask) {
-                addition = "E" + FILE_DATA_SEPARATOR
-                        + (task.getDoneStatus() ? "1" : "0") + FILE_DATA_SEPARATOR
-                        + task.getDescription() + FILE_DATA_SEPARATOR
-                        + ((EventTask) task).getDateTime();
-            } else if (task instanceof DeadlineTask) {
-                addition = "D" + FILE_DATA_SEPARATOR
-                        + (task.getDoneStatus() ? "1" : "0") + FILE_DATA_SEPARATOR
-                        + task.getDescription() + FILE_DATA_SEPARATOR
-                        + ((DeadlineTask) task).getDateTime();
-            }
+            String addition = generateAdditionString(task);
             dataString.append(addition).append(System.lineSeparator());
         }
 
@@ -137,5 +122,20 @@ public class StorageManager {
         }
     }
 
-
+    /**
+     * Generates the String to be added to the datafile
+     * @param task DukeTask
+     * @return String denoting output
+     */
+    private String generateAdditionString(DukeTask task) {
+        String output = (task.getDoneStatus() ? "1" : "0") + FILE_DATA_SEPARATOR + task.getDescription();
+        if (task instanceof TodoTask) {
+            output = "T" + FILE_DATA_SEPARATOR + output;
+        } else if (task instanceof EventTask) {
+            output = "E" + FILE_DATA_SEPARATOR + output + FILE_DATA_SEPARATOR + ((EventTask) task).getDateTime();
+        } else {
+            output = "D" + FILE_DATA_SEPARATOR + output + FILE_DATA_SEPARATOR + ((DeadlineTask) task).getDateTime();
+        }
+        return output;
+    }
 }
