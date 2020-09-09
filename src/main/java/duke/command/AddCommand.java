@@ -23,7 +23,7 @@ public class AddCommand extends Command {
      * @param inputCommand the InputCommand enum value of object.
      */
     public AddCommand(String input, InputCommand inputCommand) {
-        this.exit = false;
+        this.isExit = false;
         this.input = input;
         this.inputCommand = inputCommand;
     }

@@ -18,7 +18,7 @@ public class DeleteCommand extends Command {
      * @param input input of user.
      */
     public DeleteCommand(String input) {
-        this.exit = false;
+        this.isExit = false;
         this.input = input;
     }
 

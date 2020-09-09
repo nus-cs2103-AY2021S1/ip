@@ -18,7 +18,7 @@ public class Todo extends Task {
      * @return string representation of Todo object for file storage.
      */
     @Override
-    public String toFileString() {
+    public String convertToFileString() {
         String doneInteger = isDone ? "1" : "0";
         return "T | " + doneInteger + " | " + this.description;
     }

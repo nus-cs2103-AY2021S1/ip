@@ -14,7 +14,7 @@ public class ExitCommand extends Command {
      * Creates an ExitCommand object.
      */
     public ExitCommand() {
-        this.exit = true;
+        this.isExit = true;
     }
 
     /**

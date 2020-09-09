@@ -16,7 +16,7 @@ public class FindCommand extends Command {
      * @param input input of user.
      */
     public FindCommand(String input) {
-        this.exit = false;
+        this.isExit = false;
         this.input = input;
     }
 

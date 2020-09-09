@@ -18,7 +18,7 @@ public class GetCommand extends Command {
      * @param input input of user.
      */
     public GetCommand(String input) {
-        this.exit = false;
+        this.isExit = false;
         this.input = input;
     }
 
