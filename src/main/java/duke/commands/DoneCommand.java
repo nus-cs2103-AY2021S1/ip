@@ -18,7 +18,8 @@ public class DoneCommand extends Command{
     }
 
     /**
-     * Completes a task on the taskList;
+     * Completes a task on the taskList
+     *
      * @param taskList
      * @param ui
      * @param storage

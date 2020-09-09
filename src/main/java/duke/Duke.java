@@ -48,27 +48,7 @@ public class Duke{
     /**
      * Runs the programme, using a Duke Object
      */
-//    public void run() throws DukeException {
-//        ui.startMessage();
-//        storage.loadTasks(tasks);
-//
-//        Scanner scanner = new Scanner(System.in);
-//
-//        while  (scanner.hasNext()) {
-//            try {
-//                String input = scanner.nextLine();
-//                Command executable = Parser.parse(input);
-//                String output = executable.execute(tasks, ui, storage);
-//                if (executable.isComplete()){
-//                    break;
-//                }
-//                ui.lineFormatter(output);
-//            } catch (DukeException e){
-//                ui.lineFormatter(e.getMessage());
-//            }
-//        }
-//
-//    }
+
 
     public String getResponse(String input) throws DukeException{
         try {
@@ -76,12 +56,10 @@ public class Duke{
             String output = executable.execute(tasks, ui, storage);
             if (executable.isComplete()){
                 System.exit(0);
-
             }
-//            ui.lineFormatter(output);
+
             return output;
         } catch (DukeException e){
-//            ui.lineFormatter(e.getMessage());
             return e.getMessage();
         }
 

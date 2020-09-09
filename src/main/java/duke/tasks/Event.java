@@ -15,6 +15,7 @@ public class Event extends Task {
 
     /**
      * Creates a Event Object
+     *
      * @param description
      * @param at
      */
@@ -25,6 +26,7 @@ public class Event extends Task {
 
     /**
      * Creates a Event Object
+     *
      * @param description
      * @param at
      * @param isDone
@@ -37,6 +39,7 @@ public class Event extends Task {
 
     /**
      * Returns the date of the Event
+     *
      * @return date
      */
     public String getTime(){
@@ -47,6 +50,7 @@ public class Event extends Task {
 
     /**
      * Returns the original command used to create the Event
+     *
      * @return original command
      */
     @Override
@@ -57,6 +61,7 @@ public class Event extends Task {
 
     /**
      * Returns the date in the form of dd MMM yyyy HHmm
+     *
      * @return due date of the Event
      */
     private String getEventDate() {
@@ -78,6 +83,7 @@ public class Event extends Task {
 
     /**
      * Returns the Event with StatusIcon
+     *
      * @return Event with StatusIcon
      */
     @Override

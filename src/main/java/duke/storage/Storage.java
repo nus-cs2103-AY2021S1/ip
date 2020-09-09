@@ -30,6 +30,7 @@ public class Storage {
 
     /**
      * Creates a storage object
+     *
      * @param directory
      */
     public Storage(String directory){
@@ -40,6 +41,7 @@ public class Storage {
 
     /**
      * Saves the list of Tasks in the TaskList object into a txt file
+     *
      * @param taskList
      */
     public void saveTasks(TaskList taskList){
@@ -80,6 +82,7 @@ public class Storage {
 
     /**
      * Loads the list of Tasks in the txt file into the TaskList object
+     *
      * @param taskList
      */
     public void loadTasks(TaskList taskList) {

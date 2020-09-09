@@ -35,6 +35,7 @@ public class Task {
 
     /**
      * Returns the description of the Task
+     *
      * @return String returns the descriptions of the Task
      */
     public String getTask() {
@@ -43,6 +44,7 @@ public class Task {
 
     /**
      * Returns the Status of the Task
+     *
      * @return boolean, the status of the task
      */
     public boolean getStatus(){
@@ -51,6 +53,7 @@ public class Task {
 
     /**
      * Returns the original Command of the Task
+     *
      * @return String the original command of the task
      */
     public String getOriginal(){

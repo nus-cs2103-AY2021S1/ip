@@ -9,6 +9,7 @@ public class ToDo extends Task {
 
     /**
      * Creates a ToDo object
+     *
      * @param description
      */
     public ToDo(String description) {
@@ -18,6 +19,7 @@ public class ToDo extends Task {
 
     /**
      * Creates a ToDo object
+     *
      * @param description
      * @param isDone
      */
@@ -28,6 +30,7 @@ public class ToDo extends Task {
 
     /**
      * Returns the original command used to create the ToDo
+     *
      * @return original command
      */
     @Override
@@ -38,6 +41,7 @@ public class ToDo extends Task {
 
     /**
      * Returns the ToDo with StatusIcon
+     *
      * @return ToDo with StatusIcon
      */
     @Override

@@ -15,6 +15,7 @@ public class Deadline extends Task {
 
     /**
      * Creates a Deadline Object
+     *
      * @param description
      * @param by
      */
@@ -25,6 +26,7 @@ public class Deadline extends Task {
 
     /**
      * Creates a Deadline Object
+     *
      * @param description
      * @param by
      * @param isDone
@@ -36,6 +38,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the due date of the Deadline
+     *
      * @return date
      */
     public String getDate(){
@@ -45,6 +48,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the original command used to create the Deadline
+     *
      * @return original command
      */
     @Override
@@ -54,6 +58,7 @@ public class Deadline extends Task {
 
     /**
      * Returns the due date in the form of dd MMM yyyy HHmm
+     *
      * @return due date of the Deadline
      */
     public String getDeadlineDate() {

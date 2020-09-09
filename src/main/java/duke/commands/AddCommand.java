@@ -40,12 +40,14 @@ public class AddCommand extends Command {
             throw new IncompleteCommandException();
         }
 
-        if (Parser.isToDo(inputList[0].trim())){
+        String commandLine = inputList[0].trim();
+
+        if (Parser.isToDo(commandLine)){
             newTask = new ToDo(inputList[1].trim());
 
         }
 
-        if (Parser.isDeadline(inputList[0].trim())){
+        if (Parser.isDeadline(commandLine)){
             String[] task_deadline = inputList[1].trim().split("/by", 2);
             if (task_deadline.length != 2){
                 throw new DeadlineException();
@@ -59,7 +61,7 @@ public class AddCommand extends Command {
             }
         }
 
-        if (Parser.isEvent(inputList[0].trim())){
+        if (Parser.isEvent(commandLine)){
             String[] task_event = inputList[1].trim().split("/at", 2);
             if (task_event.length != 2){
                 throw new EventException();
