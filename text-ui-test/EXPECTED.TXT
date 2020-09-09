@@ -1,7 +1,344 @@
-Hello from
+____________________________________________________________
+Hello! I am duke.Duke, your Personal Assistant!
+What can I do for you today?
+Type "help" to see the available instructions!
+____________________________________________________________
+How to use duke.Duke:
+* Level 8: Formatting Time
+
+* DEVELOPER UPDATES:
+* I can now save data! Just terminate the program with "bye" and I'll save the data automatically!
+* Do take note of the DATE AND TIME notations when inserting DukeTasks!
+
+AVAILABLE INSTRUCTIONS:
+ help - Display Available Instructions
+ bye - Terminate duke.Duke
+ list - Display current DukeTasks
+ done [Task Number] - Complete the specified task number (Specify in numeric format!) Eg: "done 3"
+ delete [Task Number] - Deletes the task number (Specify in numeric format!) Eg: "delete 3"
+* SEE TASK INPUT INSTRUCTIONS FOR MORE ABOUT TASKS
+
+TASK INPUT INSTRUCTIONS:
+IMPORTANT: DO AVOID USING THE VERTICAL BAR "|" IN YOUR TASK INSTRUCTIONS
+ todo [Task Description] - Inputs a TODO duke.task.DukeTask
+ deadline [Task Description] /by [Date] - Inputs a DEADLINE duke.task.DukeTask, using INDICATOR /by
+ event [Task Description] /at [Date] - Inputs an EVENT duke.task.DukeTask, using INDICATOR /at
+
+TO NOTE:
+FORMAT FOR DATE: "DD/MM/YYYY hh/mm/ss"
+ 	DD, MM, YYYY are the date, month and year respectively (IN INTEGERS)
+ 	hh, mm, ss are the hour (in 24 HOUR NOTATION), minutes and seconds respectively (IN INTEGERS)
+____________________________________________________________
+You now have 0 tasks
+____________________________________________________________
+Task Added: [T][✘] homework
+You now have 1 task
+____________________________________________________________
+Exception: duke.exception.InvalidInstructionException
+	Please key in a valid instruction!
+	Source - todo
+	See "help" for more
+____________________________________________________________
+1. [T][✘] homework
+You now have 1 task
+____________________________________________________________
+Task Added: [D][✘] CS2103 webcast (by: 12 Dec 2020 06:06:00 AM)
+You now have 2 tasks
+____________________________________________________________
+Exception: duke.exception.MissingFieldException
+	Please key in the missing fields
+	Fields Missing - deadline: Description
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.MissingFieldException
+	Please key in the missing fields
+	Fields Missing - deadline: Date and Time
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.MissingFieldException
+	Please key in the missing fields
+	Fields Missing - deadline: Date and Time
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - deadline DATE FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - deadline DATE FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - deadline DATE FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - deadline TIME FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - deadline TIME FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - deadline TIME FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - deadline DATE FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - deadline DATE FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - deadline DATE FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - deadline DATE FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - deadline TIME FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - deadline TIME FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - deadline TIME FORMAT
+	See "help" for more
+____________________________________________________________
+1. [T][✘] homework
+2. [D][✘] CS2103 webcast (by: 12 Dec 2020 06:06:00 AM)
+You now have 2 tasks
+____________________________________________________________
+Task Added: [E][✘] CS2100 Lab (at: 12 Dec 2020 06:06:00 AM)
+You now have 3 tasks
+____________________________________________________________
+Exception: duke.exception.MissingFieldException
+	Please key in the missing fields
+	Fields Missing - event: Date and Time
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.MissingFieldException
+	Please key in the missing fields
+	Fields Missing - event: Description
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.MissingFieldException
+	Please key in the missing fields
+	Fields Missing - event: Date and Time
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - event DATE FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - event DATE FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - event DATE FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - event TIME FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - event TIME FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - event TIME FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - event DATE FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - event DATE FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - event DATE FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - event DATE FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - event TIME FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - event TIME FORMAT
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - event TIME FORMAT
+	See "help" for more
+____________________________________________________________
+1. [T][✘] homework
+2. [D][✘] CS2103 webcast (by: 12 Dec 2020 06:06:00 AM)
+3. [E][✘] CS2100 Lab (at: 12 Dec 2020 06:06:00 AM)
+You now have 3 tasks
+____________________________________________________________
+Exception: duke.exception.InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - deadline
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidFormatException
+	Please use the correct format for your instructions!
+	Format - event
+	See "help" for more
+____________________________________________________________
+1. [T][✘] homework
+2. [D][✘] CS2103 webcast (by: 12 Dec 2020 06:06:00 AM)
+3. [E][✘] CS2100 Lab (at: 12 Dec 2020 06:06:00 AM)
+You now have 3 tasks
+____________________________________________________________
+Alright! I'll mark this task as done!
+[T][✓] homework
+You now have 3 tasks
+____________________________________________________________
+Exception: duke.exception.InvalidInstructionException
+	Please key in a valid instruction!
+	Source - DONE: Task is already done!
+	See "help" for more
+____________________________________________________________
+1. [T][✓] homework
+2. [D][✘] CS2103 webcast (by: 12 Dec 2020 06:06:00 AM)
+3. [E][✘] CS2100 Lab (at: 12 Dec 2020 06:06:00 AM)
+You now have 3 tasks
+____________________________________________________________
+Exception: duke.exception.InvalidInstructionException
+	Please key in a valid instruction!
+	Source - DONE: Invalid Task Number
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidInstructionException
+	Please key in a valid instruction!
+	Source - DONE: Invalid Task Number
+	See "help" for more
+____________________________________________________________
+Alright! I'll mark this task as done!
+[D][✓] CS2103 webcast (by: 12 Dec 2020 06:06:00 AM)
+You now have 3 tasks
+____________________________________________________________
+Alright! I'll mark this task as done!
+[E][✓] CS2100 Lab (at: 12 Dec 2020 06:06:00 AM)
+You now have 3 tasks
+____________________________________________________________
+1. [T][✓] homework
+2. [D][✓] CS2103 webcast (by: 12 Dec 2020 06:06:00 AM)
+3. [E][✓] CS2100 Lab (at: 12 Dec 2020 06:06:00 AM)
+You now have 3 tasks
+____________________________________________________________
+Exception: duke.exception.InvalidInstructionException
+	Please key in a valid instruction!
+	Source - delete
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidInstructionException
+	Please key in a valid instruction!
+	Source - delete
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidInstructionException
+	Please key in a valid instruction!
+	Source - DELETE: Invalid Task Number
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidInstructionException
+	Please key in a valid instruction!
+	Source - DELETE: Invalid Task Number
+	See "help" for more
+____________________________________________________________
+Alright! I'll delete this task!
+Take note that this is irreversible!
+[T][✓] homework
+You now have 2 tasks
+____________________________________________________________
+Task Added: [T][✘] newHomework
+You now have 3 tasks
+____________________________________________________________
+Task Added: [E][✘] dinner (at: 12 Dec 2020 06:06:00 AM)
+You now have 4 tasks
+____________________________________________________________
+Alright! I'll mark this task as done!
+[T][✓] newHomework
+You now have 4 tasks
+____________________________________________________________
+Alright! I'll delete this task!
+Take note that this is irreversible!
+[T][✓] newHomework
+You now have 3 tasks
+____________________________________________________________
+1. [D][✓] CS2103 webcast (by: 12 Dec 2020 06:06:00 AM)
+2. [E][✓] CS2100 Lab (at: 12 Dec 2020 06:06:00 AM)
+3. [E][✘] dinner (at: 12 Dec 2020 06:06:00 AM)
+You now have 3 tasks
+____________________________________________________________
+Exception: duke.exception.InvalidInstructionException
+	Please key in a valid instruction!
+	Source - help
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidInstructionException
+	Please key in a valid instruction!
+	Source - list
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidInstructionException
+	Please key in a valid instruction!
+	Source - done
+	See "help" for more
+____________________________________________________________
+Exception: duke.exception.InvalidInstructionException
+	Please key in a valid instruction!
+	Source - bye
+	See "help" for more
+____________________________________________________________
+____________________________________________________________
+Goodbye. Hope to see you soon!
  ____        _        
 |  _ \ _   _| | _____ 
 | | | | | | | |/ / _ \
 | |_| | |_| |   <  __/
 |____/ \__,_|_|\_\___|
-
+____________________________________________________________
