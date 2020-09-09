@@ -12,7 +12,7 @@ public class EventTest {
     public void testStringConversion() {
         Event task = new Event("borrow book", LocalDate.parse("2020-09-24"));
         assertEquals("[E][\u2718] borrow book (at: Sep 24 2020)", task.toString());
-        task.done();
+        task.setAsDone();
         assertEquals("[E][\u2713] borrow book (at: Sep 24 2020)", task.toString());
     }
 }
