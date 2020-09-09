@@ -18,8 +18,9 @@ public class ExitCommand extends Command {
      * @param runnables Map object consisting of logic encapsulated as Runnables mapped by a name
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage, Map<String, Runnable> runnables) {
-        storage.save(tasks);
+    public String execute(TaskList tasks, NotesList notes, Ui ui, Storage storage, Map<String, Runnable> runnables) {
+        storage.save(tasks, notes);
+        assert runnables.containsKey("handleExit") : "Runnable object should contain code for handleExit";
         runnables.get("handleExit").run();
         return EXIT + "\n File saved!";
     }

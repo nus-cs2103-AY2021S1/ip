@@ -12,7 +12,7 @@ public class FindCommand extends Command {
 
 
     @Override
-    String execute(TaskList tasks, Ui ui, Storage storage, Map<String, Runnable> runnables) {
+    String execute(TaskList tasks, NotesList notes, Ui ui, Storage storage, Map<String, Runnable> runnables) {
         TaskList filteredTasks = tasks.findTasks(this.substring);
         return String.format("Here are your tasks matching %s\n"
                 + "%s", this.substring, filteredTasks);

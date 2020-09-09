@@ -1,3 +1,7 @@
-button {
-    color: skyblue;
+#dialog {
+    -fx-background-color: #F1C5C5;
+    -fx-min-height: 100;
+    -fx-min-width: 280;
+    -fx-label-padding: 10;
 }
+

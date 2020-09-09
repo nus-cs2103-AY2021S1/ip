@@ -11,17 +11,13 @@ import java.io.ObjectOutputStream;
 public class Storage {
 
     // Attributes
-    private final String filePath;
+    private final String filePathTasks;
+    private final String filePathNotes;
 
     // Constructor
-
-    /**
-     * Creates a storage object that reads and writes to a file at a specified filepath.
-     *
-     * @param filePath file path of file to read and write to.
-     */
-    public Storage(String filePath) {
-        this.filePath = filePath;
+    public Storage(String filePathTasks, String filePathNotes) {
+        this.filePathTasks = filePathTasks;
+        this.filePathNotes = filePathNotes;
     }
 
     /**
@@ -29,59 +25,87 @@ public class Storage {
      *
      * @return Boolean representing whether the file exists.
      */
-    public boolean doesFileExist() {
-        File file = new File(this.filePath);
+    public boolean doesFileExistTasks() {
+        File file = new File(this.filePathTasks);
         return file.exists();
     }
 
-    /**
-     * Creates the file
-     */
-    public void createFile() throws IOException {
-        File file = new File(this.filePath);
-        boolean createdDirectory = file.getParentFile().mkdirs();
-        boolean createdFile = file.createNewFile();
+    public boolean doesFileExistNotes() {
+        File file = new File(this.filePathNotes);
+        return file.exists();
     }
 
-    /**
-     * Saves a list to the file. Creates the file if it does not exist.
-     *
-     * @param lst TaskList to save to the file.
-     */
-    public void save(TaskList lst) {
+    public void createFileTasks() {
         try {
-            FileOutputStream fileOutputStream = new FileOutputStream(this.filePath);
+            File file = new File(this.filePathTasks);
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createFileNotes() {
+        try {
+            File file = new File(this.filePathNotes);
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void save(TaskList tasks, NotesList notes) {
+        try {
+            FileOutputStream fileOutputStream = new FileOutputStream(this.filePathTasks);
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(fileOutputStream);
-            objectOutputStream.writeObject(lst);
+            objectOutputStream.writeObject(tasks);
+            objectOutputStream.close();
+
+            fileOutputStream = new FileOutputStream(this.filePathNotes);
+            objectOutputStream = new ObjectOutputStream(fileOutputStream);
+            objectOutputStream.writeObject(notes);
             objectOutputStream.close();
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    /**
-     * Reads from the file containing a TaskList and returns it. If file does not exist, returns an
-     * empty file.
-     *
-     * @return The TaskList read from the file if one is read, otherwise an empty TaskList.
-     */
-    public TaskList read() {
+    public TaskList readTasks() {
         try {
-            if (doesFileExist()) {
-                FileInputStream fileInputStream = new FileInputStream(this.filePath);
+            if (doesFileExistTasks()) {
+                FileInputStream fileInputStream = new FileInputStream(this.filePathTasks);
                 ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-                TaskList lst = (TaskList) objectInputStream.readObject();
+                TaskList tasks = (TaskList) objectInputStream.readObject();
                 objectInputStream.close();
-                return lst;
+                return tasks;
             } else {
-                createFile();
-                return new TaskList();
+                throw new UnsupportedOperationException("File does not exist");
             }
 
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Error reading file");
             e.printStackTrace();
-            return new TaskList(); // Returns an empty list so that program can keep running
+            return new TaskList();
+        }
+    }
+
+    public NotesList readNotes() {
+        try {
+            if (doesFileExistNotes()) {
+                FileInputStream fileInputStream = new FileInputStream(this.filePathNotes);
+                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+                NotesList notes = (NotesList) objectInputStream.readObject();
+                objectInputStream.close();
+                return notes;
+            } else {
+                throw new UnsupportedOperationException("File does not exist");
+            }
+
+        } catch (IOException | ClassNotFoundException e) {
+            System.out.println("Error reading file");
+            e.printStackTrace();
+            return new NotesList();
         }
     }
 }

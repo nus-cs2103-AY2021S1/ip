@@ -26,10 +26,13 @@ public class MainWindow<List> extends AnchorPane {
 
     private Duke duke;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/Jigglypuff.jpg"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Pikachu.png"));
+    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Jigglypuff.jpg"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/Pikachu.png"));
 
     private final Runnable handleExit = () -> {
+        assert !userInput.isDisable() : "User input should not be disabled when calling handleExit";
+        assert !sendButton.isDisable() : "Button to send message should not be disabled when calling handleExit";
+
         userInput.setDisable(true);
         sendButton.setDisable(true);
     };

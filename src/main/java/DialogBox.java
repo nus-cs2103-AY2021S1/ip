@@ -10,6 +10,7 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.HBox;
 
 public class DialogBox extends HBox {
@@ -40,7 +41,8 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+        setAlignment(Pos.CENTER_LEFT);
+        dialog.setAlignment(Pos.CENTER_LEFT);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {

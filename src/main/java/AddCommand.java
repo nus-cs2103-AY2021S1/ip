@@ -8,7 +8,7 @@ import java.util.Map;
 public class AddCommand extends Command {
 
     // Attributes
-    private final String type;
+    private final TaskType type;
     private final String description;
 
     // Constructor
@@ -18,7 +18,7 @@ public class AddCommand extends Command {
      * @param type Type of task to be added to the list.
      * @param description Description of task.
      */
-    public AddCommand(String type, String description) {
+    public AddCommand(TaskType type, String description) {
         this.type = type;
         this.description = description;
     }
@@ -35,14 +35,14 @@ public class AddCommand extends Command {
      * @throws UnknownInputException If an unrecognised command is given.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage, Map<String, Runnable> runnables)
+    public String execute(TaskList tasks, NotesList notes, Ui ui, Storage storage, Map<String, Runnable> runnables)
             throws EmptyBodyException, UnknownInputException {
         switch (this.type) {
-        case "todo": {
+        case TODO: {
             Task newTodo = new Todo(description);
             return tasks.createTask(newTodo);
         }
-        case "deadline": {
+        case DEADLINE: {
             String[] text = description.split(" /by ");
             String description = text[0];
             if (text.length <= 1) {
@@ -56,7 +56,7 @@ public class AddCommand extends Command {
                 throw new UnknownInputException(text[1]);
             }
         }
-        case "event": {
+        case EVENT: {
             String[] text = description.split(" /at ");
             String description = text[0];
             if (text.length <= 1) {
@@ -67,7 +67,7 @@ public class AddCommand extends Command {
             return tasks.createTask(newEvent);
         }
         default:
-            throw new UnknownInputException(this.type);
+            throw new UnknownInputException(this.type.toString());
         }
     }
 

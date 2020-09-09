@@ -3,7 +3,7 @@ import java.util.Map;
 /**
  * Command to list the current tasks the user has.
  */
-public class ListCommand extends Command {
+public class ListNotesCommand extends Command {
 
     /**
      * Executes the ListCommand by printing the list of tasks.
@@ -13,8 +13,8 @@ public class ListCommand extends Command {
      */
     @Override
     String execute(TaskList tasks, NotesList notes, Ui ui, Storage storage, Map<String, Runnable> runnables) {
-        return String.format("Here are the tasks in your list!\n"
-                + "%s", tasks);
+        return String.format("Here are the notes in your list!\n"
+                + "%s", notes);
     }
 
     /**
@@ -24,5 +24,17 @@ public class ListCommand extends Command {
     @Override
     public boolean isExit() {
         return false;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+
+        return true;
     }
 }
