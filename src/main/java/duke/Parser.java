@@ -11,6 +11,7 @@ public class Parser {
      * @return The type of instruction.
      */
     public Instruction load(String input) {
+        assert !input.isEmpty() : "input is empty";
         if (input.equals("list")) {
             return Instruction.LIST;
         } else if (input.startsWith("done")) {

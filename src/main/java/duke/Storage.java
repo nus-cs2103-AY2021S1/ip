@@ -23,6 +23,7 @@ public class Storage {
      * @throws DukeException If the file cannot be written.
      */
     public void updateList(ArrayList<Task> list) throws DukeException {
+        assert !list.isEmpty() : "list is empty";
         try {
             FileWriter fw1 = new FileWriter(filepath);
             FileWriter fw2 = new FileWriter(filepath, true);

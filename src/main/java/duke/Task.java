@@ -18,6 +18,7 @@ public class Task {
      * @return The status icon.
      */
     protected String getStatusIcon() {
+        assert isDone == true || isDone == false : "satatus is empty";
         return (isDone ? "\u2713" : "\u2718");
     }
 
