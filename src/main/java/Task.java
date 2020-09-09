@@ -3,13 +3,13 @@ import java.time.format.DateTimeFormatter;
 
 public abstract class Task {
 
-    private static final String TODO_SYMBOL = "[T]";
-    private static final String DEADLINE_SYMBOL = "[D]";
-    private static final String EVENT_SYMBOL = "[E]";
+    protected static final String TODO_SYMBOL = "[T]";
+    protected static final String DEADLINE_SYMBOL = "[D]";
+    protected static final String EVENT_SYMBOL = "[E]";
 
-
-    protected DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE dd MMM HH:mm");
-    protected String time = "";
+    protected String sym = "";
+    protected LocalDateTime time;
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
 
     private String desc;
@@ -22,7 +22,10 @@ public abstract class Task {
     @Override
     public String toString() {
         String check = isDone ? "\u2713" : "\u2718";
-        return check + " " + desc + " " + time;
+        String timeText = time == null
+                        ? ""
+                        : "/" + time.format(formatter);
+        return check + " " + sym + " " + desc + " " + timeText;
     }
 
     public void done() {
@@ -32,18 +35,33 @@ public abstract class Task {
     public static Task parseToTask(String line) {
         String c = line.substring(2, 5);
         String desc = line.substring(6);
+        String[] arr;
 
         switch(c) {
         case TODO_SYMBOL:
             return new ToDo(desc);
         case DEADLINE_SYMBOL:
-            return new Deadline();
+            arr = desc.split("/", 2);
+            try {
+                LocalDateTime ldt = LocalDateTime.parse(arr[1].trim(), formatter);
+                return new Deadline(arr[0], ldt);
+            } catch (Exception e) {
+                System.out.println(e);
+                break;
+            }
         case EVENT_SYMBOL:
-            return new Event();
+            arr = desc.split("/", 2);
+            try {
+                LocalDateTime ldt1 = LocalDateTime.parse(arr[1].trim(), formatter);
+                return new Event(arr[0], ldt1);
+            } catch (Exception e) {
+                System.out.println(e);
+                break;
+            }
         default:
             System.out.println("Error: could not recognize task symbol");
-            return null;
         }
+        return null;
     }
 
 }
