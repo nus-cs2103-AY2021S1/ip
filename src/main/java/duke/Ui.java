@@ -70,7 +70,7 @@ public class Ui {
      * @return A string representing the list of tasks / message to print out.
      */
     public static String listMatchingTasks(ArrayList<String> lines) {
-        String list = divider;
+        String list = divider; // Listing matching tasks will always start with a divider string
         if (lines.size() > 0) {
             list = list + "Here are the matching tasks in your list!\n";
             for (int i = 0; i < lines.size(); i++) {

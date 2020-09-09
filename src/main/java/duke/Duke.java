@@ -31,7 +31,9 @@ public class Duke extends Application {
     private Parser parser;
 
 
-
+    /**
+     * The constructor method for a Duke object.
+     */
     public Duke() {
         storage = new Storage("src/main/data/", "src/main/data/data.txt");
         try {
@@ -42,6 +44,12 @@ public class Duke extends Application {
         parser = new Parser(storage.getData());
     }
 
+    /**
+     * A simple method that allows the delayed execution of a runnable.
+     *
+     * @param runnable The runnable you would like to delay
+     * @param delay Duration you want to delay the runnable for
+     */
     public void setTimeout(Runnable runnable, int delay) {
         new Thread(() -> {
             try {
@@ -70,7 +78,7 @@ public class Duke extends Application {
         String outputMessage;
         try {
             outputMessage = parser.parse(input);
-            if (!parser.shouldContinueDuke()) {
+            if (!parser.shouldContinueDuke()) { //Checks if a bye input has been parsed
                 ArrayList<String> finalLines = parser.finalizedLines();
                 storage.saveData(finalLines);
                 setTimeout(() -> Platform.exit(), 1500);
@@ -82,11 +90,6 @@ public class Duke extends Application {
             outputMessage = "";
         }
         return outputMessage;
-    }
-
-    public void setIntro() {
-        dialogContainer = new VBox();
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.introduction(), duke));
     }
 
     /**

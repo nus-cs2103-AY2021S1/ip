@@ -27,6 +27,7 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
+        // Adds the intro message into the Duke GUI upon start up
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.introduction(), dukeImage));
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
