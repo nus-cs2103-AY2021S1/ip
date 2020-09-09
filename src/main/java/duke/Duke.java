@@ -62,6 +62,8 @@ public class Duke {
         try {
             int index = Integer.parseInt(inputTextArr[1]);
             String statusMsg = this.taskList.markAsDone(index);
+
+            assert statusMsg != null : "Status message not found";
             return statusMsg;
 
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -87,6 +89,8 @@ public class Duke {
         try {
             int index = Integer.parseInt(inputTextArr[1]);
             String statusMsg = this.taskList.delete(index);
+
+            assert statusMsg != null : "Status message not found";
             return statusMsg;
         } catch (ArrayIndexOutOfBoundsException e) {
             // forwards ArrayIndexOutOfBoundsException from Integer.parseInt()
@@ -109,73 +113,34 @@ public class Duke {
     private String find(String[] inputTextArr) {
         String keyword = Parser.getItemSubstring(inputTextArr);
         String statusMsg = this.taskList.find(keyword);
+
+        assert statusMsg != null : "Status message not found";
         return statusMsg;
     }
 
 
-    private String dukeLogicHelper(String msgInput) {
-
-        String[] msgArr;
-        Command keywordCommand;
-
-        msgArr = Parser.parseLineToArray(msgInput);
-        keywordCommand = Parser.getCommand(msgInput);
-
-        String statusMessage = null;
+    private String handleCases(String[] msgArr, String msgString, Command keywordCommand) {
+        String statusMessage;
 
         switch (keywordCommand) {
-
         case INVALID:
-            statusMessage = this.ui.printErrorMessage(String.format("OOPS!!! I'm sorry, but I don't know what `%s` means :-(", msgArr[0]));
+            statusMessage = String.format("OOPS!!! I'm sorry, but I don't know what `%s` means :-(", msgArr[0]);
             break;
-
         case LIST:
             statusMessage = this.taskList.toString();
-            this.ui.printMessage(statusMessage);
             break;
-
         case DONE:
-            try {
-                statusMessage = this.markAsDone(msgArr);
-                this.ui.printMessage(statusMessage);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                statusMessage = this.ui.printEmptyIndexErrorMsg(keywordCommand.toString());
-            } catch (IndexOutOfBoundsException e) {
-                statusMessage = this.ui.printInvalidIndexErrorMsg();
-            }
+            statusMessage = this.markAsDone(msgArr);
             break;
-
         case DELETE:
-            try {
-                statusMessage = this.delete(msgArr);
-                this.ui.printMessage(statusMessage);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                statusMessage = this.ui.printEmptyIndexErrorMsg(keywordCommand.toString());
-            } catch (IndexOutOfBoundsException e) {
-                statusMessage = this.ui.printInvalidIndexErrorMsg();
-            }
+            statusMessage = this.delete(msgArr);
             break;
-
         case FIND:
-            try {
-                statusMessage = this.find(msgArr);
-                this.ui.printMessage(statusMessage);
-            } catch (ArrayIndexOutOfBoundsException e) {
-                statusMessage = this.ui.printEmptyIndexErrorMsg(keywordCommand.toString());
-            } catch (IndexOutOfBoundsException e) {
-                statusMessage = this.ui.printInvalidIndexErrorMsg();
-            }
+            statusMessage = this.find(msgArr);
             break;
-
         case TASK:
-            try {
-                statusMessage = this.taskList.add(msgInput);
-                this.ui.printMessage(statusMessage);
-            } catch (DukeException e) {
-                statusMessage = this.ui.printErrorMessage(e.getMessage());
-            }
+            statusMessage = this.taskList.add(msgString);
             break;
-
         case TERMINATE:
             // Fallthrough
         default:
@@ -185,6 +150,32 @@ public class Duke {
             break;
         }
 
+        assert statusMessage != null;
+        return statusMessage;
+    }
+
+
+    private String dukeLogicHelper(String msgInput) {
+        String[] msgArr;
+        Command keywordCommand;
+
+        msgArr = Parser.parseLineToArray(msgInput);
+        keywordCommand = Parser.getCommand(msgInput);
+
+        String statusMessage;
+
+        try {
+            statusMessage = this.handleCases(msgArr, msgInput, keywordCommand);
+            this.ui.printMessage(statusMessage);
+        } catch (DukeException e) {
+            statusMessage = this.ui.printErrorMessage(e.getMessage());
+        } catch (ArrayIndexOutOfBoundsException e) {
+            statusMessage = this.ui.printEmptyIndexErrorMsg(keywordCommand.toString());
+        } catch (IndexOutOfBoundsException e) {
+            statusMessage = this.ui.printInvalidIndexErrorMsg();
+        }
+
+        assert statusMessage != null;
         return statusMessage;
 
     }
@@ -199,6 +190,7 @@ public class Duke {
 
         while (!shouldQuit && this.ui.hasNextLine()) {
             msgInput = this.ui.nextLine();
+            assert msgInput != null;
             dukeLogicHelper(msgInput);
         }
     }
