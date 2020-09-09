@@ -44,5 +44,17 @@ public class Events extends Task {
                 super.getDoneString(), this.description, this.time.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm")));
     }
 
-
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o == null || getClass() != o.getClass()) {
+            return false;
+        } else if (!super.equals(o)) {
+            return false;
+        } else {
+            Events event = (Events) o;
+            return this.time.equals(event.time);
+        }
+    }
 }

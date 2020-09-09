@@ -130,7 +130,7 @@ public class Ui {
      * @param taskList the TaskList associated with the current Duke object.
      * @return List of Strings of tasks that match the word
      */
-    public String find(String word, TaskList taskList) {
+    public String find(String word, TaskList taskList) throws DukeDuplicateException {
         assert(!word.isEmpty());
         assert(taskList.getSize() > 0);
         TaskList list = new TaskList();
@@ -152,4 +152,9 @@ public class Ui {
         }
         return tasks.toString();
     }
+
+    public String printDuplicateError(DukeDuplicateException e) {
+        return e.getMessage() + "\n";
+    }
+
 }

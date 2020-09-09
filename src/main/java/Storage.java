@@ -72,6 +72,8 @@ public class Storage {
 
         } catch (IOException e) {
             ui.printIOError(e);
+        } catch (DukeDuplicateException e) {
+            ui.printDuplicateError(e);
         }
     }
 

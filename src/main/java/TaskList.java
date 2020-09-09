@@ -18,8 +18,12 @@ public class TaskList {
      * Adds a Task to the TaskList.
      * @param task task the Task to be added.
      */
-    public void addTask(Task task) {
-        this.taskList.add(task);
+    public void addTask(Task task) throws DukeDuplicateException {
+        if (this.hasDuplicate(task)) {
+            throw new DukeDuplicateException("Oops! You already have this task!");
+        } else {
+            this.taskList.add(task);
+        }
     }
 
     /**
@@ -36,5 +40,14 @@ public class TaskList {
 
     public int getSize() {
         return this.taskList.size();
+    }
+
+    public boolean hasDuplicate(Task newTask) {
+        for (Task task : taskList) {
+            if (newTask.equals(task)) {
+                return true;
+            }
+        }
+        return false;
     }
 }

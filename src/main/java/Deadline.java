@@ -38,6 +38,7 @@ public class Deadline extends Task {
                 this.deadline.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm"))+ ")";
     }
 
+    @Override
     /**
      * Returns a String formatted to how a Deadline should be saved in the associated save file.
      * @return a formatted String to be written to the save file.
@@ -45,6 +46,20 @@ public class Deadline extends Task {
     public String toSaveString() {
         return String.format("D | %s | %s | %s",
                 super.getDoneString(), this.description, this.deadline.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm")));
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o == null || getClass() != o.getClass()) {
+            return false;
+        } else if (!super.equals(o)) {
+            return false;
+        } else {
+            Deadline deadline = (Deadline) o;
+            return this.deadline.equals(deadline.deadline);
+        }
     }
 
 }

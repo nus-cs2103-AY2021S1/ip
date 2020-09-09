@@ -48,4 +48,15 @@ public abstract class Task {
         return String.format("%s %s", this.getIcon(), description);
     }
 
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        } else if (o == null || getClass() != o.getClass()) {
+            return false;
+        } else {
+            Task task = (Task) o;
+            return this.description.equals(task.description);
+        }
+    }
 }
