@@ -44,7 +44,7 @@ public class TaskList {
     public void addTask(String data) {
         Task task;
         String[] parts = data.split("( \\| )");
-
+        assert(parts.length >= 3);
         switch (parts[0]) {
         case("T"):
             task = new ToDo(Integer.parseInt(parts[1]) == 1, parts[2]);
@@ -53,6 +53,7 @@ public class TaskList {
             task = new Deadline(Integer.parseInt(parts[1]) == 1, parts[2], parts[3]);
             break;
         case("E"):
+            assert(parts.length == 4);
             task = new Event(Integer.parseInt(parts[1]) == 1, parts[2], parts[3]);
             break;
         default:
@@ -82,6 +83,7 @@ public class TaskList {
      * remove a task from task list
      */
     public void remove(int index) {
+        assert(index < tasks.size());
         tasks.remove(index);
         save();
     }
