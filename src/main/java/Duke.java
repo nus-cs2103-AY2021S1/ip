@@ -4,7 +4,6 @@ public class Duke {
 
     // Attributes
     private final Storage storage;
-    private final Storage notesListStorage;
     private final TaskList tasks;
     private final Ui ui;
     private final NotesList notes;
@@ -16,20 +15,19 @@ public class Duke {
      */
     public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage("./data/todo.txt");
-        this.notesListStorage = new Storage("./data/notes.txt");
+        this.storage = new Storage("./data/todo.txt", "./data/notes.txt");
 
-        if (storage.doesFileExist()) {
-            this.tasks = (TaskList) storage.read();
+        if (storage.doesFileExistTasks()) {
+            this.tasks = storage.readTasks();
         } else {
-            storage.createFile();
+            storage.createFileTasks();
             this.tasks = new TaskList();
         }
 
-        if (notesListStorage.doesFileExist()) {
-            this.notes = (NotesList) notesListStorage.read();
+        if (storage.doesFileExistNotes()) {
+            this.notes = storage.readNotes();
         } else {
-            notesListStorage.createFile();
+            storage.createFileNotes();
             this.notes = new NotesList();
         }
 

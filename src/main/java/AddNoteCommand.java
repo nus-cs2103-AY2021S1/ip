@@ -19,7 +19,7 @@ public class AddNoteCommand extends Command {
     @Override
     String execute(TaskList tasks, NotesList notes, Ui ui, Storage storage, Map<String, Runnable> runnables) throws DukeException {
         Note newNote = Note.createNote(this.title, this.description, this.priority);
-        notes.addNote(newNote);
+        notes.createNote(newNote);
         return String.format("Note with title %s created!", this.title);
     }
 
@@ -54,5 +54,10 @@ public class AddNoteCommand extends Command {
         result = 31 * result + description.hashCode();
         result = 31 * result + priority.hashCode();
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return this.title + this.description;
     }
 }

@@ -53,6 +53,9 @@ public class Parser {
         case "find": {
             return new FindCommand(remaining);
         }
+        case "notes": {
+            return parseNotesCommand(remaining);
+        }
         default:
             throw new UnknownInputException(firstWord);
         }
@@ -62,43 +65,51 @@ public class Parser {
     public static Command parseNotesCommand(String command) throws UnknownInputException {
         Validator.requireNonNull(command);
 
-        String[] rawCommand = command.split(" ", 2);
-        String firstWord = rawCommand[0];
-        String remaining = rawCommand[1];
-
-        List<String> rawParameters = Arrays.asList(remaining.split("(?=\\w*t/)\\w+"));
-        Map<String, Object> parameters = new HashMap<>();
-
-        rawParameters.forEach(parameter -> {
-            String[] rawSplitParameters = parameter.split("/", 2);
-
-            String name = rawSplitParameters[0];
-            Object value = rawSplitParameters[1];
-
-            parameters.put(name, value);
-        });
+        String[] words = command.split(" ", 2);
+        String firstWord = words[0];
+        String remaining = words.length > 1 ? words[1] : "";
 
         String title = null;
         String description = null;
         Priority priority = null;
 
-        for (Map.Entry<String, Object> entry : parameters.entrySet()) {
-            switch (entry.getKey()) {
-            case "title": case "t": {
-                title = (String) entry.getValue();
-                break;
-            }
-            case "description": case "d": {
-                description = (String) entry.getValue();
-                break;
-            }
-            case "priority": case "p": {
-                priority = parsePriority((String) entry.getValue());
-                break;
-            }
-            default: {
-                throw new UnknownInputException("Unknown parameter name " + entry.getKey()); //todo change to duke exceptions
-            }
+        if (words.length > 1) {
+
+            // Formatting command parameters
+            List<String> rawParameters = Arrays.asList(remaining.split(" (?=\\w*[a-z]+\\/)"));
+            Map<String, Object> parameters = new HashMap<>();
+
+            rawParameters.forEach(parameter -> {
+                String[] rawSplitParameters = parameter.split("/", 2);
+
+                String name = rawSplitParameters[0];
+                Object value = rawSplitParameters[1];
+
+                parameters.put(name, value);
+            });
+
+            // Parsing command parameters
+            for (Map.Entry<String, Object> entry : parameters.entrySet()) {
+                switch (entry.getKey()) {
+                case "title":
+                case "t": {
+                    title = (String) entry.getValue();
+                    break;
+                }
+                case "description":
+                case "d": {
+                    description = (String) entry.getValue();
+                    break;
+                }
+                case "priority":
+                case "p": {
+                    priority = parsePriority((String) entry.getValue());
+                    break;
+                }
+                default: {
+                    throw new UnknownInputException("Unknown parameter name " + entry.getKey()); //todo change to duke exceptions
+                }
+                }
             }
         }
 
@@ -108,8 +119,13 @@ public class Parser {
                 Validator.requireNonNull(title, description, priority);
                 return new AddNoteCommand(title, description, priority);
             } catch (NullPointerException e) {
+                e.printStackTrace();
                 throw new MissingFormatArgumentException(""); // todo: need implement
             }
+        }
+        case "list": {
+            System.out.println("Notes list");
+            return new ListNotesCommand();
         }
         default: {
             throw new UnknownInputException("Unknown notes command: " + firstWord); //todo change to duke exceptions

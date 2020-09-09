@@ -19,8 +19,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, NotesList notes, Ui ui, Storage storage, Map<String, Runnable> runnables) {
-        storage.save(tasks);
-
+        storage.save(tasks, notes);
         assert runnables.containsKey("handleExit") : "Runnable object should contain code for handleExit";
         runnables.get("handleExit").run();
         return EXIT + "\n File saved!";

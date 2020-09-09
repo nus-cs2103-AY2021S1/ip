@@ -1,6 +1,7 @@
+import java.io.Serializable;
 import java.util.Map;
 
-public class Note {
+public class Note implements Serializable {
 
     // Static Variables
     private static int count = 0;
@@ -44,6 +45,12 @@ public class Note {
 
     public void editTitle(String newTitle) {
         this.title = title;
+    }
+
+    // String Representation
+    @Override
+    public String toString() {
+        return String.format("[%s] %s: %s", this.priority.toString().charAt(0), this.title, this.description);
     }
 
 }

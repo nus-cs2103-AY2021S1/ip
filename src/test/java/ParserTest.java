@@ -17,4 +17,16 @@ public class ParserTest {
             fail();
         }
     }
+
+    @Test
+    public void parseNotesCommand_listNotes() {
+        try {
+            Command listNotesCommand = Parser.parseNotesCommand("list");
+            Command expectedNoteCommand = new ListNotesCommand();
+            assertEquals(expectedNoteCommand, listNotesCommand);
+        } catch (Exception e) {
+            e.printStackTrace();
+            fail();
+        }
+    }
 }
