@@ -31,6 +31,7 @@ public class DeadlineTest {
     public void createDeadline_incorrectFormat_exceptionThrown() {
         String incorrectFormatInput = "read book";
 
+		// lambda used here
         Exception exception = assertThrows(
                 IncorrectFormatException.class, () -> Deadline.createDeadline(incorrectFormatInput));
 
