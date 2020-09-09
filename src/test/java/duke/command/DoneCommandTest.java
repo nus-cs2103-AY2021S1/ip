@@ -7,8 +7,6 @@ import static org.junit.jupiter.api.Assertions.fail;
 import org.junit.jupiter.api.Test;
 
 import duke.DukeStub;
-import duke.exception.ExceptionMessage;
-import duke.exception.InvalidIndexException;
 import duke.task.Task;
 
 public class DoneCommandTest {
@@ -27,28 +25,16 @@ public class DoneCommandTest {
     }
 
     @Test
-    public void execute_normalInput_taskMarkedAsDone() {
-        String normalInput = "1";
+    public void executeTest() {
+        String input = "1";
         Task taskToBeMarked = dukeStub.getTaskList().getTask(0);
 
         try {
-            command.execute(normalInput, dukeStub);
+            command.execute(input, dukeStub);
 
             assertEquals(true, taskToBeMarked.isTaskDone());
         } catch (Exception exception) {
             fail(exception.getMessage());
         }
-    }
-
-    @Test
-    public void execute_invalidInput_exceptionThrown() {
-        String invalidInput = "-12";
-
-        Exception exception = assertThrows(
-                InvalidIndexException.class, () -> command.execute(invalidInput, dukeStub));
-
-        String errMessage = ExceptionMessage.getInvalidIndexMessage(invalidInput);
-
-        assertEquals(errMessage, exception.getMessage());
     }
 }
