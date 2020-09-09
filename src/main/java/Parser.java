@@ -47,8 +47,8 @@ public class Parser {
                 if (array.length < 2) {
                     throw new DukeException("The description of a todo cannot be empty!");
                 } else {
-                    String des = array[1];
-                    Task todo = new ToDos(des);
+                    String description = array[1];
+                    Task todo = new ToDos(description);
                     taskList.addTask(todo);
                     result = ui.printAdd(taskList, todo);
                     storage.saveTasks(taskList, ui);
@@ -59,19 +59,19 @@ public class Parser {
                     throw new DukeException("The description of a deadline cannot be empty!");
                 } else {
                     String[] arr = array[1].split(" /by ");
-                    String des = arr[0];
+                    String description = arr[0];
                     if (arr.length == 1) {
                         throw new DukeException("The deadline of the task cannot be empty!");
                     } else {
                         try {
                             String due = arr[1];
-                            Task deadline = new Deadline(des, due);
+                            Task deadline = new Deadline(description, due);
                             taskList.addTask(deadline);
                             result = ui.printAdd(taskList, deadline);
                             storage.saveTasks(taskList, ui);
                         } catch (DateTimeParseException e) {
-                            result = ui.printError("Please use this format: \n" +
-                                    "dd-MM-yyyy HHmm");
+                            result = ui.printError("Please use this format: \n"
+                                    + "dd-MM-yyyy HHmm");
                         }
                     }
                 }
@@ -92,8 +92,8 @@ public class Parser {
                             result = ui.printAdd(taskList, event);
                             storage.saveTasks(taskList, ui);
                         } catch (DateTimeParseException e) {
-                            result = ui.printError("Please use this format: \n" +
-                                        "dd-MM-yyyy HHmm");
+                            result = ui.printError("Please use this format: \n"
+                                    + "dd-MM-yyyy HHmm");
                         }
                     }
                 }
