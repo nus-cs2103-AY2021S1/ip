@@ -78,6 +78,22 @@ public class TaskList {
         return this.toString();
     }
 
+    String postpone(String input) {
+        String[] arr = input.split("/", 2);
+        int index = Integer.parseInt(input) - 1;
+        LocalDateTime ldt = LocalDateTime.parse(arr[1].trim(), formatter);
+        if (index < 0 || index >= list.size()) {
+            index++;
+            return "Poco cannot find the task: " + index;
+        }
+        Task task = list.get(index);
+        if (task instanceof ToDo) {
+            return "Poco cannot postpone a ToDo task";
+        }
+        task.postpone(ldt);
+        return "Poco has postponed the task: " + task.toString();
+    }
+
     @Override
     public String toString() {
         String s = "";

@@ -32,6 +32,10 @@ public abstract class Task {
         isDone = true;
     }
 
+    public void postpone(LocalDateTime newTime) {
+        this.time = newTime;
+    }
+
     public static Task parseToTask(String line) {
         String c = line.substring(2, 5);
         String desc = line.substring(6);

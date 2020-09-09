@@ -43,6 +43,7 @@ public class Command {
         commands.put("delete", new Cmd(taskList::delete, "delete_(indexOfTask)"));
         commands.put("find", new Cmd(taskList::find, "find_(task description)"));
         commands.put("list", new Cmd(taskList::displayList, "list"));
+        commands.put("postpone", new Cmd(taskList::postpone, "postpone_(indexOfTask)/(dd/MM/yyyy HH:mm)"));
     }
 
     /**
