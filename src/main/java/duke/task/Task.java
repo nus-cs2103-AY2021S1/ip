@@ -1,4 +1,6 @@
-package duke;
+package duke.task;
+
+import java.time.LocalDateTime;
 
 /**
  * Class to represent possible Tasks created by the user
@@ -9,7 +11,7 @@ public class Task {
     protected boolean isDone;
     protected String task;
     protected TaskType taskType;
-    protected String duration;
+    protected LocalDateTime duration;
 
     /**
      * Constructor for Task.
@@ -17,7 +19,7 @@ public class Task {
      * @param taskType Type of a task
      * @param duration Time given to the task.
      */
-    public Task(String task, TaskType taskType, String duration) {
+    public Task(String task, TaskType taskType, LocalDateTime duration) {
         this.task = task;
         this.taskType = taskType;
         this.isDone = false;
@@ -31,7 +33,7 @@ public class Task {
      * @param duration Time given to the task.
      * @param isDone The completion of a task.
      */
-    public Task(String task, TaskType taskType, String duration, boolean isDone) {
+    public Task(String task, TaskType taskType, LocalDateTime duration, boolean isDone) {
         this.task = task;
         this.taskType = taskType;
         this.isDone = isDone;
@@ -71,13 +73,12 @@ public class Task {
     }
 
     /**
-     * Retrieves the timing or duration which was assigned to the task.
-     * @return The timing or duration assigned to the task.
+     * Retrieves the LocalDate
+     * @return LocalDate
      */
-    public String getDuration() {
-        return duration;
+    public LocalDateTime getDuration() {
+        return this.duration;
     }
-
     /**
      * Retrives the type of tasking that was recorded.
      * @return Type of task.

@@ -1,10 +1,11 @@
 package duke.command;
 
+import java.io.IOException;
 
-import duke.TaskList;
 import duke.UserInterface;
 import duke.exception.DukeIndexException;
 import duke.exception.DukeListException;
+import duke.task.TaskList;
 
 /**
  * Abstract command class.
@@ -22,6 +23,7 @@ abstract class Command {
      * @throws DukeListException For when list is empty.
      * @throws DukeIndexException Index given does not match the list.
      */
-    public abstract String execute(TaskList taskList, UserInterface ui) throws DukeListException, DukeIndexException;
+    public abstract String execute(TaskList taskList,
+                                   UserInterface ui) throws DukeListException, DukeIndexException, IOException;
 
 }

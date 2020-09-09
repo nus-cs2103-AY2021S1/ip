@@ -2,6 +2,8 @@ package duke;
 
 import java.io.IOException;
 
+import duke.task.TaskList;
+
 /**
  * Duke class representing the chat bot.
  *

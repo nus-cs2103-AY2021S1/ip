@@ -96,7 +96,10 @@ public class UserInterface {
                 + "\u2022 'delete x' delete a task!\n"
                 + "\u2022 'done x' complete a task to tick it\n"
                 + "\u2022 'find <key word search>'\n"
-                + "\u2022 'help' to bring this page up!\n";
+                + "\u2022 'help' to bring this page up!\n"
+                + "\u2022 'sort' to sort your tasks!\n"
+                + "Date and Time Format: yyyy-MM-dd HH:mm";
+
         ;
 
         String startingMessage2 = "Hello! I am PikaDuke, I can help you keep track of your tasks!\n";

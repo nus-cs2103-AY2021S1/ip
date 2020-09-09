@@ -1,8 +1,12 @@
-package duke;
+package duke.task;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
+
+import duke.Storage;
 
 /**
  * A Tasklist to handle operations pertaining to the Tasklist.
@@ -40,7 +44,7 @@ public class TaskList {
      * @throws IOException When there is no pre-loaded file to write.
      */
     public void updateStorage() throws IOException {
-        this.storage.writeData(this.taskList);
+        this.storage.writeData(taskList);
     }
 
     /**
@@ -91,9 +95,38 @@ public class TaskList {
 
     /**
      * Get function to retrieve the task list in a collection.
+     *
+     * @return the task list.
      */
     public List<Task> getTaskList() {
         return this.taskList;
+    }
+
+    /**
+     * Sorts the task accordingly to the deadline of the task.
+     *
+     * @return updated TaskList that is sorted.
+     */
+    public TaskList sortTask() throws IOException {
+
+        // solution inspired from @vanGoghh
+        ArrayList<Task> filteredEventDeadline = this.taskList.stream()
+                .filter(task -> (task instanceof Deadline)
+                        || (task instanceof Event))
+                .sorted(Comparator.comparing(Task::getDuration))
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        ArrayList<Task> filteredTodo = this.taskList.stream()
+                .filter(task -> task instanceof Todo)
+                .collect(Collectors.toCollection(ArrayList::new));
+
+        filteredEventDeadline.addAll(filteredTodo); // combines both list into one
+        ArrayList<Task> sortedList = filteredEventDeadline;
+
+        this.storage.writeData(sortedList);
+        this.loadList();
+
+        return this;
     }
 }
 

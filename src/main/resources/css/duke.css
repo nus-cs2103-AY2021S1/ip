@@ -1,6 +1,6 @@
 .backgroundPic {
      -fx-background-image: url('../images/back.png');
-     -fx-background-size: 50% 50%
+     -fx-background-size: 75% 75%;
      -fx-background-position: bottom center;
      -fx-background: transparent;
 }

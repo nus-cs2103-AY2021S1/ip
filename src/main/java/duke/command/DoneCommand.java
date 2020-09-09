@@ -1,9 +1,8 @@
 package duke.command;
 
-
-import duke.TaskList;
 import duke.UserInterface;
 import duke.exception.DukeIndexException;
+import duke.task.TaskList;
 
 /**
  * DoneCommand class for when Done command is prompted by User

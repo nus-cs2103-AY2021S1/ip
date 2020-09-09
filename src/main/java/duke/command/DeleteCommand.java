@@ -1,9 +1,8 @@
 package duke.command;
 
-import duke.TaskList;
 import duke.UserInterface;
 import duke.exception.DukeIndexException;
-
+import duke.task.TaskList;
 /**
  * DeleteCommand class for when delete command is prompted by User
  * @author Kor Ming Soon

@@ -6,9 +6,15 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.Todo;
 
 /**
  * Class to read the URL path to the locally saved tasks.
@@ -17,7 +23,7 @@ import java.util.Scanner;
  */
 public class Storage {
 
-    private final String DEFAULTPATH = "./duke.txt";
+    private final String defaultPath = "./duke.txt";
     private final Path path;
 
     /**
@@ -26,8 +32,8 @@ public class Storage {
      * If not available, the storage object will create a file.
      */
     public Storage() {
-        path = Paths.get(DEFAULTPATH);
-        File file = new File(DEFAULTPATH);
+        path = Paths.get(defaultPath);
+        File file = new File(defaultPath);
         if (Files.notExists(this.path)) {
             try {
                 file.createNewFile();
@@ -43,7 +49,7 @@ public class Storage {
      * @throws IOException
      */
     public void writeData(List<Task> taskList) throws IOException {
-        FileWriter file = new FileWriter(DEFAULTPATH);
+        FileWriter file = new FileWriter(defaultPath);
         for (Task tasking : taskList) {
             String toBeSaved = "";
             switch (tasking.getTasktype()) {
@@ -88,10 +94,10 @@ public class Storage {
                 taskToBeAdded = new Todo(storedTask[2], isDone);
                 break;
             case "D":
-                taskToBeAdded = new Deadline(storedTask[2], storedTask[3], isDone);
+                taskToBeAdded = new Deadline(storedTask[2], LocalDateTime.parse(storedTask[3]), isDone);
                 break;
             case "E":
-                taskToBeAdded = new Event(storedTask[2], storedTask[3], isDone);
+                taskToBeAdded = new Event(storedTask[2], LocalDateTime.parse(storedTask[3]), isDone);
                 break;
             default:
                 continue;

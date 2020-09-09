@@ -1,13 +1,25 @@
 package duke;
 
 import java.io.IOException;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
-import duke.command.*;
+import duke.command.ByeCommand;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.SortCommand;
 import duke.exception.DukeCommandException;
-import duke.exception.DukeIndexException;
-import duke.exception.DukeListException;
+import duke.exception.DukeException;
 import duke.exception.DukeTaskException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskList;
+import duke.task.Todo;
 
 /**
  * Parser class to parse through the input given by the user.
@@ -43,6 +55,8 @@ public class Parser {
             if (command.equals("bye")) {
                 ByeCommand byeCommand = new ByeCommand();
                 response = byeCommand.execute(taskList, ui);
+            } else if (command.equals("sort")) {
+                response = new SortCommand().execute(taskList, ui);
             } else if (command.equals("list")) {
                 response = new ListCommand().execute(taskList, ui);
             } else if (command.equals("find")) {
@@ -66,10 +80,10 @@ public class Parser {
             }
             this.taskList.updateStorage();
             return response;
-        } catch (DukeCommandException | DukeIndexException | DukeTaskException | DukeListException | IOException e) {
-            return ui.printError(e.getMessage());
         } catch (DateTimeParseException e) {
             return ui.printError("INPUT DATE TIME FORMAT IS WRONG");
+        } catch (DukeException | IOException e) {
+            return ui.printError(e.getMessage());
         }
     }
 
@@ -80,7 +94,7 @@ public class Parser {
      * @return boolean if the command is correctly typed.
      */
     public boolean checkProperCommand(String command) {
-        return equals("event") || command.equals("deadline") || command.equals("todo");
+        return command.equals("event") || command.equals("deadline") || command.equals("todo");
     }
 
     /**
@@ -98,17 +112,18 @@ public class Parser {
         int sizeofTaskList = this.taskList.getTaskSize();
 
         try {
-
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             if (message.isEmpty()) {
                 throw new IndexOutOfBoundsException();
             } else if (taskType.equals("todo")) {
                 newTask = new Todo((message));
             } else if (taskType.equals("deadline")) {
                 parsedMessage = (message).split("/by ");
-                newTask = new Deadline(parsedMessage[0], parsedMessage[1]);
+                System.out.print(parsedMessage[1]);
+                newTask = new Deadline(parsedMessage[0], LocalDateTime.parse(parsedMessage[1], formatter));
             } else if (taskType.equals("event")) {
                 parsedMessage = message.split("/at ");
-                newTask = new Event(parsedMessage[0], parsedMessage[1]);
+                newTask = new Event(parsedMessage[0], LocalDateTime.parse(parsedMessage[1], formatter));
             }
 
             this.taskList.addTask(newTask);

@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.TaskList;
 import duke.UserInterface;
 import duke.exception.DukeIndexException;
 import duke.exception.DukeListException;
+import duke.task.TaskList;
 
 /**
  * HelpCommand for when user requires help.

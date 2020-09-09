@@ -1,14 +1,14 @@
 package duke.command;
 
-import duke.Task;
-import duke.TaskList;
-import duke.UserInterface;
-import duke.exception.DukeListException;
-
 import java.util.List;
 import java.util.function.BiFunction;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import duke.UserInterface;
+import duke.exception.DukeListException;
+import duke.task.Task;
+import duke.task.TaskList;
 
 /**
  * FindCommand class to execute find command when given by user.
@@ -47,7 +47,7 @@ public class FindCommand extends Command {
 
         String response = ui.listTask();
 
-        response += IntStream.range(0, wholeTaskList.size()).filter( index -> {
+        response += IntStream.range(0, wholeTaskList.size()).filter(index -> {
             return filterFunction.apply(index, wordToFind);
         }).mapToObj(filteredIndex -> ui.printTask(filteredIndex + 1,
                 wholeTaskList.get(filteredIndex).toString())).collect(Collectors.joining(""));

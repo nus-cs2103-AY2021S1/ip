@@ -1,9 +1,9 @@
 package duke.command;
 
-import duke.TaskList;
 import duke.UserInterface;
 import duke.exception.DukeIndexException;
 import duke.exception.DukeListException;
+import duke.task.TaskList;
 
 /**
  * ByeCommand for when the Bye command is prompted by User

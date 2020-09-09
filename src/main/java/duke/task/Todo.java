@@ -1,4 +1,4 @@
-package duke;
+package duke.task;
 
 /**
  * A Todo class to represent tasking that are classified as Todo
@@ -12,7 +12,7 @@ public class Todo extends Task {
      * @param task Task detail.
      */
     public Todo (String task) {
-        super(task, TaskType.TODO, "");
+        super(task, TaskType.TODO, null);
     }
 
     /**
@@ -22,7 +22,7 @@ public class Todo extends Task {
      * @param isDone To indicate if the task is done or not.
      */
     public Todo (String task, boolean isDone) {
-        super(task, TaskType.TODO, "", isDone);
+        super(task, TaskType.TODO, null, isDone);
     }
 
 }
