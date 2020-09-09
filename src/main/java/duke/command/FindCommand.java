@@ -24,7 +24,7 @@ public class FindCommand extends Command {
 
     @Override
     public boolean getExitStatus() {
-        return true;
+        return false;
     }
 
     /**
