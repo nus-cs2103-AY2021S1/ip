@@ -15,11 +15,12 @@ public class Events extends Task {
      *
      * @param taskTitle A string of Event task name.
      * @param eventTime A string of Event time.
-     * @param isDone Status of the Event task.
+     * @param isDone    Status of the Event task.
      */
     public Events(String taskTitle, String eventTime, Boolean isDone) {
         super(taskTitle, isDone, TaskTypes.TASK_TYPE_EVENT);
-        this.eventTime = LocalDateTime.parse(eventTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        this.eventTime = LocalDateTime.parse(eventTime,
+                DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
     /**
@@ -27,10 +28,11 @@ public class Events extends Task {
      *
      * @param taskTitle A string of Event task name.
      * @param eventTime A string of Event time.
-     * @param isDone Status of the Event task.
-     * @param tasks The overall user's task list.
+     * @param isDone    Status of the Event task.
+     * @param tasks     The overall user's task list.
      */
-    public static void loadEventTask(String taskTitle, String eventTime, Boolean isDone, ArrayList<Task> tasks) {
+    public static void loadEventTask(
+            String taskTitle, String eventTime, Boolean isDone, ArrayList<Task> tasks) {
         eventTime = eventTime.replace('T', ' ');
         Events event = new Events(taskTitle, eventTime, isDone);
         tasks.add(event);

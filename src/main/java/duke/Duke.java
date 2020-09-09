@@ -36,9 +36,14 @@ public class Duke {
      * Runs Duke.
      */
     public void run() {
-        ui.logoMsg();
-        ui.greetingMsg();
+        ui.getLogoMsg();
+        ui.getGreetingMsg();
+        handleInput();
+        save();
+        ui.getByeMsg();
+    }
 
+    private void handleInput() {
         Scanner sc = new Scanner(System.in);
         String inputMsg = sc.nextLine();
 
@@ -48,9 +53,6 @@ public class Duke {
             // waiting for user to key in the next request
             inputMsg = sc.nextLine();
         }
-        storage.writeTasks(tasks);
-        // say bye to the user
-        Ui.byeMsg();
     }
 
     /**
@@ -62,10 +64,20 @@ public class Duke {
         new Duke("data/tasks.txt").run();
     }
 
+    /**
+     * Gets the reply message.
+     *
+     * @param input User's input.
+     * @return Reply message.
+     */
     public String getResponse(String input) {
         assert !input.isEmpty() : "Input command should not be empty.";
         return Parser.parseUserInput(input);
     }
+
+    /**
+     * Saves the taskList into the data file.
+     */
     public void save() {
         storage.writeTasks(tasks);
     }

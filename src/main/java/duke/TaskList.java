@@ -34,7 +34,7 @@ public class TaskList {
      * Adds new to-do type task to the task list and calls the Ui class to display a message.
      *
      * @param taskTitle A string of Event task name.
-     * @param tasks The overall user's task list.
+     * @param tasks     The overall user's task list.
      */
     public static void addNewTodoTask(String taskTitle, ArrayList<Task> tasks) {
         ToDos newTodoTask = new ToDos(taskTitle, false);
@@ -44,9 +44,9 @@ public class TaskList {
     /**
      * Adds new deadline type task to the task list and calls the Ui class to display a message.
      *
-     * @param taskTitle A string of Event task name.
+     * @param taskTitle    A string of Event task name.
      * @param deadlineTime A string of deadline time
-     * @param tasks The overall user's task list.
+     * @param tasks        The overall user's task list.
      */
     public static void addNewDeadlineTask(String taskTitle, String deadlineTime, ArrayList<Task> tasks) {
         Deadlines newDeadline = new Deadlines(taskTitle, deadlineTime, false);
@@ -58,7 +58,7 @@ public class TaskList {
      *
      * @param taskTitle A string of Event task name.
      * @param eventTime A string of Event time.
-     * @param tasks The overall user's task list.
+     * @param tasks     The overall user's task list.
      */
     public static void addNewEventTask(String taskTitle, String eventTime, ArrayList<Task> tasks) {
         Events newEvent = new Events(taskTitle, eventTime, false);
@@ -91,12 +91,12 @@ public class TaskList {
      * Finds all tasks that match with the keyword in the task list.
      *
      * @param keyword A string of keyword to find the matching tasks.
-     * @param tasks An ArrayList of all the tasks that match with the keyword.
+     * @param tasks   An ArrayList of all the tasks that match with the keyword.
      */
     public static ArrayList<Task> findTask(String keyword, ArrayList<Task> tasks) {
         assert !keyword.isEmpty() : "Keyword for findTask function should not be empty.";
         ArrayList<Task> matchedTasks = new ArrayList<>();
-        for (Task task: tasks) {
+        for (Task task : tasks) {
             if (task.getTaskTitle().contains(keyword)) {
                 matchedTasks.add(task);
             }

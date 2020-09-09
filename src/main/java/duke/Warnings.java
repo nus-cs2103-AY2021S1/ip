@@ -7,12 +7,14 @@ import java.io.IOException;
  */
 public class Warnings extends Ui {
     private static final String DIVIDER_WARNING = "###########################";
+
     /**
      * Display warning message when invalid done task index is given.
      *
      * @param tasksSize Size of the user's task list.
+     * @return System warning message.
      */
-    public static String invalidDoneTaskIndex(int tasksSize) {
+    public static String getInvalidDoneTaskIndexMsg(int tasksSize) {
         assert tasksSize >= 0 : "Task size should not be less than 0.";
         String warningMsg = DIVIDER_WARNING
                 + "\n [• ▂ •]What? "
@@ -27,8 +29,10 @@ public class Warnings extends Ui {
 
     /**
      * Display warning message when invalid ToDoTask input entered.
+     *
+     * @return System warning message.
      */
-    public static String invalidToDo() {
+    public static String getInvalidToDoMsg() {
         String warningMsg = DIVIDER_WARNING
                 + "\n [• ▂ •]What? "
                 + "\n OOPS!!! The description of a todo cannot be empty."
@@ -41,8 +45,10 @@ public class Warnings extends Ui {
 
     /**
      * Display warning message when invalid DeadlineTask input entered.
+     *
+     * @return System warning message.
      */
-    public static String invalidDeadline() {
+    public static String getInvalidDeadlineMsg() {
         String warningMsg = DIVIDER_WARNING
                 + "\n [• ▂ •]What? "
                 + "\n OOPS!!! The description or/and deadline of a deadline task cannot be empty."
@@ -55,8 +61,10 @@ public class Warnings extends Ui {
 
     /**
      * Display warning message when invalid EventTask input entered.
+     *
+     * @return System warning message.
      */
-    public static String invalidEvent() {
+    public static String getInvalidEventMsg() {
         String warningMsg = DIVIDER_WARNING
                 + "\n [• ▂ •]What? "
                 + "\n OOPS!!! The description or/and event timing of a event task cannot be empty."
@@ -69,8 +77,10 @@ public class Warnings extends Ui {
 
     /**
      * Display warning message when Parser cannot recognize the input.
+     *
+     * @return System warning message.
      */
-    public static String invalidInput() {
+    public static String getInvalidInputMsg() {
         String warningMsg = DIVIDER_WARNING
                 + "\n [• ▂ •]What? "
                 + "\n OOPS!!! I'm sorry, but I don't know what that means."
@@ -84,8 +94,9 @@ public class Warnings extends Ui {
      * Display warning message when invalid delete input entered.
      *
      * @param tasksSize Size of the user's task list.
+     * @return System warning message.
      */
-    public static String invalidDelete(int tasksSize) {
+    public static String getInvalidDeleteMsg(int tasksSize) {
         assert tasksSize >= 0 : "Task size should not be less than 0.";
         String warningMsg = DIVIDER_WARNING
                 + "\n [• ▂ •]What? "
@@ -102,8 +113,9 @@ public class Warnings extends Ui {
      * Display warning message when error occurs while loading data file.
      *
      * @param e Exception message.
+     * @return System warning message.
      */
-    public static String invalidFileInput(IOException e) {
+    public static String getInvalidFileInputMsg(IOException e) {
         String warningMsg1 = DIVIDER_WARNING
                 + "\n [• ▂ •]What? "
                 + "\n Invalid data inside data/taskList.txt file..."
@@ -120,8 +132,9 @@ public class Warnings extends Ui {
      * Display warning message when error occurs while saving into data file.
      *
      * @param e Exception message.
+     * @return System warning message.
      */
-    public static String invalidFileOutput(IOException e) {
+    public static String getInvalidFileOutputMsg(IOException e) {
         String warningMsg1 = DIVIDER_WARNING
                 + "\n [• ▂ •]What? "
                 + "\n Errors occurred when try to write data into data/taskList.txt file..."
@@ -134,5 +147,4 @@ public class Warnings extends Ui {
         String warningMsg = warningMsg1 + "\n" + e + warningMsg2;
         return warningMsg;
     }
-
 }
