@@ -6,11 +6,10 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import javafx.scene.paint.LinearGradient?>
-<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import javafx.stage.Stage?>
@@ -18,16 +17,15 @@
 <fx:root iconified="true" minHeight="600.0" minWidth="500.0" title="Alice" type="Stage"
          xmlns="http://javafx.com/javafx" xmlns:fx="http://javafx.com/fxml">
     <scene>
-        <Scene>
+        <Scene stylesheets="@../style/alice.css">
             <root>
                 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
-                            prefHeight="600.0" prefWidth="500.0" style="-fx-background-color: lightblue;">
+                            prefHeight="600.0" prefWidth="500.0" styleClass="base">
                     <children>
-                        <TextField fx:id="userInput" layoutX="5.0" layoutY="558.0" minHeight="-Infinity"
-                                   minWidth="-Infinity" onAction="#handleUserInput" prefHeight="42.0" prefWidth="450.0"
-                                   promptText="Enter your command here..."
-                                   style="-fx-background-radius: 17; -fx-border-radius: 15; -fx-background-color: white; -fx-border-color: slategray; -fx-border-width: 2;"
-                                   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="5.0"
+                        <TextField fx:id="userInput" layoutY="558.0" minHeight="-Infinity" minWidth="-Infinity"
+                                   onAction="#handleUserInput" prefHeight="42.0" prefWidth="455.0"
+                                   promptText="Enter your command here..." styleClass="textInput"
+                                   AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0"
                                    AnchorPane.rightAnchor="45.0">
                             <font>
                                 <Font name="Lucida Console" size="12.0"/>
@@ -38,19 +36,19 @@
                         </TextField>
                         <Button fx:id="sendButton" layoutX="464.0" layoutY="566.0" minHeight="-Infinity"
                                 minWidth="-Infinity" mnemonicParsing="false" onAction="#handleUserInput"
-                                prefHeight="25.0" prefWidth="25.0"
-                                style="-fx-shape: &quot;M 700 350 L 200 175 L 200 325 L 550 350 L 200 375 L 200 525 Z&quot;; -fx-background-color: black;"
-                                textFill="#0b06a2" AnchorPane.bottomAnchor="8.399999999999977"
-                                AnchorPane.rightAnchor="10.399999999999977">
+                                prefHeight="25.0" prefWidth="25.0" textFill="#0b06a2"
+                                AnchorPane.bottomAnchor="8.399999999999977" AnchorPane.rightAnchor="10.399999999999977">
                             <font>
                                 <Font name="Lucida Fax Demibold" size="13.0"/>
                             </font>
+                            <effect>
+                                <DropShadow color="LIGHTSLATEGRAY"/>
+                            </effect>
                         </Button>
                         <ScrollPane fx:id="scrollPane" fitToHeight="true" fitToWidth="true" hbarPolicy="NEVER"
                                     hvalue="1.0" maxHeight="1.7976931348623157E308" minHeight="-Infinity"
-                                    minWidth="-Infinity" prefHeight="557.0" prefWidth="600.0"
-                                    style="-fx-base: aliceblue;" vvalue="1.0"
-                                    AnchorPane.bottomAnchor="42.39999999999998" AnchorPane.leftAnchor="0.0"
+                                    minWidth="-Infinity" prefHeight="557.0" prefWidth="500.0" styleClass="backgroundPic"
+                                    vvalue="1.0" AnchorPane.bottomAnchor="42.39999999999998" AnchorPane.leftAnchor="0.0"
                                     AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
                             <content>
                                 <VBox fx:id="dialogContainer" alignment="CENTER" maxHeight="1.7976931348623157E308"
@@ -60,27 +58,15 @@
                                             <children>
                                                 <Group>
                                                     <children>
-                                                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="ALICE">
+                                                        <Text fill="#dcdfb1" strokeType="OUTSIDE" strokeWidth="0.0"
+                                                              text="ALICE">
                                                             <font>
                                                                 <Font name="Snap ITC" size="69.0"/>
                                                             </font>
-                                                            <fill>
-                                                                <LinearGradient endX="1.0" endY="1.0" startX="1.0"
-                                                                                startY="0.05725190839694656">
-                                                                    <stops>
-                                                                        <Stop color="#050506"/>
-                                                                        <Stop color="#050506"
-                                                                              offset="0.007633587786259542"/>
-                                                                        <Stop color="#0b06a2"
-                                                                              offset="0.7984441466115025"/>
-                                                                        <Stop color="#0b06a2" offset="1.0"/>
-                                                                    </stops>
-                                                                </LinearGradient>
-                                                            </fill>
                                                         </Text>
-                                                        <Text layoutX="128.0" layoutY="22.0" strokeType="OUTSIDE"
-                                                              strokeWidth="0.0" text="Leave your tasks to me!"
-                                                              textAlignment="RIGHT">
+                                                        <Text fill="WHITE" layoutX="128.0" layoutY="22.0"
+                                                              strokeType="OUTSIDE" strokeWidth="0.0"
+                                                              text="Leave your tasks to me!" textAlignment="RIGHT">
                                                             <font>
                                                                 <Font name="Gabriola" size="20.0"/>
                                                             </font>

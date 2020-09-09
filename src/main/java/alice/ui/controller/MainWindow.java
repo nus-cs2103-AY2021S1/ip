@@ -125,7 +125,7 @@ public class MainWindow {
         Label sysMessage = new Label(message);
         sysMessage.setFont(SYSTEM_FONT);
         sysMessage.setWrapText(true);
-        sysMessage.setTextFill(Paint.valueOf("blue"));
+        sysMessage.setTextFill(Paint.valueOf("lightgreen"));
 
         dialogContainer.getChildren().add(sysMessage);
     }

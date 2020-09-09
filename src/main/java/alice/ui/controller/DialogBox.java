@@ -49,6 +49,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setTextFill(Paint.valueOf("black"));
         displayPicture.setImage(img);
     }
 

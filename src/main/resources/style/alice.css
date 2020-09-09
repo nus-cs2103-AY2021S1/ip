@@ -1,0 +1,30 @@
+.backgroundPic {
+    -fx-background-image: url('../images/background.jpg');
+    -fx-background-size: auto 100%;
+    -fx-background-position: center bottom;
+    -fx-background: transparent;
+}
+
+.base {
+    -fx-background-color: "#151d42";
+}
+
+.textInput {
+    -fx-background-color: white;
+    -fx-background-radius: 17;
+
+    -fx-border-radius: 15;
+    -fx-border-width: 2;
+    -fx-border-color: slategray;
+}
+
+.button {
+    -fx-shape: "M 700 350 L 200 175 L 200 325 L 550 350 L 200 375 L 200 525 Z";
+    -fx-background-color: snow;
+}
+
+.scroll-pane {
+    -fx-border-style: hidden hidden solid hidden;
+    -fx-border-width: .5;
+    -fx-border-color: white;
+}
