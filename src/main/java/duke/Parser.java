@@ -35,7 +35,7 @@ public class Parser {
         } else if (inputMsg.startsWith("archive")) {
             return parseArchive(inputMsg, tasks, archivedTasks);
         } else if (inputMsg.equals("list archive")) {
-            return Ui.getAllArchivedTasksMsg(archivedTasks.getArchivedTaskList());
+            return Ui.getAllArchivedTasksMsg(archivedTasks);
         } else if (inputMsg.equals("bye")) {
             return Ui.getByeMsg();
         } else {

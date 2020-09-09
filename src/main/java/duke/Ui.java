@@ -171,7 +171,7 @@ public class Ui {
     }
 
     /**
-     * Prints and returns out all tasks stored in the task list.
+     * Prints and returns all tasks stored in the task list.
      *
      * @param tasks The overall user's task list.
      * @return System reply message.
@@ -194,9 +194,15 @@ public class Ui {
         return getAllTasks(tasks, outputMsg);
     }
 
-    public static String getAllArchivedTasksMsg(ArrayList<Task> tasks) {
+    /**
+     * Prints and returns all archived tasks in archive task list.
+     *
+     * @param archivedTasks The archived task list.
+     * @return System reply message.
+     */
+    public static String getAllArchivedTasksMsg(ArchivedTaskList archivedTasks) {
         String outputMsg = "";
-        if (tasks.isEmpty()) {
+        if (archivedTasks.getArchivedTaskList().isEmpty()) {
             outputMsg = DIVIDER
                     + "\n (⊙ ‿ ⊙)"
                     + "\n Archived task list is empty, there's no archived task yet."
@@ -207,12 +213,20 @@ public class Ui {
 
         outputMsg = DIVIDER
                 + "\n (⊙ ‿ ⊙)"
-                + "\n You have " + tasks.size() + " archived tasks in total."
+                + "\n You have " + archivedTasks.getArchivedTaskList().size()
+                + " archived tasks in total."
                 + "\n Here they are:";
         System.out.println(outputMsg);
-        return getAllTasks(tasks, outputMsg);
+        return getAllTasks(archivedTasks.getArchivedTaskList(), outputMsg);
     }
 
+    /**
+     * Prints and returns confirmation message if the task has been archived.
+     *
+     * @param taskToArchive The task which is going to be archived.
+     * @param archivedTasks The ArchivedTaskList of archived task list.
+     * @return System reply message.
+     */
     public static String getAddingArchiveTaskMsg(Task taskToArchive, ArchivedTaskList archivedTasks) {
         String outputMsg = DIVIDER
                 + "\n (ಠ‿↼)"
@@ -224,6 +238,12 @@ public class Ui {
         return outputMsg;
     }
 
+    /**
+     * Prints and returns confirmation message if all task has been archived.
+     *
+     * @param archivedTasks The ArchivedTaskList of archived task list.
+     * @return System reply message.
+     */
     public static String getArchiveAllTaskMsg(ArchivedTaskList archivedTasks) {
         String outputMsg = DIVIDER
                 + "\n (ಠ‿↼)"
