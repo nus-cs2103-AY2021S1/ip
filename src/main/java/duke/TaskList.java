@@ -38,6 +38,10 @@ public class TaskList {
      */
     public Task addTask(TaskType type, String description, LocalDateTime dateTime,
                         TaskPriority priority, List<String> tags) throws DukeException {
+        if (description.contains("|")) {
+            throw new DukeException("Description cannot contain \"|\".");
+        }
+
         switch (type) {
         case TODO:
             assert(dateTime == null) : "dateTime should be null for todos";

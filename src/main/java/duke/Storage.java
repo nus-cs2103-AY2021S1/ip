@@ -86,7 +86,7 @@ public class Storage {
                     }
                 }
             } catch (DukeException | IOException | ArrayIndexOutOfBoundsException
-                    | DateTimeParseException | IllegalArgumentException e) {
+                    | DateTimeParseException | IllegalArgumentException | StringIndexOutOfBoundsException e) {
                 throw new DukeException("Data file is corrupt. Ignoring saved tasks :-(");
             }
         }
