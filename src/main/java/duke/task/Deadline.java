@@ -2,6 +2,7 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 /**
  * Encapsulates a deadline task.
@@ -29,6 +30,19 @@ public class Deadline extends Task {
     protected Deadline(String description, boolean isDone, LocalDate by) {
         super(description, isDone);
         this.by = by;
+    }
+
+    @Override
+    protected void updateTaskDescription(String newDescription) {
+        this.description = newDescription;
+    }
+
+    protected void updateTaskTime(String newTime) throws YooException {
+        try {
+            this.by = LocalDate.parse(newTime);
+        } catch (DateTimeParseException e) {
+            throw new YooException("Date format should be yyyy-mm-dd!\nPlease try again (>_<)");
+        }
     }
 
     @Override

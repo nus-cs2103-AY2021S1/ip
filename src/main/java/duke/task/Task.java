@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.format.DateTimeParseException;
+
 /**
  * Represents a task.
  */
@@ -40,6 +42,10 @@ public class Task {
 
     public String getDescription() {
         return description;
+    }
+
+    protected void updateTaskDescription(String newDescription) {
+        this.description = newDescription;
     }
 
     @Override
