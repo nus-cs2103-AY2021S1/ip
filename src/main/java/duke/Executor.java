@@ -11,6 +11,14 @@ import duke.util.DateTimeHandler;
  */
 public class Executor {
 
+    // Error messages
+    private static final String ERR_INDEX_OUT_OF_BOUND = "The task's number is not within the range of the list.\n";
+    private static final String ERR_DELETE_MISSING_TASK_NUM = "Which task's number do you want to delete?\n";
+    private static final String ERR_DONE_MISSING_TASK_NUM = "Which task's number do you want to mark as done?\n";
+    private static final String ERR_EVENT_MISSING_DATETIME = "Include the date and time of the event after \"/at\".\n";
+    private static final String ERR_DEADLINE_MISSING_DATETIME =
+            "Include the date and time of the deadline after \"/by\".\n";
+
     /** Storage for executor to write data to. */
     private final Storage storage;
 
@@ -65,6 +73,16 @@ public class Executor {
     }
 
     /**
+     * Checks if task's index is outside the task list's size range.
+     *
+     * @param index Task's index.
+     * @return If task's index is outside the task list's size range.
+     */
+    private boolean isIndexOutsideRange(int index) {
+        return index < 0 || index >= this.taskList.getNumOfTasks();
+    }
+
+    /**
      * Returns a footer containing the number of tasks in the list.
      *
      * @return Footer string containing the number of tasks.
@@ -89,21 +107,20 @@ public class Executor {
         try {
             int index = Integer.parseInt(indexString) - 1;
 
-            // Check if index is within the task list size
-            if (index >= 0 && index < this.taskList.getNumOfTasks()) {
-                Task task = this.taskList.getTask(index);
-                this.taskList.deleteTask(index); // delete task from the list
-                this.storage.writeToSaveFile(); // edit the data in storage
-                String confirmationMessage = "Noted. I've removed this task:\n"
-                        + task.toString()
-                        + "\n"
-                        + this.getNumOfTasksFooter();
-                return this.ui.displayMessage(confirmationMessage); // print delete confirmation message
-            } else {
-                throw new DukeInputException("The index is not within the range of the list.\n");
+            if (this.isIndexOutsideRange(index)) {
+                throw new DukeInputException(Executor.ERR_INDEX_OUT_OF_BOUND);
             }
+
+            Task task = this.taskList.getTask(index);
+            this.taskList.deleteTask(index); // delete task from the list
+            this.storage.writeToSaveFile(); // edit the data in storage
+            String confirmationMessage = "Noted. I've removed this task:\n"
+                    + task.toString()
+                    + "\n"
+                    + this.getNumOfTasksFooter();
+            return this.ui.displayMessage(confirmationMessage); // print delete confirmation message
         } catch (NumberFormatException e) {
-            throw new DukeInputException("Include the index of the task to be deleted.\n");
+            throw new DukeInputException(Executor.ERR_DELETE_MISSING_TASK_NUM);
         }
     }
 
@@ -118,20 +135,19 @@ public class Executor {
         try {
             int index = Integer.parseInt(indexString) - 1;
 
-            // Check if index is within the task list size
-            if (index >= 0 && index < this.taskList.getNumOfTasks()) {
-                Task task = this.taskList.getTask(index);
-                task.markAsDone();
-                this.storage.writeToSaveFile(); // write task's data to storage
-                String confirmationMessage = "Nice! I've marked this as done:\n"
-                        + task.toString()
-                        + "\n";
-                return this.ui.displayMessage(confirmationMessage); // print mark task as done confirmation message
-            } else {
-                throw new DukeInputException("The index is not within the range of the list.\n");
+            if (this.isIndexOutsideRange(index)) {
+                throw new DukeInputException(Executor.ERR_INDEX_OUT_OF_BOUND);
             }
+
+            Task task = this.taskList.getTask(index);
+            task.markAsDone();
+            this.storage.writeToSaveFile(); // write task's data to storage
+            String confirmationMessage = "Nice! I've marked this as done:\n"
+                    + task.toString()
+                    + "\n";
+            return this.ui.displayMessage(confirmationMessage); // print mark task as done confirmation message
         } catch (NumberFormatException e) {
-            throw new DukeInputException("Include the index of the task done.\n");
+            throw new DukeInputException(Executor.ERR_DONE_MISSING_TASK_NUM);
         }
     }
 
@@ -158,7 +174,7 @@ public class Executor {
         }
 
         if (hasRequiredTasks) {
-            String taskMessage = "Here are the task(s) from " + requiredDate + ":\n" + requiredTasks;
+            String taskMessage = "Here are the task(s) from " + requiredDate + ":\n" + requiredTasks.toString();
             return this.ui.displayMessage(taskMessage);
         } else {
             return this.ui.displayMessage("You have no tasks from " + requiredDate + ".");
@@ -189,7 +205,7 @@ public class Executor {
 
         // Print message according to whether any relevant tasks have been found
         if (hasRelevantTasks) {
-            String taskMessage = "Here are the matching task(s) in your list:\n" + relevantTasks;
+            String taskMessage = "Here are the matching task(s) in your list:\n" + relevantTasks.toString();
             return this.ui.displayMessage(taskMessage);
         } else {
             return this.ui.displayMessage("You have no matching tasks for the keyword: \"" + keyword + "\".\n");
@@ -217,7 +233,7 @@ public class Executor {
     private String createEvent(String description) throws DukeInputException {
         String[] arr = description.split(" /at ", 2);
         if (arr.length < 2 || arr[1].equals("")) {
-            throw new DukeInputException("Include the date and time of the event after \"/at\".\n");
+            throw new DukeInputException(Executor.ERR_EVENT_MISSING_DATETIME);
         }
         Task task = new Event(arr[0], arr[1]);
         return this.addTask(task);
@@ -233,7 +249,7 @@ public class Executor {
     private String createDeadline(String description) throws DukeInputException {
         String[] arr = description.split(" /by ", 2);
         if (arr.length < 2 || arr[1].equals("")) {
-            throw new DukeInputException("Include the date and time of the deadline after \"/by\".\n");
+            throw new DukeInputException(Executor.ERR_DEADLINE_MISSING_DATETIME);
         }
         Task task = new Deadline(arr[0], arr[1]);
         return this.addTask(task);

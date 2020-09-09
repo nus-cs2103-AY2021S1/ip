@@ -19,6 +19,15 @@ import java.io.IOException;
  */
 public class Storage {
 
+    // Messages
+    private static final String MSG_DIRECTORY_CREATED = "A data directory has been created in the root folder.";
+    private static final String MSG_TEXT_FILE_CREATED =
+            "duke.txt has been created in the data directory of the root folder.";
+    private static final String WARN_DIRECTORY_NOT_CREATED = "Failed to create a data directory.";
+    private static final String WARN_TEXT_FILE_NOT_CREATED = "Failed to create duke.txt.";
+    private static final String WARN_TEXT_FILE_NOT_READ = "Failed to read duke.txt.";
+    private static final String WARN_TEXT_FILE_NOT_WRITTEN = "Failed to write data to duke.txt.";
+
     /** Directory file. */
     private final File directory;
 
@@ -88,9 +97,9 @@ public class Storage {
     private void createDataDirectory() {
         boolean hasCreatedDir = directory.mkdir();
         if (hasCreatedDir) {
-            this.ui.displayMessage("A data directory has been created in the root folder.");
+            this.ui.displayMessage(Storage.MSG_DIRECTORY_CREATED);
         } else {
-            this.ui.displayWarning("Failed to create a data directory.");
+            this.ui.displayWarning(Storage.WARN_DIRECTORY_NOT_CREATED);
         }
     }
 
@@ -98,16 +107,15 @@ public class Storage {
      * Creates duke.txt in the data directory of the root folder.
      */
     private void createTextFile() {
-        String failMessage = "Failed to create duke.txt.";
         try {
             boolean hasCreatedFile = textFile.createNewFile();
             if (hasCreatedFile) {
-                this.ui.displayMessage("duke.txt has been created in the data directory of the root folder.");
+                this.ui.displayMessage(Storage.MSG_TEXT_FILE_CREATED);
             } else {
-                this.ui.displayWarning(failMessage);
+                this.ui.displayWarning(Storage.WARN_TEXT_FILE_NOT_CREATED);
             }
         } catch (IOException e) {
-            this.ui.displayWarning(failMessage);
+            this.ui.displayWarning(Storage.WARN_TEXT_FILE_NOT_CREATED);
         }
     }
 
@@ -135,7 +143,7 @@ public class Storage {
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         } catch (IOException e) {
-            this.ui.displayWarning("Failed to read duke.txt.");
+            this.ui.displayWarning(Storage.WARN_TEXT_FILE_NOT_READ);
         }
     }
 
@@ -153,7 +161,7 @@ public class Storage {
             writer.write(data.toString());
             writer.close();
         } catch (IOException e) {
-            this.ui.displayWarning("Failed to write data to duke.txt.");
+            this.ui.displayWarning(Storage.WARN_TEXT_FILE_NOT_WRITTEN);
         }
     }
 }
