@@ -45,62 +45,6 @@ public class DukeList {
     }
 
 
-    private Task handleTasks(String[] strArr, TaskType taskType) throws DukeInvalidDescriptionException, DukeInvalidCommandException {
-        String formattedDescriptionString;
-        Task newTask;
-
-        try {
-            switch (taskType) {
-            case TODO:
-                formattedDescriptionString = Parser.getItemSubstring(strArr);
-                newTask = new Todo(formattedDescriptionString);
-                break;
-            case DEADLINE:
-                formattedDescriptionString = Parser.getItemSubstring(strArr);
-                newTask = new Deadline(formattedDescriptionString);
-                break;
-            case EVENT:
-                formattedDescriptionString = Parser.getItemSubstring(strArr);
-                newTask = new Event(formattedDescriptionString);
-                break;
-            default:
-                String invalidCommand = strArr[0];
-                throw new DukeInvalidCommandException(String.format("OOPS!!! I'm sorry, but I don't know what `%s` means :-(", invalidCommand));
-            }
-
-            assert newTask != null;
-            return newTask;
-
-        } catch (DukeNoDescriptionException e) {
-            throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of a `%s` cannot be empty.", taskType));
-        } catch (DukeNoDateException e) {
-            throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of `%s` is invalid.", taskType));
-        }
-    }
-
-
-
-    /**
-     * Helper function for adding an item.
-     *
-     * @param descriptionString String to be added.
-     * @return Task added.
-     * @throws DukeInvalidDescriptionException Invalid description.
-     * @throws DukeInvalidCommandException     Invalid command.
-     */
-    private Task addHelper(String descriptionString) throws DukeInvalidDescriptionException, DukeInvalidCommandException {
-        String[] strArr = Parser.parseLineToArray(descriptionString);
-        TaskType taskType = Parser.getTaskKeyword(descriptionString);
-        
-        Task newTask = this.handleTasks(strArr, taskType);
-      
-        assert newTask != null;
-        this.taskList.add(newTask);
-
-        return newTask;
-    }
-
-
     /**
      * Adds a new item to the list.
      *
@@ -131,6 +75,70 @@ public class DukeList {
 
         if (isDone) {
             newTask.markAsDone();
+        }
+    }
+
+
+    /**
+     * Helper function for adding an item.
+     *
+     * @param descriptionString String to be added.
+     * @return Task added.
+     * @throws DukeInvalidDescriptionException Invalid description.
+     * @throws DukeInvalidCommandException     Invalid command.
+     */
+    private Task addHelper(String descriptionString) throws DukeInvalidDescriptionException, DukeInvalidCommandException {
+        String[] strArr = Parser.parseLineToArray(descriptionString);
+        TaskType taskType = Parser.getTaskKeyword(descriptionString);
+
+        Task newTask = this.handleTasks(strArr, taskType);
+
+        assert newTask != null;
+        this.taskList.add(newTask);
+
+        return newTask;
+    }
+
+
+    /**
+     * Helper function to get new task.
+     *
+     * @param strArr   Parsed string array of user input.
+     * @param taskType Parsed type of task.
+     * @return New task to be added.
+     * @throws DukeInvalidDescriptionException Invalid description in user input.
+     * @throws DukeInvalidCommandException     Invalid task type in user input.
+     */
+    private Task handleTasks(String[] strArr, TaskType taskType) throws DukeInvalidDescriptionException, DukeInvalidCommandException {
+        String formattedDescriptionString;
+        Task newTask;
+
+        try {
+            switch (taskType) {
+            case TODO:
+                formattedDescriptionString = Parser.getItemSubstring(strArr);
+                newTask = new Todo(formattedDescriptionString);
+                break;
+            case DEADLINE:
+                formattedDescriptionString = Parser.getItemSubstring(strArr);
+                newTask = new Deadline(formattedDescriptionString);
+                break;
+            case EVENT:
+                formattedDescriptionString = Parser.getItemSubstring(strArr);
+                newTask = new Event(formattedDescriptionString);
+                break;
+            default:
+                String invalidCommand = strArr[0];
+                throw new DukeInvalidCommandException(String.format("OOPS!!! I'm sorry, but I don't know what `%s` means :-(", invalidCommand));
+            }
+
+            assert newTask != null;
+            return newTask;
+
+        } catch (DukeNoDescriptionException e) {
+            throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of a `%s` cannot be empty.", taskType));
+        } catch (DukeNoDateException e) {
+            throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of `%s` is invalid.", taskType));
         }
     }
 

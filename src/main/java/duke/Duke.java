@@ -119,7 +119,15 @@ public class Duke {
     }
 
 
-    private String handleCases(String[] msgArr, String msgString, Command keywordCommand) {
+    /**
+     * Helper function to handle command cases.
+     *
+     * @param userInputStr   User input string.
+     * @param keywordCommand Parsed command of user input.
+     * @return Status message to be printed after command is executed .
+     */
+    private String handleCommands(String userInputStr, Command keywordCommand) {
+        String[] msgArr = Parser.parseLineToArray(userInputStr);
         String statusMessage;
 
         switch (keywordCommand) {
@@ -139,7 +147,7 @@ public class Duke {
             statusMessage = this.find(msgArr);
             break;
         case TASK:
-            statusMessage = this.taskList.add(msgString);
+            statusMessage = this.taskList.add(userInputStr);
             break;
         case TERMINATE:
             // Fallthrough
@@ -155,17 +163,18 @@ public class Duke {
     }
 
 
+    /**
+     * Logic helper function.
+     *
+     * @param msgInput User input string.
+     * @return Status message to be printed.
+     */
     private String dukeLogicHelper(String msgInput) {
-        String[] msgArr;
-        Command keywordCommand;
-
-        msgArr = Parser.parseLineToArray(msgInput);
-        keywordCommand = Parser.getCommand(msgInput);
-
+        Command keywordCommand = Parser.getCommand(msgInput);
         String statusMessage;
 
         try {
-            statusMessage = this.handleCases(msgArr, msgInput, keywordCommand);
+            statusMessage = this.handleCommands(msgInput, keywordCommand);
             this.ui.printMessage(statusMessage);
         } catch (DukeException e) {
             statusMessage = this.ui.printErrorMessage(e.getMessage());
