@@ -1,0 +1,5 @@
+D ~ 0 ~ read book ~ 2020-08-26
+T ~ 0 ~ read readings
+T ~ 0 ~ bake bread
+T ~ 0 ~ buy bread
+T ~ 0 ~ shopping
