@@ -37,6 +37,7 @@ public class Parser {
         if (tokens.size() == 0 || tokens.get(0).equals("")) {
             throw new EmptyCommandException();
         }
+        assert(tokens.size() >= 1);
         String cmd = tokens.get(0);
 
         if (cmd.equals("bye")) {
@@ -51,6 +52,7 @@ public class Parser {
             } catch (Exception ex) {
                 throw new InvalidCommandException(tokens.get(1) + " is not a number!");
             }
+            assert(ind >= 0);
             if (cmd.equals("done")) {
                 return new DoneCommand(ind);
             } else {
@@ -62,6 +64,7 @@ public class Parser {
             if (tokens.size() < 2) {
                 throw new MissingArgumentException("Must provide keyword after command!");
             }
+            assert(tokens.size() >= 2);
             return new FindCommand(tokens.get(1));
         } else if (cmd.equals("todo") || cmd.equals("event") || cmd.equals("deadline")) {
 
