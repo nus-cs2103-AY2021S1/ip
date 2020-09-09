@@ -22,21 +22,21 @@ public class Storage {
      * @param list The list of tasks to be updated.
      * @throws DukeException If the file cannot be written.
      */
-    public void updateList(ArrayList<Task> list) throws DukeException {
+    protected void updateList(ArrayList<Task> list) throws DukeException {
         assert !list.isEmpty() : "list is empty";
         try {
-            FileWriter fw1 = new FileWriter(filepath);
-            FileWriter fw2 = new FileWriter(filepath, true);
+            FileWriter initialFileWriter = new FileWriter(filepath);
+            FileWriter subsequentFileWriter = new FileWriter(filepath, true);
             for (int i = 1; i <= list.size(); i++) {
                 Task thisTask = list.get(i - 1);
                 if (i == 1) {
-                    fw1.write("     " + i + "." + thisTask.toString() + System.lineSeparator());
+                   initialFileWriter.write("     " + i + "." + thisTask.toString() + System.lineSeparator());
                 } else {
-                    fw2.write("     " + i + "." + thisTask.toString() + System.lineSeparator());
+                    subsequentFileWriter.write("     " + i + "." + thisTask.toString() + System.lineSeparator());
                 }
             }
-            fw1.close();
-            fw2.close();
+            initialFileWriter.close();
+            subsequentFileWriter.close();
         } catch (IOException ex) {
             throw new DukeException(ex.getMessage());
         }
@@ -47,7 +47,7 @@ public class Storage {
      *
      * @return the arraylist of tasks
      */
-    public ArrayList<Task> load() {
+    protected ArrayList<Task> load() {
         ArrayList<Task> list = new ArrayList<>();
         String thisLine;
         char identifier;

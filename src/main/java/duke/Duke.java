@@ -1,4 +1,5 @@
 package duke;
+
 import java.util.Scanner;
 import javafx.application.Application;
 import javafx.scene.Scene;
@@ -41,11 +42,11 @@ public class Duke extends Application {
         storage = new Storage("data/Duke.txt");
         list = new TaskList(storage.load());
     }
-
+    
     /**
-     * Runs the Duke.
+     * Runs the Duke in the terminal.
      */
-    public void run() {
+    protected void run() {
         Scanner sc = new Scanner(System.in);
         Instruction thisInstruction;
         Deadline thisDeadline;
@@ -86,7 +87,7 @@ public class Duke extends Application {
                         if (input.length() < 10) {
                             throw new DukeException("     The taskname of a deadline cannot be empty.");
                         }
-                        ui.noProblem();
+                        ui.printSuccess();
                         thisTaskname = input.substring(9, input.indexOf('/') - 1);
                         thisTime = input.substring(input.indexOf('/') + 4);
                         thisDeadline = new Deadline(thisTaskname, false, thisTime);
@@ -96,7 +97,7 @@ public class Duke extends Application {
                         if (input.length() < 7) {
                             throw new DukeException("     The taskname of a event cannot be empty.");
                         }
-                        ui.noProblem();
+                        ui.printSuccess();
                         thisTaskname = input.substring(6, input.indexOf('/') - 1);
                         thisTime = input.substring(input.indexOf('/') + 4);
                         list.add(new Event(thisTaskname, false, thisTime));
@@ -104,7 +105,7 @@ public class Duke extends Application {
                         if (input.length() < 6) {
                             throw new DukeException("     The taskname of a todo cannot be empty.");
                         }
-                        ui.noProblem();
+                        ui.printSuccess();
                         thisTaskname = input.substring(5);
                         list.add(new Todo(thisTaskname, false));
                     } else {
@@ -123,7 +124,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Starts the running of the Duke.
+     * Starts the running process of the Duke in the terminal.
      */
     public static void main(String[] args) {
         new Duke("data/Duke.txt").run();
@@ -188,11 +189,10 @@ public class Duke extends Application {
     }
 
     /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput() {
+    protected void handleUserInput() {
         Label userText = new Label(userInput.getText());
         Label dukeText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
@@ -201,15 +201,12 @@ public class Duke extends Application {
         );
         userInput.clear();
     }
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    private String getResponse(String input) {
+
+    protected String getResponse(String input) {
         return getOutput(input);
     }
     
-    private String getOutput(String input) {
+    protected String getOutput(String input) {
         Instruction thisInstruction;
         Deadline thisDeadline;
         String thisTaskname;
@@ -246,7 +243,7 @@ public class Duke extends Application {
                     if (input.length() < 10) {
                         throw new DukeException("     The taskname of a deadline cannot be empty.");
                     }
-                    output = ui.noProblemMessage();
+                    output = ui.printSuccessMessage();
                     thisTaskname = input.substring(9, input.indexOf('/') - 1);
                     thisTime = input.substring(input.indexOf('/') + 4);
                     thisDeadline = new Deadline(thisTaskname, false, thisTime);
@@ -256,7 +253,7 @@ public class Duke extends Application {
                     if (input.length() < 7) {
                         throw new DukeException("     The taskname of a event cannot be empty.");
                     }
-                    output = ui.noProblemMessage();
+                    output = ui.printSuccessMessage();
                     thisTaskname = input.substring(6, input.indexOf('/') - 1);
                     thisTime = input.substring(input.indexOf('/') + 4);
                     list.add(new Event(thisTaskname, false, thisTime));
@@ -264,7 +261,7 @@ public class Duke extends Application {
                     if (input.length() < 6) {
                         throw new DukeException("     The taskname of a todo cannot be empty.");
                     }
-                    output = ui.noProblemMessage();
+                    output = ui.printSuccessMessage();
                     thisTaskname = input.substring(5);
                     list.add(new Todo(thisTaskname, false));
                 } else {

@@ -9,9 +9,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
 public class DialogBox extends HBox {
-
     public DialogBox(Label l, ImageView iv) {
-
         l.setWrapText(true);
         iv.setFitWidth(100.0);
         iv.setFitHeight(100.0);
@@ -23,7 +21,7 @@ public class DialogBox extends HBox {
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
-    private void flip() {
+    protected void flip() {
         this.setAlignment(Pos.TOP_LEFT);
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         FXCollections.reverse(tmp);

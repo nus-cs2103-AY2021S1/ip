@@ -6,8 +6,8 @@ package duke;
 public class Event extends Task {
     protected String time;
 
-    public Event(String taskname, boolean isDone, String time) {
-        super(taskname, isDone);
+    public Event(String taskName, boolean isDone, String time) {
+        super(taskName, isDone);
         this.time = time;
     }
 
