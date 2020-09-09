@@ -1,6 +1,5 @@
 import java.io.InputStream;
 import java.io.PrintStream;
-import java.util.List;
 import java.util.Scanner;
 
 /**
@@ -65,7 +64,7 @@ public class Ui {
      */
     public String readCommand() {
         String commandLine = in.nextLine();
-        while(shouldIgnore(commandLine)) {
+        while (shouldIgnore(commandLine)) {
             commandLine = in.nextLine();
         }
         return commandLine;
@@ -96,11 +95,9 @@ public class Ui {
      * @return message when task is successfully deleted
      */
     public String getDeleteMessage(Task task, TaskList taskList) {
-        return (
-            "Noted. I've removed this task:\n"
-            + task.toString() + "\n"
-            + "Now you have "+ taskList.size() +" tasks in the list."
-        );
+        return "Noted. I've removed this task:\n"
+                + task.toString() + "\n"
+                + "Now you have " + taskList.size() + " tasks in the list.";
     }
 
     /**
@@ -110,11 +107,9 @@ public class Ui {
      * @return message that task is successfully added
      */
     public String getAddTaskMessage(Task task, TaskList taskList) {
-        return (
-            "Got it. I've added this task:\n" +
-            task.toString() + "\n" +
-            "Now you have "+ taskList.size() + " tasks in the list."
-        );
+        return "Got it. I've added this task:\n"
+                + task.toString() + "\n"
+                + "Now you have " + taskList.size() + " tasks in the list.";
     }
 
     /**
@@ -140,10 +135,8 @@ public class Ui {
      * @return message that task is done
      */
     public String getTaskDoneMessage(Task task) {
-        return (
-            "Nice! I've marked this task as done:\n" +
-             task.toString()
-        );
+        return "Nice! I've marked this task as done:\n"
+                + task.toString();
     }
 
     /**

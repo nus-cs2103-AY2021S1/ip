@@ -24,7 +24,7 @@ public class TaskList {
         for (int i = 0; i < tasks.size(); i++) {
             Task currentTask = tasks.get(i);
             if (currentTask.name.contains(searchTerm)) {
-                stringBuilder.append((i+1) + "." + currentTask.toString() + '\n');
+                stringBuilder.append((i + 1) + "." + currentTask.toString() + '\n');
             }
         }
         stringBuilder.setLength(stringBuilder.length() - 1);
@@ -86,7 +86,7 @@ public class TaskList {
     public String toString() {
         StringBuilder stringBuilder = new StringBuilder();
         for (int i = 0; i < tasks.size(); i++) {
-            stringBuilder.append((i+1) + "."+ tasks.get(i) +"\n");
+            stringBuilder.append((i + 1) + "." + tasks.get(i) + "\n");
         }
         stringBuilder.setLength(stringBuilder.length() - 1);
         return stringBuilder.toString();
