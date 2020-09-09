@@ -45,20 +45,23 @@ public class Storage {
     }
 
     public Task readFiles(String data) throws DukeException {
+        final int DESCRIPTION = 8;
         if (data.startsWith("T")) {
-            String description = data.substring(8);
+            String description = data.substring(DESCRIPTION);
             Todo todo = new Todo(description);
             todo.isDone = data.charAt(4) == '1';
             return todo;
             
         } else if (data.startsWith("E")) {
             int index = data.lastIndexOf("|");
-            String description = data.substring(8, index - 1);
-            String eventDate = data.substring(index + 2);
+            final int DATE_AND_TIME = index + 2;
+            String description = data.substring(DESCRIPTION, index - 1);
+            String eventDate = data.substring(DATE_AND_TIME);
             try {
                 LocalDate date = LocalDate.parse(eventDate);
                 Event event = new Event(description, date);
-                event.isDone = data.charAt(4) == '1';
+                final int DONE = 4;
+                event.isDone = data.charAt(DONE) == '1';
                 return event;
             } catch (DateTimeParseException e) {
                 throw new DukeException("Please key in the date in the format YYYY-MM-DD");
@@ -66,12 +69,14 @@ public class Storage {
 
         } else if (data.startsWith("D")) {
             int index = data.lastIndexOf("|");
-            String description = data.substring(8, index - 1);
-            String deadlineDate = data.substring(index + 2);
+            final int DATE_AND_TIME = index + 2;
+            String description = data.substring(DESCRIPTION, index - 1);
+            String deadlineDate = data.substring(DATE_AND_TIME);
             try {
                 LocalDate date = LocalDate.parse(deadlineDate);
                 Deadline deadline = new Deadline(description, date);
-                deadline.isDone = data.charAt(4) == '1';
+                final int DONE = 4;
+                deadline.isDone = data.charAt(DONE) == '1';
                 return deadline;
             } catch (DateTimeParseException e) {
                 throw new DukeException("Please key in the date in the format YYYY-MM-DD");
