@@ -1,5 +1,5 @@
 /**
- * Represents a todo inherited from task. A <code>Deadline</code> object corresponds to
+ * Represents a toodo inherited from task. A <code>Deadline</code> object corresponds to
  * a simple task without any constraints on dates
  */
 public class Todo extends Task {
