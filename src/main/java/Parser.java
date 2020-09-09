@@ -70,8 +70,8 @@ public class Parser {
                             result = ui.printAdd(taskList, deadline);
                             storage.saveTasks(taskList, ui);
                         } catch (DateTimeParseException e) {
-                            result = ui.printError("Please use this format: \n" +
-                                    "dd-MM-yyyy HHmm");
+                            result = ui.printError("Please use this format: \n"
+                                    + "dd-MM-yyyy HHmm");
                         }
                     }
                 }
@@ -92,8 +92,8 @@ public class Parser {
                             result = ui.printAdd(taskList, event);
                             storage.saveTasks(taskList, ui);
                         } catch (DateTimeParseException e) {
-                            result = ui.printError("Please use this format: \n" +
-                                        "dd-MM-yyyy HHmm");
+                            result = ui.printError("Please use this format: \n"
+                                    + "dd-MM-yyyy HHmm");
                         }
                     }
                 }

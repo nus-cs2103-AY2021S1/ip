@@ -34,8 +34,8 @@ public class Events extends Task {
 
     @Override
     public String toString() {
-        return "[E]" + this.getIcon() + description + " (at: " +
-                this.time.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm")) + ")";
+        return "[E]" + this.getIcon() + description + " (at: "
+                + this.time.format(DateTimeFormatter.ofPattern("dd-MM-yyyy HHmm")) + ")";
     }
 
     @Override
