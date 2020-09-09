@@ -29,10 +29,13 @@ public class Duke {
         try {
             tasks = new TaskList(storage.load());
         } catch (IOException | DateException e) {
-            ui.printMessage(e.getMessage());
+//            ui.printMessage(e.getMessage());
+            e.printStackTrace();
             tasks = new TaskList();
         }
     }
+
+
 
     /**
      * Runs the task management program.
@@ -41,13 +44,14 @@ public class Duke {
      * exit the program.
      */
     public void run() {
-        ui.displayWelcome();
+        System.out.println(ui.displayWelcome());
         boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
+                String response = c.execute(tasks, ui, storage);
+                ui.printMessage(response);
                 isExit = c.isExit();
             } catch (DukeException | MissingInformationException | DateException e) {
                 ui.printMessage(e.getMessage());
@@ -56,6 +60,18 @@ public class Duke {
             }
         }
         ui.close();
+    }
+
+    public String getResponse(String input) {
+        try {
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
+
+        } catch (DukeException | MissingInformationException | DateException e) {
+            return e.getMessage();
+        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+            return "Invalid task number!";
+        }
     }
 
     /**

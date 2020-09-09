@@ -3,9 +3,9 @@ package duke.command;
 import java.io.IOException;
 import java.util.Date;
 
+import duke.Ui;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.task.Task;
 import duke.task.TaskType;
 
@@ -56,7 +56,7 @@ public class AddCommand extends Command {
      * @param storage storage instance to manage storing on disk
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         try {
             Task task;
             if (type == TaskType.TODO) {
@@ -66,11 +66,12 @@ public class AddCommand extends Command {
             } else {
                 task = taskList.addEvent(name, date);
             }
-
-            ui.addSuccess(task, taskList.getCount());
             storage.saveData(taskList);
+            return ui.addSuccess(task, taskList.getCount());
+
         } catch (IOException e) {
-            ui.printMessage(e.getMessage());
+//            ui.printMessage(e.getMessage());
+            return e.getMessage();
         }
     }
 
