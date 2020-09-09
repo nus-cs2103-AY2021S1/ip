@@ -7,16 +7,29 @@ import duke.taskList.TaskList;
 import duke.tasks.Task;
 import duke.ui.Ui;
 
-
+/**
+ * Lists all the tasks in the taskList
+ */
 public class ListCommand extends Command{
 
     public ListCommand(String description){
         super(description);
     }
 
+    /**
+     * Lists all the tasks in the taskList
+     * @param taskList
+     * @param ui
+     * @param storage
+     * @return String containing the list of tasks in the taskList
+     * @throws DukeException
+     */
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
 
         String[] inputList = description.split(" ", 2);
+
+        //asserts the command to have the proper format
+        assert(inputList.length == 2);
         if ( inputList.length > 1){
             throw new IncompleteCommandException();
         }

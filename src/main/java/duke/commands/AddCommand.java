@@ -13,17 +13,29 @@ import duke.tasks.Task;
 import duke.tasks.ToDo;
 import duke.ui.Ui;
 
-
+/**
+ * Adds a new task into the taskList
+ */
 public class AddCommand extends Command {
 
     public AddCommand(String description){
         super(description);
     }
 
+    /**
+     * Adds a new task to the taskList
+     * @param taskList
+     * @param ui
+     * @param storage
+     * @return String based on the add command
+     * @throws DukeException
+     */
     public String execute (TaskList taskList, Ui ui, Storage storage) throws DukeException {
         Task newTask = new Task("Do Something");
         String[] inputList = description.trim().split(" ", 2);
 
+        //asserts the command to have the proper format
+        assert(inputList.length > 2);
         if (inputList.length != 2) {
             throw new IncompleteCommandException();
         }

@@ -5,6 +5,9 @@ import duke.taskList.TaskList;
 import duke.tasks.Task;
 import duke.ui.Ui;
 
+/**
+ * Finds a task on the taskList, based on the keyword
+ */
 public class FindCommand extends Command{
 
     private static TaskList temporaryList;
@@ -13,10 +16,19 @@ public class FindCommand extends Command{
         super(description);
     }
 
+    /**
+     * Finds a task on the taskList, based on the keyword
+     * @param taskList
+     * @param ui
+     * @param storage
+     * @return String based on the Task found
+     */
     public String execute(TaskList taskList, Ui ui, Storage storage){
         String[] inputList = description.trim().split(" ", 2);
         temporaryList = new TaskList();
 
+        //asserts the command to have the proper format
+        assert(inputList.length == 2);
         for (int i = 0; i < taskList.getSize(); i++) {
             Task toAdd = taskList.getTask(i);
             if (toAdd.getTask().contains(inputList[1].trim())) {
