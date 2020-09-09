@@ -3,9 +3,17 @@ package duke;
 import java.util.ArrayList;
 import java.io.IOException;
 
+/**
+ * Represents a command to find tasks with matching keyword.
+ */
 public class FindCommand extends Command {
     private String keyword;
-    
+
+    /**
+     * Constructs a find command to find tasks.
+     * 
+     * @param keyword The matching keyword of the task.
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
