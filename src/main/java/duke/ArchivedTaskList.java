@@ -1,5 +1,6 @@
 package duke;
 
+import javax.naming.PartialResultException;
 import java.util.ArrayList;
 
 public class ArchivedTaskList {
@@ -7,6 +8,13 @@ public class ArchivedTaskList {
 
     public ArchivedTaskList(ArrayList<Task> archivedTasks) {
         this.archivedTasks = archivedTasks;
+    }
+
+    public static void archiveAllTasks(ArrayList<Task> taskList, ArrayList<Task> archivedTaskList) {
+        for (Task task : taskList) {
+            ArchivedTaskList.addArchivedTask(task, archivedTaskList);
+        }
+        taskList.clear();
     }
 
     public ArrayList<Task> getArchivedTaskList() {

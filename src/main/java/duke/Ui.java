@@ -52,9 +52,10 @@ public class Ui {
                 + "\n     6.delete <task index> -- mark this task from task list"
                 + "\n     7.find <keyword> -- find all tasks in the task list which contains the keyword"
                 + "\n     8.archive <task index> -- archive this task"
-                + "\n     8.list archive -- show all archived tasks"
-                + "\n     9.help -- show all commands"
-                + "\n     10.bye -- exit the chatbot"
+                + "\n     9.archive all -- archive all tasks"
+                + "\n     10.list archive -- show all archived tasks"
+                + "\n     11.help -- show all commands"
+                + "\n     12.bye -- exit the chatbot"
                 + "\n" + DIVIDER_HELP + "\n";
         System.out.println(commandList);
         return commandList;
@@ -223,6 +224,16 @@ public class Ui {
         return outputMsg;
     }
 
+    public static String getArchiveAllTaskMsg(ArchivedTaskList archivedTasks) {
+        String outputMsg = DIVIDER
+                + "\n (ಠ‿↼)"
+                + "\n Noted. All tasks have been archived."
+                + "\n Now you have " + archivedTasks.getTaskListSize() + " tasks in the archived task list."
+                + "\n" + DIVIDER + "\n";
+        System.out.println(outputMsg);
+        return outputMsg;
+    }
+
     /**
      * Prints and returns out all tasks that match the keyword stored in the task list.
      *
@@ -258,5 +269,4 @@ public class Ui {
         System.out.println(outputMsg);
         return outputMsg;
     }
-
 }

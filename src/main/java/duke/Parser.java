@@ -48,6 +48,12 @@ public class Parser {
         try {
             String indexStr = inputMsg.split("archive ")[1];
             assert !indexStr.isEmpty() : "Index should not be empty.";
+
+            if (indexStr.equals("all")) {
+                ArchivedTaskList.archiveAllTasks(tasks.getTaskList(), archivedTasks.getArchivedTaskList());
+                return Ui.getArchiveAllTaskMsg(archivedTasks);
+            }
+
             int index = Integer.parseInt(inputMsg.split("archive ")[1]);
             Task taskToArchive = TaskList.deleteTask(index, tasks.getTaskList());
             ArchivedTaskList.addArchivedTask(taskToArchive, archivedTasks.getArchivedTaskList());
