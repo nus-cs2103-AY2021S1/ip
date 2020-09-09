@@ -46,7 +46,7 @@ public class DeleteCommandTest {
 
     @Test
     public void execute_invalidInput_exceptionThrown() {
-        String invalidInput = "5";
+        String invalidInput = "hahaha";
 
         Exception exception = assertThrows(
                 InvalidIndexException.class, () -> command.execute(invalidInput, dukeStub));

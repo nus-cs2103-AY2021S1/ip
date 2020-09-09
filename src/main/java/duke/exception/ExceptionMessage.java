@@ -11,6 +11,9 @@ public class ExceptionMessage {
     public static final String EVENT_INCORRECT_FORMAT_MESSAGE =
             "\nPlease follow the format of " + CommandFormat.EVENT_CMD_FORMAT + "\n";
 
+    public static final String TAG_INCORRECT_FORMAT_MESSAGE =
+            "Please follow the format of " + CommandFormat.TAG_CMD_FORMAT + "\n";
+
     public static final String TODO_NO_DESCRIPTION_MESSAGE =
             "\nOOPS!!! The description of a todo cannot be empty.\n";
 
@@ -22,6 +25,9 @@ public class ExceptionMessage {
 
     public static final String EMPTY_TIME_MESSAGE =
             "\nOOPS!!! The time cannot be empty.\n";
+
+    public static final String BLANK_TAG_MESSAGE =
+            "\nOOPS!!! The tag of a task cannot be blank";
 
     public static String getInvalidIndexMessage(String wrongIndex) {
         return "\nSorry " + wrongIndex + " is not a valid index\n";

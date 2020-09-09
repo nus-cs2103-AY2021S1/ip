@@ -28,7 +28,7 @@ public class DukeTaskList {
      */
     public Task getTask(int index) {
         indexCheck(index);
-        return tasks.get(index);
+        return tasks.get(index - 1);
     }
 
     /**
@@ -63,7 +63,7 @@ public class DukeTaskList {
      */
     public Task deleteTask(int index) {
         Task taskDelete = getTask(index);
-        tasks.remove(index);
+        tasks.remove(index - 1);
 
         return taskDelete;
     }
@@ -93,7 +93,7 @@ public class DukeTaskList {
     }
 
     private void indexCheck(int index) {
-        if (index >= getSize() || index < 0) {
+        if (index - 1 >= getSize() || index < 1) {
             throw new InvalidIndexException(ExceptionMessage.getInvalidIndexMessage(index + ""));
         }
     }
