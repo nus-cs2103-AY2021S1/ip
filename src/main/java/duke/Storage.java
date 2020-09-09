@@ -67,6 +67,7 @@ public class Storage {
     private static void initStorage() throws IOException {
         createDataDir();
         createSaveFile();
+        assert Files.exists(DATA_DIR_PATH) && Files.exists(SAVE_FILE_PATH) : "Storage directory/path doesn't exist";
     }
     /**
      * Creates the data directory if that path doesn't exist

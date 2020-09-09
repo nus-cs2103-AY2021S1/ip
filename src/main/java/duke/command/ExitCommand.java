@@ -17,6 +17,7 @@ public class ExitCommand implements Command {
     @Override
     public String execute(TaskList tasks, Ui ui) {
         System.exit(0);
+        assert false : "System should have exited, we shouldn't be reaching this line";
         return "Stub for ExitCommand.execute()";
     }
     @Override

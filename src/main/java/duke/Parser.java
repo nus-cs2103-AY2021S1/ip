@@ -34,14 +34,14 @@ public class Parser {
         input = input.trim();
         String[] words = input.split(" ");
         String keyword = words[0].toLowerCase().trim(); // keyword tells us what command to create
-        if (input.equals(CommandWord.EXIT_CMD.getCmd())) {
+        if (keyword.equals(CommandWord.EXIT_CMD.getCmd())) {
             return new ExitCommand();
-        } else if (input.equals(CommandWord.LIST_CMD.getCmd())) {
+        } else if (keyword.equals(CommandWord.LIST_CMD.getCmd())) {
             return new ListCommand(new String[]{input});
         } else if (keyword.equals(CommandWord.DONE_CMD.getCmd())
                 || keyword.equals(CommandWord.DELETE_CMD.getCmd())) {
             return parseDoneDelete(input);
-        } else if (words[0].equals("find")) {
+        } else if (keyword.equals(CommandWord.FIND_CMD.getCmd())) {
             return new FindCommand(input);
         } else { // parse the command based on the identified keyword:
             switch (keyword) {
@@ -73,6 +73,8 @@ public class Parser {
             throw new DukeException(Message.ERROR_DONEDELETE_ARGS.getMsg());
         }
         String command = st.nextToken();
+        assert command.equals(CommandWord.DONE_CMD.getCmd())
+                || command.equals(CommandWord.DELETE_CMD.getCmd()) : "parseDoneDelete(): neither done nor delete cmd";
         String taskID = st.nextToken();
         if (!isInteger(taskID)) {
             throw new DukeException(Message.ERROR_DONEDELETE_NOTINT.getMsg());
@@ -93,7 +95,8 @@ public class Parser {
      */
     private String[] parseToDo(String input) throws DukeException {
         StringTokenizer st = new StringTokenizer(input);
-        st.nextToken();
+        String command = st.nextToken();
+        assert command.equals(CommandWord.TODO_CMD.getCmd()) : "parseToDo(): incorrect cmd";
         if (!st.hasMoreTokens()) {
             throw new DukeException(Message.ERROR_TODO_DESC.getMsg());
         }
@@ -119,7 +122,8 @@ public class Parser {
         }
         String dateString = separatedInput[1];
         StringTokenizer st = new StringTokenizer(separatedInput[0]);
-        st.nextToken();
+        String command = st.nextToken();
+        assert command.equals(CommandWord.DEADLINE_CMD.getCmd()) : "parseToDo(): incorrect cmd";
         StringBuilder descriptionBuilder = new StringBuilder();
         while (st.hasMoreTokens()) {
             descriptionBuilder.append(st.nextToken()).append(" ");
@@ -142,19 +146,33 @@ public class Parser {
      *
      * @throws DukeException If the format is wrong or if it lacks proper description
      */
+    // todo: refactor this if possible. so long :(
     private String[] parseEvent(String input) throws DukeException {
         String[] separatedInput = input.split(EVENT_DELIMITER); //  <words> /at <timeInfo>
         // not enough info in user input:
         if (separatedInput.length <= 1) {
             throw new DukeException(Message.ERROR_EVENT_FORMAT.getMsg());
         }
-        String[] words = separatedInput[0].split(" ");
+        // parse description field for the event:
+        String words = separatedInput[0];
+        StringTokenizer wordsTokenizer = new StringTokenizer(words);
+        String command = wordsTokenizer.nextToken();
+        assert command.equals(CommandWord.EVENT_CMD.getCmd()) : "[parseEvent()]: incorrect command";
+        StringBuilder descriptionBuilder = new StringBuilder();
+        while (wordsTokenizer.hasMoreTokens()) {
+            descriptionBuilder.append(wordsTokenizer.nextToken()).append(" ");
+        }
+        String description = descriptionBuilder.toString().stripTrailing();
+        // parse start and end timing for the event:
         String[] timeInfo = separatedInput[1].split(" ");
-        String duration = timeInfo[timeInfo.length - 1];
-        String[] separatedTime = duration.split(TIME_DELIMITER);
-        if (separatedTime.length <= 1) {
+        String startAndEndTiming = timeInfo[timeInfo.length - 1];
+        String[] separatedStartAndEndTiming = startAndEndTiming.split(TIME_DELIMITER);
+        if (separatedStartAndEndTiming.length <= 1) {
             throw new DukeException(Message.ERROR_EVENT_TIME.getMsg());
         }
+        String startTime = separatedStartAndEndTiming[0];
+        String endTime = separatedStartAndEndTiming[1];
+        // parse string representation for the date:
         StringBuilder dateStringBuilder = new StringBuilder();
         for (int i = 0; i < timeInfo.length - 2; i++) {
             dateStringBuilder.append(timeInfo[i]).append(" ");
@@ -164,15 +182,8 @@ public class Parser {
         if (dateString.isEmpty()) {
             throw new DukeException(Message.ERROR_EVENT_DATE.getMsg());
         }
-        String startTime = separatedTime[0];
-        String endTime = separatedTime[1];
-        StringBuilder newDescription = new StringBuilder();
-        for (int i = 1; i < words.length - 1; i++) {
-            newDescription.append(words[i]).append(" ");
-        }
-        newDescription.append(words[words.length - 1]);
         return new String[]{"E",
-                            newDescription.toString().stripTrailing(),
+                            description,
                             dateString,
                             startTime,
                             endTime};

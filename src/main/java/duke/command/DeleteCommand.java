@@ -25,7 +25,7 @@ public class DeleteCommand implements Command {
      * @param tasks Current TaskList
      * @param ui    Where the User shall receive messages about the command
      *
-     * @throws DukeException
+     * @throws DukeException If we can't write onto the file after deleting a task to TaskList
      */
     @Override
     public String execute(TaskList tasks, Ui ui) throws DukeException, IOException {

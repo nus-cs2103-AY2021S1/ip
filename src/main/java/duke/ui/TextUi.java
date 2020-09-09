@@ -36,9 +36,6 @@ public class TextUi implements Ui {
         lines.add(message);
         this.display(lines);
     }
-    @Override
-    public void displayLoadError() { //todo: add this error display
-    }
     /**
      * Prints out collection of lines to the Command Line
      *
@@ -57,8 +54,8 @@ public class TextUi implements Ui {
      * @return Pretty lines
      */
     private static ArrayList<String> prettify(ArrayList<String> rawResponse) {
-        rawResponse.add(0, LINE_BREAK);
-        rawResponse.add(rawResponse.size(), LINE_BREAK);
+        // rawResponse.add(0, LINE_BREAK);
+        // rawResponse.add(rawResponse.size(), LINE_BREAK);
         return indentLines(rawResponse);
     }
     /**

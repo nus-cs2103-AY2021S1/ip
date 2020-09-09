@@ -49,7 +49,8 @@ public class TaskList implements Serializable {
             this.taskList.add(newEvent);
             return newEvent.toString();
         default:
-            return "ugh how did we get here";
+            assert false : "default statement is supposed to be a fallthrough";
+            return "ugh how did we get here"; // this is a FALLTHROUGH, never reached
         }
     }
     /**
@@ -78,6 +79,7 @@ public class TaskList implements Serializable {
     public String deleteTask(int taskID) throws DukeException {
         currentTaskCount--;
         verifyTaskValidity(taskID);
+        assert currentTaskCount != 0 : "nothing to delete";
         Task toDelete = taskList.get(taskID - 1);
         taskList.remove(toDelete);
         for (int i = taskID - 1; i < taskList.size(); i++) {
@@ -87,8 +89,8 @@ public class TaskList implements Serializable {
         return toDelete.toString();
     }
     /**
-     * Verifies the validity of the task to be handled, whether it exists in the TaskList or not;
-     * is used only when tasks are being deleted or marked as done
+     * Verifies the validity of the task to be handled, whether it exists in the TaskList or not; is used only when
+     * tasks are being deleted or marked as done
      *
      * @param taskID TaskID to be checked
      *

@@ -29,7 +29,6 @@ public class Duke extends Thread {
         try {
             this.tasks = Storage.load();
         } catch (IOException e) {
-            this.ui.displayLoadError();
             this.tasks = new TaskList();
         }
         currentRuntime.addShutdownHook(new Thread(() -> { // lambda used for anon-class
@@ -75,5 +74,6 @@ public class Duke extends Thread {
         new Duke().runDuke();
     }
 }
-
-
+/*  Todo: 1. sanitise user input: all lowercase..
+          2.
+ */

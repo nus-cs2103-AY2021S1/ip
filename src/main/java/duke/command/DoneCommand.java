@@ -23,7 +23,7 @@ public class DoneCommand implements Command {
      * @param tasks Current TaskList
      * @param ui    Where the User shall receive messages about the command
      *
-     * @throws DukeException
+     * @throws DukeException If we can't write onto the file after marking a task as done
      */
     @Override
     public String execute(TaskList tasks, Ui ui) throws DukeException, IOException {
