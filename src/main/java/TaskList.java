@@ -1,5 +1,6 @@
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * TaskList class handles the operations to modify list of tasks given by the user
@@ -33,12 +34,35 @@ public class TaskList {
         storage.writeToFile(task);
     }
 
+    public boolean hasDate(Task task) {
+        return (task instanceof Deadline || task instanceof Event);
+    }
+
+    public void sortDates() {
+        Collections.sort(this.taskArrayList, (t1, t2) -> {
+            if (t1 instanceof Todo && hasDate(t2)) {
+                return -1;
+                //sorts Todos with no date at the top of list
+            }
+            else if (hasDate(t1) && t2 instanceof Todo) {
+                return 1;
+            }
+            else if (t1 instanceof Todo && t2 instanceof Todo) {
+                return 0;
+            }
+            else return t1.getLocalDate().compareTo(t2.getLocalDate());
+
+        });
+    }
+
 
     /**
      * prints list of tasks when user inputs "list"
      *
      */
     public String printTasks() {
+        sortDates();
+
         if (taskArrayList.size() == 0){
             return "There are no tasks!\n";
         }

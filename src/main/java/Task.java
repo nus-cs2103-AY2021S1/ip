@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 /**
  * Class handling tasks of different types (i.e. its subclasses)
  *
@@ -6,6 +8,7 @@ public class Task {
     protected String description;
     protected String identifier;
     protected boolean isDone;
+    protected LocalDate date;
 
     /**
      * constructor to describe state and specifics of Task
@@ -52,6 +55,7 @@ public class Task {
         this.isDone = true;
     }
 
+
     /**
      * getter function for String description
      *
@@ -59,6 +63,12 @@ public class Task {
      */
     public String getDescription() {
         return description;
+    }
+
+    public LocalDate getLocalDate() {
+
+        assert !(this instanceof Todo) : "Todos have no dates!";
+        return date;
     }
 
     /**
