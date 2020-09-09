@@ -1,6 +1,8 @@
 package duke.command;
 
+import duke.duplicatechecker.DuplicateDetector;
 import duke.exceptions.DukeException;
+import duke.exceptions.DuplicateException;
 import duke.exceptions.EmptyToDoException;
 import duke.tasks.TaskList;
 import duke.tasks.ToDo;
@@ -22,11 +24,15 @@ public class ToDoCommand extends UserCommand {
             throw new EmptyToDoException();
         } else {
             String todoString = userInput.substring(5);
-            ToDo todo = new ToDo(todoString);
-            taskList.addTask(todo);
-            return ui.printResponse("Got it. I've added this task:") + "\n"
-                    + ui.printResponse(todo.toString()) + "\n"
-                    + ui.printListCount(taskList);
+            if (new DuplicateDetector(todoString, taskList, "ToDo").checkForDuplicates()) {
+                throw new DuplicateException();
+            } else {
+                ToDo todo = new ToDo(todoString);
+                taskList.addTask(todo);
+                return ui.printResponse("Got it. I've added this task:") + "\n"
+                        + ui.printResponse(todo.toString()) + "\n"
+                        + ui.printListCount(taskList);
+            }
         }
     }
 }

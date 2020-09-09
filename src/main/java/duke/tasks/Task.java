@@ -1,17 +1,23 @@
 package duke.tasks;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 
 public class Task implements Serializable {
     protected String description;
     protected boolean isDone;
+    protected LocalDate localDate;
 
-    /**
-     * @param description description of the task.
-     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.localDate = null;
+    }
+
+    public Task(String description, LocalDate localDate) {
+        this.description = description;
+        this.isDone = false;
+        this.localDate = localDate;
     }
 
     /**
@@ -27,6 +33,14 @@ public class Task implements Serializable {
         return description;
     }
 
+    public LocalDate getLocalDate() {
+        return localDate;
+    }
+
+    public String getTaskType() {
+        return "";
+    }
+
     /**
      * Mark a task as completed.
      */
@@ -39,5 +53,9 @@ public class Task implements Serializable {
     @Override
     public String toString() {
         return description;
+    }
+
+    public boolean isDone() {
+        return isDone;
     }
 }

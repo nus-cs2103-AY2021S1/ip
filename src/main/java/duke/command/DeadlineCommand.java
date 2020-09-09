@@ -2,7 +2,9 @@ package duke.command;
 
 import java.time.LocalDate;
 
+import duke.duplicatechecker.DuplicateDetector;
 import duke.exceptions.DukeException;
+import duke.exceptions.DuplicateException;
 import duke.tasks.Deadline;
 import duke.tasks.TaskList;
 import duke.timeformatter.TimeFormatter;
@@ -27,15 +29,19 @@ public class DeadlineCommand extends UserCommand {
      */
     @Override
     public String execute(TaskList taskList, Ui ui) throws DukeException {
-
         String[] deadlineArr = userInput.split("/", 2);
         String by = deadlineArr[1].substring(deadlineArr[1].indexOf("by") + 3);
         String deadlineString = deadlineArr[0].substring(9);
         LocalDate localDeadlineDate = TimeFormatter.localDate(by);
-        Deadline deadline = new Deadline(deadlineString, localDeadlineDate);
-        taskList.addTask(deadline);
-        return ui.printResponse("Got it. I've added this task:") + "\n"
-                + ui.printResponse(deadline.toString()) + "\n"
-                + ui.printListCount(taskList);
+        if (new DuplicateDetector(deadlineString, localDeadlineDate, taskList, "Deadline")
+                .checkForDuplicates()) {
+            throw new DuplicateException();
+        } else {
+            Deadline deadline = new Deadline(deadlineString, localDeadlineDate);
+            taskList.addTask(deadline);
+            return ui.printResponse("Got it. I've added this task:") + "\n"
+                    + ui.printResponse(deadline.toString()) + "\n"
+                    + ui.printListCount(taskList);
+        }
     }
 }
