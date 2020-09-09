@@ -13,11 +13,14 @@ public abstract class Task {
     protected String taskType;
     protected String description;
     protected boolean isDone;
+    protected String recurrence;
+    protected LocalDate dateRepeated;
 
     Task(String taskType, String description) {
         this.taskType = taskType;
         this.description = description;
         isDone = false;
+        this.recurrence = "";
     }
 
     protected boolean containsTime(String str) {
@@ -37,6 +40,11 @@ public abstract class Task {
         return ldt.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm"));
     }
 
+    public void repeatTask() {
+        isDone = false;
+        dateRepeated = LocalDate.now();
+    }
+    
     public void completeTask() {
         isDone = true;
     }
@@ -51,6 +59,23 @@ public abstract class Task {
      * @return A string representing the task in a format to be stored in the text file.
      */
     abstract public String formatTaskForFile();
+
+    public String getRecurrence() {
+        return recurrence;
+    }
+
+    public LocalDate getDateRepeated() {
+        return dateRepeated;
+    }
+
+    public void addRecurrence(String recurrence, LocalDate dateRepeated) {
+        this.recurrence = recurrence;
+        this.dateRepeated = dateRepeated;
+    }
+
+    public boolean isRecurring() {
+        return recurrence != "";
+    }
 
     public boolean match(String keyword) {
         return description.contains(keyword);
