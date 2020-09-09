@@ -41,7 +41,14 @@ public class Duke extends Application {
     public Duke() throws IOException {
         ui = new Ui();
         storage = new Storage("data/tasks.txt");
-        taskList = new TaskList();
+        try {
+            // Load task list from saved file
+            taskList = new TaskList(storage.load());
+        } catch (IOException e) {
+            // Create task list
+            ui.showLoadingError();
+            taskList = new TaskList();
+        }
     }
 
     /**
@@ -51,6 +58,7 @@ public class Duke extends Application {
      */
     public Duke(String filePath) throws IOException {
         ui = new Ui();
+        assert !filePath.isBlank();
         storage = new Storage(filePath);
         try {
             // Load task list from saved file
@@ -63,8 +71,10 @@ public class Duke extends Application {
     }
 
     public String reply(String userInput) {
+        assert !userInput.isBlank();
         String[] userTokens = userInput.split(" ");
         String userCommand = userTokens[0];
+        assert !userCommand.isBlank();
 
         // Validate command
         try {

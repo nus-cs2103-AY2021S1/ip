@@ -52,6 +52,7 @@ public class Storage {
         while (s.hasNext()) {
             String fileFormatString = s.nextLine();
             String[] fileTokens = fileFormatString.split("\\|");
+            assert fileTokens.length > 1;
             switch (fileTokens[0]) {
                 case "E":
                     taskList.add(Event.fromFileFormat(fileFormatString));

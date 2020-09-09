@@ -30,6 +30,7 @@ public class Event extends Task {
      */
     static Event fromFileFormat(String fileFormatString) {
         String[] tokens = fileFormatString.split("\\|");
+        assert tokens.length == 4;
         Event loaded = new Event(tokens[2], LocalDate.parse(tokens[3]));
         if (tokens[1].equals("1")) {
             loaded.setDone();
