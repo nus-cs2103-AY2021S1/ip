@@ -1,10 +1,16 @@
-public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+import javafx.fxml.FXML;
+
+/**
+ * Main Class here.
+ */
+public class Duke{
+
+    public String init(){
+        return ChatBot.start();
     }
+
+    public String getResponse(String input){
+        return ChatBot.getResponse(input);
+    }
+
 }
