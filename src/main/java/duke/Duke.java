@@ -147,9 +147,13 @@ public class Duke {
                 if (guiInputArray.length <= 1) {
                     throw new DukeException("Yo! Enter the task number(s).");
                 }
+
                 userInput = guiInputArray[1];
                 int[] tasksArray = Parser.parseMultipleTasks(userInput);
                 TaskList doneList = new TaskList();
+
+                assert tasksArray != null : "taskArray should not be empty.";
+
                 for (int index : tasksArray) {
                     try {
                         if (index > tasks.size() || index <= 0) {
@@ -162,9 +166,11 @@ public class Duke {
                         ui.setGuiOutput(ui.showErrorMsg(e));
                     }
                 }
+
                 if (!doneList.isEmpty()) {
                     ui.setGuiOutput(ui.showListDoneMsg() + "\n" + ui.showTaskList(doneList));
                 }
+
             } catch (DukeException e) {
                 ui.setGuiOutput(ui.showErrorMsg(e));
             }
@@ -184,14 +190,17 @@ public class Duke {
                 if (guiInputArray.length <= 1 || guiInputArray[1].isBlank()) {
                     throw new DukeException("Yo! Enter a keyword.");
                 }
+
                 userInput = guiInputArray[1];
                 TaskList foundTasks;
                 foundTasks = tasks.findTasks(userInput);
+
                 if (!foundTasks.isEmpty()) {
                     ui.setGuiOutput(ui.showFoundMsg(userInput) + "\n" + ui.showTaskList(foundTasks));
                 } else {
                     ui.setGuiOutput(ui.showNotFoundMsg(userInput));
                 }
+
             } catch (DukeException e) {
                 ui.setGuiOutput(ui.showErrorMsg(e));
             }
@@ -208,10 +217,13 @@ public class Duke {
             if (guiInputArray.length <= 1 || guiInputArray[1].isBlank()) {
                 throw new DukeException("Yo! Task details are missing.");
             }
+
             userInput = guiInputArray[1];
             Task toDo = new Todo(userInput);
+
             tasks.addTask(toDo);
             ui.setGuiOutput(ui.showTaskAddedMsg(toDo));
+
         } catch (DukeException e) {
             ui.setGuiOutput(ui.showErrorMsg(e));
         }
@@ -228,11 +240,14 @@ public class Duke {
             if (guiInputArray.length <= 1) {
                 throw new DukeException("Yo! Command Syntax Error. '<Details> /by or /at <dd/MM/yy [HH:MM]>'");
             }
+
             userInput = guiInputArray[1];
             userInputArray = Parser.parseDetails(userInput);
             Task deadLine = new Deadline(userInputArray[0], userInputArray[1]);
+
             tasks.addTask(deadLine);
             ui.setGuiOutput(ui.showTaskAddedMsg(deadLine));
+
         } catch (DukeException e) {
             ui.setGuiOutput(ui.showErrorMsg(e));
         }
@@ -249,11 +264,14 @@ public class Duke {
             if (guiInputArray.length <= 1) {
                 throw new DukeException("Yo! Command Syntax Error. '<Details> /by or /at <dd/MM/yy [HH:MM]>'");
             }
+
             userInput = guiInputArray[1];
             userInputArray = Parser.parseDetails(userInput);
             Task event = new Event(userInputArray[0], userInputArray[1]);
+
             tasks.addTask(event);
             ui.setGuiOutput(ui.showTaskAddedMsg(event));
+            
         } catch (DukeException e) {
             ui.setGuiOutput(ui.showErrorMsg(e));
         }
@@ -272,9 +290,12 @@ public class Duke {
                 if (guiInputArray.length <= 1) {
                     throw new DukeException("Yo! Enter the task numbers(s).");
                 }
+
                 userInput = guiInputArray[1];
                 TaskList deletedTasks = new TaskList();
                 int[] tasksArray = Parser.parseMultipleTasks(userInput);
+                assert tasksArray != null : "taskArray should not be empty.";
+
                 for (int index : tasksArray) {
                     try {
                         if (index > tasks.size() || index <= 0) {
@@ -287,9 +308,11 @@ public class Duke {
                         ui.setGuiOutput(ui.showErrorMsg(e));
                     }
                 }
+
                 if (!deletedTasks.isEmpty()) {
                     ui.setGuiOutput(ui.showTaskDeleteMsg() + "\n" + ui.showTaskList(deletedTasks));
                 }
+
             } catch (DukeException e) {
                 ui.setGuiOutput(ui.showErrorMsg(e));
             }
