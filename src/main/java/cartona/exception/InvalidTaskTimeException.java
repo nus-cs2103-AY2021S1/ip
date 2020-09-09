@@ -1,7 +1,7 @@
 package cartona.exception;
 
 public class InvalidTaskTimeException extends InvalidInputException {
-    InvalidTaskTimeException(String errorMsg) {
+    public InvalidTaskTimeException(String errorMsg) {
         super(errorMsg);
     }
 }

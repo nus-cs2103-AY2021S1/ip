@@ -1,5 +1,10 @@
 package cartona.command;
 
+import cartona.Storage;
+import cartona.exception.CartonaException;
+import cartona.task.TaskList;
+import cartona.ui.Ui;
+
 /**
  * The ExitCommand class runs the steps required before termination of the program.
  *
