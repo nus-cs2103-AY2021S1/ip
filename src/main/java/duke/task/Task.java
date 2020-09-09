@@ -9,6 +9,7 @@ public class Task {
     public static final String STATUS_CROSS = "[" + "\u2718" + "]";
 
     private String description;
+    private String time;
     private boolean isDone;
 
     /**
@@ -16,9 +17,24 @@ public class Task {
      *
      * @param description Description of task.
      */
-    public Task(String description) {
+    public Task(String description, String... time) {
         this.description = description;
+
+        if (time.length > 0) {
+            this.time = time[0];
+        } else {
+            this.time = "";
+        }
+
         this.isDone = false;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public String getTime() {
+        return this.time;
     }
 
     /**
@@ -44,6 +60,17 @@ public class Task {
      */
     public boolean hasDoneStatus() {
         return this.isDone;
+    }
+
+    /**
+     * Determines if two different Task objects are duplicates of one another.
+     *
+     * @param task Possible duplicate task.
+     * @return True is the tasks are duplicates. Otherwise, returns false.
+     */
+    public boolean equals(Task task) {
+        boolean isEquals = this.description.equals(task.description) && task.time.equals(task.getTime());
+        return isEquals;
     }
 
     /**
