@@ -92,11 +92,17 @@ public class Storage {
         String[] parts = s.split("\\|");
         switch (parts[0].trim()) {
         case "T":
-            return new ToDo(parts[2].trim(), parts[1].trim().equals("1"));
+            return new ToDo(parts[2].trim(), parts[1].trim().equals("1"), parts[3].trim());
         case "D":
-            return new Deadline(parts[2].trim(), parts[1].trim().equals("1"), parts[3].trim());
+            assert parts[4].trim() != null : "Tag is empty";
+            if (parts[4].trim() == "NIL") {
+                return new Deadline(parts[2].trim(), parts[1].trim().equals("1"), parts[3].trim());
+            } else {
+                return new Deadline(parts[2].trim(), parts[1].trim().equals("1"), parts[3].trim(), parts[4].trim());
+            }
         case "E":
-            return new Event(parts[2].trim(), parts[1].trim().equals("1"), parts[3].trim());
+            assert parts[4].trim() != null : "Tag is empty";
+            return new Event(parts[2].trim(), parts[1].trim().equals("1"), parts[3].trim(), parts[4].trim());
 
         default:
             return null;

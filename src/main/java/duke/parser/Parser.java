@@ -8,6 +8,7 @@ import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.TagCommand;
 import duke.command.ToDoCommand;
 import duke.common.DukeException;
 
@@ -35,6 +36,11 @@ public class Parser {
         case "delete":
             String deleteTaskIndex = parts[1].trim();
             return new DeleteCommand(Integer.parseInt(deleteTaskIndex));
+        case "tag":
+            String[] tag = parts[1].split(" ");
+            String tagTaskIndex = tag[0].trim();
+            String tagDesription = tag[1].trim();
+            return new TagCommand(Integer.parseInt(tag[0]), tag[1]);
         case "find":
             String keyword = parts[1].trim();
             return new FindCommand(keyword);

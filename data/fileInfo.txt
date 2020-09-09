@@ -1,6 +1,6 @@
-D | 1 | yas | 2012-01-01
-D | 1 | pore | 2012-02-19
-T | 0 | pretty
-D | 0 | yas | 2012-01-01
-E | 1 | pepega | 2010-04-30
-
+D | 1 | pore | 2012-02-19 | NIL
+T | 0 | pretty | NIL
+D | 0 | yas | 2012-01-01 | NIL
+T | 0 | pepega | NIL
+D | 0 | trauma | 2012-09-04 | hard
+E | 1 | why | 2020-03-04 | hard

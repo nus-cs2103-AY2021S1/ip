@@ -34,6 +34,19 @@ public class Deadline extends Task {
     }
 
     /**
+     * Constructor for a new Deadline object.
+     *
+     * @param description details about the Deadline.
+     * @param isDone whether Deadline is done or not.
+     * @param tagDescription description of tag.
+     * @param by time/date the Deadline is due by in yyyy-mm-dd format.
+     */
+    public Deadline(String description, boolean isDone, String by, String tagDescription) {
+        super(description, isDone, tagDescription);
+        this.by = LocalDate.parse(by.trim());
+    }
+
+    /**
      * Checks if task contains the keyword.
      *
      * @return whether the task contains that keyword.
@@ -59,10 +72,10 @@ public class Deadline extends Task {
      */
     @Override
     public String infoString() {
-        String x = "0";
+        String infoIsDone = "0";
         if (isDone) {
-            x = "1";
+            infoIsDone = "1";
         }
-        return "D | " + x + " | " + this.description + " | " + by;
+        return "D | " + infoIsDone + " | " + this.description + " | " + by + " | " + this.tagDescription;
     }
 }

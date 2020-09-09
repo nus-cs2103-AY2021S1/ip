@@ -34,6 +34,19 @@ public class Event extends Task {
     }
 
     /**
+     * Constructor for a new Event object.
+     *
+     * @param description details about the Event.
+     * @param isDone whether Deadline is done or not.
+     * @param tagDescription description of tag.
+     * @param at time/date the Deadline is due by in yyyy-mm-dd format.
+     */
+    public Event(String description, boolean isDone, String at, String tagDescription) {
+        super(description, isDone, tagDescription);
+        this.at = LocalDate.parse(at.trim());
+    }
+
+    /**
      * Checks if task contains the keyword.
      *
      * @return whether the task contains that keyword.
@@ -59,10 +72,10 @@ public class Event extends Task {
      */
     @Override
     public String infoString() {
-        String x = "0";
+        String infoIsDone = "0";
         if (isDone) {
-            x = "1";
+            infoIsDone = "1";
         }
-        return "E | " + x + " | " + this.description + " | " + at;
+        return "E | " + infoIsDone + " | " + this.description + " | " + at + " | " + this.tagDescription;
     }
 }

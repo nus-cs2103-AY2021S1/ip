@@ -39,6 +39,14 @@ public class TaskList {
     }
 
     /**
+     * Adds a tag to a task.
+     * @param taskindex The index of the task in the task list that a tag is to be added to.
+     */
+    public void setTag(int taskindex, String tagDescription) {
+        tasks.get(taskindex).setTag(tagDescription);
+    }
+
+    /**
      * Returns current task list.
      * @return current task list.
      */
