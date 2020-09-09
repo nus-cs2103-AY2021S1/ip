@@ -18,11 +18,16 @@ public class DeleteCommand extends Command {
      */
     @Override
     public boolean execute(String input) throws DukeException {
-        Task task = tm.deleteTask(Integer.parseInt(input));
-        String response = String.format("Successfully removed the following task:\n %s", task);
-        setResponse(response);
-        setDone();
-        return true;
+        try {
+            Task task = tm.deleteTask(Integer.parseInt(input));
+            String response = String.format("Successfully removed the following task:\n %s", task);
+            setResponse(response);
+            setDone();
+            return true;
+        } catch (NumberFormatException e) {
+            throw new DukeException("I couldn't understand your input. Please give a number.");
+        }
+
     }
 
     /**

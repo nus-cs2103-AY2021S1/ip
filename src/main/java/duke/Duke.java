@@ -2,6 +2,7 @@ package duke;
 
 import duke.commands.Command;
 import duke.commands.CommandHandler;
+import duke.tasks.Task;
 import duke.tasks.TaskManager;
 
 /**
@@ -17,7 +18,7 @@ public class Duke {
         this.ui = new Ui();
         this.commandHandler = new CommandHandler();
         try {
-            this.taskManager = new TaskManager(new Storage().load());
+            this.taskManager = new Storage().load(new TaskManager());
         } catch (DukeException e) {
             System.out.println("OOPS error loading storage: " + e.getMessage());
         }
@@ -40,7 +41,7 @@ public class Duke {
                 cmd.execute(input);
                 return cmd.toString();
             } catch (DukeException e) {
-                return "OOPS! Something went wrong while executing: " + e.toString();
+                return "OOPS! Something went wrong while executing:\n" + e.getMessage();
             }
         }
     }

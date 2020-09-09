@@ -11,7 +11,7 @@ import java.util.Date;
  * <code>Event</code> inherits from <code>Task</code>
  * and is used to represent an event.
  */
-public class Event extends Task {
+public class Event extends Task implements Comparable<Event> {
     private Date start;
     private Date end;
 
@@ -42,7 +42,7 @@ public class Event extends Task {
     public String saveText() {
         String completeStatus = super.isCompleted() ? "1" : "0";
         DateFormat dateFormat = new SimpleDateFormat("dd MM yyyy HH:mm");
-;        return "E," + completeStatus + "," + super.getName() + "," + dateFormat.format(start) + "," + dateFormat.format(end);
+        return "E," + completeStatus + "," + super.getName() + "," + dateFormat.format(start) + "," + dateFormat.format(end);
     }
 
     /**
@@ -53,5 +53,24 @@ public class Event extends Task {
     public String toString() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         return String.format("[E]%s (start: %s, end: %s)", super.toString(), dateFormat.format(start), dateFormat.format(end));
+    }
+
+    /**
+     * Compares with another event. Both are equal if they have the same name and start date.
+     * Else, they will be compared according to their start date.
+     * @param other the other event to be compared with.
+     * @return a value 0 if both events are equal;
+     * a value greater than 0 if this Event is later than the Event argument;
+     * a value less than 0 if this Event is before the Event argument.
+     */
+    @Override
+    public int compareTo(Event other) {
+        boolean sameName = getName().equals(other.getName());
+        boolean sameDate = start.compareTo(other.start) == 0;
+        if (sameName && sameDate) {
+            return 0;
+        } else {
+            return start.compareTo(other.start);
+        }
     }
 }

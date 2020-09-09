@@ -18,10 +18,14 @@ public class CompleteCommand extends Command {
      */
     @Override
     public boolean execute(String input) throws DukeException {
-        Task task = tm.markDone(Integer.parseInt(input));
-        setResponse(ui.taskCompleted(task));
-        setDone();
-        return true;
+        try {
+            Task task = tm.markDone(Integer.parseInt(input));
+            setResponse(ui.taskCompleted(task));
+            setDone();
+            return true;
+        } catch (NumberFormatException e) {
+            throw new DukeException("I couldn't understand your input. Please give a number");
+        }
     }
 
     /**

@@ -48,7 +48,7 @@ public class EventCommand extends Command {
             break;
         case 2:
             setEventEndTime(input);
-            tm.add(new Event(eventName, eventStartTime, eventEndTime));
+            tm.addEvent(new Event(eventName, eventStartTime, eventEndTime));
             setResponse("Event added"); // TODO: refactor this
             setEventEndTime(input);
             setDone();

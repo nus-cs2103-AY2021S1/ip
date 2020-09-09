@@ -11,7 +11,7 @@ import java.util.Date;
  * <code>Deadline</code> inherits from <code>Task</code>
  * and is used to represent a deadline.
  */
-public class Deadline extends Task {
+public class Deadline extends Task implements Comparable<Deadline> {
     private Date dueDate;
 
     /**
@@ -40,7 +40,7 @@ public class Deadline extends Task {
     public String saveText() {
         String completeStatus = super.isCompleted() ? "1" : "0";
         DateFormat dateFormat = new SimpleDateFormat("dd MM yyyy");
-;        return "D," + completeStatus + "," + super.getName() + "," + dateFormat.format(dueDate);
+        return "D," + completeStatus + "," + super.getName() + "," + dateFormat.format(dueDate);
     }
 
     /**
@@ -51,5 +51,24 @@ public class Deadline extends Task {
     public String toString() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return String.format("[D]%s (due: %s)", super.toString(), dateFormat.format(dueDate));
+    }
+
+    /**
+     * Compares with another deadline. Both are equal if they have the same name and same date.
+     * Else, they will be compared according to their date.
+     * @param other the other deadline to be compared with.
+     * @return a value 0 if both deadlines are equal;
+     * a value greater than 0 if this Deadline is later than the Deadline argument;
+     * a value less than 0 if this deadline is before the Deadline argument.
+     */
+    @Override
+    public int compareTo(Deadline other) {
+        boolean sameName = getName().equals(other.getName());
+        boolean sameDate = dueDate.compareTo(other.dueDate) == 0;
+        if (sameName && sameDate) {
+            return 0;
+        } else{
+            return dueDate.compareTo(other.dueDate);
+        }
     }
 }

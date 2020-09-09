@@ -1,9 +1,6 @@
 package duke;
 
-import duke.tasks.Deadline;
-import duke.tasks.Event;
-import duke.tasks.Task;
-import duke.tasks.Todo;
+import duke.tasks.*;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -28,45 +25,58 @@ public class Storage {
      * @return a list of tasks as a <code>List</code>
      * @throws DukeException if there is an IOexception while creating a new empty file
      */
-    public List<Task> load() throws DukeException {
-        List<Task> tasks = new ArrayList<>();
+    public TaskManager load(TaskManager tm) throws DukeException {
+        List<Todo> todos = new ArrayList<>();
+        List<Deadline> deadlines = new ArrayList<>();
+        List<Event> events = new ArrayList<>();
 
         try {
             File f = new File(TASKS_TEXT_FILE_PATH);
             Scanner sc = new Scanner(f);
-            
+
             while (sc.hasNext()) {
                 String taskInfo = sc.nextLine();
                 String[] taskArr = taskInfo.split(",");
-                Task task;
                 switch (taskArr[0]) {
                 case "T":
-                    task = new Todo(taskArr[2]);
+                    Todo todo = new Todo(taskArr[2]);
+                    if (isMarkedDone(taskArr)) {
+                        todo.setCompleted();
+                    }
+                    todos.add(todo);
                     break;
                 case "D":
-                    task = new Deadline(taskArr[2], taskArr[3]);
+                    Deadline deadline = new Deadline(taskArr[2], taskArr[3]);
+                    if (isMarkedDone(taskArr)) {
+                        deadline.setCompleted();
+                    }
+                    deadlines.add(deadline);
                     break;
                 case "E":
-                    task = new Event(taskArr[2], taskArr[3], taskArr[4]);
+                    Event event = new Event(taskArr[2], taskArr[3], taskArr[4]);
+                    if (isMarkedDone(taskArr)) {
+                        event.setCompleted();
+                    }
+                    events.add(event);
                     break;
                 default:
                     throw new DukeException("Unrecognised category character when loading from tasks.txt");
                 }
-                if (isMarkedDone(taskArr)) {
-                    task.setCompleted();
-                }
-                tasks.add(task);
             }
+
+            tm.initialiseTodos(todos);
+            tm.initialiseDeadlines(deadlines);
+            tm.initialiseEvents(events);
+
             sc.close();
-            return tasks;
+            return tm;
         } catch (FileNotFoundException e) {
-            // TODO: Customise font
             try {
                 System.out.println("File \"tasks.txt\" does not exist. Attempting to create one for you.");
                 File file = new File(TASKS_TEXT_FILE_PATH);
                 file.createNewFile();
                 System.out.println("Successfully created file tasks.txt");
-                return tasks;
+                return tm;
             } catch (IOException io) {
                 throw new DukeException(io.getMessage());
             }
@@ -80,6 +90,7 @@ public class Storage {
     /**
      * Writes the list of tasks to the file "tasks.txt".
      * @param fileContent the comma seperated string information to be written to the file
+     * @throws DukeException if something went wrong while saving to the file.
      */
     public static void writeTasksFile(String fileContent) throws DukeException {
         try {
