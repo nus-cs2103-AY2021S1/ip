@@ -9,6 +9,9 @@ import duke.task.Task;
 
 public class TagCommand extends Command {
 
+    /**
+     * Constructs a TagCommand.
+     */
     public TagCommand() {
         names = new String[] { "tag" };
         description = "Tags a task in the task list with some string.\nFormat: " + CommandFormat.TAG_CMD_FORMAT;

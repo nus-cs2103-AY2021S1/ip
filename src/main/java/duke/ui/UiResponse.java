@@ -166,6 +166,10 @@ public class UiResponse {
         UiPrint.drawLine(UiPrint.STAR, 50);
     }
 
+    /**
+     * Reports that the task has been tagged.
+     * @param task the tagged task
+     */
     public void reportTagTask(Task task) {
         UiPrint.drawLine(UiPrint.STAR, 50);
 

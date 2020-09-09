@@ -149,6 +149,10 @@ public class GuiResponse {
         }
     }
 
+    /**
+     * Reports that the task has been tagged.
+     * @param task the tagged task
+     */
     public void reportTagTask(Task task) {
         resetResponse();
 
