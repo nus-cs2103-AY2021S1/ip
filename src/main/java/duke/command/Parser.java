@@ -86,10 +86,11 @@ public class Parser {
     private static String addTodo(String todo, Ui ui, Storage storage) {
         try {
             TaskList tasks = storage.load();
+            assert tasks != null;
 
             Todo newTodoTask = new Todo(todo);
             tasks.addNewTask(newTodoTask);
-            storage.save(tasks, ui);
+            storage.save(tasks);
             return ui.showAddedNewTaskMessage(newTodoTask, storage.load());
         } catch (StorageException e) {
             // Unable to load or save task list
@@ -107,6 +108,8 @@ public class Parser {
     private static String addDeadline(String deadline, Ui ui, Storage storage) {
         try {
             TaskList tasks = storage.load();
+            assert tasks != null;
+
             String[] deadlineInformation;
 
             // Retrieve deadline description and deadline date
@@ -116,7 +119,7 @@ public class Parser {
 
             Deadline newDeadlineTask = new Deadline(description, deadlineDate);
             tasks.addNewTask(newDeadlineTask);
-            storage.save(tasks, ui);
+            storage.save(tasks);
             return ui.showAddedNewTaskMessage(newDeadlineTask, storage.load());
         } catch (StorageException e) {
             // Unable to load or save task list
@@ -134,6 +137,8 @@ public class Parser {
     private static String addEvent(String event, Ui ui, Storage storage) {
         try {
             TaskList tasks = storage.load();
+            assert tasks != null;
+
             String[] eventInformation;
 
             // Retrieve event description and event date
@@ -143,7 +148,7 @@ public class Parser {
 
             Event newEventTask = new Event(description, eventDate);
             tasks.addNewTask(newEventTask);
-            storage.save(tasks, ui);
+            storage.save(tasks);
             return ui.showAddedNewTaskMessage(newEventTask, storage.load());
         } catch (StorageException e) {
             // Unable to load or save task list
@@ -161,16 +166,19 @@ public class Parser {
     private static String deleteTask(String taskToDelete, Ui ui, Storage storage) throws TaskDoesNotExistException {
         try {
             TaskList tasks = storage.load();
+            assert tasks != null;
+
             int index = parseTaskIndex(taskToDelete);
 
             // Checks if index is valid
             if (index > 0 && index <= tasks.getTotalNumberOfTasks()) {
                 Task deletedTask = tasks.getTask(index);
                 tasks.deleteTask(index);
-                storage.save(tasks, ui);
+                storage.save(tasks);
                 return ui.showDeleteTaskMessage(deletedTask, storage.load());
             // If task specified does not exist in the task list
             } else {
+                assert index < 0 || index > tasks.getTotalNumberOfTasks();
                 throw new TaskDoesNotExistException(index);
             }
 
@@ -209,6 +217,8 @@ public class Parser {
             String taskToMarkDone, Ui ui, Storage storage) throws TaskDoesNotExistException {
         try {
             TaskList tasks = storage.load();
+            assert tasks != null;
+
             int index = parseTaskIndex(taskToMarkDone);
 
             // Checks if index is valid
@@ -219,9 +229,10 @@ public class Parser {
                 if (doneTask.hasDoneStatus()) {
                     return ui.showAlreadyMarkDoneMessage(doneTask);
                 } else {
+                    assert !doneTask.hasDoneStatus();
                     doneTask.markAsDone();
                     tasks.updateTaskList(doneTask, index);
-                    storage.save(tasks, ui);
+                    storage.save(tasks);
                     return ui.showMarkDoneMessage(doneTask);
                 }
 
@@ -246,6 +257,8 @@ public class Parser {
     private static String searchTaskListForKeyword(String keyword, Ui ui, Storage storage) {
         try {
             TaskList tasks = storage.load();
+            assert tasks != null;
+
             List<Task> tasksContainingKeyword = new ArrayList<>();
 
             for (int i = 1; i <= tasks.getTotalNumberOfTasks(); i++) {

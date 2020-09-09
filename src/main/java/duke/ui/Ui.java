@@ -40,18 +40,18 @@ public class Ui {
      * @param tasks Task list saved in the local storage.
      */
     public String showTaskList(TaskList tasks) {
-        String output = CHATBOT;
+        String output = CHATBOT + SKIPLINE;
 
         // If list is empty
         if (tasks.getTotalNumberOfTasks() == 0) {
-            output += SKIPLINE + "List is empty :(";
+            output += "List is empty :(";
         }
 
         if (tasks.getTotalNumberOfTasks() > 0) {
-            output += SKIPLINE + "Your current task list is as follows:" + SKIPLINE + tasks.toString();
+            output += "Your current task list is as follows:" + SKIPLINE + tasks.toString();
         }
+        assert !output.equals(CHATBOT + SKIPLINE);
         return output;
-        // System.out.println(USER);
     }
 
     /**
@@ -61,18 +61,18 @@ public class Ui {
      * @param keyword Keyword found in the filtered tasks.
      */
     public String showFilteredByKeywordTaskList(TaskList tasks, String keyword) {
-        String output = CHATBOT;
+        String output = CHATBOT + SKIPLINE;
 
         if (tasks.getTotalNumberOfTasks() == 0) {
-            output += SKIPLINE + "No tasks matched with '" + keyword + "' :(";
+            output += "No tasks matched with '" + keyword + "' :(";
         }
 
         if (tasks.getTotalNumberOfTasks() > 0) {
-            output += SKIPLINE + "Here are the tasks that matched with '" + keyword + "':" + SKIPLINE
+            output += "Here are the tasks that matched with '" + keyword + "':" + SKIPLINE
                     + tasks.toString();
         }
+        assert !output.equals(CHATBOT + SKIPLINE);
         return output;
-        // System.out.println(USER);
     }
 
     /**
@@ -82,17 +82,14 @@ public class Ui {
      */
     public String loadTaskList(TaskList tasks) {
         String output = CHATBOT + SKIPLINE + "Here is your current task list:";
-        // System.out.println("Here is your current task list:");
         if (tasks.getTotalNumberOfTasks() == 0) {
             output += SKIPLINE + "List is empty :(" + SKIPLINE;
-            // System.out.print("List is empty :(");
-            // System.out.println(SKIPLINE);
         }
 
         if (tasks.getTotalNumberOfTasks() > 0) {
-            // System.out.println(tasks);
-            output += tasks.toString();
+            output += SKIPLINE + tasks.toString();
         }
+        assert !output.equals(CHATBOT + SKIPLINE + "Here is your current task list:");
         return output;
     }
 
@@ -120,7 +117,6 @@ public class Ui {
         output += newTask.toString() + SKIPLINE;
         output += "You now have " + tasks.getTotalNumberOfTasks() + " task(s) in your list";
         output += SKIPLINE + showSuccessfullySavedMessage();
-        // System.out.println(USER);
         return output;
     }
 
