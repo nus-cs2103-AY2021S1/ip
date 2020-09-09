@@ -5,7 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class ParserTest {
     @Test
     void parseDone() throws DukeException {
-        int result = Parser.parseDone("done 2");
+        int result = Parser.parseIdentifier("done 2");
         assertEquals(result, 1);
     }
 

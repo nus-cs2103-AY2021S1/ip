@@ -11,16 +11,19 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return "[D]"
+        String repr = "[D]"
                 + super.toString()
                 + " (by: "
                 + this.taskBy.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
                 + ")";
+        for (String tag : tags) {
+            repr += " #" + tag;
+        }
+        return repr;
     }
 
-    @Override
     public String toFileFormat() {
-        return "D|" + (this.isDone ? "1" : "0") + "|" + this.taskName + "|" + this.taskBy;
+        return "D|" + (this.isDone ? "1" : "0") + "|" + this.taskName + "|" + this.taskBy + "|" + tagsFileFormat();
     }
 
     /**
@@ -30,8 +33,14 @@ public class Deadline extends Task {
      */
     static Deadline fromFileFormat(String fileFormatString) {
         String[] tokens = fileFormatString.split("\\|");
-        assert tokens.length == 4;
         Deadline loaded = new Deadline(tokens[2], LocalDate.parse(tokens[3]));
+        if (tokens.length >= 5) {
+            String[] tags = tokens[4].split("#");
+            for (String tag : tags) {
+                loaded.addTag(tag);
+            }
+        }
+
         if (tokens[1].equals("1")) {
             loaded.setDone();
         }

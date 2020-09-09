@@ -130,14 +130,38 @@ public class Duke extends Application {
             // Mark the identified task as done
             case "done":
                 try {
-                    String message = taskList.setDone(Parser.parseDone(userInput));
+                    String message = taskList.setDone(Parser.parseIdentifier(userInput));
                     storage.save(taskList);
                     return message;
                 } catch (DukeException | IOException e) {
                     return "Sorry, I can't mark that as done! " + e.getMessage();
                 }
 
-            // Delete a task
+            // Mark the identified task with a tag
+            case "tag":
+                try {
+                    String tag = Parser.parseTag(userInput);
+                    int id = Parser.parseIdentifier(userInput);
+                    String message = taskList.tagTask(id, tag);
+                    storage.save(taskList);
+                    return message;
+                } catch (DukeException | IOException e) {
+                    return "Sorry, I can't tag that! " + e.getMessage();
+                }
+
+            // Unmark the identified task from the tag
+            case "untag":
+                try {
+                    String tag = Parser.parseTag(userInput);
+                    int id = Parser.parseIdentifier(userInput);
+                    String message = taskList.untagTask(id, tag);
+                    storage.save(taskList);
+                    return message;
+                } catch (DukeException | IOException e) {
+                    return  "Sorry, I can't untag that! " + e.getMessage();
+                }
+
+                // Delete a task
             case "delete":
                 try {
                     String message = taskList.deleteTask(Parser.parseDelete(userInput));
