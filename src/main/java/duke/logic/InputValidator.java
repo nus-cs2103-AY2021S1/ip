@@ -22,9 +22,8 @@ public class InputValidator {
             throws InvalidInstructionLengthException {
         if ((instrLen == 1) == isLenOne) { // i want instrLen == 1 to be isOne
             return true;
-        } else {
-            throw new InvalidInstructionLengthException();
         }
+        throw new InvalidInstructionLengthException();
     }
 
     /**
@@ -56,12 +55,9 @@ public class InputValidator {
         if (instructionArray.length == 2) {
             if (isNumeric(instructionArray[1])) {
                 return true;
-            } else {
-                throw new InvalidInstructionFormatException();
             }
-        } else {
-            throw new InvalidInstructionLengthException();
         }
+        throw new InvalidInstructionLengthException();
     }
 
 
@@ -79,19 +75,15 @@ public class InputValidator {
      * @throws InvalidInstructionFormatException If index does not exist.
      * @throws MissingFieldException             If validation fails.
      */
-    public static boolean validateDescriptionAndDateTime(String[] instructionArray, int index)
+    public static boolean validateDescription(String[] instructionArray, int index)
             throws MissingFieldException, InvalidInstructionFormatException {
 
         if (index == -1) { // does not exist
             throw new InvalidInstructionFormatException();
         }
 
-        String atDescription = CommonMethod.mergeArray(instructionArray, 1, index);
-        if (atDescription.equals("")) {
-            throw new MissingFieldException();
-        }
-
-        if (instructionArray.length < index + 3) { // account for index + date + time
+        String description = CommonMethod.mergeArray(instructionArray, 1, index);
+        if (description.equals("")) {
             throw new MissingFieldException();
         }
         return true;
@@ -110,7 +102,11 @@ public class InputValidator {
      * @throws InvalidInstructionFormatException If validation fails
      */
     public static boolean validateDateAndTime(String[] instructionArray, int index)
-            throws InvalidInstructionFormatException {
+            throws InvalidInstructionFormatException, MissingFieldException {
+
+        if (instructionArray.length < index + 3) { // account for index + date + time
+            throw new MissingFieldException();
+        }
 
         String regex = "/"; // regex to split DateTime format
         String date = instructionArray[index + 1];
@@ -151,7 +147,8 @@ public class InputValidator {
      * @param second Integer denoting the second
      * @throws InvalidInstructionFormatException if format is wrong
      */
-    private static void validateTimeFormat(int hour, int minute, int second) throws InvalidInstructionFormatException {
+    private static void validateTimeFormat(int hour, int minute, int second)
+            throws InvalidInstructionFormatException {
         // input validation for time
         if (hour < 0 || hour > 23 || minute < 0 || minute > 59 || second < 0 || second > 59) {
             throw new InvalidInstructionFormatException();
