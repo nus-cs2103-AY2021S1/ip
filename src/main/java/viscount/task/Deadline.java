@@ -54,4 +54,21 @@ public class Deadline extends Task {
         return String.format(Deadline.STRING_FORMAT, getStatusIcon(), description,
                 dueDate.format(Parser.OUTPUT_DATE_TIME_FORMATTER));
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (o == null || o.getClass() != this.getClass()) {
+            return false;
+        }
+
+        Deadline deadline = (Deadline) o;
+        boolean hasSameDescription = this.description.equals(deadline.description);
+        boolean hasSameDone = this.isDone == deadline.isDone;
+        boolean hasSameDueDate = this.dueDate.isEqual(deadline.dueDate);
+        return hasSameDescription && hasSameDone && hasSameDueDate;
+    }
 }

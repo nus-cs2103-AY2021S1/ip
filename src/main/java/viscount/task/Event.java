@@ -54,4 +54,21 @@ public class Event extends Task {
         return String.format(Event.STRING_FORMAT, getStatusIcon(), description,
                 eventTime.format(Parser.OUTPUT_DATE_TIME_FORMATTER));
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (o == null || o.getClass() != this.getClass()) {
+            return false;
+        }
+
+        Event event = (Event) o;
+        boolean hasSameDescription = this.description.equals(event.description);
+        boolean hasSameDone = this.isDone == event.isDone;
+        boolean hasSameEventTime = this.eventTime.isEqual(event.eventTime);
+        return hasSameDescription && hasSameDone && hasSameEventTime;
+    }
 }

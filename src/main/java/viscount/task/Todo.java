@@ -37,4 +37,20 @@ public class Todo extends Task {
     public String toString() {
         return String.format(Todo.STRING_FORMAT, getStatusIcon(), description);
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (o == null || o.getClass() != this.getClass()) {
+            return false;
+        }
+
+        Todo todo = (Todo) o;
+        boolean hasSameDescription = this.description.equals(todo.description);
+        boolean hasSameDone = this.isDone == todo.isDone;
+        return hasSameDescription && hasSameDone;
+    }
 }
