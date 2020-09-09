@@ -1,4 +1,3 @@
-hi
 todo read book
 todo write review
 deadline return book /by Friday
