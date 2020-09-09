@@ -12,6 +12,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
+import java.nio.charset.StandardCharsets;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 
@@ -76,7 +77,7 @@ public class DukeTest {
         byte[] data = new byte[(int) file.length()];
         fis.read(data);
         fis.close();
-        String expectedOutput = new String(data, "UTF-8");
+        String expectedOutput = new String(data, StandardCharsets.UTF_8);
 
         String actualOutput = OUT_CONTENT.toString();
 

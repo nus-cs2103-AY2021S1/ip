@@ -52,4 +52,12 @@ public class DeadlineTest {
         String expected2 = "[D][\u2713] This is a test on toString. (by: Feb 3 2022 08:00 AM)";
         assertEquals(expected2, deadline.toString());
     }
+
+    @Test
+    public void isDueInNDays() throws InvalidDeadlineException {
+        String description = "This is a test on isDueInNDays /by 2021-09-08 08:00";
+        Deadline deadline = Deadline.createDeadline(description);
+        assertTrue(deadline.isDueInNDays(365));
+        assertFalse(deadline.isDueInNDays(5));
+    }
 }

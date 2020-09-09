@@ -44,8 +44,6 @@ public class Deadline extends Task {
             String time12h = DukeDateTime.to12HTimeFormat(dateTime[1]);
             return new Deadline(desc, time12h, date);
         } catch (DateTimeParseException | NumberFormatException e) {
-            System.err.println(dateTime[0]);
-            System.err.println(dateTime[1]);
             throw new InvalidDeadlineException();
         }
     }

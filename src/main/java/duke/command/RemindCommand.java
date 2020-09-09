@@ -23,7 +23,9 @@ public class RemindCommand {
     public static String execute(String in, TaskList taskList) throws InvalidCommandException {
         try {
             int numberDays = Integer.parseInt(in.replaceFirst("remind ", ""));
-
+            if (numberDays < 0) {
+                throw new NumberFormatException();
+            }
             ArrayList<String> filteredTasks = new ArrayList<>();
             int len = taskList.size();
             Stream

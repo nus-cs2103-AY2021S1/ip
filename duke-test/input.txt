@@ -3,6 +3,7 @@ todo wake up
 deadline brush teeth /by 2020-08-25 10:00
 todo
 event online lecture /at 2020-08-25 12:00
+remind 7
 event some event without event time
 deadline submit assignment /by 2020-08-29 17:00
 deadline invalid date time format /by 2020-30-29 1700
@@ -13,11 +14,16 @@ find lecture
 due 2020-08-25
 delete 1
 event go for a run /at 2020-08-25 20:00
+event end of semester /at 2020-12-06 20:00
 delete abc
 delete 10
 due invalid date
 todo eat lunch
+deadline apply for internship /by 2020-12-04 23:59
 event project meeting /at 2020-08-30 20:00
+remind 150
+remind abc
+remind -5
 list
 find run
 some invalid command

@@ -1,7 +1,9 @@
 package duke.util;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
@@ -71,5 +73,12 @@ public class DukeDateTimeTest {
             String time1 = "01:00";
             DukeDateTime.to24HTimeFormat(time1);
         });
+    }
+
+    @Test
+    public void isWithinNDays() {
+        assertTrue(DukeDateTime.isWithinNDays(LocalDate.now(), 0));
+        assertTrue(DukeDateTime.isWithinNDays(LocalDate.now().plusDays(5), 5));
+        assertFalse(DukeDateTime.isWithinNDays(LocalDate.now().minusDays(1), 5));
     }
 }

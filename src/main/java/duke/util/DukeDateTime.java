@@ -83,9 +83,9 @@ public class DukeDateTime {
         LocalDate now = LocalDate.now();
         LocalDate nDaysLater = now.plusDays(n);
         boolean isNow = date.equals(now);
-        boolean isDueBefore = date.isBefore(nDaysLater);
+        boolean isDueWithin = date.isBefore(nDaysLater) || date.equals(nDaysLater);
         boolean isActive = date.isAfter(now);
-        boolean isDue = isNow || (isDueBefore && isActive);
+        boolean isDue = isNow || (isDueWithin && isActive);
         return isDue;
     }
 }

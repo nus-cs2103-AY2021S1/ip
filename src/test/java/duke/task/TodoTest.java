@@ -3,6 +3,7 @@ package duke.task;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 
@@ -48,5 +49,12 @@ public class TodoTest {
 
         String expected2 = "[T][\u2713] This is a test on toString.";
         assertEquals(expected2, todo.toString());
+    }
+
+    @Test
+    public void isDueInNDays() throws InvalidTodoException {
+        String description = "This is a test on isDueInNDays.";
+        Todo todo = Todo.createTodo(description);
+        assertTrue(todo.isDueInNDays(5));
     }
 }
