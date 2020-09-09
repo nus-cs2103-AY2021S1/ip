@@ -56,4 +56,8 @@ public class Task {
     public String getTaskInfo() {
         return taskInfo;
     }
+
+    public String getDescription() {
+        return description;
+    }
 }
