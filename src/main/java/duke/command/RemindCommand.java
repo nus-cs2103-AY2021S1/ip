@@ -14,7 +14,7 @@ import duke.time.DateTime;
 public class RemindCommand extends Command {
 
     /**
-     * Filter all <code>Deadline</code>s from <code>taskManager</code> with date set to today, as returned by
+     * Filter all not done <code>Deadline</code>s from <code>taskManager</code> with date set to today, as returned by
      * <code>DateTime.getToday()</code>, then reminds the user about them.
      * Note: Only <code>DateTime</code> dated deadlines can be filtered. If the <code>Deadline</code> is
      * initialized with a <code>TimePoint</code> that relies on a description, it will not be filtered.
@@ -28,9 +28,10 @@ public class RemindCommand extends Command {
 
         DateTime date = DateTime.getToday();
 
-        // Get all deadlines due on date
+        // Get all deadlines due on date that have not been completed
         TaskManager deadlines = new TaskManager(taskManager
                 .filter(task -> task instanceof Deadline)
+                .filter(task -> !task.getDoneStatus())
                 .getAllTasks()
                 .stream()
                 .map(deadline -> (Deadline) deadline)
@@ -38,9 +39,15 @@ public class RemindCommand extends Command {
                 .filter(deadline -> ((DateTime) deadline.getDeadline()).hasSameDate(date))
                 .collect(Collectors.toList()));
 
-        ui.queueMessageToDisplay("~~ REMINDER!! - These deadlines are due today! ~~~");
-        ui.queueMessageToDisplay("");
-        ui.queueMessageToDisplay(deadlines.toString());
+        if (deadlines.isEmpty()) {
+            ui.queueMessageToDisplay("You have no deadlines for today :D");
+        } else {
+            ui.queueMessageToDisplay("~~ REMINDER!! - These deadlines are due today! ~~~");
+            ui.queueMessageToDisplay("");
+            ui.queueMessageToDisplay(deadlines.toString());
+
+            assert deadlines.size() > 0;
+        }
 
     }
 

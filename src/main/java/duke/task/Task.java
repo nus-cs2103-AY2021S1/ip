@@ -51,6 +51,10 @@ public class Task {
         return this.name;
     }
 
+    public boolean getDoneStatus() {
+        return this.isDone;
+    }
+
     /**
      * Sets <code>Task</code> as done.
      */
