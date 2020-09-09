@@ -3,12 +3,6 @@ import java.util.Scanner;
 
 public class Ui {
     
-    private final Scanner sc;
-    
-    public Ui() {
-        sc = new Scanner(System.in);
-    }
-    
     public String showLoadingError() {
         return "ERROR: file does not exist.";
     }
@@ -31,22 +25,19 @@ public class Ui {
     public String showBye() {
         return "Bye. Hope to see you again soon!";
     }
-
-    public String readCommand() {
-        return sc.nextLine();
-    }
     
     public String showLine() {
         return "    ____________________________________________________________\n";
     }
     
     public String showDeletedTask(Task task, int length) {
+        assert length >= 0 : "length must not be negative";
         return "Noted. I've removed this task:\n" + task + "\n" 
                 + "Now you have " + length + " tasks in the list.\n";
     }
     
     public String showAddedTask(Task task, int length) {
-        length++;
+        assert length >= 0 : "length must not be negative";
         return "Got it. I've added this task:\n" + task + "\n"
                 + "Now you have " + length + " tasks in the list.\n";
     }
@@ -56,13 +47,16 @@ public class Ui {
     }
     
     public String showList(TaskList taskList) {
-        for (int i = 0; i < taskList.taskListLength(); i++) {
-            if (i == 0) {
-                return "Here are the tasks in your list:\n";
+        StringBuilder display = new StringBuilder();
+        if (taskList.taskListLength() == 0) {
+            return "You have no tasks!";
+        } else {
+            display.append("Here are the tasks in your list:\n");
+            for (int i = 0; i < taskList.taskListLength(); i++) {
+                Task task = taskList.getTaskList().get(i);
+                display.append(i + 1).append(". ").append(task).append("\n");
             }
-            Task task = taskList.getTaskList().get(i);
-            return (i + 1) + ". " + task + "\n";
-        }
-        return "";
+        }    
+        return display.toString();
     } 
 }
