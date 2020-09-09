@@ -7,6 +7,7 @@ public class ToDo extends Task {
 
     /**
      * Creates an instance of a ToDo task.
+     * 
      * @param description  Contents of the todo task.
      */
     public ToDo(String description) {
@@ -14,8 +15,9 @@ public class ToDo extends Task {
     }
     
     /**
-     * Returns String representation of a todo task.
-     * @return String representation of a todo task.
+     * Returns String representation of a ToDo task.
+     * 
+     * @return String representation of a ToDo task.
      */
     @Override
     public String toString() {

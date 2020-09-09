@@ -16,7 +16,13 @@ public class Duke {
     
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-    
+
+    /**
+     * Returns Duke's response to the user as a String.
+     * 
+     * @param input User's input.
+     * @return Duke's response as a String.
+     */
     public String getResponse(String input) {
         parser.parse(input);
         switch(parser.getSplitUserInput()[0].toLowerCase()) {
@@ -55,13 +61,21 @@ public class Duke {
             return Ui.printWrongInputErrorMessage();
         }
     }
-    
+
+    /**
+     * Constructor for Duke that initialises a Storage at a given directory, Parser and TaskList.
+     * 
+     * @param filePath Specified directory for Storage.
+     */
     public Duke(Path filePath) {
         this.storage = new Storage(filePath);
         this.tasks = new TaskList(storage.load());
         this.parser = new Parser();
     }
-    
+
+    /**
+     * Constructor for Duke that calls overloaded constructor with a fixed path.
+     */
     public Duke() {
         this(java.nio.file.Paths.get(System.getProperty("user.dir"), "storage", "data.txt"));
     }

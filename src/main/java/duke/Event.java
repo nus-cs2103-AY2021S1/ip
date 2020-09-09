@@ -11,7 +11,7 @@ import java.util.Date;
 public class Event extends Task {
     private LocalDate date;
     private Date time = null;
-    SimpleDateFormat timeFormatter = new SimpleDateFormat("h:mm a");
+    private SimpleDateFormat timeFormatter = new SimpleDateFormat("h:mm a");
     private DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("MMM d yyyy");
 
     /**
@@ -19,7 +19,7 @@ public class Event extends Task {
      * @param description  Contents of the event task in the format "deadline XXX /by yyyy-mm-dd HH:mm".
      * @throws DukeException  If format of date and/or time given is not yyyy-mm-dd HH:mm.
      */
-    public Event(String description) throws DukeException{
+    public Event(String description) throws DukeException {
         super(description.split("/on ")[0]);
         try {
             String[] dateAndTime = description.split("/on ")[1].split(" ");
