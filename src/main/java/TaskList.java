@@ -9,15 +9,15 @@ public class TaskList {
         this.tasks = new ArrayList<>();
     }
 
-    TaskList(ArrayList<Task> tasks) {
+    public TaskList(ArrayList<Task> tasks) {
         this.tasks = tasks;
     }
 
-    protected int size() {
+    public int size() {
         return tasks.size();
     }
 
-    protected Task get(int i) {
+    public Task get(int i) {
         return tasks.get(i);
     }
 

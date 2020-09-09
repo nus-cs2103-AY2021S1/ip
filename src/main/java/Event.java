@@ -14,8 +14,13 @@ public class Event extends Task {
     }
 
     @Override
+    public String toString() {
+        return "[E][" + getStatusIcon()
+                + "]" + description + "(at:" + time + ")";
+    }
+
+    @Override
     public void printDescription() {
-        System.out.println("[E][" + getStatusIcon()
-                + "]" + description + "(at:" + time + ")");
+        System.out.println(toString());
     }
 }
