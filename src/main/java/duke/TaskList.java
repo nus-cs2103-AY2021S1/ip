@@ -85,6 +85,17 @@ public class TaskList {
     }
 
     /**
+     *
+     * @param index
+     * @param tagDescription
+     */
+    public void tagItem(int index, String tagDescription) {
+        String task = lines.get(index);
+        String taggedTask = task + " #" + tagDescription;
+        lines.set(index, taggedTask);
+    }
+
+    /**
      * Finds all tasks that contains the keyword
      *
      * @param keyword The keyword that we want our resulting tasks to have

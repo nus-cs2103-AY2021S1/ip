@@ -96,6 +96,18 @@ public class Ui {
     }
 
     /**
+     * returns a statement confirming that a task has been tagged
+     *
+     * @param task the task string representing the tagged task
+     * @return the string representing the message shown upon tagging a task
+     */
+    public static String taggedTask(String task) {
+        String message = divider + "Noted. The following task has been tagged.";
+        message = message + task + "\n" + divider + "\n";
+        return message;
+    }
+
+    /**
      * returns a statement confirming that a task has been deleted, as well as the number of tasks left.
      *
      * @param task The task string representing the task that was deleted.
@@ -103,7 +115,7 @@ public class Ui {
      * @return the string representing the deleted task.
      */
     public static String deletedTask(String task, int numberOfItems) {
-        String message = divider + "Noted, the task has been deleted\n";
+        String message = divider + "Noted, the following task has been deleted\n";
         message = message + task + "\n" + divider + "\n";
         message = message + "Now you have " + numberOfItems + " tasks in the list.";
         return message;
