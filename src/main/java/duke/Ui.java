@@ -83,7 +83,7 @@ public class Ui {
     }
 
     /**
-     * Renders the all tasks from the TaskList onto the console.
+     * Renders all tasks from the TaskList onto the console.
      * @param taskList The TaskList which contains all the tasks to be displayed on the console.
      */
     public String printAllTasks(TaskList taskList) {
@@ -94,5 +94,13 @@ public class Ui {
         out.println(message);
     }
 
-
+    /**
+     * Returns the undo confirmation as a string.
+     * @param taskList The tasklist that contains the previous state.
+     * @return Message to be displayed in the program.
+     */
+    public String printUndoConfirmation(TaskList taskList) {
+        return "Nice! I've undid your previous action! \n"
+                + taskList.getAllTasksAsString();
+    }
 }

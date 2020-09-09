@@ -39,6 +39,8 @@ public class Parser {
                 return processDeadline(input);
             } else if (input.indexOf("todo") == 0) {
                 return processTodo(input);
+            } else if (input.indexOf("undo") == 0) {
+                return processUndo();
             } else {
                 throw new DukeException(" OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
@@ -57,8 +59,7 @@ public class Parser {
             throw new DukeException("OOPS!!! Please specify a task to mark as complete.");
         } else {
             int taskIndex = Integer.parseInt(input.substring(5)); // this is not corrected for 0 index
-            Task completedTask = taskList.getTask(taskIndex);
-            completedTask.markAsDone();
+            Task completedTask = taskList.markTaskComplete(taskIndex);
 
             return ui.printMarkTaskCompleteConfirmation(completedTask);
         }
@@ -136,5 +137,10 @@ public class Parser {
             taskList.addTask(newTask);
             return ui.printAddTaskConfirmation(newTask, taskList);
         }
+    }
+
+    private String processUndo() throws DukeException {
+        taskList.undo();
+        return ui.printUndoConfirmation(taskList);
     }
 }
