@@ -132,7 +132,7 @@ public class Ui {
      */
     public String find(String word, TaskList taskList) {
         assert(!word.isEmpty());
-        assert(taskList.size() > 0);
+        assert(taskList.getSize() > 0);
         TaskList list = new TaskList();
         for (int i = 1; i <= taskList.getSize(); i++) {
             Task task = taskList.getTask(i);
