@@ -62,7 +62,7 @@ public class Parser {
     }
 
     // todo need change: right now it's to add notes only but might need to change for editing notes
-    public static Command parseNotesCommand(String command) throws UnknownInputException {
+    public static Command parseNotesCommand(String command) throws UnknownInputException, EmptyBodyException {
         Validator.requireNonNull(command);
 
         String[] words = command.split(" ", 2);
@@ -82,10 +82,12 @@ public class Parser {
             rawParameters.forEach(parameter -> {
                 String[] rawSplitParameters = parameter.split("/", 2);
 
-                String name = rawSplitParameters[0];
-                Object value = rawSplitParameters[1];
+                if (rawSplitParameters.length > 1) {
+                    String name = rawSplitParameters[0];
+                    Object value = rawSplitParameters[1];
 
-                parameters.put(name, value);
+                    parameters.put(name, value);
+                }
             });
 
             // Parsing command parameters
@@ -124,8 +126,14 @@ public class Parser {
             }
         }
         case "list": {
-            System.out.println("Notes list");
             return new ListNotesCommand();
+        }
+        case "delete": {
+            if (remaining.equals("")) {
+                throw new EmptyBodyException("note number", "note");
+            }
+            int taskNumber = Integer.parseInt(remaining);
+            return new DeleteNoteCommand(taskNumber);
         }
         default: {
             throw new UnknownInputException("Unknown notes command: " + firstWord); //todo change to duke exceptions
