@@ -77,6 +77,9 @@ public class Parser {
         if (isInsufficientArguments || isEmptyArgument) {
             throw new PandaBotInsufficientArgumentException();
         }
+
+        assert cmd[cmd.length - 1].length() > 0 : "Command arguments should not be empty.";
+        assert cmd.length == len : "Command arguments should match the number of arguments required.";
     }
 
     private static String[] obtainDescription(String description, String separator) throws PandaBotInsufficientArgumentException {
