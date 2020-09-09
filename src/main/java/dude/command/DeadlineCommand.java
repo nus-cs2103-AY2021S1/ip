@@ -44,6 +44,12 @@ public class DeadlineCommand extends Command {
             StringBuilder uiOutput = new StringBuilder();
             LocalDate date = LocalDate.parse(by);
             Deadline current = new Deadline(description, date);
+            int findDuplicate = tasks.detectDuplicates(current);
+            if (findDuplicate != super.FALSE) {
+                uiOutput.append("Duplicate task found at position ").append(findDuplicate).append("!");
+                ui.setMessage(uiOutput.toString());
+                return;
+            }
             tasks.addTask(current);
             uiOutput.append("Got it bro, I've added this task:\n  ").append(current.toString() + "\n").append(
                     "Now you have ").append(tasks.getCount()).append(" tasks in the list.");

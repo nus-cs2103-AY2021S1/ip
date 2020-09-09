@@ -8,9 +8,8 @@ import dude.task.Task;
 /**
  * The class that handles all of the tasks while the program is running.
  */
-
-
 public class TaskList {
+    private static final int FALSE = -1;
     private List<Task> tasks;
 
     public TaskList() {
@@ -39,5 +38,14 @@ public class TaskList {
 
     public void deleteTask(int index) {
         tasks.remove(index);
+    }
+
+    public int detectDuplicates(Task task) {
+        for (int i = 0; i < tasks.size(); i++) {
+            if (task.equals(tasks.get(i))) {
+                return i + 1;
+            }
+        }
+        return FALSE;
     }
 }

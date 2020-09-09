@@ -1,5 +1,7 @@
 package dude.task;
 
+import java.io.ObjectOutputStream;
+
 /**
  * The class that contains the key functionality of a task.
  */
@@ -67,6 +69,23 @@ public class Task {
      */
     public String toSave() {
         return (isDone ? "1" : "0") + " | " + description;
+    }
+
+    /**
+     * Overrides equal to compare 2 Task objects.
+     *
+     * @return If the two objects are equal.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof Task)) {
+            return false;
+        }
+        Task task = (Task) o;
+        return task.getDescription().trim().equals(description.trim());
     }
 
     /**

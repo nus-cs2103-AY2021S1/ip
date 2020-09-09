@@ -44,6 +44,32 @@ public class DatedTask extends Task {
     }
 
     /**
+     * Returns the date of the DatedTask.
+     *
+     * @return String description.
+     */
+    public LocalDate getDate() {
+        return date;
+    }
+
+    /**
+     * Overrides equal to compare 2 Task objects.
+     *
+     * @return If the two objects are equal.
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+        if (!(o instanceof DatedTask)) {
+            return false;
+        }
+        DatedTask task = (DatedTask) o;
+        return super.equals(task) && task.getDate().equals(date);
+    }
+
+    /**
      * Returns a string representation of the task to be displayed to the user.
      *
      * @return String formatted description.

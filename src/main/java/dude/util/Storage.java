@@ -82,11 +82,11 @@ public class Storage {
                 }
                 assert temp.equals("1") || temp.equals("0") : "temp should be equals to 0 or 1";
                 if (temp[0].equals("T")) {
-                    taskList.add(new Todo(temp[2], func.apply(temp[1])));
+                    taskList.add(new Todo(temp[2].trim(), func.apply(temp[1])));
                 } else if (temp[0].equals("D")) {
-                    taskList.add(new Deadline(temp[2], func.apply(temp[1]), LocalDate.parse(temp[3])));
+                    taskList.add(new Deadline(temp[2].trim(), func.apply(temp[1]), LocalDate.parse(temp[3])));
                 } else if (temp[0].equals("E")) {
-                    taskList.add(new Event(temp[2], func.apply(temp[1]), LocalDate.parse(temp[3])));
+                    taskList.add(new Event(temp[2].trim(), func.apply(temp[1]), LocalDate.parse(temp[3])));
                 } else {
                     throw new CorruptedFileException("Sorry, the input file is corrupted.");
                 }
