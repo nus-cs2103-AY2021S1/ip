@@ -57,6 +57,7 @@ public class Parser {
                 } else {
                     Task task = taskList.tasks.get(taskNumber - 1);
                     task.markTaskAsDeleted();
+                    taskList.deleteTask(task);
                     ui.deleteTaskSuccessful(task, taskList);
                 }
             }

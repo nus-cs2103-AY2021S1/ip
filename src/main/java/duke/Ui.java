@@ -50,7 +50,6 @@ public class Ui {
         System.out.println("Ka To:");
         System.out.println(" ");
         System.out.println("This is your task list: \n");
-
         for (int i = 1; i < taskList.taskCounts + 1; i++) {
             Task task = taskList.tasks.get(i - 1);
             System.out.println("" + i + "." + task);
@@ -171,10 +170,5 @@ public class Ui {
                 System.out.println("" + i + "." + task);
             }
         }
-    }
-    public void failToLoad() {
-        System.out.println("Ka To:");
-        System.out.println(" ");
-        System.out.println("File is not found ..");
     }
 }
