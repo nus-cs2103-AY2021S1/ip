@@ -69,9 +69,11 @@ public class ToDo extends Task {
      * @return encoded task.
      */
     public String encodeTask() throws DukeException {
-        if (date == null && time == null) {
+        if (time == null) {
+            assert date == null;
             return super.encodeTask();
-        } else if (date != null && time != null) {
+        } else if (time != null) {
+            assert date != null;
             return super.encodeTask() + "|" + date + "|" + time;
         } else {
             throw new DateTimeException();
@@ -81,6 +83,7 @@ public class ToDo extends Task {
     @Override
     public String toString() {
         if (time == null) {
+            assert date == null;
             return "[" + tag + "] " + super.toString();
         } else {
             return "[" + tag + "] " + super.toString() + "\n            (by: "

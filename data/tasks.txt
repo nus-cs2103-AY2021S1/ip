@@ -1,6 +1,7 @@
 T|1|something
 D|1|that|2020-01-30|20:11
-E|1|lol|2020-10-20|20:00
 T|1|something|2020-12-31|20:21
 T|1|even more homework omg
 T|1|something
+T|1|something
+T|1|something more
