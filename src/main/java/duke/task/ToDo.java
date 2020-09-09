@@ -14,9 +14,9 @@ public class ToDo extends Task {
     }
 
     /**
-     * Encode duke.task into a String to be saved in text file.
+     * Encode task into a String to be saved in text file.
      *
-     * @return String of encoded duke.task details.
+     * @return String of encoded task details.
      */
     public String toEncoding() {
         int completedBinary = this.completed ? 1 : 0;

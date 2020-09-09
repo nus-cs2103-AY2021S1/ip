@@ -71,6 +71,12 @@ public class Parser {
             } catch (ArrayIndexOutOfBoundsException e) {
                 throw new DukeException("Please specify the keyword to find!");
             }
+        } else if (userCommand.equals("weekly")) {
+            try {
+                return new WeeklyCommand(inputSplit[1]);
+            } catch (ArrayIndexOutOfBoundsException e) {
+                throw new DukeException("Please specify your weekly task details!");
+            }
         } else {
             return new InvalidCommand();
         }

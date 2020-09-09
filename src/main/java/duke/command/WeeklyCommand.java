@@ -1,26 +1,23 @@
 package duke.command;
 
 import duke.exception.DukeException;
-
 import duke.storage.Storage;
-
-import duke.task.Event;
-
+import duke.task.WeeklyTask;
 import duke.tasklist.TaskList;
-
 import duke.ui.Ui;
 
-public class EventCommand extends Command {
-    private String eventDetails;
+public class WeeklyCommand extends Command {
+    private String taskDetails;
 
-    public EventCommand(String eventDetails) {
-        this.eventDetails = eventDetails;
+    public WeeklyCommand(String taskDetails) {
+        this.taskDetails = taskDetails;
     }
 
     /**
-     * Creates new event with date and time, adds event to TaskList then updates the Storage.
+     * Creates new weekly recurring task with date and time, adds the next instance of the task to TaskList
+     * then updates the Storage.
      *
-     * @param taskList the list of tasks.
+     * @param taskList
      * @param ui
      * @param storage
      * @return the Duke response to show user
@@ -29,15 +26,15 @@ public class EventCommand extends Command {
     @Override
     public String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
         try {
-            String[] details = this.eventDetails.split(" /at ", 2);
-            Event newEvent = new Event(details[0], details[1], false);
-            taskList.add(newEvent);
+            String[] details = this.taskDetails.split(" /every ", 2);
+            WeeklyTask newTask = new WeeklyTask(details[0], details[1], false);
+            taskList.add(newTask);
             storage.save(taskList);
             String response = "Got it. I've added this task: \n" + taskList.get(taskList.size() - 1) + "\n"
                     + "Now you have " + taskList.size() + " tasks in the list.";
             return response;
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeException("Please specify your event description and details!");
+            throw new DukeException("Please specify your recurring task details!");
         }
     }
 

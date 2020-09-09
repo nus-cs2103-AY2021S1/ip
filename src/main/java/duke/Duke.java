@@ -16,13 +16,14 @@ public class Duke {
     public static Ui ui;
     public static boolean exit;
 
-    public Duke(String filePath) {
+    public Duke() {
         this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        this.storage = new Storage();
         try {
             this.taskList = new TaskList(this.storage.load());
         } catch (DukeException e) {
             this.taskList = new TaskList();
+            ui.printResponse(e.getMessage());
         }
     }
 
@@ -47,7 +48,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("src/main/java/duke/data/duke.txt").run();
+        new Duke().run();
     }
 
     public String getResponse(String input) {
