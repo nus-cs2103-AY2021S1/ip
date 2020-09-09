@@ -12,6 +12,10 @@ public class Deadline extends Task {
         this.by = LocalDate.parse(by);
     }
 
+    public LocalDate getDueDate() {
+        return this.by;
+    }
+
     /**
      * Returns the format for permanent storage of a deadline task in file.
      * @return string format for storing

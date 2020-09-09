@@ -25,6 +25,10 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public String getDescription() {
+        return this.description;
+    }
+
     /**
      * Returns the format for permanent storage of a task in file.
      * @return string format for storing

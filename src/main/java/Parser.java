@@ -19,13 +19,12 @@ public class Parser {
             return new ExitCommand();
         } else if (fullCommand.contains("done")) {
             // done command
-
             parserScanner.skip("done");
             assert parserScanner.hasNextInt() : "Cannot read task number for done command";
             int taskNumber = parserScanner.nextInt();
             return new DoneCommand(taskNumber);
         } else if (fullCommand.contains("find")) {
-            // done command
+            // find command
             parserScanner.skip("find");
             assert parserScanner.hasNext() : "Cannot find filter word";
             String filterWord = parserScanner.next();

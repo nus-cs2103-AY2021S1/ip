@@ -15,7 +15,11 @@ public class AddCommand extends Command {
      * @param storage file storage
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        tasks.add(this.task);
-        return ui.showAddedMessage(this.task, tasks.getTotalTasks());
+        if (tasks.containsTask(this.task)) {
+            return ui.showDuplicateMessage();
+        } else {
+            tasks.add(this.task);
+            return ui.showAddedMessage(this.task, tasks.getTotalTasks());
+        }
     }
 }

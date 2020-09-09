@@ -79,6 +79,10 @@ public class Ui {
         return listMessage;
     }
 
+    public String showDuplicateMessage() {
+        return "This task has already been added to your list!";
+    }
+
     /**
      * Prints a message to say goodbye to the user with an uplifting quote.
      */

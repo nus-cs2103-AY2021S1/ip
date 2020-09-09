@@ -28,6 +28,32 @@ public class TaskList {
     }
 
     /**
+     * Checks whether the list of tasks contains a task.
+     * @param task the task to be checked.
+     * @return boolean value indicating if the list contains the task.
+     */
+    public boolean containsTask(Task task) {
+        boolean isDuplicate = false;
+        for (int i = 0; i < tasks.size(); i++) {
+            Task currTask = tasks.get(i);
+            if (currTask.getDescription().equals(task.getDescription())) {
+                if (task instanceof Deadline && currTask instanceof Deadline) {
+                    if (((Deadline) currTask).getDueDate().equals(((Deadline) task).getDueDate())) {
+                        isDuplicate = true;
+                    }
+                } else if (task instanceof Event && currTask instanceof Event) {
+                    if (((Event) currTask).getEventDate().equals(((Event) task).getEventDate())) {
+                        isDuplicate = true;
+                    }
+                } else if (task instanceof Todo){
+                    isDuplicate = true;
+                }
+            }
+        }
+        return isDuplicate;
+    }
+
+    /**
      * Deletes a task from the list of tasks.
      * @param taskNumber number of task to be deleted.
      */
