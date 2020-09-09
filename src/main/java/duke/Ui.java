@@ -13,7 +13,7 @@ public class Ui {
             + "                                                                          \n"
             + "                                                                          \n";
     private String lowerLine = "\n(¯`·._.·(¯`·._.· Zoroark ·._.·´¯)·._.·´¯)\n";
-    private String upperrLine = "    ♫♪.ılılıll|̲̅̅●̲̅̅|̲̅̅=̲̅̅|̲̅̅●̲̅̅|llılılı.♫♪\n\n";
+    private String upperrLine = "\n(¯`·._.·(¯`·._.· (0 _ 0) ·._.·´¯)·._.·´¯)\n";
     private String goodbye = " __   __   __   __   __       ___ \n"
             + "/ _` /  \\ /  \\ |  \\ |__) \\ / |__  \n" + "\\__> \\__/ \\__/ |__/ |__)  |  |___ \n"
             + "                                  ";
