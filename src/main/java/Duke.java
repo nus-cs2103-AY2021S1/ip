@@ -6,6 +6,7 @@ public class Duke {
     /**
      * Entry point of the duke program. Read from storage and creates a UI class instance.
      * Serves as intermediate between the UI and parser.
+     *
      * @param args
      * @throws DukeException
      */

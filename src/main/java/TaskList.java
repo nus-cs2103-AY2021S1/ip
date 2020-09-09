@@ -85,7 +85,7 @@ public class TaskList implements java.io.Serializable {
         if (i < 0 || i >= tasks.size()) {
             throw new DukeException("invalid task number");
         }
-        tasks.get(i).done = value;
+        tasks.get(i).isDone = value;
         Storage.store(this);
     }
 
