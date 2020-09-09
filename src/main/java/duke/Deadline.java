@@ -40,12 +40,18 @@ public class Deadline extends Task {
     public String inputStyle() {
         return "deadline " + super.inputStyle()
                 + "/by "
-                + by;
+                + by
+                + " #" + super.priority;
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: "
-                + by.format(MMM_D_YYYY) + ")";
+        if (super.priority == Priority.HIGH) {
+            return "#" + super.priority.toString() + " [D]" + super.toString() + " (by: "
+                    + by.format(MMM_D_YYYY) + ")";
+        } else {
+            return "[E]" + super.toString() + " (by: "
+                    + by.format(MMM_D_YYYY) + ")";
+        }
     }
 }

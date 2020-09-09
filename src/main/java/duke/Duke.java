@@ -108,6 +108,10 @@ public class Duke extends Application {
                 return Ui.tasksFound(tasksFound);
             case PRINT_TASKS:
                 return Ui.printTaskList(tasks.getTaskList());
+            case PRIORITIZE:
+                input = input.split(" ", 2)[1];
+                Task prioritizeTask = TaskList.prioritize(input);
+                return Ui.prioritzeTask(prioritizeTask);
             case ERROR:
                 return Ui.commandError();
             default:

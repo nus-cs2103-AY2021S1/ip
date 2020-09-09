@@ -95,6 +95,10 @@ public class Ui {
                 + "\n Now you have " + size + " tasks in the list.";
     }
 
+    public static String prioritzeTask(Task task) {
+        return "Yay I have prioritized this task:\n" + task;
+    }
+
     public static String doneTask(Task task) {
         return "Nice! This task is marked as done: \n" + task;
     }
