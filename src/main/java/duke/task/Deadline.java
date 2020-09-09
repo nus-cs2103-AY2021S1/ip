@@ -4,8 +4,6 @@ package duke.task;
  * Represents a task with a description and deadline.
  */
 public class Deadline extends Task {
-    private String deadlineDate;
-
     /**
      * Constructs a new task with the specified description and deadline.
      *
@@ -13,8 +11,7 @@ public class Deadline extends Task {
      * @param deadlineDate Deadline of task.
      */
     public Deadline(String description, String deadlineDate) {
-        super(description);
-        this.deadlineDate = deadlineDate;
+        super(description, deadlineDate);
     }
 
     /**
@@ -24,6 +21,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.deadlineDate + ")";
+        return "[D]" + super.toString() + " (by: " + this.getTime() + ")";
     }
 }

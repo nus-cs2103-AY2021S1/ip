@@ -76,6 +76,26 @@ public class Parser {
     }
 
     /**
+     * Determines is the task already exists in the task list.
+     *
+     * @param task Task to be determined if it already exists in the task list.
+     * @param tasks Task list saved in the local storage.
+     * @return True if the task is a duplicate task. Otherwise, returns false.
+     */
+    private static boolean isRepeatedTask(Task task, TaskList tasks) {
+        for (int i = 1; i <= tasks.getTotalNumberOfTasks(); i++) {
+            Task taskInTaskList = tasks.getTask(i);
+            boolean isRepeatedTask = task.equals(taskInTaskList);
+
+            if (isRepeatedTask) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
      * Adds a new todo task to the task list.
      *
      * @param todo Description of new todo task.
@@ -89,6 +109,10 @@ public class Parser {
             assert tasks != null;
 
             Todo newTodoTask = new Todo(todo);
+            if (isRepeatedTask(newTodoTask, tasks)) {
+                return ui.showTaskIsAlreadyInTaskListMessage(newTodoTask);
+            }
+
             tasks.addNewTask(newTodoTask);
             storage.save(tasks);
 
@@ -154,6 +178,11 @@ public class Parser {
             String deadlineDate = getTaskDate(deadlineInformation);
 
             Deadline newDeadlineTask = new Deadline(description, deadlineDate);
+
+            if (isRepeatedTask(newDeadlineTask, tasks)) {
+                return ui.showTaskIsAlreadyInTaskListMessage(newDeadlineTask);
+            }
+
             tasks.addNewTask(newDeadlineTask);
             storage.save(tasks);
 
@@ -183,6 +212,11 @@ public class Parser {
             String eventDate = getTaskDate(eventInformation);
 
             Event newEventTask = new Event(description, eventDate);
+
+            if (isRepeatedTask(newEventTask, tasks)) {
+                return ui.showTaskIsAlreadyInTaskListMessage(newEventTask);
+            }
+
             tasks.addNewTask(newEventTask);
             storage.save(tasks);
 
