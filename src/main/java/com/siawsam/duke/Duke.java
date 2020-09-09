@@ -10,6 +10,9 @@ public class Duke {
      * The file path for saving tasks.
      */
     static final String FILE_PATH_TASKS = "savedTasks.txt";
+    /**
+     * The file path for saving tags.
+     */
     static final String FILE_PATH_TAGS = "savedTags.txt";
     private Parser parser;
     

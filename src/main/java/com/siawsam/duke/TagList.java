@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Represents a list of {@link Tag tags}.
+ */
 public class TagList implements Serializable {
     private final List<Tag> tags = new ArrayList<>();
     
@@ -31,7 +34,15 @@ public class TagList implements Serializable {
         throw new DukeException("No such tag exists");
     }
     
-    public Tag addTaggableToTag(String tagName, Taggable taggable) throws DukeException {
+    /**
+     * Adds a {@link Taggable taggable} to a {@link Tag tag}.
+     *
+     * @param tagName The string representing the tag's name.
+     * @param taggable The taggable to add to the tag.
+     * @return The tag object corresponding to the tag name (after adding the taggable).
+     * @throws DukeException if an invalid tag is given.
+     */
+    Tag addTaggableToTag(String tagName, Taggable taggable) throws DukeException {
         Tag tag;
         if (doesTagExistInList(tagName)) {
             tag = getTagByName(tagName);
@@ -43,7 +54,13 @@ public class TagList implements Serializable {
         return tag;
     }
     
-    public void untag(Tag tag, Taggable taggable) {
+    /**
+     * Removes a {@link Taggable taggable} from a {@link Tag tag}.
+     *
+     * @param tag The tag to remove the taggable from.
+     * @param taggable The taggable to remove.
+     */
+    void untag(Tag tag, Taggable taggable) {
         tag.removeItem(taggable);
         //we don't keep tags that have no Taggables inside
         if (tag.isTagEmpty()) {

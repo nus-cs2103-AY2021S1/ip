@@ -8,7 +8,15 @@ import java.io.ObjectOutputStream;
  * Represents a class to handle write-to-disk operations.
  */
 public class Writer {
-    public static Response writeToFile(
+    /**
+     * Serializes and writes a {@link TagList tag list}  and {@link TaskList task list} to disk.
+     * @param taskList The task list to save.
+     * @param tagList The tag list to save.
+     * @param taskListPath The write path for the task list.
+     * @param tagListPath The write path for the tag list.
+     * @return A Response indicating the result of the write operation.
+     */
+    static Response writeToFile(
             TaskList taskList, TagList tagList,
             String taskListPath, String tagListPath
     ) {

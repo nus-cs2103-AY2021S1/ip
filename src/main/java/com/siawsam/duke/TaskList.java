@@ -143,6 +143,14 @@ public class TaskList implements Serializable {
         return results;
     }
     
+    /**
+     * Tags an item.
+     *
+     * @param itemIndex The index of the item in the tasklist to tag.
+     * @param tagName The name of the tag.
+     * @param tagList The tag list instance to handle the tagging.
+     * @return A Response representing the result of the tagging operation.
+     */
     Response tagItem(int itemIndex, String tagName, TagList tagList) {
         if (itemIndex > itemList.size()) {
             throw new IllegalArgumentException("Item #" + itemIndex + " does "
@@ -164,6 +172,13 @@ public class TaskList implements Serializable {
         }
     }
     
+    /**
+     * Untags an item.
+     *
+     * @param itemIndex The index of the item in the tasklist to untag.
+     * @param tagList The tag list instance to handle the untagging.
+     * @return A Response representing the result of the untagging operation.
+     */
     Response untagItem(int itemIndex, TagList tagList) {
         if (itemIndex > itemList.size()) {
             throw new IllegalArgumentException("Item #" + itemIndex + " does "

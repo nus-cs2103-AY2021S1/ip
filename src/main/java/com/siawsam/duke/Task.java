@@ -39,10 +39,18 @@ public class Task implements Serializable, Taggable {
         return taskDescription.contains(keyword);
     }
     
+    /**
+     * Adds a {@link Tag tag} to the task.
+     *
+     * @param tag The tag to add.
+     */
     public void addTag(Tag tag) {
         this.tag = tag;
     }
     
+    /**
+     * Removes the {@link Tag tag} from the task.
+     */
     public void removeTag() {
         tag = null;
     }
@@ -51,6 +59,11 @@ public class Task implements Serializable, Taggable {
         return tag;
     }
     
+    /**
+     * Checks if the task has a tag associated with it.
+     *
+     * @return True if a tag exists in the task instance, False if otherwise.
+     */
     boolean isTagged() {
         return tag != null;
     }
