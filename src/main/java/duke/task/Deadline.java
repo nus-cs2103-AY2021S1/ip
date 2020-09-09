@@ -88,6 +88,7 @@ public class Deadline extends Task {
      */
     private DateTimeFormatter chooseDateFormatter(String date) throws DukeException {
         return DateTimeFormat.getFormatterStream().filter(formatter -> {
+            // filters through stream of formatters to find one that works:
             try {
                 LocalDate.parse(date, formatter);
                 return true;
@@ -109,6 +110,7 @@ public class Deadline extends Task {
      */
     private DateTimeFormatter chooseTimeFormatter(String time) throws DukeException {
         return DateTimeFormat.getFormatterStream().filter(formatter -> {
+            // filters through stream of formatters to find one that works:
             try {
                 LocalTime.parse(time, formatter);
                 return true;
