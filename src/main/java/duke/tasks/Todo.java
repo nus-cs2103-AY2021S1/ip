@@ -1,8 +1,6 @@
 package duke.tasks;
 
 public class Todo extends Task {
-    protected boolean hasTime = false;
-
     public Todo(String description) {
         super(description);
     }
@@ -10,6 +8,7 @@ public class Todo extends Task {
     public Todo(String description, int isDone) {
         super(description, isDone);
     }
+
 
     @Override
     public String toString() {

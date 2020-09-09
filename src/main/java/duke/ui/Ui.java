@@ -16,11 +16,11 @@ public class Ui {
     }
 
     public String displayWelcome() {
-        return "Hello! I am YURINA Chan.\nWhat can I do for you? ᕕ( ᐛ )ᕗ";
+        return "Hello! I am YURINA Chan.\nWhat can I do for you? <(`▿´)>";
     }
 
     public String displayBye() {
-        return "Bye~ Hope to see you again soon! ∠( ᐛ 」∠)＿";
+        return "Bye~ Hope to see you again soon! (❛‿❛✿̶̥̥)";
     }
 
     public String displayAddTaskMessage(Task task) {
