@@ -18,6 +18,7 @@ import main.command.EventCommand;
 import main.command.ExitCommand;
 import main.command.FindCommand;
 import main.command.ListCommand;
+import main.command.Option;
 import main.command.TodoCommand;
 import main.exception.EmptyMessageException;
 import main.exception.InvalidDateException;
@@ -143,10 +144,32 @@ public class ParserTest {
         public void parse_deadlineCommand_objectAddDeadlineCommand()
                 throws StuffException {
             Command command = Parser.parse(
-                    new String[] { "deadline", "name /by 1400-1-31 1453" });
+                    new String[] { "deadline", "name", "/by", "1400-1-31", "1453" });
             assertEquals(new DeadlineCommand("name",
                             LocalDateTime.of(1400, 1, 31, 14, 53),
                             new HashSet<>()),
+                    command);
+        }
+
+        @Test
+        @DisplayName("should generate add recurring deadline object")
+        public void parse_deadlineCommandWithOptions_objectAddDeadlineCommand()
+                throws StuffException {
+            Command command = Parser.parse(
+                    new String[] {
+                        "deadline",
+                        "-rw",
+                        "name",
+                        "/by",
+                        "1400-1-31",
+                        "1453"
+                    });
+            HashSet<Option> options = new HashSet<>();
+            options.add(Option.RECURRING_WEEKLY);
+
+            assertEquals(new DeadlineCommand("name",
+                            LocalDateTime.of(1400, 1, 31, 14, 53),
+                            options),
                     command);
         }
 
@@ -155,7 +178,7 @@ public class ParserTest {
         public void parse_deadlineCommand_altDataAddDeadlineCommand()
                 throws StuffException {
             Command command = Parser.parse(
-                    new String[] { "deadline", "test /by 1285-5-3 2144" });
+                    new String[] { "deadline", "test", "/by", "1285-5-3", "2144" });
             assertEquals(new DeadlineCommand("test",
                             LocalDateTime.of(1285, 5, 3, 21, 44),
                             new HashSet<>()),
@@ -190,7 +213,9 @@ public class ParserTest {
                     InvalidDateException.class, () ->
                             Parser.parse(new String[] {
                                 "deadline",
-                                "name /by 1931-3-30"
+                                "name",
+                                "/by",
+                                "1931-3-30"
                             }));
             assertEquals("Your date needs to"
                             + " have this format:\n\"YYYY-MM-DD HHMM\"",
@@ -204,7 +229,10 @@ public class ParserTest {
                     InvalidDateException.class, () ->
                             Parser.parse(new String[] {
                                 "deadline",
-                                "name /by 1992-03 1923"
+                                "name",
+                                "/by",
+                                "1992-03",
+                                "1923"
                             }));
             assertEquals("Your date needs to"
                             + " have this format:\n\"YYYY-MM-DD\"",
@@ -218,7 +246,10 @@ public class ParserTest {
                     InvalidDateException.class, () ->
                             Parser.parse(new String[] {
                                 "deadline",
-                                "name /by 1992-03-12 12394"
+                                "name",
+                                "/by",
+                                "1992-03-12",
+                                "12394"
                             }));
             assertEquals("Your time needs to have this format:\n\"HHMM\"",
                     exception.getMessage());
@@ -231,7 +262,10 @@ public class ParserTest {
                     InvalidDateException.class, () ->
                             Parser.parse(new String[] {
                                 "deadline",
-                                "name /by abc-12-1 1923"
+                                "name",
+                                "/by",
+                                "abc-12-1",
+                                "1923"
                             }));
             assertEquals("Please check that you've entered "
                             + "the date and time correctly",
@@ -245,7 +279,10 @@ public class ParserTest {
                     InvalidDateException.class, () ->
                             Parser.parse(new String[] {
                                 "deadline",
-                                "name /by 1998-12-45 1923"
+                                "name",
+                                "/by",
+                                "1998-12-45",
+                                "1923"
                             }));
             assertEquals("Please check that you've entered"
                             + " the date and time correctly",
@@ -261,10 +298,32 @@ public class ParserTest {
         public void parse_eventCommand_objectAddEventCommand()
                 throws StuffException {
             Command command = Parser.parse(
-                    new String[] { "event", "name /at 1400-1-31 1453" });
+                    new String[] { "event", "name", "/at", "1400-1-31", "1453" });
             assertEquals(new EventCommand("name",
                             LocalDateTime.of(1400, 1, 31, 14, 53),
                             new HashSet<>()),
+                    command);
+        }
+
+        @Test
+        @DisplayName("should generate add recurring event object")
+        public void parse_deadlineCommandWithOptions_objectAddDeadlineCommand()
+                throws StuffException {
+            Command command = Parser.parse(
+                    new String[] {
+                        "event",
+                        "-ry",
+                        "name",
+                        "/at",
+                        "1400-1-31",
+                        "1453"
+                    });
+            HashSet<Option> options = new HashSet<>();
+            options.add(Option.RECURRING_YEARLY);
+
+            assertEquals(new EventCommand("name",
+                            LocalDateTime.of(1400, 1, 31, 14, 53),
+                            options),
                     command);
         }
 
@@ -273,7 +332,7 @@ public class ParserTest {
         public void parse_eventCommand_altDataAddEventCommand()
                 throws StuffException {
             Command command = Parser.parse(
-                    new String[] { "event", "test /at 1285-5-3 2144" });
+                    new String[] { "event", "test", "/at", "1285-5-3", "2144" });
             assertEquals(new EventCommand("test",
                             LocalDateTime.of(1285, 5, 3, 21, 44),
                             new HashSet<>()),
@@ -308,7 +367,9 @@ public class ParserTest {
                     InvalidDateException.class, () ->
                             Parser.parse(new String[] {
                                 "event",
-                                "name /at 1931-3-30"
+                                "name",
+                                "/at",
+                                "1931-3-30"
                             }));
             assertEquals("Your date needs to"
                             + " have this format:\n\"YYYY-MM-DD HHMM\"",
@@ -322,7 +383,10 @@ public class ParserTest {
                     InvalidDateException.class, () ->
                             Parser.parse(new String[] {
                                 "event",
-                                "name /at 1992-03 1923"
+                                "name",
+                                "/at",
+                                "1992-03",
+                                "1923"
                             }));
             assertEquals("Your date needs to have this format:\n\"YYYY-MM-DD\"",
                     exception.getMessage());
@@ -335,7 +399,10 @@ public class ParserTest {
                     InvalidDateException.class, () ->
                             Parser.parse(new String[] {
                                 "event",
-                                "name /at 1992-03-12 12394"
+                                "name",
+                                "/at",
+                                "1992-03-12",
+                                "12394"
                             }));
             assertEquals("Your time needs to"
                             + " have this format:\n\"HHMM\"",
@@ -349,7 +416,10 @@ public class ParserTest {
                     InvalidDateException.class, () ->
                             Parser.parse(new String[] {
                                 "event",
-                                "name /at abc-12-1 1923"
+                                "name",
+                                "/at",
+                                "abc-12-1",
+                                "1923"
                             }));
             assertEquals("Please check that you've entered "
                             + "the date and time correctly",
@@ -363,7 +433,10 @@ public class ParserTest {
                     InvalidDateException.class, () ->
                             Parser.parse(new String[] {
                                 "event",
-                                "name /at 1998-12-45 1923"
+                                "name",
+                                "/at",
+                                "1998-12-45",
+                                "1923"
                             }));
             assertEquals("Please check that you've entered "
                             + "the date and time correctly",
@@ -385,7 +458,7 @@ public class ParserTest {
         @DisplayName("should generate find command object")
         public void parse_findCommand_altDataFindCommand() throws StuffException {
             assertEquals(new FindCommand("test test2 test3"),
-                    Parser.parse(new String[] { "find", "test test2 test3" }));
+                    Parser.parse(new String[] { "find", "test", "test2", "test3" }));
         }
 
         @Test
