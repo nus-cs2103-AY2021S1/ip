@@ -106,14 +106,15 @@ public class Storage {
         List<Task> results = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
-            String line;
+            String line =reader.readLine();
             // T | 1 | read book
 
-            while ((line = reader.readLine()) != null) {
+            while (line != null) {
                 Task task = readLine(line);
                 if (task != null) {
                     results.add(task);
                 }
+                line = reader.readLine();
             }
             return results;
         } catch (FileNotFoundException e) {

@@ -9,22 +9,22 @@ import task.Task;
  * Class responsible for adding and deletion of tasks
  */
 public class TaskList {
-    private List<Task> taskList;
+    private List<Task> tasks;
 
     public TaskList(List<Task> taskList) {
-        this.taskList = taskList;
+        this.tasks = taskList;
     }
 
     public TaskList() {
-        this.taskList = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
-    public List<Task> getTaskList() {
-        return taskList;
+    public List<Task> getTasks() {
+        return tasks;
     }
 
     public void addTask(Task task) {
-        this.taskList.add(task);
+        this.tasks.add(task);
     }
 
     /**
@@ -33,15 +33,15 @@ public class TaskList {
      * @param index index of task to remove.
      */
     public void removeTask(int index) {
-        this.taskList.remove(index);
+        this.tasks.remove(index);
     }
 
     public int getSize() {
-        return this.taskList.size();
+        return this.tasks.size();
     }
 
     public Task getTask(int i) {
-        return this.taskList.get(i);
+        return this.tasks.get(i);
     }
 
     /**
@@ -52,7 +52,7 @@ public class TaskList {
      */
     public TaskList find(String stringToFind) {
         List<Task> findList = new ArrayList<>();
-        for (Task task : this.taskList) {
+        for (Task task : this.tasks) {
             if (task.getName().contains(stringToFind)) {
                 findList.add(task);
             }
@@ -60,3 +60,4 @@ public class TaskList {
         return new TaskList(findList);
     }
 }
+
