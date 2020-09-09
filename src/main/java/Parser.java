@@ -65,15 +65,30 @@ public class Parser {
                             "\nNow you have " + tasks.getList().size() + " tasks in the list");
 
                 } else if (inputType.equals("done")) {
-                    tasks.setDone(Integer.parseInt(description), storage);
-                    Task doneTask = tasks.getList().get(Integer.parseInt(description) - 1);
+
+                    int numberInput = Integer.parseInt(description);
+
+                    assert (numberInput > 0 && numberInput < tasks.getList().size() + 1) :
+                            "Input number is not within range";
+
+                    tasks.setDone(numberInput, storage);
+                    Task doneTask = tasks.getList().get(numberInput - 1);
                     return Ui.print("Nice! I've marked this task as done:\n" + doneTask);
 
                 } else if (inputType.equals("delete")) {
-                    tasks.delete(Integer.parseInt(description));
+
+                    int numberInput = Integer.parseInt(description);
+
+                    assert (numberInput > 0 && numberInput <= tasks.getList().size() + 1) :
+                            "Input number is not within range";
+
+                    tasks.delete(numberInput);
                     return Ui.printList(tasks.getList());
 
                 } else if (inputType.equals("find")) {
+
+                    assert !description.equals("") : "Nothing to find!";
+
                     return tasks.find(input.substring(5));
                 } else return finalErrorMessage();
             } catch (FileNotFoundException e) {
