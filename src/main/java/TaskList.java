@@ -85,6 +85,8 @@ public class TaskList {
     }
 
     public void set_Task_As_Done(int n) {
+
+        assert n <= list_of_Contents.size();
         System.out.println("Nice! I've marked this task as done: ");
         Task task = list_of_Contents.get(n - 1);
         task.set_Task_As_Done();
@@ -96,7 +98,8 @@ public class TaskList {
      * @param n Index of the task to be deleted.
      */
     public String removeTask(int n) {
-        
+
+        assert list_of_Contents.size() < n : "The number you choose is more than the total number of tasks it contains";
         String reply = "Noted. I've removed this task: \n";
 //        System.out.println("Noted. I've removed this task:");
         Task task = list_of_Contents.get(n);
