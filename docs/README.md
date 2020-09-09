@@ -14,25 +14,6 @@ With minimal typing, Duke can manage your task faster than traditional GUI apps.
 8. List all tags : `tags`
 9. Exit the application : `bye`
 
-### Feature 1 
-Add a todo task
-### Feature 2
-Add a task and a deadline for it
-### Feature 3
-Add a task and the event timing
-### Feature 4
-Mark a task as done
-### Feature 5
-List all tasks down
-### Feature 6
-Delete a task when done
-### Feature 7
-Search for keywords of a given task in the task list
-### Feature 8
-Add tags to your task and call them when required
-### Feature 9
-Exits the application using `bye` which greets the user and exits the application
-
 ## Usage
 
 ### `todo` - Adds a todo task
