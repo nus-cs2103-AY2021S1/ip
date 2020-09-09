@@ -2,6 +2,7 @@ package duke.core.command;
 
 import duke.core.DataStore;
 import duke.core.storage.Storage;
+import duke.designpattern.command.CommandException;
 import duke.designpattern.command.Executable;
 
 import java.io.FileNotFoundException;
@@ -44,7 +45,7 @@ public class LoadCommand implements Executable {
             // Clear history
             dataStore.getHistory().clear();
         } catch (FileNotFoundException e) {
-            System.err.println("Error: File not found");
+            throw new CommandException("Error: File not found");
         }
     }
 

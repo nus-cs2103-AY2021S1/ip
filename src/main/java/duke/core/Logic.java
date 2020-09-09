@@ -2,6 +2,7 @@ package duke.core;
 
 import duke.core.parser.DukeParserException;
 import duke.core.parser.ParseToCommand;
+import duke.designpattern.command.CommandException;
 import duke.designpattern.command.Executable;
 import duke.designpattern.command.ReversibleExecutable;
 
@@ -33,6 +34,8 @@ public class Logic {
             }
 
         } catch (DukeParserException e) { // Input cannot be parsed, notify user
+            System.err.println(e.getMessage());
+        } catch (CommandException e) { // Command cannot be executed
             System.err.println(e.getMessage());
         }
     }

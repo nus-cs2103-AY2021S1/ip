@@ -1,5 +1,6 @@
 package duke.core.command;
 
+import duke.designpattern.command.CommandException;
 import duke.designpattern.command.ReversibleExecutable;
 import duke.core.task.Task;
 
@@ -32,8 +33,7 @@ public class AddCommand implements ReversibleExecutable {
     public void execute() {
         // Disallow duplicate
         if (taskList.contains(task)) {
-            System.err.println("Error: Duplicate Task");
-            return;
+            throw new CommandException("Error: Duplicate Task");
         }
 
         // Add task

@@ -8,6 +8,6 @@ public interface Executable {
     /**
      * All executables can be executed
      */
-    void execute();
+    void execute() throws CommandException;
 
 }

@@ -1,5 +1,6 @@
 package duke.core.command;
 
+import duke.designpattern.command.CommandException;
 import duke.designpattern.command.Executable;
 import duke.designpattern.command.UndoRedoList;
 
@@ -27,7 +28,7 @@ public class UndoCommand implements Executable {
     public void execute() {
         boolean success = this.history.undo();
         if (!success) {
-            System.err.println("Undo: Already at earliest change");
+            throw new CommandException("Undo: Already at earliest change");
         }
     }
 }

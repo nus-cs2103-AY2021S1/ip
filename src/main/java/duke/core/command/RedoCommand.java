@@ -1,5 +1,6 @@
 package duke.core.command;
 
+import duke.designpattern.command.CommandException;
 import duke.designpattern.command.Executable;
 import duke.designpattern.command.UndoRedoList;
 
@@ -27,7 +28,7 @@ public class RedoCommand implements Executable {
     public void execute() {
         boolean success = this.history.redo();
         if (!success) {
-            System.err.println("Redo: Already at latest change");
+            throw new CommandException("Redo: Already at latest change");
         }
     }
 }

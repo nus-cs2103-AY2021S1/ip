@@ -88,8 +88,7 @@ public abstract class Task {
             return false;
         }
         Task task = (Task) obj;
-        return isCompleted() == task.isCompleted()
-                && getDescription().equals(task.getDescription());
+        return getDescription().equals(task.getDescription());
     }
 
     /**

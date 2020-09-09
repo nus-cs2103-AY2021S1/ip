@@ -1,5 +1,6 @@
 package duke.core.command;
 
+import duke.designpattern.command.CommandException;
 import duke.designpattern.command.Executable;
 import duke.core.storage.Storage;
 import duke.core.task.Task;
@@ -41,7 +42,7 @@ public class SaveCommand implements Executable {
             Storage.save(taskList, filePath);
             System.out.println("Save: " + taskList.size() + " entries");
         } catch (IOException e) {
-            System.err.println("Error: Ensure directory exists and file is not in use");
+            throw new CommandException("Error: Ensure directory exists and file is not in use");
         }
     }
 
