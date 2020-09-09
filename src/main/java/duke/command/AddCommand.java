@@ -15,6 +15,7 @@ public class AddCommand extends Command {
 
     public AddCommand(DukeTask task) {
         super();
+        assert task != null : "AddCommand - DukeTask cannot be null";
         this.task = task;
     }
 
@@ -35,6 +36,8 @@ public class AddCommand extends Command {
     @Override
     public void execute(TaskList taskList, CommandInteractionUi uiManager,
                         StorageManager storageManager, boolean isGuiTask) {
+        assert uiManager != null : "AddCommand must have a uiManager";
+        assert taskList != null : "AddCommand must have a taskList";
         taskList.addToList(task);
         if (isGuiTask) {
             this.response = uiManager.getAddTask(task, taskList.getSize());

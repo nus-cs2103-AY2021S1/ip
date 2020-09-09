@@ -10,12 +10,12 @@ import java.time.LocalDateTime;
  */
 public class EventTask extends DukeTaskWithTime {
 
-    public EventTask(String description, LocalDateTime datetime) {
-        super(description, datetime);
+    public EventTask(String description, LocalDateTime dateTime) {
+        super(description, dateTime);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + String.format(" (at: %s)", getDatetime());
+        return "[E]" + super.toString() + String.format(" (at: %s)", getDateTime());
     }
 }

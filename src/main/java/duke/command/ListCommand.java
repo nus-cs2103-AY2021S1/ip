@@ -32,6 +32,8 @@ public class ListCommand extends Command {
     @Override
     public void execute(TaskList taskList, CommandInteractionUi uiManager,
                         StorageManager storageManager, boolean isGuiTask) {
+        assert uiManager != null : "ListCommand must have a uiManager";
+        assert taskList != null : "ListCommand must have a taskList";
         if (isGuiTask) {
             StringBuilder output = new StringBuilder();
             for (int i = 0; i < taskList.getSize(); i++) {
