@@ -6,6 +6,8 @@ import duke.task.Task;
 import duke.task.Todo;
 import duke.util.DateTimeHandler;
 
+import java.util.function.Function;
+
 /**
  * Encapsulates the execution of user's command.
  */
@@ -26,7 +28,10 @@ public class Executor {
     private final Ui ui;
 
     /** Task list for executor to add/edit/delete tasks. */
-    private final TaskList taskList;
+    private TaskList taskList;
+
+    /** Checks if the task's index is outside the task list's size range. */
+    private final Function<Integer, Boolean> checkTaskIndex = i -> i < 0 || i >= this.taskList.getNumOfTasks();
 
     /**
      * Creates a new executor from a storage.
@@ -73,16 +78,6 @@ public class Executor {
     }
 
     /**
-     * Checks if task's index is outside the task list's size range.
-     *
-     * @param index Task's index.
-     * @return If task's index is outside the task list's size range.
-     */
-    private boolean isIndexOutsideRange(int index) {
-        return index < 0 || index >= this.taskList.getNumOfTasks();
-    }
-
-    /**
      * Returns a footer containing the number of tasks in the list.
      *
      * @return Footer string containing the number of tasks.
@@ -107,7 +102,7 @@ public class Executor {
         try {
             int index = Integer.parseInt(indexString) - 1;
 
-            if (this.isIndexOutsideRange(index)) {
+            if (this.checkTaskIndex.apply(index)) {
                 throw new DukeInputException(Executor.ERR_INDEX_OUT_OF_BOUND);
             }
 
@@ -135,7 +130,7 @@ public class Executor {
         try {
             int index = Integer.parseInt(indexString) - 1;
 
-            if (this.isIndexOutsideRange(index)) {
+            if (this.checkTaskIndex.apply(index)) {
                 throw new DukeInputException(Executor.ERR_INDEX_OUT_OF_BOUND);
             }
 
