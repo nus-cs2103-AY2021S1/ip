@@ -2,6 +2,7 @@ package duke;
 
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -25,6 +26,13 @@ public class TaskList {
         for (int i = 0; i < listOfTask.size(); i++) {
             addTaskFromFile(listOfTask.get(i), tasks);
         }
+    }
+
+    public static Task prioritize(String index) {
+        int i = Integer.parseInt(index);
+        Task target = tasks.get(i - 1);
+        target.setPriority(Task.Priority.HIGH);
+        return target;
     }
 
     /**
@@ -103,6 +111,7 @@ public class TaskList {
      * @return
      */
     public List<Task> getTaskList() {
+        Collections.sort(tasks);
         return tasks;
     }
 
@@ -112,28 +121,35 @@ public class TaskList {
      * @param store the arraylist of tasks stored
      */
     public static void addTaskFromFile(String task, ArrayList<Task> store) {
-        assert task.split(" ").length >= 4;
-        String type = task.split(" ", 2)[0];
-        String remain = task.split(" ", 2)[1];
-        String done = remain.split(" ", 2)[0];
+        //assert task.split(" ").length >= 4;
+        String taskFormat = task.split(" #", 2)[0];
+        String priority = task.split(" #", 2)[1];
+        String typeOfTask = taskFormat.split(" ", 2)[0];
+        String remain = taskFormat.split(" ", 2)[1];
+        String isDone = remain.split(" ", 2)[0];
         String title = remain.split(" ", 2)[1];
-        if (type.isEmpty()) {
+
+        Task newTask;
+        if (typeOfTask.isEmpty()) {
             return;
         }
-        if (type.equals("todo")) {
-            store.add(new Todo(title, Boolean.valueOf(done)));
+        if (typeOfTask.equals("todo")) {
+            newTask = new Todo(title, Boolean.valueOf(isDone));
+            newTask.setPriority(Task.Priority.valueOf(priority));
+            store.add(newTask);
         } else {
             String description = title.split("/", 2)[0];
-            Task newTask;
 
-            if (type.equals("deadline")) {
+            if (typeOfTask.equals("deadline")) {
                 String by = title.split("/by ", 2)[1];
-                newTask = new Deadline(description, by, Boolean.valueOf(done));
+                newTask = new Deadline(description, by, Boolean.valueOf(isDone));
+                newTask.setPriority(Task.Priority.valueOf(priority));
                 store.add(newTask);
             }
-            if (type.equals("event")) {
+            if (typeOfTask.equals("event")) {
                 String at = title.split("/at ", 2)[1];
-                newTask = new Event(description, at, Boolean.valueOf(done));
+                newTask = new Event(description, at, Boolean.valueOf(isDone));
+                newTask.setPriority(Task.Priority.valueOf(priority));
                 store.add(newTask);
             }
         }

@@ -38,12 +38,17 @@ public class Event extends Task {
     @Override
     public String inputStyle() {
         return "event " + super.inputStyle()
-                + " /at " + at;
+                + " /at " + at + " #" + super.priority;
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: "
-                + at.format(MMM_D_YYYY) + ")";
+        if (super.priority == Priority.HIGH) {
+            return "#" + super.priority.toString() + " [E]" + super.toString() + " (at: "
+                    + at.format(MMM_D_YYYY) + ")";
+        } else {
+            return "[E]" + super.toString() + " (at: "
+                    + at.format(MMM_D_YYYY) + ")";
+        }
     }
 }

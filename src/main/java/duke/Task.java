@@ -6,9 +6,14 @@ import java.util.ArrayList;
  * A general task class that handles the status of any task and methods to add a task to the task list.
  */
 
-public class Task {
+public class Task implements Comparable<Task> {
     private String description;
     private Boolean isDone;
+    protected Priority priority;
+    protected enum Priority {
+        HIGH,
+        DEFAULT
+    }
 
     /**
      * Constructor for a task with a name
@@ -17,6 +22,7 @@ public class Task {
     public Task(String name) {
         this.description = name;
         this.isDone = false;
+        this.priority = Priority.DEFAULT;
     }
 
     /**
@@ -29,6 +35,10 @@ public class Task {
         this.isDone = isDone;
     }
 
+    public void setPriority(Priority newStatus) {
+        this.priority = newStatus;
+    }
+
     public boolean findTask(String name) {
         return description.contains(name);
     }
@@ -37,10 +47,9 @@ public class Task {
      * method to add tasks from given string format
      * @param task task in a string format
      * @param store the list of tasks
-     * @param print should the task be printed
      */
 
-    public static void addTaskFromFile(String task, ArrayList<Task> store, boolean print) {
+    public static void addTaskFromFile(String task, ArrayList<Task> store) {
         assert task.split(" ").length >= 4;
         String type = task.split(" ", 2)[0];
         String remain = task.split(" ", 2)[1];
@@ -63,10 +72,9 @@ public class Task {
                 store.add(newTask);
             }
         }
-        if (print) {
-            System.out.println("Got it. I've added this task:\n" + store.get(store.size() - 1));
-        }
     }
+
+
 
     public String inputStyle() {
         return this.isDone + " " + description;
@@ -86,5 +94,16 @@ public class Task {
     @Override
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + description;
+    }
+
+    @Override
+    public int compareTo(Task task) {
+        if (this.priority == Priority.HIGH && task.priority == Priority.DEFAULT) {
+            return -1;
+        } else if (this.priority == Priority.DEFAULT && task.priority == Priority.HIGH) {
+            return 1;
+        } else {
+            return 0;
+        }
     }
 }
