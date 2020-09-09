@@ -86,6 +86,8 @@ public class DukeTaskList {
      * @return the list of tasks containing the keyword
      */
     public ArrayList<Task> findTasks(String keyword) {
+        assert !keyword.isBlank() : "keyword for findTasks cannot be empty";
+
         ArrayList<Task> tasksFound = new ArrayList<>();
 
         for (Task task : tasks) {
