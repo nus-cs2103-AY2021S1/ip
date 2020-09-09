@@ -30,6 +30,7 @@ public abstract class Task {
      * Return true if task name contains keyword else false
      */
     public boolean containsKeyword(String keyword) {
+        assert !keyword.isEmpty();
         return this.taskName.contains(keyword);
     }
 }
