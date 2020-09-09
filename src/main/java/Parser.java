@@ -10,10 +10,10 @@ import java.util.MissingFormatArgumentException;
 public class Parser {
 
     /**
-     * Parses the given command in string form into a logic.commands.Command object.
+     * Parses the given command in string form into a Command object.
      *
-     * @param textCommand the command to be parsed in string formed.
-     * @return logic.commands.Command after being parsed.
+     * @param textCommand the command to be parsed in string form.
+     * @return Command after being parsed.
      * @throws EmptyBodyException    If command in string form is empty.
      * @throws UnknownInputException If command in string form is not a recognised command.
      */
@@ -61,7 +61,14 @@ public class Parser {
         }
     }
 
-    // todo need change: right now it's to add notes only but might need to change for editing notes
+    /**
+     * Parses the given notes portion of command in string form into a Command object.
+     *
+     * @param command the notes portion of command to be parsed in string form.
+     * @return Command after being parsed.
+     * @throws EmptyBodyException    If command in string form is empty.
+     * @throws UnknownInputException If command in string form is not a recognised command.
+     */
     public static Command parseNotesCommand(String command) throws UnknownInputException, EmptyBodyException {
         Validator.requireNonNull(command);
 
@@ -142,6 +149,12 @@ public class Parser {
 
     }
 
+    /**
+     * Parses a string representing priority into a Priority object.
+     * @param priority String form of priority.
+     * @return Priority object with priority.
+     * @throws UnknownInputException If string does not represent a recognised priority.
+     */
     private static Priority parsePriority(String priority) throws UnknownInputException {
         switch (priority) {
         case "high":

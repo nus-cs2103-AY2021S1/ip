@@ -19,7 +19,7 @@ public class DeleteCommand extends Command {
      * Executes the command to delete a task by deleting specified task from given TaskList.
      * @param tasks TaskList representing list of current tasks.
      * @param ui Ui object to handle printing of outputs.
-     * @param storage Storage object to handle saving of outputs to computer
+     * @param storage Storage object to handle saving of outputs to computer.
      * @throws IndexOutOfBoundsDukeException If task number is invalid.
      */
     @Override

@@ -15,7 +15,6 @@ public class Storage {
     private final String filePathNotes;
 
     // Constructor
-
     public Storage(String filePathTasks, String filePathNotes) {
         this.filePathTasks = filePathTasks;
         this.filePathNotes = filePathNotes;
@@ -39,8 +38,8 @@ public class Storage {
     public void createFileTasks() {
         try {
             File file = new File(this.filePathTasks);
-            boolean createdDirectory = file.getParentFile().mkdirs();
-            boolean createdFile = file.createNewFile();
+            file.getParentFile().mkdirs();
+            file.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -49,8 +48,8 @@ public class Storage {
     public void createFileNotes() {
         try {
             File file = new File(this.filePathNotes);
-            boolean createdDirectory = file.getParentFile().mkdirs();
-            boolean createdFile = file.createNewFile();
+            file.getParentFile().mkdirs();
+            file.createNewFile();
         } catch (IOException e) {
             e.printStackTrace();
         }

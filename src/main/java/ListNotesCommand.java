@@ -1,4 +1,3 @@
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -35,8 +34,6 @@ public class ListNotesCommand extends Command {
         if (o == null || getClass() != o.getClass()) {
             return false;
         }
-
-        ListNotesCommand that = (ListNotesCommand) o;
 
         return true;
     }
