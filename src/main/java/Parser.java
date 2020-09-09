@@ -4,9 +4,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Represents a handler of the commands.
+ * It parses the command the user types in and handles the instructions given
+ */
 public class Parser {
     Scanner sc;
     TaskList taskList;
@@ -16,6 +19,9 @@ public class Parser {
         this.taskList = taskList;
     }
 
+    /**
+     * Parses the user inputs and call corresponding methods to handle the instructions
+     */
     public void handleCommand() {
         while (true) {
             String command = sc.next();
@@ -83,6 +89,9 @@ public class Parser {
         }
     }
 
+    /**
+     * handles instruction "bye"
+     */
     public void handleBye() {
         System.out.println("    ____________________________________________________________");
         System.out.println("     Bye. Hope to see you again soon!");
@@ -90,6 +99,9 @@ public class Parser {
         return;
     }
 
+    /**
+     * handles instruction "list"
+     */
     public void handleList() {
         System.out.println("    ____________________________________________________________");
         System.out.println("     Here are the tasks in your list:");
@@ -100,6 +112,9 @@ public class Parser {
         System.out.println("    ____________________________________________________________\n");
     }
 
+    /**
+     * handles instruction "done"
+     */
     public void handleDone() throws DukeException {
         String doneCommand = sc.nextLine();
         int index = 0;
@@ -126,6 +141,9 @@ public class Parser {
         System.out.println("    ____________________________________________________________\n");
     }
 
+    /**
+     * handles instruction "delete"
+     */
     public void handleDelete() throws DukeException {
         String deleteCommand = sc.nextLine();
         int index = 0;
@@ -153,6 +171,9 @@ public class Parser {
         System.out.println("    ____________________________________________________________\n");
     }
 
+    /**
+     * handles instruction "todo"
+     */
     public void handleTodo() throws DukeException {
         String todoDescription = sc.nextLine();
         if (todoDescription.isEmpty()) {
@@ -168,6 +189,9 @@ public class Parser {
         System.out.println("    ____________________________________________________________\n");
     }
 
+    /**
+     * handles instruction "deadline"
+     */
     public void handleDeadline() throws DukeException {
 
         String deadlineCommand = sc.nextLine();
@@ -192,6 +216,9 @@ public class Parser {
         System.out.println("    ____________________________________________________________\n");
     }
 
+    /**
+     * handles instruction "event"
+     */
     public void handleEvent() throws DukeException{
         String eventCommand = sc.nextLine();
         if (eventCommand.isEmpty()) {
@@ -213,10 +240,18 @@ public class Parser {
         System.out.println("    ____________________________________________________________\n");
     }
 
+    /**
+     * throws exceptions when the command is wrongly typed
+     * @throws DukeException
+     */
     public void handleDefault() throws DukeException {
         throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
     }
 
+    /**
+     * updates the task list in the local hard disk
+     * @throws IOException
+     */
     public void updateFile() throws IOException {
         FileWriter fw = new FileWriter("./command.txt");
         FileWriter fwAppend = new FileWriter("./command.txt", true);

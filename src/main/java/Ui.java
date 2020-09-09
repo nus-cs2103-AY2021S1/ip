@@ -1,5 +1,9 @@
 package main.java;
 
+/**
+ * The User Interface of the robot
+ * It prints the greeting message and remind user to input
+ */
 public class Ui {
     String logo = " ____        _        \n"
             + "|  _ \\ _   _| | _____\n"
@@ -7,6 +11,9 @@ public class Ui {
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n";
 
+    /**
+     * prints out the logo and greeting message
+     */
     public void start() {
         System.out.println("Hello from\n" + logo);
         System.out.println("    ____________________________________________________________");
@@ -14,6 +21,9 @@ public class Ui {
         System.out.println("    ____________________________________________________________\n");
     }
 
+    /**
+     * prints out the loading error message
+     */
     protected void showLoadingError() {
         System.out.println("Oops!! There is a Loading error!!");
     }
