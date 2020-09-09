@@ -5,6 +5,7 @@ import duke.exception.DukeException;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAdjusters;
@@ -50,9 +51,16 @@ public class WeeklyTask extends Task {
         String min = time.substring(2);
         int intHour = Integer.parseInt(hour);
         int intMin = Integer.parseInt(min);
-        LocalDate now = LocalDate.now();
-        //if (now.getDayOfWeek().toLowerCase().equals(day))
-        LocalDate nextDate = getNextDate(day, now);
+        LocalDate nowDate = LocalDate.now();
+        if (nowDate.getDayOfWeek().toString().toLowerCase().equals(day)) {
+            LocalTime nowTime = LocalTime.now();
+            LocalTime taskTime = LocalTime.of(intHour, intMin);
+            if (nowTime.isBefore(taskTime)) {
+                LocalDateTime nextDateTime = nowDate.atTime(intHour, intMin);
+                return nextDateTime;
+            }
+        }
+        LocalDate nextDate = getNextDate(day, nowDate);
         LocalDateTime nextDateTime = nextDate.atTime(intHour, intMin);
         return nextDateTime;
     }
