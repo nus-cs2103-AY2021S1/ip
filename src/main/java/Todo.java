@@ -21,6 +21,7 @@ public class Todo extends Task {
      */
     static Todo fromFileFormat(String fileFormatString) {
         String[] tokens = fileFormatString.split("\\|");
+        assert tokens.length == 3;
         Todo loaded = new Todo(tokens[2]);
         if (tokens[1].equals("1")) {
             loaded.setDone();

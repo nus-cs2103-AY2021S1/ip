@@ -30,6 +30,7 @@ public class Deadline extends Task {
      */
     static Deadline fromFileFormat(String fileFormatString) {
         String[] tokens = fileFormatString.split("\\|");
+        assert tokens.length == 4;
         Deadline loaded = new Deadline(tokens[2], LocalDate.parse(tokens[3]));
         if (tokens[1].equals("1")) {
             loaded.setDone();

@@ -10,6 +10,7 @@ public class Parser {
      * @return integer index of the task in the task list to be deleted
      */
     static String parseFind(String userInput) throws DukeException {
+        assert !userInput.isBlank();
         String[] userTokens = userInput.split(" ");
         String userCommand = userTokens[0];
         Parser.validateCommand(userCommand);
@@ -24,6 +25,7 @@ public class Parser {
      * @return integer index of the task in the task list to be deleted
      */
     static int parseDelete(String userInput) throws DukeException {
+        assert !userInput.isBlank();
         String[] userTokens = userInput.split(" ");
         Parser.validateIdentifier(userInput, userTokens);
         return Integer.parseInt(userTokens[1]) - 1;
@@ -48,6 +50,7 @@ public class Parser {
      * @return Event task created from user command
      */
     static Event parseEvent(String userInput) throws DukeException {
+        assert !userInput.isBlank();
         String[] userTokens = userInput.split(" ");
         String userCommand = userTokens[0];
         String userTask = String.join(" ", Arrays.copyOfRange(userTokens, 1, userTokens.length));
@@ -65,6 +68,7 @@ public class Parser {
      * @return Deadline task created from user command
      */
     static Deadline parseDeadline(String userInput) throws DukeException {
+        assert !userInput.isBlank();
         String[] userTokens = userInput.split(" ");
         String userCommand = userTokens[0];
         String userTask = String.join(" ", Arrays.copyOfRange(userTokens, 1, userTokens.length));
@@ -82,6 +86,7 @@ public class Parser {
      * @return Todo task created from user command
      */
     static Todo parseTodo(String userInput) throws DukeException {
+        assert !userInput.isBlank();
         String[] userTokens = userInput.split(" ");
         String userCommand = userTokens[0];
         String userTask = String.join(" ", Arrays.copyOfRange(userTokens, 1, userTokens.length));
@@ -95,6 +100,7 @@ public class Parser {
      * @param userCommand - String representation of user's command
      */
     static void validateCommand(String userCommand) throws DukeException {
+        assert !userCommand.isBlank();
         List<String> validCommands =
                 Arrays.asList("bye", "list", "done", "todo", "deadline", "event", "delete", "find");
         if (!validCommands.contains(userCommand)) {
@@ -109,6 +115,7 @@ public class Parser {
      * @param userTask    - String representation of user's task
      */
     static void validateTask(String userCommand, String userTask) throws DukeException {
+        assert !userCommand.isBlank();
         if (userTask.isEmpty()) {
             throw new DukeException("Empty task: " + userCommand);
         }
@@ -121,6 +128,7 @@ public class Parser {
      * @param userTask    - String representation of user's task
      */
     static void validateDeadline(String userCommand, String userTask) throws DukeException {
+        assert !userCommand.isBlank();
         validateTask(userCommand, userTask);
         if (!userTask.contains("/by")) {
             throw new DukeException("Invalid deadline missing '/by': " + userTask);
@@ -134,6 +142,7 @@ public class Parser {
      * @param userTask    - String representation of user's task
      */
     static void validateEvent(String userCommand, String userTask) throws DukeException {
+        assert !userCommand.isBlank();
         validateTask(userCommand, userTask);
         if (!userTask.contains("/at")) {
             throw new DukeException("Invalid event missing '/at': " + userTask);
@@ -149,6 +158,7 @@ public class Parser {
      * @param userTokens - String array of user's input separated by spaces
      */
     static void validateIdentifier(String userInput, String[] userTokens) throws DukeException {
+        assert !userInput.isBlank();
         if (userTokens.length != 2) {
             throw new DukeException("Invalid identifier, requires 2 tokens: " + userInput);
         }
