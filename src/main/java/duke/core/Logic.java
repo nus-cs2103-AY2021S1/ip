@@ -17,6 +17,8 @@ public class Logic {
      * @param input The raw user input
      */
     public static void execute(DataStore dataStore, String input) {
+        assert dataStore != null;
+
         try {
             // Parse user input
             Executable command = ParseToCommand.parse(dataStore, input);

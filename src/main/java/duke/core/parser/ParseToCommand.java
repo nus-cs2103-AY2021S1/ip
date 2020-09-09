@@ -232,6 +232,9 @@ public enum ParseToCommand {
      */
     public static Executable parse(DataStore dataStore, String input) throws DukeParserException {
 
+        assert dataStore != null;
+        assert input != null;
+
         // Match the input pattern
         Pattern pattern = Pattern.compile("^\\s*(\\S+)\\s*(.*)$");
         Matcher matcher = pattern.matcher(input);

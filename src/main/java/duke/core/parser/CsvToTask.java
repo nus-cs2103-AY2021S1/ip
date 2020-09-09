@@ -62,6 +62,7 @@ public enum CsvToTask {
      * @throws Exception If the csv cannot be parsed
      */
     public static Task parse(String csv) {
+        assert csv != null;
         try (Scanner scanner = new Scanner(csv)) {
             scanner.useDelimiter(",");
             return CsvToTask.valueOf(scanner.next()).parse(scanner);
