@@ -20,6 +20,7 @@ public enum Message {
     ERR_WRONG_EVENT_CMD ("Wrong event command!\n" + Usage.get("event") + "\n"),
     ERR_WRONG_DELETE_CMD ("Wrong delete command!\n" + Usage.get("delete") + "\n"),
     ERR_WRONG_FIND_CMD ("Wrong find command!\n" + Usage.get("find") + "\n"),
+    ERR_WRONG_SORT_CMD ("Wrong sort command!\n" + Usage.get("sort") + "\n"),
     ERR_WRONG_CMD ("Unrecognizable command!\n"),
     ERR_DUKE_NOT_INIT("Duke not initialised yet in execute command"),
     CAT_DOUBT ("Meow? Sorry I don't know what you are talking about...\n"),
@@ -41,6 +42,7 @@ public enum Message {
             usages.put("delete", "Delete a task.\nUsage: delete [index]");
             usages.put("find", "Find a task with description.\nUsage: find [description]");
             usages.put("bye", "Quit application.\nUsage: bye");
+            usages.put("sort", "Sort tasks.\nUsage: sort [time/description]");
             usages.put("help", "Get help. Can specify command.\nUsage: help [keyword]");
         }
 
