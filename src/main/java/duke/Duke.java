@@ -22,6 +22,7 @@ public class Duke {
             ui.printError(e);
             tasks = new TaskList();
         }
+
     }
 
 
@@ -34,6 +35,9 @@ public class Duke {
         String output;
         try{
             Command c = Parser.parse(input);
+            assert(c!=null);
+            assert(tasks != null);
+            assert(storage != null);
             output = c.execute(tasks,ui,storage);
 
         } catch (DukeException e) {
