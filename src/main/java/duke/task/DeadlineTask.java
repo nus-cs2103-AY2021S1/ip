@@ -10,12 +10,12 @@ import java.time.LocalDateTime;
  */
 public class DeadlineTask extends DukeTaskWithTime {
 
-    public DeadlineTask(String description, LocalDateTime datetime) {
-        super(description, datetime);
+    public DeadlineTask(String description, LocalDateTime dateTime) {
+        super(description, dateTime);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + String.format(" (by: %s)", getDatetime());
+        return "[D]" + super.toString() + String.format(" (by: %s)", getDateTime());
     }
 }

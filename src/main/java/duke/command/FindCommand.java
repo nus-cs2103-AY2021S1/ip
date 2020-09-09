@@ -39,7 +39,8 @@ public class FindCommand extends Command {
     @Override
     public void execute(TaskList taskList, CommandInteractionUi uiManager,
                         StorageManager storageManager, boolean isGuiTask) {
-
+        assert uiManager != null : "FindCommand must have a uiManager";
+        assert taskList != null : "FindCommand must have a taskList";
         ArrayList<DukeTask> filteredList = new ArrayList<>();
         for (DukeTask task : taskList.getTaskList()) {
             if (task.getDescription().contains(keyword)) {

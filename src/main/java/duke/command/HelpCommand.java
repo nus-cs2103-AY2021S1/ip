@@ -31,6 +31,7 @@ public class HelpCommand extends Command {
     @Override
     public void execute(TaskList taskList, CommandInteractionUi uiManager,
                         StorageManager storageManager, boolean isGuiTask) {
+        assert uiManager != null : "HelpCommand must have a uiManager";
         if (isGuiTask) {
             response = uiManager.getDukeInstructions();
         } else {

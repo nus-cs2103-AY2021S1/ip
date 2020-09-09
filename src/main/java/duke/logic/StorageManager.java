@@ -104,6 +104,7 @@ public class StorageManager {
      * @throws DukeIoException If saving of the data fails
      */
     public void saveData(ArrayList<DukeTask> dataList) throws DukeIoException {
+        assert dataList != null : "saveDate input dataList cannot be null";
         StringBuilder dataString = new StringBuilder();
         for (DukeTask task : dataList) {
             String addition = "";
@@ -115,12 +116,12 @@ public class StorageManager {
                 addition = "E" + FILE_DATA_SEPARATOR
                         + (task.getDoneStatus() ? "1" : "0") + FILE_DATA_SEPARATOR
                         + task.getDescription() + FILE_DATA_SEPARATOR
-                        + ((EventTask) task).getDatetime();
+                        + ((EventTask) task).getDateTime();
             } else if (task instanceof DeadlineTask) {
                 addition = "D" + FILE_DATA_SEPARATOR
                         + (task.getDoneStatus() ? "1" : "0") + FILE_DATA_SEPARATOR
                         + task.getDescription() + FILE_DATA_SEPARATOR
-                        + ((DeadlineTask) task).getDatetime();
+                        + ((DeadlineTask) task).getDateTime();
             }
             dataString.append(addition).append(System.lineSeparator());
         }
