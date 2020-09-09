@@ -129,11 +129,11 @@ public class Parser {
             this.taskList.addTask(newTask);
             assert newTask != null;
 
-            return ui.printAddTask(newTask.toString(), sizeofTaskList);
+            return ui.printAddTask(newTask.toString(), sizeofTaskList + 1);
 
-        } catch (IndexOutOfBoundsException e) {
+        } catch (NullPointerException | IndexOutOfBoundsException e) {
             String errorMessage = "You might have left your message or duration empty.";
-            throw new DukeTaskException((errorMessage));
+            throw new DukeTaskException(errorMessage);
         }
     }
 

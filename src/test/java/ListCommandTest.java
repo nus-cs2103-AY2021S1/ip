@@ -5,15 +5,15 @@ import java.io.IOException;
 import org.junit.jupiter.api.Test;
 
 import duke.Storage;
-import duke.Tasklist;
 import duke.UserInterface;
 import duke.command.ListCommand;
 import duke.exception.DukeListException;
+import duke.task.TaskList;
 
 public class ListCommandTest {
 
     private Storage storage = new Storage();
-    private Tasklist tasklist = new Tasklist(storage);
+    private TaskList tasklist = new TaskList(storage);
 
     @Test
     public void invalidListCommand() throws IOException {

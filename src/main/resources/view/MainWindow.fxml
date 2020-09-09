@@ -15,9 +15,9 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="605.0" prefWidth="388.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.MainWindow">
     <children>
-        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="388.0" stylesheets="@../css/duke.css" vvalue="1.0">
+        <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="388.0" styleClass="backgroundPic" stylesheets="@/css/duke.css" vvalue="1.0">
             <content>
-                <VBox fx:id="dialogContainer" prefHeight="555.0" prefWidth="390.0" style="-fx-border-width: 10;" styleClass="backgroundPic" stylesheets="@../css/duke.css">
+                <VBox fx:id="dialogContainer" prefHeight="555.0" prefWidth="390.0" style="-fx-border-width: 10;" stylesheets="@/css/duke.css">
                     <children>
                         <BorderPane prefHeight="76.0" prefWidth="396.0">
                      <center>
@@ -38,7 +38,7 @@
                            <left>
                               <ImageView fitHeight="80.0" fitWidth="85.0" style="-fx-translate-x: 20; -fx-scale-x: 0.9; -fx-scale-y: 0.9;">
                                  <image>
-                                    <Image url="@../images/icon.png" />
+                                    <Image url="@/images/icon.png" />
                                  </image>
                               </ImageView>
                            </left>
@@ -55,12 +55,12 @@
                 </VBox>
             </content>
         </ScrollPane>
-        <Button fx:id="sendButton" layoutX="315.0" layoutY="554.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="53.0" prefWidth="74.0" styleClass="sendButton" stylesheets="@../css/duke.css" text="Send">
+        <Button fx:id="sendButton" layoutX="315.0" layoutY="554.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="53.0" prefWidth="74.0" styleClass="sendButton" stylesheets="@/css/duke.css" text="Send">
          <font>
             <Font name="Dubai Bold" size="17.0" />
          </font>
         </Button>
-        <TextField fx:id="userInput" layoutY="554.0" onAction="#handleUserInput" prefHeight="53.0" prefWidth="315.0" promptText="Write a message here..." styleClass="textfield" stylesheets="@../css/duke.css" AnchorPane.bottomAnchor="-2.0">
+        <TextField fx:id="userInput" layoutY="554.0" onAction="#handleUserInput" prefHeight="53.0" prefWidth="315.0" promptText="Write a message here..." styleClass="textfield" stylesheets="@/css/duke.css" AnchorPane.bottomAnchor="-2.0">
          <font>
             <Font size="15.0" />
          </font></TextField>
