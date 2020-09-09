@@ -5,13 +5,15 @@ import duke.commands.AddDeadlineCommand;
 import duke.commands.AddEventCommand;
 import duke.commands.AddToDoCommand;
 import duke.commands.ByeCommand;
-import duke.commands.ListCommand;
+import duke.commands.Command;
+import duke.commands.DeleteCommand;
 import duke.commands.DoneCommand;
 import duke.commands.FindCommand;
-import duke.commands.DeleteCommand;
-import duke.commands.Command;
+import duke.commands.ListCommand;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidInputException;
+
+
 
 /**
  * Parser deals with making sense of the user command.
@@ -59,7 +61,7 @@ public class Parser {
         } else if (commandType.equals(COMMAND_DELETE)) {
             commandContent = inputArr[1];
             return new DeleteCommand(commandContent);
-        } else if (commandType.equals(COMMAND_TODO)){
+        } else if (commandType.equals(COMMAND_TODO)) {
             commandContent = inputArr[1];
             return new AddToDoCommand(commandContent);
         } else if (commandType.equals(COMMAND_EVENT)) {

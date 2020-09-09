@@ -1,26 +1,26 @@
 package duke;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Deadline extends Task {
-	private String byDateString;
-	private LocalDate byDate;
+    private String byDateString;
+    private LocalDate byDate;
 
-	public Deadline(String taskContent, String byDateString) {
-		super(taskContent);
-		this.byDateString = byDateString;
-	}
-	public Deadline(String taskContent, LocalDate byDate) {
-		super(taskContent);
-		this.byDate = byDate;
-	}
+    public Deadline(String taskContent, String byDateString) {
+        super(taskContent);
+        this.byDateString = byDateString;
+    }
+    public Deadline(String taskContent, LocalDate byDate) {
+        super(taskContent);
+        this.byDate = byDate;
+    }
 
-	@Override
-	public String getType() {
-		return "D";
-	}
-	@Override
+    @Override
+    public String getType() {
+        return "D";
+    }
+
+    @Override
     public String getDate() {
         if (byDateString != null) {
             return byDateString;
@@ -28,8 +28,8 @@ public class Deadline extends Task {
             return byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
         }
     }
-	@Override
-	public String toString() {
-		return "[D]" + super.toString() + " (by: " + getDate() + ")";
-	}
+    @Override
+    public String toString() {
+        return "[D]" + super.toString() + " (by: " + getDate() + ")";
+    }
 }
