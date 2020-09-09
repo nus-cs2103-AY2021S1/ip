@@ -32,9 +32,7 @@ public class ToDo extends Task {
 
     private static void checkException(String str) throws NoDescriptionException {
         if (str.isBlank()) {
-            String line = UiPrint.getLine(UiPrint.STAR, 50);
             String errMessage = ExceptionMessage.TODO_NO_DESCRIPTION_MESSAGE;
-
             throw new NoDescriptionException(errMessage);
         }
     }
