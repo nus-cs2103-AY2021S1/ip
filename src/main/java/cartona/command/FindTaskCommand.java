@@ -1,3 +1,5 @@
+package cartona.command;
+
 public class FindTaskCommand implements Command {
     private boolean isDone;
 

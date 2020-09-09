@@ -1,3 +1,5 @@
+package cartona.command;
+
 /**
  * The ExitCommand class runs the steps required before termination of the program.
  *

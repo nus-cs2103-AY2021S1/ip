@@ -1,3 +1,5 @@
+package cartona;
+
 /**
  * Cartona is a simple CLI to-do list application. When run from the console, it reads input from the user and
  * adds and deletes items (called Tasks). It also saves the running list tasks to a file that it loads when run.
@@ -5,10 +7,7 @@
  * @author Jaya Rengam
  */
 public class Cartona {
-    /**  */
     private TaskList taskList;
-
-
     private Parser parser;
     private Ui ui;
     private Storage storage;

@@ -1,21 +1,23 @@
+package cartona.command;
+
 /**
- * The DoneCommand class, when executed, runs the steps required to mark a Task in a TaskList as done.
+ * The DeleteCommand class, when executed, runs the steps required to delete a Task from a TaskList.
  *
  * @author Jaya Rengam
  */
-public class DoneCommand implements Command {
+public class DeleteCommand implements Command {
     private boolean hasExecuted;
 
-    /** The ID in the list of the task to be marked as complete. */
-    private int taskIdToComplete;
+    /** The ID in the TaskList of the Task to be deleted. */
+    private int taskIdToDelete;
 
-    DoneCommand(int taskIdToComplete) {
+    DeleteCommand(int taskIdToDelete) {
         this.hasExecuted = false;
-        this.taskIdToComplete = taskIdToComplete;
+        this.taskIdToDelete = taskIdToDelete;
     }
 
     /**
-     * Completes the Task given by taskIdToComplete in the TaskList and updates the Storage text file.
+     * Deletes the Task given by taskIdToComplete in the TaskList and updates the Storage text file.
      *
      * @param taskList the TaskList being modified
      * @param ui the Ui object that is used to print the action to the console
@@ -26,17 +28,20 @@ public class DoneCommand implements Command {
     public void execute(TaskList taskList, Ui ui, Storage storage) throws CartonaException {
         // Check if the command has already been executed.
         if (hasExecuted) {
-            throw new CartonaException("Error: DoneCommand already executed");
+            throw new CartonaException("Error: DeleteCommand already executed");
         }
 
-        taskList.completeTask(taskIdToComplete);
-        Task completedTask = taskList.getTask(taskIdToComplete);
+        // Delete the task
+        Task deletedTask = taskList.getTask(taskIdToDelete);
+        taskList.deleteTask(taskIdToDelete);
 
         // Print UI message
-        ui.printTaskDoneMessage(completedTask);
+        ui.printTaskDeletionMessage(deletedTask, taskList.getSize());
 
         // Update Storage
         storage.saveListToFile(taskList);
+
+        this.hasExecuted = true;
     }
 
     @Override

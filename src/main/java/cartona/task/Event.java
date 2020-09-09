@@ -1,3 +1,5 @@
+package cartona.task;
+
 /**
  * The Event class is a Task that represents an event, with a start date and an end date - represented by TaskDates.
  *

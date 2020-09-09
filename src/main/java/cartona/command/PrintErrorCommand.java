@@ -1,3 +1,5 @@
+package cartona.command;
+
 /**
  * The PrintErrorCommand, when executed prints an error message to the console.
  *

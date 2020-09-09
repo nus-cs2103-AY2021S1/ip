@@ -1,3 +1,5 @@
+package cartona.ui;
+
 import java.util.Scanner;
 
 /**

@@ -1,3 +1,5 @@
+package cartona.command;
+
 /**
  * The Command class is an interface for classes that are used to run commands from the user.
  *
