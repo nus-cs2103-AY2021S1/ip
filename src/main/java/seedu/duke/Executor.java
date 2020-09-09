@@ -82,6 +82,20 @@ public class Executor {
             } catch (InvalidParameterException e) {
                 result = ui.invalidFindOrder();
             }
+        } else if (userInput.equals("all lists")) {
+            result = ui.showAllLists();
+        } else if (userInput.equals("current list")) {
+            result = ui.showCurrentList();
+        } else if (userInput.startsWith("switch")) {
+            try {
+                String listPath = parser.parseSwitch(userInput);
+                this.taskList.switchList(listPath);
+                result = ui.listSwitched(userInput);
+            } catch (InvalidParameterException e) {
+                result = ui.invalidSwitchOrder();
+            } catch (Exception e) {
+                result = "An error happened, please try again.";
+            }
         } else if (userInput.isEmpty()) {
             result = ui.noOrder();
         } else {

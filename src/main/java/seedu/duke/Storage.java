@@ -20,25 +20,41 @@ public class Storage {
     /**
      * Initializes the storage object.
      *
-     * @param fileName File path and name of data file, in string format.
      */
-    public Storage(String fileName) {
-        File temp = new File(fileName);
-        if (!temp.exists()) {
-            File dir = new File(temp.getParent());
-            if (!dir.exists()) {
-                dir.mkdirs();
+    public Storage() {
+        String currentListName;
+        try {
+            File currentList = new File("./data/currentList.txt");
+            if (!currentList.exists()) {
+                File dir = new File(currentList.getParent());
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                currentList.createNewFile();
             }
-            try {
+            Scanner fileReader = new Scanner(currentList);
+            if (fileReader.hasNext()) {
+                currentListName = fileReader.nextLine();
+            } else {
+                currentListName = "duke";
+                currentListName = "./data/" + currentListName + ".txt";
+                FileWriter fileWriter = new FileWriter(currentList);
+                fileWriter.write(currentListName);
+                fileWriter.close();
+            }
+            fileReader.close();
+
+            File temp = new File(currentListName);
+            if (!temp.exists()) {
                 temp.createNewFile();
                 storageFile = temp;
-            } catch (Exception e1) {
-                e1.getStackTrace();
+            } else {
+                storageFile = temp;
             }
-        } else {
-            storageFile = temp;
+            assert storageFile.exists(); //Ensure the storage file exists.
+        } catch (Exception e) {
+            e.getStackTrace();
         }
-        assert storageFile.exists(); //Ensure the storage file exists.
     }
 
     /**
@@ -116,4 +132,72 @@ public class Storage {
         }
     }
 
+    /**
+     * Gives all the list file.
+     *
+     * @return A list with all the list file name.
+     */
+    public List<String> getAllLists() {
+        List<String> files = new ArrayList<String>();
+        try {
+            File file = new File("./data");
+            File[] tempList = file.listFiles();
+            for (int i = 0; i < tempList.length; i++) {
+                if (tempList[i].isFile()) {
+                    files.add(tempList[i].getName());
+                }
+            }
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+        return files;
+    }
+
+    public String getCurrentList() {
+        String currentListName = "";
+        try {
+            File currentList = new File("./data/currentList.txt");
+            if (!currentList.exists()) {
+                File dir = new File(currentList.getParent());
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                currentList.createNewFile();
+            }
+            Scanner fileReader = new Scanner(currentList);
+            if (fileReader.hasNext()) {
+                currentListName = fileReader.nextLine();
+            } else {
+                currentListName = "duke";
+                currentListName = "./data/" + currentListName + ".txt";
+                FileWriter fileWriter = new FileWriter(currentList);
+                fileWriter.write(currentListName);
+                fileWriter.close();
+            }
+            fileReader.close();
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+        return currentListName;
+    }
+
+    public void switchList(String filePath) {
+        try {
+            File currentList = new File("./data/currentList.txt");
+            if (!currentList.exists()) {
+                File dir = new File(currentList.getParent());
+                if (!dir.exists()) {
+                    dir.mkdirs();
+                }
+                currentList.createNewFile();
+            }
+
+            FileWriter fileWriter = new FileWriter(currentList);
+            fileWriter.write(filePath);
+            this.storageFile = new File(filePath);
+            fileWriter.close();
+        } catch (Exception e) {
+            e.getStackTrace();
+        }
+    }
 }

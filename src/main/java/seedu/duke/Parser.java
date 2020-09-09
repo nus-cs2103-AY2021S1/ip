@@ -126,4 +126,12 @@ public class Parser {
         assert !findingKeyWord.isEmpty(); //Ensure the keyword is not empty.
         return findingKeyWord;
     }
+
+    public String parseSwitch(String userInput) throws InvalidParameterException {
+        String result = userInput.substring(7);
+        if (result.length() <= 0) {
+            throw new InvalidParameterException();
+        }
+        return "./data/" + result + ".txt";
+    }
 }

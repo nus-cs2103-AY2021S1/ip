@@ -226,6 +226,38 @@ public class Ui {
     }
 
     /**
+     * Prints all the task lists.
+     *
+     * @return A string presents all the task lists.
+     */
+    public String showAllLists() {
+        String result = "You have these task lists:\n";
+        Storage storage = new Storage();
+        List<String> allLists = storage.getAllLists();
+        for (String listName : allLists) {
+            if (!listName.equals("currentList.txt")) {
+                result += listName + "\n";
+            }
+        }
+        return result;
+    }
+
+    public String showCurrentList() {
+        String result = "You are using this list:\n";
+        Storage storage = new Storage();
+        result += storage.getCurrentList();
+        return result;
+    }
+
+    public String listSwitched(String userInput) {
+        return "Switched to:" + userInput;
+    }
+
+    public String invalidSwitchOrder() {
+        return "Sorry your switch order is invalid.";
+    }
+
+    /**
      * Gives response to null order.
      *
      * @return Response to null order.

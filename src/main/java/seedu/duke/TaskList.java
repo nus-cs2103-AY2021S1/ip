@@ -103,6 +103,11 @@ public class TaskList {
         return resultList;
     }
 
+    public void switchList(String filePath) {
+        this.storage.switchList(filePath);
+        this.taskList = this.storage.load();
+    }
+
     /**
      * Gives String representation of the list of tasks.
      *

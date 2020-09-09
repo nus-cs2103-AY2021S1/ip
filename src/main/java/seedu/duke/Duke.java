@@ -15,7 +15,7 @@ public class Duke {
      * Finishes essential settings.
      */
     public Duke() {
-        Storage storage = new Storage("./data/duke.txt");
+        Storage storage = new Storage();
         TaskList taskList = new TaskList(storage);
         Parser parser = new Parser();
         Ui ui = new Ui();
