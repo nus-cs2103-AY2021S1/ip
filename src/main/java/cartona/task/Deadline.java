@@ -8,7 +8,7 @@ package cartona.task;
 public class Deadline extends Task {
     private TaskDate dueTime;
 
-    Deadline(String name, boolean isDone, TaskDate dueTime) {
+    public Deadline(String name, boolean isDone, TaskDate dueTime) {
         super(name, isDone, "D");
         this.dueTime = dueTime;
     }

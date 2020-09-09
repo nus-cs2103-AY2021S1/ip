@@ -5,6 +5,12 @@
  */
 package cartona.command;
 
+import cartona.Storage;
+import cartona.exception.CartonaException;
+import cartona.task.Task;
+import cartona.task.TaskList;
+import cartona.ui.Ui;
+
 public class DoneCommand implements Command {
     private boolean hasExecuted;
 

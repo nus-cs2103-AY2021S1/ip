@@ -1,5 +1,7 @@
 package cartona.task;
 
+import cartona.exception.CartonaException;
+
 /**
  * The Task class represents a task.
  *

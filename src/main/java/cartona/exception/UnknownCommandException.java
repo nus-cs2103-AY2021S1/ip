@@ -1,7 +1,7 @@
 package cartona.exception;
 
 public class UnknownCommandException extends InvalidInputException {
-    UnknownCommandException(String errorMsg) {
+    public UnknownCommandException(String errorMsg) {
         super(errorMsg);
     }
 }

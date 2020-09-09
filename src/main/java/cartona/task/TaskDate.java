@@ -21,7 +21,7 @@ public class TaskDate {
     /**
      * Creates a TaskDate object with the given date and time.
      */
-    TaskDate(LocalDateTime dateTime) {
+    public TaskDate(LocalDateTime dateTime) {
         this.dateTime = dateTime;
     }
 

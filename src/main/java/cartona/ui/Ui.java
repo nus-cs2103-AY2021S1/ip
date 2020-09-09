@@ -1,5 +1,8 @@
 package cartona.ui;
 
+import cartona.task.Task;
+import cartona.task.TaskList;
+
 import java.util.Scanner;
 
 /**
@@ -12,7 +15,7 @@ public class Ui {
 
     private Scanner sc;
 
-    Ui() {
+    public Ui() {
         this.sc = new Scanner(System.in);
     }
 

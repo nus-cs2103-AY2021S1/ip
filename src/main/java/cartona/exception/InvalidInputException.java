@@ -1,7 +1,7 @@
 package cartona.exception;
 
 public class InvalidInputException extends CartonaException {
-    InvalidInputException(String errorMsg) {
+    public InvalidInputException(String errorMsg) {
         super(errorMsg);
     }
 }
