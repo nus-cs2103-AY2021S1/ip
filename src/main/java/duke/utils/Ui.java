@@ -28,6 +28,20 @@ public class Ui {
     }
 
     /**
+     * return a welcome message
+     */
+    public String welcomeMessge() {
+        String logo = "      _      _\n"
+                + "| | / /| | / /\n"
+                + "| |/ / | |/ /\n"
+                + "|   <  |   <\n"
+                + "|_|\\_\\ |_|\\_\\\n";
+        return ("Hello from\n" + logo
+            + "Hello! I'm KK\n"
+                + " What can I do for you?");
+    }
+
+    /**
      * Listens for user input and return the user input as string.
      *
      * @return a string that user has input
@@ -113,6 +127,28 @@ public class Ui {
 
     public void showLine() {
         System.out.println("-----------------------");
+    }
+
+    /**
+     * return helpMessage
+     */
+    public String helpMessage() {
+        String message = "Sample commands include: list This shows the list of things you have added\n"
+                + "\n"
+                + "event <content> /at <time> This adds an event at the stipulated time\n"
+                + "\n"
+                + "deadline <content> /by <time> This adds a deadline by the stipulated time\n"
+                + "\n"
+                + "todo <content> This adds a todo to the bot\n"
+                + "\n"
+                + "done <index> This marks the thing at index index as completed\n"
+                + "\n"
+                + "delete <index> This deletes the thing at index index\n"
+                + "\n"
+                + "bye This closes the chatbot\n"
+                + "\n"
+                + "More to be expected...";
+        return message;
     }
 
     /**

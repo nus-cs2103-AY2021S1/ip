@@ -6,6 +6,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.exceptions.DukeException;
 import duke.task.TaskType;
@@ -29,6 +30,8 @@ public class Parser {
             return new ExitCommand();
         } else if (command.equals("list")) {
             return new ListCommand();
+        } else if (command.equals("help")) {
+            return new HelpCommand();
         } else if (command.length() >= 6 && command.substring(0, 5).equals("done ")) {
             int num = Integer.parseInt(command.split(" ")[1]);
             return new DoneCommand(num - 1);
