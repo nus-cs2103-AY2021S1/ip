@@ -12,10 +12,13 @@ public class Duke {
      */
     public static void main(String[] args) throws DukeException {
         TaskList tasks = Storage.read();
+        assert tasks != null : "error initializing tasks";
         UI ui = new UI();
+        assert ui != null : "error initializing UI";
         ui.welcome(tasks);
         String input = ui.getInput();
         Parser parser = new Parser(tasks);
+        assert ui != null : "error initializing parser";
         while (!input.equals("bye")) {
             try {
                 if (input.isEmpty()) {
