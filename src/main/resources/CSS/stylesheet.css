@@ -1,7 +1,28 @@
 .root{
     -fx-font-size: 10pt;
     -fx-font-family: "Courier New";
+    -fx-font-weight: bolder;
     -fx-base: rgb(132, 145, 47);
     -fx-background: rgb(225, 228, 203);
+}
+
+.label-text {
+    -fx-font-family: "Courier New";
+    -fx-text-fill: darkblue;
+    -fx-font-size: 10pt;
+    -fx-font-weight: bolder;
+    -fx-background-color: cornsilk;
+    -fx-margin: 30;
+    -fx-background-radius: 10;
+    -fx-padding: 10 10 10 15;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+}
+
+.dialog-container {
+    -fx-background: rgb(225, 228, 203);
+    -fx-background-repeat: no-repeat;
+    -fx-background-size: cover;
+    -fx-background-position: center center;
 }
 

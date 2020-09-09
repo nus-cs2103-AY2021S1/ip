@@ -38,7 +38,6 @@ public class MainWindow extends AnchorPane {
      * Sets the duke object for the MainWindow controller
      *
      * @param d The Duke object
->>>>>>> master
      */
     public void setDuke(Duke d) {
         duke = d;
