@@ -4,7 +4,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
 import java.util.Scanner;
 
 public class Parser {
@@ -23,9 +22,11 @@ public class Parser {
                 case "bye":
                     handleBye();
                     return;
+
                 case "list":
                     handleList();
                     break;
+
                 case "done":
                     try {
                         handleDone();
@@ -35,6 +36,7 @@ public class Parser {
                         System.out.println("    ____________________________________________________________\n");
                     }
                     break;
+
                 case "delete":
                     try {
                         handleDelete();
@@ -44,6 +46,7 @@ public class Parser {
                         System.out.println("    ____________________________________________________________\n");
                     }
                     break;
+
                 case "todo":
                     try {
                         handleTodo();
@@ -53,6 +56,7 @@ public class Parser {
                         System.out.println("    ____________________________________________________________\n");
                     }
                     break;
+
                 case "deadline":
                     try {
                         handleDeadline();
@@ -62,6 +66,7 @@ public class Parser {
                         System.out.println("    ____________________________________________________________\n");
                     }
                     break;
+
                 case "event":
                     try {
                         handleEvent();
@@ -71,6 +76,7 @@ public class Parser {
                         System.out.println("    ____________________________________________________________\n");
                     }
                     break;
+
                 default:
                     try {
                         handleDefault();
@@ -169,7 +175,6 @@ public class Parser {
     }
 
     public void handleDeadline() throws DukeException {
-
         String deadlineCommand = sc.nextLine();
         if (deadlineCommand.isEmpty()) {
             throw new DukeException("\u2639 OOPS!!! The description of a deadline cannot be empty.");
