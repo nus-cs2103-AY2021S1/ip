@@ -1,20 +1,20 @@
 import java.time.LocalDate;
 
 /**
- * Represents a task to be completed by a certain time
+ * Represents a task to be completed by a certain time.
  */
 public class Deadline extends Task {
 
     /**
-     * @param description Task description
-     * @param date Deadline for the task
+     * @param description Task description.
+     * @param date Deadline for the task.
      */
     public Deadline(String description, LocalDate date) {
         super(description, date);
     }
 
     /**
-     * @return String representation of the task
+     * @return String representation of the task.
      */
     @Override
     public String toString() {

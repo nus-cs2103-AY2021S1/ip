@@ -1,8 +1,14 @@
-import java.io.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.nio.file.Paths;
 
 /**
- * Class that provides file storage utilities
+ * Class that provides file storage utilities.
  */
 public class Storage {
     public static final File storage_file = Paths.get("tasks.ser").toFile();
@@ -11,8 +17,8 @@ public class Storage {
     }
 
     /**
-     * Serializes a TaskList and writes it to file
-     * @param t tasklist to be stored
+     * Serializes a TaskList and writes it to file.
+     * @param t tasklist to be stored.
      */
     public static void store(TaskList t) {
         try {
@@ -28,8 +34,8 @@ public class Storage {
     }
 
     /**
-     * Reads a serialized TaskList
-     * @return tasklisk read from file
+     * Reads a serialized TaskList.
+     * @return tasklisk read from file.
      */
     public static TaskList read() {
         try {
