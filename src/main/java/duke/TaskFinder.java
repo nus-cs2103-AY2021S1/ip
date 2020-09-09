@@ -213,10 +213,11 @@ public class TaskFinder {
      * given keyword.
      *
      * @param taskList list of tasks to filter.
-     * @param keyword key word to be used to filter tasks.
+     * @param keyword keyword to be used to filter tasks.
      * @return ArrayList<Task> list of tasks containing given keyword.
      */
     public ArrayList<Task> findByKeyword(ArrayList<Task> taskList, String keyword) {
+        assert(!keyword.isEmpty());
         ArrayList<Task> filteredTasks = new ArrayList<Task>();
         for (Task task: taskList) {
             if (task.getDescription().contains(keyword)) {
