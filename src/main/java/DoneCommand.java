@@ -11,7 +11,7 @@ public class DoneCommand extends Command {
 
     @Override
     public String handle(String input, TaskManager taskManager, Storage fileHandler) throws IOException {
-        if (taskManager.getTasksList().isEmpty() || taskManager.getTasksList().size() < taskNum) {
+        if (taskManager.getTaskList().isEmpty() || taskManager.getTaskList().size() < taskNum) {
             return "This task doesn't exist!";
 
         } else if (taskManager.getTask(this.taskNum - 1).isDone) {

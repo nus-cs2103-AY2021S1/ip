@@ -20,8 +20,8 @@ public class Duke {
 
             assert files != null;
             for (String value : files) {
-                Task task = TextAndTaskConverter.textConverter(value);
-                taskManager.getTasksList().add(task);
+                Task task = TextAndTaskConverter.convertTextToTask(value);
+                taskManager.getTaskList().add(task);
             }
 
         } catch (FileNotFoundException e) {

@@ -1,4 +1,7 @@
-import java.io.*;
+import java.io.IOException;
+import java.io.FileWriter;
+import java.io.File;
+
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
@@ -21,7 +24,7 @@ public class Storage {
      */
     public void writeToFile(TaskManager taskManager) throws IOException {
         FileWriter fileWriter = new FileWriter(this.filePath);
-        ArrayList<Task> tasksList = taskManager.getTasksList();
+        ArrayList<Task> tasksList = taskManager.getTaskList();
 
         for (Task task : tasksList) {
 
@@ -38,8 +41,8 @@ public class Storage {
 
             if (task instanceof Event) {
                 fileWriter.write("E ## " + (task.getDone() ? 1 : 0) + " ## "
-                        + task.getDescription() + " ## "
-                        + ((Event) task).getDate() + " " + ((Event) task).getTime() + "\n");
+                        + task.getDescription() + " ## " + ((Event) task).getDate()
+                        + " " + ((Event) task).getTime() + "\n");
             }
         }
         fileWriter.close();
