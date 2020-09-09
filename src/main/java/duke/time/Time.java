@@ -36,26 +36,6 @@ public class Time {
         }
     }
 
-    /**
-     * Compares with another Time.
-     * Only comparable when both Time are specific time.
-     * @param time the time to compare to
-     * @return the result of comparison
-     */
-    public TimeComparison compareTo(Time time) {
-        if (time.time == null || this.time == null) {
-            return TimeComparison.INCOMPARABLE;
-        } else if (this.time.isBefore(time.time)) {
-            return TimeComparison.IS_BEFORE;
-        } else if (this.time.isAfter(time.time)) {
-            return TimeComparison.IS_AFTER;
-        } else if (this.time.isEqual(time.time)) {
-            return TimeComparison.EQUAL;
-        } else {
-            return null;
-        }
-    }
-
     @Override
     public String toString() {
         if (time != null) {
@@ -67,9 +47,5 @@ public class Time {
 
     public LocalDateTime getTime() {
         return time;
-    }
-
-    public String getTimeDescription() {
-        return timeDescription;
     }
 }
