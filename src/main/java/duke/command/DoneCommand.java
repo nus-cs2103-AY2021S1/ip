@@ -19,7 +19,7 @@ public class DoneCommand extends Command {
      * @param input input of user.
      */
     public DoneCommand(String input) {
-        this.exit = false;
+        this.isExit = false;
         this.input = input;
     }
 

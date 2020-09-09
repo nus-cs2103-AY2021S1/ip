@@ -10,7 +10,7 @@ import duke.task.TaskList;
  */
 public abstract class Command {
 
-    protected boolean exit;
+    protected boolean isExit;
 
     /**
      * Executes command based on user input.
@@ -26,7 +26,7 @@ public abstract class Command {
      * @return boolean value of exit variable.
      */
     public boolean isExit() {
-        return exit;
+        return isExit;
     }
 
 }

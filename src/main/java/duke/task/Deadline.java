@@ -24,7 +24,7 @@ public class Deadline extends Task {
      * @return string representation of Deadline object for file storage.
      */
     @Override
-    public String toFileString() {
+    public String convertToFileString() {
         String doneInteger = isDone ? "1" : "0";
         return "D | " + doneInteger + " | " + this.description + " | " + this.dateString;
     }

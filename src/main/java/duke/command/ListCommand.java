@@ -13,7 +13,7 @@ public class ListCommand extends Command {
      * Creates ListCommand object.
      */
     public ListCommand() {
-        this.exit = false;
+        this.isExit = false;
     }
 
     /**

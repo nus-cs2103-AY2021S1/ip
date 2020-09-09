@@ -24,7 +24,7 @@ public class Event extends Task {
      * @return string representation of Event object for file storage.
      */
     @Override
-    public String toFileString() {
+    public String convertToFileString() {
         String doneInteger = isDone ? "1" : "0";
         return "E | " + doneInteger + " | " + this.description + " | " + this.dateString;
     }

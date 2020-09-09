@@ -16,6 +16,9 @@ import duke.command.ListCommand;
  * Represents a parser that parses the input of users.
  */
 public class Parser {
+    private static int todoSubstringIndex = 5;
+    private static int deadlineSubstringIndex = 9;
+    private static int eventSubstringIndex = 6;
 
     /**
      * Parses the user's input.
@@ -65,10 +68,10 @@ public class Parser {
      * @return true if valid, false if invalid.
      */
     public static boolean isValidIndex(String input, int tasksNumber) {
-        String[] stringArray = input.split(" ");
+        String[] parsedInput = input.split(" ");
         int index;
         try {
-            index = Integer.parseInt(stringArray[1]);
+            index = Integer.parseInt(parsedInput[1]);
         } catch (Exception e) {
             return false;
         }
@@ -82,8 +85,8 @@ public class Parser {
      */
     public static int getIndex(String input) {
         assert input != " " : "There is no input";
-        String[] stringArray = input.split(" ");
-        return Integer.parseInt(stringArray[1]) - 1;
+        String[] parsedInput = input.split(" ");
+        return Integer.parseInt(parsedInput[1]) - 1;
     }
 
     /**
@@ -94,7 +97,7 @@ public class Parser {
      */
     public static String getTodoDescription(String input) throws DukeException {
         try {
-            return input.substring(5);
+            return input.substring(todoSubstringIndex);
         } catch (Exception e) {
             throw new DukeException("Todo cannot be empty!");
         }
@@ -107,9 +110,9 @@ public class Parser {
      */
     public static String[] getDeadlineStrings(String input) {
         assert input != null : "There is no input";
-        String[] stringArray = input.split(" /by ");
-        stringArray[0] = stringArray[0].substring(9);
-        return stringArray;
+        String[] parsedInput = input.split(" /by ");
+        parsedInput[0] = parsedInput[0].substring(deadlineSubstringIndex);
+        return parsedInput;
     }
 
     /**
@@ -119,9 +122,9 @@ public class Parser {
      */
     public static String[] getEventTimeStrings(String input) {
         assert input != null : "There is no input";
-        String[] stringArray = input.split(" /at ");
-        stringArray[0] = stringArray[0].substring(6);
-        return stringArray;
+        String[] parsedInput = input.split(" /at ");
+        parsedInput[0] = parsedInput[0].substring(eventSubstringIndex);
+        return parsedInput;
     }
 
     /**

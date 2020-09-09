@@ -49,7 +49,7 @@ public class Task {
      * Returns string representation of task object to be stored in file
      * @return string representation of task object for file storage
      */
-    public String toFileString() {
+    public String convertToFileString() {
         return "Error";
     }
 

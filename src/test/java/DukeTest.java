@@ -27,13 +27,13 @@ public class DukeTest {
 
     @Test
     public void toFileString_correctFileStringPrinted() {
-        String todoFileString = new Todo("Read Book").toFileString();
+        String todoFileString = new Todo("Read Book").convertToFileString();
         assertEquals(todoFileString, "T | 0 | Read Book");
 
-        String eventFileString = new Event("Gym", "2020-02-02").toFileString();
+        String eventFileString = new Event("Gym", "2020-02-02").convertToFileString();
         assertEquals(eventFileString, "E | 0 | Gym | 2020-02-02");
 
-        String deadlineFileString = new Deadline("Go home", "2020-02-02").toFileString();
+        String deadlineFileString = new Deadline("Go home", "2020-02-02").convertToFileString();
         assertEquals(deadlineFileString, "D | 0 | Go home | 2020-02-02");
     }
 }
