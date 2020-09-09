@@ -34,7 +34,9 @@ public class Parser {
             break;
         case "done":
         case "delete":
-            command.withIndex(sc.nextInt() - 1); // UI shows base 1, TaskList uses base 0
+            while (sc.hasNext()) { // for processing multiple tasks at once
+                command.withIndex(sc.nextInt() - 1); // UI shows base 1, TaskList uses base 0
+            }
             break;
         case "todo":
         case "find":

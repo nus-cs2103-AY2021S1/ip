@@ -20,6 +20,13 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
+     * Constructs a TaskList from a List of Tasks.
+     */
+    private TaskList(List<Task> tasks) {
+        this.tasks = tasks;
+    }
+
+    /**
      * Mark the Task at specified index as done.
      * @param index the index of the Task to be marked as done.
      * @return the Task marked as done.
@@ -31,12 +38,46 @@ public class TaskList implements Iterable<Task> {
     }
 
     /**
+     * Mark the Tasks at specified indexes as done.
+     * @param indexes the indexes of the Tasks to be marked as done.
+     * @return a new TaskList consisting the Tasks marked as done.
+     */
+    public TaskList done(List<Integer> indexes) {
+        List<Task> markedDone = new ArrayList<>();
+        for (int i: indexes) {
+            Task task = tasks.get(i);
+            task.markDone();
+            markedDone.add(task);
+        }
+        return new TaskList(markedDone);
+    }
+
+    /**
      * Deletes the Task at the specified index from this TaskList.
      * @param index the index of the Task to be deleted.
      * @return the deleted Task.
      */
     public Task delete(int index) {
         return tasks.remove(index);
+    }
+
+    /**
+     * Deletes the Tasks at the specified indexes from this TaskList.
+     * @param indexes the indexes of the Tasks to be deleted.
+     * @return a new TaskList consisting the deleted Tasks.
+     */
+    public TaskList delete(List<Integer> indexes) {
+        List<Task> toDelete = new ArrayList<>();
+        for (int i: indexes) {
+            toDelete.add(tasks.get(i));
+        }
+
+        // Remove the tasks after adding them all to the list, so that the index positioning
+        // doesn't get messed up for multiple deletions
+        for (Task t: toDelete) {
+            tasks.remove(t);
+        }
+        return new TaskList(toDelete);
     }
 
     /**

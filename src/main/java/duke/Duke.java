@@ -2,6 +2,7 @@ package duke;
 
 import duke.tasks.Task;
 
+
 public class Duke {
     private static final String SAVE_FILE = "save.txt";
 
@@ -36,10 +37,10 @@ public class Duke {
         case "list":
             return Ui.showList(tasks);
         case "done":
-            Task doneTask = tasks.done(command.getIndex());
+            TaskList doneTask = tasks.done(command.getIndexes());
             return Ui.showDone(doneTask);
         case "delete":
-            Task deletedTask = tasks.delete(command.getIndex());
+            TaskList deletedTask = tasks.delete(command.getIndexes());
             return Ui.showDelete(deletedTask);
         case "todo":
         case "deadline":

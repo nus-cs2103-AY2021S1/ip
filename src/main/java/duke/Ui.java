@@ -15,8 +15,8 @@ import javafx.stage.Stage;
 public class Ui {
     public final static String MESSAGE_EXIT = "*You take your leave.*";
     public final static String MESSAGE_LIST = "Here's the extent of our list so far:";
-    public final static String MESSAGE_DONE = "Right. This task is now marked as done:";
-    public final static String MESSAGE_DELETE = "Begone! This task is now removed: ";
+    public final static String MESSAGE_DONE = "Right. These task(s) has been marked as done:";
+    public final static String MESSAGE_DELETE = "Begone! These task(s) has been removed: ";
     public final static String MESSAGE_ADD = "Fine. I added the following to the list: ";
     public final static String MESSAGE_WELCOME =
             "Famed, of course, for my unique red skin and unparalleled skills as a general of " +
@@ -68,12 +68,34 @@ public class Ui {
     }
 
     /**
+     * Shows a successful "done" command.
+     * @param doneTasks a {@link TaskList} of the Tasks marked as done.
+     * @return a String containing the Tasks marked done.
+     */
+    public static String showDone(TaskList doneTasks) {
+        String msg = MESSAGE_DONE + "\n" + doneTasks;
+        System.out.println(msg);
+        return msg;
+    }
+
+    /**
      * Shows a successful "delete" command.
      * @param deletedTask the {@link Task} deleted.
      * @return a String containing the deleted Task.
      */
     public static String showDelete(Task deletedTask) {
         String msg = MESSAGE_DELETE + deletedTask;
+        System.out.println(msg);
+        return msg;
+    }
+
+    /**
+     * Shows a successful "delete" command.
+     * @param deletedTasks a {@link TaskList} of the deleted Tasks.
+     * @return a String containing the deleted Tasks.
+     */
+    public static String showDelete(TaskList deletedTasks) {
+        String msg = MESSAGE_DELETE + "\n" + deletedTasks;
         System.out.println(msg);
         return msg;
     }

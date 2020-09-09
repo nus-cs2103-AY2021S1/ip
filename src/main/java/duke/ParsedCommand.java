@@ -5,12 +5,15 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * Represents an input command that has been parsed into a class with accessible members.
  */
 public class ParsedCommand {
     private String commandType;
-    private int index;
+    private List<Integer> indexes;
     private String name;
     private String date;
 
@@ -28,7 +31,10 @@ public class ParsedCommand {
      * @return this modified ParseCommand
      */
     public ParsedCommand withIndex(int index) {
-        this.index = index;
+        if (indexes == null) {
+            indexes = new ArrayList<>();
+        }
+        indexes.add(index);
         return this;
     }
 
@@ -64,8 +70,8 @@ public class ParsedCommand {
      * Returns this ParsedCommand's index.
      * @return this ParsedCommand's index.
      */
-    public int getIndex() {
-        return index;
+    public List<Integer> getIndexes() {
+        return indexes;
     }
 
     /**
@@ -119,7 +125,7 @@ public class ParsedCommand {
 
         ParsedCommand pc = (ParsedCommand) other;
 
-        return pc.getType().equals(getType()) && pc.getIndex() == getIndex()
+        return pc.getType().equals(getType()) && pc.getIndexes().equals(getIndexes())
                 && pc.getName().equals(getName()) && pc.getDate().equals(getDate());
     }
 }
