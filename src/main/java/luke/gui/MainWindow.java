@@ -8,7 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import luke.Luke;
-import luke.Ui;
 
 /**
  * Controller for duke.MainWindow. Provides the layout for the other controls.
@@ -40,11 +39,15 @@ public class MainWindow extends AnchorPane {
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
-
     }
 
-    public void setLuke(Luke l) {
-        luke = l;
+    public void greet(Luke luke) {
+        setLuke(luke);
+        dialogContainer.getChildren().add(DialogBox.getLukeDialog(this.luke.getUi().showWelcome(), lukeImage));
+    }
+
+    public void setLuke(Luke luke) {
+        this.luke = luke;
     }
 
     /**
@@ -54,8 +57,6 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-//        String welcome = luke.getUi().showWelcome();
-//        dialogContainer.getChildren().add(DialogBox.getLukeDialog(welcome, lukeImage));
         String input = userInput.getText();
         String response = luke.getResponse(input);
         dialogContainer.getChildren().addAll(

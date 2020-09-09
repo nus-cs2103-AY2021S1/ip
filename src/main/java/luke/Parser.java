@@ -1,8 +1,7 @@
 package luke;
 
 import luke.commands.*;
-import luke.exception.LukeException;
-import luke.exception.LukeUnknownCommandException;
+import luke.exception.*;
 import luke.task.Deadline;
 import luke.task.Event;
 import luke.task.Task;
@@ -17,7 +16,7 @@ public class Parser {
 
     public static Task parseTask(String taskStr) throws LukeException {
         assert taskStr != "" : "Task should not be empty.";
-        String[] taskDetails = taskStr.split(" \\| ");
+        String[] taskDetails = taskStr.split("\\|");
         Task parsedTask = null;
         if (taskDetails[0].equals("T")) {
             parsedTask = new Todo(taskDetails[2]);
@@ -34,49 +33,77 @@ public class Parser {
 
     public static Command parseCommand(String input) throws LukeException {
         assert input != "" : "User input should not be empty.";
-        List<String> commandSplit = Arrays.asList(input.split(" "));
-        String commandType = commandSplit.get(0);
+        String[] commandSplit = input.trim().split(" ", 2);
+        String commandType = commandSplit[0].trim();
         try {
             switch (commandType) {
             case "list":
                 return new ListCommand();
             case "todo":
-                parseTodoCommand(commandSplit);
+                return parseTodoCommand(commandSplit);
             case "deadline":
-                String[] deadlineDetails = commandSplit.get(1).split("/by");
-                String deadlineDescription = deadlineDetails[0].trim();
-                LocalDateTime by = LocalDateTime.parse(deadlineDetails[1].trim());
-                return new AddCommand(new Deadline(deadlineDescription, by));
+                return parseDeadlineCommand(commandSplit);
             case "event":
-                String[] eventDetails = commandSplit.get(1).split("/at");
-                String eventDescription = eventDetails[0].trim();
-                String at = eventDetails[1].trim();
-                return new AddCommand(new Event(eventDescription, at));
+                return parseEventCommand(commandSplit);
             case "delete":
-                return new DeleteCommand(Integer.parseInt(commandSplit.get(1)));
+                return parseDeleteCommand(commandSplit);
             case "done":
-                return new DoneCommand(Integer.parseInt(commandSplit.get(1)));
+                return parseDoneCommand(commandSplit);
             case "bye":
                 return new ExitCommand();
             default:
                 throw new LukeUnknownCommandException(commandType);
             }
-        } catch (DateTimeException dateTimeException) {
-            throw new LukeException("Please enter the date and time in the format 'DD-MM-YYYY HHMM'!");
-        } catch (Exception exception) {
-            throw new LukeException("Unable to read command. Please enter it in the correct format!");
+        } catch (DateTimeException e) {
+            throw new LukeDateTimeException(e.getMessage());
         }
     }
 
-    private static Command parseTodoCommand(List<String> commandSplit) throws LukeUnknownCommandException {
+    private static Command parseTodoCommand(String[] commandSplit) throws LukeEmptyCommandException {
         try {
-            String description = commandSplit.get(1);
+            String description = commandSplit[1].trim();
             return new AddCommand(new Todo(description));
         } catch (IndexOutOfBoundsException e) {
-            throw new LukeUnknownCommandException(commandSplit.get(0));
+            throw new LukeEmptyCommandException(commandSplit[0]);
         }
-
     }
 
+    private static Command parseDeadlineCommand(String[] commandSplit) throws LukeEmptyCommandException {
+        try {
+            String[] deadlineDetails = commandSplit[1].trim().split("/by");
+            String deadlineDescription = deadlineDetails[0].trim();
+            LocalDateTime by = LocalDateTime.parse(deadlineDetails[1].trim());
+            return new AddCommand(new Deadline(deadlineDescription, by));
+        } catch (IndexOutOfBoundsException e) {
+            throw new LukeEmptyCommandException(commandSplit[0]);
+        }
+    }
+
+    private static Command parseEventCommand(String[] commandSplit) throws LukeEmptyCommandException {
+        try {
+            String[] eventDetails = commandSplit[1].trim().split("/at");
+            String eventDescription = eventDetails[0].trim();
+            String at = eventDetails[1].trim();
+            return new AddCommand(new Event(eventDescription, at));
+        } catch (IndexOutOfBoundsException e) {
+            throw new LukeEmptyCommandException(commandSplit[0]);
+        }
+    }
+
+    private static Command parseDeleteCommand(String[] commandSplit) throws LukeEmptyCommandException {
+        try {
+            return new DoneCommand(Integer.parseInt(commandSplit[1]));
+        } catch (IndexOutOfBoundsException e) {
+            throw new LukeEmptyCommandException(commandSplit[0]);
+        }
+    }
+
+    private static Command parseDoneCommand(String[] commandSplit) throws LukeEmptyCommandException {
+        try {
+            return new DeleteCommand(Integer.parseInt(commandSplit[1]));
+        } catch (IndexOutOfBoundsException e) {
+            throw new LukeEmptyCommandException(commandSplit[0]);
+        }
+    }
 }
 

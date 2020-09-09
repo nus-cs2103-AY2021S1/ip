@@ -14,7 +14,7 @@ import luke.gui.MainWindow;
  */
 public class Main extends Application {
 
-    private Luke luke = new Luke("/data/tasks.txt");
+    private Luke luke = new Luke(System.getProperty("user.dir"));
 
     @Override
     public void start(Stage stage) {
@@ -23,7 +23,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setLuke(luke);
+            fxmlLoader.<MainWindow>getController().greet(luke);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

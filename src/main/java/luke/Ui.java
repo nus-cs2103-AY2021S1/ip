@@ -1,5 +1,6 @@
 package luke;
 
+import luke.exception.LukeException;
 import luke.task.Task;
 
 public class Ui {
@@ -13,8 +14,8 @@ public class Ui {
                 + "Please tell me what to do.\n";
     }
 
-    public String showError(String msg) {
-        return msg;
+    public String showError(LukeException e) {
+        return e.getMessage();
     }
 
     public void showLoadingError() {

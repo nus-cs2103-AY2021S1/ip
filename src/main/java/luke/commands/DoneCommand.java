@@ -4,6 +4,7 @@ import luke.Storage;
 import luke.TaskList;
 import luke.Ui;
 import luke.exception.LukeException;
+import luke.exception.LukeIndexOutOfBoundsException;
 import luke.task.Task;
 
 public class DoneCommand extends Command {
@@ -21,7 +22,7 @@ public class DoneCommand extends Command {
             storage.save(tasks);
             return ui.showDoneResult(doneTask);
         } catch (IndexOutOfBoundsException e) {
-            throw new LukeException("Please enter a valid task number.");
+            throw new LukeIndexOutOfBoundsException(String.valueOf(this.taskNumber));
         }
     }
 }
