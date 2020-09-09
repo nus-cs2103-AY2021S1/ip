@@ -66,7 +66,7 @@ public class TaskList {
         try {
             removed = this.tasks.remove(index);
         } catch (IndexOutOfBoundsException e) {
-            throw new ChatbotException(Message.ITEM_NOT_EXIST);
+            throw new ChatbotException(Message.MESSAGE_ITEM_DO_NOT_EXIST);
         }
 
         return removed;
@@ -85,7 +85,7 @@ public class TaskList {
             taskDone = getTask(index).markDone();
             this.tasks.set(index, taskDone);
         } catch (IndexOutOfBoundsException e) {
-            throw new ChatbotException(Message.ITEM_NOT_EXIST);
+            throw new ChatbotException(Message.MESSAGE_ITEM_DO_NOT_EXIST);
         }
 
         return taskDone;

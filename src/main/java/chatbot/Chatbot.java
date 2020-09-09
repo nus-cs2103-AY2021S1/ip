@@ -2,9 +2,10 @@ package chatbot;
 
 import chatbot.commands.Command;
 import chatbot.commands.ExitCommand;
+
 import chatbot.data.TaskList;
 import chatbot.exception.ChatbotException;
-import chatbot.parser.Parser;
+import chatbot.parser.ChatbotParser;
 import chatbot.storage.Storage;
 import chatbot.ui.Ui;
 
@@ -30,7 +31,7 @@ public class Chatbot {
 
         try {
             // parse user input to generate a command
-            Command command = Parser.parse(input);
+            Command command = ChatbotParser.parseCommand(input);
 
             // exit command -> terminate program
             if (command instanceof ExitCommand) {

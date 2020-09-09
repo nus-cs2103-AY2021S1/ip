@@ -85,7 +85,7 @@ public class Storage {
             return taskList;
 
         } catch (IOException e) {
-            throw new ChatbotException(Message.LOAD_FAIL);
+            throw new ChatbotException(Message.MESSAGE_FAIL_LOAD);
         }
     }
 
@@ -111,7 +111,7 @@ public class Storage {
         try {
             Files.write(location, dataStr.getBytes());
         } catch (IOException e) {
-            throw new ChatbotException(Message.SAVE_FAIL);
+            throw new ChatbotException(Message.MESSAGE_FAIL_SAVE);
         }
 
         return true;

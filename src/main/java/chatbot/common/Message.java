@@ -2,20 +2,12 @@ package chatbot.common;
 
 public class Message {
 
-    public static final String EXIT_MESSAGE = "Bye, hope to see you again soon.";
-
-    public static final String INVALID_DATE = "Please enter a valid date or date format (yyyy-mm-dd).";
-    public static final String INVALID_COMMAND = "I'm not sure what you mean. ";
-    public static final String INVALID_NUMBER = "Please give me a valid number.";
-
-    public static final String SUGGEST_SORT_BY_DATE = "DO YOU MEAN: sort /by earliest or sort /by latest?";
-
-    public static final String TASK_EMPTY = "Task cannot be empty.";
-    public static final String DATE_MISSING = "Ah oh, you forgot the date.";
-
-
-    public static final String LOAD_FAIL = "Ooops, I couldn't load the tasks.";
-    public static final String SAVE_FAIL = "Oooops, I couldn't save the tasks.";
-
-    public static final String ITEM_NOT_EXIST = "That item does not exist!";
+    public static final String MESSAGE_UNKNOWN_COMMAND = "I'm not sure what you mean.";
+    public static final String MESSAGE_INVALID_DATE_FORMAT = "Please enter a valid date or date format (yyyy-mm-dd).";
+    public static final String MESSAGE_EXIT = "Bye, hope to see you again soon.";
+    public static final String MESSAGE_EMPTY_TASK = "Task cannot be empty.";
+    public static final String MESSAGE_EMPTY_DATE = "Ah oh, you forgot the date.";
+    public static final String MESSAGE_FAIL_LOAD = "Ooops, I couldn't load the tasks.";
+    public static final String MESSAGE_FAIL_SAVE = "Oooops, I couldn't save the tasks.";
+    public static final String MESSAGE_ITEM_DO_NOT_EXIST = "That item does not exist!";
 }
