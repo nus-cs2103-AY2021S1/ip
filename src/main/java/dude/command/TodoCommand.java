@@ -37,6 +37,13 @@ public class TodoCommand extends Command {
         try {
             StringBuilder uiOutput = new StringBuilder();
             Todo current = new Todo(description);
+            int findDuplicate = tasks.detectDuplicates(current);
+            System.out.println(findDuplicate);
+            if (findDuplicate != super.FALSE) {
+                uiOutput.append("Duplicate task found at position ").append(findDuplicate).append("!");
+                ui.setMessage(uiOutput.toString());
+                return;
+            }
             tasks.addTask(current);
             uiOutput.append("Got it bro, I've added this task:\n  ").append(current.toString() + "\n").append(
                     "Now you have ").append(tasks.getCount()).append(" tasks in the list.");

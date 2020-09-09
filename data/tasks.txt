@@ -1,6 +1,6 @@
-D | 0 | fog  | 2020-12-04
-T | 1 | pop 
-E | 1 | tank  | 2020-12-12
+D | 0 | fog | 2020-12-04
+T | 1 | pop
+E | 1 | tank | 2020-12-12
 T | 0 | asd
 T | 0 | asdf
 T | 1 | temp

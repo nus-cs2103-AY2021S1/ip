@@ -9,6 +9,7 @@ import dude.ui.Ui;
  * The abstract task contains the action of the command and whether the command calls for an exit.
  */
 public abstract class Command {
+    protected static final int FALSE = -1;
     protected boolean willExit;
     private String action;
 

@@ -53,6 +53,7 @@ public class Parser {
                 return new FindCommand(commands[0], commands[1].trim());
             default:
                 assert false : currentCommand;
+                throw new InvalidCommandException("Sorry, your command is not recognised!");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidArgumentException("Sorry, your argument cannot be empty!");
