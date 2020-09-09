@@ -35,6 +35,7 @@ public class DukeTaskList {
      * @param task the task to be added
      */
     public void addTask(Task task) {
+        assert task != null : "task cannot be null";
         tasks.add(task);
     }
 
@@ -86,6 +87,8 @@ public class DukeTaskList {
      * @return the list of tasks containing the keyword
      */
     public ArrayList<Task> findTasks(String keyword) {
+        assert !keyword.isBlank() : "keyword for findTasks cannot be empty";
+
         ArrayList<Task> tasksFound = new ArrayList<>();
 
         for (Task task : tasks) {

@@ -43,16 +43,6 @@ public class GuiResponse {
     }
 
     /**
-     * Repeats the input string once.
-     * @param str string to be repeated
-     */
-    public void echo(String str) {
-        resetResponse();
-
-        response.append(str + '\n');
-    }
-
-    /**
      * Prints out the current tasks saved in task list.
      */
     public void reportCurrentTasks() {

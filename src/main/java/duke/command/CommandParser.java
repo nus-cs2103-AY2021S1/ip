@@ -2,9 +2,6 @@ package duke.command;
 
 import duke.Duke;
 import duke.exception.DukeException;
-import duke.exception.IncorrectFormatException;
-import duke.exception.InvalidIndexException;
-import duke.exception.NoDescriptionException;
 import duke.exception.UnknownCommandException;
 
 /**
@@ -57,7 +54,7 @@ public class CommandParser {
     private void tryExecuteCommand(Command command, String rest, Duke duke) {
         try {
             command.execute(rest, duke);
-        } catch (NoDescriptionException | IncorrectFormatException | InvalidIndexException exception) {
+        } catch (DukeException exception) {
             reportException(exception, duke);
         }
     }
