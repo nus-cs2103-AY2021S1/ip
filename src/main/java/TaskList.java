@@ -1,60 +1,68 @@
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
 public class TaskList {
-    private ArrayList<Task> ls = new ArrayList<>();
 
-    public TaskList(ArrayList<Task> list) {
-        ls.addAll(list);
+    private ArrayList<Task> list = new ArrayList<>();
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
+    public TaskList(ArrayList<Task> ls) {
+        list.addAll(ls);
     }
 
-    /**
-     * Adds param task into this.ls
-     *
-     * @param task task to be added to list
-     */
-    void add(Task task) {
-        ls.add(task);
+    String add(String input, boolean isEvent) {
+        Task task;
+        if (input.contains("/")) {
+            task = parseTime(input, isEvent);
+            list.add(task);
+        } else {
+            task = new ToDo((input));
+            list.add(task);
+        }
+        return task != null ? "Poco has added " + task.toString() + " to your list"
+                                + "\n" + "Pending Tasks: " + list.size()
+                            : "Error adding task";
     }
 
-    /**
-     * Returns size of this.ls
-     *
-     * @return int
-     */
-    int size() {
-        return ls.size();
+    private Task parseTime(String input, boolean isEvent) {
+        String[] arr = input.split("/", 2);
+        try {
+            System.out.println(arr[1]);
+            LocalDateTime ldt = LocalDateTime.parse(arr[1].trim(), formatter);
+            return isEvent ? new Event(arr[0], ldt)
+                            : new Deadline(arr[0], ldt);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return null;
     }
 
-    /**
-     * Marks the task at index in this.ls as done
-     *
-     * @param index index of task that is done
-     */
-    void done(int index) {
-        ls.get(index).done();
+
+    String done(String input) {
+        int index = Integer.parseInt(input) - 1;
+        if (index < 0 || index >= list.size()) {
+            index++;
+            return "Poco cannot find the task: " + index;
+        }
+        list.get(index).done();
+        return "Good job!" + "\n"
+                + list.get(index).toString();
     }
 
-    /**
-     * Removes the task at index in this.ls
-     *
-     * @param index index of task to be removed
-     */
-    void remove(int index) {
-        ls.remove(index);
-    }
-
-    /**
-     * Returns task at index in this.ls
-     * @param index index of task to be returned
-     * @return Task
-     */
-    Task get(int index) {
-        return ls.get(index);
+    String delete(String input) {
+        int index = Integer.parseInt(input) - 1;
+        if (index < 0 || index >= list.size()) {
+            index++;
+            return "Poco cannot find the task: " + index;
+        }
+        list.remove(index);
+        return "Poco has deleted the task";
     }
 
     String find(String match) {
         String s = "";
-        for (Task task : ls) {
+        for (Task task : list) {
             if (task.toString().contains(match)) {
                 s = s.concat(task.toString());
                 s = s.concat("\n");
@@ -63,13 +71,21 @@ public class TaskList {
         return s;
     }
 
+    String displayList(String input) {
+        if (list.size() == 0) {
+            return "Yay, all done!";
+        }
+        return this.toString();
+    }
+
     @Override
     public String toString() {
         String s = "";
-        for (Task task : ls) {
+        for (Task task : list) {
             s = s.concat(task.toString());
             s = s.concat("\n");
         }
         return s;
     }
+
 }

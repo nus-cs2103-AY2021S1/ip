@@ -1,1 +1,3 @@
-? ? read book 
+? [T] cry            
+? [D] return book  /09/09/2020 18:00
+? [E] lie on floor /09/09/2020 18:00

@@ -1,14 +1,19 @@
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public abstract class Task {
-    String desc;
-    boolean isDone;
-    char symbol;
-    String time = "";
 
-    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("EEE dd MMM HH:mm");
+    protected static final String TODO_SYMBOL = "[T]";
+    protected static final String DEADLINE_SYMBOL = "[D]";
+    protected static final String EVENT_SYMBOL = "[E]";
+
+    protected String sym = "";
+    protected LocalDateTime time;
+    private static DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
 
 
+    private String desc;
+    private boolean isDone;
 
     public Task(String desc) {
         this.desc = desc;
@@ -17,7 +22,10 @@ public abstract class Task {
     @Override
     public String toString() {
         String check = isDone ? "\u2713" : "\u2718";
-        return check + " " + symbol + " " + desc + " " + time;
+        String timeText = time == null
+                        ? ""
+                        : "/" + time.format(formatter);
+        return check + " " + sym + " " + desc + " " + timeText;
     }
 
     public void done() {
@@ -25,27 +33,35 @@ public abstract class Task {
     }
 
     public static Task parseToTask(String line) {
-        char c = line.charAt(2);
-        String desc = line.substring(4);
-        Task t;
+        String c = line.substring(2, 5);
+        String desc = line.substring(6);
+        String[] arr;
 
-        if (c == ToDo.sym) {
-            t = new ToDo(desc);
-        } else if (c == Event.sym) {
-            t = new Event(desc);
-        } else {
-            System.out.println("Error didn't recognize task symbol");
-            return null;
+        switch(c) {
+        case TODO_SYMBOL:
+            return new ToDo(desc);
+        case DEADLINE_SYMBOL:
+            arr = desc.split("/", 2);
+            try {
+                LocalDateTime ldt = LocalDateTime.parse(arr[1].trim(), formatter);
+                return new Deadline(arr[0], ldt);
+            } catch (Exception e) {
+                System.out.println(e);
+                break;
+            }
+        case EVENT_SYMBOL:
+            arr = desc.split("/", 2);
+            try {
+                LocalDateTime ldt1 = LocalDateTime.parse(arr[1].trim(), formatter);
+                return new Event(arr[0], ldt1);
+            } catch (Exception e) {
+                System.out.println(e);
+                break;
+            }
+        default:
+            System.out.println("Error: could not recognize task symbol");
         }
-
-        char d = line.charAt(0);
-
-        //check if its done
-        if (d == '\u2713') {
-            t.done();
-        }
-
-        return t;
+        return null;
     }
 
 }
