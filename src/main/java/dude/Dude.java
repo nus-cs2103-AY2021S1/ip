@@ -72,14 +72,4 @@ public class Dude {
             }
         }
     }
-
-    /**
-     * Runs the application.
-     *
-     * @param args unused.
-     */
-    public static void main(String[] args) {
-        Dude dude = new Dude();
-        dude.run();
-    }
 }
