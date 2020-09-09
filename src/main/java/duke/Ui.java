@@ -74,7 +74,7 @@ public class Ui {
         }
     }
     public void setMessageUndoneTask() {
-        message = "I've marked that task as unfinished.";
+        message = "I have marked that task as unfinished.";
     }
     public void printException(DukeException e) {
         System.out.println(e.getMessage());
