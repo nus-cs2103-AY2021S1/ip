@@ -43,6 +43,35 @@ public class Parser {
         }
     }
 
+    private AddCommand createAddCommand(String key, String input) throws DukeDateTimeException {
+        if (CommandKey.equalsCommandKey(key, CommandKey.TODO)) {
+            String taskDescription = input.substring(5);
+            return new AddCommand(key, taskDescription);
+        } else if (CommandKey.equalsCommandKey(key, CommandKey.DEADLINE)) {
+            String[] taskDetails = input.substring(9).split(" /by ");
+            String task = taskDetails[0];
+            String[] by = taskDetails[1].split(" ");
+            try {
+                LocalDate date = parseDate(by[0]);
+                LocalTime time = parseTime(by[1]);
+                return new AddCommand(key, task, date, time);
+            } catch (DukeDateTimeException e) {
+                throw e;
+            }
+        } else {
+            String[] taskDetails = input.substring(6).split(" /at ");
+            String task = taskDetails[0];
+            String[] by = taskDetails[1].split(" ");
+            try {
+                LocalDate date = parseDate(by[0]);
+                LocalTime time = parseTime(by[1]);
+                return new AddCommand(key, task, date, time);
+            } catch (DukeDateTimeException e) {
+                throw e;
+            }
+        }
+    }
+
     /**
      * Parses and validates user input before returning a command to be executed.
      *
@@ -79,36 +108,17 @@ public class Parser {
             if (processedInput.length == 1) {
                 throw new DukeNoDescriptionException(input);
             }
-            String taskDescription = input.substring(5);
-            return new AddCommand(key, taskDescription);
+            return createAddCommand(key, input);
         } else if (CommandKey.equalsCommandKey(key, CommandKey.DEADLINE)) {
             if (processedInput.length == 1) {
                 throw new DukeNoDescriptionException(input);
             }
-            String[] taskDetails = input.substring(9).split(" /by ");
-            String task = taskDetails[0];
-            String[] by = taskDetails[1].split(" ");
-            try {
-                LocalDate date = parseDate(by[0]);
-                LocalTime time = parseTime(by[1]);
-                return new AddCommand(key, task, date, time);
-            } catch (DukeDateTimeException e) {
-                throw e;
-            }
+            return createAddCommand(key, input);
         } else if (CommandKey.equalsCommandKey(key, CommandKey.EVENT)) {
             if (processedInput.length == 1) {
                 throw new DukeNoDescriptionException(input);
             }
-            String[] taskDetails = input.substring(6).split(" /at ");
-            String task = taskDetails[0];
-            String[] by = taskDetails[1].split(" ");
-            try {
-                LocalDate date = parseDate(by[0]);
-                LocalTime time = parseTime(by[1]);
-                return new AddCommand(key, task, date, time);
-            } catch (DukeDateTimeException e) {
-                throw e;
-            }
+            return createAddCommand(key, input);
         } else {
             throw new DukeUnknownCommandException(input);
         }
