@@ -4,11 +4,11 @@ package duke;
  * Creates a task which can be further classified into different categories.
  */
 public class Task {
-    protected String taskname;
+    protected String taskName;
     protected boolean isDone;
 
-    public Task(String taskname, boolean isDone) {
-        this.taskname = taskname;
+    public Task(String taskName, boolean isDone) {
+        this.taskName = taskName;
         this.isDone = isDone;
     }
 
@@ -35,6 +35,6 @@ public class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.taskname;
+        return "[" + this.getStatusIcon() + "] " + this.taskName;
     }
 }

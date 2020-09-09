@@ -4,8 +4,8 @@ package duke;
  * Creates a type of task called todo which doesn't have a specified time.
  */
 public class Todo extends Task  {
-    public Todo(String taskname, boolean isDone) {
-        super(taskname, isDone);
+    public Todo(String taskName, boolean isDone) {
+        super(taskName, isDone);
     }
 
     /**

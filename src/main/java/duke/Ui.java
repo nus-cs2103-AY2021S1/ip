@@ -25,11 +25,11 @@ public class Ui {
     /**
      * Prints out "no problem" messages to the user.
      */
-    public void noProblem() {
+    public void printSuccess() {
         System.out.println("     No problem! I've added this task to the list:");
     }
 
-    public String noProblemMessage() {
+    public String printSuccessMessage() {
         return "     No problem! I've added this task to the list:\n";
     }
     
@@ -109,7 +109,7 @@ public class Ui {
         System.out.println("     Here are the matching tasks in your list:");
         for (int i = 1, j = 1; i <= list.size(); i++) {
             thisTask = list.get(i - 1);
-            if (thisTask.taskname.contains(keyword)) {
+            if (thisTask.taskName.contains(keyword)) {
                 System.out.println("     " + j + "." + thisTask.toString());
                 j++;
             }
@@ -121,7 +121,7 @@ public class Ui {
         String output = "     Here are the matching tasks in your list:\n";
         for (int i = 1, j = 1; i <= list.size(); i++) {
             thisTask = list.get(i - 1);
-            if (thisTask.taskname.contains(keyword)) {
+            if (thisTask.taskName.contains(keyword)) {
                 output = output + "     " + j + "." + thisTask.toString() + "\n";
                 j++;
             }

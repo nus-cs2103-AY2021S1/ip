@@ -10,7 +10,7 @@ public class Parser {
      * @param input The input from the user.
      * @return The type of instruction.
      */
-    public Instruction load(String input) {
+    protected Instruction load(String input) {
         if (input.equals("list")) {
             return Instruction.LIST;
         } else if (input.startsWith("done")) {
