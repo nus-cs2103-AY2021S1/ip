@@ -10,6 +10,7 @@ import duke.command.ExitCommand;
 import duke.command.InvalidCommand;
 import duke.command.HelpCommand;
 import duke.command.SortCommand;
+import duke.command.StartTaskCommand;
 
 import java.util.Arrays;
 
@@ -74,6 +75,7 @@ public class Parser {
         case "todo":
         case "event":
         case "deadline":
+        case "fixed":
             String description = Parser.getTaskDescription(parsed);
             return new AddCommand(command, description);
         case "done":
@@ -114,6 +116,15 @@ public class Parser {
                 return new SortCommand(parsed[1]);
             } catch (ArrayIndexOutOfBoundsException aioobe) {
                 return new InvalidCommand("You can sort by: name, type, datetime");
+            }
+        case "start":
+            try {
+                int taskNumber = Integer.parseInt(parsed[1]);
+                return new StartTaskCommand(taskNumber, parsed[2] + " " + parsed[3]);
+            } catch (ArrayIndexOutOfBoundsException aioobe) {
+                return new InvalidCommand();
+            } catch (NumberFormatException nfe) {
+                throw new DukeException("Invalid task number!");
             }
         default:
             return new InvalidCommand();
