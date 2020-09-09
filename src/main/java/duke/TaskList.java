@@ -10,6 +10,10 @@ public class TaskList implements java.io.Serializable {
     public TaskList(ArrayList<Task> store) {
         this.store = store;
     }
+
+    public TaskList() {
+        this.store = new ArrayList<>();
+    }
     public void addTask(Task task) {
         store.add(task);
     }

@@ -1,8 +1,7 @@
 package duke;
 
+import java.io.*;
 import java.nio.file.Paths;
-import java.io.File;
-import java.io.FileWriter;
 import java.util.ArrayList;
 import java.nio.file.Files;
 /**
@@ -24,19 +23,19 @@ public class Storage {
                 storageFolder.mkdir(); // creates folder if it doesn't exist
             }
 
-            File storageFile = new File("./data/duke.txt");
-            if (!storageFile.exists()) {
-                storageFile.createNewFile(); // creates file if it doesn't exist
+            this.fileHandle = new File("./data/duke.ser");
+            if (fileHandle.exists()) {
+                // Try to open the file and parse the contents
+                FileInputStream fileIn =
+                        new FileInputStream("./data/duke.ser");
+                ObjectInputStream in = new ObjectInputStream(fileIn);
+                this.taskList = (TaskList) in.readObject();
+                in.close();
+                fileIn.close();
+            } else {
+                this.taskList = new TaskList();
             }
 
-            // Initializes handle for writing to file
-            this.fileHandle = storageFile;
-
-            // Try to open the file and parse the contents
-            String data = Files.readString(Paths.get("./data/duke.txt"));
-            ArrayList<Task> tasks = Parser.parseFile(data);
-            // Load contents into store
-            this.taskList = new TaskList(tasks);
         } catch (Exception e) {
             System.out.println("Failed to initialize storage");
             System.out.println(e.toString());
@@ -49,22 +48,13 @@ public class Storage {
      */
     public boolean syncTasks() {
         try {
-            // Delete the current file
-            fileHandle.delete();
-
-            // Create a new file
-            fileHandle.createNewFile();
-
-            // Initializes handle for writing to file
-            this.writeHandle = new FileWriter("./data/duke.txt");
-
-            // Format the store output as a string
-            String data = taskList.dumpTasks();
-
-            // Write the store to file
-            writeHandle.write(data);
-            writeHandle.close();
-            System.out.println("Saved to disc");
+            FileOutputStream fileOut =
+                    new FileOutputStream("./data/duke.ser");
+            ObjectOutputStream out = new ObjectOutputStream(fileOut);
+            out.writeObject(taskList);
+            out.close();
+            fileOut.close();
+            System.out.printf("Serialized data is saved in ./data/duke.ser");
             return true;
         } catch (Exception e) {
             System.out.println(e.toString());
