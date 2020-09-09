@@ -1,4 +1,4 @@
-	Hi handsome! My name is Duck. What can I do for you?
+	Hi Poppins! My name is Duck. What can I do for you?
 	Got it. I've added this task:
 		[T][✗] read book
 	Now you have 1 tasks in the list.

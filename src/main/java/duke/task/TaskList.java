@@ -130,7 +130,7 @@ public class TaskList {
                         matchList.add(matchTask);
                     }
                 } catch (PatternSyntaxException e) {
-                    throw new DukeInvalidCommandException("Sorry handsome but I'm not sure about this command :)");
+                    throw new DukeInvalidCommandException("Sorry Poppins but I'm not sure about this command :)");
                 }
             }
         });

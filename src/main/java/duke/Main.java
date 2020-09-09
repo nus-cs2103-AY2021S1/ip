@@ -3,11 +3,11 @@ package duke;
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import duke.ui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
@@ -39,13 +39,20 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
+            scene.getStylesheets().add("/view/display.css");
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
-            duke.getStage(stage);
+            initializeStage(stage);
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    private void initializeStage(Stage stage) {
+        stage.setTitle("Duck");
+        stage.getIcons().add(new Image("/images/DaDuke.png"));
+        duke.getStage(stage);
     }
 }
 

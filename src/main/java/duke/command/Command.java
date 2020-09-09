@@ -73,7 +73,7 @@ public class Command {
                 break;
             default:
                 if (findMatchingTasks(tasks, taskInfo).length() <= 0) {
-                    throw new DukeInvalidCommandException("Sorry handsome but I'm not sure about this command :)");
+                    throw new DukeInvalidCommandException("Sorry Poppins but I'm not sure about this command :)");
                 } else {
                     dukeResponse = findMatchingTasks(tasks, taskInfo);
                 }
@@ -159,7 +159,7 @@ public class Command {
      */
     private String handleToDo(TaskList tasks, String taskInfo) throws DukeInvalidCommandException {
         if (taskInfo.trim().equals("todo")) {
-            throw new DukeInvalidCommandException("The command is incomplete handsome :D");
+            throw new DukeInvalidCommandException("The command is incomplete Poppins :D");
         }
         String requiredTask = taskInfo.replace("todo", "").trim();
         assert taskInfo.length() > 0 : "taskInfo should not be empty";
@@ -179,12 +179,12 @@ public class Command {
         // splits task to 2 segments - task information and date
         String[] stringArr = taskWithBy.split("/by", 2);
         if (stringArr.length != 2) {
-            throw new DukeInvalidCommandException("The command is incomplete handsome :D");
+            throw new DukeInvalidCommandException("The command is incomplete Poppins :D");
         }
         String requiredTask = stringArr[0].trim();
         String by = stringArr[1].trim();
         if (requiredTask.length() == 0 || by.length() == 0) {
-            throw new DukeInvalidCommandException("The command is incomplete handsome :D");
+            throw new DukeInvalidCommandException("The command is incomplete Poppins :D");
         }
         assert requiredTask.length() > 0 : "taskInfo should not be empty";
         assert by.length() > 0 : "by should not be empty";
@@ -204,12 +204,12 @@ public class Command {
         // splits task to 2 segments - task information and date
         String[] stringArr = taskWithAt.split("/at", 2);
         if (stringArr.length != 2) {
-            throw new DukeInvalidCommandException("The command is incomplete handsome :D");
+            throw new DukeInvalidCommandException("The command is incomplete Poppins :D");
         }
         String requiredTask = stringArr[0].trim();
         String at = stringArr[1].trim();
         if (requiredTask.length() == 0 || at.length() == 0) {
-            throw new DukeInvalidCommandException("The command is incomplete handsome :D");
+            throw new DukeInvalidCommandException("The command is incomplete Poppins :D");
         }
         assert requiredTask.length() > 0 : "taskInfo should not be empty";
         assert at.length() > 0 : "at should not be empty";
