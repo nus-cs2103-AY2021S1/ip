@@ -1,14 +1,14 @@
 package duke;
+import java.util.Arrays;
 
 import duke.task.Task;
-
 /**
  * Responsible for interpreting the input and interacting with the User.
  */
 public class Duke {
     private final Ui ui;
     private TaskList tasks;
-    private final Storage storage;
+    private Storage storage;
     private final Parser parser;
 
     /**
@@ -17,12 +17,16 @@ public class Duke {
      */
     public Duke(String filePath) {
         this.ui = new Ui();
-        this.storage = new Storage(filePath);
         this.parser = new Parser();
         try {
-            this.tasks = new TaskList(storage.loadFile());
+            this.storage = new Storage(filePath);
         } catch (DukeException e) {
-            ui.showError(e.getMessage());
+            this.storage = new Storage();
+        }
+
+        try {
+            this.tasks = new TaskList(this.storage.loadFile());
+        } catch (DukeException e) {
             this.tasks = new TaskList();
         }
     }
@@ -90,7 +94,7 @@ public class Duke {
             switch (command) {
             //Common functions
             case "bye":
-                storage.saveFile(tasks.toSaveFormat());
+                storage.saveToFile(tasks.toSaveFormat());
                 response = ui.showBye();
                 break;
             case "done":
@@ -104,6 +108,11 @@ public class Duke {
                 } else {
                     response = ui.showTasks(tasks.toString());
                 }
+                break;
+            case "archive":
+                String[] filePaths = Arrays.copyOfRange(inputComponents, 1, inputComponents.length);
+                this.storage.saveToFile(tasks.toSaveFormat(), filePaths);
+                response = ui.show("You have successfully archive current progress to the file(s) indicated");
                 break;
 
             //3 different types of task

@@ -4,6 +4,8 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -13,44 +15,76 @@ import duke.task.Task;
 import duke.task.ToDo;
 
 
-
 /**
  * Represents a file location that user's input. Capable of reading from and writing to the file.
  */
 public class Storage {
+    private static final String DEFAULT_SAVE_LOCATION = "data/duke.txt";
+
     private final File file;
     private final String filePath;
+    /**
+     * Points to the default save location.
+     */
+    public Storage() {
+        this.file = new File(DEFAULT_SAVE_LOCATION);
+        this.filePath = DEFAULT_SAVE_LOCATION;
+    }
 
     /**
      * Points to the file which filePath is input by User.
      * @param filePath filePath of the file that wish to be load/ write
      */
-    public Storage(String filePath) {
+    public Storage(String filePath) throws DukeException {
         assert !filePath.equals("") : "Empty FilePath";
-        this.file = new File(filePath);
+        File file = new File(filePath);
+        if (!isValidFilePath(filePath)) {
+            throw new DukeException("File Path is a directory -OR- Can't create file at location");
+        }
+        this.file = file;
         this.filePath = filePath;
     }
 
+    private boolean isValidFilePath(String filePath) {
+        return Files.isWritable(Paths.get(filePath));
+    }
+
     /**
-     * Write the argument into the file
+     * If there is input in FilePaths, write to File
+     * Write the argument into the file destinated during initialisation
      * @param data An array of String to be written to the designated file.
      * @throws DukeException If no permission to create at filePath or filePath is a directory.
      */
-    public void saveFile(String[] data) throws DukeException {
+    public void saveToFile(String[] data, String... filePaths) throws DukeException {
         try {
-            FileWriter fw = new FileWriter(file);
-            fw.write("");
-            for (String s: data) {
-                fw.append(s);
+            //If not specified, write to assigned filePath during initialisation
+            if (filePaths.length == 0) {
+                FileWriter fw = new FileWriter(this.file);
+                fw.write("");
+                for (String s: data) {
+                    fw.append(s);
+                }
+                fw.close();
+                return;
             }
-            fw.close();
+
+            for (String currentFilePath: filePaths) {
+                File currentFile = new File(currentFilePath);
+                if (isValidFilePath(filePath)) {
+                    FileWriter fw = new FileWriter(currentFile);
+                    fw.write("");
+                    for (String s: data) {
+                        fw.append(s);
+                    }
+                    fw.close();
+                }
+            }
         } catch (IOException err) {
             throw new DukeException("File Path is a directory -OR- Can't create file at location");
         }
     }
 
-    /**
-     * Read and interpret the saved file.
+    /** Read and interpret the saved file.
      * @return ArrayList of Task that is saved inside the designated file. If file / directory does not exist, create.
      * @throws DukeException If file is not found.
      */
@@ -122,4 +156,5 @@ public class Storage {
         }
         return newTask;
     }
+
 }
