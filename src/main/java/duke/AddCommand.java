@@ -60,7 +60,7 @@ public class AddCommand extends Command {
             ui.processAddMessage(newTask, taskList.getCount());
             storage.updateTasks(taskList);
         } else {
-            throw new DukeException("Wrong command type");
+            assert false;
         }
     }
 
