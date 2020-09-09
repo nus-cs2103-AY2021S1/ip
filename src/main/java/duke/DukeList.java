@@ -79,6 +79,7 @@ public class DukeList {
     }
 
 
+
     /**
      * Helper function for adding an item.
      *
@@ -92,6 +93,8 @@ public class DukeList {
         TaskType taskType = Parser.getTaskKeyword(descriptionString);
         
         Task newTask = this.handleTasks(strArr, taskType);
+      
+        assert newTask != null;
         this.taskList.add(newTask);
 
         return newTask;

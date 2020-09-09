@@ -62,6 +62,8 @@ public class Duke {
         try {
             int index = Integer.parseInt(inputTextArr[1]);
             String statusMsg = this.taskList.markAsDone(index);
+
+            assert statusMsg != null : "Status message not found";
             return statusMsg;
 
         } catch (ArrayIndexOutOfBoundsException e) {
@@ -87,6 +89,8 @@ public class Duke {
         try {
             int index = Integer.parseInt(inputTextArr[1]);
             String statusMsg = this.taskList.delete(index);
+
+            assert statusMsg != null : "Status message not found";
             return statusMsg;
         } catch (ArrayIndexOutOfBoundsException e) {
             // forwards ArrayIndexOutOfBoundsException from Integer.parseInt()
@@ -109,6 +113,8 @@ public class Duke {
     private String find(String[] inputTextArr) {
         String keyword = Parser.getItemSubstring(inputTextArr);
         String statusMsg = this.taskList.find(keyword);
+
+        assert statusMsg != null : "Status message not found";
         return statusMsg;
     }
 
@@ -184,6 +190,7 @@ public class Duke {
 
         while (!shouldQuit && this.ui.hasNextLine()) {
             msgInput = this.ui.nextLine();
+            assert msgInput != null;
             dukeLogicHelper(msgInput);
         }
     }

@@ -103,6 +103,7 @@ public class Storage {
                     boolean isFileCreated = this.createFile();
                 }
 
+                assert fileExists();
                 FileWriter fWriter = new FileWriter(storageFile);
                 BufferedWriter writer = new BufferedWriter(fWriter);
 
@@ -146,6 +147,7 @@ public class Storage {
             parsedStringBuilder.append("deadline ").append(taskStr).append(" /by ").append(splitStr[3]);
             break;
         default:
+            // assuming storage wrote to disk correctly, switch will never reach default.
             break;
         }
 
