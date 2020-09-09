@@ -8,6 +8,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
 
+    private static final String TYPE = "D";
+    private static final String TYPE_ICON = "[D]";
     protected LocalDateTime by;
 
     /**
@@ -20,8 +22,8 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String by) {
         super(description);
-        this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-        this.storeAs = "D,0," + description + "," + by;
+        this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern(DATE_TIME_INPUT_PATTERN));
+        this.storeAs = storeNotDoneDeadline(description, by);
     }
 
     /**
@@ -35,13 +37,13 @@ public class Deadline extends Task {
      */
     public Deadline(String done, String description, String by) {
         super(description);
-        this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        this.by = LocalDateTime.parse(by, DateTimeFormatter.ofPattern(DATE_TIME_INPUT_PATTERN));
 
-        if (done.equals("1")) {
+        if (done.equals(DONE)) {
             this.isDone = true;
-            this.storeAs = "D,1," + description + "," + by;
+            this.storeAs = storeDoneDeadline(description, by);
         }
-        this.storeAs = "D,1," + description + "," + by;
+        this.storeAs = storeNotDoneDeadline(description, by);
     }
 
     /**
@@ -51,7 +53,17 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: "
-                + by.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
+        return TYPE_ICON + super.toString() + showDeadlineTime();
+    }
+
+    private String storeDoneDeadline(String description, String by) {
+        return TYPE + SEPARATOR + DONE + SEPARATOR + description + SEPARATOR + by;
+    }
+
+    private String storeNotDoneDeadline(String description, String by) {
+        return TYPE + SEPARATOR + NOT_DONE + SEPARATOR + description + SEPARATOR + by;
+    }
+    private String showDeadlineTime() {
+        return " (by: " + by.format(DateTimeFormatter.ofPattern(DATE_TIME_OUTPUT_PATTERN)) + ")";
     }
 }

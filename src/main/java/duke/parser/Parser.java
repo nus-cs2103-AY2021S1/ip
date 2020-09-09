@@ -16,6 +16,27 @@ import duke.exception.DukeException;
  */
 public class Parser {
 
+    private static final String EXCEPTION_LIST_EXTRA_INPUTS =
+            "Extra inputs detected! Please only input 'list'.";
+    private static final String EXCEPTION_EMPTY_TODO =
+            "☹ OOPS!!! The description of a todo cannot be empty.";
+    private static final String EXCEPTION_EMPTY_DEADLINE =
+            "☹ OOPS!!! The description of a deadline cannot be empty.";
+    private static final String EXCEPTION_EMPTY_EVENT =
+            "☹ OOPS!!! The description of a event cannot be empty.";
+    private static final String EXCEPTION_NO_ITEM_NUMBER =
+            "Please specify item number!";
+    private static final String EXCEPTION_NO_SEARCH_TERM =
+            "Please specify a description to search!";
+    private static final String EXCEPTION_DEADLINE_FORMAT =
+            "Please input in the following format "
+            + "'deadline <description> /by <yyyy-MM-dd HH:mm>' with a valid date & time";
+    private static final String EXCEPTION_EVENT_FORMAT =
+            "Please input in the following format "
+            + "'event <description> /at <yyyy-MM-dd HH:mm>' with a valid date & time";
+    private static final String EXCEPTION_INVALID_FORMAT =
+            "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+
     /**
      * Takes in a line of user input as a String and returns a relevant Command. Otherwise,
      * throw a DukeException when a command is invalid.
@@ -38,79 +59,74 @@ public class Parser {
         if (instruction[0].equals("bye")) {
             return new ExitCommand();
         } else if (instruction[0].equals("list")) {
-            if (instruction.length == 1) {
-                return new ListCommand();
-            } else {
-                throw new DukeException("Extra inputs detected! Please only input 'list'.");
+            if (instruction.length != 1) {
+                throw new DukeException(EXCEPTION_LIST_EXTRA_INPUTS);
             }
+            return new ListCommand();
+
         } else if (instruction[0].equals("todo")) {
             if (instruction.length == 1) {
-                throw new DukeException("☹ OOPS!!! The description of a todo cannot be empty.");
-            } else {
-                return new TodoCommand(instruction[1]);
+                throw new DukeException(EXCEPTION_EMPTY_TODO);
             }
+            return new TodoCommand(instruction[1]);
+
         } else if (instruction[0].equals("deadline")) {
             if (instruction.length == 1) {
-                throw new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.");
-            } else {
-                //check if contains deadline " /by yyyy-MM-dd HH:mm"
-                if ((instruction[1].contains(" /by "))
-                        && (instruction[1].split(" /by ")[1]
-                                .matches("^\\d{4}-(0[1-9]|1[012])\\-(0[1-9]|[12][0-9]|3[01]) "
-                                        + "([01]?[0-9]|2[0-3]):[0-5][0-9]"))) {
-                    return new DeadlineCommand(instruction[1].split(" /by ")[0],
-                            instruction[1].split(" /by ")[1]);
-
-                } else {
-                    throw new DukeException("Please input in the following format "
-                            + "'deadline <description> /by <yyyy-MM-dd HH:mm>' with a valid date & time");
-                }
+                throw new DukeException(EXCEPTION_EMPTY_DEADLINE);
             }
+            //check deadline format
+            boolean correctDeadlineFormat = (instruction[1].contains(" /by "))
+                    && (instruction[1].split(" /by ")[1]
+                    .matches("^\\d{4}-(0[1-9]|1[012])\\-(0[1-9]|[12][0-9]|3[01]) "
+                            + "([01]?[0-9]|2[0-3]):[0-5][0-9]"));
+            if (!correctDeadlineFormat) {
+                throw new DukeException(EXCEPTION_DEADLINE_FORMAT);
+            }
+            String description = instruction[1].split(" /by ")[0];
+            String deadlineTime = instruction[1].split(" /by ")[1];
+            return new DeadlineCommand(description, deadlineTime);
 
         } else if (instruction[0].equals("event")) {
 
             if (instruction.length == 1) {
-                throw new DukeException("☹ OOPS!!! The description of a event cannot be empty.");
-            } else {
-                //check if contains event " /at yyyy-MM-dd HH:mm"
-                if ((instruction[1].contains(" /at "))
-                        && (instruction[1].split(" /at ")[1]
-                                .matches("^\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]) "
-                                        + "([01]?[0-9]|2[0-3]):[0-5][0-9]"))) {
-                    return new EventCommand(instruction[1].split(" /at ")[0],
-                            instruction[1].split(" /at ")[1]);
-                } else {
-                    throw new DukeException("Please input in the following format "
-                            + "'event <description> /at <yyyy-MM-dd HH:mm>' with a valid date & time");
-                }
+                throw new DukeException(EXCEPTION_EMPTY_EVENT);
             }
+            //check event format
+            boolean correctEventFormat = (instruction[1].contains(" /at "))
+                    && (instruction[1].split(" /at ")[1]
+                    .matches("^\\d{4}-(0[1-9]|1[012])-(0[1-9]|[12][0-9]|3[01]) "
+                            + "([01]?[0-9]|2[0-3]):[0-5][0-9]"));
+            if (!correctEventFormat) {
+                throw new DukeException(EXCEPTION_EVENT_FORMAT);
+            }
+            String description = instruction[1].split(" /at ")[0];
+            String eventTime = instruction[1].split(" /at ")[1];
+            return new EventCommand(description, eventTime);
         } else if (instruction[0].equals("done")) {
             //done with no other arguments
             if (instruction.length == 1) {
-                throw new DukeException("Please specify item number!");
+                throw new DukeException(EXCEPTION_NO_ITEM_NUMBER);
             } else if (instruction.length == 2) { //done with exactly 2 inputs
                 return new DoneCommand(instruction[1]);
-
             }
         } else if (instruction[0].equals("delete")) {
-            //done with no other arguments
+            //check for other arguments
             if (instruction.length == 1) {
-                throw new DukeException("Please specify item number!");
+                throw new DukeException(EXCEPTION_NO_ITEM_NUMBER);
             } else if (instruction.length == 2) { //done with exactly 2 inputs
                 return new DeleteCommand(instruction[1]);
             }
         } else if (instruction[0].equals("find")) {
             //find with no other arguments
             if (instruction.length == 1) {
-                throw new DukeException("Please specify a description to search!");
-            } else {
-                return new FindCommand(instruction[1]);
+                throw new DukeException(EXCEPTION_NO_SEARCH_TERM);
             }
+            return new FindCommand(instruction[1]);
         } else {
-            throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException(EXCEPTION_INVALID_FORMAT);
         }
 
-        throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        throw new DukeException(EXCEPTION_INVALID_FORMAT);
     }
 
 }

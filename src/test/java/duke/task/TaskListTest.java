@@ -67,7 +67,7 @@ public class TaskListTest {
             assertEquals("1.[T][✘] valid todo", tl2.toString());
             fail();
         } catch (DukeException e) {
-            assertEquals("file could not be parsed", e.getMessage());
+            assertEquals("error loading from file", e.getMessage());
         }
 
     }
