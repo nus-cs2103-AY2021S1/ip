@@ -1,13 +1,12 @@
 package duke;
 
 import duke.exception.InvalidDateTimeException;
+import duke.exception.InvalidUpdateInputException;
 
 /**
  * Represents a Event task
  */
 public class Event extends Task {
-
-    private DateAndTime dateTime;
 
     /**
      * Initialise a Event object
@@ -16,14 +15,10 @@ public class Event extends Task {
      * @param time         Time of event
      * @throws InvalidDateTimeException
      */
-    public Event(String description, String date, String time) throws InvalidDateTimeException {
+    public Event(String description, String date, String time) throws InvalidDateTimeException, InvalidUpdateInputException {
         super(description);
-        this.dateTime = new DateAndTime(date, time);
+        this.setDateTime(date, time);
     }
-
-    //public void setDateTime(String date, String time) throws InvalidDateTimeException {
-    //    this.dateTime = new DateAndTime(date, time);
-    //}
 
     /**
      * Convert Event object to a string representation.
@@ -32,12 +27,12 @@ public class Event extends Task {
     @Override
     public String toData() {
         return checkIsDone()
-                ? "E//1//" + getDescription() + "//" + this.dateTime.getDate() + "//" + this.dateTime.getTime()
-                : "E//0//" + getDescription() + "//" + this.dateTime.getDate() + "//" + this.dateTime.getTime();
+                ? "E//1//" + getDescription() + "//" + getDateTime().getDate() + "//" + getDateTime().getTime()
+                : "E//0//" + getDescription() + "//" + getDateTime().getDate() + "//" + getDateTime().getTime();
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.dateTime + ")";
+        return "[E]" + super.toString() + " (at: " + getDateTime() + ")";
     }
 }

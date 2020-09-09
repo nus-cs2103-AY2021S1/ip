@@ -9,7 +9,7 @@ public class InvalidDeadlineInputException extends DukeException {
      * Initiates exception
      */
     public InvalidDeadlineInputException() {
-        super("OOPS!!! Invalid input after deadline command. "
-                + "(Example input: deadline return book /by 2020/12/20 0800)");
+        super("OOPS!!! Invalid input after deadline command.\n"
+                + "(Format: deadline DESCRIPTION /by yyyy/mm/dd HHmm)");
     }
 }

@@ -1,5 +1,8 @@
 package duke;
 
+import duke.exception.InvalidDateTimeException;
+import duke.exception.InvalidUpdateInputException;
+
 /**
  * Represents Task
  */
@@ -7,7 +10,7 @@ public class Task {
 
     protected String description;
     protected boolean isDone;
-    //protected DateAndTime dateTime;
+    protected DateAndTime dateTime;
 
     /**
      * Initialise a Task object
@@ -16,6 +19,7 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.dateTime = null;
     }
 
     /**
@@ -62,6 +66,17 @@ public class Task {
      */
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public DateAndTime getDateTime() {
+        return this.dateTime;
+    }
+
+    public void setDateTime(String date, String time) throws InvalidDateTimeException, InvalidUpdateInputException {
+        if (this instanceof ToDo) {
+            throw new InvalidUpdateInputException();
+        }
+        this.dateTime = new DateAndTime(date, time);
     }
 
     /**

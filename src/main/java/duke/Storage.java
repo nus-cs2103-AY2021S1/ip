@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.exception.InvalidDateTimeException;
+import duke.exception.InvalidUpdateInputException;
 
 /**
  *  Storage deals with loading tasks from the file and saving tasks in the file.
@@ -39,7 +40,7 @@ public class Storage {
      * @throws FileNotFoundException
      * @throws InvalidDateTimeException
      */
-    public ArrayList<Task> getList() throws FileNotFoundException, InvalidDateTimeException {
+    public ArrayList<Task> getList() throws FileNotFoundException, InvalidDateTimeException, InvalidUpdateInputException {
         Scanner sc = new Scanner(this.file);
         ArrayList<Task> list = new ArrayList<>();
 

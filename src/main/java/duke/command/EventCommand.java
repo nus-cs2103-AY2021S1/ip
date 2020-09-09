@@ -8,6 +8,7 @@ import duke.TaskList;
 import duke.Ui;
 import duke.exception.InvalidDateTimeException;
 import duke.exception.InvalidEventInputException;
+import duke.exception.InvalidUpdateInputException;
 import duke.exception.NullEventInputException;
 
 /**
@@ -78,7 +79,7 @@ public class EventCommand extends Command {
      * @return Event
      * @throws InvalidDateTimeException
      */
-    private Event createEvent(String description, String datetime) throws InvalidDateTimeException {
+    private Event createEvent(String description, String datetime) throws InvalidDateTimeException, InvalidUpdateInputException {
         String[] datetimeArray = datetime.split(" ");
 
         if (datetimeArray.length != 2) {
@@ -104,7 +105,7 @@ public class EventCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Storage storage) throws InvalidEventInputException,
-            InvalidDateTimeException, IOException {
+            InvalidDateTimeException, IOException, InvalidUpdateInputException {
         String[] eventTaskArray = input.split(" /at ");
 
         boolean isInvalidInput = eventTaskArray.length != 2;

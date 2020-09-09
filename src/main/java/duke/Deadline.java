@@ -1,13 +1,12 @@
 package duke;
 
 import duke.exception.InvalidDateTimeException;
+import duke.exception.InvalidUpdateInputException;
 
 /**
  * Represents a Deadline task
  */
 public class Deadline extends Task {
-
-    private DateAndTime dateTime;
 
     /**
      * Initialise a deadline object
@@ -16,14 +15,12 @@ public class Deadline extends Task {
      * @param time         Time of event
      * @throws InvalidDateTimeException
      */
-    public Deadline(String description, String date, String time) throws InvalidDateTimeException {
+    public Deadline(String description, String date, String time) throws InvalidDateTimeException, InvalidUpdateInputException {
         super(description);
-        this.dateTime = new DateAndTime(date, time);
+        this.setDateTime(date, time);
     }
 
-    //public void setDateTime(String date, String time) throws InvalidDateTimeException {
-    //    this.dateTime = new DateAndTime(date, time);
-    //}
+
 
     /**
      * Convert Deadline object to a string representation.
@@ -32,12 +29,12 @@ public class Deadline extends Task {
     @Override
     public String toData() {
         return checkIsDone()
-                ? "D//1//" + getDescription() + "//" + this.dateTime.getDate() + "//" + this.dateTime.getTime()
-                : "D//0//" + getDescription() + "//" + this.dateTime.getDate() + "//" + this.dateTime.getTime();
+                ? "D//1//" + getDescription() + "//" + getDateTime().getDate() + "//" + getDateTime().getTime()
+                : "D//0//" + getDescription() + "//" + getDateTime().getDate() + "//" + getDateTime().getTime();
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.dateTime + ")";
+        return "[D]" + super.toString() + " (by: " + getDateTime() + ")";
     }
 }

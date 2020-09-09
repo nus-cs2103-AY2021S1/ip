@@ -8,6 +8,7 @@ import duke.TaskList;
 import duke.Ui;
 import duke.exception.InvalidDateTimeException;
 import duke.exception.InvalidDeadlineInputException;
+import duke.exception.InvalidUpdateInputException;
 import duke.exception.NullDeadlineInputException;
 
 /**
@@ -81,7 +82,7 @@ public class DeadlineCommand extends Command {
      * @return Deadline
      * @throws InvalidDateTimeException
      */
-    private Deadline createDeadline(String description, String datetime) throws InvalidDateTimeException {
+    private Deadline createDeadline(String description, String datetime) throws InvalidDateTimeException, InvalidUpdateInputException {
         String[] datetimeArray = datetime.split(" ");
 
         boolean isInvalidFormat = datetimeArray.length != 2;
@@ -112,7 +113,7 @@ public class DeadlineCommand extends Command {
      */
     @Override
     public String execute(TaskList tasklist, Storage storage) throws InvalidDeadlineInputException,
-            IOException, InvalidDateTimeException {
+            IOException, InvalidDateTimeException, InvalidUpdateInputException {
         String[] deadlineTaskArray = input.split(" /by ");
 
         boolean isInvalidInput = deadlineTaskArray.length != 2;

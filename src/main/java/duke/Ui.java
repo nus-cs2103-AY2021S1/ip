@@ -136,4 +136,9 @@ public class Ui {
         return show("Sorry. No tasks found containing " + input + ".\n");
     }
 
+    public static String showUpdate(int num, Task task) {
+        return show("Okay I have updated task " + num + ":\n",
+                task.toString());
+    }
+
 }

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import duke.exception.InvalidDateTimeException;
+import duke.exception.InvalidUpdateInputException;
 
 /**
  * TaskList object to store and edit Tasks.
@@ -25,7 +26,7 @@ public class TaskList {
      * @throws FileNotFoundException
      * @throws InvalidDateTimeException
      */
-    public TaskList(Storage storage) throws FileNotFoundException, InvalidDateTimeException {
+    public TaskList(Storage storage) throws FileNotFoundException, InvalidDateTimeException, InvalidUpdateInputException {
         this.list = storage.getList();
     }
 
@@ -64,13 +65,11 @@ public class TaskList {
         return this.list.get(index);
     }
 
-    //public Task editTaskDatetime(int num, String date, String time) {
-    //    int index = num -1;
-    //    Task t = this.list.get(index);
-    //    if (t instanceof Event || t instanceof Deadline) {
-    //        t.setDateTime();
-    //    }
-    //}
+    public Task editTaskDatetime(int num, String date, String time) throws InvalidDateTimeException, InvalidUpdateInputException {
+        int index = num -1;
+        this.list.get(index).setDateTime(date, time);
+        return this.list.get(index);
+    }
 
 
     /**

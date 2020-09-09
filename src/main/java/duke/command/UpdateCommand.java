@@ -9,7 +9,6 @@ import duke.exception.InvalidDateTimeException;
 import duke.exception.InvalidUpdateInputException;
 
 import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
 
 public class UpdateCommand extends Command {
     String input;
@@ -81,14 +80,46 @@ public class UpdateCommand extends Command {
             }
 
             boolean containsEditDescription = input.contains(" d/");
-            //boolean containsEditDatetime = input.contains(" dt/");
+            boolean containsEditDatetime = input.contains(" dt/");
 
-            if (containsEditDescription) { //&& !containsEditDatetime) {
+            if (containsEditDescription && !containsEditDatetime) {
                 String description = input.substring(input.indexOf(" d/") + 3);
                 Task task = taskList.editTaskDescription(num, description);
                 taskList.updateData(storage);
+                return Ui.showUpdate(num, task);
+            } else if (containsEditDatetime && !containsEditDescription) {
+                String datetime = input.substring(input.indexOf(" dt/") + 4);
+                String[] datetimeArray = datetime.split(" ");
+
+                if (datetimeArray.length != 2) {
+                    throw new InvalidDateTimeException();
+                }
+                String date = setDate(datetimeArray[0]);
+                String time = setTime(datetimeArray[1]);
+                Task task = taskList.editTaskDatetime(num, date, time);
+                taskList.updateData(storage);
+                return Ui.showUpdate(num, task);
+            } else if (containsEditDescription && containsEditDatetime) {
+                if (input.indexOf(" dt/") < input.indexOf(" d/")) {
+                    throw new InvalidUpdateInputException();
+                } else {
+                    String description = input.substring(input.indexOf(" d/") + 3, input.indexOf(" dt/"));
+                    String datetime = input.substring(input.indexOf(" dt/") + 4);
+                    String[] datetimeArray = datetime.split(" ");
+
+                    if (datetimeArray.length != 2) {
+                        throw new InvalidDateTimeException();
+                    }
+                    String date = setDate(datetimeArray[0]);
+                    String time = setTime(datetimeArray[1]);
+                    Task taskUpdateDescription = taskList.editTaskDescription(num, description);
+                    Task taskUpdateDatetime = taskList.editTaskDatetime(num, date, time);
+                    taskList.updateData(storage);
+                    return Ui.showUpdate(num, taskUpdateDatetime);
+                }
+            } else {
+                throw new InvalidUpdateInputException();
             }
-            return "(return statement in progress)";
         } catch (NumberFormatException | IOException e) {
             throw new InvalidUpdateInputException();
         }
