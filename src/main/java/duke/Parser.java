@@ -64,6 +64,10 @@ public class Parser {
                     String textToMatch = arrOfStr[1];
                     ui.findMatching(taskList, textToMatch);
                     break;
+                case "help":
+                    // help
+                    ui.help();
+                    break;
                 default:
                     // add to list
                     if ((identifier.equals("todo") || identifier.equals("deadline") || identifier.equals("event"))
@@ -103,7 +107,8 @@ public class Parser {
                                 break;
                             }
                             default:
-                                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n"
+                                + "Type \"help\" for a list of commands");
                         }
                         taskList.add(task);
                     }
@@ -186,6 +191,21 @@ public class Parser {
                 }
                 return output;
             }
+            case "help": {
+                // help
+                String output = " Command │       Description        │                   Usage\n"
+                        + "─────────┼──────────────────────────┼───────────────────────────────────────────\n"
+                        + "bye      │ exits the program        │ bye\n"
+                        + "list     │ list all current tasks   │ list\n"
+                        + "done     │ marks a task done        │ done {task number}\n"
+                        + "delete   │ deletes a task           │ delete {task number}\n"
+                        + "find     │ finds all matching tasks │ find {text to match}\n"
+                        + "help     │ displays help menu       │ help\n"
+                        + "todo     │ adds a todo task         │ todo {task name}\n"
+                        + "deadline │ adds a deadline task     │ deadline {task name} /by {dd/MM/yyyy HHmm}\n"
+                        + "event    │ adds an event task       │ event {task name} /at {duration}";
+                return output;
+            }
             default:
                 // add to list
                 if ((identifier.equals("todo") || identifier.equals("deadline")
@@ -225,7 +245,9 @@ public class Parser {
                             break;
                         }
                         default:
-                            return ("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                            String output = ("☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n");
+                            output += ("Type \"help\" for a list of commands");
+                            return output;
                     }
                     taskList.add(task);
                     List<Task> tasks = taskList.getTasks();

@@ -34,16 +34,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        String logo = "──────▄▀▄─────▄▀▄\n" +
-                    "─────▄█░░▀▀▀▀▀░░█▄\n" +
-                    "─▄▄──█░░░░░░░░░░░█──▄▄\n" +
-                    "█▄▄█─█░░▀░░┬░░▀░░█─█▄▄█";
+        String logo = "      ▄▀▄     ▄▀▄\n" +
+                    "     ▄█░░▀▀▀▀▀░░█▄\n" +
+                    " ▄▄  █░░░░░░░░░░░█  ▄▄\n" +
+                    "█▄▄█ █░░▀░░┬░░▀░░█ █▄▄█";
 
-        logo += "\n █▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█\n" +
-                " █░░╦─╦╔╗╦─╔╗╔╗╔╦╗╔╗░░█\n" +
-                " █░░║║║╠─║─║─║║║║║╠─░░█\n" +
-                " █░░╚╩╝╚╝╚╝╚╝╚╝╩─╩╚╝░░█\n" +
-                " █▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█";
+        logo += "\n█▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀▀█\uD83C\uDF3C\n" +
+                "█░░╦─╦╔╗╦─╔╗╔╗╔╦╗╔╗░░█\uD83C\uDF3C\n" +
+                "█░░║║║╠─║─║─║║║║║╠─░░█\uD83C\uDF3C\n" +
+                "█░░╚╩╝╚╝╚╝╚╝╚╝╩─╩╚╝░░█\uD83C\uDF3C\n" +
+                "█▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄▄█\uD83C\uDF3C";
 
         String welcome = logo + "\nHello! I'm Duke\nWhat can I do for you?";
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(welcome, dukeImage));
