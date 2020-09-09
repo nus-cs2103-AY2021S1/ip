@@ -49,6 +49,7 @@ public class Storage {
                 System.out.println(e.toString());
             }
         }
+        assert dukeFile.exists();
     }
 
     /**
@@ -63,7 +64,8 @@ public class Storage {
             Scanner sc1 = new Scanner(dukeFile);
             while (sc1.hasNext()) {
                 String loadedInput = sc1.nextLine();
-                switch (loadedInput.substring(0, 3)) {
+                String taskType = loadedInput.substring(0, 3);
+                switch (taskType) {
                 case ("[T]") :
                     Todo newTodo = new Todo(loadedInput.substring(7));
                     if (loadedInput.substring(4, 7).equals("[✓]")) {
@@ -96,6 +98,7 @@ public class Storage {
                     listOfTasks.add(newEvent);
                     break;
                 default:
+                    assert false : taskType;
                 }
             }
         } catch (FileNotFoundException e) {

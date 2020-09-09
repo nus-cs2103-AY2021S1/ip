@@ -1,0 +1,3 @@
+[T] [O]learn spanish
+[D] [X]return spanish book by:13/09/2020 2359
+[E] [X]spanish class at:22/09/2020 1400
