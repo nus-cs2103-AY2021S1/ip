@@ -16,6 +16,7 @@ public class StorageTest {
     @Test
     public void testStorageCreation() {
         String workingDir = System.getProperty("user.dir");
+
         java.nio.file.Path path = java.nio.file.Paths.get(workingDir, "storage", "data.txt");
         Storage s = new Storage(path);
         assertEquals(true, Files.exists(path));
@@ -30,7 +31,7 @@ public class StorageTest {
 
             ToDo dummyToDo = new ToDo("test");
             String dummyInput = "todo test";
-            s.writeToFile(dummyToDo, dummyInput);
+            s.writeToFile(dummyToDo, dummyInput.split(" ", 2));
             FileReader fr = new FileReader("storage" + File.separator + "data.txt");
             BufferedReader br = new BufferedReader(fr);
             String lineToCheck = br.readLine();

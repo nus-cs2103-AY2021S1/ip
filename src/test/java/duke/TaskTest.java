@@ -27,12 +27,12 @@ public class TaskTest {
     }
     
     @Test 
-    public void testAddTask() {
+    public void testAddToDo() {
         ArrayList<Task> loadedList = new ArrayList<>();
         TaskList list = new TaskList(loadedList);
         String input = "todo test";
         ToDo dummyToDo = new ToDo("test");
-        list.addTask(input);
+        list.addTodoAndGetMessage(input.split(" ", 2));
         assertEquals(dummyToDo.toString(), list.getStoredTasks().get(0).toString());
     }
     
@@ -44,7 +44,7 @@ public class TaskTest {
         TaskList list = new TaskList(loadedList);
         
         String input = "conquer 1";
-        list.conquerTask(input.split(" ", 2));
+        list.conquerTaskAndGetMessage(input.split(" ", 2));
         assertEquals("[T][✓] test", list.getStoredTasks().get(0).toString());
     }
     
@@ -56,7 +56,7 @@ public class TaskTest {
         TaskList list = new TaskList(loadedList);
         assertEquals(1, list.getStoredTasks().size());
         String input = "delete 1";
-        list.deleteTask(input.split(" ", 2));
+        list.deleteTaskAndGetMessage(input.split(" ", 2));
         assertEquals(0, list.getStoredTasks().size());
     }
     

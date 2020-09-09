@@ -65,6 +65,7 @@ public class Ui {
      * @param t Task that has been marked as done.
      */
     public static String conqueredMessage(Task t) {
+        assert (t != null);
         String response = "As you wish, Your Majesty. I have marked this as conquered.\n";
         String conqueredTask = t.toString() + "\n";
         return response + conqueredTask;
@@ -76,6 +77,7 @@ public class Ui {
      * @param size Size of current list of stored tasks.
      */
     public static String deletedMessage(Task t, int size) {
+        assert (t != null);
         String response = "As you wish, Your Majesty. I have removed this writing.\n";
         String deletedTask = t.toString() + "\n";
         String information = String.format("You have %s writing(s) on your scroll as of now. \n", size);
@@ -88,6 +90,7 @@ public class Ui {
      * @param size Size of current list of stored tasks.
      */
     public static String addedMessage(Task t, int size) {
+        assert (t != null);
         String response = "Your Majesty, I've added the writing:\n";
         String addedTask = t.toString() + "\n";
         String information = String.format("You have %s writing(s) on your scroll as of now. \n", size);
@@ -95,6 +98,7 @@ public class Ui {
     }
     
     public static String printAllTasksUi(ArrayList<Task> storedTasks) {
+        assert (storedTasks != null);
         if (storedTasks.size() == 0) {
             return "Your scroll is currently empty, Your Majesty.";
         } 
@@ -106,6 +110,7 @@ public class Ui {
     }
     
     public static String printRelevantTasksUi(ArrayList<Task> storedTasks) {
+        assert (storedTasks != null);
         if (storedTasks.size() == 0) {
             return "There doesn't seem to be any relevant writings, Your Majesty.";
         }
@@ -114,5 +119,8 @@ public class Ui {
             response.append(String.format("%s.%s\n", storedTasks.indexOf(task) + 1, task));
         }
         return response.toString();
+    }
+    public static String printWrongInputErrorMessage() {
+        return "I'm afraid I don't understand that command, Your Majesty.";
     }
 }
