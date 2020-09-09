@@ -123,7 +123,7 @@ public class Parser {
             command = new ByeCommand();
             break;
         default:
-            throw new DukeException("I'm sorry but I don't recognize your commandLine T__T.");
+            throw new DukeException("I'm sorry but I don't recognize your command T__T.");
         }
         assert command != null;
         return command;

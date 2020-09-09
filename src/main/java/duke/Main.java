@@ -13,20 +13,23 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Duke duke;
 
     @Override
     public void start(Stage stage) {
+        FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle("Zoroark");
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
+            duke = new Duke();
+            fxmlLoader.<MainWindow>getController().setDuke(duke);
         } catch (IOException e) {
             e.printStackTrace();
+        } catch (DukeException e) {
+            fxmlLoader.<MainWindow>getController().getZoroarkMessage(e.getMessage());
         }
     }
 }

@@ -12,14 +12,10 @@ public class Duke {
     /**
      * Duke constructor.
      */
-    public Duke() {
-        try {
-            ui = new Ui();
-            storage = new Storage("./data/Duke.txt");
-            taskList = new TaskList(storage.readFromFile());
-        } catch (DukeException e) {
-            ui.addMessage(e.getMessage());
-        }
+    public Duke() throws DukeException {
+        ui = new Ui();
+        storage = new Storage("./data/Duke.txt");
+        taskList = new TaskList(storage.readFromFile());
     }
 
     /**
