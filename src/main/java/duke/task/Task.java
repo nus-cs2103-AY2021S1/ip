@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import duke.DukeException;
 
@@ -53,6 +54,13 @@ public abstract class Task {
     public abstract boolean hasDate();
 
     /**
+     * If this task has a time associated to it, returns true, otherwise false.
+     *
+     * @return True, if this task has a time associated to it, otherwise false.
+     */
+    public abstract boolean hasTime();
+
+    /**
      * Gets the description of this task.
      *
      * @return The description of this task.
@@ -74,6 +82,11 @@ public abstract class Task {
      * Returns the date, if any, of the task.
      */
     public abstract LocalDate getDate() throws DukeException;
+
+    /**
+     * Returns the time, if any, of the task.
+     */
+    public abstract LocalTime getTime() throws DukeException;
 
     /**
      * Marks this task as done.

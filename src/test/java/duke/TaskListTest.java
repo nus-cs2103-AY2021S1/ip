@@ -3,6 +3,7 @@ package duke;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 import org.junit.jupiter.api.Test;
 
@@ -12,8 +13,8 @@ import duke.task.Todo;
 
 public class TaskListTest {
     private Todo todo = new Todo("Get bread");
-    private Deadline deadline = new Deadline("Finish project", LocalDate.parse("2012-01-23"));
-    private Event event = new Event("Birthday", LocalDate.parse("2020-05-30"));
+    private Deadline deadline = new Deadline("Finish project", LocalDate.parse("2012-01-23"), null);
+    private Event event = new Event("Birthday", LocalDate.parse("2020-05-30"), LocalTime.parse("20:15"));
 
     @Test
     public void addTask_addSomeTasks_taskListWithAllTasks() {
@@ -23,7 +24,7 @@ public class TaskListTest {
         taskList.addTask(event);
         assertEquals("\t1.[T]\u2718 Get bread\n"
                 + "\t2.[D]\u2718 Finish project (by: Jan 23 2012)\n"
-                + "\t3.[E]\u2718 Birthday (at: May 30 2020)\n", taskList.toString());
+                + "\t3.[E]\u2718 Birthday (at: May 30 2020 20:15)\n", taskList.toString());
     }
 
     @Test
@@ -34,7 +35,7 @@ public class TaskListTest {
         taskList.addTask(event);
         taskList.deleteTask(2);
         assertEquals("\t1.[T]\u2718 Get bread\n"
-                + "\t2.[E]\u2718 Birthday (at: May 30 2020)\n", taskList.toString());
+                + "\t2.[E]\u2718 Birthday (at: May 30 2020 20:15)\n", taskList.toString());
     }
 
     @Test
@@ -46,7 +47,7 @@ public class TaskListTest {
         taskList.markTaskAsDone(3);
         assertEquals("\t1.[T]\u2718 Get bread\n"
                 + "\t2.[D]\u2718 Finish project (by: Jan 23 2012)\n"
-                + "\t3.[E]\u2713 Birthday (at: May 30 2020)\n", taskList.toString());
+                + "\t3.[E]\u2713 Birthday (at: May 30 2020 20:15)\n", taskList.toString());
     }
 
     @Test

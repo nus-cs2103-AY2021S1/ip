@@ -13,7 +13,7 @@ public class ParserTest {
             Parser.parse("deadline project /by 12");
         });
 
-        String expectedMessage = "OOPS!!! The date is not valid.";
+        String expectedMessage = "OOPS!!! The date/time is not valid.";
         String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
     }
@@ -69,6 +69,17 @@ public class ParserTest {
         });
 
         String expectedMessage = "OOPS!!! The description or date cannot be empty.";
+        String actualMessage = exception.getMessage();
+        assertEquals(expectedMessage, actualMessage);
+    }
+
+    @Test
+    public void parse_invalidTime_exceptionThrown() {
+        Exception exception = assertThrows(DukeException.class, () -> {
+            Parser.parse("deadline homework /by 11 11 11 25:30");
+        });
+
+        String expectedMessage = "OOPS!!! The date/time is not valid.";
         String actualMessage = exception.getMessage();
         assertEquals(expectedMessage, actualMessage);
     }
