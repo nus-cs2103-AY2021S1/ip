@@ -32,10 +32,6 @@ public class Ui {
         return in;
     }
 
-    public PrintStream getOut() {
-        return out;
-    }
-
     /**
      * This method is used to greet the user.
      */
@@ -62,11 +58,11 @@ public class Ui {
      * This method is used to print all the tasks in the task list.
      * @param taskList The task list used for printing.
      */
-    public void printAll(TaskList taskList) {
-        System.out.println(returnAll(taskList));
+    public void printAllTasks(TaskList taskList) {
+        System.out.println(returnAllTasks(taskList));
     }
 
-    public String returnAll(TaskList taskList) {
+    public String returnAllTasks(TaskList taskList) {
         String stringToReturn = LINE + "Here are the tasks in your list: \n";
         int num = taskList.getNoOfTasks();
         assert (num != 0) : "There is no existing task in your list! ";
@@ -79,11 +75,11 @@ public class Ui {
     }
 
 
-    public void printRelevant(TaskList taskList, String keyWord) {
-        System.out.println(returnRelevant(taskList,keyWord));
+    public void printRelevantTasks(TaskList taskList, String keyWord) {
+        System.out.println(returnRelevantTasks(taskList,keyWord));
     }
 
-    public String returnRelevant(TaskList taskList, String keyWord) {
+    public String returnRelevantTasks(TaskList taskList, String keyWord) {
         String stringToReturn = LINE + "Here are the matching tasks in your list: \n";
         int n = taskList.getNoOfTasks();
         assert (n != 0) : "There is no matching task in your list! ";
@@ -174,6 +170,7 @@ public class Ui {
     public String showLoadingError() {
         return "Creating the storage file...";
     }
+
 
     public String  missingDescription(String type) {
         assert (type == "T" | type == "D" | type =="E") : "Incorrect type.";

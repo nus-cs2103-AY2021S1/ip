@@ -58,8 +58,8 @@ public class Duke extends Application {
         try {
             tasks = new TaskList(storage.load());
         } catch (FileNotFoundException e) {
-            ui.showLoadingError();
             tasks = new TaskList();
+            System.out.println(ui.showLoadingError());
         }
     }
 
