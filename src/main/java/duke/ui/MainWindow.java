@@ -61,10 +61,18 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * A get method for UI object to get user input from the GUI.
+     *
+     * @return user input from the GUI.
+     */
     public static String getInput() {
         return input;
     }
 
+    /**
+     * Duke startup message for GUI.
+     */
     private void startupMsg() {
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(ui.guiStartupMsg(), dukeImage));
     }

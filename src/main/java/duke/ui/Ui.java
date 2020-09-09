@@ -10,14 +10,15 @@ import java.util.Scanner;
  * A class that handles all of user's and duke's interactions.
  */
 public class Ui {
-    private static String duke = "Duke> ";
-    private static String cmd = ">> ";
-    private static String logo =
+    private static final String duke = "Duke> ";
+    private static final String cmd = ">> ";
+    private static final String logo =
             " ____        _        \n"
                     + "|  _ \\ _   _| | _____ \n"
                     + "| | | | | | | |/ / _ \\\n"
                     + "| |_| | |_| |   <  __/\n"
                     + "|____/ \\__,_|_|\\_\\___|\n";
+
     private Scanner scanner;
     private String guiOutput;
 
@@ -53,7 +54,7 @@ public class Ui {
      * @return String from user input.
      */
     public String readInput(boolean isGui) {
-        String s = "";
+        String s;
         if (isGui) {
             s = MainWindow.getInput();
             return s;
@@ -89,7 +90,7 @@ public class Ui {
         String output = "";
         int idx = 0;
         for (Task task : tasks.getList()) {
-             output += ++idx + ". " + task.toString() + "\n";
+            output += ++idx + ". " + task.toString() + "\n";
         }
         return output;
     }
@@ -189,14 +190,29 @@ public class Ui {
         return duke + "Found no task(s) matching the keyword: " + keyword;
     }
 
+    /**
+     * A method that prints duke's response in the command line interface.
+     *
+     * @param msg output message to be printed in the command line interface.
+     */
     public void printMsg(String msg) {
         System.out.println(msg);
     }
 
+    /**
+     * A method that saves Duke's response to be displayed in Duke dialog box.
+     *
+     * @param output Duke's response after command execution.
+     */
     public void setGuiOutput(String output) {
         guiOutput = output;
     }
 
+    /**
+     * A method that returns Duke's response as a string for Duke dialog box.
+     *
+     * @return A string that contains the Duke's response to be shown in the GUI dialog box.
+     */
     public String getGuiOutput() {
         return guiOutput;
     }

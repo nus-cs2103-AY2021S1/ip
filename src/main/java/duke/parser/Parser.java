@@ -65,6 +65,7 @@ public class Parser {
 
     /**
      * User Command and Details Input is parsed here for processing, to split command keyword and details.
+     *
      * @param inputString User Input string; User Command and Details.
      * @return A string array with command at index 0 and details at index 1.
      */

@@ -52,7 +52,7 @@ public class Duke {
     public void run() {
         ui.printMsg(ui.startupMsg());
         String[] userInputArray;
-        boolean validInput;
+        boolean isValidInput;
 
         while (true) {
             userInput = ui.readInput(isGui);
@@ -61,12 +61,7 @@ public class Duke {
             }
             switch (userInput) {
             case "list":
-                if (tasks.isEmpty()) {
-                    ui.printMsg(ui.showListEmptyMsg());
-                } else {
-                    ui.printMsg(ui.showListMsg());
-                    ui.printMsg(ui.showTaskList(tasks));
-                }
+                listCommand();
                 break;
             case "done":
                 if (tasks.isEmpty()) {
@@ -97,12 +92,12 @@ public class Duke {
                                 ui.printMsg(ui.showListDoneMsg());
                                 ui.printMsg(ui.showTaskList(doneList));
                             }
-                            validInput = true;
+                            isValidInput = true;
                         } catch (DukeException e) {
-                            validInput = false;
+                            isValidInput = false;
                             ui.printMsg(ui.showErrorMsg(e));
                         }
-                    } while (!validInput);
+                    } while (!isValidInput);
                 }
 
                 try {
@@ -131,12 +126,12 @@ public class Duke {
                             } else {
                                 ui.printMsg(ui.showNotFoundMsg(userInput));
                             }
-                            validInput = true;
+                            isValidInput = true;
                         } catch (DukeException e) {
-                            validInput = false;
+                            isValidInput = false;
                             ui.printMsg(ui.showErrorMsg(e));
                         }
-                    } while (!validInput);
+                    } while (!isValidInput);
                 }
                 break;
             case "todo":
@@ -150,12 +145,12 @@ public class Duke {
                         Task toDo = new Todo(userInput);
                         tasks.addTask(toDo);
                         ui.printMsg(ui.showTaskAddedMsg(toDo));
-                        validInput = true;
+                        isValidInput = true;
                     } catch (DukeException e) {
-                        validInput = false;
+                        isValidInput = false;
                         ui.printMsg(ui.showErrorMsg(e));
                     }
-                } while (!validInput);
+                } while (!isValidInput);
 
                 try {
                     storeFile.saveFile(tasks);
@@ -173,13 +168,13 @@ public class Duke {
                         Task deadLine = new Deadline(userInputArray[0], userInputArray[1]);
                         tasks.addTask(deadLine);
                         ui.printMsg(ui.showTaskAddedMsg(deadLine));
-                        validInput = true;
+                        isValidInput = true;
 
                     } catch (DukeException e) {
                         ui.printMsg(ui.showErrorMsg(e));
-                        validInput = false;
+                        isValidInput = false;
                     }
-                } while (!validInput);
+                } while (!isValidInput);
 
                 try {
                     storeFile.saveFile(tasks);
@@ -197,13 +192,13 @@ public class Duke {
                         Task event = new Event(userInputArray[0], userInputArray[1]);
                         tasks.addTask(event);
                         ui.printMsg(ui.showTaskAddedMsg(event));
-                        validInput = true;
+                        isValidInput = true;
 
                     } catch (DukeException e) {
                         ui.printMsg(ui.showErrorMsg(e));
-                        validInput = false;
+                        isValidInput = false;
                     }
-                } while (!validInput);
+                } while (!isValidInput);
 
                 try {
                     storeFile.saveFile(tasks);
@@ -240,12 +235,12 @@ public class Duke {
                                 ui.printMsg(ui.showTaskDeleteMsg());
                                 ui.printMsg(ui.showTaskList(deletedTasks));
                             }
-                            validInput = true;
+                            isValidInput = true;
                         } catch (DukeException e) {
                             ui.printMsg(ui.showErrorMsg(e));
-                            validInput = false;
+                            isValidInput = false;
                         }
-                    } while (!validInput);
+                    } while (!isValidInput);
                 }
 
                 try {
@@ -326,20 +321,36 @@ public class Duke {
         new Duke(filePath).run();
     }
 
+    /**
+     * Duke will run here whenever it receives a user input from MainWindow.java
+     *
+     * @return Duke's response after executing a command
+     */
     public String getResponse() {
         runGui();
         return ui.getGuiOutput();
     }
 
+    /**
+     * A method to check whether 'bye' command is entered.
+     *
+     * @return boolean hasExit.
+     */
     public boolean hasExit() {
         return this.hasExit;
     }
 
+    /**
+     * Operations when 'bye' command is entered.
+     */
     private void byeCommand() {
         ui.setGuiOutput(ui.showByeMsg());
         hasExit = true;
     }
 
+    /**
+     * Shows the task list.
+     */
     private void listCommand() {
         if (tasks.isEmpty()) {
             ui.setGuiOutput(ui.showListEmptyMsg());
@@ -348,6 +359,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Mark tasks as done when 'done <tasks>' command is entered. Multiple tasks operation is supported.
+     *
+     * @param guiInputArray input from the GUI dialog box.
+     */
     private void doneCommand(String[] guiInputArray) {
         if (tasks.isEmpty()) {
             ui.setGuiOutput(ui.showListEmptyMsg());
@@ -380,18 +396,20 @@ public class Duke {
         }
     }
 
+    /**
+     * Find tasks that match they keyword entered.
+     *
+     * @param guiInputArray input from the GUI dialog box.
+     */
     private void findCommand(String[] guiInputArray) {
         if (tasks.isEmpty()) {
             ui.setGuiOutput(ui.showListEmptyMsg());
         } else {
             try {
-                if (guiInputArray.length <= 1) {
+                if (guiInputArray.length <= 1 || guiInputArray[1].isBlank()) {
                     throw new DukeException("Yo! Enter a keyword.");
                 }
                 userInput = guiInputArray[1];
-                if (userInput.equals("")) {
-                    throw new DukeException("Yo! Enter a keyword.");
-                }
                 TaskList foundTasks;
                 foundTasks = tasks.findTasks(userInput);
                 if (!foundTasks.isEmpty()) {
@@ -405,15 +423,17 @@ public class Duke {
         }
     }
 
+    /**
+     * Add a todo task to the task list.
+     *
+     * @param guiInputArray input from the GUI dialog box.
+     */
     private void todoCommand(String[] guiInputArray) {
         try {
-            if (guiInputArray.length <= 1) {
+            if (guiInputArray.length <= 1 || guiInputArray[1].isBlank()) {
                 throw new DukeException("Yo! Task details are missing.");
             }
             userInput = guiInputArray[1];
-            if (userInput.equals("")) {
-                throw new DukeException("Yo! Task details are missing.");
-            }
             Task toDo = new Todo(userInput);
             tasks.addTask(toDo);
             ui.setGuiOutput(ui.showTaskAddedMsg(toDo));
@@ -422,6 +442,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Add a deadline task to the task list.
+     *
+     * @param guiInputArray input from the GUI dialog box.
+     */
     private void deadlineCommand(String[] guiInputArray) {
         String[] userInputArray;
         try {
@@ -438,6 +463,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Add a event task to the task list.
+     *
+     * @param guiInputArray input from the GUI dialog box.
+     */
     private void eventCommand(String[] guiInputArray) {
         String[] userInputArray;
         try {
@@ -454,6 +484,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Mark tasks for deletion when 'delete <tasks>' command is entered. Multiple tasks operation is supported.
+     *
+     * @param guiInputArray input from the GUI dialog box.
+     */
     private void deleteCommand(String[] guiInputArray) {
         if (tasks.isEmpty()) {
             ui.setGuiOutput(ui.showListEmptyMsg());
@@ -486,10 +521,16 @@ public class Duke {
         }
     }
 
+    /**
+     * Shows a help list of available commands.
+     */
     private void helpCommand() {
         ui.setGuiOutput(ui.showHelp());
     }
 
+    /**
+     * A method for file saving operations for commands that edit the task list.
+     */
     private void saveFileOperation() {
         try {
             storeFile.saveFile(tasks);
