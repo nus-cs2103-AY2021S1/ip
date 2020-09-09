@@ -214,4 +214,8 @@ public class TaskList {
             throw new SomethingWentWrongException();
         }
     }
+
+    public void sortList() {
+        list.sort(new TaskComparator());
+    }
 }
