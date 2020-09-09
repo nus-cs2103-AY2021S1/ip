@@ -11,8 +11,6 @@ import duke.tasks.TaskList;
  */
 public class ExitCommand extends Command {
 
-    public static final String MESSAGE_EXIT_ACKNOWLEDGEMENT = "Exiting...";
-
     public ExitCommand(String input) {
         super(input);
     }

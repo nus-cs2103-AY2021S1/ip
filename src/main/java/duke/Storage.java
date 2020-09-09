@@ -86,23 +86,7 @@ public class Storage {
             while ((currLine = br.readLine()) != null) {
                 String[] readLine = currLine.split("\\|");
                 boolean taskDone = readLine[1].equals("1");
-                Task newTask = new Task("");
-                String type = readLine[0];
-                switch (type) {
-                case "T":
-                    newTask = new Todo(readLine[2]);
-                    break;
-                case "D":
-                    newTask = new Deadline(readLine[2],
-                            LocalDateTime.parse(readLine[3], FORMATTER));
-                    break;
-                case "E":
-                    newTask = new Event(readLine[2],
-                            LocalDateTime.parse(readLine[3], FORMATTER));
-                    break;
-                default:
-                    break;
-                }
+                Task newTask = readTaskList(readLine);
                 taskList.addTask(newTask);
                 if (taskDone) {
                     newTask.markAsDone();
@@ -113,5 +97,26 @@ public class Storage {
             throw new InvalidFileException("Failed to load");
         }
         return taskList;
+    }
+
+    private Task readTaskList(String[] readLine) {
+        Task newTask = new Task("");
+        String type = readLine[0];
+        switch (type) {
+        case "T":
+            newTask = new Todo(readLine[2]);
+            break;
+        case "D":
+            newTask = new Deadline(readLine[2],
+                    LocalDateTime.parse(readLine[3], FORMATTER));
+            break;
+        case "E":
+            newTask = new Event(readLine[2],
+                    LocalDateTime.parse(readLine[3], FORMATTER));
+            break;
+        default:
+            break;
+        }
+        return newTask;
     }
 }
