@@ -68,6 +68,9 @@ public class TaskList {
         if (ref >= taskStorage.size()) {
             return ("I am afraid that it is not possible to delete an unknown task.");
         } else {
+
+            assert taskStorage.get(ref) != null;
+
             Task temp = taskStorage.get(ref);
             taskStorage.remove(ref);
             return ("Noted. I've removed this task:\n " +
