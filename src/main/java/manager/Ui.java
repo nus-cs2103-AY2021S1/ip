@@ -40,6 +40,7 @@ public class Ui {
                 String todoDesc = input.substring("todo".length()).trim();
                 return new Todo(todoDesc);
             default:
+                assert false : "Unknown task type";
                 return null;
             }
         } catch (InvalidDescriptionException | InvalidTimeException e) {
@@ -77,6 +78,7 @@ public class Ui {
             }
             break;
         default:
+            assert false : "Unknown action type";
             break;
         }
     }
@@ -85,6 +87,7 @@ public class Ui {
      * Passes the task into the task list to be added.
      */
     public void passTask(Task task) {
+        assert task != null : "Task not correctly created";
         this.taskList.addTask(task);
     }
 

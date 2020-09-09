@@ -16,9 +16,13 @@ public class TaskList {
      * Prints out the tasks present in the task list.
      */
     public void listTasks() {
-        System.out.println("Yes sireee, look at me! Here are the tasks in your list:");
-        for (int i = 0; i < this.taskList.size(); i++) {
-            System.out.println((i + 1) + "." + this.taskList.get(i).toString());
+        if (this.taskList.size() == 0) {
+            System.out.println("Oohh look at me! Your task list is empty. Existence is pain!");
+        } else {
+            System.out.println("Yes sireee, look at me! Here are the tasks in your list:");
+            for (int i = 0; i < this.taskList.size(); i++) {
+                System.out.println((i + 1) + "." + this.taskList.get(i).toString());
+            }
         }
     }
 
@@ -33,6 +37,7 @@ public class TaskList {
             System.out.println(task.toString());
             printNumberOfTasks();
         }
+        assert task != null : "Task being added is not correctly created";
     }
 
     /**
@@ -40,6 +45,9 @@ public class TaskList {
      * @param index of specified task to be marked done
      */
     public void markTaskAsDone(int index) {
+        assert index < this.taskList.size() && index >= 0
+                : "Index for mark done does not exist";
+
         this.taskList.get(index).markAsDone();
         System.out.println("Oooh yeahhh, good job! I've marked this task as done:");
         System.out.println(this.taskList.get(index).toString());
@@ -50,9 +58,15 @@ public class TaskList {
      * @param index of specified task to be deleted
      */
     public void deleteTask(int index) {
+        assert index < this.taskList.size() && index >= 0
+                : "Index for delete does not exist";
+
         Task removedTask = this.taskList.remove(index);
         System.out.println("I'm Mr. Meeseeks, look at me! I've removed this task:");
+
+        assert removedTask != null : "Removed task cannot be null";
         System.out.println(removedTask.toString());
+
         printNumberOfTasks();
     }
 
@@ -68,6 +82,9 @@ public class TaskList {
                 System.out.println(currentIndex + "." + task.toString());
                 currentIndex++;
             }
+        }
+        if (currentIndex == 1) {
+            System.out.println("Looks like you have none!");
         }
     }
 
