@@ -21,7 +21,7 @@ import pandabot.tasks.ToDo;
  * loading and saving tasks into the save file.
  */
 public class Storage {
-    private Path saveFilePath;
+    private final Path saveFilePath;
 
     /**
      * Creates a Storage object, which is used to load and save tasks
@@ -44,7 +44,7 @@ public class Storage {
             }
         }
 
-        Path saveFilePath = Paths.get(home, "PandaBot", fileName);
+        this.saveFilePath = Paths.get(home, "PandaBot", fileName);
         boolean saveFileExists = Files.exists(saveFilePath);
 
         // create a save file where the data will be written to
@@ -57,7 +57,6 @@ public class Storage {
         }
 
         assert Files.exists(saveFilePath) : "Save file should be successfully created.";
-        this.saveFilePath = saveFilePath;
     }
 
     /**
@@ -69,7 +68,7 @@ public class Storage {
         ArrayList<Task> tasks = new ArrayList<>();
         try {
             BufferedReader reader = Files.newBufferedReader(saveFilePath);
-            loadTask(tasks, reader);
+            loadTasks(tasks, reader);
             reader.close();
         } catch (IOException e) {
             System.out.println("OOPS! :c There was an error in reading save file: " + e.getMessage() + "\n"
@@ -80,7 +79,7 @@ public class Storage {
         return tasks;
     }
 
-    private void loadTask(ArrayList<Task> tasks, BufferedReader reader) throws IOException {
+    private void loadTasks(ArrayList<Task> tasks, BufferedReader reader) throws IOException {
         String task;
         while ((task = reader.readLine()) != null) {
             // convert the line read into a task
@@ -93,24 +92,23 @@ public class Storage {
     }
 
     private Task convertToTask(String input) throws PandaBotException {
-        String[] tDes = input.split(" \\| ");
+        String[] taskDetails = input.split(" \\| ");
         Task task;
-        switch (tDes[0]) {
+        switch (taskDetails[0]) {
         case "T":
-            task = new ToDo(tDes[2]);
+            task = new ToDo(taskDetails[2]);
             break;
         case "D":
-            task = new Deadline(tDes[2], tDes[3]);
+            task = new Deadline(taskDetails[2], taskDetails[3]);
             break;
         case "E":
-            task = new Event(tDes[2], tDes[3]);
+            task = new Event(taskDetails[2], taskDetails[3]);
             break;
         default:
             throw new PandaBotLoadingTasksErrorException(input);
         }
 
-        // update the done status
-        String isDone = tDes[1];
+        String isDone = taskDetails[1];
         if (isDone.equals("1")) {
             task.markTaskDone();
         }
@@ -134,7 +132,7 @@ public class Storage {
             writer.close();
         } catch (IOException e) {
             System.out.println("OOPS! :c There is an error in trying to write to the save file."
-                                + "I can't save the entire list of tasks here.");
+                                + "I couldn't save the entire list of tasks here.");
         }
     }
 

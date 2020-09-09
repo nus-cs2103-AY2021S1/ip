@@ -11,6 +11,7 @@ import pandabot.ui.Ui;
  */
 public class DeleteCommand extends Command {
     private final int taskNum;
+
     /**
      * Creates a DeleteCommand object.
      *

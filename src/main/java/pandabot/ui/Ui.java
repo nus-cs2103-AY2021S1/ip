@@ -20,7 +20,7 @@ public class Ui {
     }
 
     /**
-     * Prints the welcome logo.
+     * Prints the welcome message.
      */
     public void printWelcome() {
         String logo = " ____                    _\n"
@@ -45,7 +45,7 @@ public class Ui {
     /**
      * Prints a horizontal line.
      */
-    public void printLine() {
+    public void printHorizontalLine() {
         System.out.println(" ___________________________________________________");
     }
 
@@ -121,7 +121,7 @@ public class Ui {
      * @param numOfTasks the number of tasks in the list
      * @return a String representation of the add task message
      */
-    public String displayOnAddTask(Task task, int numOfTasks) {
+    public String displayOnAdd(Task task, int numOfTasks) {
         return "Noted! I've added this task:\n" + task.toString() + "\n"
                 + "Now you have " + numOfTasks + " task(s) in this list.";
     }
