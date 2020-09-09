@@ -28,6 +28,7 @@ public class DeadlineTest {
 
     @Test
     public void createDeadline_noDeadline_exceptionThrown() {
+        // lambda used here
         Exception exception = assertThrows(
                 IncorrectFormatException.class, () -> Deadline.createDeadline("read book"));
 
