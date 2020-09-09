@@ -165,4 +165,12 @@ public class UiResponse {
 
         UiPrint.drawLine(UiPrint.STAR, 50);
     }
+
+    public void reportTagTask(Task task) {
+        UiPrint.drawLine(UiPrint.STAR, 50);
+
+        System.out.println(task.getDescription() + " has been tagged with " + task.getTag());
+
+        UiPrint.drawLine(UiPrint.STAR, 50);
+    }
 }

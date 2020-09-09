@@ -148,4 +148,10 @@ public class GuiResponse {
             response.append(allCommands.get(commandName).getDescription() + "\n\n");
         }
     }
+
+    public void reportTagTask(Task task) {
+        resetResponse();
+
+        response.append(task.getDescription() + " has been tagged with " + task.getTag());
+    }
 }
