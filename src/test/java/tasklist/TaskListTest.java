@@ -1,11 +1,12 @@
 package tasklist;
 
-import org.junit.jupiter.api.Test;
-import storage.Storage;
-import tasks.Todo;
-import tasks.Deadline;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
+
+import storage.Storage;
+import tasks.Deadline;
+import tasks.Todo;
 
 public class TaskListTest {
 

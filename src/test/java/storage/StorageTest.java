@@ -1,8 +1,8 @@
 package storage;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+
+import org.junit.jupiter.api.Test;
 
 public class StorageTest {
 
@@ -11,7 +11,7 @@ public class StorageTest {
         Storage storage = new Storage("storage_test.txt");
         String lineToTest = "E | 1 | day6 concert | 2019-10-05";
         String outputLine = storage.processLine(lineToTest);
-        assertEquals("[E][✓] day6 concert (at: Oct 5 2019)", outputLine);
+        assertEquals("[E][\u2713] day6 concert (at: Oct 5 2019)", outputLine);
 
     }
 
