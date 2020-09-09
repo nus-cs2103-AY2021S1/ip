@@ -98,6 +98,7 @@ public class DukeList {
             throw new DukeInvalidCommandException(String.format("OOPS!!! I'm sorry, but I don't know what `%s` means :-(", invalidCommand));
         }
 
+        assert newTask != null;
         this.taskList.add(newTask);
 
         return newTask;

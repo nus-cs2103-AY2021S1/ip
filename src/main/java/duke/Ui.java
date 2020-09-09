@@ -112,6 +112,7 @@ public class Ui {
      */
     public void printMessage(String msg) {
         Ui.printSeparator();
+        assert msg != null;
         System.out.println(msg);
         Ui.printSeparator();
     }
@@ -124,6 +125,7 @@ public class Ui {
      * @return Error string printed.
      */
     public String printEmptyIndexErrorMsg(String commandStr) {
+        assert commandStr != null;
         String errorMsg = String.format("OOPS!!! The index of `%s` cannot be empty.", commandStr);
         this.printErrorMessage(errorMsg);
         return errorMsg;
@@ -149,6 +151,7 @@ public class Ui {
      * @return Error string printed.
      */
     public String printErrorMessage(String errMsg) {
+        assert errMsg != null;
         this.printMessage(errMsg);
         return errMsg;
     }
