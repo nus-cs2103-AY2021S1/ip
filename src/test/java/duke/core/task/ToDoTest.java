@@ -1,11 +1,12 @@
 package duke.core.task;
 
-import duke.core.parser.CsvToTask;
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import duke.core.parser.CsvToTask;
 
 class ToDoTest {
 

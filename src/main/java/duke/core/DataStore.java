@@ -1,10 +1,10 @@
 package duke.core;
 
-import duke.core.task.Task;
-import duke.designpattern.command.UndoRedoList;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.core.task.Task;
+import duke.designpattern.command.UndoRedoList;
 
 /**
  * A centralised storage for the core components of Duke.

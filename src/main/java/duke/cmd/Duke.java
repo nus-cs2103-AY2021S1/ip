@@ -1,9 +1,9 @@
 package duke.cmd;
 
+import java.util.Scanner;
+
 import duke.core.DataStore;
 import duke.core.Logic;
-
-import java.util.Scanner;
 
 /**
  * Command line application for Duke (Command line UI)

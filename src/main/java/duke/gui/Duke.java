@@ -1,5 +1,8 @@
 package duke.gui;
 
+import java.io.ByteArrayOutputStream;
+import java.io.PrintStream;
+
 import duke.core.DataStore;
 import duke.core.Logic;
 import duke.core.task.Task;
@@ -15,9 +18,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
-
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 
 /**
  * GUI application for Duke (Duke GUI)

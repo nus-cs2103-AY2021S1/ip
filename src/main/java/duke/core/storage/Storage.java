@@ -1,8 +1,5 @@
 package duke.core.storage;
 
-import duke.core.parser.CsvToTask;
-import duke.core.task.Task;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -13,6 +10,9 @@ import java.util.Scanner;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
 import java.util.stream.Stream;
+
+import duke.core.parser.CsvToTask;
+import duke.core.task.Task;
 
 /**
  * The Storage class provides methods to save/load the taskList to/from a csv file

@@ -1,10 +1,10 @@
 package duke.core.command;
 
+import java.util.List;
+
+import duke.core.task.Task;
 import duke.designpattern.command.CommandException;
 import duke.designpattern.command.ReversibleExecutable;
-import duke.core.task.Task;
-
-import java.util.List;
 
 /**
  * Add a task to taskList

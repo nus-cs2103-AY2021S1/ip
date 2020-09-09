@@ -1,15 +1,16 @@
 package duke.core.command;
 
-import duke.core.task.Task;
-import duke.core.task.ToDo;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.core.task.Task;
+import duke.core.task.ToDo;
 
 class FindCommandTest {
 

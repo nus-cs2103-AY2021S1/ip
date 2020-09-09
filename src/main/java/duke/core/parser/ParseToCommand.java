@@ -1,10 +1,11 @@
 package duke.core.parser;
 
+import java.time.format.DateTimeParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 import duke.core.DataStore;
 import duke.core.command.AddCommand;
-import duke.core.command.RedoCommand;
-import duke.core.command.UndoCommand;
-import duke.designpattern.command.Executable;
 import duke.core.command.DeleteCommand;
 import duke.core.command.DoneCommand;
 import duke.core.command.ExitCommand;
@@ -12,16 +13,15 @@ import duke.core.command.FindCommand;
 import duke.core.command.HelpCommand;
 import duke.core.command.ListCommand;
 import duke.core.command.LoadCommand;
+import duke.core.command.RedoCommand;
 import duke.core.command.SaveCommand;
+import duke.core.command.UndoCommand;
 import duke.core.task.Deadline;
 import duke.core.task.Event;
 import duke.core.task.Task;
 import duke.core.task.ToDo;
 import duke.core.util.DukeDateTime;
-
-import java.time.format.DateTimeParseException;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
+import duke.designpattern.command.Executable;
 
 /**
  * Enumeration of available commands

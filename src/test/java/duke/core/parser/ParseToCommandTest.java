@@ -1,5 +1,11 @@
 package duke.core.parser;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+
 import duke.core.DataStore;
 import duke.core.command.AddCommand;
 import duke.core.command.DeleteCommand;
@@ -12,11 +18,6 @@ import duke.core.command.LoadCommand;
 import duke.core.command.SaveCommand;
 import duke.core.task.Task;
 import duke.core.task.ToDo;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 class ParseToCommandTest {
 

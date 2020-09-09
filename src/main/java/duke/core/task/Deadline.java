@@ -1,9 +1,9 @@
 package duke.core.task;
 
-import duke.core.util.DukeDateTime;
-import duke.core.parser.CsvToTask;
-
 import java.util.Objects;
+
+import duke.core.parser.CsvToTask;
+import duke.core.util.DukeDateTime;
 
 /**
  * A Task with a deadline

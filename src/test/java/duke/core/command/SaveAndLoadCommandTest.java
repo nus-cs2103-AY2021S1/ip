@@ -1,17 +1,18 @@
 package duke.core.command;
 
-import duke.core.DataStore;
-import duke.core.util.DukeDateTime;
-import duke.core.task.Deadline;
-import duke.core.task.Event;
-import duke.core.task.Task;
-import duke.core.task.ToDo;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.core.DataStore;
+import duke.core.task.Deadline;
+import duke.core.task.Event;
+import duke.core.task.Task;
+import duke.core.task.ToDo;
+import duke.core.util.DukeDateTime;
 
 public class SaveAndLoadCommandTest {
 

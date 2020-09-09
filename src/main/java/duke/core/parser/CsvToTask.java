@@ -1,12 +1,12 @@
 package duke.core.parser;
 
-import duke.core.util.DukeDateTime;
+import java.util.Scanner;
+
 import duke.core.task.Deadline;
 import duke.core.task.Event;
 import duke.core.task.Task;
 import duke.core.task.ToDo;
-
-import java.util.Scanner;
+import duke.core.util.DukeDateTime;
 
 /**
  * Recover the Task from a csv representation

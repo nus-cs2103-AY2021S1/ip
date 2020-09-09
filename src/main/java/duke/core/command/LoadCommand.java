@@ -1,11 +1,11 @@
 package duke.core.command;
 
+import java.io.FileNotFoundException;
+
 import duke.core.DataStore;
 import duke.core.storage.Storage;
 import duke.designpattern.command.CommandException;
 import duke.designpattern.command.Executable;
-
-import java.io.FileNotFoundException;
 
 /**
  * Load taskList from file

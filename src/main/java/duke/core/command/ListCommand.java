@@ -1,9 +1,9 @@
 package duke.core.command;
 
-import duke.designpattern.command.Executable;
-import duke.core.task.Task;
-
 import java.util.List;
+
+import duke.core.task.Task;
+import duke.designpattern.command.Executable;
 
 /**
  * List all items in taskList

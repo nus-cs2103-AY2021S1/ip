@@ -1,7 +1,7 @@
 package duke.core.command;
 
-import duke.designpattern.command.Executable;
 import duke.core.parser.ParseToCommand;
+import duke.designpattern.command.Executable;
 
 /**
  * List all available Commands

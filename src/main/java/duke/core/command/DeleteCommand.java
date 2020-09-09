@@ -1,9 +1,9 @@
 package duke.core.command;
 
-import duke.designpattern.command.ReversibleExecutable;
-import duke.core.task.Task;
-
 import java.util.List;
+
+import duke.core.task.Task;
+import duke.designpattern.command.ReversibleExecutable;
 
 /**
  * Remove task from taskList

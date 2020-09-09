@@ -1,7 +1,7 @@
 package duke.core.command;
 
-import duke.designpattern.command.ReversibleExecutable;
 import duke.core.task.Task;
+import duke.designpattern.command.ReversibleExecutable;
 
 /**
  * Mark task as done

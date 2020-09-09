@@ -1,12 +1,12 @@
 package duke.core.command;
 
-import duke.designpattern.command.CommandException;
-import duke.designpattern.command.Executable;
-import duke.core.storage.Storage;
-import duke.core.task.Task;
-
 import java.io.IOException;
 import java.util.List;
+
+import duke.core.storage.Storage;
+import duke.core.task.Task;
+import duke.designpattern.command.CommandException;
+import duke.designpattern.command.Executable;
 
 /**
  * Save taskList to file.
