@@ -12,52 +12,52 @@ public class Parser {
      * @throws DukeException for errors such as non-comprehensible user commands
      */
     public static Command parse(String fullCommand) throws DukeException {
-        Scanner s2 = new Scanner(fullCommand);
+        Scanner parserScanner = new Scanner(fullCommand);
 
         if (fullCommand.equals("bye")) {
             // goodbye command
             return new ExitCommand();
         } else if (fullCommand.contains("done")) {
             // done command
-            s2.skip("done");
-            int taskNumber = s2.nextInt();
+            parserScanner.skip("done");
+            int taskNumber = parserScanner.nextInt();
             return new DoneCommand(taskNumber);
         } else if (fullCommand.contains("find")) {
             // done command
-            s2.skip("find");
-            String filterWord = s2.next();
+            parserScanner.skip("find");
+            String filterWord = parserScanner.next();
             return new FindCommand(filterWord);
         } else if (fullCommand.equals("list")) {
             // list command
             return new ListCommand();
         } else if (fullCommand.contains("delete")) {
             // delete command
-            s2.skip("delete");
-            int taskNumber = s2.nextInt();
+            parserScanner.skip("delete");
+            int taskNumber = parserScanner.nextInt();
             return new DeleteCommand(taskNumber);
         } else {
             Task currTask;
 
             if (fullCommand.contains("todo")) {
                 // add command for todotask
-                s2.skip("todo");
-                if (s2.hasNext()) {
-                    s2.skip(" ");
-                    currTask = new Todo(s2.nextLine());
+                parserScanner.skip("todo");
+                if (parserScanner.hasNext()) {
+                    parserScanner.skip(" ");
+                    currTask = new Todo(parserScanner.nextLine());
                 } else {
                     throw new DukeException("The description of a todo cannot be empty.");
                 }
             } else if (fullCommand.contains("deadline")) {
                 // add command for deadline
-                s2.skip("deadline ");
-                s2.useDelimiter(" /by ");
-                currTask = new Deadline(s2.next(), s2.next());
+                parserScanner.skip("deadline ");
+                parserScanner.useDelimiter(" /by ");
+                currTask = new Deadline(parserScanner.next(), parserScanner.next());
             } else {
                 // add command for event
                 if (fullCommand.contains("event")) {
-                    s2.skip("event ");
-                    s2.useDelimiter(" /at ");
-                    currTask = new Event(s2.next(), s2.next());
+                    parserScanner.skip("event ");
+                    parserScanner.useDelimiter(" /at ");
+                    currTask = new Event(parserScanner.next(), parserScanner.next());
                 } else {
                     throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }

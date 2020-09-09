@@ -14,7 +14,7 @@ public class Storage {
 
     public Storage(String filePath) {
         this.filePath = filePath;
-        this.loadedTasks = new ArrayList<>();
+        this.loadedTasks = new ArrayList<Task>();
     }
 
     /**
@@ -25,9 +25,9 @@ public class Storage {
      * @throws IOException for input/output errors
      */
     private void writeToFile(String filePath, String textToAdd, boolean isAppending) throws IOException {
-        FileWriter fw = new FileWriter(filePath, isAppending);
-        fw.write(textToAdd);
-        fw.close();
+        FileWriter fileWriter = new FileWriter(filePath, isAppending);
+        fileWriter.write(textToAdd);
+        fileWriter.close();
     }
 
     /**
@@ -38,11 +38,11 @@ public class Storage {
      */
     public ArrayList<Task> load() throws DukeException, IOException {
         try {
-            File f = new File(this.filePath);
-            f.getParentFile().mkdir();
-            f.createNewFile();
+            File file = new File(this.filePath);
+            file.getParentFile().mkdir();
+            file.createNewFile();
 
-            Scanner s = new Scanner(f);
+            Scanner s = new Scanner(file);
 
             while (s.hasNext()) {
 
