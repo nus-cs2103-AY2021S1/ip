@@ -6,6 +6,7 @@ import duke.Storage;
 import duke.TaskList;
 import duke.TaskType;
 import duke.Ui;
+import duke.exception.DukeException;
 import duke.exception.PastDateTimeException;
 
 public class DeadlineCommand extends Command {
@@ -32,7 +33,7 @@ public class DeadlineCommand extends Command {
      * @returns Duke response.
      * @throws PastDateTimeException If the dateTime has already passed.
      */
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws PastDateTimeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (LocalDateTime.now().isBefore(dateTime)) {
             tasks.add(task, dateTime, TaskType.DEADLINE);
             return ("Added Deadline '" + task + "' to your list!");
