@@ -2,7 +2,7 @@ package duke.core.command;
 
 import java.io.FileNotFoundException;
 
-import duke.core.DataStore;
+import duke.core.DukeData;
 import duke.core.storage.Storage;
 import duke.designpattern.command.CommandException;
 import duke.designpattern.command.Executable;
@@ -14,20 +14,20 @@ import duke.designpattern.command.Executable;
  */
 public class LoadCommand implements Executable {
 
-    private final DataStore dataStore;
+    private final DukeData dukeData;
     private final String filePath;
 
     /**
      * Load dataStore from a csv file as specified by filePath.
      * dataStore must be initialized and all entries will be cleared
      * on execution of this command
-     * @param dataStore to load data into (Existing data will be deleted)
+     * @param dukeData to load data into (Existing data will be deleted)
      * @param filePath A csv file to read data from
      */
-    public LoadCommand(DataStore dataStore, String filePath) {
-        this.dataStore = dataStore;
+    public LoadCommand(DukeData dukeData, String filePath) {
+        this.dukeData = dukeData;
         this.filePath = filePath;
-        assert this.dataStore != null;
+        assert this.dukeData != null;
         assert this.filePath != null;
     }
 
@@ -40,10 +40,10 @@ public class LoadCommand implements Executable {
     @Override
     public void execute() {
         try {
-            Storage.load(dataStore.getTaskList(), filePath);
-            System.out.println("Load: " + dataStore.getTaskList().size() + " entries");
+            Storage.load(dukeData.getTaskList(), filePath);
+            System.out.println("Load: " + dukeData.getTaskList().size() + " entries");
             // Clear history
-            dataStore.getHistory().clear();
+            dukeData.getHistory().clear();
         } catch (FileNotFoundException e) {
             throw new CommandException("Error: File not found");
         }

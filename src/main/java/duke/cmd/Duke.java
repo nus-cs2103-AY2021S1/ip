@@ -2,8 +2,8 @@ package duke.cmd;
 
 import java.util.Scanner;
 
-import duke.core.DataStore;
-import duke.core.Logic;
+import duke.core.DukeData;
+import duke.core.DukeLogic;
 
 /**
  * Command line application for Duke (Command line UI)
@@ -18,14 +18,14 @@ public class Duke {
             + "|____/ \\__,_|_|\\_\\___|\n";
     private static final String GREETING = "Hello! I'm Duke\nWhat can i do for you?";
 
-    private final DataStore dataStore;
+    private final DukeData dukeData;
     private final Scanner scanner;
 
     /**
      * Initialize Duke cmd with default dataStore and default input/output
      */
     public Duke() {
-        this.dataStore = new DataStore();
+        this.dukeData = new DukeData();
         this.scanner = new Scanner(System.in);
     }
 
@@ -44,7 +44,7 @@ public class Duke {
             String input = this.scanner.nextLine();
 
             // Execute logic
-            Logic.execute(this.dataStore, input);
+            DukeLogic.execute(this.dukeData, input);
 
             // Post processing
             // Nothing to do

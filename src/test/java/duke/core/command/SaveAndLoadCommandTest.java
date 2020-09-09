@@ -7,7 +7,7 @@ import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import duke.core.DataStore;
+import duke.core.DukeData;
 import duke.core.task.Deadline;
 import duke.core.task.Event;
 import duke.core.task.Task;
@@ -33,7 +33,7 @@ public class SaveAndLoadCommandTest {
 
         // Load taskList from file
         List<Task> recoveredTaskList = new ArrayList<>(3);
-        new LoadCommand(new DataStore(recoveredTaskList), "save.txt").execute();
+        new LoadCommand(new DukeData(recoveredTaskList), "save.txt").execute();
 
         // Check loaded taskList is similar to original
         assertEquals(originalTaskList, recoveredTaskList);

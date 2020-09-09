@@ -10,7 +10,7 @@ import duke.designpattern.command.UndoRedoList;
  * A centralised storage for the core components of Duke.
  * It facilitates passing of such data structures throughout the application.
  */
-public class DataStore {
+public class DukeData {
 
     private final List<Task> taskList;
     private final UndoRedoList history;
@@ -18,7 +18,7 @@ public class DataStore {
     /**
      * Initialize DataStore with default settings
      */
-    public DataStore() {
+    public DukeData() {
         this.taskList = new ArrayList<>(100);
         this.history = new UndoRedoList();
     }
@@ -27,7 +27,7 @@ public class DataStore {
      * Initialize DataStore with specified taskList
      * @param taskList The List of Task being managed by Duke
      */
-    public DataStore(List<Task> taskList) {
+    public DukeData(List<Task> taskList) {
         this.taskList = taskList;
         this.history = new UndoRedoList();
         assert taskList != null;

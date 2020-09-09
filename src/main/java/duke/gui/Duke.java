@@ -3,8 +3,8 @@ package duke.gui;
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
-import duke.core.DataStore;
-import duke.core.Logic;
+import duke.core.DukeData;
+import duke.core.DukeLogic;
 import duke.core.task.Task;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
@@ -27,7 +27,7 @@ public class Duke extends Application {
     // Todo: Observable is deprecated.
     //  Replace observableList with java.beans.PropertyChangeListener
     private final ObservableList<Task> taskList = FXCollections.observableArrayList();
-    private final DataStore dataStore = new DataStore(taskList);
+    private final DukeData dukeData = new DukeData(taskList);
 
     @Override
     public void start(Stage stage) {
@@ -88,7 +88,7 @@ public class Duke extends Application {
                 inputField.setText("");
 
                 // Execute logic
-                Logic.execute(dataStore, input);
+                DukeLogic.execute(dukeData, input);
 
                 // Print output
                 display.out(outputStream.toString());
