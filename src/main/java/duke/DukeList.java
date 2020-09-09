@@ -45,6 +45,40 @@ public class DukeList {
     }
 
 
+    private Task handleTasks(String[] strArr, TaskType taskType) throws DukeInvalidDescriptionException, DukeInvalidCommandException {
+        String formattedDescriptionString;
+        Task newTask;
+
+        try {
+            switch (taskType) {
+            case TODO:
+                formattedDescriptionString = Parser.getItemSubstring(strArr);
+                newTask = new Todo(formattedDescriptionString);
+                break;
+            case DEADLINE:
+                formattedDescriptionString = Parser.getItemSubstring(strArr);
+                newTask = new Deadline(formattedDescriptionString);
+                break;
+            case EVENT:
+                formattedDescriptionString = Parser.getItemSubstring(strArr);
+                newTask = new Event(formattedDescriptionString);
+                break;
+            default:
+                String invalidCommand = strArr[0];
+                throw new DukeInvalidCommandException(String.format("OOPS!!! I'm sorry, but I don't know what `%s` means :-(", invalidCommand));
+            }
+
+            assert newTask != null;
+            return newTask;
+
+        } catch (DukeNoDescriptionException e) {
+            throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of a `%s` cannot be empty.", taskType));
+        } catch (DukeNoDateException e) {
+            throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of `%s` is invalid.", taskType));
+        }
+    }
+
+
     /**
      * Helper function for adding an item.
      *
@@ -54,50 +88,10 @@ public class DukeList {
      * @throws DukeInvalidCommandException     Invalid command.
      */
     private Task addHelper(String descriptionString) throws DukeInvalidDescriptionException, DukeInvalidCommandException {
-        Task newTask;
-
         String[] strArr = Parser.parseLineToArray(descriptionString);
         TaskType taskType = Parser.getTaskKeyword(descriptionString);
-
-        String formattedDescriptionString;
-
-        switch (taskType) {
-        case TODO:
-            try {
-                formattedDescriptionString = Parser.getItemSubstring(strArr);
-                newTask = new Todo(formattedDescriptionString);
-                break;
-            } catch (DukeNoDescriptionException e) {
-                throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of a `%s` cannot be empty.", taskType));
-            }
-
-        case DEADLINE:
-            try {
-                formattedDescriptionString = Parser.getItemSubstring(strArr);
-                newTask = new Deadline(formattedDescriptionString);
-                break;
-            } catch (DukeNoDescriptionException e) {
-                throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of a `%s` cannot be empty.", taskType));
-            } catch (DukeNoDateException e) {
-                throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of `%s` is invalid.", taskType));
-            }
-
-        case EVENT:
-            try {
-                formattedDescriptionString = Parser.getItemSubstring(strArr);
-                newTask = new Event(formattedDescriptionString);
-                break;
-            } catch (DukeNoDescriptionException e) {
-                throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of a `%s` cannot be empty.", taskType));
-            } catch (DukeNoDateException e) {
-                throw new DukeInvalidDescriptionException(String.format("OOPS!!! The description of `%s` is invalid.", taskType));
-            }
-
-        default:
-            String invalidCommand = strArr[0];
-            throw new DukeInvalidCommandException(String.format("OOPS!!! I'm sorry, but I don't know what `%s` means :-(", invalidCommand));
-        }
-
+        
+        Task newTask = this.handleTasks(strArr, taskType);
         this.taskList.add(newTask);
 
         return newTask;
