@@ -1,14 +1,6 @@
 package duke;
 
-import duke.command.Command;
-import duke.command.DeadlineCommand;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.EventCommand;
-import duke.command.ExitCommand;
-import duke.command.FindCommand;
-import duke.command.ListCommand;
-import duke.command.TodoCommand;
+import duke.command.*;
 import duke.exceptions.DukeException;
 
 /**
@@ -34,6 +26,8 @@ public class Parser {
             return new ListCommand(userInput);
         } else if (userInput.startsWith("find")) {
             return new FindCommand(userInput);
+        } else if (userInput.startsWith("help")) {
+            return new HelpCommand(userInput);
         } else {
             return addCommand(userInput);
         }
@@ -55,7 +49,7 @@ public class Parser {
         } else if (command.startsWith("event")) {
             return new EventCommand(command);
         } else {
-            throw new DukeException("☹ OOPS!!! I'm sorry,"
+            throw new DukeException("OOPS!!! I'm sorry,"
                     + " but I don't know what that means :-(");
         }
     }

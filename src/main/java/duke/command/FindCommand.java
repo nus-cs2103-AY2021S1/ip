@@ -17,7 +17,7 @@ import duke.tasks.TaskList;
  */
 public class FindCommand extends Command {
 
-    private static final String TASK_FOUND_MESSAGE = "Here are the matching tasks in your list:";
+    private static final String TASK_FOUND_MESSAGE = "Here are the matching tasks in your list:\n";
     private static final String NO_TASK_FOUND = "There are no matching task!";
 
 

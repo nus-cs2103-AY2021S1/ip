@@ -31,7 +31,7 @@ public class ListCommand extends Command {
         } else {
             String result = "";
             for (int i = 0; i < tasks.taskListSize(); i++) {
-                result = result + "\n" + ui.printMessage((i + 1) + "." + tasks.getTask(i));
+                result = result + ui.printMessage((i + 1) + "." + tasks.getTask(i)) + "\n";
             }
             return result;
         }
