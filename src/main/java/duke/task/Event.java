@@ -36,10 +36,10 @@ public class Event extends Task {
         if (otherTask instanceof Event) {
             // share same description and timing
             return super.checkIfDuplicate(otherTask) && at.equals(((Event) otherTask).getAtWhen());
-        } 
+        }
         return false;
     }
-    
+
     @Override
     public String toString() {
         String formattedTimeAt = at.format(DateTimeFormatter.ofPattern("MMM d yyyy"));

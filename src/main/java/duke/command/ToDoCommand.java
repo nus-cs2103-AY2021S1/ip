@@ -35,7 +35,7 @@ public class ToDoCommand extends Command {
     public String execute(TaskList taskItems, Ui ui, Storage storage) throws DukeException {
         boolean hasDuplicates = taskItems.findIfDuplicateExists(task);
         if (hasDuplicates) {
-           throw new DukeException("Duplicate Task Added");
+            throw new DukeException("Duplicate Task Added");
         }
         taskItems.addTask(task);
         storage.saveTaskToMemory(taskItems.getAll());

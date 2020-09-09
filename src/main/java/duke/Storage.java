@@ -36,12 +36,11 @@ public class Storage {
      * @throws IOException if File object cannot create new file.
      */
     private void handleFileOrDirectoryDoesNotExist(File savedTasks) throws IOException {
-        if (savedTasks.getParentFile().mkdirs()) {
-            System.out.println("./data directory created");
-        }
-        if (savedTasks.createNewFile()) {
-            System.out.println("duke.txt created in ./data");
-        }
+        // create ./data directory if it does not exist
+        savedTasks.getParentFile().mkdirs();
+
+        // create duke.txt in ./data directory if it does not exist
+        savedTasks.createNewFile();
     }
 
     /**

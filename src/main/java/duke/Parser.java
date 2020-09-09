@@ -27,7 +27,7 @@ public class Parser {
         final int SINGLE_WORD_LENGTH = 1;
         return commandAndArguments.length == SINGLE_WORD_LENGTH;
     }
-    
+
     /**
      * Parses user input and returns appropriate Command Object for execution in Duke class.
      *
@@ -84,7 +84,7 @@ public class Parser {
                 throw new DukeException(String.format("Invalid arguments specified for %s", command));
             }
         } else {
-           throw new DukeException("Unexpected number of Commands");
+            throw new DukeException("Unexpected number of Commands");
         }
     }
 
@@ -134,7 +134,7 @@ public class Parser {
 
     /**
      * Parse deadline command arguments to create deadline object.
-     * 
+     *
      * @param reply user reply inclusive or arguments.
      * @return New deadline object based on command arguments.
      */
@@ -149,7 +149,7 @@ public class Parser {
 
     /**
      * Parse event command arguments to create event object.
-     * 
+     *
      * @param reply user reply inclusive or arguments.
      * @return New event object based on command arguments.
      */
