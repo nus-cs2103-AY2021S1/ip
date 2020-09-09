@@ -99,6 +99,8 @@ public class Parser {
      * @return Task ID parsed from input.
      */
     static int parseCommandId(String input, String command) {
+        assert input != null : "Empty input";
+        assert command != null : "Empty command";
         return Integer.parseInt(input.substring(command.length())) - 1;
     }
 

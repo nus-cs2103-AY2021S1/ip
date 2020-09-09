@@ -26,6 +26,7 @@ public class Todo extends Task {
     }
 
     private static String extractNameFromCommand(String command) {
+        assert command.length() >= 6 : "Invalid command";
         return command.substring(5);
     }
 

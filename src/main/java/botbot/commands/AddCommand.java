@@ -31,6 +31,7 @@ public class AddCommand extends Command {
     @Override
     public String execute(Storage storage, TaskList tasks, Ui ui) {
         tasks.add(task);
+        assert tasks.size() > 0 : "Empty task list after adding task";
         storage.save(tasks);
         int numOfTasks = tasks.size();
         String response = String.format("ok! I've added this task:\n  %s\nyou now have %d task"

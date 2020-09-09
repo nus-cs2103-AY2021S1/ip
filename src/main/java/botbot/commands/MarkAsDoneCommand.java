@@ -33,6 +33,7 @@ public class MarkAsDoneCommand extends Command {
         try {
             Task task = tasks.get(id);
             task.markAsDone();
+            assert task.getStatus().equals("1") : "Mark task as done unsuccessful";
             storage.save(tasks);
             return ui.printStatus("nice! I've marked this task as done:\n  " + task + "\n");
         } catch (IndexOutOfBoundsException e) {

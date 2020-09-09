@@ -45,6 +45,8 @@ public class Deadline extends Task {
 
     static String extractNameFromCommand(String command) {
         int index = command.indexOf(" /by ");
+        assert index >= 0 : "Invalid index";
+        assert command.length() >= 10 : "Invalid command";
         return command.substring(9, index);
     }
 

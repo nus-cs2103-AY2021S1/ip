@@ -45,6 +45,8 @@ public class Event extends Task {
 
     static String extractNameFromCommand(String command) {
         int index = command.indexOf(" /at ");
+        assert index >= 0 : "Invalid index";
+        assert command.length() >= 7 : "Invalid command";
         return command.substring(6, index);
     }
 

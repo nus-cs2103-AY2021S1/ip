@@ -20,6 +20,7 @@ public class FindCommand extends Command {
                 matches.add(task);
             }
         }
+        assert matches.size() > 0 : "No match";
         String response = "here are the matches in your list:\n" + matches;
         return ui.printStatus(response);
     }

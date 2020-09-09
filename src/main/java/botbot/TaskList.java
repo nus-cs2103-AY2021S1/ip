@@ -31,6 +31,7 @@ public class TaskList extends LinkedList<Task> {
      * @param id ID of task to be deleted.
      */
     public void delete(int id) {
+        assert size() > 0 && id <= size() : "Invalid ID to delete";
         remove(id);
     }
     
