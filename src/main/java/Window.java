@@ -13,6 +13,10 @@ public class Window extends Application {
 
     private Duke duke = new Duke();
 
+    /**
+     * Start the program as desired.
+     * @param stage an anchoring point for the program
+     */
     @Override
     public void start(Stage stage) {
         try {

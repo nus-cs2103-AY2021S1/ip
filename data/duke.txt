@@ -1,1 +1,1 @@
-[T][✘] borrow book[D][✘] ask /by[D][✘] ask /by
+[T][✘] ask [T][✘] ask [D][✘] ask /by
