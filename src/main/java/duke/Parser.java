@@ -1,7 +1,12 @@
 package duke;
 
+import static java.time.temporal.TemporalAdjusters.next;
+
+import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeFormatterBuilder;
 import java.time.format.DateTimeParseException;
 import java.util.Arrays;
 import java.util.List;
@@ -17,6 +22,8 @@ import duke.command.ListCommand;
 import duke.command.ViewCommand;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
+import duke.task.TaskType;
 import duke.task.Todo;
 
 /**
@@ -24,7 +31,12 @@ import duke.task.Todo;
  */
 public class Parser {
     /** List of all the valid date inputs */
-    private static final List<String> DATE_FORMATS = Arrays.asList("d/M/y", "y-M-d");
+    private static final List<String> DATE_FORMATS = Arrays.asList("d/M/yy", "d/MMM/yy", "d/MMMM/yy",
+            "d/M/y", "d/MMM/y", "d/MMMM/y", "y/M/d",
+            "d-M-yy", "d-MMM-yy", "d-MMMM-yy",
+            "d-M-y", "d-MMM-y", "d-MMMM-y", "y-M-d",
+            "d M yy", "d MMM yy", "d MMMM yy",
+            "d M y", "d MMM y", "d MMMM y", "y M d");
 
     /**
      * Parses the input command from the user into a command that the chat bot can understand.
@@ -52,16 +64,10 @@ public class Parser {
                 Todo todo = new Todo(splitCommand[1]);
                 return new AddCommand(todo);
             case DEADLINE:
-                String[] splitDeadline = splitCommand[1].split(" /by ", 2);
-                String deadlineDescription = splitDeadline[0];
-                LocalDate deadlineDate = parseDate(splitDeadline[1]);
-                Deadline deadline = new Deadline(deadlineDescription, deadlineDate);
+                Task deadline = parseDateTimeTask(TaskType.DEADLINE, splitCommand[1]);
                 return new AddCommand(deadline);
             case EVENT:
-                String[] splitEvent = splitCommand[1].split(" /at ", 2);
-                String eventDescription = splitEvent[0];
-                LocalDate eventDate = parseDate(splitEvent[1]);
-                Event event = new Event(eventDescription, eventDate);
+                Task event = parseDateTimeTask(TaskType.EVENT, splitCommand[1]);
                 return new AddCommand(event);
             case VIEW:
                 LocalDate viewDate = parseDate(splitCommand[1]);
@@ -78,30 +84,7 @@ public class Parser {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("OOPS!!! The description or date cannot be empty.");
-        } catch (DateTimeParseException e) {
-            throw new DukeException("OOPS!!! The date is not valid.");
         }
-    }
-
-    /**
-     * Parses input dates in the valid date formats of d/M/y and y-M-d into the local date format.
-     *
-     * @param string The date to be parsed.
-     * @return Local date format of the input date.
-     * @throws DateTimeParseException If the input date is not of an acceptable format.
-     */
-    public static LocalDate parseDate(String string) throws DateTimeParseException {
-        for (int i = 0; i < DATE_FORMATS.size(); i++) {
-            String formatString = DATE_FORMATS.get(i);
-            try {
-                return LocalDate.parse(string, DateTimeFormatter.ofPattern(formatString));
-            } catch (DateTimeParseException e) {
-                if (i == DATE_FORMATS.size() - 1) {
-                    throw e;
-                }
-            }
-        }
-        return null;
     }
 
     /**
@@ -112,5 +95,207 @@ public class Parser {
      */
     private static CommandInstruction parseCommandInstruction(String userInstruction) {
         return CommandInstruction.valueOf(userInstruction.toUpperCase());
+    }
+
+    /**
+     * Parses the input into a task of the specified task type with description, date and optionally time.
+     *
+     * @param taskType Type of the task to be returned.
+     * @param input The description, date and time in the format: description /separator date time.
+     * @return Task of the specified task type, description, date and optionally time.
+     * @throws DukeException If there was a problem with creating a valid task.
+     */
+    public static Task parseDateTimeTask(TaskType taskType, String input) throws DukeException {
+        input = input.trim();
+        String description;
+        String dateTimeString;
+        String potentialDate;
+        String potentialTime;
+        LocalDate localDate;
+        LocalTime localTime;
+
+        switch (taskType) {
+        case DEADLINE:
+            String[] splitDeadline = input.split(" /by ", 2);
+            description = splitDeadline[0];
+            dateTimeString = splitDeadline[1];
+            break;
+        case EVENT:
+            String[] splitEvent = input.split(" /at ", 2);
+            description = splitEvent[0];
+            dateTimeString = splitEvent[1];
+            break;
+        default:
+            assert false;
+            throw new DukeException("OOPS!!! There were some problems in making the task.");
+        }
+        potentialTime = dateTimeString.substring(dateTimeString.lastIndexOf(" ") + 1);
+        localTime = parseTime(potentialTime);
+        if (localTime == null) {
+            potentialDate = dateTimeString;
+        } else {
+            potentialDate = dateTimeString.substring(0, dateTimeString.lastIndexOf(" "));
+        }
+        localDate = parseDate(potentialDate);
+        if (localDate == null && localTime == null) {
+            throw new DukeException("OOPS!!! The date/time is not valid.");
+        } else if (localDate == null && localTime != null) {
+            throw new DukeException("OOPS!!! The date is not valid.");
+        } else {
+            switch (taskType) {
+            case DEADLINE:
+                return new Deadline(description, localDate, localTime);
+            case EVENT:
+                return new Event(description, localDate, localTime);
+            default:
+                assert false;
+                throw new DukeException("OOPS!!! There were some problems in making the task.");
+            }
+        }
+    }
+
+    /**
+     * Parses input dates in the valid date formats to the local date format. Valid date formats include:
+     * <ol>
+     *     <li>day/month/year</li>
+     *     <li>day-month-year</li>
+     *     <li>day month year</li>
+     *     <li>Days of the week and their abbreviations like Monday, Mon etc. </li>
+     *     <li>Relative days: yesterday, today, tomorrow. </li>
+     * </ol>
+     * where day can be 03 or 3, month can be 09, 9, Sep, September, and year can be 2011 or 11.
+     * It can also parse dates that are y-M-d, y/M/d, y M d provided they are in the full numerical representations
+     * of year, month and day e.g. 2011-01-11.
+     *
+     * @param input The date to be parsed.
+     * @return Local date format of the input date.
+     */
+    private static LocalDate parseDate(String input) {
+        String parsedInput = input.trim().toUpperCase();
+        try {
+            return parseLocalDateFromStringDate(parsedInput);
+        } catch (IllegalArgumentException e) {
+            // Try the other ways to parse the date first.
+        }
+        try {
+            return parseLocalDateFromDay(parsedInput);
+        } catch (IllegalArgumentException e) {
+            // Try the other ways to parse the date first.
+        }
+        try {
+            return parseLocalDateFromRelativeDay(parsedInput);
+        } catch (IllegalArgumentException e) {
+            // Try the other ways to parse the date first.
+        }
+        // By reaching here, it means that the date cannot be parsed and null is returned.
+        return null;
+    }
+
+    /**
+     * Parses input dates in the valid date formats to the local date format. Valid date formats include:
+     * <ol>
+     *     <li>day/month/year</li>
+     *     <li>day-month-year</li>
+     *     <li>day month year</li>
+     * </ol>
+     * where day can be e.g. 03 or 3, month can be e.g. 09, 9, Sep, September, and year can be e.g. 2011 or 11.
+     * It can also parse dates that are y-M-d, y/M/d, y M d provided they are in the full numerical representations
+     * of year, month and day e.g. 2011-01-11.
+     *
+     * @param date The date to be parsed.
+     * @return Local date format of the input date.
+     */
+    private static LocalDate parseLocalDateFromStringDate(String date) {
+        for (int i = 0; i < DATE_FORMATS.size(); i++) {
+            String format = DATE_FORMATS.get(i);
+            try {
+                DateTimeFormatter dTF =
+                        new DateTimeFormatterBuilder().parseCaseInsensitive()
+                                .appendPattern(format)
+                                .toFormatter();
+                return LocalDate.parse(date, dTF);
+            } catch (DateTimeParseException e) {
+                if (i == DATE_FORMATS.size() - 1) {
+                    throw new IllegalArgumentException();
+                }
+            }
+        }
+        return null;
+    }
+
+    /**
+     * Parses day of the week in string to the next such day in local date format.
+     * Days of the week are Monday to Sunday.
+     *
+     * @param day The day of the week.
+     * @return Local date format of the day.
+     */
+    private static LocalDate parseLocalDateFromDay(String day) {
+        DayOfWeek parsedDay;
+        switch (day) {
+        case "MONDAY": case "MON":
+            parsedDay = DayOfWeek.MONDAY;
+            break;
+        case "TUESDAY": case "TUE": case "TUES":
+            parsedDay = DayOfWeek.TUESDAY;
+            break;
+        case "WEDNESDAY": case "WED":
+            parsedDay = DayOfWeek.WEDNESDAY;
+            break;
+        case "THURSDAY": case "THU": case "THUR": case "THURS":
+            parsedDay = DayOfWeek.THURSDAY;
+            break;
+        case "FRIDAY": case "FRI":
+            parsedDay = DayOfWeek.FRIDAY;
+            break;
+        case "SATURDAY": case "SAT":
+            parsedDay = DayOfWeek.SATURDAY;
+            break;
+        case "SUNDAY": case "SUN":
+            parsedDay = DayOfWeek.SUNDAY;
+            break;
+        default:
+            throw new IllegalArgumentException();
+        }
+        return LocalDate.now().with(next(parsedDay));
+    }
+
+    /**
+     * Parses the relative day to the local date format. Relative days include yesterday, today and tomorrow.
+     *
+     * @param day The relative day.
+     * @return Local date format of the relative day.
+     */
+    private static LocalDate parseLocalDateFromRelativeDay(String day) {
+        switch (day) {
+        case "YESTERDAY":
+            return LocalDate.now().minusDays(1);
+        case "TODAY":
+            return LocalDate.now();
+        case "TOMORROW":
+            return LocalDate.now().plusDays(1);
+        default:
+            throw new IllegalArgumentException();
+        }
+    }
+
+    /**
+     * Parses input time in the format of HH:mm to the local time format. HH must be in the 24 hours format.
+     *
+     * @param potentialTime The input time to be parsed.
+     * @return The local time format of the input time.
+     */
+    private static LocalTime parseTime(String potentialTime) {
+        try {
+            DateTimeFormatter dTF = new DateTimeFormatterBuilder()
+                    .parseCaseInsensitive()
+                    .appendPattern("HH:mm")
+                    .toFormatter();
+            return LocalTime.parse(potentialTime, dTF);
+        } catch (DateTimeParseException e) {
+            //We want to go through all the possible time formats first.
+            // If no format can be found at all, then return null.
+        }
+        return null;
     }
 }

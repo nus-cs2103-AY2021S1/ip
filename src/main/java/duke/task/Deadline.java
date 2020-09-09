@@ -1,6 +1,7 @@
 package duke.task;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -8,17 +9,21 @@ import java.time.format.DateTimeFormatter;
  */
 public class Deadline extends Task {
     /** The date by which this task must be done. */
-    protected LocalDate by;
+    protected LocalDate byDate;
+    /** The time by which this task must be done. */
+    protected LocalTime byTime;
 
     /**
      * Creates a new Deadline with the specified description and specified deadline date.
      *
      * @param description The description of the deadline.
-     * @param by The date by which the task must be done.
+     * @param byDate The date by which the task must be done.
+     * @param byTime The time by which the task must be done.
      */
-    public Deadline(String description, LocalDate by) {
+    public Deadline(String description, LocalDate byDate, LocalTime byTime) {
         super(description, TaskType.DEADLINE);
-        this.by = by;
+        this.byDate = byDate;
+        this.byTime = byTime;
     }
 
     /**
@@ -32,13 +37,33 @@ public class Deadline extends Task {
     }
 
     /**
+     * If this deadline has a time associated to it, returns true, otherwise false.
+     *
+     * @return True, if this deadline has a time associated to it, otherwise false.
+     */
+    @Override
+    public boolean hasTime() {
+        return byTime != null;
+    }
+
+    /**
      * Gets the date by which this task must be done.
      *
      * @return The date by which this task must be done.
      */
     @Override
     public LocalDate getDate() {
-        return this.by;
+        return this.byDate;
+    }
+
+    /**
+     * Gets the time by which this task must be done.
+     *
+     * @return The time by which this task must be done.
+     */
+    @Override
+    public LocalTime getTime() {
+        return this.byTime;
     }
 
     /**
@@ -48,8 +73,15 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return String.format("%s (by: %s)",
-                super.toString(),
-                by.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        if (this.hasTime()) {
+            return String.format("%s (by: %s %s)",
+                    super.toString(),
+                    byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")),
+                    byTime.format(DateTimeFormatter.ofPattern("HH:mm")));
+        } else {
+            return String.format("%s (by: %s)",
+                    super.toString(),
+                    byDate.format(DateTimeFormatter.ofPattern("MMM d yyyy")));
+        }
     }
 }

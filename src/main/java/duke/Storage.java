@@ -4,15 +4,13 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import duke.task.Deadline;
-import duke.task.Event;
 import duke.task.Task;
+import duke.task.TaskType;
 import duke.task.Todo;
 
 /**
@@ -61,13 +59,14 @@ public class Storage {
                     break;
                 case "D":
                     String deadlineDescription = splitTask[2];
-                    LocalDate deadlineDate = Parser.parseDate(splitTask[3]);
-                    task = new Deadline(deadlineDescription, deadlineDate);
+                    String deadlineDateTime = splitTask[3];
+                    task = Parser.parseDateTimeTask(TaskType.DEADLINE,
+                            deadlineDescription + " /by " + deadlineDateTime);
                     break;
                 case "E":
                     String eventDescription = splitTask[2];
-                    LocalDate eventDate = Parser.parseDate(splitTask[3]);
-                    task = new Event(eventDescription, eventDate);
+                    String eventDateTime = splitTask[3];
+                    task = Parser.parseDateTimeTask(TaskType.EVENT, eventDescription + " /at " + eventDateTime);
                     break;
                 default:
                     assert false : splitTask[0];
@@ -101,13 +100,15 @@ public class Storage {
                 case "T":
                     writer.write(task.getShortForm()
                             + " | " + isDone
-                            + " | " + task.getDescription() + "\n");
+                            + " | " + task.getDescription()
+                            + "\n");
                     break;
                 case "D": case "E":
                     writer.write(task.getShortForm()
                             + " | " + isDone
                             + " | " + task.getDescription()
-                            + " | " + task.getDate() + "\n");
+                            + " | " + task.getDate() + " " + (task.hasTime() ? task.getTime() : "")
+                            + "\n");
                     break;
                 default:
                     assert false : task.getShortForm();
