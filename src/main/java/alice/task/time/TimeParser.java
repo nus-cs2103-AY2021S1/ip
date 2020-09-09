@@ -28,7 +28,7 @@ public class TimeParser {
      */
     private static List<DateTimeFormatter> createTimeFormats() {
         // List of acceptable date format with optional year/month
-        List<String> knownTimePatterns = Arrays.asList("HHmm", "h:mm[ ]a", "h[ ]a");
+        List<String> knownTimePatterns = Arrays.asList("HHmm", "h:mma", "ha");
 
         List<DateTimeFormatter> knownFormats = new ArrayList<>();
         // Create a formatter for each known patterns to be used for parsing dates
@@ -44,17 +44,38 @@ public class TimeParser {
     }
 
     /**
-     * Parses the time input given by the user into the implied {@code LocalTime}.
-     * Returns a default {@code LocalTime} of midnight 12am, when timeString is empty.
+     * Parse the time input given by the user into the implied {@code LocalTime}.
      *
      * @param timeString the user input containing a date.
      * @return the {@code LocalTime} indicated by the user input.
      * @throws InvalidCommandException if the time input given by the user does not match any known patterns.
      */
     public static LocalTime parse(String timeString) throws InvalidCommandException {
-        if (timeString.isBlank()) {
-            return LocalTime.MIDNIGHT;
+        assert !timeString.isBlank() : "timeString should not be empty when using LocalTime.parse";
+
+        LocalTime formattedTime = parseByTimeFormat(timeString);
+        if (formattedTime != null) {
+            return formattedTime;
         }
+
+        LocalTime naturalTime = parseByNaturalTime(timeString);
+        if (naturalTime != null) {
+            return naturalTime;
+        }
+
+        throw new InvalidCommandException("Invalid time! Please use a recognisable time format."
+                + "\n Remember to include am/pm for 12h time format.");
+    }
+
+    /**
+     * Parse the time input by checking with predefined time formats.
+     * Expects the time to match one of the formatter in {@code KNOWN_TIME_FORMATS}.
+     *
+     * @param timeString the {@code LocalTime} indicated by the user input.
+     * @return the {@code LocalTime} that is represented by the user,
+     * or null if the string does not match any known format.
+     */
+    static LocalTime parseByTimeFormat(String timeString) {
         for (int i = 0; i < KNOWN_TIME_FORMATS.size(); i++) {
             try {
                 return LocalTime.parse(timeString, KNOWN_TIME_FORMATS.get(i));
@@ -62,6 +83,43 @@ public class TimeParser {
                 // Ignore exception, fallthrough expected
             }
         }
-        throw new InvalidCommandException("Invalid datetime! Please use a recognisable time format");
+        return null;
+    }
+
+    /**
+     * Parse the time input by checking with known natural time language.
+     * Expects the time to match one of the time language defined in {@code NaturalDay}.
+     *
+     * @param timeString the {@code LocalTime} indicated by the user input.
+     * @return the {@code LocalTime} that is represented by the user,
+     * or null if the string does not match any known natural time language.
+     */
+    static LocalTime parseByNaturalTime(String timeString) {
+        // Parse for natural days
+        NaturalDay time = NaturalDay.parseTime(timeString);
+
+        if (time == null) {
+            return null;
+        }
+
+        switch (time) {
+        case MORNING:
+            // Alice default: 8am
+            return LocalTime.of(8, 0);
+        case NOON:
+            // Alice default: 12pm
+            return LocalTime.of(12, 0);
+        case EVENING:
+            // Alice default: 7pm
+            return LocalTime.of(19, 0);
+        case NIGHT:
+            // Alice default: 10pm
+            return LocalTime.of(22, 0);
+        case MIDNIGHT:
+            // Alice default: 11:59pm/ 2359
+            return LocalTime.of(23, 59);
+        default:
+            return null;
+        }
     }
 }
