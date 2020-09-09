@@ -26,6 +26,7 @@ public class Duke {
         this.ui = new Ui();
         try {
             this.tasks = storage.load();
+            assert this.tasks != null;
         } catch (StorageException e) {
             ui.showErrorMessage(e);
         }

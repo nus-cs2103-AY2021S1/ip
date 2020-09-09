@@ -93,6 +93,7 @@ public class Ui {
         String chatbotResponse = "Your current task list is as follows:" + SKIPLINE;
         output += generateTaskList(tasks, chatbotResponse);
 
+        assert !output.equals(CHATBOT + SKIPLINE);
         return output;
     }
 
@@ -109,6 +110,7 @@ public class Ui {
         String chatbotResponse = "Here are the tasks that matched with '" + keyword + "':" + SKIPLINE;
         output += generateTaskList(tasks, chatbotResponse);
 
+        assert !output.equals(CHATBOT + SKIPLINE);
         return output;
     }
 
@@ -123,6 +125,8 @@ public class Ui {
 
         String chatbotResponse = "Here is your current task list:" + SKIPLINE;
         output += generateTaskList(tasks, chatbotResponse);
+
+        assert !output.equals(CHATBOT + SKIPLINE + "Here is your current task list:");
         return output;
     }
 

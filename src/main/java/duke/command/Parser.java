@@ -86,6 +86,7 @@ public class Parser {
     private static String addTodo(String todo, Ui ui, Storage storage) {
         try {
             TaskList tasks = storage.load();
+            assert tasks != null;
 
             Todo newTodoTask = new Todo(todo);
             tasks.addNewTask(newTodoTask);
@@ -145,6 +146,7 @@ public class Parser {
     private static String addDeadline(String deadline, Ui ui, Storage storage) {
         try {
             TaskList tasks = storage.load();
+            assert tasks != null;
 
             // Retrieve deadline description and deadline date
             String[] deadlineInformation = getTaskInformation(deadline, DEADLINE_TASK_SEPARATOR);
@@ -173,6 +175,7 @@ public class Parser {
     private static String addEvent(String event, Ui ui, Storage storage) {
         try {
             TaskList tasks = storage.load();
+            assert tasks != null;
 
             // Retrieve event description and event date
             String[] eventInformation = getTaskInformation(event, EVENT_TASK_SEPARATOR);
@@ -220,6 +223,8 @@ public class Parser {
     private static String deleteTask(String taskToDelete, Ui ui, Storage storage) throws TaskDoesNotExistException {
         try {
             TaskList tasks = storage.load();
+            assert tasks != null;
+
             int index = parseTaskIndex(taskToDelete);
             boolean isValidTask = index > 0 && index <= tasks.getTotalNumberOfTasks();
 
@@ -254,6 +259,8 @@ public class Parser {
 
         try {
             TaskList tasks = storage.load();
+            assert tasks != null;
+
             int index = parseTaskIndex(taskToMarkDone);
             boolean isValidTask = index > 0 && index <= tasks.getTotalNumberOfTasks();
 
@@ -329,7 +336,10 @@ public class Parser {
     private static String searchTaskListForKeyword(String keyword, Ui ui, Storage storage) {
         try {
             TaskList tasks = storage.load();
+
             List<Task> tasksContainingKeyword = getTasksContainingKeyword(keyword, tasks);
+
+            assert tasks != null;
 
             TaskList filteredTaskList = new TaskList(tasksContainingKeyword);
             return ui.showFilteredByKeywordTaskList(filteredTaskList, keyword);

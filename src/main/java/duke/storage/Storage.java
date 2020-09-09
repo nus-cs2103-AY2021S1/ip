@@ -44,6 +44,7 @@ public class Storage {
     public void save(TaskList tasks) throws SaveToStorageErrorException {
         List<String> taskListText = new ArrayList<>();
 
+        assert tasks.getTotalNumberOfTasks() > 0;
         // Convert each task into a string
         for (int i = 1; i <= tasks.getTotalNumberOfTasks(); i++) {
             Task task = tasks.getTask(i);
@@ -118,6 +119,7 @@ public class Storage {
             return createNewFile();
         }
 
+        assert Files.exists(filePath);
         // Task list file already exists
         return getExistingFile();
     }
@@ -164,6 +166,7 @@ public class Storage {
      * @param taskIndicator A tick if the task is done or a cross if the task is not done.
      */
     private static void parseIsDoneStatus(Task task, String taskIndicator) {
+        assert !task.hasDoneStatus();
         if (taskIndicator.contains(Task.STATUS_TICK)) {
             task.markAsDone();
         }
@@ -183,7 +186,6 @@ public class Storage {
 
         // Checks if the task stored in the file is marked as done.
         parseIsDoneStatus(todo, taskIndicator);
-
         savedTaskList.add(todo);
     }
 
@@ -220,7 +222,9 @@ public class Storage {
      * @return Description and date of the deadline or event.
      */
     private static String[] parseTaskText(String taskText, String typeOfTask) {
+        assert taskText.contains(" (");
         String[] taskDescriptionAndDate = taskText.split(" \\(", 2);
+
         if (TaskList.TASK_DEADLINE_INDICATOR.equals(typeOfTask)) {
             String[] date = taskDescriptionAndDate[1].split(TEXT_DEADLINE_SEPARATOR);
             taskDescriptionAndDate[1] = date[1].substring(0, date[1].length() - 1);
