@@ -1,5 +1,8 @@
 package duke;
 
+/**
+ * Represents a command to exit.
+ */
 public class ExitCommand extends Command {
     
     @Override
