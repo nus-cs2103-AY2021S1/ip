@@ -1,5 +1,8 @@
 import java.util.List;
 
+/**
+ * TaskList contains the task list e.g., it has operations to add/delete tasks in the list
+ */
 public class TaskList {
     private List<Task> taskList;
 
@@ -7,15 +10,30 @@ public class TaskList {
         this.taskList = taskList;
     }
 
+    /**
+     * Returns the number of the tasks in the TaskList
+     * @return the size of the task list
+     */
     public int size() {
         return taskList.size();
     }
 
+    /**
+     * Adds a task to the task list
+     * @param task
+     * @return the task that has been added to the task list
+     */
     public Task addTask(Task task) {
         taskList.add(task);
         return task;
     }
 
+    /**
+     * Marks a task in the TaskList as done
+     * @param commands
+     * @return the task that has been marked as done
+     * @throws DukeException
+     */
     public Task markTaskDone(String[] commands) throws DukeException {
         int index = Parser.getTaskIndex(commands, taskList);
         Task task = taskList.get(index);
@@ -23,12 +41,22 @@ public class TaskList {
         return task;
     }
 
+    /**
+     * Deletes a task that is in the index specified by the command
+     * @param commands
+     * @return the deleted task
+     * @throws DukeException
+     */
     public Task deleteTask(String[] commands) throws DukeException {
         int index = Parser.getTaskIndex(commands, taskList);
         Task task = taskList.remove(index);
         return task;
     }
 
+    /**
+     * Gets the tasks
+     * @return a List of Tasks
+     */
     public List<Task> getTasks() {
         return taskList;
     }

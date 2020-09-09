@@ -1,10 +1,26 @@
 import java.util.List;
 
+/**
+ * Parser class deals with making sense of the user command
+ * It has functions that will help in parsing user commands
+ */
 public class Parser {
+    /**
+     * Splits what the user types in to 2 parts
+     * @param command
+     * @return a 2 sized String array that is related to a command
+     */
     public static String[] parse(String command) {
         return command.split(" ", 2);
     }
 
+    /**
+     * Gets the task index of a task list using a command, something like "<command> <number>"
+     * @param commands
+     * @param taskList
+     * @return a number related to the task list
+     * @throws DukeException
+     */
     public static int getTaskIndex(String[] commands, List<Task> taskList) throws DukeException {
         if (commands.length < 2) {
             throw new DukeException("☹ OOPS!!! Please put a number to select a task for the \"" +
@@ -21,6 +37,11 @@ public class Parser {
         }
     }
 
+    /**
+     * Checks if the add command is valid, throws a duke exception if it is not
+     * @param commands
+     * @throws DukeException
+     */
     public static void checkValidAddCommand(String[] commands) throws DukeException {
         if (commands.length < 2) {
             throw new DukeException("☹ OOPS!!! The description of a " + commands[0] + " cannot be empty.");
