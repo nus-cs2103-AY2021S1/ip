@@ -139,10 +139,14 @@ public class Ui {
 
     }
 
-    public String returnBye(){
+    public String returnBye(ArrayList<Task> reminderTaskList){
 
-        return("_______________________________\n"+
+        String BYE_TEXT = ("_______________________________\n"+
                 "Bye. Hope to see you again soon!");
+        String reminderText = "Remember to finish up these tasks!\n"+
+                returnTaskList(reminderTaskList);
+        return reminderText+BYE_TEXT;
+
     }
 
     public String returnNotValid(){
@@ -163,6 +167,15 @@ public class Ui {
                         "_______________________________");
 
     }
+    public String returnAddReminder(Task currentTask, ArrayList<Task> currentReminderList){
+        return(
+                "_______________________________\n" +
+                        "Noted. I've added a reminder to this task:\n" +
+                        currentTask.toString()+"\n"+
+                        "Now you have "+currentReminderList.size()+" reminders.\n"+
+                        "_______________________________");
+
+    }
 
     public String returnFindTask(ArrayList<Task> foundTaskList){
         return(
@@ -170,6 +183,19 @@ public class Ui {
                         "Here are the matching tasks in your list:\n"+
         returnTaskList(foundTaskList)+
         "_______________________________");
+    }
+
+    public String returnStartUpText(ArrayList<Task> reminderTaskList){
+        String START_UP_TEXT = "Hi, this is Duke, what can I do for you?\n" +
+                "REMINDERS FOR TODAY:\n";
+        String reminders = returnTaskList(reminderTaskList);
+        return START_UP_TEXT+reminders;
+
+    }
+
+    public String returnReminderList(ArrayList<Task> reminderList){
+        String REMINDER_TEXT = "Your reminders: \n";
+        return REMINDER_TEXT+returnTaskList(reminderList);
     }
 
 

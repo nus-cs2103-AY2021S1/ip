@@ -96,9 +96,9 @@ public class Storage {
      *
      * @param newTaskList new task list to be used to overwrite.
      */
-    public void overwriteWith(ArrayList<Task> newTaskList) throws IOException {
+    public void overwriteWith(ArrayList<Task> newTaskList, String filename) throws IOException {
         this.taskList = newTaskList;
-        PrintWriter file = new PrintWriter("duke.txt", "UTF-8");
+        PrintWriter file = new PrintWriter(filename, "UTF-8");
         BufferedWriter writer = new BufferedWriter(file);
         for (int i = 0; i < taskList.size(); i++) {
 

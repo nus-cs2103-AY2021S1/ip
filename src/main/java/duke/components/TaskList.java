@@ -20,15 +20,21 @@ import java.util.ArrayList;
 public class TaskList {
 
     private ArrayList<Task> myList;
+    private ArrayList<Task> reminderList;
 
-    public TaskList(ArrayList<Task> list) {
+    public TaskList(ArrayList<Task> list, ArrayList<Task> rList) {
 
         this.myList = list;
+        reminderList = rList;
 
     }
 
     public ArrayList<Task> getMyList() {
         return myList;
+    }
+
+    public ArrayList<Task> getReminderList() {
+        return reminderList;
     }
 
     /**
@@ -111,6 +117,11 @@ public class TaskList {
             }
         } );
         return findList;
+    }
+    public Task addReminder(int taskNum){
+        Task currentTask = myList.get(taskNum);
+        reminderList.add(currentTask);
+        return currentTask;
     }
 
 }

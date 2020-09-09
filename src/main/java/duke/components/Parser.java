@@ -11,18 +11,20 @@ import java.time.LocalDate;
  */
 public class Parser {
 
-    boolean isList,isTask,isDelete,isBye,isDone,isValid,isFind;
-    private int doneTaskNum, deleteTaskNum;
+    boolean isList,isTask,isDelete,isBye,isDone,isValid,isFind,isReminder,isReminderList;
+    private int doneTaskNum, deleteTaskNum, remindTaskNum;
     private String description, time, findTask;
     private LocalDate date;
 
     public Parser() {
         isList = false;
+        isReminderList = false;
         isTask = false;
         isDelete = false;
         isBye = false;
         isDone = false;
         isValid = true;
+        isReminder = false;
         description = null;
         time = null;
         date = null;
@@ -52,10 +54,18 @@ public class Parser {
         return findTask;
     }
 
+    public int getRemindTaskNum() {
+        return remindTaskNum;
+    }
+
     public void parse(String input){
         if (input.equals("list")) {
 
             isList = true;
+
+        } else if (input.startsWith("reminders")) {
+
+            isReminderList = true;
 
         } else if (input.startsWith("done")) {
 
@@ -93,6 +103,11 @@ public class Parser {
             } else if (input.startsWith("bye")) {
 
                 isBye = true;
+
+            } else if (input.startsWith("remind")) {
+
+                isReminder = true;
+                remindTaskNum = Character.getNumericValue(input.charAt(7)) - 1;
 
             } else {
 

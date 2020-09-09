@@ -1,4 +1,2 @@
-[T][✘] lunch 
 [D][✘] homework (by: 2020-09-10)
 [E][✘] meeting (at: 2020-10-10 1400)
-[T][✘] run

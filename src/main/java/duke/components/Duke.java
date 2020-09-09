@@ -36,7 +36,7 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/userIcon.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/dukeIcon.png"));
 
-    private Storage storage;
+    private Storage taskStore, reminderStore;
     private TaskList tasks;
     private Ui ui;
     private Parser parser;
@@ -46,8 +46,9 @@ public class Duke extends Application {
     }
 
     public Duke(String filePath) throws FileNotFoundException, DukeException {
-        storage = new Storage(filePath);
-        tasks = new TaskList(storage.load());
+        taskStore = new Storage(filePath);
+        reminderStore = new Storage(filePath);
+        tasks = new TaskList(taskStore.load(),reminderStore.load());
         ui = new Ui();
         parser = new Parser();
 
@@ -92,7 +93,8 @@ public class Duke extends Application {
             }
             parser = new Parser();
             parser.parse(ui.waitForNextInput());
-            storage.overwriteWith(tasks.getMyList());
+            taskStore.overwriteWith(tasks.getMyList(),"duke.txt");
+            reminderStore.overwriteWith(tasks.getReminderList(),"reminders.txt");
 
         }
         ui.printBye();
@@ -108,6 +110,13 @@ public class Duke extends Application {
         //Step 1. Setting up required components
 
         //The container for the content of the chat to scroll.
+        taskStore = new Storage("duke.txt");
+        reminderStore = new Storage("reminders.txt");
+
+        tasks = new TaskList(taskStore.load(),reminderStore.load());
+        ui = new Ui();
+        parser = new Parser();
+
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
@@ -181,7 +190,7 @@ public class Duke extends Application {
                 e.printStackTrace();
             }
         });
-        Label dukeText = new Label("Hi, this is Duke, what can I do for you?");
+        Label dukeText = new Label(ui.returnStartUpText(tasks.getReminderList()));
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(dukeText, new ImageView(duke))
         );
@@ -225,8 +234,9 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) throws IOException, DukeException {
-        storage = new Storage("duke.txt");
-        tasks = new TaskList(storage.load());
+        taskStore = new Storage("duke.txt");
+        reminderStore = new Storage("reminders.txt");
+        tasks = new TaskList(taskStore.load(),reminderStore.load());
         ui = new Ui();
         parser = new Parser();
 
@@ -261,16 +271,26 @@ public class Duke extends Application {
 
         } else if (parser.isBye) {
 
-            output = ui.returnBye();
+            output = ui.returnBye(tasks.getReminderList());
+
+        } else if (parser.isReminder) {
+
+            output = ui.returnAddReminder(tasks.addReminder(parser.getRemindTaskNum()),tasks.getReminderList());
+
+        } else if (parser.isReminderList) {
+
+            output = ui.returnReminderList(tasks.getReminderList());
 
         } else if (!parser.isValid) {
 
             output = ui.returnNotValid();
+
         } else {
             output = "error";
         }
 
-        storage.overwriteWith(tasks.getMyList());
+        taskStore.overwriteWith(tasks.getMyList(),"duke.txt");
+        reminderStore.overwriteWith(tasks.getReminderList(),"reminders.txt");
         return output;
 
     }
