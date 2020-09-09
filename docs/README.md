@@ -4,8 +4,9 @@ A CS2103 Project to create a simple bot for to-do tasking.
 The attitude of which I have adopted for this module as well as for the
 graphics are inspired by my all time favorite game:
 
-![image](../src/main/resources/images/gitintro.png) 
-<img src="../src/main/resources/images/gitintro.png"/>
+![image](../src/main/resources/images/gitintro.png)
+![image](/src/main/resources/images/gitintro.png) 
+ 
 
 *Gotta Catch 'Em All (A+s)*
 
