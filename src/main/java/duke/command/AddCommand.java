@@ -38,6 +38,10 @@ public class AddCommand extends Command {
     @Override
     public void execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
 
+        assert taskList != null : "TaskList is null";
+        assert ui != null : "ui is null";
+        assert storage != null : "storage is null";
+
         switch (inputCommand) {
         case TODO:
             try {

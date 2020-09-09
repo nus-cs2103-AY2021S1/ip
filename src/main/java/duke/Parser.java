@@ -24,7 +24,7 @@ public class Parser {
      * @throws DukeException If invalid input by user.
      */
     public static Command parse(String fullCommand) throws DukeException {
-
+        assert fullCommand != " " : "There is no command input";
         String input = fullCommand;
         String command = input.split(" ")[0];
         InputCommand inputCommand;
@@ -81,6 +81,7 @@ public class Parser {
      * @return Index in input.
      */
     public static int getIndex(String input) {
+        assert input != " " : "There is no input";
         String[] stringArray = input.split(" ");
         return Integer.parseInt(stringArray[1]) - 1;
     }
@@ -105,6 +106,7 @@ public class Parser {
      * @return Array of deadline description strings.
      */
     public static String[] getDeadlineStrings(String input) {
+        assert input != null : "There is no input";
         String[] stringArray = input.split(" /by ");
         stringArray[0] = stringArray[0].substring(9);
         return stringArray;
@@ -116,6 +118,7 @@ public class Parser {
      * @return Array of event description strings.
      */
     public static String[] getEventTimeStrings(String input) {
+        assert input != null : "There is no input";
         String[] stringArray = input.split(" /at ");
         stringArray[0] = stringArray[0].substring(6);
         return stringArray;

@@ -48,14 +48,14 @@ public class Storage {
                 dataFile.createNewFile();
                 return null;
             } catch (IOException e) {
-                throw new DukeException("WHAT WHATS GOING ON");
+                throw new DukeException("File cannot be created");
             }
         } else if (!fileExists) {
             try {
                 dataFile.createNewFile();
                 return null;
             } catch (IOException e) {
-                throw new DukeException("WHAT WHATS GOING ON");
+                throw new DukeException("File cannot be created");
             }
         } else {
             try {
@@ -67,7 +67,7 @@ public class Storage {
                 }
                 return tasks;
             } catch (IOException e) {
-                throw new DukeException("WHAT WHATS GOING ON");
+                throw new DukeException("BufferedReader I/O Exception");
             }
         }
     }

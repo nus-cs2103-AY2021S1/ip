@@ -118,6 +118,7 @@ public class Ui {
      * @return responseMessage of this Ui Object.
      */
     public String getResponseMessage() {
+        assert responseMessage != null : "There is no response message";
         return responseMessage.toString();
     }
 
