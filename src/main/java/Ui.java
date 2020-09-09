@@ -85,9 +85,9 @@ public class Ui {
      */
     public void showDelete(Task task, TaskList taskList) {
         out.println(
-            "Noted. I've removed this task:\n" +
-            task.toString() + "\n" +
-            "Now you have "+ taskList.size() +" tasks in the list."
+            "Noted. I've removed this task:\n"
+            + task.toString() + "\n"
+            + "Now you have "+ taskList.size() +" tasks in the list."
         );
     }
 

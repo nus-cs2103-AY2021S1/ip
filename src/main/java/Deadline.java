@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 public class Deadline extends Task  {
     private LocalDate date;
 
-    Deadline(String name, String dateString) {
+    public Deadline(String name, String dateString) {
         this(name, dateString, false);
     }
 

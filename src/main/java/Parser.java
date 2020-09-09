@@ -23,8 +23,8 @@ public class Parser {
      */
     public static int getTaskIndex(String[] commands, List<Task> taskList) throws DukeException {
         if (commands.length < 2) {
-            throw new DukeException("☹ OOPS!!! Please put a number to select a task for the \"" +
-                    commands[0] + "\" action!");
+            throw new DukeException("☹ OOPS!!! Please put a number to select a task for the \""
+                   + commands[0] + "\" action!");
         }
         try {
             int index = Integer.parseInt(commands[1]);
