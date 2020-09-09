@@ -8,5 +8,6 @@ public class DukeException extends Exception {
      */
     public DukeException (String errorMessage) {
         super(errorMessage);
+        assert errorMessage.length() > 0 : "Empty Duke Error Message";
     }
 }
