@@ -20,22 +20,21 @@ public class Storage {
      *
      * @param filePath Filepath of .txt file to save tasks in
      */
-    public Storage(String filePath)  {
-       try {
-           File data = new File(filePath);
-           if (!data.exists()) {
-               File folder = new File("src");
-               //data.mkdir(); // create a folder in your current work space
-               File file = new File(folder, "data.txt"); // put the file inside the folder
-               file.createNewFile(); // create the file
-               this.filePath = file.getPath();
-           } else {
-               this.filePath = filePath;
-           }
-       }
-       catch (Exception e) {
+    public Storage(String filePath) {
+        try {
+            File data = new File(filePath);
+            if (!data.exists()) {
+                File folder = new File("src");
+                //data.mkdir(); // create a folder in your current work space
+                File file = new File(folder, "data.txt"); // put the file inside the folder
+                file.createNewFile(); // create the file
+                this.filePath = file.getPath();
+            } else {
+                this.filePath = filePath;
+            }
+        } catch (Exception e) {
             System.out.println(e.getMessage());
-       }
+        }
     }
 
 
