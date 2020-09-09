@@ -64,6 +64,7 @@ public class Event extends Task {
             try {
                 return LocalDateTime.parse(dateString, DateTimeFormatter.ofPattern(formatString));
             } catch (DateTimeParseException e) {
+                //dateString will not be interpreted to contain a Date and Time
             }
         }
         return null;
@@ -84,6 +85,7 @@ public class Event extends Task {
             try {
                 return LocalDate.parse(dateString, DateTimeFormatter.ofPattern(formatString));
             } catch (DateTimeParseException e) {
+                //dateString will not be interpreted to contain a Date
             }
         }
         return null;
