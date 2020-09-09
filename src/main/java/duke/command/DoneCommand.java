@@ -31,7 +31,7 @@ public class DoneCommand extends Command {
         int taskIndex = Integer.parseInt(str);
 
         Task task = duke.getTaskList().getTask(taskIndex);
-        task.markAsDone();
+        task.setTaskDone(true);
 
         response(task, duke);
     }
