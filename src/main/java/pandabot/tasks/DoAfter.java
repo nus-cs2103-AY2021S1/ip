@@ -3,22 +3,22 @@ package pandabot.tasks;
 import pandabot.exceptions.PandaBotException;
 
 /**
- * Represents an event which is a type of task that starts at a specific time
- * and ends at a specific time
+ * The DoAfter class represents a DoAfter task which needs to be
+ * done after a specific time or task.
  */
-public class Event extends TimedTask {
+public class DoAfter extends TimedTask {
 
     /**
-     * Creates an Event object.
+     * Creates a DoAfter object.
      * It can accept both formatted and unformatted times.
      * Formatted time have to be in the format: dd/MM/yyyy HHmm
      *
-     * @param description the description of the Event task
-     * @param duration the duration of the Event task
-     * @throws PandaBotException If description or duration given is empty
+     * @param description the description of the DoAfter task
+     * @param after the time or task that the DoAfter task has to be done after
+     * @throws PandaBotException if the description or time given is empty
      */
-    public Event(String description, String duration) throws PandaBotException {
-        super(description, duration);
+    public DoAfter(String description, String after) throws PandaBotException {
+        super(description, after);
     }
 
     /**
@@ -28,7 +28,7 @@ public class Event extends TimedTask {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + time + ")";
+        return "[A]" + super.toString() + " (after: " + time + ")";
     }
 
     /**
@@ -38,6 +38,6 @@ public class Event extends TimedTask {
      */
     @Override
     public String saveAsText() {
-        return "E | " + super.saveAsText() + " | " + time;
+        return "A | " + super.saveAsText() + " | " + time;
     }
 }

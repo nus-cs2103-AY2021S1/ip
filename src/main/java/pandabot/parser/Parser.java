@@ -12,6 +12,7 @@ import pandabot.exceptions.PandaBotInsufficientArgumentException;
 import pandabot.exceptions.PandaBotInvalidArgumentFormatException;
 import pandabot.exceptions.PandaBotInvalidCommandException;
 import pandabot.tasks.Deadline;
+import pandabot.tasks.DoAfter;
 import pandabot.tasks.Event;
 import pandabot.tasks.ToDo;
 
@@ -56,12 +57,16 @@ public class Parser {
             return new AddCommand(new ToDo(cmd[1]));
         case "deadline":
             verifyArguments(cmd, 2);
-            String[] deadlineDes = obtainDescription(cmd[1], "/by ");
-            return new AddCommand(new Deadline(deadlineDes[0], deadlineDes[1]));
+            String[] deadlineDescription = obtainDescription(cmd[1], "/by ");
+            return new AddCommand(new Deadline(deadlineDescription[0], deadlineDescription[1]));
         case "event":
             verifyArguments(cmd, 2);
-            String[] eventDes = obtainDescription(cmd[1], "/at ");
-            return new AddCommand(new Event(eventDes[0], eventDes[1]));
+            String[] eventDescription = obtainDescription(cmd[1], "/at ");
+            return new AddCommand(new Event(eventDescription[0], eventDescription[1]));
+        case "do":
+            verifyArguments(cmd, 2);
+            String[] doAfterDescription = obtainDescription(cmd[1], "/after ");
+            return new AddCommand(new DoAfter(doAfterDescription[0], doAfterDescription[1]));
         case "find":
             verifyArguments(cmd, 2);
             return new FindCommand(cmd[1]);
