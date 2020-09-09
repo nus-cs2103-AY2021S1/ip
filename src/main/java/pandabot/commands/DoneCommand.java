@@ -36,7 +36,7 @@ public class DoneCommand extends Command {
         // mark as done
         Task t = tasks.getTaskAt(taskNum);
         t.markTaskDone();
-
+        assert t.getStatusIcon().equals("\u2713") : "Failed to mark task as done.";
         // save the changes
         storage.write(tasks.getTaskList());
         return ui.displayOnDone(tasks.getTaskAt(taskNum));

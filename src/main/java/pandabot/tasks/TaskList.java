@@ -63,7 +63,9 @@ public class TaskList {
      */
     public void deleteTask(int index) throws PandaBotOutOfRangeException {
         try {
+            int originalSize = taskList.size();
             taskList.remove(index);
+            assert taskList.size() < originalSize : "Failed to delete task.";
         } catch (IndexOutOfBoundsException e) {
             throw new PandaBotOutOfRangeException();
         }
@@ -75,21 +77,24 @@ public class TaskList {
      * @param task the task to be added
      */
     public void addTask(Task task) {
+        int originalSize = taskList.size();
         taskList.add(task);
+        assert taskList.size() > originalSize : "Failed to add task.";
     }
 
     /**
      * Finds the tasks among the list of tasks, where their descriptions
-     * contains the given input to match.
+     * contains the given input keyword.
      *
-     * @param toMatch the word used in the search for tasks with matching descriptions
+     * @param keyword the word used in the search for tasks with matching descriptions
      * @return a TaskList containing the list of tasks with matching descriptions
      */
-    public TaskList findTask(String toMatch) {
+    public TaskList findTask(String keyword) {
+        assert keyword.length() > 0 : "The keyword to search for should not be empty.";
         ArrayList<Task> matchingTasks = new ArrayList<>();
 
         for (Task t : taskList) {
-            if (t.getDescription().contains(toMatch)) {
+            if (t.getDescription().contains(keyword)) {
                 matchingTasks.add(t);
             }
         }
