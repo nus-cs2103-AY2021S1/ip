@@ -12,7 +12,7 @@ public class Deadline extends Task {
     }
 
     public Deadline(boolean isDone, String description, LocalDate due) {
-        super(isDone, description,'D');
+        super(isDone, description , 'D');
         this.due = due;
         String unparseMessage = "D";
         if (isDone) {

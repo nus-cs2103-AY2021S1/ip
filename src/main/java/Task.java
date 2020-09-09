@@ -33,7 +33,7 @@ public class Task {
     public void finish() {
         this.isDone = true;
         int indexOf0 = unparseMessage.indexOf('0');
-        unparseMessage = unparseMessage.substring(0, indexOf0) + "1" + unparseMessage.substring(indexOf0+1);
+        unparseMessage = unparseMessage.substring(0, indexOf0) + "1" + unparseMessage.substring(indexOf0 + 1);
     }
 
     public String toString() {

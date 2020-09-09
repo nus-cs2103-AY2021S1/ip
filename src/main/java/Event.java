@@ -4,7 +4,7 @@ import java.time.format.DateTimeFormatter;
 /**
  * Represents a Event task.
  */
-public class Event extends Task{
+public class Event extends Task {
     public LocalDate time;
     public Event(String description, LocalDate time) {
         super(description);
@@ -12,7 +12,7 @@ public class Event extends Task{
     }
 
     public Event(boolean isDone, String description, LocalDate due) {
-        super(isDone, description,'E');
+        super(isDone, description , 'E');
         this.time = due;
         String unparseMessage = "E";
         if (isDone) {

@@ -24,7 +24,7 @@ public class Parser {
                 return TaskList.printList(TaskList.list);
             }
         } else if (order.length() >= 4 && order.substring(0, 4).equals("done")) {
-            int index = Integer.parseInt(order.substring(5))-1;
+            int index = Integer.parseInt(order.substring(5)) - 1;
             Task temp = TaskList.list.get(index);
             temp.finish();
             TaskList.list.set(index, temp);
@@ -32,7 +32,7 @@ public class Parser {
             Storage.writeData(TaskList.list);
             return "    Great! I have marked this task as done:\n" + temp;
         } else if (order.length() >= 4 && order.substring(0, 4).equals("todo")) {
-            if (order.length()>4) {
+            if (order.length() > 4) {
                 String content = order.substring(5);
                 TaskList.list.add(new Todo(false, content));
                 Storage.writeData(TaskList.list);
@@ -69,8 +69,8 @@ public class Parser {
         } else if (order.length() >= 6 && order.substring(0, 6).equals("delete")) {
             if (order.length() > 6) {
                 Integer toBeDeleted = Integer.valueOf(order.substring(7));
-                Task temp = TaskList.list.get(toBeDeleted-1);
-                TaskList.list.remove(toBeDeleted-1);
+                Task temp = TaskList.list.get(toBeDeleted - 1);
+                TaskList.list.remove(toBeDeleted - 1);
                 Storage.writeData(TaskList.list);
                 return "    I have removed this task: " + "\n" + temp;
             } else {
