@@ -42,18 +42,6 @@ public class Parser {
     }
 
     /**
-     * Types of task that could result from the parsed user command.
-     */
-    enum TypeOfCommand {
-        DONE,
-        DEADLINE,
-        TODO,
-        EVENT,
-        DELETE,
-        FIND
-    }
-
-    /**
      * Parses the input from the user and returns a command with respect to the
      * input from the user.
      *
@@ -80,90 +68,115 @@ public class Parser {
                 return new IncorrectCommand("OOPS !!! Lo siento, pero no sé qué significa eso :-(");
             }
         case COMMAND_COMPLETE_TASK:
-            return handle(restOfCommand, TypeOfCommand.DONE);
+            return handleDone(restOfCommand);
         case COMMAND_ADD_DEADLINE:
-            return handle(restOfCommand, TypeOfCommand.DEADLINE);
+            return handleDeadline(restOfCommand);
         case COMMAND_ADD_TODO:
-            return handle(restOfCommand, TypeOfCommand.TODO);
+            return new AddCommand(new Todo(restOfCommand));
         case COMMAND_ADD_EVENT:
-            return handle(restOfCommand, TypeOfCommand.EVENT);
+            return handleEvent(restOfCommand);
         case COMMAND_DELETE_EVENT:
-            return handle(restOfCommand, TypeOfCommand.DELETE);
+            return handleDelete(restOfCommand);
         case COMMAND_FIND:
-            return handle(restOfCommand, TypeOfCommand.FIND);
+            return new FindCommand(restOfCommand);
         default:
             return new IncorrectCommand("OOPS !!! Lo siento, pero no sé qué significa eso :-(");
         }
     }
 
     /**
-     * Handles the creation of more complicated commands that require interaction with the TaskList.
+     * Creates a Done command that will edit a task to be completed.
      *
-     * @param restOfCommand the content of the task to be added after initial command.
-     * @param typeOfCommand the type of command to be carried out.
-     * @return the command that will finally be carried out by Duke.
+     * @param restOfCommand the number of the task to be completed.
+     * @return Done command that will complete the task.
      */
-    private static Command handle(String restOfCommand, TypeOfCommand typeOfCommand) {
+    private static Command handleDone(String restOfCommand) {
         if (restOfCommand.isEmpty()) {
             return new IncorrectCommand("☹ OOPS !!! La descripción de una tarea no puede estar vacía.");
         }
-        switch (typeOfCommand) {
-        case DONE:
-            int positionDone;
-            try {
-                positionDone = Integer.parseInt(restOfCommand);
-            } catch (NumberFormatException e) {
-                return new IncorrectCommand("☹ OOPS !!! Incapaz de completar");
-            }
-            positionDone = positionDone - 1;
-            return new DoneCommand(positionDone);
-        case DELETE:
-            try {
-                positionDone = Integer.parseInt(restOfCommand);
-            } catch (NumberFormatException e) {
-                return new IncorrectCommand("☹ OOPS !!! Incapaz de completar");
-            }
-            positionDone = positionDone - 1;
-            return new DeleteCommand(positionDone);
-        case TODO:
-            return new AddCommand(new Todo(restOfCommand));
-        case DEADLINE:
-            if (!restOfCommand.contains(DATE_DEADLINE)) {
-                return new IncorrectCommand("☹ OOPS !!! Debe establecer una fecha límite para esta tarea.");
-            }
-            int byPosition = restOfCommand.indexOf(DATE_DEADLINE);
-            String taskDescription = restOfCommand.substring(0, byPosition);
-            String dateDescription = restOfCommand.substring(byPosition + 4);
-            LocalDateTime date;
-            try {
-                date = LocalDateTime.parse(dateDescription, SAVE_READ_DATETIME_FORMAT);
-            } catch (DateTimeParseException e) {
-                return new IncorrectCommand(
-                        "☹ OOPS !!! Formato de fecha y hora incorrecto. Formatee como dd/MM/yyyy HHmm");
-            }
-            Deadline newDeadline = new Deadline(taskDescription);
-            newDeadline.setTime(date);
-            return new AddCommand(newDeadline);
-        case EVENT:
-            if (!restOfCommand.contains(DATE_EVENT)) {
-                return new IncorrectCommand("☹ OOPS !!! Debe establecer la hora del evento para esta tarea.");
-            }
-            int atPosition = restOfCommand.indexOf(DATE_EVENT);
-            taskDescription = restOfCommand.substring(0, atPosition);
-            dateDescription = restOfCommand.substring(atPosition + 4);
-            try {
-                date = LocalDateTime.parse(dateDescription, SAVE_READ_DATETIME_FORMAT);
-            } catch (DateTimeParseException e) {
-                return new IncorrectCommand(
-                        "☹ OOPS !!! Formato de fecha y hora incorrecto. Formatee como dd/MM/yyyy HHmm");
-            }
-            Event newEvent = new Event(taskDescription);
-            newEvent.setTime(date);
-            return new AddCommand(newEvent);
-        case FIND:
-            return new FindCommand(restOfCommand);
-        default:
-            return null;
+        int positionDone;
+        try {
+            positionDone = Integer.parseInt(restOfCommand);
+        } catch (NumberFormatException e) {
+            return new IncorrectCommand("☹ OOPS !!! Incapaz de completar");
         }
+        positionDone = positionDone - 1;
+        return new DoneCommand(positionDone);
+    }
+
+    /**
+     * Creates a Delete command that will remove the task from the task list.
+     *
+     * @param restOfCommand the number of the task to be deleted
+     * @return Delete command that will remove the task from the task list.
+     */
+    private static Command handleDelete(String restOfCommand) {
+        if (restOfCommand.isEmpty()) {
+            return new IncorrectCommand("☹ OOPS !!! La descripción de una tarea no puede estar vacía.");
+        }
+        int positionDone;
+        try {
+            positionDone = Integer.parseInt(restOfCommand);
+        } catch (NumberFormatException e) {
+            return new IncorrectCommand("☹ OOPS !!! Incapaz de completar");
+        }
+        positionDone = positionDone - 1;
+        return new DeleteCommand(positionDone);
+    }
+
+    /**
+     * Creates a Add Command and creates Deadline task to be added into the task list.
+     *
+     * @param restOfCommand the description and time to be used in the creation of the Deadline task.
+     * @return Add command that will input the created Deadline into the task list.
+     */
+    private static Command handleDeadline(String restOfCommand) {
+        if (restOfCommand.isEmpty()) {
+            return new IncorrectCommand("☹ OOPS !!! La descripción de una tarea no puede estar vacía.");
+        }
+        if (!restOfCommand.contains(DATE_DEADLINE)) {
+            return new IncorrectCommand("☹ OOPS !!! Debe establecer una fecha límite para esta tarea.");
+        }
+        int byPosition = restOfCommand.indexOf(DATE_DEADLINE);
+        String taskDescription = restOfCommand.substring(0, byPosition);
+        String dateDescription = restOfCommand.substring(byPosition + 4);
+        LocalDateTime date;
+        try {
+            date = LocalDateTime.parse(dateDescription, SAVE_READ_DATETIME_FORMAT);
+        } catch (DateTimeParseException e) {
+            return new IncorrectCommand(
+                    "☹ OOPS !!! Formato de fecha y hora incorrecto. Formatee como dd/MM/yyyy HHmm");
+        }
+        Deadline newDeadline = new Deadline(taskDescription);
+        newDeadline.setTime(date);
+        return new AddCommand(newDeadline);
+    }
+
+    /**
+     * Creates a Add Command and creates Event task to be added into the task list.
+     *
+     * @param restOfCommand the description and time to be used in the creation of the Event task.
+     * @return Add command that will input the created Event into the task list.
+     */
+    private static Command handleEvent(String restOfCommand) {
+        if (restOfCommand.isEmpty()) {
+            return new IncorrectCommand("☹ OOPS !!! La descripción de una tarea no puede estar vacía.");
+        }
+        if (!restOfCommand.contains(DATE_EVENT)) {
+            return new IncorrectCommand("☹ OOPS !!! Debe establecer la hora del evento para esta tarea.");
+        }
+        int atPosition = restOfCommand.indexOf(DATE_EVENT);
+        String taskDescription = restOfCommand.substring(0, atPosition);
+        String dateDescription = restOfCommand.substring(atPosition + 4);
+        LocalDateTime date;
+        try {
+            date = LocalDateTime.parse(dateDescription, SAVE_READ_DATETIME_FORMAT);
+        } catch (DateTimeParseException e) {
+            return new IncorrectCommand(
+                    "☹ OOPS !!! Formato de fecha y hora incorrecto. Formatee como dd/MM/yyyy HHmm");
+        }
+        Event newEvent = new Event(taskDescription);
+        newEvent.setTime(date);
+        return new AddCommand(newEvent);
     }
 }
