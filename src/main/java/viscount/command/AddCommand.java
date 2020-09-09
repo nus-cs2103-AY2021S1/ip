@@ -89,7 +89,9 @@ public class AddCommand extends Command {
         AddCommand addCommand = (AddCommand) o;
         boolean hasSameTaskType = this.taskType.equals(addCommand.taskType);
         boolean hasSameDescription = this.description.equals(addCommand.description);
-        boolean hasSameDateTime = this.dateTime.isEqual(addCommand.dateTime);
+        boolean hasSameDateTime = (this.dateTime == null)
+                ? (addCommand.dateTime == null)
+                : (addCommand.dateTime != null) && this.dateTime.isEqual(addCommand.dateTime);
         return hasSameTaskType && hasSameDescription && hasSameDateTime;
     }
 }

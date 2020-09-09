@@ -81,22 +81,39 @@ public class Parser {
         List<String> taskData = Arrays.asList(rawData.split("\\|"));
         assert taskData.size() > 0 : "List of task data should be non-empty";
 
-        TaskType taskType = TaskType.valueOf(taskData.get(0));
-        boolean isDone = !taskData.get(1).equals("0");
-        String taskDescription = taskData.get(2);
+        try {
+            TaskType taskType = TaskType.valueOf(taskData.get(0));
+            String isDoneString = taskData.get(1);
+            String taskDescription = taskData.get(2);
+            
+            boolean isValidDoneString = isDoneString.equals("0") || isDoneString.equals("1");
+            boolean isValidTaskDescription = !taskDescription.isEmpty();
 
-        switch (taskType) {
-        case TODO:
-            return new Todo(taskDescription, isDone);
-        case DEADLINE:
-            LocalDateTime dueDate = Parser.parseDateTime(
-                    taskData.get(3), Parser.TASK_DATA_DATE_TIME_FORMATTER);
-            return new Deadline(taskDescription, isDone, dueDate);
-        case EVENT:
-            LocalDateTime eventTime = Parser.parseDateTime(
-                    taskData.get(3), Parser.TASK_DATA_DATE_TIME_FORMATTER);
-            return new Event(taskDescription, isDone, eventTime);
-        default:
+            if (!isValidDoneString || !isValidTaskDescription) {
+                throw new IOException("Data file corrupted.");
+            }
+
+            boolean isDone = isDoneString.equals("1");
+
+            switch (taskType) {
+            case TODO:
+                return new Todo(taskDescription, isDone);
+            case DEADLINE:
+                LocalDateTime dueDate = Parser.parseDateTime(
+                        taskData.get(3), Parser.TASK_DATA_DATE_TIME_FORMATTER);
+                return new Deadline(taskDescription, isDone, dueDate);
+            case EVENT:
+                LocalDateTime eventTime = Parser.parseDateTime(
+                        taskData.get(3), Parser.TASK_DATA_DATE_TIME_FORMATTER);
+                return new Event(taskDescription, isDone, eventTime);
+            default:
+                /* Since all possible TaskTypes have been enumerated,
+                 * and exception for incorrect task type input has been handled,
+                 * program will never reach the default block of this switch statement.
+                 */
+                return null;
+            }
+        } catch (IllegalArgumentException e) {
             throw new IOException("Data file corrupted.");
         }
     }
