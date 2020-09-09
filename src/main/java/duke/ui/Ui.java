@@ -93,6 +93,10 @@ public class Ui {
         return MagicStrings.HEADER_TASK_DELETE + task.toString();
     }
 
+    public String printTaskEdited(Task task) {
+        return MagicStrings.HEADER_TASK_EDIT + task.toString();
+    }
+
     public String printTaskAdded(Task task) {
         return MagicStrings.HEADER_TASK_ADD + task.toString();
     }

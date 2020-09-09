@@ -29,6 +29,14 @@ public class Event extends Task {
         return new SimpleDateFormat("y-M-d").format(this.time);
     }
 
+    /**
+     * Returns the time of the event.
+     * @return Time of the event.
+     */
+    public Date getTime() {
+        return time;
+    }
+
     @Override
     public String toString() {
         String box = this.isDone ? "\u2713" : "\u2718";

@@ -29,6 +29,14 @@ public class Deadline extends Task {
         return new SimpleDateFormat("y-M-d").format(this.doBy);
     }
 
+    /**
+     * Returns the due date of the deadline.
+     * @return Due date of the deadline.
+     */
+    public Date getDoBy() {
+        return doBy;
+    }
+
     @Override
     public String toString() {
         String box = this.isDone ? "\u2713" : "\u2718";

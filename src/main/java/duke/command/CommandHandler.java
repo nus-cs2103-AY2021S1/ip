@@ -53,14 +53,19 @@ public class CommandHandler {
                 break;
             case "delete":
                 index = Integer.parseInt(split[1]) - 1;
-                tasks.deleteTask(index);
                 log.append(ui.printTaskDeleted(tasks.getTaskAtIndex(index)));
+                tasks.deleteTask(index);
                 break;
             case "find":
                 log.append(ui.printTasks(tasks.findTask(split[1]), true));
                 break;
             case "bye":
                 log.append(ui.printBye());
+                break;
+            case "edit":
+                tasks.editTask(split[1]);
+                index = Integer.parseInt((Parser.splitCommand(split[1]))[0]);
+                log.append(ui.printTaskEdited(tasks.getTaskAtIndex(index)));
                 break;
             default:
                 throw new DukeException(MagicStrings.ERROR_COMMAND_FORMAT_INCORRECT);

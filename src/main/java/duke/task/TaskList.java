@@ -95,6 +95,35 @@ public class TaskList {
     }
 
     /**
+     * Edit the (index + 1)th task from the task list.
+     *
+     * @param command User's command description
+     */
+    public void editTask(String command) throws DukeException {
+        try {
+            String[] split = Parser.splitCommand(command);
+            int index = Integer.parseInt(split[0]);
+            String newDesc = split[1];
+            Task task = tasks.get(index);
+            Task newTask;
+            if (task instanceof ToDo) {
+                newTask = new ToDo(newDesc, task.getIsDone());
+            } else if (task instanceof Deadline) {
+                newTask = new Deadline(newDesc, task.getIsDone(), ((Deadline) task).getDoBy());
+            } else {
+                assert task instanceof Event : "Task can't be of Task (parent) type";
+
+                newTask = new Event(newDesc, task.getIsDone(), ((Event) task).getTime());
+            }
+            this.tasks.set(index, newTask);
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(MagicStrings.ERROR_INDEX_OUT_OF_BOUNDS);
+        } catch (NumberFormatException e) {
+            throw new DukeException(MagicStrings.ERROR_DELETE_FORMAT_INCORRECT);
+        }
+    }
+
+    /**
      * Returns the list of tasks.
      */
     public TaskList findTask(String taskKeyword) {

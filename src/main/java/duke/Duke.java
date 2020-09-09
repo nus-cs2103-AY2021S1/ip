@@ -52,6 +52,8 @@ public class Duke {
 
         commandHandler.execute();
 
+        storage.saveTasks(tasks.getTasks());
+
         return commandHandler.getLog();
     }
 }
