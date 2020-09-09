@@ -32,7 +32,7 @@ public class Parser {
             Storage.writeData(TaskList.list);
             return "    Great! I have marked this task as done:\n" + temp;
         } else if (order.length() >= 4 && order.substring(0, 4).equals("todo")) {
-            if (order.length()>4) {
+            if (order.length() > 4) {
                 String content = order.substring(5);
                 TaskList.list.add(new Todo(false, content));
                 Storage.writeData(TaskList.list);
@@ -57,6 +57,41 @@ public class Parser {
             if (order.length() > 5) {
                 int indexOfSlash = order.indexOf('/');
                 String content = order.substring(6, indexOfSlash);
+                String time = order.substring(indexOfSlash + 4);
+                LocalDate ddl = LocalDate.parse(time);
+                TaskList.list.add(new Event(false, content, ddl));
+                Storage.writeData(TaskList.list);
+
+                return "    added:" + content + "\n" + "    Now you have " + TaskList.list.size() + " task(s) in the list";
+            } else {
+                return "    description cannot be empty~";
+            }
+        } else if (order.length() >= 1 && order.charAt(0) == 't') {
+            if (order.length() > 1) {
+                String content = order.substring(2);
+                TaskList.list.add(new Todo(false, content));
+                Storage.writeData(TaskList.list);
+                return "    added:" + content + "\n" + "    Now you have " + TaskList.list.size() + " task(s) in the list";
+            } else {
+                return "    description cannot be empty~";
+            }
+        } else if (order.length() >= 1 && order.charAt(0) == 'd') {
+            if (order.length() > 1) {
+                Integer indexOfSlash = order.indexOf('/');
+                String content = order.substring(2, indexOfSlash);
+                String due = order.substring(indexOfSlash + 4);
+                LocalDate ddl = LocalDate.parse(due);
+                TaskList.list.add(new Deadline(false, content, ddl));
+                Storage.writeData(TaskList.list);
+
+                return "    added:" + content + "\n" + "    Now you have " + TaskList.list.size() + " task(s) in the list";
+            } else {
+                return "    description cannot be empty~";
+            }
+        } else if (order.length() >= 1 && order.charAt(0) == 'e') {
+            if (order.length() > 1) {
+                int indexOfSlash = order.indexOf('/');
+                String content = order.substring(2, indexOfSlash);
                 String time = order.substring(indexOfSlash + 4);
                 LocalDate ddl = LocalDate.parse(time);
                 TaskList.list.add(new Event(false, content, ddl));
