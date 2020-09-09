@@ -131,6 +131,8 @@ public class Ui {
      * @return List of Strings of tasks that match the word
      */
     public String find(String word, TaskList taskList) {
+        assert(!word.isEmpty());
+        assert(taskList.size() > 0);
         TaskList list = new TaskList();
         for (int i = 1; i <= taskList.getSize(); i++) {
             Task task = taskList.getTask(i);
