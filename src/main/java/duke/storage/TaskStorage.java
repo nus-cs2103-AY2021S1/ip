@@ -20,6 +20,10 @@ import duke.task.ToDo;
  */
 public class TaskStorage {
 
+    private static final String TODO = "todo";
+    private static final String DEADLINE = "deadline";
+    private static final String EVENT = "event";
+
     private Path folderPath;
     private File folderFile;
     private Path taskFilePath;
@@ -56,11 +60,11 @@ public class TaskStorage {
         String taskInfo = taskStringParts[1];
 
         switch (taskType) {
-        case "todo":
+        case TODO:
             return ToDo.createToDo(taskInfo);
-        case "deadline":
+        case DEADLINE:
             return Deadline.createDeadline(taskInfo);
-        case "event":
+        case EVENT:
             return Event.createEvent(taskInfo);
         default:
             throw new UnknownTaskTypeException(ExceptionMessage.getUnknownTaskMessage(taskType));
