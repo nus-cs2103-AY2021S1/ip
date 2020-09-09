@@ -11,7 +11,7 @@ import java.util.Date;
  * <code>Event</code> inherits from <code>Task</code>
  * and is used to represent an event.
  */
-public class Event extends Task {
+public class Event extends Task implements Comparable<Event> {
     private Date start;
     private Date end;
 
@@ -53,5 +53,16 @@ public class Event extends Task {
     public String toString() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
         return String.format("[E]%s (start: %s, end: %s)", super.toString(), dateFormat.format(start), dateFormat.format(end));
+    }
+
+    @Override
+    public int compareTo(Event other) {
+        boolean sameName = getName().equals(other.getName());
+        boolean sameDate = start.compareTo(other.start) == 0;
+        if (sameName && sameDate) {
+            return 0;
+        } else {
+            return start.compareTo(other.start);
+        }
     }
 }

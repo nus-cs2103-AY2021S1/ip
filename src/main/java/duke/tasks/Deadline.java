@@ -11,7 +11,7 @@ import java.util.Date;
  * <code>Deadline</code> inherits from <code>Task</code>
  * and is used to represent a deadline.
  */
-public class Deadline extends Task {
+public class Deadline extends Task implements Comparable<Deadline> {
     private Date dueDate;
 
     /**
@@ -51,5 +51,16 @@ public class Deadline extends Task {
     public String toString() {
         DateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
         return String.format("[D]%s (due: %s)", super.toString(), dateFormat.format(dueDate));
+    }
+
+    @Override
+    public int compareTo(Deadline other) {
+        boolean sameName = getName().equals(other.getName());
+        boolean sameDate = dueDate.compareTo(other.dueDate) == 0;
+        if (sameName && sameDate) {
+            return 0;
+        } else{
+            return dueDate.compareTo(other.dueDate);
+        }
     }
 }
