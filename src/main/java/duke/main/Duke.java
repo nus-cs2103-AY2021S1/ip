@@ -69,7 +69,7 @@ public class Duke {
             } else if (command.equals("find")) {
                 Processor.handleFindCommand(userInput, response, ui, tasks);
             } else if (command.equals("sort")) {
-                Processor.handleSortCommand(response, ui, tasks);
+                Processor.handleSortCommand(userInput, response, ui, tasks);
             } else {
                 throw new InvalidCommandException();
             }

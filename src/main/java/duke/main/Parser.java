@@ -141,4 +141,15 @@ public class Parser {
             throw new InvalidPriority();
         }
     }
+
+    public static boolean isSortedByPriority(String userInput) throws InvalidCommandException {
+        String[] components = userInput.split(" ", 2);
+        if (components.length == 1) {
+            return false;
+        } else if (components[1].equals("priority")) {
+            return true;
+        } else {
+            throw new InvalidCommandException();
+        }
+    }
 }

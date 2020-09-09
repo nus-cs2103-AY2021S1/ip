@@ -183,11 +183,18 @@ public class Processor {
     }
 
     public static void handleSortCommand(
-            StringBuilder response, Ui ui, TaskList tasks) {
-        TaskList sortedList = tasks.sortDescription();
-        String headerMessage = "Here is your task list sorted alphabetically:\n";
-        String message = ui.getFullList(headerMessage, sortedList);
-        response.append(message);
+            String userInput, StringBuilder response, Ui ui, TaskList tasks) throws InvalidCommandException {
+        if (Parser.isSortedByPriority(userInput)) {
+            TaskList sortedList = tasks.sortPriority();
+            String headerMessage = "Here is your task list sorted based on priority:\n";
+            String message = ui.getFullList(headerMessage, sortedList);
+            response.append(message);
+        } else {
+            TaskList sortedList = tasks.sortDescription();
+            String headerMessage = "Here is your task list sorted alphabetically:\n";
+            String message = ui.getFullList(headerMessage, sortedList);
+            response.append(message);
+        }
     }
     /**
      * Processes the run of the program.
@@ -221,7 +228,7 @@ public class Processor {
             } else if (command.equals("find")) {
                 handleFindCommand(userInput, response, ui, tasks);
             } else if (command.equals("sort")) {
-                handleSortCommand(response, ui, tasks);
+                handleSortCommand(userInput, response, ui, tasks);
             } else {
                 throw new InvalidCommandException();
             }
