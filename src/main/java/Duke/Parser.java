@@ -33,6 +33,7 @@ public class Parser {
 
     public Task task(String input) throws DukeException {
         String command = input.split(" ")[0];
+        assert input.split(" ").length>=2: "At least 2 inputs";
         switch (command) {
             case "todo":
                 return toDo(input);
@@ -47,18 +48,16 @@ public class Parser {
 
     private ToDo toDo(String input) throws DukeException {
         String[] inputSplit = input.split(" ");
-        if (inputSplit.length < 2) {
-            // Throw new error message that todo has no desc
-            throw (new DukeException("\u2639 OOPS!!! The description of a todo cannot be empty."));
-        } else {
-            String name = input.split("todo ")[1];
-            return new ToDo(name);
-        }
+        String name = input.split("todo ")[1];
+        assert name.length()>0: "Empty Desc";
+        return new ToDo(name);
     }
 
     private Deadline deadline(String input) {
         String name = input.split(" /by ")[0].split("deadline ")[1];
         String by = input.split(" /by ")[1];
+        assert by.length()>0: "Empty Date";
+        assert name.length()>0: "Empty Desc";
         return new Deadline(name, by);
 
     }
@@ -66,6 +65,8 @@ public class Parser {
     private Event event(String input) {
         String name = input.split(" /at ")[0].split("event ")[1];
         String at = input.split(" /at ")[1];
+        assert at.length()>0: "Empty Date";
+        assert name.length()>0: "Empty Desc";
         return new Event(name, at);
 
     }

@@ -53,6 +53,7 @@ public class Storage {
             String input = sc.nextLine();
             String[] inputSplit = input.split("/");
 
+            assert inputSplit.length >= 2;
             Task task;
             switch (inputSplit[0]) {
                 case "T":

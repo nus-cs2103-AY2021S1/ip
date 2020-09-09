@@ -16,6 +16,7 @@ public class Task {
      * @param name name of Task.
      */
     public Task(String name) {
+        assert name.length()>0: "Invalid Input";
         this.name = name;
         this.isDone = false;
     }
