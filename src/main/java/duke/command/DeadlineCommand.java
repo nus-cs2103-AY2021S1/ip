@@ -43,7 +43,7 @@ public class DeadlineCommand extends Command {
         }
         try {
             String[] split = super.input.substring(9).split("/by ", 2);
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            DateTimeFormatter formatter = Storage.FORMATTER;
             LocalDateTime date = LocalDateTime.parse(split[1], formatter);
             Task deadline = new Deadline(split[0], date);
             tasks.addTask(deadline);
