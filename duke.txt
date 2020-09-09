@@ -812,3 +812,44 @@ Here are the tags in your list:
 Here are the tags in your list:
 1.#verygood
 
+Hello! I'm Duke
+What can I do for you?
+Got it. I've added this task:
+  [T][✘] read book #cool #books
+Now you have 1 tasks in the list.
+Here are the tags in your list:
+1.#cool
+
+Here are the tags in your list:
+1.#cool
+2.#books
+
+Got it. I've added this task:
+  [T][✘] eat food
+Now you have 2 tasks in the list.
+Here are the tasks in your list:
+
+Here are the tasks in your list:
+1.[T][✘] read book #cool #books
+
+Here are the tasks in your list:
+1.[T][✘] read book #cool #books
+2.[T][✘] eat food
+
+Hello! I'm Duke
+What can I do for you?
+Got it. I've added this task:
+  [T][✘] read book #cool #lovebooks
+Now you have 1 tasks in the list.
+Here are the tasks in your list:
+
+Here are the tasks in your list:
+1.[T][✘] read book #cool #lovebooks
+
+Here are the tags in your list:
+1.#cool
+
+Here are the tags in your list:
+1.#cool
+2.#lovebooks
+
