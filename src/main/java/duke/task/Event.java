@@ -6,51 +6,71 @@ import java.time.LocalDateTime;
  * Encapsulates an event.
  */
 public class Event extends Task {
-    private static final String DELIMITER_COMMAND = " /at ";
+    private static final String DELIMITER_AT = " /from ";
+    private static final String DELIMITER_BY = " /till ";
+    private static final String FORMAT = "The format should be <description> "
+            + "/from <time in DD/MM/YYYY HH:mm> /till <time in DD/MM/YYYY HH:mm>";
 
-    private LocalDateTime dateInfo;
+    private LocalDateTime dateFrom;
+    private LocalDateTime dateTill;
 
     /**
      * Constructs an event task that it not yet complete.
      *
      * @param description Description for the event.
-     * @param dateInfo Date of the event in DD/MM/YYYY HH:mm format.
+     * @param dateFrom Date of the event start in DD/MM/YYYY HH:mm format.
+     * @param dateTill Date of the event ends in DD/MM/YYYY HH:mm format.
      * @throws TaskException If the description is empty.
      */
-    public Event(String description, LocalDateTime dateInfo) throws TaskException {
+    public Event(String description, LocalDateTime dateFrom, LocalDateTime dateTill) throws TaskException {
         super(description);
-        this.dateInfo = dateInfo;
+        this.dateFrom = dateFrom;
+        this.dateTill = dateTill;
     }
 
     /**
      * Constructs an event with full set of parameters.
      *
      * @param description Description for the event.
-     * @param dateInfo Date of the event in DD/MM/YYYY HH:mm format.
+     * @param dateFrom Date of the event start in DD/MM/YYYY HH:mm format.
+     * @param dateTill Date of the event ends in DD/MM/YYYY HH:mm format.
      * @param isCompleted If the task is completed already.
      * @throws TaskException If the description is empty.
      */
-    public Event(String description, String dateInfo, boolean isCompleted) throws TaskException {
+    private Event(String description, LocalDateTime dateFrom, LocalDateTime dateTill,
+                  boolean isCompleted) throws TaskException {
         super(description, isCompleted);
-        this.dateInfo = LocalDateTime.parse(dateInfo);
+        this.dateFrom = dateFrom;
+        this.dateTill = dateTill;
     }
 
     /**
      * Constructs an event task with parameters as a single string.
      *
-     * @param args Parameters for the args in the form of "[description] /at [date in DD/MM/YYYY HH:mm]"
+     * @param args Parameters for the args in the form of "[description]
+     *             /from [date in DD/MM/YYYY HH:mm] /till [date in DD/MM/YYYY HH:mm]"
      * @return New event instance.
      * @throws TaskException If the description is empty or the given string cannot be delimited.
      */
     public static Event create(String args) throws TaskException {
-        String[] argsList = args.split(DELIMITER_COMMAND);
-        if (argsList.length < 2) {
+        String[] fromList = args.split(DELIMITER_AT);
+        if (fromList.length < 2) {
             throw new TaskException("I need more arguments for to track an Event.\n"
-            + "The format should be <description> /at <time in DD/MM/YYYY HH:mm>");
-        } else {
-            LocalDateTime date = LocalDateTime.parse(argsList[1], Task.DATE_FORMAT_PARSE);
-            return new Event(argsList[0], date);
+            + FORMAT);
         }
+
+        String[] tillList = fromList[1].split(DELIMITER_BY);
+        if (tillList.length < 2) {
+            throw new TaskException("I need more arguments for to track an Event.\n"
+                    + FORMAT);
+        }
+
+        String description = fromList[0];
+        String fromDateString = tillList[0];
+        String tillDateString = tillList[1];
+        LocalDateTime fromDate = LocalDateTime.parse(fromDateString, Task.DATE_FORMAT_PARSE);
+        LocalDateTime tillDate = LocalDateTime.parse(tillDateString, Task.DATE_FORMAT_PARSE);
+        return new Event(description, fromDate, tillDate);
     }
 
     /**
@@ -62,10 +82,11 @@ public class Event extends Task {
      */
     public static Event parseStorageString(String storageString) throws TaskException {
         String[] inputList = storageString.split(DELIMITER_STORAGE);
-        if (inputList.length < 3) {
+        if (inputList.length < 4) {
             throw new TaskException("Invalid storage string");
         }
-        return new Event(inputList[0], inputList[1], isTaskCompleted(inputList[2]));
+        return new Event(inputList[0], LocalDateTime.parse(inputList[1]), LocalDateTime.parse(inputList[2]),
+                isTaskCompleted(inputList[3]));
     }
 
     /**
@@ -85,7 +106,8 @@ public class Event extends Task {
      */
     @Override
     public String toStorageString() {
-        return description + DELIMITER_STORAGE + dateInfo + DELIMITER_STORAGE + storeCompletionFlag();
+        return description + DELIMITER_STORAGE
+                + dateFrom + DELIMITER_STORAGE + dateTill + DELIMITER_STORAGE + storeCompletionFlag();
     }
 
     /**
@@ -95,6 +117,8 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return printCompletionFlag() + " | E | " + description + " | At: " + dateInfo.format(Task.DATE_FORMAT_DISPLAY);
+        return printCompletionFlag() + " | E | " + description
+                + " | Period: " + dateFrom.format(Task.DATE_FORMAT_DISPLAY) + " to "
+                + dateTill.format(Task.DATE_FORMAT_DISPLAY);
     }
 }

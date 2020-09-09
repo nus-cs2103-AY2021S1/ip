@@ -11,13 +11,13 @@ import org.junit.jupiter.api.Test;
 public class EventTest {
     @Test
     public void constructor_emptyDescription_taskException() {
-        assertThrows(TaskException.class, () -> new Event("", LocalDateTime.now()));
+        assertThrows(TaskException.class, () -> new Event("", LocalDateTime.now(), LocalDateTime.now()));
     }
 
     @Test
     public void getTaskType() {
         try {
-            Event t = new Event("Some desc", LocalDateTime.now());
+            Event t = new Event("Some desc", LocalDateTime.now(), LocalDateTime.now());
             assertEquals(t.getTaskType(), TaskType.EVENT);
         } catch (Exception e) {
             fail();
