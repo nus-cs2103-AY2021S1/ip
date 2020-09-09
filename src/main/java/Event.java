@@ -1,5 +1,8 @@
 package main.java;
 
+/**
+ * A kind of the tasks, which has a specific time period
+ */
 public class Event extends Task {
     protected String time;
 

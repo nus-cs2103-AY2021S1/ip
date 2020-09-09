@@ -1,5 +1,8 @@
 package main.java;
 
+/**
+ * A kind of the tasks, which contains simply a description
+ */
 public class Todo extends Task {
     public Todo(String description) {
         super(description);

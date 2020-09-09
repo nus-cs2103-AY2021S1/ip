@@ -7,6 +7,9 @@ import java.io.File;
 import java.util.Scanner;
 import java.io.FileNotFoundException;
 
+/**
+ * Represents the local storage of the task list
+ */
 public class Storage {
 
     ArrayList<Task> taskArrayList;
@@ -17,6 +20,10 @@ public class Storage {
         this.filePath = filePath;
     }
 
+    /**
+     * fills the arraylist with the tasks in the hard disk
+     * @throws IOException
+     */
     public void fill() throws IOException {
         File f = new File(filePath);
         Scanner sc;
@@ -56,6 +63,11 @@ public class Storage {
         }
     }
 
+    /**
+     * loads the task list from local hard disk
+     * @return the arraylist that contains the tasks loaded from the local hard disk
+     * @throws DukeException
+     */
     public ArrayList<Task> load() throws DukeException {
         try{
             fill();

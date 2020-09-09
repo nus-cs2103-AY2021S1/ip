@@ -2,6 +2,9 @@ package main.java;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
+/**
+ * A kind of the tasks, which has a specific deadline
+ */
 public class Deadline extends Task {
     protected LocalDate deadline;
 
@@ -15,7 +18,7 @@ public class Deadline extends Task {
         this.deadline = deadline;
         this.isDone = isDone;
     }
-    
+
     private String getDeadline() {
         return deadline.format(DateTimeFormatter.ofPattern(" MMM dd yyyy"));
     }

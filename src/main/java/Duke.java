@@ -2,6 +2,10 @@ package main.java;
 
 import java.io.IOException;
 
+/**
+ * Represents a robot who can help the user to make todo list.
+ * A <code>Duke</code> object is an instance of such robots.
+ */
 public class Duke {
     private Storage storage;
     private TaskList tasks;
@@ -18,6 +22,9 @@ public class Duke {
         }
     }
 
+    /**
+     * launch the Duke application, initialize the robot.
+     */
     public void run() {
         ui.start();
         Parser parser = new Parser(tasks);
@@ -31,6 +38,10 @@ public class Duke {
         }
     }
 
+    /**
+     * Main method of the project, launch the project.
+     * @param args
+     */
     public static void main(String[] args) {
         new Duke("./command.txt").run();
     }
