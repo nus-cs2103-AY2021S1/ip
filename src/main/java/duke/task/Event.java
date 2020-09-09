@@ -81,4 +81,10 @@ public class Event extends Task {
     public String getTime() {
         return eventTime;
     }
+
+    @Override
+    public Task clone() {
+        Task clonedTask = new Event(super.description, eventTime);
+        return this.isDone ? clonedTask.markAsDone() : clonedTask;
+    }
 }

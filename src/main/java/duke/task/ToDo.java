@@ -29,4 +29,10 @@ public class ToDo extends Task {
     public String toString() {
         return getTypeIcon() + " " + super.getStatusIcon() + " " + super.description;
     }
+
+    @Override
+    public Task clone() {
+        Task clonedTask = new ToDo(description);
+        return this.isDone ? clonedTask.markAsDone() : clonedTask;
+    }
 }

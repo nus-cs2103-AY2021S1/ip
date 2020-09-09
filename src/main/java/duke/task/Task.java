@@ -70,6 +70,8 @@ public abstract class Task {
      */
     public abstract String getTypeIcon();
 
+    public abstract Task clone();
+
     /**
      * Converts the task to string.
      * @return The string representation of this task

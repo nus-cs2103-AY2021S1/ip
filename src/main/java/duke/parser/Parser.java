@@ -1,5 +1,6 @@
 package duke.parser;
 
+import duke.command.CloneCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
@@ -28,26 +29,25 @@ public class Parser {
     public static Command parse(String fullCommand) throws DukeException {
         String[] splitInput = fullCommand.trim().split("\\s+", 2);
 
+        boolean hasNoFollowUp = splitInput.length == 1 || splitInput.equals("");
+
         // command: hello
-        boolean hasNoFollowUpStart = splitInput.length == 1 || splitInput[1].equals("");
         boolean hasStartSpecifier = splitInput[0].equals(StartCommand.COMMAND);
-        boolean isStartCommand = hasStartSpecifier && hasNoFollowUpStart;
+        boolean isStartCommand = hasStartSpecifier && hasNoFollowUp;
         if (isStartCommand) {
             return createStartCommand();
         }
 
         // command: bye
-        boolean hasNoFollowUpExit = splitInput.length == 1 || splitInput[1].equals("");
         boolean hasExitSpecifier = splitInput[0].equals(ExitCommand.COMMAND);
-        boolean isExitCommand = hasExitSpecifier && hasNoFollowUpExit;
+        boolean isExitCommand = hasExitSpecifier && hasNoFollowUp;
         if (isExitCommand) {
             return createExitCommand();
         }
 
         // command: list
-        boolean hasNoFollowUpList = splitInput.length == 1 || splitInput[1].equals("");
         boolean hasListSpecifier = splitInput[0].equals(ListCommand.COMMAND);
-        boolean isListCommand = hasListSpecifier && hasNoFollowUpList;
+        boolean isListCommand = hasListSpecifier && hasNoFollowUp;
         if (isListCommand) {
             return createListCommand();
         }
@@ -85,10 +85,19 @@ public class Parser {
         }
 
         // command: undo
-        boolean isUndoCommand = splitInput[0].equals(UndoCommand.COMMAND);
+        boolean hasUndoSpecifier = splitInput[0].equals(UndoCommand.COMMAND);
+        boolean isUndoCommand = hasUndoSpecifier && hasNoFollowUp;
         if (isUndoCommand) {
             return createUndoCommand();
         }
+
+        // command: clone [source index] or clone [source index] [destination index]
+        boolean isCloneCommand = splitInput[0].equals(CloneCommand.COMMAND);
+        if (isCloneCommand) {
+            return createCloneCommand(splitInput);
+        }
+
+        // unregonised command
         return new Command();
     }
 
@@ -188,5 +197,12 @@ public class Parser {
 
     private static Command createExitCommand() {
         return new ExitCommand();
+    }
+
+    private static Command createCloneCommand(String[] splitInput) throws InvalidIndexException {
+        if (splitInput.length == 1) {
+            throw new InvalidIndexException();
+        }
+        return new CloneCommand(splitInput[1]);
     }
 }

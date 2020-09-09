@@ -46,6 +46,18 @@ public class TaskList {
     }
 
     /**
+     * Adds a task to the specified position in the task list
+     * @param index The position where the task will be added
+     * @param task The task to be added
+     */
+    public void add(int index, Task task) {
+        assert task != null : "task cannot be null";
+        Pair<Task, Integer> infoPair = new Pair<>(null, index);
+        prevCommands.add(new Pair<>(ADD_KEY, infoPair));
+        tasks.add(index, task);
+    }
+
+    /**
      * Removes the task at the specified position and returns it.
      * @param index The position of the task
      * @return The removed task

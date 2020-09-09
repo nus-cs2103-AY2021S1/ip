@@ -75,4 +75,10 @@ public class Deadline extends Task {
     public String getTime() {
         return dueTimeStr;
     }
+
+    @Override
+    public Task clone() {
+        Task clonedTask = new Deadline(super.description, dueTimeStr);
+        return this.isDone ? clonedTask.markAsDone() : clonedTask;
+    }
 }
