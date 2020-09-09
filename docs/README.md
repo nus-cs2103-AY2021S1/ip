@@ -4,7 +4,7 @@ A CS2103 Project to create a simple bot for to-do tasking.
 The attitude of which I have adopted for this module as well as for the
 graphics are inspired by my all time favorite game:
 
-![image](docimage/gitintro.PNG)
+![image](gitintro.PNG)
  
 *Gotta Catch 'Em All (A+s)*
 
@@ -50,7 +50,7 @@ Simply adds a tasking with the 'task details' into PikaDuke.
         ADDED: [T][X] eat genki sushi
     Now you got 1 tasks
    
-![image](docimage/add-todo.PNG) 
+![image](add-todo.PNG) 
 
 - **Event** - `event <task details> /at <Date & Time>`
 
@@ -68,7 +68,7 @@ Adds an event tasking with the 'task details' as well as Date and Time into Pika
         ADDED: [E][X] eat shabusai (at: 14 Nov 2020, 12:00PM)
     Now you got 2 tasks
    
-![image](docimage/add-event.PNG) 
+![image](add-event.PNG) 
 
 - **Deadline** - `deadline <task details> /by <Date & Time>`
 
@@ -86,7 +86,7 @@ Adds an deadline tasking with the 'task details' as well as Date and Time into P
         ADDED: [D][X] eat steak (by: 14 Nov 2020, 11:00AM)
     Now you got 3 tasks
    
-![image](docimage/add-deadline.PNG) 
+![image](add-deadline.PNG) 
 
 ---
 
@@ -124,7 +124,7 @@ Displays all the existing task list in PikaDuke.
         2. [E][X] eat shabusai (at: 14 Nov 2020, 12:00PM)
         3. [D][X] eat steak (by: 14 Nov 2020, 11:00AM)
     
-![image](docimage/list.PNG) 
+![image](list.PNG) 
 
 ---
 ### 4. Marking Completion
@@ -178,7 +178,7 @@ Note that this will not delete the tasks not relevant with the search word.
     Retrieving your list, patient ah!
     1. [E][X] eat shabusai (at: 14 Nov 2020, 12:00PM)
  
-![image](docimage/find.PNG) 
+![image](find.PNG) 
 
 ---
 
