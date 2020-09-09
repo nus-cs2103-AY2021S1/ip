@@ -14,7 +14,6 @@ public class Load extends Command {
     String filePath;
 
     Load(String[] query) throws WrongUsageException {
-
         this.name = "load";
         this.usage = "load [FILE_PATH]";
         this.description = "Used to load files stored in the task format";

@@ -45,7 +45,6 @@ public class Parser {
      * @return Concatenated String.
      */
     public static String concatenateStrArr(String[] strArr) {
-
         StringBuilder acc = new StringBuilder();
         for (int i = 0;i < strArr.length;i++) {
             if (!strArr[i].equals("")) {
