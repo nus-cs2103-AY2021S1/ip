@@ -26,10 +26,9 @@ public class DeleteCommand extends Command {
      */
     @Override
     public void execute(String str, Duke duke) throws InvalidIndexException {
-        boolean canParseInt = tryParseInt(str);
-        int taskIndex = canParseInt ? Integer.parseInt(str) - 1 : -1;
+        checkException(str);
 
-        checkException(taskIndex, str, duke);
+        int taskIndex = Integer.parseInt(str);
 
         Task task = duke.getTaskList().deleteTask(taskIndex);
 
@@ -44,7 +43,7 @@ public class DeleteCommand extends Command {
         }
     }
 
-    private boolean tryParseInt(String str) {
+    private boolean canParseInt(String str) {
         try {
             Integer.parseInt(str);
             return true;
@@ -53,8 +52,8 @@ public class DeleteCommand extends Command {
         }
     }
 
-    private void checkException(int taskIndex, String str, Duke duke) {
-        if (duke.getTaskList().getSize() <= taskIndex || taskIndex < 0) {
+    private void checkException(String str) {
+        if (!canParseInt(str)) {
             String errMessage = ExceptionMessage.getInvalidIndexMessage(str);
             throw new InvalidIndexException(errMessage);
         }
