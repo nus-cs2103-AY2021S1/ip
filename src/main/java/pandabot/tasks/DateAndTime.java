@@ -1,7 +1,6 @@
 package pandabot.tasks;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
@@ -9,26 +8,23 @@ import java.time.format.DateTimeParseException;
  * Allows PandaBot to understand date and time in the format of dd/mm/yyyy hhmm
  */
 public class DateAndTime {
-    private final LocalDate date;
-    private final LocalTime time;
+    private final LocalDateTime dateAndTime;
 
     /**
      * Creates a DateAndTime object by taking in an input
      * of the format dd/mm/yyyy hhmm.
      *
-     * @param date a String of the format dd/mm/yyyy
-     * @param time a String of the format hhmm
-     * @throws DateTimeParseException
+     * @param dateAndTime the given input
+     * @throws DateTimeParseException if the given input is not in the accepted format
      */
-    public DateAndTime (String date, String time) throws DateTimeParseException {
-        this.date = LocalDate.parse(date, DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        this.time = LocalTime.parse(time, DateTimeFormatter.ofPattern("HHmm"));
+    public DateAndTime (String dateAndTime) throws DateTimeParseException {
+        this.dateAndTime = LocalDateTime.parse(dateAndTime, DateTimeFormatter.ofPattern("dd/MM/yyyy HHmm"));
     }
 
-    private String parseDate(LocalDate input) {
+    private String parseDate(LocalDateTime input) {
         // Day of Month Counter
         String ending;
-        int day = date.getDayOfMonth();
+        int day = input.getDayOfMonth();
         switch (day % 10) {
         case 1:
             ending = "st";
@@ -43,14 +39,14 @@ public class DateAndTime {
             ending = "th";
             break;
         }
-        return day + ending + " of " + date.format(DateTimeFormatter.ofPattern("MMMM yyyy"));
+        return day + ending + " of " + input.format(DateTimeFormatter.ofPattern("MMMM yyyy"));
     }
 
-    private String parseTime(LocalTime input) {
+    private String parseTime(LocalDateTime input) {
         if (input.getMinute() == 0) {
-            return time.format(DateTimeFormatter.ofPattern("ha"));
+            return input.format(DateTimeFormatter.ofPattern("ha"));
         } else {
-            return time.format(DateTimeFormatter.ofPattern("h.mma"));
+            return input.format(DateTimeFormatter.ofPattern("h.mma"));
         }
     }
 
@@ -62,6 +58,6 @@ public class DateAndTime {
      */
     @Override
     public String toString() {
-        return parseDate(date) + ", " + parseTime(time);
+        return parseDate(dateAndTime) + ", " + parseTime(dateAndTime);
     }
 }
