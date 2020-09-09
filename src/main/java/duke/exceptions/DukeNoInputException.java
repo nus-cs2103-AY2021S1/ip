@@ -5,10 +5,10 @@ package duke.exceptions;
  */
 public class DukeNoInputException extends DukeException {
     /**
-     * Constructor class for a DukeNoInputException
-     * @param badCommand the empty command or invalid string
+     * Constructs class for a DukeNoInputException
+     * No input is given to this command hence returning the no input exception
      */
-    public DukeNoInputException(String badCommand) {
-        super(badCommand, 2);
+    public DukeNoInputException() {
+        super("", 2);
     }
 }

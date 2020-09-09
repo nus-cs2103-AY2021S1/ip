@@ -1,5 +1,6 @@
 package duke.tasks;
 
+import duke.command.Command;
 import duke.exceptions.DukeDateTimeException;
 
 public class TextParser {
@@ -9,11 +10,11 @@ public class TextParser {
     /**
      * Extracts the time from the command.
      * Slightly lenient on wording of datetime marker for Deadlines and Events
-     * @param cmd
+     * @param cmd Command to extract time from.
      * @return String array of size 2 where [0] is the description and [1] the datetime string
      * @throws DukeDateTimeException
      */
-    String[] extractTime(String cmd) throws DukeDateTimeException {
+    public String[] extractTime(String cmd) throws DukeDateTimeException {
         cmd = cmd.strip();
         int i;
         if (cmd.contains("/at")) {
@@ -49,6 +50,15 @@ public class TextParser {
         }
         given = given == null ? Command.ERROR : given;
         return given;
+    }
+    /**
+     * inputs string, processes and cleans the text for the chatbot
+     * via adding a ending token seperator
+     * @param userInput Direct user input of the string
+     * @return Cleaned user input
+     */
+    public String cleanInput(String userInput) {
+        return userInput.strip();
     }
 
 }

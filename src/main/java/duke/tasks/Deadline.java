@@ -6,7 +6,7 @@ import duke.exceptions.DukeDateTimeException;
  * The Event class contains the information that is entered by the user into the
  * Duke Chatbot Command Line Interface.
  */
-class Deadline extends TimedTask {
+public class Deadline extends TimedTask {
     /**
      * Constructor for Deadline Class without done status
      * To be used for creating new duke.tasks by the end user
@@ -14,7 +14,7 @@ class Deadline extends TimedTask {
      * @param date the date on which the task is due
      * @throws DukeDateTimeException if the fields for the date are not matching autocorrection cases
      */
-    Deadline(String desc, String date) throws DukeDateTimeException {
+    public Deadline(String desc, String date) throws DukeDateTimeException {
         super(desc, date);
     }
     /**

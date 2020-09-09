@@ -4,17 +4,17 @@ package duke.tasks;
  * ToDo is a Implementation of the Task Class with no additional fields
  * This is the class that stores todo duke.tasks in the Duke program
  */
-class ToDo extends Task {
+public class ToDo extends Task {
     /**
      * Constructs the ToDo Class for use when creating new duke.tasks
      * by end user.
      * @param desc Description of task
      */
-    ToDo(String desc) {
+    public ToDo(String desc) {
         super(desc, false);
     }
     /**
-     * Constructor for the ToDo Class for use when populating the list of duke.tasks
+     * Constructs the ToDo Class for use when populating the list of duke.tasks
      * recorded by the save text file
      * @param desc Description of task
      * @param done Done Status of task

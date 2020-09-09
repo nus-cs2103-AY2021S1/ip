@@ -1,7 +1,9 @@
 package duke.tasks;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
+import java.util.stream.IntStream;
 
 import duke.exceptions.DukeCommandException;
 import duke.exceptions.DukeDateTimeException;
@@ -39,27 +41,7 @@ public class TaskManager {
         this.taskList = ioParser.loadNewTaskList();
         this.textParser = new TextParser();
     }
-
-    /**
-     * Parses the current list and prints the output
-     * @return String representation of the Task List
-     */
-    public String parseoutput() {
-        StringBuilder sb = new StringBuilder();
-        if (this.taskList.size() > 0) {
-            sb.append("\tHere are the duke.tasks in your list:\n");
-            for (int i = 0; i < this.taskList.size(); i++) {
-                sb.append("\t").append(i + 1)
-                        .append(". ")
-                        .append(this.taskList.get(i).toString())
-                        .append("\n");
-            }
-        } else {
-            sb.append("\tThere are no duke.tasks in your list!\n");
-        }
-        return sb.toString();
-    }
-
+    
     /**
      * Indicate that a task is done
      * @param index index of the list as displayed from the application
@@ -98,7 +80,7 @@ public class TaskManager {
                     .append(t)
                     .append("\n\tNow you have ")
                     .append(this.taskList.size())
-                    .append(" duke.tasks in the list.\n").toString();
+                    .append("tasks in the list.\n").toString();
         } catch (IllegalArgumentException e) {
             throw new DukeCommandException(index);
         } catch (IndexOutOfBoundsException e) {
@@ -112,7 +94,7 @@ public class TaskManager {
      * @param index index of the internal list
      * @return Task the task at that index
      */
-    public Task getTask(int index) {
+    private Task getTask(int index) {
         return this.taskList.get(index);
     }
 
@@ -121,7 +103,7 @@ public class TaskManager {
      * @param t task
      * @return String to be wrapped and printed
      */
-    private String add(Task t) {
+    public String add(Task t) {
         this.taskList.add(t);
         return this.echo(t);
     }
@@ -129,63 +111,15 @@ public class TaskManager {
     /**
      * Returns string builder of the task
      *
-     * @param t
-     * @return
+     * @param task Task
+     * @return String echow when task is completed
      */
-    private String echo(Task t) {
+    private String echo(Task task) {
         return new StringBuilder().append("\tGot it. I've added this task:\n\t  ")
-                .append(t).append("\n\tNow you have ")
+                .append(task).append("\n\tNow you have ")
                 .append(this.taskList.size())
-                .append(" duke.tasks in the list.\n")
+                .append("tasks in the list.\n")
                 .toString();
-    }
-
-    /**
-     * Takes in command to add an "to do" task to task list
-     * @param description Description of the Todo Task
-     * @return String Representation of the Task to complete
-     * @throws DukeNoInputException throw exception if there is no input given to the function
-     */
-    public String addToDo(String description) throws DukeNoInputException {
-        if (description.isBlank()) {
-            throw new DukeNoInputException(description);
-        }
-        ToDo task = new ToDo(description);
-        return this.add(task);
-    }
-
-    /**
-     * Takes in command to add an deadline task to task list
-     *
-     * @param userInput Input for the user
-     * @return returns a string representation of the given input for use by the parser
-     * @throws DukeDateTimeException throws the exception from textparser.extractTime
-     * @throws DukeNoInputException If no description is given
-     */
-    public String addDeadline(String userInput) throws DukeDateTimeException, DukeNoInputException {
-        if (userInput.isBlank()) {
-            throw new DukeNoInputException(userInput);
-        }
-        String[] timeSeperator = textParser.extractTime(userInput);
-        Deadline d = new Deadline(timeSeperator[0], timeSeperator[1]);
-        return add(d);
-    }
-
-    /**
-     * Takes in command to add an event task to task list
-     * @param cmd the description of the task
-     * @return returns a string representation of the given input for use by the parser
-     * @throws DukeDateTimeException throws the exception from textparser.extractTime
-     * @throws DukeNoInputException If no description is given
-     */
-
-    public String addEvent(String cmd) throws DukeDateTimeException, DukeNoInputException {
-        if (cmd.isBlank()) {
-            throw new DukeNoInputException(cmd);
-        }
-        String[] timeSeperator = textParser.extractTime(cmd);
-        Event e = new Event(timeSeperator[0], timeSeperator[1]);
-        return add(e);
     }
 
     /**
@@ -195,7 +129,13 @@ public class TaskManager {
     public void saveTasks() throws DukeIoException {
         ioParser.writeTask(taskList);
     }
-
+    /**
+     * Parses the current list and prints the output
+     * @return String representation of the Task List
+     */
+    public String listTasks() {
+        return findTasks("");
+    }
     /**
      * Regex pattern string search
      * @param pattern Regex Pattern or substring of description of any task in the list
@@ -205,19 +145,20 @@ public class TaskManager {
         StringBuilder sb = new StringBuilder("");
         if (this.taskList.size() > 0) {
             Pattern stringPattern = Pattern.compile(pattern);
-            for (int i = 0; i < taskList.size(); i++) {
-                if (stringPattern.matcher(taskList.get(i).getDescription()).find()) {
-                    sb.append("\t").append(i + 1)
-                            .append(". ")
-                            .append(this.taskList.get(i).toString())
-                            .append("\n");
-                }
-            }
+            AtomicInteger index = new AtomicInteger();
+            sb.append(taskList.stream()
+                    .filter(task -> {
+                        index.incrementAndGet();
+                        return stringPattern.matcher(task.getDescription()).find();
+                        }
+                    ).map(task -> String.format("\t%d. %s\n",index.get(),task))
+                    .reduce("", (accumulate , next) -> accumulate + next));
+
             if (sb.toString().isEmpty()) {
                 sb.append("\tCannot find a valid task in your list");
             }
         } else {
-            sb.append("\tThere are no duke.tasks in your list!\n");
+            sb.append("\tThere are no tasks in your list!\n");
         }
         return sb.toString();
     }

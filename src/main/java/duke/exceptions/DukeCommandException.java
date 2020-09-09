@@ -6,7 +6,7 @@ package duke.exceptions;
 public class DukeCommandException extends DukeException {
     /**
      * Constructor class for DukeCommandException
-     * @param bad_cmd the command that is unrecognisable by Duke Application
+     * @param badCommand the command that is unrecognisable by Duke Application
      */
     public DukeCommandException(String badCommand) {
         super(badCommand , 1);

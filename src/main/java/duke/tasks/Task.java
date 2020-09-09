@@ -7,7 +7,7 @@ package duke.tasks;
 abstract class Task {
     // SEPERATION Attribute is used to encode the different attributes of the Task Class
     public static final String SEPERATOR = "#sep#";
-    protected String description;
+    protected final String description;
     protected boolean isDoneTask;
 
     /**
