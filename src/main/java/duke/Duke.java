@@ -26,8 +26,8 @@ public class Duke extends Application {
     private Button sendButton;
     private Scene scene;
 
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/Incredibles-1.jpg"));
+    private Image duke = new Image(this.getClass().getResourceAsStream("/images/Incredibles-2.jpg"));
 
     /**
      * Method to initialize a Chatbot instance and start the bot. Catch errors specific to the bot.
@@ -143,6 +143,7 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
+        assert (!input.equals(null));
         return "Duke heard: " + input;
     }
 
