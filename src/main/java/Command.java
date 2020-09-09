@@ -74,7 +74,12 @@ public class Command {
         } else if (lst.get(0).equals("Find")) {
             response = taskList.findTask(lst.get(1), ui);
         } else {
-            response = taskList.deleteTask(Integer.parseInt(lst.get(1)), ui);
+            if (lst.get(1).equals("All")) {
+                response = taskList.deleteAll(ui);
+            } else {
+                lst.remove(0);
+                response = taskList.deleteTasks(lst, ui);
+            }
             storage.save(taskList.getTasks());
         }
         return response;

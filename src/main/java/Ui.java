@@ -92,11 +92,13 @@ public class Ui {
      * @param task Task that has been deleted from the task list.
      * @param size Total number of tasks in the task list after deletion.
      */
-    public String showDelete(Task task, int size) {
+    public String showDelete(ArrayList<Task> tasks, int size) {
         String response = "";
         response += showLine() + System.lineSeparator();
-        response += "Noted. I've removed this task:" + System.lineSeparator();
-        response += "   " + task + System.lineSeparator();
+        response += "Noted. I've removed these tasks: " + System.lineSeparator();
+        for (Task t : tasks) {
+            response += "   " + t + System.lineSeparator();
+        }
         response += "Now you have " + size + " tasks in the list." + System.lineSeparator();
         response += showLine() + System.lineSeparator();
         return response;

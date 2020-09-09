@@ -84,16 +84,30 @@ public class TaskList {
         return ui.showDone(tasks.get(pos));
     }
 
-    /**
-     * Removes a specified task from the task list and alerts the
-     * user interface of the Duke application to display the
-     * corresponding message.
-     * @param pos Position of the task to be removed in the task list.
-     * @param ui User interface of the Duke application.
-     */
-    public String deleteTask(int pos, Ui ui) {
-        Task t = tasks.remove(pos);
-        return ui.showDelete(t, tasks.size());
+    public String deleteTasks(ArrayList<String> nums, Ui ui) {
+        ArrayList<Task> remove = new ArrayList<>();
+        ArrayList<Task> keep = new ArrayList<>();
+        for (int i = 0; i < tasks.size(); i++) {
+            if (nums.contains(Integer.toString(i))) {
+                remove.add(tasks.get(i));
+            } else {
+                keep.add(tasks.get(i));
+            }
+        }
+        tasks.clear();
+        for (Task t : keep) {
+            tasks.add(t);
+        }
+        return ui.showDelete(remove, tasks.size());
+    }
+
+    public String deleteAll(Ui ui) {
+        ArrayList<Task> remove = new ArrayList<>();
+        for (Task t : tasks) {
+            remove.add(t);
+        }
+        tasks.clear();
+        return ui.showDelete(remove, tasks.size());
     }
 
     /**
