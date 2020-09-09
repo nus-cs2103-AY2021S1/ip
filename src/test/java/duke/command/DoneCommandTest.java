@@ -1,12 +1,14 @@
 package duke.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
 import duke.DukeStub;
-import duke.task.Task;
+import duke.exception.ExceptionMessage;
+import duke.exception.InvalidIndexException;
 
 public class DoneCommandTest {
 
@@ -24,16 +26,25 @@ public class DoneCommandTest {
     }
 
     @Test
-    public void executeTest() {
-        String input = "1";
-        Task taskToBeMarked = dukeStub.getTaskList().getTask(0);
+    public void execute_normalInput_taskDeleted() {
+        String normalInput = "1";
 
         try {
-            command.execute(input, dukeStub);
-
-            assertEquals(true, taskToBeMarked.isTaskDone());
+            command.execute(normalInput, dukeStub);
         } catch (Exception exception) {
             fail(exception.getMessage());
         }
+    }
+
+    @Test
+    public void execute_invalidInput_exceptionThrown() {
+        String invalidInput = "hahaha";
+
+        Exception exception = assertThrows(
+                InvalidIndexException.class, () -> command.execute(invalidInput, dukeStub));
+
+        String errMessage = ExceptionMessage.getInvalidIndexMessage(invalidInput);
+
+        assertEquals(errMessage, exception.getMessage());
     }
 }

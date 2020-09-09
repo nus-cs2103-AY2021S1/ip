@@ -49,8 +49,8 @@ public class UiResponse {
 
         System.out.println("Current tasks:\n");
 
-        for (int i = 0; i < duke.getTaskList().getSize(); i++) {
-            System.out.println(i + 1 + ". " + duke.getTaskList().getTask(i));
+        for (int i = 1; i <= duke.getTaskList().getSize(); i++) {
+            System.out.println(i + ". " + duke.getTaskList().getTask(i));
         }
 
         if (duke.getTaskList().getSize() == 0) {
