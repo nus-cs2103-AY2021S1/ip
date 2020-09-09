@@ -13,9 +13,9 @@ public class ParserTest {
     @Test
     public void parseInput_recognizableList_parserResultList() {
         String[] tests = {
-            "list",
-            " list",
-            "  list   ",
+            "li",
+            " l",
+            "  lis   ",
             "List "};
         assertTrue(Arrays.stream(tests)
                 .map(s -> parser.parseInput(s) == ParserResult.LIST)
@@ -26,9 +26,9 @@ public class ParserTest {
     @Test
     public void parseInput_recognizableBye_parserResultBye() {
         String[] tests = {
-            "bye",
-            " Bye  ",
-            "BYE "};
+            "b",
+            " By  ",
+            "ByE "};
         assertTrue(Arrays.stream(tests)
                 .map(s -> parser.parseInput(s) == ParserResult.BYE)
                 .reduce((x, y) -> x && y)
