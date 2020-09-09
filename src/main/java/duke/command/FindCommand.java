@@ -5,19 +5,20 @@ import java.util.List;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.ui.Ui;
 import duke.task.Task;
+import duke.ui.Ui;
 
 /**
  * Represents a searching {@link duke.task.Task} command.
  * @author Tee Kok Siang
  */
 public class FindCommand extends Command {
-    private final String query;
     /** Minimum number of word count for a FindCommand */
     public static final int MIN_WORD_COUNT = 6;
     /** Position for extracting query for a FindCommand */
     public static final int QUERY_START_POSITION = 5;
+
+    private final String query;
 
     /**
      * Constructs a DoneCommand object.

@@ -1,10 +1,10 @@
 package duke.command;
 
-import duke.Exception.DukeException;
-import duke.Exception.InvalidPriorityLevel;
-import duke.Exception.TaskNotFoundException;
 import duke.Storage;
 import duke.TaskList;
+import duke.exception.DukeException;
+import duke.exception.InvalidPriorityLevel;
+import duke.exception.TaskNotFoundException;
 import duke.task.Task;
 import duke.ui.Ui;
 
@@ -13,12 +13,13 @@ import duke.ui.Ui;
  * @author Tee Kok Siang
  */
 public class PriorityCommand extends Command {
-    private final int taskNumber;
-    private final int priorityLevel;
     /** Number of word count for a PriorityCommand */
     public static final int WORD_COUNT = 3;
     /** Indicates the position of priority level in the command */
     public static final int PRIORITY_LEVEL_POSITION = 2;
+
+    private final int taskNumber;
+    private final int priorityLevel;
 
     /**
      * Constructs a DoneCommand object.

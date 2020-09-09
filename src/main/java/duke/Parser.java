@@ -3,8 +3,23 @@ package duke;
 import java.util.Arrays;
 import java.util.List;
 
-import duke.Exception.*;
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.ByeCommand;
+import duke.command.Command;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.FindCommand;
+import duke.command.ListCommand;
+import duke.command.PriorityCommand;
+import duke.exception.EmptyTaskDescriptionException;
+import duke.exception.InvalidCommandException;
+import duke.exception.InvalidDeadlineCommandException;
+import duke.exception.InvalidEventCommandException;
+import duke.exception.InvalidFindCommandException;
+import duke.exception.InvalidPriorityCommandException;
+import duke.exception.InvalidPriorityLevel;
+import duke.exception.InvalidTaskNumberCommandException;
+import duke.exception.InvalidTaskNumberException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -28,7 +43,8 @@ public class Parser {
         return message.toString();
     }
 
-    private static int extractTaskNumber(String command) throws DukeException {
+    private static int extractTaskNumber(String command) throws InvalidTaskNumberCommandException,
+            InvalidTaskNumberException {
         List<String> commandWords = Arrays.asList(command.split(Command.SPLIT_DELIMITER));
         if (commandWords.size() < Command.TASK_NUMBER_COMMAND_WORD_COUNT) {
             throw new InvalidTaskNumberCommandException();
@@ -42,7 +58,8 @@ public class Parser {
         }
     }
 
-    private static int extractTaskPriorityLevel(String command) throws InvalidPriorityCommandException, InvalidPriorityLevel {
+    private static int extractTaskPriorityLevel(String command) throws InvalidPriorityCommandException,
+            InvalidPriorityLevel {
         List<String> commandWords = Arrays.asList(command.split(Command.SPLIT_DELIMITER));
         if (commandWords.size() != PriorityCommand.WORD_COUNT) {
             throw new InvalidPriorityCommandException();
@@ -56,7 +73,8 @@ public class Parser {
         }
     }
 
-    public static Task parseAddCommand(String command) throws DukeException {
+    public static Task parseAddCommand(String command) throws EmptyTaskDescriptionException,
+            InvalidDeadlineCommandException, InvalidEventCommandException, InvalidCommandException {
         List<String> commandWords = Arrays.asList(command.split(Command.SPLIT_DELIMITER));
         String taskType = commandWords.get(0);
         Task task;
@@ -103,7 +121,10 @@ public class Parser {
         return task;
     }
 
-    public static Command parse(String fullCommand) throws DukeException, InvalidPriorityCommandException {
+    public static Command parse(String fullCommand) throws InvalidPriorityCommandException,
+            InvalidTaskNumberException, InvalidTaskNumberCommandException, InvalidPriorityLevel,
+            InvalidCommandException, InvalidDeadlineCommandException, InvalidEventCommandException,
+            EmptyTaskDescriptionException, InvalidFindCommandException {
         boolean isTodoCommand = fullCommand.startsWith(AddCommand.TODO_COMMAND);
         boolean isDeadlineCommand = fullCommand.startsWith(AddCommand.DEADLINE_COMMAND);
         boolean isEventCommand = fullCommand.startsWith(AddCommand.EVENT_COMMAND);

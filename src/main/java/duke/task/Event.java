@@ -30,7 +30,8 @@ public class Event extends Task {
     @Override
     public String toFileString() {
         String done = super.isDone ? "1" : "0";
-        return "E | " + done + " | " + priority.toString() + " | " + super.description + " | " +  at + " | " + priority.toString();
+        return "E | " + done + " | " + priority.toString() + " | " + super.description
+                + " | " +  at + " | " + priority.toString();
     }
 
     @Override

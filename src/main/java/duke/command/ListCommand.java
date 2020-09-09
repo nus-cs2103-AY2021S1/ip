@@ -4,8 +4,8 @@ import java.util.List;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.ui.Ui;
 import duke.task.Task;
+import duke.ui.Ui;
 
 /**
  * Represents a listing {@link duke.TaskList} command.

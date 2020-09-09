@@ -3,7 +3,6 @@ package duke;
 import java.util.ArrayList;
 import java.util.List;
 
-import duke.Exception.InvalidPriorityLevel;
 import duke.task.Task;
 
 /**

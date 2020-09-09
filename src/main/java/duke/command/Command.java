@@ -1,21 +1,16 @@
 package duke.command;
 
-import duke.Exception.DukeException;
 import duke.Storage;
 import duke.TaskList;
-import duke.ui.Ui;
+import duke.exception.DukeException;
 import duke.task.Task;
+import duke.ui.Ui;
 
 /**
  * Represents a command.
  * @author Tee Kok Siang
  */
 public abstract class Command {
-    /** Indicates if this is an exit command */
-    protected boolean isExit;
-    /** Task for AddCommand */
-    protected Task task;
-
     /** Indicates a ByeCommand for exiting application*/
     public static final String BYE_COMMAND = "bye";
     /** Indicates a AddCommand for adding a Deadline task */
@@ -40,6 +35,11 @@ public abstract class Command {
     public static final int TASK_NUMBER_COMMAND_WORD_COUNT = 2;
     /** Indicates the position of task number in the command */
     public static final int TASK_NUMBER_POSITION = 1;
+
+    /** Indicates if this is an exit command */
+    protected boolean isExit;
+    /** Task for AddCommand */
+    protected Task task;
 
     /**
      * Constructs a Command object.

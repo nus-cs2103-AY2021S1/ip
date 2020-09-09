@@ -1,7 +1,5 @@
 package duke.task;
 
-import duke.Exception.InvalidPriorityLevel;
-
 import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.Map;
@@ -11,12 +9,6 @@ import java.util.Map;
  * @author Tee Kok Siang
  */
 public abstract class Task {
-    /** Description of the task */
-    protected String description;
-    /** Indicates if task is done */
-    protected boolean isDone;
-    /** Priority of the task */
-    protected Priority priority;
     /** Indicates low priority level */
     public static final int PRIORITY_LOW = 1;
     /** Indicates medium priority level */
@@ -25,6 +17,13 @@ public abstract class Task {
     public static final int PRIORITY_HIGH = 3;
     /** Date format */
     public static final String DATE_FORMAT = "([12]\\d{3}-(0[1-9]|1[0-2])-(0[1-9]|[12]\\d|3[01]))";
+
+    /** Description of the task */
+    protected String description;
+    /** Indicates if task is done */
+    protected boolean isDone;
+    /** Priority of the task */
+    protected Priority priority;
 
     /**
      * Constructs a Task object.
@@ -96,16 +95,14 @@ public abstract class Task {
     }
 
     public enum Priority {
-        LOW(1),
-        MEDIUM(2),
-        HIGH(3);
+        LOW(1), MEDIUM(2), HIGH(3);
 
-        private static final Map<Integer,Priority> lookup
-                = new HashMap<Integer,Priority>();
+        private static final Map<Integer,Priority> lookup = new HashMap<Integer,Priority>();
 
         static {
-            for(Priority s : EnumSet.allOf(Priority.class))
+            for (Priority s : EnumSet.allOf(Priority.class)) {
                 lookup.put(s.getCode(), s);
+            }
         }
 
         private int code;
@@ -114,7 +111,9 @@ public abstract class Task {
             this.code = code;
         }
 
-        public int getCode() { return code; }
+        public int getCode() {
+            return code;
+        }
 
         public static Priority get(int code) {
             return lookup.get(code);

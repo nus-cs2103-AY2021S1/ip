@@ -7,9 +7,11 @@ import java.util.Scanner;
  * @author Tee Kok Siang
  */
 public class Ui {
-    private final Scanner scanner = new Scanner(System.in);
-    public static final String GREET_MESSAGE = "Hello! I'm AiBot :)\n\tEnter the command you would like to do\n\tEnter 'bye' to exit";
+    public static final String GREET_MESSAGE = "Hello! I'm AiBot :)\n\tEnter the command "
+            + "you would like to do\n\tEnter 'bye' to exit";
     public static final String EXIT_MESSAGE = "Bye. See you again soon!";
+
+    private final Scanner scanner = new Scanner(System.in);
 
     public void printResponse(String message) {
         assert message != null : "Message should not be null";
