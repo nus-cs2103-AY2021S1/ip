@@ -39,15 +39,15 @@ public class TaskList {
                 Task task = new Task(0, 0, "");
 
                 String ORIGINAL_FORMAT = "MMM dd yyyy";
-                String UPDATED_FORMAT = "yyyy/MM/dd";
+                String UPDATED_FORMAT = "yyyy-MM-dd";
 
                 switch (category) {
                     case "ToDo":
                         task = new ToDo(Task.TASK_TODO, status, commandDetails);
                         break;
 
-                    case "Deadline":
-                        String[] deadlineSplitter = commandDetails.split("by: ");
+                    case "DeadLine":
+                        String[] deadlineSplitter = commandDetails.split("/by: ");
 
                         assert deadlineSplitter.length == 2 : "unable to format the time";
 
@@ -67,7 +67,7 @@ public class TaskList {
                         break;
 
                     case "Event":
-                        String[] eventSplitter = commandDetails.split("at: ");
+                        String[] eventSplitter = commandDetails.split("/at: ");
 
                         assert eventSplitter.length == 2 : "unable to format the time";
 
@@ -83,7 +83,7 @@ public class TaskList {
                         }
                         simpleDateFormat.applyPattern(UPDATED_FORMAT);
                         updatedEventDate = simpleDateFormat.format(time);
-                        task = new Deadline(Task.TASK_EVENT, status, eventSplitter[0], updatedEventDate);
+                        task = new Event(Task.TASK_EVENT, status, eventSplitter[0], updatedEventDate);
                         break;
 
                     default:
