@@ -8,6 +8,8 @@ import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.List;
 
+import alice.task.TaskList;
+
 /**
  * Represents the file used to store the list of tasks.
  */
@@ -37,29 +39,29 @@ public class StorageFile {
     }
 
     /**
-     * Loads the data file located at the filePath.
+     * Loads the data file located at the filePath into a {@code TaskList}.
      * If file does not exists, create the file and directory to file.
      *
-     * @return list of encoded tasks in the data file, or null if the data file does not exist.
+     * @return the {@code TaskList} with the encoded tasks, if any.
      */
-    public List<String> load() {
+    public TaskList load() {
         boolean fileExists = Files.exists(filePath);
         try {
             if (fileExists) {
                 // Read from file.
                 List<String> taskStrings = readFile();
                 setLoadStatus("Save file loaded");
-                return taskStrings;
+                return new TaskList(taskStrings, this::setLoadStatus);
             } else {
                 // Create data file and directory.
                 createFile();
                 setLoadStatus("New file created");
                 assert Files.exists(filePath) : "File is supposed to be successfully created";
-                return null;
+                return new TaskList();
             }
         } catch (AliceStorageException ex) {
             setLoadStatus(ex.getMessage());
-            return null;
+            return new TaskList();
         }
     }
 

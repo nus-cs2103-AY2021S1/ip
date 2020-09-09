@@ -1,8 +1,8 @@
-package alice.command;
+package alice.command.types;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
+import alice.command.InvalidCommandException;
 import alice.command.result.CommandResult;
 import alice.command.result.EventCommandResult;
 import alice.storage.AliceStorageException;
@@ -11,7 +11,7 @@ import alice.storage.StorageFile;
 import alice.task.Event;
 import alice.task.Task;
 import alice.task.TaskList;
-import alice.util.Parser;
+import alice.task.time.TaskDateTime;
 
 /**
  * Represents the command to add a new event in ALICE.
@@ -20,20 +20,20 @@ public class EventCommand implements Command {
     protected static final List<String> NAMES = List.of("event");
     protected static final String DESCRIPTION = "Create an event";
     protected static final String USE_CASE = "[" + String.join(", ", NAMES)
-            + "] <desc> /on <datetime>";
+            + "] <desc> /at <date> <time>";
 
     private final String description;
-    private final LocalDateTime on;
+    private final TaskDateTime at;
 
     /**
      * Creates a new command to create a new {@code Event} with the details provided.
      *
      * @param description the description of the event.
-     * @param on          the datetime of when the event is happening.
+     * @param at          the datetime of when the event is happening.
      */
-    private EventCommand(String description, LocalDateTime on) {
+    private EventCommand(String description, TaskDateTime at) {
         this.description = description;
-        this.on = on;
+        this.at = at;
 
         assert !description.isBlank() : "Cannot create an EventCommand without providing description";
     }
@@ -56,29 +56,29 @@ public class EventCommand implements Command {
      * @throws InvalidCommandException if the user gives an invalid description and/or datetime.
      */
     public static EventCommand createCommand(String argument) throws InvalidCommandException {
-        String[] arguments = argument.split(" /on ", 2);
+        String[] arguments = argument.split(" /at ", 2);
         if (arguments.length == 2 && !arguments[1].isBlank()) {
             String description = arguments[0];
             String dateTime = arguments[1];
 
-            LocalDateTime eventDateTime = Parser.parseDateTime(dateTime);
+            TaskDateTime eventDateTime = TaskDateTime.parseDateTime(dateTime);
             return new EventCommand(description, eventDateTime);
         } else if (argument.isBlank()) {
             // Empty event description
             throw new InvalidCommandException("The event description cannot be left empty.");
-        } else if (argument.endsWith("/on")) {
+        } else if (argument.endsWith("/at")) {
             // Empty start-end time
             throw new InvalidCommandException("You cannot create an event without a date/time.");
         } else {
             // No /on marker
             throw new InvalidCommandException("I can't find the date/time of the event.\n"
-                    + "Did you forget to add '/on'?");
+                    + "Did you forget to add '/at'?");
         }
     }
 
     @Override
     public CommandResult process(TaskList tasks, StorageFile storageFile) {
-        Task event = new Event(description, on);
+        Task event = new Event(description, at);
         tasks.addTask(event);
         String reply = "Roger. I've added the event to your list:\n    " + event
                 + "\nNow you have " + tasks.getNumberOfTasks() + " tasks in your list";

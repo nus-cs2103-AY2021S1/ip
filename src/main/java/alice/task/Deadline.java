@@ -1,22 +1,13 @@
 package alice.task;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
 import alice.AliceException;
+import alice.task.time.TaskDateTime;
 
 /**
  * Represents a task with a deadline.
  */
 public class Deadline extends Task {
-    private static final DateTimeFormatter D_DATETIME_FORMAT = DateTimeFormatter
-            .ofPattern("EEEE, MMM dd uuuu, ha");
-    private static final DateTimeFormatter D_DATE_FORMAT = DateTimeFormatter
-            .ofPattern("EEEE, MMM dd uuuu");
-
-    private final LocalDateTime by;
-    private final boolean hasTime;
+    private final TaskDateTime by;
 
     /**
      * Creates an undone task with the specified deadline.
@@ -24,7 +15,7 @@ public class Deadline extends Task {
      * @param description describes the task to be done before the deadline.
      * @param by          the latest datetime by which the task should be completed.
      */
-    public Deadline(String description, LocalDateTime by) {
+    public Deadline(String description, TaskDateTime by) {
         this(false, description, by);
     }
 
@@ -35,28 +26,11 @@ public class Deadline extends Task {
      * @param description describes the task to be done before the deadline.
      * @param by          the latest datetime by which the task should be completed.
      */
-    public Deadline(boolean isDone, String description, LocalDateTime by) {
+    public Deadline(boolean isDone, String description, TaskDateTime by) {
         super(isDone, description);
         this.by = by;
-        this.hasTime = !by.toLocalTime().equals(LocalTime.MIDNIGHT);
 
         assert !description.isBlank() : "Cannot create a Deadline with no description";
-    }
-
-    /**
-     * Gets the string representation of the deadline by which the task should be completed by.
-     * If time is not specified by user, the time is omitted from the string representation.
-     *
-     * @return the appropriate string representation of the deadline datetime
-     */
-    public String getDeadlineDateTime() {
-        if (hasTime) {
-            assert !by.toLocalTime().equals(LocalTime.MIDNIGHT) : "Supposed to have time input";
-            return by.format(D_DATETIME_FORMAT);
-        } else {
-            assert by.toLocalTime().equals(LocalTime.MIDNIGHT) : "Not supposed to have time input";
-            return by.format(D_DATE_FORMAT);
-        }
     }
 
     /**
@@ -70,7 +44,7 @@ public class Deadline extends Task {
         String[] inputs = saved.split(" \\| ");
         boolean isDone = inputs[0].equals("1");
         if (inputs.length == 3) {
-            return new Deadline(isDone, inputs[1], LocalDateTime.parse(inputs[2]));
+            return new Deadline(isDone, inputs[1], TaskDateTime.decode(inputs[2]));
         } else {
             throw new AliceException("Corrupted deadline data");
         }
@@ -78,11 +52,11 @@ public class Deadline extends Task {
 
     @Override
     public String encode() {
-        return "D | " + super.encode() + " | " + by.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        return "D | " + super.encode() + " | " + by.encode();
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + getDeadlineDateTime() + ")";
+        return "[D]" + super.toString() + " (by: " + by + ")";
     }
 }

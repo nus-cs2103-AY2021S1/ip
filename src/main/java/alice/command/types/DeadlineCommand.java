@@ -1,8 +1,8 @@
-package alice.command;
+package alice.command.types;
 
-import java.time.LocalDateTime;
 import java.util.List;
 
+import alice.command.InvalidCommandException;
 import alice.command.result.CommandResult;
 import alice.command.result.DeadlineCommandResult;
 import alice.storage.AliceStorageException;
@@ -11,7 +11,7 @@ import alice.storage.StorageFile;
 import alice.task.Deadline;
 import alice.task.Task;
 import alice.task.TaskList;
-import alice.util.Parser;
+import alice.task.time.TaskDateTime;
 
 /**
  * Represents the command to add a new deadline in ALICE.
@@ -20,10 +20,10 @@ public class DeadlineCommand implements Command {
     protected static final List<String> NAMES = List.of("deadline");
     protected static final String DESCRIPTION = "Create a task with deadline";
     protected static final String USE_CASE = "[" + String.join(", ", NAMES)
-            + "] <desc> /by <datetime>";
+            + "] <desc> /by <date> <time>";
 
     private final String description;
-    private final LocalDateTime by;
+    private final TaskDateTime by;
 
     /**
      * Creates a new command to create a new {@code Deadline} with the details provided.
@@ -31,7 +31,7 @@ public class DeadlineCommand implements Command {
      * @param description the description of the deadline.
      * @param by          the due datetime of the deadline.
      */
-    private DeadlineCommand(String description, LocalDateTime by) {
+    private DeadlineCommand(String description, TaskDateTime by) {
         this.description = description;
         this.by = by;
 
@@ -60,7 +60,7 @@ public class DeadlineCommand implements Command {
         if (arguments.length == 2 && !arguments[1].isBlank()) {
             String description = arguments[0];
             String dateTime = arguments[1];
-            LocalDateTime deadlineDt = Parser.parseDateTime(dateTime);
+            TaskDateTime deadlineDt = TaskDateTime.parseDateTime(dateTime);
             return new DeadlineCommand(description, deadlineDt);
         } else if (argument.isBlank()) {
             // Empty description

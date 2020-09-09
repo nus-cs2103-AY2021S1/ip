@@ -1,22 +1,13 @@
 package alice.task;
 
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
 import alice.AliceException;
+import alice.task.time.TaskDateTime;
 
 /**
  * Represents an event.
  */
 public class Event extends Task {
-    private static final DateTimeFormatter E_DATE_FORMAT = DateTimeFormatter
-            .ofPattern("EEEE, MMM dd uuuu");
-    private static final DateTimeFormatter E_DATETIME_FORMAT = DateTimeFormatter
-            .ofPattern("EEEE, MMM dd uuuu, ha");
-
-    private final LocalDateTime on;
-    private final boolean hasTime;
+    private final TaskDateTime on;
 
     /**
      * Creates a undone event happening at the specified time.
@@ -24,7 +15,7 @@ public class Event extends Task {
      * @param description describes the event.
      * @param on          the date and time of the event.
      */
-    public Event(String description, LocalDateTime on) {
+    public Event(String description, TaskDateTime on) {
         this(false, description, on);
     }
 
@@ -35,28 +26,11 @@ public class Event extends Task {
      * @param description describes the event.
      * @param on          the date and time of the event.
      */
-    public Event(boolean isDone, String description, LocalDateTime on) {
+    public Event(boolean isDone, String description, TaskDateTime on) {
         super(isDone, description);
         this.on = on;
-        this.hasTime = !on.toLocalTime().equals(LocalTime.MIDNIGHT);
 
         assert !description.isBlank() : "Cannot create an Event with no description";
-    }
-
-    /**
-     * Gets the string representation of the event date and time.
-     * If time is not specified by user, the time is omitted from the string representation.
-     *
-     * @return the appropriate string representation of the event datetime.
-     */
-    public String getEventDateTime() {
-        if (hasTime) {
-            assert !on.toLocalTime().equals(LocalTime.MIDNIGHT) : "Supposed to have time input";
-            return on.format(E_DATETIME_FORMAT);
-        } else {
-            assert on.toLocalTime().equals(LocalTime.MIDNIGHT) : "Not supposed to have time input";
-            return on.format(E_DATE_FORMAT);
-        }
     }
 
     /**
@@ -70,7 +44,7 @@ public class Event extends Task {
         String[] inputs = saved.split(" \\| ");
         boolean isDone = inputs[0].equals("1");
         if (inputs.length == 3) {
-            return new Event(isDone, inputs[1], LocalDateTime.parse(inputs[2]));
+            return new Event(isDone, inputs[1], TaskDateTime.decode(inputs[2]));
         } else {
             throw new AliceException("Corrupted event data");
         }
@@ -78,11 +52,11 @@ public class Event extends Task {
 
     @Override
     public String encode() {
-        return "E | " + super.encode() + " | " + on.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME);
+        return "E | " + super.encode() + " | " + on.encode();
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (on: " + getEventDateTime() + ")";
+        return "[E]" + super.toString() + " (on: " + on + ")";
     }
 }

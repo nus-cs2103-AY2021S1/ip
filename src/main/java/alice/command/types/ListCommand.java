@@ -1,4 +1,4 @@
-package alice.command;
+package alice.command.types;
 
 import java.util.List;
 
