@@ -3,9 +3,9 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
+import duke.DateTime;
 import duke.DukeException;
 
 /**
@@ -51,24 +51,8 @@ public class Event extends Task {
             throw new DukeException("Event time cannot be blank!");
         }
 
-        String[] datetime = startDateTime.split(" ");
-
-        LocalDate startDate;
-        LocalTime startTime = null;
-
-        try {
-            startDate = LocalDate.parse(datetime[0]);
-
-            if (datetime.length == 2) {
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH[:]mm");
-                startTime = LocalTime.parse(datetime[1], dtf);
-            }
-
-        } catch (DateTimeParseException e) {
-            throw new DukeException("DateTime format is invalid.");
-        }
-
-        return new Event(eventName, argument, startDate, startTime);
+        DateTime dateTime = DateTime.parseFromString(startDateTime);
+        return new Event(eventName, argument, dateTime.getDate(), dateTime.getTime());
     }
 
     private String printDateTime() {

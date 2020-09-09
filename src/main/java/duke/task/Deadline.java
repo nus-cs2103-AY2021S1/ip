@@ -3,9 +3,9 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.time.format.FormatStyle;
 
+import duke.DateTime;
 import duke.DukeException;
 
 /**
@@ -58,25 +58,8 @@ public class Deadline extends Task {
             throw new DukeException("Deadline time cannot be blank!");
         }
 
-        String[] datetime = deadlineDateTime.split(" ");
-
-        LocalDate deadlineDate;
-        LocalTime deadlineTime = null;
-
-        try {
-            deadlineDate = LocalDate.parse(datetime[0]);
-
-            if (datetime.length == 2) {
-                DateTimeFormatter dtf = DateTimeFormatter.ofPattern("HH[:]mm");
-                deadlineTime = LocalTime.parse(datetime[1], dtf);
-            }
-
-        } catch (DateTimeParseException e) {
-            throw new DukeException("DateTime format is invalid.");
-        }
-
-        return new Deadline(deadlineName, argument, deadlineDate, deadlineTime);
-
+        DateTime dateTime = DateTime.parseFromString(deadlineDateTime);
+        return new Deadline(deadlineName, argument, dateTime.getDate(), dateTime.getTime());
     }
 
     private String printDateTime() {
