@@ -30,66 +30,27 @@ public class Parser {
         System.setOut(printStream);
 
         if (!input.equals("bye")) {
-
             try {
-
                 if (input.equals("list")) {
-                    this.converter.convertAction(Commands.LIST, 0, "");
-
+                    this.parseList();
                 } else if (input.equals("help")) {
-                    this.converter.convertAction(Commands.HELP, 0, "");
-
+                    this.parseHelp();
                 } else if (input.equals("delete all")) {
-                    this.converter.convertAction(Commands.DELETE_ALL, 0, "");
-
+                    this.parseDeleteAll();
                 } else if (input.startsWith("find")) {
-                    String toFind = input.substring("find".length()).trim();
-                    this.converter.convertAction(Commands.FIND, 0, toFind);
-
-                } else if (isNumberedCommand(input)) {
-                    String[] words = input.split(" ");
-
-                    if (words[0].equals("done")) {
-                        int index = Integer.parseInt(words[1]) - 1;
-                        this.converter.convertAction(Commands.DONE, index, "");
-
-                    } else if (words[0].equals("delete")) {
-                        int index = Integer.parseInt(words[1]) - 1;
-                        this.converter.convertAction(Commands.DELETE, index, "");
-
-                    } else {
-                        throw new InvalidCommandException(
-                                "Oohh I'm Mr. Meeseeks, your command is invalid. Try again?");
-                    }
-
+                    this.parseFind(input);
+                } else if (isValidNumberCommand(input)) {
+                    this.parseNumberCommand(input);
                 } else {
-
-                    if (input.startsWith("deadline") && input.contains("/by")) {
-                        this.converter.passTask(this.converter.convertTask(Commands.DEADLINE, input));
-
-                    } else if (input.startsWith("event") && input.contains("/at")) {
-                        this.converter.passTask(this.converter.convertTask(Commands.EVENT, input));
-
-                    } else if (input.startsWith("todo")) {
-                        this.converter.passTask(this.converter.convertTask(Commands.TODO, input));
-
-                    } else {
-                        throw new InvalidCommandException("Oohh, I have to fulfill my purpose so I can go away! "
-                                + "Please ensure your command format is correct and try again.");
-                    }
-
+                    this.parseTaskCommand(input);
                 }
-
                 this.converter.storeTasks();
-
             } catch (InvalidCommandException e) {
                 System.out.println(e.getMessage());
             }
-
             System.out.flush();
             System.setOut(old);
             return output.toString();
-
         } else {
             return null;
         }
@@ -105,19 +66,67 @@ public class Parser {
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
-
             System.out.println(handleUserInput(input));
-
             if (sc.hasNextLine()) {
                 input = sc.nextLine();
                 this.converter.storeTasks();
-
             } else {
                 break;
             }
         }
-
         sc.close();
+    }
+
+    private void parseList() {
+        this.converter.convertAction(Commands.LIST, 0, "");
+    }
+
+    private void parseHelp() {
+        this.converter.convertAction(Commands.HELP, 0, "");
+    }
+
+    private void parseDeleteAll() {
+        this.converter.convertAction(Commands.DELETE_ALL, 0, "");
+    }
+
+    private void parseFind(String input) {
+        String toFind = input.substring("find".length()).trim();
+        this.converter.convertAction(Commands.FIND, 0, toFind);
+    }
+
+    private void parseNumberCommand(String input) throws InvalidCommandException {
+
+        String[] words = input.split(" ");
+
+        if (words[0].equals("done")) {
+            int index = Integer.parseInt(words[1]) - 1;
+            this.converter.convertAction(Commands.DONE, index, "");
+
+        } else if (words[0].equals("delete")) {
+            int index = Integer.parseInt(words[1]) - 1;
+            this.converter.convertAction(Commands.DELETE, index, "");
+
+        } else {
+            throw new InvalidCommandException(
+                    "Oohh I'm Mr. Meeseeks, your command is invalid. Try again?");
+        }
+    }
+
+    private void parseTaskCommand(String input) throws InvalidCommandException {
+
+        if (input.startsWith("deadline") && input.contains("/by")) {
+            this.converter.passTask(this.converter.convertTask(Commands.DEADLINE, input));
+
+        } else if (input.startsWith("event") && input.contains("/at")) {
+            this.converter.passTask(this.converter.convertTask(Commands.EVENT, input));
+
+        } else if (input.startsWith("todo")) {
+            this.converter.passTask(this.converter.convertTask(Commands.TODO, input));
+
+        } else {
+            throw new InvalidCommandException("Oohh, I have to fulfill my purpose so I can go away! "
+                    + "Please ensure your command format is correct and try again.");
+        }
     }
 
     /**
@@ -127,13 +136,14 @@ public class Parser {
         this.converter.getSavedTasks();
     }
 
-    private boolean isNumberedCommand(String input) throws InvalidNumberException {
+    private boolean isValidNumberCommand(String input) throws InvalidNumberException {
 
         String[] words = input.split(" ");
-        boolean checkBackNumber = words.length == 2
-                && words[1].chars().allMatch(Character::isDigit);
+        boolean isTwoWords = words.length == 2;
+        boolean hasBackNumber = words[words.length - 1].chars().allMatch(Character::isDigit);
+        boolean isNumberedCommand = isTwoWords && hasBackNumber;
 
-        if (checkBackNumber) {
+        if (isNumberedCommand) {
             int index = Integer.parseInt(words[1]) - 1;
             boolean isValidNumber = index < this.converter.getTotalTasks();
 
