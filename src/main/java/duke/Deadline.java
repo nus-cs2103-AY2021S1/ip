@@ -35,10 +35,11 @@ public class Deadline extends Task {
      */
     public static boolean checkDateFormat(String date) throws DukeException {
         int stringLength = date.length();
-        if (stringLength != 10) {
+        boolean invalidDateString = stringLength != 10;
+        if (invalidDateString) {
             throw new DukeException("That is not a valid date!");
         } else {
-            try {
+            try { //Further checks if the date String is a valid date format
                 LocalDate localDate = LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"));
                 return true;
             } catch (DateTimeParseException e) {
