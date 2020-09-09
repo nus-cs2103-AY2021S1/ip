@@ -61,6 +61,7 @@ public class UserInputParser {
     public static Command parse(String userInput)
             throws MissingFieldException, InvalidInstructionLengthException,
             InvalidInstructionFormatException, UnknownInstructionException {
+        assert userInput != null : "Parser Command input cannot be null";
 
         // Instruction Setup - split by whitespace to check
         String instruction = userInput.trim();
@@ -139,6 +140,10 @@ public class UserInputParser {
      */
     private static DukeTask generateTaskWithDate(String taskType, String[] instructionArray, String indicator)
             throws InvalidInstructionFormatException {
+        assert taskType != null : "Parser generateTaskWithDate taskType cannot be null";
+        assert instructionArray != null : "Parser generateTaskWithDate array cannot be null";
+        assert indicator != null : "Parser generateTaskWithDate indicator cannot be null";
+
 
         // find the index of the indicator
         int index = findIndex(instructionArray, indicator);
@@ -166,6 +171,9 @@ public class UserInputParser {
      */
     private static LocalDateTime parseDateAndTime(String date, String time)
             throws InvalidInstructionFormatException {
+        assert date != null : "Parser parseDateAndTime Date cannot be null";
+        assert time != null : "Parser parseDateAndTime Date cannot be null";
+
         // INPUT DATE FORMAT: DD/MM/YYYY
         // INPUT TIME FORMAT: hh/mm/ss
         int year;
@@ -201,6 +209,9 @@ public class UserInputParser {
      * @return Integer denoting the location of the regex.
      */
     private static int findIndex(String[] array, String regex) {
+        assert array != null : "Parser findIndex array cannot be null";
+        assert regex != null : "Parser findIndex String cannot be null";
+
         for (int i = 0; i < array.length; i++) {
             if (array[i].equals(regex)) {
                 return i;

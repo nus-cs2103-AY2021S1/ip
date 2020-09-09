@@ -13,9 +13,9 @@ import duke.CommonString;
 public abstract class DukeTaskWithTime extends DukeTask {
     private final LocalDateTime datetime;
 
-    public DukeTaskWithTime(String description, LocalDateTime datetime) {
+    public DukeTaskWithTime(String description, LocalDateTime dateTime) {
         super(description);
-        this.datetime = datetime;
+        this.datetime = dateTime;
     }
 
     /**
@@ -24,7 +24,8 @@ public abstract class DukeTaskWithTime extends DukeTask {
      *
      * @return String DateTime.
      */
-    public String getDatetime() {
+    public String getDateTime() {
+        assert datetime != null : "DukeTaskWithTime dateTime cannot be null";
         DateTimeFormatter df = DateTimeFormatter.ofPattern(CommonString.DUKE_DATETIME_FORMAT.toString());
         return datetime.format(df);
     }

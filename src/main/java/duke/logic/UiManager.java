@@ -84,6 +84,7 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
      * Method implemented from CommandInteractionUi interface.
      */
     public void printAddTask(DukeTask task, int size) {
+        assert task != null : "printAddTask dukeTask cannot be null";
         System.out.println(getAddTask(task, size));
     }
 
@@ -96,6 +97,7 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
      * @return String
      */
     public String getAddTask(DukeTask task, int size) {
+        assert task != null : "getAddTask dukeTask cannot be null";
         return "Task Added:\n\n" + task.toString() + "\n\n" + getTaskStatus(size);
     }
 
@@ -104,6 +106,7 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
      * Method implemented from CommandInteractionUi interface.
      */
     public void printDeleteTask(DukeTask task, int size) {
+        assert task != null : "printDeleteTask dukeTask cannot be null";
         System.out.println(getDeleteTask(task, size));
     }
 
@@ -116,6 +119,7 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
      * @return String
      */
     public String getDeleteTask(DukeTask task, int size) {
+        assert task != null : "getDeleteTask dukeTask cannot be null";
         return "Fine...I'll get rid of that task for you...\n"
                 + "...but it's tiring so I'm not gonna bring it back...ever.\n\n"
                 + task.toString() + "\n\n"
@@ -127,6 +131,7 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
      * Method implemented from CommandInteractionUi interface.
      */
     public void printNumberedTask(DukeTask task, int num) {
+        assert task != null : "printNumberedTask dukeTask cannot be null";
         System.out.println(getNumberedTask(task, num));
     }
 
@@ -139,6 +144,8 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
      * @return String
      */
     public String getNumberedTask(DukeTask task, int num) {
+        assert task != null : "getNumberedTask dukeTask cannot be null";
+
         return (num + 1) + ". " + task;
     }
 
@@ -147,6 +154,8 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
      * Method implemented from CommandInteractionUi interface.
      */
     public void printMarkAsDone(DukeTask task, int size) {
+        assert task != null : "printMarkAsDone dukeTask cannot be null";
+
         System.out.println(getMarkAsDone(task, size));
     }
 
@@ -159,6 +168,8 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
      * @return String
      */
     public String getMarkAsDone(DukeTask task, int size) {
+        assert task != null : "getMarkAsDone dukeTask cannot be null";
+
         return "Oh...you're done? I'll mark it down for you...\n\n"
                 + task.toString() + "\n\n"
                 + getTaskStatus(size);
@@ -169,6 +180,8 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
      * Method implemented from CommandInteractionUi interface.
      */
     public void printFindCannotBeFound(String keyword) {
+        assert keyword != null : "printFindCannotBeFound keyword cannot be null";
+
         System.out.println(getFindCannotBeFound(keyword));
     }
 
@@ -180,6 +193,8 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
      * @return String
      */
     public String getFindCannotBeFound(String keyword) {
+        assert keyword != null : "getFindCannotBeFound keyword cannot be null";
+
         return "...ngghh...I don't know any..." + "\"" + keyword + "\"...zzz...";
     }
 
@@ -188,6 +203,8 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
      * Method implemented from CommandInteractionUi interface.
      */
     public void printFindFilteredList(String keyword, boolean isPlural) {
+        assert keyword != null : "printFindFilteredList keyword cannot be null";
+
         System.out.println(getFindFilteredList(keyword, isPlural));
     }
 
@@ -199,6 +216,8 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
      * @return String
      */
     public String getFindFilteredList(String keyword, boolean isPlural) {
+        assert keyword != null : "getFindFilteredList keyword cannot be null";
+
         return "...*yawns*...I found " + (isPlural ? "some tasks" : "a task")
                 + " with the keyword: " + "\"" + keyword + "\"\n";
     }

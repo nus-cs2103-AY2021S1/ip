@@ -41,7 +41,8 @@ public class DeleteCommand extends Command {
     public void execute(TaskList taskList, CommandInteractionUi uiManager,
                         StorageManager storageManager, boolean isGuiTask)
             throws InvalidTaskIndexException {
-
+        assert uiManager != null : "DeleteCommand must have a uiManager";
+        assert taskList != null : "DeleteCommand must have a taskList";
         if (index < 0 || index >= taskList.getSize()) {
             throw new InvalidTaskIndexException();
         } else {

@@ -34,6 +34,7 @@ public abstract class Command {
      * @return String response
      */
     public String getResponse() {
+        assert this.response != null : "Command - response cannot be null";
         return this.response;
     }
 

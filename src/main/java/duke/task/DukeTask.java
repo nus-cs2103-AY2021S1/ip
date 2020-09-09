@@ -35,6 +35,7 @@ public abstract class DukeTask {
      * @return String description.
      */
     public String getDescription() {
+        assert description != null : "DukeTask description cannot be null";
         return this.description;
     }
 
