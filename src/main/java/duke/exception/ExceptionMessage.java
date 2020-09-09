@@ -16,6 +16,9 @@ public class ExceptionMessage {
     public static final String UNKNOWN_COMMAND_MESSAGE =
             "\nOOPS!!! I'm sorry, but I don't know what that means :-(\n";
 
+    public static final String EMPTY_KEYWORD_MESSAGE =
+            "\nOOPS!!! The keyword for find command cannot be empty.\n";
+
     public static String getInvalidIndexMessage(String wrongIndex) {
         return "\nSorry " + wrongIndex + " is not a valid index\n";
     }
