@@ -1,6 +1,3 @@
-// deals with interactions with the user
-// probably about printing stuff to user ie "talking"
-
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -8,12 +5,11 @@ import java.util.Scanner;
  * This is class to interact with the user.
  */
 public class Ui {
-    private static String HOME = System.getProperty("user.home");
-    private java.nio.file.Path PATH = java.nio.file.Paths.get(HOME, "ip", "data.txt");
-    private String line = "______________________";
+    private static final String HOME = System.getProperty("user.home");
+    private static final java.nio.file.Path PATH = java.nio.file.Paths.get(HOME, "ip", "data.txt");
     private String enter = "\n";
 
-    private Parser p = new Parser();
+    private Parser parser = new Parser();
 
     /**
      * Bids user farewell.
@@ -41,7 +37,7 @@ public class Ui {
 
             while (myReader.hasNextLine()) {
                 String data = myReader.nextLine();
-                result += counter + ". " + p.stringToTask(data) + enter;
+                result += counter + ". " + parser.stringToTask(data) + enter;
                 counter++;
             }
         } catch (IOException e) {
@@ -109,25 +105,31 @@ public class Ui {
         return result;
     }
 
+    /**
+     * Informs user of all results found with specified keyword.
+     * @param keyword Keyword user is interested in.
+     * @return String of all tasks with user keyword.
+     * @throws IOException If Scanner is unable to find file.
+     */
     public String find(String keyword) throws IOException {
         String result = "";
 
-            int counter = 1;
-            Scanner reader = new Scanner(PATH);
+        int counter = 1;
+        Scanner reader = new Scanner(PATH);
 
-            int total = reader.nextInt(); // to skip the first integer
-            String line = reader.nextLine();
+        int total = reader.nextInt(); // to skip the first integer
+        String line = reader.nextLine();
 
-            while (reader.hasNextLine()) {
-                if (line.contains(keyword)) {
-                    result += counter + ". " + p.stringToTask(line) + enter;
-                    counter++;
-                }
-                line = reader.nextLine();
+        while (reader.hasNextLine()) {
+            if (line.contains(keyword)) {
+                result += counter + ". " + parser.stringToTask(line) + enter;
+                counter++;
             }
+            line = reader.nextLine();
+        }
 
         if (line.contains(keyword)) {
-            result += counter + ". " + p.stringToTask(line) + enter;
+            result += counter + ". " + parser.stringToTask(line) + enter;
         }
 
         return result;
