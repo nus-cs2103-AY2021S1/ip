@@ -76,5 +76,12 @@ public class TaskList {
         }
         return builder.toString();
     }
+
+    /**
+     * Clears the entire list of tasks.
+     */
+    public void newList() {
+        this.tasks = new ArrayList<>();
+    }
 }
 

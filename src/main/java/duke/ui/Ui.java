@@ -17,6 +17,7 @@ public class Ui {
     private static final String MESSAGE_REMOVE_TASK = "Alright~ I've removed this task:";
     private static final String MESSAGE_LIST = "Here are your tasks~";
     private static final String MESSAGE_FIND = "Here are the matching tasks in your list~";
+    private static final String MESSAGE_ARCHIVE = "Understood~ Your tasks have been archived~";
     private Scanner sc;
     public Ui() {
         sc = new Scanner(System.in);
@@ -102,5 +103,9 @@ public class Ui {
      */
     public String readCommand() {
         return sc.nextLine().toLowerCase();
+    }
+    
+    public String archiveText() {
+        return MESSAGE_ARCHIVE;
     }
 }

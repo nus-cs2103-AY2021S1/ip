@@ -111,4 +111,40 @@ public class Storage {
         }
 
     }
+
+    /**
+     * Archives all the tasks into a specified file.
+     * @param tasks the TaskList whose tasks should be stored.
+     * @param archivePath the file name where the tasks should be archived.
+     */
+    public void archive(TaskList tasks, String archivePath) {
+        try {
+            String seperator = " | ";
+            FileWriter fileWriter = new FileWriter(archivePath);
+
+            for (int i = 0; i < tasks.getSize(); i++) {
+                Task temp = tasks.get(i);
+                String doneStatus = "0";
+                if (temp.checkDone()) {
+                    doneStatus = "1";
+                }
+
+                if (temp instanceof Todo) {
+                    fileWriter.write("T" + seperator + doneStatus + seperator
+                            + temp.getTaskName() + "\n");
+                } else if (temp instanceof Deadline) {
+                    Deadline tempDeadline = (Deadline) temp;
+                    fileWriter.write("D" + seperator + doneStatus + seperator
+                            + tempDeadline.getTaskName() + seperator + tempDeadline.getDeadlineDate());
+                } else if (temp instanceof Event) {
+                    Event tempEvent = (Event) temp;
+                    fileWriter.write("E" + seperator + doneStatus + seperator
+                            + tempEvent.getTaskName() + seperator + tempEvent.getEventDate());
+                }
+            }
+            fileWriter.close();
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
 }

@@ -1,5 +1,6 @@
 package duke.parser;
 
+import duke.command.ArchiveCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
@@ -46,6 +47,8 @@ public class Parser {
             enumCommand = EnumCommand.DELETE;
         } else if (command.equals("find")) {
             enumCommand = EnumCommand.FIND;
+        } else if (command.equals("archive")) {
+            enumCommand = EnumCommand.ARCHIVE;
         } else {
             throw new DukeException("Sorry, I don't know what that means~");
         }
@@ -74,6 +77,9 @@ public class Parser {
         case FIND:
             next = new FindCommand(nextCommandArr);
             break;
+        case ARCHIVE:
+            next = new ArchiveCommand(nextCommandArr);
+            break;    
         default:
             throw new DukeException("Sorry, I don't know what that means~");
         }
