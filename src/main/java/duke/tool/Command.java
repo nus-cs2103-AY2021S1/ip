@@ -52,9 +52,13 @@ public class Command {
     public String list(TaskList taskList) {
         StringBuilder msgForList = new StringBuilder(Ui.SEPARATION_LINE);
         msgForList.append("    Here are the tasks in your list: \n");
-        for (int i = 0; i < taskList.getSize(); i++) {
-            msgForList.append("    ").append(i + 1).append(". ").append(taskList.get(i).toString()).append("\n");
-        }
+        taskList.getList().stream().forEach((task) -> msgForList.append("    ")
+                    .append(taskList.getList().indexOf(task) + 1).append(". ")
+                    .append(task.toString()).append("\n"));
+//        for (int i = 0; i < taskList.getSize(); i++) {
+//            msgForList.append("    ").append(i + 1).append(". ").append(taskList.get(i).toString()).append("\n");
+//        }
+        
         msgForList.append(Ui.SEPARATION_LINE);
         return msgForList.toString();
     }
