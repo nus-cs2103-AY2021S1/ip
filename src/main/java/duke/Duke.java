@@ -257,6 +257,8 @@ public class Duke {
         try {
             Thread.sleep(1000);
         } catch (Exception ignored) {
+            // Failed thread sleep is ignored,
+            // exit Duke normally.
         }
 
         Platform.exit();
