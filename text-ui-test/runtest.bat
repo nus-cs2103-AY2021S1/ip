@@ -10,7 +10,7 @@ REM delete output from previous run
 del ACTUAL.TXT
 
 REM compile the code into the bin folder
-find /s /B ..\src\main\java -name "*.java" > sources.txt
+dir /s /B ..\src\main\*.java > sources.txt
 javac  -cp ..\src -Xlint:none -d ..\bin @sources.txt
 
 IF ERRORLEVEL 1 (
