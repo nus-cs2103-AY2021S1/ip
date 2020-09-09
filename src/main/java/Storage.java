@@ -7,6 +7,9 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+/**
+ * Encapsulates a storage class, handles the writing or reading of the task list to or from a text file.
+ */
 public class Storage {
 
     private final String filePath;
@@ -23,16 +26,16 @@ public class Storage {
      */
     ArrayList<Task> load() throws DukeException {
         ArrayList<Task> taskList = new ArrayList<>();
-
+        File file = new File(filePath);
         try {
             //noinspection ResultOfMethodCallIgnored
-            new File(filePath).createNewFile();
+            file.createNewFile();
         } catch (IOException e) {
             throw new DukeException("☹ OOPS!!! There was an error creating a save file.");
         }
-
+        assert file.exists() : "File should exist.";
         try {
-            Scanner fileReader = new Scanner(new File(filePath));
+            Scanner fileReader = new Scanner(file);
             while (fileReader.hasNextLine()) {
                 String s = fileReader.nextLine();
                 Task task = getTask(s);
@@ -47,31 +50,28 @@ public class Storage {
     /**
      * Converts a string into a Task.
      *
-     * @param s string description of a Task.
+     * @param taskString string description of a Task.
      * @return a Task described by the input string.
      * @throws DukeException if input string is in the wrong format.
      */
-    private Task getTask(String s) throws DukeException {
+    private Task getTask(String taskString) throws DukeException {
         try {
-            Task currentTask;
-            if (s.startsWith("T")) {
-                currentTask = new Todo(s.substring(8));
+            Task currentTask = null;
+            if (taskString.startsWith("T")) {
+                currentTask = new Todo(taskString.substring(8));
             } else {
-                int index = s.lastIndexOf(" |");
-                String dateTime = s.substring(index + 3);
-                if (s.startsWith("D")) {
-                    currentTask = new Deadline(s.substring(8, index), LocalDate.parse(dateTime));
-                } else if (s.startsWith("E")) {
-                    currentTask = new Event(s.substring(8, index), LocalDate.parse(dateTime));
-                } else {
-                    throw new DukeException();
-                }
+                int index = taskString.lastIndexOf(" |");
+                String dateTime = taskString.substring(index + 3);
+                if (taskString.startsWith("D")) {
+                    currentTask = new Deadline(taskString.substring(8, index), LocalDate.parse(dateTime));
+                } else if (taskString.startsWith("E")) {
+                    currentTask = new Event(taskString.substring(8, index), LocalDate.parse(dateTime));
+                } 
             }
-
-            if (s.charAt(4) == '1') {
+            assert currentTask != null : "Invalid task description.";
+            if (taskString.charAt(4) == '1') {
                 currentTask.markAsDone();
             }
-
             return currentTask;
         } catch (StringIndexOutOfBoundsException | DateTimeParseException e) {
             throw new DukeException();
@@ -86,6 +86,7 @@ public class Storage {
      */
     void updateTasks(TaskList taskList) throws DukeException {
         try {
+            assert new File(filePath).exists() : "File should exist.";
             FileWriter fileWriter = new FileWriter(filePath);
             for (Task t : taskList.getMyTaskList()) {
                 fileWriter.write(t.saveAsString() + "\n");
