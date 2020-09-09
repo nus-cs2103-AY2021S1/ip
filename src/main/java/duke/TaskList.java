@@ -7,13 +7,23 @@ import java.util.ArrayList;
  */
 public class TaskList {
     protected ArrayList<Task> list;
+    protected ArrayList<Task> lastList;
 
     protected TaskList(ArrayList<Task> list) {
         this.list = list;
+        this.lastList = list;
     }
     
     protected ArrayList<Task> getList() {
         return this.list;
+    }
+    
+    protected void updateLastList() {
+        this.lastList = (ArrayList<Task>) this.list.clone();
+    }
+    
+    protected void updateList() {
+        this.list = (ArrayList<Task>) this.lastList.clone();
     }
 
     protected void add(Task task) {
