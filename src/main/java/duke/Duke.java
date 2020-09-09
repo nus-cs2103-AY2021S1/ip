@@ -7,6 +7,7 @@ import duke.command.Command;
 import duke.exception.DukeException;
 import duke.ui.TextUi;
 import duke.ui.Ui;
+
 /**
  * Drives the personal assistant using a UI, along with a parser to make sense of user inputs and executing commands on
  * a list of tasks that are read/written from local storage
@@ -31,7 +32,7 @@ public class Duke extends Thread {
             this.ui.displayLoadError();
             this.tasks = new TaskList();
         }
-        currentRuntime.addShutdownHook(new Thread(() -> {
+        currentRuntime.addShutdownHook(new Thread(() -> { // lambda used for anon-class
             try {
                 Storage.save(tasks);
             } catch (IOException e) {
