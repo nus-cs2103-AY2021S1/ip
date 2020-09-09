@@ -73,16 +73,14 @@ public class Storage {
 
     public TaskList readTasks() {
         try {
-            if (doesFileExistTasks()) {
-                FileInputStream fileInputStream = new FileInputStream(this.filePathTasks);
-                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-                TaskList tasks = (TaskList) objectInputStream.readObject();
-                objectInputStream.close();
-                return tasks;
-            } else {
+            if (!doesFileExistTasks()) {
                 throw new UnsupportedOperationException("File does not exist");
             }
-
+            FileInputStream fileInputStream = new FileInputStream(this.filePathTasks);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            TaskList tasks = (TaskList) objectInputStream.readObject();
+            objectInputStream.close();
+            return tasks;
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Error reading file");
             e.printStackTrace();
@@ -92,16 +90,14 @@ public class Storage {
 
     public NotesList readNotes() {
         try {
-            if (doesFileExistNotes()) {
-                FileInputStream fileInputStream = new FileInputStream(this.filePathNotes);
-                ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
-                NotesList notes = (NotesList) objectInputStream.readObject();
-                objectInputStream.close();
-                return notes;
-            } else {
+            if (!doesFileExistNotes()) {
                 throw new UnsupportedOperationException("File does not exist");
             }
-
+            FileInputStream fileInputStream = new FileInputStream(this.filePathNotes);
+            ObjectInputStream objectInputStream = new ObjectInputStream(fileInputStream);
+            NotesList notes = (NotesList) objectInputStream.readObject();
+            objectInputStream.close();
+            return notes;
         } catch (IOException | ClassNotFoundException e) {
             System.out.println("Error reading file");
             e.printStackTrace();
