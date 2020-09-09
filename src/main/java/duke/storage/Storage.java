@@ -62,15 +62,13 @@ public class Storage {
 
                     switch (taskType) {
                     case "T":
-                        task = new ToDo(Boolean.parseBoolean(taskData[1]), taskData[2], taskData[3]);
+                        task = ToDo.loadFromData(taskData);
                         break;
                     case "D":
-                        task = new Deadline(Boolean.parseBoolean(taskData[1]), taskData[2], taskData[3],
-                            DateTimeParser.parse(taskData[4]));
+                        task = Deadline.loadFromData(taskData);
                         break;
                     case "E":
-                        task = new Event(Boolean.parseBoolean(taskData[1]), taskData[2], taskData[3],
-                            DateTimeParser.parse(taskData[4]));
+                        task = Event.loadFromData(taskData);
                         break;
                     default:
                         throw new DukeException("Invalid argument detected in data file");

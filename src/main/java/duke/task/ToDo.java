@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 /**
  * Class representing a todo.
  */
@@ -13,19 +15,12 @@ public class ToDo extends Task {
         this.taskType = "T";
     }
 
-    /**
-     * Creates a {@code ToDo} from existing data.
-     * @param isDone Todo completion status.
-     * @param description Description of the todo.
-     */
-    public ToDo(boolean isDone, String tags, String description) {
-        this(description);
+    private ToDo(String[] data) throws DukeException {
+        super(data);
+    }
 
-        if (isDone) {
-            this.markDone();
-        }
-
-        this.addTagsFromData(tags);
+    public static ToDo loadFromData(String[] data) throws DukeException {
+        return new ToDo(data);
     }
 
     @Override

@@ -4,12 +4,14 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+import duke.exception.DukeException;
+import duke.parser.DateTimeParser;
 import duke.util.DateTime;
 
 /**
  * Wrapper class for all types of tasks.
  */
-public class Task {
+public abstract class Task {
 
     private static final String TICK_SYMBOL = "\u2713";
     private static final String CROSS_SYMBOL = "\u2718";
@@ -18,7 +20,7 @@ public class Task {
     protected String description;
     protected boolean isDone;
     protected DateTime dateTime;
-    protected List<String> tags;
+    protected List<String> tags = new ArrayList<>();
 
     /**
      * Creates a brand new {@code Task}.
@@ -27,9 +29,19 @@ public class Task {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
-        this.tags = new ArrayList<>();
     }
 
+    protected Task(String[] data) throws DukeException {
+        assert data.length == 4 || data.length == 5 : "Incorrect number of arguments in data.";
+        this.taskType = data[0];
+        this.isDone = Boolean.parseBoolean(data[1]);
+        addTagsFromData(data[2]);
+        this.description = data[3];
+
+        if (data.length == 5) {
+            this.dateTime = DateTimeParser.parse(data[4]);
+        }
+    }
 
     public void markDone() {
         isDone = true;

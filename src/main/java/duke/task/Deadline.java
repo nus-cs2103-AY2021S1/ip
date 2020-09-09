@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.exception.DukeException;
 import duke.util.DateTime;
 
 /**
@@ -18,20 +19,12 @@ public class Deadline extends Task {
         this.taskType = "D";
     }
 
-    /**
-     * Creates a {@code Deadline} from existing data.
-     * @param isDone Deadline completion status.
-     * @param description Description of the deadline.
-     * @param by Time that the deadline is due by.
-     */
-    public Deadline(boolean isDone, String tags, String description, DateTime by) {
-        this(description, by);
+    private Deadline(String[] data) throws DukeException {
+        super(data);
+    }
 
-        if (isDone) {
-            this.markDone();
-        }
-
-        this.addTagsFromData(tags);
+    public static Deadline loadFromData(String[] data) throws DukeException {
+        return new Deadline(data);
     }
 
     @Override

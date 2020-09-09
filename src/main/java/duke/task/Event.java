@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.exception.DukeException;
 import duke.util.DateTime;
 
 /**
@@ -18,20 +19,12 @@ public class Event extends Task {
         this.taskType = "E";
     }
 
-    /**
-     * Create an {@code Event} from existing data.
-     * @param isDone Event completion status.
-     * @param description Description of the event.
-     * @param at Time that the event is happening at.
-     */
-    public Event(boolean isDone, String tags, String description, DateTime at) {
-        this(description, at);
+    private Event(String[] data) throws DukeException {
+        super(data);
+    }
 
-        if (isDone) {
-            this.markDone();
-        }
-
-        this.addTagsFromData(tags);
+    public static Event loadFromData(String[] data) throws DukeException {
+        return new Event(data);
     }
 
     @Override
