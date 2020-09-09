@@ -19,15 +19,15 @@ public class DoneCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         // check if the taskNumber provided is in range
         if (taskNumber > tasks.getNumTasks() || taskNumber <= 0) {
-            throw new DukeException("Please enter a valid task number.");
+            throw new InvalidTaskException();
         } else if (tasks.getTask(taskNumber).isDone) {
-            throw new DukeException("You have already marked this task as done!");
-        } else {
-            tasks.doneTask(taskNumber);
-            storage.overwriteFile(tasks.getTaskList());
-
-            return ui.showMarkedDone(tasks.getTask(taskNumber));
+            throw new MarkedDoneException();
         }
+
+        tasks.doneTask(taskNumber);
+        storage.overwriteFile(tasks.getTaskList());
+
+        return ui.showMarkedDone(tasks.getTask(taskNumber));
     }
 
     public boolean isExit() {

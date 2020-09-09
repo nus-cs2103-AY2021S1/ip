@@ -12,19 +12,18 @@ public class ListCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         if (tasks.getNumTasks() == 0) {
             return ui.showEmptyTaskList();
-        } else {
-            String tasksList = "";
-
-            for (int i = 0; i < tasks.getNumTasks(); i++) {
-                if (i == 0) {
-                    tasksList = " 1. " + tasks.getTask(i + 1);
-                } else {
-                    tasksList = tasksList + "\n " + (i + 1) + ". " + tasks.getTask(i + 1);
-                }
-            }
-
-            return ui.showTaskList(tasksList);
         }
+        String tasksList = "";
+
+        for (int i = 0; i < tasks.getNumTasks(); i++) {
+            if (i == 0) {
+                tasksList = " 1. " + tasks.getTask(i + 1);
+            } else {
+                tasksList = tasksList + "\n " + (i + 1) + ". " + tasks.getTask(i + 1);
+            }
+        }
+
+        return ui.showTaskList(tasksList);
     }
 
     public boolean isExit() {

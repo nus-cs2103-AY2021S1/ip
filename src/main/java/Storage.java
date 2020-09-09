@@ -18,7 +18,7 @@ public class Storage {
     }
 
     /**
-     * Scan through file at specified filePath and make use of the information to initialise tasks arraylist.
+     * Scans through file at specified filePath and make use of the information to initialise tasks arraylist.
      * If directory or file does not exist, it creates the necessary directories and file.
      *
      * @return A list of tasks found in the file at specified filePath.
@@ -41,22 +41,20 @@ public class Storage {
 
                     if (currStringArray[0].equals("T")) {
                         tasks.add(numTasks, new ToDo(currStringArray[2], isDone));
-                        numTasks++;
                     } else if (currStringArray[0].equals("D")) {
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                         LocalDateTime byLocalDate = LocalDateTime.parse(currStringArray[3], formatter);
 
                         tasks.add(numTasks, new Deadline(currStringArray[2],
                                 byLocalDate, isDone));
-                        numTasks++;
-                    } else {
+                    } else if (currStringArray[0].equals("E")) {
                         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
                         LocalDateTime atLocalDate = LocalDateTime.parse(currStringArray[3], formatter);
 
                         tasks.add(numTasks, new Event(currStringArray[2],
                                 atLocalDate, isDone));
-                        numTasks++;
                     }
+                    numTasks++;
                 }
 
             } else {
@@ -69,12 +67,12 @@ public class Storage {
 
             return tasks;
         } catch (IOException e) {
-            throw new DukeException("There was a problem loading the file.");
+            throw new FileLoadFailException();
         }
     }
 
     /**
-     * Add text to the file at specified filepath.
+     * Adds text to the file at specified filepath.
      *
      * @param textToAppend Text to be added to the file.
      * @throws DukeException if unable to append a line to the file.
@@ -85,13 +83,13 @@ public class Storage {
             fw.write(textToAppend);
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("Failed to update tasks to storage. Please try again.");
+            throw new StorageUpdateFailException();
         }
 
     }
 
     /**
-     * Rewrite the entire file based on the tasks arraylist, looping through each task and formatting it.
+     * Rewrites the entire file based on the tasks arraylist, looping through each task and formatting it.
      *
      * @param tasks
      * @throws DukeException
@@ -112,7 +110,7 @@ public class Storage {
             fw.write(tasksList);
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("Failed to update tasks to storage. Please try again.");
+            throw new StorageUpdateFailException();
         }
 
     }

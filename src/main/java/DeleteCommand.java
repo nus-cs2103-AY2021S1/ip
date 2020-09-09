@@ -22,7 +22,7 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         // check if the taskNumber provided is in range
         if (taskNumber > tasks.getNumTasks() || taskNumber <= 0) {
-            throw new DukeException("Please enter a valid task number.");
+            throw new InvalidTaskException();
         } else {
             String output = ui.showDeleted(tasks.getTask(taskNumber), (tasks.getNumTasks() - 1));
 

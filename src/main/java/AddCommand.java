@@ -29,7 +29,7 @@ public class AddCommand extends Command {
                     + ((Deadline) task).by.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "\n");
         } else if (task instanceof Event) {
             storage.appendToFile("E | 0 | " + task.description + " | "
-                    + ((Event) task).at.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "\n");
+                    + ((Event) task).timing.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "\n");
         }
 
         return ui.showAdded(tasks.getTask(tasks.getNumTasks()), tasks.getNumTasks());

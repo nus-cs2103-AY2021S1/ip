@@ -7,13 +7,6 @@ public class Ui {
 
     public static final String LINE = " ____________________________________________________________\n ";
 
-    public static final String LOGO =
-            " ____        _\n"
-                    + " |  _ \\ _   _| | _____\n"
-                    + " | | | | | | | |/ / _ \\\n"
-                    + " | |_| | |_| |   <  __/\n"
-                    + " |____/ \\__,_|_|\\_\\___|\n";
-
     protected Scanner sc;
 
     public Ui() {
@@ -41,7 +34,8 @@ public class Ui {
     }
 
     /**
-     * Show bye message to the user
+     * Shows bye message to the user
+     *
      * @return The string with message.
      */
     public String showBye() {
@@ -51,7 +45,7 @@ public class Ui {
     }
 
     /**
-     * Show the task that is added and the updated number of tasks.
+     * Shows the task that is added and the updated number of tasks.
      *
      * @param task Task to be added.
      * @param numTasks Updated number of tasks.
@@ -64,7 +58,7 @@ public class Ui {
     }
 
     /**
-     * Show the task that is deleted and the updated number of tasks.
+     * Shows the task that is deleted and the updated number of tasks.
      *
      * @param task Task to be deleted.
      * @param numTasks Updated number of tasks.
@@ -77,7 +71,7 @@ public class Ui {
     }
 
     /**
-     * Show the task that is marked as done.
+     * Shows the task that is marked as done.
      *
      * @param task Task that is marked as done.
      */
@@ -88,7 +82,7 @@ public class Ui {
     }
 
     /**
-     * Show the error that has occurred.
+     * Shows the error that has occurred.
      *
      * @param msg Error message.
      */
@@ -99,7 +93,7 @@ public class Ui {
     }
 
     /**
-     * Show a message to indicate there are no tasks currently.
+     * Shows a message to indicate there are no tasks currently.
      */
     public String showEmptyTaskList() {
         String result = "You have no tasks in your list. Add some tasks!";
@@ -108,7 +102,7 @@ public class Ui {
     }
 
     /**
-     * Show all tasks in the task list.
+     * Shows all tasks in the task list.
      *
      * @param tasksList Task list of all tasks.
      */
@@ -119,7 +113,7 @@ public class Ui {
     }
 
     /**
-     * Show message to indicate there are no matching tasks to keyword provided.
+     * Shows message to indicate there are no matching tasks to keyword provided.
      */
     public String showEmptyMatchingList() {
         String result = "Hmm.. there are no tasks with that keyword!";
@@ -128,7 +122,7 @@ public class Ui {
     }
 
     /**
-     * Show matching tasks to the keyword provided.
+     * Shows matching tasks to the keyword provided.
      *
      * @param matchingTaskList String of all matching tasks enumerated.
      */
@@ -138,6 +132,9 @@ public class Ui {
         return result;
     }
 
+    /**
+     * Shows description of all commands.
+     */
     public String showHelp() {
         String result = "Here are the things that I can do for you! \n\n"
                 + "- Add a todo task:\n"
