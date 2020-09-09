@@ -19,10 +19,14 @@ public class Duke {
      * @throws IOException
      */
     public Duke() throws DukeException, IOException {
-        String filePath = System.getProperty("user.dir").endsWith("text-ui-test")
+        boolean isPathDirAtTest = System.getProperty("user.dir").endsWith("text-ui-test");
+        boolean isPathDirAtIp = System.getProperty("user.dir").endsWith("ip");
+
+        String filePath = isPathDirAtTest
                 ? "test.txt"
-                : System.getProperty("user.dir").endsWith("ip")
+                : isPathDirAtIp
                 ? "data/duke.txt"
+                // Creates file in user's home directory
                 : System.getProperty("user.home") + "/duke.txt";
 
         this.storage = new Storage(filePath);
