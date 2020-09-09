@@ -22,8 +22,8 @@ public class Event extends Task {
      * @param description task description.
      * @param period date and time of task.
      */
-    public Event(String description, String period) {
-        super(description);
+    public Event(String description, String taskType, String period) {
+        super(description, taskType);
         tag = EVENT_TAG;
         String[] splitPeriod = period.split(" ", 2);
         date = LocalDate.parse(splitPeriod[0], DateTimeFormatter.ofPattern(DATE_FORMAT));
@@ -37,8 +37,8 @@ public class Event extends Task {
      *
      * @param description task description.
      */
-    public Event(String description) {
-        super(description);
+    public Event(String description, String taskType) {
+        super(description, taskType);
         tag = EVENT_TAG;
     }
 
@@ -49,12 +49,13 @@ public class Event extends Task {
      * @throws DukeException
      */
     public Event(String ... taskInformation) throws DukeException {
-        super(taskInformation[2]);
+        super(taskInformation[2], taskInformation[3]);
         tag = EVENT_TAG;
-        if (taskInformation.length == 3) {
-        } else if (taskInformation.length == 5) {
-            this.date = LocalDate.parse(taskInformation[3]);
-            this.time = LocalTime.parse(taskInformation[4]);
+        if (taskInformation.length == 4) {
+            //Nothing else to handle
+        } else if (taskInformation.length == 6) {
+            this.date = LocalDate.parse(taskInformation[4]);
+            this.time = LocalTime.parse(taskInformation[5]);
         } else {
             throw new TaskLoadingException();
         }

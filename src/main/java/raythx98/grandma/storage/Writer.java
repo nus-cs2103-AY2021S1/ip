@@ -19,12 +19,14 @@ public class Writer {
             writer.write(input);
             writer.close();
         } catch (FileNotFoundException e) {
+            System.out.println("directory not found");
             File file = new File("data");
             boolean fileCreated = file.mkdir();
             if (fileCreated) {
                 overwrite(filepath, input);
             }
         } catch (IOException e) {
+            System.out.println("directory not found");
             e.printStackTrace();
         }
     }
@@ -41,12 +43,14 @@ public class Writer {
             writer.write(input);
             writer.close();
         } catch (FileNotFoundException e) {
+            System.out.println("directory not found");
             File file = new File("data");
             boolean fileCreated = file.mkdir();
             if (fileCreated) {
                 overwrite(filepath, input);
             }
         } catch (IOException e) {
+            System.out.println("directory not found");
             e.printStackTrace();
         }
     }

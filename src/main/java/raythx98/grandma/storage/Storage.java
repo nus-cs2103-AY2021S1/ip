@@ -32,12 +32,16 @@ public class Storage {
         this.filepath = filepath;
         this.tasks = new TaskList();
     }
+    public TaskList newTasks() {
+        return tasks;
+    }
 
     /**
      * Save current information of tasks.
      */
     public void save() throws DukeException {
         if (tasks.getSize() > 0) {
+            System.out.println("directory not found");
             Writer.overwrite(filepath, tasks.getTask(0).encodeTask());
             for (int i = 1; i < tasks.getSize(); i++) {
                 Writer.writeOn(filepath, "\n" + tasks.getTask(i).encodeTask());

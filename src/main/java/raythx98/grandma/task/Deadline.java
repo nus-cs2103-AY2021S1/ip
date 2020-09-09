@@ -22,8 +22,8 @@ public class Deadline extends Task {
      * @param description task description.
      * @param period date and time of task.
      */
-    public Deadline(String description, String period) {
-        super(description);
+    public Deadline(String description, String taskTag, String period) {
+        super(description, taskTag);
         tag = DEADLINE_TAG;
         String[] splitPeriod = period.split(" ", 2);
         date = LocalDate.parse(splitPeriod[0], DateTimeFormatter.ofPattern(DATE_FORMAT));
@@ -37,8 +37,8 @@ public class Deadline extends Task {
      *
      * @param description task description.
      */
-    public Deadline(String description) {
-        super(description);
+    public Deadline(String description, String taskTag) {
+        super(description, taskTag);
         tag = DEADLINE_TAG;
     }
 
@@ -49,12 +49,13 @@ public class Deadline extends Task {
      * @throws DukeException
      */
     public Deadline(String ... taskInformation) throws DukeException {
-        super(taskInformation[2]);
+        super(taskInformation[2], taskInformation[3]);
         tag = DEADLINE_TAG;
-        if (taskInformation.length == 3) {
-        } else if (taskInformation.length == 5) {
-            this.date = LocalDate.parse(taskInformation[3]);
-            this.time = LocalTime.parse(taskInformation[4]);
+        if (taskInformation.length == 4) {
+            //Nothing else to handle
+        } else if (taskInformation.length == 6) {
+            this.date = LocalDate.parse(taskInformation[4]);
+            this.time = LocalTime.parse(taskInformation[5]);
         } else {
             throw new TaskLoadingException();
         }

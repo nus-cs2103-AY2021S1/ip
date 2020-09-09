@@ -32,7 +32,7 @@ public class Grandma {
         } catch (DukeException e) {
             ui.getError(e);
         } catch (FileNotFoundException e) {
-            tasks = new TaskList();
+            tasks = storage.newTasks();
         }
     }
 
@@ -50,9 +50,10 @@ public class Grandma {
             return ui.getTextOnScreen();
         } catch (DukeException e) {
             return ui.getError(e);
-        } catch (Exception e) {
-            return ui.getUncheckedException();
         }
+//        catch (Exception e) {
+//            return ui.getUncheckedException();
+//        }
     }
 
     /**

@@ -19,11 +19,12 @@ public class AddDeadlineCommand extends AddCommand {
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         String[] descriptionSplit = taskDescriptionDeadline.split(" /by ", 2);
+        String[] hashtagSplit = descriptionSplit[0].split(" #", 2);
         Task task;
         if (descriptionSplit.length == 1) {
-            task = new Deadline(descriptionSplit[0]);
+            task = new Deadline(hashtagSplit[0], hashtagSplit[1]);
         } else if (descriptionSplit.length == 2) {
-            task = new Deadline(descriptionSplit[0], descriptionSplit[1]);
+            task = new Deadline(hashtagSplit[0], hashtagSplit[1], descriptionSplit[1]);
         } else {
             throw new WrongDescriptionException();
         }

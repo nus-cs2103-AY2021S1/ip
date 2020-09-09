@@ -1,7 +1,4 @@
-T|1|something
-D|1|that|2020-01-30|20:11
-T|1|something|2020-12-31|20:21
-T|1|even more homework omg
-T|1|something
-T|1|something
-T|1|something more
+E|1|exciting!!|eggcitezz|2020-01-30|19:21
+D|1|homework|zzz
+E|1|DSTA|wow|2020-01-21|20:21
+T|1|something|lol

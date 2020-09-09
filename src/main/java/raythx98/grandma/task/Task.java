@@ -22,19 +22,25 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected String tag = "";
+    protected String taskTag;
 
     /**
      * Constructor for tasks.
      *
      * @param description task description.
      */
-    public Task(String description) {
+    public Task(String description, String taskTag) {
         this.description = description;
         this.isDone = false;
+        this.taskTag = taskTag;
     }
 
     public String getDescription() {
         return description;
+    }
+
+    public String getTaskTag() {
+        return taskTag;
     }
 
     public String getStatusIcon() {
@@ -57,7 +63,7 @@ public abstract class Task {
     }
 
     public String encodeTask() throws DukeException {
-        return tag + "|" + getBinaryStatus() + "|" + getDescription();
+        return tag + "|" + getBinaryStatus() + "|" + getDescription() + "|" + getTaskTag();
     }
 
     /**
@@ -66,6 +72,6 @@ public abstract class Task {
      * @return String representation of the task.
      */
     public String toString() {
-        return "[" + getStatusIcon() + "] " + getDescription();
+        return "[" + getStatusIcon() + "] " + getDescription() + " #" + getTaskTag();
     }
 }
