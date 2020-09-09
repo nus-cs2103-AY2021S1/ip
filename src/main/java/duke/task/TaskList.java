@@ -86,10 +86,16 @@ public class TaskList {
         return this.tasks;
     }
 
-    public TaskList findTasks(String keyword) throws DukeException {
+    /**
+     * A method to find a task from the TaskList using a keyword
+     *
+     * @param keyword
+     * @return
+     */
+    public TaskList findTasks(String keyword) {
         TaskList foundTasks = new TaskList();
         for (Task task : tasks) {
-            if(task.getTaskName().contains(keyword)) {
+            if (task.getTaskName().contains(keyword)) {
                 foundTasks.addTask(task);
             }
         }
