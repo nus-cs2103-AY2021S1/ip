@@ -109,7 +109,6 @@ public class Storage {
      * @return Task object.
      */
     public Task stringToTask(String input) {
-        System.out.println(input);
         Task task = null;
         String[] inputArr = input.split("\\s+\\|\\s+", 4);
         boolean isTaskDone = Integer.parseInt(inputArr[1]) == 1;

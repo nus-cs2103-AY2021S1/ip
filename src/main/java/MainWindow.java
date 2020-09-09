@@ -1,3 +1,4 @@
+import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -6,6 +7,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.util.Duration;
 import sparrow.Sparrow;
 import sparrow.commands.ExitCommand;
 
@@ -50,7 +52,9 @@ public class MainWindow extends AnchorPane {
         );
         if (response.equals(ExitCommand.MESSAGE_EXIT)) {
             Stage stage = (Stage) sendButton.getScene().getWindow();
-            stage.close();
+            PauseTransition delay = new PauseTransition(Duration.seconds(1));
+            delay.setOnFinished((event) -> stage.close());
+            delay.play();
         }
         userInput.clear();
     }
