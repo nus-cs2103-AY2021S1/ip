@@ -16,7 +16,9 @@ public class TaskList {
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
     }
-    public TaskList() { this.taskList = new ArrayList<>(100); }
+    public TaskList() {
+        this.taskList = new ArrayList<>(100);
+    }
 
     public ArrayList<Task> getList() {
         return this.taskList;
