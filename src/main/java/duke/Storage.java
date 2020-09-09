@@ -39,20 +39,18 @@ public class Storage {
                 assert s.matches("(todo\\s)(.+)");
                 next = new ToDo(s.substring(5));
             } else if (s.startsWith("deadline")) {
-                String datePattern = "(\\d\\d\\d\\d-\\d\\d-\\d\\d)\\s";
-                String timePattern = "(\\d\\d)(\\d\\d)";
-                String pattern = "(deadline\\s)(.+)\\s(/by\\s)" + datePattern + timePattern;
+                String dateTimePattern = "(\\d\\d\\d\\d-\\d\\d-\\d\\d\\s\\d\\d\\d\\d)";
+                String pattern = "(deadline\\s)(.+)\\s(/by\\s)" + dateTimePattern;
                 assert s.matches(pattern);
                 String task = s.replaceAll(pattern, "$2");
-                LocalDateTime dateTime = Parser.extractDateTime(s, pattern);
+                LocalDateTime dateTime = Parser.extractDateTime(s.replaceAll(pattern, "$4"));
                 next = new Deadline(task, dateTime);
             } else {
-                String datePattern = "(\\d\\d\\d\\d-\\d\\d-\\d\\d)\\s";
-                String timePattern = "(\\d\\d)(\\d\\d)";
-                String pattern = "(event\\s)(.+)\\s(/at\\s)(.+)" + datePattern + timePattern;
+                String dateTimePattern = "(\\d\\d\\d\\d-\\d\\d-\\d\\d\\s\\d\\d\\d\\d)";
+                String pattern = "(event\\s)(.+)\\s(/at\\s)(.+)" + dateTimePattern;
                 assert s.matches(pattern);
                 String task = s.replaceAll(pattern, "$2");
-                LocalDateTime dateTime = Parser.extractDateTime(s, pattern);
+                LocalDateTime dateTime = Parser.extractDateTime(s.replaceAll(pattern, "$4"));
                 next = new Event(task, dateTime);
             }
             list.add(next);

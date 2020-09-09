@@ -3,10 +3,7 @@ package duke;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
-import duke.exception.DukeException;
-import duke.exception.EmptyListException;
-import duke.exception.OutOfBoundsException;
-import duke.exception.SomethingWentWrongException;
+import duke.exception.*;
 import duke.task.*;
 
 @SuppressWarnings("ALL")
@@ -185,14 +182,19 @@ public class TaskList {
      */
     public Task repeatTask(int index, LocalDateTime end, long recurrence,
                            RecurrenceType recurType) throws DukeException {
-        Task task = list.get(index);
+        Task task = list.get(index - 1);
         String desc = task.getText();
         LocalDateTime start = task.getDateTime();
         TaskType type = task.getType();
-        LocalDateTime date = incrementDate(start, recurrence, recurType);
-        while (date.isBefore(end) || date.isEqual(end)) {
-            add(desc, date, type);
-            date = incrementDate(date, recurrence, recurType);
+        switch (type) {
+        case TODO:
+            throw new CannotRepeatException();
+        default:
+            LocalDateTime date = incrementDate(start, recurrence, recurType);
+            while (date.isBefore(end) || date.isEqual(end)) {
+                add(desc, date, type);
+                date = incrementDate(date, recurrence, recurType);
+            }
         }
         return task;
     }
