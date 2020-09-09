@@ -5,6 +5,9 @@ package duke.task;
  */
 public class Todo extends Task {
 
+    private static final String TYPE = "T";
+    private static final String TYPE_ICON = "[T]";
+
     /**
      * Creates a Todo task that has a description.
      *
@@ -12,7 +15,8 @@ public class Todo extends Task {
      */
     public Todo(String description) {
         super(description);
-        this.storeAs = "T,0," + description;
+        this.storeAs = storeNotDoneTodo(description);
+
     }
 
     /**
@@ -24,11 +28,11 @@ public class Todo extends Task {
     public Todo(String done, String description) {
         super(description);
 
-        if (done.equals("1")) {
+        if (done.equals(DONE)) {
             this.isDone = true;
-            this.storeAs = "T,1," + description;
+            this.storeAs = storeDoneTodo(description);
         }
-        this.storeAs = "T,0," + description;
+        this.storeAs = storeNotDoneTodo(description);
     }
 
     /**
@@ -38,6 +42,15 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        return TYPE_ICON + super.toString();
     }
+
+    private String storeDoneTodo(String description) {
+        return TYPE + SEPARATOR + DONE + SEPARATOR + description;
+    }
+
+    private String storeNotDoneTodo(String description) {
+        return TYPE + SEPARATOR + NOT_DONE + SEPARATOR + description;
+    }
+
 }

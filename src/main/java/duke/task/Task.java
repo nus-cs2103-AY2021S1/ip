@@ -5,6 +5,13 @@ package duke.task;
  * for storing it in the storage.
  */
 public class Task {
+    protected static final String SEPARATOR = ",";
+    protected static final String DONE = "1";
+    protected static final String NOT_DONE = "0";
+    protected static final String TICK_SYMBOL = "\u2713";
+    protected static final String CROSS_SYMBOL = "\u2718";
+    protected static final String DATE_TIME_INPUT_PATTERN = "yyyy-MM-dd HH:mm";
+    protected static final String DATE_TIME_OUTPUT_PATTERN = "MMM d yyyy HH:mm";
     protected String description;
     protected boolean isDone;
     protected String storeAs;
@@ -26,7 +33,7 @@ public class Task {
      */
     public String getStatusIcon() {
         //return tick or X symbols
-        return (isDone ? "\u2713" : "\u2718");
+        return (isDone ? TICK_SYMBOL : CROSS_SYMBOL);
     }
 
     /**
@@ -38,7 +45,9 @@ public class Task {
     }
 
     private void updateDoneForStoreAs() {
-        this.storeAs = this.storeAs.substring(0, 2) + "1" + this.storeAs.substring(3);
+        String taskType = this.storeAs.substring(0, 2);
+        String taskDescription = this.storeAs.substring(3);
+        this.storeAs = taskType + DONE + taskDescription;
     }
 
     /**

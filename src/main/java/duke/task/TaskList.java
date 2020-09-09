@@ -14,6 +14,10 @@ import duke.exception.DukeException;
  * and its states, are stored in this list.
  */
 public class TaskList {
+    private static final String TYPE_TODO = "T";
+    private static final String TYPE_DEADLINE = "D";
+    private static final String TYPE_EVENT = "E";
+    private static final String ERROR_MESSAGE = "error loading from file";
     private List<Task> lst;
 
     /**
@@ -39,24 +43,24 @@ public class TaskList {
             String[] tasks = load.split("\\|");
             for (String task : tasks) {
                 String[] instruction = task.split(",");
-                if (instruction[0].equals("T")) {
+                String firstLetter = instruction[0];
+                if (firstLetter.equals(TYPE_TODO)) {
                     Task tsk = new Todo(instruction[1], instruction[2]);
                     lst.add(tsk);
-                } else if (instruction[0].equals("D")) {
+                } else if (firstLetter.equals(TYPE_DEADLINE)) {
                     Task tsk = new Deadline(instruction[1], instruction[2], instruction[3]);
                     lst.add(tsk);
-
-                } else if (instruction[0].equals("E")) {
+                } else if (firstLetter.equals(TYPE_EVENT)) {
                     Task tsk = new Event(instruction[1], instruction[2], instruction[3]);
                     lst.add(tsk);
                 } else {
-                    throw new DukeException("error loading from file");
+                    throw new DukeException(ERROR_MESSAGE);
                 }
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeException(e.getMessage());
         } catch (Exception e) {
-            throw new DukeException("file could not be parsed");
+            throw new DukeException(ERROR_MESSAGE);
         }
     }
 
@@ -106,14 +110,16 @@ public class TaskList {
             Task targetTask = tasks.get(i);
 
             //append item index
-            taskList += String.valueOf(i + 1);
-            taskList += ".";
+            taskList += addIndex(i + 1);
 
             //append item
             taskList += targetTask.toString();
 
-            //append newLine
-            if (i < tasks.size() - 1) {
+
+            boolean isNotLastTask = i < tasks.size() - 1;
+
+            //append newLine after each task except for last task
+            if (isNotLastTask) {
                 taskList += "\n";
             }
         }
@@ -136,7 +142,7 @@ public class TaskList {
      * @param itemNumber task number in the list(not index number)
      */
     public void markDone(int itemNumber) {
-        Task doneItem = this.lst.get(itemNumber - 1);
+        Task doneItem = get(itemNumber - 1);
         doneItem.markAsDone();
     }
 
@@ -147,9 +153,13 @@ public class TaskList {
      * @return Task that was deleted from the list.
      */
     public Task delete(int itemNumber) {
-        Task item = this.lst.get(itemNumber - 1);
+        Task item = get(itemNumber - 1);
         this.lst.remove(item);
         return item;
+    }
+
+    private String addIndex(int i) {
+        return String.valueOf(i) + ".";
     }
 
 }

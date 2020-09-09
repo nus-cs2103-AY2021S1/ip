@@ -8,6 +8,8 @@ import java.time.format.DateTimeFormatter;
  */
 public class Event extends Task {
 
+    private static final String TYPE = "E";
+    private static final String TYPE_ICON = "[E]";
     protected LocalDateTime at;
 
     /**
@@ -20,8 +22,8 @@ public class Event extends Task {
      */
     public Event(String description, String at) {
         super(description);
-        this.at = LocalDateTime.parse(at, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
-        this.storeAs = "E,0," + description + "," + at;
+        this.at = LocalDateTime.parse(at, DateTimeFormatter.ofPattern(DATE_TIME_INPUT_PATTERN));
+        this.storeAs = storeNotDoneEvent(description, at);
     }
 
     /**
@@ -35,13 +37,13 @@ public class Event extends Task {
      */
     public Event(String done, String description, String at) {
         super(description);
-        this.at = LocalDateTime.parse(at, DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        this.at = LocalDateTime.parse(at, DateTimeFormatter.ofPattern(DATE_TIME_INPUT_PATTERN));
 
-        if (done.equals("1")) {
+        if (done.equals(DONE)) {
             this.isDone = true;
-            this.storeAs = "E,1," + description + "," + at;
+            this.storeAs = storeDoneEvent(description, at);
         }
-        this.storeAs = "E,1," + description + "," + at;
+        this.storeAs = storeNotDoneEvent(description, at);
     }
 
 
@@ -52,7 +54,19 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: "
-                + at.format(DateTimeFormatter.ofPattern("MMM d yyyy HH:mm")) + ")";
+        return TYPE_ICON + super.toString() + showEventTime();
     }
+
+    private String storeDoneEvent(String description, String at) {
+        return TYPE + SEPARATOR + DONE + SEPARATOR + description + SEPARATOR + at;
+    }
+
+    private String storeNotDoneEvent(String description, String at) {
+        return TYPE + SEPARATOR + NOT_DONE + SEPARATOR + description + SEPARATOR + at;
+    }
+
+    private String showEventTime() {
+        return " (at: " + at.format(DateTimeFormatter.ofPattern(DATE_TIME_OUTPUT_PATTERN)) + ")";
+    }
+
 }
