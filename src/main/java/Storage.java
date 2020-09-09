@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 
+import java.util.Arrays;
+
 /**
  * Storage class that handles the reading and writing process from a designated text file,
  * referred to as a save file.
@@ -84,6 +86,7 @@ public class Storage {
      */
     public Task loadTasks(String line) {
         String[] tasks = line.split(" \\| ");
+        System.out.println("print: " + Arrays.toString(tasks));
         String task = tasks[0];
         Boolean isDone = tasks[1].equals("1");
         String desc = tasks[2];
