@@ -81,7 +81,6 @@ public class Storage {
      * @return a new Task.
      */
     public Task loadTasks(String line) {
-        assert(!line.isEmpty());
         String[] tasks = line.split(" \\| ");
         String task = tasks[0];
         Boolean isDone = tasks[1].equals("1");
