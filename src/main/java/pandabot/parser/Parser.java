@@ -56,11 +56,11 @@ public class Parser {
             return new AddCommand(new ToDo(cmd[1]));
         case "deadline":
             verifyArguments(cmd, 2);
-            String[] deadlineDes = obtainDes(cmd[1], "/by ");
+            String[] deadlineDes = obtainDescription(cmd[1], "/by ");
             return new AddCommand(new Deadline(deadlineDes[0], deadlineDes[1]));
         case "event":
             verifyArguments(cmd, 2);
-            String[] eventDes = obtainDes(cmd[1], "/at ");
+            String[] eventDes = obtainDescription(cmd[1], "/at ");
             return new AddCommand(new Event(eventDes[0], eventDes[1]));
         case "find":
             verifyArguments(cmd, 2);
@@ -79,8 +79,8 @@ public class Parser {
         }
     }
 
-    private static String[] obtainDes(String des, String separator) throws PandaBotInsufficientArgumentException {
-        String[] res = des.split(separator, 2);
+    private static String[] obtainDescription(String description, String separator) throws PandaBotInsufficientArgumentException {
+        String[] res = description.split(separator, 2);
         verifyArguments(res, 2);
         return res;
     }

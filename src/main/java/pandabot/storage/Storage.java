@@ -21,7 +21,7 @@ import pandabot.tasks.ToDo;
  * loading and saving tasks into the save file.
  */
 public class Storage {
-    private Path saveFilePath;
+    private final Path saveFilePath;
 
     /**
      * Creates a Storage object, which is used to load and save tasks
@@ -44,7 +44,7 @@ public class Storage {
             }
         }
 
-        Path saveFilePath = Paths.get(home, "PandaBot", fileName);
+        this.saveFilePath = Paths.get(home, "PandaBot", fileName);
         boolean saveFileExists = Files.exists(saveFilePath);
 
         // create a save file where the data will be written to
@@ -56,7 +56,6 @@ public class Storage {
             }
         }
 
-        this.saveFilePath = saveFilePath;
     }
 
     /**
@@ -92,23 +91,23 @@ public class Storage {
     }
 
     private Task convertToTask(String input) throws PandaBotException {
-        String[] tDes = input.split(" \\| ");
+        String[] taskDetails = input.split(" \\| ");
         Task task;
-        switch (tDes[0]) {
+        switch (taskDetails[0]) {
         case "T":
-            task = new ToDo(tDes[2]);
+            task = new ToDo(taskDetails[2]);
             break;
         case "D":
-            task = new Deadline(tDes[2], tDes[3]);
+            task = new Deadline(taskDetails[2], taskDetails[3]);
             break;
         case "E":
-            task = new Event(tDes[2], tDes[3]);
+            task = new Event(taskDetails[2], taskDetails[3]);
             break;
         default:
             throw new PandaBotLoadingTasksErrorException(input);
         }
 
-        String isDone = tDes[1];
+        String isDone = taskDetails[1];
         if (isDone.equals("1")) {
             task.markTaskDone();
         }

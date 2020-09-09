@@ -121,7 +121,7 @@ public class Ui {
      * @param numOfTasks the number of tasks in the list
      * @return a String representation of the add task message
      */
-    public String displayOnAddTask(Task task, int numOfTasks) {
+    public String displayOnAdd(Task task, int numOfTasks) {
         return "Noted! I've added this task:\n" + task.toString() + "\n"
                 + "Now you have " + numOfTasks + " task(s) in this list.";
     }

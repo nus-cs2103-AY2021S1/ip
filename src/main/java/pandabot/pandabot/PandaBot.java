@@ -16,7 +16,6 @@ public class PandaBot {
     private Storage storage;
 
     private boolean isExit;
-    
 
     /**
      * Creates a new PandaBot object.

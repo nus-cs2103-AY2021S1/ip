@@ -36,6 +36,6 @@ public class AddCommand extends Command {
 
         // save
         storage.write(tasks.getTaskList());
-        return ui.displayOnAddTask(task, tasks.size());
+        return ui.displayOnAdd(task, tasks.size());
     }
 }
