@@ -28,31 +28,4 @@ public class Duke {
             return Ui.getErrorMessage(e.getMessage());
         }
     }
-
-//    /**
-//     * Executes the Duke program.
-//     * @param args Args.
-//     */
-//    public static void main(String[] args) {
-//        TaskList taskList = new TaskList();
-//        Storage.loadFromFile(taskList);
-//        Ui ui = new Ui();
-//        System.out.print(ui.greet());
-//        Parser.setTaskList(taskList);
-//        boolean isClosed = false;
-//        while (!isClosed) {
-//            try {
-//                String command = ui.readInput();
-//                if (Parser.stopProgram(command)) {
-//                    isClosed = true;
-//                    Storage.writeToFile(taskList);
-//                    System.out.print(ui.exit());
-//                } else {
-//                    System.out.print(Parser.parseCommand(command));
-//                }
-//            } catch (DukeException e) {
-//                System.out.println(Ui.getErrorMessage(e.getMessage()));
-//            }
-//        }
-//    }
 }
