@@ -5,7 +5,7 @@ package duke.exception;
  */
 public class StorageLoadErrorException extends StorageException {
     /**
-     * Creates a new StorageLoadErrorException with no specified detail message.
+     * Constructs a new StorageLoadErrorException with no specified detail message.
      */
     public StorageLoadErrorException() {
         super("Sorry but I am unable to load the saved tasklist. "

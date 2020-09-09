@@ -5,7 +5,7 @@ package duke.exception;
  */
 public class InvalidUserCommandException extends IllegalArgumentException {
     /**
-     * Creates an new InvalidUserCommandException with the specified error message.
+     * Constructs an new InvalidUserCommandException with the specified error message.
      *
      * @param message Error message to be displayed to the user via the user interface.
      */

@@ -7,7 +7,7 @@ import java.io.IOException;
  */
 public class StorageException extends IOException {
     /**
-     * Creates a new StorageException with the specified error message.
+     * Constructs a new StorageException with the specified error message.
      *
      * @param message Error message to be displayed to the user via the user interface.
      */

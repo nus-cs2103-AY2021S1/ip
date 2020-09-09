@@ -4,17 +4,17 @@ package duke.task;
  * Represents a task with a description and deadline.
  */
 public class Deadline extends Task {
-    private String by;
+    private String deadlineDate;
 
     /**
-     * Creates a new task with the specified description and deadline.
+     * Constructs a new task with the specified description and deadline.
      *
      * @param description Description of task.
-     * @param by Deadline of task.
+     * @param deadlineDate Deadline of task.
      */
-    public Deadline(String description, String by) {
+    public Deadline(String description, String deadlineDate) {
         super(description);
-        this.by = by;
+        this.deadlineDate = deadlineDate;
     }
 
     /**
@@ -24,6 +24,6 @@ public class Deadline extends Task {
      */
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.by + ")";
+        return "[D]" + super.toString() + " (by: " + this.deadlineDate + ")";
     }
 }

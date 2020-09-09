@@ -13,10 +13,10 @@ public class TaskList {
     protected static final String TASK_DEADLINE_INDICATOR = "[D]";
     protected static final String TASK_EVENT_INDICATOR = "[E]";
 
-    private List<Task> listOfTasks;
+    private final List<Task> listOfTasks;
 
     /**
-     * Creates a new TaskList object to handle adding and deleting tasks.
+     * Constructs a new TaskList object to handle adding and deleting tasks.
      *
      * @param tasks List of tasks made by the user.
      */

@@ -13,7 +13,7 @@ public class Ui {
     private boolean hasExit;
 
     /**
-     * Creates a new user interface object to deal with user interactions.
+     * Constructs a new user interface object to deal with user interactions.
      */
     public Ui() {
         this.hasExit = false;
@@ -21,6 +21,8 @@ public class Ui {
 
     /**
      * Displays the standard greetings "Bob" gives to users when the program starts up.
+     *
+     * @return Greetings by "Bob".
      */
     public String showGreetings() {
         return SKIPLINE + "Hey there! I'm Bob" + SKIPLINE + "What can I do for you today?";
@@ -28,6 +30,8 @@ public class Ui {
 
     /**
      * Displays the standard goodbye message "Bob" gives to users when users exit the program.
+     *
+     * @return Goodbye message by "Bob".
      */
     public String showGoodbyeMessage() {
         this.hasExit = true;
@@ -35,23 +39,61 @@ public class Ui {
     }
 
     /**
-     * Displays the task list saved in the local storage.
+     * Indicates "Bob" is responding.
+     *
+     * @return "Bob: " to indicate "Bob" is responding.
+     */
+    private String showResponseIndicator() {
+        return CHATBOT + SKIPLINE;
+    }
+
+    /**
+     * Displays to the user that their task list is currently empty.
+     *
+     * @return Message to notify users that their task list is empty.
+     */
+    private String showEmptyTaskListMessage() {
+        return "List is empty :(";
+    }
+
+    /**
+     * Retrieves the current status of the user's task list.
+     * If the task list is empty, it notifies users that their task list is empty.
+     * Otherwise, it displays the tasks in the task list.
      *
      * @param tasks Task list saved in the local storage.
+     * @param message "Bob's" response which changes depending on the user command.
+     * @return Task list saved in local storage.
      */
-    public String showTaskList(TaskList tasks) {
-        String output = CHATBOT;
+    private String generateTaskList(TaskList tasks, String message) {
+        String tasklist = "";
 
         // If list is empty
         if (tasks.getTotalNumberOfTasks() == 0) {
-            output += SKIPLINE + "List is empty :(";
+            tasklist += showEmptyTaskListMessage();
+        } else if (tasks.getTotalNumberOfTasks() > 0) {
+            tasklist += message + tasks.toString();
+        } else {
+            // Should not reach this line
+            assert false;
         }
 
-        if (tasks.getTotalNumberOfTasks() > 0) {
-            output += SKIPLINE + "Your current task list is as follows:" + SKIPLINE + tasks.toString();
-        }
+        return tasklist;
+    }
+
+    /**
+     * Displays the task list saved in the local storage.
+     *
+     * @param tasks Task list saved in the local storage.
+     * @return Task list saved in the local storage.
+     */
+    public String showTaskList(TaskList tasks) {
+        String output = showResponseIndicator();
+
+        String chatbotResponse = "Your current task list is as follows:" + SKIPLINE;
+        output += generateTaskList(tasks, chatbotResponse);
+
         return output;
-        // System.out.println(USER);
     }
 
     /**
@@ -59,40 +101,28 @@ public class Ui {
      *
      * @param tasks Task list containing the tasks that match the keyword.
      * @param keyword Keyword found in the filtered tasks.
+     * @return Task list containing tasks that match the keyword.
      */
     public String showFilteredByKeywordTaskList(TaskList tasks, String keyword) {
-        String output = CHATBOT;
+        String output = showResponseIndicator();
 
-        if (tasks.getTotalNumberOfTasks() == 0) {
-            output += SKIPLINE + "No tasks matched with '" + keyword + "' :(";
-        }
+        String chatbotResponse = "Here are the tasks that matched with '" + keyword + "':" + SKIPLINE;
+        output += generateTaskList(tasks, chatbotResponse);
 
-        if (tasks.getTotalNumberOfTasks() > 0) {
-            output += SKIPLINE + "Here are the tasks that matched with '" + keyword + "':" + SKIPLINE
-                    + tasks.toString();
-        }
         return output;
-        // System.out.println(USER);
     }
 
     /**
      * Displays the saved task list when the program starts up.
      *
-     * @param tasks Task list saved in the local storage
+     * @param tasks Task list saved in the local storage.
+     * @return Task list saved in the local storage when the program starts up.
      */
     public String loadTaskList(TaskList tasks) {
-        String output = CHATBOT + SKIPLINE + "Here is your current task list:";
-        // System.out.println("Here is your current task list:");
-        if (tasks.getTotalNumberOfTasks() == 0) {
-            output += SKIPLINE + "List is empty :(" + SKIPLINE;
-            // System.out.print("List is empty :(");
-            // System.out.println(SKIPLINE);
-        }
+        String output = showResponseIndicator();
 
-        if (tasks.getTotalNumberOfTasks() > 0) {
-            // System.out.println(tasks);
-            output += tasks.toString();
-        }
+        String chatbotResponse = "Here is your current task list:" + SKIPLINE;
+        output += generateTaskList(tasks, chatbotResponse);
         return output;
     }
 
@@ -107,20 +137,50 @@ public class Ui {
     }
 
     /**
+     * Retrieves "Bob's" response to a change in the task list.
+     *
+     * @param tasks Task list saved in the local storage.
+     * @param task Task that is either added into the task list or deleted from the task list.
+     * @param taskIndicator Indicates if the task is being added to the task list or deleted from the task list.
+     * @return Message notifying users that the task has been added/deleted.
+     */
+    private String getUpdatedTaskListMessage(TaskList tasks, Task task, String taskIndicator) {
+        String message = getNotedUpdateInTaskListMessage(taskIndicator);
+        message += task.toString();
+        message += getNumberOfTasksInTaskList(tasks);
+        message += getSuccessfullySavedMessage();
+        return message;
+    }
+
+    /**
+     * Returns message notifying users that a task has been added or deleted from the task list.
+     *
+     * @param taskIndicator Indicates whether a task has been added or deleted from the task list.
+     * @return Message notifying users that a task has been added or deleted from the task list.
+     */
+    private String getNotedUpdateInTaskListMessage(String taskIndicator) {
+        return "Noted! I have " + taskIndicator + " the following task to your list:" + SKIPLINE;
+    }
+
+    /**
+     * Returns the total number of tasks currently saved in the task list.
+     *
+     * @param tasks Task list saved in the local storage.
+     * @return Total number of tasks currently saved in the task list.
+     */
+    private String getNumberOfTasksInTaskList(TaskList tasks) {
+        return SKIPLINE + "You now have " + tasks.getTotalNumberOfTasks() + " task(s) in your list" + SKIPLINE;
+    }
+
+    /**
      * Informs user that a new task has been added to the task list and has successfully been added.
      *
      * @param newTask New task added to the task list.
      * @param tasks Task list saved in the local storage.
      */
     public String showAddedNewTaskMessage(Task newTask, TaskList tasks) {
-        String output = CHATBOT + SKIPLINE;
-
-        // Bob's response
-        output += "Noted! I have added the following task to your list:" + SKIPLINE;
-        output += newTask.toString() + SKIPLINE;
-        output += "You now have " + tasks.getTotalNumberOfTasks() + " task(s) in your list";
-        output += SKIPLINE + showSuccessfullySavedMessage();
-        // System.out.println(USER);
+        String output = showResponseIndicator();
+        output += getUpdatedTaskListMessage(tasks, newTask, "added");
         return output;
     }
 
@@ -132,12 +192,9 @@ public class Ui {
      * @param tasks Task list saved in the local storage.
      */
     public String showDeleteTaskMessage(Task deletedTask, TaskList tasks) {
-        String output = CHATBOT + SKIPLINE;
+        String output = showResponseIndicator();
+        output += getUpdatedTaskListMessage(tasks, deletedTask, "deleted");
 
-        // Bob's response
-        output += "Noted! I have deleted this task from your list:" + SKIPLINE;
-        output += deletedTask.toString() + SKIPLINE;
-        output += "You now have " + tasks.getTotalNumberOfTasks() + " task(s) in your list";
         return output;
     }
 
@@ -147,7 +204,7 @@ public class Ui {
      * @param doneTask Task to be marked done.
      */
     public String showMarkDoneMessage(Task doneTask) {
-        String output = CHATBOT + SKIPLINE;
+        String output = showResponseIndicator();
 
         // Bob's response
         output += "Good job completing this task! I've marked this task as done:" + SKIPLINE;
@@ -162,7 +219,7 @@ public class Ui {
      * @param doneTask Task that is already marked done.
      */
     public String showAlreadyMarkDoneMessage(Task doneTask) {
-        String output = CHATBOT + SKIPLINE;
+        String output = showResponseIndicator();
 
         // Bob's response
         output += "OOPS. It seems like this task has already been completed:" + SKIPLINE;
@@ -177,7 +234,7 @@ public class Ui {
      * @param e Exception caught.
      */
     public String showErrorMessage(Exception e) {
-        String output = CHATBOT + SKIPLINE;
+        String output = showResponseIndicator();
         output += e.getLocalizedMessage();
         return output;
     }
@@ -185,7 +242,7 @@ public class Ui {
     /**
      * Informs user that the updated task list has been successfully saved to the file.
      */
-    public String showSuccessfullySavedMessage() {
+    private String getSuccessfullySavedMessage() {
         return SKIPLINE + "Successfully saved task list to file :)";
     }
 

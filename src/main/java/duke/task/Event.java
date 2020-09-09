@@ -4,17 +4,17 @@ package duke.task;
  * Represents a task with a description and date of event.
  */
 public class Event extends Task {
-    private String time;
+    private String eventTime;
 
     /**
-     * Creates a task with the specified description and date of event.
+     * Constructs a task with the specified description and date of event.
      *
      * @param description Decription of event.
-     * @param time Date of event.
+     * @param eventTime Date of event.
      */
-    public Event(String description, String time) {
+    public Event(String description, String eventTime) {
         super(description);
-        this.time = time;
+        this.eventTime = eventTime;
     }
 
     /**
@@ -24,6 +24,6 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + this.time + ")";
+        return "[E]" + super.toString() + " (at: " + this.eventTime + ")";
     }
 }
