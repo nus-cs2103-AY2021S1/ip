@@ -54,7 +54,7 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke("data/tasks.txt").run();
+        new Duke().run();
     }
 
     public String getResponse(String userText) throws DukeException, IOException {
