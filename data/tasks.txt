@@ -1,4 +1,6 @@
 1 || todo || Build new desktop
-0 || event || super code competition  || 2020-11-11
 0 || deadline || cs2103t ip  || 2020-10-10
 0 || event || fintech soc meeting  || 2020-09-11
+0 || todo || go to the gym
+0 || deadline || submit google project PR  || 2020-11-11
+0 || event || shopee webinar  || 2020-10-10
