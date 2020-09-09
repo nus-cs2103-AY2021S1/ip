@@ -39,7 +39,8 @@ public class Ui {
      * @return a String representation of the welcome message.
      */
     public String displayWelcomeMessage() {
-        return "Hello! I'm PandaBot.\n" + "What can I do for you?\n";
+        return "Hello! I'm PandaBot.\n What can I do for you?\n"
+            + "To start, you can enter 'help' to bring up the help page.\n";
     }
 
     /**
@@ -136,4 +137,25 @@ public class Ui {
         return "Here are the matching tasks I found:\n" + tasks.toString();
     }
 
+    /**
+     * Returns a String representation of the help page, which contains
+     * a list of commands that users can use.
+     *
+     * @return a String representation of the help page.
+     */
+    public String displayOnHelp() {
+        String helpMsg = "PandaBot is here to help you~~\n"
+                        + "\u27A4 'bye' - exits the app\n"
+                        + "\u27A4 'list' - to list all the tasks you have now\n"
+                        + "\u27A4 'help' - brings you to this help page\n"
+                        + "\u27A4 'delete x' - to delete a task, numbered x\n"
+                        + "\u27A4 'done x' - to mark a task, numbered x, as done\n"
+                        + "\u27A4 'deadline <description> /by <time>' - to add a deadline task\n"
+                        + "\u27A4 'do <description> /after <time or task>' - to add a 'do after' task\n"
+                        + "\u27A4 'event <description> /at <time>' - to add an event task\n"
+                        + "\u27A4 'todo <description>' - to add a todo task\n"
+                        + "\u27A4 'find <keyword>' - lists all the tasks with description that contains the keyword\n"
+                        + "Time should be formatted like this: dd/MM/yyyy HHmm";
+        return helpMsg;
+    }
 }

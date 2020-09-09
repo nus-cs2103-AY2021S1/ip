@@ -6,6 +6,7 @@ import pandabot.commands.Command;
 import pandabot.commands.DeleteCommand;
 import pandabot.commands.DoneCommand;
 import pandabot.commands.FindCommand;
+import pandabot.commands.HelpCommand;
 import pandabot.commands.ListCommand;
 import pandabot.exceptions.PandaBotException;
 import pandabot.exceptions.PandaBotInsufficientArgumentException;
@@ -36,6 +37,8 @@ public class Parser {
             return new ByeCommand();
         case "list":
             return new ListCommand();
+        case "help":
+            return new HelpCommand();
         case "done":
             verifyArguments(cmd, 2);
             try {
