@@ -69,9 +69,11 @@ public class Event extends Task {
      * @return
      */
     public String toPrint() throws DukeException {
-        if (date == null && at == null) {
+        if (at == null) {
+            assert date == null;
             return super.toPrint();
-        } else if (date != null && at != null) {
+        } else if (at != null) {
+            assert date != null;
             return super.toPrint() + "|" + date + "|" + at;
         } else {
             throw new DateTimeException();
@@ -81,6 +83,7 @@ public class Event extends Task {
     @Override
     public String toString() {
         if (at == null) {
+            assert date == null;
             return "[" + tag + "] " + super.toString();
         } else {
             return "[" + tag + "] " + super.toString() + "\n            (by: "

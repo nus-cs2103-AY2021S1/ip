@@ -56,6 +56,7 @@ public class Storage {
         while (myReader.hasNextLine()) {
             String data = myReader.nextLine();
             String[] dataSplit = data.split("\\|");
+            assert !dataSplit[0].isEmpty();
             switch (dataSplit[0]) {
             case TODO:
                 tasks.addTask(new ToDo(dataSplit));
