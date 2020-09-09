@@ -1,10 +1,14 @@
 package duke.ui;
 
+import java.util.ArrayList;
+
+import duke.model.Interval;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.TaskList;
 import duke.task.Todo;
 import duke.tool.Emoji;
+import duke.tool.TimeConverter;
 
 
 /**
@@ -89,5 +93,22 @@ public class Ui {
      */
     public String showLoadingError() {
         return "Loading error!";
+    }
+
+    /**
+     * Outputs the free slots in a day.
+     * @param intervalArrayList free intervals in a day.
+     * @return string representation of free slots.
+     */
+    public String showFreeSlots(ArrayList<Interval> intervalArrayList) {
+        TimeConverter timeConverter = new TimeConverter();
+        StringBuilder message = new StringBuilder(SEPARATION_LINE + "    Here is your free time in the day: \n");
+        for (Interval interval : intervalArrayList) {
+            message.append("    ").append(timeConverter.convertIntToTime(interval.getStart()).toString())
+                    .append(" to ").append(timeConverter.convertIntToTime(interval.getEnd()).toString())
+                    .append("\n");
+        }
+        message.append(SEPARATION_LINE);
+        return message.toString();
     }
 }
