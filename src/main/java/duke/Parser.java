@@ -4,7 +4,6 @@ package duke;
  * Represents a Parser that parses user input.
  */
 public class Parser {
-    private String sanitisedUserInput = "";
     private String[] splitUserInput = new String[0];
     
     /**
