@@ -42,16 +42,6 @@ public class UiResponse {
     }
 
     /**
-     * Repeats the input string once.
-     * @param str string to be repeated
-     */
-    public void echo(String str) {
-        UiPrint.drawLine(UiPrint.STAR, 50);
-        System.out.println(str);
-        UiPrint.drawLine(UiPrint.STAR, 50);
-    }
-
-    /**
      * Prints out the current tasks saved in task list.
      */
     public void reportCurrentTasks() {
