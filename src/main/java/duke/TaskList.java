@@ -41,7 +41,7 @@ public class TaskList implements java.io.Serializable {
     public String list() {
         String listText = "";
         for (int i = 0; i < store.size(); i++) {
-            listText += String.format("%d. %s", i + 1, store.get(i));
+            listText += String.format("\n %d. %s", i + 1, store.get(i));
         }
         return listText;
     }

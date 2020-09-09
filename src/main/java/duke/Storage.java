@@ -54,7 +54,7 @@ public class Storage {
             out.writeObject(taskList);
             out.close();
             fileOut.close();
-            System.out.printf("Serialized data is saved in ./data/duke.ser");
+            System.out.println("Serialized data is saved in ./data/duke.ser");
             return true;
         } catch (Exception e) {
             System.out.println(e.toString());

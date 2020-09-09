@@ -58,18 +58,18 @@ public class Ui {
      * Gets user input from STDIN, executes it
      */
     public String handleInput(String input) {
+        String result = input;
         try {
 
             // Parse the commands
             Command command = Parser.parseLine(tasks, input);
 
             // Execute the object
-            String result = command.execute();
+            result = command.execute();
 
             // After every command, save to disk
             store.syncTasks();
-            return result;
-
+            System.out.println("successful");
         } catch (CommandMissingArgumentException e) {
             System.out.println("Missing arguments!");
         } catch (CommandInvalidArgumentFormatException e) {
@@ -79,7 +79,7 @@ public class Ui {
         } catch (Exception e) {
             System.out.println(e.toString());
         } finally {
-            return input;
+            return result;
         }
     }
 }
