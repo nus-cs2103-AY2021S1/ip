@@ -20,7 +20,7 @@ public class DeadlineCommand implements Command {
     protected static final List<String> NAMES = List.of("deadline");
     protected static final String DESCRIPTION = "Create a task with deadline";
     protected static final String USE_CASE = "[" + String.join(", ", NAMES)
-            + "] <desc> /by <datetime>";
+            + "] <desc> /by <date> <time>";
 
     private final String description;
     private final TaskDateTime by;

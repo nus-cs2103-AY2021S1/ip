@@ -149,10 +149,9 @@ public class TaskDateTime {
         }
     }
 
-    @Override
-    public String toString() {
+    String toStringBasedOn(LocalDate currDate) {
         StringBuilder resultingFormat = new StringBuilder();
-        if (date.isEqual(LocalDate.now())) {
+        if (date.isEqual(currDate)) {
             resultingFormat.append("Today");
         } else {
             resultingFormat.append(date.format(DATE_FORMAT));
@@ -170,5 +169,10 @@ public class TaskDateTime {
             resultingFormat.append(", ").append(time.format(TIME_FORMAT));
             return resultingFormat.toString();
         }
+    }
+
+    @Override
+    public String toString() {
+        return toStringBasedOn(LocalDate.now());
     }
 }

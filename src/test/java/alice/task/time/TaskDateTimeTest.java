@@ -3,8 +3,6 @@ package alice.task.time;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
 
 import org.junit.jupiter.api.Test;
 
@@ -27,33 +25,32 @@ public class TaskDateTimeTest {
 
         assertEquals("Monday, Aug 12 2019", TaskDateTime.parseDateTime("12/08/2019").toString());
 
-        LocalDateTime currDateTime = LocalDateTime.now();
-        String input = currDateTime.format(DateTimeFormatter.ofPattern("dd-MMM-uuuu"));
-        assertEquals("Today", TaskDateTime.parseDateTime(input).toString());
+        LocalDateTime currDateTime = LocalDateTime.of(2019, 9, 12, 12, 30);
+        assertEquals("Today",
+                TaskDateTime.parseDateTimeHelper("2019-9-12", currDateTime)
+                        .toStringBasedOn(currDateTime.toLocalDate())
+        );
     }
 
     @Test
     void parseTimeOnly() throws InvalidCommandException {
-        LocalDateTime currDateTime = LocalDateTime.now();
+        LocalDateTime currDateTime = LocalDateTime.of(2019, 5, 2, 12, 30);
 
         // with a time 1h after current time
-        int hour1 = currDateTime.toLocalTime().getHour() + 1;
-        String output1 = "Today, "
-                + LocalTime.of(hour1, 0).format(DateTimeFormatter.ofPattern("ha"));
-        assertEquals(output1, TaskDateTime.parseDateTime(hour1 + "00").toString());
+        assertEquals("Today, 3PM", TaskDateTime
+                .parseDateTimeHelper("3pm", currDateTime)
+                .toStringBasedOn(currDateTime.toLocalDate()));
 
         // with a time 1h before current time
-        int hour2 = currDateTime.toLocalTime().getHour() - 1;
         // Expected output --> tomorrow date with same hour
-        String output2 = currDateTime.toLocalDate().plusDays(1)
-                .format(DateTimeFormatter.ofPattern("EEEE, MMM dd uuuu"))
-                + ", "
-                + LocalTime.of(hour2, 0).format(DateTimeFormatter.ofPattern("ha"));
-
-        assertEquals(output2, TaskDateTime.parseDateTime(hour2 + "00").toString());
+        assertEquals("Friday, May 03 2019, 6AM", TaskDateTime
+                .parseDateTimeHelper("6am", currDateTime)
+                .toStringBasedOn(currDateTime.toLocalDate()));
 
         // with natural time only
-        assertEquals("Today, 11:59 PM", TaskDateTime.parseDateTime("MIDNIGHT").toString());
+        assertEquals("Today, 11:59 PM", TaskDateTime
+                .parseDateTimeHelper("MIDNIGHT", currDateTime)
+                .toStringBasedOn(currDateTime.toLocalDate()));
     }
 
     @Test

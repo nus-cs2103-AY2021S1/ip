@@ -20,7 +20,7 @@ public class EventCommand implements Command {
     protected static final List<String> NAMES = List.of("event");
     protected static final String DESCRIPTION = "Create an event";
     protected static final String USE_CASE = "[" + String.join(", ", NAMES)
-            + "] <desc> /at <datetime>";
+            + "] <desc> /at <date> <time>";
 
     private final String description;
     private final TaskDateTime at;
