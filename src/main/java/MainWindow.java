@@ -27,6 +27,8 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
+        assert(userImage != null);
+        assert(dukeImage != null);
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         printToUser(Ui.printWelcome());
     }
@@ -55,6 +57,7 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     private void printToUser(String message) {
+        assert(!message.isEmpty());
         dialogContainer.getChildren().add(
                 DialogBox.getDukeDialog(message, dukeImage)
         );
