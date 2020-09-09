@@ -1,4 +1,4 @@
-# Chatbot Hanry
+# Chatbot Hanry by Li Jianhan
 
 This is an individual greenfield Java project under CS2103T (Software Enginnering). Given below are instructions on how to use it.
 
