@@ -24,39 +24,38 @@ public class UI {
     /**
      * Generates goodbye message for user
      */
-    public String goodbye() {
-        
-        return goodbyeMessage.print();
+    public void goodbye() {
+        speak(goodbyeMessage);
     }
 
     /**
      * Generates Task completion message for user
      * @param task Completed Task as input
      */
-    public String taskCompletedMessage(Task task) {
-        return "Nice! I've marked this task as done:\n[✓] " + task.toString();
+    public void taskCompletedMessage(Task task) {
+        speak(() -> "Nice! I've marked this task as done:\n[✓] " + task.toString());
     }
 
     /**
      * Generates task deletion message for user
      * @param task Task to be deleted as input
      */
-    public String taskDeletedMessage (Task task) {
-        return String.format("Noted. I've removed this task:\n" +
+    public void taskDeletedMessage (Task task) {
+        speak(() -> String.format("Noted. I've removed this task:\n" +
                 "%s%s %s\n" +
-                "Now you have %d tasks in the list.",task.getTaskSymbol(),task.getSymbol(),task.toString(),Task.remainingTasks());
+                "Now you have %d tasks in the list.",task.getTaskSymbol(),task.getSymbol(),task.toString(),Task.remainingTasks()));
     }
     
-    public String taskAddedMessage (Task task) {
-        return String.format("Got it. i've added this task:\n %s%s %s\n" +
-                "Now you have %d tasks in the list.", task.getTaskSymbol(), task.getSymbol(), task.toString(), Task.remainingTasks());
+    public void taskAddedMessage (Task task) {
+        speak(() -> String.format("Got it. i've added this task:\n %s%s %s\n" +
+                "Now you have %d tasks in the list.", task.getTaskSymbol(), task.getSymbol(), task.toString(), Task.remainingTasks()));
     }
 
     /**
      * Lists completed tasks for user
      * @param taskList list of tasks as input
      */
-    public static String listTasks (TaskList taskList) {
+    public static void listTasks (TaskList taskList) {
         int i;
         StringBuilder sb = new StringBuilder();
         for (i = 0 ; i < taskList.getTotalTask() ; i++) {
@@ -68,8 +67,8 @@ public class UI {
             }
         }
         Printable task = () -> sb.toString();
-        
-        return task.print();
+        speak(task);
+        return;
     }
     
 
