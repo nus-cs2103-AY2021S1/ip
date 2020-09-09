@@ -1,4 +1,15 @@
-import java.util.Scanner;
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.EmptyDescriptionException;
+import duke.exception.InvalidTaskTypeException;
+import duke.exception.WrongFormatException;
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.TaskType;
+import duke.task.Todo;
 
 public class AddCommand extends Command {
 

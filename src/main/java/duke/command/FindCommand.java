@@ -1,3 +1,11 @@
+package duke.command;
+
+import duke.TaskList;
+import duke.Ui;
+import duke.command.Command;
+import duke.exception.EmptyListException;
+import duke.task.Task;
+
 public class FindCommand extends Command {
 
     public FindCommand() {

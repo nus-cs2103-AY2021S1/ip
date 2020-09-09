@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -9,14 +13,14 @@ public class TaskList {
     List<Task> tasks;
 
     /**
-     * Creates an empty TaskList object.
+     * Creates an empty duke.TaskList object.
      */
     public TaskList() {
         tasks = new ArrayList<>();
     }
 
     /**
-     * Creates a TaskList object using an existing list of tasks.
+     * Creates a duke.TaskList object using an existing list of tasks.
      * @param taskArr List of tasks.
      */
     public TaskList(List<Task> taskArr) {
@@ -24,16 +28,16 @@ public class TaskList {
     }
 
     /**
-     * Generates a TaskList object by loading a saved list and generates
-     * an empty TaskList object otherwise.
+     * Generates a duke.TaskList object by loading a saved list and generates
+     * an empty duke.TaskList object otherwise.
      * @param storage Object containing filepath to saved list of tasks.
-     * @return TaskList object.
+     * @return duke.TaskList object.
      */
     public static TaskList generateTaskList(Storage storage) {
         try {
             return new TaskList(storage.load());
         } catch (IOException e) {
-            System.out.println("Could not load file. Generating blank Task List.");
+            System.out.println("Could not load file. Generating blank duke.task.Task List.");
             return new TaskList();
         }
     }
@@ -56,7 +60,7 @@ public class TaskList {
     /**
      * Returns the task at a specific index of the task list.
      * @param i Index of task.
-     * @return Task at specified index.
+     * @return duke.task.Task at specified index.
      */
     public Task getTask(int i) {
         return tasks.get(i);
@@ -64,7 +68,7 @@ public class TaskList {
 
     /**
      * Returns the last task on the task list.
-     * @return Task at the end of the task list.
+     * @return duke.task.Task at the end of the task list.
      */
     public Task getMostRecentTask() {
         return tasks.get(tasks.size() - 1);

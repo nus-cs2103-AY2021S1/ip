@@ -1,3 +1,7 @@
+package duke.exception;
+
+import duke.exception.DukeException;
+
 public class NonExistentTaskException extends DukeException {
     public NonExistentTaskException() {
         super("Sorry that task doesn't exist :/\n"

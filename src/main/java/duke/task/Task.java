@@ -1,5 +1,7 @@
+package duke.task;
+
 /**
- * Supports creation of Task objects and Task actions.
+ * Supports creation of duke.task.Task objects and duke.task.Task actions.
  */
 public class Task {
     protected String description;
@@ -7,7 +9,7 @@ public class Task {
     protected TaskType taskType;
 
     /**
-     * Creates a Task object
+     * Creates a duke.task.Task object
      *
      * @param description  Description of task.
      * @param taskType Type of task.
@@ -19,7 +21,7 @@ public class Task {
     }
 
     /**
-     * Creates a Task object with extra parameter that defines whether
+     * Creates a duke.task.Task object with extra parameter that defines whether
      * task is done or not.
      *
      * @param description Description of task.
@@ -93,9 +95,9 @@ public class Task {
     }
 
     /**
-     * Returns string representation of the Task object.
+     * Returns string representation of the duke.task.Task object.
      *
-     * @return String representation of the Task object.
+     * @return String representation of the duke.task.Task object.
      */
     @Override
     public String toString() {

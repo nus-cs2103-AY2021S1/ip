@@ -1,4 +1,11 @@
-import java.util.Scanner;
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.EmptyListException;
+import duke.exception.NonExistentTaskException;
+import duke.task.Task;
 
 public class DeleteCommand extends Command {
 

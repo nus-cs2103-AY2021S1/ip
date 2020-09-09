@@ -1,4 +1,11 @@
-import java.util.Scanner;
+package duke.command;
+
+import duke.Storage;
+import duke.TaskList;
+import duke.Ui;
+import duke.exception.EmptyListException;
+import duke.exception.InvalidDoneCommandException;
+import duke.exception.NonExistentTaskException;
 
 public class DoneCommand extends Command {
 
@@ -8,7 +15,7 @@ public class DoneCommand extends Command {
 
     @Override
     public void execute(Ui ui, TaskList taskList) throws EmptyListException,
-            NonExistentTaskException, InvalidDoneCommandException{
+            NonExistentTaskException, InvalidDoneCommandException {
         if (taskList.isEmpty()) {
             throw new EmptyListException();
         }

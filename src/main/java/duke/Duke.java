@@ -1,4 +1,8 @@
+package duke;
+
 import java.util.Scanner;
+import duke.command.Command;
+import duke.exception.DukeException;
 
 /**
  * Starts Duke which a user can give

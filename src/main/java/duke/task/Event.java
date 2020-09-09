@@ -1,8 +1,10 @@
+package duke.task;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 /**
- * Supports the creation of Event objects.
+ * Supports the creation of duke.task.Event objects.
  */
 public class Event extends Task {
     protected LocalDate date;
@@ -10,12 +12,12 @@ public class Event extends Task {
     protected LocalTime timeEnd;
 
     /**
-     * Creates an Event object
+     * Creates an duke.task.Event object
      * @param description Description of task.
      * @param dateAndTime Date and time of the task.
      * @param taskType Type of task.
      */
-    Event(String description, String dateAndTime, TaskType taskType) {
+    public Event(String description, String dateAndTime, TaskType taskType) {
         super(description, taskType);
         String[] dateAndTimeSplit = dateAndTime.split(" ");
         String[] dateSplit = dateAndTimeSplit[1].split("/");
@@ -36,7 +38,7 @@ public class Event extends Task {
     }
 
     /**
-     * Creates an Event object with extra parameters that defines date and time separately, and whether
+     * Creates an duke.task.Event object with extra parameters that defines date and time separately, and whether
      * task is done or not.
      * @param description Description of task.
      * @param taskType Type of task.
@@ -45,7 +47,7 @@ public class Event extends Task {
      * @param timeStart Starting time of task.
      * @param timeEnd Ending time of task.
      */
-    Event(String description, TaskType taskType, boolean isDone, LocalDate date, LocalTime timeStart, LocalTime timeEnd) {
+    public Event(String description, TaskType taskType, boolean isDone, LocalDate date, LocalTime timeStart, LocalTime timeEnd) {
         super(description, taskType, isDone);
         this.date = date;
         this.timeStart = timeStart;
@@ -58,13 +60,13 @@ public class Event extends Task {
     }
 
     /**
-     * Returns string representation of the Event object.
+     * Returns string representation of the duke.task.Event object.
      *
-     * @return String representation of the Event object.
+     * @return String representation of the duke.task.Event object.
      */
     @Override
     public String toString() {
-        return "[Event]" + super.toString() + " "
+        return "[duke.task.Event]" + super.toString() + " "
                 + "(at: " + this.date + " " + this.timeStart + "-" + this.timeEnd + ")";
     }
 }

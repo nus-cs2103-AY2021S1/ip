@@ -27,44 +27,44 @@ What else would you like to do?
 ____________________________________________________________
 ____________________________________________________________
 What kind of task is it?
- - Todo
- - Deadline
- - Event
+ - duke.task.Todo
+ - duke.task.Deadline
+ - duke.task.Event
 Please enter the task
 Alright, I've added this task:
-[Todo][?]read book
+[duke.task.Todo][?]read book
 You now have 1 tasks on your list
 ____________________________________________________________
 What else would you like to do?
 ____________________________________________________________
 ____________________________________________________________
 These are the tasks on your list:
-1. [Todo][?]read book
+1. [duke.task.Todo][?]read book
 ____________________________________________________________
 What else would you like to do?
 ____________________________________________________________
 ____________________________________________________________
 What kind of task is it?
- - Todo
- - Deadline
- - Event
+ - duke.task.Todo
+ - duke.task.Deadline
+ - duke.task.Event
 Please enter the task followed by the date and time of the deadline
 e.g., submit report ,11/10/2019 5pm
 Alright, I've added this task:
-[Deadline][?]assigment (by: 2pm)
+[duke.task.Deadline][?]assigment (by: 2pm)
 You now have 2 tasks on your list
 ____________________________________________________________
 What else would you like to do?
 ____________________________________________________________
 ____________________________________________________________
 What kind of task is it?
- - Todo
- - Deadline
- - Event
+ - duke.task.Todo
+ - duke.task.Deadline
+ - duke.task.Event
 Please enter the event followed by the date and time of the event
 e.g., team project meeting ,2/10/2019 2-4pm
 Alright, I've added this task:
-[Event][?]lunch with the boys (at:  12-1pm)
+[duke.task.Event][?]lunch with the boys (at:  12-1pm)
 You now have 3 tasks on your list
 ____________________________________________________________
 What else would you like to do?
@@ -72,22 +72,22 @@ ____________________________________________________________
 ____________________________________________________________
 Which task do you want to mark as done?
 Good job! This task is now marked as done:
-[Deadline][?]assigment (by: 2pm)
+[duke.task.Deadline][?]assigment (by: 2pm)
 ____________________________________________________________
 What else would you like to do?
 ____________________________________________________________
 ____________________________________________________________
 Which task do you want to mark as done?
 Good job! This task is now marked as done:
-[Todo][?]read book
+[duke.task.Todo][?]read book
 ____________________________________________________________
 What else would you like to do?
 ____________________________________________________________
 ____________________________________________________________
 These are the tasks on your list:
-1. [Todo][?]read book
-2. [Deadline][?]assigment (by: 2pm)
-3. [Event][?]lunch with the boys (at:  12-1pm)
+1. [duke.task.Todo][?]read book
+2. [duke.task.Deadline][?]assigment (by: 2pm)
+3. [duke.task.Event][?]lunch with the boys (at:  12-1pm)
 ____________________________________________________________
 What else would you like to do?
 ____________________________________________________________

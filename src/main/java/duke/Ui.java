@@ -1,3 +1,7 @@
+package duke;
+
+import duke.task.Task;
+
 import java.util.Scanner;
 
 /**
@@ -82,9 +86,9 @@ public class Ui {
      */
     public void printTaskTypes() {
         System.out.println("What kind of task is it?");
-        System.out.print(" - Todo\n"
-                + " - Deadline\n"
-                + " - Event\n");
+        System.out.print(" - duke.task.Todo\n"
+                + " - duke.task.Deadline\n"
+                + " - duke.task.Event\n");
     }
 
     /**
@@ -103,7 +107,7 @@ public class Ui {
     }
 
     /**
-     * Displays the example for the Event format.
+     * Displays the example for the duke.task.Event format.
      */
     public void printEventExample() {
         System.out.println("Please enter the event followed by the date and time of the event");
@@ -143,7 +147,7 @@ public class Ui {
     /**
      * Displays the acknowledgement of a task status being changed to done.
      * @param taskList List of tasks.
-     * @param taskNum Task specified to be changed to done.
+     * @param taskNum duke.task.Task specified to be changed to done.
      */
     public void printDoneAcknowledgement(TaskList taskList, int taskNum) {
         System.out.println("Good job! This task is now marked as done:");
@@ -171,7 +175,7 @@ public class Ui {
     /**
      * Displays the acknowledgement of the task that the user deleted from the list of tasks.
      * @param taskList List of tasks.
-     * @param task Task that was deleted.
+     * @param task duke.task.Task that was deleted.
      */
     public void printDeleteAcknowledgement(TaskList taskList, Task task) {
         System.out.println("Alright, the following task has been removed:");
