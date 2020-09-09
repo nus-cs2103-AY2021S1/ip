@@ -93,7 +93,7 @@ public class Deadline extends Task {
             this.time = parsedTime;
         }
 
-        if (isDone && !hasDeadlinePassed) {
+        if (isDone && (!hasDeadlinePassed || recurrence == null)) {
             setDone();
         }
     }

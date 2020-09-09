@@ -62,12 +62,13 @@ public class Event extends Task {
         LocalDateTime parsedTime = LocalDateTime.parse(time);
         recurrence = recurrenceAlias.length() == 0
                 ? null : Option.getOptionFromShortAlias(recurrenceAlias);
-
         LocalDateTime now = LocalDateTime.now();
         boolean hasDeadlinePassed = parsedTime.isBefore(now);
+        boolean hasRecurrence = recurrence != null;
+        boolean isToBeReset = hasDeadlinePassed && hasRecurrence;
         long addedTime;
 
-        if (hasDeadlinePassed && recurrence != null) {
+        if (isToBeReset) {
             switch (recurrence) {
             case RECURRING_DAILY:
                 addedTime = parsedTime.until(now, ChronoUnit.DAYS) + 1;
@@ -92,7 +93,7 @@ public class Event extends Task {
             this.time = parsedTime;
         }
 
-        if (isDone && !hasDeadlinePassed) {
+        if (isDone && !isToBeReset) {
             setDone();
         }
     }
