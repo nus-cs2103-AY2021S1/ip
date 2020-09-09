@@ -19,12 +19,15 @@ public class Parser {
             return new ExitCommand();
         } else if (fullCommand.contains("done")) {
             // done command
+
             parserScanner.skip("done");
+            assert parserScanner.hasNextInt() : "Cannot read task number for done command";
             int taskNumber = parserScanner.nextInt();
             return new DoneCommand(taskNumber);
         } else if (fullCommand.contains("find")) {
             // done command
             parserScanner.skip("find");
+            assert parserScanner.hasNext() : "Cannot find filter word";
             String filterWord = parserScanner.next();
             return new FindCommand(filterWord);
         } else if (fullCommand.equals("list")) {
@@ -33,6 +36,7 @@ public class Parser {
         } else if (fullCommand.contains("delete")) {
             // delete command
             parserScanner.skip("delete");
+            assert parserScanner.hasNextInt() : "Cannot read task number for delete command";
             int taskNumber = parserScanner.nextInt();
             return new DeleteCommand(taskNumber);
         } else {
@@ -43,6 +47,7 @@ public class Parser {
                 parserScanner.skip("todo");
                 if (parserScanner.hasNext()) {
                     parserScanner.skip(" ");
+                    assert parserScanner.hasNext() : "Cannot read description of todo";
                     currTask = new Todo(parserScanner.nextLine());
                 } else {
                     throw new DukeException("The description of a todo cannot be empty.");
@@ -62,6 +67,7 @@ public class Parser {
                     throw new DukeException("I'm sorry, but I don't know what that means :-(");
                 }
             }
+            assert currTask != null : "Task to perform cannot be null";
             return new AddCommand(currTask);
         }
     }

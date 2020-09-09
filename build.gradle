@@ -43,8 +43,7 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
-    //mainClassName = "Launcher"
+    mainClassName = "Launcher"
 }
 
 shadowJar {
@@ -56,7 +55,6 @@ shadowJar {
 checkstyle {
     toolVersion = '8.23'
 }
-
  */
 
 run{
