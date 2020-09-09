@@ -52,11 +52,11 @@ public class Parser {
             case FIND:
                 return new FindCommand(commands[0], commands[1].trim());
             default:
-                throw new InvalidCommandException("");
+                assert false : currentCommand;
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new InvalidArgumentException("Sorry, your argument cannot be empty!");
-        } catch (InvalidCommandException | IllegalArgumentException e) {
+        } catch ( IllegalArgumentException e) {
             throw new InvalidCommandException("Sorry, your command is not recognised!");
         }
     }
