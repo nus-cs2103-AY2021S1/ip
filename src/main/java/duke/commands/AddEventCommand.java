@@ -1,12 +1,13 @@
 package duke.commands;
 
+import duke.Event;
+import duke.Storage;
 import duke.Task;
 import duke.TaskList;
-import duke.Event;
 import duke.Ui;
-import duke.Storage;
 
-public class AddEventCommand extends Command{
+
+public class AddEventCommand extends Command {
     private String commandContent;
 
     public AddEventCommand(String commandContent) {

@@ -1,20 +1,19 @@
 package duke.commands;
 
-import duke.Task;
-import duke.TaskList;
-import duke.Deadline;
-import duke.Ui;
-import duke.Storage;
-
 import java.time.LocalDate;
 
-public class AddDeadlineCommand extends Command{
+import duke.Deadline;
+import duke.Storage;
+import duke.Task;
+import duke.TaskList;
+import duke.Ui;
+
+public class AddDeadlineCommand extends Command {
     private String commandContent;
 
     public AddDeadlineCommand(String commandContent) {
         this.commandContent = commandContent;
     }
-
 
     public String run(TaskList taskList, Storage storage) {
         Task newTask;

@@ -1,16 +1,15 @@
 package duke;
 
-import duke.exceptions.DukeException;
-
 import java.io.File;
-import java.io.IOException;
 import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
-import java.time.LocalDate;
+
 
 /**
- * Stroage deals with loading tasks from the file 
+ * Storage deals with loading tasks from the file
  * and saving tasks in the file
  */
 public class Storage {
@@ -37,8 +36,7 @@ public class Storage {
     /**
      * This method wites all of tasks onto the disk.
      *
-     * @return nothing.
-     */ 
+     */
     public void write(ArrayList<? extends Task> tasks) {
         try {
             FileWriter writer = new FileWriter(path, false);
@@ -61,7 +59,7 @@ public class Storage {
      * This method fetches all of tasks stored in disk.
      *
      * @return an ArrayList consisting of all of tasks stored in the duke.txt.
-     */ 
+     */
     public ArrayList<Task> getTaskList() {
         ArrayList<Task> tasks = new ArrayList<Task>();
         try {

@@ -3,7 +3,7 @@ package duke;
 import java.util.ArrayList;
 
 /**
- * TaskList contains the task list e.g., 
+ * TaskList contains the task list e.g.,
  * it has operations to add/delete tasks in the list.
  */
 public class TaskList {
@@ -26,13 +26,13 @@ public class TaskList {
     }
 
     public Task get(int index) {
-    	return taskList.get(index);
+        return taskList.get(index);
     }
 
     public int size() {
-    	return taskList.size();
+        return taskList.size();
     }
-
+    
     public ArrayList<Task> getList() {
         return taskList;
     }
