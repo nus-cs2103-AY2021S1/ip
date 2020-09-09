@@ -1,6 +1,9 @@
 import java.nio.file.*;
 import java.util.List;
 
+/**
+ * Duke is a Personal Assistant bot that helps you to keep track of various tasks.
+ */
 public class Duke {
     private TaskList taskList;
     private Storage storage;
@@ -18,6 +21,9 @@ public class Duke {
         new Duke().run();
     }
 
+    /**
+     * Starts duke
+     */
     public void run() {
         ui.showWelcome();
         boolean toContinue = true;

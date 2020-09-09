@@ -1,8 +1,11 @@
+/**
+ * The Event class acts as a task that occurs on a specific day.
+ * It extends the parent class Task and has a LocalDate at to represent the specified date
+ */
 public class Event extends Task  {
     private String time;
     Event(String name, String time) {
-        super(name);
-        this.time = time;
+        this(name, time, false);
     }
 
 
@@ -11,6 +14,12 @@ public class Event extends Task  {
         this.time = time;
     }
 
+    /**
+     * Creates an event from the user command
+     * @param description
+     * @return a event with details from the user input
+     * @throws DukeException
+     */
     public static Event create(String description) throws DukeException {
         String[] keywords = description.split(" /at ", 2);
         if (keywords.length < 2) {

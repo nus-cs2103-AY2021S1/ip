@@ -8,13 +8,26 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Stream;
 
+/**
+ * The storage class is the class responsible for loading and saving the list of tasks into a file
+ * It can load tasks from a file that is formatted correctly.
+ * And write a list of tasks to a file.
+ */
 public class Storage {
     private Path savePath;
 
+    /**
+     * Creates a storage object with a savePath to load and save the file to
+     * @param savePath
+     */
     Storage(Path savePath) {
         this.savePath = savePath;
     }
 
+    /**
+     * Saves the TaskList to the object path
+     * @param taskList
+     */
     public void save(TaskList taskList) {
         File saveFile = savePath.toFile();
         try {
@@ -33,6 +46,10 @@ public class Storage {
         }
     }
 
+    /**
+     * Loads the Task List from the file savePath.
+     * @return a task list with the tasks loaded from the file
+     */
     public List<Task> load() {
         List<Task> taskList = new ArrayList<>();
         if (!savePath.toFile().exists()) {
