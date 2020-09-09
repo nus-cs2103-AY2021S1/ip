@@ -2,7 +2,6 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.NoSuchFileException;
 import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.List;
@@ -60,15 +59,17 @@ public class Storage {
             stream.forEach((s -> {
                 String[] saveParts = s.split(" \\| ");
                 switch (saveParts[0]) {
-                    case "T":
-                        taskList.add(new Todo(saveParts[2], saveParts[1].equals("1")));
-                        break;
-                    case "D":
-                        taskList.add(new Deadline(saveParts[2], saveParts[3], saveParts[1].equals("1")));
-                        break;
-                    case "E":
-                        taskList.add(new Event(saveParts[2], saveParts[3], saveParts[1].equals("1")));
-                        break;
+                case "T":
+                    taskList.add(new Todo(saveParts[2], saveParts[1].equals("1")));
+                    break;
+                case "D":
+                    taskList.add(new Deadline(saveParts[2], saveParts[3], saveParts[1].equals("1")));
+                    break;
+                case "E":
+                    taskList.add(new Event(saveParts[2], saveParts[3], saveParts[1].equals("1")));
+                    break;
+                default:
+                    break;
                 }
             }));
         } catch (IOException e) {

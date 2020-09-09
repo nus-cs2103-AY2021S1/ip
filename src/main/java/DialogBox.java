@@ -13,10 +13,15 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Creates a dialog box
+     * @param l label for dialog box
+     * @param iv image of dialog box
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
-        this.setPadding(new Insets(10,0,10,0));
+        this.setPadding(new Insets(10, 0, 10, 0));
         this.setSpacing(20);
         text.setWrapText(true);
         displayPicture.setFitWidth(100.0);

@@ -1,7 +1,7 @@
 /**
  * Todo is a task without any date/time attached to it e.g., visit new theme park
  */
-public class Todo extends Task  {
+public class Todo extends Task {
     /**
      * Creates a todo with the string name that has not been done
      * @param name

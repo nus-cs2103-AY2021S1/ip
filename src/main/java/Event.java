@@ -2,7 +2,7 @@
  * The Event class acts as a task that occurs on a specific day.
  * It extends the parent class Task and has a LocalDate at to represent the specified date
  */
-public class Event extends Task  {
+public class Event extends Task {
     private String time;
     Event(String name, String time) {
         this(name, time, false);
@@ -23,7 +23,7 @@ public class Event extends Task  {
     public static Event create(String description) throws DukeException {
         String[] keywords = description.split(" /at ", 2);
         if (keywords.length < 2) {
-            throw new DukeException("☹ OOPS!!! Add a time using \" /at <time>\".");
+            throw new DukeException("Add a time using \" /at <time>\".");
         }
         return new Event(keywords[0], keywords[1]);
     }

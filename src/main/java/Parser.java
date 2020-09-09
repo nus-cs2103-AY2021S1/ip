@@ -15,7 +15,7 @@ public class Parser {
     }
 
     /**
-     * Gets the task index of a task list using a command, something like "<command> <number>"
+     * Gets the task index of a task list using a command, something like "{command} {number}"
      * @param commands
      * @param taskList
      * @return a number related to the task list
@@ -30,7 +30,7 @@ public class Parser {
             int index = Integer.parseInt(commands[1]);
             Task task = taskList.get(index - 1);
             return index - 1;
-        }  catch (NumberFormatException nfe) {
+        } catch (NumberFormatException nfe) {
             throw new DukeException("Please input an actual number e.g. 1, 2, 3.");
         } catch (IndexOutOfBoundsException iobe) {
             throw new DukeException("Please select a valid task.");
