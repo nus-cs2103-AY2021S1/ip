@@ -77,7 +77,7 @@ public class Ui {
         }
     }
     public void setMessageUndoneTask() {
-        message = "I've marked that task as unfinished.";
+        message = "I have marked that task as unfinished.";
     }
     public void setMessageUpcoming(String tasks, int numTasks, int numDays) {
         if (numTasks == 0) {
