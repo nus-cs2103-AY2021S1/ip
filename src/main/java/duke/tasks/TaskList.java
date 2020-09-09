@@ -20,6 +20,7 @@ public class TaskList implements Serializable {
     }
 
     public Task getTask(int index) {
+        assert (index >= 0 && index < this.listSize());
         return this.tasks.get(index);
     }
 
@@ -28,6 +29,7 @@ public class TaskList implements Serializable {
     }
 
     public void deleteTask(int index) {
+        assert (index >= 0 && index < this.listSize());
         this.tasks.remove(index);
     }
 
