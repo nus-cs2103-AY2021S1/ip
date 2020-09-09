@@ -185,17 +185,19 @@ public class Command {
             InvalidDeadlineDescripDukeException, InvalidEventDescripDukeException,
             InvalidFirstDukeException, ParseException, IOException {
 
-        if (commandType.equals(CommandType.PRINTALLTASKS)) {
+        switch (commandType) {
+        case PRINT_ALL_TASKS:
             return ui.printAllTask(tasks);
-        } else if (commandType.equals(CommandType.EXITDUKE)) {
+        case EXIT_DUKE:
             return ui.closeDuke();
-        } else if (commandType.equals(CommandType.MARKASDONE)){
+        case MARK_AS_DONE: {
             int counter = Integer.parseInt(commandArr[1]);
 
             tasks.getTask(counter - 1).markAsDone();
             storage.saveToFile(tasks.tasks);
             return ui.markAsDone(tasks.getTask(counter - 1));
-        } else if (commandType.equals(CommandType.DELETETASK)){
+        }
+        case DELETE_TASK: {
             int counter = Integer.parseInt(commandArr[1]);
             String output;
 
@@ -203,32 +205,34 @@ public class Command {
             tasks.removeTask(counter - 1);
             storage.saveToFile(tasks.tasks);
             return output;
-        } else if (commandType.equals(CommandType.ADDTODO)){
+        }
+        case ADD_TODO:
             Task todoTask = createTodo();
 
             tasks.addTask(todoTask);
             storage.saveToFile(tasks.tasks);
             return ui.printAddedTask(todoTask, tasks.size());
-        } else if (commandType.equals(CommandType.ADDDEADLINE)) {
+        case ADD_DEADLINE:
             Task deadlineTask = createDeadline();
 
             tasks.addTask(deadlineTask);
             storage.saveToFile(tasks.tasks);
             return ui.printAddedTask(deadlineTask, tasks.size());
-        } else if (commandType.equals(CommandType.ADDEVENT)) {
+        case ADD_EVENT:
             Task eventTask = createEvent();
 
             tasks.addTask(eventTask);
             storage.saveToFile(tasks.tasks);
             return ui.printAddedTask(eventTask, tasks.size());
-        } else if (commandType.equals(CommandType.FINDTASK)) {
+        case FIND_TASK:
             String keyword = joinString(removeFirst(commandArr));
 
             ArrayList<Task> tempTasks = searchKeyWord(tasks, keyword);
             return ui.printSearchedTask(tempTasks);
-        } else {
+        default:
             return null;
         }
+
     }
 
     /**
@@ -237,11 +241,7 @@ public class Command {
      * @return boolean
      */
     public boolean isExit() {
-        if (commandType.equals(CommandType.EXITDUKE)) {
-            return true;
-        } else {
-            return false;
-        }
+        return commandType.equals(CommandType.EXIT_DUKE);
     }
 
 }

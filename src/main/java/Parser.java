@@ -70,23 +70,37 @@ public class Parser {
         String[] commandArr = fullCommand.split(" "); // split input into string array
         Command command;
 
-        if (commandArr[0].equals("bye")) {
-            command = new Command(CommandType.EXITDUKE, null);
-        } else if (commandArr[0].equals("list")) {
-            command = new Command(CommandType.PRINTALLTASKS, null);
-        } else if (commandArr[0].equals("done")) {
-            command = new Command(CommandType.MARKASDONE, commandArr);
-        } else if (commandArr[0].equals("delete")) {
-            command = new Command(CommandType.DELETETASK, commandArr);
-        } else if (commandArr[0].equals("todo")) {
-            command = new Command(CommandType.ADDTODO, commandArr);
-        } else if (commandArr[0].equals("deadline")) {
-            command = new Command(CommandType.ADDDEADLINE, commandArr);
-        } else if (commandArr[0].equals("event")) {
-            command = new Command(CommandType.ADDEVENT, commandArr);
-        } else if (commandArr[0].equals("find")) {
-            command = new Command(CommandType.FINDTASK, commandArr);
-        } else {
+        assert (commandArr.length > 0);
+        switch (commandArr[0]) {
+        case "bye":
+            command = new Command(CommandType.EXIT_DUKE, null);
+            break;
+        case "list":
+            command = new Command(CommandType.PRINT_ALL_TASKS, null);
+            break;
+        case "done":
+            command = new Command(CommandType.MARK_AS_DONE, commandArr);
+            break;
+        case "delete":
+            command = new Command(CommandType.DELETE_TASK, commandArr);
+            break;
+        case "todo":
+            command = new Command(CommandType.ADD_TODO, commandArr);
+            break;
+        case "deadline":
+            command = new Command(CommandType.ADD_DEADLINE, commandArr);
+            break;
+        case "event":
+            command = new Command(CommandType.ADD_EVENT, commandArr);
+            break;
+        case "find":
+            command = new Command(CommandType.FIND_TASK, commandArr);
+            break;
+        default:
+            command = null;
+        }
+
+        if (command == null) {
             throw new InvalidFirstDukeException();
         }
         return command;

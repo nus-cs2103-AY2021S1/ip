@@ -5,11 +5,7 @@ import java.time.format.DateTimeFormatter;
 public class StorageParser {
 
     public static boolean isDone(String symbol) {
-        if (symbol.equals("\u2713")) {
-            return true;
-        } else {
-            return false;
-        }
+        return symbol.equals("\u2713");
     }
 
     public static Task parse(String input) {
