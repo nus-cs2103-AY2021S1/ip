@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
@@ -144,7 +145,8 @@ public class ParserTest {
             Command command = Parser.parse(
                     new String[] { "deadline", "name /by 1400-1-31 1453" });
             assertEquals(new DeadlineCommand("name",
-                            LocalDateTime.of(1400, 1, 31, 14, 53)),
+                            LocalDateTime.of(1400, 1, 31, 14, 53),
+                            new HashSet<>()),
                     command);
         }
 
@@ -155,7 +157,8 @@ public class ParserTest {
             Command command = Parser.parse(
                     new String[] { "deadline", "test /by 1285-5-3 2144" });
             assertEquals(new DeadlineCommand("test",
-                            LocalDateTime.of(1285, 5, 3, 21, 44)),
+                            LocalDateTime.of(1285, 5, 3, 21, 44),
+                            new HashSet<>()),
                     command);
         }
 
@@ -260,7 +263,8 @@ public class ParserTest {
             Command command = Parser.parse(
                     new String[] { "event", "name /at 1400-1-31 1453" });
             assertEquals(new EventCommand("name",
-                            LocalDateTime.of(1400, 1, 31, 14, 53)),
+                            LocalDateTime.of(1400, 1, 31, 14, 53),
+                            new HashSet<>()),
                     command);
         }
 
@@ -271,7 +275,8 @@ public class ParserTest {
             Command command = Parser.parse(
                     new String[] { "event", "test /at 1285-5-3 2144" });
             assertEquals(new EventCommand("test",
-                            LocalDateTime.of(1285, 5, 3, 21, 44)),
+                            LocalDateTime.of(1285, 5, 3, 21, 44),
+                            new HashSet<>()),
                     command);
         }
 

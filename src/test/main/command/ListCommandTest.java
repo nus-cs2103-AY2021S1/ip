@@ -4,12 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import main.exception.InvalidOptionException;
 import main.task.Deadline;
 import main.task.Event;
 import main.task.TaskList;
@@ -18,19 +20,20 @@ import main.ui.Ui;
 
 public class ListCommandTest {
     private static final Ui UI = new Ui();
-    private static final Todo TASK_ONE = new Todo("task 1", true);
-    private static final Deadline TASK_TWO = new Deadline("task 2",
-            LocalDateTime.of(193, 7, 26, 13, 50));
-    private static final Event TASK_THREE = new Event(
-            "task 3", "1993-12-06T10:10", false);
+    private static Deadline taskTwo;
     private static TaskList tasks;
 
     @BeforeEach
-    public void beforeEach() {
+    public void beforeEach() throws InvalidOptionException {
+        Todo taskOne = new Todo("task 1", true);
+        taskTwo = new Deadline("task 2",
+                LocalDateTime.of(193, 7, 26, 13, 50), new HashSet<>());
+        Event taskThree = new Event(
+                "task 3", "", "1993-12-06T10:10", false);
         tasks = new TaskList();
-        tasks.add(TASK_ONE);
-        tasks.add(TASK_TWO);
-        tasks.add(TASK_THREE);
+        tasks.add(taskOne);
+        tasks.add(taskTwo);
+        tasks.add(taskThree);
     }
 
     @Nested
@@ -47,7 +50,7 @@ public class ListCommandTest {
         @DisplayName("should return an alternate string with an alternate list")
         public void execute_altList_altStringOfTasks() {
             TaskList altList = new TaskList();
-            altList.add(TASK_TWO);
+            altList.add(taskTwo);
             assertEquals(UI.printTaskList(altList),
                     new ListCommand().execute(UI, altList));
         }

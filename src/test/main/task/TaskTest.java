@@ -10,7 +10,7 @@ import org.junit.jupiter.api.Test;
 
 public class TaskTest {
     private static final Task TASK_ONE = new Task("task 1");
-    private static final Task TASK_TWO = new Task("task 2", true);
+    private static final Task TASK_TWO = new Task("task 2");
 
     @Nested
     @DisplayName("write")
@@ -24,7 +24,7 @@ public class TaskTest {
         @Test
         @DisplayName("should return a string meant for writing to disk with alt task")
         public void write_altTask_altString() {
-            assertEquals(",1,task 2\n", TASK_TWO.write());
+            assertEquals(",0,task 2\n", TASK_TWO.write());
         }
     }
 
@@ -40,7 +40,7 @@ public class TaskTest {
         @Test
         @DisplayName("should return a string representation of an alternate task instance")
         public void toString_altTask_altString() {
-            assertEquals("[\u2713] task 2", TASK_TWO.toString());
+            assertEquals("[\u2718] task 2", TASK_TWO.toString());
         }
     }
 
@@ -56,19 +56,13 @@ public class TaskTest {
         @Test
         @DisplayName("should return true for an alt task with the same name")
         public void equals_altTask_true() {
-            assertTrue(TASK_TWO.equals(new Task("task 2", true)));
+            assertTrue(TASK_TWO.equals(new Task("task 2")));
         }
 
         @Test
         @DisplayName("should return false for a task with different name")
         public void equals_task_false() {
             assertFalse(TASK_ONE.equals(new Task("different")));
-        }
-
-        @Test
-        @DisplayName("should return false for a task with different done state")
-        public void equals_altTask_false() {
-            assertFalse(TASK_ONE.equals(new Task("task 1", true)));
         }
     }
 }

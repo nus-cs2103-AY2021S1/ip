@@ -4,12 +4,14 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import main.exception.InvalidOptionException;
 import main.task.Deadline;
 import main.task.Event;
 import main.task.TaskList;
@@ -18,19 +20,21 @@ import main.ui.Ui;
 
 public class FindCommandTest {
     private static final Ui UI = new Ui();
-    private static final Todo TASK_ONE = new Todo("task 1", true);
-    private static final Deadline TASK_TWO = new Deadline("task 2",
-            LocalDateTime.of(193, 7, 26, 13, 50));
-    private static final Event TASK_THREE = new Event(
-            "task 3", "1993-12-06T10:10", false);
+    private static Todo taskOne;
+    private static Deadline taskTwo;
     private static TaskList tasks;
 
     @BeforeEach
-    public void beforeEach() {
+    public void beforeEach() throws InvalidOptionException {
+        taskOne = new Todo("task 1", true);
+        taskTwo = new Deadline("task 2",
+                LocalDateTime.of(193, 7, 26, 13, 50), new HashSet<>());
+        Event taskThree = new Event(
+                "task 3", "", "1993-12-06T10:10", false);
         tasks = new TaskList();
-        tasks.add(TASK_ONE);
-        tasks.add(TASK_TWO);
-        tasks.add(TASK_THREE);
+        tasks.add(taskOne);
+        tasks.add(taskTwo);
+        tasks.add(taskThree);
     }
 
     @Nested
@@ -47,7 +51,7 @@ public class FindCommandTest {
         @DisplayName("should return an alternate string with an alternate search term")
         public void execute_altSearchTerm_altStringOfTasks() {
             TaskList foundList = new TaskList();
-            foundList.add(TASK_TWO);
+            foundList.add(taskTwo);
             assertEquals(UI.printFoundList(foundList),
                     new FindCommand("2").execute(UI, tasks));
         }
@@ -57,7 +61,7 @@ public class FindCommandTest {
                 + "with multiple search terms")
         public void execute_multipleSearchTerms_stringOfTasks() {
             TaskList foundList = new TaskList();
-            foundList.add(TASK_ONE);
+            foundList.add(taskOne);
             assertEquals(UI.printFoundList(foundList),
                     new FindCommand("ta 1").execute(UI, tasks));
             assertEquals(UI.printFoundList(foundList),

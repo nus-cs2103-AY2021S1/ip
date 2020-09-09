@@ -20,6 +20,7 @@ import javafx.scene.layout.VBox;
 import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import main.command.Command;
+import main.exception.InvalidOptionException;
 import main.exception.StuffException;
 import main.parser.Parser;
 import main.storage.Storage;
@@ -123,6 +124,17 @@ public class Stuff extends Application {
             stuffDialog.setSpacing(10);
 
             dialogContainer.getChildren().addAll(stuffDialog);
+        } catch (InvalidOptionException e) {
+            stuffImageView = new ImageView(stuffImage);
+
+            stuffImageView.setClip(new Circle(50, 50, 50));
+
+            DialogBox stuffDialog = DialogBox
+                    .getStuffDialog(new Label(e.getMessage()), stuffImageView);
+
+            stuffDialog.setSpacing(10);
+
+            dialogContainer.getChildren().addAll(stuffDialog);
         }
 
         sendButton.setOnMouseClicked(event -> handleUserInput());
@@ -153,7 +165,7 @@ public class Stuff extends Application {
         stuffLoadingImageView.setClip(new Circle(50, 50, 50));
         stuffImageView.setClip(new Circle(50, 50, 50));
 
-        String[] splitInput = input.trim().split(" ", 2);
+        String[] splitInput = input.trim().split(" ");
 
         try {
             Command command = Parser.parse(splitInput);

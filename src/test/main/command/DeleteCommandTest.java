@@ -5,12 +5,14 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import main.exception.InvalidOptionException;
 import main.exception.InvalidTaskException;
 import main.task.Deadline;
 import main.task.Event;
@@ -21,19 +23,19 @@ import main.ui.Ui;
 
 public class DeleteCommandTest {
     private static final Ui UI = new Ui();
-    private static final Todo TASK_ONE = new Todo("task 1", true);
-    private static final Deadline TASK_TWO = new Deadline("task 2",
-            LocalDateTime.of(193, 7, 26, 13, 50));
-    private static final Event TASK_THREE = new Event(
-            "task 3", "1993-12-06T10:10", false);
     private static TaskList tasks;
 
     @BeforeEach
-    public void beforeEach() {
+    public void beforeEach() throws InvalidOptionException {
+        Todo taskOne = new Todo("task 1", true);
+        Deadline taskTwo = new Deadline("task 2",
+                LocalDateTime.of(193, 7, 26, 13, 50), new HashSet<>());
+        Event taskThree = new Event(
+                "task 3", "", "1993-12-06T10:10", false);
         tasks = new TaskList();
-        tasks.add(TASK_ONE);
-        tasks.add(TASK_TWO);
-        tasks.add(TASK_THREE);
+        tasks.add(taskOne);
+        tasks.add(taskTwo);
+        tasks.add(taskThree);
     }
 
     @Nested

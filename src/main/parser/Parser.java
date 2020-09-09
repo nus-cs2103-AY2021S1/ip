@@ -2,6 +2,9 @@ package main.parser;
 
 import java.time.DateTimeException;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
 
 import main.command.Command;
 import main.command.DeadlineCommand;
@@ -11,11 +14,13 @@ import main.command.EventCommand;
 import main.command.ExitCommand;
 import main.command.FindCommand;
 import main.command.ListCommand;
+import main.command.Option;
 import main.command.TodoCommand;
 import main.exception.EmptyMessageException;
 import main.exception.InvalidDateException;
 import main.exception.InvalidDeadlineFormatException;
 import main.exception.InvalidEventFormatException;
+import main.exception.InvalidOptionException;
 import main.exception.InvalidTaskException;
 import main.exception.UnknownCommandException;
 
@@ -73,15 +78,13 @@ public class Parser {
         }
     }
 
-    private static Command parseAdd(String[] input)
+    private static Command parseAdd(String command, String description, HashSet<Option> options)
             throws InvalidDeadlineFormatException,
                 InvalidDateException,
                 InvalidEventFormatException,
                 UnknownCommandException {
-        assert(input.length > 1);
+        assert(description.length() > 0);
 
-        String command = input[0];
-        String description = input[1];
         String[] nameAndTime;
         boolean isSingleArgument;
 
@@ -96,7 +99,7 @@ public class Parser {
                 throw new InvalidDeadlineFormatException();
             }
 
-            return new DeadlineCommand(nameAndTime[0], toDateTime(nameAndTime[1]));
+            return new DeadlineCommand(nameAndTime[0], toDateTime(nameAndTime[1]), options);
         case COMMAND_EVENT:
             nameAndTime = description.split(" /at ", 2);
             isSingleArgument = nameAndTime.length == 1;
@@ -105,10 +108,51 @@ public class Parser {
                 throw new InvalidEventFormatException();
             }
 
-            return new EventCommand(nameAndTime[0], toDateTime(nameAndTime[1]));
+            return new EventCommand(nameAndTime[0], toDateTime(nameAndTime[1]), options);
         default:
             throw new UnknownCommandException();
         }
+    }
+
+    private static String[][] processArgs(String[] input) {
+        String[] command = { input[0] };
+        List<String> shortOptions = new ArrayList<>();
+        List<String> fullOptions = new ArrayList<>();
+        List<String> description = new ArrayList<>();
+
+        for (int i = 1; i < input.length; i++) {
+            String arg = input[i];
+
+            if (arg.startsWith("--")) {
+                fullOptions.add(arg.substring(2));
+            } else if (arg.startsWith("-")) {
+                shortOptions.add(arg.substring(1));
+            } else {
+                description.add(arg);
+            }
+        }
+
+        return new String[][] {
+            command,
+            fullOptions.toArray(new String[0]),
+            shortOptions.toArray(new String[0]),
+            description.toArray(new String[0])
+        };
+    }
+
+    private static HashSet<Option> parseOptions(
+            String[] fullAliases, String[] shortAliases) throws InvalidOptionException {
+        HashSet<Option> options = new HashSet<>();
+
+        for (String fullAlias : fullAliases) {
+            options.add(Option.getOptionFromFullAlias(fullAlias));
+        }
+
+        for (String shortAlias : shortAliases) {
+            options.add(Option.getOptionFromShortAlias(shortAlias));
+        }
+
+        return options;
     }
 
     /**
@@ -130,9 +174,13 @@ public class Parser {
                 UnknownCommandException,
                 InvalidDateException,
                 InvalidDeadlineFormatException,
-                InvalidEventFormatException {
-        String command = input[0];
-        boolean isSingleArgument = input.length == 1;
+                InvalidEventFormatException,
+                InvalidOptionException {
+        String[][] processedInput = processArgs(input);
+        String command = processedInput[0][0];
+        String description = String.join(" ", processedInput[3]);
+        HashSet<Option> options = parseOptions(processedInput[1], processedInput[2]);
+        boolean isSingleArgument = description.length() == 0;
         int taskNum;
 
         try {
@@ -146,7 +194,7 @@ public class Parser {
                     throw new InvalidTaskException();
                 }
 
-                taskNum = Integer.parseInt(input[1]);
+                taskNum = Integer.parseInt(description);
 
                 return new DoneCommand(taskNum);
             case COMMAND_DELETE:
@@ -154,7 +202,7 @@ public class Parser {
                     throw new InvalidTaskException();
                 }
 
-                taskNum = Integer.parseInt(input[1]);
+                taskNum = Integer.parseInt(description);
 
                 return new DeleteCommand(taskNum);
             case COMMAND_TODO:
@@ -164,13 +212,13 @@ public class Parser {
                     throw new EmptyMessageException(command);
                 }
 
-                return parseAdd(input);
+                return parseAdd(command, description, options);
             case COMMAND_FIND:
                 if (isSingleArgument) {
                     return new FindCommand("");
                 }
 
-                return new FindCommand(input[1]);
+                return new FindCommand(description);
             default:
                 throw new UnknownCommandException();
             }

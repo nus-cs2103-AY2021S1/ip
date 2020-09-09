@@ -3,17 +3,27 @@ package main.task;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDateTime;
+import java.util.HashSet;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
 
+import main.exception.InvalidOptionException;
+
 public class TaskListTest {
-    private static final Todo TASK_ONE = new Todo("task 1", true);
-    private static final Deadline TASK_TWO = new Deadline("task 2",
-            LocalDateTime.of(1993, 12, 6, 10, 10));
-    private static final Event TASK_THREE = new Event(
-            "task 1", "1993-12-06T10:10", false);
+    private static Todo taskOne;
+    private static Deadline taskTwo;
+    private static Event taskThree;
+
+    @BeforeEach
+    public void beforeEach() throws InvalidOptionException {
+        taskOne = new Todo("task 1", true);
+        taskTwo = new Deadline("task 2",
+                LocalDateTime.of(1993, 12, 6, 10, 10), new HashSet<>());
+        taskThree = new Event("task 1", "", "1993-12-06T10:10", false);
+    }
 
     @Nested
     @DisplayName("size")
@@ -28,9 +38,9 @@ public class TaskListTest {
         @DisplayName("should return list size for alternate list")
         public void size_altTaskList_altSize() {
             TaskList tasks = new TaskList();
-            tasks.add(TASK_ONE);
-            tasks.add(TASK_TWO);
-            tasks.add(TASK_THREE);
+            tasks.add(taskOne);
+            tasks.add(taskTwo);
+            tasks.add(taskThree);
 
             assertEquals(3, tasks.size());
         }
@@ -43,9 +53,9 @@ public class TaskListTest {
         @DisplayName("should return task from list")
         public void size_taskList_size() {
             TaskList tasks = new TaskList();
-            tasks.add(TASK_THREE);
+            tasks.add(taskThree);
             assertEquals(1, tasks.size());
-            assertEquals(TASK_THREE, tasks.get(0));
+            assertEquals(taskThree, tasks.get(0));
             assertEquals(1, tasks.size());
         }
 
@@ -53,12 +63,12 @@ public class TaskListTest {
         @DisplayName("should return alternate task from list")
         public void size_altTaskList_altSize() {
             TaskList tasks = new TaskList();
-            tasks.add(TASK_ONE);
-            tasks.add(TASK_TWO);
-            tasks.add(TASK_THREE);
+            tasks.add(taskOne);
+            tasks.add(taskTwo);
+            tasks.add(taskThree);
 
             assertEquals(3, tasks.size());
-            assertEquals(TASK_TWO, tasks.get(1));
+            assertEquals(taskTwo, tasks.get(1));
             assertEquals(3, tasks.size());
         }
     }
@@ -72,9 +82,9 @@ public class TaskListTest {
             TaskList tasks = new TaskList();
 
             assertEquals(0, tasks.size());
-            tasks.add(TASK_ONE);
+            tasks.add(taskOne);
             assertEquals(1, tasks.size());
-            assertEquals(TASK_ONE, tasks.get(0));
+            assertEquals(taskOne, tasks.get(0));
         }
 
         @Test
@@ -83,9 +93,9 @@ public class TaskListTest {
             TaskList tasks = new TaskList();
 
             assertEquals(0, tasks.size());
-            tasks.add(TASK_TWO);
+            tasks.add(taskTwo);
             assertEquals(1, tasks.size());
-            assertEquals(TASK_TWO, tasks.get(0));
+            assertEquals(taskTwo, tasks.get(0));
         }
     }
 
@@ -96,10 +106,10 @@ public class TaskListTest {
         @DisplayName("should remove and return task from list")
         public void remove_index_removedTask() {
             TaskList tasks = new TaskList();
-            tasks.add(TASK_TWO);
+            tasks.add(taskTwo);
 
             assertEquals(1, tasks.size());
-            assertEquals(TASK_TWO, tasks.remove(0));
+            assertEquals(taskTwo, tasks.remove(0));
             assertEquals(0, tasks.size());
         }
 
@@ -107,11 +117,11 @@ public class TaskListTest {
         @DisplayName("should remove and return alt task from list")
         public void remove_altIndex_altRemovedTask() {
             TaskList tasks = new TaskList();
-            tasks.add(TASK_ONE);
-            tasks.add(TASK_THREE);
+            tasks.add(taskOne);
+            tasks.add(taskThree);
 
             assertEquals(2, tasks.size());
-            assertEquals(TASK_THREE, tasks.remove(1));
+            assertEquals(taskThree, tasks.remove(1));
             assertEquals(1, tasks.size());
         }
     }
