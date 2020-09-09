@@ -50,12 +50,14 @@ public class Ui {
      * Prints out "deleted task" messages to the user.
      */
     public void deletedTask(Task thisTask, ArrayList<Task> list) {
+        assert !list.isEmpty() : "list is empty";
         System.out.println("     Sure! I've removed this task for you:");
         System.out.println("       " + thisTask.toString());
         System.out.println("     Now you have " + list.size() + " tasks in the list.");
     }
 
     public String deletedTaskMessage(Task thisTask, ArrayList<Task> list) {
+        assert !list.isEmpty() : "list is empty";
         return "     Sure! I've removed this task for you:\n"
                 + "       " + thisTask.toString() + "\n"
                 + "     Now you have " + list.size() + " tasks in the list.\n";
@@ -67,11 +69,13 @@ public class Ui {
      * @param list The list of tasks.
      */
     public void updatedTask(ArrayList<Task> list) {
+        assert !list.isEmpty() : "list is empty";
         System.out.println("       " + list.get(list.size() - 1));
         System.out.println("     Now you have " + list.size() + " tasks in the list.");
     }
 
     public String updatedTaskMessage(ArrayList<Task> list) {
+        assert !list.isEmpty() : "list is empty";
         return "       " + list.get(list.size() - 1) + "\n"
                 + "     Now you have " + list.size() + " tasks in the list.\n";
     }
@@ -80,6 +84,7 @@ public class Ui {
      * Prints out a list of tasks to the user.
      */
     public void printList(ArrayList<Task> list) {
+        assert !list.isEmpty() : "list is empty";
         Task thisTask;
         System.out.println("     Here are the tasks in your list:");
         for (int i = 1; i <= list.size(); i++) {
@@ -89,6 +94,7 @@ public class Ui {
     }
 
     public String printListMessage(ArrayList<Task> list) {
+        assert !list.isEmpty() : "list is empty";
         Task thisTask;
         String output = "     Here are the tasks in your list:\n";
         for (int i = 1; i <= list.size(); i++) {
@@ -105,6 +111,7 @@ public class Ui {
      * @param list The list of tasks to be searched.
      */
     public void printFoundTask(String keyword, ArrayList<Task> list) {
+        assert !list.isEmpty() : "list is empty";
         Task thisTask;
         System.out.println("     Here are the matching tasks in your list:");
         for (int i = 1, j = 1; i <= list.size(); i++) {
@@ -117,6 +124,7 @@ public class Ui {
     }
 
     public String printFoundTaskMessage(String keyword, ArrayList<Task> list) {
+        assert !list.isEmpty() : "list is empty";
         Task thisTask;
         String output = "     Here are the matching tasks in your list:\n";
         for (int i = 1, j = 1; i <= list.size(); i++) {
