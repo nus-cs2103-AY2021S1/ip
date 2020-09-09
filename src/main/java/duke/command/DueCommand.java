@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.stream.Stream;
 
 import duke.exception.InvalidCommandException;
-import duke.parser.DateTimeParsing;
+import duke.util.DukeDateTime;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -26,8 +26,8 @@ public class DueCommand extends Command {
     public static String execute(String in, TaskList taskList) throws InvalidCommandException {
         String dateStr = in.replaceFirst("due ", "");
         try {
-            LocalDate date = DateTimeParsing.parseDate(dateStr);
-            String formattedDate = DateTimeParsing.localDateToFormattedString(date);
+            LocalDate date = DukeDateTime.parseDate(dateStr);
+            String formattedDate = DukeDateTime.localDateToFormattedString(date);
 
             ArrayList<String> filteredTasks = new ArrayList<>();
             int len = taskList.size();

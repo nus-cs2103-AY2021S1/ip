@@ -59,6 +59,13 @@ public class Event extends Task {
     }
 
     @Override
+    public boolean isDueInNDays(int n) {
+        assert n >= 0 : "isDueInNDays should receive a non-negative input";
+
+        return DukeDateTime.isWithinNDays(date, n);
+    }
+
+    @Override
     public String toString() {
         String formattedDate = DukeDateTime.localDateToFormattedString(date);
         return EVENT_SYMBOL + super.toString() + "(at: " + formattedDate + " " + time12h + ")";

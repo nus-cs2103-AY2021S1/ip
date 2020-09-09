@@ -9,7 +9,7 @@ import java.time.LocalDate;
 import org.junit.jupiter.api.Test;
 
 import duke.exception.InvalidTodoException;
-import duke.parser.DateTimeParsing;
+import duke.util.DukeDateTime;
 
 public class TodoTest {
     @Test
@@ -33,7 +33,7 @@ public class TodoTest {
     public void isDueOn() throws InvalidTodoException {
         String description = "This is a test on isDueOn.";
         Todo todo = Todo.createTodo(description);
-        LocalDate date1 = DateTimeParsing.parseDate("2018-09-21");
+        LocalDate date1 = DukeDateTime.parseDate("2018-09-21");
         assertFalse(todo.isDueOn(date1));
     }
 
