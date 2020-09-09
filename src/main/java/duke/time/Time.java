@@ -27,6 +27,8 @@ public class Time {
      * @return the Time object formed
      */
     public static Time stringToTime(String timeString) {
+        assert !timeString.isBlank() : "timeString cannot be empty";
+
         LocalDateTime time = TimeParser.parse(timeString);
 
         if (time == null) {
