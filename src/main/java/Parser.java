@@ -146,21 +146,28 @@ public class Parser {
             }
         } else if ((s.length() >= 6) && (s.substring(0, 6).equals("delete"))) {
             if (s.length() <= 7) {
-                throw new InvalidDeleteException("\u2639" + " OOPS!!! The task to be deleted is not "
+                throw new InvalidDeleteException("\u2639" + "OOPS!!! The tasks to be deleted are not "
                         + "specified.");
+            } else if (s.substring(7).equals("all")) {
+                lst.add("Delete");
+                lst.add("All");
+                return lst;
             } else {
                 try {
-                    int i = Integer.parseInt(s.substring(7)) - 1;
-                    if ((i < 0) || (i >= size)) {
-                        throw new InvalidDeleteException("\u2639" + " OOPS!!! The number specified does not "
-                                + "represent a valid task.");
-                    }
                     lst.add("Delete");
-                    lst.add(Integer.toString(i));
+                    String[] numbers = s.substring(7).split(" ");
+                    for (int i = 0; i < numbers.length; i++) {
+                        int num = Integer.parseInt(numbers[i]) - 1;
+                        if ((num < 0) || (num >= size)) {
+                            throw new InvalidDeleteException("\u2639" + " OOPS!!! There is a number specified "
+                                    + "that does not represent a valid task.");
+                        }
+                        lst.add(Integer.toString(num));
+                    }
                     return lst;
                 } catch (NumberFormatException e) {
-                    throw new InvalidDeleteException("\u2639" + " OOPS!!! The task to be deleted is not "
-                            + "specified by a valid number.");
+                    throw new InvalidDeleteException("\u2639" + " OOPS!!! There is a task to be deleted "
+                            + " that is not specified by a valid number.");
                 }
             }
         } else if ((s.length() >= 4) && (s.substring(0, 4).equals("find"))) {
