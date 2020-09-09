@@ -27,6 +27,9 @@ public class DoneCommand extends Command {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String sendRequest() {
         return DONE_REQUEST;

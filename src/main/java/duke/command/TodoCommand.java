@@ -23,6 +23,9 @@ public class TodoCommand extends AddCommand {
         this.name = content;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<String> getContent() {
         List<String> contentList = new ArrayList<>();

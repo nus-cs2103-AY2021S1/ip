@@ -4,6 +4,9 @@ package duke.command;
 public class AddCommand extends Command {
     protected static final String ADD_REQUEST = "create";
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String sendRequest() {
         return ADD_REQUEST;

@@ -6,17 +6,26 @@ public class Todo extends Task {
         super(name, isDone);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Todo complete() {
         return new Todo(this.name, true);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String formatTask() {
         int isDoneSignal = this.isDoneTask() ? 1 : 0;
         return "T | " + isDoneSignal + " | " + this.name;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String toString() {
         String taskString = super.toString();

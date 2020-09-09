@@ -8,11 +8,17 @@ public class ExitCommand extends Command {
         super();
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String sendRequest() {
         return EXIT_REQUEST;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean isExit() {
         return true;

@@ -32,6 +32,9 @@ public class DeadlineCommand extends AddCommand {
         this.schedule = contentParts[1];
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<String> getContent() {
         List<String> contentList = new ArrayList<>();

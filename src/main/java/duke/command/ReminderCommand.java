@@ -27,6 +27,9 @@ public class ReminderCommand extends Command {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String sendRequest() {
         return REMINDER_REQUEST;

@@ -25,6 +25,9 @@ public class DeleteCommand extends Command {
         }
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String sendRequest() {
         return DELETE_REQUEST;

@@ -270,9 +270,7 @@ public class CommandAgent {
     public static String generateReminderResponse(List<String> mostRecentDues) {
         StringBuilder result = new StringBuilder("Here are your most recent ");
         result.append(mostRecentDues.size()).append(" tasks that you haven't done:");
-        for (String due: mostRecentDues) {
-            result.append(due);
-        }
+        mostRecentDues.forEach(due -> result.append(due));
         return result.toString();
     }
 }

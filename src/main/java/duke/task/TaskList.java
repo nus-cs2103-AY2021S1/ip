@@ -109,9 +109,7 @@ public class TaskList {
     public List<String> formatTaskList() {
         List<String> formattedTaskList = new ArrayList<>();
 
-        for (Task t: this.tasks) {
-            formattedTaskList.add(t.formatTask());
-        }
+        tasks.forEach(task -> formattedTaskList.add(task.formatTask()));
 
         return formattedTaskList;
     }
@@ -141,11 +139,11 @@ public class TaskList {
      */
     public List<String> findTasksByDueDate(int countLimit) {
         List<Task> scheduledTasks = new ArrayList<>();
-        for (Task t: this.tasks) {
-            if (t.isScheduled() & !t.isDoneTask()) {
-                scheduledTasks.add(t);
+        tasks.forEach(task -> {
+            if (task.isScheduled() && !task.isDoneTask()) {
+                scheduledTasks.add(task);
             }
-        }
+        });
 
         scheduledTasks.sort(Comparator.comparing(Task::getScheduleInLocalDate));
         int k = Math.min(scheduledTasks.size(), countLimit);

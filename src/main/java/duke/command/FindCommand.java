@@ -32,11 +32,17 @@ public class FindCommand extends Command {
         this.keyword = contentParts[0];
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String sendRequest() {
         return FIND_REQUEST;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public List<String> getContent() {
         List<String> contentList = new ArrayList<>();
