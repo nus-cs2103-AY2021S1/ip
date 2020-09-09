@@ -39,6 +39,18 @@ public class EventTask extends Task {
         return period == null ? periodString : period.toString();
     }
 
+    /**
+     * Creates EventTask with array as input. Array size should be exactly 2. First element will be used as description
+     * and second element will be used as period.
+     *
+     * @param arguments The input array.
+     * @return An EventTask.
+     */
+    public static EventTask of(String... arguments) {
+        assert(arguments.length == 2);
+        return new EventTask(arguments[0], arguments[1]);
+    }
+
     @Override
     public String toSavedString() {
         return String.format("E @@ %s @@ %s @@ %s", toSavedStringIsDone(), desc, toSavedStringPeriod());

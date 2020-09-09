@@ -1,37 +1,24 @@
 package duke;
 
+import java.util.Map;
+import java.util.stream.Stream;
+
+import javafx.util.Pair;
+
 /**
  * Parses user inputs or saved strings.
  */
 public class Parser {
-    private static boolean isBye(String s) {
-        return s.toLowerCase().equals("bye");
-    }
-
-    private static boolean isList(String s) {
-        return s.toLowerCase().equals("list");
-    }
-
-    private static boolean isDone(String s) {
-        return s.length() >= 4
-                && s.substring(0, 4)
-                    .toLowerCase()
-                    .equals("done");
-    }
-
-    private static boolean isDelete(String s) {
-        return s.length() >= 6
-                && s.substring(0, 6)
-                    .toLowerCase()
-                    .equals("delete");
-    }
-
-    private static boolean isFind(String s) {
-        return s.length() >= 4
-                && s.substring(0, 4)
-                    .toLowerCase()
-                    .equals("find");
-    }
+    private Map<String, ParserResult> stringParserResultMap = Map.of(
+        "bye", ParserResult.BYE,
+        "list", ParserResult.LIST,
+        "done", ParserResult.DONE,
+        "delete", ParserResult.DELETE,
+        "find", ParserResult.FIND,
+        "todo", ParserResult.ADD,
+        "deadline", ParserResult.ADD,
+        "event", ParserResult.ADD
+    );
 
     /**
      * Returns the index of the task to be marked done.
@@ -63,6 +50,11 @@ public class Parser {
         return s.split(" ")[1];
     }
 
+    // Returns an array of the input string split by whitespace.
+    private String[] inputToArray(String s) {
+        return s.trim().split(" +");
+    }
+
     /**
      * Returns a task represented by the input.
      *
@@ -71,40 +63,41 @@ public class Parser {
      * @throws IllegalArgumentException Unrecognizable task command.
      * @throws IndexOutOfBoundsException Task formatted wrongly.
      */
-    public Task parseAddedTask(String s) throws IllegalArgumentException, IndexOutOfBoundsException {
-        String[] processed;
-        Task task;
+    public Task parseAddedTask(String s) throws IndexOutOfBoundsException {
+        s = s.trim();
+        String[] processedArray = inputToArray(s);
+        String taskType = processedArray[0].toLowerCase();
+        assert("todo".startsWith(taskType) || "deadline".startsWith(taskType) || "event".startsWith(taskType));
+        Task processedTask = null;
         try {
-            switch (s.split(" ")[0]) {
-            case "todo":
-                task = new ToDoTask(s.substring(5));
-                break;
-            case "event":
-                processed = s.substring(6).split(" /at ");
-                task = new EventTask(processed[0], processed[1]);
-                break;
-            case "deadline":
-                processed = s.substring(9).split(" /by ");
-                task = new DeadlineTask(processed[0], processed[1]);
-                break;
-            default:
-                throw new IllegalArgumentException("Unrecognizable task command.");
+            String[] stringsAfterType = s.split(String.format("%s +", processedArray[0]));
+            if (stringsAfterType.length <= 1) {
+                throw new IndexOutOfBoundsException("Task formatted incorrectly.");
             }
-        } catch (IllegalArgumentException e) {
-            throw e;
+            String stringAfterType = stringsAfterType[1];
+            String[] arguments;
+            if ("todo".startsWith(taskType)) {
+                processedTask = ToDoTask.of(stringAfterType);
+            } else if ("deadline".startsWith(taskType)) {
+                arguments = stringAfterType.split(" +/by +");
+                if (arguments.length != 2) {
+                    throw new IndexOutOfBoundsException("Deadline task formatted incorrectly.");
+                }
+                processedTask = DeadlineTask.of(arguments);
+            } else if ("event".startsWith(taskType)) {
+                arguments = stringAfterType.split(" +/at +");
+                if (arguments.length != 2) {
+                    throw new IndexOutOfBoundsException("Event task formatted incorrectly.");
+                }
+                processedTask = EventTask.of(arguments);
+            } else {
+                assert(false);
+            }
         } catch (IndexOutOfBoundsException e) {
-            throw new IndexOutOfBoundsException("Task formatted wrongly.");
+            throw e;
         }
-        return task;
-    }
-
-    private boolean isTask(String s) {
-        try {
-            parseAddedTask(s);
-            return true;
-        } catch (Exception e) {
-            return false;
-        }
+        assert(processedTask != null);
+        return processedTask;
     }
 
     /**
@@ -116,20 +109,23 @@ public class Parser {
      */
     public ParserResult parseInput(String input) throws IllegalArgumentException {
         input = input.trim();
-        if (isBye(input)) {
-            return ParserResult.BYE;
-        } else if (isDelete(input)) {
-            return ParserResult.DELETE;
-        } else if (isDone(input)) {
-            return ParserResult.DONE;
-        } else if (isList(input)) {
-            return ParserResult.LIST;
-        } else if (isFind(input)) {
-            return ParserResult.FIND;
-        } else if (isTask(input)) {
-            return ParserResult.ADD;
+        final String inputCommand = inputToArray(input)[0].toLowerCase();
+        Stream<String> commandStream = stringParserResultMap.keySet().stream();
+        Pair<Integer, ParserResult> countCommandPair =
+            commandStream.reduce(
+                new Pair<>(0, null),
+                (pair, command) ->
+                    command.startsWith(inputCommand)
+                        ? new Pair<>(pair.getKey() + 1, stringParserResultMap.get(command))
+                        : pair,
+                (p1, p2) ->
+                    new Pair<>(p1.getKey() + p2.getKey(), p1.getValue() != null ? p1.getValue() : p2.getValue()));
+        if (countCommandPair.getKey() == 1) {
+            return countCommandPair.getValue();
+        } else if (countCommandPair.getKey() > 1) {
+            throw new IllegalArgumentException("Ambiguous command.");
         } else {
-            throw new IllegalArgumentException("Unrecognizable command.");
+            throw new IllegalArgumentException("No matching commands.");
         }
     }
 
@@ -153,7 +149,7 @@ public class Parser {
             task = new EventTask(arg[2], arg[3]);
             break;
         default:
-            throw new IllegalArgumentException("Save file corrupted");
+            throw new IllegalArgumentException("Save file corrupted.");
         }
         if (arg[1].equals("1")) {
             task.markDone();
