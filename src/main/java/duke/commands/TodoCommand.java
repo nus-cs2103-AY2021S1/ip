@@ -17,7 +17,7 @@ public class TodoCommand extends Command {
      */
     @Override
     public boolean execute(String input) throws DukeException {
-        tm.add(new Todo(input));
+        tm.addTodo(new Todo(input));
         setDone();
         setResponse("Todo added"); // TODO: refactor this
         return true;
