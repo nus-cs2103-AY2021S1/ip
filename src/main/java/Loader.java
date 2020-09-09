@@ -1,6 +1,7 @@
 package main.java;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.io.File;
 import java.util.Scanner;
@@ -39,7 +40,8 @@ public class Loader {
                 case "D": {
                     String description = token[2];
                     String time = token[3];
-                    taskArrayList.add(new Deadline(description, time, isDone));
+                    LocalDate date = LocalDate.parse(time);
+                    taskArrayList.add(new Deadline(description, date, isDone));
                     break;
                 }
                 case "E": {

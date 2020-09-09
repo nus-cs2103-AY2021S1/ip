@@ -1,6 +1,6 @@
 todo read book
 
-deadline return book /by June 6th
+deadline return book /by 2020-10-10
 
 event project meeting /at Aug 6th 2-4pm
 

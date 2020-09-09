@@ -2,6 +2,8 @@ package main.java;
 
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -178,7 +180,9 @@ public class CommandHandler {
         String[] strings = deadlineCommand.split("/by");
         String deadlineDescription = strings[0];
         String time = strings[1];
-        Deadline deadline = new Deadline(deadlineDescription, time);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(" yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(time, formatter);
+        Deadline deadline = new Deadline(deadlineDescription, date);
         taskList.add(deadline);
         System.out.println("    ____________________________________________________________");
         System.out.println("     Got it. I've added this task:");
@@ -224,7 +228,8 @@ public class CommandHandler {
                 line = "T|" + done + "|" + task.description;
             } else if(task instanceof Deadline) {
                 int done = task.isDone? 1:0;
-                line = "D|" + done + "|" + task.description + "|" + ((Deadline) task).deadline;
+                line = "D|" + done + "|" + task.description + "|" +
+                        ((Deadline) task).deadline.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
             } else {
                 int done = task.isDone? 1:0;
                 line = "T|" + done + "|" + task.description + "|" + ((Event) task).time;
