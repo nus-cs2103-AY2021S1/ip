@@ -98,7 +98,6 @@ public class Storage {
                 if (nextEntryTaskType.equals(Task.TODO_SAVE_SYMBOL)
                         && nextEntryLength == 3) { // Todo Task.
                     t = new Todo(nextEntryDescription);
-                    if (isDone) { t.markAsDone(); }
 
                 } else if (nextEntryTaskType.equals(Task.DEADLINE_SAVE_SYMBOL)
                         && nextEntryLength == 4) { // Deadline Task.
@@ -116,6 +115,8 @@ public class Storage {
                     + "Line No: "+ lineNumber + "\n"
                     + "Content: " + nextEntryLine);
                 }
+
+                if (isDone) { t.markAsDone(); }
                 // Finally, add task if no exception thrown.
                 tasks.add(t);
             }
