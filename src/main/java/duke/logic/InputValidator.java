@@ -35,6 +35,7 @@ public class InputValidator {
      */
     public static boolean validateSizeTwo(String[] instructionArray)
             throws InvalidInstructionLengthException {
+        assert instructionArray != null : "validateSizeTwo array cannot be null";
         if (instructionArray.length == 2) {
             return true;
         } // if len != 2 or the input is not an integer
@@ -48,10 +49,10 @@ public class InputValidator {
      * @param instructionArray <code>String</code> containing length of user instruction.
      * @return boolean denoting the validation results
      * @throws InvalidInstructionLengthException If validation fails.
-     * @throws InvalidInstructionFormatException If validation fails.
      */
     public static boolean validateSizeTwoAndInt(String[] instructionArray)
-            throws InvalidInstructionLengthException, InvalidInstructionFormatException {
+            throws InvalidInstructionLengthException {
+        assert instructionArray != null : "validateSizeTwoAndInt array cannot be null";
         if (instructionArray.length == 2) {
             if (isNumeric(instructionArray[1])) {
                 return true;
@@ -77,6 +78,7 @@ public class InputValidator {
      */
     public static boolean validateDescription(String[] instructionArray, int index)
             throws MissingFieldException, InvalidInstructionFormatException {
+        assert instructionArray != null : "validateDescriptionAndDateTime array cannot be null";
 
         if (index == -1) { // does not exist
             throw new InvalidInstructionFormatException();
@@ -103,11 +105,10 @@ public class InputValidator {
      */
     public static boolean validateDateAndTime(String[] instructionArray, int index)
             throws InvalidInstructionFormatException, MissingFieldException {
-
+        assert instructionArray != null : "validateDateAndTime array cannot be null";
         if (instructionArray.length < index + 3) { // account for index + date + time
             throw new MissingFieldException();
         }
-
         String regex = "/"; // regex to split DateTime format
         String date = instructionArray[index + 1];
         String time = instructionArray[index + 2];
@@ -202,6 +203,7 @@ public class InputValidator {
      * @return boolean denoting the validation results
      */
     private static boolean isNumeric(String instruction) {
+        assert instruction != null : "isNumeric String cannot be null";
         try {
             Integer.parseInt(instruction);
         } catch (NumberFormatException nfe) {

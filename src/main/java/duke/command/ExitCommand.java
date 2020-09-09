@@ -36,6 +36,7 @@ public class ExitCommand extends Command {
     public void execute(TaskList taskList, CommandInteractionUi uiManager,
                         StorageManager storageManager, boolean isGuiTask)
             throws DukeIoException {
+        assert storageManager != null : "ExitCommand must have a storageManager";
         storageManager.saveData(taskList.getTaskList());
     }
 }

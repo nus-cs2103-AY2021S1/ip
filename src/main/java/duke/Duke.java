@@ -87,6 +87,7 @@ public class Duke {
      * @return String denoting response from Duke
      */
     public String getResponse(String input) {
+        assert input != null : "Duke getResponse - input String cannot be null";
         String output;
         try {
             Command command = UserInputParser.parse(input);
@@ -98,6 +99,7 @@ public class Duke {
                 | InvalidInstructionLengthException | InvalidTaskIndexException | DukeIoException e) {
             output = e.guiString();
         }
+        assert output != null : "Duke getResponse() - output should not be null";
         return output;
     }
 

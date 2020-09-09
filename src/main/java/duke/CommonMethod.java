@@ -16,6 +16,9 @@ public class CommonMethod {
      * @return String output.
      */
     public static String mergeArray(String[] array, int start, int end) {
+        assert array != null : "mergeArray - Array is null";
+        assert end <= array.length : "mergeArray - end index is out of bounds";
+        assert start >= 0 && start < array.length : "mergeArray - start index out of bounds";
         StringBuilder output = new StringBuilder();
         for (int i = start; i < end; i++) {
             output.append(array[i]).append(" ");
@@ -30,6 +33,7 @@ public class CommonMethod {
      * @return boolean isLeap.
      */
     public static boolean isLeapYear(int year) {
+        assert year >= 0 : "isLeapYear - year cannot be negative!";
         boolean isLeap = false;
         if (year % 4 == 0) {
             if (year % 100 == 0) {

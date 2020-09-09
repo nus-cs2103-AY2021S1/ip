@@ -23,6 +23,7 @@ public class TaskList {
      * @param dukeTask DukeTask object.
      */
     public void addToList(DukeTask dukeTask) {
+        assert dukeTask != null : "addToList dukeTask cannot be null";
         taskList.add(dukeTask);
     }
 

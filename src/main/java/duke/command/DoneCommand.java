@@ -42,6 +42,8 @@ public class DoneCommand extends Command {
     public void execute(TaskList taskList, CommandInteractionUi uiManager,
                         StorageManager storageManager, boolean isGuiTask)
             throws InvalidTaskIndexException, TaskDoneException {
+        assert uiManager != null : "DoneCommand must have a uiManager";
+        assert taskList != null : "DoneCommand must have a taskList";
         if (index < 0 || index >= taskList.getSize()) {
             throw new InvalidTaskIndexException();
         } else if (taskList.getTaskList().get(index).getDoneStatus()) {
