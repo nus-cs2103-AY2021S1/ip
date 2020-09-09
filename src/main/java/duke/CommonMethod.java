@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.stream.IntStream;
+
 /**
  * Defines common methods used by Duke Program.
  */
@@ -17,9 +19,7 @@ public class CommonMethod {
      */
     public static String mergeArray(String[] array, int start, int end) {
         StringBuilder output = new StringBuilder();
-        for (int i = start; i < end; i++) {
-            output.append(array[i]).append(" ");
-        }
+        IntStream.range(0, end).forEach(i -> output.append(array[i]).append(" "));
         return output.toString().trim();
     }
 

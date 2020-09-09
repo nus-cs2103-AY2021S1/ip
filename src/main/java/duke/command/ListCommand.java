@@ -1,8 +1,10 @@
 package duke.command;
+import java.util.stream.IntStream;
 
 import duke.logic.CommandInteractionUi;
 import duke.logic.StorageManager;
 import duke.logic.TaskList;
+
 
 /**
  * Represents a List Command by the user.
@@ -35,15 +37,13 @@ public class ListCommand extends Command {
         if (isGuiTask) {
             StringBuilder output = new StringBuilder();
             for (int i = 0; i < taskList.getSize(); i++) {
-                output.append(uiManager.getNumberedTask(taskList.getTaskList().get(i), i));
-                output.append("\n");
+                output.append(uiManager.getNumberedTask(taskList.getTaskList().get(i), i)).append("\n");
             }
             output.append("\n").append(uiManager.getTaskStatus(taskList.getSize()));
             response = output.toString();
         } else {
-            for (int i = 0; i < taskList.getSize(); i++) {
-                uiManager.printNumberedTask(taskList.getTaskList().get(i), i);
-            }
+            IntStream.range(0, taskList.getSize())
+                    .forEach(i -> uiManager.printNumberedTask(taskList.getTaskList().get(i), i));
             System.out.println();
             uiManager.printTaskStatus(taskList.getSize());
         }
