@@ -32,7 +32,7 @@ public class Storage {
             boolean directoryExists = java.nio.file.Files.exists(path);
 
             if (!directoryExists) {
-                System.out.println("data folder does not exist. Let's create one.");
+                // System.out.println("data folder does not exist. Let's create one.");
                 File dir = new File(String.valueOf(path));
                 dir.mkdir();
             }
