@@ -7,14 +7,15 @@ import duke.exception.MissingDeadlineException;
  */
 public class Event extends Task {
     protected String time;
+    public static String SPLIT_IDENTIFIER = " /at ";
 
     public Event(String desc) throws MissingDeadlineException {
-        super("E", desc.split(" /at ", 2)[0]);
-        String[] temp = desc.split(" /at ", 2);
+        super("E", desc.split(SPLIT_IDENTIFIER, 2)[0]);
+        String[] temp = desc.split(SPLIT_IDENTIFIER, 2);
         if (temp.length == 1) {
             throw new MissingDeadlineException("event");
         } else {
-            String date = desc.split(" /at ", 2)[1];
+            String date = desc.split(SPLIT_IDENTIFIER, 2)[1];
             time = containsTime(date)
                             ? formatDateTime(date)
                             : formatDate(date);
