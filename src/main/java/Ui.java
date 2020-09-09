@@ -29,6 +29,8 @@ public class Ui {
      */
     public static String printList(ArrayList<Task> TaskList) {
         String output = "";
+        assert !TaskList.isEmpty() : "Task list is empty!";
+
         for (Task task : TaskList) {
             output += (TaskList.indexOf(task) + 1) + "." + task + "\n";
         }
