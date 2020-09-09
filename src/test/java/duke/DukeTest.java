@@ -71,7 +71,22 @@ public class DukeTest {
         Duke duke = new Duke(TEST_FILE_PATH);
         duke.runCli();
 
-        String expectedFilePath = Paths.get("duke-test", "EXPECTED.txt").toString();
+        Path currentDir = Paths.get("").toAbsolutePath();
+        int len = currentDir.getNameCount();
+        int index = -1;
+        for (int i = 0; i < len; i++) {
+            if (currentDir.getName(i).toString().equals("ip")) {
+                index = i;
+                break;
+            }
+        }
+        Path rootDir = currentDir;
+        for (int i = 0; i < len - index - 1; i++) {
+            rootDir = rootDir.getParent();
+        }
+        String testDir = Paths.get(rootDir.toString(), "duke-test").toString();
+
+        String expectedFilePath = Paths.get(testDir, "EXPECTED.txt").toString();
         File file = new File(expectedFilePath);
         FileInputStream fis = new FileInputStream(file);
         byte[] data = new byte[(int) file.length()];
@@ -81,7 +96,7 @@ public class DukeTest {
 
         String actualOutput = OUT_CONTENT.toString();
 
-        String actualFilePath = Paths.get("duke-test", "ACTUAL.txt").toString();
+        String actualFilePath = Paths.get(testDir, "ACTUAL.txt").toString();
         FileWriter myWriter = new FileWriter(actualFilePath);
         myWriter.write(actualOutput);
         myWriter.close();
