@@ -1,5 +1,7 @@
 package main.java;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Scanner;
 
@@ -176,7 +178,9 @@ public class CommandHandler {
         String[] strings = deadlineCommand.split("/by");
         String deadlineDescription = strings[0];
         String time = strings[1];
-        Deadline deadline = new Deadline(deadlineDescription, time);
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(" yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(time, formatter);
+        Deadline deadline = new Deadline(deadlineDescription, date);
         taskList.add(deadline);
         System.out.println("    ____________________________________________________________");
         System.out.println("     Got it. I've added this task:");

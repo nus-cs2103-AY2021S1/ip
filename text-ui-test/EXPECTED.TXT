@@ -18,7 +18,7 @@ Hello from
 
     ____________________________________________________________
      Got it. I've added this task:
-        [D][?] return book (by: June 6th)
+        [D][?] return book (by: Oct 10 2020)
      Now you have 2 tasks in the list.
     ____________________________________________________________
 
@@ -36,7 +36,7 @@ Hello from
     ____________________________________________________________
      Here are the tasks in your list:
      1.[T][?] read book
-     2.[D][?] return book (by: June 6th)
+     2.[D][?] return book (by: Oct 10 2020)
      3.[E][?] project meeting (at: Aug 6th 2-4pm)
     ____________________________________________________________
 
@@ -48,7 +48,7 @@ Hello from
     ____________________________________________________________
      Here are the tasks in your list:
      1.[T][?] read book
-     2.[D][?] return book (by: June 6th)
+     2.[D][?] return book (by: Oct 10 2020)
      3.[E][?] project meeting (at: Aug 6th 2-4pm)
     ____________________________________________________________
 
@@ -61,7 +61,7 @@ Hello from
     ____________________________________________________________
      Here are the tasks in your list:
      1.[T][?] read book
-     2.[D][?] return book (by: June 6th)
+     2.[D][?] return book (by: Oct 10 2020)
      3.[E][?] project meeting (at: Aug 6th 2-4pm)
      4.[T][?] buy bread
     ____________________________________________________________
@@ -99,7 +99,7 @@ Hello from
     ____________________________________________________________
      Here are the tasks in your list:
      1.[T][?] read book
-     2.[D][?] return book (by: June 6th)
+     2.[D][?] return book (by: Oct 10 2020)
      3.[T][?] buy bread
     ____________________________________________________________
 
