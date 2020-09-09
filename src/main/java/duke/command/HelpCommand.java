@@ -29,6 +29,7 @@ public class HelpCommand extends Command {
                 + "find <keyword> - shows a list of tasks containing the given keyword\n"
                 + "help - shows this list of commands\n"
                 + "list - shows the contents of the task list\n"
+                + "sort - sorts the task list according to time\n"
                 + "todo <description> - adds a todo task with the given description to the task list";
         return (help);
     }
