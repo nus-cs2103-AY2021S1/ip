@@ -21,13 +21,13 @@ Format: deadline {description} /by {ddMMyyyy HHmm}
 Format: deadline {description} /by {ddMMyyyy HHmm}
 Format: event {description} /from {ddMMyyyy HHmm} /till {ddMMyyyy HHmm}
 Format: event {description} /from {ddMMyyyy HHmm} /till {ddMMyyyy HHmm}
-	+ Add: [T][O] readbook
-	+ Add: [D][O] return book (by: 06 Jun 2020 11:59PM)
-	+ Add: [E][O] project meeting (from: 06 Aug 2020 02:00PM till: 06 Aug 2020 04:00PM)
-	+ Add: [T][O] join sports club
-	+ Add: [T][O] borrow book
-	+ Add: [D][O] drink coffee (by: 07 Jun 2020 11:59PM)
-	+ Add: [E][O] drink tea (from: 07 Aug 2020 04:00PM till: 07 Aug 2020 06:00PM)
++ Add: [T][O] readbook
++ Add: [D][O] return book (by: 06 Jun 2020 11:59PM)
++ Add: [E][O] project meeting (from: 06 Aug 2020 02:00PM till: 06 Aug 2020 04:00PM)
++ Add: [T][O] join sports club
++ Add: [T][O] borrow book
++ Add: [D][O] drink coffee (by: 07 Jun 2020 11:59PM)
++ Add: [E][O] drink tea (from: 07 Aug 2020 04:00PM till: 07 Aug 2020 06:00PM)
 1. [T][O] readbook
 2. [D][O] return book (by: 06 Jun 2020 11:59PM)
 3. [E][O] project meeting (from: 06 Aug 2020 02:00PM till: 06 Aug 2020 04:00PM)
@@ -46,7 +46,7 @@ Index Error: delete {index}
 5. [T][O] borrow book
 6. [D][O] drink coffee (by: 07 Jun 2020 11:59PM)
 7. [E][O] drink tea (from: 07 Aug 2020 04:00PM till: 07 Aug 2020 06:00PM)
-	# Done: [D][X] return book (by: 06 Jun 2020 11:59PM)
+# Done: [D][X] return book (by: 06 Jun 2020 11:59PM)
 1. [T][O] readbook
 2. [D][X] return book (by: 06 Jun 2020 11:59PM)
 3. [E][O] project meeting (from: 06 Aug 2020 02:00PM till: 06 Aug 2020 04:00PM)
@@ -54,7 +54,7 @@ Index Error: delete {index}
 5. [T][O] borrow book
 6. [D][O] drink coffee (by: 07 Jun 2020 11:59PM)
 7. [E][O] drink tea (from: 07 Aug 2020 04:00PM till: 07 Aug 2020 06:00PM)
-	# Done: [T][X] join sports club
+# Done: [T][X] join sports club
 1. [T][O] readbook
 2. [D][X] return book (by: 06 Jun 2020 11:59PM)
 3. [E][O] project meeting (from: 06 Aug 2020 02:00PM till: 06 Aug 2020 04:00PM)
@@ -62,20 +62,20 @@ Index Error: delete {index}
 5. [T][O] borrow book
 6. [D][O] drink coffee (by: 07 Jun 2020 11:59PM)
 7. [E][O] drink tea (from: 07 Aug 2020 04:00PM till: 07 Aug 2020 06:00PM)
-	- Delete: [E][O] project meeting (from: 06 Aug 2020 02:00PM till: 06 Aug 2020 04:00PM)
+- Delete: [E][O] project meeting (from: 06 Aug 2020 02:00PM till: 06 Aug 2020 04:00PM)
 1. [T][O] readbook
 2. [D][X] return book (by: 06 Jun 2020 11:59PM)
 3. [T][X] join sports club
 4. [T][O] borrow book
 5. [D][O] drink coffee (by: 07 Jun 2020 11:59PM)
 6. [E][O] drink tea (from: 07 Aug 2020 04:00PM till: 07 Aug 2020 06:00PM)
-	- Delete: [T][O] borrow book
+- Delete: [T][O] borrow book
 1. [T][O] readbook
 2. [D][X] return book (by: 06 Jun 2020 11:59PM)
 3. [T][X] join sports club
 4. [D][O] drink coffee (by: 07 Jun 2020 11:59PM)
 5. [E][O] drink tea (from: 07 Aug 2020 04:00PM till: 07 Aug 2020 06:00PM)
-	+ Add: [T][O] say goodbye
++ Add: [T][O] say goodbye
 1. [T][O] readbook
 2. [D][X] return book (by: 06 Jun 2020 11:59PM)
 3. [T][X] join sports club
@@ -85,11 +85,11 @@ Index Error: delete {index}
 Command list:
  help bye list done delete todo deadline event save load find undo redo
 Save: 6 entries
-	- Delete: [T][O] say goodbye
-	# Done: [E][X] drink tea (from: 07 Aug 2020 04:00PM till: 07 Aug 2020 06:00PM)
-	- Delete: [D][O] drink coffee (by: 07 Jun 2020 11:59PM)
-	# Done: [T][X] join sports club
-	- Delete: [D][X] return book (by: 06 Jun 2020 11:59PM)
+- Delete: [T][O] say goodbye
+# Done: [E][X] drink tea (from: 07 Aug 2020 04:00PM till: 07 Aug 2020 06:00PM)
+- Delete: [D][O] drink coffee (by: 07 Jun 2020 11:59PM)
+# Done: [T][X] join sports club
+- Delete: [D][X] return book (by: 06 Jun 2020 11:59PM)
 1. [T][O] readbook
 2. [T][X] join sports club
 3. [E][X] drink tea (from: 07 Aug 2020 04:00PM till: 07 Aug 2020 06:00PM)
@@ -112,8 +112,8 @@ Number of tasks found: 2
 Here are the matching tasks in your list:
 1. [T][X] join sports club
 Number of tasks found: 1
-	+ Add: [T][O] one
-	+ Add: [T][O] two
++ Add: [T][O] one
++ Add: [T][O] two
 1. [T][O] readbook
 2. [D][X] return book (by: 06 Jun 2020 11:59PM)
 3. [T][X] join sports club
@@ -122,9 +122,9 @@ Number of tasks found: 1
 6. [T][O] say goodbye
 7. [T][O] one
 8. [T][O] two
-	# Done: [T][X] one
-	# Done: [T][X] two
-	# Undo Done: [T][O] two
+# Done: [T][X] one
+# Done: [T][X] two
+# Undo Done: [T][O] two
 1. [T][O] readbook
 2. [D][X] return book (by: 06 Jun 2020 11:59PM)
 3. [T][X] join sports club
@@ -133,10 +133,10 @@ Number of tasks found: 1
 6. [T][O] say goodbye
 7. [T][X] one
 8. [T][O] two
-	+ Add: [T][O] three
++ Add: [T][O] three
 Redo: Already at latest change
-	- Undo Add: [T][O] three
-	+ Add: [T][O] four
+- Undo Add: [T][O] three
++ Add: [T][O] four
 1. [T][O] readbook
 2. [D][X] return book (by: 06 Jun 2020 11:59PM)
 3. [T][X] join sports club
@@ -148,8 +148,8 @@ Redo: Already at latest change
 9. [T][O] four
 Load: 6 entries
 Undo: Already at earliest change
-	+ Add: [T][O] 123
-	- Undo Add: [T][O] 123
++ Add: [T][O] 123
+- Undo Add: [T][O] 123
 Undo: Already at earliest change
-	+ Add: [T][O] 123
++ Add: [T][O] 123
 Redo: Already at latest change

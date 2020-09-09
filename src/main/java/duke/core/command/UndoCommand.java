@@ -27,7 +27,7 @@ public class UndoCommand implements Executable {
     public void execute() {
         boolean success = this.history.undo();
         if (!success) {
-            System.out.println("Undo: Already at earliest change");
+            System.err.println("Undo: Already at earliest change");
         }
     }
 }

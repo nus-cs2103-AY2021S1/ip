@@ -27,7 +27,7 @@ public class RedoCommand implements Executable {
     public void execute() {
         boolean success = this.history.redo();
         if (!success) {
-            System.out.println("Redo: Already at latest change");
+            System.err.println("Redo: Already at latest change");
         }
     }
 }
