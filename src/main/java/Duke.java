@@ -111,8 +111,6 @@ public class Duke extends Application {
 
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
 
-
-
     }
 
     /**
@@ -149,7 +147,10 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) {
-        return "Duke heard: " + input;
+
+        Ui ui = new Ui();
+        return  ui.deal(input);
+
     }
 
 }

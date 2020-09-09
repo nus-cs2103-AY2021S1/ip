@@ -17,9 +17,9 @@ public class TaskList {
      * @param type   a string to indicate the type/class of the task
      * @param byOrAt a date and time object to specify the timing of the task
      */
-    public static void write(String input, String type, DateAndTime byOrAt) {
+    public static String write(String input, String type, DateAndTime byOrAt) {
 
-        modify(input, type, byOrAt, taskStorage);
+        return modify(input, type, byOrAt, taskStorage);
 
     }
 
@@ -31,7 +31,7 @@ public class TaskList {
      * @param byOrAt      a date and time object to specify the timing of the task
      * @param taskStorage the static class variable for storage purpose
      */
-    private static void modify(String input, String type, DateAndTime byOrAt, ArrayList<Task> taskStorage) {
+    private static String modify(String input, String type, DateAndTime byOrAt, ArrayList<Task> taskStorage) {
         Task toBeAdded;
         if (type.equals("todo")) {
             toBeAdded = new ToDo(input);
@@ -43,18 +43,20 @@ public class TaskList {
             toBeAdded = new Event(input, byOrAt);
             taskStorage.add(toBeAdded);
         }
-        System.out.println("Got it. I've added this task: \n" + toBeAdded);
-        System.out.println("Now you have " + taskStorage.size() + " tasks in the list.");
+        return "Got it. I've added this task: \n" + toBeAdded + "\n" +
+        "Now you have " + taskStorage.size() + " tasks in the list." ;
     }
 
     /**
      * Reads(prints) tasks stored in taskStorage.
      */
-    public static void read() {
-        System.out.println("Here are the tasks in your list:");
+    public static String read() {
+        String starter = "Here are the tasks in your list:\n" ;
+        String content = "";
         for (int i = 0; i < taskStorage.size(); i++) {
-            System.out.println((i + 1) + "." + taskStorage.get(i));
+            content = content + ((i + 1) + "." + taskStorage.get(i)) + "\n";
         }
+        return starter + content;
     }
 
     /**
@@ -62,13 +64,13 @@ public class TaskList {
      *
      * @param ref an integer to specify the position/numbering of the task
      */
-    public static void delete(int ref) {
+    public static String delete(int ref) {
         if (ref >= taskStorage.size()) {
-            System.out.println("I am afraid that it is not possible to delete an unknown task.");
+            return ("I am afraid that it is not possible to delete an unknown task.");
         } else {
             Task temp = taskStorage.get(ref);
             taskStorage.remove(ref);
-            System.out.println("Noted. I've removed this task:\n " +
+            return ("Noted. I've removed this task:\n " +
                     temp + "\nNow you have " + taskStorage.size() + " tasks in the list.");
         }
     }
@@ -78,14 +80,18 @@ public class TaskList {
      *
      * @param feature a string description of the tasks to find
      */
-    public static void find(String feature) {
+    public static String find(String feature) {
 
-        System.out.println("Here are the matching tasks in your list:");
+        String starter = "Here are the matching tasks in your list:\n";
+        String content = "";
+
         for (Task task : TaskList.taskStorage) {
             if (task.description.contains(feature)) {
-                System.out.println(task);
+                content = content + (task) + "\n";
             }
         }
+
+        return starter + content;
 
     }
 

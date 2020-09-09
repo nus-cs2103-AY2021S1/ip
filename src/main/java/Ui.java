@@ -1,19 +1,17 @@
-import java.util.Scanner;
-
 /**
  * Ui class is the main processor for users inputs,
  * Ui takes in user inputs, categorises it and stores it.
  */
 public class Ui {
 
-    private final Scanner scanner;
+    //private final Scanner scanner;
     private final Parser parser;
 
     /**
      * Constructs a ui object to handle user inputs.
      */
     public Ui() {
-        scanner = new Scanner(System.in);
+        //scanner = new Scanner(System.in);
         parser = new Parser();
     }
 
@@ -22,11 +20,12 @@ public class Ui {
      * Currently, the designing of deal() function is not in line with our 2103 coding
      * standards, I will continue to work on it :).
      */
-    public void deal() {
-        for (int i = 0; i < 100000; i++) {
+    public String deal(String input) {
 
-            String input = this.scanner.nextLine();
+        Storage.read();
 
+        while (true) {
+            //String input = this.scanner.nextLine();
             if (!parser.isBye(input)) {
 
                 if (!parser.isList(input) && !parser.isFind(input)) {
@@ -54,17 +53,13 @@ public class Ui {
                                         byOrAt = new DateAndTime();
                                         TaskList.write(correctedInput, Parser.TODO, byOrAt);
                                         Storage.write(TaskList.taskStorage);
-
+                                        return TaskList.write(correctedInput, Parser.TODO, byOrAt);
                                     } else {
-                                        System.out.println(
-                                                new DukeException(
-                                                        "OOPS!!! The description of a todo cannot be empty."));
+                                        return ("OOPS!!! The description of a todo cannot be empty.");
                                     }
 
                                 } else {
-                                    System.out.println(
-                                            new DukeException(
-                                                    "The description of a todo cannot be empty lah."));
+                                    return ("The description of a todo cannot be empty lah.");
                                 }
 
                             } else {
@@ -87,13 +82,12 @@ public class Ui {
                                             TaskList.write(correctedInput, Parser.EVT, byOrAt);
                                             Storage.write(TaskList.taskStorage);
 
+                                            return TaskList.write(correctedInput, Parser.EVT, byOrAt);
                                         } else {
-                                            System.out.println(new DukeException(
-                                                    "The description of an event cannot be empty lah."));
+                                            return ("The description of an event cannot be empty lah.");
                                         }
                                     } else {
-                                        System.out.println(new DukeException(
-                                                "The description of an event cannot be empty lah."));
+                                        return ("The description of an event cannot be empty lah.");
                                     }
 
                                 } else {
@@ -111,26 +105,19 @@ public class Ui {
                                             TaskList.write(correctedInput, Parser.DDL, byOrAt);
                                             Storage.write(TaskList.taskStorage);
 
+                                            return TaskList.write(correctedInput, Parser.DDL, byOrAt);
                                         } else {
-                                            System.out.println(
-                                                    new DukeException(
-                                                            "The description of a deadline cannot be empty lah.")
-                                            );
+                                            return ("The description of a deadline cannot be empty lah.");
                                         }
                                     } else {
-                                        System.out.println(
-                                                new DukeException(
-                                                        "The description of a deadline cannot be empty lah.")
-                                        );
+                                        return ("The description of a deadline cannot be empty lah.");
                                     }
 
                                 }
                             }
 
                         } else {
-                            System.out.println(
-                                    new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(")
-                            );
+                            return ("OOPS!!! I'm sorry, but I don't know what that means :-(");
                         }
 
                     } else {
@@ -144,17 +131,17 @@ public class Ui {
 
                                 Task done = TaskList.taskStorage.get(ref).markAsDone();
                                 TaskList.taskStorage.remove(TaskList.taskStorage.get(ref));
-                                //^here
+
                                 TaskList.taskStorage.add(ref, done);
 
                                 Storage.write(TaskList.taskStorage);
 
-                                System.out.println("Nice! I've marked this task as done:\n"
+                                return ("Nice! I've marked this task as done:\n"
                                         + TaskList.taskStorage.get(ref));
 
                             } else {
 
-                                System.out.println("I am afraid that it is not possible" +
+                                return ("I am afraid that it is not possible" +
                                         "to do an unknown task.");
 
                             }
@@ -165,7 +152,9 @@ public class Ui {
                                     input.charAt(Parser.DEL_VALID.length() - 1))) - 1;
 
                             TaskList.delete(ref);
+
                             Storage.write(TaskList.taskStorage);
+                            return TaskList.delete(ref);
 
                         }
 
@@ -173,16 +162,16 @@ public class Ui {
                 } else {
 
                     if (!parser.isFind(input)) {
-                        TaskList.read();
+                        return TaskList.read();
                     } else {
-                        TaskList.find(input.substring(Parser.FIND.length() + 1));
+                        return TaskList.find(input.substring(Parser.FIND.length() + 1));
                     }
                 }
 
             } else {
-                System.out.println(" Bye. Hope to see you again soon!");
-                this.scanner.close();
-                System.exit(0);
+                return " Bye. Hope to see you again soon!";
+                //this.scanner.close();
+                //System.exit(0);
             }
         }
 

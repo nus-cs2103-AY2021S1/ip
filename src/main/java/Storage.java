@@ -21,7 +21,9 @@ public class Storage {
      * Retrieves stored tasks data from storage and print it for the user.
      */
     public static void read() {
+
         try {
+
             File storage = new File(home);
 
             if (!directoryExists) {
