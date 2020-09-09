@@ -1,5 +1,6 @@
 package duke.task;
 
+import duke.exception.ExceptionMessage;
 import duke.ui.UiPrint;
 
 /**
@@ -10,12 +11,14 @@ public class Task {
     private String icon;
     private String description;
     private String taskInfo;
+    private String tag;
     private boolean isDone;
 
     protected Task(String icon, String description, String taskInfo) {
         this.icon = icon;
         this.description = description;
         this.taskInfo = taskInfo;
+        tag = "";
         isDone = false;
     }
 
@@ -49,8 +52,9 @@ public class Task {
     @Override
     public String toString() {
         String statusIcon = isDone ? UiPrint.TICK : UiPrint.CROSS;
+        String tag = this.tag == "" ? "" : " #" + this.tag;
 
-        return icon + statusIcon + " " + description;
+        return icon + statusIcon + " " + description + tag;
     }
 
     public String getTaskInfo() {
@@ -59,5 +63,14 @@ public class Task {
 
     public String getDescription() {
         return description;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        assert !tag.isBlank() : ExceptionMessage.BLANK_TAG_MESSAGE;
+        this.tag = tag;
     }
 }
