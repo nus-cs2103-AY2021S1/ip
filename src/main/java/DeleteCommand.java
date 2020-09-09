@@ -20,6 +20,10 @@ public class DeleteCommand extends Command {
      * filePath successfully.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert tasks != null : "Tasklist not found.";
+        assert ui != null : "Ui not found.";
+        assert storage != null : "Storage not found.";
+
         // check if the taskNumber provided is in range
         if (taskNumber > tasks.getNumTasks() || taskNumber <= 0) {
             throw new DukeException("Please enter a valid task number.");
@@ -28,6 +32,8 @@ public class DeleteCommand extends Command {
 
             tasks.deleteTask(taskNumber); // delete from tasklist
             storage.overwriteFile(tasks.getTaskList()); // delete from storage
+
+            assert output != null : "Message to show task deleted should be shown.";
             return output;
         }
     }

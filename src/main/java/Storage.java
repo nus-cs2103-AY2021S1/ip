@@ -26,6 +26,7 @@ public class Storage {
      */
     public List<Task> load() throws DukeException {
         try {
+            assert !filePath.isEmpty() : "No filepath specified.";
             List<Task> tasks = new ArrayList<>();
             int numTasks = 0;
             File f = new File(filePath); // create a File for the given file path

@@ -16,6 +16,11 @@ public class FindCommand extends Command {
      * @param storage Storage to load and save tasks.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null : "Tasklist not found.";
+        assert ui != null : "Ui not found.";
+        assert storage != null : "Storage not found.";
+        assert !keyword.isEmpty() : "No keyword provided.";
+
         String matchingTasks = "";
         int numMatching = 0;
 
@@ -32,8 +37,11 @@ public class FindCommand extends Command {
         }
 
         if (matchingTasks.isEmpty()) {
+            assert ui.showEmptyMatchingList() != null : "Message showing empty list should be shown.";
             return ui.showEmptyMatchingList();
         } else {
+            assert ui.showMatchingTaskList(matchingTasks) != null : "Message showing "
+                    + "matching task list should be shown.";
             return ui.showMatchingTaskList(matchingTasks);
         }
     }
