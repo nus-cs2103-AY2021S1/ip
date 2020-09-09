@@ -23,9 +23,9 @@ public class DataStorageInterface {
      * @return String representation of list of commands with Usage syntax.
      */
     public static String listCommands() {
-        String allCommands = "";
+        StringBuilder allCommands = new StringBuilder();
         for (Command c:DataStorage.commandInit) {
-            allCommands = allCommands + c.getName() + ": "  + c.getUsage() + "\n";
+            allCommands.append(c.getName()).append(": ").append(c.getUsage()).append("\n");
         }
         return allCommands.toString();
     }
@@ -38,6 +38,7 @@ public class DataStorageInterface {
      * @throws CustomException If Task IsDone.
      */
     public static Task markDone(int index) throws CustomException {
+        assert index < DataStorage.taskList.size() && index > -1;
         Task curr = DataStorage.taskList.get(index);
         if (curr.isDone()) {
             throw new CustomException("Error: H-How many times are you gonna *BUUURRRRRP* mark " +
