@@ -7,6 +7,7 @@ public class Parser {
 
     /**
      * Reads the user input and determines which command to execute.
+     * 
      * @param command User input.
      * @return Command The type of command to execute.
      * @throws DukeException

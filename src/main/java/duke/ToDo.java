@@ -7,6 +7,7 @@ public class ToDo extends Task {
 
     /**
      * Constructor of a ToDo object.
+     * 
      * @param description The description of the task.
      */
     public ToDo(String description) {
@@ -15,6 +16,7 @@ public class ToDo extends Task {
 
     /**
      * Returns a string representation of a ToDo object to be stored in the storage.
+     * 
      * @return A String representing the code of the task stored in the storage.
      */
     @Override
@@ -24,6 +26,7 @@ public class ToDo extends Task {
 
     /**
      * Returns a string representation of a ToDo object.
+     * 
      * @return A String containing the description and completion status of the ToDo object.
      */
     @Override

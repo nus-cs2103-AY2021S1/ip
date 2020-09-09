@@ -31,6 +31,7 @@ public class Ui {
 
     /**
      * Scans the input of the user.
+     * 
      * @return a String object of the user input.
      */
     public String readCommand() {
@@ -39,6 +40,7 @@ public class Ui {
 
     /**
      * Prints the message when a task is successfully added into the tasklist.
+     * 
      * @param task Task added into the tasklist.
      * @param taskList tasklist of the user.
      */
@@ -48,6 +50,7 @@ public class Ui {
 
     /**
      * Prints the message when a task is successfully completed.
+     * 
      * @param task Task completed.
      */
     public String showCompletion(Task task) {
@@ -56,6 +59,7 @@ public class Ui {
 
     /**
      * Prints the message when a task is successfully deleted.
+     * 
      * @param task Task deleted.
      * @param taskList tasklist of the user.
      */
@@ -65,6 +69,8 @@ public class Ui {
 
     /**
      * Prints the message when the list is empty.
+     * 
+     * @return a String object of an empty list message.
      */
     public String showNoTask() {
         return "No tasks in your list yet";
@@ -72,6 +78,8 @@ public class Ui {
 
     /**
      * Prints the message when there is an error loading the user's file.
+     * 
+     * @return a String object of a loading error message.
      */
     public String showLoadingError() {
         return "Error loading files";
@@ -79,7 +87,9 @@ public class Ui {
 
     /**
      * Prints the error message.
+     * 
      * @param message error message.
+     * @return a String object of a error message.
      */
     public String showError(String message) {
         return message;
@@ -87,7 +97,9 @@ public class Ui {
 
     /**
      * Prints the message informing the user of the number of tasks in list.
+     * 
      * @param taskList tasklist of the user.
+     * @return 
      */
     public String showTaskTotal(TaskList taskList) {
         int total = taskList.getSize();

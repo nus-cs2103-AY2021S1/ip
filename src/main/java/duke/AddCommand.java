@@ -42,6 +42,7 @@ public class AddCommand extends Command {
         } catch (DateTimeException | DukeException error) {
             System.out.println("Please provide valid date and time");
         }
+        assert newTask != null : "Task cannot be null";
         taskList.addTask(newTask);
         store.write(taskList);
         return ui.showAddition(newTask, taskList);

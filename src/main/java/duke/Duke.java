@@ -31,6 +31,7 @@ public class Duke {
 
     /**
      * Creates a new Duke chatbot that saves and loads tasks from the given filePath
+     * 
      * @param filePath
      */
     public Duke(String filePath) {
@@ -50,6 +51,7 @@ public class Duke {
     public String run(String input) {
         try {
             Command c = Parser.parse(input);
+            assert !c.equals("") : "Command cannot be empty";
             return c.execute(taskList, ui, store);
         } catch (DukeException | IOException e) {
             return ui.showError(e.getMessage());
