@@ -6,6 +6,7 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
     protected LocalDateTime at;
+    public Tag tag;
 
     /**
      * Creates an Event.
@@ -13,9 +14,12 @@ public class Event extends Task {
      * @param description description of the Event
      * @param at date and time of the Event
      */
-    public Event(String description, LocalDateTime at) {
-        super(description);
+    public Event(String description, LocalDateTime at, boolean hasTag) {
+        super(description, hasTag);
         this.at = at;
+        if (hasTag) {
+            this.tag = new Tag(description.substring(description.indexOf("@") + 1));
+        }
     }
 
     @Override

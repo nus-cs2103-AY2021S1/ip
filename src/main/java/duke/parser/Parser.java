@@ -20,6 +20,7 @@ public class Parser {
      * @throws DukeException DukeException
      */
     public static Command parse(String input) throws DukeException {
+        boolean hasTag = input.contains("@");
         String[] inputArr = input.split(" ");
         Command command;
 
@@ -63,6 +64,9 @@ public class Parser {
             break;
         case "deadline":
             try {
+               // if (hasTag) {
+
+                //}
                 command = new AddCommand("deadline", input.substring(9));
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("Please include description!");

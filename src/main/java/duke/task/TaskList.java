@@ -92,7 +92,12 @@ public class TaskList {
         if (taskName.isBlank()) {
             throw new DukeException("Description cannot be only empty spaces!");
         }
-        Task task = new Todo(taskName);
+        Task task;
+        if (taskName.contains("@")) {
+            task = new Todo(taskName, true);
+        } else {
+            task = new Todo(taskName, false);
+        }
         tasks.add(task);
         storage.appendToFile(task.toText());
 
@@ -118,10 +123,23 @@ public class TaskList {
             throw new DukeException("Description cannot be only empty spaces!");
         }
         String[] taskArray = taskName.split(" /by ");
+        boolean hasTag = taskName.contains("@");
         taskName = taskArray[0];
-        String timeBy = taskArray[1].replace(' ', 'T');
+        String timeBy;
+        if (hasTag) {
+            timeBy = taskArray[1].split(" @")[0]
+                    .replace(' ', 'T');
+        } else {
+            timeBy = taskArray[1]
+                    .replace(' ', 'T');
+        }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HHmm");
-        Task task = new Deadline(taskName, LocalDateTime.parse(timeBy, formatter));
+        Task task;
+        if (taskName.contains("@")) {
+           task = new Deadline(taskName, LocalDateTime.parse(timeBy, formatter), hasTag);
+        } else {
+            task = new Deadline(taskName, LocalDateTime.parse(timeBy, formatter), hasTag);
+        }
         tasks.add(task);
         storage.appendToFile(task.toText());
         //Ui.printAddSuccess(task);
@@ -146,9 +164,17 @@ public class TaskList {
         }
         String[] taskArray = taskName.split(" /at ");
         taskName = taskArray[0];
-        String timeAt = taskArray[1].replace(' ', 'T');
+        boolean hasTag = taskName.contains("@");
+        String timeAt;
+        if (hasTag) {
+            timeAt = taskArray[1].split(" @")[0]
+                    .replace(' ', 'T');
+        } else {
+            timeAt = taskArray[1]
+                    .replace(' ', 'T');
+        }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HHmm");
-        Task task = new Event(taskName, LocalDateTime.parse(timeAt, formatter));
+        Task task = new Event(taskName, LocalDateTime.parse(timeAt, formatter), hasTag);
         tasks.add(task);
         //Ui.printAddSuccess(task);
 
