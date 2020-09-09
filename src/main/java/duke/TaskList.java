@@ -94,6 +94,7 @@ public class TaskList {
      * @param tasks An ArrayList of all the tasks that match with the keyword.
      */
     public static ArrayList<Task> findTask(String keyword, ArrayList<Task> tasks) {
+        assert !keyword.isEmpty() : "Keyword for findTask function should not be empty.";
         ArrayList<Task> matchedTasks = new ArrayList<>();
         for (Task task: tasks) {
             if (task.getTaskTitle().contains(keyword)) {
