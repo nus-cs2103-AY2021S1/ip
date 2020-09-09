@@ -68,7 +68,9 @@ public class Ui {
 
     public String returnAll(TaskList taskList) {
         String stringToReturn = LINE + "Here are the tasks in your list: \n";
-        for (int i = 1; i < taskList.getNoOfTasks() + 1; i++) {
+        int num = taskList.getNoOfTasks();
+        assert (num != 0) : "There is no existing task in your list! ";
+        for (int i = 1; i < num + 1; i++) {
             Task cur = taskList.list.get(i - 1);
             stringToReturn += ("" + i + "." + cur + "\n");
         }
@@ -84,6 +86,7 @@ public class Ui {
     public String returnRelevant(TaskList taskList, String keyWord) {
         String stringToReturn = LINE + "Here are the matching tasks in your list: \n";
         int n = taskList.getNoOfTasks();
+        assert (n != 0) : "There is no matching task in your list! ";
         for (int i = 1; i < n + 1; i++) {
             Task cur = taskList.list.get(i - 1);
             if (!cur.toString().contains(keyWord)) {
@@ -124,6 +127,7 @@ public class Ui {
 
     // DELETE RELATED
     public String deleteSuccessful(Task deleted, TaskList list) {
+        assert (list.getNoOfTasks() >= 0) : "There must be zero or more tasks in a task list.";
         String stringToReturn = LINE + "Got it. I've removed this task: \n" + deleted +
                                 "\n" + "Now you have " + list.getNoOfTasks() +
                                 " tasks in the list. " + "\n" + LINE;
@@ -142,6 +146,7 @@ public class Ui {
 
     // MODIFY
     public String markDoneSuccessful(Task done) {
+        assert (done.isDone == true) : "Task is not marked as done as intended.";
         String stringToReturn = LINE + "Nice! I've marked this task as done: \n" +
                                 done + "\n" + LINE;
         return stringToReturn;
@@ -171,6 +176,7 @@ public class Ui {
     }
 
     public String  missingDescription(String type) {
+        assert (type == "T" | type == "D" | type =="E") : "Incorrect type.";
         Exception ex = new InvalidInputException("Hey, you forget the description for your " + type +"!");
         String stringToReturn = LINE + ex.getMessage() + "\n" + LINE;
         return stringToReturn;
