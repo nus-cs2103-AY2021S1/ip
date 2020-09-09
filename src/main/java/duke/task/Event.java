@@ -61,4 +61,24 @@ public class Event extends Task {
     public Date getEnd() {
         return end;
     }
+
+    /**
+     * Changes the start date of this Event.
+     *
+     * @param date The new start date.
+     */
+    public void setStart(Date date) {
+        this.start = date;
+        onChange();
+    }
+
+    /**
+     * Changes the end date of this Event.
+     *
+     * @param date The new end date.
+     */
+    public void setEnd(Date date) {
+        this.end = end;
+        onChange();
+    }
 }

@@ -8,9 +8,14 @@ import java.util.Date;
 import duke.command.AddCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
+import duke.command.DeadlineDateEdit;
 import duke.command.DeleteCommand;
+import duke.command.DescriptionEdit;
 import duke.command.DoneCommand;
+import duke.command.EditCommand;
 import duke.command.ErrorCommand;
+import duke.command.EventDateEdit;
+import duke.command.EventDateType;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.task.Deadline;
@@ -59,11 +64,10 @@ public class Parser {
             } else if (command.equals("event")) {
                 return new AddCommand(parseEvent(args));
             } else if (command.equals("find")) {
-                if (args.isEmpty()) {
-                    return new ErrorCommand("I need to know what phrase you would like to search for!");
-                } else {
-                    return new FindCommand(args);
-                }
+                ensureArgsPresent(args, "what phrase you would like to search for");
+                return new FindCommand(args);
+            } else if (command.equals("edit")) {
+                return parseEditCommand(args);
             } else if (input.isBlank()) {
                 return new ErrorCommand("You need to tell me what you want me to do!");
             } else {
@@ -82,6 +86,12 @@ public class Parser {
         }
     }
 
+    private static void ensureArgsPresent(String args, String errorString) throws DukeParsingException {
+        if (args.isBlank()) {
+            throw new DukeParsingException("I need to know " + errorString + "!");
+        }
+    }
+
     private static int parseTaskNumber(String args, String taskDescription, String example)
             throws DukeParsingException {
         try {
@@ -90,6 +100,35 @@ public class Parser {
             throw new DukeParsingException(
                     String.format("You need to tell me the number of the task %s. Eg. %s", taskDescription, example));
         }
+    }
+
+    private static EditCommand parseEditCommand(String args) throws DukeParsingException {
+        // TODO: implement multiple edits at once eg. edit 1 /start <start> /end <end>
+        String[] argsSplit;
+        try {
+            argsSplit = splitAround(args, "\\s+/((start)|(end)|(date)|(description))\\s+");
+        } catch (DukeParsingException e) {
+            throw new DukeParsingException("Couldn't edit item. To edit an item, talk to me using the format:\n"
+                    + "edit <task number> <what to edit> <edited content>");
+        }
+        int taskNumber = parseTaskNumber(argsSplit[0], "you want to edit", "edit 1 /description <new description>");
+        String content = argsSplit[1];
+        if (args.contains("/start") || args.contains("/end") || args.contains("/date")) {
+            ensureArgsPresent(content, "the new date");
+            Date newDate = parseDate(content);
+            if (args.contains("/start")) {
+                return new EditCommand(taskNumber, new EventDateEdit(newDate, EventDateType.START));
+            } else if (args.contains("/end")) {
+                return new EditCommand(taskNumber, new EventDateEdit(newDate, EventDateType.END));
+            } else if (args.contains("/date")) {
+                return new EditCommand(taskNumber, new DeadlineDateEdit(newDate));
+            }
+        } else if (args.contains("/description")) {
+            ensureArgsPresent(content, "the new task description");
+            return new EditCommand(taskNumber, new DescriptionEdit(content));
+        }
+
+        throw new DukeParsingException("You need to tell me what you want to edit!"); // TODO better help message
     }
 
     private static Event parseEvent(String args) throws DukeParsingException {
@@ -133,7 +172,7 @@ public class Parser {
     }
 
     /**
-     * Splits a string into 2 around the first occurence of a regex pattern. An exception is thrown if the pattern does
+     * Splits a string into 2 around the first occurrence of a regex pattern. An exception is thrown if the pattern does
      * not exist, or if either of the tokens are blank.
      */
     private static String[] splitAround(String string, String pattern) throws DukeParsingException {

@@ -6,6 +6,7 @@ package duke.task;
 public class Task {
     protected String description;
     protected boolean done;
+    private Runnable onChangeFunction;
 
     /**
      * Creates a Task which has not been completed.
@@ -25,6 +26,7 @@ public class Task {
     public Task(String description, boolean isDone) {
         this.description = sanitizeString(description);
         done = isDone;
+        onChangeFunction = () -> {};
     }
 
     /**
@@ -39,8 +41,9 @@ public class Task {
     /**
      * Marks this Task as done.
      */
-    protected void markAsDone() {
+    public void markAsDone() {
         done = true;
+        onChange();
     }
 
     /**
@@ -69,6 +72,24 @@ public class Task {
      */
     public String getDescription() {
         return description;
+    }
+
+    /**
+     * Changes the description of this Task.
+     *
+     * @param description The new description for this Task.
+     */
+    public void setDescription(String description) {
+        this.description = sanitizeString(description);
+        onChange();
+    }
+
+    void setOnChangeFunction(Runnable function) {
+        onChangeFunction = function;
+    }
+
+    void onChange() {
+        onChangeFunction.run();
     }
 
     /**

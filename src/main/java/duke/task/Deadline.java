@@ -48,4 +48,14 @@ public class Deadline extends Task {
     public Date getDate() {
         return date;
     }
+
+    /**
+     * Changes the Date for this Deadline.
+     *
+     * @param date The new due Date.
+     */
+    public void setDate(Date date) {
+        this.date = date;
+        onChange();
+    }
 }

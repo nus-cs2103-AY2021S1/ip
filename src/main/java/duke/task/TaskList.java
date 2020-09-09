@@ -6,7 +6,7 @@ import java.util.stream.IntStream;
 import java.util.stream.Stream;
 
 /**
- * This class represents a list of Tasks. Tasks can only be modified through this class.
+ * This class represents a list of Tasks.
  */
 public class TaskList {
     private List<Task> list;
@@ -36,6 +36,7 @@ public class TaskList {
      * @param task the task to add.
      */
     public void add(Task task) {
+        task.setOnChangeFunction(() -> saveFunction.save(this));
         list.add(task);
         saveFunction.save(this);
     }
@@ -69,16 +70,6 @@ public class TaskList {
      */
     public int size() {
         return list.size();
-    }
-
-    /**
-     * Marks a task as done.
-     *
-     * @param index the index of the task to mark as done.
-     */
-    public void markAsDone(int index) {
-        get(index).markAsDone();
-        saveFunction.save(this);
     }
 
     /**
