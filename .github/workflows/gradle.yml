@@ -30,8 +30,8 @@ jobs:
           java-version: '11'
           java-package: jdk+fx
 
-      - name: Build and check with Gradle
-        run: ./gradlew check
+#       - name: Build and check with Gradle
+#         run: ./gradlew check
 
       - name: Perform IO redirection test (*NIX)
         if: runner.os == 'Linux'
