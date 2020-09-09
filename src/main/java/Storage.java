@@ -59,6 +59,7 @@ public class Storage {
      * @throws IOException
      */
     public void saveToFile(ArrayList<Task> taskArr) throws IOException {
+        assert (!filePath.isEmpty());
         File oldFile= new File(filePath);
         oldFile.delete();
         File newFile= new File(filePath);

@@ -65,9 +65,13 @@ public class Ui {
     public String printSearchedTask(ArrayList<Task> tasks) {
         int numTask = 0;
         String output = "Here are the matching tasks in your list:\n";
-        while (numTask < tasks.size()) {
-            output = output + Integer.valueOf(numTask + 1) + "." + tasks.get(numTask) + "\n";
-            numTask++;
+        if (tasks.isEmpty()) {
+            output = "There are no matching task in your list. :(";
+        } else {
+            while (numTask < tasks.size()) {
+                output = output + Integer.valueOf(numTask + 1) + "." + tasks.get(numTask) + "\n";
+                numTask++;
+            }
         }
         return output;
     }

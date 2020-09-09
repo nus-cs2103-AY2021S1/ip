@@ -26,6 +26,7 @@ public class Command {
      * @return string array
      */
     private String[] removeFirst(String[] arr) {
+        assert(arr.length > 0);
         String[] tempArr = new String[arr.length];
         for (int i = 0; i < arr.length - 1; i++) {
             tempArr[i] = arr[i + 1];
@@ -41,6 +42,7 @@ public class Command {
      * @return string array before the word
      */
     private String[] removeAfterWord(String[] arr, String word) {
+        assert(arr.length > 0);
         String[] temp = new String[arr.length];
         for (int i = 0; i < arr.length; i++) {
             if (arr[i].equals(word)) {
@@ -60,6 +62,7 @@ public class Command {
      * @return string array
      */
     private String[] keepAfterWord(String[] arr, String word) {
+        assert(arr.length > 0);
         String[] temp = new String[arr.length];
         int counter = 0;
         // find position of the word
@@ -83,6 +86,7 @@ public class Command {
      * @return string
      */
     private String joinString(String[] arr) {
+        assert(arr.length > 0);
         String text = arr[0];
         if (arr.length == 1) {
             return text;
