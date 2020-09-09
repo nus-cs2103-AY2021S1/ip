@@ -29,6 +29,8 @@ public class Parser {
             return Instruction.TODO;
         } else if (input.equals("bye")) {
             return Instruction.BYE;
+        } else if (input.equals("undo")) {
+            return Instruction.UNDO;
         } else {
             return Instruction.OTHERS;
         }

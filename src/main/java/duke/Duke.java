@@ -218,9 +218,14 @@ public class Duke extends Application {
         
         thisInstruction = parser.load(input);
         try {
-            if (thisInstruction == Instruction.LIST) {
+            if (thisInstruction == Instruction.UNDO) {
+                list.updateList();
+                output = ui.printListMessage(list.getList());
+            } else if (thisInstruction == Instruction.LIST) {
                 output = ui.printListMessage(list.getList());
             } else if (thisInstruction == Instruction.DONE) {
+                // Duke does not support undone a task
+                list.updateLastList();
                 number = Character.getNumericValue(input.charAt(input.length() - 1));
                 thisTask = list.get(number - 1);
                 thisTask.markAsDone();
@@ -228,6 +233,7 @@ public class Duke extends Application {
                 output = ui.markAsDoneMessage(thisTask);
                 storage.updateList(list.getList());
             } else if (thisInstruction == Instruction.DELETE) {
+                list.updateLastList();
                 number = Character.getNumericValue(input.charAt(input.length() - 1));
                 thisTask = list.get(number - 1);
                 list.remove(number - 1);
@@ -240,6 +246,7 @@ public class Duke extends Application {
                 output = ui.byeMessage();
             } else {
                 if (thisInstruction == Instruction.DEADLINE) {
+                    list.updateLastList();
                     if (input.length() < 10) {
                         throw new DukeException("     The taskname of a deadline cannot be empty.");
                     }
@@ -250,6 +257,7 @@ public class Duke extends Application {
                     thisDeadline.updateDateTime();
                     list.add(thisDeadline);
                 } else if (thisInstruction == Instruction.EVENT) {
+                    list.updateLastList();
                     if (input.length() < 7) {
                         throw new DukeException("     The taskname of a event cannot be empty.");
                     }
@@ -258,6 +266,7 @@ public class Duke extends Application {
                     thisTime = input.substring(input.indexOf('/') + 4);
                     list.add(new Event(thisTaskname, false, thisTime));
                 } else if (thisInstruction == Instruction.TODO) {
+                    list.updateLastList();
                     if (input.length() < 6) {
                         throw new DukeException("     The taskname of a todo cannot be empty.");
                     }
