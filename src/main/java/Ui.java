@@ -183,6 +183,10 @@ public class Ui {
 
     }
 
+    private String dealReminder(){
+        return TaskList.remind();
+    }
+
     /**
      * Workhorse of the project, deal with all possible instructions exactly as desired.
      * @param input string text from the user
@@ -191,6 +195,10 @@ public class Ui {
     public String deal(String input) {
 
         Storage.read();
+
+        if (parser.isReminder(input)){
+            return dealReminder();
+        }
 
         if (parser.isBye(input)) {
             return dealBye();
