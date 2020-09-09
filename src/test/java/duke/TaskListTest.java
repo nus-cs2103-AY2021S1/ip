@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import org.junit.jupiter.api.Test;
@@ -12,6 +13,7 @@ import org.junit.jupiter.api.Test;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.TaskPriority;
 import duke.task.TaskType;
 import duke.task.Todo;
 
@@ -24,7 +26,7 @@ public class TaskListTest {
         Todo expectedTask = new Todo(TaskListTest.DESCRIPTION);
         TaskList taskList = new TaskList();
 
-        taskList.addTask(TaskType.TODO, TaskListTest.DESCRIPTION, null);
+        taskList.addTask(TaskType.TODO, TaskListTest.DESCRIPTION, null, TaskPriority.NONE, Collections.emptyList());
         assertEquals(expectedTask.getDescription(), taskList.getTask(1).getDescription());
     }
 
@@ -33,7 +35,8 @@ public class TaskListTest {
         Deadline expectedTask = new Deadline(TaskListTest.DESCRIPTION, TaskListTest.DATE_TIME);
         TaskList taskList = new TaskList();
 
-        taskList.addTask(TaskType.DEADLINE, TaskListTest.DESCRIPTION, TaskListTest.DATE_TIME);
+        taskList.addTask(TaskType.DEADLINE, TaskListTest.DESCRIPTION, TaskListTest.DATE_TIME,
+                TaskPriority.NONE, Collections.emptyList());
         assertEquals(expectedTask.getDescription(), taskList.getTask(1).getDescription());
         assertEquals(expectedTask.getDateTime(), ((Deadline) taskList.getTask(1)).getDateTime());
     }
@@ -43,7 +46,8 @@ public class TaskListTest {
         Event expectedTask = new Event(TaskListTest.DESCRIPTION, TaskListTest.DATE_TIME);
         TaskList taskList = new TaskList();
 
-        taskList.addTask(TaskType.EVENT, TaskListTest.DESCRIPTION, TaskListTest.DATE_TIME);
+        taskList.addTask(TaskType.EVENT, TaskListTest.DESCRIPTION, TaskListTest.DATE_TIME,
+                TaskPriority.NONE, Collections.emptyList());
         assertEquals(expectedTask.getDescription(), taskList.getTask(1).getDescription());
         assertEquals(expectedTask.getDateTime(), ((Event) taskList.getTask(1)).getDateTime());
     }
@@ -52,9 +56,12 @@ public class TaskListTest {
     public void addTask_invalidTask_exceptionThrown() {
         TaskList taskList = new TaskList();
 
-        assertThrows(DukeException.class, () -> taskList.addTask(TaskType.TODO, "", null));
-        assertThrows(DukeException.class, () -> taskList.addTask(TaskType.DEADLINE, "", TaskListTest.DATE_TIME));
-        assertThrows(DukeException.class, () -> taskList.addTask(TaskType.EVENT, "", TaskListTest.DATE_TIME));
+        assertThrows(DukeException.class, () -> taskList.addTask(TaskType.TODO, "", null,
+                TaskPriority.NONE, Collections.emptyList()));
+        assertThrows(DukeException.class, () -> taskList.addTask(TaskType.DEADLINE, "", TaskListTest.DATE_TIME,
+                TaskPriority.NONE, Collections.emptyList()));
+        assertThrows(DukeException.class, () -> taskList.addTask(TaskType.EVENT, "", TaskListTest.DATE_TIME,
+                TaskPriority.NONE, Collections.emptyList()));
     }
 
     @Test
