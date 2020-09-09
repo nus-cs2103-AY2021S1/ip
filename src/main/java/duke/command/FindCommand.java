@@ -3,6 +3,8 @@ package duke.command;
 import java.util.ArrayList;
 
 import duke.Duke;
+import duke.exception.EmptyKeywordException;
+import duke.exception.ExceptionMessage;
 import duke.task.Task;
 
 /**
@@ -27,6 +29,7 @@ public class FindCommand extends Command {
      */
     @Override
     public void execute(String str, Duke duke) {
+        checkException(str);
         ArrayList<Task> tasksFound = duke.getTaskList().findTasks(str);
         response(tasksFound, duke);
     }
@@ -36,6 +39,12 @@ public class FindCommand extends Command {
             duke.getGuiResponse().reportGivenTasks(tasksFound);
         } else {
             duke.getUiResponse().reportGivenTasks(tasksFound);
+        }
+    }
+
+    private void checkException(String str) {
+        if (str.isBlank()) {
+            throw new EmptyKeywordException(ExceptionMessage.EMPTY_KEYWORD_MESSAGE);
         }
     }
 }
