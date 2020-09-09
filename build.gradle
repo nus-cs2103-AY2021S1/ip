@@ -66,31 +66,18 @@ run{
  */
 task runtest(type: Exec) {
     dependsOn 'shadowJar'
-    workingDir "./text-ui-test"
+    workingDir './text-ui-test'
     commandLine 'cmd', '/C', 'runtest.bat'
-}
-
-task cmdCheck {
-    dependsOn 'checkstyleMain'
-    dependsOn 'checkstyleTest'
-    dependsOn 'test' // JUnit test
-    dependsOn 'runtest' // text-ui-test
-}
-
-task guiCheck {
-    dependsOn 'checkstyleMain'
-    dependsOn 'checkstyleTest'
-    dependsOn 'test' // JUnit test
 }
 
 /**
  * @@author akgrenSoar-reused
  * Solution adapted from: https://stackoverflow.com/a/45607934/6943913
  */
-task myBuild(type: GradleBuild) {
-    tasks = ['clean',
-             'javadoc',
-             'shadowJar'
-    ]
-}
+//task myBuild(type: GradleBuild) {
+//    tasks = ['clean',
+//             'javadoc',
+//             'shadowJar'
+//    ]
+//}
 
