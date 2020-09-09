@@ -105,6 +105,13 @@ public class TaskList {
         return tasks.get(itemToMark);
     }
 
+
+    /**
+     * Deletes the task at the specified task.
+     *
+     * @param index
+     * @return The task item that was deleted.
+     */
     public Task deleteTask(int index) {
         int itemToDelete = index - 1;
         // Assert that item to delete exists
