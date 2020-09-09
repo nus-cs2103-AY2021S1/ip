@@ -47,7 +47,7 @@ public class Duke {
         tasklist = new TaskList(total);
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         // use launcher to launch
     }
 }
