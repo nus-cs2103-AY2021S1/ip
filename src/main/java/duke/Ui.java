@@ -64,7 +64,7 @@ public class Ui {
                         : " tasks in your list.");
     }
     public void setMessageDoneTask() {
-        message = "Congrats, I've marked that task as finished!";
+        message = "Congrats, I have marked that task as finished!";
     }
     public void setMessageDeleteTask(TaskList tasks, int idx) {
         message = "The task " + tasks.getTasks().get(idx - 1) + " has been removed.";
