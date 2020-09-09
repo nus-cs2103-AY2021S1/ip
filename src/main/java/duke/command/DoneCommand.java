@@ -28,12 +28,22 @@ public class DoneCommand extends Command {
      * @param storage the storage where the tasks are saved after marking.
      * @throws DukeException if the user enters an invalid task number.
      */
+
+    /**
+     * Marks the task in the task list as done.
+     *
+     * @param tasks the task list.
+     * @param ui the ui that will generate the done message.
+     * @param storage the storage where the tasks will be saved.
+     * @return the ui-generated message.
+     * @throws DukeException if the user enters an invalid task number.
+     */
     @Override
-    public void executeCommand(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String executeCommand(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             tasks.markAsDone(taskNum);
-            ui.showDoneMessage(tasks.getTask(taskNum));
             storage.save(tasks.getTasks());
+            return ui.generateDoneMessage(tasks.getTask(taskNum));
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("Uh-oh! Looks like you have entered an invalid task number.");
         }

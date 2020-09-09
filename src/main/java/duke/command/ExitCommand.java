@@ -12,14 +12,15 @@ public class ExitCommand extends Command {
     /**
      * Terminates Duke.
      *
-     * @param tasks the task list that contains the tasks to be saved before exiting Duke.
-     * @param ui the ui that will display a farewell message.
-     * @param storage the storage where the tasks are saved before exiting.
+     * @param tasks the task list.
+     * @param ui the ui that will generate the farewell message.
+     * @param storage the storage where the tasks will be saved.
+     * @return the ui-generated message.
      */
     @Override
-    public void executeCommand(TaskList tasks, Ui ui, Storage storage) {
+    public String executeCommand(TaskList tasks, Ui ui, Storage storage) {
         storage.save(tasks.getTasks());
-        ui.showExitMessage();
+        return ui.generateExitMessage();
     }
 
     /**

@@ -10,15 +10,16 @@ import duke.Ui;
 public class ListCommand extends Command {
 
     /**
-     * Displays all the tasks in the task list.
+     * Gets all the tasks in the task list.
      *
-     * @param tasks the task list that is to be displayed.
-     * @param ui the ui that displays the task list.
-     * @param storage unused.
+     * @param tasks the task list.
+     * @param ui the ui that will generate the all tasks message.
+     * @param storage the storage where the tasks will be saved.
+     * @return the ui-generated message.
      */
     @Override
-    public void executeCommand(TaskList tasks, Ui ui, Storage storage) {
-        ui.showAllTasks(tasks);
+    public String executeCommand(TaskList tasks, Ui ui, Storage storage) {
+        return ui.generateAllTasks(tasks);
     }
 
     /**

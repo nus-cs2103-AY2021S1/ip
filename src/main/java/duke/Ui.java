@@ -8,6 +8,8 @@ import duke.task.Task;
  * Represents the part of Duke that deals with user interaction.
  */
 public class Ui {
+    private static final String DIVIDER =
+            "______________________________________________________________________";
     private final Scanner sc;
 
     /**
@@ -27,101 +29,109 @@ public class Ui {
     }
 
     /**
-     * Prints Duke's response to the user interaction with dividers (to improve readability).
+     * Generates Duke's response with dividers (to improve readability).
      *
      * @param output Duke's response.
+     * @return the specified output with dividers.
      */
-    public void printLines(String output) {
-        System.out.println("______________________________________________________________________");
-        System.out.println(output);
-        System.out.println("______________________________________________________________________");
+    public String generateDividers(String output) {
+        return DIVIDER + "\n" + output + "\n" + DIVIDER;
     }
 
     /**
-     * Shows a welcome message to the user.
-     */
-    public void showWelcomeMessage() {
-        printLines("Hello! I'm Duke\n" + "What can I do for you?");
-    }
-
-    /**
-     * Shows a farewell message to the user.
-     */
-    public void showExitMessage() {
-        printLines("Bye. I hope to see you again soon!");
-    }
-
-    /**
-     * Shows the entire list of tasks.
-     * If there are no tasks in the list, Duke will inform the user instead of showing an empty list.
+     * Generates a welcome message.
      *
-     * @param tasks the list of tasks.
+     * @return the welcome message.
      */
-    public void showAllTasks(TaskList tasks) {
+    public String generateWelcomeMessage() {
+        return "Hello! I'm Duke\n" + "What can I do for you?";
+    }
+
+    /**
+     * Generates a farewell message.
+     *
+     * @return the farewell message.
+     */
+    public String generateExitMessage() {
+        return "Bye. I hope to see you again soon!";
+    }
+
+    /**
+     * Generates a message with all the tasks in the list.
+     *
+     * @param tasks the task list.
+     * @return the generated message.
+     */
+    public String generateAllTasks(TaskList tasks) {
         if (tasks.getNumOfTasks() == 0) {
-            printLines("You currently have no tasks in your list.");
+            return "You currently have no tasks in your list.";
         } else {
-            printLines("Here are the tasks in your list:\n" + tasks);
+            return "Here are the tasks in your list:\n" + tasks;
         }
     }
 
     /**
-     * Shows a list of tasks from the task list which contains a common keyword.
+     * Generates a message with a list of tasks from the task list that contain a common keyword.
      *
      * @param keyword the specified keyword.
      * @param tasks the task list.
+     * @return the generated message.
      */
-    public void showFindMessage(String keyword, TaskList tasks) {
-        printLines("Here are the matching tasks in your list:\n" + tasks.getMatchingTasks(keyword));
+    public String generateFindMessage(String keyword, TaskList tasks) {
+        return "Here are the matching tasks in your list:\n" + tasks.getMatchingTasks(keyword);
     }
 
     /**
-     * Shows a message to the user that a task has been successfully added into the task list.
-     * Duke will then recalculate the total number of tasks and inform the user.
+     * Generates a message that a task has been successfully added into the task list.
+     * The new total number of tasks will be recalculated and will be included in the message.
      *
      * @param task the task that has been added into the task list.
      * @param tasks the task list.
+     * @return the generated message.
      */
-    public void showAddedMessage(Task task, TaskList tasks) {
-        printLines("Task added successfully!\n\t" + task + showNumOfTasksMessage(tasks));
+    public String generateAddedMessage(Task task, TaskList tasks) {
+        return "Task added successfully!\n\t" + task + generateNumOfTasksMessage(tasks);
     }
 
     /**
-     * Shows a message to the user that a task has been successfully marked as done.
+     * Generates a message that a task has been successfully marked as done.
      *
      * @param task the task that has been marked as done.
+     * @return the generated message.
      */
-    public void showDoneMessage(Task task) {
-        printLines("Task completed successfully!\n\t" + task);
+    public String generateDoneMessage(Task task) {
+        return "Task completed successfully!\n\t" + task;
     }
 
     /**
-     * Shows a message to the user that a task has been successfully deleted from the task list.
-     * Duke will then recalculate the total number of tasks and inform the user.
+     * Generates a message that a task has been successfully deleted from the task list.
+     * The new total number of tasks will be recalculated and will be included in the message.
      *
      * @param task the task that has been deleted from the task list.
      * @param tasks the task list.
+     * @return the generated message.
      */
-    public void showDeletedMessage(Task task, TaskList tasks) {
-        printLines("Task deleted successfully!\n\t" + task + showNumOfTasksMessage(tasks));
+    public String generateDeletedMessage(Task task, TaskList tasks) {
+        return "Task deleted successfully!\n\t" + task + generateNumOfTasksMessage(tasks);
     }
 
     /**
-     * Shows the user how many tasks are in the task list.
+     * Generates a message that shows how many tasks are in the task list.
      *
      * @param tasks the task list.
-     * @return a message that informs the user of the number of tasks in the list.
+     * @return the generated message.
      */
-    public String showNumOfTasksMessage(TaskList tasks) {
+    public String generateNumOfTasksMessage(TaskList tasks) {
         return String.format("\nNow you have %d task(s) in the list.", tasks.getNumOfTasks());
     }
 
     /**
-     * Shows an error message as and when an exception is thrown.
+     * Generates an error message as and when an exception is thrown.
      *
      * @param e the exception thrown.
+     * @return the error message.
      */
-    public void showErrorMessage(Exception e) {
-        printLines(e.getMessage());
+    public String generateErrorMessage(Exception e) {
+        return e.getMessage();
     }
 }

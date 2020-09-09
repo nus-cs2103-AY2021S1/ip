@@ -1,21 +1,22 @@
 package duke;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
+
+import duke.task.Deadline;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
 
 public class TaskListTest {
-    ToDo todo = new ToDo("homework");
-    Deadline deadline = new Deadline("assignment", LocalDate.parse("2020-09-05"));
-    Event event = new Event("party", LocalDate.parse("2020-09-04"));
+    private ToDo todo = new ToDo("homework");
+    private Deadline deadline = new Deadline("assignment", LocalDate.parse("2020-09-05"));
+    private Event event = new Event("party", LocalDate.parse("2020-09-04"));
 
     @Test
     public void addTask_tasksAddedSuccessfully() {
@@ -23,9 +24,9 @@ public class TaskListTest {
         tasks.addTask(todo);
         tasks.addTask(deadline);
         tasks.addTask(event);
-        String expected = "\n1.[T][0] homework" +
-                "\n2.[D][0] assignment (by: 5 Sep 2020)" +
-                "\n3.[E][0] party (at: 4 Sep 2020)";
+        String expected = "\n1.[T][0] homework"
+                + "\n2.[D][0] assignment (by: 5 Sep 2020)"
+                + "\n3.[E][0] party (at: 4 Sep 2020)";
         assertEquals(expected, tasks.toString());
     }
 
@@ -36,8 +37,8 @@ public class TaskListTest {
         tasks.addTask(deadline);
         tasks.addTask(event);
         tasks.deleteTask(2);
-        String expected = "\n1.[T][0] homework" +
-                "\n2.[E][0] party (at: 4 Sep 2020)";
+        String expected = "\n1.[T][0] homework"
+                + "\n2.[E][0] party (at: 4 Sep 2020)";
         assertEquals(expected, tasks.toString());
     }
 
@@ -84,8 +85,8 @@ public class TaskListTest {
         tasks.addTask(deadline);
         tasks.addTask(event);
         tasks.markAsDone(3);
-        assertEquals("\n1.[T][0] homework" +
-                "\n2.[D][0] assignment (by: 5 Sep 2020)" +
-                "\n3.[E][1] party (at: 4 Sep 2020)", tasks.toString());
+        assertEquals("\n1.[T][0] homework"
+                + "\n2.[D][0] assignment (by: 5 Sep 2020)"
+                + "\n3.[E][1] party (at: 4 Sep 2020)", tasks.toString());
     }
 }

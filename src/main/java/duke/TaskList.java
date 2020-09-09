@@ -20,7 +20,7 @@ public class TaskList {
     }
 
     /**
-     * Creates a task list containing tasks from the given list.
+     * Creates a task list containing tasks from a specified list.
      *
      * @param tasks the list whose tasks are to be placed into this list.
      */
@@ -31,7 +31,7 @@ public class TaskList {
     /**
      * Adds a task into the task list.
      *
-     * @param task the task to be added into the task list.
+     * @param task the task to be added.
      */
     public void addTask(Task task) {
         tasks.add(task);
@@ -40,7 +40,7 @@ public class TaskList {
     /**
      * Deletes a task from the task list.
      *
-     * @param taskNum the number of the task to be deleted from the task list.
+     * @param taskNum the number of the task to be deleted.
      * @return the deleted task.
      */
     public Task deleteTask(int taskNum) {
@@ -49,7 +49,7 @@ public class TaskList {
     }
 
     /**
-     * Retrieves the list of tasks.
+     * Retrieves the task list.
      *
      * @return the list of tasks.
      */
@@ -69,7 +69,7 @@ public class TaskList {
     /**
      * Retrieves a task from the task list.
      *
-     * @param taskNum the number of the task to be retrieved from the task list.
+     * @param taskNum the number of the task to be retrieved.
      * @return the retrieved task.
      */
     public Task getTask(int taskNum) {
@@ -88,7 +88,7 @@ public class TaskList {
     }
 
     /**
-     * Retrieves the list of tasks in the task list which contain the keyword.
+     * Retrieves a list of tasks in the task list which contain a specified keyword.
      *
      * @param keyword the keyword used to find the matching tasks.
      * @return the list of matching tasks.

@@ -1,16 +1,16 @@
 package duke;
 
-import org.junit.jupiter.api.Test;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+
+import org.junit.jupiter.api.Test;
 
 public class ParserTest {
 
     @Test
-    public void parse_deleteCommand_invalidTaskNumber_testExpectedException() {
+    public void parse_deleteCommand_invalidTaskNumber() {
         Exception e = assertThrows(DukeException.class, () -> {
-            Parser.parse("delete blabla");
+            Parser.parse("delete bla");
         });
         String expected = "Uh-oh! Looks like you have entered an invalid task number.";
         String actual = e.getMessage();
@@ -18,7 +18,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_deleteCommand_taskNumberMissing_testExpectedException() {
+    public void parse_deleteCommand_taskNumberMissing() {
         Exception e = assertThrows(DukeException.class, () -> {
             Parser.parse("delete");
         });
@@ -28,9 +28,9 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_doneCommand_invalidTaskNumber_testExpectedException() {
+    public void parse_doneCommand_invalidTaskNumber() {
         Exception e = assertThrows(DukeException.class, () -> {
-            Parser.parse("done blabla");
+            Parser.parse("done blab");
         });
         String expected = "Uh-oh! Looks like you have entered an invalid task number.";
         String actual = e.getMessage();
@@ -38,7 +38,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_doneCommand_taskNumberMissing_testExpectedException() {
+    public void parse_doneCommand_taskNumberMissing() {
         Exception e = assertThrows(DukeException.class, () -> {
             Parser.parse("done");
         });
@@ -48,9 +48,9 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_invalidEntry_testExpectedException() {
+    public void parse_invalidEntry() {
         Exception e = assertThrows(DukeException.class, () -> {
-            Parser.parse("blabla");
+            Parser.parse("bla");
         });
         String expected = "Uh-oh! I have no idea what that means.";
         String actual = e.getMessage();
@@ -58,7 +58,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_deadlineTask_invalidDateFormat_testExpectedException() {
+    public void parse_deadlineTask_invalidDateFormat() {
         Exception e = assertThrows(DukeException.class, () -> {
             Parser.parse("deadline CS2103T project /by tonight");
         });
@@ -68,7 +68,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_eventTask_invalidDateFormat_testExpectedException() {
+    public void parse_eventTask_invalidDateFormat() {
         Exception e = assertThrows(DukeException.class, () -> {
             Parser.parse("event team meeting /at friday");
         });
@@ -78,7 +78,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_emptyDescription_testExpectedException() {
+    public void parse_emptyDescription() {
         Exception e = assertThrows(DukeException.class, () -> {
             Parser.parse("deadline");
         });
@@ -88,7 +88,7 @@ public class ParserTest {
     }
 
     @Test
-    public void parse_wrongDescriptionFormat_testExpectedException() {
+    public void parse_wrongDescriptionFormat() {
         Exception e = assertThrows(DukeException.class, () -> {
             Parser.parse("event /at2020-05-09");
         });

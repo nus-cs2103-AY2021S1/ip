@@ -13,8 +13,6 @@ import duke.task.Event;
 import duke.task.Task;
 import duke.task.ToDo;
 
-
-
 /**
  * Represents the part of Duke that deals with loading tasks from a file and saving tasks in the same file.
  */

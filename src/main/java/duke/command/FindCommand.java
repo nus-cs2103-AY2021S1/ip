@@ -20,15 +20,16 @@ public class FindCommand extends Command {
     }
 
     /**
-     * Finds the tasks in the task list which contain the keyword and displays them.
+     * Finds the tasks in the task list that contain the keyword.
      *
-     * @param tasks the task list where the tasks which contain the keyword can be found.
-     * @param ui the ui that will display a message when the tasks have been found.
-     * @param storage unused.
+     * @param tasks the task list.
+     * @param ui the ui that will generate the find message.
+     * @param storage the storage where the tasks will be saved.
+     * @return the ui-generated message.
      */
     @Override
-    public void executeCommand(TaskList tasks, Ui ui, Storage storage) {
-        ui.showFindMessage(keyword, tasks);
+    public String executeCommand(TaskList tasks, Ui ui, Storage storage) {
+        return ui.generateFindMessage(keyword, tasks);
     }
 
     /**
