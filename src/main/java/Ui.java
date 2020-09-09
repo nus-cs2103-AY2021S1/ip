@@ -18,6 +18,15 @@ public class Ui {
         this.out = out;
     }
 
+    public void showSearchResults(String result) {
+        if (result.isBlank()) {
+            out.println("No matching tasks, sorry");
+        } else {
+            out.println("Here are the matching tasks in your list:");
+            out.println(result);
+        }
+    }
+
     private boolean shouldIgnore(String line) {
         return line.trim().isEmpty();
     }

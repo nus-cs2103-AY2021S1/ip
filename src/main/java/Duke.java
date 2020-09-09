@@ -67,6 +67,10 @@ public class Duke {
             ui.showBye();
             storage.save(tasks);
             return false;
+        case "find":
+            String result = tasks.getSearchResult(commands);
+            ui.showSearchResults(result);
+            break;
         default:
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

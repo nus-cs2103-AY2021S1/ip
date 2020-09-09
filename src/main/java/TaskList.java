@@ -7,6 +7,17 @@ public class TaskList {
         this.tasks = tasks;
     }
 
+    public String getSearchResult(String[] commands) {
+        StringBuilder stringBuilder = new StringBuilder();
+        for (int i = 0; i < tasks.size(); i++) {
+            Task currentTask = tasks.get(i);
+            if (currentTask.name.contains(commands[1])) {
+                stringBuilder.append((i+1) + "." + currentTask.toString() + '\n');
+            }
+        }
+        return stringBuilder.subSequence(0, stringBuilder.length() - 1).toString();
+    }
+
     public int size() {
         return tasks.size();
     }
@@ -42,5 +53,4 @@ public class TaskList {
         stringBuilder.setLength(stringBuilder.length() - 1);
         return stringBuilder.toString();
     }
-
 }

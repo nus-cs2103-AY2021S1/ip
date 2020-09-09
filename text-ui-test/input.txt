@@ -8,8 +8,10 @@ event project meeting at Mon 2-4pm
 todo
 deadline project
 done 3
+find book
 list
 done
+find meeting
 done one
 done 0
 done 1
