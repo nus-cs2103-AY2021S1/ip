@@ -66,7 +66,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        return "[duke.task.Event]" + super.toString() + " "
+        return "[Event]" + super.toString() + " "
                 + "(at: " + this.date + " " + this.timeStart + "-" + this.timeEnd + ")";
     }
 }

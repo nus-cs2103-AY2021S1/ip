@@ -43,7 +43,13 @@ public class Duke {
 
     private void runUntilExitCommand() {
         boolean isExitCommand = false;
+        boolean isFirstCommand = true;
         while (!isExitCommand) {
+            if (isFirstCommand) {
+                isFirstCommand = false;
+            } else {
+                ui.printAdditionActionMessage();
+            }
             String input = ui.readCommand();
             Command command;
             try {
@@ -54,7 +60,6 @@ public class Duke {
             } catch (DukeException e) {
                 ui.displayError(e.getMessage());
             }
-            ui.printAdditionActionMessage();
         }
     }
 

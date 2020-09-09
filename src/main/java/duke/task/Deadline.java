@@ -57,7 +57,7 @@ public class Deadline extends Task{
      */
     @Override
     public String toString() {
-        return "[duke.task.Deadline]"
+        return "[Deadline]"
                 + super.toString() + " "
                 + "(by: " + this.date + " " + this.time + ")";
     }

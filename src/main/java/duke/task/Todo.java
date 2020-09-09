@@ -32,6 +32,6 @@ public class Todo extends Task {
      */
     @Override
     public String toString() {
-        return "[duke.task.Todo]" + super.toString();
+        return "[Todo]" + super.toString();
     }
 }

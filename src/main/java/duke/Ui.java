@@ -86,9 +86,9 @@ public class Ui {
      */
     public void printTaskTypes() {
         System.out.println("What kind of task is it?");
-        System.out.print(" - duke.task.Todo\n"
-                + " - duke.task.Deadline\n"
-                + " - duke.task.Event\n");
+        System.out.print(" - Todo\n"
+                + " - Deadline\n"
+                + " - Event\n");
     }
 
     /**
