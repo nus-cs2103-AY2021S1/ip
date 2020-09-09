@@ -28,8 +28,13 @@ public class Storage {
 
     public final String path;
 
+    /**
+     * Constructor for new storage.
+     * @param path of file to be stored
+     */
     public Storage(String path) {
         this.path = path;
+        assert !path.isEmpty();
     }
 
 

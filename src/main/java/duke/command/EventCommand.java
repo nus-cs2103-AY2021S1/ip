@@ -25,6 +25,13 @@ public class EventCommand extends Command {
         super(input);
     }
 
+    private boolean isValidLength(String input) {
+        return input.length() <= 5;
+    }
+    private boolean containsKeyword(String input) {
+        return input.contains("/at");
+    }
+
     /**
      * Executes the command to add an event into the task list.
      *
@@ -37,11 +44,15 @@ public class EventCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage)
             throws InvalidInputException, InvalidFileException {
-        if (super.input.length() <= 5) {
+        if (isValidLength(super.input)) {
             throw new InvalidInputException(
-                    "☹ OOPS!!! The description of a event cannot be empty.\n");
+                    "OOPS!!! The description of a event cannot be empty.\n");
+        }
+        if (!containsKeyword(super.input)) {
+            throw new InvalidInputException("OOPS!!! Please use '/at' keyword\n");
         }
         try {
+            assert super.input.contains("/at") : "Event does not have keyword command.";
             String[] split = super.input.substring(6).split("/at ", 2);
             DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
             LocalDateTime date = LocalDateTime.parse(split[1], formatter);

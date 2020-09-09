@@ -33,9 +33,15 @@ public class DeleteCommand extends Command {
             throws InvalidInputException, InvalidFileException {
         if (super.input.length() <= 7) {
             throw new InvalidInputException(
-                    "☹ OOPS!!! The description of a delete operation cannot be empty / invalid index.");
+                    "OOPS!!! The description of a delete operation cannot be empty.");
         }
         int index = Integer.parseInt(super.input.substring(7)) - 1;
+        assert index >= 0;
+        if (index > tasks.taskListSize()) {
+            throw new InvalidInputException(
+                    "OOPS!!! Invalid index."
+            );
+        }
         Task taskDeleted = tasks.getTask(index);
         tasks.removeTask(index);
         storage.save(tasks);

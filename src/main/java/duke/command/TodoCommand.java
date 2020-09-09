@@ -34,7 +34,7 @@ public class TodoCommand extends Command {
             throws InvalidInputException, InvalidFileException {
         if (super.input.length() <= 5) {
             throw new InvalidInputException(
-                    "☹ OOPS!!! The description of a todo cannot be empty.\n");
+                    "OOPS!!! The description of a todo cannot be empty.\n");
         }
         Task todoTask = new Todo(super.input.substring(5));
         tasks.addTask(todoTask);
