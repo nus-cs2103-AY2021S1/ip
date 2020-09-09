@@ -69,7 +69,7 @@ public class Parser {
      *
      * @param command A hi, bye, or list command.
      * @return The response string.
-     * @throws DukeException DukeException.
+     * @throws DukeException DukeException if command is not in standard.
      */
     public static String parseOneWordCommand(String command) throws DukeException {
         switch (command) {
