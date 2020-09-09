@@ -9,6 +9,8 @@ import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.time.temporal.TemporalAccessor;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.command.AddCommand;
 import duke.command.Command;
@@ -18,6 +20,7 @@ import duke.command.DueCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.task.TaskPriority;
 import duke.task.TaskType;
 
 /**
@@ -103,53 +106,71 @@ public class Parser {
     public static Command parse(String fullCommand) throws DukeException {
         String[] commands = fullCommand.split("\\s");
         String command = commands[0];
-        String args = commands.length > 1 ? String.join(" ", Arrays.copyOfRange(commands, 1, commands.length)) : "";
+        String argsStr = commands.length > 1 ? String.join(" ", Arrays.copyOfRange(commands, 1, commands.length)) : "";
 
         switch (command) {
         case "bye":
-            if (!args.isBlank()) {
+            if (!argsStr.isBlank()) {
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
 
             return new ExitCommand();
         case "list":
-            if (!args.isBlank()) {
+            if (!argsStr.isBlank()) {
                 throw new DukeException("I'm sorry, but I don't know what that means :-(");
             }
 
             return new ListCommand();
         case "due":
-            if (args.isBlank()) {
+            if (argsStr.isBlank()) {
                 throw new DukeException("Date required for the due command.");
             }
 
-            return new DueCommand(Parser.parseDate(args));
+            return new DueCommand(Parser.parseDate(argsStr));
         case "done":
-            if (args.isBlank()) {
+            if (argsStr.isBlank()) {
                 throw new DukeException("Task number required for the done command.");
-            } else if (!args.chars().allMatch(Character::isDigit)) {
+            } else if (!argsStr.chars().allMatch(Character::isDigit)) {
                 throw new DukeException("Only positive integers allowed for the done command.");
             }
 
-            return new DoneCommand(Integer.parseInt(args));
+            return new DoneCommand(Integer.parseInt(argsStr));
         case "delete":
-            if (args.isBlank()) {
+            if (argsStr.isBlank()) {
                 throw new DukeException("Task number required for the delete command.");
-            } else if (!args.chars().allMatch(Character::isDigit)) {
+            } else if (!argsStr.chars().allMatch(Character::isDigit)) {
                 throw new DukeException("Only positive integers allowed for the delete command.");
             }
 
-            return new DeleteCommand(Integer.parseInt(args));
+            return new DeleteCommand(Integer.parseInt(argsStr));
         case "find":
-            if (args.isBlank()) {
+            if (argsStr.isBlank()) {
                 throw new DukeException("Keyword cannot be blank.");
             }
 
-            return new FindCommand(args);
-        case "todo":
-            return new AddCommand(TaskType.TODO, args);
+            return new FindCommand(argsStr);
+        case "todo": {
+            String[] args = argsStr.split("\\s");
+            String description = Arrays.stream(args).filter(arg -> !(arg.startsWith("#") || arg.startsWith("!"))).collect(Collectors.joining(" "));
+            List<String> tags = Arrays.stream(args).filter(arg -> arg.startsWith("#")).map(arg -> arg.substring(1)).collect(Collectors.toList());
+            long priorityCount = Arrays.stream(args).filter(arg -> arg.startsWith("!")).count();
+
+            if (priorityCount > 1) {
+                throw new DukeException("Please specify only one task priority!");
+            }
+
+            String priorityStr = Arrays.stream(args).filter(arg -> arg.startsWith("!")).findFirst().orElse("!NONE");
+
+            try {
+                TaskPriority priority = TaskPriority.valueOf(priorityStr.substring(1).toUpperCase());
+
+                return new AddCommand(TaskType.TODO, description, priority, tags);
+            } catch (IllegalArgumentException e) {
+                throw new DukeException("Task priority not recognised. Please use one of NONE, LOW, MEDIUM or HIGH.");
+            }
+        }
         case "deadline": {
-            String[] deadlineArgs = args.split("\\s/by\\s");
+            String[] deadlineArgs = argsStr.split("\\s/by\\s");
             String description = deadlineArgs[0];
             String by = deadlineArgs.length > 1
                     ? String.join(" ", Arrays.copyOfRange(deadlineArgs, 1, deadlineArgs.length))
@@ -158,7 +179,7 @@ public class Parser {
             return new AddCommand(TaskType.DEADLINE, description, Parser.parseDateTime(by));
         }
         case "event": {
-            String[] eventArgs = args.split("\\s/at\\s");
+            String[] eventArgs = argsStr.split("\\s/at\\s");
             String description = eventArgs[0];
             String at = eventArgs.length > 1
                     ? String.join(" ", Arrays.copyOfRange(eventArgs, 1, eventArgs.length))

@@ -1,6 +1,8 @@
 package duke.task;
 
 import java.time.LocalDate;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Represents a todo.
@@ -10,8 +12,16 @@ public class Todo extends Task {
         this(description, false);
     }
 
+    public Todo(String description, TaskPriority priority, List<String> tags) {
+        this(description, false, priority, tags);
+    }
+
     public Todo(String description, boolean isDone) {
-        super(description, isDone);
+        this(description, isDone, TaskPriority.NONE, Collections.emptyList());
+    }
+
+    public Todo(String description, boolean isDone, TaskPriority priority, List<String> tags) {
+        super(description, isDone, priority, tags);
     }
 
     /**

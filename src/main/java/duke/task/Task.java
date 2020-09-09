@@ -1,6 +1,8 @@
 package duke.task;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Represents a task, which can be a todo, deadline or event.
@@ -8,17 +10,24 @@ import java.time.LocalDate;
 public abstract class Task {
     private final String description;
     private boolean isDone;
+    private final TaskPriority priority;
+    private final List<String> tags;
 
     /**
      * The task constructor.
      *
      * @param description The description of the task.
      * @param isDone The boolean keeping track of whether the task is done.
+     * @param priority Priority of task.
+     * @param tags List of tags.
      */
-    public Task(String description, boolean isDone) {
+
+    public Task(String description, boolean isDone, TaskPriority priority, List<String> tags) {
         assert(!description.isBlank()) : "Task description should not be empty";
         this.description = description;
         this.isDone = isDone;
+        this.priority = priority;
+        this.tags = new ArrayList<>(tags);
     }
 
     public abstract boolean isDue(LocalDate date);
@@ -70,6 +79,6 @@ public abstract class Task {
      */
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return "[" + this.getStatusIcon() + "] " + this.description + " (" + this.priority + ") " + this.tags;
     }
 }

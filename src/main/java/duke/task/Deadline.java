@@ -3,6 +3,8 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Represents a deadline.
@@ -14,15 +16,21 @@ public class Deadline extends Task {
         this(description, dateTime, false);
     }
 
+    public Deadline(String description, LocalDateTime dateTime, boolean isDone) {
+        this(description, dateTime, isDone, TaskPriority.NONE, Collections.emptyList());
+    }
+
     /**
      * The deadline constructor.
      *
      * @param description The description of the deadline.
      * @param dateTime The date/time the deadline is due by.
      * @param isDone The boolean keeping track of whether the deadline is done.
+     * @param priority Priority of deadline.
+     * @param tags List of tags.
      */
-    public Deadline(String description, LocalDateTime dateTime, boolean isDone) {
-        super(description, isDone);
+    public Deadline(String description, LocalDateTime dateTime, boolean isDone, TaskPriority priority, List<String> tags) {
+        super(description, isDone, priority, tags);
         this.dateTime = dateTime;
     }
 

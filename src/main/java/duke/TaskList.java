@@ -3,12 +3,14 @@ package duke;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
+import duke.task.TaskPriority;
 import duke.task.TaskType;
 import duke.task.Todo;
 
@@ -16,7 +18,7 @@ public class TaskList {
     private final List<Task> tasks;
 
     public TaskList() {
-        this(new ArrayList<>());
+        this(Collections.emptyList());
     }
 
     public TaskList(List<Task> tasks) {
@@ -46,6 +48,20 @@ public class TaskList {
         }
     }
 
+    public Task addTask(TaskType type, String description, LocalDateTime dateTime, TaskPriority priority, List<String> tags) throws DukeException {
+        switch (type) {
+        case TODO:
+            assert(dateTime == null) : "dateTime should be null for todos";
+            return addTodo(description, priority, tags);
+        case DEADLINE:
+            return addDeadline(description, dateTime);
+        case EVENT:
+            return addEvent(description, dateTime);
+        default:
+            throw new DukeException("Task type not recognised!");
+        }
+    }
+
     private Todo addTodo(String description) throws DukeException {
         if (description.isBlank()) {
             throw new DukeException("The description of a todo cannot be empty.");
@@ -57,23 +73,34 @@ public class TaskList {
         return todo;
     }
 
-    private Deadline addDeadline(String description, LocalDateTime by) throws DukeException {
+    private Todo addTodo(String description, TaskPriority priority, List<String> tags) throws DukeException {
+        if (description.isBlank()) {
+            throw new DukeException("The description of a todo cannot be empty.");
+        }
+
+        Todo todo = new Todo(description, priority, tags);
+        this.tasks.add(todo);
+
+        return todo;
+    }
+
+    private Deadline addDeadline(String description, LocalDateTime dateTime) throws DukeException {
         if (description.isBlank()) {
             throw new DukeException("The description of a deadline cannot be empty.");
         }
 
-        Deadline deadline = new Deadline(description, by);
+        Deadline deadline = new Deadline(description, dateTime);
         this.tasks.add(deadline);
 
         return deadline;
     }
 
-    private Event addEvent(String description, LocalDateTime at) throws DukeException {
+    private Event addEvent(String description, LocalDateTime dateTime) throws DukeException {
         if (description.isBlank()) {
             throw new DukeException("The description of an event cannot be empty.");
         }
 
-        Event event = new Event(description, at);
+        Event event = new Event(description, dateTime);
         this.tasks.add(event);
 
         return event;

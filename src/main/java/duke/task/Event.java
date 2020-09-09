@@ -3,6 +3,8 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.Collections;
+import java.util.List;
 
 /**
  * Represents an event.
@@ -14,15 +16,21 @@ public class Event extends Task {
         this(description, dateTime, false);
     }
 
+    public Event(String description, LocalDateTime dateTime, boolean isDone) {
+        this(description, dateTime, isDone, TaskPriority.NONE, Collections.emptyList());
+    }
+
     /**
      * The event constructor.
      *
      * @param description The description of the event.
      * @param dateTime The date/time the event is due by.
      * @param isDone The boolean keeping track of whether the event is done.
+     * @param priority Priority of event.
+     * @param tags List of tags.
      */
-    public Event(String description, LocalDateTime dateTime, boolean isDone) {
-        super(description, isDone);
+    public Event(String description, LocalDateTime dateTime, boolean isDone, TaskPriority priority, List<String> tags) {
+        super(description, isDone, priority, tags);
         this.dateTime = dateTime;
     }
 

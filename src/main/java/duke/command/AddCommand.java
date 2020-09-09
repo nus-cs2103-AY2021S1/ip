@@ -1,12 +1,16 @@
 package duke.command;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 
 import duke.DukeException;
 import duke.Storage;
 import duke.TaskList;
 import duke.response.Response;
 import duke.task.Task;
+import duke.task.TaskPriority;
 import duke.task.TaskType;
 
 /**
@@ -16,9 +20,15 @@ public class AddCommand extends Command {
     private final TaskType type;
     private final String description;
     private final LocalDateTime dateTime;
+    private final TaskPriority priority;
+    private final List<String> tags;
 
     public AddCommand(TaskType type, String description) {
-        this(type, description, null);
+        this(type, description, TaskPriority.NONE, Collections.emptyList());
+    }
+
+    public AddCommand(TaskType type, String description, TaskPriority priority, List<String> tags) {
+        this(type, description, null, priority, tags);
     }
 
     /**
@@ -29,9 +39,15 @@ public class AddCommand extends Command {
      * @param dateTime The date/time if applicable.
      */
     public AddCommand(TaskType type, String description, LocalDateTime dateTime) {
+        this(type, description, dateTime, TaskPriority.NONE, Collections.emptyList());
+    }
+
+    public AddCommand(TaskType type, String description, LocalDateTime dateTime, TaskPriority priority, List<String> tags) {
         this.type = type;
         this.description = description;
         this.dateTime = dateTime;
+        this.priority = priority;
+        this.tags = new ArrayList<>(tags);
     }
 
     /**
@@ -43,7 +59,7 @@ public class AddCommand extends Command {
      */
     @Override
     public Response execute(TaskList taskList, Storage storage) throws DukeException {
-        Task task = taskList.addTask(this.type, this.description, this.dateTime);
+        Task task = taskList.addTask(this.type, this.description, this.dateTime, this.priority, this.tags);
         Response response = new Response("Got it. I've added this task:\n  "
                 + task + "\n"
                 + "Now you have " + taskList.getTasks().size()
