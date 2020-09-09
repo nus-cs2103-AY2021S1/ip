@@ -57,8 +57,6 @@ public class Duke {
                 } else {
                     return ui.addTask(tasks.addTask(parsedInput[0], parsedInput[1]), tasks.getLength());
                 }
-                case "test":
-                    return ui.test(tasks.test(Integer.valueOf(parsedInput[1])));
             default:
                 throw new UnknownCommandException();
             }

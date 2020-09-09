@@ -133,9 +133,4 @@ public class TaskList {
         }
         return list;
     }
-
-    public String test(int num) {
-        Task task = tasks.get(num - 1);
-        return task.getDateRepeated().toString();
-    }
 }
