@@ -49,6 +49,7 @@ public class Task {
         if (!isDone) {
             this.isDone = true;
         }
+        assert(this.isDone) : "Mark down failed.";
     }
 
     /**
@@ -62,6 +63,7 @@ public class Task {
      * This method is used to set the type of a task.
      */
     public void setType(String type) {
+        assert (type == "T" | type == "D" | type =="E") : "Incorrect type.";
         this.type = type;
     }
 

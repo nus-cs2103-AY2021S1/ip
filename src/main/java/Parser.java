@@ -13,6 +13,7 @@ public class Parser {
      */
     public static String respond(String command, Ui ui, TaskList taskList, String filePath) {
         String[] pieces = command.split(" ", 2);
+        assert(pieces[0] != null) : "Incorrect splitting.";
         if (command.equals("bye")) { // terminating command
             return ui.bye();
         } else if (command.equals("Hi")) {
@@ -37,6 +38,7 @@ public class Parser {
                 if (task > taskList.noOfTasks) {
                     return ui.uncreatedTask(); // task has not been created
                 } else {
+                    assert (taskList.list.get(task - 1) != null) : "Incorrect index.";
                     Task cur = taskList.list.get(task - 1);
                     cur.markAsDone();
                     Storage.updateTasks(taskList.getNoOfTasks(), taskList.list, filePath);
@@ -51,6 +53,7 @@ public class Parser {
                 if (num > taskList.noOfTasks) {
                     return ui.uncreatedTask();
                 } else {
+                    assert (taskList.list.get(num - 1) != null) : "Incorrect index.";
                     Task removed = taskList.list.get(num - 1);
                     taskList.deleteTask(removed);
                     Storage.updateTasks(taskList.getNoOfTasks(), taskList.list, filePath); // update storage
@@ -77,6 +80,7 @@ public class Parser {
                     stringToReturn = ui.unknownCommand();
                     break;
                 }
+                assert (stringToReturn != "") : "Switch statement error.";
                 return stringToReturn;
             } else {
                 Task t = new Task("");
@@ -115,7 +119,6 @@ public class Parser {
                 } else {
                     return "";
                 }
-
             }
         }
     }
