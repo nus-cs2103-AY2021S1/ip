@@ -10,7 +10,7 @@ public class ToDoTest {
     public void testStringConversion() {
         ToDo task = new ToDo("read book");
         assertEquals("[T][\u2718] read book", task.toString());
-        task.done();
+        task.setAsDone();
         assertEquals("[T][\u2713] read book", task.toString());
     }
 }

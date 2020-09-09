@@ -12,7 +12,7 @@ public class DeadlineTest {
     public void testStringConversion() {
         Deadline task = new Deadline("return book", LocalDate.parse("2020-08-29"));
         assertEquals("[D][\u2718] return book (by: Aug 29 2020)", task.toString());
-        task.done();
+        task.setAsDone();
         assertEquals("[D][\u2713] return book (by: Aug 29 2020)", task.toString());
     }
 }

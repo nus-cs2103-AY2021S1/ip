@@ -6,8 +6,10 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Scanner;
 
+import duke.merchandise.Merchandise;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -20,6 +22,7 @@ import duke.task.ToDo;
 public class Storage {
 
     private final String filePath;
+    private Merchandise merchandise;
 
     /**
      * Constructor for a Storage object.
@@ -108,5 +111,13 @@ public class Storage {
             printLine.printf("%s\n", taskDetails);
         }
         printLine.close();
+    }
+
+    public Merchandise loadMerchandise() {
+        return merchandise;
+    }
+
+    public void addMerchandise(Merchandise merchandise) {
+        this.merchandise = merchandise;
     }
 }
