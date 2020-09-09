@@ -66,6 +66,41 @@ public class Parser {
             } else {
                 return "    description cannot be empty~";
             }
+        } else if (order.length() >= 1 && order.charAt(0) == 't') {
+            if (order.length() > 1) {
+                String content = order.substring(2);
+                TaskList.list.add(new Todo(false, content));
+                Storage.writeData(TaskList.list);
+                return "    added:" + content + "\n" + "    Now you have " + TaskList.list.size() + " task(s) in the list";
+            } else {
+                return "    description cannot be empty~";
+            }
+        } else if (order.length() >= 1 && order.charAt(0) == 'd') {
+            if (order.length() > 1) {
+                Integer indexOfSlash = order.indexOf('/');
+                String content = order.substring(2, indexOfSlash);
+                String due = order.substring(indexOfSlash + 4);
+                LocalDate ddl = LocalDate.parse(due);
+                TaskList.list.add(new Deadline(false, content, ddl));
+                Storage.writeData(TaskList.list);
+
+                return "    added:" + content + "\n" + "    Now you have " + TaskList.list.size() + " task(s) in the list";
+            } else {
+                return "    description cannot be empty~";
+            }
+        } else if (order.length() >= 1 && order.charAt(0) == 'e') {
+            if (order.length() > 1) {
+                int indexOfSlash = order.indexOf('/');
+                String content = order.substring(2, indexOfSlash);
+                String time = order.substring(indexOfSlash + 4);
+                LocalDate ddl = LocalDate.parse(time);
+                TaskList.list.add(new Event(false, content, ddl));
+                Storage.writeData(TaskList.list);
+
+                return "    added:" + content + "\n" + "    Now you have " + TaskList.list.size() + " task(s) in the list";
+            } else {
+                return "    description cannot be empty~";
+            }
         } else if (order.length() >= 6 && order.substring(0, 6).equals("delete")) {
             if (order.length() > 6) {
                 Integer toBeDeleted = Integer.valueOf(order.substring(7));
