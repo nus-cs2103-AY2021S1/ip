@@ -28,11 +28,11 @@ public class TaskStorage {
     private File folderFile;
     private Path taskFilePath;
     private File taskFile;
-    private Path isDoneFilePath;
-    private File isDoneFile;
+    private Path taskStateFilePath;
+    private File taskStateFile;
 
     private Scanner taskReader;
-    private Scanner isDoneReader;
+    private Scanner taskStateReader;
 
     /**
      * Constructs a TaskStorage object.
@@ -43,15 +43,15 @@ public class TaskStorage {
         folderFile = folderPath.toFile();
         taskFilePath = Paths.get(folderPath.toString(), "taskSave.txt");
         taskFile = taskFilePath.toFile();
-        isDoneFilePath = Paths.get(folderPath.toString(), "isDoneSave.txt");
-        isDoneFile = isDoneFilePath.toFile();
+        taskStateFilePath = Paths.get(folderPath.toString(), "isDoneSave.txt");
+        taskStateFile = taskStateFilePath.toFile();
 
         folderFile.mkdir();
         taskFile.createNewFile();
-        isDoneFile.createNewFile();
+        taskStateFile.createNewFile();
 
         taskReader = new Scanner(taskFile);
-        isDoneReader = new Scanner(isDoneFile);
+        taskStateReader = new Scanner(taskStateFile);
     }
 
     private Task stringToTask(String taskString) {
@@ -82,14 +82,17 @@ public class TaskStorage {
     public ArrayList<Task> getSavedTasks() {
         ArrayList<Task> tasks = new ArrayList<>();
 
-        while (taskReader.hasNextLine() && isDoneReader.hasNextLine()) {
+        while (taskReader.hasNextLine() && taskStateReader.hasNextLine()) {
             String taskString = taskReader.nextLine();
-            boolean isTaskDone = isDoneReader.nextBoolean();
+            String[] taskStateString = taskStateReader.nextLine().split(" ", 2);
+
+            boolean isTaskDone = Boolean.parseBoolean(taskStateString[0]);
+            String tag = taskStateString[1];
 
             Task task = stringToTask(taskString);
-            if (isTaskDone) {
-                task.markAsDone();
-            }
+
+            task.setTaskDone(isTaskDone);
+            task.setTag(tag);
 
             tasks.add(task);
         }
@@ -104,17 +107,19 @@ public class TaskStorage {
      */
     public void saveTasks(ArrayList<Task> tasks) throws IOException {
         FileWriter taskWriter = new FileWriter(taskFile);
-        FileWriter isDoneWriter = new FileWriter(isDoneFile);
+        FileWriter taskStateWriter = new FileWriter(taskStateFile);
 
         // Remove all current contents in the files
         taskWriter.write("");
-        isDoneWriter.write("");
+        taskStateWriter.write("");
 
         for (Task task : tasks) {
             taskWriter.append(taskToString(task) + '\n');
-            isDoneWriter.append(Boolean.toString(task.isTaskDone()) + '\n');
+
+            String taskState = task.isTaskDone() + " " + task.getTag() + '\n';
+            taskStateWriter.append(taskState);
         }
         taskWriter.close();
-        isDoneWriter.close();
+        taskStateWriter.close();
     }
 }
