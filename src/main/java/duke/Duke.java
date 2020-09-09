@@ -51,6 +51,7 @@ public class Duke {
     public String run(String input) {
         try {
             Command c = Parser.parse(input);
+            assert !c.equals("") : "Command cannot be empty";
             return c.execute(taskList, ui, store);
         } catch (DukeException | IOException e) {
             return ui.showError(e.getMessage());
