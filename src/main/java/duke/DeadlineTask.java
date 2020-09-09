@@ -33,6 +33,18 @@ public class DeadlineTask extends Task {
         }
     }
 
+    /**
+     * Creates DeadlineTask with array as input. Array size should be exactly 2. First element will be used as
+     * description and second element will be used as deadline.
+     *
+     * @param arguments The input array.
+     * @return A DeadlineTask.
+     */
+    public static DeadlineTask of(String... arguments) {
+        assert(arguments.length == 2);
+        return new DeadlineTask(arguments[0], arguments[1]);
+    }
+
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + deadlineString + ")";
