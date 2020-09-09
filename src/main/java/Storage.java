@@ -30,19 +30,19 @@ public class Storage {
 
             if (task instanceof Todo) {
                 fileWriter.write("T ## " + (task.getDone() ? 1 : 0) + " ## "
-                        + task.getDescription() + "\n");
+                        + (task.getPriority()) + " ## " + task.getDescription() + "\n");
             }
 
             if (task instanceof Deadline) {
                 fileWriter.write("D ## " + (task.getDone() ? 1 : 0) + " ## "
-                        + task.getDescription() + " ## "
+                        + (task.getPriority()) + " ## " + task.getDescription() + " ## "
                         + ((Deadline) task).getDate() + "\n");
             }
 
             if (task instanceof Event) {
                 fileWriter.write("E ## " + (task.getDone() ? 1 : 0) + " ## "
-                        + task.getDescription() + " ## " + ((Event) task).getDate()
-                        + " " + ((Event) task).getTime() + "\n");
+                        + (task.getPriority()) + " ## " + task.getDescription() + " ## "
+                        + ((Event) task).getDate() + " " + ((Event) task).getTime() + "\n");
             }
         }
         fileWriter.close();
@@ -60,7 +60,7 @@ public class Storage {
             return (ArrayList<String>) Files.readAllLines(Paths.get(fileName));
         } else {
             file.createNewFile();
-            return null;
+            return new ArrayList<>();
         }
     }
 }

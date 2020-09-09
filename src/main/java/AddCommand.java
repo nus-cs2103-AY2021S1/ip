@@ -15,7 +15,6 @@ public class AddCommand extends Command {
         this.taskDescription = splitInput[1];
     }
 
-    @Override
     public String handle(String input, TaskManager taskManager, Storage fileHandler) throws IOException {
 
         if (this.taskType.equals("todo")) {
