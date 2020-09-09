@@ -1,5 +1,9 @@
 import java.util.ArrayList;
 
+/**
+ * Encapsulates a taskList class, contains a list of tasks and supports operations that adds, deletes or
+ * finds tasks, or marks tasks as done.
+ */
 public class TaskList {
 
     private final ArrayList<Task> myTaskList;
@@ -75,6 +79,10 @@ public class TaskList {
         return new TaskList(tasks).toString();
     }
 
+    /**
+     * Returns a numbered list of all the tasks in the task list, with each task on a new line. 
+     * @return a numbered list of tasks.
+     */
     @Override
     public String toString() {
         if (myTaskList.isEmpty()) {
@@ -82,7 +90,12 @@ public class TaskList {
         } else {
             StringBuilder taskListString = new StringBuilder();
             for (int i = 1; i < myTaskList.size() + 1; i++) {
-                taskListString.append("     ").append(i).append(".").append(myTaskList.get(i - 1)).append("\n");
+                taskListString
+                        .append("     ")
+                        .append(i)
+                        .append(".")
+                        .append(myTaskList.get(i - 1))
+                        .append("\n");
             }
             taskListString.delete(taskListString.length() - 1, taskListString.length());
             return taskListString.toString();
