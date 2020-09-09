@@ -48,6 +48,12 @@ public class MainWindow extends AnchorPane {
                 + "\\     \\____/    |    \\   | |    |   \n"
                 + " \\______  /\\____|__  /___| |____|   \n"
                 + "        \\/         \\/               \n";
+        logo = "_________         _____     .______________\n"
+                + "\\_     ___   \\    /   _    \\   |     \\__      ___/\n"
+                + "/      \\     \\/  /    /_\\    \\ |      |   |      |   \n"
+                + "\\        \\____/        |       \\      |   |      |   \n"
+                + "  \\______    /\\____ |__    / ___|   |____|     \n"
+                + "             \\/               \\/               \n";
         String result = ("Hi! I'm\n" + logo + "\n");
         result += ("What can I help you with?\n");
         result += "(Type 'help' for a list of commands!)";
