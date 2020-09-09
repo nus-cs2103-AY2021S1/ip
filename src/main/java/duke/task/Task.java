@@ -90,8 +90,8 @@ public class Task {
                 type = "E";
                 break;
         }
-        String doneStatus = isDone? "1" : "0";
-        return type + "|" + doneStatus +"|" + this.description;
+        String doneStatus = isDone ? "1" : "0";
+        return type + "|" + doneStatus + "|" + this.description;
     }
 
     /**
