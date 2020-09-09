@@ -36,11 +36,13 @@ public class Storage {
         try {
             Task next;
             if (s.startsWith("todo")) {
+                assert s.matches("(todo\\s)(.+)");
                 next = new ToDo(s.substring(5));
             } else if (s.startsWith("deadline")) {
                 String datePattern = "(\\d\\d\\d\\d-\\d\\d-\\d\\d)\\s";
                 String timePattern = "(\\d\\d)(\\d\\d)";
                 String pattern = "(deadline\\s)(.+)\\s(/by\\s)" + datePattern + timePattern;
+                assert s.matches(pattern);
                 String task = s.replaceAll(pattern, "$2");
                 LocalDateTime dateTime = Parser.extractDateTime(s, pattern);
                 next = new Deadline(task, dateTime);
@@ -48,6 +50,7 @@ public class Storage {
                 String datePattern = "(\\d\\d\\d\\d-\\d\\d-\\d\\d)\\s";
                 String timePattern = "(\\d\\d)(\\d\\d)";
                 String pattern = "(event\\s)(.+)\\s(/at\\s)(.+)" + datePattern + timePattern;
+                assert s.matches(pattern);
                 String task = s.replaceAll(pattern, "$2");
                 LocalDateTime dateTime = Parser.extractDateTime(s, pattern);
                 next = new Event(task, dateTime);
