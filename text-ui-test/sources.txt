@@ -2,6 +2,10 @@
 ../src/main/java/duke/Storage.java
 ../src/main/java/duke/Parser.java
 ../src/main/java/duke/Ui.java
+../src/main/java/duke/gui/DialogBox.java
+../src/main/java/duke/gui/Main.java
+../src/main/java/duke/gui/MainWindow.java
+../src/main/java/duke/gui/Launcher.java
 ../src/main/java/duke/task/TaskType.java
 ../src/main/java/duke/task/Event.java
 ../src/main/java/duke/task/Task.java

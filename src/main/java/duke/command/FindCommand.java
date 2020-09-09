@@ -2,9 +2,9 @@ package duke.command;
 
 import java.util.List;
 
+import duke.Ui;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.task.Task;
 
 /**
@@ -39,8 +39,8 @@ public class FindCommand extends Command {
      * @param storage storage instance to manage updating on disk
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         List<Task> tasks = taskList.getTasksWithWord(keyword);
-        ui.listQueriedTasks(tasks);
+        return ui.listQueriedTasks(tasks);
     }
 }

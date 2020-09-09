@@ -3,9 +3,9 @@ package duke.command;
 import java.util.Date;
 import java.util.List;
 
+import duke.Ui;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.task.Task;
 
 /**
@@ -40,8 +40,8 @@ public class GetCommand extends Command {
      * @param storage storage instance to manage storing on disk
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         List<Task> tasks = taskList.getTasksWithDate(date);
-        ui.listQueriedTasks(tasks);
+        return ui.listQueriedTasks(tasks);
     }
 }
