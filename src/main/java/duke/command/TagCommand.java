@@ -1,10 +1,11 @@
 package duke.command;
 
+import java.util.Arrays;
+
 import duke.exception.InvalidCommandException;
 import duke.task.Task;
 import duke.task.TaskList;
 
-import java.util.Arrays;
 
 // Handles all the logic behind any "done" command from the user.
 public class TagCommand extends Command {

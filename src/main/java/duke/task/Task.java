@@ -39,6 +39,11 @@ public abstract class Task {
         return description.toLowerCase().contains(keyword.toLowerCase());
     }
 
+    /**
+     * Tags the task with the all the input tags.
+     *
+     * @param tagsToAdd String[] tags to be added.
+     */
     public void addTags(String[] tagsToAdd) {
         if (tagsToAdd.length == 0) {
             return;
