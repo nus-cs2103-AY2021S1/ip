@@ -27,6 +27,7 @@ public class DoneCommand extends Command {
     public String execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
         try {
             int taskNum = Integer.parseInt(this.description);
+            assert taskNum > 0;
             Task task = tasks.getTask(taskNum);
             tasks.markDone(taskNum, storage);
 
