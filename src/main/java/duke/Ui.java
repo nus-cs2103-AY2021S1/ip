@@ -7,7 +7,8 @@ import java.util.Scanner;
  */
 public class Ui {
     private static final String NAME = "CHUBS";
-    private static final String LOGO = "              ░                                             ░                                  ░░░  \n"
+    private static final String LOGO = "              ░                                             ░               "
+            + "░░░  \n"
             + "                                                         ████            ░                          \n"
             + "                                                      █▓▒▒▒█                                      \n"
             + "                                             ███████▒█                                    \n"
