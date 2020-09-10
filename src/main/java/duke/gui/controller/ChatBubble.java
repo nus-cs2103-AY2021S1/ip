@@ -1,4 +1,4 @@
-package duke.gui;
+package duke.gui.controller;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -24,6 +24,11 @@ public class ChatBubble extends HBox {
     @FXML
     private ImageView avatarView;
 
+    /**
+     * Generate a chat bubble
+     * @param message message of the chat bubble
+     * @param avatar profile picture of the chat user
+     */
     private ChatBubble(String message, Image avatar) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/ChatBubble.fxml"));
@@ -58,16 +63,34 @@ public class ChatBubble extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Generate a user chat bubble
+     * @param message message to display in chat bubble
+     * @param avatar user's profile picture to display in chat bubble
+     * @return Chat bubble containing user's message and avatar
+     */
     public static ChatBubble getUserDialog(String message, Image avatar) {
         return new ChatBubble(message, avatar);
     }
 
+    /**
+     * Generate a duke chat bubble
+     * @param message message to display in chat bubble
+     * @param avatar duke's profile picture to display in chat bubble
+     * @return Chat bubble containing duke's message and avatar
+     */
     public static ChatBubble getDukeDialog(String message, Image avatar) {
         ChatBubble chatBubble = new ChatBubble(message, avatar);
         chatBubble.flip();
         return chatBubble;
     }
 
+    /**
+     * Generate a error message chat bubble
+     * @param message message to display in chat bubble
+     * @param avatar error message's profile picture to display in chat bubble
+     * @return Chat bubble containing error message's message and avatar
+     */
     public static ChatBubble getErrorDialog(String message, Image avatar) {
         ChatBubble chatBubble = new ChatBubble(message, avatar);
         chatBubble.flip();

@@ -9,12 +9,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * Gui entry point for Duke using FXML.
  */
 public class Duke extends Application {
 
-    //private Duke duke = new Duke();
-
+    /**
+     * Entry point of Duke GUI
+     * @param stage
+     */
     @Override
     public void start(Stage stage) {
         try {
@@ -22,7 +24,6 @@ public class Duke extends Application {
             BorderPane bp = fxmlLoader.load();
             Scene scene = new Scene(bp);
             stage.setScene(scene);
-            //fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
