@@ -16,12 +16,27 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
 
+import java.util.HashMap;
+import java.util.function.Function;
+
 //TODO: change exceptions to throw from creation instead of checking.
 
 /**
  * This class will translate the user's input into command.
  */
 public class Parser {
+    private static HashMap<CommandList, Function<String, Command>> funcMapper = new HashMap<>();
+    static {
+        funcMapper.put(CommandList.bye, x -> new ExitCommand());
+        funcMapper.put(CommandList.exit, x -> new ExitCommand());
+        funcMapper.put(CommandList.list, x -> processList(x));
+        funcMapper.put(CommandList.todo, x -> new AddCommand(todo(x)));
+        funcMapper.put(CommandList.deadline, x -> new AddCommand(deadline(x)));
+        funcMapper.put(CommandList.event, x -> new AddCommand(event(x)));
+        funcMapper.put(CommandList.done, x -> new DoneCommand(tryParseInt(x) - 1));
+        funcMapper.put(CommandList.delete, x -> new DeleteCommand(tryParseInt(x) - 1));
+        funcMapper.put(CommandList.find, x -> new FindCommand(x));
+    }
 
     /**
      * Returns the command type of the user's input.
@@ -49,45 +64,7 @@ public class Parser {
             throw new DukeException("This is not in my command list");
         }
 
-        Command command = null;
-        switch (commandList) {
-        case bye: //fallthrough
-        case exit:
-            command = new ExitCommand();
-            break;
-        case list:
-            command = processList(contentString);
-            break;
-        case todo:
-            command = new AddCommand(todo(contentString));
-            break;
-        case deadline:
-            command = new AddCommand(deadline(contentString));
-            break;
-        case event:
-            command = new AddCommand(event(contentString));
-            break;
-        case done:
-            try {
-                int selected = Integer.parseInt(contentString);
-                command = new DoneCommand(selected - 1);
-            } catch (NumberFormatException nfe) {
-                throw new DukeException("This is not a number for \"done\" command: " + contentString);
-            }
-            break;
-        case delete:
-            try {
-                int selected = Integer.parseInt(contentString);
-                command = new DeleteCommand(selected - 1);
-            } catch (NumberFormatException nfe) {
-                throw new DukeException("This is not a number for \"delete\" command: " + contentString);
-            }
-            break;
-        case find:
-            command = new FindCommand(contentString);
-            break;
-        }
-        return command;
+        return funcMapper.get(commandList).apply(contentString);
     }
 
     //TODO: to be removed since ToDo checks for description_blank
@@ -144,5 +121,14 @@ public class Parser {
         }
 
         return new ListCommand(); //no one should reach here. All invalid settings will display the default list.
+    }
+
+    private static int tryParseInt(String contentString) {
+        try {
+            int selected = Integer.parseInt(contentString);
+            return selected;
+        } catch (NumberFormatException nfe) {
+            throw new DukeException("This is not a number for \"done\" command: " + contentString);
+        }
     }
 }
