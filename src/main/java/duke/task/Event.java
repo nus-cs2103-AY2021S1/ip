@@ -11,6 +11,7 @@ public class Event extends Task {
      */
     public Event(String name, boolean isDone, String duration) {
         super(name, isDone);
+        assert duration != null : "Duration is null";
         this.duration = duration;
     }
 

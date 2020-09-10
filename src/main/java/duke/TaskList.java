@@ -23,6 +23,7 @@ public class TaskList {
     }
 
     private void addTask(Task task) {
+        assert task != null : "Task being added is null";
         tasks.add(task);
     }
 
@@ -35,6 +36,8 @@ public class TaskList {
      */
     public String[] addTask(String command, UserCommandType userCommandType)
             throws Parser.InvalidCommandException {
+        assert command != null : "Command is null";
+        assert userCommandType != null : "userCommandType is null";
         Task task;
         String[] taskComponents = Parser.parseTask(command);
 
@@ -133,6 +136,7 @@ public class TaskList {
      * @return String array of output messages
      */
     public String[] find(String command) throws Parser.InvalidCommandException {
+        assert command != null : "Command is null";
         String keyWordString = Parser.getFindKeyWordString(command);
         ArrayList<String> messages = new ArrayList<>();
         messages.add(StringConstants.TASK_FOUND_MESSAGE);

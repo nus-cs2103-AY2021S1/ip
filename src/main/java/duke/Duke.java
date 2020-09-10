@@ -49,7 +49,7 @@ public class Duke {
             String[] findMessages = userTaskList.find(userInput);
             return StringConstants.joinStrings(findMessages);
         default:
-            return "Error";
+            return "Error: Unrecognised command type";
         }
     }
 
