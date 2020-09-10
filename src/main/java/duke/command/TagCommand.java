@@ -1,6 +1,7 @@
 package duke.command;
 
 import java.util.Arrays;
+import java.util.List;
 
 import duke.exception.InvalidCommandException;
 import duke.task.Task;
@@ -10,9 +11,12 @@ import duke.task.TaskList;
 // Handles all the logic behind any "done" command from the user.
 public class TagCommand extends Command {
     private static final String ERROR_INVALID_INDEX = "Please input a valid index.";
-    private static final String ERROR_RESERVED_KEYWORD = "Please do not use " + Task.TAGS_DELIMITER + ".";
+    private static final String ERROR_RESERVED_KEYWORD = Task.TAGS_DELIMITER + " is a reserved keyword.";
     private static final String RESPONSE_TAGS_ADDED = "I have added the tags to the following task:\n  ";
-    private static final String RESPONSE_NO_TAGS_ADDED = "There were no tags to be added.";
+    private static final String RESPONSE_NO_TAGS_ADDED = "There are no tags to be added.";
+    private static final String RESPONSE_TAGS_REMOVED = "These are the tags that were removed:\n";
+    private static final String RESPONSE_UPDATED_TASK = "These are the remaining tags for the specified task:\n  ";
+    private static final String RESPONSE_NO_TAGS_REMOVED = "There are no tags to be removed.";
 
     /**
      * Executes any "tag" command issued by the user.
@@ -24,15 +28,29 @@ public class TagCommand extends Command {
      * @throws InvalidCommandException If an invalid index is provided.
      */
     public static String execute(String in, TaskList taskList) throws InvalidCommandException {
-        try {
-            String[] details = in.replaceFirst("tag ", "").split(" ");
-            String[] tagsToAdd = Arrays.copyOfRange(details, 1, details.length);
-            for (String tag : tagsToAdd) {
-                if (tag.contains(Task.TAGS_DELIMITER)) {
-                    throw new InvalidCommandException(ERROR_RESERVED_KEYWORD);
-                }
+        String[] details = in.replaceFirst("tag ", "").split(" ");
+        String[] tags = Arrays.copyOfRange(details, 1, details.length);
+        for (String tag : tags) {
+            if (tag.contains(Task.TAGS_DELIMITER)) {
+                throw new InvalidCommandException(ERROR_RESERVED_KEYWORD);
             }
-            int index = Integer.parseInt(details[0]) - 1;
+        }
+
+        try {
+            int index = Integer.parseInt(details[0]);
+            if (index < 0) {
+                return removeTagsFromTask(Math.abs(index) - 1, taskList, tags);
+            } else {
+                return addTagsToTask(index - 1, taskList, tags);
+            }
+        } catch (NumberFormatException e) {
+            throw new InvalidCommandException(ERROR_INVALID_INDEX);
+        }
+    }
+
+    private static String addTagsToTask(int index, TaskList taskList, String[] tagsToAdd)
+            throws InvalidCommandException {
+        try {
             Task task = taskList.get(index);
             task.addTags(tagsToAdd);
             taskList.update(index);
@@ -43,7 +61,26 @@ public class TagCommand extends Command {
                     ? RESPONSE_TAGS_ADDED + task.toString()
                     : RESPONSE_NO_TAGS_ADDED;
             return response;
-        } catch (NumberFormatException | IndexOutOfBoundsException e) {
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidCommandException(ERROR_INVALID_INDEX);
+        }
+    }
+
+    private static String removeTagsFromTask (int index, TaskList taskList, String[] tagsToRemove)
+            throws InvalidCommandException {
+        try {
+            Task task = taskList.get(index);
+            List<String> removedTags = task.removeTags(tagsToRemove);
+            taskList.update(index);
+            String removedTagsFormatted = String.join("\n", removedTags) + "\n\n";
+
+            boolean wasTaskUpdated = removedTags.size() > 0;
+
+            String response = wasTaskUpdated
+                    ? RESPONSE_TAGS_REMOVED + removedTagsFormatted + RESPONSE_UPDATED_TASK + task.toString()
+                    : RESPONSE_NO_TAGS_REMOVED;
+            return response;
+        } catch (IndexOutOfBoundsException e) {
             throw new InvalidCommandException(ERROR_INVALID_INDEX);
         }
     }

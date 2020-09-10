@@ -4,6 +4,7 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.List;
 
 // Parent class for all types of tasks that can be created by the user.
 public abstract class Task {
@@ -50,6 +51,16 @@ public abstract class Task {
         }
 
         tags.addAll(Arrays.asList(tagsToAdd));
+    }
+
+    public List<String> removeTags(String[] tagsToRemove) {
+        ArrayList<String> removedTags = new ArrayList<>();
+        for (String tag : tagsToRemove) {
+            if (tags.remove(tag)) {
+                removedTags.add(tag);
+            }
+        }
+        return removedTags;
     }
 
     protected String stringifyTags() {
