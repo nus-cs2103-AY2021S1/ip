@@ -10,12 +10,12 @@ public class Event extends Task {
 
     @Override
     public String createSaveDataLine() {
-        return "E:" + getStatusLetter() + ":" + description + ":" + getSaveDate();
+        return "E:" + getStatusLetter() + ":" + description + ":" + getSaveDate() + ":" + "tags " + listTags();
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + "(at: " + getDate() + ")";
+        return "[E]" + super.toString() + "(at: " + getDate() + ") " + listTags();
     }
 
 }

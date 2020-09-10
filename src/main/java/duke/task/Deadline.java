@@ -10,12 +10,12 @@ public class Deadline extends Task {
 
     @Override
     public String createSaveDataLine() {
-        return "D:" + getStatusLetter() + ":" + description + ":" + getSaveDate();
+        return "D:" + getStatusLetter() + ":" + description + ":" + getSaveDate() + ":" + "tags " + listTags();
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + "(by: " + getDate() + ")";
+        return "[D]" + super.toString() + "(by: " + getDate() + ") " + listTags();
     }
 
 }

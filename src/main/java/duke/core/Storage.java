@@ -13,6 +13,7 @@ import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
+import duke.task.Tag;
 
 /**
  * An object used to load and save the user's task list during startup and termination of the Duke programme.
@@ -77,6 +78,7 @@ public class Storage {
 
     private void readTask(String saveEntry, ArrayList<Task> tasks) throws DateTimeParseException {
         String[] keywords = saveEntry.split(":");
+        String[] tags = saveEntry.split("tags ");
         Task savedTask = null;
         switch (keywords[0]) {
         case "T":
@@ -92,6 +94,13 @@ public class Storage {
             break;
         }
         if (savedTask != null) {
+            if (tags.length > 1) {
+                String[] individualTags = tags[1].split("#");
+                for (int i = 1; i < individualTags.length; i++) {
+                    Tag toBeAdded = new Tag(individualTags[i].trim());
+                    savedTask.addTag(toBeAdded);
+                }
+            }
             if (keywords[1].equals("y")) {
                 savedTask.markAsDone();
             }

@@ -2,12 +2,14 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
 
 public abstract class Task {
 
     protected String description;
     protected boolean isDone;
     protected LocalDate date;
+    protected ArrayList<Tag> tags = new ArrayList<>();
 
     protected Task(String description) {
         this.description = description;
@@ -51,10 +53,26 @@ public abstract class Task {
         this.isDone = true;
     }
 
+    public void addTag(String tagDescription) {
+        tags.add(new Tag(tagDescription));
+    }
+
+    public void addTag(Tag tag) {
+        tags.add(tag);
+    }
+
+    public String listTags() {
+        StringBuffer tagsBuffer = new StringBuffer();
+        for (int i = 0; i < tags.size(); i++) {
+            tagsBuffer.append(tags.get(i).toString() + " ");
+        }
+        return tagsBuffer.toString().trim();
+    }
+
     public abstract String createSaveDataLine();
 
     @Override
     public String toString() {
-        return "[" + getStatusIcon() + "] " + description + " ";
+        return "[" + getStatusIcon() + "] " + description + " " + listTags();
     }
 }
