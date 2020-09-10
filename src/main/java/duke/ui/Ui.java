@@ -104,7 +104,7 @@ public class Ui {
     public String readCommand() {
         return sc.nextLine().toLowerCase();
     }
-    
+
     public String archiveText() {
         return MESSAGE_ARCHIVE;
     }

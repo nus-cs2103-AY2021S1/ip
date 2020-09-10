@@ -22,7 +22,6 @@ public abstract class Command {
      */
     public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException;
 
-    ;
 
     /**
      * Indicates if Duke should still be running after the command is executed.

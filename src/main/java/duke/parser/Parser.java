@@ -79,7 +79,7 @@ public class Parser {
             break;
         case ARCHIVE:
             next = new ArchiveCommand(nextCommandArr);
-            break;    
+            break;
         default:
             throw new DukeException("Sorry, I don't know what that means~");
         }
