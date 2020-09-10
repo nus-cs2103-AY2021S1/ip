@@ -7,6 +7,8 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Represents the list of tasks together with a counter
@@ -179,17 +181,13 @@ public class TaskList {
 
     private List<Task> getMatchingTask(String comparator) {
         List<Task> matchingTasks = new ArrayList<>();
-
-        for (Task task : tasks) {
-            boolean emptyComparator = comparator.isBlank();
-            boolean hasSubstring = task.getTaskName().contains(comparator);
-            boolean isContained = hasSubstring && !emptyComparator;
-
-            if (isContained) {
-                matchingTasks.add(task);
-            }
+        if (!hasComparator) {
+            return new ArrayList<>();
+        } else {
+            return tasks.stream()
+                    .filter(task -> task.getTaskName().contains(comparator))
+                    .collect(Collectors.toList());
         }
-        return matchingTasks;
     }
 
     public String update(Parser parser) {
@@ -250,7 +248,5 @@ public class TaskList {
     public int getNumOfPendingTasks() {
         return numOfPendingTasks;
     }
-
-
 }
 
