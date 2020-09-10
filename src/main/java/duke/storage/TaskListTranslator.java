@@ -1,6 +1,7 @@
 package duke.storage;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import duke.exceptions.DukeDateTimeParseException;
@@ -11,6 +12,7 @@ import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.Todo;
+import duke.utils.DukeDateTime;
 
 /**
  * Represents the translator that handles the conversion of {@link TaskList} to a List of Strings.
@@ -39,7 +41,21 @@ public class TaskListTranslator {
                     task = new Deadline(parsed[2], DukeDateTimeParser.parse(parsed[3]));
                     break;
                 case "E":
-                    task = new Event(parsed[2], DukeDateTimeParser.parse(parsed[3]));
+                    try {
+                        if (parsed[3].contains(", ")) {
+                            String[] dateStrings = parsed[3].substring(1, parsed[3].length() - 1)
+                                    .split(", ");
+                            DukeDateTime[] dateArr = Arrays.stream(dateStrings)
+                                    .map(DukeDateTimeParser::parse)
+                                    .toArray(DukeDateTime[]::new);
+                            task = new Event(parsed[2], dateArr);
+                        } else {
+                            task = new Event(parsed[2], DukeDateTimeParser.parse(parsed[3]));
+                        }
+
+                    } catch (Exception e) {
+                        System.out.println(e);
+                    }
                     break;
                 default:
                     throw new TaskListTranslatorException();

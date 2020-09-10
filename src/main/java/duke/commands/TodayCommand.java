@@ -2,7 +2,8 @@ package duke.commands;
 
 import static duke.utils.Messages.MESSAGE_TODAY;
 
-import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import duke.tasklist.TaskList;
 import duke.tasks.Task;
@@ -21,23 +22,20 @@ public class TodayCommand extends Command {
      */
     @Override
     public CommandResult execute(TaskList taskList) {
-        ArrayList<Task> tasksToday = getTasksToday(taskList);
+        List<Task> tasksToday = getTasksToday(taskList);
         // todo: sort tasks
         String response = ListCommand.tasksToString(tasksToday, MESSAGE_TODAY);
         return new CommandResult(response, false);
     }
 
-    private ArrayList<Task> getTasksToday(TaskList taskList) {
-        ArrayList<Task> tasksToday = new ArrayList<>();
-        // todo: change to stream
-        taskList.getTasks().forEach(task -> {
-            if (task instanceof TimeBased) {
-                TimeBased timeBased = (TimeBased) task;
-                if (timeBased.getTime().isToday()) {
-                    tasksToday.add(task);
-                }
-            }
-        });
+    private List<Task> getTasksToday(TaskList taskList) {
+        List<Task> tasksToday = taskList.getTasks().stream()
+                .filter(task -> task instanceof TimeBased)
+                .map(task -> (TimeBased) task)
+                .filter(task -> task.getTime() != null && task.getTime().isToday())
+                .map(task -> (Task) task)
+                .collect(Collectors.toList());
+
         return tasksToday;
     }
 

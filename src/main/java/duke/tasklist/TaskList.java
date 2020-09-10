@@ -87,4 +87,12 @@ public class TaskList {
         return String.format("Now you have %d tasks in the list", getNumOfTasks());
     }
 
+    public Task getTaskAtIndex(int index) throws NoSuchTaskException {
+        try {
+            return tasks.get(index);
+        } catch (IndexOutOfBoundsException e) {
+            throw new NoSuchTaskException();
+        }
+    }
+
 }
