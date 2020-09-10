@@ -69,10 +69,12 @@ public class Parser {
             try {
                 //finds the index of the char representing '/'
                 int index = command.indexOf(47);
-                if (command.substring(DEADLINE_DESCRIPTION_INDEX, index).equals("")) {
+                if (command.substring(DEADLINE_DESCRIPTION_INDEX, index).isEmpty()) {
                     throw new BobIncompleteDeadlineDescriptionException();
                 }
-                task = new Deadline(command.substring(DEADLINE_DESCRIPTION_INDEX, index - 1), command.substring(index + 4));
+                String description = command.substring(DEADLINE_DESCRIPTION_INDEX, index - 1);
+                String deadline = command.substring(index + 4);
+                task = new Deadline(description, deadline);
             } catch (StringIndexOutOfBoundsException e) {
                 throw new BobIncompleteDeadlineDescriptionException();
             }
@@ -83,7 +85,9 @@ public class Parser {
                 if (command.substring(EVENT_DESCRIPTION_INDEX, index).equals("")) {
                     throw new BobIncompleteEventDescriptionException();
                 }
-                task = new Event(command.substring(EVENT_DESCRIPTION_INDEX, index - 1), command.substring(index + 4));
+                String description = command.substring(EVENT_DESCRIPTION_INDEX, index - 1);
+                String period = command.substring(index + 4);
+                task = new Event(description, period);
             } catch (StringIndexOutOfBoundsException e) {
                 throw new BobIncompleteEventDescriptionException();
             }
