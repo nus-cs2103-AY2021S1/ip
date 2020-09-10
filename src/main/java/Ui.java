@@ -6,7 +6,7 @@ public class Ui {
     public static final String LINE = "    ____________________________________________________________";
 
     // this function greets the user when Duke is started
-    public void greet(String createResult) {
+    public void printGreetingMessage(String createResult) {
         String logo = "      ____        _        \n"
                 + "     |  _ \\ _   _| | _____ \n"
                 + "     | | | | | | | |/ / _ \\\n"
@@ -20,7 +20,7 @@ public class Ui {
     }
 
     // this function says bye to the user when Duke receives the input "bye"
-    public void goodbye() {
+    public void printGoodbyeMessage() {
         System.out.println("     Bye. Hope to see you again soon!");
     }
 
@@ -43,7 +43,7 @@ public class Ui {
         System.out.println(LINE);
     }
 
-    public void unknownCommand(String command) {
+    public void printUnknownCommandMessage(String command) {
         System.out.println("     ☹ OOPS!!! I'm sorry, but I don't know what \"" + command + "\" means :-(");
     }
 
@@ -99,7 +99,7 @@ public class Ui {
         System.out.println("     Now you have " + numOfTasks + " tasks in the list.");
     }
 
-    public void showError(String message) {
+    public void showErrorMessage(String message) {
         System.out.println("     " + message);
     }
 

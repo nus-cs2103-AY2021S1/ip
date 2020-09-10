@@ -25,7 +25,7 @@ public class Duke extends Application {
 
     public void run() {
 
-        UI.greet(STORAGE.createResult);
+        UI.printGreetingMessage(STORAGE.createResult);
 
         boolean isExit = false;
 
@@ -37,7 +37,7 @@ public class Duke extends Application {
                 isExit = c.isExit();
             } catch (DukeException e) {
                 UI.showLine();
-                UI.showError(e.getMessage());
+                UI.showErrorMessage(e.getMessage());
                 UI.showLine();
             }
         }

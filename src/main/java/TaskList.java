@@ -25,7 +25,7 @@ public class TaskList {
     }
 
     // this function prints the task that is completed
-    public void done(int taskNumber) {
+    public void markAsDone(int taskNumber) {
         Task t = this.TASKS.get(taskNumber);
         t.markAsDone();
     }
