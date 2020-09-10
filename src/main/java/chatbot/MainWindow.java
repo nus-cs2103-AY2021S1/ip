@@ -33,12 +33,11 @@ public class MainWindow extends AnchorPane {
 
     public void setChatbot(Chatbot b) {
         chatbot = b;
-
         showWelcomeMessage();
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing chat bot's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
