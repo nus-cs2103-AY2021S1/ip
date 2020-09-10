@@ -10,6 +10,7 @@ public class Deadline extends Task {
 
     /**
      * Creates a deadline task that is not done.
+     *
      * @param description Description of the task.
      * @param by Deadline of the task.
      */
@@ -19,7 +20,8 @@ public class Deadline extends Task {
     }
 
     /**
-     * Creates a deadline task, specifying if it is done
+     * Creates a deadline task, specifying if it is done.
+     *
      * @param description Description of the task.
      * @param by Deadline of the task.
      * @param isDone True to show task is done, False to show task is not done.

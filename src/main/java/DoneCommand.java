@@ -15,6 +15,7 @@ public class DoneCommand extends Command {
      * @param ui Ui to deal with interaction with user.
      * @param storage Storage to load and save tasks.
      * @throws DukeException
+     * @return The string output message showing task that is marked done.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         assert tasks != null : "Tasklist not found.";
@@ -23,16 +24,15 @@ public class DoneCommand extends Command {
 
         // check if the taskNumber provided is in range
         if (taskNumber > tasks.getNumTasks() || taskNumber <= 0) {
-            throw new DukeException("Please enter a valid task number.");
+            throw new InvalidTaskException();
         } else if (tasks.getTask(taskNumber).isDone) {
-            throw new DukeException("You have already marked this task as done!");
-        } else {
-            tasks.doneTask(taskNumber);
-            storage.overwriteFile(tasks.getTaskList());
-
-            assert ui.showMarkedDone(tasks.getTask(taskNumber)) != null : "Message to show task is marked should be shown.";
-            return ui.showMarkedDone(tasks.getTask(taskNumber));
+            throw new MarkedDoneException();
         }
+
+        tasks.doneTask(taskNumber);
+        storage.overwriteFile(tasks.getTaskList());
+        assert ui.showMarkedDone(tasks.getTask(taskNumber)) != null : "Message to show task is marked should be shown.";
+        return ui.showMarkedDone(tasks.getTask(taskNumber));
     }
 
     public boolean isExit() {
