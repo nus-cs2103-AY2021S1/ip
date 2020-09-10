@@ -32,8 +32,7 @@ public class Task {
 	}
 	public String getDoneString() {
 		String string;
-
-		return (isDone ?"[\u2713]" : "[\u2718]" );
+		return (isDone ?"[\u2713]" : "[\u2718]" ); //tick and cross
 	}
 
 	public duke.Task done() {
@@ -42,6 +41,7 @@ public class Task {
 
 	public String getTypeString() {
 		String string;
+		assert taskType != null : "taskType has not been instantiated.";
 		if(taskType.equals(duke.TaskType.TODO)){
 			string = "[T]";
 		}

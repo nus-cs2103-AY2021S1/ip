@@ -87,6 +87,7 @@ public class Duke {
     }
 
     public String welcome(){
+        assert ui!=null : "ui has not been instantiated.";
         return ui.welcome();
     }
 
@@ -185,6 +186,10 @@ public class Duke {
     public String getResponse(String input) {
         try{
             Command c = Parser.parse(input);
+            assert c != null : "Command c has not been instantiated.";
+            assert taskList != null : "TaskList does not exist.";
+            assert ui != null : "Ui does not exist.";
+            assert storage != null : "Storage does not exist.";
             return c.execute(taskList, ui, storage);
         } catch (DukeException e) {
             return e.getMessage();

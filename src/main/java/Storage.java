@@ -1,9 +1,5 @@
 package duke;
 
-import duke.Task;
-import duke.DukeException;
-import duke.TaskList;
-
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -28,6 +24,7 @@ public class Storage {
 
 	public ArrayList<Task> load() throws DukeException {
 		File file = new File(filePath);
+		assert file.exists() : "File does not exist.";
 		ArrayList<Task> list = new ArrayList<>();
 		try {
 			Scanner sc = new Scanner(file);
@@ -68,6 +65,7 @@ public class Storage {
 
 	public String save(TaskList taskList) {
 		File file = new File(filePath);
+		assert file.exists() : "File does not exist.";
 		if(file.getParentFile() != null) {
 			file.getParentFile().mkdirs();
 		}

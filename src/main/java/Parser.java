@@ -107,6 +107,7 @@ public class Parser {
 			@Override
 			public String execute(TaskList taskList, Ui ui, Storage storage) {
 				StringBuilder outputStringBuilder = new StringBuilder();
+				assert string.length() <= 5 : "todo: string is too short.";
 				String input = string.substring(4);
 				String temp;
 				if (input.isEmpty()) {
@@ -141,6 +142,7 @@ public class Parser {
 		return new Command() {
 			@Override
 			public String execute(TaskList taskList, Ui ui, Storage storage) {
+				assert string.length() <= 9 : "deadline: string is too short.";
 				String input = string.substring(8);
 				String temp;
 				StringBuilder outputStringBuilder = new StringBuilder();
@@ -219,6 +221,7 @@ public class Parser {
 		return new Command() {
 			@Override
 			public String execute(TaskList taskList, Ui ui, Storage storage) {
+				assert string.length() <= 6 : "event: string is too short.";
 				String input = string.substring(5);
 				StringBuilder outputStringBuilder = new StringBuilder();
 				String temp;
@@ -264,6 +267,7 @@ public class Parser {
 		return new Command() {
 			@Override
 			public String execute(TaskList taskList, Ui ui, Storage storage) {
+				assert string.length() <= 5 : "done: string is too short.";
 				String input = string.substring(4);
 				StringBuilder outputStringBuilder = new StringBuilder();
 				String temp;
@@ -320,6 +324,7 @@ public class Parser {
 		return new Command() {
 			@Override
 			public String execute(TaskList taskList, Ui ui, Storage storage) {
+				assert string.length() <= 7 : "delete: string is too short.";
 				String input = string.substring(6);
 				StringBuilder outputStringBuilder = new StringBuilder();
 				String temp;
@@ -391,6 +396,7 @@ public class Parser {
 		return new Command() {
 			@Override
 			public String execute(TaskList taskList, Ui ui, Storage storage) {
+				assert fullCommand.length() <= 6 : "find: string is too short.";
 				String phrase = fullCommand.substring(5);
 				StringBuilder outputStringBuilder = new StringBuilder();
 				String temp = "Here are the matching tasks in your list:";
