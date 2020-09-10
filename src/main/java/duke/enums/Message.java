@@ -7,7 +7,7 @@ import java.util.Map;
  * An Enumeration of the various Messages words that shall be used by Duke's UI
  */
 public enum Message {
-    GREETING("Hello I'm Duke\nWhat can I do for you?"),
+    GREETING("Hello I'm Duke\nWhat can I do for you? \n\tfor inspiration, type help to get a list of help topics"),
     EXIT_GREETING("Bye. Hope to see you again soon!"),
     DONE_MSG("Nice! I've marked this task as done"),
     DELETE_MSG("Noted. I've removed this task:"),
@@ -27,6 +27,9 @@ public enum Message {
     ERROR_EVENT_FORMAT("invalid event command: bad format, try event <desc> /at <dateString> <startTime>-<endTime>"),
     ERROR_EVENT_TIME("invalid event command: you need to pass in a start and end time for your event"),
     ERROR_EVENT_DATE("invalid event command: you didn't pass in the date!"),
+    HELP_MSG("\n\tfor help on a " +
+                     "specific topic, type help <topic>. \nTopics include: List, Todo, Deadline, Event, Deadline, " +
+                     "Done, Delete"),
     INVALID;
     private static Map<String, Message> keyableMap;
     private String msg;
@@ -45,6 +48,7 @@ public enum Message {
         }
         Message.keyableMap = messageLabelMap;
     }
+    
     /**
      * Returns the string representation for that Message
      *
