@@ -1,5 +1,5 @@
 import javafx.application.Application;
-import raythx98.grandma.javafx.Main;
+import raythx.grandma.javafx.Main;
 
 /**
  * The launcher class kick starts the application.
