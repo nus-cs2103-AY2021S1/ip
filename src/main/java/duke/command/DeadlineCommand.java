@@ -29,6 +29,7 @@ public class DeadlineCommand implements Command {
     @Override
     public String execute(TaskList taskList, Ui ui, String input) throws EmptyDescriptionException, InvalidFormatException {
         String[] details = Parser.parseDeadline(input);
+        assert details.length >= 2 : "Missing details in Deadline input";
         String title = details[0];
         String by = details[1];
         Task task = new Deadline(title, by);
