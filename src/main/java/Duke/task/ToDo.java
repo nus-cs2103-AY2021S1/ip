@@ -36,7 +36,7 @@ public class ToDo extends Task {
      * @return  String representation of the ToDo to be written to a file.
      */
     @Override
-    public String fileText() {
-        return "T " + super.fileText();
+    public String getFileSaveText() {
+        return "T " + super.getFileSaveText();
     }
 }
