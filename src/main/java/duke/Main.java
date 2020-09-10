@@ -24,6 +24,7 @@ public class Main extends Application {
             String home = System.getProperty("user.dir");
             Path path = Paths.get(home, "src", "main", "resources", "view", "MainWindow.fxml");
             FXMLLoader fxmlLoader = new FXMLLoader(path.toUri().toURL());
+
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
