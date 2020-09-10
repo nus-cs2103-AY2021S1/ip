@@ -1,5 +1,10 @@
 package butler.io;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import butler.command.AddCommand;
 import butler.command.Command;
 import butler.command.CompleteCommand;
@@ -12,11 +17,6 @@ import butler.task.DeadlineTask;
 import butler.task.EventTask;
 import butler.task.Task;
 import butler.task.ToDoTask;
-
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Represents a parser to identify the content of the user input.
@@ -138,9 +138,10 @@ public class Parser {
             } catch (IndexOutOfBoundsException e) {
                 throw new ButlerException("Please add some keywords to filter with.");
             }
-        }
 
-        throw new ButlerException("This is not a valid command type.\n"
-                + "Valid commands start with list, done, delete, todo, deadline, event or bye.");
+        default:
+            throw new ButlerException("This is not a valid command type.\n"
+                    + "Valid commands start with list, done, delete, todo, deadline, event or bye.");
+        }
     }
 }

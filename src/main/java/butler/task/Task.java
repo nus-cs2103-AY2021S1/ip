@@ -7,9 +7,9 @@ package butler.task;
  */
 public abstract class Task {
 
+    protected TaskType taskType;
     private String summary;
     private boolean isComplete;
-    protected TaskType taskType;
 
     /**
      * Constructs an incomplete task with the given <code>summmary</code>.

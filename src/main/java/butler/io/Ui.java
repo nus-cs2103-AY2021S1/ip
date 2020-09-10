@@ -1,9 +1,9 @@
 package butler.io;
 
+import java.util.Scanner;
+
 import butler.task.Task;
 import butler.task.TaskList;
-
-import java.util.Scanner;
 
 /**
  * Represents a user interface that interacts with the user.
@@ -105,7 +105,7 @@ public class Ui {
                 + (taskList.getSize() > 1 ? " tasks" : " task")
                 + " in total.\n";
         for (int i = 0; i < taskList.getSize(); i++) {
-            msg += "\n" + (i+1) + ": " + taskList.getTask(i);
+            msg += "\n" + (i + 1) + ": " + taskList.getTask(i);
         }
         System.out.println(msg);
     }

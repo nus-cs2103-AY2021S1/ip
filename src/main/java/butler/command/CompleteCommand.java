@@ -1,11 +1,11 @@
 package butler.command;
 
+import java.util.ArrayList;
+
 import butler.exception.ButlerException;
 import butler.io.Storage;
 import butler.io.Ui;
 import butler.task.TaskList;
-
-import java.util.ArrayList;
 
 /**
  * Represents a command to mark some tasks as completed.

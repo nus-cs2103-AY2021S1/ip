@@ -1,8 +1,8 @@
 package butler.task;
 
-import butler.exception.ButlerException;
-
 import java.util.ArrayList;
+
+import butler.exception.ButlerException;
 
 /**
  * Represents a list of tasks.

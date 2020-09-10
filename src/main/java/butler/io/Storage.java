@@ -1,12 +1,5 @@
 package butler.io;
 
-import butler.command.AddCommand;
-import butler.exception.ButlerException;
-import butler.task.DeadlineTask;
-import butler.task.EventTask;
-import butler.task.Task;
-import butler.task.TaskList;
-import butler.task.TaskType;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
@@ -15,6 +8,14 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Scanner;
+
+import butler.command.AddCommand;
+import butler.exception.ButlerException;
+import butler.task.DeadlineTask;
+import butler.task.EventTask;
+import butler.task.Task;
+import butler.task.TaskList;
+import butler.task.TaskType;
 
 /**
  * Represents a storage responsible for reading and writing into the hard disk.
