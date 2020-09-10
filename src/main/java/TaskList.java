@@ -7,6 +7,7 @@ import java.util.List;
  */
 public class TaskList {
     private List<Task> lst = new ArrayList<>();
+    public static int numberOfDoneTasks = 0;
     public List<Task> getLst() {
         return lst;
     }

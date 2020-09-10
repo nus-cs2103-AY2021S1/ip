@@ -70,6 +70,7 @@ public class Parser {
                     assert index < lst.size();
                     Task task = lst.get(index);
                     task.setDone();
+                    TaskList.numberOfDoneTasks++;
                     messageRespond.append(format(messageMarked + SPACE + "   "
                             + task.print()));
                 } catch (IndexOutOfBoundsException ex) {
