@@ -1,6 +1,6 @@
 package duke;
+
 import java.io.IOException;
-import java.util.*;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
@@ -22,6 +22,7 @@ import javafx.scene.layout.Region;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import java.util.Scanner;
 
 /**
  * Duke the best chatbot hehe
