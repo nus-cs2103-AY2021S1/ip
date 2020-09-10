@@ -2,6 +2,7 @@ package duke.logic;
 
 import duke.Command;
 import duke.DukeInputException;
+import duke.Priority;
 import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -24,6 +25,8 @@ public class Executor {
     private static final String ERR_INDEX_OUT_OF_BOUND = "The task's number is not within the range of the list.\n";
     private static final String ERR_DELETE_MISSING_TASK_NUM = "Which task's number do you want to delete?\n";
     private static final String ERR_DONE_MISSING_TASK_NUM = "Which task's number do you want to mark as done?\n";
+    private static final String ERR_TASK_MISSING_PRIORITY = "Indicate the priority of the task after \"/p\".\n";
+    private static final String ERR_TASK_INVALID_PRIORITY = "The priority of a task can only be low, medium or high.\n";
     private static final String ERR_EVENT_MISSING_DATETIME = "Include the date and time of the event after \"/at\".\n";
     private static final String ERR_DEADLINE_MISSING_DATETIME =
             "Include the date and time of the deadline after \"/by\".\n";
@@ -210,13 +213,59 @@ public class Executor {
     }
 
     /**
+     * Extracts the priority of a task from its description.
+     *
+     * @param description Description of the task.
+     * @return Priority of the task.
+     * @throws DukeInputException If the priority is missing or invalid.
+     */
+    private Priority extractPriority(String description) throws DukeInputException {
+        if (!description.contains("/p")) {
+            throw new DukeInputException(Executor.ERR_TASK_MISSING_PRIORITY);
+        }
+
+        if (description.contains("/p low")) {
+            return Priority.LOW;
+        } else if (description.contains("/p medium")) {
+            return Priority.MEDIUM;
+        } else if (description.contains("/p high")) {
+            return Priority.HIGH;
+        } else {
+            throw new DukeInputException(Executor.ERR_TASK_INVALID_PRIORITY);
+        }
+    }
+
+    /**
+     * Removes the priority label from the description.
+     *
+     * @param priority Priority of the task.
+     * @param description Description of the task.
+     * @return Description of the task without the priority label.
+     */
+    private String removePriorityLabel(Priority priority, String description) {
+        switch (priority) {
+        case LOW:
+            return description.replace(" /p low", "");
+        case MEDIUM:
+            return description.replace(" /p medium", "");
+        case HIGH:
+            return description.replace(" /p high", "");
+        default:
+            return "";
+        }
+    }
+
+    /**
      * Creates a todo which is added to the task list.
      *
      * @param description Description of the todo.
      * @return String describing the result of creating a todo.
+     * @throws DukeInputException If the priority is missing or invalid.
      */
-    private String createTodo(String description) {
-        Task task = new Todo(description);
+    private String createTodo(String description) throws DukeInputException {
+        Priority priority = this.extractPriority(description);
+        String actualDescription = this.removePriorityLabel(priority, description);
+        Task task = new Todo(priority, actualDescription);
         return this.addTask(task);
     }
 
@@ -225,14 +274,16 @@ public class Executor {
      *
      * @param description Description of the event.
      * @return String describing the result of creating an event.
-     * @throws DukeInputException If the description is wrongly formatted.
+     * @throws DukeInputException If the priority is missing or invalid or the description is wrongly formatted.
      */
     private String createEvent(String description) throws DukeInputException {
-        String[] arr = description.split(" /at ", 2);
+        Priority priority = this.extractPriority(description);
+        String actualDescription = this.removePriorityLabel(priority, description);
+        String[] arr = actualDescription.split(" /at ", 2);
         if (arr.length < 2 || arr[1].equals("")) {
             throw new DukeInputException(Executor.ERR_EVENT_MISSING_DATETIME);
         }
-        Task task = new Event(arr[0], arr[1]);
+        Task task = new Event(priority, arr[0], arr[1]);
         return this.addTask(task);
     }
 
@@ -241,14 +292,16 @@ public class Executor {
      *
      * @param description Description of the deadline.
      * @return String describing the result of creating a deadline.
-     * @throws DukeInputException If the description is wrongly formatted.
+     * @throws DukeInputException If the priority is missing or invalid or the description is wrongly formatted.
      */
     private String createDeadline(String description) throws DukeInputException {
-        String[] arr = description.split(" /by ", 2);
+        Priority priority = this.extractPriority(description);
+        String actualDescription = this.removePriorityLabel(priority, description);
+        String[] arr = actualDescription.split(" /by ", 2);
         if (arr.length < 2 || arr[1].equals("")) {
             throw new DukeInputException(Executor.ERR_DEADLINE_MISSING_DATETIME);
         }
-        Task task = new Deadline(arr[0], arr[1]);
+        Task task = new Deadline(priority, arr[0], arr[1]);
         return this.addTask(task);
     }
 

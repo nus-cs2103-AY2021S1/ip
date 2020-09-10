@@ -1,5 +1,6 @@
 package duke.util;
 
+import duke.Priority;
 import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -121,24 +122,44 @@ public class Storage {
     }
 
     /**
-     * Reads duke.txt and adds tasks into the task list.
+     * Parses a line read from duke.txt and adds tasks into the task list.
+     *
+     * @param line Line from duke.txt.
+     */
+    private void parseLine(String line) {
+        Task task;
+        String[] arr = line.split(" / ");
+
+        Priority priority;
+        String priorityLabel = arr[1];
+        if (priorityLabel.equals("L")) {
+            priority = Priority.LOW;
+        } else if (priorityLabel.equals("M")) {
+            priority = Priority.MEDIUM;
+        } else {
+            priority = Priority.HIGH;
+        }
+
+        boolean isDone = Integer.parseInt(arr[2]) != 0;
+        if (arr[0].equals("T")) { // Todo
+            task = new Todo(priority, arr[3], isDone);
+        } else if (arr[0].equals("E")) { // Event
+            task = new Event(priority, arr[3], isDone, arr[4]);
+        } else { // Deadline
+            task = new Deadline(priority, arr[3], isDone, arr[4]);
+        }
+        this.taskList.addTask(task);
+    }
+
+    /**
+     * Reads duke.txt.
      */
     private void readTextFile() {
         try {
             BufferedReader reader = new BufferedReader(new FileReader(textFile));
             String line = reader.readLine();
             while (line != null) {
-                Task task;
-                String[] arr = line.split(" / ");
-                boolean isDone = Integer.parseInt(arr[1]) != 0;
-                if (arr[0].equals("T")) { // Todo
-                    task = new Todo(arr[2], isDone);
-                } else if (arr[0].equals("E")) { // Event
-                    task = new Event(arr[2], isDone, arr[3]);
-                } else { // Deadline
-                    task = new Deadline(arr[2], isDone, arr[3]);
-                }
-                this.taskList.addTask(task);
+                this.parseLine(line);
                 line = reader.readLine();
             }
         } catch (FileNotFoundException e) {

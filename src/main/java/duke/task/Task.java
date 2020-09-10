@@ -1,9 +1,14 @@
 package duke.task;
 
+import duke.Priority;
+
 /**
  * Encapsulates a task with a description and a completion status.
  */
 public class Task {
+
+    /**  Priority of the task. */
+    private final Priority priority;
 
     /** Description of the task. */
     private final String description;
@@ -14,9 +19,11 @@ public class Task {
     /**
      * Creates a new task from a description.
      *
+     * @param priority  Priority of the task.
      * @param description Description of the task.
      */
-    public Task(String description) {
+    public Task(Priority priority, String description) {
+        this.priority = priority;
         this.description = description;
         this.isDone = false;
     }
@@ -24,12 +31,32 @@ public class Task {
     /**
      * Creates a new task from a description and completion status.
      *
+     * @param priority Priority of the task.
      * @param description Description of the task.
      * @param isDone Completion status of the task.
      */
-    public Task(String description, boolean isDone) {
+    public Task(Priority priority, String description, boolean isDone) {
+        this.priority = priority;
         this.description = description;
         this.isDone = isDone;
+    }
+
+    /**
+     * Gets the priority label.
+     *
+     * @return String describing the priority of the task.
+     */
+    private String getPriorityLabel() {
+        switch (this.priority) {
+        case LOW:
+            return "L";
+        case MEDIUM:
+            return "M";
+        case HIGH:
+            return "H";
+        default:
+            return "";
+        }
     }
 
     /**
@@ -67,11 +94,11 @@ public class Task {
         int statusNumber = this.getStatusIcon().equals("\u2713")
                 ? 1
                 : 0;
-        return statusNumber + " / " + this.getDescription();
+        return this.getPriorityLabel() + " / " + statusNumber + " / " + this.getDescription();
     }
 
     @Override
     public String toString() {
-        return "[" + this.getStatusIcon() + "] " + this.description;
+        return "[" + this.getPriorityLabel() + "]" + "[" + this.getStatusIcon() + "] " + this.description;
     }
 }
