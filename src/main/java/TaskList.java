@@ -16,14 +16,18 @@ public class TaskList {
     }
 
     public Task getTask(int taskNumber) {
+        assert tasks != null : "Tasklist is not initialised.";
+        assert taskNumber >= 0 && taskNumber < tasks.size() : "Task number is invalid.";
         return tasks.get(taskNumber - 1);
     }
 
     public List<Task> getTaskList() {
+        assert tasks != null : "Tasklist is not initialised.";
         return this.tasks;
     }
 
     public int getNumTasks() {
+        assert tasks != null : "Tasklist is not initialised.";
         return tasks.size();
     }
 
@@ -33,6 +37,8 @@ public class TaskList {
      * @param taskNumber The task number representing task to be deleted.
      */
     public void deleteTask(int taskNumber) {
+        assert tasks != null : "Tasklist is not initialised.";
+        assert taskNumber >= 0 && taskNumber < tasks.size() : "Task number is invalid.";
         tasks.remove(taskNumber - 1);
     }
 
@@ -42,7 +48,8 @@ public class TaskList {
      * @param task The task number representing task to be added.
      */
     public void addTask(Task task) {
-        tasks.add(task); // try replacing without an index, should work also
+        assert tasks != null : "Tasklist is not initialised.";
+        tasks.add(task);
     }
 
     /**
@@ -51,6 +58,8 @@ public class TaskList {
      * @param taskNumber The task number representing task to be marked as done in task list.
      */
     public void doneTask(int taskNumber) {
+        assert tasks != null : "Tasklist is not initialised.";
+        assert taskNumber >= 0 && taskNumber < tasks.size() : "Task number is invalid.";
         tasks.set(taskNumber - 1, tasks.get(taskNumber - 1).markAsDone());
     }
 

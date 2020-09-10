@@ -24,7 +24,6 @@ public class FindCommand extends Command {
             if (currentTask.getDescription().contains(keyword)) {
                 numMatching++;
                 matchingTasks = matchingTasks + "\n " + numMatching + ". " + currentTask.toString();
-
             }
         }
         return matchingTasks;
@@ -39,11 +38,19 @@ public class FindCommand extends Command {
      * @return List of tasks, numbered in order.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) {
+        assert tasks != null : "Tasklist not found.";
+        assert ui != null : "Ui not found.";
+        assert storage != null : "Storage not found.";
+        assert !keyword.isEmpty() : "No keyword provided.";
+
         String matchingTasks = getMatchingTasks(tasks);
 
         if (matchingTasks.isEmpty()) {
+            assert ui.showEmptyMatchingList() != null : "Message showing empty list should be shown.";
             return ui.showEmptyMatchingList();
         } else {
+            assert ui.showMatchingTaskList(matchingTasks) != null : "Message showing "
+                    + "matching task list should be shown.";
             return ui.showMatchingTaskList(matchingTasks);
         }
     }

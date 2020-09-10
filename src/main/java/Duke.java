@@ -37,6 +37,7 @@ public class Duke {
         try {
             Command c = Parser.parse(input);
             String result = c.execute(tasks, ui, storage);
+            assert result != null : "No message is returned.";
             return result;
         } catch (DukeException e) {
             return ui.showError(e.getMessage());

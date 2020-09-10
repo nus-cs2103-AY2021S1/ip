@@ -18,6 +18,10 @@ public class DoneCommand extends Command {
      * @return The string output message showing task that is marked done.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert tasks != null : "Tasklist not found.";
+        assert ui != null : "Ui not found.";
+        assert storage != null : "Storage not found.";
+
         // check if the taskNumber provided is in range
         if (taskNumber > tasks.getNumTasks() || taskNumber <= 0) {
             throw new InvalidTaskException();
@@ -27,7 +31,7 @@ public class DoneCommand extends Command {
 
         tasks.doneTask(taskNumber);
         storage.overwriteFile(tasks.getTaskList());
-
+        assert ui.showMarkedDone(tasks.getTask(taskNumber)) != null : "Message to show task is marked should be shown.";
         return ui.showMarkedDone(tasks.getTask(taskNumber));
     }
 

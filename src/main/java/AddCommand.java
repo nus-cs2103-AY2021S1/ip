@@ -20,6 +20,11 @@ public class AddCommand extends Command {
      * @throws DukeException if unable to append to file specified in storage's filepath
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert task != null : "No task to be added.";
+        assert tasks != null : "Tasklist not found.";
+        assert ui != null : "Ui not found.";
+        assert storage != null : "Storage not found.";
+
         tasks.addTask(task);
 
         if (task instanceof ToDo) {
@@ -32,6 +37,8 @@ public class AddCommand extends Command {
                     + ((Event) task).timing.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm")) + "\n");
         }
 
+        assert ui.showAdded(tasks.getTask(tasks.getNumTasks()), tasks.getNumTasks()) != null
+                : "Message showing added task should be shown.";
         return ui.showAdded(tasks.getTask(tasks.getNumTasks()), tasks.getNumTasks());
     }
 

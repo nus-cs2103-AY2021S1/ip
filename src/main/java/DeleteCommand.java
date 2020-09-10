@@ -21,6 +21,10 @@ public class DeleteCommand extends Command {
      * @return The output string message showing deleted task and current tasks left.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert tasks != null : "Tasklist not found.";
+        assert ui != null : "Ui not found.";
+        assert storage != null : "Storage not found.";
+
         // check if the taskNumber provided is in range
         if (taskNumber > tasks.getNumTasks() || taskNumber <= 0) {
             throw new InvalidTaskException();
@@ -29,6 +33,7 @@ public class DeleteCommand extends Command {
         String output = ui.showDeleted(tasks.getTask(taskNumber), (tasks.getNumTasks() - 1));
         tasks.deleteTask(taskNumber); // delete from tasklist
         storage.overwriteFile(tasks.getTaskList()); // delete from storage
+        assert output != null : "Message to show task deleted should be shown.";
         return output;
     }
 
