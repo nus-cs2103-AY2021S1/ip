@@ -8,7 +8,7 @@ graphics are inspired by my all time favorite game:
  
 *Gotta Catch 'Em All (A+s)*
 
-#Thunderbolt Features 
+# Thunderbolt Features 
 
 For the PikaDuke Bot, I have implemented the following features:
 1. **Adding** of tasks to the bot.
