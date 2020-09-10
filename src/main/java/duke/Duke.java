@@ -52,6 +52,8 @@ public class Duke {
     public String getResponse(String input) {
         try {
             Command command = parser.processInput(input);
+            assert command != null : "Parser returned null";
+
             return command.runNew(taskList, storage, ui);
         } catch (DukeException ex) {
             return ex.getMessage();
