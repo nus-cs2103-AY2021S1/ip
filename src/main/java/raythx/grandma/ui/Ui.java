@@ -33,8 +33,8 @@ public class Ui {
      * @return help message.
      */
     public String appendHelpMessage() {
-        textOnScreen += "These r wud u tell your ol' grandma here...\n"
-                + "Yu wan add more tasks\n        todo {description} #{tag} \n                /by {YYYY-MM-DD HHmm}\n"
+        textOnScreen += "These r wud u tell your ol' grandma here...\nYu wan add more tasks\n"
+                + "        todo {description} #{tag} \n                /by {YYYY-MM-DD HHmm}\n"
                 + "        deadline {description} #{tag} \n                /by {YYYY-MM-DD HHmm}\n"
                 + "        event {description} #{tag} \n                /at {YYYY-MM-DD HHmm}\n"
                 + "Yu wan remove tasks coz incompetent\n        delete {task number}\n"

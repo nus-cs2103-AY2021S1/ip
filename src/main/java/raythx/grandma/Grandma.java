@@ -29,9 +29,9 @@ public class Grandma {
         storage = new Storage(filePath);
         try {
             tasks = storage.load();
-        } catch (DukeException e) {
-            ui.getError(e);
-        } catch (FileNotFoundException e) {
+        } catch (DukeException exception) {
+            ui.getError(exception);
+        } catch (FileNotFoundException exception) {
             tasks = storage.newTasks();
         }
     }
@@ -48,9 +48,9 @@ public class Grandma {
             Command command = parser.parse(tasks, input);
             command.execute(tasks, ui, storage);
             return ui.getTextOnScreen();
-        } catch (DukeException e) {
-            return ui.getError(e);
-        } catch (Exception e) {
+        } catch (DukeException exception) {
+            return ui.getError(exception);
+        } catch (Exception exception) {
             return ui.getUncheckedException();
         }
     }

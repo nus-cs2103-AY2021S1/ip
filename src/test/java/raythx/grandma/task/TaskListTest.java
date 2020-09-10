@@ -9,64 +9,66 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import raythx.grandma.exception.DukeException;
+
 public class TaskListTest {
 
     private final PrintStream standardOut = System.out;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
 
-    private TaskList tasks;
+    private Task task;
 
+    //@@author raythx98-reused
+    //Reused from https://www.baeldung.com/java-testing-system-out-println with minor modifications
     @BeforeEach
     public void setUp() {
         System.setOut(new PrintStream(outputStreamCaptor));
-        tasks = new TaskList();
+        try {
+            task = new ToDo("Something", "Cute", "311220 2029");
+        } catch (DukeException exception) {
+            exception.printStackTrace();
+        }
     }
 
     @AfterEach
     public void tearDown() {
         System.setOut(standardOut);
     }
+    //@@author
 
     /**
      * Something.
      */
     @Test
-    public void addTask_emptyList_success() {
-
-//        String actualResult = new TaskList().addTask("T", "CS2103T Exams", "2020-12-31 2021");
-//
-//        String expectedResult = "Got it, here yur task bij\n"
-//                + "[T][✘] CS2103T Exams (by: Dec 31 2020, 8:21PM)\n"
-//                + "Now you have 1 tasks in the list.";
-//
-//        assertEquals(expectedResult, actualResult);
+    public void addTask_emptyList_createdCorrectly() {
+        TaskList tasks = new TaskList();
+        String expectedResult = task.toString();
+        tasks.addTask(task);
+        String actualResult = tasks.getTask(0).toString();
+        assertEquals(expectedResult, actualResult);
     }
 
     /**
      * Something.
      */
     @Test
-    public void deleteTask_singleList_success() {
+    public void deleteTask_singleList_deletedCorrectly() {
 
-//        TaskList tasks = new TaskList();
-//        tasks.addTask(Task.TaskType.TODOS, "CS2103T Exams", "2020-12-31 2021");
-//        String actualResult = tasks.removeTask(0);
-//
-//        String expectedResult = "[T][✘] CS2103T Exams (by: Dec 31 2020, 8:21PM)";
-//
-//        assertEquals(expectedResult, actualResult);
+        TaskList tasks = new TaskList();
+        tasks.addTask(task);
+        String actualResult = tasks.removeTask(0);
+        String expectedResult = task.toString();
+        assertEquals(expectedResult, actualResult);
     }
 
     /**
      * Something.
      */
     @Test
-    public void getSize_emptyList_success() {
-
+    public void getSize_emptyList_retrievedCorrectly() {
         TaskList tasks = new TaskList();
         int actualResult = tasks.getSize();
         int expectedResult = 0;
-
         assertEquals(expectedResult, actualResult);
     }
 }

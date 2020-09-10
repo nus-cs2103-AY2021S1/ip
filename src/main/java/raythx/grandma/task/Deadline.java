@@ -34,7 +34,7 @@ public class Deadline extends Task {
             if (splitPeriod.length > 1) {
                 this.time = LocalTime.parse(splitPeriod[1], DateTimeFormatter.ofPattern(TIME_FORMAT));
             }
-        } catch (DateTimeParseException e) {
+        } catch (DateTimeParseException exception) {
             throw new ParseDateTimeException();
         }
     }

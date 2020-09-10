@@ -1,6 +1,6 @@
 # User Guide
 
-![Grandma application](/Ui.png)
+![Grandma application](docs/Ui.png)
 
 ## Features 
 

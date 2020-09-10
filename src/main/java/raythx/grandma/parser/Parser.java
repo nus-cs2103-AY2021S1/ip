@@ -59,7 +59,7 @@ public class Parser {
             int doneIndex;
             try {
                 doneIndex = Integer.parseInt(splitBySpace[1]) - 1;
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException exception) {
                 throw new WrongArgumentException();
             }
             if (doneIndex < 0 || doneIndex > tasks.getSize() - 1) {
@@ -73,7 +73,7 @@ public class Parser {
             int deleteIndex;
             try {
                 deleteIndex = Integer.parseInt(splitBySpace[1]) - 1;
-            } catch (NumberFormatException e) {
+            } catch (NumberFormatException exception) {
                 throw new WrongArgumentException();
             }
             if (deleteIndex < 0 || deleteIndex > tasks.getSize() - 1) {

@@ -18,16 +18,14 @@ public class Writer {
             FileWriter writer = new FileWriter(new File(filepath), false);
             writer.write(input);
             writer.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("directory not found");
+        } catch (FileNotFoundException exception) {
             File file = new File("data");
             boolean fileCreated = file.mkdir();
             if (fileCreated) {
                 overwrite(filepath, input);
             }
-        } catch (IOException e) {
-            System.out.println("directory not found");
-            e.printStackTrace();
+        } catch (IOException exception) {
+            exception.printStackTrace();
         }
     }
 
@@ -42,16 +40,14 @@ public class Writer {
             FileWriter writer = new FileWriter(new File(filepath), true);
             writer.write(input);
             writer.close();
-        } catch (FileNotFoundException e) {
-            System.out.println("directory not found");
+        } catch (FileNotFoundException exception) {
             File file = new File("data");
             boolean fileCreated = file.mkdir();
             if (fileCreated) {
                 overwrite(filepath, input);
             }
-        } catch (IOException e) {
-            System.out.println("directory not found");
-            e.printStackTrace();
+        } catch (IOException exception) {
+            exception.printStackTrace();
         }
     }
 }

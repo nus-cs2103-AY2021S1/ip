@@ -28,8 +28,8 @@ public class Main extends Application {
             stage.getIcons().add(new Image("/images/BombIcon.png"));
             stage.setTitle("Grandma");
             stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
+        } catch (IOException exception) {
+            exception.printStackTrace();
         }
     }
 }
