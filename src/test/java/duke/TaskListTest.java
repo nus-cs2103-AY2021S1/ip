@@ -22,7 +22,7 @@ public class TaskListTest {
         TaskListTest.initTest();
         String[] parsedInput1 = {"T", "happy thoughts"};
         assertEquals(testTaskList.addEntry(parsedInput1, "T"),
-                     "[T][✘] happy thoughts");
+                     "[T][\u2718] happy thoughts");
     }
     @Test
     public void queryTaskList_getCurrentStatus_returnsString() throws DukeException {
@@ -33,7 +33,7 @@ public class TaskListTest {
     @Test
     public void modifyTaskList_completeTask_returnsString() throws DukeException {
         TaskListTest.initTest();
-        String expected = "[T][✓] i want ice cream";
+        String expected = "[T][\u2713] i want ice cream";
         assertEquals(testTaskList.completeTask(2), expected);
     }
 }
