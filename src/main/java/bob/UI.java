@@ -13,7 +13,7 @@ import java.util.Scanner;
  */
 public class UI {
     /** A scanner which scans user's input */
-    Scanner sc = new Scanner(System.in);
+    private Scanner sc = new Scanner(System.in);
 
     /**
      * Prints out a greeting from Bob to the user.
@@ -37,11 +37,15 @@ public class UI {
      */
     public String printOutList(TaskList tasks) throws BobIndexOutOfBoundsException {
         String list = "";
-        for(int i = 1; i < tasks.size()+1; i++) {
+        for (int i = 1; i < tasks.size()+1; i++) {
             Task task = tasks.get(i);
-            list += i +"." + task.toString() + "\n";
+            if (i == tasks.size()) {
+                list += i + "." + task.toString();
+            } else {
+                list += i + "." + task.toString() + "\n";
+            }
         }
-        if(tasks.isEmpty()) {
+        if (tasks.isEmpty()) {
             return "There are no tasks in the list at the moment. Feel free to add any.";
         }
         return list;
@@ -56,8 +60,9 @@ public class UI {
      */
     public String deleteTask(TaskList tasks, int index) throws BobIndexOutOfBoundsException {
         Task task = tasks.get(index);
+        int newSize = tasks.size() - 1;
         return "Noted. I have removed the following task:\n\t" + task.toString()
-                + "\nThere are now " + tasks.size() + " remaining tasks on the list.";
+                + "\nThere are now " + newSize + " remaining tasks on the list.";
     }
 
     /**
@@ -94,6 +99,7 @@ public class UI {
 
     /**
      * Prints out an error message.
+     *
      * @param error the error message to be printed out.
      */
     public String printError(String error) {
@@ -103,9 +109,9 @@ public class UI {
     public String findKeyWord(TaskList tasks) throws BobIndexOutOfBoundsException {
         if (!tasks.isEmpty()) {
             String message = "Here are the tasks in your lists which match: ";
-            for(int i = 1; i < tasks.size()+1; i++) {
+            for (int i = 1; i < tasks.size() + 1; i++) {
                 Task task = tasks.get(i);
-                message += "\n" + i +"." + task.toString();
+                message += "\n\t" + i + "." + task.toString();
             }
             return message;
         } else {

@@ -26,6 +26,11 @@ import bob.task.Todo;
  */
 public class Parser {
 
+    static final int TODO_DESCRIPTION_INDEX = 5;
+    static final int DEADLINE_DESCRIPTION_INDEX = 9;
+    static final int EVENT_DESCRIPTION_INDEX = 6;
+    static final int FIND_KEYWORD_INDEX = 5;
+
     /**
      * Returns the appropriate command for Bob to execute by parsing a provided String command by the user.
      *
@@ -34,64 +39,84 @@ public class Parser {
      * @throws BobException if a command cannot be parsed from the provided String command.
      */
     public static Command parse(String command) throws BobException {
-        if (command.equals("list")) {
+        boolean isTask = command.contains("todo") || command.contains("deadline") || command.contains("event");
+        if (command.startsWith("list")) {
             return new ListCommand();
-        } else if (command.contains("done")) {
-            int index = 0;
-            try {
-                index = Integer.parseInt(command.substring(command.length() - 1));
-            } catch (NumberFormatException e) {
-                throw new BobNumberFormatException();
-            }
-            return new DoneCommand(index);
-        } else if (command.contains("todo") || command.contains("deadline") || command.contains("event")) {
-            Task task = null;
-            if (command.contains("todo")) {
-                try {
-                    task = new Todo(command.substring(5));
-                } catch (StringIndexOutOfBoundsException e) {
-                    throw new BobNoDescriptionException();
-                }
-            } else if (command.contains("deadline")) {
-                try {
-                    int index = command.indexOf(47);
-                    if (command.substring(9, index).equals("")) {
-                        throw new BobIncompleteDeadlineDescriptionException();
-                    }
-                    task = new Deadline(command.substring(9, index - 1), command.substring(index + 4));
-                } catch (StringIndexOutOfBoundsException e) {
-                    throw new BobIncompleteDeadlineDescriptionException();
-                }
-            } else if (command.contains("event")) {
-                try {
-                    int index = command.indexOf(47);
-                    if (command.substring(6, index).equals("")) {
-                        throw new BobIncompleteEventDescriptionException();
-                    }
-                    task = new Event(command.substring(6, index - 1), command.substring(index + 4));
-                } catch (StringIndexOutOfBoundsException e) {
-                    throw new BobIncompleteEventDescriptionException();
-                }
-            }
-            return new AddCommand(task);
-        } else if (command.contains("delete")) {
-            int index;
-            try {
-                index = Integer.parseInt(command.substring(command.length() - 1));
-            } catch (NumberFormatException e) {
-                throw new BobNumberFormatException();
-            }
-            return new DeleteCommand(index);
-        } else if (command.contains("bye")) {
+        } else if (command.startsWith("done")) {
+            return parseDone(command);
+        } else if (isTask) {
+            return parseTask(command);
+        } else if (command.startsWith("delete")) {
+            return parseDelete(command);
+        } else if (command.startsWith("bye")) {
             return new ExitCommand();
-        } else if (command.contains("find")) {
-            try {
-                return new FindCommand(command.substring(5));
-            } catch (StringIndexOutOfBoundsException e) {
-                throw new BobFindNoKeyWordsException();
-            }
+        } else if (command.startsWith("find")) {
+            return parseFind(command);
         } else {
             throw new BobException();
         }
     }
+
+    static Command parseTask(String command) throws BobException {
+        Task task = null;
+        if (command.contains("todo")) {
+            try {
+                task = new Todo(command.substring(TODO_DESCRIPTION_INDEX));
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new BobNoDescriptionException();
+            }
+        } else if (command.contains("deadline")) {
+            try {
+                //finds the index of the char representing '/'
+                int index = command.indexOf(47);
+                if (command.substring(DEADLINE_DESCRIPTION_INDEX, index).equals("")) {
+                    throw new BobIncompleteDeadlineDescriptionException();
+                }
+                task = new Deadline(command.substring(DEADLINE_DESCRIPTION_INDEX, index - 1), command.substring(index + 4));
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new BobIncompleteDeadlineDescriptionException();
+            }
+        } else if (command.contains("event")) {
+            try {
+                //finds the index of the char representing '/'
+                int index = command.indexOf(47);
+                if (command.substring(EVENT_DESCRIPTION_INDEX, index).equals("")) {
+                    throw new BobIncompleteEventDescriptionException();
+                }
+                task = new Event(command.substring(EVENT_DESCRIPTION_INDEX, index - 1), command.substring(index + 4));
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new BobIncompleteEventDescriptionException();
+            }
+        }
+        return new AddCommand(task);
+    }
+
+    static Command parseDone(String command) throws BobException {
+        int index = 0;
+        try {
+            index = Integer.parseInt(command.substring(command.length() - 1));
+        } catch (NumberFormatException e) {
+            throw new BobNumberFormatException();
+        }
+        return new DoneCommand(index);
+    }
+
+    static Command parseDelete(String command) throws BobException {
+        int index;
+        try {
+            index = Integer.parseInt(command.substring(command.length() - 1));
+        } catch (NumberFormatException e) {
+            throw new BobNumberFormatException();
+        }
+        return new DeleteCommand(index);
+    }
+
+    static Command parseFind(String command) throws BobException {
+        try {
+            return new FindCommand(command.substring(FIND_KEYWORD_INDEX));
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new BobFindNoKeyWordsException();
+        }
+    }
+
 }

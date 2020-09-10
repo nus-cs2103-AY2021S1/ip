@@ -6,8 +6,6 @@ import bob.UI;
 import bob.exception.BobIOException;
 import bob.task.Task;
 
-import java.io.IOException;
-
 /**
  * This command when executed adds a task to the TaskList and calls
  * the UI class and Storage class to print out the appropriate messages
@@ -48,7 +46,7 @@ public class AddCommand extends Command {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o){
+        if (this == o) {
             return true;
         } else if (o instanceof AddCommand) {
             AddCommand c = (AddCommand) o;
@@ -64,7 +62,7 @@ public class AddCommand extends Command {
      * @return string representation of AddCommand.
      */
     @Override
-    public String toString(){
+    public String toString() {
         return "Adds " + task.toString() + " to list.";
     }
 }

@@ -11,9 +11,10 @@ public class Deadline extends Task {
     /**The deadline of the task to be completed by. */
     private LocalDateTime  deadline;
     /**The format of inputted dates that the class can accept. */
-    private static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static final DateTimeFormatter INPUT_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
     /**The format of outputted dates by the class. */
-    private static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
+    private static final DateTimeFormatter OUTPUT_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
+
 
     /**
      * Constructs a task that has not been completed
@@ -24,7 +25,7 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String deadline) {
         super(description);
-        this.deadline = LocalDateTime.parse(deadline, inputFormatter);
+        this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
     }
 
     /**
@@ -37,7 +38,7 @@ public class Deadline extends Task {
      */
     public Deadline(boolean isDone, String description, String deadline) {
         super(isDone, description);
-        this.deadline = LocalDateTime.parse(deadline, inputFormatter);
+        this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
     }
 
 
@@ -48,7 +49,7 @@ public class Deadline extends Task {
      */
 
     public String getDeadline() {
-        return this.deadline.format(outputFormatter).toString();
+        return this.deadline.format(OUTPUT_DATE_TIME_FORMAT).toString();
     }
 
     /**
@@ -76,7 +77,9 @@ public class Deadline extends Task {
             return true;
         } else if (o instanceof Deadline) {
             Deadline task = (Deadline) o;
-            return this.description.equals(task.description) && this.deadline.equals(task.deadline) && this.isDone == task.isDone;
+            boolean isEqualDeadlines = this.description.equals(task.description)
+                    && this.deadline.equals(task.deadline) && this.isDone == task.isDone;
+            return isEqualDeadlines;
         } else {
             return false;
         }
@@ -90,9 +93,9 @@ public class Deadline extends Task {
     @Override
     public String saveFormat() {
         if (isDone) {
-            return "D | 1 | " + this.getDescription() + " | " + this.deadline.format(inputFormatter).toString();
+            return "D | 1 | " + this.getDescription() + " | " + this.deadline.format(INPUT_DATE_TIME_FORMAT).toString();
         } else {
-            return "D | 0 | " + this.getDescription() + " | " + this.deadline.format(inputFormatter).toString();
+            return "D | 0 | " + this.getDescription() + " | " + this.deadline.format(INPUT_DATE_TIME_FORMAT).toString();
         }
     }
 }

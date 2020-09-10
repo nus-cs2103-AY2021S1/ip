@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, UI ui, Storage storage) throws BobIOException, BobIndexOutOfBoundsException {
-        String message = ui.deleteTask(tasks,index);
+        String message = ui.deleteTask(tasks, index);
         tasks.delete(index);
         storage.updateSave(tasks);
         return message;

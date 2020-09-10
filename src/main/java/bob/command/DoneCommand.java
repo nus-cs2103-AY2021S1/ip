@@ -35,6 +35,6 @@ public class DoneCommand extends Command {
     public String execute(TaskList tasks, UI ui, Storage storage) throws BobIOException, BobIndexOutOfBoundsException {
         tasks.get(index).markAsDone();
         storage.updateSave(tasks);
-        return ui.markAsDone(tasks,index);
+        return ui.markAsDone(tasks, index);
     }
 }

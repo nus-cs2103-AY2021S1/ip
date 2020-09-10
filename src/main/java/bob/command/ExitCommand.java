@@ -19,7 +19,7 @@ public class ExitCommand extends Command {
      * @throws BobException
      */
     @Override
-    public String execute(TaskList tasks, UI ui, Storage storage){
+    public String execute(TaskList tasks, UI ui, Storage storage) {
         return ui.exit();
     }
 
@@ -29,7 +29,7 @@ public class ExitCommand extends Command {
      * @return false.
      */
     @Override
-    public boolean isExit(){
+    public boolean isExit() {
         return true;
     }
 }

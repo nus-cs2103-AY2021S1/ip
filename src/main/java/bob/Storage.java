@@ -71,7 +71,7 @@ public class Storage {
      * @throws BobFileNotFoundException if the file to load from does not exist.
      */
 
-    public void loadSave(TaskList tasks) throws BobFileNotFoundException {
+    public void loadSave(TaskList tasks) throws BobIOException, BobFileNotFoundException {
         Scanner sc = null;
         try {
             sc = new Scanner(save);
@@ -80,25 +80,9 @@ public class Storage {
         }
         while (sc.hasNextLine()) {
             String str = sc.nextLine();
-            if (!str.equals("")) {
-                char c = str.charAt(0);
-                if (c == 'T') {
-                    String bool = str.substring(4, 5);
-                    String description = str.substring(8);
-                    tasks.add(new Todo(bool.equals("1") ? true : false, description));
-                } else if (c == 'D') {
-                    String bool = str.substring(4, 5);
-                    String description = str.substring(8, str.indexOf("|", 8) - 1);
-                    int i = str.indexOf("|", 8);
-                    String deadline = str.substring(i + 2);
-                    tasks.add(new Deadline(bool.equals("1") ? true : false, description, deadline));
-                } else if (c == 'E') {
-                    String bool = str.substring(4, 5);
-                    String description = str.substring(8, str.indexOf("|", 8) - 1);
-                    int i = str.indexOf("|", 8);
-                    String period = str.substring(i + 2);
-                    tasks.add(new Event(bool.equals("1") ? true : false, description, period));
-                }
+            if (!str.isEmpty()) {
+                Task task = loadTask(str);
+                tasks.add(task);
             }
         }
     }
@@ -144,7 +128,7 @@ public class Storage {
      */
     public void appendToStorage(String data) throws BobIOException {
         try {
-            writer.append(data + System.lineSeparator());
+            writer.append(data);
         } catch (IOException e) {
             throw new BobIOException();
         }
@@ -173,6 +157,24 @@ public class Storage {
             writer.close();
         } catch (IOException e) {
             throw new BobIOException();
+        }
+    }
+
+    public Task loadTask(String data) {
+        String[] taskDataArr = data.split("\\|");
+        char firstChar = taskDataArr[0].charAt(0);
+        boolean isDone = taskDataArr[1].substring(1, 2).equals("1");
+        if (firstChar == 'T') {
+            String description = taskDataArr[2].substring(1);
+            return new Todo(isDone, description));
+        } else if (firstChar == 'D') {
+            String description = taskDataArr[2].substring(1, taskDataArr[2].length() - 1);
+            String deadline = taskDataArr[3].substring(1);
+            return new Deadline(isDone, description, deadline);
+        } else if (firstChar == 'E') {
+            String description = taskDataArr[2].substring(1, taskDataArr[2].length() - 1);
+            String period = taskDataArr[3].substring(1);
+            return new Event(isDone, description, period);
         }
     }
 }

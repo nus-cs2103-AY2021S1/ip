@@ -17,10 +17,14 @@ public class Event extends Task {
     private LocalDateTime end;
 
     /**The format of inputted dates and times that the class can accept. */
-    private static DateTimeFormatter inputFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
+    private static final DateTimeFormatter INPUT_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm");
 
     /**The format of outputted dates and times by the class. */
-    private static DateTimeFormatter outputFormatter = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
+    private static final DateTimeFormatter OUTPUT_DATE_TIME_FORMAT = DateTimeFormatter.ofPattern("MMM d yyyy HHmm");
+
+    private static final int END_OF_FIRST_DATE_TIME_INDEX = 15;
+
+    private static final int START_OF_SECOND_DATE_TIME_INDEX = 19;
 
     /**
      * Constructs an event that has not been completed with a brief
@@ -32,8 +36,8 @@ public class Event extends Task {
      */
     public Event (String description, String period) {
         super(description);
-        this.start = LocalDateTime.parse(period.substring(0,15), inputFormatter);
-        this.end = LocalDateTime.parse(period.substring(19), inputFormatter);
+        this.start = LocalDateTime.parse(period.substring(0, END_OF_FIRST_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);
+        this.end = LocalDateTime.parse(period.substring(START_OF_SECOND_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);
     }
 
     /**
@@ -47,8 +51,8 @@ public class Event extends Task {
      */
     public Event(boolean isDone, String description, String period) {
         super(isDone, description);
-        this.start = LocalDateTime.parse(period.substring(0,15), inputFormatter);
-        this.end = LocalDateTime.parse(period.substring(19), inputFormatter);
+        this.start = LocalDateTime.parse(period.substring(0, END_OF_FIRST_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);
+        this.end = LocalDateTime.parse(period.substring(START_OF_SECOND_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);
     }
 
     /**
@@ -59,7 +63,7 @@ public class Event extends Task {
      * @return the String representation of the period of which the event occurred over.
      */
     public String getPeriod() {
-        return this.start.format(outputFormatter).toString() + " to " + this.end.format(outputFormatter).toString();
+        return this.start.format(OUTPUT_DATE_TIME_FORMAT).toString() + " to " + this.end.format(OUTPUT_DATE_TIME_FORMAT).toString();
     }
 
     /**
@@ -85,8 +89,9 @@ public class Event extends Task {
             return true;
         } else if (o instanceof Event) {
             Event task = (Event) o;
-            return this.description.equals(task.description) && this.start.equals(task.start)
+            boolean isEqualEvents = this.description.equals(task.description) && this.start.equals(task.start)
                     && this.end.equals(task.end) && this.isDone == task.isDone;
+            return isEqualEvents;
         } else {
             return false;
         }
@@ -100,11 +105,11 @@ public class Event extends Task {
     @Override
     public String saveFormat() {
         if (isDone) {
-            return "E | 1 | " + this.getDescription() + " | " + this.start.format(inputFormatter)
-                    + " to " + this.end.format(inputFormatter);
+            return "E | 1 | " + this.getDescription() + " | " + this.start.format(INPUT_DATE_TIME_FORMAT)
+                    + " to " + this.end.format(INPUT_DATE_TIME_FORMAT);
         } else {
-            return "E | 0 | " + this.getDescription() + " | " + this.start.format(inputFormatter)
-                    + " to " + this.end.format(inputFormatter);
+            return "E | 0 | " + this.getDescription() + " | " + this.start.format(INPUT_DATE_TIME_FORMAT)
+                    + " to " + this.end.format(INPUT_DATE_TIME_FORMAT);
         }
     }
 }
