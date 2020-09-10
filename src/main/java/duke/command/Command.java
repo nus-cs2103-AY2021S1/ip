@@ -12,7 +12,8 @@ public abstract class Command {
      * Executes the actions stipulated by the command given by the user.
      * @param list A TaskList containing the user's Tasks.
      * @param storage A Storage object that handles the storage of tasks in local storage, allowing them to persist.
-     * @throws DukeException if any specific exceptions occur when executed.
+     * @return A String that contains a user message detailing the success of the command.
+     * @throws DukeException If any specific exceptions occur when executed.
      */
     public abstract String execute(TaskList list, Storage storage) throws DukeException;
 

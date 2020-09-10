@@ -5,9 +5,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import duke.Storage;
-import duke.exception.DateParseException;
 import duke.exception.InvalidTaskException;
-import duke.exception.StorageException;
 
 /**
  * Represents a list of Tasks.
@@ -30,12 +28,9 @@ public class TaskList {
      * The TaskList is initialised by adding tasks stored in the local storage from previous sessions.
      * @param storage A Storage object that handles the storage of tasks in local storage, allowing them to persist.
      * @return The new TaskList created, filled with existing Tasks.
-     * @throws StorageException if Task cannot be stored in local storage.
-     * @throws DateParseException if Task date (if any) cannot be parsed into LocalDate object.
      */
-    public static TaskList initialiseTaskList(Storage storage) throws StorageException, DateParseException {
+    public static TaskList initialiseTaskList(Storage storage) {
         TaskList newTaskList = new TaskList(storage);
-
         try {
             storage.readTaskStorage().forEach(taskString -> {
                 String[] t = taskString.split(" [|] ");
@@ -51,11 +46,11 @@ public class TaskList {
                     newTaskList.taskList.add(Event.existingEvent(t[2], t[1].equals("1"), LocalDate.parse(t[3])));
                     break;
                 default:
-                    break;
+                    assert false : "Invalid object stored in local storage";
                 }
             });
         } catch (DateTimeParseException e) {
-            throw new DateParseException("Oops! Please make sure your date is of YYYY-MM-DD format ;A;");
+            assert false : "Invalid date stored in local storage";
         }
 
         return newTaskList;
@@ -78,9 +73,8 @@ public class TaskList {
      * @param taskName A string representing the name of the task.
      * @param taskDate A string representing the date of the task.
      * @return The task added to the TaskList.
-     * @throws InvalidTaskException if task type is neither Deadline nor Event.
      */
-    public Task addTask(TaskType type, String taskName, LocalDate taskDate) throws InvalidTaskException {
+    public Task addTask(TaskType type, String taskName, LocalDate taskDate) {
         switch (type) {
         case EVENT:
             Event newEvent = Event.newEvent(taskName, taskDate);
@@ -91,7 +85,7 @@ public class TaskList {
             this.taskList.add(newDeadline);
             return newDeadline;
         default:
-            throw new InvalidTaskException("Oh dear! I'm not sure what kind of task to add ;A;");
+            throw new AssertionError("Invalid TaskType specified");
         }
     }
 
@@ -99,7 +93,7 @@ public class TaskList {
      * Marks Task as completed.
      * @param index An integer representing the index of the task in the TaskList.
      * @return The task marked as completed.
-     * @throws InvalidTaskException if index specified is invalid (does not refer to a task in the TaskList).
+     * @throws InvalidTaskException If index specified is invalid (does not refer to a task in the TaskList).
      */
     public Task markTaskAsDone(int index) throws InvalidTaskException {
         if (index > this.taskList.size() || index <= 0) {
@@ -112,7 +106,7 @@ public class TaskList {
      * Removes a Task from the TaskList.
      * @param index An integer representing the index of the task in the TaskList.
      * @return The removed task.
-     * @throws InvalidTaskException if index specified is invalid (does not refer to a task in the TaskList).
+     * @throws InvalidTaskException If index specified is invalid (does not refer to a task in the TaskList).
      */
     public Task deleteTask(int index) throws InvalidTaskException {
         if (index > this.taskList.size() || index <= 0) {
@@ -124,9 +118,23 @@ public class TaskList {
     }
 
     /**
-     * Finds tasks that match the search term
-     * @param matchString A string representing the search term
-     * @return An ArrayList containing all Tasks that match the search term provided
+     * Finds tasks that have date set as today.
+     * @return An ArrayList containing all Tasks that have date set as today.
+     */
+    public ArrayList<Task> getTasksToday() {
+        ArrayList<Task> filteredList = new ArrayList<>();
+        for (Task task : this.taskList) {
+            if (task.isToday()) {
+                filteredList.add(task);
+            }
+        }
+        return filteredList;
+    }
+
+    /**
+     * Finds tasks that match the search term.
+     * @param matchString A string representing the search term.
+     * @return An ArrayList containing all Tasks that match the search term provided.
      */
     public ArrayList<Task> findTasks(String matchString) {
         ArrayList<Task> filteredList = new ArrayList<>();
