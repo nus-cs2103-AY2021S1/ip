@@ -11,12 +11,18 @@ import duke.task.TaskManager;
 public class AddCommand extends Command {
     private Task task;
 
+    /**
+     * Constructor
+     *
+     * @param task The task that will needs to be added to the list of tasks
+     */
     public AddCommand(Task task) {
         this.task = task;
     }
 
     /**
-     * Adds the specified task in the constructor to the taskManager and prints the respective message.
+     * Adds the specified task in the constructor to the taskManager
+     *
      * @param taskManager The taskManager that the task is being added to.
      * @return The output of the command execution
      */

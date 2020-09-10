@@ -8,7 +8,20 @@ package duke.task;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
+/**
+ * An interface for tasks that has a datetime attribute.
+ */
 public interface TimeBased {
+    /**
+     * Returns the datetime associated to the task.
+     *
+     * @return the datetime of the task.
+     */
     LocalDateTime getDateTime();
+    /**
+     * Returns the date associated to the task.
+     *
+     * @return the date of the task.
+     */
     LocalDate getDate();
 }

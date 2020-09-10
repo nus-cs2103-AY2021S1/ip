@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a wrapper class over {@link LocalDateTime} such that some objects may not contain time.
+ * Represents a wrapper class over {@link LocalDateTime}.
  */
 
 public class DukeDateTime {
@@ -20,10 +20,20 @@ public class DukeDateTime {
         this.dateTime = dateTime;
     }
 
+    /**
+     * Returns a {@code LocalDateTime} object containing the {@code DukeDateTime} datetime.
+     *
+     * @return the datetime of the {@code DukeDateTime} object
+     */
     public LocalDateTime getDateTime() {
         return this.dateTime;
     }
 
+    /**
+     * Returns the string representation of this {@code DukeDateTime} object.
+     *
+     * @return the string representation of this {@code DukeDateTime} object.
+     */
     @Override
     public String toString() {
         return dateTime.format(DateTimeFormatter.ofPattern("dd MMM yyyy h:mm a"));
