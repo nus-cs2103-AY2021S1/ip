@@ -1,8 +1,11 @@
 package duke.command;
 
+import duke.Event;
+import duke.Scheduler;
 import duke.Storage;
 import duke.Task;
 import duke.TaskList;
+import duke.ToDo;
 import duke.Ui;
 
 /**
@@ -26,7 +29,13 @@ public class AddCommand extends Command {
      * @param storage user's storage.
      * @return response after command is executed.
      */
-    public String execute(TaskList userTasks, Storage storage) {
+    public String execute(TaskList userTasks, Storage storage, Scheduler scheduler) {
+
+        if (task instanceof Event) {
+            //boolean isClashing = new Scheduler().isClashing()
+
+        }
+
         userTasks.addTask(task);
         storage.saveToFile(userTasks.getTaskList());
         response = new Ui().taskAddedMessage(task, userTasks.getTaskListSize());
