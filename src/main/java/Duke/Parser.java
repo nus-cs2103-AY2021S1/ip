@@ -123,6 +123,8 @@ public class Parser {
             throws MissingDoneArgumentException, DoneOutOfRangeException, MissingDeleteArgumentException,
             DeleteOutOfRangeException, EmptyTodoException, MissingDeadlineDateException, EmptyDeadlineException,
             MissingEventDateException, EmptyEventException, UnknownCommandException, MissingFindArgumentException {
+
+        assert input.length() != 0 : "enter was registered";
         ParseInfo returnable = new ParseInfo();
         CommandType commandType = parseCommandType(input);
         switch (commandType) {

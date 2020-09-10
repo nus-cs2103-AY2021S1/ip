@@ -70,6 +70,7 @@ public class TaskList {
      * @return  String representation of the task added.
      */
     public String addTask(Task task) {
+        assert task != null : "trying to add a null task";
         this.list.add(task);
         this.count++;
         return task.toString();
@@ -81,6 +82,7 @@ public class TaskList {
      * @return  String representation of the task marked as done.
      */
     public String markTaskAsDone(int index) {
+        assert index < 0 : "trying to access a negative index";
         this.list.get(index).markAsDone();
         return this.list.get(index).toString();
     }
@@ -91,6 +93,7 @@ public class TaskList {
      * @return  String representation of the task deleted.
      */
     public String deleteTask(int index) {
+        assert index < 0 : "trying to access a negative index";
         String representation = this.list.get(index).toString();
         this.list.remove(index);
         this.count--;
