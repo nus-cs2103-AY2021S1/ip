@@ -29,8 +29,10 @@ public class DeadlineCommand implements Command {
             String description = text.substring(0, text.indexOf("/by") - 1).trim();
             Deadline deadline = new Deadline(description, by);
 
-            if (by.lastIndexOf(' ') > 0) {
-                if (by.substring(1 + by.lastIndexOf(' ')).length() > 4) {
+            boolean hasTime = by.lastIndexOf(' ') > 0;
+            if (hasTime) {
+                boolean isCorrectFormat = by.substring(1 + by.lastIndexOf(' ')).length() > 4;
+                if (isCorrectFormat) {
                     throw new DobbyException("Incorrect usage of command.\n"
                             + "Details of time should be in 24hr format with only 4 digits. "
                             + "Please try again.\n  " + USAGE);

@@ -22,7 +22,8 @@ public class FindtypeCommand implements Command {
             }
 
             type = type.toUpperCase();
-            if (!(type.equals("T") || type.equals("D") || type.equals("E"))) {
+            boolean isNotTaskType = !(type.equals("T") || type.equals("D") || type.equals("E"));
+            if (isNotTaskType) {
                 throw new DobbyException("Incorrect usage of command.\n"
                         + "Type can be T, D, or E only. Please try again.\n  "
                         + USAGE);

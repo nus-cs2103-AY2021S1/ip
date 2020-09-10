@@ -76,17 +76,17 @@ public class TaskList {
      * @return String all tasks in the list in a particular format
      */
     public String getListedTasks() {
-        int i = 0;
+        int index = 0;
         String allTasks = "";
         for (Task task : (this.tasks)) {
-            i++;
-            allTasks = allTasks + i + ". " + task.getDescription();
-            if (i < tasks.size()) {
+            index++;
+            allTasks = allTasks + index + ". " + task.getDescription();
+            if (index < tasks.size()) {
                 allTasks = allTasks + "\n";
             }
         }
 
-        if (i == 0) {
+        if (index == 0) {
             allTasks = "The task list is currently empty.";
         }
 

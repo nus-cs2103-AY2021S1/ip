@@ -41,11 +41,8 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(Ui.greet(), dobbyImage)
         );
-        dialogContainer.setBackground(
-                new Background(
-                        new BackgroundFill(Color.LEMONCHIFFON, CornerRadii.EMPTY, Insets.EMPTY)
-                )
-        );
+        BackgroundFill backgroundFill = new BackgroundFill(Color.LEMONCHIFFON, CornerRadii.EMPTY, Insets.EMPTY);
+        dialogContainer.setBackground(new Background(backgroundFill));
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 

@@ -30,8 +30,10 @@ public class EventCommand implements Command {
             String description = text.substring(0, text.indexOf("/at") - 1).trim();
             Event event = new Event(description, at);
 
-            if (at.lastIndexOf(' ') > 0) {
-                if (at.substring(1 + at.lastIndexOf(' ')).length() > 4) {
+            boolean hasTime = at.lastIndexOf(' ') > 0;
+            if (hasTime) {
+                boolean isCorrectFormat = at.substring(1 + at.lastIndexOf(' ')).length() > 4;
+                if (isCorrectFormat) {
                     throw new DobbyException("Incorrect usage of command.\n"
                             + "Details of time should be in 24hr format with only 4 digits. Please try again.\n  "
                             + USAGE);
