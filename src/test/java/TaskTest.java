@@ -1,4 +1,5 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -41,14 +42,31 @@ public class TaskTest {
     }
 
     @Test
-    public void taskCompletionStatus_markTaskAsDone_success() {
-        Todo todo = new Todo("Create Junit Tests");
-        todo.markAsDone();
-        assertEquals(todo.hasBeenCompleted(), true);
+    public void createEvent_validInput_success() {
+        LocalDate date = LocalDate.parse("10/7/2020", this.dateFormatter);
+        LocalTime time = LocalTime.parse("11:00", this.timeFormatter);
+        Event event = new Event("create event", date, time);
+        String expected = "[E][✘] create event (at: Fri, Jul 10 2020, 11:00 AM)";
+        assertEquals(expected, event.toString());
     }
 
     @Test
-    public void testTaskRetrieval() {
+    public void testMarkAsDone() {
+        Todo todo = new Todo("Create Junit Tests");
+        todo.markAsDone();
+        assertTrue(todo.hasBeenCompleted());
+    }
+
+    @Test
+    public void setTaskTag_validTag_success() {
+        Todo todo = new Todo("add todo");
+        String tag = "fun";
+        todo.setTaskTag(tag);
+        assertEquals(tag, todo.getTaskTag());
+    }
+
+    @Test
+    public void testGetTask() {
         Todo todo = new Todo("Junit tests");
         TaskList tasks = new TaskList(new ArrayList<>());
         tasks.addTask(todo);
@@ -57,7 +75,15 @@ public class TaskTest {
     }
 
     @Test
-    public void taskRemoval_eventTask_emptyTaskList() {
+    public void testAddTask() {
+        Todo todo = new Todo("attend lecture");
+        TaskList tasks = new TaskList(new ArrayList<>());
+        tasks.addTask(todo);
+        assertEquals(1, tasks.getListSize());
+    }
+
+    @Test
+    public void removeTask_eventTask_emptyTaskList() {
         LocalDate date = LocalDate.parse("10/2/2020", this.dateFormatter);
         LocalTime time = LocalTime.parse("10:00", this.timeFormatter);
         Event event = new Event("Junit test", date, time);
@@ -68,11 +94,27 @@ public class TaskTest {
     }
 
     @Test
-    public void taskToFileString_validInput_success() {
-        LocalDate date = LocalDate.parse("10/10/2020", this.dateFormatter);
-        LocalTime time = LocalTime.parse("10:00", this.timeFormatter);
-        Event event = new Event("create event", date, time);
-        String expected = "[E][✘] create event (at: Sat, Oct 10 2020, 10:00 AM)";
-        assertEquals(expected, event.toString());
+    public void testCompleteTask() {
+        Todo todo = new Todo("create more tests");
+        TaskList tasks = new TaskList(new ArrayList<>());
+        tasks.addTask(todo);
+        tasks.completeTask(0);
+        assertTrue(todo.hasBeenCompleted());
+    }
+
+    @Test
+    public void convertTaskToFileString_eventTask_success() {
+        LocalDate date = LocalDate.parse("1/10/2020", this.dateFormatter);
+        LocalTime time = LocalTime.parse("19:00", this.timeFormatter);
+        Event event = new Event("create junit tests", date, time);
+        String expected = "E | 0 | create junit tests |  | 2020-10-01 19:00";
+        assertEquals(expected, event.convertTaskToFileString());
+    }
+
+    @Test
+    public void convertTaskToFileString_todoTask_success() {
+        Todo todo = new Todo("attend tutorials");
+        String expected = "T | 0 | attend tutorials | ";
+        assertEquals(expected, todo.convertTaskToFileString());
     }
 }

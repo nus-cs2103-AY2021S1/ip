@@ -52,7 +52,7 @@ public class ToDoCommand extends Command {
      * @return String containing the todo description.
      * @throws InvalidTaskException If the todo description is missing.
      */
-    public String retrieveTodoInfo() throws DukeException {
+    private String retrieveTodoInfo() throws DukeException {
         if (this.parsedCommand.length == 0) {
             String error = "Your todo task description is empty. The task cannot be created.";
             throw new InvalidTaskException(error);

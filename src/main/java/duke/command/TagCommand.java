@@ -56,7 +56,7 @@ public class TagCommand extends Command {
      * @return String array containing the ID of the task to be tagged and the tag.
      * @throws InvalidFunctionException If the user input has missing arguments.
      */
-    public String[] retrieveTagInfo() throws InvalidFunctionException {
+    private String[] retrieveTagInfo() throws InvalidFunctionException {
         try {
             String[] commandArguments = this.parsedCommand[1].trim().split(" ", 2);
             int taskID = Integer.parseInt(commandArguments[0]);

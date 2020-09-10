@@ -71,7 +71,7 @@ public class EventCommand extends Command {
      * @return String array containing the event description and event time stamp.
      * @throws InvalidTaskException If the event information is invalid or is missing arguments.
      */
-    public String[] retrieveEventInfo() throws InvalidTaskException {
+    private String[] retrieveEventInfo() throws InvalidTaskException {
         try {
             String[] eventArguments = this.parsedCommand[1].split(" /at ");
             if (!this.parsedCommand[1].contains(" /at ") && !this.parsedCommand[1].endsWith("/at")) {
