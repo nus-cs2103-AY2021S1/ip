@@ -9,6 +9,7 @@ public abstract class Task {
     protected String description;
     protected boolean isDone;
     protected final TaskType taskType;
+    protected Priority priority;
 
     /**
      * Creates a new Task.
@@ -18,10 +19,11 @@ public abstract class Task {
      * @param taskType    Type of Task.
      * @param isDone      true if Task is done, false if Task is yet to be done.
      */
-    public Task(String description, TaskType taskType, boolean isDone) {
+    public Task(String description, TaskType taskType, boolean isDone, Priority priority) {
         this.description = description;
         this.taskType = taskType;
         this.isDone = isDone;
+        this.priority = priority;
     }
 
     public String getStatusIcon() {
@@ -41,7 +43,7 @@ public abstract class Task {
      * @return String that contains the details of a Task and is saved in a specified file.
      */
     public String getSavedString() {
-        return taskType.getSymbol() + " | " + (isDone ? "1" : "0") + " | " + description;
+        return taskType.getSymbol() + " | " + (isDone ? "1" : "0") + " | " + description + " | " + (priority == null ? "": priority.toString());
     }
 
     public boolean isOccuringOn(Date date) {
