@@ -49,6 +49,11 @@ public class Parser {
                 throw new DukeException("Be sure to include a task description and date in the correct format.");
             }
         }
+        if (type == Action.TAG) {
+            if (isInvalidTagFormat(result)) {
+                throw new DukeException("Be sure to add a tag in the correct format.");
+            }
+        }
     }
 
     /**
@@ -73,6 +78,17 @@ public class Parser {
         return (!result.contains("/by")
                 || result.split("/by").length <= 1
                 || result.split("/by")[0].isEmpty());
+    }
+
+    /**
+     * Returns true if result is in an invalid format to create a deadline task.
+     *
+     * @param result String to test validity.
+     * @return true if result is in an invalid format to create a deadline task.
+     */
+    private boolean isInvalidTagFormat(String result) {
+        String[] splitResult = result.split(" ");
+        return splitResult.length < 2;
     }
 
     /**
@@ -143,6 +159,7 @@ public class Parser {
             resultantCommand = new HelpCommand();
             break;
         case TAG:
+            validateCommandDesc(commandDesc, Action.TAG);
             String[] splitCommandDesc = commandDesc.split(" ", 2);
             String tagName = splitCommandDesc[1];
             int taskNumber = Integer.parseInt(splitCommandDesc[0]);
