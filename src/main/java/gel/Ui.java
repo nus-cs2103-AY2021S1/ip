@@ -31,14 +31,22 @@ public class Ui {
         return addTaskMsg;
     }
 
-    public String taskRemoveMsg(Task task, int numberOfItemsLeft) {
-        String removeTaskMsg = "    Noted. I've removed this task:\n    "
-                + task + "\n    Now you have " + numberOfItemsLeft + " task(s) in the list.";
+    public String taskRemoveMsg(List<Task> tasks, int numberOfItemsLeft) {
+        StringBuilder listOfRemovedTask = new StringBuilder();
+        for (Task task:tasks) {
+            listOfRemovedTask.append("    ").append(task).append("\n");
+        }
+        String removeTaskMsg = "    Noted. I've removed this task:\n"
+                + listOfRemovedTask.toString() + "    Now you have " + numberOfItemsLeft + " task(s) in the list.";
         return removeTaskMsg;
     }
 
-    public String markTaskAsDoneMsg(Task task) {
-        String markDoneMsg = "    Nice! I've marked this task as done:\n    " + task;
+    public String markTaskAsDoneMsg(List<Task> tasks) {
+        StringBuilder listOfDoneTask = new StringBuilder();
+        for (Task task:tasks) {
+            listOfDoneTask.append("    ").append(task).append("\n");
+        }
+        String markDoneMsg = "    Nice! I've marked this task as done:\n" + listOfDoneTask.toString();
         return markDoneMsg;
     }
 

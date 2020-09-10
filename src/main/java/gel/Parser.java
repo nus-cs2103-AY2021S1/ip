@@ -2,8 +2,6 @@ package gel;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
-import java.util.Scanner;
-
 import gel.exception.GelException;
 
 /**
@@ -11,7 +9,6 @@ import gel.exception.GelException;
  */
 public class Parser {
 
-    private final Scanner sc = new Scanner(System.in);
     private final Storage storage;
     private final Ui ui;
     private final TaskList taskList;
@@ -84,7 +81,7 @@ public class Parser {
         case "list":
             return parseList();
         case "done":
-            return parseDone(input);
+            return parseDone(inputArr);
         case "delete":
             return parseDelete(inputArr);
         case "deadline":
@@ -109,19 +106,12 @@ public class Parser {
         return taskList.showListOfTask();
     }
 
-    private String parseDone(String input) throws GelException {
-        return taskList.markTaskAsDone(input);
+    private String parseDone(String[] inputArr) throws GelException {
+        return taskList.markTaskAsDone(inputArr);
     }
 
     private String parseDelete(String[] inputArr) throws GelException {
-        if (inputArr.length <= 1) {
-            throw new GelException("    Yo tell me what you want to delete la");
-        }
-        try {
-            return taskList.deleteTask(inputArr[1]);
-        } catch (Exception e) {
-            throw new GelException("    Yoyoyo please input a valid number after delete");
-        }
+        return taskList.deleteTask(inputArr);
     }
 
     private String parseDeadline(String input) throws GelException {
