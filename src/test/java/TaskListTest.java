@@ -13,7 +13,7 @@ public class TaskListTest {
         TaskList testList = new TaskList(lst);
 
         String expected = "1 task";
-        String result = testList.numTasks();
+        String result = testList.getNumTasksStr();
         assertEquals(expected, result);
     }
 
@@ -26,7 +26,7 @@ public class TaskListTest {
         TaskList testList = new TaskList(lst);
 
         String expected = "3 tasks";
-        String result = testList.numTasks();
+        String result = testList.getNumTasksStr();
         assertEquals(expected, result);
     }
 }

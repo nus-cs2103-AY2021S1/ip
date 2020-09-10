@@ -1,6 +1,6 @@
 public class DukeException extends Exception {
     /** Error message of the Exception to be printed. */
-    private String errorMessage;
+    private final String errorMessage;
 
     /**
      * Constructs new Exception object based on error type.
@@ -41,7 +41,10 @@ public class DukeException extends Exception {
             message = "OOPS!!! Command to delete a task is formatted wrongly.";
             break;
         case "invalidFind":
-            message = "OOPS!!! Command to find a task is formatted wrongly.";
+            message = "OOPS!!! You cannot find tasks with no keywords!";
+            break;
+        case "noMatchingTasks":
+            message = "OOPS!! I couldn't find any tasks matching your keyword!";
             break;
         default:
             message = "Unknown error. Try something else.";

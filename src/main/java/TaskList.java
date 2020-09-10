@@ -1,5 +1,7 @@
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 /**
  * Enumeration indicating the type of change to be acted on the TaskList.
@@ -35,7 +37,7 @@ public class TaskList {
      *
      * @return String of number of tasks.
      */
-    public String numTasks() {
+    public String getNumTasksStr() {
         int numTasks = tasks.size();
         return numTasks == 1 ? "1 task" : numTasks + " tasks";
     }
@@ -50,7 +52,7 @@ public class TaskList {
     public String listChangePrint(Task task, ListChange change) {
         String keyword = change == ListChange.ADD ? "added" : "removed";
         String firstLine = "Noted. I've " + keyword + " this task:\n" + task.toString() + "\n";
-        String secondLine = "Now you have " + this.numTasks() + " in the list.";
+        String secondLine = "Now you have " + this.getNumTasksStr() + " in the list.";
         return String.join("", firstLine, secondLine);
     }
 
@@ -60,16 +62,12 @@ public class TaskList {
      * @return String of task list.
      */
     public String printList() {
-        if (tasks.size() == 0) {
+        if (tasks.isEmpty()) {
             return new DukeException("emptyList").print();
         }
-
-        String tasksStr = "";
-        for (int i = 0; i < tasks.size(); i++) {
-            String taskToJoin = i + 1 + "." + tasks.get(i).toString() + "\n";
-            tasksStr = String.join("", tasksStr, taskToJoin);
-        }
-        return tasksStr;
+        return IntStream.range(0, tasks.size())
+                        .mapToObj(i -> i + 1 + "." + tasks.get(i).toString())
+                        .collect(Collectors.joining("\n"));
     }
 
     /**
@@ -78,7 +76,7 @@ public class TaskList {
      * @param command User command.
      * @return Duke response indicating successful action (or not).
      */
-    public String done(String command) {
+    public String markDone(String command) {
         try {
             int taskId = Parser.getTaskId(command);
             tasks.get(taskId).markAsDone();
@@ -94,10 +92,9 @@ public class TaskList {
      * @param command User command.
      * @return Duke response indicating successful action (or not).
      */
-    public String newToDo(String command) {
-        if (command.equals("todo")) {
-            return new DukeException("invalidTodo").print();
-        } else {
+
+    public String createToDo(String command) {
+        try {
             String detail = Parser.getDetail(command);
             if (detail.isBlank()) {
                 return new DukeException("invalidTodo").print();
@@ -106,6 +103,8 @@ public class TaskList {
                 tasks.add(newTask);
                 return listChangePrint(newTask, ListChange.ADD);
             }
+        } catch (Exception e) {
+            return new DukeException("invalidTodo").print();
         }
     }
 
@@ -115,7 +114,7 @@ public class TaskList {
      * @param command User command.
      * @return Duke response indicating successful action (or not).
      */
-    public String newDeadline(String command) {
+    public String createDeadline(String command) {
         try {
             String desc = Parser.getDeadlineDesc(command);
             String by = Parser.getBy(command);
@@ -135,7 +134,7 @@ public class TaskList {
      * @param command User command.
      * @return Duke response indicating successful action (or not).
      */
-    public String newEvent(String command) {
+    public String createEvent(String command) {
         try {
             String desc = Parser.getEventDesc(command);
             String at = Parser.getAt(command);
@@ -169,26 +168,26 @@ public class TaskList {
      * Finds task(s) according to keyword.
      *
      * @param command User command.
-     * @return String of tasks matching the keyword.
+     * @return String of task(s) matching the keyword.
      */
     public String find(String command) {
-        if (command.equals("find")) {
-            return new DukeException("invalidFind").print();
-        } else {
+        try {
             String keyword = Parser.getDetail(command);
             if (keyword.isBlank()) {
                 return new DukeException("invalidFind").print();
             } else {
                 List<Task> tasksFound = new ArrayList<>();
-
                 for (Task task : tasks) {
                     if (task.toString().contains(keyword)) {
                         tasksFound.add(task);
                     }
                 }
-                TaskList tasksFoundList = new TaskList(tasksFound);
-                return tasksFoundList.printList();
+                return tasksFound.isEmpty()
+                    ? new DukeException("noMatchingTasks").print()
+                    : new TaskList(tasksFound).printList();
             }
+        } catch (Exception e) {
+            return new DukeException("invalidFind").print();
         }
     }
 
@@ -197,7 +196,7 @@ public class TaskList {
      *
      * @return Duke response for default error.
      */
-    public String defaultError() {
+    public String getDefaultError() {
         return new DukeException("invalidCommand").print();
     }
 }

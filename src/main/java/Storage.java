@@ -44,8 +44,8 @@ public class Storage {
         try {
             ReadFile file = new ReadFile(filePath);
             String[] dataArr = file.openFile();
-            for (int i = 0; i < dataArr.length; ++i) {
-                tasks.add(Parser.getTask(dataArr[i]));
+            for (String taskStr : dataArr) {
+                tasks.add(Parser.getTask(taskStr));
             }
         } catch (DukeException e) {
             System.out.println(e.print());
@@ -62,7 +62,7 @@ public class Storage {
      */
     public void save(List<Task> tasks) {
         try {
-            if (tasks.size() == 0) {
+            if (tasks.isEmpty()) {
                 WriteFile emptyData = new WriteFile(filePath);
                 emptyData.writeToFile("");
             } else {
