@@ -5,15 +5,29 @@ import sg.christopher.duke.entities.Event;
 import sg.christopher.duke.entities.Task;
 import sg.christopher.duke.entities.Todo;
 import sg.christopher.duke.io.DataManager;
+import sg.christopher.duke.ui.MainWindow;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
 import java.util.stream.Collectors;
 
 public class Duke {
 
     private static List<Task> savedItems = loadSavedItems();
+
+    private MainWindow mainWindowController;
+
+    public void setMainWindowController(MainWindow mw) {
+        mainWindowController = mw;
+    }
+
+    private void dukePrint(String message) {
+        mainWindowController.printDukeMessage(message);
+    }
+
+    public void printWelcome() {
+        dukePrint("Hello I'm Duke! What can I do for you?");
+    }
 
     /**
      * Hydrates the task data store with saved data from disk.
@@ -46,96 +60,91 @@ public class Duke {
         return savedItems.get(index);
     }
 
-    private static void doneHandler(String userInput) {
+    /**
+     * Removes saved tasks from disk, using its index.
+     *
+     * @param index index of the task to be removed
+     * @return task that is removed
+     */
+    public static Task removeItem(int index) {
+        Task removed = savedItems.remove(index);
+        DataManager.writeList(savedItems);
+        return removed;
+    }
+
+    private static String doneHandler(String userInput) {
         int taskNo;
         try {
             taskNo = Integer.parseInt(userInput.split(" ")[1]);
         } catch (ArrayIndexOutOfBoundsException aioobe) {
-            System.out.println("ERROR: No task no. found. Did you input the task no. of the task you'd like to mark as done?");
-            return;
+            return "ERROR: No task no. found. Did you input the task no. of the task you'd like to mark as done?";
         } catch (NumberFormatException nfe) {
-            System.out.println("ERROR: Unrecognized task. Please input the task no. of the task you'd like to mark as done.");
-            return;
+            return "ERROR: Unrecognized task. Please input the task no. of the task you'd like to mark as done.";
         }
+
         Task task;
         try {
             task = loadItem(taskNo - 1);
         } catch (IndexOutOfBoundsException ioobe) {
-            System.out.println("ERROR: Task no. not found. Does that task exist?");
-            return;
+            return "ERROR: Task no. not found. Does that task exist?";
         }
         task.markAsDone();
 
-        System.out.println("Nice! I've marked this task as done:");
-        System.out.println(taskNo + ". " + task);
+        return "Nice! I've marked this task as done:\n" + taskNo + ". " + task;
     }
 
-    private static void todoHandler(String userInput) {
+    private static String todoHandler(String userInput) {
         // Check for description
         if (userInput.split(" ").length < 2) {
-            System.out.println("ERROR: Description of todo cannot be empty.");
-            return;
+            return "ERROR: Description of todo cannot be empty.";
         }
         String description = userInput.replaceFirst("todo ", "");
         Todo todo = new Todo(description);
         saveItem(todo);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(todo);
-        printRemainingCount();
+        return "Got it. I've added this task:\n" + todo + printRemainingCount();
     }
 
-    private static void deadlineHandler(String userInput) {
+    private static String deadlineHandler(String userInput) {
         // Check for description
         if (userInput.split(" ").length < 2) {
-            System.out.println("ERROR: Description of deadline cannot be empty.");
-            return;
+            return "ERROR: Description of deadline cannot be empty.";
         }
         String[] input = userInput.replaceFirst("deadline ", "").split(" /by ");
 
         // Check for deadline in description
         if (input.length < 2) {
-            System.out.println("ERROR: Deadline not found. Did you input a deadline with `/by`?");
-            return;
+            return "ERROR: Deadline not found. Did you input a deadline with `/by`?";
         } else if (input.length > 2) {
-            System.out.println("ERROR: Multiple deadlines found. Please only input one deadline.");
-            return;
+            return "ERROR: Multiple deadlines found. Please only input one deadline.";
         }
         Deadline deadline = new Deadline(input[0], input[1]);
         saveItem(deadline);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(deadline);
-        printRemainingCount();
+        return "Got it. I've added this task:\n" + deadline + printRemainingCount();
     }
 
-    private static void eventHandler(String userInput) {
+    private static String eventHandler(String userInput) {
         // Check for description
         if (userInput.split(" ").length < 2) {
-            System.out.println("ERROR: Description of event cannot be empty.");
-            return;
+            return "ERROR: Description of event cannot be empty.";
         }
         String[] input = userInput.replaceFirst("event ", "").split(" /at ");
 
         // Check for dateTime in description
         if (input.length < 2) {
-            System.out.println("ERROR: Date/time not found. Did you input a date/time with `/at`?");
-            return;
+            return "ERROR: Date/time not found. Did you input a date/time with `/at`?";
         } else if (input.length > 2) {
-            System.out.println("ERROR: Multiple date/times found. Please only input one date/time.");
-            return;
+            return "ERROR: Multiple date/times found. Please only input one date/time.";
         }
 
         Event event = new Event(input[0], input[1]);
         saveItem(event);
-        System.out.println("Got it. I've added this task:");
-        System.out.println(event);
-        printRemainingCount();
+        return "Got it. I've added this task:\n" + event + printRemainingCount();
     }
 
-    private static void findHandler(String userInput) {
+    private static String findHandler(String userInput) {
         // Check for search term
         if (userInput.split(" ").length < 2) {
-            System.out.println("ERROR: Search term not found. Did you type a search term?");
-            return;
+            return "ERROR: Search term not found. Did you type a search term?";
         }
         String searchTerm = userInput.replaceFirst("find ", "").toLowerCase();
 
@@ -144,57 +153,52 @@ public class Duke {
         List<Task> foundTasks = savedItems.stream().filter(task -> task.getDescription().toLowerCase().contains(searchTerm)).collect(Collectors.toList());
 
         if (foundTasks.size() == 0) {
-            System.out.println("No task matching your search term was found. Perhaps try another search term?");
-            return;
+            return "No task matching your search term was found. Perhaps try another search term?";
         }
-        System.out.println("Here are the matching tasks in your list:");
+        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
         for (int i = 0; i < foundTasks.size(); ++i) {
             Task task = foundTasks.get(i);
-            System.out.println(i + 1 + ". " + task);
+            sb.append(i + 1 + ". " + task + "\n");
         }
+        return sb.toString();
     }
 
-    private static void lsHandler() {
+    private static String lsHandler() {
         if (savedItems.size() == 0) {
-            System.out.println("No tasks found. Start adding your first few tasks!");
-            return;
+            return "No tasks found. Start adding your first few tasks!";
         }
         assert savedItems.size() >= 1;
-        System.out.println("Here are the tasks in your list:");
+        StringBuilder sb = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < savedItems.size(); ++i) {
             Task task = loadItem(i);
-            System.out.println(i + 1 + ". " + task);
+            sb.append(i + 1 + ". " + task + "\n");
         }
-        printRemainingCount();
+        sb.append(printRemainingCount());
+        return sb.toString();
     }
 
-    private static void deleteHandler(String userInput) {
+    private static String deleteHandler(String userInput) {
         int taskNo;
         try {
             taskNo = Integer.parseInt(userInput.split(" ")[1]);
         } catch (ArrayIndexOutOfBoundsException aioobe) {
-            System.out.println("ERROR: No task no. found. Did you input the task no. of the task you'd like to delete?");
-            return;
+            return "ERROR: No task no. found. Did you input the task no. of the task you'd like to delete?";
         } catch (NumberFormatException nfe) {
-            System.out.println("ERROR: Unrecognized task. Please input the task no. of the task you'd like to delete.");
-            return;
+            return "ERROR: Unrecognized task. Please input the task no. of the task you'd like to delete.";
         }
 
         Task task;
         try {
-            task = savedItems.remove(taskNo - 1);
+            task = removeItem(taskNo - 1);
         } catch (IndexOutOfBoundsException ioobe) {
-            System.out.println("ERROR: Task no. not found. Does that task exist?");
-            return;
+            return "ERROR: Task no. not found. Does that task exist?";
         }
 
-        System.out.println("Noted. I've removed this task:");
-        System.out.println(taskNo + ". " + task);
-        printRemainingCount();
+        return "Noted. I've removed this task:\n" + taskNo + ". " + task + printRemainingCount();
     }
 
-    private static void printRemainingCount() {
-        System.out.println("You now have " + savedItems.size() + " tasks in the list.");
+    private static String printRemainingCount() {
+        return "\nYou now have " + savedItems.size() + " tasks in the list.";
     }
 
     private static CommandType getCommandType(String command) {
@@ -224,57 +228,31 @@ public class Duke {
         }
     }
 
-    public static void main(String[] args) {
-        System.out.println("Hello I'm Duke!");
-        System.out.println("What can I do for you?");
+    public static String getResponse(String userInput) {
+        String command = userInput.split(" ")[0];
 
-        String userInput;
-        Scanner scanner = new Scanner(System.in);
+        CommandType commandType = getCommandType(command);
 
-        while (true) {
-            System.out.print("$ ");
-            userInput = scanner.nextLine();
-            String command = userInput.split(" ")[0];
-
-            CommandType commandType = getCommandType(command);
-
-            switch (commandType) {
-            case EXIT:
-                System.out.println("Bye. Hope to see you again soon!");
-                return;
-            case TODO:
-                todoHandler(userInput);
-                break;
-            case DEADLINE:
-                deadlineHandler(userInput);
-                break;
-            case EVENT:
-                eventHandler(userInput);
-                break;
-            case DELETE:
-                deleteHandler(userInput);
-                break;
-            case FIND:
-                findHandler(userInput);
-                break;
-            case DONE:
-                doneHandler(userInput);
-                break;
-            case LIST:
-                lsHandler();
-                break;
-            case UNRECOGNISED:
-                System.out.println("ERROR: Unrecognised command. Did you make a typo?");
-                break;
-            }
+        switch (commandType) {
+        case EXIT:
+            return "Bye. Hope to see you again soon!";
+        case TODO:
+            return todoHandler(userInput);
+        case DEADLINE:
+            return deadlineHandler(userInput);
+        case EVENT:
+            return eventHandler(userInput);
+        case DELETE:
+            return deleteHandler(userInput);
+        case FIND:
+            return findHandler(userInput);
+        case DONE:
+            return doneHandler(userInput);
+        case LIST:
+            return lsHandler();
+        case UNRECOGNISED:
+            return "ERROR: Unrecognised command. Did you make a typo?";
         }
-    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
+        return null;
     }
 }

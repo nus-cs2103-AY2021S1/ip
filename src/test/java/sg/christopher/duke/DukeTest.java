@@ -12,7 +12,7 @@ public class DukeTest {
         InputStream normalSystemIn = System.in;
         ByteArrayInputStream in = new ByteArrayInputStream("exit".getBytes());
         System.setIn(in);
-        Duke.main(new String[0]);
+        // Duke.main(new String[0]);
         System.setIn(normalSystemIn);
         return;
     }
