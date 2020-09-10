@@ -4,6 +4,7 @@ import java.time.DateTimeException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.Objects;
@@ -86,33 +87,26 @@ public class Runner {
     }
 
     void find(String[] args) {
-        String searchText = "";
-        for (int i = 1; i < args.length; i++) {
-            searchText += args[i];
-        }
-        class Entry {
-            private int index;
-            private Task task;
-            Entry(int index, Task task) {
-                this.index = index;
-                this.task = task;
-            }
-        }
+        String[] argsWithoutName = Arrays.copyOfRange(args, 1, args.length);
+        String searchText = String.join(" ", argsWithoutName);
 
-        List<Entry> result = new ArrayList<>();
+        List<Task> results = new ArrayList<>();
+        List<Integer> resultIndices = new ArrayList<>();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             if (task.getContent().contains(searchText)) {
-                result.add(new Entry(i + 1, task));
+                results.add(task);
+                resultIndices.add(i + 1);
             }
         }
-        if (result.isEmpty()) {
+        assert results.size() == resultIndices.size();
+        if (results.isEmpty()) {
             Output.printMessage("Sorry, no related tasks found!");
         } else {
             Output.printMessage("Here are the matching tasks:");
-            for (Entry entry : result) {
+            for (int i = 0; i < results.size(); i++) {
                 Output.printMessage(String.format("%d. %s",
-                        entry.index, entry.task));
+                        resultIndices.get(i), results.get(i)));
             }
         }
     }

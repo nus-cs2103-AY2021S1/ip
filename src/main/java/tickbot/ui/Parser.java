@@ -15,6 +15,7 @@ public class Parser {
             return true; // empty line, continue inputing
         }
         String[] args = command.split("\\s+");
+        assert args.length > 1; // command must have a name
         switch (args[0]) {
         case "bye": {
             Output.printMessage("See you next time!");

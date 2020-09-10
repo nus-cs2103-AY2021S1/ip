@@ -44,6 +44,9 @@ public class GraphicsUi extends Application implements Ui {
             @Override
             public void handle(MouseEvent event) {
                 String command = userInput.getText();
+                Output.setPrefix("==> ");
+                Output.printMessage(command);
+                Output.setPrefix("");
                 boolean running = parser.executeCommand(command);
                 if (!running) {
                     Platform.exit();

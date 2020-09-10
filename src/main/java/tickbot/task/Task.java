@@ -14,6 +14,7 @@ public abstract class Task {
     private boolean isCompleted;
 
     Task(boolean isCompleted, String content, LocalDateTime time) {
+        assert content != null; // content cannot be null
         this.content = content;
         this.isCompleted = isCompleted;
         this.time = time;
