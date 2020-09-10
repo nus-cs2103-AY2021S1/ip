@@ -42,7 +42,16 @@ public class Task {
     }
 
     /**
-     * Gets the priority label.
+     * Gets the priority of the task.
+     *
+     * @return Priority of the task.
+     */
+    public Priority getPriority() {
+        return this.priority;
+    }
+
+    /**
+     * Gets the priority label of the task.
      *
      * @return String describing the priority of the task.
      */

@@ -5,6 +5,6 @@ package duke;
  */
 public enum Command {
     BYE, LIST,
-    DELETE, DONE, GET, FIND,
+    DELETE, DONE, FILTER, GET, FIND,
     TODO, EVENT, DEADLINE
 }

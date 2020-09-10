@@ -15,6 +15,7 @@ public class Parser {
     private static final String ERR_LIST_WITH_USER_ACTION = "Do you mean \"list\"?\n";
     private static final String ERR_DELETE_WITHOUT_USER_ACTION = "Which task do you want to delete?\n";
     private static final String ERR_DONE_WITHOUT_USER_ACTION = "Which task have you done?\n";
+    private static final String ERR_FILTER_WITHOUT_USER_ACTION = "Which priority of tasks do you want to get?\n";
     private static final String ERR_GET_WITHOUT_USER_ACTION = "Which date you want to get tasks from?\n";
     private static final String ERR_FIND_WITHOUT_USER_ACTION = "Include a search term.\n";
     private static final String ERR_TODO_WITHOUT_USER_ACTION = "The description of a todo cannot be empty.\n";
@@ -96,6 +97,8 @@ public class Parser {
             return Command.DELETE;
         case "done":
             return Command.DONE;
+        case "filter":
+            return Command.FILTER;
         case "get":
             return Command.GET;
         case "find":
@@ -123,6 +126,8 @@ public class Parser {
             throw new DukeInputException(Parser.ERR_DELETE_WITHOUT_USER_ACTION);
         case DONE:
             throw new DukeInputException(Parser.ERR_DONE_WITHOUT_USER_ACTION);
+        case FILTER:
+            throw new DukeInputException(Parser.ERR_FILTER_WITHOUT_USER_ACTION);
         case GET:
             throw new DukeInputException(Parser.ERR_GET_WITHOUT_USER_ACTION);
         case FIND:

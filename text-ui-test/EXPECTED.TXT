@@ -64,6 +64,14 @@ Here are the 4 tasks in your list:
 3. [D][M][✘] return book (by: 01 Sep 2020, 06:00 PM)
 4. [E][H][✘] project meeting (at: 01 Sep 2020, 08:00 AM)
 
+ERROR: Which priority of tasks do you want to get?
+
+ERROR: The priority of a task can only be low, medium or high.
+
+Here are the low-priority task(s):
+1. [T][L][✘] buy bread
+2. [T][L][✓] borrow book
+
 ERROR: Which date you want to get tasks from?
 
 ERROR: Enter the date as "dd-MM-yyyy".
@@ -71,6 +79,8 @@ ERROR: Enter the date as "dd-MM-yyyy".
 Here are the task(s) from 01 Sep 2020:
 1. [D][M][✘] return book (by: 01 Sep 2020, 06:00 PM)
 2. [E][H][✘] project meeting (at: 01 Sep 2020, 08:00 AM)
+
+You have no tasks from 02 Sep 2020.
 
 Nice! I've marked this as done:
 [E][H][✓] project meeting (at: 01 Sep 2020, 08:00 AM)
@@ -102,6 +112,11 @@ Here are the 4 tasks in your list:
 2. [T][L][✓] borrow book
 3. [D][M][✘] return book (by: 01 Sep 2020, 06:00 PM)
 4. [T][L][✘] join sports club
+
+Here are the medium-priority task(s):
+1. [D][M][✘] return book (by: 01 Sep 2020, 06:00 PM)
+
+You have no high-priority tasks.
 
 Here are the task(s) from 01 Sep 2020:
 1. [D][M][✘] return book (by: 01 Sep 2020, 06:00 PM)

@@ -72,6 +72,8 @@ public class Executor {
             return deleteTask(userAction);
         case DONE:
             return markTaskAsDone(userAction);
+        case FILTER:
+            return filterPriority(userAction);
         case GET:
             return displayTasksFromDate(userAction);
         case FIND:
@@ -157,6 +159,49 @@ public class Executor {
     }
 
     /**
+     * Filters the list of tasks by the required priority.
+     *
+     * @param priorityString String describing the priority of tasks to filter by.
+     * @return String describing all the tasks with a given priority.
+     * @throws DukeInputException If priority String is invalid.
+     */
+    private String filterPriority(String priorityString) throws DukeInputException {
+        Priority priority;
+        switch (priorityString) {
+        case "low":
+            priority = Priority.LOW;
+            break;
+        case "medium":
+            priority = Priority.MEDIUM;
+            break;
+        case "high":
+            priority = Priority.HIGH;
+            break;
+        default:
+            throw new DukeInputException(Executor.ERR_TASK_INVALID_PRIORITY);
+        }
+
+        StringBuilder filteredTasks = new StringBuilder();
+        Stream<Task> taskStream = this.taskList.getTaskList().stream();
+        AtomicInteger counter = new AtomicInteger();
+
+        taskStream
+                .filter(x -> x.getPriority() == priority)
+                .forEach(x -> filteredTasks
+                        .append(counter.incrementAndGet())
+                        .append(". ")
+                        .append(x.toString())
+                        .append("\n"));
+
+        if (filteredTasks.length() == 0) {
+            return this.ui.displayMessage("You have no " + priorityString + "-priority tasks.\n");
+        }
+
+        String taskMessage = "Here are the " + priorityString + "-priority task(s):\n" + filteredTasks.toString();
+        return this.ui.displayMessage(taskMessage);
+    }
+
+    /**
      * Displays the tasks with the date required by the user.
      *
      * @param dateString String describing the date of tasks required.
@@ -178,7 +223,7 @@ public class Executor {
                         .append("\n"));
 
         if (requiredTasks.length() == 0) {
-            return this.ui.displayMessage("You have no tasks from " + requiredDate + ".");
+            return this.ui.displayMessage("You have no tasks from " + requiredDate + ".\n");
         }
 
         String taskMessage = "Here are the task(s) from " + requiredDate + ":\n" + requiredTasks.toString();
