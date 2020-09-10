@@ -13,7 +13,7 @@ public class Ui {
             + 1 + " task(s) in the past week." + "\n      Keep up the good work!!!");
     private Scanner scanner = new Scanner(System.in);
 
-    public void run(List<Task> lst) throws Exception {
+    public void run(TaskList lst) throws Exception {
         // set up greetings and old list from file
         System.out.println(messageHello);
         System.out.println(new Parser("list").getRespond(lst));

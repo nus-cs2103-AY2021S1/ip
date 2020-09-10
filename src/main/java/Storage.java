@@ -16,7 +16,7 @@ public class Storage {
         this.file = new File(path.toString());
     }
 
-    public void writeToList(List<Task> lst) throws IllegalTaskTypeException {
+    public void writeToList(TaskList lst) throws IllegalTaskTypeException {
         try {
             Scanner scanner = new Scanner(file);
             while (scanner.hasNextLine()) {
@@ -28,7 +28,7 @@ public class Storage {
         }
     }
 
-    public void writeToFile(List<Task> lst) throws IOException {
+    public void writeToFile(TaskList lst) throws IOException {
         FileWriter fileWriter = new FileWriter(file);
         String content;
         for (int i = 0; i < lst.size(); i++) {

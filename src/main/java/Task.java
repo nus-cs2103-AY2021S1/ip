@@ -50,4 +50,8 @@ public class Task {
     public String getStoreMessage() {
         return "";
     }
+
+    public String print() {
+        return getTypeLetter() + getStatusIcon() + getPrintMessage();
+    }
 }

@@ -7,7 +7,7 @@ import java.util.ArrayList;
 public class Duke {
     private Storage storage;
     private Ui ui;
-    private List<Task> lst = new ArrayList<>();
+    private TaskList lst = new TaskList();
 
     public Duke() {}
     public Duke(Path filePath) {
@@ -15,14 +15,10 @@ public class Duke {
         storage = new Storage(filePath);
     }
 
-    public List<Task> getLst() {
-        return lst;
-    }
-
     public void run() throws Exception {
-        storage.writeToList(lst);
-        ui.run(lst);
-        storage.writeToFile(lst);
+        start();
+        uiRun();
+        end();
     }
 
     public void start() throws Exception {
@@ -31,6 +27,10 @@ public class Duke {
 
     public void end() throws Exception {
         storage.writeToFile(lst);
+    }
+
+    public void uiRun() throws Exception {
+        ui.run(lst);
     }
 
     public static void main(String[] args) throws Exception {
