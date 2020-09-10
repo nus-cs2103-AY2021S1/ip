@@ -38,7 +38,7 @@ public class Parser {
     }
 
     /**
-     * Parse the command given in string into a Command that it represents.
+     * Parses the command given in string into a Command that it represents.
      *
      * @param fullCommand The command that the user input into the chatbot.
      * @return Type of command that the input represents.
@@ -52,87 +52,76 @@ public class Parser {
             return new HelpCommand();
         } else if (fullCommand.equals("list")) {
             return new ListCommand();
-        } else if (firstWord.equals("done")) {
-            if (inputDataWords.length != 2) {
-                throw new DukeException("Sorry, didn't get that :( Try again or press 'help' to find out more!");
-            } else {
-                // check if second word is an integer
-                if (isInteger(inputDataWords[1])) {
-                    int taskNumber = Integer.parseInt(inputDataWords[1]);
-                    return new DoneCommand(taskNumber);
-                } else {
-                    throw new DukeException("Hmm.. I dont think you have that task in your list.");
-                }
-            }
-        } else if (firstWord.equals("delete")) {
-            if (inputDataWords.length != 2) {
-                throw new DukeException("Sorry, didn't get that :( Try again or press 'help' to find out more!");
-            } else {
-                // check if second word is an integer
-                if (isInteger(inputDataWords[1])) {
-                    int taskNumber = Integer.parseInt(inputDataWords[1]);
-                    return new DeleteCommand(taskNumber);
-                } else {
-                    throw new DukeException("Hmm.. I dont think you have that task in your list.");
-                }
-            }
-        } else if (firstWord.equals("todo")) {
-            if (inputDataWords.length < 2) {
-                throw new DukeException("I can't add a task without a description :(");
-            } else {
-                ToDo task = new ToDo(fullCommand.split("todo ")[1]);
-                return new AddCommand(task);
-            }
-        } else if (firstWord.equals("deadline")) {
-            if (inputDataWords.length < 2) {
-                throw new DukeException("I can't add a task without a description :(");
-            } else if (fullCommand.split("/by ").length < 2 || inputDataWords[1].equals("/by")) {
-                throw new DukeException("The deadline of this task is not provided.\n"
-                        + "Please re-enter the desired deadline task\n"
-                        + "(e.g. deadline xxx /by yyyy-mm-dd HH:MM)");
-            } else {
-                String byString = fullCommand.split("/by ")[1];
-                if (isValidFormat(byString)) {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-                    LocalDateTime byLocalDate = LocalDateTime.parse(byString, formatter);
-
-                    Deadline task = new Deadline(
-                            fullCommand.split("deadline ")[1].split(" /by ")[0], byLocalDate);
-                    return new AddCommand(task);
-                } else {
-                    throw new DukeException("Please enter a valid deadline task\n"
-                            + "(e.g. deadline xxx /by yyyy-mm-dd HH:mm)");
-                }
-            }
-        } else if (firstWord.equals("event")) {
-            if (fullCommand.split(" ").length < 2 || inputDataWords[1].equals("/at")) {
-                throw new DukeException("I can't add a task without description :(");
-            } else if (fullCommand.split("/at ").length < 2) {
-                throw new DukeException("The duration of this task cannot be empty.\n"
-                        + "Please re-enter the desired event task\n"
-                        + "(e.g. event xxx /at yyyy-mm-dd HH:mm)");
-            } else {
-                String atString = fullCommand.split("/at ")[1];
-                if (isValidFormat(atString)) {
-                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-                    LocalDateTime atLocalDate = LocalDateTime.parse(atString, formatter);
-
-                    Event task = new Event(
-                            fullCommand.split("event ")[1].split(" /at ")[0], atLocalDate);
-                    return new AddCommand(task);
-                } else {
-                    throw new DukeException("Please enter a valid event task\n"
-                            + "(e.g. event xxx /at yyyy-mm-dd HH:mm)");
-                }
-            }
         } else if (firstWord.equals("find")) {
             String keyword = fullCommand.split("find ")[1];
             return new FindCommand(keyword);
         } else if (fullCommand.equals("bye")) {
             return new ExitCommand();
+        } else if (firstWord.equals("done")) {
+            if (inputDataWords.length != 2) {
+                throw new InvalidCommandException();
+            } else if (!isInteger(inputDataWords[1])) { // check if second word is an integer
+                throw new InvalidTaskException();
+            }
+
+            int taskNumber = Integer.parseInt(inputDataWords[1]);
+            return new DoneCommand(taskNumber);
+        } else if (firstWord.equals("delete")) {
+            if (inputDataWords.length != 2) {
+                throw new InvalidCommandException();
+            } else if (!isInteger(inputDataWords[1])) { // check if second word is an integer
+                throw new InvalidTaskException();
+            }
+
+            int taskNumber = Integer.parseInt(inputDataWords[1]);
+            return new DeleteCommand(taskNumber);
+        } else if (firstWord.equals("todo")) {
+            if (inputDataWords.length < 2) {
+                throw new EmptyDescriptionException();
+            }
+
+            ToDo task = new ToDo(fullCommand.split("todo ")[1]);
+            return new AddCommand(task);
+        } else if (firstWord.equals("deadline")) {
+            if (inputDataWords.length < 2) {
+                throw new EmptyDescriptionException();
+            } else if (fullCommand.split("/by ").length < 2 || inputDataWords[1].equals("/by")) {
+                throw new EmptyDeadlineException();
+            }
+
+            String byString = fullCommand.split("/by ")[1];
+            if (!isValidFormat(byString)) {
+                throw new InvalidDeadlineFormatException();
+            }
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime byLocalDate = LocalDateTime.parse(byString, formatter);
+
+            Deadline task = new Deadline(
+                    fullCommand.split("deadline ")[1].split(" /by ")[0], byLocalDate);
+            return new AddCommand(task);
+
+        } else if (firstWord.equals("event")) {
+            if (fullCommand.split(" ").length < 2 || inputDataWords[1].equals("/at")) {
+                throw new EmptyDescriptionException();
+            } else if (fullCommand.split("/at ").length < 2) {
+                throw new EmptyEventTimingException();
+            }
+
+            String atString = fullCommand.split("/at ")[1];
+            if (!isValidFormat(atString)) {
+                throw new InvalidEventFormatException();
+            }
+
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime atLocalDate = LocalDateTime.parse(atString, formatter);
+
+            Event task = new Event(
+                    fullCommand.split("event ")[1].split(" /at ")[0], atLocalDate);
+            return new AddCommand(task);
         } else {
             // invalid commands
-            throw new DukeException("Sorry, didn't get that :( Try again or press 'help' to find out more!");
+            throw new InvalidCommandException();
         }
     }
 }

@@ -9,6 +9,7 @@ public class Duke {
 
     /**
      * Creates a Duke object that loads information from specified filePath.
+     *
      * @param filePath The text file which Duke loads information from.
      */
     public Duke(String filePath) {
@@ -27,7 +28,8 @@ public class Duke {
     }
 
     /**
-     * Generate response to user input from GUI.
+     * Generates a response to user input from GUI.
+     *
      * @param input The user input.
      * @return Duke's response.
      */
@@ -45,6 +47,7 @@ public class Duke {
     /**
      * Displays a welcome message and runs the chatbot,
      * continuously receiving user input and executing them accordingly.
+     * Used for running on CLI.
      */
     public void run() {
         ui.showWelcome();
