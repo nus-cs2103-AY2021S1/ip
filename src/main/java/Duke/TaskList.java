@@ -129,13 +129,10 @@ public class TaskList {
      */
     public String fileText() {
         String representation = "";
-        if (this.count > 0) {
-            for (int i = 0; i < this.count - 1; i++) {
-                representation += (list.get(i).getFileSaveText() + "\n");
-            }
-            representation += list.get(this.count - 1).getFileSaveText();
+        for (int i = 0; i < this.count; i++) {
+            representation += (list.get(i).getFileSaveText() + "\n");
         }
-        return representation;
+        return representation.trim();
     }
 
     /**
@@ -145,12 +142,10 @@ public class TaskList {
      */
     public String findTasks(String keyword) {
         String representation = "";
-        if (this.count > 0) {
-            for (int i = 0; i < this.count; i++) {
-                Task task = list.get(i);
-                if (task.getDescription().indexOf(keyword) != -1) {
-                    representation += (i + 1 + ". " + list.get(i) + "\n");
-                }
+        for (int i = 0; i < this.count; i++) {
+            Task task = list.get(i);
+            if (task.getDescription().indexOf(keyword) != -1) {
+                representation += (i + 1 + ". " + list.get(i) + "\n");
             }
         }
         return representation.trim();
