@@ -7,7 +7,7 @@ import java.time.format.DateTimeFormatter;
 
 
 /**
- * Represents a type of <code>Task</code> that has a date
+ * Represents a type of {@code Task} that has a date
  * by which it should be finished.
  */
 public class Deadline extends Task {

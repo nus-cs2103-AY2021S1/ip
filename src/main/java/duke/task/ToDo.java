@@ -4,7 +4,7 @@ import duke.Task;
 
 
 /**
- * Represents the simplest form of <code>Task</code>
+ * Represents the simplest form of {@code Task}
  * that only contains a name.
  */
 public class ToDo extends Task {

@@ -44,17 +44,11 @@ public class TaskList implements Cloneable {
         return target >= 0 && target < tasks.size();
     }
 
-    /**
-     * Adds one count to pending task.
-     */
     public void incrementPendingTasks() {
         this.numOfPendingTasks++;
         assert numOfPendingTasks > 0 : "Amount of pending tasks was negative; something went wrong.";
     }
 
-    /**
-     * Subtracts one count to pending task.
-     */
     public void decrementPendingTasks() {
         this.numOfPendingTasks--;
         assert numOfPendingTasks >= 0 : "Called decrement to an empty list; should be impossible.";
@@ -89,7 +83,7 @@ public class TaskList implements Cloneable {
      * Attempts to check a Task as done, then display a success message.
      * If the checking as done fails, a fail message is displayed instead.
      *
-     * @param parser
+     * @param parser current {@code Parser}
      */
     public String done(Parser parser) {
         try {
@@ -110,7 +104,7 @@ public class TaskList implements Cloneable {
      * Attempts to delete a Task, then display a success message
      * If the deletion fails, a fail message is displayed instead
      *
-     * @param parser
+     * @param parser current {@code Parser}
      */
     public String delete(Parser parser) {
         try {
@@ -133,7 +127,7 @@ public class TaskList implements Cloneable {
      * Attempts to add a Task to the list, then display a success message.
      * If the addition fails, a fail message is displayed instead.
      *
-     * @param parser
+     * @param parser current {@code Parser}
      */
     public String add(Parser parser) {
         try {
@@ -161,7 +155,7 @@ public class TaskList implements Cloneable {
      * Displays a list of Tasks that contains a given String.
      * If not found, displays an alternative null message.
      *
-     * @param parser
+     * @param parser current {@code Parser}
      */
     public String find(Parser parser) {
         List<Task> matches = getMatchingTask(parser.comparator);
@@ -170,14 +164,14 @@ public class TaskList implements Cloneable {
             return Ui.displayMessage(NO_MATCH);
         } else {
             int count = 1;
-            String toReturn = String.format("Found %d match(es) for '%s':", matches.size(), parser.comparator);
+            StringBuilder toReturn = new StringBuilder(String.format("Found %d match(es) for '%s':", matches.size(), parser.comparator));
 
             for (Task task : matches) {
-                toReturn += String.format("   %d. %s", count, task.toString());
+                toReturn.append(String.format("   %d. %s", count, task.toString()));
                 count++;
             }
 
-            return Ui.displayMessage(toReturn);
+            return Ui.displayMessage(toReturn.toString());
         }
     }
 
@@ -206,7 +200,7 @@ public class TaskList implements Cloneable {
      * Creates a clone of the current TaskList (for testing purposes).
      *
      * @return a shallow copy of this with no element references.
-     * @throws CloneNotSupportedException
+     * @throws CloneNotSupportedException when cloning process is invalid.
      */
     @Override
     protected Object clone() throws CloneNotSupportedException {

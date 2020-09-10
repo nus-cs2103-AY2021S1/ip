@@ -28,10 +28,10 @@ public class Parser {
 
     /**
      * Sets the command line of <code>Parser</code> to
-     * a given string inputted via CLI
+     * a given string inputted via CLI.
      *
-     * @param commandLine The line typed into CLI
-     * @throws Exception
+     * @param commandLine The line typed into CLI.
+     * @throws Exception at anytime the {@code Parser} experiences exceptions.
      */
     public void setCommandLine(String commandLine) throws Exception {
         this.commandLine = commandLine;
@@ -41,8 +41,8 @@ public class Parser {
     /**
      * Parses the command line selectively based on the first word.
      *
-     * @param commandLine The line typed into CLI
-     * @throws Exception When the parsing is unsuccessful
+     * @param commandLine The line typed into CLI.
+     * @throws Exception When the parsing is unsuccessful.
      */
     private void parseForCommand(String commandLine) throws Exception {
         String[] words = commandLine.split(" ", 2);
