@@ -3,8 +3,9 @@ package duke;
 import java.io.File;
 
 public class Duke {
-    private TaskList tasks;
     public static final String FILE_PATH = "prevTasks.txt";
+
+    private TaskList tasks;
 
     public Duke() {
         this.tasks = new TaskList();
@@ -52,11 +53,18 @@ public class Duke {
         return Formatter.formatResponse(logo);
     }
 
+    /**
+     * loadPrevTasks reads all tasks from prevTasks.txt,
+     * and load them into Hal9000.
+     */
     public void loadPrevTasks() {
         File prevTasks = FileOpener.openFile(FILE_PATH);
         TaskLoader.loadTasks(prevTasks, this.getTasks());
     }
 
+    /**
+     * saveCurrentTasks saves the state of TaskList into prevTasks.txt
+     */
     public void saveCurrentTasks() {
         File prevTasks = FileOpener.openFile(FILE_PATH);
         TaskStorage.saveTask(prevTasks, this.getTasks());

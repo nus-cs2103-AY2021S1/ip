@@ -7,14 +7,9 @@ import javafx.collections.ObservableList; // ??
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.geometry.Pos;
-import javafx.geometry.Insets;
-import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
-import javafx.scene.layout.CornerRadii;
-import javafx.scene.paint.Color;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
@@ -26,6 +21,12 @@ public class DialogBox extends HBox {
     @FXML
     private ImageView profilePic;
 
+    /**
+     * DialogBox Node is a component of the chat box.
+     * It wraps around the text and enable formatting of text and how long we want the text to be.
+     * @param text text to be displayed
+     * @param img profile picture at the side
+     */
     public DialogBox(String text, Image img) {
         // Iteration 2: Adding this as FXML Controller
         this.userText = new Label();
