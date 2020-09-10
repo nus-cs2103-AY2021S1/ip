@@ -19,3 +19,8 @@ Classes ignored for testing (and why):
 
 6. StorageManager
     Not very sure how to test the IO
+
+7. Commands:
+    AddCommand, ExitCommand, FindCommand, HelpCommand, ListCommand
+    Implementations are trivial and dependent on the other classes that are tested.
+    Testing DoneCommand and DeleteCommand because they have some form of input validation.

@@ -42,7 +42,7 @@ public class InputParserTest {
     public void testParseDeadlineMissingField() {
         assertThrows(MissingFieldException.class, (
         ) -> UserInputParser.parse("deadline CS2103 webcast /by"));
-        assertThrows(InvalidInstructionFormatException.class, (
+        assertThrows(MissingFieldException.class, (
         ) -> UserInputParser.parse("deadline /by 12/12/2020 06/06/00\n"));
         assertThrows(MissingFieldException.class, (
         ) -> UserInputParser.parse("deadline CS2103 webcast /by 12/12/2020"));
@@ -97,7 +97,7 @@ public class InputParserTest {
     public void testParseEventMissingField() {
         assertThrows(MissingFieldException.class, (
         ) -> UserInputParser.parse("event CS2100 Lab /at"));
-        assertThrows(InvalidInstructionFormatException.class, (
+        assertThrows(MissingFieldException.class, (
         ) -> UserInputParser.parse("event /at 12/12/2020 06/06/00\n"));
         assertThrows(MissingFieldException.class, (
         ) -> UserInputParser.parse("event CS2100 Lab /at 12/12/2020\n"));
