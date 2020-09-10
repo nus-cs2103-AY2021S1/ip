@@ -58,6 +58,14 @@ public class CommandHandler {
                 String subName = Parser.name(input);
                 String result = taskList.find(subName);
                 output.append(Ui.showFindTask(result));
+            } else if (mode == Mode.TAG) {
+                //Tag task
+                int order = Parser.order(input);
+                String tagName = Parser.getTag(input);
+                Task task = taskList.setTag(order, tagName);
+                storage.setTag(order, tagName);
+                output.append(Ui.showTaggedTask(task));
+
             }
         } catch (DukeException | IOException e) {
 

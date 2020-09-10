@@ -21,11 +21,16 @@ public class Deadline extends Task {
 
     @Override
     public String getParsedData() {
-        return "D" + "/" + String.valueOf(super.isDone) + "/" + super.name + "/" + this.by;
+        String[] args = new String[]{"D", String.valueOf(super.isDone), super.tag, super.name, this.by};
+        return String.join(Task.DELIMITER, args);
     }
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + this.byFormat + ")";
+        String tag = "";
+        if (!super.tag.equals("")) {
+            tag = Task.TAG_ICON + super.tag;
+        }
+        return "[D]" + super.toString() + " (by: " + this.byFormat + ")" + tag;
     }
 }

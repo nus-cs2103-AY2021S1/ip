@@ -70,4 +70,7 @@ public class Ui {
         return e.getMessage();
     }
 
+    public  static String showTaggedTask(Task task){
+        return "Noted. The following task has been tagged!" + "\n" + task.toString() + "\n";
+    }
 }

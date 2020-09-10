@@ -63,15 +63,15 @@ public class Storage {
             switch (inputSplit[0]) {
                 case "T":
                     // two inputs
-                    task = new ToDo(inputSplit[2]);
+                    task = new ToDo(inputSplit[3]);
                     break;
                 case "D":
                     //three inputs
-                    task = new Deadline(inputSplit[2], inputSplit[3]);
+                    task = new Deadline(inputSplit[3], inputSplit[4]);
                     break;
                 case "E":
                     //three inputs
-                    task = new Event(inputSplit[2], inputSplit[3]);
+                    task = new Event(inputSplit[3], inputSplit[4]);
                     break;
                 default:
                     continue;
@@ -80,6 +80,12 @@ public class Storage {
             if (Boolean.parseBoolean(inputSplit[1])) {
                 task.setDone();
             }
+
+            String tagName = inputSplit[2];
+            if (!tagName.equals("")){
+                task.setTag(tagName);
+            }
+
             dukeList.add(task);
 
         }
@@ -100,24 +106,10 @@ public class Storage {
      * Marks task as done in the data file
      *
      * @param order which order task to overwrite as done.
-     * @throws IOException
+     * @throws IOException thrown when file cannot be found.
      */
     public void markDoneData(int order) throws IOException {
-        String newData = "";
-        Scanner reader = new Scanner(f);
-
-        for (int i = 0; reader.hasNextLine(); i++) {
-            if (i == order - 1) {
-                String[] oldData = reader.nextLine().split("/");
-                oldData[1] = "True";
-                String parsedData = String.join("/", oldData);
-                newData = newData + parsedData + "\n";
-            } else {
-                newData = newData + reader.nextLine() + "\n";
-            }
-        }
-
-        writeData(newData, false);
+        editData(order, "true", 1);
     }
 
     /**
@@ -154,5 +146,40 @@ public class Storage {
         BufferedWriter bw = new BufferedWriter(new FileWriter(this.dir + "/" + this.fileName, isAppend));
         bw.write(text);
         bw.close();
+    }
+
+    /**
+     * Sets Tagname of Task.
+     *
+     * @param order which order task to setTag.
+     * @param tagName name of tag.
+     * @throws IOException thrown when file cannot be found.
+     */
+    public void setTag(int order, String tagName) throws IOException {
+        editData(order, tagName, 2);
+    }
+
+    /**
+     * editData of Task.
+     *
+     * @param order which order task to setTag.
+     * @throws IOException thrown when file cannot be found.
+     */
+    public void editData(int order, String data, int type) throws IOException{
+        String newData = "";
+        Scanner reader = new Scanner(f);
+
+        for (int i = 0; reader.hasNextLine(); i++) {
+            if (i == order - 1) {
+                String[] oldData = reader.nextLine().split("/");
+                oldData[type] = data;
+                String parsedData = String.join("/", oldData);
+                newData = newData + parsedData + "\n";
+            } else {
+                newData = newData + reader.nextLine() + "\n";
+            }
+        }
+
+        writeData(newData, false);
     }
 }
