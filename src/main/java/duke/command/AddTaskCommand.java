@@ -42,12 +42,11 @@ public class AddTaskCommand extends Command {
 
     /**
      * Executes the AddTaskCommand.
-     * The Task is first created and added the TaskList, before being stored in local storage.
-     * Then, a message is printed to indicate the Task was successfully created.
      * @param list A TaskList containing the user's Tasks.
      * @param storage A Storage object that handles the storage of tasks in local storage, allowing them to persist.
-     * @throws StorageException if Task cannot be stored in local storage.
-     * @throws InvalidTaskException if details provided of Task to be created are invalid.
+     * @return A String containing a user message, stating the task that was successfully added.
+     * @throws StorageException If Task cannot be stored in local storage.
+     * @throws InvalidTaskException If details provided of Task to be created are invalid.
      */
     @Override
     public String execute(TaskList list, Storage storage) throws StorageException, InvalidTaskException {

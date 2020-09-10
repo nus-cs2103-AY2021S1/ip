@@ -18,10 +18,10 @@ public class CommandParser {
      * Processes String value commands given by the user and returns the relevant command.
      * @param command A String value which is the user input.
      * @return A Command corresponding to user input.
-     * @throws UnknownCommandException if the Command type cannot be determined from user input.
-     * @throws DateParseException if the user input contains a date object that cannot be parsed.
-     * @throws IncompleteTaskException if user input contains incorrect or insufficient information for task creation.
-     * @throws InvalidTaskException if task index provided by user is invalid or missing.
+     * @throws UnknownCommandException If the Command type cannot be determined from user input.
+     * @throws DateParseException If the user input contains a date object that cannot be parsed.
+     * @throws IncompleteTaskException If user input contains incorrect or insufficient information for task creation.
+     * @throws InvalidTaskException If task index provided by user is invalid or missing.
      */
     public static Command parseCommand(String command) throws UnknownCommandException, DateParseException,
             IncompleteTaskException, InvalidTaskException, InvalidSearchException {
@@ -75,7 +75,7 @@ public class CommandParser {
      * Parses user input to create a DoneCommand.
      * @param command A String value which is the user input.
      * @return A DoneCommand that when executed, marks a specified task as completed.
-     * @throws InvalidTaskException if task index provided by user is invalid or missing.
+     * @throws InvalidTaskException If task index provided by user is invalid or missing.
      */
     private static DoneCommand parseDoneCommand(String command) throws InvalidTaskException {
         try {
@@ -90,7 +90,7 @@ public class CommandParser {
      * Parses user input to create a DeleteCommand.
      * @param command A String value which is the user input.
      * @return A DeleteCommand that when executed, deletes a specified task.
-     * @throws InvalidTaskException if task index provided by user is invalid or missing.
+     * @throws InvalidTaskException If task index provided by user is invalid or missing.
      */
     private static DeleteCommand parseDeleteCommand(String command) throws InvalidTaskException {
         try {
@@ -105,9 +105,9 @@ public class CommandParser {
      * Parses user input to create a AddTaskCommand.
      * @param command A String value which is the user input.
      * @return A AddTaskCommand that when executed, adds a Task with the specified details.
-     * @throws IncompleteTaskException if user input contains incorrect or insufficient information for task creation.
-     * @throws UnknownCommandException if the Task type cannot be determined from user input.
-     * @throws DateParseException if the user input contains a date object that cannot be parsed.
+     * @throws IncompleteTaskException If user input contains incorrect or insufficient information for task creation.
+     * @throws UnknownCommandException If the Task type cannot be determined from user input.
+     * @throws DateParseException If the user input contains a date object that cannot be parsed.
      */
     private static AddTaskCommand parseAddTaskCommand(String command) throws IncompleteTaskException,
             UnknownCommandException, DateParseException {

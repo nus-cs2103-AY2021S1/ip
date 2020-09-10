@@ -12,6 +12,7 @@ public class ListCommand extends Command {
      * Prints all lists in the TaskList.
      * @param list A TaskList containing the user's Tasks.
      * @param storage A Storage object that handles the storage of tasks in local storage, allowing them to persist.
+     * @return A String containing a user message containing all the user's Tasks.
      */
     @Override
     public String execute(TaskList list, Storage storage) {
