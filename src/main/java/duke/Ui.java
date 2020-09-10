@@ -41,6 +41,15 @@ public class Ui {
     }
 
     /**
+     * Returns a string with the response from the bot as given by executing a command.
+     *
+     * @return response from Duke
+     */
+    public String returnReply(String reply) {
+        return reply;
+    }
+
+    /**
      * Prints error messages from DukeExceptions thrown during
      * the bot execution.
      *
@@ -48,5 +57,9 @@ public class Ui {
      */
     public void showError(String message) {
         System.out.println(message);
+    }
+
+    public String returnError(String message) {
+        return message;
     }
 }

@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
+import duke.Ui;
 import duke.task.Task;
 
 import duke.dukeexception.DukeException;
@@ -49,6 +50,27 @@ public class FindCommand extends Command{
         }
 
         System.out.println("Na, I found this:" + finalString);
+    }
+
+    @Override
+    public String executeToGui(TaskList tasks, Storage storage, Ui ui) throws DukeException {
+        List<Task> resultList = new ArrayList<>();
+
+        for (int i = 1; i <= tasks.getListLength(); i++) {
+            Task task = tasks.getTask(i);
+            if (task.getTaskName().toLowerCase().contains(this.description)) {
+                resultList.add(task);
+            }
+        }
+
+        String finalString = "";
+        int counter = 0;
+        for (Task task : resultList) {
+            counter++;
+            finalString += "\n" + counter + "." + task.toString();
+        }
+
+        return ui.returnReply("Na, I found this:" + finalString);
     }
 
     @Override
