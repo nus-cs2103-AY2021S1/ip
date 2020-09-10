@@ -102,10 +102,14 @@ public class Storage {
     public void update(List<Task> list) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(this.taskFile);
-            String fileContents = parseToStorage(list.get(0));
 
-            for (int i = 1; i < list.size(); i++) {
-                fileContents += "\n" + parseToStorage(list.get(i));
+            String fileContents = "";
+            if (list.size() > 0) {
+                fileContents = parseToStorage(list.get(0));
+
+                for (int i = 1; i < list.size(); i++) {
+                    fileContents += "\n" + parseToStorage(list.get(i));
+                }
             }
 
             fileWriter.write(fileContents);

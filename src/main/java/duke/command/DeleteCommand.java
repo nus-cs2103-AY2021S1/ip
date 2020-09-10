@@ -32,9 +32,11 @@ public class DeleteCommand extends Command {
 
             return ui.returnReply("Okay, I deleted this liao:" + "\n  " + task.toString()
                     + "\nNow left " + tasks.getListLength() + " things in the list.");
-        } catch (Exception e) {
+        } catch (NumberFormatException e) {
             throw new WrongItemIndexException(CommandType.DELETE.toString().toLowerCase(),
                     tasks.getListLength());
+        } catch (DukeException dukeException) {
+            throw dukeException;
         }
     }
 
