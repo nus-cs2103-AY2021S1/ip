@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.AmbientLight?>
+<?import javafx.scene.PointLight?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.FlowPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.text.Font?>
+
+<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefWidth="400.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+  <children>
+      <PointLight color="CHARTREUSE" lightOn="true" style="-fx-blend-mode: #669999;" />
+      <AmbientLight color="CHARTREUSE" lightOn="true" />
+      <FlowPane prefHeight="0.0" prefWidth="306.0">
+         <children>
+            <BorderPane prefHeight="15.0" prefWidth="306.0" style="-fx-background-color: #ccffff; -fx-background-radius: 10; -fx-border-radius: 10; -fx-border-width: 2; -fx-border-color: #33cccc;">
+               <opaqueInsets>
+                  <Insets />
+               </opaqueInsets>
+               <right>
+                  <AmbientLight color="CHARTREUSE" lightOn="true" BorderPane.alignment="CENTER" />
+               </right>
+               <center>
+                <Label fx:id="dialog" minHeight="-Infinity" prefWidth="282.0" text="Label" textAlignment="CENTER" wrapText="true" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font name="MS Mincho" size="13.0" />
+                     </font>
+                  </Label>
+               </center>
+            </BorderPane>
+         </children>
+      </FlowPane>
+    <ImageView fx:id="displayPicture" fitHeight="79.0" fitWidth="78.0" pickOnBounds="true" preserveRatio="true" />
+  </children>
+  <padding>
+    <Insets bottom="10.0" left="5.0" right="5.0" top="10.0" />
+  </padding>
+</fx:root>
