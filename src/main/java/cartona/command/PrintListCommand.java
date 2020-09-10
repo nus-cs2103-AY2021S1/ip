@@ -27,17 +27,17 @@ public class PrintListCommand implements Command {
      * @throws CartonaException if the command has already been executed.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws CartonaException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws CartonaException {
         // Check if the command has already been executed.
         if (isDone) {
             throw new CartonaException("Error: PrintListCommand already executed");
         }
 
-        // Print UI message
-        ui.printTaskList(taskList);
-
         // Update Storage
         this.isDone = true;
+
+        // Print UI message
+        return ui.printTaskList(taskList);
     }
 
     @Override

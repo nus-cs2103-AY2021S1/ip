@@ -31,7 +31,7 @@ public class AddCommand implements Command {
      * @throws CartonaException if the command has already been executed
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws CartonaException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws CartonaException {
         // Check if the command has already been executed.
         if (isDone) {
             throw new CartonaException("Error: AddCommand already executed");
@@ -41,11 +41,12 @@ public class AddCommand implements Command {
 
         this.isDone = true;
 
-        // Print UI message
-        ui.printTaskAddingMessage(taskToAdd, taskList.getSize());
-
         // Update Storage
         storage.saveListToFile(taskList);
+
+        // Return UI message
+        return ui.printTaskAddingMessage(taskToAdd, taskList.getSize());
+
     }
 
     @Override
