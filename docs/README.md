@@ -36,9 +36,9 @@ This command shows a list of all possible commands Awesome-O can recognize.
 
 Each item shows the usage for each command as well.
 
-### Usage
+#### Usage
 
-### `help` - Describe action
+#### `help` - Describe action
 
 Self-explanatory.
 
@@ -80,9 +80,9 @@ Expected outcome:
 
 This command shows the current list of tasks that has been saved.
 
-### Usage
+#### Usage
 
-### `list`
+#### `list`
 
 Self-explanatory.
 
@@ -103,9 +103,9 @@ Awesome-O now shows you your tasks:
 
 This command marks a single task as having been completed.
 
-### Usage
+#### Usage
 
-### `done <task number>`
+#### `done <task number>`
 
 If the task corresponding with the task number was marked as uncompleted `[✘]`,
 it will now be marked as completed `[✓]`.
@@ -125,9 +125,9 @@ Awesome-O marked this task as done:
 
 This command deletes a *single* task from the list.
 
-### Usage
+#### Usage
 
-### `delete <task number>`
+#### `delete <task number>`
 
 The task corresponding with the task number will be removed from the list.
 
@@ -147,9 +147,9 @@ Now you have 2 tasks in the list.
 
 This command deletes *all* tasks from the list, leaving an empty list thereafter.
 
-### Usage
+#### Usage
 
-### `list`
+#### `list`
 
 Self-explanatory.
 
@@ -169,9 +169,9 @@ This command adds a *todo* task to the list.
 
 This task contains just a description and has no specified date/time.
 
-### Usage
+#### Usage
 
-### `todo <description>`
+#### `todo <description>`
 
 A *todo* will be added with the given description.
 
@@ -193,9 +193,9 @@ This command adds an *event* task to the list.
 
 This task contains a description as well as a stipulated date/time of occurrence.
 
-### Usage
+#### Usage
 
-### `event <description> /at <time>`
+#### `event <description> /at <time>`
 
 An *event* will be added with the given description and date/time of occurrence.
 
@@ -220,9 +220,9 @@ This command adds a *deadline* task to the list.
 
 This task contains a description as well as a stipulated due date/time.
 
-### Usage
+#### Usage
 
-### `deadline <description> /by <time>`
+#### `deadline <description> /by <time>`
 
 A *deadline* will be added with the given description and due date/time.
 
@@ -245,9 +245,9 @@ Now you have 3 tasks in the list.
 
 This command checks against the tasks that match the given keyword(s), and shows them, if any.
 
-### Usage
+#### Usage
 
-### `find <keyword(s)>`
+#### `find <keyword(s)>`
 
 Any tasks that match the keyword(s) will be found and listed.
 
@@ -266,9 +266,9 @@ Awesome-O shows you the tasks that match the keyword:
 
 This command checks against the tasks whose specified date matches the given date, and shows them, if any.
 
-### Usage
+#### Usage
 
-### `schedule <date>`
+#### `schedule <date>`
 
 Any tasks that match the date will be found and list (sorted chronologically).
 
@@ -290,9 +290,9 @@ Awesome-O shows you the tasks scheduled on this day:
 
 This command simply ends the conversation with Awesome-O and the application thereafter.
 
-### Usage
+#### Usage
 
-### `bye`
+#### `bye`
 
 The application window will close about 1.5 seconds after this command is entered.
 
