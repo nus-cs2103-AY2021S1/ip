@@ -5,14 +5,34 @@ import java.util.Scanner;
  */
 public class Ui {
 
-    public static final String LINE = " ____________________________________________________________\n ";
-
+    private static final String LINE = " ____________________________________________________________\n ";
+    private static final String WELCOME_MESSAGE = "Hello there!\n"
+            + "What can I do for you today? \nType 'help' to find out more!";
+    private static final String BYE_MESSAGE = "Goodbye! Come back soon!";
+    private static final String EMPTY_TASK_LIST_MESSAGE = "You have no tasks in your list. Add some tasks!";
+    private static final String NO_MATCHING_TASK_MESSAGE = "Hmm.. there are no tasks with that keyword!";
+    private static final String HELP_MESSAGE = "Here are the things that I can do for you! \n\n"
+            + "- Add a todo task:\n"
+            + "  todo <task description>\n\n"
+            + "- Add an event task:\n"
+            + "  event <task description> /at <task timing (yyyy-mm-dd HH:MM)>\n\n"
+            + "- Add a deadline task:\n"
+            + "  deadline <task description> /by <task timing (yyyy-mm-dd HH:MM)>\n\n"
+            + "- See list of tasks:\n"
+            + "  list\n\n"
+            + "- Mark a task as done:\n"
+            + "  done <number>\n\n"
+            + "- Delete a task:\n"
+            + "  delete <number>\n\n"
+            + "- Find tasks with a keyword:\n"
+            + "  find <keyword>\n\n"
+            + "- End this program :d :\n"
+            + "  bye";
     protected Scanner sc;
 
     public Ui() {
         this.sc = new Scanner(System.in);
     }
-
 
     /**
      * Show a line, which is printed before and after each message for design.
@@ -24,24 +44,23 @@ public class Ui {
 
     /**
      * Show a welcome message to the user.
+     * @return The string with welcome message.
      */
     public String showWelcome() {
         this.showLine();
-        String result = "Hello there!\n" + "What can I do for you today? \nType 'help' to find out more!";
-        System.out.println(result);
+        System.out.println(WELCOME_MESSAGE);
         this.showLine();
-        return result;
+        return WELCOME_MESSAGE;
     }
 
     /**
      * Shows bye message to the user
      *
-     * @return The string with message.
+     * @return The string with bye message.
      */
     public String showBye() {
-        String result = "Goodbye! Come back soon!";
-        System.out.println(result);
-        return result;
+        System.out.println(BYE_MESSAGE);
+        return BYE_MESSAGE;
     }
 
     /**
@@ -49,6 +68,7 @@ public class Ui {
      *
      * @param task Task to be added.
      * @param numTasks Updated number of tasks.
+     * @return A string message showing the added task.
      */
     public String showAdded(Task task, int numTasks) {
         String result = "Got it. I've added this task:\n    " + task
@@ -62,6 +82,7 @@ public class Ui {
      *
      * @param task Task to be deleted.
      * @param numTasks Updated number of tasks.
+     * @return A string message showing the deleted task.
      */
     public String showDeleted(Task task, int numTasks) {
         String result = "No problem. I've removed this task:\n    " + task
@@ -74,6 +95,7 @@ public class Ui {
      * Shows the task that is marked as done.
      *
      * @param task Task that is marked as done.
+     * @return A string message showing the task that is marked done.
      */
     public String showMarkedDone(Task task) {
         String result = "Ok! I've marked this task as done:\n    " + task;
@@ -85,6 +107,7 @@ public class Ui {
      * Shows the error that has occurred.
      *
      * @param msg Error message.
+     * @return A string message showing the error message.
      */
     public String showError(String msg) {
         String result = msg;
@@ -94,20 +117,21 @@ public class Ui {
 
     /**
      * Shows a message to indicate there are no tasks currently.
+     * @return A string message showing that there are no tasks.
      */
     public String showEmptyTaskList() {
-        String result = "You have no tasks in your list. Add some tasks!";
-        System.out.println(result);
-        return result;
+        System.out.println(EMPTY_TASK_LIST_MESSAGE);
+        return EMPTY_TASK_LIST_MESSAGE;
     }
 
     /**
      * Shows all tasks in the task list.
      *
      * @param tasksList Task list of all tasks.
+     * @return A string message showing tasks in the list in order.
      */
     public String showTaskList(String tasksList) {
-        String result = "Task(s) in your list:\n" + tasksList;
+        String result = "Task(s) in your list:" + tasksList;
         System.out.println(result);
         return result;
     }
@@ -116,18 +140,18 @@ public class Ui {
      * Shows message to indicate there are no matching tasks to keyword provided.
      */
     public String showEmptyMatchingList() {
-        String result = "Hmm.. there are no tasks with that keyword!";
-        System.out.println(result);
-        return result;
+        System.out.println(NO_MATCHING_TASK_MESSAGE);
+        return NO_MATCHING_TASK_MESSAGE;
     }
 
     /**
      * Shows matching tasks to the keyword provided.
      *
      * @param matchingTaskList String of all matching tasks enumerated.
+     * @return A string message showing matching tasks numbered in order.
      */
     public String showMatchingTaskList(String matchingTaskList) {
-        String result = "Found some matching tasks:\n" + matchingTaskList;
+        String result = "Found some matching tasks:" + matchingTaskList;
         System.out.println(result);
         return result;
     }
@@ -136,25 +160,8 @@ public class Ui {
      * Shows description of all commands.
      */
     public String showHelp() {
-        String result = "Here are the things that I can do for you! \n\n"
-                + "- Add a todo task:\n"
-                + "  todo <task description>\n\n"
-                + "- Add an event task:\n"
-                + "  event <task description> /at <task timing (yyyy-mm-dd HH:MM)>\n\n"
-                + "- Add a deadline task:\n"
-                + "  deadline <task description> /by <task timing (yyyy-mm-dd HH:MM)>\n\n"
-                + "- See list of tasks:\n"
-                + "  list\n\n"
-                + "- Mark a task as done:\n"
-                + "  done <number>\n\n"
-                + "- Delete a task:\n"
-                + "  delete <number>\n\n"
-                + "- Find tasks with a keyword:\n"
-                + "  find <keyword>\n\n"
-                + "- End this program :d :\n"
-                + "  bye";
-        System.out.println(result);
-        return result;
+        System.out.println(HELP_MESSAGE);
+        return HELP_MESSAGE;
     }
 
     /**

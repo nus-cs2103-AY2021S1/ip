@@ -9,6 +9,7 @@ public class Duke {
 
     /**
      * Creates a Duke object that loads information from specified filePath.
+     *
      * @param filePath The text file which Duke loads information from.
      */
     public Duke(String filePath) {

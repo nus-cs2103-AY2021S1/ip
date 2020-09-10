@@ -60,9 +60,7 @@ public class Parser {
         } else if (firstWord.equals("done")) {
             if (inputDataWords.length != 2) {
                 throw new InvalidCommandException();
-            }
-
-            if (!isInteger(inputDataWords[1])) { // check if second word is an integer
+            } else if (!isInteger(inputDataWords[1])) { // check if second word is an integer
                 throw new InvalidTaskException();
             }
 
@@ -71,9 +69,7 @@ public class Parser {
         } else if (firstWord.equals("delete")) {
             if (inputDataWords.length != 2) {
                 throw new InvalidCommandException();
-            }
-
-            if (!isInteger(inputDataWords[1])) { // check if second word is an integer
+            } else if (!isInteger(inputDataWords[1])) { // check if second word is an integer
                 throw new InvalidTaskException();
             }
 
@@ -89,9 +85,7 @@ public class Parser {
         } else if (firstWord.equals("deadline")) {
             if (inputDataWords.length < 2) {
                 throw new EmptyDescriptionException();
-            }
-
-            if (fullCommand.split("/by ").length < 2 || inputDataWords[1].equals("/by")) {
+            } else if (fullCommand.split("/by ").length < 2 || inputDataWords[1].equals("/by")) {
                 throw new EmptyDeadlineException();
             }
 
@@ -110,9 +104,7 @@ public class Parser {
         } else if (firstWord.equals("event")) {
             if (fullCommand.split(" ").length < 2 || inputDataWords[1].equals("/at")) {
                 throw new EmptyDescriptionException();
-            }
-
-            if (fullCommand.split("/at ").length < 2) {
+            } else if (fullCommand.split("/at ").length < 2) {
                 throw new EmptyEventTimingException();
             }
 

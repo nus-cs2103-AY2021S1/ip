@@ -13,16 +13,11 @@ public class ListCommand extends Command {
         if (tasks.getNumTasks() == 0) {
             return ui.showEmptyTaskList();
         }
+
         String tasksList = "";
-
         for (int i = 0; i < tasks.getNumTasks(); i++) {
-            if (i == 0) {
-                tasksList = " 1. " + tasks.getTask(i + 1);
-            } else {
-                tasksList = tasksList + "\n " + (i + 1) + ". " + tasks.getTask(i + 1);
-            }
+            tasksList = tasksList + "\n " + (i + 1) + ". " + tasks.getTask(i + 1);
         }
-
         return ui.showTaskList(tasksList);
     }
 

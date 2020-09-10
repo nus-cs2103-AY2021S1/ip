@@ -23,11 +23,8 @@ public class FindCommand extends Command {
 
             if (currentTask.getDescription().contains(keyword)) {
                 numMatching++;
-                if (numMatching == 1) {
-                    matchingTasks = " 1. " + currentTask.toString();
-                } else {
-                    matchingTasks = matchingTasks + "\n " + numMatching + ". " + currentTask.toString();
-                }
+                matchingTasks = matchingTasks + "\n " + numMatching + ". " + currentTask.toString();
+
             }
         }
         return matchingTasks;

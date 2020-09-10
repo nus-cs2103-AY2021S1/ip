@@ -30,34 +30,7 @@ public class Storage {
             int numTasks = 0;
             File f = new File(filePath); // create a File for the given file path
 
-            if (f.exists()) {
-                Scanner s = new Scanner(f); // create a Scanner using the File as the source
-
-                // go through file contents and initialise the tasks arraylist
-                while (s.hasNext()) {
-                    String currString = s.nextLine();
-                    String[] currStringArray = currString.split(" \\| ");
-                    boolean isDone = currStringArray[1].equals("1");
-
-                    if (currStringArray[0].equals("T")) {
-                        tasks.add(numTasks, new ToDo(currStringArray[2], isDone));
-                    } else if (currStringArray[0].equals("D")) {
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-                        LocalDateTime byLocalDate = LocalDateTime.parse(currStringArray[3], formatter);
-
-                        tasks.add(numTasks, new Deadline(currStringArray[2],
-                                byLocalDate, isDone));
-                    } else if (currStringArray[0].equals("E")) {
-                        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
-                        LocalDateTime atLocalDate = LocalDateTime.parse(currStringArray[3], formatter);
-
-                        tasks.add(numTasks, new Event(currStringArray[2],
-                                atLocalDate, isDone));
-                    }
-                    numTasks++;
-                }
-
-            } else {
+            if (!f.exists()) {
                 File directory = new File("data");
                 directory.mkdir(); // creates the directory if it does not exist
 
@@ -65,6 +38,30 @@ public class Storage {
                 file.createNewFile();
             }
 
+            Scanner s = new Scanner(f); // create a Scanner using the File as the source
+
+            // go through file contents and initialise the tasks arraylist
+            while (s.hasNext()) {
+                String currString = s.nextLine();
+                String[] currStringArray = currString.split(" \\| ");
+                String taskIdentifier = currStringArray[0];
+                boolean isDone = currStringArray[1].equals("1");
+
+                if (taskIdentifier.equals("T")) {
+                    tasks.add(numTasks, new ToDo(currStringArray[2], isDone));
+                } else if (taskIdentifier.equals("D")) {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                    LocalDateTime byLocalDate = LocalDateTime.parse(currStringArray[3], formatter);
+
+                    tasks.add(numTasks, new Deadline(currStringArray[2], byLocalDate, isDone));
+                } else if (taskIdentifier.equals("E")) {
+                    DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+                    LocalDateTime timingLocalDate = LocalDateTime.parse(currStringArray[3], formatter);
+
+                    tasks.add(numTasks, new Event(currStringArray[2], timingLocalDate, isDone));
+                }
+                numTasks++;
+            }
             return tasks;
         } catch (IOException e) {
             throw new FileLoadFailException();
