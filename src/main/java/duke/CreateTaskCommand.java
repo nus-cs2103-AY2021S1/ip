@@ -1,8 +1,9 @@
 package duke;
 
 public class CreateTaskCommand implements Command {
-    TaskList tasks;
-    Task task;
+    private TaskList tasks;
+    private Task task;
+
     public CreateTaskCommand(TaskList tasks, Task task) {
         this.tasks = tasks;
         this.task = task;
