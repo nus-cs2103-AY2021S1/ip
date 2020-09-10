@@ -1,7 +1,6 @@
 package duke.command;
 
 import duke.storage.Storage;
-import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
@@ -35,11 +34,9 @@ public class FindCommand extends Command {
         TaskList searchTasks = new TaskList();
 
         //loop through to find matching tasks to add to new TaskList
-        for (Task task : tasks.getList()) {
-            if (task.getDescription().contains(this.searchTerm)) {
-                searchTasks.add(task);
-            }
-        }
+        tasks.getList().stream()
+                .filter(task -> task.getDescription().contains(this.searchTerm))
+                .forEach(searchTasks::add);
 
         //print TaskList of matching tasks
         String output = ui.printMatchingTasks();

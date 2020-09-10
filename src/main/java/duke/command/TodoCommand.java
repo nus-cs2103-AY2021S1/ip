@@ -23,15 +23,6 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Returns the description of the task.
-     *
-     * @return String description of the task.
-     */
-    public String getDescription() {
-        return this.description;
-    }
-
-    /**
      * Creates a new Todo Task and adds it into the TaskList. The Storage
      * is updated with the latest Task and the Ui Object will return a
      * relevant string message to notify the user on this addition.
