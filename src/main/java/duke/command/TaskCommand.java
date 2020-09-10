@@ -67,7 +67,9 @@ public class TaskCommand {
      */
     public static void loadSavedTasks(String in, TaskList taskList) throws DukeException {
         boolean isDone = in.charAt(0) == '1';
-        String taskCommand = in.substring(1);
+        String[] details = in.substring(1).split(Task.TAGS_DELIMITER);
+        String taskCommand = details[0].trim();
+
         TaskType taskType = CommandParser.parseTaskType(taskCommand);
         if (taskType == TaskType.Invalid) {
             throw new InvalidCommandException(INVALID_COMMAND_MSG);
@@ -75,5 +77,15 @@ public class TaskCommand {
 
         String taskDetails = taskCommand.replaceFirst(taskType.toString().toLowerCase(), "").trim();
         createTask(taskType, taskDetails, taskList, isDone, false);
+
+        boolean hasTags = details.length == 2;
+        if (hasTags) {
+            String[] tagsToAdd = details[1]
+                    .replaceAll("#", "")
+                    .replaceFirst(Task.TAGS_DELIMITER, "")
+                    .trim()
+                    .split(" ");
+            taskList.get(taskList.size() - 1).addTags(tagsToAdd);
+        }
     }
 }

@@ -9,6 +9,7 @@ import java.util.Arrays;
 // Handles all the logic behind any "done" command from the user.
 public class TagCommand extends Command {
     private static final String ERROR_INVALID_INDEX = "Please input a valid index.";
+    private static final String ERROR_RESERVED_KEYWORD = "Please do not use " + Task.TAGS_DELIMITER + ".";
     private static final String RESPONSE_TAGS_ADDED = "I have added the tags to the following task:\n  ";
     private static final String RESPONSE_NO_TAGS_ADDED = "There were no tags to be added.";
 
@@ -25,6 +26,11 @@ public class TagCommand extends Command {
         try {
             String[] details = in.replaceFirst("tag ", "").split(" ");
             String[] tagsToAdd = Arrays.copyOfRange(details, 1, details.length);
+            for (String tag : tagsToAdd) {
+                if (tag.contains(Task.TAGS_DELIMITER)) {
+                    throw new InvalidCommandException(ERROR_RESERVED_KEYWORD);
+                }
+            }
             int index = Integer.parseInt(details[0]) - 1;
             Task task = taskList.get(index);
             task.addTags(tagsToAdd);

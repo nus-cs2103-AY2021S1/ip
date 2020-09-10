@@ -57,7 +57,8 @@ public class Deadline extends Task {
     public String toSaveString() {
         String date = DukeDateTime.localDateToString(this.date);
         String time = DukeDateTime.to24HTimeFormat(time12h);
-        return (isDone ? 1 : 0) + DEADLINE_NAME + description + DEADLINE_KEYWORD + date + " " + time;
+        String deadlineCommand = (isDone ? 1 : 0) + DEADLINE_NAME + description + DEADLINE_KEYWORD + date + " " + time;
+        return deadlineCommand + getTagsSaveString();
     }
 
     @Override
