@@ -1,3 +1,5 @@
+import javafx.util.Pair;
+
 import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
@@ -14,8 +16,7 @@ public class Parser {
         String[] userTokens = userInput.split(" ");
         String userCommand = userTokens[0];
         Parser.validateCommand(userCommand);
-        String keyword = userTokens[1];
-        return keyword;
+        return userTokens[1];
     }
 
     /**
@@ -32,15 +33,27 @@ public class Parser {
     }
 
     /**
-     * Parse a user input string as a done command.
+     * Parse a user input string as a identifier command.
      *
      * @param userInput - String representation of user input
-     * @return integer index of the task in the task list to be marked as done
+     * @return integer index of the task in the task list referenced
      */
-    static int parseDone(String userInput) throws DukeException {
+    static int parseIdentifier(String userInput) throws DukeException {
         String[] userTokens = userInput.split(" ");
         Parser.validateIdentifier(userInput, userTokens);
         return Integer.parseInt(userTokens[1]) - 1;
+    }
+
+    /**
+     * Parse a user input string as a tag command.
+     *
+     * @param userInput - String representation of user input
+     * @return tag to be tagged to the task
+     */
+    static String parseTag(String userInput) throws DukeException {
+        String[] userTokens = userInput.split(" ");
+        Parser.validateIdentifier(userInput, userTokens);
+        return userTokens[2];
     }
 
     /**
@@ -102,7 +115,7 @@ public class Parser {
     static void validateCommand(String userCommand) throws DukeException {
         assert !userCommand.isBlank();
         List<String> validCommands =
-                Arrays.asList("bye", "list", "done", "todo", "deadline", "event", "delete", "find");
+                Arrays.asList("bye", "list", "done", "todo", "deadline", "event", "delete", "find", "tag", "untag");
         if (!validCommands.contains(userCommand)) {
             throw new DukeException("Invalid command: " + userCommand);
         }
@@ -159,8 +172,8 @@ public class Parser {
      */
     static void validateIdentifier(String userInput, String[] userTokens) throws DukeException {
         assert !userInput.isBlank();
-        if (userTokens.length != 2) {
-            throw new DukeException("Invalid identifier, requires 2 tokens: " + userInput);
+        if (userTokens.length < 2) {
+            throw new DukeException("Invalid identifier, requires at least 2 tokens: " + userInput);
         }
         try {
             Integer.parseInt(userTokens[1]);

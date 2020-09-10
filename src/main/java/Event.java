@@ -11,16 +11,19 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return "[E]"
+        String repr = "[E]"
                 + super.toString()
                 + " (at: "
                 + this.taskAt.format(DateTimeFormatter.ofPattern("MMM dd yyyy"))
                 + ")";
+        for (String tag : tags) {
+            repr += " #" + tag;
+        }
+        return repr;
     }
 
-    @Override
     public String toFileFormat() {
-        return "E|" + (this.isDone ? "1" : "0") + "|" + this.taskName + "|" + this.taskAt;
+        return "E|" + (this.isDone ? "1" : "0") + "|" + this.taskName + "|" + this.taskAt  + "|" + tagsFileFormat();
     }
 
     /**
@@ -30,8 +33,15 @@ public class Event extends Task {
      */
     static Event fromFileFormat(String fileFormatString) {
         String[] tokens = fileFormatString.split("\\|");
-        assert tokens.length == 4;
         Event loaded = new Event(tokens[2], LocalDate.parse(tokens[3]));
+
+        if (tokens.length >= 5) {
+            String[] tags = tokens[4].split("#");
+            for (String tag : tags) {
+                loaded.addTag(tag);
+            }
+        }
+
         if (tokens[1].equals("1")) {
             loaded.setDone();
         }

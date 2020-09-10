@@ -1,1 +1,1 @@
-T|1|eat chicken
+T|1|eat chicken|eat#nugget

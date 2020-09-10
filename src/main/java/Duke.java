@@ -27,8 +27,6 @@ public class Duke extends Application {
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
 
     // Pre-set images
     private Image user = new Image(this.getClass().getResourceAsStream("/images/user.jpg"));
@@ -132,14 +130,38 @@ public class Duke extends Application {
             // Mark the identified task as done
             case "done":
                 try {
-                    String message = taskList.setDone(Parser.parseDone(userInput));
+                    String message = taskList.setDone(Parser.parseIdentifier(userInput));
                     storage.save(taskList);
                     return message;
                 } catch (DukeException | IOException e) {
                     return "Sorry, I can't mark that as done! " + e.getMessage();
                 }
 
-            // Delete a task
+            // Mark the identified task with a tag
+            case "tag":
+                try {
+                    String tag = Parser.parseTag(userInput);
+                    int id = Parser.parseIdentifier(userInput);
+                    String message = taskList.tagTask(id, tag);
+                    storage.save(taskList);
+                    return message;
+                } catch (DukeException | IOException e) {
+                    return "Sorry, I can't tag that! " + e.getMessage();
+                }
+
+            // Unmark the identified task from the tag
+            case "untag":
+                try {
+                    String tag = Parser.parseTag(userInput);
+                    int id = Parser.parseIdentifier(userInput);
+                    String message = taskList.untagTask(id, tag);
+                    storage.save(taskList);
+                    return message;
+                } catch (DukeException | IOException e) {
+                    return  "Sorry, I can't untag that! " + e.getMessage();
+                }
+
+                // Delete a task
             case "delete":
                 try {
                     String message = taskList.deleteTask(Parser.parseDelete(userInput));
@@ -175,23 +197,21 @@ public class Duke extends Application {
     }
 
     @Override
-    public void start(Stage stage) throws Exception {
-        //Step 1. Setting up required components
-
-        //The container for the content of the chat to scroll.
+    public void start(Stage stage) {
+        // The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
         userInput = new TextField();
-        sendButton = new Button("Send");
+        Button sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
-        scene = new Scene(mainLayout);
+        Scene scene = new Scene(mainLayout);
         stage.setScene(scene);
         stage.show();
 
-        //Step 2. Formatting the window to look as expected
+        // Formatting the window to look as expected
         stage.setTitle("Duke");
         stage.setResizable(false);
         stage.setMinHeight(600.0);
@@ -203,7 +223,6 @@ public class Duke extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
-        // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
         userInput.setPrefWidth(325.0);
         sendButton.setPrefWidth(55.0);
@@ -213,35 +232,16 @@ public class Duke extends Application {
         AnchorPane.setLeftAnchor(userInput , 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
-        //Part 3. Add functionality to handle user input.
-        sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
-        });
+        // Functionality to handle user input.
+        sendButton.setOnMouseClicked((event) -> handleUserInput());
 
-        userInput.setOnAction((event) -> {
-            handleUserInput();
-        });
+        userInput.setOnAction((event) -> handleUserInput());
 
-        //Scroll down to the end every time dialogContainer's height changes.
+        // Scroll down to the end every time dialogContainer's height changes.
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
     /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
-    /**
-     * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
@@ -256,8 +256,9 @@ public class Duke extends Application {
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Gets the response from Duke.
+     * @param input Input from the user
+     * @return the reply from Duke
      */
     private String getResponse(String input) {
         return reply(input);
