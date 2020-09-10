@@ -52,11 +52,13 @@ public class Parser {
             return new HelpCommand();
         } else if (fullCommand.equals("list")) {
             return new ListCommand();
+        } else if (fullCommand.equals("upcoming")) {
+            return new UpcomingTasksCommand();
+        } else if (fullCommand.equals("bye")) {
+            return new ExitCommand();
         } else if (firstWord.equals("find")) {
             String keyword = fullCommand.split("find ")[1];
             return new FindCommand(keyword);
-        } else if (fullCommand.equals("bye")) {
-            return new ExitCommand();
         } else if (firstWord.equals("done")) {
             if (inputDataWords.length != 2) {
                 throw new InvalidCommandException();

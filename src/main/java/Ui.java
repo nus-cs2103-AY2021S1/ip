@@ -164,6 +164,14 @@ public class Ui {
         return HELP_MESSAGE;
     }
 
+    public String showUpcomingTasks(String upcomingTasks) {
+        if (upcomingTasks.isEmpty()) {
+            return "There are no upcoming tasks! Type 'list' to see all tasks.";
+        } else {
+            return "Here are the upcoming tasks (in a week)!" + upcomingTasks;
+        }
+    }
+
     /**
      * Reads input from user.
      *

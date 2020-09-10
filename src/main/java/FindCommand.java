@@ -26,6 +26,7 @@ public class FindCommand extends Command {
                 matchingTasks = matchingTasks + "\n " + numMatching + ". " + currentTask.toString();
             }
         }
+
         return matchingTasks;
     }
 
