@@ -3,6 +3,7 @@ public class ListCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) {
         String output = "";
         int numOfTasks = tasks.size();
+        assert numOfTasks >= 0 : "Negative number of tasks in TaskList";
         if (tasks.isEmpty()) {
             output = ui.showListNoTasks();
         } else {
