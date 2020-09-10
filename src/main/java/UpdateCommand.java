@@ -3,6 +3,12 @@ public class UpdateCommand extends Command {
     private String taskName;
     private String taskDate;
 
+    /**
+     * Instantiates an UpdateCommand object.
+     * @param taskNum The task number to be updated.
+     * @param taskName The new name of the task to be updated.
+     * @param taskDate The new date and time of the task to be updated.
+     */
     public UpdateCommand(int taskNum, String taskName, String taskDate) {
         this.taskNum = taskNum;
         this.taskName = taskName;
@@ -28,6 +34,11 @@ public class UpdateCommand extends Command {
         return ui.showUpdate(t);
     }
 
+    /**
+     * Updates the task with the new task name or date and time.
+     * @param t Task to be updated.
+     * @throws DukeException If the date and time was not specified in the correct format.
+     */
     public void updateTask(Task t) throws DukeException {
         if (this.taskName != null) {
             t.setTaskName(this.taskName);

@@ -40,6 +40,11 @@ public class AddCommand extends Command {
         return ui.showAdd(t, tasks);
     }
 
+    /**
+     * Creates and returns a new task according to its task type.
+     * @return A new task according to its task type.
+     * @throws DukeException If the deadline or event is not specified in the correct format.
+     */
     public Task createTask() throws DukeException {
         Task task;
         if (this.taskType == TaskType.TODO) {

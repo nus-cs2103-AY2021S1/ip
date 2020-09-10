@@ -1,16 +1,16 @@
 /**
  * Represents the user interface that interacts with the user by replying
- * the user accordingly. A Ui objects contains a Scanner object that helps
- * to take in user input.
+ * the user accordingly.
  */
 public class Ui {
     /**
-     * Instantiates a Ui object with a scanner object.
+     * Instantiates a Ui object.
      */
     public Ui() { }
 
     /**
      * Displays the welcome message.
+     * @return Reply to the user command.
      */
     public static String showWelcome() {
         String welcomeMessage = "HOWDY!!!!! WELCOME TO BIKINI BOTTOM! "
@@ -21,6 +21,7 @@ public class Ui {
 
     /**
      * Displays the exit message.
+     * @return Reply to the user command.
      */
     public String showExit() {
         String exitMessage = "You're leavin' already?!??! Well, see you again! "
@@ -30,6 +31,7 @@ public class Ui {
 
     /**
      * Displays the list of commands available.
+     * @return Reply to the user command.
      */
     public String showHelp() {
         String helpMessage = "I don't know nothin' about other commands but "
@@ -73,6 +75,7 @@ public class Ui {
 
     /**
      * Displays the user's list of tasks.
+     * @return Reply to the user command.
      */
     public String showList() {
         String listMessage = "Here yer go! These are all your tasks!";
@@ -82,6 +85,7 @@ public class Ui {
     /**
      * Replies the user's command to mark a task as done.
      * @param t Task that is marked as done.
+     * @return Reply to the user command.
      */
     public String showDone(Task t) {
         String doneMessage = "YEEEEE-HAW!!! You've completed this task!\n" + t;
@@ -91,6 +95,7 @@ public class Ui {
     /**
      * Replies the user's command to delete a task.
      * @param t Task that is deleted.
+     * @return Reply to the user command.
      */
     public String showDelete(Task t, TaskList tasks) {
         String deleteMessage = "Got it! I'm removin' this task!\n" + t + "\n"
@@ -98,6 +103,11 @@ public class Ui {
         return deleteMessage;
     }
 
+    /**
+     * Replies the user's command to update a task.
+     * @param t Task to be updated.
+     * @return Reply to the user command.
+     */
     public String showUpdate(Task t) {
         String updateMessage = "Got it! I'm updatin' this task to:\n" + t;
         return updateMessage;
@@ -106,6 +116,7 @@ public class Ui {
     /**
      * Replies the user's command to add a task.
      * @param t Task to be added.
+     * @return Reply to the user command.
      */
     public String showAdd(Task t, TaskList tasks) {
         String addMessage = "Ain't no problem! I'm addin' this task:\n" + t + "\n"
@@ -115,6 +126,7 @@ public class Ui {
 
     /**
      * Displays the matching tasks found using the keyword.
+     * @return Reply to the user command.
      */
     public String showFind() {
         String findMessage = "Ain't no problem! I have found the matchin' tasks in your list:";
@@ -124,6 +136,7 @@ public class Ui {
     /**
      * Displays the error message.
      * @param errorMessage Error message.
+     * @return The error message to be displayed.
      */
     public String showError(String errorMessage) {
         return errorMessage;

@@ -87,6 +87,6 @@ public class TaskList {
                 .filter(t -> t.toString().contains(keyword))
                 .collect(Collectors.toCollection(() -> foundTasks));
 
-        return  new TaskList(foundTasks);
+        return new TaskList(foundTasks);
     }
 }

@@ -46,6 +46,13 @@ public class Parser {
         }
     }
 
+    /**
+     * Parses the user input according to the expected format of a find command.
+     * @param input The user input into the program.
+     * @param isOneWord Boolean representing whether the command was a single word.
+     * @return A find command.
+     * @throws DukeException If the user input did not match the expected format of a find command.
+     */
     public static Command parseFind(String input, boolean isOneWord) throws DukeException {
         if (isOneWord) {
             throw new InvalidFindException();
@@ -55,6 +62,13 @@ public class Parser {
         return new FindCommand(keyword);
     }
 
+    /**
+     * Parses the user input according to the expected format of a done command.
+     * @param input The user input into the program.
+     * @param inputWords String array of the words in the user input.
+     * @return A done command.
+     * @throws DukeException If the user input did not match the expected format of a done command.
+     */
     public static Command parseDone(String input, String[] inputWords) throws DukeException {
         if (inputWords.length != 2) {
             throw new InvalidDoneException();
@@ -65,6 +79,13 @@ public class Parser {
         return new DoneCommand(i);
     }
 
+    /**
+     * Parses the user input according to the expected format of a delete command.
+     * @param input The user input into the program.
+     * @param inputWords String array of the words in the user input.
+     * @return A delete command.
+     * @throws DukeException If the user input did not match the expected format of a delete command.
+     */
     public static Command parseDelete(String input, String[] inputWords) throws DukeException {
         if (inputWords.length != 2) {
             throw new InvalidDeleteException();
@@ -75,6 +96,13 @@ public class Parser {
         return new DeleteCommand(i);
     }
 
+    /**
+     * Parses the user input according to the expected format of a update command.
+     * @param input The user input into the program.
+     * @param inputWords String array of the words in the user input.
+     * @return An update command.
+     * @throws DukeException If the user input did not match the expected format of a update command.
+     */
     public static Command parseUpdate(String input, String[] inputWords) throws DukeException {
         if (inputWords.length < 4) {
             throw new InvalidUpdateException();
@@ -100,6 +128,13 @@ public class Parser {
 
     }
 
+    /**
+     * Parses the user input according to the expected format of a todo command.
+     * @param input The user input into the program.
+     * @param isOneWord Boolean representing whether the command was a single word.
+     * @return An add command.
+     * @throws DukeException If the user input did not match the expected format of a todo command.
+     */
     public static Command parseTodo(String input, boolean isOneWord) throws DukeException {
         if (isOneWord) {
             throw new InvalidTodoFormatException();
@@ -110,6 +145,13 @@ public class Parser {
         return new AddCommand(TaskType.TODO, taskInfos);
     }
 
+    /**
+     * Parses the user input according to the expected format of a deadline command.
+     * @param input The user input into the program.
+     * @param isOneWord Boolean representing whether the command was a single word.
+     * @return An add command.
+     * @throws DukeException If the user input did not match the expected format of a deadline command.
+     */
     public static Command parseDeadline(String input, boolean isOneWord) throws DukeException {
         if (isOneWord) {
             throw new InvalidDeadlineFormatException();
@@ -125,6 +167,13 @@ public class Parser {
         return new AddCommand(TaskType.DEADLINE, taskInfos);
     }
 
+    /**
+     * Parses the user input according to the expected format of a event command.
+     * @param input The user input into the program.
+     * @param isOneWord Boolean representing whether the command was a single word.
+     * @return An add command.
+     * @throws DukeException If the user input did not match the expected format of a event command.
+     */
     public static Command parseEvent(String input, boolean isOneWord) throws DukeException {
         if (isOneWord) {
             throw new InvalidEventFormatException();

@@ -70,6 +70,12 @@ public class Storage {
         return tasks;
     }
 
+    /**
+     * Creates and returns a new task according to its task type.
+     * @param data String representation of the task in the storage.
+     * @return A new task according to its task type.
+     * @throws DukeException If the deadline or event is not specified in the correct format.
+     */
     public Task createTask(String data) throws DukeException {
         String[] taskInfos = data.split(" ; ");
         Task t;
