@@ -1,9 +1,8 @@
 package cartona.task;
 
-import cartona.exception.CartonaException;
-
 import java.util.ArrayList;
 
+import cartona.exception.CartonaException;
 /**
  * The TaskList class represents the running list of Tasks. It uses the ArrayList to store Tasks.
  * Note that the list uses one-based numbering.
@@ -52,6 +51,12 @@ public class TaskList {
         toComplete.complete();
     }
 
+    /**
+     * Gets a string representation of the TaskList
+     * Tasks are listed in order and are separated by a newline.
+     *
+     * @return a String representation of the TaskList
+     */
     @Override
     public String toString() {
         int counter = 0;
@@ -65,6 +70,8 @@ public class TaskList {
 
     /**
      * Gets the String representation of the TaskList for storage.
+     *
+     * @return a shortened String representation of the TaskList for storage
      */
     public String getListForStorage() {
         String stringToWrite = "";

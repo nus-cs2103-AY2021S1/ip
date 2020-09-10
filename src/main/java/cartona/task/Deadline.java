@@ -8,6 +8,12 @@ package cartona.task;
 public class Deadline extends Task {
     private TaskDate dueTime;
 
+    /**
+     * Creates a Deadline object.
+     * @param name the name of the Deadline
+     * @param isDone whether the Deadline has been completed or not
+     * @param dueTime the dude date of the Deadline.
+     */
     public Deadline(String name, boolean isDone, TaskDate dueTime) {
         super(name, isDone, "D");
         this.dueTime = dueTime;

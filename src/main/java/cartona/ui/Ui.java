@@ -3,9 +3,6 @@ package cartona.ui;
 import cartona.task.Task;
 import cartona.task.TaskList;
 
-import java.util.HashMap;
-import java.util.Scanner;
-
 /**
  * The Ui class generates text strings that represent messages from the program.
  *
@@ -30,9 +27,9 @@ public class Ui {
      * Returns the startup message.
      */
     public String getWelcomeMessageFormatted() {
-        return String.format("%s     Hello! I'm Cartona.%n" +
-                        "     What can I do for you?" +
-                        "%n%s",
+        return String.format("%s     Hello! I'm Cartona.%n"
+                        + "     What can I do for you?"
+                        + "%n%s",
                 HORIZONTAL_LINE, HORIZONTAL_LINE);
     }
 
@@ -87,10 +84,10 @@ public class Ui {
     /**
      * Returns a numbered list of matching Tasks (from a FindTask Command operation)
      *
-     * @param matchingTaskList
+     * @param matchingTaskList the TaskList to be printed
      */
     public String printMatchingTaskList(TaskList matchingTaskList) {
-          return String.format(HORIZONTAL_LINE
+        return String.format(HORIZONTAL_LINE
                         + "     Here are the matching tasks in your list:%n"
                         + "%s"
                         + HORIZONTAL_LINE,

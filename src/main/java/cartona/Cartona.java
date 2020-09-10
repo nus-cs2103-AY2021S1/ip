@@ -1,16 +1,18 @@
 package cartona;
 
+import java.io.IOException;
+
 import cartona.command.Command;
 import cartona.command.Parser;
 import cartona.exception.CartonaException;
 import cartona.task.TaskList;
 import cartona.ui.Ui;
 
-import java.io.IOException;
 
 /**
- * Cartona is a simple CLI to-do list application. When run from the console, it reads input from the user and
- * adds and deletes items (called Tasks). It also saves the running list tasks to a file that it loads when run.
+ * Cartona is a simple to-do list application with JavaFX GUI. When run from the console, it reads input from the user
+ * and adds and deletes items (called Tasks). It also saves the running list tasks to a file that it loads when
+ * re-opened.
  *
  * @author Jaya Rengam
  */
@@ -27,6 +29,13 @@ public class Cartona {
         this.storage = new Storage("./tasklist.txt");
     }
 
+    /**
+     * Loads the saved list of tasks from the text file into the taskList.
+     * Used when the Cartona instance is first created.
+     *
+     * @return a String describing the result of attempting to load a list from the text file, along with
+     *         the welcome message
+     */
     public String load() {
         String lineMessage = "";
 
@@ -49,6 +58,12 @@ public class Cartona {
         return String.format("%s%s", lineMessage, ui.getWelcomeMessageFormatted());
     }
 
+    /**
+     * Processes the input string from the user (via the GUI) and returns a message to be printed to the GUI.
+     *
+     * @param inputString the input entered by the user into the GUI
+     * @return the message returned when a relevant Command is successfully executed, or an error message.
+     */
     public String getResponse(String inputString) {
         try {
             // Parse and execute command
