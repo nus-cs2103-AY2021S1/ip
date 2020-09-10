@@ -19,6 +19,7 @@ public class ParseInfo {
     }
 
     public void addResponse(String response) {
+        assert response.length() != 0 : "empty response added";
         this.responses.add(response);
     }
 
