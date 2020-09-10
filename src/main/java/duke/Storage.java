@@ -12,10 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.Todo;
+import duke.task.*;
 
 /**
  * Deals with all Storage operations.
@@ -61,6 +58,13 @@ public class Storage {
                 break;
             case "E":
                 task = new Event(description, LocalDateTime.parse(args[3]));
+                if (isDone) {
+                    task.markAsDone();
+                }
+                tasks.add(task);
+                break;
+            case "FT":
+                task = new FixedDurationTask(description, args[3]);
                 if (isDone) {
                     task.markAsDone();
                 }
