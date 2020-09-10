@@ -1,16 +1,19 @@
 package gel;
 
-import gel.exception.GelException;
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
+
+import org.junit.jupiter.api.Test;
+
+import gel.exception.GelException;
+
 
 public class TaskListTest {
 
     @Test
     public void doneTask_invalidInput_exceptionThrown() {
         try {
-            new TaskList(new Ui()).markTaskAsDone("done 1");
+            new TaskList(new Ui()).markTaskAsDone(new String[] {"1"});
             fail();
         } catch (GelException e) {
             assertEquals("\n"
@@ -23,7 +26,7 @@ public class TaskListTest {
     @Test
     public void deleteTask_nonNumberInput_exceptionThrown() {
         try {
-            new TaskList(new Ui()).deleteTask("a");
+            new TaskList(new Ui()).deleteTask(new String[] {"a"});
             fail();
         } catch (Exception e) {
             assertEquals("For input string: \"a\"", e.getLocalizedMessage());
