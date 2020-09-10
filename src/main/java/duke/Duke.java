@@ -57,8 +57,12 @@ public class Duke {
             break;
         case EVENT:
             String[] eventParams = inputParser.parseEventInput(input);
-            response += new AddCommand(new Event(eventParams[0], eventParams[1], eventParams[2]))
-                    .execute(userTasks, storage);
+            try {
+                response += new AddCommand(new Event(eventParams[0], eventParams[1], eventParams[2]))
+                        .execute(userTasks, storage);
+            } catch (DukeException ex) {
+                response += ui.errorMessage(ex);
+            }
             break;
         case LIST:
             response += new ListCommand().execute(userTasks, input);

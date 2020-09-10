@@ -1,6 +1,8 @@
 package duke.command;
 
+import duke.DukeException;
 import duke.Event;
+import duke.ExceptionType;
 import duke.Scheduler;
 import duke.Storage;
 import duke.Task;
@@ -28,12 +30,15 @@ public class AddCommand extends Command {
      * @param userTasks list of tasks from user.
      * @param storage user's storage.
      * @return response after command is executed.
+     * @throws DukeException if clashing event is added.
      */
-    public String execute(TaskList userTasks, Storage storage) {
+    public String execute(TaskList userTasks, Storage storage) throws DukeException {
 
         if (task instanceof Event) {
-            //boolean isClashing = new Scheduler().isClashing()
-            //scheduler.addEvent(task);
+            boolean isClashing = new Scheduler().isEventClashingSchedule(userTasks, ((Event) task));
+            if (isClashing) {
+                throw new DukeException("", ExceptionType.INVALID_COMMAND);
+            }
         }
 
         userTasks.addTask(task);
