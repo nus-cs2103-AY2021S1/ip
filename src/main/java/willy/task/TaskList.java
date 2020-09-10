@@ -23,7 +23,7 @@ public class TaskList {
     private final String REMOVE_TASK_RESPONSE = "Okai here is the task you just deleted:\n";
     private final String EMPTY_LIST_RESPONSE = "\tThere is no task in your list:>\n";
     private final String NON_EMPTY_LIST_RESPONSE = "\tHere are the tasks in your list to jolt ur memory:>\n";
-
+    private final String UPDATE_TASK_RESPONSE = "Okay, Here's the task you just updated:\n";
 
     public TaskList(ArrayList<Task> listOfTasks, TaskStore storage) {
         this.listOfTasks = listOfTasks;
@@ -76,6 +76,25 @@ public class TaskList {
             return willyResponse;
 
         } catch (Exception e) {
+            WillyException error = new WillyException(NON_EXISTENT_TASK_MESSAGE);
+            return error.toString();
+        }
+    }
+
+    public String updateTask(int taskNum, Task editedTask) {
+        assert taskNum > 0 : "Please insert a task number greater than 0" ;
+        try {
+            int i = taskNum - 1;
+            listOfTasks.set(i, editedTask);
+            String willyResponse = Willy.response(
+                    UPDATE_TASK_RESPONSE +
+                    "\t  " + editedTask + "\n" +
+                    "\tNow you have " + listOfTasks.size() +
+                    " task(s), please don't forget!");
+
+            return willyResponse;
+
+        } catch (Exception e){
             WillyException error = new WillyException(NON_EXISTENT_TASK_MESSAGE);
             return error.toString();
         }
@@ -150,8 +169,8 @@ public class TaskList {
                         + "\t  " + (i + 1) + "." + task + "\n";
             }
         }
-        filteredList = filteredList + Willy.getStyle();
 
+        filteredList = filteredList + Willy.getStyle();
         return filteredList;
     }
 }
