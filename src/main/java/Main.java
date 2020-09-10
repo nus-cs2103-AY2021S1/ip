@@ -1,18 +1,19 @@
+
+
 import java.io.IOException;
 
-import duke.Storage;
-import duke.TaskList;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
+import duke.Storage;
+import duke.TaskList;
 /**
  * A GUI for Duke using FXML.
  */
 public class Main extends Application {
-
     private Duke duke = new Duke();
     TaskList tasks = new TaskList();
     Storage storage = new Storage();

@@ -1,5 +1,7 @@
 package duke;
 
+import java.text.ParseException;
+
 import duke.command.Command;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
@@ -9,8 +11,6 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.ToDoCommand;
-
-import java.text.ParseException;
 
 public class Parser {
     // TODO: 20/8/20 CHANGE ALL MATCHES TO matcher.find
