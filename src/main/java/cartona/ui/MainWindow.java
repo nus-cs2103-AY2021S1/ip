@@ -3,15 +3,11 @@ package cartona.ui;
 import cartona.Cartona;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import java.net.http.WebSocketHandshakeException;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.

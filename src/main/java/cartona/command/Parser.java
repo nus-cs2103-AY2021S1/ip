@@ -19,67 +19,81 @@ import cartona.task.Todo;
  */
 public class Parser {
 
+    private Todo parseTodo(String name) {
+        return new Todo(name, false);
+    }
+
+    private Deadline parseDeadline(String nameAndDate) throws InvalidTaskTimeException, EmptyTaskDescriptionException {
+        String deadlineName;
+        String time;
+
+        try {
+            String[] nameAndTime = nameAndDate.split(" /by ");
+            deadlineName = nameAndTime[0];
+            time = nameAndTime[1];
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidTaskTimeException("Error: Missing '/by' keyword");
+        }
+
+        if (deadlineName.equals("")) {
+            throw new EmptyTaskDescriptionException("Error: Empty task name not allowed");
+        }
+        if (time.equals("")) {
+            throw new InvalidTaskTimeException("Error: Please enter a valid time for the deadline");
+        }
+
+        TaskDate dateTime = DateParser.parseDate(time);
+        return new Deadline(deadlineName, false, dateTime);
+    }
+
+    private Event parseEvent(String nameAndDate) throws InvalidTaskTimeException, EmptyTaskDescriptionException {
+        String eventName;
+        String timeRange;
+
+        try {
+            String[] nameAndTime = nameAndDate.split(" /at ");
+            eventName = nameAndTime[0];
+            timeRange = nameAndTime[1];
+        } catch (IndexOutOfBoundsException e) {
+            throw new InvalidTaskTimeException("Error: Missing '/at' keyword or time range");
+        }
+
+        if (eventName.equals("")) {
+            throw new EmptyTaskDescriptionException("Error: Empty task name not allowed");
+        }
+        if (timeRange.equals("")) {
+            throw new InvalidTaskTimeException("Error: Please input a time range");
+        }
+
+        TaskDate startDateTime = DateParser.getRange(timeRange, true);
+        TaskDate endDateTime = DateParser.getRange(timeRange, false);
+        return new Event(eventName, false, startDateTime, endDateTime);
+    }
+
     private Task parseTaskToAdd(String consoleArg) throws EmptyTaskDescriptionException, InvalidTaskTimeException,
             UnknownCommandException, InvalidInputException {
 
+        // checks if there is any text after "add "
         if (consoleArg.length() <= 4) {
             throw new UnknownCommandException("Error: Missing task type keyword");
         }
 
         String keyword = consoleArg.substring(4).split(" ")[0];
+
         switch (keyword) {
         case("todo"):
             if (consoleArg.length() <= 9) {
                 throw new EmptyTaskDescriptionException("Error: Empty task name not allowed");
             }
 
-            String name = consoleArg.substring(9);
+            return parseTodo(consoleArg.substring(9));
 
-            return new Todo(name, false);
         case("deadline"):
-            String deadlineName = "";
-            String time = "";
-
-            try {
-                String[] nameAndTime = consoleArg.substring(13).split(" /by ");
-                deadlineName = nameAndTime[0];
-                time = nameAndTime[1];
-            } catch (IndexOutOfBoundsException e) {
-                throw new InvalidTaskTimeException("Error: Missing '/by' keyword or time range");
-            }
-
-            if (deadlineName.equals("")) {
-                throw new EmptyTaskDescriptionException("Error: Empty task name not allowed");
-            }
-            if (time.equals("")) {
-                throw new InvalidTaskTimeException("Error: Empty task name not allowed");
-            }
-
-            TaskDate dateTime = DateParser.parseDate(time);
-            return new Deadline(deadlineName, false, dateTime);
+            return parseDeadline(consoleArg.substring(13));
 
         case("event"):
-            String eventName = "";
-            String timeRange = "";
+            return parseEvent(consoleArg.substring(10));
 
-            try {
-                String[] nameAndTime = consoleArg.substring(10).split(" /at ");
-                eventName = nameAndTime[0];
-                timeRange = nameAndTime[1];
-            } catch (IndexOutOfBoundsException e) {
-                throw new InvalidTaskTimeException("Error: Missing '/at' keyword or time range");
-            }
-
-            if (eventName.equals("")) {
-                throw new EmptyTaskDescriptionException("Error: Empty task name not allowed");
-            }
-            if (timeRange.equals("")) {
-                throw new InvalidTaskTimeException("Error: Please input a time range");
-            }
-
-            TaskDate startDateTime = DateParser.getRange(timeRange, true);
-            TaskDate endDateTime = DateParser.getRange(timeRange, false);
-            return new Event(eventName, false, startDateTime, endDateTime);
         default:
             throw new UnknownCommandException("Error: Invalid Event Type, please try again.");
         }
@@ -157,12 +171,11 @@ public class Parser {
      */
     public Task parseFromStorage(String storageLine) {
         String[] taskData = storageLine.split(" \\| ");
-
         assert taskData.length >= 2
                 : "Task storage line is missing fields";
 
-        String taskType = taskData[0];
 
+        String taskType = taskData[0];
         assert taskType.equals("T") || taskType.equals("D") || taskType.equals("E")
                 : "Task type in storage does not match expected characters";
 
@@ -173,8 +186,8 @@ public class Parser {
             return new Todo(taskName, taskIsDone);
 
         } else {
-
             String taskTime = taskData[3];
+
             if (taskType.equals("D")) {
                 TaskDate dueTime = DateParser.parseDateFromStorage(taskTime);
                 return new Deadline(taskName, taskIsDone, dueTime);

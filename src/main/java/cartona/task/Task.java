@@ -12,6 +12,13 @@ public abstract class Task {
     protected boolean isDone;
     protected String type;
 
+    /**
+     * Creates a Task object
+     *
+     * @param name the name of the task
+     * @param isDone whether the task has been completed or not
+     * @param type the type of the task
+     */
     Task(String name, boolean isDone, String type) {
         this.name = name;
         this.isDone = isDone;
@@ -34,6 +41,11 @@ public abstract class Task {
         return this.name;
     }
 
+    /**
+     * Gets the formatted string representation of the task
+     *
+     * @return the formatted string representation of the task
+     */
     @Override
     public String toString() {
         if (this.isDone) {
@@ -44,7 +56,9 @@ public abstract class Task {
     }
 
     /**
-     * Gets an alternative string representation of the task
+     * Gets a shortened string representation of the task
+     *
+     * @return the shortened string representation of the task
      */
     public String getAbbreviatedString() {
         int isDoneRep = this.isDone ? 1 : 0;

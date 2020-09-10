@@ -1,8 +1,5 @@
 package cartona;
 
-import cartona.command.Parser;
-import cartona.task.TaskList;
-
 import java.io.BufferedWriter;
 import java.io.File;
 import java.io.IOException;
@@ -13,6 +10,9 @@ import java.nio.file.Path;
 import java.nio.file.StandardOpenOption;
 
 import java.util.List;
+
+import cartona.command.Parser;
+import cartona.task.TaskList;
 
 /**
  * The Storage class handles the saving of the TaskList to a file, and the loading of Tasks from a file.
@@ -36,6 +36,7 @@ public class Storage {
      * Checks if the file located at the pathString exists. If the file does not exist, a new file will be created.
      *
      * @returns true if the file exists at the specified path, false if it does not and a new file was created.
+     * @throws IOException if there is an error in creating the file
      */
     public boolean checkAndCreateFile() throws IOException {
         File file = new File(pathString);
@@ -51,37 +52,23 @@ public class Storage {
     /**
      * Gets the list of Tasks, as a TaskList, from the (pre-assigned) text file.
      * If the file does not exist, it returns an empty TaskList.
+     *
+     * @return the TaskList containing the Tasks recorded in the text file.
      */
     public TaskList getListFromStorage() {
         // Create File object
         Path path = Path.of(pathString);
-        File savedListFile = new File(pathString);
 
         TaskList taskList = new TaskList();
         Parser parser = new Parser();
 
         try {
-            // Check if the file exists
-            boolean doesSavedListExist = savedListFile.createNewFile();
+            // Read the contents of the file
+            List<String> contents = Files.readAllLines(path, StandardCharsets.UTF_8);
 
-            if (!doesSavedListExist) {
-                // If the file exists, read its contents
-                List<String> contents = Files.readAllLines(path, StandardCharsets.UTF_8);
-                if (contents.size() > 0) {
-                    System.out.printf(HORIZONTAL_LINE + "     Found an existing list at %s%n" + HORIZONTAL_LINE,
-                                            path);
-                } else {
-                    System.out.printf(HORIZONTAL_LINE + "     Found an existing list, but it was empty!%n"
-                            + HORIZONTAL_LINE);
-                }
-
-                // Parse each line of text and add it to the TasKList
-                for (String taskLine : contents) {
-                    taskList.addTask(parser.parseFromStorage(taskLine));
-                }
-            } else {
-                System.out.printf(HORIZONTAL_LINE + "     Existing list not found, creating new list\n"
-                        + HORIZONTAL_LINE);
+            // Parse each line of text and add it to the TasKList
+            for (String taskLine : contents) {
+                taskList.addTask(parser.parseFromStorage(taskLine));
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -96,6 +83,7 @@ public class Storage {
 
     /**
      * Saves the given TaskList to the pre-assigned text file.
+     *
      * @param taskList The TaskList to be saved.
      */
     public void saveListToFile(TaskList taskList) {
