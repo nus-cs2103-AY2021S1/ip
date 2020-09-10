@@ -42,6 +42,9 @@ public class Storage {
                     } else if (arr.get(0).equals("E")) {
                         tasks.add(new Event(arr.get(1), arr.get(2)));
                         tasks.get(i - 1).isDone = arr.get(3).equals("true");
+                    } else if (arr.get(0).equals("W")) {
+                        tasks.add(new DoWithinPeriodTasks(arr.get(1), arr.get(2), arr.get(3)));
+                        tasks.get(i - 1).isDone = arr.get(4).equals("true");
                     }
                 }
                 myReader.close();

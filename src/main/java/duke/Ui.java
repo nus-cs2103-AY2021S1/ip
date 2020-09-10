@@ -12,21 +12,22 @@ public class Ui {
     /**
      * greet user
      */
-    public void sayHi() {
+    public String sayHi() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
-        System.out.println("Hello! I'm Duke");
-        System.out.println("What can I do for you?");
+        logo = ("Hello from\n" + logo + "\n");
+        logo = logo + ("Hello! I'm Duke") + "\n";
+        logo = logo + ("What can I do for you?");
+        return logo;
     }
 
     /**
      * bye user
      */
-    public void sayBye() {
-        System.out.println("Bye. Hope to see you again soon!");
+    public String sayBye() {
+        return ("Bye. Hope to see you again soon!");
     }
 }

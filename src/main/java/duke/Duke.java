@@ -112,16 +112,22 @@ public class Duke extends Application {
 
     private void handleUserInput() {
         String userText = userInput.getText();
-        String dukeText = getResponse(userInput.getText());
+        //tring dukeHeard = getResponse(userInput.getText());
+        String dukeReply = getReply(userInput.getText());
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, user),
-                DialogBox.getDukeDialog(dukeText, duke)
+                //DialogBox.getDukeDialog(dukeHeard, duke),
+                DialogBox.getDukeDialog(dukeReply, user)
         );
         userInput.clear();
     }
 
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        return "cak heard: " + input;
+    }
+
+    public String getReply(String input) {
+        return solveInput(input);
     }
 
     private Label getDialogLabel(String text) {
@@ -153,105 +159,141 @@ public class Duke extends Application {
     /**
      * Take in command
      */
+
+    public String addNewLines(String cur, String add) {
+        cur += add + "\n";
+        return cur;
+    }
+
+    public String solveInput(String cmd) {
+        Reply res = new Reply();
+        if(cmd.equals("bye")) {
+            res.addNewLines(ui.sayBye());
+        }
+        else if(cmd.equals("list")) {
+            res.addNewLines("Here are the tasks in your list:");
+            // list with index
+            for(int i = 1; i <= tasks.getSize(); ++i) {
+                res.addNewLines(i + "." + tasks.get(i - 1).getStatus());
+            }
+            // list without index
+            // tasks.getArrayList().forEach((n) -> System.out.println(n.getStatus()));
+        }
+        else if(cmd.length() >= 4 && cmd.substring(0, 4).equals("done")) {
+            int c = 0;
+            for(int i = 5; i < cmd.length(); ++i) {
+                c = c * 10 + cmd.charAt(i) - '0';
+            }
+            res.addNewLines("Nice! I've marked this task as done:");
+            tasks.get(c - 1).done();
+            res.addNewLines(tasks.get(c - 1).getStatus());
+        }
+        else if(cmd.length() >= 4 && cmd.substring(0, 4).equals("todo")) {
+            try {
+                checkCmd(cmd, 4, "OOPS!!! The description of a todo cannot be empty.");
+                String getName = cmd.substring(5);
+                assert(!getName.equals(""));
+                Todo tmp = new Todo(getName);
+                res.addNewLines("Got it. I've added this task: ");
+                res.addNewLines("  " + tmp.getStatus());
+                tasks.add(tmp);
+                res.addNewLines("Now you have " + tasks.getSize() + " tasks in the list.");
+            }
+            catch (DukeException ex) {
+                res.addNewLines(ex.getMessage());
+            }
+        }
+        else if(cmd.length() >= 8 &&cmd.substring(0, 8).equals("deadline")) {
+            try {
+                checkCmd(cmd, 8, "☹ OOPS!!! The description of a deadline cannot be empty.");
+                String getName = parser.getNameBy(cmd);
+                assert(!getName.equals(""));
+                String getDeadline = parser.getDeadlineBy(cmd);
+                getDeadline = formatDate(getDeadline);
+                Deadline tmp = new Deadline(getName, getDeadline);
+                res.addNewLines("Got it. I've added this task: ");
+                res.addNewLines("  " + tmp.getStatus());
+                tasks.add(tmp);
+                res.addNewLines("Now you have " + tasks.getSize() + " tasks in the list.");
+            }
+            catch (DukeException ex) {
+                res.addNewLines(ex.getMessage());
+            }
+        }
+        else if(cmd.length() >= 5 &&cmd.substring(0, 5).equals("event")) {
+            try {
+                checkCmd(cmd, 5, "☹ OOPS!!! The description of a event cannot be empty.");
+                String getName = parser.getNameAt(cmd);
+                assert(!getName.equals(""));
+                String getTime = parser.getDeadlineAt(cmd);
+                getTime = formatDate(getTime);
+                Event tmp = new Event(getName, getTime);
+                res.addNewLines("Got it. I've added this task: ");
+                res.addNewLines("  " + tmp.getStatus());
+                tasks.add(tmp);
+                res.addNewLines("Now you have " + tasks.getSize() + " tasks in the list.");
+                //
+            }
+            catch (DukeException ex) {
+                res.addNewLines(ex.getMessage());
+            }
+        }
+        else if(cmd.length() >= 6 && cmd.substring(0, 6).equals("delete")){
+            int c = 0;
+            for(int i = 7; i < cmd.length(); ++i) {
+                c = c * 10 + cmd.charAt(i) - '0';
+            }
+            res.addNewLines("Noted. I've removed this task: ");
+            res.addNewLines(tasks.get(c - 1).getStatus());
+            tasks.remove(c - 1);
+            res.addNewLines("Now you have " + tasks.getSize() + " tasks in the list.");
+        }
+        else if(cmd.length() >= 4 && cmd.substring(0, 4).equals("find")) {
+            String tmp = cmd.substring(5);
+            res.addNewLines("Here are the matching tasks in your list:");
+            for(int i = 1; i <= tasks.getSize(); ++i) if(tasks.get(i - 1).description.contains(tmp)){
+                res.addNewLines(i + "." + tasks.get(i - 1).getStatus());
+            }
+            // find without index
+            List<Task> containsList = tasks.getArrayList().stream().filter(n -> n.description.contains(tmp))
+                    .collect(Collectors.toList());
+        }
+        else if(cmd.length() >= 8 && cmd.substring(0, 8).equals("dowithin")) {
+            //void parse(String cmd) {
+            String getName = "";
+            String from = "";
+            String to = "";
+            for(int i = 9; i < cmd.length(); ++i) {
+                if(cmd.substring(i, i + 10).equals(" /between ")) {
+                    getName = cmd.substring(9, i);
+                    for(int j = i + 10; j < cmd.length(); ++j) {
+                        if(cmd.substring(j, j + 6).equals(" /and ")) {
+                            from = cmd.substring(i + 10, j);
+                            to = cmd.substring(j + 6);
+                            break;
+                        }
+                    }
+                    break;
+                }
+            }
+            DoWithinPeriodTasks tmp = new DoWithinPeriodTasks(getName, from, to);
+            res.addNewLines("Got it. I've added this task: ");
+            res.addNewLines("  " + tmp.getStatus());
+            tasks.add(tmp);
+            res.addNewLines("Now you have " + tasks.getSize() + " tasks in the list.");
+            //}
+        }
+        else res.addNewLines("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        storage.updateDataFile(tasks.getArrayList());
+        return res.toString();
+    }
+
     public void run() {
         ui.sayHi();
         Scanner myScanner = new Scanner(System.in);
         while(true) {
             String cmd = myScanner.nextLine();
-            if(cmd.equals("bye")) {
-                ui.sayBye();
-                break;
-            }
-            else if(cmd.equals("list")) {
-                System.out.println("Here are the tasks in your list:");
-                // list with index
-                for(int i = 1; i <= tasks.getSize(); ++i) {
-                    System.out.println(i + "." + tasks.get(i - 1).getStatus());
-                }
-                // list without index
-                // tasks.getArrayList().forEach((n) -> System.out.println(n.getStatus()));
-            }
-            else if(cmd.length() >= 4 && cmd.substring(0, 4).equals("done")) {
-                int c = 0;
-                for(int i = 5; i < cmd.length(); ++i) {
-                    c = c * 10 + cmd.charAt(i) - '0';
-                }
-                System.out.println("Nice! I've marked this task as done:");
-                tasks.get(c - 1).done();
-                System.out.println(tasks.get(c - 1).getStatus());
-            }
-            else if(cmd.length() >= 4 && cmd.substring(0, 4).equals("todo")) {
-                try {
-                    checkCmd(cmd, 4, "OOPS!!! The description of a todo cannot be empty.");
-                    String getName = cmd.substring(5);
-                    assert(!getName.equals(""));
-                    Todo tmp = new Todo(getName);
-                    System.out.println("Got it. I've added this task: ");
-                    System.out.println("  " + tmp.getStatus());
-                    tasks.add(tmp);
-                    System.out.println("Now you have " + tasks.getSize() + " tasks in the list.");
-                }
-                catch (DukeException ex) {
-                    System.out.println(ex.getMessage());
-                }
-            }
-            else if(cmd.length() >= 8 &&cmd.substring(0, 8).equals("deadline")) {
-                try {
-                    checkCmd(cmd, 8, "☹ OOPS!!! The description of a deadline cannot be empty.");
-                    String getName = parser.getNameBy(cmd);
-                    assert(!getName.equals(""));
-                    String getDeadline = parser.getDeadlineBy(cmd);
-                    getDeadline = formatDate(getDeadline);
-                    Deadline tmp = new Deadline(getName, getDeadline);
-                    System.out.println("Got it. I've added this task: ");
-                    System.out.println("  " + tmp.getStatus());
-                    tasks.add(tmp);
-                    System.out.println("Now you have " + tasks.getSize() + " tasks in the list.");
-                }
-                catch (DukeException ex) {
-                    System.out.println(ex.getMessage());
-                }
-            }
-            else if(cmd.length() >= 5 &&cmd.substring(0, 5).equals("event")) {
-                try {
-                    checkCmd(cmd, 5, "☹ OOPS!!! The description of a event cannot be empty.");
-                    String getName = parser.getNameAt(cmd);
-                    assert(!getName.equals(""));
-                    String getTime = parser.getDeadlineAt(cmd);
-                    getTime = formatDate(getTime);
-                    Event tmp = new Event(getName, getTime);
-                    System.out.println("Got it. I've added this task: ");
-                    System.out.println("  " + tmp.getStatus());
-                    tasks.add(tmp);
-                    System.out.println("Now you have " + tasks.getSize() + " tasks in the list.");
-                    //
-                }
-                catch (DukeException ex) {
-                    System.out.println(ex.getMessage());
-                }
-            }
-            else if(cmd.length() >= 6 && cmd.substring(0, 6).equals("delete")){
-                int c = 0;
-                for(int i = 7; i < cmd.length(); ++i) {
-                    c = c * 10 + cmd.charAt(i) - '0';
-                }
-                System.out.println("Noted. I've removed this task: ");
-                System.out.println(tasks.get(c - 1).getStatus());
-                tasks.remove(c - 1);
-                System.out.println("Now you have " + tasks.getSize() + " tasks in the list.");
-            }
-            else if(cmd.length() >= 4 && cmd.substring(0, 4).equals("find")) {
-                String tmp = cmd.substring(5);
-                System.out.println("Here are the matching tasks in your list:");
-                for(int i = 1; i <= tasks.getSize(); ++i) if(tasks.get(i - 1).description.contains(tmp)){
-                    System.out.println(i + "." + tasks.get(i - 1).getStatus());
-                }
-                // find without index
-                List<Task> containsList = tasks.getArrayList().stream().filter(n -> n.description.contains(tmp))
-                                               .collect(Collectors.toList());
-            }
-            else System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
-            storage.updateDataFile(tasks.getArrayList());
+            solveInput(cmd);
         }
     }
 
