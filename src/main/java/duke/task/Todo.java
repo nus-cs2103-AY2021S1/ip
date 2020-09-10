@@ -22,6 +22,22 @@ public class Todo extends Task {
     }
 
     /**
+     * Compares two todos and check if they are the same
+     * @param o object to compare equality
+     * @return true if the todos are the same
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        } else if (!(o instanceof Todo)) {
+            return false;
+        }
+        Todo t = (Todo) o;
+        return getName().equals(t.getName());
+    }
+
+    /**
      * Returns String representation of Task to be saved.
      * @return String representation of Task to be saved
      */

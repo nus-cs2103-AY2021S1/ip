@@ -49,6 +49,22 @@ public abstract class Task {
     }
 
     /**
+     * Compares two tasks and check if they are the same
+     * @param o object to compare equality
+     * @return true if the tasks are the same
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        } else if (!(o instanceof Task)) {
+            return false;
+        }
+        Task t = (Task) o;
+        return name.equals(t.name);
+    }
+
+    /**
      * Returns String representation of Task to be saved.
      * @return String representation of Task to be saved
      */

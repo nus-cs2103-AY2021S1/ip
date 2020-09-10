@@ -26,6 +26,22 @@ public class Event extends Task {
     }
 
     /**
+     * Compares two events and check if they are the same
+     * @param o object to compare equality
+     * @return true if the events are the same
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        } else if (!(o instanceof Event)) {
+            return false;
+        }
+        Event e = (Event) o;
+        return getName().equals(e.getName()) && duration.equals(e.duration);
+    }
+
+    /**
      * Returns String representation of Task to be saved.
      * @return String representation of Task to be saved
      */

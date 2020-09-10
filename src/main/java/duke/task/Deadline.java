@@ -30,6 +30,22 @@ public class Deadline extends Task {
     }
 
     /**
+     * Compares two deadlines and check if they are the same
+     * @param o object to compare equality
+     * @return true if the deadlines are the same
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        } else if (!(o instanceof Deadline)) {
+            return false;
+        }
+        Deadline d = (Deadline) o;
+        return getName().equals(d.getName()) && deadline.equals(d.deadline);
+    }
+
+    /**
      * Returns String representation of Task to be saved.
      * @return String representation of Task to be saved
      */

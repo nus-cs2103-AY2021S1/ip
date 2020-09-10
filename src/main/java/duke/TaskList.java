@@ -56,6 +56,12 @@ public class TaskList {
                 throw new Parser.InvalidCommandException();
         }
 
+        for (Task existingTask: tasks) {
+            if (existingTask.equals(task)) {
+                return new String[]{ String.format("Task \"%s\" already exists", task.getName()) };
+            }
+        }
+
         addTask(task);
         return new String[] {
             StringConstants.ADD_MESSAGE,
