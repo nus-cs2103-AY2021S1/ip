@@ -1,11 +1,12 @@
-import duke.DukeException;
-import duke.Task;
-import duke.TaskList;
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import java.util.ArrayList;
-import java.util.List;
+import duke.DukeException;
+import duke.Task;
+import duke.TaskList;
 
 public class TaskListTest {
     @Test

@@ -13,11 +13,11 @@ public class Duke {
     private boolean isInProgram;
 
     /**
-     * Initializes Duke containing the storage, ui and task list.
+     * Initializes Duke containing the storage, terminal ui and task list. For Duke running with Terminal UI.
      *
      * @param filePath Filepath of where storage files are stored.
      */
-    public Duke(String filePath, TerminalUi ui) {
+    public Duke(String filePath, Ui ui) {
         this.storage = new Storage(filePath);
         this.ui = ui;
         this.isInProgram = true;
@@ -28,6 +28,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Initializes Duke containing the storage, graphical ui and task list. For Duke running with GUI.
+     *
+     * @param filePath Filepath of where storage files are stored.
+     * @throws DukeException When a duke exception is caught, it is thrown to Main class for processing.
+     */
     public Duke(String filePath, GraphicalUi ui) throws DukeException {
         this.storage = new Storage(filePath);
         this.ui = ui;
@@ -47,10 +53,11 @@ public class Duke {
      * Runs Duke chat bot.
      */
     public void run() {
-        ((TerminalUi) ui).greet();
+        TerminalUi terminalUi = ((TerminalUi) ui);
+        terminalUi.greet();
         while (isInProgram) {
             try {
-                String input = ((TerminalUi) ui).getNextInput();
+                String input = terminalUi.getNextInput();
                 Command command = Parser.parse(input);
                 command.execute(taskList, ui, storage);
                 isInProgram = command.isInProgram();

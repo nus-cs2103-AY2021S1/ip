@@ -18,6 +18,11 @@ public class TerminalUi extends Ui {
         return sc.nextLine();
     }
 
+    /**
+     * Prints message in a given format from a variable number of strings.
+     *
+     * @param response Strings to be printed in a given format.
+     */
     public void printFormattedMessage(String... response) {
         System.out.println(LINE);
         for (String string : response) {
@@ -68,6 +73,12 @@ public class TerminalUi extends Ui {
                 taskToDelete.toString(), displayTaskCount(count));
     }
 
+    /**
+     * Returns display message for task count.
+     *
+     * @param numOfTasks Number of tasks.
+     * @return Display message.
+     */
     public String displayTaskCount(int numOfTasks) {
         if (numOfTasks == 1) {
             return "My duck senses tell me you have 1 task in the list.";

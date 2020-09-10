@@ -9,7 +9,7 @@ public class GraphicalUi extends Ui {
         this.responseMessage = "";
     }
 
-    public String getGreetingMessage(){
+    public String getGreetingMessage() {
         return GREETING_MESSAGE;
     }
 
@@ -22,6 +22,11 @@ public class GraphicalUi extends Ui {
         return responseMessage;
     }
 
+    /**
+     * Adds display message for task count to response message.
+     *
+     * @param numOfTasks Number of tasks.
+     */
     public void displayTaskCount(int numOfTasks) {
         if (numOfTasks == 1) {
             responseMessage += "My duck senses tell me you have 1 task in the list." + "\n";
@@ -32,7 +37,8 @@ public class GraphicalUi extends Ui {
 
     @Override
     public void processAddMessage(Task task, int count) {
-        responseMessage = "Quack! I have added: " + task + "\n";;
+        responseMessage = "Quack! I have added: " + task + "\n";
+        ;
         displayTaskCount(count);
     }
 

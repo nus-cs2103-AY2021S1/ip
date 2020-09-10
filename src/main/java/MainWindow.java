@@ -53,11 +53,21 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Creates a dialog box which contains Duke's Greeting Message, then appends it to
+     * the dialog container.
+     */
     public void greet() {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(((GraphicalUi) duke.getUi()).getGreetingMessage(),
                 dukeImage));
     }
 
+    /**
+     * Creates a dialog box which contains the error message and user image, then appends it to
+     * the dialog container.
+     *
+     * @param errorMessage Error message.
+     */
     public void showLoadError(String errorMessage) {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(errorMessage, userImage));
     }

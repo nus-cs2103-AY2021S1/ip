@@ -16,6 +16,12 @@ public class Storage {
         this.file = new File(filePath);
     }
 
+    /**
+     * Loads task information stored in the file.
+     *
+     * @return List of tasks after loading.
+     * @throws DukeException When there is an input or output error.
+     */
     public List<Task> load() throws DukeException {
         List<Task> taskList = new ArrayList<>();
         try {
@@ -55,6 +61,12 @@ public class Storage {
         return storedTaskStatus.equals("1");
     }
 
+    /**
+     * Updates the tasks stored in file from the task list.
+     *
+     * @param taskList Task list to be updated in file.
+     * @throws DukeException When there is an input or output error.
+     */
     public void updateTasks(TaskList taskList) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(file);
@@ -69,7 +81,7 @@ public class Storage {
                     fileWriter.write(String.join(SPLITTER, TaskType.EVENT.getInitial(), getDoneString(task),
                             task.getDescription(), ((Event) task).getAt()));
                 } else {
-                    throw new DukeException("I can't seem to update the file...");
+                    assert false;
                 }
                 fileWriter.write(System.lineSeparator());
             }
