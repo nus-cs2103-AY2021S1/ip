@@ -58,6 +58,9 @@ public class Duke {
             case "find":
                 toReturn += taskList.find(parser);
                 break;
+            case "update":
+                toReturn += taskList.update(parser);
+                break;
             case "deadline":
             case "event":
             case "todo":

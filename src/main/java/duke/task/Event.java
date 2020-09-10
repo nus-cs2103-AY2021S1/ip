@@ -22,6 +22,11 @@ public class Event extends Task {
         return taskDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
     }
 
+    @Override
+    public void setDate(LocalDate taskDate) {
+        this.taskDate = taskDate;
+    }
+
     public String toString() {
         return String.format("[E][%s] %s (at: %s)", getStatusIcon(), taskName, taskDate.format(DateTimeFormatter.ofPattern("MMM dd yyyy")));
     }
