@@ -8,6 +8,6 @@ public class InvalidTaskDateException extends DukeException {
 
     @Override
     public String toString() {
-        return "Cannot parse the given " + command + " date!";
+        return "Cannot parse the given date" + (command.isBlank() ? "" : " for " + command + " ") + "!";
     }
 }

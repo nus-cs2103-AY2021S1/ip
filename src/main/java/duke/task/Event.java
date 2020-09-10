@@ -6,7 +6,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * Represents a type of <code>Task</code> that hs a date
+ * Represents a type of {@code Task} that hs a date
  * at which it will occur.
  */
 public class Event extends Task {
@@ -20,6 +20,11 @@ public class Event extends Task {
     @Override
     public String getDate() {
         return taskDate.format(DateTimeFormatter.ISO_LOCAL_DATE);
+    }
+
+    @Override
+    public void setDate(LocalDate taskDate) {
+        this.taskDate = taskDate;
     }
 
     public String toString() {

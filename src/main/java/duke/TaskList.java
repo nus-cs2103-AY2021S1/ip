@@ -3,6 +3,7 @@ package duke;
 import duke.exception.*;
 import duke.task.TaskType;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
@@ -13,11 +14,12 @@ import java.util.stream.Collectors;
  * Represents the list of tasks together with a counter
  * to keep track of pending tasks.
  */
-public class TaskList implements Cloneable {
+public class TaskList {
     private static final String DONE_MESSAGE = "Good job! This task is now marked done:";
     private static final String DELETED_MESSAGE = "Alright! This task is now deleted:";
     private static final String LIST_HINT = "(Use 'list' command to see your updated list.)";
-    private static final String NO_MATCH = "No matches found!";
+    private static final String NO_MATCH_MESSAGE = "No matches found!";
+    private static final String UPDATED_MESSAGE = "Got it! Your task has been updated.";
     private List<Task> tasks;
     private int numOfPendingTasks;
 
@@ -46,18 +48,14 @@ public class TaskList implements Cloneable {
         return target >= 0 && target < tasks.size();
     }
 
-    /**
-     * Adds one count to pending task.
-     */
     public void incrementPendingTasks() {
         this.numOfPendingTasks++;
+        assert numOfPendingTasks > 0 : "Amount of pending tasks was negative; something went wrong.";
     }
 
-    /**
-     * Subtracts one count to pending task.
-     */
     public void decrementPendingTasks() {
         this.numOfPendingTasks--;
+        assert numOfPendingTasks >= 0 : "Called decrement to an empty list; should be impossible.";
     }
 
     /**
@@ -89,7 +87,7 @@ public class TaskList implements Cloneable {
      * Attempts to check a Task as done, then display a success message.
      * If the checking as done fails, a fail message is displayed instead.
      *
-     * @param parser
+     * @param parser current {@code Parser}
      */
     public String done(Parser parser) {
         try {
@@ -110,7 +108,7 @@ public class TaskList implements Cloneable {
      * Attempts to delete a Task, then display a success message
      * If the deletion fails, a fail message is displayed instead
      *
-     * @param parser
+     * @param parser current {@code Parser}
      */
     public String delete(Parser parser) {
         try {
@@ -133,7 +131,7 @@ public class TaskList implements Cloneable {
      * Attempts to add a Task to the list, then display a success message.
      * If the addition fails, a fail message is displayed instead.
      *
-     * @param parser
+     * @param parser current {@code Parser}
      */
     public String add(Parser parser) {
         try {
@@ -161,35 +159,28 @@ public class TaskList implements Cloneable {
      * Displays a list of Tasks that contains a given String.
      * If not found, displays an alternative null message.
      *
-     * @param parser
+     * @param parser current {@code Parser}
      */
     public String find(Parser parser) {
         List<Task> matches = getMatchingTask(parser.comparator);
 
         if (matches.isEmpty()) {
-            return Ui.displayMessage(NO_MATCH);
+            return Ui.displayMessage(NO_MATCH_MESSAGE);
         } else {
             int count = 1;
-            String toReturn = String.format("Found %d match(es) for '%s':", matches.size(), parser.comparator);
+            StringBuilder toReturn = new StringBuilder(String.format("Found %d match(es) for '%s':", matches.size(), parser.comparator));
 
             for (Task task : matches) {
-                toReturn += String.format("\n   %d. %s", count, task.toString());
+                toReturn.append(String.format("   %d. %s", count, task.toString()));
                 count++;
             }
 
-            return Ui.displayMessage(toReturn);
+            return Ui.displayMessage(toReturn.toString());
         }
     }
 
-    /**
-     * Creates a sublist of Tasks with a name that contains a certain string.
-     *
-     * @param comparator the substring of interest.
-     * @return a list of Tasks containing the substring of interest.
-     */
-    public List<Task> getMatchingTask(String comparator) {
-        boolean hasComparator = !comparator.isBlank();
-
+    private List<Task> getMatchingTask(String comparator) {
+        List<Task> matchingTasks = new ArrayList<>();
         if (!hasComparator) {
             return new ArrayList<>();
         } else {
@@ -199,11 +190,48 @@ public class TaskList implements Cloneable {
         }
     }
 
+    public String update(Parser parser) {
+        try {
+            Task targetTask = tasks.get(getTaskID(parser));
+            Task clonedTask = (Task) targetTask.clone();
+            String changeWord = parser.getChangeWord();
+            String target = parser.getChangeTarget();
+
+            switch (changeWord) {
+            case "name":
+                targetTask.setTaskName(target);
+                break;
+            case "date":
+                targetTask.setDate(LocalDate.parse(target));
+                break;
+            case "undo":
+                if (targetTask.isDone) {
+                    targetTask.markAsUndone();
+                    incrementPendingTasks();
+                } else {
+                    targetTask.markAsDone();
+                    decrementPendingTasks();
+                }
+                break;
+            default:
+                assert false : changeWord;
+            }
+
+            String toReturn = UPDATED_MESSAGE + "\n"
+                    + "  from:  " + clonedTask + "\n"
+                    + "  to:    " + targetTask + "\n\n"
+                    + LIST_HINT;
+            return Ui.displayMessage(toReturn);
+        } catch (DukeException | CloneNotSupportedException e) {
+            return Ui.displayMessage(e.toString());
+        }
+    }
+
     /**
      * Creates a clone of the current TaskList (for testing purposes).
      *
      * @return a shallow copy of this with no element references.
-     * @throws CloneNotSupportedException
+     * @throws CloneNotSupportedException when cloning process is invalid.
      */
     @Override
     protected Object clone() throws CloneNotSupportedException {

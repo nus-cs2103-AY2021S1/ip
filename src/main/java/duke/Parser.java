@@ -1,9 +1,8 @@
 package duke;
 
-import duke.exception.DukeException;
-import duke.exception.EmptyComparatorException;
-import duke.exception.NullIndexException;
-import duke.exception.NullTaskNameException;
+import duke.exception.*;
+
+import java.time.LocalDate;
 
 /**
  * Parses and contains the important info required
@@ -16,6 +15,9 @@ public class Parser {
     private String taskName;
     private String taskDate;
     private Integer taskNumber;
+    private String changeWord;
+    private String changeTarget;
+
 
     Parser() {
         comparator = "";
@@ -24,14 +26,16 @@ public class Parser {
         taskName = "";
         taskDate = "";
         taskNumber = 0;
+        changeWord = "";
+        changeTarget = "";
     }
 
     /**
      * Sets the command line of <code>Parser</code> to
-     * a given string inputted via CLI
+     * a given string inputted via CLI.
      *
-     * @param commandLine The line typed into CLI
-     * @throws Exception
+     * @param commandLine The line typed into CLI.
+     * @throws Exception at anytime the {@code Parser} experiences exceptions.
      */
     public void setCommandLine(String commandLine) throws Exception {
         this.commandLine = commandLine;
@@ -41,11 +45,12 @@ public class Parser {
     /**
      * Parses the command line selectively based on the first word.
      *
-     * @param commandLine The line typed into CLI
-     * @throws Exception When the parsing is unsuccessful
+     * @param commandLine The line typed into CLI.
+     * @throws Exception When the parsing is unsuccessful.
      */
     private void parseForCommand(String commandLine) throws Exception {
         String[] words = commandLine.split(" ", 2);
+        assert words.length == 2 : "String was not split() successfully to two parts.";
         commandWord = words[0];
 
         switch (commandWord) {
@@ -59,6 +64,9 @@ public class Parser {
             } catch (Exception e) {
                 throw new NullIndexException(commandWord);
             }
+            break;
+        case "update":
+            parseForUpdates(words[1].trim());
             break;
         case "todo":
         case "deadline":
@@ -90,6 +98,7 @@ public class Parser {
     }
 
     private void parseForDetails(String remain) {
+        assert remain.contains("/") : "Remaining string must contain '/'.";
         String[] words = remain.split("/", 2);
         taskName = words[0].trim();
 
@@ -112,6 +121,31 @@ public class Parser {
         }
     }
 
+    private void parseForUpdates(String trim) throws DukeException {
+        String[] updates = trim.split(" ", 3);
+
+        try {
+            parseForNumber(updates[0]);
+            changeWord = updates[1];
+
+            switch (changeWord) {
+            case "undo":
+                break;
+            case "name":
+                changeTarget = updates[2];
+                break;
+            case "date":
+                changeTarget = updates[2];
+                LocalDate.parse(changeTarget);
+                break;
+            default:
+                assert false : changeWord;
+            }
+        } catch (Exception e) {
+            throw new InvalidUpdateException(commandWord);
+        }
+    }
+
     /**
      * Class getter routines.
      */
@@ -129,5 +163,13 @@ public class Parser {
 
     public Integer getTaskNumber() {
         return taskNumber;
+    }
+
+    public String getChangeWord() {
+        return changeWord;
+    }
+
+    public String getChangeTarget() {
+        return changeTarget;
     }
 }
