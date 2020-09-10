@@ -11,7 +11,7 @@ Types of tasks currently supported:
 
 I've decided to customize it with the theme of one of my favourite shows: South Park :)
 
-![South Park boys](https://p7.hiclipart.com/preview/154/492/853/5bbc3a934e061.jpg)
+![South Park boys](https://www.kindpng.com/picc/m/258-2584013_south-park-png-south-park-transparent-png.png)
 
 ## Features (types of commands currently supported)
 
