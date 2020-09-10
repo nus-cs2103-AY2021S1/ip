@@ -33,89 +33,110 @@ public class Parser {
         String firstWord = inputArray[0];
         Command command = new EmptyCommand();
 
-
         if (firstWord.toLowerCase().equals("bye")) { // for termination
             command = new EndCommand();
         } else if (firstWord.toLowerCase().equals("list")) { // to display list of tasks
             command = new ListCommand();
         } else if (firstWord.toLowerCase().equals("done")) {
-            if (inputArray.length <= 1) {
-                throw new DukeException("Sorry, which item did you want me to mark as done again?");
-            }
-            int index = Integer.parseInt(inputArray[1]);
-            command = new DoneCommand(index - 1);
+            command = parseDone(inputArray);
         } else if (firstWord.toLowerCase().equals("delete")) {
-            if (inputArray.length <= 1) {
-                throw new DukeException("Sorry, which item did you want me to strike off again?");
-            }
-            try {
-                int index = Integer.parseInt(inputArray[1]);
-                command = new DeleteCommand(index - 1);
-            } catch (NumberFormatException e) {
-                throw new DukeException("I need a number not a word in this case. "
-                                                    + "Could ya pass that by me one more time?");
-            }
+            command = parseDelete(inputArray);
         } else if (firstWord.toLowerCase().equals("find")) {
-            if (inputArray.length <= 1) {
-                throw new DukeException("Sorry, " + "didn't quite catch what you wanted to find!");
-            }
-            String searchTerm = stringCombiner(inputArray, 1, inputArray.length - 1).trim();
-            command = new FindCommand(searchTerm);
+            command = parseFind(inputArray);
         } else {
-            int index;
-
             switch (firstWord.toLowerCase()) {
             case "todo":
-                if (inputArray.length <= 1) {
-                    throw new DukeException("Sorry, but I can't do anything "
-                                                    + "if you don't give me the description of your todo!");
-                }
-                String desc = stringCombiner(inputArray, 1, inputArray.length - 1);
-                command = AddCommand.addTodo(desc.trim());
+                command = parseAddTodo(inputArray);
                 break;
             case "event":
                 String[] eventSplit = textToParse.split("/at");
-                index = indexFinder(inputArray, "/at");
-                if (index == 0) {
-                    throw new DukeException("Think you forgot the /at keyword, pardner!");
-                }
-                if (index == 1) {
-                    throw new DukeException("I'm gonna need a description for this here event!");
-                }
-                if (eventSplit.length == 1) {
-                    throw new DukeException("I'm gonna need a date or time for this!");
-                }
-                try {
-                    command = AddCommand.addEvent(stringCombiner(inputArray, 1, index - 1).trim(),
-                                LocalDate.parse(eventSplit[1].trim()));
-                } catch (DateTimeParseException e) {
-                    throw new DukeException("Can't seem to make out this date over here");
-                }
+                command = parseAddEvent(inputArray, eventSplit);
                 break;
             case "deadline":
                 String[] deadlineSplit = textToParse.split("/by");
-                index = indexFinder(inputArray, "/by");
-                if (index == 0) {
-                    throw new DukeException("Think you forgot the /by keyword, pardner!");
-                }
-                if (index == 1) {
-                    throw new DukeException("I'm gonna need a description for this here deadline!");
-                }
-                if (deadlineSplit.length == 1) {
-                    throw new DukeException("I'm gonna need a date or time for this!");
-                }
-                try {
-                    command = AddCommand.addDeadline(stringCombiner(inputArray, 1, index - 1).trim(),
-                            LocalDate.parse(deadlineSplit[1].trim()));
-                } catch (DateTimeParseException e) {
-                    throw new DukeException("Can't seem to make out this date over here");
-                }
+                command = parseAddDeadline(inputArray, deadlineSplit);
                 break;
             default:
                 System.out.println("Sorry, I didn't quite catch that!");
             }
         }
         return command;
+    }
+
+    private Command parseDelete(String[] inputArray) throws DukeException {
+        if (inputArray.length <= 1) {
+            throw new DukeException("Sorry, which item did you want me to strike off again?");
+        }
+        try {
+            int index = Integer.parseInt(inputArray[1]);
+            return new DeleteCommand(index - 1);
+        } catch (NumberFormatException e) {
+            throw new DukeException("I need a number not a word in this case. "
+                                            + "Could ya pass that by me one more time?");
+        }
+    }
+
+    private Command parseFind(String[] inputArray) throws DukeException {
+        if (inputArray.length <= 1) {
+            throw new DukeException("Sorry, " + "didn't quite catch what you wanted to find!");
+        }
+        String searchTerm = stringCombiner(inputArray, 1, inputArray.length - 1).trim();
+        return new FindCommand(searchTerm);
+    }
+
+    private Command parseDone(String[] inputArray) throws DukeException {
+        if (inputArray.length <= 1) {
+            throw new DukeException("Sorry, which item did you want me to mark as done again?");
+        }
+        int index = Integer.parseInt(inputArray[1]);
+        return new DoneCommand(index - 1);
+    }
+
+    private Command parseAddTodo(String[] inputArray) throws DukeException {
+        if (inputArray.length <= 1) {
+            throw new DukeException("Sorry, but I can't do anything "
+                                            + "if you don't give me the description of your todo!");
+        }
+        String desc = stringCombiner(inputArray, 1, inputArray.length - 1);
+        return AddCommand.addTodo(desc.trim());
+    }
+
+    private Command parseAddEvent(String[] inputArray, String[] eventSplit) throws DukeException {
+        int dateKeywordIndex = indexFinder(inputArray, "/at");
+        if (dateKeywordIndex == 0) {
+            throw new DukeException("Think you forgot the /at keyword, pardner!");
+        }
+        if (dateKeywordIndex == 1) {
+            throw new DukeException("I'm gonna need a description for this here event!");
+        }
+        if (eventSplit.length == 1) {
+            throw new DukeException("I'm gonna need a date or time for this!");
+        }
+        try {
+            LocalDate date = LocalDate.parse(eventSplit[1].trim());
+            return AddCommand.addEvent(stringCombiner(inputArray, 1, dateKeywordIndex - 1).trim(), date);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Can't seem to make out this date over here");
+        }
+    }
+
+    private Command parseAddDeadline(String[] inputArray, String[] deadlineSplit) throws DukeException {
+        int dateKeywordIndex = indexFinder(inputArray, "/by");
+        if (dateKeywordIndex == 0) {
+            throw new DukeException("Think you forgot the /by keyword, pardner!");
+        }
+        if (dateKeywordIndex == 1) {
+            throw new DukeException("I'm gonna need a description for this here deadline!");
+        }
+        if (deadlineSplit.length == 1) {
+            throw new DukeException("I'm gonna need a date or time for this!");
+        }
+        try {
+            LocalDate date = LocalDate.parse(deadlineSplit[1].trim());
+            return AddCommand.addDeadline(stringCombiner(inputArray, 1, dateKeywordIndex - 1).trim(), date);
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Can't seem to make out this date over here");
+        }
     }
 
     private static String stringCombiner(String[] arr, int start, int end) {
