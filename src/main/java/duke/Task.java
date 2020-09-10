@@ -1,11 +1,13 @@
 package duke;
 
+import java.time.LocalDate;
+
 /**
  * Represents a work that needs to be done.
  * Contains a name of that work, represented by a String.
  * Contains the done status of the work. represented by a boolean.
  */
-public class Task {
+public abstract class Task implements Cloneable {
     protected String taskName;
     protected boolean isDone;
 
@@ -15,11 +17,25 @@ public class Task {
     }
 
     /**
-     * Class getter routines.
+     * Class getter and setter routines.
      */
     public String getTaskName() {
         return taskName;
     }
+
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
+    }
+
+    public void markAsDone() {
+        this.isDone = true;
+    }
+
+    public void markAsUndone() { this.isDone = false; }
+
+    public abstract String getDate();
+
+    public abstract void setDate(LocalDate taskDate);
 
     /**
      * Visualises the done status of a task with an icon.
@@ -30,25 +46,13 @@ public class Task {
         return isDone ?  "\u2713" : "\u2718";
     }
 
-    /**
-     * Gives a blank date when a Task has no date.
-     * Mainly used when Storage save() method is called.
-     *
-     * @return a blank String.
-     */
-    public String getDate() {
-        return "";
-    }
-
-    /**
-     * Changes the task status to finished/done.
-     */
-    public void markAsDone() {
-        this.isDone = true;
-    }
-
     @Override
     public String toString() {
         return String.format("[%s] %s", getStatusIcon(), taskName);
+    }
+
+    @Override
+    protected Object clone() throws CloneNotSupportedException {
+        return super.clone();
     }
 }

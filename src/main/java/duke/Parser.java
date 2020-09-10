@@ -1,9 +1,8 @@
 package duke;
 
-import duke.exception.DukeException;
-import duke.exception.EmptyComparatorException;
-import duke.exception.NullIndexException;
-import duke.exception.NullTaskNameException;
+import duke.exception.*;
+
+import java.time.LocalDate;
 
 /**
  * Parses and contains the important info required
@@ -16,6 +15,9 @@ public class Parser {
     private String taskName;
     private String taskDate;
     private Integer taskNumber;
+    private String changeWord;
+    private String changeTarget;
+
 
     Parser() {
         comparator = "";
@@ -24,6 +26,8 @@ public class Parser {
         taskName = "";
         taskDate = "";
         taskNumber = 0;
+        changeWord = "";
+        changeTarget = "";
     }
 
     /**
@@ -60,6 +64,9 @@ public class Parser {
             } catch (Exception e) {
                 throw new NullIndexException(commandWord);
             }
+            break;
+        case "update":
+            parseForUpdates(words[1].trim());
             break;
         case "todo":
         case "deadline":
@@ -114,6 +121,31 @@ public class Parser {
         }
     }
 
+    private void parseForUpdates(String trim) throws DukeException {
+        String[] updates = trim.split(" ", 3);
+
+        try {
+            parseForNumber(updates[0]);
+            changeWord = updates[1];
+
+            switch (changeWord) {
+            case "undo":
+                break;
+            case "name":
+                changeTarget = updates[2];
+                break;
+            case "date":
+                changeTarget = updates[2];
+                LocalDate.parse(changeTarget);
+                break;
+            default:
+                assert false : changeWord;
+            }
+        } catch (Exception e) {
+            throw new InvalidUpdateException(commandWord);
+        }
+    }
+
     /**
      * Class getter routines.
      */
@@ -131,5 +163,13 @@ public class Parser {
 
     public Integer getTaskNumber() {
         return taskNumber;
+    }
+
+    public String getChangeWord() {
+        return changeWord;
+    }
+
+    public String getChangeTarget() {
+        return changeTarget;
     }
 }
