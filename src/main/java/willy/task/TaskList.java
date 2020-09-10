@@ -86,6 +86,7 @@ public class TaskList {
         try {
             int i = taskNum - 1;
             listOfTasks.set(i, editedTask);
+            storage.updateStorage(listOfTasks);
             String willyResponse = Willy.response(
                     UPDATE_TASK_RESPONSE +
                     "\t  " + editedTask + "\n" +

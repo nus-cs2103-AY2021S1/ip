@@ -135,7 +135,7 @@ public class Parser {
             keyword = message.substring(0,6);
         }
         if (isOnJavaFX) {
-            if (keyword.equals(Willy.getLastGreeting())) {
+            if (message.equals(Willy.getLastGreeting())) {
                 Greet endGreeting = new Greet(message);
                 return endGreeting.toString();
             }
