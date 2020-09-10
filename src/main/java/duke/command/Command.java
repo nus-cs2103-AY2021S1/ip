@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.Ui;
 import duke.dukeexception.DukeException;
 import duke.Storage;
 import duke.TaskList;
@@ -17,6 +18,8 @@ public abstract class Command {
      * @throws DukeException If a DukeException is thrown in executing the command.
      */
     public abstract void execute(TaskList tasks, Storage storage) throws DukeException;
+
+    public abstract String executeToGui(TaskList tasks, Storage storage, Ui ui) throws DukeException;
 
     /**
      * Returns true when the command is an exit command and false otherwise.

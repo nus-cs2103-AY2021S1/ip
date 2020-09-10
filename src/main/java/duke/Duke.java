@@ -20,6 +20,8 @@ public class Duke {
     /** Ui object that deals with interactions with the user */
     private Ui ui;
 
+    public Duke() {}
+
     /**
      * Public class constructor that takes in the location of a file as a string
      * indicating the relative file path.
@@ -61,5 +63,21 @@ public class Duke {
 
     public static void main(String[] args) {
         new Duke("data/tasks.txt").run();
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    public String getResponse(String input) {
+        String response = "Test";
+        try {
+            Command command = Parser.parse(input);
+            response = command.executeToGui(tasks, storage, ui);
+        } catch (DukeException e) {
+            response = ui.returnError(e.getMessage());
+        }
+
+        return response;
     }
 }
