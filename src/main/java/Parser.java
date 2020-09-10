@@ -116,7 +116,7 @@ public class Parser {
                     break;
                 }
                 default: {
-                    throw new UnknownInputException("Unknown parameter name " + entry.getKey()); //todo change to duke exceptions
+                    throw new UnknownInputException("Unknown parameter name " + entry.getKey());
                 }
                 }
             }
@@ -129,7 +129,7 @@ public class Parser {
                 return new AddNoteCommand(title, description, priority);
             } catch (NullPointerException e) {
                 e.printStackTrace();
-                throw new MissingFormatArgumentException(""); // todo: need implement
+                throw new MissingFormatArgumentException("");
             }
         }
         case "list": {
@@ -143,7 +143,7 @@ public class Parser {
             return new DeleteNoteCommand(taskNumber);
         }
         default: {
-            throw new UnknownInputException("Unknown notes command: " + firstWord); //todo change to duke exceptions
+            throw new UnknownInputException("Unknown notes command: " + firstWord);
         }
         }
 
