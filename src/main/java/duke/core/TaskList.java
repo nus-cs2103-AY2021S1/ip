@@ -17,6 +17,7 @@ public class TaskList {
      * @return a string including newline characters that depict the tasks in this TaskList.
      */
     public String list() {
+        assert tasks != null;
         StringBuffer buffer = new StringBuffer();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
@@ -30,6 +31,7 @@ public class TaskList {
      * @param searchTerm the string to be searched for within all the task descriptions
      */
     public String listSearch(String searchTerm) {
+        assert tasks != null;
         StringBuffer buffer = new StringBuffer();
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
@@ -41,6 +43,7 @@ public class TaskList {
     }
 
     public Task get(int i) {
+        assert tasks != null;
         return tasks.get(i);
     }
 
@@ -51,6 +54,7 @@ public class TaskList {
      * @see Storage
      */
     public ArrayList<Task> exportTaskList() {
+        assert tasks != null;
         return tasks;
     }
 
@@ -61,16 +65,19 @@ public class TaskList {
      * @see Storage
      */
     public void loadTasks(ArrayList<Task> savedTasks) {
+        assert tasks != null;
         if (!savedTasks.isEmpty()) {
             tasks.addAll(savedTasks);
         }
     }
 
     public void addTask(Task task) {
+        assert tasks != null;
         tasks.add(task);
     }
 
     public void deleteTask(int index) {
+        assert tasks.size() > 0;
         tasks.remove(index);
     }
 
