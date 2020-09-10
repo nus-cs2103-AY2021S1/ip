@@ -34,9 +34,6 @@ jobs:
       - name: Run tests with Gradle
         run: ./gradlew test
 
-      - name: Run shadow file successfully
-        run: ./gradlew runShadow
-
       - name: Run documentation
         run: ./gradlew javadoc
 
