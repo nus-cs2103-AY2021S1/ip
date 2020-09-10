@@ -1,6 +1,7 @@
 package duke.ui.gui;
 
-import duke.Duke;
+import java.util.Objects;
+
 import duke.DukeCommandMatcher;
 import duke.storage.Storage;
 import duke.ui.Printer;
@@ -15,7 +16,6 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 
-import java.util.Objects;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -35,6 +35,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DonaldTrump.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Duke.png"));
 
+    /**
+     * Initializer for main window.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -80,6 +83,7 @@ public class MainWindow extends AnchorPane {
             if (Objects.equals(response, "EXIT")) {
                 db = DialogBox.getDukeDialog(Printer.printBye(), dukeImage);
             } else {
+                assert response != "EXIT" : response;
                 db = DialogBox.getDukeDialog(response, dukeImage);
             }
             dialogContainer.getChildren().add(db);

@@ -53,6 +53,7 @@ public class Task {
         if (this.status) {
             return "✅";
         } else {
+            assert !this.status : "status is " + this.status;
             return "❎";
         }
     }

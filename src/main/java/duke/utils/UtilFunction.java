@@ -58,6 +58,7 @@ public class UtilFunction {
             if (sentence.length() < Constants.CONSOLEWIDTH) {
                 System.out.println(sentence);
             } else {
+                assert sentence.length() >= Constants.CONSOLEWIDTH : "sentence length: " + sentence.length();
                 wrapAndDisplay(sentence);
             }
         }
@@ -84,13 +85,15 @@ public class UtilFunction {
         return formatter.format(now);
     }
 
-    public static int getPadding(String text) {
+    public static int getLongestSentLength(String text) {
         String[] sentences = text.split("\n");
-        int sol = 0;
-        for(String sentence : sentences) {
-            sol +=  Math.ceil(sentence.length()/(42.0));
+        int sol = sentences[0].length();
+        for (String sentence : sentences) {
+            if (sentence.length() > sol) {
+                sol = sentence.length();
+            }
         }
-        return sol * 10 + 30;
+        return sol;
     }
 
 }

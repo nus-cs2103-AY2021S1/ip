@@ -8,12 +8,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.*;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
@@ -32,7 +32,7 @@ public class DialogBox extends HBox {
     @FXML
     private VBox nameAndDialog;
     @FXML
-    private VBox timeStampContainer;
+    private HBox fullInfo;
     @FXML
     private Label timeStamp;
 
@@ -46,19 +46,20 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
-        if(isUser) {
+        if (isUser) {
             name.setText("You");
-            nameAndDialog.setAlignment(Pos.TOP_RIGHT);
             dialog.setStyle("-fx-background-color: #66ff33");
+            nameAndDialog.setAlignment(Pos.TOP_RIGHT);
         } else {
             name.setText("Duke");
             dialog.setStyle("-fx-background-color: #ffffff");
         }
 
         dialog.setText(text);
-        dialog.setPrefWidth(text.length() > 40 ? 400 : text.length() * 10 + 10 );
+        //int width = UtilFunction.getLongestSentLength(text) > 38 ? 400 : text.length() * 12;
+        //dialog.setPrefWidth(width);
+        dialog.setWrapText(true);
         timeStamp.setText(UtilFunction.getCurrentTime());
-        timeStampContainer.setPadding(new Insets(UtilFunction.getPadding(text), 0, 0, 0));
         //move to fxml
         displayPicture.setRadius(20);
         displayPicture.setFill(new ImagePattern(img));
@@ -70,9 +71,15 @@ public class DialogBox extends HBox {
      */
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
+        ObservableList<Node> timeAndDialog = FXCollections.observableArrayList(fullInfo.getChildren());
+        //flip the avatar and the dialog
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
+        //flip the time stamp and the dialog
         setAlignment(Pos.TOP_LEFT);
+        Collections.reverse(timeAndDialog);
+        fullInfo.getChildren().setAll(timeAndDialog);
+
     }
 
     public static DialogBox getUserDialog(String text, Image img) {

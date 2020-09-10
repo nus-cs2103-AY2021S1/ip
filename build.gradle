@@ -25,7 +25,6 @@ test {
 
     testLogging {
         events "passed", "skipped", "failed"
-
         showExceptions true
         exceptionFormat "full"
         showCauses true
@@ -35,11 +34,11 @@ test {
 }
 
 application {
-    mainClassName = "duke.ui.Launcher"
+    mainClassName = "duke.launcher.GuiLauncher"
 }
 
 shadowJar {
-    archiveBaseName = "duke"
+    archiveBaseName = "guiDuke"
     archiveClassifier = null
 }
 

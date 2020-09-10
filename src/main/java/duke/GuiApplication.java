@@ -2,7 +2,6 @@ package duke;
 
 import java.io.IOException;
 
-import duke.ui.gui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -28,5 +27,4 @@ public class GuiApplication extends Application {
             e.printStackTrace();
         }
     }
-
 }
