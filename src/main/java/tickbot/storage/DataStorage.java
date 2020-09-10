@@ -82,6 +82,7 @@ public class DataStorage {
      * @see DataStorage#getDataStoragePath
      */
     public void update(List<Task> tasks) {
+        assert tasks != null; // task list cannot be null
         try {
             File dataFile = new File(getDataStoragePath(), DATA_STORAGE_FILE_NAME);
             FileOutputStream outputStream = new FileOutputStream(dataFile);
@@ -91,7 +92,7 @@ public class DataStorage {
                     task.getTaskType(),
                     task.isCompleted() ? "1" : "0",
                     task.getContent(),
-                    Objects.toString(task.getTime()) // could be null
+                    Objects.toString(task.getTime()) // time could be null
                 };
                 writer.writeNext(line);
             }
