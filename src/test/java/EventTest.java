@@ -16,8 +16,8 @@ public class EventTest {
             Task e = new Event("meeting", "Sunday");
             fail();
         } catch (DukeException ex) {
-            String error = "UHOH! You need to use the proper format!\n"
-                    + "eg event project meeting /at 2019-10-15 1200";
+            String error = "UHOH! Y'all need to learn to use the proper format!\n"
+                    + "Try somethin' like this: \nevent karate competition /at 2019-10-15 1200";
             assertEquals(error, ex.getMessage());
         }
     }

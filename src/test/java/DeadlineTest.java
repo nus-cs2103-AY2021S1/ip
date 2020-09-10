@@ -16,8 +16,8 @@ public class DeadlineTest {
             Task d = new Deadline("project", "Sunday");
             fail();
         } catch (DukeException ex) {
-            String error = "UHOH! You need to use the proper format!\n"
-                    + "eg deadline return book /by 2019-10-15 2359";
+            String error = "UHOH! Y'all need to learn to use the proper format!\n"
+                    + "Try somethin' like this: \ndeadline build spaceship /by 2019-10-15 2359";
             assertEquals(error, ex.getMessage());
         }
     }

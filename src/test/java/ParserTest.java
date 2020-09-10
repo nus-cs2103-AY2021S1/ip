@@ -30,8 +30,8 @@ public class ParserTest {
             Parser.parse("done");
             fail();
         } catch (DukeException ex) {
-            String error = "UHOH! You need to specify which task to mark done! \n"
-                    + "eg done 1";
+            String error = "UHOH! I ain't sure which task to mark done if you ain't sayin'!\n"
+                    + "Try somethin' like this: \ndone 1";
             assertEquals(error, ex.getMessage());
         }
     }
@@ -47,8 +47,8 @@ public class ParserTest {
             Parser.parse("delete");
             fail();
         } catch (DukeException ex) {
-            String error = "UHOH! You need to specify which task to delete!\n"
-                    + "eg delete 1";
+            String error = "UHOH! I ain't sure which task to delete if you ain't sayin'!\n"
+                    + "Try somethin' like this: \ndelete 1";
             assertEquals(error, ex.getMessage());
         }
     }
@@ -68,8 +68,8 @@ public class ParserTest {
             Parser.parse("hello");
             fail();
         } catch (DukeException ex) {
-            String error = "UHOH! Sorry, I don't understand what you are saying! D=\n"
-                    + "Type \"help\" to view the list of commands you can use!";
+            String error = "UHOH! Boy, I don't get what y'all are sayin'!\n"
+                    + "Try typin' \"help\" to see what commands you can use!";
             assertEquals(error, ex.getMessage());
         }
     }
