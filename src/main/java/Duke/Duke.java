@@ -18,7 +18,7 @@ import duke.exception.MissingFindArgumentException;
 import duke.exception.UnknownCommandException;
 
 /**
- * Duke Bot is a program that c an schedule tasks and mark them as done, delete
+ * Duke Bot is a program that can schedule tasks and mark them as done, delete
  * and save them on a file.
  *
  * @author Lim Jin Feng
