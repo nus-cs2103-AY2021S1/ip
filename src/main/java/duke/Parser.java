@@ -16,6 +16,7 @@ public class Parser {
     // TODO: 20/8/20 CHANGE ALL MATCHES TO matcher.find
     public static Command parseCommand(String echo, TaskList tasks) throws DukeException, ParseException {
         if (echo.equals("bye")) {
+            assert echo != null : "Input should not be null";
             return new ExitCommand();
         } else if (echo.matches("(?i)list\\s*")) { // Querying items
             return new ListCommand();
