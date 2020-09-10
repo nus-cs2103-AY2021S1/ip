@@ -105,6 +105,11 @@ public class Parser {
     public static boolean isFind(String input) {
         return input.split(" ")[0].compareTo("find") == 0;
     }
+
+    public static boolean isHelp(String input) {
+        return input.compareTo("help") == 0;
+    }
+
     public static int getIndex(String input) {
         return Integer.parseInt(input.split(" ")[1]) - 1;
     }

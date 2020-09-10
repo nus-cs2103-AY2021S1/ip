@@ -30,6 +30,8 @@ public class Duke {
             outputMsg = getTasks().deleteTask(Parser.getIndex(input));
         } else if (Parser.isFind(input)) {
             outputMsg = getTasks().findTasksWith(Parser.getKeyword(input));
+        } else if (Parser.isHelp(input)) {
+            outputMsg = Helper.getHelp();
         } else {
             try {
                 Task taskInput;
