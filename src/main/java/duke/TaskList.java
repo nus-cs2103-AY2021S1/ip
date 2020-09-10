@@ -78,12 +78,16 @@ class TaskList {
             task = new Task("");
         }
 
+        return getTaskInfoAndTaskListInfoForUi(task);
+    }
+
+    String[] getTaskInfoAndTaskListInfoForUi(Task task) {
         int len = taskList.size();
 
-        String[] output = new String[2];
-        output[0] = task.toString();
-        output[1] = String.valueOf(len);
-        return output;
+        String[] taskAndTaskListInfo = new String[2];
+        taskAndTaskListInfo[0] = task.toString();
+        taskAndTaskListInfo[1] = String.valueOf(len);
+        return taskAndTaskListInfo;
     }
 
     private Task handleTodo(String todoTask) {
@@ -156,12 +160,8 @@ class TaskList {
     String[] deleteTask(int index) {
         Task task = taskList.get(index - 1);
         taskList.remove(index - 1);
-        int len = taskList.size();
 
-        String[] output = new String[2];
-        output[0] = task.toString();
-        output[1] = String.valueOf(len);
-        return output;
+        return getTaskInfoAndTaskListInfoForUi(task);
     }
 
     ArrayList<String> findTasks(String search) {
