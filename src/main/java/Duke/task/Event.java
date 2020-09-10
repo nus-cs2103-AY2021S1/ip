@@ -46,7 +46,7 @@ public class Event extends Task {
      * @return  String representation of the event to be written to a file.
      */
     @Override
-    public String fileText() {
-        return "E " + super.fileText() + " | " + this.date.format(INPUT_DATE_TIME_FORMAT);
+    public String getFileSaveText() {
+        return "E " + super.getFileSaveText() + " | " + this.date.format(INPUT_DATE_TIME_FORMAT);
     }
 }

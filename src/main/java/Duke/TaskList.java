@@ -37,31 +37,21 @@ public class TaskList {
         } else {
             content.get().forEach((line) -> {
                 char startChar = line.charAt(0);
-                boolean isDone = line.charAt(4) == '1';
                 switch (startChar) {
                 case 'T': {
-                    String description = line.substring(8);
-                    ToDo taskToAdd = new ToDo(description, isDone);
+                    ToDo taskToAdd = Parser.parseToDoFromSave(line);
                     this.list.add(taskToAdd);
                     this.count++;
                     break;
                 }
                 case 'D': {
-                    String descriptionAndDeadline = line.substring(8);
-                    int stringBreak = descriptionAndDeadline.indexOf('|');
-                    String deadline = descriptionAndDeadline.substring(stringBreak + 2);
-                    String description = descriptionAndDeadline.substring(0, stringBreak - 1);
-                    Deadline taskToAdd = new Deadline(description, deadline, isDone);
+                    Deadline taskToAdd = Parser.parseDeadlineFromSave(line);
                     this.list.add(taskToAdd);
                     this.count++;
                     break;
                 }
                 case 'E': {
-                    String descriptionAndDate = line.substring(8);
-                    int stringBreak = descriptionAndDate.indexOf('|');
-                    String date = descriptionAndDate.substring(stringBreak + 2);
-                    String description = descriptionAndDate.substring(0, stringBreak - 1);
-                    Event taskToAdd = new Event(description, date, isDone);
+                    Event taskToAdd = Parser.parseEventFromSave(line);
                     this.list.add(taskToAdd);
                     this.count++;
                     break;
@@ -142,13 +132,10 @@ public class TaskList {
      */
     public String fileText() {
         String representation = "";
-        if (this.count > 0) {
-            for (int i = 0; i < this.count - 1; i++) {
-                representation += (list.get(i).fileText() + "\n");
-            }
-            representation += list.get(this.count - 1).fileText();
+        for (int i = 0; i < this.count; i++) {
+            representation += (list.get(i).getFileSaveText() + "\n");
         }
-        return representation;
+        return representation.trim();
     }
 
     /**
@@ -158,12 +145,10 @@ public class TaskList {
      */
     public String findTasks(String keyword) {
         String representation = "";
-        if (this.count > 0) {
-            for (int i = 0; i < this.count; i++) {
-                Task task = list.get(i);
-                if (task.getDescription().indexOf(keyword) != -1) {
-                    representation += (i + 1 + ". " + list.get(i) + "\n");
-                }
+        for (int i = 0; i < this.count; i++) {
+            Task task = list.get(i);
+            if (task.getDescription().indexOf(keyword) != -1) {
+                representation += (i + 1 + ". " + list.get(i) + "\n");
             }
         }
         return representation.trim();

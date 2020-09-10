@@ -46,7 +46,7 @@ public class Deadline extends Task {
      * @return  String representation of the deadline to be written to a file.
      */
     @Override
-    public String fileText() {
-        return "D " + super.fileText() + " | " + this.date.format(INPUT_DATE_TIME_FORMAT);
+    public String getFileSaveText() {
+        return "D " + super.getFileSaveText() + " | " + this.date.format(INPUT_DATE_TIME_FORMAT);
     }
 }

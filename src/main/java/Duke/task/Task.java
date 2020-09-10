@@ -63,7 +63,7 @@ public class Task {
      *
      * @return  String representation of the task to be written to a file.
      */
-    public String fileText() {
+    public String getFileSaveText() {
         return "| " + (isDone ? "1" : "0") + " | " + this.description;
     }
 }
