@@ -115,8 +115,15 @@ public class UserInterface {
         return "No commands entered, please enter a command!";
     }
 
+<<<<<<< HEAD
     private String action2(String command) {
         return InitiateParser.parser2(command);
+=======
+    private String action2() {
+        assert input != null;
+        assert input.equals("") == false;
+        return InitiateParser.parser2(input);
+>>>>>>> master
     }
 
     public String parse2() {
@@ -137,6 +144,7 @@ public class UserInterface {
     }
 
     public static String addedTask2(task t) {
+        assert t != null;
         String result = "";
         String nLine = System.lineSeparator();
         String one = "Task has been successfully added!";

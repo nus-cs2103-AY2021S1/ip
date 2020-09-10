@@ -23,6 +23,7 @@ public class InputManager {
      * @throws ErrorExceptions when selected task do not exists.
      */
     public static void parse(String input) throws ErrorExceptions {
+        assert input.equals("") == false;
         Scanner sc = new Scanner(input);
         String current = sc.next();
         TaskManager.fileDir(fileDir);
@@ -31,6 +32,7 @@ public class InputManager {
         } else if (current.equals("delete")) {
             try {
                 int index = sc.nextInt();
+                assert index >= 0;
                 ParseDelete.execute(index);
             } catch (NoSuchElementException e) {
                 throw new ErrorExceptions("There is no such tasks!");
@@ -39,6 +41,7 @@ public class InputManager {
             try {
                 task t;
                 int index = sc.nextInt();
+                assert index >= 0;
                 ParseCompleted.execute(index);
             } catch (NoSuchElementException e) {
                 throw new ErrorExceptions("There is no such tasks!");
@@ -51,16 +54,20 @@ public class InputManager {
             try {
                 String date = sc.next();
                 ParseFilter.execute(date);
+                assert date.equals("") == false;
             } catch (NoSuchElementException e) {
                 throw new ErrorExceptions("Missing date!");
             }
         } else if (current.equals("find")) {
             try {
+                assert input.equals("") == false;
                 ParseFind.execute(input);
             } catch (ErrorExceptions e) {
                 System.out.println(e);
             }
         } else { // add tasks
+            assert current.equals("") == false;
+            assert input.equals("") == false;
             ParseAddTask.execute(current, input);
         }
     }

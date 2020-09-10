@@ -58,7 +58,11 @@ public class Duke {
         String userInput = removeBlank(input);
         System.out.println("CHANGED: " + userInput);
         UserInterface UI = new UserInterface();
+<<<<<<< HEAD
         UI.input(userInput);
+=======
+        UI.input(input);
+>>>>>>> master
         if (input.equals("bye")) {
             Platform.exit();
         }
