@@ -37,7 +37,7 @@ public class Parser {
         String keyword = words[0].toLowerCase().trim(); // keyword tells us what command to create
         if (keyword.equals(CommandWord.EXIT_CMD.getCmd())) {
             return new ExitCommand();
-        } else if (keyword.equals(CommandWord.HELP_CMD.getCmd())){
+        } else if (keyword.equals(CommandWord.HELP_CMD.getCmd())) {
             return new HelpCommand(input);
         } else if (keyword.equals(CommandWord.LIST_CMD.getCmd())) {
             return new ListCommand(new String[]{input});

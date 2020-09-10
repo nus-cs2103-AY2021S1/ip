@@ -9,9 +9,7 @@ import duke.exception.DukeException;
 import duke.ui.Ui;
 
 public class HelpCommand implements Command {
-    
     CommandWord topic;
-    
     public HelpCommand(String input) {
         StringTokenizer st = new StringTokenizer(input);
         String command = st.nextToken();
@@ -24,9 +22,7 @@ public class HelpCommand implements Command {
             // generic help
             this.topic = CommandWord.HELP_CMD;
         }
-        
     }
-    
     @Override
     public String execute(TaskList tasks, Ui ui) throws DukeException, IOException {
         return topic.getHelpMsg();
