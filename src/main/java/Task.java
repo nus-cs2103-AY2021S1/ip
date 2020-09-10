@@ -20,6 +20,14 @@ public class Task {
         this.isDone = false;
     }
 
+    public void setTaskName(String taskName) {
+        this.taskName = taskName;
+    }
+
+    public void setTaskDateTime(String dateTime) throws DukeException {
+
+    }
+
     /**
      * Marks the task as done.
      */

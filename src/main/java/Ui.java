@@ -60,6 +60,13 @@ public class Ui {
                 + "delete *task number*: deletes the task with that number from the list\n"
                 + "eg delete 1\n"
                 + "\n"
+                + "update *task number* /name *task name*: updates the name of the task with "
+                + "that number from the list\n" + "update 1 /name help spongebob\n"
+                + "\n"
+                + "update *task number* /date *task name*: (only for deadline or event tasks!) "
+                + "updates the date and time of the task with that number from the list\n"
+                + "update 1 /date 2020-02-20 1200\n"
+                + "\n"
                 + "bye: ends the session";
         return helpMessage;
     }
@@ -89,6 +96,11 @@ public class Ui {
         String deleteMessage = "Got it! I'm removin' this task!\n" + t + "\n"
                 + "Now you have " + tasks.getSize() + " tasks in your list!";
         return deleteMessage;
+    }
+
+    public String showUpdate(Task t) {
+        String updateMessage = "Got it! I'm updatin' this task to:\n" + t;
+        return updateMessage;
     }
 
     /**

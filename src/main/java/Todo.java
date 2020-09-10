@@ -12,6 +12,11 @@ public class Todo extends Task {
         super(taskName);
     }
 
+    @Override
+    public void setTaskDateTime(String dateTime) throws DukeException {
+        throw new InvalidUpdateTodoException();
+    }
+
     /**
      * Returns the string representation of the todo task in the format to be saved in the computer.
      *

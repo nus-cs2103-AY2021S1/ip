@@ -33,6 +33,20 @@ public class Event extends Task {
         }
     }
 
+    @Override
+    public void setTaskDateTime(String dateTime) throws DukeException {
+        try {
+            this.atDateTime = LocalDateTime.parse(
+                    dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+            this.originalFormat = this.atDateTime.format(
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+            this.printedFormat = this.atDateTime.format(
+                    DateTimeFormatter.ofPattern("EEE, d MMM yyyy, HH:mm"));
+        } catch (DateTimeParseException ex) {
+            throw new InvalidUpdateTaskDateException();
+        }
+    }
+
     /**
      * Returns the string representation of the event task in the format to be saved in the computer.
      *

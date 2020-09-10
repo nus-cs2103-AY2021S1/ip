@@ -33,6 +33,8 @@ public class Parser {
             return parseDone(input, inputWords);
         } else if (commandWord.equals("delete")) {
             return parseDelete(input, inputWords);
+        } else if (commandWord.equals("update")) {
+            return parseUpdate(input, inputWords);
         } else if (commandWord.equals("todo")) {
             return parseTodo(input, isOneWord);
         } else if (commandWord.equals("deadline")) {
@@ -71,6 +73,31 @@ public class Parser {
         String taskNum = input.substring(7);
         int i = Integer.parseInt(taskNum);
         return new DeleteCommand(i);
+    }
+
+    public static Command parseUpdate(String input, String[] inputWords) throws DukeException {
+        if (inputWords.length < 4) {
+            throw new InvalidUpdateException();
+        }
+
+        boolean isUpdateName = inputWords[2].equals("/name");
+        boolean isUpdateDateTime = inputWords[2].equals("/date");
+
+        if (!isUpdateName && !isUpdateDateTime) {
+            throw new InvalidUpdateException();
+        }
+
+        String taskNum = inputWords[1];
+        int i = Integer.parseInt(taskNum);
+
+        if (isUpdateName) {
+            String newTaskName = input.split(" /name ")[1];
+            return new UpdateCommand(i, newTaskName, null);
+        } else {
+            String newTaskDate = input.split(" /date ")[1];
+            return new UpdateCommand(i, null, newTaskDate);
+        }
+
     }
 
     public static Command parseTodo(String input, boolean isOneWord) throws DukeException {
