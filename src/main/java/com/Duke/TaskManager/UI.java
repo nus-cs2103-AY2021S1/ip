@@ -110,15 +110,6 @@ public class UI {
         return deletedMessage+"\n"+ "Now you have " + ls.length() + " tasks in the list.";
     }
 
-    public static String taskCalled(TaskList ls, Task task) throws DukeException {
-        System.out.println(line);
-        ls.add(task);
-        System.out.println("     added: " + task.getTask());
-        System.out.println(line);
-        Storage.write(ls);
-        return "added: " + task.getTask();
-    }
-
     public static String findCalled(TaskList ls, String hint) throws DukeException {
         System.out.println(line);
         TaskList containsHint = ls.findTask(hint);
