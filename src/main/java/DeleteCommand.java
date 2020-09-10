@@ -25,6 +25,9 @@ public class DeleteCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert tasks != null && ui != null && storage != null
+                : "TaskList, Ui or Storage is not supposed to be null";
+
         if (tasks.getSize() == 0) {
             throw new DukeException("You don't have any tasks yet!");
         }
