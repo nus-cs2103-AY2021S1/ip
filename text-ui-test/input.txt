@@ -1,0 +1,10 @@
+todo pork
+todo beef
+todo veggies
+list
+done 2
+deadline milk /by yesterday
+event bread /at today
+list
+done 4
+exit
