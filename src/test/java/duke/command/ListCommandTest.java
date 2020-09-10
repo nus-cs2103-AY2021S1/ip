@@ -21,7 +21,7 @@ public class ListCommandTest {
             "5.This todo stub was not marked as done",
             "6.This todo stub was not marked as done",
             "7.This todo stub was not marked as done",
-            "8.[\u2718] event this is an event stub",
+            "8.[X] event this is an event stub",
             "9.This todo stub was not marked as done",
             "10.This deadline stub was not marked as done"
         };

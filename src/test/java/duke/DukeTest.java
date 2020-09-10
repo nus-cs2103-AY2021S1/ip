@@ -13,8 +13,11 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintStream;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
+import java.util.stream.Stream;
 
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
@@ -27,13 +30,13 @@ public class DukeTest {
     private static final ByteArrayOutputStream OUT_CONTENT = new ByteArrayOutputStream();
     private static final PrintStream ORIGINAL_OUT = System.out;
     private static final InputStream SYSIN_BACKUP = System.in;
-    private static final String TEST_DIR;
+    private static String testFilesDir = Paths.get("").toString();
 
     static {
         Path currentDir = Paths.get("").toAbsolutePath();
         int len = currentDir.getNameCount();
         int index = -1;
-        for (int i = len - 1; i >= 0; i--) {
+        for (int i = 0; i < len; i++) {
             if (currentDir.getName(i).toString().equals("ip")) {
                 index = i;
                 break;
@@ -43,7 +46,16 @@ public class DukeTest {
         for (int i = 0; i < len - index - 1; i++) {
             rootDir = rootDir.getParent();
         }
-        TEST_DIR = Paths.get(rootDir.toString(), "build", "resources", "test", "duke-test").toString();
+        try {
+            Path[] testDir =
+                    Files
+                            .walk(rootDir, 20)
+                            .filter(p -> p.endsWith("duke-test"))
+                            .toArray(Path[]::new);
+            testFilesDir = testDir[0].toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     // recursive function to delete directory that stores the save file
@@ -70,7 +82,31 @@ public class DukeTest {
     static void setUpStreams() throws IOException {
         clearPath();
         System.setOut(new PrintStream(OUT_CONTENT));
-        BufferedReader reader = new BufferedReader(new FileReader(Paths.get(TEST_DIR, "input.txt").toString()));
+        Path currentDir = Paths.get("").toAbsolutePath();
+        int len = currentDir.getNameCount();
+        int index = -1;
+        for (int i = 0; i < len; i++) {
+            if (currentDir.getName(i).toString().equals("ip")) {
+                index = i;
+                break;
+            }
+        }
+        String[] pathToRootDir = new String[len - index - 1];
+        Arrays.fill(pathToRootDir, "..");
+        Path rootDir = Paths.get(String.join(File.separator, pathToRootDir));
+
+        String inputFilePath = "";
+        try {
+            Path[] testDir =
+                    Files
+                            .walk(rootDir, 20)
+                            .filter(p -> p.endsWith("duke_test_input.txt"))
+                            .toArray(Path[]::new);
+            inputFilePath = testDir[0].toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        BufferedReader reader = new BufferedReader(new FileReader(inputFilePath));
         String[] input = reader.lines().toArray(String[]::new);
         reader.close();
         ByteArrayInputStream inputStream = new ByteArrayInputStream(String.join("\n", input).getBytes());
@@ -89,24 +125,50 @@ public class DukeTest {
         Duke duke = new Duke(TEST_SAVE_PATH);
         duke.runCli();
 
-        String expectedFilePath = Paths.get(TEST_DIR, "EXPECTED.txt").toString();
-        File file = new File(expectedFilePath);
+        Path currentDir = Paths.get("").toAbsolutePath();
+        int len = currentDir.getNameCount();
+        int index = -1;
+        for (int i = 0; i < len; i++) {
+            if (currentDir.getName(i).toString().equals("ip")) {
+                index = i;
+                break;
+            }
+        }
+        String[] pathToRootDir = new String[len - index - 1];
+        Arrays.fill(pathToRootDir, "..");
+        Path rootDir = Paths.get(String.join(File.separator, pathToRootDir));
+        String pathToExpected =
+                Files
+                        .walk(rootDir, 20)
+                        .filter(p -> p.endsWith("DUKE_TEST_EXPECTED.txt"))
+                        .toArray(Path[]::new)[0]
+                        .toString();
+
+        File file = new File(pathToExpected);
         FileInputStream fis = new FileInputStream(file);
         byte[] data = new byte[(int) file.length()];
         fis.read(data);
         fis.close();
-        String expectedOutput = new String(data, StandardCharsets.UTF_8);
+        String[] expectedOutputLines = new String(data, StandardCharsets.UTF_8).split("[\r\n]{1,2}");
 
         String actualOutput = OUT_CONTENT.toString();
+        String[] actualOutputLines = actualOutput.split("[\r\n]{1,2}");
 
-        String actualFilePath = Paths.get(TEST_DIR, "ACTUAL.txt").toString();
-        FileWriter myWriter = new FileWriter(actualFilePath);
+        String pathToActual =
+                Files
+                        .walk(rootDir, 20)
+                        .filter(p -> p.endsWith("DUKE_TEST_ACTUAL.txt"))
+                        .toArray(Path[]::new)[0]
+                        .toString();
+        FileWriter myWriter = new FileWriter(pathToActual);
         myWriter.write(actualOutput);
         myWriter.close();
 
-        assertEquals(
-                expectedOutput,
-                actualOutput
-        );
+        assertEquals(expectedOutputLines.length, actualOutputLines.length);
+        Stream
+                .iterate(0, i -> i < expectedOutputLines.length, i -> i + 1)
+                .forEach(i -> {
+                    assertEquals(expectedOutputLines[i], actualOutputLines[i]);
+                });
     }
 }

@@ -13,6 +13,9 @@ import duke.exception.InvalidTodoException;
 import duke.util.DukeDateTime;
 
 public class TodoTest {
+    private static final String SYMBOL_DONE = "O";
+    private static final String SYMBOL_NOT_DONE = "X";
+
     @Test
     public void toSaveString() throws InvalidTodoException {
         String description = "This is a test on toSaveString.";
@@ -42,12 +45,12 @@ public class TodoTest {
     public void toStringTest() throws InvalidTodoException {
         String description = "This is a test on toString.";
         Todo todo = Todo.createTodo(description);
-        String expected1 = "[T][\u2718] This is a test on toString.";
+        String expected1 = "[T][" + SYMBOL_NOT_DONE + "] This is a test on toString.";
         assertEquals(expected1, todo.toString());
 
         todo.markAsDone();
 
-        String expected2 = "[T][\u2713] This is a test on toString.";
+        String expected2 = "[T][" + SYMBOL_DONE + "] This is a test on toString.";
         assertEquals(expected2, todo.toString());
     }
 

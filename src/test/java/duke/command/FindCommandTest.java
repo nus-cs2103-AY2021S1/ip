@@ -14,7 +14,7 @@ public class FindCommandTest {
         String actual = FindCommand.execute("find event stub", taskListStub);
         String expected =
                 "Here are the matching tasks in your list:\n"
-                + "8.[\u2718] event this is an event stub";
+                + "8.[X] event this is an event stub";
         assertEquals(expected, actual);
     }
 }

@@ -16,7 +16,7 @@ public class TaskCommandTest {
         String actual = TaskCommand.execute("deadline this is a test /by 2017-11-29 13:00", taskListStub);
         String[] expected = new String[]{
             "Got it. I've added this task: ",
-            "  [D][\u2718] this is a test (by: Nov 29 2017 01:00 PM)",
+            "  [D][X] this is a test (by: Nov 29 2017 01:00 PM)",
             "Now you have 10 tasks in the list."
         };
         assertEquals(String.join("\n", expected), actual);
@@ -27,7 +27,7 @@ public class TaskCommandTest {
         TaskListStub taskListStub = new TaskListStub();
         TaskCommand.loadSavedTasks("1todo This is a loadSavedTasks test", taskListStub);
         Task addedTask = taskListStub.getLastAddedTask();
-        String expectedToString = "[T][\u2713] This is a loadSavedTasks test";
+        String expectedToString = "[T][O] This is a loadSavedTasks test";
         assertEquals(expectedToString, addedTask.toString());
     }
 }

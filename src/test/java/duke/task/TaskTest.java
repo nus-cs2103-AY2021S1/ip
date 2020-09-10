@@ -10,6 +10,8 @@ import org.junit.jupiter.api.Test;
 import duke.stub.task.TaskStub;
 
 public class TaskTest {
+    private static final String SYMBOL_DONE = "O";
+    private static final String SYMBOL_NOT_DONE = "X";
     private final Task task = new TaskStub("This is a test");
 
     @BeforeEach
@@ -19,11 +21,11 @@ public class TaskTest {
 
     @Test
     public void getStatusIcon() {
-        assertEquals("\u2718", task.getStatusIcon());
+        assertEquals(SYMBOL_NOT_DONE, task.getStatusIcon());
 
         task.markAsDone();
 
-        assertEquals("\u2713", task.getStatusIcon());
+        assertEquals(SYMBOL_DONE, task.getStatusIcon());
     }
 
     @Test
@@ -35,12 +37,12 @@ public class TaskTest {
 
     @Test
     public void toStringTest() {
-        String expected1 = "[\u2718] This is a test";
+        String expected1 = "[" + SYMBOL_NOT_DONE + "] This is a test";
         assertEquals(expected1, task.toString());
 
         task.markAsDone();
 
-        String expected2 = "[\u2713] This is a test";
+        String expected2 = "[" + SYMBOL_DONE + "] This is a test";
         assertEquals(expected2, task.toString());
     }
 }

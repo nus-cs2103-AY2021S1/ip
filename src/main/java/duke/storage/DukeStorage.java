@@ -14,7 +14,6 @@ import java.util.Arrays;
 public class DukeStorage implements Storage {
     private static final String ERROR_CREATE_SAVE = "An error has occurred when trying to create the save file!";
     private static final String ERROR_UPDATE_SAVE = "An error has occurred when updating the save file.";
-    private static final String ERROR_READ_SAVE = "An error has occurred when reading the save file.";
 
     private final Path filePath;
     private ArrayList<String> saveLines;

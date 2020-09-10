@@ -4,8 +4,8 @@ import java.time.LocalDate;
 
 // Parent class for all types of tasks that can be created by the user.
 public abstract class Task {
-    private static final String SYMBOL_TICK = "\u2713";
-    private static final String SYMBOL_CROSS = "\u2718";
+    private static final String SYMBOL_DONE = "O";
+    private static final String SYMBOL_NOT_DONE = "X";
 
     protected String description;
     protected boolean isDone = false;
@@ -24,10 +24,10 @@ public abstract class Task {
     /**
      * Returns an icon that represents the task status.
      *
-     * @return String ✘ if not done and ✓ if done.
+     * @return String x if not done and o if done.
      */
     public String getStatusIcon() {
-        return isDone ? SYMBOL_TICK : SYMBOL_CROSS;
+        return isDone ? SYMBOL_DONE : SYMBOL_NOT_DONE;
     }
 
     public boolean containsKeyword(String keyword) {

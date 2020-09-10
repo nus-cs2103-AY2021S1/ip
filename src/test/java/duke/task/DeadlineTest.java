@@ -13,6 +13,9 @@ import duke.exception.InvalidDeadlineException;
 import duke.util.DukeDateTime;
 
 public class DeadlineTest {
+    private static final String SYMBOL_DONE = "O";
+    private static final String SYMBOL_NOT_DONE = "X";
+
     @Test
     public void toSaveString() throws InvalidDeadlineException {
         String description = "This is a test on toSaveString. /by 2020-03-20 12:00";
@@ -44,12 +47,12 @@ public class DeadlineTest {
     public void toStringTest() throws InvalidDeadlineException {
         String description = "This is a test on toString. /by 2022-02-03 08:00";
         Deadline deadline = Deadline.createDeadline(description);
-        String expected1 = "[D][\u2718] This is a test on toString. (by: Feb 3 2022 08:00 AM)";
+        String expected1 = "[D][" + SYMBOL_NOT_DONE + "] This is a test on toString. (by: Feb 3 2022 08:00 AM)";
         assertEquals(expected1, deadline.toString());
 
         deadline.markAsDone();
 
-        String expected2 = "[D][\u2713] This is a test on toString. (by: Feb 3 2022 08:00 AM)";
+        String expected2 = "[D][" + SYMBOL_DONE + "] This is a test on toString. (by: Feb 3 2022 08:00 AM)";
         assertEquals(expected2, deadline.toString());
     }
 
