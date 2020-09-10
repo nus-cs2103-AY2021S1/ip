@@ -9,7 +9,7 @@ import java.time.LocalDate;
  * Subclass of Task.
  * Task that starts on a specific date.
  */
-public class Event extends Task {
+public class Event extends Task implements Comparable<Task> {
 
     private static final String DELIMITER = " /at ";
 
@@ -42,6 +42,16 @@ public class Event extends Task {
 
 
     /**
+     * Gets LocalDate object of task.
+     *
+     * @return LocalDate object of task.
+     */
+    public LocalDate getDate() {
+        return this.date;
+    }
+
+
+    /**
      * Gets string array for storage.
      *
      * @return String array for storage.
@@ -57,6 +67,24 @@ public class Event extends Task {
         char stateSymbol = this.isDone() ? DONE : NOT_DONE;
         String dateString = Task.formatDateString(this.date);
         return String.format("[E][%s] %s (at: %s)", stateSymbol, this.getItemString(), dateString);
+    }
+
+    @Override
+    public int compareTo(Task t) {
+        if (t instanceof Todo) {
+            return 1;
+        } else {
+            LocalDate thisDate = this.getDate();
+            LocalDate otherDate = t.getDate();
+            
+            if (thisDate.isBefore(otherDate)) {
+                return -1;
+            } else if (thisDate.isAfter(otherDate)) {
+                return 1;
+            } else {
+                return this.getItemString().compareTo(t.getItemString());
+            }
+        }
     }
 
 }

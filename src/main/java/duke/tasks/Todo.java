@@ -1,12 +1,17 @@
 package duke.tasks;
 
 
+import java.time.LocalDate;
+
+
 /**
  * Todo class.
  * Subclass of Task.
  * Task without any dates attached to it.
  */
-public class Todo extends Task {
+public class Todo extends Task implements Comparable<Task> {
+    
+    private static LocalDate DUMMY_DATE = LocalDate.EPOCH;
 
     /**
      * Creates a new Todo task.
@@ -41,9 +46,26 @@ public class Todo extends Task {
 
 
     @Override
+    public LocalDate getDate() {
+        return Todo.DUMMY_DATE;
+    }
+
+
+    @Override
     public String toString() {
         char stateSymbol = this.isDone() ? DONE : NOT_DONE;
         return String.format("[T][%s] %s", stateSymbol, this.getItemString());
+    }
+
+
+    @Override
+    public int compareTo(Task t) {
+        if (t instanceof Todo) {
+            return this.getItemString().compareTo(t.getItemString());
+        } else {
+            // Todos always come before other tasks
+            return -1;
+        }
     }
 
 }

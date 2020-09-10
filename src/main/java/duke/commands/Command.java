@@ -12,6 +12,7 @@ public enum Command {
     TERMINATE("terminate"),
     TASK("task"),
     FIND("find"),
+    SORT("sort"),
     INVALID("invalid");
 
     private final String str;

@@ -1,3 +1,5 @@
-T,1,stuff today abcdef
-E,1,stuff,2020-02-02
-T,0,stuff
+T,1,indiv project
+T,0,work
+T,1,teamproj
+E,1,2101 meeting,2020-02-02
+D,1,2101 slides,2020-02-03
