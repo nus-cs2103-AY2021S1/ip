@@ -4,7 +4,7 @@ package focus.exception;
 public class InvalidTaskDateException extends FocusException {
     /** Creates InvalidTaskDateException for AddCommand class to throw. */
     public InvalidTaskDateException() {
-        super("\tPlease input the correct date format!\n"
+        super("Please input the correct date format!\n"
                 + "\tIf you need an example, type 'help'!");
     }
 }

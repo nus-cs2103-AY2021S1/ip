@@ -24,7 +24,7 @@ public class SettingsCommandTest {
         try {
             settingsCommand.execute("settings", taskList, storage);
         } catch (FocusException e) {
-            assertEquals("\tPlease type in the correct format for settings!\n"
+            assertEquals("\tERROR: Please type in the correct format for settings!\n"
                     + "\tIf you need an example, type 'help'!", e.getMessage());
         }
         String message = "";

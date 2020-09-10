@@ -4,6 +4,6 @@ package focus.exception;
 public class InvalidTaskKeywordException extends FocusException {
     /** Creates InvalidTaskKeywordException for FindCommand class to throw. */
     public InvalidTaskKeywordException() {
-        super("\tPlease enter a keyword you wish to find!");
+        super("Please enter a keyword you wish to find!");
     }
 }

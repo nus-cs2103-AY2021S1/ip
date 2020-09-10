@@ -33,7 +33,7 @@ public class DialogBox extends HBox {
      * @param text Inputs and responses.
      * @param image Speaker's image.
      */
-    private DialogBox(String text, Image image, boolean isUser) {
+    private DialogBox(String text, Image image) {
         try {
             String dialogBoxFxml = "/view/DialogBox.fxml";
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource(dialogBoxFxml));
@@ -42,10 +42,6 @@ public class DialogBox extends HBox {
             fxmlLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
-        }
-        if (isUser) {
-            dialog.getStyleClass().remove("focus");
-            dialog.getStyleClass().add("user");
         }
         dialog.setText(text);
         imageView.setImage(image);
@@ -68,7 +64,10 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(String input, Image image) {
         String userTag = "You:\n\t";
-        return new DialogBox(userTag + input, image, true);
+        DialogBox dialogBox = new DialogBox(userTag + input, image);
+        dialogBox.dialog.getStyleClass().remove("focus");
+        dialogBox.dialog.getStyleClass().add("user");
+        return dialogBox;
     }
 
     /**
@@ -80,8 +79,24 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getPocusDialog(String response, Image image) {
         String pocusTag = "Pocus:\n";
-        DialogBox dialogBox = new DialogBox(pocusTag + response, image, false);
+        DialogBox dialogBox = new DialogBox(pocusTag + response, image);
         dialogBox.flip();
+        return dialogBox;
+    }
+
+    /**
+     * Creates a new DialogBox for Pocus (but for error messages).
+     *
+     * @param response Pocus' error.
+     * @param image Image of Pocus.
+     * @return DialogBox for Pocus' errors.
+     */
+    public static DialogBox getErrorDialog(String response, Image image) {
+        String pocusTag = "Pocus:\n";
+        DialogBox dialogBox = new DialogBox(pocusTag + response, image);
+        dialogBox.flip();
+        dialogBox.dialog.getStyleClass().remove("focus");
+        dialogBox.dialog.getStyleClass().add("error");
         return dialogBox;
     }
 }

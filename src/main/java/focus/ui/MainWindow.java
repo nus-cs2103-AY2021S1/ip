@@ -74,10 +74,17 @@ public class MainWindow extends AnchorPane {
         } else {
             assert (numberOfTimes > 0) : "Number of times user typed should be more than 0 here.";
             String response = focus.getResponse(input);
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getPocusDialog(response, pocusImage)
-            );
+            if (response.startsWith("\tERROR:")) {
+                dialogContainer.getChildren().addAll(
+                        DialogBox.getUserDialog(input, userImage),
+                        DialogBox.getErrorDialog(response, pocusImage)
+                );
+            } else {
+                dialogContainer.getChildren().addAll(
+                        DialogBox.getUserDialog(input, userImage),
+                        DialogBox.getPocusDialog(response, pocusImage)
+                );
+            }
             if (input.equals("bye")) {
                 PauseTransition delay = new PauseTransition(Duration.seconds(5));
                 delay.setOnFinished(event -> Main.getStage().close());

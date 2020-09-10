@@ -4,7 +4,7 @@ package focus.exception;
 public class InvalidCommandException extends FocusException {
     /** Creates InvalidCommandException for Parser class to throw. */
     public InvalidCommandException() {
-        super("\tOops! I'm not sure what you meant!\n"
+        super("Oops! I'm not sure what you meant!\n"
                 + "\tPlease try again!");
     }
 }

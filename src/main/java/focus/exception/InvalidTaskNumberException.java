@@ -4,7 +4,7 @@ package focus.exception;
 public class InvalidTaskNumberException extends FocusException {
     /** Creates InvalidTaskNumberException for Delete and Done classes to throw. */
     public InvalidTaskNumberException() {
-        super("\tThere is no such task number.\n"
+        super("There is no such task number.\n"
                 + "\tPlease enter a valid one!\n"
                 + "\tType 'list' to view your list of tasks!");
     }

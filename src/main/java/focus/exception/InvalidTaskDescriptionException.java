@@ -4,7 +4,7 @@ package focus.exception;
 public class InvalidTaskDescriptionException extends FocusException {
     /** Creates InvalidTaskDescriptionException for AddCommand class to throw. */
     public InvalidTaskDescriptionException() {
-        super("\tPlease input an appropriate task description!\n"
+        super("Please input an appropriate task description!\n"
                 + "\tIf you need an example, type 'help'!");
     }
 }

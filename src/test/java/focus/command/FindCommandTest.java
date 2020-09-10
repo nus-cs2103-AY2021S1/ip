@@ -24,12 +24,12 @@ public class FindCommandTest {
         try {
             findCommand.execute("find", taskList, storage);
         } catch (FocusException e) {
-            assertEquals("\tPlease enter a keyword you wish to find!", e.getMessage());
+            assertEquals("\tERROR: Please enter a keyword you wish to find!", e.getMessage());
         }
         try {
             findCommand.execute("find ", taskList, storage);
         } catch (FocusException e) {
-            assertEquals("\tPlease enter a keyword you wish to find!", e.getMessage());
+            assertEquals("\tERROR: Please enter a keyword you wish to find!", e.getMessage());
         }
     }
 }

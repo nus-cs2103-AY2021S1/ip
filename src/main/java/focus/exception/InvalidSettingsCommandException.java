@@ -4,7 +4,7 @@ package focus.exception;
 public class InvalidSettingsCommandException extends FocusException {
     /** Creates InvalidSettingsCommandException for SettingsCommand class to throw. */
     public InvalidSettingsCommandException() {
-        super("\tPlease type in the correct format for settings!\n"
+        super("Please type in the correct format for settings!\n"
                 + "\tIf you need an example, type 'help'!");
     }
 }

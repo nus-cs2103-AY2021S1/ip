@@ -29,7 +29,7 @@ public class ParserTest {
             assertEquals(ExitCommand.class, Parser.parse("bye").getClass());
             Parser.parse("invalid command");
         } catch (FocusException e) {
-            assertEquals("\tOops! I'm not sure what you meant!\n"
+            assertEquals("\tERROR: Oops! I'm not sure what you meant!\n"
                     + "\tPlease try again!", e.getMessage());
         }
     }

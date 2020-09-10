@@ -24,7 +24,7 @@ public class HelpCommandTest {
         try {
             helpCommand.execute("help me", taskList, storage);
         } catch (FocusException e) {
-            assertEquals("\tDid you meant the command 'help'?", e.getMessage());
+            assertEquals("\tERROR: Did you meant the command 'help'?", e.getMessage());
         }
     }
 }

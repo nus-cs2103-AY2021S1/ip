@@ -24,7 +24,7 @@ public class ListCommandTest {
         try {
             listCommand.execute("blah", taskList, storage);
         } catch (FocusException e) {
-            assertEquals("\tThere are currently no tasks on your list!\n"
+            assertEquals("\tERROR: There are currently no tasks on your list!\n"
                     + "\tStart adding one now!", e.getMessage());
         }
     }

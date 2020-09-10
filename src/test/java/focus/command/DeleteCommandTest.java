@@ -24,21 +24,21 @@ public class DeleteCommandTest {
         try {
             deleteCommand.execute("delete ", taskList, storage);
         } catch (FocusException e) {
-            assertEquals("\tThere is no such task number.\n"
+            assertEquals("\tERROR: There is no such task number.\n"
                     + "\tPlease enter a valid one!\n"
                     + "\tType 'list' to view your list of tasks!", e.getMessage());
         }
         try {
             deleteCommand.execute("delete 0", taskList, storage);
         } catch (FocusException e) {
-            assertEquals("\tThere is no such task number.\n"
+            assertEquals("\tERROR: There is no such task number.\n"
                     + "\tPlease enter a valid one!\n"
                     + "\tType 'list' to view your list of tasks!", e.getMessage());
         }
         try {
             deleteCommand.execute("delete 5", taskList, storage);
         } catch (FocusException e) {
-            assertEquals("\tThere is no such task number.\n"
+            assertEquals("\tERROR: There is no such task number.\n"
                     + "\tPlease enter a valid one!\n"
                     + "\tType 'list' to view your list of tasks!", e.getMessage());
         }

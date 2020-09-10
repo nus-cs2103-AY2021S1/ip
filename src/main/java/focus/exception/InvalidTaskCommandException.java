@@ -4,7 +4,7 @@ package focus.exception;
 public class InvalidTaskCommandException extends FocusException {
     /** Creates InvalidTaskCommandException for AddCommand class to throw. */
     public InvalidTaskCommandException() {
-        super("\tPlease input the appropriate command!\n"
+        super("Please input the appropriate command!\n"
                 + "\tIf you need an example, type 'help'!");
     }
 }

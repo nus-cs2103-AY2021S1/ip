@@ -26,7 +26,7 @@ public class AddCommandTest {
             AddCommand addCommand = new AddCommand("todo");
             addCommand.execute("todo", taskList, storage);
         } catch (FocusException e) {
-            assertEquals("\tPlease input an appropriate task description!\n"
+            assertEquals("\tERROR: Please input an appropriate task description!\n"
                     + "\tIf you need an example, type 'help'!", e.getMessage());
         }
     }
@@ -37,28 +37,28 @@ public class AddCommandTest {
             AddCommand addCommand = new AddCommand("deadline");
             addCommand.execute("deadline ", taskList, storage);
         } catch (FocusException e) {
-            assertEquals("\tPlease input an appropriate task description!\n"
+            assertEquals("\tERROR: Please input an appropriate task description!\n"
                     + "\tIf you need an example, type 'help'!", e.getMessage());
         }
         try {
             AddCommand addCommand = new AddCommand("deadline");
             addCommand.execute("deadline return book", taskList, storage);
         } catch (FocusException e) {
-            assertEquals("\tPlease input the appropriate command!\n"
+            assertEquals("\tERROR: Please input the appropriate command!\n"
                     + "\tIf you need an example, type 'help'!", e.getMessage());
         }
         try {
             AddCommand addCommand = new AddCommand("deadline");
             addCommand.execute("deadline return book /by ", taskList, storage);
         } catch (FocusException e) {
-            assertEquals("\tPlease input the correct date format!\n"
+            assertEquals("\tERROR: Please input the correct date format!\n"
                     + "\tIf you need an example, type 'help'!", e.getMessage());
         }
         try {
             AddCommand addCommand = new AddCommand("deadline");
             addCommand.execute("deadline return book /by 2020-02-28", taskList, storage);
         } catch (FocusException e) {
-            assertEquals("\tPlease input the correct date format!\n"
+            assertEquals("\tERROR: Please input the correct date format!\n"
                     + "\tIf you need an example, type 'help'!", e.getMessage());
         }
     }
@@ -69,28 +69,28 @@ public class AddCommandTest {
             AddCommand addCommand = new AddCommand("event");
             addCommand.execute("event", taskList, storage);
         } catch (FocusException e) {
-            assertEquals("\tPlease input an appropriate task description!\n"
+            assertEquals("\tERROR: Please input an appropriate task description!\n"
                     + "\tIf you need an example, type 'help'!", e.getMessage());
         }
         try {
             AddCommand addCommand = new AddCommand("event");
             addCommand.execute("event party ", taskList, storage);
         } catch (FocusException e) {
-            assertEquals("\tPlease input the appropriate command!\n"
+            assertEquals("\tERROR: Please input the appropriate command!\n"
                     + "\tIf you need an example, type 'help'!", e.getMessage());
         }
         try {
             AddCommand addCommand = new AddCommand("event");
             addCommand.execute("event party /at", taskList, storage);
         } catch (FocusException e) {
-            assertEquals("\tPlease input the correct date format!\n"
+            assertEquals("\tERROR: Please input the correct date format!\n"
                     + "\tIf you need an example, type 'help'!", e.getMessage());
         }
         try {
             AddCommand addCommand = new AddCommand("event");
             addCommand.execute("event party /at 2020-20-09 1200", taskList, storage);
         } catch (FocusException e) {
-            assertEquals("\tPlease input the correct date format!\n"
+            assertEquals("\tERROR: Please input the correct date format!\n"
                     + "\tIf you need an example, type 'help'!", e.getMessage());
         }
     }

@@ -8,6 +8,6 @@ public class FocusException extends Exception {
      * @param message Error message.
      */
     public FocusException(String message) {
-        super(message);
+        super("\tERROR: " + message);
     }
 }
