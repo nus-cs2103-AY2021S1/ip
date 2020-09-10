@@ -77,4 +77,9 @@ public class EventTask extends Task {
                 this.startTime.format(PATTERN_TIME_INPUT),
                 this.endTime.format(PATTERN_TIME_INPUT));
     }
+
+    @Override
+    public String getTitle() {
+        return this.title;
+    }
 }
