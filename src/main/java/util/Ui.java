@@ -29,6 +29,7 @@ public class Ui {
                 + "6. done {task number} => marks the given task as done" + "\n"
                 + "7. delete {task number} => deletes the given task" + "\n"
                 + "8. tag {task number} {tag name} => tag selected task with given tag name" + "\n"
+                + "8. tag {task number} delete => delete tag from selected task" + "\n"
                 + "9. find {query} => lists out tasks based on your query" + "\n"
                 + "10. bye => makes me go to sleep";
     }
