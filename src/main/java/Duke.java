@@ -3,7 +3,7 @@ public class Duke {
     private final Storage storage;
 
     /** Object containing the list of tasks. */
-    private TaskList tasks;
+    private final TaskList tasks;
 
     /**
      * Constructs new Duke object.
@@ -29,16 +29,16 @@ public class Duke {
             response = tasks.printList();
             break;
         case "done":
-            response = tasks.done(command);
+            response = tasks.markDone(command);
             break;
         case "todo":
-            response = tasks.newToDo(command);
+            response = tasks.createToDo(command);
             break;
         case "deadline":
-            response = tasks.newDeadline(command);
+            response = tasks.createDeadline(command);
             break;
         case "event":
-            response = tasks.newEvent(command);
+            response = tasks.createEvent(command);
             break;
         case "delete":
             response = tasks.delete(command);
@@ -47,7 +47,7 @@ public class Duke {
             response = tasks.find(command);
             break;
         default:
-            response = tasks.defaultError();
+            response = tasks.getDefaultError();
         }
         storage.save(tasks.getTasks());
         return response;
