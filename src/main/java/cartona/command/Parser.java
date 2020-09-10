@@ -108,7 +108,13 @@ public class Parser {
                 if (words.length < 2) {
                     throw new InvalidInputException("Error: No number argument after 'delete'");
                 }
+
                 int taskIdToDelete = Integer.parseInt(words[1]);
+
+                if (taskIdToDelete < 1) {
+                    throw new InvalidInputException("Error: Task numbers start from 1");
+                }
+
                 return new DeleteCommand(taskIdToDelete);
             } catch (NumberFormatException e) {
                 throw new InvalidInputException("Error: Invalid number argument after 'delete'");
@@ -118,7 +124,13 @@ public class Parser {
                 if (words.length < 2) {
                     throw new InvalidInputException("Error: No number argument after 'delete'");
                 }
+
                 int taskIdToComplete = Integer.parseInt(words[1]);
+
+                if (taskIdToComplete < 1) {
+                    throw new InvalidInputException("Error: Task numbers start from 1");
+                }
+
                 return new DoneCommand(taskIdToComplete);
             } catch (NumberFormatException e) {
                 throw new InvalidInputException("Error: Invalid number argument after 'delete'");
@@ -145,23 +157,34 @@ public class Parser {
      */
     public Task parseFromStorage(String storageLine) {
         String[] taskData = storageLine.split(" \\| ");
+
+        assert taskData.length >= 2
+                : "Task storage line is missing fields";
+
         String taskType = taskData[0];
+
+        assert taskType.equals("T") || taskType.equals("D") || taskType.equals("E")
+                : "Task type in storage does not match expected characters";
+
         boolean taskIsDone = Integer.parseInt(taskData[1]) == 1;
         String taskName = taskData[2];
 
-        if (!taskType.equals("T")) {
+        if (taskType.equals("T")) {
+            return new Todo(taskName, taskIsDone);
+
+        } else {
+
             String taskTime = taskData[3];
             if (taskType.equals("D")) {
                 TaskDate dueTime = DateParser.parseDateFromStorage(taskTime);
                 return new Deadline(taskName, taskIsDone, dueTime);
+
             } else {
                 TaskDate startDate = DateParser.parseRangeFromStorage(taskTime, true);
                 TaskDate endDate = DateParser.parseRangeFromStorage(taskTime, false);
 
                 return new Event(taskName, taskIsDone, startDate, endDate);
             }
-        } else {
-            return new Todo(taskName, taskIsDone);
         }
     }
 }

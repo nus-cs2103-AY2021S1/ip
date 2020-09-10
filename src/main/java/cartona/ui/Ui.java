@@ -23,6 +23,7 @@ public class Ui {
      * @param errorMessage
      */
     public String getErrorMessageFormatted(String errorMessage) {
+        assert !(errorMessage.equals("")) : "Error message cannot be empty";
         return String.format("%s     %s%n%s", HORIZONTAL_LINE, errorMessage, HORIZONTAL_LINE);
     }
 
