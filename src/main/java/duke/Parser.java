@@ -80,8 +80,10 @@ public class Parser {
             }
             this.taskList.updateStorage();
             return response;
+        } catch (IndexOutOfBoundsException e) {
+            return ui.printError("Tell you index need put properly already.");
         } catch (DateTimeParseException e) {
-            return ui.printError("INPUT DATE TIME FORMAT IS WRONG");
+            return ui.printError("Read Properly Please: yyyy-MM-dd HH:mm");
         } catch (DukeException | IOException e) {
             return ui.printError(e.getMessage());
         }

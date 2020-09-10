@@ -4,7 +4,7 @@ A CS2103 Project to create a simple bot for to-do tasking.
 The attitude of which I have adopted for this module as well as for the
 graphics are inspired by my all time favorite game:
 
-![image](gitintro.png)
+![image](https://64.media.tumblr.com/tumblr_m7a5yyVgc01rbvr5do1_500.gif)
  
 *Gotta Catch 'Em All (A+s)*
 
@@ -230,3 +230,8 @@ Displays the initial prompt message to guide the user on the command available f
     • 'help' to bring this page up!
     • 'sort' to sort your tasks!
     Date and Time Format: yyyy-MM-dd HH:mm
+    
+---
+
+# Thanks for coming!
+![pichu ](https://media1.tenor.com/images/abd1e656a8f0b066d3d8060b1945409c/tenor.gif?itemid=8748041)
