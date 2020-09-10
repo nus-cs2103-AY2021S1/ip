@@ -36,6 +36,10 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, UI ui, Storage storage) throws BobException {
+        assert tasks != null : "A tasklist should be provided";
+        assert storage != null : "Storage should be provided";
+        assert ui != null : "A UI should be provided";
+
         return ui.findKeyWord(tasks.contains(keyWord));
     }
 }

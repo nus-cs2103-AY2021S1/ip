@@ -26,7 +26,7 @@ public class TaskList {
      */
     public void delete(int index) throws BobIndexOutOfBoundsException {
         try {
-            list.remove(index-1);
+            list.remove(index - 1);
         } catch (IndexOutOfBoundsException e) {
             throw new BobIndexOutOfBoundsException();
         }

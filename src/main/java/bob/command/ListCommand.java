@@ -20,6 +20,7 @@ public class ListCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, UI ui, Storage storage) throws BobIndexOutOfBoundsException {
+        assert tasks != null : "A tasklist should be provided";
         return ui.printOutList(tasks);
     }
 }
