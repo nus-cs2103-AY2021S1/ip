@@ -30,7 +30,7 @@ public class EventTask extends Task {
      *
      * @return Time period of this event task.
      */
-    private String getEventDuration() {
+    public String getEventDuration() {
         return startDate.getDayOfMonth() + " "
                 + startDate.getMonth().toString() + " "
                 + startDate.getYear() + " to "
