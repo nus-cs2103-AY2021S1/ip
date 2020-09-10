@@ -2,6 +2,7 @@ package duke.command;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import duke.Ui;
 import duke.Storage;
@@ -39,39 +40,37 @@ public class AddCommand extends Command {
 
     @Override
     public String execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
+        String[] descElements = this.description.split(" /by ");
+        String taskName = descElements[0];
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm");
+
         Task task = null;
         if (this.commandType == CommandType.TODO) {
-            task = new Todo(this.description);
+            task = new Todo(taskName);
         } else if (this.commandType == CommandType.DEADLINE) {
-            String[] descElements = this.description.split(" /by ");
             try {
-                LocalDateTime dateTime = LocalDateTime.parse(descElements[1],
-                        DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-                String taskName = descElements[0];
+                LocalDateTime dateTime = LocalDateTime.parse(descElements[1], formatter);
                 task = new Deadline(taskName, dateTime);
-            } catch (Exception e) {
+            } catch (DateTimeParseException e) {
                 throw new WrongDeadlineException("deadline", "/by");
             }
-        } else { // should be event
-            String[] descElements = this.description.split(" /at ");
+        } else if (this.commandType == CommandType.DEADLINE) {
             try {
-                LocalDateTime dateTime = LocalDateTime.parse(descElements[1],
-                        DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
-                String taskName = descElements[0];
+                LocalDateTime dateTime = LocalDateTime.parse(descElements[1], formatter);
                 task = new Event(taskName, dateTime);
-            } catch (Exception e) {
+            } catch (DateTimeParseException e) {
                 throw new WrongDeadlineException("event", "/at");
             }
         }
 
-        String response = "Test from AddCommand";
         if (task != null) {
             tasks.addTask(task, storage);
 
-            response = ui.returnReply("Orh. I added:" + "\n  " + task.toString()
+            return ui.returnReply("Orh. I added:" + "\n  " + task.toString()
                     + "\nNow you got " + tasks.getListLength() + " things in the list.");
+        } else {
+            throw new DukeException("Something went wrong! Try again.");
         }
-        return response;
     }
 
     @Override

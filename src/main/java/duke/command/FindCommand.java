@@ -31,14 +31,7 @@ public class FindCommand extends Command{
 
     @Override
     public String execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
-        List<Task> resultList = new ArrayList<>();
-
-        for (int i = 1; i <= tasks.getListLength(); i++) {
-            Task task = tasks.getTask(i);
-            if (task.getTaskName().toLowerCase().contains(this.description)) {
-                resultList.add(task);
-            }
-        }
+        List<Task> resultList = findMatchingTasks(tasks);
 
         String finalString = "";
         int counter = 0;
@@ -48,6 +41,19 @@ public class FindCommand extends Command{
         }
 
         return ui.returnReply("Na, I found this:" + finalString);
+    }
+
+    private List<Task> findMatchingTasks(TaskList tasks) {
+        List<Task> resultList = new ArrayList<>();
+
+        for (int i = 1; i <= tasks.getListLength(); i++) {
+            Task task = tasks.getTask(i);
+            if (task.getTaskName().toLowerCase().contains(this.description)) {
+                resultList.add(task);
+            }
+        }
+
+        return resultList;
     }
 
     @Override

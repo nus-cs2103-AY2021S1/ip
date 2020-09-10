@@ -1,10 +1,10 @@
 package duke;
 
-import duke.dukeexception.DukeException;
-import duke.task.Task;
-
 import java.util.ArrayList;
 import java.util.List;
+
+import duke.dukeexception.DukeException;
+import duke.task.Task;
 
 /**
  * Contains the list of tasks based on user inputs
@@ -67,7 +67,7 @@ public class TaskList {
      * @throws DukeException If exception is thrown by the update method of the Storage class.
      */
     public void markDone(int taskNum, Storage storage) throws DukeException {
-        this.list.get(taskNum - 1).markDone();
+        getTask(taskNum).markDone();
         storage.update(this.list);
     }
 

@@ -52,7 +52,7 @@ public class Parser {
                 } else {
                     return new AddCommand(commandType, description);
                 }
-            } catch (Exception e) {
+            } catch (IndexOutOfBoundsException e) {
                 throw new NoDescriptionException(commandType.toString().toLowerCase());
             }
         } else {
