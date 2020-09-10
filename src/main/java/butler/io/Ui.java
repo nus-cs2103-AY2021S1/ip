@@ -51,7 +51,7 @@ public class Ui {
      * @param errorMessage Error message to be printed.
      */
     public void showError(String errorMessage) {
-        System.out.println("ERROR: " + errorMessage);
+        System.out.println("ERRORS: " + errorMessage);
     }
 
     /**
