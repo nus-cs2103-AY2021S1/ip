@@ -51,6 +51,8 @@ public class Parser {
             return Command.FIND;
         case ("bye"):
             return Command.TERMINATE;
+        case ("sort"):
+            return Command.SORT;
         case ("todo"):
             // fallthrough
         case ("event"):

@@ -105,6 +105,21 @@ public class Duke {
 
 
     /**
+     * Sorts tasks chronologically (by date).
+     * Todos always come first, in alphabetical order.
+     * If tasks with dates have the same date, they are sorted alphabetically.
+     *
+     * @return Status message to be printed.
+     */
+    private String sort() {
+        String statusMsg = this.taskList.sort();
+
+        assert statusMsg != null;
+        return statusMsg;
+    }
+
+
+    /**
      * Finds tasks based on keyword.
      * Output indexes are the indexes of elements in the original dukeList.
      *
@@ -145,6 +160,9 @@ public class Duke {
             break;
         case FIND:
             statusMessage = this.find(msgArr);
+            break;
+        case SORT:
+            statusMessage = this.sort();
             break;
         case TASK:
             statusMessage = this.taskList.add(userInputStr);

@@ -13,7 +13,7 @@ import duke.exceptions.DukeNoDescriptionException;
  * Abstract Task class.
  * Child classes: Deadline, Event, Todo.
  */
-public abstract class Task {
+public abstract class Task implements Comparable<Task> {
 
     public static final char DONE = '\u2713';
     public static final char NOT_DONE = '\u2717';
@@ -157,10 +157,22 @@ public abstract class Task {
     }
 
 
+    /**
+     * Gets LocalDate object of task.
+     *
+     * @return LocalDate object of task.
+     */
+    public abstract LocalDate getDate();
+
+
     @Override
     public String toString() {
         char stateSymbol = this.isDone ? DONE : NOT_DONE;
         return String.format("[%s] %s", stateSymbol, this.itemString);
     }
+
+
+    @Override
+    public abstract int compareTo(Task t);
 
 }

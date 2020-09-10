@@ -2,6 +2,7 @@ package duke;
 
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import duke.exceptions.DukeException;
@@ -198,6 +199,23 @@ public class DukeList {
         } else {
             return "No matching tasks found!";
         }
+
+    }
+
+
+    /**
+     * Sorts tasks chronologically.
+     *
+     * @return Status string to be printed.
+     */
+    public String sort() {
+        if (this.taskList.size() == 0) {
+            return "List is empty, there's nothing to sort!";
+        }
+
+        Collections.sort(this.taskList);
+
+        return "Tasks sorted chronologically:\n" + this.toString();
 
     }
 
