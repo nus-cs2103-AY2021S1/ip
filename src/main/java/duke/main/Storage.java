@@ -89,6 +89,7 @@ public class Storage {
      * @throws IOException when the folder or the saved file cannot be found.
      */
     private Task translateStringToTask(String savedTask) throws IOException {
+        assert !savedTask.equals("") : "Saved task string cannot be empty";
         String[] components = savedTask.split(" \\| ");
         String command = components[0];
         boolean isDone = components[1].equals("\u2713");
