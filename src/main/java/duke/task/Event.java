@@ -6,7 +6,6 @@ import java.time.format.DateTimeFormatter;
 public class Event extends Task {
 
     protected LocalDateTime at;
-    public Tag tag;
 
     /**
      * Creates an Event.
@@ -14,12 +13,9 @@ public class Event extends Task {
      * @param description description of the Event
      * @param at date and time of the Event
      */
-    public Event(String description, LocalDateTime at, boolean hasTag) {
-        super(description, hasTag);
+    public Event(String description, LocalDateTime at, String tag) {
+        super(description, tag);
         this.at = at;
-        if (hasTag) {
-            this.tag = new Tag(description.substring(description.indexOf("@") + 1));
-        }
     }
 
     @Override
@@ -28,13 +24,25 @@ public class Event extends Task {
         if (this.isDone) {
             completionStatus = "1";
         }
-        return "E" + " | " + completionStatus + " | " + this.description + " | "
-                + at.format(DateTimeFormatter.ofPattern("dd/MM/yyyy, HHmm"));
+        if (this.hasTag) {
+            return "E" + " | " + completionStatus + " | " + this.description + " | "
+                    + at.format(DateTimeFormatter.ofPattern("dd/MM/yyyy, HHmm"))
+                    + tag.toString();
+        } else {
+            return "E" + " | " + completionStatus + " | " + this.description + " | "
+                    + at.format(DateTimeFormatter.ofPattern("dd/MM/yyyy, HHmm"));
+        }
     }
 
     @Override
     public String toString() {
-        return "[E]" + this.getStatusIcon() + " " + super.toString() + " (at: "
-                + at.format(DateTimeFormatter.ofPattern("dd MMM yyyy, HHmm")) + ")";
+        if (this.hasTag) {
+            return "[E]" + this.getStatusIcon() + " " + super.toString() + " (at: "
+                    + at.format(DateTimeFormatter.ofPattern("dd MMM yyyy, HHmm")) + ")"
+                    + this.tag.toString();
+        } else {
+            return "[E]" + this.getStatusIcon() + " " + super.toString() + " (at: "
+                    + at.format(DateTimeFormatter.ofPattern("dd MMM yyyy, HHmm")) + ")";
+        }
     }
 }

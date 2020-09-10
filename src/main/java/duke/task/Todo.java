@@ -2,12 +2,8 @@ package duke.task;
 
 public class Todo extends Task {
 
-    public Tag tag;
-    public Todo(String description, boolean hasTag) {
-        super(description, hasTag);
-        if (hasTag) {
-            this.tag = new Tag(description.substring(description.indexOf("@") + 1));
-        }
+    public Todo(String description, String tag) {
+        super(description, tag);
     }
 
     @Override
@@ -16,11 +12,21 @@ public class Todo extends Task {
         if (this.isDone) {
             completionStatus = "1";
         }
-        return "T" + " | " + completionStatus + " | " + this.description;
+        if (this.hasTag) {
+            return "T" + " | " + completionStatus + " | " + this.description
+                    + this.tag.toString();
+        } else {
+            return "T" + " | " + completionStatus + " | " + this.description;
+        }
     }
 
     @Override
     public String toString() {
-        return "[T]" + this.getStatusIcon() + " " + super.toString();
+        if (this.hasTag) {
+            return "[T]" + this.getStatusIcon() + " " + super.toString()
+                    + this.tag.toString();
+        } else {
+            return "[T]" + this.getStatusIcon() + " " + super.toString();
+        }
     }
 }

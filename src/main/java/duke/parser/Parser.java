@@ -1,6 +1,5 @@
 package duke.parser;
 
-
 import duke.command.AddCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
@@ -8,6 +7,8 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.ListTagCommand;
+import duke.command.TagCommand;
 import duke.command.UnknownCommand;
 import duke.exception.DukeException;
 
@@ -20,7 +21,6 @@ public class Parser {
      * @throws DukeException DukeException
      */
     public static Command parse(String input) throws DukeException {
-        boolean hasTag = input.contains("@");
         String[] inputArr = input.split(" ");
         Command command;
 
@@ -46,6 +46,16 @@ public class Parser {
                 throw new DukeException("Please include description!");
             }
             break;
+        case "tag":
+            try {
+                command = new TagCommand(input.substring(4));
+            } catch (StringIndexOutOfBoundsException e) {
+                throw new DukeException("Please include description!");
+            }
+            break;
+        case "tags":
+            command = new ListTagCommand();
+            break;
         case "delete":
             try {
                 command = new DeleteCommand(Integer.parseInt(inputArr[1]));
@@ -64,9 +74,6 @@ public class Parser {
             break;
         case "deadline":
             try {
-               // if (hasTag) {
-
-                //}
                 command = new AddCommand("deadline", input.substring(9));
             } catch (StringIndexOutOfBoundsException e) {
                 throw new DukeException("Please include description!");

@@ -94,9 +94,11 @@ public class TaskList {
         }
         Task task;
         if (taskName.contains("@")) {
-            task = new Todo(taskName, true);
+            String [] taskTokens = taskName.split(" @");
+            task = new Todo(taskTokens[0], taskTokens[1]);
+            Tag.addTagIfNew(taskTokens[1]);
         } else {
-            task = new Todo(taskName, false);
+            task = new Todo(taskName, "");
         }
         tasks.add(task);
         storage.appendToFile(task.toText());
@@ -104,10 +106,6 @@ public class TaskList {
         return "Got it. I've added this task:"
                 + "\n\t" + task
                 + printTotalNumberOfTasks();
-        //Ui.printAddSuccess(task);
-
-        //printTotalNumberOfTasks();
-
     }
 
     /**
@@ -124,27 +122,24 @@ public class TaskList {
         }
         String[] taskArray = taskName.split(" /by ");
         boolean hasTag = taskName.contains("@");
+        String tag = "";
         taskName = taskArray[0];
         String timeBy;
         if (hasTag) {
             timeBy = taskArray[1].split(" @")[0]
                     .replace(' ', 'T');
+            tag = taskArray[1].split(" @")[1];
+            Tag.addTagIfNew(tag);
         } else {
             timeBy = taskArray[1]
                     .replace(' ', 'T');
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HHmm");
         Task task;
-        if (taskName.contains("@")) {
-           task = new Deadline(taskName, LocalDateTime.parse(timeBy, formatter), hasTag);
-        } else {
-            task = new Deadline(taskName, LocalDateTime.parse(timeBy, formatter), hasTag);
-        }
+        task = new Deadline(taskName, LocalDateTime.parse(timeBy, formatter), tag);
         tasks.add(task);
         storage.appendToFile(task.toText());
-        //Ui.printAddSuccess(task);
 
-        //printTotalNumberOfTasks();
         return "Got it. I've added this task:"
                 + "\n\t" + task
                 + printTotalNumberOfTasks();
@@ -163,18 +158,22 @@ public class TaskList {
             throw new DukeException("Description cannot be only empty spaces!");
         }
         String[] taskArray = taskName.split(" /at ");
-        taskName = taskArray[0];
         boolean hasTag = taskName.contains("@");
+        taskName = taskArray[0];
         String timeAt;
+        String tag = "";
         if (hasTag) {
             timeAt = taskArray[1].split(" @")[0]
                     .replace(' ', 'T');
+            tag = taskArray[1].split(" @")[1];
+            Tag.addTagIfNew(tag);
         } else {
             timeAt = taskArray[1]
                     .replace(' ', 'T');
         }
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HHmm");
-        Task task = new Event(taskName, LocalDateTime.parse(timeAt, formatter), hasTag);
+        Task task;
+        task = new Event(taskName, LocalDateTime.parse(timeAt, formatter), tag);
         tasks.add(task);
         //Ui.printAddSuccess(task);
 
@@ -194,7 +193,32 @@ public class TaskList {
         ArrayList<String> matchedTasks = new ArrayList<>();
 
         for (Task task: tasks) {
-            if (task.toString().contains(keyWord)) {
+            if (task.getDescription().contains(keyWord)) {
+                matchedTasks.add(task.toString());
+            }
+        }
+        StringBuilder reply = new StringBuilder("Here are the tasks that matched your search:");
+        for (int i = 0; i < matchedTasks.size(); i++) {
+            String string = matchedTasks.get(i);
+            reply.append("\n").append(i + 1).append(". ").append(string);
+        }
+        return reply.toString();
+    }
+
+    /**
+     * Finds tasks that have this tag.
+     *
+     * @param queryTag query tag
+     * @return tasks
+     * @throws DukeException DukeException
+     */
+    public String findTasksWithTag(String queryTag) throws DukeException {
+        if (!Tag.containsTag(queryTag)) {
+            throw new DukeException("Tag does not exist!");
+        }
+        ArrayList<String> matchedTasks = new ArrayList<>();
+        for (Task task: tasks) {
+            if (task.tag.getTagName().equals(queryTag)) {
                 matchedTasks.add(task.toString());
             }
         }

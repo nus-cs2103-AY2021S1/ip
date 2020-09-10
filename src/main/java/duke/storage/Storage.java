@@ -11,8 +11,10 @@ import java.util.Scanner;
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Tag;
 import duke.task.Task;
 import duke.task.Todo;
+
 
 /**
  * Deals with loading tasks from the file and saving tasks in the file
@@ -69,33 +71,41 @@ public class Storage {
                 String isDone = taskArray[1];
                 String taskName = taskArray[2];
                 Task task = null;
+                DateTimeFormatter formatter = DateTimeFormatter
+                        .ofPattern("dd/MM/yyyy'T'HHmm");
                 boolean hasTag = stringToParse.contains("@");
                 switch (taskType) {
                 case "T":
-                    task = new Todo(taskName, hasTag);
+                    if (hasTag) {
+                        String [] taskTokens = taskName.split(" @");
+                        task = new Todo(taskTokens[0], taskTokens[1]);
+                        Tag.addTagIfNew(taskTokens[1]);
+                    } else {
+                        task = new Todo(taskName, "");
+                    }
                     break;
                 case "D":
+                    LocalDateTime timeBy = LocalDateTime.parse(taskArray[3]
+                            .split(" @")[0]
+                            .replace(", ", "T"), formatter);
                     if (hasTag) {
-                        task = new Deadline(taskName, LocalDateTime.parse(taskArray[3]
-                                .split(" @")[0]
-                                .replace(", ", "T"),
-                                DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HHmm")), hasTag);
+                        String tag = taskArray[3].split(" @")[1];
+                        task = new Deadline(taskName, timeBy, tag);
+                        Tag.addTagIfNew(tag);
                     } else {
-                        task = new Deadline(taskName, LocalDateTime.parse(taskArray[3]
-                                .replace(", ", "T"),
-                                DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HHmm")), hasTag);
+                        task = new Deadline(taskName, timeBy, "");
                     }
                     break;
                 case "E":
+                    LocalDateTime timeAt = LocalDateTime.parse(taskArray[3]
+                            .split(" @")[0]
+                            .replace(", ", "T"), formatter);
                     if (hasTag) {
-                        task = new Event(taskName, LocalDateTime.parse(taskArray[3]
-                                .split(" @")[0]
-                                .replace(", ", "T"),
-                                DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HHmm")), hasTag);
+                        String tag = taskArray[3].split(" @")[1];
+                        task = new Event(taskName, timeAt, tag);
+                        Tag.addTagIfNew(tag);
                     } else {
-                        task = new Event(taskName, LocalDateTime.parse(taskArray[3]
-                                .replace(", ", "T"),
-                                DateTimeFormatter.ofPattern("dd/MM/yyyy'T'HHmm")), hasTag);
+                        task = new Event(taskName, timeAt, "");
                     }
                     break;
                 default:
