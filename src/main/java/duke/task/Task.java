@@ -57,6 +57,14 @@ public abstract class Task {
     }
 
     /**
+     * Changes the description of the task
+     * @param newDescription The new description
+     */
+    public void setDescription(String newDescription) {
+        this.description = newDescription;
+    }
+
+    /**
      * Gets the time which this task happens.
      * @return An empty String if the task is of type Todo, else return the time string input by the user
      */
@@ -69,6 +77,12 @@ public abstract class Task {
      * @return An icon
      */
     public abstract String getTypeIcon();
+
+    /**
+     * Clones this task
+     * @return A new task that contain the same information as this task
+     */
+    public abstract Task clone();
 
     /**
      * Converts the task to string.
