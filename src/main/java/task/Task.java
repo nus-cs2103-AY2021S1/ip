@@ -6,9 +6,13 @@ package task;
 public class Task {
     public final static String TICK = "\u2713";
     public final static String CROSS = "\u2718";
+    public final static String DELIMITER = "/";
+    public final static String TAG_ICON = " #";
 
     protected final String name;
     protected boolean isDone;
+
+    protected String tag;
 
     /**
      * Constructor creates a task and initialises done to false.
@@ -19,6 +23,7 @@ public class Task {
         assert name.length()>0: "Invalid Input";
         this.name = name;
         this.isDone = false;
+        this.tag = "";
     }
 
     public void setDone() {
@@ -39,12 +44,16 @@ public class Task {
      * @return
      */
     public String getParsedData() {
-        return String.valueOf(this.isDone) + "/" + this.name;
+        return String.valueOf(this.isDone) + Task.DELIMITER + this.name;
     }
 
     public String toString() {
         String symbol = isDone ? Task.TICK : Task.CROSS;
         return "[" + symbol + "] " + name;
+    }
+
+    public void setTag (String tagName) {
+        this.tag = tagName;
     }
 }
 

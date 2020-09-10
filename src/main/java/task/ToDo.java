@@ -7,11 +7,16 @@ public class ToDo extends Task {
 
     @Override
     public String getParsedData() {
-        return "T" + "/" + String.valueOf(super.isDone) + "/" + super.name;
+        String[] args = new String[]{"T", String.valueOf(super.isDone), super.tag, super.name};
+        return String.join(Task.DELIMITER, args);
     }
 
     @Override
     public String toString() {
-        return "[T]" + super.toString();
+        String tag = "";
+        if (!super.tag.equals("")) {
+            tag = Task.TAG_ICON + super.tag;
+        }
+        return "[T]" + super.toString() + " " + tag;
     }
 }

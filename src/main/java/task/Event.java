@@ -10,11 +10,16 @@ public class Event extends Task {
 
     @Override
     public String getParsedData() {
-        return "E" + "/" + String.valueOf(super.isDone) + "/" + super.name + "/" + this.at;
+        String[] args = new String[]{"E", String.valueOf(super.isDone), super.tag, super.name, this.at};
+        return String.join(Task.DELIMITER, args);
     }
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + at + ")";
+        String tag = "";
+        if (!super.tag.equals("")) {
+            tag = Task.TAG_ICON + super.tag;
+        }
+        return "[E]" + super.toString() + " (at: " + at + ")" + tag;
     }
 }

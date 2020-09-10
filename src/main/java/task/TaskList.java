@@ -84,4 +84,10 @@ public class TaskList {
 
         return output.toString();
     }
+
+    public Task setTag(int order, String tagName) {
+        Task task = dukeList.get(order - 1);
+        task.setTag(tagName);
+        return task;
+    }
 }

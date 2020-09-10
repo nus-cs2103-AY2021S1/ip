@@ -35,6 +35,8 @@ public class Parser {
             return Mode.LIST;
         case "find":
             return Mode.FIND;
+        case "tag":
+            return Mode.TAG;
         default:
             throw new DukeException("\u2639 OOPS!!! I'm sorry, but I don't know what that means :-(");
         }
@@ -92,5 +94,9 @@ public class Parser {
 
     public static String name(String input) {
         return input.split("find ")[1];
+    }
+
+    public static String getTag(String input) {
+        return input.split(" ")[2];
     }
 }
