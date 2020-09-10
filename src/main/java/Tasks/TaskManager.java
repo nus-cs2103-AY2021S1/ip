@@ -32,6 +32,10 @@ public class TaskManager {
      */
     public static String newTask2(String name, String itype, String date, String fileDir) throws ErrorExceptions {
         task Task;
+        assert name.equals("") == false;
+        assert itype.equals("") == false;
+        assert date.equals("") == false;
+        assert fileDir.equals("") == false;
         if (itype.equals("Todo")) {
             Task = new Todo(name, "[T]");
         } else if (itype.equals("Deadline")) {
@@ -130,15 +134,11 @@ public class TaskManager {
      * @return String list of tasks.
      */
     public static String listing2() {
-        String result = "";
-        result = result + "These are your current tasks!";
-        int count = 1;
-        for (task i : store) {
-            result = result + System.lineSeparator();
-            result = result + count + ". " + read(i);
-            count++;
-        }
-        return result;
+        String start = "These are your current tasks!";
+        ArrayList<String> results = new ArrayList<>();
+        results.add(start);
+        store.forEach(task->results.add(read(task)));
+        return printListOfStrings(results);
     }
 
     /**
@@ -187,5 +187,15 @@ public class TaskManager {
             clone.add(i);
         }
         return clone;
+    }
+
+    public static String printListOfStrings(ArrayList<String> results) {
+        String ans = "";
+        ans = results.get(0);
+        for (int i = 1; i < results.size(); i++) {
+            ans = ans + System.lineSeparator();
+            ans += i + ". " + results.get(i);
+        }
+        return ans;
     }
 }
