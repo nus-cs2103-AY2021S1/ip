@@ -71,6 +71,7 @@ public class Storage {
      * @throws StorageOperationException if there were errors converting and/or storing data to file.
      */
     public void save(TaskList taskList) throws StorageOperationException {
+        assert new File(this.filePath).exists();
         try {
             List<String> encodedTaskList = TaskListEncoder.encodeTaskList(taskList);
             FileWriter fw = new FileWriter(this.filePath);

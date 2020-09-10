@@ -188,6 +188,7 @@ public class Parser {
     private Command prepareDone(String args) {
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args.trim());
+            assert targetIndex > 0; // Target task index should be larger than 0.
             return new DoneCommand(targetIndex);
         } catch (ParseException e) {
             return new IncorrectCommand(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,
@@ -206,6 +207,7 @@ public class Parser {
     private Command prepareDelete(String args) {
         try {
             final int targetIndex = parseArgsAsDisplayedIndex(args.trim());
+            assert targetIndex > 0; // Target task index should be larger than 0.
             return new DeleteCommand(targetIndex);
         } catch (ParseException e) {
             return new IncorrectCommand(String.format(Messages.MESSAGE_INVALID_COMMAND_FORMAT,

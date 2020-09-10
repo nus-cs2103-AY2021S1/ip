@@ -65,6 +65,7 @@ public class MainWindow extends AnchorPane {
             ScheduledExecutorService scheduler = Executors.newSingleThreadScheduledExecutor();
             Runnable task = Platform::exit;
             scheduler.schedule(task, 5, TimeUnit.SECONDS);
+            System.exit(0);
             return;
         }
 
