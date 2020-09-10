@@ -14,6 +14,11 @@ public class ToDo extends Task {
         super(msg);
     }
 
+    @Override
+    public String getDataString() {
+        return String.format("T | %s\n", super.getDataString());
+    }
+
     /**
      * Returns a formatted string representing the to do.
      *

@@ -20,6 +20,7 @@ public class Parser {
      * @param input String input read from user.
      * @param taskList List of task stored by driver.
      * @param ui UI printer containing standard print methods.
+     * @return String output corresponding to input.
      * @throws DukeException If input is invalid.
      */
     public static String parse(String input, TaskList taskList, Ui ui) throws DukeException {
@@ -32,7 +33,7 @@ public class Parser {
 
             output += taskList.printList();
 
-        } else if (input.indexOf("done ") == 0) {
+        } else if (input.startsWith("done ")) {
 
             String[] arr = input.split(" ");
             int index = Integer.parseInt(arr[1]) - 1;
@@ -40,7 +41,7 @@ public class Parser {
             output += "Nice! I've marked this task as done:\n";
             output += task + "\n";
 
-        } else if (input.indexOf("delete ") == 0) {
+        } else if (input.startsWith("delete ")) {
 
             String[] arr = input.split(" ");
             int index = Integer.parseInt(arr[1]) - 1;
@@ -49,7 +50,7 @@ public class Parser {
             output += task + "\n";
             output += "Now you have " + taskList.getSize() + " tasks in the list.\n";
 
-        } else if (input.indexOf("find ") == 0) {
+        } else if (input.startsWith("find ")) {
             output = find(input, output, taskList, ui);
         } else {
             output = addToList(input, output, taskList, ui);
@@ -71,10 +72,9 @@ public class Parser {
             try {
                 LocalDate date = LocalDate.parse(dateString);
 
-                output += taskList.printList(task -> {
-                    return (task instanceof Event && ((Event) task).getDate().equals(date))
-                            || (task instanceof Deadline && ((Deadline) task).getDate().equals(date));
-                });
+                output += taskList.printList(task -> (task instanceof Event
+                        && ((Event) task).getDate().equals(date))
+                        || (task instanceof Deadline && ((Deadline) task).getDate().equals(date)));
             } catch (DateTimeException e) {
                 throw new DukeException("Enter date in the following format: YYYY-MM-DD");
             }
@@ -95,11 +95,11 @@ public class Parser {
 
         Task task = null;
 
-        if (input.indexOf("todo ") == 0 && input.length() > 5) {
+        if (input.startsWith("todo ") && input.length() > 5) {
 
             task = new ToDo(input.substring(5));
 
-        } else if (input.indexOf("deadline ") == 0) {
+        } else if (input.startsWith("deadline ")) {
 
             int deadlineIndex = input.indexOf("/by ");
 
@@ -126,7 +126,7 @@ public class Parser {
                 }
             }
 
-        } else if (input.indexOf("event ") == 0) {
+        } else if (input.startsWith("event ")) {
 
             int timeIndex = input.indexOf("/at ");
 

@@ -6,7 +6,6 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -94,36 +93,9 @@ public class Storage {
             file.createNewFile();
             BufferedWriter bw = new BufferedWriter(new FileWriter(file));
 
-            DateTimeFormatter format = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
             tasks.forEach(task -> {
-                int completed = task.isCompleted() ? 1 : 0;
-
-                String output = "";
-
-                if (task instanceof ToDo) {
-
-                    output = String.format("T | %d | %s\n", completed, task.getMsg());
-
-                } else if (task instanceof Deadline) {
-
-                    String time = (((Deadline) task).getTime() != null)
-                            ? ((Deadline) task).getTime().format(DateTimeFormatter.ofPattern("HH:mm")) : "NA";
-                    output = String.format("D | %d | %s | %s | %s\n", completed,
-                            task.getMsg(), ((Deadline) task).getDate().format(format),
-                            time);
-
-                } else if (task instanceof Event) {
-
-                    String time = (((Event) task).getTime() != null)
-                            ? ((Event) task).getTime().format(DateTimeFormatter.ofPattern("HH:mm")) : "NA";
-                    output = String.format("E | %d | %s | %s | %s\n", completed,
-                            task.getMsg(), ((Event) task).getDate().format(format),
-                            time);
-                }
-
                 try {
-                    bw.write(output);
+                    bw.write(task.getDataString());
                 } catch (IOException e) {
                     System.out.println("Error occurred while saving data");
                 }

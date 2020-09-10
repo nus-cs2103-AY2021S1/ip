@@ -47,6 +47,15 @@ public class Event extends Task {
         return time;
     }
 
+    @Override
+    public String getDataString() {
+        String timeString = (time != null) ? time.format(timeFormat) : "NA";
+        return String.format("E | %s | %s | %s\n",
+                super.getDataString(),
+                date.format(dateFormat),
+                timeString);
+    }
+
     /**
      * Returns a formatted string representing the event.
      *

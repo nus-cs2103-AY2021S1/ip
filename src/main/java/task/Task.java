@@ -1,9 +1,14 @@
 package task;
 
+import java.time.format.DateTimeFormatter;
+
 /**
  * Abstract implementation of a task.
  */
 public abstract class Task {
+
+    protected DateTimeFormatter timeFormat = DateTimeFormatter.ofPattern("HH:mm");
+    protected DateTimeFormatter dateFormat = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     private boolean completed;
     private String msg;
@@ -16,6 +21,11 @@ public abstract class Task {
     public Task(String msg) {
         this.msg = msg;
         completed = false;
+    }
+
+    public String getDataString() {
+        int completeInt = (completed) ? 1 : 0;
+        return String.format("%d | %s", completeInt, msg);
     }
 
     public boolean contains(String query) {
