@@ -16,10 +16,6 @@ public abstract class Task {
         isDone = true;
     }
     
-    public TaskType getTaskType() {
-        return taskType;
-    }
-    
     public abstract String generateSaveFileData();
     
     public String getDesc() {

@@ -2,9 +2,7 @@ public class ExitCommand extends Command {
     
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        String output = ui.showExit();
-        
-        return output;
+        return ui.showExit();
     }
     
     @Override

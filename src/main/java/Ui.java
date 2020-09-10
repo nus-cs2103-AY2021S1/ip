@@ -1,5 +1,3 @@
-import java.util.Scanner;
-
 public class Ui {
     private final static String MSG_GREET = "Hello! I'm Duke \n" +
             "What can I do for you?\n";
@@ -12,7 +10,6 @@ public class Ui {
     private final static String MSG_FOUND_MATCHING_TASK = "Here are the matching tasks in your list:";
     private final static String MSG_NO_MATCHING_TASK = "No matching tasks are found in your list.";
     
-    
     public String showWelcome() {
         return MSG_GREET;
     }
@@ -23,10 +20,6 @@ public class Ui {
     
     public String showError(Exception e) {
         return e.getMessage();
-    }
-
-    public String showError(String e) {
-        return e;
     }
     
     public String showListWithTasksHeader() {
@@ -55,12 +48,16 @@ public class Ui {
     }
     
     public String showAdded(Task task, int numOfTasks) {
-        return MSG_ADDED_TASK + task + "\n" 
-                + (numOfTasks == 0
-                        ? "Now you have no tasks in the list."
-                        : (numOfTasks == 1
-                                ? "Now you have 1 task in the list."
-                                : "Now you have " + numOfTasks + " tasks in the list."));
+        assert numOfTasks >= 0 : "Negative number of tasks";
+        String numOfTaskDescription;
+        if (numOfTasks == 0) {
+            numOfTaskDescription = "Now you have no tasks in the list.";
+        } else if (numOfTasks == 1) {
+            numOfTaskDescription = "Now you have 1 task in the list.";
+        } else {
+            numOfTaskDescription = "Now you have " + numOfTasks + " tasks in the list.";
+        }
+        return MSG_ADDED_TASK + task + "\n" + numOfTaskDescription;
     }
     
     public String showNoMatch() {

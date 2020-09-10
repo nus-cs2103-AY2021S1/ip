@@ -14,10 +14,11 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
+        int day = by.getDayOfMonth();
+        String month = by.getMonth().getDisplayName(TextStyle.SHORT_STANDALONE, Locale.ENGLISH);
+        int year = by.getYear();
         return "[" + taskType + "]" + super.toString() + " (by: " 
-                + by.getMonth().getDisplayName(TextStyle.SHORT_STANDALONE, Locale.ENGLISH) + " " 
-                + by.getDayOfMonth() + " " 
-                + by.getYear() + ")";
+                + month + " " + day + " " + year + ")";
     }
 
     @Override
