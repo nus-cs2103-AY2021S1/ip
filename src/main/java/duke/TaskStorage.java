@@ -11,6 +11,7 @@ public class TaskStorage {
      * @param tasks TaskList to be saved
      */
     public static void saveTask(File prevTasks, TaskList tasks) {
+        assert prevTasks.exists() : "File prevTasks should be open and exists";
         try {
             BufferedWriter writer = new BufferedWriter(new FileWriter(prevTasks));
             for (int i = 0; i < tasks.getSize(); i++) {
