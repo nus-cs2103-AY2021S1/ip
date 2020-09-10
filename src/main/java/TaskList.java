@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.stream.Collectors;
 
 /**
  * Represents the list of tasks the user has and keeps track of the current state of the list.
@@ -82,13 +83,10 @@ public class TaskList {
 
         ArrayList<Task> foundTasks = new ArrayList<>();
 
-        for (int i = 0; i < tasks.size(); i++) {
-            Task t = this.tasks.get(i);
-            if (t.toString().contains(keyword)) {
-                foundTasks.add(t);
-            }
-        }
+        this.tasks.stream()
+                .filter(t -> t.toString().contains(keyword))
+                .collect(Collectors.toCollection(() -> foundTasks));
 
-        return new TaskList(foundTasks);
+        return  new TaskList(foundTasks);
     }
 }
