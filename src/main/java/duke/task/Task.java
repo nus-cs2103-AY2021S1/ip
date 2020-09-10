@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.exception.DukeException;
+
 /**
  * {@code Task} is an abstract class which dictates the minimal structure every Task should have
  *      and capable of performing.
@@ -31,6 +33,9 @@ public abstract class Task {
      * @param priority The priority for this task.
      */
     protected Task(String desc, boolean isDone, Priority priority) {
+        if (desc == null || desc.isBlank()) {
+            throw new DukeException("The description for this Task cannot be empty");
+        }
         this.desc = desc;
         this.isDone = isDone;
         this.priority = priority;
