@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 /**
  * Represents a todo task.
  */
@@ -10,6 +12,21 @@ public class ToDo extends Task {
 
     public ToDo(String task, boolean isDone) {
         super(task, isDone);
+    }
+
+    /**
+     * Gets the task type.
+     *
+     * @return type of task in String.
+     */
+    @Override
+    public String getTaskType() {
+        return "todo";
+    }
+
+    @Override
+    LocalDate getDate() {
+        return null;
     }
 
     /**

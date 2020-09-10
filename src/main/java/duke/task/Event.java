@@ -28,7 +28,7 @@ public class Event extends Task {
     }
 
     /**
-     * Returns an Event with the appropriate details. Should only be used when reading from
+     * Returns an Event with the appropriate details. Should only be used when testing or reading from
      * the storage file.
      *
      * @param task Task description.
@@ -50,6 +50,21 @@ public class Event extends Task {
             System.out.println(e);
         }
         return null;
+    }
+
+    /**
+     * Gets the task type.
+     *
+     * @return type of task in String.
+     */
+    @Override
+    public String getTaskType() {
+        return "event";
+    }
+
+    @Override
+    LocalDate getDate() {
+        return date;
     }
 
     /**

@@ -11,7 +11,8 @@ public enum CommandKey {
     EVENT("event"),
     DEADLINE("deadline"),
     EXIT("bye"),
-    FIND("find");
+    FIND("find"),
+    REMINDER("reminder");
 
     private String key;
 

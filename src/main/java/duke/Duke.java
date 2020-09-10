@@ -33,7 +33,12 @@ public class Duke {
     }
 
     String displayWelcome() {
-        return ui.displayWelcome();
+        String welcomeMessage = ui.displayWelcome();
+        TaskList upcomingTasks = tasks.getUpcomingTasks();
+        if (upcomingTasks.size() > 0) {
+            welcomeMessage += "\n\n" + ui.displayUpcomingTasks(tasks.getUpcomingTasks());
+        }
+        return welcomeMessage;
     }
 
     /**

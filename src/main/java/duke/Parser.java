@@ -14,6 +14,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 
+import duke.command.ReminderCommand;
 import duke.exception.DukeDateTimeException;
 import duke.exception.DukeException;
 import duke.exception.DukeNoDescriptionException;
@@ -82,12 +83,14 @@ public class Parser {
      * @throws DukeException If the user input is invalid.
      */
     public Command parse(String input) throws DukeException {
-        String[] processedInput = input.split(" ");
+        String[] processedInput = input.trim().split(" ");
         String key = processedInput[0];
         if (CommandKey.equalsCommandKey(input, CommandKey.EXIT)) {
             return new ExitCommand();
         } else if (CommandKey.equalsCommandKey(input, CommandKey.LIST)) {
             return new ListCommand();
+        } else if (CommandKey.equalsCommandKey(input, CommandKey.REMINDER)) {
+            return new ReminderCommand();
         } else if (CommandKey.equalsCommandKey(processedInput[0], CommandKey.DELETE)) {
             if (processedInput.length == 1) {
                 throw new DukeNoItemToDeleteException(input);
