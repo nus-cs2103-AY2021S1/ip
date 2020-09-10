@@ -1,4 +1,8 @@
-package duke;
+package duke.logic;
+
+import duke.Command;
+import duke.DukeInputException;
+import duke.util.Storage;
 
 /**
  * Encapsulates the parsing of user's input.

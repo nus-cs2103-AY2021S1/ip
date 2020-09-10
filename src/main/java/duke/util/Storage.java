@@ -1,5 +1,6 @@
-package duke;
+package duke.util;
 
+import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;

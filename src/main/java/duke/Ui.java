@@ -1,5 +1,7 @@
 package duke;
 
+import duke.util.TaskList;
+
 /**
  * Handles interactions with the user.
  */

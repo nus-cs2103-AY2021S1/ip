@@ -1,5 +1,9 @@
 package duke;
 
+import duke.logic.Parser;
+import duke.util.Storage;
+import duke.util.TaskList;
+
 import java.util.Scanner;
 
 /**

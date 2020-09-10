@@ -1,10 +1,15 @@
-package duke;
+package duke.logic;
 
+import duke.Command;
+import duke.DukeInputException;
+import duke.Ui;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.Todo;
 import duke.util.DateTimeHandler;
+import duke.util.Storage;
+import duke.util.TaskList;
 
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Function;
