@@ -35,7 +35,7 @@ Expected outcome:
 
 ```
 Got it. I've added this task:
-[T][X] homework
+[T][✘] homework
 Now you have 2 tasks in the list
 ```
 
@@ -51,7 +51,7 @@ Expected outcome:
 
 ```
 Got it. I've added this task:
-[E][X] webinar (at: February 20 2020, 19:00)
+[E][✘] webinar (at: February 20 2020, 19:00)
 Now you have 3 tasks in the list
 ```
 
@@ -67,7 +67,7 @@ Expected outcome:
 
 ```
 Got it. I've added this task:
-[D][X] lab report (by: April 22 2020, 19:30)
+[D][✘] lab report (by: April 22 2020, 19:30)
 Now you have 3 tasks in the list
 ```
 
@@ -82,9 +82,9 @@ Example of usage:
 Expected outcome:
 
 ```
-1. [T][X] homework
-2. [E][X] webinar (at: February 20 2020, 19:00)
-3. [D][X] lab report (by: April 22 2020, 19:30)
+1. [T][✘] homework
+2. [E][✘] webinar (at: February 20 2020, 19:00)
+3. [D][✘] lab report (by: April 22 2020, 19:30)
 ```
 
 ### `done <task index>` - To mark a task as done
@@ -98,7 +98,7 @@ Example of usage:
 Expected outcome:
 ```
 Nice! I've marked this task as done:
-[T][:heavy_check_mark:] homework
+[T][✓] homework
 ```
 
 ### `delete <task index>` - To delete a task
@@ -112,7 +112,7 @@ Example of usage:
 Expected outcome:
 ```
 Noted. I've removed this task:
-[T][:heavy_check_mark:] homework
+[T][✓] homework
 Now you have 2 tasks in the list.
 ```
 
@@ -126,7 +126,7 @@ Example of usage:
 
 Expected outcome:
 ```
-1. [E][X] webinar (at: February 20 2020, 19:00)
+1. [E][✘] webinar (at: February 20 2020, 19:00)
 ```
 
 ### `bye` - To exit the Duke app
