@@ -21,6 +21,8 @@ public class Storage {
     public Storage(String filePath) throws DukeException {
         this.filePath = filePath;
         createFileIfAbsent(filePath);
+        assert new File(filePath).exists()
+                : "File to store tasks is supposed to be created";
     }
 
     /**

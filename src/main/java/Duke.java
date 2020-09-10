@@ -71,6 +71,8 @@ public class Duke {
                 return ui.showError(ex.getMessage());
             }
         }
+
+        assert false : "Response to user input is supposed to be returned";
         return "";
     }
 

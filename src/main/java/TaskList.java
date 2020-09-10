@@ -59,6 +59,9 @@ public class TaskList {
      * Prints the list of tasks in a numbered format.
      */
     public String printList() {
+        assert tasks.size() > 0
+                : "List of tasks is not supposed to be empty";
+
         String list = "";
         for (int i = 0; i < tasks.size(); i++) {
             int num = i + 1;
@@ -75,6 +78,9 @@ public class TaskList {
      * @return TaskList containing tasks with the same keyword.
      */
     public TaskList findTasks(String keyword) {
+        assert keyword != null
+                : "Keyword used to find tasks is not supposed to be null";
+
         ArrayList<Task> foundTasks = new ArrayList<>();
 
         this.tasks.stream()
