@@ -10,5 +10,5 @@ import duke.exception.InvalidTaskIdException;
  * Represent an executable command.
  */
 public interface Command {
-    void execute(TaskList taskList, Ui ui, String input) throws InvalidTaskIdException, EmptyDescriptionException, InvalidFormatException;
+    String execute(TaskList taskList, Ui ui, String input) throws InvalidTaskIdException, EmptyDescriptionException, InvalidFormatException;
 }

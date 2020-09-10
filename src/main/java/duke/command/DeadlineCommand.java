@@ -7,7 +7,6 @@ import duke.task.Deadline;
 import duke.task.Task;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.InvalidFormatException;
-import duke.exception.InvalidTaskIdException;
 
 /**
  * Represents a deadline command.
@@ -25,14 +24,15 @@ public class DeadlineCommand implements Command {
      * @param input
      * @throws EmptyDescriptionException
      * @throws InvalidFormatException
+     * @return
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, String input) throws EmptyDescriptionException, InvalidFormatException {
+    public String execute(TaskList taskList, Ui ui, String input) throws EmptyDescriptionException, InvalidFormatException {
         String[] details = Parser.parseDeadline(input);
         String title = details[0];
         String by = details[1];
         Task task = new Deadline(title, by);
         taskList.add(task);
-        ui.add(task);
+        return ui.add(task);
     }
 }

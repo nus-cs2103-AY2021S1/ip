@@ -5,7 +5,6 @@ import duke.Parser;
 import duke.TaskList;
 import duke.Ui;
 import duke.exception.EmptyDescriptionException;
-import duke.exception.InvalidTaskIdException;
 import duke.task.Task;
 import duke.task.Todo;
 
@@ -24,12 +23,13 @@ public class TodoCommand implements Command {
      * @param ui
      * @param input
      * @throws EmptyDescriptionException
+     * @return
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, String input) throws EmptyDescriptionException {
+    public String execute(TaskList taskList, Ui ui, String input) throws EmptyDescriptionException {
         String description = Parser.parseTodo(input);
         Task task = new Todo(description);
         taskList.add(task);
-        ui.add(task);
+        return ui.add(task);
     }
 }

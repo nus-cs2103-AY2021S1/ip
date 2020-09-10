@@ -10,13 +10,13 @@ public class HelpCommand implements Command {
 
     /**
      * Shows the available commands.
-     *
-     * @param ts
+     *  @param ts
      * @param ui
      * @param input
+     * @return
      */
     @Override
-    public void execute(TaskList ts, Ui ui, String input) {
-        ui.help();
+    public String execute(TaskList ts, Ui ui, String input) {
+        return ui.help();
     }
 }

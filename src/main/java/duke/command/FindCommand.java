@@ -4,8 +4,6 @@ import duke.Parser;
 import duke.TaskList;
 import duke.Ui;
 import duke.exception.EmptyDescriptionException;
-import duke.exception.InvalidFormatException;
-import duke.exception.InvalidTaskIdException;
 import duke.task.Task;
 
 import java.util.List;
@@ -24,13 +22,14 @@ public class FindCommand implements Command {
      * @param ui
      * @param input
      * @throws EmptyDescriptionException
+     * @return
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, String input) throws EmptyDescriptionException {
+    public String execute(TaskList taskList, Ui ui, String input) throws EmptyDescriptionException {
         String searchWord = Parser.parseFind(input);
         List<Task> tasks = taskList.getTasks();
         List<Task> filtered = tasks.stream().
                 filter(task -> task.getTitle().contains(searchWord)).collect(Collectors.toList());
-        ui.filteredList(filtered);
+        return ui.filteredList(filtered);
     }
 }

@@ -21,9 +21,10 @@ public class DoneCommand implements Command {
      * @param ui
      * @param input
      * @throws InvalidTaskIdException
+     * @return
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, String input) throws InvalidTaskIdException {
+    public String execute(TaskList taskList, Ui ui, String input) throws InvalidTaskIdException {
         int taskId = Parser.parseTaskId(input);
 
         if (taskId < 0 || taskId >= taskList.taskSize()) {
@@ -31,6 +32,6 @@ public class DoneCommand implements Command {
         }
 
         Task task = taskList.markAsDone(taskId);
-        ui.markAsDone(task);
+        return ui.markAsDone(task);
     }
 }

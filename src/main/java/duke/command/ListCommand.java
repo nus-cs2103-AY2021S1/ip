@@ -10,13 +10,13 @@ public class ListCommand implements Command {
 
     /**
      * Shows all the tasks that are in the list.
-     *
-     * @param ts
+     *  @param ts
      * @param ui
      * @param input
+     * @return
      */
     @Override
-    public void execute(TaskList ts, Ui ui, String input) {
-        ui.list();
+    public String execute(TaskList ts, Ui ui, String input) {
+        return ui.list();
     }
 }

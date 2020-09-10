@@ -10,13 +10,13 @@ public class QuitCommand implements Command {
 
     /**
      * Shows a goodbye message before exiting the program.
-     *
-     * @param ts
+     *  @param ts
      * @param ui
      * @param input
+     * @return
      */
     @Override
-    public void execute(TaskList ts, Ui ui, String input) {
-        ui.quit();
+    public String execute(TaskList ts, Ui ui, String input) {
+        return ui.quit();
     }
 }
