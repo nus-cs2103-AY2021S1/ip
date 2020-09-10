@@ -2,6 +2,8 @@ package duke.ui;
 
 import java.util.Scanner;
 
+import duke.note.Note;
+import duke.note.NoteList;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -130,6 +132,21 @@ public class Ui {
     }
 
     /**
+     * Returns a string representation of Note being successfully deleted.
+     *
+     * @param lst  NoteList in the program
+     * @param note Note to be deleted
+     */
+    public String printNoteDeleted(NoteList lst, Note note) {
+        assert note != null : "task should be valid";
+        assert lst != null : "lst should be valid";
+
+        String s = "Noted. I've removed this note:\n" + note.toString()
+                + "\nNow you have " + lst.getSize() + " notes in your program.";
+        return s;
+    }
+
+    /**
      * Returns a matching tasks message.
      */
     public String printMatchingTasks() {
@@ -138,4 +155,34 @@ public class Ui {
 
     }
 
+    /**
+     * Returns a new note added message.
+     *
+     * @param newNote note that was added.
+     * @return String message to notify new note added.
+     */
+    public String printNoteAdded(Note newNote) {
+        assert newNote != null : "note should be valid";
+
+        String s = "Got it. Your note has been added:\n"
+                + newNote.toString();
+        return s;
+    }
+
+    /**
+     * Returns a string representation of the note list in the program.
+     *
+     * @param notes List of notes in the program.
+     * @return String representation of the note list.
+     */
+    public String printNotes(NoteList notes) {
+        assert notes != null : "lst should be a valid list";
+
+        String s = notes.toString();
+
+        if (notes.getSize() == 0) {
+            s = "There are no notes found! Type 'note <description>' to save a note!";
+        }
+        return s;
+    }
 }

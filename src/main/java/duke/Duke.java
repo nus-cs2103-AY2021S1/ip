@@ -2,6 +2,7 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.note.NoteList;
 import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.TaskList;
@@ -15,6 +16,8 @@ import duke.ui.Ui;
 public class Duke {
 
     private Storage storage;
+    private Storage noteStorage;
+    private NoteList notes;
     private TaskList tasks;
     private Ui ui;
 
@@ -23,15 +26,16 @@ public class Duke {
      * a TaskList is found, it will be loaded. Otherwise, a new TaskList object is created
      * to store the tasks.
      *
-     * @param filePath Relative filepath from project source.
+     * @param taskStoragePath Relative filepath for storing task list from project source.
      */
-    public Duke(String filePath) {
+    public Duke(String taskStoragePath, String noteStoragePath) {
 
         //initialize User interface
         ui = new Ui();
 
         //Initialize Storage location
-        storage = new Storage(filePath);
+        storage = new Storage(taskStoragePath);
+        noteStorage = new Storage(noteStoragePath);
 
         //Initialize TaskList
         try {
@@ -39,6 +43,14 @@ public class Duke {
         } catch (DukeException e) {
             tasks = new TaskList();
             storage.writeToFile(storage.getPath().toString(), "");
+        }
+
+        //Initialize notes
+        try {
+            notes = new NoteList(noteStorage.load());
+        } catch (DukeException e) {
+            notes = new NoteList();
+            noteStorage.writeToFile(noteStorage.getPath().toString(), "");
         }
 
     }
@@ -66,7 +78,7 @@ public class Duke {
         //execute correct command
         try {
             Command c = Parser.parse(input);
-            output += c.execute(tasks, ui, storage);
+            output += c.execute(tasks, notes, ui, storage, noteStorage);
         } catch (DukeException e) {
             output += ui.showError(e.getMessage());
         }

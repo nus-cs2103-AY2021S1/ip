@@ -1,5 +1,6 @@
 package duke.command;
 
+import duke.note.NoteList;
 import duke.storage.Storage;
 import duke.task.Event;
 import duke.task.Task;
@@ -31,12 +32,14 @@ public class EventCommand extends Command {
      * the user on this addition will be returned.
      *
      * @param tasks   TaskList object containing the list of tasks.
+     * @param notes   NoteList object containing the list of notes.
      * @param ui      Ui object to output messages to the user.
-     * @param storage Storage object to interact and manipulate data from the hard disk.
+     * @param taskStorage Storage object for storing tasks.
+     * @param noteStorage Storage object for storing notes.
      * @return String response to user.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, NoteList notes, Ui ui, Storage taskStorage, Storage noteStorage) {
         Task event = new Event(this.description, this.at);
         tasks.add(event);
 
@@ -44,7 +47,7 @@ public class EventCommand extends Command {
         String output = ui.printTaskAdded(tasks, event);
 
         //update storage
-        storage.saveListToHardDisk(tasks);
+        taskStorage.saveListToHardDisk(tasks);
 
         return output;
     }
