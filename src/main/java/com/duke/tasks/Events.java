@@ -9,17 +9,19 @@ import com.duke.parser.Parser;
  */
 
 public class Events extends Task {
+    public static final String EVENT_SYMBOL = "[E]";
     protected LocalDate date;
     protected int time;
 
     /**
      * Constructor for Events.
+     * dateAndTime is of YYYY-MM-DD 10pm format.
      *
      * @param task Task description.
      * @param dateAndTime date and time of deadline.
      */
     public Events(String task, String dateAndTime) {
-        // date = 'at Sunday 2-4pm'
+        // date = '2018-10-23 6pm'
         String[] dateAndTimeArr = dateAndTime.split(" ");
         this.task = task;
         this.date = LocalDate.parse(dateAndTimeArr[0]);
@@ -28,6 +30,7 @@ public class Events extends Task {
 
     /**
      * Constructor for Events.
+     * dateAndTime is of YYYY-MM-DD 10pm format.
      *
      * @param task Task description.
      * @param dateAndTime date and time of deadline.
@@ -54,7 +57,7 @@ public class Events extends Task {
         String time = generateTimeString();
         assert !time.equals("");
 
-        return "[E]" + doneIndicator + " " + this.task + " (at: " + date + ", " + time + ")";
+        return EVENT_SYMBOL + doneIndicator + " " + this.task + " (at: " + date + ", " + time + ")";
     }
 
     private String generateDateString() {

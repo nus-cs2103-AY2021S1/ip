@@ -62,6 +62,7 @@ public class Storage {
             }
             return taskArr;
         } catch (FileNotFoundException e) {
+            System.out.println(e.getMessage());
             throw new DukeException("File failed to load. Initializing new File...");
         } catch (DukeException e) {
             throw e;

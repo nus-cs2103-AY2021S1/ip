@@ -10,6 +10,9 @@ import com.duke.storage.Storage;
 import com.duke.tasklist.TaskList;
 import com.duke.tasks.Deadlines;
 import com.duke.tasks.Events;
+import com.duke.tasks.RecurringDeadlines;
+import com.duke.tasks.RecurringEvents;
+import com.duke.tasks.RecurringToDos;
 import com.duke.tasks.Task;
 import com.duke.tasks.ToDos;
 
@@ -32,45 +35,6 @@ public class Ui {
         this.taskList = null;
     }
 
-    /**
-     * Adds entry into Duke and replies with response.
-     */
-    private String addTask(String taskType, String task) throws DukeException {
-        assert this.taskList != null;
-
-        String date = "";
-        switch (taskType) {
-        case ("todo"):
-            this.taskList.addItem(new ToDos(task));
-            break;
-        case ("event"):
-            String[] taskAndDateArr = Parser.splitTaskAndDate(task);
-            task = taskAndDateArr[0];
-            date = taskAndDateArr[1];
-            taskList.addItem(new Events(task, date));
-            break;
-        case ("deadline"):
-            taskAndDateArr = Parser.splitTaskAndDate(task);
-            task = taskAndDateArr[0];
-            date = taskAndDateArr[1];
-            taskList.addItem(new Deadlines(task, date));
-            break;
-        default:
-            throw new DukeException(ERROR_MESSAGE);
-        }
-
-        String reply = generateAddListReply();
-        generateCliReply(reply);
-        return reply;
-    }
-
-    private String generateAddListReply() {
-        String reply = "\tGot it. I've added this task:\n";
-        reply += "\t\t" + this.taskList.getList().get(this.taskList.size() - 1).toString() + "\n";
-        reply += "\tNow you have " + this.taskList.size() + " tasks in the list.";
-        return reply;
-    }
-
     private void generateCliReply(String reply) {
         System.out.println(DUKE_SECTION);
         System.out.println(reply);
@@ -84,7 +48,7 @@ public class Ui {
     /**
      * Prints entries stored in Duke.
      */
-    private String handleListItems() {
+    private String handleListCommand() {
         assert this.taskList != null;
 
         if (this.taskList.size() == 0) {
@@ -114,7 +78,7 @@ public class Ui {
      *
      * @param input input keyword to match.
      */
-    private String handleFindItem(String input) {
+    private String handleFindCommand(String input) {
         if (input.isBlank()) {
             return this.replyNoEmptyString(input);
         }
@@ -172,7 +136,7 @@ public class Ui {
         return reply;
     }
 
-    private String handleBye() {
+    private String handleByeCommand() {
         try {
             Storage.saveListToFile(this.taskList);
             String reply = replyBye();
@@ -191,7 +155,7 @@ public class Ui {
         return "\tBye. Hope to see you again soon!";
     }
 
-    private String handleDone(int index) {
+    private String handleDoneCommand(int index) {
         try {
             this.taskList.setDone(index);
             String reply = replyDone(index);
@@ -215,7 +179,7 @@ public class Ui {
      *
      * @param index index of entry to be removed.
      */
-    private String handleRemove(int index) {
+    private String handleRemoveCommand(int index) {
         try {
             Task task = this.taskList.remove(index);
             String reply = replyRemove(task);
@@ -226,6 +190,63 @@ public class Ui {
             generateCliReply(errorMessage);
             return errorMessage;
         }
+    }
+
+    /**
+     * Adds Recurring task to Duke and give reply.
+     * Example command is 'recurring todo Do Laundry /weekly'
+     * Example command is 'recurring deadline Pay Bills /by 09/07/2019 1800 /monthly'
+     * Example command is 'recurring event Wedding Anniversary /at 30/10/2020 /yearly'
+     *
+     * @param input The input string for recurring task instruction.
+     */
+    private String handleRecurringTaskCommand(String input) {
+        try {
+            String instruction = input.split(" ", 2)[1];
+            String taskType = instruction.split(" ", 2)[0];
+            String task = instruction.split(" ", 2)[1].split(" /")[0];
+            String intervalString = instruction.split(" ", 2)[1].split(" /")[1];
+            return this.addRecurringTask(taskType, task, intervalString);
+        } catch (DukeException dukeException) {
+            String errorMessage = "\t\t" + dukeException.getMessage();
+            generateCliReply(errorMessage);
+            return errorMessage;
+        }
+    }
+
+    /**
+     * Adds Recurring Task entry into Duke and replies with response.
+     *
+     * @param taskType type of Task: event, todo, deadline.
+     * @param task Description of task.
+     * @param interval time interval. Examples include: weekly, monthly, yearly.
+     */
+    private String addRecurringTask(String taskType, String task, String interval) throws DukeException {
+        assert this.taskList != null;
+
+        String date = "";
+        switch (taskType) {
+        case ("todo"):
+            this.taskList.addItem(new RecurringToDos(task, interval));
+            break;
+        case ("event"):
+            String[] taskAndDateArr = Parser.splitTaskAndDate(task);
+            task = taskAndDateArr[0];
+            date = taskAndDateArr[1];
+            taskList.addItem(new RecurringEvents(task, date, interval));
+            break;
+        case ("deadline"):
+            taskAndDateArr = Parser.splitTaskAndDate(task);
+            task = taskAndDateArr[0];
+            date = taskAndDateArr[1];
+            taskList.addItem(new RecurringDeadlines(task, date, interval));
+            break;
+        default:
+            throw new DukeException(ERROR_MESSAGE);
+        }
+        String reply = generateAddListReply();
+        generateCliReply(reply);
+        return reply;
     }
 
     /**
@@ -251,6 +272,46 @@ public class Ui {
         }
     }
 
+    /**
+     * Adds entry into Duke and replies with response.
+     */
+    private String addTask(String taskType, String task) throws DukeException {
+        assert this.taskList != null;
+
+        String date = "";
+        switch (taskType) {
+        case ("todo"):
+            this.taskList.addItem(new ToDos(task));
+            break;
+        case ("event"):
+            String[] taskAndDateArr = Parser.splitTaskAndDate(task);
+            task = taskAndDateArr[0];
+            date = taskAndDateArr[1];
+            taskList.addItem(new Events(task, date));
+            break;
+        case ("deadline"):
+            taskAndDateArr = Parser.splitTaskAndDate(task);
+            task = taskAndDateArr[0];
+            date = taskAndDateArr[1];
+            taskList.addItem(new Deadlines(task, date));
+            break;
+        default:
+            throw new DukeException(ERROR_MESSAGE);
+        }
+
+        String reply = generateAddListReply();
+        generateCliReply(reply);
+        return reply;
+    }
+
+    private String generateAddListReply() {
+        String reply = "\tGot it. I've added this task:\n";
+        reply += "\t\t" + this.taskList.getList().get(this.taskList.size() - 1).toString() + "\n";
+        reply += "\tNow you have " + this.taskList.size() + " tasks in the list.";
+        return reply;
+    }
+
+
     private String replyRemove(Task task) {
         String reply = "\tNoted. I've removed this task:\n";
         reply += "\t\t" + task.toString() + "\n";
@@ -270,21 +331,10 @@ public class Ui {
     }
 
     /**
-     * Initializes Duke with no entries.
+     * Initializes Duke with welcome message.
      */
-    public static void initialize() {
-        Ui ui = new Ui(new TaskList());
-        ui.showWelcome();
-        ui.listen();
-    }
-
-    /**
-     * Initializes Duke from persistent file.
-     */
-    public static void initialize(TaskList taskList) {
-        Ui ui = new Ui(taskList);
-        ui.showWelcome();
-        ui.listen();
+    public String initialize() {
+        return showWelcome();
     }
 
     /**
@@ -328,17 +378,19 @@ public class Ui {
         try {
             if (Parser.isDone(input)) {
                 int index = Integer.parseInt(input.split(" ")[1]) - 1;
-                return handleDone(index);
+                return handleDoneCommand(index);
             } else if (Parser.isDelete(input)) {
                 int index = Integer.parseInt(input.split(" ")[1]) - 1;
-                return handleRemove(index);
+                return handleRemoveCommand(index);
             } else if (input.equals("bye")) {
-                return handleBye();
+                return handleByeCommand();
             } else if (input.equals("list")) {
-                return handleListItems();
+                return handleListCommand();
             } else if (Parser.isFind(input)) {
                 String item = input.split(" ", 2)[1];
-                return handleFindItem(item);
+                return handleFindCommand(item);
+            } else if (Parser.isRecurringTask(input)) {
+                return handleRecurringTaskCommand(input);
             } else if (Parser.isAddTask(input)) {
                 //pull type of task and the task
                 String taskType = Parser.getTaskType(input);

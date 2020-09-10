@@ -4,43 +4,56 @@ import java.time.LocalDate;
 
 import com.duke.parser.Parser;
 
-/**
- * Represents a Deadline task item.
- */
-
-public class Deadlines extends Task {
+public class RecurringDeadlines extends RecurringTask {
     public static final String DEADLINE_SYMBOL = "[D]";
     protected LocalDate date;
     protected int time;
-
     /**
-     * Constructor for Deadlines.
+     * Constructor for RecurringDeadlines.
+     * dateAndTime is of YYYY-MM-DD 10pm format.
      *
      * @param task Task description.
      * @param dateAndTime date and time of deadline.
+     * @param recurringPeriod the period of recurrence in days.
      */
-    public Deadlines(String task, String dateAndTime) {
-        //date = 2019-12-02 1800
+    public RecurringDeadlines(String task, String dateAndTime, String recurringPeriod) {
         String[] dateAndTimeArr = dateAndTime.split(" ");
         this.task = task;
         this.date = LocalDate.parse(dateAndTimeArr[0]);
         this.time = Integer.parseInt(dateAndTimeArr[1]);
+        this.recurringPeriod = recurringPeriod;
     }
 
     /**
-     * Constructor for Deadlines.
+     * Constructor for RecurringDeadlines.
+     * dateAndTime is of YYYY-MM-DD 10pm format.
      *
      * @param task Task description.
      * @param dateAndTime date and time of deadline.
      * @param isDone Whether task is done or not.
+     * @param recurringPeriod the period of recurrence in days.
      */
-    public Deadlines(String task, String dateAndTime, boolean isDone) {
+    public RecurringDeadlines(String task, String dateAndTime, boolean isDone, String recurringPeriod) {
         String[] dateAndTimeArr = dateAndTime.split(" ");
 
         this.task = task;
         this.date = LocalDate.parse(dateAndTimeArr[0]);
         this.time = Integer.parseInt(dateAndTimeArr[1]);
         this.isDone = isDone;
+        this.recurringPeriod = recurringPeriod;
+    }
+
+    /**
+     * Returns a string representation of the RecurringDeadline object to be saved in persistent file.
+     *
+     * @return String Returns a string representation of the RecurringDeadline object to be saved in persistent file.
+     */
+    @Override
+    public String parseToSaveFormat() {
+        String isDoneStr = this.isDone ? "1" : "0";
+        String dateSaveFormatStr = Parser.parseDateToSaveFormat(this.date);
+        String res = "D - " + isDoneStr + " - " + this.task + " - " + dateSaveFormatStr + " " + this.time;
+        return res;
     }
 
     /**
@@ -54,7 +67,8 @@ public class Deadlines extends Task {
         String date = generateDateString();
         String time = generateTimeString();
         assert !time.equals("");
-        return DEADLINE_SYMBOL + doneIndicator + " " + this.task + " (by: " + date + ", " + time + ")";
+        return RECURRING_SYMBOL + " " + DEADLINE_SYMBOL
+                + doneIndicator + " " + this.task + " (by: " + date + ", " + time + ")";
     }
 
     private String generateDateString() {
@@ -75,19 +89,4 @@ public class Deadlines extends Task {
         }
         return time;
     }
-
-    /**
-     * Returns a string representation of the Deadline object to be saved in persistent file.
-     *
-     * @return String Returns a string representation of the Deadline object to be saved in persistent file.
-     */
-    @Override
-    public String parseToSaveFormat() {
-        String res = "";
-        String isDoneStr = this.isDone ? "1" : "0";
-        String dateSaveFormatStr = Parser.parseDateToSaveFormat(this.date);
-        res = "D - " + isDoneStr + " - " + this.task + " - " + dateSaveFormatStr + " " + this.time;
-        return res;
-    }
-
 }

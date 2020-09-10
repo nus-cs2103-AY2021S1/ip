@@ -1,12 +1,14 @@
 package com.duke.parser;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import com.duke.exceptions.DukeException;
 import com.duke.tasks.Deadlines;
 import com.duke.tasks.Events;
+import com.duke.tasks.RecurringDeadlines;
+import com.duke.tasks.RecurringEvents;
+import com.duke.tasks.RecurringTask;
+import com.duke.tasks.RecurringToDos;
 import com.duke.tasks.Task;
 import com.duke.tasks.ToDos;
 
@@ -71,7 +73,7 @@ public class Parser {
     }
 
     /**
-     * Returns boolean on whether format is correct for a create task command.
+     * Returns boolean on whether command is to add tasks or not.
      * This includes checks for 'todo', 'deadline' or 'event' tasks.
      * If format is wrong, returns false, else returns true.
      *
@@ -90,19 +92,45 @@ public class Parser {
     }
 
     private static boolean isToDoFormat(String[] inputArr) {
-        return inputArr.length == 2 && inputArr[0].equals("todo");
+        boolean doesTaskExists = !inputArr[1].equals("");
+        boolean isLengthTwo = inputArr.length == 2;
+        boolean isToDo = inputArr[0].equals("todo");
+        return isLengthTwo && isToDo && doesTaskExists;
     }
 
     private static boolean isDeadlineFormat(String[] inputArr) {
-        String taskWithDate = inputArr[1];
-        String[] taskAndDateArr = taskWithDate.split(" /");
-        return taskAndDateArr.length == 2 && inputArr[0].equals("deadline");
+        return inputArr[0].equals("deadline");
     }
 
     private static boolean isEventFormat(String[] inputArr) {
-        String taskWithDate = inputArr[1];
-        String[] taskAndDateArr = taskWithDate.split(" /");
-        return taskAndDateArr.length == 2 && inputArr[0].equals("event");
+        return inputArr[0].equals("event");
+    }
+
+    /**
+     * Returns boolean on whether command is to add recurring tasks or not.
+     * Example command is 'recurring todo Do Laundry /weekly'
+     * Example command is 'recurring deadline Pay Bills /by 09/07/2019 1800 /monthly'
+     * Example command is 'recurring event Wedding Anniversary /at 30/10/2020 /yearly'
+     * If format is wrong, returns false, else returns true.
+     *
+     * @param input Input command to check format.
+     * @return boolean.
+     */
+    public static boolean isRecurringTask(String input) {
+        String[] inputArr = input.split(" ", 2);
+        String taskAndInterval = inputArr[1];
+        String[] taskAndIntervalArr = taskAndInterval.split(" /");
+        boolean isRecurring = inputArr[0].equals("recurring");
+        boolean isValidInterval = checkRecurringInterval(taskAndIntervalArr[1]);
+        return isRecurring && isValidInterval;
+    }
+
+    private static boolean checkRecurringInterval(String timePeriod) {
+        String timePeriodLowerCase = timePeriod.toLowerCase();
+        return timePeriodLowerCase.equals("daily")
+                || timePeriodLowerCase.equals("weekly")
+                || timePeriodLowerCase.equals("monthly")
+                || timePeriodLowerCase.equals("yearly");
     }
 
     public static String getTaskType(String input) {
@@ -115,7 +143,7 @@ public class Parser {
 
     /**
      * Parses a string saved from Storage into a Task Object.
-     * This includes 'todo', 'deadline' or 'event' tasks.
+     * This includes 'todo', 'deadline', 'event' and recurring tasks.
      * If format is wrong, throws DukeException.
      *
      * @param taskString Input taskString to check format.
@@ -123,6 +151,49 @@ public class Parser {
      * @throws DukeException if format is wrong.
      */
     public static Task parseTask(String taskString) throws DukeException {
+        String[] taskStringArr = taskString.split(" - ");
+        String taskCode = taskStringArr[0];
+        if (taskCode.equals("R")) {
+            return parseRecurringTask(taskString);
+        } else if (isNonRecurringTask(taskCode)) {
+            return parseNonRecurringTask(taskString);
+        } else {
+            throw new DukeException("Task is of invalid input format!");
+        }
+    }
+
+    private static RecurringTask parseRecurringTask(String taskString) throws DukeException {
+        String[] taskStringArr = taskString.split(" - ");
+        String taskCode = taskStringArr[1];
+        String isDoneStr = taskStringArr[2];
+        String task = taskStringArr[3];
+        String interval = taskStringArr[5];
+        boolean isDone = isDoneStr.equals("1");
+
+        String recurringCode = taskStringArr[0];
+        assert recurringCode.equals("R");
+        assert taskCode.equals("T") ^ taskCode.equals("D") ^ taskCode.equals("E");
+
+        if (taskCode.equals("T")) {
+            return new RecurringToDos(task, isDone, interval);
+        } else if (taskCode.equals("D")) {
+            String date = taskStringArr[4];
+            date = parseDate(date);
+            return new RecurringDeadlines(task, date, isDone, interval);
+        } else if (taskCode.equals("E")) {
+            String date = taskStringArr[4];
+            date = parseDate(date);
+            return new RecurringEvents(task, date, isDone, interval);
+        } else {
+            throw new DukeException("Task is of invalid input format!");
+        }
+    }
+
+    private static boolean isNonRecurringTask(String taskCode) {
+        return taskCode.equals("T") || taskCode.equals("E") || taskCode.equals("D");
+    }
+
+    private static Task parseNonRecurringTask(String taskString) throws DukeException {
         String[] taskStringArr = taskString.split(" - ");
         String taskCode = taskStringArr[0];
         String isDoneStr = taskStringArr[1];
