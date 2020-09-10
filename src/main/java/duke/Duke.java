@@ -48,6 +48,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Retrieves the response by Duke when users provide an input.
+     *
+     * @param input Input provided by the user.
+     * @return String containing the response to the user input.
+     */
     public String getResponse(String input) {
         try {
             Command command = Parser.parse(input);

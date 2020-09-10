@@ -31,7 +31,7 @@ public class MainWindow extends AnchorPane {
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
 
     /**
-     * Initialises the dialog container and prints the welcome greeting.
+     * Initialises the dialog container and displays the welcome greeting.
      */
     @FXML
     public void initialize() {
@@ -41,6 +41,11 @@ public class MainWindow extends AnchorPane {
         );
     }
 
+    /**
+     * Initialises the Duke instance to be used for the GUI.
+     *
+     * @param d Duke object.
+     */
     public void setDuke(Duke d) {
         duke = d;
     }
