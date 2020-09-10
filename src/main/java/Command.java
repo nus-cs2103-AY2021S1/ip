@@ -93,22 +93,22 @@ public class Command {
                     throw new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.DEADLINE);
                 }
                 int index = 1;
-                while(!inputLine[index].equals("/by")){
+                while(!inputLine[index].equals("/by")) {
                     description.append(inputLine[index]).append(" ");
                     index++;
-                    if(index == inputLine.length){
+                    if(index == inputLine.length) {
                         throw new DukeException("", DukeExceptionType.EMPTY_TIME, Commands.DEADLINE);
                     }
-                    if(description.length() < 1){
+                    if(description.length() < 1) {
                         throw new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.DEADLINE);
                     }
                 }
                 index++;
-                while(index < inputLine.length){
+                while(index < inputLine.length) {
                     deadline.append(inputLine[index]).append(" ");
                     index++;
                 }
-                if(deadline.length() < 1){
+                if(deadline.length() < 1) {
                     throw new DukeException("", DukeExceptionType.EMPTY_TIME, Commands.DEADLINE);
                 }
                 deadline.deleteCharAt(deadline.length() - 1);
@@ -122,7 +122,7 @@ public class Command {
                     throw new DukeException("Please use dd-MM-yyyy", DukeExceptionType.WRONG_TIME, Commands.DEADLINE);
                 }
             }
-            case "event" :{
+            case "event" : {
                 Task task;
                 StringBuilder description = new StringBuilder();
                 StringBuilder time = new StringBuilder();
@@ -130,22 +130,22 @@ public class Command {
                     throw new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.EVENT);
                 }
                 int index = 1;
-                while(!inputLine[index].equals("/at")){
+                while(!inputLine[index].equals("/at")) {
                     description.append(inputLine[index]).append(" ");
                     index++;
                     if(index == inputLine.length){
                         throw new DukeException("", DukeExceptionType.EMPTY_TIME, Commands.EVENT);
                     }
                 }
-                if(description.length() < 1){
+                if(description.length() < 1) {
                     throw new DukeException("", DukeExceptionType.NO_DESCRIPTION, Commands.EVENT);
                 }
                 index++;
-                while(index < inputLine.length){
+                while(index < inputLine.length) {
                     time.append(inputLine[index]).append(" ");
                     index++;
                 }
-                if(time.length() < 1){
+                if(time.length() < 1) {
                     throw new DukeException("", DukeExceptionType.EMPTY_TIME, Commands.EVENT);
                 }
                 time.deleteCharAt(time.length() - 1);
