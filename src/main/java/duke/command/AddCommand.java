@@ -37,7 +37,7 @@ public class AddCommand extends Command {
         if (task instanceof Event) {
             boolean isClashing = new Scheduler().isEventClashingSchedule(userTasks, ((Event) task));
             if (isClashing) {
-                throw new DukeException("", ExceptionType.INVALID_COMMAND);
+                throw new DukeException("", ExceptionType.EVENT_CLASHES_SCHEDULE);
             }
         }
 
