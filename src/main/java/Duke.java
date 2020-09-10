@@ -48,6 +48,8 @@ public class Duke extends Application{
         } catch (DukeException | IOException e) {
             ui.showError(e);
         }
+
+
     }
 
     @Override
@@ -163,6 +165,7 @@ public class Duke extends Application{
      */
     public String getResponse(String input) {
         StringBuilder output = new StringBuilder("");
+        assert output.length()>0 : "Invalid Argument";
         try {
             Parser.Mode mode = parser.mode(input);
             if (mode == Parser.Mode.TODO || mode == Parser.Mode.DEADLINE ||
@@ -213,5 +216,4 @@ public class Duke extends Application{
         }
         return output.toString();
     }
-
 }

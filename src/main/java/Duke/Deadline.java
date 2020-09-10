@@ -16,6 +16,7 @@ public class Deadline extends Task {
         this.by = by;
         this.date = LocalDate.parse(by);
         this.byFormat = this.date.format(MY_DATE_FORMATTER);
+
     }
 
     @Override
