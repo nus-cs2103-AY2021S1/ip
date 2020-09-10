@@ -1,6 +1,5 @@
 package duke.ui;
 
-
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -30,16 +29,8 @@ public class Ui {
     }
 
     /**
-     * Displays a startup message with Duke's logo and greeting for CLI.
+     * Displays a startup message with Duke's logo and greeting for GUI.
      */
-    public String startupMsg() {
-        String output = "";
-        output += logo + "\n";
-        output += duke + "Hi I'm Duke! \n";
-        output += duke + "What can I do for you? \n";
-        return output;
-    }
-
     public String guiStartupMsg() {
         String output = "";
         output += duke + "Hi I'm Duke! \n";
@@ -71,13 +62,16 @@ public class Ui {
         String s = "Here's what I can do:\n";
         String msg =
                 "Available Commands: \n"
-                        + "'todo' \n"
-                        + "'deadline' \n"
-                        + "'event' \n"
-                        + "'list' \n"
-                        + "'delete' \n"
-                        + "'find' \n"
-                        + "'bye'";
+                        + "'todo' - Adds a todo task.\n"
+                        + "'deadline' - Adds a task with deadline.\n"
+                        + "'event' - Adds an event task.\n"
+                        + "'list' - Shows the task list.\n"
+                        + "'done' - Select task(s) to be marked as done in the list.\n"
+                        + "'delete' - Delete task(s) from task list.\n"
+                        + "'find' - Find task(s) matching the keyword.\n"
+                        + "'date' - Find task(s) matching the date.\n"
+                        + "'help' - Show the help list with the available commands.\n"
+                        + "'bye' - Exit Duke.";
         return s + msg;
     }
 
@@ -119,24 +113,10 @@ public class Ui {
     }
 
     /**
-     * A message to user to prompt for input.
-     */
-    public String showListDoneAskMsg() {
-        return duke + "Choose the task(s) to be marked as 'Done'";
-    }
-
-    /**
      * A message to user that the tasks are marked done successfully.
      */
     public String showListDoneMsg() {
         return duke + "Nice! I've marked the following as done:";
-    }
-
-    /**
-     * A message to user to prompt for input.
-     */
-    public String showTaskAddAskMsg() {
-        return duke + "Enter task details:";
     }
 
     /**
@@ -146,13 +126,6 @@ public class Ui {
      */
     public String showTaskAddedMsg(Task task) {
         return duke + "I've added '" + task.getTaskName() + "' to your Task List";
-    }
-
-    /**
-     * A message to user to prompt for input.
-     */
-    public String showTaskDeleteAskMsg() {
-        return "Choose the task(s) to be deleted.";
     }
 
     /**
@@ -170,34 +143,19 @@ public class Ui {
     }
 
     /**
-     * A message to user to prompt for input for 'find' command.
+     * A header message to indicate the 'find'/'date' results.
      */
-    public String showFindPromptMsg() {
-        return duke + "Enter a keyword:";
+    public String showFoundMsg(String input) {
+        return duke + "Here are the task(s) matching: " + input;
     }
 
     /**
-     * A header message to indicate the 'find' results.
+     * A header message to indicate no 'find'/'date' results.
      */
-    public String showFoundMsg(String keyword) {
-        return duke + "Here are the task(s) matching the keyword: " + keyword;
+    public String showNotFoundMsg(String input) {
+        return duke + "Found no task(s) matching: " + input;
     }
 
-    /**
-     * A header message to indicate no 'find' results.
-     */
-    public String showNotFoundMsg(String keyword) {
-        return duke + "Found no task(s) matching the keyword: " + keyword;
-    }
-
-    /**
-     * A method that prints duke's response in the command line interface.
-     *
-     * @param msg output message to be printed in the command line interface.
-     */
-    public void printMsg(String msg) {
-        System.out.println(msg);
-    }
 
     /**
      * A method that saves Duke's response to be displayed in Duke dialog box.

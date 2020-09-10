@@ -7,6 +7,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import java.util.Optional;
+
 /**
  * Represents a Deadline Task.
  */
@@ -60,12 +62,22 @@ public class Deadline extends Task {
     }
 
     /**
-     * A method to display Event object attributes in String format for the save file.
+     * A method to display Deadline object attributes in String format for the save file.
      *
      * @return Event task attributes in a string for the save file.
      */
     @Override
     public String toFile() {
         return "D | " + getStatusCode() + " | " + description + " | " + by;
+    }
+
+    /**
+     * A method to retrieve LocalDate from Deadline object
+     *
+     * @return Java Optional instance of LocalDate
+     */
+    @Override
+    public Optional<LocalDate> getDate() {
+        return Optional.of(date);
     }
 }

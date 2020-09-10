@@ -7,6 +7,8 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
+import java.util.Optional;
+
 /**
  * Represents an Event Task.
  */
@@ -68,5 +70,15 @@ public class Event extends Task {
     @Override
     public String toFile() {
         return "E | " + getStatusCode() + " | " + description + " | " + at;
+    }
+
+    /**
+     * A method to retrieve LocalDate from Event object
+     *
+     * @return Java Optional instance of LocalDate
+     */
+    @Override
+    public Optional<LocalDate> getDate() {
+        return Optional.of(date);
     }
 }

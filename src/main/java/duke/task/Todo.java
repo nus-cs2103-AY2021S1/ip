@@ -1,5 +1,9 @@
 package duke.task;
 
+import java.time.LocalDate;
+
+import java.util.Optional;
+
 /**
  * Represents a To-do Task.
  */
@@ -33,5 +37,17 @@ public class Todo extends Task {
     @Override
     public String toFile() {
         return "T | " + getStatusCode() + " | " + description;
+    }
+
+
+    /**
+     * Todo object does not require the user to input date.
+     * Thus, it returns an empty Optional instance.
+     *
+     * @return Java Optional instance that is empty.
+     */
+    @Override
+    public Optional<LocalDate> getDate() {
+        return Optional.empty();
     }
 }

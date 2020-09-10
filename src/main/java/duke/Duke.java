@@ -87,6 +87,9 @@ public class Duke {
         case "help":
             helpCommand();
             break;
+        case "date":
+            dateCommand(guiInputArray);
+            break;
         default:
             try {
                 throw new DukeException("Unrecognised Command :(, type 'help' for available commands.");
@@ -193,7 +196,7 @@ public class Duke {
 
                 userInput = guiInputArray[1];
                 TaskList foundTasks;
-                foundTasks = tasks.findTasks(userInput);
+                foundTasks = tasks.findTasksUsingKeyword(userInput);
 
                 if (!foundTasks.isEmpty()) {
                     ui.setGuiOutput(ui.showFoundMsg(userInput) + "\n" + ui.showTaskList(foundTasks));
@@ -320,7 +323,7 @@ public class Duke {
     }
 
     /**
-     * Shows a help list of available commands.
+     * Shows a help list of available commands. (C-Help)
      */
     private void helpCommand() {
         ui.setGuiOutput(ui.showHelp());
@@ -334,6 +337,34 @@ public class Duke {
             storeFile.saveFile(tasks);
         } catch (DukeException e) {
             ui.setGuiOutput(ui.showErrorMsg(e));
+        }
+    }
+
+    /**
+     * Find tasks that matches the date entered by user. (B-ViewSchedules)
+     */
+    private void dateCommand(String[] guiInputArray) {
+        if (tasks.isEmpty()) {
+            ui.setGuiOutput(ui.showListEmptyMsg());
+        } else {
+            try {
+                if (guiInputArray.length <= 1 || guiInputArray[1].isBlank()) {
+                    throw new DukeException("Yo! Enter a date.");
+                }
+
+                userInput = guiInputArray[1];
+                TaskList foundTasks;
+                foundTasks = tasks.findTasksUsingDate(userInput);
+
+                if (!foundTasks.isEmpty()) {
+                    ui.setGuiOutput(ui.showFoundMsg(userInput) + "\n" + ui.showTaskList(foundTasks));
+                } else {
+                    ui.setGuiOutput(ui.showNotFoundMsg(userInput));
+                }
+
+            } catch (DukeException e) {
+                ui.setGuiOutput(ui.showErrorMsg(e));
+            }
         }
     }
 }

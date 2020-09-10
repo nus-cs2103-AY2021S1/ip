@@ -1,5 +1,9 @@
 package duke.task;
 
+import java.time.LocalDate;
+
+import java.util.Optional;
+
 /**
  * Represents a generic task.
  */
@@ -68,4 +72,12 @@ public abstract class Task {
      * @return Task attributes in a string.
      */
     public abstract String toFile();
+
+    /**
+     * An abstract method to allow retrieval of date from different task types.
+     * Java Optional is implemented because some task types may not require dates.
+     *
+     * @return Optional instance of LocalDate
+     */
+    public abstract Optional<LocalDate> getDate();
 }
