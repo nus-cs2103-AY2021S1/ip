@@ -25,22 +25,22 @@ public class TaskList {
         }
     }
 
-    public TaskList findTask(String hint){
-        TaskList containsHint = new TaskList(new ArrayList<Task>());
-        for(Task task: ls){
-            if(task.getTask().contains(hint)){
+    public TaskList findTask(String hint) {
+        TaskList containsHint = new TaskList(new ArrayList<>());
+        for(Task task: ls) {
+            if(task.getTask().contains(hint)) {
                 containsHint.add(task);
             }
         }
         return containsHint;
     }
 
-    public List<Task> getListOfTasks(){
+    public List<Task> getListOfTasks() {
         return this.ls;
     }
 
-    public String delete(int task) throws DukeException{
-        if(task>ls.size()){
+    public String delete(int task) throws DukeException {
+        if(task>ls.size()) {
             throw new DukeException("You don't have that many tasks");
         }else{
             System.out.println("     Noted. I've removed this task: ");
@@ -51,7 +51,7 @@ public class TaskList {
         }
     }
 
-    public void add(Task task){
+    public void add(Task task) {
         ls.add(task);
     }
 

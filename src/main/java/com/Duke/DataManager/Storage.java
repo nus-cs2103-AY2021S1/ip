@@ -76,30 +76,35 @@ public class Storage {
             while (sc.hasNextLine()) {
                 String data = sc.nextLine();
                 String[] dataArr = data.split("\\*");
-                if (dataArr[0].equals("T")) {
-                    if (dataArr[2].equals("Y")) {
-                        taskList.add(new ToDo(dataArr[1], true));
-                    } else {
-                        taskList.add(new ToDo(dataArr[1], false));
-                    }
-                } else if (dataArr[0].equals("E")) {
-                    if (dataArr[4].equals("Y")) {
-                        taskList.add(new Event(dataArr[1], LocalTime.parse(dataArr[2]), LocalTime.parse(dataArr[3]), true));
-                    } else {
-                        taskList.add(new Event(dataArr[1], LocalTime.parse(dataArr[2]), LocalTime.parse(dataArr[3]), false));
-                    }
-                } else if (dataArr[0].equals("D")) {
-                    if (dataArr[4].equals("Y")) {
-                        taskList.add(new Deadline(dataArr[1], LocalDate.parse(dataArr[2]), true));
-                    } else {
-                        taskList.add(new Deadline(dataArr[1], LocalDate.parse(dataArr[2]), false));
-                    }
-                } else {
-                    if (dataArr[1].equals("Y")) {
-                        taskList.add(new Task(dataArr[0], true));
-                    } else {
-                        taskList.add(new Task(dataArr[0], false));
-                    }
+                switch (dataArr[0]) {
+                    case "T":
+                        if (dataArr[2].equals("Y")) {
+                            taskList.add(new ToDo(dataArr[1], true));
+                        } else {
+                            taskList.add(new ToDo(dataArr[1], false));
+                        }
+                        break;
+                    case "E":
+                        if (dataArr[4].equals("Y")) {
+                            taskList.add(new Event(dataArr[1], LocalTime.parse(dataArr[2]), LocalTime.parse(dataArr[3]), true));
+                        } else {
+                            taskList.add(new Event(dataArr[1], LocalTime.parse(dataArr[2]), LocalTime.parse(dataArr[3]), false));
+                        }
+                        break;
+                    case "D":
+                        if (dataArr[4].equals("Y")) {
+                            taskList.add(new Deadline(dataArr[1], LocalDate.parse(dataArr[2]), true));
+                        } else {
+                            taskList.add(new Deadline(dataArr[1], LocalDate.parse(dataArr[2]), false));
+                        }
+                        break;
+                    default:
+                        if (dataArr[1].equals("Y")) {
+                            taskList.add(new Task(dataArr[0], true));
+                        } else {
+                            taskList.add(new Task(dataArr[0], false));
+                        }
+                        break;
                 }
             }
         } catch (FileNotFoundException | DukeException e) {
