@@ -6,6 +6,8 @@ import duke.task.TaskType;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 /**
  * Represents the list of tasks together with a counter
@@ -171,7 +173,7 @@ public class TaskList implements Cloneable {
             String toReturn = String.format("Found %d match(es) for '%s':", matches.size(), parser.comparator);
 
             for (Task task : matches) {
-                toReturn += String.format("   %d. %s", count, task.toString());
+                toReturn += String.format("\n   %d. %s", count, task.toString());
                 count++;
             }
 
@@ -186,18 +188,15 @@ public class TaskList implements Cloneable {
      * @return a list of Tasks containing the substring of interest.
      */
     public List<Task> getMatchingTask(String comparator) {
-        List<Task> matchingTasks = new ArrayList<>();
+        boolean hasComparator = !comparator.isBlank();
 
-        for (Task task : tasks) {
-            boolean emptyComparator = comparator.isBlank();
-            boolean hasSubstring = task.getTaskName().contains(comparator);
-            boolean isContained = hasSubstring && !emptyComparator;
-
-            if (isContained) {
-                matchingTasks.add(task);
-            }
+        if (!hasComparator) {
+            return new ArrayList<>();
+        } else {
+            return tasks.stream()
+                    .filter(task -> task.getTaskName().contains(comparator))
+                    .collect(Collectors.toList());
         }
-        return matchingTasks;
     }
 
     /**
