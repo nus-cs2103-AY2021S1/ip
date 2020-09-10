@@ -14,6 +14,7 @@ public abstract class Task {
      * Mark the task as done.
      */
     public void setDone() {
+        assert !isDone;
         this.isDone = true;
     }
 
