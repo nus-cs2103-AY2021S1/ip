@@ -1,6 +1,8 @@
 package duke.utils;
 
 
+import duke.storage.Storage;
+
 public class Constants {
     /**
      * Greeting for Duke.
@@ -58,10 +60,13 @@ public class Constants {
 
     public static final String HELPPATTERN = ("^(h|H)(e|E)(l|L)(p|P)$");
 
-
     /**
      * Default console width.
      */
     public static final int CONSOLEWIDTH = 50;
+
+    public static final String EXITRESPONSE = "EXIT";
+
+    public static final Storage DEFAULTSTORAGE = new Storage("data/tasksTable.csv");
 
 }
