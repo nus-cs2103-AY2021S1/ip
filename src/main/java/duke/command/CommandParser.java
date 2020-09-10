@@ -55,9 +55,17 @@ public class CommandParser {
                 || command.split(" ")[0].equals("event");
     }
 
+    /**
+     * Parses user input to create a FindCommand
+     * @param command A String value which is the user input.
+     * @return A FindCommand that when executed, finds and prints all matching tasks.
+     * @throws InvalidSearchException If no valid search string is provided.
+     */
     private static FindCommand parseFindCommand(String command) throws InvalidSearchException {
-        if (command.length() < 5) {
+        if (command.length() < 5 ) {
             throw new InvalidSearchException("Oh noes! I don't think you specified a search string :<");
+        } else if (command.split(" ").length <= 1) {
+            throw new InvalidSearchException("Oh noes! Please add a space before your search string :<");
         }
         String matchString = command.substring(5);
         return new FindCommand(matchString);
@@ -70,13 +78,10 @@ public class CommandParser {
      * @throws InvalidTaskException if task index provided by user is invalid or missing.
      */
     private static DoneCommand parseDoneCommand(String command) throws InvalidTaskException {
-        if (command.length() < 5) {
-            throw new InvalidTaskException("Oh noes! I don't think you specified a valid task index :<");
-        }
         try {
-            int index = Integer.parseInt(command.substring(5));
+            int index = Integer.parseInt(command.split(" ")[1]);
             return new DoneCommand(index);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             throw new InvalidTaskException("Oh noes! I don't think you specified a valid task index :<");
         }
     }
@@ -88,13 +93,10 @@ public class CommandParser {
      * @throws InvalidTaskException if task index provided by user is invalid or missing.
      */
     private static DeleteCommand parseDeleteCommand(String command) throws InvalidTaskException {
-        if (command.length() < 7) {
-            throw new InvalidTaskException("Oh noes! I don't think you specified a valid task index :<");
-        }
         try {
-            int index = Integer.parseInt(command.substring(7));
+            int index = Integer.parseInt(command.split(" ")[1]);
             return new DeleteCommand(index);
-        } catch (NumberFormatException e) {
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
             throw new InvalidTaskException("Oh noes! I don't think you specified a valid task index :<");
         }
     }
