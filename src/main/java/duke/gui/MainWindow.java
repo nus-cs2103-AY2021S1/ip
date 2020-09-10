@@ -34,6 +34,9 @@ public class MainWindow extends BorderPane {
     private DukeData dukeData;
     private Display display;
 
+    /**
+     * Initialize all Duke GUI items
+     */
     @FXML
     public void initialize() {
         // Redirect System.out to outputStream

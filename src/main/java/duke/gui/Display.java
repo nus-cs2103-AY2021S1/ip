@@ -54,7 +54,7 @@ public class Display {
         }
 
         // Display chatbubble for user input
-        Pane pane = ChatBubble.generate(userAvatar, message, ChatBubble.Align.RIGHT);
+        Pane pane = ChatBubble.getUserDialog(message, userAvatar);
         outputChatBox.getChildren().add(pane);
     }
 
@@ -70,7 +70,7 @@ public class Display {
         }
 
         // Display chatbubble for program output
-        Pane pane = ChatBubble.generate(dukeAvatar, message, ChatBubble.Align.LEFT);
+        Pane pane = ChatBubble.getDukeDialog(message, dukeAvatar);
         outputChatBox.getChildren().add(pane);
     }
 
@@ -86,8 +86,7 @@ public class Display {
         }
 
         // Display chatbubble for error output
-        Pane pane = ChatBubble.generate(errorAvatar, message, ChatBubble.Align.LEFT);
-        pane.setStyle("-fx-background-color: #ffcccc");
+        Pane pane = ChatBubble.getErrorDialog(message, errorAvatar);
         outputChatBox.getChildren().add(pane);
     }
 
