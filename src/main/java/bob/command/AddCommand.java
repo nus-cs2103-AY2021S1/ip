@@ -6,8 +6,6 @@ import bob.UI;
 import bob.exception.BobIOException;
 import bob.task.Task;
 
-import java.io.IOException;
-
 /**
  * This command when executed adds a task to the TaskList and calls
  * the UI class and Storage class to print out the appropriate messages

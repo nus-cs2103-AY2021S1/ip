@@ -39,6 +39,6 @@ public class DoneCommand extends Command {
 
         tasks.get(index).markAsDone();
         storage.updateSave(tasks);
-        return ui.markAsDone(tasks,index);
+        return ui.markAsDone(tasks, index);
     }
 }

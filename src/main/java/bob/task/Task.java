@@ -74,7 +74,8 @@ public class Task {
             return true;
         } else if (o instanceof Task) {
             Task task = (Task) o;
-            return this.description.equals(task.description) && this.isDone == task.isDone;
+            boolean isEqualTask = this.description.equals(task.description) && this.isDone == task.isDone;
+            return isEqualTask;
         } else {
             return false;
         }
