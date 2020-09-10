@@ -158,12 +158,20 @@ public class Ui {
 
     /**
      * Shows description of all commands.
+     *
+     * @return A string message showing list of commands.
      */
     public String showHelp() {
         System.out.println(HELP_MESSAGE);
         return HELP_MESSAGE;
     }
 
+    /**
+     * Shows tasks that are upcoming in a week, or message to indicate if there are no upcoming tasks.
+     *
+     * @param upcomingTasks The tasks that are upcoming, enumerated.
+     * @return A string message showing upcoming tasks.
+     */
     public String showUpcomingTasks(String upcomingTasks) {
         if (upcomingTasks.isEmpty()) {
             return "There are no upcoming tasks! Type 'list' to see all tasks.";

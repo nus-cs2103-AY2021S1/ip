@@ -25,7 +25,7 @@ public class UpcomingTasksCommand extends Command {
                 }
 
             } else if (current instanceof Deadline) {
-                long days = ChronoUnit.DAYS.between( now, ((Deadline) current).by);
+                long days = ChronoUnit.DAYS.between(now, ((Deadline) current).by);
                 if (days <= 7) {
                     numUpcoming++;
                     upcomingTasks = upcomingTasks + "\n " + numUpcoming + ". " + current.toString();
