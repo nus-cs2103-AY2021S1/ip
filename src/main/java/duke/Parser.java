@@ -21,6 +21,8 @@ import duke.command.DueCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.PrioritisedCommand;
+import duke.command.TaggedCommand;
 import duke.task.TaskPriority;
 import duke.task.TaskType;
 
@@ -158,6 +160,24 @@ public class Parser {
             }
 
             return new DueCommand(Parser.parseDate(argsStr));
+        case "find":
+            if (argsStr.isBlank()) {
+                throw new DukeException("Keyword cannot be blank.");
+            }
+
+            return new FindCommand(argsStr);
+        case "prioritised":
+            try {
+                TaskPriority priority = TaskPriority.valueOf(argsStr.toUpperCase());
+
+                return new PrioritisedCommand(priority);
+            } catch (IllegalArgumentException e) {
+                throw new DukeException("Task priority not recognised. Please use one of NONE, LOW, MEDIUM or HIGH.");
+            }
+        case "tagged":
+            List<String> tags = Arrays.asList(argsStr.split("\\s"));
+
+            return new TaggedCommand(tags);
         case "done":
             if (argsStr.isBlank()) {
                 throw new DukeException("Task number required for the done command.");
@@ -174,12 +194,6 @@ public class Parser {
             }
 
             return new DeleteCommand(Integer.parseInt(argsStr));
-        case "find":
-            if (argsStr.isBlank()) {
-                throw new DukeException("Keyword cannot be blank.");
-            }
-
-            return new FindCommand(argsStr);
         case "todo": {
             Argument args = Parser.parseAddCommandArgs(argsStr);
 

@@ -145,6 +145,14 @@ public class TaskList {
         return this.tasks.stream().filter(task -> task.isDue(date)).collect(Collectors.toList());
     }
 
+    public List<Task> getPrioritisedTasks(TaskPriority priority) {
+        return this.tasks.stream().filter(task -> task.hasPriority(priority)).collect(Collectors.toList());
+    }
+
+    public List<Task> getTaggedTasks(List<String> tags) {
+        return this.tasks.stream().filter(task -> task.hasTags(tags)).collect(Collectors.toList());
+    }
+
     /**
      * Returns a list of tasks containing the given keyword.
      *

@@ -43,6 +43,18 @@ public abstract class Task {
         return this.description.contains(keyword);
     }
 
+    public boolean hasPriority(TaskPriority priority) {
+        return this.priority.equals(priority);
+    }
+
+    public boolean hasTags(List<String> tags) {
+        if (tags.isEmpty()) {
+            return this.tags.isEmpty();
+        }
+
+        return this.tags.containsAll(tags);
+    }
+
     /**
      * Returns a status icon corresponding to whether the task is done.
      *
