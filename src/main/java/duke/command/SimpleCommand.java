@@ -41,11 +41,12 @@ public class SimpleCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (!isNumber(input)) {
-            if (type == SimpleCommandType.DONE) {
+            switch (type) {
+            case DONE:
                 throw new InvalidDoneException();
-            } else if (type == SimpleCommandType.DELETE) {
+            case DELETE:
                 throw new InvalidDeleteException();
-            } else {
+            default:
                 assert false : INVALID_SIMPLE_COMMAND_MESSAGE;
             }
         }
@@ -54,18 +55,19 @@ public class SimpleCommand extends Command {
             throw new InvalidTaskNumberException(tasks.size());
         }
         Task current = tasks.get(digit - 1);
-        if (type == SimpleCommandType.DONE) {
+        switch (type) {
+        case DONE:
             if (current.isDone()) {
                 throw new TaskAlreadyDoneException();
             }
             current.markAsDone();
             storage.update(tasks);
             return ui.markTaskAsDone(current);
-        } else if (type == SimpleCommandType.DELETE) {
+        case DELETE:
             tasks.delete(digit - 1);
             storage.update(tasks);
             return ui.deleteTask(current, tasks.size());
-        } else {
+        default:
             assert false : INVALID_SIMPLE_COMMAND_MESSAGE;
             return null;
         }

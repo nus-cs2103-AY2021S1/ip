@@ -36,8 +36,7 @@ public class AddToDoCommand extends AddCommand {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (taskDetails.isEmpty()) {
             throw new EmptyTaskException(TaskType.TODO);
-        } else {
-            return addTask(new ToDo(taskDetails), tasks, ui, storage);
         }
+        return addTask(new ToDo(taskDetails), tasks, ui, storage);
     }
 }

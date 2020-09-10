@@ -115,11 +115,13 @@ public class Parser {
         String[] inputArr = description.split(getIdentifier(taskType), 2);
 
         if (inputArr.length == 1) {
-            if (taskType == TaskType.DEADLINE) {
+            switch(taskType) {
+            case DEADLINE:
                 throw new InvalidDeadlineException();
-            }
-            if (taskType == TaskType.EVENT) {
+            case EVENT:
                 throw new InvalidEventException();
+            default:
+                assert false : "Invalid task type!";
             }
         }
 

@@ -42,13 +42,14 @@ public class ComplexTask extends Task {
      */
     @Override
     public String toString() {
-        if (taskType == TaskType.EVENT) {
+        switch (taskType) {
+        case EVENT:
             return "[E]" + super.toString() + " (at: " + time + ")";
-        }
-        if (taskType == TaskType.DEADLINE) {
+        case DEADLINE:
             return "[D]" + super.toString() + " (by: " + time + ")";
+        default:
+            assert false : "Invalid complex task!";
+            return null;
         }
-        assert false : "Invalid complex task!";
-        return null;
     }
 }
