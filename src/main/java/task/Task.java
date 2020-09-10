@@ -39,6 +39,7 @@ public abstract class Task {
      */
     @Override
     public String toString() {
+        assert !taskType.equals("-");
         String typeString = "[" + taskType + "]";
         String doneString = "";
         if(isDone){
