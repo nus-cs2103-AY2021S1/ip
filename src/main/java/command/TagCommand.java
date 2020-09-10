@@ -10,7 +10,8 @@ import util.Ui;
 
 
 /**
- * Represents the tag command. The tag command creates a new tag and tags it to an existing task.
+ * Represents the tag command. The tag command creates a new tag and tags it to an existing task. If the task has an
+ * existing tag, the tag command replaces the existing tag with the newly created tag.
  */
 public class TagCommand extends Command {
     /**
@@ -46,8 +47,9 @@ public class TagCommand extends Command {
         int lineNum = taskNum - 1;
         Task task = lst.get(lineNum);
         Tag tag = new Tag(tagName);
+        boolean isTagged = task.isTagged();
         try {
-            storage.modifyLine(lineNum, tag);
+            storage.modifyLineTag(lineNum, tag, isTagged);
             task.setTag(tag);
         } catch (IOException e) {
             return ui.showError(e.getMessage());

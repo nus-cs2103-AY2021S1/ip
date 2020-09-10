@@ -40,7 +40,7 @@ public class DoneCommand extends Command {
         Task task = lst.get(lineNum);
         task.markAsDone();
         try {
-            storage.modifyLine(lineNum);
+            storage.modifyLineDone(lineNum);
         } catch (IOException e) {
             return ui.showError(e.getMessage());
         }

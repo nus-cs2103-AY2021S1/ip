@@ -44,6 +44,15 @@ public class Task {
     }
 
     /**
+     * Returns boolean indicating if task has been tagged.
+     *
+     * @return boolean indicating if task has beent tagged.
+     */
+    public boolean isTagged() {
+        return tag != null;
+    }
+
+    /**
      * Returns a tick icon or cross icon based on done state of the task.
      *
      * @return Tick icon or cross icon.

@@ -84,26 +84,52 @@ public class Storage {
     }
 
     /**
-     * Modifies a line from the file, marking the task in the line as done or adding a tag to the task.
+     * Modifies a line from the file, marking the task in the line as done.
      *
      * @param lineNum Line number to be modified from the file.
      * @throws IOException If there is error writing to the file.
      */
-    public void modifyLine(int lineNum, Tag ...tags) throws IOException {
+    public void modifyLineDone(int lineNum) throws IOException {
         Path path = Path.of(file.getPath());
         List<String> fileContent = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));
         String line = fileContent.get(lineNum);
-        boolean isTagModification = tags.length == 1;
         String updatedLine;
-        if (isTagModification) {
-            // adding tag to task
-            Tag tag = tags[0];
-            updatedLine = line + " | " + tag.getName();
-        } else {
-            // marking task as done
-            updatedLine = line.replaceFirst("0", "1");
-        }
+        // marking task as done
+        updatedLine = line.replaceFirst("0", "1");
         fileContent.set(lineNum, updatedLine);
+        Files.write(path, fileContent, StandardCharsets.UTF_8);
+    }
+
+    /**
+     * Modifies a line from the file, adding a tag to the task in the line or replacing the task's existing tag.
+     *
+     * @param lineNum Line number to be modified from the file.
+     * @param tag Tag to be added to the task.
+     * @param isTagged Boolean indicating if task is already tagged.
+     * @throws IOException If there is error writing to the file.
+     */
+    public void modifyLineTag(int lineNum, Tag tag, boolean isTagged) throws IOException {
+        Path path = Path.of(file.getPath());
+        List<String> fileContent = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));
+        String line = fileContent.get(lineNum);
+        StringBuilder updatedLine;
+        if (!isTagged) {
+            // add new tag to task
+            updatedLine = new StringBuilder(line + " | " + tag.getName());
+        } else {
+            // replace existing tag
+            String[] lineSplit = line.split("\\|");
+            lineSplit[lineSplit.length - 1] = tag.getName();
+            updatedLine = new StringBuilder();
+            for (int i = 0; i < lineSplit.length; i++) {
+                if (i == (lineSplit.length - 1)) {
+                    updatedLine.append(" ").append(lineSplit[i]);
+                } else {
+                    updatedLine.append(lineSplit[i]).append("|");
+                }
+            }
+        }
+        fileContent.set(lineNum, updatedLine.toString());
         Files.write(path, fileContent, StandardCharsets.UTF_8);
     }
 }
