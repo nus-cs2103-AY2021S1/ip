@@ -83,11 +83,13 @@ public class Ui {
      * @param taskString  String representation of the task added.
      */
     public void sendAddTaskMessage(String taskString) {
+        assert taskString.length() != 0 : "trying to send empty taskString";
         System.out.println(this.add);
         System.out.println("  " + taskString);
     }
 
     public String getAddTaskMessage(String taskString) {
+        assert taskString.length() != 0 : "trying to send empty taskString";
         return this.add + "\n"
                 + "  " + taskString;
     }
@@ -97,11 +99,13 @@ public class Ui {
      * @param taskString  String representation of the task marked as done.
      */
     public void sendMarkedAsDoneMessage(String taskString) {
+        assert taskString.length() != 0 : "trying to send empty taskString";
         System.out.println(this.done);
         System.out.println("  " + taskString);
     }
 
     public String getMarkedAsDoneMessage(String taskString) {
+        assert taskString.length() != 0 : "trying to send empty taskString";
         return this.done + "\n"
                 + "  " + taskString;
     }
@@ -111,10 +115,12 @@ public class Ui {
      * @param taskString  String representation of the task deleted.
      */
     public void sendDeleteTaskMessage(String taskString) {
+        assert taskString.length() != 0 : "trying to send empty taskString";
         System.out.println(this.delete);
         System.out.println("  " + taskString);
     }
     public String getDeleteTaskMessage(String taskString) {
+        assert taskString.length() != 0 : "trying to send empty taskString";
         return this.delete + "\n"
                 + "  " + taskString;
     }
@@ -155,10 +161,12 @@ public class Ui {
      * @param tasks  TaskList to be sent.
      */
     public void listTasks(TaskList tasks) {
+        assert tasks != null : "listTasks tasks is null";
         System.out.println(tasks);
     }
 
     public String getTaskList(TaskList tasks) {
+        assert tasks != null : "getTaskList tasks is null";
         return tasks.toString();
     }
 
@@ -168,11 +176,13 @@ public class Ui {
      * @param keyword  Keyword to be queried.
      */
     public void findTasks(TaskList tasks, String keyword) {
+        assert tasks != null : "findTasks tasks is null";
         System.out.println(this.foundMessage);
         System.out.println(tasks.findTasks(keyword));
     }
 
     public String getFoundTasks(TaskList tasks, String keyword) {
+        assert tasks != null : "getFoundTasks tasks is null";
         return this.foundMessage + "\n"
                 + tasks.findTasks(keyword);
     }
@@ -182,11 +192,13 @@ public class Ui {
      * @param tasks  TaskLists with tasks to be counted.
      */
     public void sendCount(TaskList tasks) {
+        assert tasks != null : "sendCount tasks is null";
         int count = tasks.getCount();
         System.out.println("Now you have " + count + (count == 1 ? " task " : " tasks ") + "in the list.");
     }
 
     public String getCountMessage(TaskList tasks) {
+        assert tasks != null : "getCountMessage tasks is null";
         int count = tasks.getCount();
         return "Now you have " + count + (count == 1 ? " task " : " tasks ") + "in the list.";
     }

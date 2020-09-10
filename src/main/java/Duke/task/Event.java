@@ -16,6 +16,7 @@ public class Event extends Task {
      */
     public Event(String description, String date) {
         super(description);
+        assert date.length() != 0 : "date is empty";
         this.date = LocalDate.parse(date, Task.INPUT_DATE_TIME_FORMAT);
     }
 
@@ -27,6 +28,7 @@ public class Event extends Task {
      */
     public Event(String description, String date, boolean isDone) {
         super(description, isDone);
+        assert date.length() != 0 : "date is empty";
         this.date = LocalDate.parse(date, Task.INPUT_DATE_TIME_FORMAT);
     }
 

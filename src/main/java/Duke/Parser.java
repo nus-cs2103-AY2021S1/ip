@@ -45,6 +45,7 @@ public class Parser {
             DoneOutOfRangeException, MissingDeleteArgumentException, DeleteOutOfRangeException, EmptyTodoException,
             MissingDeadlineDateException, EmptyDeadlineException, MissingEventDateException, EmptyEventException,
             UnknownCommandException, MissingFindArgumentException {
+
         //DONE PORTION HERE----------------------------------------------------------
         if (input.length() >= 4 && input.substring(0, 4).equals("done")) {
             if (input.length() <= 5) {
@@ -178,6 +179,8 @@ public class Parser {
             throws MissingDoneArgumentException, DoneOutOfRangeException, MissingDeleteArgumentException,
             DeleteOutOfRangeException, EmptyTodoException, MissingDeadlineDateException, EmptyDeadlineException,
             MissingEventDateException, EmptyEventException, UnknownCommandException, MissingFindArgumentException {
+
+        assert input.length() != 0 : "enter was registered";
         ParseInfo returnable = new ParseInfo();
         //DONE PORTION HERE----------------------------------------------------------
         if (input.length() >= 4 && input.substring(0, 4).equals("done")) {
