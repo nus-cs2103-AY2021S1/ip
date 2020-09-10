@@ -1,7 +1,8 @@
 package duke;
 
-import javafx.concurrent.Task;
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.*;
+
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TaskTest {
 	@Test

@@ -1,10 +1,8 @@
 package duke;
 
-import org.testng.annotations.Test;
+import org.junit.jupiter.api.*;
 
-import static org.testng.Assert.assertEquals;
-
-import duke.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class ParserTest {
 	@Test
