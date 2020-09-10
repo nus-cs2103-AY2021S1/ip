@@ -1,0 +1,7 @@
+deadline asdf /by sunday
+todo borrow book
+event project meeting /at Mon 2-4pm
+list
+done 3
+list
+bye
