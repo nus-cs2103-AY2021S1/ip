@@ -8,15 +8,36 @@ import java.time.LocalTime;
  * in scheduled events.
  */
 public class Scheduler {
+
     /**
-     * Returns a boolean to show whether the events are clashing.
+     * Returns a boolean to indicate an event being added clashes with
+     * existing schedules.
+     *
+     * @param userTasks list of tasks from user.
+     * @param toBeScheduled event attempting to be scheduled by user.
+     * @return boolean whether event clashes with schedule.
+     */
+    public boolean isEventClashingSchedule(TaskList userTasks, Event toBeScheduled) {
+        boolean isEventClashing = false;
+
+        for (Task task : userTasks.getTaskList()) {
+            if (task instanceof Event) {
+                isEventClashing = isEventClashingAnotherEvent(((Event) task), toBeScheduled);
+            }
+        }
+
+        return isEventClashing;
+    }
+
+    /**
+     * Returns a boolean to indicate whether two events are clashing.
      * Solution adapted from https://stackoverflow.com/questions/2309558/time-comparison.
      *
      * @param scheduled event already scheduled previously.
      * @param toBeScheduled event attempting to be scheduled by user.
      * @return boolean whether events are clashing.
      */
-    public boolean isClashing(Event scheduled, Event toBeScheduled) {
+    public boolean isEventClashingAnotherEvent(Event scheduled, Event toBeScheduled) {
         LocalDate scheduledDate = scheduled.getDate();
         LocalDate toBeScheduledDate = toBeScheduled.getDate();
 
