@@ -29,15 +29,13 @@ public class Command {
      * @throws DukeException for invalid commands
      * @throws IOException for reading and writing
      */
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException, IOException {
         switch (inputLine[0]){
             case "bye" :
-                ui.bye();
                 this.bye = true;
-                break;
+                return ui.bye();
             case "list" :
-                ui.uiForList(tasks);
-                break;
+                return ui.uiForList(tasks);
             case "done" : {
                 int index;
                 if (inputLine.length < 2) {
@@ -52,9 +50,8 @@ public class Command {
                     throw new DukeException("", DukeExceptionType.WRONG_DESCRIPTION, Commands.DONE);
                 }
                 tasks.markDone(index);
-                ui.uiForDone(tasks.getTask(index));
                 storage.save(tasks);
-                break;
+                return ui.uiForDone(tasks.getTask(index));
             }
             case "delete" : {
                 int index;
@@ -71,9 +68,8 @@ public class Command {
                 }
                 Task task = tasks.getTask(index);
                 tasks.deleteTask(index);
-                ui.uiForDelete(tasks, task);
                 storage.save(tasks);
-                break;
+                return ui.uiForDelete(tasks, task);
             }
             case "todo" : {
                 if (inputLine.length < 2) {
@@ -85,11 +81,9 @@ public class Command {
                     }
                     Task task = new TodoTask(description.toString(), false);
                     tasks.addTask(task);
-                    ui.uiForAdd(tasks,task);
                     storage.save(tasks);
+                    return ui.uiForAdd(tasks,task);
                 }
-
-                break;
             }
             case "deadline" : {
                 Task task;
@@ -121,13 +115,12 @@ public class Command {
                 try{
                     task = new DeadlineTask(description.toString(),false, deadline.toString());
                     tasks.addTask(task);
-                    ui.uiForAdd(tasks, task);
                     storage.save(tasks);
+                    return ui.uiForAdd(tasks, task);
                 } catch (DateTimeParseException e){
                     System.err.println("Please use yyyy-mm-dd");
                     throw new DukeException("Please use dd-MM-yyyy", DukeExceptionType.WRONG_TIME, Commands.DEADLINE);
                 }
-                break;
             }
             case "event" :{
                 Task task;
@@ -159,13 +152,12 @@ public class Command {
                 try{
                     task = new EventTask(description.toString(),false, time.toString());
                     tasks.addTask(task);
-                    ui.uiForAdd(tasks, task);
                     storage.save(tasks);
+                    return ui.uiForAdd(tasks, task);
                 } catch (DateTimeParseException e){
                     System.err.println("Please use yyyy-mm-dd format for time");
                     throw new DukeException("Please use dd-MM-yyyy HHmm format", DukeExceptionType.WRONG_TIME, Commands.EVENT);
                 }
-                break;
             }
             case "find" : {
                 if (inputLine.length < 2) {
@@ -176,7 +168,7 @@ public class Command {
                         description.append(inputLine[i]).append(" ");
                     }
                     List<Task> filteredList = tasks.search(description.toString());
-                    ui.uiForFind(new TaskList(filteredList));
+                    return ui.uiForFind(new TaskList(filteredList));
                 }
             }
             default:

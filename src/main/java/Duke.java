@@ -1,11 +1,15 @@
 import java.io.*;
-import java.util.ArrayList;
 
 public class Duke {
 
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+
+
+    public Duke() {
+
+    }
 
     /**
      * Constructor for a Duke object
@@ -46,6 +50,15 @@ public class Duke {
 
         new Duke("./data\\duke.txt").run();
 
+    }
+
+    /**
+     * You should have your own function to generate a response to user input.
+     * Replace this stub with your completed method.
+     */
+    String getResponse(String input) throws IOException, DukeException {
+        Command cmd = Parser.parse(input);
+        return cmd.execute(tasks, ui, storage);
     }
 
 }

@@ -10,13 +10,14 @@ public class Ui {
         sc = new Scanner(System.in);
     }
 
-    public void uiForAdd(TaskList tasks, Task task){
+    public String uiForAdd(TaskList tasks, Task task){
         String output = "   " + HORIZONTAL_LINE
                 + "\n   Got it. I've added this task:"
                 + "\n       " + task
                 + String.format("\n   Now you have %d task(s) in the list.", tasks.getSize())
                 + "\n   " + HORIZONTAL_LINE;
         System.out.println(output);
+        return output;
     }
 
     public void greet(){
@@ -34,35 +35,39 @@ public class Ui {
         System.out.println(greeting);
     }
 
-    public void bye(){
+    public String bye(){
         String output = "   " + HORIZONTAL_LINE
                 + "\n   " + "Bye. Hope to see you again soon!"
                 + "\n   " + HORIZONTAL_LINE;
         System.out.println(output);
+        return output;
     }
 
-    public void uiForDone(Task task){
+    public String uiForDone(Task task){
         String output = "   " + HORIZONTAL_LINE
                 + "\n   " + "Nice! I've marked this task as done:"
                 + "\n   " + task
                 + "\n   " + HORIZONTAL_LINE;
         System.out.println(output);
+        return output;
     }
 
-    public void uiForDelete(TaskList tasks, Task task){
+    public String uiForDelete(TaskList tasks, Task task){
         String output = "   " + HORIZONTAL_LINE
                 + "\n   " + "Noted. I've removed this task: "
                 + "\n   " + task
                 + String.format("\n   Now you have %d task(s) in the list.", tasks.getSize())
                 + "\n   " + HORIZONTAL_LINE;
         System.out.println(output);
+        return output;
     }
 
-    public void uiForList(TaskList tasks){
+    public String uiForList(TaskList tasks){
         if(tasks.getSize() == 0){
             System.out.println("   " + HORIZONTAL_LINE
                     + "\n   " + "You have no tasks"
                     + "\n   " + HORIZONTAL_LINE);
+            return "no tasks";
         } else {
             StringBuilder output = new StringBuilder("   " + HORIZONTAL_LINE);
             for (int i = 0; i < tasks.getSize(); i++) {
@@ -70,12 +75,13 @@ public class Ui {
             }
             output.append("\n   " + HORIZONTAL_LINE);
             System.out.println(output);
+            return output.toString();
         }
     }
 
-    public void uiForFind(TaskList tasks){
+    public String uiForFind(TaskList tasks){
         if(tasks.getSize() == 0){
-            System.out.println("   " + HORIZONTAL_LINE
+            return ("   " + HORIZONTAL_LINE
                     + "\n   " + "You have no tasks"
                     + "\n   " + HORIZONTAL_LINE);
         } else {
@@ -85,13 +91,12 @@ public class Ui {
             }
             output.append("\n   " + HORIZONTAL_LINE);
             System.out.println(output);
+            return output.toString();
         }
     }
 
     public String read(){
         return sc.nextLine();
     }
-
-
 
 }
