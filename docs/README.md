@@ -1,6 +1,6 @@
 # User Guide
 
-![Grandma application](Ui.png)
+![Grandma application](https://i.imgur.com/G2UjJNJ.png)
 
 ## Features 
 
