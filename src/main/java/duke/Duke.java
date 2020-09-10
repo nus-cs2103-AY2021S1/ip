@@ -163,9 +163,12 @@ public class Duke extends Application {
             }
             else if(cmd.equals("list")) {
                 System.out.println("Here are the tasks in your list:");
+                // list with index
                 for(int i = 1; i <= tasks.getSize(); ++i) {
                     System.out.println(i + "." + tasks.get(i - 1).getStatus());
                 }
+                // list without index
+                // tasks.getArrayList().forEach((n) -> System.out.println(n.getStatus()));
             }
             else if(cmd.length() >= 4 && cmd.substring(0, 4).equals("done")) {
                 int c = 0;
