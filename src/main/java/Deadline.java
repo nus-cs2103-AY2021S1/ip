@@ -6,11 +6,22 @@ public class Deadline extends Task {
 
     protected LocalDate deadlineDate;
 
+    /**
+     * Deadline construction taking description and deadline date.
+     * @param description
+     * @param deadlineDate
+     */
     public Deadline(String description, LocalDate deadlineDate) {
         super(description);
         this.deadlineDate = deadlineDate;
     }
 
+    /**
+     * Deadline constructor taking boolean is done, description and deadline date.
+     * @param isDone
+     * @param description
+     * @param deadlineDate
+     */
     public Deadline(boolean isDone, String description, LocalDate deadlineDate) {
         super(isDone, description);
         this.deadlineDate = deadlineDate;
