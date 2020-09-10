@@ -11,13 +11,12 @@ public class ParseDelete extends Parse {
 
     /**
      * Calls the delete task command.
+     * Returns the deletion message.
+     *
      * @param i task index.
+     * @return String deletion of task message.
      * @throws ErrorExceptions when task cannot be found.
      */
-    public static void execute(int i) throws ErrorExceptions {
-        DeleteCommand.execute(i);
-    }
-
     public static String execute2(int i) throws ErrorExceptions {
         return DeleteCommand.execute2(i);
     }

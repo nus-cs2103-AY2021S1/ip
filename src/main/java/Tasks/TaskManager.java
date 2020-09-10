@@ -21,16 +21,21 @@ public class TaskManager {
     private static String fileDir;
 
     /**
-     * Creates a new task depending on the type of task entered by the user.
+     * Creates and returns a new task depending on the type of task entered by the user.
      *
      * @param name name of task.
      * @param itype type of task.
      * @param date due date.
      * @param fileDir file directory of the local save.
+     * @return String the added task message.
      * @throws ErrorExceptions if there is an error adding the date.
      */
-    public static void newTask(String name, String itype, String date, String fileDir) throws ErrorExceptions {
+    public static String newTask2(String name, String itype, String date, String fileDir) throws ErrorExceptions {
         task Task;
+        assert name.equals("") == false;
+        assert itype.equals("") == false;
+        assert date.equals("") == false;
+        assert fileDir.equals("") == false;
         if (itype.equals("Todo")) {
             Task = new Todo(name, "[T]");
         } else if (itype.equals("Deadline")) {
@@ -41,8 +46,8 @@ public class TaskManager {
             DateTimeManager.addDate(Task, date);
         }
         store.add(Task);
-        UserInterface.addedTask(Task);
         save(fileDir, Task);
+        return UserInterface.addedTask2(Task);
     }
 
     /**
@@ -123,15 +128,17 @@ public class TaskManager {
     }
 
     /**
-     * Lists all the tasks that is currently in the list and all its relevant information.
+     * Returns the lists all the tasks that is currently in
+     * the list and all its relevant information.
+     *
+     * @return String list of tasks.
      */
-    public static void listing() {
-        System.out.println("These are your current tasks!");
-        int count = 1;
-        for (task i : store) {
-            System.out.println(count + ". " + read(i));
-            count++;
-        }
+    public static String listing2() {
+        String start = "These are your current tasks!";
+        ArrayList<String> results = new ArrayList<>();
+        results.add(start);
+        store.forEach(task->results.add(read(task)));
+        return printListOfStrings(results);
     }
 
     /**
@@ -182,14 +189,6 @@ public class TaskManager {
         return clone;
     }
 
-    public static String listing2() {
-        String start = "These are your current tasks!";
-        ArrayList<String> results = new ArrayList<>();
-        results.add(start);
-        store.forEach(task->results.add(read(task)));
-        return printListOfStrings(results);
-    }
-
     public static String printListOfStrings(ArrayList<String> results) {
         String ans = "";
         ans = results.get(0);
@@ -198,25 +197,5 @@ public class TaskManager {
             ans += i + ". " + results.get(i);
         }
         return ans;
-    }
-
-    public static String newTask2(String name, String itype, String date, String fileDir) throws ErrorExceptions {
-        task Task;
-        assert name.equals("") == false;
-        assert itype.equals("") == false;
-        assert date.equals("") == false;
-        assert fileDir.equals("") == false;
-        if (itype.equals("Todo")) {
-            Task = new Todo(name, "[T]");
-        } else if (itype.equals("Deadline")) {
-            Task = new Deadline(name, "[D]");
-            DateTimeManager.addDate(Task, date);
-        } else {
-            Task = new Event(name, "[E]");
-            DateTimeManager.addDate(Task, date);
-        }
-        store.add(Task);
-        save(fileDir, Task);
-        return UserInterface.addedTask2(Task);
     }
 }
