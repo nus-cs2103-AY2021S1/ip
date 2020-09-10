@@ -10,11 +10,11 @@ public class TaskListTest {
     @Test
     public void doneTask_invalidInput_exceptionThrown() {
         try {
-            new TaskList(new Ui()).doneTask("done 1");
+            new TaskList(new Ui()).markTaskAsDone("done 1");
             fail();
         } catch (GelException e) {
-            assertEquals("\n" +
-                    "    Please input a valid number from 1 - 0", e.getMessage());
+            assertEquals("\n"
+                    + "    Please input a valid number from 1 - 0", e.getMessage());
         } catch (Exception e) {
             fail();
         }
