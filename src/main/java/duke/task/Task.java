@@ -5,7 +5,6 @@ package duke.task;
  * It can also tell us if it has been done or not.
  */
 public class Task {
-
     /** Description of Task. */
     protected String description;
     /** Status of Task. */

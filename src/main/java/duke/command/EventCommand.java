@@ -4,13 +4,13 @@ import duke.main.TaskList;
 import duke.task.Event;
 
 /**
- * EventCommand is Command to add a Command to the related TaskList.
+ * EventCommand is Command to add an Event to the related TaskList.
  */
 public class EventCommand extends Command {
-
     /** The Event that wants to be added to the TaskList. */
-    protected Event event;
-    protected TaskList tasks;
+    private Event event;
+    /** TaskList that is related to this command. **/
+    private TaskList tasks;
 
     /**
      * Constructs an EventCommand.
@@ -32,9 +32,15 @@ public class EventCommand extends Command {
         tasks.add(event);
     }
 
+    /**
+     * Gets the reply after performing the Command.
+     *
+     * @return A reply as a String based on the perform method.
+     **/
+    @Override
     public String getReply() {
         return " Okay! I have added this task:" + "\n" + "   "
-            + event.toString() + "\n" + " Now you have " + tasks.size() + (tasks.size() > 1 ? " tasks."
+            + event.toString() + "\n" + " Now you have " + tasks.getSize() + (tasks.getSize() > 1 ? " tasks."
             : " task.");
     }
 

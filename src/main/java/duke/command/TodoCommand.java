@@ -7,20 +7,18 @@ import duke.task.Todo;
  * TodoCommand is Command to add a Todo to the related TaskList.
  */
 public class TodoCommand extends Command {
-
-    /**
-     * The Todo that wants to be added to the related TaskList.
-     */
-    protected Todo todo;
-    protected TaskList tasks;
+    /** The Todo that wants to be added to the related TaskList. **/
+    private Todo todo;
+    /** TaskList that is related to this command **/
+    private TaskList tasks;
 
     /**
      * Constructs a TodoCommand.
      *
-     * @param taskDescription The description of the Todo.
+     * @param description The description of the Todo.
      */
-    public TodoCommand(String taskDescription) {
-        this.todo = new Todo(taskDescription);
+    public TodoCommand(String description) {
+        this.todo = new Todo(description);
     }
 
     /**
@@ -34,9 +32,14 @@ public class TodoCommand extends Command {
         tasks.add(todo);
     }
 
+    /**
+     * Gets the reply after performing the Command.
+     *
+     * @return A reply as a String based on the perform method.
+     **/
     public String getReply() {
         return " Okay! I have added this task:" + "\n" + "   "
-            + todo.toString() + "\n" + " Now you have " + tasks.size() + (tasks.size() > 1 ? " tasks."
+            + todo.toString() + "\n" + " Now you have " + tasks.getSize() + (tasks.getSize() > 1 ? " tasks."
             : " task.");
     }
 

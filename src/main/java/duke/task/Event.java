@@ -7,15 +7,10 @@ import java.time.format.DateTimeFormatter;
  * Event is sub-class of Task. Event is a task that have time when it will take place.
  */
 public class Event extends Task {
-
     /**
      * Date as LocalDate.
      */
     protected LocalDate date;
-    /**
-     * Date as String.
-     */
-    protected String date2;
 
     /**
      * Constructs an Event.
@@ -26,7 +21,6 @@ public class Event extends Task {
     public Event(String description, String date) {
         super(description);
         this.date = LocalDate.parse(date);
-        this.date2 = date;
     }
 
     /**
@@ -45,7 +39,7 @@ public class Event extends Task {
      */
     @Override
     public String[] getInfo() {
-        return new String[] {"E", description, date2};
+        return new String[] {"E", description, date.toString()};
     }
 
     /**
@@ -55,7 +49,7 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
-        String dateString = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
-        return " [E]" + super.toString() + " (at: " + dateString + ")";
+        String d = date.format(DateTimeFormatter.ofPattern("MMM d yyyy"));
+        return " [E]" + super.toString() + " (at: " + d + ")";
     }
 }

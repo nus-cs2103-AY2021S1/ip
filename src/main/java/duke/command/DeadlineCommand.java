@@ -7,10 +7,10 @@ import duke.task.Deadline;
  * DeadlineCommand is Command to add a Deadline to the related TaskList.
  */
 public class DeadlineCommand extends Command {
-
     /** The Deadline that wants to be added to the TaskList. */
-    protected Deadline deadline;
-    protected TaskList tasks;
+    private Deadline deadline;
+    /** TaskList that is related to this command. **/
+    private TaskList tasks;
 
     /**
      * Constructs a DeadlineCommand.
@@ -33,9 +33,15 @@ public class DeadlineCommand extends Command {
         tasks.add(deadline);
     }
 
+    /**
+     * Gets the reply after performing the Command.
+     *
+     * @return A reply as a String based on the perform method.
+     **/
+    @Override
     public String getReply() {
         return " Okay! I have added this task:" + "\n" + "   "
-                + deadline.toString() + "\n" + " Now you have " + tasks.size() + (tasks.size() > 1 ? " tasks."
+                + deadline.toString() + "\n" + " Now you have " + tasks.getSize() + (tasks.getSize() > 1 ? " tasks."
                 : " task.");
     }
 

@@ -1,5 +1,8 @@
 package duke.main;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
@@ -18,136 +21,265 @@ import duke.exception.DoneOutOfListException;
 import duke.exception.DukeException;
 import duke.exception.EventIncompleteException;
 import duke.exception.FindIncompleteException;
+import duke.exception.InvalidInputException;
 import duke.exception.NoInputException;
 import duke.exception.TodoIncompleteException;
 import duke.exception.UnknownInputException;
-
-import java.util.ArrayList;
-import java.util.Arrays;
 
 /**
  * Parser is used to make sense the input from the user and convert it to executable command.
  */
 public class Parser {
+    /** Array that stores valid commands as String. **/
+    private static final String[] COMMANDS = {"list", "done", "deadline", "event", "todo", "delete", "bye", "find"};
+    /** ArrayList that stores valid commands as String. **/
+    private static final ArrayList<String> VALID_COMMANDS = new ArrayList<>(Arrays.asList(COMMANDS));
 
-    public static String[] commands = {"list", "done", "deadline", "event", "todo", "delete", "bye", "find"};
-    public static ArrayList<String> VALID_COMMAND = new ArrayList<>(Arrays.asList(commands));
+    /**
+     * Checks the validity of a command.
+     *
+     * @param command Command as a String.
+     * @return true if the command is not valid, false otherwise.
+     */
+    private static boolean isNotValidCommand(String command) {
+        return !VALID_COMMANDS.contains(command);
+    }
+
+    /**
+     * Checks the validity of a task number.
+     *
+     * @param taskNumber The task number as integer.
+     * @return true if the task number is zero or negative, otherwise false.
+     */
+    private static boolean isNotValidTaskNumber(int taskNumber) {
+        return taskNumber <= 0;
+    }
 
     /**
      * Checks the correctness of the input by the user.
      *
      * @param input The input from the user.
-     * @throws DukeException If user's input is invalid.
+     * @throws InvalidInputException If user's input is invalid.
      */
-    public static void checkInput(String ... input) throws DukeException {
+    public static void checkInput(String... input) throws InvalidInputException {
+        // Store the first word from the input which should be the command type.
         String command = input[0];
-        System.out.println(command);
+
+        // Check for empty input.
         if (command.equals("")) {
             throw new NoInputException();
-        } else if (!VALID_COMMAND.contains(input[0])) {
+        }
+
+        // Check for invalid command.
+        if (isNotValidCommand(command)) {
             throw new UnknownInputException();
-        } else if (input.length == 1) {
+        }
+
+        // Check for incomplete command.
+        if (input.length == 1) {
             switch (command) {
-                case "done":
-                    throw new DoneIncompleteException();
-                case "deadline":
-                    throw new DeadlineIncompleteException();
-                case "event":
-                    throw new EventIncompleteException();
-                case "todo":
-                    throw new TodoIncompleteException();
-                case "delete":
-                    throw new DeleteIncompleteException();
-                case "find":
-                    throw new FindIncompleteException();
+            case "done":
+                throw new DoneIncompleteException();
+            case "deadline":
+                throw new DeadlineIncompleteException();
+            case "event":
+                throw new EventIncompleteException();
+            case "todo":
+                throw new TodoIncompleteException();
+            case "delete":
+                throw new DeleteIncompleteException();
+            case "find":
+                throw new FindIncompleteException();
+            default:
+                break;
             }
-        } else if (command.equals("done")) {
-            if (Integer.parseInt(input[1]) < 1) {
+        }
+
+        // Check for invalid task number.
+        if (command.equals("done")) {
+            int taskNumber = Integer.parseInt(input[1]);
+            if (isNotValidTaskNumber(taskNumber)) {
                 throw new DoneOutOfListException();
             }
-        } else if (command.equals("delete")) {
-            if (Integer.parseInt(input[1]) < 1) {
+        }
+
+        // Check for invalid task number.
+        if (command.equals("delete")) {
+            int taskNumber = Integer.parseInt(input[1]);
+            if (isNotValidTaskNumber(taskNumber)) {
                 throw new DeleteOutOfListException();
             }
         }
     }
 
     /**
+     * Parses input that starts with "bye".
+     *
+     * @return A ByeCommand.
+     */
+    private static Command parseInputThatStartWithBye() {
+        return new ByeCommand();
+    }
+
+    /**
+     * Parses input that starts with "list".
+     *
+     * @return A ListCommand.
+     */
+    private static Command parseInputThatStartWithList() {
+        return new ListCommand();
+    }
+
+    /** Parses input that starts with "find".
+     *
+     * @param input The user input as array String.
+     * @return A FindCommand.
+     */
+    private static Command parseInputThatStartWithFind(String[] input) {
+        return new FindCommand(input[1]);
+    }
+
+    /** Parses input that starts with "done"
+     *
+     * @param input The user input as array String.
+     * @return A DoneCommand.
+     */
+    private static Command parseInputThatStartWithDone(String[] input) {
+        int taskNumber = Integer.parseInt(input[1]);
+        return new DoneCommand(taskNumber);
+    }
+
+    /**
+     * Parses input that starts with "delete".
+     *
+     * @param input The user input as array String.
+     * @return A DeleteCommand.
+     */
+    private static Command parseInputThatStartWithDelete(String[] input) {
+        int taskNumber = Integer.parseInt(input[1]);
+        return new DeleteCommand(taskNumber);
+    }
+
+    /**
+     * Parses input that starts with "todo".
+     *
+     * @param input The user input as array String.
+     * @return A TodoCommand.
+     */
+    private static Command parseInputThatStartWithTodo(String[] input) {
+        String description = extractDescription(input, "");
+        return new TodoCommand(description);
+    }
+
+    /**
+     * Parses input that starts with "deadline".
+     *
+     * @param input The user input as array String.
+     * @return A DeadlineCommand.
+     */
+    private static Command parseInputThatStartWithDeadline(String[] input) {
+        String description = extractDescription(input, "/by");
+        String date = extractDate(input, "/by");
+        return new DeadlineCommand(description, date);
+    }
+
+    /**
+     * Parses input that starts with "event".
+     *
+     * @param input The user input as array String.
+     * @return An EventCommand.
+     */
+    private static Command parseInputThatStartWithEvent(String[] input) {
+        String description = extractDescription(input, "/at");
+        String date = extractDate(input, "/at");
+        return new EventCommand(description, date);
+    }
+
+    /**
+     * Extracts the description of a task.
+     *
+     * @param input The user input as array String.
+     * @param stop String to indicate the end of the the description.
+     * @return The description of a task as a String.
+     */
+    private static String extractDescription(String[] input, String stop) {
+        StringBuilder description = new StringBuilder();
+
+        for (int i = 1; i < input.length; i++) {
+            String s = input[i];
+            // Stop building description when limit is encountered.
+            if (s.equals(stop)) {
+                break;
+            }
+            // Append a whitespace after each word.
+            if (description.length() > 0) {
+                description.append(" ");
+            }
+            description.append(s);
+        }
+        return description.toString();
+    }
+
+    /**
+     * Extracts the date of a task.
+     *
+     * @param input The user input as array String.
+     * @param start String to indicate the start of the date.
+     * @return The date of a task as a String.
+     */
+    private static String extractDate(String[] input, String start) {
+        boolean shouldTake = false;
+        StringBuilder date = new StringBuilder();
+
+        for (int i = 1; i < input.length; i++) {
+            String s = input[i];
+            // Start building date when limit is encountered.
+            if (s.equals(start)) {
+                shouldTake = true;
+                continue;
+            }
+            if (shouldTake) {
+                date.append(s);
+            }
+        }
+        return date.toString();
+    }
+    /**
      * Translates user input into executable Command.
      *
-     * @param c The input from the user.
+     * @param input The input from the user.
      * @return Command that will be executed.
-     * @throws DukeException If user's input is invalid.
+     * @throws DukeException If user input is invalid.
      */
-    public static Command parse(String ... c) throws DukeException {
-        // Check command input
-        checkInput(c);
-        String commandType = c[0];
+    public static Command parse(String ... input) throws DukeException {
+        checkInput(input);
+
+        String commandType = input[0];
         switch (commandType) {
         case "bye":
-            return new ByeCommand();
+            return parseInputThatStartWithBye();
         case "list":
-            return new ListCommand();
+            return parseInputThatStartWithList();
+        case "find": {
+            return parseInputThatStartWithFind(input);
+        }
         case "done": {
-            String taskNumber = c[1];
-            return new DoneCommand(taskNumber);
+            return parseInputThatStartWithDone(input);
         }
         case "delete": {
-            String taskNumber = c[1];
-            return new DeleteCommand(taskNumber);
+            return parseInputThatStartWithDelete(input);
         }
         case "todo": {
-            StringBuilder description = new StringBuilder();
-            for (int i = 1; i < c.length; i++) {
-                if (description.length() > 0) {
-                    description.append(" ");
-                }
-                description.append(c[i]);
-            }
-            return new TodoCommand(description.toString());
+            return parseInputThatStartWithTodo(input);
         }
         case "deadline": {
-            StringBuilder description = new StringBuilder();
-            StringBuilder date = new StringBuilder();
-            boolean shouldTake = false;
-            for (int i = 1; i < c.length; i++) {
-                if (c[i].equals("/by")) {
-                    shouldTake = true;
-                    continue;
-                }
-                if (shouldTake) {
-                    date.append(c[i]);
-                } else {
-                    if (description.length() > 0) {
-                        description.append(" ");
-                    }
-                    description.append(c[i]);
-                }
-            }
-            return new DeadlineCommand(description.toString(), date.toString());
+            return parseInputThatStartWithDeadline(input);
         }
-        case "find": {
-            return new FindCommand(c[1]);
+        case "event": {
+            return parseInputThatStartWithEvent(input);
         }
         default: {
-            StringBuilder description = new StringBuilder();
-            StringBuilder date = new StringBuilder();
-            boolean shouldTake = false;
-            for (int i = 1; i < c.length; i++) {
-                if (c[i].equals("/at")) {
-                    shouldTake = true;
-                    continue;
-                }
-                if (shouldTake) {
-                    date.append(c[i]);
-                } else {
-                    if (description.length() > 0) {
-                        description.append(" ");
-                    }
-                    description.append(c[i]);
-                }
-            }
-            return new EventCommand(description.toString(), date.toString());
+            throw new UnknownInputException();
         }
         }
     }
