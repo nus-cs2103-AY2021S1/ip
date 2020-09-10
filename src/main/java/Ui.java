@@ -57,6 +57,7 @@ public class Ui {
         if (tasks.size() == 0) {
             System.out.println("     Currently, you have no tasks!");
         } else {
+            assert tasks.size() > 0 : "Tasks should be greater than 0!";
             System.out.println("     These are your tasks:");
             int counter = 1;
             for (Task task : tasks) {
