@@ -14,8 +14,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Enumerates the 3 types of tasks and defines the behavior
- * when Duke calls to add and/or save a new task of any type.
+ * Enumerates the 3 types of {@code Task} and defines the behavior
+ * when {@code Duke} calls to add and/or save a new task of any type.
  */
 public enum TaskType {
     DEADLINE("deadline") {
@@ -103,26 +103,22 @@ public enum TaskType {
     }
 
     /**
-     * Checks to see if a string is a representation of some TaskType
+     * Checks to see if a string is a representation of some {@code TaskType}
      *
-     * @param name An input to check against
-     * @return true if the name exists as a TaskType
-     * @throws DukeException If the name is unrecognised
+     * @param name an input to check against
+     * @return true if the name exists as a {@code TaskType}
+     * @throws DukeException if the name is unrecognised
      */
     public static boolean isMember(String name) throws DukeException {
-        if (!nameToValueMap.containsKey(name)) {
-            throw new DukeException(name);
-        } else {
-            return true;
-        }
+        return nameToValueMap.containsKey(name);
     }
 
     /**
      * Returns the TaskType represented by a given String input
      *
-     * @param lowerCase
-     * @return TaskType represented by input
-     * @throws DukeException If the name is unrecognised
+     * @param lowerCase the lowe
+     * @return {@code TaskType} represented by input
+     * @throws DukeException if the name is unrecognised
      */
     public static TaskType getTaskType(String lowerCase) throws DukeException {
         if (!isMember(lowerCase)) {

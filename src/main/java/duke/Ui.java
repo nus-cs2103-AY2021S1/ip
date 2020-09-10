@@ -16,19 +16,26 @@ public class Ui {
     public static final String LOADING_FAILED = "Loading failed: Duke continues with empty duke.TaskList.";
     public static final String STAR_LINE = "––––––––––––––––––––– *** –––––––––––––––––––––";
 
-    /**
-     * Displays the separator star line.
-     */
-    public static String displayStarLine() {
+    public static void displayStarLine() {
         System.out.println(STAR_LINE);
-        return STAR_LINE;
+    }
 
+    public static void displayLoadingError() {
+        displayMessage(LOADING_FAILED);
+    }
+
+    public static void displayWelcome() {
+        displayMessage(WELCOME);
+    }
+
+    public static String displayGoodbye() {
+        return displayMessage(GOODBYE);
     }
 
     /**
      * Displays a message between two separator lines.
      *
-     * @param message
+     * @param message current {@code TaskList}
      */
     public static String displayMessage(String message) {
         displayStarLine();
@@ -39,46 +46,22 @@ public class Ui {
     }
 
     /**
-     * Displays the loading error.
-     */
-    public static String displayLoadingError() {
-        displayMessage(LOADING_FAILED);
-        return LOADING_FAILED;
-    }
-
-    /**
-     * Displays the welcome message.
-     */
-    public static String displayWelcome() {
-        displayMessage(WELCOME);
-        return WELCOME;
-    }
-
-    /**
-     * Displays the goodbye message.
-     */
-    public static String displayGoodbye() {
-        displayMessage(GOODBYE);
-        return GOODBYE;
-    }
-
-    /**
-     * Displays the tasks in TaskList as a numbered list.
+     * Displays the tasks in {@code TaskList} as a numbered list.
      * 
-     * @param taskList
+     * @param taskList current {@code TaskList}
      */
     public static String displayList(TaskList taskList) {
         List<Task> tasks = taskList.getTasks();
         int pending = taskList.getNumOfPendingTasks();
         int currId = 1;
-        String toReturn = "TO-DO LIST:\n"
-                + String.format("%d pending", pending) ;
+        StringBuilder toReturn = new StringBuilder("TO-DO LIST:\n"
+                + String.format("%d pending", pending));
 
         for (Task t : tasks) {
-            toReturn += String.format("\n   %d. %s", currId, t);;
+            toReturn.append(String.format("\n   %d. %s", currId, t));
             currId++;
         }
 
-        return displayMessage(toReturn);
+        return displayMessage(toReturn.toString());
     }
 }
