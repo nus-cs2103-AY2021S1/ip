@@ -39,7 +39,7 @@ public class Parser {
 
     /**
      * User Input is parsed here for processing, enable multiple task numbers to be marked as done or
-     * deleted.
+     * deleted. (C-MassOps)
      *
      * @param inputString User Input string; task numbers.
      * @return An integer array that consists of task number(s).

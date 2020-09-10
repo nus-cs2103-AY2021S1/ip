@@ -2,12 +2,16 @@ package duke.task;
 
 import duke.dukeException.DukeException;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+
 import java.util.ArrayList;
 
 /**
  * Represents a Task List.
  */
 public class TaskList {
+    protected DateTimeFormatter dateParser = DateTimeFormatter.ofPattern("dd/MM/yy");
     private ArrayList<Task> tasks;
 
     /**
@@ -87,16 +91,35 @@ public class TaskList {
     }
 
     /**
-     * A method to find a task from the TaskList using a keyword
+     * A method to find a task from the TaskList using a keyword.
      *
-     * @param keyword
-     * @return
+     * @param keyword String, entered by user.
+     * @return TaskList of found tasks matching the keyword.
      */
-    public TaskList findTasks(String keyword) {
+    public TaskList findTasksUsingKeyword(String keyword) {
         TaskList foundTasks = new TaskList();
         for (Task task : tasks) {
             if (task.getTaskName().contains(keyword)) {
                 foundTasks.addTask(task);
+            }
+        }
+        return foundTasks;
+    }
+
+    /**
+     * A method to fina a task from the TaskList using a date entered by user.
+     *
+     * @param inputDate String format of the date input by user. Format expected: dd/MM/yy.
+     * @return TaskList of found tasks matching the date.
+     */
+    public TaskList findTasksUsingDate(String inputDate) {
+        LocalDate date = LocalDate.parse(inputDate, dateParser);
+        TaskList foundTasks = new TaskList();
+        for (Task task : tasks) {
+            if (task.getDate().isPresent() && task.getDate().get().equals(date)) {
+                foundTasks.addTask(task);
+            } else {
+                continue;
             }
         }
         return foundTasks;
