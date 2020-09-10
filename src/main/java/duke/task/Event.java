@@ -55,7 +55,8 @@ public class Event extends Task {
     public String toSaveString() {
         String date = DukeDateTime.localDateToString(this.date);
         String time = DukeDateTime.to24HTimeFormat(time12h);
-        return (isDone ? 1 : 0) + EVENT_NAME + description + EVENT_KEYWORD + date + " " + time;
+        String eventCommand = (isDone ? 1 : 0) + EVENT_NAME + description + EVENT_KEYWORD + date + " " + time;
+        return eventCommand + " " + getTagsSaveString();
     }
 
     @Override
@@ -68,6 +69,6 @@ public class Event extends Task {
     @Override
     public String toString() {
         String formattedDate = DukeDateTime.localDateToFormattedString(date);
-        return EVENT_SYMBOL + super.toString() + "(at: " + formattedDate + " " + time12h + ")";
+        return EVENT_SYMBOL + super.toString() + "(at: " + formattedDate + " " + time12h + ")" + stringifyTags();
     }
 }

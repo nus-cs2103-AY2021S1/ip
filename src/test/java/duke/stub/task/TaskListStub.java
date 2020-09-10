@@ -4,7 +4,7 @@ import duke.task.Task;
 import duke.task.TaskList;
 
 public class TaskListStub implements TaskList {
-    protected Task lastAddedTask;
+    protected Task lastAddedTask = new DeadlineStub();
 
     public void add(Task t, boolean shouldUpdateStorage) {
         this.lastAddedTask = t;
@@ -14,7 +14,7 @@ public class TaskListStub implements TaskList {
         if (i == 7) {
             return new EventStub();
         } else if (i == 9) {
-            return new DeadlineStub();
+            return lastAddedTask;
         } else {
             return new TodoStub();
         }

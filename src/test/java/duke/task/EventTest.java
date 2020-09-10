@@ -20,8 +20,9 @@ public class EventTest {
     public void toSaveString() throws InvalidEventException {
         String description = "This is a test on toSaveString. /at 2020-03-20 12:00";
         Event event = Event.createEvent(description);
+        event.addTags(new String[]{"event1", "event2", "event3"});
         String saveString = event.toSaveString();
-        String expected = "0event " + description;
+        String expected = "0event " + description + " " + Task.TAGS_DELIMITER + " #event1 #event2 #event3";
         assertEquals(expected, saveString);
     }
 

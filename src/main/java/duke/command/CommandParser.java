@@ -12,6 +12,7 @@ public class CommandParser {
     private static final String CMD_FIND = "find";
     private static final String CMD_LIST = "list";
     private static final String CMD_REMIND = "remind";
+    private static final String CMD_TAG = "tag";
     private static final String CMD_TODO = "todo";
 
     /**
@@ -38,6 +39,8 @@ public class CommandParser {
             return CommandType.List;
         case CMD_REMIND:
             return CommandType.Remind;
+        case CMD_TAG:
+            return CommandType.Tag;
         case CMD_DEADLINE:
             // fallthrough
         case CMD_EVENT:

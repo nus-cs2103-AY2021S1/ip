@@ -20,6 +20,10 @@ delete 10
 due invalid date
 todo eat lunch
 deadline apply for internship /by 2020-12-04 23:59
+tag 8 lazy freeload SU
+list
+tag -8 freeload
+list
 event project meeting /at 2020-08-30 20:00
 remind 150
 remind abc

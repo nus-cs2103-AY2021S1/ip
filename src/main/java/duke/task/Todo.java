@@ -28,7 +28,8 @@ public class Todo extends Task {
 
     @Override
     public String toSaveString() {
-        return (isDone ? 1 : 0) + TODO_NAME + description;
+        String todoCommand = (isDone ? 1 : 0) + TODO_NAME + description;
+        return todoCommand + " " + getTagsSaveString();
     }
 
     @Override
@@ -44,6 +45,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return TODO_ICON + super.toString();
+        return TODO_ICON + super.toString() + stringifyTags();
     }
 }

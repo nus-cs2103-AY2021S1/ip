@@ -1,14 +1,20 @@
 package duke.task;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 // Parent class for all types of tasks that can be created by the user.
 public abstract class Task {
+    public static final String TAGS_DELIMITER = "\\\\tags";
     private static final String SYMBOL_DONE = "O";
     private static final String SYMBOL_NOT_DONE = "X";
 
     protected String description;
     protected boolean isDone = false;
+    protected ArrayList<String> tags = new ArrayList<>(Collections.singletonList(""));
 
     public Task(String description) {
         this.description = description;
@@ -32,6 +38,43 @@ public abstract class Task {
 
     public boolean containsKeyword(String keyword) {
         return description.toLowerCase().contains(keyword.toLowerCase());
+    }
+
+    /**
+     * Tags the task with the all the input tags.
+     *
+     * @param tagsToAdd String[] tags to be added.
+     */
+    public void addTags(String[] tagsToAdd) {
+        if (tagsToAdd.length == 0) {
+            return;
+        }
+
+        tags.addAll(Arrays.asList(tagsToAdd));
+    }
+
+    /**
+     * Removes all the input tags from the task.
+     *
+     * @param tagsToRemove String[] tags to be removed.
+     * @return List&lt;String> list of tags that were removed.
+     */
+    public List<String> removeTags(String[] tagsToRemove) {
+        ArrayList<String> removedTags = new ArrayList<>();
+        for (String tag : tagsToRemove) {
+            if (tags.remove(tag)) {
+                removedTags.add(tag);
+            }
+        }
+        return removedTags;
+    }
+
+    protected String stringifyTags() {
+        return String.join(" #", tags);
+    }
+
+    protected String getTagsSaveString() {
+        return TAGS_DELIMITER + stringifyTags();
     }
 
     @Override
