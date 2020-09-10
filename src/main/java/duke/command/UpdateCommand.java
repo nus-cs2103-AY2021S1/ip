@@ -3,6 +3,8 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.exception.InvalidIndexException;
 import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -15,7 +17,7 @@ public class UpdateCommand extends Command {
     private String[] changes;
     private int index;
 
-    // cannot have space + / in
+    // cannot have <code> /<code> in the command
 
     /**
      * Create an updateCommand
@@ -63,23 +65,53 @@ public class UpdateCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (!checkValidation()) {
-            throw new DukeException("Invalid specifier(s)");
+            throw new DukeException("Invalid specifier");
         }
         try {
             Task newTask = tasks.get(index).clone();
             for (String change : changes) {
-                if (change.indexOf(DESCRIPTION_SPECIFIER) == 0) {
-                    String newDescription = change.substring(DESCRIPTION_SPECIFIER.length()).trim();
-                    if (newDescription.equals("")) {
-                        throw new DukeException("new description cannot be empty");
-                    }
-                    newTask.setDescription(newDescription);
-                }
+                handleDescriptionChange(newTask, change);
+                handleTimeChange(newTask, change);
             }
             tasks.set(index, newTask);
             return ui.showUpdateComplete(index + 1, newTask);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidIndexException();
+        }
+    }
+
+
+    @SuppressWarnings("checkstyle:SeparatorWrap")
+    private void handleTimeChange(Task newTask, String change) throws DukeException {
+        if (change.indexOf(TIME_SPECIFIER) == 0) {
+            if (!(newTask instanceof Deadline || newTask instanceof Event)) {
+                throw new DukeException("Invalid specifier");
+            }
+            String newTime = change.substring(TIME_SPECIFIER.length()).trim();
+            if (newTime.equals("")) {
+                throw new DukeException("new time cannot be empty");
+            }
+            if (newTask instanceof Deadline) {
+                //CHECKSTYLE:OFF: SeparatorWrap
+                ((Deadline) newTask).setTime(newTime);
+                //CHECKSTYLE:ON: SeparatorWrap
+
+            }
+            if (newTask instanceof Event) {
+                //CHECKSTYLE:OFF: SeparatorWrap
+                ((Event) newTask).setTime(newTime);
+                //CHECKSTYLE:ON: SeparatorWrap
+            }
+        }
+    }
+
+    private void handleDescriptionChange(Task newTask, String change) throws DukeException {
+        if (change.indexOf(DESCRIPTION_SPECIFIER) == 0) {
+            String newDescription = change.substring(DESCRIPTION_SPECIFIER.length()).trim();
+            if (newDescription.equals("")) {
+                throw new DukeException("new description cannot be empty");
+            }
+            newTask.setDescription(newDescription);
         }
     }
 }

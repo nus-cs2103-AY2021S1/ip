@@ -21,6 +21,10 @@ public class Deadline extends Task {
      */
     public Deadline(String description, String dueTime) {
         super(description);
+        parseDueTime(dueTime);
+    }
+
+    private void parseDueTime(String dueTime) {
         assert dueTime != null : "due time cannot be null";
         this.dueTimeStr = dueTime;
         Optional<LocalDate> optDate = DateParser.parse(dueTime);
@@ -65,6 +69,10 @@ public class Deadline extends Task {
             return false;
         }
         return cmpDate.isEqual(dueTime);
+    }
+
+    public void setTime(String newDueTimeStr) {
+        parseDueTime(newDueTimeStr);
     }
 
     /**

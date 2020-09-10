@@ -6,7 +6,7 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Ui;
 
-public class CloneCommand extends Command{
+public class CloneCommand extends Command {
     public static final String COMMAND = "clone";
 
     private int sourceIndex;
