@@ -12,13 +12,13 @@ public class Message {
     public static final String MESSAGE_NO_TASKS_CURRENTLY = "No tasks currently";
     public static final String MESSAGE_DONE_TASK = "Awesome-O marked this task as done:";
     public static final String MESSAGE_DELETE_TASK = "Awesome-O removed this task:";
-    public static final String MESSAGE_CLEAR_TASKS = "All tasks have been cleared!";
+    public static final String MESSAGE_CLEAR_TASKS = "Awesome-O has cleared all tasks.";
     public static final String MESSAGE_ADD_TASK = "Awesome-O added this task:";
-    public static final String MESSAGE_FIND_TASKS_INTRO = "Here are the tasks that match the keyword:";
+    public static final String MESSAGE_FIND_TASKS_INTRO = "Awesome-O shows you the tasks that match the keyword:";
     public static final String MESSAGE_NO_MATCHING_TASKS = "No matching tasks!";
     public static final String MESSAGE_SCHEDULE_INTRO = "Awesome-O shows you the tasks scheduled on this day:";
-    public static final String MESSAGE_NO_SCHEDULED_TASKS = "No tasks scheduled on this day!";
-    public static final String MESSAGE_THANK_YOU = "Thank you for talking to Awesome-O.";
+    public static final String MESSAGE_NO_SCHEDULED_TASKS = "Awesome-O sees no scheduled tasks on this day.";
+    public static final String MESSAGE_THANK_YOU = "Awesome-O thanks you for talking to him.";
     public static final String MESSAGE_GOODBYE = "Awesome-O WILL MISS YOU.";
     public static final String MESSAGE_NUMBER_OF_TASKS = "Now you have %d tasks in the list.";
 
