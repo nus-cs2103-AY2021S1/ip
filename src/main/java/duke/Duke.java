@@ -175,7 +175,7 @@ public class Duke extends Application {
             }
             else if(cmd.length() >= 4 && cmd.substring(0, 4).equals("todo")) {
                 try {
-                    checkCmd(cmd, 4, "☹ OOPS!!! The description of a todo cannot be empty.");
+                    checkCmd(cmd, 4, "OOPS!!! The description of a todo cannot be empty.");
                     String getName = cmd.substring(5);
                     Todo tmp = new Todo(getName);
                     System.out.println("Got it. I've added this task: ");
