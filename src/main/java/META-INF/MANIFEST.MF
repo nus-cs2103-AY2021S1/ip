@@ -1,3 +1,4 @@
 Manifest-Version: 1.0
-Main-Class: duke.Duke
+Class-Path: .
+Main-Class: Launcher
 
