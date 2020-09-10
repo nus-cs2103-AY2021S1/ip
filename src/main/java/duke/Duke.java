@@ -6,6 +6,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.HelpCommand;
 import duke.command.ListCommand;
+
 import duke.parser.InputParser;
 
 /**
@@ -17,8 +18,6 @@ public class Duke {
     private Storage storage;
     private InputParser inputParser;
     private TaskList userTasks;
-    private Scheduler scheduler;
-
     /**
      * Instantiates a new Duke chatbot.
      */
@@ -27,7 +26,6 @@ public class Duke {
         storage = new Storage();
         inputParser = new InputParser();
         userTasks = new TaskList(storage.readFromFile());
-        scheduler = new Scheduler();
     }
 
     /**
@@ -50,17 +48,17 @@ public class Duke {
         case TODO:
             String description = inputParser.parseToDoInput(input);
             response += new AddCommand(new ToDo(description))
-                    .execute(userTasks, storage, scheduler);
+                    .execute(userTasks, storage);
             break;
         case DEADLINE:
             String[] deadlineParams = inputParser.parseDeadlineInput(input);
             response += new AddCommand(new Deadline(deadlineParams[0], deadlineParams[1]))
-                    .execute(userTasks, storage, scheduler);
+                    .execute(userTasks, storage);
             break;
         case EVENT:
             String[] eventParams = inputParser.parseEventInput(input);
             response += new AddCommand(new Event(eventParams[0], eventParams[1], eventParams[2]))
-                    .execute(userTasks, storage, scheduler);
+                    .execute(userTasks, storage);
             break;
         case LIST:
             response += new ListCommand().execute(userTasks, input);

@@ -29,11 +29,11 @@ public class AddCommand extends Command {
      * @param storage user's storage.
      * @return response after command is executed.
      */
-    public String execute(TaskList userTasks, Storage storage, Scheduler scheduler) {
+    public String execute(TaskList userTasks, Storage storage) {
 
         if (task instanceof Event) {
             //boolean isClashing = new Scheduler().isClashing()
-
+            //scheduler.addEvent(task);
         }
 
         userTasks.addTask(task);
