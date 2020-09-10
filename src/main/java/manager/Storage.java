@@ -91,14 +91,17 @@ public class Storage {
         String taskType = words[0];
         boolean isDone = words[1].equals("true");
         String description = words[2];
+        String tags = words.length <= 3 ? "" : words[3];
 
         switch (taskType) {
         case "T":
-            return new Todo(description, isDone);
+            return new Todo(description, isDone, tags);
         case "D":
-            return new Deadline(description, words[3], isDone);
+            String endTime = words[4];
+            return new Deadline(description, endTime, isDone, tags);
         case "E":
-            return new Event(description, words[3], isDone);
+            String time = words[4];
+            return new Event(description, time, isDone, tags);
         default:
             assert false : "Unknown task type from storage";
             return null;

@@ -129,4 +129,15 @@ public class TaskList {
         this.taskList = taskList;
     }
 
+    /**
+     * Adds a tag to the specified task.
+     * @param index of specified task
+     * @param tagName the name of the tag
+     */
+    public void tagTask(int index, String tagName) {
+        this.taskList.get(index).tagTask(tagName);
+        System.out.println("Yes siree! Your task is tagged: ");
+        System.out.println(this.taskList.get(index).toString());
+    }
+
 }

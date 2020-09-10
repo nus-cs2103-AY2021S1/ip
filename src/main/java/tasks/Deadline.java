@@ -46,8 +46,8 @@ public class Deadline extends Task {
      * @param endTime provided for the deadline
      * @param isDone provided for the deadline
      */
-    public Deadline(String description, String endTime, boolean isDone) {
-        super(description, isDone);
+    public Deadline(String description, String endTime, boolean isDone, String tags) {
+        super(description, isDone, tags);
         this.endTime = endTime;
         formatEndTime();
     }

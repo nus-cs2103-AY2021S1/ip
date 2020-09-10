@@ -108,6 +108,10 @@ public class Parser {
             int index = Integer.parseInt(words[1]) - 1;
             this.converter.convertAction(Commands.DELETE, index, "");
 
+        } else if (words[0].startsWith("#")) {
+            int index = Integer.parseInt(words[1]) - 1;
+            this.converter.convertAction(Commands.TAG, index, words[0].substring("#".length()));
+
         } else {
             throw new InvalidCommandException(
                     "Oohh I'm Mr. Meeseeks, your command is invalid. Try again?");

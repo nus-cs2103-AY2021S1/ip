@@ -44,6 +44,11 @@ public enum Commands {
         public String toString() {
             return "Get task list --> list\n";
         }
+    }, TAG {
+        @Override
+        public String toString() {
+            return "Tag task --> #<tag name> <task no.>\n";
+        }
     }, TODO {
         @Override
         public String toString() {
