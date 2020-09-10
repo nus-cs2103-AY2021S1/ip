@@ -29,6 +29,8 @@ public class Parser {
         } else if(input.equals("bye")) {
             isFinished = true;
             return Ui.showEnd();
+        } else if (input.equals("help")) {
+            return ui.printHelpInformation();
         } else if(input.equals("todo") || input.equals("deadline") || input.equals("event")) {
             throw new DukeException("OOPS!!! The description cannot be empty.");
 

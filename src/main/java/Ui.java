@@ -77,4 +77,8 @@ public class Ui {
     public String printSavingError() {
         return "Some error occurred when saving.";
     }
+
+    public String printHelpInformation() {
+        return "";
+    }
 }
