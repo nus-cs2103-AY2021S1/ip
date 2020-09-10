@@ -11,7 +11,7 @@ import duke.data.TaskList;
 import duke.data.exception.IllegalValueException;
 
 /**
- * Represents the file used to store task list duke.data.
+ * Represents the file used to store task list data.
  */
 public class Storage {
 
@@ -55,10 +55,9 @@ public class Storage {
     }
 
     /**
-     * Loads the {@code TaskList} duke.data from this duke.storage file, and then returns it.
+     * Loads the {@code TaskList} data from this storage file, and then returns it.
      * Returns an empty {@code TaskList} if the file does not exist, or is not a regular file.
-     *
-     * @throws StorageOperationException if there were errors reading and/or converting duke.data from file.
+     * @throws StorageOperationException if there were errors reading and/or converting data from file.
      */
     public TaskList load() throws StorageOperationException, FileNotFoundException {
         if (!this.file.exists()) {
@@ -68,9 +67,8 @@ public class Storage {
     }
 
     /**
-     * Saves the {@code taskList} duke.data to the duke.storage file.
-     *
-     * @throws StorageOperationException if there were errors converting and/or storing duke.data to file.
+     * Saves the {@code taskList} data to the storage file.
+     * @throws StorageOperationException if there were errors converting and/or storing data to file.
      */
     public void save(TaskList taskList) throws StorageOperationException {
         assert new File(this.filePath).exists();

@@ -92,10 +92,11 @@ public class Parser {
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
 
-        case HelpCommand.COMMAND_WORD: // Fallthrough
+        case HelpCommand.COMMAND_WORD:
+            return new HelpCommand();
 
         default:
-            return new HelpCommand();
+            return new IncorrectCommand(Messages.MESSAGE_INVALID_COMMAND);
         }
     }
 

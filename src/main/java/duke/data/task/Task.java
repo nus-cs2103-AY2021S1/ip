@@ -59,8 +59,8 @@ public abstract class Task {
     }
 
     /**
-     * Returns the string of the task to be added into the local duke.storage file.
-     * @return The string of the task in the local duke.storage file
+     * Returns the string of the task to be added into the local storage file.
+     * @return The string of the task in the local storage file
      */
     public abstract String fileFormat();
 
