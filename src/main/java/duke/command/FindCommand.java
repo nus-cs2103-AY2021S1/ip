@@ -34,7 +34,7 @@ public class FindCommand extends Command {
         for (int i = 1; i <= t.getSize(); i++) {
             Task task = t.get(i);
             String description = task.getInfo()[1];
-            if (containSameWord(keyword, description)) {
+            if (contain(keyword, description)) {
                 tasks.add(task);
             }
         }
@@ -47,16 +47,39 @@ public class FindCommand extends Command {
      * @param b Second String that wants to be checked.
      * @return true if String a is contained in String b, otherwise false.
      */
-    private boolean containSameWord(String a, String b) {
+    private boolean contain(String a, String b) {
         boolean hasSameWord = false;
-        String[] stringArr = b.split(" ");
-        for (String s : stringArr) {
-            if (s.equals(a)) {
+        String[] arrayB = b.split(" ");
+        for (String s : arrayB) {
+            if (isPrefixOf(a, s)) {
                 hasSameWord = true;
                 break;
             }
         }
         return hasSameWord;
+    }
+
+    /**
+     * Checks if a String is a prefix of another String.
+     *
+     * @param a First String as the prefix.
+     * @param b Second String that wants to be checked.
+     * @return true if a is prefix of b.
+     */
+    private boolean isPrefixOf(String a, String b) {
+        if (b.length() < a.length()) {
+            return false;
+        }
+
+        char[] arrayA = a.toCharArray();
+        char[] arrayB = b.toCharArray();
+
+        for (int i = 0; i < arrayA.length; i++) {
+            if (arrayA[i] != arrayB[i]) {
+                return false;
+            }
+        }
+        return true;
     }
 
     /**
