@@ -39,6 +39,7 @@ public class Parser {
 
     /**
      * This method deals with making sense of the user command.
+     *
      * @param cmd Full string of command entered by the user.
      * @return a Command object.
      * @throws FeiException when Parser fails to parse a command.
@@ -47,69 +48,97 @@ public class Parser {
         String[] words = cmd.split(" ");
         String command = words[0];
         if (words.length == 1) {
-            switch (command) {
-            case "hi":
-            case "hello":
-                return new GreetingCommand();
-            case "bye":
-                return new ExitCommand();
-            case "list":
-                return new ShowCommand();
-            case "done":
-            case "delete":
-                throw FeiException.operationException();
-            case "todo":
-            case "deadline":
-            case "event":
-            case "find":
-                throw FeiException.emptyDescriptionException();
-            default:
-                throw FeiException.defaultException();
-            }
+            return parseSingleWord(command);
         }
-        String description = cmd.split(" ", 2)[1];
 
-        switch (command) {
+        String description = cmd.split(" ", 2)[1];
+        return parseMultiWord(command, description);
+
+    }
+
+    public static Command parseSingleWord(String cmd) throws FeiException {
+        switch (cmd) {
+        case "hi":
+        case "hello":
+            return new GreetingCommand();
+        case "bye":
+            return new ExitCommand();
+        case "list":
+            return new ShowCommand();
         case "done":
-            try {
-                int doneIndex = Integer.parseInt(description);
-                return new DoneCommand(doneIndex);
-            } catch (Exception e) {
-                throw FeiException.invalidIndexException();
-            }
+        case "delete":
+            throw FeiException.operationException();
+        case "todo":
+        case "deadline":
+        case "event":
+        case "find":
+            throw FeiException.emptyDescriptionException();
+        default:
+            throw FeiException.defaultException();
+        }
+    }
+
+    public static Command parseMultiWord(String cmd, String description) throws FeiException {
+        switch (cmd) {
+        case "done":
+            return parseDone(description);
 
         case "delete":
-            try {
-                int deleteIndex = Integer.parseInt(description);
-                return new DeleteCommand(deleteIndex);
-            } catch (Exception e) {
-                throw FeiException.invalidIndexException();
-
-            }
+            return parseDelete(description);
 
         case "todo":
             ToDo todo = new ToDo(description);
             return new AddCommand(todo);
 
         case "deadline":
-            String[] contentAndDate = description.split(" /by ");
-            assert contentAndDate.length == 2: FeiException.deadlineException();
-            Deadline ddl = new Deadline(contentAndDate[0], contentAndDate[1]);
-            return new AddCommand(ddl);
+            return parseDeadline(description);
 
         case "event":
-            String[] contentAndTime = description.split(" /at ");
-            assert contentAndTime.length == 2: FeiException.eventException();
-            Event e = new Event(contentAndTime[0], contentAndTime[1]);
-            return new AddCommand(e);
+            return parseEvent(description);
 
         case "find":
-            assert description.split(" ").length == 1: FeiException.findException();
-            return new FindCommand(description);
+            return parseFind(description);
 
         default:
             return new UnknownCommand();
         }
+    }
+
+    private static Command parseDone(String index) throws FeiException {
+        try {
+            int doneIndex = Integer.parseInt(index);
+            return new DoneCommand(doneIndex);
+        } catch (Exception e) {
+            throw FeiException.invalidIndexException();
+        }
+    }
+
+    private static Command parseDelete(String index) throws FeiException {
+        try {
+            int deleteIndex = Integer.parseInt(index);
+            return new DeleteCommand(deleteIndex);
+        } catch (Exception e) {
+            throw FeiException.invalidIndexException();
+        }
+    }
+
+    private static Command parseDeadline(String description) {
+        String[] contentAndDate = description.split(" /by ");
+        assert contentAndDate.length == 2: FeiException.deadlineException();
+        Deadline ddl = new Deadline(contentAndDate[0], contentAndDate[1]);
+        return new AddCommand(ddl);
+    }
+
+    private static Command parseEvent(String description) {
+        String[] contentAndTime = description.split(" /at ");
+        assert contentAndTime.length == 2: FeiException.eventException();
+        Event e = new Event(contentAndTime[0], contentAndTime[1]);
+        return new AddCommand(e);
+    }
+
+    private static Command parseFind(String description) {
+        assert description.split(" ").length == 1: FeiException.findException();
+        return new FindCommand(description);
     }
 
 }
