@@ -25,4 +25,4 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    |____/ \__,_|_|\_\___|
    ```
 ### Picture Use
-Mocha.jpg <a href="https://www.freepik.com/vectors/wood">Wood vector created by freepik - www.freepik.com</a>
+Mocha.jpg <a href='https://www.freepik.com/vectors/wood'>Wood vector created by freepik - www.freepik.com</a>
