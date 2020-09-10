@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 /**
  * A GUI for Duke using FXML.
  */
-public class Main extends Application {
+public class Gui extends Application {
 
     private Duke duke = new Duke("data/gui-test.txt");
 

@@ -11,12 +11,7 @@ import duke.dukeexception.DukeException;
 public class ListCommand extends Command {
 
     @Override
-    public void execute(TaskList tasks, Storage storage) {
-        System.out.println("Na, here is your list lah:" + tasks.toString());
-    }
-
-    @Override
-    public String executeToGui(TaskList tasks, Storage storage, Ui ui) throws DukeException {
+    public String execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
         return ui.returnReply("Na, here is your list lah:" + tasks.toString());
     }
 

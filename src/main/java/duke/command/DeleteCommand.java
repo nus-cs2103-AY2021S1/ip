@@ -24,22 +24,7 @@ public class DeleteCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Storage storage) throws DukeException {
-        try {
-            int taskNum = Integer.parseInt(this.description);
-            Task task = tasks.getTask(taskNum);
-            tasks.deleteTask(taskNum, storage);
-
-            System.out.println("Okay, I deleted this liao:" + "\n  " + task.toString()
-                    + "\nNow left " + tasks.getListLength() + " things in the list.");
-        } catch (Exception e) {
-            throw new WrongItemIndexException(CommandType.DELETE.toString().toLowerCase(),
-                tasks.getListLength());
-        }
-    }
-
-    @Override
-    public String executeToGui(TaskList tasks, Storage storage, Ui ui) throws DukeException {
+    public String execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
         try {
             int taskNum = Integer.parseInt(this.description);
             Task task = tasks.getTask(taskNum);

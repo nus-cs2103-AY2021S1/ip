@@ -44,17 +44,19 @@ public class Duke {
      * Runs the bot.
      */
     public void run() {
-        ui.showWelcomeMsg();
+        this.ui.showLine();
+        System.out.println(this.ui.returnWelcomeMsg());
+        this.ui.showLine();
         boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = this.ui.readCommand();
                 this.ui.showLine();
                 Command command = Parser.parse(fullCommand);
-                command.execute(tasks, storage);
+                System.out.println(command.execute(this.tasks, this.storage, this.ui));
                 isExit = command.isExit();
             } catch (DukeException e) {
-                ui.showError(e.getMessage());
+                System.out.println(this.ui.returnError(e.getMessage()));
             } finally {
                 this.ui.showLine();
             }
@@ -73,7 +75,7 @@ public class Duke {
         String response = "Test";
         try {
             Command command = Parser.parse(input);
-            response = command.executeToGui(tasks, storage, ui);
+            response = command.execute(tasks, storage, ui);
         } catch (DukeException e) {
             response = ui.returnError(e.getMessage());
         }

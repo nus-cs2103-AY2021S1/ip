@@ -24,22 +24,7 @@ public class DoneCommand extends Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Storage storage) throws DukeException {
-        try {
-            int taskNum = Integer.parseInt(this.description);
-            Task task = tasks.getTask(taskNum);
-            tasks.markDone(taskNum, storage);
-
-            System.out.println("Can, I help you mark this as done liao:"
-                    + "\n  " + task.toString());
-        } catch (NumberFormatException e) {
-            throw new WrongItemIndexException(CommandType.DONE.toString().toLowerCase(),
-                    tasks.getListLength());
-        }
-    }
-
-    @Override
-    public String executeToGui(TaskList tasks, Storage storage, Ui ui) throws DukeException {
+    public String execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
         try {
             int taskNum = Integer.parseInt(this.description);
             Task task = tasks.getTask(taskNum);

@@ -26,34 +26,11 @@ public class FindCommand extends Command{
      * @param description Keyword that user wants to search for amongst tasks.
      */
     public FindCommand(String description) {
-        this.description = description.
-            replaceAll("\\s","").
-            toLowerCase();
+        this.description = description.replaceAll("\\s","").toLowerCase();
     }
 
     @Override
-    public void execute(TaskList tasks, Storage storage) throws DukeException {
-        List<Task> resultList = new ArrayList<>();
-
-        for (int i = 1; i <= tasks.getListLength(); i++) {
-            Task task = tasks.getTask(i);
-            if (task.getTaskName().toLowerCase().contains(this.description)) {
-                resultList.add(task);
-            }
-        }
-
-        String finalString = "";
-        int counter = 0;
-        for (Task task : resultList) {
-            counter++;
-            finalString += "\n" + counter + "." + task.toString();
-        }
-
-        System.out.println("Na, I found this:" + finalString);
-    }
-
-    @Override
-    public String executeToGui(TaskList tasks, Storage storage, Ui ui) throws DukeException {
+    public String execute(TaskList tasks, Storage storage, Ui ui) throws DukeException {
         List<Task> resultList = new ArrayList<>();
 
         for (int i = 1; i <= tasks.getListLength(); i++) {

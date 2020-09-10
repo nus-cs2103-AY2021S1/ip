@@ -16,12 +16,10 @@ public class Ui {
 
     /**
      * Displays the welcome message to the user.
+     * @return
      */
-    public void showWelcomeMsg() {
-        System.out.println("____________________________________________________________");
-        System.out.println("Eh what's up! I'm Meimei" +
-            "\nWhat you want ah?");
-        System.out.println("____________________________________________________________");
+    public String returnWelcomeMsg() {
+        return "Eh what's up! I'm Meimei" + "\nWhat you want ah?";
     }
 
     /**
@@ -47,16 +45,6 @@ public class Ui {
      */
     public String returnReply(String reply) {
         return reply;
-    }
-
-    /**
-     * Prints error messages from DukeExceptions thrown during
-     * the bot execution.
-     *
-     * @param message message from the getMessage() method of a DukeException
-     */
-    public void showError(String message) {
-        System.out.println(message);
     }
 
     public String returnError(String message) {

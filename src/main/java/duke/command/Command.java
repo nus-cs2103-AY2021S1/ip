@@ -15,11 +15,11 @@ public abstract class Command {
      *
      * @param tasks The user's tasks.
      * @param storage Handles updating the hard disk accordingly.
+     * @param ui
      * @throws DukeException If a DukeException is thrown in executing the command.
+     * @return response to user
      */
-    public abstract void execute(TaskList tasks, Storage storage) throws DukeException;
-
-    public abstract String executeToGui(TaskList tasks, Storage storage, Ui ui) throws DukeException;
+    public abstract String execute(TaskList tasks, Storage storage, Ui ui) throws DukeException;
 
     /**
      * Returns true when the command is an exit command and false otherwise.
