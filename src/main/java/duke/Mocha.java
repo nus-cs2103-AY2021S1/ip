@@ -13,6 +13,8 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+import java.util.ArrayList;
+
 
 public class Mocha extends Application {
 
@@ -24,7 +26,12 @@ public class Mocha extends Application {
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image mocha = new Image(this.getClass().getResourceAsStream("/images/Mocha.png"));
-    
+
+    private Ui ui = new Ui();
+    private Parser parser = ui.createParser();
+    private Storage storage = new Storage("data/tasks.txt");
+    private TaskList tasks = new TaskList(storage.loadData());
+
     public static void main(String[] args) {
         // ... 
     }
@@ -76,7 +83,7 @@ public class Mocha extends Application {
         AnchorPane.setBottomAnchor(sendButton, 1.0);
         AnchorPane.setRightAnchor(sendButton, 1.0);
 
-        AnchorPane.setLeftAnchor(userInput , 1.0);
+        AnchorPane.setLeftAnchor(userInput, 1.0);
         AnchorPane.setBottomAnchor(userInput, 1.0);
 
         //Step 3. Add functionality to handle user input.
@@ -101,11 +108,16 @@ public class Mocha extends Application {
         userInput.setOnAction((event) -> {
             handleUserInput();
         });
+
+        Label mochaIntroduction = new Label(ui.sayIntroduction());
+        dialogContainer.getChildren().add(
+                new DialogBox(mochaIntroduction, new ImageView(mocha)));
     }
 
     /**
      * Iteration 1:
      * Creates a label with the specified text and adds it to the dialog container.
+     *
      * @param text String containing text to add
      * @return a label with the specified text that has word wrap enabled.
      */
@@ -137,6 +149,56 @@ public class Mocha extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return "Mocha heard: " + input;
+        String responseReturn = ""; 
+        
+        try {
+            int commandNumber = parser.parseCommand(input);
+
+            if (commandNumber >= 1 && commandNumber <= 3) {
+                Task newTask = parser.createTask(commandNumber);
+                tasks.addTask(newTask);
+                responseReturn = ui.addTask(newTask, tasks.getSize());
+                
+            } else if (commandNumber == 4) {
+                int taskNumber = parser.getDoneTaskNumber();
+                Task doneTask = tasks.getTask(taskNumber);
+                doneTask.markAsDone();
+                responseReturn = ui.markTaskDone(doneTask);
+                
+            } else if (commandNumber == 5) {
+                responseReturn = ui.listAllTasks(tasks);
+                
+            } else if (commandNumber == 6) {
+                responseReturn = ui.sayGoodbye();
+                storage.writeToFile(tasks.getTaskList());
+                
+            } else if (commandNumber == 7) {
+                int taskNumber = parser.getDeleteTaskNumber();
+                Task deleteTask = tasks.getTask(taskNumber);
+                tasks.deleteTask(taskNumber);
+                responseReturn = ui.deleteTask(deleteTask, tasks.getSize());
+                
+            } else if (commandNumber == 8) {
+                ArrayList<Task> matchingTasks = parser.getMatchingTasks(tasks);
+                responseReturn = ui.findTask(matchingTasks);
+
+            } else {
+                final String horizontalLine = "_____________________________________________________";
+
+                throw new CommandNotRecognizedException(horizontalLine
+                        + "\r\n"
+                        + "Oops! I couldn't understand what you mean :("
+                        + "\r\n"
+                        + horizontalLine);
+            }
+            
+        } catch (MissingTaskDescriptionException e) {
+            responseReturn = e.getMessage();
+        } catch (MissingTaskNumberException e) {
+            responseReturn = e.getMessage();
+        } catch (CommandNotRecognizedException e) {
+            responseReturn = e.getMessage();
+        }
+        return responseReturn;
     }
 }

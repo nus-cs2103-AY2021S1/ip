@@ -7,22 +7,24 @@ import java.util.Scanner;
  * Ui deals with interactions with users.
  */
 public class Ui {
-    private static final String HORIZONTAL_LINE = "_______________________________________________________";
+    private static final String HORIZONTAL_LINE = "______________________________________________________";
 
     /**
     * Introduction of Mocha.
-    */
-    public void sayIntroduction() {
+     * @return
+     */
+    public String sayIntroduction() {
 
         String nameIntro = "Hello, I'm Mocha!";
         String greeting = "What's up today!";
-        System.out.println(HORIZONTAL_LINE
+        String mochaIntro = (HORIZONTAL_LINE
                 + "\r\n"
                 + nameIntro
                 + "\r\n"
                 + greeting
                 + "\r\n"
                 + HORIZONTAL_LINE);
+        return mochaIntro;
     }
 
     /**
@@ -49,10 +51,12 @@ public class Ui {
      * @param task  Takes in a task object.
      * @param sizeOfTasks The size of the list of tasks.
      */
-    public void addTask(Task task, int sizeOfTasks) {
+    public String addTask(Task task, int sizeOfTasks) {
+        String newTask = "";
+        
         if (task.getTaskType() == "ToDo") {
 
-            System.out.println(HORIZONTAL_LINE
+            newTask = (HORIZONTAL_LINE
                     + "\r\n"
                     + "One new ToDo Task added: "
                     + "\r\n"
@@ -65,7 +69,7 @@ public class Ui {
 
         } else if (task.getTaskType() == "Deadline") {
 
-            System.out.println(HORIZONTAL_LINE
+            newTask = (HORIZONTAL_LINE
                     + "\r\n"
                     + "One new Deadline added: "
                     + "\r\n"
@@ -77,7 +81,7 @@ public class Ui {
                     + HORIZONTAL_LINE);
 
         } else if (task.getTaskType() == "Event") {
-            System.out.println(HORIZONTAL_LINE
+            newTask = (HORIZONTAL_LINE
                     + "\r\n"
                     + "One new Deadline Task added: "
                     + "\r\n"
@@ -87,9 +91,8 @@ public class Ui {
                     + sizeOfTasks
                     + "\r\n"
                     + HORIZONTAL_LINE);
-        } else {
-            return;
         }
+        return newTask;
     }
 
     /**
@@ -97,13 +100,15 @@ public class Ui {
      *
      * @param task Takes in a task object.
      */
-    public void markTaskDone(Task task) {
-        System.out.println(HORIZONTAL_LINE
+    public String markTaskDone(Task task) {
+        String newTaskDone = "";
+        newTaskDone = (HORIZONTAL_LINE
                 + "\r\n"
                 + "Nice! One thing done: \r\n"
                 + task.toString()
                 + "\r\n"
                 + HORIZONTAL_LINE);
+        return newTaskDone;
     }
 
     /**
@@ -111,43 +116,57 @@ public class Ui {
      *
      * @param tasks Takes in a list of tasks.
      */
-    public void listAllTasks(TaskList tasks) {
-        System.out.println(HORIZONTAL_LINE
+    public String listAllTasks(TaskList tasks) {
+        String dividerStart = "";
+        String allTasks = "";
+        String dividerEnd = "";
+        String listAllTasks = "";
+        
+        dividerStart = (HORIZONTAL_LINE
                 + "\r\n"
                 + "Here are all of your tasks:"
                 + "\r\n");
 
         for (int i = 0; i < tasks.getSize(); i++) {
-            System.out.println((i + 1) + "." + tasks.getTask(i).toString());
+            String taskToString = "";
+            taskToString = ((i + 1) + "." + tasks.getTask(i).toString() +"\n");
+            allTasks += taskToString;
         }
 
-        System.out.println("\r\n"
+        dividerEnd += ("\r\n"
                 + "You have a total of "
                 + tasks.getSize()
                 + " tasks."
                 + "\r\n"
                 + HORIZONTAL_LINE);
+        
+        listAllTasks = dividerStart + allTasks + dividerEnd;
+        return listAllTasks;
     }
 
     /**
      * Mocha's salutations.
      */
-    public void sayGoodbye() {
-        System.out.println(HORIZONTAL_LINE
+    public String sayGoodbye() {
+        String mochaGoodbye = "";
+       mochaGoodbye = (HORIZONTAL_LINE
                 + "\r\n"
                 + "Bye! See ya soon!"
                 + "\r\n"
                 + HORIZONTAL_LINE);
+        return mochaGoodbye;
     }
 
     /**
      * Displays the message when a task is deleted.
-     *
+     * 
      * @param task Takes in a task object.
      * @param sizeOfTasks Takes in the size of the list of tasks.
+     * @return
      */
-    public void deleteTask(Task task, int sizeOfTasks) {
-        System.out.println(HORIZONTAL_LINE
+    public String deleteTask(Task task, int sizeOfTasks) {
+        String deleteTask = "";
+        deleteTask = (HORIZONTAL_LINE
                 + "\r\n"
                 + "Noted. Removing the following task:"
                 + "\r\n"
@@ -157,6 +176,7 @@ public class Ui {
                 + sizeOfTasks
                 + "\r\n"
                 + HORIZONTAL_LINE);
+        return deleteTask;
     }
 
     /**
@@ -164,18 +184,28 @@ public class Ui {
      *
      * @param matchingTasks A list of matching tasks.
      */
-    public void findTask(ArrayList<Task> matchingTasks) {
+    public String findTask(ArrayList<Task> matchingTasks) {
+        String dividerStart = "";
+        String relevantTasks = "";
+        String dividerEnd = "";
+        String findTask = "";
 
-        System.out.println(HORIZONTAL_LINE
+        dividerStart = (HORIZONTAL_LINE
                 + "\r\n"
                 + "Here are the matching tasks in your list:"
                 + "\r\n");
 
         for (int i = 0; i < matchingTasks.size(); i++) {
-            System.out.println((i + 1)
+            String matchingTask = "";
+            matchingTask = ((i + 1) 
                     + "."
-                    + matchingTasks.get(i).toString());
+                    + matchingTasks.get(i).toString()
+                    + "\n");
+            relevantTasks += matchingTask;
         }
-        System.out.println(HORIZONTAL_LINE);
+        
+        dividerEnd = HORIZONTAL_LINE;
+        findTask = dividerStart + relevantTasks + dividerEnd;
+        return findTask;
     }
 }

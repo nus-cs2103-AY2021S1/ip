@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * Parser deals with making sense of the user command
  */
 public class Parser {
-    private static final String HORIZONTAL_LINE = "_______________________________________________________";
+    private static final String HORIZONTAL_LINE = "______________________________________________________";
     private String command;
     private String[] commandParts;
 
