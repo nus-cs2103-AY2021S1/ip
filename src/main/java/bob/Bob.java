@@ -31,16 +31,7 @@ public class Bob {
      * @throws IOException If saved file can't be loaded.
      */
     public Bob() throws IOException, BobException {
-        boolean ifPathDirIsTest = System.getProperty("user.dir").endsWith("text-ui-test");
-        boolean ifPathDirIsIp = System.getProperty("user.dir").endsWith("ip");
-
-        String filePath = ifPathDirIsTest
-                ? "test.txt"
-                : ifPathDirIsIp
-                ? "data/bob.txt"
-                // Creates a save file on the user's home directory if user is not in ip directory
-                : System.getProperty("user.home") + "/bob.txt";
-
+        String filePath = getPathName();
         Tasklist tempTasks = null;
         this.storage = new Storage(filePath);
         try {
@@ -52,6 +43,17 @@ public class Bob {
             this.tasks = tempTasks;
             this.hasExited = false;
         }
+    }
+
+    private String getPathName() {
+        boolean ifPathDirIsTest = System.getProperty("user.dir").endsWith("text-ui-test");
+        boolean ifPathDirIsIp = System.getProperty("user.dir").endsWith("ip");
+        return ifPathDirIsTest
+                ? "test.txt"
+                : ifPathDirIsIp
+                ? "data/bob.txt"
+                // Creates a save file on the user's home directory if user is not in ip directory
+                : System.getProperty("user.home") + "/bob.txt";
     }
 
     private void setStateOfTasklist(Command c) throws BobInvalidUndoException {

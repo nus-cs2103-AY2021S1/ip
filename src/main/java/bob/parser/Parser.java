@@ -18,6 +18,13 @@ import bob.exceptions.BobInvalidCommandException;
  * Tool to parse user input into commands.
  */
 public class Parser {
+    private static final int LENGTH_OF_DONE = 4;
+    private static final int LENGTH_OF_DELETE = 6;
+    private static final int LENGTH_OF_TODO = 4;
+    private static final int LENGTH_OF_EVENT = 5;
+    private static final int LENGTH_OF_DEADLINE = 8;
+    private static final int LENGTH_OF_FIND = 4;
+
     /**
      * Handles user input which decides which command Bob executes.
      *
@@ -31,13 +38,13 @@ public class Parser {
             throws BobInvalidCommandException, BobEmptyTaskException, BobEmptyFindException {
         boolean isExitCommand = input.equals("bye");
         boolean isListCommand = input.equals("list");
-        boolean isDoneCommand = input.length() >= 4 && input.startsWith("done");
-        boolean isDeleteCommand = input.length() >= 6 && input.startsWith("delete");
-        boolean isTodoCommmand = input.length() >= 4 && input.startsWith("todo");
-        boolean isEventCommand = input.length() >= 5 && input.startsWith("event");
-        boolean isDeadlineCommand = input.length() >= 8 && input.startsWith("deadline");
-        boolean isFindCommand = input.length() >= 4 && input.startsWith("find");
-        boolean isUndoCommand = input.length() >= 4 && input.startsWith("undo");
+        boolean isDoneCommand = input.length() >= LENGTH_OF_DONE && input.startsWith("done");
+        boolean isDeleteCommand = input.length() >= LENGTH_OF_DELETE && input.startsWith("delete");
+        boolean isTodoCommmand = input.length() >= LENGTH_OF_TODO && input.startsWith("todo");
+        boolean isEventCommand = input.length() >= LENGTH_OF_EVENT && input.startsWith("event");
+        boolean isDeadlineCommand = input.length() >= LENGTH_OF_DEADLINE && input.startsWith("deadline");
+        boolean isFindCommand = input.length() >= LENGTH_OF_FIND && input.startsWith("find");
+        boolean isUndoCommand = input.startsWith("undo");
         boolean isUnknownCommand = !(isExitCommand || isListCommand || isDoneCommand || isDeleteCommand
                 || isTodoCommmand || isEventCommand || isDeadlineCommand || isFindCommand || isUndoCommand);
 
@@ -59,7 +66,6 @@ public class Parser {
             return new FindCommand(input.substring((4)));
         } else if (isUndoCommand) {
             return new UndoCommand();
-        // If user's command is invalid/not recognisable by Bob
         } else {
             assert isUnknownCommand;
             throw new BobInvalidCommandException();
