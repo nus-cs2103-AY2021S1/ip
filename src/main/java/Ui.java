@@ -1,42 +1,21 @@
-import java.util.Scanner;
-
 /**
  * Represents the user interface that interacts with the user by replying
  * the user accordingly. A Ui objects contains a Scanner object that helps
  * to take in user input.
  */
 public class Ui {
-    private static final String LOGO = " ____        _\n"
-            + "|  _ \\ _   _| | _____\n"
-            + "| | | | | | | |/ / _ \\\n"
-            + "| |_| | |_| |   <  __/\n"
-            + "|____/ \\__,_|_|\\_\\___|\n";
-    private static final String LINE = "---------------------------------------------------------";
-    private Scanner sc;
-
     /**
      * Instantiates a Ui object with a scanner object.
      */
-    public Ui() {
-        sc = new Scanner(System.in);
-    }
-
-    /**
-     * Reads the input of the user.
-     *
-     * @return User input.
-     */
-    public String readCommand() {
-        return sc.nextLine();
-    }
+    public Ui() { }
 
     /**
      * Displays the welcome message.
      */
     public static String showWelcome() {
-        String welcomeMessage = "hElLoOOoOOoO! WELCOME TO BIKINI BOTTOM! "
-                + "I'm Sandy Cheeks, how can I help you today?\n"
-                + "Type \"help\" to view the list of commands you can use!";
+        String welcomeMessage = "HOWDY!!!!! WELCOME TO BIKINI BOTTOM! "
+                + "I'm Sandy Cheeks, what can I do for yer?\n"
+                + "Try typin' \"help\" to see what commands you can use!";
         return welcomeMessage;
     }
 
@@ -44,39 +23,42 @@ public class Ui {
      * Displays the exit message.
      */
     public String showExit() {
-        return "BYEEE!! SEE YOU AGAIN!!! >O<";
+        String exitMessage = "You're leavin' already?!??! Well, see you again! "
+                + "BYEEE!!!";
+        return exitMessage;
     }
 
     /**
      * Displays the list of commands available.
      */
     public String showHelp() {
-        String helpMessage = "Here are the list of commands you can use! =D\n"
+        String helpMessage = "I don't know nothin' about other commands but "
+                + "here are the list of commands I understand!\n"
                 + "help: displays the list of commands available\n"
                 + "\n"
                 + "list: displays the list of tasks you have\n"
                 + "\n"
                 + "find *keyword*: displays the tasks with that keyword\n"
-                + "eg find book\n"
+                + "eg find karate\n"
                 + "\n"
                 + "todo *task description*: adds a task without any\n"
-                + "date/time attached to it\n" + "eg todo read book\n"
+                + "date/time attached to it\n" + "eg todo scold spongebob\n"
                 + "\n"
                 + "deadline *task description* /by *date+time*: adds a\n"
                 + "task that needs to be done before a specific date and time\n"
                 + "(date and time to be written in yyyy-mm-dd HHMM format)\n"
-                + "eg deadline return book /by 2019-10-15 2359\n"
+                + "eg deadline build spaceship /by 2019-10-15 2359\n"
                 + "\n"
                 + "event *task description* /at *date+time*: adds a task that\n"
                 + "starts at a specific time and ends at a specific time\n"
                 + "(date and time to be written in yyyy-mm-dd HHMM format)\n"
-                + "eg event meeting /at 2019-10-15 1200\n"
+                + "eg karate competition /at 2019-10-15 1200\n"
                 + "\n"
-                + "done *task number*: marks the task with that number as\n"
-                + "done eg done 1\n"
+                + "done *task number*: marks the task with that number as done\n"
+                + "eg done 1\n"
                 + "\n"
-                + "delete *task number*: deletes the task with that number\n"
-                + "from the list eg delete 1\n"
+                + "delete *task number*: deletes the task with that number from the list\n"
+                + "eg delete 1\n"
                 + "\n"
                 + "bye: ends the session";
         return helpMessage;
@@ -86,7 +68,8 @@ public class Ui {
      * Displays the user's list of tasks.
      */
     public String showList() {
-        return "Here are your tasks! JIAYOU! =D";
+        String listMessage = "Here yer go! These are all your tasks!";
+        return listMessage;
     }
 
     /**
@@ -94,7 +77,7 @@ public class Ui {
      * @param t Task that is marked as done.
      */
     public String showDone(Task t) {
-        String doneMessage = "Nicee!! You've completed this task!\n" + t;
+        String doneMessage = "YEEEEE-HAW!!! You've completed this task!\n" + t;
         return doneMessage;
     }
 
@@ -103,7 +86,7 @@ public class Ui {
      * @param t Task that is deleted.
      */
     public String showDelete(Task t, TaskList tasks) {
-        String deleteMessage = "Oki! I've removed this task!\n" + t + "\n"
+        String deleteMessage = "Got it! I'm removin' this task!\n" + t + "\n"
                 + "Now you have " + tasks.getSize() + " tasks in your list!";
         return deleteMessage;
     }
@@ -113,7 +96,7 @@ public class Ui {
      * @param t Task to be added.
      */
     public String showAdd(Task t, TaskList tasks) {
-        String addMessage = "Oki! I have added this task:\n" + t + "\n"
+        String addMessage = "Ain't no problem! I'm addin' this task:\n" + t + "\n"
                 + "Now you have " + tasks.getSize() + " tasks in your list!";
         return addMessage;
     }
@@ -122,21 +105,16 @@ public class Ui {
      * Displays the matching tasks found using the keyword.
      */
     public String showFind() {
-        return "Oki! I have found the matching tasks in your list:";
+        String findMessage = "Ain't no problem! I have found the matchin' tasks in your list:";
+        return findMessage;
     }
 
     /**
      * Displays the error message.
-     * @param err Error message.
+     * @param errorMessage Error message.
      */
-    public String showError(String err) {
-        return err;
+    public String showError(String errorMessage) {
+        return errorMessage;
     }
 
-    /**
-     * Displays the line that acts as a border.
-     */
-    public String showLine() {
-        return LINE;
-    }
 }

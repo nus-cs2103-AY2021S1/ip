@@ -24,42 +24,12 @@ public class Duke {
         try {
             storage = new Storage(filePath);
             tasks = new TaskList(storage.load());
-        } catch (DukeException e) {
-//            ui.showLine();
-            ui.showError(e.getMessage());
-//            ui.showLine();
-
+        } catch (DukeException ex) {
+            ui.showError(ex.getMessage());
             tasks = new TaskList();
         }
     }
 
-    /**
-     * Runs the Duke program by receiving the user commands and executing the corresponding
-     * steps accordingly.
-     */
-//    public void run() {
-//        ui.showWelcome();
-//
-//        boolean isExit = false;
-//        while (!isExit) {
-//            try {
-//                String input = ui.readCommand();
-//                ui.showLine();
-//                Command c = Parser.parse(input);
-//                c.execute(tasks, ui, storage);
-//                isExit = c.isExit();
-//            } catch (DukeException ex) {
-//                ui.showError(ex.getMessage());
-//            } finally {
-//                ui.showLine();
-//            }
-//        }
-//    }
-
-    /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
-     */
     public String getResponse(String input) {
         boolean isExit = false;
         while (!isExit) {
@@ -75,17 +45,4 @@ public class Duke {
         assert false : "Response to user input is supposed to be returned";
         return "";
     }
-
-//    public static String getGreeting() {
-//        return ui.showWelcome();
-//    }
-
-    /**
-     * Instantiates a Duke object and runs the program.
-     *
-     * @param args An array of strings.
-     */
-//    public static void main(String[] args) {
-//        new Duke("data/duke.txt").run();
-//    }
 }

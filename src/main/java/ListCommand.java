@@ -16,7 +16,7 @@ public class ListCommand extends Command {
                 : "TaskList, Ui or Storage is not supposed to be null";
 
         if (tasks.getSize() == 0) {
-            throw new DukeException("You don't have any tasks yet!");
+            throw new EmptyListException();
         }
 
         return ui.showList() + "\n" + tasks.printList();

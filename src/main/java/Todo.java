@@ -19,7 +19,8 @@ public class Todo extends Task {
      */
     @Override
     public String toTaskData() {
-        return "T" + " ; " + super.toTaskData();
+        String separator = " ; ";
+        return "T" + separator + super.toTaskData();
     }
 
     /**

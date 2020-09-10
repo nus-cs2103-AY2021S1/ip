@@ -4,11 +4,7 @@
  * and a string array with the task description separated into the task name and date/time.
  */
 public class AddCommand extends Command {
-    public static final int TODO = 1;
-    public static final int DEADLINE = 2;
-    public static final int EVENT = 3;
-
-    private int taskType;
+    private TaskType taskType;
     private String[] taskInfos;
 
     /**
@@ -17,7 +13,7 @@ public class AddCommand extends Command {
      * @param taskType The type of task to be added.
      * @param taskInfos The description of the task to be added.
      */
-    public AddCommand(int taskType, String[] taskInfos) {
+    public AddCommand(TaskType taskType, String[] taskInfos) {
         this.taskType = taskType;
         this.taskInfos = taskInfos;
     }
@@ -38,18 +34,22 @@ public class AddCommand extends Command {
         assert this.taskInfos.length > 0
                 : "String array containing task descriptions is not supposed to be empty";
 
-        Task t;
-        if (this.taskType == TODO) {
-            t = new Todo(this.taskInfos[0]);
-        } else if (this.taskType == DEADLINE) {
-            t = new Deadline(this.taskInfos[0], this.taskInfos[1]);
-        } else {
-            t = new Event(this.taskInfos[0], this.taskInfos[1]);
-        }
-
+        Task t = createTask();
         tasks.addTask(t);
         storage.updateData(tasks);
         return ui.showAdd(t, tasks);
+    }
+
+    public Task createTask() throws DukeException {
+        Task task;
+        if (this.taskType == TaskType.TODO) {
+            task = new Todo(this.taskInfos[0]);
+        } else if (this.taskType == TaskType.DEADLINE) {
+            task = new Deadline(this.taskInfos[0], this.taskInfos[1]);
+        } else {
+            task = new Event(this.taskInfos[0], this.taskInfos[1]);
+        }
+        return task;
     }
 
     /**

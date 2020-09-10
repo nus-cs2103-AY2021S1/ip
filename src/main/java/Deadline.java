@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
  * A Deadline object is made up of the task name, as well as a date and time of the deadline.
  */
 public class Deadline extends Task {
-    protected LocalDateTime by;
+    protected LocalDateTime byDateTime;
     private String originalFormat;
     private String printedFormat;
 
@@ -22,15 +22,14 @@ public class Deadline extends Task {
         super(taskName);
 
         try {
-            this.by = LocalDateTime.parse(
+            this.byDateTime = LocalDateTime.parse(
                     date, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-            this.originalFormat = this.by.format(
+            this.originalFormat = this.byDateTime.format(
                     DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-            this.printedFormat = this.by.format(
+            this.printedFormat = this.byDateTime.format(
                     DateTimeFormatter.ofPattern("EEE, d MMM yyyy, HH:mm"));
         } catch (DateTimeParseException ex) {
-            throw new DukeException("You need to use the proper format!\n"
-                    + "eg deadline return book /by 2019-10-15 2359");
+            throw new InvalidDeadlineFormatException();
         }
     }
 
@@ -41,7 +40,8 @@ public class Deadline extends Task {
      */
     @Override
     public String toTaskData() {
-        return "D" + " ; " + super.toTaskData() + " ; " + originalFormat;
+        String separator = " ; ";
+        return "D" + separator + super.toTaskData() + separator + originalFormat;
     }
 
     /**
