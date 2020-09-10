@@ -16,8 +16,8 @@ public class DukeException extends Exception {
         case "invalidCommand":
             message = "OOPS!!! I'm sorry, but I don't know what that means :-(";
             break;
-        case "invalidMarkingDone":
-            message = "OOPS!!! Command to mark a task done is formatted wrongly.";
+        case "invalidDone":
+            message = "OOPS!! Please indicate existing task numbers separated by commas!";
             break;
         case "invalidTodo":
             message = "OOPS!!! The description of a todo cannot be empty.";
@@ -38,7 +38,7 @@ public class DukeException extends Exception {
             message = "OOPS!!! The event datetime should be in a valid 'YYYY-MM-DD HH:MM to YYYY-MM-DD HH:MM' format.";
             break;
         case "invalidDelete":
-            message = "OOPS!!! Command to delete a task is formatted wrongly.";
+            message = "OOPS!!! Please indicate existing task numbers separated by commas!";
             break;
         case "invalidFind":
             message = "OOPS!!! You cannot find tasks with no keywords!";
@@ -47,7 +47,7 @@ public class DukeException extends Exception {
             message = "OOPS!! I couldn't find any tasks matching your keyword!";
             break;
         default:
-            message = "Unknown error. Try something else.";
+            message = "Unknown error. Contact the developer NOW!.";
         }
         this.errorMessage = message;
     }

@@ -1,6 +1,8 @@
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
+import java.util.Arrays;
+import java.util.Comparator;
 import java.util.Locale;
 
 public class Parser {
@@ -10,8 +12,13 @@ public class Parser {
      * @param command User command.
      * @return Id of the task to be modified/deleted.
      */
-    public static int getTaskId(String command) {
-        return Integer.parseInt(command.split(" ")[1]) - 1;
+    public static Integer[] getTaskIds(String command) {
+        String idString = command.split(" ", 2)[1];
+        String[] ids = idString.split(",");
+        return Arrays.stream(ids)
+                     .map(x -> Integer.parseInt(x) - 1)
+                     .sorted(Comparator.reverseOrder())
+                     .toArray(Integer[]::new);
     }
 
     /**

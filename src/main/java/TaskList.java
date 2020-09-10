@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -7,7 +8,7 @@ import java.util.stream.IntStream;
  * Enumeration indicating the type of change to be acted on the TaskList.
  */
 enum ListChange {
-    ADD, DELETE
+    ADD, DONE, DELETE
 }
 
 public class TaskList {
@@ -39,21 +40,35 @@ public class TaskList {
      */
     public String getNumTasksStr() {
         int numTasks = tasks.size();
-        return numTasks == 1 ? "1 task" : numTasks + " tasks";
+        return numTasks + (numTasks == 1 ? " task" : " tasks");
     }
 
     /**
-     * Returns the correct message to signify adding/deleting a task.
+     * Returns the correct message to signify a change in tasks.
      *
-     * @param task Task to be added/deleted.
-     * @param change ListChange depending on command.
+     * @param change ListChange enum depending on command.
      * @return Message string.
      */
-    public String listChangePrint(Task task, ListChange change) {
-        String keyword = change == ListChange.ADD ? "added" : "removed";
-        String firstLine = "Noted. I've " + keyword + " this task:\n" + task.toString() + "\n";
-        String secondLine = "Now you have " + this.getNumTasksStr() + " in the list.";
-        return String.join("", firstLine, secondLine);
+    public String listChangePrint(ListChange change) {
+        String keyphrase;
+        switch (change) {
+        case ADD:
+            keyphrase = "added the new task";
+            break;
+        case DONE:
+            keyphrase = "marked done the task(s)";
+            break;
+        case DELETE:
+            keyphrase = "deleted the task(s)";
+            break;
+        default:
+            keyphrase = "some issues but I'd die";
+        }
+        String firstLine = "Nice! I've " + keyphrase + " for you!";
+        String secondLine = change == ListChange.DONE
+                ? ""
+                : "Now you have " + this.getNumTasksStr() + " in the list.";
+        return String.join("\n", firstLine, secondLine);
     }
 
     /**
@@ -71,18 +86,24 @@ public class TaskList {
     }
 
     /**
-     * Marks a task as done.
+     * Marks task(s) as done.
      *
      * @param command User command.
      * @return Duke response indicating successful action (or not).
      */
     public String markDone(String command) {
         try {
-            int taskId = Parser.getTaskId(command);
-            tasks.get(taskId).markAsDone();
-            return "Nice! I've marked this task as done:\n" + tasks.get(taskId).toString();
+            Integer[] taskIds = command.contains("all")
+                    ? IntStream.range(0, tasks.size())
+                               .boxed()
+                               .toArray(Integer[]::new)
+                    : Parser.getTaskIds(command);
+            for (int taskId : taskIds) {
+                tasks.get(taskId).markAsDone();
+            }
+            return listChangePrint(ListChange.DONE);
         } catch (Exception e) {
-            return new DukeException("invalidMarkingDone").print();
+            return new DukeException("invalidDone").print();
         }
     }
 
@@ -100,7 +121,7 @@ public class TaskList {
             } else {
                 Task newTask = new ToDo(detail);
                 tasks.add(newTask);
-                return listChangePrint(newTask, ListChange.ADD);
+                return listChangePrint(ListChange.ADD);
             }
         } catch (Exception e) {
             return new DukeException("invalidTodo").print();
@@ -119,7 +140,7 @@ public class TaskList {
             String by = Parser.getBy(command);
             Task newTask = new Deadline(desc, by);
             tasks.add(newTask);
-            return listChangePrint(newTask, ListChange.ADD);
+            return listChangePrint(ListChange.ADD);
         } catch (DukeException e) {
             return e.print();
         } catch (Exception e) {
@@ -139,7 +160,7 @@ public class TaskList {
             String at = Parser.getAt(command);
             Task newTask = new Event(desc, at);
             tasks.add(newTask);
-            return listChangePrint(newTask, ListChange.ADD);
+            return listChangePrint(ListChange.ADD);
         } catch (DukeException e) {
             return e.print();
         } catch (Exception e) {
@@ -148,16 +169,22 @@ public class TaskList {
     }
 
     /**
-     * Deletes a task.
+     * Deletes task(s).
      *
      * @param command User command.
      * @return Duke response indicating successful action (or not).
      */
     public String delete(String command) {
         try {
-            int taskId = Parser.getTaskId(command);
-            Task removedTask = tasks.remove(taskId);
-            return listChangePrint(removedTask, ListChange.DELETE);
+            Integer[] taskIds = command.contains("all")
+                    ? Arrays.stream(new int[tasks.size()])
+                            .boxed()
+                            .toArray(Integer[]::new)
+                    : Parser.getTaskIds(command);
+            for (int taskId : taskIds) {
+                tasks.remove(taskId);
+            }
+            return listChangePrint(ListChange.DELETE);
         } catch (Exception e) {
             return new DukeException("invalidDelete").print();
         }
