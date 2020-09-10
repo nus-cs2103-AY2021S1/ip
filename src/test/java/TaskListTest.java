@@ -10,6 +10,6 @@ public class TaskListTest {
     public void addTaskTest() {
         TaskList tasks = new TaskList(new ArrayList<Task>());
         tasks.addTask(new Todo("Test", false));
-        assertEquals(tasks.toString(), "1.[T][✗] Test");
+        assertEquals(tasks.toString(), "1.[T][\u2718] Test");
     }
 }
