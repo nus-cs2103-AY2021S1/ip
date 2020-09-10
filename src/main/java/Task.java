@@ -5,6 +5,7 @@ public class Task {
     protected boolean isDone;
 
     public Task(String description, boolean isDone) {
+        assert description.trim() != "" : "The description of a task cannot be empty!";
         this.description = description.trim();
         this.isDone = isDone;
     }
