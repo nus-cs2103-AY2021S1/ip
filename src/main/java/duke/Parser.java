@@ -61,12 +61,12 @@ public class Parser {
             return parseToDo(commands[1]);
         case "deadline":
             if (commands.length < 2) {
-                throw new DukeEmptyInputException("The description of a todo cannot be empty.");
+                throw new DukeEmptyInputException("The description of a deadline cannot be empty.");
             }
             return parseDeadline(commands[1]);
         case "event":
             if (commands.length < 2) {
-                throw new DukeEmptyInputException("The description of a todo cannot be empty.");
+                throw new DukeEmptyInputException("The description of an event cannot be empty.");
             }
             return parseEvent(commands[1]);
         default:
