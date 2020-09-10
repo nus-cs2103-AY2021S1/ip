@@ -53,6 +53,7 @@ public class TaskList {
      * @throws DukeException If exception is thrown by the update method of the Storage class.
      */
     public void deleteTask(int taskNum, Storage storage) throws DukeException {
+        assert taskNum > 0;
         this.list.remove(taskNum - 1);
         storage.update(this.list);
     }
@@ -67,6 +68,7 @@ public class TaskList {
      * @throws DukeException If exception is thrown by the update method of the Storage class.
      */
     public void markDone(int taskNum, Storage storage) throws DukeException {
+        assert taskNum > 0;
         this.list.get(taskNum - 1).markDone();
         storage.update(this.list);
     }
@@ -80,6 +82,7 @@ public class TaskList {
      * @return Task represented by the <code>taskNum</code>.
      */
     public Task getTask(int taskNum) {
+        assert taskNum > 0;
         return this.list.get(taskNum - 1);
     }
 
