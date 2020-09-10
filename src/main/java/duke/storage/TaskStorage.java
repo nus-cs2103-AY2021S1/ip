@@ -18,4 +18,9 @@ public class TaskStorage extends Storage<Task> {
     TaskStorage(String path) {
         super(new File(path + DEFAULT_FILENAME), new TaskStorageParser());
     }
+
+    @Override
+    String getStorableName() {
+        return "task";
+    }
 }

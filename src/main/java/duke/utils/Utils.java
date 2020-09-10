@@ -2,8 +2,6 @@ package duke.utils;
 
 import java.util.Arrays;
 
-import duke.exception.DukeParseException;
-
 /** The utilities class for Duke. */
 public final class Utils {
     public static final int INDEX_NOT_FOUND = -1;
@@ -73,7 +71,6 @@ public final class Utils {
      *
      * @param money the <code>String</code> to be converted.
      * @return the converted <code>double</code> value.
-     * @throws DukeParseException if the <code>String</code> is not of the correct format.
      */
     public static double convertMoneyToValue(String money) {
         assert isMoney(money) : "money passed in is of a wrong format";

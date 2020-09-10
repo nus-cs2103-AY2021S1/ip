@@ -18,4 +18,9 @@ public class ExpenseStorage extends Storage<Expense> {
     ExpenseStorage(String path) {
         super(new File(path + DEFAULT_FILENAME), new ExpenseStorageParser());
     }
+
+    @Override
+    String getStorableName() {
+        return "expense";
+    }
 }
