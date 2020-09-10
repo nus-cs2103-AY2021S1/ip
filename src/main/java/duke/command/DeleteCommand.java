@@ -33,7 +33,7 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Storage storage, Ui ui) {
         try {
             if (index > tasks.size()) {
-                throw new DukeException("C'mon parder! That task doesn't exist cos you don't go so many!");
+                throw new DukeException("C'mon pardner! That task doesn't exist cos you don't got so many!");
             }
             Task toBeRemoved = tasks.get(index);
             tasks.deleteTask(index);

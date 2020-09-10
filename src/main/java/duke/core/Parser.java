@@ -57,9 +57,10 @@ public class Parser {
                 command = parseAddDeadline(inputArray, deadlineSplit);
                 break;
             default:
-                System.out.println("Sorry, I didn't quite catch that!");
+                throw new DukeException("Sorry, I didn't quite catch that!");
             }
         }
+        assert command != null;
         return command;
     }
 
@@ -151,6 +152,7 @@ public class Parser {
         int index = 0;
         for (int i = 0; i < arr.length; i++) {
             if (arr[i].equals(exp)) {
+                assert i >= index;
                 index = i;
             }
         }
