@@ -41,13 +41,6 @@ public class Ui {
     }
 
     /**
-     * Last message shown before Duke program is closed.
-     */
-    public String quit() {
-        return "Adios!";
-    }
-
-    /**
      * Shows tasks in the current list.
      */
     public String list() {
