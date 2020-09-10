@@ -9,7 +9,12 @@ import duke.exception.DukeException;
 import duke.ui.Ui;
 
 public class HelpCommand implements Command {
-    CommandWord topic;
+    private final CommandWord topic;
+    /**
+     * Constructs HelpCommand
+     *
+     * @param input help command input
+     */
     public HelpCommand(String input) {
         StringTokenizer st = new StringTokenizer(input);
         String command = st.nextToken();
