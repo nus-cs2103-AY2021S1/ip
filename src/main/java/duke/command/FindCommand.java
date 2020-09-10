@@ -44,7 +44,7 @@ public class FindCommand extends Command {
                 LocalDate date = optDate.get();
                 filteredTasks = tasks.filter((task) -> {
                     boolean isDeadlineAndDueOnDate = task instanceof Deadline && ((Deadline) task).isDueOn(date);
-                    boolean isEventAndOccurOnDate = task instanceof Event && ((Event) task).isOccuringOn(date);
+                    boolean isEventAndOccurOnDate = task instanceof Event && ((Event) task).isOccurringOn(date);
                     return isDeadlineAndDueOnDate || isEventAndOccurOnDate;
                 });
 

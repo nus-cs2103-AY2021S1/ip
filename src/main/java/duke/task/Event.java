@@ -22,6 +22,10 @@ public class Event extends Task {
      */
     public Event(String description, String eventTime) {
         super(description);
+        parseEventTime(eventTime);
+    }
+
+    private void parseEventTime(String eventTime) {
         assert eventTime != null : "event time cannot be null";
         this.eventTime = eventTime;
         isInDateFormat = false;
@@ -61,16 +65,20 @@ public class Event extends Task {
     }
 
     /**
-     * Checks whether this task is occuring on a specified day.
+     * Checks whether this task is occurring on a specified day.
      * @param cmpDate A date that is being queried
      * @return True if this task occurs on that day, false otherwise
      */
-    public boolean isOccuringOn(LocalDate cmpDate) {
+    public boolean isOccurringOn(LocalDate cmpDate) {
         assert cmpDate != null : "compared date cannot be null";
         if (!isInDateFormat) {
             return false;
         }
         return cmpDate.compareTo(startTime) > 0 && cmpDate.compareTo(endTime) < 0;
+    }
+
+    public void setTime(String newEventTime) {
+        parseEventTime(newEventTime);
     }
 
     /**
