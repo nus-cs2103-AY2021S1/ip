@@ -16,6 +16,8 @@ public class DukeException extends Exception {
             + "A deadline must have a specific end date/time.\n";
     protected final String MESSAGE_EVENT_NO_START_END = "    I am sorry my Lord. "
             + "An event must have a start and end time.\n";
+    protected final String MESSAGE_EVENT_CLASHES_SCHEDULE = "    I am sorry my Lord. "
+            + "This event clashes with another event.\n";
     protected final String MESSAGE_INDEX_OUT_OF_BOUNDS = "    I am sorry my Lord. "
             + "That task cannot be found!";
     protected final String MESSAGE_DEFAULT = "    I am sorry my Lord. "
@@ -53,6 +55,9 @@ public class DukeException extends Exception {
             break;
         case EVENT_NO_START_END:
             errorMessage = MESSAGE_EVENT_NO_START_END;
+            break;
+        case EVENT_CLASHES_SCHEDULE:
+            errorMessage = MESSAGE_EVENT_CLASHES_SCHEDULE;
             break;
         case INDEX_OUT_OF_BOUNDS:
             errorMessage = MESSAGE_INDEX_OUT_OF_BOUNDS;
