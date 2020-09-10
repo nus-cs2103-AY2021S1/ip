@@ -1,14 +1,13 @@
 package duke.main;
 
-import duke.task.Task;
-
 import java.util.ArrayList;
+
+import duke.task.Task;
 
 /**
  * TaskList is a container for Task. It has query, delete, and add function.
  */
 public class TaskList {
-
     /** List to store the Tasks. */
     protected ArrayList<Task> taskList;
 
@@ -31,29 +30,29 @@ public class TaskList {
     /**
      * Adds a Task to this TaskList.
      *
-     * @param t Task to be added.
+     * @param task Task to be added.
      */
-    public void add(Task t) {
-        taskList.add(t);
+    public void add(Task task) {
+        taskList.add(task);
     }
 
     /**
      * Deletes a Task in this TaskList based on the given index.
      *
-     * @param i Index of Task that wants to be deleted.
+     * @param taskNumber The desired task number to be deleted.
      */
-    public void delete(int i) {
-        taskList.remove(i);
+    public void delete(int taskNumber) {
+        taskList.remove(taskNumber - 1);
     }
 
     /**
      * Gets the Task based on the given index.
      *
-     * @param i Index of the desired Task.
-     * @return The desired Task based on the given index.
+     * @param taskNumber The desired task number.
+     * @return The desired Task based on the given task number.
      */
-    public Task get(int i) {
-        return taskList.get(i);
+    public Task get(int taskNumber) {
+        return taskList.get(taskNumber - 1);
     }
 
     /**
@@ -61,7 +60,7 @@ public class TaskList {
      *
      * @return The size of this TaskList in integer form.
      */
-    public int size() {
+    public int getSize() {
         return taskList.size();
     }
 }

@@ -3,8 +3,7 @@ package duke.exception;
 /**
  * Exception that occurs when the user input an invalid number for the file that wants to be deleted.
  */
-public class DeleteOutOfListException extends DukeException {
-
+public class DeleteOutOfListException extends InvalidInputException {
     /**
      * Returns String message of this Exception.
      *

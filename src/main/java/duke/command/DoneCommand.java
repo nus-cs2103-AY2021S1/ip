@@ -7,19 +7,20 @@ import duke.task.Task;
  * DoneCommand is a Command to mark as done a Task in the related TaskList based on the given index.
  */
 public class DoneCommand extends Command {
-
     /** The index of the Task that wants to be marked as done. */
-    protected int taskNumber;
-    protected TaskList tasks;
-    protected Task task;
+    private int taskNumber;
+    /** TaskList that is related to this command. **/
+    private TaskList tasks;
+    /** Task that is related to this command. **/
+    private Task task;
 
     /**
      * Constructs a DoneCommand.
      *
      * @param taskNumber The index of the Task that wants to be marked as done.
      */
-    public DoneCommand(String taskNumber) {
-        this.taskNumber = Integer.parseInt(taskNumber);
+    public DoneCommand(int taskNumber) {
+        this.taskNumber = taskNumber;
     }
 
     /**
@@ -30,11 +31,17 @@ public class DoneCommand extends Command {
     @Override
     public void perform(TaskList t) {
         tasks = t;
-        task = tasks.get(taskNumber - 1);
+        task = tasks.get(taskNumber);
         task.markAsDone();
         assert task.isDone();
     }
 
+    /**
+     * Gets the reply after performing the Command.
+     *
+     * @return A reply as a String based on the perform method.
+     **/
+    @Override
     public String getReply() {
         return " Yay! I have marked this task as done: " + "\n"
             + "   " + task.toString();

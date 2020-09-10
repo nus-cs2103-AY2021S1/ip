@@ -1,6 +1,7 @@
 package duke.exception;
 
-public class FindIncompleteException extends InvalidInputException {
+/** Exception that occurs when the task type is not valid. **/
+public class InvalidTaskTypeException extends StorageException {
     /**
      * Returns String message of this Exception.
      *
@@ -8,7 +9,6 @@ public class FindIncompleteException extends InvalidInputException {
      */
     @Override
     public String getMessage() {
-        return " Oh no! Please specify a keyword of the task that you "
-                + "\n" + " want to find.";
+        return "  Oops, invalid task type detected!";
     }
 }

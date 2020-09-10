@@ -12,7 +12,7 @@ public class TaskListTest {
        tasks.add(new EventStub());
        tasks.add(new TodoStub());
        tasks.add(new DeadlineStub());
-       assertEquals(3, tasks.size());
+       assertEquals(3, tasks.getSize());
    }
 
     @Test
@@ -21,6 +21,6 @@ public class TaskListTest {
         tasks.add(new EventStub());
         tasks.add(new TodoStub());
         tasks.delete(1);
-        assertEquals(1, tasks.size());
+        assertEquals(1, tasks.getSize());
     }
 }

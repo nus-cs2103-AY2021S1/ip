@@ -7,8 +7,8 @@ import duke.task.Task;
  * ListCommand is Command to list all the Task that the user have stored in the related TaskList.
  */
 public class ListCommand extends Command {
-
-    protected TaskList tasks;
+    /** TaskList that is related to this command **/
+    private TaskList tasks;
 
     /**
      * Lists all the task in the related TaskList.
@@ -20,11 +20,17 @@ public class ListCommand extends Command {
         tasks = t;
     }
 
+    /**
+     * Gets the reply after performing the Command.
+     *
+     * @return A reply as a String based on the perform method.
+     **/
+    @Override
     public String getReply() {
         String reply = " These are the tasks in your list:";
-        for (int i = 0; i < tasks.size(); i++) {
+        for (int i = 1; i <= tasks.getSize(); i++) {
             Task t = tasks.get(i);
-            reply += "\n" + " " + (i + 1) + "." + t.toString();
+            reply += "\n" + " " + i + "." + t.toString();
         }
         return reply;
     }

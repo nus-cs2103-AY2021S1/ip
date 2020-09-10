@@ -13,6 +13,11 @@ public abstract class Command {
      */
     public abstract void perform(TaskList tasks);
 
+    /**
+     * Gets the reply after performing the Command.
+     *
+     * @return A reply as a String based on the perform method.
+     **/
     public abstract String getReply();
 
     /**

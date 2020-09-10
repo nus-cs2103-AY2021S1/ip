@@ -8,7 +8,6 @@ import java.time.format.DateTimeFormatter;
  * means this Task has to be done before the deadline date.
  */
 public class Deadline extends Task {
-
     /** Date as LocalDate. */
     protected LocalDate date;
     /** Date as String. */

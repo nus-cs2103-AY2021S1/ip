@@ -3,8 +3,7 @@ package duke.exception;
 /**
  * Exception that occurs when the user does not specify which Task to be deleted.
  */
-public class DeleteIncompleteException extends DukeException {
-
+public class DeleteIncompleteException extends InvalidInputException {
     /**
      * Returns String message of this Exception.
      *

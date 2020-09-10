@@ -3,8 +3,7 @@ package duke.exception;
 /**
  * Exception that occurs when the user input an invalid number for the file that wants to be marked as done.
  */
-public class DoneOutOfListException extends DukeException {
-
+public class DoneOutOfListException extends InvalidInputException {
     /**
      * Returns String message of this Exception.
      *

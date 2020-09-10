@@ -3,8 +3,7 @@ package duke.exception;
 /**
  * Exception that occurs when the user inputs an invalid command that Duke does not understand.
  */
-public class UnknownInputException extends DukeException {
-
+public class UnknownInputException extends InvalidInputException {
     /**
      * Returns String message of this Exception.
      *

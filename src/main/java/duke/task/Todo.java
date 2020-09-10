@@ -6,7 +6,6 @@ package duke.task;
  * but is targetted to be done.
  */
 public class Todo extends Task {
-
     /**
      * Constructs a Todo.
      *
