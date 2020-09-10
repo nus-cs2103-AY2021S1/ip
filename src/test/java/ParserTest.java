@@ -58,7 +58,8 @@ public class ParserTest {
         try {
             assertEquals(true, Parser.parse("abcd") instanceof Command);
         } catch (DukeException e) {
-            assertEquals("  ERROR: Invalid command provided. Please try again.", e.getMessage());
+            assertEquals("Sorry, didn't get that :( "
+                    + "Try again or press 'help' to find out more!", e.getMessage());
         }
     }
 }

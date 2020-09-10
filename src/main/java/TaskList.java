@@ -17,7 +17,7 @@ public class TaskList {
 
     public Task getTask(int taskNumber) {
         assert tasks != null : "Tasklist is not initialised.";
-        assert taskNumber >= 0 && taskNumber < tasks.size() : "Task number is invalid.";
+        assert taskNumber > 0 && taskNumber <= tasks.size() : "Task number is invalid.";
         return tasks.get(taskNumber - 1);
     }
 
@@ -38,7 +38,7 @@ public class TaskList {
      */
     public void deleteTask(int taskNumber) {
         assert tasks != null : "Tasklist is not initialised.";
-        assert taskNumber >= 0 && taskNumber < tasks.size() : "Task number is invalid.";
+        assert taskNumber > 0 && taskNumber <= tasks.size() : "Task number is invalid.";
         tasks.remove(taskNumber - 1);
     }
 
@@ -59,7 +59,7 @@ public class TaskList {
      */
     public void doneTask(int taskNumber) {
         assert tasks != null : "Tasklist is not initialised.";
-        assert taskNumber >= 0 && taskNumber < tasks.size() : "Task number is invalid.";
+        assert taskNumber > 0 && taskNumber <= tasks.size() : "Task number is invalid.";
         tasks.set(taskNumber - 1, tasks.get(taskNumber - 1).markAsDone());
     }
 
