@@ -204,7 +204,7 @@ public class Duke {
         String numOfTasks = this.taskList.size() == 1 ? "1 task" : this.taskList.size() + " tasks";
         String message = "Noted. The following task has been removed:"
                 + NEW_LINE + PADDING + "  " + task.toString() + NEW_LINE
-                + PADDING + "Now you have "  + numOfTasks + " left.";;
+                + PADDING + "Now you have "  + numOfTasks + " left.";
         System.out.printf(MESSAGE_TEMPLATE, message);
     }
 

@@ -11,4 +11,16 @@ public class Ui {
     private final String MESSAGE_TEMPLATE_ERROR = HORIZONTAL_LINE + NEW_LINE + PADDING
             + "☹ OOPS!!! %s"
             + NEW_LINE + HORIZONTAL_LINE + NEW_LINE + NEW_LINE;
+
+    public static void print(String msg) {
+
+    }
+
+    public static void printError(String errMsg) {
+
+    }
+
+    public static void printVerbal(String msg) {
+
+    }
 }
