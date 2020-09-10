@@ -24,6 +24,7 @@ public class TaskList {
     }
     
     public Task getTask(int i) {
+        assert i >= 1 : "Trying to get task with invalid task index";
         return innerList.get(i - 1);
     }
     

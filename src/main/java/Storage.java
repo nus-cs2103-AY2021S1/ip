@@ -13,10 +13,12 @@ public class Storage {
         try {
             ArrayList<Task> savedTaskList = new ArrayList<>();
             String folderPath = getFolderPath();
+            assert !folderPath.isBlank() : "Folder path is blank";
             File folder = new File(folderPath);
             if (!folder.exists()) {
                 folder.mkdir();
             }
+            assert folder.exists() : "Folder is not created before attempting to save a file in it";
             File saveFile = new File(filePath);
             Scanner fileReader = new Scanner(saveFile);
             while (fileReader.hasNextLine()) {
