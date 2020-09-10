@@ -46,12 +46,31 @@ public class Deadline extends Task {
         return new Deadline(name, isComplete, date);
     }
 
+    public LocalDate getDeadlineDate() {
+        return this.date;
+    }
+
     /**
      * Gets whether the deadline date is set as today.
      * @return The boolean value representing whether the deadline is today.
      */
     public boolean isToday() {
         return this.date.isEqual(LocalDate.now());
+    }
+
+    /**
+     * Checks if the details provided exactly match the deadline fields.
+     * This is with the exception of the task status (isComplete).
+     * @param newTask The new Task to be compared against.
+     * @return A boolean that determines if the details provided exactly match the task fields.
+     */
+    @Override
+    public boolean isEqualTo(Task newTask) {
+        if (!(newTask instanceof Deadline)) {
+            return false;
+        }
+
+        return super.isEqualTo(newTask) && this.date.equals(((Deadline) newTask).getDeadlineDate());
     }
 
     /**

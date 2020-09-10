@@ -5,6 +5,7 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 
 import duke.Storage;
+import duke.exception.DuplicateTaskException;
 import duke.exception.InvalidTaskException;
 
 /**
@@ -61,8 +62,9 @@ public class TaskList {
      * @param taskName A string representing the name of the todo.
      * @return The todo added to the TaskList.
      */
-    public Task addTask(String taskName) {
+    public Task addTask(String taskName) throws DuplicateTaskException {
         Todo newTodo = Todo.newTodo(taskName);
+        checkForDuplicates(newTodo);
         this.taskList.add(newTodo);
         return newTodo;
     }
@@ -74,18 +76,34 @@ public class TaskList {
      * @param taskDate A string representing the date of the task.
      * @return The task added to the TaskList.
      */
-    public Task addTask(TaskType type, String taskName, LocalDate taskDate) {
+    public Task addTask(TaskType type, String taskName, LocalDate taskDate) throws DuplicateTaskException {
+        Task newTask;
         switch (type) {
         case EVENT:
-            Event newEvent = Event.newEvent(taskName, taskDate);
-            this.taskList.add(newEvent);
-            return newEvent;
+            newTask = Event.newEvent(taskName, taskDate);
+            break;
         case DEADLINE:
-            Deadline newDeadline = Deadline.newDeadline(taskName, taskDate);
-            this.taskList.add(newDeadline);
-            return newDeadline;
+            newTask = Deadline.newDeadline(taskName, taskDate);
+            break;
         default:
             throw new AssertionError("Invalid TaskType specified");
+        }
+
+        checkForDuplicates(newTask);
+        this.taskList.add(newTask);
+        return newTask;
+    }
+
+    /**
+     * Checks if the task newTask is a duplicated of any previously created tasks.
+     * @param newTask The new task to be added to the taskList.
+     * @throws DuplicateTaskException If the task has previously been created.
+     */
+    public void checkForDuplicates(Task newTask) throws DuplicateTaskException {
+        for (Task task : this.taskList) {
+            if (newTask.isEqualTo(task)) {
+                throw new DuplicateTaskException(task.toString());
+            }
         }
     }
 

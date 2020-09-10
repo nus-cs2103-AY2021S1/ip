@@ -54,6 +54,25 @@ public class Event extends Task {
         return this.date.isEqual(LocalDate.now());
     }
 
+    public LocalDate getEventDate() {
+        return this.date;
+    }
+
+    /**
+     * Checks if the details provided exactly match the event fields.
+     * This is with the exception of the task status (isComplete).
+     * @param newTask The new Task to be compared against.
+     * @return A boolean that determines if the details provided exactly match the task fields.
+     */
+    @Override
+    public boolean isEqualTo(Task newTask) {
+        if (!(newTask instanceof Event)) {
+            return false;
+        }
+
+        return super.isEqualTo(newTask) && this.date.equals(((Event) newTask).getEventDate());
+    }
+
     /**
      * Gets the string representation of the event object for printing.
      * This contains the completion status and the event name, date, as well as the type (Event).

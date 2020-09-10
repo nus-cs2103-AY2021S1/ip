@@ -3,6 +3,7 @@ package duke.command;
 import java.time.LocalDate;
 
 import duke.Storage;
+import duke.exception.DuplicateTaskException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.TaskType;
@@ -45,7 +46,7 @@ public class AddTaskCommand extends Command {
      * @return A String containing a user message, stating the task that was successfully added.
      */
     @Override
-    public String execute(TaskList list, Storage storage) {
+    public String execute(TaskList list, Storage storage) throws DuplicateTaskException {
         switch (this.type) {
         case TODO:
             Task newTodo = list.addTask(this.taskName);
