@@ -14,8 +14,8 @@ public class Event extends Task {
      * @param at          Time of Event.
      * @param isDone      true if event is over, false if event if in the future.
      */
-    public Event(String description, Date at, boolean isDone) {
-        super(description, TaskType.EVENT, isDone);
+    public Event(String description, Date at, boolean isDone, Priority priority) {
+        super(description, TaskType.EVENT, isDone, priority);
         this.at = at;
     }
 
@@ -31,7 +31,8 @@ public class Event extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " (at: " + Ui.formatDate(at) + ")";
+        return super.toString() + " (at: " + Ui.formatDate(at) + ")" + (priority == null ? "" :
+                " (priority: " + priority.toString() + ")");
     }
 
 }

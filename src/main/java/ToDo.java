@@ -3,7 +3,12 @@
  */
 public class ToDo extends Task {
 
-    public ToDo(String description, boolean isDone) {
-        super(description, TaskType.TODO, isDone);
+    public ToDo(String description, boolean isDone, Priority priority) {
+        super(description, TaskType.TODO, isDone, priority);
+    }
+
+    @Override
+    public String toString() {
+        return super.toString() + (priority == null ? "" : " (priority: " + priority.toString() + ")");
     }
 }

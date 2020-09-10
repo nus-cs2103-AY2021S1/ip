@@ -3,6 +3,8 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Scanner;
 
 /**
@@ -11,6 +13,13 @@ import java.util.Scanner;
 public class Storage {
 
     private final String filePath;
+    private final HashMap<String, Priority> priorityHashMap = new HashMap<>() {
+        {
+            put(Priority.HIGH.toString(), Priority.HIGH);
+            put(Priority.MEDIUM.toString(), Priority.MEDIUM);
+            put(Priority.LOW.toString(), Priority.LOW);
+        }
+    };
 
     public Storage(String filePath) {
         this.filePath = filePath;
@@ -25,21 +34,31 @@ public class Storage {
      */
     private Task addTaskFromStorage(String display) {
         String[] taskDetails = display.split(" \\| ");
-        assert taskDetails.length != 3 || taskDetails.length != 4: "Task saved wrongly - contains wrong number of " +
+        assert taskDetails.length != 4 || taskDetails.length != 5: "Task saved wrongly - " +
+                "contains wrong number of" +
+                " " +
                 "arguments.";
         String taskType = taskDetails[0];
+
         assert !taskDetails[1].equals("0") || !taskDetails[1].equals("1"): "Task saved wrongly - completion status " +
                 "should have been saved as a 0 or 1";
         boolean isDone = taskDetails[1].equals("1");
+
         String description = taskDetails[2];
+
         if (taskType.equals(TaskType.TODO.getSymbol())) {
-            return new ToDo(description, isDone);
+            Priority priority = priorityHashMap.get(taskDetails[3]);
+            return new ToDo(description, isDone, priority);
         } else if (taskType.equals(TaskType.DEADLINE.getSymbol())) {
-            assert taskDetails.length != 4: "Task saved wrongly - contains wrong number of arguments.";
-            return new Deadline(description, Parser.parseDate(taskDetails[3]), isDone);
+            assert taskDetails.length != 5: "Task saved wrongly - contains wrong number of arguments.";
+            Date date = Parser.parseDate(taskDetails[3]);
+            Priority priority = priorityHashMap.get(taskDetails[4]);
+            return new Deadline(description, date, isDone, priority);
         } else if (taskType.equals(TaskType.EVENT.getSymbol())) {
-            assert taskDetails.length != 4: "Task saved wrongly - contains wrong number of arguments.";
-            return new Deadline(description, Parser.parseDate(taskDetails[3]), isDone);
+            assert taskDetails.length != 5: "Task saved wrongly - contains wrong number of arguments.";
+            Date date = Parser.parseDate(taskDetails[3]);
+            Priority priority = priorityHashMap.get(taskDetails[4]);
+            return new Deadline(description, date, isDone, priority);
         } else {
             assert true: "Task saved wrongly - task type could not be identified";
             return null; // will not reach this

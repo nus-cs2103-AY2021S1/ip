@@ -14,8 +14,8 @@ public class Deadline extends Task {
      * @param by          Due time of deadline.
      * @param isDone      True if completed, false if yet to be completed.
      */
-    public Deadline(String description, Date by, boolean isDone) {
-        super(description, TaskType.DEADLINE, isDone);
+    public Deadline(String description, Date by, boolean isDone, Priority priority) {
+        super(description, TaskType.DEADLINE, isDone, priority);
         this.by = by;
     }
 
@@ -31,6 +31,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        return super.toString() + " (by: " + Ui.formatDate(by) + ")";
+        return super.toString() + " (by: " + Ui.formatDate(by) + ")" + (priority == null ? "" :
+                " (priority: " + priority.toString() + ")");
     }
 }

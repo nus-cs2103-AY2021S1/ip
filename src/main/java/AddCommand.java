@@ -10,6 +10,7 @@ public class AddCommand extends Command {
     private final TaskType taskType;
     private final String description;
     private final Date date;
+    private Priority priority;
 
     /**
      * Creates a new AddCommand.
@@ -18,19 +19,20 @@ public class AddCommand extends Command {
      * @param description Description of Task to be added.
      * @param date        Date of Task if applicable.
      */
-    public AddCommand(TaskType taskType, String description, Date date) {
+    public AddCommand(TaskType taskType, String description, Date date, Priority priority) {
         this.taskType = taskType;
         this.description = description;
         this.date = date;
+        this.priority = priority;
     }
 
     private Task createNewTask() {
         if (taskType == TaskType.TODO) {
-            return new ToDo(description, false);
+            return new ToDo(description, false, priority);
         } else if (taskType == TaskType.DEADLINE) {
-            return new Deadline(description, date, false);
+            return new Deadline(description, date, false, priority);
         } else if (taskType == TaskType.EVENT) {
-            return new Event(description, date, false);
+            return new Event(description, date, false, priority);
         } else {
             return null;
         }
