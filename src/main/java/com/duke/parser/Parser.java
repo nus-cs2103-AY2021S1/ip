@@ -118,6 +118,9 @@ public class Parser {
      */
     public static boolean isRecurringTask(String input) {
         String[] inputArr = input.split(" ", 2);
+        if (inputArr.length != 2) {
+            return false;
+        }
         String taskAndInterval = inputArr[1];
         String[] taskAndIntervalArr = taskAndInterval.split(" /");
         boolean isRecurring = inputArr[0].equals("recurring");

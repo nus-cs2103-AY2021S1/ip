@@ -2,7 +2,6 @@ package com.duke.gui;
 import java.io.IOException;
 
 import com.duke.Duke;
-import com.duke.gui.controllers.DialogBox;
 import com.duke.gui.controllers.MainWindow;
 
 import javafx.application.Application;
