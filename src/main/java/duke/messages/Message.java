@@ -16,7 +16,7 @@ public class Message {
     public static final String MESSAGE_ADD_TASK = "Awesome-O added this task:";
     public static final String MESSAGE_FIND_TASKS_INTRO = "Here are the tasks that match the keyword:";
     public static final String MESSAGE_NO_MATCHING_TASKS = "No matching tasks!";
-    public static final String MESSAGE_SCHEDULE_INTRO = "Here are the tasks scheduled on this day:";
+    public static final String MESSAGE_SCHEDULE_INTRO = "Awesome-O shows you the tasks scheduled on this day:";
     public static final String MESSAGE_NO_SCHEDULED_TASKS = "No tasks scheduled on this day!";
     public static final String MESSAGE_THANK_YOU = "Thank you for talking to Awesome-O.";
     public static final String MESSAGE_GOODBYE = "Awesome-O WILL MISS YOU.";
