@@ -1,10 +1,37 @@
+
+/**
+ * Duke is a bot that functions as a user's task manager.
+ */
 public class Duke {
-    public static void main(String[] args) {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println("Hello from\n" + logo);
+    private Ui ui;
+    private TaskList taskList;
+    private Storage storage;
+    private Parser parser;
+
+    /**
+     * Constructor that creates a Duke object.
+     * @param file the file task sessions will be saved in
+     */
+    public Duke(String file) {
+        this.ui = new Ui();
+        this.storage = new Storage(file);
+        this.taskList = new TaskList();
+        this.parser = new Parser(ui, taskList, storage);
+        storage.load(taskList, ui);
+    }
+
+    public Duke() {
+        this.ui = new Ui();
+        this.storage = new Storage(".//SAVED-TASKS.txt");
+        this.taskList = new TaskList();
+        this.parser = new Parser(ui, taskList, storage);
+        storage.load(taskList, ui);
+
+    }
+
+
+    public String getResponse(String input) {
+        return parser.action(input);
     }
 }
+
