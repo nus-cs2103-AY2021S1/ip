@@ -1,8 +1,5 @@
 TESTING:
 
-Yet to test:
-StorageManager, InputValidator, Commands
-
 Classes ignored for testing (and why):
 1. Duke
     Implementation under Duke is rather dependent on the other classes.
@@ -19,3 +16,6 @@ Classes ignored for testing (and why):
 
 5. GUI
     Not sure how to test
+
+6. StorageManager
+    Not very sure how to test the IO

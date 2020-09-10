@@ -22,7 +22,7 @@ public class CommonMethod {
         assert end <= array.length : "mergeArray - end index is out of bounds";
         assert start >= 0 && start < array.length : "mergeArray - start index out of bounds";
         StringBuilder output = new StringBuilder();
-        IntStream.range(0, end).forEach(i -> output.append(array[i]).append(" "));
+        IntStream.range(start, end).forEach(i -> output.append(array[i]).append(" "));
         return output.toString().trim();
     }
 

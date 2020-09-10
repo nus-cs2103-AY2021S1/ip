@@ -81,7 +81,7 @@ public class InputValidator {
             throws MissingFieldException, InvalidInstructionFormatException {
         assert instructionArray != null : "validateDescriptionAndDateTime array cannot be null";
 
-        if (index == -1 || index == 1) { // does not exist
+        if (index == -1) { // does not exist
             throw new InvalidInstructionFormatException();
         }
 
