@@ -166,7 +166,7 @@ public class Storage {
         boolean isDone = taskDataArr[1].substring(1, 2).equals("1");
         if (firstChar == 'T') {
             String description = taskDataArr[2].substring(1);
-            return new Todo(isDone, description));
+            return new Todo(isDone, description);
         } else if (firstChar == 'D') {
             String description = taskDataArr[2].substring(1, taskDataArr[2].length() - 1);
             String deadline = taskDataArr[3].substring(1);
@@ -175,6 +175,8 @@ public class Storage {
             String description = taskDataArr[2].substring(1, taskDataArr[2].length() - 1);
             String period = taskDataArr[3].substring(1);
             return new Event(isDone, description, period);
+        } else {
+            return null;
         }
     }
 }
