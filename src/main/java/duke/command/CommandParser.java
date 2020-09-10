@@ -62,7 +62,7 @@ public class CommandParser {
      * @throws InvalidSearchException If no valid search string is provided.
      */
     private static FindCommand parseFindCommand(String command) throws InvalidSearchException {
-        if (command.length() < 5 ) {
+        if (command.length() < 5) {
             throw new InvalidSearchException("Oh noes! I don't think you specified a search string :<");
         } else if (command.split(" ").length <= 1) {
             throw new InvalidSearchException("Oh noes! Please add a space before your search string :<");
