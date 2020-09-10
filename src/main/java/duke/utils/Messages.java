@@ -18,6 +18,7 @@ public class Messages {
     public static final String MESSAGE_FIND = "\t Here are the matching tasks in your list:\n";
     public static final String MESSAGE_LIST = "\t Here are the tasks in your list:\n";
     public static final String MESSAGE_TODAY = "\t Here are your tasks today:\n";
+    public static final String MESSAGE_CONFIRM = "\t Nice! I've confirmed the date for this event:\n";
 
     public static final String MESSAGE_INVALID_DATE_TIME = "OOPS! Invalid date / time format!";
     public static final String MESSAGE_EMPTY_DUE_DATE = "OOPS! The due date of deadline cannot be empty!";
@@ -32,6 +33,8 @@ public class Messages {
     public static final String MESSAGE_NO_SUCH_TASK = "OOPS! No such task exists!";
     public static final String MESSAGE_STORAGE_EXCEPTION = "OOPS! Error saving file.";
     public static final String MESSAGE_TASKLIST_TRANSLATOR_EXCEPTION = "OOPS! Error reading from file.";
+    public static final String MESSAGE_NO_SUCH_TENTATIVE_DATE_EXCEPTION = "OOPS! No such tentative date exists!";
+    public static final String MESSAGE_INVALID_COMMAND_FORMAT_EXCEPTION = "OOPS! The command format is wrong!";
 
     public static final String MESSAGE_HANDLED_INVALID_COMMAND_ASSERTION =
             "Invalid command scenario has been handled earlier.";
