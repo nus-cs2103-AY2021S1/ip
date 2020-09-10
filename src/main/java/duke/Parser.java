@@ -7,6 +7,7 @@ import duke.command.Commands;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.exception.DukeException;
 
@@ -42,6 +43,8 @@ public class Parser {
             return new ByeCommand();
         case LIST:
             return new ListCommand();
+        case HELP:
+            return new HelpCommand();
         case FIND:
             if (commandDetail.length < 2) {
                 throw new DukeException("Please key in a task to find!");

@@ -18,6 +18,16 @@ public class Ui {
     static final String TASK_FOUND_MESSAGE = "Here are the matching tasks in your list:";
     static final String LOADING_ERROR_MESSAGE = "Something went wrong when loading previously saved tasks!\n"
             + "Starting with an empty tasks list instead...";
+    static final String HELP_INTRO = "Here are the list of commands I support!";
+    static final String[] COMMANDS = {"list", "bye", "todo", "deadline", "event", "done", "find", "delete", "help"};
+    static final String LIST_HELP = "To list out all existing tasks, type 'list'.";
+    static final String BYE_HELP = "To exit the chat bot, type 'bye'.";
+    static final String TODO_HELP = "To add a new Todo, type 'todo <description>'.";
+    static final String DEADLINE_HELP = "To add a new Deadline, type 'deadline <description> /by <yyyy-MM-dd HH:mm>'.";
+    static final String EVENT_HELP = "To add a new Event, type 'event <description> /at <yyyy-MM-dd HH:mm>'.";
+    static final String DONE_HELP = "To mark a task as done, type 'done <taskId>'.";
+    static final String FIND_HELP = "To find all items containing a keyword in its description, type 'find <keyword>'.";
+    static final String DELETE_HELP = "To delete a task, type 'delete <taskId>'.";
 
     /**
      * Formats chat bot replies and returns them as a string.
@@ -121,6 +131,19 @@ public class Ui {
         return this.botReply(Ui.TASK_FOUND_MESSAGE, content);
     }
 
+    /**
+     * Returns a reply for the command help.
+     *
+     * @return chat bot reply.
+     */
+    public String replyHelp() {
+        StringBuilder commands = new StringBuilder();
+        for (String command : Ui.COMMANDS) {
+            commands.append(String.format("%s, ", command));
+        }
+        return this.botReply(Ui.HELP_INTRO, commands.toString().trim(), Ui.LIST_HELP, Ui.BYE_HELP,
+                Ui.TODO_HELP, Ui.DEADLINE_HELP, Ui.EVENT_HELP, Ui.DONE_HELP, Ui.FIND_HELP, Ui.DELETE_HELP);
+    }
     /**
      * Returns a reply formatted error message as a string.
      *

@@ -65,7 +65,7 @@ public class Storage {
         for (String task : this.tasks) {
             String[] split = task.split(" \\| ");
 
-            assert (split.length > 3) : "Tasks are being saved wrongly.";
+            assert (split.length >= 3) : "Tasks are being saved wrongly.";
 
             String type = split[0];
             assert (type.equals("T") || type.equals("D") || type.equals("E")) : "Tasks are being saved wrongly";
@@ -77,7 +77,7 @@ public class Storage {
                 tasks.add(new Todo(desc, isDone));
                 break;
             case "D":
-                assert (split.length > 4) : "Deadlines are being saved wrongly.";
+                assert (split.length == 4) : "Deadlines are being saved wrongly.";
 
                 String by = split[3].trim();
                 try {
@@ -87,7 +87,7 @@ public class Storage {
                 }
                 break;
             case "E":
-                assert (split.length > 4) : "Events are being saved wrongly.";
+                assert (split.length == 4) : "Events are being saved wrongly.";
 
                 String at = split[3].trim();
                 try {
