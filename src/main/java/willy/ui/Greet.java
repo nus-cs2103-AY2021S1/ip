@@ -6,10 +6,10 @@ package willy.ui;
 public class Greet {
     private String originalGreeting;
     private String greeting;
-    private String style = "\t________________________________________________________________\n";
-    private String startGreeting = "\tHello I'm Willy and I am here for u! \n" +
+    private final String STYLE = "\t________________________________________________________________\n";
+    private final String START_GREETING = "\tHello I'm Willy and I am here for u! \n" +
             "\tTell me what u need to do and I will help u keep track of it :)\n";
-    private String exitGreeting = "\t  Byee See you again soon!:)\n";
+    private final String EXIT_GREETING = "\t  Byee See you again soon!:)\n";
 
     public Greet() {
         this.originalGreeting = null;
@@ -24,11 +24,11 @@ public class Greet {
     @Override
     public String toString() {
         if (originalGreeting == null) {
-            greeting = startGreeting;
+            greeting = START_GREETING;
         } else if (originalGreeting.equals("bye")) {
-            greeting = exitGreeting;
+            greeting = EXIT_GREETING;
         }
-        String response = style + greeting + "\n" + style;
+        String response = STYLE + greeting + "\n" + STYLE;
         return response;
     }
 }

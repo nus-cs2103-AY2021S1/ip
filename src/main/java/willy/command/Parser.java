@@ -1,8 +1,11 @@
 package willy.command;
 
-import org.testng.remote.strprotocol.IMessage;
 import willy.exceptions.WillyException;
-import willy.task.*;
+import willy.task.TaskList;
+import willy.task.TaskSymbol;
+import willy.task.TodoTask;
+import willy.task.EventTask;
+import willy.task.DeadlineTask;
 import willy.ui.Greet;
 import willy.ui.Willy;
 
@@ -19,6 +22,11 @@ public class Parser {
         this.list = list;
     }
 
+    /**
+     * Creates the various types of Tasks to be added to the list.
+     * @param message Input by the user.
+     * @return String version of the task being added to the list.
+     */
     private String taskCreator(String message) {
         String response = "";
         if (message.contains("todo")) {
@@ -28,7 +36,7 @@ public class Parser {
                     WillyException error = new WillyException(NO_TASK_MESSAGE);
                     response = error.toString();
                 } else {
-                    ToDoTask newTask = new ToDoTask(activity, TaskSymbol.TODO);
+                    TodoTask newTask = new TodoTask(activity, TaskSymbol.TODO);
                     response = list.addToList(newTask);
                 }
             } catch (Exception e) {
@@ -58,7 +66,7 @@ public class Parser {
                 int separatorIndex = message.indexOf("/");
                 String activity = message.substring(6, separatorIndex - 1);
                 String duration = message.substring(separatorIndex + 4);
-                EventsTask newTask = new EventsTask(duration, activity, TaskSymbol.EVENT);
+                EventTask newTask = new EventTask(duration, activity, TaskSymbol.EVENT);
                 response = list.addToList(newTask);
             } catch (Exception e) {
                 WillyException error = new WillyException(MISSING_INFO_MESSAGE);
@@ -68,7 +76,12 @@ public class Parser {
         }
         return response;
     }
-
+    /**
+     * Edit Tasks in the List by replacing it with a new version of the task.
+     * @param taskNum Number representing the task in the list that is selected to be edited.
+     * @param message Input by the user.
+     * @return String version of the task that will replace the old task in the list.
+     */
     private String taskEditor(int taskNum, String message) {
         String response = "";
         if (message.contains("todo")) {
@@ -78,7 +91,7 @@ public class Parser {
                     WillyException error = new WillyException(NO_TASK_MESSAGE);
                     response = error.toString();
                 } else {
-                    ToDoTask newTask = new ToDoTask(activity, TaskSymbol.TODO);
+                    TodoTask newTask = new TodoTask(activity, TaskSymbol.TODO);
                     response = list.updateTask(taskNum, newTask);
                 }
             } catch (Exception e) {
@@ -108,7 +121,7 @@ public class Parser {
                 int separatorIndex = message.indexOf("/");
                 String activity = message.substring(6, separatorIndex - 1);
                 String duration = message.substring(separatorIndex + 4);
-                EventsTask newTask = new EventsTask(duration, activity, TaskSymbol.EVENT);
+                EventTask newTask = new EventTask(duration, activity, TaskSymbol.EVENT);
                 response = list.updateTask(taskNum, newTask);
             } catch (Exception e) {
                 WillyException error = new WillyException(MISSING_INFO_MESSAGE);

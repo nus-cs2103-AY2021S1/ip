@@ -6,11 +6,11 @@ import java.time.format.DateTimeFormatter;
 /**
  * A type of Task that spans over a period.
  */
-public class EventsTask extends Task {
+public class EventTask extends Task {
     private String stringPeriod;
     private LocalDateTime period;
 
-    public EventsTask(String period, String task, TaskSymbol taskType) {
+    public EventTask(String period, String task, TaskSymbol taskType) {
         super(task, taskType);
         this.stringPeriod = period;
         this.period = LocalDateTime.parse(period,
