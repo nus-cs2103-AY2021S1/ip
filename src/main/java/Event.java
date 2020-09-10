@@ -1,7 +1,7 @@
 import java.time.LocalDateTime;
 
 public class Event extends Task {
-    /** Time duration of Event */
+    /** Time duration of Event. */
     protected String at;
 
     /** Start datetime of the Event. */
@@ -30,6 +30,8 @@ public class Event extends Task {
             } else {
                 throw new DukeException("invalidEventChronology");
             }
+        } catch (DukeException e) {
+            throw e;
         } catch (Exception e) {
             throw new DukeException("invalidEventDateTime");
         }
@@ -45,9 +47,9 @@ public class Event extends Task {
     }
 
     /**
-     * Returns the task string to be written to the duke.txt storage file.
+     * Returns the Event task string to be written to the duke.txt storage file.
      *
-     * @return task string.
+     * @return Event task string.
      */
     public String toStorageString() {
         return "[E]" + super.toStorageString() + " (at: " + this.at + ")";

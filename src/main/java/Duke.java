@@ -5,78 +5,79 @@ public class Duke {
     /** Object containing the list of tasks. */
     private TaskList tasks;
 
-    /** Object dealing with interactions with user. */
-    private final Ui ui;
-
     /**
      * Constructs new Duke object.
      *
      * @param filePath Destination path of the duke.txt storage file.
      */
     public Duke(String filePath) {
-        ui = new Ui();
         storage = new Storage(filePath);
         tasks = new TaskList(storage.load());
     }
 
     /**
      * Runs the Duke application with the basic logic.
+     *
+     * @param command User command.
+     * @return Duke's response.
      */
-    public void run() {
-        ui.opening();
-        String command = ui.userInput();
-
-        while (!command.equals("bye")) {
-            ui.showLine();
-
-            if (command.equals("list")) {
-                tasks.printList();
-            } else {
-                String action = Parser.getAction(command);
-                switch (action) {
-                case "done":
-                    tasks.done(command);
-                    break;
-                case "todo":
-                    tasks.newToDo(command);
-                    break;
-                case "deadline":
-                    tasks.newDeadline(command);
-                    break;
-                case "event":
-                    tasks.newEvent(command);
-                    break;
-                case "delete":
-                    tasks.delete(command);
-                    break;
-                case "find":
-                    tasks.find(command);
-                    break;
-                default:
-                    tasks.defaultError();
-                }
-                storage.save(tasks.getTasks());
-            }
-            ui.showLine();
-            command = ui.userInput();
+    public String run(String command) {
+        String response;
+        String action = Parser.getAction(command);
+        switch (action) {
+        case "list":
+            response = tasks.printList();
+            break;
+        case "done":
+            response = tasks.done(command);
+            break;
+        case "todo":
+            response = tasks.newToDo(command);
+            break;
+        case "deadline":
+            response = tasks.newDeadline(command);
+            break;
+        case "event":
+            response = tasks.newEvent(command);
+            break;
+        case "delete":
+            response = tasks.delete(command);
+            break;
+        case "find":
+            response = tasks.find(command);
+            break;
+        default:
+            response = tasks.defaultError();
         }
-        ui.closing();
+        storage.save(tasks.getTasks());
+        return response;
     }
 
     /**
-     * You should have your own function to generate a response to user input.
-     * Replace this stub with your completed method.
+     * Retrieves the opening lines of Duke.
+     *
+     * @return Opening lines when user starts the application.
      */
-    public String getResponse(String input) {
-        return "Duke heard: " + input;
+    public String getOpening() {
+        return Ui.opening();
     }
 
-//    /**
-//     * Starts the Duke application.
-//     *
-//     * @param args Typical String[] argument.
-//     */
-//    public static void main(String[] args) {
-//        new Duke(Storage.getFilePath()).run();
-//    }
+    /**
+     * Retrieves the closing lines of Duke.
+     *
+     * @return Closing lines when user ends the application.
+     */
+    public String getClosing() {
+        return Ui.closing();
+    }
+
+    /**
+     * Retrieves Duke's response via a wrapper method.
+     *
+     * @param input User command.
+     * @return Duke response.
+     */
+    public String getResponse(String input) {
+        return this.run(input);
+    }
 }
