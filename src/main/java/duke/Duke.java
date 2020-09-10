@@ -28,29 +28,27 @@ public class Duke {
         case EXIT:
             return StringConstants.EXIT_MESSAGE;
         case LIST:
-            return StringConstants.joinStrings(userTaskList.getTasksAsStrings());
+            return saveTaskListAndJoinMessages(userTaskList.getTasksAsStrings());
         case DONE:
             int doneIndex = Parser.getTaskIndex(userInput);
-            String[] doneMessages = userTaskList.markTaskDoneAtIndex(doneIndex);
-            userTaskList.saveTaskList();
-            return StringConstants.joinStrings(doneMessages);
+            return saveTaskListAndJoinMessages(userTaskList.markTaskDoneAtIndex(doneIndex));
         case DELETE:
             int deleteIndex = Parser.getTaskIndex(userInput);
-            String[] deleteMessages = userTaskList.deleteTaskAtIndex(deleteIndex);
-            userTaskList.saveTaskList();
-            return StringConstants.joinStrings(deleteMessages);
+            return saveTaskListAndJoinMessages(userTaskList.deleteTaskAtIndex(deleteIndex));
         case TODO:
         case DEADLINE:
         case EVENT:
-            String[] addMessages = userTaskList.addTask(userInput, userCommandType);
-            userTaskList.saveTaskList();
-            return StringConstants.joinStrings(addMessages);
+            return saveTaskListAndJoinMessages(userTaskList.addTask(userInput, userCommandType));
         case FIND:
-            String[] findMessages = userTaskList.find(userInput);
-            return StringConstants.joinStrings(findMessages);
+            return saveTaskListAndJoinMessages(userTaskList.find(userInput));
         default:
             return "Error";
         }
+    }
+
+    private String saveTaskListAndJoinMessages(String[] messages) throws IOException {
+        userTaskList.saveTaskList();
+        return StringConstants.joinStrings(messages);
     }
 
 }
