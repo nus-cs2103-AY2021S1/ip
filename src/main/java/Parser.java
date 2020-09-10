@@ -1,7 +1,7 @@
 import java.time.LocalDate;
 
 /**
- * deals with making sense of the user command.
+ * Deals with making sense of the user command.
  */
 public class Parser {
     protected int location;
@@ -14,7 +14,7 @@ public class Parser {
     protected boolean isFinished;
 
     /**
-     * creates a new parser and initialized the state to false.
+     * Creates a new parser and initialized the state to false.
      * @param tasks the task list that will be implemented
      */
     public Parser(TaskList tasks) {

@@ -4,7 +4,7 @@ import java.time.LocalDate;
 import java.util.Scanner;
 
 /**
- * deals with loading tasks from the file and saving tasks in the file.
+ * Deals with loading tasks from the file and saving tasks in the file.
  */
 public class Storage {
     protected String path;
@@ -12,7 +12,7 @@ public class Storage {
     protected boolean isCreated;
 
     /**
-     *  creates a new storage with a file path.
+     *  Creates a new storage with a file path.
      * @param path file path to the storage file
      */
     public Storage(String path) {
@@ -21,7 +21,7 @@ public class Storage {
     }
 
     /**
-     * saves all of the tasks in the task list into the storage file.
+     * Saves all of the tasks in the task list into the storage file.
      * @param tasks list of tasks to be saved
      * @throws java.io.IOException possible exception when creating the file
      */
@@ -37,7 +37,7 @@ public class Storage {
     }
 
     /**
-     * loads all of the tasks stored in the file to a task list.
+     * Loads all of the tasks stored in the file to a task list.
      * @param tasks the list that tasks will be loaded to
      * @throws java.io.IOException possible exception when creating the file
      */
