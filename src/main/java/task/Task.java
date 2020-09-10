@@ -15,6 +15,7 @@ public abstract class Task {
 
 
     protected Task(String item) throws EmptyStringException{
+        assert item != null;
         this();
         if(item.isBlank()){
             throw new EmptyStringException("Task cannot be empty.");
