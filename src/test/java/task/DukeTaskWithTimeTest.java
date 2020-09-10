@@ -20,6 +20,6 @@ public class DukeTaskWithTimeTest {
         DateTimeFormatter df = DateTimeFormatter.ofPattern(CommonString.DUKE_DATETIME_FORMAT.toString());
         DukeTaskWithTime task = new DukeTaskWithTimeStub("TESTING", dateTime);
 
-        assertEquals(task.getDateTime(), df.format(dateTime));
+        assertEquals(task.getDateTimeString(), df.format(dateTime));
     }
 }

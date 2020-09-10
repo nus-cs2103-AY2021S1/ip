@@ -16,6 +16,6 @@ public class DeadlineTask extends DukeTaskWithTime {
 
     @Override
     public String toString() {
-        return "[D]" + super.toString() + String.format(" (by: %s)", getDateTime());
+        return "[D]" + super.toString() + String.format(" (by: %s)", getDateTimeString());
     }
 }

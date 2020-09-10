@@ -24,9 +24,17 @@ public abstract class DukeTaskWithTime extends DukeTask {
      *
      * @return String DateTime.
      */
-    public String getDateTime() {
+    public String getDateTimeString() {
         assert datetime != null : "DukeTaskWithTime dateTime cannot be null";
         DateTimeFormatter df = DateTimeFormatter.ofPattern(CommonString.DUKE_DATETIME_FORMAT.toString());
         return datetime.format(df);
+    }
+
+    /**
+     * Returns a <code>LocalDateTime</code> representing Date and Time of the task.
+     * @return LocalDateTime datetime.
+     */
+    public LocalDateTime getDateTime() {
+        return datetime;
     }
 }

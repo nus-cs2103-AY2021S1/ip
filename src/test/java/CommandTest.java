@@ -12,6 +12,7 @@ import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.exception.DukeIoException;
+import duke.exception.InvalidInstructionFormatException;
 import duke.exception.InvalidTaskIndexException;
 import duke.exception.TaskDoneException;
 import duke.logic.TaskList;
@@ -25,7 +26,8 @@ import stub.CommandStub;
 
 public class CommandTest {
     @Test
-    public void mainCommandTest() throws InvalidTaskIndexException, DukeIoException, TaskDoneException {
+    public void mainCommandTest() throws InvalidTaskIndexException,
+            DukeIoException, TaskDoneException, InvalidInstructionFormatException {
         Command command = new CommandStub();
         assertEquals(command.getResponse(), "");
         assertFalse(command.getExitStatus());

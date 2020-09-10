@@ -223,6 +223,30 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
     }
 
     /**
+     * Prints Tasks sorted by SortCommand.
+     * Method implemented from CommandInteractionUi interface.
+     */
+    public void printSortList(String tag, boolean isPlural) {
+        assert tag != null : "printSortList tag cannot be null";
+
+        System.out.println(getSortList(tag, isPlural));
+    }
+
+    /**
+     * Returns String representation of response from find command.
+     * Method implemented from CommandInteractionUi interface.
+     *
+     * @param tag String containing type of Tasks sorted.
+     * @return String
+     */
+    public String getSortList(String tag, boolean isPlural) {
+        assert tag != null : "getSortList tag cannot be null";
+
+        return "...*yawns*...I sorted " + (isPlural ? "some tasks" : "a task")
+                + " that are of type: " + "\"" + tag + "\"\n";
+    }
+
+    /**
      * Prints number of tasks users have in their list.
      * Method implemented from CommandInteractionUi interface.
      */
@@ -272,13 +296,15 @@ public class UiManager implements UserInteractionUi, CommandInteractionUi {
                 + " delete [Task Number] - Deletes the task number\n"
                 + " \t(Specify in numeric format!) Eg: \"delete 3\"\n"
                 + " find [keyword] - Finds related Tasks containing the keyword\n"
+                + " sort [tag] - Sorts the tasks with the tag\n"
                 + "* SEE TASK INPUT INSTRUCTIONS FOR MORE ABOUT TASKS", false),
 
         TaskInputInstruction("TASK INPUT INSTRUCTIONS:\n"
                 + "PLEASE AVOID USING THE VERTICAL BAR \"|\" IN YOUR TASK INSTRUCTIONS\n"
                 + " todo [Task Description] - Inputs a TODO DukeTask\n"
                 + " deadline [Task Description] /by [Date] - Inputs a DEADLINE DukeTask, using INDICATOR /by\n"
-                + " event [Task Description] /at [Date] - Inputs an EVENT DukeTask, using INDICATOR /at", false),
+                + " event [Task Description] /at [Date] - Inputs an EVENT DukeTask, using INDICATOR /at\n"
+                + " sort [tag] - TAGS are: \"all\", \"deadline\" or \"event\"", false),
 
         TaskInputSpecification("TO NOTE:\n"
                 + "FORMAT FOR DATE: \"DD/MM/YYYY hh/mm/ss\"\n"
