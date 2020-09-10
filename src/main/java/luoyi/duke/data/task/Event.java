@@ -3,7 +3,7 @@ package luoyi.duke.data.task;
 import luoyi.duke.common.TimeWrapper;
 
 /**
- * An Event class.
+ * An immutable Event class.
  * An Event is a task that start at a specific time and ends at a specific time.
  */
 public class Event extends TimedTask {
@@ -36,10 +36,6 @@ public class Event extends TimedTask {
     @Override
     public String getDataString() {
         return String.format("E|%d|%s|%s", isDone ? 1 : 0, description, time);
-    }
-
-    public boolean isSameTime(String date) {
-        return time.equals(TimeWrapper.getTimeWrapper(date));
     }
 
     @Override

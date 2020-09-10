@@ -55,17 +55,21 @@ public class Parser {
             return parseHelpCommand(commandStr);
         } else if (commandStr.matches("^sort.*")) {
             // Handle sort command
-            if (commandStr.equals("sort time")) {
-                return SortCommand.getSortCommand(SortType.TIME);
-            } else if (commandStr.equals("sort description")) {
-                return SortCommand.getSortCommand(SortType.DESCRIPTION);
-            }
-            throw new DukeIllegalArgumentException(
-                    Message.ERR_WRONG_SORT_CMD.toString());
+            return parseSortCommand(commandStr);
         } else if (commandStr.equals("bye")) {
             return ByeCommand.getByeCommand();
         }
         throw new DukeUnrecognizedArgumentException(Message.ERR_WRONG_CMD.toString());
+    }
+
+    private static SortCommand parseSortCommand(String commandStr) {
+        if (commandStr.equals("sort time")) {
+            return SortCommand.getSortCommand(SortType.TIME);
+        } else if (commandStr.equals("sort description")) {
+            return SortCommand.getSortCommand(SortType.DESCRIPTION);
+        }
+        throw new DukeIllegalArgumentException(
+                Message.ERR_WRONG_SORT_CMD.toString());
     }
 
     private static HelpCommand parseHelpCommand(String commandStr) {
@@ -139,6 +143,5 @@ public class Parser {
         }
         return ListCommand.getListCommand(commandStr.split(" ", 2)[1]);
     }
-
 
 }

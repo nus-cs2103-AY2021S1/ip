@@ -3,7 +3,7 @@ package luoyi.duke.data.task;
 import luoyi.duke.common.TimeWrapper;
 
 /**
- * A Deadline class.
+ * An Immutable Deadline class.
  * A Deadline is a task that needs to be done before a specific date/time.
  */
 public class Deadline extends TimedTask {

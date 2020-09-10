@@ -7,15 +7,15 @@ import java.util.List;
  * TaskList class to encapsulate a list of tasks.
  */
 public class TaskList {
-    private final List<ITask> list;
+    private final List<ITask> taskList;
 
     /**
      * Returns a TaskList using a list of tasks.
      *
-     * @param list A list of tasks.
+     * @param taskList A list of tasks.
      */
-    public TaskList(List<ITask> list) {
-        this.list = new ArrayList<>(list);
+    public TaskList(List<ITask> taskList) {
+        this.taskList = new ArrayList<>(taskList);
     }
 
     /**
@@ -24,7 +24,7 @@ public class TaskList {
      * @param task Task to be added.
      */
     public void add(ITask task) {
-        list.add(task);
+        taskList.add(task);
     }
 
     /**
@@ -33,7 +33,7 @@ public class TaskList {
      * @param index Task index to be removed.
      */
     public void remove(int index) {
-        list.remove(index);
+        taskList.remove(index);
     }
 
     /**
@@ -43,7 +43,7 @@ public class TaskList {
      * @param newTask Task used to replace the old task.
      */
     public void replace(int index, ITask newTask) {
-        list.set(index, newTask);
+        taskList.set(index, newTask);
     }
 
     /**
@@ -53,7 +53,7 @@ public class TaskList {
      * @return The task at index {@code index}.
      */
     public ITask get(int index) {
-        return list.get(index);
+        return taskList.get(index);
     }
 
     /**
@@ -62,7 +62,7 @@ public class TaskList {
      * @return Size of the task list.
      */
     public int size() {
-        return list.size();
+        return taskList.size();
     }
 
     /**
@@ -71,6 +71,6 @@ public class TaskList {
      * @return List stored in the task list.
      */
     public List<ITask> getList() {
-        return list;
+        return taskList;
     }
 }

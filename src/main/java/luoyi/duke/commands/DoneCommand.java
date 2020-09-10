@@ -57,9 +57,9 @@ public class DoneCommand extends Command {
         if (index < 1 || index > duke.getNumTask()) {
             throw new DukeIllegalArgumentException("Task index out of bound!");
         }
+        doneTask(index);
         String output = Message.MARKED_DONE.toString() + duke.getTask(index);
         System.out.print(TextFormatter.getFormattedText(output));
-        doneTask(index);
         return output;
     }
 

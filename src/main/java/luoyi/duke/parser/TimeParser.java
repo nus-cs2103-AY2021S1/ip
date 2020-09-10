@@ -8,7 +8,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 /**
- * Encapsulate parsing of time string to get LocalDate or LocalTime.
+ * Encapsulate custom parsing of time string to get LocalDate or LocalTime.
  */
 public class TimeParser {
     // Accept YYYYMMDD, DDMMYYYY

@@ -75,9 +75,9 @@ public class UiTest {
         Ui.displayTasks(list);
         String expectedOutput = "------------------------------------------------------------------\n"
                 + "|\tHere are the tasks in your list:\n"
-                + "|\t 1. [T][X] Have lunch.\n"
-                + "|\t 2. [D][X] Homework (by: 2020-11-11)\n"
-                + "|\t 3. [E][V] Tutorial (at: 2020-11-11T11:22)\n"
+                + "|\t 1. [T][\u2718] Have lunch.\n"
+                + "|\t 2. [D][\u2718] Homework (by: 2020-11-11)\n"
+                + "|\t 3. [E][\u2713] Tutorial (at: 2020-11-11T11:22)\n"
                 + "------------------------------------------------------------------\n";
         assertEquals(expectedOutput, outContent.toString());
     }
@@ -88,8 +88,8 @@ public class UiTest {
         Ui.displayTasks(list, new int[]{2, 3});
         String expectedOutput = "------------------------------------------------------------------\n"
                 + "|\tHere are the task on you are looking for:\n"
-                + "|\t 3. [E][V] Tutorial (at: 2020-11-11T11:22)\n"
-                + "|\t 4. [E][V] Lecture (at: 2020-11-12T10:45)\n"
+                + "|\t 3. [E][\u2713] Tutorial (at: 2020-11-11T11:22)\n"
+                + "|\t 4. [E][\u2713] Lecture (at: 2020-11-12T10:45)\n"
                 + "------------------------------------------------------------------\n";
         assertEquals(expectedOutput, outContent.toString());
     }

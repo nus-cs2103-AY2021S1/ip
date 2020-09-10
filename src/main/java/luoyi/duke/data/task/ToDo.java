@@ -5,7 +5,7 @@ import java.util.Optional;
 import luoyi.duke.common.TimeWrapper;
 
 /**
- * ToDo class.
+ * Immutable ToDo class.
  * A ToDo is a task without any date/time attached to it.
  */
 public class ToDo extends Task {

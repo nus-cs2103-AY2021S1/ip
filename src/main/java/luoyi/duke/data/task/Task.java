@@ -30,20 +30,12 @@ public abstract class Task implements ITask {
      * {@inheritDoc}
      */
     @Override
-    public String getDataString() {
-        return String.format("Ta|%d|%s", isDone ? 1 : 0, description);
-    }
-
-    /**
-     * {@inheritDoc}
-     */
-    @Override
     public String getDescription() {
         return description;
     }
 
     @Override
     public String toString() {
-        return String.format("[%s] %s", isDone ? "V" : "X", description);
+        return String.format("[%s] %s", isDone ? "\u2713" : "\u2718", description);
     }
 }

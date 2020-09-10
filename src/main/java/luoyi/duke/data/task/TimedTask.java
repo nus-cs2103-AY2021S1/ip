@@ -22,6 +22,9 @@ public abstract class TimedTask extends Task {
         this.time = time;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public Optional<TimeWrapper> getTime() {
         return Optional.ofNullable(time);
