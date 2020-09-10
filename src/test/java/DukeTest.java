@@ -1,22 +1,19 @@
-import Duke.Deadline;
-import Duke.Event;
-import Duke.Task;
-import Duke.TaskList;
-import Duke.ToDo;
-import Duke.Parser;
-import Duke.DukeException;
-
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
-import org.junit.jupiter.api.Test;
-
-import java.io.ByteArrayInputStream;
+import converter.Parser;
+import exception.DukeException;
 import java.io.ByteArrayOutputStream;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Arrays;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import task.Deadline;
+import task.Event;
+import task.Task;
+import task.TaskList;
+import task.ToDo;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 

@@ -1,4 +1,4 @@
-package Duke;
+package application;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -13,6 +13,12 @@ public class DialogBox extends HBox {
     private Label text;
     private ImageView displayPicture;
 
+    /**
+     * Create DialogBox when user makes an input to be previewed.
+     *
+     * @param l Label to display.
+     * @param iv Image to attach to display.
+     */
     public DialogBox(Label l, ImageView iv) {
         text = l;
         displayPicture = iv;
