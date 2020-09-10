@@ -1,20 +1,20 @@
 import java.util.ArrayList;
 
 /**
- * contains the task list.
+ * Contains the task list.
  */
 public class TaskList {
     protected ArrayList<Task> tasks;
 
     /**
-     * creates a new task list.
+     * Creates a new task list.
      */
     public TaskList() {
         tasks = new ArrayList<>();
     }
 
     /**
-     * counts the number of tasks in the list.
+     * Counts the number of tasks in the list.
      * @return number of tasks
      */
     public int count() {
@@ -22,7 +22,7 @@ public class TaskList {
     }
 
     /**
-     * returns the task at the specific position.
+     * Returns the task at the specific position.
      * @param index the position of the task
      * @return the specified task
      */
@@ -39,7 +39,7 @@ public class TaskList {
     }
 
     /**
-     * delete a task from the list.
+     * Delete a task from the list.
      * @param number the index of the task to be removed
      */
     public void deleteTask(int number) {
@@ -47,7 +47,7 @@ public class TaskList {
     }
 
     /**
-     * finds all of the tasks that contain the keyword.
+     * Finds all of the tasks that contain the keyword.
      * @param word the keyword
      * @return a list of matching tasks
      */

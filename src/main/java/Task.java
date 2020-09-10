@@ -1,12 +1,12 @@
 /**
- * represents a task that has a description and a state of whether it has been done.
+ * Represents a task that has a description and a state of whether it has been done.
  */
 public class Task {
     protected String description;
     protected boolean isDone;
 
     /**
-     * creates a new task with the state of not being done.
+     * Creates a new task with the state of not being done.
      * @param description the description of the task.
      */
     public Task(String description) {
@@ -15,7 +15,7 @@ public class Task {
     }
 
     /**
-     * gets the status icon for this task.
+     * Gets the status icon for this task.
      * @return tick if it has been done and cross if it has not been done yet.
      */
     public String getStatusIcon() {
@@ -23,7 +23,7 @@ public class Task {
     }
 
     /**
-     * returns the description of the task.
+     * Returns the description of the task.
      * @return description of the task
      */
     public String getDescription() {
@@ -31,7 +31,7 @@ public class Task {
     }
 
     /**
-     * marks the task as done.
+     * Marks the task as done.
      */
     public void markAsDone() {
         isDone = true;
@@ -43,7 +43,7 @@ public class Task {
     }
 
     /**
-     * converts the task to string to store in the file
+     * Converts the task to string to store in the file
      * @return string to write into the storage file
      */
     public String toSave() {

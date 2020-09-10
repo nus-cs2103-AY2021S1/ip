@@ -1,5 +1,5 @@
 /**
- * handles errors in Duke.
+ * Handles errors in Duke.
  */
 public class DukeException extends Exception {
 

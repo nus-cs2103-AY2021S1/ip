@@ -2,14 +2,14 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
- * represents a deadline task that has a description, a date, and a state of whether it has been done.
+ * Represents a deadline task that has a description, a date, and a state of whether it has been done.
  */
 public class Deadline extends Task {
 
     protected LocalDate by;
 
     /**
-     * creates a new deadline task.
+     * Creates a new deadline task.
      * @param description the description of the deadline task
      * @param by the date by when the task should have been finished
      */

@@ -1,7 +1,7 @@
 import java.util.Scanner;
 
 /**
- * deals with interactions with the user.
+ * Deals with interactions with the user.
  */
 public class Ui {
 
@@ -10,7 +10,7 @@ public class Ui {
     protected Scanner scanner;
 
     /**
-     * creates a new ui with a task list and initiates the scanner and command.
+     * Creates a new ui with a task list and initiates the scanner and command.
      * @param tasks the task list to be implemented
      */
     public Ui(TaskList tasks) {
@@ -28,7 +28,7 @@ public class Ui {
     }
 
     /**
-     * reads the command from the user.
+     * Reads the command from the user.
      * @return a string array command[2]. command[0] represents type and command[1] represents description.
      */
     public String[] read() {
@@ -42,7 +42,7 @@ public class Ui {
     }
 
     /**
-     * lists out all the tasks in the task list.
+     * Lists out all the tasks in the task list.
      */
     public String list() {
         StringBuilder builder = new StringBuilder();
@@ -54,7 +54,7 @@ public class Ui {
     }
 
     /**
-     * lists out all the tasks in the matching task list.
+     * Lists out all the tasks in the matching task list.
      * @param taskList a task list that contains all the matching tasks.
      */
     public String find(TaskList taskList) {
