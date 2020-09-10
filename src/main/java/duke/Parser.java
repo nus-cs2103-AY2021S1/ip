@@ -27,6 +27,7 @@ public class Parser {
      * @throws InvalidCommandException if user command is not recognised
      */
     public static UserCommandType parseUserCommand(String command) throws InvalidCommandException {
+        assert command != null : "Command is null";
         if (command.equals(LIST_COMMAND)) {
             return UserCommandType.LIST;
         } else if (command.equals(EXIT_COMMAND)) {
@@ -55,6 +56,7 @@ public class Parser {
      * @throws InvalidCommandException if command syntax is unrecognised
      */
     public static String[] parseTask(String command) throws InvalidCommandException {
+        assert command != null : "Command is null";
         String[] components = command.split(" ");
         String taskType = components[0];
 
@@ -92,6 +94,7 @@ public class Parser {
      * @throws InvalidCommandException if cannot parse dateString
      */
     public static LocalDateTime parseDateTime(String dateString) throws InvalidCommandException {
+        assert dateString != null : "dateString is null";
         try {
             return LocalDateTime.parse(dateString, dateTimeFormatter);
         } catch (DateTimeParseException exception) {
@@ -107,6 +110,7 @@ public class Parser {
      * @throws InvalidCommandException if command syntax is invalid
      */
     public static int getTaskIndex(String command) throws InvalidCommandException {
+        assert command != null : "Command is null";
         String[] components = command.split(" ");
         if (components.length != 2) {
             throw new InvalidCommandException("Done command should have 2 components");
@@ -121,6 +125,7 @@ public class Parser {
      * @throws InvalidCommandException if keyword string not provided
      */
     public static String getFindKeyWordString(String command) throws InvalidCommandException {
+        assert command != null : "Command is null";
         String[] components = command.split(" ");
         if (components.length < 2) {
             throw new InvalidCommandException("Done command should have 2 components");

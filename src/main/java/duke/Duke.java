@@ -42,7 +42,7 @@ public class Duke {
         case FIND:
             return saveTaskListAndJoinMessages(userTaskList.find(userInput));
         default:
-            return "Error";
+            return "Error: Unrecognised command type";
         }
     }
 
