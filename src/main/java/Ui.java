@@ -9,7 +9,9 @@ public class Ui {
     private final static String MSG_DELETED_TASK = "Noted. I've removed this task:\n";
     private final static String MSG_FOUND_MATCHING_TASK = "Here are the matching tasks in your list:";
     private final static String MSG_NO_MATCHING_TASK = "No matching tasks are found in your list.";
-    
+    private final static String MSG_UPDATED_TASK = "Ok! I have updated the task as follows:\n";
+
+
     public String showWelcome() {
         return MSG_GREET;
     }
@@ -66,6 +68,10 @@ public class Ui {
     
     public String showMatchingTaskHeader() {
         return MSG_FOUND_MATCHING_TASK;
+    }
+    
+    public String showUpdated(int indexOfUpdatedTask, Task updatedTask) {
+        return MSG_UPDATED_TASK + showTaskWithIndex(indexOfUpdatedTask, updatedTask);
     }
     
 }

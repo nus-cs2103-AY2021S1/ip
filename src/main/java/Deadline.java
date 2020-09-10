@@ -11,6 +11,10 @@ public class Deadline extends Task {
         this.by = LocalDate.parse(byString);
         taskType = TaskType.DEADLINE;
     }
+    
+    public void updateTime(String newTime) {
+        this.by = LocalDate.parse(newTime);
+    }
 
     @Override
     public String toString() {

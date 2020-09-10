@@ -1,3 +1,5 @@
+import java.util.Arrays;
+
 public class Parser {
     private static final int TO_DO_MIN_LENGTH = 6;
     private static final int DEADLINE_MIN_LENGTH = 10;
@@ -20,6 +22,30 @@ public class Parser {
             return new DoneCommand(indexOfDoneTask);
         } else if (input.startsWith("find")) {
             return new FindCommand(input.substring(5));
+        } else if (input.startsWith("update")) {
+            String[] subInputs = input.split(" ");
+            int length = subInputs.length;
+            int indexOfTaskToBeUpdated = Integer.parseInt(subInputs[1]);
+            if (containsBackSlash(subInputs)) {
+                // update description of Deadline/Event OR update description of Deadline/Event + time
+                int indexOfBackSlash = findIndexOfBackSlash(subInputs);
+                String[] timeInArray = Arrays.copyOfRange(subInputs, indexOfBackSlash + 1, length);
+                String time = String.join(" ", timeInArray);
+                if (indexOfBackSlash == 2) {
+                    // update time only
+                    return new UpdateTimeCommand(indexOfTaskToBeUpdated, time);
+                } else {
+                    // update description and time
+                    String[] descriptionInArray = Arrays.copyOfRange(subInputs, 2, indexOfBackSlash);
+                    String description = String.join(" ", descriptionInArray);
+                    return new UpdateDescriptionAndTimeCommand(indexOfTaskToBeUpdated, description, time);
+                }
+            } else {
+                // update description of To-Do/Deadline/Event only
+                String[] descriptionInArray = Arrays.copyOfRange(subInputs, 2,  length);
+                String description = String.join(" ", descriptionInArray);
+                return new UpdateDescriptionCommand(indexOfTaskToBeUpdated, description);
+            }
         } else if (input.startsWith("todo")) {
             if (input.length() < TO_DO_MIN_LENGTH) {
                 throw new ToDoException();
@@ -45,5 +71,27 @@ public class Parser {
         } else {
             throw new CommandException();
         }
+    }
+    
+    private static int findIndexOfBackSlash(String[] subInputs) {
+        int length = subInputs.length;
+        for (int i = 0; i < length; i++) {
+            String subInput = subInputs[i];
+            if (subInput.charAt(0) == '/') {
+                return i;
+            }
+        }
+        return -1;
+    }
+
+    private static boolean containsBackSlash(String[] subInputs) {
+        int length = subInputs.length;
+        for (int i = 0; i < length; i++) {
+            String subInput = subInputs[i];
+            if (subInput.charAt(0) == '/') {
+                return true;
+            }
+        }
+        return false;
     }
 }

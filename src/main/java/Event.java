@@ -1,3 +1,5 @@
+import java.time.LocalDate;
+
 public class Event extends Task {
     protected String at;
 
@@ -5,6 +7,10 @@ public class Event extends Task {
         super(desc);
         this.at = at;
         taskType = TaskType.EVENT;
+    }
+
+    public void updateTime(String newTime) {
+        this.at = newTime;
     }
 
     @Override
