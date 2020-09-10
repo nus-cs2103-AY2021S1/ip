@@ -1,0 +1,2 @@
+T | 1 | eat dinner
+T | 0 | eat lunch
