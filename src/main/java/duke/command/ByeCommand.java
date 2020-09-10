@@ -14,6 +14,7 @@ public class ByeCommand extends Command {
      */
     @Override
     public void perform(TaskList tasks) {
+        // Nothing to perform since this is a termination command.
     }
 
     public String getReply() {

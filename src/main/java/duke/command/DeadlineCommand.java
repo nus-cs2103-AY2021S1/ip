@@ -30,7 +30,9 @@ public class DeadlineCommand extends Command {
     @Override
     public void perform(TaskList t) {
         tasks = t;
+        int a = tasks.size();
         tasks.add(deadline);
+        assert tasks.size() == a + 1;
     }
 
     public String getReply() {

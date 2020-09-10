@@ -15,7 +15,7 @@ public class Duke {
     private final TaskList tasks;
     /** Storage to store data to hard disk */
     private final Storage storage;
-    public static boolean isExit;
+    public static boolean isExit = false;
     /**
      * Constructs a Duke.
      */

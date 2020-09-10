@@ -31,7 +31,9 @@ public class DeleteCommand extends Command {
     public void perform(TaskList t) {
         tasks = t;
         task = t.get(taskNumber - 1);
+        int a = tasks.size();
         tasks.delete(taskNumber - 1);
+        assert tasks.size() == a - 1;
     }
 
     public String getReply() {
