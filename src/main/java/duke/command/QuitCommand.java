@@ -17,6 +17,7 @@ public class QuitCommand implements Command {
      */
     @Override
     public String execute(TaskList ts, Ui ui, String input) {
-        return ui.quit();
+        System.exit(0);
+        return "";
     }
 }
