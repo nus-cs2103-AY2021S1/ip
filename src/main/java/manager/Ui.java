@@ -77,6 +77,9 @@ public class Ui {
                 System.out.println(c.toString());
             }
             break;
+        case TAG:
+            this.taskList.tagTask(index, input);
+            break;
         default:
             assert false : "Unknown action type";
             break;

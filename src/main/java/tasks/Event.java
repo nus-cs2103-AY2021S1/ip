@@ -46,8 +46,8 @@ public class Event extends Task {
      * @param time provided for the event
      * @param isDone provided for the event
      */
-    public Event(String description, String time, boolean isDone) {
-        super(description, isDone);
+    public Event(String description, String time, boolean isDone, String tags) {
+        super(description, isDone, tags);
         this.time = time;
         formatTime();
     }

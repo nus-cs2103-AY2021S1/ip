@@ -1,5 +1,9 @@
 package tasks;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 /**
  * Represents an abstract task, consisting of a description.
  */
@@ -7,6 +11,7 @@ public abstract class Task {
 
     private final String description;
     private boolean isDone;
+    private List<String> tags = new ArrayList<>();
 
     /**
      * Constructs a task given a description, setting default done status as false.
@@ -22,9 +27,11 @@ public abstract class Task {
      * @param description provided for the task
      * @param isDone provided for the task
      */
-    public Task(String description, boolean isDone) {
+    public Task(String description, boolean isDone, String tags) {
         this.description = description;
         this.isDone = isDone;
+        String[] sepTags = tags.split(" ");
+        this.tags.addAll(Arrays.asList(sepTags));
     }
 
     /**
@@ -58,7 +65,17 @@ public abstract class Task {
      * @return the string consisting of the done status and description
      */
     public String toString() {
-        return "[" + getStatusIcon() + "] " + this.description;
+        String tags = "";
+        for (String tag : this.tags) {
+            if (tag == null || tag.equals("")) {
+                continue;
+            }
+            tags = tags + "#" + tag + " ";
+        }
+        return tags.equals("")
+                ? "[" + getStatusIcon() + "] " + this.description
+                : "[" + getStatusIcon() + "] " + this.description
+                        + " (" + tags.substring(0, tags.length() - 1) + ")";
     }
 
     /**
@@ -68,6 +85,21 @@ public abstract class Task {
      */
     public String databaseString() {
         String doneStatus = this.isDone ? "true" : "false";
-        return doneStatus + " | " + this.description;
+        StringBuilder tags = new StringBuilder();
+        for (String tag : this.tags) {
+            if (tag == null || tag.equals("")) {
+                continue;
+            }
+            tags.append(tag).append(" ");
+        }
+        return doneStatus + " | " + this.description + " | " + tags;
+    }
+
+    /**
+     * Adds a tag to the task.
+     * @param tagName
+     */
+    public void tagTask(String tagName) {
+        this.tags.add(tagName);
     }
 }
