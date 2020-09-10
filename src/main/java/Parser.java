@@ -8,109 +8,108 @@ public class Parser {
      *
      * @param input The user input into the program.
      * @return The corresponding command for the user input.
-     * @throws DukeException
+     * @throws DukeException If an invalid user input was given.
      */
     public static Command parse(String input) throws DukeException {
         input = input.toLowerCase();
         String[] inputWords = input.split(" ");
 
         if (inputWords.length == 0) {
-            throw new DukeException("Sorry, I don't understand what you are saying! D=\n"
-                    + "Type \"help\" to view the list of commands you can use!");
+            throw new InvalidCommandException();
         }
 
         String commandWord = inputWords[0];
+        boolean isOneWord = inputWords.length == 1;
 
-        if (commandWord.equals("bye") && inputWords.length == 1) {
+        if (commandWord.equals("bye") && isOneWord) {
             return new ExitCommand();
-        }
-
-        if (commandWord.equals("help") && inputWords.length == 1) {
+        } else if (commandWord.equals("help") && isOneWord) {
             return new HelpCommand();
-        }
-
-        if (commandWord.equals("list") && inputWords.length == 1) {
+        } else if (commandWord.equals("list") && isOneWord) {
             return new ListCommand();
+        } else if (commandWord.equals("find")) {
+            return parseFind(input, isOneWord);
+        } else if (commandWord.equals("done")) {
+            return parseDone(input, inputWords);
+        } else if (commandWord.equals("delete")) {
+            return parseDelete(input, inputWords);
+        } else if (commandWord.equals("todo")) {
+            return parseTodo(input, isOneWord);
+        } else if (commandWord.equals("deadline")) {
+            return parseDeadline(input, isOneWord);
+        } else if (commandWord.equals("event")) {
+            return parseEvent(input, isOneWord);
+        } else {
+            throw new InvalidCommandException();
+        }
+    }
+
+    public static Command parseFind(String input, boolean isOneWord) throws DukeException {
+        if (isOneWord) {
+            throw new InvalidFindException();
         }
 
-        if (commandWord.equals("find")) {
-            if (inputWords.length == 1) {
-                throw new DukeException("You need to specify what keyword to search! \n"
-                        + "eg find book");
-            }
+        String keyword = input.substring(4);
+        return new FindCommand(keyword);
+    }
 
-            String keyword = input.substring(4);
-            return new FindCommand(keyword);
+    public static Command parseDone(String input, String[] inputWords) throws DukeException {
+        if (inputWords.length != 2) {
+            throw new InvalidDoneException();
         }
 
+        String taskNum = input.substring(5);
+        int i = Integer.parseInt(taskNum);
+        return new DoneCommand(i);
+    }
 
-        if (commandWord.equals("done")) {
-            if (inputWords.length != 2) {
-                throw new DukeException("You need to specify which task to mark done! \n"
-                        + "eg done 1");
-            }
-
-            int i = input.charAt(5) - 48;
-            return new DoneCommand(i);
+    public static Command parseDelete(String input, String[] inputWords) throws DukeException {
+        if (inputWords.length != 2) {
+            throw new InvalidDeleteException();
         }
 
-        if (commandWord.equals("delete")) {
-            if (inputWords.length != 2) {
-                throw new DukeException("You need to specify which task to delete!\n"
-                        + "eg delete 1");
-            }
+        String taskNum = input.substring(7);
+        int i = Integer.parseInt(taskNum);
+        return new DeleteCommand(i);
+    }
 
-            int i = input.charAt(7) - 48;
-            return new DeleteCommand(i);
+    public static Command parseTodo(String input, boolean isOneWord) throws DukeException {
+        if (isOneWord) {
+            throw new InvalidTodoFormatException();
         }
 
-        if (commandWord.equals("todo")) {
-            if (inputWords.length == 1) {
-                throw new DukeException("You need to specify your todo task!\n"
-                        + "eg todo read book");
-            }
+        String taskDesc = input.substring(5);
+        String[] taskInfos = {taskDesc};
+        return new AddCommand(TaskType.TODO, taskInfos);
+    }
 
-            String taskDesc = input.substring(5);
-            String[] taskInfos = {taskDesc};
-            return new AddCommand(AddCommand.TODO, taskInfos);
+    public static Command parseDeadline(String input, boolean isOneWord) throws DukeException {
+        if (isOneWord) {
+            throw new InvalidDeadlineFormatException();
         }
 
-        if (commandWord.equals("deadline")) {
-            if (input.split(" ").length == 1) {
-                throw new DukeException("You need to specify your deadline!\n"
-                        + "eg deadline return book /by 2019-10-15 2359");
-            }
+        String taskDesc = input.substring(9);
+        String[] taskInfos = taskDesc.split(" /by ");
 
-            String taskDesc = input.substring(9);
-            String[] taskInfos = taskDesc.split(" /by ");
-
-            if (taskInfos.length == 1) {
-                throw new DukeException("You need to use the proper format!\n"
-                        + "eg deadline return book /by 2019-10-15 2359");
-            }
-
-            return new AddCommand(AddCommand.DEADLINE, taskInfos);
+        if (taskInfos.length == 1) {
+            throw new InvalidDeadlineFormatException();
         }
 
-        if (commandWord.equals("event")) {
-            if (input.split(" ").length == 1) {
-                throw new DukeException("You need to specify your event!\n"
-                        + "eg event project meeting /at 2019-10-15 1200");
-            }
+        return new AddCommand(TaskType.DEADLINE, taskInfos);
+    }
 
-            String taskDesc = input.substring(6);
-            String[] taskInfos = taskDesc.split(" /at ");
-
-            if (taskInfos.length == 1) {
-                throw new DukeException("You need to use the proper format!\n"
-                        + "eg event project meeting /at 2019-10-15 1200");
-            }
-
-            return new AddCommand(AddCommand.EVENT, taskInfos);
+    public static Command parseEvent(String input, boolean isOneWord) throws DukeException {
+        if (isOneWord) {
+            throw new InvalidEventFormatException();
         }
 
-        throw new DukeException("Sorry, I don't understand what you are saying! D=\n"
-                + "Type \"help\" to view the list of commands you can use!");
+        String taskDesc = input.substring(6);
+        String[] taskInfos = taskDesc.split(" /at ");
 
+        if (taskInfos.length == 1) {
+            throw new InvalidEventFormatException();
+        }
+
+        return new AddCommand(TaskType.EVENT, taskInfos);
     }
 }
