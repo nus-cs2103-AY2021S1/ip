@@ -9,11 +9,10 @@ public class ParseExit extends Parse {
 
     /**
      * Calls the exit command.
+     * Returns the exiting message.
+     *
+     * @return String exiting message.
      */
-    public static void execute() {
-        ExitCommand.execute();
-    }
-
     public static String execute2() {
         return ExitCommand.execute2();
     }
