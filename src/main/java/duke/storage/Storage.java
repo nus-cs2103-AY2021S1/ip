@@ -12,6 +12,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import duke.exception.DukeException;
+import duke.note.NoteList;
 import duke.task.TaskList;
 
 /**
@@ -100,6 +101,20 @@ public class Storage {
         String list = IntStream.range(0, lst.getSize())
                 .mapToObj(lst::get)
                 .map(targetTask -> targetTask.getStoreAs() + "\n")
+                .collect(Collectors.joining());
+
+        writeToFile(this.path.toString(), list);
+    }
+
+    /**
+     * Saves notes in the NoteList Object into the hard disk so that it can be retrieved again.
+     *
+     * @param noteList NoteList Object.
+     */
+    public void saveNotesToHardDisk(NoteList noteList) {
+        String list = IntStream.range(0, noteList.getSize())
+                .mapToObj(noteList::get)
+                .map(note -> note.toString() + "\n")
                 .collect(Collectors.joining());
 
         writeToFile(this.path.toString(), list);

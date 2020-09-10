@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeException;
+import duke.note.NoteList;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.ui.Ui;
@@ -13,7 +14,7 @@ public class DoneCommand extends Command {
     private final String markItem;
 
     /**
-     * Constructs a command with String value of the instruction to be further processed.
+     * Constructs a command to mark an object as done.
      *
      * @param secondArg String argument to specify the Task to delete.
      */
@@ -28,13 +29,16 @@ public class DoneCommand extends Command {
      * and a relevant String message to notify the user on this deletion or exception will be returned.
      *
      * @param tasks   TaskList object containing the list of tasks.
+     * @param notes   NoteList object containing the list of notes.
      * @param ui      Ui object to output messages to the user.
-     * @param storage Storage object to interact and manipulate data from the hard disk.
+     * @param taskStorage Storage object for storing tasks.
+     * @param noteStorage Storage object for storing notes.
      * @return String response to user.
      * @throws DukeException If number is not a valid item number in the task list.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, NoteList notes, Ui ui, Storage taskStorage, Storage noteStorage)
+            throws DukeException {
 
         //check if second argument of instruction is valid
         try {
@@ -54,7 +58,7 @@ public class DoneCommand extends Command {
         String output = ui.printTaskDone(tasks.getList().get(doneIndex - 1));
 
         //update storage
-        storage.saveListToHardDisk(tasks);
+        taskStorage.saveListToHardDisk(tasks);
 
         return output;
     }

@@ -13,7 +13,8 @@ import org.junit.jupiter.api.Test;
 
 public class DukeTest {
 
-    private static final String TEST_PATH = "DukeTestList.txt";
+    private static final String TEST_PATH_TASKS = "DukeTestList.txt";
+    private static final String TEST_PATH_NOTES = "NoteTestPath.txt";
     private Duke duke;
 
 
@@ -21,9 +22,17 @@ public class DukeTest {
     public void init() {
 
         //initialize file and store default task list
-        duke = new Duke("DukeTestList.txt");
+        duke = new Duke("DukeTestList.txt", "NoteTestPath.txt");
         try {
-            FileWriter fw = new FileWriter(TEST_PATH);
+            FileWriter fw = new FileWriter(TEST_PATH_TASKS);
+            fw.write("");
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            FileWriter fw = new FileWriter(TEST_PATH_NOTES);
             fw.write("");
             fw.close();
         } catch (IOException e) {
@@ -34,7 +43,15 @@ public class DukeTest {
     @AfterEach
     public void resetFilePath() {
         try {
-            FileWriter fw = new FileWriter(TEST_PATH);
+            FileWriter fw = new FileWriter(TEST_PATH_TASKS);
+            fw.write("");
+            fw.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        try {
+            FileWriter fw = new FileWriter(TEST_PATH_NOTES);
             fw.write("");
             fw.close();
         } catch (IOException e) {
@@ -74,6 +91,14 @@ public class DukeTest {
 
         assertEquals("Here are the matching tasks in your list:\n"
                 + "1.[T][✘] valid todo", duke.getResponse("find todo"));
+
+        assertEquals("Got it. Your note has been added:\n"
+                + "test1", duke.getResponse("note test1"));
+
+        assertEquals("1.test1", duke.getResponse("notes"));
+
+        assertEquals("Noted. I've removed this note:\n"
+                + "test1\nNow you have 0 notes in your program.", duke.getResponse("RemoveNote 1"));
 
     }
 

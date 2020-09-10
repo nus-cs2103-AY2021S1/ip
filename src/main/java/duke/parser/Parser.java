@@ -8,6 +8,9 @@ import duke.command.EventCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.NoteCommand;
+import duke.command.NotesCommand;
+import duke.command.RemoveNoteCommand;
 import duke.command.TodoCommand;
 import duke.exception.DukeException;
 
@@ -36,6 +39,12 @@ public class Parser {
             + "'event <description> /at <yyyy-MM-dd HH:mm>' with a valid date & time";
     private static final String EXCEPTION_INVALID_FORMAT =
             "☹ OOPS!!! I'm sorry, but I don't know what that means :-(";
+    private static final String EXCEPTION_EMPTY_NOTE =
+            "☹ OOPS!!! The description of a note cannot be empty.";
+    private static final String EXCEPTION_NOTES_EXTRA_INPUTS =
+            "Extra inputs detected! Please only input 'notes' to see your notes!";
+    private static final String EXCEPTION_EMPTY_REMOVE =
+            "☹ OOPS!!! The please enter a note number to remove.";
 
     /**
      * Takes in a line of user input as a String and returns a relevant Command. Otherwise,
@@ -122,6 +131,21 @@ public class Parser {
                 throw new DukeException(EXCEPTION_NO_SEARCH_TERM);
             }
             return new FindCommand(instruction[1]);
+        } else if (instruction[0].equals("note")) {
+            if (instruction.length == 1) {
+                throw new DukeException(EXCEPTION_EMPTY_NOTE);
+            }
+            return new NoteCommand(instruction[1]);
+        } else if (instruction[0].equals("notes")) {
+            if (instruction.length != 1) {
+                throw new DukeException(EXCEPTION_NOTES_EXTRA_INPUTS);
+            }
+            return new NotesCommand();
+        } else if (instruction[0].equals("RemoveNote")) {
+            if (instruction.length == 1) {
+                throw new DukeException(EXCEPTION_EMPTY_REMOVE);
+            }
+            return new RemoveNoteCommand(instruction[1]);
         } else {
             throw new DukeException(EXCEPTION_INVALID_FORMAT);
         }
