@@ -29,6 +29,11 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+        assert tasks != null && ui != null && storage != null
+                : "TaskList, Ui or Storage is not supposed to be null";
+        assert this.taskInfos.length > 0
+                : "String array containing task descriptions is not supposed to be empty";
+
         Task t = createTask();
         tasks.addTask(t);
         storage.updateData(tasks);
