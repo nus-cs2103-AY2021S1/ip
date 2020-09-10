@@ -25,20 +25,4 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    |____/ \__,_|_|\_\___|
    ```
 
-##Features
 
-All Features available in Duke and the format:
-1. `<todo>`     : todo + TaskName  
-                is used to add a new task
-1. `<deadline>` : deadline + TaskName + /by + dd/MM/yyyy HHmm
-                is used to add a new deadline
-1. `<event>`    : event + TaskName + /at + dd/MM/yyyy HHmm
-                is used to add a new event
-1. `<delete>`   : delete + TaskNumber
-                is used to delete a task
-1. `<done>`     : done + TaskNumber
-                is used to mark a task as done
-1. `<list>`     : list
-                is used to print the list of task
-1. `<find>`     : find + keyword
-                is used to find task that matches the keyword
