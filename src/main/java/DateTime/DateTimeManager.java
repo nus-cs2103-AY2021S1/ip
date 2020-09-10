@@ -21,6 +21,7 @@ public class DateTimeManager {
      * @return LocalDateTime date and time.
      */
     public static LocalDateTime setDateTime(CharSequence s) {
+        assert s != null;
         DateTimeFormatter format = DateTimeFormatter.ofPattern("d-MM-uuuu HHmm");
         LocalDateTime dt = LocalDateTime.parse(s, format);
         return dt;
@@ -34,6 +35,8 @@ public class DateTimeManager {
      * @throws ErrorExceptions wrong date and time format.
      */
     public static void addDate(task task, String date) throws ErrorExceptions {
+        assert task != null;
+        assert date.equals("") == false;
         Scanner sc = new Scanner(date);
         try {
             String d = sc.next();

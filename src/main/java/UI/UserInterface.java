@@ -110,6 +110,8 @@ public class UserInterface {
     }
 
     private String action2() {
+        assert input != null;
+        assert input.equals("") == false;
         return InitiateParser.parser2(input);
     }
 
@@ -131,6 +133,7 @@ public class UserInterface {
     }
 
     public static String addedTask2(task t) {
+        assert t != null;
         String result = "";
         String nLine = System.lineSeparator();
         String one = "Task has been successfully added!";
