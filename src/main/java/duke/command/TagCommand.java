@@ -72,7 +72,7 @@ public class TagCommand extends Command {
             Task task = taskList.get(index);
             List<String> removedTags = task.removeTags(tagsToRemove);
             taskList.update(index);
-            String removedTagsFormatted = String.join("\n", removedTags) + "\n\n";
+            String removedTagsFormatted = String.join("\n", removedTags) + "\n";
 
             boolean wasTaskUpdated = removedTags.size() > 0;
 

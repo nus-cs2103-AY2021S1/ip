@@ -119,7 +119,6 @@ ____________________________________________________________
 ____________________________________________________________
 These are the tags that were removed:
 freeload
-
 These are the remaining tags for the specified task:
   [D][X] apply for internship (by: Dec 4 2020 11:59 PM) #lazy #SU
 ____________________________________________________________
