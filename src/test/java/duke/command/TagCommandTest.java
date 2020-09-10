@@ -1,6 +1,7 @@
 package duke.command;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import org.junit.jupiter.api.Test;
 
@@ -18,5 +19,13 @@ public class TagCommandTest {
 
         String expected = "I have added the tags to the following task:\n" + "  [X] abc";
         assertEquals(expected, actual);
+    }
+
+    @Test
+    public void execute_invalidIndex_exceptionThrown() {
+        TaskList taskListStub = new TaskListStub();
+        assertThrows(InvalidCommandException.class, () -> {
+            TagCommand.execute("tag 10a tag1 tag2 tag3", taskListStub);
+        });
     }
 }
