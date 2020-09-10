@@ -63,27 +63,7 @@ public class Storage {
                 while (saveReader.hasNextLine()) {
                     try {
                         String saveEntry = saveReader.nextLine();
-                        String[] keywords = saveEntry.split(":");
-                        Task savedTask = null;
-                        switch (keywords[0]) {
-                        case "T":
-                            savedTask = new Todo(keywords[2]);
-                            break;
-                        case "D":
-                            savedTask = new Deadline(keywords[2], LocalDate.parse(keywords[3]));
-                            break;
-                        case "E":
-                            savedTask = new Event(keywords[2], LocalDate.parse(keywords[3]));
-                            break;
-                        default:
-                            break;
-                        }
-                        if (savedTask != null) {
-                            if (keywords[1].equals("y")) {
-                                savedTask.markAsDone();
-                            }
-                            tasks.add(savedTask);
-                        }
+                        readTask(saveEntry, tasks);
                     } catch (DateTimeParseException e) {
                         System.out.println("Looks like some of your records got messed up! Sorry 'bout that!");
                     }
@@ -93,6 +73,30 @@ public class Storage {
             System.out.println(exception);
         }
         return tasks;
+    }
+
+    private void readTask(String saveEntry, ArrayList<Task> tasks) throws DateTimeParseException {
+        String[] keywords = saveEntry.split(":");
+        Task savedTask = null;
+        switch (keywords[0]) {
+        case "T":
+            savedTask = new Todo(keywords[2]);
+            break;
+        case "D":
+            savedTask = new Deadline(keywords[2], LocalDate.parse(keywords[3]));
+            break;
+        case "E":
+            savedTask = new Event(keywords[2], LocalDate.parse(keywords[3]));
+            break;
+        default:
+            break;
+        }
+        if (savedTask != null) {
+            if (keywords[1].equals("y")) {
+                savedTask.markAsDone();
+            }
+            tasks.add(savedTask);
+        }
     }
 
     /**
