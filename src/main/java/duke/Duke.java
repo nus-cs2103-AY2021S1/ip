@@ -17,8 +17,8 @@ public class Duke {
 
     /**
      * Initialises Duke class.
-     * @throws DateParseException if Task created from file information cannot be stored in local storage.
-     * @throws StorageException if Task date (if any) cannot be parsed into LocalDate object.
+     * @throws DateParseException If Task created from file information cannot be stored in local storage.
+     * @throws StorageException If Task date (if any) cannot be parsed into LocalDate object.
      */
     public Duke() throws DateParseException, StorageException {
         this.storage = new Storage();

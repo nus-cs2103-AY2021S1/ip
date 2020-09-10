@@ -37,7 +37,7 @@ public class Storage {
     /**
      * Reads the lines of text in local storage and compiles them into an ArrayList of strings.
      * @return An ArrayList containing String representations of all the Tasks in local storage.
-     * @throws StorageException if the storage cannot be accessed or read.
+     * @throws StorageException If the storage cannot be accessed or read.
      */
     public ArrayList<String> readTaskStorage() throws StorageException {
         ArrayList<String> existingTasks = new ArrayList<>();
@@ -55,7 +55,7 @@ public class Storage {
     /**
      * Appends a string representation of a Task to local storage.
      * @param taskString The String representation of a Task.
-     * @throws StorageException if the storage cannot be accessed or read.
+     * @throws StorageException If the storage cannot be accessed or read.
      */
     public void appendTaskStorage(String taskString) throws StorageException {
         try {
@@ -70,7 +70,7 @@ public class Storage {
     /**
      * Writes the string representations of all Tasks to local storage.
      * @param taskString The String representation of all tasks in the TaskList.
-     * @throws StorageException if the storage cannot be accessed or read.
+     * @throws StorageException If the storage cannot be accessed or read.
      */
     public void writeToTaskStorage(String taskString) throws StorageException {
         try {

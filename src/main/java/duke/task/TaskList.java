@@ -30,8 +30,8 @@ public class TaskList {
      * The TaskList is initialised by adding tasks stored in the local storage from previous sessions.
      * @param storage A Storage object that handles the storage of tasks in local storage, allowing them to persist.
      * @return The new TaskList created, filled with existing Tasks.
-     * @throws StorageException if Task cannot be stored in local storage.
-     * @throws DateParseException if Task date (if any) cannot be parsed into LocalDate object.
+     * @throws StorageException If Task cannot be stored in local storage.
+     * @throws DateParseException If Task date (if any) cannot be parsed into LocalDate object.
      */
     public static TaskList initialiseTaskList(Storage storage) throws StorageException, DateParseException {
         TaskList newTaskList = new TaskList(storage);
@@ -78,7 +78,7 @@ public class TaskList {
      * @param taskName A string representing the name of the task.
      * @param taskDate A string representing the date of the task.
      * @return The task added to the TaskList.
-     * @throws InvalidTaskException if task type is neither Deadline nor Event.
+     * @throws InvalidTaskException If task type is neither Deadline nor Event.
      */
     public Task addTask(TaskType type, String taskName, LocalDate taskDate) throws InvalidTaskException {
         switch (type) {
@@ -99,7 +99,7 @@ public class TaskList {
      * Marks Task as completed.
      * @param index An integer representing the index of the task in the TaskList.
      * @return The task marked as completed.
-     * @throws InvalidTaskException if index specified is invalid (does not refer to a task in the TaskList).
+     * @throws InvalidTaskException If index specified is invalid (does not refer to a task in the TaskList).
      */
     public Task markTaskAsDone(int index) throws InvalidTaskException {
         if (index > this.taskList.size() || index <= 0) {
@@ -112,7 +112,7 @@ public class TaskList {
      * Removes a Task from the TaskList.
      * @param index An integer representing the index of the task in the TaskList.
      * @return The removed task.
-     * @throws InvalidTaskException if index specified is invalid (does not refer to a task in the TaskList).
+     * @throws InvalidTaskException If index specified is invalid (does not refer to a task in the TaskList).
      */
     public Task deleteTask(int index) throws InvalidTaskException {
         if (index > this.taskList.size() || index <= 0) {
