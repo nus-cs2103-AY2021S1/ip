@@ -1,5 +1,7 @@
 package UI;
 
+import java.util.stream.Stream;
+
 import Tasks.TaskManager;
 import Tasks.task;
 
@@ -11,6 +13,7 @@ import Tasks.task;
 public class UserInterface {
     private static boolean isExit = false;
     private String input;
+    private Stream<String> inputStream;
 
     /**
      * Saves the user input in the instance variable.
@@ -20,7 +23,6 @@ public class UserInterface {
     public void input(String input) {
         this.input = input;
     }
-
     /**
      * Returns the task processing message when the user tries to mark a task as completed.
      *
@@ -48,17 +50,16 @@ public class UserInterface {
     private String failed2() {
         return "No commands entered, please enter a command!";
     }
-
     /**
      * Returns the message when calling the Parser and pass the user
      * input along to be broken down and understood.
      *
      * @return String action message.
      */
-    private String action2() {
+    private String action2(String command) {
         assert input != null;
         assert input.equals("") == false;
-        return InitiateParser.parser2(input);
+        return InitiateParser.parser2(command);
     }
 
     /**
@@ -73,7 +74,7 @@ public class UserInterface {
         if (this.input.equals("")) {
             return failed2();
         } else {
-            return action2();
+            return action2(input);
         }
     }
 

@@ -63,8 +63,13 @@
 <<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/src/main/java/Duke.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Duke.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MainWindow.java" afterDir="false" />
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/src/main/java/UI/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI/UserInterface.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/testing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/testing.java" afterDir="false" />
+=======
       <change beforePath="$PROJECT_DIR$/src/main/java/Parser/InputManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser/InputManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Tasks/task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tasks/task.java" afterDir="false" />
+>>>>>>> master
 =======
       <change beforePath="$PROJECT_DIR$/src/main/java/DateTime/DateTimeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DateTime/DateTimeManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Duke.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Duke.java" afterDir="false" />
@@ -246,6 +251,24 @@
     </state>
     <state x="421" y="102" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1599032427849" />
 <<<<<<< HEAD
+<<<<<<< HEAD
+    <state width="1237" height="163" key="GridCell.Tab.0.bottom" timestamp="1599761290273">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1599761290273" />
+    <state width="1237" height="163" key="GridCell.Tab.0.center" timestamp="1599761290273">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1599761290273" />
+    <state width="1237" height="163" key="GridCell.Tab.0.left" timestamp="1599761290273">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1599761290273" />
+    <state width="1237" height="163" key="GridCell.Tab.0.right" timestamp="1599761290273">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1599761290273" />
+=======
     <state width="1237" height="163" key="GridCell.Tab.0.bottom" timestamp="1599641521991">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -262,6 +285,7 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1237" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1599641521991" />
+>>>>>>> master
 =======
     <state width="1237" height="163" key="GridCell.Tab.0.bottom" timestamp="1599620251481">
       <screen x="0" y="0" width="1280" height="680" />
