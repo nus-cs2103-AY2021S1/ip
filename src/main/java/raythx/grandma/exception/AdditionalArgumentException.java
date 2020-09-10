@@ -5,6 +5,6 @@ package raythx.grandma.exception;
  */
 public class AdditionalArgumentException extends DukeException {
     public AdditionalArgumentException() {
-        super("Wtf why got so many inputs... Wake up ur bloody idea...");
+        super("Wtf why got extra stuff one... Wake up ur bloody idea...");
     }
 }
