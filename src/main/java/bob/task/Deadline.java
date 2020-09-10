@@ -48,6 +48,9 @@ public class Deadline extends Task {
      * @return a String representation of the deadline with the format of outputFormatter.
      */
 
+    public void snooze(String newDeadline) {
+        this.deadline = LocalDateTime.parse(newDeadline, INPUT_DATE_TIME_FORMAT);
+    }
     public String getDeadline() {
         return this.deadline.format(OUTPUT_DATE_TIME_FORMAT).toString();
     }

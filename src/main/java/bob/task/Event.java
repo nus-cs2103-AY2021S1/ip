@@ -66,6 +66,11 @@ public class Event extends Task {
         return this.start.format(OUTPUT_DATE_TIME_FORMAT).toString() + " to " + this.end.format(OUTPUT_DATE_TIME_FORMAT).toString();
     }
 
+    public void reschedule(String newPeriod) {
+        this.start = LocalDateTime.parse(newPeriod.substring(0, END_OF_FIRST_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);
+        this.end = LocalDateTime.parse(newPeriod.substring(START_OF_SECOND_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);
+    }
+
     /**
      * Returns the string representation of the event, which includes the status icon, description, and period.
      *

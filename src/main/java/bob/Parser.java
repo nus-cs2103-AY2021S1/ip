@@ -8,6 +8,8 @@ import bob.command.ExitCommand;
 import bob.command.FindCommand;
 import bob.command.ListCommand;
 
+import bob.command.RescheduleCommand;
+import bob.command.SnoozeCommand;
 import bob.exception.BobException;
 import bob.exception.BobFindNoKeyWordsException;
 import bob.exception.BobIncompleteDeadlineDescriptionException;
@@ -52,6 +54,10 @@ public class Parser {
             return new ExitCommand();
         } else if (command.startsWith("find")) {
             return parseFind(command);
+        } else if (command.startsWith("snooze")) {
+            return parseSnooze(command);
+        } else if (command.startsWith("reschedule")) {
+            return parseReschedule(command);
         } else {
             throw new BobException();
         }
@@ -121,6 +127,20 @@ public class Parser {
         } catch (StringIndexOutOfBoundsException e) {
             throw new BobFindNoKeyWordsException();
         }
+    }
+
+    static Command parseSnooze(String command) throws BobException {
+        String[] split = command.split("/");
+        String deadline = split[1].substring(3);
+        int index = Integer.parseInt(split[0].split(" ")[1]);
+        return new SnoozeCommand(index, deadline);
+    }
+
+    static Command parseReschedule(String command) throws BobException {
+        String[] split = command.split("/");
+        String period = split[1].substring(3);
+        int index = Integer.parseInt(split[0].split(" ")[1]);
+        return new RescheduleCommand(index, period);
     }
 
 }
