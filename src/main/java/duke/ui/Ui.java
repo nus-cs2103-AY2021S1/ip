@@ -88,9 +88,7 @@ public class Ui {
      */
     public String getTaskListView(List<? extends Task> taskList) {
         final List<String> formattedTasks = new ArrayList<>();
-        for (Task task : taskList) {
-            formattedTasks.add(task.toString());
-        }
+        taskList.forEach(task -> formattedTasks.add(task.toString()));
         return getIndexedListForViewing(formattedTasks);
     }
 
