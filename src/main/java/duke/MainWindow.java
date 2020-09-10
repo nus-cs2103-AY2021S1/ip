@@ -6,12 +6,18 @@ import java.util.concurrent.TimeUnit;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
+import javafx.geometry.Insets;
 import javafx.scene.control.Alert;
+import javafx.scene.control.DialogPane;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 
 /**
@@ -28,8 +34,8 @@ public class MainWindow extends AnchorPane {
     private Duke duke;
     private Ui ui = new Ui();
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/kungfu.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/Oogway-white.png"));
 
     /**
      * Initializes the program
@@ -37,6 +43,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
+        dialogContainer.setBackground(new Background(new BackgroundFill(Color.WHITE, CornerRadii.EMPTY, Insets.EMPTY)));
+        dialogContainer.setPrefSize(400,550);
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(ui.start(), dukeImage));
     }
 
@@ -55,6 +63,7 @@ public class MainWindow extends AnchorPane {
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Help");
             alert.setHeaderText("Guide to DUKE's chatbot");
+            alert.getDialogPane().setPrefSize(500,350);
             alert.setContentText(ui.help());
             alert.showAndWait();
         } else if (input.equals("bye")) {

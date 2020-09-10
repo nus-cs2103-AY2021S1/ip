@@ -90,13 +90,13 @@ public class Ui {
     public String help() {
         String content = "";
         content += "Here is the list of command:\n\n";
-        content += "todo (eg. todo borrow book)\n";
-        content += "deadline (eg. return book /by Sunday\n";
-        content += "event (eg, project meeting /at 09/09/2020 1400\n";
+        content += "todo [description] (eg. todo borrow book)\n";
+        content += "deadline [description] /by [day] (eg. return book /by Sunday)\n";
+        content += "event [description] /at [date and time] (eg, project meeting /at 09/09/2020 1400)\n";
         content += "list (returns list of tasks)\n";
-        content += "done[number] (choose and complete a task)\n";
-        content += "delete[number] (choose and delete a task)\n";
-        content += "find[word] (search for matching task)\n";
+        content += "done [number] (choose and complete a task)\n";
+        content += "delete [number] (choose and delete a task)\n";
+        content += "find [word] (search for matching task)\n";
         content += "bye (exits the application)\n";
         return content;
     }
