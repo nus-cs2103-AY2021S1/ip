@@ -8,9 +8,10 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.Scanner;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import duke.exception.DukeException;
-import duke.task.Task;
 import duke.task.TaskList;
 
 /**
@@ -96,14 +97,11 @@ public class Storage {
      * @param lst TaskList Object.
      */
     public void saveListToHardDisk(TaskList lst) {
-        StringBuilder list = new StringBuilder();
-        for (int i = 0; i < lst.getSize(); i++) {
-            Task targetTask = lst.get(i);
+        String list = IntStream.range(0, lst.getSize())
+                .mapToObj(lst::get)
+                .map(targetTask -> targetTask.getStoreAs() + "\n")
+                .collect(Collectors.joining());
 
-            list.append(targetTask.getStoreAs());
-            list.append("\n");
-        }
-
-        writeToFile(this.path.toString(), list.toString());
+        writeToFile(this.path.toString(), list);
     }
 }
