@@ -3,6 +3,10 @@ package UI;
 import Tasks.TaskManager;
 import Tasks.task;
 
+import java.util.ArrayList;
+import java.util.Scanner;
+import java.util.stream.Stream;
+
 /**
  * Represents a UserInterface that is used by the main program. The UserInterface class handles all
  * the inputs entered by the user. It also helps to check for empty commands and prints most of the
@@ -11,6 +15,7 @@ import Tasks.task;
 public class UserInterface {
     private static boolean isExit = false;
     private String input;
+    private Stream<String> inputStream;
 
     /**
      * Creates a UserInterface object that helps to handle all the user inputs and pass it along to
@@ -29,6 +34,7 @@ public class UserInterface {
     public void input(String input) {
         this.input = input;
     }
+
 
     /**
      * Calls the Parser and pass the user input along to be broken down and understood.
@@ -109,15 +115,15 @@ public class UserInterface {
         return "No commands entered, please enter a command!";
     }
 
-    private String action2() {
-        return InitiateParser.parser2(input);
+    private String action2(String command) {
+        return InitiateParser.parser2(command);
     }
 
     public String parse2() {
         if (this.input.equals("")) {
             return failed2();
         } else {
-            return action2();
+            return action2(input);
         }
     }
 

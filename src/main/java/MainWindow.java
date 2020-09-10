@@ -11,6 +11,7 @@ import javafx.scene.layout.VBox;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.stream.Stream;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -64,11 +65,17 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = Duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getUserDialog(input, userImage)
         );
+        Stream<String> results = Duke.convertToStream(input);
+        results.forEach(reply -> {
+//            System.out.println("REPLY: " + reply);
+            String response = Duke.getResponse(reply);
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+        });
         userInput.clear();
     }
 }
