@@ -1,6 +1,7 @@
 package duke;
 
 import java.util.Scanner;
+
 import duke.command.Command;
 import duke.exception.DukeException;
 
@@ -34,7 +35,6 @@ public class Duke {
         duke.start();
         duke.runUntilExitCommand();
         duke.exit();
-
     }
 
     private void start() {
