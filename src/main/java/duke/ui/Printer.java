@@ -75,12 +75,20 @@ public class Printer {
         System.out.println(Constants.DIVIDER);
     }
 
+    /**
+     * Print bye message.
+     * @return bye message
+     */
     public static String printBye() {
         String message = "Farewell/再見/さようなら～～";
         System.out.println(message);
         return message;
     }
 
+    /**
+     * Print all available commands for Duke.
+     * @return all available commands
+     */
     public static String printListCommands() {
         return "help\n" + "done\n" + "todo\n" + "deadline\n" + "event\n" + "bye\n" + "list\n" + "find\n" + "done\n"
                 + "delete";
