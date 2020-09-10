@@ -78,12 +78,12 @@ public class MainWindow extends AnchorPane {
         try {
             Storage database = new Storage("data/tasksTable.csv");
             DukeCommandMatcher parser = new DukeCommandMatcher(database);
-            String response = parser.matchCommand(input);
+            String response = parser.handleCommand(input);
             DialogBox db;
-            if (Objects.equals(response, "EXIT")) {
+            if (Objects.equals(response, Constants.EXITRESPONSE)) {
                 db = DialogBox.getDukeDialog(Printer.printBye(), dukeImage);
             } else {
-                assert response != "EXIT" : response;
+                assert response != Constants.EXITRESPONSE : response;
                 db = DialogBox.getDukeDialog(response, dukeImage);
             }
             dialogContainer.getChildren().add(db);

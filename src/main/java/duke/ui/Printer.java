@@ -90,7 +90,20 @@ public class Printer {
      * @return all available commands
      */
     public static String printListCommands() {
-        return "help\n" + "done\n" + "todo\n" + "deadline\n" + "event\n" + "bye\n" + "list\n" + "find\n" + "done\n"
-                + "delete";
+        String commandList = "help\n" + "done <task number> \n" + "todo <task content> \n"
+                + "deadline <task content> /<" + Constants.DATEFORMAT + ">\n"
+                + "event <task content> /<" + Constants.DATEFORMAT + ">\n"
+                + "find <query key>\n" + "delete <task number>\n"
+                + "l[i]s[t]\n" + "bye\n";
+        System.out.println(commandList);
+        return commandList;
+    }
+
+    /**
+     * Print the division line.
+     * @return division line
+     */
+    public static void printDivision() {
+        System.out.println(Constants.DIVIDER);
     }
 }

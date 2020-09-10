@@ -1,15 +1,15 @@
 package duke;
 
-import duke.storage.Storage;
 import duke.ui.Cli;
+import duke.utils.Constants;
 
 public class Duke {
     /**
      * Launch Duke.
      */
     public static void launchDuke() {
-        Storage database = new Storage("data/tasksTable.csv");
-        Cli.loop(database);
+        //there is no need to set default storage, here is just showcasing the usage of Cli
+        Cli.getInstance().setStorage(Constants.DEFAULTSTORAGE).loop();
     }
 
 }

@@ -43,15 +43,15 @@ public class DukeCommandMatcher {
      * Match the command to corresponding behavior.
      * @param command
      * @return message of implementation
-     * @throws CommandNotFoundException
-     * @throws NullCommandException
-     * @throws LackOfTimeException
-     * @throws NullCommandContentException
-     * @throws TaskOutOfBoundException
-     * @throws TaskNotSpecifyException
-     * @throws DateFormatException
+     * @throws CommandNotFoundException when command is not found
+     * @throws NullCommandException when the command is empty
+     * @throws LackOfTimeException when event/deadline command lacks time
+     * @throws NullCommandContentException when todo/event/deadline lacks content
+     * @throws TaskOutOfBoundException when done/delete is implemented on task that does not exist
+     * @throws TaskNotSpecifyException when the task to be done/deleted is not specified
+     * @throws DateFormatException when input date format is not in the standard format
      */
-    public String matchCommand(String command) throws CommandNotFoundException, NullCommandException,
+    public String handleCommand(String command) throws CommandNotFoundException, NullCommandException,
             LackOfTimeException, NullCommandContentException, TaskOutOfBoundException, TaskNotSpecifyException,
             DateFormatException {
         if (Objects.equals(command, "")) {
@@ -93,7 +93,7 @@ public class DukeCommandMatcher {
 
     private String handleExit() {
         Printer.printBye();
-        return "EXIT";
+        return Constants.EXITRESPONSE;
     }
 
     private String handleAdd(Task task) {
@@ -114,7 +114,7 @@ public class DukeCommandMatcher {
     }
 
     private String handleTodo(String[] todoStr) throws NullCommandContentException {
-        ToDo todo = null;
+        ToDo todo;
         try {
             String todoContent = todoStr[1];
             todo = new ToDo(todoContent);
@@ -126,7 +126,7 @@ public class DukeCommandMatcher {
 
     private String handleDeadline(String[] deadlineStr) throws NullCommandContentException, LackOfTimeException,
             DateFormatException {
-        Deadline deadline = null;
+        Deadline deadline;
         String[] splitDeadline;
         try {
             String deadlineContent = deadlineStr[1];
@@ -146,7 +146,7 @@ public class DukeCommandMatcher {
 
     private String handleEvent(String[] eventStr) throws NullCommandContentException, LackOfTimeException,
             DateFormatException {
-        Event event = null;
+        Event event;
         String[] splitEventStr;
         try {
             String eventContent = eventStr[1];
@@ -167,7 +167,7 @@ public class DukeCommandMatcher {
     }
 
     private String handleDelete(String[] deleteStr) throws TaskNotSpecifyException, TaskOutOfBoundException {
-        int taskToDelete = -1;
+        int taskToDelete;
         try {
             taskToDelete = Integer.parseInt(deleteStr[1]);
             return taskList.delete(taskToDelete);
