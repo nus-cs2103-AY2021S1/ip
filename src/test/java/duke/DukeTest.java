@@ -148,7 +148,12 @@ public class DukeTest {
         FileInputStream fis = new FileInputStream(file);
         byte[] data = fis.readAllBytes();
         fis.close();
-        String[] expectedOutputLines = new String(data, StandardCharsets.UTF_8).split("[\r\n]{1,2}");
+        Stream<String> expectedOutput = Arrays.stream(
+                new String(data, StandardCharsets.UTF_8).split("[\r\n]{1,2}")
+        );
+        String[] expectedOutputLines = expectedOutput
+                .filter(line -> !line.matches("[\r\n]{1,2}"))
+                .toArray(String[]::new);
 
         String actualOutput = OUT_CONTENT.toString();
         String[] actualOutputLines = actualOutput.split("[\r\n]{1,2}");
