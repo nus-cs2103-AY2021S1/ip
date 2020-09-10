@@ -33,6 +33,7 @@ public class DoneCommand extends Command {
         tasks = t;
         task = tasks.get(taskNumber);
         task.markAsDone();
+        assert task.isDone();
     }
 
     /**

@@ -38,6 +38,7 @@ public class Storage {
      */
     private Task convertFromHardDisk(String s) throws InvalidFormatFromHardDiskException {
         String[] data = s.split(" / ");
+        assert data.length > 0;
         String taskType = data[0];
         boolean isDone = data[1].equals("1");
         String description = data[2];
@@ -45,14 +46,17 @@ public class Storage {
         Task task;
         switch (taskType) {
         case "T":
+            assert data.length == 3;
             task = new Todo(description);
             break;
         case "D": {
+            assert data.length == 4;
             String date = data[3];
             task = new Deadline(description, date);
             break;
         }
         case "E": {
+            assert data.length == 4;
             String date = data[3];
             task = new Event(description, date);
             break;
@@ -63,6 +67,7 @@ public class Storage {
 
         if (isDone) {
             task.markAsDone();
+            assert task.isDone();
         }
         return task;
     }
@@ -76,6 +81,7 @@ public class Storage {
      */
     private String convertToHardDisk(Task task) throws InvalidTaskTypeException {
         String[] info = task.getInfo();
+        assert info.length > 0;
         String taskType = info[0];
         String description = info[1];
 
@@ -83,9 +89,11 @@ public class Storage {
 
         switch(taskType) {
         case "T":
+            assert info.length == 3;
             return taskType + " / " + isDone + " / " + description;
         case "D":
         case "E":
+            assert info.length == 4;
             return taskType + " / " + isDone + " / " + description + " / " + info[2];
         default:
             throw new InvalidTaskTypeException();

@@ -29,7 +29,9 @@ public class EventCommand extends Command {
     @Override
     public void perform(TaskList t) {
         tasks = t;
+        int a = tasks.size();
         tasks.add(event);
+        assert tasks.size() == a + 1;
     }
 
     /**
