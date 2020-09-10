@@ -232,7 +232,6 @@ public class Command {
         default:
             return null;
         }
-
     }
 
     /**
