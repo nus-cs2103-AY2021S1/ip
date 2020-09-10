@@ -34,6 +34,7 @@ public class Parser {
         String[] tokens = string.split(",");
         String type = tokens[0];
         switch (type) {
+            case "t":
             case "todo": {
                 // Todo task
 
@@ -47,6 +48,7 @@ public class Parser {
                 Task task = new TodoTask(false, taskName);
                 return new CreateTaskCommand(tasks, task);
             }
+            case "e":
             case "event": {
                 // Event task
                 if (tokens.length <= 2
@@ -64,6 +66,7 @@ public class Parser {
                 return new CreateTaskCommand(tasks, task);
             }
 
+            case "de":
             case "deadline": {
                 // Deadline task
 
@@ -82,12 +85,18 @@ public class Parser {
                 );
                 return new CreateTaskCommand(tasks, task);
             }
+
+            case "b":
             case "bye": {
                 return new ExitCommand();
             }
+
+            case "l":
             case "list": {
                 return new ListCommand(tasks);
             }
+
+            case "f":
             case "find": {
                 // Find task
                 if (tokens.length <= 1
@@ -97,6 +106,8 @@ public class Parser {
 
                 return new FindCommand(tasks, tokens[1]);
             }
+
+            case "do":
             case "done": {
                 // Handle incorrect argument lengths
                 if (tokens.length <= 1) {
@@ -107,6 +118,7 @@ public class Parser {
                 return new CompleteTaskCommand(tasks, taskIndex);
             }
 
+            case "del":
             case "delete": {
                 // Handle incorrect argument lengths
                 if (tokens.length <= 1) {
