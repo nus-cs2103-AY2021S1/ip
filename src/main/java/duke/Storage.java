@@ -75,6 +75,7 @@ public class Storage {
         for(int i = 1; i <= tasks.size(); ++i) {
             res += tasks.get(i - 1).getType() + "|" + tasks.get(i - 1).getDescription() + "|" + tasks.get(i - 1).isDone + "\n";
         }
+       // tasks.forEach((n) -> { res += n.getType() + "|" + n).getDescription() + "|" + tasks.get(i - 1).isDone + "\n"});
         return res;
     }
 }
