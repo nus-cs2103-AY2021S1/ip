@@ -3,6 +3,10 @@ package duke;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+/**
+ * Scheduler class deals with event schedules to detect any anomalies
+ * in scheduled events.
+ */
 public class Scheduler {
     /**
      * Returns a boolean to show whether the events are clashing.
