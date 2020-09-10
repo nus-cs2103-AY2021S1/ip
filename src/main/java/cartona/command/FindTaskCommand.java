@@ -27,7 +27,7 @@ public class FindTaskCommand implements Command {
      * @throws CartonaException if the command has already been executed
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws CartonaException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws CartonaException {
         if (isDone) {
             throw new CartonaException("Error: FindTaskCommand already executed");
         }
@@ -42,9 +42,9 @@ public class FindTaskCommand implements Command {
             }
         }
 
-        ui.printMatchingTaskList(matchingList);
-
         this.isDone = true;
+
+        return ui.printMatchingTaskList(matchingList);
     }
 
     @Override

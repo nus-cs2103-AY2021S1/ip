@@ -13,7 +13,7 @@ import cartona.ui.Ui;
 public class ExitCommand implements Command {
     private boolean hasExecuted;
 
-    ExitCommand() {
+    public ExitCommand() {
         this.hasExecuted = false;
     }
 
@@ -26,16 +26,17 @@ public class ExitCommand implements Command {
      * @throws CartonaException
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws CartonaException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws CartonaException {
         // Check if the command has already been executed.
         if (hasExecuted) {
             throw new CartonaException("Error: PrintErrorCommand already executed");
         }
 
-        // Print UI message
-        ui.printExitMessage();
-
         this.hasExecuted = true;
+
+        System.exit(0);
+        // Print UI message
+        return ui.printExitMessage();
     }
 
     @Override

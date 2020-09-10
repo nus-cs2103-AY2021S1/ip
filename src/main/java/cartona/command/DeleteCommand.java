@@ -31,7 +31,7 @@ public class DeleteCommand implements Command {
      * @throws CartonaException if the command has already been executed
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws CartonaException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws CartonaException {
         // Check if the command has already been executed.
         if (hasExecuted) {
             throw new CartonaException("Error: DeleteCommand already executed");
@@ -41,13 +41,13 @@ public class DeleteCommand implements Command {
         Task deletedTask = taskList.getTask(taskIdToDelete);
         taskList.deleteTask(taskIdToDelete);
 
-        // Print UI message
-        ui.printTaskDeletionMessage(deletedTask, taskList.getSize());
-
         // Update Storage
         storage.saveListToFile(taskList);
 
         this.hasExecuted = true;
+
+        // Return UI message
+        return ui.printTaskDeletionMessage(deletedTask, taskList.getSize());
     }
 
     @Override

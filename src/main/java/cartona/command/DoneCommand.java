@@ -31,7 +31,7 @@ public class DoneCommand implements Command {
      * @throws CartonaException if the command has already been executed
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws CartonaException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws CartonaException {
         // Check if the command has already been executed.
         if (hasExecuted) {
             throw new CartonaException("Error: DoneCommand already executed");
@@ -40,11 +40,11 @@ public class DoneCommand implements Command {
         taskList.completeTask(taskIdToComplete);
         Task completedTask = taskList.getTask(taskIdToComplete);
 
-        // Print UI message
-        ui.printTaskDoneMessage(completedTask);
-
         // Update Storage
         storage.saveListToFile(taskList);
+
+        // Return UI message
+        return ui.printTaskDoneMessage(completedTask);
     }
 
     @Override

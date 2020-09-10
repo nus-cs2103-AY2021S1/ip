@@ -5,9 +5,7 @@ import cartona.task.TaskList;
 
 import java.io.BufferedWriter;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Files;
@@ -32,6 +30,22 @@ public class Storage {
      */
     Storage(String pathString) {
         this.pathString = pathString;
+    }
+
+    /**
+     * Checks if the file located at the pathString exists. If the file does not exist, a new file will be created.
+     *
+     * @returns true if the file exists at the specified path, false if it does not and a new file was created.
+     */
+    public boolean checkAndCreateFile() throws IOException {
+        File file = new File(pathString);
+        boolean isCreated = file.exists();
+
+        if (!isCreated) {
+            file.createNewFile();
+        }
+
+        return isCreated;
     }
 
     /**
@@ -69,27 +83,15 @@ public class Storage {
                 System.out.printf(HORIZONTAL_LINE + "     Existing list not found, creating new list\n"
                         + HORIZONTAL_LINE);
             }
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             e.printStackTrace();
-
-        } catch (IOException e) {
-            e.printStackTrace();
-
-        } catch (IndexOutOfBoundsException e) {
-            // FOR TESTING, TO BE DISCARDED BEFORE RELEASE
-            System.out.println("     Encoding error: creating new list");
-            taskList = new TaskList();
-            Path listFilePath = Path.of(pathString);
-
-            try {
-                new PrintWriter(pathString).close();
-            } catch (IOException exception) {
-                exception.printStackTrace();
-            }
-
         }
 
         return taskList;
+    }
+
+    public String getPath() {
+        return pathString;
     }
 
     /**
@@ -100,7 +102,7 @@ public class Storage {
         String stringToWrite = taskList.getListForStorage();
 
         Path listFilePath = Path.of(pathString);
-
+        System.out.printf("writing file %s", listFilePath.toAbsolutePath().toString());
         try (BufferedWriter writer = Files.newBufferedWriter(
                 listFilePath, StandardCharsets.UTF_8, StandardOpenOption.WRITE)) {
             writer.write(stringToWrite, 0, stringToWrite.length());

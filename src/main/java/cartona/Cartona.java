@@ -3,9 +3,10 @@ package cartona;
 import cartona.command.Command;
 import cartona.command.Parser;
 import cartona.exception.CartonaException;
-import cartona.exception.InvalidInputException;
 import cartona.task.TaskList;
 import cartona.ui.Ui;
+
+import java.io.IOException;
 
 /**
  * Cartona is a simple CLI to-do list application. When run from the console, it reads input from the user and
@@ -23,45 +24,45 @@ public class Cartona {
         this.taskList = new TaskList();
         this.parser = new Parser();
         this.ui = new Ui();
-        this.storage = new Storage("./saved/tasklist.txt");
+        this.storage = new Storage("./tasklist.txt");
     }
 
-    /**
-     * The main method is run when the program is executed from the command line. It initialises the required classes
-     * and loads the list of tasks from a text file, whose relative path is fixed. It then reads input from the
-     * console; each line is passed into the parser, which returns a Command. The command is then run; if it is an exit
-     * command, the program terminates.
-     *
-     * @param args
-     */
-    public static void main(String[] args) {
-        Cartona cartona = new Cartona();
-        Ui ui = new Ui();
-        ui.printWelcomeMessage();
+    public String load() {
+        String lineMessage = "";
 
-        // Loads TaskList from text file
-        cartona.taskList = cartona.storage.getListFromStorage();
-
-        while (true) {
-            // Reads next line of input from user
-            String nextLine = ui.getNextLineInput();
-
-            try {
-                // Parse and execute command
-                Command nextCommand = cartona.parser.parseCommand(nextLine);
-                nextCommand.execute(cartona.taskList, cartona.ui, cartona.storage);
-
-                // If command is exit command, stop program after running
-                if (nextCommand.isExitCmd()) {
-                    break;
-                }
-
-            // If errors are encountered, print the error message to the console.
-            } catch (InvalidInputException e) {
-                ui.printErrorMessage(e.getMessage());
-            } catch (CartonaException e) {
-                ui.printErrorMessage(e.getMessage());
+        try {
+            if (!storage.checkAndCreateFile()) {
+                lineMessage = "     Existing list not found, creating new list\n";
             }
+        } catch (IOException e) {
+            return ui.getErrorMessageFormatted(e.getMessage());
         }
+
+        this.taskList = storage.getListFromStorage();
+
+        if (taskList.getSize() == 0) {
+            lineMessage = "     Found an existing list, but it was empty!\n";
+        } else {
+            lineMessage = String.format("     Found an existing list at %s%n", storage.getPath());
+        }
+
+        return String.format("%s%s", lineMessage, ui.getWelcomeMessageFormatted());
+    }
+
+    public String getResponse(String inputString) {
+        try {
+            // Parse and execute command
+            Command nextCommand = parser.parseCommand(inputString);
+            String response = nextCommand.execute(taskList, ui, storage);
+            return response;
+
+        } catch (CartonaException e) {
+            // If errors are encountered, print the error message to the console.
+            return ui.getErrorMessageFormatted(e.getMessage());
+        }
+    }
+
+    public static void main(String[] args) {
+
     }
 }

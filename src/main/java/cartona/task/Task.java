@@ -37,9 +37,9 @@ public abstract class Task {
     @Override
     public String toString() {
         if (this.isDone) {
-            return String.format("[✓] %s", name);
+            return String.format("[✔] %s", name);
         } else {
-            return String.format("[✗] %s", name);
+            return String.format("[✖] %s", name);
         }
     }
 

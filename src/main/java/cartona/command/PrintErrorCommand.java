@@ -31,14 +31,14 @@ public class PrintErrorCommand implements Command {
      * @throws CartonaException if the command has already been executed.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws CartonaException {
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws CartonaException {
         if (hasExecuted) {
             throw new CartonaException("Error: PrintErrorCommand already executed");
         }
 
-        ui.printErrorMessage(errorMessage);
-
         this.hasExecuted = true;
+
+        return ui.getErrorMessageFormatted(errorMessage);
     }
 
     @Override
