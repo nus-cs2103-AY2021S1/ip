@@ -1,9 +1,10 @@
 public class ListCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        String output = "";
+        String output;
         int numOfTasks = tasks.size();
         assert numOfTasks >= 0 : "Negative number of tasks in TaskList";
+
         if (tasks.isEmpty()) {
             output = ui.showListNoTasks();
         } else {
@@ -12,6 +13,7 @@ public class ListCommand extends Command {
                 output += ui.showTaskWithIndex(i, tasks.getTask(i)) + "\n";
             }
         }
+        
         return output;
     }
 

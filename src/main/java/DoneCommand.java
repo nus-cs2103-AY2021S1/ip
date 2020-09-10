@@ -12,20 +12,9 @@ public class DoneCommand extends Command {
         String output = ui.showDone(doneTask);
         
         storage.save(tasks);
+        
         return output;
     }
-    
-    /*
-    private void markAsDone(int indexOfDoneTask) {
-        Task doneTask = tasks.get(indexOfDoneTask - 1);
-        doneTask.markAsDone();
-        System.out.println("    ____________________________________________________________\n" +
-                "     Nice! I've marked this task as done:\n" +
-                "       " + doneTask + "\n" +
-                "    ____________________________________________________________");
-        writeSaveFile();
-    }
-     */
 
     @Override
     boolean isExit() {

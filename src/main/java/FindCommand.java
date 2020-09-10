@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 public class FindCommand extends Command {
-    private String searchString;
+    private final String searchString;
     
     public FindCommand(String searchString) {
         this.searchString = searchString;
@@ -21,6 +21,7 @@ public class FindCommand extends Command {
                 matchedTasks.add(currTask);
             }
         }
+        
         if (matchedTasks.isEmpty()) {
             output = ui.showNoMatch();
         } else {
