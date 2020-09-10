@@ -83,6 +83,16 @@ public class Task {
     }
 
     /**
+     * Checks if the details of the new task provided exactly match the task fields.
+     * This is with the exception of the task status (isComplete).
+     * @param newTask The new Task to be compared against.
+     * @return A boolean that determines if the details provided exactly match the task fields.
+     */
+    public boolean isEqualTo(Task newTask) {
+        return this.taskName.equals(newTask.getTaskName());
+    }
+
+    /**
      * Gets the string representation of the task object for printing.
      * This contains the completion status and the task name.
      * @return A string representation of the task for printing.
