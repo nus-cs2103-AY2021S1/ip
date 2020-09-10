@@ -46,6 +46,7 @@ public class Parser {
      */
     private void parseForCommand(String commandLine) throws Exception {
         String[] words = commandLine.split(" ", 2);
+        assert words.length == 2 : "String was not split() successfully to two parts.";
         commandWord = words[0];
 
         switch (commandWord) {
@@ -90,6 +91,7 @@ public class Parser {
     }
 
     private void parseForDetails(String remain) {
+        assert remain.contains("/") : "Remaining string must contain '/'.";
         String[] words = remain.split("/", 2);
         taskName = words[0].trim();
 

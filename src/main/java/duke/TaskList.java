@@ -49,6 +49,7 @@ public class TaskList implements Cloneable {
      */
     public void incrementPendingTasks() {
         this.numOfPendingTasks++;
+        assert numOfPendingTasks > 0 : "Amount of pending tasks was negative; something went wrong.";
     }
 
     /**
@@ -56,6 +57,7 @@ public class TaskList implements Cloneable {
      */
     public void decrementPendingTasks() {
         this.numOfPendingTasks--;
+        assert numOfPendingTasks >= 0 : "Called decrement to an empty list; should be impossible.";
     }
 
     /**

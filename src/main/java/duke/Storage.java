@@ -11,7 +11,7 @@ import java.util.Scanner;
 
 public class Storage {
     public static final String LOAD_FAILED = "Oops, load was unsuccessful!";
-    public static final String SAVE_WAS_UNSUCCESSFUL = "Oops, save was unsuccessful!";
+    public static final String SAVE_FAILED = "Oops, save was unsuccessful!";
     private String filePath;
 
     public Storage(String filePath) {
@@ -49,6 +49,8 @@ public class Storage {
         } catch (Exception e) {
             System.out.println(LOAD_FAILED);
         }
+
+        assert result.size() > 0 : "The load failed, or the original save file was invalid.";
         return result;
     }
 
@@ -71,7 +73,7 @@ public class Storage {
             }
             output.close();
         } catch (Exception e) {
-            System.out.println(SAVE_WAS_UNSUCCESSFUL);
+            System.out.println(SAVE_FAILED);
         }
     }
 }
