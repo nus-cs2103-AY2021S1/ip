@@ -42,20 +42,21 @@ public class Cartona {
         try {
             if (!storage.checkAndCreateFile()) {
                 lineMessage = "     Existing list not found, creating new list\n";
+            } else {
+                this.taskList = storage.getListFromStorage();
+
+                if (taskList.getSize() == 0) {
+                    lineMessage = "     Found an existing list, but it was empty!\n";
+                } else {
+                    lineMessage = String.format("     Found an existing list at %s%n", storage.getPath());
+                }
             }
+
+            return String.format("%s%s", lineMessage, ui.getWelcomeMessageFormatted());
+
         } catch (IOException e) {
             return ui.getErrorMessageFormatted(e.getMessage());
         }
-
-        this.taskList = storage.getListFromStorage();
-
-        if (taskList.getSize() == 0) {
-            lineMessage = "     Found an existing list, but it was empty!\n";
-        } else {
-            lineMessage = String.format("     Found an existing list at %s%n", storage.getPath());
-        }
-
-        return String.format("%s%s", lineMessage, ui.getWelcomeMessageFormatted());
     }
 
     /**
@@ -68,6 +69,7 @@ public class Cartona {
         try {
             // Parse and execute command
             Command nextCommand = parser.parseCommand(inputString);
+
             String response = nextCommand.execute(taskList, ui, storage);
             return response;
 

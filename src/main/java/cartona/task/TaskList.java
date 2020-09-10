@@ -42,7 +42,13 @@ public class TaskList {
      * @throws CartonaException if the given task is already done
      */
     public void completeTask(int taskNum) throws CartonaException {
-        Task toComplete = taskArrayList.get(taskNum - 1);
+        Task toComplete = null;
+
+        try {
+            toComplete = taskArrayList.get(taskNum - 1);
+        } catch (IndexOutOfBoundsException e) {
+            throw new CartonaException("Error: Task with that number does not exist.");
+        }
 
         if (toComplete.checkIfDone()) {
             throw new CartonaException(String.format("Error: Task %d is already done.", taskNum));

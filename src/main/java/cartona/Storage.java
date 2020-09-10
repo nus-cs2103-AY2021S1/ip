@@ -87,6 +87,14 @@ public class Storage {
      * @param taskList The TaskList to be saved.
      */
     public void saveListToFile(TaskList taskList) {
+
+        try {
+            assert checkAndCreateFile();
+        } catch (IOException e) {
+            // accounts for case where parent directory of file does not exist
+            throw new AssertionError("File should have been created");
+        }
+
         String stringToWrite = taskList.getListForStorage();
 
         Path listFilePath = Path.of(pathString);
