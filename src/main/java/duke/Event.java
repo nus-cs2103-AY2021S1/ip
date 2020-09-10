@@ -63,4 +63,16 @@ public class Event extends Task {
         return "[E]" + super.toStringFileFormat() + " (at: "
                 + at + " " + start + "-" + end + ")";
     }
+
+    public LocalDate getDate() {
+        return at;
+    }
+
+    public LocalTime getStartTime() {
+        return start;
+    }
+
+    public LocalTime getEndTime() {
+        return end;
+    }
 }

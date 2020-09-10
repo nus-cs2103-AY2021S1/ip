@@ -22,16 +22,6 @@ public class InputParser {
     }
 
     /**
-     * Reads and returns the input from user
-     * as a string.
-     *
-     * @return String input from user.
-     */
-    public String getInput() {
-        return myObj.nextLine().trim();
-    }
-
-    /**
      * Takes the given input and parses it to
      * return the appropriate command enum type.
      *

@@ -6,6 +6,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.HelpCommand;
 import duke.command.ListCommand;
+
 import duke.parser.InputParser;
 
 /**
@@ -17,7 +18,6 @@ public class Duke {
     private Storage storage;
     private InputParser inputParser;
     private TaskList userTasks;
-
     /**
      * Instantiates a new Duke chatbot.
      */
@@ -57,8 +57,12 @@ public class Duke {
             break;
         case EVENT:
             String[] eventParams = inputParser.parseEventInput(input);
-            response += new AddCommand(new Event(eventParams[0], eventParams[1], eventParams[2]))
-                    .execute(userTasks, storage);
+            try {
+                response += new AddCommand(new Event(eventParams[0], eventParams[1], eventParams[2]))
+                        .execute(userTasks, storage);
+            } catch (DukeException ex) {
+                response += ui.errorMessage(ex);
+            }
             break;
         case LIST:
             response += new ListCommand().execute(userTasks, input);
