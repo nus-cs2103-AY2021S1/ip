@@ -44,4 +44,10 @@ public class Task implements Serializable {
     public void setDone() {
         this.isDone = true;
     }
+
+    /**
+     * Sets the status of a task to "Undone"
+     */
+    public void setUndone() {
+        this.isDone = false; }
 }

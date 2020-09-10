@@ -12,10 +12,9 @@ public class Parser {
      * @throws FileNotFoundException
      */
 
-    public String commandParser(String command, TaskList list, Storage store)
+    public String commandParser(String command, TaskList list, Storage store, Command action)
             throws DukeException, FileNotFoundException {
         ArrayList<Task> storage = list.getTasks();
-        Command action = new Command();
         try {
             assert !command.equals("") : "Please type in your command.";
             if (command.equals("list")) {
@@ -34,6 +33,8 @@ public class Parser {
                 return action.delete(command, store, storage);
             } else if (command.startsWith("find")) {
                 return action.find(command, storage);
+            } else if (command.startsWith("undo")) {
+                return action.undo(store, storage);
             } else {
                 throw new DukeException(command);
             }

@@ -19,6 +19,7 @@ public class Duke extends Application implements Serializable {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private Command action;
     private ScrollPane scrollPane;
     private VBox dialogContainer;
     private TextField userInput;
@@ -34,6 +35,7 @@ public class Duke extends Application implements Serializable {
     public Duke(String filepath) {
         ui = new Ui();
         storage = new Storage(filepath);
+        action = new Command();
         try {
             tasks = new TaskList(storage.load());
         } catch (IOException e) {
@@ -49,6 +51,7 @@ public class Duke extends Application implements Serializable {
         this.storage = duke.storage;
         this.tasks = duke.tasks;
         this.ui = duke.ui;
+        this.action = duke.action;
     }
 
     @Override
@@ -159,7 +162,7 @@ public class Duke extends Application implements Serializable {
      */
     public String getResponse(String input) throws FileNotFoundException, DukeException {
         Parser parser = new Parser();
-        return parser.commandParser(input, tasks, storage);
+        return parser.commandParser(input, tasks, storage, action);
     }
 
     /**

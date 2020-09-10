@@ -3,6 +3,8 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 
 public class Command {
+    private String prevCommand = "";
+    private int position = -1;
     /**
      * Prints out the current tasks in the list
      * @param command
@@ -37,6 +39,8 @@ public class Command {
             Task current = storage.get(number - 1);
             current.setDone();
             store.save(storage);
+            prevCommand = "done";
+            position = number - 1;
             return "Nice! I've marked this task as done: " + "\n"
                     + current.getStatusIcon() + " " + current.getDescription();
         } catch (IndexOutOfBoundsException e) {
@@ -71,6 +75,8 @@ public class Command {
 
         store.save(storage, todo);
         int size = storage.size();
+        prevCommand = "task";
+        position = size - 1;
         return "Got it. I've added this task: " + "\n" + todo + "\n"
                 + "Now you have " + size + " tasks in the list.";
     }
@@ -96,6 +102,8 @@ public class Command {
         Deadline deadline = new Deadline(string[0], string[1]);
         store.save(storage, deadline);
         int size = storage.size();
+        prevCommand = "task";
+        position = size - 1;
         return "Got it. I've added this task: " + "\n" + deadline + "\n"
                 + "Now you have " + size + " tasks in the list.";
     }
@@ -121,6 +129,8 @@ public class Command {
         Events event = new Events(string[0], string[1]);
         store.save(storage, event);
         int size = storage.size();
+        prevCommand = "task";
+        position = size - 1;
         return "Got it. I've added this task: " + "\n" + event + "\n"
                 + "Now you have " + size + " tasks in the list.";
     }
@@ -144,17 +154,36 @@ public class Command {
      */
     public String delete(String command, Storage store, ArrayList<Task> storage) throws DukeException {
         try {
-            int number = Integer.parseInt(command.split(" ")[1]);
-            Task task = storage.get(number - 1);
-            storage.remove(number - 1);
-            store.save(storage);
-            int size = storage.size();
-            return "Noted, I've removed this task: " + "\n" + task + "\n"
-                    + "Now you have " + size + " tasks in the list.";
+            String[] temp = command.split("e ");
+            if (temp[1].length() == 1) {
+                int number = Integer.parseInt(command.split(" ")[1]);
+                Task task = storage.get(number - 1);
+                storage.remove(number - 1);
+                store.save(storage);
+                int size = storage.size();
+                return "Noted, I've removed this task: " + "\n" + task + "\n"
+                        + "Now you have " + size + " tasks in the list.";
+            } else {
+                String[] range = temp[1].split("-");
+                int first = Integer.parseInt(range[0]);
+                int second = Integer.parseInt(range[1]);
+                String deletedTasks = "";
+                for (int i = first - 1; i < second; i++) {
+                    Task task = storage.get(first - 1);
+                    deletedTasks += task + "\n";
+                    storage.remove(first - 1);
+                    store.save(storage);
+                }
+                int size = storage.size();
+                return "Noted, I've removed the following tasks: " + deletedTasks
+                        + "Now you have " + size + " tasks in the list.";
+            }
         } catch (IndexOutOfBoundsException e) {
             throw new DukeException("delete2");
         } catch (InputMismatchException | FileNotFoundException e) {
             throw new DukeException(command);
+        } catch (NumberFormatException e) {
+            return "Please enter the position of the item you wish to delete.";
         }
     }
 
@@ -185,6 +214,33 @@ public class Command {
             throw new DukeException("find2");
         } else {
             return tasks;
+        }
+    }
+
+    /**
+     * Undoes the most recent change to the current list of Tasks
+     * @param store
+     * @param storage
+     * @return The most recent change to the current list of Tasks
+     * @throws FileNotFoundException
+     */
+    public String undo(Storage store, ArrayList<Task> storage) throws FileNotFoundException {
+        if (prevCommand.equals("done")) {
+            Task current = storage.get(position);
+            current.setUndone();
+            store.save(storage);
+            prevCommand = "";
+            return "Nice! I've unchecked this task " + "\n"
+                    + current.getStatusIcon() + " " + current.getDescription();
+        } else if (prevCommand.equals("task")) {
+            Task task = storage.get(position);
+            storage.remove(position);
+            store.save(storage);
+            prevCommand = "";
+            position = -1;
+            return "Alright! I've undid your previous addition: " + "\n" + task;
+        } else {
+            return "Cannot undo any further.";
         }
     }
 }
