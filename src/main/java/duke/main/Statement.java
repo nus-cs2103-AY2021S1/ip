@@ -58,6 +58,13 @@ public enum Statement {
         }
     },
 
+    UPDATE {
+        @Override
+        public String toString() {
+            return "Got it. I've update the task\n";
+        }
+    },
+
     TASKADDED {
         @Override
         public String toString() {

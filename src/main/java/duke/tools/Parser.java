@@ -70,7 +70,9 @@ public class Parser {
 
         extract = new String[3];
         extract = extract(order);
+
         assert extract[command] != null : "Shorten() not working";
+
         reloadTaskList();
 
         if (order.equals(Command.LIST.toString())) {
@@ -86,6 +88,8 @@ public class Parser {
                     return find(extract[taskDetail]);
                 } else if (extract[command].equals((Command.CLEAR.toString()))) {
                     return clear();
+                } else if (extract[command].equals((Command.UPDATE.toString()))) {
+                    return update();
                 } else {
                     return identifier();
                 }
@@ -184,6 +188,47 @@ public class Parser {
         );
 
         return new Format<>(response).toString();
+    }
+
+    /**
+     * Updates the selected number of task
+     * with the new input.
+     * This is done by first deleting the required task
+     * and then add in a new task.
+     *
+     * @return String that contains all tasks after update.
+     */
+    public static String update() {
+        //The number of the task to update is in taskDetail.
+        String[] indexAndTypeOfUpdate = extract[taskDetail].split(" ");
+
+        //The detail of the task to update is in taskTime.
+        String taskToUpdate = extract[taskTime];
+
+        //Checks if there are more things other than
+        //one index and one partToUpdate.
+        if (indexAndTypeOfUpdate.length > 2) {
+            return DukeException.updateFormatException();
+        }
+
+        //Extract the index.
+        String indexInString = new Format<>(indexAndTypeOfUpdate[0]).shorten().getContent();
+
+        //Extract the command.
+        String command = new Format<>(indexAndTypeOfUpdate[1]).shorten().getContent();
+
+        try {
+            int index = Integer.parseInt(indexInString);
+
+            if (index > taskList.getTaskList().size()) {
+                return DukeException.numberExcessException();
+            }
+
+            return new DukeFileEditor(Directory.FILEDIRECTORY.toString())
+                    .update(index, command, taskToUpdate);
+        } catch (NumberFormatException e) {
+            return DukeException.numberFormatException();
+        }
     }
 
     /**

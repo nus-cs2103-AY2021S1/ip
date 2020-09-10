@@ -81,5 +81,13 @@ public enum Exceptions {
         public String toString() {
             return "Errors occurs during writing into the file";
         }
+    },
+
+    UPDATEFORMATEXCEPTION {
+        @Override
+        public String toString() {
+            return "Your update command format is incorrect.\n"
+                    + "please use: update <number to update> <detail/time> /to <content>";
+        }
     }
 }

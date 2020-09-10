@@ -40,6 +40,22 @@ public class Task {
         this.isDone = true;
     }
 
+    /**
+     * Returns Task with new content.
+     *
+     * @param newContent Content that the user wants to change to.
+     * @return Task with new content.
+     */
+    public Task updateDetail(String newContent) {
+        Task result = new Task(newContent);
+
+        if (isDone) {
+            result.setDone();
+        }
+
+        return result;
+    }
+
     @Override
     public String toString() {
         return getStatusIcon() + " " + this.description;

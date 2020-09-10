@@ -98,4 +98,13 @@ public class DukeException {
     public static String fileWritingException() {
         return new Format<>(Exceptions.WRITINGEXCEPTION.toString()).toString();
     }
+
+    /**
+     * Returns an error message when the update format is incorrect.
+     *
+     * @return An error message.
+     */
+    public static String updateFormatException() {
+        return new Format<>(Exceptions.UPDATEFORMATEXCEPTION.toString()).toString();
+    }
 }

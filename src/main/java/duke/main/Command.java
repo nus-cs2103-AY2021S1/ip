@@ -66,5 +66,26 @@ public enum Command {
         public String toString() {
             return "clear";
         }
+    },
+
+    UPDATE {
+        @Override
+        public String toString() {
+            return "update";
+        }
+    },
+
+    UPDATETIME {
+        @Override
+        public String toString() {
+            return "time";
+        }
+    },
+
+    UPDATEDETAIL {
+        @Override
+        public String toString() {
+            return "detail";
+        }
     }
 }
