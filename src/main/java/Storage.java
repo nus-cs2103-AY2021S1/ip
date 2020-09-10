@@ -12,7 +12,7 @@ public class Storage {
     protected final File TASKFILE;
     protected String createResult = "";
 
-    // constructor
+    // Constructor
     public Storage(String filePath) {
 
         this.TASKFILE = new File(filePath);

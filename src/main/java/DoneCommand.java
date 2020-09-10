@@ -34,7 +34,7 @@ public class DoneCommand implements Command {
                 throw new InvalidNumberFromDoneCommandException();
             } else {
                 Task t = taskList.TASKS.get(taskNumber);
-                taskList.done(taskNumber);
+                taskList.markAsDone(taskNumber);
                 storage.write(taskList.TASKS);
                 ui.showLine();
                 ui.doneCommandSuccessMessage(taskNumber + 1, t);

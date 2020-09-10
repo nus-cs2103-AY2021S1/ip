@@ -12,15 +12,15 @@ public class Deadline extends Task {
      * provided that the command input is valid.
      *
      * @param description String describing the Deadline task.
-     * @param by String indicating the deadline of the Deadline task.
+     * @param dateBy String indicating the deadline of the Deadline task.
      * @param isDone Boolean indicating if the Deadline task is done.
 
      */
-    public Deadline(String description, String by, boolean isDone) {
+    public Deadline(String description, String dateBy, boolean isDone) {
 
         super(description.trim(), isDone);
 
-        String[] dateAndTime = by.trim().split(" ");
+        String[] dateAndTime = dateBy.trim().split(" ");
         String[] date = dateAndTime[0].split("/");
 
         String time = String.format("%04d", Integer.parseInt(dateAndTime[1]));

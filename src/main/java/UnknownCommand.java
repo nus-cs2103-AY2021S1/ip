@@ -22,7 +22,7 @@ public class UnknownCommand implements Command {
      */
     public void execute(TaskList taskList, Ui ui, Storage storage) {
         ui.showLine();
-        ui.unknownCommand(COMMAND);
+        ui.printUnknownCommandMessage(COMMAND);
         ui.showLine();
     }
 
