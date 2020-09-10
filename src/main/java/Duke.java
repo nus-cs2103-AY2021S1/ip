@@ -57,6 +57,7 @@ public class Duke {
      * Replace this stub with your completed method.
      */
     String getResponse(String input) throws IOException, DukeException {
+        assert input != null : "Input shouldn't be empty";
         Command cmd = Parser.parse(input);
         return cmd.execute(tasks, ui, storage);
     }
