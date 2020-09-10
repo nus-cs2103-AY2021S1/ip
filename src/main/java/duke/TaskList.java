@@ -60,7 +60,7 @@ class TaskList {
         return taskList;
     }
 
-    String addTask(CommandName commandName, String description, String date) throws DukeException {
+    String[] addTask(CommandName commandName, String description, String date) throws DukeException {
         Task task;
 
         switch (commandName) {
@@ -79,10 +79,11 @@ class TaskList {
         }
 
         int len = taskList.size();
-        String addedTaskOutputMessage = "Got it. I've added this task:\n"
-                + task.toString() + "\nNow you have " + len
-                + " tasks in the list.";
-        return addedTaskOutputMessage;
+
+        String[] output = new String[2];
+        output[0] = task.toString();
+        output[1] = String.valueOf(len);
+        return output;
     }
 
     private Task handleTodo(String todoTask) {
@@ -138,43 +139,38 @@ class TaskList {
         }
     }
 
-    String listTasks() {
-        StringBuilder output = new StringBuilder("Here are the tasks in your list:\n");
-        int index = 1;
+    ArrayList<String> listTasks() {
+        ArrayList<String> taskListString = new ArrayList<>();
         for (Task task : taskList) {
-            output.append(index).append(".").append(task.toString()).append("\n");
-            index++;
+            taskListString.add(task.toString());
         }
-        return output.toString();
+        return taskListString;
     }
 
     String doTask(int index) {
         Task task = taskList.get(index - 1);
         task.setDone(true);
-        String doneOutputMessage = "Nice! I've marked this task as done: \n"
-                + task.toString();
-        return doneOutputMessage;
+        return task.toString();
     }
 
-    String deleteTask(int index) {
+    String[] deleteTask(int index) {
         Task task = taskList.get(index - 1);
         taskList.remove(index - 1);
         int len = taskList.size();
-        String deletionOutputMessage = "Noted. I've removed this task:\n"
-                + task.toString() + "\nNow you have " + len
-                + " tasks in the list.";
-        return deletionOutputMessage;
+
+        String[] output = new String[2];
+        output[0] = task.toString();
+        output[1] = String.valueOf(len);
+        return output;
     }
 
-    String findTasks(String search) {
-        StringBuilder output = new StringBuilder("Here are the matching tasks in your list:\n");
-        int index = 1;
+    ArrayList<String> findTasks(String search) {
+        ArrayList<String> foundTaskListString = new ArrayList<>();
         for (Task task : taskList) {
             if (task.toString().contains(search)) {
-                output.append(index).append(".").append(task.toString()).append("\n");
-                index++;
+                foundTaskListString.add(task.toString());
             }
         }
-        return output.toString();
+        return foundTaskListString;
     }
 }

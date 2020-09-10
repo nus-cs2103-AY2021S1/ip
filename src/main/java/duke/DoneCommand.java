@@ -25,11 +25,10 @@ class DoneCommand extends Command {
      */
     @Override
     String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String output = tasks.doTask(index);
+        String taskString = tasks.doTask(index);
         ArrayList<Task> taskList = tasks.getTasks();
         storage.save(taskList);
-        return ui.printOutput(output);
-
+        return ui.showDoTaskMessage(taskString);
     }
 
     /**

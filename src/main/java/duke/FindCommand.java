@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+
 class FindCommand extends Command {
 
     private String search;
@@ -10,8 +12,8 @@ class FindCommand extends Command {
 
     @Override
     String execute(TaskList tasks, Ui ui, Storage storage) {
-        String output = tasks.findTasks(search);
-        return ui.printOutput(output);
+        ArrayList<String> foundTaskListString = tasks.findTasks(search);
+        return ui.showFindTaskMessage(foundTaskListString);
     }
 
     @Override

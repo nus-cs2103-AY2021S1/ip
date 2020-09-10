@@ -1,5 +1,7 @@
 package duke;
 
+import java.util.ArrayList;
+
 /**
  * Controls logic of listing tasks.
  */
@@ -14,8 +16,8 @@ class ListCommand extends Command {
      */
     @Override
     String execute(TaskList tasks, Ui ui, Storage storage) {
-        String output = tasks.listTasks();
-        return ui.printOutput(output);
+        ArrayList<String> taskListString = tasks.listTasks();
+        return ui.showListTaskMessage(taskListString);
     }
 
     /**
