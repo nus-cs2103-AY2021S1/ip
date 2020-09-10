@@ -10,6 +10,7 @@ public class FindCommand extends Command {
     @Override
     String execute(TaskList tasks, Ui ui, Storage storage) {
         int numOfTasks = tasks.size();
+        assert numOfTasks >= 0 : "Negative number of tasks in Tasklist";
         ArrayList<Task> matchedTasks = new ArrayList<>();
         String output = "";
         
