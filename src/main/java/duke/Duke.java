@@ -6,6 +6,8 @@ import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.stream.Collectors;
+
 import javafx.application.Application;
 import javafx.fxml.FXML;
 import javafx.scene.Scene;
@@ -240,6 +242,9 @@ public class Duke extends Application {
                 for(int i = 1; i <= tasks.getSize(); ++i) if(tasks.get(i - 1).description.contains(tmp)){
                     System.out.println(i + "." + tasks.get(i - 1).getStatus());
                 }
+                // find without index
+                List<Task> containsList = tasks.getArrayList().stream().filter(n -> n.description.contains(tmp))
+                                               .collect(Collectors.toList());
             }
             else System.out.println("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
             storage.updateDataFile(tasks.getArrayList());
