@@ -44,6 +44,16 @@ public class Task {
     }
 
     /**
+     * Remove the tag for the task and returns the task.
+     *
+     * @return Return task.
+     */
+    public Task removeTag() {
+        this.tag = null;
+        return this;
+    }
+
+    /**
      * Returns boolean indicating if task has been tagged.
      *
      * @return boolean indicating if task has beent tagged.

@@ -10,8 +10,9 @@ import util.Ui;
 
 
 /**
- * Represents the tag command. The tag command creates a new tag and tags it to an existing task. If the task has an
- * existing tag, the tag command replaces the existing tag with the newly created tag.
+ * Represents the tag command. Firstly, the tag command can create a new tag and tag it to an existing task.
+ * Secondly, if the task has an existing tag, the tag command replaces the existing tag with the newly created tag.
+ * Lastly, the tag command can also delete a tag from a task.
  */
 public class TagCommand extends Command {
     /**
@@ -25,18 +26,25 @@ public class TagCommand extends Command {
     private final String tagName;
 
     /**
+     * Boolean representing if the tag command should be one that deletes a tag.
+     */
+    private final boolean isDelete;
+
+    /**
      * Creates a new Tag command.
      *
      * @param taskNum Task number of task to be tagged.
      */
-    public TagCommand(int taskNum, String tagName) {
+    public TagCommand(int taskNum, String tagName, boolean isDelete) {
         this.taskNum = taskNum;
         this.tagName = tagName;
+        this.isDelete = isDelete;
     }
 
     /**
-     * Executes the tag command. The execution involves tagging the task with the newly created tag,
-     * writing to the storage as well as printing the relevant UI.
+     * Executes the tag command. The execution involves tagging the task with the newly created tag, replacing an
+     * existing tag, or deleting the tag from the task. It also involves writing to the storage and printing the
+     * relevant UI.
      *
      * @param lst     List containing the current tasks.
      * @param ui      Ui allows execute to carry out ui methods to print to the console.
@@ -48,12 +56,16 @@ public class TagCommand extends Command {
         Task task = lst.get(lineNum);
         Tag tag = new Tag(tagName);
         boolean isTagged = task.isTagged();
-        try {
-            storage.modifyLineTag(lineNum, tag, isTagged);
+        if (isDelete) {
+            task.removeTag();
+        } else {
             task.setTag(tag);
+        }
+        try {
+            storage.modifyLineTag(lineNum, tag, isTagged, isDelete);
         } catch (IOException e) {
             return ui.showError(e.getMessage());
         }
-        return ui.showTagAdded(task, taskNum);
+        return isDelete ? ui.showTagRemoved(task, taskNum) : ui.showTagAdded(task, taskNum);
     }
 }

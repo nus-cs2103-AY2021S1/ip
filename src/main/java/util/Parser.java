@@ -88,7 +88,7 @@ public class Parser {
      */
     private boolean isInvalidTagFormat(String result) {
         String[] splitResult = result.split(" ");
-        return splitResult.length < 2;
+        return splitResult.length != 2;
     }
 
     /**
@@ -164,7 +164,8 @@ public class Parser {
             String tagName = splitCommandDesc[1];
             int taskNumber = Integer.parseInt(splitCommandDesc[0]);
             this.validateTaskNum(taskNumber);
-            resultantCommand = new TagCommand(taskNumber, tagName);
+            boolean isDelete = tagName.equals("delete");
+            resultantCommand = new TagCommand(taskNumber, tagName, isDelete);
             break;
         default:
             assert false : action;

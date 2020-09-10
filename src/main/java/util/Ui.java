@@ -111,6 +111,17 @@ public class Ui {
     }
 
     /**
+     * Returns the tag removed from task acknowledgement string.
+     *
+     * @param task    Task to print
+     * @param taskNum Task number of task
+     * @return The task tag added to task acknowledgement string.
+     */
+    public String showTagRemoved(Task task, int taskNum) {
+        return "The following task's tag has been removed: \n" + this.showTask(task, taskNum);
+    }
+
+    /**
      * Returns the goodbye message string.
      *
      * @return Goodbye message string.

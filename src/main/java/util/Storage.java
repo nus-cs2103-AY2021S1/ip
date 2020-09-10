@@ -101,24 +101,36 @@ public class Storage {
     }
 
     /**
-     * Modifies a line from the file, adding a tag to the task in the line or replacing the task's existing tag.
+     * Modifies a line from the file, adding a tag to the task in the line, replacing the task's existing tag or
+     * deleting the tag.
      *
      * @param lineNum Line number to be modified from the file.
      * @param tag Tag to be added to the task.
      * @param isTagged Boolean indicating if task is already tagged.
+     * @param isDelete Boolean indicating if tag should be deleted.
      * @throws IOException If there is error writing to the file.
      */
-    public void modifyLineTag(int lineNum, Tag tag, boolean isTagged) throws IOException {
+    public void modifyLineTag(int lineNum, Tag tag, boolean isTagged, boolean isDelete) throws IOException {
         Path path = Path.of(file.getPath());
         List<String> fileContent = new ArrayList<>(Files.readAllLines(path, StandardCharsets.UTF_8));
         String line = fileContent.get(lineNum);
         StringBuilder updatedLine;
+        String[] lineSplit = line.split("\\|");
         if (!isTagged) {
             // add new tag to task
             updatedLine = new StringBuilder(line + " | " + tag.getName());
+        } else if (isDelete) {
+            // delete tag from task
+            updatedLine = new StringBuilder();
+            for (int i = 0; i < lineSplit.length - 1; i++) {
+                if (i == (lineSplit.length - 2)) {
+                    updatedLine.append(lineSplit[i]);
+                } else {
+                    updatedLine.append(lineSplit[i]).append("|");
+                }
+            }
         } else {
             // replace existing tag
-            String[] lineSplit = line.split("\\|");
             lineSplit[lineSplit.length - 1] = tag.getName();
             updatedLine = new StringBuilder();
             for (int i = 0; i < lineSplit.length; i++) {
