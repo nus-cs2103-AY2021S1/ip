@@ -7,7 +7,6 @@ import duke.Scheduler;
 import duke.Storage;
 import duke.Task;
 import duke.TaskList;
-import duke.ToDo;
 import duke.Ui;
 
 /**

@@ -23,6 +23,9 @@ public class Scheduler {
         for (Task task : userTasks.getTaskList()) {
             if (task instanceof Event) {
                 isEventClashing = isEventClashingAnotherEvent(((Event) task), toBeScheduled);
+                if (isEventClashing) {
+                    break;
+                }
             }
         }
 
