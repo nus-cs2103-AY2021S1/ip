@@ -4,7 +4,7 @@ import java.io.IOException;
 
 public class ReadFile {
     /** Destination path of the duke.txt storage file. */
-    private String path;
+    private final String path;
 
     /**
      * Construct new ReadFile object.

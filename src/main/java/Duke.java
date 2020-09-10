@@ -35,16 +35,16 @@ public class Duke {
                 String action = Parser.getAction(command);
                 switch (action) {
                 case "done":
-                    tasks.done(command);
+                    tasks.markDone(command);
                     break;
                 case "todo":
-                    tasks.newToDo(command);
+                    tasks.createToDo(command);
                     break;
                 case "deadline":
-                    tasks.newDeadline(command);
+                    tasks.createDeadline(command);
                     break;
                 case "event":
-                    tasks.newEvent(command);
+                    tasks.createEvent(command);
                     break;
                 case "delete":
                     tasks.delete(command);
@@ -53,7 +53,7 @@ public class Duke {
                     tasks.find(command);
                     break;
                 default:
-                    tasks.defaultError();
+                    tasks.getDefaultError();
                 }
                 storage.save(tasks.getTasks());
             }
@@ -70,13 +70,4 @@ public class Duke {
     public String getResponse(String input) {
         return "Duke heard: " + input;
     }
-
-//    /**
-//     * Starts the Duke application.
-//     *
-//     * @param args Typical String[] argument.
-//     */
-//    public static void main(String[] args) {
-//        new Duke(Storage.getFilePath()).run();
-//    }
 }

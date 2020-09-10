@@ -2,7 +2,7 @@ import java.util.Scanner;
 
 public class Ui {
     /** Scanner object. */
-    private Scanner sc;
+    private final Scanner sc;
 
     /**
      * Constructs new Ui object.

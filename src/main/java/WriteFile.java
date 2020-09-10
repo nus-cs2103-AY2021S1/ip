@@ -39,7 +39,7 @@ public class WriteFile {
         FileWriter write = new FileWriter(path, isToAppend);
         PrintWriter print = new PrintWriter(write);
 
-        print.printf(text == "" ? "%s" : "%s" + "%n", text);
+        print.printf(text.equals("") ? "%s" : "%s" + "%n", text);
         print.close();
     }
 }

@@ -35,7 +35,7 @@ public class TaskList {
      *
      * @return Number of tasks.
      */
-    public String numTasks() {
+    public String getNumTasksStr() {
         int numTasks = tasks.size();
         return numTasks == 1 ? "1 task" : numTasks + " tasks";
     }
@@ -49,7 +49,7 @@ public class TaskList {
     public void listChangePrint(Task task, ListChange change) {
         String keyword = change == ListChange.ADD ? "added" : "removed";
         System.out.println("Noted. I've " + keyword + " this task:\n" + task.toString());
-        System.out.println("Now you have " + this.numTasks() + " in the list.");
+        System.out.println("Now you have " + this.getNumTasksStr() + " in the list.");
     }
 
     /**
@@ -66,7 +66,7 @@ public class TaskList {
      *
      * @param command User command.
      */
-    public void done(String command) {
+    public void markDone(String command) {
         try {
             int taskId = Parser.getTaskId(command);
             tasks.get(taskId).markAsDone();
@@ -82,7 +82,7 @@ public class TaskList {
      *
      * @param command User command.
      */
-    public void newToDo(String command) {
+    public void createToDo(String command) {
         if (command.equals("todo")) {
             new DukeException("invalidTodo");
         } else {
@@ -102,7 +102,7 @@ public class TaskList {
      *
      * @param command User command.
      */
-    public void newDeadline(String command) {
+    public void createDeadline(String command) {
         try {
             String desc = Parser.getDeadlineDesc(command);
             String by = Parser.getBy(command);
@@ -119,7 +119,7 @@ public class TaskList {
      *
      * @param command User command.
      */
-    public void newEvent(String command) {
+    public void createEvent(String command) {
         try {
             String desc = Parser.getEventDesc(command);
             String at = Parser.getAt(command);
@@ -161,9 +161,9 @@ public class TaskList {
             } else {
                 List<Task> tasksFound = new ArrayList<>();
 
-                for (int i = 0; i < tasks.size(); ++i) {
-                    if (tasks.get(i).toString().contains(keyword)) {
-                        tasksFound.add(tasks.get(i));
+                for (Task task : tasks) {
+                    if (task.toString().contains(keyword)) {
+                        tasksFound.add(task);
                     }
                 }
                 TaskList tasksFoundList = new TaskList(tasksFound);
@@ -175,7 +175,7 @@ public class TaskList {
     /**
      * Returns the default invalid command error.
      */
-    public void defaultError() {
+    public void getDefaultError() {
         new DukeException("invalidCommand");
     }
 }

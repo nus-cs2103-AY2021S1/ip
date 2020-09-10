@@ -11,7 +11,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke(Storage.getFilePath());
+    private final Duke duke = new Duke(Storage.getFilePath());
 
     @Override
     public void start(Stage stage) {
