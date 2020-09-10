@@ -1,1 +1,2 @@
-T*homework*N
+T*homework*Y
+E*meeting *16:00*20:00*N

@@ -23,14 +23,12 @@ public class DukeParser {
             return new DeadlineCommand(splitList,ls);
         }else if(splitList[0].equals("event")){
             return new EventCommand(splitList,ls);
-        }else if(input.equals("blah")){
-            return new BlahCommand();
         }else if(splitList[0].equals("delete")){
             return new DeleteCommand(ls,Integer.parseInt(splitList[1]));
         }else if(splitList[0].equals("find")) {
             return new FindCommand(ls, splitList[1]);
         }else {
-            return new TaskCommand(ls,input);
+            return new BlahCommand();
         }
     }
 }
