@@ -5,6 +5,7 @@ import java.text.ParseException;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
 import duke.command.DeleteCommand;
+import duke.command.HelpCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.ExitCommand;
@@ -18,6 +19,8 @@ public class Parser {
         if (echo.equals("bye")) {
             assert echo != null : "Input should not be null";
             return new ExitCommand();
+        } if (echo.equals("help")) {
+            return new HelpCommand();
         } else if (echo.matches("(?i)list\\s*")) { // Querying items
             return new ListCommand();
         } else if (echo.matches("(?i)find\\s+\\S+")) {

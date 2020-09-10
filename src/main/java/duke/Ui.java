@@ -37,4 +37,9 @@ public class Ui {
                 + "Now you have " + numberOfTasks + " tasks in the list.\n";
         return printMessage(toPrint);
     }
+
+    public static String printHelpMessage() {
+        String toPrint = "dummy help message";
+        return printMessage(toPrint);
+    }
 }
