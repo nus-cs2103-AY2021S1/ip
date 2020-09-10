@@ -32,13 +32,8 @@ public class Task {
 	}
 	public String getDoneString() {
 		String string;
-		if(isDone){
-			string = "[✓]";
-		}
-		else{
-			string = "[✗]";
-		}
-		return string;
+
+		return (isDone ?"[\u2713]" : "[\u2718]" );
 	}
 
 	public duke.Task done() {

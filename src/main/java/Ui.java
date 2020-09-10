@@ -8,17 +8,21 @@ import java.util.Scanner;
  */
 
 public class Ui {
+
 	public void showWelcome() {
-		String logo = "____________________________________________________________\n"
-                /*+ " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n"*/
+		System.out.println(welcome());
+	}
+
+	public String welcome() {
+		String logo = " ____        _        \n"
+				+ "|  _ \\ _   _| | _____ \n"
+				+ "| | | | | | | |/ / _ \\\n"
+				+ "| |_| | |_| |   <  __/\n"
+				+ "|____/ \\__,_|_|\\_\\___|\n"
 				+ " Hello I'm Duke\n"
-				+ " What can I do for you?\n"
-				+ "____________________________________________________________\n";
-		System.out.println(logo);
+				+ " What can I do for you?";
+
+		return logo;
 	}
 
 	public String readCommand() {

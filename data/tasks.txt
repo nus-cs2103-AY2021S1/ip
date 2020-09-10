@@ -1,2 +1,0 @@
-[T][✓] borrow book
-[T][✗] borrow book

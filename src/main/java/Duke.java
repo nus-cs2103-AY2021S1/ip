@@ -47,8 +47,15 @@ public class Duke {
         }
     }
 
-    public Duke(){
-        super();
+    public Duke() {
+        ui = new Ui();
+        storage = new Storage(TASKS_PATHNAME);
+        try {
+            taskList = new TaskList(storage.load());
+        } catch (DukeException e) {
+            ui.showLoadingError();
+            taskList = new TaskList();
+        }
     }
 
     /**
@@ -60,14 +67,16 @@ public class Duke {
     }
 
     public void run() {
-        ui.showWelcome();
+        ui.showLine();
+        System.out.println(ui.welcome());
+        ui.showLine();
         boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
                 ui.showLine(); // show the divider line ("_______")
                 Command c = Parser.parse(fullCommand);
-                c.execute(taskList, ui, storage);
+                ui.showOutput(c.execute(taskList, ui, storage));
                 isExit = c.isExit();
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
@@ -75,6 +84,10 @@ public class Duke {
                 ui.showLine();
             }
         }
+    }
+
+    public String welcome(){
+        return ui.welcome();
     }
 
 /*    @Override
@@ -170,6 +183,11 @@ public class Duke {
      */
 
     public String getResponse(String input) {
-        return "Duke heard: " + input;
+        try{
+            Command c = Parser.parse(input);
+            return c.execute(taskList, ui, storage);
+        } catch (DukeException e) {
+            return e.getMessage();
+        }
     }
 }

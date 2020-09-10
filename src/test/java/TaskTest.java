@@ -1,13 +1,12 @@
 package duke;
 
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
+import javafx.concurrent.Task;
+import org.testng.annotations.Test;
 
 public class TaskTest {
 	@Test
 	public void testGetDoneString(){
-		assertEquals("[✓]", new duke.Task(duke.TaskType.DEADLINE, true, "aaaaa bbbb").getDoneString());
+		assertEquals("[✓]", new Task(TaskType.DEADLINE, true, "aaaaa bbbb").getDoneString());
 		assertEquals("[✗]", new duke.Task(duke.TaskType.TODO, false, "abc bbbb").getDoneString());
 	}
 
