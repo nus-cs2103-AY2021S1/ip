@@ -3,8 +3,6 @@ package duke.ui;
 import java.io.IOException;
 
 import duke.Duke;
-import duke.exception.DateParseException;
-import duke.exception.StorageException;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -22,14 +20,7 @@ public class Main extends Application {
      * This starts up the UI and the backend.
      */
     public Main() {
-        // TODO: handle exceptions
-        try {
-            this.duke = new Duke();
-        } catch (DateParseException e) {
-            e.printStackTrace();
-        } catch (StorageException e) {
-            e.printStackTrace();
-        }
+        this.duke = new Duke();
     }
 
     @Override
