@@ -34,6 +34,16 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
+     * Creates one dialog box with Duke's welcome message
+     */
+    @FXML
+    void welcome() {
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(duke.ui.printWelcome(duke.tasks), dukeImage)
+        );
+    }
+
+    /**
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */

@@ -29,12 +29,12 @@ public class TaskList {
      *
      * @param newTask New task.
      */
-    public void addTask(Task newTask) {
+    public String addTask(Task newTask) {
         taskList.add(newTask);
         String addTaskMessage = "Got it. I've added this task:\n"
                 + newTask.toString() + "\n"
                 + "Now you have " + taskList.size() + (taskList.size() > 1 ? " tasks " : " task ") + "in the list.\n";
-        new Ui(addTaskMessage).printMessageWithBorders();
+        return new Ui(addTaskMessage).printMessage();
     }
 
     /**
@@ -42,11 +42,11 @@ public class TaskList {
      *
      * @param index Index of the task to be deleted.
      */
-    public void deleteTask(int index) {
+    public String deleteTask(int index) {
         Task task = taskList.remove(index);
         String deleteTaskMessage = "Noted. I've removed this task:\n"
                 + task.toString() + "\n";
-        new Ui(deleteTaskMessage).printMessageWithBorders();
+        return new Ui(deleteTaskMessage).printMessage();
     }
 
     /**
@@ -54,11 +54,11 @@ public class TaskList {
      *
      * @param index Index of the task to be marked as done.
      */
-    public void markDone(int index) {
+    public String markDone(int index) {
         Task task = taskList.get(index);
         task.makeDone();
         String markDoneMessage = "Nice! I've marked this task as done:\n"
                 + "[\u2713] " + task.getDescription() + "\n";
-        new Ui(markDoneMessage).printMessageWithBorders();
+        return new Ui(markDoneMessage).printMessage();
     }
 }

@@ -8,12 +8,12 @@ public class Ui {
     String divider;
 
     public Ui() {
-        divider = "____________________________________________________\n";
+        divider = "________________________________________________\n";
     }
 
     public Ui(String message) {
         this.message = message;
-        divider = "____________________________________________________\n";
+        divider = "________________________________________________\n";
     }
 
     public void setMessage(String message) {
@@ -23,57 +23,55 @@ public class Ui {
     /**
      * Prints the message without borders.
      */
-    public void printMessage() {
-        System.out.println(message);
+    public String printMessage() {
+        return message;
     }
 
-    /**
-     * Prints the message with borders.
-     */
-    public void printMessageWithBorders() {
-        System.out.println(divider);
-        System.out.println(message);
-        System.out.println(divider);
-    }
+//    /**
+//     * Prints the message with borders.
+//     */
+//    public String printMessageWithBorders() {
+//        return divider + message + divider;
+//    }
 
     /**
      * Prints the Duke logo.
      */
-    public void printLogo() {
+    private String printLogo() {
         String logo = " ____        _        \n"
                 + "|  _ \\ _   _| | _____ \n"
                 + "| | | | | | | |/ / _ \\\n"
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
-        System.out.println(logo);
+        return logo;
     }
 
     /**
      * Prints the welcome message.
      */
-    public void printWelcome(ArrayList<Task> taskList) {
-        message = "Hello, I'm Duke!\n\n";
-        if (taskList.size() < 1) {
+    public String printWelcome(TaskList taskList) {
+        message = "Hello, I'm Duke!\n";
+        if (taskList.getTasks().size() < 1) {
             message += "You currently have no tasks. ";
         } else {
             message +=  "Here are your existing tasks:\n";
-            for (int i = 0; i < taskList.size(); i++) {
-                Task task = taskList.get(i);
+            for (int i = 0; i < taskList.getTasks().size(); i++) {
+                Task task = taskList.getTasks().get(i);
                 message += i + 1 + "." + task.toString() + "\n";
             }
             message += "\n";
         }
         message += "What can I do for you?\n";
         setMessage(message);
-        printMessageWithBorders();
+        return printMessage();
     }
 
     /**
      * Prints the loading error.
      */
-    public void printLoadingError() {
+    public String printLoadingError() {
         message = "An error occurred while loading the data...";
-        printMessage();
+        return printMessage();
     }
 
     /**
@@ -81,7 +79,7 @@ public class Ui {
      *
      * @param taskList Array list of tasks to be printed.
      */
-    public void printTasks(ArrayList<Task> taskList) {
+    public String printTasks(ArrayList<Task> taskList) {
         if (taskList.size() < 1) {
             message = "You currently have no tasks.\n";
         } else {
@@ -92,10 +90,10 @@ public class Ui {
                 message += taskString;
             }
         }
-        printMessageWithBorders();
+        return printMessage();
     }
 
-    public void printFind(ArrayList<Task> taskList, String keyword) {
+    public String printFind(ArrayList<Task> taskList, String keyword) {
         if (taskList.size() < 1) {
             message = "You currently have no tasks.\n";
         } else {
@@ -110,14 +108,14 @@ public class Ui {
                 }
             }
         }
-        printMessageWithBorders();
+        return printMessage();
     }
 
     /**
      * Prints the goodbye message.
      */
-    public void printGoodbye() {
+    public String printGoodbye() {
         message = "Bye. Hope to see you again soon!\n";
-        printMessageWithBorders();
+        return printMessage();
     }
 }
