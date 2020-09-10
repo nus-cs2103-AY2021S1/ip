@@ -66,6 +66,8 @@ public class Duke {
             case "todo":
                 toReturn += taskList.add(parser);
                 break;
+            default:
+                assert false : command;
             }
         } catch (DukeException e) {
             toReturn += ui.displayMessage(e.toString());
