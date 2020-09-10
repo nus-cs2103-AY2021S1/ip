@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.function.Consumer;
 
 /**
  * Encapsulates a taskList class, contains a list of tasks and supports operations that adds, deletes or
@@ -27,36 +28,48 @@ public class TaskList {
     public void addNewTask(Task newTask) {
         myTaskList.add(newTask);
     }
+    
+    ArrayList<Task> updateTasks(ArrayList<Integer> taskIndexes,
+                                Consumer<Task> updateTask) throws IndexOutOfBoundsException {
+        
+        ArrayList<Task> updatedTasks = new ArrayList<>();
+        for (int taskIndex : taskIndexes) {
+            Task current = myTaskList.get(taskIndex - 1);
+            updatedTasks.add(current);
+        }
+        for (Task task : updatedTasks) {
+            updateTask.accept(task);
+        }
+        return updatedTasks;
+    }
 
     /**
-     * Marks a task as done. Throws an exception if the task index is invalid.
+     * Marks one or more tasks as done. Throws an exception if any task index is invalid.
      *
-     * @param taskIndex index of task to be marked as done.
-     * @return the done task.
-     * @throws DukeException if index is invalid.
+     * @param taskIndexes indexes of tasks to be marked as done.
+     * @return the done tasks.
+     * @throws DukeException if an index is invalid.
      */
-    public Task doneTask(int taskIndex) throws DukeException {
+    public ArrayList<Task> doneTasks(ArrayList<Integer> taskIndexes) throws DukeException {
         try {
-            Task temp = myTaskList.get(taskIndex - 1);
-            temp.markAsDone();
-            return temp;
+            Consumer<Task> doneTask = task -> task.markAsDone(); 
+            return updateTasks(taskIndexes, doneTask);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskIndexException("done");
         }
     }
 
     /**
-     * Deletes a task from the list. Throws an exception if the task index is invalid.
+     * Deletes one or more tasks from the list. Throws an exception if any task index is invalid.
      *
-     * @param taskIndex index of task to be deleted.
-     * @return the deleted task.
-     * @throws DukeException if index is invalid.
+     * @param taskIndexes indexes of tasks to be deleted.
+     * @return the deleted tasks.
+     * @throws DukeException if an index is invalid.
      */
-    public Task deleteTask(int taskIndex) throws DukeException {
+    public ArrayList<Task> deleteTasks(ArrayList<Integer> taskIndexes) throws DukeException {
         try {
-            Task temp = myTaskList.get(taskIndex - 1);
-            myTaskList.remove(temp);
-            return temp;
+            Consumer<Task> deleteTask = task -> myTaskList.remove(task);
+            return updateTasks(taskIndexes, deleteTask);
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidTaskIndexException("delete");
         }

@@ -1,15 +1,17 @@
+import java.util.ArrayList;
+
 public class DoneCommand extends Command {
 
-    private final int taskIndex;
+    private final ArrayList<Integer> taskIndexes;
 
-    DoneCommand(int taskIndex) {
-        this.taskIndex = taskIndex;
+    DoneCommand(ArrayList<Integer> taskIndexes) {
+        this.taskIndexes = taskIndexes;
     }
 
     @Override
     String execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        Task task = taskList.doneTask(taskIndex);
+        ArrayList<Task> tasks = taskList.doneTasks(taskIndexes);
         storage.updateTasks(taskList);
-        return ui.showDoneTask(task);
+        return ui.showDoneTasks(tasks);
     }
 }

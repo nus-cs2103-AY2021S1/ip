@@ -1,15 +1,17 @@
+import java.util.ArrayList;
+
 public class DeleteCommand extends Command {
     
-    private final int taskIndex;
+    private final ArrayList<Integer> taskIndexes;
 
-    DeleteCommand(int taskIndex) {
-        this.taskIndex = taskIndex;
+    DeleteCommand(ArrayList<Integer> taskIndexes) {
+        this.taskIndexes = taskIndexes;
     }
 
     @Override
     String  execute(TaskList taskList, Ui ui, Storage storage) throws DukeException {
-        Task task = taskList.deleteTask(taskIndex);
+        ArrayList<Task> tasks = taskList.deleteTasks(taskIndexes);
         storage.updateTasks(taskList);
-        return ui.showDeleteTask(task, taskList.getListLength());
+        return ui.showDeleteTasks(tasks, taskList.getListLength());
     }
 }

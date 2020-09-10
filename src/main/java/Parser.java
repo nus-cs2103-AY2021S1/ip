@@ -1,5 +1,6 @@
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 
 /**
  * Encapsulates a parser class, supports the function to parse the user input into a command.
@@ -14,7 +15,7 @@ public class Parser {
     final static String TODO = "todo";
     final static String DEADLINE = "deadline";
     final static String EVENT = "event";
-    
+
 
     /**
      * Returns a task index for a done or delete user input.
@@ -24,7 +25,7 @@ public class Parser {
      * @return an integer representing a task index.
      * @throws DukeException if input has an invalid format.
      */
-    private static int getTaskIndex(String input, String commandType) throws DukeException {
+    private static ArrayList<Integer> getTaskIndexes(String input, String commandType) throws DukeException {
 
         final int TASK_INDEX_POSITION = commandType.equals(DONE)
                 ? 5
@@ -37,7 +38,7 @@ public class Parser {
             throw new InvalidTaskIndexException(input);
         } else if (input.startsWith(commandType + " ") && input.length() > TASK_INDEX_POSITION) {
             try {
-                return Integer.parseInt(input.substring(TASK_INDEX_POSITION));
+                return parseIndexString(input.substring(TASK_INDEX_POSITION), new ArrayList<>());
             } catch (NumberFormatException e) {
                 throw new InvalidTaskIndexException(input);
             }
@@ -46,28 +47,48 @@ public class Parser {
         }
     }
 
+    private static ArrayList<Integer> parseIndexString(
+            String taskIndexString, ArrayList<Integer> taskIndexes) throws NumberFormatException {
+        
+        int firstIndexEndPosition = taskIndexString.indexOf(" ");
+        if (firstIndexEndPosition < 0) {
+            int firstIndex = Integer.parseInt(taskIndexString);
+            taskIndexes.add(firstIndex);
+            return taskIndexes;
+        } else {
+            String firstIndexString = taskIndexString.substring(0, firstIndexEndPosition);
+            int firstIndex = Integer.parseInt(firstIndexString);
+            taskIndexes.add(firstIndex);
+            String remainingIndexString = taskIndexString.substring(firstIndexEndPosition + 1);
+            return parseIndexString(remainingIndexString, taskIndexes);
+        }
+    }
+
     /**
      * Takes in a user input starting with 'done' and returns a done command.
+     *
      * @param input user input that starts with 'done'.
      * @return a done command.
      * @throws DukeException if user input has an invalid format.
      */
     private static DoneCommand done(String input) throws DukeException {
-        return new DoneCommand(getTaskIndex(input, DONE));
+        return new DoneCommand(getTaskIndexes(input, DONE));
     }
 
     /**
      * Takes in a user input starting with 'delete' and returns a delete command.
+     *
      * @param input user input that starts with 'delete'.
      * @return a delete command.
      * @throws DukeException if user input has an invalid format.
      */
     private static DeleteCommand delete(String input) throws DukeException {
-        return new DeleteCommand(getTaskIndex(input, DELETE));
+        return new DeleteCommand(getTaskIndexes(input, DELETE));
     }
 
     /**
      * Takes in a user input starting with 'find' and returns a find command.
+     *
      * @param input user input that starts with 'find'.
      * @return a find command.
      * @throws DukeException if user input has an invalid format.
@@ -86,6 +107,7 @@ public class Parser {
 
     /**
      * Takes in a user input starting with 'todo' and returns an add command that adds a new todo.
+     *
      * @param input user input that starts with 'todo'.
      * @return an add command.
      * @throws DukeException if user input has an invalid format.
@@ -106,6 +128,7 @@ public class Parser {
     /**
      * Creates an add command for tasks with timings. Takes in a user input starting with 'deadline' or
      * 'event' and returns an add command for those tasks.
+     *
      * @param input user input that starts with 'deadline' or 'event'.
      * @return an add command.
      * @throws DukeException if user input has an invalid format.
@@ -114,14 +137,14 @@ public class Parser {
         final int DESCRIPTION_INDEX = taskType.equals(DEADLINE)
                 ? 9
                 : taskType.equals(EVENT)
-                    ? 6
-                    : 0;
+                ? 6
+                : 0;
         final int TIME_INDEX = 5;
         final String TIME_DESCRIPTOR = taskType.equals(DEADLINE)
                 ? " /by "
                 : taskType.equals(EVENT)
-                    ? " /at "
-                    : "";
+                ? " /at "
+                : "";
         assert DESCRIPTION_INDEX != 0 : "Task type should deadline or event.";
 
         if (input.equals(taskType) || input.equals(taskType + " ")) {
@@ -153,6 +176,7 @@ public class Parser {
 
     /**
      * Takes in a user input starting with 'deadline' and returns an add command.
+     *
      * @param input user input that starts with 'deadline'.
      * @return an add command.
      * @throws DukeException if user input has an invalid format.
@@ -163,6 +187,7 @@ public class Parser {
 
     /**
      * Takes in a user input starting with 'event' and returns an add command.
+     *
      * @param input user input that starts with 'event'.
      * @return an add command.
      * @throws DukeException if user input has an invalid format.
@@ -173,6 +198,7 @@ public class Parser {
 
     /**
      * Parses the user's input and returns the corresponding command.
+     *
      * @param input user's input
      * @return a command
      * @throws DukeException if user input has an invalid format.

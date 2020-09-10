@@ -1,3 +1,5 @@
+import java.util.ArrayList;
+
 public class Ui {
 
     private static final String LOGO =
@@ -33,12 +35,22 @@ public class Ui {
         return "     Here are the tasks in your list:\n" +  taskListString;
     }
 
-    String showDoneTask(Task task) {
-        return "     Nice! I've marked this task as done:\n       " + task;
+    private String buildTaskString(ArrayList<Task> tasks) {
+        StringBuilder taskString = new StringBuilder();
+        for (Task task : tasks) {
+            taskString.append(task).append("\n       ");
+        }
+        return taskString.toString();
+    }
+    
+    String showDoneTasks(ArrayList<Task> tasks) {
+        String doneTasks = buildTaskString(tasks);
+        return "     Nice! I've marked these tasks as done:\n       " + doneTasks;
     }
 
-    String showDeleteTask(Task task, int listLength) {
-        return "     Noted. I've removed this task:\n       " + task 
+    String showDeleteTasks(ArrayList<Task> tasks, int listLength) {
+        String deleteTasks = buildTaskString(tasks);
+        return "     Noted. I've removed these tasks:\n       " + deleteTasks 
                 + "\n     Now you have " + listLength + " tasks in the list.";
     }
 
