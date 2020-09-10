@@ -177,6 +177,7 @@ public class Duke extends Application {
                 try {
                     checkCmd(cmd, 4, "OOPS!!! The description of a todo cannot be empty.");
                     String getName = cmd.substring(5);
+                    assert(!getName.equals(""));
                     Todo tmp = new Todo(getName);
                     System.out.println("Got it. I've added this task: ");
                     System.out.println("  " + tmp.getStatus());
@@ -191,6 +192,7 @@ public class Duke extends Application {
                 try {
                     checkCmd(cmd, 8, "☹ OOPS!!! The description of a deadline cannot be empty.");
                     String getName = parser.getNameBy(cmd);
+                    assert(!getName.equals(""));
                     String getDeadline = parser.getDeadlineBy(cmd);
                     getDeadline = formatDate(getDeadline);
                     Deadline tmp = new Deadline(getName, getDeadline);
@@ -207,6 +209,7 @@ public class Duke extends Application {
                 try {
                     checkCmd(cmd, 5, "☹ OOPS!!! The description of a event cannot be empty.");
                     String getName = parser.getNameAt(cmd);
+                    assert(!getName.equals(""));
                     String getTime = parser.getDeadlineAt(cmd);
                     getTime = formatDate(getTime);
                     Event tmp = new Event(getName, getTime);
