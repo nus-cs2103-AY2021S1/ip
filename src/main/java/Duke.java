@@ -28,6 +28,15 @@ public class Duke {
     }
 
     /**
+     * Shows reminder for events/deadline tasks that are a week away.
+     *
+     * @return The string message showing upcoming tasks if there are any, in a week.
+     */
+    public String showReminderMessage() {
+        return (new UpcomingTasksCommand()).execute(tasks, ui, storage);
+    }
+
+    /**
      * Generates a response to user input from GUI.
      *
      * @param input The user input.
