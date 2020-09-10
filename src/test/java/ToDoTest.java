@@ -2,6 +2,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
+import duke.tasks.ToDo;
+
 public class ToDoTest {
     @Test
     public void markAsDone_success() {
