@@ -36,8 +36,7 @@ public abstract class Task {
             return false;
         }
         Task task = (Task) o;
-        return isDone == task.isDone
-                && Objects.equals(description, task.description);
+        return Objects.equals(description, task.description);
     }
 
     @Override
