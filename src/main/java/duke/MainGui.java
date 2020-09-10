@@ -7,9 +7,9 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
-import javafx.stage.Stage;;
+import javafx.stage.Stage;
 
-public class MainGUI extends Application {
+public class MainGui extends Application {
     private Duke hal9000 = new Duke();
 
     @Override
@@ -18,7 +18,7 @@ public class MainGUI extends Application {
             // setting up Hal9000
             hal9000.loadPrevTasks();
 
-            FXMLLoader fxmlLoader = new FXMLLoader(MainGUI.class.getResource("/view/MainWindow.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainGui.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);

@@ -8,6 +8,6 @@ public class Launcher {
      *
      */
     public static void main(String[] args) {
-        Application.launch(MainGUI.class, args);
+        Application.launch(MainGui.class, args);
     }
 }
