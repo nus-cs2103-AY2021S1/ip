@@ -13,6 +13,11 @@ public class ToDo extends Task {
     public String generateSaveFileData() {
         return "T|" + (isDone ? "1" : "0") + "|" + desc;
     }
+    
+    @Override
+    public void updateTime(String newTime) {
+        
+    }
 
     @Override
     public boolean equals(Object o) {

@@ -16,6 +16,12 @@ public abstract class Task {
         isDone = true;
     }
     
+    public void updateDescription(String newDescription) {
+        this.desc = newDescription;
+    }
+    
+    public abstract void updateTime(String newTime);
+    
     public abstract String generateSaveFileData();
     
     public String getDesc() {
