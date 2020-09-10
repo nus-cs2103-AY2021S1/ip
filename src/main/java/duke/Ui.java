@@ -1,4 +1,5 @@
 package duke;
+
 /**
  * interact with user
  */
