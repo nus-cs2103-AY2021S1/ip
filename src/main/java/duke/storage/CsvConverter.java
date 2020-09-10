@@ -25,13 +25,14 @@ public class CsvConverter {
         String time = resultArr[2];
         boolean isDone = stringToBoolean(resultArr[3]);
 
-        if (taskType.equals("TODO")) {
+        switch (taskType) {
+        case "TODO":
             return new ToDo(description, isDone);
-        } else if (taskType.equals("EVENT")) {
+        case "EVENT":
             return new ComplexTask(description, isDone, TaskType.EVENT, time);
-        } else if (taskType.equals("DEADLINE")) {
+        case "DEADLINE":
             return new ComplexTask(description, isDone, TaskType.DEADLINE, time);
-        } else {
+        default:
             throw new InvalidFileFormatException();
         }
     }

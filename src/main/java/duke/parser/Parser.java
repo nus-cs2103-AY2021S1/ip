@@ -36,25 +36,26 @@ public class Parser {
         String keyWord = getKeyWord(inputArr);
         String details = getRestOfWord(inputArr);
 
-        if (keyWord.equals("list")) {
+        switch (keyWord) {
+        case "list":
             return new ShowCommand();
-        } else if (keyWord.equals("done")) {
+        case "done":
             return new SimpleCommand(details, SimpleCommandType.DONE);
-        } else if (keyWord.equals("delete")) {
+        case "delete":
             return new SimpleCommand(details, SimpleCommandType.DELETE);
-        } else if (keyWord.equals("todo")) {
+        case "todo":
             return new AddToDoCommand(details);
-        } else if (keyWord.equals("deadline")) {
+        case "deadline":
             return new AddComplexTaskCommand(details, TaskType.DEADLINE);
-        } else if (keyWord.equals("event")) {
+        case "event":
             return new AddComplexTaskCommand(details, TaskType.EVENT);
-        } else if (keyWord.equals("find")) {
+        case "find":
             return new FindCommand(details);
-        } else if (keyWord.equals("bye")) {
+        case "bye":
             return new ExitCommand();
-        } else if (keyWord.equals("help")) {
+        case "help":
             return new HelpCommand();
-        } else {
+        default:
             throw new UnknownCommandException();
         }
     }
