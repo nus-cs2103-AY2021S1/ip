@@ -9,9 +9,14 @@ import java.util.List;
  */
 public class Parser {
 
-    static List<String> formatStringsLocalDate = Arrays.asList("M/y", "d/M/y", "M-y", "d-M-y");
-    static List<String> formatStringsLocalDateTime = Arrays.asList("d-M-y HH:mm", "d/M/y HH:mm");
+    private static final List<String> formatStringsLocalDate = Arrays.asList("M/y", "d/M/y", "M-y", "d-M-y");
+    private static final List<String> formatStringsLocalDateTime = Arrays.asList("d-M-y HH:mm", "d/M/y HH:mm");
 
+    /**
+     * Parse date and time string to LocalDateTime
+     * @param dateTimeString string
+     * @return LocalDateTime used by Event
+     */
     private static LocalDateTime tryParseLocalDateTime(String dateTimeString) {
         for (String formatString : formatStringsLocalDateTime) {
             try {
@@ -24,7 +29,11 @@ public class Parser {
         }
         return null;
     }
-
+    /**
+     * Parse date string to LocalDate
+     * @param dateString string
+     * @return LocalDate used by Event
+     */
     private static LocalDate tryParseLocalDate(String dateString) {
         for (String formatString : formatStringsLocalDate) {
             try {
@@ -39,7 +48,7 @@ public class Parser {
     }
 
     /**
-     * Change date and time into LocalDateTime.
+     * Change date and time array into LocalDateTime.
      *
      * @param dateAndTime String array consist of date as first element and time as second element
      * @return LocalDateTime
@@ -51,7 +60,13 @@ public class Parser {
         String time = dateAndTime[1];
         return tryParseLocalDateTime(date + " " + time);
     }
-
+    /**
+     * Change date array into LocalDate.
+     *
+     * @param dateAndTime String array consist of date as element
+     * @return LocalDate
+     * @throws NumberFormatException
+     */
     public static LocalDate changeDate(String[] dateAndTime) throws NumberFormatException {
         assert (dateAndTime.length == 1);
         String date = dateAndTime[0];
@@ -106,6 +121,10 @@ public class Parser {
         return command;
     }
 
+    /**
+     * Testing the format of date and dateTime.
+     * @param args
+     */
     public static void main(String[] args) {
         try {
             String[] tempDate = {"12/2020"}; // try using date by simpledateformat instead of localDate

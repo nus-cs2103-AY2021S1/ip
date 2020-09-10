@@ -23,6 +23,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/javaduke.jpg"));
 
+    /**
+     * Initialize dialog container.
+     */
     @FXML
     public void initialize() {
         String response = "Hello! I'm Duke\nWhat can I do for you?";

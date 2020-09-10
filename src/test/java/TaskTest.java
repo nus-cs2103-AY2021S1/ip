@@ -1,6 +1,6 @@
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import static org.junit.jupiter.api.Assertions.*;
+import org.junit.jupiter.api.Test;
 
 class TaskTest {
 
@@ -12,14 +12,14 @@ class TaskTest {
 
     @Test
     void markAsDone() {
-        Task task = new Task( "read book");
+        Task task = new Task("read book");
         task.markAsDone();
         assertEquals("✓", task.getStatusIcon());
     }
 
     @Test
     void testToString() {
-        Task task = new Task( "read book");
+        Task task = new Task("read book");
         assertEquals("[✗] read book", task.toString());
     }
 }

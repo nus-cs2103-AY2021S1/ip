@@ -44,7 +44,7 @@ public class Storage {
 
     /**
      * Start loading storage to read file.
-     * @return
+     * @return ArrayList of Task
      * @throws FileNotFoundException
      */
     public ArrayList<Task> load() throws FileNotFoundException {
@@ -60,10 +60,10 @@ public class Storage {
      */
     public void saveToFile(ArrayList<Task> taskArr) throws IOException {
         assert (!filePath.isEmpty());
-        File oldFile= new File(filePath);
+        File oldFile = new File(filePath);
         oldFile.delete();
-        File newFile= new File(filePath);
-        FileWriter fileWriter = new FileWriter(newFile, StandardCharsets.UTF_8,false);
+        File newFile = new File(filePath);
+        FileWriter fileWriter = new FileWriter(newFile, StandardCharsets.UTF_8, false);
         for (Task task : taskArr) {
             fileWriter.write(task.toString());
             fileWriter.write(System.lineSeparator());

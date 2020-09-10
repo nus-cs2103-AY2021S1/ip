@@ -6,7 +6,12 @@ import java.util.Scanner;
  */
 public class Ui {
     private Scanner sc;
-
+    /**
+     * Ui constructor to initialise scanner.
+     */
+    public Ui() {
+        sc = new Scanner(System.in);
+    }
     /**
      * Print statement when a task is added into TaskList.
      *
@@ -74,13 +79,6 @@ public class Ui {
             }
         }
         return output;
-    }
-
-    /**
-     * Ui constructor to initialise scanner.
-     */
-    public Ui() {
-        sc = new Scanner(System.in);
     }
 
     /**
