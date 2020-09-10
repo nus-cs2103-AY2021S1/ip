@@ -33,6 +33,11 @@ public class AddCommand extends Command {
      */
     @Override
     public String execute(TaskList tasks, UI ui, Storage storage) throws BobIOException {
+        assert task != null : "A task should be provided";
+        assert tasks != null : "A tasklist should be provided";
+        assert storage != null : "Storage should be provided";
+        assert ui != null : "A UI should be provided";
+
         tasks.add(task);
         storage.appendToStorage(task.saveFormat() + System.lineSeparator());
         storage.flushWriter();
@@ -48,7 +53,7 @@ public class AddCommand extends Command {
      */
     @Override
     public boolean equals(Object o) {
-        if (this == o){
+        if (this == o) {
             return true;
         } else if (o instanceof AddCommand) {
             AddCommand c = (AddCommand) o;
@@ -64,7 +69,7 @@ public class AddCommand extends Command {
      * @return string representation of AddCommand.
      */
     @Override
-    public String toString(){
+    public String toString() {
         return "Adds " + task.toString() + " to list.";
     }
 }

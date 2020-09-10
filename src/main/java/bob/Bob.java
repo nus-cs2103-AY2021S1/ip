@@ -39,6 +39,7 @@ public class Bob {
             try {
                 String command = uI.readCommand();
                 Command c = Parser.parse(command);
+                assert c != null : "A command should be provided";
                 System.out.println(c.execute(tasks, uI, storage));
                 isExit = c.isExit();
             } catch (BobException e) {
@@ -56,6 +57,7 @@ public class Bob {
         try {
             String command = input;
             Command c = Parser.parse(command);
+            assert c != null : "A command should be provided";
             return c.execute(tasks, uI, storage);
         } catch (BobException e) {
             return uI.printError(e.getMessage());
