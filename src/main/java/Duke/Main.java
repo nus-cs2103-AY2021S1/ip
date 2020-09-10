@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    private Duke duke = new Duke(System.getProperty("user.dir") + "/data/Duke.txt");
+    private Duke duke = new Duke(System.getProperty("user.dir") + "/data");
 
     public Main() {
     }

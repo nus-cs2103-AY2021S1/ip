@@ -3,6 +3,7 @@ package duke;
 import java.util.ArrayList;
 
 public class ParseInfo {
+    private Boolean wasTaskListUndone;
     private Boolean wasTaskListUpdated;
     private ArrayList<String> responses;
 
@@ -10,12 +11,17 @@ public class ParseInfo {
      * Initialises a ParseInfo object.
      */
     public ParseInfo() {
+        this.wasTaskListUndone = false;
         this.wasTaskListUpdated = false;
         this.responses = new ArrayList<String>();
     }
 
     public void taskListDidUpdate() {
         this.wasTaskListUpdated = true;
+    }
+
+    public void taskListWasUndone() {
+        this.wasTaskListUndone = true;
     }
 
     public void addResponse(String response) {
@@ -25,6 +31,10 @@ public class ParseInfo {
 
     public Boolean isListUpdated() {
         return this.wasTaskListUpdated;
+    }
+
+    public Boolean isListUndone() {
+        return this.wasTaskListUndone;
     }
 
     public ArrayList<String> getResponses() {

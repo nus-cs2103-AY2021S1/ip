@@ -22,6 +22,8 @@ public class Ui {
     private final String delete = "Noted. I've removed this task:";
     private final String failedInitialise = "Failed to read existing TODO list. Duke will initialise blankly.";
     private final String foundMessage = "Here are the matching tasks in your list:";
+    private final String undoSuccessMessage = "Undo successful.";
+    private final String undoFailMessage = "Undo unsuccessful.";
 
     /**
      * Constructs an Ui object capable of collecting user input.
@@ -201,5 +203,21 @@ public class Ui {
         assert tasks != null : "getCountMessage tasks is null";
         int count = tasks.getCount();
         return "Now you have " + count + (count == 1 ? " task " : " tasks ") + "in the list.";
+    }
+
+    public void sendUndoFailMessage() {
+        System.out.println(this.undoFailMessage);
+    }
+
+    public String getUndoFailMessage() {
+        return this.undoFailMessage;
+    }
+
+    public void sendUndoSuccessMessage() {
+        System.out.println(this.undoSuccessMessage);
+    }
+
+    public String getUndoSuccessMessage() {
+        return this.undoSuccessMessage;
     }
 }

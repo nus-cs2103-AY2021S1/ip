@@ -41,10 +41,11 @@ public class Parser {
      * @throws MissingFindArgumentException   If find was input without a keyword.
      */
 
-    public static boolean parseAndExecute(String input, TaskList tasks, Ui ui) throws MissingDoneArgumentException,
+    public static ParseInfo parseAndExecute(String input, TaskList tasks, Ui ui) throws MissingDoneArgumentException,
             DoneOutOfRangeException, MissingDeleteArgumentException, DeleteOutOfRangeException, EmptyTodoException,
             MissingDeadlineDateException, EmptyDeadlineException, MissingEventDateException, EmptyEventException,
             UnknownCommandException, MissingFindArgumentException {
+        ParseInfo returnable = new ParseInfo();
         CommandType commandType = parseCommandType(input);
         switch (commandType) {
         case DONE: {
@@ -52,7 +53,8 @@ public class Parser {
             ui.sendMarkedAsDoneMessage(
                     tasks.markTaskAsDone(index) //checkthis
             );
-            return true;
+            returnable.taskListDidUpdate();
+            break;
         }
         case DELETE: {
             int index = parseDelete(input, tasks.getCount());
@@ -60,7 +62,8 @@ public class Parser {
                     tasks.deleteTask(index) //checkthis
             );
             ui.sendCount(tasks);
-            return true;
+            returnable.taskListDidUpdate();
+            break;
         }
         case TODO: {
             ToDo taskToAdd = parseToDo(input);
@@ -68,7 +71,8 @@ public class Parser {
                     tasks.addTask(taskToAdd)
             );
             ui.sendCount(tasks);
-            return true;
+            returnable.taskListDidUpdate();
+            break;
         }
         case DEADLINE: {
             Deadline taskToAdd = parseDeadline(input);
@@ -76,7 +80,8 @@ public class Parser {
                     tasks.addTask(taskToAdd)
             );
             ui.sendCount(tasks);
-            return true;
+            returnable.taskListDidUpdate();
+            break;
         }
         case EVENT: {
             Event taskToAdd = parseEvent(input);
@@ -84,20 +89,29 @@ public class Parser {
                     tasks.addTask(taskToAdd)
             );
             ui.sendCount(tasks);
-            return true;
+            returnable.taskListDidUpdate();
+            break;
         }
         case LIST: {
             ui.listTasks(tasks);
-            return false;
+            //no update
+            break;
         }
         case FIND: {
             String keyword = parseFind(input);
             ui.findTasks(tasks, keyword);
-            return false;
+            //no update
+            break;
+        }
+        case UNDO: {
+            //no update
+            returnable.taskListWasUndone();
+            break;
         }
         default:
             throw new UnknownCommandException();
         }
+        return returnable;
     }
 
     /**
@@ -205,6 +219,10 @@ public class Parser {
             //task list did not update, did not change returnable
             break;
         }
+        case UNDO: {
+            returnable.taskListWasUndone();
+            break;
+        }
         default:
             throw new UnknownCommandException();
         }
@@ -232,8 +250,10 @@ public class Parser {
             return CommandType.LIST;
         } else if (input.length() >= 4 && input.substring(0, 4).equals("find")) {
             return CommandType.FIND;
+        } else if (input.equals("undo")) {
+            return CommandType.UNDO;
         } else {
-            return CommandType.UNKNOWN;
+                return CommandType.UNKNOWN;
         }
     }
 

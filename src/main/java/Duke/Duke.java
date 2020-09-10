@@ -41,7 +41,7 @@ public class Duke {
         this.storage = new Storage(filePath);
         try {
             this.tasks = new TaskList(storage.load());
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             this.ui.sendFailedInitialiseMessage();
             this.tasks = new TaskList();
         }
@@ -52,12 +52,12 @@ public class Duke {
      * if it is not specified.
      */
     public Duke() {
-        String filePath = System.getProperty("user.dir") + "/data/Duke.txt";
+        String filePath = System.getProperty("user.dir") + "/data";
         this.ui = new Ui();
         this.storage = new Storage(filePath);
         try {
             this.tasks = new TaskList(storage.load());
-        } catch (FileNotFoundException e) {
+        } catch (IOException e) {
             this.ui.sendFailedInitialiseMessage();
             this.tasks = new TaskList();
         }
@@ -75,9 +75,18 @@ public class Duke {
         while (!userInput.equals("bye")) {
             this.ui.sendBar();
             try {
-                if (
-                    Parser.parseAndExecute(userInput, this.tasks, this.ui)
-                ) {
+                ParseInfo parseInfo = Parser.parseAndExecute(userInput, this.tasks, this.ui);
+                if (parseInfo.isListUndone()) {
+                    if (storage.undo()) {
+                        //if can undo, load from previous
+                        this.tasks = new TaskList(this.storage.load());
+                        this.ui.sendUndoSuccessMessage();
+                    } else {
+                        //if cannot undo, do nothing
+                        this.ui.sendUndoFailMessage();
+                    }
+                }
+                if (parseInfo.isListUpdated()) {
                     this.storage.save(tasks);
                 }
             } catch (MissingDoneArgumentException | DoneOutOfRangeException | MissingDeleteArgumentException
@@ -106,6 +115,20 @@ public class Duke {
         ParseInfo parseInfo = new ParseInfo();
         try {
             parseInfo = Parser.parseAndExecuteAndGetMessage(input, this.tasks, this.ui);
+            if (parseInfo.isListUndone()) {
+                if (storage.undo()) {
+                    //if can undo, load from previous
+                    this.tasks = new TaskList(this.storage.load());
+                    parseInfo.addResponse(
+                            this.ui.getUndoSuccessMessage()
+                    );
+                } else {
+                    //if cannot undo, do nothing
+                    parseInfo.addResponse(
+                            this.ui.getUndoFailMessage()
+                    );
+                }
+            }
             if (parseInfo.isListUpdated()) {
                 this.storage.save(tasks);
             }
@@ -130,6 +153,6 @@ public class Duke {
     }
 
     public static void main(String[] args) {
-        new Duke(System.getProperty("user.dir") + "/data/Duke.txt").run();
+        new Duke(System.getProperty("user.dir") + "/data").run();
     }
 }

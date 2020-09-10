@@ -35,7 +35,8 @@ public class TaskList {
         if (content.isEmpty()) {
             //do nothing
         } else {
-            content.get().forEach((line) -> {
+            Stream<String> saveContent = content.get();
+            saveContent.forEach((line) -> {
                 char startChar = line.charAt(0);
                 switch (startChar) {
                 case 'T': {
@@ -60,6 +61,7 @@ public class TaskList {
                 }
                 }
             });
+            saveContent.close();
         }
 
     }
