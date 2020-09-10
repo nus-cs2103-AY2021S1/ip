@@ -32,7 +32,7 @@ public enum CommandTypes {
     TODO {
         @Override
         public void checkInput(String input) throws DukeException {
-            String content = input.replaceFirst("^todo", "");
+            String content = input.replaceFirst("^(?i)todo", "");
             if (content.isBlank()) {
                 throw new DukeException(Messages.INVALID_TODO_COMMAND);
             }
@@ -41,7 +41,7 @@ public enum CommandTypes {
     EVENT {
         @Override
         public void checkInput(String input) throws DukeException {
-            input = input.replaceFirst("^event", "");
+            input = input.replaceFirst("^(?i)event", "");
             String[] inputArgs = input.split("\\s*/at\\s*");
             try {
                 String task = inputArgs[0];
@@ -92,7 +92,7 @@ public enum CommandTypes {
     FIND {
         @Override
         public void checkInput(String input) throws DukeException {
-            String content = input.replaceFirst("^find", "");
+            String content = input.replaceFirst("^(?i)find", "");
             if (content.isBlank()) {
                 throw new DukeException(Messages.INVALID_FIND_COMMAND);
             }
@@ -101,7 +101,7 @@ public enum CommandTypes {
     TODAY {
         @Override
         public void checkInput(String input) throws DukeException {
-            String content = input.replaceFirst("^today", "");
+            String content = input.replaceFirst("^(?i)today", "");
             if (!content.isBlank()) {
                 throw new DukeException(Messages.INVALID_TODAY_COMMAND);
             }
@@ -110,7 +110,7 @@ public enum CommandTypes {
     UNCOMPLETED {
         @Override
         public void checkInput(String input) throws DukeException {
-            String content = input.replaceFirst("^uncompleted", "");
+            String content = input.replaceFirst("^(?i)uncompleted", "");
             if (!content.isBlank()) {
                 throw new DukeException(Messages.INVALID_UNCOMPLETED_COMMAND);
             }
@@ -119,7 +119,7 @@ public enum CommandTypes {
     COMPLETED {
         @Override
         public void checkInput(String input) throws DukeException {
-            String content = input.replaceFirst("^completed", "");
+            String content = input.replaceFirst("^(?i)completed", "");
             if (!content.isBlank()) {
                 throw new DukeException(Messages.INVALID_COMPLETED_COMMAND);
             }
@@ -128,7 +128,7 @@ public enum CommandTypes {
     OVERDUE {
         @Override
         public void checkInput(String input) throws DukeException {
-            String content = input.replaceFirst("^overdue", "");
+            String content = input.replaceFirst("^(?i)overdue", "");
             if (!content.isBlank()) {
                 throw new DukeException(Messages.INVALID_OVERDUE_COMMAND);
             }
@@ -147,7 +147,7 @@ public enum CommandTypes {
                 throw new DukeException(Messages.INVALID_TAG_FORMAT_COMMAND);
             }
             try {
-                int taskToBeTaggedIndex = Integer.parseInt(userInputArgsWithoutTagCommand[0]);
+                Integer.parseInt(userInputArgsWithoutTagCommand[0]);
             } catch (NumberFormatException e) {
                 throw new DukeException(Messages.INVALID_TAG_COMMAND);
             }

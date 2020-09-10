@@ -26,10 +26,10 @@ public class FindCommand extends Command {
         boolean hasFilteredTasks = filteredTasks.size() > 0;
         if (hasFilteredTasks) {
             filteredTasksOutput.append(Messages.FILTERED_TASKS_STARTING_MESSAGE);
-            filteredTasks.forEach(filteredTask -> {
-                String filteredTaskDescription = filteredTask.toString();
-                filteredTasksOutput.append(filteredTaskDescription + "\n");
-            });
+            filteredTasks.stream()
+                    .map(Task::toString)
+                    .map(filteredTaskDescription -> filteredTaskDescription + "\n")
+                    .forEach(filteredTasksOutput::append);
         } else {
             filteredTasksOutput.append(Messages.NO_TASKS_UNDER_KEYWORD_MESSAGE);
         }

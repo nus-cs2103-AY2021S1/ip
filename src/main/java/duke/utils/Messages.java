@@ -34,21 +34,24 @@ public class Messages {
     public static final String CORRECT_COMPLETED_COMMAND = "-Completed: This command is used to display all "
             + " completed tasks.\n"
             + "The correct command is:\n \"completed\"";
+    public static final String CORRECT_BYE_COMMAND = "-Bye: This command will terminate the program.\n"
+            + "The correct command is:\n \"bye\"";
 
     public static final String INVALID_COMMAND_INPUT_MESSAGE = "OOPS!!!! You have inputted an invalid command.\n"
             + "The only commands I know are:\n"
-            + "1) Todo <task description>\n"
-            + "2) Deadline <task description> /by <datetime>\n"
-            + "3) Event <task description> /at <datetime>\n"
-            + "4) Done <task index>\n"
-            + "5) Delete <task index>\n"
-            + "6) Find <keyword>\n"
+            + "1) todo <task description>\n"
+            + "2) deadline <task description> /by <datetime>\n"
+            + "3) event <task description> /at <datetime>\n"
+            + "4) done <task index>\n"
+            + "5) delete <task index>\n"
+            + "6) find <keyword>\n"
             + "7) list\n"
             + "8) uncompleted\n"
             + "9) completed\n"
             + "10) tag <task index> #<tag name>\n"
             + "11) today\n"
-            + "12) overdue\n";
+            + "12) overdue\n"
+            + "13) bye";
     public static final String INVALID_TASK_INDEX_ERROR_MESSAGE = "Invalid task index! Please choose another index.";
     public static final String INVALID_TODO_COMMAND = "OOPS!!! The description of a todo cannot be empty!\n"
             + "The correct command is:\ntodo <task description>";
@@ -89,11 +92,11 @@ public class Messages {
     public static final String NO_COMPLETED_TASKS_MESSAGE = "You do not have any completed tasks."
             + " You better get started on completing some tasks soon";
     public static final String NO_OVERDUE_TASKS_MESSAGE = "There are no overdue tasks."
-            + "Good job on keeping up with your tasks";
+            + " Good job on keeping up with your tasks";
     public static final String NO_TASKS_FOR_TODAY_MESSAGE = "There are no tasks for today."
-            + "Go ahead and chill for the day";
+            + " Go ahead and chill for the day";
     public static final String NO_TASKS_MESSAGE = "Looks like there are no tasks currently."
-            + "Go ahead and start creating new tasks";
+            + " Go ahead and start creating new tasks";
 
 
     public static final String HELP_MESSAGE = "Here are the commands you can use:\n"
@@ -107,5 +110,6 @@ public class Messages {
             + "8) " + CORRECT_SET_TAG_COMMAND + "\n"
             + "9) " + CORRECT_OVERDUE_COMMAND + "\n"
             + "10) " + CORRECT_COMPLETED_COMMAND + "\n"
-            + "11) " + CORRECT_UNCOMPLETED_COMMAND;
+            + "11) " + CORRECT_UNCOMPLETED_COMMAND + "\n"
+            + "12) " + CORRECT_BYE_COMMAND;
 }

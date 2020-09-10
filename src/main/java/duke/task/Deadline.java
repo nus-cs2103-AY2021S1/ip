@@ -16,11 +16,6 @@ public class Deadline extends Task implements TimeBased {
     }
 
     @Override
-    public DukeDateTime getDukeDateTime() {
-        return this.dateTime;
-    }
-
-    @Override
     public LocalDateTime getDateTime() {
         LocalDateTime taskDateTime = this.dateTime.getDateTime();
         return taskDateTime;

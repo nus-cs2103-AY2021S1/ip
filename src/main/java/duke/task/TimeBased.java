@@ -9,7 +9,6 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 public interface TimeBased {
-    public DukeDateTime getDukeDateTime();
-    public LocalDateTime getDateTime();
-    public LocalDate getDate();
+    LocalDateTime getDateTime();
+    LocalDate getDate();
 }

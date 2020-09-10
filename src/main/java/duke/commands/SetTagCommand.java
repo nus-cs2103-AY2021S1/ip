@@ -19,7 +19,7 @@ public class SetTagCommand extends Command {
     public CommandOutput executeCommand(TaskManager taskManger) throws DukeException {
         try {
             taskManger.setTagToTask(taskToBeTaggedIndex, tagName);
-            Task taggedTask = taskManger.getTask(taskToBeTaggedIndex - 1);
+            Task taggedTask = taskManger.getTask(taskToBeTaggedIndex);
             String taggedTaskOutput = outputResult(taggedTask);
             return new CommandOutput(taggedTaskOutput, false);
         } catch (IndexOutOfBoundsException e) {

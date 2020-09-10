@@ -20,7 +20,7 @@ public class DeleteCommand extends Command {
 
     public CommandOutput executeCommand(TaskManager taskManager) throws DukeException {
         try {
-            Task deletedTask = taskManager.getTask(taskIndex - 1);
+            Task deletedTask = taskManager.getTask(taskIndex);
             taskManager.deleteTask(taskIndex);
             String deletedTaskOutput = outputResult(deletedTask);
             return new CommandOutput(deletedTaskOutput, false);

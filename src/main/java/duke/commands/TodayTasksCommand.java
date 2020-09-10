@@ -7,6 +7,7 @@ import duke.utils.Messages;
 import java.time.LocalDate;
 
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class TodayTasksCommand extends Command {
     private static final LocalDate TODAY = LocalDate.now();
@@ -17,7 +18,7 @@ public class TodayTasksCommand extends Command {
         int numberOfCompletedTasks = this.getNumberOfCompletedTasks(tasksForToday);
         int numberOfUncompletedTasks = this.getNumberOfUncompletedTasks(tasksForToday);
         String tasksForTodayOutput = outputResult(tasksForToday, numberOfCompletedTasks, numberOfUncompletedTasks);
-        return new CommandOutput(tasksForTodayOutput.toString(), false);
+        return new CommandOutput(tasksForTodayOutput, false);
     }
 
     private String outputResult(List<Task> tasksForToday, int numberOfCompletedTasks, int numberOfUncompletedTasks) {
@@ -25,9 +26,12 @@ public class TodayTasksCommand extends Command {
         boolean hasTasksForToday = tasksForToday.size() > 0;
         if (hasTasksForToday) {
             tasksForTodayOutput.append("Here are your tasks for today:\n");
-            for (int i = 0; i < tasksForToday.size(); i++) {
-                String taskDescription = String.format("%d) %s\n", (i + 1), tasksForToday.get(i).toString());
-                tasksForTodayOutput.append(taskDescription);
+            AtomicInteger listNumber = new AtomicInteger();
+            for (Task task : tasksForToday) {
+                String taskDescription = task.toString();
+                String taskDescriptionInListFormat = String.format("%d) %s\n", listNumber.get() + 1, taskDescription);
+                tasksForTodayOutput.append(taskDescriptionInListFormat);
+                listNumber.getAndIncrement();
             }
             boolean hasMoreThanOneCompletedTasks = numberOfCompletedTasks > 1;
             String completedTasks = numberOfCompletedTasks

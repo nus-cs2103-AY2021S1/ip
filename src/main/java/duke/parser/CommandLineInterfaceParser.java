@@ -36,21 +36,17 @@ public class CommandLineInterfaceParser {
             String[] words = userInput.toLowerCase().split(" ");
             CommandTypes commandType = CommandTypes.valueOf(words[0].toUpperCase());
             commandType.checkInput(userInput.toLowerCase());
-            String content;
             switch (commandType) {
             case LIST:
                 return newListTasksCommand();
             case BYE:
                 return newExitCommand();
             case TODO:
-                content = userInput.replaceFirst("^(?i)todo", "");
-                return newAddTaskCommand(CommandTypes.TODO, content);
+                return newAddTaskCommand(CommandTypes.TODO, userInput);
             case DEADLINE:
-                content = userInput.replaceFirst("^(?i)deadline", "");
-                return newAddTaskCommand(CommandTypes.DEADLINE, content);
+                return newAddTaskCommand(CommandTypes.DEADLINE, userInput);
             case EVENT:
-                content = userInput.replaceFirst("^(?i)event", "");
-                return newAddTaskCommand(CommandTypes.EVENT, content);
+                return newAddTaskCommand(CommandTypes.EVENT, userInput);
             case DONE:
                 int completedTaskIndex = Integer.parseInt(words[1]);
                 return newDoneCommand(completedTaskIndex);
@@ -58,8 +54,7 @@ public class CommandLineInterfaceParser {
                 int deletedTaskIndex = Integer.parseInt(words[1]);
                 return newDeleteCommand(deletedTaskIndex);
             case FIND:
-                content = userInput.replaceFirst("^(?i)find", "");
-                return newFindCommand(content);
+                return newFindCommand(userInput);
             case TODAY:
                 return newTodayTasksCommand();
             case UNCOMPLETED:
@@ -69,7 +64,9 @@ public class CommandLineInterfaceParser {
             case OVERDUE:
                 return newOverdueCommand();
             case TAG:
-                return newSetTagCommand(words[1], words[2]);
+                int taskToBeTaggedIndex = Integer.parseInt(words[1]);
+                String tagName = words[2];
+                return newSetTagCommand(taskToBeTaggedIndex, tagName);
             case HELP:
                 return newHelpCommand();
             default:
@@ -108,26 +105,29 @@ public class CommandLineInterfaceParser {
         }
     }
 
-    private static AddCommand newAddTaskCommand(CommandTypes taskType, String userInputContent) throws DukeException {
+    private static AddCommand newAddTaskCommand(CommandTypes taskType, String userInput) throws DukeException {
         assert taskType == CommandTypes.TODO || taskType == CommandTypes.EVENT || taskType == CommandTypes.DEADLINE
                 : "Command should either be a TODO, EVENT or DEADLINE command";
         switch (taskType) {
         case TODO:
-            String trimmedContent = userInputContent.trim();
+            String todoContent = userInput.replaceFirst("^(?i)todo", "");
+            String trimmedContent = todoContent.trim();
             return new AddCommand(new Todo(trimmedContent));
         case EVENT:
-            String[] userInputEventArgs = userInputContent.split("\\s*/at\\s*");
-            String content = userInputEventArgs[0].trim();
+            String eventContent = userInput.replaceFirst("^(?i)event", "");
+            String[] userInputEventArgs = eventContent.split("\\s*/at\\s*");
+            String trimmedEventContent = userInputEventArgs[0].trim();
             String eventDateTime = userInputEventArgs[1];
             DukeDateTime eventDukeDateTime = DateTimeParser.parseDateTime(eventDateTime);
-            AddCommand addEvent = new AddCommand(new Event(content, eventDukeDateTime));
+            AddCommand addEvent = new AddCommand(new Event(trimmedEventContent, eventDukeDateTime));
             return addEvent;
         case DEADLINE:
-            String[] userInputDeadlineArgs = userInputContent.split("\\s*/by\\s*");
-            content = userInputDeadlineArgs[0].trim();
+            String deadlineContent = userInput.replaceFirst("^(?i)deadline", "");
+            String[] userInputDeadlineArgs = deadlineContent.split("\\s*/by\\s*");
+            String trimmedDeadlineContent = userInputDeadlineArgs[0].trim();
             String deadlineDateTime = userInputDeadlineArgs[1];
             DukeDateTime deadlineDukeDateTime = DateTimeParser.parseDateTime(deadlineDateTime);
-            AddCommand addDeadline = new AddCommand(new Deadline(content, deadlineDukeDateTime));
+            AddCommand addDeadline = new AddCommand(new Deadline(trimmedDeadlineContent, deadlineDukeDateTime));
             return addDeadline;
         default:
             assert false : Messages.INVALID_COMMAND_ASSERTIONS;
@@ -135,7 +135,8 @@ public class CommandLineInterfaceParser {
         }
     }
 
-    private static FindCommand newFindCommand(String keyword) {
+    private static FindCommand newFindCommand(String userInput) {
+        String keyword = userInput.replaceFirst("^(?i)find", "");
         String trimmedKeyword = keyword.trim();
         FindCommand newFindCommand = new FindCommand(trimmedKeyword);
         return newFindCommand;
@@ -161,8 +162,7 @@ public class CommandLineInterfaceParser {
         return new InvalidCommand(errorMessage);
     }
 
-    private static SetTagCommand newSetTagCommand(String taskIndex, String tagName) {
-        int taskToBeTaggedIndex = Integer.parseInt(taskIndex);
+    private static SetTagCommand newSetTagCommand(int taskToBeTaggedIndex, String tagName) {
         String tagNameWithoutHex = tagName.replaceAll("[^a-zA-Z0-9]", " ").trim();
         SetTagCommand newSetTagCommand = new SetTagCommand(taskToBeTaggedIndex, tagNameWithoutHex);
         return newSetTagCommand;

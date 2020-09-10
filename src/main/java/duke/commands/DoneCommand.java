@@ -22,7 +22,7 @@ public class DoneCommand extends Command {
     public CommandOutput executeCommand(TaskManager taskManger) throws DukeException {
         try {
             taskManger.markTaskAsDone(completedTaskIndex);
-            Task completedTask = taskManger.getTask(completedTaskIndex - 1);
+            Task completedTask = taskManger.getTask(completedTaskIndex);
             String doneTaskOutput = outputResult(completedTask);
             return new CommandOutput(doneTaskOutput, false);
         } catch (IndexOutOfBoundsException e) {

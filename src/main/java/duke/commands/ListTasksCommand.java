@@ -2,6 +2,7 @@ package duke.commands;
 
 import duke.task.Task;
 import duke.task.TaskManager;
+
 import duke.utils.Messages;
 
 import java.util.List;
@@ -28,14 +29,12 @@ public class ListTasksCommand extends Command {
         if (hasTasks) {
             allTasksOutput.append("Here are all your tasks: \n");
             AtomicInteger listNumber = new AtomicInteger();
-            allTasks.forEach(task -> {
+            for (Task task : allTasks) {
                 String taskDescription = task.toString();
-                String taskDescriptionInListFormat = String.format("%d) %s\n",
-                        listNumber.get() + 1,
-                        taskDescription);
+                String taskDescriptionInListFormat = String.format("%d) %s\n", listNumber.get() + 1, taskDescription);
                 allTasksOutput.append(taskDescriptionInListFormat);
                 listNumber.getAndIncrement();
-            });
+            }
             boolean hasMoreThanOneCompletedTask = numberOfCompletedTasks > 1;
             boolean hasMoreThanOneUncompletedTask = numberOfUncompletedTasks > 1;
             String completedTasks = numberOfCompletedTasks

@@ -22,7 +22,7 @@ public class TaskManager {
     }
 
     public Task getTask(int taskIndex) {
-        return this.tasks.get(taskIndex);
+        return this.tasks.get(taskIndex - 1);
     }
 
     public int getTotalNumberOfTasks() {
@@ -34,22 +34,16 @@ public class TaskManager {
     }
 
     public int getNumberOfCompletedTasks() {
-        int completedTasks = 0;
-        for (int i = 0; i < tasks.size(); i++) {
-            if (tasks.get(i).getIsDone()) {
-                completedTasks++;
-            }
-        }
+        int completedTasks = (int) tasks.stream()
+                .filter(Task::getIsDone)
+                .count();
         return completedTasks;
     }
 
     public int getNumberOfUncompletedTasks() {
-        int uncompletedTasks = 0;
-        for (int i = 0; i < tasks.size(); i++) {
-            if (!tasks.get(i).getIsDone()) {
-                uncompletedTasks++;
-            }
-        }
+        int uncompletedTasks = (int) tasks.stream()
+                .filter(task -> !task.getIsDone())
+                .count();
         return uncompletedTasks;
     }
 
@@ -80,7 +74,9 @@ public class TaskManager {
     }
 
     public List<Task> findTasksByKeyword(String keyword) {
-        return tasks.stream().filter(task -> task.getContent().contains(keyword)).collect(Collectors.toList());
+        return tasks.stream()
+                .filter(task -> task.getContent().contains(keyword))
+                .collect(Collectors.toList());
     }
 
     public List<Task> findTasksByDate(LocalDate queryDate) {
