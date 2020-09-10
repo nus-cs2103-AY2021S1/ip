@@ -34,11 +34,18 @@ public class Duke {
 
     public static void main(String[] args) {
         Duke duke = new Duke();
-        duke.run();
+//        duke.run();
     }
 
     String getResponse(String input) {
-        return "Duke heard: " + input;
+        String reply;
+        try {
+            Command c = Parser.parse(input);
+            reply  = c.execute(taskList, ui, input);
+        } catch (DukeException e) {
+            reply = e.toString();
+        }
+        return "Duke: " + reply;
     }
 }
 

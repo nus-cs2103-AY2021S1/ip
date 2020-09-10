@@ -18,15 +18,14 @@ public class Ui {
     /**
      * Greets user who just activated Duke.
      */
-    public void greeting() {
-        String greeting = "Hello! I'm Duke\nWhat can I do for you?\n\n";
-        System.out.print(greeting);
+    public String greeting() {
+        return "Hello! I'm Duke\nWhat can I do for you?";
     }
 
     /**
      * Shows the available commands.
      */
-    public void help() {
+    public String help() {
         String msg = String.join("\n",
                 "Adding task:",
                 "todo <desc>",
@@ -38,82 +37,79 @@ public class Ui {
                 "done <taskId> - mark the task as done",
                 "delete <taskId> - delete the task",
                 "bye - close Duke");
-        System.out.println(msg + "\n");
+        return (msg);
     }
 
     /**
      * Last message shown before Duke program is closed.
      */
-    public void quit() {
-        System.out.println("Adios!");
+    public String quit() {
+        return "Adios!";
     }
 
     /**
      * Shows tasks in the current list.
      */
-    public void list() {
+    public String list() {
         List<Task> tasks = taskList.getTasks();
+        String msg = "";
         if (tasks.size() == 0) {
-            System.out.println("No tasks in the list wohoo!");
+            msg = "No tasks in the list wohoo!\n";
         } else {
-            System.out.println("Here are the tasks in your list:");
+            msg += "Here are the tasks in your list:\n";
             for (int i = 0; i < tasks.size(); i++) {
                 String task = tasks.get(i).toString();
-                String message = (i + 1) + ". " + task;
-                System.out.println(message);
+                String taskDesc = (i + 1) + ". " + task + "\n";
+                msg += taskDesc;
             }
         }
-        System.out.print("\n");
+        return msg;
     }
 
-    public void filteredList(List<Task> tasks) {
+    public String filteredList(List<Task> tasks) {
+        String msg = "";
         if (tasks.size() == 0) {
-            System.out.println("No matching tasks in the list");
+            msg = "No matching tasks in the list\n";
         } else {
-            System.out.println("Here are the matching tasks in your list:");
+            msg += "Here are the matching tasks in your list:\n";
             for (int i = 0; i < tasks.size(); i++) {
                 String task = tasks.get(i).toString();
-                String message = (i + 1) + ". " + task;
-                System.out.println(message);
+                String taskDesc = (i + 1) + ". " + task + "\n";
+                msg += taskDesc;
             }
         }
-        System.out.print("\n");
+        return msg;
     }
 
     /**
      * Shows message that the given task has been marked done.
      * @param task
      */
-    public void markAsDone(Task task) {
-        System.out.println("Nice! I've marked it done - " + task.toString());
-        System.out.print("\n");
+    public String markAsDone(Task task) {
+        return "Nice! I've marked it done - " + task.toString();
     }
 
     /**
      * Shows the summary of how many tasks are there in the list.
      */
-    private void summary() {
-        System.out.println("Now you have " + taskList.taskSize() + " tasks in the list");
+    private String summary() {
+        return "Now you have " + taskList.taskSize() + " tasks in the list";
     }
 
     /**
      * Shows message that the given task has been deleted.
      * @param task
      */
-    public void delete(Task task) {
-        System.out.println("Noted! I've removed this task - " + task.toString());
-        summary();
-        System.out.print("\n");
+    public String delete(Task task) {
+        return "Noted! I've removed this task - " + task.toString() + "\n" + summary();
     }
 
     /**
      * Shows message that the given task has been added.
      * @param task
      */
-    public void add(Task task) {
-        System.out.println("Added '" + task.toString() + "' to list of tasks");
-        summary();
-        System.out.print("\n");
+    public String add(Task task) {
+        return "Added '" + task.toString() + "' to list of tasks" + "\n" + summary();
     }
 
 }

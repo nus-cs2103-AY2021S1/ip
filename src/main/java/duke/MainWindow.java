@@ -9,6 +9,9 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
 public class MainWindow extends AnchorPane {
+
+    final String EXIT = "bye";
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -44,6 +47,9 @@ public class MainWindow extends AnchorPane {
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+        if (input.equals(EXIT)) {
+            System.exit(0);
+        }
         userInput.clear();
     }
 }
