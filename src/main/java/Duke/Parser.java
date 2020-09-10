@@ -45,7 +45,6 @@ public class Parser {
             DoneOutOfRangeException, MissingDeleteArgumentException, DeleteOutOfRangeException, EmptyTodoException,
             MissingDeadlineDateException, EmptyDeadlineException, MissingEventDateException, EmptyEventException,
             UnknownCommandException, MissingFindArgumentException {
-
         CommandType commandType = parseCommandType(input);
         switch (commandType) {
         case DONE: {
