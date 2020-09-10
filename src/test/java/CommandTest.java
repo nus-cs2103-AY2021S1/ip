@@ -1,25 +1,26 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import duke.Parser;
 import duke.Storage;
 import duke.Ui;
-
 import duke.exception.DukeException;
-
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
 
-import java.util.ArrayList;
 
 public class CommandTest {
 
     @Test
     public void addTodoCommand_validInput_success() throws DukeException {
-        TaskList tasks = new TaskList(new ArrayList<>());
+        List<Task> emptyListOfTasks = new ArrayList<>();
+        TaskList tasks = new TaskList(emptyListOfTasks);
         Ui ui = new Ui();
         Storage storage = new Storage();
         String expected = "Success! This task has been added:\n"
@@ -29,7 +30,8 @@ public class CommandTest {
 
     @Test
     public void addDeadlineCommand_validInput_success() throws DukeException {
-        TaskList tasks = new TaskList(new ArrayList<>());
+        List<Task> emptyListOfTasks = new ArrayList<>();
+        TaskList tasks = new TaskList(emptyListOfTasks);
         Ui ui = new Ui();
         Storage storage = new Storage();
         String expected = "Success! This task has been added:\n"
@@ -40,7 +42,8 @@ public class CommandTest {
 
     @Test
     public void addEventCommand_invalidInput_failure() throws DukeException {
-        TaskList tasks = new TaskList(new ArrayList<>());
+        List<Task> emptyListOfTasks = new ArrayList<>();
+        TaskList tasks = new TaskList(emptyListOfTasks);
         Ui ui = new Ui();
         Storage storage = new Storage();
         DukeException ex = Assertions.assertThrows(DukeException.class, () -> {
@@ -52,7 +55,8 @@ public class CommandTest {
 
     @Test
     public void addEventCommand_missingDescription_throwsException() throws DukeException {
-        TaskList tasks = new TaskList(new ArrayList<>());
+        List<Task> emptyListOfTasks = new ArrayList<>();
+        TaskList tasks = new TaskList(emptyListOfTasks);
         Ui ui = new Ui();
         Storage storage = new Storage();
         DukeException ex = Assertions.assertThrows(DukeException.class, () -> {
@@ -64,7 +68,8 @@ public class CommandTest {
 
     @Test
     public void addDeadlineCommand_missingTimeStamp_throwsException() throws DukeException {
-        TaskList tasks = new TaskList(new ArrayList<>());
+        List<Task> emptyListOfTasks = new ArrayList<>();
+        TaskList tasks = new TaskList(emptyListOfTasks);
         Ui ui = new Ui();
         Storage storage = new Storage();
         DukeException ex = Assertions.assertThrows(DukeException.class, () -> {
@@ -76,7 +81,8 @@ public class CommandTest {
 
     @Test
     public void addEventCommand_invalidDateTimeFormat_throwsException() throws DukeException {
-        TaskList tasks = new TaskList(new ArrayList<>());
+        List<Task> emptyListOfTasks = new ArrayList<>();
+        TaskList tasks = new TaskList(emptyListOfTasks);
         Ui ui = new Ui();
         Storage storage = new Storage();
         DukeException ex = Assertions.assertThrows(DukeException.class, () -> {
@@ -90,7 +96,8 @@ public class CommandTest {
 
     @Test
     public void addDeadlineCommand_missingDescriptionAndTime_throwsException() throws DukeException {
-        TaskList tasks = new TaskList(new ArrayList<>());
+        List<Task> emptyListOfTasks = new ArrayList<>();
+        TaskList tasks = new TaskList(emptyListOfTasks);
         Ui ui = new Ui();
         Storage storage = new Storage();
         DukeException ex = Assertions.assertThrows(DukeException.class, () -> {
@@ -116,7 +123,7 @@ public class CommandTest {
 
     @Test
     public void deleteTaskCommand_invalidTaskID_failure() throws DukeException {
-        ArrayList<Task> listOfTasks = new ArrayList<>();
+        List<Task> listOfTasks = new ArrayList<>();
         listOfTasks.add(new Todo("todo description"));
         TaskList tasks = new TaskList(listOfTasks);
         Ui ui = new Ui();
@@ -142,8 +149,12 @@ public class CommandTest {
 
     @Test
     public void completeTaskCommand_invalidTaskID_throwsException() {
+        List<Task> emptyListOfTasks = new ArrayList<>();
+        TaskList tasks = new TaskList(emptyListOfTasks);
+        Ui ui = new Ui();
+        Storage storage = new Storage();
         DukeException ex = Assertions.assertThrows(DukeException.class, () -> {
-            Parser.parse("done 10").execute(new TaskList(new ArrayList<>()), new Ui(), new Storage());
+            Parser.parse("done 10").execute(tasks, ui, storage);
         });
         String expected = "Oh no! Invalid Task! The task ID you provided is not valid. ";
         assertEquals(expected, ex.getMessage());
@@ -151,7 +162,8 @@ public class CommandTest {
 
     @Test
     public void testExitCommand() throws DukeException {
-        TaskList tasks = new TaskList(new ArrayList<>());
+        List<Task> emptyListOfTasks = new ArrayList<>();
+        TaskList tasks = new TaskList(emptyListOfTasks);
         Ui ui = new Ui();
         Storage storage = new Storage();
         String expected = "Goodbye... For now.";
@@ -160,7 +172,8 @@ public class CommandTest {
 
     @Test
     public void findTaskByDateCommand_validDate_success() throws DukeException {
-        TaskList tasks = new TaskList(new ArrayList<>());
+        List<Task> emptyListOfTasks = new ArrayList<>();
+        TaskList tasks = new TaskList(emptyListOfTasks);
         Ui ui = new Ui();
         Storage storage = new Storage();
         Parser.parse("deadline eat /by 1/2/2020 1:00").execute(tasks, ui, storage);
@@ -172,8 +185,12 @@ public class CommandTest {
 
     @Test
     public void findTaskByDateCommand_invalidDate_throwsException() {
+        List<Task> emptyListOfTasks = new ArrayList<>();
+        TaskList tasks = new TaskList(emptyListOfTasks);
+        Ui ui = new Ui();
+        Storage storage = new Storage();
         DukeException ex = Assertions.assertThrows(DukeException.class, () -> {
-            Parser.parse("find_by_date 10 May").execute(new TaskList(new ArrayList<>()), new Ui(), new Storage());
+            Parser.parse("find_by_date 10 May").execute(tasks, ui, storage);
         });
         String expected = "Oh no! The task date format is incorrect. "
                 + "Please input a valid date using the format: 'dd/mm/yyyy'\n"
@@ -183,7 +200,8 @@ public class CommandTest {
 
     @Test
     public void findTaskByKeywordCommand_validInput_success() throws DukeException {
-        TaskList tasks = new TaskList(new ArrayList<>());
+        List<Task> emptyListOfTasks = new ArrayList<>();
+        TaskList tasks = new TaskList(emptyListOfTasks);
         Ui ui = new Ui();
         Storage storage = new Storage();
         Parser.parse("deadline cs2103T tutorial /by 1/2/2020 1:00").execute(tasks, ui, storage);
@@ -195,8 +213,12 @@ public class CommandTest {
 
     @Test
     public void findTaskByKeywordCommand_missingKeyword_throwsException() {
+        List<Task> emptyListOfTasks = new ArrayList<>();
+        TaskList tasks = new TaskList(emptyListOfTasks);
+        Ui ui = new Ui();
+        Storage storage = new Storage();
         DukeException ex = Assertions.assertThrows(DukeException.class, () -> {
-            Parser.parse("find").execute(new TaskList(new ArrayList<>()), new Ui(), new Storage());
+            Parser.parse("find").execute(tasks, ui, storage);
         });
         String expected = "Oh no! No keyword for the search was entered. Please enter a keyword!\n"
                 + "Type 'help' for a list of all my functions and their commands.";
@@ -205,8 +227,12 @@ public class CommandTest {
 
     @Test
     public void invalidCommand_invalidInput_throwsException() {
+        List<Task> emptyListOfTasks = new ArrayList<>();
+        TaskList tasks = new TaskList(emptyListOfTasks);
+        Ui ui = new Ui();
+        Storage storage = new Storage();
         DukeException ex = Assertions.assertThrows(DukeException.class, () -> {
-            Parser.parse("find").execute(new TaskList(new ArrayList<>()), new Ui(), new Storage());
+            Parser.parse("find").execute(tasks, ui, storage);
         });
         String expected = "Oh no! No keyword for the search was entered. Please enter a keyword!\n"
                 + "Type 'help' for a list of all my functions and their commands.";
@@ -215,7 +241,8 @@ public class CommandTest {
 
     @Test
     public void testListCommand() throws DukeException {
-        TaskList tasks = new TaskList(new ArrayList<>());
+        List<Task> emptyListOfTasks = new ArrayList<>();
+        TaskList tasks = new TaskList(emptyListOfTasks);
         Ui ui = new Ui();
         Storage storage = new Storage();
         Parser.parse("todo finish ip").execute(tasks, ui, storage);

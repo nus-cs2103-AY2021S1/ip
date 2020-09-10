@@ -1,9 +1,9 @@
 package duke;
 
-import duke.task.Task;
-
 import java.util.List;
 import java.util.Scanner;
+
+import duke.task.Task;
 
 /**
  * Handles interactions with the user while the user is using DukeBot.

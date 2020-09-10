@@ -1,5 +1,14 @@
 package duke;
 
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+
 import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -7,16 +16,7 @@ import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
 
-import java.util.List;
-import java.util.ArrayList;
-import java.util.Scanner;
 
-import java.io.File;
-import java.io.FileWriter;
-import java.io.IOException;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
 
 /**
  * Encapsulates methods and information that relate to file operations
@@ -24,8 +24,10 @@ import java.time.LocalTime;
  */
 public class Storage {
 
-    private static final String DIRECTORY = "data";
-    private static final String FILE_LOCATION = "data/duke.txt";
+    /** Default directory which will contain the file with the stored tasks. **/
+    private static final String DEFAULT_DIRECTORY = "data";
+    /** Default path of the file which will store the tasks. **/
+    private static final String DEFAULT_FILE_LOCATION = "data/duke.txt";
 
     /**
      * Retrieves the list of tasks stored in the designated file
@@ -37,11 +39,11 @@ public class Storage {
 
         List<Task> tasks = new ArrayList<>();
         try {
-            File dataDirectory = new File(Storage.DIRECTORY);
+            File dataDirectory = new File(Storage.DEFAULT_DIRECTORY);
             // make a data directory if the directory does not exist
             dataDirectory.mkdir();
 
-            File dataFile = new File(Storage.FILE_LOCATION);
+            File dataFile = new File(Storage.DEFAULT_FILE_LOCATION);
             // create an empty file to store the tasks if the file does not exist
             dataFile.createNewFile();
             assert dataFile.exists();
@@ -136,7 +138,7 @@ public class Storage {
      */
     public void saveToFile(TaskList tasks) throws DukeException {
         try {
-            FileWriter fileWriter = new FileWriter(Storage.FILE_LOCATION);
+            FileWriter fileWriter = new FileWriter(Storage.DEFAULT_FILE_LOCATION);
             for (int i = 0; i < tasks.getListSize(); i++) {
                 Task task = tasks.getTask(i);
                 fileWriter.write(task.convertTaskToFileString() + "\n");

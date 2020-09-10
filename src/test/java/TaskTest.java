@@ -1,5 +1,10 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Test;
 
 import duke.task.Deadline;
@@ -7,13 +12,10 @@ import duke.task.Event;
 import duke.task.TaskList;
 import duke.task.Todo;
 
-import java.time.LocalDate;
-import java.time.LocalTime;
-import java.time.format.DateTimeFormatter;
-
-import java.util.ArrayList;
-
 public class TaskTest {
+
+    private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
+    private final DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:mm");
 
     @Test
     public void createTodo_validInput_success() {
@@ -31,10 +33,8 @@ public class TaskTest {
 
     @Test
     public void createDeadline_validInput_success() {
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:mm");
-        LocalDate date = LocalDate.parse("4/5/2020", dateFormatter);
-        LocalTime time = LocalTime.parse("14:00", timeFormatter);
+        LocalDate date = LocalDate.parse("4/5/2020", this.dateFormatter);
+        LocalTime time = LocalTime.parse("14:00", this.timeFormatter);
         Deadline deadline = new Deadline("create deadline", date, time);
         String expected = "[D][✘] create deadline (by: Mon, May 04 2020, 02:00 PM)";
         assertEquals(expected, deadline.toString());
@@ -58,10 +58,8 @@ public class TaskTest {
 
     @Test
     public void taskRemoval_eventTask_emptyTaskList() {
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:mm");
-        LocalDate date = LocalDate.parse("10/2/2020", dateFormatter);
-        LocalTime time = LocalTime.parse("10:00", timeFormatter);
+        LocalDate date = LocalDate.parse("10/2/2020", this.dateFormatter);
+        LocalTime time = LocalTime.parse("10:00", this.timeFormatter);
         Event event = new Event("Junit test", date, time);
         TaskList tasks = new TaskList(new ArrayList<>());
         tasks.addTask(event);
@@ -71,10 +69,8 @@ public class TaskTest {
 
     @Test
     public void taskToFileString_validInput_success() {
-        DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
-        DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:mm");
-        LocalDate date = LocalDate.parse("10/10/2020", dateFormatter);
-        LocalTime time = LocalTime.parse("10:00", timeFormatter);
+        LocalDate date = LocalDate.parse("10/10/2020", this.dateFormatter);
+        LocalTime time = LocalTime.parse("10:00", this.timeFormatter);
         Event event = new Event("create event", date, time);
         String expected = "[E][✘] create event (at: Sat, Oct 10 2020, 10:00 AM)";
         assertEquals(expected, event.toString());

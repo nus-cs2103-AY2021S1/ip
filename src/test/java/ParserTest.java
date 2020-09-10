@@ -1,15 +1,15 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import duke.Storage;
-import duke.Ui;
-import duke.task.TaskList;
+import java.util.ArrayList;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import duke.Parser;
+import duke.Storage;
+import duke.Ui;
 import duke.exception.DukeException;
-
-import java.util.ArrayList;
+import duke.task.TaskList;
 
 public class ParserTest {
 
@@ -38,5 +38,4 @@ public class ParserTest {
                 + "Type 'help' for a list of all my functions and their commands.";
         assertEquals(expected, ex.getMessage());
     }
-
 }
