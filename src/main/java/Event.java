@@ -20,12 +20,14 @@ public class Event extends Task {
 
     @Override
     public String toString() {
+        assert at != null;
         return "[E]" + super.toString() + " (at: "
                 + at.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     @Override
     public String toSave() {
+        assert at != null;
         return "E " + super.toSave() + "/" + at;
     }
 }

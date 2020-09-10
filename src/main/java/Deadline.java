@@ -20,12 +20,14 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
+        assert by != null;
         return "[D]" + super.toString() + " (by: "
                 + by.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
     }
 
     @Override
     public String toSave() {
+        assert by != null;
         return "D " + super.toSave() + "/" + by;
     }
 }
