@@ -15,12 +15,12 @@ class UserCommandsTest {
     void testGetDeadlineCommandWord() {
         assertEquals("deadline", UserCommands.DEADLINE.getCommandWord());
     }
-    
+
     @Test
     void testGetEventCommandWord() {
         assertEquals("event", UserCommands.EVENT.getCommandWord());
     }
-    
+
     @Test
     void testGetDeleteCommandWord() {
         assertEquals("delete", UserCommands.DELETE.getCommandWord());
