@@ -23,27 +23,27 @@ public class Ui {
         if (tasks.isEmpty()) {
             return "There's currently no task in your list.\n";
         }
-        String response = "Here are the tasks in your list:\n";
+        StringBuilder response = new StringBuilder("Here are the tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
-            response += String.format("%d.%s\n", i + 1, task);
+            response.append(String.format("%d.%s\n", i + 1, task));
         }
-        return response;
+        return response.toString();
     }
 
     public String showMatching(TaskList tasks, String keyword) {
-        String response = "Here are the matching tasks in your list:\n";
+        StringBuilder response = new StringBuilder("Here are the matching tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             String description = task.getDescription();
             String[] words = description.split(" ");
             for (String word : words) {
                 if (word.equals(keyword)) {
-                    response += String.format("%d.%s%\n", i + 1, task);
+                    response.append(String.format("%d.%s%\n", i + 1, task));
                 }
             }
         }
-        return response;
+        return response.toString();
     }
 
     public String markDoneMsg(Task task) {
@@ -60,6 +60,18 @@ public class Ui {
         return "Noted. I've removed this task: \n "
                 + removed + "\n"
                 + String.format("Now you have %d tasks in the list.", tasks.size());
+    }
+
+    public String showStats(TaskList tasks) {
+        int done = 0;
+        int total = tasks.size();
+        for (int i = 0; i < total; i++) {
+            if (tasks.get(i).isDone()) {
+                done++;
+            }
+        }
+        return String.format("You now have %d out of %d tasks marked as done.\n"
+                + "There are still %d task(s) left.\n", done, total, total - done);
     }
 
 }

@@ -64,7 +64,9 @@ public class Parser {
         case "bye":
             return new ExitCommand();
         case "list":
-            return new ShowCommand();
+            return new ListCommand();
+        case "stats":
+            return new StatsCommand();
         case "done":
         case "delete":
             throw FeiException.operationException();
