@@ -11,7 +11,9 @@ import duke.command.EmptyCommand;
 import duke.command.EndCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.TagCommand;
 import duke.exception.DukeException;
+import duke.task.Tag;
 
 /**
  * An object used to parse user input given during the usage of the Duke programme.
@@ -43,6 +45,8 @@ public class Parser {
             command = parseDelete(inputArray);
         } else if (firstWord.toLowerCase().equals("find")) {
             command = parseFind(inputArray);
+        } else if (firstWord.toLowerCase().equals("tag")) {
+            command = parseAddTag(inputArray);
         } else {
             switch (firstWord.toLowerCase()) {
             case "todo":
@@ -62,6 +66,22 @@ public class Parser {
         }
         assert command != null;
         return command;
+    }
+
+    private Command parseAddTag(String[] inputArray) throws DukeException {
+        if (inputArray.length <= 1) {
+            throw new DukeException("Which task do you want tagged?");
+        }
+        if (inputArray.length == 2) {
+            throw new DukeException("You're missing either the description for your tag or the task number!");
+        }
+        try {
+            int index = Integer.parseInt(inputArray[1]);
+            Tag tag = new Tag(inputArray[2]);
+            return new TagCommand(index - 1, tag);
+        } catch (NumberFormatException e) {
+            throw new DukeException("You gotta give me the task index before the tag description!");
+        }
     }
 
     private Command parseDelete(String[] inputArray) throws DukeException {
