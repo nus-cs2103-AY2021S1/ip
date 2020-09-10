@@ -26,6 +26,7 @@ public class TaskList {
     }
 
     public TaskList findTask(String hint){
+        assert hint !=null : "I couldn't understand the hint please try again";
         TaskList containsHint = new TaskList(new ArrayList<Task>());
         for(Task task: ls){
             if(task.getTask().contains(hint)){
