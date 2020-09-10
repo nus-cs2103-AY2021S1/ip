@@ -1,2 +1,5 @@
-[T][X] read book 
 [T][X] gradle test 
+[E][X] add (at: 11 Nov 1111 1100)
+[T][X] todo1 
+[E][X] event 1 (at: 22 Feb 2222 1100)
+[T][X] test 

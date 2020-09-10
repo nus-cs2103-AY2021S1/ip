@@ -24,6 +24,7 @@ public class InputManager {
      * @throws ErrorExceptions when selected task do not exists.
      */
     public static String parse2(String input) throws ErrorExceptions {
+        assert input.equals("") == false;
         Scanner sc = new Scanner(input);
         String current = sc.next();
         TaskManager.fileDir(fileDir);

@@ -63,6 +63,7 @@ public class MainWindow extends AnchorPane {
                                 + e, dukeImage));
             }
         }
+        assert save.exists() == true;
         TaskManager.load(save);
     }
 

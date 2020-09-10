@@ -53,7 +53,9 @@ public class TaskManager {
      * @return task selected task.
      */
     public static task getTask(int index) {
+        assert index >= 0;
         task t = store.get(index - 1);
+        System.out.println(t.name);
         return t;
     }
 
@@ -63,6 +65,7 @@ public class TaskManager {
      * @param t task.
      */
     public static void completed(task t) {
+        assert t != null;
         t.setDone();
         try {
             FileManager.edit(fileDir, store);
@@ -77,6 +80,7 @@ public class TaskManager {
      * @param index index of the task.
      */
     public static void delete(int index) {
+        assert index >= 0;
         store.remove(index - 1);
         try {
             FileManager.edit(fileDir, store);
@@ -101,6 +105,7 @@ public class TaskManager {
      * @return String message.
      */
     public static String read(task t) {
+        assert t != null;
         String done = "";
         if (t.getTaskCompleted()) {
             done = "[O]";
@@ -141,6 +146,7 @@ public class TaskManager {
      * @param save
      */
     public static void load(File save) {
+        assert save.exists() == true;
         FileManager.read(save, store);
     }
 
@@ -150,6 +156,8 @@ public class TaskManager {
      * @param t task.
      */
     public static void save(String fileDir, task t) {
+        assert fileDir.equals("") == false;
+        assert t != null;
         try {
             FileManager.add(fileDir, TaskManager.read(t));
         } catch (IOException e) {
@@ -163,6 +171,7 @@ public class TaskManager {
      * @param d file file directory.
      */
     public static void fileDir(String d) {
+        assert d.equals("") == false;
         fileDir = d;
     }
 
