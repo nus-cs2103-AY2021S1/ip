@@ -5,24 +5,8 @@ import bob.data.task.Tasklist;
 import bob.exceptions.BobException;
 
 public class MsgGenerator {
-    /**
-     * Generates response message to user.
-     *
-     * @param message Message to be shown.
-     * @return Response message.
-     */
-    private static String generateMsg(String ... message) {
-        boolean isNotEmptyMessage = message.length > 0;
-        assert isNotEmptyMessage;
-        String response = "";
-        for (String m : message) {
-            response += m;
-        }
-        return response;
-    }
-
-    private static String genFindMessage(String input) {
-        return "I found these tasks containing \"" + input + "\" in your list.\n";
+    private static String genFindMessage(String input, String tasksFound) {
+        return "I found these tasks containing \"" + input + "\" in your list.\n" + tasksFound;
     }
 
     private static String genNoTaskFoundMessage(String input) {
@@ -35,7 +19,7 @@ public class MsgGenerator {
      * @param e Exception caught.
      */
     public static String generateError(BobException e) {
-        return generateMsg(e.toString());
+        return e.toString();
     }
 
     /**
@@ -52,7 +36,7 @@ public class MsgGenerator {
         String taskMsg = task + "\n";
         // Ending line
         String end = "Currently you have " + tasks.getListSize() + " tasks in your list.\n";
-        return generateMsg(start, taskMsg, end);
+        return start + taskMsg + end;
     }
 
     /**
@@ -63,11 +47,11 @@ public class MsgGenerator {
      */
     public static String generateDoneMessage(Task task) {
         String taskMsg = task + "\n";
-        return generateMsg(Messages.DONE_MSG, taskMsg);
+        return Messages.DONE_MSG + taskMsg;
     }
 
     public static String generateListMessage(Tasklist tasks) {
-        return generateMsg(tasks.toString());
+        return tasks.toString();
     }
 
     /**
@@ -78,7 +62,7 @@ public class MsgGenerator {
      */
     public static String generateDeleteMessage(Task task) {
         String taskMsg = "Deleted: " + task + "\n";
-        return generateMsg(Messages.DELETE_MSG, taskMsg);
+        return Messages.DELETE_MSG + taskMsg;
     }
 
     /**
@@ -98,11 +82,11 @@ public class MsgGenerator {
     }
 
     public static String generateTasksFoundMessage(String input, String tasksFound) {
-        return generateMsg(genFindMessage(input), tasksFound);
+        return genFindMessage(input, tasksFound);
     }
 
     public static String generateNoTaskFoundMessage(String input) {
-        return generateMsg(genNoTaskFoundMessage(input));
+        return genNoTaskFoundMessage(input);
     }
 
     /**
