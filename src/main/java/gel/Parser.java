@@ -128,14 +128,13 @@ public class Parser {
         int dateIndex = input.lastIndexOf("/");
         if (dateIndex == -1) {
             throw new GelException("    Bruh you need the /by tag for deadlines");
-        } else {
-            String[] dateDetails = input.substring(dateIndex).split(" ");
-            String checkBy = dateDetails[0];
-            if (!checkBy.equals("/by")) {
-                throw new GelException("    Bruh you need the /by tag for deadlines");
-            } else if (dateDetails.length <= 1) {
-                throw new GelException("    Bruh you left out the deadline");
-            }
+        }
+        String[] dateDetails = input.substring(dateIndex).split(" ");
+        String checkBy = dateDetails[0];
+        if (!checkBy.equals("/by")) {
+            throw new GelException("    Bruh you need the /by tag for deadlines");
+        } else if (dateDetails.length <= 1) {
+            throw new GelException("    Bruh you left out the deadline");
         }
         return taskList.addDeadline(input, dateIndex);
     }
@@ -144,14 +143,13 @@ public class Parser {
         int dateIndex = input.lastIndexOf("/");
         if (dateIndex == -1) {
             throw new GelException("    Bruh you need the /at tag for events");
-        } else {
-            String[] dateDetails = input.substring(dateIndex).split(" ");
-            String checkAt = dateDetails[0];
-            if (!checkAt.equals("/at")) {
-                throw new GelException("    Bruh you need the /at tag for events");
-            } else if (dateDetails.length <= 1) {
-                throw new GelException("    Bruh you left out the event date");
-            }
+        }
+        String[] dateDetails = input.substring(dateIndex).split(" ");
+        String checkAt = dateDetails[0];
+        if (!checkAt.equals("/at")) {
+            throw new GelException("    Bruh you need the /at tag for events");
+        } else if (dateDetails.length <= 1) {
+            throw new GelException("    Bruh you left out the event date");
         }
         return taskList.addEvent(input, dateIndex);
     }
