@@ -1,6 +1,9 @@
 package duke.task;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 
 // Parent class for all types of tasks that can be created by the user.
 public abstract class Task {
@@ -9,6 +12,7 @@ public abstract class Task {
 
     protected String description;
     protected boolean isDone = false;
+    protected ArrayList<String> tags = new ArrayList<>(Collections.singletonList(""));
 
     public Task(String description) {
         this.description = description;
@@ -32,6 +36,18 @@ public abstract class Task {
 
     public boolean containsKeyword(String keyword) {
         return description.toLowerCase().contains(keyword.toLowerCase());
+    }
+
+    public void addTags(String[] tagsToAdd) {
+        if (tagsToAdd.length == 0) {
+            return;
+        }
+
+        tags.addAll(Arrays.asList(tagsToAdd));
+    }
+
+    protected String stringifyTags() {
+        return String.join(" #", tags);
     }
 
     @Override
