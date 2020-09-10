@@ -26,12 +26,11 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         if (tasks.getSize() == 0) {
-            throw new DukeException("You don't have any tasks yet!");
+            throw new EmptyListException();
         }
 
         if (this.taskNum == 0 || this.taskNum > tasks.getSize()) {
-            throw new DukeException("You don't have a task with that number! ><\n"
-                    + "Can you try a different number?");
+            throw new InvalidTaskNumberException();
         }
 
         Task t = tasks.getTask(this.taskNum);

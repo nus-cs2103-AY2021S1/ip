@@ -28,8 +28,7 @@ public class FindCommand extends Command {
         TaskList foundTasks = tasks.findTasks(keyword);
 
         if (foundTasks.getSize() == 0) {
-            throw new DukeException("There are no matching tasks in your list!\n"
-                    + "Can you try a different keyword?");
+            throw new NoTasksFoundException();
         }
 
         return ui.showFind() + "\n" + foundTasks.printList();

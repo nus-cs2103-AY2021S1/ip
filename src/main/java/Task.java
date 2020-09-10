@@ -33,7 +33,8 @@ public class Task {
      * @return String representation of the task.
      */
     public String toTaskData() {
-        return (this.isDone ? "1" : "0") + " ; " + this.taskName;
+        String separator = " ; ";
+        return (this.isDone ? "1" : "0") + separator + this.taskName;
     }
 
     /**

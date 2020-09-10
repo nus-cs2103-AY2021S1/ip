@@ -7,7 +7,7 @@ import java.time.format.DateTimeParseException;
  * An Event object is made up of the task name, as well as a date and time of the event.
  */
 public class Event extends Task {
-    protected LocalDateTime at;
+    protected LocalDateTime atDateTime;
     private String originalFormat;
     private String printedFormat;
 
@@ -22,15 +22,14 @@ public class Event extends Task {
         super(taskName);
 
         try {
-            this.at = LocalDateTime.parse(
+            this.atDateTime = LocalDateTime.parse(
                     date, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-            this.originalFormat = this.at.format(
+            this.originalFormat = this.atDateTime.format(
                     DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
-            this.printedFormat = this.at.format(
+            this.printedFormat = this.atDateTime.format(
                     DateTimeFormatter.ofPattern("EEE, d MMM yyyy, HH:mm"));
         } catch (DateTimeParseException ex) {
-            throw new DukeException("You need to use the proper format!\n"
-                    + "eg event project meeting /at 2019-10-15 1200");
+            throw new InvalidEventFormatException();
         }
     }
 
@@ -41,7 +40,8 @@ public class Event extends Task {
      */
     @Override
     public String toTaskData() {
-        return "E" + " ; " + super.toTaskData() + " ; " + originalFormat;
+        String separator = " ; ";
+        return "E" + separator + super.toTaskData() + separator + originalFormat;
     }
 
     /**
