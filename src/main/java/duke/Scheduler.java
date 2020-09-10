@@ -3,6 +3,9 @@ package duke;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import java.util.stream.Collectors;
+import java.util.List;
+
 /**
  * Scheduler class deals with event schedules to detect any anomalies
  * in scheduled events.
@@ -20,12 +23,15 @@ public class Scheduler {
     public boolean isEventClashingSchedule(TaskList userTasks, Event toBeScheduled) {
         boolean isEventClashing = false;
 
-        for (Task task : userTasks.getTaskList()) {
-            if (task instanceof Event) {
-                isEventClashing = isEventClashingAnotherEvent(((Event) task), toBeScheduled);
-                if (isEventClashing) {
-                    break;
-                }
+        List<Task> events = userTasks.getTaskList()
+                .stream()
+                .filter(task -> task instanceof Event)
+                .collect(Collectors.toList());
+
+        for (Task task : events) {
+            isEventClashing = isEventClashingAnotherEvent(((Event) task), toBeScheduled);
+            if (isEventClashing) {
+                break;
             }
         }
 

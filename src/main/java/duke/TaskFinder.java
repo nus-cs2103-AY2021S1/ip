@@ -1,6 +1,8 @@
 package duke;
 
 import java.util.ArrayList;
+import java.util.stream.Collectors;
+
 /**
  * Task Finder class is used to filter tasks based on keywords given
  * and returns the tasks in task list according to the filters.
@@ -15,12 +17,12 @@ public class TaskFinder {
      * @return ArrayList<Task> list of done tasks.
      */
     public ArrayList<Task> findAllDone(ArrayList<Task> taskList) {
-        ArrayList<Task> tasksDone = new ArrayList<Task>();
-        for (Task task : taskList) {
-            if (task.isDone) {
-                tasksDone.add(task);
-            }
-        }
+
+        ArrayList<Task> tasksDone = taskList
+                .stream()
+                .filter(task -> task.isDone)
+                .collect(Collectors.toCollection(ArrayList::new));
+
         return tasksDone;
     }
 
@@ -33,12 +35,12 @@ public class TaskFinder {
      * @return ArrayList<Task> list of done tasks.
      */
     public ArrayList<Task> findAllNotDone(ArrayList<Task> taskList) {
-        ArrayList<Task> tasksNotDone = new ArrayList<Task>();
-        for (Task task : taskList) {
-            if (!task.isDone) {
-                tasksNotDone.add(task);
-            }
-        }
+
+        ArrayList<Task> tasksNotDone = taskList
+                .stream()
+                .filter(task -> !task.isDone)
+                .collect(Collectors.toCollection(ArrayList::new));
+
         return tasksNotDone;
     }
 
@@ -50,12 +52,13 @@ public class TaskFinder {
      * @return ArrayList<Task> list of done tasks.
      */
     public ArrayList<Task> findToDos(ArrayList<Task> taskList) {
-        ArrayList<Task> toDos = new ArrayList<Task>();
-        for (Task task : taskList) {
-            if (task.getClass().getSimpleName().equals("ToDo")) {
-                toDos.add(task);
-            }
-        }
+
+        ArrayList<Task> toDos = taskList
+                .stream()
+                .filter(task ->
+                        task.getClass().getSimpleName().equals("ToDo"))
+                .collect(Collectors.toCollection(ArrayList::new));
+
         return toDos;
     }
 
@@ -68,13 +71,14 @@ public class TaskFinder {
      * @return ArrayList<Task> list of done tasks.
      */
     public ArrayList<Task> findToDosDone(ArrayList<Task> taskList) {
-        ArrayList<Task> toDosDone = new ArrayList<Task>();
-        for (Task task : taskList) {
-            if (task.getClass().getSimpleName().equals("ToDo")
-                    && task.isDone) {
-                toDosDone.add(task);
-            }
-        }
+
+        ArrayList<Task> toDosDone = taskList
+                .stream()
+                .filter(task ->
+                        task.getClass().getSimpleName().equals("ToDo")
+                                && task.isDone)
+                .collect(Collectors.toCollection(ArrayList::new));
+
         return toDosDone;
     }
 
@@ -87,13 +91,14 @@ public class TaskFinder {
      * @return ArrayList<Task> list of done tasks.
      */
     public ArrayList<Task> findToDosNotDone(ArrayList<Task> taskList) {
-        ArrayList<Task> toDosNotDone = new ArrayList<Task>();
-        for (Task task : taskList) {
-            if (task.getClass().getSimpleName().equals("ToDo")
-                    && !task.isDone) {
-                toDosNotDone.add(task);
-            }
-        }
+
+        ArrayList<Task> toDosNotDone = taskList
+                .stream()
+                .filter(task ->
+                        task.getClass().getSimpleName().equals("ToDo")
+                                && !task.isDone)
+                .collect(Collectors.toCollection(ArrayList::new));
+
         return toDosNotDone;
     }
 
@@ -105,12 +110,13 @@ public class TaskFinder {
      * @return ArrayList<Task> list of done tasks.
      */
     public ArrayList<Task> findDeadlines(ArrayList<Task> taskList) {
-        ArrayList<Task> deadlines = new ArrayList<Task>();
-        for (Task task : taskList) {
-            if (task.getClass().getSimpleName().equals("Deadline")) {
-                deadlines.add(task);
-            }
-        }
+
+        ArrayList<Task> deadlines = taskList
+                .stream()
+                .filter(task ->
+                        task.getClass().getSimpleName().equals("Deadline"))
+                .collect(Collectors.toCollection(ArrayList::new));
+
         return deadlines;
     }
 
@@ -123,13 +129,14 @@ public class TaskFinder {
      * @return ArrayList<Task> list of done tasks.
      */
     public ArrayList<Task> findDeadlinesDone(ArrayList<Task> taskList) {
-        ArrayList<Task> deadlinesDone = new ArrayList<Task>();
-        for (Task task : taskList) {
-            if (task.getClass().getSimpleName().equals("Deadline")
-                    && task.isDone) {
-                deadlinesDone.add(task);
-            }
-        }
+
+        ArrayList<Task> deadlinesDone = taskList
+                .stream()
+                .filter(task ->
+                        task.getClass().getSimpleName().equals("Deadline")
+                                && task.isDone)
+                .collect(Collectors.toCollection(ArrayList::new));
+
         return deadlinesDone;
     }
 
@@ -142,13 +149,14 @@ public class TaskFinder {
      * @return ArrayList<Task> list of done tasks.
      */
     public ArrayList<Task> findDeadlinesNotDone(ArrayList<Task> taskList) {
-        ArrayList<Task> deadlinesNotDone = new ArrayList<Task>();
-        for (Task task : taskList) {
-            if (task.getClass().getSimpleName().equals("Deadline")
-                    && !task.isDone) {
-                deadlinesNotDone.add(task);
-            }
-        }
+
+        ArrayList<Task> deadlinesNotDone = taskList
+                .stream()
+                .filter(task ->
+                        task.getClass().getSimpleName().equals("Deadline")
+                                && !task.isDone)
+                .collect(Collectors.toCollection(ArrayList::new));
+
         return deadlinesNotDone;
     }
 
@@ -160,12 +168,13 @@ public class TaskFinder {
      * @return ArrayList<Task> list of done tasks.
      */
     public ArrayList<Task> findEvents(ArrayList<Task> taskList) {
-        ArrayList<Task> events = new ArrayList<Task>();
-        for (Task task : taskList) {
-            if (task.getClass().getSimpleName().equals("Event")) {
-                events.add(task);
-            }
-        }
+
+        ArrayList<Task> events = taskList
+                .stream()
+                .filter(task ->
+                        task.getClass().getSimpleName().equals("Event"))
+                .collect(Collectors.toCollection(ArrayList::new));
+
         return events;
     }
 
@@ -178,13 +187,14 @@ public class TaskFinder {
      * @return ArrayList<Task> list of done tasks.
      */
     public ArrayList<Task> findEventsDone(ArrayList<Task> taskList) {
-        ArrayList<Task> eventsDone = new ArrayList<Task>();
-        for (Task task : taskList) {
-            if (task.getClass().getSimpleName().equals("Event")
-                    && task.isDone) {
-                eventsDone.add(task);
-            }
-        }
+
+        ArrayList<Task> eventsDone = taskList
+                .stream()
+                .filter(task ->
+                        task.getClass().getSimpleName().equals("Event")
+                                && task.isDone)
+                .collect(Collectors.toCollection(ArrayList::new));
+
         return eventsDone;
     }
 
@@ -197,13 +207,14 @@ public class TaskFinder {
      * @return ArrayList<Task> list of done tasks.
      */
     public ArrayList<Task> findEventsNotDone(ArrayList<Task> taskList) {
-        ArrayList<Task> eventsNotDone = new ArrayList<Task>();
-        for (Task task : taskList) {
-            if (task.getClass().getSimpleName().equals("Event")
-                    && !task.isDone) {
-                eventsNotDone.add(task);
-            }
-        }
+
+        ArrayList<Task> eventsNotDone = taskList
+                .stream()
+                .filter(task ->
+                        task.getClass().getSimpleName().equals("Event")
+                                && !task.isDone)
+                .collect(Collectors.toCollection(ArrayList::new));
+
         return eventsNotDone;
     }
 
@@ -218,12 +229,13 @@ public class TaskFinder {
      */
     public ArrayList<Task> findByKeyword(ArrayList<Task> taskList, String keyword) {
         assert(!keyword.isEmpty());
-        ArrayList<Task> filteredTasks = new ArrayList<Task>();
-        for (Task task: taskList) {
-            if (task.getDescription().contains(keyword)) {
-                filteredTasks.add(task);
-            }
-        }
+
+        ArrayList<Task> filteredTasks = taskList
+                .stream()
+                .filter(task ->
+                        task.getDescription().contains(keyword))
+                .collect(Collectors.toCollection(ArrayList::new));
+
         return filteredTasks;
     }
 }
