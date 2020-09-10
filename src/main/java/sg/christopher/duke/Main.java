@@ -26,6 +26,7 @@ public class Main extends Application {
             MainWindow mainWindow = fxmlLoader.<MainWindow>getController();
             mainWindow.setDuke(duke);
             duke.setMainWindowController(mainWindow);
+            duke.setStage(stage);
             duke.printWelcome();
             stage.show();
         } catch (IOException e) {

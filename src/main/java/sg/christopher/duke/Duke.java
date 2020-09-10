@@ -1,5 +1,7 @@
 package sg.christopher.duke;
 
+import javafx.application.Platform;
+import javafx.stage.Stage;
 import sg.christopher.duke.entities.Deadline;
 import sg.christopher.duke.entities.Event;
 import sg.christopher.duke.entities.Task;
@@ -16,9 +18,14 @@ public class Duke {
     private static List<Task> savedItems = loadSavedItems();
 
     private MainWindow mainWindowController;
+    private static Stage stage;
 
     public void setMainWindowController(MainWindow mw) {
         mainWindowController = mw;
+    }
+
+    public void setStage(Stage stage) {
+        Duke.stage = stage;
     }
 
     private void dukePrint(String message) {
@@ -235,6 +242,14 @@ public class Duke {
 
         switch (commandType) {
         case EXIT:
+            new Thread(() -> {
+                try {
+                    Thread.sleep(3000);
+                    Platform.runLater(() -> stage.close());
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }).start();
             return "Bye. Hope to see you again soon!";
         case TODO:
             return todoHandler(userInput);
