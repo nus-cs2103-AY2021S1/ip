@@ -1,7 +1,7 @@
 package duke.data.task;
 
-//  Deadlines: duke.data.tasks that need to be done before a specific date/time
-//  e.g., submit report by 11/10/2019 5pm
+//  Deadlines: tasks that need to be done before a specific date/time
+//  e.g. submit report by 11/10/2019 5pm
 
 import java.time.LocalDateTime;
 

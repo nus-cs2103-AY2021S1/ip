@@ -6,7 +6,7 @@ import java.util.List;
 import duke.data.task.Task;
 
 /**
- * Represents the entire task list. Contains the duke.data of all the tasks.
+ * Represents the entire task list. Contains the data of all the tasks.
  */
 public class TaskList {
 

@@ -31,7 +31,7 @@ public class TaskListDecoder {
     /**
      * Decodes {@code encodedTaskList} into a {@code TaskList} containing the decoded tasks.
      *
-     * @param file the duke.storage file containing all the saved tasks
+     * @param file the storage file containing all the saved tasks
      * @return a {@code TaskList object}
      * @throws FileNotFoundException if the file is not found
      * @throws Storage.StorageOperationException if the {@code encodedTaskList} is in an invalid format.
@@ -49,7 +49,6 @@ public class TaskListDecoder {
 
     /**
      * Decodes {@code encodedTask} into a {@code Todo}, {@code Deadline} or {@code Event}.
-     *
      * @throws Storage.StorageOperationException if {@code encodedTask} is in an invalid format.
      */
     private static Task decodeTaskFromString(String encodedTask) throws Storage.StorageOperationException {
@@ -70,7 +69,7 @@ public class TaskListDecoder {
         case "E":
             return decodeEvent(isDone, arguments);
         default:
-            throw new Storage.StorageOperationException("Encoded duke.data.task in invalid format. Unable to decode.");
+            throw new Storage.StorageOperationException("Encoded task in invalid format. Unable to decode.");
         }
     }
 
@@ -83,7 +82,6 @@ public class TaskListDecoder {
 
     /**
      * Decodes {@code encodedTodo} into a {@code Todo}.
-     *
      * @throws Storage.StorageOperationException if {@code encodedTodo} is in an invalid format.
      */
     private static Todo decodeTodo(boolean isDone, String arguments) throws Storage.StorageOperationException {
@@ -96,7 +94,6 @@ public class TaskListDecoder {
 
     /**
      * Decodes {@code encodedDeadline} into a {@code Deadline}.
-     *
      * @throws Storage.StorageOperationException if {@code encodedDeadline} is in an invalid format.
      */
     private static Deadline decodeDeadline(boolean isDone, String arguments) throws Storage.StorageOperationException {
@@ -109,7 +106,6 @@ public class TaskListDecoder {
 
     /**
      * Decodes {@code encodedEvent} into a {@code Event}.
-     *
      * @throws Storage.StorageOperationException if {@code encodedEvent} is in an invalid format.
      */
     private static Event decodeEvent(boolean isDone, String arguments) throws Storage.StorageOperationException {
