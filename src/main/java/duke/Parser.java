@@ -15,6 +15,7 @@ import duke.exception.InvalidArgumentException;
 import duke.exception.InvalidCommandException;
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.FixedDurationTask;
 import duke.task.Todo;
 
 /**
@@ -40,6 +41,19 @@ public class Parser {
             throw new EmptyArgumentException("todo's description");
         }
         return new AddTaskCommand(new Todo(input.substring(5)));
+    }
+    private static Command parseFixedDurationTask(String input) throws DukeException {
+        String command = "fdtask";
+        assert input.contains(command);
+        if (input.matches(command + "\\s*")) {
+            throw new EmptyArgumentException(command + "'s description");
+        }
+        if (!input.matches(command + " .+/duration .+")) {
+            throw new InvalidArgumentException(command + "'s description");
+        }
+        String[] split = input.substring(command.length() + 1).split("/duration");
+        String dateTimeString = split[1].stripLeading();
+        return new AddTaskCommand(new FixedDurationTask(split[0].stripTrailing(), dateTimeString));
     }
     private static Command parseDeadlineTask(String input) throws DukeException {
         assert input.contains("deadline");
@@ -123,6 +137,8 @@ public class Parser {
             return parseDeadlineTask(input);
         } else if (input.matches("event.*")) {
             return parseEventTask(input);
+        } else if (input.matches("fdtask.*")) {
+            return parseFixedDurationTask(input);
         } else if (input.matches("delete.*")) {
             return parseDelete(input);
         } else if (input.matches("find.*")) {
@@ -133,6 +149,7 @@ public class Parser {
                     && !input.contains("deadline")
                     && !input.contains("event")
                     && !input.contains("delete")
+                    && !input.contains("fdtask")
                     && !input.contains("find");
             throw new InvalidCommandException();
         }
