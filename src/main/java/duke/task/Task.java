@@ -53,6 +53,12 @@ public abstract class Task {
         tags.addAll(Arrays.asList(tagsToAdd));
     }
 
+    /**
+     * Removes all the input tags from the task.
+     *
+     * @param tagsToRemove String[] tags to be removed.
+     * @return List&lt;String> list of tags that were removed.
+     */
     public List<String> removeTags(String[] tagsToRemove) {
         ArrayList<String> removedTags = new ArrayList<>();
         for (String tag : tagsToRemove) {
