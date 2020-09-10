@@ -35,4 +35,14 @@ public class TaskListTest {
         testUnit.add(testTask);
         assertEquals(testUnit.get(1).toString(), "[T][\u2718] this");
     }
+
+    @Test
+    public void getUpcomingTasks_outdatedTask_success() {
+        Task testOutdatedTask = Deadline.of(
+            "deadline", "2001-01-01", "08:00", false);
+        TaskList testUnit = new TaskList();
+        testUnit.add(testOutdatedTask);
+        TaskList result = testUnit.getUpcomingTasks();
+        assertEquals(result.size(), 0);
+    }
 }

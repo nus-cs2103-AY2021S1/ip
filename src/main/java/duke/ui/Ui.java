@@ -63,6 +63,24 @@ public class Ui {
         return output;
     }
 
+    /**
+     * Prints the list of upcoming tasks.
+     *
+     * @param tasks upcoming tasks within the week.
+     * @return String representing the list of upcoming tasks.
+     */
+    public String displayUpcomingTasks(TaskList tasks) {
+        ArrayList<Task> list = tasks.getList();
+        String output = "Duke would like to remind you that you have these tasks in this upcoming week:\n";
+        for (Task task : list) {
+            output += INDENT + (list.indexOf(task) + 1) + "." + task.toString() + "\n";
+        }
+        if (list.size() == 0) {
+            output += INDENT + "None";
+        }
+        return output;
+    }
+
 
     /**
      * Prints out a message to confirm that the user has marked a task as done.

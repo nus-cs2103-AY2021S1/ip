@@ -1,6 +1,9 @@
 package duke.task;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.function.Predicate;
 
 /**
  * Represents a list of tasks.
@@ -75,5 +78,29 @@ public class TaskList {
             }
         }
         return matchingTasks;
+    }
+
+    private TaskList filter(Predicate<Task> tester) {
+        TaskList filteredList = new TaskList();
+        for (Task task : tasks) {
+            if (tester.test(task)) {
+                filteredList.add(task);
+            }
+        }
+        return filteredList;
+    }
+
+    /**
+     * Gets a list of upcoming tasks in the week.
+     *
+     * @return list of upcoming tasks.
+     */
+    public TaskList getUpcomingTasks() {
+        TaskList tasksWithDateTime = filter(task -> task.getTaskType().equals("deadline")
+            || task.getTaskType().equals("event"));
+        TaskList tasksWithinAWeek = tasksWithDateTime.filter(
+            task -> LocalDate.now().until(task.getDate(), ChronoUnit.DAYS) <= 7
+                    && LocalDate.now().until(task.getDate(), ChronoUnit.DAYS) >= 0);
+        return tasksWithinAWeek;
     }
 }

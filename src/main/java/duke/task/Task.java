@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.time.LocalDate;
+
 /**
  * Represents a user task.
  */
@@ -25,6 +27,15 @@ public abstract class Task {
     public String getTaskDescription() {
         return task;
     }
+
+    /**
+     * Gets the type of task.
+     *
+     * @return Type of task.
+     */
+    public abstract String getTaskType();
+
+    abstract LocalDate getDate();
 
     /**
      * Returns a String representation of the task to be stored in the
