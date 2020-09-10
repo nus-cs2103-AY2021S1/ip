@@ -14,9 +14,9 @@ public class ToDo extends Task {
     }
 
     /**
-     * Returns the task string to be written to the duke.txt storage file.
+     * Returns the ToDo task string to be written to the duke.txt storage file.
      *
-     * @return task string.
+     * @return Todo task string.
      */
     public String toStorageString() {
         return "[T]" + super.toStorageString();

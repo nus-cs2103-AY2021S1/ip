@@ -1,48 +1,19 @@
-import java.util.Scanner;
-
 public class Ui {
-    /** Scanner object. */
-    private Scanner sc;
-
     /**
-     * Constructs new Ui object.
-     */
-    public Ui() {
-        sc = new Scanner(System.in);
-    }
-
-    /**
-     * Prints the divider line.
-     */
-    public void showLine() {
-        System.out.println("==============================================================================");
-    }
-
-    /**
-     * Prints the opening lines in Duke.
-     */
-    public void opening() {
-        this.showLine();
-        System.out.println("Hello! I'm Duke!\nWhat can I do for you?");
-        this.showLine();
-    }
-
-    /**
-     * Returns a prompt for user input.
+     * Returns the opening lines in Duke.
      *
-     * @return Scanner prompt.
+     * @return opening string.
      */
-    public String userInput() {
-        return sc.nextLine();
+    public static String opening() {
+        return "Hello! I'm Duke!\nWhat can I do for you?";
     }
 
     /**
-     * Prints the closing lines in Duke.
+     * Returns the closing lines in Duke.
+     *
+     * @return closing string.
      */
-    public void closing() {
-        this.showLine();
-        System.out.println("Bye. Hope to see you again soon!");
-        this.showLine();
-        sc.close();
+    public static String closing() {
+        return "Bye. Hope to see you again soon!";
     }
 }

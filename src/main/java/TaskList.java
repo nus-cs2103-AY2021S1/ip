@@ -31,9 +31,9 @@ public class TaskList {
     }
 
     /**
-     * Finds the number of tasks in the task list.
+     * Returns substring of tasks depending on their amount.
      *
-     * @return Number of tasks.
+     * @return String of number of tasks.
      */
     public String numTasks() {
         int numTasks = tasks.size();
@@ -41,39 +41,50 @@ public class TaskList {
     }
 
     /**
-     * Prints the correct message to signify adding/deleting a task.
+     * Returns the correct message to signify adding/deleting a task.
      *
-     * @param task Task to be added or deleted.
-     * @param change Enum of ADD or DELETE depending on command.
+     * @param task Task to be added/deleted.
+     * @param change ListChange depending on command.
+     * @return Message string.
      */
-    public void listChangePrint(Task task, ListChange change) {
+    public String listChangePrint(Task task, ListChange change) {
         String keyword = change == ListChange.ADD ? "added" : "removed";
-        System.out.println("Noted. I've " + keyword + " this task:\n" + task.toString());
-        System.out.println("Now you have " + this.numTasks() + " in the list.");
+        String firstLine = "Noted. I've " + keyword + " this task:\n" + task.toString() + "\n";
+        String secondLine = "Now you have " + this.numTasks() + " in the list.";
+        return String.join("", firstLine, secondLine);
     }
 
     /**
-     * Prints the tasks in the task list sequentially.
+     * Compiles an ordered list (in String) of tasks.
+     *
+     * @return String of task list.
      */
-    public void printList() {
-        for (int i = 0; i < tasks.size(); i++) {
-            System.out.println(i + 1 + "." + tasks.get(i).toString());
+    public String printList() {
+        if (tasks.size() == 0) {
+            return new DukeException("emptyList").print();
         }
+
+        String tasksStr = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            String taskToJoin = i + 1 + "." + tasks.get(i).toString() + "\n";
+            tasksStr = String.join("", tasksStr, taskToJoin);
+        }
+        return tasksStr;
     }
 
     /**
      * Marks a task as done.
      *
      * @param command User command.
+     * @return Duke response indicating successful action (or not).
      */
-    public void done(String command) {
+    public String done(String command) {
         try {
             int taskId = Parser.getTaskId(command);
             tasks.get(taskId).markAsDone();
-            System.out.println("Nice! I've marked this task as done:");
-            System.out.println(tasks.get(taskId).toString());
+            return "Nice! I've marked this task as done:\n" + tasks.get(taskId).toString();
         } catch (Exception e) {
-            new DukeException("invalidMarkingDone");
+            return new DukeException("invalidMarkingDone").print();
         }
     }
 
@@ -81,18 +92,19 @@ public class TaskList {
      * Creates new ToDo task.
      *
      * @param command User command.
+     * @return Duke response indicating successful action (or not).
      */
-    public void newToDo(String command) {
+    public String newToDo(String command) {
         if (command.equals("todo")) {
-            new DukeException("invalidTodo");
+            return new DukeException("invalidTodo").print();
         } else {
             String detail = Parser.getDetail(command);
             if (detail.isBlank()) {
-                new DukeException("invalidTodo");
+                return new DukeException("invalidTodo").print();
             } else {
                 Task newTask = new ToDo(detail);
                 tasks.add(newTask);
-                listChangePrint(newTask, ListChange.ADD);
+                return listChangePrint(newTask, ListChange.ADD);
             }
         }
     }
@@ -101,16 +113,19 @@ public class TaskList {
      * Creates new Deadline task.
      *
      * @param command User command.
+     * @return Duke response indicating successful action (or not).
      */
-    public void newDeadline(String command) {
+    public String newDeadline(String command) {
         try {
             String desc = Parser.getDeadlineDesc(command);
             String by = Parser.getBy(command);
             Task newTask = new Deadline(desc, by);
             tasks.add(newTask);
-            listChangePrint(newTask, ListChange.ADD);
+            return listChangePrint(newTask, ListChange.ADD);
+        } catch (DukeException e) {
+            return e.print();
         } catch (Exception e) {
-            new DukeException("invalidDeadlineTask");
+            return new DukeException("invalidDeadlineTask").print();
         }
     }
 
@@ -118,16 +133,19 @@ public class TaskList {
      * Creates new Event task.
      *
      * @param command User command.
+     * @return Duke response indicating successful action (or not).
      */
-    public void newEvent(String command) {
+    public String newEvent(String command) {
         try {
             String desc = Parser.getEventDesc(command);
             String at = Parser.getAt(command);
             Task newTask = new Event(desc, at);
             tasks.add(newTask);
-            listChangePrint(newTask, ListChange.ADD);
+            return listChangePrint(newTask, ListChange.ADD);
+        } catch (DukeException e) {
+            return e.print();
         } catch (Exception e) {
-            new DukeException("invalidEvent");
+            return new DukeException("invalidEvent").print();
         }
     }
 
@@ -135,47 +153,51 @@ public class TaskList {
      * Deletes a task.
      *
      * @param command User command.
+     * @return Duke response indicating successful action (or not).
      */
-    public void delete(String command) {
+    public String delete(String command) {
         try {
             int taskId = Parser.getTaskId(command);
             Task removedTask = tasks.remove(taskId);
-            listChangePrint(removedTask, ListChange.DELETE);
+            return listChangePrint(removedTask, ListChange.DELETE);
         } catch (Exception e) {
-            new DukeException("invalidDelete");
+            return new DukeException("invalidDelete").print();
         }
     }
 
     /**
-     * Finds task(s).
+     * Finds task(s) according to keyword.
      *
      * @param command User command.
+     * @return String of tasks matching the keyword.
      */
-    public void find(String command) {
+    public String find(String command) {
         if (command.equals("find")) {
-            new DukeException("invalidFind");
+            return new DukeException("invalidFind").print();
         } else {
             String keyword = Parser.getDetail(command);
             if (keyword.isBlank()) {
-                new DukeException("invalidFind");
+                return new DukeException("invalidFind").print();
             } else {
                 List<Task> tasksFound = new ArrayList<>();
 
-                for (int i = 0; i < tasks.size(); ++i) {
-                    if (tasks.get(i).toString().contains(keyword)) {
-                        tasksFound.add(tasks.get(i));
+                for (Task task : tasks) {
+                    if (task.toString().contains(keyword)) {
+                        tasksFound.add(task);
                     }
                 }
                 TaskList tasksFoundList = new TaskList(tasksFound);
-                tasksFoundList.printList();
+                return tasksFoundList.printList();
             }
         }
     }
 
     /**
      * Returns the default invalid command error.
+     *
+     * @return Duke response for default error.
      */
-    public void defaultError() {
-        new DukeException("invalidCommand");
+    public String defaultError() {
+        return new DukeException("invalidCommand").print();
     }
 }
