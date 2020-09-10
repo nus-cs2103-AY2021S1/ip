@@ -14,8 +14,8 @@ public class DoneCommand extends Command {
      * @param tasks Task list of all tasks.
      * @param ui Ui to deal with interaction with user.
      * @param storage Storage to load and save tasks.
-     * @throws DukeException
      * @return The string output message showing task that is marked done.
+     * @throws DukeException If task number is invalid or task is already marked done.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         assert tasks != null : "Tasklist not found.";

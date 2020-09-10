@@ -5,7 +5,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.*;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
 /**
@@ -35,6 +41,9 @@ public class MainWindow extends AnchorPane {
 
     private Background background = new Background(backgroundImageCreated);
 
+    /**
+     * Method to initialise the dialog box with a specified background.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
@@ -57,11 +66,10 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(DialogBox.getUserDialog(input, userImage));
-
         // delay duke's output to come awhile after user's input
         PauseTransition delayDukeOutput = new PauseTransition(Duration.seconds(0.3));
-        delayDukeOutput.setOnFinished(
-                event -> dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(response, dukeImage)));
+        delayDukeOutput.setOnFinished(event ->
+                dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(response, dukeImage)));
         delayDukeOutput.play();
 
         userInput.clear();

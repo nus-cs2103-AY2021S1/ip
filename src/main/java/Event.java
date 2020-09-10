@@ -43,7 +43,8 @@ public class Event extends Task {
 
     @Override
     public String toTxtFileFormat() {
-        return "E" + super.toTxtFileFormat() + " | " + this.timing.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+        return "E" + super.toTxtFileFormat() + " | "
+                + this.timing.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
     }
 
     @Override

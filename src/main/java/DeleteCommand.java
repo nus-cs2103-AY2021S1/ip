@@ -16,9 +16,9 @@ public class DeleteCommand extends Command {
      * @param tasks Task list of all tasks.
      * @param ui Ui to deal with interaction with user.
      * @param storage Storage to load and save tasks.
+     * @return The output string message showing deleted task and current tasks left.
      * @throws DukeException If the task number is invalid or unable to overwrite file specified in storage
      * filePath successfully.
-     * @return The output string message showing deleted task and current tasks left.
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         assert tasks != null : "Tasklist not found.";
