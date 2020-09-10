@@ -11,6 +11,7 @@ public class Parser {
 
     /**
      * This method parse a task string into its corresponding Task.
+     *
      * @param taskString Saved line from file path.
      * @return Corresponding Task.
      * @throws FeiException when it is none of the known task.
@@ -67,6 +68,7 @@ public class Parser {
             }
         }
         String description = cmd.split(" ", 2)[1];
+
         switch (command) {
         case "done":
             try {
@@ -75,6 +77,7 @@ public class Parser {
             } catch (Exception e) {
                 throw FeiException.invalidIndexException();
             }
+
         case "delete":
             try {
                 int deleteIndex = Integer.parseInt(description);
@@ -83,31 +86,27 @@ public class Parser {
                 throw FeiException.invalidIndexException();
 
             }
+
         case "todo":
             ToDo todo = new ToDo(description);
             return new AddCommand(todo);
+
         case "deadline":
             String[] contentAndDate = description.split(" /by ");
-            if (contentAndDate.length == 1) {
-                throw FeiException.deadlineException();
-            } else {
-                Deadline ddl = new Deadline(contentAndDate[0], contentAndDate[1]);
-                return new AddCommand(ddl);
-            }
+            assert contentAndDate.length == 2: FeiException.deadlineException();
+            Deadline ddl = new Deadline(contentAndDate[0], contentAndDate[1]);
+            return new AddCommand(ddl);
+
         case "event":
             String[] contentAndTime = description.split(" /at ");
-            if (contentAndTime.length == 1) {
-                throw FeiException.eventException();
-            } else {
-                Event e = new Event(contentAndTime[0], contentAndTime[1]);
-                return new AddCommand(e);
-            }
+            assert contentAndTime.length == 2: FeiException.eventException();
+            Event e = new Event(contentAndTime[0], contentAndTime[1]);
+            return new AddCommand(e);
+
         case "find":
-            if (description.split(" ").length > 1) {
-                throw FeiException.findException();
-            } else {
-                return new FindCommand(description);
-            }
+            assert description.split(" ").length == 1: FeiException.findException();
+            return new FindCommand(description);
+
         default:
             return new UnknownCommand();
         }

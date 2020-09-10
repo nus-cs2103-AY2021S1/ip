@@ -9,7 +9,6 @@ public class Ui {
     }
 
     public static String greeting() {
-
         return "Hello! It's me!\n"
                 + "I'm Fei.\n"
                 + "What can I do for you?";
