@@ -171,19 +171,23 @@ public class Storage {
         try {
             Task task = null;
             if (storedTask.charAt(0) == 'T') {
+                assert taskElements.length == 3;
                 task = new Todo(taskElements[2]);
             } else if (storedTask.charAt(0) == 'D') {
+                assert taskElements.length == 4;
                 String taskName = taskElements[2];
                 LocalDateTime dateTime = LocalDateTime.parse(taskElements[3],
                     DateTimeFormatter.ofPattern("d MMM yyyy, h.m a"));
                 task = new Deadline(taskName, dateTime);
             } else if (storedTask.charAt(0) == 'E') {
+                assert taskElements.length == 4;
                 String taskName = taskElements[2];
                 LocalDateTime dateTime = LocalDateTime.parse(taskElements[3],
                     DateTimeFormatter.ofPattern("d MMM yyyy, h.m a"));
                 task = new Event(taskName, dateTime);
             }
 
+            assert taskElements.length > 1;
             if (taskElements[1].equals("1")) {
                 task.markDone();
             }
