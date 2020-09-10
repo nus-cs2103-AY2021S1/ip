@@ -15,6 +15,10 @@ public class Duke {
         storage = new Storage(filePath);
     }
 
+    public TaskList getLst() {
+        return lst;
+    }
+
     public void run() throws Exception {
         start();
         uiRun();

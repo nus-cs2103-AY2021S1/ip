@@ -6,7 +6,6 @@ import java.util.List;
  * it has operations to add/delete tasks in the list
  */
 public class TaskList {
-    //todo
     private List<Task> lst = new ArrayList<>();
     public List<Task> getLst() {
         return lst;
@@ -39,7 +38,7 @@ public class TaskList {
         return lst.get(i);
     }
 
-    public void remove(int i) {
+    public void delete(int i) {
         lst.remove(i);
     }
 }

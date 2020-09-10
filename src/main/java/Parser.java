@@ -2,8 +2,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Parser {
-    // Todo: handle magic strings
-    // Todo: extract TaskList class
     // constant SPACE and LINE for format purposes
     public static String SPACE = "     ";
     // old line for command line output
@@ -68,6 +66,8 @@ public class Parser {
                     if (index < 0 || index >= lst.size()) {
                         messageRespond.append(format(new InvalidDoneException().toString()));
                     }
+                    assert index > 0;
+                    assert index < lst.size();
                     Task task = lst.get(index);
                     task.setDone();
                     messageRespond.append(format(messageMarked + SPACE + "   "
@@ -82,8 +82,10 @@ public class Parser {
                     if (index < 0 || index >= lst.size()) {
                         messageRespond.append(new InvalidDoneException().toString());
                     }
+                    assert index > 0;
+                    assert index < lst.size();
                     Task task = lst.get(index);
-                    lst.remove(index);
+                    lst.delete(index);
                     String messageNum = "\n      Now you have " + lst.size() + " task(s) in the list.";
                     messageRespond.append(format(messageDelete + SPACE + "   "
                             + task.print() + messageNum)).append("\n");
