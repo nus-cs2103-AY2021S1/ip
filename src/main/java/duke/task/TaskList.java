@@ -77,7 +77,7 @@ public class TaskList {
     }
 
     /**
-     * Return the task at a specified index of the list.
+     * Returns the task at a specified index of the list.
      *
      * @param index index of task.
      * @return Task Object from the list.
@@ -99,7 +99,7 @@ public class TaskList {
 
 
     /**
-     * String representation of the TaskList.
+     * Returns the string representation of the TaskList.
      *
      * @return String representation of the TaskList.
      */
@@ -132,7 +132,7 @@ public class TaskList {
     }
 
     /**
-     * Return size of the task list.
+     * Returns size of the task list.
      *
      * @return number of lists.
      */
@@ -141,9 +141,9 @@ public class TaskList {
     }
 
     /**
-     * Mark an item in the task list as done.
+     * Marks an item in the task list as done.
      *
-     * @param itemNumber task number in the list(not index number)
+     * @param itemNumber task number in the list(not index number).
      */
     public void markDone(int itemNumber) {
         assert itemNumber > 0 : "itemNumber should be a valid item number in the list";

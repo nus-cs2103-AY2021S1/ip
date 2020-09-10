@@ -65,7 +65,6 @@ public class Duke {
 
         //execute correct command
         try {
-
             Command c = Parser.parse(input);
             output += c.execute(tasks, ui, storage);
         } catch (DukeException e) {

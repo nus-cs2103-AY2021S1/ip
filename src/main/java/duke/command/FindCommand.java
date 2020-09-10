@@ -10,7 +10,8 @@ public class FindCommand extends Command {
     private String searchTerm;
 
     /**
-     * Takes in a search term to be used for filtering out matching task descriptions in a specified TaskList.
+     * Constructs a command with search term to be used for filtering out matching
+     * task descriptions in a specified TaskList.
      *
      * @param searchTerm Search description for tasks.
      */

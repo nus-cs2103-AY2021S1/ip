@@ -13,7 +13,7 @@ public class DoneCommand extends Command {
     private final String markItem;
 
     /**
-     * Constructor takes in a String value of the instruction to be further processed.
+     * Constructs a command with String value of the instruction to be further processed.
      *
      * @param secondArg String argument to specify the Task to delete.
      */

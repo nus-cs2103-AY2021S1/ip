@@ -15,7 +15,7 @@ public class DeleteCommand extends Command {
     private final String markItem;
 
     /**
-     * Constructor takes in a String value of the instruction to be further processed.
+     * Constructs a command with a String value of the instruction to be further processed.
      *
      * @param secondArg String argument to specify the Task to delete.
      */
@@ -65,7 +65,7 @@ public class DeleteCommand extends Command {
     /**
      * Returns false to indicate that the Command does not exit the program.
      *
-     * @return Exit program indicator
+     * @return Exit program indicator.
      */
     @Override
     public boolean isExit() {

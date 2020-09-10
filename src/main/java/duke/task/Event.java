@@ -48,9 +48,9 @@ public class Event extends Task {
 
 
     /**
-     * String representation of the Event Task
+     * Returns a String representation of the Event Task.
      *
-     * @return representation of the Event Task
+     * @return representation of the Event Task.
      */
     @Override
     public String toString() {

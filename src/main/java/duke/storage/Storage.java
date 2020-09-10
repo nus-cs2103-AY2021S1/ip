@@ -15,7 +15,7 @@ import duke.task.TaskList;
 
 /**
  * The Storage class handles all the operations when reading or writing files from the
- * hard disk. .
+ * hard disk.
  */
 public class Storage {
 
@@ -23,9 +23,9 @@ public class Storage {
     private final Path path;
 
     /**
-     * Takes in a given filePath and saves it for reference
+     * Takes in a given filePath and saves it for reference.
      *
-     * @param filePath file path from user input
+     * @param filePath file path from user input.
      */
     public Storage(String filePath) {
         path = Paths.get(filePath);
@@ -36,8 +36,8 @@ public class Storage {
      * it as a String value. Otherwise, a DukeException will be thrown if there are
      * errors loading the file.
      *
-     * @return String representation of the specified file
-     * @throws DukeException when file is not found
+     * @return String representation of the specified file.
+     * @throws DukeException when file is not found.
      */
     public String load() throws DukeException {
 
@@ -64,9 +64,9 @@ public class Storage {
     }
 
     /**
-     * Get file path of this Storage object when it is created.
+     * Returns the file path of this Storage object when it is created.
      *
-     * @return Saved file path
+     * @return Saved file path.
      */
     public Path getPath() {
         return this.path;
@@ -74,7 +74,7 @@ public class Storage {
 
 
     /**
-     * Overrides a text file at a specified file path relative to the source
+     * Overrides a text file at a specified file path relative to the source.
      *
      * @param filePath  Specified file path to write to file.
      * @param textToAdd String value to write to file.
@@ -93,7 +93,7 @@ public class Storage {
     /**
      * Saves tasks in the TaskList Object into the hard disk so that it can be retrieved again.
      *
-     * @param lst TaskList Object
+     * @param lst TaskList Object.
      */
     public void saveListToHardDisk(TaskList lst) {
         StringBuilder list = new StringBuilder();

@@ -15,7 +15,7 @@ public class EventCommand extends Command {
     private String at;
 
     /**
-     * Constructor takes in a String description and a String time.
+     * Constructs a command with a String description and a String time.
      *
      * @param description String description of the Event Task Object.
      * @param at          String time of the Event Task Object.

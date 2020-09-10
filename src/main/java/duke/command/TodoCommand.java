@@ -14,7 +14,7 @@ public class TodoCommand extends Command {
     private String description;
 
     /**
-     * Constructor takes in a String description.
+     * Constructs a command with in a String description.
      *
      * @param tsk String description of the Todo Task object.
      */
@@ -23,7 +23,7 @@ public class TodoCommand extends Command {
     }
 
     /**
-     * Get the description of the task.
+     * Returns the description of the task.
      *
      * @return String description of the task.
      */

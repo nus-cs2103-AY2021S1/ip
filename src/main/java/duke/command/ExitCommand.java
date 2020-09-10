@@ -5,7 +5,7 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 
 /**
- * Represents a Command to exit the program
+ * Represents a Command to exit the program.
  */
 public class ExitCommand extends Command {
 
@@ -26,7 +26,7 @@ public class ExitCommand extends Command {
     /**
      * Returns true to indicate that the Command exits the program.
      *
-     * @return Exit program indicator
+     * @return Exit program indicator.
      */
     @Override
     public boolean isExit() {

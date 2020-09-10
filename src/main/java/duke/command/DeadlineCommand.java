@@ -15,7 +15,7 @@ public class DeadlineCommand extends Command {
     private String by;
 
     /**
-     * Constructor takes in a String description and a String time.
+     * Constructs a command with a String description and a String time.
      *
      * @param description String description of the Deadline Task Object.
      * @param by          String due time of the Deadline Task Object.

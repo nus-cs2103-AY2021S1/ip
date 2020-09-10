@@ -27,9 +27,9 @@ public class Task {
     }
 
     /**
-     * Get the done status of the Task
+     * Returns the done status of the Task.
      *
-     * @return done status
+     * @return done status.
      */
     public String getStatusIcon() {
         //return tick or X symbols
@@ -37,7 +37,7 @@ public class Task {
     }
 
     /**
-     * Mark the Task as done.
+     * Marks the Task as done.
      */
     public void markAsDone() {
         this.isDone = true;
@@ -51,7 +51,7 @@ public class Task {
     }
 
     /**
-     * Get the String representation of the Task for storage.
+     * Returns the String representation of the Task for storage.
      *
      * @return String representation of the Task for storage.
      */
@@ -60,18 +60,18 @@ public class Task {
     }
 
     /**
-     * Get the description of the task.
+     * Returns the description of the task.
      *
-     * @return String description of the Task
+     * @return String description of the Task.
      */
     public String getDescription() {
         return this.description;
     }
 
     /**
-     * Get the String representation of the task.
+     * Returns the String representation of the task.
      *
-     * @return String representation of the Task
+     * @return String representation of the Task.
      */
     public String toString() {
         return "[" + this.getStatusIcon() + "] " + this.getDescription();

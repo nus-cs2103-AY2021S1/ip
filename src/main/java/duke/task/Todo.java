@@ -36,9 +36,9 @@ public class Todo extends Task {
     }
 
     /**
-     * String representation of the Todo Task
+     * Returns the String representation of the Todo Task.
      *
-     * @return representation of the Todo Task
+     * @return Representation of the Todo Task.
      */
     @Override
     public String toString() {
