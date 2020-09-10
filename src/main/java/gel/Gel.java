@@ -1,9 +1,7 @@
 package gel;
 
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.Scanner;
-
 
 /**
  * gel.Gel is an task planner. A <code>gel.Gel</code> object is a bot which
@@ -11,10 +9,12 @@ import java.util.Scanner;
  */
 public class Gel {
 
-    private Storage storage;
+    private static final String STORAGE_LOCATION = "data/tasks.txt";
+    private final Storage storage;
     private TaskList taskList;
-    private Ui ui;
-
+    private final Ui ui;
+    private final Parser parser;
+    private final Scanner sc = new Scanner(System.in);
 
     /**
      * Constructor for class gel.Gel.
@@ -22,42 +22,42 @@ public class Gel {
      * @param filePath takes in the filepath of the storage file.
      */
     public Gel (String filePath) {
-        this.ui = new Ui();
-        this.storage = new Storage(filePath);
+        ui = new Ui();
+        storage = new Storage(filePath);
         try {
             storage.checkFileExistence();
             taskList = storage.load(ui);
         } catch (IOException e) {
-            ui.showLoadingError();
+            System.out.println(ui.loadingError());
             taskList = new TaskList(ui);
         }
+        this.parser = new Parser(storage, ui, taskList);
     }
 
     /**
      * Starts the task planner <code>gel.Gel</code> and interact with user.
      */
     private void run() {
-        // initialise list and scanner
-        try {
-            Scanner sc = new Scanner(System.in);
-            ui.showWelcomeMessage();
-            Parser.parseUserInput(sc, storage, ui, taskList);
-        } catch (FileNotFoundException e) {
+        System.out.println(ui.showWelcomeMessage());
+        System.out.println();
+        while (sc.hasNextLine()) {
+            String input = sc.nextLine();
             System.out.println();
-            System.out.println(e.getMessage());
-        } catch (IOException e) {
+            System.out.println(getResponse(input));
             System.out.println();
-            System.out.println(e.getLocalizedMessage());
+            if (input.equals("bye")) {
+                break;
+            }
         }
     }
 
     public static void main(String[] args) {
-        new Gel("data/tasks.txt").run();
+        new Gel(STORAGE_LOCATION).run();
     }
 
     public String getResponse(String input) {
         try {
-            return Parser.parseUserInputFromGui(storage, ui, taskList, input);
+            return parser.parseUserInput(input);
         } catch (Exception e) {
             return e.getMessage();
         }
