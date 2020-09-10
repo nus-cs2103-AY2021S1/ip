@@ -1,6 +1,5 @@
 package duke;
 
-import duke.cmd.Duke;
 import javafx.application.Application;
 
 /**
@@ -34,7 +33,7 @@ public class Main {
     }
 
     private static void runCmd(String[] args) {
-        Duke duke = new Duke();
+        duke.cmd.Duke duke = new duke.cmd.Duke();
         duke.run();
     }
 
