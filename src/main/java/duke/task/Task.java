@@ -36,7 +36,7 @@ public abstract class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "✓" : "✘"); //return tick or X symbols
+        return (isDone ? "O" : "X"); //return tick or X symbols
     }
 
     public String getStatusLetter() {

@@ -4,13 +4,7 @@ import java.io.File;
 
 import duke.command.Command;
 import duke.exception.DukeException;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollPane;
-import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.VBox;
 
 /**
  * The Duke programme implements an application that works as task tracker productivity tool.
@@ -29,11 +23,6 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Parser parser;
-    private ScrollPane scrollPane;
-    private VBox dialogContainer;
-    private TextField userInput;
-    private Button sendButton;
-    private Scene scene;
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
@@ -66,13 +55,5 @@ public class Duke {
         } catch (DukeException e) {
             return e.getMessage();
         }
-    }
-
-    private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
     }
 }
