@@ -31,6 +31,9 @@ public class TaskList {
         for (int i = 0; i < this.taskList.size(); i++) {
             s += (i + 1) + ". " + this.taskList.get(i) + "\n";
         }
+        if (s.equals("")) {
+            s = "There are no task";
+        }
         return s;
     }
 
@@ -72,7 +75,7 @@ public class TaskList {
      * @param task task to be added to the list.
      */
     public void addTask(Task task) throws DukeException {
-        if(this.taskList.contains(task)){
+        if (this.taskList.contains(task)) {
             throw new TaskExistException();
         }
         this.taskList.add(task);
@@ -91,6 +94,9 @@ public class TaskList {
                 s += index + ". " + this.taskList.get(i).toString() + "\n";
                 index++;
             }
+        }
+        if (s.equals("")) {
+            s = "There are no task matching the keyword";
         }
         return s;
     }

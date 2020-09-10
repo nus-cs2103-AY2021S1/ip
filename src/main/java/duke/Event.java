@@ -64,7 +64,8 @@ public class Event extends Task {
             return true;
         } else if (o instanceof Event) {
             Event cur = (Event) o;
-            if (cur.description.equals(this.description) && cur.isDone ==this.isDone && cur.time.equals(this.time))  {
+            if (cur.description.equals(this.description) && cur.isDone == this.isDone
+                    && cur.time.equals(this.time)) {
                 return true;
             } else {
                 return false;

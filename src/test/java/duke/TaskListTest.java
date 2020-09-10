@@ -6,8 +6,9 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.LinkedList;
 
-import exception.DukeException;
 import org.junit.jupiter.api.Test;
+
+import exception.DukeException;
 
 public class TaskListTest {
 
@@ -22,7 +23,7 @@ public class TaskListTest {
             forTest.addTask(new Event("Study", date));
             assertEquals(3, forTest.size());
         } catch (DukeException e) {
-            assertEquals("OOPS!!! The task already exists in the list.\n",e.toString());
+            assertEquals("OOPS!!! The task already exists in the list.\n", e.toString());
         }
     }
 
@@ -39,7 +40,7 @@ public class TaskListTest {
             forTest.addTask(new Task("Random task"));
             assertEquals(4, forTest.size());
         } catch (DukeException e) {
-            assertEquals("OOPS!!! The task already exists in the list.\n",e.toString());
+            assertEquals("OOPS!!! The task already exists in the list.\n", e.toString());
         }
     }
 
@@ -53,7 +54,7 @@ public class TaskListTest {
             forTest.addTask(new Deadline("return book", date));
             forTest.addTask(new Event("Study", date));
         } catch (DukeException e) {
-            assertEquals("OOPS!!! The task already exists in the list.\n",e.toString());
+            assertEquals("OOPS!!! The task already exists in the list.\n", e.toString());
         }
         try {
             forTest.delete(1);
@@ -73,7 +74,7 @@ public class TaskListTest {
             forTest.addTask(new Deadline("return book", date));
             forTest.addTask(new Event("Study", date));
         } catch (DukeException e) {
-            assertEquals("OOPS!!! The task already exists in the list.\n",e.toString());
+            assertEquals("OOPS!!! The task already exists in the list.\n", e.toString());
         }
         try {
             forTest.delete(100);

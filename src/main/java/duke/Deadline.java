@@ -64,7 +64,8 @@ public class Deadline extends Task {
             return true;
         } else if (o instanceof Deadline) {
             Deadline cur = (Deadline) o;
-            if (cur.isDone == this.isDone && cur.description.equals(this.description) && cur.deadline.equals(this.deadline)) {
+            if (cur.isDone == this.isDone && cur.description.equals(this.description)
+                    && cur.deadline.equals(this.deadline)) {
                 return true;
             } else {
                 return false;
