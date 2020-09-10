@@ -11,7 +11,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     /** The Duke object to be set up. */
-    private Duke duke = new Duke(Storage.getFilePath());
+    private final Duke duke = new Duke(Storage.getFilePath());
 
     /**
      * Configures and displays the GUI for Duke.

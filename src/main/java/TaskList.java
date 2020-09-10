@@ -35,7 +35,7 @@ public class TaskList {
      *
      * @return String of number of tasks.
      */
-    public String numTasks() {
+    public String getNumTasksStr() {
         int numTasks = tasks.size();
         return numTasks == 1 ? "1 task" : numTasks + " tasks";
     }
@@ -78,7 +78,7 @@ public class TaskList {
      * @param command User command.
      * @return Duke response indicating successful action (or not).
      */
-    public String done(String command) {
+    public String markDone(String command) {
         try {
             int taskId = Parser.getTaskId(command);
             tasks.get(taskId).markAsDone();
@@ -94,7 +94,7 @@ public class TaskList {
      * @param command User command.
      * @return Duke response indicating successful action (or not).
      */
-    public String newToDo(String command) {
+    public String createToDo(String command) {
         if (command.equals("todo")) {
             return new DukeException("invalidTodo").print();
         } else {
@@ -115,7 +115,7 @@ public class TaskList {
      * @param command User command.
      * @return Duke response indicating successful action (or not).
      */
-    public String newDeadline(String command) {
+    public String createDeadline(String command) {
         try {
             String desc = Parser.getDeadlineDesc(command);
             String by = Parser.getBy(command);
@@ -135,7 +135,7 @@ public class TaskList {
      * @param command User command.
      * @return Duke response indicating successful action (or not).
      */
-    public String newEvent(String command) {
+    public String createEvent(String command) {
         try {
             String desc = Parser.getEventDesc(command);
             String at = Parser.getAt(command);
@@ -197,7 +197,7 @@ public class TaskList {
      *
      * @return Duke response for default error.
      */
-    public String defaultError() {
+    public String getDefaultError() {
         return new DukeException("invalidCommand").print();
     }
 }

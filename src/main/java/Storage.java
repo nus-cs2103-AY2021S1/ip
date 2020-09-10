@@ -23,8 +23,8 @@ public class Storage {
      */
     public static String getFilePath() {
         try {
-            boolean doesDataExist = new File("./data").exists();
-            if (!doesDataExist) {
+            boolean hasStorageFile = new File("./data").exists();
+            if (!hasStorageFile) {
                 new File("./data").mkdir();
                 new File("./data/duke.txt").createNewFile();
             }

@@ -14,7 +14,7 @@ public class ParserTest {
 
     @Test
     public void getLocalDateTime() {
-        LocalDateTime expected = LocalDateTime.of(2020, 7, 19, 15, 00);
+        LocalDateTime expected = LocalDateTime.of(2020, 7, 19, 15, 0);
         LocalDateTime result = Parser.getLocalDateTimeBy("2020-07-19 15:00");
         assertEquals(expected, result);
     }
