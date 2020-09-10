@@ -47,7 +47,6 @@ public class ListCommand extends Command {
         } else {
             IntStream.range(0, taskList.getSize())
                     .forEach(i -> uiManager.printNumberedTask(taskList.getTaskList().get(i), i));
-            System.out.println();
             uiManager.printTaskStatus(taskList.getSize());
         }
     }

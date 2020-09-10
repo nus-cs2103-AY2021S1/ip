@@ -16,6 +16,6 @@ public class EventTask extends DukeTaskWithTime {
 
     @Override
     public String toString() {
-        return "[E]" + super.toString() + String.format(" (at: %s)", getDateTime());
+        return "[E]" + super.toString() + String.format(" (at: %s)", getDateTimeString());
     }
 }

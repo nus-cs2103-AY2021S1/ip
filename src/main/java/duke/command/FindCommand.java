@@ -44,7 +44,7 @@ public class FindCommand extends Command {
         assert taskList != null : "FindCommand must have a taskList";
         ArrayList<DukeTask> filteredList = new ArrayList<>();
         taskList.getTaskList().forEach(task -> {
-            if (task.getDescription().contains(keyword)) {
+            if (task.getDescription().toLowerCase().contains(keyword.toLowerCase())) {
                 filteredList.add(task);
             }
         });

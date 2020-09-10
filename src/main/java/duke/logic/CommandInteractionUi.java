@@ -42,6 +42,11 @@ public interface CommandInteractionUi {
 
     String getFindFilteredList(String keyword, boolean isPlural);
 
+    // SORT COMMAND
+    void printSortList(String tag, boolean isPlural);
+
+    String getSortList(String tag, boolean isPlural);
+
     // GENERAL
     void printTaskStatus(int size);
 

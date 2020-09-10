@@ -106,9 +106,8 @@ public class StorageManager {
     public void saveData(ArrayList<DukeTask> dataList) throws DukeIoException {
         assert dataList != null : "saveDate input dataList cannot be null";
         StringBuilder dataString = new StringBuilder();
-        dataList.forEach(task -> {
-            dataString.append(generateAdditionString(task)).append(System.lineSeparator());
-        });
+        dataList.forEach(task ->
+                dataString.append(generateAdditionString(task)).append(System.lineSeparator()));
         String output = dataString.toString();
 
         try {
@@ -130,9 +129,11 @@ public class StorageManager {
         if (task instanceof TodoTask) {
             output = "T" + FILE_DATA_SEPARATOR + output;
         } else if (task instanceof EventTask) {
-            output = "E" + FILE_DATA_SEPARATOR + output + FILE_DATA_SEPARATOR + ((EventTask) task).getDateTime();
+            output = "E" + FILE_DATA_SEPARATOR + output + FILE_DATA_SEPARATOR
+                    + ((EventTask) task).getDateTimeString();
         } else {
-            output = "D" + FILE_DATA_SEPARATOR + output + FILE_DATA_SEPARATOR + ((DeadlineTask) task).getDateTime();
+            output = "D" + FILE_DATA_SEPARATOR + output + FILE_DATA_SEPARATOR
+                    + ((DeadlineTask) task).getDateTimeString();
         }
         return output;
     }

@@ -8,7 +8,8 @@ import duke.task.DukeTask;
 /**
  * Represents an Add Command by the user.
  * Apart from the parent's implementation,
- * it contains a <code>DukeTask</code> task to be added to the <code>TaskList</code>.
+ * it contains a <code>DukeTask</code> task to be
+ * added to the <code>TaskList</code>.
  */
 public class AddCommand extends Command {
     private final DukeTask task;

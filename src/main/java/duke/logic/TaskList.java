@@ -1,8 +1,10 @@
 package duke.logic;
 import java.util.ArrayList;
+import java.util.Comparator;
 
 import duke.task.DukeTask;
-
+import duke.task.DukeTaskWithTime;
+import duke.task.TodoTask;
 
 
 /**
@@ -62,5 +64,25 @@ public class TaskList {
      */
     public ArrayList<DukeTask> getTaskList() {
         return taskList;
+    }
+
+    /**
+     * Sorts the task list in chronological order.
+     * Since TodoTasks do not have a time, they are appended at the end.
+     */
+    public void sortTaskList() {
+        ArrayList<DukeTask> todoTasks = new ArrayList<>();
+        ArrayList<DukeTaskWithTime> tasksWithTime = new ArrayList<>();
+        taskList.forEach(x -> {
+            if (x instanceof TodoTask) {
+                todoTasks.add(x);
+            } else {
+                tasksWithTime.add((DukeTaskWithTime) x);
+            }
+        });
+        tasksWithTime.sort(Comparator.comparing(DukeTaskWithTime::getDateTime));
+        taskList.clear();
+        taskList.addAll(tasksWithTime);
+        taskList.addAll(todoTasks);
     }
 }

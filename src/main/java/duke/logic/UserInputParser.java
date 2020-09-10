@@ -10,6 +10,7 @@ import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.HelpCommand;
 import duke.command.ListCommand;
+import duke.command.SortCommand;
 import duke.exception.InvalidInstructionFormatException;
 import duke.exception.InvalidInstructionLengthException;
 import duke.exception.MissingFieldException;
@@ -42,6 +43,7 @@ public class UserInputParser {
     private static final String AT_INDICATOR = "/at";
     private static final String DELETE = "delete";
     private static final String FIND = "find";
+    private static final String SORT = "sort";
 
     /**
      * Parses the user instruction into a <code>Command</code>.
@@ -118,6 +120,11 @@ public class UserInputParser {
         case FIND:
             if (InputValidator.validateSizeTwo(instructionArray)) {
                 return new FindCommand(instructionArray[1]);
+            }
+            break;
+        case SORT:
+            if (InputValidator.validateSizeTwo(instructionArray)) {
+                return new SortCommand(instructionArray[1]);
             }
             break;
         default:

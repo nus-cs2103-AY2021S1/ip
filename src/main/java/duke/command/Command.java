@@ -1,6 +1,7 @@
 package duke.command;
 
 import duke.exception.DukeIoException;
+import duke.exception.InvalidInstructionFormatException;
 import duke.exception.InvalidTaskIndexException;
 import duke.exception.TaskDoneException;
 import duke.logic.CommandInteractionUi;
@@ -53,5 +54,5 @@ public abstract class Command {
      */
     public abstract void execute(TaskList taskList, CommandInteractionUi uiManager,
                                  StorageManager storageManager, boolean isGuiTask)
-            throws InvalidTaskIndexException, TaskDoneException, DukeIoException;
+            throws InvalidTaskIndexException, TaskDoneException, DukeIoException, InvalidInstructionFormatException;
 }
