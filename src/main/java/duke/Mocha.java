@@ -1,7 +1,6 @@
 package duke;
 
 import javafx.application.Application;
-import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -11,6 +10,7 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
+import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.util.ArrayList;
@@ -111,7 +111,8 @@ public class Mocha extends Application {
 
         Label mochaIntroduction = new Label(ui.sayIntroduction());
         dialogContainer.getChildren().add(
-                new DialogBox(mochaIntroduction, new ImageView(mocha)));
+                DialogBox.getMochaDialog(mochaIntroduction, new ImageView(mocha)));
+        
     }
 
     /**
@@ -122,7 +123,6 @@ public class Mocha extends Application {
      * @return a label with the specified text that has word wrap enabled.
      */
     private Label getDialogLabel(String text) {
-        // You will need to import `javafx.scene.control.Label`.
         Label textToAdd = new Label(text);
         textToAdd.setWrapText(true);
 
@@ -138,8 +138,8 @@ public class Mocha extends Application {
         Label userText = new Label(userInput.getText());
         Label mochaText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                new DialogBox(userText, new ImageView(user)),
-                new DialogBox(mochaText, new ImageView(mocha))
+                DialogBox.getUserDialog(userText, new ImageView(user)),
+                DialogBox.getMochaDialog(mochaText, new ImageView(mocha))
         );
         userInput.clear();
     }
