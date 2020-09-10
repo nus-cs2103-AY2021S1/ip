@@ -9,11 +9,10 @@ public class ParseList extends Parse {
 
     /**
      * Calls the list command.
+     * Returns all the currently tracked tasks.
+     *
+     * @return String all current tasks.
      */
-    public static void execute() {
-        ListCommand.execute();
-    }
-
     public static String execute2() {
         return ListCommand.execute2();
     }

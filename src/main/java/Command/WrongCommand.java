@@ -9,11 +9,10 @@ public class WrongCommand extends Command {
 
     /**
      * Calls UserInterface to print the error message.
+     * Returns the error message.
+     *
+     * @return String wrong message.
      */
-    public static void execute() {
-        UserInterface.wrongCommand();
-    }
-
     public static String execute2() {
         return UserInterface.wrongCommand2();
     }

@@ -1,6 +1,11 @@
+import java.io.File;
+import java.io.IOException;
+import java.util.stream.Stream;
+
 import Parser.InputManager;
 import Tasks.TaskManager;
 import UI.UserInterface;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -9,9 +14,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.stream.Stream;
 
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
@@ -31,10 +33,25 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
+    /**
+     * Starts the GUI with the given loading of files.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         String fileDir = "./DukeTodoSave.txt";
+        setUpLocalSave(fileDir);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getDukeDialog(UserInterface.welcomeMessage(), dukeImage)
+        );
+    }
+
+    /**
+     * Sets up the required process to read and load into the program.
+     *
+     * @param fileDir the directory of the local saved file.
+     */
+    public void setUpLocalSave(String fileDir) {
         InputManager.fileDir(fileDir);
         File save = new File(fileDir);
         if (!save.exists()) { // create the text file
@@ -50,9 +67,6 @@ public class MainWindow extends AnchorPane {
         }
         assert save.exists() == true;
         TaskManager.load(save);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(UserInterface.welcomeMessage(), dukeImage)
-        );
     }
 
     public void setDuke(Duke d) {

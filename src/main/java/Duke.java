@@ -1,11 +1,7 @@
-import java.io.File;
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
 import java.util.stream.Stream;
 
-import Parser.InputManager;
-import Tasks.TaskManager;
 import UI.UserInterface;
 import javafx.application.Platform;
 
@@ -54,44 +50,16 @@ public class Duke {
         }
         return userInput;
     }
+
     static String getResponse(String input) {
         String userInput = removeBlank(input);
         System.out.println("CHANGED: " + userInput);
         UserInterface UI = new UserInterface();
-<<<<<<< HEAD
         UI.input(userInput);
-=======
-        UI.input(input);
->>>>>>> master
         if (input.equals("bye")) {
             Platform.exit();
         }
         return UI.parse2();
     }
-    /**
-     * Represents the main method of the program. The start of the mattbot program.
-     * @param args args.
-     */
-    public static void main(String[] args) {
-        String fileDir = "./DukeTodoSave.txt";
-        InputManager.fileDir(fileDir);
-        File save = new File(fileDir);
-        if (!save.exists()) { // create the text file
-            System.out.println("Save file does not exist, creating it now!");
-            try {
-                save.createNewFile();
-            } catch (IOException e) {
-                System.out.println("Error creating the save file!");
-                System.out.println(e);
-            }
-        }
-        TaskManager.load(save);
-        Scanner sc = new Scanner(System.in);
-        UserInterface UI = new UserInterface();
-        while (UI.getStop() == false) {
-            UI.input(sc.nextLine());
-            UI.parse();
-        }
-        sc.close();
-    }
+
 }

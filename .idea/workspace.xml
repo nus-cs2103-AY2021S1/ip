@@ -21,6 +21,14 @@
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/AddDeadlineCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/AddDeadlineCommand.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/AddEventCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/AddEventCommand.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/AddTodoCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/AddTodoCommand.class" afterDir="false" />
+<<<<<<< HEAD
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/FilterDateCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/FilterDateCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/FindCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/FindCommand.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/DateTime/DateTimeManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/DateTime/DateTimeManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Duke.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Duke.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/File/FileManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/File/FileManager.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/build/classes/java/main/Parser/InputManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Parser/InputManager.class" afterDir="false" />
+=======
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/Command.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/Command.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/CompletedCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/CompletedCommand.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Command/DeleteCommand.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Command/DeleteCommand.class" afterDir="false" />
@@ -44,6 +52,7 @@
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseFind.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseFind.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseList.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseList.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseShow.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Parser/ParseShow.class" afterDir="false" />
+>>>>>>> master
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Tasks/Deadline.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Tasks/Deadline.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Tasks/Event.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Tasks/Event.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/build/classes/java/main/Tasks/TaskManager.class" beforeDir="false" afterPath="$PROJECT_DIR$/build/classes/java/main/Tasks/TaskManager.class" afterDir="false" />
@@ -54,8 +63,13 @@
 <<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/src/main/java/Duke.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Duke.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/MainWindow.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/MainWindow.java" afterDir="false" />
+<<<<<<< HEAD
       <change beforePath="$PROJECT_DIR$/src/main/java/UI/UserInterface.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/UI/UserInterface.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/testing.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/testing.java" afterDir="false" />
+=======
+      <change beforePath="$PROJECT_DIR$/src/main/java/Parser/InputManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Parser/InputManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/Tasks/task.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Tasks/task.java" afterDir="false" />
+>>>>>>> master
 =======
       <change beforePath="$PROJECT_DIR$/src/main/java/DateTime/DateTimeManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/DateTime/DateTimeManager.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/Duke.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/Duke.java" afterDir="false" />
@@ -237,6 +251,7 @@
     </state>
     <state x="421" y="102" key="FileChooserDialogImpl/0.0.1280.680@0.0.1280.680" timestamp="1599032427849" />
 <<<<<<< HEAD
+<<<<<<< HEAD
     <state width="1237" height="163" key="GridCell.Tab.0.bottom" timestamp="1599761290273">
       <screen x="0" y="0" width="1280" height="680" />
     </state>
@@ -253,6 +268,24 @@
       <screen x="0" y="0" width="1280" height="680" />
     </state>
     <state width="1237" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1599761290273" />
+=======
+    <state width="1237" height="163" key="GridCell.Tab.0.bottom" timestamp="1599641521991">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="163" key="GridCell.Tab.0.bottom/0.0.1280.680@0.0.1280.680" timestamp="1599641521991" />
+    <state width="1237" height="163" key="GridCell.Tab.0.center" timestamp="1599641521991">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="163" key="GridCell.Tab.0.center/0.0.1280.680@0.0.1280.680" timestamp="1599641521991" />
+    <state width="1237" height="163" key="GridCell.Tab.0.left" timestamp="1599641521991">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="163" key="GridCell.Tab.0.left/0.0.1280.680@0.0.1280.680" timestamp="1599641521991" />
+    <state width="1237" height="163" key="GridCell.Tab.0.right" timestamp="1599641521991">
+      <screen x="0" y="0" width="1280" height="680" />
+    </state>
+    <state width="1237" height="163" key="GridCell.Tab.0.right/0.0.1280.680@0.0.1280.680" timestamp="1599641521991" />
+>>>>>>> master
 =======
     <state width="1237" height="163" key="GridCell.Tab.0.bottom" timestamp="1599620251481">
       <screen x="0" y="0" width="1280" height="680" />

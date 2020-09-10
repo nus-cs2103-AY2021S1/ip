@@ -10,14 +10,12 @@ public class ParseCompleted extends Parse {
 
     /**
      * Calls the completion command.
+     * Returns the completion message.
      *
      * @param i index of the task.
+     * @return String completion message.
      * @throws ErrorExceptions when the task cannot be found.
      */
-    public static void execute(int i) throws ErrorExceptions {
-        CompletedCommand.execute(i);
-    }
-
     public static String execute2(int i) throws ErrorExceptions {
         return CompletedCommand.execute2(i);
     }

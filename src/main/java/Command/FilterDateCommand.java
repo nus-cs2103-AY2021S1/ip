@@ -15,24 +15,12 @@ import Tasks.task;
 public class FilterDateCommand extends Command {
     /**
      * Filters the tasks based on the input date, showing only those with that date.
+     * Return the list of task matching the filter.
      *
      * @param date date to search.
+     * @return String filtered list.
      * @throws ErrorExceptions wrong date format.
      */
-    public static void execute(LocalDate date) throws ErrorExceptions {
-        ArrayList<task> clone = TaskManager.getStore();
-        int count = 1;
-        System.out.println("Here are your tasks on this date!");
-        for (task i : clone) {
-            if (i.getTaskDate() != null) {
-                if (i.getTaskDate().toLocalDate().equals(date)) {
-                    System.out.println("    " + count + ". " + TaskManager.read(i));
-                    count++;
-                }
-            }
-        }
-    }
-
     public static String execute2(LocalDate date) throws ErrorExceptions {
         ArrayList<task> clone = TaskManager.getStore();
         int count = 1;

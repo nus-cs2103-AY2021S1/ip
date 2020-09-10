@@ -16,16 +16,12 @@ public class AddEventCommand extends Command {
 
     /**
      * Creates and add a new Event into the list of tasks.
+     * Returns the added Event task message.
      *
      * @param input user input.
+     * @return String event message.
      * @throws ErrorExceptions failed to get name or date of task.
      */
-    public static void execute(String input) throws ErrorExceptions {
-        String name = getName(input, 2);
-        String date = getDate(input, 2);
-        TaskManager.newTask(name, "Event", date, getFileDir());
-    }
-
     public static String execute2(String input) throws ErrorExceptions {
         String name = getName(input, 2);
         String date = getDate(input, 2);
