@@ -1,9 +1,5 @@
 package task;
 
-import command.TaskListCommand;
-
-import java.util.Arrays;
-
 public abstract class Task {
     protected String description;
     protected boolean isDone;

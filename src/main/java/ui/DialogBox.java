@@ -49,6 +49,15 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Set the style of the dialog box.
+     * @param style Style to be used.
+     */
+    private void setDialogStyle(String style) {
+        dialog.setStyle(style);
+    }
+
+
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
@@ -56,6 +65,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
+        db.setDialogStyle("-fx-background-color:  rgb(207,238,250); -fx-border-color: black");
         return db;
     }
 }
