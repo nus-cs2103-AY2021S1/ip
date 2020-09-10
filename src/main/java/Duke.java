@@ -64,8 +64,7 @@ public class Duke {
         } catch (DukeException ex) {
             printError(ex.getMessage());
         } catch (FileNotFoundException ex) {
-            printError("Missing Deuk Data File!" + NEW_LINE + PADDING +
-                "Creating new Deuk Data File..."
+            printError("Missing Deuk Data File!" + NEW_LINE + PADDING + "Creating new Deuk Data File..."
             );
             try {
                 FileWriter fw = new FileWriter(DUKE_DATA_FILE_PATH.toString());
@@ -77,7 +76,7 @@ public class Duke {
         }
 
 
-        while(true) {
+        while (true) {
             if (SC.hasNext()) {
                 String input = SC.nextLine().trim();
                 if (input.toUpperCase().equals(Commands.EXIT.getString())) { // to make command case-insensitive
