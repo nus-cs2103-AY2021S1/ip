@@ -2,9 +2,7 @@ package duke;
 
 import duke.command.Command;
 import duke.command.CommandParser;
-import duke.exception.DateParseException;
 import duke.exception.DukeException;
-import duke.exception.StorageException;
 import duke.task.TaskList;
 import duke.ui.DukeMessages;
 
@@ -17,17 +15,15 @@ public class Duke {
 
     /**
      * Initialises Duke class.
-     * @throws DateParseException If Task created from file information cannot be stored in local storage.
-     * @throws StorageException If Task date (if any) cannot be parsed into LocalDate object.
      */
-    public Duke() throws DateParseException, StorageException {
+    public Duke() {
         this.storage = new Storage();
         this.taskList = TaskList.initialiseTaskList(this.storage);
     }
 
     /**
-     * Prints the welcome message.
-     * @return A string containing the welcome message to be printed.
+     * Prints a welcome message to the user.
+     * @return A String containing a welcome message to the user.
      */
     public static String sendWelcomeMessage() {
         return DukeMessages.printWelcomeMessage();
