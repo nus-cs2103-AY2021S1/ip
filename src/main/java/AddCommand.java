@@ -49,24 +49,25 @@ public class AddCommand extends Command {
         }
         case DEADLINE: {
             String[] text = description.split(" /by ");
-            String description = text[0];
             if (text.length <= 1) {
                 throw new EmptyBodyException("deadline", "deadline");
             }
+            String description = text[0];
+            String stringDeadline = text[1];
             try {
-                LocalDate deadline = LocalDate.parse(text[1]);
+                LocalDate deadline = LocalDate.parse(stringDeadline);
                 Task newDeadline = new Deadline(description, deadline);
                 return tasks.createTask(newDeadline);
             } catch (DateTimeParseException e) {
-                throw new UnknownInputException(text[1]);
+                throw new UnknownInputException(stringDeadline);
             }
         }
         case EVENT: {
             String[] text = description.split(" /at ");
-            String description = text[0];
             if (text.length <= 1) {
                 throw new EmptyBodyException("date and time", "event");
             }
+            String description = text[0];
             String dateTime = text[1];
             Task newEvent = new Event(description, dateTime);
             return tasks.createTask(newEvent);
