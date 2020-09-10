@@ -22,11 +22,10 @@ public class DeleteCommand extends Command {
 
     /**
      * Executes the DeleteCommand.
-     * First, the Task specified is removed, and the updated TaskList is written to local storage.
-     * Lastly, a message is printed to indicate that the task has been removed successfully.
      * @param list A TaskList containing the user's Tasks.
      * @param storage A Storage object that handles the storage of tasks in local storage, allowing them to persist.
-     * @throws InvalidTaskException if details provided of Task to be removed are invalid.
+     * @return A String that contains a user message indicating that the specified task has been deleted.
+     * @throws InvalidTaskException If details provided of Task to be removed are invalid.
      */
     @Override
     public String execute(TaskList list, Storage storage) throws InvalidTaskException {

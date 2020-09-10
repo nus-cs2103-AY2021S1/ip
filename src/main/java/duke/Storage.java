@@ -18,6 +18,16 @@ public class Storage {
      */
     public Storage() {
         this.storage = new File(FILEPATH);
+        try {
+            if (!this.storage.exists()) {
+                this.storage.getParentFile().mkdirs();
+                this.storage.createNewFile();
+            }
+
+            assert this.storage.exists() : "Local storage not found";
+        } catch (IOException e) {
+            System.out.println("Irrecoverable error");
+        }
     }
 
     /**
@@ -27,19 +37,10 @@ public class Storage {
     public ArrayList<String> readTaskStorage() {
         ArrayList<String> existingTasks = new ArrayList<>();
         try {
-            if (this.storage.exists()) {
-                // Load into taskList if file is not empty
-                Scanner s = new Scanner(this.storage);
-                if (this.storage.length() != 0) {
-                    while (s.hasNext()) {
-                        existingTasks.add(s.nextLine());
-                    }
-                }
-            } else {
-                this.storage.getParentFile().mkdirs();
-                this.storage.createNewFile();
+            Scanner s = new Scanner(this.storage);
+            while (s.hasNext()) {
+                existingTasks.add(s.nextLine());
             }
-            assert this.storage.exists() : "Local storage not found";
         } catch (IOException e) {
             assert false : "Local storage cannot be read";
         }

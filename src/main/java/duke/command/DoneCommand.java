@@ -22,10 +22,9 @@ public class DoneCommand extends Command {
 
     /**
      * Executes the DoneCommand.
-     * First, the Task specified is marked as done, and the updated TaskList is written to local storage.
-     * Lastly, a message is printed to indicate that the task has been marked as completed successfully.
      * @param list A TaskList containing the user's Tasks.
      * @param storage A Storage object that handles the storage of tasks in local storage, allowing them to persist.
+     * @return A String that contains a user message indicating that the specified task has been marked completed.
      * @throws InvalidTaskException if details provided of Task to be marked done are invalid.
      */
     @Override

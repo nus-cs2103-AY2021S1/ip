@@ -93,7 +93,7 @@ public class TaskList {
      * Marks Task as completed.
      * @param index An integer representing the index of the task in the TaskList.
      * @return The task marked as completed.
-     * @throws InvalidTaskException if index specified is invalid (does not refer to a task in the TaskList).
+     * @throws InvalidTaskException If index specified is invalid (does not refer to a task in the TaskList).
      */
     public Task markTaskAsDone(int index) throws InvalidTaskException {
         if (index > this.taskList.size() || index <= 0) {
@@ -106,7 +106,7 @@ public class TaskList {
      * Removes a Task from the TaskList.
      * @param index An integer representing the index of the task in the TaskList.
      * @return The removed task.
-     * @throws InvalidTaskException if index specified is invalid (does not refer to a task in the TaskList).
+     * @throws InvalidTaskException If index specified is invalid (does not refer to a task in the TaskList).
      */
     public Task deleteTask(int index) throws InvalidTaskException {
         if (index > this.taskList.size() || index <= 0) {
@@ -118,9 +118,23 @@ public class TaskList {
     }
 
     /**
-     * Finds tasks that match the search term
-     * @param matchString A string representing the search term
-     * @return An ArrayList containing all Tasks that match the search term provided
+     * Finds tasks that have date set as today.
+     * @return An ArrayList containing all Tasks that have date set as today.
+     */
+    public ArrayList<Task> getTasksToday() {
+        ArrayList<Task> filteredList = new ArrayList<>();
+        for (Task task : this.taskList) {
+            if (task.isToday()) {
+                filteredList.add(task);
+            }
+        }
+        return filteredList;
+    }
+
+    /**
+     * Finds tasks that match the search term.
+     * @param matchString A string representing the search term.
+     * @return An ArrayList containing all Tasks that match the search term provided.
      */
     public ArrayList<Task> findTasks(String matchString) {
         ArrayList<Task> filteredList = new ArrayList<>();
