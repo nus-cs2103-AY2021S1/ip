@@ -1,8 +1,9 @@
 package duke.exception;
 
+import static duke.util.Keyword.KEYWORD_EMPTY_EXCEPTION;
+
 public class EmptyTextException extends DukeException {
-    private static final String EMPTY_EXCEPTION = " ☹ OOPS! You must fill in the text for %s";
     public EmptyTextException(String text) {
-        super(String.format(EMPTY_EXCEPTION, text));
+        super(String.format(KEYWORD_EMPTY_EXCEPTION, text));
     }
 }

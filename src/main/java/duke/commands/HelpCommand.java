@@ -1,26 +1,24 @@
 package duke.commands;
 
+import static duke.util.FormatChecker.checkHelpFormat;
+import static duke.util.Keyword.KEYWORD_HELP_BYE;
+import static duke.util.Keyword.KEYWORD_HELP_DEADLINE;
+import static duke.util.Keyword.KEYWORD_HELP_DELETE;
+import static duke.util.Keyword.KEYWORD_HELP_DISPLAY_MESSAGE;
+import static duke.util.Keyword.KEYWORD_HELP_DONE;
+import static duke.util.Keyword.KEYWORD_HELP_EVENT;
+import static duke.util.Keyword.KEYWORD_HELP_FIND;
+import static duke.util.Keyword.KEYWORD_HELP_LIST;
+import static duke.util.Keyword.KEYWORD_HELP_REMIND;
+import static duke.util.Keyword.KEYWORD_HELP_TODO;
+import static duke.util.Keyword.KEYWORD_HELP_UNSURE;
+
+import duke.exception.InvalidFormatHelpException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.textui.Ui;
 
 public class HelpCommand extends Command {
-    private static final String EXTRA_SPACE = "    ";
-    private static final String unsureString = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n";
-    private static final String listingString = "Here are the list of commands available:\n";
-    private static final String S1 = "1. list\n";
-    private static final String S2 = "2. bye\n";
-    private static final String S3 = "3. todo \'task name\' (e.g. todo task 1)\n";
-    private static final String S4 = "4. delete ___ (e.g. delete 1)  *Note that it should be a value more than 0*\n";
-    private static final String S5 = "5. done ___ (e.g. done 1)  *Note that it should be a value more than 0*\n";
-    private static final String S6 = "6. find ___ (e.g. find book) *Note that only 1 keyword is allowed*\n";
-    private static final String S7 = "7. remind _ _ (e.g.remind 1 y)" + "\n" + EXTRA_SPACE
-            + " *Sets reminder on task 1 in task list , y or n represents yes or no respectively*\n";
-    private static final String S8 = "8. deadline \'task name\' /by \'any date format\' " + "\n" + EXTRA_SPACE
-            + "(e.g. deadline project /by YYYY-MM-DD HHMM or YYYY-MM-DD)\n";
-    private static final String S9 = "9. event \'event name\' /at \'any date format\' " + "\n" + EXTRA_SPACE
-            + "(e.g. event project /at YYYY-MM-DD HHMM or YYYY-MM-DD)\n";
-
     /**
      * Creates a HelpCommand object.
      *
@@ -32,7 +30,8 @@ public class HelpCommand extends Command {
         super(inputArr);
     }
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFormatHelpException {
+        checkHelpFormat(inputArr);
         return getListOfCommands();
     }
 
@@ -42,6 +41,8 @@ public class HelpCommand extends Command {
      * @return A list of commands available in Duke
      */
     public String getListOfCommands() {
-        return unsureString + listingString + S1 + S2 + S3 + S4 + S5 + S6 + S7 + S8 + S9;
+        return KEYWORD_HELP_UNSURE + KEYWORD_HELP_DISPLAY_MESSAGE + KEYWORD_HELP_LIST + KEYWORD_HELP_BYE
+                + KEYWORD_HELP_TODO + KEYWORD_HELP_DELETE + KEYWORD_HELP_DONE + KEYWORD_HELP_FIND
+                + KEYWORD_HELP_REMIND + KEYWORD_HELP_DEADLINE + KEYWORD_HELP_EVENT;
     }
 }

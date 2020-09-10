@@ -1,9 +1,9 @@
 package duke.exception;
 
+import static duke.util.Keyword.KEYWORD_HELP_EXCEPTION;
+
 public class InvalidFormatHelpException extends DukeException {
-    private static final String HELP_EXCEPTION = " ☹ OOPS! Did you mean help? "
-            + "(Note: There should not be anything behind help)";
     public InvalidFormatHelpException() {
-        super(HELP_EXCEPTION);
+        super(KEYWORD_HELP_EXCEPTION);
     }
 }

@@ -1,9 +1,19 @@
 package duke.commands;
 
+import static duke.util.Keyword.KEYWORD_COMMAND_ERR;
+
 import duke.exception.DuplicateException;
+import duke.exception.EmptyTextException;
+import duke.exception.InvalidFormatByeException;
 import duke.exception.InvalidFormatDateException;
 import duke.exception.InvalidFormatDeadlineException;
+import duke.exception.InvalidFormatDeleteException;
+import duke.exception.InvalidFormatDoneException;
 import duke.exception.InvalidFormatEventException;
+import duke.exception.InvalidFormatFindException;
+import duke.exception.InvalidFormatHelpException;
+import duke.exception.InvalidFormatListException;
+import duke.exception.InvalidFormatReminderException;
 import duke.exception.UnknownCommandException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
@@ -14,7 +24,6 @@ import duke.ui.textui.Ui;
  */
 
 public abstract class Command {
-    private static final String KEYWORD_ERR = "Sorry something went wrong. Duke crashed X.X";
     protected String[] inputArr;
     /**
      * Creates a Command object.
@@ -30,7 +39,7 @@ public abstract class Command {
      * Prints the error message when duke crashes.
      */
     public static void printErr() {
-        System.out.println(KEYWORD_ERR);
+        System.out.println(KEYWORD_COMMAND_ERR);
     }
 
     /**
@@ -50,5 +59,8 @@ public abstract class Command {
      * @param storage Object that deals with loading tasks from the file and saving tasks in the file
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws UnknownCommandException,
-            InvalidFormatDeadlineException, InvalidFormatEventException, InvalidFormatDateException, DuplicateException;
+            InvalidFormatDeadlineException, InvalidFormatEventException, InvalidFormatDateException,
+            DuplicateException, InvalidFormatReminderException, EmptyTextException, InvalidFormatFindException,
+            InvalidFormatDeleteException, InvalidFormatDoneException, InvalidFormatHelpException,
+            InvalidFormatListException, InvalidFormatByeException;
 }

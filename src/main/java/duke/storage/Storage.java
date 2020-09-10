@@ -1,5 +1,8 @@
 package duke.storage;
 
+import static duke.util.Keyword.KEYWORD_DEADLINE;
+import static duke.util.Keyword.KEYWORD_EVENT;
+import static duke.util.Keyword.KEYWORD_TODO;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -12,7 +15,6 @@ import java.nio.file.Paths;
 
 import duke.commands.Command;
 import duke.exception.UnknownCommandException;
-import duke.parser.Parser;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.ToDo;
@@ -91,17 +93,14 @@ public class Storage {
         String dir = System.getProperty("user.dir");
         Path path = Paths.get(dir, "duke.Duke");
         try {
-            // checking if path exist
             if (!Files.exists(path)) {
                 createFilePath(path);
             }
             Path filePath = Paths.get(dir, "duke.Duke", "todoList.csv");
             File file = filePath.toFile();
-            // checking if file exist
             if (!file.exists()) {
                 createCsv(file);
             }
-            // saving file
             savingFileInfo(file, tasks);
         } catch (IOException e) {
             Command.printErr();
@@ -117,33 +116,39 @@ public class Storage {
         String dir = System.getProperty("user.dir");
         Path path = Paths.get(dir, "duke.Duke", "todoList.csv");
         if (path.toFile().exists()) {
-            try {
-                BufferedReader bufferedReader = Files.newBufferedReader(path);
-                String line = bufferedReader.readLine();
-                while (line != null) {
-                    String[] info = line.split(",", 5);
-                    // todo format type description done reminderOn
-                    // event format type at description done reminderOn
-                    // deadline format type by description done reminderOn
-                    switch (info[0]) {
-                    case Parser.KEYWORD_TODO:
-                        tasks.add(new ToDo(info[1], isTaskDone(info[2]), isReminderOn(info[3])));
-                        break;
-                    case Parser.KEYWORD_EVENT:
-                        tasks.add(new Event(info[2], info[1], isTaskDone(info[3]), isReminderOn(info[4])));
-                        break;
-                    case Parser.KEYWORD_DEADLINE:
-                        tasks.add(new Deadline(info[2], info[1], isTaskDone(info[3]), isReminderOn(info[4])));
-                        break;
-                    default:
-                        throw new UnknownCommandException();
-                    }
-                    line = bufferedReader.readLine();
-                }
-            } catch (IOException | UnknownCommandException e) {
-                Command.printErr();
-            }
+            getData(path, tasks);
         }
     }
 
+    /**
+     * Read the data that is stored inside the file
+     *
+     * @param path File path.
+     * @param tasks Object contains the task list.
+     */
+    private void getData(Path path, TaskList tasks) {
+        try {
+            BufferedReader bufferedReader = Files.newBufferedReader(path);
+            String line = bufferedReader.readLine();
+            while (line != null) {
+                String[] info = line.split(",", 5);
+                switch (info[0]) {
+                case KEYWORD_TODO:
+                    tasks.add(new ToDo(info[1], isTaskDone(info[2]), isReminderOn(info[3])));
+                    break;
+                case KEYWORD_EVENT:
+                    tasks.add(new Event(info[2], info[1], isTaskDone(info[3]), isReminderOn(info[4])));
+                    break;
+                case KEYWORD_DEADLINE:
+                    tasks.add(new Deadline(info[2], info[1], isTaskDone(info[3]), isReminderOn(info[4])));
+                    break;
+                default:
+                    throw new UnknownCommandException();
+                }
+                line = bufferedReader.readLine();
+            }
+        } catch (IOException | UnknownCommandException e) {
+            Command.printErr();
+        }
+    }
 }

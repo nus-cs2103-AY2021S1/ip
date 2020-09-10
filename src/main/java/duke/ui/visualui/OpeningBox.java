@@ -29,12 +29,15 @@ public class OpeningBox extends VBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        greetingMessage.setText(greetingText);
-        greetingMessage.getStylesheets().add("view/OpeningBox.css");
-        displayPicture.setImage(img);
+        setProperties(greetingText, img);
     }
     public static OpeningBox getOpeningMessage(String greetingText, Image img) {
         return new OpeningBox(greetingText, img);
+    }
+    private void setProperties(String greetingText, Image img) {
+        greetingMessage.setText(greetingText);
+        greetingMessage.getStylesheets().add("view/OpeningBox.css");
+        displayPicture.setImage(img);
     }
 }
 

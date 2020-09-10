@@ -1,20 +1,22 @@
 package duke.commands;
 
+import static duke.util.FormatChecker.checkListFormat;
+import static duke.util.Keyword.KEYWORD_LIST_EMPTY_MSG;
+import static duke.util.Keyword.KEYWORD_LIST_SHOW_TASK;
+
 import java.util.stream.IntStream;
 
+import duke.exception.InvalidFormatListException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.textui.Ui;
-
-
 
 /**
  * Class that simulates the add command of the user.
  */
 
 public class ListCommand extends Command {
-    private static final String EMPTY_MSG = "Your list is empty!!!";
-    private static final String SHOW_TASK = "Here are the tasks in your list:";
+
     /**
      * Creates an ListCommand object.
      *
@@ -26,7 +28,8 @@ public class ListCommand extends Command {
         super(inputArr);
     }
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFormatListException {
+        checkListFormat(inputArr);
         return showListTasks(tasks, ui);
     }
 
@@ -39,10 +42,10 @@ public class ListCommand extends Command {
      */
     private String showListTasks(TaskList tasks, Ui ui) {
         if (tasks.size() == 0) {
-            return ui.messageFormatter(EMPTY_MSG);
+            return ui.messageFormatter(KEYWORD_LIST_EMPTY_MSG);
         } else {
             assert tasks.size() > 0 : "Invalid task list, giving a negative size";
-            StringBuffer finalMessage = new StringBuffer(SHOW_TASK).append("\n");
+            StringBuffer finalMessage = new StringBuffer(KEYWORD_LIST_SHOW_TASK).append("\n");
             IntStream.range(1, tasks.size() + 1).forEach(num -> finalMessage.append(num).append(". ")
                     .append(tasks.get(num - 1)).append("\n"));
             return ui.messageFormatter(finalMessage.toString());

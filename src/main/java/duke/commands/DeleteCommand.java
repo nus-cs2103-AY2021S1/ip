@@ -1,21 +1,21 @@
 package duke.commands;
 
+import static duke.util.FormatChecker.checkDeleteFormat;
+import static duke.util.Keyword.KEYWORD_DELETE_INVALID_INPUT;
+import static duke.util.Keyword.KEYWORD_DELETE_NOTIFICATION;
 import static java.lang.Integer.parseInt;
 
+import duke.exception.InvalidFormatDeleteException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.textui.Ui;
 
 
-
 /**
  * Class that simulates the delete command.
  */
-
 public class DeleteCommand extends Command {
-    private static final String INVALID_INPUT = "Invalid input for delete";
-    private static final String DELETE_NOTIFICATION = "Noted. I've removed this task:";
     /**
      * Creates a DeleteCommand object.
      *
@@ -27,7 +27,8 @@ public class DeleteCommand extends Command {
         super(inputArr);
     }
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFormatDeleteException {
+        checkDeleteFormat(inputArr);
         return deleteTask(parseInt(inputArr[1]), ui, tasks);
     }
 
@@ -41,12 +42,15 @@ public class DeleteCommand extends Command {
      * @return A string message notifying which task has been deleted
      */
     private String deleteTask(int pos, Ui ui, TaskList tasks) {
-        if (pos <= 0 || pos > tasks.size()) {
-            return ui.messageFormatter(INVALID_INPUT);
+        if (checkInValidIndex(pos, tasks)) {
+            return ui.messageFormatter(KEYWORD_DELETE_INVALID_INPUT);
         } else {
             Task task = tasks.get(pos - 1);
             tasks.remove(pos - 1);
-            return ui.messageFormatter(DELETE_NOTIFICATION, task.toString(), printNumTask(tasks));
+            return ui.messageFormatter(KEYWORD_DELETE_NOTIFICATION, task.toString(), printNumTask(tasks));
         }
+    }
+    private boolean checkInValidIndex(int pos, TaskList tasks) {
+        return pos <= 0 || pos > tasks.size();
     }
 }

@@ -1,14 +1,13 @@
 package duke.task;
 
+import static duke.util.DateFormatter.FORMAT_DATE_TIME;
+
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Class that simulates the deadline task that user has inputted.
  */
-
 public class Deadline extends Task {
-    private static final DateTimeFormatter Format_Date_Time = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy, h:mma");
     /**
      * Creates a deadline object the containing details of the task.
      *
@@ -41,6 +40,6 @@ public class Deadline extends Task {
     }
     @Override
     public String toString() {
-        return "[D]" + super.toString() + " (by: " + getDueDate().format(Format_Date_Time) + ")";
+        return "[D]" + super.toString() + " (by: " + getDueDate().format(FORMAT_DATE_TIME) + ")";
     }
 }

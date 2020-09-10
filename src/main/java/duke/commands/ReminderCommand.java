@@ -1,10 +1,16 @@
 package duke.commands;
 
+import static duke.util.FormatChecker.checkReminderFormat;
+
+import duke.exception.InvalidFormatReminderException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.textui.Ui;
 
+/**
+ * Class that simulates the remind command.
+ */
 public class ReminderCommand extends Command {
     /**
      * Creates an ReminderCommand object.
@@ -18,7 +24,8 @@ public class ReminderCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFormatReminderException {
+        checkReminderFormat(tasks, inputArr);
         return setReminder(inputArr[1], tasks);
     }
 

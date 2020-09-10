@@ -1,11 +1,21 @@
 package duke.commands;
 
+import static duke.util.DateFormatter.formatDateTime;
+import static duke.util.FormatChecker.checkDeadlineFormat;
+import static duke.util.FormatChecker.checkEmptyText;
+import static duke.util.FormatChecker.checkEventFormat;
+import static duke.util.Keyword.KEYWORD_ADD_NOTIFICATION;
+import static duke.util.Keyword.KEYWORD_DEADLINE;
+import static duke.util.Keyword.KEYWORD_DEADLINE_FORMAT;
+import static duke.util.Keyword.KEYWORD_EVENT;
+import static duke.util.Keyword.KEYWORD_EVENT_FORMAT;
+import static duke.util.Keyword.KEYWORD_TODO;
+
 import duke.exception.DuplicateException;
+import duke.exception.EmptyTextException;
 import duke.exception.InvalidFormatDateException;
 import duke.exception.InvalidFormatDeadlineException;
 import duke.exception.InvalidFormatEventException;
-import duke.exception.UnknownCommandException;
-import duke.parser.Parser;
 import duke.storage.Storage;
 import duke.task.Deadline;
 import duke.task.Event;
@@ -18,9 +28,7 @@ import duke.ui.textui.Ui;
  * Class that simulates the add command of the user.
  * Mainly: event, deadline, todo.
  */
-
 public class AddCommand extends Command {
-    private static final String ADDED_NOTIFICATION = "Got it. I've added this task:";
     /**
      * Creates an AddCommand object.
      *
@@ -33,7 +41,8 @@ public class AddCommand extends Command {
     }
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFormatDeadlineException,
-            InvalidFormatEventException, InvalidFormatDateException, UnknownCommandException, DuplicateException {
+            InvalidFormatEventException, InvalidFormatDateException, DuplicateException, EmptyTextException {
+        checkEmptyText(inputArr);
         return addTask(inputArr[0], inputArr[1], ui, tasks);
     }
 
@@ -49,42 +58,51 @@ public class AddCommand extends Command {
      * @throws InvalidFormatDeadlineException Throws an exception when the format of 'message' is wrong.
      * @throws InvalidFormatEventException Throws an exception when the format of 'message' is wrong.
      * @throws InvalidFormatDateException Throws an exception when the format of 'message' is wrong.
+     * @throws DuplicateException Throws an exception when there is a duplicate task.
      */
     private String addTask(String type, String message, Ui ui, TaskList tasks) throws InvalidFormatDeadlineException,
-            InvalidFormatEventException, InvalidFormatDateException, UnknownCommandException, DuplicateException {
-        Task task;
+            InvalidFormatEventException, InvalidFormatDateException, DuplicateException {
+        Task task = null;
         String[] dateTime;
         switch (type) {
-        case Parser.KEYWORD_TODO:
+        case KEYWORD_TODO:
             task = new ToDo(message);
             break;
-        case Parser.KEYWORD_DEADLINE:
-            dateTime = message.split(" /by ", 2);
-            // checking if the input is valid
-            if (dateTime.length == 1) {
-                throw new InvalidFormatDeadlineException();
-            }
-            task = new Deadline(dateTime[0], Parser.formatDateTime(dateTime[1]));
+        case KEYWORD_DEADLINE:
+            dateTime = message.split(KEYWORD_DEADLINE_FORMAT, 2);
+            checkDeadlineFormat(dateTime);
+            task = new Deadline(dateTime[0], formatDateTime(dateTime[1]));
             break;
-        case Parser.KEYWORD_EVENT:
-            dateTime = message.split(" /at ", 2);
-            // checking if the input is valid
-            if (dateTime.length == 1) {
-                throw new InvalidFormatEventException();
-            }
-            task = new Event(dateTime[0], Parser.formatDateTime(dateTime[1]));
+        case KEYWORD_EVENT:
+            dateTime = message.split(KEYWORD_EVENT_FORMAT, 2);
+            checkEventFormat(dateTime);
+            task = new Event(dateTime[0], formatDateTime(dateTime[1]));
             break;
         default:
-            throw new UnknownCommandException();
+            assert false : "Invalid task";
         }
+        assert task != null;
+        return addTask(tasks, task, ui);
+    }
+
+    /**
+     * Check for duplicate before adding.
+     *
+     * @param tasks Object contains the task list.
+     * @param task The task to be added.
+     * @param ui Object that deals with interactions with the user.
+     * @return A string representing the addition of the task.
+     * @throws DuplicateException Throws an exception when there is a duplicate task.
+     */
+    private String addTask(TaskList tasks, Task task, Ui ui) throws DuplicateException {
         if (checkDuplicates(tasks, task)) {
             throw new DuplicateException();
         } else {
             tasks.add(task);
-            return ui.messageFormatter(ADDED_NOTIFICATION, task.toString(), printNumTask(tasks));
+            return ui.messageFormatter(KEYWORD_ADD_NOTIFICATION, task.toString(), printNumTask(tasks));
         }
     }
-    public boolean checkDuplicates(TaskList taskList, Task task) {
+    private boolean checkDuplicates(TaskList taskList, Task task) {
         return taskList.checkExistBefore(task);
     }
 }

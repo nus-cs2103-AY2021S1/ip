@@ -1,20 +1,20 @@
 package duke.commands;
 
+import static duke.util.FormatChecker.checkDoneFormat;
+import static duke.util.Keyword.KEYWORD_DONE_INVALID_INPUT;
 import static java.lang.Integer.parseInt;
 
+import duke.exception.InvalidFormatDoneException;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.tasklist.TaskList;
 import duke.ui.textui.Ui;
-
-
 
 /**
  * Class that simulates the done command.
  */
 
 public class DoneCommand extends Command {
-    private static final String INVALID_INPUT = "Invalid input for done";
     /**
      * Creates a DoneCommand object.
      *
@@ -26,7 +26,8 @@ public class DoneCommand extends Command {
         super(inputArr);
     }
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFormatDoneException {
+        checkDoneFormat(inputArr);
         return marking(parseInt(inputArr[1]), ui, tasks);
     }
 
@@ -40,11 +41,15 @@ public class DoneCommand extends Command {
      * @return A String message that this particular task is marked or has been marked before.
      */
     private String marking(int pos, Ui ui, TaskList tasks) {
-        if (pos <= 0 || tasks.size() < pos) {
-            return ui.messageFormatter(INVALID_INPUT);
+        if (checkInValidIndex(pos, tasks)) {
+            return ui.messageFormatter(KEYWORD_DONE_INVALID_INPUT);
         } else {
             Task task = tasks.get(pos - 1);
             return ui.messageFormatter(task.markAsDone());
         }
+    }
+
+    private boolean checkInValidIndex(int pos, TaskList tasks) {
+        return pos <= 0 || pos > tasks.size();
     }
 }

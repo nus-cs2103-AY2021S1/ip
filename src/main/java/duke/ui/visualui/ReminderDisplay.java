@@ -1,9 +1,14 @@
 package duke.ui.visualui;
 
-import java.io.IOException;
-import java.time.format.DateTimeFormatter;
+import static duke.util.DateFormatter.FORMAT_DATE_TIME;
+import static duke.util.Keyword.KEYWORD_CROSS;
+import static duke.util.Keyword.KEYWORD_DEADLINE;
+import static duke.util.Keyword.KEYWORD_EVENT;
+import static duke.util.Keyword.KEYWORD_TICK;
+import static duke.util.Keyword.KEYWORD_TODO;
 
-import duke.parser.Parser;
+import java.io.IOException;
+
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -22,7 +27,6 @@ import javafx.scene.text.TextFlow;
  * Displays all the task that users have set on reminder.
  */
 public class ReminderDisplay extends VBox {
-    private static final DateTimeFormatter Format_Date_Time = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy, h:mma");
     private static final Insets INSETS = new Insets(10, 10, 0, 10);
     private static final int TEXT_SPACE__HEIGHT = 40;
     private static final int TEXT_CENTERING = 7;
@@ -32,8 +36,6 @@ public class ReminderDisplay extends VBox {
     private static final String TEXT_COMPLETED = "Completed: ";
     private static final String TEXT_COLON = ": ";
     private static final String TEXT_COMMA = ", ";
-    private static final String TEXT_TICK = "\u2714";
-    private static final String TEXT_CROSS = "\u2718";
     private static final String TODO_BACKGROUND = "-fx-background-color: #648DFC;";
     private static final String EVENT_BACKGROUND = "-fx-background-color: #072AC8;";
     private static final String DEADLINE_BACKGROUND = "-fx-background-color: #8FADFD";
@@ -72,10 +74,10 @@ public class ReminderDisplay extends VBox {
             return new ReminderDisplay(description, isDone, "Todo");
         } else if (task instanceof Event) {
             return new ReminderDisplay(description, isDone, "Event",
-                    task.getDueDate().format(Format_Date_Time));
+                    task.getDueDate().format(FORMAT_DATE_TIME));
         } else if (task instanceof Deadline) {
             return new ReminderDisplay(description, isDone, "Deadline",
-                    task.getDueDate().format(Format_Date_Time));
+                    task.getDueDate().format(FORMAT_DATE_TIME));
         } else {
             assert false : "invalid task type";
             return null;
@@ -90,7 +92,7 @@ public class ReminderDisplay extends VBox {
      * @param description
      * @return
      */
-    public Text[] createText(String title, String description) {
+    private Text[] createText(String title, String description) {
         Text text1 = new Text(title);
         text1.setFill(Color.web(TITLE_COLOR));
         text1.setFont(Font.font(DISPLAY_FONT, FontWeight.BOLD, DISPLAY_SIZE));
@@ -99,13 +101,13 @@ public class ReminderDisplay extends VBox {
         text2.setFont(Font.font(DISPLAY_FONT, FontWeight.BOLD, DISPLAY_SIZE));
         return new Text[]{text1, text2};
     }
-    public void setPadding() {
+    private void setPadding() {
         time.setPadding(INSETS);
         date.setPadding(INSETS);
         description.setPadding(INSETS);
         isDone.setPadding(INSETS);
     }
-    public void setHeight() {
+    private void setHeight() {
         description.setPrefHeight(TEXT_SPACE__HEIGHT);
         isDone.setPrefHeight(TEXT_SPACE__HEIGHT);
         date.setPrefHeight(TEXT_SPACE__HEIGHT);
@@ -115,15 +117,15 @@ public class ReminderDisplay extends VBox {
         date.translateYProperty().setValue(TEXT_CENTERING);
         time.translateYProperty().setValue(TEXT_CENTERING);
     }
-    public void setBarColor(String task) {
+    private void setBarColor(String task) {
         switch (task.toLowerCase()) {
-        case Parser.KEYWORD_TODO:
+        case KEYWORD_TODO:
             bar.setStyle(TODO_BACKGROUND);
             break;
-        case Parser.KEYWORD_EVENT:
+        case KEYWORD_EVENT:
             bar.setStyle(EVENT_BACKGROUND);
             break;
-        case Parser.KEYWORD_DEADLINE:
+        case KEYWORD_DEADLINE:
             bar.setStyle(DEADLINE_BACKGROUND);
             break;
         default:
@@ -135,19 +137,11 @@ public class ReminderDisplay extends VBox {
      *
      * @param taskDetails A list of details regarding the task.
      */
-    public void createReminderList(String ... taskDetails) {
-        Text[] dateText;
-        Text[] timeText;
+    private void createReminderList(String ... taskDetails) {
+        Text[] dateText = getDateText(taskDetails);
+        Text[] timeText = getTimeText(taskDetails);
         Text[] descriptionText = createText(taskDetails[2] + TEXT_COLON, taskDetails[0]);
-        Text[] isDoneText = createText(TEXT_COMPLETED, taskDetails[1].equals("0") ? TEXT_TICK : TEXT_CROSS);
-        if (taskDetails.length == 4) {
-            String[] dateTimeArray = taskDetails[3].split(TEXT_COMMA);
-            dateText = createText(TEXT_DATE, dateTimeArray[0] + TEXT_COMMA + dateTimeArray[1]);
-            timeText = createText(TEXT_TIME, dateTimeArray[2]);
-        } else {
-            dateText = createText(TEXT_DATE, TEXT_EMPTY);
-            timeText = createText(TEXT_TIME, TEXT_EMPTY);
-        }
+        Text[] isDoneText = createText(TEXT_COMPLETED, taskDetails[1].equals("0") ? KEYWORD_TICK : KEYWORD_CROSS);
         setHeight();
         setPadding();
         date.getChildren().addAll(dateText[0], dateText[1]);
@@ -155,5 +149,25 @@ public class ReminderDisplay extends VBox {
         description.getChildren().addAll(descriptionText[0], descriptionText[1]);
         isDone.getChildren().addAll(isDoneText[0], isDoneText[1]);
         setBarColor(taskDetails[2]);
+    }
+    private Text[] getDateText(String ... taskDetails) {
+        Text[] dateText;
+        if (taskDetails.length == 4) {
+            String[] dateTimeArray = taskDetails[3].split(TEXT_COMMA);
+            dateText = createText(TEXT_DATE, dateTimeArray[0] + TEXT_COMMA + dateTimeArray[1]);
+        } else {
+            dateText = createText(TEXT_DATE, TEXT_EMPTY);
+        }
+        return dateText;
+    }
+    private Text[] getTimeText(String ... taskDetails) {
+        Text[] timeText;
+        if (taskDetails.length == 4) {
+            String[] dateTimeArray = taskDetails[3].split(TEXT_COMMA);
+            timeText = createText(TEXT_TIME, dateTimeArray[2]);
+        } else {
+            timeText = createText(TEXT_TIME, TEXT_EMPTY);
+        }
+        return timeText;
     }
 }

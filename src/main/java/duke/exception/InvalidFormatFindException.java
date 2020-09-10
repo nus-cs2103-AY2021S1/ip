@@ -1,9 +1,9 @@
 package duke.exception;
 
+import static duke.util.Keyword.KEYWORD_FIND_EXCEPTION;
+
 public class InvalidFormatFindException extends DukeException {
-    private static final String FIND_EXCEPTION = " ☹ OOPS! A proper find format would be like, e.g. find \'keyword\' "
-            + "(Note that only 1 keyword is allowed.)";
     public InvalidFormatFindException() {
-        super(FIND_EXCEPTION);
+        super(KEYWORD_FIND_EXCEPTION);
     }
 }

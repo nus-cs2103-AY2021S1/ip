@@ -1,18 +1,17 @@
 package duke.task;
 
-import java.time.LocalDateTime;
+import static duke.util.Keyword.KEYWORD_CROSS;
+import static duke.util.Keyword.KEYWORD_TASK_MARKED;
+import static duke.util.Keyword.KEYWORD_TASK_MARKED_BEFORE;
+import static duke.util.Keyword.KEYWORD_TASK_REMINDER_OFF;
+import static duke.util.Keyword.KEYWORD_TASK_REMINDER_ON;
+import static duke.util.Keyword.KEYWORD_TICK;
 
+import java.time.LocalDateTime;
 /**
  * Class that simulates the task that user has inputted.
  */
-
 public class Task {
-    private static final String TASK_MARKED_BEFORE = "This task has already been marked!";
-    private static final String TASK_MARKED = "Nice! I've marked this task as done:";
-    private static final String TASK_REMINDER_ON = "The reminder of this task %s, has been activated";
-    private static final String TASK_REMINDER_OFF = "The reminder of this task %s, has been deactivated";
-    private static final String TICK = "\u2714";
-    private static final String CROSS = "\u2718";
     protected String description;
     protected boolean isDone;
     protected boolean isReminderOn;
@@ -100,17 +99,17 @@ public class Task {
      * @return Byte encoding strings of the symbols tick or X.
      */
     private String getStatusIcon() {
-        return (isDone ? TICK : CROSS);
+        return (isDone ? KEYWORD_TICK : KEYWORD_CROSS);
     }
     /**
      * Marks the task as completed.
      */
     public String markAsDone() {
         if (this.isDone) {
-            return TASK_MARKED_BEFORE;
+            return KEYWORD_TASK_MARKED_BEFORE;
         } else {
             this.isDone = true;
-            return TASK_MARKED + "\n" + this.toString();
+            return KEYWORD_TASK_MARKED + "\n" + this.toString();
         }
     }
     /**
@@ -121,9 +120,9 @@ public class Task {
     public String setReminder(boolean status) {
         isReminderOn = status;
         if (status) {
-            return String.format(TASK_REMINDER_ON, description);
+            return String.format(KEYWORD_TASK_REMINDER_ON, description);
         } else {
-            return String.format(TASK_REMINDER_OFF, description);
+            return String.format(KEYWORD_TASK_REMINDER_OFF, description);
         }
     }
     /**

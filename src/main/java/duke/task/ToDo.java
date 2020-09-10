@@ -5,7 +5,6 @@ package duke.task;
  */
 
 public class ToDo extends Task {
-
     /**
      * Creates a todo object the containing details of the task.
      *

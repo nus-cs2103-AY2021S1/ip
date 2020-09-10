@@ -1,5 +1,8 @@
 package duke.commands;
 
+import static duke.util.FormatChecker.checkByeFormat;
+
+import duke.exception.InvalidFormatByeException;
 import duke.storage.Storage;
 import duke.tasklist.TaskList;
 import duke.ui.textui.Ui;
@@ -9,7 +12,6 @@ import duke.ui.textui.Ui;
  */
 
 public class ByeCommand extends Command {
-
     /**
      * Creates an ByeCommand object.
      *
@@ -21,7 +23,8 @@ public class ByeCommand extends Command {
         super(inputArr);
     }
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFormatByeException {
+        checkByeFormat(inputArr);
         return endProgram(tasks, ui, storage);
     }
 

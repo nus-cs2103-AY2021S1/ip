@@ -4,12 +4,9 @@ import java.util.ArrayList;
 
 import duke.task.Task;
 
-
-
 /**
  * Class that simulates containing all the task.
  */
-
 public class TaskList {
     private ArrayList<Task> listTasks;
     public TaskList() {

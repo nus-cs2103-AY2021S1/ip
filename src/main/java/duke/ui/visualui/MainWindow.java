@@ -56,8 +56,8 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(stage, input, user),
-                DialogBox.getDukeDialog(stage, response, stitch)
+                DialogBox.getUserDialog(input, user),
+                DialogBox.getDukeDialog(response, stitch)
         );
         userInput.clear();
     }

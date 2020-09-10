@@ -1,14 +1,13 @@
 package duke.task;
 
+import static duke.util.DateFormatter.FORMAT_DATE_TIME;
+
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 /**
  * Class that simulates the event task that user has inputted.
  */
-
 public class Event extends Task {
-    private static final DateTimeFormatter Format_Date_Time = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy, h:mma");
     /**
      * Creates a event object the containing details of the task.
      *
@@ -30,8 +29,6 @@ public class Event extends Task {
     public Event(String description, String eventTime, boolean isDone, boolean isReminderOn) {
         super(description, isDone, isReminderOn, 0, LocalDateTime.parse(eventTime));
     }
-
-
     /**
      * Returns a proper styling to be recorded into CSV.
      *
@@ -42,6 +39,6 @@ public class Event extends Task {
     }
     @Override
     public String toString() {
-        return "[E]" + super.toString() + " (at: " + getDueDate().format(Format_Date_Time) + ")";
+        return "[E]" + super.toString() + " (at: " + getDueDate().format(FORMAT_DATE_TIME) + ")";
     }
 }

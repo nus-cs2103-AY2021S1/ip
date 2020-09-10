@@ -1,8 +1,9 @@
 package duke.exception;
 
+import static duke.util.Keyword.KEYWORD_DUPLICATE_EXCEPTION;
+
 public class DuplicateException extends DukeException {
-    private static final String DUPLICATE_EXCEPTION = " ☹ OOPS! This specific task exist before!";
     public DuplicateException() {
-        super(DUPLICATE_EXCEPTION);
+        super(KEYWORD_DUPLICATE_EXCEPTION);
     }
 }

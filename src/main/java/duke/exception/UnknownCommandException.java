@@ -1,7 +1,9 @@
 package duke.exception;
 
+import static duke.util.Keyword.KEYWORD_UNKNOWN_COMMAND_EXCEPTION;
+
 public class UnknownCommandException extends DukeException {
     public UnknownCommandException() {
-        super("Sorry I don't know what that means. Type \"help\" to view the list of commands available");
+        super(KEYWORD_UNKNOWN_COMMAND_EXCEPTION);
     }
 }

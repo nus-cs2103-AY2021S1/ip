@@ -1,26 +1,27 @@
 package duke.ui.textui;
 
+import static duke.util.Keyword.KEYWORD_UI_GOODBYE_MSG;
+import static duke.util.Keyword.KEYWORD_UI_HELLO_DUKE;
+
 import java.util.stream.Stream;
 
 /**
  * Class that simulates the reaction of duke to the user's input
  */
-
 public class Ui {
-    private static final String GOODBYE_MSG = "Bye ^.^, Hope to see you again soon!!!";
-    private static final String HELLO_DUKE = "Welcome back";
+
     /**
      * Greets the user.
      */
     public String greetings() {
-        return messageFormatter(HELLO_DUKE);
+        return messageFormatter(KEYWORD_UI_HELLO_DUKE);
     }
 
     /**
      * Saying goodbye to user.
      */
     public String goodBye() {
-        return messageFormatter(GOODBYE_MSG);
+        return messageFormatter(KEYWORD_UI_GOODBYE_MSG);
     }
 
     /**
