@@ -33,6 +33,20 @@ public class Deadline extends Task {
         }
     }
 
+    @Override
+    public void setTaskDateTime(String dateTime) throws DukeException {
+        try {
+            this.byDateTime = LocalDateTime.parse(
+                    dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+            this.originalFormat = this.byDateTime.format(
+                    DateTimeFormatter.ofPattern("yyyy-MM-dd HHmm"));
+            this.printedFormat = this.byDateTime.format(
+                    DateTimeFormatter.ofPattern("EEE, d MMM yyyy, HH:mm"));
+        } catch (DateTimeParseException ex) {
+            throw new InvalidUpdateTaskDateException();
+        }
+    }
+
     /**
      * Returns the string representation of the deadline task in the format to be saved in the computer.
      *
