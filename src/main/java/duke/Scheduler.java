@@ -30,23 +30,14 @@ public class Scheduler {
             return true;
         } else if (scheduledEndTime.equals(toBeScheduledEndTime)) {
             return true;
-        } else if (scheduledStartTime.isBefore(toBeScheduledStartTime)) {
-            if (scheduledEndTime.isAfter(toBeScheduledStartTime)) {
-                return true;
-            } else if (scheduledEndTime.isBefore(toBeScheduledStartTime)) {
-                return false;
-            } else if (scheduledEndTime.equals(toBeScheduledStartTime)) {
-                return false;
-            }
-        } else if (scheduledStartTime.isAfter(toBeScheduledStartTime)) {
-            if (scheduledStartTime.isBefore(toBeScheduledEndTime)) {
-                return true;
-            } else if (scheduledStartTime.isAfter(toBeScheduledEndTime)) {
-                return false;
-            } else if (scheduledStartTime.equals(toBeScheduledEndTime)) {
-                return false;
-            }
+        } else if (scheduledStartTime.isBefore(toBeScheduledStartTime)
+                && scheduledEndTime.isAfter(toBeScheduledStartTime)) {
+            return true;
+        } else if (scheduledStartTime.isAfter(toBeScheduledStartTime)
+                && scheduledStartTime.isBefore(toBeScheduledEndTime)) {
+            return true;
         }
+
         return false;
     }
 }
