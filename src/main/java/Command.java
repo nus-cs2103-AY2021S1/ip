@@ -28,7 +28,7 @@ public class Command {
      * @param command
      * @param store
      * @param storage
-     * @return Selected Task to mark done in String format
+     * @return Selected Task marked done in String format
      * @throws DukeException
      */
     public String done(String command, Storage store, ArrayList<Task> storage) throws DukeException {
