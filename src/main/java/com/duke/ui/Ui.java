@@ -46,6 +46,29 @@ public class Ui {
     }
 
     /**
+     * Prints all the instructions available for DukeBot.
+     */
+    private String handleHelpCommand() {
+        return "The list of commands are of below:\n"
+                + "list - List all available entries in the tasklist.\n"
+                + "Delete Task: delete <TASK INDEX>\n"
+                + "Mark Task as Done: done <TASK INDEX>\n"
+                + "Find Task: find <WORD IN TASK DESCRIPTION>\n"
+                + "\n"
+                + "Add Tasks: \n"
+                + "Deadline: deadline <TASK> /by <DATE IN D/MM/YYYY> <24H TIME FORMAT>\n"
+                + "Event: event <TASK> /at <DATE IN D/MM/YYYY> <24H TIME FORMAT>\n"
+                + "ToDo : todo <TASK>\n"
+                + "\n"
+                + "Add Recurring Tasks:\n"
+                + "Recurring Deadline: recurring deadline <TASK> /by <D/MM/YYYY> <TIME> /<PERIOD>\n"
+                + "Recurring Event: recurring event <TASK> /at <D/MM/YYYY> <TIME> /<PERIOD>\n"
+                + "Recurring ToDo: recurring todo <TASK>\n"
+                + "\n"
+                + "Exit: bye";
+    }
+
+    /**
      * Prints entries stored in Duke.
      */
     private String handleListCommand() {
@@ -195,8 +218,8 @@ public class Ui {
     /**
      * Adds Recurring task to Duke and give reply.
      * Example command is 'recurring todo Do Laundry /weekly'
-     * Example command is 'recurring deadline Pay Bills /by 09/07/2019 1800 /monthly'
-     * Example command is 'recurring event Wedding Anniversary /at 30/10/2020 /yearly'
+     * Example command is 'recurring deadline Pay Bills /by 9/07/2019 1800 /monthly'
+     * Example command is 'recurring event Wedding Anniversary /at 30/10/2020 1800 /yearly'
      *
      * @param input The input string for recurring task instruction.
      */
@@ -205,7 +228,11 @@ public class Ui {
             String instruction = input.split(" ", 2)[1];
             String taskType = instruction.split(" ", 2)[0];
             String task = instruction.split(" ", 2)[1].split(" /")[0];
-            String intervalString = instruction.split(" ", 2)[1].split(" /")[1];
+            String intervalString = "";
+            if (!taskType.equals("todo")) {
+                task += " /" + instruction.split(" ", 2)[1].split(" /")[1];
+                intervalString = instruction.split(" ", 2)[1].split(" /")[2];
+            }
             return this.addRecurringTask(taskType, task, intervalString);
         } catch (DukeException dukeException) {
             String errorMessage = "\t\t" + dukeException.getMessage();
@@ -376,7 +403,9 @@ public class Ui {
 
     private String handleCommand(String input) {
         try {
-            if (Parser.isDone(input)) {
+            if (Parser.isHelp(input)) {
+                return handleHelpCommand();
+            } else if (Parser.isDone(input)) {
                 int index = Integer.parseInt(input.split(" ")[1]) - 1;
                 return handleDoneCommand(index);
             } else if (Parser.isDelete(input)) {

@@ -1,6 +1,7 @@
 package com.duke.parser;
 
 import java.time.LocalDate;
+import java.util.Arrays;
 
 import com.duke.exceptions.DukeException;
 import com.duke.tasks.Deadlines;
@@ -22,6 +23,17 @@ public class Parser {
             + "Example input should be "
             + "deadline return book /by 2/12/2019 1800. "
             + "Please fix storage file before loading Duke again.";
+
+    /**
+     * Returns boolean on whether format is correct for a 'help command.
+     * If format is wrong, returns false, else returns true.
+     *
+     * @param input Input command to check format.
+     * @return boolean.
+     */
+    public static boolean isHelp(String input) {
+        return input.equals("help");
+    }
 
     /**
      * Returns boolean on whether format is correct for a 'done' command.
@@ -109,8 +121,8 @@ public class Parser {
     /**
      * Returns boolean on whether command is to add recurring tasks or not.
      * Example command is 'recurring todo Do Laundry /weekly'
-     * Example command is 'recurring deadline Pay Bills /by 09/07/2019 1800 /monthly'
-     * Example command is 'recurring event Wedding Anniversary /at 30/10/2020 /yearly'
+     * Example command is 'recurring deadline Pay Bills /by 9/07/2019 1800 /monthly'
+     * Example command is 'recurring event Wedding Anniversary /at 30/10/2020 1800 /yearly'
      * If format is wrong, returns false, else returns true.
      *
      * @param input Input command to check format.
@@ -123,8 +135,18 @@ public class Parser {
         }
         String taskAndInterval = inputArr[1];
         String[] taskAndIntervalArr = taskAndInterval.split(" /");
+        System.out.println(Arrays.toString(taskAndIntervalArr));
+        boolean isCorrectTaskAndIntervalFormat = taskAndIntervalArr.length == 2 || taskAndIntervalArr.length == 3;
         boolean isRecurring = inputArr[0].equals("recurring");
-        boolean isValidInterval = checkRecurringInterval(taskAndIntervalArr[1]);
+        if (!isRecurring && !isCorrectTaskAndIntervalFormat) {
+            return false;
+        }
+
+        String taskType = taskAndIntervalArr[0].split(" ")[0];
+        boolean isValidInterval = true;
+        if (!taskType.equals("todo")) {
+            isValidInterval = checkRecurringInterval(taskAndIntervalArr[2]);
+        }
         return isRecurring && isValidInterval;
     }
 
