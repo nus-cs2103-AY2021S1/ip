@@ -26,15 +26,15 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String datetime = Parser.getDateTime(by);
+        String strBy = Parser.getStringBy(by);
         String day = Parser.getDay(by);
-        return "[D]" + super.toString() + " (by: " + day + ", " + datetime + ")";
+        return "[D]" + super.toString() + " (by: " + day + ", " + strBy + ")";
     }
 
     /**
-     * Returns the task string to be written to the duke.txt storage file.
+     * Returns the Deadline task string to be written to the duke.txt storage file.
      *
-     * @return task string.
+     * @return Deadline task string.
      */
     public String toStorageString() {
         return "[D]" + super.toStorageString() + " (by: " + this.originalBy + ")";

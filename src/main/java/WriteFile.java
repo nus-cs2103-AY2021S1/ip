@@ -6,7 +6,7 @@ public class WriteFile {
     /** Destination path of the duke.txt storage file. */
     private final String path;
 
-    /** Indication if new data should be appended to current data. */
+    /** True if new data should be appended to current data. */
     private boolean isToAppend = false;
 
     /**

@@ -23,7 +23,10 @@ public class Parser {
      */
     public static Task getTask(String taskString) throws DukeException {
         char taskType = taskString.charAt(1);
-        boolean isTaskDone = taskString.charAt(4) == '1';
+        assert taskType == 'T' || taskType == 'D' || taskType == 'E';
+        char completionStatus = taskString.charAt(4);
+        assert completionStatus == '0' || completionStatus == '1';
+        boolean isTaskDone = completionStatus == '1';
         Task result;
 
         if (taskType == 'T') {
@@ -43,14 +46,14 @@ public class Parser {
     }
 
     /**
-     * Gets the action keyword, e.g. list, event, delete.
+     * Gets the action keyword of user command.
      *
      * @param command User command.
      * @return Action keyword.
      */
     public static String getAction(String command) {
         String[] commandList = command.split(" ", 2);
-        return commandList[0];
+        return commandList[0].toLowerCase();
     }
 
     /**
@@ -165,7 +168,7 @@ public class Parser {
      * @param by Deadline of the Task.
      * @return String of the deadline.
      */
-    public static String getDateTime(LocalDateTime by) {
+    public static String getStringBy(LocalDateTime by) {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy, HH:mm");
         return by.format(formatter);
 

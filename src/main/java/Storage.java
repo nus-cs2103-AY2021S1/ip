@@ -29,7 +29,7 @@ public class Storage {
                 new File("./data/duke.txt").createNewFile();
             }
         } catch (IOException e) {
-            System.out.println("Something went wrong in creating files");
+            System.out.println("Something went wrong in creating the storage file...");
         }
         return "./data/duke.txt";
     }
@@ -41,17 +41,17 @@ public class Storage {
      */
     public List<Task> load() {
         List<Task> tasks = new ArrayList<>();
-
         try {
             ReadFile file = new ReadFile(filePath);
             String[] dataArr = file.openFile();
             for (int i = 0; i < dataArr.length; ++i) {
-                tasks.add(Task.textToTask(dataArr[i]));
+                tasks.add(Parser.getTask(dataArr[i]));
             }
+        } catch (DukeException e) {
+            System.out.println(e.print());
         } catch (Exception e) {
             System.out.println("Something went wrong in reading data...");
         }
-
         return tasks;
     }
 
