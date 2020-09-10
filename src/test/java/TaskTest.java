@@ -1,14 +1,13 @@
-import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
+import org.junit.jupiter.api.Test;
+
 public class TaskTest {
-    
-    Task task = new Task("return book");
+    private Task task = new Task("return book");
     @Test
-    public void dummyTest(){
+    public void dummyTest() {
         assertEquals(2, 2);
     }
-
     /**
      * Tests the getDescription method from the Task Class
      */
