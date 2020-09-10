@@ -1,4 +1,4 @@
-package Duke;
+package task;
 
 /**
  * Super class for all types of tasks.

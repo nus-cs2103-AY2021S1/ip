@@ -1,4 +1,5 @@
-package Duke;
+package task;
+
 
 import java.util.ArrayList;
 

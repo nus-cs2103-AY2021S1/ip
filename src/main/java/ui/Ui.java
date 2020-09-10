@@ -1,45 +1,21 @@
-package Duke;
+package ui;
 
-import java.util.Scanner;
+import task.Task;
 
 public class Ui {
-    private final Scanner sc;
 
     /**
-     * Constructor initialises Scanner.
+     * Prints welcome message.
      */
-    public Ui() {
-        this.sc = new Scanner(System.in);
-    }
-
-    /**
-     * Prints welcome message
-     */
-    public String showWelcome() {
+    public static String showWelcome() {
         return "Hello! I'm Duke\n" +
                 "What can I do for you?";
     }
 
     /**
-     * Reads and returns system input.
-     *
-     * @return System input.
-     */
-    public String readLine() {
-        return sc.nextLine();
-    }
-
-    /**
-     * Closes Scanner
-     */
-    public void close() {
-        this.sc.close();
-    }
-
-    /**
      * Prints goodbye message
      */
-    public String goodbye() {
+    public static String goodbye() {
         return "Bye. Hope to see you again soon!";
     }
 
@@ -48,7 +24,7 @@ public class Ui {
      *
      * @param task Task to print
      */
-    public String showAddTask(Task task) {
+    public static String showAddTask(Task task) {
         return "Go it. I've added this task:\n" + task.toString();
     }
 
@@ -57,7 +33,7 @@ public class Ui {
      *
      * @param task Task to print
      */
-    public String showDoneTask(Task task) {
+    public static String showDoneTask(Task task) {
         return "Nice! I've marked this task as done:\n" + task;
     }
 
@@ -66,7 +42,7 @@ public class Ui {
      *
      * @param task Task to print
      */
-    public String showRemovedTask(Task task) {
+    public static String showRemovedTask(Task task) {
         return "Noted. I've removed this task:\n" + task.toString();
     }
 
@@ -75,18 +51,14 @@ public class Ui {
      *
      * @param size
      */
-    public String showTotalTasks(int size) {
+    public static String showTotalTasks(int size) {
         String plural = size != 1 ? "tasks" : "task";
         return "Now you have " + size + " " + plural + " in the list.";
     }
 
 
-    public String showFindTask(String result) {
+    public static String showFindTask(String result) {
         return "Here are the matching tasks in your list:\n" + result;
-    }
-
-    public void printMessage(String output) {
-        System.out.println(output);
     }
 
     /**
@@ -94,7 +66,7 @@ public class Ui {
      *
      * @param e Exception to print
      */
-    public String showError(Exception e) {
+    public static String showError(Exception e) {
         return e.getMessage();
     }
 
