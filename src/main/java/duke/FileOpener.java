@@ -24,6 +24,7 @@ public class FileOpener {
             System.out.println(e);
         }
 
+        assert prevTasks.exists() : "prevTasks should exist before being returned";
         return prevTasks;
     }
 }
