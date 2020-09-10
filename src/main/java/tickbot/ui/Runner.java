@@ -111,6 +111,21 @@ public class Runner {
         }
     }
 
+    void tag(String[] args) {
+        try {
+            int index = Integer.parseInt(args[1]) - 1;
+            for (int i = 1; i < args.length; i++) {
+                String tag = args[i];
+                tasks.get(index).addTag(tag);
+            }
+        } catch (NumberFormatException err) {
+            Output.printMessage("Invalid Syntax.");
+            Output.printMessage("Usage: tag <task_index> [<tag_name> ...]");
+        } catch (IndexOutOfBoundsException err) {
+            Output.printMessage("Sorry, no such task found.");
+        }
+    }
+
     private LocalDateTime parseTime(String timeString) {
         DateTimeFormatter formatter = DateTimeFormatterFactory.getInputFormatter();
         return LocalDateTime.parse(timeString, formatter);

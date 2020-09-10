@@ -53,6 +53,10 @@ public class Parser {
             runner.find(args);
             break;
         }
+        case "tag": {
+            runner.tag(args);
+            break;
+        }
         default: {
             Output.printMessage("Unknown command " + args[0] + ".");
         }

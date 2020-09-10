@@ -2,6 +2,8 @@ package tickbot.task;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.util.List;
+import java.util.stream.Collectors;
 
 import tickbot.util.DateTimeFormatterFactory;
 
@@ -12,12 +14,15 @@ public abstract class Task {
     private final String content;
     private final LocalDateTime time;
     private boolean isCompleted;
+    private List<String> tags;
 
-    Task(boolean isCompleted, String content, LocalDateTime time) {
+    Task(boolean isCompleted, String content, LocalDateTime time, List<String> tags) {
         assert content != null; // content cannot be null
+        assert tags != null;
         this.content = content;
         this.isCompleted = isCompleted;
         this.time = time;
+        this.tags = tags;
     }
 
     /**
@@ -64,17 +69,26 @@ public abstract class Task {
         return isCompleted() ? "✔︎" : "✘";
     }
 
+    public void addTag(String tag) {
+        tags.add(tag);
+    }
+
     @Override
     public String toString() {
         String timeMarker = getTimeMarker();
+        String result = "";
         if (timeMarker != null) {
             DateTimeFormatter formatter = DateTimeFormatterFactory.getOutputFormatter();
             String timeString = formatter.format(getTime());
-            return String.format("[%s][%s] %s (%s: %s)", getTaskType(),
+            result += String.format("[%s][%s] %s (%s: %s)", getTaskType(),
                     getCompleteMark(), getContent(), timeMarker, timeString);
         } else {
-            return String.format("[%s][%s] %s", getTaskType(),
+            result += String.format("[%s][%s] %s", getTaskType(),
                     getCompleteMark(), getContent());
         }
+        String tagString = tags.stream()
+                .map(tag -> "#" + tag)
+                .collect(Collectors.joining(" "));
+        return result + " " + tagString;
     }
 }

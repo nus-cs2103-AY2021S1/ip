@@ -24,6 +24,7 @@ public class Output {
             put("todo", "todo <content>");
             put("deadline", "deadline <content> /by " + TIME_FORMAT);
             put("event", "event <content> /at " + TIME_FORMAT);
+            put("tag", "tag <index> [<tag> ...]");
         }
     };
 
