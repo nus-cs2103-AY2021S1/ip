@@ -3,9 +3,9 @@ package dukechatbot.tasklist;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.stream.Collectors;
 
 import dukechatbot.constant.DukeConstants;
+import dukechatbot.enums.StringMatchEnum;
 import dukechatbot.task.Task;
 
 /**
@@ -86,14 +86,40 @@ public class TaskList {
     }
 
     /**
-     * Returns a list of tasks in the task list that contains the search keyword.
+     * Returns a list of tasks in the task list that matches the keyword.
+     * tasks whose title matches fully with keyword comes first,
+     * followed by tasks whose space-delimited title contain the keyword,
+     * followed by tasks whose title contains the substring keyword.
      * 
      * @param searchKeyword
-     * @return List of tasks in the task list that contains the search keyword.
+     * @return List of tasks in the task list that matches the search keyword.
      */
     public List<Task> findMatches(String searchKeyword) {
-        return this.list.stream()
-                .filter(x -> x.contains(searchKeyword))
-                .collect(Collectors.toList());
+        List<Task> result = new ArrayList<>();
+        List<Task> fullMatchList = new ArrayList<>();
+        List<Task> wordMatchList = new ArrayList<>();
+        List<Task> partialMatchList = new ArrayList<>();
+        
+        for (Task task : this.list) {
+            StringMatchEnum nameMatchEnum = task.contains(searchKeyword);
+            switch (nameMatchEnum) {
+            case FULL_MATCH:
+                fullMatchList.add(task);
+                break;
+            case WORD_MATCH:
+                wordMatchList.add(task);
+                break;
+            case PARTIAL_MATCH:
+                partialMatchList.add(task);
+                break;
+            default:
+            }
+        }
+        
+        result.addAll(fullMatchList);
+        result.addAll(wordMatchList);
+        result.addAll(partialMatchList);
+        
+        return result;
     } 
 }

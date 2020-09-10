@@ -54,4 +54,9 @@ public class DeadlineTask extends Task {
     private String getDateTimeDetails() {
         return this.dateTime.format(PATTERN_INPUT);
     }
+
+    @Override
+    public String getTitle() {
+        return this.title;
+    }
 }

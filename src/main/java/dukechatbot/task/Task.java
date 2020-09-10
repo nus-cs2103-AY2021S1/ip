@@ -1,8 +1,9 @@
 package dukechatbot.task;
 
-import java.util.Arrays;
 
+import dukechatbot.enums.StringMatchEnum;
 import dukechatbot.enums.TaskEnum;
+import dukechatbot.parser.StringMatchParser;
 
 public class Task {
 
@@ -77,8 +78,11 @@ public class Task {
      * @param substring
      * @return Boolean on whether attribute contains the substring as a word.
      */
-    public boolean contains(String substring) {
-        return Arrays.stream(this.title.split("\\s+"))
-                .anyMatch(x -> x.toLowerCase().equals(substring.toLowerCase()));
+    public StringMatchEnum contains(String substring) {
+        return StringMatchParser.match(this.getTitle(), substring);
+    }
+    
+    public String getTitle() {
+        return title;
     }
 }
