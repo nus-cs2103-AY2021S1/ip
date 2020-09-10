@@ -2,8 +2,6 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
-import java.io.ByteArrayOutputStream;
-import java.io.PrintStream;
 import java.util.ArrayList;
 
 import org.junit.jupiter.api.Test;
@@ -20,10 +18,6 @@ import duke.logic.UiManager;
 import stub.CommandStub;
 
 
-
-
-
-
 public class CommandTest {
     @Test
     public void mainCommandTest() throws InvalidTaskIndexException,
@@ -31,13 +25,11 @@ public class CommandTest {
         Command command = new CommandStub();
         assertEquals(command.getResponse(), "");
         assertFalse(command.getExitStatus());
-        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
-        System.setOut(new PrintStream(outContent));
-        command.execute(null, null, null, false);
-        String expectedOutput = "TESTING\n";
+        command.execute(null, null, null, true);
+        String expectedOutput = "TESTING";
 
         // Do the actual assertion.
-        assertEquals(expectedOutput, outContent.toString());
+        assertEquals(expectedOutput, command.getResponse());
     }
 
     @Test

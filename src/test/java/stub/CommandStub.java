@@ -18,6 +18,10 @@ public class CommandStub extends Command {
     @Override
     public void execute(TaskList taskList, CommandInteractionUi uiManager, StorageManager storageManager,
                         boolean isGuiTask) {
-        System.out.println("TESTING");
+        if (isGuiTask) {
+            this.response = "TESTING";
+        } else {
+            System.out.println("TESTING");
+        }
     }
 }
