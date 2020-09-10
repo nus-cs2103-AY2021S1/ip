@@ -1,8 +1,8 @@
 package duke;
 
 public class CompleteTaskCommand implements Command {
-    TaskList tasks;
-    int taskIndex;
+    private TaskList tasks;
+    private int taskIndex;
     public CompleteTaskCommand(TaskList tasks, int taskIndex) {
         this.tasks = tasks;
         this.taskIndex = taskIndex;

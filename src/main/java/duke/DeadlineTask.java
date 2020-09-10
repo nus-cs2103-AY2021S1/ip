@@ -2,7 +2,7 @@ package duke;
 
 import java.util.Date;
 public class DeadlineTask extends Task {
-    Date time;
+    private Date time;
     public DeadlineTask(
             Boolean isDone,
             String name,
