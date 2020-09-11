@@ -1,6 +1,7 @@
 package duke.commands;
 
 import static duke.util.FormatChecker.checkDeleteFormat;
+import static duke.util.IntegerChecker.isNumber;
 import static duke.util.Keyword.KEYWORD_DELETE_INVALID_INPUT;
 import static duke.util.Keyword.KEYWORD_DELETE_NOTIFICATION;
 import static java.lang.Integer.parseInt;
@@ -16,6 +17,7 @@ import duke.ui.textui.Ui;
  * Class that simulates the delete command.
  */
 public class DeleteCommand extends Command {
+
     /**
      * Creates a DeleteCommand object.
      *
@@ -26,6 +28,10 @@ public class DeleteCommand extends Command {
     public DeleteCommand(String[] inputArr) {
         super(inputArr);
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFormatDeleteException {
         checkDeleteFormat(inputArr);
@@ -42,7 +48,8 @@ public class DeleteCommand extends Command {
      * @return A string message notifying which task has been deleted
      */
     private String deleteTask(int pos, Ui ui, TaskList tasks) {
-        if (checkInValidIndex(pos, tasks)) {
+        assert isNumber(Integer.toString(pos)) : "pos is not a number";
+        if (checkInvalidIndex(pos, tasks)) {
             return ui.messageFormatter(KEYWORD_DELETE_INVALID_INPUT);
         } else {
             Task task = tasks.get(pos - 1);
@@ -50,7 +57,15 @@ public class DeleteCommand extends Command {
             return ui.messageFormatter(KEYWORD_DELETE_NOTIFICATION, task.toString(), printNumTask(tasks));
         }
     }
-    private boolean checkInValidIndex(int pos, TaskList tasks) {
+
+    /**
+     * Checks if the index that the user input is within range.
+     *
+     * @param pos The index that user keyed in.
+     * @param tasks the list of tasks.
+     * @return True if the index is within the size of tasks else false.
+     */
+    private boolean checkInvalidIndex(int pos, TaskList tasks) {
         return pos <= 0 || pos > tasks.size();
     }
 }

@@ -3,6 +3,7 @@ package duke.util;
 import static java.lang.Integer.parseInt;
 
 public class IntegerChecker {
+
     /**
      * Checking if the user's string input is a number.
      *

@@ -28,6 +28,7 @@ import duke.commands.UnknownCommand;
  * Class that simulates reading the user's input and making sense of it.
  */
 public class Parser {
+
     /**
      * Making sense of the user's input and outputting the relevant commands to the input.
      */
@@ -60,6 +61,14 @@ public class Parser {
             return new UnknownCommand(inputArr);
         }
     }
+
+    /**
+     * Format the user's input. Replacing multiple white spaces with single white space and splitting the string
+     * based on the white spaces.
+     *
+     * @param message User's input.
+     * @return A string array containing the user's input.
+     */
     private static String[] getInputArray(String message) {
         return message.trim().replaceAll(KEYWORD_MULTIPLE_SPACE, KEYWORD_ONE_SPACE).split(KEYWORD_ONE_SPACE, 2);
     }

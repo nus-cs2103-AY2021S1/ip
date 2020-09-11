@@ -20,7 +20,7 @@ public class OpeningBox extends VBox {
     @FXML
     private ImageView displayPicture;
 
-    private OpeningBox(String greetingText, Image img) {
+    private OpeningBox(String greetingText, Image image) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/OpeningBox.fxml"));
             fxmlLoader.setController(this);
@@ -29,15 +29,17 @@ public class OpeningBox extends VBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        setProperties(greetingText, img);
+        setProperties(greetingText, image);
     }
-    public static OpeningBox getOpeningMessage(String greetingText, Image img) {
-        return new OpeningBox(greetingText, img);
+
+    public static OpeningBox getOpeningMessage(String greetingText, Image image) {
+        return new OpeningBox(greetingText, image);
     }
-    private void setProperties(String greetingText, Image img) {
+
+    private void setProperties(String greetingText, Image image) {
         greetingMessage.setText(greetingText);
         greetingMessage.getStylesheets().add("view/OpeningBox.css");
-        displayPicture.setImage(img);
+        displayPicture.setImage(image);
     }
 }
 

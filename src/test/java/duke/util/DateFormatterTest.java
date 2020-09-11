@@ -13,11 +13,14 @@ import duke.exception.InvalidFormatDateException;
 
 
 public class DateFormatterTest {
+
     private DateFormatter dateFormatter;
+
     @BeforeEach
     void init() {
         dateFormatter = new DateFormatter();
     }
+
     @Test
     public void testFormatDateTime() {
         try {

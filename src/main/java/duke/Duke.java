@@ -15,6 +15,7 @@ import javafx.application.Platform;
  */
 
 public class Duke {
+
     private Storage storage;
     private Ui ui;
     private TaskList tasks;
@@ -28,6 +29,7 @@ public class Duke {
         storage.retrieve(tasks);
         ui = new Ui();
     }
+
     //@@ Oleg Mikhailov
     //Reused https://stackoverflow.com/questions/26311470/what-is-the-equivalent-of-javascript-settimeout-in-java
     public static void setTimeout(Runnable runnable, int delay) {
@@ -41,6 +43,12 @@ public class Duke {
         }).start();
     }
 
+    /**
+     * Return duke's response to user's input.
+     *
+     * @param input User's input.
+     * @return Duke's response to user's input.
+     */
     public String getResponse(String input) {
         try {
             Command c = Parser.parse(input);
@@ -56,6 +64,12 @@ public class Duke {
             return e.getMessage();
         }
     }
+
+    /**
+     * Return the list of tasks.
+     *
+     * @return The list of tasks.
+     */
     public TaskList retrieveTaskList() {
         return tasks;
     }

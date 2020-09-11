@@ -1,6 +1,7 @@
 package duke.commands;
 
 import static duke.util.FormatChecker.checkReminderFormat;
+import static duke.util.IntegerChecker.isNumber;
 
 import duke.exception.InvalidFormatReminderException;
 import duke.storage.Storage;
@@ -12,6 +13,7 @@ import duke.ui.textui.Ui;
  * Class that simulates the remind command.
  */
 public class ReminderCommand extends Command {
+
     /**
      * Creates an ReminderCommand object.
      *
@@ -23,6 +25,9 @@ public class ReminderCommand extends Command {
         super(inputArr);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFormatReminderException {
         checkReminderFormat(tasks, inputArr);
@@ -38,6 +43,8 @@ public class ReminderCommand extends Command {
      */
     private String setReminder(String command, TaskList tasks) {
         String[] result = command.split(" ");
+        assert result[1].equals("y") || result[1].equals("n");
+        assert isNumber(result[0]);
         Task task = tasks.get(Integer.parseInt(result[0]) - 1);
         return task.setReminder(result[1].equals("y"));
     }

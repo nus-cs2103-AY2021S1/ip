@@ -1,6 +1,7 @@
 package duke.commands;
 
 import static duke.util.FormatChecker.checkDoneFormat;
+import static duke.util.IntegerChecker.isNumber;
 import static duke.util.Keyword.KEYWORD_DONE_INVALID_INPUT;
 import static java.lang.Integer.parseInt;
 
@@ -15,6 +16,7 @@ import duke.ui.textui.Ui;
  */
 
 public class DoneCommand extends Command {
+
     /**
      * Creates a DoneCommand object.
      *
@@ -25,6 +27,10 @@ public class DoneCommand extends Command {
     public DoneCommand(String[] inputArr) {
         super(inputArr);
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFormatDoneException {
         checkDoneFormat(inputArr);
@@ -41,7 +47,8 @@ public class DoneCommand extends Command {
      * @return A String message that this particular task is marked or has been marked before.
      */
     private String marking(int pos, Ui ui, TaskList tasks) {
-        if (checkInValidIndex(pos, tasks)) {
+        assert isNumber(Integer.toString(pos)) : "pos is not a number";
+        if (checkInvalidIndex(pos, tasks)) {
             return ui.messageFormatter(KEYWORD_DONE_INVALID_INPUT);
         } else {
             Task task = tasks.get(pos - 1);
@@ -49,7 +56,14 @@ public class DoneCommand extends Command {
         }
     }
 
-    private boolean checkInValidIndex(int pos, TaskList tasks) {
+    /**
+     * Checks if the index that the user input is within range.
+     *
+     * @param pos The index that user keyed in.
+     * @param tasks the list of tasks.
+     * @return True if the index is within the size of tasks else false.
+     */
+    private boolean checkInvalidIndex(int pos, TaskList tasks) {
         return pos <= 0 || pos > tasks.size();
     }
 }

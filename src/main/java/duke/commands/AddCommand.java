@@ -29,6 +29,7 @@ import duke.ui.textui.Ui;
  * Mainly: event, deadline, todo.
  */
 public class AddCommand extends Command {
+
     /**
      * Creates an AddCommand object.
      *
@@ -39,6 +40,10 @@ public class AddCommand extends Command {
     public AddCommand(String[] inputArr) {
         super(inputArr);
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFormatDeadlineException,
             InvalidFormatEventException, InvalidFormatDateException, DuplicateException, EmptyTextException {
@@ -81,7 +86,6 @@ public class AddCommand extends Command {
         default:
             assert false : "Invalid task";
         }
-        assert task != null;
         return addTask(tasks, task, ui);
     }
 
@@ -95,6 +99,7 @@ public class AddCommand extends Command {
      * @throws DuplicateException Throws an exception when there is a duplicate task.
      */
     private String addTask(TaskList tasks, Task task, Ui ui) throws DuplicateException {
+        assert task != null;
         if (checkDuplicates(tasks, task)) {
             throw new DuplicateException();
         } else {
@@ -102,6 +107,14 @@ public class AddCommand extends Command {
             return ui.messageFormatter(KEYWORD_ADD_NOTIFICATION, task.toString(), printNumTask(tasks));
         }
     }
+
+    /**
+     * Checks if task list contains this exact task.
+     *
+     * @param taskList the list of tasks.
+     * @param task the task that user is trying to add.
+     * @return True if list contains that task, else false.
+     */
     private boolean checkDuplicates(TaskList taskList, Task task) {
         return taskList.checkExistBefore(task);
     }

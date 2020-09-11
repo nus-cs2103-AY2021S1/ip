@@ -4,6 +4,7 @@ package duke.util;
  * Class that contains all the magic strings.
  */
 public class Keyword {
+
     // Miscellaneous
     public static final String KEYWORD_TICK = "\u2714";
     public static final String KEYWORD_CROSS = "\u2718";
@@ -14,14 +15,17 @@ public class Keyword {
     public static final String KEYWORD_EVENT_FORMAT = " /at ";
     public static final String KEYWORD_USER = "user";
     public static final String KEYWORD_DUKE = "duke";
+
     // Task message
     public static final String KEYWORD_TASK_MARKED_BEFORE = "This task has already been marked!";
     public static final String KEYWORD_TASK_MARKED = "Nice! I've marked this task as done:";
     public static final String KEYWORD_TASK_REMINDER_ON = "The reminder of this task %s, has been activated";
     public static final String KEYWORD_TASK_REMINDER_OFF = "The reminder of this task %s, has been deactivated";
+
     // UI message
-    public static final String KEYWORD_UI_GOODBYE_MSG = "Bye ^.^, Hope to see you again soon!!!";
+    public static final String KEYWORD_UI_GOODBYE_MESSAGE = "Bye ^.^, Hope to see you again soon!!!";
     public static final String KEYWORD_UI_HELLO_DUKE = "Welcome back";
+
     // command
     public static final String KEYWORD_TODO = "todo";
     public static final String KEYWORD_EVENT = "event";
@@ -33,6 +37,7 @@ public class Keyword {
     public static final String KEYWORD_FIND = "find";
     public static final String KEYWORD_HELP = "help";
     public static final String KEYWORD_REMIND = "remind";
+
     // Notification message
     public static final String KEYWORD_ADD_NOTIFICATION = "Got it. I've added this task:";
     public static final String KEYWORD_COMMAND_ERR = "Sorry something went wrong. Duke crashed X.X";
@@ -59,6 +64,7 @@ public class Keyword {
             + KEYWORD_EXTRA_SPACE + "(e.g. event project /at YYYY-MM-DD HHMM or YYYY-MM-DD)\n";
     public static final String KEYWORD_LIST_EMPTY_MSG = "Your list is empty!!!";
     public static final String KEYWORD_LIST_SHOW_TASK = "Here are the tasks in your list:";
+
     // Exception messages
     public static final String KEYWORD_DUPLICATE_EXCEPTION = " ☹ OOPS! This specific task exist before!";
     public static final String KEYWORD_EMPTY_EXCEPTION = " ☹ OOPS! You must fill in the text for %s";

@@ -24,6 +24,7 @@ import duke.tasklist.TaskList;
  * Class that simulates the storing and retrieving of information into the hard-disk
  */
 public class Storage {
+
     /**
      * Checking if a particular task is completed.
      *
@@ -33,6 +34,7 @@ public class Storage {
     private boolean isTaskDone(String s) {
         return !s.equals("0");
     }
+
     /**
      * Checking if a particular task has reminder on.
      *

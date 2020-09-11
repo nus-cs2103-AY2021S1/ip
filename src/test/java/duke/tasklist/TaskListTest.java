@@ -8,7 +8,9 @@ import org.junit.jupiter.api.Test;
 import duke.task.Task;
 
 public class TaskListTest {
+
     private TaskList task;
+
     @BeforeEach
     void init() {
         task = new TaskList();
@@ -16,6 +18,7 @@ public class TaskListTest {
             task.add(new Task("hello world " + i));
         }
     }
+
     @Test
     public void testSize() {
         assertEquals(3, task.size());

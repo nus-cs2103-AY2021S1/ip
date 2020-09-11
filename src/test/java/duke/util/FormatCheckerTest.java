@@ -37,17 +37,21 @@ import duke.task.Event;
 import duke.tasklist.TaskList;
 
 public class FormatCheckerTest {
+
     private FormatChecker formatChecker;
 
     private static String[] getInputArray(String message) {
         return message.trim().replaceAll(KEYWORD_MULTIPLE_SPACE, KEYWORD_ONE_SPACE).split(KEYWORD_ONE_SPACE, 2);
     }
+
     @BeforeEach
     void init() {
         formatChecker = new FormatChecker();
     }
+
     @Nested
     class EventFormatTest {
+
         @Test
         @DisplayName("Test if user have missed out the /at keyword in event")
         public void missingDescriptionForEvent() {
@@ -55,6 +59,7 @@ public class FormatCheckerTest {
             String[] messageArr = inputArr[1].split(KEYWORD_EVENT_FORMAT, 2);
             assertThrows(InvalidFormatEventException.class, () -> checkEventFormat(messageArr));
         }
+
         @Test
         @DisplayName("Test if user have missed out the description in event")
         public void missingDescription() {
@@ -67,6 +72,7 @@ public class FormatCheckerTest {
 
     @Nested
     class DeadlineFormatTest {
+
         @Test
         @DisplayName("Test if user have missed out the /by keyword in deadline")
         public void missingByKeyword() {
@@ -74,6 +80,7 @@ public class FormatCheckerTest {
             String[] messageArr = inputArr[1].split(KEYWORD_DEADLINE_FORMAT, 2);
             assertThrows(InvalidFormatDeadlineException.class, () -> checkDeadlineFormat(messageArr));
         }
+
         @Test
         @DisplayName("Test if user have missed out the description in deadline")
         public void missingDescription() {
@@ -85,6 +92,7 @@ public class FormatCheckerTest {
 
     @Nested
     class EmptyTextFormatTest {
+
         @Test
         @DisplayName("Test if user only keyed in the word event")
         public void singleWordCommandForEventTest() {
@@ -98,6 +106,7 @@ public class FormatCheckerTest {
             String[] inputArr = getInputArray("deadline");
             assertThrows(EmptyTextException.class, () -> checkEmptyText(inputArr));
         }
+
         @Test
         @DisplayName("Test if user only keyed in the word todo")
         public void singleWordCommandForToDo() {
@@ -126,12 +135,14 @@ public class FormatCheckerTest {
 
     @Nested
     class FindFormatTest {
+
         @Test
         @DisplayName("Test if user only keyed in find")
         public void singleWordForFind() {
             String[] inputArr = getInputArray("find");
             assertThrows(InvalidFormatFindException.class, () -> checkFindFormat(inputArr));
         }
+
         @Test
         @DisplayName("Test if user keyed in multiple keywords to search")
         public void multipleWordsForFind() {
@@ -154,6 +165,7 @@ public class FormatCheckerTest {
 
     @Nested
     class ReminderFormatTest {
+
         @Test
         @DisplayName("Test if user only keyed in remind")
         public void singleWordForFind() {
@@ -167,6 +179,7 @@ public class FormatCheckerTest {
                 System.out.println(e);
             }
         }
+
         @Test
         @DisplayName("Test if user input an index less than zero")
         public void invalidIndexLessThanZero() {
@@ -180,6 +193,7 @@ public class FormatCheckerTest {
                 System.out.println(e);
             }
         }
+
         @Test
         @DisplayName("Test if user input an index equals to zero")
         public void invalidIndexEqualsZero() {
@@ -193,6 +207,7 @@ public class FormatCheckerTest {
                 System.out.println(e);
             }
         }
+
         @Test
         @DisplayName("Test if user did not key in the index of the task")
         public void missingIndex() {
@@ -206,6 +221,7 @@ public class FormatCheckerTest {
                 System.out.println(e);
             }
         }
+
         @Test
         @DisplayName("Test if user did not key in the yes or no to activate reminder of the task")
         public void missingInstructionForReminderStatus() {
@@ -219,6 +235,7 @@ public class FormatCheckerTest {
                 System.out.println(e);
             }
         }
+
         @Test
         @DisplayName("Test if user key in other letters beside y or n")
         public void invalidCharacterInputted() {
@@ -232,6 +249,7 @@ public class FormatCheckerTest {
                 System.out.println(e);
             }
         }
+
         @Test
         @DisplayName("Test if user key in not a number into the index that should contain a number")
         public void invalidInputAtNumberIndex() {
@@ -245,6 +263,7 @@ public class FormatCheckerTest {
                 System.out.println(e);
             }
         }
+
         @Test
         @DisplayName("Test if user key in number into the index that should y or n")
         public void invalidInputAtYesNoIndex() {

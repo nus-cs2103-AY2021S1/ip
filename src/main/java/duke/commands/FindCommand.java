@@ -13,6 +13,7 @@ import duke.ui.textui.Ui;
  * Class that simulates the find command of the user.
  */
 public class FindCommand extends Command {
+
     /**
      * Creates a FindCommand object.
      *
@@ -23,6 +24,10 @@ public class FindCommand extends Command {
     public FindCommand(String[] inputArr) {
         super(inputArr);
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFormatFindException {
         checkFindFormat(inputArr);
@@ -62,6 +67,13 @@ public class FindCommand extends Command {
         }
         return finalMessage;
     }
+
+    /**
+     * Checks if the Stringbuilder is an empty string.
+     *
+     * @param finalMessage Stringbuilder containing the result.
+     * @return True if Stringbuilder does not contain an empty string, else false.
+     */
     private boolean checkEmptyMessage(StringBuilder finalMessage) {
         return finalMessage.toString().equals("");
     }
@@ -72,7 +84,8 @@ public class FindCommand extends Command {
      * @param finalMessage result of finding any list of tasks that match the user's input.
      * @param ui Object that deals with interactions with the user.
      * @param keyword The task that the user is looking for.
-     * @return
+     * @return If finalMessage is not an empty string, return the result of finalMessage, else return an empty string
+     * message.
      */
     private String getResult(StringBuilder finalMessage, Ui ui, String keyword) {
         if (checkEmptyMessage(finalMessage)) {

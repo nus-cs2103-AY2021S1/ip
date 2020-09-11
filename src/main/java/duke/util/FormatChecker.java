@@ -17,6 +17,7 @@ import duke.exception.InvalidFormatReminderException;
 import duke.tasklist.TaskList;
 
 public class FormatChecker {
+
     /**
      * Checks if the event command has the description.
      *

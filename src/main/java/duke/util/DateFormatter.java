@@ -9,7 +9,9 @@ import java.time.format.DateTimeFormatter;
 import duke.exception.InvalidFormatDateException;
 
 public class DateFormatter {
+
     public static final DateTimeFormatter FORMAT_DATE_TIME = DateTimeFormatter.ofPattern("EEEE, dd MMM yyyy, h:mma");
+
     /**
      *Formats the user's input timing into a LocalDateTime format.
      *

@@ -12,6 +12,7 @@ import duke.ui.textui.Ui;
  */
 
 public class ByeCommand extends Command {
+
     /**
      * Creates an ByeCommand object.
      *
@@ -22,6 +23,10 @@ public class ByeCommand extends Command {
     public ByeCommand(String[] inputArr) {
         super(inputArr);
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFormatByeException {
         checkByeFormat(inputArr);

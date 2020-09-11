@@ -25,9 +25,11 @@ import javafx.scene.shape.Rectangle;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+
     private static final String USER_SPEECH_BUBBLE = "-fx-background-radius: 12 12 0 12;";
     private static final String DUKE_SPEECH_BUBBLE = "-fx-background-radius: 12 12 12 0;";
     private static final int IMAGE_SIZE = 80;
+
     @FXML
     private Label dialog;
     @FXML
@@ -35,7 +37,7 @@ public class DialogBox extends HBox {
     @FXML
     private VBox speechBubble;
 
-    private DialogBox(String text, Image img, String user) {
+    private DialogBox(String text, Image image, String user) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -44,7 +46,7 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        setProperties(text, img, user);
+        setProperties(text, image, user);
     }
 
     /**
@@ -57,12 +59,12 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img, KEYWORD_USER);
+    public static DialogBox getUserDialog(String text, Image image) {
+        return new DialogBox(text, image, KEYWORD_USER);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img, KEYWORD_DUKE);
+    public static DialogBox getDukeDialog(String text, Image image) {
+        var db = new DialogBox(text, image, KEYWORD_DUKE);
         db.flip();
         return db;
     }
@@ -71,10 +73,10 @@ public class DialogBox extends HBox {
      * Set the design of the speech bubble.
      *
      * @param text The message that is being displayed
-     * @param img The person image.
+     * @param image The person image.
      * @param user The name of the user.
      */
-    private void setProperties(String text, Image img, String user) {
+    private void setProperties(String text, Image image, String user) {
         dialog.setText(text);
         dialog.getStylesheets().add("view/DialogBox.css");
         setSpeechBubbleStyle(user);
@@ -83,7 +85,7 @@ public class DialogBox extends HBox {
         clip.setArcWidth(IMAGE_SIZE);
         clip.setArcHeight(IMAGE_SIZE);
         displayPicture.setClip(clip);
-        displayPicture.setImage(img);
+        displayPicture.setImage(image);
     }
 
     /**

@@ -9,9 +9,11 @@ import org.junit.jupiter.api.Test;
 import duke.ui.textui.Ui;
 
 public class UiTest {
+
     private static final String HELLO_DUKE = "Welcome back";
     private static final String GOODBYE_MSG = "Bye ^.^, Hope to see you again soon!!!";
     private Ui ui;
+
     @BeforeEach
     void init() {
         ui = new Ui();
@@ -24,6 +26,7 @@ public class UiTest {
         String str = "hello world\n";
         assertEquals(str, messageFormatterMessage);
     }
+
     @Test
     @DisplayName("user's login greetings")
     public void testGreetings() {
@@ -31,6 +34,7 @@ public class UiTest {
         String str = HELLO_DUKE + "\n";
         assertEquals(str, greetingMessage);
     }
+
     @Test
     @DisplayName("user's logout message")
     public void testGoodBye() {
@@ -38,6 +42,7 @@ public class UiTest {
         String str = GOODBYE_MSG + "\n";
         assertEquals(str, goodbyeMessage);
     }
+
     @Test
     @DisplayName("error message")
     public void testPrintException() {

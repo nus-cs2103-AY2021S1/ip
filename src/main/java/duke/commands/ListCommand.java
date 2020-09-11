@@ -27,6 +27,10 @@ public class ListCommand extends Command {
     public ListCommand(String[] inputArr) {
         super(inputArr);
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFormatListException {
         checkListFormat(inputArr);

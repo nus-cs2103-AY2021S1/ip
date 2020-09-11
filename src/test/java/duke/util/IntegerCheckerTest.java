@@ -6,6 +6,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 public class IntegerCheckerTest {
+
     @Test
     @DisplayName("Check if input is not a number")
     public void checkIfNotANumber() {

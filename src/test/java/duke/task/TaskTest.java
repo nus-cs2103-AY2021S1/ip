@@ -6,7 +6,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 public class TaskTest {
+
     private Task task;
+
     @BeforeEach
     void init() {
         task = new Task("hello world", false);

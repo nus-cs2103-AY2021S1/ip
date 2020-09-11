@@ -16,6 +16,7 @@ import javafx.stage.Stage;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+
     @FXML
     private ScrollPane userScreen;
     @FXML

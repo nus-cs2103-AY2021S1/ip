@@ -19,6 +19,7 @@ import duke.tasklist.TaskList;
 import duke.ui.textui.Ui;
 
 public class HelpCommand extends Command {
+
     /**
      * Creates a HelpCommand object.
      *
@@ -29,6 +30,10 @@ public class HelpCommand extends Command {
     public HelpCommand(String[] inputArr) {
         super(inputArr);
     }
+
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws InvalidFormatHelpException {
         checkHelpFormat(inputArr);
@@ -40,7 +45,7 @@ public class HelpCommand extends Command {
      *
      * @return A list of commands available in Duke
      */
-    public String getListOfCommands() {
+    private String getListOfCommands() {
         return KEYWORD_HELP_UNSURE + KEYWORD_HELP_DISPLAY_MESSAGE + KEYWORD_HELP_LIST + KEYWORD_HELP_BYE
                 + KEYWORD_HELP_TODO + KEYWORD_HELP_DELETE + KEYWORD_HELP_DONE + KEYWORD_HELP_FIND
                 + KEYWORD_HELP_REMIND + KEYWORD_HELP_DEADLINE + KEYWORD_HELP_EVENT;

@@ -8,7 +8,12 @@ import duke.task.Task;
  * Class that simulates containing all the task.
  */
 public class TaskList {
+
     private ArrayList<Task> listTasks;
+
+    /**
+     * Initialize the list of tasks.
+     */
     public TaskList() {
         listTasks = new ArrayList<>();
     }
@@ -91,6 +96,14 @@ public class TaskList {
     public void sortByDueDate() {
         sort(this, 0, this.size() - 1);
     }
+
+    /**
+     * Sort the task in the list according to due dates *Todo takes the highest priority*.
+     *
+     * @param taskList List of tasks.
+     * @param left Index pointing to the left of array.
+     * @param right Index pointing to the right of array.
+     */
     private void sort(TaskList taskList, int left, int right) {
         if (left < right) {
             int mid = (left + right) / 2;
@@ -99,6 +112,16 @@ public class TaskList {
             merge(taskList, left, mid, mid + 1, right);
         }
     }
+
+    /**
+     * Sort the task in the list according to due dates *Todo takes the highest priority*.
+     *
+     * @param taskList List of tasks.
+     * @param left1 Index pointing to the left of the first half of the array.
+     * @param right1 Index pointing to the right of the first half of the array.
+     * @param left2 Index pointing to the left of the second half of the array.
+     * @param right2 Index pointing to the right of the second half of the array.
+     */
     private void merge(TaskList taskList, int left1, int right1, int left2, int right2) {
         int left = left1;
         int right = left2;
@@ -121,6 +144,7 @@ public class TaskList {
             taskList.set(i + left1, temp[i]);
         }
     }
+
     /**
      * Checks if a task already exist in the list of tasks.
      *

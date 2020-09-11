@@ -12,7 +12,9 @@ import duke.tasklist.TaskList;
 import duke.ui.textui.Ui;
 
 public class ParserTest {
+
     private Parser parser;
+
     @BeforeEach
     void init() {
         parser = new Parser();

@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
  * Class that simulates the deadline task that user has inputted.
  */
 public class Deadline extends Task {
+
     /**
      * Creates a deadline object the containing details of the task.
      *
@@ -30,6 +31,7 @@ public class Deadline extends Task {
     public Deadline(String description, String taskDeadline, boolean isDone, boolean isReminderOn) {
         super(description, isDone, isReminderOn, 0, LocalDateTime.parse(taskDeadline));
     }
+
     /**
      * Returns a proper styling to be recorded into CSV.
      *
@@ -38,6 +40,12 @@ public class Deadline extends Task {
     public String formatStyling() {
         return String.format("deadline,%s%s", getDueDate(), super.formatStyling());
     }
+
+    /**
+     * A String representation of the deadline object.
+     *
+     * @return A String representation of the deadline object.
+     */
     @Override
     public String toString() {
         return "[D]" + super.toString() + " (by: " + getDueDate().format(FORMAT_DATE_TIME) + ")";

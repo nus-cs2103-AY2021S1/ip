@@ -10,18 +10,22 @@ import duke.ui.textui.Ui;
  */
 
 public class UnknownCommand extends Command {
+
+    /**
+     * Creates an UnknownCommand object.
+     *
+     * @param inputArr Array of length 2 that contains information of the user input
+     *                 At index 0, contains the type of command
+     *                 At index 1, contains the message of the command.
+     */
     public UnknownCommand(String[] inputArr) {
         super(inputArr);
     }
 
     /**
-     * To throw the unknown command exception.
-     *
-     * @param tasks Object contains the task list.
-     * @param ui Object that deals with interactions with the user.
-     * @param storage Object that deals with loading tasks from the file and saving tasks in the file
-     * @throws UnknownCommandException Throws an unknown command exception when user's input is not recognized.
+     * {@inheritDoc}
      */
+    @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws UnknownCommandException {
         throw new UnknownCommandException();
     }

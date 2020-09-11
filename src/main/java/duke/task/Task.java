@@ -8,15 +8,18 @@ import static duke.util.Keyword.KEYWORD_TASK_REMINDER_ON;
 import static duke.util.Keyword.KEYWORD_TICK;
 
 import java.time.LocalDateTime;
+
 /**
  * Class that simulates the task that user has inputted.
  */
 public class Task {
+
     protected String description;
     protected boolean isDone;
     protected boolean isReminderOn;
     protected int priority;
     protected LocalDateTime dueDate;
+
     /**
      * Creates a task object the containing details of the task.
      *
@@ -27,6 +30,7 @@ public class Task {
         this.isDone = false;
         this.isReminderOn = false;
     }
+
     /**
      * Creates a task object the containing details of the task.
      *
@@ -38,6 +42,7 @@ public class Task {
         this.isDone = isDone;
         this.isReminderOn = false;
     }
+
     /**
      * Creates a task object the containing details of the task.
      *
@@ -50,6 +55,7 @@ public class Task {
         this.isReminderOn = false;
         this.priority = priority;
     }
+
     /**
      * Creates a task object the containing details of the task.
      *
@@ -62,6 +68,7 @@ public class Task {
         this.description = description;
         this.priority = priority;
     }
+
     /**
      * Creates a task object the containing details of the task.
      *
@@ -93,6 +100,7 @@ public class Task {
         this.priority = priority;
         this.dueDate = dueDate;
     }
+
     /**
      * Displays a cross if task is not done, a tick otherwise.
      *
@@ -101,6 +109,7 @@ public class Task {
     private String getStatusIcon() {
         return (isDone ? KEYWORD_TICK : KEYWORD_CROSS);
     }
+
     /**
      * Marks the task as completed.
      */
@@ -112,6 +121,7 @@ public class Task {
             return KEYWORD_TASK_MARKED + "\n" + this.toString();
         }
     }
+
     /**
      * Set the status of reminder option.
      *
@@ -125,6 +135,7 @@ public class Task {
             return String.format(KEYWORD_TASK_REMINDER_OFF, description);
         }
     }
+
     /**
      * Returns a proper styling to be recorded into CSV.
      *
@@ -133,6 +144,7 @@ public class Task {
     public String formatStyling() {
         return String.format(",%s,%d,%d\n", description, getTaskStatus(), getReminderStatus());
     }
+
     /**
      * If a task has a reminder on, return 1 else 0.
      *
@@ -141,6 +153,7 @@ public class Task {
     public int getReminderStatus() {
         return isReminderOn ? 1 : 0;
     }
+
     /**
      * If a task is completed, return 1 else 0.
      *
@@ -149,6 +162,7 @@ public class Task {
     public int getTaskStatus() {
         return isDone ? 1 : 0;
     }
+
     /**
      * Retrieves the details of the task.
      *
@@ -157,6 +171,7 @@ public class Task {
     public String getDescription() {
         return description;
     }
+
     /**
      * Retrieves the priority of the task.
      *
@@ -165,6 +180,7 @@ public class Task {
     public int getPriority() {
         return priority;
     }
+
     /**
      * Retrieves the due date of the task.
      *
@@ -173,6 +189,12 @@ public class Task {
     public LocalDateTime getDueDate() {
         return dueDate;
     }
+
+    /**
+     * A String representation of the task object.
+     *
+     * @return A String representation of the task object.
+     */
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;

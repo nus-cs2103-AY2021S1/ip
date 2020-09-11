@@ -5,6 +5,7 @@ package duke.task;
  */
 
 public class ToDo extends Task {
+
     /**
      * Creates a todo object the containing details of the task.
      *
@@ -34,6 +35,11 @@ public class ToDo extends Task {
         return String.format("todo%s", super.formatStyling());
     }
 
+    /**
+     * A String representation of the todo object.
+     *
+     * @return A String representation of the todo object.
+     */
     @Override
     public String toString() {
         return "[T]" + super.toString();

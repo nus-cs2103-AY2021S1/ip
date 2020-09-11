@@ -1,6 +1,6 @@
 package duke.ui.textui;
 
-import static duke.util.Keyword.KEYWORD_UI_GOODBYE_MSG;
+import static duke.util.Keyword.KEYWORD_UI_GOODBYE_MESSAGE;
 import static duke.util.Keyword.KEYWORD_UI_HELLO_DUKE;
 
 import java.util.stream.Stream;
@@ -21,15 +21,15 @@ public class Ui {
      * Saying goodbye to user.
      */
     public String goodBye() {
-        return messageFormatter(KEYWORD_UI_GOODBYE_MSG);
+        return messageFormatter(KEYWORD_UI_GOODBYE_MESSAGE);
     }
 
     /**
-     * Prints the error 'msg'.
-     * @param msg Error message to be printed.
+     * Prints the error 'message'.
+     * @param message Error message to be printed.
      */
-    public String printException(String msg) {
-        return messageFormatter(msg);
+    public String printException(String message) {
+        return messageFormatter(message);
     }
 
     /**

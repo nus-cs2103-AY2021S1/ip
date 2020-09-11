@@ -8,6 +8,7 @@ import java.time.LocalDateTime;
  * Class that simulates the event task that user has inputted.
  */
 public class Event extends Task {
+
     /**
      * Creates a event object the containing details of the task.
      *
@@ -17,6 +18,7 @@ public class Event extends Task {
     public Event(String description, LocalDateTime eventTime) {
         super(description, 0, eventTime);
     }
+
     /**
      * Creates a event object the containing details of the task.
      *
@@ -29,6 +31,7 @@ public class Event extends Task {
     public Event(String description, String eventTime, boolean isDone, boolean isReminderOn) {
         super(description, isDone, isReminderOn, 0, LocalDateTime.parse(eventTime));
     }
+
     /**
      * Returns a proper styling to be recorded into CSV.
      *
@@ -37,6 +40,12 @@ public class Event extends Task {
     public String formatStyling() {
         return String.format("event,%s%s", getDueDate(), super.formatStyling());
     }
+
+    /**
+     * A String representation of the event object.
+     *
+     * @return A String representation of the event object.
+     */
     @Override
     public String toString() {
         return "[E]" + super.toString() + " (at: " + getDueDate().format(FORMAT_DATE_TIME) + ")";
