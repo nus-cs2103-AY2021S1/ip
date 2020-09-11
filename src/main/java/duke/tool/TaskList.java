@@ -115,15 +115,15 @@ public class TaskList {
         }
 
         return taskList.stream()
-                .reduce("Here are the tasks in your list: \n\t",
-                        (string,task) -> string + buildTaskString(task),
-                        (string1,string2) -> string1 + string2);
+                .reduce("Here are the tasks in your list: \n\t", (string, task) ->
+                                string + buildTaskString(task), (string1, string2) ->
+                        string1 + string2);
     }
 
     private String buildTaskString(Task task) {
         assert taskList.contains(task);
 
-        return (taskList.indexOf(task) + 1) + ". " +
-                task.toString() + "\n" + "\t";
+        return (taskList.indexOf(task) + 1) + ". "
+                + task.toString() + "\n" + "\t";
     }
 }

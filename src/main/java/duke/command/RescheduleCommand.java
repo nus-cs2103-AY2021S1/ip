@@ -13,6 +13,12 @@ public class RescheduleCommand implements Command {
     private final LocalDateTime targetDate;
     private Task rescheduledTask;
 
+    /**
+     * Creates an instance of reschedule command.
+     *
+     * @param targetIndex Index of task that needs to be rescheduled.
+     * @param targetDate Expect date of the task.
+     */
     public RescheduleCommand(int targetIndex, LocalDateTime targetDate) {
         this.targetIndex = targetIndex;
         this.targetDate = targetDate;

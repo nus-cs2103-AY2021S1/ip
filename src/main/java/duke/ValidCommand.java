@@ -11,11 +11,11 @@ import duke.exception.AmbiguousInputException;
  */
 public enum ValidCommand {
 
-    RESCHEDULE("reschedule","change","delay"),
+    RESCHEDULE("reschedule", "change", "delay"),
     DELETE("delete", "DELETE", "del", "DEL"),
     DEADLINE("deadline", "DEADLINE", "ddl", "DDL"),
     EVENT("event", "EVENT", "eve", "EVE"),
-    TODO("todo", "TODO", "to", "TO","t"),
+    TODO("todo", "TODO", "to", "TO", "t"),
     CLEAR("clear", "CLEAR", "clr", "CLR"),
     EXIT("bye", "BYE", "quit", "QUIT", "EXIT", "exit"),
     FIND("find", "search", "FIND", "SEARCH"),
@@ -36,7 +36,7 @@ public enum ValidCommand {
 
     static {
         Arrays.stream(ValidCommand.values()).forEach(command -> Arrays.stream(command.aliases)
-                .forEach(alias -> aliasMap.put(alias,command)));
+                .forEach(alias -> aliasMap.put(alias, command)));
     }
 
     /**

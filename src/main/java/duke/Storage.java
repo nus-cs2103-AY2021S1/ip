@@ -53,7 +53,7 @@ public class Storage {
                 String[] taskComponents = nowTask.split(" / ");
 
                 //Decode the file representation of list
-                handleStorageFormat(taskComponents,taskList);
+                handleStorageFormat(taskComponents, taskList);
 
             }
         } catch (FileNotFoundException e) {

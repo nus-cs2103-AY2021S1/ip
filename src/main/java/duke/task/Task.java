@@ -84,6 +84,12 @@ public class Task {
         return this.desciption.equals(task.desciption);
     }
 
+    /**
+     * Reschedule the task.
+     *
+     * @param time Target time of the task.
+     * @return Task that has been reschedule.
+     */
     public Task reschedule(LocalDateTime time) {
         this.time = Optional.of(time);
         return this;

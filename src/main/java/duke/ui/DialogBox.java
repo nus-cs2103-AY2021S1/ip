@@ -57,9 +57,9 @@ public class DialogBox extends HBox {
 
 
     public static DialogBox getUserDialog(String text, Image img) {
-        var db = new DialogBox(text,img);
+        var db = new DialogBox(text, img);
 
-        Node target = findNodeById("textbox",db.getChildren());
+        Node target = findNodeById("textbox", db.getChildren());
 
         assert target != null;
         target.setStyle("-fx-background-color: #E4D7F9");
@@ -72,7 +72,7 @@ public class DialogBox extends HBox {
 
         db.flip();
 
-        Node target = findNodeById("textbox",db.getChildren());
+        Node target = findNodeById("textbox", db.getChildren());
 
         assert target != null;
         target.setStyle("-fx-background-color: #9156F0");

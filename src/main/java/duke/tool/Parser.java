@@ -61,7 +61,7 @@ public class Parser {
             }
 
             return new RescheduleCommand(Integer.parseInt(indexAndDate[0]),
-                    LocalDateTime.parse(indexAndDate[1],acceptedFormatter));
+                    LocalDateTime.parse(indexAndDate[1], acceptedFormatter));
         case CLEAR:
             return new ClearCommand();
         case LIST:
