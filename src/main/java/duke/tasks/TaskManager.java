@@ -112,7 +112,7 @@ public class TaskManager {
         return new StringBuilder().append("\tGot it. I've added this task:\n\t  ")
                 .append(task).append("\n\tNow you have ")
                 .append(this.taskList.size())
-                .append("tasks in the list.\n")
+                .append(" tasks in the list.\n")
                 .toString();
     }
 
