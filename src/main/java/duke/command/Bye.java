@@ -1,7 +1,7 @@
-package command;
+package duke.command;
 
 import duke.DukeException;
-import task.TaskList;
+import duke.task.TaskList;
 
 public class Bye extends Instruction {
 
@@ -10,7 +10,7 @@ public class Bye extends Instruction {
     }
 
     @Override
-    public String execute() throws DukeException {
+    public String execute() {
         taskList.setTaskListNotUpdating();
         return "Bye, Have a Great Time!";
     }

@@ -1,9 +1,9 @@
-package command;
+package duke.command;
 
 import duke.DukeException;
-import task.Deadline;
-import task.Task;
-import task.TaskList;
+import duke.task.Deadline;
+import duke.task.Task;
+import duke.task.TaskList;
 
 public class IDeadline extends Instruction{
 

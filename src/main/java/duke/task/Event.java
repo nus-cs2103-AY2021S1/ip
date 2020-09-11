@@ -1,4 +1,4 @@
-package task;
+package duke.task;
 
 import duke.DukeException;
 
@@ -9,9 +9,9 @@ import java.time.format.DateTimeParseException;
 
 public class Event extends Task {
 
-    /** Date of the task **/
+    /** Date of the duke.task **/
     protected LocalDate atDate;
-    /** Time of the task **/
+    /** Time of the duke.task **/
     protected LocalTime atTime;
 
     private Event(String taskName, String taskDateTime) throws DukeException {
@@ -21,11 +21,11 @@ public class Event extends Task {
     }
 
     /**
-     * Creates task.Event task
+     * Creates duke.task.Event duke.task
      *
-     * @param taskDescription description of the task
-     * @return task.Event task
-     * @throws DukeException if the format of the task description is wrong
+     * @param taskDescription description of the duke.task
+     * @return duke.task.Event duke.task
+     * @throws DukeException if the format of the duke.task description is wrong
      */
     public static Event create(String taskDescription) throws DukeException {
         if (!taskDescription.contains("/at")) {
@@ -48,7 +48,7 @@ public class Event extends Task {
      * Stores them into the LocalDate and LocalTime variable
      *
      * @param taskDateTime the string representation of the time and date
-     * @throws DukeException if the format of the task date/time is wrong
+     * @throws DukeException if the format of the duke.task date/time is wrong
      */
     private void parseTime(String taskDateTime) throws DukeException {
 
@@ -72,9 +72,9 @@ public class Event extends Task {
 
 
     /**
-     * return the summarised form of the task
+     * return the summarised form of the duke.task
      *
-     * @return String format of the summarised details of the task
+     * @return String format of the summarised details of the duke.task
      */
     @Override
     public String toString() {
@@ -90,9 +90,9 @@ public class Event extends Task {
 
 
     /**
-     * return the summarised form of the task in the format to be saved
+     * return the summarised form of the duke.task in the format to be saved
      *
-     * @return String format of the summarised details of the task to be saved
+     * @return String format of the summarised details of the duke.task to be saved
      */
     @Override
     public String safeFileFormat() {

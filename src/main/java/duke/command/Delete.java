@@ -1,7 +1,7 @@
-package command;
+package duke.command;
 
 import duke.DukeException;
-import task.TaskList;
+import duke.task.TaskList;
 
 public class Delete extends Instruction {
 

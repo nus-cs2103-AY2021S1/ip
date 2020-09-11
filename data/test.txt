@@ -1,8 +1,4 @@
-T | 1 | sell book                                              
-T | 1 | drink dinner                                              
-T | 0 | study                                        
-T | 1 | jump book                                     
-T | 1 | read book                
-T | 0 | buy book              
-T | 1 | eat dinner    
-T | 0 | read book  
+T | 1 | readbook   
+T | 1 | buybook   
+T | 1 | burn book 3  
+T | 1 | burn book 
