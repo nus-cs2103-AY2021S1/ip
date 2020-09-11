@@ -12,8 +12,8 @@ public class TaskListTest {
     public void testGetNumTask(){
         assertEquals(0, new TaskList().getNumTasks());
         List<Task> listOfTask = new ArrayList<>();
-        listOfTask.add(new Todo("play"));
-        listOfTask.add(new Todo("study"));
+        listOfTask.add(new Todo("play", Optional.empty()));
+        listOfTask.add(new Todo("study", Optional.empty()));
         assertEquals(2, new TaskList(listOfTask).getNumTasks());
     }
 
@@ -22,7 +22,7 @@ public class TaskListTest {
         class SimpleTask extends Task {
             LocalDate date = LocalDate.parse("2020-08-08");
             SimpleTask(){
-                super("test");
+                super("test", Optional.empty());
             }
             @Override
             public Optional<LocalDate> getDate(){
@@ -40,7 +40,7 @@ public class TaskListTest {
         class SimpleTask extends Task {
             LocalDate date = LocalDate.parse("2020-08-08");
             SimpleTask(){
-                super("test");
+                super("test", Optional.empty());
             }
             @Override
             public Optional<LocalDate> getDate(){
