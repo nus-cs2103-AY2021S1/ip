@@ -8,16 +8,16 @@ import java.util.Date;
 import duke.command.AddCommand;
 import duke.command.ByeCommand;
 import duke.command.Command;
-import duke.command.DeadlineDateEdit;
 import duke.command.DeleteCommand;
-import duke.command.DescriptionEdit;
 import duke.command.DoneCommand;
 import duke.command.EditCommand;
 import duke.command.ErrorCommand;
-import duke.command.EventDateEdit;
-import duke.command.EventDateType;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.edit.DeadlineDateEdit;
+import duke.edit.DescriptionEdit;
+import duke.edit.EventDateEdit;
+import duke.edit.EventDateType;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -37,7 +37,6 @@ public class Parser {
         input = input.strip();
         String[] split = input.split("\\s+", 2); // this should contain at least "", even when input is empty
         assert split.length >= 1;
-
         String command = split[0];
         String args = split.length == 2 ? split[1] : "";
 
@@ -55,16 +54,14 @@ public class Parser {
                 int taskNumber = parseTaskNumber(args, "you want to remove", "delete 1");
                 return new DeleteCommand(taskNumber);
             } else if (command.equals("todo")) {
-                if (args.isEmpty()) {
-                    return new ErrorCommand("Couldn't add todo! The description of a todo cannot be empty.");
-                }
+                ensureArgsPresent(args, "Couldn't add todo! The description of a todo cannot be empty.");
                 return new AddCommand(new Task(args));
             } else if (command.equals("deadline")) {
                 return new AddCommand(parseDeadline(args));
             } else if (command.equals("event")) {
                 return new AddCommand(parseEvent(args));
             } else if (command.equals("find")) {
-                ensureArgsPresent(args, "what phrase you would like to search for");
+                ensureArgsPresent(args, "I need to know what phrase you would like to search for!");
                 return new FindCommand(args);
             } else if (command.equals("edit")) {
                 return parseEditCommand(args);
@@ -88,7 +85,7 @@ public class Parser {
 
     private static void ensureArgsPresent(String args, String errorString) throws DukeParsingException {
         if (args.isBlank()) {
-            throw new DukeParsingException("I need to know " + errorString + "!");
+            throw new DukeParsingException(errorString);
         }
     }
 
@@ -106,7 +103,7 @@ public class Parser {
         // TODO: implement multiple edits at once eg. edit 1 /start <start> /end <end>
         String[] argsSplit;
         try {
-            argsSplit = splitAround(args, "\\s+/((start)|(end)|(date)|(description))\\s+");
+            argsSplit = splitAround(args, "\\s+/((start)|(end)|(date)|(description))\\s+"); // /start, /end or /date
         } catch (DukeParsingException e) {
             throw new DukeParsingException("Couldn't edit item. To edit an item, talk to me using the format:\n"
                     + "edit <task number> <what to edit> <edited content>");
@@ -114,18 +111,18 @@ public class Parser {
         int taskNumber = parseTaskNumber(argsSplit[0], "you want to edit", "edit 1 /description <new description>");
         String content = argsSplit[1];
         if (args.contains("/start") || args.contains("/end") || args.contains("/date")) {
-            ensureArgsPresent(content, "the new date");
+            ensureArgsPresent(content, "I need to know the new date!");
             Date newDate = parseDate(content);
             if (args.contains("/start")) {
-                return new EditCommand(taskNumber, new EventDateEdit(newDate, EventDateType.START));
+                return new EditCommand<>(taskNumber, new EventDateEdit(newDate, EventDateType.START));
             } else if (args.contains("/end")) {
-                return new EditCommand(taskNumber, new EventDateEdit(newDate, EventDateType.END));
+                return new EditCommand<>(taskNumber, new EventDateEdit(newDate, EventDateType.END));
             } else if (args.contains("/date")) {
-                return new EditCommand(taskNumber, new DeadlineDateEdit(newDate));
+                return new EditCommand<>(taskNumber, new DeadlineDateEdit(newDate));
             }
         } else if (args.contains("/description")) {
-            ensureArgsPresent(content, "the new task description");
-            return new EditCommand(taskNumber, new DescriptionEdit(content));
+            ensureArgsPresent(content, "I need to know the new task description!");
+            return new EditCommand<>(taskNumber, new DescriptionEdit(content));
         }
 
         throw new DukeParsingException("You need to tell me what you want to edit!"); // TODO better help message
@@ -180,7 +177,7 @@ public class Parser {
         String[] argSplit = string.split(pattern, splitSize);
 
         if (argSplit.length != splitSize) {
-            throw new DukeParsingException("");
+            throw new DukeParsingException(""); // TODO: write displayable error message, else throw another error type
         }
 
         for (String s : argSplit) {
