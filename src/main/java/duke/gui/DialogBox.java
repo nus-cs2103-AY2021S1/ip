@@ -7,11 +7,16 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
@@ -39,10 +44,14 @@ public class DialogBox extends HBox {
 
         dialog.setText(text);
         displayCircle.setFill(new ImagePattern(img));
+        this.setBackground(new Background(new BackgroundFill(Color.YELLOW, new CornerRadii(50),
+                new Insets(20, 0, 20, 0))));
 
     }
 
     private void flip() {
+        this.setBackground(new Background(new BackgroundFill(Color.TURQUOISE,
+                new CornerRadii(50), new Insets(10, 0, 20, 0))));
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
@@ -58,6 +67,4 @@ public class DialogBox extends HBox {
         db.flip();
         return db;
     }
-
-
 }

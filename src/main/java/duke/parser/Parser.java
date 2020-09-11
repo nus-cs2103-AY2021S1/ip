@@ -70,7 +70,6 @@ public class Parser {
      */
     public String listen(String response) {
         try {
-            String date;
             int taskIndex;
             switch(keyword(response)) {
             case BYE:
