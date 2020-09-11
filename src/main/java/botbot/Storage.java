@@ -38,6 +38,7 @@ public class Storage {
     List<Task> load() {
         File file = new File(filePath);
         file.getParentFile().mkdirs();
+        assert file.getParentFile().isDirectory() : "Parent directory for data file not created";
         if (!file.isFile()) {
             try {
                 file.createNewFile();
@@ -65,22 +66,27 @@ public class Storage {
                 String data = sc.nextLine();
                 String[] dataArr = data.split("\\|");
                 char taskType = dataArr[0].charAt(0);
+                assert (dataArr[1].equals("1") || dataArr[1].equals("0")) : "Completion status not 1 or 0";
                 boolean isDone = dataArr[1].equals("1");
                 String description = dataArr[2];
                 if (taskType == Todo.TYPE_CODE) {
                     list.add(new Todo(description, isDone));
                 } else if (taskType == Deadline.TYPE_CODE) {
                     String by = dataArr[3];
+                    assert by != null : "Deadline not provided for deadline task";
                     list.add(new Deadline(description, isDone, by));
                 } else if (taskType == Event.TYPE_CODE) {
                     String at = dataArr[3];
+                    assert at != null : "Time not provided for event";
                     list.add(new Event(description, isDone, at));
+                } else {
+                    assert false : "Task type not D, E or T";
                 }
             }
             sc.close();
             return list;
         } catch (FileNotFoundException e) {
-            System.out.println("    oops! your data file is missing!");
+            System.out.println("oops! your data file is missing!");
             return null;
         }
     }
@@ -102,6 +108,8 @@ public class Storage {
                     temp.add(task.getBy());
                 } else if (task instanceof Event) {
                     temp.add(task.getAt());
+                } else {
+                    assert task instanceof Todo : "Invalid task type";
                 }
                 String data = String.join("|", temp);
                 fw.write(data + "\n");

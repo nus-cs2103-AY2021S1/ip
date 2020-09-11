@@ -37,8 +37,11 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        assert dialog.getText() != null : "Empty dialog box text";
         displayPicture.setImage(img);
+        assert displayPicture.getImage() != null : "Display picture not set";
         displayPicture.setClip(new Circle(30, 30, 30));
+        assert displayPicture.getClip() != null : "Display picture clip not set";
     }
 
     /**
