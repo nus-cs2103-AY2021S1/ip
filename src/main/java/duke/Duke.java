@@ -8,7 +8,6 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
@@ -122,7 +121,7 @@ public class Duke extends Application {
         // Start up message
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(
                 new Label("Hello! I'm Duke. \nWhat can I do for you?\n"
-                        + "Enter 'help' to see the list of commands"), new ImageView(duke)));
+                        + "Enter 'help' to see the list of commands"), duke));
     }
 
     /**
@@ -148,8 +147,8 @@ public class Duke extends Application {
             Label userText = new Label(input);
             Label dukeText = new Label(getResponse(input));
             dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(userText, new ImageView(user)),
-                    DialogBox.getDukeDialog(dukeText, new ImageView(duke))
+                    DialogBox.getUserDialog(userText, user),
+                    DialogBox.getDukeDialog(dukeText, duke)
             );
         }
         userInput.clear();
