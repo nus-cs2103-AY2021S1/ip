@@ -1,0 +1,22 @@
+todo eat cake
+event friend's birthday /at 2020-08-23
+deadline CS2103 /by Aug 10
+deadline CS2103 /by 2020-08-20
+hello
+todo
+event description-less event :(
+deadline CS2103 /by
+testy test
+list
+done 1
+done 2
+list
+delete 4
+delete 3
+list
+todo eat less cake
+find cake
+find friend's birthday
+find
+find no match
+bye
