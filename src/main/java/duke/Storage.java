@@ -71,7 +71,7 @@ public class Storage {
 
     /**
      * Reads the hard disk and converts it into an arraylist.
-     * @return ArrayList(Task)
+     * @return ArrayList(Task) the arraylist representation of the hard disk
      * @throws Exception
      */
     ArrayList<Task> toArrayList() throws Exception {
