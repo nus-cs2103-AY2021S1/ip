@@ -6,17 +6,17 @@ import com.Duke.TaskManager.UI;
 
 public class DoneCommand extends Command{
 
-    private final TaskList ls;
+    private final TaskList taskList;
     private final int taskIndex;
 
-    public DoneCommand(TaskList ls, int taskIndex) {
-        this.ls = ls;
+    public DoneCommand(TaskList taskList, int taskIndex) {
+        this.taskList = taskList;
         this.taskIndex = taskIndex;
     }
 
     public String execute(){
         try{
-            return UI.doneCalled(ls,taskIndex);
+            return UI.doneCalled(taskList,taskIndex);
         }catch (DukeException e){
             return UI.printError(e.toString());
         }catch(Exception e){

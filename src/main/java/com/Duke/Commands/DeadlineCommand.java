@@ -9,11 +9,11 @@ import java.time.format.DateTimeParseException;
 
 public class DeadlineCommand extends Command {
     private final String[] splitList;
-    private final TaskList ls;
+    private final TaskList taskList;
 
-    public DeadlineCommand(String[] splitList, TaskList ls) {
+    public DeadlineCommand(String[] splitList, TaskList taskList) {
         this.splitList = splitList;
-        this.ls = ls;
+        this.taskList = taskList;
     }
 
 
@@ -21,7 +21,7 @@ public class DeadlineCommand extends Command {
         try {
             String[] splitList2 = splitList[1].split("/by ", 2);
             Deadline deadline = new Deadline(splitList2[0], LocalDate.parse(splitList2[1]), false);
-            return UI.deadlineCalled(ls, deadline);
+            return UI.deadlineCalled(taskList, deadline);
         } catch (DateTimeParseException e) {
             return UI.printError("     \u2639 OOPS!!! The deadline is not of the proper format, make sure you enter it as YYYY-MM-dd");
         } catch (Exception e) {

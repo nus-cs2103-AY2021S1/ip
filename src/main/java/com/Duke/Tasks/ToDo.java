@@ -2,12 +2,12 @@ package com.Duke.Tasks;
 
 import com.Duke.TaskManager.DukeException;
 
-/*
+/**
  * This Class encapsulates the command To Do
  */
 public final class ToDo extends Task{
 
-    /*
+    /**
     * Constructor for the To Do class
     * @param task Represents the description of the task
     * @param isDone Represents whether the task is done
@@ -16,7 +16,7 @@ public final class ToDo extends Task{
         super(task,isDone);
     }
 
-    /*
+    /**
      * Method to create the done version of this task
      * @return Returns a To Do with the isDone state as true
      */
@@ -25,7 +25,7 @@ public final class ToDo extends Task{
         return new ToDo(this.task, true);
     }
 
-    /*
+    /**
      * Method to Create the text format that is Saved
      */
     @Override

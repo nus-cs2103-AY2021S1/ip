@@ -6,15 +6,15 @@ import com.Duke.TaskManager.UI;
 
 public class ListCommand extends Command{
 
-    private final TaskList ls;
+    private final TaskList taskList;
 
-    public ListCommand(TaskList ls) {
-        this.ls = ls;
+    public ListCommand(TaskList taskList) {
+        this.taskList = taskList;
     }
 
     public String execute(){
         try {
-            return UI.listCalled(ls);
+            return UI.listCalled(taskList);
         }catch(DukeException e){
             return UI.printError(e.toString());
         }

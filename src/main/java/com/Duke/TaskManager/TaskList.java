@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    //This class manages the list of Tasks that the user has added
     public final List<Task> ls;
 
     public TaskList(List<Task> ls) {
@@ -18,6 +17,7 @@ public class TaskList {
     }
 
     public void setDone(int task) throws DukeException {
+        assert task > 0 : "Invalid task entered";
         if(task>ls.size()){
             throw new DukeException("You don't have that many tasks");
         }else {

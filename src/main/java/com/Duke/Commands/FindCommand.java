@@ -5,18 +5,18 @@ import com.Duke.TaskManager.TaskList;
 import com.Duke.TaskManager.UI;
 
 public class FindCommand extends Command{
-    private final TaskList ls;
+    private final TaskList taskList;
     private final String hint;
 
-    public FindCommand(TaskList ls, String hint) {
-        this.ls = ls;
+    public FindCommand(TaskList taskList, String hint) {
+        this.taskList = taskList;
         this.hint = hint;
     }
 
     @Override
     public String execute() {
         try {
-            return UI.findCalled(ls, hint);
+            return UI.findCalled(taskList, hint);
         }catch (DukeException e){
             return UI.printError(e.toString());
         }

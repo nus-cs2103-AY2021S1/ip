@@ -2,14 +2,14 @@ package com.Duke.Tasks;
 
 import com.Duke.TaskManager.DukeException;
 
-/*
+/**
  * This Class encapsulates a unnamed task
  */
 public class Task {
     protected final String task;
     protected final boolean isDone;
 
-    /*
+    /**
      * Constructor for the To Do class
      * @param task Represents the description of the task
      * @param isDone Represents whether the task is done
@@ -25,7 +25,7 @@ public class Task {
     }
 
 
-    /*
+    /**
      * Method to Create the text format that is Saved
      */
     public String toSaveFormat(){
@@ -38,7 +38,7 @@ public class Task {
         return this.isDone;
     }
 
-    /*
+    /**
      * Method to create the done version of this task
      * @return Returns a task with the isDone state as true
      */

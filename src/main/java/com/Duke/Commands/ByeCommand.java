@@ -6,10 +6,10 @@ import com.Duke.TaskManager.UI;
 
 public class ByeCommand extends Command {
 
-    private final TaskList ls;
+    private final TaskList taskList;
 
-    public ByeCommand(TaskList ls) {
-        this.ls = ls;
+    public ByeCommand(TaskList taskList) {
+        this.taskList = taskList;
     }
 
     @Override
@@ -19,7 +19,7 @@ public class ByeCommand extends Command {
 
     public String execute() {
         try {
-            return UI.byeCalled(ls);
+            return UI.byeCalled(taskList);
         } catch (DukeException e) {
             return UI.printError(e.toString());
         }

@@ -5,18 +5,18 @@ import com.Duke.TaskManager.TaskList;
 import com.Duke.TaskManager.UI;
 
 public class DeleteCommand extends Command{
-    private final TaskList ls;
+    private final TaskList taskList;
     private final int taskIndex;
 
-    public DeleteCommand(TaskList ls, int taskIndex) {
-        this.ls = ls;
+    public DeleteCommand(TaskList taskList, int taskIndex) {
+        this.taskList = taskList;
         this.taskIndex = taskIndex;
     }
 
     @Override
     public String execute() {
         try{
-            return UI.deleteCalled(ls, taskIndex);
+            return UI.deleteCalled(taskList, taskIndex);
         }catch(DukeException e){
             return UI.printError(e.toString());
         }

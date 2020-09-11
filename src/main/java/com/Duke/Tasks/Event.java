@@ -5,14 +5,14 @@ import com.Duke.TaskManager.DukeException;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
-/*
+/**
  * This Class encapsulates the command Event
  */
 public class Event extends Task{
     private final LocalTime start;
     private final LocalTime end;
 
-    /*
+    /**
      * Constructor for Event class
      * @param task Represents the description of the task
      * @param isDone Represents whether the task is done
@@ -25,7 +25,7 @@ public class Event extends Task{
         this.end = end;
     }
 
-    /*
+    /**
      * Method to Create the text format that is Saved
      */
     @Override
@@ -39,7 +39,7 @@ public class Event extends Task{
         return "(at: " + start.format(DateTimeFormatter.ofPattern("HH:mm")) + " - " + end.format(DateTimeFormatter.ofPattern("HH:mm")) + ")";
     }
 
-    /*
+    /**
      * Method to create the done version of this event
      * @return Returns a Event with the isDone state as true
      */

@@ -10,11 +10,11 @@ import java.time.format.DateTimeParseException;
 public class EventCommand extends Command{
 
     private final String[] splitList;
-    private final TaskList ls;
+    private final TaskList taskList;
 
-    public EventCommand(String[] splitlist, TaskList ls) {
+    public EventCommand(String[] splitlist, TaskList taskList) {
         this.splitList = splitlist;
-        this.ls = ls;
+        this.taskList = taskList;
     }
 
 
@@ -24,7 +24,7 @@ public class EventCommand extends Command{
             String[] splitList2 = this.splitList[1].split("/at ", 2);
             String[] splitList3 = splitList2[1].split("-", 2);
             Event event = new Event(splitList2[0], LocalTime.parse(splitList3[0]), LocalTime.parse(splitList3[1]), false);
-            return UI.eventCalled(ls,event);
+            return UI.eventCalled(taskList,event);
         }catch(DateTimeParseException e){
             return UI.printError("     \u2639 OOPS!!! The format of your start or end time is not correct, format it as HH:mm");
         } catch(Exception e){
