@@ -33,6 +33,8 @@ public class Parser {
             return parseByeCommand(description);
         case "find":
             return parseFindCommand(description);
+        case "fixed":
+            return parseFixedDurationTaskCommand(description);
         default:
             throw new IllegalArgumentException("Invalid input.");
         }
@@ -195,5 +197,20 @@ public class Parser {
             return new FindCommand(description);
         }
     }
+
+    public static FixedDurationTaskCommand parseFixedDurationTaskCommand(String description) {
+        String[] descriptionArray = description.split("/for");
+        String taskName = descriptionArray[0];
+        if (taskName == null) {
+            throw new IllegalArgumentException("The description of a task cannot be empty. ");
+        } else if (descriptionArray.length == 1) {
+            throw new IllegalArgumentException("Invalid input, no duration stated. ");
+        } else if (descriptionArray.length > 2) {
+            throw new IllegalArgumentException("Invalid input, multiple durations stated. ");
+        } else {
+            return new FixedDurationTaskCommand(taskName, descriptionArray[1]);
+        }
+    }
 }
+
 

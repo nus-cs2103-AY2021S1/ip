@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 public class Command {
     private String taskName;
     private LocalDateTime taskDateTime;
+    private String duration;
 
     /**
      * Constructor of Commands
@@ -27,6 +28,11 @@ public class Command {
         this.taskDateTime = taskDateTime;
     }
 
+    public Command(String taskName, String duration) {
+        this.taskName = taskName;
+        this.duration = duration;
+    }
+
     /**
      * getter for the name of the tasks
      *
@@ -45,6 +51,9 @@ public class Command {
         return this.taskDateTime;
     }
 
+    public String getDuration() {
+        return this.duration;
+    }
     /**
      * performs actions based on the tasks in the tasklist
      *
