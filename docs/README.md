@@ -31,6 +31,7 @@ Format: `todo TASK_NAME`
 Example of usage: 
 
 * `todo sampleTask` creates the `sampleTask` in the task list.  
+<br />
 ![todoImage](asset/todo.png)  
 
 ***
@@ -63,11 +64,11 @@ Example of usage:
 
 * `deadline sampleDeadline /by 2020-11-12` creates the `sampleDeadline` in the task list.
 * The `sampleDeadline` is to be done before __Nov 12, 2020__.  
+<br />
 ![deadlineImage](asset/deadline.png)  
-   
-\
-\
-   
+
+***
+
 ### `List` - Display the list of tasks
 
 Generates the entire list of tasks stored in the app.
@@ -82,10 +83,10 @@ Format: `list`
 Example of usage: 
 
 * `list` returns all tasks' information presented nicely.  
+<br />
 ![listImage](asset/list.png)  
    
-\
-\
+***
    
 ### `Done` - Complete a task
 
@@ -98,10 +99,10 @@ Format: `done TASK_INDEX`
 Example of usage: 
 
 * `done 1` updates the status of the first task as "done", represented as `✓`.  
+<br />
 ![doneImage](asset/done.png)  
    
-\
-\
+***
    
 ### `Delete` - Delete a task
 
@@ -113,10 +114,10 @@ Format: `delete TASK_INDEX`
 Example of usage: 
 
 * `delete 1` delete the first task from the list.  
+<br />
 ![deleteImage](asset/delete.png)  
    
-\
-\
+***
    
 ### `Find` - Search for relevant tasks
 
@@ -130,10 +131,10 @@ Example of usage:
 
 * `find sample` returns all tasks whose name contain the word `'sample'`.
 * Here the outputs are `sampleEvent` and `sampleDeadline`.  
+<br />
 ![findImage](asset/find.png)  
    
-\
-\
+***
    
 ### `Reminder` - Get notified of upcoming due
 
@@ -147,4 +148,5 @@ Example of usage:
 * `remind 1` returns the earliest 1 task the user hasn't completed.
 * If the task's scheduled time has past, the returned task will also indicate it.
 * Here the earliest task is `sampleEvet`, which should be done at _March 12, 2020_. The output also shows `[Schedule past!]` to remind user this event has past and not been done.  
+<br />
 ![remindImage](asset/remind.png)
