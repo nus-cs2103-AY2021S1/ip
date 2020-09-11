@@ -8,6 +8,8 @@ import ui.Ui;
  */
 public class Cait {
 
+    private static String fileName = "cait_data.txt";
+
     /** Storage for storing user's data */
     private Storage storage;
 
@@ -24,7 +26,7 @@ public class Cait {
      * Constructs a new Cait object.
      */
     public Cait() {
-        storage = new Storage("cait_data.txt");
+        storage = new Storage(fileName);
         tasks = new TaskList(storage);
         parser = new Parser(tasks);
         ui = new Ui(parser);
@@ -63,7 +65,7 @@ public class Cait {
      * Creates a new Cait object and starts running.
      */
     public static void main(String[] args) {
-        new Cait("cait_data.txt").run();
+        new Cait(fileName).run();
     }
 
 }
