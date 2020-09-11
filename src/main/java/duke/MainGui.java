@@ -23,6 +23,7 @@ public class MainGui extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(hal9000); // using controller!! Important part
+            fxmlLoader.<MainWindow>getController().welcomeUser();
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

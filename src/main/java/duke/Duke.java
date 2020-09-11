@@ -30,6 +30,8 @@ public class Duke {
             outputMsg = getTasks().deleteTask(Parser.getIndex(input));
         } else if (Parser.isFind(input)) {
             outputMsg = getTasks().findTasksWith(Parser.getKeyword(input));
+        } else if (Parser.isHelp(input)) {
+            outputMsg = Helper.getHelp();
         } else {
             try {
                 Task taskInput;
@@ -44,13 +46,11 @@ public class Duke {
 
     public String getWelcomeMessage() {
         String logo =
-                "   __ _____   __  ___  ___  ___  ___\n"
-                        + "  / // / _ | / / / _ \\/ _ \\/ _ \\/ _ \\\n"
-                        + " / _  / __ |/ /__\\_, / // / // / // /\n"
-                        + "/_//_/_/ |_/____/___/\\___/\\___/\\___/\n"
-                        + "Hello! I'm Hal9000\nWhat can I do for you?\n";
+                "Hello! I'm Hal9000\nWhat can I do for you?\n"
+                + "Enter \"help\" for instructions\n"
+                + "enter \"list\" to see sample data / your existing tasks";
         // Intro message
-        return Formatter.formatResponse(logo);
+        return logo;
     }
 
     /**

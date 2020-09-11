@@ -14,7 +14,7 @@ public class Parser {
         } else if (inputParts[0].compareTo("event") == 0) {
             return TaskType.Event;
         } else {
-            throw new UndefinedWordException("You're not making any sense bro.\n");
+            throw new UndefinedWordException("Command undefined! Enter \"help\" to view our Help page\n");
         }
     }
 
@@ -57,20 +57,20 @@ public class Parser {
         if (type == TaskType.ToDo) {
             parts = input.split(" ");
             if (parts.length <= 1) {
-                throw new NoDescriptionException("☹ OOPS!!! The description of a todo cannot be empty.\n");
+                throw new NoDescriptionException("The description of a todo cannot be empty.\n");
             } // if not, chillax and continue
             String name = extractTask(parts);
             return new ToDo(name);
         } else if (type == TaskType.Deadline) {
             if (input.split("/by").length <= 1) {
-                throw new NoDescriptionException("☹ OOPS!!! The description of a deadline cannot be empty.\n");
+                throw new NoDescriptionException("The description of a deadline cannot be empty.\n");
             } // if not, chillax and continue
             String name = extractTask(input.split("/by")[0].split(" "));
             String deadline = extractDetails(input.split("/by")[1].split(" "));
             return new Deadline(name, deadline);
         } else {
             if (input.split("/at").length <= 1) {
-                throw new NoDescriptionException("☹ OOPS!!! The description of an event cannot be empty.\n");
+                throw new NoDescriptionException("The description of an event cannot be empty.\n");
             } // if not, chillax and continue
             String name = extractTask(input.split("/at")[0].split(" "));
             String details = extractDetails(input.split("/at")[1].split(" "));
@@ -105,6 +105,11 @@ public class Parser {
     public static boolean isFind(String input) {
         return input.split(" ")[0].compareTo("find") == 0;
     }
+
+    public static boolean isHelp(String input) {
+        return input.compareTo("help") == 0;
+    }
+
     public static int getIndex(String input) {
         return Integer.parseInt(input.split(" ")[1]) - 1;
     }
