@@ -5,15 +5,7 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import duke.command.AddCommand;
-import duke.command.Command;
-import duke.command.CommandType;
-import duke.command.DeleteCommand;
-import duke.command.DoneCommand;
-import duke.command.ExitCommand;
-import duke.command.ListCommand;
-import duke.command.ListDateCommand;
-import duke.command.SearchCommand;
+import duke.command.*;
 import duke.handle.CommandNotFoundException;
 import duke.task.Deadline;
 import duke.task.DoWithinPeriodTask;
@@ -43,6 +35,8 @@ public class Parser {
         command = command.strip();
         if (command.equals("bye")) {
             parsedCommand = new ExitCommand();
+        }  else if (command.equals("help")) {
+            parsedCommand = new HelpCommand();
         } else if (command.equals("list")) {
             parsedCommand = new ListCommand();
         } else if (command.split(" ")[0].equals("list")) {
@@ -62,7 +56,8 @@ public class Parser {
         } else if (command.split(" ")[0].equals("find")) {
             parsedCommand = evaluateSearchCommand(command);
         } else {
-            throw new CommandNotFoundException("The command is not found");
+            throw new CommandNotFoundException("It seems that the command is not found\n"
+                    + "Type help to see the list of available commands");
         }
         return parsedCommand;
     }
@@ -82,13 +77,15 @@ public class Parser {
             return evaluateAddPeriodTask(command);
         } else if (commandType == CommandType.ADD_TODO) {
             if (command.strip().split(" ").length == 1) {
-                throw new CommandNotFoundException("The description for todo should not be empty");
+                throw new CommandNotFoundException("The description for todo should not be empty\n"
+                        + "Try adding some description to the task");
             }
 
             return new AddCommand(new ToDo(command.split("\\s+", 2)[1]));
 
         } else if (command.split(" ").length == 1) {
-            throw new CommandNotFoundException("The description should not be empty");
+            throw new CommandNotFoundException("The description should not be empty"
+                    + "Try adding some description to the task");
 
         } else if (command.split(" ")[0].equals("event") || command.split(" ")[0].equals("deadline")) {
             String content = (command.split("\\s+", 2)[1]);

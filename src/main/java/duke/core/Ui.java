@@ -12,11 +12,11 @@ import duke.task.Task;
  * the result of the execution of the command.
  */
 public class Ui {
-    public static final String INDENTATION = "    ";
-    public static final String DIVIDER = "_______________________________";
+    public static final String INDENTATION = "";
+    public static final String DIVIDER = "____________________________";
     public static final String GREETING = "Hello! I am Smith\n" + "What can I do for you?";
     public static final String EXITMESSAGE = "Bye. Hope to see you again soon!";
-    public static final String LOADMESSAGE = "Load the local record.";
+    public static final String LOADMESSAGE = "Loading the local record";
     public static final String LOGO = " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
             + "| | | | | | | |/ / _ \\\n"
@@ -69,17 +69,21 @@ public class Ui {
 
     /**
      * Shows the greeting information.
+     *
+     * @return The corresponding message.
      */
     public String showGreeting() {
         //System.out.println("Hello from\n" + logo);
         //out.println(makeBlock(logo + "\n" + GREETING));
-        return makeBlock(LOGO + "\n" + GREETING);
+        return makeBlock(LOGO + "\n" + GREETING + "\n"
+                + "To see the list of available commands, type help");
     }
 
     /**
      * Handles the possible problems by showing the corresponding information to the user.
      *
      * @param exception The exception corresponding to the problem.
+     * @return The corresponding message.
      */
     public String handleException(Exception exception) {
         //out.println(makeBlock(exception.getMessage()));
@@ -91,6 +95,7 @@ public class Ui {
      *
      * @param task The task to be added.
      * @param size The number of tasks after the execution.
+     * @return The corresponding message.
      */
     public String getAddMessage(Task task, int size) {
         String result = "Got it. I have added this task:\n  "
@@ -102,9 +107,44 @@ public class Ui {
     }
 
     /**
+     * Shows the help message with the list of available commands.
+     *
+     * @return The help message with the list of available commands.
+     */
+    public String getHelpMessage() {
+        String result = "Here is the list of commands available\n"
+                + "Note that the name in [] indicates that the argument is optional\n"
+                + "1. list [yyyy-MM-dd]\n"
+                + "If the date argument is empty, list out all the tasks\n"
+                + "If the date argument is not empty, list out the tasks at the specified time\n"
+                + "example: list 2014-12-07\n"
+                + "2. todo description\n"
+                + "Add a task to do\n"
+                + "example: todo something\n"
+                + "3. deadline description /by yyyy-MM-dd\n"
+                + "Add a deadline by sometime\n"
+                + "example: deadline something /by 2014-12-07\n"
+                + "4. event description /at yyyy-MM-dd\n"
+                + "Add an event at sometime\n"
+                + "example: event something /at 2014-12-07\n"
+                + "5. periodTask description /start yyyy-MM-dd /end yyyy-MM-dd\n"
+                + "Add a task that needs to be completed from the start time to the end time\n"
+                + "example: periodTask something /start 2014-12-07 /end 2014-12-08\n"
+                + "6. find key\n"
+                + "Search for the tasks with the description that contains the key and list the tasks\n"
+                + "example: find description\n"
+                + "7. help\n"
+                + "List the available commands\n"
+                + "8. bye\n"
+                + "Exit\n";
+        return result;
+    }
+
+    /**
      * Shows the result of the executing the list command.
      *
      * @param taskList The task list.
+     * @return The corresponding message.
      */
     public String getTaskListMessage(TaskList taskList) {
         //out.println(makeBlock(taskList.toString()));
@@ -116,6 +156,7 @@ public class Ui {
      *
      * @param task The task to be marked as completed.
      * @param count The count of the task to be completed.
+     * @return The corresponding message.
      */
     public String getDoneMessage(Task task, int count) {
         return makeBlock("Nice! I have marked this task as done:\n"
@@ -129,6 +170,7 @@ public class Ui {
      * @param task The task to be deleted.
      * @param count The count of the task.
      * @param size The number of tasks in the task list.
+     * @return The corresponding message.
      */
     public String getDeleteMessage(Task task, int count, int size) {
         /*
@@ -150,6 +192,8 @@ public class Ui {
 
     /**
      * Shows the result of the executing the exit command.
+     *
+     * @return The corresponding message.
      */
     public String showExit() {
         //out.println(makeBlock(EXITMESSAGE));

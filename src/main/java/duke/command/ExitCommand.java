@@ -1,9 +1,6 @@
 package duke.command;
 
-import duke.core.Result;
-import duke.core.Storage;
-import duke.core.TaskList;
-import duke.core.Ui;
+import duke.core.*;
 
 /**
  * The ExitCommand class represents a command that exits the program.
@@ -20,7 +17,7 @@ public class ExitCommand extends Command {
      */
     @Override
     public Result excecute(TaskList taskList, Ui ui, Storage storage) {
-        return new Result(ui.showExit(), this.isContinuing());
+        return new Result(ui.showExit(), this.isContinuing(), MessageType.COMMAND_FOUND_MESSAGE);
     }
 
     /**

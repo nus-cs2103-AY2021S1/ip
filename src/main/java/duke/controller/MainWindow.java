@@ -5,6 +5,7 @@ import java.io.IOException;
 
 import duke.Duke;
 import duke.control.DialogueBox;
+import duke.core.MessageType;
 import duke.core.Result;
 import duke.handle.LoadingException;
 import javafx.animation.PauseTransition;
@@ -53,24 +54,24 @@ public class MainWindow extends AnchorPane {
         try {
             duke = new Duke();
             dialogContainer.getChildren().addAll(
-                    DialogueBox.getDukeDialogueBox(duke.getUi().showLoad(), dukeImage)
+                    DialogueBox.getDukeDialogueBox(duke.getUi().showLoad(), dukeImage, MessageType.LOADING_MESSAGE)
             );
             this.stage = stage;
         } catch (FileNotFoundException fileNotFoundException) {
             dialogContainer.getChildren().addAll(
-                    DialogueBox.getDukeDialogueBox(fileNotFoundException.getMessage(), dukeImage)
+                    DialogueBox.getDukeDialogueBox(fileNotFoundException.getMessage(), dukeImage, MessageType.HANDLE_MESSAGE)
             );
         } catch (LoadingException loadingException) {
             dialogContainer.getChildren().addAll(
-                    DialogueBox.getDukeDialogueBox(loadingException.getMessage(), dukeImage)
+                    DialogueBox.getDukeDialogueBox(loadingException.getMessage(), dukeImage, MessageType.HANDLE_MESSAGE)
             );
         } catch (IOException ioException) {
             dialogContainer.getChildren().addAll(
-                    DialogueBox.getDukeDialogueBox(ioException.getMessage(), dukeImage)
+                    DialogueBox.getDukeDialogueBox(ioException.getMessage(), dukeImage, MessageType.HANDLE_MESSAGE)
             );
         } finally {
             dialogContainer.getChildren().addAll(
-                    DialogueBox.getDukeDialogueBox(duke.getUi().showGreeting(), dukeImage)
+                    DialogueBox.getDukeDialogueBox(duke.getUi().showGreeting(), dukeImage, MessageType.GREETING_MESSAGE)
             );
         }
     }
@@ -84,8 +85,8 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         Result response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogueBox.getUserDialogueBox(input, userImage),
-                DialogueBox.getDukeDialogueBox((String) response.getMessage(), dukeImage)
+                DialogueBox.getUserDialogueBox(input, userImage, MessageType.USER_MESSAGE),
+                DialogueBox.getDukeDialogueBox((String) response.getMessage(), dukeImage, response.getMessageType())
         );
         userInput.clear();
         if (!(response.isContinuing())) {

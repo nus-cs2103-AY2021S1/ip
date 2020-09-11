@@ -3,10 +3,7 @@ package duke.command;
 import java.io.IOException;
 import java.time.LocalDate;
 
-import duke.core.Result;
-import duke.core.Storage;
-import duke.core.TaskList;
-import duke.core.Ui;
+import duke.core.*;
 import duke.handle.TaskNotFoundException;
 
 /**
@@ -32,10 +29,10 @@ public class ListDateCommand extends Command {
      * @param ui The user interface component.
      * @param storage The storage component.
      * @throws TaskNotFoundException If there is no task corresponding to the count of the task.
-     * @throws IOException If the storage process needs to be handled
+     * @throws IOException If the storage process needs to be handled.
      */
     @Override
     public Result excecute(TaskList taskList, Ui ui, Storage storage) throws TaskNotFoundException, IOException {
-        return new Result(ui.getTaskListMessage(taskList.findTaskAt(localDate)), isContinuing());
+        return new Result(ui.getTaskListMessage(taskList.findTaskAt(localDate)), isContinuing(), MessageType.COMMAND_FOUND_MESSAGE);
     }
 }
