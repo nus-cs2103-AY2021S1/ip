@@ -25,14 +25,12 @@ Format: `list`</br></br>
 
 ### Completing a task: `done`
 Marks a task, specified by the task number in the updated task list, as done.</br></br>
-Format: `done [task number]` 
-* Task number refers to the task number shown in the displayed task list.</br></br>
+Format: `done [task number]` (Task number refers to the task number shown in the displayed task list)</br></br>
 Example of usage: *done 6* </br></br>
 
 ### Deleting a task: `delete`
 Deletes a task that is specified by the task number in the updated task list. </br></br>
-Format: `delete [task number]` 
-* Task number refers to the task number shown in the displayed task list.</br></br>
+Format: `delete [task number]`  (Task number refers to the task number shown in the displayed task list) </br></br>
 Example of usage: *delete 7*</br></br>
 
 ### Finding a task by description: `find`
@@ -48,4 +46,3 @@ Example of usage: *print 2020-12-12* </br></br>
 ### Exiting the bot: `bye`
 Exits the program. </br></br>
 Format: `bye` and click on the `exit` button
-
