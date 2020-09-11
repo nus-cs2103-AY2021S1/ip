@@ -267,6 +267,10 @@ public class CommandAgent {
      * @return A String showing the response to the user with the most recent k tasks it wants.
      */
     public static String generateReminderResponse(List<String> mostRecentDues) {
+        if (mostRecentDues.size() < 1) {
+            return "Well done! you have no task to be completed recently!";
+        }
+
         StringBuilder result = new StringBuilder("Here are your most recent ");
         result.append(mostRecentDues.size()).append(" tasks that you haven't done:");
         mostRecentDues.forEach(result::append);
