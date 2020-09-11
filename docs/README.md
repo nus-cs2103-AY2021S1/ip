@@ -2,10 +2,14 @@
 
 ## Features 
 ### Adding a todo task: `todo`
-Adds a todo task to the task bot. A todo task only has a description of the task and optionally, notes for the task.</br></br>
-Format: `todo [task to be done]` </br></br>
-Optional field: `/[any notes for this task]` </br></br>
-Example of usage: *todo play games /need some rest yo* </br></br>
+Adds a todo task to the task bot. A todo task only has a description of the task and optionally, notes for the task.
+
+Format: `todo [task to be done]` 
+
+Optional field: `/[any notes for this task]` 
+
+Example of usage: *todo play games /need some rest yo* 
+
 
 ### Adding a deadline task: `deadline`
 Adds a deadline task to the task bot. A deadline task has a description of the task, deadline date and time and optionally, notes for the task.</br></br>
