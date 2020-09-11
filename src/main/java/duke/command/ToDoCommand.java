@@ -16,6 +16,8 @@ public class ToDoCommand extends Command {
     @Override
     public void execute(TaskList tasks, Ui ui) throws DukeException {
         verifyInput();
+        assert !taskName.isBlank() : "The task name should not be blank";
+
         Task task = new ToDo(taskName);
         tasks.addTask(task);
         ui.displayAddTask(task, tasks.numTasks());
@@ -24,6 +26,8 @@ public class ToDoCommand extends Command {
     @Override
     public String executeWithOutput(TaskList tasks, Ui ui) throws DukeException {
         verifyInput();
+        assert !taskName.isBlank() : "The task name should not be blank";
+
         Task task = new ToDo(taskName);
         tasks.addTask(task);
         return ui.getAddTaskResponseAsString(task, tasks.numTasks());

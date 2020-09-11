@@ -1,9 +1,10 @@
 package duke;
 
-import duke.exception.DukeException;
-
 import java.io.IOException;
 import java.util.Scanner;
+
+import duke.command.Command;
+import duke.exception.DukeException;
 
 /**
  * The main class for the Duke Chatbot which serves as the entry point for the whole program. The main business logic
@@ -38,13 +39,20 @@ public class Duke {
      * The method responsible for the main logic of the program.
      */
     public void run() {
+        assert ui != null : "Ui should not be null";
+        assert tasks != null : "tasks list should not be null";
+        assert parser != null : "parser should not be null";
+
         ui.displayGreeting();
 
         String input = sc.nextLine();
 
         while (!input.equals("bye")) {
             try {
-                parser.parse(input).execute(tasks, ui);
+                Command command = parser.parse(input);
+                assert command != null : "Parser was unable to handle input";
+
+                command.execute(tasks, ui);
             } catch (DukeException e) {
                 System.err.println(e);
             }

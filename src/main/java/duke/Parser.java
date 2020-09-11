@@ -25,7 +25,9 @@ public class Parser {
     public Command parse(String input) throws DukeException {
         String[] splitInput = input.split(" ", 2);
         String command = splitInput[0];
-        String details = splitInput.length < 2 ? null : splitInput[1];
+        assert !command.isBlank() : "The command should not be blank";
+
+        String details = (splitInput.length < 2) ? null : splitInput[1];
         String[] parsedDetails;
 
         switch (command) {

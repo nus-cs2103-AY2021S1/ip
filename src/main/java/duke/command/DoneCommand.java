@@ -14,6 +14,8 @@ public class DoneCommand extends Command {
     public void execute(TaskList tasks, Ui ui) {
         ui.displayCompleteTask();
         tasks.getTask(taskIndex).doTask();
+
+        assert tasks.getTask(taskIndex).isDone() : "This task should be marked as completed";
     }
 
     @Override
