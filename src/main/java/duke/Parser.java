@@ -53,7 +53,7 @@ public class Parser {
             case "remind":
                 return new ReminderCommand(content);
             default:
-                throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+                throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
             }
         } catch (DukeException | DateTimeParseException e) {
             throw new DukeException(e.getMessage());
@@ -111,7 +111,7 @@ public class Parser {
             LocalDate eventTime = LocalDate.parse(taskSchedule, formatter);
             return new Event(taskContentParts[2], taskIsDone, eventTime);
         default:
-            throw new DukeException("Error in parsing the task. Incorrect task type recorded in the file");
+            throw new DukeException("Error in parsing the task. Incorrect task format recorded in the file");
         }
     }
 }

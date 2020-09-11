@@ -15,7 +15,7 @@ public class Ui {
      * @return The greeting String.
      */
     public static String showGreeting() {
-        return "Hello! I'm Obi-wan!\n"
+        return "Hello! This is Obi-wan!\n"
                 + "What can I do for you Anakin?";
     }
 

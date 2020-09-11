@@ -77,7 +77,7 @@ public class TaskList {
     public TaskList markAsDone(int taskId) throws DukeException {
         Task currentTask = this.getTaskById(taskId);
         if (currentTask.isDone) {
-            throw new DukeException("☹ OOPS!!! This task is already done!");
+            throw new DukeException("OOPS!!! This task is already done!");
         }
 
         int index = taskId - 1;

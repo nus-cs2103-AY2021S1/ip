@@ -48,7 +48,8 @@ public class Storage {
             List<String> tasksInFile = Files.readAllLines(filePath, Charset.defaultCharset());
             taskList = this.loadTaskList(tasksInFile);
         } catch (IOException e) {
-            throw new DukeException("☹ OOPS!!! I/O Error" + Arrays.toString(e.getStackTrace()));
+            throw new DukeException("OOPS!!! I/O Error! Check your file property"
+                    + Arrays.toString(e.getStackTrace()));
         }
         return taskList;
     }
@@ -73,6 +74,7 @@ public class Storage {
      *
      * @param tasksInFile The list of tasks stored in the file.
      * @return A TaskList based on the tasks recorded in the file.
+     * @throws DukeException if the tasks in data file are not parsed out correctly.
      */
     public TaskList loadTaskList(List<String> tasksInFile) throws DukeException {
         List<Task> tasksLoaded = new ArrayList<>();

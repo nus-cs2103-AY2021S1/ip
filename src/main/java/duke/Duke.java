@@ -18,6 +18,8 @@ public class Duke {
      * @param filePath The path of task list data stored in the hard disk.
      */
     public Duke(String filePath) {
+        assert filePath.contains(".txt") : "The storage path must contains a valid .txt file";
+
         ui = new Ui();
         storage = new Storage(filePath);
 
@@ -47,8 +49,8 @@ public class Duke {
         boolean isExit = false;
         while (!isExit) {
             try {
-                String fullCommand = ui.readCommand();
                 ui.showLine();
+                String fullCommand = ui.readCommand();
                 Command c = Parser.parseCommand(fullCommand);
                 agent.handleCommand(c, ui, storage);
                 isExit = c.isExit();
@@ -66,8 +68,6 @@ public class Duke {
      * @param args The main() function arguments.
      */
     public static void main(String[] args) {
-        assert STORAGE_PATH.contains(".txt") : "The storage path must contains a valid .txt file";
-
         new Duke(STORAGE_PATH).run();
     }
 

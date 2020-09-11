@@ -15,16 +15,15 @@ public class DoneCommand extends Command {
      */
     public DoneCommand(String content) throws DukeException {
         if (content.isEmpty()) {
-            throw new DukeException("☹ OOPS!!! Please enter a value");
+            throw new DukeException("OOPS!!! Please enter a value");
         } else if (!(Character.isDigit(content.charAt(0)))) {
-            throw new DukeException("☹ OOPS!!! Please enter a numerical value");
+            throw new DukeException("OOPS!!! Please enter a numerical value");
         } else if (Integer.parseInt(content) > CommandAgent.getListSize()) {
-            throw new DukeException("☹ OOPS!!! Please enter a valid index");
+            throw new DukeException("OOPS!!! Please enter a valid index");
         } else if (Integer.parseInt(content) <= 0) {
-            throw new DukeException("☹ OOPS!!! Please enter a valid index");
-        } else {
-            this.content = content;
+            throw new DukeException("OOPS!!! Please enter a valid index");
         }
+        this.content = content;
     }
 
     /**

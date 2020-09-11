@@ -15,16 +15,15 @@ public class ReminderCommand extends Command {
     public ReminderCommand(String content) throws DukeException {
         int numberOfTasks = CommandAgent.getListSize();
         if (content.isEmpty()) {
-            throw new DukeException("☹ OOPS!!! Please enter a digit no more than " + numberOfTasks);
+            throw new DukeException("OOPS!!! Please enter a digit no more than " + numberOfTasks);
         } else if (!(Character.isDigit(content.charAt(0)))) {
-            throw new DukeException("☹ OOPS!!! Please enter a numerical value");
+            throw new DukeException("OOPS!!! Please enter a numerical value");
         } else if (Integer.parseInt(content) > numberOfTasks) {
-            throw new DukeException("☹ OOPS!!! We don't have that may tasks yet");
+            throw new DukeException("OOPS!!! We don't have that may tasks yet");
         } else if (Integer.parseInt(content) <= 0) {
-            throw new DukeException("☹ OOPS!!! You may want to check for at least 1 most recent task to do");
-        } else {
-            this.content = content;
+            throw new DukeException("OOPS!!! You may want to check for at least 1 most recent task to do");
         }
+        this.content = content;
     }
 
     /**

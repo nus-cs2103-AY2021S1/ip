@@ -21,7 +21,7 @@ public abstract class Command {
     /**
      * Checks if the command is an ExitCommand by reviewing its content.
      *
-     * @return A boolean value, 1 if it is an ExitCommand, 0 otherwise.
+     * @return A boolean value, true if it is an ExitCommand, false otherwise.
      */
     public boolean isExit() {
         return false;

@@ -39,8 +39,8 @@ public class CommandAgent {
 
     /**
      * Overloads command handler for final product.
-     * Execute the command, store the updated task list and
-     * send a response string to the dialog box.
+     * Executes the command, stores the updated task list and
+     * sends a response string to the dialog box.
      *
      * @param c The command parsed from user input.
      * @param storage The data storage handler.
@@ -83,7 +83,7 @@ public class CommandAgent {
                 List<String> mostRecentDues = executeReminderTask(commandContents);
                 return generateReminderResponse(mostRecentDues);
             default:
-                throw new DukeException("Something is wrong. The command you input is not processed.");
+                throw new DukeException("Something is wrong. The command you type is not processed.");
             }
         } catch (DateTimeParseException | DukeException e) {
             return e.getMessage();
@@ -169,9 +169,8 @@ public class CommandAgent {
 
         assert identifier.equals("E") | identifier.equals("D") | identifier.equals("T") : "identifier is invalid";
 
-
         if (!taskList.findTasksByKeyword(name).equals("")) {
-            throw new DukeException("☹ OOPS!!! This task has already been stored in the list!");
+            throw new DukeException("OOPS!!! This task has already been stored in the list!");
         }
 
         switch (identifier) {
@@ -186,7 +185,7 @@ public class CommandAgent {
         case "T":
             return new Todo(name, false);
         default:
-            throw new DukeException("☹ OOPS!!! This type of task cannot be created by me!");
+            throw new DukeException("OOPS!!! This type of task cannot be created by me!");
         }
     }
 
@@ -195,7 +194,7 @@ public class CommandAgent {
      * @return a message telling the user his/her exit message ends the program successfully.
      */
     public static String generateEndResponse() {
-        return "Bye. Hope to see you again soon!";
+        return "Bye. May the Force be with you!";
     }
 
     /**
@@ -270,7 +269,7 @@ public class CommandAgent {
     public static String generateReminderResponse(List<String> mostRecentDues) {
         StringBuilder result = new StringBuilder("Here are your most recent ");
         result.append(mostRecentDues.size()).append(" tasks that you haven't done:");
-        mostRecentDues.forEach(due -> result.append(due));
+        mostRecentDues.forEach(result::append);
         return result.toString();
     }
 }
