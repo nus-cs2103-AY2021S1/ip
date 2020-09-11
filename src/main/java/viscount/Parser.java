@@ -85,7 +85,7 @@ public class Parser {
             TaskType taskType = TaskType.valueOf(taskData.get(0));
             String isDoneString = taskData.get(1);
             String taskDescription = taskData.get(2);
-            
+
             boolean isValidDoneString = isDoneString.equals("0") || isDoneString.equals("1");
             boolean isValidTaskDescription = !taskDescription.isEmpty();
 

@@ -12,6 +12,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import viscount.Main;
 import viscount.Viscount;
+import viscount.exception.ViscountException;
 
 /**
  * Represents the main window component of the GUI.
@@ -47,7 +48,7 @@ public class MainWindow extends AnchorPane {
         }
 
         String viscountWelcome = viscount.getUi().getWelcomeMessage();
-        dialogContainer.getChildren().add(DialogBox.getViscountDialog(viscountWelcome));
+        dialogContainer.getChildren().add(DialogBox.getViscountDialog(viscountWelcome, false));
     }
 
     /**
@@ -68,11 +69,18 @@ public class MainWindow extends AnchorPane {
         if (input.equals("bye")) {
             Platform.exit();
         } else {
-            String response = viscount.getResponse(input);
+            String response = "";
+            boolean isException = false;
+            try {
+                response = viscount.getResponse(input);
+            } catch (ViscountException e) {
+                response = e.getMessage();
+                isException = true;
+            }
 
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input),
-                    DialogBox.getViscountDialog(response)
+                    DialogBox.getViscountDialog(response, isException)
             );
 
             userInput.clear();

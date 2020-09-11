@@ -2,6 +2,7 @@ package viscount;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import viscount.gui.MainWindow;
@@ -20,6 +21,8 @@ public class Main extends Application {
         AnchorPane anchorPane = new MainWindow();
         Scene scene = new Scene(anchorPane);
         stage.setScene(scene);
+        stage.setTitle("Viscount Task Manager");
+        stage.getIcons().add(new Image(Main.class.getResourceAsStream("/images/applicationIcon.png")));
         stage.show();
     }
 }

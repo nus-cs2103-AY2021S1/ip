@@ -32,13 +32,9 @@ public class Viscount {
      * @param input Input to be parsed and responded to.
      * @return The appropriate string response from Viscount.
      */
-    public String getResponse(String input) {
-        try {
-            Command command = Parser.parse(input);
-            return command.executeAndGetResponse(tasks, ui, storage);
-        } catch (ViscountException e) {
-            return e.getMessage();
-        }
+    public String getResponse(String input) throws ViscountException {
+        Command command = Parser.parse(input);
+        return command.executeAndGetResponse(tasks, ui, storage);
     }
 
     /**

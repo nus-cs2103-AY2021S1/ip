@@ -6,12 +6,17 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
 
 /**
  * Represents a dialog box component within the main window.
@@ -21,6 +26,10 @@ public class DialogBox extends HBox {
             new Image(DialogBox.class.getResourceAsStream("/images/userIcon.png"));
     private static final Image VISCOUNT_IMAGE =
             new Image(DialogBox.class.getResourceAsStream("/images/viscountIcon.png"));
+
+    private static final Color USER_TEXT_BOX_COLOR = Color.rgb(222, 241, 253);
+    private static final Color VISCOUNT_TEXT_BOX_COLOR = Color.rgb(255, 255, 255);
+    private static final Color VISCOUNT_TEXT_BOX_EXCEPTION_COLOR = Color.rgb(255, 192, 193);
 
     @FXML
     private Label dialog;
@@ -54,7 +63,11 @@ public class DialogBox extends HBox {
      * @return A new dialog box component representing a user's chat message.
      */
     public static DialogBox getUserDialog(String text) {
-        return new DialogBox(text, USER_IMAGE);
+        DialogBox dialogBox = new DialogBox(text, USER_IMAGE);
+        dialogBox.dialog.setBackground(
+                new Background(new BackgroundFill(USER_TEXT_BOX_COLOR, new CornerRadii(5.0), new Insets(-5.0))));
+
+        return dialogBox;
     }
 
     /**
@@ -63,9 +76,15 @@ public class DialogBox extends HBox {
      * @param text Text inside the dialog box.
      * @return Gets a new dialog box component representing Viscount's chat response.
      */
-    public static DialogBox getViscountDialog(String text) {
+    public static DialogBox getViscountDialog(String text, boolean isException) {
         DialogBox dialogBox = new DialogBox(text, VISCOUNT_IMAGE);
         dialogBox.flip();
+
+        dialogBox.dialog.setBackground(new Background(new BackgroundFill(
+                isException ? VISCOUNT_TEXT_BOX_EXCEPTION_COLOR : VISCOUNT_TEXT_BOX_COLOR,
+                new CornerRadii(5.0),
+                new Insets(-5.0))));
+
         return dialogBox;
     }
 
