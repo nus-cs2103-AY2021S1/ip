@@ -21,21 +21,21 @@ public class DeadlineTest {
             Assertions.fail();
         } catch (DukeException de) {
             Assertions.assertEquals(
-                    new DukeException("The description or date of \"deadline\" cannot be empty").getMessage(),
+                    new DukeException("The description cannot be empty").getMessage(),
                     de.getMessage());
         }
     }
 
     @Test
-    public void deadlineCreation_dateTimeIsNull_exceptionThrown() {
-        try {
-            Deadline deadline = new Deadline("Lunch", null);
-            Assertions.fail();
-        } catch (DukeException de) {
-            Assertions.assertEquals(
-                    new DukeException("The description or date of \"deadline\" cannot be empty").getMessage(),
-                    de.getMessage());
-        }
+    public void deadlineCreation_normalInputWithPriority_success() {
+        Deadline deadline = new Deadline("!2 read map", LocalDateTime.of(2020,03,16,15,50));
+        Assertions.assertEquals("[D][\u2718][HIGH] read map (by: Mar 16 2020 1550)", deadline.toString());
+    }
+
+    @Test
+    public void deadlineCreation_normalInputWithBadPriority_success() {
+        Deadline deadline = new Deadline("!9 read map", LocalDateTime.of(2021,03,16,15,50));
+        Assertions.assertEquals("[D][\u2718][UNCLASSIFIED] !9 read map (by: Mar 16 2021 1550)", deadline.toString());
     }
 
     @Test

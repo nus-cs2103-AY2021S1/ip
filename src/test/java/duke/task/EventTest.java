@@ -21,21 +21,21 @@ public class EventTest {
             Assertions.fail();
         } catch (DukeException de) {
             Assertions.assertEquals(
-                    new DukeException("The description or date of \"event\" cannot be empty").getMessage(),
+                    new DukeException("The description cannot be empty").getMessage(),
                     de.getMessage());
         }
     }
 
     @Test
-    public void eventCreation_dateTimeIsNull_exceptionThrown() {
-        try {
-            Event event = new Event("Lunch", null);
-            Assertions.fail();
-        } catch (DukeException de) {
-            Assertions.assertEquals(
-                    new DukeException("The description or date of \"event\" cannot be empty").getMessage(),
-                    de.getMessage());
-        }
+    public void eventCreation_normalInputWithPriority_success() {
+        Event event = new Event("!2 read map", LocalDateTime.of(2020,03,16,15,50));
+        Assertions.assertEquals("[E][\u2718][HIGH] read map (at: Mar 16 2020 1550)", event.toString());
+    }
+
+    @Test
+    public void eventCreation_normalInputWithBadPriority_success() {
+        Event event = new Event("!9 read map", LocalDateTime.of(2021,03,16,15,50));
+        Assertions.assertEquals("[E][\u2718][UNCLASSIFIED] !9 read map (at: Mar 16 2021 1550)", event.toString());
     }
 
     @Test

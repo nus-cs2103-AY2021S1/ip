@@ -20,12 +20,9 @@ public class Deadline extends Task {
     public Deadline(String desc, LocalDateTime by) {
         super(desc);
 
-        if (this.taskBy == null) {
-            throw new DukeException("The description or date of \"deadline\" cannot be empty");
-        }
         this.taskBy = by;
 
-        assert(!this.desc.isBlank());
+        assert(!this.desc.isBlank() && this.taskBy != null);
     }
 
     /**

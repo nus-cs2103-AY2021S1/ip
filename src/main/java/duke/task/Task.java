@@ -33,10 +33,29 @@ public abstract class Task {
      * @param priority The priority for this task.
      */
     protected Task(String desc, boolean isDone, Priority priority) {
-        if (desc == null || desc.isBlank()) {
-            throw new DukeException("The description for this Task cannot be empty");
+        assert(desc != null);
+
+        int priorityIndex = desc.indexOf('!') + 1;
+        int priorityValue = 0;
+        if (priorityIndex > 0) {
+            try {
+                priorityValue = Integer.parseInt(String.valueOf(desc.charAt(priorityIndex)));
+            } catch (NumberFormatException e) {
+                // does not do any priority parsing if number is invalid
+            }
+
+            if (priorityValue >= Priority.CRITICAL.getPriorityValue() &&
+                    priorityValue <= Priority.UNCLASSIFIED.getPriorityValue()) {
+                priority = Priority.getPriority(priorityValue);
+                desc = (desc.substring(0, priorityIndex - 1) + desc.substring(priorityIndex + 1)).strip();
+            }
         }
-        this.desc = desc;
+
+        if (desc.isBlank()) {
+            throw new DukeException("The description cannot be empty");
+        }
+
+        this.desc = desc.strip();
         this.isDone = isDone;
         this.priority = priority;
     }

@@ -21,12 +21,9 @@ public class Event extends Task {
     public Event(String desc, LocalDateTime taskDateTime) {
         super(desc);
 
-        if (this.taskDateTime == null) {
-            throw new DukeException("The description or date of \"event\" cannot be empty");
-        }
         this.taskDateTime = taskDateTime;
 
-        assert(!this.desc.isBlank());
+        assert(!this.desc.isBlank() && this.taskDateTime != null);
     }
 
     /**

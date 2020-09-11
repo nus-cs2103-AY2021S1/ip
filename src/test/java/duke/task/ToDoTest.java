@@ -4,6 +4,8 @@ import duke.exception.DukeException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+
 public class ToDoTest {
     @Test
     public void todoCreation_normalInput_success() {
@@ -19,6 +21,18 @@ public class ToDoTest {
         } catch (DukeException de) {
             Assertions.assertEquals(new DukeException("The description cannot be empty").getMessage(), de.getMessage());
         }
+    }
+
+    @Test
+    public void todoCreation_normalInputWithPriority_success() {
+        ToDo todo = new ToDo("!2 read map");
+        Assertions.assertEquals("[T][\u2718][HIGH] read map", todo.toString());
+    }
+
+    @Test
+    public void todoCreation_normalInputWithBadPriority_success() {
+        ToDo todo = new ToDo("!- read map");
+        Assertions.assertEquals("[T][\u2718][UNCLASSIFIED] !- read map", todo.toString());
     }
 
     @Test
