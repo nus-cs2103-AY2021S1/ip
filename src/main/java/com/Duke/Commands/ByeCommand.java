@@ -4,12 +4,15 @@ import com.Duke.TaskManager.DukeException;
 import com.Duke.TaskManager.TaskList;
 import com.Duke.TaskManager.UI;
 
+/**
+ * This class acts as a model for the execution of the ByeCommand
+ */
 public class ByeCommand extends Command {
 
-    private final TaskList ls;
+    private final TaskList taskList;
 
-    public ByeCommand(TaskList ls) {
-        this.ls = ls;
+    public ByeCommand(TaskList taskList) {
+        this.taskList = taskList;
     }
 
     @Override
@@ -17,9 +20,13 @@ public class ByeCommand extends Command {
         return true;
     }
 
+    /**
+     * Simulates the execution of the Bye command by Duke
+     * @return The response to the command "bye".
+     */
     public String execute() {
         try {
-            return UI.byeCalled(ls);
+            return UI.byeCalled(taskList);
         } catch (DukeException e) {
             return UI.printError(e.toString());
         }

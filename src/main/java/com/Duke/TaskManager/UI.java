@@ -41,7 +41,7 @@ public class UI {
             for (int i = 0; i < list.ls.size(); i++) {
                 int j = i + 1;
                 System.out.println("     " + j + "." + list.ls.get(i).toString());
-                builder.append(list.ls.get(i).toString() +"\n");
+                builder.append(list.ls.get(i).toString()).append("\n");
             }
         }
         System.out.println(line);
@@ -93,7 +93,7 @@ public class UI {
         return "Got it I've now added this Task: \n" + event.toString() + "\n" + "Now you have " + ls.length() + " tasks in the list.";
     }
 
-    public static String blahCalled() throws DukeException{
+    public static String blahCalled() {
         System.out.println(line);
         String blahMessage = Blah.blahCreated();
         System.out.println(blahMessage);
@@ -122,7 +122,7 @@ public class UI {
             for (int i = 0; i < containsHint.ls.size(); i++) {
                 int j = i + 1;
                 System.out.println("     " + j + "." + containsHint.ls.get(i).toString());
-                builder.append(j + "." + containsHint.ls.get(i).toString() + "\n");
+                builder.append(j).append(".").append(containsHint.ls.get(i).toString()).append("\n");
             }
         }
         System.out.println(line);

@@ -5,13 +5,13 @@ import com.Duke.TaskManager.DukeException;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
-/*
+/**
  * This Class encapsulates the command Deadline
  */
 public class Deadline extends Task{
     private final LocalDate deadline;
 
-    /*
+    /**
      * Constructor for the To Do class
      * @param task Represents the description of the task
      * @param deadline Represents the deadline date of the task
@@ -26,7 +26,7 @@ public class Deadline extends Task{
         return "(by: " + deadline.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")" ;
     }
 
-    /*
+    /**
      * Method to create the done version of this task
      * @return Returns a Deadline with the isDone state as true
      */
@@ -35,7 +35,7 @@ public class Deadline extends Task{
         return new Deadline(task, deadline,true);
     }
 
-    /*
+    /**
      * Method to Create the text format that is Saved
      */
     @Override

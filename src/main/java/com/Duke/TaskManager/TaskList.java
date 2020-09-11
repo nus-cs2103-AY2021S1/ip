@@ -6,7 +6,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class TaskList {
-    //This class manages the list of Tasks that the user has added
     public final List<Task> ls;
 
     public TaskList(List<Task> ls) {
@@ -18,12 +17,14 @@ public class TaskList {
     }
 
     public void setDone(int task) throws DukeException {
+        assert task > 0 : "Invalid task entered";
         if(task>ls.size()){
             throw new DukeException("You don't have that many tasks");
         }else {
             ls.set(task, ls.get(task).done());
         }
     }
+
 
     public TaskList findTask(String hint){
         assert hint !=null : "I couldn't understand the hint please try again";
@@ -36,12 +37,12 @@ public class TaskList {
         return containsHint;
     }
 
-    public List<Task> getListOfTasks(){
+    public List<Task> getListOfTasks() {
         return this.ls;
     }
 
-    public String delete(int task) throws DukeException{
-        if(task>ls.size()){
+    public String delete(int task) throws DukeException {
+        if(task>ls.size()) {
             throw new DukeException("You don't have that many tasks");
         }else{
             System.out.println("     Noted. I've removed this task: ");
@@ -52,7 +53,7 @@ public class TaskList {
         }
     }
 
-    public void add(Task task){
+    public void add(Task task) {
         ls.add(task);
     }
 

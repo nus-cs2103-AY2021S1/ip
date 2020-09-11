@@ -23,12 +23,12 @@ import com.Duke.Tasks.Task;
 import com.Duke.Tasks.ToDo;
 
 
-/*
+/**
  * This Class manages read and write operations into the storage files
  */
 public class Storage {
 
-    /*
+    /**
      * This method writes a given list of tasks into the storage file
      * @param taskList This is the taskList that is stored
      */
@@ -63,7 +63,7 @@ public class Storage {
         }
     }
 
-    /*
+    /**
      * This method reads a given list of tasks and returns a List of tasks
      * @return Returns a list of Tasks that can be used to create a TaskList object
      */
@@ -77,19 +77,19 @@ public class Storage {
             while (sc.hasNextLine()) {
                 String data = sc.nextLine();
                 String[] dataArr = data.split("\\*");
-                if (dataArr[0].equals("T")) {
+                if ("T".equals(dataArr[0])) {
                     if (dataArr[2].equals("Y")) {
                         taskList.add(new ToDo(dataArr[1], true));
                     } else {
                         taskList.add(new ToDo(dataArr[1], false));
                     }
-                } else if (dataArr[0].equals("E")) {
+                } else if ("E".equals(dataArr[0])) {
                     if (dataArr[4].equals("Y")) {
                         taskList.add(new Event(dataArr[1], LocalTime.parse(dataArr[2]), LocalTime.parse(dataArr[3]), true));
                     } else {
                         taskList.add(new Event(dataArr[1], LocalTime.parse(dataArr[2]), LocalTime.parse(dataArr[3]), false));
                     }
-                } else if (dataArr[0].equals("D")) {
+                } else if ("D".equals(dataArr[0])) {
                     if (dataArr[4].equals("Y")) {
                         taskList.add(new Deadline(dataArr[1], LocalDate.parse(dataArr[2]), true));
                     } else {
