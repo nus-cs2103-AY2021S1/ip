@@ -65,6 +65,7 @@ public class Event extends Task {
             int indOfTime = messageLowerCase.indexOf("/at");
             String description = message.substring(indOfDescription + 5, indOfTime).trim();
             String at = message.substring(indOfTime + 3).trim();
+
             if (description.isBlank() && at.isBlank()) {
                 throw new DukeException(errMessage1);
             } else if (at.isBlank()) {
@@ -90,6 +91,7 @@ public class Event extends Task {
                     throw new DukeException(errMessage);
                 }
             }
+
         } catch (DukeException e) {
             throw e;
         } catch (Exception e) {

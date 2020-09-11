@@ -42,7 +42,7 @@ public class Yuki {
     }
 
     /**
-     * Runs the whole program by taking in input commands.
+     * Runs the whole program by taking in inputs from command line and displaying outputs in command line.
      * Terminates only when an <Code>ExitCommand</Code> is given.
      */
     public void run() {
@@ -90,10 +90,10 @@ public class Yuki {
     }
 
     /**
-     * Returns a string containing the text in a specific format.
+     * Returns a string containing the text in q given border.
      *
      * @param text to be included
-     * @return a string containing the text in a specific format
+     * @return a string containing the text in a given border.
      */
     String printFormat(String text) {
         String headerLine = "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\n";
@@ -106,7 +106,7 @@ public class Yuki {
      * @param input command from user
      * @return string representation of response from <code>Yuki</code>
      */
-    String getResponse(String input) {
+    String getResponse(String input) throws DukeException {
         try {
             input = input.trim();
             Command c;
@@ -117,12 +117,13 @@ public class Yuki {
                 PREV_COMMANDS.remove(latestCommand);
             } else {
                 c = Parser.parse(input);
-                if (c instanceof UndoableCommand) {
-                    PREV_COMMANDS.add((UndoableCommand) c);
-                }
             }
 
             String s = c.execute(storage, Yuki.UI, taskList);
+
+            if (c instanceof UndoableCommand) {
+                PREV_COMMANDS.add((UndoableCommand) c);
+            }
 
             if (c instanceof ExitCommand) {
                 PauseTransition delay = new PauseTransition(Duration.seconds(3));
@@ -132,9 +133,7 @@ public class Yuki {
 
             return s;
         } catch (IndexOutOfBoundsException ex) {
-            return "Error: There's no more actions to undo! *woof*";
-        } catch (DukeException ex) {
-            return "ERROR: " + ex.getMessage();
+            throw new DukeException(" ERROR: There's no more actions to undo!\n*woof*");
         }
     }
 

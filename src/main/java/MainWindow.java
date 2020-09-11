@@ -1,3 +1,4 @@
+import duke.DukeException;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -39,12 +40,20 @@ public class MainWindow {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = yuki.getResponse(input);
-        response = yuki.printFormat(response);
-        dialogContainer.getChildren().addAll(
-                DialogBoxUser.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        try {
+            String response = yuki.getResponse(input);
+            response = yuki.printFormat(response);
+            dialogContainer.getChildren().addAll(
+                    DialogBoxUser.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+        } catch (DukeException e) {
+            String response = yuki.printFormat(e.getMessage());
+            dialogContainer.getChildren().addAll(
+                    DialogBoxUser.getUserDialog(input, userImage),
+                    DialogBoxError.getDukeDialog(response, dukeImage)
+            );
+        }
         userInput.clear();
     }
 }
