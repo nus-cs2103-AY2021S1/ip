@@ -8,6 +8,8 @@ Duke chat bot is for people _in need to manage their daily tasks via CLI_.
 
 * Ensure you have `Java 11` or above installed in your Computer.
 * Download latest `duke.jar`.
+* Double-click on the `duke.jar` to start the application.
+* Exit the app by typing in _"bye"_.
 
 ## Features
 
@@ -28,8 +30,8 @@ Format: `todo TASK_NAME`
 
 Example of usage: 
 
-    * `todo sampleTask` creates the `sampleTask` in the task list.
-    * ![todoImage](./todo.png)
+   * `todo sampleTask` creates the `sampleTask` in the task list.
+   * ![todoImage](asset/todo.png)
 
 ### `Event` - Add an event task
 
@@ -39,9 +41,9 @@ Format: `event TASK_NAME /at SCHEDULED_TIME` where `SCHEDULED_TIME` follows the 
 
 Example of usage: 
 
-    * `even sampleEvent /at 2020-03-12` creates the `sampleEvent` in the task list.
-    * The `sampleEvent` is to be done at __March 12 2020__.
-    * ![eventImage](./event.png)
+   * `even sampleEvent /at 2020-03-12` creates the `sampleEvent` in the task list.
+   * The `sampleEvent` is to be done at __March 12, 2020__.
+   ![eventImage](asset/event.png)
 
 ### `Deadline` - Add a deadline task
 
@@ -51,6 +53,32 @@ Format: `deadline TASK_NAME /by SCHEDULED_TIME` where `SCHEDULED_TIME` follows t
 
 Example of usage: 
 
-    * `deadline sampleDeadline /by 2020-11-12` creates the `sampleDeadline` in the task list.
-    * The `sampleDeadline` is to be done before __Nov 12 2020__.
-    * ![deadlineImage](./deadline.png)
+   * `deadline sampleDeadline /by 2020-11-12` creates the `sampleDeadline` in the task list.
+   * The `sampleDeadline` is to be done before __Nov 12, 2020__.
+   * ![deadlineImage](asset/deadline.png)
+   
+### `list` - Add a deadline task
+
+Generates the entire list of tasks stored in the app.
+
+Format: `list`
+
+Example of usage: 
+
+   * `list` returns all tasks' information presented nicely.
+   * The displayed string is of the form `[TASK_TYPE][COMPLETION_INDICATOR]TASK_NAME ([TASK_SCHEDULE])`.
+   * `TASK_TYPE` can be `T` (Todo) / `E` (Event) / `D` (Deadline).
+   * `COMPLETION_INDICATOR` shows whether the task has been completed, a `✓` means done, a `✘` means not done.
+   * `TASK_SCHEDULE` is _optional_.
+   * ![listImage](asset/list.png)
+   
+### `done` - Add a deadline task
+
+Mark a task in the list as completed.
+
+Format: `done TASK_INDEX` where `TASK_INDEX` is an integer between 1 and length of list.
+
+Example of usage: 
+
+   * `done 1` updates the status of the task as "done", represented as `✓`.
+   * ![doneImage](asset/done.png)
