@@ -30,8 +30,8 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.showWelcome(), dukeImage));
     }
 
-    public void setDuke(Mario d) {
-        mario = d;
+    public void setMario(Mario m) {
+        mario = m;
     }
 
     /**
