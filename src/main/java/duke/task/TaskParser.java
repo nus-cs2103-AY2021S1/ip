@@ -60,7 +60,11 @@ public class TaskParser {
             addedTask = new ToDo(details[1]);
             break;
         case DEADLINE:
-            addedTask = new Deadline(details[1]);
+            if (subcommands.containsKey(SC_RECURRING)) {
+                addedTask = new RecurringDeadline(details[1], subcommands.get(SC_RECURRING));
+            } else {
+                addedTask = new Deadline(details[1]);
+            }
             break;
         case EVENT:
             if (subcommands.containsKey(SC_RECURRING)) {

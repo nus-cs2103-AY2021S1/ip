@@ -91,6 +91,8 @@ public class Storage {
             return Deadline.reconstructFromSummary(taskSummary);
         case RecurringEvent.SYMBOL:
             return RecurringEvent.reconstructFromSummary(taskSummary);
+        case RecurringDeadline.SYMBOL:
+            return RecurringDeadline.reconstructFromSummary(taskSummary);
         default:
             throw new InvalidSaveException(identifier + " is not a valid type symbol!");
         }
