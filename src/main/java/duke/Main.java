@@ -16,17 +16,20 @@ public class Main {
 
         String usage = "Usage: java -jar duke.jar <cmd|gui>";
 
-        if (args.length == 0) {
+        if (args.length != 1) {
             System.out.println(usage);
             return;
         }
 
         // Run either CMD or GUI depending on program argument
-        if (args[0].equals("cmd")) {
+        switch (args[0]) {
+        case "cmd":
             runCmd(args);
-        } else if (args[0].equals("gui")) {
+            break;
+        case "gui":
             runGui(args);
-        } else {
+            break;
+        default:
             System.out.println(usage);
         }
 

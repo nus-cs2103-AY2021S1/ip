@@ -50,6 +50,7 @@ public class ChatBubble extends HBox {
         clip.setArcWidth(20);
         clip.setArcHeight(20);
 
+        // Clip the avatarView
         avatarView.setClip(clip);
     }
 

@@ -24,7 +24,7 @@ import javafx.scene.layout.VBox;
  */
 public class MainWindow extends BorderPane {
 
-    private static final String WELCOME_MESSAGE = "Welcome to Duke!";
+    private static final String WELCOME_MESSAGE = "Humans at your service!";
 
     @FXML
     private VBox dialogContainer;
@@ -57,11 +57,11 @@ public class MainWindow extends BorderPane {
         errorStream = new ByteArrayOutputStream();
         System.setErr(new PrintStream(errorStream));
 
-        // Duke variables
+        // Initialize Duke variables
         ObservableList<Task> taskList = FXCollections.observableArrayList();
         dukeData = new DukeData(taskList);
 
-        // fxml variables
+        // Initialize taskView
         taskView.setItems(taskList);
         taskView.setCellFactory(listView -> new IndexListCell<>());
 
@@ -133,10 +133,12 @@ public class MainWindow extends BorderPane {
         assert dialogContainer != null;
         assert userInput != null;
 
-        if (!userInput.isBlank()) {
-            Pane inputBubble = ChatBubble.getUserDialog(userInput, userAvatar);
-            dialogContainer.getChildren().add(inputBubble);
+        if (userInput.isBlank()) {
+            return;
         }
+
+        Pane inputBubble = ChatBubble.getUserDialog(userInput, userAvatar);
+        dialogContainer.getChildren().add(inputBubble);
     }
 
     /**
@@ -147,10 +149,12 @@ public class MainWindow extends BorderPane {
         assert dialogContainer != null;
         assert outputMessage != null;
 
-        if (!outputMessage.isBlank()) {
-            Pane outputBubble = ChatBubble.getDukeDialog(outputMessage, dukeAvatar);
-            dialogContainer.getChildren().add(outputBubble);
+        if (outputMessage.isBlank()) {
+            return;
         }
+
+        Pane outputBubble = ChatBubble.getDukeDialog(outputMessage, dukeAvatar);
+        dialogContainer.getChildren().add(outputBubble);
     }
 
     /**
@@ -161,10 +165,12 @@ public class MainWindow extends BorderPane {
         assert dialogContainer != null;
         assert errorMessage != null;
 
-        if (!errorMessage.isBlank()) {
-            Pane errorBubble = ChatBubble.getErrorDialog(errorMessage, errorAvatar);
-            dialogContainer.getChildren().add(errorBubble);
+        if (errorMessage.isBlank()) {
+            return;
         }
+
+        Pane errorBubble = ChatBubble.getErrorDialog(errorMessage, errorAvatar);
+        dialogContainer.getChildren().add(errorBubble);
     }
 
 }

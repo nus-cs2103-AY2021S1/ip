@@ -15,7 +15,7 @@ public class Duke extends Application {
 
     /**
      * Entry point of Duke GUI
-     * @param stage
+     * @param stage the default stage
      */
     @Override
     public void start(Stage stage) {
@@ -24,6 +24,7 @@ public class Duke extends Application {
             BorderPane bp = fxmlLoader.load();
             Scene scene = new Scene(bp);
             stage.setScene(scene);
+            stage.setTitle("Penguin Town");
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

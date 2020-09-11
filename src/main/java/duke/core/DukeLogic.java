@@ -29,15 +29,15 @@ public class DukeLogic {
 
             // Add command to history
             if (command instanceof ReversibleExecutable) {
-                ReversibleExecutable reversibleCommand = (ReversibleExecutable) command;
-                dukeData.getHistory().add(reversibleCommand);
+                dukeData.getHistory().add((ReversibleExecutable) command);
             }
 
-        } catch (DukeParserException e) { // Input cannot be parsed, notify user
-            System.err.println(e.getMessage());
-        } catch (CommandException e) { // Command cannot be executed
+        } catch (DukeParserException | CommandException e) {
+            // DukeParserException: Input cannot be parsed
+            // CommandException: Command cannot be executed
             System.err.println(e.getMessage());
         }
+
     }
 
 }

@@ -59,14 +59,13 @@ public enum CsvToTask {
      * Factory method to obtain a Task from its csv representation
      * @param csv The csv representation of a task.
      * @return The task represented by the csv
-     * @throws Exception If the csv cannot be parsed
      */
     public static Task parse(String csv) {
         assert csv != null;
         try (Scanner scanner = new Scanner(csv)) {
             scanner.useDelimiter(",");
             return CsvToTask.valueOf(scanner.next()).parse(scanner);
-        } catch (Exception e) { // Many types of parse error
+        } catch (Exception e) { // Many errors can occur when parsing
             System.err.println("Corrupt entry: " + csv);
             return null;
         }
