@@ -27,6 +27,12 @@ public class Command {
         this.taskName = taskName;
         this.taskDateTime = taskDateTime;
     }
+    /**
+     * Constructor for Fixed Duration Task Commands
+     *
+     * @param taskName
+     * @param duration
+     */
 
     public Command(String taskName, String duration) {
         this.taskName = taskName;

@@ -197,7 +197,12 @@ public class Parser {
             return new FindCommand(description);
         }
     }
-
+    /**
+     * parse user input into FixedDurationTaskCommand
+     *
+     * @param description
+     * @return FixedDurationTaskCommand
+     */
     public static FixedDurationTaskCommand parseFixedDurationTaskCommand(String description) {
         String[] descriptionArray = description.split("/for");
         String taskName = descriptionArray[0];
