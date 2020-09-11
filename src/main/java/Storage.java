@@ -18,8 +18,8 @@ public class Storage {
 
     /**
      * Loads the tasks from the hard disk. Creates a new file if the file doesnt exist.
-     * @return the arrayList containing the tasks.
-     * @throws DukeException with the failure to load message.
+     * @return the arrayList containing the tasks stored in the hard disk.
+     * @throws DukeException an exception with the "failure to load" message.
      */
     public ArrayList<Task> showTasks() throws DukeException {
         try {
@@ -72,7 +72,7 @@ public class Storage {
     /**
      * Saves the tasks to the hard disk.
      * @param taskList arrayList containing the tasks.
-     * @throws DukeException Exception with the "failure to save" message
+     * @throws DukeException an exception with the "failure to save" message
      */
     public void saveTasks(ArrayList<Task> taskList) throws DukeException {
 
