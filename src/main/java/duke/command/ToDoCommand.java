@@ -32,6 +32,11 @@ public class ToDoCommand extends Command {
         tasks.addTask(task);
         return ui.getAddTaskResponseAsString(task, tasks.numTasks());
     }
+
+    @Override
+    public void undo(TaskList tasks) {
+        tasks.removeLastTask();
+    }
     private void verifyInput() throws DukeException {
         if (taskName.isBlank()) {
             throw DukeException.badToDo();

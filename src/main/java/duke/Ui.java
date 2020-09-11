@@ -169,6 +169,24 @@ public class Ui {
     }
 
     /**
+     * Prints out a string for when the user undoes a command
+     */
+    public void displayUndoCommand() {
+        System.out.println(getUndoCommandResponseAsString());
+    }
+
+    /**
+     * Get bot's response to undoing a previous command, as a String
+     *
+     * @return String respresenting bot's response
+     */
+    public String getUndoCommandResponseAsString() {
+        return HORIZONTAL_RULE
+                + "\nWhy do I always have to clean up after you\n"
+                + HORIZONTAL_RULE;
+    }
+
+    /**
      * Prints out a string for when there is an error loading the stored data
      */
     public void showLoadingError() {
