@@ -1,5 +1,7 @@
 package focus.ui;
 
+import focus.storage.Storage;
+
 /** Represents the interactions between Pocus and user. */
 public class UI {
     /**
@@ -20,15 +22,29 @@ public class UI {
     }
 
     /**
-     * Addresses the user with the name provided.
+     * Addresses the new user with the name provided.
      *
      * @param name Name of user.
      * @return Addressing of user.
      */
-    public static String addressUser(String name) {
+    public static String addressNewUser(String name) {
+        Storage.setUserName(name);
         String address = "\tHello there, " + name + "! How can I help you today?\n"
-                + "\tNote: If you are a first time user,\n"
+                + "\tSince you are a first time user,\n"
                 + "\ttype 'help' for the list of commands to get started!\n";
+        assert !address.isEmpty() : "Printing should not blank here.";
+        return address;
+    }
+
+    /**
+     * Addresses the existing user.
+     *
+     * @return Addressing of user.
+     */
+    public static String addressExistingUser() {
+        String address = "\t\"\\(*^O^*) Hello there, " + Storage.getUserName() + "!\n"
+                + "\tWelcome back! How can I help you today?\n"
+                + "\tYou may want to 'list' out your tasks!";
         assert !address.isEmpty() : "Printing should not blank here.";
         return address;
     }
@@ -55,7 +71,8 @@ public class UI {
                 + "\n\t\tTo have a glossary of upcoming deadlines:"
                 + "\n\t\t\t- remind"
                 + "\n\t\tTo edit settings:"
-                + "\n\t\t\t- settings /days <input>"
+                + "\n\t\t\t- settings /name <new name>"
+                + "\n\t\t\t- settings /days <new number of days>"
                 + "\n\t\tTo exit Focus:"
                 + "\n\t\t\t- bye\n";
         assert !commands.isEmpty() : "Printing should not blank here.";

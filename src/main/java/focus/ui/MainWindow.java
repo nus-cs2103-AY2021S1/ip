@@ -2,6 +2,7 @@ package focus.ui;
 
 import focus.Focus;
 import focus.Main;
+import focus.storage.Storage;
 import javafx.animation.PauseTransition;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -43,9 +44,16 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().addAll(
-                DialogBox.getPocusDialog(UI.greetUser(), pocusImage)
-        );
+        if (!Storage.getUserName().equals("name")) { //existing user
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getPocusDialog(UI.addressExistingUser(), pocusImage)
+            );
+            numberOfTimes++;
+        } else { // new user
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getPocusDialog(UI.greetUser(), pocusImage)
+            );
+        }
     }
 
     /**
@@ -65,13 +73,13 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        if (numberOfTimes == 0) {
+        if (Storage.getUserName().equals("name") && numberOfTimes == 0) {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),
-                    DialogBox.getPocusDialog(UI.addressUser(input), pocusImage)
+                    DialogBox.getPocusDialog(UI.addressNewUser(input), pocusImage)
             );
-            numberOfTimes++;
-        } else {
+        }
+        if (numberOfTimes != 0) {
             assert (numberOfTimes > 0) : "Number of times user typed should be more than 0 here.";
             String response = focus.getResponse(input);
             if (response.startsWith("\tERROR:")) {
@@ -91,6 +99,7 @@ public class MainWindow extends AnchorPane {
                 delay.play();
             }
         }
+        numberOfTimes++;
         userInput.clear();
     }
 }

@@ -1,16 +1,25 @@
 # User Guide to Focus
 
+## Content Page
+1. [Introduction](#introduction)
+2. [Getting Started](#getting-started)
+3. [Features](#features)
+4. [Additional Help](#additional-help)
+5. [Acknowledgements](#acknowledgements)
+
 ## Introduction
 Meet Pocus in Focus! An all-in-one task manager to help you better plan your time.
 With a simple interface and easy-to-use commands, you would be able to use Focus effectively!
 
-## Getting started
-1. Download the v0.2 JAR file and double-click it to open.
-2. You should see something like this:  
+## Getting Started
+1. Ensure that you have at least **Java 11** installed in your laptop.
+2. Download the **latest version of focus.jar** file here.
+3. Once downloaded, double-click it to run.
+4. You should see something like this:  
 ![Image of Starting Screen](./images/startingScreen.png)
-3. Start by typing in your name!  
+5. Start by typing in your name!  
 ![Image of Starting Screen](./images/homeScreen.png)
-4. Next, start talking to Pocus and manage your tasks!
+6. Next, start talking to Pocus and manage your tasks!
 
 ## Features 
 1. [Add tasks of different types](#feature-1)
@@ -19,12 +28,12 @@ With a simple interface and easy-to-use commands, you would be able to use Focus
 4. [Delete tasks](#feature-4)
 5. [Find tasks with specified keyword](#feature-5)
 6. [Reminder within specified period](#feature-6)
-7. [Settings to change reminder period](#feature-7)
+7. [Settings](#feature-7)
 8. [List commands available](#feature-8)
 9. [Exit Focus](#feature-9)
 
 ### Feature 1
-Adds 3 different types of tasks, namely ToDo, Deadline and Event.
+Pocus helps you to add 3 different types of tasks, namely ToDo, Deadline and Event.
 
 #### Usages
 
@@ -56,7 +65,7 @@ Expected outcome:
 ![Image of Event command](./images/event.png)
 
 ### Feature 2
-Marks the tasks that you have completed as done.
+Pocus helps you to mark the tasks that you have completed as done.
 
 #### Usage
 
@@ -70,7 +79,7 @@ Expected outcome:
 ![Image of Done command](./images/done.png)
 
 ### Feature 3
-Lists the tasks that you have in your task list.
+Pocus helps you to list out the tasks you have in your task list.
 
 #### Usage
 
@@ -84,7 +93,7 @@ Expected outcome:
 ![Image of List command](./images/list.png)
 
 ### Feature 4
-Deletes the tasks.
+Pocus helps you to delete the tasks that you no longer need.
 
 #### Usage
 
@@ -98,7 +107,7 @@ Expected outcome:
 ![Image of Delete command](./images/delete.png)
 
 ### Feature 5
-Finds the tasks which contains the keyword you want.
+Pocus helps you to find the tasks which contain the keyword you want.
 
 #### Usage
 
@@ -112,7 +121,7 @@ Expected outcome:
 ![Image of Find command](./images/find.png)
 
 ### Feature 6
-Reminds you of the tasks which are due soon (within your specified period of days).
+Pocus reminds you of the tasks which are due soon (within your specified period of days).
 
 #### Usage
 
@@ -126,21 +135,30 @@ Expected outcome:
 ![Image of Remind command](./images/remind.png)
 
 ### Feature 7
-Allows you to change the number of days you require for reminders.
+Pocus helps you to change your name, or the number of days you want for reminders.
 
-#### Usage
+#### Usages
 
-##### Settings to change reminder period -`settings /days NUMBER_OF_DAYS`
-Default number of days is 7 days.
+##### 1. Settings to change name - `settings /name YOUR_NEW_NAME`
+First-time users will be prompted to add a name, but you can change it afterwards.
+
+Example of usage: 
+`settings /name Rui`
+
+Expected outcome:  
+![Image of ToDo command](./images/settingsName.png)
+
+##### 2. Settings to change reminder period -`settings /days NUMBER_OF_DAYS`
+Default number of days is 7, but you can change it if you like.
 
 Example of usage: 
 `settings /days 3`
 
 Expected outcome:  
-![Image of Settings command](./images/settings.png)
+![Image of Settings command](./images/settingsDays.png)
 
 ### Feature 8
-Lists out the available commands to help you. Good for first-time users!
+Pocus helps you to list out the available commands. Good for first-time users!
 
 #### Usage
 
@@ -154,7 +172,7 @@ Expected outcome:
 ![Image of Help command](./images/help.png)
 
 ### Feature 9
-Exits the application.
+Pocus helps you to exit the application.
 
 #### Usage
 
@@ -166,3 +184,19 @@ Example of usage:
 
 Expected outcome:  
 ![Image of Exit command](./images/bye.png)
+
+## Additional Help
+Q: Why am I unable to run the JAR file?  
+A: Please ensure that your laptop supports at least Java 11.  
+  
+Q: What if I am changing my laptop?  
+A: Don't worry! At the current directory you are at right now, you should see a data folder created for you. 
+Simply copy the folder into your new laptop, and run the JAR file in the same directory, and Focus will 
+retrieve all the data for you!  
+
+If you have any further questions, please do not hesitate to contact me via [Github]("https://github.com/ruilingk")!
+
+## Acknowledgements
+Images used for making of Focus:  
+[Image of Pocus]("https://cdn.shopify.com/s/files/1/0231/6137/2752/files/bt21-rj_ebcc3442-da05-40c0-869a-e3befcf6f48e_1600x.jpg?v=1563920540")  
+[Image of User]("https://cdn.shopify.com/s/files/1/0231/6137/2752/files/bt21-koya_ab56b8c9-ca8a-40a7-a82a-689eaffa8d3d_1600x.jpg?v=1563920606")

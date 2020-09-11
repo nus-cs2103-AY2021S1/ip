@@ -17,6 +17,48 @@ public class SettingsCommand extends Command {
     }
 
     /**
+     * Returns the number of days that user wants.
+     *
+     * @param input User's input.
+     * @return Number of days.
+     * @throws FocusException If input does not meet criteria.
+     */
+    private String updateDays(String input) throws FocusException {
+        String numberOfDays;
+        try {
+            numberOfDays = input.substring(7);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new InvalidSettingsCommandException();
+        }
+        if (numberOfDays.isBlank()) {
+            throw new InvalidSettingsCommandException();
+        }
+        assert !numberOfDays.isEmpty() : "Number of days should not be blank here.";
+        return numberOfDays;
+    }
+
+    /**
+     * Returns the name user wants to change.
+     *
+     * @param input User's input.
+     * @return User's new name.
+     * @throws FocusException If input does not meet criteria.
+     */
+    private String updateName(String input) throws FocusException {
+        String name;
+        try {
+            name = input.substring(7);
+        } catch (StringIndexOutOfBoundsException e) {
+            throw new InvalidSettingsCommandException();
+        }
+        if (name.isBlank()) {
+            throw new InvalidSettingsCommandException();
+        }
+        assert !name.isEmpty() : "Number of days should not be blank here.";
+        return name;
+    }
+
+    /**
      * Executes SettingsCommand to change settings.
      *
      * @param input User's input.
@@ -42,17 +84,14 @@ public class SettingsCommand extends Command {
             throw new InvalidSettingsCommandException();
         }
 
-        String numberOfDays;
-        try {
-            numberOfDays = checker.substring(7);
-        } catch (StringIndexOutOfBoundsException e) {
-            throw new InvalidSettingsCommandException();
+        if (checker.contains("/days")) {
+            String numberOfDays = updateDays(checker);
+            storage.updateNumberOfDays(numberOfDays);
+            return "\tThe period of reminders has been changed to: " + numberOfDays + " days!";
+        } else {
+            String name = updateName(checker);
+            Storage.updateName(name);
+            return "\tYour name has been changed to: " + name + "!";
         }
-        if (numberOfDays.isBlank()) {
-            throw new InvalidSettingsCommandException();
-        }
-        assert !numberOfDays.isEmpty() : "Number of days should not be blank here.";
-        storage.updateSettings(numberOfDays);
-        return "\tThe period of reminders has been changed to: " + numberOfDays + " days!";
     }
 }

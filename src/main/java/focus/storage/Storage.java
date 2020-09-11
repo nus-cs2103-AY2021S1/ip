@@ -13,17 +13,19 @@ import focus.task.Task;
 public class Storage {
     /** Represents the current user's directory. */
     private static final String USER_DIRECTORY = "user.dir";
+    /** Represents the path for the settings to be saved at. */
+    private static String settingsPath;
+    /** User's name. */
+    private static String userName;
+    /** Number of days user has set. */
+    private static int numberOfDays;
     /** Represents the path for the task list to be saved at. */
     private final String focusPath;
-    /** Represents the path for the settings to be saved at. */
-    private final String settingsPath;
-    /** Number of days user has set. */
-    private int numberOfDays;
 
     /** Creates a storage to allow loading and saving of tasks. */
     public Storage() {
         this.focusPath = System.getProperty(USER_DIRECTORY) + "/data/focus.txt";
-        this.settingsPath = System.getProperty(USER_DIRECTORY) + "/data/settings.txt";
+        settingsPath = System.getProperty(USER_DIRECTORY) + "/data/settings.txt";
     }
 
     /**
@@ -32,7 +34,25 @@ public class Storage {
      * @return Number of days.
      */
     public int getNumberOfDays() {
-        return this.numberOfDays;
+        return numberOfDays;
+    }
+
+    /**
+     * Gets the username.
+     *
+     * @return User's name.
+     */
+    public static String getUserName() {
+        return userName;
+    }
+
+    /**
+     * Sets the user's name.
+     *
+     * @param userInput User's input.
+     */
+    public static void setUserName(String userInput) {
+        updateName(userInput);
     }
 
     /** Creates a folder to store text file. If present, it will not create. */
@@ -155,8 +175,9 @@ public class Storage {
             System.out.println("Settings file created: " + data.getName());
             try {
                 FileWriter fileWriter = new FileWriter(settingsPath);
-                fileWriter.write("7"); // default number of days
-                this.numberOfDays = 7;
+                fileWriter.write("name|7"); // default name and number of days
+                userName = "name";
+                numberOfDays = 7;
                 fileWriter.close();
             } catch (IOException e) {
                 System.out.println("An error occurred.");
@@ -175,7 +196,12 @@ public class Storage {
             File data = new File(settingsPath);
             Scanner sc = new Scanner(data);
             while (sc.hasNextLine()) {
-                numberOfDays = Integer.parseInt(sc.nextLine());
+                String line = sc.nextLine();
+                String[] split = line.split("\\|");
+                System.out.println(split[0]);
+                System.out.println(split[1]);
+                userName = split[0];
+                numberOfDays = Integer.parseInt(split[1]);
             }
             sc.close();
         } catch (FileNotFoundException e) {
@@ -184,16 +210,29 @@ public class Storage {
         }
     }
 
-    /** Updates the data in user's settings file. */
-    public void updateSettings(String userInput) {
+    /** Updates the name in user's settings file. */
+    public static void updateName(String username) {
         try {
             FileWriter fileWriter = new FileWriter(settingsPath);
-            fileWriter.write(userInput);
+            fileWriter.write(username + "|" + numberOfDays);
             fileWriter.close();
         } catch (IOException e) {
             System.out.println("An error occurred.");
             e.printStackTrace();
         }
-        this.numberOfDays = Integer.parseInt(userInput);
+        userName = username;
+    }
+
+    /** Updates the number of days in user's settings file. */
+    public void updateNumberOfDays(String numberOfDays) {
+        try {
+            FileWriter fileWriter = new FileWriter(settingsPath);
+            fileWriter.write(userName + "|" + numberOfDays);
+            fileWriter.close();
+        } catch (IOException e) {
+            System.out.println("An error occurred.");
+            e.printStackTrace();
+        }
+        Storage.numberOfDays = Integer.parseInt(numberOfDays);
     }
 }
