@@ -41,6 +41,7 @@ public class TaskList {
      * @return task that is marked done.
      */
     public Task markAsDone(int taskId) {
+        assert taskId < taskSize() : "Index out of range";
         Task task = tasks.get(taskId).markAsDone();
         tasks.set(taskId, task);
         storage.update();
@@ -54,6 +55,7 @@ public class TaskList {
      * @return task that is deleted.
      */
     public Task delete(int taskId) {
+        assert taskId < taskSize() : "Index out of range";
         Task task = tasks.get(taskId);
         tasks.remove(taskId);
         storage.update();

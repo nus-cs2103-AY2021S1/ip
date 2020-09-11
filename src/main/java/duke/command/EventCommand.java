@@ -29,6 +29,7 @@ public class EventCommand implements Command {
     @Override
     public String execute(TaskList taskList, Ui ui, String input) throws EmptyDescriptionException, InvalidFormatException {
         String[] details = Parser.parseEvent(input);
+        assert details.length >= 2 : "Missing details in Event input";
         String title = details[0];
         String at = details[1];
         Task task = new Event(title, at);

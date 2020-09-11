@@ -65,6 +65,7 @@ public class Parser {
      */
     public static int parseTaskId(String input) {
         String rawNum = input.replaceAll("[^0-9]", "");
+        assert !rawNum.equals("") : "Missing Task ID";
         int taskId = Integer.parseInt(rawNum) - 1;
         return taskId;
     }
