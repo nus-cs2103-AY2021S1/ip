@@ -42,10 +42,8 @@ public class Storage {
             FileWriter writer = new FileWriter(path, false);
             for (Task task: tasks) {
                 String taskInfo = task.getType() + "," + (task.isDone() ? 1 : 0)
-                        + "," + task.getContent();
-                if (task.getDate() != "") {
-                    taskInfo = taskInfo + "," + task.getDate();
-                }
+                        + "," + task.getContent() + "," + task.getDate() + ","
+                        + task.getTag();
                 taskInfo = taskInfo + "\n";
                 writer.write(taskInfo);
             }
@@ -67,31 +65,28 @@ public class Storage {
             while (sc.hasNext()) {
                 String taskContent = sc.nextLine();
                 String[] taskInfo = taskContent.split(",");
+                Task task;
                 if (taskInfo[0].equals("T")) {
-                    ToDo task = new ToDo(taskInfo[2]);
-                    if (taskInfo[2].equals("1")) {
-                        task.markAsDone();
-                    }
-                    tasks.add(task);
+                    task = new ToDo(taskInfo[2]);
                 } else if (taskInfo[0].equals("E")) {
-                    Event task = new Event(taskInfo[2], taskInfo[3]);
-                    if (taskInfo[1].equals("1")) {
-                        task.markAsDone();
-                    }
-                    tasks.add(task);
+                    task = new Event(taskInfo[2], taskInfo[3]);
                 } else if (taskInfo[0].equals("D")) {
-                    Deadline task;
                     try {
                         LocalDate taskDeadline = LocalDate.parse(taskInfo[3]);
                         task = new Deadline(taskInfo[2], taskDeadline);
                     } catch (Exception e) {
                         task = new Deadline(taskInfo[2], taskInfo[3]);
                     }
-                    if (taskInfo[1].equals("1")) {
-                        task.markAsDone();
-                    }
-                    tasks.add(task);
+                } else {
+                    task = new Task(taskInfo[2]);
                 }
+                if (taskInfo[1].equals("1")) {
+                    task.markAsDone();
+                }
+                if (!taskInfo[4].equals("null")) {
+                    task.setTag(taskInfo[4]);
+                }
+                tasks.add(task);
             }
         } catch (Exception e) {
             System.out.println("Failed to load" + this.path);

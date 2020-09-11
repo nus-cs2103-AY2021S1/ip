@@ -4,10 +4,12 @@ import duke.exceptions.DukeException;
 public class Task {
     private boolean isDone;
     private String taskContent;
+    private String taskTag;
 
     public Task(String taskContent) {
         this.taskContent = taskContent;
         this.isDone = false;
+        this.taskTag = null;
     }
     public void markAsDone() {
         this.isDone = true;
@@ -29,12 +31,36 @@ public class Task {
     public String getDate() {
         return "";
     }
+
+    /**
+     * Sets a tag for task.
+     * @param tag is fetched from user command and stored as taskTag.
+     * @return original tag if exists. Otherwise, it will return null.
+     */
+    public String setTag(String tag) {
+        String oldTag = this.taskTag;
+        if (tag.equals("null")) {
+            this.taskTag = null;
+        } else {
+            this.taskTag = tag;
+        }
+        return oldTag;
+    }
+
+    public String getTag() {
+        return this.taskTag;
+    }
     @Override
     public String toString() {
+        String res = "";
         if (isDone) {
-            return "[" + "\u2713" + "] " + this.taskContent;
+            res += "[" + "\u2713" + "] " + this.taskContent;
         } else {
-            return "[" + "\u2718" + "] " + this.taskContent;
+            res += "[" + "\u2718" + "] " + this.taskContent;
         }
+        if (taskTag != null) {
+            res += " " + taskTag;
+        }
+        return res;
     }
 }

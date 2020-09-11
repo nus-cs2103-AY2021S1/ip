@@ -1,15 +1,6 @@
 package duke;
 
-import duke.commands.AddCommand;
-import duke.commands.AddDeadlineCommand;
-import duke.commands.AddEventCommand;
-import duke.commands.AddToDoCommand;
-import duke.commands.ByeCommand;
-import duke.commands.Command;
-import duke.commands.DeleteCommand;
-import duke.commands.DoneCommand;
-import duke.commands.FindCommand;
-import duke.commands.ListCommand;
+import duke.commands.*;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidInputException;
 
@@ -28,18 +19,7 @@ public class Parser {
     private static final String COMMAND_TODO = "todo";
     private static final String COMMAND_DEADLINE = "deadline";
     private static final String COMMAND_EVENT = "event";
-
-    public static boolean isToDo(String commandType) {
-        return commandType.equals(COMMAND_TODO);
-    }
-
-    public static boolean isDeadline(String commandType) {
-        return commandType.equals(COMMAND_DEADLINE);
-    }
-
-    public static boolean isEvent(String commandType) {
-        return commandType.equals(COMMAND_EVENT);
-    }
+    private static final String COMMAND_TAG = "tag";
 
     public static Command parse(String input) throws DukeException {
         if (input.length() == 0) {
@@ -68,6 +48,11 @@ public class Parser {
             return new AddEventCommand(commandContent);
         } else if (commandType.equals(COMMAND_DEADLINE)) {
             return new AddDeadlineCommand(commandContent);
+        } else if (commandType.equals(COMMAND_TAG)) {
+            String[] tagInfo = commandContent.split(" ", 2);
+            int taskIndex = Integer.parseInt(tagInfo[0]);
+            String taskTag = tagInfo[1];
+            return new TagCommand(taskIndex, taskTag);
         }
         return new AddCommand(input);
     }
