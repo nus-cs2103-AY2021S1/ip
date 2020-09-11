@@ -1,6 +1,7 @@
 import duke.TaskList;
 import duke.Ui;
 import duke.command.TodoCommand;
+import duke.exception.DuplicateException;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.InvalidTaskIdException;
 import duke.task.Task;
@@ -18,13 +19,7 @@ public class TodoCommandTest {
         String input = "todo Laundry";
         try {
             todoCommand.execute(taskList, ui, input);
-        } catch (EmptyDescriptionException e) {
-            e.printStackTrace();
-        } catch (InvalidTaskIdException e) {
-            e.printStackTrace();
-        } catch (duke.exception.InvalidFormatException e) {
-            e.printStackTrace();
-        } catch (duke.exception.DuplicateException e) {
+        } catch (EmptyDescriptionException | DuplicateException e) {
             e.printStackTrace();
         }
         Task lastTaskAdded = taskList.getTasks().get(taskList.taskSize() - 1);

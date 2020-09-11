@@ -1,6 +1,7 @@
 import duke.TaskList;
 import duke.Ui;
 import duke.command.DeadlineCommand;
+import duke.exception.DuplicateException;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.InvalidFormatException;
 import duke.exception.InvalidTaskIdException;
@@ -19,11 +20,7 @@ public class DeadlineCommandTest {
         String input = "deadline Laundry /by 2020-12-30";
         try {
             deadlineCommand.execute(taskList, ui, input);
-        } catch (EmptyDescriptionException | InvalidFormatException e) {
-            e.printStackTrace();
-        } catch (InvalidTaskIdException e) {
-            e.printStackTrace();
-        } catch (duke.exception.DuplicateException e) {
+        } catch (EmptyDescriptionException | InvalidFormatException | DuplicateException e) {
             e.printStackTrace();
         }
         Task lastTaskAdded = taskList.getTasks().get(taskList.taskSize() - 1);
