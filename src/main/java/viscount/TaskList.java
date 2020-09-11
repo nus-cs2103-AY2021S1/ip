@@ -1,10 +1,12 @@
 package viscount;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import viscount.exception.ViscountIndexOutOfBoundsException;
+import viscount.exception.ViscountUnsupportedOperationException;
 import viscount.task.Task;
 
 /**
@@ -59,6 +61,42 @@ public class TaskList {
         }
 
         return notDoneTasks;
+    }
+
+    /**
+     * Edit the description of a task by its index.
+     *
+     * @param taskIndex Index of task edited.
+     * @param newDescription New description of the task.
+     * @throws ViscountIndexOutOfBoundsException If taskIndex is < 0 or >= list size.
+     */
+    public void editTaskDescription(int taskIndex, String newDescription) throws ViscountIndexOutOfBoundsException {
+        try {
+            Task task = tasks.get(taskIndex);
+            task.setDescription(newDescription);
+        } catch (IndexOutOfBoundsException e) {
+            throw new ViscountIndexOutOfBoundsException(taskIndex);
+        }
+    }
+
+    /**
+     * Edit the date time of a deadline or event by its index.
+     *
+     * @param taskIndex Index of task edited.
+     * @param newDateTime New date time of the deadline or event.
+     * @throws ViscountIndexOutOfBoundsException If taskIndex is < 0 or >= list size.
+     * @throws ViscountUnsupportedOperationException If the task edited is a todo.
+     */
+    public void editTaskDateTime(int taskIndex, LocalDateTime newDateTime)
+            throws ViscountIndexOutOfBoundsException, ViscountUnsupportedOperationException {
+        try {
+            Task task = tasks.get(taskIndex);
+            task.setDateTime(newDateTime);
+        } catch (IndexOutOfBoundsException e) {
+            throw new ViscountIndexOutOfBoundsException(taskIndex);
+        } catch (UnsupportedOperationException e) {
+            throw new ViscountUnsupportedOperationException("edit todo date time");
+        }
     }
 
     /**

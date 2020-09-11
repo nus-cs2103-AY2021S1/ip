@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import viscount.task.Task;
+import viscount.task.TaskType;
 
 /**
  * Represents Viscount's User Interface.
@@ -96,6 +97,23 @@ public class Ui {
     public String getDoneAllResponse(List<Task> tasks) {
         return String.format("Very good! I have marked all these tasks as done:\n%s",
                 convertTaskListToString(tasks));
+    }
+
+    public String getEditDescriptionResponse(Task task) {
+        return String.format("Very well. I've edited the description of this %s:\n%s",
+                task.getTaskType().name().toLowerCase(),
+                task.toString());
+    }
+
+    public String getEditDateTimeResponse(Task task) {
+        String dateTimeDescription = task.getTaskType().equals(TaskType.DEADLINE)
+                ? "due date"
+                : "event time";
+
+        return String.format("Very well. I've edited the %s of this %s:\n%s",
+                dateTimeDescription,
+                task.getTaskType().name().toLowerCase(),
+                task.toString());
     }
 
     /**

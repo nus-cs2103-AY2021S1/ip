@@ -7,22 +7,24 @@ import viscount.exception.ViscountIndexOutOfBoundsException;
 import viscount.exception.ViscountSaveDataException;
 
 /**
- * Represents a done command.
+ * Represents an edit description command.
  */
-public class DoneCommand extends Command {
-    private Integer taskIndex;
+public class EditDescriptionCommand extends EditCommand {
+    private String newDescription;
 
     /**
-     * Instantiates a new done command.
+     * Instantiates a new edit description command.
      *
-     * @param taskIndex Index of task marked as done.
+     * @param taskIndex Index of task edited.
+     * @param newDescription New description of task edited.
      */
-    public DoneCommand(Integer taskIndex) {
-        this.taskIndex = taskIndex;
+    public EditDescriptionCommand(Integer taskIndex, String newDescription) {
+        super(taskIndex);
+        this.newDescription = newDescription;
     }
 
     /**
-     * Executes the done command and returns the response from Viscount.
+     * Executes the edit description command and returns the response from Viscount.
      *
      * @param taskList Task list where tasks are stored.
      * @param ui Ui to display response.
@@ -34,9 +36,9 @@ public class DoneCommand extends Command {
     @Override
     public String executeAndGetResponse(TaskList taskList, Ui ui, Storage storage)
             throws ViscountIndexOutOfBoundsException, ViscountSaveDataException {
-        taskList.markDone(taskIndex);
+        taskList.editTaskDescription(taskIndex, newDescription);
         storage.saveToDisk(taskList.getTasks());
-        return ui.getDoneResponse(taskList.getTask(taskIndex));
+        return ui.getEditDescriptionResponse(taskList.getTask(taskIndex));
     }
 
     @Override
@@ -49,7 +51,9 @@ public class DoneCommand extends Command {
             return false;
         }
 
-        DoneCommand doneCommand = (DoneCommand) o;
-        return this.taskIndex == doneCommand.taskIndex;
+        EditDescriptionCommand editDescriptionCommand = (EditDescriptionCommand) o;
+        boolean hasSameTaskIndex = this.taskIndex.equals(editDescriptionCommand.taskIndex);
+        boolean hasSameNewDescription = this.newDescription.equals(editDescriptionCommand.newDescription);
+        return hasSameTaskIndex && hasSameNewDescription;
     }
 }

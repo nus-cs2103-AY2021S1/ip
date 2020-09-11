@@ -38,6 +38,11 @@ public class Event extends Task {
         return eventTime;
     }
 
+    @Override
+    public void setDateTime(LocalDateTime newDateTime) {
+        this.eventTime = newDateTime;
+    }
+
     /**
      * Gives a task data representation of the task in String format.
      *

@@ -16,6 +16,10 @@ import viscount.command.DeleteAllDoneCommand;
 import viscount.command.DeleteCommand;
 import viscount.command.DoneAllCommand;
 import viscount.command.DoneCommand;
+import viscount.command.EditCommand;
+import viscount.command.EditDateTimeCommand;
+import viscount.command.EditDescriptionAndDateTimeCommand;
+import viscount.command.EditDescriptionCommand;
 import viscount.command.ListCommand;
 import viscount.exception.ViscountDateTimeParseException;
 import viscount.exception.ViscountException;
@@ -46,7 +50,6 @@ public class Parser {
 
     //@@author sc-arecrow-reused
     //Reused from https://stackoverflow.com/a/48281350 with minor modifications
-
     /**
      * Parses a String representing a date and time using the given formatter.
      *
@@ -134,6 +137,8 @@ public class Parser {
             return parseListCommand(arguments);
         case "add":
             return parseAddCommand(arguments);
+        case "edit":
+            return parseEditCommand(arguments);
         case "done":
             return parseDoneCommand(arguments);
         case "delete":
@@ -148,9 +153,13 @@ public class Parser {
      *
      * @param arguments Arguments from user input.
      * @return List command representing input from user.
-     * @throws ViscountException If command contains unknown arguments or was used wrongly.
+     * @throws ViscountMissingArgumentException If input command is missing an argument.
+     * @throws ViscountUnsupportedOperationException If /on argument is used with todo filter.
+     * @throws ViscountUnknownCommandException If task type filter is invalid.
      */
-    private static ListCommand parseListCommand(List<String> arguments) throws ViscountException {
+    private static ListCommand parseListCommand(List<String> arguments)
+            throws ViscountMissingArgumentException, ViscountUnsupportedOperationException,
+            ViscountUnknownCommandException {
         int onArgumentIndex = arguments.indexOf("/on");
         int findArgumentIndex = arguments.indexOf("/find");
         String taskTypeModifier = "";
@@ -201,9 +210,12 @@ public class Parser {
      *
      * @param arguments Arguments from user input.
      * @return Add command representing input from user.
-     * @throws ViscountException If command contains unknown arguments or was used wrongly.
+     * @throws ViscountMissingArgumentException If input command is missing an argument.
+     * @throws ViscountDateTimeParseException If date time input is formatted wrongly.
+     * @throws ViscountUnknownCommandException If task type is invalid.
      */
-    private static AddCommand parseAddCommand(List<String> arguments) throws ViscountException {
+    private static AddCommand parseAddCommand(List<String> arguments) throws ViscountMissingArgumentException,
+            ViscountDateTimeParseException, ViscountUnknownCommandException {
         if (arguments.size() < 2) {
             throw new ViscountMissingArgumentException("task type");
         }
@@ -235,9 +247,9 @@ public class Parser {
      *
      * @param arguments Arguments from user input.
      * @return Add todo command representing input from user.
-     * @throws ViscountException If command contains unknown arguments or was used wrongly.
+     * @throws ViscountMissingArgumentException If input command is missing an argument.
      */
-    private static AddCommand parseAddTodoCommand(List<String> arguments) throws ViscountException {
+    private static AddCommand parseAddTodoCommand(List<String> arguments) throws ViscountMissingArgumentException {
         String description = String.join(" ", arguments.subList(2, arguments.size()));
 
         if (description.isEmpty()) {
@@ -252,9 +264,11 @@ public class Parser {
      *
      * @param arguments Arguments from user input.
      * @return Add deadline command representing input from user.
-     * @throws ViscountException If command contains unknown arguments or was used wrongly.
+     * @throws ViscountDateTimeParseException If date time input is formatted wrongly.
+     * @throws ViscountMissingArgumentException If input command is missing an argument.
      */
-    private static AddCommand parseAddDeadlineCommand(List<String> arguments) throws ViscountException {
+    private static AddCommand parseAddDeadlineCommand(List<String> arguments)
+            throws ViscountDateTimeParseException, ViscountMissingArgumentException {
         int dueDateIndex = arguments.indexOf("/by");
 
         if (dueDateIndex == -1) {
@@ -285,9 +299,11 @@ public class Parser {
      *
      * @param arguments Arguments from user input.
      * @return Add event command representing input from user.
-     * @throws ViscountException If command contains unknown arguments or was used wrongly.
+     * @throws ViscountDateTimeParseException If date time input is formatted wrongly.
+     * @throws ViscountMissingArgumentException If input command is missing an argument.
      */
-    private static AddCommand parseAddEventCommand(List<String> arguments) throws ViscountException {
+    private static AddCommand parseAddEventCommand(List<String> arguments)
+            throws ViscountDateTimeParseException, ViscountMissingArgumentException {
         int eventTimeIndex = arguments.indexOf("/at");
 
         if (eventTimeIndex == -1) {
@@ -314,13 +330,136 @@ public class Parser {
     }
 
     /**
+     * Parses an edit command.
+     *
+     * @param arguments Arguments from user input.
+     * @return Edit command representing input from user.
+     * @throws ViscountDateTimeParseException If date time input is formatted wrongly.
+     * @throws ViscountMissingArgumentException If input command is missing an argument.
+     * @throws ViscountNumberFormatException If task index input is not a number.
+     */
+    private static EditCommand parseEditCommand(List<String> arguments)
+            throws ViscountDateTimeParseException, ViscountMissingArgumentException, ViscountNumberFormatException {
+        if (arguments.size() < 2) {
+            throw new ViscountMissingArgumentException("task number");
+        }
+
+        int descriptionArgumentIndex = arguments.indexOf("/desc");
+        int dateTimeArgumentIndex = arguments.indexOf("/date");
+
+        if (descriptionArgumentIndex == -1 && dateTimeArgumentIndex == -1) {
+            throw new ViscountMissingArgumentException("/desc or /date argument");
+        }
+
+        try {
+            int taskIndex = Integer.parseInt(arguments.get(1)) - 1;
+
+            if (descriptionArgumentIndex != -1 && dateTimeArgumentIndex != -1) {
+                return parseEditDescriptionAndDateTimeCommand(
+                        arguments, taskIndex, descriptionArgumentIndex, dateTimeArgumentIndex);
+            } else if (descriptionArgumentIndex != -1) {
+                return parseEditDescriptionCommand(arguments, taskIndex);
+            } else {
+                return parseEditDateTimeCommand(arguments, taskIndex);
+            }
+        } catch (NumberFormatException e) {
+            throw new ViscountNumberFormatException(arguments.get(1));
+        }
+    }
+
+    /**
+     * Parses an edit description and date time command.
+     *
+     * @param arguments Arguments from user input.
+     * @param taskIndex Index of task edited.
+     * @param descriptionArgumentIndex Index of /desc argument.
+     * @param dateTimeArgumentIndex Index of /date argument.
+     * @return Edit description and date time command representing input from user.
+     * @throws ViscountDateTimeParseException If date time input is formatted wrongly.
+     * @throws ViscountMissingArgumentException If input command is missing an argument.
+     */
+    private static EditCommand parseEditDescriptionAndDateTimeCommand(List<String> arguments, int taskIndex,
+                                                                      int descriptionArgumentIndex,
+                                                                      int dateTimeArgumentIndex)
+            throws ViscountDateTimeParseException, ViscountMissingArgumentException {
+        String newDescription = "";
+        String newDateTimeString = "";
+
+        if (descriptionArgumentIndex < dateTimeArgumentIndex) {
+            newDescription = String.join(
+                    " ", arguments.subList(descriptionArgumentIndex + 1, dateTimeArgumentIndex));
+            newDateTimeString = String.join(
+                    " ", arguments.subList(dateTimeArgumentIndex + 1, arguments.size()));
+        } else {
+            newDateTimeString = String.join(
+                    " ", arguments.subList(dateTimeArgumentIndex + 1, descriptionArgumentIndex));
+            newDescription = String.join(
+                    " ", arguments.subList(descriptionArgumentIndex + 1, arguments.size()));
+        }
+
+        if (newDescription.isEmpty()) {
+            throw new ViscountMissingArgumentException("new description");
+        }
+
+        try {
+            LocalDateTime newDateTime = Parser.parseDateTime(newDateTimeString, INPUT_DATE_TIME_FORMATTER);
+
+            EditDescriptionCommand editDescriptionCommand = new EditDescriptionCommand(taskIndex, newDescription);
+            EditDateTimeCommand editDateTimeCommand = new EditDateTimeCommand(taskIndex, newDateTime);
+            return new EditDescriptionAndDateTimeCommand(taskIndex, editDescriptionCommand, editDateTimeCommand);
+        } catch (DateTimeParseException e) {
+            throw new ViscountDateTimeParseException("new date time");
+        }
+    }
+
+    /**
+     * Parses an edit description command.
+     *
+     * @param arguments Arguments from user input.
+     * @param taskIndex Index of task edited.
+     * @return Edit description command representing input from user.
+     * @throws ViscountMissingArgumentException If input command is missing an argument.
+     */
+    private static EditCommand parseEditDescriptionCommand(List<String> arguments, int taskIndex)
+        throws ViscountMissingArgumentException {
+        String newDescription = String.join(" ", arguments.subList(3, arguments.size()));
+
+        if (newDescription.isEmpty()) {
+            throw new ViscountMissingArgumentException("new description");
+        }
+
+        return new EditDescriptionCommand(taskIndex, newDescription);
+    }
+
+    /**
+     * Parses an edit date time command.
+     * @param arguments Arguments from user input.
+     * @param taskIndex Index of task edited.
+     * @return Edit date time command representing input from user.
+     * @throws ViscountDateTimeParseException If date time input is formatted wrongly.
+     */
+    private static EditCommand parseEditDateTimeCommand(List<String> arguments, int taskIndex)
+            throws ViscountDateTimeParseException {
+        try {
+            String newDateTimeString = String.join(" ", arguments.subList(3, arguments.size()));
+
+            LocalDateTime newDateTime = Parser.parseDateTime(newDateTimeString, INPUT_DATE_TIME_FORMATTER);
+            return new EditDateTimeCommand(taskIndex, newDateTime);
+        } catch (DateTimeParseException e) {
+            throw new ViscountDateTimeParseException("new date time");
+        }
+    }
+
+    /**
      * Parses a done command.
      *
      * @param arguments Arguments from user input.
      * @return Done command representing input from user.
-     * @throws ViscountException If command contains unknown arguments or was used wrongly.
+     * @throws ViscountMissingArgumentException If input command is missing an argument.
+     * @throws ViscountNumberFormatException If task index input is not a number.
      */
-    private static DoneCommand parseDoneCommand(List<String> arguments) throws ViscountException {
+    private static DoneCommand parseDoneCommand(List<String> arguments)
+            throws ViscountMissingArgumentException, ViscountNumberFormatException {
         if (arguments.size() < 2) {
             throw new ViscountMissingArgumentException("task number");
         }
@@ -342,9 +481,11 @@ public class Parser {
      *
      * @param arguments Arguments from user input.
      * @return Delete command representing input from user.
-     * @throws ViscountException If command contains unknown arguments or was used wrongly.
+     * @throws ViscountMissingArgumentException If input command is missing an argument.
+     * @throws ViscountNumberFormatException If task index input is not a number.
      */
-    private static DeleteCommand parseDeleteCommand(List<String> arguments) throws ViscountException {
+    private static DeleteCommand parseDeleteCommand(List<String> arguments)
+            throws ViscountMissingArgumentException, ViscountNumberFormatException {
         if (arguments.size() < 2) {
             throw new ViscountMissingArgumentException("task number");
         }

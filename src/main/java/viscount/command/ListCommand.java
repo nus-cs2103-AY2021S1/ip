@@ -46,7 +46,7 @@ public class ListCommand extends Command {
      * @param ui Ui to display response.
      * @param storage Storage to save changes to disk.
      * @return The response from Viscount.
-     * @throws ViscountDateTimeParseException If exception occurs with parsing date string
+     * @throws ViscountDateTimeParseException If exception occurs with parsing date string.
      */
     @Override
     public String executeAndGetResponse(TaskList taskList, Ui ui, Storage storage) throws ViscountException {

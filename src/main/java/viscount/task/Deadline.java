@@ -38,6 +38,11 @@ public class Deadline extends Task {
         return dueDate;
     }
 
+    @Override
+    public void setDateTime(LocalDateTime newDateTime) {
+        this.dueDate = newDateTime;
+    }
+
     /**
      * Gives a task data representation of the task in String format.
      *

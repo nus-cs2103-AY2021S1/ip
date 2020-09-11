@@ -29,10 +29,6 @@ public abstract class Task {
         this.isDone = isDone;
     }
 
-    public void setDone(boolean isDone) {
-        this.isDone = isDone;
-    }
-
     /**
      * Returns tick or cross symbols depending on whether the task is done.
      *
@@ -52,6 +48,16 @@ public abstract class Task {
     public boolean getIsDone() {
         return isDone;
     }
+
+    public void setDone(boolean isDone) {
+        this.isDone = isDone;
+    }
+
+    public void setDescription(String newDescription) {
+        this.description = newDescription;
+    }
+
+    public abstract void setDateTime(LocalDateTime newDateTime) throws UnsupportedOperationException;
 
     public abstract boolean hasDateTime();
     public abstract LocalDateTime getDateTime();

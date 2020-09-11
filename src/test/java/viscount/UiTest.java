@@ -45,7 +45,7 @@ public class UiTest {
                 + "4.[E][" + TICK_ICON + "] t4 (at: Aug 24 2020, 11:00)\n"
                 + "5.[E][" + CROSS_ICON + "] t5 (at: Aug 27 2020, 12:00)";
 
-        String actualResult = new Ui().getListResponse(DEFAULT_TASKS, "", "");
+        String actualResult = new Ui().getListResponse(DEFAULT_TASKS, "", "", "");
 
         assertEquals(expectedResult, actualResult);
     }
@@ -60,7 +60,7 @@ public class UiTest {
         List<Task> filteredTasks = Arrays.asList(
                 new Deadline("t2", true, LocalDateTime.of(2020, 8, 24, 10, 0)),
                 new Event("t4", true, LocalDateTime.of(2020, 8, 24, 11, 0)));
-        String actualResult = new Ui().getListResponse(filteredTasks, "", "Aug 24 2020");
+        String actualResult = new Ui().getListResponse(filteredTasks, "", "Aug 24 2020", "");
 
         assertEquals(expectedResult, actualResult);
     }
@@ -75,7 +75,7 @@ public class UiTest {
         List<Task> filteredTasks = Arrays.asList(
                 new Deadline("t3", false, LocalDateTime.of(2020, 8, 27, 11, 0)),
                 new Event("t5", false, LocalDateTime.of(2020, 8, 27, 12, 0)));
-        String actualResult = new Ui().getListResponse(filteredTasks, "", "today");
+        String actualResult = new Ui().getListResponse(filteredTasks, "", "today", "");
 
         assertEquals(expectedResult, actualResult);
     }
@@ -90,7 +90,7 @@ public class UiTest {
         List<Task> filteredTasks = Arrays.asList(
                 new Deadline("t2", true, LocalDateTime.of(2020, 8, 24, 10, 0)),
                 new Deadline("t3", false, LocalDateTime.of(2020, 8, 27, 11, 0)));
-        String actualResult = new Ui().getListResponse(filteredTasks, "deadline", "");
+        String actualResult = new Ui().getListResponse(filteredTasks, "deadline", "", "");
 
         assertEquals(expectedResult, actualResult);
     }
@@ -103,7 +103,7 @@ public class UiTest {
 
         List<Task> filteredTasks = Arrays.asList(
                 new Deadline("t2", true, LocalDateTime.of(2020, 8, 24, 10, 0)));
-        String actualResult = new Ui().getListResponse(filteredTasks, "deadline", "Aug 24 2020");
+        String actualResult = new Ui().getListResponse(filteredTasks, "deadline", "Aug 24 2020", "");
 
         assertEquals(expectedResult, actualResult);
     }

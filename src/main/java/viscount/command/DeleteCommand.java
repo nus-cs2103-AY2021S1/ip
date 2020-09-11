@@ -13,6 +13,11 @@ import viscount.task.Task;
 public class DeleteCommand extends Command {
     private Integer taskIndex;
 
+    /**
+     * Instantiates a new delete command.
+     *
+     * @param taskIndex Index of task deleted.
+     */
     public DeleteCommand(Integer taskIndex) {
         this.taskIndex = taskIndex;
     }

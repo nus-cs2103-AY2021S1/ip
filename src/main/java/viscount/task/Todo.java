@@ -23,6 +23,11 @@ public class Todo extends Task {
         throw new UnsupportedOperationException();
     }
 
+    @Override
+    public void setDateTime(LocalDateTime newDateTime) {
+        throw new UnsupportedOperationException();
+    }
+
     /**
      * Gives a task data representation of the task in String format.
      *

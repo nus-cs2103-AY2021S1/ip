@@ -8,7 +8,13 @@ import viscount.Ui;
 import viscount.exception.ViscountSaveDataException;
 import viscount.task.Task;
 
+/**
+ * Represents a delete all done command.
+ */
 public class DeleteAllDoneCommand extends DeleteCommand {
+    /**
+     * Instantiates a new delete all done command.
+     */
     public DeleteAllDoneCommand() {
         super(null);
     }

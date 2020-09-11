@@ -56,7 +56,6 @@ add deadline return book /by 28-09-2020
 add event go to library /at 28-09-2020 1000
 ```
 
-
 Expected outcome:
 ```
 Very well. I've added this todo:
@@ -152,6 +151,36 @@ Very good! I have marked this todo as done:
 Very good! I have marked all these tasks as done:
 1.[D][✓] return book (by: Sep 28 2020 00:00)
 2.[E][✓] go to library (at: Sep 28 2020 10:00)
+```
+
+### `edit` - Editing a task
+Edits an existing task by index.
+
+Format:
+```
+// must have at least /desc or /date
+edit INDEX [/desc DESCRIPTION] [/date DATE_TASK]
+```
+
+Example usage:
+```
+edit 1 /desc read book and take notes
+edit 2 /date 03-12-2020
+edit 3 /desc take bus to library /date 03-12-2020 1200
+```
+
+Expected Outcome:
+```
+Very well. I've edited the description of this todo:
+[T][✓] read book and take notes
+
+Very well. I've edited the due date of this deadline:
+[D][✓] return book (by: Dec 03 2020 00:00)
+
+Very well. I've edited the due date of this deadline:
+[E][✓] go to library (at: Dec 03 2020 12:00)
+Very well. I've edited the description of this todo:
+[E][✓] take bus to library (at: Dec 03 2020 12:00)
 ```
 
 ### `delete` - Deleting a task

@@ -8,7 +8,13 @@ import viscount.Ui;
 import viscount.exception.ViscountSaveDataException;
 import viscount.task.Task;
 
+/**
+ * Represents a done all command.
+ */
 public class DoneAllCommand extends DoneCommand {
+    /**
+     * Instantiates a new done all command.
+     */
     public DoneAllCommand() {
         super(null);
     }
