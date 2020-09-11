@@ -35,7 +35,7 @@ This is a java project created for CS2103T Software Engineering for AY2020/2021 
 Author: Lum Jian Yang Sean <br/>
 Version: 0 <br/>
 Release Date: 11 Sepetember 2020 <br/>
-Github: <a href="http://github.com/seanjyjy/duke">http://github.com/seanjyjy/duke</a> <br />
+Github: <a href="http://github.com/seanjyjy/duke">https://seanjyjy.github.io/ip/</a> <br />
 
 ### Getting Started
 
