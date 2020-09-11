@@ -1,7 +1,80 @@
-Hello from
- ____        _        
-|  _ \ _   _| | _____ 
-| | | | | | | |/ / _ \
-| |_| | |_| |   <  __/
-|____/ \__,_|_|\_\___|
-
+__________________________________________________
+Hello/您好/こんにちは I'm Duke
+What can I do for you?
+__________________________________________________
+__________________________________________________
+😝You don't have any task in the schedule yet~~
+use todo/deadline/event command to create your tasks~
+__________________________________________________
+__________________________________________________
+😝You don't have any task in the schedule yet~~
+use todo/deadline/event command to create your tasks~
+__________________________________________________
+__________________________________________________
+duke.exceptions.CommandNotFoundException: 🙈
+OOPS!!! Sorry I don't understand what that means
+__________________________________________________
+__________________________________________________
+duke.exceptions.NullCommandContentException: 💔OH
+NO~~ The description of Deadline cannot be empty
+__________________________________________________
+__________________________________________________
+duke.exceptions.LackOfTimeException: ⚠️OOPS!!! The
+time/date of Duke.Deadline cannot be empty
+__________________________________________________
+__________________________________________________
+Got it. I've added this task:
+   [D][❎] return book  (Aug 8 2020)
+Now you have 1 task in the list.
+__________________________________________________
+__________________________________________________
+duke.exceptions.DateFormatException: The input
+format of date is not valid
+please write date in the forms of yyyy-mm-dd
+__________________________________________________
+__________________________________________________
+1. [D][❎] return book  (Aug 8 2020)
+__________________________________________________
+__________________________________________________
+duke.exceptions.NullCommandContentException: 💔OH
+NO~~ The description of Event cannot be empty
+__________________________________________________
+__________________________________________________
+duke.exceptions.LackOfTimeException: ⚠️OOPS!!! The
+time/date of Event cannot be empty
+__________________________________________________
+__________________________________________________
+Got it. I've added this task:
+   [E][❎] presentation  (Aug 25 2020)
+Now you have 2 tasks in the list.
+__________________________________________________
+__________________________________________________
+duke.exceptions.DateFormatException: The input
+format of date is not valid
+please write date in the forms of yyyy-mm-dd
+__________________________________________________
+__________________________________________________
+1. [D][❎] return book  (Aug 8 2020)
+2. [E][❎] presentation  (Aug 25 2020)
+__________________________________________________
+__________________________________________________
+Très bien!I have helped you marked task return book as done
+[D][✅] return book  (Aug 8 2020)
+__________________________________________________
+__________________________________________________
+duke.exceptions.TaskOutOfBoundException: 😝OOPS!!!
+You do not have task 0 in the schedule.
+__________________________________________________
+__________________________________________________
+duke.exceptions.NullCommandContentException: 💔OH
+NO~~ The description of FIND cannot be empty
+__________________________________________________
+__________________________________________________
+   [D][✅] return book  (Aug 8 2020)
+__________________________________________________
+__________________________________________________
+1. [D][✅] return book  (Aug 8 2020)
+2. [E][❎] presentation  (Aug 25 2020)
+__________________________________________________
+__________________________________________________
+Farewell/再見/さようなら～～

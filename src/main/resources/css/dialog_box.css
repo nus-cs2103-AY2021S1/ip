@@ -1,0 +1,13 @@
+#dialog {
+     -fx-background-radius: 15px;
+     -fx-border-radius: 15px;
+     -fx-padding: 10px;
+     -fx-font-size: 12px;
+}
+
+#name, #timeStamp {
+    -fx-background-color: rgb();
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 10px;
+    -fx-font-weight: bold;
+}
