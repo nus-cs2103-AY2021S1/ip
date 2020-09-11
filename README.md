@@ -24,3 +24,13 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+
+## Acknowledgements
+src/main/resources/audio/meow2.wav uses this sound from freesound:
+Cat meow by wesleyextreme_gamer (https://freesound.org/people/wesleyextreme_gamer/sounds/530341/)
+
+src/main/resources/images/blackcat_circle.png is edited from iStockPhoto:
+Black cat by sarayut (https://www.istockphoto.com/photo/closeup-portrait-black-cat-the-face-in-front-of-eyes-is-yellow-halloween-black-cat-gm901574784-248725535)
+
+src/main/resources/images/usercat_circle.png is edited from pixabay:
+Cat by ArtTower (https://pixabay.com/illustrations/fractal-cat-feline-portrait-animal-681584/)

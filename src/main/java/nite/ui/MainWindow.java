@@ -27,7 +27,7 @@ public class MainWindow extends AnchorPane {
     private Nite nite;
 
     private final Image userImage = new Image(this.getClass()
-            .getResourceAsStream("/images/woman_circle.png"));
+            .getResourceAsStream("/images/usercat_circle.png"));
     private final Image niteImage = new Image(this.getClass()
             .getResourceAsStream("/images/blackcat_circle.png"));
     private final String meowSoundPath = "/audio/meow2.wav";

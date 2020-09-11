@@ -55,7 +55,11 @@ public class Parser {
         } else if (fullCommand.startsWith("event")) {
             command = new AddCommand(parseTask("event", fullCommand));
         } else if (fullCommand.startsWith("find")) {
-            command = new FindCommand(fullCommand.split(" ")[1]);
+            try {
+                command = new FindCommand(fullCommand.split(" ")[1]);
+            } catch (ArrayIndexOutOfBoundsException ex) {
+                throw new NiteException("Invalid format of find command!");
+            }
         } else if (fullCommand.startsWith("sort")) {
             command = new SortCommand(fullCommand.split(" "));
         } else {
