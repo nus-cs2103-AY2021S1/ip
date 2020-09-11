@@ -47,7 +47,8 @@ public class Duke {
     public String getWelcomeMessage() {
         String logo =
                 "Hello! I'm Hal9000\nWhat can I do for you?\n"
-                + "Enter \"help\" for instructions\n";
+                + "Enter \"help\" for instructions\n"
+                + "enter \"list\" to see sample data / your existing tasks";
         // Intro message
         return logo;
     }

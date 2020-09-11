@@ -13,18 +13,23 @@ public class FileOpener {
      */
     public static File openFile(String path) {
         File prevTasks = new File(path);
+        File returnFile = null;
         try {
             if (!prevTasks.exists()) {
+                // New user detected. Populate data from sample file, and create prevTasks.txt
+                returnFile = new File("sampleTasks.txt");
                 prevTasks.createNewFile();
+            } else {
+                returnFile = prevTasks;
+                returnFile.setWritable(true);
             }
-            prevTasks.setReadable(true);
-            prevTasks.setWritable(true);
+            returnFile.setReadable(true);
 
         } catch (IOException e) {
             System.out.println(e);
         }
 
-        assert prevTasks.exists() : "prevTasks should exist before being returned";
-        return prevTasks;
+        assert returnFile.exists() : "File should exist before being returned";
+        return returnFile;
     }
 }
