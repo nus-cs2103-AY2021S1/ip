@@ -13,28 +13,28 @@ public class Messages {
     public static final String CORRECT_DEADLINE_COMMAND = "-Deadline: This command is used to create a new "
             + "deadline task.\n"
             + "The correct command is:\n \"deadline <task description> /by <datetime>\"";
-    public static final String CORRECT_EVENT_COMMAND = "-Event: This command is used to create a new Event task.\n"
+    public static final String CORRECT_EVENT_COMMAND = "- Event: This command is used to create a new Event task.\n"
             + "The correct command is:\n \"event <task description> /at <datetime>\"";
-    public static final String CORRECT_DONE_COMMAND = "-Done: This command is used to mark an existing task as done.\n"
+    public static final String CORRECT_DONE_COMMAND = "- Done: This command is used to mark an existing task as done.\n"
             + "The correct command is:\n \"done <task index>\"";
-    public static final String CORRECT_DELETE_COMMAND = "-Delete: This command is used to delete an existing task.\n"
+    public static final String CORRECT_DELETE_COMMAND = "- Delete: This command is used to delete an existing task.\n"
             + "The correct command is:\n \"delete <task index>\"";
-    public static final String CORRECT_FIND_COMMAND = "-Find: This command is used to find tasks that fit a keyword.\n"
+    public static final String CORRECT_FIND_COMMAND = "- Find: This command is used to find tasks that fit a keyword.\n"
             + "The correct command is:\n \"find <keyword>\"";
-    public static final String CORRECT_LIST_COMMAND = "-List: This command is used to list all exisiting tasks.\n"
+    public static final String CORRECT_LIST_COMMAND = "- List: This command is used to list all existing tasks.\n"
             + "The correct command is:\n \"list\"";
-    public static final String CORRECT_SET_TAG_COMMAND = "-Tag: This command is used to tag tasks.\n"
+    public static final String CORRECT_SET_TAG_COMMAND = "- Tag: This command is used to tag tasks.\n"
             + "The correct command is:\n \"tag <task index> #<tag name>\"";
-    public static final String CORRECT_OVERDUE_COMMAND = "-Overdue: This command is used to display all overdue "
+    public static final String CORRECT_OVERDUE_COMMAND = "- Overdue: This command is used to display all overdue "
             + "uncompleted tasks.\n"
             + "The correct command is:\n \"overdue\"";
-    public static final String CORRECT_UNCOMPLETED_COMMAND = "-Uncompleted: This command is used to display all "
+    public static final String CORRECT_UNCOMPLETED_COMMAND = "- Uncompleted: This command is used to display all "
             + " uncompleted tasks.\n"
             + "The correct command is:\n \"uncompleted\"";
-    public static final String CORRECT_COMPLETED_COMMAND = "-Completed: This command is used to display all "
+    public static final String CORRECT_COMPLETED_COMMAND = "- Completed: This command is used to display all "
             + " completed tasks.\n"
             + "The correct command is:\n \"completed\"";
-    public static final String CORRECT_BYE_COMMAND = "-Bye: This command will terminate the program.\n"
+    public static final String CORRECT_BYE_COMMAND = "- Bye: This command will terminate the program.\n"
             + "The correct command is:\n \"bye\"";
 
     public static final String INVALID_COMMAND_INPUT_MESSAGE = "OOPS!!!! You have inputted an invalid command.\n"
