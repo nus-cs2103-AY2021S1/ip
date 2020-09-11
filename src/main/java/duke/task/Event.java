@@ -52,9 +52,15 @@ public class Event extends Task {
      * @param timing string description of the timing of the event.
      * @throws DukeException if the timing provided for the event has an invalid format.
      */
-    private Event(String eventDescription, String timing) throws DukeException {
+    protected Event(String eventDescription, String timing) throws DukeException {
         super(eventDescription);
         processEventTimingString(timing);
+    }
+
+    protected Event(String eventDescription, LocalDateTime startTiming, LocalDateTime endTiming) {
+        super(eventDescription);
+        this.startTiming = startTiming;
+        this.endTiming = endTiming;
     }
 
     /**
@@ -139,6 +145,14 @@ public class Event extends Task {
     @Override
     public String getSymbol() {
         return SYMBOL;
+    }
+
+    public LocalDateTime getStartTiming() {
+        return startTiming;
+    }
+
+    public LocalDateTime getEndTiming() {
+        return endTiming;
     }
 
 }

@@ -51,9 +51,18 @@ public class Deadline extends Task {
      * @param deadline string description of the deadline.
      * @throws DukeException if the deadline provided has an invalid datetime format.
      */
-    private Deadline(String deadlineDescription, String deadline) throws DukeException {
+    protected Deadline(String deadlineDescription, String deadline) throws DukeException {
         super(deadlineDescription);
         this.deadline = DateTimeHandler.parseDateTime(deadline);
+    }
+
+    protected Deadline(String eventDescription, LocalDateTime deadlineTiming) {
+        super(eventDescription);
+        this.deadline = deadlineTiming;
+    }
+
+    public LocalDateTime getDeadline() {
+        return deadline;
     }
 
     /**
