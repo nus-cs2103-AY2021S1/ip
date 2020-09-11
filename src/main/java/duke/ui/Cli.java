@@ -59,7 +59,7 @@ public class Cli {
 
     private String execute() {
         //setStorage must be invoked before execute
-        assert this.storage != null: "storage is not set yet";
+        assert this.storage != null : "storage is not set yet";
         this.dcm = new DukeCommandMatcher(this.storage);
 
         assert !(this.dcm == null) : "duke command matcher is not created yet";

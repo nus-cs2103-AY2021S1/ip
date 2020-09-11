@@ -91,8 +91,8 @@ public class Printer {
      */
     public static String printListCommands() {
         String commandList = "help\n" + "done <task number> \n" + "todo <task content> \n"
-                + "deadline <task content> /<" + Constants.DATEFORMAT + ">\n"
-                + "event <task content> /<" + Constants.DATEFORMAT + ">\n"
+                + "deadline <task content> /<" + Constants.DF_LOCAL_TIME + ">\n"
+                + "event <task content> /<" + Constants.DF_LOCAL_TIME + ">\n"
                 + "find <query key>\n" + "delete <task number>\n"
                 + "l[i]s[t]\n" + "bye\n";
         System.out.println(commandList);
@@ -101,7 +101,6 @@ public class Printer {
 
     /**
      * Print the division line.
-     * @return division line
      */
     public static void printDivision() {
         System.out.println(Constants.DIVIDER);

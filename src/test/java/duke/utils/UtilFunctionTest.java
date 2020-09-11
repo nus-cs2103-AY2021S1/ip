@@ -28,7 +28,7 @@ public class UtilFunctionTest {
             Assertions.fail();
         } catch (DateFormatException e) {
             Assertions.assertEquals("The input format of date is not valid\n"
-                    + "please write date in the forms of " + Constants.DATEFORMAT, e.getMessage());
+                    + "please write date in the forms of " + Constants.DF_LOCAL_TIME, e.getMessage());
         }
     }
 

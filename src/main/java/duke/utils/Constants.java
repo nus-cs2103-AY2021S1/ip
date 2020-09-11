@@ -1,7 +1,13 @@
 package duke.utils;
 
+import java.util.Arrays;
+import java.util.List;
 
+import duke.dateformats.DateFormat;
+import duke.dateformats.DayOnlyFormat;
+import duke.dateformats.StandardDateFormat;
 import duke.storage.Storage;
+
 
 public class Constants {
     /**
@@ -47,14 +53,13 @@ public class Constants {
     public static final String EVENTPATTERN = ("^(e|E)(v|V)(e|E)(n|N)(t|T)$");
 
     /**
-     * Delete pattern of the delete comand for Duke.
+     * Delete pattern of the delete command for Duke.
      */
     public static final String DELETEPATTERN = ("^(d|D)(e|E)(l|L)(e|E)(t|T)(e|E)$");
-
     /**
      * Standard date format.
      */
-    public static final String DATEFORMAT = "yyyy-mm-dd";
+    public static final String DF_LOCAL_TIME = "yyyy-mm-dd";
 
     public static final String FINDPATTERN = ("^(f|F)(i|I)(n|N)(d|D)$");
 
@@ -68,5 +73,8 @@ public class Constants {
     public static final String EXITRESPONSE = "EXIT";
 
     public static final Storage DEFAULTSTORAGE = new Storage("data/tasksTable.csv");
+
+    public static final List<DateFormat> DATE_FORMAT_LIST =
+            Arrays.asList(new DayOnlyFormat(), new StandardDateFormat());
 
 }

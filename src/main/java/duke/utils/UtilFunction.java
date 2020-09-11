@@ -1,13 +1,13 @@
 package duke.utils;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 import java.util.Date;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import duke.dateformats.DateFormat;
 import duke.exceptions.DateFormatException;
 
 /**
@@ -37,15 +37,17 @@ public class UtilFunction {
      * @see duke.exceptions.DateFormatException
      */
     public static String formatDateToStandard(String dateString) throws DateFormatException {
-        String standardDateFormat = null;
-        try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
-            LocalDate date = LocalDate.parse(dateString);
-            standardDateFormat = formatter.format(date);
-        } catch (DateTimeParseException e) {
-            throw new DateFormatException("The date format is not valid.");
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
+        LocalDateTime ldt = null;
+        for (DateFormat format: Constants.DATE_FORMAT_LIST) {
+            if (format.check(dateString)) {
+                ldt = format.formatToStandard(dateString);
+                String standardDate = formatter.format(ldt);
+                return standardDate;
+            }
         }
-        return standardDateFormat;
+
+        throw new DateFormatException("The date format is not valid.");
     }
 
     /**
@@ -85,15 +87,5 @@ public class UtilFunction {
         return formatter.format(now);
     }
 
-    public static int getLongestSentLength(String text) {
-        String[] sentences = text.split("\n");
-        int sol = sentences[0].length();
-        for (String sentence : sentences) {
-            if (sentence.length() > sol) {
-                sol = sentence.length();
-            }
-        }
-        return sol;
-    }
 
 }
