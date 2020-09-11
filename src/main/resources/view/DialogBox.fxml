@@ -7,7 +7,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<fx:root alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1266.0" stylesheets="@StyleSheet.css" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<fx:root id="chatBox" alignment="TOP_RIGHT" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="-Infinity" prefWidth="1266.0" stylesheets="@StyleSheet.css" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Label fx:id="dialog" text="lol" textFill="#555b6e" wrapText="true">
          <HBox.margin>
@@ -21,8 +21,11 @@
          </padding></Label>
         <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../images/user.png" />
-         </image></ImageView>
+            <Image url="@../images/hotline.png" />
+         </image>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin></ImageView>
     </children>
     <padding>
         <Insets bottom="5.0" left="15.0" right="15.0" top="15.0" />
