@@ -42,6 +42,8 @@ public class TaskList {
         for (Task task: taskList) {
             if (task.getContent().contains(condition)) {
                 newTaskList.add(task);
+            } else if (task.getTag().contains(condition)) {
+                newTaskList.add(task);
             }
         }
         return new TaskList(newTaskList);

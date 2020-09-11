@@ -35,4 +35,12 @@ public class Ui {
         return "Noted. I've removed this task:\n" + task.toString()
                 + "\nNow you have " + taskList.size() + " tasks in the list.";
     }
+
+    public static String setTaskTag(int taskIndex, String oldTag, String newTag) {
+        if (oldTag == null) {
+            return "Noted. I've tagged Task " + taskIndex + " as " + newTag + ".";
+        } else {
+            return "Noted. I've tagged Task " + taskIndex + " as " + newTag + ". Its original tag is " + oldTag + ".";
+        }
+    }
 }
