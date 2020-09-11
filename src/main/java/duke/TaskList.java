@@ -62,7 +62,7 @@ public class TaskList {
      * Adds a Todo Task to the task list.
      *
      * @param parameters the description of the task
-     * @return the {@code Todo} task
+     * @return the Todo task
      */
     public Task addTodoTask(String ...parameters) {
         assert parameters.length == 1 : "insufficient amount of parameters";
@@ -71,6 +71,12 @@ public class TaskList {
         return newTask;
     }
 
+    /**
+     * Adds an Event Task to the task list.
+     *
+     * @param parameters the description of the task
+     * @return the Event task
+     */
     public Task addEventTask(String ...parameters) {
         assert parameters.length == 2 : "insufficient amount of parameters";
         String eventDescription = parameters[0].strip();
@@ -80,6 +86,12 @@ public class TaskList {
         return newTask;
     }
 
+    /**
+     * Adds a Deadline Task to the task list.
+     *
+     * @param parameters the description of the task
+     * @return the Event task
+     */
     public Task addDeadlineTask(String ...parameters) {
         assert parameters.length == 2 : "insufficient amount of parameters";
         String eventDescription = parameters[0].strip();

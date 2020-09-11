@@ -10,7 +10,7 @@ import duke.TaskList;
  */
 public abstract class Command {
     /** array of strings where each element represents a parameter tagged to the command */
-    private final String[] parameters;
+    protected final String[] parameters;
 
     /**
      * Instantiate command without parameters
