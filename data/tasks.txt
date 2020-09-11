@@ -1,5 +1,2 @@
-1.[T][✓] study
-2.[T][✘] work
-3.[T][✘] read
-4.[T][✘] gym
+1.[D][✘] read book
 

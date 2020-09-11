@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 
 /**
- * Represents a parser object that interprets user inputs.
+ * Represents a parser object that interprets user inputs for the graphical user interface.
+ * It is in a separate class so that both the graphical user interface and the command line interface
+ * can run at the same time.
  */
 public class GuiParser {
 
@@ -98,6 +100,10 @@ public class GuiParser {
         return helpInterface;
     }
 
+    /**
+     * Shows the tasks in the list.
+     * @param list List of tasks.
+     */
     private String showListGui(ArrayList<Task> list) {
         assert list != null : "List object should not be null";
 
@@ -114,6 +120,15 @@ public class GuiParser {
         }
     }
 
+    /**
+     * Sets the specific task as done.
+     * @param input Input string.
+     * @param indexOfSpace Index of space.
+     * @param list List of tasks.
+     * @param storage Storage object.
+     * @throws DukeInvalidTaskException
+     * @throws FileNotFoundException
+     */
     private String setDoneGui(String input, int indexOfSpace, ArrayList<Task> list, Storage storage) throws DukeException, FileNotFoundException {
         assert indexOfSpace > -1 : "Index of space should not be negative";
 
@@ -128,6 +143,16 @@ public class GuiParser {
         }
     }
 
+    /**
+     * Deletes a task.
+     * @param input Input string
+     * @param indexOfSpace Index of space.
+     * @param taskList TaskList object.
+     * @param list list of tasks
+     * @param storage
+     * @throws DukeInvalidTaskException
+     * @throws FileNotFoundException
+     */
     private String dealWithDeleteGui(String input, int indexOfSpace, TaskList taskList, ArrayList<Task> list, Storage storage)
             throws DukeException, FileNotFoundException {
         assert indexOfSpace > -1 : "Index of space should not be negative";
@@ -144,6 +169,15 @@ public class GuiParser {
         }
     }
 
+    /**
+     * Creates a new todo object and stores it.
+     * @param input Input string.
+     * @param indexOfSpace Index of space.
+     * @param taskList TaskList object.
+     * @param list List of tasks.
+     * @param storage Storage object.
+     * @throws FileNotFoundException
+     */
     private String dealWithTodoGui(String input, int indexOfSpace, TaskList taskList, ArrayList<Task> list, Storage storage)
             throws FileNotFoundException {
         assert indexOfSpace > -1 : "Index of space should not be negative";
@@ -157,6 +191,15 @@ public class GuiParser {
         return str;
     }
 
+    /**
+     * Creates a new deadline object and stores it.
+     * @param input Input string.
+     * @param indexOfSpace Index of space.
+     * @param taskList TaskList object
+     * @param list List of tasks.
+     * @param storage Storage object.
+     * @throws FileNotFoundException
+     */
     private String dealWithDeadlineGui(String input, int indexOfSpace, TaskList taskList, ArrayList<Task> list, Storage storage)
             throws FileNotFoundException {
         assert indexOfSpace > -1 : "Index of space should not be negative";
@@ -172,6 +215,15 @@ public class GuiParser {
         return str;
     }
 
+    /**
+     * Creates a new event object and stores it.
+     * @param input Input string.
+     * @param indexOfSpace Index of space.
+     * @param taskList TaskList object.
+     * @param list List of tasks.
+     * @param storage Storage object.
+     * @throws FileNotFoundException
+     */
     private String dealWithEventGui(String input, int indexOfSpace, TaskList taskList, ArrayList<Task> list, Storage storage)
             throws FileNotFoundException {
         assert indexOfSpace > -1 : "Index of space should not be negative";
@@ -187,11 +239,16 @@ public class GuiParser {
         return str;
     }
 
+    /**
+     * Finds the specific tasks based on user query.
+     * @param input Input string.
+     * @param indexOfSpace Index of space.
+     * @param list List of tasks.
+     */
     private String dealWithFindGui(String input, int indexOfSpace, ArrayList<Task> list) {
         assert indexOfSpace > -1 : "Index of space should not be negative";
 
         String nameOfItemToBeFound = input.substring(indexOfSpace + 1);
-        // search the list of the item to be found, add them to a new list and print them out
         ArrayList<Task> newList = new ArrayList<>();
         for (Task task: list) {
             Boolean found = Arrays.asList(task.getTaskName().split(" ")).contains(nameOfItemToBeFound);

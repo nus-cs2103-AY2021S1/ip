@@ -10,7 +10,6 @@ public class Deadline extends Task {
 
     private final String ICON = "[D]";
     private final DateTimeFormatter FORMATOFDATE = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-
     private LocalDate date;
 
     /**

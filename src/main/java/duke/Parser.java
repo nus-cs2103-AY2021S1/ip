@@ -96,6 +96,10 @@ public class Parser {
                 "\nfind - finds task (e.g find book)");
     }
 
+    /**
+     * Shows the tasks in the list.
+     * @param list List of tasks.
+     */
     private void showList(ArrayList<Task> list) {
         assert list != null : "List object should not be null";
 
@@ -112,8 +116,17 @@ public class Parser {
         }
     }
 
+    /**
+     * Sets the specific task as done.
+     * @param input Input string.
+     * @param indexOfSpace Index of space.
+     * @param list List of tasks.
+     * @param storage Storage object.
+     * @throws DukeInvalidTaskException
+     * @throws FileNotFoundException
+     */
     private void setDone(String input, int indexOfSpace, ArrayList<Task> list, Storage storage)
-            throws DukeException, FileNotFoundException {
+            throws DukeInvalidTaskException, FileNotFoundException {
         assert indexOfSpace > -1 : "Index of space should not be negative";
 
         int num = Integer.parseInt(input.substring(indexOfSpace + 1));
@@ -127,8 +140,18 @@ public class Parser {
         }
     }
 
+    /**
+     * Deletes a task.
+     * @param input Input string
+     * @param indexOfSpace Index of space.
+     * @param taskList TaskList object.
+     * @param list list of tasks
+     * @param storage
+     * @throws DukeInvalidTaskException
+     * @throws FileNotFoundException
+     */
     private void dealWithDelete(String input, int indexOfSpace, TaskList taskList, ArrayList<Task> list, Storage storage)
-            throws DukeException, FileNotFoundException {
+            throws DukeInvalidTaskException, FileNotFoundException {
         assert indexOfSpace > -1 : "Index of space should not be negative";
 
         int num = Integer.parseInt(input.substring(indexOfSpace + 1));
@@ -140,6 +163,15 @@ public class Parser {
         }
     }
 
+    /**
+     * Creates a new todo object and stores it.
+     * @param input Input string.
+     * @param indexOfSpace Index of space.
+     * @param taskList TaskList object.
+     * @param list List of tasks.
+     * @param storage Storage object.
+     * @throws FileNotFoundException
+     */
     private void dealWithTodo(String input, int indexOfSpace, TaskList taskList, ArrayList<Task> list, Storage storage)
             throws FileNotFoundException {
         assert indexOfSpace > -1 : "Index of space should not be negative";
@@ -150,6 +182,15 @@ public class Parser {
         storage.update(list);
     }
 
+    /**
+     * Creates a new deadline object and stores it.
+     * @param input Input string.
+     * @param indexOfSpace Index of space.
+     * @param taskList TaskList object
+     * @param list List of tasks.
+     * @param storage Storage object.
+     * @throws FileNotFoundException
+     */
     private void dealWithDeadline(String input, int indexOfSpace, TaskList taskList, ArrayList<Task> list, Storage storage)
             throws FileNotFoundException {
         assert indexOfSpace > -1 : "Index of space should not be negative";
@@ -162,6 +203,15 @@ public class Parser {
         storage.update(list);
     }
 
+    /**
+     * Creates a new event object and stores it.
+     * @param input Input string.
+     * @param indexOfSpace Index of space.
+     * @param taskList TaskList object.
+     * @param list List of tasks.
+     * @param storage Storage object.
+     * @throws FileNotFoundException
+     */
     private void dealWithEvent(String input, int indexOfSpace, TaskList taskList, ArrayList<Task> list, Storage storage)
             throws FileNotFoundException {
         assert indexOfSpace > -1 : "Index of space should not be negative";
@@ -174,6 +224,12 @@ public class Parser {
         storage.update(list);
     }
 
+    /**
+     * Finds the specific tasks based on user query.
+     * @param input Input string.
+     * @param indexOfSpace Index of space.
+     * @param list List of tasks.
+     */
     private void dealWithFind(String input, int indexOfSpace, ArrayList<Task> list) {
         assert indexOfSpace > -1 : "Index of space should not be negative";
 
