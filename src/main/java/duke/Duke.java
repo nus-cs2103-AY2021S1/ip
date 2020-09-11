@@ -14,10 +14,6 @@ class Duke {
      */
     private TaskList tasks;
     /**
-     * Client list.
-     */
-    private ClientList clients;
-    /**
      * Deals with user input output.
      */
     private Ui ui;
@@ -32,11 +28,9 @@ class Duke {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
-            clients = new ClientList();
         } catch (DukeException e) {
             ui.showError(e);
             tasks = new TaskList();
-            clients = new ClientList();
         }
     }
 
@@ -49,14 +43,8 @@ class Duke {
      */
     String getResponse(String input) {
         try {
-            boolean isTaskCommand = Parser.isTaskCommand(input);
-            if (isTaskCommand) {
-                Command command = Parser.parseTaskCommand(input);
-                return command.execute(tasks, ui, storage);
-            } else {
-                ClientCommand clientCommand = Parser.parseClientCommand(input);
-                return clientCommand.execute(clients, ui, storage);
-            }
+            Command c = Parser.parse(input);
+            return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return ui.showError(e);
         }
@@ -64,14 +52,8 @@ class Duke {
 
     boolean isExit(String input) {
         try {
-            boolean isTaskCommand = Parser.isTaskCommand(input);
-            if (isTaskCommand) {
-                Command command = Parser.parseTaskCommand(input);
-                return command.isExit();
-            } else {
-                ClientCommand clientCommand = Parser.parseClientCommand(input);
-                return clientCommand.isExit();
-            }
+            Command c = Parser.parse(input);
+            return c.isExit();
         } catch (DukeException e) {
             return false;
         }

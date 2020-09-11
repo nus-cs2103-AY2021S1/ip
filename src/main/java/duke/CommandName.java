@@ -4,5 +4,5 @@ package duke;
  * Enumeration of all valid commands by user.
  */
 enum CommandName {
-    LIST, DONE, TODO, DEADLINE, EVENT, DELETE, BYE, FIND, ADDCLIENT, LISTCLIENT
+    LIST, DONE, TODO, DEADLINE, EVENT, DELETE, BYE, FIND
 }

@@ -1,7 +1,7 @@
 package duke;
 
 /**
- * Controls main logic of task-type user commands.
+ * Controls main logic of all user commands.
  */
 abstract class Command {
     /**

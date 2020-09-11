@@ -73,20 +73,4 @@ class Ui {
         return findTaskMessage.toString();
     }
 
-    String showAddClientMessage(String clientString, String lenString) {
-        String addedClientOutputMessage = "Got it. I've added this client:\n"
-                + clientString + "\nNow you have " + lenString
-                + " clients in the list.";
-        return addedClientOutputMessage;
-    }
-    String showListClientMessage(ArrayList<String> clientListString) {
-        StringBuilder listClientMessage = new StringBuilder("Here are the clients in your list:\n");
-        int index = 1;
-        for (String clientString : clientListString) {
-            listClientMessage.append(index).append(".").append(clientString).append("\n");
-            index++;
-        }
-        return listClientMessage.toString();
-    }
-
 }
