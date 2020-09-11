@@ -4,6 +4,7 @@ import bob.Storage;
 import bob.TaskList;
 import bob.UI;
 import bob.exception.BobException;
+import bob.exception.BobNotADeadlineException;
 import bob.task.Deadline;
 import bob.task.Task;
 
@@ -27,7 +28,7 @@ public class SnoozeCommand extends Command {
             storage.updateSave(tasks);
             return ui.snoozeTask(tasks, index);
         } else {
-            throw new BobException();
+            throw new BobNotADeadlineException();
         }
     }
 }

@@ -14,6 +14,8 @@ import bob.exception.BobException;
 import bob.exception.BobFindNoKeyWordsException;
 import bob.exception.BobIncompleteDeadlineDescriptionException;
 import bob.exception.BobIncompleteEventDescriptionException;
+import bob.exception.BobIncorrectRescheduleFormatException;
+import bob.exception.BobIncorrectSnoozeFormatException;
 import bob.exception.BobNoDescriptionException;
 import bob.exception.BobNumberFormatException;
 
@@ -130,17 +132,28 @@ public class Parser {
     }
 
     static Command parseSnooze(String command) throws BobException {
-        String[] split = command.split("/");
-        String deadline = split[1].substring(3);
-        int index = Integer.parseInt(split[0].split(" ")[1]);
-        return new SnoozeCommand(index, deadline);
+        try {
+            String[] split = command.split("/");
+            String deadline = split[1].substring(3);
+            int index = Integer.parseInt(split[0].split(" ")[1]);
+            return new SnoozeCommand(index, deadline);
+        } catch (IndexOutOfBoundsException e) {
+            throw new BobIncorrectSnoozeFormatException();
+        } catch (NumberFormatException e) {
+            throw new BobIncorrectSnoozeFormatException();
+        }
     }
 
     static Command parseReschedule(String command) throws BobException {
-        String[] split = command.split("/");
-        String period = split[1].substring(3);
-        int index = Integer.parseInt(split[0].split(" ")[1]);
-        return new RescheduleCommand(index, period);
+        try {
+            String[] split = command.split("/");
+            String period = split[1].substring(3);
+            int index = Integer.parseInt(split[0].split(" ")[1]);
+            return new RescheduleCommand(index, period);
+        } catch (IndexOutOfBoundsException e) {
+            throw new BobIncorrectRescheduleFormatException();
+        } catch (NumberFormatException e) {
+            throw new BobIncorrectRescheduleFormatException();
+        }
     }
-
 }

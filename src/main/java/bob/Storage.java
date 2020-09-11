@@ -1,5 +1,6 @@
 package bob;
 
+import bob.exception.BobDateTimeParseException;
 import bob.exception.BobFileNotFoundException;
 import bob.exception.BobIOException;
 import bob.exception.BobIndexOutOfBoundsException;
@@ -71,7 +72,7 @@ public class Storage {
      * @throws BobFileNotFoundException if the file to load from does not exist.
      */
 
-    public void loadSave(TaskList tasks) throws BobIOException, BobFileNotFoundException {
+    public void loadSave(TaskList tasks) throws BobIOException, BobFileNotFoundException, BobDateTimeParseException {
         Scanner sc = null;
         try {
             sc = new Scanner(save);
@@ -160,7 +161,7 @@ public class Storage {
         }
     }
 
-    public Task loadTask(String data) {
+    public Task loadTask(String data) throws BobDateTimeParseException {
         String[] taskDataArr = data.split("\\|");
         char firstChar = taskDataArr[0].charAt(0);
         boolean isDone = taskDataArr[1].substring(1, 2).equals("1");

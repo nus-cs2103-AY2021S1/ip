@@ -1,7 +1,11 @@
 package bob.task;
 
+import bob.exception.BobDateTimeParseException;
+
+import java.time.DateTimeException;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeParseException;
 
 /**
  * Encapsulates a task with a deadline.
@@ -23,9 +27,13 @@ public class Deadline extends Task {
      * @param description a brief description of the deadline.
      * @param deadline a String in a specific format (inputFormatter) which specifies a date.
      */
-    public Deadline(String description, String deadline) {
+    public Deadline(String description, String deadline) throws BobDateTimeParseException {
         super(description);
-        this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
+        try {
+            this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
+        } catch (DateTimeException e) {
+            throw new BobDateTimeParseException();
+        }
     }
 
     /**
@@ -36,9 +44,13 @@ public class Deadline extends Task {
      * @param description a brief description of the deadline.
      * @param deadline a String in a specific format (inputFormatter) which specifies a date.
      */
-    public Deadline(boolean isDone, String description, String deadline) {
+    public Deadline(boolean isDone, String description, String deadline) throws BobDateTimeParseException {
         super(isDone, description);
-        this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
+        try {
+            this.deadline = LocalDateTime.parse(deadline, INPUT_DATE_TIME_FORMAT);
+        } catch (DateTimeException e) {
+            throw new BobDateTimeParseException();
+        }
     }
 
 
@@ -48,8 +60,14 @@ public class Deadline extends Task {
      * @return a String representation of the deadline with the format of outputFormatter.
      */
 
-    public void snooze(String newDeadline) {
-        this.deadline = LocalDateTime.parse(newDeadline, INPUT_DATE_TIME_FORMAT);
+    public void snooze(String newDeadline) throws BobDateTimeParseException {
+        try {
+            this.deadline = LocalDateTime.parse(newDeadline, INPUT_DATE_TIME_FORMAT);
+        } catch (DateTimeException e) {
+            throw new BobDateTimeParseException();
+        } catch (IndexOutOfBoundsException e) {
+            throw new BobDateTimeParseException();
+        }
     }
     public String getDeadline() {
         return this.deadline.format(OUTPUT_DATE_TIME_FORMAT).toString();

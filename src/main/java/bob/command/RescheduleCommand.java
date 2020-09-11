@@ -5,6 +5,7 @@ import bob.TaskList;
 import bob.UI;
 import bob.exception.BobException;
 
+import bob.exception.BobNotAnEventException;
 import bob.task.Deadline;
 import bob.task.Event;
 import bob.task.Task;
@@ -27,9 +28,9 @@ public class RescheduleCommand extends Command {
         if (isEvent) {
             ((Event) task).reschedule(newPeriod);
             storage.updateSave(tasks);
-            return ui.rescheduleTask(tasks,index);
+            return ui.rescheduleTask(tasks, index);
         } else {
-            throw new BobException();
+            throw new BobNotAnEventException();
         }
     }
 }
