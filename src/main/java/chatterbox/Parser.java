@@ -29,6 +29,8 @@ public class Parser {
      * @return The string parsed as a LocalDateTime if possible, else null
      */
     public static LocalDateTime parseDateTimeFromString(String dateTime) {
+        // Solution below adapted from
+        // https://stackoverflow.com/questions/4024544/how-to-parse-dates-in-multiple-formats-using-simpledateformat
         for (String format : dateFormats) {
             try {
                 Date d = new SimpleDateFormat(format).parse(dateTime);
