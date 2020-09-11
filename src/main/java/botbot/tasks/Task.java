@@ -39,6 +39,8 @@ public abstract class Task {
      * @return Type of task.
      */
     public char getType() {
+        assert type == Deadline.TYPE_CODE || type == Event.TYPE_CODE || type == Todo.TYPE_CODE
+                : "Task type not D, E or T";
         return type;
     }
 
@@ -48,6 +50,7 @@ public abstract class Task {
      * @return Description of task.
      */
     public String getDescription() {
+        assert description != null : "Empty description";
         return description;
     }
 

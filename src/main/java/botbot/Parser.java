@@ -77,6 +77,7 @@ public class Parser {
      * @return Task ID parsed from input.
      */
     static int parseCommandId(String args) {
+        assert !args.isBlank() : "Args provided is blank";
         return Integer.parseInt(args) - 1;
     }
 

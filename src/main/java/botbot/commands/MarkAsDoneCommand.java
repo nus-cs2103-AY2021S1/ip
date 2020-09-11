@@ -4,6 +4,7 @@ import botbot.Storage;
 import botbot.TaskList;
 import botbot.Ui;
 import botbot.tasks.Task;
+import botbot.tasks.TaskStatus;
 
 /**
  * Marks a task in the task list as done.
@@ -33,6 +34,7 @@ public class MarkAsDoneCommand extends Command {
     public String execute(Storage storage, TaskList tasks, Ui ui) {
         Task task = tasks.get(id);
         task.markAsDone();
+        assert task.getStatus().equals(TaskStatus.DONE.getStrValue()) : "Mark task as done unsuccessful";
         storage.save(tasks);
         return ui.showMarkAsDoneResponse(task);
     }

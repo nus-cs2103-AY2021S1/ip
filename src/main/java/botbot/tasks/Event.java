@@ -35,7 +35,7 @@ public class Event extends Task {
         super(TYPE_CODE, description, status);
         this.at = LocalDateTime.parse(at);
     }
-
+    
     /**
      * Returns the time of the event.
      *

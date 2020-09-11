@@ -35,7 +35,7 @@ public class Deadline extends Task {
         super(TYPE_CODE, description, status);
         this.by = LocalDateTime.parse(by);
     }
-
+    
     /**
      * Returns the time of the deadline.
      *

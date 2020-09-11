@@ -39,7 +39,8 @@ public class Storage {
     List<Task> load() {
         File file = new File(filePath);
         file.getParentFile().mkdirs();
-        
+        assert file.getParentFile().isDirectory() : "Parent directory for data file not created";
+
         if (file.isFile()) {
             return readDataFile();
         } else {
@@ -126,6 +127,8 @@ public class Storage {
                     temp.add(task.getBy());
                 } else if (task instanceof Event) {
                     temp.add(task.getAt());
+                } else {
+                    assert task instanceof Todo : "Invalid task type";
                 }
                 String data = String.join("|", temp);
                 fw.write(data + "\n");

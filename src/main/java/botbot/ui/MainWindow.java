@@ -32,6 +32,7 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(DialogBox.getBotbotDialog(Ui.greet(), botbotImage));
+        assert dialogContainer.getChildren().size() == 1;
     }
 
     public void setBotbot(Botbot botbot) {
@@ -45,11 +46,14 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
+        assert input != null : "Empty input";
         String response = botbot.getResponse(input);
+        assert response != null : "Empty response";
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getBotbotDialog(response, botbotImage)
         );
+        assert dialogContainer.getChildren().size() >= 2;
         userInput.clear();
     }
 }
