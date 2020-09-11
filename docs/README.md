@@ -19,7 +19,9 @@ Duke is an application using Command Line Tool to manage your tasks.
 
 4. Double-click the file to start the app. The GUI similar to below will appear in a few seconds.
 
-![Main page](/demo/duke_main.png?raw=true)
+<p alignment = "certer">
+    <img src="/demo/duke_main.png">
+</p>
 
 ## Features 
 
