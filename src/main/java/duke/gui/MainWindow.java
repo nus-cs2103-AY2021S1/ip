@@ -60,6 +60,7 @@ public class MainWindow extends AnchorPane {
         if (input.equals("bye")) {
             response = new Ui().getExitResponseAsString();
             userInput.setEditable(false);
+            sendButton.setDisable(true);
             try {
                 duke.storeTasks();
             } catch (IOException e) {
