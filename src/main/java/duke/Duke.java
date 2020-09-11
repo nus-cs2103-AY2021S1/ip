@@ -1,5 +1,7 @@
 package duke;
 
+import duke.exception.DukeException;
+
 import java.io.IOException;
 import java.util.Scanner;
 

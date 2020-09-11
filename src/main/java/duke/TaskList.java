@@ -21,6 +21,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Initialises a TaskList which contains tasks provided by the List of Tasks
+     *
      * @param taskList List containing Tasks with which to fill the TaskList
      */
     public TaskList(List<Task> taskList) {
@@ -29,6 +30,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Provides the number of tasks in the TaskList
+     *
      * @return Size of TaskList
      */
     public int numTasks() {
@@ -37,6 +39,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Adds a new Task to the TaskList
+     *
      * @param task Task to be added to the TaskList
      */
     public void addTask(Task task) {
@@ -45,6 +48,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Retrieves a task from the TaskList at the specified index
+     *
      * @param index The index of the Task to be retrieved
      * @return Task object stored at index in the TaskList
      */
@@ -54,6 +58,7 @@ public class TaskList implements Iterable<Task> {
 
     /**
      * Removes a task from the TaskList at the specified index
+     *
      * @param index The index of the Task to be removed
      * @return Task object that has been removed
      */

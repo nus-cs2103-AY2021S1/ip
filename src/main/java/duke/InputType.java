@@ -14,6 +14,7 @@ public enum InputType {
 
     /**
      * Gives an InputType corresponding to the input string
+     *
      * @param s String which corresponds to a particular InputType
      * @return InputType representing the string
      */
