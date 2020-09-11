@@ -4,8 +4,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.stage.Stage;
 
 /**
@@ -50,7 +49,7 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         if (response.equals(Ui.showByeMessage())) {
-            Button exitButton = setExitButton();
+            HBox exitButton = setExitButton();
             dialogContainer.getChildren().addAll(
                     DialogBox.getDukeDialog(response, dukeImage),
                     exitButton);
@@ -63,11 +62,15 @@ public class MainWindow extends AnchorPane {
         userInput.clear();
     }
 
-    private Button setExitButton() {
+    private HBox setExitButton() {
+        HBox hbox = new HBox();
+        Pane spacer = new Pane();
+        HBox.setHgrow(spacer, Priority.ALWAYS);
         Button exitButton = new Button("Exit");
         exitButton.setPadding(new Insets(10, 10, 10, 10));
         exitButton.setOnAction(e -> closeStage());
-        return exitButton;
+        hbox.getChildren().addAll(spacer, exitButton);
+        return hbox;
     }
 
     @FXML
