@@ -230,6 +230,9 @@ public class CommandAgent {
      * @return A String showing all the task information.
      */
     public static String generateRetrievalResponse() {
+        if (taskList.getSize() == 0) {
+            return "Sorry, there is no task stored, please enter some.";
+        }
         String result = "Here are the tasks in your list:";
         result += taskList.printTasks();
         return result;
@@ -255,6 +258,9 @@ public class CommandAgent {
      * @return A String showing the response to the user with all the tasks desired.
      */
     public static String generateSearchResponse(String matchedTasks) {
+        if (matchedTasks.equals("")) {
+            return "Sorry, no matching task is found, try another keyword";
+        }
         String result = "Here are the matching tasks in your list:";
         result += matchedTasks;
         return result;
