@@ -105,12 +105,14 @@ public class Storage {
     /**
      * Archives the list of Task objects into an archive file in text format, and empties the current save file.
      *
+     * @return The filename of the archive file.
      * @throws IOException If archiving fails.
      */
-    public void archiveItems() throws IOException {
+    public String archiveItems() throws IOException {
         ensureSaveFileExistence();
         File archiveFile = getUnusedArchiveFile();
         Files.move(saveFile.toPath(), archiveFile.toPath(), StandardCopyOption.REPLACE_EXISTING);
         ensureSaveFileExistence(); // Create an empty save file again
+        return archiveFile.getName();
     }
 }

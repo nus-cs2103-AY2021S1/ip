@@ -13,14 +13,14 @@ public class Chatterbox {
     private static final String ERROR_NO_TASK_NUMBER = "Please enter a number after the command.";
     private static final String ERROR_INVALID_COMMAND = "That's not a valid command.";
 
-    private final TaskList tasks;
+    private final TaskList taskList;
 
     /**
      * Initializes the task list and load stored tasks.
      */
     public Chatterbox() {
         Storage storage = new Storage();
-        tasks = new TaskList(storage);
+        taskList = new TaskList(storage);
     }
 
     /**
@@ -30,7 +30,7 @@ public class Chatterbox {
      * @throws IOException  If tasks cannot be loaded.
      */
     public void loadTasks() throws ChatterboxException, IOException {
-        tasks.loadTasks();
+        taskList.loadTasks();
     }
 
     /**
@@ -61,7 +61,7 @@ public class Chatterbox {
 
         // Process command
         if (command.equals("list")) {
-            return tasks.getPrintableTaskList();
+            return taskList.getPrintableTaskList();
         } else if (command.equals("done") || command.equals("delete")) {
             // Get the task number after the command, check if it is valid
             int taskNo;
@@ -73,18 +73,18 @@ public class Chatterbox {
 
             // Mark as done or delete based on the command
             if (command.equals("done")) {
-                return tasks.setTaskAsDone(taskNo);
+                return taskList.setTaskAsDone(taskNo);
             } else {
-                return tasks.deleteTask(taskNo);
+                return taskList.deleteTask(taskNo);
             }
         } else if (command.equals("find")) {
             String searchKeyword = input.split(" ", 2)[1];
-            return tasks.findTasks(searchKeyword);
+            return taskList.findTasks(searchKeyword);
         } else if (command.equals("deadline") || command.equals("todo") || command.equals("event")) {
             Task t = Parser.parseTask(input);
-            return tasks.addTask(t);
+            return taskList.addTask(t);
         } else if (command.equals("archive")) {
-            return tasks.archive();
+            return taskList.archive();
         } else {
             throw new ChatterboxException(ERROR_INVALID_COMMAND);
         }

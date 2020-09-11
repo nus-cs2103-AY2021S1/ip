@@ -1,3 +1,7 @@
-false todo check books
-false todo help me with the cleaning, cooking, and other things that need help with
-false todo the dishes
+true todo borrow books
+false deadline borrow books /by 18/9/2019 9
+false todo help me
+false deadline do stuff
+false event do that
+false todo do this
+false todo check

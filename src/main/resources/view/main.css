@@ -22,7 +22,6 @@
     -fx-shape: " ";
     -fx-padding: 0 12 0 0;
     -fx-max-height: 0;
-    -fx-background-color: transparent;
 }
 
 #scrollPane .scroll-bar .increment-arrow,
@@ -30,7 +29,6 @@
     -fx-shape: " ";
     -fx-padding: 0 0 5;
     -fx-max-height: 0;
-    -fx-background-color: transparent;
 }
 
 #scrollPane .scroll-bar .thumb {
