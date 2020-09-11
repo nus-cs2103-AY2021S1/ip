@@ -1,6 +1,7 @@
 package duke.ui;
 
 import java.io.IOException;
+import java.util.List;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,9 +18,11 @@ import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog = new Label();
+    private final HBox dialogContainer = new HBox();
     @FXML
     private ImageView displayPicture = new ImageView();
+    @FXML
+    private Label dialog = new Label();
 
     /**
      * Creates a dialog box in GUI.
@@ -28,7 +31,7 @@ public class DialogBox extends HBox {
      * @param img Image to be displayed
      */
     private DialogBox(String text, Image img) {
-        Circle clipCircle = new Circle(50, 40, 40);
+        Circle clipCircle = new Circle(40, 40, 40);
 
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -40,6 +43,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+
         displayPicture.setImage(img);
         displayPicture.setClip(clipCircle);
     }
@@ -55,11 +59,10 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text,img);
 
-        for (Node subview: db.getChildren()) {
-            if (subview.getId().equals("textbox")) {
-                subview.setStyle("-fx-background-color: #E4D7F9");
-            }
-        }
+        Node target = findNodeById("textbox",db.getChildren());
+
+        assert target != null;
+        target.setStyle("-fx-background-color: #E4D7F9");
 
         return db;
     }
@@ -68,11 +71,23 @@ public class DialogBox extends HBox {
         var db = new DialogBox(text, img);
 
         db.flip();
-        for (Node subview: db.getChildren()) {
-            if (subview.getId().equals("textbox")) {
-                subview.setStyle("-fx-background-color: #9156F0");
+
+        Node target = findNodeById("textbox",db.getChildren());
+
+        assert target != null;
+        target.setStyle("-fx-background-color: #9156F0");
+
+        return db;
+    }
+
+    private static Node findNodeById(String id, List<Node> childrenList) {
+        for (Node subview: childrenList) {
+            if (subview.getId().equals(id)) {
+                return subview;
             }
         }
-        return db;
+
+        assert false;
+        return null;
     }
 }
