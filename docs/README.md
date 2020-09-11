@@ -5,8 +5,6 @@
 
 - [Features](#Features)
 
-- [Usage](#Usage)
-
 ## Introduction
 
 Duke is an application using Command Line Tool to manage your tasks.
@@ -14,10 +12,16 @@ Duke is an application using Command Line Tool to manage your tasks.
 ## Quick Start
 ## Features 
 
-#### Note: 
 
-1. "( )" represents the parameter for the command
-2. The input format of time is "yyyy-MM-dd HH:mm"
+<div markdown="block" class="alert alert-info">
+
+**:information_source: Notes about the command format:**<br>
+   * `( )` represents the parameter for the command
+   
+   * The input format of time is "yyyy-MM-dd HH:mm"
+   
+</div> 
+
 
 ### `todo` - Add a TODO item into the list
 
