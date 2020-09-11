@@ -1,3 +1,4 @@
-T | 1 | read book | -
-
-
+T | 0 | clean book | -
+D | 0 | return book (by: 12 Oct 2020) | 2020-10-12
+T | 0 | clean car | -
+T | 0 | find book | -

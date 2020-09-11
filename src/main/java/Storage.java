@@ -33,11 +33,11 @@ public class Storage {
 
             Stream<Task> taskStream = Files.lines(path).map(item -> {
 
-                String[] lineData = item.split("\\|");
-                String type = lineData[0].trim();
-                boolean isDone = lineData[1].trim().equals("1");
-                String description = lineData[2].trim();
-                String time = lineData[3].trim();
+                String[] dataArray = item.split("\\|");
+                String type = dataArray[0].trim();
+                boolean isDone = dataArray[1].trim().equals("1");
+                String description = dataArray[2].trim();
+                String time = dataArray[3].trim();
 
                 Task task = null;
 
@@ -54,15 +54,14 @@ public class Storage {
                 default:
                     break;
                 }
-
                 return task;
 
             });
 
-            ArrayList<Task> tasks = new ArrayList<>();
-            taskStream.forEach(tasks::add);
+            ArrayList<Task> taskList = new ArrayList<>();
+            taskStream.forEach(taskList::add);
 
-            return tasks;
+            return taskList;
 
 
         } catch (IOException e) {
@@ -77,20 +76,20 @@ public class Storage {
      */
     public void saveTasks(ArrayList<Task> taskList) throws DukeException {
 
-        String dataStr = "";
+        String message = "";
 
         for (Task tsk : taskList) {
-            String timestamp = tsk.getTime() == null ? "-" : tsk.getTime().toString();
+            String time = tsk.getTime() == null ? "-" : tsk.getTime().toString();
             String entry = tsk.getType() + " | " +
                     tsk.getStatus() + " | " +
                     tsk.getDescription() + " | " +
-                    timestamp  +
+                    time  +
                     System.lineSeparator();
-            dataStr = dataStr.concat(entry);
+            message = message.concat(entry);
         }
 
         try {
-            Files.write(path, dataStr.getBytes());
+            Files.write(path, message.getBytes());
         } catch (IOException e) {
             throw new DukeException("Unable to save the tasks.");
         }
