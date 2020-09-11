@@ -1,3 +1,5 @@
+package Task;
+
 import java.time.LocalDate;
 
 /**
@@ -6,7 +8,7 @@ import java.time.LocalDate;
 public class Event extends Task {
 
     /**
-     * @param description Task description
+     * @param description Task.Task description
      * @param date Date of the event
      */
     public Event(String description, LocalDate date) {

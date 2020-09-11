@@ -1,15 +1,17 @@
+package Task;
+
 import java.time.LocalDate;
 
 /**
  * Represents a task.
  */
 public class Task implements java.io.Serializable {
-    String text;
-    boolean isDone;
+    public String text;
+    public boolean isDone;
     LocalDate date;
 
     /**
-     * @param text Task description.
+     * @param text Task.Task description.
      * @param date Date of the task.
      */
     public Task(String text, LocalDate date) {

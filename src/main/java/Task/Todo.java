@@ -1,10 +1,12 @@
+package Task;
+
 /**
  * Represents a to do task without a date.
  */
 public class Todo extends Task {
 
     /**
-     * @param description Task description.
+     * @param description Task.Task description.
      */
     public Todo(String description) {
         super(description, null);

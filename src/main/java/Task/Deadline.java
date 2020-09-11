@@ -1,3 +1,5 @@
+package Task;
+
 import java.time.LocalDate;
 
 /**
@@ -6,8 +8,8 @@ import java.time.LocalDate;
 public class Deadline extends Task {
 
     /**
-     * @param description Task description.
-     * @param date Deadline for the task.
+     * @param description Task.Task description.
+     * @param date Task.Deadline for the task.
      */
     public Deadline(String description, LocalDate date) {
         super(description, date);
