@@ -49,6 +49,9 @@
                         fx:id="reminderScreen"
                         maxHeight="Infinity"
                         fitToWidth="true"
+                        style="-fx-background: #e8effa;-fx-border-color: #e8effa"
+                        translateX="-2"
+                        translateY="-2"
                 >
                 <VBox
                         fx:id="reminderSection"
