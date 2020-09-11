@@ -3,6 +3,7 @@ package duke.ui;
 import java.io.IOException;
 import java.util.Collections;
 
+import duke.result.Result;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -18,6 +19,8 @@ import javafx.scene.shape.Circle;
 
 public class DialogBox extends HBox {
     private static final double CLIP_RADIUS = 30.0;
+    private static final String GREEN_BORDER = " -fx-border-color: green;";
+    private static final String RED_BORDER = " -fx-border-color: red";
 
     @FXML
     private Label dialog;
@@ -53,13 +56,22 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    private static void setDialogBoxFormat(DialogBox db, String style) {
+        String newStyle = db.dialog.getStyle() + style;
+        db.dialog.setStyle(newStyle);
+    }
+
     public static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        DialogBox db = new DialogBox(text, img);
+    public static DialogBox getDukeDialog(Result result, Image img) {
+        DialogBox db = new DialogBox(result.getMessage(), img);
         db.setMinHeight(Region.USE_PREF_SIZE);
+        String colourStyle = result.isSuccessful()
+                ? GREEN_BORDER
+                : RED_BORDER;
+        setDialogBoxFormat(db, colourStyle);
         db.flip();
         return db;
     }

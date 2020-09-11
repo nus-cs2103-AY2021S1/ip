@@ -28,7 +28,8 @@ public class StartOperation extends Operation {
     @Override
     public Result execute() {
         String message = storageManager.loadStores(
-                listManager.getTaskList(), listManager.getExpenseList());
+                listManager.getTaskList(), listManager.getExpenseList())
+                + "\nGreetings, what may I do for you?";
         return new Result(true, message, this.isExit());
     }
 }
