@@ -7,12 +7,11 @@ import duke.task.TaskManager;
  * Represents the user command which will add a task to the taskManager
  * when the command is executed.
  */
-
 public class AddCommand extends Command {
     private Task task;
 
     /**
-     * Constructor
+     * Constructor that creates a {@code AddCommand} object.
      *
      * @param task The task that will needs to be added to the list of tasks
      */
@@ -21,10 +20,10 @@ public class AddCommand extends Command {
     }
 
     /**
-     * Adds the specified task in the constructor to the taskManager
+     * Adds the specified task in the constructor to the taskManager.
      *
      * @param taskManager The taskManager that the task is being added to.
-     * @return The output of the command execution
+     * @return the output of the command execution.
      */
     public CommandOutput executeCommand(TaskManager taskManager) {
         taskManager.addTask(task);

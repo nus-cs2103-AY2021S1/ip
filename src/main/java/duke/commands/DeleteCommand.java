@@ -14,10 +14,23 @@ import duke.utils.Messages;
 public class DeleteCommand extends Command {
     private int taskIndex;
 
+    /**
+     * Constructor to create a new {@code DeleteCommand} object.
+     *
+     * @param taskIndex the index of the task which will be deleted.
+     */
     public DeleteCommand(int taskIndex) {
         this.taskIndex = taskIndex;
     }
 
+    /**
+     * Deletes the task based on the task index and returns the appropriate output after deleting the task.
+     *
+     * @param taskManager the {@code TaskManager} object which holds the list of all the {@code Task} instances.
+     * @return the output after deleting the task.
+     * @throws DukeException if the index is out of the bounds of the list of tasks stored in {@code TaskManager}
+     *      * object.
+     */
     public CommandOutput executeCommand(TaskManager taskManager) throws DukeException {
         try {
             Task deletedTask = taskManager.getTask(taskIndex);

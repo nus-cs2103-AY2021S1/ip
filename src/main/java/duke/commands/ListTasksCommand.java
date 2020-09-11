@@ -12,8 +12,14 @@ import java.util.concurrent.atomic.AtomicInteger;
  * Represents the command which will list out all the tasks that are currently stored in the storage
  * upon execution.
  */
-
 public class ListTasksCommand extends Command {
+
+    /**
+     * Retrieves all the user's {@code Task} and returns an output containing it.
+     *
+     * @param taskManager the {@code TaskManager} object that contains the list of {@code Task}s.
+     * @return the output from executing the command.
+     */
     @Override
     public CommandOutput executeCommand(TaskManager taskManager) {
         List<Task> allTasks = taskManager.getAllTasks();
@@ -37,10 +43,8 @@ public class ListTasksCommand extends Command {
             }
             boolean hasMoreThanOneCompletedTask = numberOfCompletedTasks > 1;
             boolean hasMoreThanOneUncompletedTask = numberOfUncompletedTasks > 1;
-            String completedTasks = numberOfCompletedTasks
-                    + (hasMoreThanOneCompletedTask ? " tasks" : " task");
-            String uncompletedTasks = numberOfUncompletedTasks
-                    + (hasMoreThanOneUncompletedTask ? " tasks." : " task");
+            String completedTasks = numberOfCompletedTasks + (hasMoreThanOneCompletedTask ? " tasks" : " task");
+            String uncompletedTasks = numberOfUncompletedTasks + (hasMoreThanOneUncompletedTask ? " tasks." : " task");
             allTasksOutput.append("You have completed " + completedTasks + " and have yet to complete "
                     + uncompletedTasks);
         } else {

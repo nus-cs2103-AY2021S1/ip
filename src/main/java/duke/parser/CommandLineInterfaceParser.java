@@ -8,7 +8,6 @@ import duke.commands.DoneCommand;
 import duke.commands.ExitCommand;
 import duke.commands.FindCommand;
 import duke.commands.HelpCommand;
-import duke.commands.InvalidCommand;
 import duke.commands.ListAllCompletedTasksCommand;
 import duke.commands.ListAllUncompletedTasksCommand;
 import duke.commands.ListTasksCommand;
@@ -76,7 +75,7 @@ public class CommandLineInterfaceParser {
         } catch (IllegalArgumentException e) {
             throw new DukeException(Messages.INVALID_COMMAND_INPUT_MESSAGE);
         }
-        return newInvalidCommand(Messages.INVALID_COMMAND_INPUT_MESSAGE);
+        throw new DukeException(Messages.INVALID_COMMAND_INPUT_MESSAGE);
     }
 
     private static ListTasksCommand newListTasksCommand() {
@@ -156,10 +155,6 @@ public class CommandLineInterfaceParser {
 
     private static OverdueCommand newOverdueCommand() {
         return new OverdueCommand();
-    }
-
-    private static InvalidCommand newInvalidCommand(String errorMessage) {
-        return new InvalidCommand(errorMessage);
     }
 
     private static SetTagCommand newSetTagCommand(int taskToBeTaggedIndex, String tagName) {

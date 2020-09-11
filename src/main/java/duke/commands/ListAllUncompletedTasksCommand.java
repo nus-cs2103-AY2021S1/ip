@@ -8,8 +8,17 @@ import duke.utils.Messages;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * Represents the user command which will list out all the tasks which are uncompleted.
+ */
 public class ListAllUncompletedTasksCommand extends Command {
 
+    /**
+     * Finds all {@code Task} which is uncompleted and returns an output containing it.
+     *
+     * @param taskManger the {@code TaskManager} object that contains the list of {@code Task}s.
+     * @return the output from executing the command.
+     */
     @Override
     public CommandOutput executeCommand(TaskManager taskManger) {
         List<Task> uncompletedTasks = taskManger.getAllUncompletedTasks();

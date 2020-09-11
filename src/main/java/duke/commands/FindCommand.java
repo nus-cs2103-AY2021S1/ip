@@ -7,13 +7,27 @@ import duke.utils.Messages;
 
 import java.util.List;
 
+/**
+ * Represents a command which will find {@code Task} that match a keyword the user has inputted.
+ */
 public class FindCommand extends Command {
     private String keyword;
 
+    /**
+     * Constructor to create a new {@code FindCommand} object with its keyword.
+     *
+     * @param keyword the keyword that is being searched for.
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }
 
+    /**
+     * Returns a {@code CommandOutput} object containing the output from finding the tasks that match the keyword.
+     *
+     * @param taskManager the {@code TaskManager} object that contains the list of {@code Task}s.
+     * @return the output from executing the command.
+     */
     @Override
     public CommandOutput executeCommand(TaskManager taskManager) {
         List<Task> filteredTasks = taskManager.findTasksByKeyword(keyword);

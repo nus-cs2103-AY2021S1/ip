@@ -8,7 +8,17 @@ import duke.utils.Messages;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * Represents the user command that will list out all of the user's completed tasks.
+ */
 public class ListAllCompletedTasksCommand extends Command {
+
+    /**
+     * Finds all {@code Task} that is marked as completed and returns an output containing it.
+     *
+     * @param taskManger the {@code TaskManager} object that contains the list of {@code Task}s.
+     * @return the output from executing the command.
+     */
     @Override
     public CommandOutput executeCommand(TaskManager taskManger) {
         List<Task> completedTasks = taskManger.getAllCompletedTasks();

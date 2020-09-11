@@ -12,8 +12,4 @@ import duke.task.TaskManager;
 
 public abstract class Command {
     public abstract CommandOutput executeCommand(TaskManager taskManger) throws DukeException;
-
-    public boolean isExit() {
-        return false;
-    }
 }

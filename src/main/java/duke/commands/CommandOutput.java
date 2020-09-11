@@ -9,10 +9,11 @@ public class CommandOutput {
     private boolean isExit;
 
     /**
-     * Constructor
+     * Constructor to create a new {@code CommandOutput} object containing the output resulting from executing
+     * the command and also a boolean value to indicate to the program whether or not it should terminate.
      *
-     * @param commandOutput The string that will be outputted as a result of the respective command
-     * @param isExit Indicate whether or not the the program needs to exit
+     * @param commandOutput The string that will be outputted as a result of executing the respective command.
+     * @param isExit Indicate whether or not the the program needs to exit.
      */
     public CommandOutput(String commandOutput, boolean isExit) {
         this.commandOutput = commandOutput;

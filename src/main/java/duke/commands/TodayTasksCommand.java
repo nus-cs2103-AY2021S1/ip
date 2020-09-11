@@ -7,11 +7,21 @@ import duke.utils.Messages;
 import java.time.LocalDate;
 
 import java.util.List;
-import java.util.concurrent.atomic.AtomicInteger;
 
+/**
+ * Represents the command that will list out all of the {@code Task} which has the date matching the date when the
+ * {@code TodayTasksCommand} object is created.
+ */
 public class TodayTasksCommand extends Command {
     private static final LocalDate TODAY = LocalDate.now();
 
+    /**
+     * Retrieves all the {@code Task} that has its date matching the date when the {@code TodayTasksCommand} object is
+     * created from the {@code TaskManager}.
+     *
+     * @param taskManager the {@code TaskManager} object that contains the list of {@code Task}s.
+     * @return the output resulting from executing the command.
+     */
     @Override
     public CommandOutput executeCommand(TaskManager taskManager) {
         List<Task> tasksForToday = taskManager.findTasksByDate(TODAY);
@@ -26,12 +36,12 @@ public class TodayTasksCommand extends Command {
         boolean hasTasksForToday = tasksForToday.size() > 0;
         if (hasTasksForToday) {
             tasksForTodayOutput.append("Here are your tasks for today:\n");
-            AtomicInteger listNumber = new AtomicInteger();
+            int listNumber = 1;
             for (Task task : tasksForToday) {
                 String taskDescription = task.toString();
-                String taskDescriptionInListFormat = String.format("%d) %s\n", listNumber.get() + 1, taskDescription);
+                String taskDescriptionInListFormat = String.format("%d) %s\n", listNumber, taskDescription);
                 tasksForTodayOutput.append(taskDescriptionInListFormat);
-                listNumber.getAndIncrement();
+                listNumber++;
             }
             boolean hasMoreThanOneCompletedTasks = numberOfCompletedTasks > 1;
             String completedTasks = numberOfCompletedTasks
