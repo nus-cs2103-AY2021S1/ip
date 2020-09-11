@@ -33,8 +33,7 @@ Example of usage:
 * `todo sampleTask` creates the `sampleTask` in the task list.  
 ![todoImage](asset/todo.png)  
 
-\
-\
+***
 
 ### `Event` - Add an event task
 
@@ -48,10 +47,10 @@ Example of usage:
 
 * `even sampleEvent /at 2020-03-12` creates the `sampleEvent` in the task list.
 * The `sampleEvent` is to be done at __March 12, 2020__.  
+/
 ![eventImage](asset/event.png)  
 
-\
-\
+***
 
 ### `Deadline` - Add a deadline task
 
