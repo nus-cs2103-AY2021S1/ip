@@ -21,7 +21,7 @@ public class DeleteCommand implements Command {
      * @param ui
      * @param input
      * @throws InvalidTaskIdException
-     * @return
+     * @return task deleted message.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, String input) throws InvalidTaskIdException {

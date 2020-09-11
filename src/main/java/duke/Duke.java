@@ -11,32 +11,12 @@ public class Duke {
 
     protected TaskList taskList = new TaskList();
     protected Ui ui = new Ui(taskList);
+
     /**
-     * Runs Duke, a task manager program.
+     * Gets string response from Duke.
      * Duke takes in console input as a command and will execute
      * and return the appropriate output.
      */
-    public void run() {
-        Scanner sc = new Scanner(System.in);
-        ui.greeting();
-
-        String input = "";
-        while (!input.equals("bye") && sc.hasNextLine()) {
-            try {
-                input = sc.nextLine();
-                Command c = Parser.parse(input);
-                c.execute(taskList, ui, input);
-            } catch (DukeException e) {
-                System.out.println(e + "\n");
-            }
-        }
-    }
-
-    public static void main(String[] args) {
-//        Duke duke = new Duke();
-//        duke.run();
-    }
-
     String getResponse(String input) {
         String reply;
         try {

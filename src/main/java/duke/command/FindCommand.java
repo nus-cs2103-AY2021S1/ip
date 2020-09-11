@@ -22,7 +22,7 @@ public class FindCommand implements Command {
      * @param ui
      * @param input
      * @throws EmptyDescriptionException
-     * @return
+     * @return list of filtered tasks.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, String input) throws EmptyDescriptionException {

@@ -13,7 +13,7 @@ public class ListCommand implements Command {
      *  @param ts
      * @param ui
      * @param input
-     * @return
+     * @return list of tasks.
      */
     @Override
     public String execute(TaskList ts, Ui ui, String input) {

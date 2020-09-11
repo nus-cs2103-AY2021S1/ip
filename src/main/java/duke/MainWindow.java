@@ -8,6 +8,9 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+/**
+ * MainWindow controls Duke's GUI
+ */
 public class MainWindow extends AnchorPane {
 
     final String EXIT = "bye";

@@ -13,7 +13,7 @@ public class HelpCommand implements Command {
      *  @param ts
      * @param ui
      * @param input
-     * @return
+     * @return list of available commands.
      */
     @Override
     public String execute(TaskList ts, Ui ui, String input) {

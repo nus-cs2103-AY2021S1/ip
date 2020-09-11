@@ -17,6 +17,7 @@ public class Ui {
 
     /**
      * Greets user who just activated Duke.
+     * @return greeting message.
      */
     public String greeting() {
         return "Hello! I'm Duke\nWhat can I do for you?";
@@ -24,6 +25,7 @@ public class Ui {
 
     /**
      * Shows the available commands.
+     * @return list of available commands.
      */
     public String help() {
         String msg = String.join("\n",
@@ -42,6 +44,7 @@ public class Ui {
 
     /**
      * Shows tasks in the current list.
+     * @return list of tasks.
      */
     public String list() {
         List<Task> tasks = taskList.getTasks();
@@ -50,26 +53,33 @@ public class Ui {
             msg = "No tasks in the list wohoo!\n";
         } else {
             msg += "Here are the tasks in your list:\n";
-            for (int i = 0; i < tasks.size(); i++) {
-                String task = tasks.get(i).toString();
-                String taskDesc = (i + 1) + ". " + task + "\n";
-                msg += taskDesc;
-            }
+            msg += tasksToString(tasks);
         }
         return msg;
     }
 
+    /**
+     * Shows tasks in the given filtered list.
+     * @param tasks
+     * @return list of filtered tasks.
+     */
     public String filteredList(List<Task> tasks) {
         String msg = "";
         if (tasks.size() == 0) {
             msg = "No matching tasks in the list\n";
         } else {
             msg += "Here are the matching tasks in your list:\n";
-            for (int i = 0; i < tasks.size(); i++) {
-                String task = tasks.get(i).toString();
-                String taskDesc = (i + 1) + ". " + task + "\n";
-                msg += taskDesc;
-            }
+            msg += tasksToString(tasks);
+        }
+        return msg;
+    }
+
+    private String tasksToString(List<Task> tasks) {
+        String msg = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            String task = tasks.get(i).toString();
+            String taskDesc = (i + 1) + ". " + task + "\n";
+            msg += taskDesc;
         }
         return msg;
     }
@@ -77,6 +87,7 @@ public class Ui {
     /**
      * Shows message that the given task has been marked done.
      * @param task
+     * @return task done message.
      */
     public String markAsDone(Task task) {
         return "Nice! I've marked it done - " + task.toString();
@@ -92,6 +103,7 @@ public class Ui {
     /**
      * Shows message that the given task has been deleted.
      * @param task
+     * @return task deleted message.
      */
     public String delete(Task task) {
         return "Noted! I've removed this task - " + task.toString() + "\n" + summary();
@@ -100,6 +112,7 @@ public class Ui {
     /**
      * Shows message that the given task has been added.
      * @param task
+     * @return task added message.
      */
     public String add(Task task) {
         return "Added '" + task.toString() + "' to list of tasks" + "\n" + summary();
