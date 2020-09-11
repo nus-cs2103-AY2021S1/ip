@@ -20,6 +20,7 @@ import javafx.scene.layout.BorderWidths;
 import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
+import javafx.scene.shape.Polygon;
 import javafx.scene.text.Font;
 
 /**
@@ -33,6 +34,9 @@ public class DialogBox extends HBox {
 
     @FXML
     private ImageView displayPicture;
+
+    @FXML
+    private Polygon triangle;
 
     /**
      * Creates a dialog box component with the given label and image.
@@ -52,8 +56,7 @@ public class DialogBox extends HBox {
         displayPicture.setImage(iv.getImage());
         dialog.setFont(Font.font("Ayuthaya", 13));
         if (isUserDialog) {
-            dialog.setStyle("-fx-background-color: #001935; -fx-text-fill: #e6fbff; -fx-label-padding:3;"
-                    + " -fx-border-radius: 3; -fx-background-radius: 3;");
+            styleUserDialog();
         } else {
             styleIfException();
         }
@@ -69,6 +72,18 @@ public class DialogBox extends HBox {
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         this.setPadding(new Insets(10, 10, 10, 10));
         setProperHeight(l);
+    }
+
+    private void styleUserDialog() {
+        dialog.setStyle("-fx-background-color: #001935; -fx-text-fill: #e6fbff; -fx-label-padding:5;"
+                + " -fx-border-radius: 5; -fx-background-radius: 5;");
+        triangle.getPoints().setAll(
+                10.0, 44.0,
+                10.0, 53.0,
+                20.0, 49.0
+        );
+        triangle.setTranslateY(10);
+        triangle.setLayoutY(30);
     }
 
     private void styleIfException() {
