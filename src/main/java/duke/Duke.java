@@ -131,6 +131,7 @@ public class Duke extends Application {
         });
 
         //Scroll down to the end every time dialogContainer's height changes.
+        Label introText = new Label (ui.)
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
