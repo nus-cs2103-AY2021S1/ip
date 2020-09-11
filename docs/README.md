@@ -40,7 +40,7 @@ This is what you should see when you start up Cait:
   
 ## Features
 
-### help
+### `help`
 Shows the commands you can use.
 
 ### Usage
@@ -58,7 +58,7 @@ Expected outcome:
 - `outcome` (pic)
 
 
-### list
+### `list`
 Shows your saved tasks.
 
 ### Usage
@@ -76,7 +76,7 @@ Expected outcome:
 - `outcome` (pic)
 
 
-### todo
+### `todo`
 Adds a todo to your saved tasks.
 
 ### Usage
@@ -96,7 +96,7 @@ Expected outcome:
 - `outcome` (pic)
 
 
-### event
+### `event`
 Adds a event to your saved tasks.
 
 ### Usage
@@ -116,7 +116,7 @@ Expected outcome:
 - `outcome` (pic)
 
 
-### deadline
+### `deadline`
 Adds a deadline to your saved tasks.
 
 ### Usage
@@ -136,7 +136,7 @@ Expected outcome:
 - `outcome` (pic)
 
 
-### done
+### `done`
 Finishes a task.
 
 ### Usage
@@ -156,7 +156,7 @@ Expected outcome:
 - `outcome` (pic)
 
 
-### delete
+### `delete`
 Deletes a task.
 
 ### Usage
@@ -176,7 +176,7 @@ Expected outcome:
 - `outcome` (pic)
 
 
-### find
+### `find`
 Finds the tasks with a keyword.
 
 ### Usage
@@ -194,7 +194,7 @@ Expected outcome:
 - `outcome` (pic)
 
 
-### bye
+### `bye`
 Shuts down the application.
 
 ### Usage
