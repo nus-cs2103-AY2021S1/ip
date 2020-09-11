@@ -210,3 +210,18 @@ Example of usage:
 Expected outcome:
 
 - `outcome` (pic)
+
+
+### Command summary
+
+Action | Format, Examples
+------------ | -------------
+Help | `help`
+List | `list`
+Todo | `todo <task>` eg, `todo read book`
+Event | `event <task> /at <yyyy-mm-dd>` eg, `event day6 concert /at 2019-10-05`
+Deadline | `deadline <task> /by <yyyy-mm-dd>` eg, `deadline eat cake /by 2020-09-04`
+Done | `done <list index(es)>` eg, `done 4 5 6`
+Delete | `delete <list index(es)>` eg, `delete 1`
+Find | `find <keyword>` eg, `find cake`
+Bye | `bye`
