@@ -39,13 +39,9 @@ public class TaskList {
 
     public TaskList find(String condition) {
         ArrayList<Task> newTaskList = new ArrayList<Task>();
-        for (Task task: taskList) {
-            if (task.getContent().contains(condition)) {
-                newTaskList.add(task);
-            } else if (task.getTag().contains(condition)) {
-                newTaskList.add(task);
-            }
-        }
+        taskList.stream()
+                .filter(x->x.getContent().contains(condition) || x.getTag().contains(condition))
+                .forEach(x->newTaskList.add(x));
         return new TaskList(newTaskList);
     }
 }
