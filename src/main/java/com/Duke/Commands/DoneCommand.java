@@ -27,7 +27,7 @@ public class DoneCommand extends Command{
         }catch (DukeException e){
             return UI.printError(e.toString());
         }catch(Exception e){
-            return UI.printError("     ☹ OOPS!!! There arent that many tasks in your list");
+            return UI.printError("☹ OOPS!!! There arent that many tasks in your list");
         }
     }
 }

@@ -17,10 +17,7 @@ import java.util.Scanner;
 
 import com.Duke.TaskManager.DukeException;
 import com.Duke.TaskManager.TaskList;
-import com.Duke.Tasks.Deadline;
-import com.Duke.Tasks.Event;
-import com.Duke.Tasks.Task;
-import com.Duke.Tasks.ToDo;
+import com.Duke.Tasks.*;
 
 
 /**
@@ -84,10 +81,10 @@ public class Storage {
                         taskList.add(new ToDo(dataArr[1], false));
                     }
                 } else if ("E".equals(dataArr[0])) {
-                    if (dataArr[4].equals("Y")) {
-                        taskList.add(new Event(dataArr[1], LocalTime.parse(dataArr[2]), LocalTime.parse(dataArr[3]), true));
+                    if (dataArr[5].equals("Y")) {
+                        taskList.add(new Event(dataArr[1], LocalTime.parse(dataArr[2]), LocalTime.parse(dataArr[3]), true, LocalDate.parse(dataArr[4])));
                     } else {
-                        taskList.add(new Event(dataArr[1], LocalTime.parse(dataArr[2]), LocalTime.parse(dataArr[3]), false));
+                        taskList.add(new Event(dataArr[1], LocalTime.parse(dataArr[2]), LocalTime.parse(dataArr[3]), false, LocalDate.parse(dataArr[4])));
                     }
                 } else if ("D".equals(dataArr[0])) {
                     if (dataArr[4].equals("Y")) {
@@ -95,11 +92,11 @@ public class Storage {
                     } else {
                         taskList.add(new Deadline(dataArr[1], LocalDate.parse(dataArr[2]), false));
                     }
-                } else {
-                    if (dataArr[1].equals("Y")) {
-                        taskList.add(new Task(dataArr[0], true));
-                    } else {
-                        taskList.add(new Task(dataArr[0], false));
+                } else if("W".equals(dataArr[0])){
+                    if(dataArr[4].equals("Y")){
+                        taskList.add(new DoWithin(dataArr[1], LocalDate.parse(dataArr[2]), LocalDate.parse(dataArr[3]), true));
+                    }else{
+                        taskList.add(new DoWithin(dataArr[1], LocalDate.parse(dataArr[2]), LocalDate.parse(dataArr[3]), false));
                     }
                 }
             }

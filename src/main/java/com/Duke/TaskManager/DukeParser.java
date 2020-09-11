@@ -31,6 +31,8 @@ public class DukeParser {
             return new DeadlineCommand(splitList,ls);
         }else if(splitList[0].toLowerCase().equals("event")){
             return new EventCommand(splitList,ls);
+        }else if(splitList[0].toLowerCase().equals("do")){
+            return new DoWithinCommand(splitList,ls);
         }else if(splitList[0].toLowerCase().equals("delete")){
             return new DeleteCommand(ls,Integer.parseInt(splitList[1]));
         }else if(splitList[0].toLowerCase().equals("find")) {

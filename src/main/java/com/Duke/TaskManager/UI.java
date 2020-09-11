@@ -93,6 +93,17 @@ public class UI {
         return "Got it I've now added this Task: \n" + event.toString() + "\n" + "Now you have " + ls.length() + " tasks in the list.";
     }
 
+    public static String doWithinCalled(TaskList ls, DoWithin doWithin) throws DukeException {
+        System.out.println(line);
+        System.out.println("     Got it I've now added this Task:");
+        System.out.println("       " + doWithin.toString());
+        ls.add(doWithin);
+        System.out.println("     Now you have " + ls.length() + " tasks in the list.");
+        System.out.println(line);
+        Storage.write(ls);
+        return "Got it I've now added this Task: \n" + doWithin.toString() + "\n" + "Now you have " + ls.length() + " tasks in the list.";
+    }
+
     public static String blahCalled() {
         System.out.println(line);
         String blahMessage = Blah.blahCreated();

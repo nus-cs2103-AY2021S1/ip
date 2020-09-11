@@ -28,7 +28,7 @@ public class TaskList {
 
     public TaskList findTask(String hint){
         assert hint !=null : "I couldn't understand the hint please try again";
-        TaskList containsHint = new TaskList(new ArrayList<Task>());
+        TaskList containsHint = new TaskList(new ArrayList<>());
         getListOfTasks()
                 .stream()
                 .filter(task->task
