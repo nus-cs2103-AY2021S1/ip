@@ -57,7 +57,7 @@ Example of usage:
    * The `sampleDeadline` is to be done before __Nov 12, 2020__.
    * ![deadlineImage](asset/deadline.png)
    
-### `list` - Add a deadline task
+### `List` - Display the list of tasks
 
 Generates the entire list of tasks stored in the app.
 
@@ -72,13 +72,49 @@ Example of usage:
    * `TASK_SCHEDULE` is _optional_.
    * ![listImage](asset/list.png)
    
-### `done` - Add a deadline task
+### `Done` - Complete a task
 
 Mark a task in the list as completed.
 
-Format: `done TASK_INDEX` where `TASK_INDEX` is an integer between 1 and length of list.
+Format: `done TASK_INDEX` where `TASK_INDEX` is an _integer_ between 1 and length of list.
 
 Example of usage: 
 
-   * `done 1` updates the status of the task as "done", represented as `✓`.
+   * `done 1` updates the status of the first task as "done", represented as `✓`.
    * ![doneImage](asset/done.png)
+   
+### `Delete` - Delete a task
+
+Delete a task in the list by its index.
+
+Format: `delete TASK_INDEX` where `TASK_INDEX` is an _integer_ between 1 and length of list.
+
+Example of usage: 
+
+   * `delete 1` delete the first task from the list.
+   * ![deleteImage](asset/delete.png)
+   
+### `Find` - Search for relevant tasks
+
+Find the tasks containing certain keywords specified by the user.
+
+Format: `find KEYWORD` where `KEYWORD` is __limited to 1 word__.
+
+Example of usage: 
+
+   * `find sample` returns all tasks whose name contain the word `'sample'`.
+   * Here the outputs are `sampleEvent` and `sampleDeadline`.
+   * ![findImage](asset/find.png)
+   
+### `Reminder` - Get notified of upcoming due
+
+Remind the use the upcoming events/deadlines sorted by their schedule.
+
+Format: `remind TASK_NUMBER` where `TASK_NUMBER` is amount of upcoming tasks the user wants to know.
+
+Example of usage: 
+
+   * `remind 1` returns the earliest 1 task the user hasn't completed.
+   * If the task's scheduled time has past, the returned task will also indicate it.
+   * Here the earliest task is `sampleEvet`, which should be done at _March 12, 2020_. The output also shows `[Schedule past!]` to remind user this event has past and not been done.
+   * ![remindImage](asset/remind.png)
