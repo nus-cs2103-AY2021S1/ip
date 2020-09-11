@@ -28,8 +28,8 @@ public class DukeTest {
     @Test
     public void eventTest() {
         try {
-            Event task = new Event("Dinner Party", LocalTime.parse("15:30"), LocalTime.parse("17:30"), false);
-            assertEquals(task.toString(), "[E][\u2718] Dinner Party(at: 15:30 - 17:30)");
+            Event task = new Event("Dinner Party", LocalTime.parse("15:30"), LocalTime.parse("17:30"), false, LocalDate.parse("2011-11-19") );
+            assertEquals(task.toString(), "[E][\u2718] Dinner Party(on: Nov 19 2011 at: 15:30 - 17:30)");
         } catch (Exception ignored) {
         }
     }

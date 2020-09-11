@@ -12,7 +12,7 @@ public class Deadline extends Task{
     private final LocalDate deadline;
 
     /**
-     * Constructor for the To Do class
+     * Constructor for the Deadline class
      * @param task Represents the description of the task
      * @param deadline Represents the deadline date of the task
      * @param isDone Represents whether the task is done
