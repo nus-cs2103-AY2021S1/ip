@@ -9,9 +9,9 @@ import java.util.Scanner;
 
 import willy.task.Task;
 import willy.task.TaskSymbol;
-import willy.task.ToDoTask;
+import willy.task.TodoTask;
 import willy.task.DeadlineTask;
-import willy.task.EventsTask;
+import willy.task.EventTask;
 
 /**
  * Stores the tasks recorded by the bot in a hard drive.
@@ -66,10 +66,10 @@ public class TaskStore {
                             taskContent + "|" + taskDeadline;
 
                 } else if (taskType.equals("[E]")) {
-                    EventsTask eventsTask = (EventsTask) listOfTasks.get(i);
-                    String taskPeriod = eventsTask.getStringPeriod();
-                    String taskStatus = eventsTask.getStatusIcon();
-                    String taskContent = eventsTask.getTask();
+                    EventTask eventTask = (EventTask) listOfTasks.get(i);
+                    String taskPeriod = eventTask.getStringPeriod();
+                    String taskStatus = eventTask.getStatusIcon();
+                    String taskContent = eventTask.getTask();
                     combinedTask = taskType + "|" + taskStatus + "|" +
                             taskContent + "|" + taskPeriod;
 
@@ -104,7 +104,7 @@ public class TaskStore {
                 String activity = taskComponents[2];
 
                 if (taskType.contains("T")) {
-                    ToDoTask newTask = new ToDoTask(activity, TaskSymbol.TODO);
+                    TodoTask newTask = new TodoTask(activity, TaskSymbol.TODO);
                     if (taskStatus.contains("\u2713")) { //done
                         newTask.setTaskDone(true);
                     }
@@ -120,7 +120,7 @@ public class TaskStore {
 
                 } else if (taskType.contains("E")) {
                     String duration = taskComponents[3];
-                    EventsTask newTask = new EventsTask(duration, activity, TaskSymbol.EVENT);
+                    EventTask newTask = new EventTask(duration, activity, TaskSymbol.EVENT);
                     if (taskStatus.contains("\u2713")) { //done
                         newTask.setTaskDone(true);
                     }
