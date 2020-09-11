@@ -9,7 +9,7 @@ import botbot.tasks.Task;
  * Adds a task to the task list.
  */
 public class AddCommand extends Command {
-    private Task task;
+    private final Task task;
 
     /**
      * Creates an add command to add the specified task.
@@ -25,17 +25,14 @@ public class AddCommand extends Command {
      *
      * @param storage Storage to save updated task list to.
      * @param tasks Task list to add task to.
-     * @param ui Ui to print status of execution.
-     * @return Status of execution.
+     * @param ui Ui to show response of execution.
+     * @return Response of execution.
      */
     @Override
     public String execute(Storage storage, TaskList tasks, Ui ui) {
         tasks.add(task);
         assert tasks.size() > 0 : "Empty task list after adding task";
         storage.save(tasks);
-        int numOfTasks = tasks.size();
-        String response = String.format("ok! I've added this task:\n  %s\nyou now have %d task"
-                + (numOfTasks > 1 ? "s" : "") + " in your list\n", task, numOfTasks);
-        return ui.printStatus(response);
+        return ui.showAddResponse(task, tasks.size());
     }
 }

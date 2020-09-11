@@ -9,7 +9,8 @@ import botbot.tasks.Task;
  * Deletes a task from the task list.
  */
 public class DeleteCommand extends Command {
-    private int id;
+    public static final String COMMAND_KEYWORD = "delete";
+    private final int id;
 
     /**
      * Creates a delete command to delete the specified task.
@@ -25,21 +26,14 @@ public class DeleteCommand extends Command {
      *
      * @param storage Storage to save updated task list to.
      * @param tasks Task list to delete task from.
-     * @param ui Ui to print status of execution.
-     * @return Status of execution.
+     * @param ui Ui to show response of execution.
+     * @return Response of execution.
      */
     @Override
     public String execute(Storage storage, TaskList tasks, Ui ui) {
-        try {
-            Task task = tasks.get(id);
-            tasks.delete(id);
-            storage.save(tasks);
-            int numOfTasks = tasks.size();
-            String response = String.format("ok! I've removed this task:\n  %s\nyou now have %d task"
-                    + (numOfTasks > 1 ? "s" : "") + " in your list\n", task, numOfTasks);
-            return ui.printStatus(response);
-        } catch (IndexOutOfBoundsException e) {
-            return ui.printStatus("oops! invalid task number!\n");
-        }
+        Task task = tasks.get(id);
+        tasks.delete(id);
+        storage.save(tasks);
+        return ui.showDeleteResponse(task, tasks.size());
     }
 }

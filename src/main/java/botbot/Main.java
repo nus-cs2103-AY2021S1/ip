@@ -13,7 +13,7 @@ import javafx.stage.Stage;
  * A GUI for Botbot using FXML.
  */
 public class Main extends Application {
-    private Botbot botbot = new Botbot("data/botbot.txt");
+    private final Botbot botbot = new Botbot("data/botbot.txt");
 
     @Override
     public void start(Stage stage) {

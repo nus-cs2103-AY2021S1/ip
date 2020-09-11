@@ -6,7 +6,7 @@ package botbot.tasks;
 public abstract class Task {
     protected final char type;
     protected final String description;
-    private boolean isDone;
+    private TaskStatus status;
 
     /**
      * Creates a task.
@@ -17,7 +17,7 @@ public abstract class Task {
     public Task(char type, String description) {
         this.type = type;
         this.description = description;
-        isDone = false;
+        status = TaskStatus.NOT_DONE;
     }
 
     /**
@@ -25,12 +25,12 @@ public abstract class Task {
      *
      * @param type Type of task.
      * @param description Description of task.
-     * @param isDone Completion status of task.
+     * @param status Completion status of task.
      */
-    public Task(char type, String description, boolean isDone) {
+    public Task(char type, String description, TaskStatus status) {
         this.type = type;
         this.description = description;
-        this.isDone = isDone;
+        this.status = status;
     }
 
     /**
@@ -60,7 +60,7 @@ public abstract class Task {
      * @return 1 if task is done, 0 otherwise.
      */
     public String getStatus() {
-        return isDone ? "1" : "0";
+        return status.getStrValue();
     }
 
     /**
@@ -69,14 +69,14 @@ public abstract class Task {
      * @return Tick if task is done, cross otherwise.
      */
     String getStatusIcon() {
-        return isDone ? "\u2713" : "\u2718";
+        return status.getStatusIcon();
     }
 
     /**
      * Marks the task as done.
      */
     public void markAsDone() {
-        isDone = true;
+        status = TaskStatus.DONE;
     }
 
     /**

@@ -9,25 +9,20 @@ public class Todo extends Task {
     /**
      * Creates a to-do.
      *
-     * @param command Command to create to-do.
+     * @param description Description of to-do.
      */
-    public Todo(String command) {
-        super(TYPE_CODE, extractNameFromCommand(command));
+    public Todo(String description) {
+        super(TYPE_CODE, description);
     }
 
     /**
      * Creates a to-do.
      *
      * @param description Description of to-do.
-     * @param isDone Completion status of to-do.
+     * @param status Completion status of to-do.
      */
-    public Todo(String description, boolean isDone) {
-        super(TYPE_CODE, description, isDone);
-    }
-
-    private static String extractNameFromCommand(String command) {
-        assert command.length() >= 6 : "Invalid command";
-        return command.substring(5);
+    public Todo(String description, TaskStatus status) {
+        super(TYPE_CODE, description, status);
     }
 
     /**
@@ -52,6 +47,6 @@ public class Todo extends Task {
 
     @Override
     public String toString() {
-        return String.format("[%c] [%s] %s", TYPE_CODE, getStatusIcon(), description);
+        return String.format("[%c] [%s] %s", getType(), getStatusIcon(), getDescription());
     }
 }

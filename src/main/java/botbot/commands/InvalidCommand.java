@@ -8,15 +8,15 @@ import botbot.Ui;
  * Represents an invalid command.
  */
 public class InvalidCommand extends Command {
-    private String error;
+    private final String errorMessage;
     
     /**
      * Creates an invalid command to alert the user of an error.
      *
-     * @param error Error to be printed to user.
+     * @param errorMessage Error to be printed to user.
      */
-    public InvalidCommand(String error) {
-        this.error = error;
+    public InvalidCommand(String errorMessage) {
+        this.errorMessage = errorMessage;
     }
 
     /**
@@ -24,11 +24,11 @@ public class InvalidCommand extends Command {
      *
      * @param storage Storage of the bot.
      * @param tasks Task list of the bot.
-     * @param ui Ui to print error message.
-     * @return Error message.
+     * @param ui Ui to show response of execution.
+     * @return Response of execution.
      */
     @Override
     public String execute(Storage storage, TaskList tasks, Ui ui) {
-        return ui.printStatus(error);
+        return ui.showErrorResponse(errorMessage);
     }
 }

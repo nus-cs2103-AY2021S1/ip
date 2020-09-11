@@ -1,55 +1,41 @@
 package botbot.tasks;
 
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeParseException;
 
-import botbot.Parser;
-import botbot.exceptions.InvalidFormatException;
+import botbot.BotbotDateTimeFormatter;
 
 /**
  * Represents a deadline with a description, deadline and completion status.
  */
 public class Deadline extends Task {
     public static final char TYPE_CODE = 'D';
-    public static final String FORMAT = "deadline <description> /by <D-M-YYYY HHmm> (eg. 17-3-2020 0945 "
+    public static final String COMMAND_FORMAT = "deadline <description> /by <D-M-YYYY HHmm> (eg. 17-3-2020 0945 "
             + "or 3-4-2020 with no time specified)";
     private LocalDateTime by;
 
     /**
      * Creates a deadline.
      *
-     * @param command Command to create deadline.
-     * @throws InvalidFormatException If command is of invalid format.
+     * @param description Description of deadline.
+     * @param by Deadline of task.
      */
-    public Deadline(String command) throws InvalidFormatException {
-        super(TYPE_CODE, extractNameFromCommand(command));
-        try {
-            by = Parser.parseDateTime(command, "/by");
-        } catch (DateTimeParseException e) {
-            throw new InvalidFormatException(FORMAT);
-        }
+    public Deadline(String description, LocalDateTime by) {
+        super(TYPE_CODE, description);
+        this.by = by;
     }
 
     /**
      * Creates a deadline.
      *
      * @param description Description of deadline.
-     * @param isDone Completion status of deadline.
-     * @param by Deadline of deadline.
+     * @param status Completion status of deadline.
+     * @param by Deadline of task.
      */
-    public Deadline(String description, boolean isDone, String by) {
-        super(TYPE_CODE, description, isDone);
+    public Deadline(String description, TaskStatus status, String by) {
+        super(TYPE_CODE, description, status);
         this.by = LocalDateTime.parse(by);
     }
-
-    static String extractNameFromCommand(String command) {
-        int index = command.indexOf(" /by ");
-        assert index >= 0 : "Invalid index";
-        assert command.length() >= 10 : "Invalid command";
-        return command.substring(9, index);
-    }
-
+    
     /**
      * Returns the time of the deadline.
      *
@@ -63,7 +49,7 @@ public class Deadline extends Task {
     /**
      * Returns the deadline of the deadline.
      *
-     * @return Deadline of deadline.
+     * @return Deadline of task.
      */
     @Override
     public String getBy() {
@@ -72,15 +58,7 @@ public class Deadline extends Task {
 
     @Override
     public String toString() {
-        String format = "d MMM yyyy";
-        if (by.getHour() != 3 || by.getMinute() != 14 || by.getSecond() != 15 || by.getNano() != 926535898) {
-            if (by.getMinute() == 0) {
-                format += " ha";
-            } else {
-                format += " h.mma";
-            }
-        }
-        String byStr = by.format(DateTimeFormatter.ofPattern(format));
-        return String.format("[%c] [%s] %s (by: %s)", TYPE_CODE, getStatusIcon(), description, byStr);
+        return String.format("[%c] [%s] %s (by: %s)", getType(), getStatusIcon(), getDescription(),
+                BotbotDateTimeFormatter.convertDateTimeToStr(by));
     }
 }

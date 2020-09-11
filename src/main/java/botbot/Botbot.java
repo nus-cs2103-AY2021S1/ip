@@ -1,15 +1,14 @@
 package botbot;
 
 import botbot.commands.Command;
-import botbot.exceptions.BotbotException;
 
 /**
  * Represents the chatbot.
  */
 public class Botbot {
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui;
+    private final Storage storage;
+    private final TaskList tasks;
+    private final Ui ui;
 
     /**
      * Creates a chatbot.
@@ -22,12 +21,14 @@ public class Botbot {
         tasks = new TaskList(storage.load());
     }
 
+    /**
+     * Returns the response after the execution of the user's command.
+     *
+     * @param input User input.
+     * @return Response of execution.
+     */
     public String getResponse(String input) {
-        try {
-            Command c = Parser.parseCommand(input);
-            return c.execute(storage, tasks, ui);
-        } catch (BotbotException e) {
-            return ui.printStatus(e.getMessage());
-        }
+        Command c = Parser.parseCommand(input);
+        return c.execute(storage, tasks, ui);
     }
 }

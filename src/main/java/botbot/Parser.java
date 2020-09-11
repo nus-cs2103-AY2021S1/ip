@@ -3,121 +3,95 @@ package botbot;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
-import botbot.commands.AddCommand;
 import botbot.commands.Command;
+import botbot.commands.DeadlineCommand;
 import botbot.commands.DeleteCommand;
+import botbot.commands.EventCommand;
 import botbot.commands.ExitCommand;
 import botbot.commands.FindCommand;
 import botbot.commands.InvalidCommand;
 import botbot.commands.ListCommand;
 import botbot.commands.MarkAsDoneCommand;
-import botbot.exceptions.EmptySearchException;
-import botbot.exceptions.EmptyTaskException;
-import botbot.exceptions.EmptyTaskNumberException;
-import botbot.exceptions.InvalidFormatException;
-import botbot.exceptions.NoSuchCommandException;
-import botbot.tasks.Deadline;
-import botbot.tasks.Event;
-import botbot.tasks.Todo;
+import botbot.commands.TodoCommand;
 
 /**
- * Represents a parser.
+ * Parser for Botbot commands.
  */
 public class Parser {
-    private static final String NO_TIME_FLAG = String.format(" 0%.0f", Math.PI * Math.pow(10, 13));
+    private static final Pattern FORMAT_COMMAND = Pattern.compile("(?<commandKeyword>\\S+)(?<args>.*)");
+    private static final String FORMAT_DATE_TIME = "d-M-yyyy HHmm[ssn]";
+    private static final int DATE_TIME_LENGTH = 13;
 
     /**
      * Parses the given user input into a command.
      *
      * @param input Input to be parsed.
      * @return Command parsed from input.
-     * @throws EmptyTaskException If no task description is provided when adding task to task list.
-     * @throws EmptyTaskNumberException If no task number is provided when deleting or marking task as done.
-     * @throws InvalidFormatException If input is of an invalid format.
-     * @throws NoSuchCommandException If input does not match any command.
      */
-    static Command parseCommand(String input) throws EmptyTaskException, EmptyTaskNumberException,
-            InvalidFormatException, NoSuchCommandException, EmptySearchException {
-        if (input.equals("bye")) {
+    static Command parseCommand(String input) {
+        Matcher matcher = FORMAT_COMMAND.matcher(input.trim());
+        if (!matcher.matches()) {
+            return new InvalidCommand(CommandValidator.ERROR_MESSAGE_NO_SUCH_COMMAND);
+        }
+
+        String commandKeyword = matcher.group("commandKeyword");
+        String args = matcher.group("args").trim();
+
+        switch (commandKeyword) {
+        case DeadlineCommand.COMMAND_KEYWORD:
+            return CommandValidator.tryAddDeadline(args);
+
+        case DeleteCommand.COMMAND_KEYWORD:
+            return CommandValidator.tryDelete(args);
+
+        case EventCommand.COMMAND_KEYWORD:
+            return CommandValidator.tryAddEvent(args);
+
+        case ExitCommand.COMMAND_KEYWORD:
             return new ExitCommand();
-        } else if (input.equals("list")) {
+
+        case FindCommand.COMMAND_KEYWORD:
+            return CommandValidator.tryFind(args);
+
+        case ListCommand.COMMAND_KEYWORD:
             return new ListCommand();
-        } else if (input.length() >= 8 && input.startsWith("delete ")) {
-            try {
-                int id = parseCommandId(input, "delete ");
-                return new DeleteCommand(id);
-            } catch (NumberFormatException e) {
-                return new InvalidCommand("    oops! invalid task number!\n");
-            }
-        } else if (input.equals("delete") || (input.length() >= 7 && input.startsWith("delete "))) {
-            throw new EmptyTaskNumberException();
-        } else if (input.length() >= 6 && input.startsWith("done ")) {
-            try {
-                int id = parseCommandId(input, "done ");
-                return new MarkAsDoneCommand(id);
-            } catch (NumberFormatException e) {
-                return new InvalidCommand("    oops! invalid task number!\n");
-            }
-        } else if (input.equals("done") || (input.length() >= 5 && input.startsWith("done "))) {
-            throw new EmptyTaskNumberException();
-        } else if (input.length() >= 6 && input.startsWith("todo ")) {
-            return new AddCommand(new Todo(input));
-        } else if (input.equals("todo") || (input.length() >= 5 && input.startsWith("todo "))) {
-            throw new EmptyTaskException("a todo");
-        } else if (input.length() >= 10 && input.startsWith("deadline ")) {
-            if (!input.contains(" /by ")) {
-                throw new InvalidFormatException(Deadline.FORMAT);
-            }
-            return new AddCommand(new Deadline(input));
-        } else if (input.equals("deadline")
-                || (input.length() >= 9 && input.startsWith("deadline "))) {
-            throw new EmptyTaskException("a deadline");
-        } else if (input.length() >= 7 && input.startsWith("event ")) {
-            if (!input.contains(" /at ")) {
-                throw new InvalidFormatException(Event.FORMAT);
-            }
-            return new AddCommand(new Event(input));
-        } else if (input.equals("event")
-                || (input.length() >= 6 && input.startsWith("event "))) {
-            throw new EmptyTaskException("an event");
-        } else if (input.length() >= 6 && input.startsWith("find ")) {
-            String keyword = input.substring(5);
-            return new FindCommand(keyword);
-        } else if (input.equals("find") || (input.length() >= 5 && input.startsWith("find "))) {
-            throw new EmptySearchException();
-        } else {
-            throw new NoSuchCommandException();
+
+        case MarkAsDoneCommand.COMMAND_KEYWORD:
+            return CommandValidator.tryMarkAsDone(args);
+
+        case TodoCommand.COMMAND_KEYWORD:
+            return CommandValidator.tryAddTodo(args);
+
+        default:
+            return new InvalidCommand(CommandValidator.ERROR_MESSAGE_NO_SUCH_COMMAND);
         }
     }
 
     /**
      * Parses the input for a task ID.
      *
-     * @param input Input to be parsed.
-     * @param command Command parsed from input.
+     * @param args Input to be parsed.
      * @return Task ID parsed from input.
      */
-    static int parseCommandId(String input, String command) {
-        assert input != null : "Empty input";
-        assert command != null : "Empty command";
-        return Integer.parseInt(input.substring(command.length())) - 1;
+    static int parseCommandId(String args) {
+        assert !args.isBlank() : "Args provided is blank";
+        return Integer.parseInt(args) - 1;
     }
 
     /**
      * Parses the input for a date (and a time).
      *
      * @param input Input to be parsed.
-     * @param identifier Identifier which comes before the date.
      * @return Date (and time) parsed from input.
      * @throws DateTimeParseException If input does not follow expected datetime format.
      */
-    public static LocalDateTime parseDateTime(String input, String identifier) throws DateTimeParseException {
-        int index = input.indexOf(identifier) + identifier.length() + 1;
-        String dateStr = input.substring(index).strip();
-        if (dateStr.length() < 13) {
-            dateStr += NO_TIME_FLAG;
+    static LocalDateTime parseDateTime(String input) throws DateTimeParseException {
+        if (input.length() < DATE_TIME_LENGTH) {
+            input += BotbotDateTimeFormatter.NO_TIME_FLAG_STR;
         }
-        return LocalDateTime.parse(dateStr, DateTimeFormatter.ofPattern("d-M-yyyy HHmm[ssn]"));
+        return LocalDateTime.parse(input, DateTimeFormatter.ofPattern(FORMAT_DATE_TIME));
     }
 }

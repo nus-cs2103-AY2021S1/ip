@@ -8,26 +8,18 @@ import botbot.Ui;
  * Terminates the bot.
  */
 public class ExitCommand extends Command {
+    public static final String COMMAND_KEYWORD = "bye";
+    
     /**
      * Executes the exit command.
      *
      * @param storage Storage to save task list to.
      * @param tasks Task list of the bot.
-     * @param ui Ui to exit from.
-     * @return Status of execution.
+     * @param ui Ui to show response of execution.
+     * @return Response of execution.
      */
     @Override
     public String execute(Storage storage, TaskList tasks, Ui ui) {
         return Ui.exit();
-    }
-
-    /**
-     * Returns true if the given command is an exit command.
-     *
-     * @param command Command.
-     * @return True if given command is exit command, false otherwise.
-     */
-    public static boolean isExit(Command command) {
-        return command instanceof ExitCommand;
     }
 }

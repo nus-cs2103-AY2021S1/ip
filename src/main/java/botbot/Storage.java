@@ -12,18 +12,19 @@ import java.util.Scanner;
 import botbot.tasks.Deadline;
 import botbot.tasks.Event;
 import botbot.tasks.Task;
+import botbot.tasks.TaskStatus;
 import botbot.tasks.Todo;
 
 /**
- * Represents the storage of data from the chatbot.
+ * Represents the storage of data from Botbot.
  */
 public class Storage {
     private final String filePath;
 
     /**
-     * Creates a storage at the specified filepath.
+     * Creates a storage with a specified filepath.
      *
-     * @param filePath Filepath where storage is created.
+     * @param filePath Filepath where data will be located.
      */
     Storage(String filePath) {
         this.filePath = filePath;
@@ -39,54 +40,71 @@ public class Storage {
         File file = new File(filePath);
         file.getParentFile().mkdirs();
         assert file.getParentFile().isDirectory() : "Parent directory for data file not created";
-        if (!file.isFile()) {
-            try {
-                file.createNewFile();
-                return new LinkedList<>();
-            } catch (IOException e) {
-                e.printStackTrace();
-                return null;
-            }
+
+        if (file.isFile()) {
+            return readDataFile();
         } else {
-            return read();
+            return createDataFile(file);
         }
     }
-
-    /**
-     * Reads the existing data at the filepath.
-     *
-     * @return List of existing tasks.
-     */
-    List<Task> read() {
-        List<Task> list = new LinkedList<>();
+    private List<Task> readDataFile() {
+        Scanner sc = createFileScanner();
+        assert sc != null;
+        return extractTasks(sc);
+    }
+    
+    private Scanner createFileScanner() {
+        FileInputStream file;
         try {
-            FileInputStream file = new FileInputStream(filePath);
-            Scanner sc = new Scanner(file);
-            while (sc.hasNextLine()) {
-                String data = sc.nextLine();
-                String[] dataArr = data.split("\\|");
-                char taskType = dataArr[0].charAt(0);
-                assert (dataArr[1].equals("1") || dataArr[1].equals("0")) : "Completion status not 1 or 0";
-                boolean isDone = dataArr[1].equals("1");
-                String description = dataArr[2];
-                if (taskType == Todo.TYPE_CODE) {
-                    list.add(new Todo(description, isDone));
-                } else if (taskType == Deadline.TYPE_CODE) {
-                    String by = dataArr[3];
-                    assert by != null : "Deadline not provided for deadline task";
-                    list.add(new Deadline(description, isDone, by));
-                } else if (taskType == Event.TYPE_CODE) {
-                    String at = dataArr[3];
-                    assert at != null : "Time not provided for event";
-                    list.add(new Event(description, isDone, at));
-                } else {
-                    assert false : "Task type not D, E or T";
-                }
-            }
-            sc.close();
-            return list;
+            file = new FileInputStream(filePath);
         } catch (FileNotFoundException e) {
             System.out.println("oops! your data file is missing!");
+            return null;
+        }
+        return new Scanner(file);
+    }
+    
+    private List<Task> extractTasks(Scanner sc) {
+        List<Task> list = new LinkedList<>();
+        
+        while (sc.hasNextLine()) {
+            String data = sc.nextLine();
+            
+            String[] dataArr = data.split("\\|");
+            char taskType = dataArr[0].charAt(0);
+            TaskStatus taskStatus = TaskStatus.convertToStatus(dataArr[1]);
+            String description = dataArr[2];
+            
+            switch (taskType) {
+            case Deadline.TYPE_CODE:
+                String by = dataArr[3];
+                list.add(new Deadline(description, taskStatus, by));
+                break;
+                
+            case Event.TYPE_CODE:
+                String at = dataArr[3];
+                list.add(new Event(description, taskStatus, at));
+                break;
+                
+            case Todo.TYPE_CODE:
+                list.add(new Todo(description, taskStatus));
+                break;
+                
+            default:
+                assert false : "Invalid task type";
+            }
+        }
+        
+        sc.close();
+        return list;
+    }
+    
+    private List<Task> createDataFile(File file) {
+        try {
+            file.createNewFile();
+            return new LinkedList<>();
+        } catch (IOException e) {
+            e.printStackTrace();
             return null;
         }
     }
@@ -99,6 +117,7 @@ public class Storage {
     public void save(TaskList tasks) {
         try {
             FileWriter fw = new FileWriter(filePath);
+            
             for (Task task : tasks) {
                 List<String> temp = new LinkedList<>();
                 temp.add(String.valueOf(task.getType()));
@@ -114,6 +133,7 @@ public class Storage {
                 String data = String.join("|", temp);
                 fw.write(data + "\n");
             }
+            
             fw.close();
         } catch (IOException e) {
             e.printStackTrace();
