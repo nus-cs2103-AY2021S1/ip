@@ -8,24 +8,24 @@ Hello from
 What can I do for you?
     -------------------------------------------------------------------
     Got it. I've added this task:
-    [D][ઝ] return book  (by: Sunday)
+    [D][X] return book  (by: Sunday)
     Now you have 1 tasks in the list.
     -------------------------------------------------------------------
     -------------------------------------------------------------------
     Got it. I've added this task:
-    [E][ઝ] project meeting  (at: Mon 2-4pm)
+    [E][X] project meeting  (at: Mon 2-4pm)
     Now you have 2 tasks in the list.
     -------------------------------------------------------------------
     -------------------------------------------------------------------
     Got it. I've added this task:
-    [T][ઝ] borrow book
+    [T][X] borrow book
     Now you have 3 tasks in the list.
     -------------------------------------------------------------------
     -------------------------------------------------------------------
 Here are the tasks in your list:
-    1. [D][ઝ] return book  (by: Sunday)
-    2. [E][ઝ] project meeting  (at: Mon 2-4pm)
-    3. [T][ઝ] borrow book
+    1. [D][X] return book  (by: Sunday)
+    2. [E][X] project meeting  (at: Mon 2-4pm)
+    3. [T][X] borrow book
     -------------------------------------------------------------------
     -------------------------------------------------------------------
     Nice! I've marked this task as done:
@@ -34,9 +34,9 @@ Here are the tasks in your list:
     -------------------------------------------------------------------
     -------------------------------------------------------------------
 Here are the tasks in your list:
-    1. [D][ઝ] return book  (by: Sunday)
+    1. [D][X] return book  (by: Sunday)
     2. [E][✓] project meeting  (at: Mon 2-4pm)
-    3. [T][ઝ] borrow book
+    3. [T][X] borrow book
     -------------------------------------------------------------------
     -------------------------------------------------------------------
     Bye. Hope to see you again soon!

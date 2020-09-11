@@ -1,4 +1,3 @@
-T|0|borrow book
 D|0|return book|2020-09-01
 E|0|attend wedding|2020-09-05
 A|0|run|MA2104 assignment
