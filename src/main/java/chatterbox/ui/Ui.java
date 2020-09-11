@@ -18,7 +18,7 @@ public class Ui {
         assert totalTasks > 0;
         return "Got it. I've added this task: \n"
             + t + "\n"
-            + "Now you have " + totalTasks + " tasks in the list";
+            + String.format("You now have %s task%s in your list", totalTasks, totalTasks == 1 ? "" : "s");
     }
 
     /**
@@ -33,7 +33,7 @@ public class Ui {
         assert totalTasks >= 0;
         return "Noted! I've removed this task from your list: \n"
             + t + "\n"
-            + " Now you have " + totalTasks + " tasks in the list.";
+            + String.format("You now have %s task%s in your list", totalTasks, totalTasks == 1 ? "" : "s");
     }
 
     /**
