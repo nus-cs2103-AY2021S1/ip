@@ -45,7 +45,6 @@ public class Keyword {
     public static final String KEYWORD_DELETE_NOTIFICATION = "Noted. I've removed this task:";
     public static final String KEYWORD_DONE_INVALID_INPUT = "Invalid input for done";
     public static final String KEYWORD_FIND_SUCCESS = "Here are the matching tasks in your list:";
-    public static final String KEYWORD_HELP_UNSURE = "☹ OOPS!!! I'm sorry, but I don't know what that means :-(\n";
     public static final String KEYWORD_HELP_DISPLAY_MESSAGE = "Here are the list of commands available:\n";
     public static final String KEYWORD_HELP_LIST = "1. list\n";
     public static final String KEYWORD_HELP_BYE = "2. bye\n";
@@ -57,7 +56,7 @@ public class Keyword {
     public static final String KEYWORD_HELP_FIND = "6. find ___ (e.g. find book) "
             + "*Note that only 1 keyword is allowed*\n";
     public static final String KEYWORD_HELP_REMIND = "7. remind _ _ (e.g.remind 1 y)" + "\n" + KEYWORD_EXTRA_SPACE
-            + " *Sets reminder on task 1 in task list , y or n represents yes or no respectively*\n";
+            + " *Sets reminder on task 1 in task list, y or n represents yes or no respectively*\n";
     public static final String KEYWORD_HELP_DEADLINE = "8. deadline \'task name\' /by \'any date format\' " + "\n"
             + KEYWORD_EXTRA_SPACE + "(e.g. deadline project /by YYYY-MM-DD HHMM or YYYY-MM-DD)\n";
     public static final String KEYWORD_HELP_EVENT = "9. event \'event name\' /at \'any date format\' " + "\n"
@@ -88,6 +87,6 @@ public class Keyword {
             + "(Note: There should not be anything behind list)";
     public static final String KEYWORD_REMINDER_EXCEPTION = " ☹ OOPS! A proper remind format would be like, "
             + "e.g. remind \'index in task list\' \'y or n\' ";
-    public static final String KEYWORD_UNKNOWN_COMMAND_EXCEPTION = "Sorry I don't know what that means. "
-            + "Type \"help\" to view the list of commands available";
+    public static final String KEYWORD_UNKNOWN_COMMAND_EXCEPTION = "☹ OOPS!!! I'm sorry, but I don't know what "
+            + "that means :-( Type \"help\" to view the list of commands available";
 }
