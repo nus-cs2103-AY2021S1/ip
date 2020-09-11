@@ -1,3 +1,3 @@
-ToDo | done | borrow book
-Event | undone | swimming | 23/04/2020 04:30 PM
-Deadline | undone | return book | 12/12/2020 12:30 AM
+ToDo | done | eat louie
+ToDo | undone | have dinner
+ToDo | undone | pet winter

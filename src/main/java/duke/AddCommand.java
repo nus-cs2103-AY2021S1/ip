@@ -64,7 +64,7 @@ public class AddCommand extends Command {
 
     private String addToDo(TaskList tasks, Storage storage, Ui ui) throws DukeException, IOException {
         assert userInput != null : "User input cannot be null";
-        if (!userInput.substring(4).isBlank()) {
+        if (userInput.substring(4).isBlank()) {
             throw new DukeException("The description of todo cannot be empty!");
         }
         ToDo todo = new ToDo(userInput.substring(5));
