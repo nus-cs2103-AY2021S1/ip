@@ -123,7 +123,11 @@ public class Storage {
                 keyword = "at";
                 toPrint = " (" + keyword + ": " + t.getTime() + ")";
             }
-            String text = t.getIndicator() + t.getIcon() + t.getName() + toPrint + "\n";
+            String indicator = t.getIndicator();
+            String icon = t.getIcon();
+            assert (indicator.equals("[T]") || indicator.equals("[D]") || indicator.equals("[E]"))
+                    && (icon.equals("[" + "\u2713" + "] ") || icon.equals("[" + "\u2718" + "] "));
+            String text = indicator + icon + t.getName() + toPrint + "\n";
 
             fw.write(text);
         }
