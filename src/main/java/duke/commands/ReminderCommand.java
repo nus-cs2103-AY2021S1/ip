@@ -48,5 +48,4 @@ public class ReminderCommand extends Command {
         Task task = tasks.get(Integer.parseInt(result[0]) - 1);
         return task.setReminder(result[1].equals("y"));
     }
-
 }

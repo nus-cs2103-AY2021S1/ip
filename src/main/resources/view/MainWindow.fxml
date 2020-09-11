@@ -35,17 +35,29 @@
                 <RowConstraints vgrow="SOMETIMES"/>
             </rowConstraints>
             <children>
-                <VBox
-                        fx:id="reminderSection"
-                        styleClass="reminderSectionStyling"
-                        minWidth="200"
+                <ScrollPane
+                        minWidth="210"
                         GridPane.columnIndex="0"
                         GridPane.columnSpan="1"
                         GridPane.rowIndex="0"
                         GridPane.rowSpan="4"
-                        minHeight="-Infinity"
+                        hbarPolicy="NEVER"
+                        vbarPolicy="NEVER"
+                        pannable="true"
+                        hvalue="1.0"
+                        vvalue="1.0"
+                        fx:id="reminderScreen"
+                        maxHeight="Infinity"
+                        fitToWidth="true"
                 >
-                </VBox>
+                <VBox
+                        fx:id="reminderSection"
+                        styleClass="reminderSectionStyling"
+                        minWidth="200"
+                        minHeight="-Infinity"
+                        maxHeight="Infinity"
+                />
+                </ScrollPane>
                 <TextField styleClass="textFieldStyling"
                            fx:id="userInput"
                            onAction="#handleUserInput"

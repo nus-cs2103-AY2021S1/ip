@@ -1,6 +1,9 @@
 package duke.ui.visualui;
 
 import duke.Duke;
+import duke.commands.Command;
+import duke.commands.ReminderCommand;
+import duke.parser.Parser;
 import duke.tasklist.TaskList;
 import duke.ui.textui.Ui;
 import javafx.fxml.FXML;
@@ -20,6 +23,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     private ScrollPane userScreen;
     @FXML
+    private ScrollPane reminderScreen;
+    @FXML
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
@@ -36,6 +41,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         userScreen.vvalueProperty().bind(dialogContainer.heightProperty());
+        reminderScreen.vvalueProperty().bind(reminderSection.heightProperty());
     }
 
     public void setDuke(Duke duke, Stage stage) {
@@ -56,6 +62,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
+        handleAddReminder(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, user),
                 DialogBox.getDukeDialog(response, stitch)
@@ -69,7 +76,8 @@ public class MainWindow extends AnchorPane {
      *
      * @param taskList List of tasks.
      */
-    public void loadReminderList(TaskList taskList) {
+    private void loadReminderList(TaskList taskList) {
+        reminderSection.getChildren().clear();
         TaskList reminderList = new TaskList();
         for (int i = 0; i < taskList.size(); i++) {
             if (taskList.get(i).getReminderStatus() == 1) {
@@ -79,6 +87,19 @@ public class MainWindow extends AnchorPane {
         reminderList.sortByDueDate();
         for (int i = 0; i < reminderList.size(); i++) {
             reminderSection.getChildren().addAll(ReminderDisplay.getReminderDisplay(reminderList.get(i)));
+        }
+    }
+
+    /**
+     * Update the ui instantly if user adds a new reminder.
+     *
+     * @param input User's input.
+     */
+    private void handleAddReminder(String input) {
+        Command command = Parser.parse(input);
+        if (command instanceof ReminderCommand) {
+            TaskList taskList = duke.retrieveTaskList();
+            loadReminderList(taskList);
         }
     }
 }
