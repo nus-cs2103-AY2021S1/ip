@@ -1,0 +1,2 @@
+T | 1 | Sample task
+E | 0 | Sample task | 2020-01-01 0000
