@@ -317,6 +317,7 @@ public class Parser {
         String reply = "";
         try {
             String taskType = command.split(" ")[0];
+            taskType = taskType.toLowerCase();
             switch (taskType) {
             case "help":
                 reply = showHelp();
