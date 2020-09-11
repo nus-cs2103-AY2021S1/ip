@@ -1,1 +1,2 @@
 [T]|?|sleep
+[T]|?|go home
