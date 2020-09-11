@@ -1,4 +1,6 @@
+import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * TaskList stores an ArrayList of Task to be used by Duke.
@@ -19,6 +21,24 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> tasks) {
         this.tasks = new ArrayList<>(tasks);
+    }
+
+    /**
+     * Sort TaskList by description.
+     * @return TaskList
+     */
+    public TaskList sortByDescription() {
+        Collections.sort(tasks, new DescripComparator());
+        return this;
+    }
+
+    /**
+     * Sort TaskList by due date and time.
+     * @return TaskList
+     */
+    public TaskList sortByDueDateTime() {
+        Collections.sort(tasks, new DateComparator());
+        return this;
     }
 
     /**
@@ -56,5 +76,27 @@ public class TaskList {
      */
     public void addTask(Task task) {
         tasks.add(task);
+    }
+
+    /**
+     * Test sorting
+     * @param args
+     */
+    public static void main(String[] args) {
+        ArrayList<Task> tasksArrayList = new ArrayList<>();
+        String[] tempDateTime1 = {"11-09-2020", "18:00"};
+        String[] tempDateTime2 = {"11-09-2020", "10:00"};
+        String[] tempDate1 = {"09/09/2020"};
+        String[] tempDate2 = {"12/09/2020"};
+        tasksArrayList.add(new Todo("read book"));
+        tasksArrayList.add(new Deadline("return book", LocalDate.now()));
+        tasksArrayList.add(new Deadline("return book", Parser.changeDate(tempDate1)));
+        tasksArrayList.add(new Deadline("return book", Parser.changeDate(tempDate2)));
+        tasksArrayList.add(new Event("dinner with family", Parser.changeDateAndTime(tempDateTime1)));
+        tasksArrayList.add(new Event("dinner with friends", Parser.changeDateAndTime(tempDateTime2)));
+        TaskList tasks = new TaskList(tasksArrayList);
+        tasks.sortByDueDateTime();
+        Ui ui = new Ui();
+        System.out.println(ui.printAllTask(tasks));
     }
 }

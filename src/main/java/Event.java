@@ -3,7 +3,6 @@ import java.time.format.DateTimeFormatter;
 
 // a task that need to specify exact date and time
 public class Event extends Task {
-
     protected LocalDateTime eventDateTime;
 
     /**
@@ -25,6 +24,19 @@ public class Event extends Task {
     public Event(Boolean isDone, String description, LocalDateTime eventDateTime) {
         super(isDone, description);
         this.eventDateTime = eventDateTime;
+    }
+
+    public LocalDateTime getEventDateTime() {
+        return eventDateTime;
+    }
+
+    public void setEventDateTime(LocalDateTime eventDateTime) {
+        this.eventDateTime = eventDateTime;
+    }
+
+    @Override
+    public LocalDateTime getDueDateTime() {
+        return eventDateTime;
     }
 
     @Override
