@@ -45,13 +45,11 @@ public class DeadlineCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
 
         try {
-            System.out.println(parsedCommand[0]);
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
             DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:mm");
 
             String[] deadlineInfo = retrieveDeadlineInfo();
-            System.out.println("HERE");
-            assert !deadlineInfo[0].isBlank();
+            assert !deadlineInfo[0].isBlank() : "deadline description cannot be empty";
             String[] timeStamp = deadlineInfo[1].split(" ");
 
             LocalDate deadlineDate = LocalDate.parse(timeStamp[0], dateFormatter);
@@ -75,8 +73,8 @@ public class DeadlineCommand extends Command {
      * @throws InvalidTaskException If the deadline information is invalid or is missing arguments.
      */
     private String[] retrieveDeadlineInfo() throws InvalidTaskException {
-        String[] deadlineArguments = this.parsedCommand[1].split(" /by ");
         try {
+            String[] deadlineArguments = this.parsedCommand[1].split(" /by ");
             if (!this.parsedCommand[1].contains(" /by ") && !this.parsedCommand[1].endsWith("/by")) {
                 String error = "Your deadline task has an incorrect format. The task cannot be created.";
                 throw new InvalidTaskException(error);

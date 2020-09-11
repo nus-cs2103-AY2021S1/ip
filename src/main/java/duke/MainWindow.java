@@ -83,7 +83,7 @@ public class MainWindow extends AnchorPane {
             }
         };
         Timer delay = new Timer();
-        delay.schedule(timerTask, 2000);
+        delay.schedule(timerTask, 1500);
     }
 
 }

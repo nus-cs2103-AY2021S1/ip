@@ -66,9 +66,9 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(String text, Image img) {
         DialogBox dialogBox = new DialogBox(text, img);
         String userDialogStyle = "-fx-background-color: salmon; "
-                + "-fx-background-radius: 10; -fx-padding: 10 15 10 15";
+                + "-fx-background-radius: 10; -fx-padding: 10 10 10 10";
         dialogBox.dialog.setStyle(userDialogStyle);
-        dialogBox.displayPicture.setClip(new Circle(54, 43, 42));
+        dialogBox.displayPicture.setClip(new Circle(34, 37, 34));
         return dialogBox;
     }
 
@@ -82,9 +82,9 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         String dukeDialogStyle = "-fx-background-color: lightSteelBlue; "
-                + "-fx-background-radius: 10; -fx-padding: 10 15 10 15";
+                + "-fx-background-radius: 10; -fx-padding: 10 10 10 10";
         db.dialog.setStyle(dukeDialogStyle);
-        db.displayPicture.setClip(new Circle(50, 42, 42));
+        db.displayPicture.setClip(new Circle(35, 35, 34));
         db.flip();
         return db;
     }

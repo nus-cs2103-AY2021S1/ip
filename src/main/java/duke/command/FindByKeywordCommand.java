@@ -43,6 +43,7 @@ public class FindByKeywordCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
             String keyword = this.parsedCommand[1].trim().toLowerCase();
+            assert !keyword.isBlank() : "search keyword cannot be blank";
             Predicate<Task> searchKeywordFilter = task -> {
                 return task.getDescription().toLowerCase().contains(keyword);
             };

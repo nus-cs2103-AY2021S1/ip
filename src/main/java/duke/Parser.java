@@ -22,10 +22,10 @@ import duke.exception.InvalidFunctionException;
 public class Parser {
 
     private static final String LIST_COMMAND = "list";
-    private static final String END_COMMAND = "bye";
-    private static final String ADD_TODO_COMMAND = "todo";
-    private static final String ADD_DEADLINE_COMMAND = "deadline";
-    private static final String ADD_EVENT_COMMAND = "event";
+    private static final String EXIT_COMMAND = "bye";
+    private static final String TODO_COMMAND = "todo";
+    private static final String DEADLINE_COMMAND = "deadline";
+    private static final String EVENT_COMMAND = "event";
     private static final String DONE_COMMAND = "done";
     private static final String DELETE_COMMAND = "delete";
     private static final String FIND_BY_DATE_COMMAND = "find_by_date";
@@ -50,19 +50,19 @@ public class Parser {
             throw new InvalidFunctionException(err);
         } else if (message.equals(Parser.HELP_COMMAND)) {
             return new HelpCommand();
-        } else if (message.equals(Parser.END_COMMAND)) {
+        } else if (message.equals(Parser.EXIT_COMMAND)) {
             return new ExitCommand();
         } else if (message.equals(Parser.LIST_COMMAND)) {
             return new ListCommand();
         } else if (function.equals(Parser.DONE_COMMAND)) {
             return new DoneCommand(parsedCommand);
-        } else if (function.equals(Parser.ADD_TODO_COMMAND)) {
+        } else if (function.equals(Parser.TODO_COMMAND)) {
             parsedCommand = message.split("todo");
             return new ToDoCommand(parsedCommand);
-        } else if (function.equals(Parser.ADD_DEADLINE_COMMAND)) {
+        } else if (function.equals(Parser.DEADLINE_COMMAND)) {
             parsedCommand = message.split("deadline");
             return new DeadlineCommand(parsedCommand);
-        } else if (function.equals(Parser.ADD_EVENT_COMMAND)) {
+        } else if (function.equals(Parser.EVENT_COMMAND)) {
             parsedCommand = message.split("event");
             return new EventCommand(parsedCommand);
         } else if (function.equals(Parser.DELETE_COMMAND)) {

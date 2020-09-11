@@ -61,12 +61,13 @@ public class TagCommand extends Command {
             String[] commandArguments = this.parsedCommand[1].trim().split(" ", 2);
             int taskID = Integer.parseInt(commandArguments[0]);
             String tag = commandArguments[1].trim();
+            assert !tag.isBlank() : "tag cannot be empty";
             return new String[]{Integer.toString(taskID), tag};
         } catch (ArrayIndexOutOfBoundsException ex) {
             String error = "Your tag command has missing arguments";
             throw new InvalidFunctionException(error);
         } catch (NumberFormatException ex) {
-            String error = "No task ID provided! Please input the ID of the task you wish to tag.";
+            String error = "Your tag command has an incorrect format.";
             throw new InvalidFunctionException(error);
         }
     }
