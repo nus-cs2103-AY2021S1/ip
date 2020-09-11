@@ -58,7 +58,7 @@ Finds tasks with description that matches the keyword.
 
 Format: `find [keyword]`
 
-Example of usage: *find play* '
+Example of usage: *find play* 
 
 
 ### Finding a task by date: `print`
