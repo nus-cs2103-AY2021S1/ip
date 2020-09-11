@@ -35,7 +35,6 @@ public class TaskManager {
         this.ioParser = new TaskIoParser(path);
         this.taskList = ioParser.loadNewTaskList();
     }
-    
     /**
      * Indicate that a task is done
      * @param index index of the list as displayed from the application
@@ -144,9 +143,8 @@ public class TaskManager {
                     .filter(task -> {
                         index.incrementAndGet();
                         return stringPattern.matcher(task.getDescription()).find();
-                        }
-                    ).map(task -> String.format("\t%d. %s\n",index.get(),task))
-                    .reduce("", (accumulate , next) -> accumulate + next));
+                    }).map(task -> String.format("\t%d. %s\n", index.get(), task))
+                    .reduce("" , (accumulate, next) -> accumulate + next));
 
             if (sb.toString().isEmpty()) {
                 sb.append("\tCannot find a valid task in your list");
