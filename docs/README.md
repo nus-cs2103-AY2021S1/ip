@@ -56,7 +56,7 @@ Example of usage:
 Expected outcome:
 
 - `outcome` (pic)
-
+<br>
 
 ### `list`
 Shows your saved tasks.
@@ -74,7 +74,7 @@ Example of usage:
 Expected outcome:
 
 - `outcome` (pic)
-
+<br>
 
 ### `todo`
 Adds a todo to your saved tasks.
@@ -94,7 +94,7 @@ Example of usage:
 Expected outcome:
 
 - `outcome` (pic)
-
+<br>
 
 ### `event`
 Adds a event to your saved tasks.
@@ -114,7 +114,7 @@ Example of usage:
 Expected outcome:
 
 - `outcome` (pic)
-
+<br>
 
 ### `deadline`
 Adds a deadline to your saved tasks.
@@ -134,7 +134,7 @@ Example of usage:
 Expected outcome:
 
 - `outcome` (pic)
-
+<br>
 
 ### `done`
 Finishes a task.
@@ -154,7 +154,7 @@ Example of usage:
 Expected outcome:
 
 - `outcome` (pic)
-
+<br>
 
 ### `delete`
 Deletes a task.
@@ -174,7 +174,7 @@ Example of usage:
 Expected outcome:
 
 - `outcome` (pic)
-
+<br>
 
 ### `find`
 Finds the tasks with a keyword.
@@ -192,7 +192,7 @@ Example of usage:
 Expected outcome:
 
 - `outcome` (pic)
-
+<br>
 
 ### `bye`
 Shuts down the application.
@@ -210,7 +210,7 @@ Example of usage:
 Expected outcome:
 
 - `outcome` (pic)
-
+<br>
 
 ### Command summary
 
@@ -218,10 +218,10 @@ Action | Format, Examples
 ------------ | -------------
 Help | `help`
 List | `list`
-Todo | `todo <task>` eg, `todo read book`
-Event | `event <task> /at <yyyy-mm-dd>` eg, `event day6 concert /at 2019-10-05`
-Deadline | `deadline <task> /by <yyyy-mm-dd>` eg, `deadline eat cake /by 2020-09-04`
-Done | `done <list index(es)>` eg, `done 4 5 6`
-Delete | `delete <list index(es)>` eg, `delete 1`
-Find | `find <keyword>` eg, `find cake`
+Todo | `todo <task>` <br> eg, `todo read book`
+Event | `event <task> /at <yyyy-mm-dd>` <br> eg, `event day6 concert /at 2019-10-05`
+Deadline | `deadline <task> /by <yyyy-mm-dd>` <br> eg, `deadline eat cake /by 2020-09-04`
+Done | `done <list index(es)>` <br> eg, `done 4 5 6`
+Delete | `delete <list index(es)>` <br> eg, `delete 1`
+Find | `find <keyword>` <br> eg, `find cake`
 Bye | `bye`
