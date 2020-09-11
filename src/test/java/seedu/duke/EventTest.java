@@ -7,7 +7,7 @@ import org.junit.jupiter.api.Test;
 public class EventTest {
     @Test
     public void constructor_validCreation_success() {
-        assertEquals("[E][NOT DONE] Dinner (at: Aug 24 2020)", new Event("Dinner", "2020-08-24").toString());
+        assertEquals("[E][X] Dinner (at: Aug 24 2020)", new Event("Dinner", "2020-08-24").toString());
     }
 
     @Test
