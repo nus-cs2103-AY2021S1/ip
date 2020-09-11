@@ -1,0 +1,10 @@
+public enum DukeExceptionType {
+    NO_DESCRIPTION,
+    INVALID_TASK,
+    WRONG_DESCRIPTION,
+    EMPTY_TIME,
+    WRONG_TAG,
+    TOO_FEW_ARGUMENTS,
+    WRONG_TIME,
+    NO_MATCHING_TASKS
+}
