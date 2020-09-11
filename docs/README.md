@@ -26,11 +26,12 @@ are responsive to searches.
 
 ## Usage
 
-Syntax:
+### Syntax:
 
-`[parameter]` denotes a parameter.
+`[parameter]` denotes a parameter. Parameters are required.
 
-`(arguments)` denotes optional arguments.
+`(arguments)` denotes optional arguments. The command will run 
+with or without this part of the input.
 
 ### `todo [task name] (/tags tag1, tag2...)` - Add a To-do type task.
 
@@ -54,7 +55,8 @@ Sample outcome:
 
 Adds a Deadline type task with a name and deadline to
 your task list. Deadline date format must be of the
-form YYYY-MM-DD.
+form YYYY-MM-DD. If you provide tags, the task added
+will be tagged.
 
 Example usage: 
 
@@ -73,7 +75,8 @@ Sample outcome:
 
 Adds an Event type task with a name and date to
 your task list. Date format must be of the
-form YYYY-MM-DD.
+form YYYY-MM-DD. If you provide tags, the task 
+added will be tagged.
 
 Example usage: 
 
