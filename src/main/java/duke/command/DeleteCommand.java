@@ -2,10 +2,7 @@ package duke.command;
 
 import java.io.IOException;
 
-import duke.core.Result;
-import duke.core.Storage;
-import duke.core.TaskList;
-import duke.core.Ui;
+import duke.core.*;
 import duke.handle.TaskNotFoundException;
 import duke.task.Task;
 
@@ -32,18 +29,19 @@ public class DeleteCommand extends Command {
      * @param ui The user interface component.
      * @param storage The storage component.
      * @throws TaskNotFoundException If there is no task corresponding to the count of the task.
-     * @throws IOException If the storage process needs to be handled
+     * @throws IOException If the storage process needs to be handled.
      */
     @Override
     public Result excecute(TaskList taskList, Ui ui, Storage storage) throws TaskNotFoundException, IOException {
         if (!taskList.has(count - 1)) {
-            throw new TaskNotFoundException("There is no such task");
+            throw new TaskNotFoundException("There is no such task\n"
+                    + "Type list to see the list of tasks");
         }
 
         Task task = taskList.remove(count - 1);
 
         storage.writeRecord(taskList);
 
-        return new Result(ui.getDeleteMessage(task, count, taskList.getSize()), this.isContinuing());
+        return new Result(ui.getDeleteMessage(task, count, taskList.getSize()), this.isContinuing(), MessageType.COMMAND_FOUND_MESSAGE);
     }
 }

@@ -1,9 +1,6 @@
 package duke.command;
 
-import duke.core.Result;
-import duke.core.Storage;
-import duke.core.TaskList;
-import duke.core.Ui;
+import duke.core.*;
 
 /**
  * The ListCommand class represents a command that lists the tasks in the task list.
@@ -20,6 +17,6 @@ public class ListCommand extends Command {
      */
     @Override
     public Result excecute(TaskList taskList, Ui ui, Storage storage) {
-        return new Result(ui.getTaskListMessage(taskList), isContinuing());
+        return new Result(ui.getTaskListMessage(taskList), isContinuing(), MessageType.COMMAND_FOUND_MESSAGE);
     }
 }

@@ -5,11 +5,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import duke.command.Command;
-import duke.core.Parser;
-import duke.core.Result;
-import duke.core.Storage;
-import duke.core.TaskList;
-import duke.core.Ui;
+import duke.core.*;
 import duke.handle.CommandNotFoundException;
 import duke.handle.LoadingException;
 import duke.handle.TaskNotFoundException;
@@ -60,11 +56,11 @@ public class Duke {
             return parsedCommand.excecute(taskList, ui, storage);
         } catch (CommandNotFoundException commandNotFoundException) {
             //System.out.println(commandNotFoundexException.getMessage());
-            return new Result(ui.handleException(commandNotFoundException), true);
+            return new Result(ui.handleException(commandNotFoundException), true, MessageType.COMMAND_NOT_FOUND_MESSAGE);
         } catch (TaskNotFoundException taskNotFoundException) {
-            return new Result(ui.handleException(taskNotFoundException), true);
+            return new Result(ui.handleException(taskNotFoundException), true, MessageType.TASK_NOT_FOUND_MESSAGE);
         } catch (IOException ioException) {
-            return new Result(ui.handleException(ioException), true);
+            return new Result(ui.handleException(ioException), true, MessageType.HANDLE_MESSAGE);
         }
     }
 

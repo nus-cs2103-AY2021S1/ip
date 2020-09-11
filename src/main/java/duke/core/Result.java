@@ -3,6 +3,7 @@ package duke.core;
 public class Result {
     private String message;
     private boolean isContinuing;
+    private MessageType messageType;
 
     /**
      * Returns a result with the message and
@@ -11,9 +12,10 @@ public class Result {
      * @param message The message of the result
      * @param isContinuing The boolean value of whether the process should continue.
      */
-    public Result(String message, boolean isContinuing) {
+    public Result(String message, boolean isContinuing, MessageType messageType) {
         this.message = message;
         this.isContinuing = isContinuing;
+        this.messageType = messageType;
     }
 
     public String getMessage() {
@@ -22,5 +24,9 @@ public class Result {
 
     public boolean isContinuing() {
         return isContinuing;
+    }
+
+    public MessageType getMessageType() {
+        return messageType;
     }
 }
