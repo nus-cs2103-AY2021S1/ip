@@ -33,7 +33,8 @@ Example of usage:
 * `todo sampleTask` creates the `sampleTask` in the task list.  
 ![todoImage](asset/todo.png)  
 
-
+\
+\
 
 ### `Event` - Add an event task
 
@@ -49,7 +50,8 @@ Example of usage:
 * The `sampleEvent` is to be done at __March 12, 2020__.  
 ![eventImage](asset/event.png)  
 
-
+\
+\
 
 ### `Deadline` - Add a deadline task
 
@@ -64,7 +66,8 @@ Example of usage:
 * The `sampleDeadline` is to be done before __Nov 12, 2020__.  
 ![deadlineImage](asset/deadline.png)  
    
-   
+\
+\
    
 ### `List` - Display the list of tasks
 
@@ -82,7 +85,8 @@ Example of usage:
 * `list` returns all tasks' information presented nicely.  
 ![listImage](asset/list.png)  
    
-   
+\
+\
    
 ### `Done` - Complete a task
 
@@ -97,7 +101,8 @@ Example of usage:
 * `done 1` updates the status of the first task as "done", represented as `✓`.  
 ![doneImage](asset/done.png)  
    
-   
+\
+\
    
 ### `Delete` - Delete a task
 
@@ -111,7 +116,8 @@ Example of usage:
 * `delete 1` delete the first task from the list.  
 ![deleteImage](asset/delete.png)  
    
-   
+\
+\
    
 ### `Find` - Search for relevant tasks
 
@@ -127,7 +133,8 @@ Example of usage:
 * Here the outputs are `sampleEvent` and `sampleDeadline`.  
 ![findImage](asset/find.png)  
    
-   
+\
+\
    
 ### `Reminder` - Get notified of upcoming due
 
