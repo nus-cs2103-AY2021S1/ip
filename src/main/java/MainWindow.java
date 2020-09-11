@@ -1,3 +1,4 @@
+// Solution below are adapted from https://se-education.org/guides/tutorials/javaFx.html
 import duke.component.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.Cursor;

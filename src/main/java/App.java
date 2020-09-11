@@ -1,3 +1,4 @@
+// Solution below are adapted from https://se-education.org/guides/tutorials/javaFx.html
 import duke.Duke;
 import duke.command.Command;
 import duke.command.InvalidCommandException;
