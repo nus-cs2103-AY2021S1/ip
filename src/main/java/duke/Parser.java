@@ -12,12 +12,44 @@ class Parser {
      * @return Corresponding Command with respect to input.
      * @throws DukeException  When date is in wrong format, or task lacks description.
      */
-    static Command parse(String input) throws DukeException {
+    static Command parseTaskCommand(String input) throws DukeException {
         String[] partsOfCommand = splitCommandAndFormatAction(input);
         String action = partsOfCommand[0];
 
         CommandName commandName = tryEnum(action);
         return handleCommand(commandName, partsOfCommand);
+    }
+
+    static boolean isTaskCommand(String input) throws DukeException {
+        String[] partsOfCommand = splitCommandAndFormatAction(input);
+        String action = partsOfCommand[0];
+
+        CommandName commandName = tryEnum(action);
+        switch(commandName) {
+        case LIST:
+            // Fallthrough
+        case DONE:
+            // Fallthrough
+        case TODO:
+            // Fallthrough
+        case DEADLINE:
+            // Fallthrough
+        case EVENT:
+            // Fallthrough
+        case DELETE:
+            // Fallthrough
+        case FIND:
+            // Fallthrough
+        case BYE:
+            return true;
+        case ADDCLIENT:
+            // Fallthrough
+        case LISTCLIENT:
+            return false;
+        default:
+            assert false : "There should only be a fixed number of commands, should not reach here";
+            return false;
+        }
     }
 
     private static String[] splitCommandAndFormatAction(String input) {
@@ -60,9 +92,45 @@ class Parser {
         case BYE:
             return new ExitCommand();
         default:
-            assert false : "There should only be a fixed number of commands, should not reach here";
+            assert false : "There should only be a fixed number of task commands, should not reach here";
             return new ExitCommand();
         }
+    }
+
+    static ClientCommand parseClientCommand(String input) throws DukeException {
+        String[] partsOfCommand = splitCommandAndFormatAction(input);
+        String action = partsOfCommand[0];
+
+        CommandName commandName = tryEnum(action);
+        return handleClientCommand(commandName, partsOfCommand);
+    }
+
+    private static ClientCommand handleClientCommand(CommandName commandName,
+                                                     String[] partsOfCommand) throws DukeException {
+        switch(commandName) {
+        case ADDCLIENT:
+            return handleAddClient(partsOfCommand);
+        case LISTCLIENT:
+            return new ListClientCommand();
+        default:
+            assert false : "There should only be a fixed number of client commands, should not reach here";
+            //TODO: Exit Client Command
+            return new AddClientCommand("", "", "");
+        }
+    }
+
+    private static ClientCommand handleAddClient(String[] partsOfCommand) {
+        String clientInfo = partsOfCommand[1];
+
+        String[] clientInfoParts = clientInfo.split(" /isMale ", 2);
+        String name = clientInfoParts[0];
+        String isMaleStringAndBirthdayString = clientInfoParts[1];
+
+        String[] isMaleStringAndBirthdayParts = isMaleStringAndBirthdayString.split(" /bday ", 2);
+        String isMaleString = isMaleStringAndBirthdayParts[0];
+        String birthdayString = isMaleStringAndBirthdayParts[1];
+
+        return new AddClientCommand(name, isMaleString, birthdayString);
     }
 
     /**
