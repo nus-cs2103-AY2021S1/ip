@@ -19,13 +19,17 @@ public class Event extends Task {
      * Returns a String in the format of "dd MM yyyy hh mm"
      * @return String that represents the date and time of the Deadline Task
      */
-    public String getDateTime() {
+    public String getDateTimeToString() {
         int dd = this.dateTime.getDayOfMonth();
         int mm = this.dateTime.getMonthValue();
         int yyyy = this.dateTime.getYear();
         int hour = this.dateTime.getHour();
         int min = this.dateTime.getMinute();
         return dd + " " + mm + " " + yyyy + " " + hour + " " + min;
+    }
+
+    public LocalDateTime getDateTime() {
+        return dateTime;
     }
 
     /**

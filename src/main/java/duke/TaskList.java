@@ -3,6 +3,8 @@ package duke;
 import java.util.ArrayList;
 import java.util.List;
 
+import duke.comparators.DeadlineAndEventComparator;
+import duke.comparators.TaskComparator;
 import duke.task.Task;
 
 public class TaskList {
@@ -14,6 +16,15 @@ public class TaskList {
      */
     public TaskList(ArrayList<Task> taskList) {
         this.taskList = taskList;
+    }
+
+    /**
+     * Sorts tasklist by shoving toDo tasks towards the back and sorting them lexicographically.
+     * Deadlines and Events at the front are then sorted by dates in ascending order followed by lexicographic order
+     */
+    public void sort() {
+        this.taskList.sort(new TaskComparator()
+                .thenComparing(new DeadlineAndEventComparator()));
     }
 
     /**

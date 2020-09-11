@@ -27,6 +27,7 @@ public class ExitCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) {
         ui.setMessage("Bye. Hope to see you again soon!\n");
         System.out.println("Bye. Hope to see you again soon!");
+        tasks.sort();
         // saves tasks to filePath
         try {
             storage.saveToCsv(tasks);

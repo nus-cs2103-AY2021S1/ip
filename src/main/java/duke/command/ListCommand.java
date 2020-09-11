@@ -23,6 +23,7 @@ public class ListCommand extends Command {
      */
     @Override
     public void execute(TaskList tasks, Ui ui, Storage storage) {
+        tasks.sort();
         String message = "";
         message += "Here are the tasks in your list:\n";
         System.out.println("Here are the tasks in your list:");
