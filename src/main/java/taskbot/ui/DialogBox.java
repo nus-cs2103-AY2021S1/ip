@@ -28,7 +28,7 @@ public class DialogBox extends HBox {
     @FXML
     private Circle displayPicture;
 
-    private DialogBox(String text, Image image) {
+    private DialogBox(String text, Image image, Color color, Color dropShadow) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(DialogBox.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -40,9 +40,9 @@ public class DialogBox extends HBox {
         }
         dialog.setText(text);
 
-        displayPicture.setStroke(Color.SEAGREEN);
+        displayPicture.setStroke(color);
         displayPicture.setFill(new ImagePattern(image));
-        displayPicture.setEffect(new DropShadow(+25d, 0d, +2d, Color.DARKSEAGREEN));
+        displayPicture.setEffect(new DropShadow(+25d, 0d, +2d, dropShadow));
     }
 
     /**
@@ -62,7 +62,7 @@ public class DialogBox extends HBox {
      * @return a DialogBox with the given text and image.
      */
     public static DialogBox getUserDialog(String text, Image image) {
-        return new DialogBox(text, image);
+        return new DialogBox(text, image, Color.SEAGREEN, Color.DARKSEAGREEN);
     }
 
     /**
@@ -72,7 +72,7 @@ public class DialogBox extends HBox {
      * @return a DialogBox to be displayed as TaskBot's answer to the user.
      */
     public static DialogBox getTaskbotDialog(String text, Image image) {
-        DialogBox dialogBox = new DialogBox(text, image);
+            DialogBox dialogBox = new DialogBox(text, image, Color.BLUE, Color.DARKBLUE);
         dialogBox.flip();
         return dialogBox;
     }
