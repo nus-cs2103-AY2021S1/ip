@@ -156,6 +156,7 @@ public class Storage {
             try {
                 FileWriter fileWriter = new FileWriter(settingsPath);
                 fileWriter.write("7"); // default number of days
+                this.numberOfDays = 7;
                 fileWriter.close();
             } catch (IOException e) {
                 System.out.println("An error occurred.");
