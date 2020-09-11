@@ -13,7 +13,7 @@ public class QuitCommand implements Command {
      *  @param ts
      * @param ui
      * @param input
-     * @return
+     * @return empty string.
      */
     @Override
     public String execute(TaskList ts, Ui ui, String input) {

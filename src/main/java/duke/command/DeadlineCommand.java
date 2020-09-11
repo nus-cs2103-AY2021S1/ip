@@ -24,7 +24,7 @@ public class DeadlineCommand implements Command {
      * @param input
      * @throws EmptyDescriptionException
      * @throws InvalidFormatException
-     * @return
+     * @return deadline added message.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, String input) throws EmptyDescriptionException, InvalidFormatException {

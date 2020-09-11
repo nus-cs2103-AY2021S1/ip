@@ -23,7 +23,7 @@ public class TodoCommand implements Command {
      * @param ui
      * @param input
      * @throws EmptyDescriptionException
-     * @return
+     * @return todo added message.
      */
     @Override
     public String execute(TaskList taskList, Ui ui, String input) throws EmptyDescriptionException {
