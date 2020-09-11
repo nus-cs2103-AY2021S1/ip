@@ -36,9 +36,9 @@ Hello from
 ####################################################################################################
 
 ####################################################################################################
-	 Oops you used a invalid command! Not sure what you mean... by:
+	 Oops you used a invalid commandHelp! Not sure what you mean... by:
 	 abc 123
-	 Heres a tip, use the 'help' command to learn about my commands!
+	 Heres a tip, use the 'help' commandHelp to learn about my commands!
 ####################################################################################################
 
 ####################################################################################################

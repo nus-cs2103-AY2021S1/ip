@@ -1,16 +1,13 @@
 package duke.tasks;
 
+
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.regex.Pattern;
-import java.util.stream.IntStream;
 
 import duke.exceptions.DukeCommandException;
-import duke.exceptions.DukeDateTimeException;
 import duke.exceptions.DukeIndexException;
 import duke.exceptions.DukeIoException;
-import duke.exceptions.DukeNoInputException;
-
 
 /**
  * TaskManager is a class to handle where duke.tasks are CRUD.
@@ -18,7 +15,6 @@ import duke.exceptions.DukeNoInputException;
 public class TaskManager {
     private final List<Task> taskList;
     private final TaskIoParser ioParser;
-    private final TextParser textParser;
 
     /**
      * Constructs TaskManager for the Duke Application with loading from the save file
@@ -28,7 +24,6 @@ public class TaskManager {
     public TaskManager(String path) throws DukeIoException {
         this.ioParser = new TaskIoParser(path);
         this.taskList = ioParser.loadTaskList();
-        this.textParser = new TextParser();
     }
 
     /**
@@ -39,7 +34,6 @@ public class TaskManager {
     public TaskManager(String path, boolean isNew) {
         this.ioParser = new TaskIoParser(path);
         this.taskList = ioParser.loadNewTaskList();
-        this.textParser = new TextParser();
     }
     
     /**
@@ -161,5 +155,10 @@ public class TaskManager {
             sb.append("\tThere are no tasks in your list!\n");
         }
         return sb.toString();
+    }
+
+    @Override
+    public String toString() {
+        return "TaskManager: \n" + listTasks();
     }
 }

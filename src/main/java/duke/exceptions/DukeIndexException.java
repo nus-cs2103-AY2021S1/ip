@@ -21,11 +21,11 @@ public class DukeIndexException extends DukeException {
      */
     public String message(String s) {
         StringBuilder b = new StringBuilder("");
-        b.append("\t Oops you requested for a index ourside the list range or a non numeric index:\n");
-        b.append("\t ").append(badCommand).append("\n");
-        b.append("\t ").append(s);
+        b.append("Oops you requested for a index ourside the list range or a non numeric index:\n");
+        b.append(badCommand).append("\n");
+        b.append(s);
         b.append(": ").append(code.toString()).append(" out of ").append(size).append("\n");
-        b.append("\t Heres a tip, use the 'list' command to see the current duke.tasks!\n");
+        b.append("Heres a tip, use the 'list' command to see the current duke.tasks!\n");
         return b.toString();
     }
 }

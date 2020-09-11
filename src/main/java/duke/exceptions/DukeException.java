@@ -33,11 +33,11 @@ public abstract class DukeException extends Exception {
      */
     public String message(String s) {
         StringBuilder b = new StringBuilder();
-        b.append("\t Oops you used a invalid command! Not sure what you mean by:\n");
-        b.append("\t ").append(badCommand).append("\n");
-        b.append("\t ").append(s);
+        b.append("Oops you used a invalid command! Not sure what you mean by:\n");
+        b.append(badCommand).append("\n");
+        b.append(s);
         b.append(": ").append(code.toString()).append("\n");
-        b.append("\t Heres a tip, use the 'help' command to learn about my commands!\n");
+        b.append("Heres a tip, use the 'help' command to learn about my commands!\n");
         return b.toString();
     }
 

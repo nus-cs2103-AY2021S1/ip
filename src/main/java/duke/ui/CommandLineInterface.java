@@ -11,7 +11,7 @@ public class CommandLineInterface implements UserInterface{
             + "|____/ \\__,_|_|\\_\\___|\n"
             + "\tHello! %s I'm duke.Duke\n\tWhat can I do for you "
             + "\n";
-    private static final String goodbye = "Bye %s! Hope to see you again soon!";
+    private static final String goodbye = "Bye %s! Hope to see you again soon!\n";
     private static final String linebreaker = "_".repeat(30) + "\n";
     
     private boolean isChatbotRunning;
@@ -44,7 +44,7 @@ public class CommandLineInterface implements UserInterface{
         assert isChatbotRunning : "CommandLineInterface should only end once";
         this.scanner.close();
         this.isChatbotRunning = false;
-        systemMessage(String.format(goodbye,userName));
+        systemMessage(String.format(goodbye, userName));
     }
 
     @Override

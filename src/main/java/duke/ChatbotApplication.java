@@ -1,11 +1,6 @@
 package duke;
 
-import java.util.Scanner;
-
-import duke.exceptions.DukeException;
-import duke.exceptions.DukeIoException;
-import duke.exceptions.DukeUnknownException;
-import duke.gui.MainLauncher;
+import duke.ui.MainLauncher;
 import duke.ui.CommandLineInterface;
 import duke.ui.UserInterface;
 import javafx.application.Application;
@@ -25,15 +20,15 @@ public class ChatbotApplication {
     }
 
     public static void main(String[] args) {
-        UserInterface ui = new CommandLineInterface();
-        Duke duke = new Duke(ui);
-        while (ui.isRunning()) {
-            duke.nextIteration();
+        //args[0] = "cli";
+        if (args.length > 0 && args[0].equals("-cli")) {
+            UserInterface ui = new CommandLineInterface();
+            Duke duke = new Duke(ui);
+            while (ui.isRunning()) {
+                duke.nextIteration();
+            }
+        } else {
+            Application.launch(MainLauncher.class, args);
         }
-//        if (args.length > 0 && args[0].equals("--gui")) {
-//            //Application.launch(MainLauncher.class, args);
-//        } else {
-//            
-//        }
     }
 }

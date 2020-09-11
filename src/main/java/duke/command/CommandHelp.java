@@ -3,7 +3,7 @@ package duke.command;
 /**
  * Command is a Storage for the Enumerations of each type of command that is valid in Duke Chatbot.
  */
-public enum Command {
+public enum CommandHelp {
     //random string as this is the default enum.
     ERROR("asjdbaksjfbanfjknjkdfnskasd", "This is a invalid command"),
     BYE("bye", "close the application"),
@@ -17,18 +17,17 @@ public enum Command {
     EVENT("event", "schedule a timed event task, please structure with "
             + "[event <task name> /at dd-MM-YYYY]"),
     SEARCH("find", "find <regex expression> on description only"),
-    ALL("all", ""),
     BLANK("", "This is a invalid command");
     
     private final String commandEncoding;
     private final String helpMsg;
 
     /**
-     * Constructor for the enumeration for commands
+     * Constructs the enumeration for commands
      * @param code key word of command
      * @param help Help message to display
      */
-    Command(String code, String help) {
+    CommandHelp(String code, String help) {
         this.commandEncoding = code;
         this.helpMsg = help;
     }
@@ -41,5 +40,14 @@ public enum Command {
     }
     public String toString() {
         return "- " + commandEncoding + " to " + helpMsg + "\n";
+    }
+
+    /**
+     * Checks for equivilence between the code of the command and the other
+     * @param other Other command
+     * @return boolean indicating that the command is the same.
+     */
+    public boolean equals(CommandHelp other) {
+        return other.getCode().equals(this.getCode());
     }
 }

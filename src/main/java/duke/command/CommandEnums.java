@@ -11,8 +11,8 @@ import java.util.regex.Pattern;
 
 public enum CommandEnums {
     TODO(CommandList.TODO , "(.*)" , "todo"),
-    DEADLINE(CommandList.DEADLINE, "(.*) -at (.*)", "deadline"),
-    EVENT(CommandList.EVENT , "(.*) -by (.*)" , "event"),
+    DEADLINE(CommandList.DEADLINE, "(.*) -by (.*)", "deadline"),
+    EVENT(CommandList.EVENT , "(.*) -at (.*)" , "event"),
     HELP(CommandList.HELP, "(.*)", "help"),
     LIST(CommandList.LIST, "" , "list"),
     FIND(CommandList.FIND, "(.*)" , "find"),
@@ -41,15 +41,28 @@ public enum CommandEnums {
         if (!rawInput.startsWith(this.name)) {
             return Optional.empty();
         }
+//        System.out.print(this.name);
         Matcher matcher = this.format.matcher(rawInput.substring(this.name.length()).trim());
         return Optional.of(matcher);
     }
-    
+
+    /**
+     * Executes the task using the taskmanager and user interface
+     * @param taskManager stored taskManager in parser
+     * @param ui User Interface
+     * @param args String argument
+     * @throws DukeException an Exception in the internal commandlist
+     */
     public void execute(TaskManager taskManager, UserInterface ui, String[] args) throws DukeException{
         this.executer.run(taskManager, ui , args);
     }
-    
-    public DukeCommandException commandError() {
-        return new DukeCommandException("not matching command");
+
+    /**
+     * Input given that is known to be wrong
+     * @param input userinput
+     * @return Error Message
+     */
+    public DukeCommandException commandError(String input) {
+        return new DukeCommandException(input);
     }
 }

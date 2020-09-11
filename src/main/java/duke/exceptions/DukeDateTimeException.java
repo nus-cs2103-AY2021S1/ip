@@ -19,11 +19,11 @@ public class DukeDateTimeException extends DukeException {
      */
     public String message(String s) {
         StringBuilder b = new StringBuilder();
-        b.append("\t Oops you did not mark your datetime! Not sure what you mean by:\n");
-        b.append("\t ").append(badCommand).append("\n");
-        b.append("\t ").append(s);
+        b.append("Oops you did not mark your datetime! Not sure what you mean by:\n");
+        b.append(badCommand).append("\n");
+        b.append(s);
         b.append(": ").append(code.toString()).append("\n");
-        b.append("\t Heres a tip, use the 'help' command to learn about my commands!\n");
+        b.append("Heres a tip, use the 'help' command to learn about my commands!\n");
         return b.toString();
     }
 }
