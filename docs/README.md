@@ -37,7 +37,7 @@ Example of usage:
 
 ### `Event` - Add an event task
 
-Store an event task which needs to be done __at__ a scheduled time.
+Store an event task which needs to be done `at` a scheduled time.
 
 Format: `event TASK_NAME /at SCHEDULED_TIME`
 
@@ -47,14 +47,14 @@ Example of usage:
 
 * `even sampleEvent /at 2020-03-12` creates the `sampleEvent` in the task list.
 * The `sampleEvent` is to be done at __March 12, 2020__.  
-/
+<br />
 ![eventImage](asset/event.png)  
 
 ***
 
 ### `Deadline` - Add a deadline task
 
-Store a deadline task which needs to be done __before__ a scheduled time.
+Store a deadline task which needs to be done `before` a scheduled time.
 
 Format: `deadline TASK_NAME /by SCHEDULED_TIME`
 * `SCHEDULED_TIME` follows the format _'YYYY-MM-DD'_.
