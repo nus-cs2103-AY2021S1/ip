@@ -12,6 +12,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
+import javafx.scene.shape.Rectangle;
 
 /**
  * DialogBox UI component that encapsulates a label and an imageview.
@@ -33,6 +35,11 @@ public class DialogBox extends HBox {
         }
 
         dialogText.setText(text);
+
+        Rectangle clip = new Rectangle(displayPicture.getFitWidth(), displayPicture.getFitHeight());
+        clip.setArcWidth(10);
+        clip.setArcHeight(10);
+        displayPicture.setClip(clip);
         displayPicture.setImage(img);
     }
 
@@ -50,8 +57,15 @@ public class DialogBox extends HBox {
         return new DialogBox(text, img);
     }
 
+    public static DialogBox getErrorDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
+        db.getStyleClass().add("error-dialog");
+        return db;
+    }
+
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
+        db.getStyleClass().add("user-dialog");
         db.flip();
         return db;
     }

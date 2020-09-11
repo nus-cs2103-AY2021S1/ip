@@ -59,12 +59,20 @@ public class MainWindow extends AnchorPane {
         if (input.equals("bye")) {
             System.exit(0);
         }
-        String response = chatterbox.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getChatterboxDialog(response, chatterboxImage)
-        );
-        userInput.clear();
+
+        // Display user dialog
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
+
+        try {
+            // Display normal dialog
+            String response = chatterbox.getResponse(input);
+            dialogContainer.getChildren().add(DialogBox.getChatterboxDialog(response, chatterboxImage));
+        } catch (ChatterboxException | IOException e) {
+            // Display error dialog
+            dialogContainer.getChildren().add(DialogBox.getErrorDialog(e.toString(), chatterboxImage));
+        } finally {
+            userInput.clear();
+        }
     }
 }
 

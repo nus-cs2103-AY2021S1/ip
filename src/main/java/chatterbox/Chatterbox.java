@@ -39,12 +39,8 @@ public class Chatterbox {
      * @param input The user's input string.
      * @return Chatterbox's response to the input.
      */
-    public String getResponse(String input) {
-        try {
-            return processInput(input);
-        } catch (ChatterboxException | IOException e) {
-            return e.toString();
-        }
+    public String getResponse(String input) throws ChatterboxException, IOException {
+        return processInput(input);
     }
 
     /**

@@ -7,6 +7,7 @@ import chatterbox.ui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -28,6 +29,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
+            Image icon = new Image(Main.class.getResourceAsStream("/images/Icon.jpg"));
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             MainWindow mw = new MainWindow();
             fxmlLoader.setController(mw);
@@ -37,6 +39,7 @@ public class Main extends Application {
             stage.setScene(scene);
             stage.setResizable(false);
             stage.setTitle("Chatterbox");
+            stage.getIcons().add(icon);
             fxmlLoader.<MainWindow>getController().setChatterbox(chatterbox);
             stage.show();
         } catch (IOException e) {
