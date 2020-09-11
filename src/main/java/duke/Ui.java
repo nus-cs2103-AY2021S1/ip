@@ -1,26 +1,39 @@
 package duke;
 
-import java.util.Scanner;
-import java.lang.StringBuilder;
-
+/**
+ * A user interface with standard messages used in interacting with the user.
+ */
 public class Ui {
-    private Scanner scanner;
 
-    private static final String MESSAGE_CURRENT_TASKS = "Now you have %d task(s) in the list.";
-    private static final String MESSAGE_ADD_TASK = "Got it. I've added this task:";
-    private static final String MESSAGE_DONE_TASK = "Nice! I've marked this as done:";
-    private static final String MESSAGE_DELETED_TASK = "Noted. I've removed this task:";
+    /** Standard messages as part of the UI's design. */
     private static final String MESSAGE_WELCOME = "Hello! I'm Duke, your task-list manager!\n"
             + "Before we get started, let me know if you would like to:\n"
-            + "\ti)  LOAD <filepath>  : fetch a task-list you have made before, or\n"
-            + "\tii) CREATE <filepath>: create a new task-list from scratch.";
+            + "    i)  LOAD   <filepath> : fetch a task-list you have made before, or\n"
+            + "   ii)  CREATE <filepath> : create a new task-list from scratch.";
     private static final String MESSAGE_GOODBYE = "Bye. Hope to see you again soon!";
+    private static final String MESSAGE_ADD_TASK = "Got it. I've added this task:";
+    private static final String MESSAGE_DELETED_TASK = "Noted. I've removed this task:";
+    private static final String MESSAGE_CURRENT_TASKS = "Now you have %d task(s) in the list.";
+    private static final String MESSAGE_DONE_TASK = "Nice! I've marked this as done:";
+    private static final String MESSAGE_LIST_TASKS = "Here are the tasks in your list:";
+    private static final String MESSAGE_NO_TASKS = "There are no tasks in your list.";
+    private static final String MESSAGE_FOUND_TASKS = "Here are the matching tasks in your list:";
+    private static final String MESSAGE_NO_FOUND_TASKS = "Hmm...I did not manage to find any tasks containing ";
+    private static final String MESSAGE_FILE_LOADED = "Got it. I have successfully loaded your task-list from ";
+    private static final String MESSAGE_FILE_CREATED = "Congratulations! You now have a new task-list at ";
+    private static final String MESSAGE_TAG = "What can I do for you next?";
+    private static final String ERROR_PREFIX = "\u2639 OOPS!!! ";
 
-    public Ui() {
-        this.scanner = new Scanner(System.in);
-    }
+    /** Constructs a new user interface object that interacts with the user input. */
+    public Ui() {}
 
-    private static String showLines(String... lines) {
+    /**
+     * Concatenates a sequence of lines, appending a linebreak after each line.
+     *
+     * @param lines The lines to be concatenated.
+     * @return A string of the concatenated lines.
+     */
+    private static String concatenateLines(String... lines) {
         StringBuilder stringBuilder = new StringBuilder();
         boolean isFirst = true;
         for (String s : lines) {
@@ -34,7 +47,18 @@ public class Ui {
         return stringBuilder.toString();
     }
 
-    private static String showNumbered(boolean hasHeader, boolean hasFooter, String... lines) {
+    /**
+     * Concatenates a sequence of lines, numbering them in increasing sequence.
+     *
+     * <p>Includes options to indicate whether there is a header (or a footer) to
+     * skip when numbering them.</p>
+     *
+     * @param hasHeader The boolean indicator whether to skip the first line in numbering.
+     * @param hasFooter The boolean indicator whether to skip the last line in numbering.
+     * @param lines The lines to be concatenated.
+     * @return A string of the numbered and concatenated lines.
+     */
+    private static String numberAndConcatenateLines(boolean hasHeader, boolean hasFooter, String... lines) {
         int start = 0;
         int end = lines.length;
         int number = 1;
@@ -48,6 +72,7 @@ public class Ui {
         }
 
         if (hasFooter) {
+            assert end - start > 0;
             end--;
         }
 
@@ -61,66 +86,78 @@ public class Ui {
         return stringBuilder.toString();
     }
 
-    public static String showWelcomeMessage() {
+    public static String getWelcomeMessage() {
         return MESSAGE_WELCOME;
     }
 
-    public String showGoodbyeMessage() {
+    public String getGoodbyeMessage() {
         return MESSAGE_GOODBYE;
     }
 
-    public String showErrorMessage(String errorMessage) {
-        return "\u2639 OOPS!!! " + errorMessage;
+    /**
+     * Prepends a standard error prefix to a specified error message.
+     *
+     * @param errorMessage The main error message.
+     * @return The error message with the standard error prefix.
+     */
+    public String addErrorPrefix(String errorMessage) {
+        return ERROR_PREFIX + errorMessage;
     }
 
-    public String showTasks(String... tasks) {
-        String message = "Here are the tasks in your list:";
-        if (tasks.length == 0) {
-            return showLines(message, "\tThere are no tasks in your list.");
-        } else {
-            String[] lines = new String[tasks.length + 1];
-            lines[0] = message;
-            System.arraycopy(tasks, 0, lines, 1, tasks.length);
-            return showNumbered(true, false, lines);
-        }
+    /**
+     * Concatenates the tasks as a numbered list starting from 1.
+     *
+     * @param tasks The tasks to be numbered and listed.
+     * @return The numbered and concatenated list of tasks.
+     */
+    public String listNumberedTasks(String... tasks) {
+        assert tasks.length > 0;
+        String[] lines = new String[tasks.length + 1];
+        lines[0] = MESSAGE_LIST_TASKS;
+        System.arraycopy(tasks, 0, lines, 1, tasks.length);
+        return numberAndConcatenateLines(true, false, lines);
     }
 
-    public String showFoundTasks(String... finds) {
-        String message = "Here are the matching tasks in your list:";
-        if (finds.length == 0) {
-            return showLines(message, "\tThere are no matching tasks in your list.");
-        } else {
-            String[] lines = new String[finds.length + 1];
-            lines[0] = message;
-            System.arraycopy(finds, 0, lines, 1, finds.length);
-            return showNumbered(true, false, lines);
-        }
+    public String getNoTasksMessage() {
+        return MESSAGE_NO_TASKS;
     }
 
-    public String showNoSuchTasks(String searchQuery) {
-        return "Hmm...I did not manage to find any tasks containing " + searchQuery;
+    /**
+     * Concatenates the tasks found matching the query as a numbered list starting from 1.
+     *
+     * @param finds The tasks found matching the query.
+     * @return The numbered and concatenated tasks found matching the query.
+     */
+    public String listNumberedFoundTasks(String... finds) {
+        assert finds.length > 0;
+        String[] lines = new String[finds.length + 1];
+        lines[0] = MESSAGE_FOUND_TASKS;
+        System.arraycopy(finds, 0, lines, 1, finds.length);
+        return numberAndConcatenateLines(true, false, lines);
+    }
+
+    public String getNoFoundTasksMessage(String searchQuery) {
+        return MESSAGE_NO_FOUND_TASKS + searchQuery;
     }
 
     public String showLoadingSuccess(String filepath) {
-        return showLines("Got it. I have successfully loaded your task-list from " + filepath,
-                "What can I do for you next?");
+        return concatenateLines(MESSAGE_FILE_LOADED + filepath, MESSAGE_TAG);
     }
 
     public String showMakeFileSuccess(String filepath) {
-        return showLines("Congratulations! You now have a new task-list at " + filepath,
-                "What can I do for you next?");
+        return concatenateLines(MESSAGE_FILE_CREATED + filepath, MESSAGE_TAG);
     }
 
     public String showAddedTask(String task, int numTasks) {
-        return showLines(MESSAGE_ADD_TASK, " "+ task, String.format(MESSAGE_CURRENT_TASKS, numTasks));
+        return concatenateLines(MESSAGE_ADD_TASK, " " + task, String.format(MESSAGE_CURRENT_TASKS, numTasks));
     }
 
     public String showDoneTask(String task) {
-        return showLines(MESSAGE_DONE_TASK, "  " + task);
+        return concatenateLines(MESSAGE_DONE_TASK, "  " + task);
     }
 
     public String showDeletedTask(String task, int numTasks) {
-        return showLines(MESSAGE_DELETED_TASK, "  " + task, String.format(MESSAGE_CURRENT_TASKS, numTasks));
+        return concatenateLines(MESSAGE_DELETED_TASK, "  " + task, String.format(MESSAGE_CURRENT_TASKS, numTasks));
     }
 
 }

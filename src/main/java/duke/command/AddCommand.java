@@ -15,6 +15,12 @@ public class AddCommand extends Command {
     private CommandType commandType;
     private String[] details;
 
+    /**
+     * Constructs a new AddCommand object of the specified CommandType containing the accompanying details.
+     *
+     * @param commandType The type of the AddCommand
+     * @param details The accompanying details needed for the execution of the command.
+     */
     public AddCommand(CommandType commandType, String... details) {
         this.commandType = commandType;
         this.details = details;
@@ -25,18 +31,21 @@ public class AddCommand extends Command {
         String output;
         switch (commandType) {
         case TODO:
+            assert details.length == 1;
             ToDo toDo = new ToDo(details[0]);
             tasks.addTask(toDo);
             storage.addLine(toDo.toFileString());
             output = ui.showAddedTask(toDo.toString(), tasks.getNumTasks());
             break;
         case DEADLINE:
+            assert details.length == 2;
             Deadline deadline = new Deadline(details[0], details[1]);
             tasks.addTask(deadline);
             storage.addLine(deadline.toFileString());
             output = ui.showAddedTask(deadline.toString(), tasks.getNumTasks());
             break;
         case EVENT:
+            assert details.length == 2;
             Event event = new Event(details[0], details[1]);
             tasks.addTask(event);
             storage.addLine(event.toFileString());

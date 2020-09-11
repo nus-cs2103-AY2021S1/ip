@@ -8,6 +8,7 @@ import duke.task.Event;
 import duke.command.Command;
 import duke.command.CommandType;
 import duke.command.AddCommand;
+import duke.command.ListCommand;
 import duke.command.ExitCommand;
 import duke.command.QueryCommand;
 import duke.command.EditCommand;
@@ -28,6 +29,7 @@ public class Parser {
 
     /**
      * Parses a specified string and converts it into a Command to be executed.
+     *
      * @param string the String from the user input
      * @return the Command parsed from the string
      * @throws DukeException If the string deviates from any of the acceptable formats
@@ -48,7 +50,7 @@ public class Parser {
                 command = new ExitCommand(CommandType.BYE);
                 break;
             case "list":
-                command = new QueryCommand(CommandType.LIST);
+                command = new ListCommand(CommandType.LIST);
                 break;
             case "find":
                 try {
@@ -124,7 +126,7 @@ public class Parser {
 
     /**
      * Parses a specified line from a File and converts it into a Task.
-     * Used for the initialization of the TaskList when a new Duke is initialized.
+     *
      * @param line a String read from a File
      * @return the Task parsed from the line
      * @throws DukeException If the line deviates from any of the acceptable formats

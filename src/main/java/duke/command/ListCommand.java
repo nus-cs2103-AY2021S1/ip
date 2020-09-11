@@ -5,26 +5,31 @@ import duke.Storage;
 
 import duke.task.TaskList;
 
-public class ExitCommand extends Command {
+public class ListCommand extends Command {
     private CommandType commandType;
 
     /**
-     * Constructs a new ExitCommand of the specified CommandType.
+     * Constructs a new ListCommand object of the specified CommandType.
      *
-     * @param commandType The type of the ExitCommand.
+     * @param commandType The type of the ListCommand.
      */
-    public ExitCommand(CommandType commandType) {
+    public ListCommand(CommandType commandType) {
         this.commandType = commandType;
     }
 
+
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return ui.getGoodbyeMessage();
+        String[] lines = tasks.getTasks();
+        if (lines.length > 0) {
+            return ui.listNumberedTasks(lines);
+        }
+        return ui.getNoTasksMessage();
     }
 
     @Override
     public boolean isExit() {
-        return true;
+        return false;
     }
 
     @Override
@@ -32,3 +37,4 @@ public class ExitCommand extends Command {
         return commandType.toString();
     }
 }
+

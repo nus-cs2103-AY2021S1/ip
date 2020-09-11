@@ -12,6 +12,12 @@ public class FileCommand extends Command {
     private CommandType commandType;
     private String filepath;
 
+    /**
+     * Constructs a new FileCommand object of the specified CommandType with the specified filepath.
+     *
+     * @param commandType The type of the FileCommand.
+     * @param filepath The filepath where the concerned file is located.
+     */
     public FileCommand(CommandType commandType, String filepath) {
         this.commandType = commandType;
         this.filepath = filepath;
