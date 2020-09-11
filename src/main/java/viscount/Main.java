@@ -21,7 +21,7 @@ public class Main extends Application {
         AnchorPane anchorPane = new MainWindow();
         Scene scene = new Scene(anchorPane);
         stage.setScene(scene);
-        stage.setTitle("Viscount Task Manager");
+        stage.setTitle("Viscount");
         stage.getIcons().add(new Image(Main.class.getResourceAsStream("/images/applicationIcon.png")));
         stage.show();
     }
