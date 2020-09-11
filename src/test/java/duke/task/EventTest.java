@@ -1,6 +1,7 @@
 package duke.task;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDateTime;
 
@@ -29,7 +30,7 @@ public class EventTest {
     }
 
     @Test
-    void storeTest() {
+    void store() {
         assertEquals(
                 "E F borrow book /at 2020-08-25T14:30 to 2020-08-25T18:00",
                 new Event("borrow book",
@@ -46,5 +47,18 @@ public class EventTest {
                         LocalDateTime.parse("2020-08-31T22:35"))
                         .store()
         );
+    }
+
+    @Test
+    void compareTo() {
+        Event event1 = new Event(
+                "meeting",
+                LocalDateTime.parse("2020-09-25T14:30"),
+                LocalDateTime.parse("2020-09-25T16:00"));
+        Event event2 = new Event(
+                "project",
+                LocalDateTime.parse("2020-09-30T12:30"),
+                LocalDateTime.parse("2020-09-30T13:00"));
+        assertTrue(event1.compareTo(event2) < 0);
     }
 }

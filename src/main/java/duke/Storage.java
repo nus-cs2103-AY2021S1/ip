@@ -51,26 +51,7 @@ public class Storage {
             if (directoryExists) {
                 FileReader fileReader = new FileReader(String.valueOf(path));
                 BufferedReader buffReader = new BufferedReader(fileReader);
-                while (buffReader.ready()) {
-                    String savedTask = buffReader.readLine();
-                    String type = savedTask.substring(0, 1);
-                    String isDone = savedTask.substring(2, 3);
-                    assert isDone.equals("T") || isDone.equals("F");
-                    switch (type) {
-                    case TODO:
-                        loadTodo(list, savedTask, isDone.equals("T"));
-                        break;
-                    case DEADLINE:
-                        loadDeadline(list, savedTask, isDone.equals("T"));
-                        break;
-                    case EVENT:
-                        loadEvent(list, savedTask, isDone.equals("T"));
-                        break;
-                    default:
-                        // Execution should never reach here
-                        assert false : savedTask;
-                    }
-                }
+                readData(buffReader, list);
             } else {
                 Files.createFile(path);
             }
@@ -123,6 +104,29 @@ public class Storage {
             bw.close();
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    private void readData(BufferedReader buffReader, List<Task> list) throws IOException {
+        while (buffReader.ready()) {
+            String savedTask = buffReader.readLine();
+            String type = savedTask.substring(0, 1);
+            String isDone = savedTask.substring(2, 3);
+            assert isDone.equals("T") || isDone.equals("F");
+            switch (type) {
+            case TODO:
+                loadTodo(list, savedTask, isDone.equals("T"));
+                break;
+            case DEADLINE:
+                loadDeadline(list, savedTask, isDone.equals("T"));
+                break;
+            case EVENT:
+                loadEvent(list, savedTask, isDone.equals("T"));
+                break;
+            default:
+                // Execution should never reach here
+                assert false : savedTask;
+            }
         }
     }
 
