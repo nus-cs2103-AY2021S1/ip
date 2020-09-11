@@ -93,9 +93,18 @@ public final class Storage {
      * Add to-do item
      *
      * @param task to be added
+     * @return boolean whether there are duplicates
      */
-    public void addToDoItem(Task task) {
+    public boolean addToDoItem(Task task) {
+        boolean hasDuplicates = false;
+
+        if (toDoLst.contains(task)) {
+            hasDuplicates = true;
+        }
+
         toDoLst.addToDoItem(task);
+
+        return hasDuplicates;
     }
 
     /**

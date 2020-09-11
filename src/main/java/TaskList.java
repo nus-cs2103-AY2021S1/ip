@@ -15,6 +15,10 @@ public class TaskList {
         return toDoLst;
     }
 
+    public boolean contains(Task task) {
+        return toDoLst.contains(task);
+    }
+
     public int getToDoLstSize() {
         return toDoLst.size();
     }

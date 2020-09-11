@@ -33,6 +33,12 @@ public class Task {
         return date.format(DateTimeFormatter.ofPattern("yyyy-MM-dd"));
     }
 
+    public boolean equals(Object obj) {
+        Task otherTask = (Task) obj;
+
+        return todo.equals(otherTask.getTodo());
+    }
+
     public String toString() {
         String description = String.format("[%s][%s] %s", type, isDone ? "✓" : "✗", todo);
 

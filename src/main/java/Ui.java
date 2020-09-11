@@ -78,4 +78,11 @@ public final class Ui {
     public void showDirErrorMessage() {
         System.out.println("Data directory or file not found, see error");
     }
+
+    /**
+     * Shows duplicate task message.
+     */
+    public static void showDuplicateTaskMessage(Task task) {
+        System.out.println(String.format("Duplicate task detected: %s", task));
+    }
 }
