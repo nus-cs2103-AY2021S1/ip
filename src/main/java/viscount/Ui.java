@@ -33,7 +33,7 @@ public class Ui {
      * @param dateString Date argument of list command.
      * @return The appropriate list response.
      */
-    public String getListResponse(List<Task> tasks, String modifier, String dateString) {
+    public String getListResponse(List<Task> tasks, String modifier, String dateString, String findString) {
         String[] validModifiers = {"", "todo", "deadline", "event"};
         assert Arrays.asList(validModifiers).contains(modifier)
                 : String.format("Invalid modifier '%s'", modifier);
@@ -44,9 +44,14 @@ public class Ui {
                         ? dateString
                         : "on " + dateString) + " ");
 
-        return String.format("Here are the %ss %sin your list:\n%s",
+        String finalFindString = findString.isEmpty()
+                ? findString
+                : String.format("containing '%s' ", findString);
+
+        return String.format("Here are the %ss %s%sin your list:\n%s",
                 modifier.isEmpty() ? "task" : modifier,
                 finalDateString,
+                finalFindString,
                 convertTaskListToString(tasks));
     }
 
@@ -128,7 +133,7 @@ public class Ui {
      */
     public String getDeleteAllDoneResponse(List<Task> tasks, int tasksSize) {
         return String.format(
-                "Very well. I've removed all the done tasks in the list:\n%s\nNow you have %d tasks in the list",
+                "Very well. I've removed all the done tasks in the list:\n%s\nNow you have %d tasks in the list.",
                 convertTaskListToString(tasks),
                 tasksSize);
     }

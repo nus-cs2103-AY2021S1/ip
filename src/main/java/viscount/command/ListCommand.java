@@ -71,7 +71,7 @@ public class ListCommand extends Command {
                     .filter(filterByDescription)
                     .collect(Collectors.toList());
 
-            return ui.getListResponse(filteredTasks, taskTypeModifier, dateString);
+            return ui.getListResponse(filteredTasks, taskTypeModifier, dateString, findString);
         } else {
             try {
                 LocalDateTime queriedDateTime = dateString.equals("today")
@@ -92,7 +92,8 @@ public class ListCommand extends Command {
                         taskTypeModifier,
                         dateString.equals("today")
                                 ? dateString
-                                : queriedDateTime.format(Parser.OUTPUT_DATE_FORMATTER));
+                                : queriedDateTime.format(Parser.OUTPUT_DATE_FORMATTER),
+                        findString);
             } catch (DateTimeParseException e) {
                 throw new ViscountDateTimeParseException("date query");
             }
