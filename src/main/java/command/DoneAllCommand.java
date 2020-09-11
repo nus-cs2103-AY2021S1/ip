@@ -24,6 +24,26 @@ public class DoneAllCommand extends Command {
     }
 
     /**
+     * Prints tasks.
+     *
+     * @param ui Ui user interface.
+     * @param tasks TaskList list of task.
+     * @return String Lists of Task.
+     */
+    private String printTask(Ui ui, TaskList tasks) {
+        StringBuilder sb = new StringBuilder();
+
+        for (int i = 0; i < tasks.size(); i++) {
+            boolean isLastTask = i != tasks.size() - 1;
+            if (isLastTask) {
+                sb.append(ui.formatMessage((i + 1) + ". " + tasks.getTask(i) + "\n"));
+            } else {
+                sb.append(ui.formatMessage((i + 1) + ". " + tasks.getTask(i)));
+            }
+        }
+        return sb.toString();
+    }
+    /**
      * Executes parsed user command. The result is:
      * 1. Sets all task in the list to finished via TaskList.
      * 2. Shows the updates list of tasks to the user via UI.
@@ -43,19 +63,10 @@ public class DoneAllCommand extends Command {
             }
         }
 
-        StringBuilder sb = new StringBuilder();
-
-        for (int i = 0; i < tasks.size(); i++) {
-            boolean isLastTask = i != tasks.size() - 1;
-            if (isLastTask) {
-                sb.append(ui.formatMessage((i + 1) + ". " + tasks.getTask(i) + "\n"));
-            } else {
-                sb.append(ui.formatMessage((i + 1) + ". " + tasks.getTask(i)));
-            }
-        }
+        String printTask = printTask(ui, tasks);
 
         storage.updateFile(tasks);
 
-        return ui.getMessageTemplate("Here are the tasks in your list:\n" + sb.toString());
+        return ui.getMessageTemplate("Here are the tasks in your list:\n" + printTask);
     }
 }
