@@ -38,6 +38,9 @@ public class MainWindow extends AnchorPane {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/user.png"));
     private Image welcomeStitch = new Image(this.getClass().getResourceAsStream("/images/welcomestitch.png"));
 
+    /**
+     * Binds the height of the reminder and the chat portion.
+     */
     @FXML
     public void initialize() {
         userScreen.vvalueProperty().bind(dialogContainer.heightProperty());
