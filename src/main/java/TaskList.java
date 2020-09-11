@@ -13,7 +13,8 @@ public class TaskList {
         this.database = database;
     }
 
-    private String addTask(Task task) {
+    private String addTask(Task task) throws DukeException {
+        this.detectDuplicates(task);
         this.database.add(task);
         String output = "Looking good! I have added this task:\n"
                 + task.toString()
@@ -84,11 +85,10 @@ public class TaskList {
 
         if (description.equals("")) {
             throw new DukeException("To-do description cannot be empty");
-        } else {
-            ToDo toDo = new ToDo(description.trim());
-            output = this.addTask(toDo);
         }
 
+        ToDo toDo = new ToDo(description.trim());
+        output = this.addTask(toDo);
         return output;
     }
 
@@ -126,6 +126,25 @@ public class TaskList {
         }
 
         return output;
+    }
+
+    /**
+     * Checks if a particular task exists in the database.
+     * This function is case sensitive. "Buy books" and "buy books" will be
+     * treated as 2 different tasks.
+     *
+     * @param task takes in the task to be checked.
+     * @throws DukeException if the task exists in the database.
+     */
+    private void detectDuplicates(Task task) throws DukeException {
+        String description = task.getDescription();
+
+        for (int i = 0; i < this.database.size(); i++) {
+            String currentTask = database.get(i).toString();
+            if (currentTask.contains(description)) {
+                throw new DukeException("This task already exists in the database");
+            }
+        }
     }
 
     /**
