@@ -5,7 +5,16 @@ import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import duke.command.*;
+import duke.command.AddCommand;
+import duke.command.Command;
+import duke.command.CommandType;
+import duke.command.DeleteCommand;
+import duke.command.DoneCommand;
+import duke.command.ExitCommand;
+import duke.command.HelpCommand;
+import duke.command.ListCommand;
+import duke.command.ListDateCommand;
+import duke.command.SearchCommand;
 import duke.handle.CommandNotFoundException;
 import duke.task.Deadline;
 import duke.task.DoWithinPeriodTask;
@@ -35,7 +44,7 @@ public class Parser {
         command = command.strip();
         if (command.equals("bye")) {
             parsedCommand = new ExitCommand();
-        }  else if (command.equals("help")) {
+        } else if (command.equals("help")) {
             parsedCommand = new HelpCommand();
         } else if (command.equals("list")) {
             parsedCommand = new ListCommand();
@@ -128,12 +137,12 @@ public class Parser {
         String stringPattern = "periodTask (.+) /start (.+) /end (.+)";
         Pattern pattern = Pattern.compile(stringPattern);
         Matcher matcher = pattern.matcher(command);
-        if(!matcher.find()) {
-            throw new CommandNotFoundException("The period task command should have the format " +
-                    "periodTask description /start start time /end end time");
+        if (!matcher.find()) {
+            throw new CommandNotFoundException("The period task command should have the format "
+                    + "periodTask description /start start time /end end time");
         }
 
-        try{
+        try {
             String description = matcher.group(1).strip();
             String start = matcher.group(2).strip();
             String end = matcher.group(3).strip();

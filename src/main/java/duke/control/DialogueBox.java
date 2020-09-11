@@ -98,11 +98,11 @@ public class DialogueBox extends HBox {
      * @return The color of the message of the corresponding message type.
      */
     Paint getMessageColor(MessageType messageType) {
-        if(messageType == MessageType.HANDLE_MESSAGE) {
+        if (messageType == MessageType.HANDLE_MESSAGE) {
             return Color.BROWN;
-        } else if(messageType == MessageType.COMMAND_NOT_FOUND_MESSAGE) {
+        } else if (messageType == MessageType.COMMAND_NOT_FOUND_MESSAGE) {
             return Color.RED;
-        } else if(messageType == MessageType.TASK_NOT_FOUND_MESSAGE) {
+        } else if (messageType == MessageType.TASK_NOT_FOUND_MESSAGE) {
             return Color.BLUE;
         } else if (messageType == MessageType.USER_MESSAGE) {
             return Color.WHITE;
@@ -118,7 +118,7 @@ public class DialogueBox extends HBox {
      * @return The font of the message of the corresponding message type.
      */
     Font getMessageFont(MessageType messageType) {
-        if(messageType == MessageType.HANDLE_MESSAGE) {
+        if (messageType == MessageType.HANDLE_MESSAGE) {
             return Font.font("Verdana", FontWeight.BOLD, 10);
         } else if (messageType == MessageType.TASK_NOT_FOUND_MESSAGE) {
             return Font.font("Verdana", FontPosture.ITALIC, 10);

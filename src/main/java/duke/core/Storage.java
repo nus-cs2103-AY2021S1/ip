@@ -9,7 +9,12 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import duke.handle.LoadingException;
-import duke.task.*;
+import duke.task.Deadline;
+import duke.task.DoWithinPeriodTask;
+import duke.task.Event;
+import duke.task.Task;
+import duke.task.ToDo;
+
 
 /**
  * The Storage class reads the local task record and the task list, and updates

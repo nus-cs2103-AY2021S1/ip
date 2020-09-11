@@ -54,24 +54,34 @@ public class MainWindow extends AnchorPane {
         try {
             duke = new Duke();
             dialogContainer.getChildren().addAll(
-                    DialogueBox.getDukeDialogueBox(duke.getUi().showLoad(), dukeImage, MessageType.LOADING_MESSAGE)
+                    DialogueBox.getDukeDialogueBox(duke.getUi().showLoad(),
+                            dukeImage,
+                            MessageType.LOADING_MESSAGE)
             );
             this.stage = stage;
         } catch (FileNotFoundException fileNotFoundException) {
             dialogContainer.getChildren().addAll(
-                    DialogueBox.getDukeDialogueBox(fileNotFoundException.getMessage(), dukeImage, MessageType.HANDLE_MESSAGE)
+                    DialogueBox.getDukeDialogueBox(fileNotFoundException.getMessage(),
+                            dukeImage,
+                            MessageType.HANDLE_MESSAGE)
             );
         } catch (LoadingException loadingException) {
             dialogContainer.getChildren().addAll(
-                    DialogueBox.getDukeDialogueBox(loadingException.getMessage(), dukeImage, MessageType.HANDLE_MESSAGE)
+                    DialogueBox.getDukeDialogueBox(loadingException.getMessage(),
+                            dukeImage,
+                            MessageType.HANDLE_MESSAGE)
             );
         } catch (IOException ioException) {
             dialogContainer.getChildren().addAll(
-                    DialogueBox.getDukeDialogueBox(ioException.getMessage(), dukeImage, MessageType.HANDLE_MESSAGE)
+                    DialogueBox.getDukeDialogueBox(ioException.getMessage(),
+                            dukeImage,
+                            MessageType.HANDLE_MESSAGE)
             );
         } finally {
             dialogContainer.getChildren().addAll(
-                    DialogueBox.getDukeDialogueBox(duke.getUi().showGreeting(), dukeImage, MessageType.GREETING_MESSAGE)
+                    DialogueBox.getDukeDialogueBox(duke.getUi().showGreeting(),
+                            dukeImage,
+                            MessageType.GREETING_MESSAGE)
             );
         }
     }

@@ -2,7 +2,11 @@ package duke.command;
 
 import java.io.IOException;
 
-import duke.core.*;
+import duke.core.MessageType;
+import duke.core.Result;
+import duke.core.Storage;
+import duke.core.TaskList;
+import duke.core.Ui;
 import duke.task.Task;
 
 /**
@@ -34,6 +38,8 @@ public class AddCommand extends Command {
         taskList.add(task);
         storage.writeRecord(taskList);
 
-        return new Result(ui.getAddMessage(task, taskList.getSize()), this.isContinuing(), MessageType.COMMAND_FOUND_MESSAGE);
+        return new Result(ui.getAddMessage(task, taskList.getSize()),
+                this.isContinuing(),
+                MessageType.COMMAND_FOUND_MESSAGE);
     }
 }

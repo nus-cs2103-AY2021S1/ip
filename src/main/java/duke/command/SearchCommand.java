@@ -2,7 +2,11 @@ package duke.command;
 
 import java.io.IOException;
 
-import duke.core.*;
+import duke.core.MessageType;
+import duke.core.Result;
+import duke.core.Storage;
+import duke.core.TaskList;
+import duke.core.Ui;
 import duke.handle.TaskNotFoundException;
 
 /**
@@ -32,6 +36,8 @@ public class SearchCommand extends Command {
      */
     @Override
     public Result excecute(TaskList taskList, Ui ui, Storage storage) throws TaskNotFoundException, IOException {
-        return new Result(ui.getTaskListMessage(taskList.findTaskWithDescription(key)), this.isContinuing(), MessageType.COMMAND_FOUND_MESSAGE);
+        return new Result(ui.getTaskListMessage(taskList.findTaskWithDescription(key)),
+                this.isContinuing(),
+                MessageType.COMMAND_FOUND_MESSAGE);
     }
 }
