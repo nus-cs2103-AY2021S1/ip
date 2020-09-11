@@ -36,8 +36,8 @@ public class Main extends Application {
         try {
             String mainWindowFxml = "/view/MainWindow.fxml";
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource(mainWindowFxml));
-            AnchorPane ap = fxmlLoader.load();
-            Scene scene = new Scene(ap);
+            AnchorPane anchorPane = fxmlLoader.load();
+            Scene scene = new Scene(anchorPane);
             stage.setTitle("focus.");
             stage.getIcons().add(new Image("/images/planner.jpg"));
             stage.setScene(scene);
