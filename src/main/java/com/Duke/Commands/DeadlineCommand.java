@@ -7,6 +7,9 @@ import com.Duke.Tasks.Deadline;
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+/**
+ * This class acts as a model for the execution of the DeadlineCommand
+ */
 public class DeadlineCommand extends Command {
     private final String[] splitList;
     private final TaskList taskList;
@@ -16,7 +19,10 @@ public class DeadlineCommand extends Command {
         this.taskList = taskList;
     }
 
-
+    /**
+     * Simulates Duke executing the Deadline Command
+     * @return The response to the command "deadline"
+     */
     public String execute() {
         try {
             String[] splitList2 = splitList[1].split("/by ", 2);

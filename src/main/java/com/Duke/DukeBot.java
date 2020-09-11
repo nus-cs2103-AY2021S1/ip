@@ -9,7 +9,7 @@ import com.Duke.TaskManager.UI;
 import java.util.Scanner;
 
 /**
-* This Class handles the simulation of the Duke Chatbot
+* This Class handles the simulation of the Duke Chat bot
 * It creates the lists for storing data and facilitates the
 * parser and storage processes
  */

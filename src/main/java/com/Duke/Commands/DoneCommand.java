@@ -4,6 +4,9 @@ import com.Duke.TaskManager.DukeException;
 import com.Duke.TaskManager.TaskList;
 import com.Duke.TaskManager.UI;
 
+/**
+ * This class acts as a model for the execution of the DoneCommand
+ */
 public class DoneCommand extends Command{
 
     private final TaskList taskList;
@@ -14,6 +17,10 @@ public class DoneCommand extends Command{
         this.taskIndex = taskIndex;
     }
 
+    /**
+     * Simulates Duke executing the Done Command
+     * @return The response to the command "done"
+     */
     public String execute(){
         try{
             return UI.doneCalled(taskList,taskIndex);
