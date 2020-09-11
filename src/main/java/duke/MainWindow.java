@@ -32,7 +32,7 @@ public class MainWindow extends AnchorPane {
 
     public void setDuke(Duke d) {
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Hi!", dukeImage)
+                DialogBox.getDukeDialog("Hi! If you have already had the account, you can user 'login {username} {password} to log in.'", dukeImage)
         );
         duke = d;
     }
