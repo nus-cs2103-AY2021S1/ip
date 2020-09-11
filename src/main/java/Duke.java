@@ -23,6 +23,7 @@ public class Duke {
         parser = new Parser();
         try {
             ArrayList<Task> existingTasks = storage.loadExistingData();
+            assert existingTasks != null;
             tasks = new TaskList(existingTasks);
             ui.printWelcome(tasks);
         } catch (DukeException e) {
@@ -30,7 +31,6 @@ public class Duke {
             tasks = new TaskList();
         } catch (IOException e) {
             new Ui("An error occurred while retrieving the data.").printMessage();
-
         }
     }
 

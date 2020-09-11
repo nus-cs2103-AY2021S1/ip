@@ -43,6 +43,7 @@ public class TaskList {
      * @param index Index of the task to be deleted.
      */
     public String deleteTask(int index) {
+        assert index > 0;
         Task task = taskList.remove(index);
         String deleteTaskMessage = "Noted. I've removed this task:\n"
                 + task.toString() + "\n";
@@ -55,6 +56,7 @@ public class TaskList {
      * @param index Index of the task to be marked as done.
      */
     public String markDone(int index) {
+        assert index > 0;
         Task task = taskList.get(index);
         task.makeDone();
         String markDoneMessage = "Nice! I've marked this task as done:\n"
