@@ -29,6 +29,9 @@ public class Parser {
         String[] inputArr = input.split(" ", 2);
         String commandType = inputArr[0];
         String commandContent;
+        if ((!Login.isLogined()) && (!commandType.equals(COMMAND_LOGIN))) {
+            return new EmptyCommand();
+        }
         if (commandType.equals(COMMAND_BYE)) {
             return new ByeCommand();
         } else if (commandType.equals(COMMAND_LIST)) {
