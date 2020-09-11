@@ -1,5 +1,8 @@
 package duke;
 
+import java.util.Optional;
+import java.util.regex.Matcher;
+
 import duke.command.CommandEnums;
 import duke.exceptions.DukeCommandException;
 import duke.exceptions.DukeException;
@@ -8,16 +11,15 @@ import duke.tasks.TaskManager;
 import duke.tasks.TextParser;
 import duke.ui.UserInterface;
 
-import java.util.Optional;
-import java.util.regex.Matcher;
+
 
 /**
  * Backend Object Class for the duke.Duke Chatbot Interface
  */
 public class Duke {
+    private static final TextParser textParser = new TextParser();
     private final TaskManager taskManager;
     private final UserInterface ui;
-    private final static TextParser textParser = new TextParser();
     /**
      * Constructor for the duke.Duke Chatbot, if is old initialisation, will read from txt file
      * Eles it will initialise a new TaskManager class
@@ -36,8 +38,7 @@ public class Duke {
         this.ui = ui;
         ui.start("Friend");
     }
-    
-    public void parseRun(String input) throws DukeException {
+    private void parseRun(String input) throws DukeException {
         for (CommandEnums cmd : CommandEnums.values()) {
             Optional<Matcher> maybeMatcher = cmd.matcher(input);
             if (maybeMatcher.isEmpty()) {
@@ -58,20 +59,24 @@ public class Duke {
         throw new DukeCommandException(input);
     }
 
+    /**
+     * Runs the Next Iteration of Duke
+     * To be invoked to iterate the continuation of Duke Application flow.
+     */
     public void nextIteration() {
         String input = textParser.cleanInput(ui.nextLine());
         try {
             this.parseRun(input);
-        } catch ( DukeException e) {
+        } catch (DukeException e) {
             ui.systemMessage(e.toString());
         }
     }
 
     @Override
     public String toString() {
-        return "Duke{" +
-                "taskManager=" + taskManager +
-                ", ui=" + ui +
-                '}';
+        return "Duke{"
+                + "taskManager=" + taskManager
+                + ", ui=" + ui
+                + '}';
     }
 }

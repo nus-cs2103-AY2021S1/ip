@@ -1,5 +1,9 @@
 package duke.ui.graphics;
 
+import java.io.IOException;
+import java.net.URL;
+import java.util.Collections;
+
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -11,9 +15,7 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
-import java.io.IOException;
-import java.net.URL;
-import java.util.Collections;
+
 
 /**
  * Dialog box contains messages from duke and user
@@ -71,5 +73,4 @@ public class DialogBox extends HBox {
         db.flip();
         return db;
     }
-    
 }

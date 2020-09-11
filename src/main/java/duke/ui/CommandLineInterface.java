@@ -2,7 +2,10 @@ package duke.ui;
 
 import java.util.Scanner;
 
-public class CommandLineInterface implements UserInterface{
+/**
+ * Class to handle Commandline interface, implements UserInterface contract.
+ */
+public class CommandLineInterface implements UserInterface {
     private static final String logo = "\tHello from\n"
             + " ____        _        \n"
             + "|  _ \\ _   _| | _____ \n"
@@ -13,11 +16,14 @@ public class CommandLineInterface implements UserInterface{
             + "\n";
     private static final String goodbye = "Bye %s! Hope to see you again soon!\n";
     private static final String linebreaker = "_".repeat(30) + "\n";
-    
     private boolean isChatbotRunning;
     private String userName;
     private final Scanner scanner;
-    public CommandLineInterface(){
+
+    /**
+     * Constructs the CommandLineInterface UI for use without a GUI
+     */
+    public CommandLineInterface() {
         this.scanner = new Scanner(System.in);
         this.isChatbotRunning = false;
     }
@@ -25,15 +31,13 @@ public class CommandLineInterface implements UserInterface{
     public boolean isRunning() {
         return isChatbotRunning;
     }
-
-    
     /**
      * Greeting from Duke Bot and set username of user
      * @param userName Name of the user
      */
     @Override
     public void start(String userName) {
-        assert !isChatbotRunning : "CommandLineInterface should only start once"; 
+        assert !isChatbotRunning : "CommandLineInterface should only start once";
         this.isChatbotRunning = true;
         this.userName = userName;
         systemMessage(String.format(logo, userName));
@@ -58,15 +62,14 @@ public class CommandLineInterface implements UserInterface{
      */
     @Override
     public void systemMessage(String message) {
-        System.out.print("\t"+linebreaker + indent(message) + linebreaker);
+        System.out.print("\t" + linebreaker + indent(message) + linebreaker);
     }
-    
     /**
      * Indents text
      * @param s text to indent
      * @return indented text
      */
     private String indent(String s) {
-        return "    " + s.replace("\n","\n\t");
+        return "    " + s.replace("\n", "\n\t");
     }
 }

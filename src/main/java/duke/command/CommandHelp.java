@@ -18,12 +18,11 @@ public enum CommandHelp {
             + "[event <task name> /at dd-MM-YYYY]"),
     SEARCH("find", "find <regex expression> on description only"),
     BLANK("", "This is a invalid command");
-    
     private final String commandEncoding;
     private final String helpMsg;
 
     /**
-     * Constructs the enumeration for commands
+     * Constructs the enumeration for help commands
      * @param code key word of command
      * @param help Help message to display
      */

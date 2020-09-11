@@ -32,10 +32,10 @@ public class TaskManager {
      * @param isNew Boolean to indicate that the TaskManager is first initialised.
      */
     public TaskManager(String path, boolean isNew) {
+        assert isNew == true : "isNew is to allow for polymorphism for the case where taskmanager is new";
         this.ioParser = new TaskIoParser(path);
         this.taskList = ioParser.loadNewTaskList();
     }
-    
     /**
      * Indicate that a task is done
      * @param index index of the list as displayed from the application
@@ -144,8 +144,7 @@ public class TaskManager {
                     .filter(task -> {
                         index.incrementAndGet();
                         return stringPattern.matcher(task.getDescription()).find();
-                        }
-                    ).map(task -> String.format("\t%d. %s\n",index.get(),task))
+                    }).map(task -> String.format("\t%d. %s\n", index.get(), task))
                     .reduce("", (accumulate , next) -> accumulate + next));
 
             if (sb.toString().isEmpty()) {

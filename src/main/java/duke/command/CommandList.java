@@ -2,9 +2,11 @@ package duke.command;
 
 import duke.exceptions.DukeNoInputException;
 import duke.tasks.Deadline;
+import duke.tasks.Event;
 import duke.tasks.TextParser;
 import duke.tasks.ToDo;
-import duke.tasks.Event;
+
+
 
 /**
  * CommandList to store commands supported by duke
@@ -23,13 +25,13 @@ class CommandList {
             + "- 'event' to list a timed event task, please structure with "
             + "[event <task name> -at dd-MM-YYYY]\n"
             + "- 'help' to list these commands again help <command> for specific commands\n";
-    private static final TextParser PARSER = new TextParser(); 
+    private static final TextParser PARSER = new TextParser();
     static final CommandExecuter DEADLINE = (taskManager, ui, arguments) -> {
-        if (arguments.length == 0){
+        if (arguments.length == 0) {
             throw new DukeNoInputException();
         }
-        assert arguments.length == 2 : "The length of the argument should always only be 2" +
-                " because of -by seperator";
+        assert arguments.length == 2 : "The length of the argument should always only be 2"
+                + " because of -by seperator";
         ui.systemMessage(taskManager.add(new Deadline(arguments[0] , arguments[1])));
     };
     static final CommandExecuter TODO = (taskManager, ui, arguments) -> {
@@ -43,9 +45,9 @@ class CommandList {
         if (arguments.length == 0) {
             throw new DukeNoInputException();
         }
-        assert arguments.length == 2 : "The length of the argument should always only be 2" +
-                " because of -at seperator";
-        ui.systemMessage(taskManager.add(new Event(arguments[0],arguments[1])));
+        assert arguments.length == 2 : "The length of the argument should always only be 2"
+                + " because of -at seperator";
+        ui.systemMessage(taskManager.add(new Event(arguments[0], arguments[1])));
     };
     static final CommandExecuter FIND = (taskManager, ui, arguments) -> {
         ui.systemMessage(taskManager.findTasks(arguments[0]));
@@ -65,15 +67,11 @@ class CommandList {
         ui.systemMessage(taskManager.listTasks());
     };
     static final CommandExecuter HELP = (taskManager, ui, arguments) -> {
-        //TODO add command level help to the help command string
         CommandHelp commandHelp = PARSER.parseHelpCommand(arguments[0]);
         String message = commandHelp.toString();
         if (commandHelp.equals(CommandHelp.ERROR) || commandHelp.equals(CommandHelp.BLANK)) {
             message = ALLHELP;
         }
         ui.systemMessage(message);
-    
     };
-    
-    
 }
