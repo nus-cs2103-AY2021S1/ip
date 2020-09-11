@@ -24,8 +24,19 @@ public class Ui {
     private static final String MESSAGE_TAG = "What can I do for you next?";
     private static final String ERROR_PREFIX = "\u2639 OOPS!!! ";
 
+    /** The message to be passed to the user. */
+    private String outputMessage;
     /** Constructs a new user interface object that interacts with the user input. */
     public Ui() {}
+
+    /**
+     * Gets the message to be passed to the user.
+     *
+     * @return The current message.
+     */
+    public String getMessage() {
+        return outputMessage;
+    }
 
     /**
      * Concatenates a sequence of lines, appending a linebreak after each line.
@@ -86,12 +97,19 @@ public class Ui {
         return stringBuilder.toString();
     }
 
+    /**
+     * Gets the standard welcome message.
+     * @return The standard welcome message.
+     */
     public static String getWelcomeMessage() {
         return MESSAGE_WELCOME;
     }
 
-    public String getGoodbyeMessage() {
-        return MESSAGE_GOODBYE;
+    /**
+     * Sets the output message to be the standard goodbye message.
+     */
+    public void goodbye() {
+        outputMessage = MESSAGE_GOODBYE;
     }
 
     /**
@@ -105,59 +123,96 @@ public class Ui {
     }
 
     /**
-     * Concatenates the tasks as a numbered list starting from 1.
+     * Concatenates the tasks as a numbered list starting from 1, and sets it as the output message.
      *
      * @param tasks The tasks to be numbered and listed.
-     * @return The numbered and concatenated list of tasks.
      */
-    public String listNumberedTasks(String... tasks) {
+    public void listNumberedTasks(String... tasks) {
         assert tasks.length > 0;
         String[] lines = new String[tasks.length + 1];
         lines[0] = MESSAGE_LIST_TASKS;
         System.arraycopy(tasks, 0, lines, 1, tasks.length);
-        return numberAndConcatenateLines(true, false, lines);
-    }
-
-    public String getNoTasksMessage() {
-        return MESSAGE_NO_TASKS;
+        outputMessage = numberAndConcatenateLines(true, false, lines);
     }
 
     /**
-     * Concatenates the tasks found matching the query as a numbered list starting from 1.
+     * Sets the output message to be the standard message for when the task-list is empty.
+     */
+    public void setNoTasksMessage() {
+        outputMessage = MESSAGE_NO_TASKS;
+    }
+
+    /**
+     * Concatenates the tasks found matching the query as a numbered list starting from 1, and sets it as the
+     * output message.
      *
      * @param finds The tasks found matching the query.
-     * @return The numbered and concatenated tasks found matching the query.
      */
-    public String listNumberedFoundTasks(String... finds) {
+    public void listNumberedFoundTasks(String... finds) {
         assert finds.length > 0;
         String[] lines = new String[finds.length + 1];
         lines[0] = MESSAGE_FOUND_TASKS;
         System.arraycopy(finds, 0, lines, 1, finds.length);
-        return numberAndConcatenateLines(true, false, lines);
+        outputMessage = numberAndConcatenateLines(true, false, lines);
     }
 
-    public String getNoFoundTasksMessage(String searchQuery) {
-        return MESSAGE_NO_FOUND_TASKS + searchQuery;
+    /**
+     * Sets the output message to inform the user that the search query returned no matching tasks.
+     *
+     * @param searchQuery The keyword used for searching the tasks.
+     */
+    public void setNoFoundTasksMessage(String searchQuery) {
+        outputMessage = MESSAGE_NO_FOUND_TASKS + searchQuery;
     }
 
-    public String showLoadingSuccess(String filepath) {
-        return concatenateLines(MESSAGE_FILE_LOADED + filepath, MESSAGE_TAG);
+    /**
+     * Sets the output message to show that the file at the specified filepath was successfully loaded.
+     *
+     * @param filepath The specified filepath where the file was loaded from.
+     */
+    public void showLoadingSuccess(String filepath) {
+        outputMessage = concatenateLines(MESSAGE_FILE_LOADED + filepath, MESSAGE_TAG);
     }
 
-    public String showMakeFileSuccess(String filepath) {
-        return concatenateLines(MESSAGE_FILE_CREATED + filepath, MESSAGE_TAG);
+    /**
+     * Sets the output message to show that the file was successfully created at the specified filepath.
+     *
+     * @param filepath The specified filepath where the file was created.
+     */
+    public void showMakeFileSuccess(String filepath) {
+        outputMessage = concatenateLines(MESSAGE_FILE_CREATED + filepath, MESSAGE_TAG);
     }
 
-    public String showAddedTask(String task, int numTasks) {
-        return concatenateLines(MESSAGE_ADD_TASK, " " + task, String.format(MESSAGE_CURRENT_TASKS, numTasks));
+    /**
+     * Sets the output message to update the user that the task was successfully added to the task-list.
+     *
+     * @param task The task that was added.
+     * @param numTasks The current number of tasks in the task-list.
+     */
+    public void showAddedTask(String task, int numTasks) {
+        outputMessage = concatenateLines(MESSAGE_ADD_TASK, " " + task, String.format(MESSAGE_CURRENT_TASKS, numTasks));
     }
 
-    public String showDoneTask(String task) {
-        return concatenateLines(MESSAGE_DONE_TASK, "  " + task);
+    /**
+     * Sets the output message to show that the task was successfully marked as done.
+     *
+     * @param task The task that was marked as done.
+     */
+    public void showDoneTask(String task) {
+        outputMessage = concatenateLines(MESSAGE_DONE_TASK, "  " + task);
     }
 
-    public String showDeletedTask(String task, int numTasks) {
-        return concatenateLines(MESSAGE_DELETED_TASK, "  " + task, String.format(MESSAGE_CURRENT_TASKS, numTasks));
+    /**
+     * Sets the output message to show that the task was successfully deleted from the task-list.
+     *
+     * @param task The task that was deleted.
+     * @param numTasks The current number of tasks in the task-list.
+     */
+    public void showDeletedTask(String task, int numTasks) {
+        outputMessage = concatenateLines(MESSAGE_DELETED_TASK,
+                "  " + task,
+                String.format(MESSAGE_CURRENT_TASKS, numTasks));
+
     }
 
 }

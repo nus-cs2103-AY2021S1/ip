@@ -23,16 +23,25 @@ public class Storage {
      * destination of the file to be written.
      */
     private String filepath;
+    private boolean isLoaded;
 
-    public Storage() {}
+    /**
+     * Constructs a new Storage object.
+     */
+    public Storage() {
+        this.isLoaded = false;
+    }
 
     /**
      * Creates and returns a File at the specified filepath.
+     *
      * @param filepath The destination filepath for creating the file.
-     * @return The File object, if successfully created.
      * @throws DukeException If the file could not be created due to an IO error.
      */
-    public File makeFile(String filepath) throws DukeException {
+    public void makeFile(String filepath) throws DukeException {
+        if (isLoaded) {
+            throw DukeException.LOADING_CAPACITY_EXCEPTION;
+        }
         try {
             this.filepath = filepath;
             String parentFilepath = Path.of(filepath).getParent().toString();
@@ -41,10 +50,11 @@ public class Storage {
                 parentFolder.mkdir();
             }
             File taskFile = new File(filepath);
-            if (!taskFile.exists()) {
-                taskFile.createNewFile();
+            boolean isNewFile = taskFile.createNewFile();
+            if (!isNewFile) {
+                throw DukeException.FILE_OVERWRITE_EXCEPTION;
             }
-            return taskFile;
+            isLoaded = true;
         } catch (IOException e) {
             throw DukeException.FILE_LOADING_EXCEPTION;
         }
@@ -53,11 +63,15 @@ public class Storage {
     /**
      * Loads a list of tasks from the source file, if it exists. Otherwise, creates a file
      * at the filepath and returns an empty list.
-     * @return A list of tasks parsed from the source file, if any; otherwise, an empty list
+     *
+     * @return A list of tasks parsed from the source file, if any; otherwise, an empty list.
      * @throws DukeException If an I/O error occurs when trying to create the file and parent
-     * folders, if any
+     * folders, if any.
      */
     public ArrayList<Task> loadFromFilepath(String filepath) throws DukeException {
+        if (isLoaded) {
+            throw DukeException.LOADING_CAPACITY_EXCEPTION;
+        }
         try {
             this.filepath = filepath;
             File taskFile = new File(filepath);
@@ -66,6 +80,7 @@ public class Storage {
             while (scanner.hasNext()) {
                 tasks.add(Parser.parseTaskFromFile(scanner.nextLine()));
             }
+            isLoaded = true;
             return tasks;
         } catch (IOException e) {
             throw DukeException.FILE_LOADING_EXCEPTION;
@@ -76,7 +91,7 @@ public class Storage {
      * Appends a line of text to the destination file specified by the filepath.
      * <p>
      * If an I/O error occurs, shows an error message.
-     * @param line A line of text to be appended to the destination file
+     * @param line A line of text to be appended to the destination file.
      */
     public void addLine(String line) throws DukeException {
         try {
@@ -93,44 +108,31 @@ public class Storage {
     /**
      * Deletes a line of text at the specified index from the destination file specified by
      * the filepath.
-     * <p>
-     * If the index falls outside the range of the number of lines in the file, no lines are
-     * deleted, and no error is raised.
-     * <p>
+     *
+     * <p>If the index falls outside the range of the number of lines in the file, no lines are
+     * deleted, and no error is raised.</p>
+     *
      * If an I/O error occurs, shows an error message.
-     * @param index The line number to be deleted
+     *
+     * @param index The line number to be deleted.
      */
     public void deleteLine(int index) {
-        try {
-            String tempFilepath = Path.of(filepath).getParent().toString() + "/temp.txt";
-            Files.copy(Path.of(filepath), Path.of((tempFilepath)));
-            FileWriter fileWriter = new FileWriter(filepath);
-            File copy = new File(tempFilepath);
-            Scanner scanner = new Scanner(copy);
-            int lineNumber = 1;
-            while (scanner.hasNext()) {
-                if (lineNumber != index) {
-                    fileWriter.write(scanner.nextLine() + System.lineSeparator());
-                } else {
-                    scanner.nextLine();
-                }
-                lineNumber++;
-            }
-            fileWriter.close();
-            scanner.close();
-            Files.delete(Path.of(tempFilepath));
-        } catch (IOException e) {
-            System.out.println("Encountered an unexpected error with the file :(");
-        }
+        replaceLine(index, "");
     }
 
     /**
      * Replaces a line of text at the specified index with a specified line of text in the
      * destination file specified by the filepath.
-     * <p>
+     *
+     * <p>If the index falls outside the range of the number of lines in the file, no lines are
+     * replaced, and no error is raised.</p>
+     *
+     * <p>If the replacing text is empty, deletes the line at the index instead of replacing it.</p>
+     *
      * If an I/O error occurs, shows an error message.
-     * @param index The line number to be replaced
-     * @param line The line of text to replace the previous one
+     *
+     * @param index The line number to be replaced.
+     * @param line The line of text to replace the previous one.
      */
     public void replaceLine(int index, String line) {
         try {
@@ -143,10 +145,13 @@ public class Storage {
             while (scanner.hasNext()) {
                 if (lineNumber != index) {
                     fileWriter.write(scanner.nextLine() + System.lineSeparator());
-                } else {
-                    fileWriter.write(line + System.lineSeparator());
-                    scanner.nextLine();
+                    lineNumber++;
+                    continue;
                 }
+                if (!line.isEmpty()) {
+                    fileWriter.write(line + System.lineSeparator());
+                }
+                scanner.nextLine();
                 lineNumber++;
             }
             fileWriter.close();

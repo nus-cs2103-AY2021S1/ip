@@ -7,6 +7,9 @@ import duke.DukeException;
 import duke.task.Task;
 import duke.task.TaskList;
 
+/**
+ * A command dealing with editing or deleting a task from a task-list.
+ */
 public class EditCommand extends Command {
     private CommandType commandType;
     private int index;
@@ -23,23 +26,21 @@ public class EditCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String output;
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         switch (this.commandType) {
         case DONE:
             Task doneTask = tasks.markTaskAsDone(index);
-            output = ui.showDoneTask(doneTask.toString());
+            ui.showDoneTask(doneTask.toString());
             storage.replaceLine(index, doneTask.toFileString());
             break;
         case DELETE:
             Task deletedTask = tasks.deleteTask(index);
-            output = ui.showDeletedTask(deletedTask.toString(), tasks.getNumTasks());
+            ui.showDeletedTask(deletedTask.toString(), tasks.getNumTasks());
             storage.deleteLine(index);
             break;
         default:
-            output = ui.addErrorPrefix(DukeException.INVALID_COMMAND_EXCEPTION.getMessage());
+            throw DukeException.INVALID_COMMAND_EXCEPTION;
         }
-        return output;
     }
 
     @Override

@@ -1,5 +1,8 @@
 package duke.command;
 
+/**
+ * A standard set of command types.
+ */
 public enum CommandType {
     BYE("bye"),
     LIST("list"),
@@ -14,6 +17,7 @@ public enum CommandType {
 
     private final String label;
 
+    /** Constructs the enums with a custom label. */
     CommandType(String label) {
         this.label = label;
     }

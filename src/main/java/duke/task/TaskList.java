@@ -4,6 +4,9 @@ import duke.DukeException;
 
 import java.util.ArrayList;
 
+/**
+ * A task-list maintaining the state of the tasks.
+ */
 public class TaskList {
     private final ArrayList<Task> tasks;
 
@@ -14,6 +17,11 @@ public class TaskList {
         tasks = new ArrayList<>();
     }
 
+    /**
+     * Gets the number of tasks in the task-list.
+     *
+     * @return The number of tasks currently in the task-list.
+     */
     public int getNumTasks() {
         return tasks.size();
     }
@@ -28,6 +36,11 @@ public class TaskList {
         return taskStrings;
     }
 
+    /**
+     * Adds a task to the current task-list.
+     *
+     * @param task The task to be added to the task-list.
+     */
     public void addTask(Task task) {
         tasks.add(task);
     }
