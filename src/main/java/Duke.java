@@ -2,6 +2,7 @@ import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.time.format.DateTimeParseException;
+
 import javafx.application.Platform;
 
 /**
@@ -39,7 +40,8 @@ public class Duke {
         try {
             c = parser.parse(input);
             assert c != null : "The command cannot be null";
-        } catch (MissingDelimiterException | MissingDateTimeException | InvalidCommandException | AliasNotAllowedException e) {
+        } catch (MissingDelimiterException | MissingDateTimeException
+                | InvalidCommandException | AliasNotAllowedException e) {
             return e.getMessage();
         } catch (DateTimeParseException e) {
             return Ui.MESSAGE_WRONG_FORMAT;
