@@ -15,6 +15,12 @@ public class AddCommand extends Command {
     private CommandType commandType;
     private String[] details;
 
+    /**
+     * Constructs a new AddCommand object of the specified CommandType containing the accompanying details.
+     *
+     * @param commandType The type of the AddCommand
+     * @param details The accompanying details needed for the execution of the command.
+     */
     public AddCommand(CommandType commandType, String... details) {
         this.commandType = commandType;
         this.details = details;

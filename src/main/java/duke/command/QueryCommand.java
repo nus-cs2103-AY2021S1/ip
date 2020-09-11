@@ -11,10 +11,12 @@ public class QueryCommand extends Command {
     private CommandType commandType;
     private String searchQuery;
 
-    public QueryCommand(CommandType commandType) {
-        this.commandType = commandType;
-    }
-
+    /**
+     * Constructs a new QueryCommand of the specified CommandType containing the keyword for searching.
+     *
+     * @param commandType The type of the QueryCommand.
+     * @param searchQuery The keyword to be used for searching.
+     */
     public QueryCommand(CommandType commandType, String searchQuery) {
         this.commandType = commandType;
         this.searchQuery = searchQuery;
@@ -25,7 +27,10 @@ public class QueryCommand extends Command {
         String[] lines = tasks.getTasks();
 
         if (commandType.equals(CommandType.LIST)) {
-            return ui.showTasks(lines);
+            if (lines.length > 0) {
+                return ui.listNumberedTasks(lines);
+            }
+            return ui.getNoTasksMessage();
         }
 
         ArrayList<String> finds = new ArrayList<>();
@@ -36,10 +41,10 @@ public class QueryCommand extends Command {
         }
 
         if (finds.size() == 0) {
-            return ui.showNoSuchTasks(searchQuery);
+            return ui.getNoFoundTasksMessage(searchQuery);
         }
 
-        return ui.showFoundTasks(finds.toArray(new String[1]));
+        return ui.listNumberedFoundTasks(finds.toArray(new String[1]));
     }
 
     @Override

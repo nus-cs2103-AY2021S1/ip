@@ -27,13 +27,11 @@ public class Storage {
     public Storage() {}
 
     /**
-     * Constructs a new Storage that reads/writes the file in the specified filepath.
-     * @param filepath The source/destination filepath
+     * Creates and returns a File at the specified filepath.
+     * @param filepath The destination filepath for creating the file.
+     * @return The File object, if successfully created.
+     * @throws DukeException If the file could not be created due to an IO error.
      */
-    public Storage(String filepath) {
-        this.filepath = filepath;
-    }
-
     public File makeFile(String filepath) throws DukeException {
         try {
             this.filepath = filepath;
@@ -51,6 +49,7 @@ public class Storage {
             throw DukeException.FILE_LOADING_EXCEPTION;
         }
     }
+
     /**
      * Loads a list of tasks from the source file, if it exists. Otherwise, creates a file
      * at the filepath and returns an empty list.

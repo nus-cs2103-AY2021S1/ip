@@ -11,6 +11,12 @@ public class EditCommand extends Command {
     private CommandType commandType;
     private int index;
 
+    /**
+     * Constructs a new EditCommand object of the specified CommandType with the index where the command is executed.
+     *
+     * @param commandType
+     * @param index
+     */
     public EditCommand(CommandType commandType, int index) {
         this.commandType = commandType;
         this.index = index;
@@ -31,7 +37,7 @@ public class EditCommand extends Command {
             storage.deleteLine(index);
             break;
         default:
-            output = ui.showErrorMessage(DukeException.INVALID_COMMAND_EXCEPTION.getMessage());
+            output = ui.addErrorPrefix(DukeException.INVALID_COMMAND_EXCEPTION.getMessage());
         }
         return output;
     }
