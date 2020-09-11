@@ -12,7 +12,7 @@ public class CommandLineInterface implements UserInterface {
             + "| | | | | | | |/ / _ \\\n"
             + "| |_| | |_| |   <  __/\n"
             + "|____/ \\__,_|_|\\_\\___|\n"
-            + "\tHello! %s I'm duke.Duke\n\tWhat can I do for you "
+            + "\tHello! %s I'm Duke\n\tWhat can I do for you "
             + "\n";
     private static final String goodbye = "Bye %s! Hope to see you again soon!\n";
     private static final String linebreaker = "_".repeat(30) + "\n";
