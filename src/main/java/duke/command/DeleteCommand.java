@@ -3,6 +3,9 @@ package duke.command;
 import duke.Parser;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DuplicateException;
+import duke.exception.EmptyDescriptionException;
+import duke.exception.InvalidFormatException;
 import duke.task.Task;
 import duke.exception.InvalidTaskIdException;
 

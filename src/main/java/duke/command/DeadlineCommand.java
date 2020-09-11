@@ -3,6 +3,8 @@ package duke.command;
 import duke.Parser;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DuplicateException;
+import duke.exception.InvalidTaskIdException;
 import duke.task.Deadline;
 import duke.task.Task;
 import duke.exception.EmptyDescriptionException;
@@ -27,7 +29,7 @@ public class DeadlineCommand implements Command {
      * @return deadline added message.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, String input) throws EmptyDescriptionException, InvalidFormatException {
+    public String execute(TaskList taskList, Ui ui, String input) throws EmptyDescriptionException, InvalidFormatException, DuplicateException {
         String[] details = Parser.parseDeadline(input);
         assert details.length >= 2 : "Missing details in Deadline input";
         String title = details[0];

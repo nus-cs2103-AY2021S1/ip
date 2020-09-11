@@ -3,8 +3,10 @@ package duke.command;
 import duke.Parser;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DuplicateException;
 import duke.exception.EmptyDescriptionException;
 import duke.exception.InvalidFormatException;
+import duke.exception.InvalidTaskIdException;
 import duke.task.Event;
 import duke.task.Task;
 
@@ -27,7 +29,7 @@ public class EventCommand implements Command {
      * @return event added message.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, String input) throws EmptyDescriptionException, InvalidFormatException {
+    public String execute(TaskList taskList, Ui ui, String input) throws EmptyDescriptionException, InvalidFormatException, DuplicateException {
         String[] details = Parser.parseEvent(input);
         assert details.length >= 2 : "Missing details in Event input";
         String title = details[0];

@@ -4,7 +4,10 @@ package duke.command;
 import duke.Parser;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DuplicateException;
 import duke.exception.EmptyDescriptionException;
+import duke.exception.InvalidFormatException;
+import duke.exception.InvalidTaskIdException;
 import duke.task.Task;
 import duke.task.Todo;
 
@@ -26,7 +29,7 @@ public class TodoCommand implements Command {
      * @return todo added message.
      */
     @Override
-    public String execute(TaskList taskList, Ui ui, String input) throws EmptyDescriptionException {
+    public String execute(TaskList taskList, Ui ui, String input) throws EmptyDescriptionException, DuplicateException {
         String description = Parser.parseTodo(input);
         Task task = new Todo(description);
         taskList.add(task);

@@ -1,5 +1,6 @@
 package duke;
 
+import duke.exception.DuplicateException;
 import duke.task.Task;
 
 import java.util.List;
@@ -22,7 +23,11 @@ public class TaskList {
      *
      * @param task
      */
-    public void add(Task task) {
+    public void add(Task task) throws DuplicateException {
+        boolean taskExists = tasks.stream().anyMatch(t -> t.equals(task));
+        if (taskExists) {
+            throw new DuplicateException(task.toString());
+        }
         storage.add(task);
         tasks.add(task);
     }
