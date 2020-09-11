@@ -119,6 +119,16 @@ public class UI {
         }
     }
 
+    public String snoozeTask(TaskList tasks, int index) throws BobIndexOutOfBoundsException {
+        return "Noted. I have updated the task to the following: "
+                + "\n\t" + tasks.get(index).toString();
+    }
+
+    public String rescheduleTask(TaskList tasks, int index) throws BobIndexOutOfBoundsException {
+        return "Noted. I have updated the task to the following: "
+                + "\n\t" + tasks.get(index).toString();
+    }
+
     public String exit() {
         return "Bye! I hope to see you soon! \n[This window will close in 3 seconds.]";
     }

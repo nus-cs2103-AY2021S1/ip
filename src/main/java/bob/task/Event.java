@@ -1,5 +1,11 @@
 package bob.task;
 
+import bob.Bob;
+import bob.exception.BobDateTimeException;
+import bob.exception.BobDateTimeParseException;
+import bob.exception.BobException;
+
+import java.time.DateTimeException;
 import java.time.format.DateTimeFormatter;
 import java.time.LocalDateTime;
 
@@ -34,10 +40,14 @@ public class Event extends Task {
      * @param period two dates and times with the format of inputFormatter in the form of
      *               -start- to -end-.
      */
-    public Event (String description, String period) {
+    public Event (String description, String period) throws BobDateTimeParseException {
         super(description);
-        this.start = LocalDateTime.parse(period.substring(0, END_OF_FIRST_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);
-        this.end = LocalDateTime.parse(period.substring(START_OF_SECOND_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);
+        try {
+            this.start = LocalDateTime.parse(period.substring(0, END_OF_FIRST_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);
+            this.end = LocalDateTime.parse(period.substring(START_OF_SECOND_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);
+        } catch (DateTimeException e) {
+            throw new BobDateTimeParseException();
+        }
     }
 
     /**
@@ -49,10 +59,14 @@ public class Event extends Task {
      * @param period two dates with the format of inputFormatter in the form of
      *               start date- to -end date-.
      */
-    public Event(boolean isDone, String description, String period) {
+    public Event(boolean isDone, String description, String period) throws BobDateTimeParseException {
         super(isDone, description);
-        this.start = LocalDateTime.parse(period.substring(0, END_OF_FIRST_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);
-        this.end = LocalDateTime.parse(period.substring(START_OF_SECOND_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);
+        try {
+            this.start = LocalDateTime.parse(period.substring(0, END_OF_FIRST_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);
+            this.end = LocalDateTime.parse(period.substring(START_OF_SECOND_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);
+        } catch (DateTimeException e) {
+            throw new BobDateTimeParseException();
+        }
     }
 
     /**
@@ -64,6 +78,17 @@ public class Event extends Task {
      */
     public String getPeriod() {
         return this.start.format(OUTPUT_DATE_TIME_FORMAT).toString() + " to " + this.end.format(OUTPUT_DATE_TIME_FORMAT).toString();
+    }
+
+    public void reschedule(String newPeriod) throws BobDateTimeParseException {
+        try {
+            this.start = LocalDateTime.parse(newPeriod.substring(0, END_OF_FIRST_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);
+            this.end = LocalDateTime.parse(newPeriod.substring(START_OF_SECOND_DATE_TIME_INDEX), INPUT_DATE_TIME_FORMAT);
+        } catch (DateTimeException e) {
+            throw new BobDateTimeParseException();
+        } catch (IndexOutOfBoundsException e) {
+            throw new BobDateTimeParseException();
+        }
     }
 
     /**
