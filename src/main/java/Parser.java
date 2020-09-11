@@ -7,7 +7,6 @@ public class Parser {
      * Returns whether type is a task modification
      *
      * @param type type of Task
-     *
      * @return whether type is a task modification
      */
     public static boolean isTaskModification(String type) {
@@ -18,7 +17,6 @@ public class Parser {
      * Processes line when its a task modification
      *
      * @param line line
-     *
      * @return array of parsed strings
      */
     public static String[] processModification(String line) {
@@ -34,7 +32,6 @@ public class Parser {
      * Processes line when its a task item
      *
      * @param line line
-     *
      * @return array of parsed strings
      */
     public static String[] processTaskItem(String line) {

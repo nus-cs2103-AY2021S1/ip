@@ -63,9 +63,9 @@ public final class Storage {
     }
 
     /**
-     * Get to-do list.
+     * Gets to-do list.
      *
-     * @returns List of tasks (to-do list)
+     * @returns List of tasks (to-do list).
      */
     public List<Task> getToDoLst() {
         return toDoLst.getToDoLst();
