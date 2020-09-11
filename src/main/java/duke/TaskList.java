@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
+import com.sun.jdi.LocalVariable;
 import command.Command;
 import command.EventCommand;
 import command.TodoCommand;
@@ -58,25 +59,32 @@ public class TaskList {
     }
 
     /**
-     * Adds new task to the task list
+     * Adds a Todo Task to the task list.
      *
-     * @param task task to be added
-     * @return the task that was added
+     * @param parameters the description of the task
+     * @return the {@code Todo} task
      */
-    public Task addTask(Command task) {
-        Task newTask;
-        if (task.getClass() == TodoCommand.class) {
-            assert task.getParameters().length == 1 : "insufficient amount of parameters";
-            newTask = new Todo(task.getParameters()[0]);
-        } else if (task.getClass() == EventCommand.class) {
-            assert task.getParameters().length == 2 : "insufficient amount of parameters";
-            newTask = new Event(task.getParameters()[0].strip(),
-                    LocalDateTime.parse(task.getParameters()[1].strip(), formatter));
-        } else {
-            assert task.getParameters().length == 2 : "insufficient amount of parameters";
-            newTask = new Deadline(task.getParameters()[0].strip(),
-                    LocalDateTime.parse(task.getParameters()[1].strip(), formatter));
-        }
+    public Task addTodoTask(String ...parameters) {
+        assert parameters.length == 1 : "insufficient amount of parameters";
+        Task newTask = new Todo(parameters[0]);
+        this.taskList.add(newTask);
+        return newTask;
+    }
+
+    public Task addEventTask(String ...parameters) {
+        assert parameters.length == 2 : "insufficient amount of parameters";
+        String eventDescription = parameters[0].strip();
+        LocalDateTime EventDate = LocalDateTime.parse(parameters[1].strip(), formatter);
+        Task newTask = new Event(eventDescription, EventDate);
+        this.taskList.add(newTask);
+        return newTask;
+    }
+
+    public Task addDeadlineTask(String ...parameters) {
+        assert parameters.length == 2 : "insufficient amount of parameters";
+        String eventDescription = parameters[0].strip();
+        LocalDateTime DeadlineDate = LocalDateTime.parse(parameters[1].strip(), formatter);
+        Task newTask = new Deadline(eventDescription, DeadlineDate);
         this.taskList.add(newTask);
         return newTask;
     }

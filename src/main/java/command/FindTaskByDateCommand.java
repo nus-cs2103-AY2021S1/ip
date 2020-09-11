@@ -1,11 +1,15 @@
 package command;
-public class DateCommand extends Command {
-    public DateCommand(String ...parameter) {
+
+import duke.Storage;
+import duke.TaskList;
+
+public class FindTaskByDateCommand extends Command {
+    public FindTaskByDateCommand(String ...parameter) {
         super(parameter);
     }
 
     @Override
-    public Result execute() {
+    public Result execute(TaskList taskList, Storage storage) {
         return null;
     }
 }

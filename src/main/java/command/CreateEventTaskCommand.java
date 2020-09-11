@@ -1,11 +1,16 @@
 package command;
-public class EventCommand extends Command {
-    public EventCommand (String ...parameters) {
+
+import duke.Storage;
+import duke.TaskList;
+
+public class CreateEventTaskCommand extends Command {
+    public CreateEventTaskCommand (String ...parameters) {
         super(parameters);
     }
 
     @Override
-    public Result execute() {
+    public Result execute(TaskList taskList, Storage storage) {
         return null;
     }
+
 }

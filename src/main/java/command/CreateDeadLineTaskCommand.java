@@ -1,11 +1,16 @@
 package command;
-public class DeadLineCommand extends Command {
-    public DeadLineCommand (String ...parameters) {
+
+import duke.Storage;
+import duke.TaskList;
+
+public class CreateDeadLineTaskCommand extends Command {
+    public CreateDeadLineTaskCommand (String ...parameters) {
         super(parameters);
     }
 
     @Override
-    public Result execute() {
+    public Result execute(TaskList taskList, Storage storage) {
         return null;
     }
+
 }

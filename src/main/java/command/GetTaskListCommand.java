@@ -1,7 +1,12 @@
 package command;
-public class ListCommand extends Command {
+
+import duke.Storage;
+import duke.TaskList;
+
+public class GetTaskListCommand extends Command {
+
     @Override
-    public Result execute() {
+    public Result execute(TaskList taskList, Storage storage) {
         return null;
     }
 }

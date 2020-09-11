@@ -1,11 +1,15 @@
 package command;
-public class DelCommand extends Command {
-    public DelCommand(String ...parameter) {
+
+import duke.Storage;
+import duke.TaskList;
+
+public class DelTaskCommand extends Command {
+    public DelTaskCommand(String ...parameter) {
         super(parameter);
     }
 
     @Override
-    public Result execute() {
+    public Result execute(TaskList taskList, Storage storage) {
         return null;
     }
 }

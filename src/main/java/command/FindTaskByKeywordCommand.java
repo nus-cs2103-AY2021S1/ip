@@ -1,12 +1,15 @@
 package command;
 
-public class FindCommand extends Command {
-    public FindCommand (String ...parameter) {
+import duke.Storage;
+import duke.TaskList;
+
+public class FindTaskByKeywordCommand extends Command {
+    public FindTaskByKeywordCommand (String ...parameter) {
         super(parameter);
     }
 
     @Override
-    public Result execute() {
+    public Result execute(TaskList taskList, Storage storage) {
         return null;
     }
 }
