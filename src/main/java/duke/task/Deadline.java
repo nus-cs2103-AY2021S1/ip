@@ -55,7 +55,7 @@ public class Deadline extends Task {
         if (o == null || getClass() != o.getClass()) return false;
         Deadline deadline = (Deadline) o;
         return isDone == deadline.isDone &&
-                Objects.equals(title, deadline.title) &&
+                Objects.equals(title.toLowerCase(), deadline.title.toLowerCase()) &&
                 Objects.equals(date, deadline.date);
     }
 }

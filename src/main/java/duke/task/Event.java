@@ -54,7 +54,7 @@ public class Event extends Task {
         if (!super.equals(o)) return false;
         Event event = (Event) o;
         return isDone == event.isDone &&
-                Objects.equals(title, event.title) &&
+                Objects.equals(title.toLowerCase(), event.title.toLowerCase()) &&
                 Objects.equals(date, event.date);
     }
 }

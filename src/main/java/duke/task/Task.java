@@ -51,6 +51,6 @@ public class Task {
         if (o == null || getClass() != o.getClass()) return false;
         Task task = (Task) o;
         return isDone == task.isDone &&
-                Objects.equals(title, task.title);
+                Objects.equals(title.toLowerCase(), task.title.toLowerCase());
     }
 }
