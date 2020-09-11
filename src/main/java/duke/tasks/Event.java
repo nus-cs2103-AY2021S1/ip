@@ -11,6 +11,7 @@ public class Event extends Task {
 
     /**
      * Constructor for event class
+     * 
      * @param description description of the task
      * @param time time at which the event occurs
      * @param isDone indicates whether the task has been completed or not

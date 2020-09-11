@@ -18,7 +18,12 @@ public class Duke {
         parser = new Parser();
         taskList = new TaskList(storage.loadTasks());
     }
-    
+
+    /**
+     * Returns the welcome message for duke 
+     * 
+     * @return welcome message
+     */
     public String getWelcome() {
         return ui.getOutputMessage();
     }

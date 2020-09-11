@@ -34,5 +34,4 @@ public class AddTaskCommand extends Command {
     public String toString() {
         return "AddTaskCommand " + task.toString();
     }
-    
 }

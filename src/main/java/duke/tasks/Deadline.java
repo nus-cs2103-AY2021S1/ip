@@ -11,6 +11,7 @@ public class Deadline extends Task {
 
     /**
      * Constructor for deadline class
+     * 
      * @param description description of the task
      * @param deadline deadline by which task needs to be completed
      * @param isDone indicates whether the task has been completed or not

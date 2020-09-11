@@ -1,17 +1,9 @@
-.background {
-    -fx-background-image: url('./../images/Background.png');
-    -fx-background-size: 100% 100%;
-    -fx-background-position: bottom center;
-}
-
 #userInput {
     -fx-background-color: #FFFFFF;
 }
 
 #enterButton {
     -fx-background-color: #704316;
-    border-color: #FFFFFF;
-    border-width: 2px;
 }
 
 #dialog {

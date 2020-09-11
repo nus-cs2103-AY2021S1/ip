@@ -9,8 +9,21 @@ import duke.TaskList;
 import duke.exceptions.DukeInvalidUndoException;
 import duke.tasks.Task;
 
+/**
+ * Command to undo the last edit to the task list
+ */
 public class UndoCommand extends Command {
-    
+
+    /**
+     * Performs necessary tasks to carry out the undo command
+     * 
+     * @param ui ui which generates appropriate response to the user
+     * @param storage storage where data is stored
+     * @param taskList taskList which stores information about tasks
+     * @param commandList commandList which stores information about previous commands
+     * @param deletedTaskList deletedTaskList which stores information about deleted tasks
+     * @throws DukeInvalidUndoException If there are no commands to undo
+     */
     public void executeCommand (Ui ui, Storage storage, TaskList taskList, CommandList commandList,
                                 DeletedTaskList deletedTaskList) throws DukeInvalidUndoException {
         
@@ -50,6 +63,5 @@ public class UndoCommand extends Command {
         default:
             ui.undoMessage(commandWord);
         }
-        
     }
 }

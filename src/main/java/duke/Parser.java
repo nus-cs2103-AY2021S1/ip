@@ -4,7 +4,14 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import duke.commands.*;
+import duke.commands.AddTaskCommand;
+import duke.commands.ByeCommand;
+import duke.commands.Command;
+import duke.commands.DoneCommand;
+import duke.commands.FindCommand;
+import duke.commands.ListCommand;
+import duke.commands.RemoveTaskCommand;
+import duke.commands.UndoCommand;
 
 import duke.exceptions.DukeInvalidIndexException;
 import duke.exceptions.DukeInvalidUndoException;
@@ -20,8 +27,8 @@ import duke.tasks.Todo;
  */
 public class Parser {
     
-    private CommandList commandList = new CommandList();
-    private DeletedTaskList deletedTaskList = new DeletedTaskList();
+    private final CommandList commandList = new CommandList();
+    private final DeletedTaskList deletedTaskList = new DeletedTaskList();
     
     private boolean isDate(String time) {
         SimpleDateFormat date = new SimpleDateFormat("yyyy-MM-dd");
@@ -74,7 +81,6 @@ public class Parser {
         
 
         try {
-            
             switch (commandWord) {
             case "LIST":
                 command = new ListCommand();
@@ -155,8 +161,10 @@ public class Parser {
     /**
      * Extract integer from the user input and returns the index of the required task in the taskList
      * 
-     * @param input user input 
-     * @return index of specified task in taskList
+     * @param input user input
+     * @return index of specified task in the taskList
+     * @throws DukeInvalidIndexException If index given is 0
+     * @throws NumberFormatException If index given is not an integer
      */
     private int parseIndex (String input) throws DukeInvalidIndexException, NumberFormatException {
         int index = Integer.parseInt(input.replaceAll("[^0-9]", "")) - 1;

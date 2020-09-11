@@ -38,7 +38,7 @@ public class Ui {
     public String getOutputMessage (){
         String pattern = "\u2509\u2509\u2509\u2509\u2509\u02da\u002a\u274b \u274b " +
                 "\u274b\u002a\u02da\u2509\u2509\u2509\u2509\u2509\u0f1d";
-        String border = String.format("%s %s\n", pattern, pattern);
+        String border = String.format("%s %s %s\n", pattern, pattern, pattern);
         return String.format ("%s\n %s\n %s", border, outputMessage, border);
     }
     
@@ -49,11 +49,11 @@ public class Ui {
         welcomeMessage += "* Todo <description>\n";
         welcomeMessage += "* Deadline <description> /by <deadline>\n";
         welcomeMessage += "* Event <description> /at <event_time>\n\n";
-        welcomeMessage += "List : Lists out all your tasks\n";
-        welcomeMessage += "Done <number> : Sets task at <number> to done\n";
-        welcomeMessage += "Delete <number> : Removes task at <number>\n";
-        welcomeMessage += "Find <word> : Lists tasks which contain <word>\n";
-        welcomeMessage += "Undo : Undo your last change to your tasks\n";
+        welcomeMessage += "List ..... Lists out all your tasks\n";
+        welcomeMessage += "Done <number> ..... Sets task at <number> to done\n";
+        welcomeMessage += "Delete <number> ..... Removes task at <number>\n";
+        welcomeMessage += "Find <word> ..... Lists tasks which contain <word>\n";
+        welcomeMessage += "Undo ..... Undo your last change to your tasks\n";
         return welcomeMessage;
     }
 
@@ -121,6 +121,7 @@ public class Ui {
 
     /**
      * Sets output message when the undo command is given
+     * 
      * @param message message depending on which command is reversed
      */
     public void undoMessage (String message) {

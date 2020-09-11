@@ -8,6 +8,7 @@ import duke.tasks.Task;
  * List to keep track of tasks
  */
 public class TaskList {
+    
     private final ArrayList<Task> taskList;
 
     /**
@@ -35,6 +36,12 @@ public class TaskList {
         taskList.add(task);
     }
 
+    /**
+     * Adds the specified task to the index specified
+     * 
+     * @param index index in list where task is added
+     * @param task task to be added
+     */
     public void addTaskAtIndex (int index, Task task) {
         taskList.add(index, task);
     }
