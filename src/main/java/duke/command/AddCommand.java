@@ -29,7 +29,9 @@ public class AddCommand implements UndoableCommand {
     public String execute(Storage storage, Ui ui, TaskList taskList) throws DukeException {
         int totalTaskBefore = taskList.total();
         int totalTask = taskList.addTask(t);
+
         assert totalTask == totalTaskBefore + 1 : "Failed to add task!";
+
         storage.save(taskList);
         return " *WOOF* I have added:\n   " + t + "\n" + ui.displayTotal(totalTask);
     }

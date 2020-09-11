@@ -130,13 +130,18 @@ public class Storage {
             List<Task> listOfTask = taskList.getList();
             FileWriter fileWriter = new FileWriter(file);
 
+            assert listOfTask != null : "Failed to obtain list";
+
+            int taskCounter = 0;
             for (Task task : listOfTask) {
                 fileWriter.write(task.toString());
                 fileWriter.write(System.getProperty("line.separator"));
+                taskCounter++;
             }
 
-            fileWriter.close();
+            assert taskCounter == listOfTask.size() : "Not all tasks saved to storage";
 
+            fileWriter.close();
         } catch (IOException e) {
             String s = " Unable to access file... *woof*\n";
             throw new DukeException(s);
