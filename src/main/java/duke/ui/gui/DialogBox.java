@@ -56,8 +56,6 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        //int width = UtilFunction.getLongestSentLength(text) > 38 ? 400 : text.length() * 12;
-        //dialog.setPrefWidth(width);
         dialog.setWrapText(true);
         timeStamp.setText(UtilFunction.getCurrentTime());
         //move to fxml
