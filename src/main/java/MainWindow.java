@@ -19,7 +19,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Mario mario;
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/luigi.png"));
     private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/mario.jpeg"));
@@ -30,18 +30,18 @@ public class MainWindow extends AnchorPane {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(Ui.showWelcome(), dukeImage));
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setDuke(Mario d) {
+        mario = d;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Mario's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
+        String response = mario.getResponse(input);
         assert !response.isBlank() : "response should not be empty";
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),

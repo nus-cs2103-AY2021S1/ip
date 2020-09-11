@@ -6,9 +6,9 @@ import java.time.format.DateTimeParseException;
 import javafx.application.Platform;
 
 /**
- * Main class for the Duke CLI task-tracking application.
+ * Main class for the Mario CLI task-tracking application.
  */
-public class Duke {
+public class Mario {
 
     private final Storage storage;
     private final Ui ui;
@@ -18,9 +18,9 @@ public class Duke {
     /**
      * Initialises the instance attributes: storage, tasks, ui.
      */
-    public Duke() {
+    public Mario() {
         ui = new Ui();
-        Path dataPath = Paths.get("data", "duke.txt");
+        Path dataPath = Paths.get("data", "mario.txt");
         Path aliasMapFilePath = Paths.get("data", "keymap.txt");
         storage = new Storage(dataPath, aliasMapFilePath);
 
