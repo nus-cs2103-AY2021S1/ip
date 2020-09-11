@@ -496,6 +496,8 @@ public class Duke extends Application {
     public static void main(String[] args) {
         Duke duke = null;
 
+        assert duke == null;
+
         try {
             duke = new Duke();
         } catch (FileNotFoundException e) {
