@@ -2,6 +2,7 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 /**
@@ -46,5 +47,15 @@ public class Deadline extends Task {
     public String toData() {
         int status = isDone ? 1 : 0;
         return String.format("D | %d | %s | %s", status, title, by);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Deadline deadline = (Deadline) o;
+        return isDone == deadline.isDone &&
+                Objects.equals(title, deadline.title) &&
+                Objects.equals(date, deadline.date);
     }
 }

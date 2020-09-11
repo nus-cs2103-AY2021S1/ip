@@ -1,5 +1,7 @@
 package duke.task;
 
+import java.util.Objects;
+
 public class Task {
     protected String title;
     protected boolean isDone;
@@ -41,5 +43,14 @@ public class Task {
                     ? new Event(title, time, isDone)
                     : new Deadline(title, time, isDone);
         }
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Task task = (Task) o;
+        return isDone == task.isDone &&
+                Objects.equals(title, task.title);
     }
 }

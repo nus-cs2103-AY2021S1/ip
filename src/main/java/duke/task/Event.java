@@ -2,6 +2,7 @@ package duke.task;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.Objects;
 import java.util.regex.Pattern;
 
 public class Event extends Task {
@@ -44,5 +45,16 @@ public class Event extends Task {
     public String toData() {
         int status = isDone ? 1 : 0;
         return String.format("D | %d | %s | %s", status, title, at);
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+        Event event = (Event) o;
+        return isDone == event.isDone &&
+                Objects.equals(title, event.title) &&
+                Objects.equals(date, event.date);
     }
 }
