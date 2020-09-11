@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 
 /**
  * The ListCommand class contains methods pertaining to the ListCommand.

@@ -1,7 +1,8 @@
-package duke;
+package duke.ui;
 
 import java.util.concurrent.CompletableFuture;
 
+import duke.Duke;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

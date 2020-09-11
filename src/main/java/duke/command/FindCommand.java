@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
+import duke.ui.Ui;
 
 /**
  * The FindCommand class contains methods pertaining to the FindCommand.

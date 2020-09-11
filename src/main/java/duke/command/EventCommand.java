@@ -2,8 +2,8 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.task.Event;
+import duke.ui.Ui;
 
 /**
  * The EventCommand class contains methods pertaining to the EventCommand.

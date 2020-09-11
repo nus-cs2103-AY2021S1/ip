@@ -3,6 +3,7 @@ package duke;
 import java.nio.file.Path;
 
 import duke.command.Command;
+import duke.ui.Ui;
 import javafx.scene.layout.VBox;
 
 /**

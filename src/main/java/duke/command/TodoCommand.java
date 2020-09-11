@@ -2,8 +2,8 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.task.ToDo;
+import duke.ui.Ui;
 
 /**
  * The TodoCommand class contains methods pertaining to the TodoCommand.

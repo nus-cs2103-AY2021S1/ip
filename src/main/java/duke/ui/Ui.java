@@ -1,5 +1,6 @@
-package duke;
+package duke.ui;
 
+import duke.TaskList;
 import duke.task.Task;
 import javafx.scene.image.Image;
 import javafx.scene.layout.VBox;
