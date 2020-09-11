@@ -30,6 +30,11 @@ public class TodoCommand extends Command {
                 + "desc: The description of the todo task\n";
     }
 
+    /**
+     * Gets the task description.
+     *
+     * @return the task description.
+     */
     public String getTask() {
         return task;
     }

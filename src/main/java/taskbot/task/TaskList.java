@@ -72,7 +72,7 @@ public class TaskList {
      *
      * @return A string describing how many tasks there are in the list.
      */
-    public String listTaskSize() {
+    public String getNumberOfTasks() {
         return "You now have " + tasks.size() + " task(s) in the list.";
     }
 
@@ -84,16 +84,16 @@ public class TaskList {
      */
     public String addTodoTask(String task) {
         // Makes a new todo task
-        Todo newTask = new Todo(task);
+        Todo newTodo = new Todo(task);
         //Adds the new task to the list
-        tasks.add(newTask);
+        tasks.add(newTodo);
         // Update the storage
         if (storage != null) {
             storage.setTasksList(tasks);
         }
         // Informs the user that the task has been added
-        return "I have added a Todo:\n" + newTask
-                + "\n" + listTaskSize();
+        return "I have added a Todo:\n" + newTodo
+                + "\n" + getNumberOfTasks();
     }
 
     /**
@@ -114,10 +114,10 @@ public class TaskList {
         }
         LocalDateTime dateTime = parseDateTime(parsedString[1].stripLeading());
         // Makes a new Event task
-        Event newTask = new Event(parsedString[0], dateTime);
+        Event newEvent = new Event(parsedString[0], dateTime);
 
         // Adds the new task to the list
-        tasks.add(newTask);
+        tasks.add(newEvent);
 
         // Update the storage
         if (storage != null) {
@@ -125,8 +125,8 @@ public class TaskList {
         }
 
         // Informs the user that the task has been added
-        return "I have added an Event:\n" + newTask
-                + "\n" + listTaskSize();
+        return "I have added an Event:\n" + newEvent
+                + "\n" + getNumberOfTasks();
     }
 
     /**
@@ -148,10 +148,10 @@ public class TaskList {
 
         LocalDateTime dateTime = parseDateTime(parsedString[1].stripLeading());
         // Makes a new Deadline task
-        Deadline newTask = new Deadline(parsedString[0], dateTime);
+        Deadline newDeadline = new Deadline(parsedString[0], dateTime);
 
         // Adds the new task to the list
-        tasks.add(newTask);
+        tasks.add(newDeadline);
 
         // Update the storage
         if (storage != null) {
@@ -159,8 +159,8 @@ public class TaskList {
         }
 
         // Informs the user that the task has been added
-        return "I have added a Deadline:\n" + newTask
-                + "\n" + listTaskSize();
+        return "I have added a Deadline:\n" + newDeadline
+                + "\n" + getNumberOfTasks();
     }
 
     /**
@@ -224,7 +224,7 @@ public class TaskList {
             if (storage != null) {
                 storage.setTasksList(tasks);
             }
-            message += listTaskSize();
+            message += getNumberOfTasks();
             return message;
         } catch (IndexOutOfBoundsException e) {
             throw new InvalidIndexException(
@@ -272,17 +272,17 @@ public class TaskList {
      * @return a String describing the tasks matching the keywords.
      */
     public String findTasks(String[] keywords) {
-        //If tasks is empty
+        // If tasks is empty
         if (tasks.size() == 0) {
             return "You currently have no tasks pending.\n";
         }
 
-        StringBuilder sb = new StringBuilder("Here are the matching tasks in your list:\n");
-        //Set to contain tasks
+        StringBuilder stringBuilder = new StringBuilder("Here are the matching tasks in your list:\n");
+        // Set to contain tasks
         Set<String> uniqueTasks = new HashSet<String>();
-        //Flag for when a match is found
+        // Flag for when a match is found
         boolean found = false;
-        //Builds the list of tasks
+        // Builds the list of tasks
         for (int i = 0; i < tasks.size(); i++) {
             Task task = tasks.get(i);
             for (String keyword : keywords) {
@@ -296,16 +296,16 @@ public class TaskList {
         }
 
         if (!found) {
-            //Printed if no matches found
+            // Printed if no matches found
             return "Sorry, that keyword did not return any results. Please try another.";
         } else {
             int counter = 1;
             for (String task : uniqueTasks) {
-                sb.append(counter).append(". ").append(task).append("\n");
+                stringBuilder.append(counter).append(". ").append(task).append("\n");
                 counter++;
             }
-            //Returns the lists of tasks found matching the keyword
-            return sb.toString();
+            // Returns the lists of tasks found matching the keyword
+            return stringBuilder.toString();
         }
     }
 }

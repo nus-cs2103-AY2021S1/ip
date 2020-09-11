@@ -59,6 +59,8 @@ public class HelpCommand extends Command {
     }
 
     /**
+     * Gets the name of the command that is being handled.
+     *
      * @return The command string stored in this class.
      */
     public String getCommand() {

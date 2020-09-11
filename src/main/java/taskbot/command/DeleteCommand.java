@@ -32,6 +32,8 @@ public class DeleteCommand extends Command {
     }
 
     /**
+     * Gets the task index.
+     *
      * @return The index of the list where the task is.
      */
     public int getTaskIndex() {

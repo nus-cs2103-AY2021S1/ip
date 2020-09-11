@@ -184,7 +184,7 @@ public class Storage {
                     bufferedWriter.write(task.getTask());
                     bufferedWriter.newLine();
 
-                    bufferedWriter.write(((Event) task).getAt().toString());
+                    bufferedWriter.write(((Event) task).getOccursAt().toString());
                     bufferedWriter.newLine();
                 } else if (task instanceof Deadline) {
                     bufferedWriter.write("deadline");
@@ -196,7 +196,7 @@ public class Storage {
                     bufferedWriter.write(task.getTask());
                     bufferedWriter.newLine();
 
-                    bufferedWriter.write(((Deadline) task).getBy().toString());
+                    bufferedWriter.write(((Deadline) task).getDueBy().toString());
                     bufferedWriter.newLine();
                 }
             }

@@ -34,6 +34,8 @@ public class EventCommand extends Command {
     }
 
     /**
+     * Gets the task description.
+     *
      * @return The task description.
      */
     public String getTask() {

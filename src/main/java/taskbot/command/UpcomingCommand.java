@@ -33,6 +33,8 @@ public class UpcomingCommand extends Command {
     }
 
     /**
+     * Gets the number of days to look ahead.
+     *
      * @return The days ahead to look.
      */
     public int getDays() {

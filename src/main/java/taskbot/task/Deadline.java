@@ -34,7 +34,7 @@ public class Deadline extends TimedTask {
      *
      * @return The time of the deadline.
      */
-    public LocalDateTime getBy() {
+    public LocalDateTime getDueBy() {
         return getTime();
     }
 

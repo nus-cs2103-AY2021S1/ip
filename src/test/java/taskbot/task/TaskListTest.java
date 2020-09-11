@@ -30,12 +30,12 @@ public class TaskListTest {
     @Test
     public void testListTasks() {
         try {
-            StringBuilder expected = new StringBuilder("These are the following task(s) to complete:\n");
+            StringBuilder expectedOutput = new StringBuilder("These are the following task(s) to complete:\n");
             for (int i = 1; i < 3; i++) {
-                expected.append(i).append(". ").append("[✗] Task ").append(i).append("\n");
+                expectedOutput.append(i).append(". ").append("[✗] Task ").append(i).append("\n");
             }
-            expected.append("3. [✗] Task 3");
-            assertEquals(expected.toString(), taskList.listTasks());
+            expectedOutput.append("3. [✗] Task 3");
+            assertEquals(expectedOutput.toString(), taskList.listTasks());
         } catch (Exception e) {
             fail();
         }
@@ -44,7 +44,7 @@ public class TaskListTest {
     @Test
     public void testListTasksSize() {
         String expected = "You now have 3 task(s) in the list.";
-        assertEquals(expected, taskList.listTaskSize());
+        assertEquals(expected, taskList.getNumberOfTasks());
     }
 
     @Test

@@ -32,6 +32,8 @@ public class DoneCommand extends Command {
     }
 
     /**
+     * Gets the task index.
+     *
      * @return An int representing the index in the list
      * where the task is at.
      */

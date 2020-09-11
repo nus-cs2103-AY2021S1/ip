@@ -33,7 +33,7 @@ public class Event extends TimedTask {
      *
      * @return The time of the event.
      */
-    public LocalDateTime getAt() {
+    public LocalDateTime getOccursAt() {
         return getTime();
     }
 

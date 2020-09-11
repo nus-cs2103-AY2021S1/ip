@@ -33,6 +33,11 @@ public class DeadlineCommand extends Command {
     }
 
 
+    /**
+     * Gets for task description.
+     *
+     * @return the task description stored in this command.
+     */
     public String getTask() {
         return task;
     }
@@ -40,8 +45,7 @@ public class DeadlineCommand extends Command {
 
     @Override
     public String execute(TaskList taskList) throws TaskbotException {
-        taskList.addDeadlineTask(task);
-        return null;
+        return taskList.addDeadlineTask(task);
     }
 
     @Override
