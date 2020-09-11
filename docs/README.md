@@ -1,19 +1,34 @@
 # User Guide
+- [Features](!Features)
+
+- [Usage](!Usage)
 
 ## Features 
 
-### Feature 1 
-Description of feature.
+### 'todo' - Add a TODO item into the list
+
+Format: 'todo (your task description)'
+
+Add a TODO item to the task list, the task will be saved.
+
+Example of usage:
+
+'todo read book'
+
+Expected outcome:
+
+
+
 
 ## Usage
 
-### `Keyword` - Describe action
+### `todo` - 
 
 Describe action and its outcome.
 
 Example of usage: 
 
-`keyword (optional arguments)`
+`todo readbook`
 
 Expected outcome:
 
