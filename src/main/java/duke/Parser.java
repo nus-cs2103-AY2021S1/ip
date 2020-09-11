@@ -29,7 +29,6 @@ public class Parser {
      * @throws IOException
      * @throws ClassNotFoundException
      */
-    @SuppressWarnings("checkstyle:SeparatorWrap")
     public void parse(String str) throws DukeException, IOException {
 
         ArrayList<Task> store = this.tasks.getList();
@@ -291,6 +290,7 @@ public class Parser {
      * @throws IOException
      * @throws ClassNotFoundException
      */
+    @SuppressWarnings("checkstyle:SeparatorWrap")
     public String parseStr(String str) throws DukeException, IOException {
 
         ArrayList<Task> store = this.tasks.getList();

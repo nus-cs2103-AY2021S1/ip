@@ -25,6 +25,15 @@ public class Ui {
         String intro = "-------------------------\n"
                 + "Hello! I'm Duke\n"
                 + "What can I do for you?\n"
+                + "Here are some of the commands i take:\n"
+                + "list - to view a list of your current tasks\n"
+                + "todo <task> - to add a todo to your task list\n"
+                + "deadline <task> /by <date and time (YYYY-MM-DD TTTT)> - to add a deadline to your task list\n"
+                + "event <task> /by <date and time (YYYY-MM-DD TTTT)> - to add an event to your task list\n"
+                + "done <index of task to be deleted> - to mark a task as done\n"
+                + "delete <index of task to be deleted> - to delete a specific task\n"
+                + "bye - to exit the program\n"
+                + "Also, to make a task recurring, simply add \"recurring\" after todo/deadline/event\n"
                 + "-------------------------";
         System.out.println(intro);
 
@@ -49,5 +58,27 @@ public class Ui {
             parser.parse(next);
             next = scan.nextLine();
         }
+    }
+
+
+    /**
+     * Returns the intro message as a string.
+     * @return the intro message
+     */
+    public String introMessage() {
+        String intro = "-------------------------\n"
+                + "Hello! I'm Duke\n"
+                + "What can I do for you?\n"
+                + "Here are some of the commands i take:\n"
+                + "list - to view a list of your current tasks\n"
+                + "todo <task> - to add a todo to your task list\n"
+                + "deadline <task> /by <date and time (YYYY-MM-DD TTTT)> - to add a deadline to your task list\n"
+                + "event <task> /by <date and time (YYYY-MM-DD TTTT)> - to add an event to your task list\n"
+                + "done <index of task to be deleted> - to mark a task as done\n"
+                + "delete <index of task to be deleted> - to delete a specific task\n"
+                + "bye - to exit the program\n"
+                + "Also, to make a task recurring, simply add \"recurring\" after todo/deadline/event\n"
+                + "-------------------------";
+        return intro;
     }
 }

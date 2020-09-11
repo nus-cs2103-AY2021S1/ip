@@ -1,5 +1,2 @@
 
-[T][✓] | tester [Recurring Weekly]
-[T][✘] | tester [Recurring Weekly]
-[D][✘] |tester2 /by 2020-02-03 1900 [Recurring Weekly]
-[E][✘] | testerevent /at 2020-09-08 1500 [Recurring Weekly]
+[E][✘] |party /at 2020-10-21 2000
