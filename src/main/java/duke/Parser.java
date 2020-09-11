@@ -10,6 +10,7 @@ public class Parser {
      * @return String array of split string
      */
     public static String[] stringSplit(String toSplit, String split) {
+        assert toSplit.length() > 0;
         return toSplit.split(split);
     }
 
@@ -22,6 +23,8 @@ public class Parser {
      * @return String array of split string
      */
     public static String[] stringSplitLimit(String toSplit, String split, int limit) {
+        assert limit > 0 : "Spliting string using negative slices";
+        assert limit < toSplit.length() : "Splitting string into more slices than length of string";
         return toSplit.split(split, limit);
     }
 
@@ -32,6 +35,7 @@ public class Parser {
      * @return first word of string
      */
     public static String getCommand(String line) {
+        assert line.length() > 0;
         return stringSplitLimit(line, " ", 2)[0];
     }
 
@@ -42,6 +46,7 @@ public class Parser {
      * @return sentence after the first word
      */
     public static String getDetails(String line) {
+        assert line.length() > 0;
         String[] splitString = stringSplitLimit(line, " ", 2);
         return splitString.length < 2 ? "" : splitString[1];
     }
@@ -53,6 +58,7 @@ public class Parser {
      * @return integer form of argument
      */
     public static int getIndex(String line) {
+        assert line.length() > 0;
         return Integer.parseInt(getDetails(line)) - 1;
     }
 }
