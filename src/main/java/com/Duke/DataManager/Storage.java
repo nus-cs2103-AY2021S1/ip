@@ -33,6 +33,7 @@ public class Storage {
      * @param taskList This is the taskList that is stored
      */
     public static void write(TaskList taskList) throws DukeException {
+        assert taskList != null : new DukeException("Unable to create a files for storage");
         String homeDir = System.getProperty("user.dir");
         Path dataFolderPath = Paths.get(homeDir, "data");
         if (Files.exists(dataFolderPath)) {

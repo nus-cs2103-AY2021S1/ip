@@ -93,6 +93,7 @@ public class Duke extends Application {
     }
 
     String getResponse(String input) {
+        assert input!= null : "You didn't enter a command, please try again";
         return DukeBot.simulateGui(input);
     }
 
