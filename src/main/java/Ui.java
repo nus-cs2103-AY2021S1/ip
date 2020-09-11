@@ -59,4 +59,8 @@ public class Ui {
         }    
         return display.toString();
     } 
+    
+    public String showSortedList(TaskList taskList) {
+        return "Here is your sorted list:\n" + showList(taskList);
+    }
 }

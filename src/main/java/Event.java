@@ -10,6 +10,11 @@ public class Event extends Task {
     }
 
     @Override
+    public LocalDate getDate() {
+        return at;
+    }
+
+    @Override
     public String saveTask() {
         return "E" + super.saveTask() + " | " + at;
     }

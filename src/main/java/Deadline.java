@@ -11,6 +11,11 @@ public class Deadline extends Task {
     }
 
     @Override
+    public LocalDate getDate() {
+        return by;
+    }
+
+    @Override
     public String saveTask() {
         return "D" + super.saveTask() + " | " + by;
     }

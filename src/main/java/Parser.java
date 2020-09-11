@@ -33,6 +33,8 @@ public class Parser {
             return new AddCommand(deadline);
         } else if (s.startsWith("find")) {
             return new FindCommand(s);
+        } else if (s.startsWith("sort")) {
+            return new SortCommand();
         } else {
             throw new DukeException("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
         }

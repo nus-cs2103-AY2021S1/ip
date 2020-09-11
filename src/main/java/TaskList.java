@@ -1,6 +1,5 @@
-import java.time.LocalDate;
-import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
+import java.util.PriorityQueue;
 
 public class TaskList {
     public ArrayList<Task> taskList;
@@ -48,5 +47,12 @@ public class TaskList {
             reply.append(match).append("\n");
         }
         return reply.toString();
+    }
+    
+    public void sortTasksByDate() {
+        TaskComparator taskComparator = new TaskComparator();
+        PriorityQueue<Task> priorityQueue = new PriorityQueue<>(taskComparator);
+        priorityQueue.addAll(taskList);
+        taskList = new ArrayList<>(priorityQueue);
     }
 }
