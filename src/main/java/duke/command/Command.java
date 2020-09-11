@@ -16,7 +16,7 @@ public abstract class Command {
      * @param tasks List of tasks belonging to the user.
      * @param ui Ui object created for the Duke object.
      * @param storage Storage object used by the Duke object for file operations.
-     * @throws DukeException If the command cannot be executed successfully.
+     * @throws DukeException If the command could not be executed successfully.
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
 

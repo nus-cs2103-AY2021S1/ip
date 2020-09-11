@@ -3,7 +3,6 @@ package duke.command;
 import duke.Storage;
 import duke.Ui;
 import duke.exception.DukeException;
-import duke.exception.InvalidFunctionException;
 import duke.exception.InvalidTaskException;
 import duke.task.TaskList;
 
@@ -12,16 +11,16 @@ import duke.task.TaskList;
  */
 public class DoneCommand extends Command {
 
-    /** Parsed commands containing details of the task to be marked as done. */
-    private final String[] parsedCommand;
+    /** Integer value representing the ID of the task to be marked as done. */
+    private final int taskID;
 
     /**
      * Creates and initialises a new DoneCommand object.
      *
-     * @param parsedCommand String array that contains information of the task to be marked as done.
+     * @param taskID int value representing the ID of the task to be marked as done.
      */
-    public DoneCommand(String[] parsedCommand) {
-        this.parsedCommand = parsedCommand;
+    public DoneCommand(int taskID) {
+        this.taskID = taskID;
     }
 
     /**
@@ -32,27 +31,17 @@ public class DoneCommand extends Command {
      * @param ui Ui object created for the Duke object.
      * @param storage Storage object used by the Duke object for file operations.
      * @return String containing the reply for successful completion of task.
-     * @throws DukeException If the task cannot be mark completed due to invalid arguments.
+     * @throws DukeException If the task could not be marked as done due to invalid arguments.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        try {
-            int index = Integer.parseInt(this.parsedCommand[1]);
-            if (index > tasks.getListSize() || index <= 0) {
-                String error = "Invalid Task! The task ID you provided is not valid. ";
-                throw new InvalidTaskException(error);
-            }
-            tasks.completeTask(index - 1);
-            storage.saveToFile(tasks);
-            return ui.showCompletedTask(tasks.getTask(index - 1));
-        } catch (ArrayIndexOutOfBoundsException ex) {
-            String error = "No Task ID provided! Please input the ID of the task you wish to mark as completed.";
-            throw new InvalidFunctionException(error);
-        } catch (NumberFormatException ex) {
-            String error = "Your input is not a recognised command. You have to provide the ID of "
-                    + "the task you wish to mark as done. \n";
-            throw new InvalidFunctionException(error);
+        if (this.taskID > tasks.getListSize() || this.taskID <= 0) {
+            String error = "Invalid Task! The task ID you provided is not valid.";
+            throw new InvalidTaskException(error);
         }
+        tasks.completeTask(this.taskID - 1);
+        storage.saveToFile(tasks);
+        return ui.showCompletedTask(tasks.getTask(this.taskID - 1));
     }
 
     /**

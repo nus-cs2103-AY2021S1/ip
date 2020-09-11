@@ -13,6 +13,7 @@ import duke.command.InvalidCommand;
 import duke.command.ListCommand;
 import duke.command.TagCommand;
 import duke.command.ToDoCommand;
+import duke.exception.DukeException;
 import duke.exception.InvalidFunctionException;
 
 /**
@@ -39,42 +40,198 @@ public class Parser {
      *
      * @param userInput Inputs entered by the user.
      * @return Command object.
-     * @throws InvalidFunctionException If the input is not a valid command.
+     * @throws DukeException If the input is not a valid command.
      */
-    public static Command parse(String userInput) throws InvalidFunctionException {
-        String message = userInput.trim();
-        String[] parsedCommand = message.split(" ", 2);
-        String function = parsedCommand[0];
-        if (message.isEmpty()) {
+    public static Command parse(String userInput) throws DukeException {
+        String input = userInput.trim();
+        String[] splitInput = input.split(" ", 2);
+        String function = splitInput[0];
+        if (input.isEmpty()) {
             String err = "No input was entered! Please enter something!";
             throw new InvalidFunctionException(err);
-        } else if (message.equals(Parser.HELP_COMMAND)) {
+        } else if (input.equals(Parser.HELP_COMMAND)) {
             return new HelpCommand();
-        } else if (message.equals(Parser.EXIT_COMMAND)) {
+        } else if (input.equals(Parser.EXIT_COMMAND)) {
             return new ExitCommand();
-        } else if (message.equals(Parser.LIST_COMMAND)) {
+        } else if (input.equals(Parser.LIST_COMMAND)) {
             return new ListCommand();
         } else if (function.equals(Parser.DONE_COMMAND)) {
-            return new DoneCommand(parsedCommand);
+            int taskID = parseDoneOrDeleteInput(input);
+            return new DoneCommand(taskID);
         } else if (function.equals(Parser.TODO_COMMAND)) {
-            parsedCommand = message.split("todo");
-            return new ToDoCommand(parsedCommand);
+            String todoDescription = parseTodoInput(input);
+            return new ToDoCommand(todoDescription);
         } else if (function.equals(Parser.DEADLINE_COMMAND)) {
-            parsedCommand = message.split("deadline");
-            return new DeadlineCommand(parsedCommand);
+            String[] parsedDeadlineInput = parseDeadlineInput(input);
+            return new DeadlineCommand(parsedDeadlineInput);
         } else if (function.equals(Parser.EVENT_COMMAND)) {
-            parsedCommand = message.split("event");
-            return new EventCommand(parsedCommand);
+            String[] parsedEventInput = parseEventInput(input);
+            return new EventCommand(parsedEventInput);
         } else if (function.equals(Parser.DELETE_COMMAND)) {
-            return new DeleteCommand(parsedCommand);
+            int taskID = parseDoneOrDeleteInput(input);
+            return new DeleteCommand(taskID);
         } else if (function.equals(Parser.FIND_BY_DATE_COMMAND)) {
-            return new FindByDateCommand(parsedCommand);
+            String searchDate = parseFindInput(input);
+            return new FindByDateCommand(searchDate);
         } else if (function.equals(Parser.FIND_BY_KEYWORD_COMMAND)) {
-            return new FindByKeywordCommand(parsedCommand);
+            String searchKeyword = parseFindInput(input);
+            return new FindByKeywordCommand(searchKeyword);
         } else if (function.equals(Parser.TAG_COMMAND)) {
-            return new TagCommand(parsedCommand);
+            String[] parsedTagInput = parseTagInput(input);
+            return new TagCommand(parsedTagInput);
         } else {
             return new InvalidCommand();
+        }
+    }
+
+    /**
+     * Parses the user input for a deadline command to retrieve the details of the deadline task
+     * and store it in an array.
+     *
+     * @param userInput Input entered by the user.
+     * @return String array containing the deadline description and deadline time stamp.
+     * @throws InvalidFunctionException If the deadline information is invalid or the input is missing arguments.
+     */
+    public static String[] parseDeadlineInput(String userInput) throws InvalidFunctionException {
+        try {
+            String deadlineArguments = userInput.split("deadline")[1];
+            String[] parsedDeadlineArguments = deadlineArguments.split(" /by ");
+            if (!deadlineArguments.contains(" /by ") && !deadlineArguments.endsWith("/by")) {
+                String error = "Your deadline task has an incorrect format. The task cannot be created.";
+                throw new InvalidFunctionException(error);
+            } else if (deadlineArguments.trim().equals("/by")) {
+                String error = "Your deadline task is missing a description and time stamp. "
+                        + "The task cannot be created.";
+                throw new InvalidFunctionException(error);
+            } else if (deadlineArguments.trim().endsWith("/by")) {
+                String error = "Your deadline task is missing a time stamp. The task cannot be created.";
+                throw new InvalidFunctionException(error);
+            } else if (parsedDeadlineArguments[0].isBlank()) {
+                String error = "Your deadline task is missing a description. The task cannot be created.";
+                throw new InvalidFunctionException(error);
+            }
+            String description = parsedDeadlineArguments[0].trim();
+            String time = parsedDeadlineArguments[1].trim();
+            return new String[]{description, time};
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            String error = "Your deadline task has missing arguments. The task cannot be created.";
+            throw new InvalidFunctionException(error);
+        }
+    }
+
+    /**
+     * Parses the user input for an event command to retrieve the details of the event task
+     * and store it in an array.
+     *
+     * @param userInput Input entered by the user.
+     * @return String array containing the event description and event time stamp.
+     * @throws InvalidFunctionException If the event information is invalid or the input is missing arguments.
+     */
+    public static String[] parseEventInput(String userInput) throws InvalidFunctionException {
+        try {
+            String eventArguments = userInput.split("event")[1];
+            String[] parsedEventArguments = eventArguments.split(" /at ");
+            if (!eventArguments.contains(" /at ") && !eventArguments.endsWith("/at")) {
+                String error = "Your event task has an incorrect format. The task cannot be created.";
+                throw new InvalidFunctionException(error);
+            } else if (eventArguments.trim().equals("/at")) {
+                String error = "Your event task is missing a description and time stamp. "
+                        + "The task cannot be created.";
+                throw new InvalidFunctionException(error);
+            } else if (eventArguments.trim().endsWith("/at")) {
+                String error = "Your event task is missing a time stamp. The task cannot be created.";
+                throw new InvalidFunctionException(error);
+            } else if (parsedEventArguments[0].isBlank()) {
+                String error = "Your event task is missing a description. The task cannot be created.";
+                throw new InvalidFunctionException(error);
+            }
+            String description = parsedEventArguments[0].trim();
+            String time = parsedEventArguments[1].trim();
+            return new String[]{description, time};
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            String error = "Your event task has missing arguments. The task cannot be created.";
+            throw new InvalidFunctionException(error);
+        }
+    }
+
+    /**
+     * Parses the user input for a todo command to retrieve the todo description.
+     *
+     * @param userInput Input entered by the user.
+     * @return String containing the todo description.
+     * @throws InvalidFunctionException If the todo description is missing.
+     */
+    public static String parseTodoInput(String userInput) throws InvalidFunctionException {
+        String[] parsedTodoArguments = userInput.split("todo");
+        if (parsedTodoArguments.length == 0) {
+            String error = "Your todo task description is empty. The task cannot be created.";
+            throw new InvalidFunctionException(error);
+        }
+        String description = parsedTodoArguments[1].trim();
+        return description;
+    }
+
+    /**
+     * Parses the user input for either a done or delete command to retrieve the ID
+     * of the desired task to be marked as done or deleted respectively.
+     *
+     * @param userInput Input entered by the user.
+     * @return int value representing the ID of the desired task to be marked as done or deleted.
+     * @throws InvalidFunctionException If the task ID is missing or invalid.
+     */
+    public static int parseDoneOrDeleteInput(String userInput) throws InvalidFunctionException {
+        String[] parsedInput = userInput.split(" ", 2);
+        String command = parsedInput[0];
+        try {
+            int index = Integer.parseInt(parsedInput[1]);
+            return index;
+        } catch (ArrayIndexOutOfBoundsException | NumberFormatException ex) {
+            String error = "No Task ID provided! Please input the ID of the task you wish to "
+                    + (command.equals("done") ? "mark as done." : "delete.");
+            throw new InvalidFunctionException(error);
+        }
+    }
+
+    /**
+     * Parses the user input for either a find by keyword or find by date command to retrieve
+     * the search keyword or search date respectively.
+     *
+     * @param userInput Input entered by the user.
+     * @return String containing either the search keyword or search date depending on the command.
+     * @throws InvalidFunctionException If no search keyword or date was provided.
+     */
+    public static String parseFindInput(String userInput) throws InvalidFunctionException {
+        String[] parsedInput = userInput.split(" ", 2);
+        String command = parsedInput[0];
+        try {
+            String searchInput = parsedInput[1].trim();
+            return searchInput;
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            String missingKeywordError = "No keyword for the search was entered. Please enter a keyword!";
+            String missingDateError = "No task date provided. Please input a valid date using the format: 'dd/mm/yyyy'";
+            String error = (command.equals("find") ? missingKeywordError : missingDateError);
+            throw new InvalidFunctionException(error);
+        }
+    }
+
+    /**
+     * Parses the user input for a tag command to retrieve the details
+     * of the tag command and store it in an array.
+     *
+     * @param userInput Input entered by the user.
+     * @return String array containing the ID of the task to be tagged and the tag.
+     * @throws InvalidFunctionException If the user input has missing arguments.
+     */
+    public static String[] parseTagInput(String userInput) throws InvalidFunctionException {
+        try {
+            String tagArguments = userInput.split(" ", 2)[1].trim();
+            String[] parsedTagArguments = tagArguments.split(" ", 2);
+            String taskId = parsedTagArguments[0];
+            String tag = parsedTagArguments[1].trim();
+            return new String[]{taskId, tag};
+        } catch (ArrayIndexOutOfBoundsException ex) {
+            String error = "Your tag command has missing arguments";
+            throw new InvalidFunctionException(error);
         }
     }
 }

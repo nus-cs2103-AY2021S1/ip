@@ -7,8 +7,6 @@ import java.util.stream.Collectors;
 
 import duke.Storage;
 import duke.Ui;
-import duke.exception.DukeException;
-import duke.exception.InvalidFunctionException;
 import duke.task.Task;
 import duke.task.TaskList;
 
@@ -17,16 +15,17 @@ import duke.task.TaskList;
  */
 public class FindByKeywordCommand extends Command {
 
-    /** Parsed commands containing the search keyword. */
-    private final String[] parsedCommand;
+    /** String containing the search keyword. */
+    private final String searchKeyword;
 
     /**
      * Creates and initialises a new FindByKeywordCommand.
      *
-     * @param parsedCommand String array that contains the search keyword input.
+     * @param searchKeyword String that contains the search keyword.
      */
-    public FindByKeywordCommand(String[] parsedCommand) {
-        this.parsedCommand = parsedCommand;
+    public FindByKeywordCommand(String searchKeyword) {
+        this.searchKeyword = searchKeyword;
+        assert !searchKeyword.isBlank() : "search keyword cannot be empty";
     }
 
     /**
@@ -37,26 +36,18 @@ public class FindByKeywordCommand extends Command {
      * @param ui Ui object created for the Duke object.
      * @param storage Storage object used by the Duke object for file operations.
      * @return String containing a list of tasks that matches the search keyword.
-     * @throws DukeException If no tasks could be found due to invalid keyword provided.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        try {
-            String keyword = this.parsedCommand[1].trim().toLowerCase();
-            assert !keyword.isBlank() : "search keyword cannot be blank";
-            Predicate<Task> searchKeywordFilter = task -> {
-                return task.getDescription().toLowerCase().contains(keyword);
-            };
-            List<Task> searchResults = new ArrayList<>(tasks.getTaskList())
-                    .stream()
-                    .filter(searchKeywordFilter)
-                    .collect(Collectors.toList());
-            assert !keyword.isBlank();
-            return ui.showTaskList(searchResults);
-        } catch (ArrayIndexOutOfBoundsException ex) {
-            String error = "No keyword for the search was entered. Please enter a keyword!";
-            throw new InvalidFunctionException(error);
-        }
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
+        String keyword = this.searchKeyword.toLowerCase();
+        Predicate<Task> searchKeywordFilter = task -> {
+            return task.getDescription().toLowerCase().contains(keyword);
+        };
+        List<Task> searchResults = new ArrayList<>(tasks.getTaskList())
+                .stream()
+                .filter(searchKeywordFilter)
+                .collect(Collectors.toList());
+        return ui.showTaskList(searchResults);
     }
 
     /**

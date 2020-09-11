@@ -3,7 +3,6 @@ package duke.command;
 import duke.Storage;
 import duke.Ui;
 import duke.exception.DukeException;
-import duke.exception.InvalidTaskException;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
@@ -13,16 +12,17 @@ import duke.task.Todo;
  */
 public class ToDoCommand extends Command {
 
-    /** Parsed commands containing details of the todo task. */
-    private final String[] parsedCommand;
+    /** String containing the description of the todo task. */
+    private final String todoDescription;
 
     /**
      * Creates and initialises a new ToDoCommand object.
      *
-     * @param parsedCommand String array that contains the todo task information.
+     * @param todoDescription String containing the description of the todo task.
      */
-    public ToDoCommand(String[] parsedCommand) {
-        this.parsedCommand = parsedCommand;
+    public ToDoCommand(String todoDescription) {
+        this.todoDescription = todoDescription;
+        assert !todoDescription.isBlank() : "todo description cannot be empty";
     }
 
     /**
@@ -33,32 +33,14 @@ public class ToDoCommand extends Command {
      * @param ui Ui object created for the Duke object.
      * @param storage Storage object used by the Duke object for file operations.
      * @return String containing the reply for successful creation of ToDo task.
-     * @throws DukeException If the todo task cannot be created due to invalid inputs.
+     * @throws DukeException If the todo task could not be saved.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-
-        String todoInfo = this.retrieveTodoInfo();
-        Task todo = new Todo(todoInfo.trim());
+        Task todo = new Todo(this.todoDescription);
         tasks.addTask(todo);
-        assert !todoInfo.isBlank() : "todo description cannot be empty";
         storage.saveToFile(tasks);
         return ui.showNewTask(todo, tasks.getListSize());
-    }
-
-    /**
-     * Retrieves the description of the todo task.
-     *
-     * @return String containing the todo description.
-     * @throws InvalidTaskException If the todo description is missing.
-     */
-    private String retrieveTodoInfo() throws DukeException {
-        if (this.parsedCommand.length == 0) {
-            String error = "Your todo task description is empty. The task cannot be created.";
-            throw new InvalidTaskException(error);
-        }
-        String todoInfo = this.parsedCommand[1];
-        return todoInfo;
     }
 
     /**

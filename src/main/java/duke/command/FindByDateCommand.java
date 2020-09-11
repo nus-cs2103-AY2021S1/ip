@@ -20,16 +20,17 @@ import duke.task.TaskList;
  */
 public class FindByDateCommand extends Command {
 
-    /** Parsed commands containing the search date. */
-    private final String[] parsedCommand;
+    /** String containing the search date. */
+    private final String searchDate;
 
     /**
      * Creates and initialises a new FindByDateCommand object.
      *
-     * @param parsedCommand String array that contains the search date input.
+     * @param searchDate String containing the search date.
      */
-    public FindByDateCommand(String[] parsedCommand) {
-        this.parsedCommand = parsedCommand;
+    public FindByDateCommand(String searchDate) {
+        this.searchDate = searchDate;
+        assert !searchDate.isBlank() : "search date cannot be empty";
     }
 
     /**
@@ -45,10 +46,8 @@ public class FindByDateCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            String date = parsedCommand[1].trim();
-            assert !date.isBlank() : "search date cannot be empty";
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
-            LocalDate dateToSearch = LocalDate.parse(date, dateFormatter);
+            LocalDate dateToSearch = LocalDate.parse(this.searchDate, dateFormatter);
             Predicate<Task> searchDateFilter = task -> {
                 return task.getDate() != null && task.getDate().isEqual(dateToSearch);
             };
@@ -57,9 +56,6 @@ public class FindByDateCommand extends Command {
                     .filter(searchDateFilter)
                     .collect(Collectors.toList());
             return ui.showTaskList(searchResults);
-        } catch (ArrayIndexOutOfBoundsException ex) {
-            String error = "No task date provided. Please input a valid date using the format: 'dd/mm/yyyy' ";
-            throw new InvalidFunctionException(error);
         } catch (DateTimeParseException ex) {
             String error = "The task date format is incorrect. "
                     + "Please input a valid date using the format: 'dd/mm/yyyy'";

@@ -9,7 +9,6 @@ import duke.Storage;
 import duke.Ui;
 import duke.exception.DukeException;
 import duke.exception.InvalidFunctionException;
-import duke.exception.InvalidTaskException;
 import duke.task.Event;
 import duke.task.Task;
 import duke.task.TaskList;
@@ -39,7 +38,7 @@ public class EventCommand extends Command {
      * @param ui Ui object created for the Duke object.
      * @param storage Storage object used by the Duke object for file operations.
      * @return String containing the reply for successful creation of event task.
-     * @throws DukeException If the event task cannot be created due to invalid inputs.
+     * @throws DukeException If the event task could not be saved or created due to invalid inputs.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
@@ -47,14 +46,14 @@ public class EventCommand extends Command {
             DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("d/M/yyyy");
             DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("H:mm");
 
-            String[] eventInfo = retrieveEventInfo();
-            assert !eventInfo[0].isBlank() : "event description cannot be empty";
-            String[] timeStamp = eventInfo[1].split(" ");
+            String description = parsedCommand[0];
+            assert !description.isBlank() : "event description cannot be empty";
+            String[] timeStamp = parsedCommand[1].split(" ");
 
             LocalDate eventDate = LocalDate.parse(timeStamp[0], dateFormatter);
             LocalTime eventTime = LocalTime.parse(timeStamp[1], timeFormatter);
 
-            Task event = new Event(eventInfo[0], eventDate, eventTime);
+            Task event = new Event(description, eventDate, eventTime);
             tasks.addTask(event);
             storage.saveToFile(tasks);
             return ui.showNewTask(event, tasks.getListSize());
@@ -62,38 +61,6 @@ public class EventCommand extends Command {
             String error = "The task date format is incorrect. \n"
                     + "Please input a valid date using the format: 'dd/mm/yyyy hh:mm'. For eg, 10/8/2020 18:00";
             throw new InvalidFunctionException(error);
-        }
-    }
-
-    /**
-     * Retrieves the details of the event task and stores it in an array.
-     *
-     * @return String array containing the event description and event time stamp.
-     * @throws InvalidTaskException If the event information is invalid or is missing arguments.
-     */
-    private String[] retrieveEventInfo() throws InvalidTaskException {
-        try {
-            String[] eventArguments = this.parsedCommand[1].split(" /at ");
-            if (!this.parsedCommand[1].contains(" /at ") && !this.parsedCommand[1].endsWith("/at")) {
-                String error = "Your event task has an incorrect format. The task cannot be created.";
-                throw new InvalidTaskException(error);
-            } else if (this.parsedCommand[1].trim().equals("/at")) {
-                String error = "Your event task is missing a description and time stamp. "
-                        + "The task cannot be created.";
-                throw new InvalidTaskException(error);
-            } else if (this.parsedCommand[1].trim().endsWith("/at")) {
-                String error = "Your event task is missing a time stamp. The task cannot be created.";
-                throw new InvalidTaskException(error);
-            } else if (eventArguments[0].isBlank()) {
-                String error = "Your event task is missing a description. The task cannot be created.";
-                throw new InvalidTaskException(error);
-            }
-            String description = eventArguments[0].trim();
-            String time = eventArguments[1].trim();
-            return new String[]{description, time};
-        } catch (ArrayIndexOutOfBoundsException ex) {
-            String error = "Your event task has missing arguments. The task cannot be created.";
-            throw new InvalidTaskException(error);
         }
     }
 
