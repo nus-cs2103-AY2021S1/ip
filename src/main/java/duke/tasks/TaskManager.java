@@ -10,7 +10,7 @@ import duke.exceptions.DukeIndexException;
 import duke.exceptions.DukeIoException;
 
 /**
- * TaskManager is a class to handle where duke.tasks are CRUD.
+ * TaskManager is a class to handle where Tasks are CRUD.
  */
 public class TaskManager {
     private final List<Task> taskList;
@@ -32,6 +32,7 @@ public class TaskManager {
      * @param isNew Boolean to indicate that the TaskManager is first initialised.
      */
     public TaskManager(String path, boolean isNew) {
+        assert isNew == true : "isNew is to allow for polymorphism for the case where taskmanager is new";
         this.ioParser = new TaskIoParser(path);
         this.taskList = ioParser.loadNewTaskList();
     }
@@ -145,7 +146,6 @@ public class TaskManager {
                         return stringPattern.matcher(task.getDescription()).find();
                     }).map(task -> String.format("\t%d. %s\n", index.get(), task))
                     .reduce("" , (accumulate, next) -> accumulate + next));
-
             if (sb.toString().isEmpty()) {
                 sb.append("\tCannot find a valid task in your list");
             }

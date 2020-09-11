@@ -24,9 +24,12 @@ public class MainWindow extends AnchorPane {
     private GuiHelper guiHelper;
     private Duke duke;
 
-    private final Image USERIMG = new Image(this.getClass().getResourceAsStream("/images/caocao.gif"));
-    private final Image DUKEIMG = new Image(this.getClass().getResourceAsStream("/images/trump.gif"));
+    private final Image userImg = new Image(this.getClass().getResourceAsStream("/images/caocao.gif"));
+    private final Image dukeImg = new Image(this.getClass().getResourceAsStream("/images/trump.gif"));
 
+    /**
+     * Substitute constructor for GUI
+     */
     public void setup() {
         this.guiHelper = new GuiHelper();
         this.duke = new Duke(guiHelper);
@@ -40,11 +43,8 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
-
-
     /**
-     *
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and 
+     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and
      * then appends them to the dialog container. Clears the user input after processing.
      */
     @FXML
@@ -73,11 +73,11 @@ public class MainWindow extends AnchorPane {
     }
 
     private void userMessage(String message) {
-        dialogContainer.getChildren().add(DialogBox.getUserDialog( message , USERIMG));
+        dialogContainer.getChildren().add(DialogBox.getUserDialog(message , userImg));
     }
 
     private void dukeMessage(String message) {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog( message, DUKEIMG));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(message, dukeImg));
     }
 
 }

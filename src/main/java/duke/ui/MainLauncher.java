@@ -1,5 +1,7 @@
 package duke.ui;
 
+import java.io.IOException;
+
 import duke.ui.graphics.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -7,13 +9,12 @@ import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
-import java.io.IOException;
+
 
 /**
  * Main class for GUI
  */
 public class MainLauncher extends Application {
-    
     @Override
     public void start(Stage stage) {
         try {
@@ -28,5 +29,4 @@ public class MainLauncher extends Application {
             e.printStackTrace();
         }
     }
-    
 }

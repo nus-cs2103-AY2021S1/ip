@@ -1,7 +1,7 @@
 package duke;
 
-import duke.ui.MainLauncher;
 import duke.ui.CommandLineInterface;
+import duke.ui.MainLauncher;
 import duke.ui.UserInterface;
 import javafx.application.Application;
 
@@ -19,6 +19,10 @@ public class ChatbotApplication {
         dukeProgram = new Duke(ui);
     }
 
+    /**
+     * Entry point for application
+     * @param args args
+     */
     public static void main(String[] args) {
         //args[0] = "cli";
         if (args.length > 0 && args[0].equals("-cli")) {
