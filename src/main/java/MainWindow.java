@@ -67,6 +67,7 @@ public class MainWindow extends AnchorPane {
     }
 
     private HBox setExitButton() {
+        //Solution below adapted from https://stackoverflow.com/questions/39214586/how-to-align-a-button-right-in-javafx
         HBox hbox = new HBox();
         Pane spacer = new Pane();
         HBox.setHgrow(spacer, Priority.ALWAYS);

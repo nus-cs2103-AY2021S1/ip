@@ -39,6 +39,7 @@ public class DialogBox extends HBox {
         displayPicture.setClip(clip); //convert image to circular
     }
 
+    //Solution below adapted from https://se-education.org/guides/tutorials/javaFx.html
     /**
      * Flips the dialog box such that the ImageView is on the left and text on the right.
      */
