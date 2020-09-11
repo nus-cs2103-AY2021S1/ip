@@ -9,11 +9,22 @@ public abstract class Task {
     protected String description;
     protected char symbol = 'T';
 
+    /**
+     * Constructs a Task with the given description.
+     *
+     * @param description description of the Task
+     */
     public Task(String description) {
         this.description = description;
         this.isCompleted = false;
     }
 
+    /**
+     * Constructs a Task with the given description and completion status
+     *
+     * @param description description of the Task
+     * @param completed whether the Task has been completed
+     */
     public Task(String description, boolean completed) {
         this.description = description;
         this.isCompleted = completed;

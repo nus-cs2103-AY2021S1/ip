@@ -9,12 +9,25 @@ public class Deadline extends Task {
 
     private LocalDateTime dueDate;
 
+    /**
+     * Constructs a new Deadline with the given description and due date.
+     *
+     * @param description description of the Deadline
+     * @param dueDate due date of the Deadline
+     */
     public Deadline(String description, LocalDateTime dueDate) {
         super(description);
         super.symbol = 'D';
         this.dueDate = dueDate;
     }
 
+    /**
+     * Constructs a new Deadline with the given description, due date and completion status.
+     *
+     * @param description description of the Deadline
+     * @param dueDate due date of the Deadline
+     * @param isCompleted whether the Deadline Task has been completed
+     */
     public Deadline(String description, LocalDateTime dueDate, boolean isCompleted) {
         super(description, isCompleted);
         super.symbol = 'D';

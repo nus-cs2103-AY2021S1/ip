@@ -1,13 +1,13 @@
 package duke.command;
 
+import java.util.List;
+
 import duke.storage.DukeStateManager;
 import duke.storage.Storage;
 import duke.task.NumberedTask;
 import duke.task.TaskList;
 import duke.ui.Response;
 import duke.ui.Ui;
-
-import java.util.List;
 
 /**
  * Command for user to view all Tasks created. Created by using "list"

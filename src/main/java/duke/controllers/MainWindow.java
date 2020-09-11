@@ -1,8 +1,11 @@
 package duke.controllers;
 
+import java.io.IOException;
+import java.util.Timer;
+import java.util.TimerTask;
+
 import duke.Duke;
 import duke.ui.Response;
-
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -12,10 +15,6 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-
-import java.io.IOException;
-import java.util.Timer;
-import java.util.TimerTask;
 
 /**
  * Controller for duke.controllers.MainWindow. Provides the layout for the other controls.
@@ -35,6 +34,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/coffee1.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/coffee2.jpg"));
 
+    /**
+     * Constructs a MainWindow and sets it as the controller of MainWindow.fxml.
+     */
     public MainWindow() {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/MainWindow.fxml"));
@@ -46,6 +48,9 @@ public class MainWindow extends AnchorPane {
         }
     }
 
+    /**
+     * Initializes the styling properties of the GUI and binds the necessary event handlers.
+     */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());

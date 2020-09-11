@@ -1,16 +1,16 @@
 package duke.command;
 
-import duke.storage.DukeStateManager;
-import duke.ui.Response;
-import duke.ui.Ui;
-import duke.storage.Storage;
-import duke.exceptions.WrongDateFormatException;
-import duke.parser.DateParser;
-import duke.task.Event;
-import duke.task.TaskList;
-
 import java.io.IOException;
 import java.time.LocalDateTime;
+
+import duke.exceptions.WrongDateFormatException;
+import duke.parser.DateParser;
+import duke.storage.DukeStateManager;
+import duke.storage.Storage;
+import duke.task.Event;
+import duke.task.TaskList;
+import duke.ui.Response;
+import duke.ui.Ui;
 
 /**
  * Command to create a Event Task. Created by using "event description /at DD MMM YYYY hhmm"
@@ -64,8 +64,8 @@ public class EventCommand extends Command {
         if (this == other) {
             return true;
         } else if (other instanceof EventCommand) {
-            return this.description.equals(((EventCommand) other).description) &&
-                    this.dateStr.equals(((EventCommand) other).dateStr);
+            return this.description.equals(((EventCommand) other).description)
+                    && this.dateStr.equals(((EventCommand) other).dateStr);
         } else {
             return false;
         }

@@ -1,14 +1,14 @@
 package duke.command;
 
+import java.io.IOException;
+
+import duke.exceptions.NoSuchTaskException;
 import duke.storage.DukeStateManager;
 import duke.storage.Storage;
 import duke.task.Task;
 import duke.task.TaskList;
 import duke.ui.Response;
 import duke.ui.Ui;
-import duke.exceptions.NoSuchTaskException;
-
-import java.io.IOException;
 
 /**
  * Command to delete a Task. Created by using "delete taskNumber"

@@ -3,8 +3,8 @@ package duke.command;
 import duke.storage.DukeStateManager;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.ui.Ui;
 import duke.ui.Response;
+import duke.ui.Ui;
 
 /**
  * Command for users to exit the app. Created by using "bye".
@@ -40,7 +40,7 @@ public class ByeCommand extends Command {
     public boolean equals(Object other) {
         if (this == other) {
             return true;
-        } else if (other instanceof  ByeCommand) {
+        } else if (other instanceof ByeCommand) {
             return true;
         }
         return false;

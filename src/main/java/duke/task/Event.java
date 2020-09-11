@@ -9,12 +9,25 @@ public class Event extends Task {
 
     private LocalDateTime date;
 
+    /**
+     * Constructs an Event with the given description and date.
+     *
+     * @param description description of the Event
+     * @param date datetime of the Event
+     */
     public Event(String description, LocalDateTime date) {
         super(description);
         super.symbol = 'E';
         this.date = date;
     }
 
+    /**
+     * Constructs an Event with the given description, date and completion status.
+     *
+     * @param description description of the Event
+     * @param date datetime of the Event
+     * @param isCompleted whether the Event is completed
+     */
     public Event(String description, LocalDateTime date, boolean isCompleted) {
         super(description, isCompleted);
         super.symbol = 'E';

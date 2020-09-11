@@ -1,5 +1,7 @@
 package duke;
 
+import java.io.IOException;
+
 import duke.command.Command;
 import duke.exceptions.DukeException;
 import duke.parser.Parser;
@@ -10,14 +12,17 @@ import duke.task.TaskList;
 import duke.ui.Response;
 import duke.ui.Ui;
 
-import java.io.IOException;
-
 public class Duke {
 
     private final Ui ui;
     private final Parser parser;
     private final DukeStateManager dukeStateManager;
 
+    /**
+     * Constructs a new Duke object
+     *
+     * @throws IOException if error accessing storage file
+     */
     public Duke() throws IOException {
         try {
             Storage storage = new Storage();
@@ -31,6 +36,12 @@ public class Duke {
         }
     }
 
+    /**
+     * Creates a Response for the GUI given a user input String
+     *
+     * @param input user entered input into GUI
+     * @return Response containing data for GUI
+     */
     public Response getResponse(String input) {
         try {
             DukeState currentState = dukeStateManager.getCurrentState();

@@ -10,6 +10,12 @@ public class DukeState {
     private TaskList taskList;
     private Storage storage;
 
+    /**
+     * Constructs a new DukeState with the given TaskList and Storage
+     *
+     * @param taskList TaskList containing the Tasks in the app
+     * @param storage Storage to retrieve and update the external storage
+     */
     public DukeState(TaskList taskList, Storage storage) {
         this.taskList = taskList;
         this.storage = storage;

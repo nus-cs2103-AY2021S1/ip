@@ -1,16 +1,15 @@
 package duke.ui;
 
-import duke.task.NumberedTask;
-
-import java.util.Scanner;
 import java.util.List;
+
+import duke.task.NumberedTask;
 
 /**
  * Formats Strings to be sent to the GUI to be displayed.
  */
 public class Ui {
 
-    private final String LINE_SEPARATOR = "***********************";
+    private static final String LINE_SEPARATOR = "***********************";
 
     public Ui() {
 

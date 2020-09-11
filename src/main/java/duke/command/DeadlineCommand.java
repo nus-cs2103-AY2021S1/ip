@@ -1,16 +1,16 @@
 package duke.command;
 
-import duke.storage.DukeStateManager;
-import duke.ui.Response;
-import duke.ui.Ui;
-import duke.storage.Storage;
-import duke.exceptions.WrongDateFormatException;
-import duke.parser.DateParser;
-import duke.task.Deadline;
-import duke.task.TaskList;
-
 import java.io.IOException;
 import java.time.LocalDateTime;
+
+import duke.exceptions.WrongDateFormatException;
+import duke.parser.DateParser;
+import duke.storage.DukeStateManager;
+import duke.storage.Storage;
+import duke.task.Deadline;
+import duke.task.TaskList;
+import duke.ui.Response;
+import duke.ui.Ui;
 
 /**
  * Command to create a Deadline Task. Created by using "deadline description /by DD MMM YYYY hhmm"
@@ -64,8 +64,8 @@ public class DeadlineCommand extends Command {
         if (this == other) {
             return true;
         } else if (other instanceof DeadlineCommand) {
-            return this.description.equals(((DeadlineCommand) other).description) &&
-                    this.dateStr.equals(((DeadlineCommand) other).dateStr);
+            return this.description.equals(((DeadlineCommand) other).description)
+                    && this.dateStr.equals(((DeadlineCommand) other).dateStr);
         } else {
             return false;
         }

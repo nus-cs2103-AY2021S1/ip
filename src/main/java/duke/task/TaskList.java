@@ -1,12 +1,12 @@
 package duke.task;
 
-import duke.storage.Copiable;
-import duke.exceptions.NoSuchTaskException;
-
-import java.util.List;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+
+import duke.exceptions.NoSuchTaskException;
+import duke.storage.Copiable;
 
 /**
  * Contains the user's Tasks while the app is running.

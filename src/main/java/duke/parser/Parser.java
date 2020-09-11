@@ -1,5 +1,9 @@
 package duke.parser;
 
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.Set;
+
 import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeadlineCommand;
@@ -13,10 +17,6 @@ import duke.command.UndoCommand;
 import duke.exceptions.DukeException;
 import duke.exceptions.UnknownCommandException;
 import duke.exceptions.WrongSyntaxException;
-
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.Set;
 
 /**
  * Parse Strings that create Commands.

@@ -1,9 +1,9 @@
 package duke.storage;
 
-import duke.task.Task;
-
 import java.io.IOException;
 import java.util.List;
+
+import duke.task.Task;
 
 /**
  * Manages the state and history of the Duke app.
@@ -14,9 +14,9 @@ public class DukeStateManager {
      * Represents a point in the history of the app
      */
     static class Node {
-        Node next;
-        Node previous;
-        DukeState state;
+        private Node next;
+        private Node previous;
+        private DukeState state;
 
         Node(DukeState state) {
             this.state = state;

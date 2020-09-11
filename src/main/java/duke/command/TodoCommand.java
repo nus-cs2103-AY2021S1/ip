@@ -1,13 +1,13 @@
 package duke.command;
 
+import java.io.IOException;
+
 import duke.storage.DukeStateManager;
 import duke.storage.Storage;
 import duke.task.TaskList;
 import duke.task.Todo;
 import duke.ui.Response;
 import duke.ui.Ui;
-
-import java.io.IOException;
 
 /**
  * Represents a command to create a Todo Task. Created by using "todo description"
