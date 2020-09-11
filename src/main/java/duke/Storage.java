@@ -63,7 +63,7 @@ public class Storage {
 
     public List<Task> getTasks() {
         return tasks;
-    };
+    }
 
     /**
      * Overwrite Duke.txt with the current taskList in data format.
