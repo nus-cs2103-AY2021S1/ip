@@ -1,13 +1,13 @@
 package storage;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.NoSuchElementException;
-import java.util.Scanner;
-import java.util.stream.IntStream;
 
 import mugexception.MugException;
 
@@ -38,8 +38,10 @@ public class UndoStorage {
      */
     public void undo() throws MugException {
         try {
-            Scanner sc = new Scanner(new File(this.undoFilepath));
-            Action undoCommand = Action.valueOf(sc.next());
+            FileReader fr = new FileReader(this.undoFilepath);
+            BufferedReader br = new BufferedReader(fr);
+            Action undoCommand = Action.valueOf(br.readLine());
+            br.close();
             assert(undoCommand == Action.DELETE
                     || undoCommand == Action.ADD
                     || undoCommand == Action.DONE);
@@ -117,23 +119,25 @@ public class UndoStorage {
         File newFile = new File(tempFile);
 
         try {
-            FileWriter undoFw = new FileWriter(tempFile, true);
-            BufferedWriter undoBw = new BufferedWriter(undoFw);
-            PrintWriter undoPw = new PrintWriter(undoBw);
-            // read undo.txt
-            Scanner undoSc = new Scanner(new File(filepath));
-            undoSc.useDelimiter("[\n]");
+            // writer
+            FileWriter fw = new FileWriter(tempFile, true);
+            BufferedWriter bw = new BufferedWriter(fw);
+            PrintWriter pw = new PrintWriter(bw);
+            // undo.txt reader
+            FileReader fr = new FileReader(filepath);
+            BufferedReader br = new BufferedReader(fr);
             // remove the first three
-            undoSc.next();
-            undoSc.next();
-            undoSc.next();
+            br.readLine();
+            br.readLine();
+            br.readLine();
             // copy back the rest
-            while (undoSc.hasNext()) {
-                undoPw.println(undoSc.next());
+            String line;
+            while ((line = br.readLine()) != null) {
+                pw.println(line);
             }
-            undoSc.close();
-            undoPw.flush();
-            undoPw.close();
+            br.close();
+            pw.flush();
+            pw.close();
             // rename file
             oldFile.delete();
             File renameFile = new File(filepath);
@@ -155,40 +159,43 @@ public class UndoStorage {
      */
     private void writeFile(String mugFilepath, String undoFilepath,
                            boolean isDelete, boolean isDone) throws IOException, MugException {
-        String tempFile = "temp.txt";
+        String tempFile = "writeTemp.txt";
         File oldFile = new File(mugFilepath);
         File newFile = new File(tempFile);
         try {
-            // write mug file
+            // mug.txt writer
             FileWriter mugFw = new FileWriter(tempFile, true);
             BufferedWriter mugBw = new BufferedWriter(mugFw);
             PrintWriter mugPw = new PrintWriter(mugBw);
-            // read undo.txt
-            Scanner undoSc = new Scanner(new File(undoFilepath));
-            undoSc.useDelimiter("[\n]");
-            undoSc.next();
-            int lineIndex = Integer.parseInt(undoSc.next());
-            assert(lineIndex >= 0);
-            // read mug.txt
-            Scanner mugSc = new Scanner(oldFile);
-            mugSc.useDelimiter("[\n]");
+            // undo.txt reader
+            FileReader undoFr = new FileReader(undoFilepath);
+            BufferedReader undoBr = new BufferedReader(undoFr);
+            undoBr.readLine();
+            String taskId = undoBr.readLine();
+            int lineIndex = Integer.parseInt(taskId.trim());
+            assert(lineIndex > 0);
+            // mug.txt reader
+            FileReader mugFr = new FileReader(mugFilepath);
+            BufferedReader mugBr = new BufferedReader(mugFr);
             // add in task
-            IntStream.range(1, lineIndex)
-                    .forEach(line -> mugPw.println(mugSc.next()));
+            for (int i = 1; i < lineIndex; i++) {
+                mugPw.println(mugBr.readLine());
+            }
             if (isDelete || isDone) {
                 // add in changed task
-                mugPw.println(undoSc.next());
+                mugPw.println(undoBr.readLine());
                 if (isDone) {
-                    mugSc.next();
+                    mugBr.readLine();
                 }
                 // continue the rest of the task
-                while (mugSc.hasNext()) {
-                    mugPw.println(mugSc.next());
+                String line;
+                while ((line = mugBr.readLine()) != null) {
+                    mugPw.println(line);
                 }
             }
-            // close scanner
-            undoSc.close();
-            mugSc.close();
+            // close br
+            undoBr.close();
+            mugBr.close();
             // close mug file
             mugPw.flush();
             mugPw.close();

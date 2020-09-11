@@ -63,8 +63,7 @@ public class Storage {
             BufferedReader br = new BufferedReader(fr);
             String line;
 
-            while (br.ready()) {
-                line = br.readLine();
+            while ((line = br.readLine()) != null) {
                 String[] newLine = line.split("[|]");
                 assert(newLine.length <= 4 && newLine.length > 0);
                 Command command = Validator.command(newLine[0]);
@@ -80,7 +79,7 @@ public class Storage {
                     taskList.add(new Event(newLine[2], date, hasDone));
                 }
             }
-
+            br.close();
         } catch (IOException | MugException ex) {
             System.out.println("WARNING: " + ex.getMessage() + " :WARNING");
         } catch (ArrayIndexOutOfBoundsException ex) {
@@ -130,13 +129,15 @@ public class Storage {
             }
             pw.flush();
             pw.close();
+            // line counter
             FileReader fr = new FileReader(this.filepath);
             BufferedReader br = new BufferedReader(fr);
             int lineNum = 0;
-            while (br.ready()) {
-                br.readLine();
+            String line;
+            while ((line = br.readLine()) != null) {
                 lineNum++;
             }
+            br.close();
             writeUndoRecord(Action.ADD, "", lineNum);
         } catch (MugException ex) {
             throw new MugException(ex.getMessage());
@@ -152,21 +153,22 @@ public class Storage {
      * @throws MugException When MugException cause by other method.
      */
     public void deleteTask(int taskId) throws MugException {
-        String tempFile = "temp.txt";
+        String tempFile = "deleteTemp.txt";
         File oldFile = new File(this.filepath);
         File newFile = new File(tempFile);
         int taskTrack = 0;
         String line;
 
         try {
+            // writer
             FileWriter fw = new FileWriter(tempFile, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
+            // reader
             FileReader fr = new FileReader(this.filepath);
             BufferedReader br = new BufferedReader(fr);
 
-            while (br.ready()) {
-                line = br.readLine();
+            while ((line = br.readLine()) != null) {
                 taskTrack++;
                 if (taskTrack != taskId) {
                     pw.println(line);
@@ -193,21 +195,22 @@ public class Storage {
      * @throws MugException When MugException cause by other method.
      */
     public void doneTask(int taskId) throws MugException {
-        String tempFile = "temp.txt";
+        String tempFile = "doneTemp.txt";
         File oldFile = new File(this.filepath);
         File newFile = new File(tempFile);
         int taskTrack = 0;
         String line;
 
         try {
+            // writer
             FileWriter fw = new FileWriter(tempFile, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
+            // reader
             FileReader fr = new FileReader(this.filepath);
             BufferedReader br = new BufferedReader(fr);
 
-            while (br.ready()) {
-                line = br.readLine();
+            while ((line = br.readLine()) != null) {
                 taskTrack++;
                 if (taskTrack != taskId) {
                     pw.println(line);
@@ -221,6 +224,7 @@ public class Storage {
             br.close();
             pw.flush();
             pw.close();
+            // rename
             oldFile.delete();
             File renameFile = new File(this.filepath);
             newFile.renameTo(renameFile);
@@ -242,7 +246,8 @@ public class Storage {
         File newFile = new File(tempFile);
 
         try {
-            FileWriter fw = new FileWriter(tempFile, true);
+            // writer
+            FileWriter fw = new FileWriter(newFile, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
             // read undo.txt
@@ -251,8 +256,10 @@ public class Storage {
             pw.println(task);
             pw.println(taskId);
             pw.println(info);
-            while (br.ready()) {
-                pw.println(br.readLine());
+
+            String line;
+            while ((line = br.readLine()) != null) {
+                pw.println(line);
             }
             //close reader and writer
             br.close();
