@@ -1,7 +1,7 @@
 package duke.utils;
 
 import java.text.SimpleDateFormat;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Date;
 import java.util.regex.Matcher;
@@ -38,10 +38,10 @@ public class UtilFunction {
      */
     public static String formatDateToStandard(String dateString) throws DateFormatException {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM d yyyy");
-        LocalDateTime ldt = null;
+        LocalDate ldt;
         for (DateFormat format: Constants.DATE_FORMAT_LIST) {
             if (format.check(dateString)) {
-                ldt = format.formatToStandard(dateString);
+                ldt = format.mapToLocalDate(dateString);
                 String standardDate = formatter.format(ldt);
                 return standardDate;
             }

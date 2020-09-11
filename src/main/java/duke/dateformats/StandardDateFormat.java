@@ -1,18 +1,14 @@
 package duke.dateformats;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 public class StandardDateFormat implements DateFormat {
-    private final String format = "yyyy-mm-dd";
 
     @Override
     public boolean check(String date) {
         try {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
-            LocalDate ld = LocalDate.parse(date, formatter);
+            LocalDate ld = LocalDate.parse(date);
             return true;
         } catch (DateTimeParseException e) {
             return false;
@@ -20,9 +16,14 @@ public class StandardDateFormat implements DateFormat {
     }
 
     @Override
-    public LocalDateTime formatToStandard(String date) {
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern(format);
-        LocalDateTime ldt = LocalDateTime.parse(date, formatter);
-        return ldt;
+    public LocalDate mapToLocalDate(String date) {
+        try {
+            LocalDate ld = LocalDate.parse(date);
+            return ld;
+        } catch (DateTimeParseException e) {
+            assert false : "should check the date format before you map";
+            return null;
+        }
+
     }
 }

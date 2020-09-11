@@ -1,8 +1,8 @@
 package duke.dateformats;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 public interface DateFormat {
     boolean check(String date);
-    LocalDateTime formatToStandard(String date);
+    LocalDate mapToLocalDate(String date);
 }
