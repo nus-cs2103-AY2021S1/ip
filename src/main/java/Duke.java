@@ -103,7 +103,11 @@ public class Duke extends Application {
             newTask = new Task("E", todo, date, false);
         }
 
-        db.addToDoItem(newTask);
+        boolean hasDuplicates = db.addToDoItem(newTask);
+
+        if (hasDuplicates) {
+            showDuplicateTaskMessage(newTask);
+        }
 
         return newTask;
     }
@@ -311,7 +315,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Shows welcome message
+     * Shows welcome message.
      */
     public void showWelcomeMessage() {
         Label welcomeText = new Label("Hello! I'm Duke\nWhat can I do for you?");
@@ -319,7 +323,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Shows bye message
+     * Shows bye message.
      */
     public void showByeMessage() {
         Label welcomeText = new Label("Bye. Hope to see you again soon!");
@@ -327,7 +331,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Shows done message
+     * Shows done message.
      */
     public void showDoneMessage(Task task) {
         Label welcomeText = new Label(String.format("Nice! I've marked this task as done:\n%s", task));
@@ -335,7 +339,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Shows delete message
+     * Shows delete message.
      */
     public void showDeleteMessage(Task task) {
         Label deleteText = new Label(String.format("Noted. I've removed this task:\n%s", task));
@@ -343,7 +347,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Shows number of list items
+     * Shows number of list items.
      */
     public void showtotalItemsDescription() {
         String totalItemsDescription = getTotalItemsDescription();
@@ -352,7 +356,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Shows list items
+     * Shows list items.
      */
     public void showListItems(List<Task> lst, String action) {
         Label listItemsText = new Label(ui.formatListItems(lst, action));
@@ -360,7 +364,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Shows error message
+     * Shows error message.
      */
     public void showErrorMessage() {
         Label listItemsText = new Label("☹ OOPS!!! The description of a todo cannot be empty.");
@@ -368,7 +372,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Shows exception message
+     * Shows exception message.
      */
     public void showExceptionMessage(Exception e) {
         Label exceptionText = new Label(String.format("Error: %s", e.getMessage()));
@@ -376,7 +380,7 @@ public class Duke extends Application {
     }
 
     /**
-     * Shows add message
+     * Shows add message.
      */
     public void showAddMessage(Task task) {
         Label listItemsText = new Label(String.format("Got it. I've added this task:\n%s", task));
@@ -384,10 +388,18 @@ public class Duke extends Application {
     }
 
     /**
-     * Shows wrong input message
+     * Shows wrong input message.
      */
     public void showWrongInputMessage() {
         Label listItemsText = new Label("☹ OOPS!!! I'm sorry, but I don't know what that means :-(");
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(listItemsText, new ImageView(duke)));
+    }
+
+    /**
+     * Shows duplicate task message.
+     */
+    public void showDuplicateTaskMessage(Task task) {
+        Label listItemsText = new Label(String.format("Duplicate task detected: %s", task));
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(listItemsText, new ImageView(duke)));
     }
 
