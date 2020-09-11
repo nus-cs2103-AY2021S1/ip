@@ -1,5 +1,8 @@
 package duke.exception;
 
+/**
+ * Thrown when the task Id entered by the user does not exist in the list of tasks.
+ */
 public class InvalidTaskIdException extends DukeException {
 
     public InvalidTaskIdException(String id) {
