@@ -29,6 +29,10 @@ Example of usage:
 
 Date must be in the format of (yyyy-mm-dd).
 
+### `list`
+
+Displays your task list.
+
 ### `done`
 
 Marks a specific task as done.
@@ -52,4 +56,12 @@ Finds a specific task.
 Example of usage: 
 
 `find book`
+
+### `help`
+
+Displays a help panel.
+
+### `bye`
+
+Ends the program.
 
