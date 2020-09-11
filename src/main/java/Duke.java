@@ -82,7 +82,7 @@ public class Duke {
             return ui.addTask() + work.toString() + "\n" + ui.showNumberOfTasks(taskList.getTasks());
         }
 
-        case "find": {
+        case "find": {  // finds the task even if the keyword matches the task partially
             ArrayList<Task> findTasks = new ArrayList<>();
             for (Task task : taskList.getTasks()) {
                 if (task.getDescription().contains(last)) {
