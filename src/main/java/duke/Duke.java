@@ -21,6 +21,7 @@ public class Duke {
         CLEAR,
         HELLO,
         FIND,
+        FIXEDTASK,
     }
     private Storage storage;
     private TaskList tasks;
@@ -99,6 +100,11 @@ public class Duke {
                 taskToUpdate = tasks.removeTask(Parser.getIndex(userInput));
                 storage.saveTask(tasks);
                 return Ui.updateTaskText("removed", taskToUpdate, tasks.length());
+            case "fixedtask":
+                description = Parser.stringSplit(details, " /for ");
+                taskToUpdate = tasks.addTask(new FixedDurationTask(description[0], description[1]));
+                storage.saveTask(tasks);
+                return Ui.updateTaskText("added", taskToUpdate, tasks.length());
             case "clear":
                 return ("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             case "hello":
