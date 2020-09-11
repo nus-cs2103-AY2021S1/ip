@@ -12,6 +12,14 @@ public class Event extends Task {
     private LocalTime startTime;
     private LocalTime endTime;
 
+    /**
+     * Create an event task
+     * @param description of task
+     * @param eventDate of task
+     * @param startTime of task
+     * @param endTime of task
+     * @param notes of task
+     */
     public Event(String description, LocalDate eventDate, LocalTime startTime,
                  LocalTime endTime, Optional<String> notes) {
         super(description, notes.map(note -> "|Note: " + note));

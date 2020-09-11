@@ -11,6 +11,13 @@ public class Deadline extends Task {
     private LocalDate deadlineDate;
     private LocalTime deadlineTime;
 
+    /**
+     * Create a deadline task
+     * @param description of task
+     * @param deadlineDate of task
+     * @param deadlineTime of task
+     * @param notes of task
+     */
     public Deadline(String description, LocalDate deadlineDate,
                     LocalTime deadlineTime, Optional<String> notes) {
         super(description, notes.map(note -> "|Note: " + note));

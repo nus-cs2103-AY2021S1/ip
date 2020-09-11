@@ -64,8 +64,8 @@ public class Storage {
         switch (taskComponent[0]) {
         case "T":
             boolean hasTodoNotes = taskComponent.length == 4;
-            Task todoTask = new Todo(taskComponent[2],
-                    (hasTodoNotes)? Optional.of(taskComponent[3].replaceFirst("Note: ","")) : Optional.empty());
+            Task todoTask = new Todo(taskComponent[2], (
+                    hasTodoNotes) ? Optional.of(taskComponent[3].replaceFirst("Note: ", "")) : Optional.empty());
             if (taskComponent[1].equals("\u2713")) {
                 todoTask.markAsDone();
             }
@@ -74,8 +74,8 @@ public class Storage {
             boolean hasDeadlineNotes = taskComponent.length == 6;
             Task deadlineTask = new Deadline(taskComponent[2],
                     LocalDate.parse(taskComponent[3], DateTimeFormatter.ofPattern("dd MMM yyyy")),
-                    LocalTime.parse(taskComponent[4], DateTimeFormatter.ofPattern("hh.mma")),
-                    (hasDeadlineNotes)? Optional.of(taskComponent[5].replaceFirst("Note: ", "")): Optional.empty());
+                    LocalTime.parse(taskComponent[4], DateTimeFormatter.ofPattern("hh.mma")), (
+                    hasDeadlineNotes) ? Optional.of(taskComponent[5].replaceFirst("Note: ", "")) : Optional.empty());
             if (taskComponent[1].equals("\u2713")) {
                 deadlineTask.markAsDone();
             }
@@ -85,8 +85,8 @@ public class Storage {
             Task eventTask = new Event(taskComponent[2],
                     LocalDate.parse(taskComponent[3], DateTimeFormatter.ofPattern("dd MMM yyyy")),
                     LocalTime.parse(taskComponent[4].split(" to ")[0], DateTimeFormatter.ofPattern("hh.mma")),
-                    LocalTime.parse(taskComponent[4].split(" to ")[1], DateTimeFormatter.ofPattern("hh.mma")),
-                    (hasEventNotes)? Optional.of(taskComponent[5].replaceFirst("Note: ", "")) : Optional.empty());
+                    LocalTime.parse(taskComponent[4].split(" to ")[1], DateTimeFormatter.ofPattern("hh.mma")), (
+                    hasEventNotes) ? Optional.of(taskComponent[5].replaceFirst("Note: ", "")) : Optional.empty());
             if (taskComponent[1].equals("\u2713")) {
                 eventTask.markAsDone();
             }

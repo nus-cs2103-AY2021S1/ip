@@ -26,6 +26,9 @@ public class MainWindow extends AnchorPane {
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/nobita.png"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/doraemon.png"));
 
+    /**
+     * Initialises the stage with a welcome message.
+     */
     @FXML
     public void initialize() {
         assert(userImage != null);
@@ -62,7 +65,7 @@ public class MainWindow extends AnchorPane {
 
     private Button setExitButton() {
         Button exitButton = new Button("Exit");
-        exitButton.setPadding(new Insets(10,10,10,10));
+        exitButton.setPadding(new Insets(10, 10, 10, 10));
         exitButton.setOnAction(e -> closeStage());
         return exitButton;
     }

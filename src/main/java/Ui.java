@@ -51,7 +51,8 @@ public class Ui {
     public String showRequiredTasks(List<Task> taskList) {
         if (taskList.size() > 0) {
             StringBuilder reply = new StringBuilder();
-            reply.append("I have matched your queries as below. Don't forget to complete them if not your mom will scold you!\n");
+            reply.append("I have matched your queries as below. "
+                    + "Don't forget to complete them if not your mom will scold you!\n");
             for (int i = 0; i < taskList.size(); i++) {
                 reply.append((i + 1) + ". " + taskList.get(i) + (i == taskList.size() - 1 ? "" : "\n"));
             }

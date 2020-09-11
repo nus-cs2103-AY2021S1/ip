@@ -86,8 +86,8 @@ public class Parser {
             String[] detectNotes = command.split("/");
             boolean hasNotes = detectNotes.length > 1;
             if (hasNotes) {
-                return new String[]{cmd[0], detectNotes[0].replaceFirst(cmd[0] + " ", "")
-                        , detectNotes[1]};
+                return new String[]{cmd[0], detectNotes[0].replaceFirst(cmd[0] + " ", ""),
+                        detectNotes[1]};
             } else {
                 return new String[]{cmd[0], detectNotes[0].replaceFirst(cmd[0] + " ", "")};
             }
@@ -116,11 +116,10 @@ public class Parser {
                 LocalTime.parse(time, DateTimeFormatter.ofPattern("HHmm"));
                 boolean hasNotes = splitBySlash.length > 2;
                 if (hasNotes) {
-                    return new String[]{cmd[0], splitBySlash[0].replaceFirst(cmd[0] + " ", ""),
-                            date, time, splitBySlash[2]};
+                    return new String[] {cmd[0], splitBySlash[0].replaceFirst(cmd[0] + " ", ""),
+                        date, time, splitBySlash[2]};
                 } else {
-                    return new String[]{cmd[0], splitBySlash[0].replaceFirst(cmd[0] + " ", ""),
-                            date, time};
+                    return new String[]{cmd[0], splitBySlash[0].replaceFirst(cmd[0] + " ", ""), date, time};
                 }
             } catch (DateTimeParseException | InvalidDateAndTimeException e) {
                 throw new InvalidDateAndTimeException();
@@ -166,11 +165,11 @@ public class Parser {
                 LocalTime.parse(endTime, DateTimeFormatter.ofPattern("HHmm"));
                 boolean hasNotes = splitBySlash.length > 2;
                 if (hasNotes) {
-                    return new String[]{cmd[0], splitBySlash[0].replaceFirst(cmd[0] + " ", ""),
-                            date, startTime, endTime, splitBySlash[2]};
+                    return new String[] {cmd[0], splitBySlash[0].replaceFirst(cmd[0] + " ", ""),
+                        date, startTime, endTime, splitBySlash[2]};
                 } else {
-                    return new String[]{cmd[0], splitBySlash[0].replaceFirst(cmd[0] + " ", ""),
-                            date, startTime, endTime};
+                    return new String[] {cmd[0], splitBySlash[0].replaceFirst(cmd[0] + " ", ""),
+                        date, startTime, endTime};
                 }
             } catch (DateTimeParseException | InvalidDateAndTimeException e) {
                 throw new InvalidDateAndTimeException();
