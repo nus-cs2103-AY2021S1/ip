@@ -39,7 +39,7 @@ public class Parser {
         if (message.contains("todo")) {
             try {
                 String activity = message.substring(5);
-                ToDoTask newTask = new ToDoTask(activity, TaskSymbol.TODO);
+                TodoTask newTask = new TodoTask(activity, TaskSymbol.TODO);
                 response = list.addToList(newTask);
             } catch (Exception e) {
                 WillyException error = new WillyException(NO_TASK_MESSAGE + TODO_FORMAT);
@@ -89,7 +89,7 @@ public class Parser {
         if (message.contains("todo")) {
             try {
                 String activity = message.substring(5);
-                ToDoTask newTask = new ToDoTask(activity, TaskSymbol.TODO);
+                TodoTask newTask = new TodoTask(activity, TaskSymbol.TODO);
                 response = list.updateTask(taskNum, newTask);
             } catch (Exception e) {
                 WillyException error = new WillyException(NO_TASK_MESSAGE + TODO_FORMAT);
@@ -175,10 +175,8 @@ public class Parser {
             assert message.length() > 5 : "Please insert a task for us to update the list";
             try {
                 int taskNum = Integer.parseInt(message.substring(5, 6));
-                System.out.println(taskNum);
                 int separatorIndex = message.indexOf(">");
                 String taskMessage = message.substring(separatorIndex + 2);
-                System.out.println(taskNum + " task: " + taskMessage);
                 response = taskEditor(taskNum, taskMessage);
             } catch(Exception e) {
                 WillyException error = new WillyException(EDIT_FORMAT);
