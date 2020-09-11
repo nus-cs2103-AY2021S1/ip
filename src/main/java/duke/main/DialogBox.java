@@ -1,7 +1,6 @@
 package duke.main;
 
 import java.io.IOException;
-import java.util.Collections;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -40,7 +39,7 @@ public class DialogBox extends HBox {
     }
 
     private void setBackgroundColor(Color color) {
-        this.setBackground(new Background(new BackgroundFill(color,null, null)));
+        this.setBackground(new Background(new BackgroundFill(color, null, null)));
     }
 
     private String getText() {

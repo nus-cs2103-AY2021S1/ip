@@ -9,6 +9,12 @@ repositories {
     mavenCentral()
 }
 
+jar {
+    manifest {
+        attributes 'Main-Class': 'duke.main.Launcher'
+    }
+}
+
 dependencies {
     String javaFxVersion = '11'
     testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'

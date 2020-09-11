@@ -3,7 +3,7 @@ package duke.main;
 import java.io.IOException;
 
 import duke.exception.InvalidCommandException;
-import duke.task.*;
+import duke.task.TaskList;
 import duke.exception.DukeException;
 
 
@@ -48,6 +48,11 @@ public class Duke {
         }
     }
 
+    /**
+     * Gets the Duke's response with with respect to user's input.
+     * @param userInput The input from the user.
+     * @return Duke's response to be displayed through the GUI.
+     */
     public String getResponse(String userInput) {
         StringBuilder response = new StringBuilder();
         try {

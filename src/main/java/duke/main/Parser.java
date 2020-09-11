@@ -2,7 +2,14 @@ package duke.main;
 
 import java.util.Scanner;
 
-import duke.exception.*;
+import duke.exception.EmptyDateException;
+import duke.exception.EmptyTaskException;
+import duke.exception.InvalidCommandException;
+import duke.exception.InvalidDateFormatException;
+import duke.exception.InvalidIndexException;
+import duke.exception.InvalidPriorityException;
+
+
 
 /**
  * Reads and parses the user input.
@@ -132,13 +139,13 @@ public class Parser {
         return priority.equals("high") || priority.equals("medium") || priority.equals("low");
     }
 
-    public static String getPriority(String userInput) throws InvalidPriority {
+    public static String getPriority(String userInput) throws InvalidPriorityException {
         String[] components = userInput.split("/priority ");
         String priority = components[1];
         if (isValidPriority(priority)) {
             return priority;
         } else {
-            throw new InvalidPriority();
+            throw new InvalidPriorityException();
         }
     }
 
