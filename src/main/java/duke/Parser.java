@@ -8,6 +8,7 @@ import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.ToDoCommand;
+import duke.exception.DukeException;
 
 /**
  * This class is responsible for parsing the input provided by the user into the respective commands they represent
@@ -16,6 +17,7 @@ public class Parser {
 
     /**
      * Produces a Command object corresponding to the input provided. Throws an exception if invalid input is provided.
+     *
      * @param input raw string form of a command
      * @return Command object representing the command in the input
      * @throws DukeException If the input is not a valid command

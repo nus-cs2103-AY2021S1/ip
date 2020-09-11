@@ -22,6 +22,7 @@ public class Ui {
 
     /**
      * Get's bot's greeting as a String
+     *
      * @return String representing bot's opening greeting
      */
     public String getGreetingResponseAsString() {
@@ -39,6 +40,7 @@ public class Ui {
 
     /**
      * Get's bot's response to an exit command, as a String
+     *
      * @return String representing bot's response
      */
     public String getExitResponseAsString() {
@@ -49,6 +51,7 @@ public class Ui {
 
     /**
      * Prints out tasks that have been found from a find query
+     *
      * @param tasks TaskList containing found Tasks
      */
     public void printFindResult(TaskList tasks) {
@@ -57,6 +60,7 @@ public class Ui {
 
     /**
      * Get's bot's response to a Find query, as a String
+     *
      * @param tasks TaskList containing all the current tasks
      * @return String representing bot's response
      */
@@ -66,6 +70,7 @@ public class Ui {
 
     /**
      * Prints out all items in the specified TaskList
+     *
      * @param tasks TaskList consisting of items to be printed
      */
     public void printList(TaskList tasks) {
@@ -74,6 +79,7 @@ public class Ui {
 
     /**
      * Get's the bot's response to a Print list request, as a String
+     *
      * @param tasks A TaskList with all the current tasks
      * @return String representing bot's response
      */
@@ -103,6 +109,7 @@ public class Ui {
 
     /**
      * Get's the bot's response to Completing Task, as a String
+     *
      * @return String representing bot's response
      */
     public String getCompleteTaskResponseAsString() {
@@ -113,6 +120,7 @@ public class Ui {
 
     /**
      * Prints out a string for when the user adds a Task
+     *
      * @param task Task which the user has added
      * @param size Number of items in the TaskList
      */
@@ -122,6 +130,7 @@ public class Ui {
 
     /**
      * Get's the bot's response to adding the Task as a String
+     *
      * @param task Task that is added
      * @param size Number of tasks added thus far
      * @return String representing bot's response
@@ -136,6 +145,7 @@ public class Ui {
 
     /**
      * Prints out a string for when the user deletes a Task
+     *
      * @param removedTask The removed Task
      * @param size Number of items remaining in the TaskList
      */
@@ -145,6 +155,7 @@ public class Ui {
 
     /**
      * Get's bot's response to receving a delete command, as a String
+     *
      * @param removedTask Task to be removed
      * @param size Current number of tasks
      * @return String representing bot's response
@@ -166,6 +177,7 @@ public class Ui {
 
     /**
      * Get's the loading error message as a String
+     *
      * @return String representing laoding error message
      */
     public String getLoadingErrorAsString() {

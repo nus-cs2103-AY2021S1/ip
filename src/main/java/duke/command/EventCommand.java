@@ -1,6 +1,6 @@
 package duke.command;
 
-import duke.DukeException;
+import duke.exception.DukeException;
 import duke.TaskList;
 import duke.Ui;
 import duke.task.Event;
@@ -12,6 +12,7 @@ public class EventCommand extends Command {
 
     /**
      * Object representing Commands that refer to Event tasks
+     *
      * @param taskName Name of Event task
      * @param eventTime String representing time of event
      */

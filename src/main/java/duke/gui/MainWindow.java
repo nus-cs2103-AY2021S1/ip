@@ -3,7 +3,7 @@ package duke.gui;
 import java.io.IOException;
 
 import duke.Duke;
-import duke.DukeException;
+import duke.exception.DukeException;
 import duke.Ui;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;

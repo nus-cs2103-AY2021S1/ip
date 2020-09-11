@@ -1,8 +1,10 @@
 package duke;
+
 import java.io.IOException;
 import java.util.Scanner;
 
 import duke.command.Command;
+import duke.exception.DukeException;
 
 /**
  * The main class for the Duke Chatbot which serves as the entry point for the whole program. The main business logic

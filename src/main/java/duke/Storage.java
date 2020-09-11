@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -23,6 +24,7 @@ public class Storage {
 
     /**
      * Initialises a Storage object that represents the data stored in the file path provided
+     *
      * @param filePath File path containing the location where the data for the program is stored
      * @throws IOException If there is an error in Files operations
      */
@@ -35,6 +37,7 @@ public class Storage {
 
     /**
      * Loads the data in the file into a List for easier manipulation
+     *
      * @return List containing the tasks represented by each line in the data
      * @throws FileNotFoundException If file is not found
      * @throws DukeException If the data contains invalid tasks
@@ -88,6 +91,7 @@ public class Storage {
 
     /**
      * Stores the provided TaskList into the data file
+     *
      * @param tasks TaskList containing the data to be persisted to the hard disk
      * @throws IOException If there is an error in Files operations
      */
