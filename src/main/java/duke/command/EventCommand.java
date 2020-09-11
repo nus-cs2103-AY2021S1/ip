@@ -12,6 +12,7 @@ public class EventCommand extends Command {
 
     /**
      * Object representing Commands that refer to Event tasks
+     *
      * @param taskName Name of Event task
      * @param eventTime String representing time of event
      */
