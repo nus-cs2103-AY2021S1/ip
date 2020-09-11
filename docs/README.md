@@ -119,3 +119,15 @@ Noted. I've removed this task:
     [T][X] read book
     Now you have 3 tasks in the list.
 ```
+
+### `bye` - Exit Duke
+
+Example of usage: 
+
+`bye`
+
+Expected outcome:
+
+```
+Bye. Hope to see you again soon!
+```
