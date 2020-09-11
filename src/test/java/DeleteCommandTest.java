@@ -20,6 +20,12 @@ public class DeleteCommandTest {
             deleteCommand.execute(taskList, ui, input);
         } catch (InvalidTaskIdException e) {
             System.out.println(e);
+        } catch (duke.exception.EmptyDescriptionException e) {
+            e.printStackTrace();
+        } catch (duke.exception.InvalidFormatException e) {
+            e.printStackTrace();
+        } catch (duke.exception.DuplicateException e) {
+            e.printStackTrace();
         }
 
         int after = taskList.taskSize();

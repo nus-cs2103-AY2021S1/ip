@@ -20,6 +20,12 @@ public class TodoCommandTest {
             todoCommand.execute(taskList, ui, input);
         } catch (EmptyDescriptionException e) {
             e.printStackTrace();
+        } catch (InvalidTaskIdException e) {
+            e.printStackTrace();
+        } catch (duke.exception.InvalidFormatException e) {
+            e.printStackTrace();
+        } catch (duke.exception.DuplicateException e) {
+            e.printStackTrace();
         }
         Task lastTaskAdded = taskList.getTasks().get(taskList.taskSize() - 1);
         assertEquals(lastTaskAdded.toString(), "[✗][T] Laundry");

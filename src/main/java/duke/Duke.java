@@ -2,7 +2,6 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
-import java.util.Scanner;
 
 /**
  * Represents the task manager program.

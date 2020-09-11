@@ -21,6 +21,10 @@ public class DeadlineCommandTest {
             deadlineCommand.execute(taskList, ui, input);
         } catch (EmptyDescriptionException | InvalidFormatException e) {
             e.printStackTrace();
+        } catch (InvalidTaskIdException e) {
+            e.printStackTrace();
+        } catch (duke.exception.DuplicateException e) {
+            e.printStackTrace();
         }
         Task lastTaskAdded = taskList.getTasks().get(taskList.taskSize() - 1);
         assertEquals(lastTaskAdded.toString(), "[✗][D] Laundry (by: Dec 30 2020)");
