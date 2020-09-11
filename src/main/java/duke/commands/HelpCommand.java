@@ -11,7 +11,6 @@ import static duke.util.Keyword.KEYWORD_HELP_FIND;
 import static duke.util.Keyword.KEYWORD_HELP_LIST;
 import static duke.util.Keyword.KEYWORD_HELP_REMIND;
 import static duke.util.Keyword.KEYWORD_HELP_TODO;
-import static duke.util.Keyword.KEYWORD_HELP_UNSURE;
 
 import duke.exception.InvalidFormatHelpException;
 import duke.storage.Storage;

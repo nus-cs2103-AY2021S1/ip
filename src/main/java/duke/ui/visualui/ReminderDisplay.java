@@ -184,7 +184,8 @@ public class ReminderDisplay extends VBox {
         Text[] dateText;
         if (taskDetails.length == 4) {
             String[] dateTimeArray = taskDetails[3].split(TEXT_COMMA);
-            dateText = createText(TEXT_DATE, dateTimeArray[0] + TEXT_COMMA + dateTimeArray[1]);
+            String newTextDate = shortenTextDate(dateTimeArray[0]);
+            dateText = createText(TEXT_DATE, newTextDate + TEXT_COMMA + dateTimeArray[1]);
         } else {
             dateText = createText(TEXT_DATE, TEXT_EMPTY);
         }
@@ -206,5 +207,42 @@ public class ReminderDisplay extends VBox {
             timeText = createText(TEXT_TIME, TEXT_EMPTY);
         }
         return timeText;
+    }
+
+    /**
+     * Returns a shorten name for the day.
+     *
+     * @param textDate the day of the task.
+     * @return A shorten common abbreviation name for the day.
+     */
+    private String shortenTextDate(String textDate) {
+        String newTextDate;
+        switch(textDate.toLowerCase()) {
+        case "monday":
+            newTextDate = "Mon";
+            break;
+        case "tuesday":
+            newTextDate = "Tues";
+            break;
+        case "wednesday":
+            newTextDate = "Wed";
+            break;
+        case "thursday":
+            newTextDate = "Thur";
+            break;
+        case "friday":
+            newTextDate = "Fri";
+            break;
+        case "saturday":
+            newTextDate = "Sat";
+            break;
+        case "sunday":
+            newTextDate = "Sun";
+            break;
+        default:
+            assert false;
+            return null;
+        }
+        return newTextDate;
     }
 }
