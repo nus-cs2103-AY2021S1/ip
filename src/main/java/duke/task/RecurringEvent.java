@@ -61,28 +61,36 @@ public class RecurringEvent extends Event {
             RecurringEvent recurringEvent = new RecurringEvent(details[2], details[3], details[4]);
             boolean isDone = details[1].equals(SYMBOL_DONE);
 
-            LocalDateTime currentTime = LocalDateTime.now();
-            LocalDateTime startTime = recurringEvent.getStartTiming();
-            LocalDateTime endTime = recurringEvent.getEndTiming();
-            boolean isOutdated = endTime.compareTo(currentTime) < 0;
-            while (isOutdated) {
-                FastForwarder fastForwarder = recurringEvent.fastForwarder;
-                startTime = fastForwarder.apply(startTime);
-                endTime = fastForwarder.apply(endTime);
-                isOutdated = endTime.compareTo(currentTime) < 0;
-            }
+            RecurringEvent updatedRecurringEvent = updateRecurringEvent(recurringEvent, isDone);
 
-            boolean isUpdated = endTime != recurringEvent.getEndTiming();
-            if (isUpdated) {
-                recurringEvent = new RecurringEvent(details[2], startTime, endTime, details[4]);
-            }
-            if (!isUpdated && isDone) {
-                recurringEvent.markDone();
-            }
-            return recurringEvent;
+            return updatedRecurringEvent;
         } catch (DukeException e) {
             throw new InvalidSaveException("Invalid datetime format in save!");
         }
+    }
+
+    private static RecurringEvent updateRecurringEvent(RecurringEvent recurringEvent, boolean isDone) {
+        LocalDateTime currentTime = LocalDateTime.now();
+        LocalDateTime startTime = recurringEvent.getStartTiming();
+        LocalDateTime endTime = recurringEvent.getEndTiming();
+        boolean isOutdated = endTime.compareTo(currentTime) < 0;
+        while (isOutdated) {
+            FastForwarder fastForwarder = recurringEvent.fastForwarder;
+            startTime = fastForwarder.apply(startTime);
+            endTime = fastForwarder.apply(endTime);
+            isOutdated = endTime.compareTo(currentTime) < 0;
+        }
+
+        boolean isUpdated = endTime != recurringEvent.getEndTiming();
+        if (isUpdated) {
+            recurringEvent = new RecurringEvent(recurringEvent.getTaskDescription(),
+                    startTime, endTime, recurringEvent.recurringDetails);
+        }
+        if (!isUpdated && isDone) {
+            recurringEvent.markDone();
+        }
+
+        return recurringEvent;
     }
 
 
