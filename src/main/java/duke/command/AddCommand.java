@@ -33,18 +33,21 @@ public class AddCommand extends Command {
     public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         switch (commandType) {
         case TODO:
+            assert details.length == 1;
             ToDo toDo = new ToDo(details[0]);
             tasks.addTask(toDo);
             storage.addLine(toDo.toFileString());
             ui.showAddedTask(toDo.toString(), tasks.getNumTasks());
             break;
         case DEADLINE:
+            assert details.length == 2;
             Deadline deadline = new Deadline(details[0], details[1]);
             tasks.addTask(deadline);
             storage.addLine(deadline.toFileString());
             ui.showAddedTask(deadline.toString(), tasks.getNumTasks());
             break;
         case EVENT:
+            assert details.length == 2;
             Event event = new Event(details[0], details[1]);
             tasks.addTask(event);
             storage.addLine(event.toFileString());
