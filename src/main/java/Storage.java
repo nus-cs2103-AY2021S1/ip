@@ -38,7 +38,7 @@ public class Storage {
      * @param tasks List of tasks.
      * @throws IOException If an error occurred when saving to disk.
      */
-    void updateMemory(ArrayList<Task> tasks) throws IOException {
+    void saveTaskList(ArrayList<Task> tasks) throws IOException {
         StringBuilder taskListString = new StringBuilder();
         for (Task task : tasks) {
             for (String attribute : task.attributeList()) {

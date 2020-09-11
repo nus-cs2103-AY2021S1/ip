@@ -31,7 +31,7 @@ public class AddTaskCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws BlankTaskException, IOException {
         tasks.add(type, name, date, time);
-        storage.updateMemory(tasks.getList());
+        storage.saveTaskList(tasks.getList());
         assert tasks.size() > 0 : "There should be at least 1 task after the adding";
         return ui.showAdd(tasks.size(), tasks.getLastTask());
     }

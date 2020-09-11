@@ -37,7 +37,7 @@ public class DoneCommand extends Command {
         }
 
         tasks.markAsDone(id);
-        storage.updateMemory(tasks.getList());
+        storage.saveTaskList(tasks.getList());
         assert curr.isDone() : "The task should be marked as done";
         return ui.showDone(curr);
     }

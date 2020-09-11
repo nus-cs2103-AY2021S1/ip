@@ -31,7 +31,7 @@ public class DeleteCommand extends Command {
     public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException, IndexOutOfBoundsException {
         Task current = tasks.getTaskAtIndex(id);
         tasks.delete(id);
-        storage.updateMemory(tasks.getList());
+        storage.saveTaskList(tasks.getList());
         return ui.showDelete(tasks.size(), current);
     }
 
