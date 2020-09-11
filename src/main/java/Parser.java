@@ -42,10 +42,15 @@ public class Parser {
             String[] deadlineArr = deadlineContent.split("/");
             newTaskDetails = new String[]{"D", deadlineArr[0].trim(), deadlineArr[1].substring(3).trim()};
             break;
-        case("event"):
+        case ("event"):
             String eventContent = command.substring(6);
             String[] eventArr = eventContent.split("/");
             newTaskDetails = new String[]{"E", eventArr[0].trim(), eventArr[1].substring(3).trim()};
+            break;
+        case ("after"):
+            String afterContent = command.substring(6);
+            String[] afterArr = afterContent.split("/");
+            newTaskDetails = new String[]{"A", afterArr[0].trim(), afterArr[1].substring(6).trim()};
             break;
         default:
             throw new DukeException();
