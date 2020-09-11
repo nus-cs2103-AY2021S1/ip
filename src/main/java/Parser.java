@@ -111,6 +111,13 @@ public class Parser {
         case "find":
             command = new Command(CommandType.FIND_TASK, commandArr);
             break;
+        case "sort":
+            if (commandArr[2].equals("date")) {
+                command = new Command(CommandType.SORT_BY_DATE, commandArr);
+            } else {
+                command = new Command(CommandType.SORT_BY_DESCRIPTION, commandArr);
+            }
+            break;
         default:
             command = null;
         }

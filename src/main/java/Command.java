@@ -229,6 +229,14 @@ public class Command {
 
             ArrayList<Task> tempTasks = searchKeyWord(tasks, keyword);
             return ui.printSearchedTask(tempTasks);
+        case SORT_BY_DATE:
+            tasks.sortByDueDateTime();
+            storage.saveToFile(tasks.tasks);
+            return ui.printAllTask(tasks);
+        case SORT_BY_DESCRIPTION:
+            tasks.sortByDescription();
+            storage.saveToFile(tasks.tasks);
+            return ui.printAllTask(tasks);
         default:
             return null;
         }

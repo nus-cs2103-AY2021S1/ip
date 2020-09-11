@@ -1,7 +1,9 @@
+import java.time.LocalDateTime;
+
 /**
  * Take each user input as Task.
  */
-public class Task {
+public class Task implements DueDateTime {
     protected String description;
     protected boolean isDone;
 
@@ -25,6 +27,7 @@ public class Task {
         this.description = description;
         this.isDone = isDone;
     }
+
 
     /**
      * Return the status of the Task.
@@ -51,5 +54,17 @@ public class Task {
     @Override
     public String toString() {
         return "[" + getStatusIcon() + "] " + description;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public LocalDateTime getDueDateTime() {
+        return LocalDateTime.MAX;
     }
 }
