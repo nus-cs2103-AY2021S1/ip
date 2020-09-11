@@ -40,7 +40,7 @@ public class Event extends Task {
         if (details.length < NUM_FIELDS_DESCRIPTION) {
             throw new DukeException("Please specify a timing!");
         } else if (details.length > NUM_FIELDS_DESCRIPTION) {
-            throw new DukeException("Please follow the format of \"{task} /at {deadline}\"");
+            throw new DukeException("Please follow the format of \"{task} /at {event}\"");
         }
         processEventTimingString(taskDescription.split(SPLITTER)[1]);
     }
@@ -111,7 +111,7 @@ public class Event extends Task {
 
     /**
      * Returns an Event object corresponding to the summary given.
-     * Deadline summary has to be of the form "E|{0 or 1 representing completion}|{description}|{event duration}".
+     * Event summary has to be of the form "E|{0 or 1 representing completion}|{description}|{event duration}".
      *
      * @param summary string summary of the Event object to be reconstructed.
      * @return Event object representing the summary given.
@@ -147,10 +147,20 @@ public class Event extends Task {
         return SYMBOL;
     }
 
+    /**
+     * Returns start timing of the event.
+     *
+     * @return start timing as a LocalDateTime object.
+     */
     public LocalDateTime getStartTiming() {
         return startTiming;
     }
 
+    /**
+     * Returns end timing of the event.
+     *
+     * @return end timing as a LocalDateTime object.
+     */
     public LocalDateTime getEndTiming() {
         return endTiming;
     }

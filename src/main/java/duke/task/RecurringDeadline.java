@@ -8,35 +8,52 @@ import duke.datetime.FastForwarderGenerator;
 import java.time.LocalDateTime;
 import java.util.regex.Pattern;
 
+/**
+ * Encapsulates a recurring deadline.
+ */
 public class RecurringDeadline extends Deadline {
 
+    /** Symbol representing a Recurring Deadline object. */
     public static final String SYMBOL = "R" + Deadline.SYMBOL;
-    /** Number of separate fields in a event save summary */
+    /** Number of separate fields in a recurring deadline save summary */
     private static final int NUM_FIELDS_SUMMARY = 5;
 
+    /** FastForwarder that controls the amount of time the deadline jumps on each reoccurrence */
     private FastForwarder fastForwarder;
+    /** Details used to create the FastForwarder object */
     private String recurringDetails;
 
+    /**
+     * Constructs a RecurringDeadline instance with the given description, timing and recurring details.
+     *
+     * @param deadlineDescription description of the task and the deadline.
+     * @param recurringDetails string representing the length between each reoccurrence.
+     * @throws DukeException if the description or recurring details are invalid.
+     */
     public RecurringDeadline(String deadlineDescription, String recurringDetails) throws DukeException {
         super(deadlineDescription);
         parseRecurringDetails(recurringDetails);
     }
 
+    /** Constructs a RecurringDeadline instance directly from string arguments of each attribute */
     protected RecurringDeadline(String deadlineDescription, String deadlineTiming, String recurringDetails)
             throws DukeException {
         super(deadlineDescription, deadlineTiming);
         parseRecurringDetails(recurringDetails);
     }
 
-    protected RecurringDeadline(String eventDescription, LocalDateTime deadline, String recurringDetails) {
-        super(eventDescription, deadline);
+    /** Constructs a RecurringDeadline instance directly from the provided description and deadline */
+    protected RecurringDeadline(String deadlineDescription, LocalDateTime deadline, String recurringDetails) {
+        super(deadlineDescription, deadline);
         this.recurringDetails = recurringDetails.toUpperCase();
     }
 
+    /** Parses the recurring details into a FastForwarder and saves it in the instance */
     private void parseRecurringDetails(String recurringDetails) throws DukeException {
         this.recurringDetails = recurringDetails;
         fastForwarder = FastForwarderGenerator.generateFastForwarder(recurringDetails);
     }
+
 
     @Override
     public String toString() {
@@ -48,6 +65,14 @@ public class RecurringDeadline extends Deadline {
         return "R" + super.getSummary() + SYMBOL_SEPARATOR + recurringDetails;
     }
 
+    /**
+     * Returns a RecurringDeadline instance from the summary provided.
+     * Summary should be of the form RD|{0 or 1}|{description}|{deadline}|{recurring details}.
+     *
+     * @param summary summary from the save file.
+     * @return Recurring deadline object corresponding to the summary provided.
+     * @throws InvalidSaveException if the summary is invalid.
+     */
     public static RecurringDeadline reconstructFromSummary(String summary) throws InvalidSaveException {
         String[] details = summary.split(Pattern.quote(SYMBOL_SEPARATOR));
         if (details.length != NUM_FIELDS_SUMMARY) {
@@ -68,6 +93,7 @@ public class RecurringDeadline extends Deadline {
         }
     }
 
+    /** Returns a recurring deadline object with the deadline updated to after the current time */
     private static RecurringDeadline updateRecurringDeadline(RecurringDeadline recurringDeadline, boolean isDone) {
         LocalDateTime currentTime = LocalDateTime.now();
         LocalDateTime deadline = recurringDeadline.getDeadline();

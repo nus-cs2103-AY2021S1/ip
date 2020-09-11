@@ -80,6 +80,14 @@ public class TaskParser {
 
     }
 
+    /**
+     * Parses and returns the description and the subcommands found.
+     * First object in the pair is the description with the subcommands removed.
+     * Second object is a hash map of the subcommands found and the arguments provided.
+     *
+     * @param taskDescription description of task to be parsed.
+     * @return String with subcommands removed and a Hashmap of subcommands found and their arguments.
+     */
     private static Pair<String, HashMap<String, String>> parseForSubcommands(String taskDescription) {
         String[] details = taskDescription.split(" ");
         HashMap<String, String> subcommands = new HashMap<>();

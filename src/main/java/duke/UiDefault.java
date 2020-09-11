@@ -2,6 +2,9 @@ package duke;
 
 import java.util.Scanner;
 
+/**
+ * Default UI class for testing Duke chat bot with terminal.
+ */
 public class UiDefault implements Ui {
 
     //Constants used when formatting the bot's message

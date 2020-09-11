@@ -8,32 +8,48 @@ import duke.datetime.FastForwarderGenerator;
 import java.time.LocalDateTime;
 import java.util.regex.Pattern;
 
+/**
+ * Encapsulates a recurring event.
+ */
 public class RecurringEvent extends Event {
 
+    /** Symbol represneting a Recurring Event object */
     public static final String SYMBOL = "R" + Event.SYMBOL;
     /** Number of separate fields in a event save summary */
     private static final int NUM_FIELDS_SUMMARY = 5;
 
+    /** FastForwarder that controls the amount of time the start and end timings jump on each reoccurrence */
     private FastForwarder fastForwarder;
+    /** Details used to create the FastForwarder object */
     private String recurringDetails;
 
+    /**
+     * Constructs a RecurringEvent instance with the given description, start and end timings and recurring details.
+     *
+     * @param eventDescription description of the task and the start and end timings of the event.
+     * @param recurringDetails string represneting the length between each reoccurrence.
+     * @throws DukeException if the description of recurring details are invalid.
+     */
     public RecurringEvent(String eventDescription, String recurringDetails) throws DukeException {
         super(eventDescription);
         parseRecurringDetails(recurringDetails);
     }
 
+    /** Constructs a recurring event instance directly from string arguments of each attribute */
     protected RecurringEvent(String eventDescription, String eventTiming, String recurringDetails)
             throws DukeException {
         super(eventDescription, eventTiming);
         parseRecurringDetails(recurringDetails);
     }
 
+    /** Constructs a recurring event instance directly from the provided description and start and end timings */
     protected RecurringEvent(String eventDescription, LocalDateTime startTiming,
              LocalDateTime endTiming, String recurringDetails) {
         super(eventDescription, startTiming, endTiming);
         this.recurringDetails = recurringDetails.toUpperCase();
     }
 
+    /** Parses the recurring details into a FastForwarder and saves it in the instance */
     private void parseRecurringDetails(String recurringDetails) throws DukeException {
         this.recurringDetails = recurringDetails;
         fastForwarder = FastForwarderGenerator.generateFastForwarder(recurringDetails);
@@ -49,6 +65,14 @@ public class RecurringEvent extends Event {
         return "R" + super.getSummary() + SYMBOL_SEPARATOR + recurringDetails;
     }
 
+    /**
+     * Returns a RecurringEvent instance from the summary provided.
+     * Summary should be of the form RE|{0 or 1}|{description}|{event start and end timings}|{recurring details}
+     *
+     * @param summary summary from the save file.
+     * @return Recurring event object corresponding to the summary provided.
+     * @throws InvalidSaveException if the summary is invalid.
+     */
     public static RecurringEvent reconstructFromSummary(String summary) throws InvalidSaveException {
         String[] details = summary.split(Pattern.quote(SYMBOL_SEPARATOR));
         if (details.length != NUM_FIELDS_SUMMARY) {
@@ -69,6 +93,7 @@ public class RecurringEvent extends Event {
         }
     }
 
+    /** Returns a recurring event object with the event start and end timings updated to after the current time */
     private static RecurringEvent updateRecurringEvent(RecurringEvent recurringEvent, boolean isDone) {
         LocalDateTime currentTime = LocalDateTime.now();
         LocalDateTime startTime = recurringEvent.getStartTiming();

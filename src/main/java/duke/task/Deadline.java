@@ -56,11 +56,17 @@ public class Deadline extends Task {
         this.deadline = DateTimeHandler.parseDateTime(deadline);
     }
 
-    protected Deadline(String eventDescription, LocalDateTime deadlineTiming) {
-        super(eventDescription);
+    /** Constructs a Deadline object directly from the description and deadline provided */
+    protected Deadline(String deadlineDescription, LocalDateTime deadlineTiming) {
+        super(deadlineDescription);
         this.deadline = deadlineTiming;
     }
 
+    /**
+     * Returns the deadline.
+     *
+     * @return deadline as a LocalDateTime object.
+     */
     public LocalDateTime getDeadline() {
         return deadline;
     }

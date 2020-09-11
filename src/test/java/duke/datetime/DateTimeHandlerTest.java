@@ -13,8 +13,14 @@ import org.junit.jupiter.api.Test;
 
 import duke.DukeException;
 
+/**
+ * JUnit test class for the DateTimeHandler class methods.
+ */
 public class DateTimeHandlerTest {
 
+    /**
+     * Test the parseDateTime method on valid Strings.
+     */
     @Test
     public void testParseDateTime_validStrings_success() {
         String time1 = "24-09-2000 1800";
@@ -31,6 +37,9 @@ public class DateTimeHandlerTest {
         }
     }
 
+    /**
+     * Tests the parseDateTime method in invalid Strings.
+     */
     @Test
     public void testParseDateTime_invalidStrings_errorThrown() {
         String input1 = "abcde";
@@ -51,6 +60,9 @@ public class DateTimeHandlerTest {
 
     }
 
+    /**
+     * Tests the parseEventTimings method on valid Strings.
+     */
     @Test
     public void testParseEventTimings_validStrings_success() {
         String input1 = "24-09-2000 1800-2000";
@@ -65,6 +77,9 @@ public class DateTimeHandlerTest {
         }
     }
 
+    /**
+     * Tests the parseEventTimings method on invalid Strings.
+     */
     @Test
     public void testParseEventTimings_invalidStrings_errorThrown() {
         String input1 = "abcde";

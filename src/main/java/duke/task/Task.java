@@ -92,6 +92,7 @@ public abstract class Task implements PrintSummary {
         return String.join(SYMBOL_SEPARATOR, details);
     }
 
+    /** Returns true if the symbol provided is a valid save symbol for a save summary */
     protected static boolean isValidSaveSymbol(String symbol) {
         return symbol.equals(SYMBOL_DONE) || symbol.equals(SYMBOL_NOT_DONE);
     }
