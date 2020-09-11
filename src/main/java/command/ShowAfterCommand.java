@@ -33,22 +33,10 @@ public class ShowAfterCommand extends Command {
         this.command = command;
     }
 
-    /**
-     * Executes parsed user command. The result is:
-     * 1. Shows user all the task that exist after the specified date.
-     *
-     * @param tasks TaskList List of task.
-     * @param ui Ui updating user interface to show intended messages.
-     * @param storage Storage to update external file whenever needed.
-     * @throws DukeDateTimeParserException This exception would be thrown
-     * when the user failed to specify the date in the command.
-     */
-    @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeDateTimeParserException {
-        LocalDate localDate = Parser.findDateParser(this.command);
+
+    private String printTask(TaskList tasks, LocalDate localDate) {
         StringBuilder sb = new StringBuilder();
         int index = 1;
-
         for (Task task : tasks.getTasks()) {
             if (task instanceof DeadlineTask) {
                 DeadlineTask deadlineTask = (DeadlineTask) task;
@@ -67,7 +55,24 @@ public class ShowAfterCommand extends Command {
                 }
             }
         }
+        return sb.toString();
+    }
+    /**
+     * Executes parsed user command. The result is:
+     * 1. Shows user all the task that exist after the specified date.
+     *
+     * @param tasks TaskList List of task.
+     * @param ui Ui updating user interface to show intended messages.
+     * @param storage Storage to update external file whenever needed.
+     * @throws DukeDateTimeParserException This exception would be thrown
+     * when the user failed to specify the date in the command.
+     */
+    @Override
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeDateTimeParserException {
+        LocalDate localDate = Parser.findDateParser(this.command);
+        int index = 1;
 
-        return ui.getMessageTemplate(sb.toString());
+        String printTask = printTask(tasks, localDate);
+        return ui.getMessageTemplate(printTask);
     }
 }

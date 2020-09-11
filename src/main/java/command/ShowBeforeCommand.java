@@ -21,6 +21,8 @@ public class ShowBeforeCommand extends Command {
 
     private String command;
 
+
+
     /**
      * Constructs a ShowBeforeCommand with the given
      * user command.
@@ -30,6 +32,30 @@ public class ShowBeforeCommand extends Command {
     public ShowBeforeCommand(String command) {
         super();
         this.command = command;
+    }
+
+    private String printTask(TaskList tasks, LocalDate localDate) {
+        StringBuilder sb = new StringBuilder();
+        int index = 1;
+        for (Task task : tasks.getTasks()) {
+            if (task instanceof DeadlineTask) {
+                DeadlineTask deadlineTask = (DeadlineTask) task;
+
+                boolean isBeforeSpecifiedDate = deadlineTask.getDateTime().toLocalDate().isBefore(localDate);
+                if (isBeforeSpecifiedDate) {
+                    sb.append(index).append(". ").append(deadlineTask).append("\n");
+                    index++;
+                }
+            } else if (task instanceof EventTask) {
+                EventTask eventTask = (EventTask) task;
+                boolean isBeforeSpecifiedDate = eventTask.getDateTime().toLocalDate().isBefore(localDate);
+                if (isBeforeSpecifiedDate) {
+                    sb.append(index).append(". ").append(eventTask).append("\n");
+                    index++;
+                }
+            }
+        }
+        return sb.toString();
     }
 
     /**
@@ -45,27 +71,8 @@ public class ShowBeforeCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeDateTimeParserException {
         LocalDate localDate = Parser.findDateParser(this.command);
-        StringBuilder sb = new StringBuilder();
-        int index = 1;
-        for (Task task : tasks.getTasks()) {
-            if (task instanceof DeadlineTask) {
-                DeadlineTask deadlineTask = (DeadlineTask) task;
 
-                boolean isBeforeSpecifiedDate = deadlineTask.getDateTime().toLocalDate().isBefore(localDate);
-                if (isBeforeSpecifiedDate) {
-                    sb.append(index + ". " + deadlineTask + "\n");
-                    index++;
-                }
-            } else if (task instanceof EventTask) {
-                EventTask eventTask = (EventTask) task;
-                boolean isBeforeSpecifiedDate = eventTask.getDateTime().toLocalDate().isBefore(localDate);
-                if (isBeforeSpecifiedDate) {
-                    sb.append(index + ". " + eventTask + "\n");
-                    index++;
-                }
-            }
-        }
-
-        return ui.getMessageTemplate(sb.toString());
+        String printTask = printTask(tasks, localDate);
+        return ui.getMessageTemplate(printTask);
     }
 }
