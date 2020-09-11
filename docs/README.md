@@ -161,7 +161,7 @@ Here are the matching tasks in your list:
 ```
 
 ### `remind`
-The task to be reminded is indicated by the index after the `remind` command, you can view the index of the task by typing `list`. Also, state whether to activate or deactivate the reminder using `y` for yes, `n` for no after the `remind` command. Currently you would have to exit using `bye` and reopening duke to see the reminder tab.
+The task to be reminded is indicated by the index after the `remind` command, you can view the index of the task by typing `list`. Also, state whether to activate or deactivate the reminder using `y` for yes, `n` for no after the `remind` command.
 
 Example of usage: 
 
