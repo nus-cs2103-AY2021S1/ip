@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.Optional;
 
 import command.Command;
 import mugexception.MugException;
@@ -136,9 +137,10 @@ public class Storage {
             FileReader fr = new FileReader(this.filepath);
             BufferedReader br = new BufferedReader(fr);
             int lineNum = 0;
-            String line;
-            while ((line = br.readLine()) != null) {
+            String line = br.readLine();
+            while (Optional.ofNullable(line).isPresent()) {
                 lineNum++;
+                line = br.readLine();
             }
             br.close();
             writeUndoRecord(Action.ADD, task, lineNum);
@@ -160,7 +162,6 @@ public class Storage {
         File oldFile = new File(this.filepath);
         File newFile = new File(tempFile);
         int taskTrack = 0;
-        String line;
 
         try {
             // writer
@@ -170,14 +171,15 @@ public class Storage {
             // reader
             FileReader fr = new FileReader(this.filepath);
             BufferedReader br = new BufferedReader(fr);
-
-            while ((line = br.readLine()) != null) {
+            String line = br.readLine();
+            while (Optional.ofNullable(line).isPresent()) {
                 taskTrack++;
                 if (taskTrack != taskId) {
                     pw.println(line);
                 } else {
                     writeUndoRecord(Action.DELETE, line, taskId);
                 }
+                line = br.readLine();
             }
 
             br.close();
@@ -202,7 +204,6 @@ public class Storage {
         File oldFile = new File(this.filepath);
         File newFile = new File(tempFile);
         int taskTrack = 0;
-        String line;
 
         try {
             // writer
@@ -212,8 +213,8 @@ public class Storage {
             // reader
             FileReader fr = new FileReader(this.filepath);
             BufferedReader br = new BufferedReader(fr);
-
-            while ((line = br.readLine()) != null) {
+            String line = br.readLine();
+            while (Optional.ofNullable(line).isPresent()) {
                 taskTrack++;
                 if (taskTrack != taskId) {
                     pw.println(line);
@@ -222,6 +223,7 @@ public class Storage {
                     String[] newLine = line.split("[|]", 3);
                     pw.println(newLine[0] + "|" + 1 + "|" + newLine[2]);
                 }
+                line = br.readLine();
             }
 
             br.close();
@@ -260,9 +262,10 @@ public class Storage {
             pw.println(taskId);
             pw.println(info);
 
-            String line;
-            while ((line = br.readLine()) != null) {
+            String line = br.readLine();
+            while (Optional.ofNullable(line).isPresent()) {
                 pw.println(line);
+                line = br.readLine();
             }
             //close reader and writer
             br.close();

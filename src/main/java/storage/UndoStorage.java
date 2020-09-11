@@ -7,6 +7,8 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.NoSuchElementException;
+import java.util.Optional;
 
 import mugexception.MugException;
 
@@ -39,12 +41,13 @@ public class UndoStorage {
         try {
             FileReader fr = new FileReader(this.undoFilepath);
             BufferedReader br = new BufferedReader(fr);
-            Action undoCommand = Action.valueOf(br.readLine());
+            Optional<String> undoCommand = Optional.ofNullable(br.readLine());
             br.close();
-            assert(undoCommand == Action.DELETE
-                    || undoCommand == Action.ADD
-                    || undoCommand == Action.DONE);
-            switch (undoCommand) {
+            Action parsedCommand = Action.valueOf(undoCommand.get());
+            assert(parsedCommand == Action.DELETE
+                    || parsedCommand == Action.ADD
+                    || parsedCommand == Action.DONE);
+            switch (parsedCommand) {
             case DELETE:
                 undoDelete();
                 break;
@@ -57,7 +60,7 @@ public class UndoStorage {
             default:
                 throw new MugException("Something went wrong. Mug fail to undo:_:");
             }
-        } catch (NullPointerException ex) {
+        } catch (NoSuchElementException ex) {
             throw new MugException("Mug do not have anything to undo. TT");
         } catch (IOException ex) {
             throw new MugException("Something went wrong. Mug fail to undo:_:");
@@ -130,9 +133,10 @@ public class UndoStorage {
             br.readLine();
             br.readLine();
             // copy back the rest
-            String line;
-            while ((line = br.readLine()) != null) {
+            String line = br.readLine();
+            while (Optional.ofNullable(line).isPresent()) {
                 pw.println(line);
+                line = br.readLine();
             }
             br.close();
             pw.flush();
@@ -186,10 +190,11 @@ public class UndoStorage {
                 if (isDone) {
                     mugBr.readLine();
                 }
-                // continue the rest of the task
-                String line;
-                while ((line = mugBr.readLine()) != null) {
+                // continue copy the rest of the task
+                String line = mugBr.readLine();
+                while (Optional.ofNullable(line).isPresent()) {
                     mugPw.println(line);
+                    line = mugBr.readLine();
                 }
             }
             // close br
