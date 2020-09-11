@@ -1,5 +1,6 @@
 package duke;
 import java.util.Arrays;
+import java.util.logging.Level;
 
 import duke.task.Task;
 /**
@@ -25,7 +26,7 @@ public class Duke {
         }
 
         try {
-            this.tasks = new TaskList(this.storage.loadFile());
+            this.tasks = new TaskList(this.storage.loadDefaultFile());
         } catch (DukeException e) {
             this.tasks = new TaskList();
         }
@@ -78,7 +79,9 @@ public class Duke {
         }
     }
 
-
+    private void loadFile(String filePath) throws DukeException {
+        this.tasks = new TaskList(storage.loadCustomFile(filePath));
+    }
 
     /**
      ** Take in user input and carry out the respective command based on the input command.
@@ -113,6 +116,14 @@ public class Duke {
                 String[] filePaths = Arrays.copyOfRange(inputComponents, 1, inputComponents.length);
                 this.storage.saveToFile(tasks.toSaveFormat(), filePaths);
                 response = ui.show("You have successfully archive current progress to the file(s) indicated");
+                break;
+            case "load":
+                if (inputComponents.length != 2) {
+                    response = ui.show("Invalid Input. 'Load' should be followed by the filePath");
+                    break;
+                }
+                this.loadFile(inputComponents[1]);
+                response = ui.show("Successful");
                 break;
 
             //3 different types of task

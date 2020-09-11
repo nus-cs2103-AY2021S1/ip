@@ -13,8 +13,7 @@ public class Ui {
      * @param input The message to display to user.
      */
     public String show(String input) {
-        String line = "_______________________________________________________";
-        return String.format("%s\n%s\n%s", line, input, line);
+        return input;
     }
 
     /**

@@ -18,8 +18,13 @@ import duke.task.ToDo;
 /**
  * Represents a file location that user's input. Capable of reading from and writing to the file.
  */
+@SuppressWarnings("checkstyle:Regexp")
 public class Storage {
     private static final String DEFAULT_SAVE_LOCATION = "data/duke.txt";
+    private static final DukeException FILE_NOT_FOUND = new DukeException("Can't find the File. Please ensure that:\n"
+            + "Filepath is not pointed to a directory,\n"
+            + "you have permission to access/create file there and\n"
+            + "in this format: dir\\...\\filename.txt\n");
 
     private final File file;
     private final String filePath;
@@ -38,15 +43,19 @@ public class Storage {
     public Storage(String filePath) throws DukeException {
         assert !filePath.equals("") : "Empty FilePath";
         File file = new File(filePath);
-        if (!isValidFilePath(filePath)) {
-            throw new DukeException("File Path is a directory -OR- Can't create file at location");
+        if (!isWritableFilePath(filePath)) {
+            throw FILE_NOT_FOUND;
         }
         this.file = file;
         this.filePath = filePath;
     }
 
-    private boolean isValidFilePath(String filePath) {
+    private boolean isWritableFilePath(String filePath) {
         return Files.isWritable(Paths.get(filePath));
+    }
+
+    private boolean isReadableFilePath(String filePath) {
+        return Files.isReadable(Paths.get(filePath));
     }
 
     /**
@@ -70,7 +79,7 @@ public class Storage {
 
             for (String currentFilePath: filePaths) {
                 File currentFile = new File(currentFilePath);
-                if (isValidFilePath(filePath)) {
+                if (isWritableFilePath(filePath)) {
                     FileWriter fw = new FileWriter(currentFile);
                     fw.write("");
                     for (String s: data) {
@@ -88,27 +97,52 @@ public class Storage {
      * @return ArrayList of Task that is saved inside the designated file. If file / directory does not exist, create.
      * @throws DukeException If file is not found.
      */
-    public ArrayList<Task> loadFile() throws DukeException {
+    public ArrayList<Task> loadDefaultFile() throws DukeException {
         try {
-            ArrayList<Task> loadedTask = new ArrayList<>();
-            Scanner scanner = new Scanner(this.file);
-            String[] dataRead;
-            while (scanner.hasNext()) {
-                dataRead = readSavedData(scanner.nextLine());
-                Task newTask = loadSavedTask(dataRead);
-                loadedTask.add(newTask);
-            }
-            return loadedTask;
+            return loadFile(this.file);
         } catch (FileNotFoundException err) {
-            String[] fileDirectory = this.filePath.split("/");
-            String parentDirectory = "";
-            for (int i = 0; i < fileDirectory.length - 1; i++) {
-                parentDirectory += fileDirectory[i] + "/";
-            }
-            File f = new File(parentDirectory);
-            f.mkdirs();
-            throw new DukeException("Can't Find Save File. Creating New File");
+            this.createNewFile(this.filePath);
+            return new ArrayList<Task>();
         }
+    }
+
+    /** Load a file at path specified by the user.
+     * @param newFilePath Path of the file that user wish to load.
+     * @return ArrayList of Task that is saved inside the designated file. If file / directory does not exist, create.
+     * @throws DukeException If file is not found.
+     */
+    public ArrayList<Task> loadCustomFile(String newFilePath) throws DukeException {
+        try {
+            if (!isReadableFilePath(newFilePath)) {
+                throw FILE_NOT_FOUND;
+            }
+            return loadFile(new File(newFilePath));
+        } catch (FileNotFoundException err) {
+            throw FILE_NOT_FOUND;
+        }
+    }
+
+    private void createNewFile(String filePath) {
+        String[] fileDirectory = filePath.split("/");
+        String parentDirectory = "";
+        for (int i = 0; i < fileDirectory.length - 1; i++) {
+            parentDirectory += fileDirectory[i] + "/";
+        }
+        File f = new File(parentDirectory);
+        f.mkdirs();
+    }
+
+    private ArrayList<Task> loadFile(File file) throws FileNotFoundException, DukeException {
+        ArrayList<Task> loadedTask = new ArrayList<>();
+        Scanner scanner = new Scanner(file);
+        String[] dataRead;
+        while (scanner.hasNext()) {
+            dataRead = readSavedData(scanner.nextLine());
+            Task newTask = loadSavedTask(dataRead);
+            loadedTask.add(newTask);
+        }
+        scanner.close();
+        return loadedTask;
     }
 
     /**

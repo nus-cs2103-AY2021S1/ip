@@ -14,7 +14,7 @@ import duke.task.ToDo;
  * Represents a Manager to manage different tasks on hand.
  */
 public class TaskList {
-    private final List<Task> tasks;
+    private List<Task> tasks;
 
     /**
      * Initialise with no initial task on hand.
@@ -159,4 +159,7 @@ public class TaskList {
         return output;
     }
 
+    public void loadArchivedTasks(ArrayList<Task> dataRead) {
+        this.tasks = dataRead;
+    }
 }
