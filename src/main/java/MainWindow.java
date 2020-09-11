@@ -1,5 +1,6 @@
 import duke.component.Ui;
 import javafx.fxml.FXML;
+import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.ScrollPane;
@@ -12,6 +13,10 @@ import javafx.scene.layout.VBox;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+    public static final String STYLE_BORDER = "-fx-border-radius: 20; -fx-background-radius: 20";
+    public static final String TEXT_LIGHT_COLOR = "-fx-text-fill: aliceblue;";
+    public static final String NORMAL_BUTTON_COLOR = " -fx-background-color: darkslategrey; ";
+    public static final String HOVER_BUTTON_COLOR = "-fx-background-color: #107c85;";
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -29,7 +34,19 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-
+        userInput.setStyle(STYLE_BORDER);
+        sendButton.setStyle(TEXT_LIGHT_COLOR + NORMAL_BUTTON_COLOR
+                + STYLE_BORDER);
+        sendButton.setOnMouseEntered(e -> {
+            sendButton.setStyle(TEXT_LIGHT_COLOR + HOVER_BUTTON_COLOR
+                    + STYLE_BORDER);
+            sendButton.setCursor(Cursor.HAND);
+        });
+        sendButton.setOnMouseExited(e -> {
+            sendButton.setStyle(TEXT_LIGHT_COLOR + NORMAL_BUTTON_COLOR
+                    + STYLE_BORDER);
+            sendButton.setCursor(Cursor.DEFAULT);
+        });
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(new Label(Ui.GREETING), new ImageView(dukeImage))
         );
