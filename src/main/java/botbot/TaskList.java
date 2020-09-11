@@ -1,12 +1,14 @@
 package botbot;
 
+import static botbot.Ui.INDENT;
+
 import java.util.Collection;
 import java.util.LinkedList;
 
 import botbot.tasks.Task;
 
 /**
- * Represents the task list in the chatbot.
+ * Represents the Botbot task list.
  */
 public class TaskList extends LinkedList<Task> {
     /**
@@ -36,10 +38,10 @@ public class TaskList extends LinkedList<Task> {
     
     @Override
     public String toString() {
-        String result = "";
+        StringBuilder result = new StringBuilder();
         for (int i = 0; i < size(); i++) {
-            result += String.format("  %s. %s\n", i + 1, this.get(i));
+            result.append(String.format(INDENT + "%s. %s\n", i + 1, this.get(i)));
         }
-        return result;
+        return result.toString();
     }
 }

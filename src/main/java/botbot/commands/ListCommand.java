@@ -8,20 +8,18 @@ import botbot.Ui;
  * Lists all tasks in the task list.
  */
 public class ListCommand extends Command {
+    public static final String COMMAND_KEYWORD = "list";
+    
     /**
      * Executes the list command.
      *
      * @param storage Storage of the bot.
      * @param tasks Task list to list.
-     * @param ui Ui to print list.
-     * @return Status of execution.
+     * @param ui Ui to show response of execution.
+     * @return Response of execution.
      */
     @Override
     public String execute(Storage storage, TaskList tasks, Ui ui) {
-        if (tasks.size() <= 0) {
-            return ui.printStatus("your list is empty!\n");
-        } else {
-            return ui.printStatus("here's your list:\n" + tasks);
-        }
+        return ui.showListResponse(tasks);
     }
 }
