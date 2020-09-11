@@ -3,9 +3,9 @@ package willy.task;
 /**
  * Responsible for Basic Task with no additional conditions.
  */
-public class ToDoTask extends Task {
+public class TodoTask extends Task {
 
-    public ToDoTask(String task, TaskSymbol taskType) {
+    public TodoTask(String task, TaskSymbol taskType) {
         super(task, taskType);
     }
 

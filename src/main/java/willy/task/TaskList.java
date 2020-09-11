@@ -47,10 +47,10 @@ public class TaskList {
         listOfTasks.add(task);
         storage.updateStorage(listOfTasks);
         String willyResponse = Willy.response(
-                ADD_TASK_RESPONSE +
-                "\t  " + task + "\n" +
-                "\tNow you have " + listOfTasks.size() +
-                " task(s), please don't forget!");
+                ADD_TASK_RESPONSE
+                + "\t  " + task + "\n"
+                + "\tNow you have " + listOfTasks.size()
+                + " task(s), please don't forget!");
 
         return willyResponse;
     }
@@ -68,10 +68,10 @@ public class TaskList {
             listOfTasks.remove(i);
             storage.updateStorage(listOfTasks);
             String willyResponse = Willy.response(
-                    REMOVE_TASK_RESPONSE +
-                    "\t  " + task + "\n" +
-                    "\tNow you have " + listOfTasks.size() +
-                    " task(s) left ~");
+                    REMOVE_TASK_RESPONSE
+                    + "\t  " + task + "\n"
+                    + "\tNow you have " + listOfTasks.size()
+                    + " task(s) left ~");
 
             return willyResponse;
 
@@ -88,10 +88,10 @@ public class TaskList {
             listOfTasks.set(i, editedTask);
             storage.updateStorage(listOfTasks);
             String willyResponse = Willy.response(
-                    UPDATE_TASK_RESPONSE +
-                    "\t  " + editedTask + "\n" +
-                    "\tNow you have " + listOfTasks.size() +
-                    " task(s), please don't forget!");
+                    UPDATE_TASK_RESPONSE
+                    + "\t  " + editedTask + "\n"
+                    + "\tNow you have " + listOfTasks.size()
+                    + " task(s), please don't forget!");
 
             return willyResponse;
 

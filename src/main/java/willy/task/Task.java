@@ -27,8 +27,8 @@ public class Task {
         return taskType;
     }
 
-    public void setTaskDone(boolean boo) {
-        isDone = boo;
+    public void setTaskDone(boolean isDone) {
+        this.isDone = isDone;
     }
 
     public String getStatusIcon() {

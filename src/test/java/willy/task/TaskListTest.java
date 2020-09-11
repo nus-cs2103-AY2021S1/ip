@@ -18,7 +18,7 @@ class TaskListTest {
         listOfTask = store.retrieveStorage();
         list = new TaskList(listOfTask, store);
         String activity = "read book";
-        ToDoTask newTask = new ToDoTask(activity, TaskSymbol.TODO);
+        TodoTask newTask = new TodoTask(activity, TaskSymbol.TODO);
         list.addToList(newTask);
         assertEquals(1,list.getList().size(), "Number of Lists after adding a task");
     }
@@ -32,8 +32,8 @@ class TaskListTest {
         String activity1 = "read book";
         String activity2 = "go Home";
         // Add 2 tasks
-        list.addToList(new ToDoTask(activity1, TaskSymbol.TODO));
-        list.addToList(new ToDoTask(activity2, TaskSymbol.TODO));
+        list.addToList(new TodoTask(activity1, TaskSymbol.TODO));
+        list.addToList(new TodoTask(activity2, TaskSymbol.TODO));
         // Remove 1 task
         list.removeTask(1);
         assertEquals(1, list.getList().size(), "Number of Tasks after adding 2 tasks and removing 1 task");
@@ -45,7 +45,7 @@ class TaskListTest {
         listOfTask = store.retrieveStorage();
         list = new TaskList(listOfTask, store);
         String activity1 = "read book";
-        list.addToList(new ToDoTask(activity1, TaskSymbol.TODO));
+        list.addToList(new TodoTask(activity1, TaskSymbol.TODO));
         list.setTaskDone(1);
         assertTrue(list.getList().get(0).isDone());
     }
@@ -58,8 +58,8 @@ class TaskListTest {
         String activity1 = "read book";
         String activity2 = "go Home";
         // Add 2 tasks
-        list.addToList(new ToDoTask(activity1, TaskSymbol.TODO));
-        list.addToList(new ToDoTask(activity2, TaskSymbol.TODO));
+        list.addToList(new TodoTask(activity1, TaskSymbol.TODO));
+        list.addToList(new TodoTask(activity2, TaskSymbol.TODO));
         list.findTask("read");
         assertEquals(1, list.getKeyList().size());
     }
@@ -72,8 +72,8 @@ class TaskListTest {
         String activity1 = "read book";
         String activity2 = "go Home";
         // Add 2 tasks
-        list.addToList(new ToDoTask(activity1, TaskSymbol.TODO));
-        list.addToList(new ToDoTask(activity2, TaskSymbol.TODO));
+        list.addToList(new TodoTask(activity1, TaskSymbol.TODO));
+        list.addToList(new TodoTask(activity2, TaskSymbol.TODO));
         list.findTask("library");
         assertEquals(0, list.getKeyList().size());
     }
