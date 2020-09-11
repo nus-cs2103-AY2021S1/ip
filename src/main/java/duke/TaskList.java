@@ -66,6 +66,15 @@ public class TaskList implements Iterable<Task> {
         return taskList.remove(index);
     }
 
+    /**
+     * Removes the task from the TaskList at the last position
+     *
+     * @return Task object at the last position that has been removed
+     */
+    public Task removeLastTask() {
+        return removeTask(taskList.size() - 1);
+    }
+
     @Override
     public Iterator<Task> iterator() {
         return taskList.iterator();

@@ -24,6 +24,11 @@ public class FindCommand extends Command {
         return ui.getFindResultAsString(getListQueryResult(tasks));
     }
 
+    @Override
+    public void undo(TaskList tasks) {
+        return;
+    }
+
     private TaskList getListQueryResult(TaskList tasks) {
         TaskList foundTasks = new TaskList();
         for (Task task : tasks) {

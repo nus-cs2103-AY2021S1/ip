@@ -8,12 +8,15 @@ import duke.command.EventCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
 import duke.command.ToDoCommand;
+import duke.command.UndoCommand;
 import duke.exception.DukeException;
 
 /**
  * This class is responsible for parsing the input provided by the user into the respective commands they represent
  */
 public class Parser {
+
+    private Command mostRecentCommand; // stores most recent Command to help the undo functionality
 
     /**
      * Produces a Command object corresponding to the input provided. Throws an exception if invalid input is provided.
@@ -30,31 +33,50 @@ public class Parser {
         String details = (splitInput.length < 2) ? null : splitInput[1];
         String[] parsedDetails;
 
+        Command resultCommand;
+
         switch (command) {
         case "list":
-            return new ListCommand();
+            resultCommand = new ListCommand();
+            break;
         case "done":
-            return new DoneCommand(Integer.parseInt(details) - 1);
+            resultCommand = new DoneCommand(Integer.parseInt(details) - 1);
+            mostRecentCommand = resultCommand;
+            break;
         case "todo":
-            return new ToDoCommand(details);
+            resultCommand = new ToDoCommand(details);
+            mostRecentCommand = resultCommand;
+            break;
         case "find":
-            return new FindCommand(details);
+            resultCommand = new FindCommand(details);
+            break;
         case "deadline":
             parsedDetails = details.split(" /by ", 2);
             if (parsedDetails.length < 2) {
                 throw DukeException.badDeadlineDate();
             }
-            return new DeadlineCommand(parsedDetails[0], parsedDetails[1]);
+            resultCommand = new DeadlineCommand(parsedDetails[0], parsedDetails[1]);
+            mostRecentCommand = resultCommand;
+            break;
         case "event":
             parsedDetails = details.split(" /at ", 2);
             if (parsedDetails.length < 2) {
                 throw DukeException.badEventDate();
             }
-            return new EventCommand(parsedDetails[0], parsedDetails[1]);
+            resultCommand = new EventCommand(parsedDetails[0], parsedDetails[1]);
+            mostRecentCommand = resultCommand;
+            break;
         case "delete":
-            return new DeleteCommand(Integer.parseInt(details) - 1);
+            resultCommand = new DeleteCommand(Integer.parseInt(details) - 1);
+            mostRecentCommand = resultCommand;
+            break;
+        case "undo":
+            resultCommand = new UndoCommand(mostRecentCommand);
+            break;
         default:
             throw DukeException.badCommand();
         }
+
+        return resultCommand;
     }
 }

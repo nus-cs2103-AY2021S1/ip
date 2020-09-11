@@ -1,8 +1,8 @@
 package duke.command;
 
-import duke.exception.DukeException;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.DukeException;
 import duke.task.Deadline;
 import duke.task.Task;
 
@@ -36,6 +36,11 @@ public class DeadlineCommand extends Command {
         Task task = new Deadline(taskName, deadlineString);
         tasks.addTask(task);
         return ui.getAddTaskResponseAsString(task, tasks.numTasks());
+    }
+
+    @Override
+    public void undo(TaskList tasks) {
+        tasks.removeLastTask();
     }
 
     private void verifyInput() throws DukeException {

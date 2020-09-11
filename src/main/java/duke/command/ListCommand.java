@@ -2,6 +2,7 @@ package duke.command;
 
 import duke.TaskList;
 import duke.Ui;
+import duke.task.Task;
 
 public class ListCommand extends Command {
 
@@ -13,5 +14,10 @@ public class ListCommand extends Command {
     @Override
     public String executeWithOutput(TaskList tasks, Ui ui) {
         return ui.getPrintListResponseAsString(tasks);
+    }
+
+    @Override
+    public void undo(TaskList tasks) {
+        return;
     }
 }

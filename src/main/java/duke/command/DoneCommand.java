@@ -21,6 +21,14 @@ public class DoneCommand extends Command {
     @Override
     public String executeWithOutput(TaskList tasks, Ui ui) {
         tasks.getTask(taskIndex).doTask();
+        assert tasks.getTask(taskIndex).isDone() : "This task should be marked as completed";
+
         return ui.getCompleteTaskResponseAsString();
+    }
+
+    @Override
+    public void undo(TaskList tasks) {
+        tasks.getTask(taskIndex).undoTask();
+        assert !tasks.getTask(taskIndex).isDone() : "This task should be marked as incomplete";
     }
 }
