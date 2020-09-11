@@ -42,16 +42,23 @@ public class Storage {
     public ArrayList<Task> readRecord() throws FileNotFoundException, LoadingException {
         assert path != null : "the path should not be null";
         File record = new File(path);
-        Scanner scanner = new Scanner(record);
+        Scanner scanner = new Scanner(System.in);
 
         try {
             ArrayList<Task> tasks = new ArrayList<>();
             String next;
-            
-            if (record.createNewFile()) {
+
+            if(!record.exists() || record.isDirectory()) {
+                File directory = new File("data");
+                directory.mkdirs();
+                record = new File(directory, "duke.txt");
+                record.createNewFile();
                 throw new FileNotFoundException("Creating new record");
             }
 
+            scanner.close();
+            scanner = new Scanner(record);
+            System.out.println(scanner.hasNextLine());
             while (scanner.hasNextLine()) {
                 next = scanner.nextLine();
                 assert next != null : "the command should not be null";
@@ -84,10 +91,16 @@ public class Storage {
             return tasks;
 
         } catch (FileNotFoundException fileNotFoundException) {
+            System.out.println("Throw exception after the file has been created");
             throw fileNotFoundException;
 
-        } catch (Exception exception) {
-            throw new LoadingException(exception.getMessage());
+        } catch (IOException ioException) {
+            //System.out.println("Throw caused by loading the file");
+            throw new LoadingException("Problems with creating the file");
+
+        }  catch (LoadingException loadingException) {
+            //System.out.println("Throw caused by loading the file");
+            throw new LoadingException("Problems with creating the file");
 
         } finally {
             scanner.close();
@@ -169,7 +182,6 @@ public class Storage {
 
         tasks.add(doWithinPeriodTask);
     }
-
 
     /**
      * Updates the local record when the list of tasks is changed.

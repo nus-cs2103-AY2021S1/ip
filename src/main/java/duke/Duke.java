@@ -3,6 +3,7 @@ package duke;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.util.ArrayList;
 
 import duke.command.Command;
 import duke.core.MessageType;
@@ -28,29 +29,37 @@ public class Duke {
     private Storage storage;
     private TaskList taskList;
     private Ui ui;
+    public ArrayList<Exception> startingExceptions;
+
+
     /**
      * Takes in the path of the local record, and creates a duke bot to interact with
      * the user.
      */
-    public Duke() throws FileNotFoundException, LoadingException, IOException {
+    public Duke() {
         assert FILE_PATH != null : "the file path should not be null";
-
+        startingExceptions = new ArrayList<>();
         ui = new Ui();
         storage = new Storage(FILE_PATH);
         try {
             taskList = new TaskList(storage.readRecord());
         } catch (FileNotFoundException fileNotFoundException) {
             taskList = new TaskList();
-
-            storage.writeRecord(taskList);
-
-            throw fileNotFoundException;
+            //System.out.println("in file exception");
+            try {
+                storage.writeRecord(taskList);
+            } catch (IOException exception) {
+                startingExceptions.add(exception);
+            }
+            startingExceptions.add(fileNotFoundException);
         } catch (LoadingException loadingException) {
             taskList = new TaskList();
-
-            storage.writeRecord(taskList);
-
-            throw loadingException;
+            try {
+                storage.writeRecord(taskList);
+            } catch (IOException exception) {
+                startingExceptions.add(exception);
+            }
+            startingExceptions.add(loadingException);
         }
     }
 
