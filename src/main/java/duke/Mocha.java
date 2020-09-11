@@ -27,15 +27,22 @@ public class Mocha extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/User.png"));
     private Image mocha = new Image(this.getClass().getResourceAsStream("/images/Mocha.png"));
 
-    private Ui ui = new Ui();
-    private Parser parser = ui.createParser();
-    private Storage storage = new Storage("data/tasks.txt");
-    private TaskList tasks = new TaskList(storage.loadData());
+    private Ui ui;
+    private Parser parser;
+    private Storage storage;
+    private TaskList tasks;
 
     public static void main(String[] args) {
         // ... 
     }
 
+    public Mocha() {
+        ui = new Ui();
+        parser = ui.createParser();
+        storage = new Storage("data/tasks.txt");
+        tasks = new TaskList(storage.loadData());        
+    }
+    
     @Override
     public void start(Stage stage) {
         //Step 1. Setting up required components
@@ -109,9 +116,9 @@ public class Mocha extends Application {
             handleUserInput();
         });
 
-        Label mochaIntroduction = new Label(ui.sayIntroduction());
+//        Label mochaIntroduction = new Label(ui.sayIntroduction());
         dialogContainer.getChildren().add(
-                DialogBox.getMochaDialog(mochaIntroduction, new ImageView(mocha)));
+                DialogBox.getMochaDialog(ui.sayIntroduction(), mocha));
         
     }
 
@@ -138,8 +145,8 @@ public class Mocha extends Application {
         Label userText = new Label(userInput.getText());
         Label mochaText = new Label(getResponse(userInput.getText()));
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(userText, new ImageView(user)),
-                DialogBox.getMochaDialog(mochaText, new ImageView(mocha))
+                DialogBox.getUserDialog(userInput.getText(), user),
+                DialogBox.getMochaDialog(getResponse(userInput.getText()), mocha)
         );
         userInput.clear();
     }
@@ -148,7 +155,7 @@ public class Mocha extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
+    String getResponse(String input) {
         String responseReturn = ""; 
         
         try {
