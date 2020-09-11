@@ -54,4 +54,8 @@ public class Ui {
             return "Invalid username or password. Please try again.";
         }
     }
+
+    public static String accessMissing() {
+        return "No Access for Command. Please login in first.";
+    }
 }
