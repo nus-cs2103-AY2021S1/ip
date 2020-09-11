@@ -27,7 +27,7 @@ public class Event extends Task {
     /**
      * Creates an Event by extracting out relevant information from the parsed user input
      *
-     * @param parsedInput Parser's output
+     * @param parsedInput User's input that is parsed by the parser
      *
      * @return Event
      */

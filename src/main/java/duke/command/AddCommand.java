@@ -15,7 +15,8 @@ import duke.ui.Ui;
  */
 public class AddCommand implements Command {
     private final String[] parsedInput;
-    private final String commandTag; // indicates what kind of Task
+    /*Indicates the type of task*/
+    private final String commandTag;
     /**
      * Constructs an AddCommand Object.
      *

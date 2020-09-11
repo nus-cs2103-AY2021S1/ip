@@ -41,8 +41,7 @@ public class Parser {
             return new HelpCommand(input);
         } else if (keyword.equals(CommandWord.LIST_CMD.getCmd())) {
             return new ListCommand(new String[]{input});
-        } else if (keyword.equals(CommandWord.DONE_CMD.getCmd())
-                || keyword.equals(CommandWord.DELETE_CMD.getCmd())) {
+        } else if (keyword.equals(CommandWord.DONE_CMD.getCmd()) || keyword.equals(CommandWord.DELETE_CMD.getCmd())) {
             return parseDoneDelete(input);
         } else if (keyword.equals(CommandWord.FIND_CMD.getCmd())) {
             return new FindCommand(input);
@@ -66,8 +65,8 @@ public class Parser {
      *
      * @return Either Done or Delete Command
      *
-     * @throws DukeException If the format is wrong or if a non-integer is passed in as argument or  multiple arguments
-     *                       are passed in
+     * @throws DukeException If the format is wrong, a non-integer is passed in as argument,
+     *                       multiple arguments are passed in
      */
     private Command parseDoneDelete(String input) throws DukeException {
         StringTokenizer st = new StringTokenizer(input);
@@ -76,8 +75,8 @@ public class Parser {
             throw new DukeException(Message.ERROR_DONEDELETE_ARGS.getMsg());
         }
         String command = st.nextToken();
-        assert command.equals(CommandWord.DONE_CMD.getCmd())
-                || command.equals(CommandWord.DELETE_CMD.getCmd()) : "parseDoneDelete(): neither done nor delete cmd";
+        assert command.equals(CommandWord.DONE_CMD.getCmd()) || command.equals(CommandWord.DELETE_CMD.getCmd())
+                : "parseDoneDelete(): neither done nor delete cmd";
         String taskID = st.nextToken();
         if (!isInteger(taskID)) {
             throw new DukeException(Message.ERROR_DONEDELETE_NOTINT.getMsg());
@@ -135,9 +134,7 @@ public class Parser {
         if (description.isEmpty()) {
             throw new DukeException(Message.ERROR_DEADLINE_DESC.getMsg());
         }
-        return new String[]{"D",
-                            description,
-                            dateString};
+        return new String[]{"D", description, dateString};
     }
     /**
      * Parses user input that is related to the Event command
@@ -184,11 +181,7 @@ public class Parser {
         if (dateString.isEmpty()) {
             throw new DukeException(Message.ERROR_EVENT_DATE.getMsg());
         }
-        return new String[]{"E",
-                            description,
-                            dateString,
-                            startTime,
-                            endTime};
+        return new String[]{"E", description, dateString, startTime, endTime};
     }
     /**
      * Checks if input is a string representation of an integer
