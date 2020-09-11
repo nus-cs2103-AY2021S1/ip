@@ -1,15 +1,15 @@
-import org.junit.jupiter.api.Test;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import org.junit.jupiter.api.Test;
 
 public class TaskListTest {
     @Test
-    public void testGetNumTask(){
+    public void testGetNumTask() {
         assertEquals(0, new TaskList().getNumTasks());
         List<Task> listOfTask = new ArrayList<>();
         listOfTask.add(new Todo("play", Optional.empty()));
@@ -18,14 +18,14 @@ public class TaskListTest {
     }
 
     @Test
-    public void testGetSameDateTask(){
+    public void testGetSameDateTask() {
         class SimpleTask extends Task {
-            LocalDate date = LocalDate.parse("2020-08-08");
-            SimpleTask(){
+            private LocalDate date = LocalDate.parse("2020-08-08");
+            SimpleTask() {
                 super("test", Optional.empty());
             }
             @Override
-            public Optional<LocalDate> getDate(){
+            public Optional<LocalDate> getDate() {
                 return Optional.of(date);
             }
         }
@@ -36,14 +36,14 @@ public class TaskListTest {
     }
 
     @Test
-    public void testGetAllTasks(){
+    public void testGetAllTasks() {
         class SimpleTask extends Task {
-            LocalDate date = LocalDate.parse("2020-08-08");
-            SimpleTask(){
+            private LocalDate date = LocalDate.parse("2020-08-08");
+            SimpleTask() {
                 super("test", Optional.empty());
             }
             @Override
-            public Optional<LocalDate> getDate(){
+            public Optional<LocalDate> getDate() {
                 return Optional.of(date);
             }
         }
