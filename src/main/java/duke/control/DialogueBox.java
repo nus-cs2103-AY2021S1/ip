@@ -124,6 +124,8 @@ public class DialogueBox extends HBox {
             return Font.font("Verdana", FontPosture.ITALIC, 10);
         } else if (messageType == MessageType.COMMAND_NOT_FOUND_MESSAGE) {
             return Font.font("Verdana", FontWeight.BOLD, 10);
+        } else if (messageType == MessageType.USER_MESSAGE) {
+            return Font.font("Arial", 16);
         } else {
             return Font.font("Arial", 10);
         }
