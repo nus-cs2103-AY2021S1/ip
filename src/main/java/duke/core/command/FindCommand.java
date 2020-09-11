@@ -1,6 +1,7 @@
 package duke.core.command;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import duke.core.task.Task;
 import duke.designpattern.command.Executable;
@@ -9,6 +10,8 @@ import duke.designpattern.command.Executable;
  * List all tasks which containing searchString
  */
 public class FindCommand implements Executable {
+
+    private static final Logger logger = Logger.getLogger(FindCommand.class.getName());
 
     private final List<Task> taskList;
     private final String searchString;
@@ -30,12 +33,15 @@ public class FindCommand implements Executable {
      */
     @Override
     public void execute() {
+
+        logger.info(FindCommand.class.getSimpleName() + ": Searching for '" + searchString + "'");
         System.out.println("Here are the matching tasks in your list:");
 
         // Search matching tasks
         int index = 0;
         for (Task task : taskList) {
             if (task.toString().contains(searchString)) {
+                logger.fine(FindCommand.class.getSimpleName() + ": Found match " + task.toString());
                 System.out.println(++index + ". " + task.toString());
             }
         }

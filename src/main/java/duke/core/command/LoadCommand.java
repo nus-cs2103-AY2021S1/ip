@@ -1,6 +1,7 @@
 package duke.core.command;
 
 import java.io.FileNotFoundException;
+import java.util.logging.Logger;
 
 import duke.core.DukeData;
 import duke.core.storage.Storage;
@@ -13,6 +14,8 @@ import duke.designpattern.command.Executable;
  * Any existing task in taskList will be deleted
  */
 public class LoadCommand implements Executable {
+
+    private static final Logger logger = Logger.getLogger(LoadCommand.class.getName());
 
     private final DukeData dukeData;
     private final String filePath;
@@ -40,11 +43,14 @@ public class LoadCommand implements Executable {
     @Override
     public void execute() {
         try {
+            logger.info(LoadCommand.class.getSimpleName() + ": Loading data from '" + filePath + "'");
             Storage.load(dukeData.getTaskList(), filePath);
             System.out.println("Load: " + dukeData.getTaskList().size() + " entries");
             // Clear history
+            logger.warning(LoadCommand.class.getSimpleName() + ": Clearing command history");
             dukeData.getHistory().clear();
         } catch (FileNotFoundException e) {
+            logger.warning(LoadCommand.class.getSimpleName() + ": File Not Found");
             throw new CommandException("Error: File not found");
         }
     }

@@ -1,5 +1,7 @@
 package duke.core.command;
 
+import java.util.logging.Logger;
+
 import duke.core.task.Task;
 import duke.designpattern.command.ReversibleExecutable;
 
@@ -7,6 +9,8 @@ import duke.designpattern.command.ReversibleExecutable;
  * Mark task as done
  */
 public class DoneCommand implements ReversibleExecutable {
+
+    private static final Logger logger = Logger.getLogger(DoneCommand.class.getName());
 
     private final Task task;
 
@@ -26,6 +30,7 @@ public class DoneCommand implements ReversibleExecutable {
     public void execute() {
         task.setCompleted(true);
         System.out.println("# Done: " + task.toString());
+        logger.info(DoneCommand.class.getSimpleName() + ": Done " + task.toString());
     }
 
     /**
@@ -35,6 +40,7 @@ public class DoneCommand implements ReversibleExecutable {
     public void reverse() {
         task.setCompleted(false);
         System.out.println("# Undo Done: " + task.toString());
+        logger.info(DoneCommand.class.getSimpleName() + ": Undo Done " + task.toString());
     }
 
 }

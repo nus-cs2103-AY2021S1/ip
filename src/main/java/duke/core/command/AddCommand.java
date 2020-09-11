@@ -1,6 +1,7 @@
 package duke.core.command;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import duke.core.task.Task;
 import duke.designpattern.command.CommandException;
@@ -10,6 +11,8 @@ import duke.designpattern.command.ReversibleExecutable;
  * Add a task to taskList
  */
 public class AddCommand implements ReversibleExecutable {
+
+    private static final Logger logger = Logger.getLogger(AddCommand.class.getName());
 
     private final List<Task> taskList;
     private final Task task;
@@ -33,12 +36,14 @@ public class AddCommand implements ReversibleExecutable {
     public void execute() {
         // Disallow duplicate
         if (taskList.contains(task)) {
+            logger.info(AddCommand.class.getSimpleName() + ": Cannot add duplicate task");
             throw new CommandException("Error: Duplicate Task");
         }
 
         // Add task
         this.taskList.add(task);
         System.out.println("+ Add: " + task.toString());
+        logger.info(AddCommand.class.getSimpleName() + ": Add " + task.toString());
     }
 
     /**
@@ -48,6 +53,7 @@ public class AddCommand implements ReversibleExecutable {
     public void reverse() {
         this.taskList.remove(task);
         System.out.println("- Undo Add: " + task.toString());
+        logger.info(AddCommand.class.getSimpleName() + ": Undo Add " + task.toString());
     }
 
 }

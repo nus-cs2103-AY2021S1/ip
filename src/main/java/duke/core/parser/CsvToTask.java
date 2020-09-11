@@ -1,6 +1,7 @@
 package duke.core.parser;
 
 import java.util.Scanner;
+import java.util.logging.Logger;
 
 import duke.core.task.Deadline;
 import duke.core.task.Event;
@@ -46,6 +47,8 @@ public enum CsvToTask {
         }
     };
 
+    private static final Logger logger = Logger.getLogger(CsvToTask.class.getName());
+
     /**
      * Task specific parser (Helper method).
      * Parses the csv into its String representation
@@ -64,9 +67,12 @@ public enum CsvToTask {
         assert csv != null;
         try (Scanner scanner = new Scanner(csv)) {
             scanner.useDelimiter(",");
-            return CsvToTask.valueOf(scanner.next()).parse(scanner);
+            Task task = CsvToTask.valueOf(scanner.next()).parse(scanner);
+            logger.fine("Recovered: " + task.toString());
+            return task;
         } catch (Exception e) { // Many errors can occur when parsing
             System.err.println("Corrupt entry: " + csv);
+            logger.warning("Corrupt entry: " + csv);
             return null;
         }
     }

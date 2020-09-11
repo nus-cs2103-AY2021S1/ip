@@ -1,6 +1,7 @@
 package duke.core.command;
 
 import java.util.List;
+import java.util.logging.Logger;
 
 import duke.core.task.Task;
 import duke.designpattern.command.ReversibleExecutable;
@@ -9,6 +10,8 @@ import duke.designpattern.command.ReversibleExecutable;
  * Remove task from taskList
  */
 public class DeleteCommand implements ReversibleExecutable {
+
+    private static final Logger logger = Logger.getLogger(DeleteCommand.class.getName());
 
     private final List<Task> taskList;
     private final Task task;
@@ -34,9 +37,11 @@ public class DeleteCommand implements ReversibleExecutable {
      */
     @Override
     public void execute() {
+        assert this.taskList.contains(task);
         this.removeIndex = this.taskList.indexOf(task);
         this.taskList.remove(removeIndex);
         System.out.println("- Delete: " + task.toString());
+        logger.info(DeleteCommand.class.getSimpleName() + ": Delete " + task.toString());
     }
 
     /**
@@ -46,6 +51,7 @@ public class DeleteCommand implements ReversibleExecutable {
     public void reverse() {
         this.taskList.add(removeIndex, task);
         System.out.println("+ Undo Delete: " + task.toString());
+        logger.info(DeleteCommand.class.getSimpleName() + ": Undo Delete " + task.toString());
     }
 
 }

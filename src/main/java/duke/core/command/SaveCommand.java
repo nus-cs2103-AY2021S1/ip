@@ -2,6 +2,7 @@ package duke.core.command;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.logging.Logger;
 
 import duke.core.storage.Storage;
 import duke.core.task.Task;
@@ -14,6 +15,8 @@ import duke.designpattern.command.Executable;
  * Any existing data in filePath will be overwritten
  */
 public class SaveCommand implements Executable {
+
+    private static final Logger logger = Logger.getLogger(SaveCommand.class.getName());
 
     private final List<Task> taskList;
     private final String filePath;
@@ -39,9 +42,11 @@ public class SaveCommand implements Executable {
     @Override
     public void execute() {
         try {
+            logger.info(SaveCommand.class.getSimpleName() + ": Saving data into '" + filePath + "'");
             Storage.save(taskList, filePath);
             System.out.println("Save: " + taskList.size() + " entries");
         } catch (IOException e) {
+            logger.warning(SaveCommand.class.getSimpleName() + ": File/Folder not available");
             throw new CommandException("Error: Ensure directory exists and file is not in use");
         }
     }

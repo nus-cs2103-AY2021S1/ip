@@ -9,6 +9,7 @@ import java.util.Objects;
 import java.util.Scanner;
 import java.util.function.Predicate;
 import java.util.function.Supplier;
+import java.util.logging.Logger;
 import java.util.stream.Stream;
 
 import duke.core.parser.CsvToTask;
@@ -18,6 +19,8 @@ import duke.core.task.Task;
  * The Storage class provides methods to save/load the taskList to/from a csv file
  */
 public class Storage {
+
+    private static final Logger logger = Logger.getLogger(Storage.class.getName());
 
     /**
      * Save and overwrite the taskList into specified filePath
@@ -36,6 +39,7 @@ public class Storage {
         try (FileWriter fileWriter = new FileWriter(filePath)) {
             for (Task task : taskList) {
                 fileWriter.write(task.toCsv() + "\n");
+                logger.fine("Save: " + task.toCsv());
             }
 
             fileWriter.flush();
