@@ -52,6 +52,8 @@ public class Parser {
             throw new DukeException("Oops! I am sorry but I don't understand what that means");
         }
 
+        assert output != null;
+        assert !output.isEmpty();
         return output;
     }
 }

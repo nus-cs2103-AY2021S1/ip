@@ -16,7 +16,6 @@ public class Duke {
      */
     public Duke() {
         this.ui = new Ui();
-        System.out.println(Duke.DATABASE_DIRECTORY_PATH);
         this.storage = new Storage(Duke.DATABASE_DIRECTORY_PATH);
         this.parser = new Parser();
 
@@ -42,6 +41,8 @@ public class Duke {
     }
 
     public String getResponse(String input) {
+        assert input != null;
+
         try {
             String output = this.parser.parseCommands(this.tasks, this.ui, input);
             this.storage.save(this.tasks.getDatabase());
