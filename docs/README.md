@@ -1,5 +1,5 @@
-# User Guide
-
+# Duke User Guide
+Duke is a bot that helps you keep track of your tasks at hand.
 ## Features 
 
 ### Feature 1 
