@@ -17,6 +17,6 @@ public class ToDos extends Task {
      */
     public String toString() {
         return "  [" + this.getType() + "][" + this.getStatusIcon() + "] "
-                + this.getDescription();
+                + this.getDescription() + this.recurringPrinter();
     }
 }

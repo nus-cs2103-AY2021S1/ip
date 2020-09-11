@@ -15,7 +15,6 @@ import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
-
 public class Duke extends Application {
 
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
@@ -131,7 +130,8 @@ public class Duke extends Application {
         });
 
         //Scroll down to the end every time dialogContainer's height changes.
-        Label introText = new Label (ui.)
+        Label dukeIntro = new Label(ui.introMessage());
+        dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(dukeIntro, new ImageView(duke)));
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 

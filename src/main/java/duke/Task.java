@@ -6,6 +6,7 @@ public class Task implements Serializable {
     protected String description;
     protected boolean isDone;
     protected String type;
+    protected boolean recurring;
 
     /**
      * Class Constructor specifying the description of the Task.
@@ -14,6 +15,7 @@ public class Task implements Serializable {
     public Task(String description) {
         this.description = description;
         this.isDone = false;
+        this.recurring = false;
     }
 
     /**
@@ -54,7 +56,23 @@ public class Task implements Serializable {
         this.isDone = true;
     }
 
+    /**
+     * Returns a string to indicate that a task is recurring.
+     * @return the string to indicate recurrence
+     */
+    public String recurringPrinter() {
+        if (this.recurring) {
+            return " [Recurring Weekly]";
+        } else {
+            return "";
+        }
+    }
+
+    public void removeRecurring() {
+        this.description = this.description.replaceAll("recurring" , "");
+    }
+
     public String toString() {
-        return "  [" + this.getType() + "][" + this.getStatusIcon() + "]" + this.description;
+        return "  [" + this.getType() + "][" + this.getStatusIcon() + "]" + this.description + recurringPrinter();
     }
 }

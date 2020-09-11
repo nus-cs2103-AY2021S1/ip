@@ -1,7 +1,6 @@
 package duke;
 
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class Events extends Task {
 
@@ -31,6 +30,10 @@ public class Events extends Task {
      */
     public String getStart() {
         return this.start;
+    }
+
+    public LocalDate getDate() {
+        return this.date;
     }
 
     /**

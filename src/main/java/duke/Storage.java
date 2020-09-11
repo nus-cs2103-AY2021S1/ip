@@ -39,6 +39,8 @@ public class Storage {
             ObjectInputStream in = new ObjectInputStream(new FileInputStream("" + absolutePath));
             ArrayList<Task> array = (ArrayList<Task>) in.readObject();
             in.close();
+
+            //Add each task found in the save file to the TaskList.
             for (Task task : array) {
                 store.add(task);
             }
