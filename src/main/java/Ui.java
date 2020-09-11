@@ -92,6 +92,21 @@ public class Ui {
         return printMessage();
     }
 
+    public String printHelp() {
+        message = "I see that you need some help!\n\n"
+                + "Here are a list of Duke commands ([] indicates user input):\n\n"
+                + "1. list - shows a list of your existing tasks\n"
+                + "2. find [keyword] - shows a list of existing tasks which contain the given keyword\n"
+                + "3. todo [description] - adds a todo with a description\n"
+                + "4. deadline [description] /by [date in yyyy-mm-dd format] - adds a deadline with a description and a deadline\n"
+                + "5. event [description] /at [date in yyyy-mm-dd format] - adds an event with a description and an event date\n"
+                + "6. done [index] - marks the specified task as done\n"
+                + "7. delete [index] - deletes the specified task from the task list\n"
+                + "8. help - shows the help page\n"
+                + "9. bye - exits the application";
+        return printMessage();
+    }
+
     /**
      * Prints the goodbye message.
      */

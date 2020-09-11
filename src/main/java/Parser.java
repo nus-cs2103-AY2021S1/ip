@@ -20,6 +20,8 @@ public class Parser {
             switch (command) {
             case ("list"):
                 return ui.printTasks(storage.loadExistingData());
+            case ("help"):
+                return ui.printHelp();
             case ("find"):
                 if (inputInfo.length < 2) {
                     throw new DukeException("Error! To find a task, please enter 'find [keyword]'.\n");
