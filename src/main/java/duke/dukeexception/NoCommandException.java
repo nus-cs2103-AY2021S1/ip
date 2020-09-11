@@ -5,12 +5,10 @@ package duke.dukeexception;
  */
 public class NoCommandException extends DukeException {
 
+    /**
+     * Public constructor.
+     */
     public NoCommandException() {
         super("I cannot find this command leh. Try sth else?");
-    }
-
-    @Override
-    public String getMessage() {
-        return super.getMessage();
     }
 }

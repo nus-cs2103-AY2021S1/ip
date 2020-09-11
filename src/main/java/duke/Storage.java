@@ -6,11 +6,14 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
 import duke.dukeexception.DukeException;
+import duke.dukeexception.LoadFailureException;
+import duke.dukeexception.SaveFailureException;
 import duke.task.Deadline;
 import duke.task.Event;
 import duke.task.Task;
@@ -27,6 +30,8 @@ public class Storage {
     public static final String TODO_TASK = "T";
     public static final String DEADLINE_TASK = "D";
     public static final String EVENT_TASK = "E";
+    public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("d MMM yyyy, h.m a");
+
     /** File where data is stored */
     private final File taskFile;
 
@@ -40,43 +45,50 @@ public class Storage {
     }
 
     /**
-     * Loads list of tasks from <code>taskFile</code>.
+     * Loads saved data from <code>taskFile</code>.
      *
      * @return List of tasks to be passed to a <code>TaskList</code> object
      * @throws DukeException If file cannot be created, read or parsed.
      */
-    public List<Task> load() throws DukeException {
+    public List<Task> load() throws LoadFailureException {
         if (!this.taskFile.exists()) {
-            File dir = this.taskFile.getParentFile();
-            if (dir != null && !dir.exists()) {
-                dir.mkdirs();
-            }
-
-            try {
-                this.taskFile.createNewFile();
-            } catch (IOException e) {
-                e.printStackTrace(); // todo
-            }
+            createFile();
         }
 
-        Scanner sc = null;
         try {
-            sc = new Scanner(this.taskFile);
+            Scanner sc = new Scanner(this.taskFile);
+
+            return loadTasksFromFile(sc);
         } catch (FileNotFoundException e) {
-            e.printStackTrace(); // todo
+            e.printStackTrace();
+            throw new LoadFailureException("Cannot find the file. Restart?");
+        }
+    }
+
+    private void createFile() throws LoadFailureException {
+        File directory = this.taskFile.getParentFile();
+        if (directory != null && !directory.exists()) {
+            directory.mkdirs();
         }
 
-        if (sc != null) {
-            List<Task> list = new ArrayList<>();
-            while (sc.hasNext()) {
-                String storedTask = sc.nextLine();
-                Task task = parseFromStorage(storedTask);
-                list.add(task);
-            }
-            return list;
-        } else {
-            return new ArrayList<Task>(); //todo
+        try {
+            this.taskFile.createNewFile();
+        } catch (IOException e) {
+            e.printStackTrace();
+            throw new LoadFailureException("Somehow cannot make a new file. Help me restart?");
         }
+    }
+
+    private List<Task> loadTasksFromFile(Scanner sc) throws LoadFailureException {
+        List<Task> list = new ArrayList<>();
+
+        while (sc.hasNext()) {
+            String storedTask = sc.nextLine();
+            Task task = parseFromStorage(storedTask);
+            list.add(task);
+        }
+
+        return list;
     }
 
     /**
@@ -85,13 +97,14 @@ public class Storage {
      * @param task Task to be added to file.
      * @throws DukeException If task cannot be parsed or file cannot be written to.
      */
-    public void update(Task task) throws DukeException {
+    public void update(Task task) throws SaveFailureException {
         try {
             FileWriter fileWriter = new FileWriter(this.taskFile, true);
             fileWriter.write("\n" + parseToStorage(task));
             fileWriter.close();
         } catch (IOException e) {
             e.printStackTrace();
+            throw new SaveFailureException("Restart?");
         }
     }
 
@@ -101,7 +114,7 @@ public class Storage {
      * @param list Updated list given by <code>TaskList</code> object.
      * @throws DukeException If tasks cannot be parsed or file cannot be written to.
      */
-    public void update(List<Task> list) throws DukeException {
+    public void update(List<Task> list) throws SaveFailureException {
         try {
             FileWriter fileWriter = new FileWriter(this.taskFile);
 
@@ -117,7 +130,8 @@ public class Storage {
             fileWriter.write(fileContents);
             fileWriter.close();
         } catch (IOException e) {
-            e.printStackTrace(); // todo
+            e.printStackTrace();
+            throw new SaveFailureException("Restart?");
         }
     }
 
@@ -132,27 +146,26 @@ public class Storage {
      *          represented as "T | 1 | Homework".
      * @throws DukeException If the type of the task cannot be recognised.
      */
-    protected String parseToStorage(Task task) throws DukeException {
-        String taskType = "";
+    protected String parseToStorage(Task task) throws SaveFailureException {
+        String taskTypeString = "";
         String status = task.isDone() ? DONE : NOT_DONE;
         String taskName = task.getTaskName();
         String taskDescription = "";
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy, h.m a");
 
         if (task instanceof Todo) {
-            taskType = TODO_TASK;
+            taskTypeString = TODO_TASK;
             taskDescription = taskName;
         } else if (task instanceof Deadline) {
-            taskType = DEADLINE_TASK; // + date
-            taskDescription = taskName + " | " + ((Deadline) task).getDateTime().format(formatter);
+            taskTypeString = DEADLINE_TASK; // + date
+            taskDescription = taskName + " | " + ((Deadline) task).getDateTime().format(FORMATTER);
         } else if (task instanceof Event) {
-            taskType = EVENT_TASK;
-            taskDescription = taskName + " | " + ((Event) task).getDateTime().format(formatter);
+            taskTypeString = EVENT_TASK;
+            taskDescription = taskName + " | " + ((Event) task).getDateTime().format(FORMATTER);
         } else {
-            throw new DukeException("Cannot recognise type");
+            throw new SaveFailureException("Cannot recognise the task types!");
         }
 
-        return taskType + " | " + status + " | " + taskDescription;
+        return taskTypeString + " | " + status + " | " + taskDescription;
     }
 
     /**
@@ -161,41 +174,58 @@ public class Storage {
      *
      * @param storedTask String representation of the task
      * @return Task represented by the string input.
-     * @throws DukeException If the string is in the wrong format.
+     * @throws LoadFailureException If the string is in the wrong format.
      */
-    protected Task parseFromStorage(String storedTask) throws DukeException {
+    protected Task parseFromStorage(String storedTask) throws LoadFailureException {
         String[] taskElements = storedTask.split(" \\| ", 4);
 
-        String taskType = taskElements[0];
+        String taskTypeString = taskElements[0];
         String taskName = "";
         LocalDateTime dateTime = null;
-        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("d MMM yyyy, h.m a");
 
         if (taskElements.length >= 3) {
             taskName = taskElements[2];
         }
 
         if (taskElements.length >= 4) {
-            dateTime = LocalDateTime.parse(taskElements[3], formatter);
+            try {
+                dateTime = LocalDateTime.parse(taskElements[3], FORMATTER);
+            } catch (DateTimeParseException e) {
+                e.printStackTrace();
+                throw new LoadFailureException("Look like date and time wrong format.");
+            }
         }
 
-        Task task = null;
-        if (taskType == TODO_TASK) {
-            task = new Todo(taskName);
-        } else if (taskType == DEADLINE_TASK) {
-            task = new Deadline(taskName, dateTime);
-        } else if (taskType == EVENT_TASK) {
-            task = new Event(taskName, dateTime);
-        }
+        Task task = createTask(taskTypeString, taskName, dateTime);
 
         if (taskElements[1].equals(DONE)) {
             task.markDone();
         }
 
-        if (task != null) {
-            return task;
+        return task;
+    }
+
+    /**
+     * Creates task using elements parsed from source file.
+     *
+     * @param taskTypeString String indicating task type.
+     * @param taskName Name of the task (aka Description).
+     * @param dateTime LocalDateTime object indicating date and time of task (if applicable).
+     * @return Task created according the specified elements.
+     * @throws LoadFailureException If the taskTypeString does not refer to any task type.
+     */
+    private Task createTask(String taskTypeString,
+                            String taskName,
+                            LocalDateTime dateTime) throws LoadFailureException {
+        if (taskTypeString == TODO_TASK) {
+            return new Todo(taskName);
+        } else if (taskTypeString == DEADLINE_TASK) {
+            return new Deadline(taskName, dateTime);
+        } else if (taskTypeString == EVENT_TASK) {
+            return new Event(taskName, dateTime);
         } else {
-            throw new DukeException("Cannot read tasks from file.");
+            throw new LoadFailureException("Cannot identify the type of tasks in file."
+                    + "\nProbably wrong format?");
         }
     }
 }
