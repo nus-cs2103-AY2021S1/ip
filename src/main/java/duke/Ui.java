@@ -50,11 +50,7 @@ public class Ui {
             msg = "No tasks in the list wohoo!\n";
         } else {
             msg += "Here are the tasks in your list:\n";
-            for (int i = 0; i < tasks.size(); i++) {
-                String task = tasks.get(i).toString();
-                String taskDesc = (i + 1) + ". " + task + "\n";
-                msg += taskDesc;
-            }
+            msg += tasksToString(tasks);
         }
         return msg;
     }
@@ -65,11 +61,17 @@ public class Ui {
             msg = "No matching tasks in the list\n";
         } else {
             msg += "Here are the matching tasks in your list:\n";
-            for (int i = 0; i < tasks.size(); i++) {
-                String task = tasks.get(i).toString();
-                String taskDesc = (i + 1) + ". " + task + "\n";
-                msg += taskDesc;
-            }
+            msg += tasksToString(tasks);
+        }
+        return msg;
+    }
+
+    private String tasksToString(List<Task> tasks) {
+        String msg = "";
+        for (int i = 0; i < tasks.size(); i++) {
+            String task = tasks.get(i).toString();
+            String taskDesc = (i + 1) + ". " + task + "\n";
+            msg += taskDesc;
         }
         return msg;
     }
