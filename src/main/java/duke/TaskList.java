@@ -81,7 +81,7 @@ class TaskList {
         return getTaskInfoAndTaskListInfoForUi(task);
     }
 
-    String[] getTaskInfoAndTaskListInfoForUi(Task task) {
+    private String[] getTaskInfoAndTaskListInfoForUi(Task task) {
         int len = taskList.size();
 
         String[] taskAndTaskListInfo = new String[2];
