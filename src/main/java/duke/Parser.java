@@ -20,6 +20,7 @@ public class Parser {
     private static final String COMMAND_DEADLINE = "deadline";
     private static final String COMMAND_EVENT = "event";
     private static final String COMMAND_TAG = "tag";
+    private static final String COMMAND_LOGIN = "login";
 
     public static Command parse(String input) throws DukeException {
         if (input.length() == 0) {
@@ -53,6 +54,13 @@ public class Parser {
             int taskIndex = Integer.parseInt(tagInfo[0]);
             String taskTag = tagInfo[1];
             return new TagCommand(taskIndex, taskTag);
+        } else if (commandType.equals(COMMAND_LOGIN)) {
+            String[] userInfo = commandContent.split(" ", 2);
+            String username = userInfo[0];
+            String userPassword = userInfo[1];
+            Login.login(username, userPassword);
+
+            return new LoginCommand();
         }
         return new AddCommand(input);
     }

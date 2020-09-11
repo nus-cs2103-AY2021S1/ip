@@ -1,5 +1,7 @@
 package duke;
 
+import duke.user.User;
+
 /**
  * Ui deals with interactions with the user.
  */
@@ -41,6 +43,15 @@ public class Ui {
             return "Noted. I've tagged Task " + taskIndex + " as " + newTag + ".";
         } else {
             return "Noted. I've tagged Task " + taskIndex + " as " + newTag + ". Its original tag is " + oldTag + ".";
+        }
+    }
+
+    public static String login() {
+        if (Login.isLogined()) {
+            User user = Login.getUser();
+            return "Hi, " + user.getNickname() + "! Long time no see.";
+        } else {
+            return "Invalid username or password. Please try again.";
         }
     }
 }

@@ -1,11 +1,14 @@
 package duke;
 
+import duke.user.User;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
+
 
 
 /**
@@ -16,7 +19,7 @@ public class Storage {
     private String path;
     private File file;
 
-    Storage(String path) {
+    public Storage(String path) {
         File file = new File(path);
         if (file.exists()) {
             this.file = file;
@@ -92,5 +95,23 @@ public class Storage {
             System.out.println("Failed to load" + this.path);
         }
         return tasks;
+    }
+
+    public ArrayList<User> readUsersInfo() {
+        ArrayList<User> users = new ArrayList<User>();
+        try {
+            Scanner sc = new Scanner(this.file);
+            System.out.println(1);
+            while (sc.hasNext()) {
+                String userContent = sc.nextLine();
+                System.out.println(userContent);
+                String[] userInfo = userContent.split(",", 3);
+                User user = new User(userInfo[0], userInfo[1], userInfo[2]);
+                users.add(user);
+            }
+        } catch (Exception e) {
+            System.out.println("Failed to load users information");
+        }
+        return users;
     }
 }
