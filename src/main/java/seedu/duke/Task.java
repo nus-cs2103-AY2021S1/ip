@@ -34,7 +34,7 @@ public class Task {
      * @return Status of a task.
      */
     public String getStatus() {
-        return isDone ? "[DONE]" : "[NOT DONE]";
+        return isDone ? "[O]" : "[X]";
     }
 
     /**
