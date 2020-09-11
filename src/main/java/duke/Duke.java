@@ -28,14 +28,15 @@ public class Duke {
     /**
      * Responds to the user input, if it can be processed. Otherwise, alerts the user to the error
      * that occurred.
+     *
      * @param input The input from the user.
      * @return The response, or the alert to the error that occurred.
      */
     String getResponse(String input) {
         try {
             Command command = Parser.parse(input);
-            String output = command.execute(tasks, ui, storage);
-            return output;
+            command.execute(tasks, ui, storage);
+            return ui.getMessage();
         } catch (DukeException e) {
             return ui.addErrorPrefix(e.getMessage());
         }

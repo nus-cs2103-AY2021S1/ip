@@ -5,6 +5,9 @@ import duke.Storage;
 
 import duke.task.TaskList;
 
+/**
+ * A command that signals the application to close.
+ */
 public class ExitCommand extends Command {
     private CommandType commandType;
 
@@ -18,8 +21,8 @@ public class ExitCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
-        return ui.getGoodbyeMessage();
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
+        ui.goodbye();
     }
 
     @Override

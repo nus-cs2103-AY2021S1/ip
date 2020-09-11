@@ -5,14 +5,20 @@ package duke.task;
  */
 public abstract class Task {
 
+    /** Symbols used to indicate whether the task is done or not. */
+    private static final String SYMBOL_TICK = "\u2713";
+    private static final String SYMBOL_CROSS = "\u2718";
+
     /** A description of the task. */
     protected String description;
+
     /** A boolean indicating whether the task is done or not. */
     protected boolean isDone;
 
     /**
      * Constructs a generic task with a description and defaults to be not done.
      * (For invocation by subclass constructors.)
+     *
      * @param description The task description
      */
     protected Task(String description) {
@@ -27,18 +33,20 @@ public abstract class Task {
 
     /**
      * Gets the icon symbolizing whether the task is done or not done.
+     *
      * @return A symbol as a String
      */
     public String getStatusIcon() {
         if (isDone) {
-            return "\u2713";
+            return SYMBOL_TICK;
         } else {
-            return "\u2718";
+            return SYMBOL_CROSS;
         }
     }
 
     /**
      * Gets the type of the task represented by a unique identifier.
+     *
      * @return The type of the task as its unique identifier
      */
     public abstract String getType();
@@ -50,6 +58,7 @@ public abstract class Task {
 
     /**
      * Returns the String representation of the task customized for being written to a file.
+     *
      * @return The task as a string formatted for being written to the file
      */
     public String toFileString() {

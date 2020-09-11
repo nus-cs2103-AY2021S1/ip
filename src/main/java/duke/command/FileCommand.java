@@ -8,6 +8,9 @@ import duke.task.TaskList;
 
 import java.util.ArrayList;
 
+/**
+ * A command dealing with loading an existing task-list or creating a new task-list.
+ */
 public class FileCommand extends Command {
     private CommandType commandType;
     private String filepath;
@@ -24,23 +27,21 @@ public class FileCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String output;
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         switch (this.commandType) {
         case LOAD:
             ArrayList<Task> fileTasks = storage.loadFromFilepath(filepath);
             assert(tasks.getNumTasks() == 0);
             tasks.loadTasks(fileTasks);
-            output = ui.showLoadingSuccess(filepath);
+            ui.showLoadingSuccess(filepath);
             break;
         case CREATE:
             storage.makeFile(filepath);
-            output = ui.showMakeFileSuccess(filepath);
+            ui.showMakeFileSuccess(filepath);
             break;
         default:
             throw DukeException.INVALID_COMMAND_EXCEPTION;
         }
-        return output;
     }
 
     @Override

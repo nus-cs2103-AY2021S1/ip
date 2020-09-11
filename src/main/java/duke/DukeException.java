@@ -46,12 +46,34 @@ public class DukeException extends Exception {
             "Sorry, the file does not seem to exist.\n"
             + "Try: CREATE <filepath>.");
 
+    /**
+     * A DukeException thrown when there is an existing file in the filepath where the new file is to be created.
+     */
+    public static final DukeException FILE_OVERWRITE_EXCEPTION = new DukeException(
+            "Sorry, that filepath already has an existing file.\n"
+                    + "Would you like to load that file, or create a file in a different filepath?");
+
+    /**
+     * A DukeException thrown when an I/O error occurs while trying to write to a file at the
+     * specified filepath.
+     */
     public static final DukeException FILE_NO_ACCESS_EXCEPTION = new DukeException(
             "Sorry, I cannot seem to access the file");
 
     /**
+     * A DukeException thrown when the user commands Duke to load/create a file but does not specify the filepath.
+     */
+    public static final DukeException EMPTY_FILEPATH_EXCEPTION = new DukeException(
+            "Sorry, you did not enter a filepath.");
+
+    public static final DukeException LOADING_CAPACITY_EXCEPTION = new DukeException(
+            "Sorry, you cannot create or load another file while working with the current file.\n"
+                    + "Please restart the session if you would like to change files.");
+
+    /**
      * Sole constructor. Used for creating static instances of DukeException;
      * Restricted to within the class; non-instantiable otherwise.
+     *
      * @param message A custom message tagging the DukeException, detailing the error.
      */
     private DukeException(String message) {

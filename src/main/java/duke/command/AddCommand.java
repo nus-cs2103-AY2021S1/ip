@@ -11,6 +11,9 @@ import duke.task.TaskList;
 
 import java.util.Arrays;
 
+/**
+ * A command dealing with adding a task to a task-list.
+ */
 public class AddCommand extends Command {
     private CommandType commandType;
     private String[] details;
@@ -27,34 +30,32 @@ public class AddCommand extends Command {
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String output;
+    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         switch (commandType) {
         case TODO:
             assert details.length == 1;
             ToDo toDo = new ToDo(details[0]);
             tasks.addTask(toDo);
             storage.addLine(toDo.toFileString());
-            output = ui.showAddedTask(toDo.toString(), tasks.getNumTasks());
+            ui.showAddedTask(toDo.toString(), tasks.getNumTasks());
             break;
         case DEADLINE:
             assert details.length == 2;
             Deadline deadline = new Deadline(details[0], details[1]);
             tasks.addTask(deadline);
             storage.addLine(deadline.toFileString());
-            output = ui.showAddedTask(deadline.toString(), tasks.getNumTasks());
+            ui.showAddedTask(deadline.toString(), tasks.getNumTasks());
             break;
         case EVENT:
             assert details.length == 2;
             Event event = new Event(details[0], details[1]);
             tasks.addTask(event);
             storage.addLine(event.toFileString());
-            output = ui.showAddedTask(event.toString(), tasks.getNumTasks());
+            ui.showAddedTask(event.toString(), tasks.getNumTasks());
             break;
         default:
             throw DukeException.INVALID_COMMAND_EXCEPTION;
-        }
-        return output;
+        };
     }
 
     @Override

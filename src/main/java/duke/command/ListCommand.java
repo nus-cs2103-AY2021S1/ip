@@ -5,6 +5,9 @@ import duke.Storage;
 
 import duke.task.TaskList;
 
+/**
+ * A command dealing with listing tasks from the task-list.
+ */
 public class ListCommand extends Command {
     private CommandType commandType;
 
@@ -19,12 +22,13 @@ public class ListCommand extends Command {
 
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage) {
         String[] lines = tasks.getTasks();
         if (lines.length > 0) {
-            return ui.listNumberedTasks(lines);
+            ui.listNumberedTasks(lines);
+        } else {
+            ui.setNoTasksMessage();
         }
-        return ui.getNoTasksMessage();
     }
 
     @Override
