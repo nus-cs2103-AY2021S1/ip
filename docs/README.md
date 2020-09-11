@@ -62,7 +62,7 @@ Double click the jar file to run
 
 ## Usage
 
-### `deadline` - adds a deadline task
+### `deadline`
 Deadline is a task with description, a completion status, a reminder status and a date. Note that the date format must follow either `dd/MM/yy HH:mm` or `dd/MM/yy`. By default reminder status is set to false and could only be activated/deactivated using the `remind` command.
 
 Example of usage: 
@@ -76,7 +76,7 @@ Got it. I've added this task:
 Now you have <Int> tasks in the list.
 ```
 
-### `event` - adds an event task
+### `event`
 Event is a task with description, a completion status, a reminder status and a date. Note that the date format must follow either `dd/MM/yy HH:mm` or `dd/MM/yy`. By default reminder status is set to false and could only be activated/deactivated using the `remind` command.
 
 Example of usage: 
@@ -90,7 +90,7 @@ Got it. I've added this task:
 Now you have <Int> tasks in the list.
 ```
  
-### `todo` - adds a todo task
+### `todo`
 Todo is a task with a description, a completion status and a reminder status. By default reminder status is set to false and could only be activated/deactivated using the `remind` command.
 
 Example of usage: 
@@ -103,7 +103,7 @@ Got it. I've added this task:
 [T][✘] Project Duke
 Now you have <Int> tasks in the list.
 ```
-### `list` - display a list of task
+### `list`
 Your tasks will be displayed out for you.
 
 Example of usage: 
@@ -119,7 +119,7 @@ Here are the tasks in your list:
 
 ```
 
-### `done` - marks a task as done
+### `done`
 The task to be marked is indicated by the index after the `done` command, you can view the index of the task by typing `list`.
 
 Example of usage: 
@@ -132,7 +132,7 @@ Nice! I've marked this task as done:
 [D][✓] Project Duke submission (by: Friday, 11 Dec 2020, 11:12pm)
 ```
 
-### `delete` - deletes a task from the list
+### `delete`
 The task to be deleted is indicated by the index after the `done` command, you can view the index of the task by typing `list`.
 
 Example of usage: 
@@ -146,7 +146,7 @@ Noted. I've removed this task:
 Now you have <Int> tasks in the list.
 ```
 
-### `find` - find tasks
+### `find`
 Find tasks thats contains the keyword, note that only 1 keyword is allowed currently.
 
 Example of usage: 
@@ -160,7 +160,7 @@ Here are the matching tasks in your list:
 [T][✘] Project Duke
 ```
 
-### `remind` - set a task on reminder
+### `remind`
 The task to be reminded is indicated by the index after the `remind` command, you can view the index of the task by typing `list`. Also, state whether to activate or deactivate the reminder using `y` for yes, `n` for no after the `remind` command. Currently you would have to exit using `bye` and reopening duke to see the reminder tab.
 
 Example of usage: 
@@ -172,7 +172,7 @@ Expected outcome:
 The reminder of this task Project Duke, has been activated
 ```
 
-### `help` - display the list of commands available
+### `help`
 The list of commands available in duke will be displayed as well as its usage.
 
 Example of usage: 
@@ -196,7 +196,7 @@ Here are the list of commands available:
    (e.g. event project /at YYYY-MM-DD HHMM or YYYY-MM-DD)   
 ```
 
-### `bye` - exit and save any data
+### `bye`
 A message will be displayed and after a 1.5s delay, the program will close.
 
 Example of usage: 
