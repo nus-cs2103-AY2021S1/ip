@@ -11,7 +11,7 @@ public abstract class Task {
     /**
      * Creates a new Task object.
      *
-     * @param description details about the Task.
+     * @param description description about the Task.
      */
     public Task(String description) {
         this.description = description;
