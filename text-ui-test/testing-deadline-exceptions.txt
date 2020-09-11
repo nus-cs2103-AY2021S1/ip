@@ -1,0 +1,6 @@
+deadline
+deadline /by week8
+deadline cs2103t /by
+deadline r /by 5
+list
+bye
