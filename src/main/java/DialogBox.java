@@ -1,6 +1,7 @@
 import java.io.IOException;
 import java.util.Collections;
 
+import duke.command.InvalidCommandException;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -38,7 +39,7 @@ public class DialogBox extends HBox {
      * @param l the label with the text for the dialog box
      * @param iv the imageview of the image of the speaker of the dialog box
      */
-    public DialogBox(Label l, ImageView iv) {
+    public DialogBox(Label l, ImageView iv, boolean isUserDialog) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -50,6 +51,12 @@ public class DialogBox extends HBox {
         dialog.setText(l.getText());
         displayPicture.setImage(iv.getImage());
         dialog.setFont(Font.font("Ayuthaya", 13));
+        if (isUserDialog) {
+            dialog.setStyle("-fx-background-color: #001935; -fx-text-fill: #e6fbff; -fx-label-padding:3;"
+                    + " -fx-border-radius: 3; -fx-background-radius: 3;");
+        } else {
+            styleIfException();
+        }
         dialog = l;
         displayPicture = iv;
 
@@ -62,6 +69,12 @@ public class DialogBox extends HBox {
                 BorderStrokeStyle.SOLID, CornerRadii.EMPTY, BorderWidths.DEFAULT)));
         this.setPadding(new Insets(10, 10, 10, 10));
         setProperHeight(l);
+    }
+
+    private void styleIfException() {
+        if (dialog.getText().startsWith(InvalidCommandException.INVALID_COMMAND_EXCEPTION_PREFIX)) {
+            dialog.setTextFill(Color.rgb(140, 10, 10));
+        }
     }
 
     private void setProperHeight(Label l) {
@@ -83,14 +96,21 @@ public class DialogBox extends HBox {
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
         setBackground(new Background(new BackgroundFill(Color.ALICEBLUE, CornerRadii.EMPTY, Insets.EMPTY)));
+        if (dialog.getText().startsWith(InvalidCommandException.INVALID_COMMAND_EXCEPTION_PREFIX)) {
+            setBackground(new Background(new BackgroundFill(Color.rgb(246, 217, 217, 0.3),
+                    CornerRadii.EMPTY, Insets.EMPTY)));
+        }
     }
 
     public static DialogBox getUserDialog(Label l, ImageView iv) {
-        return new DialogBox(l, iv);
+        DialogBox res = new DialogBox(l, iv, true);
+        res.dialog.setBackground(new Background(new BackgroundFill(Color.rgb(246, 217, 217),
+                CornerRadii.EMPTY, Insets.EMPTY)));
+        return res;
     }
 
     public static DialogBox getDukeDialog(Label l, ImageView iv) {
-        var db = new DialogBox(l, iv);
+        var db = new DialogBox(l, iv, false);
         db.flip();
         return db;
     }
