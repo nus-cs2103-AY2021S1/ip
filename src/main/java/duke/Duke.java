@@ -46,13 +46,10 @@ public class Duke {
 
     public String getWelcomeMessage() {
         String logo =
-                "   __ _____   __  ___  ___  ___  ___\n"
-                        + "  / // / _ | / / / _ \\/ _ \\/ _ \\/ _ \\\n"
-                        + " / _  / __ |/ /__\\_, / // / // / // /\n"
-                        + "/_//_/_/ |_/____/___/\\___/\\___/\\___/\n"
-                        + "Hello! I'm Hal9000\nWhat can I do for you?\n";
+                "Hello! I'm Hal9000\nWhat can I do for you?\n"
+                + "Enter \"help\" for instructions\n";
         // Intro message
-        return Formatter.formatResponse(logo);
+        return logo;
     }
 
     /**

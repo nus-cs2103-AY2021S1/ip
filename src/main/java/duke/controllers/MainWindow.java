@@ -59,7 +59,7 @@ public class MainWindow extends AnchorPane {
      * Creates Duke welcome message dialog box.
      */
     @FXML
-    private void welcomeUser() {
+    public void welcomeUser() {
         String dukeWelcome = duke.getWelcomeMessage();
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialogBox(dukeWelcome, dukeImage)

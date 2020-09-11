@@ -1,16 +1,12 @@
 HELP BOOKLET
 1. Commands we have:
-    list: List all your tasks
-    done [task number]: Mark a task done
-    delete [task number]: Delete a task from your computer
-    help: Display help page
+    list, done [task number], delete [task number], help
 2. Kinds of tasks and syntax
-    Todo:
-        General plan for later.
+    Todo: General task.
         todo [task name]. Example: todo wash dishes
-    Event:
-        Task with a specific time, at a specific place.
-        event [task name] /at [additional information]. Example: event meeting /at 5pm on Zoom
-    Deadline:
-        Task with a specific end date.
-        deadline [task name] /by [YYYY.MM.DD] [HH:MM]. Example: deadline CS2103T /by 2020.10.13 23:59
+    Event: Task with specific deadline
+        event [task name] /at [additional information].
+        Example: event meeting /at 5pm on Zoom
+    Deadline: Task with specific end date.
+        deadline [task name] /by [YYYY.MM.DD] [HH:MM].
+        Example: deadline CS2103T /by 2020.10.13 23:59
