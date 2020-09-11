@@ -30,7 +30,7 @@ Format: `todo TASK_NAME`
 
 Example of usage: 
 
-* `todo sampleTask` creates the `sampleTask` in the task list.
+* `todo sampleTask` creates the `sampleTask` in the task list.  
 ![todoImage](asset/todo.png)  
 
 
@@ -46,7 +46,7 @@ Format: `event TASK_NAME /at SCHEDULED_TIME`
 Example of usage: 
 
 * `even sampleEvent /at 2020-03-12` creates the `sampleEvent` in the task list.
-* The `sampleEvent` is to be done at __March 12, 2020__.
+* The `sampleEvent` is to be done at __March 12, 2020__.  
 ![eventImage](asset/event.png)  
 
 
@@ -79,8 +79,8 @@ Format: `list`
 
 Example of usage: 
 
-* `list` returns all tasks' information presented nicely.
-* ![listImage](asset/list.png)  
+* `list` returns all tasks' information presented nicely.  
+![listImage](asset/list.png)  
    
    
    
@@ -94,8 +94,8 @@ Format: `done TASK_INDEX`
 
 Example of usage: 
 
-* `done 1` updates the status of the first task as "done", represented as `✓`.
-* ![doneImage](asset/done.png)  
+* `done 1` updates the status of the first task as "done", represented as `✓`.  
+![doneImage](asset/done.png)  
    
    
    
@@ -108,8 +108,8 @@ Format: `delete TASK_INDEX`
 
 Example of usage: 
 
-* `delete 1` delete the first task from the list.
-* ![deleteImage](asset/delete.png)  
+* `delete 1` delete the first task from the list.  
+![deleteImage](asset/delete.png)  
    
    
    
@@ -124,8 +124,8 @@ Format: `find KEYWORD`
 Example of usage: 
 
 * `find sample` returns all tasks whose name contain the word `'sample'`.
-* Here the outputs are `sampleEvent` and `sampleDeadline`.
-* ![findImage](asset/find.png)  
+* Here the outputs are `sampleEvent` and `sampleDeadline`.  
+![findImage](asset/find.png)  
    
    
    
@@ -140,5 +140,5 @@ Example of usage:
 
 * `remind 1` returns the earliest 1 task the user hasn't completed.
 * If the task's scheduled time has past, the returned task will also indicate it.
-* Here the earliest task is `sampleEvet`, which should be done at _March 12, 2020_. The output also shows `[Schedule past!]` to remind user this event has past and not been done.
-* ![remindImage](asset/remind.png)
+* Here the earliest task is `sampleEvet`, which should be done at _March 12, 2020_. The output also shows `[Schedule past!]` to remind user this event has past and not been done.  
+![remindImage](asset/remind.png)
