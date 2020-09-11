@@ -27,25 +27,6 @@ public class Ui {
         return message;
     }
 
-//    /**
-//     * Prints the message with borders.
-//     */
-//    public String printMessageWithBorders() {
-//        return divider + message + divider;
-//    }
-
-    /**
-     * Prints the Duke logo.
-     */
-    private String printLogo() {
-        String logo = " ____        _        \n"
-                + "|  _ \\ _   _| | _____ \n"
-                + "| | | | | | | |/ / _ \\\n"
-                + "| |_| | |_| |   <  __/\n"
-                + "|____/ \\__,_|_|\\_\\___|\n";
-        return logo;
-    }
-
     /**
      * Prints the welcome message.
      */

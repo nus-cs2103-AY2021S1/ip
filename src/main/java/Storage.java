@@ -17,31 +17,39 @@ public class Storage {
         try {
             this.filePath = filePath;
             File dataFile = new File(filePath);
-            if (!dataFile.getParentFile().exists()) {
-                if (dataFile.getParentFile().mkdirs()) {
-                    new Ui("Data Directory is created...").printMessage();
-                } else {
-                    new Ui("Oops...the data directory cannot be created :(").printMessage();
-                }
-            } else {
-                new Ui("Data directory located...").printMessage();
-            }
-            if (!dataFile.exists()) {
-                if (dataFile.createNewFile()) {
-                    new Ui("Data file is created...\nInitialization complete!\n").printMessage();
-                } else {
-                    new Ui("Oops...the data file cannot be created :(").printMessage();
-                }
-            } else {
-                new Ui("Data file located...").printMessage();
-                loadExistingData();
-                new Ui("Initialization complete!").printMessage();
-            }
+            checkAndCreateParentDirectory(dataFile);
+            checkAndCreateFile(dataFile);
+            loadExistingData();
+            new Ui("Initialization complete!").printMessage();
         } catch (IOException e) {
             new Ui("An error occurred.").printMessage();
             e.printStackTrace();
         } catch (DukeException e) {
             new Ui("Initialization failed.\ne.getMessage()\n").printMessage();
+        }
+    }
+
+    private void checkAndCreateParentDirectory(File file) {
+        if (!file.getParentFile().exists()) {
+            if (file.getParentFile().mkdirs()) {
+                new Ui("Data Directory is created...").printMessage();
+            } else {
+                new Ui("Oops...the data directory cannot be created :(").printMessage();
+            }
+        } else {
+            new Ui("Data directory located...").printMessage();
+        }
+    }
+
+    private void checkAndCreateFile(File file) throws IOException {
+        if (!file.exists()) {
+            if (file.createNewFile()) {
+                new Ui("Data file is created...\nInitialization complete!\n").printMessage();
+            } else {
+                new Ui("Oops...the data file cannot be created :(").printMessage();
+            }
+        } else {
+            new Ui("Data file located...").printMessage();
         }
     }
 
