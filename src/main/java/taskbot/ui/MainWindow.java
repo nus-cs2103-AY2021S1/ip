@@ -72,7 +72,6 @@ public class MainWindow extends AnchorPane {
             pause.play();
         }
         String response = taskbot.getResponse(input);
-        System.out.println(response);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getTaskbotDialog(response, taskbotImage)
