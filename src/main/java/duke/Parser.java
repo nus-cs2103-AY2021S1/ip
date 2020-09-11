@@ -15,6 +15,7 @@ import duke.exception.InvalidCommandException;
 import duke.exception.InvalidFormatException;
 
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 /**
  * The Parser is a utility class that is used to parse and process
@@ -120,10 +121,11 @@ public class Parser {
 
 
     private static int getIndex(String[] words, String target) {
-        for (int i = 0; i < words.length; i++) {
-            if (words[i].equals(target)) return i;
-        }
-        return -1;
+        int index = IntStream.range(0, words.length)
+                .filter(i -> words[i].equals(target))
+                .findFirst()
+                .orElse(-1);
+        return index;
     }
 
     /**
