@@ -100,9 +100,10 @@ public class Storage {
             FileWriter fw = new FileWriter(this.filepath, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
+            String task;
             switch (command) {
             case TODO:
-                pw.println("TODO|0|" + info);
+                task = "TODO|0|" + info;
                 break;
             case DEADLINE:
                 String[] deadlineInfo = info.split(" /by ");
@@ -112,7 +113,7 @@ public class Storage {
                 // info
                 String deadlineEvent = deadlineInfo[0];
                 LocalDate deadlineTime = Validator.date(deadlineInfo[1]);
-                pw.println("DEADLINE|0|" + deadlineEvent + "|" + deadlineTime);
+                task = "DEADLINE|0|" + deadlineEvent + "|" + deadlineTime;
                 break;
             case EVENT:
                 String[] eventInfo = info.split(" /at ");
@@ -122,11 +123,13 @@ public class Storage {
                 // info
                 String eventEvent = eventInfo[0];
                 LocalDate eventTime = Validator.date(eventInfo[1]);
-                pw.println("EVENT|0|" + eventEvent + "|" + eventTime);
+                task = "EVENT|0|" + eventEvent + "|" + eventTime;
                 break;
             default:
+                task = " | | ";
                 break;
             }
+            pw.println(task);
             pw.flush();
             pw.close();
             // line counter
@@ -138,7 +141,7 @@ public class Storage {
                 lineNum++;
             }
             br.close();
-            writeUndoRecord(Action.ADD, "", lineNum);
+            writeUndoRecord(Action.ADD, task, lineNum);
         } catch (MugException ex) {
             throw new MugException(ex.getMessage());
         } catch (IOException ex) {

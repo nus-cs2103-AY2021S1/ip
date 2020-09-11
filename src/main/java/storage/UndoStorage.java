@@ -7,7 +7,6 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.util.NoSuchElementException;
 
 import mugexception.MugException;
 
@@ -58,7 +57,7 @@ public class UndoStorage {
             default:
                 throw new MugException("Something went wrong. Mug fail to undo:_:");
             }
-        } catch (NoSuchElementException ex) {
+        } catch (NullPointerException ex) {
             throw new MugException("Mug do not have anything to undo. TT");
         } catch (IOException ex) {
             throw new MugException("Something went wrong. Mug fail to undo:_:");
