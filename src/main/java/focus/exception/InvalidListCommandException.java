@@ -4,6 +4,6 @@ package focus.exception;
 public class InvalidListCommandException extends FocusException {
     /** Creates InvalidListCommandException for ListCommand class to throw. */
     public InvalidListCommandException() {
-        super("Did you meant the command 'list'?");
+        super("Hmm, did you meant the command 'list'?");
     }
 }

@@ -4,6 +4,6 @@ package focus.exception;
 public class InvalidHelpCommandException extends FocusException {
     /** Creates InvalidHelpCommandException for HelpCommand class to throw. */
     public InvalidHelpCommandException() {
-        super("Did you meant the command 'help'?");
+        super("Hmm, did you meant the command 'help'?");
     }
 }

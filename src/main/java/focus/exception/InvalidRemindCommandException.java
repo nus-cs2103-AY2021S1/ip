@@ -4,6 +4,6 @@ package focus.exception;
 public class InvalidRemindCommandException extends FocusException {
     /** Creates InvalidRemindCommandException for RemindCommand class to throw. */
     public InvalidRemindCommandException() {
-        super("Did you meant the command 'remind'?");
+        super("Hmm, did you meant the command 'remind'?");
     }
 }
