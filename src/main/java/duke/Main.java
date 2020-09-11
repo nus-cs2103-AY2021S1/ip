@@ -22,7 +22,7 @@ public class Main extends Application {
             assert ap != null : "Anchor pane cannot be null";
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            stage.setTitle("Duke");
+            stage.setTitle("Duke! ٩(◕‿◕｡)۶ ");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
