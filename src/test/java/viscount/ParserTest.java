@@ -22,6 +22,9 @@ import viscount.command.DeleteAllDoneCommand;
 import viscount.command.DeleteCommand;
 import viscount.command.DoneAllCommand;
 import viscount.command.DoneCommand;
+import viscount.command.EditDateTimeCommand;
+import viscount.command.EditDescriptionAndDateTimeCommand;
+import viscount.command.EditDescriptionCommand;
 import viscount.command.ListCommand;
 import viscount.exception.ViscountException;
 import viscount.task.Deadline;
@@ -201,6 +204,46 @@ public class ParserTest {
     public void parse_invalidAddCommand_exceptionThrown(String addCommand) {
         try {
             Parser.parse(addCommand);
+            fail();
+        } catch (ViscountException e) {
+            // Exception thrown and caught successfully
+            assertTrue(true);
+        }
+    }
+
+    @ParameterizedTest
+    @DisplayName("Parse valid edit command")
+    @MethodSource("provideValidEditCommandForParseEditCommand")
+    public void parse_validEditCommand_success(String editCommand, Command expectedResult) {
+        try {
+            Command actualResult = Parser.parse(editCommand);
+
+            assertEquals(expectedResult, actualResult);
+        } catch (ViscountException e) {
+            fail();
+        }
+    }
+
+    private static Stream<Arguments> provideValidEditCommandForParseEditCommand() {
+        return Stream.of(
+                Arguments.of(
+                        "edit 1 /desc t0", new EditDescriptionCommand(0, "t0")),
+                Arguments.of(
+                        "edit 2 /date 28-09-2020", new EditDateTimeCommand(1, LocalDateTime.of(2020, 9, 28, 0, 0))),
+                Arguments.of(
+                        "edit 3 /desc t0 /date 28-09-2020 1020",
+                        new EditDescriptionAndDateTimeCommand(2,
+                                new EditDescriptionCommand(2, "t0"),
+                                new EditDateTimeCommand(2, LocalDateTime.of(2020, 9, 28, 10, 20))))
+        );
+    }
+
+    @ParameterizedTest
+    @DisplayName("Parse invalid edit command")
+    @ValueSource(strings = {"edit", "edit 1", "edit 1 /desc", "edit 1 /date 28092020"})
+    public void parse_invalidEditCommand_exceptionThrown(String editCommand) {
+        try {
+            Parser.parse(editCommand);
             fail();
         } catch (ViscountException e) {
             // Exception thrown and caught successfully

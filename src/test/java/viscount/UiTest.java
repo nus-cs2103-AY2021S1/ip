@@ -109,6 +109,35 @@ public class UiTest {
     }
 
     @Test
+    @DisplayName("Get list response with specified find string")
+    public void getListResponse_specifiedFindString_success() {
+        String expectedResult = "Here are the tasks containing 'book' in your list:\n"
+                + "1.[T][" + CROSS_ICON + "] read book\n"
+                + "2.[D][" + TICK_ICON + "] return book (by: Aug 24 2020, 10:00)";
+
+        List<Task> filteredTasks = Arrays.asList(
+                new Todo ("read book", false),
+                new Deadline("return book", true, LocalDateTime.of(2020, 8, 24, 10, 0)));
+        String actualResult = new Ui().getListResponse(filteredTasks, "", "", "book");
+
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
+    @DisplayName("Get list response with specified modifier, date string and find string")
+    public void getListResponse_specifiedAllFilters_success() {
+        String expectedResult = "Here are the deadlines occurring on Sep 28 2020 containing 'book' in your list:\n"
+                + "1.[D][" + TICK_ICON + "] return book (by: Sep 28 2020, 10:00)";
+
+        List<Task> filteredTasks = Arrays.asList(
+                new Deadline("return book", true, LocalDateTime.of(2020, 9, 28, 10, 0))
+        );
+        String actualResult = new Ui().getListResponse(filteredTasks, "deadline", "Sep 28 2020", "book");
+
+        assertEquals(expectedResult, actualResult);
+    }
+
+    @Test
     @DisplayName("Get add task response")
     public void getAddResponse_task_success() {
         String expectedResult = "Very well. I've added this todo:\n"

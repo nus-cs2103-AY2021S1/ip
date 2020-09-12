@@ -48,4 +48,22 @@ public class EditDescriptionAndDateTimeCommand extends EditCommand {
         response += editDescriptionCommand.executeAndGetResponse(taskList, ui, storage);
         return response;
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == this) {
+            return true;
+        }
+
+        if (o == null || o.getClass() != this.getClass()) {
+            return false;
+        }
+
+        EditDescriptionAndDateTimeCommand editDescriptionAndDateTimeCommand = (EditDescriptionAndDateTimeCommand) o;
+        boolean hasSameDescriptionCommand =
+                this.editDescriptionCommand.equals(editDescriptionAndDateTimeCommand.editDescriptionCommand);
+        boolean hasSameDateTimeCommand =
+                this.editDateTimeCommand.equals(editDescriptionAndDateTimeCommand.editDateTimeCommand);
+        return hasSameDescriptionCommand && hasSameDateTimeCommand;
+    }
 }
