@@ -51,17 +51,18 @@ public class Deadline extends Task {
      * @throws DukeInvalidDateException
      * @throws DukeInvalidTaskException
      */
-    public Deadline(String taskName, String date, Frequency frequency)
+    public Deadline(String taskName, String date, String frequency)
             throws DukeInvalidDateException, DukeInvalidTaskException {
         super(taskName);
         assert taskName != null : "TaskName should not be null!";
         assert date != null : "Date should not be null!";
         assert !date.equals(" ");
         assert frequency != null : "Frequency cannot be null!";
-        repeatedFrequency = frequency;
+        repeatedFrequency = translateToFrequency(frequency);
         setIsRepetitive();
         if (!date.equals(null) && !date.equals(" ")) {
             this.date = date;
+            System.out.println(date);
             try {
                 super.dateTime = LocalDate.parse(date);
             } catch (DateTimeParseException err) {
@@ -77,7 +78,7 @@ public class Deadline extends Task {
      *
      * @return a String representing the date.
      */
-
+    @Override
     public String getDate() {
         if (dateTime == null) {
             return date;
@@ -95,10 +96,14 @@ public class Deadline extends Task {
     @Override
     public String toString() {
         String finished = this.isDone ? "✓" : "✗";
+        String frequency = isRepetitive
+                ? ", repeats " + getFrequency()
+                : ", does not repeat";
         String toReturn = dateTime == null
                             ? "[D]" + "[" + finished + "] " + taskName + " (by: " + date + ")"
                             : "[D]" + "[" + finished + "] " + taskName + " (by: "
-                                + dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                                + dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                                + frequency + ")";
         return toReturn;
     }
 }

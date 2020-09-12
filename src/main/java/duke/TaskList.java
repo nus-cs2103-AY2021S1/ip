@@ -10,8 +10,8 @@ import duke.exception.DukeInvalidTaskException;
 import duke.tasks.Deadline;
 import duke.tasks.Event;
 import duke.tasks.Task;
-import duke.tasks.Task.Frequency;
 import duke.tasks.Todo;
+
 
 /**
  * The TaskList class is used to keep track of the tasks given by the user.
@@ -19,15 +19,15 @@ import duke.tasks.Todo;
  */
 
 public class TaskList {
-    private ArrayList<Task> todo;
-    private Storage storage;
+    private final ArrayList<Task> todo;
+    private final Storage storage;
 
     /**
-     * Initalizes a TaskList object
+     * Initialize a TaskList object
      *
      * @param storage object in which the file data is read, written and stored in.
-     * @throws FileNotFoundException
-     * @throws DukeException
+     * @throws FileNotFoundException file not found, check file path
+     * @throws DukeException issue creating duke object
      */
     public TaskList(Storage storage) throws FileNotFoundException, DukeException {
         this.storage = storage;
@@ -37,7 +37,7 @@ public class TaskList {
      * Deletes the task from the task list.
      *
      * @param line the line in which the command of delete was given.
-     * @throws DukeException
+     * @throws DukeException issue creating duke object
      */
 
     public String delete(String line) throws DukeException {
@@ -70,24 +70,25 @@ public class TaskList {
      * Adds an event task to the task list.
      *
      * @param line the line in which the command of adding event was given.
-     * @throws DukeInvalidTaskException
-     * @throws DukeInvalidDayException
+     * @throws DukeInvalidTaskException task given is invalid
+     * @throws DukeInvalidDayException day given is invalid
      */
 
     public String addEvent (String line) throws DukeInvalidDayException, DukeInvalidTaskException {
         assert line != null : "event given cannot be null";
-        String[] splits = line.split("deadline |/at |/repeat ");
+        String[] splits = line.split("event |/at | /repeat ");
         boolean isRepetitive = splits.length == 4;
         String toReturn = Ui.showLine();
         if (splits.length > 2) {
+            System.out.println(splits[3]);
             Event task = isRepetitive
-                            ? new Event(splits[1], splits[2], evaluateFrequency(splits[3]))
+                            ? new Event(splits[1], splits[2], splits[3])
                             : new Event(splits[1], splits[2]);
             todo.add(task);
             toReturn += "Got it. I've added this to task: \n" + task + "\n"
                     + "Now you have " + todo.size() + " tasks in the list \n"
                     + Ui.showLine();
-            String textToAppend = "\nE | 0 | " + splits[1] + " | " + splits[2];
+            String textToAppend = "\nE | 0 | " + splits[1] + " | " + splits[2] + " | " + splits[3];
             storage.appendFile(textToAppend);
             return toReturn;
         } else if (splits.length > 1) {
@@ -102,23 +103,23 @@ public class TaskList {
      * Adds an deadline task to the task list.
      *
      * @param line the line in which the command of adding deadline task was given.
-     * @throws DukeInvalidDateException
-     * @throws DukeInvalidTaskException
+     * @throws DukeInvalidDateException date given is invalid
+     * @throws DukeInvalidTaskException task given is invalid
      */
     public String addDeadline (String line) throws DukeInvalidDateException, DukeInvalidTaskException {
         assert line != null : "deadline task given cannot be null";
-        String[] splits = line.split("deadline |/by |/repeat ");
+        String[] splits = line.split("deadline |/by | /repeat ");
         boolean isRepetitive = splits.length == 4;
         String toReturn = Ui.showLine();
         if (splits.length > 2) {
             Deadline task = isRepetitive
-                                ? new Deadline(splits[1], splits[2], evaluateFrequency(splits[3]))
+                                ? new Deadline(splits[1], splits[2], splits[3])
                                 : new Deadline(splits[1], splits[2]);
             todo.add(task);
             toReturn += "Got it. I've added this to task: \n" + task + "\n"
                     + "Now you have " + todo.size() + " tasks in the list \n"
                     + Ui.showLine();
-            String textToAppend = "\nD | 0 | " + splits[1] + " | " + splits[2];
+            String textToAppend = "\nD | 0 | " + splits[1] + " | " + splits[2] + " | " + splits[3];
             storage.appendFile(textToAppend);
             return toReturn;
         } else if (splits.length > 1) {
@@ -132,7 +133,7 @@ public class TaskList {
      * Adds an todo task to the task list.
      *
      * @param line the line in which the command of adding todo task was given.
-     * @throws DukeInvalidTaskException
+     * @throws DukeInvalidTaskException task given is invalid
      */
     public String addToDo (String line) throws DukeInvalidTaskException {
         String[] splits = line.split("todo ");
@@ -171,8 +172,8 @@ public class TaskList {
             task.checkOff();
             toReturn += task + "\n";
             toReturn += Ui.showLine();
-            storage.overwriteFile(todo);
         }
+        storage.overwriteFile(todo);
         return toReturn;
     }
 
@@ -182,21 +183,5 @@ public class TaskList {
 
     public ArrayList<Task> getList() {
         return this.todo;
-    }
-
-    private Frequency evaluateFrequency(String frequency) {
-        switch (frequency) {
-        case "daily":
-            return Frequency.DAILY;
-        case "weekly":
-            return Frequency.WEEKLY;
-        case "monthly":
-            return Frequency.MONTHLY;
-        case "yearly":
-            return Frequency.YEARLY;
-        default:
-            return Frequency.NONE;
-        }
-
     }
 }

@@ -90,6 +90,12 @@ public class Storage {
             boolean done = Integer.parseInt(splits[1]) == 1;
             String type = splits[0];
             String task = splits[2];
+            String frequency = "";
+            boolean isRepetitive = false;
+            if (splits.length > 4) {
+                frequency = splits[4].toLowerCase();
+                isRepetitive = !frequency.equals("");
+            }
             switch (type) {
             case ("T"):
                 Task todoTask = new Todo(task);
@@ -100,7 +106,9 @@ public class Storage {
                 break;
             case ("D"):
                 String date = splits[3];
-                Deadline deadlineTask = new Deadline(task, date);
+                Deadline deadlineTask = isRepetitive
+                                            ? new Deadline(task, date, frequency)
+                                            : new Deadline(task, date);
                 if (done) {
                     deadlineTask.checkOff();
                 }
@@ -108,7 +116,9 @@ public class Storage {
                 break;
             case ("E"):
                 String day = splits[3];
-                Event eventTask = new Event(task, day);
+                Event eventTask = isRepetitive
+                                    ? new Event(task, day, frequency)
+                                    : new Event(task, day);
                 if (done) {
                     eventTask.checkOff();
                 }
@@ -129,12 +139,16 @@ public class Storage {
      */
     private String identifyTask(Task currentTask) throws DukeException {
         String done = currentTask.isDone() ? "1" : "0";
+        Boolean isRepetitive = currentTask.getIsRepetitive();
+        System.out.println("is repetitive? " + isRepetitive);
+        String frequency = isRepetitive ? currentTask.getFrequency() : "";
+        System.out.println("frequency is: " + frequency);
         if (currentTask instanceof Event) {
             return "E | " + done + " | " + currentTask.getTaskName() + " | "
-                    + ((Event) currentTask).getDate() + "\n";
+                    + ((Event) currentTask).getDate() + " | " + frequency + "\n";
         } else if (currentTask instanceof Deadline) {
             return "D | " + done + " | " + currentTask.getTaskName() + " | "
-                    + ((Deadline) currentTask).getDate() + "\n";
+                    + ((Deadline) currentTask).getDate() + " | " + frequency + "\n";
         } else if (currentTask instanceof Todo) {
             return "T | " + done + " | " + currentTask.getTaskName() + "\n";
         } else {

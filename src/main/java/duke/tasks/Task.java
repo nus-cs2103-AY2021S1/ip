@@ -74,6 +74,14 @@ public class Task {
     }
 
     /**
+     * Returns the frequency of the task.
+     * @return a string describing the frequency
+     */
+    public String getFrequency() {
+        return this.repeatedFrequency.toString();
+    }
+
+    /**
      * updates the date based on frequency stated
      */
     public void updateDate() {
@@ -115,4 +123,28 @@ public class Task {
         return toReturn;
     }
 
+    private Frequency evaluateFrequency(String frequency) {
+        return translateToFrequency(frequency);
+
+    }
+
+    /**
+     * Translate a string frequency into a Enum Frequency object
+     * @param frequency
+     * @return Frequency
+     */
+    public static Frequency translateToFrequency(String frequency) {
+        switch (frequency) {
+        case "daily":
+            return Frequency.DAILY;
+        case "weekly":
+            return Frequency.WEEKLY;
+        case "monthly":
+            return Frequency.MONTHLY;
+        case "yearly":
+            return Frequency.YEARLY;
+        default:
+            return Frequency.NONE;
+        }
+    }
 }

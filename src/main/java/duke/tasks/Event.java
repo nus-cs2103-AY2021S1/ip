@@ -51,13 +51,14 @@ public class Event extends Task {
      * @throws DukeInvalidDayException
      * @throws DukeInvalidTaskException
      */
-    public Event(String taskName, String day, Frequency frequency)
+    public Event(String taskName, String day, String frequency)
             throws DukeInvalidDayException, DukeInvalidTaskException {
         super(taskName);
         assert taskName != null : "TaskName should not be null!";
         assert day != null : "Day should not be null!";
         assert !day.equals(" ");
-        repeatedFrequency = frequency;
+        repeatedFrequency = translateToFrequency(frequency);
+        setIsRepetitive();
         if (!day.equals(null) && !day.equals(" ")) {
             this.day = day;
             try {
@@ -69,13 +70,12 @@ public class Event extends Task {
             throw new DukeInvalidDayException();
         }
     }
-
-
     /**
      * Gets the date of the Event
      *
      * @return a String representing the day.
      */
+    @Override
     public String getDate() {
         if (dateTime != null) {
             return dateTime.toString();
@@ -93,10 +93,14 @@ public class Event extends Task {
     @Override
     public String toString() {
         String finished = this.isDone ? "✓" : "✗";
+        String frequency = isRepetitive
+                                ? ", repeats " + getFrequency()
+                                : ", does not repeat";
         String toReturn = dateTime == null
                             ? "[E]" + "[" + finished + "] " + taskName + " (at: " + day + ")"
                             : "[E]" + "[" + finished + "] " + taskName + " (at: "
-                                + dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy")) + ")";
+                                + dateTime.format(DateTimeFormatter.ofPattern("MMM d yyyy"))
+                                + frequency + ")";
         return toReturn;
     }
 }
