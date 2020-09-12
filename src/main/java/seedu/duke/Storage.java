@@ -22,13 +22,14 @@ public class Storage {
      * @throws IOException if there is a problem when creating a new file on the user's system
      */
     Storage(String filePath) throws IOException {
+        String currentDirectory = new File("").getAbsolutePath();
         int i = filePath.lastIndexOf("/");
         if (i != -1) {
             String directory = filePath.substring(0, i);
-            new File(directory).mkdirs();
+            new File(currentDirectory, directory).mkdirs();
         }
-        this.filePath = filePath;
-        this.file = new File(filePath);
+        this.filePath = currentDirectory + "/" + filePath;
+        this.file = new File(this.filePath);
         this.file.createNewFile();
     }
 
