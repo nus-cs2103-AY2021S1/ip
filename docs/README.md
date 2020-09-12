@@ -7,12 +7,16 @@ Duke is a chat bot to help you manage your deadlines and task. It serves as an a
     3. Use the text field to type in command
 ## Features 
 Some commands available:
--   `help` opens a help window
+-   `todo`, `deadline`, `event` adds the task type to the todo list
 -   `list` lists out all current tasks
--   `done 3` marks the 3rd task in the list as done
 -   `delete 3` deletes the 3rd task in the list
+-   `help` opens a help window
+-   `done 3` marks the 3rd task in the list as done
+-   `find book` finds all task with `book` 
 
 More commands are available in the help window
+
+## Key Features Examples
 ### Feature 1 
 Adding of tasks
 
@@ -22,9 +26,9 @@ Adding of tasks
 
 Adds a todo, deadline or event task. 
 
-Note that for deadline, a `/by` followed by the date in the format `YYYY-MM-DD` is required
+Note that for a deadline, a `/by` followed by the date in the format `YYYY-MM-DD` is required
 
-Note that for event, a `/at` followed by the date and time in the format `YYYY-MM-DD TT:TT-TT:TT` is required
+Note that for an event, a `/at` followed by the date and time in the format `YYYY-MM-DD TT:TT-TT:TT` is required
 
 Example of usage: 
 
@@ -36,8 +40,53 @@ Example of usage:
 
 Expected outcome:
 
-`Got it. I've added the task: [T][x] cs2103 quiz`
+>Got it. I've added the task:
+>
+>[T][x] cs2103 quiz
 
-`Got it. I've added the task: [T][x] cs2103 quiz (by: Aug 23 2020)`
+>Got it. I've added the task: 
+>
+>[T][x] cs2103 quiz (by: Aug 23 2020)
 
-`Got it. I've added the task: [T][x] cs2103 quiz (at: Aug 23 2020 16:00-18:00)`
+>Got it. I've added the task: 
+>
+>[T][x] cs2103 lecture (at: Aug 23 2020 16:00-18:00)
+
+### Feature 2
+Listing of tasks
+
+#### Usage
+
+### `list` - Lists all current task
+
+List all the current task in the list
+
+Example of usage: 
+
+`list`
+
+Expected outcome:
+
+>Here are the task in your list:
+>
+>1. [T][x] cs2103 quiz
+
+### Feature 3
+Deleting of tasks
+
+#### Usage
+
+### `delete` - deletes a task
+
+Deletes the task specified by the number after the `delete` command
+
+Example of usage: 
+
+`delete 1`
+
+Expected outcome:
+
+>Noted. I've removed this task:
+>
+>1. [T][x] cs2103 quiz
+
