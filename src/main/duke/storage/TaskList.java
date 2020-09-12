@@ -73,14 +73,25 @@ public class TaskList {
 
     }
 
+    /**
+     * Returns the index of the Task within the TaskList
+     * @param t The Task to search for
+     * @return the index of the Task
+     */
+    public int indexOf(Task t) {
+        return tasks.indexOf(t);
+    }
+
     @Override
     public String toString() {
         if (tasks.isEmpty()) {
             return "The list is empty.";
         } else {
             String result = "";
+            int index = 1;
             for (Task t : tasks) {
-                result = result.concat(t.toString()).concat("\n");
+                result = result.concat(String.format("%d. %s\n", index, t.toString()));
+                index++;
             }
             return result;
         }

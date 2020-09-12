@@ -97,14 +97,23 @@ public class Storage {
      * @param keyword the keyword in lower-case to be searched for
      * @return TaskList containing only matching tasks
      */
-    public ResultsList find(String keyword) {
-        ResultsList results = new ResultsList();
+    public TaskList find(String keyword) {
+        TaskList results = new TaskList();
         for (Task t : tasks.list()) {
             if (t.getName().toLowerCase().contains(keyword)) {
                 results.add(t);
             }
         }
         return results;
+    }
+
+    /**
+     * Returns the index of the Task within the TaskList
+     * @param t The Task to search for
+     * @return the index of the Task
+     */
+    public int indexOf(Task t) {
+        return tasks.indexOf(t);
     }
 
     /**
