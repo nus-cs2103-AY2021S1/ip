@@ -1,12 +1,24 @@
 .root{
     -fx-font-size: 10pt;
     -fx-font-family: "Courier New";
-    -fx-base: rgb(132, 145, 47);
-    -fx-background: rgb(225, 228, 203);
+    /*-fx-base: rgb(132, 145, 47);*/
+
+}
+
+#dialogContainer {
+    -fx-background-image: url("/images/wolf-background.jpg");
 }
 
 #dialog{
-    -fx-background-color: aquamarine;
+    -fx-background-color: #15233F;
+    -fx-text-fill: white;
+    -fx-padding: 10pt;
+    -fx-border-radius: 20;
+    -fx-background-radius: 20;
+}
+
+#userDialog{
+    -fx-background-color: lightskyblue;
     -fx-padding: 10pt;
     -fx-border-radius: 20;
     -fx-background-radius: 20;

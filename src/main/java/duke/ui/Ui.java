@@ -96,4 +96,17 @@ public class Ui {
         }
         generateDivider();
     }
+
+    public String getWelComeMessage() {
+        String logo = "    _____                 ________  .__\n"
+                + "   /     \\_______  ______ \\______ \\ |__| ____   ____\n"
+                + "  /  \\ /  \\_  __ \\/  ___/  |    |  \\|  |/    \\ /  _ \\ \n"
+                + " /    Y    \\  | \\/\\___ \\   |    |   \\  |   |  (  <_> ) \n"
+                + " \\____|__  /__|  /____  > /_______  /__|___|  /\\____/ \n"
+                + "         \\/           \\/          \\/        \\/ \n";
+        String hello = "Hello from \n";
+        String welcome = "Welcome!\n";
+        String helpUser = "What can Mrs Dino do for you?\n";
+        return hello + logo + welcome + helpUser;
+    }
 }

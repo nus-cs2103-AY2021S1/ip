@@ -1,3 +1,9 @@
 T | 1 | read book
 E | 1 | competition | 2020-09-23 9pm-10pm
 T | 0 | eat dinner
+T | 0 | eat
+T | 0 | sleep
+T | 0 | read book
+T | 0 | singing competition
+T | 0 | eat supper
+T | 0 | thinking out loud

@@ -25,18 +25,28 @@ public class DialogBox extends HBox {
     private Label dialog;
     @FXML
     private ImageView displayPicture;
+    @FXML
+    private Label userDialog;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, String type) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader;
+            if (type.equals("user")) {
+                fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/userDialogBox.fxml"));
+            } else {
+                fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            }
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        dialog.setText(text);
+        if (type.equals("user")) {
+            userDialog.setText(text);
+        } else {
+            dialog.setText(text);
+        }
         displayPicture.setImage(img);
     }
 
@@ -51,11 +61,13 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        String type = "user";
+        return new DialogBox(text, img, type);
     }
 
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        String type = "duke";
+        var db = new DialogBox(text, img, type);
         db.flip();
         return db;
     }
