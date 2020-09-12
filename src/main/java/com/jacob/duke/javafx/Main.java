@@ -1,4 +1,4 @@
-package main.java.com.jacob.duke;
+package main.java.com.jacob.duke.javafx;
 
 import java.io.IOException;
 
@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
+import main.java.com.jacob.duke.Duke;
 
 /**
  * A GUI for Duke using FXML.

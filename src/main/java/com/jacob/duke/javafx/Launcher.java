@@ -1,4 +1,4 @@
-package main.java.com.jacob.duke;
+package main.java.com.jacob.duke.javafx;
 
 import javafx.application.Application;
 
