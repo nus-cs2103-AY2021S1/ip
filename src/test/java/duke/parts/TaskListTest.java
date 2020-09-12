@@ -2,6 +2,8 @@ package duke.parts;
 
 import duke.task.Task;
 import duke.task.ToDo;
+import duke.task.Event;
+import duke.parts.TaskList;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
@@ -24,6 +26,6 @@ public class TaskListTest {
         TaskList tasks = new TaskList();
         tasks.addTask(new ToDo("do something"), s);
         ArrayList<Task> xs = s.load();
-        assertEquals(xs.get(0).equals(new ToDo("do something")), true);
+        assertEquals(xs.get(0), new ToDo("do something"));
     }
 }

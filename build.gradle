@@ -1,211 +1,21 @@
-buildscript {
-    repositories {
-        jcenter()
-    }
-    dependencies {
-        classpath 'com.github.jengelman.gradle.plugins:shadow:6.0.0'
-    }
-}
-
 plugins {
     id 'java'
     id 'application'
     id 'checkstyle'
-    id 'com.github.johnrengelman.shadow' version '6.0.0'
+    id 'com.github.johnrengelman.shadow' version '5.1.0'
 }
-apply plugin: 'com.github.johnrengelman.shadow'
-apply plugin: 'java'
 
 repositories {
     mavenCentral()
-}
-
-run {
-    enableAssertions = true
-}
-
-jar {
-    manifest {
-        attributes 'Class-Path': '/libs/a.jar'
-    }
-
-    from {
-        configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
-    }
-}
-
-shadowJar {
-    include '*.jar'
-    include '*.properties'
-    exclude 'a2.properties'
-}
-
-shadowJar {
-    exclude 'a2.properties'
-}
-
-shadowJar {
-    configurations = [project.configurations.compile]
+    jcenter()
 }
 
 dependencies {
-    compile 'org.apache.logging.log4j:log4j-core:2.11.1'
-}
+    testCompile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.4.2'
+    compile group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.4.2'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.4.2'
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.4.2'
 
-shadowJar {
-    dependencies {
-        exclude(dependency('org.apache.logging.log4j:log4j-core:2.11.1'))
-    }
-}
-
-dependencies {
-    compile 'org.apache.logging.log4j:log4j-core:2.11.1'
-}
-
-shadowJar {
-    dependencies {
-        exclude(dependency('org.apache.logging.log4j:log4j-core:.*'))
-    }
-}
-
-dependencies {
-    compile 'org.apache.logging.log4j:log4j-core:2.11.1'
-}
-
-shadowJar {
-    dependencies {
-        exclude(dependency('org.apache.logging.log4j:log4j-core'))
-    }
-}
-
-dependencies {
-    compile 'org.apache.logging.log4j:log4j-core:2.11.1'
-}
-
-shadowJar {
-    dependencies {
-        exclude(dependency(':log4j-core:2.11.1'))
-    }
-}
-
-dependencies {
-    compile 'org.apache.logging.log4j:log4j-core:2.11.1'
-}
-
-shadowJar {
-    dependencies {
-        exclude(dependency('org.apache.logging.log4j::2.11.1'))
-    }
-}
-
-// Selecting Dependencies to Filter With a Spec
-dependencies {
-    compile 'org.apache.logging.log4j:log4j-core:2.11.1'
-}
-
-shadowJar {
-    dependencies {
-        exclude(dependency {
-            it.moduleGroup == 'org.apache.logging.log4j'
-        })
-    }
-}
-
-// Merging Service Files
-shadowJar {
-    mergeServiceFiles()
-}
-
-// Merging Service Files in a Specific Directory
-shadowJar {
-    mergeServiceFiles {
-        path = 'META-INF/custom'
-    }
-}
-
-// Excluding a Service Descriptor From Merging
-shadowJar {
-    mergeServiceFiles {
-        exclude 'META-INF/services/com.acme.*'
-    }
-}
-
-// Merging Groovy Extension Modules
-shadowJar {
-    mergeGroovyExtensionModules()
-}
-
-// Appending a Property File
-shadowJar {
-    append 'test.properties'
-}
-
-// Appending a XML File
-import com.github.jengelman.gradle.plugins.shadow.transformers.XmlAppendingTransformer
-
-shadowJar {
-    transform(XmlAppendingTransformer.class) {
-        resource = 'properties.xml'
-    }
-}
-
-// Relocating a Package
-shadowJar {
-    relocate 'junit.framework', 'shadow.junit'
-}
-
-shadowJar {
-    relocate('junit.textui', 'a') {
-        exclude 'junit.textui.TestRunner'
-    }
-    relocate('junit.framework', 'b') {
-        include 'junit.framework.Test*'
-    }
-}
-
-// Configure Auto Relocation
-import com.github.jengelman.gradle.plugins.shadow.tasks.ConfigureShadowRelocation
-
-task relocateShadowJar(type: ConfigureShadowRelocation) {
-    target = tasks.shadowJar
-    prefix = "myapp" // Default value is "shadow"
-
-}
-
-// Minimizing an shadow JAR
-shadowJar {
-    minimize()
-}
-
-tasks.withType(AbstractArchiveTask) {
-    preserveFileTimestamps = false
-    reproducibleFileOrder = true
-}
-
-import com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar
-
-
-task testJar(type: ShadowJar) {
-    classifier = 'tests'
-    from sourceSets.test.output
-    configurations = [project.configurations.testRuntime]
-}
-
-tasks.shadowJar.dependsOn tasks.relocateShadowJar
-
-shadowJar {
-    mergeServiceFiles()
-}
-
-dependencies {
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.0'
-    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.0'
-}
-repositories {
-    mavenCentral()
-}
-
-dependencies {
     String javaFxVersion = '11'
 
     implementation group: 'org.openjfx', name: 'javafx-base', version: javaFxVersion, classifier: 'win'
@@ -236,19 +46,27 @@ test {
     }
 }
 
-dependencies {
-    shadow 'junit:junit:3.8.2'
+sourceSets {
+    main {
+        java {
+            srcDirs = ["src/main"]
+        }
+    }
+
+    test {
+        java {
+            srcDirs = ["src/test"]
+        }
+    }
 }
 
-
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "Launcher"
 }
 
 shadowJar {
-    baseName = 'shadow'
-    classifier = ''
-    archiveVersion = ''
+    archiveBaseName = "stuff"
+    archiveClassifier = null
 }
 
 checkstyle {
@@ -257,4 +75,5 @@ checkstyle {
 
 run {
     standardInput = System.in
+    enableAssertions = true
 }

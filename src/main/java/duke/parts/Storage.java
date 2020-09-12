@@ -63,7 +63,6 @@ public class Storage {
             Scanner sc = new Scanner(path);
             while (sc.hasNextLine()) {
                 String[] parts = sc.nextLine().split("//");
-                assert parts[0] == "0" || parts[1] == "1";
                 switch (parts[0]) {
                 case "T":
                     arr.add(new ToDo(parts[2], parts[1].equals("1")));
