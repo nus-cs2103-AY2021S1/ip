@@ -25,6 +25,7 @@ Expected outcome:
 
 
 
+
 ### `DONE [INT]` - MARKS A TASK AS DONE
 
 Marks a task as done based on the number provided by the user
@@ -38,6 +39,7 @@ Expected outcome:
 `Nice! I've marked this task as done: 
 [D][Donezo]update todos (by: 23/02/2020 21:22).
 Now you have 7 tasks in the list` 
+
 
 
 ### `DELETE [INT]` - DELETE A TASK FROM THE LIST
@@ -55,6 +57,7 @@ Expected outcome:
 Now you have 6 tasks to the list`
 
 
+
 ### `DEADLINE [STRING] /BY DD-MM-YYYY HH:MM `- CREATE A DEADLINE TASK
 
 Creates and adds a deadline task at the given date and time
@@ -67,6 +70,7 @@ Expected outcome:
 
 `[D][Not Done] get out in front (by: 22/02/2020 23:45) has been added to the list. 
 You have 7 tasks left to do.`
+
 
 
 ### `EVENT [STRING] /AT DD-MM-YYYY HH:MM `- CREATE AN EVENT TASK
@@ -83,6 +87,7 @@ Expected outcome:
 You have 8 tasks left to do` 
 
 
+
 ### `TODO [STRING]`- CREATE A TODO TASK
 
 Creates and adds a todo task with given description
@@ -95,6 +100,7 @@ Expected outcome:
 
 `[T][Not Done] get groceries has been added to the list. 
 You have 9 tasks left to do`
+
 
 
 ### `FIND[STRING] `- FIND TASKS BASED ON KEYWORD
@@ -110,6 +116,7 @@ Expected outcome:
 `[D][Not Done] portfolio now (by: 23/02/2020 12:12) contain portolio`
 
 
+
 ### `UPDATE [INT][STRING] `- UPDATE TASKS
 
 Updates task at the integer provided by the within the user input
@@ -122,6 +129,7 @@ Expected outcome:
 
 `[E][Donezo] portfolio now (at: 23/02/2020 12:12) has been updated to
 [E][Donezo] portfolio now (at: 24/02/2020 23:23)`
+
 
 
 ### `NUMBER`- NUMBER OF TASKS IN THE LIST
