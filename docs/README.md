@@ -1,14 +1,30 @@
 # Duke User Guide
 
+## Introduction
+
+Duke application is an offline task management tool that helps you to organize the task list and save the task data in your computer's storage.
+
+<img src="Ui/../Ui.png" width="320" height="497"/>
+
+## Quick Start
+
+1. Download the latest release `duke.jar` from the [GitHub repo](https://github.com/teekoksiang/ip/releases).
+
+2. Open the terminal/command prompt and navigate to the directory where `duke.jar` is stored.
+
+3. Enter the command `java -jar duke.jar`.
+
+4. Duke application is running now and you can enter the command to perform the operation.
+
 ## Features
 
-### Add a `Deadline` task
+### 1. Add a `Deadline` task
 
 Add a `Deadline` task and save it to the `./data/tasks.txt` file.
 
-### Usage
+Usage
 
-### `deadline [task name] /by [yyyy-mm-dd]` - add a `Deadline` task
+`deadline [task name] /by [yyyy-mm-dd]` - add a `Deadline` task
 
 Enter the command to add a `Deadline` task and save it to the `./data/tasks.txt` file.
 
@@ -24,7 +40,7 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ```
 
-### Add a `Event` task
+### 2. Add a `Event` task
 
 Add a `Event` task and save it to the `./data/tasks.txt` file.
 
@@ -46,7 +62,7 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ```
 
-### Add a `Todo` task
+### 3. Add a `Todo` task
 
 Add a `Todo` task and save it to the `./data/tasks.txt` file.
 
@@ -68,7 +84,7 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ```
 
-### Delete a `Task`
+### 4. Delete a `Task`
 
 Delete a `Task` and update `./data/tasks.txt` file.
 
@@ -90,7 +106,7 @@ Noted. I have removed this task:
 Now you have 1 tasks in the list.
 ```
 
-### Exit Duke application
+### 5. Exit Duke application
 
 Exit Duke application.
 
@@ -110,7 +126,7 @@ Expected outcome:
 Bye. See you again soon!
 ```
 
-### List tasks
+### 6. List tasks
 
 List all the saved tasks from `./data/tasks.txt` file.
 
@@ -139,15 +155,15 @@ Here are the tasks in your list:
 No task added yet...
 ```
 
-### Mark task as done
+### 7. Mark a `Task` as done
 
-Mark a task as done and update `./data/tasks.txt` file.
+Mark a `Task` as done and update `./data/tasks.txt` file.
 
 ### Usage
 
-### `done [task number]` - mark the task as done
+### `done [task number]` - mark the `Task` as done
 
-Enter the command to mark the task as done and update `./data/tasks.txt` file.
+Enter the command to mark the `Task` as done and update `./data/tasks.txt` file.
 
 Example of usage:
 
@@ -168,15 +184,15 @@ Nice! I have marked this task as done:
 The task number is not found
 ```
 
-### Prioritise a task
+### 8. Prioritise a `Task`
 
-Mark a task priority and update `./data/tasks.txt` file.
+Mark a `Task` priority and update `./data/tasks.txt` file.
 
 ### Usage
 
-### `priority [task number] [priority level]` - mark the task priority
+### `priority [task number] [priority level]` - mark the `Task` priority
 
-Enter the command to mark the task priority and update `./data/tasks.txt` file.
+Enter the command to mark the `Task` priority and update `./data/tasks.txt` file.
 Priority level:
 
 - `1`: low
