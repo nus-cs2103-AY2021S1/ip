@@ -1,26 +1,137 @@
-# duke.Duke project template
+# User Guide
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+## Features 
 
-## Setting up in Intellij
+### Listing Tasks
+Shows the full list of Tasks saved.
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+### `list` - Shows the full list of Tasks saved.  
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-1. Set up the correct JDK version, as follows:
-   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
-   1. Click `OK`
-1. Import the project into Intellij as follows:
-   1. Click `Open or Import`.
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/duke.Duke.java` file, right-click it, and choose `Run duke.Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+Duke will reply with a list of Tasks. 
+
+Example of usage: 
+
+`list`
+
+Expected outcome:
+
+```
+1. [T] [✓] Todo
+2. [D] [✓] Deadline (by: Oct 20 2020)
+3. [E] [✗] Event (at: Nov 5 2020)
+```
+
+### Finding Tasks
+Duke can find Tasks that have names containing a specified keyword. 
+The results are numbered according to their index in the full list, so the same indexes can be used for other commands. 
+
+### `find {keyword}` - Finds all Tasks that contain {keyword} in the name.
+
+Example of usage:
+ 
+`find deadline`
+
+Expected outcome:
+
+```
+2. [D] [✓] Deadline (by: Oct 20 2020)
+```
+
+### Marking Tasks as completed
+Duke can mark Tasks as completed based on the index in the list.
+If the specified Task is already completed, Duke will mark it as incomplete. 
+
+### `done {index}` - Marks the task at the specified index as complete or incomplete.
+
+Example of usage:
+
+`done 3`
+
+Expected outcome:
+
+```[E] [✓] Event (at: Nov 5 2020)```
+
+### Deleting Tasks
+Duke can delete Tasks based on the index in the list.
+
+### `delete {index}` - Deletes the task at the specified index.
+
+Example of usage:
+
+`delete 3`
+
+Expected outcome:
+
+```Deleted [E] [✓] Event (at: Nov 5 2020).```
+
+### Adding a Todo task
+A Todo task has no date or deadline, and only needs the user to specify the name. 
+
+### `todo {name}` - Adds a new Todo task with the given name. 
+
+Example of usage:
+
+`todo Do post-lecture quiz`
+
+Expected outcome:
+
+```Added [T] [✗] Do post-lecture quiz.```
+
+### Adding a Event task
+An Event task has a name and a date (in YYYY-MM-DD).
+
+### `event {name} /at {YYYY-MM-DD}` - Adds a new Event task with the given name and date.
+
+Example of usage:
+
+`event Results release /at 2020-09-16`
+
+Expected outcome:
+
+```Added [E] [✗] Results release (at: Sep 16 2020).```
+
+### Adding a Deadline task
+A Deadline task has a name and a date (in YYYY-MM-DD).
+
+### `deadline {name} /by {YYYY-MM-DD}` - Adds a new Deadline task with the given name and date.
+
+Example of usage:
+
+`deadline Lab submission /by 2020-09-16`
+
+Expected outcome:
+
+```Added [D] [✗] Lab submission (at: Sep 16 2020).```
+
+
+### Exiting Duke
+Closes the program window. 
+
+### `bye` - Closes the program. 
+
+Example of usage:
+
+`bye`
+
+Expected outcome:
+
+```Goodbye```
+
+### Help menu
+Shows the help guide. Can be called with a specific command to information on that command, or with no arguments to
+ show information about the help command. 
+Can be called with `commands` as an argument by using `help commands` to show the full list of commands. 
+
+### `help [{command}]` - Shows information about the command (if any), otherwise shows instructions on how to use the help command.  
+
+Example of usage: 
+
+```help delete```
+
+
+Expected outcome:
+```
+delete <index> - Deletes the task at the index of the list.
+   
+Example usage: "delete 1" -> Removes the first entry of the list. 
+```
