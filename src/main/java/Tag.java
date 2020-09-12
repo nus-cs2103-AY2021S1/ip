@@ -8,14 +8,6 @@ public class Tag {
         this.fullTag = TAG_PREFIX + keyword;
     }
 
-    public String getFullTag() {
-        return fullTag;
-    }
-
-    public String getTagKeyword() {
-        return fullTag.substring(1);
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

@@ -6,7 +6,7 @@ public class HashtagCommand extends Command {
     }
 
     @Override
-    public void execute(TaskManager taskManager, Ui ui) throws DukeException {
+    public void execute(TaskManager taskManager, Ui ui) {
         ui.replyFindTag(taskManager, taskManager.findTaskWithTag(tag));
     }
 

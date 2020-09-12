@@ -1,8 +1,10 @@
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.time.format.DateTimeParseException;
+
+/**
+ * <p>Parser class makes sense of the user input.</p>
+ */
 
 public class Parser {
     public static Command parse(String userInput) throws DukeException {
@@ -43,20 +45,24 @@ public class Parser {
         }
     }
 
-    private static DateAndTime parseTime(String timeFormat) {
-        if (!timeFormat.contains(" ")) {
-            LocalDate localDate = LocalDate.parse(timeFormat.trim());
-            return new DateAndTime(localDate);
-        } else {
-            String[] split = timeFormat.trim().split(" ");
-            LocalTime localTime = LocalTime.parse(split[0].trim());
-            LocalDate localDate = LocalDate.parse(split[1].trim());
-            return new DateAndTime(localDate, localTime);
+    private static DateAndTime parseTime(String timeFormat) throws InvalidDateTimeInput {
+        try {
+            if (!timeFormat.contains(" ")) {
+                LocalDate localDate = LocalDate.parse(timeFormat.trim());
+                return new DateAndTime(localDate);
+            } else {
+                String[] split = timeFormat.trim().split(" ");
+                LocalTime localTime = LocalTime.parse(split[0].trim());
+                LocalDate localDate = LocalDate.parse(split[1].trim());
+                return new DateAndTime(localDate, localTime);
+            }
+        } catch (DateTimeParseException e) {
+            throw new InvalidDateTimeInput();
         }
     }
 
     private static ToDoTask parseTodo(String detail) throws DukeException {
-        if (detail.equals("")) {
+        if (detail.strip().equals("")) {
             throw new MissingDescriptionException(TaskType.TODO);
         } else {
             if (detail.contains("#")) {
@@ -64,7 +70,6 @@ public class Parser {
                 // excludes the tags in description
                 int i = detail.indexOf("#");
                 String newDetail = detail.substring(0, i);
-
                 return new ToDoTask(newDetail, false, taglist);
             } else {
                 return new ToDoTask(detail, false, null);
@@ -73,7 +78,7 @@ public class Parser {
     }
 
     private static DeadlineTask parseDeadline(String detail) throws DukeException {
-        if (detail.equals("")) {
+        if (detail.strip().equals("")) {
             throw new MissingDescriptionException(TaskType.DEADLINE);
         } else {
             if (!detail.contains("#")) {
@@ -97,7 +102,7 @@ public class Parser {
     }
 
     private static EventTask parseEvent(String detail) throws DukeException {
-        if (detail.equals("")) {
+        if (detail.strip().equals("")) {
             throw new MissingDescriptionException(TaskType.EVENT);
         } else {
             String descriptionAndTime = detail.replace("/at", "%");
@@ -114,7 +119,7 @@ public class Parser {
     }
 
     private static int parseNumber(String detail) throws DukeException {
-        if (detail.trim().length() == 0) {
+        if (detail.strip().length() == 0) {
             throw new MissingTaskIndexException();
         }
         try {

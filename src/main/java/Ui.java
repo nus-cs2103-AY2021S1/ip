@@ -14,7 +14,7 @@ public class Ui {
     private static final String CANNOT_FIND_TAG_REPLY = "Sorry can't find any tasks with such tag.";
     private static final String DELETE_REPLY = "Good good... Okay removed! Looks more apt for a lazy ass like you. \n";
     private static final String ADD_REPLY_TOP = "Wow, another task. Added. You sure you can finish them all? \n";
-    private static final String ADD_REPLY_BOT = "Now you have a grand total of %d";
+    private static final String ADD_REPLY_BOT = "Now you have a grand total of %d tasks";
     private static final String DONE_REPLY = "Wah finally. Wondering how long more I need to wait... \n";
     private static final String HELP_REPLY =  "\u0AE6 todo [description] - add a todo task \n"
                                             + "\u0AE6 deadline [description] /by [YYYY-MM-DD] - add a deadline task \n"
@@ -43,32 +43,58 @@ public class Ui {
         print(BYE);
     }
 
-    /** Replies when user input "list" */
+    /**
+     * Replies when user inputs "list".
+     *
+     * @param taskManager The TaskManager that carries out operation on the task list.
+     */
     public void replyList(TaskManager taskManager) {
         String taskList = taskManager.convertTaskListToString(taskManager.getTaskList());
         print(LIST_REPLY + taskList);
     }
 
+    /** Replies when user inputs "help". */
     public void replyHelp() {
         print(HELP_REPLY);
     }
 
+    /**
+     * Replies when user adds task.
+     *
+     * @param taskAdded The task added.
+     * @param taskManager The TaskManager that carries out operation on the task list.
+     */
     public void replyAdd(Task taskAdded, TaskManager taskManager) {
         String task = taskAdded.toString() + "\n";
         String dukeReplyBot = String.format(ADD_REPLY_BOT, taskManager.getTotalNoOfTasks());
         print(ADD_REPLY_TOP + task + dukeReplyBot);
     }
 
+    /**
+     * Replies when user deletes task.
+     *
+     * @param taskDeleted The task deleted.
+     */
     public void replyDelete(Task taskDeleted) {
         String task = taskDeleted.toString();
         print(DELETE_REPLY + task);
     }
 
+    /** Replies when user marks task as done.
+     *
+     * @param taskDone The task marked as done.
+     */
     public void replyDone(Task taskDone) {
         String task = taskDone.toString();
         print(DONE_REPLY + task);
     }
 
+    /**
+     * Replies when user finds a tag with keyword.
+     *
+     * @param taskManager The TaskManager that carries out operation on the task list.
+     * @param foundTasks The list of tasks with the keyword found.
+     */
     public void replyFind(TaskManager taskManager, ArrayList<Task> foundTasks) {
         if (foundTasks.size() > 0) {
             print(FIND_REPLY + taskManager.convertTaskListToString(foundTasks));
@@ -77,6 +103,12 @@ public class Ui {
         }
     }
 
+    /**
+     * Replies when user finds a tag with tag.
+     *
+     * @param taskManager The TaskManager that carries out operation on the task list.
+     * @param foundTasks The list of tasks with the tag found.
+     */
     public void replyFindTag(TaskManager taskManager, ArrayList<Task> foundTasks) {
         if (foundTasks.size() > 0) {
             print(FIND_TAG_REPLY + taskManager.convertTaskListToString(foundTasks));

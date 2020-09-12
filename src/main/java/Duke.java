@@ -8,6 +8,10 @@ public class Duke  {
     private TaskSaveAndLoadManager taskSaveAndLoadManager = new TaskSaveAndLoadManager();
     private TaskManager taskManager;
 
+    /**
+     * Creates a Duke object and initialises a Task Manager.
+     * @throws IOException when input or output operation fails.
+     */
     public Duke() throws IOException {
         if (taskSaveAndLoadManager.loadTaskManager() != null) {
             this.taskManager = taskSaveAndLoadManager.loadTaskManager();
@@ -16,11 +20,27 @@ public class Duke  {
         }
     }
 
+    /**
+     * Initialises the UI.
+     * @param dialogContainer The vertical layout to contain dialogues.
+     */
     public void setUi(VBox dialogContainer) {
         this.ui = new Ui(dialogContainer);
     }
 
-    public boolean getResponse(String input) throws IOException {
+    /** Greets the user.*/
+    public void greet() {
+        assert (ui != null) : "UI must not be null.";
+        ui.greet();
+    }
+
+    /**
+     * Returns whether the input command is bye.
+     * @param input String to represent user input.
+     * @return a boolean indicating if the user input is a ByeCommand.
+     * @throws IOException when input or output operation fails.
+     */
+    public boolean isByeCommand(String input) throws IOException {
         try {
             Command c = Parser.parse(input);
             c.execute(taskManager, ui);
@@ -30,10 +50,5 @@ public class Duke  {
             ui.print(e.getMessage());
         }
         return false;
-    }
-
-    public void greet() {
-        assert (ui != null) : "UI must be specified";
-        ui.greet();
     }
 }

@@ -20,6 +20,10 @@ public class Task {
         this.tagList = tagList;
     }
 
+    /**
+     * Serialises a task into a string format.
+     * @return A String that represents the serialised task.
+     */
     public String serialiseTask() {
         return "";
     }

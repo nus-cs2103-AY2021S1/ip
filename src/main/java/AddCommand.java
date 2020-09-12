@@ -1,3 +1,6 @@
+/**
+ * <p>AddCommand class defines the behaviour of a command to add a task.</p>
+ */
 public class AddCommand extends Command {
     private final Task task;
 

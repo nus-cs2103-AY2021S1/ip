@@ -1,12 +1,10 @@
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 import java.io.IOException;
 
@@ -44,7 +42,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() throws IOException {
         String input = userInput.getText();
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
-        if (duke.getResponse(input)) {
+        if (duke.isByeCommand(input)) {
             Platform.exit();
         }
         userInput.clear();

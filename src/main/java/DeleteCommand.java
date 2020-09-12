@@ -1,3 +1,6 @@
+/**
+ * <p>DeleteCommand class defines the behaviour of a command to delete an item in the task list.</p>
+ */
 public class DeleteCommand extends Command {
     private final int taskIndex;
 

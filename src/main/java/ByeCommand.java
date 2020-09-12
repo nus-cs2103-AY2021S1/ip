@@ -1,3 +1,6 @@
+/**
+ * <p>ByeCommand class defines the behaviour of a command to end the chat.</p>
+ */
 public class ByeCommand extends Command {
     @Override
     public void execute(TaskManager taskManager, Ui ui) {

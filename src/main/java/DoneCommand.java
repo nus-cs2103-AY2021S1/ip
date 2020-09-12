@@ -1,3 +1,6 @@
+/**
+ * <p>DoneCommand class defines the behaviour of a command to mark a task as done.</p>
+ */
 public class DoneCommand extends Command {
     private final int taskIndex;
 
