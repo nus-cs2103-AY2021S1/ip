@@ -16,7 +16,7 @@
             <Insets right="20.0" top="10.0" />
          </padding>
          <font>
-            <Font name="Montserrat Regular" size="14.0" />
+            <Font name="Montserrat Regular" size="12.0" />
          </font></Label>
       <Circle fx:id="displayCircle" fill="DODGERBLUE" radius="40.0" stroke="BLACK" strokeType="INSIDE">
          <HBox.margin>

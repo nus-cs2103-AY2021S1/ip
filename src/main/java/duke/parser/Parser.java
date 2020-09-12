@@ -80,10 +80,10 @@ public class Parser {
                 checkEmptyDescription(response, "Find Query");
                 return ui.performFind(response.substring(5));
             case DELETE:
-                taskIndex = getTaskIndex(response);
+                taskIndex = getTaskIndex(response, Command.DELETE);
                 return ui.performDelete(taskIndex);
             case DONE:
-                taskIndex = getTaskIndex(response);
+                taskIndex = getTaskIndex(response, Command.DONE);
                 return ui.performDone(taskIndex);
             case TODO:
                 return processTodo(response);
@@ -112,7 +112,7 @@ public class Parser {
         int taskIndex;
         checkEmptyDescription(response, "update");
         checkMissingKeyword(response, "/to ");
-        taskIndex = getTaskIndex(response);
+        taskIndex = getTaskIndex(response, Command.UPDATE);
         response = response.substring(response.indexOf("/to ") + "/to ".length());
         Command taskType = getTaskType(response);
         return processUpdatedTask(taskIndex, response, taskType);
@@ -207,9 +207,9 @@ public class Parser {
         }
     }
 
-    private int getTaskIndex(String response) throws DukeMissingCommandNumberException {
+    private int getTaskIndex(String response, Command command) throws DukeMissingCommandNumberException {
         int taskIndex;
-        String parsedResponse = getCommand(response);
+        String parsedResponse = getCommand(response, command);
         taskIndex = parseInteger(parsedResponse);
         return taskIndex;
     }
@@ -222,8 +222,17 @@ public class Parser {
         }
     }
 
-    private String getCommand(String response) {
-        return response.substring(0, response.indexOf(" ", response.indexOf(" ") + 1));
+    private String getCommand(String response, Command command) {
+        switch (command) {
+        case UPDATE:
+            return response.substring(0, response.indexOf(" ", response.indexOf(" ") + 1));
+        case DONE:
+        case DELETE:
+            return response.substring(response.indexOf(" "));
+        default:
+            assert false : "getCommand error";
+            return null;
+        }
     }
 
     private Command keyword(String response) {

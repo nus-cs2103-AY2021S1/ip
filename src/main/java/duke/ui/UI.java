@@ -87,7 +87,7 @@ public class UI {
      */
     public String performDelete(int index) throws IOException, DukeTaskNonExistException {
         checkTaskExists(index);
-        assert index >= taskList.getSize() : "index out of bounds exception not thrown";
+        assert index < taskList.getSize() : "index out of bounds exception not thrown";
         StringBuilder sb = new StringBuilder("Noted. I've removed this task: ").append('\n');
         taskList.delete(index);
         storage.updateFile(taskList);
@@ -106,7 +106,7 @@ public class UI {
 
     public String performDone(int index) throws DukeTaskNonExistException, IOException {
         checkTaskExists(index);
-        assert index >= taskList.getSize() : "index out of bounds exception not thrown";
+        assert index < taskList.getSize() : "index out of bounds exception not thrown";
         StringBuilder sb = new StringBuilder("Nice! I've marked this task as done: ").append('\n');
         Task book = taskList.completeTask(index);
         storage.updateFile(taskList);
