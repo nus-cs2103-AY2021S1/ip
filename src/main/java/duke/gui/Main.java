@@ -29,6 +29,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             scene.getStylesheets().add(this.getClass().getResource("/view/styles.css").toExternalForm());
             stage.setScene(scene);
+            stage.setTitle("Meow Galaxy Task Manager");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
