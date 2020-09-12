@@ -1,4 +1,6 @@
-# User Guide
+# Dino User Guide
+## Welcome to Dino,
+a Command-Line Interface (CLI) task management application that optimizes tracking, organization and management of your tasks.
 
 ## Features 
 
@@ -6,9 +8,9 @@
 The in-built help command 'help' displays a list of command formatting that teaches users
  the format to enter commands to use Dino.
 
-## Usage
+### Usage
 
-### `help` - View command formats
+### `help` - View valid command formats
 
 Type 'help' in the text box and enter to view the list of commands 
 to use the features in Dino.
@@ -26,7 +28,7 @@ Todo tasks are added with command 'todo' along with task desription.
 Deadline tasks are added with command 'deadline' along with task description and task deadline.
 Event tasks are added with command 'event' along with task description and task period.
 
-## Usage
+### Usage
 
 ### `todo` - Add a Todo task
 
@@ -73,7 +75,7 @@ Expected outcome:
 Users can view their task list by entering the command 'list' which
 will display their entire task list.
 
-## Usage
+### Usage
 
 ### `list` - Display task list
 
@@ -92,7 +94,7 @@ Users can mark their tasks as done to denote completion of the tasks.
 Tasks that are not done are denoted 0 by default.
 Tasks that have been marked done are denoted 1.
 
-## Usage
+### Usage
 
 ### `done` - Mark task as done
 
@@ -111,7 +113,7 @@ Expected outcome:
 Users can find a task in their task list by entering a keyword representing the task description.
 All tasks whose task description contains the keyword will be displayed to user.
 
-## Usage
+### Usage
 
 ### `find` - Find a task
 
@@ -130,7 +132,7 @@ Expected outcome:
 Users can add priority *HIGH or MID or LOW* to a task in their task list,
 by entering the priority followed by task number of the task.
 
-## Usage
+### Usage
 
 ### `priority` - Add priority to task
 
@@ -155,7 +157,7 @@ Expected outcome:
 Users can delete a task from their task list, by entering 'delete'
 followed by the task number.
 
-## Usage
+### Usage
 
 ### `delete` - Delete a task
 
@@ -174,7 +176,7 @@ Expected outcome:
 ### Exit from Dino
 Users can exit from Dino by entering 'bye'.
 
-## Usage
+### Usage
 
 ### `bye` - Exit command
 
