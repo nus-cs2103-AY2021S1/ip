@@ -63,8 +63,8 @@ Example of usage:
 `done 4`
 
 Expected outcome: <br />
-``Good Job!!! You cleared this task:<br />
-[D][✓] CS2103T IP Submission (FINISH by: 18 September 2020 12:00)``
+`Good Job!!! You cleared this task:`<br />
+`[D][✓] CS2103T IP Submission (FINISH by: 18 September 2020 12:00)`
 
 ### Feature 5
 To search for task(s) containing specific keyword(s), make use of the command `find {keyword1} ... {keywordN}`, press `Enter` to execute.
