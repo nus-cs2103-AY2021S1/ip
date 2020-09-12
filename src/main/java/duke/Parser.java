@@ -217,12 +217,12 @@ public class Parser {
             throws DukeFrequencyNotFoundException, DukeTaskNotFoundException {
         if (commandDetails.length < 2) {
             throw new DukeFrequencyNotFoundException(" ERROR... RECURRING TASK FREQUENCY EMPTY. "
-                    + "\n PLEASE TRY AGAIN IN THE FORMAT 'RECURRING [FREQUENCY] [DESCRIPTION]'");
+                    + "\n PLEASE TRY AGAIN IN THE FORMAT 'RECURRING [FREQUENCY] [DESCRIPTION] [TIME]'");
         }
         String[] stringArray = commandDetails[1].split(" ", 2);
         if (stringArray.length < 2) {
             throw new DukeTaskNotFoundException(" ERROR... RECURRING TASK DESCRIPTION EMPTY. "
-                    + "\n PLEASE TRY AGAIN IN THE FORMAT 'RECURRING [FREQUENCY] [DESCRIPTION]'");
+                    + "\n PLEASE TRY AGAIN IN THE FORMAT 'RECURRING [FREQUENCY] [DESCRIPTION] [TIME]'");
         }
         return new RecurringCommand(stringArray);
     }

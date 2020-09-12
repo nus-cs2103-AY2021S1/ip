@@ -103,7 +103,7 @@ public class Ui {
         StringBuilder output = new StringBuilder(" Here are the matching tasks in your list:\n");
         for (int i = 0; i < tasks.size(); i++) {
             int count = i + 1;
-            output.append(String.format("   %d. ", count)).append(tasks.get(i).toString());
+            output.append(String.format("   %d. ", count)).append(tasks.get(i).toString() + "\n");
         }
         return output.toString();
     }

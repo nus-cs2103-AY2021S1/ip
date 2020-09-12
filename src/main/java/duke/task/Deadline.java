@@ -14,7 +14,7 @@ public class Deadline extends Task {
     protected String date;
 
     private DateTimeFormatter fmt = new DateTimeFormatterBuilder()
-            .appendPattern("[d-MM-yyyy HHmm][yyyy-MM-d HHmm]")
+            .appendPattern("[d-M-yyyy HHmm][yyyy-M-d HHmm]")
             .optionalStart()
             .appendPattern(" HHmm")
             .optionalEnd()
