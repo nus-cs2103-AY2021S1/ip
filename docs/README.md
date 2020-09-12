@@ -32,7 +32,6 @@ Expected outcome:
 
 `[T][0] get A+ for CS2103T`
 
-
 ### `event` - Creates an event at a specified date
 
 An event will be created at the date specified by the user.
@@ -48,7 +47,6 @@ Example of usage:
 Expected outcome:
 
 `[E][0] lunch with Damith (at: Sep 13 2020)`
-
 
 ### `deadline` - Creates a deadline at a specified date
 
@@ -66,7 +64,6 @@ Expected outcome:
 
 `[D][0] finish product website (by: Sep 13 2020)`
 
-
 ### `done` - Marks a task as done
 
 Marks a specified event/deadline/todo as done. This changes the task's status code from 0 to 1.
@@ -83,7 +80,6 @@ Expected outcome:
 
 `[D][1] finish product website (by: Sep 13 2020)`
 
-
 ### `list` - Describe action
 
 Asks Batman to display all the tasks in a list to the user.
@@ -98,7 +94,6 @@ Expected outcome:
 `1. [E][0] lunch with Damith (at: Sep 13 2020)`\
 `2. [D][1] finish product website (by: Sep 13 2020)`
 
-
 ### `delete` - Deletes the task at the specified index
 
 Deletes the task at the specified index. 
@@ -116,7 +111,6 @@ Expected outcome:
 `Noted. I've removed this task:`\
 `[E][0] lunch with Damith (at: Sep 13 2020)`
 
-
 ### `delete` - Deletes the task at the specified index
 
 Deletes the task at the specified index. 
@@ -133,7 +127,6 @@ Expected outcome:
 
 `Noted. I've removed this task:`\
 `[E][0] lunch with Damith (at: Sep 13 2020)`
-
 
 ### `find` - Finds all matching tasks
 
@@ -153,7 +146,6 @@ Expected outcome:
 `1.[E][0] lunch with Damith (at: Sep 13 2020)`\
 `2.[E][0] lunch with Seth (at: Sep 14 2020)`
 
-
 ### `bye` - Closes program
 
 Ends the conversation with Batman and closes the program after 1 second delay.
@@ -165,3 +157,6 @@ Example of usage:
 Expected outcome:
 
 `Farewell.`
+
+## Acknowledgements
+Natty - a third library used to parse date using natural language - http://natty.joestelmach.com/
