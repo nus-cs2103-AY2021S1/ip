@@ -59,9 +59,9 @@ public class AddCommand implements UndoableCommand {
      */
     public static String commandToExecute() {
         String header = " Add a task:\n";
-        String todoCommand = "  todo <name>\n";
-        String deadlineCommand = "  deadline <name> /by <YYYY:MM:DD {HH:MM}>\n";
-        String eventCommand = "  event <name> /at <YYYY:MM:DD\n  HH:MM-HH:MM>\n";
+        String todoCommand = " -> todo <name>\n";
+        String deadlineCommand = " -> deadline <name> /by <YYYY:MM:DD {HH:MM}>\n";
+        String eventCommand = " -> event <name> /at <YYYY:MM:DD\n    HH:MM-HH:MM>\n";
         return header + todoCommand + deadlineCommand + eventCommand;
     }
 

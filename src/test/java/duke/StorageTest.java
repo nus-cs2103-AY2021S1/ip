@@ -19,8 +19,6 @@ public class StorageTest {
 
     public void save() throws DukeException {
         String filePath = "data/duke.txt";
-        //Storage storage = Storage.createStorage(filePath);
-        //assertTrue(storage.isNew());
 
         String home = System.getProperty("user.dir");
         Path currDir = Paths.get(home);
@@ -37,9 +35,6 @@ public class StorageTest {
         listOfTask.add(tTask);
 
         StorageStub.save(listOfTask, file);
-
-        //Storage storageDuplicate = Storage.createStorage(filePath);
-        // assertFalse(storageDuplicate.isNew());
     }
 
     public List<Task> load() throws DukeException {

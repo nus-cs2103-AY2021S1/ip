@@ -41,7 +41,8 @@ public class DeleteCommand implements UndoableCommand {
             String message = " *Woof!* This task does not exist!\n";
             throw new DukeException(message);
         } catch (NumberFormatException e) {
-            String message = " *Woof!* Please enter an integer value! I can't really read...\n";
+            String message = " *Woof!* Please enter an integer value! "
+                    + "I can't really decipher which task you are interested in\n";
             throw new DukeException(message);
         }
     }

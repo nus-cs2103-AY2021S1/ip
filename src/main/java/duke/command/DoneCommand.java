@@ -35,8 +35,12 @@ public class DoneCommand implements UndoableCommand {
             doneTask = taskList.getList().get(taskInd - 1);
             storage.save(taskList);
             return s;
-        } catch (IndexOutOfBoundsException | NumberFormatException e) {
+        } catch (IndexOutOfBoundsException e) {
             String message = " *Woof!* This task does not exist!\n";
+            throw new DukeException(message);
+        } catch (NumberFormatException e) {
+            String message = " *Woof!* Please enter an integer value! "
+                    + "I can't really decipher which task you are interested in\n";
             throw new DukeException(message);
         }
     }
