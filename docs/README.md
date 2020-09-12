@@ -99,4 +99,4 @@ list | `list`
 
 
 ## Task Lists
-- [x] Auto-exit after command `bye`. Entering command `bye` will show goodbye message but does not exit the bot automatically.
+- [] Auto-exit after command `bye`. Entering command `bye` will show goodbye message but does not exit the bot automatically.
