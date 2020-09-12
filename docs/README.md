@@ -142,3 +142,7 @@ Expected outcome:
 
 
 ## Acknowledgements
+### 3rd party Libraries
+- Gson: For serializing java classes
+- JUnits: For unit testing
+- JavaFx: For graphics used for GUI
