@@ -37,7 +37,7 @@ public class Ui {
      * Welcomes the user when the user starts Duke.
      */
     public String welcome() {
-        return "Hi! My name is Duke.\nWhat do you want me to do?";
+        return "Hi! My name is Wube.\nWhat do you want me to do?";
     }
 
     /**
