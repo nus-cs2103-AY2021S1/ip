@@ -10,7 +10,8 @@ import storage.Storage;
 public class TaskListTest {
 
     private final Storage store = new Storage("mug-test.txt");
-    private final TaskList taskList = new TaskList(store);
+    {store.initialize();}
+    private final TaskList taskList = new TaskList(store.load());
 
     @Test
     public void addTask() {
@@ -25,19 +26,19 @@ public class TaskListTest {
 
     @Test
     public void taskDone() {
-        String actResult = this.taskList.taskDone(3);
+        String actResult = this.taskList.taskDone(2);
         String expResult = "Congratz! Mug has marked this task as done:\n"
-                + "[T][\u2713] borrow book";
+                + "[T][\u2713] return book";
         assertEquals(expResult, actResult);
     }
 
     @Test
     public void deleteTask() {
-        String actResult = this.taskList.deleteTask(3);
+        String actResult = this.taskList.deleteTask(2);
         String expResult = "Noted. Mug has removed this task:\n"
-            + "[T][\u2713] borrow book"
+            + "[T][\u2718] return book"
             + "\nNow you have "
-            + 2
+            + 1
             + " tasks in the list.";
 
         assertEquals(expResult, actResult);
@@ -48,8 +49,7 @@ public class TaskListTest {
         String actResult = this.taskList.readList();
         String expResult = "Here is your tasks:\n"
                 + "1. [T][\u2718] read book\n"
-                + "2. [T][\u2718] return book\n"
-                + "3. [T][\u2718] borrow book\n";
+                + "2. [T][\u2718] return book\n";
         assertEquals(expResult, actResult);
     }
 
