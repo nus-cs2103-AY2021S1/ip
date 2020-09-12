@@ -1,13 +1,14 @@
 package main.java.farrell.duke.gui;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.Region;
-import javafx.scene.layout.VBox;
+import javafx.scene.image.Image;
+import javafx.scene.layout.*;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import main.java.farrell.duke.Duke;
 import main.java.farrell.duke.DukeException;
@@ -32,15 +33,17 @@ public class UiManager extends Application {
         AnchorPane mainLayout = new AnchorPane();
 
         //Formatting and Style
-        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
-
         scrollPane.setContent(dialogContainer);
-        scrollPane.setPrefSize(385, 535);
+        scrollPane.setPrefSize(400, 570);
+
         scrollPane.setHbarPolicy(ScrollPane.ScrollBarPolicy.NEVER);
         scrollPane.setVbarPolicy(ScrollPane.ScrollBarPolicy.ALWAYS);
 
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
+        scrollPane.setPadding(new Insets(5));
+
+        dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
 
         userInput.setPrefWidth(325.0);
 
@@ -60,7 +63,7 @@ public class UiManager extends Application {
         Scene scene = new Scene(mainLayout);
 
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Duke");
+        primaryStage.setTitle("Chicken Coop");
         primaryStage.setResizable(false);
         primaryStage.setMinWidth(400);
         primaryStage.setMinHeight(600);
@@ -89,8 +92,12 @@ public class UiManager extends Application {
     private void handleUserInput(String input) {
         sendUserMessage(input);
 
-        String output = duke.run(input);
-        sendDukeMessage(output);
+        try {
+            String output = duke.run(input);
+            sendDukeMessage(output);
+        } catch (DukeException exception) {
+            sendDukeError(exception.getMessage());
+        }
 
         userInput.clear();
     }
@@ -99,7 +106,7 @@ public class UiManager extends Application {
      * Returns the string for the welcome message.
      */
     public void displayStartMessage() {
-        sendDukeMessage("Hello, I'm a banana.\nWhat can I do for you?");
+        sendDukeMessage("Hello!\nWhat can I do for you?");
     }
 
     /**
@@ -109,6 +116,10 @@ public class UiManager extends Application {
      */
     public void sendDukeMessage(String text) {
         dialogContainer.getChildren().add(new DukeDialog(text));
+    }
+
+    public void sendDukeError(String text) {
+        dialogContainer.getChildren().add(new DukeErrorDialog(text));
     }
 
     public void sendUserMessage(String text) {

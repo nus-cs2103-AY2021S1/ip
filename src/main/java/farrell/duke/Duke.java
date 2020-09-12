@@ -43,7 +43,7 @@ public class Duke {
             dataManager = new DataManager();
             taskList = dataManager.load();
         } catch (DukeException exception) {
-            uiManager.sendDukeMessage(exception.getMessage());
+            uiManager.sendDukeError(exception.getMessage());
             taskList = new TaskList();
         }
     }
@@ -56,20 +56,16 @@ public class Duke {
      * 3. Execute the command.
      * 4. Display the program output to the user.
      */
-    public String run(String input) {
-        try {
-            Command command = CommandParser.parse(input);
-            String output = command.execute(taskList);
+    public String run(String input) throws DukeException {
+        Command command = CommandParser.parse(input);
+        String output = command.execute(taskList);
 
-            dataManager.save(taskList);
+        dataManager.save(taskList);
 
-            if (command.shouldExit()) {
-                System.exit(0);
-            }
-
-            return output;
-        } catch (DukeException exception) {
-            return exception.getMessage();
+        if (command.shouldExit()) {
+            System.exit(0);
         }
+
+        return output;
     }
 }

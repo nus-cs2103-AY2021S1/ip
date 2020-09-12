@@ -12,16 +12,16 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
-public class DukeDialog extends HBox {
+public class DukeErrorDialog extends HBox {
     private Label textLabel;
     private Circle displayPicture;
-    private Image image = new Image(this.getClass().getResourceAsStream("/images/chicken.png"));
+    private Image image = new Image(this.getClass().getResourceAsStream("/images/parrot.png"));
 
     /**
      * Creates a new DukeDialog containing some text.
      * @param text Text to display in the dialog.
      */
-    public DukeDialog(String text) {
+    public DukeErrorDialog(String text) {
         this.setSpacing(10);
         this.setPadding(new Insets(5));
 
@@ -34,7 +34,7 @@ public class DukeDialog extends HBox {
         textLabel.setPadding(new Insets(5));
 
         BackgroundFill textBg = new BackgroundFill(
-                Color.BISQUE,
+                Color.PALEVIOLETRED,
                 new CornerRadii(10),
                 null
         );
