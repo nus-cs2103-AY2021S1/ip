@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 class FindCommand extends Command {
 
+    /** Contains user's search string. */
     private String search;
 
     FindCommand(String search) {

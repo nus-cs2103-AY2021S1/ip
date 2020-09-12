@@ -16,7 +16,7 @@ class Parser {
         String[] partsOfCommand = splitCommandAndFormatAction(input);
         String action = partsOfCommand[0];
 
-        CommandName commandName = tryEnum(action);
+        CommandName commandName = checkCommandNameEnum(action);
         return handleCommand(commandName, partsOfCommand);
     }
 
@@ -57,11 +57,24 @@ class Parser {
         case FIND:
             secondPartOfCommand = partsOfCommand[1];
             return new FindCommand(secondPartOfCommand);
+        case SORT:
+            return handleSort(partsOfCommand);
         case BYE:
             return new ExitCommand();
         default:
             assert false : "There should only be a fixed number of commands, should not reach here";
             return new ExitCommand();
+        }
+    }
+
+    private static Command handleSort(String[] inputs) throws DukeException {
+        try {
+            String sortOrderOption = inputs[1].toUpperCase();
+            SortOrderOption sortOrderOptionEnum = checkSortOrderOptionEnum(sortOrderOption);
+            return new SortCommand(sortOrderOptionEnum);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            String missingSortOptionsErrorMessage = "OOPS!!! Please add in sort order.";
+            throw new DukeException(missingSortOptionsErrorMessage);
         }
     }
 
@@ -104,11 +117,19 @@ class Parser {
         }
     }
 
-    private static CommandName tryEnum(String action) throws DukeException {
+    private static CommandName checkCommandNameEnum(String action) throws DukeException {
         try {
             return CommandName.valueOf(action);
         } catch (IllegalArgumentException e) {
             throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+        }
+    }
+
+    private static SortOrderOption checkSortOrderOptionEnum(String orderOption) throws DukeException {
+        try {
+            return SortOrderOption.valueOf(orderOption);
+        } catch (IllegalArgumentException e) {
+            throw new DukeException("OOPS!!! Please enter either asc or desc.");
         }
     }
 }

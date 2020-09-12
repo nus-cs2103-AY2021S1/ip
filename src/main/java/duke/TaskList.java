@@ -2,8 +2,9 @@ package duke;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
-
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 /**
  * Contains task list, and has operations like list and delete.
@@ -173,4 +174,23 @@ class TaskList {
         }
         return foundTaskListString;
     }
+
+    ArrayList<String> sortTasks(SortOrderOption sortOrderOptionEnum) {
+        sortTasksInPlace(sortOrderOptionEnum);
+        return listTasks();
+    }
+
+    void sortTasksInPlace(SortOrderOption sortOrderOptionEnum) {
+        switch (sortOrderOptionEnum) {
+        case ASC:
+            taskList.sort(Comparator.comparing(Task::getDescription));
+            break;
+        case DESC:
+            taskList.sort(Collections.reverseOrder(Comparator.comparing(Task::getDescription)));
+            break;
+        default:
+            assert false : "There should only be 2 sort options, should not reach here.";
+        }
+    }
+
 }
