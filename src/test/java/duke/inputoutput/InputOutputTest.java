@@ -1,5 +1,6 @@
 package duke.inputoutput;
 
+import static duke.utils.Messages.MESSAGE_GREETING;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.io.ByteArrayInputStream;
@@ -47,7 +48,7 @@ public class InputOutputTest {
         InputOutput inputOutput = new InputOutput();
         inputOutput.showGreeting();
         String expected = "Hello from\n" + logo + "\n" + line
-                + "\t Hello! I'm Duke\n\t What can I do for you?\n" + line;
+                + MESSAGE_GREETING + "\n" + line;
         assertEquals(expected, outContent.toString());
     }
 
