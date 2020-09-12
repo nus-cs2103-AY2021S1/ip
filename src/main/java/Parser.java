@@ -32,7 +32,7 @@ public class Parser {
         try {
             validity(input);
         } catch (UnknownCommandException ex) {
-            return "Unknown command";
+            return "Error! Unknown command";
         }
         String[] inputs = input.split(" ");
         assert inputs.length != 0 : "Input cannot be empty";
@@ -42,26 +42,26 @@ public class Parser {
             try {
                 str = getTodo(input, list);
             } catch (EmptyTodoException ex) {
-                return "Empty todo provided";
+                return "Error! Empty todo provided";
             }
             break;
         case "event":
             try {
                 str = getEventTest(input, list);
             } catch (InvalidEventException e) {
-                return "Invalid event provided";
+                return "Error! Invalid event provided";
             }
             break;
         case "deadline":
             try {
                 str = getDeadline(input, list);
             } catch (InvalidDeadlineException e) {
-                return "Invalid deadline given";
+                return "Error! Invalid deadline given";
             }
             break;
         case "delete":
             if (inputs.length != 2) {
-                str = "Incorrect format provided";
+                str = "Error! Incorrect format provided";
             } else {
                 str = delete(inputs[1], list);
             }
@@ -70,7 +70,7 @@ public class Parser {
             try {
                 str = find(input, list);
             } catch (InvalidNumberException e) {
-                return "No searches found";
+                return "Error! No searches found";
             }
             break;
         case "list":
@@ -86,12 +86,12 @@ public class Parser {
             try {
                 str = changeTask(input, list);
             } catch (InvalidTaskException ex) {
-                return "Invalid task provided";
+                return "Error! Invalid task provided";
             }
             break;
         default:
             if (inputs.length != 2) {
-                return "Invalid number of arguments";
+                return "Error! Invalid number of arguments";
             }
             str = update(inputs[1], list);
         }
@@ -197,7 +197,7 @@ public class Parser {
             String str = "The event has been removed as per your request: \n "
                     + list.get(index);
             list.delete(index);
-            str += "Now you have" + list.getSize() + " tasks to the list";
+            str += ". Now you have " + list.getSize() + " tasks to the list";
             return str;
         } catch (NumberFormatException e) {
             return "You have not provided a valid number";
