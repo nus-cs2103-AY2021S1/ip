@@ -14,6 +14,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
     private static final String MAIN_WINDOW_FXML_FILE_PATH = "/view/MainWindow.fxml";
+    private static final String APPLICATION_NAME = "Star Bot";
 
     private Duke duke = new Duke();
 
@@ -26,6 +27,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.setResizable(false);
+            stage.setTitle(APPLICATION_NAME);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

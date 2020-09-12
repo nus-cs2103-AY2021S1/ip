@@ -6,108 +6,58 @@ import static org.junit.jupiter.api.Assertions.fail;
 
 import org.junit.jupiter.api.Test;
 
-import duke.exception.WrongFormatException;
-
 public class TaskTest {
 
     @Test
-    public void newTask_validInput_taskObject() {
+    public void newTask_validInput_taskObjectReturned() {
         try {
-            new Task("do homework", "[T]", "todo", false);
+            Task task = new Task("meeting", " (at: NUS)", "|NUS", "[E]", "event", false);
             assertTrue(true);
-        } catch (WrongFormatException e) {
+        } catch (Exception e) {
             fail();
         }
     }
 
     @Test
-    public void newTask_invalidInputNoDescription_taskObject() {
-        try {
-            new Task("", "[T]", "todo", false);
-            fail();
-        } catch (WrongFormatException e) {
-            assertTrue(true);
-        }
+    public void setDone() {
+        Task task = new Task("meeting", " (at: NUS)", "|NUS", "[E]", "event", false);
+        task.setDone(true);
+        assertEquals("[E]|1|meeting|NUS", task.toStringForMemory());
     }
 
     @Test
-    public void getStatusIconForGui_taskNotDone_getCross() {
-        try {
-            Task task = new Task("do homework", "[T]", "todo", false);
-            assertEquals("\u2718", task.getStatusIconForGui());
-        } catch (WrongFormatException e) {
-            fail();
-        }
+    public void toStringForMemory_taskNotDone() {
+        Task task = new Task("meeting", " (at: NUS)", "|NUS", "[E]", "event", false);
+        assertEquals("[E]|0|meeting|NUS", task.toStringForMemory());
     }
 
     @Test
-    public void getStatusIconForGui_taskDone_getTick() {
-        try {
-            Task task = new Task("do homework", "[T]", "todo", true);
-            assertEquals("\u2713", task.getStatusIconForGui());
-        } catch (WrongFormatException e) {
-            fail();
-        }
+    public void toStringForMemory_taskDone() {
+        Task task = new Task("meeting", " (at: NUS)", "|NUS", "[E]", "event", true);
+        assertEquals("[E]|1|meeting|NUS", task.toStringForMemory());
     }
 
     @Test
-    public void getStatusIconForCli_taskNotDone_getCross() {
-        try {
-            Task task = new Task("do homework", "[T]", "todo", false);
-            assertEquals("✘", task.getStatusIconForCli());
-        } catch (WrongFormatException e) {
-            fail();
-        }
+    public void toStringForGui_taskNotDone() {
+        Task task = new Task("meeting", " (at: NUS)", "|NUS", "[E]", "event", false);
+        assertEquals("[E][\u2718] meeting (at: NUS)", task.toStringForGui());
     }
 
     @Test
-    public void getStatusIconForCli_taskDone_getTick() {
-        try {
-            Task task = new Task("do homework", "[T]", "todo", true);
-            assertEquals("✓", task.getStatusIconForCli());
-        } catch (WrongFormatException e) {
-            fail();
-        }
+    public void toStringForGui_taskDone() {
+        Task task = new Task("meeting", " (at: NUS)", "|NUS", "[E]", "event", true);
+        assertEquals("[E][\u2713] meeting (at: NUS)", task.toStringForGui());
     }
 
     @Test
-    public void testSetDone() {
-        try {
-            Task task = new Task("do homework", "[T]", "todo", false);
-            task.setDone(true);
-            assertEquals("\u2713", task.getStatusIconForGui());
-        } catch (WrongFormatException e) {
-            fail();
-        }
+    public void toStringForCli_taskNotDone() {
+        Task task = new Task("meeting", " (at: NUS)", "|NUS", "[E]", "event", false);
+        assertEquals("[E][✘] meeting (at: NUS)", task.toStringForCli());
     }
 
     @Test
-    public void testToStringForMemory() {
-        try {
-            Task task = new Task("do homework", "[T]", "todo", false);
-            assertEquals("[T]|0|do homework", task.toStringForMemory());
-        } catch (WrongFormatException e) {
-            fail();
-        }
-    }
-
-    @Test
-    public void testToStringForGui() {
-        try {
-            Task task = new Task("do homework", "[T]", "todo", false);
-            assertEquals("[T][\u2718] do homework", task.toStringForGui());
-        } catch (WrongFormatException e) {
-            fail();
-        }
-    }
-
-    @Test
-    public void testToStringForCli() {
-        try {
-            Task task = new Task("do homework", "[T]", "todo", false);
-            assertEquals("[T][✘] do homework", task.toStringForCli());
-        } catch (WrongFormatException e) {
-            fail();
-        }
+    public void toStringForCli_taskDone() {
+        Task task = new Task("meeting", " (at: NUS)", "|NUS", "[E]", "event", true);
+        assertEquals("[E][✓] meeting (at: NUS)", task.toStringForCli());
     }
 }

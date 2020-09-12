@@ -1,93 +1,85 @@
 package duke.task;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
-import java.time.DateTimeException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 import org.junit.jupiter.api.Test;
-
-import duke.exception.WrongFormatException;
 
 public class DeadlineTest {
 
     @Test
-    public void newDeadline_validInput_deadlineObject() {
+    public void newDeadline_validArguments_deadlineObjectReturned() {
         try {
-            new Deadline("homework", "2020-09-10 2359");
+            LocalDate deadlineDate = LocalDate.parse("2020-05-18");
+            LocalDateTime deadlineDateAndTime = deadlineDate.atTime(21, 17);
+            new Deadline("homework", deadlineDate, deadlineDateAndTime);
             assertTrue(true);
-        } catch (WrongFormatException e) {
+        } catch (Exception e) {
             fail();
         }
     }
 
     @Test
-    public void newDeadline_invalidInputWrongDateFormat_dateTimeExceptionThrown() {
+    public void newDeadline_validArgumentsWithIsDoneSet_deadlineObjectReturned() {
         try {
-            new Deadline("homework", "10-09-2020 2359");
-            fail();
-        } catch (WrongFormatException | DateTimeException e) {
-            assertTrue(e instanceof DateTimeException);
-        }
-    }
-
-    @Test
-    public void newDeadline_invalidInputWrongTimeFormat_numberFormatExceptionThrown() {
-        try {
-            new Deadline("homework", "2020-09-10 11:59pm");
-            fail();
-        } catch (WrongFormatException | NumberFormatException e) {
-            assertTrue(e instanceof NumberFormatException);
-        }
-    }
-
-    @Test
-    public void newDeadline_invalidInputWrongDateTimeFormat_dateTimeExceptionThrown() {
-        try {
-            new Deadline("homework", "tomorrow 9pm");
-            fail();
-        } catch (WrongFormatException | DateTimeException e) {
-            assertTrue(e instanceof DateTimeException);
-        }
-    }
-
-    @Test
-    public void newDeadline_invalidInputNoDateTimeSpecified_arrayIndexOutOfBoundsExceptionThrown() {
-        try {
-            new Deadline("homework", "then");
-            fail();
-        } catch (WrongFormatException | ArrayIndexOutOfBoundsException e) {
-            assertTrue(e instanceof ArrayIndexOutOfBoundsException);
-        }
-    }
-
-    @Test
-    public void newDeadline_invalidInputNoDescription_wrongFormatExceptionThrown() {
-        try {
-            new Deadline("", "2020-09-10 11:59pm");
-            fail();
-        } catch (WrongFormatException e) {
+            LocalDate deadlineDate = LocalDate.parse("2020-05-18");
+            LocalDateTime deadlineDateAndTime = deadlineDate.atTime(21, 17);
+            new Deadline("homework", deadlineDate, deadlineDateAndTime, true);
             assertTrue(true);
+        } catch (Exception e) {
+            fail();
         }
     }
 
     @Test
-    public void newDeadline_invalidInputNoDateTime_arrayIndexOutOfBoundsExceptionThrown() {
-        try {
-            new Deadline("homework", "");
-            fail();
-        } catch (WrongFormatException | ArrayIndexOutOfBoundsException e) {
-            assertTrue(e instanceof ArrayIndexOutOfBoundsException);
-        }
+    public void toStringForMemory_taskNotDone() {
+        LocalDate deadlineDate = LocalDate.parse("2020-05-18");
+        LocalDateTime deadlineDateAndTime = deadlineDate.atTime(21, 17);
+        Deadline deadline = new Deadline("homework", deadlineDate, deadlineDateAndTime);
+        assertEquals("[D]|0|homework|2020-05-18T21:17:00", deadline.toStringForMemory());
     }
 
     @Test
-    public void newDeadline_invalidInputNoDescriptionNorDateTime_wrongFormatExceptionThrown() {
-        try {
-            new Deadline("", "");
-            fail();
-        } catch (WrongFormatException e) {
-            assertTrue(true);
-        }
+    public void toStringForMemory_taskDone() {
+        LocalDate deadlineDate = LocalDate.parse("2020-05-18");
+        LocalDateTime deadlineDateAndTime = deadlineDate.atTime(21, 17);
+        Deadline deadline = new Deadline("homework", deadlineDate, deadlineDateAndTime, true);
+        assertEquals("[D]|1|homework|2020-05-18T21:17:00", deadline.toStringForMemory());
+    }
+
+    @Test
+    public void toStringForGui_taskNotDone() {
+        LocalDate deadlineDate = LocalDate.parse("2020-05-18");
+        LocalDateTime deadlineDateAndTime = deadlineDate.atTime(21, 17);
+        Deadline deadline = new Deadline("homework", deadlineDate, deadlineDateAndTime);
+        assertEquals("[D][\u2718] homework (by: 18 May 2020 @ 09:17pm)", deadline.toStringForGui());
+    }
+
+    @Test
+    public void toStringForGui_taskDone() {
+        LocalDate deadlineDate = LocalDate.parse("2020-05-18");
+        LocalDateTime deadlineDateAndTime = deadlineDate.atTime(21, 17);
+        Deadline deadline = new Deadline("homework", deadlineDate, deadlineDateAndTime, true);
+        assertEquals("[D][\u2713] homework (by: 18 May 2020 @ 09:17pm)", deadline.toStringForGui());
+    }
+
+    @Test
+    public void toStringForCli_taskNotDone() {
+        LocalDate deadlineDate = LocalDate.parse("2020-05-18");
+        LocalDateTime deadlineDateAndTime = deadlineDate.atTime(21, 17);
+        Deadline deadline = new Deadline("homework", deadlineDate, deadlineDateAndTime);
+        assertEquals("[D][✘] homework (by: 18 May 2020 @ 09:17pm)", deadline.toStringForCli());
+    }
+
+    @Test
+    public void toStringForCli_taskDone() {
+        LocalDate deadlineDate = LocalDate.parse("2020-05-18");
+        LocalDateTime deadlineDateAndTime = deadlineDate.atTime(21, 17);
+        Deadline deadline = new Deadline("homework", deadlineDate, deadlineDateAndTime, true);
+        assertEquals("[D][✓] homework (by: 18 May 2020 @ 09:17pm)", deadline.toStringForCli());
     }
 }
