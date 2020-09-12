@@ -30,8 +30,10 @@ Feature | Purpose
 `find <keyword>` | shows a task that contains a given keyword
 `bye` | terminates the bot 
 -----------------------------
+
 ### Feature Details
-###1. `todo`
+
+####1. `todo`
 This command adds a todo task into the list.
 #### Usage
 #### `todo <task name>`
@@ -51,7 +53,7 @@ Got it. I've added this task:
 
 Now you have 1 task in the list.
 ```
-###2. `deadline`
+####2. `deadline`
 This command adds a deadline task into the list
 #### Usage
 #### `deadline <task name> /by <deadline>`
@@ -77,7 +79,7 @@ Got it. I've added this task:
 Now you have 2 tasks in the list.
 ```
 
-###3. `event`
+####3. `event`
 This command adds an event task into the list
 #### Usage
 #### `event <task name> /at <event time>`
@@ -102,7 +104,7 @@ Got it. I've added this task:
 
 Now you have 3 tasks in the list.
 ```
-###4. `fixed`
+####4. `fixed`
 This command adds a fixed duration task into the list
 #### Usage
 #### `fixed <task name> /for <duration>`
@@ -128,7 +130,7 @@ Got it. I've added this task:
 Now you have 4 tasks in the list.
 ```
 
-###5. `list`
+####5. `list`
 This command shows the tasks in the tasklist.
 #### Usage
 #### `list`
@@ -149,7 +151,7 @@ Here are the tasks in your list:
 
 Now you have 4 tasks in the list.
 ```
-###6. `done`
+####6. `done`
 This command marks a particular task as done.
 #### Usage
 #### `done <task number>`
@@ -169,7 +171,7 @@ Nice! I've marked this task as done:
 [T][✓] read book
 ```
 
-###7. `delete`
+####7. `delete`
 This command deletes a particular task.
 #### Usage
 #### `delete <task number>`
@@ -202,7 +204,7 @@ Here are the matching tasks in your list:
 2.[D][✘] do project task (by: 18-Oct-2020 11:59PM)
 ```
 
-###9. `bye`
+####9. `bye`
 This command terminates the bot.
 #### Usage
 #### `bye`
