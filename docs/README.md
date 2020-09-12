@@ -4,7 +4,7 @@
 
 ## Features 
 
-### Create, Read, Update and Delete Tasks
+### Create, read, update and delete tasks
 Keep track of all your tasks, be it to-dos, deadlines, or events, all in this application.
 
 ### Mark tasks as completed
