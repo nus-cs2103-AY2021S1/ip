@@ -99,8 +99,7 @@ public final class Storage {
      * @throws UltronException If there are any IO errors.
      */
     public void writeAll(final ArrayList<Task> taskArrayList)
-        throws UltronException {
-        //Check if the directory exist
+            throws UltronException {
         if (!f.exists()) {
             try {
                 Files.createDirectory(Path.of(f.getParent()));
@@ -109,7 +108,6 @@ public final class Storage {
                     ExceptionType.DIRECTORY_NOT_CREATED);
             }
         }
-
         try {
             FileWriter fw = new FileWriter(f.getPath());
             for (Task task : taskArrayList) {
@@ -120,5 +118,4 @@ public final class Storage {
             throw new UltronException(f.getPath(), ExceptionType.IO_EXCEPTION);
         }
     }
-
 }

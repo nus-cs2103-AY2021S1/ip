@@ -72,11 +72,12 @@ public final class Deadline extends Task {
         String name = matcher.group(NAME_INDEX);
         String date = matcher.group(DATE_INDEX);
         try {
+
             Date date1 = DATE_FORMAT.parse(date);
             return new Deadline(name, date1);
+
         } catch (ParseException e) {
 
-            //Pass the 2 arguments into the function
             return new Deadline(name, date);
         }
     }
@@ -103,7 +104,7 @@ public final class Deadline extends Task {
     @Override
     public String toString() {
         return "[D]"
-            + super.toString()
-            + String.format(" (by: %s)", this.getDate());
+                + super.toString()
+                + String.format(" (by: %s)", this.getDate());
     }
 }

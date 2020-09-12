@@ -33,8 +33,8 @@ public final class Parser {
      * @throws UltronException if there are errors in getting the command.
      */
     private static Command checkInput(final String command,
-                                      final String arguments)
-        throws UltronException {
+            final String arguments)
+            throws UltronException {
         switch (command) {
         case "bye":
             return new ByeCommand(arguments);
@@ -64,7 +64,6 @@ public final class Parser {
     public static int parseInteger(final String args) throws UltronException {
         try {
             return Integer.parseInt(args) - 1;
-
         } catch (NumberFormatException e) {
             throw new UltronException(args, ExceptionType.INVALID_NUMBER);
         }
@@ -87,5 +86,4 @@ public final class Parser {
         String arguments = inputs.group(2);
         return checkInput(inputCommand, arguments);
     }
-
 }

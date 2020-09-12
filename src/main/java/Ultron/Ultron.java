@@ -19,7 +19,11 @@ public final class Ultron {
      * The Ultron class.
      */
     public Ultron() {
+
+        //Store the path to the data
         String path = "data/data.txt";
+
+        //Create a new storage
         storage = new Storage(path);
 
         try {
@@ -33,9 +37,7 @@ public final class Ultron {
             this.taskList = new TaskList(new ArrayList<>());
 
         }
-        //Create new instance of UI
         ui = new UI();
-
     }
 
     /**
@@ -48,30 +50,27 @@ public final class Ultron {
 
         //Check if it is the command to show the intro message
         if (input == "showIntro") {
+
             ui.setIntro();
             return ui.getMessage();
+
         } else {
+
+            //Adapted from CS2103T website.
             try {
-                //Get the command to execute
                 Command c = Parser.parseCommand(input);
 
-                //Execute the command
                 c.execute(taskList, ui, storage);
 
-                //Check if it is a quitting command
                 if (c.isExit()) {
-
-                    //Close the application
                     Platform.exit();
                 }
 
             } catch (UltronException e) {
-                //Return the error message
                 ui.setMessage(e.getMessage());
             }
         }
 
-        //Return the message stored in the UI
         return ui.getMessage();
     }
 

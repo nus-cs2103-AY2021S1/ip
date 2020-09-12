@@ -29,7 +29,7 @@ public final class TaskList {
     }
 
     /**
-     * Gets the size of the tasklist.
+     * Gets the size of the task list.
      *
      * @return int size.
      */
@@ -49,7 +49,7 @@ public final class TaskList {
     }
 
     /**
-     * Remove a task from the tasklist.
+     * Remove a task from the task list.
      *
      * @param index Index of the task to be removed.
      */
