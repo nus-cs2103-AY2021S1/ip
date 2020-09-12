@@ -1,26 +1,151 @@
-# Duke project template
+# Duke User Guide
+Duke is a personal task manager that helps to add, store, delete, find and sort tasks for you. :smile:
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+## Duke GUI
+![Duke GUI](/docs/Ui.PNG)
 
-## Setting up in Intellij
+## Setting Up
+Download the latest relase of Duke.jar to start using Duke.
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+## Features
+There are a total of 9 features on Duke for users to use.
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-1. Set up the correct JDK version, as follows:
-   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
-   1. Click `OK`
-1. Import the project into Intellij as follows:
-   1. Click `Open or Import`.
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+Feature | Description
+------------ | -------------
+`bye` | Exits Duke application
+`deadline NAMEOFDEADLINE /YYYY-MM-DD` | Creates a deadline and add it to list of tasks
+`delete TASKID` | Delete the particular task
+`done TASKID` | Marks the particular task as done
+`event NAMEOFEVENT /YYYY-MM-DD` | Creates an event and add it to list of tasks
+`find KEYWORD` | Search for any tasks based on the keyword given
+`list` | Shows the current list of tasks
+`sort` | Shows the current list of tasks sorted by name
+`todo NAMEOFTODO` | Creates a todo and add it to list of tasks
+
+## Usage of Features
+Below is a list of examples showing the expected outcomes of each features on Duke
+
+### 1. When duke is launched
+Expected output:
+```
+Hi I'm Duke! I help create and store tasks for you! How can I help you today?
+```
+
+### 2. `bye`
+Sample input:
+```
+bye
+```
+
+Expected output:
+```
+Bye! Hope to see you again soon.
+```
+
+### 3. `deadline NAMEOFDEADLINE /YYYY-MM-DD`
+Sample input:
+```
+deadline ip6 /2020-09-12
+```
+
+Expected output:
+```
+Got it. I have added this tasks:
+[D][X] ip6 (by: Sep 12 2020)
+Now you have 1 task in the list
+```
+
+### 4. `delete TASKID`
+Sample input:
+```
+delete 1
+```
+
+Expected output:
+```
+Noted. I have removed this task:
+[D][X] ip6 (by: Sep 12 2020)
+Now you have 0 tasks in the list
+```
+
+### 5. `done TASKID`
+Sample input:
+```
+done 1
+```
+
+Expected output:
+```
+Nice! I have marked this task as done:
+[D][O] ip6 (by: Sep 12 2020)
+```
+
+### 6. `event NAMEOFEVENT /YYYY-MM-DD`
+Sample input:
+```
+event anniversary /2020-10-08
+```
+
+Expected output:
+```
+Got it. I have added this task:
+[E][X] anniversary (at: Oct 8 2020)
+Now you have 2 tasks in the list
+```
+
+### 7. `find KEYWORD`
+Sample input:
+```
+find ip6
+```
+
+Expected output:
+```
+Here are the matching tasks in your list:
+[D][O]ip6 (by: Sep 12 2020)
+```
+
+### 8. `list`
+Sample input:
+```
+list
+```
+
+Expected output:
+```
+Here are the tasks in your list:
+1. [T][O] drink water
+2. [D][O]ip6 (by: Sep 12 2020)
+3. [E][X] anniversary (at: Oct 8 2020)
+```
+
+### 9. `sort`
+Sample input:
+```
+sort
+```
+
+Expected output:
+```
+SORTED BY TASK TYPE
+1. [D][O]ip6 (by: Sep 12 2020)
+2. [E][X] anniversary (at: Oct 8 2020)
+3. [T][O] drink water
+```
+
+### 10. `todo NAMEOFTODO`
+Sample input:
+```
+todo drink water
+```
+
+Expected output:
+```
+Got it. I have added this task:
+[T][X] drink water
+Now you have 3 tasks in the list
+```
+
+
+
+
