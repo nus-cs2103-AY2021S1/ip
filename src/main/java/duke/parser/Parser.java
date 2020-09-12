@@ -12,25 +12,11 @@ public class Parser {
     }
 
 
-    private static boolean isOneWordCommand(String[] parseArray) {
+    protected static boolean isOneWordCommand(String[] parseArray) {
         return parseArray.length == 1;
     }
 
-    private static Command parseListCommand(String[] parseArray) throws WrongDateFormatException {
-        try {
-            if (isOneWordCommand(parseArray)) {
-                return new ListCommand(null);
-            } else {
-                String time = parseArray[1];
-                LocalDate date = LocalDate.parse(time);
-                return new ListCommand(date);
-            }
-        } catch(DateTimeParseException ex) {
-            throw new WrongDateFormatException();
-        }
-    }
-
-    private static int getArrayIndex(String[] parseArray) throws EmptyTaskException {
+    protected static int getArrayIndex(String[] parseArray) throws EmptyTaskException {
         try{
             String index = parseArray[1];
             return Integer.parseInt(index) - 1;
@@ -38,128 +24,6 @@ public class Parser {
             throw new EmptyTaskException();
         }
     }
-
-    private static Command parseDoneCommand(String[] parseArray) throws EmptyTaskException {
-        if (isOneWordCommand(parseArray)) {
-            throw new EmptyTaskException();
-        } else {
-            int arrayIndex = getArrayIndex(parseArray);
-            return new DoneCommand(arrayIndex);
-        }
-    }
-
-    private static Command parseFindCommand(String[] parseArray) throws IncompleteMessageException {
-        if (isOneWordCommand(parseArray)) {
-            throw new IncompleteMessageException("Please specify keyword. (´∀`)");
-        } else {
-            String keyword = parseArray[1];
-            return new FindCommand(keyword);
-        }
-    }
-
-    private static Command parseDeleteCommand(String[] parseArray) throws EmptyTaskException {
-        if (isOneWordCommand(parseArray)) {
-            throw new EmptyTaskException();
-        } else {
-            int arrayIndex = getArrayIndex(parseArray);
-            return new DeleteCommand(arrayIndex);
-        }
-    }
-
-    private static boolean hasNoTimeSignal(String[] parseArray) {
-        return parseArray[1].split("/").length == 1;
-    }
-
-    private static boolean hasNoTime(String[] parseArray) {
-        return parseArray[1].split("/")[1].split(" ", 2).length == 1;
-    }
-
-    private static Command parseTodoCommand(String[] parseArray) throws EmptyTaskException {
-        if (isOneWordCommand(parseArray)) {
-            throw new EmptyTaskException("Please specify the todo. (´∀`)");
-        } else {
-            return new AddCommand(parseArray[0], parseArray[1], null);
-        }
-    }
-
-    private static Command parseDeadlineCommand(String[] parseArray) throws EmptyTimeException,
-            WrongDateFormatException, EmptyTaskException {
-        if (isOneWordCommand(parseArray)) {
-            throw new EmptyTaskException("Please specify the deadline. (´∀`)");
-        }
-
-        if (hasNoTimeSignal(parseArray)) {
-            throw new EmptyTimeException("Please specify deadline using \"/by\". (´∀`)");
-        }
-        if (hasNoTime(parseArray)) {
-            throw new EmptyTimeException("Please don't leave the deadline blank~ (´∀`)");
-        }
-
-        try {
-            String type = parseArray[0];
-            String taskDescription = parseArray[1];
-            String name = taskDescription.split(" /")[0];
-            String time = taskDescription.split(" /")[1].split(" ", 2)[1];
-            LocalDate date = LocalDate.parse(time);
-            LocalDate[] dataArr = {date};
-            return new AddCommand(type, name, dataArr);
-        } catch (DateTimeParseException ex) {
-            throw new WrongDateFormatException();
-        }
-    }
-
-    private static Command parseEventCommand(String[] parseArray) throws EmptyTimeException,
-            WrongDateFormatException, EmptyTaskException {
-        if (isOneWordCommand(parseArray)) {
-            throw new EmptyTaskException("Please specify the event. (´∀`)");
-        }
-        if (hasNoTimeSignal(parseArray)) {
-            throw new EmptyTimeException("Please specify event using \"/at\". (´∀`)");
-        }
-        if (hasNoTime(parseArray)) {
-            throw new EmptyTimeException("Please don't leave the event time blank~ (´∀`)");
-        }
-
-        try {
-            String type = parseArray[0];
-            String taskDescription = parseArray[1];
-            String name = taskDescription.split(" /")[0];
-            String time = taskDescription.split(" /")[1].split(" ", 2)[1];
-            LocalDate date = LocalDate.parse(time);
-            LocalDate[] dataArr = {date};
-            return new AddCommand(type, name, dataArr);
-        } catch (DateTimeParseException ex) {
-            throw new WrongDateFormatException();
-        }
-    }
-
-    private static Command parsePeriodTaskCommand(String[] parseArray) throws EmptyTimeException,
-            WrongDateFormatException, EmptyTaskException {
-        if (isOneWordCommand(parseArray)) {
-            throw new EmptyTaskException();
-        }
-        if (hasNoTimeSignal(parseArray)) {
-            throw new EmptyTimeException("Please specify start and end time using \"/from ... /to\". (´∀`)");
-        }
-        if (hasNoTime(parseArray)) {
-            throw new EmptyTimeException("Please don't leave the time blank~ (´∀`)");
-        }
-
-        try {
-            String type = parseArray[0];
-            String taskDescription = parseArray[1];
-            String name = taskDescription.split(" /")[0];
-            String startString = taskDescription.split(" /")[1].split(" ", 2)[1];
-            LocalDate start = LocalDate.parse(startString);
-            String endString = taskDescription.split(" /")[2].split(" ", 2)[1];
-            LocalDate end = LocalDate.parse(endString);
-            LocalDate[] dataArr = {start, end};
-            return new AddCommand(type, name, dataArr);
-        } catch (DateTimeParseException ex) {
-            throw new WrongDateFormatException();
-        }
-    }
-
 
     /**
      * Cut an user-input String to smaller piece of information
@@ -181,21 +45,21 @@ public class Parser {
         case "bye":
             return new ExitCommand();
         case "list":
-            return parseListCommand(parseArray);
+            return new ListParser().parseListCommand(parseArray);
         case "done":
-            return parseDoneCommand(parseArray);
+            return new DoneParser().parseDoneCommand(parseArray);
         case "find":
-            return parseFindCommand(parseArray);
+            return new FineParser().parseFindCommand(parseArray);
         case "delete":
-            return parseDeleteCommand(parseArray);
+            return new DeleteParser().parseDeleteCommand(parseArray);
         case "todo":
-            return parseTodoCommand(parseArray);
+            return new AddTaskParser().parseTodoCommand(parseArray);
         case "deadline":
-            return parseDeadlineCommand(parseArray);
+            return new AddTaskParser().parseDeadlineCommand(parseArray);
         case "event":
-            return parseEventCommand(parseArray);
+            return new AddTaskParser().parseEventCommand(parseArray);
         case "period-task":
-            return parsePeriodTaskCommand(parseArray);
+            return new AddTaskParser().parsePeriodTaskCommand(parseArray);
         default:
             throw new CommandNotFoundException();
         }
