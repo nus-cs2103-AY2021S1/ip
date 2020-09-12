@@ -42,7 +42,7 @@ public class SortCommand extends Command {
      * Sorts list alphabetically according to task description.
      */
     private void sortByDescription(TaskList arrayOfTasks) {
-        ArrayList copiedArray = arrayOfTasks.getTasks();
+        ArrayList<Task> copiedArray = arrayOfTasks.getTasks();
         copiedArray.sort(Comparator.comparing(Task::getDescription));
     }
 
@@ -50,7 +50,7 @@ public class SortCommand extends Command {
      * Sorts list alphabetically according to task type.
      */
     private void sortByType(TaskList arrayOfTasks) {
-        ArrayList copiedArray = arrayOfTasks.getTasks();
+        ArrayList<Task> copiedArray = arrayOfTasks.getTasks();
         copiedArray.sort(Comparator.comparingInt(this::getTaskType)
         );
     }

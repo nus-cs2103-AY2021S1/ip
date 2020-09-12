@@ -150,9 +150,7 @@ public class Ui {
      * @return Response object
      */
     public Response listError() {
-        String output = "Failed to list tasks. There can be two reasons:\n"
-                + "1. Missing 'duke.txt' in 'data' folder of project directory.\n "
-                + "2. Your list of tasks is currently empty.";
+        String output = "Failed to list tasks as your list is currently empty.";
         Response responseObject = new Response(output);
         return responseObject;
     }
