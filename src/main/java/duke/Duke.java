@@ -40,14 +40,6 @@ public class Duke extends Application {
     private Image user = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
     private Image duke = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
 
-//    /**
-//     * Calls method run().
-//     * @param args expecting the array of objects.
-//     */
-//    public static void main(String[] args) throws IOException {
-//        new Duke();
-//    }
-
     /**
      * Creates a Duke.
      * Initializes the Duke bot.
