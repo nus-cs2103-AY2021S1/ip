@@ -39,6 +39,7 @@ Expected outcome:
 Now you have 7 tasks in the list` 
 
 
+
 ### `DELETE [INT]` - DELETE A TASK FROM THE LIST
 
 Deletes the task found at the number provided by the user
@@ -52,6 +53,7 @@ Expected outcome:
 `The event has been removed as per your request:
 [D][Donezo]update todos (by: 23/02/2020 21:22).
 Now you have 6 tasks to the list`
+
 
 
 ### `DEADLINE [STRING] /BY DD-MM-YYYY HH:MM `- CREATE A DEADLINE TASK
@@ -68,6 +70,7 @@ Expected outcome:
 You have 7 tasks left to do.`
 
 
+
 ### `EVENT [STRING] /AT DD-MM-YYYY HH:MM `- CREATE AN EVENT TASK
 
 Creates and adds an event task at the given date and time
@@ -80,6 +83,7 @@ Expected outcome:
 
 `[E][Not Done] get out in front (at: 22/02/2020 23:45) has been added to the list. 
 You have 8 tasks left to do` 
+
 
 
 ### `TODO [STRING]`- CREATE A TODO TASK
@@ -96,6 +100,7 @@ Expected outcome:
 You have 9 tasks left to do`
 
 
+
 ### `FIND[STRING] `- FIND TASKS BASED ON KEYWORD
 
 Finds and displays all the tasks which contain an user-inputted keyword
@@ -107,6 +112,7 @@ Example of usage:
 Expected outcome:
 
 `[D][Not Done] portfolio now (by: 23/02/2020 12:12) contain portolio`
+
 
 
 ### `UPDATE [INT][STRING] `- UPDATE TASKS
@@ -121,6 +127,7 @@ Expected outcome:
 
 `[E][Donezo] portfolio now (at: 23/02/2020 12:12) has been updated to
 [E][Donezo] portfolio now (at: 24/02/2020 23:23)`
+
 
 
 ### `NUMBER`- NUMBER OF TASKS IN THE LIST
