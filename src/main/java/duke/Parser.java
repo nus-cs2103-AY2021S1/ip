@@ -7,10 +7,11 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
-import duke.command.StatsCommand;
 import duke.command.OwoCommand;
+import duke.command.StatsCommand;
 import duke.command.UwuCommand;
 import duke.tasks.Deadline;
+import duke.tasks.Event;
 import duke.tasks.Todo;
 
 /**
@@ -42,79 +43,88 @@ public class Parser {
         case StatsCommand.COMMAND_WORD:
             return new StatsCommand();
         case FindCommand.COMMAND_WORD_FIND:
-            if (checkInputLength(splitCommand, 2)) {
-                return new FindCommand(splitCommand[1]);
-            }
-            // Fallthrough
+            return prepareFind(splitCommand);
         case DeleteCommand.COMMAND_WORD:
-            if (checkInputLength(splitCommand, 2)) {
-                return prepareDelete(splitCommand[1]);
-            }
-            // Fallthrough
+            return prepareDelete(splitCommand);
         case DoneCommand.COMMAND_WORD:
-            if (checkInputLength(splitCommand, 2)) {
-                return prepareDone(splitCommand[1]);
-            }
-            // Fallthrough
+            return prepareDone(splitCommand);
         case AddCommand.COMMAND_WORD_TODO:
             // Fallthrough
         case AddCommand.COMMAND_WORD_DEADLINE:
             // Fallthrough
         case AddCommand.COMMAND_WORD_EVENT:
-            if (checkInputLength(splitCommand, 2)) {
-                return prepareAdd(commandWord, splitCommand[1]);
-            }
-            // Fallthrough
+            return prepareAdd(splitCommand);
         default:
             throw new DukeException("I don't understand what you're saying HMM...");
         }
-
     }
 
-    private static boolean checkInputLength(String[] input, int len) throws DukeException {
-        if (input.length < len) {
-            throw new DukeException("Input is missing some arguments!");
+    private static Command prepareFind(String[] input) throws DukeException {
+        if (input.length >= 2) {
+            return new FindCommand(input[1]);
         } else {
-            return true;
+            throw new DukeException("Input is missing some arguments!");
         }
     }
 
-    private static Command prepareDelete(String input) throws DukeException {
-        try {
-            int taskNum = Integer.parseInt(input);
-            return new DeleteCommand(taskNum);
-        } catch (NumberFormatException e) {
-            throw new DukeException("Invalid task number!");
-        }
-    }
-
-    private static Command prepareDone(String input) throws DukeException {
-        try {
-            int taskNum = Integer.parseInt(input);
-            return new DoneCommand(taskNum);
-        } catch (NumberFormatException e) {
-            throw new DukeException("Invalid task number!");
-        }
-    }
-
-    private static Command prepareAdd(String command, String description) throws DukeException {
-        switch (command) {
-        case ("todo"):
-            return new AddCommand(new Todo(description));
-        case ("deadline"):
-            String[] deadline = description.split(" /by ", 2);
-            if (checkInputLength(deadline, 2)) {
-                return new AddCommand(new Deadline(deadline[0], deadline[1].replace('/', '-')));
+    private static Command prepareDelete(String[] input) throws DukeException {
+        if (input.length >= 2) {
+            try {
+                int taskNum = Integer.parseInt(input[1]);
+                return new DeleteCommand(taskNum);
+            } catch (NumberFormatException e) {
+                throw new DukeException("Invalid task number!");
             }
-            // Fallthrough
-        case ("event"):
-            String[] event = description.split(" /at ", 2);
-            if (checkInputLength(event, 2)) {
-                return new AddCommand(new Deadline(event[0], event[1].replace('/', '-')));
+        } else {
+            throw new DukeException("Input is missing some arguments!");
+        }
+    }
+
+    private static Command prepareDone(String[] input) throws DukeException {
+        if (input.length >= 2) {
+            try {
+                int taskNum = Integer.parseInt(input[1]);
+                return new DoneCommand(taskNum);
+            } catch (NumberFormatException e) {
+                throw new DukeException("Invalid task number!");
             }
-            // Fallthrough
-        default:
-            throw new DukeException("Couldn't add item..");
+        } else {
+            throw new DukeException("Input is missing some arguments!");
+        }
+    }
+
+    private static Command prepareAdd(String[] input) throws DukeException {
+        if (input.length >= 2) {
+            switch (input[0]) {
+            case ("todo"):
+                return new AddCommand(new Todo(input[1]));
+            case ("deadline"):
+                return prepareDeadline(input[1]);
+            case ("event"):
+                return prepareEvent(input[1]);
+            default:
+                throw new DukeException("Couldn't add item..");
+            }
+        } else {
+            throw new DukeException("Input is missing some arguments!");
+        }
+    }
+
+    private static Command prepareDeadline(String input) throws DukeException {
+        String[] deadline = input.split(" /by ", 2);
+        if (deadline.length >= 2) {
+            return new AddCommand(new Deadline(deadline[0], deadline[1].replace('/', '-')));
+        } else {
+            throw new DukeException("Input is missing some arguments!");
+        }
+    }
+
+    private static Command prepareEvent(String input) throws DukeException {
+        String[] event = input.split(" /at ", 2);
+        if (event.length >= 2) {
+            return new AddCommand(new Event(event[0], event[1].replace('/', '-')));
+        } else {
+            throw new DukeException("Input is missing some arguments!");
         }
     }
 }
