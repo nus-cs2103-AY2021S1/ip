@@ -2,32 +2,18 @@
 
 ## Features 
 
-### Add Todo Task
-Adds a Todo Task that has no associated deadline.
+### Add, Delete and Update Tasks
+User is able to add, delete and update Tasks. 
+A Task can be just a generic description, or it can be associated with either a deadline or an event. 
 
-### Add Deadline Task
-Adds a Deadline Task with an associated deadline.
+### List and Find Tasks
+User is able to find Tasks that matches the given keywords or get a list of all the Tasks in the Task List.
 
-### Add Event Task
-Adds an Event Task with an associated event time.
+### Mark Tasks as Done
+User is able to mark a Task in the Task List as done. 
 
-### Find Task
-Finds Tasks that matches the given keywords.
-
-### List all Tasks
-List all Tasks that were created before.
-
-### Update Task
-Update a Task in the Task List. 
-
-### Delete Task
-Delete a Task in the Task List.
-
-### Mark Task as Done
-Marks a Task in the Task List as done / completed.
-
-### Save Tasks
-Saves the current Task List into a data file.
+### Save 
+Saves the state of the current Task List into a data file.
 
 ## Usage
 
