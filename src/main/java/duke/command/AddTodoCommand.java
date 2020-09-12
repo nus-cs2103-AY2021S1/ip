@@ -6,10 +6,10 @@ import java.util.List;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
-import duke.UiForGui;
 import duke.task.Task;
 import duke.task.ToDo;
+import duke.ui.Ui;
+import duke.ui.UiForGui;
 
 /**
  * Encapsulates an add command for to-do tasks. This command adds a to-do task to the task list. The format for this

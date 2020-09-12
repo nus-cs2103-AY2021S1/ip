@@ -5,8 +5,8 @@ import java.util.List;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
-import duke.UiForGui;
+import duke.ui.Ui;
+import duke.ui.UiForGui;
 
 /**
  * Encapsulates a list command for the Duke program. This is the command that lists out the tasks in the task list

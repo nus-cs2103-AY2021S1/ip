@@ -2,9 +2,9 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
-import duke.UiForGui;
 import duke.exception.DukeException;
+import duke.ui.Ui;
+import duke.ui.UiForGui;
 
 /**
  * Encapsulates a command for the Duke program. These are commands that users can enter as input to interact with Duke.

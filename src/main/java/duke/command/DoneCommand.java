@@ -6,10 +6,10 @@ import java.util.List;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
-import duke.UiForGui;
 import duke.exception.TaskIndexOutOfBoundsException;
 import duke.task.Task;
+import duke.ui.Ui;
+import duke.ui.UiForGui;
 
 /**
  * Encapsulates a done command for the Duke program. This is the command that marks tasks as completed in the task list.

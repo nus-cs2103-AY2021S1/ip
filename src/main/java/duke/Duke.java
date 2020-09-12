@@ -6,6 +6,8 @@ import java.util.concurrent.TimeUnit;
 import duke.command.Command;
 import duke.command.UnknownCommand;
 import duke.exception.DukeException;
+import duke.ui.Ui;
+import duke.ui.UiForGui;
 import javafx.application.Platform;
 
 /**

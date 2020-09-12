@@ -8,10 +8,10 @@ import java.util.List;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
-import duke.UiForGui;
 import duke.task.Deadline;
 import duke.task.Task;
+import duke.ui.Ui;
+import duke.ui.UiForGui;
 
 /**
  * Encapsulates an add command for deadline tasks. This command adds a deadline task to the task list. The format for

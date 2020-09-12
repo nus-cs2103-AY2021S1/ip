@@ -6,10 +6,10 @@ import java.util.List;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
-import duke.UiForGui;
 import duke.task.Event;
 import duke.task.Task;
+import duke.ui.Ui;
+import duke.ui.UiForGui;
 
 /**
  * Encapsulates an add command for event tasks. This command adds an event task to the task list. The format for this

@@ -2,9 +2,9 @@ package duke.command;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
-import duke.UiForGui;
 import duke.exception.UnknownCommandException;
+import duke.ui.Ui;
+import duke.ui.UiForGui;
 
 /**
  * Encapsulates unknown commands for the Duke program. These are invalid commands (in which the first word of the

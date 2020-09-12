@@ -5,10 +5,11 @@ import java.util.List;
 
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
-import duke.UiForGui;
 import duke.task.Event;
 import duke.task.Task;
+import duke.ui.Ui;
+import duke.ui.UiForGui;
+
 
 public class FindCommand extends Command {
 
