@@ -8,9 +8,9 @@ a Command-Line Interface (CLI) task management application that optimizes tracki
 The in-built help command 'help' displays a list of command formatting that teaches users
  the format to enter commands to use Dino.
 
-### Usage
+#### \> Usage
 
-### `help` - View valid command formats
+##### `help` - View valid command formats
 
 Type 'help' in the text box and enter to view the list of commands 
 to use the features in Dino.
@@ -22,15 +22,15 @@ Example of usage:
 Expected outcome:
 ![image of help command](dinoHelpCommand.jpg)
 
-### Adding tasks 
+### Add a Task to your task list
 Users can add three types of tasks to their task list: Todo, Deadline and Event.
 Todo tasks are added with command 'todo' along with task desription.
 Deadline tasks are added with command 'deadline' along with task description and task deadline.
 Event tasks are added with command 'event' along with task description and task period.
 
-### Usage
+#### \> Usage
 
-### `todo` - Add a Todo task
+##### `todo` - adds Todo task
 
 Type 'todo *description*', where *description* represents the task description, 
 in the text box and press enter.
@@ -43,7 +43,7 @@ Example of usage:
 Expected outcome:
 ![image of todo command](dinoTodoCommand.jpg)
 
-### `deadline` - Add a Deadline task
+##### `deadline` - adds Deadline task
 
 Type 'deadline *description* /by *yyyy-mm-dd* *hhmm*', where *description* represents the task description,
 *yyyy-mm-dd* and *hhmm* (in 24 hour format) represent the date and time of the deadline.
@@ -57,7 +57,7 @@ Example of usage:
 Expected outcome:
 ![image of deadline command](dinoDeadlineCommand.jpg)
 
-### `event` - Add an Event task
+##### `event` - adds Event task
 
 Type 'event *description* /at *yyyy-mm-dd* *hhmm-hhmm*', where *description* represents the task description,
 *yyyy-mm-dd* and *hhmm-hhmm* (in 24 hour format) represent the date and period (start time to end time) of the event.
@@ -71,13 +71,13 @@ Example of usage:
 Expected outcome:
 ![image of event command](dinoEventCommand.jpg)
 
-### Display your task list
+### View your task list
 Users can view their task list by entering the command 'list' which
 will display their entire task list.
 
-### Usage
+#### \> Usage
 
-### `list` - Display task list
+##### `list` - displays task list
 
 Type 'list' into the text box and press enter. 
  This will display the tasks in your task list.
@@ -89,14 +89,14 @@ Example of usage:
 Expected outcome:
 ![image of list command](dinoListCommand.jpg)
 
-### Mark completion of tasks
+### Mark completion of task
 Users can mark their tasks as done to denote completion of the tasks.
 Tasks that are not done are denoted 0 by default.
 Tasks that have been marked done are denoted 1.
 
-### Usage
+#### \> Usage
 
-### `done` - Mark task as done
+##### `done` - marks task as done
 
 Type 'done *task number*', where *task number* represents the index number of the
  task which can be viewed in the task list. 
@@ -113,9 +113,9 @@ Expected outcome:
 Users can find a task in their task list by entering a keyword representing the task description.
 All tasks whose task description contains the keyword will be displayed to user.
 
-### Usage
+#### \> Usage
 
-### `find` - Find a task
+##### `find` - finds a task
 
 Type 'find *keyword*', where *keyword* will be used to search for all task descriptions
 in the task list that contain the keyword.
@@ -132,9 +132,9 @@ Expected outcome:
 Users can add priority *HIGH or MID or LOW* to a task in their task list,
 by entering the priority followed by task number of the task.
 
-### Usage
+#### \> Usage
 
-### `priority` - Add priority to task
+##### `priority` - adds priority to task
 
 Type 'priority *high/mid/low* *task number*', 
 where *high/mid/low* represents the priority of the task.
@@ -157,9 +157,9 @@ Expected outcome:
 Users can delete a task from their task list, by entering 'delete'
 followed by the task number.
 
-### Usage
+#### \> Usage
 
-### `delete` - Delete a task
+##### `delete` - deletes a task
 
 Type 'delete *task number*', 
 where the *task number* represents the index number of the 
@@ -176,9 +176,9 @@ Expected outcome:
 ### Exit from Dino
 Users can exit from Dino by entering 'bye'.
 
-### Usage
+#### \> Usage
 
-### `bye` - Exit command
+##### `bye` - exits from Dino
 
 Type 'bye' in the text box and press enter.
 This will close Dino.
