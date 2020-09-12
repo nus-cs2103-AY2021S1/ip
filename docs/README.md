@@ -1,25 +1,29 @@
-# User Guide
+# Duke User Guide
+Duke is a personal chatbot who can help you keep track of your tasks.
 
-## Features 
-Keep track of your tasks (todo, event, and deadline)
+![Product Screenshot](Ui.png)
 
-### Add Todo
-Add a task to do
+## Table of Contents
+- [Requirements](#requirements)
+- [Features](#features)
+- [Usage](#usage)
 
-### Add Event
-Add an event with a specified date and time
+## Requirements
+- Java 11
 
-### Add Deadline
-Add a deadline with a specified due date and time
+## Features
 
-### Mark Task as Done
-Mark a task as done
+### Duke supports multiple types of tasks
+You can keep track of a todo task, a task with deadline, or an event with a specified time.
 
-### Delete Task
-Delete a task
+### Search tasks by keyword
+You can search tasks containing the keyword(s) you query.
 
-### Find task
-Find tasks based on keyword
+### No need to use mouse or trackpad
+You can easily use the features using keyboard, hence improves efficiency.
+
+### Auto-save
+Duke will save the changes in your tasks automatically.
 
 ## Usage
 
@@ -39,6 +43,8 @@ Got it. I've added this task:
 Now you have 2 tasks in the list
 ```
 
+***
+
 ### `event <description> /at <date> <time>` - To add an event
 
 Adds the event with the specified date and time.
@@ -54,6 +60,8 @@ Got it. I've added this task:
 [E][✘] webinar (at: February 20 2020, 19:00)
 Now you have 3 tasks in the list
 ```
+
+***
 
 ### `deadline <description> /by <date> <time>` - To add a deadline
 
@@ -71,6 +79,8 @@ Got it. I've added this task:
 Now you have 3 tasks in the list
 ```
 
+***
+
 ### `list` - To view the list of all tasks
 
 Displays list of all tasks along with their indices.
@@ -87,6 +97,8 @@ Expected outcome:
 3. [D][✘] lab report (by: April 22 2020, 19:30)
 ```
 
+***
+
 ### `done <task index>` - To mark a task as done
 
 Marks the task whose index in the task list is specified by `<task index>` as done.
@@ -100,6 +112,8 @@ Expected outcome:
 Nice! I've marked this task as done:
 [T][✓] homework
 ```
+
+***
 
 ### `delete <task index>` - To delete a task
 
@@ -116,6 +130,8 @@ Noted. I've removed this task:
 Now you have 2 tasks in the list.
 ```
 
+***
+
 ### `find <keyword>` - To mark the task as done
 
 Finds the tasks containing `<keyword>`.
@@ -128,6 +144,8 @@ Expected outcome:
 ```
 1. [E][✘] webinar (at: February 20 2020, 19:00)
 ```
+
+***
 
 ### `bye` - To exit the Duke app
 
