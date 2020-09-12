@@ -24,13 +24,19 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    // Image retrieved from https://line.fandom.com/wiki/Cony
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/cony.png"));
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
+    /**
+     * Sets up Duke.
+     *
+     * @param duke
+     */
     public void setDuke(Duke duke) {
         this.duke = duke;
         duke.setUi(dialogContainer);
@@ -46,16 +52,15 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         dialogContainer.getChildren().add(DialogBox.getUserDialog(input, userImage));
         if (duke.getResponse(input)) {
-            CompletableFuture<Void> cf = CompletableFuture.runAsync(() -> {
+            CompletableFuture<Void> completableFuture = CompletableFuture.runAsync(() -> {
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
                     e.printStackTrace();
                 }
             });
-            cf.thenRun(() -> Platform.exit());
+            completableFuture.thenRun(() -> Platform.exit());
         }
         userInput.clear();
-
     }
 }

@@ -10,7 +10,8 @@ import javafx.scene.layout.VBox;
  */
 public class Ui {
 
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
+    //Image retrieved from https://line.fandom.com/wiki/Brown
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/brown.png"));
 
     private VBox dialogContainer;
 
@@ -22,13 +23,13 @@ public class Ui {
     /** Greets the user. */
     public void greet() {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(
-                "Hello! I'm Duke\n" + "What can I do for you?\n", dukeImage));
+                "Hello! I'm Duke\n" + "What can I do for you?\n", dukeImage, false));
     }
 
     /** Say bye to the user. */
     public void bye() {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(
-                "Bye. Hope to see you again soon!", dukeImage));
+                "Bye. Hope to see you again soon!", dukeImage, false));
     }
 
     /**
@@ -38,7 +39,7 @@ public class Ui {
      */
     public void done(Task task) {
         String text = "Nice! I've marked this task as done:\n" + task.toString();
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(text, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(text, dukeImage, false));
     }
 
     /**
@@ -47,7 +48,7 @@ public class Ui {
      * @param message The message to be displayed.
      */
     public void showError(String message) {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(message, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(message, dukeImage, true));
     }
 
     /**
@@ -60,7 +61,7 @@ public class Ui {
         String text = "Noted. I've removed this task:" + "\n"
                 + task.toString() + "\n"
                 + String.format("Now you have %d tasks in the list.", taskList.size());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(text, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(text, dukeImage, false));
     }
 
     /**
@@ -73,7 +74,7 @@ public class Ui {
         String text = "Got it! I have added this task to the list!\n"
                 + task.toString() + "\n"
                 + String.format("Now you have %d tasks in the list.", taskList.size());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(text, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(text, dukeImage, false));
     }
 
     /**
@@ -82,7 +83,6 @@ public class Ui {
      * @param text Text to be printed.
      */
     public void print(String text) {
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog(
-                text, dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog(text, dukeImage, false));
     }
 }

@@ -51,9 +51,6 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
-        dialog.setStyle("-fx-background-color: #D1FDA4; "
-                + "-fx-border-color: #D1FDA4; -fx-border-radius: 10; "
-                + "-fx-border-width: 10; -fx-background-radius: 10");
     }
 
     /**
@@ -73,11 +70,29 @@ public class DialogBox extends HBox {
      *
      * @param text The response from Duke.
      * @param img Image of Duke.
+     * @param isErrorMessage True if the message is an error message.
      * @return DialogBox for Duke.
      */
-    public static DialogBox getDukeDialog(String text, Image img) {
+    public static DialogBox getDukeDialog(String text, Image img, boolean isErrorMessage) {
         var db = new DialogBox(text, img);
         db.flip();
+        if (isErrorMessage) {
+            db.setErrorDialog();
+        } else {
+            db.setNormalDialog();
+        }
         return db;
+    }
+
+    private void setErrorDialog() {
+        dialog.setStyle("-fx-background-color: #F27474; "
+                + "-fx-border-color: #F27474; -fx-border-radius: 10; "
+                + "-fx-border-width: 10; -fx-background-radius: 10");
+    }
+
+    private void setNormalDialog() {
+        dialog.setStyle("-fx-background-color: #D1FDA4; "
+                + "-fx-border-color: #D1FDA4; -fx-border-radius: 10; "
+                + "-fx-border-width: 10; -fx-background-radius: 10");
     }
 }
