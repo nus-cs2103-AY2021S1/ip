@@ -7,8 +7,6 @@ import clippy.storage.Storage;
 import clippy.task.TaskList;
 import clippy.ui.Ui;
 
-import java.time.format.DateTimeParseException;
-
 /**
  * Represents a task-tracking chat bot with Clippy.Command Line Interface.
  */
@@ -56,8 +54,6 @@ public class Clippy {
             return c.execute(tasks, ui, storage);
         } catch (ClippyException e) {
             return e.getMessage();
-        } catch (DateTimeParseException e) {
-            return "Incorrect date format. Retry with YYYY-MM-DD.";
         }
     }
     

@@ -1,10 +1,8 @@
 package clippy.parser;
 
 import clippy.command.*;
-import clippy.exception.CommandException;
-import clippy.exception.DeadlineException;
-import clippy.exception.EventException;
-import clippy.exception.ToDoException;
+import clippy.exception.*;
+import clippy.task.TaskType;
 
 import java.util.Arrays;
 
@@ -16,8 +14,8 @@ public class Parser {
     private static final int AT_GAP = 4;
 
 
-    public static Command parse(String input) throws ToDoException, DeadlineException, EventException,
-            CommandException {
+    public static Command parse(String input) throws EmptyDescriptionException,
+            InvalidCommandException, EmptyDateTimeException {
         if (input.equals("bye")) {
             return new ExitCommand();
         } else if (input.equals("list")) {
@@ -35,7 +33,7 @@ public class Parser {
             int length = subInputs.length;
             int indexOfTaskToBeUpdated = Integer.parseInt(subInputs[1]);
             if (containsBackSlash(subInputs)) {
-                // update description of Clippy.Deadline/Clippy.Event OR update description of Clippy.Deadline/Clippy.Event + time
+                // update description of Deadline/Event OR update description of Deadline/Event + time
                 int indexOfBackSlash = findIndexOfBackSlash(subInputs);
                 String[] timeInArray = Arrays.copyOfRange(subInputs, indexOfBackSlash + 1, length);
                 String time = String.join(" ", timeInArray);
@@ -49,35 +47,41 @@ public class Parser {
                     return new UpdateDescriptionAndTimeCommand(indexOfTaskToBeUpdated, description, time);
                 }
             } else {
-                // update description of To-Do/Clippy.Deadline/Clippy.Event only
+                // update description of To-Do/Deadline/Event only
                 String[] descriptionInArray = Arrays.copyOfRange(subInputs, 2,  length);
                 String description = String.join(" ", descriptionInArray);
                 return new UpdateDescriptionCommand(indexOfTaskToBeUpdated, description);
             }
         } else if (input.startsWith("todo")) {
             if (input.length() < TO_DO_MIN_LENGTH) {
-                throw new ToDoException();
+                throw new EmptyDescriptionException(TaskType.TODO);
             } else {
                 return new AddToDoCommand(input.substring(TO_DO_MIN_LENGTH - 1));
             }
         } else if (input.startsWith("deadline")) {
             if (input.length() < DEADLINE_MIN_LENGTH) {
-                throw new DeadlineException();
+                throw new EmptyDescriptionException(TaskType.DEADLINE);
             }
             int indexOfSeparator = input.indexOf("/");
             String taskDescription = input.substring(DEADLINE_MIN_LENGTH - 1, indexOfSeparator - 1);
             String by = input.substring(indexOfSeparator + BY_GAP);
+            if (by.isBlank()) {
+                throw new EmptyDateTimeException();
+            }
             return new AddDeadlineCommand(taskDescription, by);
         } else if (input.startsWith("event")) {
             if (input.length() < EVENT_MIN_LENGTH) {
-                throw new EventException();
+                throw new EmptyDescriptionException(TaskType.EVENT);
             }
             int indexOfSeparator = input.indexOf("/");
             String taskDescription = input.substring(EVENT_MIN_LENGTH - 1, indexOfSeparator - 1);
             String at = input.substring(indexOfSeparator + AT_GAP);
+            if (at.isBlank()) {
+                throw new EmptyDateTimeException();
+            }
             return new AddEventCommand(taskDescription, at);
         } else {
-            throw new CommandException();
+            throw new InvalidCommandException();
         }
     }
     
