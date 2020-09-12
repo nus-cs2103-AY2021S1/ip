@@ -2,11 +2,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-
 import java.util.Scanner;
 
 /**
@@ -64,17 +62,17 @@ public class Storage {
                 String line = sc.nextLine();
                 Task loadedTask = null;
                 switch (line.charAt(0)) {
-                    case 'E':
-                        loadedTask = Event.decode(line);
-                        break;
-                    case 'D':
-                        loadedTask = Deadline.decode(line);
-                        break;
-                    case 'T':
-                        loadedTask = ToDo.decode(line);
-                        break;
-                    default:
-                        throw new DukeException("Unable to find");
+                case 'E':
+                    loadedTask = Event.decode(line);
+                    break;
+                case 'D':
+                    loadedTask = Deadline.decode(line);
+                    break;
+                case 'T':
+                    loadedTask = ToDo.decode(line);
+                    break;
+                default:
+                    throw new DukeException("Unable to find");
                 }
                 loadStore.add(loadedTask);
             }

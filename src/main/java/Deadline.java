@@ -3,11 +3,18 @@ import java.time.LocalDateTime;
 /**
  * Deadline class creates a type of Task called deadline which contains a date and description of the task
  */
+
+
 public class Deadline extends Task {
 
     private static final int dividerNum = 4;
     private LocalDateTime date;
 
+    /**
+     * Constructor to create a Deadline Object
+     * @param description description of deadline
+     * @param date the date of the deadline
+     */
     public Deadline(String description, LocalDateTime date) {
         super(description);
         this.date = date;

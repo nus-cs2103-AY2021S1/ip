@@ -17,78 +17,79 @@ public class Parser {
         String echo = userInput;
         try {
             String split = echo;
-            String arr[] = split.split(" ", 2);
+            String[] arr = split.split(" ", 2);
             String keyword = arr[0];
             Commands command = Commands.findCommand(keyword);
             switch (command) {
-                case EXIT:
+            case EXIT:
 
+                Storage.save(taskList, Storage.FILE_PATH);
+                return ui.addLines("Bye. Hope to see you again soon!");
+
+            case LIST:
+                Storage.save(taskList, Storage.FILE_PATH);
+                return ui.addLines(taskList.printOutList());
+
+            case DONE:
+                try {
                     Storage.save(taskList, Storage.FILE_PATH);
-                    return ui.addLines("Bye. Hope to see you again soon!");
+                    int index = Integer.parseInt(arr[1]) - 1;
+                    return ui.addLines(taskList.markCompleted(index));
 
-                case LIST:
+                } catch (Exception e) {
+                    return (new DukeException("Integer not detected")).toString();
+                }
+            case DEADLINE:
+                try {
+                    Storage.save(taskList, Storage.FILE_PATH);
+                    return ui.addLines(taskList.add(Deadline.createDeadline(arr[1])));
 
-                    return ui.addLines(taskList.printOutList());
+                } catch (ArrayIndexOutOfBoundsException e) {
+                    return (new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.", e))
+                            .toString();
+                }
+            case TODO:
+                try {
+                    Storage.save(taskList, Storage.FILE_PATH);
+                    ToDo item = new ToDo(arr[1]);
+                    return ui.addLines(taskList.add(item));
 
-                case DONE:
-                    try {
+                } catch (Exception e) {
+                    return (new DukeException("☹ OOPS!!! The description of a todo cannot be empty.", e)).toString();
+                }
+            case EVENT:
+                try {
+                    Storage.save(taskList, Storage.FILE_PATH);
+                    return ui.addLines(taskList.add(Event.createEvent(arr[1])));
 
-                        int index = Integer.parseInt(arr[1]) - 1;
-                        return ui.addLines(taskList.markCompleted(index));
+                } catch (Exception e) {
+                    return (new DukeException("☹ OOPS!!! The description of a event cannot be empty.", e)).toString();
+                }
+            case DELETE:
+                try {
+                    Storage.save(taskList, Storage.FILE_PATH);
+                    int index2 = Integer.parseInt(arr[1]) - 1;
+                    return ui.addLines(taskList.deleteTask(index2));
 
-                    } catch (Exception e) {
-                        return (new DukeException("Integer not detected")).toString();
-                    }
-                case DEADLINE:
-                    try {
-
-                        return ui.addLines(taskList.add(Deadline.createDeadline(arr[1])));
-
-                    } catch (ArrayIndexOutOfBoundsException e) {
-                        return (new DukeException("☹ OOPS!!! The description of a deadline cannot be empty.", e)).toString();
-                    }
-                case TODO:
-                    try {
-
-                        ToDo item = new ToDo(arr[1]);
-                        return ui.addLines(taskList.add(item));
-
-                    } catch (Exception e) {
-                        return (new DukeException("☹ OOPS!!! The description of a todo cannot be empty.", e)).toString();
-                    }
-                case EVENT:
-                    try {
-
-                        return ui.addLines(taskList.add(Event.createEvent(arr[1])));
-
-                    } catch (Exception e) {
-                        return (new DukeException("☹ OOPS!!! The description of a event cannot be empty.", e)).toString();
-                    }
-                case DELETE:
-                    try {
-
-                        int index2 = Integer.parseInt(arr[1]) - 1;
-                        return ui.addLines(taskList.deleteTask(index2));
-
-                    } catch (Exception e) {
-                        return (new DukeException("☹ OOPS!!! There is no task at that list number to delete!", e)).toString();
-                    }
-                case FIND:
-
-                    String findWord = arr[1];
-                    taskList.findTask(findWord);
-                    return ui.addLines(taskList.printOutKeyWordList());
-                
-                case RESCHEDULE:
-                    try {
-                      
-                        String taskToChange = arr[1];
-                        return ui.addLines(taskList.rescheduleTask(taskToChange));
-                      
-                    } catch (Exception e) {
-                        return (new DukeException("☹ OOPS!!! The description to reschedule a task cannot be empty", e)).toString();
-                    }
-
+                } catch (Exception e) {
+                    return (new DukeException("☹ OOPS!!! There is no task at that list number to delete!", e))
+                             .toString();
+                }
+            case FIND:
+                Storage.save(taskList, Storage.FILE_PATH);
+                String findWord = arr[1];
+                taskList.findTask(findWord);
+                return ui.addLines(taskList.printOutKeyWordList());
+            case RESCHEDULE:
+                try {
+                    Storage.save(taskList, Storage.FILE_PATH);
+                    String taskToChange = arr[1];
+                    return ui.addLines(taskList.rescheduleTask(taskToChange));
+                } catch (Exception e) {
+                    return (new DukeException("☹ OOPS!!! The description to reschedule a task cannot be empty", e))
+                                .toString();
+                }
+            default: return "Unable to parse";
             }
 
 
@@ -96,8 +97,6 @@ public class Parser {
             System.out.println(e);
             return e.toString();
         }
-
-        return "Unable to parse";
     }
 
 

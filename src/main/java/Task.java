@@ -8,6 +8,10 @@ public abstract class Task implements Encodable<Task> {
     protected String description;
     protected boolean isDone;
 
+    /**
+     * Constructor for making a Task Object
+     * @param description
+     */
     public Task(String description) {
         this.description = description;
         this.isDone = false;
@@ -19,7 +23,7 @@ public abstract class Task implements Encodable<Task> {
      * @return String [✓] or [✗]
      */
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? "\u2713" : "\u2718");
     }
 
     /**

@@ -1,4 +1,4 @@
-import java.util.Scanner;
+
 
 
 /**
@@ -7,21 +7,18 @@ import java.util.Scanner;
 
 public class UI {
 
-    public static final String line = "____________________________________________________________";
-    public Scanner sc;
+    public static final String LINE = "~~~~~~~~~~~~~~~~~~~~~";
 
-    UI() {
-        this.sc = new Scanner(System.in);
-    }
+    UI(){}
 
     /**
-     * adds the lines to make it look nice
+     * adds the LINEs to make it look nice
      *
      * @param content String item to be wrapped by two lines
      */
     public static String addLines(String content) {
         assert content.length() > 0;
-        return line + "\n" + content +"\n" + line;
+        return LINE + "\n" + content + "\n" + LINE;
     }
 
 

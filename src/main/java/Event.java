@@ -27,7 +27,7 @@ public class Event extends Task {
      */
     public static Event createEvent(String details) {
         if (details == null) {
-            throw new DukeException("I need something to work with.");
+            throw new DukeException("missing details");
         }
         String[] detailsArray = details.split("/at", 2);
         try {
@@ -41,7 +41,7 @@ public class Event extends Task {
     }
 
     /**
-     * convertes a String into a condensed form
+     * converts a String into a condensed form
      *
      * @return condesnsed form of inputted string
      */

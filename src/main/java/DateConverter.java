@@ -1,17 +1,18 @@
-import java.util.Arrays;
-import java.util.List;
-import java.util.ArrayList;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
+import java.util.Arrays;
+import java.util.List;
+
 
 /**
  * class handles all formatting for dates in Deadline and Event objects
  */
 public class DateConverter {
 
-    private static final List<String> ACCEPTED_FORMATS_WITH_TIME = Arrays.asList("d MMM yyyy HH:mm", "d-M-yyyy HH:mm", "d/M/yyyy HHmm", "d/M/yyyy HH:mm");
+    private static final List<String> ACCEPTED_FORMATS_WITH_TIME = Arrays.asList("d MMM yyyy HH:mm", "d-M-yyyy HH:mm",
+            "d/M/yyyy HHmm", "d/M/yyyy HH:mm");
 
     private static final List<String> ACCEPTED_FORMATS_DATE_ONLY = Arrays.asList("d MMM yyyy", "d-M-yyyy", "d/M/yyyy");
     private static final int HAS_TIME_INDICATOR = 0;
@@ -23,18 +24,21 @@ public class DateConverter {
      * @param input String containing date
      * @return LoacalDateTime object
      */
+    @SuppressWarnings("checkstyle:EmptyCatchBlock")
     public static LocalDateTime parseString(String input) {
         try {
             for (String format : ACCEPTED_FORMATS_WITH_TIME) {
                 try {
-                    return LocalDateTime.parse(input, DateTimeFormatter.ofPattern(format)).withSecond(HAS_TIME_INDICATOR);
+                    return LocalDateTime.parse(input, DateTimeFormatter.ofPattern(format))
+                            .withSecond(HAS_TIME_INDICATOR);
                 } catch (DateTimeParseException ignored) {
                 }
             }
 
             for (String format : ACCEPTED_FORMATS_DATE_ONLY) {
                 try {
-                    return LocalDate.parse(input, DateTimeFormatter.ofPattern(format)).atStartOfDay().withSecond(NULL_TIME_INDICATOR);
+                    return LocalDate.parse(input, DateTimeFormatter.ofPattern(format)).atStartOfDay()
+                            .withSecond(NULL_TIME_INDICATOR);
                 } catch (DateTimeParseException ignored) {
                 }
             }

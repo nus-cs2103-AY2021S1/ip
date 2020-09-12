@@ -1,0 +1,22 @@
+.background {
+     -fx-background-image: url('../images/background.jpg');
+     -fx-background-size: contain;
+
+}
+
+.messageWindow {
+    -fx-border-width: 10.0;
+    -fx-border-color: green;
+    -fx-background-color: #F4E7B0;
+    -fx-background-radius: 15;
+    -fx-padding: 30px;
+    -fx-border-insets: 5px;
+    -fx-background-insets: 5px;
+    -fx-border-radius: 5;
+    -fx-text-fill: black;
+    -fx-font-weight: bold;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 10, 0.5, 0.0, 0.0);
+}
+
+
+

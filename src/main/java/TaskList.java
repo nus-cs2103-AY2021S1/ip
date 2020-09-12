@@ -1,7 +1,7 @@
 import java.time.LocalDateTime;
-import java.util.Iterator;
-import java.util.List;
 import java.util.ArrayList;
+import java.util.Iterator;
+
 
 /**
  * TaskList manages the list of tasks and implements the iterable interface
@@ -9,10 +9,8 @@ import java.util.ArrayList;
 public class TaskList implements Iterable<Task> {
 
 
-    public ArrayList<Task> listOfItems;
-
-
-    public ArrayList<Task> ListOfKeyWordItems = new ArrayList<>();
+    private ArrayList<Task> listOfItems;
+    private ArrayList<Task> listOfKeyWordItems = new ArrayList<>();
 
 
     TaskList() {
@@ -33,6 +31,10 @@ public class TaskList implements Iterable<Task> {
                 this.listOfItems.size());
     }
 
+    public ArrayList<Task> getListOfItems() {
+        return listOfItems;
+    }
+
     /**
      * marks a task in the list with [✓] to state it is done
      *
@@ -43,7 +45,7 @@ public class TaskList implements Iterable<Task> {
     public String markCompleted(int index) throws DukeException {
         try {
             //assert index > 0 && index < this.listOfItems.size();
-            Task item = this.listOfItems.get(index);
+            Task item = this.getListOfItems().get(index);
             item.markAsDone();
 
             return String.format("\nNice! I've marked this task as done:\n  %s\n", item.toString());
@@ -64,16 +66,21 @@ public class TaskList implements Iterable<Task> {
 
         try {
 
-            Task item = this.listOfItems.remove(index);
+            Task item = this.getListOfItems().remove(index);
 
             return String.format("\nNoted. I've removed this task:\n  %s\nNow you have %d tasks in your list.\n",
                     item.toString(),
-                    this.listOfItems.size());
+                    this.getListOfItems().size());
         } catch (IndexOutOfBoundsException e) {
             return (new DukeException("List does not contain the number specified")).toString();
         }
     }
 
+    /**
+     * reschedule either a deadline or event with a new date and time
+     * @param details the details to change the date to
+     * @return String withe the new date and time
+     */
     public String rescheduleTask(String details) {
         if (details == null) {
             throw new DukeException("I need something to work with.");
@@ -83,7 +90,7 @@ public class TaskList implements Iterable<Task> {
 
             String indexString = detailsArray[0].trim();
             int index = Integer.parseInt(indexString) - 1;
-            Task temp = this.listOfItems.get(index);
+            Task temp = this.getListOfItems().get(index);
             String dateTimeString = detailsArray[1].trim();
             LocalDateTime dateTime = DateConverter.parseString(dateTimeString);
 
@@ -93,19 +100,19 @@ public class TaskList implements Iterable<Task> {
                     item.markAsDone();
                 }
 
-                this.listOfItems.set(index, item);
-                return String.format("\nNoted. I have now rescheduled %s to :\n  %s\nYou still have %d tasks in your list.\n",
-                        temp.toString(), item.toString(),
-                        this.listOfItems.size());
+                this.getListOfItems().set(index, item);
+                return String.format("\nNoted. I have now rescheduled %s to :\n "
+                                + " %s\nYou still have %d tasks in your list.\n", temp.toString(), item.toString(),
+                        this.getListOfItems().size());
             } else if (temp instanceof Event) {
                 Task item = new Event(temp.description, dateTime);
                 if (temp.isDone) {
                     item.markAsDone();
                 }
-                this.listOfItems.set(index, item);
-                return String.format("\nNoted. I have now rescheduled %s to :\n  %s\nYou still have %d tasks in your list.\n",
-                        temp.toString(), item.toString(),
-                        this.listOfItems.size());
+                this.getListOfItems().set(index, item);
+                return String.format("\nNoted. I have now rescheduled %s to :\n"
+                                + "  %s\nYou still have %d tasks in your list.\n", temp.toString(), item.toString(),
+                        this.getListOfItems().size());
             } else {
                 return (new DukeException("Unable to detect class")).toString();
             }
@@ -114,38 +121,41 @@ public class TaskList implements Iterable<Task> {
         }
     }
 
-
     /**
-     * prints out the entire list
-     *
-     * @return String output of the entire list
+     * searches the listOF Items for any task that contains the key word
+     * @param keyWord word being looked for
      */
+    public void findTask(String keyWord) {
+        assert keyWord.length() > 0;
 
-
-    public void findTask(String Keyword){
-        assert Keyword.length() > 0;
-
-        ListOfKeyWordItems.clear();
-        for (Task item : listOfItems) {
-            if (item.toString().indexOf(Keyword) != -1) {
-                ListOfKeyWordItems.add(item);
+        listOfKeyWordItems.clear();
+        for (Task item : getListOfItems()) {
+            if (item.toString().indexOf(keyWord) != -1) {
+                listOfKeyWordItems.add(item);
             }
         }
 
     }
 
+    /**
+     * prints out the list of items that have the keyword contained
+     * @return a string of the list of key words tasks
+     */
     public String printOutKeyWordList() {
         String list = "\nHere are the matching tasks in your list:\n";
-        for (int i = 0; i < ListOfKeyWordItems.size(); i++) {
-            list += String.format("%d.%s\n", i + 1, ListOfKeyWordItems.get(i).toString());
+        for (int i = 0; i < listOfKeyWordItems.size(); i++) {
+            list += String.format("%d.%s\n", i + 1, listOfKeyWordItems.get(i).toString());
         }
         return list;
     }
 
-
+    /**
+     * prints out the list of all tasks
+     * @return string output of the list of items
+     */
     public String printOutList() {
         String list = "\nHere are the tasks in your list:\n";
-        for (int i = 0; i < this.listOfItems.size(); i++) {
+        for (int i = 0; i < this.getListOfItems().size(); i++) {
             list += String.format("%d.%s\n", i + 1, this.listOfItems.get(i).toString());
         }
         return list;
