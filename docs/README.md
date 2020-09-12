@@ -15,13 +15,13 @@ Here are the commands to add different types of tasks into your tasklist
 
 `todo` - Add Todo
 
-![Todo](https://github.com/IsaacTin/ip/blob/branch-A-UserGuide/docs/Images/todo.png)
 </summary>
 <br>
 Type "todo" followed by a space and then type in the 'todo' you wish to add into your list
 <br>
 <br>
-Click on link here to see example: https://github.com/IsaacTin/ip/blob/branch-A-UserGuide/docs/Images/todo.png
+
+![Todo](https://github.com/IsaacTin/ip/blob/branch-A-UserGuide/docs/Images/todo.png)
 </details>
 
 `deadline`
