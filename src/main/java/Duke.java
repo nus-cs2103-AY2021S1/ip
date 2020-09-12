@@ -22,7 +22,7 @@ public class Duke {
 
     public String getResponse(String input) {
         try {
-            return command.execute(input, tasks, storage) + "\n" + ui.printLineBreak();
+            return command.execute(input, tasks, storage);
         } catch (DukeException ex) {
             return ui.printErrorMessage(ex);
         }
@@ -33,7 +33,7 @@ public class Duke {
     }
 
     /**
-     * Runs the Duke program.
+     * For running the Duke program in terminal.
      */
     public void run() {
         command.welcomeCommand();
