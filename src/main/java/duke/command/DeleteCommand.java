@@ -26,6 +26,6 @@ public class DeleteCommand extends Command {
 
     @Override
     public void undo(TaskList tasks) {
-        tasks.addTask(removedTask);
+        tasks.addTaskAtIndex(removedTask, taskIndex);
     }
 }

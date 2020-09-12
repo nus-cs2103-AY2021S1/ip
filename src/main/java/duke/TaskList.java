@@ -46,6 +46,10 @@ public class TaskList implements Iterable<Task> {
         taskList.add(task);
     }
 
+    public void addTaskAtIndex(Task task, int index) {
+        taskList.add(index, task);
+    }
+
     /**
      * Retrieves a task from the TaskList at the specified index
      *
