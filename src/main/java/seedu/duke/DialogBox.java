@@ -42,9 +42,11 @@ public class DialogBox extends HBox {
         if (isBot) {
             imageView.setImage(botImage);
             flip();
+            label.getStyleClass().addAll("dialog-label", "bot-label");
         } else {
             imageView.setImage(userImage);
             this.setAlignment(Pos.BOTTOM_RIGHT);
+            label.getStyleClass().addAll("dialog-label", "user-label");
         }
     }
 

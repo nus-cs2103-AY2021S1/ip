@@ -1,5 +1,7 @@
 .root {
-    -fx-background-color: midnightblue;
+    -fx-font: 16px "Courier New";
+    -fx-background-image: url("/images/background.PNG");
+    -fx-background-size: stretch;
 }
 
 .scroll-pane {
@@ -11,11 +13,22 @@
    -fx-background-color: transparent;
 }
 
-.label {
-    -fx-font: 14px "Courier New";
+.scroll-bar .thumb {
+   -fx-background-color: #303030;
+}
+
+.dialog-label {
+    -fx-text-fill: white;
     -fx-padding: 10px;
-    -fx-background-color: white;
     -fx-background-radius: 10px;
+}
+
+.user-label {
+    -fx-background-color: #408040;
+}
+
+.bot-label {
+    -fx-background-color: #404080;
 }
 
 .text-field {

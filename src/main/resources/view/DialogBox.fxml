@@ -10,5 +10,5 @@
          xmlns="http://javafx.com/javafx"
          xmlns:fx="http://javafx.com/fxml">
     <Label fx:id="label" wrapText="true"/>
-    <ImageView fx:id="imageView" fitHeight="100" fitWidth="100"/>
+    <ImageView fx:id="imageView" fitHeight="60" fitWidth="60"/>
 </fx:root>
