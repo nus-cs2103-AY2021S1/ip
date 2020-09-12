@@ -96,7 +96,7 @@ public class Ui {
      * @param taskList List of tasks to be printed out.
      * @return A string of the list of tasks.
      */
-    public String printTaskList(TaskList taskList) {
+    public String showTaskList(TaskList taskList) {
         String msg = "Here are your list of tasks.\n"
                 + "You have " + taskList.getSize()
                 + (taskList.getSize() > 1 ? " tasks" : " task")
@@ -125,7 +125,7 @@ public class Ui {
      * @param taskList List of tasks to be printed out.
      * @return A string of the list of filtered tasks.
      */
-    public String printFilteredTaskList(TaskList taskList) {
+    public String showFilteredTaskList(TaskList taskList) {
         String msg = "Here are the matching tasks in your list.\n"
                 + "You have " + taskList.getSize()
                 + (taskList.getSize() > 1 ? " tasks" : " task")

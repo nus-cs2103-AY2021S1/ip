@@ -50,34 +50,10 @@ public class Butler extends Application {
         try {
             tasks = new TaskList(storage.load());
         } catch (ButlerException e) {
-            ui.showLoadingError();
+            //ui.showLoadingError();
             tasks = new TaskList();
         }
     }
-
-    public static void main(String[] args) {
-        new Butler("data/tasks.txt").run();
-    }
-
-    private void run() {
-        ui.showWelcome();
-        boolean isExit = false;
-
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                ui.showLine();
-                Command c = Parser.parse(fullCommand);
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (ButlerException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine();
-            }
-        }
-    }
-
     /**
      * Starts the application GUI to display "Hello World!".
      *
@@ -85,8 +61,8 @@ public class Butler extends Application {
      */
     @Override
     public void start(Stage stage) {
-        //Step 1. Setting up required components
 
+        //Step 1.Setting up required components.
         //The container for the content of the chat to scroll.
         scrollPane = new ScrollPane();
         dialogContainer = new VBox();
@@ -94,6 +70,13 @@ public class Butler extends Application {
 
         userInput = new TextField();
         sendButton = new Button("Send");
+
+        Butler b = new Butler("data/tasks.txt");
+        String welcomeMsg = b.ui.showWelcome();
+        Label welcomeText = new Label(welcomeMsg);
+        dialogContainer.getChildren().addAll(
+                DialogBox.getButlerDialog(welcomeText, new ImageView(butler))
+        );
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
@@ -135,11 +118,11 @@ public class Butler extends Application {
 
         //Step 3. Add functionality to handle user input.
         sendButton.setOnMouseClicked((event) -> {
-            handleUserInput();
+            handleUserInput(b);
         });
 
         userInput.setOnAction((event) -> {
-            handleUserInput();
+            handleUserInput(b);
         });
 
         //Scroll down to the end every time dialogContainer's height changes.
@@ -153,9 +136,9 @@ public class Butler extends Application {
      * Creates two dialog boxes, one echoing user input and the other containing Butler's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
-    private void handleUserInput() {
+    private void handleUserInput(Butler b) {
         Label userText = new Label(userInput.getText());
-        Label butlerText = new Label(getResponse(userInput.getText()));
+        Label butlerText = new Label(getResponse(userInput.getText(), b));
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(userText, new ImageView(user)),
                 DialogBox.getButlerDialog(butlerText, new ImageView(butler))
@@ -167,15 +150,12 @@ public class Butler extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
-        /**
+    private String getResponse(String input, Butler b) {
         try {
             Command c = Parser.parse(input);
-            return(c.execute(tasks, ui, storage));
+            return c.execute(b.tasks, b.ui, b.storage);
         } catch (ButlerException e) {
-            return(e.getMessage());
+            return b.ui.showError(e.getMessage());
         }
-        **/
-        return "Duke heard: " + input;
     }
 }

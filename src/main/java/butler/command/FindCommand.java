@@ -26,11 +26,12 @@ public class FindCommand extends Command {
      * @param taskList List of tasks on which this command acts on.
      * @param ui       User interface to interact with user.
      * @param storage  Storage which stores given <code>taskList</code> on hard disk.
+     * @return String response of task execution.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
         TaskList filteredTasks = taskList.findTasks(keyword);
-        ui.printFilteredTaskList(filteredTasks);
+        return ui.showFilteredTaskList(filteredTasks);
     }
 
     /**

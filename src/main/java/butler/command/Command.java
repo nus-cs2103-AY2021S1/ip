@@ -15,9 +15,10 @@ public abstract class Command {
      * @param taskList List of tasks on which this command acts on.
      * @param ui User interface to interact with user.
      * @param storage Storage which stores the given <code>taskList</code> on hard disk.
+     * @return String response of task execution.
      * @throws ButlerException if an error occurs in the execution of this command.
      */
-    public abstract void execute(TaskList taskList, Ui ui, Storage storage) throws ButlerException;
+    public abstract String execute(TaskList taskList, Ui ui, Storage storage) throws ButlerException;
 
     /**
      * Returns a boolean whether this command is an <code>ExitCommand</code>.

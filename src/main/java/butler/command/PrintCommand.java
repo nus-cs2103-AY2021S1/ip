@@ -21,10 +21,11 @@ public class PrintCommand extends Command {
      * @param taskList List of tasks on which this command acts on.
      * @param ui User interface to interact with user.
      * @param storage Storage which stores given <code>taskList</code> on hard disk.
+     * @return String response of task execution.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) {
-        ui.printTaskList(taskList);
+    public String execute(TaskList taskList, Ui ui, Storage storage) {
+        return ui.showTaskList(taskList);
     }
 
     /**

@@ -22,12 +22,13 @@ public class ExitCommand extends Command {
      * @param taskList List of tasks on which this command acts on.
      * @param ui User interface to interact with user.
      * @param storage Storage which stores given <code>taskList</code> on hard disk.
+     * @return String response of task execution.
      * @throws ButlerException if an error occurs while saving the task list.
      */
     @Override
-    public void execute(TaskList taskList, Ui ui, Storage storage) throws ButlerException {
-        ui.showExit();
+    public String execute(TaskList taskList, Ui ui, Storage storage) throws ButlerException {
         storage.storeTaskList(taskList);
+        return ui.showExit();
     }
 
     /**
