@@ -1,6 +1,7 @@
 public class Parser {
 
     public static Command parse(String str) throws DukeException {
+        assert str != null : "command should not be null";
         String s = str.split(" ")[0];
         if (s.equals("bye")) {
             return new ByeCommand(str);
