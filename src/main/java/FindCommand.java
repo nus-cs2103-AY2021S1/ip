@@ -65,7 +65,7 @@ public class FindCommand extends Command {
         return isExit;
     }
 
-    // Code from GeeksForGeeks
+    // Code retrieved from GeeksForGeeks
     static boolean isSubSequence(String keyword, String task, int keywordLength, int taskLength) {
         if (keywordLength == 0) {
             return true;
