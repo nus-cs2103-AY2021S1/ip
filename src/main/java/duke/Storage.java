@@ -101,10 +101,8 @@ public class Storage {
         ArrayList<User> users = new ArrayList<User>();
         try {
             Scanner sc = new Scanner(this.file);
-            System.out.println(1);
             while (sc.hasNext()) {
                 String userContent = sc.nextLine();
-                System.out.println(userContent);
                 String[] userInfo = userContent.split(",", 3);
                 User user = new User(userInfo[0], userInfo[1], userInfo[2]);
                 users.add(user);
