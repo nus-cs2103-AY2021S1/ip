@@ -41,7 +41,7 @@ Some example commands you can try:
 ---
 
 ## Features 
-> :information_source: **Notes about the command format:**
+> ℹ️ **Notes about the command format:**
 > - Words in `UPPER_CASE` are the parameters to be supplied by the user.  
 > eg. in `todo DESCRIPTION`, `DESCRIPTION` is a parameter which can be used as `todo read book`.
 > - Items in square brackets are optional.  
@@ -68,7 +68,7 @@ Expected outcome:
 Adds a deadline to the list of tasks.  
 Format: `deadline DESCRIPTION /by DATE [TIME]`
 
-> :warning: For `DATE [TIME]` parameters in both deadline and event
+> ⚠️ For `DATE [TIME]` parameters in both deadline and event
 > features, only the following formats are accepted: 
 
 - Date formats:  
@@ -89,7 +89,7 @@ hh:mm A | 3:30 PM
 HH:mm | 15:30
 Hmm | 1530
 
-> :bulb: Tip: It is not necessary to add a time.
+> 💡 Tip: It is not necessary to add a time.
 
 Example of usage:  
 `deadline finish CS2103 User Guide /by 9/10/2020 2:00 PM`  
@@ -99,19 +99,19 @@ Expected outcome:
 &nbsp;&nbsp; `[D][✘] finish CS2103 User Guide (by 9 Oct 2020 2:00 PM)`  
 &nbsp; `Now you have 3 tasks in the list.`
 
-> :+1: All dates and time are displayed as `dd MMM yyyy h:mm A` (as above)
+> 👍 All dates and time are displayed as `dd MMM yyyy h:mm A` (as above)
 > for easy reading.
 
 ### Adding an event: `event`
 Adds an event to the list of tasks.  
 Format: `event DESCRIPTION /at (DATE [TIME])... `
 
-> :bulb: `...` indicates that `DATE [TIME]` can be repeated
+> 💡 `...` indicates that `DATE [TIME]` can be repeated
 > multiple times (but at least once), separated by a comma.
 > Add multiple timings if you want to store a tentative schedule
 > to be confirmed later.
 
-> :information_source: Refer to [Adding a deadline: `deadline`](#adding-a-deadline-deadline)
+> ℹ️ Refer to [Adding a deadline: `deadline`](#adding-a-deadline-deadline)
 > to find out the accepted date and time formats.
 
 Example of usage:  
@@ -162,7 +162,7 @@ Expected outcome:
 &nbsp; `Here are the tasks today:`  
 &nbsp;&nbsp; `1. [D][✘] finish CS2103 User Guide (by 9 Oct 2020 2:00 PM)`  
 
-> :warn: Note that events with tentative schedules (more than one timing specified)
+> ⚠️ Note that events with tentative schedules (more than one timing specified)
 > that have not been confirmed will not be displayed.
 
 ### Searching for a task: `find`
@@ -187,7 +187,7 @@ Expected outcome:
 Marks a task as done.  
 Format: `done INDEX` 
 
-> :information_source: `INDEX` refers to the index of the task
+> ℹ️ `INDEX` refers to the index of the task
 > as displayed when executing `list`. 
 
 Example of usage:  
@@ -201,7 +201,7 @@ Expected outcome:
 Deletes a task.  
 Format: `delete INDEX` 
 
-> :information_source: `INDEX` refers to the index of the task
+> ℹ️ `INDEX` refers to the index of the task
 > as displayed when executing `list`. 
 
 Example of usage:  
@@ -219,7 +219,7 @@ Format: `bye`
 All tasks are saved in the hard drive automatically after every
 command. There is no need to save manually.
 
-> :bulb: Data is stored in */data/duke.txt* relative to the 
+> 💡 Data is stored in */data/duke.txt* relative to the 
 > *home folder*.
 
 ___
