@@ -11,27 +11,27 @@ I customized it with the theme of my favourite cartoon: Sumikko Gurashi!
 ![GitHub Logo](Ui.png)
 
 ## Features 
-1. ```help```: provides a list of possible commands
-2. ```list```: shows the list of tasks
+1. `help`: provides a list of possible commands
+2. `list`: shows the list of tasks
 3. Add tasks
-	1. ```todo```: creates a todo task with specific description
-	2. ```deadline```: creates a deadline task with specific description and date
-	3. ```event```: creates an event task with specific description and date
-4. ```done```: marks a task as complete
-5. ```delete```: deletes a task from the list
-6. ```clear```: deletes all tasks from the list
-7. ```find```: shows task(s) which match the query string
-8. ```view```: shows task(s) due on the given date
-9. ```bye```: ends the conversation with Shiro
+	1. `todo`: creates a todo task with specific description
+	2. `deadline`: creates a deadline task with specific description and date
+	3. `event`: creates an event task with specific description and date
+4. `done`: marks a task as complete
+5. `delete`: deletes a task from the list
+6. `clear`: deletes all tasks from the list
+7. `find`: shows task(s) which match the query string
+8. `view`: shows task(s) due on the given date
+9. `bye`: ends the conversation with Shiro
 
-### 1. ```help```
+### 1. `help`
 This command shows a list of all possible commands that Shiro can recognize.
 
 ##### Usage
-```help```
+`help`
 
 ##### Example of usage: 
-```help```
+`help`
 
 ##### Expected outcome:
 ```
@@ -48,14 +48,14 @@ available commands are:
  10. bye
 ```
 
-### 2. ```list```
+### 2. `list`
 This command shows the entire list of tasks.
 
 ##### Usage
-```list```
+`list`
 
 ##### Example of usage: 
-```list```
+`list`
 
 ##### Expected outcome:
 ```
@@ -65,14 +65,13 @@ okies! here are the tasks in your list:
 3. [E][✘] project meeting (at: Sep 15 2020)
 ```
 
-### 3.i. ```todo```
+### 3.i `todo`
 This command adds a *todo* task to the list.
 
 ##### Usage
-```todo <description>```
+`todo <description>`
 
-##### Example of usage: 
-```todo read book```
+##### Example of usage: ``todo read book`
 
 ##### Expected outcome:
 ```
@@ -81,23 +80,23 @@ sure thing! i have added the following task to your list:
 you have [1] task(s) in your list
 ```
 
-### 3.ii. ```deadline```
+### 3.ii `deadline`
 This command adds a *deadline* task to the list.
 
 ##### Usage
-```deadline <description> /by <date>```
+`deadline <description> /by <date>`
 
-```<date>``` can either be in the format ```<yyyy-mm-dd>``` or ```<day>```.
+`<date>` can either be in the format``<yyyy-mm-dd>` or `<day>`.
 
-```<day>``` should only consist the first three letters of the day of week.
+`<day>` should only consist the first three letters of the day of week.
 
-For the usage of ```<day>```, the date used will be the next specified day of week in the calendar.
+For the usage of``<day>`, the date used will be the next specified day of week in the calendar.
 If the day provided is the same as the current day of week, 
 the date of the next specified day of week in the calendar will also be used, 
 instead of the current date.
 
 ##### Example of usage: 
-```deadline return book /by 2020-09-20```
+`deadline return book /by 2020-09-20`
 
 ##### Expected outcome:
 ```
@@ -106,23 +105,23 @@ sure thing! i have added the following task to your list:
 you have [1] task(s) in your list
 ```
 
-### 3.iii. ```event```
+### 3.iii `event`
 This command adds an *event* task to the list.
 
 ##### Usage
-```deadline <description> /by <date>```
+`event <description> /by <date>`
 
-```<date>``` can either be in the format ```<yyyy-mm-dd>``` or ```<day>```.
+`<date>` can either be in the format `<yyyy-mm-dd>` or `<day>`.
 
-```<day>``` should only consist the first three letters of the day of week.
+`<day>` should only consist the first three letters of the day of week.
 
-For the usage of ```<day>```, the date used will be the next specified day of week in the calendar.
+For the usage of `<day>`, the date used will be the next specified day of week in the calendar.
 If the day provided is the same as the current day of week, 
 the date of the next specified day of week in the calendar will also be used, 
 instead of the current date.
 
 ##### Example of usage: 
-```event project meeting /at 2020-09-28```
+`event project meeting /at 2020-09-28`
 
 ##### Expected outcome:
 ```
@@ -131,16 +130,16 @@ sure thing! i have added the following task to your list:
 you have [1] task(s) in your list
 ```
 
-### 4. ```done```
+### 4. `done`
 This command marks the specified task as done.
 
 ##### Usage
-```done <task_number>```
+`done <task_number>`
 
 If the task corresponding with the task number uncompleted [✘] before, it will now be marked as completed [✓].
 
 ##### Example of usage: 
-```done 3```
+`done 3`
 
 ##### Expected outcome:
 ```
@@ -149,14 +148,14 @@ yay! i have marked this task as done:
 you have [1] task(s) in your list
 ```
 
-### 5. ```delete```
+### 5. `delete`
 This command deletes the specified task from the list
 
 ##### Usage
-```delete <task_number>```
+`delete <task_number>`
 
 ##### Example of usage: 
-```delete 2```
+`delete 2`
 
 ##### Expected outcome:
 ```
@@ -165,28 +164,26 @@ of course! i have deleted this task from your list:
 you have [3] task(s) in your list
 ```
 
-### 6. ```clear```
+### 6. `clear`
 This command deletes all tasks from the list
 
 ##### Usage
-```clear```
+`clear`
 
 ##### Example of usage: 
-```clear```
+`clear`
 
 ##### Expected outcome:
-```
-okie! all the tasks in your list have been cleared :-)
-```
+`okie! all the tasks in your list have been cleared :-)`
 
-### 7. ```find```
+### 7. `find`
 This command shows all the tasks which match the query string
 
 ##### Usage
-```find <keyword(s)>```
+`find <keyword(s)>`
 
 ##### Example of usage: 
-```find book```
+`find book`
 
 ##### Expected outcome:
 ```
@@ -195,23 +192,23 @@ got it! here are the tasks matching your search:
 2. [D][✘] return book (by: Sep 14 2020)
 ```
 
-### 8. ```view```
+### 8. `view`
 This command shows all the tasks due on the given date
 
 ##### Usage
-```view <date>```
+`view <date>`
 
-```<date>``` can either be in the format ```<yyyy-mm-dd>``` or ```<day>```.
+`<date>` can either be in the format `<yyyy-mm-dd>` or `<day>`.
 
-```<day>``` should only consist the first three letters of the day of week.
+`<day>` should only consist the first three letters of the day of week.
 
-For the usage of ```<day>```, the date used will be the next specified day of week in the calendar.
+For the usage of `<day>`, the date used will be the next specified day of week in the calendar.
 If the day provided is the same as the current day of week, 
 the date of the next specified day of week in the calendar will also be used, 
 instead of the current date.
 
 ##### Example of usage: 
-```view 2020-09-20```
+`view 2020-09-20`
 
 ##### Expected outcome:
 ```
@@ -220,14 +217,14 @@ got it! here are the tasks on your given date:
 2. [D][✘] return book (by: Sep 20 2020)
 ```
 
-### 8. ```bye```
+### 8. `bye`
 This command causes the application to exit.
 
 ##### Usage
-```bye```
+`bye`
 
 ##### Example of usage: 
-```bye```
+`bye`
 
 ##### Expected outcome:
 The application closes when this command is sent. 
