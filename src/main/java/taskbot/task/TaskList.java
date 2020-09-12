@@ -6,7 +6,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
-import java.util.HashSet;
+import java.util.LinkedHashSet;
 import java.util.Set;
 
 import taskbot.exceptions.InvalidDateTimeException;
@@ -279,7 +279,7 @@ public class TaskList {
 
         StringBuilder stringBuilder = new StringBuilder("Here are the matching tasks in your list:\n");
         // Set to contain tasks
-        Set<String> uniqueTasks = new HashSet<String>();
+        Set<String> uniqueTasks = new LinkedHashSet<String>();
         // Flag for when a match is found
         boolean found = false;
         // Builds the list of tasks
