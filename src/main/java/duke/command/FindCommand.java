@@ -4,7 +4,7 @@ import java.util.StringJoiner;
 
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
+import duke.ui.Ui;
 
 public class FindCommand extends Command {
     private String[] stringsToFind;

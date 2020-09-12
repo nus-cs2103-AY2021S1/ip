@@ -4,7 +4,7 @@ import duke.exception.InvalidDoneIndexException;
 import duke.task.Task;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
+import duke.ui.Ui;
 
 /**
  * Responsible for a done command.

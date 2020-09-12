@@ -2,7 +2,7 @@ package duke.command;
 
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
+import duke.ui.Ui;
 
 /**
  * Responsible for executing a bye command.

@@ -1,4 +1,4 @@
-package duke.util;
+package duke.ui;
 
 /**
  * Responsible for displaying information to the user.
@@ -7,9 +7,8 @@ public class Ui {
     /**
      * Prints out a greeting.
      */
-    public void greet() {
-        String greeting = "Hello! I'm Duke. \nWhat can I do for you?";
-        printResponse(greeting);
+    public String greet() {
+        return "Hello! I'm Duke.\nWhat can I do for you?";
     }
 
     /**

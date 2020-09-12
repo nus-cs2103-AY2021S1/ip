@@ -3,7 +3,7 @@ package duke.command;
 import duke.exception.DukeException;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
+import duke.ui.Ui;
 
 public class SortCommand extends Command {
     public SortCommand() {

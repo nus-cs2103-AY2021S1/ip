@@ -5,7 +5,7 @@ import duke.exception.DukeException;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
+import duke.ui.Ui;
 import javafx.application.Platform;
 
 /**
@@ -35,15 +35,16 @@ public class Duke {
      *
      * @param input User command.
      * @return Duke's response to the command.
+     * @throws DukeException if the input does not match any commands.
      */
-    public String getResponse(String input) {
+    public String getResponse(String input) throws DukeException {
         String response;
 
         try {
             Command command = Parser.parse(input);
             response = command.execute(tasks, ui, storage);
         } catch (DukeException e) {
-            response = e.getMessage();
+            throw e;
         }
 
         if (response.equals("Bye. Hope to see you again soon!")) {

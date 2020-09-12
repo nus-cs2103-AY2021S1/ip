@@ -1,3 +1,7 @@
+.root {
+    -fx-background-color: rgba(114, 205, 247, 0.0);
+}
+
 .userInput {
     -fx-font-size: 16px;
     -fx-font-family: Calibri;
@@ -11,12 +15,13 @@
 
 .dialog {
     -fx-font-family: Consolas;
-    -fx-background-color: rgba(114, 205, 247, 0.9);
+    -fx-font-size: 14px;
     -fx-background-radius: 15;
     -fx-padding: 10px;
 }
 
 .dialogContainer {
+    -fx-padding: 20, 10, 10, 10;
 }
 
 .scrollPane {

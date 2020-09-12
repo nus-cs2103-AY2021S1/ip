@@ -4,7 +4,7 @@ import duke.task.Task;
 import duke.task.ToDo;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.util.Ui;
+import duke.ui.Ui;
 
 /**
  * Responsible for executing a todo command.

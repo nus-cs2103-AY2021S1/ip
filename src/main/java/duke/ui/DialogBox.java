@@ -1,5 +1,5 @@
 
-package duke;
+package duke.ui;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -14,6 +14,7 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.shape.Circle;
 
 /**
  * An example of a custom control using FXML.
@@ -21,12 +22,19 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static final String USER_BACKGROUND =
+            "-fx-background-color: rgba(114, 205, 247, 0.5); -fx-background-radius: 15;";
+    private static final String DUKE_BACKGROUND =
+            "-fx-background-color: rgba(255, 168, 220, 0.5); -fx-background-radius: 15;";
+    private static final String ERROR_STYLE =
+            "-fx-background-color: rgba(242, 66, 54, 0.5); -fx-background-radius: 15;"
+            + "-fx-font-size: 16px; -fx-font-weight: bold; -fx-color: red;";
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+    private DialogBox(String text, Image img, boolean isErrorMessage, boolean isDukeResponse) {
         super(10);
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
@@ -38,7 +46,19 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        // Sets different background depending on nature of message
+        if (isDukeResponse) {
+            dialog.setStyle(DUKE_BACKGROUND);
+        } else {
+            dialog.setStyle(USER_BACKGROUND);
+        }
+        if (isErrorMessage) {
+            dialog.setStyle(ERROR_STYLE);
+        }
+
         displayPicture.setImage(img);
+        final Circle clip = new Circle(50, 50, 50);
+        displayPicture.setClip(clip);
     }
 
     /**
@@ -52,11 +72,11 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        return new DialogBox(text, img, false, false);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+    public static DialogBox getDukeDialog(String text, Image img, boolean isErrorMessage) {
+        var db = new DialogBox(text, img, isErrorMessage, true);
         db.flip();
         return db;
     }
