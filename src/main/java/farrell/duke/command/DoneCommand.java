@@ -13,7 +13,7 @@ public class DoneCommand extends Command {
 
     @Override
     public String execute(TaskList taskList) throws DukeException {
-        if (taskIndex < 0 || taskIndex > taskList.getSize() - 1) {
+        if (taskIndex <= 0 || taskIndex > taskList.getSize()) {
             throw new DukeException("There is no task with index " + taskIndex);
         }
         taskList.updateDone(taskIndex);

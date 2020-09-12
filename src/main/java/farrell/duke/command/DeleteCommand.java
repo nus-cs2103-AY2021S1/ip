@@ -14,7 +14,8 @@ public class DeleteCommand extends Command {
 
     @Override
     public String execute(TaskList taskList) throws DukeException {
-        if (taskIndex < 0 || taskIndex > taskList.getSize() - 1) {
+        if (taskIndex <= 0 || taskIndex > taskList.getSize()) {
+            System.out.println(taskIndex);
             throw new DukeException("There is no task with index " + taskIndex);
         }
         Task deleteTask = taskList.getTask(taskIndex);
