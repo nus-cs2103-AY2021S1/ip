@@ -41,6 +41,7 @@ public final class HelpCommand extends Command {
                 + "- deadline (name) /by (date): "
                 + "Adds a deadline which expires by date\n"
                 + "- delete (number)           : Removes a todo from the list\n"
+                + "- find (keyword(s))           : Finds tasks with the keyword(s)\n"
         );
     }
 }
