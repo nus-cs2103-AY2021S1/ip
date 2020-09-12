@@ -7,6 +7,11 @@ import main.java.farrell.duke.task.TaskList;
 public class DeleteCommand extends Command {
     private int taskIndex;
 
+    /**
+     * Creates a DeleteComman with a specified task index.
+     *
+     * @param taskIndex The index of the task to be deleted.
+     */
     public DeleteCommand(int taskIndex) {
         this.taskIndex = taskIndex;
         type = CommandType.DELETE;

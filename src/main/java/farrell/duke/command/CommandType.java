@@ -79,14 +79,26 @@ public enum CommandType {
         this.maxParams = maxParams;
     }
 
+    /**
+     * Checks if the command requires parameters to execute.
+     * @return true if the command requires parameters, false otherwise.
+     */
     public boolean requiresParams() {
         return requiresParams;
     }
 
+    /**
+     * Gets the minimum number of parameters the command needs to execute.
+     * @return Minumum number of parameters needed.
+     */
     public int getMinParams() {
         return minParams;
     }
 
+    /**
+     * Gets the maximum number of parameters the command needs to execute.
+     * @return Maximum number of parameters needed
+     */
     public int getMaxParams() {
         return maxParams;
     }
@@ -105,6 +117,10 @@ public enum CommandType {
         }
     }
 
+    /**
+     * Gets a string containing information on how to use the command.
+     * @return The informational string.
+     */
     public String getUsageString() {
         return "";
     }

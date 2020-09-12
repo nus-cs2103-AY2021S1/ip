@@ -4,9 +4,14 @@ import main.java.farrell.duke.DukeException;
 import main.java.farrell.duke.task.TaskList;
 import main.java.farrell.duke.task.ToDo;
 
-public class ToDoCommand extends Command{
+public class ToDoCommand extends Command {
     private String description;
 
+    /**
+     * Creates a ToDoCommand with a specified description.
+     *
+     * @param description The description for the resulting task.
+     */
     public ToDoCommand(String description) {
         this.description = description;
         type = CommandType.TODO;

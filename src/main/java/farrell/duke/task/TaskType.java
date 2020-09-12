@@ -35,5 +35,12 @@ public enum TaskType {
         return TaskType.valueOf(string.toUpperCase());
     }
 
+    /**
+     * Creates the corresponding task object from an array of parameters.
+     *
+     * @param data Parameters to create the task.
+     * @return The created Task object.
+     * @throws DukeException If there are problems with the parameters provided.
+     */
     public abstract Task getTaskFromData(String[] data) throws DukeException;
 }

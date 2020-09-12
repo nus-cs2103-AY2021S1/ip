@@ -12,13 +12,14 @@ import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
+/** Encapsulates a set of UI elements used to show program error messages. */
 public class DukeErrorDialog extends HBox {
     private Label textLabel;
     private Circle displayPicture;
     private Image image = new Image(this.getClass().getResourceAsStream("/images/parrot.png"));
 
     /**
-     * Creates a new DukeDialog containing some text.
+     * Creates a new DukeErrorDialog containing some text.
      * @param text Text to display in the dialog.
      */
     public DukeErrorDialog(String text) {

@@ -4,6 +4,9 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.time.format.FormatStyle;
 
+/**
+ * Encapsulates data common to timed tasks.
+ */
 public class TimedTask extends Task {
     /** The time when the event is occurring */
     protected LocalDate time;

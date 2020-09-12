@@ -7,10 +7,22 @@ public class SortCommand extends Command {
     private String sortType;
     private boolean sortAscending;
 
+    /**
+     * Creates a SortCommand with a specified sorting type in descending order.
+     *
+     * @param sortType The type of sort to perform (description or date).
+     */
     public SortCommand(String sortType) {
         this(sortType, false);
     }
 
+    /**
+     * Creates a SortCommand with a specified sorting type and sorting order.
+     * The default sorting order is descending.
+     *
+     * @param sortType The type of sort to perform (description or date).
+     * @param sortAscending Whether to sort in ascending order instead.
+     */
     public SortCommand(String sortType, boolean sortAscending) {
         this.sortType = sortType;
         this.sortAscending = sortAscending;

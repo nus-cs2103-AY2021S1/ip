@@ -49,6 +49,10 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718");
     }
 
+    /**
+     * Converts the object to a formatted string to act as savable data.
+     * @return The formatted string to be saved.
+     */
     public String convertToData() {
         return (isDone ? "true" : "false") + "|"
                 + description;

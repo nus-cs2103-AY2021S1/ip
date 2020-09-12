@@ -5,8 +5,6 @@ import main.java.farrell.duke.command.CommandParser;
 import main.java.farrell.duke.gui.UiManager;
 import main.java.farrell.duke.task.TaskList;
 
-import javax.swing.*;
-
 /**
  * A personal assistant chatbot that helps to keep track of tasks.
  */
@@ -17,11 +15,20 @@ public class Duke {
     /** An object that handles saving and loading data */
     private DataManager dataManager;
 
+    /**
+     * Creates a new instance of the program in the default configuration.
+     * Data is saved/loaded form data/data.txt.
+     * The task list is initially empty.
+     */
     public Duke() {
         dataManager = new DataManager();
         taskList = new TaskList();
     }
 
+    /**
+     * Creates a new instance of the program that saves and loads data from a specified file path.
+     * @param dataPath The file to save/load from.
+     */
     public Duke(String dataPath) {
         try {
             dataManager = new DataManager(dataPath);
@@ -34,9 +41,8 @@ public class Duke {
     /**
      * Starts a new instance of the program.
      * Existing data is loaded (if available).
-     * Display a startup message.
+     *
      * @param uiManager The UIManager to handle the startup error messages.
-     * @throws DukeException If unable to load data
      */
     public Duke(UiManager uiManager) {
         try {
@@ -49,12 +55,11 @@ public class Duke {
     }
 
     /**
-     * Displays a welcome message, then runs the main program loop.
-     * The main program loop consists of the following:
-     * 1. Obtaining user input.
-     * 2. Parsing user input to the corresponding command.
-     * 3. Execute the command.
-     * 4. Display the program output to the user.
+     * Runs an appropriate command corresponding to the input string.
+     *
+     * @param input The input to process.
+     * @return The output message of the command that was executed.
+     * @throws DukeException If there were problems encounted with parsing the input or executing the command.
      */
     public String run(String input) throws DukeException {
         Command command = CommandParser.parse(input);

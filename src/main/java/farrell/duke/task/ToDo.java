@@ -2,8 +2,6 @@ package main.java.farrell.duke.task;
 
 import main.java.farrell.duke.DukeException;
 
-import java.time.LocalDate;
-
 /**
  * Encapsulates data for a todo task.
  */
@@ -12,6 +10,13 @@ public class ToDo extends Task {
         this(description, false);
     }
 
+    /**
+     * Creates a ToDo with a description and completion status.
+     *
+     * @param description
+     * @param isDone
+     * @throws DukeException
+     */
     public ToDo(String description, boolean isDone) throws DukeException {
         super(description, isDone);
         taskType = TaskType.TODO;
@@ -20,6 +25,13 @@ public class ToDo extends Task {
         }
     }
 
+    /**
+     * Creates a ToDo from some formatted saved data.
+     *
+     * @param data The data to convert.
+     * @return The resulting ToDo object.
+     * @throws DukeException If the saved data is invalid.
+     */
     public static ToDo fromData(String[] data) throws DukeException {
         try {
             return new ToDo(data[2], Boolean.parseBoolean(data[1]));
@@ -28,6 +40,7 @@ public class ToDo extends Task {
         }
     }
 
+    @Override
     public String convertToData() {
         return taskType.name() + "|"
                 + (isDone ? "true" : "false") + "|"

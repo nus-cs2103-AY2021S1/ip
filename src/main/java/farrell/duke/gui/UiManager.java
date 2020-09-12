@@ -6,16 +6,16 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.image.Image;
-import javafx.scene.layout.*;
-import javafx.scene.paint.Color;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Region;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import main.java.farrell.duke.Duke;
 import main.java.farrell.duke.DukeException;
 
 /**
  * Encapsulates behavior for interacting with the user.
- * This class uses System.in to receive inputs from the user and System.out to display its output.
+ * This class uses JavaFx to receive inputs from the user and render GUI to display to the user.
  */
 public class UiManager extends Application {
     private Duke duke;
@@ -110,7 +110,7 @@ public class UiManager extends Application {
     }
 
     /**
-     * Displays text inside a formatted window.
+     * Displays some text as a message sent by the program.
      *
      * @param text The text to display.
      */
@@ -118,10 +118,20 @@ public class UiManager extends Application {
         dialogContainer.getChildren().add(new DukeDialog(text));
     }
 
+    /**
+     * Displays some error message sent by the program.
+     *
+     * @param text The error message to display.
+     */
     public void sendDukeError(String text) {
         dialogContainer.getChildren().add(new DukeErrorDialog(text));
     }
 
+    /**
+     * Displays some text as a message sent by the user.
+     *
+     * @param text The text to display.
+     */
     public void sendUserMessage(String text) {
         dialogContainer.getChildren().add(new UserDialog(text));
     }

@@ -1,26 +1,159 @@
-# Duke project template
+# Chicken Coop User Guide
 
-This is a project template for a greenfield Java project. It's named after the Java mascot _Duke_. Given below are instructions on how to use it.
+## Features 
 
-## Setting up in Intellij
+### Create ToDo 
+Create a todo task that can be marked as complete.
 
-Prerequisites: JDK 11, update Intellij to the most recent version.
+## Usage
 
-1. Open Intellij (if you are not in the welcome screen, click `File` > `Close Project` to close the existing project dialog first)
-1. Set up the correct JDK version, as follows:
-   1. Click `Configure` > `Structure for New Projects` and then `Project Settings` > `Project` > `Project SDK`
-   1. If JDK 11 is listed in the drop down, select it. If it is not, click `New...` and select the directory where you installed JDK 11
-   1. Click `OK`
-1. Import the project into Intellij as follows:
-   1. Click `Open or Import`.
-   1. Select the project directory, and click `OK`
-   1. If there are any further prompts, accept the defaults.
-1. After the importing is complete, locate the `src/main/java/Duke.java` file, right-click it, and choose `Run Duke.main()`. If the setup is correct, you should see something like the below:
-   ```
-   Hello from
-    ____        _        
-   |  _ \ _   _| | _____ 
-   | | | | | | | |/ / _ \
-   | |_| | |_| |   <  __/
-   |____/ \__,_|_|\_\___|
-   ```
+### `todo DESCRIPTION` - Creates a todo with DESCRIPTION as the description
+
+Example of usage: 
+
+`todo Peck at seeds`
+
+Expected outcome:
+
+![A todo is added](docs/images/ToDo.png)
+
+### Create Event 
+Create a event task that occurs at a certain time that can be marked as complete.
+
+## Usage
+
+### `event DESCRIPTION /at TIME` - Creates a event with DESCRIPTION as the description and occurs at TIME
+
+Example of usage: 
+
+`event Peck at seeds /at 2020-10-10`
+
+Expected outcome:
+
+![An event is added](docs/images/Event.png)
+
+### Create Deadline 
+Create a task with a specified deadline that can be marked as complete.
+
+## Usage
+
+### `deadline DESCRIPTION /by TIME` - Creates a task with DESCRIPTION as the description and deadline on TIME
+
+Example of usage: 
+
+`deadline Peck at seeds /by 2020-10-10`
+
+Expected outcome:
+
+![A deadline is added](docs/images/Deadline.png)
+
+### List All Tasks 
+Shows all the tasks currently tracked.
+
+## Usage
+
+### `list` - Shows all the tasks currently tracked
+
+Example of usage: 
+
+`todo Peck at seeds`
+
+Expected outcome:
+
+![A list of tasks is displayed](docs/images/List.png)
+
+### Delete a Task 
+Delete a task that was previously added.
+
+## Usage
+
+### `delete TASK_NUMBER` - Deletes task with task number TASK_NUMBER from the list
+
+Example of usage: 
+
+`delete 1`
+
+Expected outcome:
+
+![The task is deleted](docs/images/Delete.png)
+
+### Complete a Task
+Mark an added task as completed/done.
+
+## Usage
+
+### `done TASK_NUMBER` - Marks the task with task number TASK_NUMBER from the list as completed
+
+Example of usage: 
+
+`done 1`
+
+Expected outcome:
+
+![The task is marked as complete](docs/images/Done.png)
+
+### Find a Task
+Shows all tasks that contain the specified text.
+
+## Usage
+
+### `find TEXT_TO_FIND` - Shows all tasks on the list that contains the text TEXT_TO_FIND
+
+Example of usage: 
+
+`find seeds`
+
+Expected outcome:
+
+![The tasks found are displayed](docs/images/Find.png)
+
+### Sort the Task List
+Sort the task list according to the description or date.
+
+## Usage
+
+### `sort description/date [/order ascending]` - Sorts the task list by description or date. Optionally choose to sort in ascending order
+
+Example of usage: 
+
+`sort description`
+
+Expected outcome:
+
+![The task list is sorted by description](docs/images/Sort_Description.png)
+
+Example of usage: 
+
+`sort date`
+
+Expected outcome:
+
+![The task list is sorted by date](docs/images/Sort_Date.png)
+
+Example of usage: 
+
+`sort date /order ascending`
+
+Expected outcome:
+
+![The task list is sorted by date in ascending order](docs/images/Sort_Date.png)
+
+### Exit the Program
+Exit the program.
+
+## Usage
+
+### `bye` - Exits the program
+
+Example of usage: 
+
+`bye`
+
+Expected outcome:
+
+The program exits.
+
+### Saving and Loading
+Tasks are saved in the `data.txt` file in the `data/` directory.
+Tasks are also loaded from this file. The file can be edited or deleted
+as desired by the user.

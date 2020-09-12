@@ -19,12 +19,21 @@ public class DataManager {
     /** The file name to save and load data from */
     private String fileName = "data.txt";
 
+    /** The directory to save and load data from */
     private String directory = "data/";
 
+    /**
+     * Creates a DataManager that saves and loads tasks from data/data.txt.
+     */
     public DataManager() {
         this("data/data.txt");
     }
 
+    /**
+     * Creates a DataManager that saves and loads tasks from a specified file.
+     *
+     * @param dataPath The path to the data file.
+     */
     public DataManager(String dataPath) {
         File dataFile = new File(dataPath);
         fileName = dataFile.getName();

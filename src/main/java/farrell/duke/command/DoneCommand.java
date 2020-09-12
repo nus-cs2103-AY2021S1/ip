@@ -6,6 +6,11 @@ import main.java.farrell.duke.task.TaskList;
 public class DoneCommand extends Command {
     private int taskIndex;
 
+    /**
+     * Creates a DoneCommand with a specified task index.
+     *
+     * @param taskIndex The index of the task to be deleted.
+     */
     public DoneCommand(int taskIndex) {
         this.taskIndex = taskIndex;
         type = CommandType.DONE;

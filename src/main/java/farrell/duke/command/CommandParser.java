@@ -1,11 +1,18 @@
 package main.java.farrell.duke.command;
 
-import main.java.farrell.duke.DukeException;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 
+import main.java.farrell.duke.DukeException;
+
 public class CommandParser {
+    /**
+     * Prases the input string to the corresponding Command object.
+     * Parameters provided to the input string will be provided to the object.
+     * @param input The input string to parse.
+     * @return The corresponding Command object.
+     * @throws DukeException If there is a problem with the command or parameters.
+     */
     public static Command parse(String input) throws DukeException {
         String[] splitInput = input.split(" ", 2);
         CommandType commandType = CommandType.enumFromString(splitInput[0]);
@@ -20,12 +27,12 @@ public class CommandParser {
 
         String[] parameters = splitInput.length > 1 ? splitInput[1].split("\\s\\/[^\\s]*\\s") : new String[0];
 
-        if(parameters.length < commandType.getMinParams()
+        if (parameters.length < commandType.getMinParams()
                 || parameters.length > commandType.getMaxParams()) {
             throw new DukeException("Invalid number of parameters!\n" + commandType.getUsageString());
         }
 
-        switch(commandType) {
+        switch (commandType) {
         case TODO:
             return new ToDoCommand(parameters[0]);
         case EVENT:

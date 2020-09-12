@@ -6,10 +6,10 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import main.java.farrell.duke.DukeException;
 import org.junit.Test;
 
 import main.java.farrell.duke.Duke;
+import main.java.farrell.duke.DukeException;
 
 public class DukeTest {
     @Test

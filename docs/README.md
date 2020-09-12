@@ -138,6 +138,21 @@ Expected outcome:
 
 ![The task list is sorted by date in ascending order](images/Sort_Date.png)
 
+### Exit the Program
+Exit the program.
+
+## Usage
+
+### `bye` - Exits the program
+
+Example of usage: 
+
+`bye`
+
+Expected outcome:
+
+The program exits.
+
 ### Saving and Loading
 Tasks are saved in the `data.txt` file in the `data/` directory.
 Tasks are also loaded from this file. The file can be edited or deleted

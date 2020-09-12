@@ -13,6 +13,7 @@ import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.TextAlignment;
 
+/** Encapsulates a set of UI elements used to show user messages. */
 public class UserDialog extends HBox {
     private Label textLabel;
     private Circle displayPicture;

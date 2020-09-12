@@ -6,6 +6,11 @@ import main.java.farrell.duke.task.TaskList;
 public class FindCommand extends Command {
     private String filterString;
 
+    /**
+     * Creates a FindCommand with a specified filterString.
+     *
+     * @param filterString The string to find tasks by.
+     */
     public FindCommand(String filterString) {
         this.filterString = filterString;
         type = CommandType.FIND;

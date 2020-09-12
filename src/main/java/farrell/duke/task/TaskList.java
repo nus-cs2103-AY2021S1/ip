@@ -1,12 +1,10 @@
 package main.java.farrell.duke.task;
 
-import main.java.farrell.duke.DukeException;
-import main.java.farrell.duke.task.Task;
-import main.java.farrell.duke.task.TimedTask;
-
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
+
+import main.java.farrell.duke.DukeException;
 
 /**
  * Represents a list of tasks and actions that can be performed on the list.
@@ -15,10 +13,12 @@ public class TaskList {
     /** The list of tasks */
     private List<Task> taskList;
 
+    /** Create an empty task list */
     public TaskList() {
         this.taskList = new ArrayList<>();
     }
 
+    /** Create a task list populated with tasks from another task list */
     public TaskList(List<Task> taskList) {
         this.taskList = taskList;
     }

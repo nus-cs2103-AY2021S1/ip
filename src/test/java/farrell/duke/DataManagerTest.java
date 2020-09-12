@@ -1,14 +1,16 @@
 package farrell.duke;
 
-import main.java.farrell.duke.Duke;
-import main.java.farrell.duke.DukeException;
-import org.junit.Test;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
+
+import main.java.farrell.duke.Duke;
+import main.java.farrell.duke.DukeException;
 
 public class DataManagerTest {
     @Test
@@ -37,7 +39,7 @@ public class DataManagerTest {
             String input = Files.readString(Paths.get("TestInputs", "Save.txt"));
 
             Duke duke = new Duke();
-            for(String line : input.split("\n")) {
+            for (String line : input.split("\n")) {
                 try {
                     duke.run(line);
                 } catch (DukeException e) {
