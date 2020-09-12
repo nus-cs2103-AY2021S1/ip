@@ -11,23 +11,25 @@ A simple guide to get you kick started on how to easily use this CLI app to crea
     <br>
     <br>
         <details>
-             <summary>Add Todo - 'todo'</summary>
+             <summary>`todo` - Add Todo</summary>
              <br>
              Type "todo" followed by a space and then type in the 'todo' you wish to add into your list
+             <br>
              <br>
              Click on link here to see example: https://github.com/IsaacTin/ip/blob/branch-A-UserGuide/docs/Images/todo.png
         </details>
         <details>
-            <summary>Add deadline - 'deadline' </summary>
+            <summary>`deadline` - Add deadline</summary>
             <br>
             Type "deadline" followed by description of deadline, then followed by  "/by" followed by a space and then type the rest of the description
             <br>
             Input date via 'YYYY-MM-DD' format and time in 'HH:MM' format if you wish to add date and time
             <br>
+            <br>
             Click on link here to see example: https://github.com/IsaacTin/ip/blob/branch-A-UserGuide/docs/Images/deadline.png
         </details>
         <details>
-            <summary>Add event - 'event'</summary>
+            <summary>`event` - Add event</summary>
             <br>
             *Type "event" followed by description of event, then followed by "/at" followed by a space and then type in ther rest of the description
             <br>
