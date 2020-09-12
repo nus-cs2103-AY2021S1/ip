@@ -52,12 +52,6 @@ shadowJar {
     archiveClassifier = null
 }
 
-jar {
-    exclude 'META-INF/*.RSA'
-    exclude 'META-INF/*.SF'
-    exclude 'META-INF/*.DSA'
-}
-
 checkstyle {
     configFile = rootProject.file("config/checkstyle.xml")
     toolVersion = '8.23'
