@@ -6,12 +6,26 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.task.Task;
 
-import java.io.IOException;
-
+/**
+ * Encapsulates a command for Mrs Dino to delete a task.
+ */
 public class DeleteCommand extends Command {
+
+    /**
+     * Whether this command is a terminal command.
+     */
     private final boolean HAS_FINISHED = false;
+
+    /**
+     * Index of the task in the todoList that needs to be deleted.
+     */
     private int indexOfTaskToBeDeleted;
 
+    /**
+     * Constructs a new DeleteCommand.
+     *
+     * @param indexOfTaskToBeDeleted index of the task in the todoList that needs to be deleted.
+     */
     public DeleteCommand(int indexOfTaskToBeDeleted) {
         this.indexOfTaskToBeDeleted = indexOfTaskToBeDeleted;
     }

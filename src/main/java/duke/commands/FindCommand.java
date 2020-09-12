@@ -6,12 +6,26 @@ import duke.ui.Ui;
 import duke.task.Task;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
+/**
+ * Encapsulates a command for Mrs Dino to find tasks using keywords given.
+ */
 public class FindCommand extends Command {
+    /**
+     * Whether this command is a terminal command.
+     */
     private final boolean HAS_FINISHED = false;
+
+    /**
+     * The target keyword to search for relevant tasks.
+     */
     private String keyword;
 
+    /**
+     * Constructs a new FindCommand.
+     *
+     * @param keyword The target keyword to search for relevant tasks.
+     */
     public FindCommand(String keyword) {
         this.keyword = keyword;
     }

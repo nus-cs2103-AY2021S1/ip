@@ -8,13 +8,32 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.task.Task;
 
-import java.io.IOException;
-
+/**
+ * Encapsulates a command for Mrs Dino to reschedule tasks.
+ */
 public class RescheduleCommand extends Command {
+
+    /**
+     * Whether this command is a terminal command.
+     */
     private final boolean HAS_FINISHED = false;
+
+    /**
+     * Updated date and tome of the task.
+     */
     private String newDateAndTime;
+
+    /**
+     * Index in the todoList of the target task to reschedule.
+     */
     private int indexOfTaskToReschedule;
 
+    /**
+     * Constructs a new RescheduleCommand.
+     *
+     * @param indexOfTaskToReschedule Index in the todoList of the target task to reschedule.
+     * @param newDateAndTime Updated date and tome of the task.
+     */
     public RescheduleCommand(int indexOfTaskToReschedule, String newDateAndTime) {
         this.newDateAndTime = newDateAndTime;
         this.indexOfTaskToReschedule = indexOfTaskToReschedule;

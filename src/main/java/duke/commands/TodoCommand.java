@@ -6,10 +6,25 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.task.Task;
 
+/**
+ * Encapsulates a command for Mrs Dino to add a Todo task.
+ */
 public class TodoCommand extends Command {
+    /**
+     * Whether this command is a terminal command.
+     */
     private final boolean HAS_FINISHED = false;
+
+    /**
+     * Details of the todo task.
+     */
     private String todoTaskDetails;
 
+    /**
+     * Constructs a new TodoCommand.
+     *
+     * @param todoTaskDetails Details of the todo task.
+     */
     public TodoCommand(String todoTaskDetails) {
         this.todoTaskDetails = todoTaskDetails;
     }

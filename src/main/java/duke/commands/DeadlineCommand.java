@@ -6,10 +6,27 @@ import duke.task.TaskList;
 import duke.ui.Ui;
 import duke.task.Task;
 
+/**
+ * Encapsulates a command for Mrs Dino to add a Deadline task.
+ */
 public class DeadlineCommand extends Command {
+
+    /**
+     * Whether this command is a terminal command.
+     */
     private final boolean HAS_FINISHED = false;
+
+    /**
+     * Array containing details of the deadline task to add.
+     * First element is the name of the task, second element is the date and time that task is due.
+     */
     private String[] deadlineTaskDetails;
 
+    /**
+     * Constructs a new Deadline object.
+     *
+     * @param deadlineTaskDetails Array containing details of the deadline task to add.
+     */
     public DeadlineCommand(String[] deadlineTaskDetails) {
         this.deadlineTaskDetails = deadlineTaskDetails;
     }
