@@ -9,7 +9,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="700.0" maxWidth="500.0" minHeight="700.0" minWidth="500.0" prefHeight="700.0" prefWidth="500.0" style="-fx-background-color: rgb(214, 239, 243);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.ui.MainWindow">
+<AnchorPane maxHeight="700.0" maxWidth="500.0" minHeight="700.0" minWidth="500.0" prefHeight="700.0" prefWidth="500.0" style="-fx-background-color: rgb(214, 239, 243);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="shiro.ui.MainWindow">
   <children>
     <TextField fx:id="userInput" alignment="BOTTOM_LEFT" layoutX="7.0" layoutY="663.0" onAction="#handleUserInput" prefHeight="30.0" prefWidth="411.0" promptText="send me a message!" style="-fx-background-radius: 10; -fx-background-color: rgb(230, 204, 255);" styleClass="userInput" stylesheets="@stylesheet.css">
          <font>

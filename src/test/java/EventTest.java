@@ -2,7 +2,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import duke.task.Event;
+import shiro.task.Event;
 
 public class EventTest {
     @Test

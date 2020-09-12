@@ -2,8 +2,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
 
-import duke.exception.EmptyDescriptionException;
-import duke.task.ToDo;
+import shiro.exception.EmptyDescriptionException;
+import shiro.task.ToDo;
 
 public class ToDoTest {
     @Test
