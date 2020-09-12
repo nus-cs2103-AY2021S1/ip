@@ -109,6 +109,9 @@ public class Ui {
                 );
     }
 
+    /**
+     * Prints the list of task or deadline withen the input date from now.
+     */
     public String reminderMessage(int numberOfDays, String taskInString, int size) {
         if (size == 0) {
             return messageFormatter("There are no task that is due within ",

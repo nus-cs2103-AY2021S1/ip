@@ -27,7 +27,7 @@ public class Storage {
     private List<String> tasksInString = new ArrayList<>();
 
     /**
-     * Constructor which creates the file if the file is not present.
+     * Constructs the file if the file is not present.
      * Throws IOException if the given path is invalid.
      *
      * @param path Path to store and read the file which contains the task list.
@@ -103,11 +103,13 @@ public class Storage {
                 }
 
                 if (currentTask instanceof Event) {
-                    currentLine += "E#" + isTaskDone + "#" + description + "#" + ((Event) currentTask).getActivityTimeInString();
+                    currentLine += "E#" + isTaskDone + "#" + description + "#"
+                            + ((Event) currentTask).getActivityTimeInString();
                 }
 
                 if (currentTask instanceof Deadline) {
-                    currentLine += "D#" + isTaskDone + "#" + description + "#" + ((Deadline) currentTask).getActivityTimeInString();
+                    currentLine += "D#" + isTaskDone + "#" + description + "#"
+                            + ((Deadline) currentTask).getActivityTimeInString();
                 }
 
                 string.append(currentLine);
