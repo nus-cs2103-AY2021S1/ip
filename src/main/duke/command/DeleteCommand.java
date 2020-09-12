@@ -37,7 +37,7 @@ public class DeleteCommand extends Command {
     @Override
     public String execute(Storage storage) throws DukeExecutionException {
         try {
-            return storage.delete(index).toString();
+            return String.format("Deleted %s.", storage.delete(index).toString());
         } catch (IndexOutOfBoundsException e) {
             throw new DukeExecutionException(String.format("Could not execute command due to the index %d being out "
                     + "of range", index));

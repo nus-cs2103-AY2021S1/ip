@@ -70,7 +70,6 @@ public class TaskList {
         } catch (ArrayIndexOutOfBoundsException e) {
             throw new DukeArgumentException(String.format("Array index %d is out of bounds.", index));
         }
-
     }
 
     /**

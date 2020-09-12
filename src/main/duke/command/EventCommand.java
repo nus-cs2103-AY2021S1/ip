@@ -31,7 +31,7 @@ public class EventCommand extends Command {
             LocalDate date = LocalDate.parse(args[1].trim());
             this.event = new Event(name, date);
         } catch (ArrayIndexOutOfBoundsException ae) {
-            throw new DukeArgumentException("Insufficient arguments provided for duke.Tasks.Event.");
+            throw new DukeArgumentException("Insufficient arguments provided for Event.");
         } catch (DateTimeParseException de) {
             throw new DukeArgumentException("Event date/time could not be parsed.");
         }
@@ -47,7 +47,7 @@ public class EventCommand extends Command {
     public String execute(Storage storage) throws DukeExecutionException {
         try {
             storage.add(event);
-            return event.toString();
+            return String.format("Added %s.", event.toString());
         } catch (IOException e) {
             throw new DukeExecutionException("Could not execute command due to IO exception.");
         }

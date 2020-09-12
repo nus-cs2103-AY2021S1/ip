@@ -31,9 +31,9 @@ public class DeadlineCommand extends Command {
             LocalDate date = LocalDate.parse(args[1].trim());
             deadline = new Deadline(name, date);
         } catch (ArrayIndexOutOfBoundsException ae) {
-            throw new DukeArgumentException("Insufficient arguments provided for duke.Tasks.Deadline.");
+            throw new DukeArgumentException("Insufficient arguments provided for Deadline.");
         } catch (DateTimeParseException de) {
-            throw new DukeArgumentException("duke.Tasks.Deadline date/time could not be parsed.");
+            throw new DukeArgumentException("Deadline date/time could not be parsed.");
         }
     }
 
@@ -47,7 +47,7 @@ public class DeadlineCommand extends Command {
     public String execute(Storage storage) throws DukeExecutionException {
         try {
             storage.add(deadline);
-            return deadline.toString();
+            return String.format("Added %s.", deadline.toString());
         } catch (IOException e) {
             throw new DukeExecutionException("Could not execute command due to IO exception.");
         }

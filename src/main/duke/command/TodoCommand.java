@@ -33,7 +33,7 @@ public class TodoCommand extends Command {
     public String execute(Storage storage) throws DukeExecutionException {
         try {
             storage.add(todo);
-            return todo.toString();
+            return String.format("Added %s.", todo.toString());
         } catch (IOException e) {
             throw new DukeExecutionException("Could not execute command due to IO exception.");
         }

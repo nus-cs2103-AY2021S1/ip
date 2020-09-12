@@ -39,5 +39,99 @@ Expected outcome:
 
 ### Marking Tasks as completed
 Duke can mark Tasks as completed based on the index in the list.
+If the specified Task is already completed, Duke will mark it as incomplete. 
+
+### `done {index}` - Marks the task at the specified index as complete or incomplete.
+
+Example of usage:
+
+`done 3`
+
+Expected outcome:
+
+```[E] [✓] Event (at: Nov 5 2020)```
+
+### Deleting Tasks
+Duke can delete Tasks based on the index in the list.
+
+### `delete {index}` - Deletes the task at the specified index.
+
+Example of usage:
+
+`delete 3`
+
+Expected outcome:
+
+```Deleted [E] [✓] Event (at: Nov 5 2020).```
+
+### Adding a Todo task
+A Todo task has no date or deadline, and only needs the user to specify the name. 
+
+### `todo {name}` - Adds a new Todo task with the given name. 
+
+Example of usage:
+
+`todo Do post-lecture quiz`
+
+Expected outcome:
+
+```Added [T] [✗] Do post-lecture quiz.```
+
+### Adding a Event task
+An Event task has a name and a date (in YYYY-MM-DD).
+
+### `event {name} /at {YYYY-MM-DD}` - Adds a new Event task with the given name and date.
+
+Example of usage:
+
+`event Results release /at 2020-09-16`
+
+Expected outcome:
+
+```Added [E] [✗] Results release (at: Sep 16 2020).```
+
+### Adding a Deadline task
+A Deadline task has a name and a date (in YYYY-MM-DD).
+
+### `deadline {name} /by {YYYY-MM-DD}` - Adds a new Deadline task with the given name and date.
+
+Example of usage:
+
+`deadline Lab submission /by 2020-09-16`
+
+Expected outcome:
+
+```Added [D] [✗] Lab submission (at: Sep 16 2020).```
 
 
+### Exiting Duke
+Closes the program window. 
+
+### `bye` - Closes the program. 
+
+Example of usage:
+
+`bye`
+
+Expected outcome:
+
+```Goodbye```
+
+### Help menu
+Shows the help guide. Can be called with a specific command to information on that command, or with no arguments to
+ show information about the help command. 
+Can be called with `commands` as an argument by using `help commands` to show the full list of commands. 
+
+### `help [{command}]` - Shows information about the command (if any), otherwise shows instructions on how to use the help command.  
+
+Example of usage: 
+
+```help delete```
+
+
+Expected outcome:
+```
+delete <index> - Deletes the task at the index of the list.
+   
+Example usage: "delete 1" -> Removes the first entry of the list. 
+```
