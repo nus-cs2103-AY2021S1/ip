@@ -91,7 +91,7 @@ This command adds a *deadline* task to the list.
 
 `<day>` should only consist the first three letters of the day of week.
 
-For the usage of``<day>`, the date used will be the next specified day of week in the calendar.
+For the usage of `<day>`, the date used will be the next specified day of week in the calendar.
 If the day provided is the same as the current day of week, 
 the date of the next specified day of week in the calendar will also be used, 
 instead of the current date.
