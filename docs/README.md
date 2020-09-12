@@ -179,20 +179,6 @@ This command deletes all tasks from the list
 okie! all the tasks in your list have been cleared :-)
 ```
 
-### 6. ```clear```
-This command deletes all tasks from the list
-
-##### Usage
-```clear```
-
-##### Example of usage: 
-```clear```
-
-##### Expected outcome:
-```
-okie! all the tasks in your list have been cleared :-)
-```
-
 ### 7. ```find```
 This command shows all the tasks which match the query string
 
