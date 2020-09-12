@@ -82,6 +82,8 @@ public class MainWindow extends AnchorPane {
             DialogBox db;
             if (Objects.equals(response, Constants.EXITRESPONSE)) {
                 db = DialogBox.getDukeDialog(Printer.printBye(), dukeImage);
+                userInput.setEditable(false);
+                userInput.setStyle("-fx-background-color: grey;");;
             } else {
                 assert response != Constants.EXITRESPONSE : response;
                 db = DialogBox.getDukeDialog(response, dukeImage);

@@ -49,12 +49,12 @@ public class Task {
         return "[" + statusToIcon() + "] " + this.task;
     }
 
-    private String statusToIcon() {
+    private Character statusToIcon() {
         if (this.status) {
-            return "✅";
+            return '\u2714';
         } else {
             assert !this.status : "status is " + this.status;
-            return "❎";
+            return '\u2716';
         }
     }
 }

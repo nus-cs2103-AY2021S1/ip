@@ -13,7 +13,7 @@ public class DayOnlyFormat implements DateFormat {
 
     @Override
     public boolean check(String date) {
-        return days.stream().anyMatch(day -> date.matches(day));
+        return days.stream().anyMatch(day -> date.toUpperCase().matches(day));
     }
 
     /**

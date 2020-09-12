@@ -56,7 +56,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
-        dialog.setWrapText(true);
+        dialog.setMinHeight(Label.USE_PREF_SIZE);
         timeStamp.setText(UtilFunction.getCurrentTime());
         //move to fxml
         displayPicture.setRadius(20);
