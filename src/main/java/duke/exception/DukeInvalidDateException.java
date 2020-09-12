@@ -12,7 +12,7 @@ public class DukeInvalidDateException extends DukeException {
     public DukeInvalidDateException(String command) {
         super("Please enter a valid date for "
                 + command + "!\nDate and time format"
-                + "should be 'dd/mm/yyyy 24h-time'"
+                + " should be 'dd/mm/yyyy 24h-time'"
                 + "\n(eg. 01/01/2020 1900)");
     }
 }

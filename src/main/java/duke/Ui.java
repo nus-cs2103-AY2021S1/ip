@@ -14,10 +14,10 @@ public class Ui {
             + " a certain deadline into the task list.";
     public static final String DONE_DESCRIPTION = "'done [number]'"
             + " - Marks the task corresponding with the task index"
-            + "in the task list as done";
+            + " in the task list as done";
     public static final String DELETE_DESCRIPTION = "'delete [number]'"
             + "- Deletes the task corresponding with the task index"
-            + "in the task list.";
+            + " in the task list.";
     public static final String EVENT_DESCRIPTION = "'event [task] /at "
             + "[date and time]' - Adds an event that is to be attended into "
             + "the task list.";
@@ -41,7 +41,7 @@ public class Ui {
      * @return String farewell message.
      */
     public String printFarewell() {
-        return "Thanks for chatting with me, "
+        return "Thanks for using this bot, "
                 + "see you soon!\n"
                 + BORDER;
     }
