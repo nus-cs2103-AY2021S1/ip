@@ -7,9 +7,12 @@ import javafx.scene.control.TextField;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+
+import java.awt.*;
 
 /**
  * Main body of application Duke
@@ -73,11 +76,11 @@ public class Duke extends Application {
      */
     private void handleUserInput() {
         String input = userInput.getText();
-        Label userText = new Label(input);
+        Label userText = getDialogLabel(input);
         String output = null;
         try {
             output = this.parser.processInput(input);
-            Label dukeText = new Label(getResponse(output));
+            Label dukeText = getDialogLabel(getResponse(output));
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(userText, new ImageView(user)),
                     DialogBox.getDukeDialog(dukeText, new ImageView(duke))
@@ -95,7 +98,7 @@ public class Duke extends Application {
      * Replace this stub with your completed method.
      */
     private String getResponse(String input) {
-        return "Duke: " + input;
+        return input;
     }
 
     @Override
@@ -108,13 +111,16 @@ public class Duke extends Application {
         dialogContainer = new VBox();
         scrollPane.setContent(dialogContainer);
 
+
         userInput = new TextField();
+        userInput.setStyle("-fx-background-color: black");
         sendButton = new Button("Send");
 
         AnchorPane mainLayout = new AnchorPane();
         mainLayout.getChildren().addAll(scrollPane, userInput, sendButton);
 
         scene = new Scene(mainLayout);
+
 
         stage.setScene(scene);
         stage.show();
@@ -134,8 +140,10 @@ public class Duke extends Application {
         scrollPane.setVvalue(1.0);
         scrollPane.setFitToWidth(true);
 
+
         // You will need to import `javafx.scene.layout.Region` for this.
         dialogContainer.setPrefHeight(Region.USE_COMPUTED_SIZE);
+
 
         userInput.setPrefWidth(325.0);
 
