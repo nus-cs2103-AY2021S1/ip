@@ -1,18 +1,26 @@
 .scrollPane {
-    -fx-background-color: transparent;
+        -fx-background-image: url("/images/background.jpg");
+        -fx-background-repeat: stretch;
+        -fx-background-size: 400px 600px;
+        -fx-background-position: center;
+        -fx-background:transparent;
 }
 
 .dialogContainer {
-    -fx-background-image: url("/images/background.jpg");
-    -fx-background-repeat: stretch;
-    -fx-background-size: cover;
-    -fx-background-position: center center;
+        -fx-background-image: url("/images/background.jpg");
+        -fx-background-repeat: stretch;
+        -fx-background-size: 400px 600px;
+        -fx-background-position: center;
+
+}
+
+.buttonStyle {
+    -fx-border-radius: 10px;
 }
 
 .buttonStyle :hover{
     -fx-font-weight: bold;
     -fx-opacity: 0.8;
-
 }
 
 .textFieldStyle {
