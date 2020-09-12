@@ -18,7 +18,7 @@ import java.util.List;
  * >> bye
  *     --------------------------------------------------------------
  *     Have a good day! Tebby logging off...
- *     --------------------------------------------------------------
+ *     ----------------------------X---------------------------------
  */
 public class Ui {
 
@@ -27,6 +27,8 @@ public class Ui {
 
     /** The line for enclosing messages */
     private final String LINE = "    --------------------------------------------------------------";
+
+    private final String WELCOME_MESSAGE = "Hello! Tebby lives to serve :)\nType help for list of commands!";
 
     /**
      * Constructor for the Ui class.
@@ -51,7 +53,7 @@ public class Ui {
                 + "                                               `-'     `-'\n"
                 + "By: Andy Wu";
         System.out.println(logo);
-        sendMessage("Hello! Tebby lives to serve :)");
+        sendMessage(WELCOME_MESSAGE);
     }
 
     /**
@@ -149,13 +151,13 @@ public class Ui {
 
     public String getListOfCommands() {
         String[] commands = new String[]{
-                "help", "list", "todo <description>",
+                "list", "todo <description>",
                 "event <description> /at <date> [time]",
                 "deadline <description> /by <date> [time]",
                 "fixed <description> /for <duration>",
                 "done <task no.>", "remove <task no.>",
                 "remove all", "sort <name/type/datetime>",
-                "start <task no.> <date> <time>", "bye"
+                "start <task no.> <date> <time>"
         };
         StringBuilder sb = new StringBuilder("Here are the available commands:\n");
         for (String command: commands) {
@@ -166,6 +168,6 @@ public class Ui {
     }
 
     public String getGuiWelcomeMessage() {
-        return "Hello! Tebby lives to serve :)\nType help for list of commands!";
+        return WELCOME_MESSAGE;
     }
 }

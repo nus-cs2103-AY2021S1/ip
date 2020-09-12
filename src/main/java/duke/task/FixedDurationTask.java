@@ -1,5 +1,3 @@
-// TODO: AddCommand add FixedDurationTask; Parser; StartTaskCommand; HelpCommand Ui
-
 package duke.task;
 
 import duke.util.DukeException;
@@ -121,12 +119,23 @@ public class FixedDurationTask extends Task {
     public String toString() {
         String info = "";
         if (startDate.isPresent() && startTime.isPresent()) {
-            info += String.format(" (start: %s, %s)",
-                    startDate.get().format(DateTimeFormatter.ofPattern("d MMM")),
+            LocalDate date = startDate.get();
+            String datePattern = (date.getYear() == LocalDate.now().getYear() ? "d MMM" : "d MMM yy");
+            info += String.format(" (at: %s, %s)",
+                    startDate.get().format(DateTimeFormatter.ofPattern(datePattern)),
                     startTime.get().format(DateTimeFormatter.ofPattern("h:mm a")));
         }
         long sec = duration.getSeconds();
-        info += String.format(" (for: %dh %dm)", sec / 3600, (sec % 3600) / 60);
+        long hr = sec / 3600;
+        long min = (sec % 3600) / 60;
+        info += " (for: ";
+        if (hr != 0) {
+            info += String.format("%d hr ", hr);
+        }
+        if (min != 0) {
+            info += String.format("%d min", min);
+        }
+        info += ")";
         return super.toString() + info;
     }
 }

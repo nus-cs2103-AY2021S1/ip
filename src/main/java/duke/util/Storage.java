@@ -89,7 +89,7 @@ public class Storage {
                     if (t[1].equals("1")) {
                         fdt.markAsDone();
                     }
-                    if (t.length > 4) {
+                    if (!(t[4].equals(" "))) {
                         fdt.setStartDateTimeFromString(t[4]);
                     }
                     list.add(fdt);

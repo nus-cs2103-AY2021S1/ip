@@ -9,6 +9,9 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 
+/**
+ * The javafx dialog box for users
+ */
 public class UserDialogBox extends HBox {
     @FXML
     private Label dialog;

@@ -1,7 +1,20 @@
-.textlabel{
+.dukespeech{
     -fx-background-radius: 10px;
+    -fx-focus-color: transparent;
 }
 
-.imageview{
+.roundify{
     -fx-background-radius: 10px;
+    -fx-focus-color: transparent;
+}
+
+.maximumround{
+    -fx-background-radius: 100px;
+    -fx-focus-color: transparent;
+}
+
+.button{
+    -fx-background-color: -fx-outer-border, -fx-inner-border, -fx-body-color;
+    -fx-background-insets: 0, 1, 2;
+    -fx-background-radius: 5, 4, 3;
 }

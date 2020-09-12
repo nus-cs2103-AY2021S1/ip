@@ -5,21 +5,18 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
 <fx:root maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" minHeight="-Infinity" minWidth="0.0" prefWidth="405.0" type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-      <StackPane prefWidth="99.0">
-         <children>
-              <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
-               <image>
-                  <Image url="@../images/tebby.png" />
-               </image>
-            </ImageView>
-         </children>
-      </StackPane>
-        <Label fx:id="dialog" graphicTextGap="8.0" lineSpacing="1.0" style="-fx-background-color: #42A6FE;" styleClass="dukespeech" stylesheets="@../images/stylesheet.css" text="UWU UWU UWU" textFill="WHITE" wrapText="true">
+        <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../images/tebbyError.png" />
+         </image>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin></ImageView>
+        <Label fx:id="dialog" graphicTextGap="8.0" lineSpacing="1.0" style="-fx-background-color: #f44d5e;" styleClass="roundify" stylesheets="@../images/stylesheet.css" text="Sorry I do not know what that means :(&#10;Sorry I do not know what that means :(&#10;Sorry I do not know what that means :(&#10;Sorry I do not know what that means :(&#10;Sorry I do not know what that means :(&#10;Sorry I do not know what that means :(&#10;Sorry I do not know what that means :(&#10;Sorry I do not know what that means :(" textFill="WHITE" wrapText="true">
          <font>
             <Font name="Segoe UI" size="12.0" />
          </font>
@@ -31,8 +28,7 @@
          </HBox.margin>
          <padding>
             <Insets bottom="10.0" left="15.0" right="15.0" top="10.0" />
-         </padding>
-      </Label>
+         </padding></Label>
     </children>
     <padding>
         <Insets bottom="15.0" left="5.0" right="5.0" top="15.0" />

@@ -65,9 +65,9 @@ public class Parser {
      */
     public static Command parse(String input) throws DukeException {
         String[] parsed = Parser.format(input);
-        String command = parsed[0];
+        String command = parsed[0].toLowerCase();
 
-        switch (command.toLowerCase()) {
+        switch (command) {
         case "bye":
         case "quit":
         case "exit":

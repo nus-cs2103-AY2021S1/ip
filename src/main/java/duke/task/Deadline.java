@@ -2,6 +2,7 @@ package duke.task;
 
 import duke.util.DukeException;
 
+import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 /**
@@ -22,8 +23,8 @@ public class Deadline extends TaskWithDateTime {
 
     @Override
     public String toString() {
-        String dt = String.format(" (by: %s",
-                date.format(DateTimeFormatter.ofPattern("d MMM")));
+        String pattern = (date.getYear() == LocalDate.now().getYear() ? "d MMM" : "d MMM yy");
+        String dt = String.format(" (by: %s", date.format(DateTimeFormatter.ofPattern(pattern)));
         if (time.isPresent()) {
             dt += String.format(", %s)",
                     time.get().format(DateTimeFormatter.ofPattern("h:mm a")));
