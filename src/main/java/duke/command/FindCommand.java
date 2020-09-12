@@ -28,7 +28,7 @@ public class FindCommand extends Command {
      * @return Message when the command is completed.
      */
     @Override
-    public String executeWithResponse(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         StringJoiner response = new StringJoiner("\n");
         StringJoiner userStrings = new StringJoiner("\n");
         for (String string : stringsToFind) {

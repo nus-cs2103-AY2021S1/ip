@@ -24,7 +24,7 @@ public class ByeCommand extends Command {
      * @return Bye message.
      */
     @Override
-    public String executeWithResponse(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         assert(!this.shouldLoop());
         return "Bye. Hope to see you again soon!";
     }

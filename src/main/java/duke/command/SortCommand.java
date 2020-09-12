@@ -11,7 +11,7 @@ public class SortCommand extends Command {
     }
 
     @Override
-    public String executeWithResponse(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         tasks.sort();
         storage.save(tasks);
         return "Your task list has been sorted!";

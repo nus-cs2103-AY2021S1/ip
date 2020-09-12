@@ -1,7 +1,5 @@
 package duke;
 
-import java.util.Scanner;
-
 import duke.command.Command;
 import duke.exception.DukeException;
 import duke.util.Parser;
@@ -22,45 +20,13 @@ public class Duke {
      * Constructs an instance of Duke.
      */
     public Duke() {
-        this("tasks.txt");
-    }
-
-    /**
-     * Constructs an instance of Duke.
-     *
-     * @param filePath The path to save the tasks to.
-     */
-    public Duke(String filePath) {
         ui = new Ui();
-        storage = new Storage(filePath);
+        storage = new Storage("tasks.txt");
         try {
             tasks = new TaskList(storage.load());
         } catch (DukeException e) {
             ui.showLoadingError();
             tasks = new TaskList();
-        }
-    }
-
-    public static void main(String[] args) {
-        new Duke("tasks.txt").run();
-    }
-
-    /**
-     * Runs the command-line version of the application.
-     */
-    public void run() {
-        Scanner sc = new Scanner(System.in);
-        ui.greet();
-        boolean shouldLoop = true;
-        while (shouldLoop) {
-            try {
-                String input = sc.nextLine();
-                Command command = Parser.parse(input);
-                command.executeWithoutResponse(tasks, ui, storage);
-                shouldLoop = command.shouldLoop();
-            } catch (DukeException e) {
-                ui.showError(e);
-            }
         }
     }
 
@@ -75,7 +41,7 @@ public class Duke {
 
         try {
             Command command = Parser.parse(input);
-            response = command.executeWithResponse(tasks, ui, storage);
+            response = command.execute(tasks, ui, storage);
         } catch (DukeException e) {
             response = e.getMessage();
         }

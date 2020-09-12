@@ -36,7 +36,7 @@ public class EventCommand extends Command {
      * @return Message when the command is completed.
      */
     @Override
-    public String executeWithResponse(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = new Event(description, at);
         int previousTaskSize = tasks.size();
         tasks.add(task);

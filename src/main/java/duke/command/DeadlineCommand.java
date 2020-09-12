@@ -36,7 +36,7 @@ public class DeadlineCommand extends Command {
      * @return Message when command is completed.
      */
     @Override
-    public String executeWithResponse(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         Task task = new Deadline(description, by);
         int previousTaskSize = tasks.size();
         tasks.add(task);

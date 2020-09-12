@@ -44,7 +44,7 @@ public class HelpCommand extends Command {
      * @return Message when the command is completed.
      */
     @Override
-    public String executeWithResponse(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Ui ui, Storage storage) {
         StringJoiner response = new StringJoiner("\n");
         response.add("Here are all the available commands:");
         for (Command command : allCommands) {

@@ -29,21 +29,8 @@ public abstract class Command {
      * @return String Message when completing the command.
      * @throws DukeException If could not execute command.
      */
-    public abstract String executeWithResponse(TaskList tasks, Ui ui, Storage storage)
+    public abstract String execute(TaskList tasks, Ui ui, Storage storage)
             throws DukeException;
-
-    /**
-     * Executes the command without returning a response.
-     *
-     * @param tasks Contains the current tasks.
-     * @param ui Responsible for displaying information to the user.
-     * @param storage Reads and stores data into memory.
-     * @throws DukeException If could not execute command.
-     */
-    public void executeWithoutResponse(TaskList tasks, Ui ui, Storage storage)
-            throws DukeException {
-        this.executeWithResponse(tasks, ui, storage);
-    }
 
     /**
      * Checks whether the command should continue the loop or not.

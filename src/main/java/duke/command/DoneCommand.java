@@ -32,7 +32,7 @@ public class DoneCommand extends Command {
      * @return Message when the command is completed.
      */
     @Override
-    public String executeWithResponse(TaskList tasks, Ui ui, Storage storage)
+    public String execute(TaskList tasks, Ui ui, Storage storage)
             throws InvalidDoneIndexException {
         if (index > tasks.size() || index < 1) {
             throw new InvalidDoneIndexException(tasks.size());

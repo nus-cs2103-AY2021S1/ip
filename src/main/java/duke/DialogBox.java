@@ -1,3 +1,4 @@
+
 package duke;
 
 import java.io.IOException;
@@ -20,10 +21,6 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
-    private static final String USER_BACKGROUND =
-            "-fx-background-color: rgba(114, 205, 247, 0.5); -fx-background-radius: 15;";
-    private static final String DUKE_BACKGROUND =
-            "-fx-background-color: rgba(255, 168, 220, 0.5); -fx-background-radius: 15;";
     @FXML
     private Label dialog;
     @FXML
@@ -31,14 +28,11 @@ public class DialogBox extends HBox {
 
     private DialogBox(String text, Image img) {
         super(10);
-
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
-
-
         } catch (IOException e) {
             e.printStackTrace();
         }
