@@ -55,13 +55,13 @@ public class Duke {
             return ui.showDeleteTask(deletedTask) + "\n" + ui.showTotalTasks(tasks.getNumTasks());
         case "todo":
             boolean hasTodoNotes = processedCommand.length == 3;
-            Task todoTsk = new Todo(processedCommand[1], (
+            Task todoTsk = new Todo(processedCommand[1].toUpperCase(), (
                     hasTodoNotes) ? Optional.of(processedCommand[2]) : Optional.empty());
             tasks.addTask(todoTsk);
             return ui.showAddTask(todoTsk) + "\n" + ui.showTotalTasks(tasks.getNumTasks());
         case "deadline":
             boolean hasDeadlineNotes = processedCommand.length == 5;
-            Task deadlineTsk = new Deadline(processedCommand[1],
+            Task deadlineTsk = new Deadline(processedCommand[1].toUpperCase(),
                     LocalDate.parse(processedCommand[2], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                     LocalTime.parse(processedCommand[3], DateTimeFormatter.ofPattern("HHmm")), (
                     hasDeadlineNotes) ? Optional.of(processedCommand[4]) : Optional.empty());
@@ -69,7 +69,7 @@ public class Duke {
             return ui.showAddTask(deadlineTsk) + "\n" + ui.showTotalTasks(tasks.getNumTasks());
         case "event":
             boolean hasEventNotes = processedCommand.length == 6;
-            Task eventTsk = new Event(processedCommand[1],
+            Task eventTsk = new Event(processedCommand[1].toUpperCase(),
                     LocalDate.parse(processedCommand[2], DateTimeFormatter.ofPattern("yyyy-MM-dd")),
                     LocalTime.parse(processedCommand[3], DateTimeFormatter.ofPattern("HHmm")),
                     LocalTime.parse(processedCommand[4], DateTimeFormatter.ofPattern("HHmm")), (

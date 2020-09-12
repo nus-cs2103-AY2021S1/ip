@@ -26,7 +26,7 @@ abstract class Task {
     }
 
     public boolean searchFound(String keyword) {
-        return description.contains(keyword);
+        return description.contains(keyword.toUpperCase());
     }
 
     protected String getStatusIcon() {
