@@ -1,4 +1,10 @@
-T | 0 | g
-T | 0 | ggwp
-T | 0 | h
-T | 0 | nani
+E | 0 | Angklung CCA | 2020-09-14 | 19:00-21:00
+D | 1 | submit CS2100 Lab4 Report | 2020-09-14 | 23:59
+E | 0 | CS2102 Lecture | 2020-09-15 | 12:00-14:00
+D | 0 | CS2103 iP week 6 | 2020-09-15 | 23:59
+T | 1 | CS2100 Assignment #1 
+T | 1 | CS2102 Assignment #1
+T | 0 | ST2334 Tutorial 4
+T | 0 | check CS2102 Project
+T | 1 | eat dinner
+T | 1 | watch Mulan
