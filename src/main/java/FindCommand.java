@@ -22,7 +22,6 @@ public class FindCommand extends Command {
         String keyWord = this.getTaskName();
         assert keyWord != null;
         TaskList keyWordTaskList = taskList.getTasksWithKeyWords(keyWord);
-        return TextUi.printMessage("Here are the matching tasks in your list:\n" + keyWordTaskList.toString())
-                + TextUi.printTaskSummary(keyWordTaskList.getTaskLength());
+        return TextUi.printMessage("Here are the matching tasks in your list:\n" + keyWordTaskList.toString());
     }
 }
