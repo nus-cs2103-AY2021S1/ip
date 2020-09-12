@@ -136,8 +136,8 @@ Example of usage:
 
 Expected outcome:
 
-Here are the matching tasks in your list:
 ```
+Here are the matching tasks in your list:
 1.[U][N] task (10 hours) 
 ```
 
