@@ -4,16 +4,16 @@ Duke is a **desktop app for managing your tasks, optimized for use via a Command
 
 * [Quick Start](#quick-start)
 * [Features](#features)
-  * [Adding a ToDo task: `todo`](#adding-a-todo-task:-`todo`)
-  * [Adding a Deadline task: `deadline`](#adding-a-deadline-task:-`deadline`)
-  * [Adding a Event task: `event`](#adding-a-event-task:-`event`)
-  * [Adding a Recurring task: `recurring`](#adding-a-recurring-task:-`recurring`)
-  * [Listing all tasks: `list`](#listing-all-tasks:-`todo`)
-  * [Marking task as done: `done`](#marking-task-as-done:-`done`)
-  * [Marking task as not done: `undo`](#marking-task-as-not-done:-`undo`)
-  * [Finding a task: `find`](#finding-a-task:-`find`)
-  * [Deleting a task: `delete`](#deleting-a-task:-`delete`)
-  * [Exiting the program: `bye`](#exiting-the-program:-`bye`)
+  * [Adding a ToDo task: `todo`](#adding-a-todo-task-todo)
+  * [Adding a Deadline task: `deadline`](#adding-a-deadline-task-deadline)
+  * [Adding a Event task: `event`](#adding-a-event-task-event)
+  * [Adding a Recurring task: `recurring`](#adding-a-recurring-task-recurring)
+  * [Listing all tasks: `list`](#listing-all-tasks-todo)
+  * [Marking task as done: `done`](#marking-task-as-done-done)
+  * [Marking task as not done: `undo`](#marking-task-as-not-done-undo)
+  * [Finding a task: `find`](#finding-a-task-find)
+  * [Deleting a task: `delete`](#deleting-a-task-delete)
+  * [Exiting the program: `bye`](#exiting-the-program-bye)
 
 ## Quick Start
   1. Ensure that you have Java `11` or above installed in your Computer.
