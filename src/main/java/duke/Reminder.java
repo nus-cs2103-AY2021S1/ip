@@ -22,7 +22,7 @@ public class Reminder {
      */
     public TaskList getUpcomingTasks() {
         TaskList upcomingTaskList = new TaskList();
-        for (Task task : taskList.getTaskList()) {
+        for (Task task : taskList.getTasks()) {
             if (task.getTaskType() != Task.TaskType.DEADLINE) {
                 // skip over
                 continue;

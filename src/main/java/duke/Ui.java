@@ -78,8 +78,8 @@ public class Ui {
      * @param s        Stringbuilder object containing message to be returned to user.
      */
     private void addTasksToStringBuilder(TaskList taskList, StringBuilder s) {
-        for (int i = 0; i < taskList.getTaskList().size(); i++) {
-            s.append(i + 1).append(".").append(taskList.getTaskList().get(i)).append("\n");
+        for (int i = 0; i < taskList.getTasks().size(); i++) {
+            s.append(i + 1).append(".").append(taskList.getTasks().get(i)).append("\n");
         }
     }
 

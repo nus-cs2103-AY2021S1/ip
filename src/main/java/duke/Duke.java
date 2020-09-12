@@ -73,15 +73,15 @@ public class Duke {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    public String getResponse(String input) {
+    public DukeResponse getResponse(String input) {
         try {
             Command c = Parser.parse(input.trim());
 
             String s = c.execute(taskList, ui, storage);
             System.out.println(s);
-            return s;
+            return new DukeResponse(s, false);
         } catch (DukeException e) {
-            return e.getMessage();
+            return new DukeResponse(e.getMessage(),true);
         }
     }
 }

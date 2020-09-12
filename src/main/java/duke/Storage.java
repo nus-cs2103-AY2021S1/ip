@@ -136,7 +136,7 @@ public class Storage {
             File file = readFile();
             assert file != null;
             BufferedWriter writer = new BufferedWriter(new FileWriter(file));
-            for (Task task : taskList.getTaskList()) {
+            for (Task task : taskList.getTasks()) {
                 writer.write(task.getFormattedString());
             }
             writer.close();
