@@ -23,13 +23,18 @@ a chatbot with a fun personality can help make task management more appealing, h
   * Event
   * Deadline
   * Fixed duration task
+  
 * View task list
+
 * Mark tasks as done
+
 * Delete tasks
+
 * Sort tasks by
   * Description
   * Date time
   * Task type
+  
 * Find tasks by keyword
 
 ---
