@@ -2,6 +2,7 @@ package duke.commands;
 
 import duke.Storage;
 import duke.TaskList;
+import duke.exception.DukeException;
 import duke.tasks.Task;
 
 /**
@@ -26,10 +27,15 @@ public class DoneCommand implements Command {
      * @param storage The storage object.
      * @param tasks   The taskList.
      * @return The response to the user indicating the task has been marked as done.
+     * @throws DukeException If taskNum index out of bounds.
      */
     @Override
-    public String execute(Storage storage, TaskList tasks) {
-        Task doneTask = tasks.markTaskAsDone(taskNum);
-        return "OK! I have marked the following task as done:\n" + doneTask.toString();
+    public String execute(Storage storage, TaskList tasks) throws DukeException {
+        try {
+            Task doneTask = tasks.markTaskAsDone(taskNum);
+            return "OK! I have marked the following task as done:\n" + doneTask.toString();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(e.getMessage());
+        }
     }
 }

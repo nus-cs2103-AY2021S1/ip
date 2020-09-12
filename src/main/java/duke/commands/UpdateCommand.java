@@ -30,11 +30,15 @@ public class UpdateCommand implements Command {
      * @param storage The storage object.
      * @param tasks   The taskList.
      * @return The string represetation of the updated task.
-     * @throws DukeException If updateString format is wrong.
+     * @throws DukeException If updateString format is wrong or taskNum index out of bounds.
      */
     @Override
     public String execute(Storage storage, TaskList tasks) throws DukeException {
-        Task updatedTask = tasks.update(taskNum, updateString);
-        return "Successfully updated task #" + taskNum + ": " + updatedTask.toString();
+        try {
+            Task updatedTask = tasks.update(taskNum, updateString);
+            return "Successfully updated task #" + taskNum + ": " + updatedTask.toString();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(e.getMessage());
+        }
     }
 }

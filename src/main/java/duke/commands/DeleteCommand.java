@@ -2,6 +2,7 @@ package duke.commands;
 
 import duke.Storage;
 import duke.TaskList;
+import duke.exception.DukeException;
 import duke.tasks.Task;
 
 /**
@@ -26,11 +27,16 @@ public class DeleteCommand implements Command {
      * @param storage The storage object.
      * @param tasks   The taskList.
      * @return The response indicating task has been deleted from taskList.
+     * @throws DukeException If taskNum index out of bounds.
      */
     @Override
-    public String execute(Storage storage, TaskList tasks) {
-        Task delTask = tasks.delete(taskNum);
-        return "OK! I have deleted the following task for your list:\n" + delTask.toString() + "\n" + tasks
-                .getListStatus();
+    public String execute(Storage storage, TaskList tasks) throws DukeException {
+        try {
+            Task delTask = tasks.delete(taskNum);
+            return "OK! I have deleted the following task for your list:\n" + delTask.toString() + "\n" + tasks
+                    .getListStatus();
+        } catch (IndexOutOfBoundsException e) {
+            throw new DukeException(e.getMessage());
+        }
     }
 }
