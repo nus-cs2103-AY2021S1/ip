@@ -101,7 +101,7 @@ public class TaskList {
                     res += "\n";
                 }
                 res += String.format("%d. %s", count, task);
-                count ++;
+                count++;
             }
         }
         return res;

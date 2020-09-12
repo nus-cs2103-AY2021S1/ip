@@ -7,6 +7,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.StatsCommand;
 import duke.command.OwoCommand;
 import duke.command.UwuCommand;
 import duke.tasks.Deadline;
@@ -49,7 +50,8 @@ public class Parser {
 
         case UwuCommand.COMMAND_WORD:
             return new UwuCommand();
-
+        case StatsCommand.COMMAND_WORD:
+            return new StatsCommand();
         case AddCommand.COMMAND_WORD_TODO:
             // Fallthrough
         case AddCommand.COMMAND_WORD_DEADLINE:
