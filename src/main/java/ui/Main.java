@@ -25,7 +25,10 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle("Duke");
+            //@@author Madan Sapkota
+            //Reused from https://stackoverflow.com/questions/10275841 with minor modifications
             stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/Duke-logo.jpg")));
+            //@@author
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {

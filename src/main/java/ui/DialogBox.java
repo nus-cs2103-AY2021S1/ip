@@ -1,6 +1,5 @@
 package ui;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.Collections;
 
@@ -12,12 +11,10 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.ImagePattern;
 import javafx.scene.paint.Color;
+import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
-import javafx.scene.text.TextAlignment;
 
 /**
  * An example of a custom control using FXML.
@@ -51,8 +48,7 @@ public class DialogBox extends HBox {
     private void flip() {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
-        Node labelBox = tmp.get(1);
-        labelBox.setStyle("-fx-background-color: #e1ad01; "
+        tmp.get(1).setStyle("-fx-background-color: #e1ad01; "
                 + "-fx-border-radius: 0 20 20 20; "
                 + "-fx-background-radius: 0 20 20 20; "
                 + "-fx-label-padding: 6 10 6 6;"
