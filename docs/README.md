@@ -115,7 +115,9 @@ Example of usage:
 
 Expected outcome:
 
-```Goodbye```
+```
+Goodbye
+```
 
 ### Help menu
 Shows the help guide. Can be called with a specific command to information on that command, or with no arguments to
@@ -130,6 +132,7 @@ Example of usage:
 
 
 Expected outcome:
+
 ```
 delete <index> - Deletes the task at the index of the list.
    
