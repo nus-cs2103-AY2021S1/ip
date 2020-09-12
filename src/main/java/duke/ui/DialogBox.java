@@ -15,7 +15,6 @@ import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.shape.Circle;
 
-
 // @@author aizatazhar-reused
 // Reused from https://se-education.org/guides/tutorials/javaFxPart4.html with minor modifications
 /**
