@@ -66,10 +66,8 @@ shadowJar {
 }
 
 checkstyle {
-    toolVersion = '8.23'
-    sourceSets = []
+    toolVersion = '8.29'
 }
-//checkstyleTest.enabled = false
 
 run{
     standardInput = System.in
