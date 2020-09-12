@@ -36,8 +36,8 @@ public class Jarvis {
             try {
                 String command = ui.readCommand();
                 ui.showLine();
-                Command c = Command.parse(command);
-                c.execute(tasks, ui, storage);
+                Command c = Command.parse(command, tasks, ui, storage);
+                c.execute();
                 exit = c.isExit();
             } catch (DukeException | IOException e) {
                 ui.showError(e.getMessage());
@@ -55,16 +55,17 @@ public class Jarvis {
     /**
      * getResponse takes the user command as a String and returns the response from Jarvis
      * @param input User command String
-     * @return Jarvis response String
+     * @return Jarvis command
      */
-    String getResponse(String input) {
+    Command getResponse(String input) {
         String command = input;
         try {
-            Command c = Command.parse(command);
-            return c.execute(tasks, ui, storage);
+            Command c = Command.parse(command, tasks, ui, storage);
+            return c;
         } catch (Exception e) {
             e.printStackTrace();
-            return "Jarvis exception: " + e.getMessage();
+            Command c = new ExceptionCommand(e, tasks, ui, storage);
+            return c;
         }
     }
 }

@@ -2,8 +2,12 @@ import java.io.IOException;
 
 public class LoadFileCommand extends Command {
 
+    LoadFileCommand(TaskList tasks, Ui ui, Storage storage) {
+        super(tasks, ui, storage);
+    }
+
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws IOException {
+    public String execute() throws IOException {
         String filePath = storage.promptForFile();
         if (filePath.equals(Storage.noPath)) {
             return ui.printf("No new data file selected");

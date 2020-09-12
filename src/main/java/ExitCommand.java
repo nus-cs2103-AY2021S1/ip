@@ -2,13 +2,13 @@
  * An exit command
  */
 class ExitCommand extends Command {
-    ExitCommand() {
-        super();
+    ExitCommand(TaskList tasks, Ui ui, Storage storage) {
+        super(tasks, ui, storage);
         this.exit = true;
     }
 
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute() {
         return "Jarvis is exiting, goodbye!";
     }
 }
