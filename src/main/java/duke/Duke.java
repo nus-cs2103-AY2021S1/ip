@@ -56,7 +56,7 @@ public class Duke {
             storage.saveToFile(tasks.getList());
             return response;
         } catch (DukeException | IOException e) {
-            return (e.getMessage());
+            return ("Error " + e.getMessage());
         }
     }
 
@@ -70,7 +70,7 @@ public class Duke {
                 + "   |    \\___     /____\\     /____\\   |\n"
                 + "   |        \\   /      \\   /      \\   \\\n"
                 + " ------  ___/  /        \\ /        \\    -----\n";*/
-        return "Hello! I'm Duke!" + "\nWhat can I do for you?";
+        return "Hello! I'm Pepe!" + "\nWhat can I do for you?";
     }
 }
 

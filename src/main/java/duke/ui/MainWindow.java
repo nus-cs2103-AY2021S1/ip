@@ -22,33 +22,44 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
-
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/Doge.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/PepeSad.png"));
+    private Image greetImage = new Image(this.getClass().getResourceAsStream("/images/PepeGreet.png"));
+    private Image failImage = new Image(this.getClass().getResourceAsStream("/images/PepeSad2.png"));
     /**
      * Initializes dialogContainer.
      */
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.setSpacing(20);
+        String style = "-fx-background-color: rgba(40,42,47,1);";
+        this.dialogContainer.setStyle(style);
     }
 
     public void setDuke(Duke d) {
         duke = d;
+        dialogContainer.setSpacing(20);
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(duke.getGreeting(), dukeImage)
+                DialogBox.getDukeDialog(duke.getGreeting(), greetImage)
         );
+
     }
 
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+        if (response.startsWith("Error")) {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeErrorDialog(response.substring(6), failImage)
+            );
+        } else {
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+        }
         userInput.clear();
     }
 }

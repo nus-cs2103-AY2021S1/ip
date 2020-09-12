@@ -71,7 +71,7 @@ public class AddCommand extends Command {
 
     private String checkForClashes(TaskList tasklist) throws DukeException {
         String[] descriptions = description.split(" ");
-        String response = "***WARNING!*** \nTasks on the same date and within an hour of added task: \n";
+        String response = "\n***WARNING!*** \nTasks on the same date and within an hour of added task: \n";
         boolean hasClash = false;
         List<Task> tasks = tasklist.getList();
         LocalDate date = null;

@@ -23,10 +23,11 @@ public class ListCommand extends Command {
     public String execute(TaskList tasklist, Storage storage) throws DukeException {
         assert tasklist != null : "Tasklist cannot be null.";
         assert storage != null : "Storage cannot be null.";
+        String response = "Here's the list you sad soul \n";
         if (tasklist.getSize() == 0) {
             throw new DukeException("there's nothing on the list yet.");
         }
-        return IntStream.range(0, tasklist.getSize())
+        return response + IntStream.range(0, tasklist.getSize())
                 .mapToObj(index -> String.format("%d . %s", index + 1, tasklist.get(index)))
                 .collect(Collectors.joining("\n"))
                 .trim();
