@@ -72,7 +72,7 @@ public class DialogBox extends HBox {
      * @return a DialogBox to be displayed as TaskBot's answer to the user.
      */
     public static DialogBox getTaskbotDialog(String text, Image image) {
-            DialogBox dialogBox = new DialogBox(text, image, Color.BLUE, Color.DARKBLUE);
+        DialogBox dialogBox = new DialogBox(text, image, Color.BLUE, Color.DARKBLUE);
         dialogBox.flip();
         return dialogBox;
     }
