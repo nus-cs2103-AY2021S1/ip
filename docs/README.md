@@ -14,6 +14,8 @@ Duke is a **desktop app for managing your tasks, optimized for use via a Command
   * [Finding a task: `find`](#finding-a-task-find)
   * [Deleting a task: `delete`](#deleting-a-task-delete)
   * [Exiting the program: `bye`](#exiting-the-program-bye)
+ * [Saving the data](#saving-the-data)
+ * [Command Summary](#command-summary)
 
 ## Quick Start
   1. Ensure that you have Java `11` or above installed in your Computer.
