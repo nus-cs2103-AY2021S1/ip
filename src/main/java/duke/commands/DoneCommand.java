@@ -32,23 +32,33 @@ public class DoneCommand extends Command {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            if (isNumberOrDescriptionAbsent()) {
-                throw new DoneException(true, false); //when number is absent
-            } else {
-                int iD = Integer.parseInt(commandDescription.substring(lengthOfKeyword + 1));
-                if (isNumberNotInList(iD, tasks)) {
-                    throw new DoneException(false, true); //when number is not in list
-                } else {
-                    return rewrite(storage, tasks, iD); //where the file in Storage is updated and TaskList is updated
-                }
-            }
+            return process(tasks, storage);
         } catch (DukeException dukeException) {
             ui.setDukeException(dukeException);
             throw dukeException;
         }
     }
 
-
+    /**
+     * Returns a String if the input is given in the correct order, else Exception is thrown
+     *
+     * @param tasks is used to check whether the tasks to be found is present in TaskList
+     * @param storage is used to update the file in storage that contains current tasks
+     * @return String if the user input is correct
+     * @throws DukeException if the user input is wrong
+     */
+    private String process(TaskList tasks, Storage storage) throws DukeException {
+        if (isNumberOrDescriptionAbsent()) {
+            throw new DoneException(true, false); //when number is absent
+        } else {
+            int iD = Integer.parseInt(commandDescription.substring(lengthOfKeyword + 1));
+            if (isNumberNotInList(iD, tasks)) {
+                throw new DoneException(false, true); //when number is not in list
+            } else {
+                return rewrite(storage, tasks, iD); //where the file in Storage is updated and TaskList is updated
+            }
+        }
+    }
     /**
      * Returns whether the task is present in the list.
      *

@@ -15,7 +15,7 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * handles cases when Event is keyword
+ * Handles cases when Event is keyword
  */
 public class EventCommand extends AddCommand {
     /**
@@ -38,21 +38,34 @@ public class EventCommand extends AddCommand {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            if (isNumberOrDescriptionAbsent()) {
-                throw new EventException(true, false, false, false, false);
-            }
-            String[] dataSplit = splitData();
-            //splits String into different of Event name, start and end time and/or date
-            Event event = provide(dataSplit[0], dataSplit[1], dataSplit[2]);
-            //gives the event or throws exception
-            return updateTaskList(storage, event, tasks);
-            //updates the Task list in Storage and TaskList since the Event is added
+            return process(tasks, storage);
+            //Returns string if correct input and updates tasks and file in storage if correct input by user, else
+            // throws exception
         } catch (DukeException dukeException) {
             ui.setDukeException(dukeException);
             throw dukeException;
         }
     }
 
+    /**
+     * Returns String if the user input is correct and throws exception otherwise
+     *
+     * @param tasks used to add Event into tasks if user input is correct
+     * @param storage used to update file in storage that contains file if user input is correct
+     * @return String informing user that Event has been added to list
+     * @throws DukeException thrown if user input is wrong
+     */
+    private String process(TaskList tasks, Storage storage) throws DukeException {
+        if (isNumberOrDescriptionAbsent()) {
+            throw new EventException(true, false, false, false, false);
+        }
+        String[] dataSplit = splitData();
+        //splits String into different of Event name, start and end time and/or date
+        Event event = provide(dataSplit[0], dataSplit[1], dataSplit[2]);
+        //gives the event or throws exception
+        return updateTaskList(storage, event, tasks);
+        //updates the Task list in Storage and TaskList since the Event is added
+    }
     /**
      * splits the data into Deadline description and the Deadline date and/ or time. If the date and/or time is absent
      * then DeadlineException is thrown.

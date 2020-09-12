@@ -32,17 +32,29 @@ public class TodoCommand extends AddCommand {
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            if (isNumberOrDescriptionAbsent()) {
-                throw new TodoException();
-            }
-            ToDo t = new ToDo(todoDescription());
-            return updateTaskList(storage, t, tasks);
+            return process(tasks, storage);
         } catch (DukeException dukeException) {
             ui.setDukeException(dukeException);
             throw dukeException;
         }
     }
 
+    /**
+     * Returns String if user input is correct and updates the TaskList tasks and file containing tasks file in
+     * storage
+     *
+     * @param tasks to add ToDo task here if the user input is correct
+     * @param storage to add ToDo task in the file containing tasks
+     * @return String informing that the user has input the task
+     * @throws DukeException if user input is correct
+     */
+    private String process(TaskList tasks, Storage storage) throws DukeException {
+        if (isNumberOrDescriptionAbsent()) {
+            throw new TodoException();
+        }
+        ToDo t = new ToDo(todoDescription());
+        return updateTaskList(storage, t, tasks);
+    }
     /**
      * returns the name of the task
      *

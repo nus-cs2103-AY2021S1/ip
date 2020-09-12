@@ -57,7 +57,6 @@ public abstract class AddCommand extends Command {
         } catch (IOException i) {
             throw new FileAbsentException(storage.getFilePath());
         }
-        //System.out.println(stringToUpdateTaskList(task, taskList));
         return stringToUpdateTaskList(task, taskList);
     }
 

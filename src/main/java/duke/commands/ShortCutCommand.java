@@ -38,30 +38,40 @@ public class ShortCutCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            if (isNumberOrDescriptionAbsent()) {
-                throw new ShortCutException(true, false, false, false, ""); //if description is absent
-            }
-
-            String[] splitData = splitDescription(commandDescription);
-            if (shortCutPresent(splitData[1])) {
-                throw new ShortCutException(false, false, true, false, splitData[1]);
-                //if short cut is already present
-            } else if (containsUselessShortCut(splitData[0])) {
-                throw new ShortCutException(false, false, false, true, splitData[1]);
-                //if short cut exception is useless
-            } else if (!shortCutPresent(splitData[0])) {
-                ShortCuts.addShortCut(splitData[0], splitData[1]);
-                updateShortCutFile(splitData[1], splitData[0], storage);
-                return shortCutMessage(); //when it is correct
-            } else {
-                return null;
-            }
+            return process(storage);
+            //function processes the given input and gives message that short cut is added or else exception thrown
         } catch (DukeException dukeException) {
             ui.setDukeException(dukeException);
             throw dukeException;
         }
     }
 
+    /**
+     * Judges whether the String given is correct, else it throws an error
+     *
+     * @param storage which contains information of the various short forms and checks for short forms in them
+     * @return String value if the String given by user is correct
+     * @throws DukeException thrown if there is an error in user input
+     */
+    private String process(Storage storage) throws DukeException {
+        if (isNumberOrDescriptionAbsent()) {
+            throw new ShortCutException(true, false, false, false, ""); //if description is absent
+        }
+        String[] splitData = splitDescription(commandDescription);
+        if (shortCutPresent(splitData[1])) {
+            throw new ShortCutException(false, false, true, false, splitData[1]);
+            //if short cut is already present
+        } else if (containsUselessShortCut(splitData[0])) {
+            throw new ShortCutException(false, false, false, true, splitData[1]);
+            //if short cut exception is useless
+        } else if (!shortCutPresent(splitData[0])) {
+            ShortCuts.addShortCut(splitData[0], splitData[1]);
+            updateShortCutFile(splitData[1], splitData[0], storage);
+            return shortCutMessage(); //when it is correct
+        } else {
+            return null;
+        }
+    }
     /**
      * splits input into original form and short form
      *

@@ -25,7 +25,7 @@ public class ListCommand extends Command {
      * @param ui
      * @param storage
      * @return String returns the string of the output that informs the action has been complete.
-     * @throws DukeException
+     * @throws DukeException not returned in this scenario
      */
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         return listMessage(tasks);

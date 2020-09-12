@@ -11,7 +11,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * handles the case when the keyword is delete
+ * Handles the case when the keyword is delete
  */
 public class DeleteCommand extends Command {
     /**

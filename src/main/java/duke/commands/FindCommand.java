@@ -38,23 +38,35 @@ public class FindCommand extends Command {
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
         try {
-            if (isNumberOrDescriptionAbsent()) {
-                throw new FindException(false, true, "");
-            }
-            String find = commandDescription.substring(5);
-            String[] strings = find.split(" ", -2); // keywords split into different Strings
-            setTasks(strings, tasks);
-            if (this.tasks.size() == 0) {
-                throw new FindException(true, false, find);
-            } else {
-                return findMessage();
-            }
+            return process(tasks);
+            //Returns string if correct input and updates tasks and file in storage if correct input by user, else
+            // throws exception
         } catch (DukeException dukeException) {
             ui.setDukeException(dukeException);
             throw dukeException;
         }
     }
 
+    /**
+     * Returns String informing user that find command is successful otherwise throws FindException
+     *
+     * @param tasks to access the tasks to find out the description used and to compare keywords given for this command
+     * @return String if user input is in correct format
+     * @throws FindException when user input is given in wrong format
+     */
+    public String process(TaskList tasks) throws FindException {
+        if (isNumberOrDescriptionAbsent()) {
+            throw new FindException(false, true, "");
+        }
+        String find = commandDescription.substring(5);
+        String[] strings = find.split(" ", -2); // keywords split into different Strings
+        setTasks(strings, tasks);
+        if (this.tasks.size() == 0) {
+            throw new FindException(true, false, find);
+        } else {
+            return findMessage();
+        }
+    }
     /**
      * sets the Tasks list here with Tasks containing key words.
      *
