@@ -23,8 +23,10 @@ public class MainWindow extends AnchorPane {
 
     private Chatbot chatbot;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image chatbotImage = new Image(this.getClass().getResourceAsStream("/images/DaChatbot.png"));
+    private final Image userImage = new Image(
+            this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private final Image chatbotImage = new Image(
+            this.getClass().getResourceAsStream("/images/DaChatbot.png"));
 
     @FXML
     public void initialize() {
@@ -37,8 +39,9 @@ public class MainWindow extends AnchorPane {
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing chat bot's reply and then appends them to
-     * the dialog container. Clears the user input after processing.
+     * Creates two dialog boxes, one echoing user input and the other containing
+     * chat bot's reply and then appends them to the dialog container. Clears the
+     * user input after processing.
      */
     @FXML
     private void handleUserInput() {
