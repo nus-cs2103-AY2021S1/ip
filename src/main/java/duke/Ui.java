@@ -48,7 +48,7 @@ public class Ui {
      * @param task the new task that was created by the user
      * @param noTask the number of task currently in the task list
      */
-    public String printAddedNewTask(Task task, int noTask) {
+    public String AddedNewTaskMessage(Task task, int noTask) {
         return (this.border
                 + "Yes master. I've added the task to the list: \n"
                 + task.toString() + "\n"

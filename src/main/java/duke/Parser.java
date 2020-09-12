@@ -2,16 +2,8 @@ package duke;
 
 import java.util.Scanner;
 
-import command.ByeCommand;
-import command.Command;
-import command.DateCommand;
-import command.DeadLineCommand;
-import command.DelCommand;
-import command.DoneCommand;
-import command.EventCommand;
-import command.FindCommand;
-import command.ListCommand;
-import command.TodoCommand;
+import command.*;
+
 /**
  * The Parser class to handle the parsing of user inputs to the appropriate commands.
  *
@@ -30,25 +22,26 @@ public class Parser {
         assert input.length() > 0 : "no input given";
         Scanner sc = new Scanner(input);
         String command = sc.next().toLowerCase();
+        String parameters = input.replace(command,"");
         switch (command) {
         case "list":
-            return new ListCommand();
+            return new GetTaskListCommand();
         case "date":
-            return new DateCommand(sc.nextLine().strip());
+            return new FindTaskByDateCommand(parameters.strip());
         case "done":
-            return new DoneCommand(sc.nextLine().strip());
+            return new MarkTaskDoneCommand(parameters.strip());
         case "delete":
-            return new DelCommand(sc.nextLine().strip());
+            return new DelTaskCommand(parameters.strip());
         case "event":
-            return new EventCommand(sc.nextLine().split("/at"));
+            return new CreateEventTaskCommand(parameters.split("/at"));
         case "deadline" :
-            return new DeadLineCommand(sc.nextLine().split("/by"));
+            return new CreateDeadLineTaskCommand(parameters.split("/by"));
         case "todo":
-            return new TodoCommand(sc.nextLine());
+            return new CreateTodoTaskCommand(parameters);
         case "bye":
             return new ByeCommand();
         case "find":
-            return new FindCommand(sc.nextLine().strip());
+            return new FindTaskByKeywordCommand(sc.nextLine().strip());
         default:
             throw new IllegalArgumentException();
         }

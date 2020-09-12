@@ -11,6 +11,8 @@ import duke.TaskList;
 public abstract class Command {
     /** array of strings where each element represents a parameter tagged to the command */
     protected final String[] parameters;
+    public static boolean EXECUTED_SUCCESSFULLY = true;
+    public static boolean EXECUTED_UNSUCCESSFULLY = false;
 
     /**
      * Instantiate command without parameters

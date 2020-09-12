@@ -7,6 +7,6 @@ public class GetTaskListCommand extends Command {
 
     @Override
     public Result execute(TaskList taskList, Storage storage) {
-        return null;
+        return new Result(taskList.toString(), EXECUTED_SUCCESSFULLY);
     }
 }

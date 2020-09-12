@@ -1,11 +1,12 @@
 package command;
 
 public class Result {
-    private String message;
+    private String resultMessage;
     public boolean isSuccessful;
 
-    public Result(String ) {
-
+    public Result(String resultMessage, boolean isSuccessful ) {
+        this.resultMessage = resultMessage;
+        this.isSuccessful = isSuccessful;
     }
 
     public boolean isSuccessful(){
@@ -14,6 +15,6 @@ public class Result {
 
     @Override
     public String toString(){
-        return this.message;
+        return this.resultMessage;
     }
 }

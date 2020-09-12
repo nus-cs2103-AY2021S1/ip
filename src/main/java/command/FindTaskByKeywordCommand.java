@@ -10,6 +10,8 @@ public class FindTaskByKeywordCommand extends Command {
 
     @Override
     public Result execute(TaskList taskList, Storage storage) {
-        return null;
+        String listOfTasks = taskList.getTaskWithKeyword(parameters[0]);
+        String message = "Master here are the tasks with keyword " + parameters[0].strip() + " :\n" + listOfTasks;
+        return new Result(message, EXECUTED_SUCCESSFULLY);
     }
 }

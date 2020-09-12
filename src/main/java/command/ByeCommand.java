@@ -11,7 +11,7 @@ public class ByeCommand extends Command{
 
     @Override
     public Result execute(TaskList taskList, Storage storage) {
-        return null;
+        return new Result("Adios, pleasure to serve you!\n", EXECUTED_SUCCESSFULLY);
     }
 
 
