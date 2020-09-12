@@ -21,7 +21,7 @@ public class Main extends Application {
             scene.getStylesheets().add("/view/main.css");
             stage.setScene(scene);
             stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/Icon.png")));
-            stage.setTitle("Duke");
+            stage.setTitle("Alexa");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
