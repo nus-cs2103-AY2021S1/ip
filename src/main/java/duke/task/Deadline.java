@@ -43,6 +43,6 @@ public class Deadline extends Task {
         int dd = this.dateTime.getDayOfMonth();
         int yyyy = this.dateTime.getYear();
         String hhhh = this.dateTime.toLocalTime().toString();
-        return "[D]" + super.toString() + "(at: " + dd + " " + mmm + " " + yyyy + ", " + ddd + " @ " + hhhh + ")";
+        return "[D]" + super.toString() + "(by: " + dd + " " + mmm + " " + yyyy + ", " + ddd + " @ " + hhhh + ")";
     }
 }
