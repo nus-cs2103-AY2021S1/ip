@@ -8,9 +8,11 @@ A simple guide to get you kick started on how to easily use this CLI app to crea
     <summary>
         Add Functions
     </summary>
-        <summary>Add todo</summary>
-        <summary>Add deadline</summary>
-        <summary>Add event</summary>
+        <details>
+             <summary>Add todo</summary>
+             <summary>Add deadline</summary>
+             <summary>Add event</summary>
+        </details>
 </details>
 
 Description of feature.
