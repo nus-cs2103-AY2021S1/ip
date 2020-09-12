@@ -29,11 +29,11 @@ A simple guide to get you kick started on how to easily use this CLI app to crea
         <details>
             <summary>Add event - 'event'</summary>
             <br>
-            Type "event" followed by description of event, then followed by "/at" followed by a space and then type in ther rest of the description
+            *Type "event" followed by description of event, then followed by "/at" followed by a space and then type in ther rest of the description
             <br>
-            Input date via 'YYYY-MM-DD' format and time in 'HH:MM' format if you wish to add date and time
+            *Input date via 'YYYY-MM-DD' format and time in 'HH:MM' format if you wish to add date and time
             <br>
-            Click on link here to see example: https://github.com/IsaacTin/ip/blob/branch-A-UserGuide/docs/Images/event.png
+            *Click on link here to see example: https://github.com/IsaacTin/ip/blob/branch-A-UserGuide/docs/Images/event.png
         </details>
 </details>
 
