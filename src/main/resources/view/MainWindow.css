@@ -1,21 +1,19 @@
 .scrollPane {
-        -fx-background-image: url("/images/background.jpg");
-        -fx-background-repeat: stretch;
-        -fx-background-size: 400px 600px;
-        -fx-background-position: center;
-        -fx-background:transparent;
+    -fx-background-image: url("/images/background.jpg");
+    -fx-background-repeat: stretch;
+    -fx-background-size: 400px 600px;
+    -fx-background-position: center;
+    -fx-background:transparent;
 }
 
 .dialogContainer {
-        -fx-background-image: url("/images/background.jpg");
-        -fx-background-repeat: stretch;
-        -fx-background-size: 400px 600px;
-        -fx-background-position: center;
-
+    -fx-padding: 0 0 30px 0;
 }
 
 .buttonStyle {
+    -fx-background:transparent;
     -fx-border-radius: 10px;
+    -fx-background-radius: 10px;
 }
 
 .buttonStyle :hover{
