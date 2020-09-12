@@ -34,16 +34,11 @@ class Parser {
     }
 
     private static Command handleCommand(CommandName commandName, String[] partsOfCommand) throws DukeException {
-        int index;
-        String secondPartOfCommand;
-
         switch(commandName) {
         case LIST:
             return new ListCommand();
         case DONE:
-            secondPartOfCommand = partsOfCommand[1];
-            index = Integer.parseInt(secondPartOfCommand);
-            return new DoneCommand(index);
+            return handleDone(partsOfCommand);
         case TODO:
             // Fallthrough
         case DEADLINE:
@@ -51,12 +46,9 @@ class Parser {
         case EVENT:
             return handleTask(partsOfCommand, commandName);
         case DELETE:
-            secondPartOfCommand = partsOfCommand[1];
-            index = Integer.parseInt(secondPartOfCommand);
-            return new DeleteCommand(index);
+            return handleDelete(partsOfCommand);
         case FIND:
-            secondPartOfCommand = partsOfCommand[1];
-            return new FindCommand(secondPartOfCommand);
+            return handleFind(partsOfCommand);
         case SORT:
             return handleSort(partsOfCommand);
         case BYE:
@@ -67,15 +59,36 @@ class Parser {
         }
     }
 
-    private static Command handleSort(String[] inputs) throws DukeException {
+    private static String tryGetSecondElement(String[] inputs, String errorMessage) throws DukeException {
         try {
-            String sortOrderOption = inputs[1].toUpperCase();
-            SortOrderOption sortOrderOptionEnum = checkSortOrderOptionEnum(sortOrderOption);
-            return new SortCommand(sortOrderOptionEnum);
+            return inputs[1];
         } catch (ArrayIndexOutOfBoundsException e) {
-            String missingSortOptionsErrorMessage = "OOPS!!! Please add in sort order.";
-            throw new DukeException(missingSortOptionsErrorMessage);
+            throw new DukeException(errorMessage);
         }
+    }
+
+    private static Command handleDone(String[] inputs) throws DukeException {
+        String indexString = tryGetSecondElement(inputs, "OOPS!!! Please add index to be done.");
+        int index = Integer.parseInt(indexString);
+        return new DoneCommand(index);
+    }
+
+    private static Command handleDelete(String[] inputs) throws DukeException {
+        String indexString = tryGetSecondElement(inputs, "OOPS!!! Please add index to be deleted.");
+        int index = Integer.parseInt(indexString);
+        return new DeleteCommand(index);
+    }
+
+    private static Command handleFind(String[] inputs) throws DukeException {
+        String findString = tryGetSecondElement(inputs, "OOPS!!! Please add what you want to find.");
+        return new FindCommand(findString);
+    }
+
+    private static Command handleSort(String[] inputs) throws DukeException {
+        String sortOrderOption = tryGetSecondElement(inputs,
+                "OOPS!!! Please add in sort order.").toUpperCase();
+        SortOrderOption sortOrderOptionEnum = checkSortOrderOptionEnum(sortOrderOption);
+        return new SortCommand(sortOrderOptionEnum);
     }
 
     /**
@@ -86,35 +99,34 @@ class Parser {
      * @throws DukeException If deadline date not input for deadline, or event date not input for event.
      */
     private static Command handleTask(String[] inputs, CommandName commandName) throws DukeException {
-        try {
-            String taskInfo = inputs[1];
-            String[] taskInfoParts;
-            String description;
-            String date;
-            //TODO: in switch/if-else statement, okay to define early if we use the same variable name?
+        String taskInfo = tryGetSecondElement(inputs,
+                "OOPS!!! The description of a "
+                + commandName.toString().toLowerCase()
+                + " cannot be empty.");
 
-            switch (commandName) {
-            case TODO:
-                return new AddCommand(commandName, taskInfo);
-            case DEADLINE:
-                taskInfoParts = taskInfo.split(" /by ", 2);
-                description = taskInfoParts[0];
-                date = taskInfoParts[1];
-                return new AddCommand(commandName, description, date);
-            case EVENT:
-                taskInfoParts = taskInfo.split(" /at ", 2);
-                description = taskInfoParts[0];
-                date = taskInfoParts[1];
-                return new AddCommand(commandName, description, date);
-            default:
-                assert false : "There should only be 3 types of tasks, should not reach here";
-                return new AddCommand(commandName, "");
-            }
-        } catch (ArrayIndexOutOfBoundsException e) {
-            String emptyDescriptionErrorMessage = "OOPS!!! The description of a " + commandName.toString().toLowerCase()
-                + " cannot be empty.";
-            throw new DukeException(emptyDescriptionErrorMessage);
+        switch (commandName) {
+        case TODO:
+            return new AddCommand(commandName, taskInfo);
+        case DEADLINE:
+            return handleDeadlineAndEvent(taskInfo, " /by ", commandName);
+        case EVENT:
+            return handleDeadlineAndEvent(taskInfo, " /at ", commandName);
+        default:
+            assert false : "There should only be 3 types of tasks, should not reach here";
+            return new AddCommand(commandName, "");
         }
+    }
+
+    private static Command handleDeadlineAndEvent(
+            String taskInfo, String toSplitBy, CommandName commandName) throws DukeException {
+
+        String [] taskInfoParts = taskInfo.split(toSplitBy, 2);
+        String description = taskInfoParts[0];
+        String date = tryGetSecondElement(taskInfoParts,
+                "OOPS!!! The date of a "
+                        + commandName.toString().toLowerCase()
+                        + " cannot be empty.");
+        return new AddCommand(commandName, description, date);
     }
 
     private static CommandName checkCommandNameEnum(String action) throws DukeException {

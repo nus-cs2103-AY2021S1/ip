@@ -38,10 +38,12 @@ class TaskList {
             TaskNameInStorage taskNameInStorage = TaskNameInStorage.valueOf(taskNameString);
             switch (taskNameInStorage) {
             case D:
-                handleDeadline(description, taskString.get(3), isDone);
+                String dateString = taskString.get(3);
+                handleDeadline(description, dateString, isDone);
                 break;
             case E:
-                handleEvent(description, taskString.get(3), isDone);
+                dateString = taskString.get(3);
+                handleEvent(description, dateString, isDone);
                 break;
             case T:
                 handleTodo(description, isDone);
