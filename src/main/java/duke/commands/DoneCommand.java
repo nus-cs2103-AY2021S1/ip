@@ -3,6 +3,7 @@ package duke.commands;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.FileError;
 import duke.exception.InvalidCommand;
 import duke.tasks.Task;
 
@@ -33,8 +34,9 @@ public class DoneCommand extends Command {
      * @param taskList List of tasks added by users so far.
      * @return UI message after executing done command.
      * @throws InvalidCommand Invalid task number given.
+     * @throws FileError Unable to process data file.
      */
-    public String execute(Ui ui, Storage listStorage, TaskList taskList) throws InvalidCommand {
+    public String execute(Ui ui, Storage listStorage, TaskList taskList) throws InvalidCommand, FileError {
         try {
             Task editedTask = taskList.get(this.taskIndex);
             listStorage.editTask(editedTask, this.taskIndex, taskList);

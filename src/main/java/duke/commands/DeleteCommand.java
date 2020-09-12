@@ -3,6 +3,7 @@ package duke.commands;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.FileError;
 import duke.exception.InvalidCommand;
 import duke.tasks.Task;
 
@@ -32,9 +33,10 @@ public class DeleteCommand extends Command {
      * @param taskList List of tasks added by users so far.
      * @return UI message after executing delete command.
      * @throws InvalidCommand Invalid task number given.
+     * @throws FileError Unable to process data file.
      */
     @Override
-    public String execute(Ui ui, Storage listStorage, TaskList taskList) throws InvalidCommand {
+    public String execute(Ui ui, Storage listStorage, TaskList taskList) throws InvalidCommand, FileError {
         try {
             Task removedTask = taskList.removeTask(itemIndex);
             listStorage.deleteTask(removedTask);

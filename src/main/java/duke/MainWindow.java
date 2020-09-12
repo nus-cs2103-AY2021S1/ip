@@ -56,9 +56,7 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        String formattedInput = "______________________________________________________"
-                + "\n" + input + "\n"
-                + "______________________________________________________";
+        String formattedInput = Ui.formatUserInput(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(formattedInput, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)

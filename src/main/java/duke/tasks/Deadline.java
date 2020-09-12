@@ -27,7 +27,7 @@ public class Deadline extends Task {
      * @return Representation of deadline task in backend data storage.
      */
     public String getDataStorageName() {
-        return "D | " + (super.getStatus() == "\u2713" ? "1" : "0") + " | " + super.getTaskName() + " | "
+        return "D | " + (super.getStatus() == "Completed" ? "1" : "0") + " | " + super.getTaskName() + " | "
                 + this.time;
     }
 

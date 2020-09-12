@@ -27,7 +27,7 @@ public class Event extends Task {
      * @return Representation of event task in backend data storage.
      */
     public String getDataStorageName() {
-        return "E | " + (super.getStatus() == "\u2713" ? "1" : "0") + " | " + super.getTaskName() + " | "
+        return "E | " + (super.getStatus() == "Completed" ? "1" : "0") + " | " + super.getTaskName() + " | "
                 + this.time;
     }
 

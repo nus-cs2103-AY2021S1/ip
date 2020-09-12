@@ -24,6 +24,8 @@ import duke.tasks.ToDo;
  *
  */
 public class Parser {
+    private static final int ITEM_NOT_FOUND_INDEX = -1;
+
     public Parser() {
     }
 
@@ -47,8 +49,7 @@ public class Parser {
             AddCommand newCommand = processEvent(command);
             return newCommand;
         } else if (command.contains("list")) {
-            processList(command);
-            ListCommand newCommand = new ListCommand();
+            ListCommand newCommand = processList(command);
             return newCommand;
         } else if (command.contains("delete")) {
             DeleteCommand newCommand = processDelete(command);
@@ -71,14 +72,15 @@ public class Parser {
 
     private static TagCommand processTag(String command) throws InvalidCommand {
         try {
-            int taskIndex = -1;
+            int taskIndex;
             try {
-                taskIndex = Integer.parseInt(command.substring(4, 5)) - 1;
+                taskIndex = Integer.parseInt(command.substring(4, 5));
             } catch (NumberFormatException ex) {
                 throw new InvalidCommand("Please enter task number instead of task name!");
             }
+            int taskIndexInList = taskIndex - 1;
             String tagWord = command.substring(6);
-            TagCommand tc = new TagCommand(taskIndex, tagWord);
+            TagCommand tc = new TagCommand(taskIndexInList, tagWord);
             return tc;
         } catch (StringIndexOutOfBoundsException ex) {
             throw new InvalidCommand("OOPS!!! Please specify your task.");
@@ -105,24 +107,26 @@ public class Parser {
         }
         try {
             int deleteIndex = Integer.parseInt(deleteInput[1]);
-            DeleteCommand dc = new DeleteCommand(deleteIndex - 1);
+            int indexInTaskList = deleteIndex - 1;
+            DeleteCommand dc = new DeleteCommand(indexInTaskList);
             return dc;
         } catch (NumberFormatException ex) {
             throw new InvalidCommand("Please enter a valid task number");
         }
     }
 
-    private static void processList(String command) throws InvalidCommand {
+    private static ListCommand processList(String command) throws InvalidCommand {
         if (command.split(" ").length > 1) {
             throw new InvalidCommand("You have to view your entire to-do list!");
         }
+        return new ListCommand();
     }
 
     private static AddCommand processEvent(String command) throws InvalidCommand {
         try {
             String eventInput = command.substring(6);
             int indexSeparator = eventInput.indexOf("/at");
-            if (indexSeparator == -1) {
+            if (indexSeparator == ITEM_NOT_FOUND_INDEX) {
                 throw new InvalidCommand("Please include your event date using /at !");
             }
             String eventTaskName = eventInput.substring(0, indexSeparator - 1);
@@ -142,7 +146,7 @@ public class Parser {
         try {
             String deadlineInput = command.substring(9);
             int indexSeparator = deadlineInput.indexOf("/by");
-            if (indexSeparator == -1) {
+            if (indexSeparator == ITEM_NOT_FOUND_INDEX) {
                 throw new InvalidCommand("Please include your deadline using /by !");
             }
             String deadlineTaskName = deadlineInput.substring(0, indexSeparator - 1);
@@ -153,6 +157,8 @@ public class Parser {
             return ac;
         } catch (StringIndexOutOfBoundsException ex) {
             throw new InvalidCommand("OOPS!!! Please specify your task.");
+        } catch (DateTimeParseException ex) {
+            throw new InvalidCommand ("OOPS!!! Invalid date.");
         }
     }
 
@@ -177,13 +183,14 @@ public class Parser {
         } else if (doneInputs.length > 2) {
             throw new InvalidCommand("OOPS!!! Please enter 1 task number only");
         }
-        int taskToDo = -1;
+        int taskToDo;
         try {
             taskToDo = Integer.parseInt(doneInputs[1]);
         } catch (NumberFormatException ex) {
             throw new InvalidCommand("Please enter task number instead of task name!");
         }
-        DoneCommand dc = new DoneCommand(taskToDo - 1);
+        int indexInTaskList = taskToDo - 1;
+        DoneCommand dc = new DoneCommand(indexInTaskList);
         return dc;
     }
 }

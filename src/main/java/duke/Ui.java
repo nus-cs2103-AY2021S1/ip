@@ -2,8 +2,6 @@ package duke;
 
 import java.util.Scanner;
 
-import duke.exception.InvalidCommand;
-import duke.parser.Parser;
 import duke.tasks.Task;
 
 /**
@@ -11,10 +9,9 @@ import duke.tasks.Task;
  */
 public class Ui {
     private static final Scanner sc = new Scanner(System.in);
-    private static final String lines = "______________________________________________________";
+    private static final String LINES = "______________________________________________________";
     private String logo;
     private String defaultGreeting;
-    private Parser commandParser;
 
     /**
      * Creates a UI object with storage object and current task list.
@@ -35,17 +32,21 @@ public class Ui {
                 + "                             888" + "                            " + "     " + "\n" + "  "
                 + "                                       " + "  Y8b d88P                                 \n"
                 + "                                       "
-                + "     \"Y88P\"                                  ";
-        this.defaultGreeting = Ui.lines + "\n" + "     Hello! I'm Chatty Bot ^~^ \n"
+                + "     \"Y88P\"      lines                            ";
+        this.defaultGreeting = Ui.LINES + "\n" + "     Hello! I'm Chatty Bot ^~^ \n"
                 + "     What can I do for you?\n" + "Type 'help' if you wish to know more about"
-                + " what I can do!" + "\n" + Ui.lines + "\n";
-        this.commandParser = new Parser();
+                + " what I can do!" + "\n" + Ui.LINES + "\n";
     }
 
+    /**
+     * Returns UI message to signal that all data file has been loaded correctly.
+     *
+     * @return Files found UI message.
+     */
     public static String allFilesFound() {
-        return "________________________________________________________" + "\n"
+        return Ui.LINES + "\n"
                 + "     Found directories and file" + "\n"
-                + "________________________________________________________" + "\n";
+                + Ui.LINES + "\n";
     }
 
     /**
@@ -73,8 +74,8 @@ public class Ui {
      * @return Load files message.
      */
     public String loadFile() {
-        String loadFileMessage = Ui.lines + "\n" + "     Previously saved list (if any) loaded."
-                + " You may enter your commands now:" + "\n" + Ui.lines;
+        String loadFileMessage = Ui.LINES + "\n" + "     Previously saved list (if any) loaded."
+                + " You may enter your commands now:" + "\n" + Ui.LINES;
         return loadFileMessage;
     }
 
@@ -84,10 +85,10 @@ public class Ui {
      * @return Directory added message.
      */
     public static String addDirectory() {
-        String addDirectorymessage = "______________________________________________________"
+        String addDirectorymessage = Ui.LINES
                 + "\n" + "     I see that you do not have a directory to store data. "
                 + "Created one for you before we proceed." + "\n"
-                + "______________________________________________________";
+                + Ui.LINES;
         return addDirectorymessage;
     }
 
@@ -97,10 +98,10 @@ public class Ui {
      * @return Adds data file message.
      */
     public static String addDataFile() {
-        String addDataFileMessage = "______________________________________________________" + "\n"
+        String addDataFileMessage = Ui.LINES + "\n"
                 + "     I see that this is your first time using Chatty Bot, "
                 + "I have created a file to log your history from now on!" + "\n"
-                + "______________________________________________________";
+                + Ui.LINES;
         return addDataFileMessage;
     }
 
@@ -113,8 +114,8 @@ public class Ui {
      */
     public String markAsDone(int taskIndex, TaskList currList) {
         assert currList.contains(currList.get(taskIndex)) : "Something went wrong while marking as done!";
-        String markedDoneMessage = Ui.lines + "\n" + "     Nice! I've marked this task as done:"
-                + "\n" + "       " + currList.get(taskIndex) + "\n" + Ui.lines;
+        String markedDoneMessage = Ui.LINES + "\n" + "     Nice! I've marked this task as done:"
+                + "\n" + "       " + currList.get(taskIndex) + "\n" + Ui.LINES;
         return markedDoneMessage;
     }
 
@@ -127,9 +128,9 @@ public class Ui {
      */
     public String addTask(Task newTask, TaskList currList) {
         assert currList.getNumTask() >= 0 : "Something went wrong in your task list!";
-        String taskAddedUi = Ui.lines + "\n" + "     Got it. I've added this task:" + "\n" + "       "
+        String taskAddedUi = Ui.LINES + "\n" + "     Got it. I've added this task:" + "\n" + "       "
                 + newTask + "\n" + "     Now you have " + String.valueOf(currList.getNumTask())
-                + " task(s) in the list." + "\n" + Ui.lines;
+                + " task(s) in the list." + "\n" + Ui.LINES;
         return taskAddedUi;
     }
 
@@ -140,8 +141,8 @@ public class Ui {
      * @return UI message of task list.
      */
     public String listItems(TaskList currList) {
-        String listInString = Ui.lines + "\n" + "     Here are the tasks in your list:" + "\n"
-                + currList.listItems() + Ui.lines + "\n";
+        String listInString = Ui.LINES + "\n" + "     Here are the tasks in your list:" + "\n"
+                + currList.listItems() + Ui.LINES + "\n";
         return listInString;
     }
 
@@ -153,9 +154,9 @@ public class Ui {
      * @return UI message of removed task.
      */
     public String deleteTask(Task removeTask, TaskList currList) {
-        String deleteMessage = Ui.lines + "\n" + "     Alright, the following task has been removed" + "\n"
+        String deleteMessage = Ui.LINES + "\n" + "     Alright, the following task has been removed" + "\n"
                 + "       " + removeTask + "\n" + "     Now you have " + String.valueOf(currList.getNumTask())
-                + " task(s) in the list." + "\n" + Ui.lines;
+                + " task(s) in the list." + "\n" + Ui.LINES;
         return deleteMessage;
     }
 
@@ -165,9 +166,9 @@ public class Ui {
      * @param ex Relevant invalid command message.
      * @return String representation of invalid action attempted.
      */
-    public static String commandError(InvalidCommand ex) {
-        String invalidCommandMessage = "______________________________________________________" + "\n"
-                + "     " + ex + "\n" + "______________________________________________________";
+    public static String commandError(Exception ex) {
+        String invalidCommandMessage = Ui.LINES + "\n"
+                + "     " + ex + "\n" + Ui.LINES;
         return invalidCommandMessage;
     }
 
@@ -177,7 +178,7 @@ public class Ui {
      * @return UI message for goodbye.
      */
     public String goodBye() {
-        String endGreeting = Ui.lines + "\n" + "     Bye. Hope to see you again soon!\n" + Ui.lines;
+        String endGreeting = Ui.LINES + "\n" + "     Bye. Hope to see you again soon!\n" + Ui.LINES;
         return endGreeting;
     }
 
@@ -188,8 +189,8 @@ public class Ui {
      * @return UI message for found tasks.
      */
     public String printFoundItems(TaskList foundTasks, String keyword) {
-        String foundItemsMessage = Ui.lines + "\n" + "     Here are the matching tasks for keyword \""
-                + keyword + "\" in your list:" + "\n" + foundTasks.listItems() + Ui.lines;
+        String foundItemsMessage = Ui.LINES + "\n" + "     Here are the matching tasks for keyword \""
+                + keyword + "\" in your list:" + "\n" + foundTasks.listItems() + Ui.LINES;
         return foundItemsMessage;
     }
 
@@ -221,12 +222,16 @@ public class Ui {
         String markTaskAsDoneInstructions = "     You can mark a task as done using the done command"
                 + " in the form of done <task number>. e.g. 'done 3' marks the 3rd task in the task list"
                 + " as done.";
+        String tagTaskInstructions = "     You can tag a task using the tag command"
+                + " in the form of tag <task number> <tag word>. e.g. 'tag 1 fun' tags the 1st task"
+                + " in the task list as #fun.";
         String exitBotInstructions = "     If you are done editing your task list, feel free to close down"
                 + "  this bot with the bye command by typing 'bye'.";
-        String helpMessageToBePrinted = Ui.lines + "\n" + helpMessage + "\n" + addTasksInstructions
+        String helpMessageToBePrinted = Ui.LINES + "\n" + helpMessage + "\n" + addTasksInstructions
                 + addToDoInstructions + "\n" + addDeadlineInstructions + "\n" + addEventInstructions
                 + "\n" + deleteTaskInstructions + "\n" + listTasksInstructions + "\n" + findTasksInstructions
-                + "\n" + markTaskAsDoneInstructions + "\n" + exitBotInstructions + "\n" + Ui.lines + "\n";
+                + "\n" + markTaskAsDoneInstructions + "\n" + tagTaskInstructions + "\n" + exitBotInstructions
+                + "\n" + Ui.LINES + "\n";
         return helpMessageToBePrinted;
     }
 
@@ -240,9 +245,27 @@ public class Ui {
         return loadData;
     }
 
+    /**
+     * Returns UI message when a task is tagged.
+     *
+     * @param tagTask Task that has been tagged.
+     * @param tagWord Tag word used to tag the task.
+     * @return Task tagged UI message.
+     */
     public String taggedTask(Task tagTask, String tagWord) {
-        String uiMessageForTaggedTask = Ui.lines + "\n" + "     Got it. I've tagged this task:" + "\n" + "       "
-                + tagTask + "\n" + Ui.lines;
+        String uiMessageForTaggedTask = Ui.LINES + "\n" + "     Got it. I've tagged this task:" + "\n" + "       "
+                + tagTask + "\n" + Ui.LINES;
         return uiMessageForTaggedTask;
+    }
+
+    /**
+     * Formats and returns user input.
+     *
+     * @param userInput Command entered by users.
+     * @return UI message of formatted user input.
+     */
+    public static String formatUserInput(String userInput) {
+        String formattedUserInput = Ui.LINES + "\n" + userInput + "\n" + Ui.LINES;
+        return formattedUserInput;
     }
 }

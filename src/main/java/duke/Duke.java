@@ -2,6 +2,7 @@ package duke;
 
 import duke.commands.ByeCommand;
 import duke.commands.Command;
+import duke.exception.FileError;
 import duke.exception.InvalidCommand;
 import duke.parser.Parser;
 
@@ -43,12 +44,16 @@ public class Duke {
         String uiMessage = "";
         try {
             Command c = Parser.parse(input);
+
             assert c != null : "Something went wrong!";
+
             if (c != null) {
-                uiMessage = c.execute(this.ui, this.listStorage, this.taskList);
                 checkExit(c);
+                uiMessage = c.execute(this.ui, this.listStorage, this.taskList);
             }
         } catch (InvalidCommand ex) {
+            uiMessage = Ui.commandError(ex);
+        } catch (FileError ex) {
             uiMessage = Ui.commandError(ex);
         }
         return uiMessage;
@@ -72,7 +77,7 @@ public class Duke {
         String uiMessage = "";
         try {
             uiMessage = this.ui.loadStorage(this.listStorage.loadData(this.taskList));
-        } catch (InvalidCommand ex) {
+        } catch (FileError ex) {
             Ui.commandError(ex);
         }
         return uiMessage;

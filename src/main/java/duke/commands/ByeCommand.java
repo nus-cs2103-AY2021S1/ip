@@ -21,7 +21,6 @@ public class ByeCommand extends Command {
 
     /**
      * Executes main logic to exit the bot.
-     * Displays bye message to user.
      *
      * @param ui Ui used to generate messages to users.
      * @param listStorage Backend storage to store items in the task list.

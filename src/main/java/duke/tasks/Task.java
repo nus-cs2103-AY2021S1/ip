@@ -59,6 +59,11 @@ public class Task {
         return retrievedTagName;
     }
 
+    /**
+     * Tags a task with the given tag word by user.
+     *
+     * @param tagWord Tag word to be used to tag task.
+     */
     public void tagTask(String tagWord) {
         this.isTagged = true;
         this.tagName = "#" + tagWord;

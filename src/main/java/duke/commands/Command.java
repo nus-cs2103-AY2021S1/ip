@@ -3,6 +3,7 @@ package duke.commands;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
+import duke.exception.FileError;
 import duke.exception.InvalidCommand;
 
 /**
@@ -39,6 +40,9 @@ public abstract class Command {
      * @param listStorage
      * @param taskList
      * @return UI message representing the relevant execution.
+     * @throws InvalidCommand User input unknown command.
+     * @throws FileError Unable to process data file.
      */
-    public abstract String execute(Ui ui, Storage listStorage, TaskList taskList) throws InvalidCommand;
+    public abstract String execute(Ui ui, Storage listStorage, TaskList taskList)
+            throws InvalidCommand, FileError;
 }
