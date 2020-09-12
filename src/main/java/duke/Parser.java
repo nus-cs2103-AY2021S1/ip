@@ -87,7 +87,7 @@ public class Parser {
             Task task = taskList.getTasks().get(taskNumber - 1);
             taskList.removeTask(taskNumber - 1);
             return concatStrings("This task has been removed:\n", task.toString(),
-                    "\nNow you have " + taskList.getTasks().size(), " in the list.");
+                    "\nNow you have " + taskList.getTasks().size(), " tasks in the list.");
         } catch (IndexOutOfBoundsException e) {
             return INVALID_TASK_NUMBER;
         } catch (NoSuchElementException e) {
