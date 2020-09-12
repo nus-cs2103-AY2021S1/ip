@@ -2,53 +2,47 @@
 ### Yuki is a personal assistant chatbot that helps to keep track of tasks.
 
 ## Features 
-    * Add tasks
-    * Delete tasks
-    * List all tasks
-    * Mark task as completed
-    * Search for task(s) using keywords
-    * Search for task(s) on particular day
-    * Undo a command
+    - Add tasks
+    - Delete tasks
+    - List all tasks
+    - Mark task as completed
+    - Search for task(s) using keywords
+    - Search for task(s) on particular day
+    - Undo a command
     
 ### Feature 1 
 #### Yuki accepts mainly 3 types of task, including `todo`, `deadline`, `event`.
 
 1. Add a `todo` task:
-`todo` refers to a task with no date/time involved. To add such a task, make use of command `todo {descriptionOfTask}`, press `Enter` to execute.
-
-Example of usage: 
-`todo pay mobile bill` 
-
-Expected outcome:
-`[T][✘] pay mobile bill`
+`todo` refers to a task with no date/time involved. To add such a task, make use of command `todo {descriptionOfTask
+}`, press `Enter` to execute.
+                                                                                                                              
+    Example of usage: `todo pay mobile bill`                 
+    
+    Expected outcome: `[T][✘] pay mobile bill`
 
 2. Add a `deadline` task:
 `deadline` refers to a task with date involved, specifying time is optional. To add such a task, make use of command  `deadline {descriptionOfTask} /by YYYY/MM/DD` or  `deadline {descriptionOfTask} /by YYYY/MM/DD HH:MM`, press `Enter` to execute. 
 
-Example of usage:
-`deadline CS2103T IP Submission /by 2020/09/18 12:00`
-
-Expected outcome:
-`[D][✘] CS2103T IP Submission (FINISH by: 18 September 2020 12:00)`
+    Example of usage: `deadline CS2103T IP Submission /by 2020/09/18 12:00`
+    
+    Expected outcome: `[D][✘] CS2103T IP Submission (FINISH by: 18 September 2020 12:00)`
 
 3. Add an `event` task:
 `event` refers to task with date, start time and end time. To add such a task, make use of command `event {descriptionOfTask} /by YYYY/MM/DD HH:MM-HH:MM`, press `Enter` to execute.
 
-Example of usage:
-`Event CS2103T Finals /at 2020/12/01 12:00-14:00`
+    Example of usage: `Event CS2103T Finals /at 2020/12/01 12:00-14:00`
 
-Expected outcome:
-`[E][✘] CS2103T Finals (APPEAR at: 01 December 2020 12:00-14:00)`
+    Expected outcome: `[E][✘] CS2103T Finals (APPEAR at: 01 December 2020 12:00-14:00)`
 
 ### Feature 2
 To delete a task permanently from storage, make use of command `delete {taskNumber}`. The taskNumber of a specific task can be found using the `list` command, press `Enter` to execute.
 
-Example of usage:
-`delete 5`
+Example of usage: `delete 5`
 
-Expected outcome:
-`*Woof* I have removed:`
-`   [T][✘] pay mobile bill`
+Expected outcome: <br />
+`*Woof* I have removed:` <br />
+`   [T][✘] pay mobile bill` <br />
 `Now you have 4 tasks in the list. Keep going!!`
 
 ### Feature 3
@@ -57,10 +51,10 @@ To display all tasks in storage, make use of command  `list`, press `Enter` to e
 Example of usuage:
 `list`
 
-Expected outcome:
-`Here are the tasks in your list *Woof*:`
-`   1. [D][✓] CS2103T IP Submission (FINISH by: 18 September 2020 12:00)`
-        ...
+Expected outcome: <br />
+`Here are the tasks in your list *Woof*:`<br />
+`1. [D][✓] CS2103T IP Submission (FINISH by: 18 September 2020 12:00)`<br />
+...
 
 ### Feature 4 
 To mark a specific task as completed, make use of command `done {taskNumber}`. The taskNumber of a specific task can be found using the `list` command, press `Enter` to execute.
@@ -68,9 +62,9 @@ To mark a specific task as completed, make use of command `done {taskNumber}`. T
 Example of usage:
 `done 4`
 
-Expected outcome:
-`Good Job!!! You cleared this task:`
-`   [D][✓] CS2103T IP Submission (FINISH by: 18 September 2020 12:00)`
+Expected outcome: <br />
+`Good Job!!! You cleared this task:`<br />
+`[D][✓] CS2103T IP Submission (FINISH by: 18 September 2020 12:00)`
 
 ### Feature 5
 To search for task(s) containing specific keyword(s), make use of the command `find {keyword1} ... {keywordN}`, press `Enter` to execute.
@@ -78,10 +72,10 @@ To search for task(s) containing specific keyword(s), make use of the command `f
 Example of usage:
 `find finals submission`
 
-Expected outcome:
-`Here is the list of matching tasks in your storage:`
-`   1. [D][✓] CS2103T IP Submission (FINISH by: 18 September 2020 12:00)`
-`   2. [E][✘] CS2103T Finals (APPEAR at: 01 December 2020 12:00-14:00)`.
+Expected outcome: <br />
+`Here is the list of matching tasks in your storage:`<br />
+`1. [D][✓] CS2103T IP Submission (FINISH by: 18 September 2020 12:00)`<br />
+`2. [E][✘] CS2103T Finals (APPEAR at: 01 December 2020 12:00-14:00)`.
 
 ### Feature 6
 To check for task(s) occuring on a particular day, make use of the command `check YYYY:MM:DD`, press `Enter` to execute.
@@ -89,13 +83,13 @@ To check for task(s) occuring on a particular day, make use of the command `chec
 Example of usage:
 `check 2020/09/18`
 
-Expected outcome:
-`Here is the list of ongoing tasks on 20 September 2020:`
-`   1. [D][✓] CS2103T IP Submission (FINISH by: 18 September 2020 12:00)`
-        ...
+Expected outcome: <br />
+`Here is the list of ongoing tasks on 20 September 2020:`<br />
+`1. [D][✓] CS2103T IP Submission (FINISH by: 18 September 2020 12:00)`<br />
+...
 
 ### Feature 7
 To undo any of the commands that can be undone (eg. add, delete, done), make use of the command `undo`, press `enter` to execute.
 
 ### Feature 8
-At any point in time where you require assistance in using the bot, make use of the command `help` to access the list of commands available and its format. 
+At any point in time you require assistance in using the bot, make use of the command `help` to access the list of commands available and its format. 
