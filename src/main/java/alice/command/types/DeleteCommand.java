@@ -16,7 +16,7 @@ import alice.task.TaskList;
  * Represents the command to delete a task from ALICE.
  */
 public class DeleteCommand implements Command {
-    protected static final List<String> NAMES = List.of("delete", "rm", "remove");
+    protected static final List<String> NAMES = List.of("delete", "del", "rm");
     protected static final String DESCRIPTION = "Delete a task";
     protected static final String USE_CASE = "[" + String.join(", ", NAMES) + "] <task number>";
 

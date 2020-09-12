@@ -22,7 +22,7 @@ import javafx.util.Duration;
  * Controller for MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow {
-    private static final Font SYSTEM_FONT = new Font(12);
+    private static final Font SYSTEM_FONT = new Font(14);
 
     @FXML
     private ScrollPane scrollPane;
@@ -51,7 +51,7 @@ public class MainWindow {
 
         fxmlLoader.load();
         this.primaryStage = primaryStage;
-        primaryStage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/icon.png")));
+        primaryStage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/alice.png")));
     }
 
     /**
@@ -67,7 +67,7 @@ public class MainWindow {
      */
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        displaySystemMessage(String.format("<%s>", alice.getLoadStatus()));
+        displaySystemMessage(alice.getLoadStatus());
         welcomeUser();
     }
 
@@ -85,9 +85,9 @@ public class MainWindow {
 
         DialogBox responseBubble;
         if (result.isCommandFailure()) {
-            responseBubble = respondToUser("ERROR: " + result.getMessage());
+            responseBubble = respondToUser(result.getMessage(), true);
         } else {
-            responseBubble = respondToUser(result.getMessage());
+            responseBubble = respondToUser(result.getMessage(), false);
         }
 
         if (result.shouldExit()) {
@@ -99,8 +99,14 @@ public class MainWindow {
         userInput.clear();
     }
 
-    private DialogBox respondToUser(String response) {
-        DialogBox db = DialogBox.getAliceDialog(response);
+    private DialogBox respondToUser(String response, boolean isError) {
+        DialogBox db;
+        if (isError) {
+            db = DialogBox.getErrorDialog(response);
+        } else {
+            db = DialogBox.getAliceDialog(response);
+        }
+
         dialogContainer.getChildren().add(db);
         return db;
     }
@@ -118,14 +124,14 @@ public class MainWindow {
 
     private void welcomeUser() {
         respondToUser("Hello! I'm Alice\n"
-                + "How can I help you today?");
+                + "How can I help you today?", false);
     }
 
     private void displaySystemMessage(String message) {
-        Label sysMessage = new Label(message);
+        Label sysMessage = new Label(String.format("<%s>", message));
         sysMessage.setFont(SYSTEM_FONT);
         sysMessage.setWrapText(true);
-        sysMessage.setTextFill(Paint.valueOf("lightgreen"));
+        sysMessage.setTextFill(Paint.valueOf("aliceblue"));
 
         dialogContainer.getChildren().add(sysMessage);
     }

@@ -12,10 +12,13 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.control.Tooltip;
+import javafx.scene.effect.BlurType;
+import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.scene.shape.Circle;
 
@@ -81,9 +84,31 @@ public class DialogBox extends HBox {
     public static DialogBox getAliceDialog(String text) {
         DialogBox db = new DialogBox(text, ALICE_AVATAR);
         db.flip();
-        db.chatBubble.setStyle("-fx-background-color: darkslateblue; -fx-background-radius: 15");
+        db.chatBubble.setStyle("-fx-background-color: ghostwhite; -fx-background-radius: 15");
         HBox.setMargin(db.chatBubble, new Insets(0, 15, 0, 5));
-        db.dialog.setTextFill(Paint.valueOf("white"));
+        db.dialog.setTextFill(Paint.valueOf("black"));
+        return db;
+    }
+
+    /**
+     * Creates an error dialog box with the given string input as dialog text.
+     *
+     * @param text the dialog string error output by Alice.
+     * @return the corresponding DialogBox representing Alice's error feedback to the user's input.
+     */
+    public static DialogBox getErrorDialog(String text) {
+        DialogBox db = getAliceDialog(text);
+
+        DropShadow errorShadow = new DropShadow();
+        errorShadow.setBlurType(BlurType.GAUSSIAN);
+        errorShadow.setRadius(10.0);
+        errorShadow.setHeight(20);
+        errorShadow.setWidth(30);
+        errorShadow.setColor(Color.PALEVIOLETRED);
+        db.chatBubble.setEffect(errorShadow);
+
+        db.chatBubble.setStyle("-fx-background-color: plum; -fx-background-radius: 15");
+
         return db;
     }
 
@@ -109,7 +134,7 @@ public class DialogBox extends HBox {
         circle.setStrokeWidth(0.0);
         Tooltip tooltip = new Tooltip("Saved failed");
         if (saveStatus == SaveStatus.SAVE_SUCCESS) {
-            circle.setFill(Paint.valueOf("lawngreen"));
+            circle.setFill(Paint.valueOf("springgreen"));
             tooltip.setText("Save successful");
         }
 
