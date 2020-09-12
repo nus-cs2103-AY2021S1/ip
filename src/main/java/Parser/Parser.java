@@ -5,8 +5,12 @@ import static java.lang.Integer.parseInt;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.time.format.DateTimeParseException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.Set;
 
 import dukeexception.DukeException;
 import storage.Storage;
@@ -93,6 +97,26 @@ public class Parser {
         return result;
     }
 
+    protected Integer[] removeDuplicates(Integer[] array) {
+        int length = array.length;
+        ArrayList<Integer> tempArr = new ArrayList<>();
+        Set<Integer> set = new HashSet<>();
+
+        for (int i = 0; i < length; i++) {
+            set.add(array[i]);
+        }
+
+        Iterator iter = set.iterator();
+        while (iter.hasNext()) {
+            tempArr.add((int) iter.next());
+        }
+        Integer[] resultArr = new Integer[tempArr.size()];
+        for (int j = 0; j < tempArr.size(); j++) {
+            resultArr[j] = tempArr.get(j);
+        }
+        return resultArr;
+    }
+
     /**
      * Handles the command for done.
      * @param command the user's input
@@ -107,7 +131,7 @@ public class Parser {
             try {
                 assert doneCommand[0].equals("done");
                 String[] strIndexes = command.split(" ");
-                int[] indexes = new int[strIndexes.length - 1];
+                Integer[] indexes = new Integer[strIndexes.length - 1];
                 for (int i = 1; i < strIndexes.length; i++) {
                     indexes[i - 1] = parseInt(strIndexes[i]);
                 }
@@ -115,6 +139,8 @@ public class Parser {
                 for (int i : indexes) {
                     reply = tasks.getFromList(i).toString();
                 }
+
+                indexes = removeDuplicates(indexes);
 
                 reply = "Completing tasks...\n";
                 reply += setMultipleDoneTask(indexes);
@@ -130,7 +156,7 @@ public class Parser {
         }
     }
 
-    protected String setMultipleDoneTask(int ... indexes) {
+    protected String setMultipleDoneTask(Integer ... indexes) {
         String reply = "";
         try {
             for (int index : indexes) {
@@ -172,11 +198,14 @@ public class Parser {
                     reply = tasks.getFromList(i).toString();
                 }
 
+                indexes = removeDuplicates(indexes);
+
                 Arrays.sort(indexes, Collections.reverseOrder());
+
 
                 reply = "Deleting tasks...\n";
                 reply += deleteMultipleTasks(indexes);
-                reply += "You now have " + storage.getNumOfTasks() + " tasks.";
+                reply += "You now have " + tasks.getNumList() + " tasks.";
 
 
             } catch (IndexOutOfBoundsException e) {

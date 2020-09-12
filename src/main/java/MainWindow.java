@@ -61,7 +61,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        if (input.equals("bye")) {
+        if (input.toLowerCase().equals("bye")) {
             String response = cait.getResponse(input);
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input, userImage),

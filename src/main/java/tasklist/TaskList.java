@@ -1,5 +1,6 @@
 package tasklist;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import storage.Storage;
@@ -18,6 +19,8 @@ public class TaskList {
 
     /** Storage for storing user's data */
     private Storage storage;
+
+    private String fileName = "cait_data.txt";
 
     /**
      * Constructs a new TaskList object.
@@ -52,7 +55,7 @@ public class TaskList {
      * Gets the number of tasks in the task list.
      * @return the number of tasks in the task list.
      */
-    protected int getNumList() {
+    public int getNumList() {
         return this.tasks.size();
     }
 
@@ -156,9 +159,12 @@ public class TaskList {
      * Prints out all the tasks in the task list.
      */
     public String readList() {
+        tasks = storage.load();
         String reply = "";
         if (tasks.isEmpty()) {
             reply = "Looks like you don't have any tasks! Go on and add some!";
+            File currFile = new File(fileName);
+            currFile.delete();
         } else {
             reply += "Here's all your tasks to complete:\n";
             int i = 1;

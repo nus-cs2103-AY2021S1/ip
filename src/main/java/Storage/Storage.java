@@ -82,6 +82,7 @@ public class Storage {
             }
             return taskList;
         } catch (IOException e) {
+            System.out.println("load()");
             printFileError();
             return taskList;
         }
@@ -118,6 +119,7 @@ public class Storage {
             sc.close();
             return count;
         } catch (FileNotFoundException e) {
+            System.out.println("getnumtasks()");
             printFileError();
         }
         return 0;
@@ -134,6 +136,7 @@ public class Storage {
                 ;
             }
         } catch (IOException e) {
+            System.out.println("createfile()");
             printFileError();
         }
     }
@@ -194,6 +197,7 @@ public class Storage {
             Storage data = new Storage(this.fileName, true);
             data.writeToFile(text);
         } catch (IOException e) {
+            System.out.println("savedata()");
             printFileError();
         }
     }
@@ -217,32 +221,39 @@ public class Storage {
      * @throws IOException if there is a problem reading the file
      */
     public void deleteFromFile(int lineNumber) throws IOException {
-        File currFile = new File(this.fileName);
-        File tempFile = new File(tempFileName);
-        BufferedReader reader = new BufferedReader(new FileReader(currFile));
-        BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+        try {
+            File currFile = new File(this.fileName);
+            File tempFile = new File(tempFileName);
+            BufferedReader reader = new BufferedReader(new FileReader(currFile));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
 
-        lineNumber = lineNumber - 1;
-        String lineToRemove = Files.readAllLines(Paths.get(this.fileName)).get(lineNumber);
-        String currLine;
+            lineNumber = lineNumber - 1;
+            String lineToRemove = Files.readAllLines(Paths.get(this.fileName)).get(lineNumber);
+            String currLine;
 
-        while ((currLine = reader.readLine()) != null) {
-            String trimLine = currLine.trim();
-            if (trimLine.equals(lineToRemove)) {
-                continue;
+            while ((currLine = reader.readLine()) != null) {
+                String trimLine = currLine.trim();
+                if (trimLine.equals(lineToRemove)) {
+                    continue;
+                }
+                writer.write(currLine + '\n');
             }
-            writer.write(currLine + '\n');
-        }
 
-        writer.close();
-        reader.close();
+            writer.close();
+            reader.close();
 
-        if (currFile.delete()) {
-            if (!tempFile.renameTo(currFile)) {
+            if (currFile.delete()) {
+                if (!tempFile.renameTo(currFile)) {
+                    System.out.println("delete");
+                    printFileError();
+                }
+            } else {
+                System.out.println("delete");
                 printFileError();
             }
-        } else {
-            printFileError();
+        } catch (Exception e) {
+            System.out.println("delete");
+            System.out.println(e);
         }
     }
 
@@ -252,37 +263,44 @@ public class Storage {
      * @throws IOException if there is a problem reading the file
      */
     public void setDoneLine(int lineNumber) throws IOException {
-        File currFile = new File(this.fileName);
-        File tempFile = new File(tempFileName);
-        BufferedReader reader = new BufferedReader(new FileReader(currFile));
-        BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
+        try {
+            File currFile = new File(this.fileName);
+            File tempFile = new File(tempFileName);
+            BufferedReader reader = new BufferedReader(new FileReader(currFile));
+            BufferedWriter writer = new BufferedWriter(new FileWriter(tempFile));
 
-        assert lineNumber > 0;
-        lineNumber = lineNumber - 1;
-        String lineToUpdate = Files.readAllLines(Paths.get(this.fileName)).get(lineNumber);
-        String[] taskInfo = lineToUpdate.trim().split(" [|] ");
-        taskInfo[1] = String.valueOf(1);
-        String doneLine = String.join(" | ", taskInfo);
-        String currLine;
+            assert lineNumber > 0;
+            lineNumber = lineNumber - 1;
+            String lineToUpdate = Files.readAllLines(Paths.get(this.fileName)).get(lineNumber);
+            String[] taskInfo = lineToUpdate.trim().split(" [|] ");
+            taskInfo[1] = String.valueOf(1);
+            String doneLine = String.join(" | ", taskInfo);
+            String currLine;
 
-        while ((currLine = reader.readLine()) != null) {
-            String trimLine = currLine.trim();
-            if (trimLine.equals(lineToUpdate)) {
-                writer.write(doneLine + '\n');
-            } else {
-                writer.write(currLine + '\n');
+            while ((currLine = reader.readLine()) != null) {
+                String trimLine = currLine.trim();
+                if (trimLine.equals(lineToUpdate)) {
+                    writer.write(doneLine + '\n');
+                } else {
+                    writer.write(currLine + '\n');
+                }
             }
-        }
 
-        writer.close();
-        reader.close();
+            writer.close();
+            reader.close();
 
-        if (currFile.delete()) {
-            if (!tempFile.renameTo(currFile)) {
+            if (currFile.delete()) {
+                if (!tempFile.renameTo(currFile)) {
+                    System.out.println("done");
+                    printFileError();
+                }
+            } else {
+                System.out.println("done");
                 printFileError();
             }
-        } else {
-            printFileError();
+        } catch (Exception e) {
+            System.out.println("done");
+            System.out.println(e);
         }
     }
 
