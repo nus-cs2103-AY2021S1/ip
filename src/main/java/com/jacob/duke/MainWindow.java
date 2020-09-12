@@ -35,7 +35,7 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        String startUpString = "Hi there, I am Duke! Here are some commands that you can use to talk with me :)\n"
+        String startUpString = "Hi there, I am Duke! Here are some commands that you can use to talk to me :)\n"
                 + "\n\n\nBasic Commands:\n"
                 + "list: gets you list of currently stored tasks\n"
                 + "bye: terminates duke\n"

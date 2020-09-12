@@ -151,7 +151,7 @@ public class Ui {
      */
     public String showNoteDeleted(String noteDescription, List<Note> noteList) {
         assert (noteDescription != null && noteList != null);
-        return String.format(" Noted. I've removed this task:\n "
+        return String.format(" Noted. I've removed this note:\n "
                 + "   %s\n"
                 + " Now you have %d notes in the list.\n", noteDescription, noteList.size());
 
