@@ -24,6 +24,12 @@ public class Main {
 
         String usage = "Usage: java -jar duke.jar <cmd|gui>";
 
+        // Default to GUI for jar file
+        if (args.length == 0) {
+            setupLogger(Level.FINE);
+            runGui(args);
+        }
+
         if (args.length != 1) {
             System.out.println(usage);
             return;

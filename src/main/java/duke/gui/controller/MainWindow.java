@@ -24,7 +24,7 @@ import javafx.scene.layout.VBox;
  */
 public class MainWindow extends BorderPane {
 
-    private static final String WELCOME_MESSAGE = "Humans at your service!";
+    private static final String WELCOME_MESSAGE = "Welcome, my little penguins!";
 
     @FXML
     private VBox dialogContainer;
