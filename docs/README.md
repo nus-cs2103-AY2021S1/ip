@@ -18,7 +18,7 @@ Quickly filter through your lists of tasks by searching for tasks containing onl
 
 ### `list` - Display all tasks
 
-Displays a list of all added tasks.
+Display a list of all added tasks.
 
 Example of usage: 
 
@@ -36,7 +36,7 @@ Here are the tasks in your list:
 
 ### `todo <description>` - Add a new To-do item
 
-Adds a new to-do item to the list of tasks.
+Add a new to-do item to the list of tasks.
 
 Example of usage: 
 
@@ -51,7 +51,7 @@ Now you have 5 tasks in the list.
 
 ### `deadline <description> /by <date in YYYY-MM-dd format>` - Add a new Deadline item
 
-Adds a new deadline item to the list of tasks.
+Add a new deadline item to the list of tasks.
 
 Example of usage: 
 
@@ -66,7 +66,7 @@ Now you have 6 tasks in the list.
 
 ### `event <description> /at <date in YYYY-MM-dd format>` - Add a new Event item
 
-Adds a new event item to the list of tasks.
+Add a new event item to the list of tasks.
 
 Example of usage: 
 
@@ -81,7 +81,7 @@ Now you have 7 tasks in the list.
 
 ### `done <task ID>` - Mark a task as complete
 
-Marks the task with given task ID as complete. 
+Mark the task with given task ID as complete. 
 The task ID of a task is the number the accompanies it when you use the `list` command.
 
 Example of usage: 
@@ -94,7 +94,22 @@ Nice! I've marked this task as done:
 [E][✓] Birthday Celebration (at: Jan 1 2020)
 ```
 
-### `update <task ID> <command to create a todo, deadline, or event>` - Updates a task
+### `delete <task ID>` - Delete a task
+
+Delete the task with given task ID.
+
+Example of usage: 
+
+`delete 7`
+
+Expected outcome:
+```
+Noted. I've removed this task:
+[E][✘] Submit assignment (at: Oct 30 2020)
+Now you have 6 tasks in the list.
+```
+
+### `update <task ID> <command to create a todo, deadline, or event>` - Update a task
 
 Update the tasks with given task ID. 
 The task ID of a task is the number the accompanies it when you use the `list` command.
@@ -114,7 +129,6 @@ Here's your updated task list:
 4. [D][✘] Online Quiz (by: Oct 10 2020)
 5. [T][✘] Submit assigment
 6. [D][✘] Submit assignment (by: Oct 30 2020)
-7. [E][✘] Submit assignment (at: Oct 30 2020)
 ```
 
 ### `find <keyword>` - Search for tasks with keyword
@@ -131,7 +145,6 @@ Here are the matching tasks in your list:
 1. [T][✓] Submit assignment
 2. [D][✘] Programming Assignment (by: Oct 5 2020)
 3. [D][✘] Submit assignment (by: Oct 30 2020)
-4. [E][✘] Submit assignment (at: Oct 30 2020)
 ```
 
 ### `help` - Display the help manual
@@ -154,13 +167,11 @@ This is a list of functionalities that I support:
 • To mark any item as complete, type 'done <taskId>'.
 • To update an item, type 'update <taskId> <command to create a todo, deadline, or event>'.
 • To find all items containing a certain keyword, type 'find <keyword>'.
-
-
 ```
 
 ### `bye` - Exits the program
 
-Exits the program.
+Exit the program.
 
 Example of usage: 
 
