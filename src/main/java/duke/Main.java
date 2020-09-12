@@ -2,6 +2,7 @@ package duke;
 
 import java.io.IOException;
 
+import duke.user.UserList;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
@@ -24,6 +25,7 @@ public class Main extends Application {
             scene.getStylesheets().add("view/MainWindow.css");
             scene.getStylesheets().add("view/DialogBox.css");
             stage.setScene(scene);
+            UserList.initialize();
 
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();

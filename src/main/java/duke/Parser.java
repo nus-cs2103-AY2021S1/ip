@@ -3,7 +3,7 @@ package duke;
 import duke.commands.*;
 import duke.exceptions.DukeException;
 import duke.exceptions.InvalidInputException;
-
+import duke.user.User;
 
 
 /**
@@ -21,6 +21,7 @@ public class Parser {
     private static final String COMMAND_EVENT = "event";
     private static final String COMMAND_TAG = "tag";
     private static final String COMMAND_LOGIN = "login";
+    private static final String COMMAND_ADDUSER = "adduser";
 
     public static Command parse(String input) throws DukeException {
         if (input.length() == 0) {
@@ -62,8 +63,13 @@ public class Parser {
             String username = userInfo[0];
             String userPassword = userInfo[1];
             Login.login(username, userPassword);
-
             return new LoginCommand();
+        } else if (commandType.equals(COMMAND_ADDUSER)) {
+            String[] newUserInfo = commandContent.split(" ", 3);
+            String username = newUserInfo[0];
+            String userPassword = newUserInfo[1];
+            String userNickname = newUserInfo[2];
+            return new AddUserCommand(new User(username, userPassword, userNickname));
         }
         return new AddCommand(input);
     }

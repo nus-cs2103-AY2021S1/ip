@@ -1,6 +1,1 @@
-T,0,ls,,lo
-T,0,bye,,ls
-T,0,ls,,null
-T,0,ls,,null
-T,0,ls,,null
 T,0,ls,,null
