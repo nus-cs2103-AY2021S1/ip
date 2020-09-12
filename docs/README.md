@@ -16,7 +16,7 @@ A simple guide to get you kick started on how to easily use this CLI app to crea
              <br>
              Type "todo" followed by a space and then type in the 'todo' you wish to add into your list
              <br>
-             ![todo](https://github.com/IsaacTin/ip/blob/branch-A-UserGuide/docs/Images/todo.png)
+             ![todo](https://octodex.github.com/images/yaktocat.png)
         </details>
         <details>
             <summary>Add deadline</summary>
