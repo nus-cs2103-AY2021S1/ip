@@ -10,7 +10,7 @@ public class Task {
     protected boolean isDone;
 
     /**
-     * Constructs Deadline object with Task's description.
+     * Constructs Task object with Task's description.
      *
      * @param description Task's description.
      */
@@ -20,7 +20,7 @@ public class Task {
     }
 
     /**
-     * Constructs Deadline object with Task's description and Task's status.
+     * Constructs Task object with Task's description and Task's status.
      *
      * @param description Task's description.
      * @param isDone Task's status.

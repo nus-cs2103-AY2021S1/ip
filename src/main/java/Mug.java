@@ -16,8 +16,9 @@ public class Mug {
      */
     public Mug() {
         this.ui = new Ui();
-        Storage storage = new Storage("mug.txt");
-        this.tasks = new TaskList(storage);
+        Storage storage = new Storage(Storage.MUG_FILE);
+        storage.initialize();
+        this.tasks = new TaskList(storage.load());
     }
 
     /**

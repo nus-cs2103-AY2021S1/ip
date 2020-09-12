@@ -15,9 +15,7 @@ import mugexception.MugException;
 /**
  * Undo Action in storage
  */
-public class UndoStorage {
-    /** mug.txt filepath */
-    private final String mugFilepath;
+public class UndoStorage extends Storage {
     /** undo.txt filepath */
     private final String undoFilepath;
 
@@ -28,7 +26,7 @@ public class UndoStorage {
      * @param undoFilepath undo.txt filepath.
      */
     public UndoStorage(String mugFilepath, String undoFilepath) {
-        this.mugFilepath = mugFilepath;
+        super(mugFilepath);
         this.undoFilepath = undoFilepath;
     }
 
@@ -67,54 +65,33 @@ public class UndoStorage {
         }
     }
 
-    /**
-     * Undo delete Command
-     *
-     * @throws MugException If something wrong with file
-     */
     private void undoDelete() throws MugException {
         try {
-            writeFile(this.mugFilepath, this.undoFilepath, true, false);
+            writeFile(super.filepath, this.undoFilepath, true, false);
             clearUndo(this.undoFilepath);
         } catch (IOException ex) {
             throw new MugException("Something went wrong. Mug fail to undo:_:");
         }
     }
 
-    /**
-     * Undo done Command
-     *
-     * @throws MugException If something wrong with file
-     */
     private void undoDone() throws MugException {
         try {
-            writeFile(this.mugFilepath, this.undoFilepath, false, true);
+            writeFile(super.filepath, this.undoFilepath, false, true);
             clearUndo(this.undoFilepath);
         } catch (IOException ex) {
             throw new MugException("Something went wrong. Mug fail to undo:_:");
         }
     }
 
-    /**
-     * Undo add task related Command
-     *
-     * @throws MugException If something wrong with file
-     */
     private void undoAdd() throws MugException {
         try {
-            writeFile(this.mugFilepath, this.undoFilepath, false, false);
+            writeFile(super.filepath, this.undoFilepath, false, false);
             clearUndo(this.undoFilepath);
         } catch (IOException ex) {
             throw new MugException("Something went wrong. Mug fail to undo:_:");
         }
     }
 
-    /**
-     * Clears the content of file.
-     *
-     * @param filepath The filepath of the file to clear.
-     * @throws IOException If fail to write file.
-     */
     private void clearUndo(String filepath) throws IOException {
         String tempFile = "clearTemp.txt";
         File oldFile = new File(filepath);
@@ -150,16 +127,6 @@ public class UndoStorage {
         }
     }
 
-
-    /**
-     * Writes local storage file when undo.
-     *
-     * @param mugFilepath mug.txt filepath.
-     * @param undoFilepath undo.txt filepath.
-     * @param isDelete delete Command related.
-     * @param isDone done Command related.
-     * @throws IOException If fail to write file.
-     */
     private void writeFile(String mugFilepath, String undoFilepath,
                            boolean isDelete, boolean isDone) throws IOException, MugException {
         String tempFile = "writeTemp.txt";

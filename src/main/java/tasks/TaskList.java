@@ -7,7 +7,6 @@ import java.util.stream.IntStream;
 
 import command.Command;
 import mugexception.MugException;
-import storage.Storage;
 import storage.UndoStorage;
 import validator.Validator;
 
@@ -17,27 +16,16 @@ import validator.Validator;
 public class TaskList {
     /** ArrayList of Task */
     private ArrayList<Task> taskList;
-    /** Local storage that store list of task */
-    private final Storage store;
-    /** undo Storage action */
-    private final UndoStorage undoStore;
 
     /**
      * Constructs TaskList object with local Storage given.
      *
-     * @param store Local Storage that store list of task
+     * @param taskList List of Tasks
      */
-    public TaskList(Storage store) {
-        this.taskList = store.load();
-        this.store = store;
-        this.undoStore = new UndoStorage("mug.txt", "undo.txt");
+    public TaskList(ArrayList<Task> taskList) {
+        this.taskList = taskList;
     }
 
-    /**
-     * Length of task's list
-     *
-     * @return Length of task's list
-     */
     private int taskListLen() {
         return this.taskList.size();
     }
@@ -77,37 +65,19 @@ public class TaskList {
             Task task;
             switch (command) {
             case TODO:
-                task = new Todo(info);
+                task = addTodo(info);
                 break;
             case DEADLINE:
-                String[] deadlineInfo = info.split(" /by ");
-                //Validate info
-                Validator.input(command, deadlineInfo.length, true);
-                assert(deadlineInfo.length > 1);
-                Validator.info(command, deadlineInfo[1], true);
-                // info
-                String deadlineEvent = deadlineInfo[0];
-                LocalDate deadlineTime = Validator.date(deadlineInfo[1]);
-                task = new Deadline(deadlineEvent, deadlineTime);
+                task = addDeadline(info);
                 break;
             case EVENT:
-                String[] eventInfo = info.split(" /at ");
-                //Validate info
-                Validator.input(command, eventInfo.length, true);
-                assert(eventInfo.length > 1);
-                Validator.info(command, eventInfo[1], true);
-                // info
-                String eventEvent = eventInfo[0];
-                LocalDate eventTime = Validator.date(eventInfo[1]);
-                task = new Event(eventEvent, eventTime);
+                task = addEvent(info);
                 break;
             default:
                 task = new Task(info);
                 break;
             }
             this.taskList.add(task);
-            // append task to local storage
-            store.appendTask(command, info);
 
             return "Got it. Mug has added this task:\n"
                     + task
@@ -118,6 +88,34 @@ public class TaskList {
         } catch (MugException ex) {
             return ex.getMessage();
         }
+    }
+
+    private Task addTodo(String info) {
+        return new Todo(info);
+    }
+
+    private Task addDeadline(String info) throws MugException {
+        String[] deadlineInfo = info.split(" /by ");
+        //Validate info
+        Validator.input(Command.DEADLINE, deadlineInfo.length, true);
+        assert(deadlineInfo.length > 1);
+        Validator.info(Command.DEADLINE, deadlineInfo[1], true);
+        // info
+        String deadlineEvent = deadlineInfo[0];
+        LocalDate deadlineTime = Validator.date(deadlineInfo[1]);
+        return new Deadline(deadlineEvent, deadlineTime);
+    }
+
+    private Task addEvent(String info) throws MugException {
+        String[] eventInfo = info.split(" /at ");
+        //Validate info
+        Validator.input(Command.EVENT, eventInfo.length, true);
+        assert(eventInfo.length > 1);
+        Validator.info(Command.EVENT, eventInfo[1], true);
+        // info
+        String eventEvent = eventInfo[0];
+        LocalDate eventTime = Validator.date(eventInfo[1]);
+        return new Event(eventEvent, eventTime);
     }
 
     /**
@@ -132,20 +130,15 @@ public class TaskList {
         } else {
             //assert
             assert(taskId <= this.taskListLen());
-            try {
-                int taskIndex = taskId - 1;
-                Task deletedTask = this.taskList.get(taskIndex);
-                this.taskList.remove(taskIndex);
-                this.store.deleteTask(taskId);
+            int taskIndex = taskId - 1;
+            Task deletedTask = this.taskList.get(taskIndex);
+            this.taskList.remove(taskIndex);
 
-                return "Noted. Mug has removed this task:\n"
-                        + deletedTask
-                        + "\nNow you have "
-                        + this.taskListLen()
-                        + " tasks in the list.";
-            } catch (MugException ex) {
-                return ex.getMessage();
-            }
+            return "Noted. Mug has removed this task:\n"
+                    + deletedTask
+                    + "\nNow you have "
+                    + this.taskListLen()
+                    + " tasks in the list.";
         }
     }
 
@@ -167,15 +160,11 @@ public class TaskList {
                 return "Mug had marked this task as done:\n"
                         + doneTask;
             } else {
-                try {
-                    doneTask = doneTask.markAsDone();
-                    this.taskList.set(taskIndex, doneTask);
-                    this.store.doneTask(taskId);
-                    return "Congratz! Mug has marked this task as done:\n"
-                            + doneTask;
-                } catch (MugException ex) {
-                    return ex.getMessage();
-                }
+                doneTask = doneTask.markAsDone();
+                this.taskList.set(taskIndex, doneTask);
+
+                return "Congratz! Mug has marked this task as done:\n"
+                        + doneTask;
             }
         }
     }
@@ -212,10 +201,11 @@ public class TaskList {
      * Undo the most recent edited task(add, delete, done).
      * @return Undo Status
      */
-    public String undoTask() {
+    public String undoTask(String mugFile, String undoFile) {
         try {
-            this.undoStore.undo();
-            this.taskList = this.store.load();
+            UndoStorage store = new UndoStorage(mugFile, undoFile);
+            store.undo();
+            this.taskList = store.load();
             return "Mug has undo successfully :D";
         } catch (MugException ex) {
             return ex.getMessage();

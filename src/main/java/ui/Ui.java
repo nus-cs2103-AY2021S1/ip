@@ -2,6 +2,10 @@ package ui;
 
 import command.Command;
 import mugexception.MugException;
+import storage.AddStorage;
+import storage.DeleteStorage;
+import storage.DoneStorage;
+import storage.Storage;
 import tasks.TaskList;
 import validator.Validator;
 
@@ -48,7 +52,7 @@ public class Ui {
                 output = findAction(splitInput, tasks);
                 break;
             case UNDO:
-                output = tasks.undoTask();
+                output = tasks.undoTask(Storage.MUG_FILE, Storage.UNDO_FILE);
                 break;
             default:
                 output = "Hey!!! I'm sorry, but Mug don't know what that means :3";
@@ -63,14 +67,6 @@ public class Ui {
         return output;
     }
 
-    /**
-     * Undergoes action for done command.
-     *
-     * @param splitInput a split user input.
-     * @param tasks A list of tasks to mark task done.
-     * @return Respond after marking a task done.
-     * @throws MugException If the user input is wrong format.
-     */
     private String doneAction(String[] splitInput, TaskList tasks) throws MugException {
         // Validate splitInput
         Validator.input(Command.DONE, splitInput.length, false);
@@ -79,17 +75,12 @@ public class Ui {
         // Extract and validate Id
         int doneTaskId = Validator.index(splitInput[1], splitInput.length);
         assert(doneTaskId > 0);
+        // write local Storage
+        DoneStorage store = new DoneStorage(Storage.MUG_FILE);
+        store.doneTask(doneTaskId);
         return tasks.taskDone(doneTaskId);
     }
 
-    /**
-     * Undergoes action for delete command.
-     *
-     * @param splitInput a split user input.
-     * @param tasks A list of tasks to remove task from.
-     * @return Respond after deleting task.
-     * @throws MugException If the user input is wrong format.
-     */
     private String deleteAction(String[] splitInput, TaskList tasks) throws MugException {
         // Validate splitInput
         Validator.input(Command.DELETE, splitInput.length, false);
@@ -98,18 +89,12 @@ public class Ui {
         // Extract and Validate Id
         int deleteTaskId = Validator.index(splitInput[1], splitInput.length);
         assert(deleteTaskId > 0);
+        // write local Storage
+        DeleteStorage store = new DeleteStorage(Storage.MUG_FILE);
+        store.deleteTask(deleteTaskId);
         return tasks.deleteTask(deleteTaskId);
     }
 
-    /**
-     * Undergoes action for add task(Todo, Deadline, Event) command.
-     *
-     * @param command Type of Task's command.
-     * @param splitInput a split user input.
-     * @param tasks A list of tasks to add in new tasks.
-     * @return Respond after adding task.
-     * @throws MugException If the user input is wrong format.
-     */
     private String taskAction(Command command, String[] splitInput, TaskList tasks) throws MugException {
         // Validate splitInput
         Validator.input(command, splitInput.length, false);
@@ -117,17 +102,12 @@ public class Ui {
         Validator.info(command, splitInput[1], false);
         // Extract Info
         String info = splitInput[1];
+        // write local storage
+        AddStorage store = new AddStorage(Storage.MUG_FILE);
+        store.appendTask(command, info);
         return tasks.addTask(command, info);
     }
 
-    /**
-     * Undergoes action for find command.
-     *
-     * @param splitInput a split user input.
-     * @param tasks A list of tasks to search.
-     * @return Find results.
-     * @throws MugException If the user input is wrong format.
-     */
     private String findAction(String[] splitInput, TaskList tasks) throws MugException {
         // Validate splitInput
         Validator.input(Command.FIND, splitInput.length, false);
@@ -138,10 +118,6 @@ public class Ui {
         return tasks.searchTask(keyword);
     }
 
-    /**
-     * Undergoes action for bye command.
-     * @return Goodbye message.
-     */
     private String byeAction() {
         return "** Bye. Hope to see you soon!! **";
     }
