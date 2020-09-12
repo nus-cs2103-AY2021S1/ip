@@ -20,6 +20,9 @@ import javafx.scene.layout.VBox;
  * Controller for duke.controllers.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+
+    private static final int EXIT_TIMEOUT = 1000;
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -74,10 +77,16 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         Response response = duke.getResponse(input);
+
+        DialogBox userDialog = DialogBox.getUserDialog(input, userImage);
+        DialogBox dukeDialog = response.isError()
+                ? DialogBox.getErrorDialog(response.getMessage(), dukeImage)
+                : DialogBox.getDukeDialog(response.getMessage(), dukeImage);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response.getMessage(), dukeImage)
+                userDialog,
+                dukeDialog
         );
+
         userInput.clear();
         if (response.shouldExit()) {
             userInput.setDisable(true);
@@ -86,7 +95,7 @@ public class MainWindow extends AnchorPane {
                 public void run() {
                     Platform.exit();
                 }
-            }, 1000);
+            }, MainWindow.EXIT_TIMEOUT);
         }
     }
 }
