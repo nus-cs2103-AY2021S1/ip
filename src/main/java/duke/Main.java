@@ -2,6 +2,7 @@ package duke;
 
 import java.io.IOException;
 
+import duke.result.Result;
 import duke.ui.MainWindow;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
@@ -16,14 +17,14 @@ public class Main extends Application {
 
     @Override
     public void start(Stage stage) {
-        String loadMessage = duke.initialize().getMessage();
+        Result loadResult = duke.initialize();
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
             stage.setTitle("Duke");
-            fxmlLoader.<MainWindow>getController().setDuke(duke, loadMessage);
+            fxmlLoader.<MainWindow>getController().setDuke(duke, loadResult);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

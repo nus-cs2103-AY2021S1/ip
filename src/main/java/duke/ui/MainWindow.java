@@ -33,11 +33,10 @@ public class MainWindow extends AnchorPane {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
     }
 
-    public void setDuke(Duke duke, String loadMessage) {
+    public void setDuke(Duke duke, Result loadResult) {
         this.duke = duke;
-        String msg = "Greetings, what may I do for you?\n" + loadMessage;
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(msg, dukeImage)
+                DialogBox.getDukeDialog(loadResult, dukeImage)
         );
     }
 
@@ -50,7 +49,7 @@ public class MainWindow extends AnchorPane {
                 : "Apologies. " + response.getMessage();
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(responseMessage, dukeImage)
+                DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
         if (response.isExit()) {
