@@ -9,7 +9,7 @@ public class UpdateDescriptionAndTimeCommand extends UpdateCommand {
     }
 
     @Override
-    String execute(TaskList tasks, Ui ui, Storage storage) {
+    String execute(TaskList tasks, Ui ui, Storage storage) throws UpdateToDoTimeException {
         Task taskToUpdate = tasks.getTask(indexOfTaskToUpdate);
         taskToUpdate.updateDescription(newDescription);
         taskToUpdate.updateTime(newTime);

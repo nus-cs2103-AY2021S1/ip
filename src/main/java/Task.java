@@ -2,6 +2,9 @@ public abstract class Task {
     protected String desc;
     protected boolean isDone;
     protected TaskType taskType;
+    
+    private final String SYMBOL_TICK = "\u2713";
+    private final String SYMBOL_CROSS = "\u2718";
 
     public Task(String desc) {
         this.desc = desc;
@@ -9,7 +12,7 @@ public abstract class Task {
     }
 
     public String getStatusIcon() {
-        return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
+        return (isDone ? SYMBOL_TICK : SYMBOL_CROSS); //return tick or X symbols
     }
 
     public void markAsDone() {
@@ -20,7 +23,7 @@ public abstract class Task {
         this.desc = newDescription;
     }
     
-    public abstract void updateTime(String newTime);
+    public abstract void updateTime(String newTime) throws UpdateToDoTimeException;
     
     public abstract String generateSaveFileData();
     

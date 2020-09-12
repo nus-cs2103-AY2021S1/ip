@@ -14,8 +14,6 @@ public class TaskGenerator {
         } else if (taskTypeLetter.equals("E")) {
             task = new Event(taskDesc, taskSubData[3]);
         } else {
-            // todo: generate exception
-            System.out.println("corrupted save file");
             throw new CorruptedFileException();
         }
         

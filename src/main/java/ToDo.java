@@ -15,8 +15,8 @@ public class ToDo extends Task {
     }
     
     @Override
-    public void updateTime(String newTime) {
-        
+    public void updateTime(String newTime) throws UpdateToDoTimeException {
+        throw new UpdateToDoTimeException();
     }
 
     @Override
