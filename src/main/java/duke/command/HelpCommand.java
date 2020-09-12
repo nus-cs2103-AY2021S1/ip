@@ -26,7 +26,8 @@ public class HelpCommand extends Command {
                 + "in yyyy-MM-dd format>'.\n";
         String doneHelpMessage = "To mark any item as complete, type 'done <taskId>'.\n";
         String updateHelpMessage =
-                "To update an item, type 'update <taskId> <task creation " + "inputs>'.\n";
+                "To update an item, type 'update <taskId> <command to create a todo, deadline, or"
+                        + " event>'.\n";
         String findHelpMessage =
                 "To find all items containing a certain keyword, type 'find <keyword>'.\n";
 

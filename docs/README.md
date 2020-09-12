@@ -134,6 +134,30 @@ Here are the matching tasks in your list:
 4. [E][✘] Submit assignment (at: Oct 30 2020)
 ```
 
+### `help` - Display the help manual
+
+Display the help manual which shows the list of available commands.
+
+Example of usage: 
+
+`help`
+
+Expected outcome:
+```
+This is a list of functionalities that I support:
+
+• To list out all existing tasks, type 'list'.
+• To exit the program, type 'bye'.
+• To add a new Todo item, type 'todo <description>'.
+• To add a new Deadline item, type 'deadline <description> /by <date in yyyy-MM-dd format>'.
+• To add a new Event item, type 'event <description> /at <date in yyyy-MM-dd format>'.
+• To mark any item as complete, type 'done <taskId>'.
+• To update an item, type 'update <taskId> <command to create a todo, deadline, or event>'.
+• To find all items containing a certain keyword, type 'find <keyword>'.
+
+
+```
+
 ### `bye` - Exits the program
 
 Exits the program.
