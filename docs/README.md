@@ -40,9 +40,9 @@ To delete a task permanently from storage, make use of command `delete {taskNumb
 
 Example of usage: `delete 5`
 
-Expected outcome: <br />
-`*Woof* I have removed:` <br />
-`   [T][✘] pay mobile bill` <br />
+Expected outcome:<br />
+`*Woof* I have removed:`<br />
+`[T][✘] pay mobile bill`<br />
 `Now you have 4 tasks in the list. Keep going!!`
 
 ### Feature 3
@@ -51,10 +51,10 @@ To display all tasks in storage, make use of command  `list`, press `Enter` to e
 Example of usuage:
 `list`
 
-Expected outcome: <br />
+Expected outcome:<br />
 `Here are the tasks in your list *Woof*:`<br />
 `1. [D][✓] CS2103T IP Submission (FINISH by: 18 September 2020 12:00)`<br />
-...
+`2. ... `
 
 ### Feature 4 
 To mark a specific task as completed, make use of command `done {taskNumber}`. The taskNumber of a specific task can be found using the `list` command, press `Enter` to execute.
@@ -63,8 +63,8 @@ Example of usage:
 `done 4`
 
 Expected outcome: <br />
-`Good Job!!! You cleared this task:`<br />
-`[D][✓] CS2103T IP Submission (FINISH by: 18 September 2020 12:00)`
+``Good Job!!! You cleared this task:<br />
+[D][✓] CS2103T IP Submission (FINISH by: 18 September 2020 12:00)``
 
 ### Feature 5
 To search for task(s) containing specific keyword(s), make use of the command `find {keyword1} ... {keywordN}`, press `Enter` to execute.
