@@ -158,13 +158,11 @@ public class Parser {
                     date = Optional.of(LocalDate.parse(findDate[1]));
                 } else if (timeDelimiter < descriptionDelimiter) {
                     String[] findDate = commands[1].split(timeRegex, 2);
-                    System.out.println(findDate[1]);
                     String[] findDescription = findDate[1].split(descRegex, 2);
                     description = Optional.of(findDescription[1]);
                     date = Optional.of(LocalDate.parse(findDescription[0]));
                 } else {
                     String[] findDescription = commands[1].split(descRegex, 2);
-                    System.out.println(findDescription[1]);
                     String[] findDate = findDescription[1].split(timeRegex, 2);
                     description = Optional.of(findDate[0]);
                     date = Optional.of(LocalDate.parse(findDate[1]));

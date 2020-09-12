@@ -20,7 +20,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             scene.getStylesheets().add("/view/main.css");
             stage.setScene(scene);
-            stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/Icon.jpg")));
+            stage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/Icon.png")));
             stage.setTitle("Duke");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
