@@ -1,5 +1,6 @@
 /**
  * Help Command Class to list Commands, their usage and their description.
+ * Allows for listing of all Commands, as well as for a detailed description of one Command.
  */
 public class Help extends Command {
 
