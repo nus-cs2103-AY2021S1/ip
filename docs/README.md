@@ -18,7 +18,7 @@ for you! :D
 5. Show all tasks
 6. Support for natural date formats
 
-### Feature 1 - Add a task - Todo, Event, Deadline
+## Feature 1 - Add a task - Todo, Event, Deadline
 
 Users are able to add tasks into Kim Jong Duke. Specifically,
 they are able to add 3 types of tasks - Todo, Event, Deadline.
@@ -29,7 +29,7 @@ they are able to add 3 types of tasks - Todo, Event, Deadline.
 
 **Deadline** - Task that needs to be done before a specific date/time.
 
-## Usage
+### Usage
 
 ### `todo`
 
@@ -91,12 +91,12 @@ Expected outcome:
 
 
 
-### Feature 2 - Delete a task
+## Feature 2 - Delete a task
 
 Users are able to delete a task by declaring the serial number
 tagged to the task.
 
-## Usage
+### Usage
 
 ### `delete`
 
@@ -119,11 +119,11 @@ the list of tasks.
 
 
 
-### Feature 3 - Find a task
+## Feature 3 - Find a task
 
 Users are able to find tasks in their task list containing specific keywords.
 
-## Usage
+### Usage
 
 ### `find`
 
@@ -143,12 +143,12 @@ Expected outcome:
 
 
 
-### Feature 4 - Mark task as completed
+## Feature 4 - Mark task as completed
 
 Upon completing a task, users are able to mark their task as 
 completed by declaring the serial number tagged to the task.
 
-## Usage
+### Usage
 
 ### `done`
 
@@ -169,12 +169,12 @@ Expected outcome:
 
 
 
-### Feature 5 - Show all tasks
+## Feature 5 - Show all tasks
 
 Displays all tasks in users' task list.
 (This includes both completed [Y] and non-completed [N] tasks)
 
-## Usage
+### Usage
 
 ### `list`
 
@@ -196,7 +196,7 @@ Expected outcome:
 
 
 
-### Feature 6 - Support for natural date formats
+## Feature 6 - Support for natural date formats
 
 Kim Jong Duke can accept dates in certain formats and will convert it to English date format.
 If a day of the week (e.g Monday) is accepted as input, Kim Jong Duke will convert the input to
@@ -220,7 +220,7 @@ Mon | Mon | Monday, September 07, 2020
 mon |mon | Monday, September 07, 2020
 
 
-## Usage
+### Usage
 
 ### `NaturalDates`
 
