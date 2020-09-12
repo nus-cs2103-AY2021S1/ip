@@ -19,9 +19,7 @@ Duke is an application using Command Line Tool to manage your tasks.
 
 4. Double-click the file to start the app. The GUI similar to below will appear in a few seconds.
 
-<p align="center">
-    <img src="/img/duke_main.png">
-</p>
+![](img/duke_main.png)
 
 ## Features 
 
@@ -49,9 +47,7 @@ Expect Output:
 
 The task is added to the list with not done status, and gives out the total tasks in the list.
 
-<p align="center">
-    <img src="/img/duke_todo.png">
-</p>
+![](img/duke_todo.png)
 
 ***
 
@@ -67,9 +63,8 @@ Expected Output:
 
 The event has been recorded into the system and give out the total number of tasks in the list.
 
-<p align="center">
-    <img src="/img/duke_event.png">
-</p>
+![](img/duke_event.png)
+
 
 ***
 
@@ -86,9 +81,9 @@ Expect output:
 
 The deadline is added and give out the total task in the list.
 
-<p align="center">
-    <img src="/img/duke_deadline.png">
-</p>
+![](img/duke_deadline.png)
+
+***
 
 ### `list` - List all the item in the list
 
@@ -96,9 +91,8 @@ Format: `list`
 
 Example:
 
-<p align="center">
-    <img src="/img/duke_list.png">
-</p>
+![](img/duke_list.png)
+
 
 ***
 
@@ -116,9 +110,8 @@ Expected output:
 
 The task with the target index is marked as done. 
 
-<p align="center">
-    <img src="/img/duke_done.png">
-</p>
+![](img/duke_done.png)
+
 
 ***
 
@@ -136,9 +129,8 @@ Expected output:
 
 The task with index 2 is deleted from the task list.
 
-<p align="center">
-    <img src="/img/duke_delete.png">
-</p>
+![](img/duke_delete.png)
+
 
 ***
 
@@ -148,9 +140,8 @@ Format: `Clear`
 
 Example of usage:
 
-<p align="center">
-    <img src="/img/duke_clear.png">
-</p>
+![](img/duke_clear.png)
+
 
 ***
 
@@ -162,8 +153,7 @@ Example of usage:
 
 `reschedule 2 /to 2020-12-20 19:00`
 
-<p align="center">
-    <img src="/img/duke_reschedule.png">
-</p>
+![](img/duke_reschedule.png)
+
 
 
