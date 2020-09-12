@@ -304,10 +304,11 @@ public class Parser {
         int stringLength = input.length();
         assert stringLength >= 1 : "Input cannot be empty";
         String stringIndex = input.substring(7, input.length());
-        if (input.matches(".*[a-zA-Z]+.*")) {
+        if (stringIndex.matches(".*[a-zA-Z]+.*")) {
             return new InvalidListIndexException().toString();
         } else {
             int index = Integer.parseInt(stringIndex);
+            System.out.println(index);
             if (this.tasks.isEmpty()) {
                 return new EmptyListException().toString();
             } else if (index > 0 && index <= this.tasks.length()) {
