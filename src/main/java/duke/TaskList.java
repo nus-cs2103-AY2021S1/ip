@@ -9,9 +9,8 @@ import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 
-import command.Command;
-import command.EventCommand;
-import command.TodoCommand;
+import com.sun.jdi.LocalVariable;
+
 import task.Deadline;
 import task.Event;
 import task.Task;
@@ -57,28 +56,71 @@ public class TaskList {
         fr.close();
     }
 
+    private boolean descriptionIsPresent(String ...parameters){
+        return parameters.length > 0 && !parameters[0].isBlank();
+    }
+
+    private boolean dateIsPresent(String ...parameters) {
+        return parameters.length > 1 && !parameters[1].isBlank();
+    }
+
     /**
-     * Adds new task to the task list
+     * Adds a Todo Task to the task list.
      *
-     * @param task task to be added
-     * @return the task that was added
+     * @param parameters the description of the task
+     * @return the Todo task
      */
-    public Task addTask(Command task) {
-        Task newTask;
-        if (task.getClass() == TodoCommand.class) {
-            assert task.getParameters().length == 1 : "insufficient amount of parameters";
-            newTask = new Todo(task.getParameters()[0]);
-        } else if (task.getClass() == EventCommand.class) {
-            assert task.getParameters().length == 2 : "insufficient amount of parameters";
-            newTask = new Event(task.getParameters()[0].strip(),
-                    LocalDateTime.parse(task.getParameters()[1].strip(), formatter));
+    public Task addTodoTask(String ...parameters) throws DukeExceptions.IncompleteCommandException {
+        if (descriptionIsPresent(parameters)) {
+            //assert parameters.length == 1 : "insufficient amount of parameters";
+            String TaskDescription = parameters[0];
+            Task newTask = new Todo(TaskDescription);
+            this.taskList.add(newTask);
+            return newTask;
         } else {
-            assert task.getParameters().length == 2 : "insufficient amount of parameters";
-            newTask = new Deadline(task.getParameters()[0].strip(),
-                    LocalDateTime.parse(task.getParameters()[1].strip(), formatter));
+            String errorMessage = "Master the description of Todo cannot be empty\n";
+            throw new DukeExceptions.IncompleteCommandException(errorMessage);
         }
-        this.taskList.add(newTask);
-        return newTask;
+    }
+
+    /**
+     * Adds an Event Task to the task list.
+     *
+     * @param parameters the description of the task
+     * @return the Event task
+     */
+    public Task addEventTask(String ...parameters) throws DukeExceptions.IncompleteCommandException {
+        if (!descriptionIsPresent(parameters)) {
+            String errorMessage = "Master the description of Event cannot be empty\n";
+            throw new DukeExceptions.IncompleteCommandException(errorMessage);
+        } else {
+            //assert parameters.length == 2 : "insufficient amount of parameters";
+            String eventDescription = parameters[0].strip();
+            LocalDateTime EventDate = LocalDateTime.parse(parameters[1].strip(), formatter);
+            Task newTask = new Event(eventDescription, EventDate);
+            this.taskList.add(newTask);
+            return newTask;
+        }
+    }
+
+    /**
+     * Adds a Deadline Task to the task list.
+     *
+     * @param parameters the description of the task
+     * @return the Event task
+     */
+    public Task addDeadlineTask(String ...parameters) throws DukeExceptions.IncompleteCommandException {
+        if (!descriptionIsPresent(parameters)) {
+            String errorMessage = "Master the description of Event cannot be empty\n";
+            throw new DukeExceptions.IncompleteCommandException(errorMessage);
+        } else {
+            //assert parameters.length == 2 : "insufficient amount of parameters";
+            String eventDescription = parameters[0].strip();
+            LocalDateTime EventDate = LocalDateTime.parse(parameters[1].strip(), formatter);
+            Task newTask = new Deadline(eventDescription, EventDate);
+            this.taskList.add(newTask);
+            return newTask;
+        }
     }
 
     /**
@@ -100,10 +142,10 @@ public class TaskList {
      * @return the string representation of all the task due on that date
      */
     public String getTaskDueOn(String dueDate) {
+        LocalDate date = LocalDate.parse(dueDate.strip(), DateTimeFormatter.ofPattern("dd-MM-yyyy"));
         String output = "";
-
         for (Task task : this.taskList) {
-            if (task.isDueOn(LocalDate.parse(dueDate.strip(), DateTimeFormatter.ofPattern("dd-MM-yyyy")))) {
+            if (task.isDueOn(date)) {
                 output += task.toString() + "\n";
             }
         }
@@ -119,7 +161,6 @@ public class TaskList {
 
     public String getTaskWithKeyword(String parameter) {
         String output = "";
-
         for (Task task : this.taskList) {
             if (task.hasKeyword(parameter.strip())) {
                 output += task.toString() + "\n";
@@ -141,8 +182,9 @@ public class TaskList {
         return true;
     }
 
-    public void completeTask(int index) {
-        this.taskList.get(index).markDone();
+    public Task completeTask(int index) {
+        this.getTask(index).markDone();
+        return this.getTask(index);
     }
 
     public Task getTask(int index) {
@@ -163,12 +205,14 @@ public class TaskList {
 
     @Override
     public String toString() {
-        String output = "";
+        String output;
         if (this.taskList.size() > 0) {
             output = "Here are the tasks in your list:\n";
             for (int i = 1; i < this.taskList.size() + 1; i++) {
                 output += String.valueOf(i) + ". " + this.taskList.get(i - 1).toString() + "\n";
             }
+        } else {
+            output = "You have no tasks master :)";
         }
         return output;
     }

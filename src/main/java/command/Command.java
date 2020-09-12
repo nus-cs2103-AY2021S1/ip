@@ -1,13 +1,18 @@
 package command;
 
+import duke.Storage;
+import duke.TaskList;
+
 /**
  * Represents a single Command with or without parameters
  *
  * @author  Ryan Lim
  */
-public class Command {
+public abstract class Command {
     /** array of strings where each element represents a parameter tagged to the command */
-    private final String[] parameters;
+    protected final String[] parameters;
+    public static boolean EXECUTED_SUCCESSFULLY = true;
+    public static boolean EXECUTED_UNSUCCESSFULLY = false;
 
     /**
      * Instantiate command without parameters
@@ -18,28 +23,15 @@ public class Command {
 
     /**
      * Instantiate command with parameters
-     *
-     * @param parameters Array of parameters represented as strrings.
+     * @param parameters Array of parameters represented as strings.
      */
-    public Command(String[] parameters) {
+    public Command(String ...parameters) {
         this.parameters = parameters;
     }
 
     /**
-     * Returns True if there is no parameter tagged to the Command, False otherwise.
-     *
-     * @return boolean value indicating if command has parameter or not.
+     * Execute the command
+     * @return The result of executing the command
      */
-    public boolean isEmpty() {
-        return this.parameters.length == 0;
-    }
-
-    /**
-     * Returns an Array of string where each element is a single parameter of the command tagged to it.
-     *
-     * @return an array of parameters represented as strings.
-     */
-    public String[] getParameters() {
-        return this.parameters;
-    }
+    public abstract Result execute(TaskList taskList, Storage storage);
 }

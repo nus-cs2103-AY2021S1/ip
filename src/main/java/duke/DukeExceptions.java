@@ -5,12 +5,8 @@ public class DukeExceptions {
      * Exception for scenario where an incomplete command is given
      */
     public static class IncompleteCommandException extends Exception {
-        public IncompleteCommandException(String commandName) {
-            super(commandName);
-        }
-
-        public String toString() {
-            return "Master the description of " + super.getMessage() + " cannot be empty!";
+        public IncompleteCommandException(String message) {
+            super(message);
         }
     }
 
@@ -23,7 +19,7 @@ public class DukeExceptions {
         }
 
         public String toString() {
-            return "Master the list is empty";
+            return "Master the list is empty\n";
         }
     }
 
@@ -36,7 +32,7 @@ public class DukeExceptions {
         }
 
         public String toString() {
-            return "Master the list is empty";
+            return "Master the list is empty\n";
         }
     }
 
