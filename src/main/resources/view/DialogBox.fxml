@@ -11,8 +11,7 @@
          style="-fx-spacing: 8"
          xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <children>
-        <Label fx:id="dialog"
-               style="-fx-background-radius: 10; -fx-padding: 7 12 7 12;"
+        <Label fx:id="dialog" styleClass="dialog"
                text="Label" wrapText="true"/>
         <Circle fx:id="displayPicture" radius="45" pickOnBounds="true"/>
     </children>

@@ -1,0 +1,46 @@
+.dialog-container {
+    -fx-background-color: #0e1621;
+}
+
+.user-input {
+    -fx-background-color: #182533;
+}
+
+.send-button {
+     -fx-background-color: #2b5278;
+}
+
+.scroll-bar:vertical .track {
+    -fx-background-color: #2e343c;
+    -fx-border-color: transparent;
+}
+
+.scroll-bar:vertical .increment-button ,
+.scroll-bar:vertical .decrement-button {
+    -fx-background-color: transparent;
+    -fx-background-radius: 0.0em;
+    -fx-padding: 0.0 10.0 0.0 0.0;
+}
+
+.scroll-bar:vertical .increment-arrow,
+.scroll-bar:vertical .decrement-arrow{
+    -fx-shape: " ";
+    -fx-padding: 0.0 0.15em;
+}
+
+.scroll-bar:vertical .thumb {
+    -fx-background-color: #545a60;
+    -fx-background-insets: 2.0, 0.0, 0.0;
+    -fx-background-radius: 2.0em;
+}
+
+
+.user-input, .dialog, .send-button {
+    -fx-text-fill: #fff;
+}
+
+.dialog {
+    -fx-background-radius: 10;
+    -fx-padding: 7 12 7 12;
+}
+

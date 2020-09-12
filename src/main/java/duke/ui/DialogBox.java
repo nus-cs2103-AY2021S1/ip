@@ -22,8 +22,8 @@ import javafx.scene.shape.Circle;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
-    private static final String DUKE_DIALOG_COLOUR = "#d9d9d9";
-    private static final String USER_DIALOG_COLOUR = "#a9d18e";
+    private static final String DUKE_DIALOG_COLOUR = "#182533";
+    private static final String USER_DIALOG_COLOUR = "#2b5278";
 
     @FXML
     private Label dialog;
