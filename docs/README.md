@@ -10,7 +10,7 @@ Add a task to do
 Add an event with a specified date and time
 
 ### Add Deadline
-Add an deadline with a specified due date and time
+Add a deadline with a specified due date and time
 
 ### Mark Task as Done
 Mark a task as done
