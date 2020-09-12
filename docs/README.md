@@ -3,6 +3,15 @@
 - [Introduction](#introduction)
 - [Quick Start](#quick-start)
 - [Features](#features)
+  1. [Add a `Deadline` task](#1-add-a-deadline-task)
+  2. [Add a `Event` task](#2-add-a-event-task)
+  3. [Add a `Todo` task](#3-add-a-todo-task)
+  4. [Delete a `Task`](#4-delete-a-task)
+  5. [Exit Duke application](#5-exit-duke-application)
+  6. [Find `Task`](#6-find-task)
+  7. [List `Task`](#7-list-task)
+  8. [Mark a `Task` as done](#8-mark-a-task-as-done)
+  9. [Prioritise a `Task`](#9-prioritise-a-task)
 
 ## Introduction
 
@@ -140,7 +149,7 @@ Bye. See you again soon!
 
 The application will be closed.
 
-### 6. Find tasks
+### 6. Find `Task`
 
 Find the tasks based on the query keyword.
 
@@ -169,7 +178,7 @@ Here are the matching tasks in your list:
 No task found...
 ```
 
-### 7. List tasks
+### 7. List `Task`
 
 List all the saved tasks from `./data/tasks.txt` file.
 
