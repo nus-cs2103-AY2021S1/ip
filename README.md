@@ -12,4 +12,4 @@ Available commands:
 * `list` : Lists down all tasks.
 * `find <query>` : Finds a task based on the query.
 * `addalias <alias> <original command>` : Adds an alias for an existing command.
-* `bye` : exits the application.
+* `bye` : Exits the application.
