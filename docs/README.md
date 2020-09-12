@@ -24,7 +24,7 @@ Command to add a todo task: `todo <description>`
 
 Here are some example calls for adding tasks:
 
-![deadlineAndEvent](./event.png)
+![deadlineAndEvent](./deadlineAndEvent.png)
 
 ![todo](./todo.png)
 
