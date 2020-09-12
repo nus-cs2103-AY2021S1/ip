@@ -1,0 +1,11 @@
+#dialogContainer {
+  -fx-background-image: url("../images/manyCatsWallpaper.jpg");
+  -fx-background-repeat: repeat;
+  -fx-background-size: cover;
+}
+
+#dialog {
+  -fx-background-color: #e1e4e6;
+  -fx-label-padding: 5;
+}
+

@@ -27,8 +27,9 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/spaceCat.png"));
+    private final Image dukeImage = new Image(
+            this.getClass().getResourceAsStream("/images/catTranscedence.jpg"));
 
     /**
      * Sets scrollpane to scroll to the bottom whenever new dialogs are added.
@@ -52,7 +53,7 @@ public class MainWindow extends AnchorPane {
         } else {
             sb.append(DukeStdMsg.FRESH_START.getMsg());
         }
-        sb.append(DukeStdMsg.WELCOME.getMsg());
+        sb.append('\n').append(DukeStdMsg.WELCOME.getMsg());
 
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(sb.toString(), dukeImage)
