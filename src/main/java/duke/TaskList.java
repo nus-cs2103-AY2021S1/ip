@@ -2,20 +2,37 @@ package duke;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 /**
  * Manage list of all tasks
  */
 public class TaskList {
     private final List<Task> tasks;
-    private final Storage storage;
+    private final Optional<Storage> storage;
 
     /**
-     * Constructor for TaskList, do storage initilization
+     * Constructor for TaskList, do storage initialization
      */
     public TaskList(String filename) {
-        storage = new Storage(filename);
-        tasks = storage.load();
+        storage = Optional.of(new Storage(filename));
+        tasks = storage.get().load();
+    }
+
+    /**
+     * Special constructor for TaskList with no storage
+     * Used for testing only
+     */
+    public TaskList() {
+        storage = Optional.empty();
+        tasks = new ArrayList<>();
+    }
+
+    private void saveToDisk() {
+        if (storage.isEmpty()) {
+            return;
+        }
+        storage.get().write(tasks);
     }
 
     private void addTodo(String desc) {
@@ -71,7 +88,6 @@ public class TaskList {
             addEvent(command.substring(5));
         }
         Ui.addTask(tasks);
-        storage.write(tasks);
     }
 
     /**
@@ -83,7 +99,6 @@ public class TaskList {
         int num = Integer.parseInt(command) - 1;
         tasks.get(num).setDone();
         Ui.markDone(tasks.get(num));
-        storage.write(tasks);
     }
 
     /**
@@ -95,7 +110,6 @@ public class TaskList {
         int num = Integer.parseInt(command) - 1;
         Task cur = tasks.remove(num);
         Ui.delete(cur, tasks);
-        storage.write(tasks);
     }
 
     /**

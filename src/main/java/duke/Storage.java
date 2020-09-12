@@ -1,16 +1,16 @@
 package duke;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * handle loading files and saving program's data to disk
  */
 public class Storage {
+    private final Queue<String> inputData;
     private File file;
 
     /**
@@ -30,6 +30,20 @@ public class Storage {
             System.out.println("An error occurred when interacting with file.");
             e.printStackTrace();
         }
+        inputData = readFileToLines();
+    }
+
+    private Queue<String> readFileToLines() {
+        Queue<String> dataToReturn = new LinkedList<>();
+        try {
+            Scanner sc = new Scanner(file);
+            while (sc.hasNext()) {
+                dataToReturn.add(sc.nextLine());
+            }
+        } catch (FileNotFoundException e) {
+            assert (false); // not possible since if file hasn't existed, it will be created in the constructor
+        }
+        return dataToReturn;
     }
 
     /**
@@ -37,38 +51,30 @@ public class Storage {
      *
      * @return the data of the file provided in the constructor
      */
-    public List<Task> load() {
+    public List<Task> load() throws IllegalStateException {
         List<Task> lst = new ArrayList<>();
-        try {
-            Scanner sc = new Scanner(file);
-            while (sc.hasNext()) {
-                String type = sc.nextLine();
-                String desc = sc.nextLine();
-                int status = Integer.parseInt(sc.nextLine());
-                switch (type) {
-                case "todo":
-                    lst.add(new Todo(desc));
-                    break;
-                case "deadline":
-                    String by = sc.nextLine();
-                    lst.add(new Deadline(desc, by));
-                    break;
-                case "event":
-                    String at = sc.nextLine();
-                    lst.add(new Event(desc, at));
-                    break;
-                default:
-                    throw new IllegalStateException("The data file is corrupted");
-                }
-                if (status == 1) {
-                    lst.get(lst.size() - 1).setDone();
-                }
+        while (!inputData.isEmpty()) {
+            String type = inputData.poll();
+            String desc = inputData.poll();
+            int status = Integer.parseInt(inputData.poll());
+            switch (type) {
+            case "todo":
+                lst.add(new Todo(desc));
+                break;
+            case "deadline":
+                String by = inputData.poll();
+                lst.add(new Deadline(desc, by));
+                break;
+            case "event":
+                String at = inputData.poll();
+                lst.add(new Event(desc, at));
+                break;
+            default:
+                throw new IllegalStateException("The data file is corrupted");
             }
-        } catch (IOException e) {
-            System.out.println("An error occurred when interacting with file.");
-            e.printStackTrace();
-        } catch (IllegalStateException e) {
-            System.out.println(e);
+            if (status == 1) {
+                lst.get(lst.size() - 1).setDone();
+            }
         }
         return lst;
     }

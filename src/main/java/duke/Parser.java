@@ -1,16 +1,12 @@
 package duke;
 
-import java.util.Scanner;
-
 /**
  * Handle user input and control the program's logic
  */
 class Parser {
-    private final Scanner in;
     private final TaskList taskList;
 
     Parser(TaskList taskList) {
-        in = new Scanner(System.in);
         this.taskList = taskList;
     }
 
