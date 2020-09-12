@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 import java.util.*;
 
 /**
@@ -67,6 +68,13 @@ public class Storage {
                 break;
             case "event":
                 String at = inputData.poll();
+                if (!inputData.isEmpty()) {
+                    try {
+                        lst.add(new Event(desc, at, inputData.peek()));
+                    } catch (DateTimeParseException e) {
+                        break;
+                    }
+                }
                 lst.add(new Event(desc, at));
                 break;
             default:
