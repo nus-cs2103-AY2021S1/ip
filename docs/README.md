@@ -2,7 +2,7 @@
 
 ## Introduction
 
-Duke application is an offline task management tool that helps you to organize the task list and save the task data in your computer's storage.
+Duke application is an offline task management tool that organizes the task list and saves the task data in the local computer's storage.
 
 <img src="Ui/../Ui.png" width="320" height="497"/>
 
@@ -126,7 +126,38 @@ Expected outcome:
 Bye. See you again soon!
 ```
 
-### 6. List tasks
+The application will be closed.
+
+### 6. Find tasks
+
+Find the tasks based on the query keyword.
+
+### Usage
+
+### `find [keyword]` - find the tasks
+
+Enter the command to display the found tasks.
+
+Example of usage:
+
+`find CS2103T`
+
+Expected outcome:
+
+1. If there is task associated with the keyword:
+
+```console
+Here are the matching tasks in your list:
+    1.[T][✗][MEDIUM] CS2103T iP
+```
+
+2. If there is no task associated with the keyword:
+
+```console
+No task found...
+```
+
+### 7. List tasks
 
 List all the saved tasks from `./data/tasks.txt` file.
 
@@ -142,11 +173,11 @@ Example of usage:
 
 Expected outcome:
 
-1. If there is any task:
+1. If there is task:
 
 ```console
 Here are the tasks in your list:
-    1.[T][✗][MEDIUM] task
+    1.[T][✗][MEDIUM] CS2103T iP
 ```
 
 2. If there is no task:
@@ -155,7 +186,7 @@ Here are the tasks in your list:
 No task added yet...
 ```
 
-### 7. Mark a `Task` as done
+### 8. Mark a `Task` as done
 
 Mark a `Task` as done and update `./data/tasks.txt` file.
 
@@ -184,7 +215,7 @@ Nice! I have marked this task as done:
 The task number is not found
 ```
 
-### 8. Prioritise a `Task`
+### 9. Prioritise a `Task`
 
 Mark a `Task` priority and update `./data/tasks.txt` file.
 
