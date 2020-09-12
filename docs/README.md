@@ -8,6 +8,7 @@ There are three types of tasks currently supported by Shiro:
 * Events: tasks with a specified date of occurrence
 
 I customized it with the theme of my favourite cartoon: Sumikko Gurashi!
+![GitHub Logo](Ui.png)
 
 ## Features 
 1. ```help```: provides a list of possible commands
@@ -76,7 +77,7 @@ This command adds a *todo* task to the list.
 ##### Expected outcome:
 ```
 sure thing! i have added the following task to your list:
-	[T][✘] read book
+    [T][✘] read book
 you have [1] task(s) in your list
 ```
 
@@ -101,7 +102,7 @@ instead of the current date.
 ##### Expected outcome:
 ```
 sure thing! i have added the following task to your list:
-	[D][✘] return book (by: Sep 20 2020)
+    [D][✘] return book (by: Sep 20 2020)
 you have [1] task(s) in your list
 ```
 
@@ -126,7 +127,7 @@ instead of the current date.
 ##### Expected outcome:
 ```
 sure thing! i have added the following task to your list:
-  [E][✘] project meeting (at: Sep 28 2020)
+    [E][✘] project meeting (at: Sep 28 2020)
 you have [1] task(s) in your list
 ```
 
@@ -144,7 +145,7 @@ If the task corresponding with the task number uncompleted [✘] before, it will
 ##### Expected outcome:
 ```
 yay! i have marked this task as done:
-  [E][✓] project meeting (at: Sep 28 2020)
+    [E][✓] project meeting (at: Sep 28 2020)
 you have [1] task(s) in your list
 ```
 
@@ -160,7 +161,7 @@ This command deletes the specified task from the list
 ##### Expected outcome:
 ```
 of course! i have deleted this task from your list:
-  [D][✘] return book (by: Sep 20 2020)
+    [D][✘] return book (by: Sep 20 2020)
 you have [3] task(s) in your list
 ```
 
