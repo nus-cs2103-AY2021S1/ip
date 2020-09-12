@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+import main.java.farrell.duke.DukeException;
 import org.junit.Test;
 
 import main.java.farrell.duke.Duke;
@@ -120,7 +121,11 @@ public class DukeTest {
 
         StringBuilder sb = new StringBuilder();
         for (String line : input.split("\n")) {
-            sb.append(duke.run(line));
+            try {
+                sb.append(duke.run(line));
+            } catch (DukeException e) {
+                sb.append(e.getMessage());
+            }
             sb.append("\n");
         }
 

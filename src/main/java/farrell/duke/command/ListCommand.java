@@ -11,6 +11,9 @@ public class ListCommand extends Command {
 
     @Override
     public String execute(TaskList taskList) throws DukeException {
+        if (taskList.getSize() <= 0) {
+            throw new DukeException("There are no tasks!");
+        }
         return taskList.toString();
     }
 }

@@ -1,13 +1,14 @@
 package farrell.duke;
 
 import main.java.farrell.duke.Duke;
+import main.java.farrell.duke.DukeException;
 import org.junit.Test;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.*;
 
 public class DataManagerTest {
     @Test
@@ -16,7 +17,12 @@ public class DataManagerTest {
             String expectedOutput = Files.readString(Paths.get("ExpectedOutputs", "Load.txt"));
 
             Duke duke = new Duke("TestInputs/Load.txt");
-            String output = duke.run("list");
+            String output;
+            try {
+                output = duke.run("list");
+            } catch (DukeException e) {
+                output = e.getMessage();
+            }
 
             assertEquals(expectedOutput, output);
         } catch (IOException e) {
@@ -32,7 +38,12 @@ public class DataManagerTest {
 
             Duke duke = new Duke();
             for(String line : input.split("\n")) {
-                duke.run(line);
+                try {
+                    duke.run(line);
+                } catch (DukeException e) {
+                    System.out.println("Invalid Command Provided");
+                    fail();
+                }
             }
 
             String output = Files.readString(Paths.get("data", "data.txt"));

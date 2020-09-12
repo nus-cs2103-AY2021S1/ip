@@ -43,6 +43,10 @@ public class TaskList {
         return taskList;
     }
 
+    public int getSize() {
+        return taskList.size();
+    }
+
     /**
      * Adds a task to the list.
      *

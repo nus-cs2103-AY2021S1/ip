@@ -32,7 +32,7 @@ public class CommandParser {
             try {
                 return new EventCommand(parameters[0], LocalDate.parse(parameters[1]));
             } catch (DateTimeParseException exception) {
-                //throw new DukeException("Invalid date format! Please use YYYY-MM-DD" + parameters[1]);
+                throw new DukeException("Invalid date format! Please use YYYY-MM-DD");
             }
         case DEADLINE:
             try {

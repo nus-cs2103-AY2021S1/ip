@@ -31,9 +31,10 @@ public class UserDialog extends HBox {
 
         textLabel = new Label(text);
         textLabel.setWrapText(true);
-        textLabel.setMinSize(255, 100);
+        textLabel.setPrefSize(255, 100);
         textLabel.setPadding(new Insets(5));
         textLabel.setTextAlignment(TextAlignment.RIGHT);
+        textLabel.setAlignment(Pos.CENTER_RIGHT);
 
         BackgroundFill textBg = new BackgroundFill(
                 Color.BISQUE,

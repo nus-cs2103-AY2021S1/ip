@@ -13,6 +13,9 @@ public class DoneCommand extends Command {
 
     @Override
     public String execute(TaskList taskList) throws DukeException {
+        if (taskIndex < 0 || taskIndex > taskList.getSize() - 1) {
+            throw new DukeException("There is no task with index " + taskIndex);
+        }
         taskList.updateDone(taskIndex);
         return "Nice! I've marked the this as done.\n"
                 + taskList.getTask(taskIndex).toString();
