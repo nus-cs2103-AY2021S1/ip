@@ -59,14 +59,11 @@ public class Duke {
      *
      * @param input The user input.
      * @return The CommandResult.
+     * @throws DukeException If an exception occurs.
      */
-    public CommandResult getResult(String input) {
-        try {
-            Command command = Parser.parse(input);
-            storage.save(taskList);
-            return command.execute(taskList);
-        } catch (DukeException e) {
-            return new CommandResult("\t " + e.getMessage(), false);
-        }
+    public CommandResult getResult(String input) throws DukeException {
+        Command command = Parser.parse(input);
+        storage.save(taskList);
+        return command.execute(taskList);
     }
 }
