@@ -7,8 +7,6 @@ import duke.util.Storage;
 import duke.util.Ui;
 
 //TODO: [W3] Stretch Goals: Level 8- Use date related command
-//TODO: [W5] branch-A-Lambdas
-//TODO: [W5] branch-A-Streams
 
 /**
  * Driver of {@code Duke} programme.
@@ -73,5 +71,14 @@ public class Duke {
      */
     public String getUiUpdate() {
         return ui.flush();
+    }
+
+    /**
+     * Retrieves the error buffer (if any) to display in UI
+     *
+     * @return Error message. If no error is found, empty string is returned
+     */
+    public String getErrorString() {
+        return ui.flushError();
     }
 }

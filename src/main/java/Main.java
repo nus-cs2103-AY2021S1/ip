@@ -18,7 +18,7 @@ public class Main extends Application {
             stage.setScene(scene);
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             fxmlLoader.<MainWindow>getController().update();
-            stage.setTitle("Duke Bot");
+            stage.setTitle("Jackie Chan Bot");
             stage.show();
 
             //Add action when pressing on close button

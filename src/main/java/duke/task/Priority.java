@@ -11,7 +11,7 @@ public enum Priority {
     HIGH(2),
     MID(3),
     LOW(4),
-    UNCLASSIFIED(5);
+    NONE(5);
 
     private int priorityValue;
     private Priority(final int priorityValue) {

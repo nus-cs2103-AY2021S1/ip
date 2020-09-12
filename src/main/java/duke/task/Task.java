@@ -22,7 +22,7 @@ public abstract class Task {
      * @param desc The description for this task.
      */
     protected Task(String desc) {
-        this(desc,false, Priority.UNCLASSIFIED);
+        this(desc,false, Priority.NONE);
     }
 
     /**
@@ -45,7 +45,7 @@ public abstract class Task {
             }
 
             if (priorityValue >= Priority.CRITICAL.getPriorityValue() &&
-                    priorityValue <= Priority.UNCLASSIFIED.getPriorityValue()) {
+                    priorityValue <= Priority.NONE.getPriorityValue()) {
                 priority = Priority.getPriority(priorityValue);
                 desc = (desc.substring(0, priorityIndex - 1) + desc.substring(priorityIndex + 1)).strip();
             }
@@ -120,7 +120,7 @@ public abstract class Task {
      */
     @Override
     public String toString(){
-        return String.format("[%c][%s] %s",
+        return String.format("[%c][%.4s] %s",
                 (this.isDone) ? '\u2713' : '\u2718', this.getPriority(), this.desc);
     }
 }

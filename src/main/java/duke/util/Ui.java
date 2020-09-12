@@ -14,8 +14,15 @@ public class Ui {
      * Output buffer for GUI output.
      * Only writable from println()
      * Only erasable from flush()
-     * */
+     */
     private String outputBuffer = "";
+
+    /**
+     * Error buffer for GUI output.
+     * Only writable from printError()
+     * Only erasable from flushError()
+     */
+    private String errorBuffer = "";
 
     /**
      * Constructs a new UI object, and displays a welcome message.
@@ -48,8 +55,19 @@ public class Ui {
         return output;
     }
 
+    /**
+     * Retrieves the error buffer to display in GUI.
+     *
+     * @return output string.
+     */
+    public String flushError() {
+        String output = this.errorBuffer;
+        errorBuffer = "";
+        return output;
+    }
+
     private void intro() {
-        println("Hello! I'm KING!", "Let me load the stored file ~~ ");
+        println("Hello! I'm Jackie Chan!", "Let me load the stored file ~~ \n");
     }
 
     /**
@@ -145,7 +163,8 @@ public class Ui {
     public void printError(DukeException de) {
         assert(de != null);
 
-        println(de.getMessage());
+        errorBuffer = de.getMessage();
+        //println(de.getMessage());
     }
 
     /**

@@ -14,6 +14,7 @@ import javafx.scene.layout.CornerRadii;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 import javafx.scene.text.TextAlignment;
 
 import java.io.IOException;
@@ -38,10 +39,11 @@ public class DialogBox extends HBox {
         this.displayPicture.setImage(img);
 
         //Mods
-        this.displayPicture.setClip(new Circle(45,50,45));
+        this.displayPicture.setClip(new Circle(50,50,50));
         this.setPadding(new Insets(20,10,20,10));
-        this.dialog.setPadding(new Insets(0,10,0,10));
+        this.dialog.setPadding(new Insets(0,30,0,10));
         this.dialog.setTextAlignment(TextAlignment.RIGHT);
+        this.dialog.setFont(Font.font(13));
     }
 
     private void flip() {
@@ -50,6 +52,7 @@ public class DialogBox extends HBox {
         this.getChildren().setAll(tmp);
         this.setAlignment(Pos.TOP_LEFT);
         this.dialog.setTextAlignment(TextAlignment.LEFT);
+        this.dialog.setPadding(new Insets(0,10,0,10));
     }
 
     public static DialogBox getUserDialog(String text, Image img) {
@@ -61,6 +64,13 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setBackground(new Background(new BackgroundFill(Color.LIME, CornerRadii.EMPTY, Insets.EMPTY)));
+        db.flip();
+        return db;
+    }
+
+    public static DialogBox getErrorDialog(String text, Image img) {
+        var db = new DialogBox(text, img);
+        db.setBackground(new Background(new BackgroundFill(Color.PINK, CornerRadii.EMPTY, Insets.EMPTY)));
         db.flip();
         return db;
     }
