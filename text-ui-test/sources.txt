@@ -1,9 +1,14 @@
 C:\Users\daong\Dev\ip\src\main\java\duke\Duke.java
+C:\Users\daong\Dev\ip\src\main\java\duke\Launcher.java
+C:\Users\daong\Dev\ip\src\main\java\duke\Main.java
+C:\Users\daong\Dev\ip\src\main\java\duke\MainWindow.java
 C:\Users\daong\Dev\ip\src\main\java\duke\commands\Commands.java
 C:\Users\daong\Dev\ip\src\main\java\duke\dukehelper\Parser.java
 C:\Users\daong\Dev\ip\src\main\java\duke\dukehelper\Storage.java
 C:\Users\daong\Dev\ip\src\main\java\duke\dukehelper\TaskList.java
 C:\Users\daong\Dev\ip\src\main\java\duke\dukehelper\Ui.java
+C:\Users\daong\Dev\ip\src\main\java\duke\dukehelper\uiparts\DialogBox.java
+C:\Users\daong\Dev\ip\src\main\java\duke\dukehelper\uiparts\Statistics.java
 C:\Users\daong\Dev\ip\src\main\java\duke\exception\DukeException.java
 C:\Users\daong\Dev\ip\src\main\java\duke\exception\DukeInvalidArgumentException.java
 C:\Users\daong\Dev\ip\src\main\java\duke\helper\DateTimeHelper.java
