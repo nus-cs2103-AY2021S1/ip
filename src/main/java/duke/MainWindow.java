@@ -3,7 +3,6 @@ package duke;
 import duke.dukehelper.uiparts.DialogBox;
 import duke.dukehelper.uiparts.Statistics;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
@@ -22,10 +21,7 @@ public class MainWindow extends AnchorPane {
     private VBox dialogContainer;
     @FXML
     private TextField userInput;
-    @FXML
-    private Button sendButton;
-    @FXML
-    private VBox sideMenu;
+
 
     private Duke duke;
 
@@ -34,46 +30,10 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize(Duke duke) {
-        sideMenu.getStylesheets().add(this.getClass().getClassLoader().getResource("style/side_menu.css").toExternalForm());
-        //sideMenu.getChildren().add(new Statistics(new int[]{1,2,3}));
         this.duke = duke;
         dialogContainer.getChildren().addAll(DialogBox.getDukeDialog(duke.init(),
                 dukeImage));
-        setUpFunctionality();
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-    }
-
-    private void addDialog() {
-        String userText = userInput.getText();
-        String dukeText = duke.getResponse(userInput.getText());
-        if(dukeText.equals("GET_CHART")) {
-            //dialogContainer.getChildren().add();
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(userText,userImage),
-                    DialogBox.getStatDialog(new Statistics(), dukeImage)
-            );
-        } else {
-            //System.out.println("HERE");
-            dialogContainer.getChildren().addAll(
-                    DialogBox.getUserDialog(userText,userImage),
-                    DialogBox.getDukeDialog(dukeText, dukeImage)
-            );
-        }
-        userInput.clear();
-    }
-
-    private void setUpFunctionality() {
-        sendButton.setOnMouseClicked((event) -> {
-            if (!userInput.getText().strip().equals("")) {
-                addDialog();
-            }
-        });
-
-        userInput.setOnAction((event) -> {
-            if (!userInput.getText().strip().equals("")) {
-                addDialog();
-            }
-        });
     }
 
     /**
@@ -86,13 +46,11 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         if(response == "GET_CHART") {
-            //dialogContainer.getChildren().add();
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input,userImage),
                     DialogBox.getStatDialog(new Statistics(), dukeImage)
             );
         } else {
-            //System.out.println("HERE");
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input,userImage),
                     DialogBox.getDukeDialog(response, dukeImage)

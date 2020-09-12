@@ -19,7 +19,7 @@ public class Duke {
     private final static String WRONG_FORMAT_MSG = "Wrong format\n"
             + " Your date and time(optional) should be in this format:\n"
             + "yyyy-mm-dd HHmm\ne.g: 2019-10-15 1800 or 2019-10-15";
-    private final static String ERROR_MSG = "OOPS!!! CAN YOU PLEASE TYPE SOMETHING MEANINGFUL?";
+    public final static String ERROR_MSG = "OOPS!!! CAN YOU PLEASE TYPE SOMETHING MEANINGFUL?";
     private final static String GREETINGS = "Hello! I'm Elon Musk. Type 'help' if you know nothing\n"
             + "Your tasks will be saved at /data\nWhat can I do for you?";
     private final static String ERROR_LOAD_MSG = "Something wrong happened while loading saved tasks";

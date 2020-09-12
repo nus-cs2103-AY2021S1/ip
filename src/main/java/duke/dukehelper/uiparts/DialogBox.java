@@ -1,6 +1,8 @@
 package duke.dukehelper.uiparts;
 
+import duke.Duke;
 import duke.MainWindow;
+import duke.dukehelper.Ui;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
@@ -52,6 +54,9 @@ public class DialogBox extends HBox {
         assert (text != null && img != null) : "Input is null";
         baseSetUp(img);
         dialog.getStyleClass().add("message-right");
+        if (text.equals(Ui.printDialog(Duke.ERROR_MSG))) {
+            dialog.getStyleClass().add("error-msg");
+        }
         dialog.setText(text);
         stat.setVisible(false);
     }

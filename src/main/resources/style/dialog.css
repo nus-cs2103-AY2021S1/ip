@@ -12,6 +12,10 @@
     -fx-background-radius: 20;
     -fx-padding: 10;
 }
+.error-msg {
+    -fx-text-fill: red;
+    -fx-font-weight: bold;
+}
 .layout {
     -fx-padding: 10.0 10.0 10.0 10.0;
 }
