@@ -70,6 +70,7 @@ public class Ui {
      * Print out the bye with different style.
      */
     public String showBye() {
-        return show("Bye. See you again");
+        return show("Bye. See you again\n"
+                + "Window will close in 2 seconds");
     }
 }

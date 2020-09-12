@@ -1,6 +1,5 @@
 package duke;
 import java.util.Arrays;
-import java.util.logging.Level;
 
 import duke.task.Task;
 /**
@@ -88,7 +87,7 @@ public class Duke {
      * @param input The user input.
      * @return Either Success Message or Error Message due to bad formatting.
      */
-    public String processInput(String input) {
+    public String processInput(String input, Runnable terminationFunction) {
         int index;
         String response = "";
         try {
@@ -99,6 +98,7 @@ public class Duke {
             case "bye":
                 storage.saveToFile(tasks.toSaveFormat());
                 response = ui.showBye();
+                terminationFunction.run();
                 break;
             case "done":
                 index = Integer.parseInt(inputComponents[1]);
