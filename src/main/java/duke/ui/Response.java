@@ -11,6 +11,9 @@ public class Response {
     /** Message the GUI should display to user **/
     private String message;
 
+    /** Whether an error has occurred **/
+    protected boolean isError;
+
     /**
      * Constructs a Response for the GUI.
      *
@@ -20,6 +23,7 @@ public class Response {
     public Response(boolean isExit, String message) {
         this.isExit = isExit;
         this.message = message;
+        this.isError = false;
     }
 
     public boolean shouldExit() {
@@ -29,4 +33,6 @@ public class Response {
     public String getMessage() {
         return message;
     }
+
+    public boolean isError() { return isError; }
 }

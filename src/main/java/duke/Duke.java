@@ -9,6 +9,7 @@ import duke.storage.DukeState;
 import duke.storage.DukeStateManager;
 import duke.storage.Storage;
 import duke.task.TaskList;
+import duke.ui.ErrorResponse;
 import duke.ui.Response;
 import duke.ui.Ui;
 
@@ -51,7 +52,7 @@ public class Duke {
             Response r = c.execute(taskList, ui, store, dukeStateManager);
             return r;
         } catch (DukeException e) {
-            return new Response(false, e.getFriendlyMessage());
+            return new ErrorResponse(false, e.getFriendlyMessage());
         } catch (IOException e) {
             return new Response(false, "Unable to connect to storage :-(");
         }
