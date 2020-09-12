@@ -37,7 +37,7 @@ public class Message {
      * @return the message indicating that the task was successfully deleted
      */
     public static String deletedTaskMessage(Task deletedTask, TaskList taskList) {
-        return "of course! i have removed this task: \n    " +
+        return "of course! i have deleted this task from your list: \n    " +
                 deletedTask + "\n" +
                 Message.numberOfTasksMessage(taskList.size());
     }
@@ -97,9 +97,9 @@ public class Message {
     public static String viewTasksOnDateMessage(ArrayList<Task> tasks) {
         String string;
         if (tasks.size() == 0) {
-            string = "yay! there are no tasks on the given date";
+            string = "yay! there are no tasks on your given date";
         } else {
-            string = "okies! here are the tasks on the given date:\n" +
+            string = "okies! here are the tasks on your given date:\n" +
                     Message.tasksAsStringMessage(tasks);
         }
         return string;
@@ -118,7 +118,7 @@ public class Message {
                 "5. delete <task_number>\n  " +
                 "6. list\n  " +
                 "7. clear\n  " +
-                "8. find <keyword>\n  " +
+                "8. find <keyword(s)>\n  " +
                 "9. view <date>\n " +
                 "10. bye\n\n" +
                 "<date> is in the format: <yyyy-mm-dd> or <daydayday>";
