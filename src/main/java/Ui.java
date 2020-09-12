@@ -1,7 +1,7 @@
 public class Ui {
     private final static String MSG_GREET = "Hello! I'm Clippy \n" +
-            "What can I do for you?\n";
-    private final static String MSG_EXIT = "Bye. Hope to see you again soon!";
+            "What can I do for you today?\n";
+    private final static String MSG_EXIT = "Bye! Hope to see you again soon!";
     private final static String MSG_ADDED_TASK = "Got it. I've added this task:\n";
     private final static String MSG_LIST_TASK_NO_TASK = "You have no tasks in your list.";
     private final static String MSG_LIST_TASK_HAVE_TASK = "Here are the tasks in your list:";
@@ -10,6 +10,9 @@ public class Ui {
     private final static String MSG_FOUND_MATCHING_TASK = "Here are the matching tasks in your list:";
     private final static String MSG_NO_MATCHING_TASK = "No matching tasks are found in your list.";
     private final static String MSG_UPDATED_TASK = "Ok! I have updated the task as follows:\n";
+    private final static String MSG_NOW_NO_TASK = "Now you have no tasks in the list.";
+    private final static String MSG_NOW_ONE_TASK = "Now you have 1 task in the list.";
+
 
 
     public String showWelcome() {
@@ -37,12 +40,20 @@ public class Ui {
     }
     
     public String showDeleted(Task task, int numOfRemainingTasks) {
-        return MSG_DELETED_TASK + task + "\n" 
-                + (numOfRemainingTasks == 0 
-                        ? "Now you have no tasks in the list."
-                        : (numOfRemainingTasks == 1 
-                                ? "Now you have 1 task in the list." 
-                                : "Now you have " + numOfRemainingTasks + " tasks in the list."));
+        return MSG_DELETED_TASK + task + "\n" + generateNumOfTasksRemainingSentence(numOfRemainingTasks);
+    }
+    
+    private String generateNumOfTasksRemainingSentence(int numOfRemainingTasks) {
+        assert numOfRemainingTasks >= 0 : "Negative number of remaining tasks";
+        switch (numOfRemainingTasks) {
+        case 0:
+            return MSG_NOW_NO_TASK;
+        case 1:
+            return MSG_NOW_ONE_TASK;
+        default:
+            return "Now you have " + numOfRemainingTasks + " tasks in the list.";
+        }
+            
     }
     
     public String showDone(Task task) {
