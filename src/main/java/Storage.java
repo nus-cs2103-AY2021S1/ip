@@ -83,20 +83,41 @@ public class Storage {
      *
      * @return TaskList containing the tasks
      */
+    public static TaskList loadTest(String filePath) {
+        ArrayList<Task> tasks = new ArrayList<>();
+        try {
+            FileReader file = new FileReader(filePath);
+            BufferedReader reader = new BufferedReader(file);
+            String line;
+            while ((line = reader.readLine()) != null) {
+                tasks.add(getTasks(line));
+            }
+            file.close();
+        } catch (IOException e) {
+            tasks = new ArrayList<>();
+        }
+        return new TaskList(tasks);
+    }
+
+    /**
+     * Get the list of tasks from the arraylist
+     *
+     * @return TaskList containing the tasks
+     */
     public static TaskList load() {
-        ArrayList<Task> task = new ArrayList<>();
+        ArrayList<Task> tasks = new ArrayList<>();
         try {
             FileReader file = new FileReader("Data/duke.txt");
             BufferedReader reader = new BufferedReader(file);
             String line;
             while ((line = reader.readLine()) != null) {
-                task.add(getTasks(line));
+                tasks.add(getTasks(line));
             }
             file.close();
         } catch (IOException e) {
-            task = new ArrayList<>();
+            tasks = new ArrayList<>();
         }
-        return new TaskList(task);
+        return new TaskList(tasks);
     }
 
     /**
@@ -133,6 +154,28 @@ public class Storage {
      * can be easily parsed when the chatbot is rerun. If the file or folder doesn't exist then,
      * a new file will be made
      */
+    public static void saveTest(String direct, String addedFile) {
+        try {
+            String folderPath = direct;
+            File directory = new File(folderPath);
+            if (!directory.isDirectory()) {
+                File folder = new File(folderPath);
+                folder.mkdir();
+            }
+            File file = new File(direct + "/" + addedFile);
+            file.createNewFile();
+            FileWriter writer = new FileWriter(file);
+            writer.write(list.save());
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("No File found");
+        }
+    }
+    /**
+     * Writes the tasklist into the file at the filepath of this storage object in a format which
+     * can be easily parsed when the chatbot is rerun. If the file or folder doesn't exist then,
+     * a new file will be made
+     */
     public void save() {
         try {
             String folderPath = "Data";
@@ -150,7 +193,6 @@ public class Storage {
             System.out.println("No File found");
         }
     }
-
     /**
      * Writes the tasklist into the file at the filepath of this storage object in a format which
      * can be easily parsed when the chatbot is rerun. If the file or folder doesn't exist then,

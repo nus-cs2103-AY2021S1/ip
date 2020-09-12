@@ -21,21 +21,38 @@ public class TaskList {
         return this.tasks;
     }
 
+    /**
+     * Add a task to the tasklist
+     * @param task to be added into the tasklist
+     */
     public void update(Task task) {
         assert task != null : "A null task was passed in";
         tasks.add(task);
     }
 
+    /**
+     * Get a task from the given index in the tasklist
+     * @param i index to be pulled
+     * @return Task object
+     */
     public Task get(int i) {
         assert this.tasks != null : "The arraylist of tasks can never be null";
         return tasks.get(i - 1);
     }
 
+    /**
+     * Delete at the given index
+     * @param i index to be deleted
+     */
     public void delete(int i) {
         assert this.tasks != null : "The arraylist of tasks can never be null";
         tasks.remove(i - 1);
     }
 
+    /**
+     * Update the task to show done
+     * @param i index to be updated
+     */
     public void updateStatus(int i) {
         assert this.tasks != null : "The arraylist of tasks can never be null";
         tasks.get(i - 1).updateStatus();

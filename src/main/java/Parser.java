@@ -4,7 +4,13 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-import exceptions.*;
+import exceptions.EmptyTodoException;
+import exceptions.InvalidDateException;
+import exceptions.InvalidDeadlineException;
+import exceptions.InvalidEventException;
+import exceptions.InvalidNumberException;
+import exceptions.InvalidTaskException;
+import exceptions.UnknownCommandException;
 import tasks.Deadline;
 import tasks.Event;
 import tasks.Task;
@@ -79,7 +85,7 @@ public class Parser {
         case "update":
             try {
                 str = changeTask(input, list);
-            } catch(InvalidTaskException ex){
+            } catch (InvalidTaskException ex) {
                 return "Invalid task provided";
             }
             break;
@@ -100,9 +106,9 @@ public class Parser {
      * @return
      */
     public static String changeTask(String request, TaskList list) throws InvalidTaskException {
-        assert !request.equals(""): "An empty string is not allowed";
+        assert !request.equals("") : "An empty string is not allowed";
         String[] requests = request.split(" ");
-        if (requests.length < 4){
+        if (requests.length < 4) {
             throw new InvalidTaskException();
         }
         int index = 0;
@@ -116,21 +122,21 @@ public class Parser {
         }
         Task task = list.get(index);
         StringBuilder sb = new StringBuilder();
-        for (int i = 3; i < requests.length; i++){
+        for (int i = 3; i < requests.length; i++) {
             sb.append(requests[i]);
             sb.append(" ");
         }
         String updatedString = task + " has been updated to ";
         String newWork = sb.toString();
-        if (requests[2].equals("date") && task.istodo()){
+        if (requests[2].equals("date") && task.istodo()) {
             return "Not possible to change the date of a todo";
         }
-        if (requests[2].equals("date")){
+        if (requests[2].equals("date")) {
             try {
                 LocalDateTime date = parseDate(requests[3] + " " + requests[4]);
                 task.setDate(date);
                 System.out.println(task.toString());
-            } catch (InvalidDateException ex){
+            } catch (InvalidDateException ex) {
                 return "Invalid date format used";
             }
         } else {
@@ -140,7 +146,11 @@ public class Parser {
         return updatedString + task.toString();
     }
 
-    public static LocalDateTime parseDate(String str) throws InvalidDateException{
+    /**
+     * @param str
+     * @return
+     */
+    public static LocalDateTime parseDate(String str) throws InvalidDateException {
         str = str.trim();
         String datestr = str.replaceAll("-", "/");
         String[] datearr = datestr.split("/");

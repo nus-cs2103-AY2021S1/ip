@@ -28,8 +28,8 @@ public class Task {
      * @param date A LocalDateTime object containing the timing of the deadline/task
      */
     public Task(String work, LocalDateTime date) {
-        assert work.length() != 0 && date!= null : "The input cannot be empty " +
-                "and date cannot be null";
+        assert work.length() != 0 && date != null : "The input cannot be empty "
+                + "and date cannot be null";
         this.work = work;
         this.date = date;
         this.done = false;
@@ -65,11 +65,11 @@ public class Task {
         return false;
     }
 
-    public void setWork(String work){
+    public void setWork(String work) {
         this.work = work;
     }
 
-    public void setDate(LocalDateTime date){
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 
