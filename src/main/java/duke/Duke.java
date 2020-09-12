@@ -47,8 +47,12 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
+            // interpret user input
             Command c = Parser.parse(input);
-            return c.execute(tasks, storage, stats);
+            assert tasks != null : "task list should not be uninitialised";
+            assert ui != null : "ui should not be uninitialised";
+            assert storage != null : "storage should not be uninitialised";
+            return c.execute(tasks, ui, storage);
         } catch (DukeException e) {
             return e.toString();
         }
