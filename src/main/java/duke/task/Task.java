@@ -1,5 +1,7 @@
 package duke.task;
 
+import duke.DukeException;
+
 public class Task {
     protected String description;
     protected boolean isDone;
@@ -29,11 +31,11 @@ public class Task {
         return (isDone ? "\u2713" : "\u2718"); //return tick or X symbols
     }
 
-    public void markDone() {
+    public void markDone() throws DukeException {
         this.isDone = true;
     }
 
-    public boolean getIsDone() {
+    public boolean getIsDone() throws DukeException {
         return this.isDone;
     }
 

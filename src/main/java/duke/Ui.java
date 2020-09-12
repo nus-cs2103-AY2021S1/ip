@@ -94,6 +94,16 @@ public class Ui {
     }
 
     /**
+     * Shows Task added message.
+     *
+     * @param task which is added.
+     */
+    public String addTriviaReply(Task task, TaskList taskItems) {
+        return String.format("Got it. I've added this trivia:\n    %s\nNow you have %d items in the list",
+                task.toString(), taskItems.getSize());
+    }
+ 
+    /**
      * Shows Task deleted message.
      *
      * @param task which is deleted.
