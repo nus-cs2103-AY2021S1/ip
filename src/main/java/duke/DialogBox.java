@@ -6,10 +6,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Color;
 import javafx.scene.paint.ImagePattern;
 import javafx.scene.shape.Circle;
 
@@ -65,7 +62,7 @@ public class DialogBox extends HBox {
      */
     public static DialogBox getUserDialog(Label l, Image iv) {
         var db = new DialogBox(l, iv);
-        db.setBackground(new Background(new BackgroundFill(Color.CYAN, null, null)));
+        db.setStyle("-fx-background-color: #2cd1a2;");
         return db;
     }
 
@@ -78,7 +75,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(Label l, Image iv) {
         var db = new DialogBox(l, iv);
         db.flip();
-        db.setBackground(new Background(new BackgroundFill(Color.DARKORANGE, null, null)));
+        db.setStyle("-fx-background-color: #17c0e6;");
         return db;
     }
 }
