@@ -24,7 +24,7 @@ class TaskList {
      * Constructs list of tasks.
      *
      * @param taskStrings List of tasks in string format.
-     * @throws DukeException  When date is in wrong format.
+     * @throws DukeException  When date is in wrong format, or when task is not named as D/E/T.
      */
     TaskList(ArrayList<ArrayList<String>> taskStrings) throws DukeException {
 
@@ -49,7 +49,8 @@ class TaskList {
                 handleTodo(description, isDone);
                 break;
             default:
-                throw new DukeException("Invalid character in storage file :-(");
+                String errorMessage = ErrorMessage.getErrorMessage(ErrorType.WRONG_TASK_TYPE_IN_STORAGE);
+                throw new DukeException(errorMessage);
             }
         }
     }
@@ -70,7 +71,7 @@ class TaskList {
      * @param description Description of task.
      * @param date Date of task.
      * @return Output for ui for adding tasks.
-     * @throws DukeException
+     * @throws DukeException Throws exception when date is in wrong format.
      */
     String[] addTask(CommandName commandName, String description, String date) throws DukeException {
         Task task;
@@ -113,46 +114,39 @@ class TaskList {
         taskList.add(todo);
     }
 
-    private Task handleDeadline(String deadlineTask, String deadlineBy) throws DukeException {
+    private LocalDate checkParseDate(String dateString) throws DukeException {
         try {
-            LocalDate deadlineByLocalDate = LocalDate.parse(deadlineBy);
-            Task deadline = new Deadline(deadlineTask, deadlineByLocalDate);
-            taskList.add(deadline);
-            return deadline;
+            return LocalDate.parse(dateString);
         } catch (DateTimeParseException e) {
-            throw new DukeException("OOPS!!! Pass in a date in yyyy-mm-dd :-(");
+            String errorMessage = ErrorMessage.getErrorMessage(ErrorType.WRONG_DATE_FORMAT);
+            throw new DukeException(errorMessage);
         }
+    }
+
+    private Task handleDeadline(String deadlineTask, String deadlineBy) throws DukeException {
+        LocalDate deadlineByLocalDate = checkParseDate(deadlineBy);
+        Task deadline = new Deadline(deadlineTask, deadlineByLocalDate);
+        taskList.add(deadline);
+        return deadline;
     }
 
     private void handleDeadline(String deadlineTask, String deadlineBy, boolean isDone) throws DukeException {
-        try {
-            LocalDate deadlineByLocalDate = LocalDate.parse(deadlineBy);
-            Task deadline = new Deadline(deadlineTask, deadlineByLocalDate, isDone);
-            taskList.add(deadline);
-        } catch (DateTimeParseException e) {
-            throw new DukeException("OOPS!!! Pass in a date in yyyy-mm-dd :-(");
-        }
+        LocalDate deadlineByLocalDate = checkParseDate(deadlineBy);
+        Task deadline = new Deadline(deadlineTask, deadlineByLocalDate, isDone);
+        taskList.add(deadline);
     }
 
     private Task handleEvent(String eventTask, String eventAt) throws DukeException {
-        try {
-            LocalDate eventAtLocalDate = LocalDate.parse(eventAt);
-            Task event = new Event(eventTask, eventAtLocalDate);
-            taskList.add(event);
-            return event;
-        } catch (DateTimeParseException e) {
-            throw new DukeException("OOPS!!! Pass in a date in yyyy-mm-dd :-(");
-        }
+        LocalDate eventAtLocalDate = checkParseDate(eventAt);
+        Task event = new Event(eventTask, eventAtLocalDate);
+        taskList.add(event);
+        return event;
     }
 
     private void handleEvent(String eventTask, String eventAt, boolean isDone) throws DukeException {
-        try {
-            LocalDate eventAtLocalDate = LocalDate.parse(eventAt);
-            Task event = new Event(eventTask, eventAtLocalDate, isDone);
-            taskList.add(event);
-        } catch (DateTimeParseException e) {
-            throw new DukeException("OOPS!!! Pass in a date in yyyy-mm-dd :-(");
-        }
+        LocalDate eventAtLocalDate = checkParseDate(eventAt);
+        Task event = new Event(eventTask, eventAtLocalDate, isDone);
+        taskList.add(event);
     }
 
     /**

@@ -1,0 +1,19 @@
+package duke;
+
+/**
+ * Enumeration of all error types.
+ */
+public enum ErrorType {
+    WRONG_TASK_TYPE_IN_STORAGE,
+    WRONG_DATE_FORMAT,
+    FILE_NOT_FOUND,
+    FILE_IO,
+    DONE_MISSING_INDEX,
+    DELETE_MISSING_INDEX,
+    FIND_MISSING_KEYWORD,
+    SORT_MISSING_ORDER,
+    TASK_MISSING_DESCRIPTION,
+    DEADLINE_AND_EVENT_MISSING_DATE,
+    INVALID_COMMAND,
+    INVALID_ORDER
+}

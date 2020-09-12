@@ -68,26 +68,29 @@ class Parser {
     }
 
     private static Command handleDone(String[] inputs) throws DukeException {
-        String indexString = tryGetSecondElement(inputs, "OOPS!!! Please add index to be done.");
+        String errorMessage = ErrorMessage.getErrorMessage(ErrorType.DONE_MISSING_INDEX);
+        String indexString = tryGetSecondElement(inputs, errorMessage);
         int index = Integer.parseInt(indexString);
         return new DoneCommand(index);
     }
 
     private static Command handleDelete(String[] inputs) throws DukeException {
-        String indexString = tryGetSecondElement(inputs, "OOPS!!! Please add index to be deleted.");
+        String errorMessage = ErrorMessage.getErrorMessage(ErrorType.DELETE_MISSING_INDEX);
+        String indexString = tryGetSecondElement(inputs, errorMessage);
         int index = Integer.parseInt(indexString);
         return new DeleteCommand(index);
     }
 
     private static Command handleFind(String[] inputs) throws DukeException {
-        String findString = tryGetSecondElement(inputs, "OOPS!!! Please add what you want to find.");
+        String errorMessage = ErrorMessage.getErrorMessage(ErrorType.FIND_MISSING_KEYWORD);
+        String findString = tryGetSecondElement(inputs, errorMessage);
         return new FindCommand(findString);
     }
 
     private static Command handleSort(String[] inputs) throws DukeException {
-        String sortOrderOption = tryGetSecondElement(inputs,
-                "OOPS!!! Please add in sort order.").toUpperCase();
-        SortOrderOption sortOrderOptionEnum = checkSortOrderOptionEnum(sortOrderOption);
+        String errorMessage = ErrorMessage.getErrorMessage(ErrorType.SORT_MISSING_ORDER);
+        String sortOrderOption = tryGetSecondElement(inputs, errorMessage);
+        SortOrderOption sortOrderOptionEnum = checkSortOrderOptionEnum(sortOrderOption.toUpperCase());
         return new SortCommand(sortOrderOptionEnum);
     }
 
@@ -99,10 +102,10 @@ class Parser {
      * @throws DukeException If deadline date not input for deadline, or event date not input for event.
      */
     private static Command handleTask(String[] inputs, CommandName commandName) throws DukeException {
-        String taskInfo = tryGetSecondElement(inputs,
-                "OOPS!!! The description of a "
-                + commandName.toString().toLowerCase()
-                + " cannot be empty.");
+        String errorMessage = ErrorMessage.getErrorMessage(
+                ErrorType.TASK_MISSING_DESCRIPTION,
+                commandName.toString().toLowerCase());
+        String taskInfo = tryGetSecondElement(inputs, errorMessage);
 
         switch (commandName) {
         case TODO:
@@ -122,10 +125,10 @@ class Parser {
 
         String [] taskInfoParts = taskInfo.split(toSplitBy, 2);
         String description = taskInfoParts[0];
-        String date = tryGetSecondElement(taskInfoParts,
-                "OOPS!!! The date of a "
-                        + commandName.toString().toLowerCase()
-                        + " cannot be empty.");
+        String errorMessage = ErrorMessage.getErrorMessage(
+                ErrorType.DEADLINE_AND_EVENT_MISSING_DATE,
+                commandName.toString().toLowerCase());
+        String date = tryGetSecondElement(taskInfoParts, errorMessage);
         return new AddCommand(commandName, description, date);
     }
 
@@ -133,7 +136,8 @@ class Parser {
         try {
             return CommandName.valueOf(action);
         } catch (IllegalArgumentException e) {
-            throw new DukeException("OOPS!!! I'm sorry, but I don't know what that means :-(");
+            String errorMessage = ErrorMessage.getErrorMessage(ErrorType.INVALID_COMMAND);
+            throw new DukeException(errorMessage);
         }
     }
 
@@ -141,7 +145,8 @@ class Parser {
         try {
             return SortOrderOption.valueOf(orderOption);
         } catch (IllegalArgumentException e) {
-            throw new DukeException("OOPS!!! Please enter either asc or desc.");
+            String errorMessage = ErrorMessage.getErrorMessage(ErrorType.INVALID_ORDER);
+            throw new DukeException(errorMessage);
         }
     }
 }

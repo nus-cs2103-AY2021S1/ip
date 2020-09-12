@@ -17,7 +17,7 @@ class Storage {
     private String filePath;
 
     /**
-     * Constructor used to create file storage.
+     * Constructs file storage.
      *
      * @param filePath Filepath of input and output file.
      */
@@ -47,7 +47,8 @@ class Storage {
             file.createNewFile();
             return new ArrayList<>();
         } catch (IOException e) {
-            throw new DukeException("A file error has occurred!");
+            String errorMessage = ErrorMessage.getErrorMessage(ErrorType.FILE_IO);
+            throw new DukeException(errorMessage);
         }
     }
 
@@ -69,7 +70,8 @@ class Storage {
             }
             return formattedOutput;
         } catch (java.io.FileNotFoundException e) {
-            throw new DukeException("A file error has occurred!");
+            String errorMessage = ErrorMessage.getErrorMessage(ErrorType.FILE_NOT_FOUND);
+            throw new DukeException(errorMessage);
         }
     }
 
@@ -98,7 +100,8 @@ class Storage {
             fw.write(textToAppend);
             fw.close();
         } catch (IOException e) {
-            throw new DukeException("A file error has occurred!");
+            String errorMessage = ErrorMessage.getErrorMessage(ErrorType.FILE_IO);
+            throw new DukeException(errorMessage);
         }
     }
 }
