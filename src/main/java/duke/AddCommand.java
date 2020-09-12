@@ -7,7 +7,7 @@ import java.util.ArrayList;
  */
 class AddCommand extends Command {
 
-    /** Name of command e.g. Todo. */
+    /** Name of command e.g. Deadline. */
     private CommandName commandName;
     /** Description of task. */
     private String description;
