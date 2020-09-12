@@ -45,11 +45,13 @@ formats should be followed exactly.
 ### `todo` - Adds a Todo task to the list
 Format: `todo <description>`
 
-\>\> Example of usage:
+\> Example of usage:
 
-`todo read a book`
+```
+todo read a book
+```
 
-<< Expected outcome:
+< Expected outcome:
 
 ```
 Okay I've added:
@@ -68,11 +70,13 @@ Date alternatives: `today` or `tomorrow` or select from dropdown calendar in GUI
 
 Time format (24 hr): `hh:mm` or `hh.mm`
 
-\>\> Example of usage:
+\> Example of usage:
 
-`deadline finish README.md /by tomorrow`
+```
+deadline finish README.md /by tomorrow
+```
 
-<< Expected outcome:
+< Expected outcome:
 
 ```
 Okay I've added:
@@ -91,11 +95,13 @@ Date alternatives: `today` or `tomorrow` or select from dropdown calendar in GUI
 
 Time format (24 hr): `hh:mm` or `hh.mm`
 
-\>\> Example of usage:
+\> Example of usage:
 
-`event speed dating /at 2021-03-07 9:00`
+```
+event speed dating /at 2021-03-07 9:00
+```
 
-<< Expected outcome:
+< Expected outcome:
 
 ```
 Okay I've added:
@@ -110,11 +116,13 @@ Format: `fixed <description> /for <duration>`
 
 Duration format: `<[xh] [ym]>` for x hours y minutes
 
-\>\> Example of usage:
+\> Example of usage:
 
-`fixed meditate /for 30m`
+```
+fixed meditate /for 30m
+```
 
-<< Expected outcome:
+< Expected outcome:
 
 ```
 Okay I've added:
@@ -133,11 +141,13 @@ Date alternatives: `today` or `tomorrow` or select from dropdown calendar in GUI
 
 Time format (24 hr): `hh:mm` or `hh.mm`
 
-\>\> Example of usage:
+\> Example of usage:
 
-`start 4 today 23:00`
+```
+start 4 today 23:00
+```
 
-<< Expected outcome:
+< Expected outcome:
 
 ```
 Okay I've set this task's start date time:
@@ -149,11 +159,13 @@ Okay I've set this task's start date time:
 ### `done` - Marks Task as done
 Format: `done <task number>`
 
-\>\> Example of usage:
+\> Example of usage:
 
-`done 4`
+```
+done 4
+```
 
-<< Expected outcome:
+< Expected outcome:
 
 ```
 Okay I've set this task's start date time:
@@ -168,11 +180,13 @@ Format: `remove <task number>`
 Alternative: `delete <task number>`
 Alternative: `remove all` to clear the task list
 
-\>\> Example of usage:
+\> Example of usage:
 
-`remove 4`
+```
+remove 4
+```
 
-<< Expected outcome:
+< Expected outcome:
 
 ```
 Okay I've removed:
@@ -187,11 +201,13 @@ Format: `sort <sort by>`
 
 Sort by: `name` or `datetime` or `type`
 
-\>\> Example of usage:
+\> Example of usage:
 
-`sort datetime`
+```
+sort datetime
+```
 
-<< Expected outcome:
+< Expected outcome:
 
 ```
 Your list has been sorted!
@@ -200,11 +216,13 @@ Your list has been sorted!
 ---
 
 ### `list` - Views the list
-\>\> Example of usage:
+\> Example of usage:
 
-`list`
+```
+list
+```
 
-<< Expected outcome:
+< Expected outcome:
 
 ```
 Here are the tasks in your list:
@@ -221,11 +239,13 @@ Format: `find <keyword>`
 Tasks with description matching the entire string will be filtered, substrings are not filtered.
 For example, `"end"` will pick up description `"end of chapter"` but not `"find girlfriend"`.
 
-\>\> Example of usage:
+\> Example of usage:
 
-`find book`
+```
+find book
+```
 
-<< Expected outcome:
+< Expected outcome:
 
 ```
 Search result:
