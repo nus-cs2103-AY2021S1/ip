@@ -1,6 +1,7 @@
 package duke;
 
 import java.io.IOException;
+import java.time.format.DateTimeParseException;
 
 import duke.task.TaskList;
 import duke.task.TaskType;
@@ -38,6 +39,8 @@ public class Duke {
             command = Parser.parse(input);
         } catch (IllegalArgumentException e) {
             return "There was an error parsing your command.\n" + e.getMessage();
+        } catch (DateTimeParseException e) {
+            return "There was an error parsing your date.\nInput your date in the format 2020-12-25.";
         }
 
         if (command.getTaskType() == TaskType.BYE) {
