@@ -8,6 +8,7 @@ import static duke.util.Keyword.KEYWORD_TICK;
 import static duke.util.Keyword.KEYWORD_TODO;
 
 import java.io.IOException;
+import java.util.Arrays;
 
 import duke.task.Deadline;
 import duke.task.Event;
@@ -161,10 +162,11 @@ public class ReminderDisplay extends VBox {
      * @param taskDetails A list of details regarding the task.
      */
     private void createReminderList(String ... taskDetails) {
+        System.out.println(Arrays.deepToString(taskDetails));
         Text[] dateText = getDateText(taskDetails);
         Text[] timeText = getTimeText(taskDetails);
         Text[] descriptionText = createText(taskDetails[2] + TEXT_COLON, taskDetails[0]);
-        Text[] isDoneText = createText(TEXT_COMPLETED, taskDetails[1].equals("0") ? KEYWORD_TICK : KEYWORD_CROSS);
+        Text[] isDoneText = createText(TEXT_COMPLETED, taskDetails[1].equals("1") ? KEYWORD_TICK : KEYWORD_CROSS);
         setHeight();
         setPadding();
         date.getChildren().addAll(dateText[0], dateText[1]);
