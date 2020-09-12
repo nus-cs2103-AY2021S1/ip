@@ -30,7 +30,7 @@ Duke application is an **offline task management tool that organizes the task li
 
 3. Open the finder/file explorer and navigate to the directory where `duke.jar` is stored.
 
-4. Double-click `duke.jar` to start the application and the GUI below will appear.
+4. Double-click `duke.jar` to start the application and the GUI below will appear. <br>
    <img src="welcome.png" width="320" height="497"/>
 5. Type the command in the input box and press Enter or click the Send button to execute it.
 
