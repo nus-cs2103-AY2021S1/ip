@@ -4,6 +4,7 @@ import static duke.utils.Messages.MESSAGE_GREETING;
 
 import duke.Duke;
 import duke.commands.CommandResult;
+import duke.exceptions.DukeException;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -28,8 +29,8 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/DaDuke.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/chatbot.png"));
 
     /**
      * Initialises the main window with a greeting message.
@@ -38,8 +39,28 @@ public class MainWindow extends AnchorPane {
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().add(
-                DialogBox.getUserDialog(MESSAGE_GREETING, dukeImage)
+                DialogBox.getDukeDialog(MESSAGE_GREETING, dukeImage)
         );
+        userInput.textProperty().addListener(observable -> refreshPromptVisibility());
+    }
+
+    private void refreshPromptVisibility() {
+        final String text = userInput.getText();
+        if (isEmptyString(text)) {
+            userInput.getStyleClass().remove("no-prompt");
+            sendButton.setDisable(true);
+            userInput.setOnAction(null);
+        } else {
+            if (!getStyleClass().contains("no-prompt")) {
+                getStyleClass().add("no-prompt");
+            }
+            sendButton.setDisable(false);
+            userInput.setOnAction(event -> handleUserInput());
+        }
+    }
+
+    private boolean isEmptyString(String text) {
+        return text == null || text.isEmpty();
     }
 
     public void setDuke(Duke d) {
@@ -53,16 +74,28 @@ public class MainWindow extends AnchorPane {
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        CommandResult result = duke.getResult(input);
-        if (result.isExit()) {
-            Platform.exit();
-            return;
+        String response;
+        try {
+            CommandResult result = duke.getResult(input);
+            if (result.isExit()) {
+                Platform.exit();
+                return;
+            }
+            response = result.getFeedbackToUser();
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    DialogBox.getDukeDialog(response, dukeImage)
+            );
+        } catch (DukeException e) {
+            response = e.getMessage();
+            DialogBox dukeDialog = DialogBox.getDukeDialog(response, dukeImage);
+            dukeDialog.getDialog().setStyle("-fx-effect: dropshadow(gaussian, red, 10, 0, 0, 1)");
+            dialogContainer.getChildren().addAll(
+                    DialogBox.getUserDialog(input, userImage),
+                    dukeDialog
+            );
         }
-        String response = result.getFeedbackToUser();
-        dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
-        );
+
         userInput.clear();
     }
 }
