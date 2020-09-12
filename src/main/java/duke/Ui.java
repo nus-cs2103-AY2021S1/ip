@@ -8,7 +8,7 @@ import java.util.ArrayList;
 class Ui {
 
     /**
-     * Constructor used to create UI .
+     * Constructs User interface .
      */
     Ui() {
     }
@@ -23,8 +23,9 @@ class Ui {
     }
 
     /**
+     * Displays welcome message.
      *
-     * @return
+     * @return Welcome message.
      */
     String showWelcome() {
         String welcomeMessage = "Hello! I'm Shinomiya \u2665\n"
@@ -33,8 +34,9 @@ class Ui {
     }
 
     /**
+     * Displays exit message.
      *
-     * @return
+     * @return Exit message.
      */
     String showExit() {
         String exitMessage = "Bye. Hope to see you again soon! \u2665";
@@ -42,10 +44,11 @@ class Ui {
     }
 
     /**
+     * Displays add task message.
      *
-     * @param taskString
-     * @param lenString
-     * @return
+     * @param taskString Task in string format.
+     * @param lenString Length of task list in string format.
+     * @return Add task message.
      */
     String showAddTaskMessage(String taskString, String lenString) {
         String addedTaskOutputMessage = "Got it. I've added this task:\n"
@@ -55,9 +58,10 @@ class Ui {
     }
 
     /**
+     * Displays list task message.
      *
-     * @param taskListString
-     * @return
+     * @param taskListString Task list in string format.
+     * @return List task message.
      */
     String showListTaskMessage(ArrayList<String> taskListString) {
         StringBuilder listTaskMessage = new StringBuilder("Here are the tasks in your list:\n");
@@ -70,9 +74,10 @@ class Ui {
     }
 
     /**
+     * Displays do task message.
      *
-     * @param taskString
-     * @return
+     * @param taskString Task in string format.
+     * @return Do task message.
      */
     String showDoTaskMessage(String taskString) {
         String doneOutputMessage = "Nice! I've marked this task as done: \n"
@@ -81,10 +86,11 @@ class Ui {
     }
 
     /**
+     * Displays delete task message.
      *
-     * @param taskString
-     * @param lenString
-     * @return
+     * @param taskString Deleted task in string format.
+     * @param lenString Length of task list in string format.
+     * @return Delete task message.
      */
     String showDeleteTaskMessage(String taskString, String lenString) {
         String deletionOutputMessage = "Noted. I've removed this task:\n"
@@ -94,9 +100,10 @@ class Ui {
     }
 
     /**
+     * Displays find task message.
      *
-     * @param foundTaskListString
-     * @return
+     * @param foundTaskListString Task list found, in string format.
+     * @return Find task message.
      */
     String showFindTaskMessage(ArrayList<String> foundTaskListString) {
         StringBuilder findTaskMessage = new StringBuilder("Here are the matching tasks in your list:\n");
