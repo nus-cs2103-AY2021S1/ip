@@ -1,4 +1,4 @@
-# User Guide
+# User Guide 
 
 ## Introduction
 A simple guide to get you kick started on how to easily use this CLI app to create and manage your personal TaskList
@@ -15,7 +15,8 @@ A simple guide to get you kick started on how to easily use this CLI app to crea
              <summary>Add todo</summary>
              <br>
              Type "todo" followed by a space and then type in the 'todo' you wish to add into your list
-             ![UI](Ui.png)
+             <br>
+             ![todo](https://github.com/IsaacTin/ip/blob/branch-A-UserGuide/docs/Images/todo.png)
         </details>
         <details>
             <summary>Add deadline</summary>
