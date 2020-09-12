@@ -36,13 +36,12 @@ public class Event extends Task {
      */
     @Override
     public String toString() {
+        String part = "[E]" + super.toString() + "(at: " + at.getMonth().toString().substring(0, 3) + " " +
+                at.getDayOfMonth() + " " + at.getYear() + " ";
         if(at.getMinute() >= 10) {
-            return "[E]" + super.toString() + "(at: " + at.getMonth().toString().substring(0, 3) + " " +
-                    at.getDayOfMonth() + " " + at.getYear() + " " +
-                    String.format("%d:%d)", at.getHour(), at.getMinute()) + ")";
+            return part + String.format("%d:%d)", at.getHour(), at.getMinute()) + ")";
         } else {
-            return "[E]" + super.toString() + "(at: " + at.getMonth().toString().substring(0, 3) + " " +
-                    at.getDayOfMonth() + " " + at.getYear() + " " + at.getHour() + ":0" + at.getMinute() + ")";
+            return part + at.getHour() + ":0" + at.getMinute() + ")";
         }
 
     }

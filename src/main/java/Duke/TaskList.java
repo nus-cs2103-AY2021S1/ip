@@ -120,10 +120,10 @@ public class TaskList {
             // Exception: eg. todo
             throw new DukeException("      OOPS!!! The description of a todo cannot be empty.");
         }
-        Todo t = new Todo(input.substring(5));
-        assert t != null;
-        data.add(t);
-        res = ui.printTask(data, t);
+        Todo task = new Todo(input.substring(5));
+        assert task != null;
+        data.add(task);
+        res = ui.printTask(data, task);
         storage.writeFile(data);
         return res;
     }
@@ -147,14 +147,15 @@ public class TaskList {
         if (ss.length != 4 || !ss[1].startsWith("by ")) {
             throw new DukeException("      OOPS!!! Please following the format: deadline XXX /by X/X/XXXX XXXX");
         }
-        Deadline t = new Deadline(ss[0].substring(9),
-                LocalDateTime.of(Integer.parseInt(ss[3].split(" ")[0]), Integer.parseInt(ss[2]),
-                        Integer.parseInt(ss[1].substring(3)),
-                        Integer.parseInt(ss[3].split(" ")[1].substring(0, 2)),
-                        Integer.parseInt(ss[3].split(" ")[1].substring(2))));
-        assert t != null;
-        data.add(t);
-        res = ui.printTask(data, t);
+        int year = Integer.parseInt(ss[3].split(" ")[0]);
+        int month = Integer.parseInt(ss[2]);
+        int day = Integer.parseInt(ss[1].substring(3));
+        int hour = Integer.parseInt(ss[3].split(" ")[1].substring(0, 2));
+        int minute = Integer.parseInt(ss[3].split(" ")[1].substring(2));
+        Deadline task = new Deadline(ss[0].substring(9), LocalDateTime.of(year, month, day, hour, minute));
+        assert task != null;
+        data.add(task);
+        res = ui.printTask(data, task);
         storage.writeFile(data);
         return res;
     }
@@ -170,7 +171,7 @@ public class TaskList {
      */
     public String event(String input, Ui ui, Storage storage) throws DukeException, FileNotFoundException {
         String res;
-        if (input.length() <= 9) {
+        if (input.length() <= 6) {
             // Exception: eg. event
             throw new DukeException("      OOPS!!! The description of an event cannot be empty.");
         }
@@ -179,15 +180,16 @@ public class TaskList {
             // Exception: eg. event meeting /Mon
             throw new DukeException("\"      OOPS!!! Please following the format: event XXX /at X/X/XXXX XXXX");
         }
-        Event t = new Event(ss[0].substring(6),
-                LocalDateTime.of(Integer.parseInt(ss[3].split(" ")[0]), Integer.parseInt(ss[2]),
-                        Integer.parseInt(ss[1].substring(3)),
-                        Integer.parseInt(ss[3].split(" ")[1].substring(0, 2)),
-                        Integer.parseInt(ss[3].split(" ")[1].substring(2))));
-        assert t != null;
-        System.out.println(t.getDescription());
-        data.add(t);
-        res = ui.printTask(data, t);
+        int year = Integer.parseInt(ss[3].split(" ")[0]);
+        int month = Integer.parseInt(ss[2]);
+        int day = Integer.parseInt(ss[1].substring(3));
+        int hour = Integer.parseInt(ss[3].split(" ")[1].substring(0, 2));
+        int minute = Integer.parseInt(ss[3].split(" ")[1].substring(2));
+        Event task = new Event(ss[0].substring(6), LocalDateTime.of(year, month, day, hour, minute));
+        assert task != null;
+        System.out.println(task.getDescription());
+        data.add(task);
+        res = ui.printTask(data, task);
         storage.writeFile(data);
         return res;
     }
@@ -202,13 +204,23 @@ public class TaskList {
         String res;
         String keyword = input.substring(5);
         List<Task> filteredData = new ArrayList<>();
-        for(Task t : data) {
-            if(t.getDescription().contains(keyword)) {
-                filteredData.add(t);
-            }
+        for(Task task : data) {
+            findMatch(task, filteredData, keyword);
         }
         res = ui.printFind(filteredData);
         return res;
+    }
+
+    /**
+     * find all the results that match the keyword.
+     * @param task is a particular task.
+     * @param filteredData stores the matched result.
+     * @param keyword is the searching keyword.
+     */
+    private void findMatch(Task task, List<Task> filteredData, String keyword) {
+        if(task.getDescription().contains(keyword)) {
+            filteredData.add(task);
+        }
     }
 }
 

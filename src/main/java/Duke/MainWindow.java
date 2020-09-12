@@ -7,6 +7,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import static java.lang.Thread.sleep;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -27,8 +30,8 @@ public class MainWindow extends AnchorPane {
 
     @FXML
     public void initialize() {
-        String response = "    ____________________________________________________________\n     Hello! I'm Duke\n" +
-                "     What can I do for you?\n    ____________________________________________________________";
+        String line = "    ____________________________________________________________\n";
+        String response = line + "     Hello! I'm Duke\n" + "     What can I do for you?\n" + line;
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
                 DialogBox.getDukeDialog(response, dukeImage)
@@ -44,13 +47,16 @@ public class MainWindow extends AnchorPane {
      * the dialog container. Clears the user input after processing.
      */
     @FXML
-    private void handleUserInput() throws DukeException {
+    private void handleUserInput() throws DukeException, InterruptedException {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
                 DialogBox.getDukeDialog(response, dukeImage)
         );
+        if(input.equals(("bye"))) {
+            System.exit(0);
+        }
         userInput.clear();
     }
 }

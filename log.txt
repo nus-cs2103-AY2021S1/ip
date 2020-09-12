@@ -1,0 +1,5 @@
+     1.[D][N] task2 (by: JAN 1 2020 18:00)
+     2.[T][N] task
+     3.[T][N] tt
+     4.[D][N] dt (by: JAN 1 2020 12:00)
+     5.[U][N] taskd (10 hours)
