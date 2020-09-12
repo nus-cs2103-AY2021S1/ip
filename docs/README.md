@@ -43,7 +43,6 @@ Input date via 'YYYY-MM-DD' format and time in 'HH:MM' format if you wish to add
 <summary>
 
 `event` - Add event
-
 </summary>
 <br>
 *Type "event" followed by description of event, then followed by "/at" followed by a space and then type in ther rest of the description
