@@ -11,9 +11,9 @@ public class UpdateDescriptionAndTimeCommand extends UpdateCommand {
     @Override
     String execute(TaskList tasks, Ui ui, Storage storage) throws UpdateToDoTimeException {
         Task taskToUpdate = tasks.getTask(indexOfTaskToUpdate);
-        taskToUpdate.updateDescription(newDescription);
         taskToUpdate.updateTime(newTime);
-
+        taskToUpdate.updateDescription(newDescription);
+        
         storage.save(tasks);
 
         return ui.showUpdated(indexOfTaskToUpdate, taskToUpdate);
