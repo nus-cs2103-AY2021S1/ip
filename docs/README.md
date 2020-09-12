@@ -5,11 +5,11 @@
 ### List tasks
 List all tasks that have been saved.
 
-**Find tasks**
+### Find tasks
 
 Search existing tasks using a keyword
 
-**Add tasks**
+### Add tasks
 
 The following types of tasks can be added
 
@@ -17,15 +17,15 @@ The following types of tasks can be added
 2. Event
 3. Deadline
 
-**Mark tasks as done**
+### Mark tasks as done
 
 Tasks are initially added as incomplete and can be marked as done.
 
-**Delete tasks**
+### Delete tasks
 
 Individual tasks can be deleted.
 
-**Auto-save and load**
+### Auto-save and load
 
 Tasks are automatically saved and restored when closing and opening the application.
 
