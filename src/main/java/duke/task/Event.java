@@ -85,8 +85,8 @@ public class Event extends Task {
         assert dtfDate instanceof DateTimeFormatter : "date formatter has to be of type DateTimeFormatter";
         assert dtfTime instanceof DateTimeFormatter : "time formatter has to be of type DateTimeFormatter";
         final String EVENT_STRING_TO_SAVE =
-                "E " + "| " + status + " | " + this.description+ this.stringOfTags + " " + "| " + this.date.format(dtfDate) + " " +
-                        this.time.format(dtfTime);
+                "E " + "| " + status + " | " + this.description+ this.stringOfTags + " " + "| " +
+                        this.date.format(dtfDate) + " " + this.time.format(dtfTime);
         return EVENT_STRING_TO_SAVE;
     }
 

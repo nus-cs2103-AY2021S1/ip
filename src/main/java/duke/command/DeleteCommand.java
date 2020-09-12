@@ -27,7 +27,8 @@ public class DeleteCommand extends Command {
      * @throws DukeException exception thrown when exception caught while running.
      */
     @Override
-    public ArrayList<String> execute(TaskList tasklist, Gui gui, Storage storage, ArrayList<String> responseList) throws DukeException {
+    public ArrayList<String> execute(TaskList tasklist, Gui gui, Storage storage, ArrayList<String> responseList)
+            throws DukeException {
         try {
             String taskNumberToDelete = this.fullCommand.substring(7);
             int index = Integer.parseInt(taskNumberToDelete) - 1;

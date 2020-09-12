@@ -83,7 +83,8 @@ public class CliUi {
      * @param tasksLeft integer value of tasks remaining in the list of tasks.
      */
     public void deleteMessage(Task task, int tasksLeft) {
-        System.out.println("Noted. I have removed this task:\n" + INDENT + INDENT + task + "\n" + this.taskLeftMessage(tasksLeft));
+        System.out.println("Noted. I have removed this task:\n" + INDENT + INDENT + task + "\n" +
+                this.taskLeftMessage(tasksLeft));
     }
 
     /**
