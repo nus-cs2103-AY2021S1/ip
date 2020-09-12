@@ -14,7 +14,7 @@ public class HelpCommand extends Command {
                 + "2. list --- see the lists of task saved\n"
                 + "3. done x --- mark task numbered x as done\n"
                 + "4. todo {details} --- add a todo with the given details\n"
-                + "5. event {details} /at {date} --- add an event with the given details and time\n"
+                + "5. event {details} /at {date} to {date} --- add an event with the given details and time\n"
                 + "6. deadline {deadline} /by {date} --- add a deadline with the given details and time\n"
                 + "7. delete x --- deletes the task numbered x\n"
                 + "8. find {keyword} --- find all tasks with the keyword\n"
