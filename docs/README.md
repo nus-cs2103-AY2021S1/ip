@@ -13,7 +13,7 @@ A simple guide to get you kick started on how to easily use this CLI app to crea
         <details>
              <summary>Add todo</summary>
         </details>
-        details>
+        <details>
             <summary>Add deadline</summary>
         </details>
         <details>
