@@ -108,7 +108,8 @@ public class Parser {
         }
     }
 
-    private String processUpdate(String response) throws EmptyDescriptionException, DukeKeywordMissingException, DukeMissingCommandNumberException, IOException {
+    private String processUpdate(String response) throws EmptyDescriptionException, DukeKeywordMissingException,
+            DukeMissingCommandNumberException, IOException {
         int taskIndex;
         checkEmptyDescription(response, "update");
         checkMissingKeyword(response, "/to ");
