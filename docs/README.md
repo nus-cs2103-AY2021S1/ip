@@ -28,13 +28,14 @@ Duke is an application using Command Line Tool to manage your tasks.
 
 <div markdown="block" class="alert alert-info">
 
-**:information_source: Notes about the command format:**<br>
+**Notes about the command format:**<br>
    * `( )` represents the parameter for the command
    
    * The input format of time is **yyyy-MM-dd HH:mm**
    
 </div> 
 
+---
 
 ### `todo` - Add a TODO item into the list
 
@@ -47,6 +48,10 @@ Example of usage:
 Expect Output:
 
 The task is added to the list with not done status, and gives out the total tasks in the list.
+
+<p align="center">
+    <img src="/demo/duke_todo.png">
+</p>
 
 ***
 
@@ -61,6 +66,10 @@ Example of usage:
 Expected Output:
 
 The event has been recorded into the system and give out the total number of tasks in the list.
+
+<p align="center">
+    <img src="/demo/duke_event.png">
+</p>
 
 ***
 
@@ -77,13 +86,19 @@ Expect output:
 
 The deadline is added and give out the total task in the list.
 
+<p align="center">
+    <img src="/demo/duke_deadline.png">
+</p>
+
 ### `list` - List all the item in the list
 
 Format: `list`
 
 Example:
 
-(Picture here)
+<p align="center">
+    <img src="/demo/duke_list.png">
+</p>
 
 ***
 
@@ -101,6 +116,10 @@ Expected output:
 
 The task with the target index is marked as done. 
 
+<p align="center">
+    <img src="/demo/duke_done.png">
+</p>
+
 ***
 
 ### `delete` - Delete certain task in the list
@@ -117,6 +136,10 @@ Expected output:
 
 The task with index 2 is deleted from the task list.
 
+<p align="center">
+    <img src="/demo/duke_delete.png">
+</p>
+
 ***
 
 ### `clear` - Clear all the task in the list
@@ -125,7 +148,9 @@ Format: `Clear`
 
 Example of usage:
 
-(Picture here)
+<p align="center">
+    <img src="/demo/duke_clear.png">
+</p>
 
 ***
 
@@ -136,5 +161,9 @@ Format: `reschedule \to (time)`
 Example of usage: 
 
 `reschedule 2 /to 2020-12-20 19:00`
+
+<p align="center">
+    <img src="/demo/duke_reschedule.png">
+</p>
 
 

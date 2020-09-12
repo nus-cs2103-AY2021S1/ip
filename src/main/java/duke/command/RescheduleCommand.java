@@ -1,6 +1,7 @@
 package duke.command;
 
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import duke.Storage;
 import duke.exception.DukeException;
@@ -39,8 +40,10 @@ public class RescheduleCommand implements Command {
     public String getResponse() {
         assert !isExit();
 
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MMM dd yyyy HH:mm");
+
         return "I have rescheduled: \n \t"
-                + rescheduledTask.toString() + " to"
-                + targetDate.toString();
+                + rescheduledTask.toString() + " to "
+                + targetDate.format(formatter);
     }
 }
