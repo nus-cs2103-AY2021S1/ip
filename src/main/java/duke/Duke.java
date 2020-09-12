@@ -2,10 +2,10 @@ package duke;
 
 import duke.command.Command;
 import duke.exception.DukeException;
+import duke.ui.Ui;
 import duke.util.Parser;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.ui.Ui;
 import javafx.application.Platform;
 
 /**

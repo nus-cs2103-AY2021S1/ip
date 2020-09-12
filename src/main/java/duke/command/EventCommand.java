@@ -4,9 +4,9 @@ import java.util.Date;
 
 import duke.task.Event;
 import duke.task.Task;
+import duke.ui.Ui;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.ui.Ui;
 
 /**
  * Responsible for executing an event command.

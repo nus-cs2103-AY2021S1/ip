@@ -2,9 +2,9 @@ package duke.command;
 
 import duke.task.Task;
 import duke.task.ToDo;
+import duke.ui.Ui;
 import duke.util.Storage;
 import duke.util.TaskList;
-import duke.ui.Ui;
 
 /**
  * Responsible for executing a todo command.

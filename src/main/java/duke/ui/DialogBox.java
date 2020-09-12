@@ -1,4 +1,3 @@
-
 package duke.ui;
 
 import java.io.IOException;
@@ -28,7 +27,7 @@ public class DialogBox extends HBox {
             "-fx-background-color: rgba(255, 168, 220, 0.5); -fx-background-radius: 15;";
     private static final String ERROR_STYLE =
             "-fx-background-color: rgba(242, 66, 54, 0.5); -fx-background-radius: 15;"
-            + "-fx-font-size: 16px; -fx-font-weight: bold; -fx-color: red;";
+                    + "-fx-font-size: 16px; -fx-font-weight: bold; -fx-color: red;";
     @FXML
     private Label dialog;
     @FXML
