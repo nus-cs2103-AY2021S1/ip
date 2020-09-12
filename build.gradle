@@ -44,7 +44,15 @@ test {
 }
 
 application {
-    mainClassName = "seedu.duke.Duke"
+    mainClassName = "Launcher"
+}
+
+jar {
+    manifest {
+        attributes(
+                'Main-Class': 'Launcher'
+        )
+    }
 }
 
 shadowJar {
