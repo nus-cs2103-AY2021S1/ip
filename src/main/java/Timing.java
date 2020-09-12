@@ -11,12 +11,20 @@ public class Timing {
      * Instantiates Timing object.
      * @param timing Timing read from input text file.
      */
-    public Timing(String timing) {
+    public Timing(String timing) throws DukeException {
         assert !timing.equals("") : "Date cannot be empty.";
         this.timing = timing;
         int timeInt = Integer.parseInt(timing);
         this.minute = timeInt % 100;
         this.hour = timeInt / 100;
+
+        if (minute < 0 || minute >= 60) {
+            throw new DukeException("Oops. Minute field should be between 0 and 59!");
+        }
+
+        if (hour < 0 || hour >= 24) {
+            throw new DukeException("Oops. Hour field should be between 0 and 23!");
+        }
 
         if (this.hour < 12) {
             isPM = false;

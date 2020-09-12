@@ -13,13 +13,21 @@ public class Date {
      * Instantiates Date object.
      * @param date Date from input file.
      */
-    public Date(String date) {
+    public Date(String date) throws DukeException {
         assert !date.equals("") : "Date cannot be empty.";
         this.date = date;
         String[] dateElements = date.split("/");
         this.day = Integer.parseInt(dateElements[0]);
         this.month = Integer.parseInt(dateElements[1]);
         this.year = Integer.parseInt(dateElements[2]);
+
+        if (day < 1 || day > 31) {
+            throw new DukeException("Oops. Day field should be between 1 and 31!");
+        }
+
+        if (month < 1 || month  > 12) {
+            throw new DukeException("Oops. Month field should be between 1 and 12!");
+        }
     }
 
     /**
