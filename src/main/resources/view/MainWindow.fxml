@@ -3,7 +3,6 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
-<?import javafx.scene.effect.Bloom?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -21,7 +20,7 @@
       </AnchorPane>
         <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="341.0" style="-fx-background-radius: 50px; -fx-border-radius: 50px; -fx-border-color: lightblue; -fx-background-color: white;" styleClass="textfield" stylesheets="@styles.css" AnchorPane.bottomAnchor="1.0">
          <effect>
-            <Bloom threshold="1.0" />
+            <InnerShadow color="#0c3139" height="15.07" radius="5.4925" width="8.9" />
          </effect></TextField>
         <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" vvalue="1.0">
             <content>
