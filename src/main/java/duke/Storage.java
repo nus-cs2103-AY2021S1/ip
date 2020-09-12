@@ -73,6 +73,12 @@ class Storage {
         }
     }
 
+    /**
+     * Saves tasks to file.
+     *
+     * @param tasks List of task objects.
+     * @throws DukeException Throws exception when a file error e.g. writing occurs.
+     */
     void save(ArrayList<Task> tasks) throws DukeException {
         String output = tasksToStorageStringOutput(tasks);
         appendToFile(output);

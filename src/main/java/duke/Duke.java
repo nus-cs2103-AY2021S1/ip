@@ -5,21 +5,15 @@ package duke;
  */
 class Duke {
 
-    /**
-     * Deals with input output of files.
-     */
+    /** Deals with input output of files. */
     private Storage storage;
-    /**
-     * Task list.
-     */
+    /** Task list. */
     private TaskList tasks;
-    /**
-     * Deals with user input output.
-     */
+    /** Deals with user input output. */
     private Ui ui;
 
     /**
-     * Constructor for the main driver.
+     * Constructs the main driver.
      *
      * @param filePath File path to load history, and to save history.
      */
@@ -34,12 +28,20 @@ class Duke {
         }
     }
 
+    /**
+     * Gets welcome message.
+     *
+     * @return Welcome message.
+     */
     String getWelcome() {
         return ui.showWelcome();
     }
 
     /**
-      * Generate a response to user input.
+     * Generates a response to user input.
+     *
+     * @param input User input.
+     * @return Response to user input.
      */
     String getResponse(String input) {
         try {
@@ -50,6 +52,12 @@ class Duke {
         }
     }
 
+    /**
+     * Gets exit status of application.
+     *
+     * @param input User input.
+     * @return Boolean of exit status.
+     */
     boolean isExit(String input) {
         try {
             Command c = Parser.parse(input);

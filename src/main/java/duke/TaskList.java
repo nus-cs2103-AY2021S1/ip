@@ -63,6 +63,15 @@ class TaskList {
         return taskList;
     }
 
+    /**
+     * Handles adding of tasks.
+     *
+     * @param commandName Name of task command.
+     * @param description Description of task.
+     * @param date Date of task.
+     * @return Output for ui for adding tasks.
+     * @throws DukeException
+     */
     String[] addTask(CommandName commandName, String description, String date) throws DukeException {
         Task task;
 
@@ -84,7 +93,7 @@ class TaskList {
         return getTaskInfoAndTaskListInfoForUi(task);
     }
 
-    String[] getTaskInfoAndTaskListInfoForUi(Task task) {
+    private String[] getTaskInfoAndTaskListInfoForUi(Task task) {
         int len = taskList.size();
 
         String[] taskAndTaskListInfo = new String[2];
@@ -146,6 +155,11 @@ class TaskList {
         }
     }
 
+    /**
+     * Handles listing of tasks.
+     *
+     * @return Output for ui for listing tasks.
+     */
     ArrayList<String> listTasks() {
         ArrayList<String> taskListString = new ArrayList<>();
         for (Task task : taskList) {
@@ -154,12 +168,24 @@ class TaskList {
         return taskListString;
     }
 
+    /**
+     * Handles doing of tasks.
+     *
+     * @param index Index of task to do.
+     * @return Output for ui for doing tasks.
+     */
     String doTask(int index) {
         Task task = taskList.get(index - 1);
         task.setDone(true);
         return task.toString();
     }
 
+    /**
+     * Handles deleting of tasks.
+     *
+     * @param index Index of task to delete.
+     * @return Output for ui for deleting tasks.
+     */
     String[] deleteTask(int index) {
         Task task = taskList.get(index - 1);
         taskList.remove(index - 1);
@@ -167,6 +193,12 @@ class TaskList {
         return getTaskInfoAndTaskListInfoForUi(task);
     }
 
+    /**
+     * Handles finding of tasks.
+     *
+     * @param search String to search for.
+     * @return Output for ui for finding tasks.
+     */
     ArrayList<String> findTasks(String search) {
         ArrayList<String> foundTaskListString = new ArrayList<>();
         for (Task task : taskList) {
@@ -177,12 +209,18 @@ class TaskList {
         return foundTaskListString;
     }
 
+    /**
+     * Handles sorting of tasks.
+     *
+     * @param sortOrderOptionEnum Option to order ascending or descending.
+     * @return Output for ui for sorting tasks.
+     */
     ArrayList<String> sortTasks(SortOrderOption sortOrderOptionEnum) {
         sortTasksInPlace(sortOrderOptionEnum);
         return listTasks();
     }
 
-    void sortTasksInPlace(SortOrderOption sortOrderOptionEnum) {
+    private void sortTasksInPlace(SortOrderOption sortOrderOptionEnum) {
         switch (sortOrderOptionEnum) {
         case ASC:
             taskList.sort(Comparator.comparing(Task::getDescription));

@@ -10,12 +10,17 @@ class SortCommand extends Command {
     /** Contains user's sort order option, e.g.  asc, desc. */
     private SortOrderOption sortOrderOptionEnum;
 
+    /**
+     * Constructs SortCommand object, which handles logic of sorting tasks.
+     *
+     * @param sortOrderOptionEnum Option to order ascending or descending.
+     */
     SortCommand(SortOrderOption sortOrderOptionEnum) {
         this.sortOrderOptionEnum = sortOrderOptionEnum;
     }
 
     /**
-     * Executes list tasks.
+     * Executes task sorting.
      *
      * @param tasks Stores task list.
      * @param ui Handles user interaction.
