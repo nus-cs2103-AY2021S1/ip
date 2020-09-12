@@ -1,1 +1,0 @@
-packageSearchIndex = [{"l":"All Packages","url":"allpackages-index.html"},{"l":"ultron"},{"l":"ultron.commands"},{"l":"ultron.exceptions"},{"l":"ultron.tasks"}]
