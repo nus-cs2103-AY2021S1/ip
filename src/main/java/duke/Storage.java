@@ -27,6 +27,7 @@ class Storage {
      * Parses text file from file path specified to get
      * the Task objects stored, and returns them all
      * packaged in an ArrayList.
+     *
      * @return ArrayList containing Task objects.
      * @throws DukeException Exception while loading from text file.
      */
@@ -36,9 +37,10 @@ class Storage {
             if (!taskListFile.exists() && !taskListFile.createNewFile()) {
                 throw new DukeException("Failed to create new text file.");
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             throw new DukeException("Exception while opening task list file: " + e);
         }
+        assert taskListFile.exists() : "Creation of File at filePath failed.";
 
         ArrayList<Task> outputTaskList = new ArrayList<>();
         Scanner taskReader;
@@ -86,6 +88,7 @@ class Storage {
 
     /**
      * Saves the Tasks stored in a TaskList into the file path of the Storage.
+     *
      * @param taskList TaskList object containing Task(s) to store.
      * @return true if store was successful.
      * @throws DukeException Exception while storing into file.
@@ -100,6 +103,7 @@ class Storage {
             } else {
                 throw new IOException("No file found at the specified path.");
             }
+            assert taskListFile.exists() : "Task list file does not exist.";
             if (taskList.getSize() > 0) {
                 FileWriter taskWriter = new FileWriter(taskListFile);
                 for (Task t : taskList.getTaskList()) {

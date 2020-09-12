@@ -30,6 +30,7 @@ class TaskList {
 
     /**
      * Gets Task from the list based on the index supplied
+     *
      * @param index index of Task to retrieve from the task list.
      * @return Task from the task list
      * @throws DukeException Exception while getting Task from task list.
@@ -44,6 +45,7 @@ class TaskList {
 
     /**
      * List all tasks currently stored in the system.
+     *
      * @return String format of all the Tasks stored in the task list.
      */
     String getAllTasks() {
@@ -65,6 +67,7 @@ class TaskList {
     /**
      * Gets all Tasks with descriptions matching the keyword(s)
      * specified by the user.
+     *
      * @param keywords keyword(s) to filter Tasks.
      * @return String containing all Tasks in string
      * format appended together which also match the
@@ -95,6 +98,7 @@ class TaskList {
     /**
      * Adds a Task into the Task list and returns true
      * if successful.
+     *
      * @param taskToAdd Task to add into taskList.
      * @return true if adding of Task was successful.
      */
@@ -106,6 +110,7 @@ class TaskList {
     /**
      * Removes a task from the task list based on its
      * number in the list.
+     *
      * @param taskNum the number of the task to remove.
      * @return true if deleting of task was successful.
      * @throws DukeException Exception while deleting of task.
@@ -125,21 +130,18 @@ class TaskList {
 
     /**
      * Given a particular task number, mark that task in the task list as done.
+     *
      * @param taskNum The task number to mark as done.
      * @return true if marking of task as done was successful.
      * @throws DukeException Exception while marking task as done.
      */
     boolean markTaskDone(int taskNum) throws DukeException {
-        try {
-            if (taskNum < 0 || taskNum > tasks.size()) {
-                throw new DukeException("task.Task number does not exist.");
-            } else {
-                Task t = tasks.get(taskNum - 1);
-                t.markDone();
-                return true;
-            }
-        } catch (DukeException e) {
-            throw e;
+        if (taskNum < 0 || taskNum > tasks.size()) {
+            throw new DukeException("task.Task number does not exist.");
+        } else {
+            Task t = tasks.get(taskNum - 1);
+            t.markDone();
+            return true;
         }
     }
 }

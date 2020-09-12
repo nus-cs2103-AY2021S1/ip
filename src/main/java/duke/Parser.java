@@ -67,6 +67,7 @@ class Parser {
                     // Stop index when indicator /at or /by is found.
                 }
             }
+
             if (indexToStop == -1) {
                 throw new DukeException("Incorrect Input for timed task.");
             }
