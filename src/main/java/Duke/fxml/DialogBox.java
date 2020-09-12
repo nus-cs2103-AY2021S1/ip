@@ -41,6 +41,8 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        //@@author lye-jw
+        //Reused from https://github.com/lye-jw/duke with minor modifications
         dialog.setText(text);
         displayPicture.setImage(img);
 
@@ -58,6 +60,7 @@ public class DialogBox extends HBox {
                         )
                 )
         );
+        //@@author
     }
 
     /**

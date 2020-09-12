@@ -1,2 +1,1 @@
-E,1,borrow book,2019-04-18 1800
-D,1,return book,2019-04-18 0900
+E,1,borrow book,2019-04-18 0000
