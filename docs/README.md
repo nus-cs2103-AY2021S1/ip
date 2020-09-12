@@ -83,6 +83,7 @@ The deadline is added and give out the total task in the list.
 
 ![](img/duke_deadline.png)
 
+***
 
 ### `list` - List all the item in the list
 
