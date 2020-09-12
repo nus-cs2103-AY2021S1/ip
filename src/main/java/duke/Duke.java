@@ -11,7 +11,6 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
-    public Boolean isRunning = true;
 
     public Duke() {
         ui = new Ui();
@@ -49,19 +48,15 @@ public class Duke {
      */
     public void run() {
         ui.showWelcome();
-        boolean isExit = false;
-        while (!isExit) {
-            try {
-                String fullCommand = ui.readCommand();
-                Parser parser = new Parser(fullCommand);
-                Command c = parser.parse();
-                c.execute(tasks, ui, storage);
-                isExit = c.isExit();
-            } catch (DukeException e) {
-                ui.showError(e.getMessage());
-            } finally {
-                ui.showLine(); // show the divider line ("_______")
-            }
+        try {
+            String fullCommand = ui.readCommand();
+            Parser parser = new Parser(fullCommand);
+            Command c = parser.parse();
+            c.execute(tasks, ui, storage);
+        } catch (DukeException e) {
+            ui.showError(e.getMessage());
+        } finally {
+            ui.showLine(); // show the divider line ("_______")
         }
     }
 
@@ -77,9 +72,6 @@ public class Duke {
                 Parser parser = new Parser(line);
                 Command c = parser.parse();
                 c.execute(tasks, ui, storage);
-                if (c.isExit()) {
-                    break;
-                }
             } catch (DukeException e) {
                 ui.showError(e.getMessage());
             } finally {
@@ -97,9 +89,6 @@ public class Duke {
             Parser parser = new Parser(input);
             Command c = parser.parse();
             String dukeReply = c.execute(tasks, ui, storage);
-//            if (c.isExit()) {
-//                this.isRunning = false;
-//            }
             return dukeReply;
         } catch (DukeException e) {
             return e.getMessage();

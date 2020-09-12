@@ -14,13 +14,4 @@ public abstract class Command {
      * @param storage the storage file to save and load tasks from.
      */
     public abstract String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException;
-
-    /**
-     * Returns whether the command should cause the program to exit.
-     *
-     * @return boolean value of whether the command should cause the program to exit.
-     */
-    public boolean isExit() {
-        return false;
-    }
 }

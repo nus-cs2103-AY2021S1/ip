@@ -23,11 +23,9 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
+            stage.setTitle("Batman");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
-//            while (duke.isRunning) {
-//               stage.close();
-//            }
         } catch (IOException e) {
             e.printStackTrace();
         }
