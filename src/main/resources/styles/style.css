@@ -10,6 +10,17 @@
      -fx-background-color: #2b5278;
 }
 
+.user-input, .dialog, .send-button {
+    -fx-text-fill: #fff;
+}
+
+.dialog {
+    -fx-background-radius: 10;
+    -fx-padding: 7 12 7 12;
+}
+
+/* Styling of scroll bar reused from https://stackoverflow.com/questions/48048943/javafx-8-scroll-bar-css
+with minor modifications */
 .scroll-bar:vertical .track {
     -fx-background-color: #2e343c;
     -fx-border-color: transparent;
@@ -33,14 +44,3 @@
     -fx-background-insets: 2.0, 0.0, 0.0;
     -fx-background-radius: 2.0em;
 }
-
-
-.user-input, .dialog, .send-button {
-    -fx-text-fill: #fff;
-}
-
-.dialog {
-    -fx-background-radius: 10;
-    -fx-padding: 7 12 7 12;
-}
-
