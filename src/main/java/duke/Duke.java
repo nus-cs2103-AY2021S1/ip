@@ -52,7 +52,7 @@ public class Duke {
             assert tasks != null : "task list should not be uninitialised";
             assert ui != null : "ui should not be uninitialised";
             assert storage != null : "storage should not be uninitialised";
-            return c.execute(tasks, ui, storage);
+            return c.execute(tasks, storage, stats);
         } catch (DukeException e) {
             return e.toString();
         }
