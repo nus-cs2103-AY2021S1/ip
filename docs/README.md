@@ -40,7 +40,7 @@ Expected outcome:
 Now you have 7 tasks in the list` 
 
 
-### `DELETE [INT]` - DELETES A TASK FROM THE LIST
+### `DELETE [INT]` - DELETE A TASK FROM THE LIST
 
 Deletes the task found at the number provided by the user
 
