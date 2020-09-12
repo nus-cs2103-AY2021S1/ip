@@ -32,7 +32,7 @@ public class DeleteCommand implements Command {
         List<Task> taskList = dukeList.getTaskList();
         Task theRemovedTask = taskList.remove(Integer.parseInt(inputCommand.substring(7)) - 1);
         if (theRemovedTask == null) {
-            throw new DukeException("No such task exists! ");
+            throw new DukeException("No such task exists. ");
         }
         storage.removeTextFromTasks(theRemovedTask.convertToFile());
 

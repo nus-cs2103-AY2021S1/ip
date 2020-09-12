@@ -103,12 +103,12 @@ public class Ui {
     public String showKeywordList(String inputCommand, List<Task> taskList) throws DukeException {
         assert (inputCommand != null && taskList != null);
         if (inputCommand.length() <= "find ".length()) {
-            throw new DukeException(" find command cannot be empty!!");
+            throw new DukeException(" find command cannot be empty.");
         }
         String keyword = inputCommand.substring("find ".length());
 
         if (keyword.trim().equals("")) {
-            throw new DukeException(" Search String cannot be empty!");
+            throw new DukeException(" Search String cannot be left empty.");
         }
         Predicate<String> searchStringPredicate = x -> x.contains(keyword);
 
@@ -128,7 +128,7 @@ public class Ui {
      * UI of the bye command
      */
     public String sayBye() {
-        return " Bye. Hope to see you again soon!";
+        return " Bye. Hope to see you again soon.";
     }
 
     /**

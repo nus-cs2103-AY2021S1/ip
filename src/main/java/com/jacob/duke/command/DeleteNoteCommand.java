@@ -17,7 +17,7 @@ public class DeleteNoteCommand implements Command {
         List<Note> noteList = dukeList.getNoteList();
         Note theRemovedNote = noteList.remove(Integer.parseInt(fullCommand.substring("note-delete ".length())) - 1);
         if (theRemovedNote == null) {
-            throw new DukeException("No such note exists!");
+            throw new DukeException("No such note exists.");
         }
         storage.removeTextFromNotes(theRemovedNote.convertToFileFormat());
         return ui.showNoteDeleted(theRemovedNote.getCurrentStatus(), noteList);
