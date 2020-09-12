@@ -30,6 +30,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+    private static final int EXIT_TIMEOUT = 1000;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/coffee1.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/coffee2.jpg"));
@@ -74,10 +75,16 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         Response response = duke.getResponse(input);
+
+        DialogBox userDialog = DialogBox.getUserDialog(input, userImage);
+        DialogBox dukeDialog = response.isError()
+                ? DialogBox.getErrorDialog(response.getMessage(), dukeImage)
+                : DialogBox.getDukeDialog(response.getMessage(), dukeImage);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response.getMessage(), dukeImage)
+                userDialog,
+                dukeDialog
         );
+
         userInput.clear();
         if (response.shouldExit()) {
             userInput.setDisable(true);
@@ -86,7 +93,7 @@ public class MainWindow extends AnchorPane {
                 public void run() {
                     Platform.exit();
                 }
-            }, 1000);
+            }, MainWindow.EXIT_TIMEOUT);
         }
     }
 }

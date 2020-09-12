@@ -61,4 +61,11 @@ public class DialogBox extends HBox {
         db.flip();
         return db;
     }
+
+    public static DialogBox getErrorDialog(String text, Image img) {
+        DialogBox errorDialog = DialogBox.getDukeDialog(text, img);
+        errorDialog.dialog.getStyleClass().remove("chat-box");
+        errorDialog.dialog.getStyleClass().add("chat-box-error");
+        return errorDialog;
+    }
 }
