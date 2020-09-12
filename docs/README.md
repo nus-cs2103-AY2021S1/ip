@@ -1,5 +1,5 @@
 # User Guide
-[Duke](./Duke.png)
+![Duke](./Duke.png)
 ## Features 
 
 ### Add Tasks 
@@ -40,9 +40,9 @@ Example of usage:
 `done 1`
 
 Expected outcome:
-
+```
 Nice! I've marked this task as done:
-```1.[T][Y] task1```
+1.[T][Y] task1```
 
 ### `delete` - delete a task
 
@@ -53,9 +53,8 @@ Example of usage:
 `delete 1`
 
 Expected outcome:
-
-Noted. I've removed this task:
 ```
+Noted. I've removed this task:
 1.[T][Y] task1   
 Now you have 2 tasks in the list.
 ```
@@ -69,9 +68,8 @@ Example of usage:
 `todo task`
 
 Expected outcome:
-
-Got it. I've added this task:
 ```
+Got it. I've added this task:
 1.[T][N] task 
 Now you have 2 tasks in the list.
 ```
@@ -133,7 +131,7 @@ Example of usage:
 Expected outcome:
 
 Here are the matching tasks in your list:
-`1.[U][N] task (10 hours) `
+```1.[U][N] task (10 hours) ```
 
 ### `bye` - exit the program
 
@@ -144,7 +142,6 @@ Example of usage:
 `bye`
 
 Expected outcome:
-```
-```
+(nothing)
 
 
