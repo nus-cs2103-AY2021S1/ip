@@ -6,9 +6,11 @@ A simple guide to get you kick started on how to easily use this CLI app to crea
 
 <details>
     <summary>
-        How do I drop down?
+        Add Functions
     </summary>
-This is how
+        <summary>Add todo</summary>
+        <summary>Add deadline</summary>
+        <summary>Add event</summary>
 </details>
 
 Description of feature.
