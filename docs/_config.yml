@@ -1,1 +1,5 @@
 theme: jekyll-theme-minimal
+title: Alexa
+description: Alexa, a CLI-styled chatbot to help you keep track of tasks
+logo: ./Icon.png
+show_downloads: "true"
