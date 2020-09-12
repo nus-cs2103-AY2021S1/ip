@@ -7,7 +7,7 @@ Add tasks to Duke. There are todo, deadline and event tasks.
 
 ## Usage
 
-### `todo [String]` - Todo Task
+### `todo [String]` - Add Todo Task
 
 Adds a new Todo task with name String.
 
@@ -20,7 +20,7 @@ Expected outcome:
 `Added Task:
  [T][X] read book`
  
- ### `deadline [String] /by [dateTimeString]` 
+ ### `deadline [String] /by [dateTimeString]` - Add Deadline Task
  
  Adds a new Deadline task with name String, and deadline dateTimeString.
  
@@ -34,7 +34,7 @@ Expected outcome:
  [D][x] finish 2103 (by: Sep 13 2020 1500)
   `
   
-   ### `event [String] /at [dateTimeString]` 
+   ### `event [String] /at [dateTimeString]` - Add Event Task
    
    Adds a new Event task with name String, and time dateTimeString.
    
