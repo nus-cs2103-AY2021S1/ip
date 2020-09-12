@@ -3,8 +3,9 @@
 - [Introduction](#introduction)
 - [Quick Start](#quick-start)
 - [Features](#features)
+
   1. [Add a `Deadline` task](#1-add-a-deadline-task)
-  2. [Add a `Event` task](#2-add-a-event-task)
+  2. [Add an `Event` task](#2-add-an-event-task)
   3. [Add a `Todo` task](#3-add-a-todo-task)
   4. [Delete a `Task`](#4-delete-a-task)
   5. [Exit Duke application](#5-exit-duke-application)
@@ -13,23 +14,33 @@
   8. [Mark a `Task` as done](#8-mark-a-task-as-done)
   9. [Prioritise a `Task`](#9-prioritise-a-task)
 
+- [Command Summary](#command-summary)
+
 ## Introduction
 
-Duke application is an offline task management tool that organizes the task list and saves the task data in the local computer's storage.
+Duke application is an **offline task management tool that organizes the task list** and saves the task data in the local computer's storage.
 
 <img src="Ui/../Ui.png" width="320" height="497"/>
 
 ## Quick Start
 
-1. Download the latest release `duke.jar` from the [GitHub repo](https://github.com/teekoksiang/ip/releases).
+1. Ensure you have Java `11` or above installed in your computer.
 
-2. Open the terminal/command prompt and navigate to the directory where `duke.jar` is stored.
+2. Download the latest release `duke.jar` from the [GitHub repo](https://github.com/teekoksiang/ip/releases).
 
-3. Enter the command `java -jar duke.jar`.
+3. Open the finder/file explorer and navigate to the directory where `duke.jar` is stored.
 
-4. Duke application is running now and you can enter the command to perform the operation.
+4. Double-click `duke.jar` to start the application and the GUI below will appear.
+   <img src="welcome.png" width="320" height="497"/>
+5. Type the command in the input box and press Enter or click the Send button to execute it.
+
+6. Refer to [Features](#features) section to learn all the commands.
 
 ## Features
+
+> Notes about the command format:
+>
+> - Words in `UPPER_CASE` are the parameters to be supplied by the user.
 
 ### 1. Add a `Deadline` task
 
@@ -37,9 +48,9 @@ Add a `Deadline` task and save it to the `./data/tasks.txt` file.
 
 Usage
 
-`deadline [task name] /by [yyyy-mm-dd]` - add a `Deadline` task
+`deadline TASK_NAME /by DATE` - add a `Deadline` task
 
-Enter the command to add a `Deadline` task and save it to the `./data/tasks.txt` file.
+Enter the command to add a `Deadline` task and save it to the `./data/tasks.txt` file. The `DATE` must follow `yyyy-mm-dd` format.
 
 Example of usage:
 
@@ -53,15 +64,15 @@ Got it. I've added this task:
 Now you have 1 tasks in the list.
 ```
 
-### 2. Add a `Event` task
+### 2. Add an `Event` task
 
-Add a `Event` task and save it to the `./data/tasks.txt` file.
+Add an `Event` task and save it to the `./data/tasks.txt` file.
 
 ### Usage
 
-### `event [task name] /at [time]` - add a `Event` task
+### `event TASK_NAME /at TIME` - add an `Event` task
 
-Enter the command to add a `Event` task and save it to the `./data/tasks.txt` file.
+Enter the command to add an `Event` task and save it to the `./data/tasks.txt` file.
 
 Example of usage:
 
@@ -81,7 +92,7 @@ Add a `Todo` task and save it to the `./data/tasks.txt` file.
 
 ### Usage
 
-### `todo [task name]` - add a `Todo` task
+### `todo TASK_NAME` - add a `Todo` task
 
 Enter the command to add a `Todo` task and save it to the `./data/tasks.txt` file.
 
@@ -103,7 +114,7 @@ Delete a `Task` and update `./data/tasks.txt` file.
 
 ### Usage
 
-### `delete [task number]` - delete a `Task`
+### `delete TASK_NUMBER` - delete a `Task`
 
 Enter the command to delete a `Task` and update `./data/tasks.txt` file.
 
@@ -155,7 +166,7 @@ Find the tasks based on the query keyword.
 
 ### Usage
 
-### `find [keyword]` - find the tasks
+### `find KEYWORD` - find the tasks
 
 Enter the command to search for the tasks and display the found tasks.
 
@@ -213,7 +224,7 @@ Mark a `Task` as done and update `./data/tasks.txt` file.
 
 ### Usage
 
-### `done [task number]` - mark the `Task` as done
+### `done TASK_NUMBER` - mark the `Task` as done
 
 Enter the command to mark the `Task` as done and update `./data/tasks.txt` file.
 
@@ -242,7 +253,7 @@ Mark a `Task` priority and update `./data/tasks.txt` file.
 
 ### Usage
 
-### `priority [task number] [priority level]` - mark the `Task` priority
+### `priority TASK_NUMBER PRIORITY_LEVEL` - mark the `Task` priority
 
 Enter the command to mark the `Task` priority and update `./data/tasks.txt` file.
 Priority level:
@@ -269,3 +280,17 @@ Nice! I have updated the task priority: HIGH
 ```console
 The task number is not found
 ```
+
+## Command Summary
+
+| Action   | Format, Example                                                              |
+| -------- | ---------------------------------------------------------------------------- |
+| Bye      | `bye`                                                                        |
+| Deadline | `deadline TASK_NAME /by DATE` <br> e.g. `deadline CS2103T iP /by 2020-09-18` |
+| Delete   | `delete TASK_NUMBER` <br> e.g. `delete 1`                                    |
+| Done     | `done TASK_NUMBER` <br> e.g. `done 1`                                        |
+| Event    | `event TASK_NAME /at TIME` <br> e.g. `event CS2103T iP /at Sep 19, 2359`     |
+| Find     | `find KEYWORD` <br> e.g. `find CS2103T`                                      |
+| List     | `list`                                                                       |
+| Priority | `priority TASK_NUMBER PRIORITY_LEVEL` <br> e.g. `priority 1 3`               |
+| Todo     | `todo TASK_NUMBER` <br> e.g. `todo 1`                                        |

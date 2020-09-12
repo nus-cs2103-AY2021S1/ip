@@ -10,7 +10,6 @@ public class InvalidCommandException extends DukeException {
      * Constructs a InvalidCommandException.
      */
     public InvalidCommandException() {
-        super(":( Oops!!! I'm sorry, but I don't know what that means "
-                + ":-(\n\tCommands: list | done | priority | delete | todo | deadline | event | bye");
+        super(":( Oops!!! I'm sorry, but I don't understand. Command:\n\tbye | deadline | delete | done | event | find | list | priority | todo ");
     }
 }
