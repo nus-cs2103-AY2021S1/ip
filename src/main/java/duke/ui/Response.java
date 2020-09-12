@@ -5,14 +5,14 @@ package duke.ui;
  */
 public class Response {
 
+    /** Whether an error has occurred **/
+    protected boolean isError;
+
     /** Whether the GUI should exit **/
     private boolean isExit;
 
     /** Message the GUI should display to user **/
     private String message;
-
-    /** Whether an error has occurred **/
-    protected boolean isError;
 
     /**
      * Constructs a Response for the GUI.
@@ -34,5 +34,7 @@ public class Response {
         return message;
     }
 
-    public boolean isError() { return isError; }
+    public boolean isError() {
+        return isError;
+    }
 }

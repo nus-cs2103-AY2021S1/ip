@@ -20,6 +20,9 @@ import javafx.scene.layout.VBox;
  * Controller for duke.controllers.MainWindow. Provides the layout for the other controls.
  */
 public class MainWindow extends AnchorPane {
+
+    private static final int EXIT_TIMEOUT = 1000;
+
     @FXML
     private ScrollPane scrollPane;
     @FXML
@@ -30,7 +33,6 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-    private static final int EXIT_TIMEOUT = 1000;
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/coffee1.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/coffee2.jpg"));
