@@ -64,41 +64,4 @@ public class StorageTest {
         System.out.println(dummyTaskList);
         assertEquals(Deadline.class, dummyTaskList.get(dummyTaskList.size() - 2).getClass());
     }
-
-    @Test
-    public void appendText_updateStringBuffer_success() {
-        Storage storagePreAppendObject = new Storage("data/preAppend.txt");
-        Storage storagePostAppendObject = new Storage("data/postAppend.txt");
-        storagePostAppendObject.readFile();
-        storagePreAppendObject.readFile();
-        int x = 0;
-
-        storagePreAppendObject.appendTextToTasks("D~0~added deadline for testing~2020-12-19 1800");
-        storagePreAppendObject.appendTextToTasks("E~0~added event for testing~2020-12-19 1800");
-        storagePreAppendObject.appendTextToTasks("T~0~added task for testing~2020-12-19 1800");
-        storagePreAppendObject.appendTextToNotes("N~Added Note for testing?~Yaz.");
-        assertEquals(true, storagePreAppendObject.getStringBufferOfTasks().toString()
-                        .equals(storagePostAppendObject.getStringBufferOfTasks().toString()));
-        assertEquals(true, storagePreAppendObject.getStringBufferOfNotes().toString()
-                .equals(storagePostAppendObject.getStringBufferOfNotes().toString()));
-
-    }
-
-    @Test
-    public void removeText_updateTextFile_success() {
-        Storage storagePreRemoveObject = new Storage("data/preRemove.txt");
-        Storage storagePostRemoveObject = new Storage("data/postRemove.txt");
-        storagePostRemoveObject.readFile();
-        storagePreRemoveObject.readFile();
-        int x = 0;
-
-        storagePreRemoveObject.removeTextFromTasks("D~0~added deadline for testing~2020-12-19 1800");
-        storagePreRemoveObject.removeTextFromTasks("E~0~added event for testing~2020-12-19 1800");
-        storagePreRemoveObject.removeTextFromTasks("T~0~added task for testing~2020-12-19 1800");
-        storagePreRemoveObject.removeTextFromNotes("N~Added Note for testing?~Yaz.");
-        assertEquals(true, storagePreRemoveObject.getStringBufferOfTasks().toString()
-                .equals(storagePostRemoveObject.getStringBufferOfTasks().toString()));
-        assertEquals(true, storagePreRemoveObject.getStringBufferOfNotes().toString()
-                .equals(storagePostRemoveObject.getStringBufferOfNotes().toString()));
-    }
 }

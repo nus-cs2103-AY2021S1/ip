@@ -133,7 +133,7 @@ public class Storage {
             BufferedReader reader = new BufferedReader(new InputStreamReader(
                     new DataInputStream(new FileInputStream(this.filename))));
             String line = reader.readLine();
-            while ( line != null ) {
+            while (line != null) {
                 //parse the line here and add to dukelist
                 this.handleFileCommands(line, dukeList);
                 line = reader.readLine();
@@ -236,11 +236,4 @@ public class Storage {
         replacement(lineToEdit, "", sb);
     }
 
-    public StringBuffer getStringBufferOfNotes() {
-        return stringBufferOfNotes;
-    }
-
-    public StringBuffer getStringBufferOfTasks() {
-        return stringBufferOfTasks;
-    }
 }
