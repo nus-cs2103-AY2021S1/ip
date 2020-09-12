@@ -58,4 +58,8 @@ public class Ui {
     public static String accessMissing() {
         return "No Access for Command. Please login in first.";
     }
+
+    public static String addUser() {
+        return "A new user has been added successfully.";
+    }
 }

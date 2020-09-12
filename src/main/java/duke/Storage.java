@@ -9,6 +9,9 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import java.nio.file.Path;
+import java.nio.file.Paths;
+
 
 
 /**
@@ -16,22 +19,23 @@ import java.util.Scanner;
  * and saving tasks in the file
  */
 public class Storage {
-    private String path;
     private File file;
+    private Path path;
 
-    public Storage(String path) {
-        File file = new File(path);
+    public Storage(String fileName) {
+        String dir = System.getProperty("user.dir");
+        Path path = Paths.get(dir, "duke", fileName);
+        this.path = path;
+        File file = path.toFile();
         if (file.exists()) {
             this.file = file;
-            this.path = path;
         } else {
             try {
                 file.getParentFile().mkdirs();
                 file.createNewFile();
                 this.file = file;
-                this.path = path;
             } catch (IOException e) {
-                System.out.println("Failed to create" + this.path);
+                System.out.println("Failed to create" + fileName);
             }
         }
     }
@@ -42,7 +46,7 @@ public class Storage {
      */
     public void write(ArrayList<? extends Task> tasks) {
         try {
-            FileWriter writer = new FileWriter(path, false);
+            FileWriter writer = new FileWriter(file);
             for (Task task: tasks) {
                 String taskInfo = task.getType() + "," + (task.isDone() ? 1 : 0)
                         + "," + task.getContent() + "," + task.getDate() + ","
@@ -52,7 +56,7 @@ public class Storage {
             }
             writer.close();
         } catch (IOException e) {
-            System.out.println("Failed to write into " + this.path);
+            System.out.println("Failed to write into " + this.path.getFileName());
         }
     }
 
@@ -92,24 +96,10 @@ public class Storage {
                 tasks.add(task);
             }
         } catch (Exception e) {
-            System.out.println("Failed to load" + this.path);
+            System.out.println("Failed to load" + this.path.getFileName());
         }
         return tasks;
     }
 
-    public ArrayList<User> readUsersInfo() {
-        ArrayList<User> users = new ArrayList<User>();
-        try {
-            Scanner sc = new Scanner(this.file);
-            while (sc.hasNext()) {
-                String userContent = sc.nextLine();
-                String[] userInfo = userContent.split(",", 3);
-                User user = new User(userInfo[0], userInfo[1], userInfo[2]);
-                users.add(user);
-            }
-        } catch (Exception e) {
-            System.out.println("Failed to load users information");
-        }
-        return users;
-    }
+
 }

@@ -14,7 +14,7 @@ public class Duke {
     private TaskList taskList;
 
     public Duke() {
-        storage = new Storage("F:/XIA-LIYI/ip/src/main/data/duke.txt");
+        storage = new Storage("duke.txt");
         taskList = new TaskList(storage.getTaskList());
     }
 
