@@ -47,6 +47,7 @@ public abstract class Parser {
         } else if (inputLine.equals("save")) {
             return new SaveCommand();
         } else if (inputLine.equals("sort")) {
+            // can sort by task desc
             return new SortCommand();
         } else if (arr[0].equals("find")) {
             try {

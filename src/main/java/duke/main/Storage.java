@@ -31,6 +31,8 @@ public class Storage {
         this.filepath = filepath;
     }
 
+    // can improve and abstract out to 2 different functions, one to show load success
+    // and other to get tasklist
     /**
      * Loads data using the filepath given.
      *
