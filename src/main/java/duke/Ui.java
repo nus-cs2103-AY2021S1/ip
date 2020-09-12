@@ -9,18 +9,12 @@ import duke.dependencies.parser.Controller;
  *
  */
 class Ui {
-//    private static final String DIVIDER = "____________________________________________________________\n";
-//    private static final String LOGO = " ____        _        \n"
-//                                    + "|  _ \\ _   _| | _____ \n"
-//                                    + "| | | | | | | |/ / _ \\\n"
-//                                    + "| |_| | |_| |   <  __/\n"
-//                                    + "|____/ \\__,_|_|\\_\\___|\n";
 
     private static final String GREETING = "Hello, I'm Duke\nwhat can I do for you?\n";
 
     private static final String CIAO ="Spero di rivederti presto\n";
     private static final String CONVO_START = GREETING;
-    private static final String END = "end|ciao|bye|close|exit|nights|shutdown";
+    private static final String END = "|end|ciao|bye|close|exit|nights|shutdown|";
 
     private static final Controller CONTROLLER = Controller.init();
 
@@ -28,21 +22,6 @@ class Ui {
     private boolean confirmPasswordMode = false;
     private String password;
 
-
-    /**
-     * Starts the Duke application.
-     */
-    public void start() {
-        System.out.println(CONVO_START);
-    }
-
-    /**
-     * Stops the Duke application.
-     */
-    public void end() {
-        System.out.println(CIAO);
-        System.exit(0);
-    }
 
     /**
      * Receives command from user.
@@ -54,7 +33,7 @@ class Ui {
      */
     public String takeInputAndReturn(String s) {
         // End command
-        if (!s.isEmpty() && END.contains(s)) {
+        if (!s.isEmpty() && END.contains("|" + s + "|")) {
             return "See yall around!!!";
         }
         // Checks if the second entering of the password matches the first entering.
@@ -89,13 +68,6 @@ class Ui {
 
         String reply = CONTROLLER.parseAndExec(s);
 
-        if (reply.equals("Error")) {            // Error. However this should not occur
-//            System.out.println(DIVIDER + reply + "\n" + DIVIDER);
-            return reply;
-        } else {
-            // Normal execution
-//            System.out.println(DIVIDER + reply + "\n" + DIVIDER);
-            return reply;
-        }
+        return reply;
     }
 }

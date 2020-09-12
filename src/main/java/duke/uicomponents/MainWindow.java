@@ -3,6 +3,7 @@ package duke.uicomponents;
 import duke.Duke;
 import duke.uicomponents.DialogBox;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -59,5 +60,10 @@ public class MainWindow extends Application {
                 DialogBox.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+    }
+
+    private void handleExit() {
+        Platform.exit();
+        duke.exit();
     }
 }

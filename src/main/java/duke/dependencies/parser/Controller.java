@@ -141,6 +141,9 @@ public class Controller {
                 String reply = exe.receiveAndExec(Command.createClearCacheCommand(null));
                 return reply;
             } else {
+                // Quits user authentication mode even if the password entered is wrong.
+                // Clearing of task list will not execute.
+                isInUserAuthenticationMode = false;
                 return "You've entered the wrong pw!";
             }
         }

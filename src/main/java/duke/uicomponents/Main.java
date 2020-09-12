@@ -19,7 +19,6 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) {
         try {
-            System.out.println("Root directory: " + Main.class.getResource("/").toExternalForm());
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
