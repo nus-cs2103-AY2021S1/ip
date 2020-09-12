@@ -1,5 +1,7 @@
 # Chicken Coop User Guide
 
+![Program UI](docs/Ui.png)
+
 ## Features 
 
 ### Create ToDo 
@@ -153,7 +155,10 @@ Expected outcome:
 
 The program exits.
 
-### Saving and Loading
+# Saving and Loading
 Tasks are saved in the `data.txt` file in the `data/` directory.
 Tasks are also loaded from this file. The file can be edited or deleted
 as desired by the user.
+
+# Acknowledgements
+Images obtained from https://www.kenney.nl/assets/animal-pack-redux
