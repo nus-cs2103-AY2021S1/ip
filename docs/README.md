@@ -1,4 +1,5 @@
 # User Guide
+Duke is a minimalistic task manager desktop app. Duke is able to add 3 different types of tasks as well as specify the date and time of deadlines and events. You will also be able to mark tasks as completed or delete them from the list. With Duke, you will never forget about what you have to do again.
 
 ## Features 
 
@@ -125,4 +126,7 @@ Here are the tasks in your list:
 End and close the chat window after 3 seconds.
 
 Expected outcome:  
-`Bye. Hope to see you again soon!`
+
+```
+Bye. Hope to see you again soon!
+```
