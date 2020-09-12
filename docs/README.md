@@ -1,4 +1,6 @@
 # User Guide
+Duke, a task management application.
+
 Have you ever wanted the Supreme Leader of North Korea to be your personal secretary?
 Now you can with your very own Kim Jong Duke personal assistant chatbot! In the chatbot,
 you will play the role of Donald Trump and have your BFF Kim Jong Duke manage your tasks 
