@@ -108,3 +108,6 @@ This function brings up this help page within the app.
 
 This function saves all data and exits.
 
+# Credits
+
+The code for the GUI was referenced from a tutorial at https://se-education.org/guides/tutorials/javaFx.html
