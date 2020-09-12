@@ -8,10 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import duke.task.Deadline;
-import duke.task.Event;
-import duke.task.Task;
-import duke.task.ToDo;
+import duke.task.*;
 
 /**
  * Represents the Storage Object containing logic to writing and storing task list to memory.
@@ -67,6 +64,9 @@ public class Storage {
                 } else if (task instanceof Event) {
                     tasksToWriteToMemory += String.format("E,%d,%s,%s\n", task.getIsDone() ? 1 : 0,
                                                 task.getDescription(), ((Event) task).getAtWhen());
+                } else if (task instanceof Trivia) {
+                    tasksToWriteToMemory += String.format("Q,%s,%s\n",
+                            ((Trivia) task).getTriviaQuestion(), ((Trivia) task).getTriviaAnswer());
                 } else {
                     throw new DukeException("Cannot save invalid task type");
                 }
@@ -103,26 +103,36 @@ public class Storage {
                 String taskFromMemory = sc.nextLine();
                 // parse task string for its attributes
                 String[] taskAttributes = taskFromMemory.split(",");
-                assert taskAttributes.length >= 3 : "task retrieved must have type, status, description";
+                assert taskAttributes.length >= 3 : "items retrieved must have type and 2 other attributes";
                 // Extract task attributes.
                 String taskType = taskAttributes[TASK_TYPE_INDEX];
-                boolean isDone = taskAttributes[TASK_COMPLETION_INDEX].equals("1") ? true : false;
-                String description = taskAttributes[TASK_DESCRIPTION_INDEX];
-                String time;
-                switch (taskType) {
-                case "T":
-                    taskToLoad = new ToDo(description, isDone);
-                    break;
-                case "D":
-                    time = taskAttributes[TASK_TIMING_INDEX];
-                    taskToLoad = new Deadline(description, isDone, LocalDate.parse(time));
-                    break;
-                case "E":
-                    time = taskAttributes[TASK_TIMING_INDEX];
-                    taskToLoad = new Event(description, isDone, LocalDate.parse(time));
-                    break;
-                default:
-                    throw new DukeException("Task cannot be read from Duke.txt");
+                if (taskType.equals("Q")) {
+                    final int TRIVIA_QUESTION_INDEX = 1;
+                    final int TRIVIA_ANSWER_INDEX = 2;
+                    String question = taskAttributes[TRIVIA_QUESTION_INDEX];
+                    String answer = taskAttributes[TRIVIA_ANSWER_INDEX];
+                    taskToLoad = new Trivia(question, answer);
+                } else if (taskType.matches("T|D|E")) {
+                    boolean isDone = taskAttributes[TASK_COMPLETION_INDEX].equals("1") ? true : false;
+                    String description = taskAttributes[TASK_DESCRIPTION_INDEX];
+                    String time;
+                    switch (taskType) {
+                    case "T":
+                        taskToLoad = new ToDo(description, isDone);
+                        break;
+                    case "D":
+                        time = taskAttributes[TASK_TIMING_INDEX];
+                        taskToLoad = new Deadline(description, isDone, LocalDate.parse(time));
+                        break;
+                    case "E":
+                        time = taskAttributes[TASK_TIMING_INDEX];
+                        taskToLoad = new Event(description, isDone, LocalDate.parse(time));
+                        break;
+                    default:
+                        throw new DukeException("Task cannot be read from Duke.txt");
+                    }
+                } else {
+                    throw new DukeException("Unknown task type in Duke.txt");
                 }
                 loadedTasks.add(taskToLoad);
             }
