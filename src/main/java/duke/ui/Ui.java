@@ -45,21 +45,20 @@ public class Ui {
      * when inputting command for Dino to execute.
      */
     public void showFormat() {
-        System.out.println("Formats for the three task types Todo, Deadline and Event,"
-                + " are shown below.\n"
-                + "Todo: 'todo <task description>'"
-                + " (e.g. todo visit new theme park)\n"
+        System.out.println("__Task formats__\n"
+                + "Todo: 'todo <task description>'\n"
+                + "(e.g. todo visit new theme park)\n\n"
                 + "Deadline: 'deadline <task description>"
-                + " /by <yyyy-mm-dd hhmm>' (e.g. deadline submit report /by 2019-11-10 1500)\n"
+                + " /by <yyyy-mm-dd hhmm>'\n(e.g. deadline submit report /by 2019-11-10 1500)\n\n"
                 + "Event: 'event <task description>"
-                + " /at <yyyy-mm-dd hhmm-hhmm>' "
-                + "(e.g. event team project meeting /at 2019-10-02 1400-1500)\n"
-                + "\nAdditional Information:"
-                + "\nTo mark a task as done, input 'done <task number>'."
-                + "\nTo delete a task from your list, input 'delete <task number>'."
-                + "\nTo find a task in your list, input 'find <keyword>'."
-                + "\nTo set the priority of task to high/mid/low, "
-                + "input 'priority <high/mid/low> <task number>'."
+                + " /at <yyyy-mm-dd hhmm-hhmm>'\n"
+                + "(e.g. event team project meeting /at 2019-10-02 1400-1500)\n\n"
+                + "\n__Additional commands__"
+                + "\nTo mark a task as done: 'done <task number>'."
+                + "\nTo delete a task from your list: 'delete <task number>'."
+                + "\nTo find a task in your list: 'find <keyword>'."
+                + "\nTo set the priority of task to high/mid/low: "
+                + "'priority <high/mid/low> <task number>'."
                 + "\nTo close Dino, enter 'bye'.");
     }
 

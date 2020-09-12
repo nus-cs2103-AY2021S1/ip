@@ -1,3 +1,3 @@
-D!@#0!@#dinosaur!@#2020-12-12!@#2030!@#HIGH
-E!@#1!@#party concert!@#2020-12-19!@#2300-0000!@#NONE
+E!@#1!@#party concert!@#2020-12-19!@#2300-0000!@#LOW
 T!@#1!@#treasure hunting!@#LOW
+D!@#0!@#eat 10 pizzas!@#2020-09-12!@#2200!@#HIGH

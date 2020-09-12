@@ -5,7 +5,7 @@ import duke.command.ByeCommand;
 import duke.command.Command;
 import duke.command.DeleteCommand;
 import duke.command.FindCommand;
-import duke.command.FormatCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.MarkDoneCommand;
 import duke.command.PriorityCommand;
@@ -33,8 +33,8 @@ public class Parser {
 
         if (userInput.equals("bye")) {
             return new ByeCommand();
-        } else if (userInput.equals("format")) {
-            return new FormatCommand();
+        } else if (userInput.equals("help")) {
+            return new HelpCommand();
         } else if (userInput.equals("list")) {
             return new ListCommand();
         } else if (inputWords[0].equals("done") && inputWords.length == 2
