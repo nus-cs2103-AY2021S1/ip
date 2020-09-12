@@ -47,6 +47,7 @@ public class DialogBox extends HBox {
         dialog.getChildren().add(textFill);
         dialog.setLineSpacing(1.15);
         dialog.setTextAlignment(TextAlignment.LEFT);
+        dialog.setOpacity(0.8);
 
         displayPicture.setImage(img);
     }
@@ -58,7 +59,7 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
-        db.dialog.setStyle("-fx-background-color: #1b8ea8");
+        db.dialog.setStyle("-fx-background-color: #43a192; -fx-background-radius : 15");
         return db;
     }
 

@@ -7,6 +7,11 @@ import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.VBox;
 
 /**
@@ -23,22 +28,30 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
+    private final static String GREETINGS = "Hola! I'm Dongo :) \n"
+        + "How can I help you?";
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/penguinuser.png"));
-    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/dogbot1.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/pug.png"));
+    private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/corgi.png"));
+    private Image backgroundImage = new Image(this.getClass().getResourceAsStream("/images/bgimg.png"));
 
     /**
      * Initialises the new GUI window.
      */
     @FXML
     public void initialize() {
+        setDialogBackground();
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        String greetings = "Hola! I'm Dongo :) \n"
-            + "How can I help you?";
         dialogContainer.getChildren().addAll(
-            DialogBox.getDukeDialog(greetings, dukeImage)
-        );
+            DialogBox.getDukeDialog(GREETINGS, dukeImage)
 
+        );
+    }
+
+    public void setDialogBackground() {
+        BackgroundImage bg = new BackgroundImage(backgroundImage, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT,
+            new BackgroundSize(0, 0, false, false, true, false));
+        dialogContainer.setBackground(new Background(bg));
     }
 
     public void setDuke(Duke d) {
