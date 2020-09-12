@@ -1,0 +1,32 @@
+.root {
+    -fx-background-color: midnightblue;
+}
+
+.scroll-pane {
+   -fx-background-color: transparent;
+}
+
+// Reused from https://stackoverflow.com/questions/40253661
+.scroll-pane > .viewport {
+   -fx-background-color: transparent;
+}
+
+.label {
+    -fx-font: 14px "Courier New";
+    -fx-padding: 10px;
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+}
+
+.text-field {
+    -fx-background-radius: 10px;
+}
+
+.button {
+    -fx-background-color: white;
+    -fx-background-radius: 10px;
+}
+
+.button:pressed {
+    -fx-background-color: lightsteelblue;
+}

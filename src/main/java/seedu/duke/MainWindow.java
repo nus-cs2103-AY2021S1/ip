@@ -1,12 +1,12 @@
 package seedu.duke;
 
 import javafx.fxml.FXML;
-import javafx.scene.control.Label;
+import javafx.geometry.Insets;
+import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.VBox;
-import javafx.scene.text.Font;
 
 public class MainWindow extends BorderPane {
     private Duke duke;
@@ -17,7 +17,7 @@ public class MainWindow extends BorderPane {
     @FXML
     private TextField userInput;
     @FXML
-    private Label welcomeLabel;
+    private Button sendButton;
 
     void setDuke(Duke duke) {
         this.duke = duke;
@@ -28,8 +28,16 @@ public class MainWindow extends BorderPane {
      */
     @FXML
     public void initialize() {
-        welcomeLabel.setText(Message.getWelcome().getText());
-        welcomeLabel.setFont(new Font("Courier New", 12));
+        // welcome message
+        String welcome = Message.getWelcome().getText();
+        dialogContainer.getChildren().add(new DialogBox(welcome, true));
+
+        // padding between buttons
+        Insets insets = new Insets(10, 5, 10, 5);
+        BorderPane.setMargin(userInput, insets);
+        BorderPane.setMargin(sendButton, insets);
+
+        scrollPane.setFitToWidth(true);
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
@@ -38,28 +46,19 @@ public class MainWindow extends BorderPane {
      */
     @FXML
     public void handleUserInput() {
-        userInput.setOnAction((event) -> {
-            String input = userInput.getText();
-            if (!input.trim().equals("")) {
-                dialogContainer.getChildren().addAll(getInputLabel(input), getResponseLabel(input));
-            }
-            userInput.clear();
-        });
+        String input = userInput.getText();
+        if (!input.trim().equals("")) {
+            dialogContainer.getChildren().addAll(getInputBox(input), getResponseBox(input));
+        }
+        userInput.clear();
     }
 
-    private Label getInputLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
+    private DialogBox getInputBox(String text) {
+        return new DialogBox(text, false);
     }
 
-    private Label getResponseLabel(String text) {
+    private DialogBox getResponseBox(String text) {
         String response = duke.getResponse(text);
-
-        Label textToAdd = new Label(response);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
+        return new DialogBox(response, true);
     }
 }

@@ -15,7 +15,11 @@ public class Main extends Application {
             FXMLLoader fxmlLoader = new FXMLLoader(Main.class.getResource("/view/MainWindow.fxml"));
             BorderPane borderPane = fxmlLoader.load();
             Scene scene = new Scene(borderPane);
+            scene.getStylesheets().add("/css/stylesheet.css");
             stage.setScene(scene);
+            stage.setTitle("Duke");
+            stage.setMinHeight(200);
+            stage.setMinWidth(400);
             fxmlLoader.<MainWindow>getController().setDuke(new Duke());
             stage.show();
         } catch (IOException e) {
