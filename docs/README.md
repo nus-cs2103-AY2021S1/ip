@@ -13,82 +13,82 @@ MuskBot was designed to make your work easier and more organized
  bye\
  done
 
-#list
+# list
 List all current tasks, can pass date to filter tasks
-####Usage
+#### Usage
 `list [date]` \
 Example
 `list 2020-12-12` \
 returns all tasks that have deadline on that day
 
-#deadline
+# deadline
 Add a deadline task
-####Usage
+#### Usage
 `deadline <description> /by <date> [time]` \
 Example
 `deadline do something /by 2020-12-12 1500` \
 adds the deadline at 12th, Dec 2020 at 3pm
 
 
-#event
+# event
 Add an event task
-####Usage
+#### Usage
 `event <description> /at <date> [time]` \
 Example
 `event do something /at 2020-12-12 1500` \
 adds the event at 12th, Dec 2020 at 3pm
 
-#todo
+# todo
 Add a todo task
-####Usage
+#### Usage
 `todo <description>` \
 Example
 `event do something` \
 adds the todo task
 
-#delete
+# delete
 Delete a task
-####Usage
+#### Usage
 `delete <index number>` \
 Example
 `delete 1` \
 deletes the task with index number 1
 
-#find
+# find
 Find a task with keyword
-####Usage
+#### Usage
 `find <keyword>`\
 Example
 `find book`\
 returns tasks that have description containing `book`
  
-#stat
+# stat
 Show statistics i.e usage frequency
-####Usage
+#### Usage
 `stat` \
 Example
 `stat` \
 shows the bar chart indicating usage frequency since the 1st time using the app
 
-#done
+# done
 Mark a task as done
-####Usage
+#### Usage
 `done <index number>` \
 Example
 `done 1` \
 marks the task with index number 1 as done
 
-#bye
+# bye
 Close the app
-####Usage
+#### Usage
 `bye` \
 Example
 `bye` \
 closed the app
 
-#help
+# help
 Shows available commands
-####Usage
+#### Usage
 `help` \
 Example
 `help` \
