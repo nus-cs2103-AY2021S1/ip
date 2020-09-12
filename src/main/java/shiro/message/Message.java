@@ -111,17 +111,16 @@ public class Message {
      */
     public static String helpMessage() {
         return "available commands are: \n  " +
-                "1. todo <description>\n  " +
-                "2. deadline <description> /by <date>\n  " +
-                "3. event <description> /at <date>\n  " +
-                "4. done <task_number>\n  " +
-                "5. delete <task_number>\n  " +
-                "6. list\n  " +
+                "1. list\n  " +
+                "2. todo <description>\n  " +
+                "3. deadline <description> /by <date>\n  " +
+                "4. event <description> /at <date>\n  " +
+                "5. done <task_number>\n  " +
+                "6. delete <task_number>\n  " +
                 "7. clear\n  " +
                 "8. find <keyword(s)>\n  " +
                 "9. view <date>\n " +
-                "10. bye\n\n" +
-                "<date> is in the format: <yyyy-mm-dd> or <daydayday>";
+                "10. bye";
     }
 
     /**
