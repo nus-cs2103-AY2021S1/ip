@@ -41,7 +41,7 @@ public class DialogBox extends HBox {
         //Mods
         this.displayPicture.setClip(new Circle(50,50,50));
         this.setPadding(new Insets(20,10,20,10));
-        this.dialog.setPadding(new Insets(0,30,0,10));
+        this.dialog.setPadding(new Insets(10,30,10,10));
         this.dialog.setTextAlignment(TextAlignment.RIGHT);
         this.dialog.setFont(Font.font(13));
     }
@@ -58,6 +58,9 @@ public class DialogBox extends HBox {
     public static DialogBox getUserDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.setBackground(new Background(new BackgroundFill(Color.TURQUOISE, CornerRadii.EMPTY, Insets.EMPTY)));
+        db.dialog.setBackground(new Background(new BackgroundFill(Color.ORANGE, new CornerRadii(10),
+                new Insets(10,10,10,-10))));
+        db.dialog.setFont(Font.font(15));
         return db;
     }
 
