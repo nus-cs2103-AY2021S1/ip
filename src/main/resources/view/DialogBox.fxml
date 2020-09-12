@@ -10,7 +10,7 @@
          type="javafx.scene.layout.HBox" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
     <children>
         <Label fx:id="dialog" text="Label" wrapText="true" minHeight="-Infinity"
-               style="-fx-background-color: #fcf7de; -fx-padding: 5 10 5 10; -fx-background-radius: 15;"/>
+               style="-fx-background-color: #fcf7de; -fx-padding: 5 10 5 10; -fx-background-radius: 15; -fx-font-family: 'Courier New'; -fx-font-weight: 600; -fx-font-size: 13px;"/>
         <StackPane>
             <ImageView fx:id="displayPicture" fitHeight="99.0" fitWidth="99.0" pickOnBounds="true" preserveRatio="true" />
             <padding>
