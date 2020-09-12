@@ -76,7 +76,7 @@ Time format (24 hr): `hh:mm` or `hh.mm`
 
 ```
 Okay I've added:
-  [D][✘] finish README.md (by: 13 Sep)
+  [D][✘] finish README.md (by: 14 Sep)
 now you have 2 tasks in the list!
 ```
 
@@ -141,7 +141,7 @@ Time format (24 hr): `hh:mm` or `hh.mm`
 
 ```
 Okay I've set this task's start date time:
-  [F][✘] meditate (at: 12 Sep, 11:00 pm) (for: 30 min)
+  [F][✘] meditate (at: 13 Sep, 11:00 pm) (for: 30 min)
 ```
 
 ---
@@ -157,7 +157,7 @@ Format: `done <task number>`
 
 ```
 Okay I've set this task's start date time:
-  [F][✓] meditate (at: 12 Sep, 11:00 pm) (for: 30 min)
+  [F][✓] meditate (at: 13 Sep, 11:00 pm) (for: 30 min)
 ```
 
 ---
@@ -176,7 +176,7 @@ Alternative: `remove all` to clear the task list
 
 ```
 Okay I've removed:
-  [F][✓] meditate (at: 12 Sep, 11:00 pm) (for: 30 min)
+  [F][✓] meditate (at: 13 Sep, 11:00 pm) (for: 30 min)
 now you have 3 tasks in the list!
 ```
 
@@ -208,7 +208,7 @@ Your list has been sorted!
 
 ```
 Here are the tasks in your list:
-1. [D][✘] finish README.md (by: 13 Sep)
+1. [D][✘] finish README.md (by: 14 Sep)
 2. [E][✘] speed dating (at: 7 Mar 21, 9:00 am)
 3. [T][✘] read a book
 ```
