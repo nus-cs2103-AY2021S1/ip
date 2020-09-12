@@ -1,5 +1,7 @@
 package sparrow;
 
+import java.util.Scanner;
+
 import sparrow.commands.Command;
 import sparrow.data.task.TaskList;
 import sparrow.data.trivia.VocabList;
@@ -7,14 +9,16 @@ import sparrow.parser.Parser;
 import sparrow.storage.Storage;
 import sparrow.ui.Ui;
 
-import java.util.Scanner;
-
 public class Sparrow {
     private Storage storage;
     private TaskList tasks;
     private VocabList vocabList;
-    final private Ui ui;
+    private final Ui ui;
 
+    /**
+     * Creates an instance of Sparrow, with data stored in the file specified by the path.
+     * @param filePath Path to file for saving data.
+     */
     public Sparrow(String filePath) {
         ui = new Ui();
         try {
@@ -26,6 +30,9 @@ public class Sparrow {
         }
     }
 
+    /**
+     * Creates an instance of Sparrow, with data stored at the default file path.
+     */
     public Sparrow() {
         ui = new Ui();
         try {
@@ -37,6 +44,9 @@ public class Sparrow {
         }
     }
 
+    /**
+     * Driver method of the app.
+     */
     public void run() {
         ui.greet();
 
@@ -52,12 +62,20 @@ public class Sparrow {
         }
     }
 
+    /**
+     * Generates a reply based on the user's input.
+     * @param userInput User's text input.
+     * @return Reply to user.
+     */
     public String getResponse(String userInput) {
         Parser parser = new Parser();
         Command c = parser.parseCommand(userInput);
         return c.execute(tasks, vocabList, ui, storage);
     }
 
+    /**
+     * Entry point into the application.
+     */
     public static void main(String[] args) {
 
         Sparrow sparrow = new Sparrow("Sparrow.txt");

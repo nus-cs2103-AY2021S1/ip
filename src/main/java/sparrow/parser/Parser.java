@@ -1,14 +1,27 @@
 package sparrow.parser;
 
-import sparrow.commands.*;
-import sparrow.data.task.Deadline;
-import sparrow.data.task.Event;
-import sparrow.data.task.Todo;
-
 import java.time.LocalDate;
 import java.time.format.DateTimeParseException;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import sparrow.commands.AddDeadlineCommand;
+import sparrow.commands.AddEventCommand;
+import sparrow.commands.AddTodoCommand;
+import sparrow.commands.Command;
+import sparrow.commands.DefineCommand;
+import sparrow.commands.DeleteCommand;
+import sparrow.commands.DoneCommand;
+import sparrow.commands.ExitCommand;
+import sparrow.commands.FilterCommand;
+import sparrow.commands.FindCommand;
+import sparrow.commands.HelpCommand;
+import sparrow.commands.IncorrectCommand;
+import sparrow.commands.ListCommand;
+import sparrow.commands.VocabCommand;
+import sparrow.data.task.Deadline;
+import sparrow.data.task.Event;
+import sparrow.data.task.Todo;
 
 /**
  * Parses user input and calls the relevant methods.
@@ -37,6 +50,11 @@ public class Parser {
 
     public static final Pattern VOCAB_FORMAT = Pattern.compile("(?<word>\\S+)( (?<definition>.*))?");
 
+    /**
+     * Parses user input to generate a command based on the first word + arguments.
+     * @param userInput Text entered by user.
+     * @return Command to be executed.
+     */
     public Command parseCommand(String userInput) {
         assert !userInput.isBlank() : "No input entered"; // do I need this assertion?
         final Matcher matcher = BASIC_COMMAND_FORMAT.matcher(userInput.trim());

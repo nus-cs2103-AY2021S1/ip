@@ -1,11 +1,11 @@
 package sparrow.ui;
 
+import java.util.List;
+import java.util.Scanner;
+
 import sparrow.data.task.Task;
 import sparrow.data.trivia.Vocabulary;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Scanner;
 
 /**
  * Responsible for sending messages to the user.
@@ -20,14 +20,14 @@ public class Ui {
      * Welcomes the user to the program.
      */
     public void greet() {
-        String welcome = "  _  _ _   ___ _                    \n" +
-                " | || (_) |_ _( )_ __               \n" +
-                " | __ | |  | ||/| '  \\              \n" +
-                " |_||_|_| |___| |_|_|_|             \n" +
-                " / __|_ __  __ _ _ _ _ _ _____ __ __\n" +
-                " \\__ \\ '_ \\/ _` | '_| '_/ _ \\ V  V /\n" +
-                " |___/ .__/\\__,_|_| |_| \\___/\\_/\\_/ \n" +
-                "     |_|                            ";
+        String welcome = "  _  _ _   ___ _                    \n"
+                + " | || (_) |_ _( )_ __               \n"
+                + " | __ | |  | ||/| '  \\              \n"
+                + " |_||_|_| |___| |_|_|_|             \n"
+                + " / __|_ __  __ _ _ _ _ _ _____ __ __\n"
+                + " \\__ \\ '_ \\/ _` | '_| '_/ _ \\ V  V /\n"
+                + " |___/ .__/\\__,_|_| |_| \\___/\\_/\\_/ \n"
+                + "     |_|                            ";
         System.out.println(welcome);
         replyToUser("How can I help ye?");
     }
@@ -49,7 +49,7 @@ public class Ui {
     }
 
     /**
-     * Converts input list to string.
+     * Converts input task list to string.
      */
     public String taskListToString(List<Task> tasks) {
         StringBuilder sb = new StringBuilder();
@@ -60,6 +60,9 @@ public class Ui {
         return sb.toString();
     }
 
+    /**
+     * Converts input task list to string.
+     */
     public String vocabListToString(List<Vocabulary> vocabList) {
         StringBuilder sb = new StringBuilder();
         for (Vocabulary vocabulary : vocabList) {

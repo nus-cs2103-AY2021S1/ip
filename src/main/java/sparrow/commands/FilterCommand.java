@@ -1,13 +1,13 @@
 package sparrow.commands;
 
+import java.time.LocalDate;
+import java.util.ArrayList;
+
 import sparrow.data.task.Task;
 import sparrow.data.task.TaskList;
 import sparrow.data.trivia.VocabList;
 import sparrow.storage.Storage;
 import sparrow.ui.Ui;
-
-import java.time.LocalDate;
-import java.util.ArrayList;
 
 public class FilterCommand extends Command {
 
@@ -19,6 +19,10 @@ public class FilterCommand extends Command {
 
     private final LocalDate date;
 
+    /**
+     * Creates a FilterCommand with the date specified.
+     * @param date Date to filter by.
+     */
     public FilterCommand(LocalDate date) {
         super();
         this.date = date;

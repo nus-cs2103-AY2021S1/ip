@@ -1,12 +1,12 @@
 package sparrow.commands;
 
+import java.util.ArrayList;
+
 import sparrow.data.task.Task;
 import sparrow.data.task.TaskList;
 import sparrow.data.trivia.VocabList;
 import sparrow.storage.Storage;
 import sparrow.ui.Ui;
-
-import java.util.ArrayList;
 
 public class FindCommand extends Command {
 
@@ -18,6 +18,10 @@ public class FindCommand extends Command {
 
     private final String keyword;
 
+    /**
+     * Creates a FindCommand with the given keyword.
+     * @param keyword Term to search for.
+     */
     public FindCommand(String keyword) {
         super();
         this.keyword = keyword;

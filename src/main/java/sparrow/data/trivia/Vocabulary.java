@@ -1,17 +1,24 @@
 package sparrow.data.trivia;
 
 public class Vocabulary {
+    public static final String DICTIONARY_PREFIX = "https://dictionary.cambridge.org/dictionary/english/";
+
     private final String word;
     private String definition;
     private boolean hasDefinition;
 
-    public static final String DICTIONARY_PREFIX = "https://dictionary.cambridge.org/dictionary/english/";
 
+    /**
+     * Creates a Vocabulary object without a definition.
+     */
     public Vocabulary(String word) {
         this.word = word;
         this.hasDefinition = false;
     }
 
+    /**
+     * Creates a Vocabulary object with a definition.
+     */
     public Vocabulary(String word, String definition) {
         this.word = word;
         this.definition = definition;

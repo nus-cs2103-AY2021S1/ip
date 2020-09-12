@@ -13,6 +13,10 @@ public class AddTaskCommand extends Command {
 
     private final Task toAdd;
 
+    /**
+     * Creates an AddTaskCommand with the Task specified.
+     * @param toAdd Task to add to the TaskList.
+     */
     public AddTaskCommand(Task toAdd) {
         super();
         this.toAdd = toAdd;

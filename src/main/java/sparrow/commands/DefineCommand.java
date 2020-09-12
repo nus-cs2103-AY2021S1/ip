@@ -14,6 +14,10 @@ public class DefineCommand extends Command {
 
     private final String targetWord;
 
+    /**
+     * Creates a DefineCommand with the word specified.
+     * @param word Word to define.
+     */
     public DefineCommand(String word) {
         super();
         this.targetWord = word;

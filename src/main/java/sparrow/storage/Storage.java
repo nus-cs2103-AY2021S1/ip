@@ -1,14 +1,5 @@
 package sparrow.storage;
 
-import sparrow.data.exceptions.FileErrorException;
-import sparrow.data.task.Task;
-import sparrow.data.task.Todo;
-import sparrow.data.task.Deadline;
-import sparrow.data.task.Event;
-import sparrow.data.task.TaskList;
-import sparrow.data.trivia.VocabList;
-import sparrow.data.trivia.Vocabulary;
-
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
@@ -19,6 +10,15 @@ import java.time.format.DateTimeParseException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+
+import sparrow.data.exceptions.FileErrorException;
+import sparrow.data.task.Deadline;
+import sparrow.data.task.Event;
+import sparrow.data.task.Task;
+import sparrow.data.task.TaskList;
+import sparrow.data.task.Todo;
+import sparrow.data.trivia.VocabList;
+import sparrow.data.trivia.Vocabulary;
 
 /**
  * Represents the file used to store the task list.
@@ -33,6 +33,11 @@ public class Storage {
         this(DEFAULT_FILE_PATH);
     }
 
+    /**
+     * Initialises a Storage object with the path specified.
+     * @param filePath Path to file.
+     * @throws Exception If path does not end with .txt."
+     */
     public Storage(String filePath) throws Exception {
         path = Path.of(filePath);
         if (!isValidPath(path)) {
@@ -47,7 +52,7 @@ public class Storage {
     /**
      * Returns list of tasks loaded from hard disk.
      * If no file found, returns an empty list.
-     * @return Task list.
+     * @return TaskList.
      */
     public TaskList loadTaskListFromFile() throws FileErrorException {
         File f = new File(path.toString());
@@ -76,6 +81,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Saves input TaskList to file.
+     * @param tasks TaskList to be saved.
+     * @throws FileErrorException if error writing to file.
+     */
     public void saveTaskListToFile(TaskList tasks) throws FileErrorException {
         assert isValidPath(path);
         try {
@@ -85,6 +95,11 @@ public class Storage {
         }
     }
 
+    /**
+     * Converts task list from formatted version to a TaskList object.
+     * @param encodedTaskList Task list saved in file.
+     * @return TaskList
+     */
     public TaskList decodeTaskList(List<String> encodedTaskList) {
         ArrayList<Task> tasks = new ArrayList<>();
         for (String encodedTask : encodedTaskList) {
@@ -95,6 +110,11 @@ public class Storage {
         return new TaskList(tasks);
     }
 
+    /**
+     * Converts TaskList object to a List of Strings.
+     * @param tasks TaskList object to be converted.
+     * @return List of formatted tasks.
+     */
     public List<String> encodeTaskList(TaskList tasks) {
         List<String> encodedTaskList = new ArrayList<>();
         for (Task task : tasks.getTasks()) {
@@ -104,8 +124,8 @@ public class Storage {
     }
 
     /**
-     * Converts user input into a Task.
-     * @param input User input to be converted.
+     * Converts input into a Task.
+     * @param input Input to be converted.
      * @return Task object.
      */
     public Task stringToTask(String input) {
@@ -160,12 +180,12 @@ public class Storage {
         }
 
         if (task instanceof Todo) {
-            sb.insert(0,"T | ");
+            sb.insert(0, "T | ");
         } else if (task instanceof Deadline) {
-            sb.insert(0,"D | ");
+            sb.insert(0, "D | ");
             sb.append(" | ").append(((Deadline) task).getDueDate());
-        } else if (task instanceof  Event) {
-            sb.insert(0,"E | ");
+        } else if (task instanceof Event) {
+            sb.insert(0, "E | ");
             sb.append(" | ").append(((Event) task).getDate());
         }
 
@@ -183,6 +203,11 @@ public class Storage {
         return LocalDate.parse(dateStr);
     }
 
+    /**
+     * Converts a Vocabulary object into a String for storage.
+     * @param vocab Vocabulary to be converted.
+     * @return String representation of Vocabulary.
+     */
     public String vocabToString(Vocabulary vocab) {
         StringBuilder sb = new StringBuilder(vocab.getWord());
         if (vocab.hasDefinition()) {
@@ -191,6 +216,11 @@ public class Storage {
         return sb.toString();
     }
 
+    /**
+     * Converts input into a Vocabulary.
+     * @param input Input to be converted.
+     * @return Vocabulary object.
+     */
     public Vocabulary stringToVocab(String input) {
         String[] inputArr = input.split("\\s+\\|\\s+", 2);
         if (inputArr.length == 2) {
@@ -204,6 +234,11 @@ public class Storage {
 
     }
 
+    /**
+     * Converts vocabulary list from formatted version to a VocabList object.
+     * @param encodedVocabList Vocabulary list saved in file.
+     * @return VocabList object.
+     */
     public VocabList decodeVocabList(List<String> encodedVocabList) {
         ArrayList<Vocabulary> vocabs = new ArrayList<>();
         for (String encodedVocab : encodedVocabList) {
@@ -214,6 +249,11 @@ public class Storage {
         return new VocabList(vocabs);
     }
 
+    /**
+     * Converts VocabList object to a List of Strings.
+     * @param vocabs VocabList object to be converted.
+     * @return List of formatted vocabularies.
+     */
     public List<String> encodeVocabList(VocabList vocabs) {
         List<String> encodedVocabList = new ArrayList<>();
         for (Vocabulary vocab : vocabs.getVocabList()) {
@@ -222,6 +262,11 @@ public class Storage {
         return encodedVocabList;
     }
 
+    /**
+     * Returns list of vocabularies loaded from hard disk.
+     * If no file found, returns an empty list.
+     * @return VocabList.
+     */
     public VocabList loadVocabListFromFile() throws FileErrorException {
         File f = new File(path.toString());
 
@@ -254,6 +299,11 @@ public class Storage {
         return new VocabList();
     }
 
+    /**
+     * Saves input VocabList to file.
+     * @param vocabs VocabList to be saved.
+     * @throws FileErrorException if error writing to file.
+     */
     public void saveVocabListToFile(VocabList vocabs) throws FileErrorException {
         try {
             Files.write(path, Arrays.asList("---"), StandardOpenOption.APPEND);

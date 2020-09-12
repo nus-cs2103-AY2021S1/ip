@@ -9,7 +9,7 @@ public class SparrowTest {
 
     @Test
     public void exceptionMessage() {
-        assertEquals("ARR!\uD83C\uDFF4\u200D\u2620\uFE0F️ ", SparrowException.standardExceptionMessage());
+        assertEquals("ARR!\uD83C\uDFF4\u200D\u2620\uFE0F️ ", SparrowException.STANDARD_EXCEPTION_MESSAGE);
     }
 
 }

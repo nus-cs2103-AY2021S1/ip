@@ -80,6 +80,11 @@ public class TaskList {
         return tasks.remove(taskNum - 1);
     }
 
+    /**
+     * Searches TaskList for tasks matching keyword.
+     * @param taskStr Keyword to search for.
+     * @return List of tasks matching keyword.
+     */
     public ArrayList<Task> findTasks(String taskStr) {
         ArrayList<Task> matchingTasks = new ArrayList<>();
         for (Task task : tasks) {
