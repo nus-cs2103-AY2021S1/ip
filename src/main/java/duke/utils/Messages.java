@@ -17,7 +17,8 @@ public class Messages {
             + "\t \u2022 Mark a task as done (eg done <task index>\n"
             + "\t \u2022 Find a task (eg find <search words>)\n"
             + "\t \u2022 List today's task (eg today)\n"
-            + "\t \u2022 Confirm a date/time (eg confirm <task index> <date/time index>\n";
+            + "\t \u2022 Confirm a date/time (eg confirm <task index> <date/time index>\n"
+            + "\t \u2022 Exit the program (eg bye)\n";
     public static final String MESSAGE_BYE = "\t Bye. Hope to see you again soon!";
 
     public static final String MESSAGE_ADD_TASK = "\t Got it. I've added this task:\n";
