@@ -34,7 +34,7 @@ public class DialogBox extends HBox {
         } catch (IOException e) {
             e.printStackTrace();
         }
-
+        this.setTranslateX(85);
         dialog.setText(text);
         displayPicture.setImage(img);
     }
@@ -46,7 +46,8 @@ public class DialogBox extends HBox {
         ObservableList<Node> tmp = FXCollections.observableArrayList(this.getChildren());
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
-        setAlignment(Pos.TOP_LEFT);
+        setAlignment(Pos.CENTER_LEFT);
+        this.setTranslateX(0);
     }
 
     public static DialogBox getUserDialog(String text, Image img) {

@@ -53,7 +53,6 @@ public class MainWindow extends AnchorPane {
      */
     @FXML
     private void handleUserInput() {
-        userInput.setText("something");
         String input = userInput.getText();
         String response = duke.getResponse(input);
         if (input.toLowerCase().equals("bye")) {
