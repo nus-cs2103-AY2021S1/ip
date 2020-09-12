@@ -35,7 +35,9 @@ public class AliasManager {
         // Check that alias is not an existing command.
         for (Command command : Command.values()) {
             if (command.name().equalsIgnoreCase(alias)) {
-                return ResourceHandler.getString("aliasManager.aliasConflict");
+                String template = ResourceHandler.getString("aliasManager.aliasConflict");
+                response = MessageFormat.format(template, alias);
+                return response;
             }
         }
 
@@ -44,14 +46,38 @@ public class AliasManager {
             Command previousCommand = aliases.putIfAbsent(alias.toLowerCase(), command);
             // If `previousCommand` is not `null`, then the alias is already in use.
             if (previousCommand == null) {
-                response = ResourceHandler.getString("aliasManager.addAlias");
+                String template = ResourceHandler.getString("aliasManager.addAlias");
+                response = MessageFormat.format(template, alias.toLowerCase(), commandString.toLowerCase());
             } else {
-                response = ResourceHandler.getString("aliasManager.aliasInUse");
+                String template = ResourceHandler.getString("aliasManager.aliasInUse");
+                response = MessageFormat.format(template, alias.toLowerCase(),
+                        previousCommand.toString().toLowerCase());
             }
         } catch (IllegalArgumentException e) {
             // `commandString` does not correspond to a command.
-            response = MessageFormat.format(ResourceHandler.getString("aliasManager.invalidCommand"),
-                    commandString);
+            String template = ResourceHandler.getString("aliasManager.invalidCommand");
+            response = MessageFormat.format(template, commandString);
+        }
+
+        return response;
+    }
+
+    /**
+     * Removes an association between an alias and a command.
+     *
+     * @param alias the alias to be removed.
+     * @return a string representation of the action of removing an alias.
+     */
+    public String removeAlias(String alias) {
+        Command previousCommand = aliases.remove(alias.toLowerCase());
+
+        String response;
+        if (previousCommand == null) {
+            String template = ResourceHandler.getString("aliasManager.aliasNotFound");
+            response = MessageFormat.format(template, alias.toLowerCase());
+        } else {
+            String template = ResourceHandler.getString("aliasManager.removeAlias");
+            response = MessageFormat.format(template, alias.toLowerCase());
         }
 
         return response;

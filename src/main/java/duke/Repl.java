@@ -47,15 +47,14 @@ public class Repl {
      */
     public static DukeResponse getResponse(String input) {
         String firstToken = input.trim().split(" ")[0];
+        String inputWithoutCommand = input.replaceFirst(firstToken, "");
         DukeResponse dukeResponse;
         try {
             Command command = Store.getAliasManager().getCommand(firstToken);
-            // Substitute any aliases if necessary.
-            String substitutedInput = input.replaceFirst(firstToken, command.toString());
             // Check that the user input is of the correct format for the command.
-            command.validate(substitutedInput);
+            command.validate(firstToken, inputWithoutCommand);
             // Execute the command.
-            dukeResponse = command.execute(substitutedInput);
+            dukeResponse = command.execute(inputWithoutCommand);
         } catch (DukeException e) {
             dukeResponse = new DukeResponse(e.getMessage());
         } catch (IllegalArgumentException e) {

@@ -24,16 +24,17 @@ public enum Command {
         /**
          * Validates whether the user input is of the correct format for the 'alias' command.
          *
-         * @param input the user input.
+         * @param alias the name used in invoking the command; can be either the command name or an alias.
+         * @param inputArgs the user inputted arguments.
          * @throws DukeException if the user input is invalid.
          */
         @Override
-        public void validate(String input) throws DukeException {
-            String regex = "^(?i)alias\\s+\\S+\\s+\\S+\\s*$|^(?i)alias\\s+-l$";
-            if (!Pattern.matches(regex, input)) {
+        public void validate(String alias, String inputArgs) throws DukeException {
+            String regex = "^\\s*\\S+\\s+\\S+\\s*$|^\\s*-l\\s*$|^\\s*-rm\\s+\\S+\\s*$";
+            if (!Pattern.matches(regex, inputArgs)) {
                 String template = String.format("%s\n%s", ResourceHandler.getString("exception.invalidArgs"),
                         ResourceHandler.getString("command.aliasFormat"));
-                String message = MessageFormat.format(template, "alias");
+                String message = MessageFormat.format(template, alias);
                 throw new DukeException(message);
             }
         }
@@ -41,23 +42,28 @@ public enum Command {
         /**
          * Executes the 'alias' command.
          *
-         * @param input the user input.
+         * @param inputArgs the user inputted arguments.
          * @return the output of running the 'alias' command.
          */
         @Override
-        public DukeResponse execute(String input) {
-            String regex = "^(?i)alias\\s+-l$";
-            if (Pattern.matches(regex, input)) {
+        public DukeResponse execute(String inputArgs) {
+            String listRegex = "^\\s*-l\\s*$";
+            String removeRegex = "^\\s*-rm\\s+\\S+\\s*$";
+            String response;
+            if (Pattern.matches(listRegex, inputArgs)) {
                 // Display list of aliases.
-                return new DukeResponse(Store.getAliasManager().toString());
+                response = Store.getAliasManager().toString();
+            } else if (Pattern.matches(removeRegex, inputArgs)) {
+                // Remove specified alias
+                String alias = inputArgs.replaceFirst("-rm", "").trim();
+                response = Store.getAliasManager().removeAlias(alias);
+            } else {
+                // Add a new alias.
+                String[] argTokens = inputArgs.trim().split("\\s+", 2);
+                String command = argTokens[0].trim();
+                String alias = argTokens[1].trim();
+                response = Store.getAliasManager().addAlias(alias, command);
             }
-
-            // Add a new alias.
-            String lineWithoutCommand = input.replaceFirst("^(?i)alias", "");
-            String[] args = lineWithoutCommand.trim().split("\\s+", 2);
-            String command = args[0].trim();
-            String alias = args[1].trim();
-            String response = Store.getAliasManager().addAlias(alias, command);
             return new DukeResponse(response);
         }
     },
@@ -69,15 +75,16 @@ public enum Command {
         /**
          * Validates whether the user input is of the correct format for the 'bye' command.
          *
-         * @param input the user input.
+         * @param alias the name used in invoking the command; can be either the command name or an alias.
+         * @param inputArgs the user inputted arguments.
          * @throws DukeException if the user input is invalid.
          */
         @Override
-        public void validate(String input) throws DukeException {
-            String regex = "^(?i)bye\\s*$";
-            if (!Pattern.matches(regex, input)) {
+        public void validate(String alias, String inputArgs) throws DukeException {
+            String regex = "^\\s*$";
+            if (!Pattern.matches(regex, inputArgs)) {
                 String template = ResourceHandler.getString("exception.noArgs");
-                String message = MessageFormat.format(template, "bye");
+                String message = MessageFormat.format(template, alias);
                 throw new DukeException(message);
             }
         }
@@ -85,11 +92,11 @@ public enum Command {
         /**
          * Executes the 'bye' command.
          *
-         * @param input the user input.
+         * @param inputArgs the user inputted arguments.
          * @return the output of running the 'bye' command.
          */
         @Override
-        public DukeResponse execute(String input) {
+        public DukeResponse execute(String inputArgs) {
             String response = ResourceHandler.getString("repl.farewell");
             // Return a `DukeResponse` with the exit flag enabled.
             return new DukeResponse(response, true);
@@ -103,16 +110,17 @@ public enum Command {
         /**
          * Validates whether the user input is of the correct format for the 'deadline' command.
          *
-         * @param input the user input.
+         * @param alias the name used in invoking the command; can be either the command name or an alias.
+         * @param inputArgs the user inputted arguments.
          * @throws DukeException if the user input is invalid.
          */
         @Override
-        public void validate(String input) throws DukeException {
-            String regex = "^(?i)deadline\\s+.*\\S+.*\\s+/by\\s+.*\\S+.*\\s*$";
-            if (!Pattern.matches(regex, input)) {
+        public void validate(String alias, String inputArgs) throws DukeException {
+            String regex = "^\\s*.*\\S+.*\\s+/by\\s+.*\\S+.*\\s*$";
+            if (!Pattern.matches(regex, inputArgs)) {
                 String template = String.format("%s\n%s", ResourceHandler.getString("exception.invalidArgs"),
                         ResourceHandler.getString("command.deadlineFormat"));
-                String message = MessageFormat.format(template, "deadline");
+                String message = MessageFormat.format(template, alias);
                 throw new DukeException(message);
             }
         }
@@ -120,16 +128,15 @@ public enum Command {
         /**
          * Executes the 'deadline' command.
          *
-         * @param input the user input.
+         * @param inputArgs the user inputted arguments.
          * @return the output of running the 'deadline' command.
          * @throws DukeException if an error occurs while running the 'deadline' command.
          */
         @Override
-        public DukeResponse execute(String input) throws DukeException {
-            String lineWithoutCommand = input.replaceFirst("^(?i)deadline", "");
-            String[] args = lineWithoutCommand.split("/by", 2);
-            String deadlineName = args[0].trim();
-            String dueDateString = args[1].trim();
+        public DukeResponse execute(String inputArgs) throws DukeException {
+            String[] argTokens = inputArgs.split("/by", 2);
+            String deadlineName = argTokens[0].trim();
+            String dueDateString = argTokens[1].trim();
             LocalDateTime dueDate = DateTimeParser.parseDateTime(dueDateString);
             String response = Store.getTaskManager().addTask(new Deadline(deadlineName, dueDate));
             return new DukeResponse(response);
@@ -143,16 +150,17 @@ public enum Command {
         /**
          * Validates whether the user input is of the correct format for the 'delete' command.
          *
-         * @param input the user input.
+         * @param alias the name used in invoking the command; can be either the command name or an alias.
+         * @param inputArgs the user inputted arguments.
          * @throws DukeException if the user input is invalid.
          */
         @Override
-        public void validate(String input) throws DukeException {
-            String regex = "^(?i)delete\\s+\\d+\\s*$";
-            if (!Pattern.matches(regex, input)) {
+        public void validate(String alias, String inputArgs) throws DukeException {
+            String regex = "^\\s*\\d+\\s*$";
+            if (!Pattern.matches(regex, inputArgs)) {
                 String template = String.format("%s\n%s", ResourceHandler.getString("exception.invalidArgs"),
                         ResourceHandler.getString("command.deleteFormat"));
-                String message = MessageFormat.format(template, "delete");
+                String message = MessageFormat.format(template, alias);
                 throw new DukeException(message);
             }
         }
@@ -160,13 +168,12 @@ public enum Command {
         /**
          * Executes the 'delete' command.
          *
-         * @param input the user input.
+         * @param inputArgs the user inputted arguments.
          * @return the output of running the 'delete' command.
          */
         @Override
-        public DukeResponse execute(String input) {
-            String lineWithoutCommand = input.replaceFirst("^(?i)delete", "");
-            String listIndexString = lineWithoutCommand.trim();
+        public DukeResponse execute(String inputArgs) {
+            String listIndexString = inputArgs.trim();
             // `listIndexString` is guaranteed to be a string made up of only digit characters after validation.
             int listIndex = Integer.parseInt(listIndexString) - 1;
             String response;
@@ -187,16 +194,17 @@ public enum Command {
         /**
          * Validates whether the user input is of the correct format for the 'done' command.
          *
-         * @param input the user input.
+         * @param alias the name used in invoking the command; can be either the command name or an alias.
+         * @param inputArgs the user inputted arguments.
          * @throws DukeException if the user input is invalid.
          */
         @Override
-        public void validate(String input) throws DukeException {
-            String regex = "^(?i)done\\s+\\d+\\s*$";
-            if (!Pattern.matches(regex, input)) {
+        public void validate(String alias, String inputArgs) throws DukeException {
+            String regex = "^\\s*\\d+\\s*$";
+            if (!Pattern.matches(regex, inputArgs)) {
                 String template = String.format("%s\n%s", ResourceHandler.getString("exception.invalidArgs"),
                         ResourceHandler.getString("command.doneFormat"));
-                String message = MessageFormat.format(template, "done");
+                String message = MessageFormat.format(template, alias);
                 throw new DukeException(message);
             }
         }
@@ -204,13 +212,12 @@ public enum Command {
         /**
          * Executes the 'done' command.
          *
-         * @param input the user input.
+         * @param inputArgs the user inputted arguments.
          * @return the output of running the 'done' command.
          */
         @Override
-        public DukeResponse execute(String input) {
-            String lineWithoutCommand = input.replaceFirst("^(?i)done", "");
-            String listIndexString = lineWithoutCommand.trim();
+        public DukeResponse execute(String inputArgs) {
+            String listIndexString = inputArgs.trim();
             // `listIndexString` is guaranteed to be a string made up of only digit characters after validation.
             int listIndex = Integer.parseInt(listIndexString) - 1;
             String response;
@@ -231,16 +238,17 @@ public enum Command {
         /**
          * Validates whether the user input is of the correct format for the 'event' command.
          *
-         * @param input the user input.
+         * @param alias the name used in invoking the command; can be either the command name or an alias.
+         * @param inputArgs the user inputted arguments.
          * @throws DukeException if the user input is invalid.
          */
         @Override
-        public void validate(String input) throws DukeException {
-            String regex = "^(?i)event\\s+.*\\S+.*\\s+/at\\s+.*\\S+.*\\s*$";
-            if (!Pattern.matches(regex, input)) {
+        public void validate(String alias, String inputArgs) throws DukeException {
+            String regex = "^\\s*.*\\S+.*\\s+/at\\s+.*\\S+.*\\s*$";
+            if (!Pattern.matches(regex, inputArgs)) {
                 String template = String.format("%s\n%s", ResourceHandler.getString("exception.invalidArgs"),
                         ResourceHandler.getString("command.eventFormat"));
-                String message = MessageFormat.format(template, "event");
+                String message = MessageFormat.format(template, alias);
                 throw new DukeException(message);
             }
         }
@@ -248,16 +256,15 @@ public enum Command {
         /**
          * Executes the 'event' command.
          *
-         * @param input the user input.
+         * @param inputArgs the user inputted arguments.
          * @return the output of running the 'event' command.
          * @throws DukeException if an error occurs while running the 'event' command.
          */
         @Override
-        public DukeResponse execute(String input) throws DukeException {
-            String lineWithoutCommand = input.replaceFirst("^(?i)event", "");
-            String[] args = lineWithoutCommand.split("/at", 2);
-            String eventName = args[0].trim();
-            String dateTimeString = args[1].trim();
+        public DukeResponse execute(String inputArgs) throws DukeException {
+            String[] argTokens = inputArgs.split("/at", 2);
+            String eventName = argTokens[0].trim();
+            String dateTimeString = argTokens[1].trim();
             LocalDateTime dateTime = DateTimeParser.parseDateTime(dateTimeString);
             String response = Store.getTaskManager().addTask(new Event(eventName, dateTime));
             return new DukeResponse(response);
@@ -271,16 +278,17 @@ public enum Command {
         /**
          * Validates whether the user input is of the correct format for the 'find' command.
          *
-         * @param input the user input.
+         * @param alias the name used in invoking the command; can be either the command name or an alias.
+         * @param inputArgs the user inputted arguments.
          * @throws DukeException if the user input is invalid.
          */
         @Override
-        public void validate(String input) throws DukeException {
-            String regex = "^(?i)find\\s+.*\\S+.*\\s*$";
-            if (!Pattern.matches(regex, input)) {
+        public void validate(String alias, String inputArgs) throws DukeException {
+            String regex = "^\\s*.*\\S+.*\\s*$";
+            if (!Pattern.matches(regex, inputArgs)) {
                 String template = String.format("%s\n%s", ResourceHandler.getString("exception.invalidArgs"),
                         ResourceHandler.getString("command.findFormat"));
-                String message = MessageFormat.format(template, "find");
+                String message = MessageFormat.format(template, alias);
                 throw new DukeException(message);
             }
         }
@@ -288,13 +296,12 @@ public enum Command {
         /**
          * Executes the 'find' command.
          *
-         * @param input the user input.
+         * @param inputArgs the user inputted arguments.
          * @return the output of running the 'find' command.
          */
         @Override
-        public DukeResponse execute(String input) {
-            String lineWithoutCommand = input.replaceFirst("^(?i)find", "");
-            String[] searchKeywords = lineWithoutCommand.trim().split("\\s+");
+        public DukeResponse execute(String inputArgs) {
+            String[] searchKeywords = inputArgs.trim().split("\\s+");
             String response = Store.getTaskManager().getMatchingTasks(searchKeywords);
             return new DukeResponse(response);
         }
@@ -307,15 +314,16 @@ public enum Command {
         /**
          * Validates whether the user input is of the correct format for the 'list' command.
          *
-         * @param input the user input.
+         * @param alias the name used in invoking the command; can be either the command name or an alias.
+         * @param inputArgs the user inputted arguments.
          * @throws DukeException if the user input is invalid.
          */
         @Override
-        public void validate(String input) throws DukeException {
-            String regex = "^(?i)list\\s*$";
-            if (!Pattern.matches(regex, input)) {
+        public void validate(String alias, String inputArgs) throws DukeException {
+            String regex = "^\\s*$";
+            if (!Pattern.matches(regex, inputArgs)) {
                 String template = ResourceHandler.getString("exception.noArgs");
-                String message = MessageFormat.format(template, "list");
+                String message = MessageFormat.format(template, alias);
                 throw new DukeException(message);
             }
         }
@@ -323,11 +331,11 @@ public enum Command {
         /**
          * Executes the 'list' command.
          *
-         * @param input the user input.
+         * @param inputArgs the user inputted arguments.
          * @return the output of running the 'list' command.
          */
         @Override
-        public DukeResponse execute(String input) {
+        public DukeResponse execute(String inputArgs) {
             String response = Store.getTaskManager().toString();
             return new DukeResponse(response);
         }
@@ -340,15 +348,16 @@ public enum Command {
         /**
          * Validates whether the user input is of the correct format for the 'overdue' command.
          *
-         * @param input the user input.
+         * @param alias the name used in invoking the command; can be either the command name or an alias.
+         * @param inputArgs the user inputted arguments.
          * @throws DukeException if the user input is invalid.
          */
         @Override
-        public void validate(String input) throws DukeException {
-            String regex = "^(?i)overdue\\s*$";
-            if (!Pattern.matches(regex, input)) {
+        public void validate(String alias, String inputArgs) throws DukeException {
+            String regex = "^\\s*$";
+            if (!Pattern.matches(regex, inputArgs)) {
                 String template = ResourceHandler.getString("exception.noArgs");
-                String message = MessageFormat.format(template, "overdue");
+                String message = MessageFormat.format(template, alias);
                 throw new DukeException(message);
             }
         }
@@ -356,11 +365,11 @@ public enum Command {
         /**
          * Executes the 'overdue' command.
          *
-         * @param input the user input.
+         * @param inputArgs the user inputted arguments.
          * @return the output of running the 'overdue' command.
          */
         @Override
-        public DukeResponse execute(String input) {
+        public DukeResponse execute(String inputArgs) {
             String response = Store.getTaskManager().getOverdueTasks();
             return new DukeResponse(response);
         }
@@ -373,16 +382,17 @@ public enum Command {
         /**
          * Validates whether the user input is of the correct format for the 'todo' command.
          *
-         * @param input the user input.
+         * @param alias the name used in invoking the command; can be either the command name or an alias.
+         * @param inputArgs the user inputted arguments.
          * @throws DukeException if the user input is invalid.
          */
         @Override
-        public void validate(String input) throws DukeException {
-            String regex = "^(?i)todo\\s+.*\\S+.*\\s*$";
-            if (!Pattern.matches(regex, input)) {
+        public void validate(String alias, String inputArgs) throws DukeException {
+            String regex = "^\\s*.*\\S+.*\\s*$";
+            if (!Pattern.matches(regex, inputArgs)) {
                 String template = String.format("%s\n%s", ResourceHandler.getString("exception.invalidArgs"),
                         ResourceHandler.getString("command.toDoFormat"));
-                String message = MessageFormat.format(template, "todo");
+                String message = MessageFormat.format(template, alias);
                 throw new DukeException(message);
             }
         }
@@ -390,13 +400,12 @@ public enum Command {
         /**
          * Executes the 'todo' command.
          *
-         * @param input the user input.
+         * @param inputArgs the user inputted arguments.
          * @return the output of running the 'todo' command.
          */
         @Override
-        public DukeResponse execute(String input) {
-            String lineWithoutCommand = input.replaceFirst("^(?i)todo", "");
-            String toDoName = lineWithoutCommand.trim();
+        public DukeResponse execute(String inputArgs) {
+            String toDoName = inputArgs.trim();
             String response = Store.getTaskManager().addTask(new ToDo(toDoName));
             return new DukeResponse(response);
         }
@@ -409,15 +418,16 @@ public enum Command {
         /**
          * Validates whether the user input is of the correct format for the 'upcoming' command.
          *
-         * @param input the user input.
+         * @param alias the name used in invoking the command; can be either the command name or an alias.
+         * @param inputArgs the user inputted arguments.
          * @throws DukeException if the user input is invalid.
          */
         @Override
-        public void validate(String input) throws DukeException {
-            String regex = "^(?i)upcoming\\s*$";
-            if (!Pattern.matches(regex, input)) {
+        public void validate(String alias, String inputArgs) throws DukeException {
+            String regex = "^\\s*$";
+            if (!Pattern.matches(regex, inputArgs)) {
                 String template = ResourceHandler.getString("exception.noArgs");
-                String message = MessageFormat.format(template, "upcoming");
+                String message = MessageFormat.format(template, alias);
                 throw new DukeException(message);
             }
         }
@@ -425,11 +435,11 @@ public enum Command {
         /**
          * Executes the 'upcoming' command.
          *
-         * @param input the user input.
+         * @param inputArgs the user inputted arguments.
          * @return the output of running the 'upcoming' command.
          */
         @Override
-        public DukeResponse execute(String input) {
+        public DukeResponse execute(String inputArgs) {
             String response = Store.getTaskManager().getUpcomingTasks();
             return new DukeResponse(response);
         }
@@ -438,17 +448,18 @@ public enum Command {
     /**
      * Validates whether the user input is of the correct format.
      *
-     * @param input the user input.
+     * @param alias the name used in invoking the command; can be either the command name or an alias.
+     * @param inputArgs the user inputted arguments.
      * @throws DukeException if the user input is invalid.
      */
-    public abstract void validate(String input) throws DukeException;
+    public abstract void validate(String alias, String inputArgs) throws DukeException;
 
     /**
      * Executes the command.
      *
-     * @param input the user input.
+     * @param inputArgs the user inputted arguments.
      * @return a {@code DukeResponse}.
      * @throws DukeException if an error occurs while running the command.
      */
-    public abstract DukeResponse execute(String input) throws DukeException;
+    public abstract DukeResponse execute(String inputArgs) throws DukeException;
 }
