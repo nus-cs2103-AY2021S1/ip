@@ -42,10 +42,12 @@ public class ToDo extends Task {
         return new ToDo(content);
     }
 
+    @Override
     public String toString() {
         return "[T]" + super.toString();
     }
 
+    @Override
     public String print() {
         return "T | " + super.print();
     }

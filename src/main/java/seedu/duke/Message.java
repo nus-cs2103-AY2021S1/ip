@@ -71,6 +71,11 @@ public class Message {
         return result.toString();
     }
 
+    /**
+     * Carries out an action on each line in the message.
+     *
+     * @param consumer action to be carried out
+     */
     public void forEach(Consumer<? super String> consumer) {
         for (String line : message) {
             consumer.accept(line);

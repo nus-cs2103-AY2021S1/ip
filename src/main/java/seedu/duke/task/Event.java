@@ -58,11 +58,13 @@ public class Event extends Task {
         }
     }
 
+    @Override
     public String toString() {
         String date = this.duration.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
         return "[E]" + super.toString() + " (at: " + date + ")";
     }
 
+    @Override
     public String print() {
         return "E | " + super.print() + " | " + this.duration;
     }

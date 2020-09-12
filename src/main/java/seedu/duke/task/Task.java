@@ -40,6 +40,7 @@ public abstract class Task {
         return this;
     }
 
+    @Override
     public String toString() {
         String status = this.isDone ? "\u2713" : "\u2718";
         return "[" + status + "] " + this.title;
@@ -67,6 +68,7 @@ public abstract class Task {
         return this.title.contains(keyword);
     }
 
+    @Override
     public boolean equals(Object obj) {
         assert obj instanceof Task;
         return this.title.equals(((Task) obj).title);

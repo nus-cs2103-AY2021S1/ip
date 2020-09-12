@@ -59,11 +59,13 @@ public class Deadline extends Task {
 
     }
 
+    @Override
     public String toString() {
         String date = this.deadline.format(DateTimeFormatter.ofPattern("d MMM yyyy"));
         return "[D]" + super.toString() + " (by: " + date + ")";
     }
 
+    @Override
     public String print() {
         return "D | " + super.print() + " | " + this.deadline;
     }

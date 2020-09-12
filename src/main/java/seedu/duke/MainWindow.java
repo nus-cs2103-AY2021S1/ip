@@ -23,6 +23,9 @@ public class MainWindow extends BorderPane {
         this.duke = duke;
     }
 
+    /**
+     * Initializes the main window of the GUI.
+     */
     @FXML
     public void initialize() {
         welcomeLabel.setText(Message.getWelcome().getText());
@@ -30,6 +33,9 @@ public class MainWindow extends BorderPane {
         dialogContainer.heightProperty().addListener((observable) -> scrollPane.setVvalue(1.0));
     }
 
+    /**
+     * Manages GUI changes when the user submits an input.
+     */
     @FXML
     public void handleUserInput() {
         userInput.setOnAction((event) -> {

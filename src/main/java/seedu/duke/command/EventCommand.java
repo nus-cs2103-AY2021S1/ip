@@ -19,6 +19,7 @@ public class EventCommand implements Command {
         this.command = command;
     }
 
+    @Override
     public Message execute(TaskList taskList, Storage storage) throws InvalidCommandFormatException, IOException {
         try {
             Event event = Event.of(this.command);
@@ -30,6 +31,7 @@ public class EventCommand implements Command {
         }
     }
 
+    @Override
     public boolean isDone() {
         return false;
     }

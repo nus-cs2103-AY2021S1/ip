@@ -12,6 +12,7 @@ public class FindCommand implements Command {
         this.command = command;
     }
 
+    @Override
     public Message execute(TaskList taskList, Storage storage) throws InvalidCommandFormatException {
         if (command.length() <= 5) {
             throw new InvalidCommandFormatException("Please enter the keywords you are searching for.");
@@ -20,6 +21,7 @@ public class FindCommand implements Command {
         return taskList.find(keyword);
     }
 
+    @Override
     public boolean isDone() {
         return false;
     }

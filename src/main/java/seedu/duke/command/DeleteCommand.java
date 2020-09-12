@@ -19,6 +19,7 @@ public class DeleteCommand implements Command {
         this.command = command;
     }
 
+    @Override
     public Message execute(TaskList taskList, Storage storage) throws InvalidCommandFormatException,
             InvalidTaskException, IOException {
         if (command.length != 2) {
@@ -33,6 +34,7 @@ public class DeleteCommand implements Command {
         }
     }
 
+    @Override
     public boolean isDone() {
         return false;
     }

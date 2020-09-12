@@ -19,6 +19,7 @@ public class ToDoCommand implements Command {
         this.command = command;
     }
 
+    @Override
     public Message execute(TaskList taskList, Storage storage) throws InvalidCommandFormatException, IOException {
         try {
             ToDo toDo = ToDo.of(this.command);
@@ -30,6 +31,7 @@ public class ToDoCommand implements Command {
         }
     }
 
+    @Override
     public boolean isDone() {
         return false;
     }
