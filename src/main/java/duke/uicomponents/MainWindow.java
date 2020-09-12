@@ -36,7 +36,6 @@ public class MainWindow extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-
     }
     @FXML
     public void initialize() {

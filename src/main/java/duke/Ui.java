@@ -62,7 +62,7 @@ class Ui {
             return "You are somebody new! Please state your user password.";
         }
         // Initiating a conversation with duke with 'hi'
-        if (s.length() == 2 && s.contains("hi")) {
+        if (s.length() == 3 && s.contains("hey")) {
             return CONVO_START;
         }
 

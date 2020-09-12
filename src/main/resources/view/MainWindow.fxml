@@ -3,17 +3,36 @@
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.effect.Bloom?>
+<?import javafx.scene.effect.DropShadow?>
+<?import javafx.scene.effect.InnerShadow?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.uicomponents.MainWindow">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="400.0" style="-fx-background-color: lightgrey; -fx-background-radius: 10px;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="duke.uicomponents.MainWindow">
     <children>
-        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="324.0" AnchorPane.bottomAnchor="1.0" />
-        <Button fx:id="sendButton" layoutX="324.0" layoutY="558.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="41.0" prefWidth="76.0" text="Send" />
+      <AnchorPane layoutX="350.0" layoutY="558.0" prefHeight="41.0" prefWidth="42.0" style="-fx-background-color: #0088cc; -fx-background-radius: 100%;">
+         <children>
+              <Button fx:id="sendButton" layoutX="7.0" layoutY="8.0" mnemonicParsing="false" onAction="#handleUserInput" prefHeight="27.0" prefWidth="26.0" style="-fx-background-color: white;" stylesheets="@styles.css" />
+         </children>
+         <effect>
+            <DropShadow />
+         </effect>
+      </AnchorPane>
+        <TextField fx:id="userInput" layoutY="558.0" onAction="#handleUserInput" prefHeight="41.0" prefWidth="341.0" style="-fx-background-radius: 50px; -fx-border-radius: 50px; -fx-border-color: lightblue; -fx-background-color: white;" styleClass="textfield" stylesheets="@styles.css" AnchorPane.bottomAnchor="1.0">
+         <effect>
+            <Bloom threshold="1.0" />
+         </effect></TextField>
         <ScrollPane fx:id="scrollPane" hbarPolicy="NEVER" hvalue="1.0" prefHeight="557.0" prefWidth="400.0" vvalue="1.0">
             <content>
-                <VBox fx:id="dialogContainer" prefHeight="552.0" prefWidth="388.0" />
+                <VBox fx:id="dialogContainer" prefHeight="561.0" prefWidth="399.0" style="-fx-background-color: white;" />
             </content>
+         <effect>
+            <InnerShadow />
+         </effect>
         </ScrollPane>
     </children>
+   <effect>
+      <InnerShadow />
+   </effect>
 </AnchorPane>
