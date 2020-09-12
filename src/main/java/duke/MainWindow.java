@@ -1,7 +1,9 @@
 package duke;
 
+import duke.dukehelper.Ui;
 import duke.dukehelper.uiparts.DialogBox;
 import duke.dukehelper.uiparts.Statistics;
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
@@ -50,7 +52,11 @@ public class MainWindow extends AnchorPane {
                     DialogBox.getUserDialog(input,userImage),
                     DialogBox.getStatDialog(new Statistics(), dukeImage)
             );
-        } else {
+        }
+        else if (response.equals(Ui.printDialog(Duke.EXIT_MSG))) {
+            Platform.exit();
+        }
+        else {
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(input,userImage),
                     DialogBox.getDukeDialog(response, dukeImage)
@@ -58,4 +64,5 @@ public class MainWindow extends AnchorPane {
         }
         userInput.clear();
     }
+
 }

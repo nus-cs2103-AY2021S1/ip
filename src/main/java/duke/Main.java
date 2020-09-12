@@ -26,7 +26,7 @@ public class Main extends Application {
             scene.getStylesheets().add(this.getClass().getClassLoader().getResource("style/main_window.css").toExternalForm());
             stage.setScene(scene);
 
-            this.duke = new Duke(stage);
+            this.duke = new Duke();
             fxmlLoader.<MainWindow>getController().initialize(duke);
             stage.setTitle("Elon Musk");
             stage.getIcons().add(new Image(this.getClass().getClassLoader().getResource("images/icon.jpg").toString()));

@@ -9,7 +9,7 @@ import duke.dukehelper.uiparts.Statistics;
 import duke.exception.DukeException;
 import duke.helper.DateTimeHelper;
 import duke.task.Task;
-import javafx.stage.Stage;
+
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -25,26 +25,24 @@ public class Duke {
     private final static String ERROR_LOAD_MSG = "Something wrong happened while loading saved tasks";
     private final static String FIRST_TIME = "This is the first time you use Duke!";
     public final static String ERROR_CODE = "000";
-    private final static String EXIT_MSG = "Bye. Hope to see you again soon!";
+    public final static String EXIT_MSG = "Bye. Hope to see you again soon!";
     private final static String HELP_MSG = "Type 'help' if you know nothing";
 
     private Ui ui;
     private Storage storage;
     private TaskList tasks;
     private Parser parser;
-    private Stage stage;
     private int[] statData;
     private Statistics statistics;
     /**
      * Constructor
      */
-    public Duke(Stage stage) {
+    public Duke() {
         this.statistics = new Statistics();
         this.ui = new Ui();
         this.storage = new Storage("data/save_file.txt");
         this.tasks = new TaskList();
         this.parser = new Parser();
-        this.stage = stage;
         this.statData = new int[]{0,0,0};
     }
     private int getNumTasks() {
@@ -170,7 +168,6 @@ public class Duke {
 
         content = content.strip();
         if (content.equals(Commands.BYE.getAction())) {
-            this.stage.close();
             return Ui.printDialog(EXIT_MSG);
         }
         if (content.equals(Commands.HELP.getAction())) {
