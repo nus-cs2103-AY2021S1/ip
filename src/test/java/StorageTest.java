@@ -64,16 +64,4 @@ public class StorageTest {
         System.out.println(dummyTaskList);
         assertEquals(Deadline.class, dummyTaskList.get(dummyTaskList.size() - 2).getClass());
     }
-
-    @Test
-    public void appendText_updateTextFile_success() {
-        int x = 0;
-        assertEquals(0, x);
-    }
-
-    @Test
-    public void removeText_updateTextFile_success() {
-        int x = 0;
-        assertEquals(0, x);
-    }
 }

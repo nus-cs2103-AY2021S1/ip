@@ -1,4 +1,7 @@
 package main.java.com.jacob.duke.io;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.format.DateTimeParseException;
 
 import main.java.com.jacob.duke.DukeException;
 import main.java.com.jacob.duke.command.ByeCommand;
@@ -37,29 +40,37 @@ public class Parser {
             c = new TodoCommand(fullCommand);
             break;
         case "deadline":
-            checkBreakpointExists("/", fullCommand, "deadline");
+            checkCorrectDateTime(splitStrings);
+            checkBreakpointExists("/by", fullCommand, "deadline");
             c = new DeadlineCommand(fullCommand);
             break;
         case "event":
-            checkBreakpointExists("/", fullCommand, "event");
+            checkCorrectDateTime(splitStrings);
+            checkBreakpointExists("/at", fullCommand, "event");
             c = new EventCommand(fullCommand);
             break;
         case "delete":
+            checkCommandLength(2, splitStrings);
             c = new DeleteCommand(fullCommand);
             break;
         case "list":
+            checkCommandLength(1, splitStrings);
             c = new PrintListCommand();
             break;
         case "list-due":
+            checkCommandLength(3, splitStrings);
+            checkCorrectDateTime(splitStrings);
             c = new PrintFilteredListDateTimeCommand(fullCommand);
             break;
         case "find":
             c = new FindCommand(fullCommand);
             break;
         case "done":
+            checkCommandLength(2, splitStrings);
             c = new DoneCommand(fullCommand);
             break;
         case "bye":
+            checkCommandLength(1, splitStrings);
             c = new ByeCommand();
             break;
         case "note":
@@ -67,9 +78,11 @@ public class Parser {
             c = new NoteCommand(fullCommand);
             break;
         case "note-list":
+            checkCommandLength(1, splitStrings);
             c = new PrintNoteListCommand();
             break;
         case "note-delete":
+            checkCommandLength(2, splitStrings);
             c = new DeleteNoteCommand(fullCommand);
             break;
         default:
@@ -81,13 +94,31 @@ public class Parser {
     private void checkDescriptionNotEmpty(String commandType, String fullCommand) throws DukeException {
         if (commandType.length() + 1 >= fullCommand.length() && !fullCommand.equals("bye")
                 && !fullCommand.equals("list") && !fullCommand.equals("note-list")) {
-            throw new DukeException("A " + commandType + " cannot be empty!");
+            throw new DukeException("A " + commandType + " request cannot be empty!");
         }
     }
 
     private void checkBreakpointExists(String breakpoint, String fullCommand, String commandType) throws DukeException {
         if (!fullCommand.contains(breakpoint)) {
-            throw new DukeException("Your " + commandType + " command is incomplete!!!");
+            throw new DukeException("Your " + commandType + " command is incomplete!!! It does not contain: "
+                    + breakpoint);
+        }
+    }
+
+    private void checkCommandLength(int commandLength, String[] fullCommand) throws DukeException {
+        if (commandLength != fullCommand.length) {
+            throw new DukeException("I dont recognise this command, you might have added too much stuff!");
+        }
+    }
+
+    //parse date time exceptions - catches java.time.format.DateTimeParseException
+    private void checkCorrectDateTime(String[] splitCommand) throws DukeException {
+        //checks the last string parsed in full command
+        String dateTime = splitCommand[splitCommand.length - 2] + " " + splitCommand[splitCommand.length - 1];
+        try {
+            LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
+        } catch (DateTimeParseException e) {
+            throw new DukeException("Invalid Date time format: use YYYY-MM-DD kkmm(2400 format)");
         }
     }
 }

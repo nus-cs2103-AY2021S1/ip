@@ -1,4 +1,4 @@
-package main.java.com.jacob.duke;
+package main.java.com.jacob.duke.javafx;
 
 import java.io.IOException;
 import java.util.Collections;

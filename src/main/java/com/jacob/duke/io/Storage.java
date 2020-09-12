@@ -132,9 +132,11 @@ public class Storage {
         try {
             BufferedReader reader = new BufferedReader(new InputStreamReader(
                     new DataInputStream(new FileInputStream(this.filename))));
-            for (String line; (line = reader.readLine()) != null; ) {
+            String line = reader.readLine();
+            while (line != null) {
                 //parse the line here and add to dukelist
                 this.handleFileCommands(line, dukeList);
+                line = reader.readLine();
             }
             //handle resource leakage
             reader.close();
@@ -233,4 +235,5 @@ public class Storage {
         lineToEdit = lineToEdit + newLine;
         replacement(lineToEdit, "", sb);
     }
+
 }
