@@ -62,7 +62,7 @@ public class Parser {
         } else if (input.isBlank()) {
             return new DoNothingCommand();
         } else {
-            throw new DukeException("\tI don't know what that means :-(");
+            throw new DukeException("I don't know what that means :-(");
         }
     }
 
@@ -77,7 +77,7 @@ public class Parser {
         } else if (input.startsWith("event")) {
             newTask = getEvent(input, dateFormat);
         } else {
-            throw new DukeException("\tUnidentified Add Command");
+            throw new DukeException("Unidentified Add Command");
         }
 
         return new AddCommand(newTask);
@@ -91,19 +91,19 @@ public class Parser {
         boolean hasNoDescription = inputComponents[0].length() == 5;
         boolean hasBlankDescription = hasNoDescription || inputComponents[0].substring(6).isBlank();
         if (hasBlankDescription) {
-            throw new DukeException("\tThe description of an event cannot be empty.");
+            throw new DukeException("The description of an event cannot be empty.");
         }
 
         boolean hasNoDate = inputComponents.length == 1;
         boolean hasBlankDate = hasNoDate || inputComponents[1].isBlank();
         if (hasBlankDate) {
-            throw new DukeException("\tThe date of an event cannot be empty.");
+            throw new DukeException("The date of an event cannot be empty.");
         }
 
         try {
             dateOfEvent = LocalDateTime.parse(inputComponents[1].trim(), dateFormat);
         } catch (DateTimeParseException e) {
-            throw new DukeException("\tDate should be in format dd/mm/yyyy hh:mm");
+            throw new DukeException("Date should be in format dd/mm/yyyy hh:mm");
         }
 
         eventDescription = inputComponents[0].substring(6).trim();
@@ -118,19 +118,19 @@ public class Parser {
         boolean hasNoDescription = inputComponents[0].length() == 8;
         boolean hasBlankDescription = hasNoDescription || inputComponents[0].substring(9).isBlank();
         if (hasBlankDescription) {
-            throw new DukeException("\tThe description of a deadline cannot be empty.");
+            throw new DukeException("The description of a deadline cannot be empty.");
         }
 
         boolean hasNoDate = inputComponents.length == 1;
         boolean hasBlankDate = hasNoDate || inputComponents[1].isBlank();
         if (hasBlankDate) {
-            throw new DukeException("\tThe date of a deadline cannot be empty.");
+            throw new DukeException("The date of a deadline cannot be empty.");
         }
 
         try {
             deadlineDate = LocalDateTime.parse(inputComponents[1].trim(), dateFormat);
         } catch (DateTimeParseException e) {
-            throw new DukeException("\tDate should be in format dd/mm/yyyy hh:mm");
+            throw new DukeException("Date should be in format dd/mm/yyyy hh:mm");
         }
 
         deadlineDescription = inputComponents[0].substring(9).trim();
@@ -143,7 +143,7 @@ public class Parser {
         boolean hasNoDescription = input.length() == 4;
         boolean hasBlankDescription = hasNoDescription || input.substring(5).isBlank();
         if (hasBlankDescription) {
-            throw new DukeException("\tThe description of a todo cannot be empty.");
+            throw new DukeException("The description of a todo cannot be empty.");
         }
 
         todoDescription = input.substring(5).trim();
@@ -154,7 +154,7 @@ public class Parser {
         boolean hasNoDate = input.length() == 8;
         boolean hasBlankDate = hasNoDate || input.substring(9).isBlank();
         if (hasBlankDate) {
-            throw new DukeException("\tNeed to specify the date of the tasks");
+            throw new DukeException("Need to specify the date of the tasks");
         }
 
         String dateOfTask = input.substring(9).trim();
@@ -163,7 +163,7 @@ public class Parser {
         try {
             date = LocalDate.parse(dateOfTask, dateFormat);
         } catch (DateTimeParseException e) {
-            throw new DukeException("\tDate should be in format dd/mm/yyyy");
+            throw new DukeException("Date should be in format dd/mm/yyyy");
         }
 
         return new TasksOnCommand(date);
@@ -173,7 +173,7 @@ public class Parser {
         boolean hasNoKeyword = input.length() == 4;
         boolean hasBlankKeyword = hasNoKeyword || input.substring(5).isBlank();
         if (hasBlankKeyword) {
-            throw new DukeException("\tNo keyword specified.");
+            throw new DukeException("No keyword specified.");
         }
 
         String keywordToFind = input.substring(5).trim();
@@ -195,14 +195,14 @@ public class Parser {
         boolean hasNoTaskNumber = input.length() == 6;
         boolean hasBlankTaskNumber = hasNoTaskNumber || input.substring(7).isBlank();
         if (hasBlankTaskNumber) {
-            throw new DukeException("\tNo task number specified.");
+            throw new DukeException("No task number specified.");
         }
 
         int taskNumber;
         try {
             taskNumber = Integer.parseInt(input.substring(7).trim()) - 1;
         } catch (NumberFormatException e) {
-            throw new DukeException("\tTask number format invalid, "
+            throw new DukeException("Task number format invalid, "
                     + "must be a number.");
         }
 
@@ -213,14 +213,14 @@ public class Parser {
         boolean hasNoTaskNumber = input.length() == 7;
         boolean hasBlankTaskNumber = hasNoTaskNumber || input.substring(8).isBlank();
         if (hasBlankTaskNumber) {
-            throw new DukeException("\tNo task number specified.");
+            throw new DukeException("No task number specified.");
         }
 
         int taskNumber;
         try {
             taskNumber = Integer.parseInt(input.substring(8).trim()) - 1;
         } catch (NumberFormatException e) {
-            throw new DukeException("\tTask number format invalid, "
+            throw new DukeException("Task number format invalid, "
                     + "must be a number.");
         }
 
@@ -231,14 +231,14 @@ public class Parser {
         boolean hasNoTaskNumber = input.length() == 9;
         boolean hasBlankTaskNumber = hasNoTaskNumber || input.substring(10).isBlank();
         if (hasBlankTaskNumber) {
-            throw new DukeException("\tNo task number specified.");
+            throw new DukeException("No task number specified.");
         }
 
         int taskNumber;
         try {
             taskNumber = Integer.parseInt(input.substring(10).trim()) - 1;
         } catch (NumberFormatException e) {
-            throw new DukeException("\tTask number format invalid, "
+            throw new DukeException("Task number format invalid, "
                     + "must be a number.");
         }
 
@@ -253,14 +253,14 @@ public class Parser {
         boolean hasNoTaskNumber = input.length() == 4;
         boolean hasBlankTaskNumber = hasNoTaskNumber || input.substring(5).isBlank();
         if (hasBlankTaskNumber) {
-            throw new DukeException("\tNo task number specified.");
+            throw new DukeException("No task number specified.");
         }
 
         int taskNumber;
         try {
             taskNumber = Integer.parseInt(input.substring(5).trim()) - 1;
         } catch (NumberFormatException e) {
-            throw new DukeException("\tTask number format invalid, "
+            throw new DukeException("Task number format invalid, "
                     + "must be a number.");
         }
 

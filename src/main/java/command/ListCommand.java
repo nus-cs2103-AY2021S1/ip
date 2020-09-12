@@ -49,12 +49,12 @@ public class ListCommand extends Command {
 
         StringBuilder output = new StringBuilder(mainOutput);
 
-        output.append("\n").append("\t Here are your archived tasks:\n");
+        output.append("\n").append(" Here are your archived tasks:\n");
 
         for (int i = 1; i <= archivedTasks.size(); i++) {
             Task theTask = archivedTasks.get(i - 1);
             assert theTask != null : "theTask should not be null";
-            output.append("\t ").append(i).append(".").append(theTask).append("\n");
+            output.append(" ").append(i).append(".").append(theTask).append("\n");
         }
 
         return output.toString();
@@ -64,15 +64,15 @@ public class ListCommand extends Command {
         boolean hasMainTasks = mainTasks.size() != 0;
 
         if (!hasMainTasks) {
-            return "\tYay! You have nothing to do at the moment! :-)\n";
+            return "Yay! You have nothing to do at the moment! :-)\n";
         }
 
-        StringBuilder output = new StringBuilder("\t Here are the tasks in your list:\n");
+        StringBuilder output = new StringBuilder(" Here are the tasks in your list:\n");
 
         for (int i = 1; i <= mainTasks.size(); i++) {
             Task theTask = mainTasks.get(i - 1);
             assert theTask != null : "theTask should not be null";
-            output.append("\t ").append(i).append(".").append(theTask).append("\n");
+            output.append(" ").append(i).append(".").append(theTask).append("\n");
         }
 
         return output.toString();

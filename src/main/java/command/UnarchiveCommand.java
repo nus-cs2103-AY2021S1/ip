@@ -33,7 +33,7 @@ public class UnarchiveCommand extends Command {
         boolean hasInvalidIndex = hasNegativeIndex || hasIndexOutOfBounds;
 
         if (hasInvalidIndex) {
-            throw new DukeException("\tThere is no such task.");
+            throw new DukeException("There is no such task.");
         }
 
         Task toUnarchive = archivedTasks.get(this.taskIndex);
@@ -45,9 +45,9 @@ public class UnarchiveCommand extends Command {
         mainTasks.add(toUnarchive);
         storage.overwrite(mainTasks, false);
 
-        return "\t Noted. I've unarchived this task:\n"
-                + "\t   " + toUnarchive + "\n"
-                + "\t Now you have " + mainTasks.size() + " tasks in the list.\n";
+        return " Noted. I've unarchived this task:\n"
+                + "   " + toUnarchive + "\n"
+                + " Now you have " + mainTasks.size() + " tasks in the list.\n";
     }
 
     /**

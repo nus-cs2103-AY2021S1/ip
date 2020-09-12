@@ -35,9 +35,9 @@ public class AddCommand extends Command {
         storage.append(this.newTask, false);
         mainTasks.add(this.newTask);
 
-        return "\t Got it. I've added this task:\n"
-                + "\t   " + newTask + "\n"
-                + "\t Now you have " + mainTasks.size() + " tasks in the list.\n";
+        return " Got it. I've added this task:\n"
+                + "   " + newTask + "\n"
+                + " Now you have " + mainTasks.size() + " tasks in the list.\n";
     }
 
     /**

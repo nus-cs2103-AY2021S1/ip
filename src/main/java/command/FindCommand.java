@@ -30,7 +30,7 @@ public class FindCommand extends Command {
      */
     @Override
     public String execute(TaskList mainTasks, TaskList archivedTasks, Storage storage) throws DukeException {
-        StringBuilder output = new StringBuilder("\t Here are the tasks containing the keyword ")
+        StringBuilder output = new StringBuilder(" Here are the tasks containing the keyword ")
                 .append(String.format("\"%s\"", keyword)).append(":\n");
 
         int numbering = 1;
@@ -46,13 +46,13 @@ public class FindCommand extends Command {
                     isUnavailable = false;
                 }
 
-                output.append("\t ").append(numbering).append(".").append(task).append("\n");
+                output.append(" ").append(numbering).append(".").append(task).append("\n");
                 numbering++;
             }
         }
 
         if (isUnavailable) {
-            return "\tThere are no tasks containing the keyword "
+            return "There are no tasks containing the keyword "
                     + String.format("\"%s\"", keyword) + "!\n";
         } else {
             return output.toString();

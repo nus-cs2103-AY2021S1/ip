@@ -35,7 +35,7 @@ public class TasksOnCommand extends Command {
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
         String formattedDate = date.format(formatter);
 
-        StringBuilder output = new StringBuilder("\t Here are the tasks on ")
+        StringBuilder output = new StringBuilder(" Here are the tasks on ")
                 .append(formattedDate).append(":\n");
 
         int numbering = 1;
@@ -52,13 +52,13 @@ public class TasksOnCommand extends Command {
                     isFree = false;
                 }
 
-                output.append("\t ").append(numbering).append(".").append(task).append("\n");
+                output.append(" ").append(numbering).append(".").append(task).append("\n");
                 numbering++;
             }
         }
 
         if (isFree) {
-            return "\tYay! You have nothing to do on " + formattedDate + "! :-)\n";
+            return "Yay! You have nothing to do on " + formattedDate + "! :-)\n";
         } else {
             return output.toString();
         }

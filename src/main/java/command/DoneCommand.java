@@ -37,7 +37,7 @@ public class DoneCommand extends Command {
         boolean hasInvalidIndex = hasNegativeIndex || hasIndexOutOfBounds;
 
         if (hasInvalidIndex) {
-            throw new DukeException("\tThere is no such task.");
+            throw new DukeException("There is no such task.");
         }
 
         Task toChange = mainTasks.get(this.taskIndex);
@@ -45,8 +45,8 @@ public class DoneCommand extends Command {
         toChange.markAsDone();
         storage.overwrite(mainTasks, false);
 
-        return "\t Nice! I've marked this task as done:\n"
-                + "\t  " + toChange + "\n";
+        return " Nice! I've marked this task as done:\n"
+                + "  " + toChange + "\n";
     }
 
     /**

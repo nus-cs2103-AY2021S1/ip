@@ -41,7 +41,7 @@ public class Ui {
      * Displays a line seperator to the user.
      */
     public void showLine() {
-        System.out.println("\t____________________________________________________________");
+        System.out.println("____________________________________________________________");
     }
 
     /**
@@ -50,7 +50,7 @@ public class Ui {
      * @param err The error message from an exception.
      */
     public void showError(String err) {
-        System.out.printf("\t%s\n", err);
+        System.out.printf("%s\n", err);
     }
 
     /**

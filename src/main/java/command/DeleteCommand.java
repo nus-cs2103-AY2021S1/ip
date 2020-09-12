@@ -37,7 +37,7 @@ public class DeleteCommand extends Command {
         boolean hasInvalidIndex = hasNegativeIndex || hasIndexOutOfBounds;
 
         if (hasInvalidIndex) {
-            throw new DukeException("\tThere is no such task.");
+            throw new DukeException("There is no such task.");
         }
 
         Task toDelete = mainTasks.get(this.taskIndex);
@@ -45,9 +45,9 @@ public class DeleteCommand extends Command {
         mainTasks.remove(this.taskIndex);
         storage.overwrite(mainTasks, false);
 
-        return "\t Noted. I've removed this task:\n"
-                + "\t   " + toDelete + "\n"
-                + "\t Now you have " + mainTasks.size() + " tasks in the list.\n";
+        return " Noted. I've removed this task:\n"
+                + "   " + toDelete + "\n"
+                + " Now you have " + mainTasks.size() + " tasks in the list.\n";
     }
 
     /**
