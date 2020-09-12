@@ -65,13 +65,14 @@ okies! here are the tasks in your list:
 3. [E][✘] project meeting (at: Sep 15 2020)
 ```
 
-### 3.i `todo`
+### 3.i. `todo`
 This command adds a *todo* task to the list.
 
 ##### Usage
 `todo <description>`
 
-##### Example of usage: ``todo read book`
+##### Example of usage: 
+`todo read book`
 
 ##### Expected outcome:
 ```
@@ -80,13 +81,13 @@ sure thing! i have added the following task to your list:
 you have [1] task(s) in your list
 ```
 
-### 3.ii `deadline`
+### 3.ii. `deadline`
 This command adds a *deadline* task to the list.
 
 ##### Usage
 `deadline <description> /by <date>`
 
-`<date>` can either be in the format``<yyyy-mm-dd>` or `<day>`.
+`<date>` can either be in the format `<yyyy-mm-dd>` or `<day>`.
 
 `<day>` should only consist the first three letters of the day of week.
 
@@ -105,7 +106,7 @@ sure thing! i have added the following task to your list:
 you have [1] task(s) in your list
 ```
 
-### 3.iii `event`
+### 3.iii. `event`
 This command adds an *event* task to the list.
 
 ##### Usage
@@ -149,7 +150,7 @@ you have [1] task(s) in your list
 ```
 
 ### 5. `delete`
-This command deletes the specified task from the list
+This command deletes the specified task from the list.
 
 ##### Usage
 `delete <task_number>`
@@ -165,7 +166,7 @@ you have [3] task(s) in your list
 ```
 
 ### 6. `clear`
-This command deletes all tasks from the list
+This command deletes all tasks from the list.
 
 ##### Usage
 `clear`
@@ -177,7 +178,7 @@ This command deletes all tasks from the list
 `okie! all the tasks in your list have been cleared :-)`
 
 ### 7. `find`
-This command shows all the tasks which match the query string
+This command shows all the tasks which match the query string.
 
 ##### Usage
 `find <keyword(s)>`
@@ -193,7 +194,7 @@ got it! here are the tasks matching your search:
 ```
 
 ### 8. `view`
-This command shows all the tasks due on the given date
+This command shows all the tasks due on the given date.
 
 ##### Usage
 `view <date>`
