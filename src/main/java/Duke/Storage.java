@@ -57,7 +57,6 @@ public class Storage {
 
     /**
      * Writes the data into the log file.
-     *
      * @param data the data that will be stored in the file.
      * @throws FileNotFoundException if cannot write into file.
      */
@@ -65,9 +64,6 @@ public class Storage {
         final PrintStream oldStdout = System.out;
         PrintStream ps = new PrintStream("./log.txt");
         System.setOut(ps);
-        for (int i = 0; i < data.size(); i++) {
-            System.out.printf("     %d.%s\n", i + 1, data.get(i).toString());
-        }
         System.setOut(oldStdout);
     }
 

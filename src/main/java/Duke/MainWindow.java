@@ -8,8 +8,6 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
-import static java.lang.Thread.sleep;
-
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -34,7 +32,7 @@ public class MainWindow extends AnchorPane {
         String response = line + "     Hello! I'm Duke\n" + "     What can I do for you?\n" + line;
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(response, dukeImage)
+                DukeDialogBox.getDukeDialog(response, dukeImage)
         );
     }
 
@@ -51,8 +49,8 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                UserDialogBox.getUserDialog(input, userImage),
+                DukeDialogBox.getDukeDialog(response, dukeImage)
         );
         if(input.equals(("bye"))) {
             System.exit(0);
