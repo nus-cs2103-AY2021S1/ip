@@ -1,4 +1,3 @@
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -23,38 +22,38 @@ public class MainWindow extends AnchorPane {
     @FXML
     private Button sendButton;
 
-    private Duke duke;
+    private Clippy clippy;
 
     private final Image userImage = new Image(this.getClass().getResourceAsStream("/images/user.png"));
-    private final Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/duke.png"));
+    private final Image clippyImage = new Image(this.getClass().getResourceAsStream("/images/clippy.jpg"));
     private static final int exitDelayInSeconds = 2000;
 
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog("Hello! I'm Duke \n" +
-                        "What can I do for you?\n", dukeImage)
+                DialogBox.getDukeDialog("Hello! I'm Clippy \n" +
+                        "What can I do for you?\n", clippyImage)
         );
         
     }
 
-    public void setDuke(Duke d) {
-        duke = d;
+    public void setClippy(Clippy clippy) {
+        this.clippy = clippy;
     }
 
     /**
-     * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
+     * Creates two dialog boxes, one echoing user input and the other containing Clippy's reply and then appends them to
      * the dialog container. Clears the user input after processing.
      */
     @FXML
     private void handleUserInput() {
         String input = userInput.getText();
-        String response = duke.getResponse(input);
-        assert !response.isBlank() : "Duke response is blank";
+        String response = clippy.getResponse(input);
+        assert !response.isBlank() : "Clippy response is blank";
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBox.getDukeDialog(response, clippyImage)
         );
         userInput.clear();
         

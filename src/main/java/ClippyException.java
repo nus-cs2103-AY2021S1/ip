@@ -1,7 +1,7 @@
-public class DukeException extends Exception {
+public class ClippyException extends Exception {
     private String msg;
     
-    DukeException(String msg) {
+    ClippyException(String msg) {
         super(msg);
         this.msg = msg;
     }

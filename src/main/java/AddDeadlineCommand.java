@@ -19,9 +19,9 @@ public class AddDeadlineCommand extends AddCommand {
 
     /**
      * Executes the command.
-     * @param tasks TaskList instance used by Duke in this session
-     * @param ui Ui instance used by Duke in this session
-     * @param storage Storage instance used by Duke in this session
+     * @param tasks TaskList instance used by Clippy in this session
+     * @param ui Ui instance used by Clippy in this session
+     * @param storage Storage instance used by Clippy in this session
      * @throws DateTimeParseException
      */
     @Override

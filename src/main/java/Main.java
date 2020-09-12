@@ -7,11 +7,11 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Clippy using FXML.
  */
 public class Main extends Application {
 
-    private Duke duke = new Duke();
+    private Clippy clippy = new Clippy();
 
     @Override
     public void start(Stage stage) {
@@ -20,7 +20,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setClippy(clippy);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();

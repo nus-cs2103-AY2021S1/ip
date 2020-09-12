@@ -1,5 +1,5 @@
 public class Ui {
-    private final static String MSG_GREET = "Hello! I'm Duke \n" +
+    private final static String MSG_GREET = "Hello! I'm Clippy \n" +
             "What can I do for you?\n";
     private final static String MSG_EXIT = "Bye. Hope to see you again soon!";
     private final static String MSG_ADDED_TASK = "Got it. I've added this task:\n";
