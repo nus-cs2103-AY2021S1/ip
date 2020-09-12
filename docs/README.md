@@ -43,7 +43,8 @@ Example of usage:
 Expected outcome:
 ```
 Nice! I've marked this task as done:
-1.[T][Y] task1```
+1.[T][Y] task1
+```
 
 ### `delete` - delete a task
 
@@ -81,6 +82,8 @@ this comamnd is for adding a dealine task. A success message with the number of 
 
 Example of usage: 
 
+Format: deadline name /by day/month/year time
+
 `deadline task /by 1/1/2020 1200`
 
 Expected outcome:
@@ -96,6 +99,8 @@ Now you have 2 tasks in the list.
 this comamnd is for adding an event task. A success message with the number of remaining tasks will be sent after execution.
 
 Example of usage: 
+
+Format: event name /at day/month/year time
 
 `event task /at 1/1/2020 1200`
 
@@ -132,7 +137,9 @@ Example of usage:
 Expected outcome:
 
 Here are the matching tasks in your list:
-```1.[U][N] task (10 hours) ```
+```
+1.[U][N] task (10 hours) 
+```
 
 ### `bye` - exit the program
 
@@ -142,7 +149,5 @@ Example of usage:
 
 `bye`
 
-Expected outcome:
-(nothing)
 
 
