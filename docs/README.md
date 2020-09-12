@@ -244,9 +244,9 @@ in planning of dates with the visuals of a calendar.
 
 ---
 
----
-
 This is a greenfield Java project using [NUS-CS2103](https://github.com/nus-cs2103-AY2021S1/ip) project template.
+
+---
 
 ```
 done 1
