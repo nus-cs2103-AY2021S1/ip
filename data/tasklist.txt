@@ -1,3 +1,2 @@
-E!@#1!@#party concert!@#2020-12-19!@#2300-0000!@#LOW
-T!@#1!@#treasure hunting!@#LOW
-D!@#0!@#eat 10 pizzas!@#2020-09-12!@#2200!@#HIGH
+D!@#1!@#finish pizzas in fridge!@#2020-12-19!@#2200!@#NONE
+E!@#0!@#christmas party!@#2020-12-24!@#2000-0100!@#NONE

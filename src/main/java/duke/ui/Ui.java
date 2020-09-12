@@ -27,8 +27,8 @@ public class Ui {
         System.out.println("Rawr! I'm Dino ><\n"
                 + logo
                 + "\nGet started on your task list by entering a task!"
-                + "\nTo see how to format your task or other commands, input 'format'."
-                + "\nTo stop Dino, input 'bye'."
+                + "\nInput 'help', to see how to format your task or other commands."
+                + "\nInput 'bye', to exit Dino."
                 + "\n____________________________________________________________");
     }
 
