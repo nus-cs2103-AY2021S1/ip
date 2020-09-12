@@ -11,7 +11,7 @@ public class EventCommand extends Command {
      * @param eventDate Date of event.
      * @param eventTime Time of event.
      */
-    public EventCommand(String description, String eventDate, String eventTime) {
+    public EventCommand(String description, String eventDate, String eventTime) throws DukeException {
         this.eventTask = new Event(description, eventDate, eventTime);
     }
 

@@ -8,6 +8,9 @@ public class ParserTest {
     protected Task event = new Event("project meeting", "17/7/2015", "1842");
     protected String testCommand = "testCommand";
 
+    public ParserTest() throws DukeException {
+    }
+
     @Test
     public void parseCommand_invalidCommand_exceptionThrown() {
         try {

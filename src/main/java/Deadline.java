@@ -10,7 +10,7 @@ public class Deadline extends Task {
      * @param description Description of deadline command.
      * @param deadlineDate Date of deadline.
      */
-    public Deadline(String description, String deadlineDate) {
+    public Deadline(String description, String deadlineDate) throws DukeException {
         super(description, TaskType.DEADLINE);
         this.deadlineDate = new Date(deadlineDate);
         Task.totalTasks++;
@@ -22,7 +22,7 @@ public class Deadline extends Task {
      * @param deadlineDate Date of deadline.
      * @param deadlineTime Time of deadline.
      */
-    public Deadline(String description, String deadlineDate, String deadlineTime) {
+    public Deadline(String description, String deadlineDate, String deadlineTime) throws DukeException {
         super(description, TaskType.DEADLINE);
         this.deadlineDate = new Date(deadlineDate);
         this.deadlineTime = new Timing(deadlineTime);
@@ -36,7 +36,7 @@ public class Deadline extends Task {
      * @param deadlineDate Date of deadline.
      * @param deadlineTime Time of deadline.
      */
-    public Deadline(int boolDone, String description, String deadlineDate, String deadlineTime) {
+    public Deadline(int boolDone, String description, String deadlineDate, String deadlineTime) throws DukeException {
         super(description, TaskType.DEADLINE, boolDone);
         this.deadlineDate = new Date(deadlineDate);
         this.deadlineTime = new Timing(deadlineTime);

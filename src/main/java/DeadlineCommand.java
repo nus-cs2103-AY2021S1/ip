@@ -11,7 +11,7 @@ public class DeadlineCommand extends Command {
      * @param deadlineDate Date of deadline.
      * @param deadlineTime Time of deadline.
      */
-    public DeadlineCommand(String description, String deadlineDate, String deadlineTime) {
+    public DeadlineCommand(String description, String deadlineDate, String deadlineTime) throws DukeException {
         this.deadlineTask = new Deadline(description, deadlineDate, deadlineTime);
     }
 

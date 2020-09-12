@@ -10,7 +10,7 @@ public class Event extends Task {
      * @param description Description of event command.
      * @param eventTime Time of event.
      */
-    public Event(String description, String eventTime) {
+    public Event(String description, String eventTime) throws DukeException {
         super(description, TaskType.EVENT);
         this.eventTime = new Timing(eventTime);
         Task.totalTasks++;
@@ -22,7 +22,7 @@ public class Event extends Task {
      * @param eventDate Date of event.
      * @param eventTime Time of event.
      */
-    public Event(String description, String eventDate, String eventTime) {
+    public Event(String description, String eventDate, String eventTime) throws DukeException {
         super(description, TaskType.EVENT);
         this.eventDate = new Date(eventDate);
         this.eventTime = new Timing(eventTime);
@@ -36,7 +36,7 @@ public class Event extends Task {
      * @param eventDate Date of event.
      * @param eventTime Time of event.
      */
-    public Event(int boolDone, String description, String eventDate, String eventTime) {
+    public Event(int boolDone, String description, String eventDate, String eventTime) throws DukeException {
         super(description, TaskType.EVENT, boolDone);
         this.eventDate = new Date(eventDate);
         this.eventTime = new Timing(eventTime);

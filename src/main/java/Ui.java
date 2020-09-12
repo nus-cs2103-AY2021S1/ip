@@ -52,7 +52,7 @@ public class Ui {
      * @return Response object
      */
     public Response doneMessage(Task doneTask) {
-        String done = "Great job! This task has been marked as done:";
+        String done = "Great job! The following task has been marked as done:";
         String finalOutput = done + "\n" + doneTask;
         Response responseObject = new Response(finalOutput);
         return responseObject;
@@ -97,7 +97,7 @@ public class Ui {
      * @return Response object
      */
     public Response matchingMessage(TaskList arrayOfTasks) {
-        String matchingMsg = "Here are your matching tasks in your list";
+        String matchingMsg = "These are the matching tasks in your list";
         String finalOutput = matchingMsg + "\n" + arrayOfTasks.toString();
         Response responseObject = new Response(finalOutput);
         return responseObject;

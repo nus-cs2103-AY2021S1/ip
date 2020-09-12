@@ -130,7 +130,7 @@ public class Storage {
      * @param inputData String input by user on command line.
      * @return Deadline object.
      */
-    private Deadline parseDeadline(String inputData) {
+    private Deadline parseDeadline(String inputData) throws DukeException {
         String[] userInputArray = inputData.split("\\|");
         String[] dateTimeTokens = userInputArray[3].split(" ");
         String taskDate = dateTimeTokens[0];
@@ -158,7 +158,7 @@ public class Storage {
      * @param inputData String input by user on command line.
      * @return Event object.
      */
-    private Event parseEvent(String inputData) {
+    private Event parseEvent(String inputData) throws DukeException {
         String[] userInputArray = inputData.split("\\|");
         String[] dateTimeTokens = userInputArray[3].split(" ");
         String taskDate = dateTimeTokens[0];

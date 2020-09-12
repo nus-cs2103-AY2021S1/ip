@@ -6,6 +6,9 @@ public class TaskListTest {
     protected Task todo = new Todo("sleep");
     protected Task event = new Event("project meeting", "17/11/2015", "1532");
 
+    public TaskListTest() throws DukeException {
+    }
+
     @Test
     void taskArraySize_validInput_success() {
         TaskList todoList = new TaskList();

@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 public class TaskTest {
     @Test
-    public void doneTask_validInput_success() {
+    public void doneTask_validInput_success() throws DukeException {
         Task task = new Todo("Todo");
         task.setDone();
         assertTrue(task.isDone);
@@ -16,7 +16,7 @@ public class TaskTest {
     }
 
     @Test
-    public void undoneTask_validInput_success() {
+    public void undoneTask_validInput_success() throws DukeException {
         Task deadline = new Deadline("Deadline", "20/5/1984", "1239");
         assertFalse(deadline.isDone);
     }
