@@ -28,7 +28,7 @@ public class MainWindow extends AnchorPane {
     private Button sendButton;
 
     private Duke duke;
-    private final static String GREETINGS = "Hola! I'm Dongo :) \n"
+    private final static String GREETINGS = "Woof! I'm your favourite Doggo :) \n"
         + "How can I help you?";
 
     private Image userImage = new Image(this.getClass().getResourceAsStream("/images/pug.png"));

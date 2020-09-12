@@ -59,7 +59,8 @@ public class DialogBox extends HBox {
     public static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
-        db.dialog.setStyle("-fx-background-color: #43a192; -fx-background-radius : 15");
+        //db.dialog.setStyle("-fx-background-color: #43a192; -fx-background-radius : 15");
+        db.dialog.setStyle("-fx-background-color: #5db0a7; -fx-background-radius : 15");
         return db;
     }
 
