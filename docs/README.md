@@ -14,6 +14,9 @@ Your tasks will automatically be saved into a text file under the data folder wh
 ### Archive tasks
 You can archive all tasks into a backup file in the data folder, and start with a clean state using the [archive](#archive---archive-tasks) command.
 
+### Exit program
+You can exit the program by using the [bye](#bye---exit-the-program) command.
+
 ## Usage
 
 ### `todo` - Create a ToDo task
@@ -131,3 +134,6 @@ Expected outcome:
  I have archived all your tasks into the archive file chatterbox_0.bak, you can find it in the data folder
  ```
  
+ ### `bye` - Exit the program
+ 
+ Enter `bye` to exit the program
