@@ -2,28 +2,28 @@
 
 Duke is a **desktop app for tracking down todos, deadlines and events for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Duke can get your tasks management done faster than traditional GUI apps.
 
-* Quick Start
-* Features
-	* Adding a task
-		* Adding a todo: `todo`
-		* Adding a deadline: `deadline`
-		* Adding an event: `event`
-	* Marking a task as done: `done`
-	* Listing all tasks: `list`
-	* Locating a task by name: `find`
-	* Displaying all tasks on a specific date: `tasks on`
-	* Archiving a task: `archive`
-	* Unarchiving a task: `unarchive`
-	* Deleting a task: `delete`
-	* Exiting the program: `bye`
-* Command Summary
+* [Quick Start](https://github.com/FH-30/ip/blob/master/docs/README.md#quick-start)
+* [Features](https://github.com/FH-30/ip/blob/master/docs/README.md#features)
+	* [Adding a task](https://github.com/FH-30/ip/blob/master/docs/README.md#adding-a-task)
+		* [Adding a todo: `todo`](https://github.com/FH-30/ip/blob/master/docs/README.md#adding-a-todo-todo)
+		* [Adding a deadline: `deadline`](https://github.com/FH-30/ip/blob/master/docs/README.md#adding-a-deadline-deadline)
+		* [Adding an event: `event`](https://github.com/FH-30/ip/blob/master/docs/README.md#adding-an-event-event)
+	* [Marking a task as done: `done`](https://github.com/FH-30/ip/blob/master/docs/README.md#marking-a-task-as-done-done)
+	* [Listing all tasks: `list`](https://github.com/FH-30/ip/blob/master/docs/README.md#listing-all-tasks-list)
+	* [Locating a task by name: `find`](https://github.com/FH-30/ip/blob/master/docs/README.md#locating-a-task-by-name-find)
+	* [Displaying all tasks on a specific date: `tasks on`](https://github.com/FH-30/ip/blob/master/docs/README.md#displaying-all-tasks-on-a-specific-date-tasks-on)
+	* [Archiving a task: `archive`](https://github.com/FH-30/ip/blob/master/docs/README.md#archiving-a-task-archive)
+	* [Unarchiving a task: `unarchive`](https://github.com/FH-30/ip/blob/master/docs/README.md#unarchiving-a-task-unarchive)
+	* [Deleting a task: `delete`](https://github.com/FH-30/ip/blob/master/docs/README.md#deleting-a-task-delete)
+	* [Exiting the program: `bye`](https://github.com/FH-30/ip/blob/master/docs/README.md#exiting-the-program-bye)
+* [Command Summary](https://github.com/FH-30/ip/blob/master/docs/README.md#command-summary)
 
 ## Quick Start
 1. Ensure you have Java `11` or above installed in your Computer.
 2. Download the latest Duke.jar from here.
 3. Copy the file to the folder you want to use as the home folder for your AddressBook.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. **If not able to, you can open terminal in that directory and run: `java -jar <filename>`**
-![Duke GUI](/Ui.png)
+![Duke GUI](https://github.com/FH-30/ip/blob/master/docs/Ui.png)
 5. Type the command in the command box and press Enter or click Send to execute it. e.g. typing `list` and pressing Enter or clicking Send will list all your current tasks.
 Some example commands you can try:
 	* `todo wash car` : Adds a task called wash car into your list.
@@ -86,7 +86,7 @@ Shows a list of all Tasks in the list.
 
 Format: `list`
 Additional tags:
-	* `-a` - Includes archived tasks
+	* `-a`: Includes archived tasks
 
 Examples:
 	* `list`
