@@ -21,14 +21,14 @@ Type "todo" followed by a space and then type in the 'todo' you wish to add into
 <br>
 <br>
 
-![Todo](https://github.com/IsaacTin/ip/blob/branch-A-UserGuide/docs/Images/todo.png)
+![Todo](./Images/todo.png)
 </details>
-
-`deadline`
 
 <details>
 <summary>
+
 `deadline` - Add deadline
+
 </summary>
 <br>
 Type "deadline" followed by description of deadline, then followed by  "/by" followed by a space and then type the rest of the description
@@ -36,18 +36,23 @@ Type "deadline" followed by description of deadline, then followed by  "/by" fol
 Input date via 'YYYY-MM-DD' format and time in 'HH:MM' format if you wish to add date and time
 <br>
 <br>
-Click on link here to see example: https://github.com/IsaacTin/ip/blob/branch-A-UserGuide/docs/Images/deadline.png
+
+![Deadline](./Images/deadline.png)
 </details>
 <details>
 <summary>
-**event** - Add event
+
+`event` - Add event
+
 </summary>
 <br>
 *Type "event" followed by description of event, then followed by "/at" followed by a space and then type in ther rest of the description
 <br>
 *Input date via 'YYYY-MM-DD' format and time in 'HH:MM' format if you wish to add date and time
 <br>
-*Click on link here to see example: https://github.com/IsaacTin/ip/blob/branch-A-UserGuide/docs/Images/event.png
+<br>
+
+![Event](./Images/event.png)
 </details>
 </details>
 
