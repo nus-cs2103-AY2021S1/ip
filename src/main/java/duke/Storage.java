@@ -106,7 +106,7 @@ public class Storage {
         List<Task> results = new ArrayList<>();
         try {
             BufferedReader reader = new BufferedReader(new FileReader(file));
-            String line =reader.readLine();
+            String line = reader.readLine();
             // T | 1 | read book
 
             while (line != null) {

@@ -7,17 +7,12 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
-import javafx.scene.control.Dialog;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.HBox;
-import javafx.scene.paint.Paint;
 
 /**
  * An example of a custom control using FXML.
@@ -45,7 +40,7 @@ public class DialogBox extends HBox {
     }
 
     public static DialogBox getDukeErrorDialog(String text, Image img) {
-        DialogBox dukeDialog = getDukeDialog(text,img);
+        DialogBox dukeDialog = getDukeDialog(text, img);
         dukeDialog.getChildren().get(1).setStyle("-fx-background-color: #E4572E");
         return dukeDialog;
     }

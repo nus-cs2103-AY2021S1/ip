@@ -41,6 +41,7 @@ public class Duke {
 
     /**
      * Gets the string representation of reminder
+     *
      * @return String containing deadline tasks that have deadlines within 3 days.
      */
     public String getReminderString() {
@@ -81,7 +82,7 @@ public class Duke {
             System.out.println(s);
             return new DukeResponse(s, false);
         } catch (DukeException e) {
-            return new DukeResponse(e.getMessage(),true);
+            return new DukeResponse(e.getMessage(), true);
         }
     }
 }

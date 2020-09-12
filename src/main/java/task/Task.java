@@ -5,10 +5,6 @@ public abstract class Task {
     private String name;
     private TaskType taskType;
 
-    public TaskType getTaskType() {
-        return taskType;
-    }
-
     /**
      * Default Constructor for Task
      *
@@ -54,4 +50,9 @@ public abstract class Task {
     public enum TaskType {
         TODO, EVENT, DEADLINE;
     }
+
+    public TaskType getTaskType() {
+        return taskType;
+    }
 }
+

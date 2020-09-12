@@ -1,17 +1,22 @@
 package duke;
 
-import task.DeadlineTask;
-import task.Task;
-
 import java.time.Duration;
 import java.time.LocalDateTime;
 
-public class Reminder {
-    TaskList taskList;
-    LocalDateTime currentDateTime;
+import task.DeadlineTask;
+import task.Task;
 
-    public Reminder(TaskList taskList) {
-        this.taskList = taskList;
+public class Reminder {
+    private TaskList tasks;
+    private LocalDateTime currentDateTime;
+
+    /**
+     * Constructor for creating a reminder object
+     *
+     * @param tasks Arraylist containing tasks.
+     */
+    public Reminder(TaskList tasks) {
+        this.tasks = tasks;
         this.currentDateTime = LocalDateTime.now();
     }
 
@@ -22,7 +27,7 @@ public class Reminder {
      */
     public TaskList getUpcomingTasks() {
         TaskList upcomingTaskList = new TaskList();
-        for (Task task : taskList.getTasks()) {
+        for (Task task : tasks.getTasks()) {
             if (task.getTaskType() != Task.TaskType.DEADLINE) {
                 // skip over
                 continue;
