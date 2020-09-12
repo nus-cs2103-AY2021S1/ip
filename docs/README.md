@@ -3,7 +3,6 @@
 ## Introduction
 A simple guide to get you kick started on how to easily use this CLI app to create and manage your personal TaskList
 ## Features 
-
 <details>
     <summary>
         Add Functions
@@ -12,25 +11,29 @@ A simple guide to get you kick started on how to easily use this CLI app to crea
     <br>
     <br>
         <details>
-             <summary>Add todo</summary>
+             <summary>Add Todo - 'todo'</summary>
              <br>
              Type "todo" followed by a space and then type in the 'todo' you wish to add into your list
              <br>
-             ![todo](https://octodex.github.com/images/yaktocat.png)
+             Click on link here to see example: https://github.com/IsaacTin/ip/blob/branch-A-UserGuide/docs/Images/todo.png
         </details>
         <details>
-            <summary>Add deadline</summary>
+            <summary>Add deadline - 'deadline' </summary>
             <br>
-            Type "deadline /by" followed by a space and then type the description of deadline in
+            Type "deadline" followed by description of deadline, then followed by  "/by" followed by a space and then type the rest of the description
             <br>
             Input date via 'YYYY-MM-DD' format and time in 'HH:MM' format if you wish to add date and time
+            <br>
+            Click on link here to see example: https://github.com/IsaacTin/ip/blob/branch-A-UserGuide/docs/Images/deadline.png
         </details>
         <details>
-            <summary>Add event</summary>
+            <summary>Add event - 'event'</summary>
             <br>
-            Type "event /at" followed by a space and then type in the 'todo' you wish to add into your list
+            Type "event" followed by description of event, then followed by "/at" followed by a space and then type in ther rest of the description
             <br>
             Input date via 'YYYY-MM-DD' format and time in 'HH:MM' format if you wish to add date and time
+            <br>
+            Click on link here to see example: https://github.com/IsaacTin/ip/blob/branch-A-UserGuide/docs/Images/event.png
         </details>
 </details>
 
