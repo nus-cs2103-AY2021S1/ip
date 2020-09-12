@@ -23,7 +23,9 @@ Duke is a **desktop app for tracking down todos, deadlines and events for use vi
 2. Download the latest Duke.jar from here.
 3. Copy the file to the folder you want to use as the home folder for your AddressBook.
 4. Double-click the file to start the app. The GUI similar to the below should appear in a few seconds. **If not able to, you can open terminal in that directory and run: `java -jar <filename>`**
+
 ![Duke GUI](https://github.com/FH-30/ip/blob/master/docs/Ui.png)
+
 5. Type the command in the command box and press Enter or click Send to execute it. e.g. typing `list` and pressing Enter or clicking Send will list all your current tasks.
 Some example commands you can try:
 	* `todo wash car` : Adds a task called wash car into your list.
@@ -85,6 +87,7 @@ Examples:
 Shows a list of all Tasks in the list.
 
 Format: `list`
+
 Additional tags:
 	* `-a`: Includes archived tasks
 
