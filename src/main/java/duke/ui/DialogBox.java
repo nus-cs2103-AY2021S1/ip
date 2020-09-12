@@ -1,4 +1,5 @@
 package duke.ui;
+
 import java.io.IOException;
 import java.util.Collections;
 
@@ -11,7 +12,14 @@ import javafx.scene.Node;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
 import javafx.scene.layout.HBox;
+import javafx.scene.paint.Color;
+
 
 /**
  * An example of a custom control using FXML.
@@ -19,12 +27,18 @@ import javafx.scene.layout.HBox;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    private static Image userBoxImage = new Image(MainWindow.class.getResourceAsStream("/images/UserBoxImage.png"));
+    private static Image dukeBoxImage = new Image(MainWindow.class.getResourceAsStream("/images/DukeBoxImage.png"));
+
     @FXML
     private Label dialog;
     @FXML
     private ImageView displayPicture;
 
-    private DialogBox(String text, Image img) {
+
+    private DialogBox(String text, Image img, Color color) {
+
+
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
             fxmlLoader.setController(this);
@@ -35,6 +49,7 @@ public class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        dialog.setTextFill(color);
         displayPicture.setImage(img);
     }
 
@@ -56,7 +71,13 @@ public class DialogBox extends HBox {
      * @return a DialogBox Object of user.
      */
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        DialogBox userDialog = new DialogBox(text, img, Color.BLUE);
+        BackgroundImage backgroundImage = new BackgroundImage(userBoxImage,
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        Background background = new Background(backgroundImage);
+        userDialog.setBackground(background);
+        return userDialog;
     }
 
     /**
@@ -67,7 +88,12 @@ public class DialogBox extends HBox {
      * @return a DialogBox Object of duke.
      */
     public static DialogBox getDukeDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
+        var db = new DialogBox(text, img, Color.RED);
+        BackgroundImage backgroundImage = new BackgroundImage(dukeBoxImage,
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT);
+        Background background = new Background(backgroundImage);
+        db.setBackground(background);
         db.flip();
         return db;
     }
