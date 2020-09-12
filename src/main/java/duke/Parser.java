@@ -13,6 +13,7 @@ import duke.command.DeleteCommand;
 import duke.command.DoneCommand;
 import duke.command.EventCommand;
 import duke.command.FindCommand;
+import duke.command.HelpCommand;
 import duke.command.ListCommand;
 import duke.command.SortCommand;
 import duke.command.TodoCommand;
@@ -35,11 +36,12 @@ public class Parser {
     private static final String DELETE = "delete";
     private static final String FIND = "find";
     private static final String SORT = "sort";
+    private static final String HELP = "help";
 
     /** Returns the command based on user input. */
     public static Command parse(String input) throws DukeException {
         int i = input.trim().indexOf(' ');
-        String command = input.trim();
+        String command = input.trim().toLowerCase();
         String detail = "";
         if (i > 0) {
             command = input.substring(0, i);
@@ -65,6 +67,8 @@ public class Parser {
             return new FindCommand(detail);
         case SORT:
             return new SortCommand(detail);
+        case HELP:
+            return new HelpCommand();
         default:
             throw new DukeException("Oops! I'm sorry, but I don't know what that means");
         }

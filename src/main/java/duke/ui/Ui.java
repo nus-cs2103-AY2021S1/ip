@@ -23,7 +23,9 @@ public class Ui {
     /** Greets the user. */
     public void greet() {
         dialogContainer.getChildren().add(DialogBox.getDukeDialog(
-                "Hello! I'm Duke\n" + "What can I do for you?\n", dukeImage, false));
+                "Hello! I'm Duke\nWhat can I do for you?\nType help to see the list of commands available.",
+                dukeImage,
+                false));
     }
 
     /** Say bye to the user. */
