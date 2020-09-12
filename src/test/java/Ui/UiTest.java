@@ -2,9 +2,9 @@ package ui;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
+
+import org.junit.jupiter.api.Test;
 
 import storage.Storage;
 import tasks.Task;
