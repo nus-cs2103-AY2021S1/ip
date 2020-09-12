@@ -29,7 +29,7 @@ public class CommandTest {
     }
 
     @Test
-    public void executeTodoCommand_missingDescription_throwsException() throws DukeException {
+    public void executeTodoCommand_missingDescription_throwsException() {
         List<Task> emptyListOfTasks = new ArrayList<>();
         TaskList tasks = new TaskList(emptyListOfTasks);
         Ui ui = new Ui();
@@ -37,7 +37,8 @@ public class CommandTest {
         DukeException ex = Assertions.assertThrows(DukeException.class, () -> {
             Parser.parse("todo").execute(tasks, ui, storage);
         });
-        String expected = "Oh no! Your todo task description is empty. The task cannot be created.";
+        String expected = "Oh no! Your todo task description is empty. The task cannot be created.\n"
+                + "Type 'help' for a list of all my functions and their commands.";
         assertEquals(expected, ex.getMessage());
     }
 
@@ -54,7 +55,7 @@ public class CommandTest {
     }
 
     @Test
-    public void executeEventCommand_invalidArguments_throwsException() throws DukeException {
+    public void executeEventCommand_invalidArguments_throwsException() {
         List<Task> emptyListOfTasks = new ArrayList<>();
         TaskList tasks = new TaskList(emptyListOfTasks);
         Ui ui = new Ui();
@@ -62,12 +63,13 @@ public class CommandTest {
         DukeException ex = Assertions.assertThrows(DukeException.class, () -> {
             Parser.parse("event eat").execute(tasks, ui, storage);
         });
-        String expected = "Oh no! Your event task has an incorrect format. The task cannot be created.";
+        String expected = "Oh no! Your event task has an incorrect format. The task cannot be created.\n"
+                + "Type 'help' for a list of all my functions and their commands.";
         assertEquals(expected, ex.getMessage());
     }
 
     @Test
-    public void executeEventCommand_missingDescription_throwsException() throws DukeException {
+    public void executeEventCommand_missingDescription_throwsException() {
         List<Task> emptyListOfTasks = new ArrayList<>();
         TaskList tasks = new TaskList(emptyListOfTasks);
         Ui ui = new Ui();
@@ -75,12 +77,13 @@ public class CommandTest {
         DukeException ex = Assertions.assertThrows(DukeException.class, () -> {
             Parser.parse("event /at 1/2/2020 1:00").execute(tasks, ui, storage);
         });
-        String expected = "Oh no! Your event task is missing a description. The task cannot be created.";
+        String expected = "Oh no! Your event task is missing a description. The task cannot be created.\n"
+                + "Type 'help' for a list of all my functions and their commands.";
         assertEquals(expected, ex.getMessage());
     }
 
     @Test
-    public void executeDeadlineCommand_missingTimeStamp_throwsException() throws DukeException {
+    public void executeDeadlineCommand_missingTimeStamp_throwsException() {
         List<Task> emptyListOfTasks = new ArrayList<>();
         TaskList tasks = new TaskList(emptyListOfTasks);
         Ui ui = new Ui();
@@ -88,12 +91,13 @@ public class CommandTest {
         DukeException ex = Assertions.assertThrows(DukeException.class, () -> {
             Parser.parse("deadline eat /by").execute(tasks, ui, storage);
         });
-        String expected = "Oh no! Your deadline task is missing a time stamp. The task cannot be created.";
+        String expected = "Oh no! Your deadline task is missing a time stamp. The task cannot be created.\n"
+                + "Type 'help' for a list of all my functions and their commands.";
         assertEquals(expected, ex.getMessage());
     }
 
     @Test
-    public void executeEventCommand_invalidDateTimeFormat_throwsException() throws DukeException {
+    public void executeEventCommand_invalidDateTimeFormat_throwsException() {
         List<Task> emptyListOfTasks = new ArrayList<>();
         TaskList tasks = new TaskList(emptyListOfTasks);
         Ui ui = new Ui();
@@ -108,7 +112,7 @@ public class CommandTest {
     }
 
     @Test
-    public void executeDeadlineCommand_missingDescriptionAndTime_throwsException() throws DukeException {
+    public void executeDeadlineCommand_missingDescriptionAndTime_throwsException() {
         List<Task> emptyListOfTasks = new ArrayList<>();
         TaskList tasks = new TaskList(emptyListOfTasks);
         Ui ui = new Ui();
@@ -117,16 +121,18 @@ public class CommandTest {
             Parser.parse("deadline /by").execute(tasks, ui, storage);
         });
         String expected = "Oh no! Your deadline task is missing a description and time stamp. "
-                + "The task cannot be created.";
+                + "The task cannot be created.\n"
+                + "Type 'help' for a list of all my functions and their commands.";
         assertEquals(expected, ex.getMessage());
     }
 
     @Test
     public void executeDeleteCommand_validTaskID_success() throws DukeException {
+        List<Task> emptyListOfTasks = new ArrayList<>();
         Task todo = new Todo("read");
         Ui ui = new Ui();
         Storage storage = new Storage();
-        TaskList tasks = new TaskList(new ArrayList<>());
+        TaskList tasks = new TaskList(emptyListOfTasks);
         todo.markAsDone();
         tasks.addTask(todo);
         String expected = "Found it! This task has been successfully deleted: \n"
@@ -135,16 +141,17 @@ public class CommandTest {
     }
 
     @Test
-    public void executeDeleteCommand_invalidTaskID_throwsException() throws DukeException {
+    public void executeDeleteCommand_invalidTaskID_throwsException() {
         List<Task> listOfTasks = new ArrayList<>();
-        listOfTasks.add(new Todo("todo description"));
+        Todo todo = new Todo("todo description");
+        listOfTasks.add(todo);
         TaskList tasks = new TaskList(listOfTasks);
         Ui ui = new Ui();
         Storage storage = new Storage();
         DukeException ex = Assertions.assertThrows(DukeException.class, () -> {
             Parser.parse("delete 10").execute(tasks, ui, storage);
         });
-        String expected = "Oh no! Invalid Task! The task ID you provided is not valid. ";
+        String expected = "Oh no! Invalid Task! The task ID you provided is not valid.";
         assertEquals(expected, ex.getMessage());
     }
 
@@ -169,7 +176,7 @@ public class CommandTest {
         DukeException ex = Assertions.assertThrows(DukeException.class, () -> {
             Parser.parse("done 10").execute(tasks, ui, storage);
         });
-        String expected = "Oh no! Invalid Task! The task ID you provided is not valid. ";
+        String expected = "Oh no! Invalid Task! The task ID you provided is not valid.";
         assertEquals(expected, ex.getMessage());
     }
 
@@ -206,7 +213,7 @@ public class CommandTest {
             Parser.parse("find_by_date").execute(tasks, ui, storage);
         });
         String expected = "Oh no! No task date provided. "
-                + "Please input a valid date using the format: 'dd/mm/yyyy' \n"
+                + "Please input a valid date using the format: 'dd/mm/yyyy'\n"
                 + "Type 'help' for a list of all my functions and their commands.";
         assertEquals(expected, ex.getMessage());
     }
@@ -276,7 +283,7 @@ public class CommandTest {
         DukeException ex = Assertions.assertThrows(DukeException.class, () -> {
             Parser.parse("tag fun").execute(tasks, ui, storage);
         });
-        String expected = "Oh no! No task ID provided! Please input the ID of the task you wish to tag.\n"
+        String expected = "Oh no! Your tag command has missing arguments\n"
                 + "Type 'help' for a list of all my functions and their commands.";
         assertEquals(expected, ex.getMessage());
     }

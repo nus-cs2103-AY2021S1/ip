@@ -5,11 +5,11 @@ import duke.exception.DukeException;
 import duke.task.TaskList;
 
 /**
- * Represents a chat bot that functions as a task manager.
+ * Encapsulates information and methods that relate to a chat bot that functions as a task manager.
  */
 public class Duke {
 
-    /** Ui object that functions as the user interface. */
+    /** Ui object that handles user interactions. */
     private final Ui ui;
     /** Storage object that handles file operations. */
     private final Storage storage;
@@ -26,28 +26,29 @@ public class Duke {
     }
 
     /**
-     * Executes a DukeBot session for the bot to perform its intended functions.
+     * Executes a Duke session for the bot to perform its intended functions.
      */
     public void run() {
         System.out.println(Ui.showWelcome());
+        System.out.println(Ui.showLine());
         boolean isExit = false;
         while (!isExit) {
             try {
                 String fullCommand = ui.readCommand();
-                ui.showLine();
+                System.out.println(Ui.showLine());
                 Command command = Parser.parse(fullCommand);
                 System.out.println(command.execute(tasks, ui, storage));
                 isExit = command.isExit();
             } catch (DukeException ex) {
                 System.out.println(ex.getMessage());
             } finally {
-                ui.showLine();
+                System.out.println(Ui.showLine());
             }
         }
     }
 
     /**
-     * Retrieves the response by Duke when users provide an input.
+     * Retrieves the response by Duke when the user provides an input.
      *
      * @param input Input provided by the user.
      * @return String containing the response to the user input.
@@ -62,15 +63,12 @@ public class Duke {
     }
 
     /**
-     * Initialises a new DukeBot session.
+     * Initialises a new Duke session.
      *
      * @param args Command-line arguments.
      */
     public static void main(String[] args) {
-        // start a new session with JonasBot
         Duke session = new Duke();
-
-        // execute the bot to perform intended functions
         session.run();
     }
 }

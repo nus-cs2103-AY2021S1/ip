@@ -30,7 +30,7 @@ public class TagCommand extends Command {
      * stored in the designated file.
      *
      * @param tasks List of tasks belonging to the user.
-     * @param ui Ui object created for the Duke object.
+     * @param ui Ui object created for the Duke object to handle user interactions.
      * @param storage Storage object used by the Duke object for file operations.
      * @return String containing the reply for successful tagging of the desired task.
      * @throws DukeException If the tag could not be attached to the task due to invalid arguments.
@@ -56,9 +56,9 @@ public class TagCommand extends Command {
     }
 
     /**
-     * Indicates if the DukeBot session has ended.
+     * Indicates if the Duke session has ended.
      *
-     * @return False since the DukeBot session has not been terminated.
+     * @return False since the Duke session has not been terminated.
      */
     @Override
     public boolean isExit() {

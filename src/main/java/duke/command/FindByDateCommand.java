@@ -38,10 +38,10 @@ public class FindByDateCommand extends Command {
      * of tasks that matches the date provided for the search.
      *
      * @param tasks List of tasks belonging to the user.
-     * @param ui Ui object created for the Duke object.
+     * @param ui Ui object created for the Duke object to handle user interactions.
      * @param storage Storage object used by the Duke object for file operations.
      * @return String containing a list of tasks that matches the search date.
-     * @throws DukeException If no tasks could be found due to invalid date provided.
+     * @throws DukeException If an invalid date was provided by the user.
      */
     @Override
     public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
@@ -64,9 +64,9 @@ public class FindByDateCommand extends Command {
     }
 
     /**
-     * Indicates if the DukeBot session has ended.
+     * Indicates if the Duke session has ended.
      *
-     * @return False since the DukeBot session has not been terminated.
+     * @return False since the Duke session has not been terminated.
      */
     @Override
     public boolean isExit() {

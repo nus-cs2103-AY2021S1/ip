@@ -1,6 +1,7 @@
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -9,13 +10,15 @@ import duke.Parser;
 import duke.Storage;
 import duke.Ui;
 import duke.exception.DukeException;
+import duke.task.Task;
 import duke.task.TaskList;
 
 public class ParserTest {
 
     @Test
     public void parser_invalidInput_throwsException() {
-        TaskList tasks = new TaskList(new ArrayList<>());
+        List<Task> emptyListOfTasks = new ArrayList<>();
+        TaskList tasks = new TaskList(emptyListOfTasks);
         Ui ui = new Ui();
         Storage storage = new Storage();
         DukeException ex = Assertions.assertThrows(DukeException.class, () -> {
@@ -28,7 +31,8 @@ public class ParserTest {
 
     @Test
     public void parser_missingUserInput_throwsException() {
-        TaskList tasks = new TaskList(new ArrayList<>());
+        List<Task> emptyListOfTasks = new ArrayList<>();
+        TaskList tasks = new TaskList(emptyListOfTasks);
         Ui ui = new Ui();
         Storage storage = new Storage();
         DukeException ex = Assertions.assertThrows(DukeException.class, () -> {

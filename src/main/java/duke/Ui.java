@@ -6,7 +6,7 @@ import java.util.Scanner;
 import duke.task.Task;
 
 /**
- * Handles interactions with the user while the user is using DukeBot.
+ * Handles interactions with the user while the user is using Duke.
  */
 public class Ui {
 
@@ -16,19 +16,20 @@ public class Ui {
     private final Scanner scanner;
 
     /**
-     * Creates and initialises a new Ui object to deal with user interactions
-     * using a scanner object to read user inputs.
+     * Creates and initialises a new Ui object to deal with user interactions.
      */
     public Ui() {
         scanner = new Scanner(System.in);
     }
 
     /**
-     * Prints a greeting to welcome the user when a new session with DukeBot
+     * Prints a greeting to welcome the user when a new session with Duke
      * is initialised.
+     *
+     * @return String containing the welcome message.
      */
     public static String showWelcome() {
-        String greeting = "Hello! I am JonasBot! Nice to meet you :) \n\n"
+        String greeting = "Hello! I am JonasBot! Nice to meet you. \n\n"
                 + "To view a list of all my commands, input 'help' \n\n"
                 + "How may I assist you today?";
         return greeting;
@@ -140,7 +141,9 @@ public class Ui {
 
 
     /**
-     * Prints a farewell message when the session with DukeBot is terminated.
+     * Prints a farewell message when the session with Duke is terminated.
+     *
+     * @return String containing the farewell message.
      */
     public String showFarewell() {
         String farewellMessage = "Goodbye... For now.";
@@ -150,8 +153,10 @@ public class Ui {
 
     /**
      * Prints a line to divide and segment the chat text.
+     *
+     * @return String containing the divider.
      */
-    public void showLine() {
-        System.out.println(Ui.DIVIDER);
+    public static String showLine() {
+        return Ui.DIVIDER;
     }
 }

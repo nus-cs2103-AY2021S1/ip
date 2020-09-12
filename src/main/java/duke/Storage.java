@@ -36,7 +36,6 @@ public class Storage {
      * @return TaskList containing the tasks retrieved from the file.
      */
     public TaskList readFile() {
-
         List<Task> tasks = new ArrayList<>();
         try {
             File dataDirectory = new File(Storage.DEFAULT_DIRECTORY);
@@ -46,7 +45,7 @@ public class Storage {
             File dataFile = new File(Storage.DEFAULT_FILE_LOCATION);
             // create an empty file to store the tasks if the file does not exist
             dataFile.createNewFile();
-            assert dataFile.exists();
+            assert dataFile.exists() : "data file must exist";
 
             Scanner scanner = new Scanner(dataFile);
             while (scanner.hasNextLine()) {
@@ -135,13 +134,15 @@ public class Storage {
      * Stores the list of tasks, in the TaskList object, into the designated file.
      *
      * @param tasks TaskList object containing a list of tasks to be saved in the designated file.
+     * @throws DukeException If the tasks could not be saved into the designated file.
      */
     public void saveToFile(TaskList tasks) throws DukeException {
         try {
             FileWriter fileWriter = new FileWriter(Storage.DEFAULT_FILE_LOCATION);
             for (int i = 0; i < tasks.getListSize(); i++) {
                 Task task = tasks.getTask(i);
-                fileWriter.write(task.convertTaskToFileString() + "\n");
+                String taskFileString = task.convertTaskToFileString();
+                fileWriter.write(taskFileString + "\n");
             }
             fileWriter.close();
         } catch (IOException ex) {

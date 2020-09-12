@@ -35,9 +35,9 @@ public class EventCommand extends Command {
      * and saves it into the designated file that stores the user's tasks.
      *
      * @param tasks List of tasks which the new event task will be added into.
-     * @param ui Ui object created for the Duke object.
+     * @param ui Ui object created for the Duke object to handle user interactions.
      * @param storage Storage object used by the Duke object for file operations.
-     * @return String containing the reply for successful creation of event task.
+     * @return String containing the reply for successful creation of the event task.
      * @throws DukeException If the event task could not be saved or created due to invalid inputs.
      */
     @Override
@@ -65,9 +65,9 @@ public class EventCommand extends Command {
     }
 
     /**
-     * Indicates if the DukeBot session has ended.
+     * Indicates if the Duke session has ended.
      *
-     * @return False since the DukeBot session has not been terminated.
+     * @return False since the Duke session has not been terminated.
      */
     @Override
     public boolean isExit() {

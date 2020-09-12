@@ -30,9 +30,9 @@ public class ToDoCommand extends Command {
      * and saves it into the designated file that stores the user's tasks.
      *
      * @param tasks List of tasks which the new todo task will be added into.
-     * @param ui Ui object created for the Duke object.
+     * @param ui Ui object created for the Duke object to handle user interactions.
      * @param storage Storage object used by the Duke object for file operations.
-     * @return String containing the reply for successful creation of ToDo task.
+     * @return String containing the reply for successful creation of the todo task.
      * @throws DukeException If the todo task could not be saved.
      */
     @Override
@@ -44,9 +44,9 @@ public class ToDoCommand extends Command {
     }
 
     /**
-     * Indicates if the DukeBot session has ended.
+     * Indicates if the Duke session has ended.
      *
-     * @return False since the DukeBot session has not been terminated.
+     * @return False since the Duke session has not been terminated.
      */
     @Override
     public boolean isExit() {

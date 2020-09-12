@@ -18,7 +18,7 @@ import duke.exception.InvalidFunctionException;
 
 /**
  * Represents a parser to make sense of the user inputs so that
- * the correct command can be executed by DukeBot.
+ * the correct command can be executed by Duke.
  */
 public class Parser {
 
@@ -36,9 +36,9 @@ public class Parser {
 
     /**
      * Parses the input entered by users and returns a Command object to be
-     * executed by DukeBot if the input is valid.
+     * executed by Duke if the input is valid.
      *
-     * @param userInput Inputs entered by the user.
+     * @param userInput Input entered by the user.
      * @return Command object.
      * @throws DukeException If the input is not a valid command.
      */
@@ -47,8 +47,8 @@ public class Parser {
         String[] splitInput = input.split(" ", 2);
         String function = splitInput[0];
         if (input.isEmpty()) {
-            String err = "No input was entered! Please enter something!";
-            throw new InvalidFunctionException(err);
+            String error = "No input was entered! Please enter something!";
+            throw new InvalidFunctionException(error);
         } else if (input.equals(Parser.HELP_COMMAND)) {
             return new HelpCommand();
         } else if (input.equals(Parser.EXIT_COMMAND)) {
@@ -183,8 +183,8 @@ public class Parser {
         String[] parsedInput = userInput.split(" ", 2);
         String command = parsedInput[0];
         try {
-            int index = Integer.parseInt(parsedInput[1]);
-            return index;
+            int taskID = Integer.parseInt(parsedInput[1]);
+            return taskID;
         } catch (ArrayIndexOutOfBoundsException | NumberFormatException ex) {
             String error = "No Task ID provided! Please input the ID of the task you wish to "
                     + (command.equals("done") ? "mark as done." : "delete.");
@@ -197,8 +197,8 @@ public class Parser {
      * the search keyword or search date respectively.
      *
      * @param userInput Input entered by the user.
-     * @return String containing either the search keyword or search date depending on the command.
-     * @throws InvalidFunctionException If no search keyword or date was provided.
+     * @return String containing either the search keyword or search date.
+     * @throws InvalidFunctionException If no search keyword or date was provided by the user.
      */
     public static String parseFindInput(String userInput) throws InvalidFunctionException {
         String[] parsedInput = userInput.split(" ", 2);

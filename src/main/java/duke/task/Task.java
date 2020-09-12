@@ -8,7 +8,7 @@ import java.time.LocalDate;
 public abstract class Task {
 
     /** Description of the task. */
-    private String description;
+    private final String description;
     /** Boolean describing whether the task has been completed. */
     private boolean isDone;
     /** Tag attached to a task. */

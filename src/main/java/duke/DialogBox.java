@@ -21,8 +21,10 @@ import javafx.scene.shape.Circle;
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
+    /** Label containing the text to be displayed in the dialog box. */
     @FXML
     private Label dialog;
+    /** ImageView to represent the display picture for either the user or Duke. */
     @FXML
     private ImageView displayPicture;
 

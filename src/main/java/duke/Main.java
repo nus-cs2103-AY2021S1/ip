@@ -14,6 +14,7 @@ import javafx.stage.Stage;
  */
 public class Main extends Application {
 
+    /** Duke Object created for the GUI. */
     private Duke duke = new Duke();
 
     /**

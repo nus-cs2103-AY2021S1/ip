@@ -10,10 +10,10 @@ import duke.task.TaskList;
 public class ListCommand extends Command {
 
     /**
-     * Prints all the user's tasks and the relevant task information.
+     * Returns a string containing all the user's tasks and the relevant task information.
      *
      * @param tasks List of tasks belonging to the user.
-     * @param ui Ui object created for the Duke object.
+     * @param ui Ui object created for the Duke object to handle user interactions.
      * @param storage Storage object used by the Duke object for file operations.
      * @return String containing a list of all the user's tasks.
      */
@@ -23,9 +23,9 @@ public class ListCommand extends Command {
     }
 
     /**
-     * Indicates if the DukeBot session has ended.
+     * Indicates if the Duke session has ended.
      *
-     * @return False since the DukeBot session has not been terminated.
+     * @return False since the Duke session has not been terminated.
      */
     @Override
     public boolean isExit() {

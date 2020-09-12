@@ -5,11 +5,13 @@ import java.time.LocalDate;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
 import duke.task.Deadline;
 import duke.task.Event;
+import duke.task.Task;
 import duke.task.TaskList;
 import duke.task.Todo;
 
@@ -68,7 +70,8 @@ public class TaskTest {
     @Test
     public void testGetTask() {
         Todo todo = new Todo("Junit tests");
-        TaskList tasks = new TaskList(new ArrayList<>());
+        List<Task> emptyListOfTasks = new ArrayList<>();
+        TaskList tasks = new TaskList(emptyListOfTasks);
         tasks.addTask(todo);
         String expectedTask = "[T][✘] Junit tests";
         assertEquals(expectedTask, tasks.getTask(0).toString());
@@ -77,17 +80,19 @@ public class TaskTest {
     @Test
     public void testAddTask() {
         Todo todo = new Todo("attend lecture");
-        TaskList tasks = new TaskList(new ArrayList<>());
+        List<Task> emptyListOfTasks = new ArrayList<>();
+        TaskList tasks = new TaskList(emptyListOfTasks);
         tasks.addTask(todo);
         assertEquals(1, tasks.getListSize());
     }
 
     @Test
     public void removeTask_eventTask_emptyTaskList() {
+        List<Task> emptyListOfTasks = new ArrayList<>();
         LocalDate date = LocalDate.parse("10/2/2020", this.dateFormatter);
         LocalTime time = LocalTime.parse("10:00", this.timeFormatter);
         Event event = new Event("Junit test", date, time);
-        TaskList tasks = new TaskList(new ArrayList<>());
+        TaskList tasks = new TaskList(emptyListOfTasks);
         tasks.addTask(event);
         tasks.removeTask(0);
         assertEquals(0, tasks.getListSize());
@@ -95,8 +100,9 @@ public class TaskTest {
 
     @Test
     public void testCompleteTask() {
+        List<Task> emptyListOfTasks = new ArrayList<>();
         Todo todo = new Todo("create more tests");
-        TaskList tasks = new TaskList(new ArrayList<>());
+        TaskList tasks = new TaskList(emptyListOfTasks);
         tasks.addTask(todo);
         tasks.completeTask(0);
         assertTrue(todo.hasBeenCompleted());

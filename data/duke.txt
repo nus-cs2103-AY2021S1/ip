@@ -1,3 +1,2 @@
-T | 1 | eat | asucahc
-D | 0 | eat | test | 2020-02-01 12:00
-T | 0 | play | fun
+T | 1 | play | 
+D | 0 | eat |  | 2020-02-01 12:00

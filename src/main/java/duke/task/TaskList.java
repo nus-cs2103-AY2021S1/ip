@@ -4,7 +4,7 @@ import java.util.List;
 
 /**
  * Encapsulates information and methods that relate to a list of tasks being tracked
- * for the user by DukeBot.
+ * for the user by Duke.
  */
 public class TaskList {
 
@@ -67,12 +67,13 @@ public class TaskList {
     }
 
     /**
-     * Marks the task at the given index in the task list as completed.
+     * Marks the task at the given index in the list of tasks as completed.
      *
-     * @param index Zero based index of the task to be completed.
+     * @param index Zero based index of the task to be marked as done.
      */
     public void completeTask(int index) {
-        this.tasks.get(index).markAsDone();
+        Task task = this.tasks.get(index);
+        task.markAsDone();
     }
 
 }

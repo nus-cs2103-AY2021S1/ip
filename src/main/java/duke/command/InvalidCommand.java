@@ -15,9 +15,9 @@ public class InvalidCommand extends Command {
      * Throws a DukeException to inform the user of the invalid input provided.
      *
      * @param tasks List of tasks belonging to the user.
-     * @param ui Ui object created for the Duke object.
+     * @param ui Ui object created for the Duke object to handle user interactions.
      * @param storage Storage object used by the Duke object for file operations.
-     * @return String containing the reply to an invalid input.
+     * @return String containing the reply to an invalid input by the user.
      * @throws DukeException DukeException is thrown to inform the user of the invalid input provided.
      */
     @Override
@@ -27,9 +27,9 @@ public class InvalidCommand extends Command {
     }
 
     /**
-     * Indicates if the DukeBot session has ended.
+     * Indicates if the Duke session has ended.
      *
-     * @return False since the DukeBot session has not been terminated.
+     * @return False since the Duke session has not been terminated.
      */
     @Override
     public boolean isExit() {
