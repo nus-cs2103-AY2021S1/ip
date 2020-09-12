@@ -1,6 +1,6 @@
 # User Guide
 
-[[./Ui.png]]
+![User Interface](Ui.png)
 
 ## Features 
 
@@ -94,14 +94,14 @@ Nice! I've marked this task as done:
 [E][✓] Birthday Celebration (at: Jan 1 2020)
 ```
 
-### `update <task ID> <task creation inputs>` - Updates a task
+### `update <task ID> <command to create a todo, deadline, or event>` - Updates a task
 
 Update the tasks with given task ID. 
 The task ID of a task is the number the accompanies it when you use the `list` command.
 
 Example of usage: 
 
-`update 2`
+`update 2 todo Submit assignment`
 
 Expected outcome:
 ```
