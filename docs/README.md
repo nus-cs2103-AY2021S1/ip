@@ -31,7 +31,7 @@ Duke is an application using Command Line Tool to manage your tasks.
 **:information_source: Notes about the command format:**<br>
    * `( )` represents the parameter for the command
    
-   * The input format of time is "yyyy-MM-dd HH:mm"
+   * The input format of time is **yyyy-MM-dd HH:mm**
    
 </div> 
 
@@ -48,6 +48,8 @@ Expect Output:
 
 The task is added to the list with not done status, and gives out the total tasks in the list.
 
+***
+
 ### `event` - Add an event to the task list
 
 Format: `event (description) /at (time)` 
@@ -59,6 +61,9 @@ Example of usage:
 Expected Output:
 
 The event has been recorded into the system and give out the total number of tasks in the list.
+
+***
+
 
 ### `deadline` - Add an deadline to the task list
 
@@ -80,6 +85,8 @@ Example:
 
 (Picture here)
 
+***
+
 ### `done` - Mark certain task as done
 
 Format: `done (index)`
@@ -93,6 +100,8 @@ Example of usage:
 Expected output:
 
 The task with the target index is marked as done. 
+
+***
 
 ### `delete` - Delete certain task in the list
 
@@ -108,6 +117,8 @@ Expected output:
 
 The task with index 2 is deleted from the task list.
 
+***
+
 ### `clear` - Clear all the task in the list
 
 Format: `Clear`
@@ -115,6 +126,8 @@ Format: `Clear`
 Example of usage:
 
 (Picture here)
+
+***
 
 ### `reschedule` - Reschedule the task to future date
 
