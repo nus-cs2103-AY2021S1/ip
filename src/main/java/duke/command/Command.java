@@ -9,7 +9,6 @@ import duke.exception.DukeException;
  */
 public abstract class Command {
     protected String fullCommand;
-    protected boolean isExit;
 
     /**
      * class constructor
@@ -20,19 +19,11 @@ public abstract class Command {
     }
 
     /**
-     * boolean value representing if the command is an exit command
-     * @return true if the command is an exit command and false otherwise
-     */
-    public boolean isExit() {
-        return isExit;
-    }
-
-    /**
      * performs the appropriate command based on the type of command it is
      * @param tasks the list of tasks
      * @param storage the storage system responsible for saving and loading data
-     * @return the response in terms of a string based on the type of command it is
-     * @throws DukeException
+     * @return the command result based on the type of command given
+     * @throws DukeException if there any issues executing the command
      */
     public abstract CommandResult execute(TaskList tasks, Storage storage) throws DukeException;
 }

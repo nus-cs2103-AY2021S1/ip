@@ -3,7 +3,7 @@ package duke.command;
 import duke.message.Message;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.exception.EmptyDescriptionException;
+import duke.exception.DukeEmptyDescriptionException;
 import duke.task.Task;
 
 import java.util.ArrayList;
@@ -19,23 +19,22 @@ public class FindCommand extends Command {
      */
     public FindCommand(String fullCommand) {
         super(fullCommand);
-        this.isExit = false;
     }
 
     /**
      * searches for a list of tasks that matches the query string.
-     * finally, returns a string representation of the list of tasks matching the query string
-     * @param tasks the list of tasks
+     * finally, returns a command result containing the list of tasks matching the query string
+     * @param taskList the list of tasks
      * @param storage the storage system responsible for saving and loading data
-     * @return the string representation of the list of tasks matching the query string
-     * @throws EmptyDescriptionException if the query string given by the user is empty
+     * @return a command result containing the list of tasks matching the query string
+     * @throws DukeEmptyDescriptionException if the query string given by the user is empty
      */
     @Override
-    public CommandResult execute(TaskList tasks, Storage storage) throws EmptyDescriptionException {
+    public CommandResult execute(TaskList taskList, Storage storage) throws DukeEmptyDescriptionException {
         if (fullCommand.length() < 6) {
-            throw new EmptyDescriptionException("oh dear :-( the description of 'find' cannot be empty");
+            throw new DukeEmptyDescriptionException("oh dear :-( the description of 'find' cannot be empty");
         }
-        ArrayList<Task> matchingTasks = tasks.getMatchingTasks(fullCommand.substring(5));
+        ArrayList<Task> matchingTasks = taskList.getMatchingTasks(fullCommand.substring(5));
         return new CommandResult(Message.matchingTasksMessage(matchingTasks));
     }
 }

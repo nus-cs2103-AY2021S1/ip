@@ -14,17 +14,16 @@ public class HelpCommand extends Command {
      */
     public HelpCommand() {
         super("help");
-        this.isExit = false;
     }
 
     /**
-     * returns the list of commands available to the user
-     * @param tasks the list of tasks
+     * returns a command result containing the list of commands available to the user
+     * @param taskList the list of tasks
      * @param storage the storage system responsible for saving and loading data
-     * @return the list of commands available to the user
+     * @return a command result containing the list of commands available to the user
      */
     @Override
-    public CommandResult execute(TaskList tasks, Storage storage) {
+    public CommandResult execute(TaskList taskList, Storage storage) {
         return new CommandResult(Message.helpMessage());
     }
 }

@@ -1,8 +1,8 @@
 package duke.command;
 
 import duke.exception.DukeFileLoadingErrorException;
-import duke.exception.EmptyDateException;
-import duke.exception.EmptyDescriptionException;
+import duke.exception.DukeEmptyDateException;
+import duke.exception.DukeEmptyDescriptionException;
 import duke.message.Message;
 import duke.storage.Storage;
 import duke.task.Task;
@@ -24,18 +24,18 @@ public class DeadlineCommand extends AddTaskCommand {
     /**
      * creates a new deadline task which is added to the task list.
      * this change is reflected in the storage.
-     * finally, the method returns a message indicating that the operation was successful
-     * @param tasks the list of tasks
+     * finally, the method returns the command result indicating that the task was successfully added to the task list
+     * @param taskList the list of tasks
      * @param storage the storage system responsible for saving and loading data
-     * @return message indicating the addition of the deadline task was successful
-     * @throws EmptyDescriptionException if the description for the deadline task is empty
-     * @throws EmptyDateException if the date for the deadline task is empty
+     * @return the command result indicating that the task list was successfully cleared
+     * @throws DukeEmptyDescriptionException if the description for the deadline task is empty
+     * @throws DukeEmptyDateException if the date for the deadline task is empty
      * @throws DukeFileLoadingErrorException if there was an error loading the file
      */
     @Override
-    public CommandResult execute(TaskList tasks, Storage storage) throws EmptyDescriptionException, EmptyDateException, DukeFileLoadingErrorException {
-        Task addedTask = tasks.addDeadline(fullCommand);
-        storage.save(tasks.getTasks());
-        return new CommandResult(Message.addedTaskMessage(addedTask, tasks));
+    public CommandResult execute(TaskList taskList, Storage storage) throws DukeEmptyDescriptionException, DukeEmptyDateException, DukeFileLoadingErrorException {
+        Task addedTask = taskList.addDeadline(fullCommand);
+        storage.save(taskList.getTasks());
+        return new CommandResult(Message.addedTaskMessage(addedTask, taskList));
     }
 }

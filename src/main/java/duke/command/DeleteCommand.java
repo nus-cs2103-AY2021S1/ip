@@ -4,7 +4,7 @@ import duke.exception.DukeFileLoadingErrorException;
 import duke.message.Message;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.exception.InvalidIndexException;
+import duke.exception.DukeInvalidIndexException;
 import duke.task.Task;
 
 /**
@@ -18,22 +18,22 @@ public class DeleteCommand extends Command {
      */
     public DeleteCommand(String fullCommand) {
         super(fullCommand);
-        this.isExit = false;
     }
 
     /**
-     * deletes the task specified by the user and reflect this change in the storage.
-     * finally, the method returns a message indicating that the operation was successful
-     * @param tasks the list of tasks
+     * deletes the task specified by the user.
+     * this change is reflected in the storage.
+     * finally, the method returns the command result indicating that the task list was successfully deleted
+     * @param taskList the list of tasks
      * @param storage the storage system responsible for saving and loading data
-     * @return message indicating the deletion of the task was successful
-     * @throws InvalidIndexException if the given task number does not exist in the list
+     * @return the command result indicating that the task list was successfully cleared
+     * @throws DukeInvalidIndexException if the given task number does not exist in the list
      */
     @Override
-    public CommandResult execute(TaskList tasks, Storage storage) throws InvalidIndexException, DukeFileLoadingErrorException {
+    public CommandResult execute(TaskList taskList, Storage storage) throws DukeInvalidIndexException, DukeFileLoadingErrorException {
         int taskNumber = Integer.parseInt(fullCommand.substring(7));
-        Task task = tasks.delete(taskNumber);
-        storage.save(tasks.getTasks());
-        return new CommandResult(Message.deletedTaskMessage(task, tasks));
+        Task task = taskList.delete(taskNumber);
+        storage.save(taskList.getTasks());
+        return new CommandResult(Message.deletedTaskMessage(task, taskList));
     }
 }

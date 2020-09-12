@@ -28,7 +28,6 @@ public class Storage {
     /**
      * creates a new file if the it does not exist in the specified file path.
      * afterwards, the text in the file is decoded and converted to a list of tasks stored in an array list
-     *
      * @return the array list of tasks
      * @throws DukeException if there are issues finding the file or decoding the file
      */
@@ -40,8 +39,7 @@ public class Storage {
 
     /**
      * encodes the tasks in the given task list to a more appropriate format for storage
-     * updates the changes in the task list using the encoded versions of the task
-     *
+     * updates the changes in the task list using encoded versions of the tasks
      * @param tasks the task list to reference when updating the file
      */
     public void save(ArrayList<Task> tasks) throws DukeFileLoadingErrorException {

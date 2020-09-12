@@ -44,6 +44,10 @@ public class Deadline extends Task {
                 this.date;
     }
 
+    /**
+     * returns the due date of the deadline task as a LocalDate object
+     * @return due date of the deadline task
+     */
     @Override
     public LocalDate getDate() {
         return this.date;

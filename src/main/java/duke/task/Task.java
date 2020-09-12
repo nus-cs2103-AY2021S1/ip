@@ -46,5 +46,9 @@ public abstract class Task {
         return "[" + this.getStatus() + "] " + this.task;
     }
 
+    /**
+     * returns the date of the task
+     * @return date of the task
+     */
     public abstract LocalDate getDate();
 }

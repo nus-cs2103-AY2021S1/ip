@@ -4,7 +4,7 @@ import duke.exception.DukeFileLoadingErrorException;
 import duke.message.Message;
 import duke.storage.Storage;
 import duke.task.TaskList;
-import duke.exception.InvalidIndexException;
+import duke.exception.DukeInvalidIndexException;
 import duke.task.Task;
 
 /**
@@ -18,21 +18,21 @@ public class DoneCommand extends Command {
      */
     public DoneCommand(String fullCommand) {
         super(fullCommand);
-        this.isExit = false;
     }
 
     /**
-     * marks the specified task as done and reflect this change in the storage.
-     * finally, the method returns a message indicating that the operation was successful
-     * @param tasks the list of tasks
+     * marks the specified task as done.
+     * this change is reflected in the storage.
+     * finally, the method returns the command result indicating that the task list was successfully marked as done
+     * @param taskList the list of tasks
      * @param storage the storage system responsible for saving and loading data
-     * @return message indicating task was successfully marked as done
-     * @throws InvalidIndexException if the given task number does not exist in the list
+     * @return the command result indicating that the task list was successfully deleted
+     * @throws DukeInvalidIndexException if the given task number does not exist in the list
      */
-    public CommandResult execute(TaskList tasks, Storage storage) throws InvalidIndexException, DukeFileLoadingErrorException {
+    public CommandResult execute(TaskList taskList, Storage storage) throws DukeInvalidIndexException, DukeFileLoadingErrorException {
         int taskNumber = Integer.parseInt(fullCommand.substring(5));
-        Task task = tasks.done(taskNumber);
-        storage.save(tasks.getTasks());
-        return new CommandResult(Message.markedTaskAsDoneMessage(task, tasks));
+        Task task = taskList.done(taskNumber);
+        storage.save(taskList.getTasks());
+        return new CommandResult(Message.markedTaskAsDoneMessage(task, taskList));
     }
 }

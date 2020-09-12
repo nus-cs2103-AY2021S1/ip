@@ -1,8 +1,8 @@
 package duke.task;
 
-import duke.exception.EmptyDateException;
-import duke.exception.EmptyDescriptionException;
-import duke.exception.InvalidIndexException;
+import duke.exception.DukeEmptyDateException;
+import duke.exception.DukeEmptyDescriptionException;
+import duke.exception.DukeInvalidIndexException;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -40,9 +40,9 @@ public class TaskList {
      * marks the given task as done based on its task number
      * @param taskNumber the index of the task to be marked as done
      * @return the task after it has been marked as done
-     * @throws InvalidIndexException if the given index of the task does not exist
+     * @throws DukeInvalidIndexException if the given index of the task does not exist
      */
-    public Task done(int taskNumber) throws InvalidIndexException {
+    public Task done(int taskNumber) throws DukeInvalidIndexException {
         Task task = getTaskNumber(taskNumber - 1);
         task.markAsDone();
         return task;
@@ -52,39 +52,59 @@ public class TaskList {
      * deletes the given task based on its task number
      * @param taskNumber the index of the task to be deleted
      * @return the task that was deleted
-     * @throws InvalidIndexException if the given index of the task does not exist
+     * @throws DukeInvalidIndexException if the given index of the task does not exist
      */
-    public Task delete(int taskNumber) throws InvalidIndexException {
+    public Task delete(int taskNumber) throws DukeInvalidIndexException {
         Task task = getTaskNumber(taskNumber - 1);
         tasks.remove(taskNumber - 1);
         return task;
     }
 
-    public ToDo addToDo(String input) throws EmptyDescriptionException {
+    /**
+     * converts the given string to a to do task and adds it to the task list
+     * @param input to do task to be added as a string
+     * @return the to do task that was created
+     * @throws DukeEmptyDescriptionException if the description of the to do task was empty
+     */
+    public ToDo addToDo(String input) throws DukeEmptyDescriptionException {
         if (input.length() <= 5) {
-            throw new EmptyDescriptionException("oops! the description of a todo cannot be empty");
+            throw new DukeEmptyDescriptionException("oops! the description of a todo cannot be empty");
         }
         ToDo todo = new ToDo(input.substring(5));
         tasks.add(todo);
         return todo;
     }
 
-    public Task addDeadline(String input) throws EmptyDescriptionException, EmptyDateException {
+    /**
+     * converts the given string to a deadline task and adds it to the task list
+     * @param input deadline task to be added as a string
+     * @return the deadline task that was created
+     * @throws DukeEmptyDescriptionException if the description of the deadline was empty
+     * @throws DukeEmptyDateException if the date of the deadline task was not specified
+     */
+    public Deadline addDeadline(String input) throws DukeEmptyDescriptionException, DukeEmptyDateException {
         if (input.length() <= 9) {
-            throw new EmptyDescriptionException("oops! the description of a deadline cannot be empty");
+            throw new DukeEmptyDescriptionException("oops! the description of a deadline cannot be empty");
         } else if (!input.contains("/")) {
-            throw new EmptyDateException("oops! the due date for the deadline was not specified");
+            throw new DukeEmptyDateException("oops! the due date for the deadline was not specified");
         }
         Deadline deadline = new Deadline(input.substring(9));
         tasks.add(deadline);
         return deadline;
     }
 
-    public Task addEvent(String input) throws EmptyDescriptionException, EmptyDateException {
+    /**
+     * converts the given string to an event task and adds it to the task list
+     * @param input event task to be added as a string
+     * @return the event task that was created
+     * @throws DukeEmptyDescriptionException if the description of the event was empty
+     * @throws DukeEmptyDateException if the date of the event task was not specified
+     */
+    public Event addEvent(String input) throws DukeEmptyDescriptionException, DukeEmptyDateException {
         if (input.length() <= 6) {
-            throw new EmptyDescriptionException("oops! the description of a event cannot be empty");
+            throw new DukeEmptyDescriptionException("oops! the description of a event cannot be empty");
         } else if (!input.contains("/")) {
-            throw new EmptyDateException("oops! the event date for the event was not specified");
+            throw new DukeEmptyDateException("oops! the event date for the event was not specified");
         }
         Event event = new Event(input.substring(6));
         tasks.add(event);
@@ -106,6 +126,11 @@ public class TaskList {
         return matchingTasks;
     }
 
+    /**
+     * returns the list of tasks that occur on the given date
+     * @param date the given date to search for in the task list
+     * @return an array list containing the tasks that match the given date
+     */
     public ArrayList<Task> getTasksOnDate(LocalDate date) {
         ArrayList<Task> tasksOnDate = new ArrayList<>();
         for (Task task : tasks) {
@@ -133,14 +158,14 @@ public class TaskList {
         tasks.clear();
     }
 
-    private Task getTaskNumber(int taskNumber) throws InvalidIndexException {
+    private Task getTaskNumber(int taskNumber) throws DukeInvalidIndexException {
         try {
             return this.tasks.get(taskNumber);
         } catch (IndexOutOfBoundsException e) {
             String message = "sorry! the task number: " +
                     (taskNumber + 1) +
                     " does not exist in your list";
-            throw new InvalidIndexException(message);
+            throw new DukeInvalidIndexException(message);
         }
     }
 }

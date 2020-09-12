@@ -10,6 +10,5 @@ public abstract class AddTaskCommand extends Command {
      */
     AddTaskCommand(String fullCommand) {
         super(fullCommand);
-        this.isExit = false;
     }
 }

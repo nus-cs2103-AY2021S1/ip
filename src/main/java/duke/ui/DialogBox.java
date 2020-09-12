@@ -47,13 +47,19 @@ public class DialogBox extends HBox {
         Collections.reverse(tmp);
         getChildren().setAll(tmp);
         setAlignment(Pos.TOP_LEFT);
+        dialog.setStyle("-fx-background-color: rgb(255, 230, 242); " +
+                "-fx-background-radius: 15;" +
+                "-fx-padding: 7.5;" +
+                "-fx-text-fill: rgb(153, 0, 51);" +
+                "-fx-border-color: rgb(255, 204, 229);" +
+                "-fx-border-radius: 15;");
     }
 
-    public static DialogBox getUserDialog(String text, Image img) {
+    protected static DialogBox getUserDialog(String text, Image img) {
         return new DialogBox(text, img);
     }
 
-    public static DialogBox getDukeDialog(String text, Image img) {
+    protected static DialogBox getDukeDialog(String text, Image img) {
         var db = new DialogBox(text, img);
         db.flip();
         return db;

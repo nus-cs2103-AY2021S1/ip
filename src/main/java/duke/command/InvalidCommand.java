@@ -14,11 +14,10 @@ public class InvalidCommand extends Command {
      */
     public InvalidCommand() {
         super("");
-        this.isExit = false;
     }
 
     /**
-     * returns a message indicating that the given command cannot be understood
+     * returns message indicating that the given command cannot be understood
      * @param tasks the list of tasks
      * @param storage the storage system responsible for saving and loading data
      * @return message indicating that the given command cannot be understood

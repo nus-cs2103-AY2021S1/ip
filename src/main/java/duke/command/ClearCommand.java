@@ -15,20 +15,20 @@ public class ClearCommand extends Command {
      */
     public ClearCommand() {
         super("clear");
-        this.isExit = false;
     }
 
     /**
-     * deletes all of the tasks in the given task list and updates this change to the storage
-     * finally, the method returns a message indicating the operation was successful
-     * @param tasks the list of tasks
+     * deletes all of the tasks in the given task list
+     * updates this change to the storage
+     * finally, the method returns the command result indicating that the task list was successfully cleared
+     * @param taskList the list of tasks
      * @param storage the storage system responsible for saving and loading data
-     * @return message indicating that the task list was successfully cleared
+     * @return the command result indicating that the task list was successfully cleared
      */
     @Override
-    public CommandResult execute(TaskList tasks, Storage storage) throws DukeFileLoadingErrorException {
-        tasks.deleteAll();
-        storage.save(tasks.getTasks());
+    public CommandResult execute(TaskList taskList, Storage storage) throws DukeFileLoadingErrorException {
+        taskList.deleteAll();
+        storage.save(taskList.getTasks());
         return new CommandResult(Message.clearedAllTasksMessage());
     }
 }

@@ -3,13 +3,13 @@ package duke.exception;
 /**
  * represents an exception that is thrown when the date for a Deadline or Event task is empty
  */
-public class EmptyDateException extends DukeException {
+public class DukeEmptyDateException extends DukeException {
     /**
      * constructs a new empty date exception with the specified detail message.
      * @param message the detail message.
      *                the message is saved for later retrieval by the <code>Throwable.getMessage()</> method
      */
-    public EmptyDateException(String message) {
+    public DukeEmptyDateException(String message) {
         super(message);
     }
 }

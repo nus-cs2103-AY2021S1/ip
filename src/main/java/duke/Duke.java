@@ -14,7 +14,8 @@ import duke.parser.Parser;
  *     2. clear the entire list's tasks
  *     3. mark a task as done
  *     4. search for tasks using a query string
- *     5. display all of the existing tasks in the list
+ *     5. search for tasks that occur on a given date
+ *     6. display all of the existing tasks in the list
  * this class is the main driver for the chatbot
  */
 

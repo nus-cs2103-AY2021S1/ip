@@ -44,6 +44,10 @@ public class Event extends Task {
                 this.date;
     }
 
+    /**
+     * returns the date of the event task as a LocalDate object
+     * @return date of the event task
+     */
     @Override
     public LocalDate getDate() {
         return this.date;

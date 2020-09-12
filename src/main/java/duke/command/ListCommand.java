@@ -17,14 +17,13 @@ public class ListCommand extends Command {
      */
     public ListCommand() {
         super("list");
-        this.isExit = false;
     }
 
     /**
-     * returns a string representation of the full list of tasks
+     * returns a command result containing the full list of tasks
      * @param taskList the list of tasks
      * @param storage the storage system responsible for saving and loading data
-     * @return a string representation of the full list of tasks
+     * @return a a command result containing the full list of tasks
      */
     @Override
     public CommandResult execute(TaskList taskList, Storage storage) {
