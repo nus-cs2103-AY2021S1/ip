@@ -42,6 +42,8 @@ public final class Ultron {
 
     /**
      * GetResponse of Ultron based on input.
+     * @@author jh123x-reused
+     * reused from https://nus-cs2103-ay2021s1.github.io/website/schedule/week3/project.html
      *
      * @param input input from the user.
      * @return String message by Ultron for the user.
@@ -56,7 +58,6 @@ public final class Ultron {
 
         } else {
 
-            //Adapted from CS2103T website.
             try {
                 Command c = Parser.parseCommand(input);
 
