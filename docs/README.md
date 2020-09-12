@@ -89,7 +89,7 @@ Shows a list of all Tasks in the list.
 Format: `list`
 
 Additional tags:
-	* `-a`: Includes archived tasks
+	1. `-a`: Includes archived tasks
 
 Examples:
 	* `list`
