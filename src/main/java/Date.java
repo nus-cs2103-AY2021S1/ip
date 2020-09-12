@@ -25,7 +25,7 @@ public class Date {
             throw new DukeException("Oops. Day field should be between 1 and 31!");
         }
 
-        if (month < 1 || month  > 12) {
+        if (month < 1 || month > 12) {
             throw new DukeException("Oops. Month field should be between 1 and 12!");
         }
     }

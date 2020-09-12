@@ -67,14 +67,18 @@ public class FindCommand extends Command {
 
     // Code from GeeksForGeeks
     static boolean isSubSequence(String keyword, String task, int keywordLength, int taskLength) {
-        if (keywordLength == 0)
+        if (keywordLength == 0) {
             return true;
-        if (taskLength == 0)
+        }
+
+        if (taskLength == 0) {
             return false;
+        }
 
         // If last characters of two strings are matching
-        if (keyword.charAt(keywordLength - 1) == task.charAt(taskLength - 1))
+        if (keyword.charAt(keywordLength - 1) == task.charAt(taskLength - 1)) {
             return isSubSequence(keyword, task, keywordLength - 1, taskLength - 1);
+        }
 
         // If last characters are not matching
         return isSubSequence(keyword, task, keywordLength, taskLength - 1);

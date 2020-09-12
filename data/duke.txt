@@ -1,2 +1,3 @@
-D|1|my deadline|20/3/2020 1303
-E|0|my event|19/10/2019 2349
+T|0|read book
+D|0|CS2103T project|11/11/2020 1345
+E|0|interview|30/10/2020 1100
