@@ -10,6 +10,8 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 
+// Solution adapted from https://se-education.org/guides/tutorials/javaFxPart4.html
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
