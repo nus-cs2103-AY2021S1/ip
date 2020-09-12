@@ -24,7 +24,6 @@ Expected outcome:
 `3. [E][Not Done] party hard (at: Jul 20 2020, 3:00pm)` 
 
 
-
 ### `DONE [INT]` - MARKS A TASK AS DONE
 
 Marks a task as done based on the number provided by the user
