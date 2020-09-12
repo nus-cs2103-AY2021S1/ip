@@ -116,9 +116,9 @@ public class Parser {
             index = Integer.parseInt(requests[1]);
             isNumeric(index, list);
         } catch (NumberFormatException e) {
-            return "You have not provided a valid number";
+            return "Error! You have not provided a valid number";
         } catch (InvalidNumberException e) {
-            return "The number provided was greater or lesser than the number of items in the list";
+            return "Error! The number provided was greater or lesser than the number of items in the list";
         }
         Task task = list.get(index);
         StringBuilder sb = new StringBuilder();
@@ -137,7 +137,7 @@ public class Parser {
                 task.setDate(date);
                 System.out.println(task.toString());
             } catch (InvalidDateException ex) {
-                return "Invalid date format used";
+                return "Error! Invalid date format used";
             }
         } else {
             task.setWork(newWork);
@@ -200,9 +200,9 @@ public class Parser {
             str += ". Now you have " + list.getSize() + " tasks to the list";
             return str;
         } catch (NumberFormatException e) {
-            return "You have not provided a valid number";
+            return "Error! You have not provided a valid number";
         } catch (InvalidNumberException e) {
-            return "The number provided was greater or lesser than the number of items in the list";
+            return "Error! The number provided was greater or lesser than the number of items in the list";
         }
     }
 
@@ -221,7 +221,7 @@ public class Parser {
             list.updateStatus(index);
             String str = "Nice! I've marked this task as done: \n "
                     + list.get(index);
-            str += "Now you have " + list.getSize() + " tasks in the list";
+            str += ". Now you have " + list.getSize() + " tasks in the list";
             return str;
         } catch (NumberFormatException e) {
             return "You have not provided a valid number";
@@ -285,9 +285,9 @@ public class Parser {
             LocalDateTime date = LocalDateTime.parse(datestr, formatter);
             Deadline deadline = new Deadline(word.substring(0, index), date);
             list.update(deadline);
-            return deadline.toString();
+            return deadline.toString() + " has been added to the list. You have " + list.getSize() + " tasks left to do";
         } catch (DateTimeParseException e) {
-            return "Invalid Date provided";
+            return "Error! Invalid Date provided";
         }
     }
     /**
@@ -330,9 +330,9 @@ public class Parser {
             LocalDateTime date = LocalDateTime.parse(datestr, formatter);
             Event event = new Event(word.substring(0, index), date);
             list.update(event);
-            return event.toString();
+            return event.toString() + " has been added to the list. You have " + list.getSize() + " tasks left to do";
         } catch (DateTimeParseException e) {
-            return "Incorrect Date format used";
+            return "Error! Incorrect Date format used";
         }
     }
 
@@ -374,7 +374,7 @@ public class Parser {
                 tasks.add(list.get(i));
             }
         }
-        return new TaskList(tasks).toString();
+        return new TaskList(tasks).toString() + " contain " + requests[1];
     }
 
     /**
@@ -389,7 +389,7 @@ public class Parser {
         if (work.length() > 4) {
             ToDos todo = new ToDos(work.substring(4));
             list.update(todo);
-            return todo.toString();
+            return todo.toString()  + " has been added to the list. You have " + list.getSize() + " tasks left to do";
         } else {
             throw new EmptyTodoException();
         }
