@@ -1,5 +1,9 @@
 # Duke User Guide
 
+- [Introduction](#introduction)
+- [Quick Start](#quick-start)
+- [Features](#features)
+
 ## Introduction
 
 Duke application is an offline task management tool that organizes the task list and saves the task data in the local computer's storage.
@@ -100,10 +104,18 @@ Example of usage:
 
 Expected outcome:
 
+1. If there is task associated with the number `1`:
+
 ```console
 Noted. I have removed this task:
     [T][✗][MEDIUM] CS2103T iP
 Now you have 1 tasks in the list.
+```
+
+2. If there is no task associated with the number `1`:
+
+```console
+The task number is not found
 ```
 
 ### 5. Exit Duke application
@@ -136,7 +148,7 @@ Find the tasks based on the query keyword.
 
 ### `find [keyword]` - find the tasks
 
-Enter the command to display the found tasks.
+Enter the command to search for the tasks and display the found tasks.
 
 Example of usage:
 
@@ -144,14 +156,14 @@ Example of usage:
 
 Expected outcome:
 
-1. If there is task associated with the keyword:
+1. If there is task associated with the keyword `CS2103T`:
 
 ```console
 Here are the matching tasks in your list:
     1.[T][✗][MEDIUM] CS2103T iP
 ```
 
-2. If there is no task associated with the keyword:
+2. If there is no task associated with the keyword `CS2103T`:
 
 ```console
 No task found...
@@ -202,14 +214,14 @@ Example of usage:
 
 Expected outcome:
 
-1. If there is task associated with the number:
+1. If there is task associated with the number `1`:
 
 ```console
 Nice! I have marked this task as done:
     [T][✓][MEDIUM] CS2103T iP
 ```
 
-2. If there is no task associated with the number:
+2. If there is no task associated with the number `1`:
 
 ```console
 The task number is not found
@@ -236,14 +248,14 @@ Example of usage:
 
 Expected outcome:
 
-1. If there is task associated with the number:
+1. If there is task associated with the number `1`:
 
 ```console
 Nice! I have updated the task priority: HIGH
     [T][✓][HIGH] CS2103T iP
 ```
 
-2. If there is no task associated with the number:
+2. If there is no task associated with the number `1`:
 
 ```console
 The task number is not found
