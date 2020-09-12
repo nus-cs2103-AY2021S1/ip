@@ -14,7 +14,15 @@ public class Storage {
 
     Storage(String filePath) throws IOException {
         //read data file path from filePath file
-        this.pointerFile = new File(filePath);
+        Path testPath = Paths.get(filePath);
+        File testFile = new File(filePath);
+        if (testFile.exists()) {
+            this.pointerFile  = testFile;
+        } else {
+            Files.createDirectories(testPath.getParent());
+            Files.createFile(testPath);
+            this.pointerFile  = new File(filePath);
+        }
         BufferedReader br = new BufferedReader(new FileReader(this.pointerFile));
         String dataFilePath = br.readLine();
         loadFile(dataFilePath);
@@ -29,6 +37,9 @@ public class Storage {
     }
 
     public void loadFile(String filePath) throws IOException {
+        if (filePath == null) {
+            filePath = "data/data.txt";
+        }
         Path testPath = Paths.get(filePath);
         File testFile = new File(filePath);
         if (testFile.exists()) {
