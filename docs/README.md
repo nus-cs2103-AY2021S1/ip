@@ -1,4 +1,5 @@
 # User Guide
+Duke is a convenient task manager that allow users to add, store, delete, and find tasks so that they can better manage their time!
 ![Duke](./Duke.png)
 ## Features 
 
