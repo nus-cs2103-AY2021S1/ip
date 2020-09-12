@@ -5,6 +5,8 @@ import main.java.farrell.duke.command.CommandParser;
 import main.java.farrell.duke.gui.UiManager;
 import main.java.farrell.duke.task.TaskList;
 
+import javax.swing.*;
+
 /**
  * A personal assistant chatbot that helps to keep track of tasks.
  */
@@ -13,7 +15,21 @@ public class Duke {
     private TaskList taskList;
 
     /** An object that handles saving and loading data */
-    private DataManager dataManager = new DataManager();
+    private DataManager dataManager;
+
+    public Duke() {
+        dataManager = new DataManager();
+        taskList = new TaskList();
+    }
+
+    public Duke(String dataPath) {
+        try {
+            dataManager = new DataManager(dataPath);
+            taskList = dataManager.load();
+        } catch (DukeException exception) {
+            taskList = new TaskList();
+        }
+    }
 
     /**
      * Starts a new instance of the program.
@@ -24,6 +40,7 @@ public class Duke {
      */
     public Duke(UiManager uiManager) {
         try {
+            dataManager = new DataManager();
             taskList = dataManager.load();
         } catch (DukeException exception) {
             uiManager.sendDukeMessage(exception.getMessage());

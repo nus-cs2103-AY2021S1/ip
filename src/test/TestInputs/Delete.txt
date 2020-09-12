@@ -1,0 +1,4 @@
+todo read book
+todo read novel
+delete 1
+list

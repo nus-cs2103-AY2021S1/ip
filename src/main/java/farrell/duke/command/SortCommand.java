@@ -30,6 +30,6 @@ public class SortCommand extends Command {
         default:
             throw new DukeException("Unknown sort type!");
         }
-        return sortedList;
+        return "Here are your tasks sorted by " + sortType.toLowerCase() + "\n" + sortedList;
     }
 }

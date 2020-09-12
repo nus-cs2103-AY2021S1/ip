@@ -17,9 +17,19 @@ import main.java.farrell.duke.task.TaskType;
  */
 public class DataManager {
     /** The file name to save and load data from */
-    private final String fileName = "data.txt";
+    private String fileName = "data.txt";
 
-    private final String directory = "data/";
+    private String directory = "data/";
+
+    public DataManager() {
+        this("data/data.txt");
+    }
+
+    public DataManager(String dataPath) {
+        File dataFile = new File(dataPath);
+        fileName = dataFile.getName();
+        directory = dataFile.getParent() + "/";
+    }
 
     /**
      * Writes the contents of a list of tasks to a file.

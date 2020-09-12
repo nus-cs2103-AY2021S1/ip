@@ -6,34 +6,124 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
-import main.java.farrell.duke.Main;
+import main.java.farrell.duke.Duke;
 
 public class DukeTest {
-    private TestManager testManager = new TestManager();
-    @Before
-    public void setUp() {
-        testManager.init();
-    }
-
-    @After
-    public void cleanUp() {
-        testManager.cleanUp();
-    }
-
     @Test
     public void duke_createToDo_toDoCreated() {
         try {
-            String output = Files.readString(Paths.get("ExpectedOutputs", "CreateToDo.txt"));
+            String expectedOutput = Files.readString(Paths.get("ExpectedOutputs", "CreateToDo.txt"));
             String input = Files.readString(Paths.get("TestInputs", "CreateToDo.txt"));
-            testManager.giveInput(input);
-            Main.main(new String[0]);
-            assertEquals(output, testManager.getOutput());
+
+            String output = runProgram(input);
+            assertEquals(expectedOutput, output);
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            System.out.println(e);
         }
+    }
+
+    @Test
+    public void duke_createEvent_eventCreated() {
+        try {
+            String expectedOutput = Files.readString(Paths.get("ExpectedOutputs", "CreateEvent.txt"));
+            String input = Files.readString(Paths.get("TestInputs", "CreateEvent.txt"));
+
+            String output = runProgram(input);
+            assertEquals(expectedOutput, output);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    @Test
+    public void duke_createDeadline_deadlineCreated() {
+        try {
+            String expectedOutput = Files.readString(Paths.get("ExpectedOutputs", "CreateDeadline.txt"));
+            String input = Files.readString(Paths.get("TestInputs", "CreateDeadline.txt"));
+
+            String output = runProgram(input);
+            assertEquals(expectedOutput, output);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    @Test
+    public void duke_done_taskDone() {
+        try {
+            String expectedOutput = Files.readString(Paths.get("ExpectedOutputs", "Done.txt"));
+            String input = Files.readString(Paths.get("TestInputs", "Done.txt"));
+
+            String output = runProgram(input);
+            assertEquals(expectedOutput, output);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    @Test
+    public void duke_delete_taskDeleted() {
+        try {
+            String expectedOutput = Files.readString(Paths.get("ExpectedOutputs", "Delete.txt"));
+            String input = Files.readString(Paths.get("TestInputs", "Delete.txt"));
+
+            String output = runProgram(input);
+            assertEquals(expectedOutput, output);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    @Test
+    public void duke_find_tasksFound() {
+        try {
+            String expectedOutput = Files.readString(Paths.get("ExpectedOutputs", "Find.txt"));
+            String input = Files.readString(Paths.get("TestInputs", "Find.txt"));
+
+            String output = runProgram(input);
+            assertEquals(expectedOutput, output);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    @Test
+    public void duke_sortByDescription_tasksSortedByDescription() {
+        try {
+            String expectedOutput = Files.readString(Paths.get("ExpectedOutputs", "SortByDescription.txt"));
+            String input = Files.readString(Paths.get("TestInputs", "SortByDescription.txt"));
+
+            String output = runProgram(input);
+            assertEquals(expectedOutput, output);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    @Test
+    public void duke_sortByDate_tasksSortedByDate() {
+        try {
+            String expectedOutput = Files.readString(Paths.get("ExpectedOutputs", "SortByDate.txt"));
+            String input = Files.readString(Paths.get("TestInputs", "SortByDate.txt"));
+
+            String output = runProgram(input);
+            assertEquals(expectedOutput, output);
+        } catch (IOException e) {
+            System.out.println(e);
+        }
+    }
+
+    private String runProgram(String input) {
+        Duke duke = new Duke();
+
+        StringBuilder sb = new StringBuilder();
+        for (String line : input.split("\n")) {
+            sb.append(duke.run(line));
+            sb.append("\n");
+        }
+
+        return sb.toString();
     }
 }

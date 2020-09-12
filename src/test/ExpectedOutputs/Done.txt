@@ -1,0 +1,6 @@
+Added: [T][✘] read book
+Added: [T][✘] read novel
+Nice! I've marked the this as done.
+[T][✓] read book
+1. [T][✓] read book
+2. [T][✘] read novel
