@@ -1,0 +1,20 @@
+dab
+list
+todo
+todo yeet
+list
+deadline
+deadline hehe
+deadline haha /by dab
+event /at
+event hoho
+event huhu /at yeet
+list
+done -1
+done 1
+done 4
+done 01
+list
+delete 1
+list
+bye
