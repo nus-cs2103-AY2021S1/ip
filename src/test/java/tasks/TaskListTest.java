@@ -10,7 +10,7 @@ import storage.Storage;
 public class TaskListTest {
 
     private final Storage store = new Storage("mug-test.txt");
-    {store.initialize();}
+    { store.initialize(); }
     private final TaskList taskList = new TaskList(store.load());
 
     @Test
