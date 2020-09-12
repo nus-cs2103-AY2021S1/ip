@@ -15,6 +15,7 @@ public class ScrollDialoguePane extends ScrollPane {
      */
     public ScrollDialoguePane() {
         super();
+        this.setStyle("-fx-background: #484747;");
 
         dialogContainer = new VBox();
         dialogContainer.heightProperty().addListener((observable) -> setVvalue(1.0));
@@ -23,7 +24,6 @@ public class ScrollDialoguePane extends ScrollPane {
         setContent(dialogContainer);
         setVbarPolicy(ScrollBarPolicy.ALWAYS);
         setFitToWidth(true);
-
 
     }
 

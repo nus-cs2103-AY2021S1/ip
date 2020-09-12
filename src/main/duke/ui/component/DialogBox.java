@@ -39,11 +39,13 @@ public class DialogBox extends HBox {
      * @return a DialogBox with the Duke's image and alignment.
      */
     public static DialogBox dukeDialog(Label l, ImageView iv) {
-        l.setBackground(new Background(new BackgroundFill(Color.rgb(179, 141, 151), new CornerRadii(3.0),
+        l.setBackground(new Background(new BackgroundFill(Color.rgb(176, 163, 212), new CornerRadii(3.0),
                 new Insets(0.0))));
         DialogBox db = new DialogBox(l, iv);
         db.setAlignment(Pos.TOP_LEFT);
         db.getChildren().addAll(db.displayPicture, db.text);
+        db.setBackground(new Background(new BackgroundFill(Color.rgb(86, 85, 84),
+                new CornerRadii(0.0), new Insets(-10.0))));
         return db;
     }
 
@@ -54,11 +56,13 @@ public class DialogBox extends HBox {
      * @return a DialogBox with the User's image and alignment.
      */
     public static DialogBox userDialog(Label l, ImageView iv) {
-        l.setBackground(new Background(new BackgroundFill(Color.rgb(213, 172, 169), new CornerRadii(3.0),
+        l.setBackground(new Background(new BackgroundFill(Color.rgb(153, 178, 221), new CornerRadii(3.0),
                 new Insets(0.0))));
         DialogBox db = new DialogBox(l, iv);
         db.setAlignment(Pos.TOP_RIGHT);
         db.getChildren().addAll(db.text, db.displayPicture);
+        db.setBackground(new Background(new BackgroundFill(Color.rgb(103, 102, 101),
+                new CornerRadii(0.0), new Insets(-10.0))));
         return db;
     }
 

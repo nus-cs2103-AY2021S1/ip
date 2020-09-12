@@ -64,7 +64,8 @@ public final class CommandParser {
                 throw new DukeArgumentException("Command did not match any known commands.");
             }
         } catch (ArrayIndexOutOfBoundsException e) {
-            throw new DukeArgumentException("Insufficient arguments for the command.");
+            throw new DukeArgumentException("Insufficient arguments for the command. Try typing \"help\" for a list "
+                    + "of commands");
         }
     }
 

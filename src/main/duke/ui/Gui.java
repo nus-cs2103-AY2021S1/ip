@@ -59,6 +59,8 @@ public class Gui extends Application {
         // Add settings for the components
         userInput.setPrefWidth(330);
         scrollDialoguePane.setPrefSize(385, 535);
+        scrollDialoguePane.setBackground(new Background(new BackgroundFill(Color.rgb(23, 36, 33),
+                new CornerRadii(0.0), new Insets(0.0))));
         layout.getChildren().addAll(userInput, sendButton, scrollDialoguePane);
         layout.setPrefSize(390, 570);
         layout.setBackground(new Background(new BackgroundFill(Color.rgb(23, 36, 33),
@@ -80,12 +82,10 @@ public class Gui extends Application {
     public void start(Stage stage) {
         // Stage initialisation
         Scene scene = new Scene(layout);
-
         stage.setTitle("Duke");
         stage.setResizable(false);
-
-
         stage.setScene(scene);
+
         stage.show();
 
         exitPause.setOnFinished(event -> stage.close());
