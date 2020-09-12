@@ -1,20 +1,203 @@
-# User Guide
+# Duke User Guide
 
-## Features 
+## Features
 
-### Feature 1 
-Description of feature.
+### Add a `Deadline` task
 
-## Usage
+Add a `Deadline` task and save it to the `./data/tasks.txt` file.
 
-### `Keyword` - Describe action
+### Usage
 
-Describe action and its outcome.
+### `deadline [task name] /by [yyyy-mm-dd]` - add a `Deadline` task
 
-Example of usage: 
+Enter the command to add a `Deadline` task and save it to the `./data/tasks.txt` file.
 
-`keyword (optional arguments)`
+Example of usage:
+
+`deadline CS2103T iP /by 2020-09-18`
 
 Expected outcome:
 
-`outcome`
+```console
+Got it. I've added this task:
+    [D][✗][MEDIUM] CS2103T iP (by: Sep 18 2020)
+Now you have 1 tasks in the list.
+```
+
+### Add a `Event` task
+
+Add a `Event` task and save it to the `./data/tasks.txt` file.
+
+### Usage
+
+### `event [task name] /at [time]` - add a `Event` task
+
+Enter the command to add a `Event` task and save it to the `./data/tasks.txt` file.
+
+Example of usage:
+
+`event CS2103T iP /at Sep 18, 2359`
+
+Expected outcome:
+
+```console
+Got it. I've added this task:
+    [E][✗][MEDIUM] CS2103T iP (at Sep 18, 2359)
+Now you have 1 tasks in the list.
+```
+
+### Add a `Todo` task
+
+Add a `Todo` task and save it to the `./data/tasks.txt` file.
+
+### Usage
+
+### `todo [task name]` - add a `Todo` task
+
+Enter the command to add a `Todo` task and save it to the `./data/tasks.txt` file.
+
+Example of usage:
+
+`todo CS2103T iP`
+
+Expected outcome:
+
+```console
+Got it. I've added this task:
+    [T][✗][MEDIUM] CS2103T iP
+Now you have 1 tasks in the list.
+```
+
+### Delete a `Task`
+
+Delete a `Task` and update `./data/tasks.txt` file.
+
+### Usage
+
+### `delete [task number]` - delete a `Task`
+
+Enter the command to delete a `Task` and update `./data/tasks.txt` file.
+
+Example of usage:
+
+`delete 1`
+
+Expected outcome:
+
+```console
+Noted. I have removed this task:
+    [T][✗][MEDIUM] CS2103T iP
+Now you have 1 tasks in the list.
+```
+
+### Exit Duke application
+
+Exit Duke application.
+
+### Usage
+
+### `bye` - exit application
+
+Enter the command to exit and close Duke application.
+
+Example of usage:
+
+`bye`
+
+Expected outcome:
+
+```console
+Bye. See you again soon!
+```
+
+### List tasks
+
+List all the saved tasks from `./data/tasks.txt` file.
+
+### Usage
+
+### `list` - list all the saved tasks
+
+Enter the command to display all the tasks.
+
+Example of usage:
+
+`list`
+
+Expected outcome:
+
+1. If there is any task:
+
+```console
+Here are the tasks in your list:
+    1.[T][✗][MEDIUM] task
+```
+
+2. If there is no task:
+
+```console
+No task added yet...
+```
+
+### Mark task as done
+
+Mark a task as done and update `./data/tasks.txt` file.
+
+### Usage
+
+### `done [task number]` - mark the task as done
+
+Enter the command to mark the task as done and update `./data/tasks.txt` file.
+
+Example of usage:
+
+`done 1`
+
+Expected outcome:
+
+1. If there is task associated with the number:
+
+```console
+Nice! I have marked this task as done:
+    [T][✓][MEDIUM] CS2103T iP
+```
+
+2. If there is no task associated with the number:
+
+```console
+The task number is not found
+```
+
+### Prioritise a task
+
+Mark a task priority and update `./data/tasks.txt` file.
+
+### Usage
+
+### `priority [task number] [priority level]` - mark the task priority
+
+Enter the command to mark the task priority and update `./data/tasks.txt` file.
+Priority level:
+
+- `1`: low
+- `2`: medium (default)
+- `3`: high
+
+Example of usage:
+
+`priority 1 3`
+
+Expected outcome:
+
+1. If there is task associated with the number:
+
+```console
+Nice! I have updated the task priority: HIGH
+    [T][✓][HIGH] CS2103T iP
+```
+
+2. If there is no task associated with the number:
+
+```console
+The task number is not found
+```
