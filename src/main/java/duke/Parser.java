@@ -32,24 +32,27 @@ public class Parser {
 
         case ListCommand.COMMAND_WORD:
             return new ListCommand();
+        case OwoCommand.COMMAND_WORD:
+            return new OwoCommand();
+        case UwuCommand.COMMAND_WORD:
+            return new UwuCommand();
+        case ExitCommand.COMMAND_WORD:
+            return new ExitCommand();
         case FindCommand.COMMAND_WORD_FIND:
             if (checkInputLength(splitCommand, 2)) {
                 return new FindCommand(splitCommand[1]);
             }
+            // Fallthrough
         case DeleteCommand.COMMAND_WORD:
             if (checkInputLength(splitCommand, 2)) {
                 return prepareDelete(splitCommand[1]);
             }
+            // Fallthrough
         case DoneCommand.COMMAND_WORD:
             if (checkInputLength(splitCommand, 2)) {
                 return prepareDone(splitCommand[1]);
             }
-        case OwoCommand.COMMAND_WORD:
-            return new OwoCommand();
-
-        case UwuCommand.COMMAND_WORD:
-            return new UwuCommand();
-
+            // Fallthrough
         case AddCommand.COMMAND_WORD_TODO:
             // Fallthrough
         case AddCommand.COMMAND_WORD_DEADLINE:
@@ -58,8 +61,7 @@ public class Parser {
             if (checkInputLength(splitCommand, 2)) {
                 return prepareAdd(commandWord, splitCommand[1]);
             }
-        case ExitCommand.COMMAND_WORD:
-            return new ExitCommand();
+            // Fallthrough
         default:
             throw new DukeException("I don't understand what you're saying HMM...");
         }
@@ -97,15 +99,17 @@ public class Parser {
         case ("todo"):
             return new AddCommand(new Todo(description));
         case ("deadline"):
-            String[] delete = description.split(" /by ", 2);
-            if (checkInputLength(delete, 2)) {
-                return new AddCommand(new Deadline(delete[0], delete[1].replace('/', '-')));
+            String[] deadline = description.split(" /by ", 2);
+            if (checkInputLength(deadline, 2)) {
+                return new AddCommand(new Deadline(deadline[0], deadline[1].replace('/', '-')));
             }
+            // Fallthrough
         case ("event"):
             String[] event = description.split(" /at ", 2);
             if (checkInputLength(event, 2)) {
                 return new AddCommand(new Deadline(event[0], event[1].replace('/', '-')));
             }
+            // Fallthrough
         default:
             throw new DukeException("Couldn't add item..");
         }

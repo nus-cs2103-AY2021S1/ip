@@ -53,8 +53,10 @@ public class Storage {
         try {
             Scanner scanner = new Scanner(this.file);
             while (scanner.hasNextLine()) {
+                // extract task details eg. type of task, if it is done, task description and date
                 String[] currLine = scanner.nextLine().split(" \\| ");
                 String typeOfTask = currLine[0];
+                // adds task objects to current task list
                 switch (typeOfTask) {
                 case "T":
                     Task todo = new Todo(currLine[2]);
@@ -77,6 +79,8 @@ public class Storage {
                     }
                     list.add(event);
                     break;
+                default:
+                    throw new DukeException("Trouble encountered when loading file :c");
                 }
             }
             return list;
@@ -93,6 +97,7 @@ public class Storage {
      */
     public void saveTaskList(String taskToAdd) throws DukeException {
         try {
+            // appends task to local saved file
             FileWriter fw = new FileWriter(this.file, true);
             fw.write(taskToAdd + "\n");
             fw.close();

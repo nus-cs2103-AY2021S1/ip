@@ -36,6 +36,7 @@ public class Duke {
      */
     public String getResponse(String input) {
         try {
+            // interpret user input
             Command c = Parser.parse(input);
             assert tasks != null : "task list should not be uninitialised";
             assert ui != null : "ui should not be uninitialised";
