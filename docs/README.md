@@ -13,7 +13,7 @@ Here are the commands to add different types of tasks into your tasklist
 <details>
 <summary>Add Todo</summary>
 
-##`todo`
+## `todo`
 <br>
 <br>
 Type "todo" followed by a space and then type in the 'todo' you wish to add into your list
@@ -26,7 +26,7 @@ Type "todo" followed by a space and then type in the 'todo' you wish to add into
 <details>
 <summary>Add deadline</summary>
 
-##`deadline`
+## `deadline`
 <br>
 <br>
 Type "deadline" followed by description of deadline, then followed by  "/by" followed by a space and then type the rest of the description
@@ -40,7 +40,7 @@ Input date via 'YYYY-MM-DD' format and time in 'HH:MM' format if you wish to add
 <details>
 <summary>Add event</summary>
 
-##`event`
+## `event`
 <br>
 <br>
 *Type "event" followed by description of event, then followed by "/at" followed by a space and then type in ther rest of the description
