@@ -18,6 +18,7 @@ public class Clippy {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
+            tasks.updateAllTaskIndices();
         } catch (ClippyException e) {
             ui.showError(e);
             tasks = new TaskList();
@@ -33,6 +34,7 @@ public class Clippy {
         storage = new Storage(filePath);
         try {
             tasks = new TaskList(storage.load());
+            tasks.updateAllTaskIndices();
         } catch (ClippyException e) {
             ui.showError(e);
             tasks = new TaskList();

@@ -8,7 +8,8 @@ public class AddToDoCommand extends AddCommand {
         Task newTask = new ToDo(taskDescription);
         tasks.add(newTask);
         String output = ui.showAdded(newTask, tasks.size());
-        
+
+        tasks.updateAllTaskIndices();
         storage.save(tasks);
         
         return output;

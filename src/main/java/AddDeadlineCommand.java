@@ -31,6 +31,7 @@ public class AddDeadlineCommand extends AddCommand {
         tasks.add(newTask);
         String output = ui.showAdded(newTask, tasks.size());
         
+        tasks.updateAllTaskIndices();
         storage.save(tasks);
         
         return output;

@@ -2,6 +2,7 @@ public abstract class Task {
     protected String desc;
     protected boolean isDone;
     protected TaskType taskType;
+    private int index;
     
     private final String SYMBOL_TICK = "\u2713";
     private final String SYMBOL_CROSS = "\u2718";
@@ -9,6 +10,14 @@ public abstract class Task {
     public Task(String desc) {
         this.desc = desc;
         this.isDone = false;
+    }
+    
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public int getTaskIndexInList() {
+        return index;
     }
 
     public String getStatusIcon() {

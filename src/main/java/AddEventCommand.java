@@ -11,7 +11,8 @@ public class AddEventCommand extends AddCommand {
         Task newTask = new Event(taskDescription, at);
         tasks.add(newTask);
         String output = ui.showAdded(newTask, tasks.size());
-        
+
+        tasks.updateAllTaskIndices();
         storage.save(tasks);
         
         return output;

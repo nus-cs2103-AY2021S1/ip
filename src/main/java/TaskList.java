@@ -28,6 +28,13 @@ public class TaskList {
         return innerList.get(i - 1);
     }
     
+    public void updateAllTaskIndices() {
+        for (int i = 0; i < innerList.size(); i++) {
+            Task t = innerList.get(i);
+            t.setIndex(i + 1);
+        }
+    }
+    
     public boolean isEmpty() {
         return innerList.isEmpty();
     }
