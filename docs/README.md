@@ -19,26 +19,16 @@ With reference to the screenshot:
 The current features available are:
 
 Feature | Purpose
-
 ------------ | -------------
-
 `todo <task name>` | adds a todo task  
-
 `deadline <task name> /by <deadline>` | adds a deadline task
-  
 `event <task name> /at <event time>` | adds an event task
-
-`fixed <task name> /for <duration>` | adds a fixed-duration task 
-   
+`fixed <task name> /for <duration>` | adds a fixed-duration task  
 `list`| shows the current tasks in the list
-
 `done <task number>` | marks a specific task as done
-
 `delete <task number>` | removes a specific task
-
 `find <keyword>` | shows a task that contains a given keyword
-
-`bye` | terminates the bot 
+`bye` | terminates the bot
 
 -----------------------------
 
