@@ -82,6 +82,9 @@ public class Parser {
             }
             return parseFind(splitByCommand[1].strip().toLowerCase());
         case "confirm":
+            if (splitByCommand.length < 2) {
+                throw new InvalidCommandFormatException();
+            }
             return parseConfirm(splitByCommand[1].strip());
         default:
             throw new InvalidCommandException();
@@ -172,8 +175,8 @@ public class Parser {
             int taskIndex = Integer.parseInt(argumentArray[0]) - 1;
             int tentativeIndex = Integer.parseInt(argumentArray[1]) - 1;
             return new ConfirmCommand(taskIndex, tentativeIndex);
-        } catch (NumberFormatException e) {
-            throw new InvalidCommandException();
+        } catch (NumberFormatException | ArrayIndexOutOfBoundsException e) {
+            throw new InvalidCommandFormatException();
         }
     }
 }
