@@ -22,8 +22,15 @@ public class Ui {
 
     public String sayHi() {
         String str = ("\t" + line + "\n"
-                + "\tSup dude! Am duke :D\n"
-                + "\tWhat can I do for you?\n"
+                + "\tHi I am RollRoll :D\n"
+                + "\tYour Todo-list helper teehee\n"
+                + "\tTell me the following words and i will \n\thelp you track your tasks:\n"
+                + "\t\t 1. todo <task>\n"
+                + "\t\t 2. deadline <task> /by <YYYY-MM-DD>\n"
+                + "\t\t 3. event <task> /at <YYYY-MM-DD>\n"
+                + "\t\t 4. done <number of the task>\n"
+                + "\t\t 5. delete <number of the task>\n"
+                + "\t\t 6. list\n"
                 + "\t" + line);
         return (str);
     }
