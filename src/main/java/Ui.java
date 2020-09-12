@@ -23,7 +23,7 @@ public class Ui {
                 + "| |_| | |_| |   <  __/\n"
                 + "|____/ \\__,_|_|\\_\\___|\n";
         System.out.println("Hello from\n" + logo);
-        System.out.println(format + "Hello! I'm Duke");
+        System.out.println(format + "Hello! I'm Jarvis");
         System.out.println(format + "What can I do for you?");
     }
 

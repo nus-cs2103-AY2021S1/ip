@@ -7,14 +7,14 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Jarvis using FXML.
  */
 public class Main extends Application {
 
-    private Duke duke;
+    private Jarvis jarvis;
 
     public Main() throws IOException {
-        this.duke = new Duke("data/pointer.txt");
+        this.jarvis = new Jarvis("data/pointer.txt");
     }
 
     @Override
@@ -24,7 +24,7 @@ public class Main extends Application {
             AnchorPane ap = fxmlLoader.load();
             Scene scene = new Scene(ap);
             stage.setScene(scene);
-            fxmlLoader.<MainWindow>getController().setDuke(duke);
+            fxmlLoader.<MainWindow>getController().setJarvis(jarvis);
             stage.show();
         } catch (IOException e) {
             e.printStackTrace();
