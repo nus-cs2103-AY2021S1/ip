@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.Statistics;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.tasks.Task;
 
 /**
@@ -29,16 +29,17 @@ public class DoneCommand extends Command {
      * and displays acknowledgement message that task has been marked as done to user.
      *
      * @param tasks Task list representing current tasks.
-     * @param ui User interface interacting with user.
      * @param storage Storage Storage in charge of saving file to hard disk.
      * @return A string representing Duke's response after executing command.
      * @throws DukeException If unable to edit task file.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage, Statistics stats) throws DukeException {
 
         Task task = tasks.doneTask(taskNum);
         storage.editTaskList(task.saveToString(), taskNum, false);
+        storage.updateStats(2);
+        stats.incrementDoneStats();
         return String.format("%s\n%s\n%s", MESSAGE_DONE_ACKNOWLEDGEMENT,
                 task.toString(), MESSAGE_DONE_END);
 

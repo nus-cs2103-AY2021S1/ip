@@ -9,20 +9,31 @@ public class Duke {
     private Storage storage;
     private TaskList tasks;
     private Ui ui;
+    private Statistics stats;
 
-    private Duke(String filePath) {
+    private Duke(String filePathTasks, String filePathStats) {
         ui = new Ui();
         try {
-            storage = new Storage(filePath);
-            tasks = new TaskList(storage.load());
+            storage = new Storage(filePathTasks, filePathStats);
+        } catch (DukeException e) {
+            ui.showError(e.toString());
+        }
+        try {
+            tasks = new TaskList(storage.loadTasks());
         } catch (DukeException e) {
             ui.showError(e.toString());
             tasks = new TaskList();
         }
+        try {
+            stats = new Statistics(storage.loadStats());
+        } catch (DukeException e) {
+            ui.showError(e.toString());
+            stats = new Statistics();
+        }
     }
 
     public static Duke createDuke() {
-        return new Duke("data/tasks.txt");
+        return new Duke("data/tasks.txt", "data/stats.txt");
     }
 
     public String getWelcome() {

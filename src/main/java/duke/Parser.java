@@ -7,6 +7,7 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
+import duke.command.StatsCommand;
 import duke.command.OwoCommand;
 import duke.command.UwuCommand;
 import duke.tasks.Deadline;
@@ -38,6 +39,8 @@ public class Parser {
             return new UwuCommand();
         case ExitCommand.COMMAND_WORD:
             return new ExitCommand();
+        case StatsCommand.COMMAND_WORD:
+            return new StatsCommand();
         case FindCommand.COMMAND_WORD_FIND:
             if (checkInputLength(splitCommand, 2)) {
                 return new FindCommand(splitCommand[1]);

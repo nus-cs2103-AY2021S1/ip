@@ -1,8 +1,8 @@
 package duke.command;
 
+import duke.Statistics;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 
 /**
  * Represents a list command.
@@ -14,12 +14,11 @@ public class ListCommand extends Command {
      * Displays all current tasks.
      *
      * @param tasks Task list representing current tasks.
-     * @param ui User interface interacting with user.
      * @param storage Storage Storage in charge of saving file to hard disk.
      * @return A string representing Duke's response after executing command.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) {
+    public String execute(TaskList tasks, Storage storage, Statistics stats) {
         return tasks.listAllTasks();
     }
 

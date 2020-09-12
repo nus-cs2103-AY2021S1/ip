@@ -1,9 +1,9 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.Statistics;
 import duke.Storage;
 import duke.TaskList;
-import duke.Ui;
 import duke.tasks.Task;
 
 /**
@@ -31,15 +31,16 @@ public class AddCommand extends Command {
      * and displays acknowledgement message that task has been added to user.
      *
      * @param tasks Task list representing current tasks.
-     * @param ui User interface interacting with user.
      * @param storage Storage Storage in charge of saving file to hard disk.
      * @return A string representing Duke's response after executing command.
      * @throws DukeException If unable to either add task or save task file.
      */
     @Override
-    public String execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
+    public String execute(TaskList tasks, Storage storage, Statistics stats) throws DukeException {
         tasks.addTask(task);
         storage.saveTaskList(task.saveToString());
+        storage.updateStats(0);
+        stats.incrementAddedStats();
         return String.format("%s\n%s\n%s%d!", MESSAGE_ADD_ACKNOWLEDGEMENT, task.toString(),
                 MESSAGE_ADD_UPDATE, tasks.getTaskCount());
     }
