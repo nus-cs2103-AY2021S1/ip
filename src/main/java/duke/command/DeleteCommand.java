@@ -2,6 +2,7 @@ package duke.command;
 
 import java.io.IOException;
 
+import duke.MerchandiseList;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -14,17 +15,18 @@ public class DeleteCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage,
+                        MerchandiseList merchandises) {
         try {
             String response = "Noted. I've removed this task:\n";
             int itemNumber = Integer.parseInt(itemToDelete) - 1;
-            response += tasks.getList().get(itemNumber) + "\n";
+            response += tasks.getTasks().get(itemNumber) + "\n";
             tasks.deleteTask(itemNumber);
-            storage.updateDataFile(tasks.getList());
-            if (tasks.getList().size() > 1) {
-                response += "Now you have " + tasks.getList().size() + " tasks in your list.";
+            storage.updateTasksFile(tasks.getTasks());
+            if (tasks.getTasks().size() > 1) {
+                response += "Now you have " + tasks.getTasks().size() + " tasks in your list.";
             } else {
-                response += "Now you have " + tasks.getList().size() + " task in your list.";
+                response += "Now you have " + tasks.getTasks().size() + " task in your list.";
             }
             ui.setResponse(response);
         } catch (IOException error) {

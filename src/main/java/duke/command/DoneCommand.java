@@ -2,6 +2,7 @@ package duke.command;
 
 import java.io.IOException;
 
+import duke.MerchandiseList;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -14,13 +15,14 @@ public class DoneCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage,
+                        MerchandiseList merchandises) {
         try {
             int itemNumber = Integer.parseInt(itemToMarkAsDone) - 1;
             String response = "Nice! I've marked this task as done:\n";
-            tasks.markAsDone(itemNumber);
-            response += tasks.getList().get(itemNumber);
-            storage.updateDataFile(tasks.getList());
+            tasks.markTaskAsDone(itemNumber);
+            response += tasks.getTasks().get(itemNumber);
+            storage.updateTasksFile(tasks.getTasks());
             ui.setResponse(response);
         } catch (IOException error) {
             ui.setResponse(error.getMessage());

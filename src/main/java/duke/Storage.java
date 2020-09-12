@@ -1,9 +1,11 @@
 package duke;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.lang.reflect.Array;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -22,7 +24,6 @@ import duke.task.ToDo;
 public class Storage {
 
     private final String filePath;
-    private Merchandise merchandise;
 
     /**
      * Constructor for a Storage object.
@@ -40,60 +41,62 @@ public class Storage {
      * @return An arraylist which contains the Tasks stored in the file.
      * @throws DukeException if an IO error occurred and createNewFile() throws IOException.
      */
-    public ArrayList<Task> load() throws DukeException {
+    public ArrayList<Task> loadTasks() throws DukeException {
         try {
-            File file = new File(filePath);
-            ArrayList<Task> list = new ArrayList<>();
-            boolean hasFolder = file.getParentFile().mkdirs();
-            boolean hasFile = file.createNewFile();
-            if (!hasFile && !hasFolder) {
-                Scanner sc = new Scanner(file);
-                while (sc.hasNext()) {
-                    String task = sc.nextLine();
-                    String[] taskDetails = task.split(" \\| ");
-                    String taskType = taskDetails[0];
-                    String isTaskDone = taskDetails[1];
-                    String taskName = taskDetails[2];
-                    String taskTime;
-                    if (taskType.equals("T")) {
-                        list.add(new ToDo(taskName));
-                    } else if (taskType.equals("D")) {
-                        taskTime = taskDetails[3];
-                        list.add(new Deadline(taskName, LocalDate.parse(taskTime)));
-                    } else if (taskType.equals("E")) {
-                        taskTime = taskDetails[3];
-                        list.add(new Event(taskName, LocalDate.parse(taskTime)));
-                    } else {
-                        taskType = "unknown";
-                    }
-                    if (isTaskDone.equals("1")) {
-                        list.get(list.size() - 1).setAsDone();
-                    }
-                    assert taskType != "unknown" : "Task type was not saved properly";
-                    assert isTaskDone.equals("0") || isTaskDone.equals("1")
-                            : "IsDone was not saved properly";
-                    if (isTaskDone.equals("1")) {
-                        list.get(list.size() - 1).setAsDone();
-                    }
-                }
-                sc.close();
-            }
-            return list;
+            File file = new File(filePath + "/tasks.txt");
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+            return readTasksFile(file);
         } catch (IOException error) {
             throw new DukeException("IOException");
         }
     }
 
+    public ArrayList<Task> readTasksFile(File file) throws FileNotFoundException {
+        ArrayList<Task> tasks = new ArrayList<>();
+        Scanner sc = new Scanner(file);
+        while (sc.hasNext()) {
+            String task = sc.nextLine();
+            String[] taskDetails = task.split(" \\| ");
+            String taskType = taskDetails[0];
+            String isTaskDone = taskDetails[1];
+            String taskName = taskDetails[2];
+            String taskTime;
+            if (taskType.equals("T")) {
+                tasks.add(new ToDo(taskName));
+            } else if (taskType.equals("D")) {
+                taskTime = taskDetails[3];
+                tasks.add(new Deadline(taskName, LocalDate.parse(taskTime)));
+            } else if (taskType.equals("E")) {
+                taskTime = taskDetails[3];
+                tasks.add(new Event(taskName, LocalDate.parse(taskTime)));
+            } else {
+                taskType = "unknown";
+            }
+            if (isTaskDone.equals("1")) {
+                tasks.get(tasks.size() - 1).setAsDone();
+            }
+            assert taskType != "unknown" : "Task type was not saved properly";
+            assert isTaskDone.equals("0") || isTaskDone.equals("1")
+                    : "IsDone was not saved properly";
+            if (isTaskDone.equals("1")) {
+                tasks.get(tasks.size() - 1).setAsDone();
+            }
+        }
+        sc.close();
+        return tasks;
+    }
+
     /**
      * Updates the data file to store all the Tasks in the list.
      *
-     * @param list An arraylist which contains information for all the Tasks.
+     * @param tasks An arraylist which contains information for all the Tasks.
      * @throws IOException if the file in filePath does not exist or cannot be opened.
      */
-    public void updateDataFile(ArrayList<Task> list) throws IOException {
-        FileWriter writer = new FileWriter(filePath);
+    public void updateTasksFile(ArrayList<Task> tasks) throws IOException {
+        FileWriter writer = new FileWriter(filePath + "/tasks.txt");
         PrintWriter printLine = new PrintWriter(writer);
-        for (Task task : list) {
+        for (Task task : tasks) {
             String taskDetails;
             String isTaskDone = task.getIsDone() ? "1" : "0";
             if (task instanceof ToDo) {
@@ -113,11 +116,35 @@ public class Storage {
         printLine.close();
     }
 
-    public Merchandise loadMerchandise() {
-        return merchandise;
+    public ArrayList<Merchandise> loadMerchandises() throws DukeException {
+        try {
+            File file = new File(filePath + "/merchandises.txt");
+            file.getParentFile().mkdirs();
+            file.createNewFile();
+            return readMerchandisesFile(file);
+        } catch (IOException error) {
+            throw new DukeException("IOException");
+        }
     }
 
-    public void addMerchandise(Merchandise merchandise) {
-        this.merchandise = merchandise;
+    public ArrayList<Merchandise> readMerchandisesFile(File file) throws FileNotFoundException {
+        ArrayList<Merchandise> merchandises = new ArrayList<>();
+        Scanner sc = new Scanner(file);
+        while (sc.hasNext()) {
+            String itemName = sc.nextLine();
+            merchandises.add(new Merchandise(itemName));
+        }
+        sc.close();
+        return merchandises;
+    }
+
+    public void updateMerchandisesFile(ArrayList<Merchandise> merchandises) throws IOException {
+        FileWriter writer = new FileWriter(filePath + "/merchandises.txt");
+        PrintWriter printLine = new PrintWriter(writer);
+        for (Merchandise merchandise : merchandises) {
+            String merchandiseDetails = merchandise.getItemName();
+            printLine.printf("%s\n", merchandiseDetails);
+        }
+        printLine.close();
     }
 }

@@ -9,22 +9,22 @@ import duke.task.Task;
  * to modify the list.
  */
 public class TaskList {
-    private final ArrayList<Task> list;
+    private final ArrayList<Task> tasks;
 
     /**
      * Constructor for a TaskList object with a new list.
      */
     public TaskList() {
-        this.list = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 
     /**
      * Constructor for a TaskList object with an existing list.
      *
-     * @param list An arraylist which is used to store Tasks.
+     * @param taskArrayList An arraylist which is used to store Tasks.
      */
-    public TaskList(ArrayList<Task> list) {
-        this.list = list;
+    public TaskList(ArrayList<Task> taskArrayList) {
+        this.tasks = taskArrayList;
     }
 
     /**
@@ -32,8 +32,8 @@ public class TaskList {
      *
      * @return An arraylist containing all the Tasks stored in the TaskList.
      */
-    public ArrayList<Task> getList() {
-        return this.list;
+    public ArrayList<Task> getTasks() {
+        return this.tasks;
     }
 
     /**
@@ -42,7 +42,7 @@ public class TaskList {
      * @param task A Task which contains the name and details of a task.
      */
     public void addTask(Task task) {
-        list.add(task);
+        tasks.add(task);
     }
 
     /**
@@ -51,8 +51,8 @@ public class TaskList {
      *
      * @param number The number of the task to be marked as done.
      */
-    public void markAsDone(int number) {
-        list.get(number).setAsDone();
+    public void markTaskAsDone(int number) {
+        tasks.get(number).setAsDone();
     }
 
     /**
@@ -61,6 +61,6 @@ public class TaskList {
      * @param number The number of the task to be deleted from the list.
      */
     public void deleteTask(int number) {
-        list.remove(number);
+        tasks.remove(number);
     }
 }

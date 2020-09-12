@@ -8,7 +8,6 @@ import duke.command.DoneCommand;
 import duke.command.ExitCommand;
 import duke.command.FindCommand;
 import duke.command.ListCommand;
-import duke.command.NewMerchandiseCommand;
 import duke.command.NoCommand;
 import duke.command.ViewMerchandiseCommand;
 import duke.task.TaskType;
@@ -36,7 +35,7 @@ public class Parser {
             return new ExitCommand();
         case "list":
             return new ListCommand();
-        case "done": //put liens 37 - 40 into DoneCommand
+        case "done":
             if (inputArray.length == 1 || inputArray[1].trim().equals("")) {
                 throw new DukeException("Which task do you want to mark as done?");
             }
@@ -88,8 +87,6 @@ public class Parser {
             taskName = taskDetails[0];
             taskTime = taskDetails[1];
             return new AddCommand(TaskType.EVENT, taskName, taskTime);
-        case "new":
-            return new NewMerchandiseCommand(input);
         case "view":
             return new ViewMerchandiseCommand(input);
         case "addItem":

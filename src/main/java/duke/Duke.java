@@ -15,6 +15,7 @@ public class Duke {
     private final Storage storage;
     private TaskList tasks;
     private final Ui ui;
+    private MerchandiseList merchandises;
 
     /**
      * Constructor for Duke.
@@ -25,11 +26,13 @@ public class Duke {
         ui = new Ui();
         storage = new Storage(filePath);
         try {
-            tasks = new TaskList(storage.load());
+            tasks = new TaskList(storage.loadTasks());
+            merchandises = new MerchandiseList(storage.loadMerchandises());
         } catch (DukeException e) {
             ui.setResponse("File can't be loaded.");
             ui.showResponse();
             tasks = new TaskList();
+            merchandises = new MerchandiseList();
         }
     }
 
@@ -41,7 +44,7 @@ public class Duke {
         String response;
         try {
             Command c = Parser.parse(input);
-            c.execute(tasks, ui, storage);
+            c.execute(tasks, ui, storage, merchandises);
             response = ui.showResponse();
         } catch (DukeException e) {
             response = e.getMessage();

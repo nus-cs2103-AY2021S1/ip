@@ -1,10 +1,10 @@
 package duke.command;
 
 import duke.DukeException;
+import duke.MerchandiseList;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
-import duke.merchandise.Merchandise;
 
 public class ViewMerchandiseCommand implements Command {
     private final String userInput;
@@ -14,14 +14,10 @@ public class ViewMerchandiseCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) throws DukeException {
-        String[] inputArray = userInput.split(" ", 2);
-        if (inputArray.length == 1 || inputArray[1].trim().equals("")) {
-            throw new DukeException("This collection does not exist.");
-        }
-        Merchandise merchandise = storage.loadMerchandise();
-        String response = "This is your collection of " + merchandise + ":\n";
-        response += merchandise.printCollection();
+    public void execute(TaskList tasks, Ui ui, Storage storage,
+                        MerchandiseList merchandises) throws DukeException {
+        String response = "This is your collection of (merchandise):\n";
+        response += merchandises.printCollection();
         ui.setResponse(response);
     }
 }

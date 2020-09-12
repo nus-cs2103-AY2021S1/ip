@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.time.DateTimeException;
 import java.time.LocalDate;
 
+import duke.MerchandiseList;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -35,7 +36,8 @@ public class AddCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage,
+                        MerchandiseList merchandises) {
         try {
             Task task;
             String response = "Got it. I've added this task:\n";
@@ -52,10 +54,10 @@ public class AddCommand implements Command {
             }
             assert task != null: "Task should never be null";
             tasks.addTask(task);
-            storage.updateDataFile(tasks.getList());
+            storage.updateTasksFile(tasks.getTasks());
             response += task + "\n";
-            if (tasks.getList().size() > 1) {
-                response += "Now you have " + tasks.getList().size() + " tasks in your list.";
+            if (tasks.getTasks().size() > 1) {
+                response += "Now you have " + tasks.getTasks().size() + " tasks in your list.";
             } else {
                 response += "Now you have 1 task in your list.";
             }

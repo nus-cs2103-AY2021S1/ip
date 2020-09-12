@@ -2,6 +2,7 @@ package duke.command;
 
 import java.util.ArrayList;
 
+import duke.MerchandiseList;
 import duke.Storage;
 import duke.TaskList;
 import duke.Ui;
@@ -15,9 +16,10 @@ public class FindCommand implements Command {
     }
 
     @Override
-    public void execute(TaskList tasks, Ui ui, Storage storage) {
+    public void execute(TaskList tasks, Ui ui, Storage storage,
+                        MerchandiseList merchandises) {
         ArrayList<Task> list = new ArrayList<>();
-        for (Task task : tasks.getList()) {
+        for (Task task : tasks.getTasks()) {
             if (task.getName().contains(keyword)) {
                 list.add(task);
             }
