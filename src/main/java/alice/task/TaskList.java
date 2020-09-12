@@ -15,14 +15,14 @@ public class TaskList {
     private final ArrayList<Task> tasks;
 
     /**
-     * Creates a new TaskList.
+     * Create a new TaskList.
      */
     public TaskList() {
         tasks = new ArrayList<>();
     }
 
     /**
-     * Creates a new TaskList from previously saved tasks.
+     * Create a new TaskList from previously saved tasks.
      *
      * @param encodedTasks list of string of saved tasks from the previous session, if any.
      * @param logger       the consumer that takes in a String to be logged in the StorageFile
@@ -62,7 +62,7 @@ public class TaskList {
     }
 
     /**
-     * Encodes the list of tasks into a list of strings for saving.
+     * Encode the list of tasks into a list of strings for saving.
      * The tasks are encoded in a form that ALICE can understand.
      *
      * @return the list of string representation of the encoded tasks.
@@ -76,7 +76,7 @@ public class TaskList {
     }
 
     /**
-     * Gets the string representation of all the tasks.
+     * Get the string representation of all the tasks.
      *
      * @return the string representation of all tasks, or null if there are no tasks.
      */
@@ -94,7 +94,7 @@ public class TaskList {
     }
 
     /**
-     * Searches for all tasks that matches any of the keywords.
+     * Search for all tasks that matches any of the keywords.
      *
      * @param keywords the list of keywords to search against.
      * @return the string representation of all tasks that matches.
@@ -120,7 +120,7 @@ public class TaskList {
     }
 
     /**
-     * Gets the number of tasks in TaskList.
+     * Get the number of tasks in TaskList.
      *
      * @return number of tasks.
      */
@@ -129,7 +129,7 @@ public class TaskList {
     }
 
     /**
-     * Adds the task to TaskList.
+     * Add the task to TaskList.
      *
      * @param t the task to be added.
      */
@@ -139,7 +139,7 @@ public class TaskList {
     }
 
     /**
-     * Marks a task as done.
+     * Mark a task as done.
      *
      * @param index the index indicating the task to be marked as done.
      * @return the completed task.
@@ -158,7 +158,7 @@ public class TaskList {
     }
 
     /**
-     * Deletes a task.
+     * Delete a task.
      *
      * @param index the index indicating the task to be deleted.
      * @return the deleted task.
@@ -173,10 +173,16 @@ public class TaskList {
     }
 
     /**
-     * Clears all tasks.
+     * Clear all tasks.
      */
     public void clearAllTasks() {
         tasks.clear();
     }
 
+    /**
+     * Clear only completed tasks.
+     */
+    public void clearCompletedTasks() {
+        tasks.removeIf(Task::isCompleted);
+    }
 }

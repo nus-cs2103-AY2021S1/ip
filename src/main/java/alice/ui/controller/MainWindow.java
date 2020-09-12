@@ -51,7 +51,7 @@ public class MainWindow {
 
         fxmlLoader.load();
         this.primaryStage = primaryStage;
-        primaryStage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/alice.png")));
+        primaryStage.getIcons().add(new Image(this.getClass().getResourceAsStream("/images/icon.png")));
     }
 
     /**

@@ -16,16 +16,16 @@ import alice.command.types.TodoCommand;
 import alice.util.CheckedFunction;
 
 public enum CommandType {
-    CMD_BYE(ByeCommand::hasCommandWord, (arg) -> ByeCommand.createCommand()),
-    CMD_LIST(ListCommand::hasCommandWord, (arg) -> ListCommand.createCommand()),
-    CMD_FIND(FindCommand::hasCommandWord, FindCommand::createCommand),
-    CMD_CLEAR(ClearCommand::hasCommandWord, (arg) -> ClearCommand.createCommand()),
-    CMD_HELP(HelpCommand::hasCommandWord, (arg) -> HelpCommand.createCommand()),
+    CMD_TODO(TodoCommand::hasCommandWord, TodoCommand::createCommand),
+    CMD_EVENT(EventCommand::hasCommandWord, EventCommand::createCommand),
+    CMD_DEADLINE(DeadlineCommand::hasCommandWord, DeadlineCommand::createCommand),
     CMD_DONE(DoneCommand::hasCommandWord, DoneCommand::createCommand),
     CMD_DELETE(DeleteCommand::hasCommandWord, DeleteCommand::createCommand),
-    CMD_TODO(TodoCommand::hasCommandWord, TodoCommand::createCommand),
-    CMD_DEADLINE(DeadlineCommand::hasCommandWord, DeadlineCommand::createCommand),
-    CMD_EVENT(EventCommand::hasCommandWord, EventCommand::createCommand);
+    CMD_LIST(ListCommand::hasCommandWord, (arg) -> ListCommand.createCommand()),
+    CMD_FIND(FindCommand::hasCommandWord, FindCommand::createCommand),
+    CMD_HELP(HelpCommand::hasCommandWord, (arg) -> HelpCommand.createCommand()),
+    CMD_CLEAR(ClearCommand::hasCommandWord, ClearCommand::createCommand),
+    CMD_BYE(ByeCommand::hasCommandWord, (arg) -> ByeCommand.createCommand());
 
 
     private final Function<String, Boolean> wordChecker;

@@ -31,18 +31,18 @@ public class HelpCommand implements Command {
 
     @Override
     public CommandResult process(TaskList tasks, StorageFile storageFile) {
-        String commandFormat = "%s - %s\n";
+        String commandFormat = "----------------------------------------------------------------\n%s\n        %s\n";
 
         StringBuilder output = new StringBuilder("These are the commands in my dictionary:\n");
-        output.append(String.format(commandFormat, ListCommand.USE_CASE, ListCommand.DESCRIPTION));
-        output.append(String.format(commandFormat, FindCommand.USE_CASE, FindCommand.DESCRIPTION));
-        output.append(String.format(commandFormat, ClearCommand.USE_CASE, ClearCommand.DESCRIPTION));
+        output.append(String.format(commandFormat, TodoCommand.USE_CASE, TodoCommand.DESCRIPTION));
+        output.append(String.format(commandFormat, EventCommand.USE_CASE, EventCommand.DESCRIPTION));
+        output.append(String.format(commandFormat, DeadlineCommand.USE_CASE, DeadlineCommand.DESCRIPTION));
         output.append(String.format(commandFormat, DoneCommand.USE_CASE, DoneCommand.DESCRIPTION));
         output.append(String.format(commandFormat, DeleteCommand.USE_CASE, DeleteCommand.DESCRIPTION));
-        output.append(String.format(commandFormat, TodoCommand.USE_CASE, TodoCommand.DESCRIPTION));
-        output.append(String.format(commandFormat, DeadlineCommand.USE_CASE, DeadlineCommand.DESCRIPTION));
-        output.append(String.format(commandFormat, EventCommand.USE_CASE, EventCommand.DESCRIPTION));
+        output.append(String.format(commandFormat, ListCommand.USE_CASE, ListCommand.DESCRIPTION));
+        output.append(String.format(commandFormat, FindCommand.USE_CASE, FindCommand.DESCRIPTION));
         output.append(String.format(commandFormat, USE_CASE, DESCRIPTION));
+        output.append(String.format(commandFormat, ClearCommand.USE_CASE, ClearCommand.DESCRIPTION));
         output.append(String.format(commandFormat, ByeCommand.USE_CASE, ByeCommand.DESCRIPTION));
 
         // remove last newline char

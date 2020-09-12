@@ -4,14 +4,14 @@ import java.util.Arrays;
 import java.util.List;
 
 /**
- * Represents a task in ALICE.
+ * Represent a task in ALICE.
  */
 public abstract class Task {
     private final String description;
     private boolean isDone;
 
     /**
-     * Creates a task with the indicated status and specified description.
+     * Create a task with the indicated status and specified description.
      *
      * @param isDone      the completion status of the task, true if completed; false otherwise.
      * @param description describes the task.
@@ -22,7 +22,7 @@ public abstract class Task {
     }
 
     /**
-     * Marks the task as done.
+     * Mark the task as done.
      *
      * @return true if successful; false otherwise.
      */
@@ -35,7 +35,7 @@ public abstract class Task {
     }
 
     /**
-     * Checks if the task description contains any of the provided keywords.
+     * Check if the task description contains any of the provided keywords.
      *
      * @param keywords the list of keywords to check with.
      * @return true if any keywords matches the task description; false otherwise.
@@ -47,17 +47,16 @@ public abstract class Task {
         return Arrays.stream(keywords).anyMatch(descriptionTokens::contains);
     }
 
-    /**
-     * Gets the task description.
-     *
-     * @return the description of the task.
-     */
     public String getDescription() {
         return description;
     }
 
+    public boolean isCompleted() {
+        return isDone;
+    }
+
     /**
-     * Gets the status completion of the task.
+     * Get the status completion of the task.
      *
      * @return O if the task is completed; X otherwise.
      */
@@ -66,7 +65,7 @@ public abstract class Task {
     }
 
     /**
-     * Encodes the task into a string for saving.
+     * Encode the task into a string for saving.
      * The task is encoded in a form that ALICE can understand.
      *
      * @return the string representation of the encoded task.
