@@ -10,10 +10,6 @@ import duke.tasks.Event;
 import duke.tasks.Task;
 import duke.tasks.TaskList;
 
-
-
-
-
 /**
  * A class that represents Update command.
  */
@@ -51,7 +47,6 @@ public class UpdateCommand {
         } else {
             throw new DukeException("Not the correct type of task to change new date.");
         }
-
         return tempDelete;
     }
 }
