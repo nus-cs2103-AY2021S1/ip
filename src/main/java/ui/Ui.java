@@ -40,8 +40,7 @@ public class Ui {
      */
     public String getMessageTemplate(String input) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(LINE).append("\n").append(input)
-                .append("\n").append(LINE);
+        stringBuilder.append(input).append("\n");
         System.out.println(stringBuilder.toString());
         return stringBuilder.toString();
     }
@@ -54,9 +53,7 @@ public class Ui {
      */
     public void getExceptionTemplate(Exception exception) {
         StringBuilder stringBuilder = new StringBuilder();
-        stringBuilder.append(LINE).append("\n")
-                .append(exception.toString()).append("\n")
-                .append(LINE);
+        stringBuilder.append(exception.toString()).append("\n");
         System.out.println(stringBuilder.toString());
     }
 

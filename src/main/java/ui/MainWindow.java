@@ -26,7 +26,7 @@ public class MainWindow extends AnchorPane {
 
     private Duke duke;
 
-    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.png"));
+    private Image userImage = new Image(this.getClass().getResourceAsStream("/images/DaUser.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/robot.png"));
 
     /**
@@ -37,7 +37,7 @@ public class MainWindow extends AnchorPane {
         Ui ui = new Ui();
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
         dialogContainer.getChildren().addAll(
-                DialogBox.getDukeDialog(ui.greet(), dukeImage)
+                DialogBoxDuke.getDukeDialog(ui.greet(), dukeImage)
         );
     }
 
@@ -53,11 +53,11 @@ public class MainWindow extends AnchorPane {
     private void handleUserInput() {
         String input = userInput.getText();
         String response = duke.getResponse(input);
-        System.out.println(response);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
-                DialogBox.getDukeDialog(response, dukeImage)
+                DialogBoxUser.getUserDialog(input, userImage),
+                DialogBoxDuke.getDukeDialog(response, dukeImage)
         );
         userInput.clear();
+        userInput.setPromptText("Enter Command");
     }
 }
