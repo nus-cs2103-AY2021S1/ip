@@ -32,19 +32,21 @@ public class Parser {
         assert(splitStrings.length >= 1);
 
         String firstInput = splitStrings[0];
-        checkDescriptionNotEmpty(firstInput, fullCommand);
 
         Command c;
         switch (firstInput) {
         case "todo":
+            checkDescriptionNotEmpty(firstInput, fullCommand);
             c = new TodoCommand(fullCommand);
             break;
         case "deadline":
+            checkDescriptionNotEmpty(firstInput, fullCommand);
             checkCorrectDateTime(splitStrings);
             checkBreakpointExists("/by", fullCommand, "deadline");
             c = new DeadlineCommand(fullCommand);
             break;
         case "event":
+            checkDescriptionNotEmpty(firstInput, fullCommand);
             checkCorrectDateTime(splitStrings);
             checkBreakpointExists("/at", fullCommand, "event");
             c = new EventCommand(fullCommand);
@@ -63,9 +65,11 @@ public class Parser {
             c = new PrintFilteredListDateTimeCommand(fullCommand);
             break;
         case "find":
+            checkDescriptionNotEmpty(firstInput, fullCommand);
             c = new FindCommand(fullCommand);
             break;
         case "done":
+            checkDescriptionNotEmpty(firstInput, fullCommand);
             checkCommandLength(2, splitStrings);
             c = new DoneCommand(fullCommand);
             break;
@@ -75,6 +79,7 @@ public class Parser {
             break;
         case "note":
             checkBreakpointExists("?", fullCommand, "note");
+            checkDescriptionNotEmpty(firstInput, fullCommand);
             c = new NoteCommand(fullCommand);
             break;
         case "note-list":
@@ -86,28 +91,27 @@ public class Parser {
             c = new DeleteNoteCommand(fullCommand);
             break;
         default:
-            throw new DukeException(" :( OOPS!!! I'm sorry, but I don't know what that means :-(");
+            throw new DukeException(" I don't recognise that. Type a valid request please.");
         }
         return c;
     }
 
     private void checkDescriptionNotEmpty(String commandType, String fullCommand) throws DukeException {
-        if (commandType.length() + 1 >= fullCommand.length() && !fullCommand.equals("bye")
-                && !fullCommand.equals("list") && !fullCommand.equals("note-list")) {
-            throw new DukeException("A " + commandType + " request cannot be empty!");
+        if (commandType.length() + 1 >= fullCommand.length()) {
+            throw new DukeException("Hey. A " + commandType + " request cannot be empty.");
         }
     }
 
     private void checkBreakpointExists(String breakpoint, String fullCommand, String commandType) throws DukeException {
         if (!fullCommand.contains(breakpoint)) {
-            throw new DukeException("Your " + commandType + " command is incomplete!!! It does not contain: "
+            throw new DukeException("Your " + commandType + " request is incomplete. It does not contain: "
                     + breakpoint);
         }
     }
 
     private void checkCommandLength(int commandLength, String[] fullCommand) throws DukeException {
         if (commandLength != fullCommand.length) {
-            throw new DukeException("I dont recognise this command, you might have added too much stuff!");
+            throw new DukeException("I dont recognise this request, you might have added too much.");
         }
     }
 
@@ -118,7 +122,7 @@ public class Parser {
         try {
             LocalDateTime.parse(dateTime, DateTimeFormatter.ofPattern("yyyy-MM-dd kkmm"));
         } catch (DateTimeParseException e) {
-            throw new DukeException("Invalid Date time format: use YYYY-MM-DD kkmm(2400 format)");
+            throw new DukeException("This is an invalid Date time format: use YYYY-MM-DD kkmm(2400 format)");
         }
     }
 }

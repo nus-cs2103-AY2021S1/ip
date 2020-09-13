@@ -17,6 +17,7 @@ sourceSets {
             srcDirs = ['src']
         }
     }
+
 }
 dependencies {
     compile 'junit:junit:4.12'
@@ -48,8 +49,7 @@ dependencies {
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'mac'
     implementation group: 'org.openjfx', name: 'javafx-graphics', version: javaFxVersion, classifier: 'linux'
 }
-
 checkstyle {
     toolVersion = '8.23'
 }
-mainClassName = 'main.java.com.jacob.duke.Launcher'
+mainClassName ="main.java.com.jacob.duke.javafx.Launcher"
