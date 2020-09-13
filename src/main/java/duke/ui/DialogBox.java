@@ -26,7 +26,7 @@ public class DialogBox extends HBox {
     private static final String USER_BACKGROUND =
             "-fx-background-color: rgba(114, 205, 247, 0.5); -fx-background-radius: 15;";
     private static final String DUKE_BACKGROUND =
-            "-fx-background-color: rgba(255, 168, 220, 0.5); -fx-background-radius: 15;";
+            "-fx-background-color: rgba(77, 214, 116, 0.5); -fx-background-radius: 15;";
     private static final String ERROR_STYLE =
             "-fx-background-color: rgba(242, 66, 54, 0.5); -fx-background-radius: 15;"
                     + "-fx-font-size: 16px; -fx-font-weight: bold; -fx-color: red;";
