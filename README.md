@@ -24,3 +24,9 @@ Prerequisites: JDK 11, update Intellij to the most recent version.
    | |_| | |_| |   <  __/
    |____/ \__,_|_|\_\___|
    ```
+
+# Acknowledgements
+
+1. Background retrieved from https://www.jakpost.travel/vwall/JThbJw_worlds-okayest-bard-i-made-a-d-d/
+2. Bearimy profile picture retrieved from https://www.pngegg.com/en/png-ssxae
+3. User profile picture retrieved from https://www.pngegg.com/en/png-pvyoa

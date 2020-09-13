@@ -35,8 +35,8 @@ public class MainWindow extends AnchorPane {
     @FXML
     public void initialize() {
         scrollPane.vvalueProperty().bind(dialogContainer.heightProperty());
-        dialogContainer.getChildren().add(DialogBox.getDukeDialog("Hello, I'm Bearimy! How can I help you today?"
-                , dukeImage));
+        dialogContainer.getChildren().add(DialogBox.getDukeDialog("Hello, I'm Bearimy! How can I help you today?",
+                dukeImage));
         if (!Duke.getTasks().getListOfTasks().isEmpty()) {
             String savedTasks = "Welcome back! Here are the tasks in your list:\n";
             for (Task task : Duke.getTasks().getListOfTasks()) {
@@ -60,7 +60,7 @@ public class MainWindow extends AnchorPane {
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
                 DialogBox.getUserDialog("[User] " + input, userImage),
-                DialogBox.getDukeDialog("[Duke] " + response, dukeImage)
+                DialogBox.getDukeDialog("[Bearimy] " + response, dukeImage)
         );
         userInput.clear();
     }
