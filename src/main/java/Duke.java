@@ -54,19 +54,6 @@ public class Duke extends Application {
     }
 
     /**
-     * Iteration 1:
-     * Creates a label with the specified text and adds it to the dialog container.
-     * @param text String containing text to add
-     * @return a label with the specified text that has word wrap enabled.
-     */
-    private Label getDialogLabel(String text) {
-        Label textToAdd = new Label(text);
-        textToAdd.setWrapText(true);
-
-        return textToAdd;
-    }
-
-    /**
      * Iteration 2:
      * Creates two dialog boxes, one echoing user input and the other containing Duke's reply and then appends them to
      * the dialog container. Clears the user input after processing.
@@ -74,10 +61,9 @@ public class Duke extends Application {
     private void handleUserInput() {
         String input = userInput.getText();
         Label userText = new Label(input);
-        String output = null;
         try {
-            output = this.parser.processInput(input);
-            Label dukeText = new Label(getResponse(output));
+
+            Label dukeText = new Label(getResponse(input));
             dialogContainer.getChildren().addAll(
                     DialogBox.getUserDialog(userText, new ImageView(user)),
                     DialogBox.getDukeDialog(dukeText, new ImageView(duke))
@@ -94,8 +80,8 @@ public class Duke extends Application {
      * You should have your own function to generate a response to user input.
      * Replace this stub with your completed method.
      */
-    private String getResponse(String input) {
-        return "Duke: " + input;
+    private String getResponse(String input) throws DukeException {
+        return this.parser.processInput(input);
     }
 
     @Override
