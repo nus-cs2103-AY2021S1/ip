@@ -95,7 +95,7 @@ public class TaskList {
         }
         return str
                 + "\n"
-                + "Total expenses " + this.calculateTotalExpense();
+                + "Total expenses: $" + this.calculateTotalExpense();
     }
 
     public String deleteExpense(int expenseNumber) {

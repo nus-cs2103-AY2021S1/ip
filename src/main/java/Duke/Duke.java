@@ -2,7 +2,8 @@ package main.java.Duke;
 
 import javafx.application.Platform;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Region;
+import javafx.scene.layout.*;
+import javafx.scene.shape.Circle;
 import main.java.Duke.Commands.Command;
 import main.java.Duke.DukeException.DukeException;
 import main.java.Duke.Task.Task;
@@ -13,14 +14,11 @@ import javafx.collections.ObservableList;
 import javafx.geometry.Pos;
 import javafx.scene.Node;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.HBox;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.scene.image.Image;
 import java.io.IOException;
@@ -48,7 +46,10 @@ class DialogBox extends HBox {
         }
 
         dialog.setText(text);
+        setMinHeight(Region.USE_PREF_SIZE);
         displayPicture.setImage(img);
+        Circle clip = new Circle(70, 50, 50);
+        displayPicture.setClip(clip);
     }
 
     /**
@@ -76,7 +77,7 @@ class DialogBox extends HBox {
 }
 
 public class Duke extends Application {
-    private Image user = new Image(this.getClass().getResourceAsStream("/images/aang.jpg"));
+    private Image user = new Image(this.getClass().getResourceAsStream("/images/babyyoda.jpg"));
     private Image dukeImage = new Image(this.getClass().getResourceAsStream("/images/shiba.jpg"));
     private ScrollPane scrollPane;
     private VBox dialogContainer;
