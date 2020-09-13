@@ -16,7 +16,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Rectangle;
 import javafx.scene.text.Font;
-import javafx.scene.text.Text;
 
 /**
  * An example of a custom control using FXML.
@@ -39,12 +38,13 @@ public class DialogBox extends HBox {
             e.printStackTrace();
         }
 
+        dialog.setText(text);
         if(text.startsWith("Opps")) {
-            dialog.setText(text);
             dialog.setTextFill(Color.RED);
             dialog.setFont(Font.font("Arial", 13));
+        } else if (text.startsWith("DO REMIND")) {
+            dialog.setTextFill(Color.GREENYELLOW);
         }
-        dialog.setText(text);
 
         Rectangle clip = new Rectangle(
                 displayPicture.getFitWidth(), displayPicture.getFitHeight()

@@ -24,7 +24,7 @@ public class Ui {
      * Prints the greeting message.
      */
     public String showGreeting() {
-        return "Hello! I'm Duke DuiDui\nWhat can I do for you?";
+        return "Hello! I'm DuiDui\nWhat can I do for you?";
     }
 
     public String showReminderToday(TaskList taskList) {
