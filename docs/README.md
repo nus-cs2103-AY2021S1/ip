@@ -1,80 +1,94 @@
 # User Guide
 Pingu helper is a desktop app for managing tasks in a todo list format, optimized for use via a Command Line Interface (CLI) while still having the benefits of a Graphical User Interface (GUI).
  
-## Usage 
-
-### Viewing help: **help** 
+### Viewing help: `help` 
 Shows a breakdown of how to use each command available.
 ![help command](/docs/helpcommand.png)
 
-Format: help
+Format: `help`
 
 
-### Listing all tasks: **list**
+
+
+### Listing all tasks: `list`
 Shows a list of all tasks in the todo list.
 
-Format: list
+Format: `list`
 
 
-### Adding a task: **todo**
+
+
+### Adding a task: `todo`
 Adds a new task to the todo list.
 
-Format: todo [DESCRIPTION]
+Format: `todo [DESCRIPTION]`
 
 
-### Adding a task with a deadline: **deadline**
+
+
+### Adding a task with a deadline: `deadline`
 Adds a new task with a deadline to the todo list.
 
-Format: deadline [DESCRIPTION] /by [DATE]
+Format: `deadline [DESCRIPTION] /by [DATE]`
 
 *Date must be in YYYY-MM-DD format.
 *Both fields must be provided.
 
 
-### Adding an event: **event**
+
+
+### Adding an event: `event`
 Adds a new upcoming event to the todo list.
 
-Format: event [DESCRIPTION] /at [DATE]
+Format: `event [DESCRIPTION] /at [DATE]`
 
 *Date must be in YYYY-MM-DD format.
 *Both fields must be provided.
 
 
-## Marking a task as completed: **done**
+
+
+### Marking a task as completed: `done`
 Marks a task in the todo list as having been completed.
 
-Format: done [INDEX]
+Format: `done [INDEX]`
 
 - Marks the task at the specified [INDEX] as having been completed.
 - The index refers to the index number shown in the displayed todo list.
 - The index must be a positive integer 1, 2, 3, ...
 
-Example: done 2 marks the 2nd task in the todo list as done.
+Example: `done 2` marks the 2nd task in the todo list as done.
 
 
-## Deleting a task: **delete**
+
+
+### Deleting a task: `delete`
 Deletes a task from the todo list.
 
-Format: delete [INDEX]
+Format: `delete [INDEX]`
 
 - Deletes the task at the specified [INDEX].
 - The index refers to the index number shown in the displayed todo list.
 - The index must be a positive integer 1, 2, 3, ...
 
-Example: delete 2 deletes the 2nd task in the todo list.
+Example: `delete 2` deletes the 2nd task in the todo list.
 
 
-## Locating tasks by name: **fine**
+
+
+### Locating tasks by name: `find`
 Finds tasks whose descriptions contain the given keyword.
 
-Format: find [KEYWORD]
+Format: `find [KEYWORD]`
 
 - The search is case-insensitive. e.g. book will match Book
 
 
-## Exiting the program: **bye**
+
+
+### Exiting the program: `bye`
 Exits the program.
 
-Format: bye
+Format: `bye`
 
 
