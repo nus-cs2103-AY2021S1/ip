@@ -2,6 +2,9 @@ package duke;
 
 import duke.ui.DialogBox;
 import duke.ui.Ui;
+import duke.ui.UserDialogBox;
+
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
@@ -9,6 +12,10 @@ import javafx.scene.control.TextField;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
+
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Controller for MainWindow. Provides the layout for the other controls.
  */
@@ -52,9 +59,25 @@ public class MainWindow extends AnchorPane {
         String input = userInput.getText();
         String response = duke.getResponse(input);
         dialogContainer.getChildren().addAll(
-                DialogBox.getUserDialog(input, userImage),
+                UserDialogBox.getUserDialog(input, userImage),
                 DialogBox.getMrsDinoDialog(response, dukeImage)
         );
+        if (input.equals("bye")) {
+            new Timer().schedule(new TimerTask() {
+                public void run () {
+                    handleExit();
+                }
+            }, 1000);
+        }
         userInput.clear();
+    }
+
+    /**
+     * Exits the program.
+     */
+    @FXML
+    private void handleExit() {
+        Platform.exit();
+        System.exit(0);
     }
 }

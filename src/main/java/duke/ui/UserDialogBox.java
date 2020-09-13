@@ -20,24 +20,22 @@ import javafx.scene.layout.HBox;
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
-public class DialogBox extends HBox {
-    @FXML
-    private Label dialog;
+public class UserDialogBox extends HBox {
     @FXML
     private ImageView displayPicture;
-//    @FXML
-//    private Label userDialog;
+    @FXML
+    private Label userDialog;
 
-    private DialogBox(String text, Image img) {
+    private UserDialogBox(String text, Image img) {
         try {
-            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));
+            FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/UserDialogBox.fxml"));
             fxmlLoader.setController(this);
             fxmlLoader.setRoot(this);
             fxmlLoader.load();
         } catch (IOException e) {
             e.printStackTrace();
         }
-        dialog.setText(text);
+        userDialog.setText(text);
         displayPicture.setImage(img);
     }
 
@@ -51,28 +49,28 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Gets dialog box to display messages by the user.
+     *
+     * @param text Message by the user.
+     * @param img Display image of the user.
+     * @return A new instance of UserDialogBox.
+     */
+    public static UserDialogBox getUserDialog(String text, Image img) {
+        return new UserDialogBox(text, img);
+    }
+
 //    /**
-//     * Gets dialog box to display messages by the user.
+//     * Gets dialog box to display messages by the Mrs Dino.
 //     *
-//     * @param text Message by the user.
-//     * @param img Display image of the user.
+//     * @param text Message by Mrs Dino.
+//     * @param img Display image of Mrs Dino.
 //     * @return A new instance of DialogBox.
 //     */
-//    public static DialogBox getUserDialog(String text, Image img) {
-//        String type = "user";
-//        return new DialogBox(text, img, type);
+//    public static DialogBox getMrsDinoDialog(String text, Image img) {
+//        String type = "duke";
+//        var db = new DialogBox(text, img, type);
+//        db.flip();
+//        return db;
 //    }
-
-    /**
-     * Gets dialog box to display messages by the Mrs Dino.
-     *
-     * @param text Message by Mrs Dino.
-     * @param img Display image of Mrs Dino.
-     * @return A new instance of DialogBox.
-     */
-    public static DialogBox getMrsDinoDialog(String text, Image img) {
-        var db = new DialogBox(text, img);
-        db.flip();
-        return db;
-    }
 }
