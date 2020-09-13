@@ -43,33 +43,12 @@ public class Storage {
                 Scanner s = new Scanner(file);
                 while (s.hasNext()) {
                     String entry = s.nextLine();
-                    DateTimeFormatter dateTimeFormat2 = DateTimeFormatter.ofPattern("HH:mm MMM d yyyy");
                     if (entry.startsWith("[T]")) {
-                        ToDo t = new ToDo(entry.substring(7));
-                        if (entry.contains("✓")) {
-                            t.completeTask();
-                        }
-                        toDoList.add(t);
+                        toDoList.add(createToDo(entry));
                     } else if (entry.startsWith("[D]")) {
-                        int index = entry.indexOf("(");
-                        String datetime = entry.substring(index + 5, entry.length() - 1);
-                        LocalDateTime ldt = LocalDateTime.parse(datetime, dateTimeFormat2);
-                        Deadline d = new Deadline(entry.substring(7, index - 1),
-                                ldt);
-                        if (entry.contains("✓")) {
-                            d.completeTask();
-                        }
-                        toDoList.add(d);
+                        toDoList.add(createDeadline(entry));
                     } else if (entry.startsWith("[E]")) {
-                        int index = entry.indexOf("(");
-                        String datetime = entry.substring(index + 5, entry.length() - 1);
-                        LocalDateTime ldt = LocalDateTime.parse(datetime, dateTimeFormat2);
-                        Event e = new Event(entry.substring(7, index - 1),
-                                ldt);
-                        if (entry.contains("✓")) {
-                            e.completeTask();
-                        }
-                        toDoList.add(e);
+                        toDoList.add(createEvent(entry));
                     } else {
                         throw new InvalidSaveFileException("Hmmmm.....there seems to be an entry"
                                 + "that does not follow the convention!");
@@ -106,5 +85,49 @@ public class Storage {
             throw new InvalidSaveFileException(
                     "☹ OOPS!!! logic.Duke is experiencing IO errors when writing to save file!");
         }
+    }
+
+    private ToDo createToDo(String entry) {
+        final int STARTING_INDEX = 7;
+        ToDo todo = new ToDo(entry.substring(STARTING_INDEX));
+        if (entry.contains("✓")) {
+            todo.completeTask();
+        }
+        return todo;
+    }
+
+    private Deadline createDeadline(String entry) {
+
+        //format of example saved entry: [D][✓] return book (by: 13:56 Aug 23 2020)
+        final int DATETIME_INDEX = entry.indexOf("(") + 5;
+        final int DESC_INDEX = 7;
+
+        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("HH:mm MMM d yyyy");
+
+        String datetime = entry.substring(DATETIME_INDEX, entry.length() - 1);
+        LocalDateTime ldt = LocalDateTime.parse(datetime, dateTimeFormat);
+        Deadline deadline = new Deadline(entry.substring(DESC_INDEX, DATETIME_INDEX - 1),
+                ldt);
+        if (entry.contains("✓")) {
+            deadline.completeTask();
+        }
+        return deadline;
+    }
+
+    private Event createEvent(String entry) {
+
+        //format of example saved entry: [E][✓] return book (at: 13:56 Aug 23 2020)
+        final int DATETIME_INDEX = entry.indexOf("(") + 5;
+        final int DESC_INDEX = 7;
+        DateTimeFormatter dateTimeFormat = DateTimeFormatter.ofPattern("HH:mm MMM d yyyy");
+
+        String datetime = entry.substring(DATETIME_INDEX, entry.length() - 1);
+        LocalDateTime ldt = LocalDateTime.parse(datetime, dateTimeFormat);
+        Event event = new Event(entry.substring(DESC_INDEX, DATETIME_INDEX - 1),
+                ldt);
+        if (entry.contains("✓")) {
+            event.completeTask();
+        }
+        return event;
     }
 }
