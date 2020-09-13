@@ -1,12 +1,14 @@
 package duke;
 
 import duke.backend.Storage;
+
 import duke.task.*;
+
 import duke.ui.Ui;
 
 import java.io.IOException;
+
 import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 import java.time.format.DateTimeParseException;
 
 /**
@@ -36,7 +38,15 @@ public class Parser {
     private static final String NOW = "now";
 
     /**
+     * Parses the user input and process the user's command.
      *
+     * @param input User input.
+     * @param ui User interface.
+     * @param tasks TaskList.
+     * @param storage Storage.
+     * @return A String describing the outcome after processing the user's command.
+     * @throws DukeException Any error regarding Duke.
+     * @throws IOException When storage faces any error.
      */
     public static String parseInput(String input, Ui ui, TaskList tasks, Storage storage) throws DukeException, IOException {
         String[] parsedInput = input.split(SPACE, 2);
@@ -76,14 +86,18 @@ public class Parser {
     }
 
     /**
+     * Checks if user input is bye.
      *
+     * @param input User input.
+     * @return A boolean stating if command is bye.
      */
     public static boolean isBye(String input) {
         String commandKeyword = input.split(SPACE, 2)[0].toLowerCase();
         return commandKeyword.equals(BYE);
     }
 
-    // ===== HANDLER AND HELPER METHODS =====
+    // ===== PRIVATE HANDLER AND HELPER METHODS =====
+
     private static String handleByeCommand(Ui ui) {
         return ui.sayGoodbye();
     }

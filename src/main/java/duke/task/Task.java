@@ -1,7 +1,7 @@
 package duke.task;
 
 /**
- * Represents a Task. A <code>Task</code> object contains a description, keeps track of
+ * An abstract class Task. A <code>Task</code> object contains a description, keeps track of
  * whether it has been completed and stores a type.
  */
 public abstract class Task {
@@ -33,6 +33,9 @@ public abstract class Task {
 
     protected abstract String getTypeIcon();
 
+    /**
+     * Marks this task as done.
+     */
     public void markDone() {
         isDone = true;
     }
