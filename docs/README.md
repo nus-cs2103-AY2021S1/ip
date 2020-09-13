@@ -2,21 +2,21 @@
 
 Duke is a **desktop app for tracking down todos, deadlines and events for use via a Command Line Interface** (CLI) while still having the benefits of a Graphical User Interface (GUI). If you can type fast, Duke can get your tasks management done faster than traditional GUI apps.
 
-* [Quick Start](https://github.com/FH-30/ip/blob/master/docs/README.md#quick-start)
-* [Features](https://github.com/FH-30/ip/blob/master/docs/README.md#features)
-	* [Adding a task](https://github.com/FH-30/ip/blob/master/docs/README.md#adding-a-task)
-		* [Adding a todo: `todo`](https://github.com/FH-30/ip/blob/master/docs/README.md#adding-a-todo-todo)
-		* [Adding a deadline: `deadline`](https://github.com/FH-30/ip/blob/master/docs/README.md#adding-a-deadline-deadline)
-		* [Adding an event: `event`](https://github.com/FH-30/ip/blob/master/docs/README.md#adding-an-event-event)
-	* [Marking a task as done: `done`](https://github.com/FH-30/ip/blob/master/docs/README.md#marking-a-task-as-done-done)
-	* [Listing all tasks: `list`](https://github.com/FH-30/ip/blob/master/docs/README.md#listing-all-tasks-list)
-	* [Locating a task by name: `find`](https://github.com/FH-30/ip/blob/master/docs/README.md#locating-a-task-by-name-find)
-	* [Displaying all tasks on a specific date: `tasks on`](https://github.com/FH-30/ip/blob/master/docs/README.md#displaying-all-tasks-on-a-specific-date-tasks-on)
-	* [Archiving a task: `archive`](https://github.com/FH-30/ip/blob/master/docs/README.md#archiving-a-task-archive)
-	* [Unarchiving a task: `unarchive`](https://github.com/FH-30/ip/blob/master/docs/README.md#unarchiving-a-task-unarchive)
-	* [Deleting a task: `delete`](https://github.com/FH-30/ip/blob/master/docs/README.md#deleting-a-task-delete)
-	* [Exiting the program: `bye`](https://github.com/FH-30/ip/blob/master/docs/README.md#exiting-the-program-bye)
-* [Command Summary](https://github.com/FH-30/ip/blob/master/docs/README.md#command-summary)
+* [Quick Start](#quick-start)
+* [Features](#features)
+	* [Adding a task](#adding-a-task)
+		* [Adding a todo: `todo`](#adding-a-todo-todo)
+		* [Adding a deadline: `deadline`](#adding-a-deadline-deadline)
+		* [Adding an event: `event`](#adding-an-event-event)
+	* [Marking a task as done: `done`](#marking-a-task-as-done-done)
+	* [Listing all tasks: `list`](#listing-all-tasks-list)
+	* [Locating a task by name: `find`](#locating-a-task-by-name-find)
+	* [Displaying all tasks on a specific date: `tasks on`](#displaying-all-tasks-on-a-specific-date-tasks-on)
+	* [Archiving a task: `archive`](#archiving-a-task-archive)
+	* [Unarchiving a task: `unarchive`](#unarchiving-a-task-unarchive)
+	* [Deleting a task: `delete`](#deleting-a-task-delete)
+	* [Exiting the program: `bye`](#exiting-the-program-bye)
+* [Command Summary](#command-summary)
 
 ## Quick Start
 1. Ensure you have Java `11` or above installed in your Computer.
