@@ -43,9 +43,10 @@ Add Functions
 
 ## `event`
 <br>
-* Type "event" followed by description of event, then followed by "/at" followed by a space and then type in ther rest of the description
+
+* Type `event` followed by description of event, then followed by `/at` followed by a space and then type in the rest of the description
 <br>
-* Input date via 'YYYY-MM-DD' format and time in 'HH:MM' format if you wish to add date and time
+* Input date via `YYYY-MM-DD` format and time in `HH:MM` format if you wish to add date and time
 <br>
 <br>
 
@@ -53,6 +54,55 @@ Add Functions
 </details>
 </details>
 
+<details>
+<summary>
+Search For Word
+</summary>
+
+<details>
+<summary>
+Search Via Word
+</summary>
+
+## `find`
+<br>
+
+* Type in `find` and then the description that you want to search for in the tasklist
+* Return you tasks which contains the description you searched for
+<br>
+<br> 
+
+</details>
+<details>
+<summary>
+Search Via Time
+</summary>
+
+## `time`
+<br>
+
+* Type in `time` followed by the time that you wish to search for in `HH:MM` format
+* Returns you the tasks which take place at the time you searched for
+<br>
+<br>
+
+
+</details>
+<details>
+<summary>
+Search Via Date
+</summary>
+
+## `schedule`
+<br>
+
+* Type in `schedule` followed by date that you wish to search for in `YYYY-MM-DD` format
+* Returns you the tasks which take place on the date you searched for
+<br>
+<br> 
+
+</details>
+</details>
 ## Usage
 
 ### `Keyword` - Describe action
