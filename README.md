@@ -90,15 +90,9 @@ list | list
 bye | bye
 done | done INDEX
 e.g. done 3
-delete | delete INDEX
-e.g. delete 2
-check | check DATE
-e.g. check 2020-07-02
-todo | todo DESC
-e.g. todo new stuff
-deadline | deadline DESC /by DATE
-e.g. deadline this thing /by 2020-09-09
-event | event DESC /at DATE
-e.g. event something else /at 2020-12-12
-find | find KEYWORD
-e.g. find something
+delete | delete INDEX<br>e.g. delete 2
+check | check DATE<br>e.g. check 2020-07-02
+todo | todo DESC<br>e.g. todo new stuff
+deadline | deadline DESC /by DATE<br>e.g. deadline this thing /by 2020-09-09
+event | event DESC /at DATE<br>e.g. event something else /at 2020-12-12
+find | find KEYWORD<br>e.g. find something
