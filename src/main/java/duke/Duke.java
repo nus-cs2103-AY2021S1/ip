@@ -27,10 +27,20 @@ public class Duke {
         tasks = new TaskList(storage.load());
     }
 
+    /**
+     * Returns Introduction of duke based on whether duke met user already.
+     * @return Introduction string of duke.
+     */
     public String intro() {
-        return "Hi Mary Poppins! My name is Duck. I am not familiar with the human language.\n"
-            + "But I would very much like to know about your adventures :(\n"
-            + "Would you type 'help' to know about all the commands that I understand? :D";
+        String intro = "Hi again Poppins! Thanks for talking to me again :)\n"
+            + "What adventures do you want me to record today?\n"
+            + "Once again if you forgot how to communicate with me type 'help' :D";
+        if (storage.folderIsCreated()) {
+            intro = "Hi Mary Poppins! My name is Duck. I am not familiar with the human language.\n"
+                + "But I would very much like to know about your adventures :(\n"
+                + "Would you type 'help' to know about all the commands that I understand? :D";
+        }
+        return intro;
     }
 
     /**

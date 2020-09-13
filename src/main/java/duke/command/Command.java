@@ -288,19 +288,19 @@ public class Command {
      */
     private String printHelp() {
         String dukeResponse = "\tI can only understand these human commands :(\n";
-        dukeResponse += "\n\n\t'help': I will tell you the only human commands I know.";
-        dukeResponse += "\n\n\t'list': I will list you all the tasks you told me.";
-        dukeResponse += "\n\n\t'todo homework': I will add homework task to the list.";
-        dukeResponse += "\n\n\t'deadline homework /by 2020-12-25 1600': I will " +
-            "add homework to the list with the specified deadline";
-        dukeResponse += "\n\n\t'event Christmas /at 2020-12-25 1600': I will " +
-            "add Christmas event to the list at the specified time";
-        dukeResponse += "\n\n\t'delete 2': I will delete task 2 from the list.";
-        dukeResponse += "\n\n\t'done 3': I will mark task 3 in the list as complete.";
-        dukeResponse += "\n\n\t'duplicate': I will list you the duplicated task.";
-        dukeResponse += "\n\n\t'remove duplicates': I will remove all duplicate tasks except the first copy.";
-        dukeResponse += "\n\n\t'clear please' : I will clear the tasks list.";
-        dukeResponse += "\n\n\t'bye': I will go away... sadly :(";
+        dukeResponse += "\n\n\t'help' : I will tell you the only human commands I know.";
+        dukeResponse += "\n\n\t'list' : I will list you all the tasks you told me.";
+        dukeResponse += "\n\n\t'todo (homework)' : I will add (homework) to the list.";
+        dukeResponse += "\n\n\t'deadline (homework) /by (2020-12-25 1600)' : I will " +
+            "add (homework) to the list with the (specified deadline)";
+        dukeResponse += "\n\n\t'event (Christmas) /at (2020-12-25 1600)' : I will " +
+            "add (Christmas) event to the list at the (specified time)";
+        dukeResponse += "\n\n\t'delete 2' : I will delete task 2 from the list.";
+        dukeResponse += "\n\n\t'done 3' : I will mark task 3 in the list as complete.";
+        dukeResponse += "\n\n\t'duplicate' : I will list you all the duplicate tasks.";
+        dukeResponse += "\n\n\t'remove duplicates' : I will remove all duplicate tasks except the first copy of each task.";
+        dukeResponse += "\n\n\t'clear please' : I will clear the tasks list for you.";
+        dukeResponse += "\n\n\t'bye' : I will go away ... quietly :(";
         return dukeResponse;
     }
 }

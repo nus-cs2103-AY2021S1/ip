@@ -48,6 +48,7 @@ public class Storage {
 
     private static final int TASKTYPEINDEX = 0;
     private String filePath;
+    private boolean isFolderCreated;
 
     /**
      * Constructs a storage
@@ -74,7 +75,16 @@ public class Storage {
         if (!dataDirectoryExists) {
             File dir = new File(dataPath.toString());
             dir.mkdir();
+            isFolderCreated = true;
         }
+    }
+
+    /**
+     * Returns True if a new data file is created.
+     * @return True if a new data file is created, false if it is not.
+     */
+    public boolean folderIsCreated() {
+        return isFolderCreated;
     }
 
     /**
