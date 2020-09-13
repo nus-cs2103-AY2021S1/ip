@@ -232,10 +232,14 @@ public class Parser {
             if (by.matches(".*[a-zA-Z]+.*")) {
                 return new WrongFormatException("deadline").toString();
             }
+            try {
+                LocalDate date = LocalDate.parse(by);
+                Task task = new Deadline(desc, date);
+                return this.addTaskToTasklist(task);
+            } catch (Exception e) {
+                return e.toString();
+            }
 
-            LocalDate date = LocalDate.parse(by);
-            Task task = new Deadline(desc, date);
-            return this.addTaskToTasklist(task);
         } else {
             return new WrongFormatException("deadline").toString();
         }
