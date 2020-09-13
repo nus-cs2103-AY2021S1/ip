@@ -44,6 +44,7 @@ public class AddDeadlineCommand extends Command {
             Deadline deadline = taskManager.addDeadline(content, datetimeDue, priority);
             return MessageManager.getAddSuccessMessage(deadline, taskManager);
         } catch (DukeException | IOException exception) {
+            this.isError = true;
             return exception.getMessage();
         }
     }

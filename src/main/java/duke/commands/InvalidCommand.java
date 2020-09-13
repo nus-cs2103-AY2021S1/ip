@@ -25,6 +25,7 @@ public class InvalidCommand extends Command {
      */
     @Override
     public String execute(TaskManager taskManager) {
+        this.isError = true;
         return "I don't know what you just sent...";
     }
 }

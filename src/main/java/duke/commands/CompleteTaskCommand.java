@@ -42,6 +42,7 @@ public class CompleteTaskCommand extends Command {
             Task task = taskManager.completeTask(taskNumber);
             return MessageManager.getCompleteSuccessMessage(task);
         } catch (DukeException | IOException exception) {
+            this.isError = true;
             return exception.getMessage();
         }
     }

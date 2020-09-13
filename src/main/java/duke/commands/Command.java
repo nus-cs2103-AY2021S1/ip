@@ -9,6 +9,7 @@ public abstract class Command {
 
     protected boolean isExit;
     protected String input;
+    protected boolean isError;
 
     /**
      * Execution instructions for the command.
@@ -20,5 +21,9 @@ public abstract class Command {
 
     public boolean isExit() {
         return isExit;
+    }
+
+    public boolean isError() {
+        return isError;
     }
 }
