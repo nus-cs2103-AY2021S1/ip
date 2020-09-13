@@ -8,8 +8,10 @@ A simple guide to get you kick started on how to easily use this CLI app to crea
 <summary>
 View Function
 </summary>
+
 ## `list`
 <br>
+
 **Command to view tasks**
 <br>
 
