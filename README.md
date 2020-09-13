@@ -1,4 +1,4 @@
-#Duke
+# Duke
 
 This is the independent project for CS2103T AY20/21.
 
