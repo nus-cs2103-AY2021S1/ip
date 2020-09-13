@@ -23,6 +23,7 @@ public class Main extends Application {
             Scene scene = new Scene(ap);
             scene.getStylesheets().add("view/styles.css");
             stage.setScene(scene);
+            stage.setTitle("Mrs Dino Application");
             fxmlLoader.<MainWindow>getController().setDuke(duke);
             stage.show();
         } catch (IOException e) {
