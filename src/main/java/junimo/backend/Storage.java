@@ -27,6 +27,7 @@ public class Storage {
         if (!file.exists()) {
             createFile(file);
         }
+        assert file.exists() : "File is supposed to be created/ already exist";
         this.file = file;
     }
 
@@ -38,6 +39,7 @@ public class Storage {
             // Create file and parent directories if they do not exist yet
             dirFile.mkdirs();
             file.createNewFile();
+            assert file.exists() : "File is supposed to be created";
         } catch (IOException e) {
             System.out.println(e.getMessage());
         }
@@ -50,6 +52,7 @@ public class Storage {
      */
     public BufferedReader load() throws FileNotFoundException {
         FileReader f = new FileReader(file);
+        assert file.exists() : "File is supposed to exist/ be created in constructor before load() is called";
         return new BufferedReader(f);
     }
 
@@ -62,9 +65,12 @@ public class Storage {
         try {
             // Delete old saved file if it exists
             boolean isDeleted = file.delete();
+            assert !file.exists() : "File is supposed to be deleted before it is overwritten in save()";
+
             if (isDeleted) {
                 createFile(file);
             }
+            assert file.exists() : "New file is supposed to be created to write tasks into.";
 
             // Write tasks to new file overwriting the old file
             FileWriter fw = new FileWriter(file);
