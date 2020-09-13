@@ -41,6 +41,7 @@ public class Duke extends Application {
     private UI ui;
     private Image userImage;
     private Image dukeImage;
+    private Image iconImage;
     private boolean isExit;
 
     /**
@@ -48,7 +49,7 @@ public class Duke extends Application {
      * to null.
      */
     public Duke() {
-        store = new Storage("./data", "gui.txt");
+        store = new Storage("./data", "duke.txt");
         this.ui = new UI();
         File loadFile = store.loadData(ui);
         if (loadFile == null) {
@@ -60,6 +61,8 @@ public class Duke extends Application {
                 this.getClass().getResourceAsStream("/images/DaUser.png"));
         dukeImage = new Image(
                 this.getClass().getResourceAsStream("/images/DaDuke.png"));
+        iconImage = new Image(
+                this.getClass().getResourceAsStream("/images/DaIcon.png"));
     }
 
     /**
@@ -104,7 +107,7 @@ public class Duke extends Application {
      * @param args Command line arguments.
      */
     public static void main(String[] args) {
-        Duke duke = new Duke("./data", "gui.txt");
+        Duke duke = new Duke("./data", "duke.txt");
         duke.run();
     }
 
@@ -134,7 +137,8 @@ public class Duke extends Application {
 
         // more code to be added here later
         //Step 2. Formatting the window to look as expected
-        stage.setTitle("Duke");
+        stage.setTitle("Duke Task Tracker");
+        stage.getIcons().add(iconImage);
         stage.setResizable(false);
         stage.setMinHeight(600.0);
         stage.setMinWidth(400.0);

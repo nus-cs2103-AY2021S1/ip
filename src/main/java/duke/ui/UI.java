@@ -28,7 +28,7 @@ public class UI {
      * @return Display greeting as a String.
      */
     public String displayGreeting() {
-        return "I am gui, keeper of all tasks. How may I help you?";
+        return "I am duke, keeper of all tasks. How may I help you?";
     }
 
     /**
