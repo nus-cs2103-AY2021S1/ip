@@ -24,7 +24,7 @@ Expected result:
 
 
 #### _Adding tasks_:
-### 2.`Todo`
+### 2a.`Todo`
 
 ###### Adds a todo task to the tasks list.
 
@@ -37,7 +37,7 @@ Expected result:
 
 
 
-### 3.`Deadline`
+### 2b.`Deadline`
 
 ###### Adds a task with a specified deadline to the tasks list.
 
@@ -50,7 +50,7 @@ Expected result:
 
 
 
-### 4.`Event`
+### 2c.`Event`
 
 ###### Adds a task with a specified event time to the tasks list.
 
@@ -64,7 +64,7 @@ Expected result:
 
 
 #### _Other task list operations_:
-### 5.`List`
+### 3a.`List`
 
 ###### Prints out the list of tasks you told Duck.
 
@@ -77,7 +77,7 @@ Expected result:
 
 
 
-### 6.`Done`
+### 3b.`Done`
 
 ###### Marks a task as done in the tasks list.
 
@@ -90,7 +90,7 @@ Expected result:
 
 
 
-### 7.`Delete`
+### 3c.`Delete`
 
 ###### Deletes a task from the tasks list.
 
@@ -103,7 +103,7 @@ Expected result:
 
 
 
-### 8.`Clear`
+### 3d.`Clear`
 
 ###### Clears the task list.
 
@@ -120,7 +120,7 @@ Expected result:
 
 
 
-### 9.`Duplicate`
+### 4a.`Duplicate`
 
 ###### Fetches all duplicated tasks in the list.
 
@@ -133,7 +133,7 @@ Expected result:
 
 
 
-### 10.`Remove duplicates`
+### 4b.`Remove duplicates`
 
 ###### Removes all duplicated tasks except the first copy.
 
@@ -150,7 +150,7 @@ Expected result:
 
 
 
-### 11.`Bye`
+### 5a.`Bye`
 
 ###### Exits duck application.
 
