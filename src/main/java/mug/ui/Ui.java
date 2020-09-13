@@ -31,6 +31,9 @@ public class Ui {
             Command command = Validator.command(splitInput[0]);
 
             switch (command) {
+            case HELP:
+                output = helpAction();
+                break;
             case LIST:
                 output = listAction(tasks);
                 break;
@@ -124,5 +127,20 @@ public class Ui {
 
     private String listAction(TaskList tasks) {
         return tasks.readList();
+    }
+
+    private String helpAction() {
+        StringBuilder help = new StringBuilder("Here are the command you could use:\n");
+        help.append("1. todo - add todo task\n");
+        help.append("2. deadline - add deadline task\n");
+        help.append("3. event - add event task\n");
+        help.append("4. delete - delete task\n");
+        help.append("5. done - marking task done\n");
+        help.append("6. list - listing all tasks\n");
+        help.append("7. undo - undo Command\n");
+        help.append("8. find - searching tasks\n");
+        help.append("9. help - listing all commands");
+
+        return help.toString();
     }
 }

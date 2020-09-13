@@ -12,6 +12,7 @@ public enum Command {
     LIST,
     TODO,
     FIND,
-    UNDO
+    UNDO,
+    HELP
 }
 
