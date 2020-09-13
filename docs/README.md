@@ -175,14 +175,14 @@ If you have any further questions, please contact me through the email provided 
 ### Command Summary
 Action | Format
 ------------ | -------------
-Add | 1. `todo <description>` <br> 2. `deadline <description> /by <YYYY-MM-DD>` <br> 3. `event <description /at <YYYY-MM-DD>` | 
-List | `list` | 
-Done | `done <index>` | 
-Delete | `delete <index>` | 
-Find | `find <keyword>` | 
-Update | `update <index> <desc/date> <new description/YYYY-MM-DD>` | 
-Help | `help` | 
-Bye | `bye` | 
+Add | 1. `todo <description>` <br> 2. `deadline <description> /by <YYYY-MM-DD>` <br> 3. `event <description /at <YYYY-MM-DD>`
+List | `list`
+Done | `done <index>`
+Delete | `delete <index>`
+Find | `find <keyword>`
+Update | `update <index> <desc/date> <new description/YYYY-MM-DD>`
+Help | `help`
+Bye | `bye`
 
 ### Acknowledgements
 All images and characters used belonged to the respective owners. 
