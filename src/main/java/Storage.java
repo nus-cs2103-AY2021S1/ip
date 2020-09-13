@@ -16,7 +16,8 @@ public class Storage {
         if (!taskFile.exists())
             taskFile.getParentFile().mkdirs();
             try {
-                taskFile.createNewFile();
+                boolean isCreated = taskFile.createNewFile();
+                assert isCreated == true : "should create a file here";
             }
             catch (IOException e2){
                 System.out.println("Sorry, an error occurs while loading."+

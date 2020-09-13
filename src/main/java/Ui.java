@@ -60,6 +60,7 @@ public class Ui {
             System.out.println("    " + s);
         }
 
+        assert tmp.compareTo("")!=0: "An empty string is passed to print()";
         return tmp;
     }
 
@@ -75,7 +76,6 @@ public class Ui {
      * @param undoneCount number of tasks in the list that has not been done.
      */
     static public String printTodoTask(String taskContent, int size, int undoneCount){
-
         return (Ui.print("The following task has been added to your list:")+
         Ui.print("  [T][ ] " + taskContent)+
         Ui.print(String.format("Now you have %d tasks in your list.", size))+
