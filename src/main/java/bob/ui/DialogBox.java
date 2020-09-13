@@ -50,8 +50,17 @@ public class DialogBox extends HBox {
         setAlignment(Pos.TOP_LEFT);
     }
 
+    /**
+     * Sets the position of label center horizontally.
+     */
+    private void setAlignmentCenter() {
+        setAlignment(Pos.CENTER_RIGHT);
+    }
+
     public static DialogBox getUserDialog(String text, Image img) {
-        return new DialogBox(text, img);
+        var db = new DialogBox(text, img);
+        db.setAlignmentCenter();
+        return db;
     }
 
     public static DialogBox getBobDialog(String text, Image img) {

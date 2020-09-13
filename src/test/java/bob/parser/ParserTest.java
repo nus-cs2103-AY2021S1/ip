@@ -21,7 +21,6 @@ import bob.exceptions.BobEmptyTaskException;
 import bob.exceptions.BobInvalidCommandException;
 
 
-
 public class ParserTest {
     private Parser parser;
 

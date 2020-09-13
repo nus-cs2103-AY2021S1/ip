@@ -14,7 +14,6 @@ import bob.storage.Storage;
 
 
 public class ExitCommandTest {
-    /* In Progress */
     private static final String FILE_PATH = "src/test/java/bob/data/bob.txt";
     private ExitCommand exitCommand;
     private Tasklist tasks;
