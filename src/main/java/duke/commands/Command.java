@@ -6,7 +6,7 @@ import duke.helpers.TaskList;
 import duke.helpers.Ui;
 
 /**
- * this is an abstract class used for polymorphism
+ * this is an abstract class used for polymorphism, parent class of all Command classes
  */
 public abstract class Command {
     /**

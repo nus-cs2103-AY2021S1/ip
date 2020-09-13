@@ -6,7 +6,7 @@ package duke.tasks;
 public class Deadline extends Task {
     private String day = null;
     /**
-     * Assigns the name and day values
+     * Assigns the name and day values, initializes Deadline task
      *
      * @param name super(name) so that it does whatever is mentioned in the parent class
      * @param day assigns this.day to day value
@@ -17,7 +17,7 @@ public class Deadline extends Task {
     }
 
     /**
-     * Assigns the nam, done and day values
+     * Assigns the name, done and day values, initializes Deadline task
      *
      * @param name argument in super class constructor
      * @param done argument in super class constructor

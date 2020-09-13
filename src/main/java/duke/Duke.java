@@ -10,14 +10,14 @@ import duke.helpers.Ui;
 import java.io.IOException;
 
 /**
- * This Duke class is the main class that prints out the relevant outputs by including all the subclasses of Task and
- * taking in the input.
+ * This Duke class is the main class that prints out the relevant outputs based on input given by user
  */
 public class Duke {
     private boolean isExit = false;
-    private Storage storage;
-    private TaskList tasks;
-    private Ui ui = new Ui();
+    //checks whether the Duke has been given the user command, true if exit command is given and false otherwise
+    private Storage storage; //deals with loading tasks from the file, saving tasks and shortcuts in the file
+    private TaskList tasks; //contains the task list e.g., it has operations to add/delete tasks in the list
+    private Ui ui = new Ui(); //deals with interactions with the user
     public Duke(){}
 
     /**

@@ -11,11 +11,12 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /**
- * handles case when done is keyword
+ * Handles case when done is keyword
  */
 public class DoneCommand extends Command {
     /**
      * assigns string to a value of string
+     *
      * @param input assigns string to this this.string
      */
     public DoneCommand (String input, int lengthOfKeyword) {
@@ -24,6 +25,7 @@ public class DoneCommand extends Command {
 
     /**
      * Completes done task and handle error
+     *
      * @param tasks to change the taskList as a task is completed
      * @param ui
      * @param storage to change the file as task is completed

@@ -16,7 +16,7 @@ import java.util.Scanner;
 
 
 /**
- * deals with loading tasks from the file and saving tasks in the file.
+ * Deals with loading tasks from the file and saving tasks in the file and stores shortcuts
  */
 public class Storage {
     private String filePath;

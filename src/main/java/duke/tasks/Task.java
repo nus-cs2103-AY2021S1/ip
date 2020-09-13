@@ -16,7 +16,7 @@ public abstract class Task {
     /**
      * constructor assigns name variable a value
      *
-     * @param name this assigns the name of the Task to the name being given in the constructor.
+     * @param name this assigns the name of the Task to the name being given in the constructor
      */
     Task(String name) {
         this.done = false;

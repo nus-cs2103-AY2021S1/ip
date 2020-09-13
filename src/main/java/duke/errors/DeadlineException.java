@@ -1,7 +1,7 @@
 package duke.errors;
 
 /**
- * This DeadlineException is used to print out exceptions when there is an incomplete input where wither the description
+ * This DeadlineException is used to print out exceptions when there is an incomplete input where wether the description
  * or date is absent.
  */
 

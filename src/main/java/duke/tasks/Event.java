@@ -8,7 +8,7 @@ public class Event extends Task {
     private String end;
 
     /**
-     * Initializes the Event class
+     * Assigns the name, done and day variables with values and used to initialize Event task
      *
      * @param name super(name) so that it does whatever is mentioned in the parent class
      * @param dateTime assigns this.dayTime to dayTime value
@@ -20,7 +20,7 @@ public class Event extends Task {
     }
 
     /**
-     * Assigns the nam, done and day values
+     * Assigns the name, done and day variables with values and used to initialize Event task
      *
      * @param name argument in super class constructor
      * @param done argument in super class constructor

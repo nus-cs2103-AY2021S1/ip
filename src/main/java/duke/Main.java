@@ -11,7 +11,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 /**
- * A GUI for Duke using FXML.
+ * A GUI for Duke.
  */
 public class Main extends Application {
     private Duke duke = new Duke("src/main/java/tasks.txt", "src/main/java/shortCuts.txt");

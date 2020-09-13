@@ -21,15 +21,21 @@ import java.util.Collections;
 
 
 /**
- * An example of a custom control using FXML.
  * This control represents a dialog box consisting of an ImageView to represent the speaker's face and a label
  * containing text from the speaker.
  */
 public class DialogBox extends HBox {
     @FXML
-    private Label dialog;
+    private Label dialog; //displays String given by user or Duke
     @FXML
-    private Circle circleDisplayPicture;
+    private Circle circleDisplayPicture; //display picture of Duke or user
+
+    /**
+     * Constructor for DialogBox used to initialize DialogBox object
+     *
+     * @param text is input placed in dialog
+     * @param img used in the image for circleDisplayPicture
+     */
     private DialogBox(String text, Image img) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader(MainWindow.class.getResource("/view/DialogBox.fxml"));

@@ -6,7 +6,7 @@ package duke.tasks;
 
 public class ToDo extends Task {
     /**
-     * Assigns name to name value
+     * Constructor assigns name to name value and initialize ToDO task
      *
      * @param name super(name) so that it does whatever is mentioned in the parent class
      */
@@ -15,7 +15,7 @@ public class ToDo extends Task {
     }
 
     /**
-     * Assigns name and done to values
+     * Constructor assigns name and done to values and initialize ToDO task
      *
      * @param name assigns name to this.name
      * @param done assigns done to this.done

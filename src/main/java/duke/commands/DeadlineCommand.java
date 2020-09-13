@@ -14,11 +14,11 @@ import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 
 /**
- * has the method if deadline is keyword deadline
+ * Used to handle when input is deadline
  */
 public class DeadlineCommand extends AddCommand {
     /**
-     * assigns string to a value of string
+     * assigns string to a value of string and initialize Deadline Command
      *
      * @param input assigns string to this this.string
      */

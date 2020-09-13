@@ -2,7 +2,7 @@ package duke.errors;
 
 /**
  * this is a DukeException class which is the parents class of all the other exceptions in this package.
- * this is never intiilized and therefore is an abstract class and used for polymorphism.
+ * this is never initialized and therefore is an abstract class and used for polymorphism.
  */
 public abstract class DukeException extends Exception {
     /**

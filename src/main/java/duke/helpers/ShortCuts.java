@@ -2,6 +2,9 @@ package duke.helpers;
 
 import java.util.HashMap;
 
+/**
+ * ShortCuts class is used to define shortcuts and access defined shortucts
+ */
 public class ShortCuts {
     private static HashMap<String, String> shortCuts = new HashMap<>();
     private ShortCuts(String shortCut, String originalForm) {
